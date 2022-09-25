@@ -1,0 +1,30 @@
+{
+  "name": "@baeta/cli",
+  "type": "module",
+  "dependencies": {
+    "@baeta/generator": "workspace:^",
+    "chokidar": "^3.5.3",
+    "ink": "^3.2.0",
+    "ink-spinner": "^4.0.3",
+    "nanoid": "^4.0.0",
+    "react": "^17.0.2",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@baeta/core": "workspace:^",
+    "@types/node": "^18.7.20",
+    "@types/react": "^18.0.21",
+    "@types/yargs": "^17.0.13",
+    "typescript": "^4.8.3"
+  },
+  "peerDependencies": {
+    "@baeta/core": "workspace:^",
+    "graphql": "^15.3.0 || ^16.0.0"
+  },
+  "optionalDependencies": {
+    "@baeta/compiler": "workspace:^"
+  },
+  "bin": {
+    "baeta": "./bin/cli-dev.cjs"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@baeta/compiler",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "compile": "./bin/compile"
+  },
+  "dependencies": {
+    "@esbuild-kit/cjs-loader": "^2.3.3",
+    "@esbuild-kit/esm-loader": "^2.4.2",
+    "esbuild": "^0.15.9",
+    "esbuild-plugin-commands": "^1.1.0",
+    "esbuild-register": "^3.3.3",
+    "execa": "^6.1.0",
+    "tree-kill": "^1.2.2",
+    "tsx": "^3.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.20",
+    "typescript": "^4.8.3"
+  },
+  "peerDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^4.8.0"
+  }
+}

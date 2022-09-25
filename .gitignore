@@ -1,0 +1,25 @@
+### linux ###
+.fuse_hidden*
+.directory
+.nfs*
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### yarn ###
+
+node_modules
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+yarn-debug.log*
+yarn-error.log*
+
+### build ###
+dist

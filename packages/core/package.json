@@ -1,0 +1,24 @@
+{
+  "name": "@baeta/core",
+  "type": "module",
+  "dependencies": {
+    "@graphql-tools/schema": "^9.0.4",
+    "@graphql-tools/utils": "^8.12.0",
+    "graphql-modules": "^2.1.0",
+    "graphql-subscriptions": "^2.0.0"
+  },
+  "devDependencies": {
+    "@baeta/compiler": "workspace:^",
+    "@baeta/generator": "workspace:^",
+    "@baeta/plugin": "workspace:^",
+    "@baeta/plugin-graphql": "workspace:^",
+    "@types/node": "^18.7.20",
+    "graphql": "^16.6.0",
+    "tsup": "^6.2.3",
+    "typescript": "^4.8.3",
+    "unbuild": "^0.8.11"
+  },
+  "peerDependencies": {
+    "graphql": "^15.3.0 || ^16.0.0"
+  }
+}

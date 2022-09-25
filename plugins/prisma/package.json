@@ -10,7 +10,7 @@
     "change-case-all": "^1.0.15",
     "pluralize": "^8.0.0",
     "ramda": "^0.28.0",
-    "tslib": "~2.4.0"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.20",

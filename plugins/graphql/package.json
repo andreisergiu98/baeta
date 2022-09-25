@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-graphql",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "dependencies": {
     "@baeta/plugin": "workspace:^",
@@ -23,7 +23,7 @@
     "change-case-all": "1.0.15",
     "graphql-codegen-typescript-validation-schema": "^0.6.2",
     "parse-filepath": "^1.0.2",
-    "tslib": "~2.4.0"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.20",

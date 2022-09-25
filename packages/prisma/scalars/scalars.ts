@@ -1,4 +1,4 @@
-import { ScalarResolver } from "@baeta/core";
+import type { ScalarResolver } from "@baeta/core";
 import { DecimalJSScalar } from "./decimal";
 import {
   BigIntResolver,

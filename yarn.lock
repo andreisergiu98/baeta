@@ -910,20 +910,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/constraints@workspace:packages/constraints":
-  version: 0.0.0-use.local
-  resolution: "@baeta/constraints@workspace:packages/constraints"
-  dependencies:
-    "@graphql-tools/schema": ^9.0.4
-    "@graphql-tools/utils": ^8.12.0
-    "@types/node": ^18.7.23
-    graphql: ^16.6.0
-    typescript: ^4.8.3
-  peerDependencies:
-    graphql: ^15.3.0 || ^16.0.0
-  languageName: unknown
-  linkType: soft
-
 "@baeta/core@workspace:^, @baeta/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@baeta/core@workspace:packages/core"
@@ -935,11 +921,9 @@ __metadata:
     "@graphql-tools/schema": ^9.0.4
     "@graphql-tools/utils": ^8.12.0
     "@types/node": ^18.7.23
-    "@types/ramda": ^0.28.15
     graphql: ^16.6.0
     graphql-modules: ^2.1.0
     graphql-subscriptions: ^2.0.0
-    ramda: ^0.28.0
     typescript: ^4.8.3
   peerDependencies:
     graphql: ^15.3.0 || ^16.0.0
@@ -1061,7 +1045,6 @@ __metadata:
   resolution: "@baeta/prisma@workspace:packages/prisma"
   dependencies:
     "@baeta/core": "workspace:^"
-    "@graphql-tools/utils": ^8.12.0
     decimal.js: ^10.4.1
     graphql: ^16.6.0
     graphql-scalars: ^1.18.0

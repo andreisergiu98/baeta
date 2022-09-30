@@ -4,6 +4,7 @@ import { nameFunction } from "../utils/functions";
 import { ManagerOptions } from "./manager";
 import {
   createMiddlewareRegisterer,
+  createObjectTypeMiddleware,
   MiddlewareFromResolver,
 } from "./middleware";
 
@@ -31,6 +32,18 @@ export function createResolverRegisterer<
   handler.$use = createMiddlewareRegisterer(type, field, options);
 
   return handler;
+}
+
+export function createResolversRegisterer<Resolvers, ResolversType>(
+  name: string,
+  options: ManagerOptions,
+  {}: ResolversType,
+  resolvers: Resolvers
+) {
+  return {
+    ...resolvers,
+    $use: createObjectTypeMiddleware<ResolversType>(name, options),
+  };
 }
 
 export type ResolversMap = Record<string, Record<string, unknown>>;

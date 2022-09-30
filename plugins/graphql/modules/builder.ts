@@ -230,7 +230,7 @@ export const get${name}Module = () => module;
   function printBaetaManager() {
     const printObjectFieldRegisterer = (typeName: string, field: string) => {
       const resolverType = `${typeName}Resolvers["${field}"]`;
-      return `${field}: Baeta.createResolverRegisterer<${resolverType}>("${typeName}", "${field}", options),`;
+      return `${field}: Baeta.createResolverRegisterer<NonNullable<${resolverType}>>("${typeName}", "${field}", options),`;
     };
 
     const printObjectTypeRegisterer = (
@@ -247,7 +247,7 @@ export const get${name}Module = () => module;
 
       const resolversType = `${typeName}Resolvers`;
       const content = "{\n" + fields.map(indent(2)).join("\n") + "\n}";
-      return `${typeName}: Baeta.createObjectTypeRegisterer("${typeName}", options, {} as ${resolversType}, ${content}),`;
+      return `${typeName}: Baeta.createResolversRegisterer("${typeName}", options, {} as ${resolversType}, ${content}),`;
     };
 
     const printScalarRegisterer = () => {

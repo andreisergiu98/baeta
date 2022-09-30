@@ -63,7 +63,6 @@ export async function generate(options: GraphqlPluginConfig) {
     pluginMap: rootConfig.pluginMap,
     plugins: rootConfig.plugins,
     config: {
-      avoidOptionals: true,
       useIndexSignature: true,
       inputMaybeValue: "T | undefined",
       mapperTypeSuffix: "Prisma",
@@ -73,6 +72,7 @@ export async function generate(options: GraphqlPluginConfig) {
       useTypeImports: true,
       makeResolverTypeCallable: true,
       includeDirectives: true,
+      resolverTypeWrapperSignature: "T",
       scalars: {
         BigInt: "number",
         Bytes: "Buffer",

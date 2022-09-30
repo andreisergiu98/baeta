@@ -13,7 +13,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@types/node": "^18.7.20",
+    "@types/node": "^18.7.23",
     "@types/pluralize": "^0.0.29",
     "@types/ramda": "^0.28.15",
     "graphql": "^16.6.0",

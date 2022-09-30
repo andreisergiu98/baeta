@@ -867,7 +867,7 @@ __metadata:
     "@baeta/compiler": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/generator": "workspace:^"
-    "@types/node": ^18.7.20
+    "@types/node": ^18.7.23
     "@types/react": ^18.0.21
     "@types/yargs": ^17.0.13
     chokidar: ^3.5.3
@@ -894,7 +894,7 @@ __metadata:
   dependencies:
     "@esbuild-kit/cjs-loader": ^2.3.3
     "@esbuild-kit/esm-loader": ^2.4.2
-    "@types/node": ^18.7.20
+    "@types/node": ^18.7.23
     esbuild: ^0.15.9
     esbuild-plugin-commands: ^1.1.0
     esbuild-register: ^3.3.3
@@ -910,6 +910,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/constraints@workspace:packages/constraints":
+  version: 0.0.0-use.local
+  resolution: "@baeta/constraints@workspace:packages/constraints"
+  dependencies:
+    "@graphql-tools/schema": ^9.0.4
+    "@graphql-tools/utils": ^8.12.0
+    "@types/node": ^18.7.23
+    graphql: ^16.6.0
+    typescript: ^4.8.3
+  peerDependencies:
+    graphql: ^15.3.0 || ^16.0.0
+  languageName: unknown
+  linkType: soft
+
 "@baeta/core@workspace:^, @baeta/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@baeta/core@workspace:packages/core"
@@ -920,10 +934,12 @@ __metadata:
     "@baeta/plugin-graphql": "workspace:^"
     "@graphql-tools/schema": ^9.0.4
     "@graphql-tools/utils": ^8.12.0
-    "@types/node": ^18.7.20
+    "@types/node": ^18.7.23
+    "@types/ramda": ^0.28.15
     graphql: ^16.6.0
     graphql-modules: ^2.1.0
     graphql-subscriptions: ^2.0.0
+    ramda: ^0.28.0
     typescript: ^4.8.3
   peerDependencies:
     graphql: ^15.3.0 || ^16.0.0
@@ -941,8 +957,8 @@ __metadata:
     "@baeta/prisma": "workspace:^"
     "@graphql-tools/utils": ^8.12.0
     "@prisma/client": ^4.3.1
-    "@types/node": ^18.7.20
-    "@yarnpkg/pnpify": ^4.0.0-rc.20
+    "@types/node": ^18.7.23
+    "@yarnpkg/pnpify": ^4.0.0-rc.21
     apollo-server: ^3.10.2
     graphql: ^16.6.0
     graphql-scalars: ^1.18.0
@@ -963,7 +979,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/plugin": "workspace:^"
     "@baeta/plugin-graphql": "workspace:^"
-    "@types/node": ^18.7.20
+    "@types/node": ^18.7.23
     chokidar: ^3.5.3
     graphql: ^16.6.0
     typescript: ^4.8.3
@@ -993,12 +1009,11 @@ __metadata:
     "@graphql-tools/prisma-loader": ^7.2.22
     "@graphql-tools/url-loader": ^7.16.2
     "@graphql-tools/utils": ^8.12.0
-    "@types/node": ^18.7.20
+    "@types/node": ^18.7.23
     "@types/parse-filepath": 1.0.0
     auto-bind: ^5.0.1
     change-case-all: 1.0.15
     graphql: ^16.6.0
-    graphql-codegen-typescript-validation-schema: ^0.6.2
     parse-filepath: ^1.0.2
     tslib: ^2.4.0
     typescript: ^4.8.3
@@ -1016,7 +1031,7 @@ __metadata:
     "@prisma/generator-helper": ^4.3.1
     "@prisma/internals": ^4.3.1
     "@prisma/sdk": ^4.0.0
-    "@types/node": ^18.7.20
+    "@types/node": ^18.7.23
     "@types/pluralize": ^0.0.29
     "@types/ramda": ^0.28.15
     change-case-all: ^1.0.15
@@ -1036,7 +1051,7 @@ __metadata:
   dependencies:
     "@baeta/core": "workspace:^"
     "@baeta/generator": "workspace:^"
-    "@types/node": ^18.7.20
+    "@types/node": ^18.7.23
     typescript: ^4.8.3
   languageName: unknown
   linkType: soft
@@ -1145,7 +1160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/plugin-helpers@npm:^2.3.2, @graphql-codegen/plugin-helpers@npm:^2.6.2":
+"@graphql-codegen/plugin-helpers@npm:^2.6.2":
   version: 2.6.2
   resolution: "@graphql-codegen/plugin-helpers@npm:2.6.2"
   dependencies:
@@ -1177,7 +1192,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/schema-ast@npm:^2.4.1, @graphql-codegen/schema-ast@npm:^2.5.1":
+"@graphql-codegen/schema-ast@npm:^2.5.1":
   version: 2.5.1
   resolution: "@graphql-codegen/schema-ast@npm:2.5.1"
   dependencies:
@@ -1221,7 +1236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/visitor-plugin-common@npm:2.12.1, @graphql-codegen/visitor-plugin-common@npm:^2.5.2":
+"@graphql-codegen/visitor-plugin-common@npm:2.12.1":
   version: 2.12.1
   resolution: "@graphql-codegen/visitor-plugin-common@npm:2.12.1"
   dependencies:
@@ -1631,17 +1646,6 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 8d1d8a11722e211dc8723cd3fd7a97fa5401ab22146e4240a0f9d45547792476c34814ff914524578beec961db7b0ff23a6ddff8fe059764537e594cff35c906
-  languageName: node
-  linkType: hard
-
-"@graphql-tools/utils@npm:^8.6.1":
-  version: 8.10.1
-  resolution: "@graphql-tools/utils@npm:8.10.1"
-  dependencies:
-    tslib: ^2.4.0
-  peerDependencies:
-    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: db1a689cdfa7e1cbdbd8c3c1957338c018cb8b9978c747c69b7332c088af5a3af6b50eb6f14f1b369d43bff328a94a1ba68a0b4dcbf5349396747db328042d08
   languageName: node
   linkType: hard
 
@@ -2532,10 +2536,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.7.20":
-  version: 18.7.20
-  resolution: "@types/node@npm:18.7.20"
-  checksum: 83905b5528afe8c4e3f5f33de2699e1a12064d0e1b89310b179ab1801fca73157158ecf84c8dac3681afa77026f12440d34c37bc1107ca461da8df0f086b09e9
+"@types/node@npm:^18.7.23":
+  version: 18.7.23
+  resolution: "@types/node@npm:18.7.23"
+  checksum: 2c8df0830d8345e5cd1ca17feb9cf43fa667aae749888e0a068c5c1b35eaedd2f9b24ed987a0758078395edf7a03681e5e0b7790a518ff7afe1ff6d8459f7b4a
   languageName: node
   linkType: hard
 
@@ -2697,17 +2701,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/core@npm:^4.0.0-rc.20":
-  version: 4.0.0-rc.20
-  resolution: "@yarnpkg/core@npm:4.0.0-rc.20"
+"@yarnpkg/core@npm:^4.0.0-rc.21":
+  version: 4.0.0-rc.21
+  resolution: "@yarnpkg/core@npm:4.0.0-rc.21"
   dependencies:
     "@arcanis/slice-ansi": ^1.1.1
     "@types/semver": ^7.1.0
     "@types/treeify": ^1.0.0
-    "@yarnpkg/fslib": ^3.0.0-rc.20
-    "@yarnpkg/libzip": ^3.0.0-rc.20
-    "@yarnpkg/parsers": ^3.0.0-rc.20
-    "@yarnpkg/shell": ^4.0.0-rc.20
+    "@yarnpkg/fslib": ^3.0.0-rc.21
+    "@yarnpkg/libzip": ^3.0.0-rc.21
+    "@yarnpkg/parsers": ^3.0.0-rc.21
+    "@yarnpkg/shell": ^4.0.0-rc.21
     camelcase: ^5.3.1
     chalk: ^3.0.0
     ci-info: ^3.2.0
@@ -2726,74 +2730,74 @@ __metadata:
     treeify: ^1.1.0
     tslib: ^2.4.0
     tunnel: ^0.0.6
-  checksum: 75ed943a9c64a4931632efb4d68d00e65993d9e9b553376b17aad14504586832533e1bc57453645d4d75aa0193f353a2e00e8b7c4c0086ac2a42be6e060ef558
+  checksum: 80058a237ee052e09c01fbd0c1a49e6be1e5e621ae41fa5ab9adf9f4a221b96f45bd9bfa31595996c77b6ffd20213b933eed4d683e5f1954fdac293c91d1cbcd
   languageName: node
   linkType: hard
 
-"@yarnpkg/fslib@npm:^3.0.0-rc.20":
-  version: 3.0.0-rc.20
-  resolution: "@yarnpkg/fslib@npm:3.0.0-rc.20"
+"@yarnpkg/fslib@npm:^3.0.0-rc.21":
+  version: 3.0.0-rc.21
+  resolution: "@yarnpkg/fslib@npm:3.0.0-rc.21"
   dependencies:
     tslib: ^2.4.0
-  checksum: 1f0b2d19224b6c19ba35267facb2af7b5c636940fef5db45ff831cc40a5e7db5914f47bacef8889389202f3a413e521eca9e1f9b8e03742e08b95ac7da7c7f41
+  checksum: edc6f1e5d8a2d7dc0ca0d71126a0b8e783898a07f23bce16a8d0eb117d1b8ee6770fb174ecb458844ed1ae3d074a212fbcb7dbe4023c3f722f73c81ab6816cf5
   languageName: node
   linkType: hard
 
-"@yarnpkg/libzip@npm:^3.0.0-rc.20":
-  version: 3.0.0-rc.20
-  resolution: "@yarnpkg/libzip@npm:3.0.0-rc.20"
+"@yarnpkg/libzip@npm:^3.0.0-rc.21":
+  version: 3.0.0-rc.21
+  resolution: "@yarnpkg/libzip@npm:3.0.0-rc.21"
   dependencies:
     "@types/emscripten": ^1.39.6
-    "@yarnpkg/fslib": ^3.0.0-rc.20
+    "@yarnpkg/fslib": ^3.0.0-rc.21
     tslib: ^2.4.0
   peerDependencies:
-    "@yarnpkg/fslib": ^3.0.0-rc.20
-  checksum: 42e5728fcf796a0eecdb22db8a9735b1c505d339b35b9fadfa9943fe4a2ee49b00c073c0f10a2c47c0a8165528f8e694de81ab257d8035f88752d07d178e202b
+    "@yarnpkg/fslib": ^3.0.0-rc.21
+  checksum: c1a3c5963a318b0b2a8814fdb8e3e3d444704719bb1152abce67230d844fb7e6c920d02fca79ff6a7f6111d9679b8a44d67fd2cb477b42e37fcf864ffb1d8348
   languageName: node
   linkType: hard
 
-"@yarnpkg/nm@npm:^4.0.0-rc.20":
-  version: 4.0.0-rc.20
-  resolution: "@yarnpkg/nm@npm:4.0.0-rc.20"
+"@yarnpkg/nm@npm:^4.0.0-rc.21":
+  version: 4.0.0-rc.21
+  resolution: "@yarnpkg/nm@npm:4.0.0-rc.21"
   dependencies:
-    "@yarnpkg/core": ^4.0.0-rc.20
-    "@yarnpkg/fslib": ^3.0.0-rc.20
-  checksum: bb286870adb6bc3adbd1511eb7dcf1f08538219b9a4291eb61899638a43834d6d662c88ff1560a29899beb700b44a4929b1bec7cee596c551a0e178ceea531c1
+    "@yarnpkg/core": ^4.0.0-rc.21
+    "@yarnpkg/fslib": ^3.0.0-rc.21
+  checksum: d5d87e7bf00cbdfdc121cd37cfb30dd86ff8b1a630402f65c751bc9f51606cf2339f7842bc814901c98ba5bcfe2e30410ca0b40a57656d0e5eb5525935dbf9ee
   languageName: node
   linkType: hard
 
-"@yarnpkg/parsers@npm:^3.0.0-rc.20":
-  version: 3.0.0-rc.20
-  resolution: "@yarnpkg/parsers@npm:3.0.0-rc.20"
+"@yarnpkg/parsers@npm:^3.0.0-rc.21":
+  version: 3.0.0-rc.21
+  resolution: "@yarnpkg/parsers@npm:3.0.0-rc.21"
   dependencies:
     js-yaml: ^3.10.0
     tslib: ^2.4.0
-  checksum: a0dfc2d4d824322ae779363870ad7705b42161ad5e90c992404bf5dc0454a046a6f04144303c9bb047239e480b882b4105272127f2ba080b865180276c46deda
+  checksum: c0741ef01089a7d452dfb75b8c24a82ddcc3e218dac22b794a06f2e50c7070378c460f63f63fb7ed0f62f634114e448e3d85a75ccd4db84e1526242ae9b4a7d5
   languageName: node
   linkType: hard
 
-"@yarnpkg/pnpify@npm:^4.0.0-rc.20":
-  version: 4.0.0-rc.20
-  resolution: "@yarnpkg/pnpify@npm:4.0.0-rc.20"
+"@yarnpkg/pnpify@npm:^4.0.0-rc.21":
+  version: 4.0.0-rc.21
+  resolution: "@yarnpkg/pnpify@npm:4.0.0-rc.21"
   dependencies:
-    "@yarnpkg/core": ^4.0.0-rc.20
-    "@yarnpkg/fslib": ^3.0.0-rc.20
-    "@yarnpkg/nm": ^4.0.0-rc.20
+    "@yarnpkg/core": ^4.0.0-rc.21
+    "@yarnpkg/fslib": ^3.0.0-rc.21
+    "@yarnpkg/nm": ^4.0.0-rc.21
     clipanion: ^3.2.0-rc.10
     tslib: ^2.4.0
   bin:
     pnpify: ./lib/cli.js
-  checksum: 283b7a4fffaea9171008b89ebbbbb1d840db5604a23395f4f68b42e4022cdab30cf93a47d9c1ce1af70feb1f105a84f432d594c4c1d30f72edffcb9adf1ba93c
+  checksum: b92c42d0b7a821d0aae5749b832f12cf94e605da8142446b33244bbe9530ed09f627545676cf3eea99c4d4740a310e9c8ac2f4b1e2845770276854f16c041970
   languageName: node
   linkType: hard
 
-"@yarnpkg/sdks@npm:^3.0.0-rc.20":
-  version: 3.0.0-rc.20
-  resolution: "@yarnpkg/sdks@npm:3.0.0-rc.20"
+"@yarnpkg/sdks@npm:^3.0.0-rc.21":
+  version: 3.0.0-rc.21
+  resolution: "@yarnpkg/sdks@npm:3.0.0-rc.21"
   dependencies:
-    "@yarnpkg/core": ^4.0.0-rc.20
-    "@yarnpkg/fslib": ^3.0.0-rc.20
-    "@yarnpkg/parsers": ^3.0.0-rc.20
+    "@yarnpkg/core": ^4.0.0-rc.21
+    "@yarnpkg/fslib": ^3.0.0-rc.21
+    "@yarnpkg/parsers": ^3.0.0-rc.21
     chalk: ^3.0.0
     clipanion: ^3.2.0-rc.10
     comment-json: ^2.2.0
@@ -2801,16 +2805,16 @@ __metadata:
     tslib: ^2.4.0
   bin:
     sdks: ./lib/cli.js
-  checksum: 12ca1b660c1115f56a4ccab132cba36ddc6119a776c43547719c7f486b20422b349e6295c7ec5f4239c51aa6f3a01306eb87a3ab83adf64e422825ffcc78dba8
+  checksum: 6b059a3bc7d166be6a3e7898cfb0e4db8af1d7ebf4105814cdbf0bcaacb0d9a54511a29366152ba5191895d7aa6c9f4375c41a603cf5889fb1ec5707790b991c
   languageName: node
   linkType: hard
 
-"@yarnpkg/shell@npm:^4.0.0-rc.20":
-  version: 4.0.0-rc.20
-  resolution: "@yarnpkg/shell@npm:4.0.0-rc.20"
+"@yarnpkg/shell@npm:^4.0.0-rc.21":
+  version: 4.0.0-rc.21
+  resolution: "@yarnpkg/shell@npm:4.0.0-rc.21"
   dependencies:
-    "@yarnpkg/fslib": ^3.0.0-rc.20
-    "@yarnpkg/parsers": ^3.0.0-rc.20
+    "@yarnpkg/fslib": ^3.0.0-rc.21
+    "@yarnpkg/parsers": ^3.0.0-rc.21
     chalk: ^3.0.0
     clipanion: ^3.2.0-rc.10
     cross-spawn: 7.0.3
@@ -2819,7 +2823,7 @@ __metadata:
     tslib: ^2.4.0
   bin:
     shell: ./lib/cli.js
-  checksum: 6a35893c7b418642060a7008c2260beca26ac7831d67d76db657c3196fa12cd1562a7a65e558a585d9cf24e91f5d555f3cff53d452b846810b361fac3dba3612
+  checksum: 8812cc3f3c29097ba7bd8a5c76319c6cac301eef0c8ef37305f76d179c5b412b5f74613b2eaeff91b8c549413f8be278d5aee03c1d82de2794ece34c116da771
   languageName: node
   linkType: hard
 
@@ -3280,7 +3284,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "baeta@workspace:."
   dependencies:
-    "@yarnpkg/sdks": ^3.0.0-rc.20
+    "@yarnpkg/sdks": ^3.0.0-rc.21
     eslint: ^8.24.0
     typescript: ^4.8.3
   languageName: unknown
@@ -5553,21 +5557,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-codegen-typescript-validation-schema@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "graphql-codegen-typescript-validation-schema@npm:0.6.2"
-  dependencies:
-    "@graphql-codegen/plugin-helpers": ^2.3.2
-    "@graphql-codegen/schema-ast": ^2.4.1
-    "@graphql-codegen/visitor-plugin-common": ^2.5.2
-    "@graphql-tools/utils": ^8.6.1
-    graphql: ^16.2.0
-  peerDependencies:
-    graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: e5bc215d18bfb203114823e69139350aeead1ab35f24c43cc67999e83146f876fdaa812d17f574c1a1eee2e2824fcbd6784a0b985d7d9eeefcb9ddb99fbaf00e
-  languageName: node
-  linkType: hard
-
 "graphql-modules@npm:^2.1.0":
   version: 2.1.0
   resolution: "graphql-modules@npm:2.1.0"
@@ -5638,7 +5627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.2.0, graphql@npm:^16.6.0":
+"graphql@npm:^16.6.0":
   version: 16.6.0
   resolution: "graphql@npm:16.6.0"
   checksum: bf1d9e3c1938ce3c1a81e909bd3ead1ae4707c577f91cff1ca2eca474bfbc7873d5d7b942e1e9777ff5a8304421dba57a4b76d7a29eb19de8711cb70e3c2415e

@@ -10,8 +10,6 @@ export interface GenerateOptions extends Required<PrismaPluginOptions> {
 }
 
 export async function generate(store: Store, options: GenerateOptions) {
-  writeFile("dmmf.json", JSON.stringify(store.dmmf, null, 2), "utf-8");
-
   const schemaBuilder = createSchemaBuilder(store, options);
   const resolversBuilder = createResolversBuilder(store, options);
 

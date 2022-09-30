@@ -166,26 +166,6 @@ export function buildBlock({
   return [`${name} {`, ...lines.map(indent(2)), "};"].join("\n");
 }
 
-export function buildObject({
-  name,
-  lines,
-  comma = true,
-  indentation = 2,
-}: {
-  name: string;
-  lines: string[];
-  comma?: boolean;
-  indentation?: number;
-}): string {
-  if (!lines.length) {
-    return "";
-  }
-
-  return [`${name} {`, ...lines.map(indent(indentation)), `}${comma ? "," : ""}`].join(
-    "\n"
-  );
-}
-
 const getRelativePath = function (filepath: string, basePath: string) {
   const normalizedFilepath = normalize(filepath);
   const normalizedBasePath = ensureStartsWithSeparator(

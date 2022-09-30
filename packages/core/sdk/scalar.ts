@@ -7,17 +7,14 @@ export type OnScalarResolver = (
   resolver: ScalarResolver
 ) => void;
 
-export function createScalarRegisterer(
-  scalar: string,
-  options: ManagerOptions
-) {
-  const handler = (resolver: ScalarResolver) => {
+export function createScalarBuilder(scalar: string, options: ManagerOptions) {
+  const builder = (resolver: ScalarResolver) => {
     options.onScalar(scalar, resolver);
   };
-  return handler;
+  return builder;
 }
 
-export function registerScalar(
+export function addScalar(
   map: Record<string, unknown>,
   scalar: string,
   resolver: GraphQLScalarType<unknown, unknown>

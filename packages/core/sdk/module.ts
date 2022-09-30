@@ -1,13 +1,13 @@
 import { DocumentNode, GraphQLSchema } from "graphql";
-import { ManagerOptions } from "./manager";
-import { GM } from "../lib/graphql-modules";
-import { MiddlewaresMap, registerMiddleware } from "./middleware";
-import { ResolversMap, registerResolver } from "./resolver";
-import { registerScalar } from "./scalar";
-import { registerSubscription } from "./subscription";
 import { Middleware, Resolver, ScalarResolver } from "../lib";
+import { GM } from "../lib/graphql-modules";
 import { SubscriptionObjectWithoutPayload } from "../lib/subscription";
 import { SchemaTransformer, transformSchema } from "./directive";
+import { ManagerOptions } from "./manager";
+import { addMiddleware, MiddlewaresMap } from "./middleware";
+import { addResolver, ResolversMap } from "./resolver";
+import { addScalar } from "./scalar";
+import { addSubscription } from "./subscription";
 
 export interface Module<T> {
   id: string;
@@ -55,7 +55,7 @@ export function createModule<T>(module: Module<T>) {
   const transformers: SchemaTransformer[] = [];
 
   const onScalar = (scalar: string, resolver: ScalarResolver) => {
-    registerScalar(resolvers, scalar, resolver);
+    addScalar(resolvers, scalar, resolver);
   };
 
   const onResolver = (
@@ -63,14 +63,14 @@ export function createModule<T>(module: Module<T>) {
     field: string,
     resolver: Resolver<unknown>
   ) => {
-    registerResolver(resolvers, type, field, resolver);
+    addResolver(resolvers, type, field, resolver);
   };
 
   const onSubscription = (
     field: string,
     subscription: SubscriptionObjectWithoutPayload<unknown>
   ) => {
-    registerSubscription(resolvers, field, subscription);
+    addSubscription(resolvers, field, subscription);
   };
 
   const onMiddleware = (
@@ -78,7 +78,7 @@ export function createModule<T>(module: Module<T>) {
     field: string,
     resolver: Middleware<unknown>
   ) => {
-    registerMiddleware(middlewares, type, field, resolver);
+    addMiddleware(middlewares, type, field, resolver);
   };
 
   const onDirective = (transformer: SchemaTransformer) => {
@@ -90,6 +90,7 @@ export function createModule<T>(module: Module<T>) {
     onResolver,
     onMiddleware,
     onSubscription,
+    onDirective,
   });
 
   extendManager(manager, {
@@ -99,5 +100,15 @@ export function createModule<T>(module: Module<T>) {
     transformers,
   });
 
-  return { ...manager, $directive: onDirective };
+  return manager;
+}
+
+export function createSingletonModule<T>(create: () => T) {
+  let module: T | undefined;
+  return () => {
+    if (!module) {
+      module = create();
+    }
+    return module;
+  };
 }

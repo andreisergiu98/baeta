@@ -6,4 +6,3 @@ export * from "./resolver";
 export * from "./scalar";
 export * from "./subscription";
 export * from "./directive";
-export * from "./object";

@@ -22,20 +22,14 @@ export type SubscriptionOptions<Payload, Sub> =
   >
     ? Payload extends Result
       ? SubscriptionObjectWithoutPayload<Result, Root, Context, Args>
-      : SubscriptionObjectWithPayload<
-          Result,
-          Payload,
-          Root,
-          Context,
-          Args
-        >
+      : SubscriptionObjectWithPayload<Result, Payload, Root, Context, Args>
     : never;
 
 function normalizeSubscribe<Payload>(
   subscribe: SubscriptionSubscribeFn<Payload>,
   filter?: SubscriptionFilterFn<Payload>
 ) {
-  const handler: ResolverFn = (root, args, context, info) => {
+  const normalizedSubscribe: ResolverFn = (root, args, context, info) => {
     return subscribe({
       root,
       args,
@@ -47,10 +41,10 @@ function normalizeSubscribe<Payload>(
   const normalizedFilter = normalizeFilter(filter);
 
   if (normalizedFilter == null) {
-    return handler;
+    return normalizedSubscribe;
   }
 
-  return withFilter(handler, normalizedFilter);
+  return withFilter(normalizedSubscribe, normalizedFilter);
 }
 
 function normalizeFilter<Payload>(filter?: SubscriptionFilterFn<Payload>) {
@@ -58,7 +52,7 @@ function normalizeFilter<Payload>(filter?: SubscriptionFilterFn<Payload>) {
     return;
   }
 
-  const handler: FilterFn = (payload, args, context, info) => {
+  const normalizedFilter: FilterFn = (payload, args, context, info) => {
     return filter({
       payload,
       args,
@@ -67,17 +61,17 @@ function normalizeFilter<Payload>(filter?: SubscriptionFilterFn<Payload>) {
     });
   };
 
-  return handler;
+  return normalizedFilter;
 }
 
-function normalizeResolve<Payload>(
+function normalizeResolver<Payload>(
   resolve?: SubscriptionResolveFn<unknown, Payload>
 ) {
   if (resolve == null) {
     return;
   }
 
-  const handler: GM.Resolver<unknown, Payload> = (
+  const normalizedResolver: GM.Resolver<unknown, Payload> = (
     payload: Payload,
     args,
     context,
@@ -91,7 +85,7 @@ function normalizeResolve<Payload>(
     });
   };
 
-  return handler;
+  return normalizedResolver;
 }
 
 export type OnSubscription = (
@@ -99,11 +93,11 @@ export type OnSubscription = (
   options: SubscriptionObjectWithoutPayload<unknown>
 ) => void;
 
-export function createSubscriptionRegisterer<Subscription>(
+export function createSubscriptionBuilder<Subscription>(
   field: string,
   options: ManagerOptions
 ) {
-  const handler = <Payload>(
+  const builder = <Payload>(
     subscription: SubscriptionOptions<Payload, Subscription>
   ) => {
     nameFunction(subscription.subscribe, `${field}.subscribe`);
@@ -115,10 +109,18 @@ export function createSubscriptionRegisterer<Subscription>(
     );
   };
 
-  return handler;
+  return builder;
 }
 
-export function registerSubscription(
+export function createSubscriptionsBuilder<Resolvers, ResolversType>(
+  options: ManagerOptions,
+  {}: ResolversType,
+  resolvers: Resolvers
+) {
+  return resolvers;
+}
+
+export function addSubscription(
   map: ResolversMap,
   field: string,
   subscription: SubscriptionObjectWithoutPayload<unknown>
@@ -127,7 +129,7 @@ export function registerSubscription(
     subscription.subscribe,
     subscription.filter
   );
-  const resolve = normalizeResolve(subscription.resolve);
+  const resolve = normalizeResolver(subscription.resolve);
 
   if (map.Subscription == null) {
     map.Subscription = {};

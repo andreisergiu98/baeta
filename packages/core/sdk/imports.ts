@@ -13,7 +13,5 @@ function cjsImport<T>(file: string, clearCache: boolean): T {
   if (clearCache) {
     delete require.cache[module];
   }
-  const test = require(module);
-  console.log("test", test);
-  return test.default.config;
+  return require(module).default.config;
 }

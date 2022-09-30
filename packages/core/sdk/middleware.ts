@@ -37,48 +37,42 @@ type MiddlewareFromResolverObject<R extends ResolversObject<{}>> =
     ? Middleware<unknown, {}, Context, {}>
     : never;
 
-export function createMiddlewareRegisterer<T extends Middleware<unknown>>(
+export function createMiddlewareBuilder<T extends Middleware<unknown>>(
   type: string,
   field: string,
   options: ManagerOptions
 ) {
-  return (middleware: T) => {
+  const builder = (middleware: T) => {
     nameFunction(middleware, `${type}.${field}.$use`);
     options.onMiddleware(type, field, middleware);
   };
+  return builder;
 }
 
-export function createObjectTypeMiddleware<Resolvers>(
+export function createObjectTypeMiddlewareBuilder<Resolvers>(
   object: string,
   options: ManagerOptions
 ) {
-  return createMiddlewareRegisterer<MiddlewareFromResolvers<Resolvers>>(
+  return createMiddlewareBuilder<MiddlewareFromResolvers<Resolvers>>(
     object,
     "*",
     options
   );
 }
 
-export function createModuleMiddleware<Resolvers extends ResolversObject<{}>>(
-  options: ManagerOptions
-) {
-  return createMiddlewareRegisterer<MiddlewareFromResolverObject<Resolvers>>(
+export function createModuleMiddlewareBuilder<
+  Resolvers extends ResolversObject<{}>
+>(options: ManagerOptions) {
+  return createMiddlewareBuilder<MiddlewareFromResolverObject<Resolvers>>(
     "*",
     "*",
     options
   );
 }
 
-export type MiddlewaresMap = Record<string, Record<string, Array<unknown>>>;
-
-export function registerMiddleware(
-  map: MiddlewaresMap,
-  type: string,
-  field: string,
-  resolver: Middleware<unknown>
-) {
+function normalizeMiddleware(middleware: Middleware<unknown>) {
   const normalizedMiddleware: GM.Middleware<unknown> = (params, next) => {
-    return resolver(
+    return middleware(
       {
         root: params.root,
         args: params.args,
@@ -88,14 +82,22 @@ export function registerMiddleware(
       next
     );
   };
+  return normalizedMiddleware;
+}
 
+export type MiddlewaresMap = Record<string, Record<string, Array<unknown>>>;
+
+export function addMiddleware(
+  map: MiddlewaresMap,
+  type: string,
+  field: string,
+  resolver: Middleware<unknown>
+) {
   if (map[type] == null) {
     map[type] = {};
   }
-
   if (map[type][field] == null) {
     map[type][field] = [];
   }
-
-  map[type][field].push(normalizedMiddleware);
+  map[type][field].push(normalizeMiddleware(resolver));
 }

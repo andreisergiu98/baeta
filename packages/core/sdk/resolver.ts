@@ -3,8 +3,8 @@ import { GM } from "../lib/graphql-modules";
 import { nameFunction } from "../utils/functions";
 import { ManagerOptions } from "./manager";
 import {
-  createMiddlewareRegisterer,
-  createObjectTypeMiddleware,
+  createMiddlewareBuilder,
+  createObjectTypeMiddlewareBuilder,
   MiddlewareFromResolver,
 } from "./middleware";
 
@@ -21,20 +21,22 @@ type ResolverRegisterer<T> = ((resolver: T) => void) & {
   $use: (middleware: MiddlewareFromResolver<T>) => void;
 };
 
-export function createResolverRegisterer<
-  T extends Resolver<any, any, any, any>
->(type: string, field: string, options: ManagerOptions): ResolverRegisterer<T> {
-  const handler = (resolver: T) => {
+export function createResolverBuilder<T extends Resolver<any, any, any, any>>(
+  type: string,
+  field: string,
+  options: ManagerOptions
+): ResolverRegisterer<T> {
+  const builder = (resolver: T) => {
     nameFunction(resolver, `${type}.${field}`);
     options.onResolver(type, field, resolver);
   };
 
-  handler.$use = createMiddlewareRegisterer(type, field, options);
+  builder.$use = createMiddlewareBuilder(type, field, options);
 
-  return handler;
+  return builder;
 }
 
-export function createResolversRegisterer<Resolvers, ResolversType>(
+export function createResolversBuilder<Resolvers, ResolversType>(
   name: string,
   options: ManagerOptions,
   {}: ResolversType,
@@ -42,25 +44,27 @@ export function createResolversRegisterer<Resolvers, ResolversType>(
 ) {
   return {
     ...resolvers,
-    $use: createObjectTypeMiddleware<ResolversType>(name, options),
+    $use: createObjectTypeMiddlewareBuilder<ResolversType>(name, options),
   };
+}
+
+function normalizeResolver<T>(resolver: Resolver<T>) {
+  const normalizedResolver: GM.Resolver<unknown> = (root, args, ctx, info) => {
+    return resolver({ root, args, ctx, info });
+  };
+  return normalizedResolver;
 }
 
 export type ResolversMap = Record<string, Record<string, unknown>>;
 
-export function registerResolver(
+export function addResolver(
   map: ResolversMap,
   type: string,
   field: string,
   resolver: Resolver<unknown>
 ) {
-  const normalizedResolver: GM.Resolver<unknown> = (root, args, ctx, info) => {
-    return resolver({ root, args, ctx, info });
-  };
-
   if (map[type] == null) {
     map[type] = {};
   }
-
-  map[type][field] = normalizedResolver;
+  map[type][field] = normalizeResolver(resolver);
 }

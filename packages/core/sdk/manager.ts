@@ -1,3 +1,4 @@
+import { OnDirective } from "./directive";
 import { OnMiddleware } from "./middleware";
 import { OnResolver } from "./resolver";
 import { OnScalarResolver } from "./scalar";
@@ -8,6 +9,7 @@ export interface ManagerOptions {
   onResolver: OnResolver;
   onMiddleware: OnMiddleware;
   onSubscription: OnSubscription;
+  onDirective: OnDirective;
 }
 
 export function createManager<Map, Resolvers>(
@@ -15,5 +17,5 @@ export function createManager<Map, Resolvers>(
   resolversType: Resolvers,
   map: Map
 ) {
-  return map;
+  return { ...map, $directive: options.onDirective };
 }

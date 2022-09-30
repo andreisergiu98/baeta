@@ -26,7 +26,6 @@ import {
   createObject,
   collectUsedTypes,
   indent,
-  buildObject,
 } from "./utils";
 import { ModulesConfig } from "./config";
 import { BaseVisitor } from "@graphql-codegen/visitor-plugin-common";
@@ -210,96 +209,95 @@ export function buildModule(
 
   function printFactoryMethod() {
     const name = moduleNamespace.slice(0, moduleNamespace.length - 6);
+    const createModuleFn = `create${name}Module`;
+    const getModuleFn = `get${name}Module`;
 
-    const factory = `
-export const create${name}Module = () => Baeta.createModule(ModuleMetadata);
-       `;
-
-    const instance = `
-const module = create${name}Module();
-export const get${name}Module = () => module;
-    `;
-
-    return [factory, instance].join("\n");
+    return `
+export const ${createModuleFn} = () => Baeta.createModule(ModuleMetadata);
+export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
+`;
   }
 
   /**
    * Baeta manager
    */
 
-  function printBaetaManager() {
-    const printObjectFieldRegisterer = (typeName: string, field: string) => {
-      const resolverType = `${typeName}Resolvers["${field}"]`;
-      return `${field}: Baeta.createResolverRegisterer<NonNullable<${resolverType}>>("${typeName}", "${field}", options),`;
-    };
+  function printObjectFieldResolverBuilder(typeName: string, field: string) {
+    const resolverType = `${typeName}Resolvers["${field}"]`;
+    return `${field}: Baeta.createResolverBuilder<NonNullable<${resolverType}>>("${typeName}", "${field}", options),`;
+  }
 
-    const printObjectTypeRegisterer = (
-      records: Record<string, string[]>,
-      typeName: string
-    ) => {
-      const fields = records[typeName]
+  function printObjectResolverBuilder(
+    typeName: string,
+    objects: Record<string, string[]>
+  ) {
+    const fields =
+      objects[typeName]
         ?.filter(unique)
-        .map((field) => printObjectFieldRegisterer(typeName, field));
+        .map((field) => printObjectFieldResolverBuilder(typeName, field)) ?? [];
 
-      if (fields.length === 0) {
-        return "";
-      }
+    if (fields.length === 0) {
+      return "";
+    }
 
-      const resolversType = `${typeName}Resolvers`;
-      const content = "{\n" + fields.map(indent(2)).join("\n") + "\n}";
-      return `${typeName}: Baeta.createResolversRegisterer("${typeName}", options, {} as ${resolversType}, ${content}),`;
-    };
+    const resolversType = `${typeName}Resolvers`;
+    const content = `{\n${fields.map(indent(2)).join("\n")}\n}`;
+    return `${typeName}: Baeta.createResolversBuilder("${typeName}", options, {} as ${resolversType}, ${content}),`;
+  }
 
-    const printScalarRegisterer = () => {
-      const scalars = visited.scalars;
+  function printSubscriptionFieldBuilder(field: string) {
+    const resolverType = `SubscriptionResolvers["${field}"]`;
+    return `${field}: Baeta.createSubscriptionBuilder<${resolverType}>("${field}", options),`;
+  }
 
-      if (scalars.length === 0) {
-        return "";
-      }
+  function printSubscriptionObjectBuilder() {
+    const subscriptions = picks.objects["Subscription"]?.filter(unique) ?? [];
 
-      const fields = scalars.map(
-        (scalar) =>
-          `${scalar}: Baeta.createScalarRegisterer("${scalar}", options),`
-      );
+    if (subscriptions.length === 0) {
+      return "";
+    }
 
-      return buildObject({ name: "Scalar:", lines: fields });
-    };
+    const fields = subscriptions.map((subscription) =>
+      printSubscriptionFieldBuilder(subscription)
+    );
 
-    const printSubscriptionFieldRegisterer = (field: string) => {
-      const resolverType = `SubscriptionResolvers["${field}"]`;
-      return `${field}: Baeta.createSubscriptionRegisterer<${resolverType}>("${field}", options),`;
-    };
+    const resolversType = `SubscriptionResolvers`;
+    const content = `{\n${fields.map(indent(2)).join("\n")}\n}`;
+    return `Subscription: Baeta.createSubscriptionsBuilder(options, {} as ${resolversType}, ${content}),`;
+  }
 
-    const printSubscriptionsRegisterer = () => {
-      const subscriptions = picks.objects["Subscription"]?.filter(unique) ?? [];
+  function printScalarBuilder() {
+    const scalars = visited.scalars;
+    if (scalars.length === 0) {
+      return "";
+    }
 
-      if (subscriptions.length === 0) {
-        return "";
-      }
+    const fields = scalars.map(
+      (scalar) => `${scalar}: Baeta.createScalarBuilder("${scalar}", options),`
+    );
+    const content = fields.map(indent(2)).join("\n");
+    return `Scalar: {\n${content}\n},`;
+  }
 
-      const fields = subscriptions.map((subscription) =>
-        printSubscriptionFieldRegisterer(subscription)
-      );
-
-      return buildObject({ name: "Subscription:", lines: fields });
-    };
-
+  function printBaetaManager() {
     const objects = visited.objects
       .filter((type) => type !== "Subscription")
-      .map((typeName) => printObjectTypeRegisterer(picks.objects, typeName));
+      .map((typeName) => printObjectResolverBuilder(typeName, picks.objects))
+      .filter(Boolean);
 
     const bodyFields = [
       ...objects,
-      printScalarRegisterer(),
-      printSubscriptionsRegisterer(),
+      printScalarBuilder(),
+      printSubscriptionObjectBuilder(),
     ];
 
-    const body = "{\n" + bodyFields.map(indent(2)).join("\n") + "\n}";
+    const body = bodyFields.filter(Boolean).map(indent(6)).join("\n");
+    const content = `{\n${body}\n    }`;
 
     return `
-export function createManager(options: Baeta.ManagerOptions) {
-  return Baeta.createManager(options, {}, ${body});
-}`;
+  export function createManager(options: Baeta.ManagerOptions) {
+    return Baeta.createManager(options, {}, ${content});
+  }`;
   }
 
   /**

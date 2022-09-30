@@ -69,9 +69,7 @@ export function Generator(props: GeneratorProps) {
     };
   }, [config, props.watch, props.onSuccess]);
 
-  if (error) {
-    console.log("err");
-  }
-
-  return <GeneratorStatus running={running} watching={props.watch} />;
+  return (
+    <GeneratorStatus error={error} running={running} watching={props.watch} />
+  );
 }

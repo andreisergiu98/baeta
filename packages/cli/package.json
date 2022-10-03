@@ -1,0 +1,50 @@
+{
+  "name": "@baeta/cli",
+  "version": "0.0.8",
+  "type": "module",
+  "scripts": {
+    "prepack": "yarn prep --move dist",
+    "postpack": "yarn prep --clean",
+    "build": "yarn tsup --dts"
+  },
+  "dependencies": {
+    "@baeta/generator": "workspace:^",
+    "chalk": "^5.0.1",
+    "chokidar": "^3.5.3",
+    "cli-spinners": "^2.7.0",
+    "ink": "^3.2.0",
+    "nanoid": "^4.0.0",
+    "react": "^17.0.2",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@baeta/core": "workspace:^",
+    "@baeta/prep": "workspace:^",
+    "@types/node": "^18.7.23",
+    "@types/react": "^18.0.21",
+    "@types/yargs": "^17.0.13",
+    "graphql": "^16.6.0",
+    "typescript": "^4.8.3"
+  },
+  "peerDependencies": {
+    "@baeta/core": "workspace:^",
+    "graphql": "^15.3.0 || ^16.0.0"
+  },
+  "optionalDependencies": {
+    "@baeta/compiler": "workspace:^"
+  },
+  "bin": {
+    "baeta": "./bin/cli-dev.cjs"
+  },
+  "files": [
+    "*.js",
+    "*.cjs",
+    "*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "bin": {
+      "baeta": "./cli.js"
+    }
+  }
+}

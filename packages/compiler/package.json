@@ -1,0 +1,44 @@
+{
+  "name": "@baeta/compiler",
+  "version": "0.0.5",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "prepack": "yarn prep --move dist",
+    "postpack": "yarn prep --clean",
+    "build": "yarn tsup --dts"
+  },
+  "dependencies": {
+    "@esbuild-kit/cjs-loader": "^2.3.3",
+    "@esbuild-kit/esm-loader": "^2.4.2",
+    "esbuild": "^0.15.9",
+    "esbuild-plugin-commands": "^1.1.0",
+    "esbuild-register": "^3.3.3",
+    "execa": "^6.1.0",
+    "tree-kill": "^1.2.2",
+    "tsx": "^3.9.0"
+  },
+  "devDependencies": {
+    "@baeta/prep": "workspace:^",
+    "@types/node": "^18.7.23",
+    "typescript": "^4.8.3"
+  },
+  "files": [
+    "*.js",
+    "*.cjs",
+    "*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./index.js",
+        "require": "./index.cjs",
+        "types": "./index.d.ts"
+      },
+      "./register.cjs": {
+        "require": "./register.cjs"
+      }
+    }
+  }
+}

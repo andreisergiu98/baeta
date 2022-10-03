@@ -1,13 +1,10 @@
-import {
-  findModelByOperationSchema,
-  ModelOperations,
-} from "../model-operations";
-import { ModelRelation } from "../model-relations";
-import { concat, mergeDeepWith } from "ramda";
-import { createModuleFiles } from "./resolver-builder-files";
-import { createVisitorBuilder } from "../visitor";
-import { Store } from "../context";
-import { GenerateOptions } from "../generator";
+import { concat, mergeDeepWith } from 'ramda';
+import { Store } from '../context';
+import { GenerateOptions } from '../generator';
+import { findModelByOperationSchema, ModelOperations } from '../model-operations';
+import { ModelRelation } from '../model-relations';
+import { createVisitorBuilder } from '../visitor';
+import { createModuleFiles } from './resolver-builder-files';
 
 export interface ModuleResolvers {
   name: string;
@@ -56,11 +53,11 @@ export function createResolversBuilder(store: Store, options: GenerateOptions) {
         continue;
       }
 
-      if (type === "Query") {
+      if (type === 'Query') {
         pushDefinition(model, { queries: [operations] });
       }
 
-      if (type === "Mutation") {
+      if (type === 'Mutation') {
         pushDefinition(model, { mutations: [operations] });
       }
     }
@@ -70,7 +67,7 @@ export function createResolversBuilder(store: Store, options: GenerateOptions) {
     return createModuleFiles(modelDefinitions, {
       root: options.modulesDir,
       casing: options.casing,
-      filename: "resolvers.ts",
+      filename: 'resolvers.ts',
       namespace: options.resolverNamespace,
       createExport: options.resolverExport,
     });

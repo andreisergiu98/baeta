@@ -1,1 +1,1 @@
-export { ConfigStatus } from "./config-status";
+export { ConfigStatus } from './config-status';

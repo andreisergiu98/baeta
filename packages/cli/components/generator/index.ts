@@ -1,2 +1,2 @@
-export { Generator } from "./generator";
-export { WithGenerator } from "./with-generator";
+export { Generator } from './generator';
+export { WithGenerator } from './with-generator';

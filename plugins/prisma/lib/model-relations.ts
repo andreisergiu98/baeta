@@ -1,4 +1,4 @@
-import { DMMF } from "./dmmf";
+import { DMMF } from './dmmf';
 
 export interface ModelRelation {
   with: string;
@@ -21,7 +21,7 @@ function getRelationsFromModel(model: DMMF.Model) {
   const relations: ModelRelation[] = [];
 
   for (const field of model.fields) {
-    if (field.kind !== "object") {
+    if (field.kind !== 'object') {
       continue;
     }
 

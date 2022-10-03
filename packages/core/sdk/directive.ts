@@ -1,4 +1,4 @@
-import { GraphQLSchema } from "graphql";
+import { GraphQLSchema } from 'graphql';
 
 export type SchemaTransformer = (schema: GraphQLSchema) => GraphQLSchema;
 export type OnDirective = (transformer: SchemaTransformer) => void;

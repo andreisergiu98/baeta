@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from "graphql";
+import { GraphQLResolveInfo } from 'graphql';
 
 export type SubscriptionSubscribeParams<Root, Context, Args> = {
   root: Root;
@@ -7,12 +7,7 @@ export type SubscriptionSubscribeParams<Root, Context, Args> = {
   info: GraphQLResolveInfo;
 };
 
-export type SubscriptionSubscribeFn<
-  Payload,
-  Root = {},
-  Context = {},
-  Args = {}
-> = (
+export type SubscriptionSubscribeFn<Payload, Root = {}, Context = {}, Args = {}> = (
   params: SubscriptionSubscribeParams<Root, Context, Args>
 ) => AsyncIterator<Payload>;
 
@@ -65,12 +60,6 @@ export type SubscriptionObjectWithPayload<
   ) => boolean | Promise<boolean>;
 };
 
-export type SubscriptionResolver<
-  Result,
-  Key extends string,
-  Root,
-  Context,
-  Args
-> = {
+export type SubscriptionResolver<Result, Key extends string, Root, Context, Args> = {
   subscribe: SubscriptionSubscribeFn<Result, Root, Context, Args>;
 };

@@ -1,4 +1,4 @@
-import { DMMF } from "@prisma/generator-helper";
+import { DMMF } from '@prisma/generator-helper';
 
 type VisitorInput<T> = (model: T) => void | Promise<void>;
 
@@ -111,13 +111,9 @@ export function visit(document: DMMF.Document, visitors: Visitor[]) {
     (visitor) => visitor.schemaEnum
   );
 
-  return Promise.all([
-    models,
-    modelEnums,
-    inputTypes,
-    outputTypes,
-    enumTypes,
-  ]).then(() => {
-    // do nothing
-  });
+  return Promise.all([models, modelEnums, inputTypes, outputTypes, enumTypes]).then(
+    () => {
+      // do nothing
+    }
+  );
 }

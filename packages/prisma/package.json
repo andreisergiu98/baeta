@@ -1,6 +1,17 @@
 {
   "name": "@baeta/prisma",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/prisma"
+  },
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
   "private": true,
   "type": "module",
   "dependencies": {
@@ -9,6 +20,8 @@
   },
   "devDependencies": {
     "@baeta/core": "workspace:^",
+    "@baeta/eslint-config": "workspace:^",
+    "eslint": "^8.24.0",
     "graphql": "^16.6.0",
     "typescript": "^4.8.3"
   },

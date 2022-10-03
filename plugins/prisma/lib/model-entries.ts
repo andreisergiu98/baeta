@@ -21,13 +21,9 @@ export function createEntriesModelMap(models: string[], entries: string[]) {
   return normalizeResult(map);
 }
 
-function updateEntriesForModel(
-  map: ModelEntryMap,
-  model: string,
-  entries: string[]
-) {
+function updateEntriesForModel(map: ModelEntryMap, model: string, entries: string[]) {
   for (const input of entries) {
-    if (!input.startsWith(model) && input !== "Aggregate" + model) {
+    if (!input.startsWith(model) && input !== 'Aggregate' + model) {
       continue;
     }
 

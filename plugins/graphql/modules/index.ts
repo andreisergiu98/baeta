@@ -1,18 +1,15 @@
-import { Types } from "@graphql-codegen/plugin-helpers";
-import { concatAST, DocumentNode, isScalarType } from "graphql";
-import { resolve, relative, join } from "path";
+import { Types } from '@graphql-codegen/plugin-helpers';
+import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
+import { concatAST, DocumentNode, isScalarType } from 'graphql';
+import { join, relative, resolve } from 'path';
+import { buildModule } from './builder';
+import { ModulesConfig } from './config';
 import {
   groupSourcesByModule,
-  stripFilename,
-  normalize,
   isGraphQLPrimitive,
-} from "./utils";
-import { buildModule } from "./builder";
-import { ModulesConfig } from "./config";
-import {
-  BaseVisitor,
-  getConfigValue,
-} from "@graphql-codegen/visitor-plugin-common";
+  normalize,
+  stripFilename,
+} from './utils';
 
 export const preset: Types.OutputPreset<ModulesConfig> = {
   buildGeneratesSection: (options) => {
@@ -25,8 +22,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
     );
 
     const cwd = resolve(options.presetConfig.cwd || process.cwd());
-    const importTypesNamespace =
-      options.presetConfig.importTypesNamespace || "Types";
+    const importTypesNamespace = options.presetConfig.importTypesNamespace || 'Types';
 
     if (!baseTypesPath) {
       throw new Error(
@@ -55,12 +51,12 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
       plugins: [
         ...options.plugins,
         {
-          "modules-exported-scalars": {},
+          'modules-exported-scalars': {},
         },
       ],
       pluginMap: {
         ...options.pluginMap,
-        "modules-exported-scalars": {
+        'modules-exported-scalars': {
           plugin: (schema) => {
             const typeMap = schema.getTypeMap();
 
@@ -79,7 +75,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
                 return null;
               })
               .filter(Boolean)
-              .join("\n");
+              .join('\n');
           },
         },
       },
@@ -90,7 +86,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
       schemaAst: options.schemaAst!,
     };
 
-    const baseTypesFilename = baseTypesPath.replace(/\.(js|ts|d.ts)$/, "");
+    const baseTypesFilename = baseTypesPath.replace(/\.(js|ts|d.ts)$/, '');
     const baseTypesDir = stripFilename(baseOutput.filename);
 
     // One file per each module
@@ -108,41 +104,39 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
         normalize(join(relativePath, baseTypesFilename));
       const sources = sourcesByModuleMap[moduleName];
 
-      const documents = sources.map(
-        (source) => source.document
-      ) as DocumentNode[];
+      const documents = sources.map((source) => source.document) as DocumentNode[];
 
       const moduleDocument = concatAST(documents);
 
-      const shouldDeclare = filename.endsWith(".d.ts");
+      const shouldDeclare = filename.endsWith('.d.ts');
 
       return {
         filename,
         schema: options.schema,
         documents: [],
         plugins: [
-          ...options.plugins.filter((p) => typeof p === "object" && !!p.add),
+          ...options.plugins.filter((p) => typeof p === 'object' && !!p.add),
           {
-            "graphql-modules-plugin": {},
+            'graphql-modules-plugin': {},
           },
         ],
         pluginMap: {
           ...options.pluginMap,
-          "graphql-modules-plugin": {
+          'graphql-modules-plugin': {
             plugin: (schema) =>
               buildModule(moduleName, moduleDocument, {
                 importNamespace: importTypesNamespace,
                 importPath,
-                encapsulate: encapsulateModuleTypes || "namespace",
+                encapsulate: encapsulateModuleTypes || 'namespace',
                 requireRootResolvers,
                 shouldDeclare,
                 schema,
                 baseVisitor,
                 useGraphQLModules: false,
                 rootTypes: [
-                  schema.getQueryType()?.name || "",
-                  schema.getMutationType()?.name || "",
-                  schema.getSubscriptionType()?.name || "",
+                  schema.getQueryType()?.name || '',
+                  schema.getMutationType()?.name || '',
+                  schema.getSubscriptionType()?.name || '',
                 ].filter(Boolean),
               }),
           },

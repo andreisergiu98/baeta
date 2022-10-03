@@ -1,4 +1,4 @@
-import { File } from "@baeta/plugin";
+import { File } from '@baeta/plugin';
 
 export function createFileManager() {
   let files: File[] = [];

@@ -1,2 +1,2 @@
-export type { CompilerOptions } from "./esbuild-config";
-export { build } from "./build";
+export { build } from './build';
+export type { CompilerOptions } from './esbuild-config';

@@ -1,1 +1,1 @@
-export * from "./scalars";
+export * from './scalars';

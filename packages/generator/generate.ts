@@ -1,9 +1,9 @@
-import { GeneratorPluginV1WithConfig, PluginType } from "@baeta/plugin";
-import graphqlPlugin from "@baeta/plugin-graphql";
-import { FileManager, createFileManager } from "./file-manager";
-import { startRunner } from "./runner";
-import type { Config } from "@baeta/core";
-import chokidar from "chokidar";
+import type { Config } from '@baeta/core';
+import { GeneratorPluginV1WithConfig, PluginType } from '@baeta/plugin';
+import graphqlPlugin from '@baeta/plugin-graphql';
+import chokidar from 'chokidar';
+import { createFileManager, FileManager } from './file-manager';
+import { startRunner } from './runner';
 
 export interface GeneratorConfig {
   plugins: GeneratorPluginV1WithConfig[];
@@ -20,8 +20,7 @@ export type GeneratorCtx<T = {}> = {
 
 function getPlugins(config: Config) {
   const plugins =
-    config.plugins?.filter((plugin) => plugin.type === PluginType.Generator) ??
-    [];
+    config.plugins?.filter((plugin) => plugin.type === PluginType.Generator) ?? [];
   plugins.push(graphqlPlugin(config.graphql));
   return plugins;
 }
@@ -116,6 +115,6 @@ export function generateAndWatch(config: Config, watchOptions?: WatchOptions) {
     .watch(toWatch, {
       ignored: toIgnore,
     })
-    .on("change", handler)
-    .on("unlink", handler);
+    .on('change', handler)
+    .on('unlink', handler);
 }

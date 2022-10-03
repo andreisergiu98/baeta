@@ -1,7 +1,6 @@
-import { createCommand } from "../utils/command";
-import { Generator } from "../components/generator";
-import { renderComponent } from "../utils/render-component";
-import { generate } from "@baeta/generator";
+import { Generator } from '../components/generator';
+import { createCommand } from '../utils/command';
+import { renderComponent } from '../utils/render-component';
 
 interface Args {
   watch?: boolean;
@@ -9,20 +8,20 @@ interface Args {
 }
 
 export default createCommand<Args>({
-  command: "generate",
-  aliases: ["g"],
-  describe: "generate types and module definitions",
+  command: 'generate',
+  aliases: ['g'],
+  describe: 'generate types and module definitions',
   builder: (yargs) => {
     return yargs
-      .option("watch", {
-        alias: "w",
+      .option('watch', {
+        alias: 'w',
         boolean: true,
-        describe: "watch for changes",
+        describe: 'watch for changes',
       })
-      .option("skipInitial", {
-        alias: "s",
+      .option('skipInitial', {
+        alias: 's',
         boolean: true,
-        describe: "skip initial generation when running in watch mode",
+        describe: 'skip initial generation when running in watch mode',
       });
   },
   handler,

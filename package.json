@@ -2,9 +2,13 @@
   "name": "baeta",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "yarn workspaces foreach --no-private run build",
-    "publish": "yarn workspaces foreach --no-private npm publish --tolerate-republish"
+    "build": "yarn workspaces foreach -pv --no-private run build",
+    "lint": "yarn workspaces foreach -pv run lint",
+    "prettier:check": "yarn prettier --check .",
+    "release": "yarn build && yarn changeset publish",
+    "prepare": "husky install"
   },
   "workspaces": [
     "packages/*",
@@ -13,8 +17,14 @@
   ],
   "packageManager": "yarn@3.2.3",
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.0",
     "@yarnpkg/sdks": "^3.0.0-rc.21",
     "eslint": "^8.24.0",
+    "husky": "^8.0.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3.1.1",
+    "pretty-quick": "^3.1.3",
     "typescript": "^4.8.3"
   },
   "resolutions": {

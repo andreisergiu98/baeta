@@ -1,6 +1,5 @@
-import React, { createElement, FunctionComponent } from "react";
-import { PropsWithChildren } from "react";
-import { ConfigProviderBase } from "./ConfigProvider";
+import React, { createElement, FunctionComponent, PropsWithChildren } from 'react';
+import { ConfigProviderBase } from './ConfigProvider';
 
 export function Providers(props: PropsWithChildren) {
   return <ConfigProviderBase>{props.children}</ConfigProviderBase>;

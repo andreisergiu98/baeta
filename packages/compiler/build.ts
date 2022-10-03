@@ -1,5 +1,5 @@
-import { CompilerOptions, createEsbuildConfig } from "./esbuild-config";
-import { build as esbuildBuild } from "esbuild";
+import { build as esbuildBuild } from 'esbuild';
+import { CompilerOptions, createEsbuildConfig } from './esbuild-config';
 
 export async function build(options: CompilerOptions) {
   const { buildOptions, hooks } = createEsbuildConfig(options);

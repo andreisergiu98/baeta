@@ -1,20 +1,19 @@
-import { getDirective, MapperKind, mapSchema } from "@graphql-tools/utils";
-import { GraphQLSchema } from "graphql";
+import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils';
+import { GraphQLSchema } from 'graphql';
 import {
   addArgumentValidationsExtension,
   addValidationsExtension,
   ValidationOptions,
-} from "./input-extensions";
-import { ValidateParams } from "./input-schema";
+} from './input-extensions';
+import { ValidateParams } from './input-schema';
 
-export type ValidationTarget = "list" | "object" | "scalar";
+export type ValidationTarget = 'list' | 'object' | 'scalar';
 
-type ValidationDirectiveFnParams<DirectiveConfig, Context> =
-  ValidateParams<Context> & {
-    directiveConfig: DirectiveConfig;
-    getValue: () => unknown;
-    setValue: (newValue: unknown) => void;
-  };
+type ValidationDirectiveFnParams<DirectiveConfig, Context> = ValidateParams<Context> & {
+  directiveConfig: DirectiveConfig;
+  getValue: () => unknown;
+  setValue: (newValue: unknown) => void;
+};
 
 export type ValidationDirectiveFn<
   DirectiveConfig = Record<string, unknown>,
@@ -23,10 +22,7 @@ export type ValidationDirectiveFn<
   params: ValidationDirectiveFnParams<DirectiveConfig, Context>
 ) => void | Promise<void>;
 
-function getObjectSelector(
-  args: Record<string, unknown>,
-  path: Array<string | number>
-) {
+function getObjectSelector(args: Record<string, unknown>, path: Array<string | number>) {
   let i = 0;
   let key: string | number;
   let obj: Record<string, any> = args;
@@ -63,10 +59,7 @@ function createMutateValueFn(
   };
 }
 
-function createGetValueFn(
-  args: Record<string, unknown>,
-  path: Array<string | number>
-) {
+function createGetValueFn(args: Record<string, unknown>, path: Array<string | number>) {
   return () => {
     const selector = getObjectSelector(args, path);
     return selector?.get();
@@ -150,11 +143,7 @@ function applyInputDirective(
 
       for (const [argumentName, argValidations] of validationEntries) {
         for (const validationMeta of argValidations) {
-          addArgumentValidationsExtension(
-            fieldConfig,
-            argumentName,
-            validationMeta
-          );
+          addArgumentValidationsExtension(fieldConfig, argumentName, validationMeta);
         }
       }
 
@@ -178,10 +167,7 @@ export function createInputDirective<DirectiveConfig, Context = unknown>(
       schema,
       options.name,
       options.target,
-      options.resolve as ValidationDirectiveFn<
-        Record<string, unknown>,
-        unknown
-      >,
+      options.resolve as ValidationDirectiveFn<Record<string, unknown>, unknown>,
       options.getListDepth as (config: unknown) => number
     );
   };

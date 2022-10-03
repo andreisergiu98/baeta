@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from "graphql";
+import { GraphQLResolveInfo } from 'graphql';
 
 export type Middleware<Result, Root = {}, Context = {}, Args = {}> = (
   params: MiddlewareParams<Root, Context, Args>,

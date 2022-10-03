@@ -1,13 +1,13 @@
-import { DocumentNode, GraphQLSchema } from "graphql";
-import { Middleware, Resolver, ScalarResolver } from "../lib";
-import { GM } from "../lib/graphql-modules";
-import { SubscriptionObjectWithoutPayload } from "../lib/subscription";
-import { SchemaTransformer, transformSchema } from "./directive";
-import { ManagerOptions } from "./manager";
-import { addMiddleware, MiddlewaresMap } from "./middleware";
-import { addResolver, ResolversMap } from "./resolver";
-import { addScalar } from "./scalar";
-import { addSubscription } from "./subscription";
+import { DocumentNode, GraphQLSchema } from 'graphql';
+import { Middleware, Resolver, ScalarResolver } from '../lib';
+import { GM } from '../lib/graphql-modules';
+import { SubscriptionObjectWithoutPayload } from '../lib/subscription';
+import { SchemaTransformer, transformSchema } from './directive';
+import { ManagerOptions } from './manager';
+import { addMiddleware, MiddlewaresMap } from './middleware';
+import { addResolver, ResolversMap } from './resolver';
+import { addScalar } from './scalar';
+import { addSubscription } from './subscription';
 
 export interface Module<T> {
   id: string;
@@ -58,11 +58,7 @@ export function createModule<T>(module: Module<T>) {
     addScalar(resolvers, scalar, resolver);
   };
 
-  const onResolver = (
-    type: string,
-    field: string,
-    resolver: Resolver<unknown>
-  ) => {
+  const onResolver = (type: string, field: string, resolver: Resolver<unknown>) => {
     addResolver(resolvers, type, field, resolver);
   };
 
@@ -73,11 +69,7 @@ export function createModule<T>(module: Module<T>) {
     addSubscription(resolvers, field, subscription);
   };
 
-  const onMiddleware = (
-    type: string,
-    field: string,
-    resolver: Middleware<unknown>
-  ) => {
+  const onMiddleware = (type: string, field: string, resolver: Middleware<unknown>) => {
     addMiddleware(middlewares, type, field, resolver);
   };
 

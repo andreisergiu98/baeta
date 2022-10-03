@@ -1,9 +1,8 @@
-import { createSchemaBuilder } from "./schema-builder";
-import { createResolversBuilder } from "./resolver-builder";
-import { visit } from "./visitor";
-import { Store } from "./context";
-import { PrismaPluginOptions } from "..";
-import { writeFile } from "fs/promises";
+import { PrismaPluginOptions } from '..';
+import { Store } from './context';
+import { createResolversBuilder } from './resolver-builder';
+import { createSchemaBuilder } from './schema-builder';
+import { visit } from './visitor';
 
 export interface GenerateOptions extends Required<PrismaPluginOptions> {
   modulesDir: string;

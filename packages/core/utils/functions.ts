@@ -3,11 +3,11 @@ export function nameFunction(fn: Function | undefined, name: string) {
     return;
   }
 
-  if (fn.name === "") {
+  if (fn.name === '') {
     return;
   }
 
-  Object.defineProperty(fn, "name", {
+  Object.defineProperty(fn, 'name', {
     value: name,
   });
 }

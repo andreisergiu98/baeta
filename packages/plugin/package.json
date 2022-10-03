@@ -1,17 +1,31 @@
 {
   "name": "@baeta/plugin",
   "version": "0.0.4",
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
   "type": "module",
   "scripts": {
     "prepack": "yarn prep --move dist",
     "postpack": "yarn prep --clean",
-    "build": "yarn tsup --dts"
+    "build": "yarn tsup --dts",
+    "lint": "yarn eslint './**/*.ts'"
   },
   "devDependencies": {
     "@baeta/core": "workspace:^",
+    "@baeta/eslint-config": "workspace:^",
     "@baeta/generator": "workspace:^",
     "@baeta/prep": "workspace:^",
     "@types/node": "^18.7.23",
+    "eslint": "^8.24.0",
     "typescript": "^4.8.3"
   },
   "files": [

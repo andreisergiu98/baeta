@@ -1,14 +1,9 @@
-import React, {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
-import chokidar from "chokidar";
-import { loadConfig } from "@baeta/core/sdk";
-import { ConfigStatus } from "../components/config";
-import { createContextProvider } from "../utils/context";
-import { Config } from "@baeta/core";
+import { Config } from '@baeta/core';
+import { loadConfig } from '@baeta/core/sdk';
+import chokidar from 'chokidar';
+import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { ConfigStatus } from '../components/config';
+import { createContextProvider } from '../utils/context';
 
 export interface ConfigProps {
   watchConfig?: boolean;
@@ -32,9 +27,9 @@ export function useConfigStore(props: ConfigProps) {
       .watch(`./baeta.{js,cjs,mjs,ts,cts,mts}`, {
         ignoreInitial: true,
       })
-      .on("add", updateConfig)
-      .on("change", updateConfig)
-      .on("unlink", updateConfig);
+      .on('add', updateConfig)
+      .on('change', updateConfig)
+      .on('unlink', updateConfig);
 
     return () => {
       instance.close();
@@ -46,7 +41,7 @@ export function useConfigStore(props: ConfigProps) {
 
 export const [ConfigProviderBase, useConfig] = createContextProvider(
   {
-    name: "Config",
+    name: 'Config',
     strict: false,
   },
   useConfigStore

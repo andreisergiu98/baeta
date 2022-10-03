@@ -1,9 +1,9 @@
-import { GM } from "./graphql-modules";
-import { SdkModule } from "../sdk/module";
-import { makeExecutableSchema } from "@graphql-tools/schema";
-import { pruneSchema } from "@graphql-tools/utils";
-import { GraphQLSchema } from "graphql";
-import { addValidationToSchema } from "./input-validation/input-schema";
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { pruneSchema } from '@graphql-tools/utils';
+import { GraphQLSchema } from 'graphql';
+import { SdkModule } from '../sdk/module';
+import { GM } from './graphql-modules';
+import { addValidationToSchema } from './input-validation/input-schema';
 
 export interface Options {
   modules: Array<Record<string, unknown>>;

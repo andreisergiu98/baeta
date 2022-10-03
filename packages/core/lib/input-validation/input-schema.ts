@@ -11,10 +11,9 @@ import {
   GraphQLSchema,
   GraphQLType,
   Kind,
-} from "graphql";
-import { flattenPromises } from "../../utils/promises";
-import { AggregateValidationError } from "./aggregate-error";
-import { ValidationError } from "./validation-error";
+} from 'graphql';
+import { flattenPromises } from '../../utils/promises';
+import { AggregateValidationError } from './aggregate-error';
 import {
   addValidateExtension,
   getArgumentValidationsFromExtensions,
@@ -23,7 +22,8 @@ import {
   hasValidateExtension,
   hasValidationsExtension,
   ValidationOptions,
-} from "./input-extensions";
+} from './input-extensions';
+import { ValidationError } from './validation-error';
 
 export type ValidateParams<Context = unknown> = {
   path: Array<number | string>;
@@ -38,9 +38,7 @@ export type ValidateFn = <Context>(
   params: ValidateParams<Context>
 ) => void | Promise<void>;
 
-function isInputObjectType(
-  type: GraphQLNamedType
-): type is GraphQLInputObjectType {
+function isInputObjectType(type: GraphQLNamedType): type is GraphQLInputObjectType {
   return type.astNode?.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION;
 }
 
@@ -61,9 +59,7 @@ function getFieldsWithArgumentsAndInputObjectTypes(schema: GraphQLSchema) {
 
     if (isObjectType(type)) {
       const fields = Object.values(type.getFields());
-      fieldsWithArguments.push(
-        ...fields.filter((field) => field.args.length > 0)
-      );
+      fieldsWithArguments.push(...fields.filter((field) => field.args.length > 0));
     }
   }
 
@@ -89,10 +85,7 @@ function addValidateExtensionToInputObjectTypesRecursive(
       return hasValidationsExtension(fieldType);
     }
 
-    return addValidateExtensionToInputObjectTypesRecursive(
-      fieldType,
-      newVisitedTypes
-    );
+    return addValidateExtensionToInputObjectTypesRecursive(fieldType, newVisitedTypes);
   });
 
   const validate = inputHasValidation || fieldsHaveValidations;
@@ -134,16 +127,13 @@ async function validateListType(
   listDepth = 0
 ) {
   const listValidations = validations.filter(
-    (validation) =>
-      validation.target === "list" && validation.listDepth === listDepth
+    (validation) => validation.target === 'list' && validation.listDepth === listDepth
   );
 
   const promises: Promise<ValidationError[]>[] = [];
 
   for (const validation of listValidations) {
-    promises.push(
-      handleResolver(validation, type, path, root, args, ctx, info)
-    );
+    promises.push(handleResolver(validation, type, path, root, args, ctx, info));
   }
 
   for (let index = 0; index < value.length; index++) {
@@ -180,15 +170,13 @@ async function validateObjectType(
     getValidationsFromExtension(type) ?? []
   );
   const objectValidations = withInputValidations.filter(
-    (validation) => validation.target === "object"
+    (validation) => validation.target === 'object'
   );
 
   const promises: Promise<ValidationError[]>[] = [];
 
   for (const validation of objectValidations) {
-    promises.push(
-      handleResolver(validation, type, path, root, args, ctx, info)
-    );
+    promises.push(handleResolver(validation, type, path, root, args, ctx, info));
   }
 
   if (!hasValidateExtension(type)) {
@@ -232,9 +220,7 @@ async function validateScalarType(
   const promises: Promise<ValidationError[]>[] = [];
 
   for (const validation of validations) {
-    promises.push(
-      handleResolver(validation, type, path, root, args, ctx, info)
-    );
+    promises.push(handleResolver(validation, type, path, root, args, ctx, info));
   }
 
   return flattenPromises(promises);
@@ -288,15 +274,7 @@ async function validateRecursive<TSource, TContext>(
     );
   }
 
-  return validateScalarType(
-    root,
-    args,
-    ctx,
-    info,
-    path,
-    valueType,
-    validations
-  );
+  return validateScalarType(root, args, ctx, info, path, valueType, validations);
 }
 
 async function validateFieldArguments(
@@ -317,10 +295,7 @@ async function validateFieldArguments(
 
   for (const [argumentName, argumentValue] of argEntries) {
     const argumentDefinition = argsDefinitionMap[argumentName];
-    const argumentValidations = getArgumentValidationsFromExtensions(
-      field,
-      argumentName
-    );
+    const argumentValidations = getArgumentValidationsFromExtensions(field, argumentName);
 
     promises.push(
       validateRecursive(

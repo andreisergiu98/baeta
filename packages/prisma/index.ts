@@ -1,1 +1,1 @@
-export { registerPrismaModule } from "./module";
+export { registerPrismaModule } from './module';

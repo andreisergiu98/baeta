@@ -1,8 +1,7 @@
-import { createPluginFactoryV1, GeneratorCtx } from "@baeta/plugin";
-import { resolve } from "path";
-import { createContext, Store } from "./lib/context";
-import { generate } from "./lib/generator";
-import { Casing } from "./utils/casing";
+import { createPluginFactoryV1, GeneratorCtx } from '@baeta/plugin';
+import { createContext, Store } from './lib/context';
+import { generate } from './lib/generator';
+import { Casing } from './utils/casing';
 
 export interface PrismaPluginOptions {
   casing?: Casing;
@@ -16,13 +15,13 @@ export type PrismaPluginCtx = GeneratorCtx<{
 }>;
 
 export default createPluginFactoryV1<PrismaPluginOptions, PrismaPluginCtx>({
-  name: "prisma",
+  name: 'prisma',
   watch: (baetaConfig, pluginConfig) => {
-    const root = baetaConfig.graphql.modulesDir || "src/modules";
+    const root = baetaConfig.graphql.modulesDir || 'src/modules';
     const modulesMatcher =
-      root + "/*/" + (pluginConfig.schemaNamespace || "prisma-schema") + "/**";
+      root + '/*/' + (pluginConfig.schemaNamespace || 'prisma-schema') + '/**';
 
-    const prismaModule = root + "/prisma" + "/**";
+    const prismaModule = root + '/prisma' + '/**';
 
     return {
       include: [],
@@ -35,14 +34,14 @@ export default createPluginFactoryV1<PrismaPluginOptions, PrismaPluginCtx>({
   },
   generate: async (params) => {
     const files = await generate(params.ctx.prisma, {
-      modulesDir: params.ctx.config.graphql.modulesDir || "src/modules",
-      casing: params.config.casing || "kebab-case",
-      schemaNamespace: params.config.schemaNamespace || "prisma-schema",
-      resolverNamespace: params.config.resolverNamespace || "prisma-resolver",
+      modulesDir: params.ctx.config.graphql.modulesDir || 'src/modules',
+      casing: params.config.casing || 'kebab-case',
+      schemaNamespace: params.config.schemaNamespace || 'prisma-schema',
+      resolverNamespace: params.config.resolverNamespace || 'prisma-resolver',
       resolverExport: params.config.resolverExport ?? true,
     });
     params.ctx.fileManager.add(...files);
-    await params.ctx.fileManager.writeByTag("prisma-sdl");
+    await params.ctx.fileManager.writeByTag('prisma-sdl');
     return params.next();
   },
 });

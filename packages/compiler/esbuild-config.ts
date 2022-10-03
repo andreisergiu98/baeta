@@ -1,6 +1,6 @@
-import { BuildOptions, Plugin } from "esbuild";
-import { addCliPlugin, CommandsOptions } from "./esbuild-cli";
-import { getExternals } from "./esbuild-externals";
+import { BuildOptions, Plugin } from 'esbuild';
+import { addCliPlugin, CommandsOptions } from './esbuild-cli';
+import { getExternals } from './esbuild-externals';
 
 export interface CompilerOptions {
   src: string | string[];
@@ -9,7 +9,7 @@ export interface CompilerOptions {
   bundleDeps?: boolean;
   bundleWorkspaces?: boolean;
   commands?: CommandsOptions;
-  esbuild?: Partial<Omit<BuildOptions, "outdir" | "watch" | "entryPoints">>;
+  esbuild?: Partial<Omit<BuildOptions, 'outdir' | 'watch' | 'entryPoints'>>;
 }
 
 export interface Hooks {
@@ -35,11 +35,11 @@ export function createEsbuildConfig(options: CompilerOptions) {
   const entryPoints = Array.isArray(options.src) ? options.src : [options.src];
 
   const buildOptions: BuildOptions = {
-    target: "node16",
+    target: 'node16',
     bundle: true,
     sourcemap: true,
-    platform: "node",
-    logLevel: "silent",
+    platform: 'node',
+    logLevel: 'silent',
     watch,
     entryPoints,
     outdir,

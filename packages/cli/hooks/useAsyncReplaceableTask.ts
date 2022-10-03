@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
+import { useCallback, useEffect, useState } from 'react';
 
 type Task = () => Promise<void>;
 
@@ -12,10 +12,7 @@ function resolve(task: PendingTask) {
   return task.callback().catch((e) => console.log(e));
 }
 
-function removeCurrentTask(
-  current: PendingTask | undefined,
-  incoming: PendingTask
-) {
+function removeCurrentTask(current: PendingTask | undefined, incoming: PendingTask) {
   if (current?.id === incoming.id) {
     return undefined;
   }

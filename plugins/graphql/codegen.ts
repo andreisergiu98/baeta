@@ -1,36 +1,36 @@
-import { codegen as gqlCodegen } from "@graphql-codegen/core";
+import { File } from '@baeta/plugin';
+import { codegen as gqlCodegen } from '@graphql-codegen/core';
 import {
   normalizeConfig,
   normalizeInstanceOrArray,
-} from "@graphql-codegen/plugin-helpers";
-import { UnnormalizedTypeDefPointer } from "@graphql-tools/load";
-import * as modules from "./modules";
-import * as typescriptPlugin from "@graphql-codegen/typescript";
-import * as typescriptResolversPlugin from "./resolvers";
-import { GraphqlPluginConfig } from "./config";
-import path from "path";
-import { createCache } from "./utils/cache";
-import { loadSchema } from "./utils/load";
-import { File } from "@baeta/plugin";
+} from '@graphql-codegen/plugin-helpers';
+import * as typescriptPlugin from '@graphql-codegen/typescript';
+import { UnnormalizedTypeDefPointer } from '@graphql-tools/load';
+import path from 'path';
+import { GraphqlPluginConfig } from './config';
+import * as modules from './modules';
+import * as typescriptResolversPlugin from './resolvers';
+import { createCache } from './utils/cache';
+import { loadSchema } from './utils/load';
 
 export async function generate(options: GraphqlPluginConfig) {
   const root = process.cwd();
-  const modulesDir = path.relative(root, options.modulesDir || "modules");
+  const modulesDir = path.relative(root, options.modulesDir || 'modules');
 
   const rootConfig = {
     schemas: normalizeInstanceOrArray(options.schemas),
     modulesDir,
     baseTypesPath: path.relative(
       modulesDir,
-      options.baseTypesPath || "./__generated__/types.ts"
+      options.baseTypesPath || './__generated__/types.ts'
     ),
     contextType: options.contextType,
-    moduleDefinitionName: options.moduleDefinitionName || "typedef.ts",
+    moduleDefinitionName: options.moduleDefinitionName || 'typedef.ts',
     scalars: options.scalars,
-    plugins: normalizeConfig(["typescript", "typescript-resolvers"]),
+    plugins: normalizeConfig(['typescript', 'typescript-resolvers']),
     pluginMap: {
       typescript: typescriptPlugin,
-      "typescript-resolvers": typescriptResolversPlugin,
+      'typescript-resolvers': typescriptResolversPlugin,
     },
   };
 
@@ -38,15 +38,15 @@ export async function generate(options: GraphqlPluginConfig) {
 
   const schemaPointerMap: UnnormalizedTypeDefPointer = {};
   for (const ptr of rootConfig.schemas) {
-    if (typeof ptr === "string") {
+    if (typeof ptr === 'string') {
       schemaPointerMap[ptr] = {};
-    } else if (typeof ptr === "object") {
+    } else if (typeof ptr === 'object') {
       Object.assign(schemaPointerMap, ptr);
     }
   }
 
   const hash = JSON.stringify(schemaPointerMap);
-  const result = await cache("schema", hash, async () => {
+  const result = await cache('schema', hash, async () => {
     return loadSchema(schemaPointerMap, root);
   });
 
@@ -55,7 +55,7 @@ export async function generate(options: GraphqlPluginConfig) {
     presetConfig: {
       baseTypesPath: rootConfig.baseTypesPath,
       filename: rootConfig.moduleDefinitionName,
-      encapsulateModuleTypes: "none",
+      encapsulateModuleTypes: 'none',
     },
     schema: result.outputSchema,
     schemaAst: result.outputSchemaAst,
@@ -64,22 +64,22 @@ export async function generate(options: GraphqlPluginConfig) {
     plugins: rootConfig.plugins,
     config: {
       useIndexSignature: true,
-      inputMaybeValue: "T | undefined",
-      mapperTypeSuffix: "Prisma",
+      inputMaybeValue: 'T | undefined',
+      mapperTypeSuffix: 'Prisma',
       contextType: rootConfig.contextType,
-      customResolverFn: "@baeta/core#Resolver",
-      customSubscriptionResolver: "@baeta/core#SubscriptionResolver",
+      customResolverFn: '@baeta/core#Resolver',
+      customSubscriptionResolver: '@baeta/core#SubscriptionResolver',
       useTypeImports: true,
       makeResolverTypeCallable: true,
       includeDirectives: true,
-      resolverTypeWrapperSignature: "T",
+      resolverTypeWrapperSignature: 'T',
       emitLegacyCommonJSImports: false,
       scalars: {
-        BigInt: "number",
-        Bytes: "Buffer",
-        DateTime: "Date",
-        Decimal: "number",
-        Json: "{}",
+        BigInt: 'number',
+        Bytes: 'Buffer',
+        DateTime: 'Date',
+        Decimal: 'number',
+        Json: '{}',
         ...rootConfig.scalars,
       },
     },
@@ -90,7 +90,7 @@ export async function generate(options: GraphqlPluginConfig) {
       ...output,
       cache,
     });
-    return new File(output.filename, result, "graphql");
+    return new File(output.filename, result, 'graphql');
   });
 
   return Promise.all(promises);

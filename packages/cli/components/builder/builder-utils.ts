@@ -1,15 +1,15 @@
-import type { build } from "@baeta/compiler";
-import { createRequire } from "node:module";
+import type { build } from '@baeta/compiler';
+import { createRequire } from 'node:module';
 
 type Build = typeof build;
 
 export async function importCompiler(): Promise<Build> {
   try {
     const require = createRequire(import.meta.url);
-    const { build } = require("@baeta/compiler");
+    const { build } = require('@baeta/compiler');
     return build;
   } catch (e) {
     console.log(e);
-    throw new Error("@baeta/compiler is not installed!");
+    throw new Error('@baeta/compiler is not installed!');
   }
 }

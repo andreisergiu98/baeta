@@ -1,12 +1,12 @@
-import React from "react";
-import { Text } from "ink";
+import { Text } from 'ink';
+import React from 'react';
 
 interface MessagesProps {
   warnings?: string[];
   errors?: string[];
 }
 
-export const errorNamespace = "✘ " + "[ERROR]";
+export const errorNamespace = '✘ ' + '[ERROR]';
 
 export function Errors(props: MessagesProps) {
   return (

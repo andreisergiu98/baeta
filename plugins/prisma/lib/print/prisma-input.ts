@@ -1,7 +1,7 @@
-import { DMMF } from "../dmmf";
-import { printObject } from "./object";
-import { printType } from "./type";
-import { printInputConstraintDirective } from "./directive";
+import { DMMF } from '../dmmf';
+import { printInputConstraintDirective } from './directive';
+import { printObject } from './object';
+import { printType } from './type';
 
 export function printPrismaInput(inputType: DMMF.InputType) {
   const { minNumFields, maxNumFields } = inputType.constraints;
@@ -16,7 +16,7 @@ export function printPrismaInput(inputType: DMMF.InputType) {
     printInputField(field, requireConstraint)
   );
 
-  return printObject("input", inputType.name, fields, directive);
+  return printObject('input', inputType.name, fields, directive);
 }
 
 function printInputField(field: DMMF.SchemaArg, requireConstraint: boolean) {
@@ -27,13 +27,8 @@ function printInputField(field: DMMF.SchemaArg, requireConstraint: boolean) {
   return `${field.name}: ${type}`;
 }
 
-function printInputFieldScalar(
-  field: DMMF.SchemaArg,
-  requireConstraint: boolean
-) {
-  const inputTypes = field.inputTypes.filter(
-    (inputType) => inputType.type !== "Null"
-  );
+function printInputFieldScalar(field: DMMF.SchemaArg, requireConstraint: boolean) {
+  const inputTypes = field.inputTypes.filter((inputType) => inputType.type !== 'Null');
 
   if (inputTypes.length === 0) {
     return;

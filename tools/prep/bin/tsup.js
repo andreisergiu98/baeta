@@ -1,1 +1,1 @@
-import "tsup/dist/cli-node.js";
+import 'tsup/dist/cli-node.js';

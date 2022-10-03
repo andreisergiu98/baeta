@@ -1,3 +1,3 @@
-export { File } from "./file";
-export * from "./lib/plugin-generator";
-export * from "./lib/plugin";
+export { File } from './file';
+export * from './lib/plugin';
+export * from './lib/plugin-generator';

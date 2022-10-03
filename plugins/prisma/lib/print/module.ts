@@ -1,7 +1,7 @@
-import { camelCase } from "change-case-all";
-import { parse } from "path";
-import { ModuleResolvers } from "../resolver-builder";
-import { printRelationResolver, printResolver } from "./module-resolver";
+import { camelCase } from 'change-case-all';
+import { parse } from 'path';
+import { ModuleResolvers } from '../resolver-builder';
+import { printRelationResolver, printResolver } from './module-resolver';
 
 export function printModule(model: ModuleResolvers) {
   const name = model.name;
@@ -11,12 +11,10 @@ export function printModule(model: ModuleResolvers) {
   const hasMutations = model.mutations.length > 0;
   const hasRelations = model.relations.length > 0;
 
-  const queries = model.queries.map((operations) =>
-    printResolver("Query", operations)
-  );
+  const queries = model.queries.map((operations) => printResolver('Query', operations));
 
   const mutations = model.mutations.map((operations) =>
-    printResolver("Mutation", operations)
+    printResolver('Mutation', operations)
   );
 
   const relations = model.relations.map((relation) =>
@@ -26,17 +24,11 @@ export function printModule(model: ModuleResolvers) {
   return [
     printImports(name),
     printInit(moduleName, name),
-    printDestructure(
-      moduleName,
-      model.name,
-      hasQueries,
-      hasMutations,
-      hasRelations
-    ),
-    queries.join("\n\n"),
-    mutations.join("\n\n"),
-    relations.join("\n\n"),
-  ].join("\n\n");
+    printDestructure(moduleName, model.name, hasQueries, hasMutations, hasRelations),
+    queries.join('\n\n'),
+    mutations.join('\n\n'),
+    relations.join('\n\n'),
+  ].join('\n\n');
 }
 
 export function printModuleExport(filename: string) {
@@ -45,11 +37,11 @@ export function printModuleExport(filename: string) {
 }
 
 function printImports(name: string) {
-  return [`import { create${name}Module } from "../typedef";`].join("\n");
+  return [`import { create${name}Module } from "../typedef";`].join('\n');
 }
 
 function printInit(moduleName: string, name: string) {
-  return [`export const ${moduleName} = create${name}Module();`].join("\n");
+  return [`export const ${moduleName} = create${name}Module();`].join('\n');
 }
 
 function printDestructure(
@@ -61,13 +53,13 @@ function printDestructure(
 ) {
   const values = [];
   if (hasQueries) {
-    values.push("Query");
+    values.push('Query');
   }
   if (hasMutations) {
-    values.push("Mutation");
+    values.push('Mutation');
   }
   if (hasRelations) {
     values.push(modelName);
   }
-  return `const { ${values.join(", ")} } = ${moduleName};`;
+  return `const { ${values.join(', ')} } = ${moduleName};`;
 }

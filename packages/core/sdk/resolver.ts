@@ -1,12 +1,12 @@
-import { Resolver } from "../lib";
-import { GM } from "../lib/graphql-modules";
-import { nameFunction } from "../utils/functions";
-import { ManagerOptions } from "./manager";
+import { Resolver } from '../lib';
+import { GM } from '../lib/graphql-modules';
+import { nameFunction } from '../utils/functions';
+import { ManagerOptions } from './manager';
 import {
   createMiddlewareBuilder,
   createObjectTypeMiddlewareBuilder,
   MiddlewareFromResolver,
-} from "./middleware";
+} from './middleware';
 
 export type WithIndex<T> = T & Record<string, any>;
 export type ResolversObject<T> = WithIndex<T>;

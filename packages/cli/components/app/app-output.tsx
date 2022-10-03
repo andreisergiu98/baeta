@@ -1,6 +1,6 @@
-import React from "react";
-import { Text } from "ink";
-import { Layout } from "../layout";
+import { Text } from 'ink';
+import React from 'react';
+import { Layout } from '../layout';
 
 export function AppOutput({ output }: { output: string[] }) {
   const hasOutput = output.length > 0;

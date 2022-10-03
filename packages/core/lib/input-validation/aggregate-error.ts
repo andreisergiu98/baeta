@@ -1,21 +1,21 @@
-import { GraphQLError } from "graphql";
-import { ValidationError } from "./validation-error";
+import { GraphQLError } from 'graphql';
+import { ValidationError } from './validation-error';
 
-export const ERROR_MESSAGE = "One or more validation errors were encountered";
-export const ERROR_CODE = "BAD_USER_INPUT";
+export const ERROR_MESSAGE = 'One or more validation errors were encountered';
+export const ERROR_CODE = 'BAD_USER_INPUT';
 
 function buildPath(path: Array<string | number>) {
-  let pathString = "";
+  let pathString = '';
 
   for (const location of path) {
-    if (typeof location === "number") {
+    if (typeof location === 'number') {
       pathString += `[${location}]`;
     } else {
       pathString += `.${location}`;
     }
   }
 
-  if (pathString[0] === ".") {
+  if (pathString[0] === '.') {
     pathString = pathString.slice(1);
   }
 
@@ -34,6 +34,6 @@ export class AggregateValidationError extends GraphQLError {
         })),
       },
     });
-    Object.defineProperty(this, "name", { value: "AggregateValidationError" });
+    Object.defineProperty(this, 'name', { value: 'AggregateValidationError' });
   }
 }

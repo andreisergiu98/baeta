@@ -1,3 +1,4 @@
+import { Source } from '@graphql-tools/utils';
 import {
   DefinitionNode,
   DocumentNode,
@@ -6,11 +7,10 @@ import {
   Kind,
   NamedTypeNode,
   TypeNode,
-} from "graphql";
-import { Source } from "@graphql-tools/utils";
-import parse from "parse-filepath";
+} from 'graphql';
+import parse from 'parse-filepath';
 
-const sep = "/";
+const sep = '/';
 
 /**
  * Searches every node to collect used types
@@ -25,11 +25,7 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
   }
 
   function findRelated(
-    node:
-      | DefinitionNode
-      | FieldDefinitionNode
-      | InputValueDefinitionNode
-      | NamedTypeNode
+    node: DefinitionNode | FieldDefinitionNode | InputValueDefinitionNode | NamedTypeNode
   ) {
     if (
       node.kind === Kind.OBJECT_TYPE_DEFINITION ||
@@ -128,7 +124,7 @@ export function resolveTypeNode(node: TypeNode): NamedTypeNode {
 }
 
 export function isGraphQLPrimitive(name: string): boolean {
-  return ["String", "Boolean", "ID", "Float", "Int"].includes(name);
+  return ['String', 'Boolean', 'ID', 'Float', 'Int'].includes(name);
 }
 
 export function unique<T>(val: T, i: number, all: T[]): boolean {
@@ -140,30 +136,24 @@ export function withQuotes(val: string): string {
 }
 
 export function indent(size: number) {
-  const space = new Array(size).fill(" ").join("");
+  const space = new Array(size).fill(' ').join('');
 
   function indentInner(val: string): string {
     return val
-      .split("\n")
+      .split('\n')
       .map((line) => `${space}${line}`)
-      .join("\n");
+      .join('\n');
   }
 
   return indentInner;
 }
 
-export function buildBlock({
-  name,
-  lines,
-}: {
-  name: string;
-  lines: string[];
-}): string {
+export function buildBlock({ name, lines }: { name: string; lines: string[] }): string {
   if (!lines.length) {
-    return "";
+    return '';
   }
 
-  return [`${name} {`, ...lines.map(indent(2)), "};"].join("\n");
+  return [`${name} {`, ...lines.map(indent(2)), '};'].join('\n');
 }
 
 const getRelativePath = function (filepath: string, basePath: string) {
@@ -217,7 +207,7 @@ export function stripFilename(path: string) {
 }
 
 export function normalize(path: string) {
-  return path.replace(/\\/g, "/");
+  return path.replace(/\\/g, '/');
 }
 
 function ensureEndsWithSeparator(path: string) {
@@ -225,11 +215,11 @@ function ensureEndsWithSeparator(path: string) {
 }
 
 function ensureStartsWithSeparator(path: string) {
-  return path.startsWith(".")
-    ? path.replace(/^(..\/)|(.\/)/, "/")
-    : path.startsWith("/")
+  return path.startsWith('.')
+    ? path.replace(/^(..\/)|(.\/)/, '/')
+    : path.startsWith('/')
     ? path
-    : "/" + path;
+    : '/' + path;
 }
 
 /**
@@ -258,10 +248,7 @@ export function uniqueByKey<T extends Record<string, any[]>, K extends keyof T>(
   return left[key].filter((item) => !right[key].includes(item));
 }
 
-export function createObject<K extends string, T>(
-  keys: K[],
-  valueFn: (key: K) => T
-) {
+export function createObject<K extends string, T>(keys: K[], valueFn: (key: K) => T) {
   const obj: Record<K, T> = {} as any;
 
   keys.forEach((key) => {

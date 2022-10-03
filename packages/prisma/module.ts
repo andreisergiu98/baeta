@@ -1,7 +1,7 @@
-import type { ScalarResolver } from "@baeta/core";
-import { GraphQLSchema } from "graphql";
-import { registerDirectives } from "./directives";
-import { registerScalars } from "./scalars";
+import type { ScalarResolver } from '@baeta/core';
+import { GraphQLSchema } from 'graphql';
+import { registerDirectives } from './directives';
+import { registerScalars } from './scalars';
 
 export interface ModuleRegisterer {
   Scalar: {

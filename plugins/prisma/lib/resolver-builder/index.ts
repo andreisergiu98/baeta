@@ -1,1 +1,1 @@
-export * from "./resolver-builder";
+export * from './resolver-builder';

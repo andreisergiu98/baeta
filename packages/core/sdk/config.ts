@@ -1,10 +1,10 @@
-import { Config } from "../lib";
-import { createRequire } from "node:module";
+import { createRequire } from 'node:module';
+import { Config } from '../lib';
 
 function registerCompiler() {
   try {
     const require = createRequire(import.meta.url);
-    require("@baeta/compiler/register.cjs");
+    require('@baeta/compiler/register.cjs');
     return true;
   } catch (e) {
     return false;
@@ -22,7 +22,7 @@ function requireConfig(file: string, skipCache: boolean): Config | undefined {
 
 export function loadConfig(skipCache = false) {
   registerCompiler();
-  const file = process.cwd() + "/baeta.ts";
+  const file = process.cwd() + '/baeta.ts';
   const config = requireConfig(file, skipCache);
 
   if (!config) {

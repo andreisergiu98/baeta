@@ -1,12 +1,10 @@
-import { GeneratorPluginV1WithConfig, GeneratorPluginFn } from "@baeta/plugin";
-import { GeneratorCtx } from "./generate";
+import { GeneratorPluginFn, GeneratorPluginV1WithConfig } from '@baeta/plugin';
+import { GeneratorCtx } from './generate';
 
 export function createRunner(
   ctx: GeneratorCtx,
   plugins: GeneratorPluginV1WithConfig[],
-  getFn: (
-    plugin: GeneratorPluginV1WithConfig
-  ) => GeneratorPluginFn<unknown, {}>,
+  getFn: (plugin: GeneratorPluginV1WithConfig) => GeneratorPluginFn<unknown, {}>,
   onFinish?: (plugin: GeneratorPluginV1WithConfig) => void
 ) {
   let i = 0;
@@ -35,9 +33,7 @@ export function createRunner(
 export function startRunner(
   ctx: GeneratorCtx,
   plugins: GeneratorPluginV1WithConfig[],
-  getFn: (
-    plugin: GeneratorPluginV1WithConfig
-  ) => GeneratorPluginFn<unknown, {}>,
+  getFn: (plugin: GeneratorPluginV1WithConfig) => GeneratorPluginFn<unknown, {}>,
   onFinish?: (plugin: GeneratorPluginV1WithConfig) => void
 ) {
   const run = createRunner(ctx, plugins, getFn, onFinish);

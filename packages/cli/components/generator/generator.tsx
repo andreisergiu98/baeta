@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { generate, generateAndWatch } from "@baeta/generator";
-import { GeneratorStatus } from "./generator-status";
-import { useConfig } from "../../providers/ConfigProvider";
+import { generate, generateAndWatch } from '@baeta/generator';
+import React, { useEffect, useState } from 'react';
+import { useConfig } from '../../providers/ConfigProvider';
+import { GeneratorStatus } from './generator-status';
 
 export interface GeneratorProps {
   watch?: boolean;
@@ -69,7 +69,5 @@ export function Generator(props: GeneratorProps) {
     };
   }, [config, props.watch, props.onSuccess]);
 
-  return (
-    <GeneratorStatus error={error} running={running} watching={props.watch} />
-  );
+  return <GeneratorStatus error={error} running={running} watching={props.watch} />;
 }

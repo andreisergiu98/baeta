@@ -2,9 +2,11 @@
   "name": "baeta",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "yarn workspaces foreach --no-private run build",
-    "publish": "yarn workspaces foreach --no-private npm publish --tolerate-republish",
+    "build": "yarn workspaces foreach -pv --no-private run build",
+    "lint": "yarn workspaces foreach -pv run lint",
+    "publish": "yarn workspaces foreach -v --no-private npm publish --tolerate-republish",
     "prepare": "husky install"
   },
   "workspaces": [

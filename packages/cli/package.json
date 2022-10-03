@@ -16,7 +16,8 @@
   "scripts": {
     "prepack": "yarn prep --move dist",
     "postpack": "yarn prep --clean",
-    "build": "yarn tsup --dts"
+    "build": "yarn tsup --dts",
+    "lint": "yarn eslint './**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@baeta/generator": "workspace:^",
@@ -30,10 +31,14 @@
   },
   "devDependencies": {
     "@baeta/core": "workspace:^",
+    "@baeta/eslint-config": "workspace:^",
     "@baeta/prep": "workspace:^",
     "@types/node": "^18.7.23",
     "@types/react": "^18.0.21",
     "@types/yargs": "^17.0.13",
+    "eslint": "^8.24.0",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "graphql": "^16.6.0",
     "typescript": "^4.8.3"
   },

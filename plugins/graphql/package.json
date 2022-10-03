@@ -16,7 +16,8 @@
   "scripts": {
     "prepack": "yarn prep --move dist",
     "postpack": "yarn prep --clean",
-    "build": "yarn tsup --dts"
+    "build": "yarn tsup --dts",
+    "lint": "yarn eslint './**/*.ts'"
   },
   "dependencies": {
     "@baeta/plugin": "workspace:^",
@@ -41,9 +42,11 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@baeta/eslint-config": "workspace:^",
     "@baeta/prep": "workspace:^",
     "@types/node": "^18.7.23",
     "@types/parse-filepath": "1.0.0",
+    "eslint": "^8.24.0",
     "graphql": "^16.6.0",
     "typescript": "^4.8.3"
   },

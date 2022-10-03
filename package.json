@@ -8,6 +8,7 @@
     "lint": "yarn workspaces foreach -pv run lint",
     "prettier:check": "yarn prettier --check .",
     "publish": "yarn workspaces foreach -v --no-private npm publish --tolerate-republish",
+    "release": "yarn build && yarn publish",
     "prepare": "husky install"
   },
   "workspaces": [

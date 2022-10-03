@@ -1,8 +1,8 @@
-import { OnDirective } from "./directive";
-import { OnMiddleware } from "./middleware";
-import { OnResolver } from "./resolver";
-import { OnScalarResolver } from "./scalar";
-import { OnSubscription } from "./subscription";
+import { OnDirective } from './directive';
+import { OnMiddleware } from './middleware';
+import { OnResolver } from './resolver';
+import { OnScalarResolver } from './scalar';
+import { OnSubscription } from './subscription';
 
 export interface ManagerOptions {
   onScalar: OnScalarResolver;

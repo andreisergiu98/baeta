@@ -1,29 +1,28 @@
-import { withFilter, ResolverFn, FilterFn } from "graphql-subscriptions";
-import { nameFunction } from "../utils/functions";
-import { GM } from "../lib/graphql-modules";
-import { ManagerOptions } from "./manager";
-import { ResolversMap } from "./resolver";
+import { FilterFn, ResolverFn, withFilter } from 'graphql-subscriptions';
+import { GM } from '../lib/graphql-modules';
 import {
   SubscriptionFilterFn,
   SubscriptionObjectWithoutPayload,
   SubscriptionObjectWithPayload,
   SubscriptionResolveFn,
-  SubscriptionSubscribeFn,
   SubscriptionResolver,
-} from "../lib/subscription";
+  SubscriptionSubscribeFn,
+} from '../lib/subscription';
+import { nameFunction } from '../utils/functions';
+import { ManagerOptions } from './manager';
+import { ResolversMap } from './resolver';
 
-export type SubscriptionOptions<Payload, Sub> =
-  Sub extends SubscriptionResolver<
-    infer Result,
-    infer Key,
-    infer Root,
-    infer Context,
-    infer Args
-  >
-    ? Payload extends Result
-      ? SubscriptionObjectWithoutPayload<Result, Root, Context, Args>
-      : SubscriptionObjectWithPayload<Result, Payload, Root, Context, Args>
-    : never;
+export type SubscriptionOptions<Payload, Sub> = Sub extends SubscriptionResolver<
+  infer Result,
+  infer Key,
+  infer Root,
+  infer Context,
+  infer Args
+>
+  ? Payload extends Result
+    ? SubscriptionObjectWithoutPayload<Result, Root, Context, Args>
+    : SubscriptionObjectWithPayload<Result, Payload, Root, Context, Args>
+  : never;
 
 function normalizeSubscribe<Payload>(
   subscribe: SubscriptionSubscribeFn<Payload>,
@@ -64,9 +63,7 @@ function normalizeFilter<Payload>(filter?: SubscriptionFilterFn<Payload>) {
   return normalizedFilter;
 }
 
-function normalizeResolver<Payload>(
-  resolve?: SubscriptionResolveFn<unknown, Payload>
-) {
+function normalizeResolver<Payload>(resolve?: SubscriptionResolveFn<unknown, Payload>) {
   if (resolve == null) {
     return;
   }
@@ -97,9 +94,7 @@ export function createSubscriptionBuilder<Subscription>(
   field: string,
   options: ManagerOptions
 ) {
-  const builder = <Payload>(
-    subscription: SubscriptionOptions<Payload, Subscription>
-  ) => {
+  const builder = <Payload>(subscription: SubscriptionOptions<Payload, Subscription>) => {
     nameFunction(subscription.subscribe, `${field}.subscribe`);
     nameFunction(subscription.resolve, `${field}.resolve`);
     nameFunction(subscription.filter, `${field}.filter`);
@@ -125,10 +120,7 @@ export function addSubscription(
   field: string,
   subscription: SubscriptionObjectWithoutPayload<unknown>
 ) {
-  const subscribe = normalizeSubscribe(
-    subscription.subscribe,
-    subscription.filter
-  );
+  const subscribe = normalizeSubscribe(subscription.subscribe, subscription.filter);
   const resolve = normalizeResolver(subscription.resolve);
 
   if (map.Subscription == null) {

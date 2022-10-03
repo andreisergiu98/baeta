@@ -1,9 +1,8 @@
-import React from "react";
-import { Text } from "ink";
-import { Layout } from "../layout";
-import { errorNamespace, Errors } from "../errors";
-import { GraphQLError } from "graphql";
-import { red, bgRed } from "chalk";
+import { GraphQLError } from 'graphql';
+import { Text } from 'ink';
+import React from 'react';
+import { errorNamespace, Errors } from '../errors';
+import { Layout } from '../layout';
 
 interface Props {
   error?: unknown;
@@ -18,15 +17,11 @@ function formatError(error: unknown) {
       return error.message;
     }
 
-    const location = [
-      path,
-      error.locations?.[0]?.line,
-      error.locations?.[0]?.column,
-    ]
+    const location = [path, error.locations?.[0]?.line, error.locations?.[0]?.column]
       .filter((x) => x != null)
-      .join(":");
+      .join(':');
 
-    return error.message + "\n\n" + location;
+    return error.message + '\n\n' + location;
   }
 
   if (error instanceof Error) {
@@ -46,7 +41,7 @@ export function GeneratorStatus(props: Props) {
 
 function GeneratorStatusContent(props: Props) {
   if (props.error) {
-    const errorMessage = errorNamespace + " " + formatError(props.error);
+    const errorMessage = errorNamespace + ' ' + formatError(props.error);
     return <Errors errors={[errorMessage]}></Errors>;
   }
 

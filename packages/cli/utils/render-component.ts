@@ -1,6 +1,6 @@
-import { render } from "ink";
-import { createElement, FunctionComponent } from "react";
-import { ConfigProps, ConfigProvider } from "../providers/ConfigProvider";
+import { render } from 'ink';
+import { createElement, FunctionComponent } from 'react';
+import { ConfigProps, ConfigProvider } from '../providers/ConfigProvider';
 
 export function renderComponentDumb<P extends {}>(
   component: FunctionComponent<P>,
@@ -14,7 +14,5 @@ export function renderComponent<P extends {}>(
   props: P,
   configProps?: ConfigProps
 ) {
-  render(
-    createElement(ConfigProvider, configProps, createElement(Component, props))
-  );
+  render(createElement(ConfigProvider, configProps, createElement(Component, props)));
 }

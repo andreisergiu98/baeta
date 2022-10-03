@@ -1,5 +1,5 @@
-import { DMMF } from "./dmmf";
-import { plural, singular } from "pluralize";
+import { plural, singular } from 'pluralize';
+import { DMMF } from './dmmf';
 
 export type ModelOperations = {
   model: string;
@@ -44,16 +44,16 @@ function createModelOperationsMap(mapping: DMMF.ModelMapping) {
   const modelName = model[0].toLocaleLowerCase() + model.slice(1);
 
   for (const key of keys) {
-    if (key === "model") {
+    if (key === 'model') {
       continue;
     }
 
-    if (key === "findUnique") {
+    if (key === 'findUnique') {
       addToMap(key, singular(modelName));
       continue;
     }
 
-    if (key === "findMany") {
+    if (key === 'findMany') {
       addToMap(key, plural(modelName));
       continue;
     }

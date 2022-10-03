@@ -1,9 +1,9 @@
 export const directives = [
-  "directive @inputConstraint(minFields: Int, maxFields: Int) on INPUT_OBJECT",
+  'directive @inputConstraint(minFields: Int, maxFields: Int) on INPUT_OBJECT',
 ];
 
 export function printDirectives() {
-  return directives.join("\n");
+  return directives.join('\n');
 }
 
 export function printInputConstraintDirective(
@@ -24,5 +24,5 @@ export function printInputConstraintDirective(
     return;
   }
 
-  return `@inputConstraint(${args.join(", ")})`;
+  return `@inputConstraint(${args.join(', ')})`;
 }

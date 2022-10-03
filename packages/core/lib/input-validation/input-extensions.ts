@@ -1,4 +1,4 @@
-import { Maybe } from "@graphql-tools/utils";
+import { Maybe } from '@graphql-tools/utils';
 import {
   GraphQLField,
   GraphQLFieldConfig,
@@ -6,9 +6,9 @@ import {
   GraphQLInputFieldConfig,
   GraphQLInputObjectType,
   GraphQLNamedInputType,
-} from "graphql";
-import { ValidationTarget } from "./input-directive";
-import { ValidateFn } from "./input-schema";
+} from 'graphql';
+import { ValidationTarget } from './input-directive';
+import { ValidateFn } from './input-schema';
 
 export type ValidationOptions = {
   target: ValidationTarget;
@@ -32,7 +32,7 @@ function initValidationsExtension(
   config: GraphQLInputObjectType | GraphQLInputFieldConfig
 ) {
   if (config.extensions?.validations == null) {
-    Object.defineProperty(config.extensions, "validations", {
+    Object.defineProperty(config.extensions, 'validations', {
       value: [],
       writable: true,
     });
@@ -44,7 +44,7 @@ function initArgumentValidationsExtension(
   config: GraphQLFieldConfig<unknown, unknown, unknown>
 ) {
   if (config.extensions?.argumentValidations == null) {
-    Object.defineProperty(config.extensions, "argumentValidations", {
+    Object.defineProperty(config.extensions, 'argumentValidations', {
       value: {},
       writable: true,
     });
@@ -53,7 +53,7 @@ function initArgumentValidationsExtension(
 }
 
 export function addValidateExtension(type: GraphQLInputObjectType) {
-  Object.defineProperty(type.extensions, "validate", {
+  Object.defineProperty(type.extensions, 'validate', {
     value: true,
     writable: false,
   });

@@ -1,4 +1,4 @@
-import { RawResolversConfig } from "@graphql-codegen/visitor-plugin-common";
+import { RawResolversConfig } from '@graphql-codegen/visitor-plugin-common';
 
 export interface TypeScriptResolversPluginConfig extends RawResolversConfig {
   useIndexSignature?: boolean;

@@ -1,44 +1,43 @@
 export enum PrismaScalars {
-  string = "String",
-  boolean = "Boolean",
-  int = "Int",
-  float = "Float",
-  dateTime = "DateTime",
-  json = "Json",
-  bigInt = "BigInt",
-  decimal = "Decimal",
-  bytes = "Bytes",
+  string = 'String',
+  boolean = 'Boolean',
+  int = 'Int',
+  float = 'Float',
+  dateTime = 'DateTime',
+  json = 'Json',
+  bigInt = 'BigInt',
+  decimal = 'Decimal',
+  bytes = 'Bytes',
 }
-
 
 export function mapPrismaTypeToScalar(scalar: string) {
   switch (scalar) {
     case PrismaScalars.string: {
-      return "String";
+      return 'String';
     }
     case PrismaScalars.boolean: {
-      return "Boolean";
+      return 'Boolean';
     }
     case PrismaScalars.int: {
-      return "Int";
+      return 'Int';
     }
     case PrismaScalars.float: {
-      return "Float";
+      return 'Float';
     }
     case PrismaScalars.dateTime: {
-      return "DateTime";
+      return 'DateTime';
     }
     case PrismaScalars.json: {
-      return "Json";
+      return 'Json';
     }
     case PrismaScalars.bigInt: {
-      return "BigInt";
+      return 'BigInt';
     }
     case PrismaScalars.decimal: {
-      return "Decimal";
+      return 'Decimal';
     }
     case PrismaScalars.bytes: {
-      return "Bytes";
+      return 'Bytes';
     }
     default: {
       throw new Error(`Unrecognized scalar type: ${scalar}`);

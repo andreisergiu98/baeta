@@ -1,1 +1,1 @@
-export * from "tsup";
+export * from 'tsup';

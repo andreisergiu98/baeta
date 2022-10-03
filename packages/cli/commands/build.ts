@@ -1,6 +1,6 @@
-import { createCommand } from "../utils/command";
-import { renderComponent } from "../utils/render-component";
-import { Builder, BuilderWithGenerator } from "../components/builder";
+import { Builder, BuilderWithGenerator } from '../components/builder';
+import { createCommand } from '../utils/command';
+import { renderComponent } from '../utils/render-component';
 
 interface Args {
   watch?: boolean;
@@ -10,29 +10,29 @@ interface Args {
 }
 
 export default createCommand<Args>({
-  command: "build",
-  aliases: ["b"],
-  describe: "build a typescript application",
+  command: 'build',
+  aliases: ['b'],
+  describe: 'build a typescript application',
   builder: (yargs) => {
     return yargs
-      .option("watch", {
-        alias: "w",
+      .option('watch', {
+        alias: 'w',
         boolean: true,
-        describe: "watch for changes",
+        describe: 'watch for changes',
       })
-      .options("generate", {
-        alias: "g",
+      .options('generate', {
+        alias: 'g',
         boolean: true,
-        describe: "run generator before building",
+        describe: 'run generator before building',
       })
-      .option("onSuccess", {
+      .option('onSuccess', {
         string: true,
-        describe: "command to run on a successful build",
+        describe: 'command to run on a successful build',
       })
-      .option("onError", {
-        alias: "f",
+      .option('onError', {
+        alias: 'f',
         string: true,
-        describe: "command to run on a build error",
+        describe: 'command to run on a build error',
       });
   },
   handler,

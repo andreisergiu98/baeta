@@ -1,16 +1,16 @@
-import kill from "tree-kill";
-import { Writable } from "stream";
-import { performance } from "perf_hooks";
-import { Plugin, formatMessages } from "esbuild";
-import { ExecaChildProcess, execaCommand } from "execa";
-import { Hooks } from "./esbuild-config";
+import { formatMessages, Plugin } from 'esbuild';
+import { ExecaChildProcess, execaCommand } from 'execa';
+import { performance } from 'perf_hooks';
+import { Writable } from 'stream';
+import kill from 'tree-kill';
+import { Hooks } from './esbuild-config';
 
 async function killProcess(process: ExecaChildProcess) {
   return new Promise<void>((resolve) => {
     if (process.pid == null) {
       return resolve();
     }
-    kill(process.pid, "SIGKILL", () => resolve());
+    kill(process.pid, 'SIGKILL', () => resolve());
   });
 }
 
@@ -29,17 +29,14 @@ function createStream(onData: (data: string) => void) {
   return stream;
 }
 
-async function handleCommand(
-  processes: ExecaChildProcess[],
-  options?: CommandOptions
-) {
+async function handleCommand(processes: ExecaChildProcess[], options?: CommandOptions) {
   if (!options) {
     return;
   }
 
   const child = execaCommand(options.command, {
-    stdout: "pipe",
-    stderr: "pipe",
+    stdout: 'pipe',
+    stderr: 'pipe',
     stripFinalNewline: true,
   });
 
@@ -78,7 +75,7 @@ export function esbuildCliPlugin(options: CommandsOptions) {
   let cleanup = () => {};
 
   const plugin: Plugin = {
-    name: "esbuild-plugin-baeta-cli",
+    name: 'esbuild-plugin-baeta-cli',
     setup(build) {
       cleanup = () => {
         if (build.initialOptions.watch) {
@@ -99,7 +96,7 @@ export function esbuildCliPlugin(options: CommandsOptions) {
 
         if (result.warnings.length > 0) {
           const messages = await formatMessages(result.warnings, {
-            kind: "warning",
+            kind: 'warning',
             color: true,
           });
           options.onBuildWarnings?.(messages);
@@ -107,7 +104,7 @@ export function esbuildCliPlugin(options: CommandsOptions) {
 
         if (result.errors.length > 0) {
           const messages = await formatMessages(result.errors, {
-            kind: "error",
+            kind: 'error',
             color: true,
           });
           options.onBuildErrors?.(messages);
@@ -123,11 +120,7 @@ export function esbuildCliPlugin(options: CommandsOptions) {
   return { plugin, cleanup };
 }
 
-export function addCliPlugin(
-  plugins: Plugin[],
-  hooks: Hooks,
-  options?: CommandsOptions
-) {
+export function addCliPlugin(plugins: Plugin[], hooks: Hooks, options?: CommandsOptions) {
   if (!options) {
     return;
   }

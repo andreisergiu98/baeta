@@ -1,8 +1,8 @@
-import { Middleware, Resolver } from "../lib";
-import { GM } from "../lib/graphql-modules";
-import { ResolversObject } from "./resolver";
-import { ManagerOptions } from "../sdk";
-import { nameFunction } from "../utils/functions";
+import { Middleware, Resolver } from '../lib';
+import { GM } from '../lib/graphql-modules';
+import { ManagerOptions } from '../sdk';
+import { nameFunction } from '../utils/functions';
+import { ResolversObject } from './resolver';
 
 export type OnMiddleware = (
   type: string,
@@ -22,20 +22,13 @@ export type MiddlewareFromResolver<R> = R extends Resolver<
 type MiddlewareFromResolvers<R> = R extends {
   [K in keyof R]: infer Inner;
 }
-  ? Inner extends Resolver<
-      infer Result,
-      infer Parent,
-      infer Context,
-      infer Args
-    >
+  ? Inner extends Resolver<infer Result, infer Parent, infer Context, infer Args>
     ? Middleware<unknown, Parent, Context, {}>
     : never
   : never;
 
 type MiddlewareFromResolverObject<R extends ResolversObject<{}>> =
-  R extends ResolversObject<infer Context>
-    ? Middleware<unknown, {}, Context, {}>
-    : never;
+  R extends ResolversObject<infer Context> ? Middleware<unknown, {}, Context, {}> : never;
 
 export function createMiddlewareBuilder<T extends Middleware<unknown>>(
   type: string,
@@ -55,17 +48,17 @@ export function createObjectTypeMiddlewareBuilder<Resolvers>(
 ) {
   return createMiddlewareBuilder<MiddlewareFromResolvers<Resolvers>>(
     object,
-    "*",
+    '*',
     options
   );
 }
 
-export function createModuleMiddlewareBuilder<
-  Resolvers extends ResolversObject<{}>
->(options: ManagerOptions) {
+export function createModuleMiddlewareBuilder<Resolvers extends ResolversObject<{}>>(
+  options: ManagerOptions
+) {
   return createMiddlewareBuilder<MiddlewareFromResolverObject<Resolvers>>(
-    "*",
-    "*",
+    '*',
+    '*',
     options
   );
 }

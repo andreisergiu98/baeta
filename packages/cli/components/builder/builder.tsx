@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { BuilderStatus } from "./builder-status";
-import { importCompiler } from "./builder-utils";
-import { WithGenerator } from "../generator";
-import { useConfig } from "../../providers/ConfigProvider";
-import { useApp } from "ink";
-import type { Config } from "@baeta/core/lib";
-import { AppOutput } from "../app";
+import type { Config } from '@baeta/core/lib';
+import { useApp } from 'ink';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useConfig } from '../../providers/ConfigProvider';
+import { AppOutput } from '../app';
+import { WithGenerator } from '../generator';
+import { BuilderStatus } from './builder-status';
+import { importCompiler } from './builder-utils';
 
 interface Props {
   watch?: boolean;
@@ -33,7 +33,7 @@ export function Builder(props: Props) {
       const build = await importCompiler();
 
       if (config?.compiler == null) {
-        console.log("Compiler is not configured!");
+        console.log('Compiler is not configured!');
         return;
       }
 
@@ -118,9 +118,7 @@ export function Builder(props: Props) {
         warnings={warnings}
         buildTime={buildTime}
       />
-      {errors.length === 0 && !!props.onSuccess && (
-        <AppOutput output={output} />
-      )}
+      {errors.length === 0 && !!props.onSuccess && <AppOutput output={output} />}
     </>
   );
 }

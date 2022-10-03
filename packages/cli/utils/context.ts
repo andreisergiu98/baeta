@@ -4,9 +4,8 @@ import {
   createElement,
   PropsWithChildren,
   Provider as ProviderType,
-  ReactNode,
   useContext,
-} from "react";
+} from 'react';
 
 export interface CreateContextOptions {
   /**
@@ -41,7 +40,7 @@ function createHook<T>(
 
     if (context == null && strict) {
       const error = new Error(errorMessage);
-      error.name = "ContextError";
+      error.name = 'ContextError';
       Error.captureStackTrace?.(error, useContextWrapper);
       throw error;
     }
@@ -49,7 +48,7 @@ function createHook<T>(
     return context;
   };
 
-  useContextWrapper.displayName = `use${name ?? "Context"}`;
+  useContextWrapper.displayName = `use${name ?? 'Context'}`;
 
   return useContextWrapper;
 }
@@ -63,20 +62,20 @@ function createWrappedProvider<T, Props>(
     const value = useValue(props);
     return createElement(Context.Provider, { value }, props.children);
   };
-  ProviderWrapper.displayName = `${name ?? ""}ProviderWrapper`;
+  ProviderWrapper.displayName = `${name ?? ''}ProviderWrapper`;
 
   return ProviderWrapper;
 }
 
 function createErrorMessage(name?: string) {
-  let hook = "useContext";
+  let hook = 'useContext';
   if (name) {
-    hook = "use" + name;
+    hook = 'use' + name;
   }
 
-  let context = "Context";
+  let context = 'Context';
   if (name) {
-    context = name + "Context";
+    context = name + 'Context';
   }
 
   return `${hook}: \`${context}\` is undefined. Seems you forgot to wrap component within the Provider`;
@@ -95,14 +94,10 @@ export function createContextProvider<Type, Props>(
   options: CreateContextOptions = {},
   useValue?: (props: Props) => Type
 ) {
-  const {
-    name,
-    strict = true,
-    errorMessage = createErrorMessage(name),
-  } = options;
+  const { name, strict = true, errorMessage = createErrorMessage(name) } = options;
 
   const Context = createContext<Type | undefined>(undefined);
-  Context.displayName = name + "Context";
+  Context.displayName = name + 'Context';
 
   const useContextWrapper = createHook(Context, strict, errorMessage, name);
 

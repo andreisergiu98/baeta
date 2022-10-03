@@ -1,23 +1,23 @@
-import { TypeScriptResolversPluginConfig } from "./config";
+import { TypeScriptOperationVariablesToObject } from '@graphql-codegen/typescript';
 import {
+  BaseResolversVisitor,
+  DeclarationKind,
+  getConfigValue,
+  ParsedResolversConfig,
+} from '@graphql-codegen/visitor-plugin-common';
+import autoBind from 'auto-bind';
+import {
+  EnumTypeDefinitionNode,
   FieldDefinitionNode,
+  GraphQLSchema,
   ListTypeNode,
   NamedTypeNode,
   NonNullTypeNode,
-  GraphQLSchema,
-  EnumTypeDefinitionNode,
-} from "graphql";
-import autoBind from "auto-bind";
-import {
-  ParsedResolversConfig,
-  BaseResolversVisitor,
-  getConfigValue,
-  DeclarationKind,
-} from "@graphql-codegen/visitor-plugin-common";
-import { TypeScriptOperationVariablesToObject } from "@graphql-codegen/typescript";
+} from 'graphql';
+import { TypeScriptResolversPluginConfig } from './config';
 
 export const ENUM_RESOLVERS_SIGNATURE =
-  "export type EnumResolverSignature<T, AllowedValues = any> = { [key in keyof T]?: AllowedValues };";
+  'export type EnumResolverSignature<T, AllowedValues = any> = { [key in keyof T]?: AllowedValues };';
 
 export interface ParsedTypeScriptResolversConfig extends ParsedResolversConfig {
   useIndexSignature: boolean;
@@ -30,30 +30,18 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
   TypeScriptResolversPluginConfig,
   ParsedTypeScriptResolversConfig
 > {
-  constructor(
-    pluginConfig: TypeScriptResolversPluginConfig,
-    schema: GraphQLSchema
-  ) {
+  constructor(pluginConfig: TypeScriptResolversPluginConfig, schema: GraphQLSchema) {
     super(
       pluginConfig,
       {
         avoidOptionals: getConfigValue(pluginConfig.avoidOptionals, false),
-        useIndexSignature: getConfigValue(
-          pluginConfig.useIndexSignature,
-          false
-        ),
-        wrapFieldDefinitions: getConfigValue(
-          pluginConfig.wrapFieldDefinitions,
-          false
-        ),
+        useIndexSignature: getConfigValue(pluginConfig.useIndexSignature, false),
+        wrapFieldDefinitions: getConfigValue(pluginConfig.wrapFieldDefinitions, false),
         allowParentTypeOverride: getConfigValue(
           pluginConfig.allowParentTypeOverride,
           false
         ),
-        optionalInfoArgument: getConfigValue(
-          pluginConfig.optionalInfoArgument,
-          false
-        ),
+        optionalInfoArgument: getConfigValue(pluginConfig.optionalInfoArgument, false),
       } as ParsedTypeScriptResolversConfig,
       schema
     );
@@ -94,16 +82,15 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
     declarationKind: DeclarationKind
   ): string {
     const avoidOptionals =
-      this.config.avoidOptionals?.resolvers ??
-      this.config.avoidOptionals === true;
+      this.config.avoidOptionals?.resolvers ?? this.config.avoidOptionals === true;
     return `${schemaTypeName}${
-      avoidOptionals ? "" : "?"
+      avoidOptionals ? '' : '?'
     }: ${resolverType}${this.getPunctuation(declarationKind)}`;
   }
 
   private clearOptional(str: string): string {
-    if (str.startsWith("Maybe")) {
-      return str.replace(/Maybe<(.*?)>$/, "$1");
+    if (str.startsWith('Maybe')) {
+      return str.replace(/Maybe<(.*?)>$/, '$1');
     }
 
     return str;
@@ -114,7 +101,7 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
   }
 
   protected wrapWithListType(str: string): string {
-    return `${this.config.immutableTypes ? "ReadonlyArray" : "Array"}<${str}>`;
+    return `${this.config.immutableTypes ? 'ReadonlyArray' : 'Array'}<${str}>`;
   }
 
   protected getParentTypeForSignature(node: FieldDefinitionNode) {
@@ -122,9 +109,9 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
       this._federation.isResolveReferenceField(node) &&
       this.config.wrapFieldDefinitions
     ) {
-      return "UnwrappedObject<ParentType>";
+      return 'UnwrappedObject<ParentType>';
     }
-    return "ParentType";
+    return 'ParentType';
   }
 
   NamedType(node: NamedTypeNode): string {
@@ -138,7 +125,7 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
   }
 
   protected getPunctuation(_declarationKind: DeclarationKind): string {
-    return ";";
+    return ';';
   }
 
   protected buildEnumResolverContentBlock(
@@ -147,12 +134,9 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
   ): string {
     const valuesMap = `{ ${(node.values || [])
       .map(
-        (v) =>
-          `${v.name as any as string}${
-            this.config.avoidOptionals ? "" : "?"
-          }: any`
+        (v) => `${v.name as any as string}${this.config.avoidOptionals ? '' : '?'}: any`
       )
-      .join(", ")} }`;
+      .join(', ')} }`;
 
     this._globalDeclarations.add(ENUM_RESOLVERS_SIGNATURE);
 
@@ -169,9 +153,9 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
         const mappedValue = valuesMapping[valueName];
 
         return `${valueName}: ${
-          typeof mappedValue === "number" ? mappedValue : `'${mappedValue}'`
+          typeof mappedValue === 'number' ? mappedValue : `'${mappedValue}'`
         }`;
       })
-      .join(", ")} }`;
+      .join(', ')} }`;
   }
 }

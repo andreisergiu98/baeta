@@ -1,6 +1,6 @@
-import type { Config as BaetaConfig } from "@baeta/core";
-import type { GeneratorCtx } from "@baeta/generator";
-import { PluginType } from "./plugin";
+import type { Config as BaetaConfig } from '@baeta/core';
+import type { GeneratorCtx } from '@baeta/generator';
+import { PluginType } from './plugin';
 
 type MatchPattern = string | RegExp;
 type Matcher = MatchPattern | MatchPattern[];

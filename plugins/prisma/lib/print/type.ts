@@ -1,4 +1,4 @@
-import { mapPrismaTypeToScalar } from "./prisma-scalar";
+import { mapPrismaTypeToScalar } from './prisma-scalar';
 
 interface ScalarOptions {
   kind?: string;
@@ -9,7 +9,7 @@ interface ScalarOptions {
 export function printType(name: string, options: ScalarOptions = {}) {
   let type = name;
 
-  if (options.kind === "scalar" && name !== "ID") {
+  if (options.kind === 'scalar' && name !== 'ID') {
     type = mapPrismaTypeToScalar(type);
   }
 
@@ -18,20 +18,20 @@ export function printType(name: string, options: ScalarOptions = {}) {
   }
 
   if (options.required) {
-    type += "!";
+    type += '!';
   }
 
   return type;
 }
 
 export const scalars = [
-  "scalar DateTime",
-  "scalar BigInt",
-  "scalar Json",
-  "scalar Decimal",
-  "scalar Bytes",
+  'scalar DateTime',
+  'scalar BigInt',
+  'scalar Json',
+  'scalar Decimal',
+  'scalar Bytes',
 ];
 
 export function printScalars() {
-  return scalars.join("\n");
+  return scalars.join('\n');
 }

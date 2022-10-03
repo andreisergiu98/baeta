@@ -1,7 +1,7 @@
-import React from "react";
-import { Text } from "ink";
-import { Errors } from "../errors";
-import { Layout } from "../layout";
+import { Text } from 'ink';
+import React from 'react';
+import { Errors } from '../errors';
+import { Layout } from '../layout';
 
 interface StatusProps {
   running: boolean;
@@ -32,13 +32,13 @@ function BuilderStatusContent(props: StatusProps) {
 
   const hasErrors = props.errors != null && props.errors.length > 0;
 
-  let message = "Done";
+  let message = 'Done';
   if (hasErrors) {
-    message = "";
+    message = '';
   }
 
   if (props.watching) {
-    message = "Watching for changes";
+    message = 'Watching for changes';
   }
 
   return (

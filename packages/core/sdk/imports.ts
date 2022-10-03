@@ -1,8 +1,5 @@
-export async function dynamicImport<T>(
-  file: string,
-  clearCache = false
-): Promise<T> {
-  if (process.env.BAETA_CJS_IMPORT === "1") {
+export async function dynamicImport<T>(file: string, clearCache = false): Promise<T> {
+  if (process.env.BAETA_CJS_IMPORT === '1') {
     return cjsImport<T>(file, clearCache);
   }
   return import(file);

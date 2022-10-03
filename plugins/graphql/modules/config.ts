@@ -4,6 +4,6 @@ export type ModulesConfig = {
   cwd?: string;
   importTypesNamespace?: string;
   filename: string;
-  encapsulateModuleTypes: "prefix" | "namespace" | "none";
+  encapsulateModuleTypes: 'prefix' | 'namespace' | 'none';
   requireRootResolvers?: boolean;
 };

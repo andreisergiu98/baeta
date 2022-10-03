@@ -1,17 +1,16 @@
-import { parseMapper } from "@graphql-codegen/visitor-plugin-common";
 import {
-  Types,
-  PluginFunction,
   addFederationReferencesToSchema,
   getCachedDocumentNodeFromSchema,
   oldVisit,
-} from "@graphql-codegen/plugin-helpers";
-import { GraphQLSchema } from "graphql";
-import { TypeScriptResolversVisitor } from "./visitor";
-import { TypeScriptResolversPluginConfig } from "./config";
+  PluginFunction,
+  Types,
+} from '@graphql-codegen/plugin-helpers';
+import { parseMapper } from '@graphql-codegen/visitor-plugin-common';
+import { GraphQLSchema } from 'graphql';
+import { TypeScriptResolversPluginConfig } from './config';
+import { TypeScriptResolversVisitor } from './visitor';
 
-const capitalize = (s: string): string =>
-  s.charAt(0).toUpperCase() + s.slice(1);
+const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export const plugin: PluginFunction<
   TypeScriptResolversPluginConfig,
@@ -23,24 +22,20 @@ export const plugin: PluginFunction<
 ) => {
   const imports = [];
   if (!config.customResolveInfo) {
-    imports.push("GraphQLResolveInfo");
+    imports.push('GraphQLResolveInfo');
   }
   const showUnusedMappers =
-    typeof config.showUnusedMappers === "boolean"
-      ? config.showUnusedMappers
-      : true;
+    typeof config.showUnusedMappers === 'boolean' ? config.showUnusedMappers : true;
   const noSchemaStitching =
-    typeof config.noSchemaStitching === "boolean"
-      ? config.noSchemaStitching
-      : true;
+    typeof config.noSchemaStitching === 'boolean' ? config.noSchemaStitching : true;
 
   const indexSignature = config.useIndexSignature
     ? [
-        "export type WithIndex<TObject> = TObject & Record<string, any>;",
-        "export type ResolversObject<TObject> = WithIndex<TObject>;",
-      ].join("\n")
-    : "";
-  const importType = config.useTypeImports ? "import type" : "import";
+        'export type WithIndex<TObject> = TObject & Record<string, any>;',
+        'export type ResolversObject<TObject> = WithIndex<TObject>;',
+      ].join('\n')
+    : '';
+  const importType = config.useTypeImports ? 'import type' : 'import';
   const prepend: string[] = [];
   const defsToInclude: string[] = [];
   const directiveResolverMappings = {} as Record<string, string>;
@@ -63,20 +58,16 @@ export type Resolver${capitalizedDirectiveName}WithResolve<TResult, TParent, TCo
 
       if (parsedMapper.isExternal) {
         if (parsedMapper.default) {
-          prepend.push(
-            `${importType} ${resolverFnName} from '${parsedMapper.source}';`
-          );
+          prepend.push(`${importType} ${resolverFnName} from '${parsedMapper.source}';`);
         } else {
           prepend.push(
             `${importType} { ${parsedMapper.import} ${
-              parsedMapper.import !== resolverFnName
-                ? `as ${resolverFnName} `
-                : ""
+              parsedMapper.import !== resolverFnName ? `as ${resolverFnName} ` : ''
             }} from '${parsedMapper.source}';`
           );
         }
         prepend.push(
-          `export${config.useTypeImports ? " type" : ""} { ${resolverFnName} };`
+          `export${config.useTypeImports ? ' type' : ''} { ${resolverFnName} };`
         );
       } else {
         defsToInclude.push(
@@ -106,7 +97,7 @@ export type Resolver${capitalizedDirectiveName}WithResolve<TResult, TParent, TCo
   );
   const namespacedImportPrefix = visitor.config.namespacedImportName
     ? `${visitor.config.namespacedImportName}.`
-    : "";
+    : '';
 
   const astNode = getCachedDocumentNodeFromSchema(transformedSchema);
 
@@ -114,7 +105,7 @@ export type Resolver${capitalizedDirectiveName}WithResolve<TResult, TParent, TCo
   // @ts-expect-error type not matching
   const visitorResult = oldVisit(astNode, { leave: visitor });
 
-  const optionalSignForInfoArg = visitor.config.optionalInfoArgument ? "?" : "";
+  const optionalSignForInfoArg = visitor.config.optionalInfoArgument ? '?' : '';
   const legacyStitchingResolverType = `
 export type LegacyStitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
@@ -181,13 +172,11 @@ export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
         stitchingResolverType,
         resolverType,
         `  | ${resolverFnUsage}`,
-        config.makeResolverTypeCallable
-          ? ``
-          : `  | ${resolverWithResolveUsage}`,
+        config.makeResolverTypeCallable ? `` : `  | ${resolverWithResolveUsage}`,
         `  | ${stitchingResolverUsage};`,
-      ].join("\n")
+      ].join('\n')
     );
-    imports.push("SelectionSetNode", "FieldNode");
+    imports.push('SelectionSetNode', 'FieldNode');
   }
 
   if (config.customResolverFn) {
@@ -198,13 +187,11 @@ export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
       } else {
         prepend.push(
           `${importType} { ${parsedMapper.import} ${
-            parsedMapper.import !== "ResolverFn" ? "as ResolverFn " : ""
+            parsedMapper.import !== 'ResolverFn' ? 'as ResolverFn ' : ''
           }} from '${parsedMapper.source}';`
         );
       }
-      prepend.push(
-        `export${config.useTypeImports ? " type" : ""} { ResolverFn };`
-      );
+      prepend.push(`export${config.useTypeImports ? ' type' : ''} { ResolverFn };`);
     } else {
       prepend.push(
         `export type ResolverFn<TResult, TParent, TContext, TArgs> = ${parsedMapper.type}`
@@ -226,22 +213,18 @@ export type ResolverFn<TResult, TParent, TContext, TArgs> = (
     const parsedMapper = parseMapper(config.customSubscriptionResolver);
     if (parsedMapper.isExternal) {
       if (parsedMapper.default) {
-        prepend.push(
-          `${importType} SubscriptionResolver from '${parsedMapper.source}';`
-        );
+        prepend.push(`${importType} SubscriptionResolver from '${parsedMapper.source}';`);
       } else {
         prepend.push(
           `${importType} { ${parsedMapper.import} ${
-            parsedMapper.import !== "SubscriptionResolver"
-              ? "as SubscriptionResolver "
-              : ""
+            parsedMapper.import !== 'SubscriptionResolver'
+              ? 'as SubscriptionResolver '
+              : ''
           }} from '${parsedMapper.source}';`
         );
       }
       prepend.push(
-        `export${
-          config.useTypeImports ? " type" : ""
-        } { SubscriptionResolver };`
+        `export${config.useTypeImports ? ' type' : ''} { SubscriptionResolver };`
       );
     } else {
       prepend.push(
@@ -290,7 +273,7 @@ export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TCo
 
 ${visitor.getResolverTypeWrapperSignature()}
 
-${defsToInclude.join("\n")}
+${defsToInclude.join('\n')}
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
@@ -322,16 +305,16 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   } = visitor;
 
   if (hasScalars()) {
-    imports.push("GraphQLScalarType", "GraphQLScalarTypeConfig");
+    imports.push('GraphQLScalarType', 'GraphQLScalarTypeConfig');
   }
 
   if (showUnusedMappers && unusedMappers.length) {
     // eslint-disable-next-line no-console
-    console.warn(`Unused mappers: ${unusedMappers.join(",")}`);
+    console.warn(`Unused mappers: ${unusedMappers.join(',')}`);
   }
 
   if (imports.length) {
-    prepend.push(`${importType} { ${imports.join(", ")} } from 'graphql';`);
+    prepend.push(`${importType} { ${imports.join(', ')} } from 'graphql';`);
   }
 
   if (config.customResolveInfo) {
@@ -342,9 +325,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
       }
       prepend.push(
         `import { ${parsedMapper.import} ${
-          parsedMapper.import !== "GraphQLResolveInfo"
-            ? "as GraphQLResolveInfo"
-            : ""
+          parsedMapper.import !== 'GraphQLResolveInfo' ? 'as GraphQLResolveInfo' : ''
         } } from '${parsedMapper.source}';`
       );
     } else {
@@ -361,10 +342,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
       resolversTypeMapping,
       resolversParentTypeMapping,
       // @ts-expect-error type not defined
-      ...visitorResult.definitions.filter((d) => typeof d === "string"),
+      ...visitorResult.definitions.filter((d) => typeof d === 'string'),
       getRootResolver(),
       getAllDirectiveResolvers(),
-    ].join("\n"),
+    ].join('\n'),
   };
 };
 

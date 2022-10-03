@@ -1,5 +1,5 @@
-import { DMMF } from "@prisma/generator-helper";
-import { getDMMF, GetDMMFOptions } from "@prisma/internals";
+import { DMMF } from '@prisma/generator-helper';
+import { getDMMF, GetDMMFOptions } from '@prisma/internals';
 
 export { DMMF };
 

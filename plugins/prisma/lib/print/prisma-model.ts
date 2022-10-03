@@ -1,10 +1,10 @@
-import { DMMF } from "../dmmf";
-import { printObject } from "./object";
-import { printType } from "./type";
+import { DMMF } from '../dmmf';
+import { printObject } from './object';
+import { printType } from './type';
 
 export function printPrismaModel(model: DMMF.Model) {
   const fields = model.fields.map((field) => printModelField(field));
-  return printObject("type", model.name, fields);
+  return printObject('type', model.name, fields);
 }
 
 function printModelField(field: DMMF.Field) {
@@ -14,11 +14,11 @@ function printModelField(field: DMMF.Field) {
 function printFieldScalar(field: DMMF.Field) {
   let name = field.type;
   if (field.isId) {
-    name = "ID";
+    name = 'ID';
   }
   return printType(name, {
     kind: field.kind,
     list: field.isList,
-    required: field.isRequired && field.kind !== "object",
+    required: field.isRequired && field.kind !== 'object',
   });
 }

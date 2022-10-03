@@ -1,7 +1,7 @@
-import fs from "fs/promises";
-import path from "path";
+import fs from 'fs/promises';
+import path from 'path';
 
-const manifest = ".publish.json";
+const manifest = '.publish.json';
 
 async function getManifest() {
   const manifestContent = await fs.readFile(manifest).catch(() => null);
@@ -13,7 +13,7 @@ async function getManifest() {
 
 async function writeManifest(files, to) {
   const dest = files.map((file) => path.join(to, file));
-  await fs.writeFile(manifest, JSON.stringify(dest), "utf-8");
+  await fs.writeFile(manifest, JSON.stringify(dest), 'utf-8');
 }
 
 async function getAllFiles(dir) {
@@ -42,7 +42,7 @@ async function moveFile(file, from, to) {
 async function moveFiles(from, to) {
   const manifest = await getManifest();
   if (manifest != null) {
-    throw new Error("Remove manifest before moving files");
+    throw new Error('Remove manifest before moving files');
   }
 
   const files = await getAllFiles(from);
@@ -71,16 +71,16 @@ async function cleanFiles() {
 
 const arg = process.argv[2];
 
-if (arg === "--move") {
+if (arg === '--move') {
   const from = process.argv[3];
 
   if (!from) {
-    throw new Error("Missing from path");
+    throw new Error('Missing from path');
   }
 
-  moveFiles(from, ".");
-} else if (arg === "--clean") {
+  moveFiles(from, '.');
+} else if (arg === '--clean') {
   cleanFiles();
 } else {
-  [console.log("Usage: prep.js [--move|--clean]")];
+  [console.log('Usage: prep.js [--move|--clean]')];
 }

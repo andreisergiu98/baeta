@@ -1,29 +1,22 @@
-import { buildSchema, validateSchema } from "graphql";
-import { concat, mergeDeepWith, path } from "ramda";
-import { DMMF } from "../dmmf";
-import { findModelByEnum } from "../model-enum";
-import { findModelByInput } from "../model-inputs";
-import { findModelByOperationSchema } from "../model-operations";
-import { findModelByOutput } from "../model-outputs";
-import { isOperation } from "./schema-builder-utils";
-import { createVisitorBuilder } from "../visitor";
-import { printPrismaModel } from "../print/prisma-model";
-import { printPrismaEnumModel } from "../print/prisma-enum-model";
-import { printPrismaInput } from "../print/prisma-input";
-import { printPrismaEnum } from "../print/prisma-enum";
-import { printScalars, scalars } from "../print/type";
-import { printDirectives, directives } from "../print/directive";
-import {
-  printPrismaOperation,
-  printPrismaOutput,
-} from "../print/prisma-output";
-import {
-  createGlobalSchemas,
-  createModuleSchemas,
-} from "./schema-builder-files";
-import { Store } from "../context";
-import { GenerateOptions } from "../generator";
-import { relative } from "path";
+import { buildSchema, validateSchema } from 'graphql';
+import { concat, mergeDeepWith } from 'ramda';
+import { Store } from '../context';
+import { DMMF } from '../dmmf';
+import { GenerateOptions } from '../generator';
+import { findModelByEnum } from '../model-enum';
+import { findModelByInput } from '../model-inputs';
+import { findModelByOperationSchema } from '../model-operations';
+import { findModelByOutput } from '../model-outputs';
+import { directives, printDirectives } from '../print/directive';
+import { printPrismaEnum } from '../print/prisma-enum';
+import { printPrismaEnumModel } from '../print/prisma-enum-model';
+import { printPrismaInput } from '../print/prisma-input';
+import { printPrismaModel } from '../print/prisma-model';
+import { printPrismaOperation, printPrismaOutput } from '../print/prisma-output';
+import { printScalars, scalars } from '../print/type';
+import { createVisitorBuilder } from '../visitor';
+import { createGlobalSchemas, createModuleSchemas } from './schema-builder-files';
+import { isOperation } from './schema-builder-utils';
 
 export interface GlobalSchemaDefinition {
   enums: string[];
@@ -43,10 +36,7 @@ export interface ModuleSchemaDefinition {
   outputTypes: string[];
 }
 
-export type ModuleDefinitionMap = Record<
-  string,
-  ModuleSchemaDefinition | undefined
->;
+export type ModuleDefinitionMap = Record<string, ModuleSchemaDefinition | undefined>;
 
 export function createSchemaBuilder(store: Store, options: GenerateOptions) {
   const { models, inputsMap, outputsMap, operationsMap } = store;
@@ -142,10 +132,7 @@ export function createSchemaBuilder(store: Store, options: GenerateOptions) {
     pushDefinition(model, { outputTypes: [content] });
   });
 
-  function handleOperation(
-    outputType: DMMF.OutputType,
-    operation: "Query" | "Mutation"
-  ) {
+  function handleOperation(outputType: DMMF.OutputType, operation: 'Query' | 'Mutation') {
     for (const field of outputType.fields) {
       const model = findModelByOperationSchema(operationsMap, field);
 
@@ -159,13 +146,13 @@ export function createSchemaBuilder(store: Store, options: GenerateOptions) {
         continue;
       }
 
-      if (operation === "Query") {
+      if (operation === 'Query') {
         pushDefinition(model, {
           queries: [content],
         });
       }
 
-      if (operation === "Mutation") {
+      if (operation === 'Mutation') {
         pushDefinition(model, {
           mutations: [content],
         });
@@ -174,7 +161,7 @@ export function createSchemaBuilder(store: Store, options: GenerateOptions) {
   }
 
   function validate() {
-    validateSchema(buildSchema(schema.join("\n")));
+    validateSchema(buildSchema(schema.join('\n')));
   }
 
   function compose() {

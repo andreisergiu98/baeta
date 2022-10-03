@@ -1,13 +1,13 @@
-import { DMMF } from "../dmmf";
-import { mapPrismaTypeToScalar } from "./prisma-scalar";
-import { printObject } from "./object";
-import { ModelsOperationsMap } from "../model-operations";
-import { printType } from "./type";
-import { filterEmpty } from "../../utils/string";
+import { filterEmpty } from '../../utils/string';
+import { DMMF } from '../dmmf';
+import { ModelsOperationsMap } from '../model-operations';
+import { printObject } from './object';
+import { mapPrismaTypeToScalar } from './prisma-scalar';
+import { printType } from './type';
 
 export function printPrismaOutput(outputType: DMMF.OutputType) {
   const content = outputType.fields.map((field) => printOutputTypeField(field));
-  return printObject("type", outputType.name, content);
+  return printObject('type', outputType.name, content);
 }
 
 export function printPrismaOperation(
@@ -35,10 +35,10 @@ function printOutputFieldArgs(args: DMMF.SchemaArg[]) {
   const argList = filterEmpty(args.map((arg) => printOutputFieldArg(arg)));
 
   if (argList.length === 0) {
-    return "";
+    return '';
   }
 
-  return `(${argList.join(", ")})`;
+  return `(${argList.join(', ')})`;
 }
 
 function printOutputFieldArg(arg: DMMF.SchemaArg) {
@@ -60,7 +60,7 @@ function printOutputFieldArgType(arg: DMMF.SchemaArg) {
 
   let type = inputType.type.toString();
 
-  if (inputType.location === "scalar") {
+  if (inputType.location === 'scalar') {
     type = mapPrismaTypeToScalar(type);
   }
 
@@ -69,7 +69,7 @@ function printOutputFieldArgType(arg: DMMF.SchemaArg) {
   }
 
   if (arg.isRequired) {
-    type += "!";
+    type += '!';
   }
 
   return type;

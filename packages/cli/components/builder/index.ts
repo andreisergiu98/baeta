@@ -1,1 +1,1 @@
-export {Builder, BuilderWithGenerator} from "./builder";
+export { Builder, BuilderWithGenerator } from './builder';

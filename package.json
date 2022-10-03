@@ -2,10 +2,14 @@
   "name": "baeta",
   "license": "MIT",
   "private": true,
-  "type": "module",
+  "scripts": {
+    "build": "yarn workspaces foreach run build",
+    "publish": "yarn workspaces foreach npm publish --tolerate-republish"
+  },
   "workspaces": [
     "packages/*",
-    "plugins/*"
+    "plugins/*",
+    "tools/*"
   ],
   "packageManager": "yarn@3.2.3",
   "devDependencies": {

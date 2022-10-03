@@ -1,0 +1,15 @@
+{
+  "name": "@baeta/prep",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "prep": "./bin/prep.js",
+    "tsup": "./bin/tsup.js"
+  },
+  "dependencies": {
+    "tsup": "^6.2.3"
+  },
+  "exports": {
+    "./tsup": "./tsup.js"
+  }
+}

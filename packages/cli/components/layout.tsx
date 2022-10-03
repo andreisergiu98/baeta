@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from "react";
 import { Box, Text, TextProps } from "ink";
-import Spinner from "ink-spinner";
+import { Spinner } from "./spinner";
 import { Time } from "./time";
 
 interface LayoutProps extends PropsWithChildren {

@@ -1,9 +1,9 @@
 import { Config } from "../lib";
-
-let cachedConfig: Config | null = null;
+import { createRequire } from "node:module";
 
 function registerCompiler() {
   try {
+    const require = createRequire(import.meta.url);
     require("@baeta/compiler/register.cjs");
     return true;
   } catch (e) {
@@ -11,27 +11,23 @@ function registerCompiler() {
   }
 }
 
-function importConfig(file: string, skipCache: boolean): Config | undefined {
-  const module = require.resolve(file);
+function requireConfig(file: string, skipCache: boolean): Config | undefined {
+  const req = createRequire(import.meta.url);
+  const module = req.resolve(file);
   if (skipCache) {
-    delete require.cache[module];
+    delete req.cache[module];
   }
-  return require(module)?.default?.config;
+  return req(module)?.default?.config;
 }
 
 export function loadConfig(skipCache = false) {
-  if (cachedConfig && !skipCache) {
-    return cachedConfig;
-  }
-
-  const registered = registerCompiler();
+  registerCompiler();
   const file = process.cwd() + "/baeta.ts";
-  const config = importConfig(file, skipCache);
+  const config = requireConfig(file, skipCache);
 
   if (!config) {
     return;
   }
 
-  cachedConfig = config;
   return config;
 }

@@ -24,7 +24,7 @@ export function createApplication(options: Options) {
   const modules = options.modules as SdkModule<unknown>[];
   const builtModules = modules.map((module) => module.__build());
 
-  const app = GM.createApplication({
+  const app = GM.createGMApplication({
     modules: builtModules,
     schemaBuilder(input) {
       let schema = makeExecutableSchema({

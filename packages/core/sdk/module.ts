@@ -17,7 +17,7 @@ export interface Module<T> {
 }
 
 export type SdkModule<T> = T & {
-  __build: () => GM.Module;
+  __build: () => GM.GMModule;
   __transformSchema: (schema: GraphQLSchema) => GraphQLSchema;
 };
 
@@ -33,12 +33,12 @@ function extendManager<T>(manager: T, options: ExtendOptions): T {
   const extended = manager as SdkModule<T>;
 
   extended.__build = () => {
-    return GM.createModule({
+    return GM.createGMModule({
       id: module.id,
       typeDefs: module.typedef,
       dirname: module.dirname,
       resolvers: resolvers,
-      middlewares: middlewares as GM.MiddlewareMap,
+      middlewares: middlewares as GM.GMMiddlewareMap,
     });
   };
 

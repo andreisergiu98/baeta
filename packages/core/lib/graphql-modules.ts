@@ -1,17 +1,13 @@
 import { GraphQLResolveInfo } from "graphql";
-import { MiddlewareMap as GMMiddlewareMap } from "graphql-modules/shared/middleware";
-import {
-  createModule as createGMModule,
-  createApplication as createGMApplication,
-  Module as GMModule,
-} from "graphql-modules";
+import { MiddlewareMap  } from "graphql-modules/shared/middleware";
+import { createModule, createApplication, Module } from "graphql-modules";
 
 export namespace GM {
-  export const createModule = createGMModule;
-  export const createApplication = createGMApplication;
+  export const createGMModule = createModule;
+  export const createGMApplication = createApplication;
 
-  export type Module = GMModule;
-  export type MiddlewareMap = GMMiddlewareMap;
+  export type GMModule = Module;
+  export type GMMiddlewareMap = MiddlewareMap ;
 
   export type Resolver<Result, Parent = {}, Context = {}, Args = {}> = (
     parent: Parent,

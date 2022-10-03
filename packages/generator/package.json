@@ -1,7 +1,12 @@
 {
   "name": "@baeta/generator",
-  "version": "0.1.0",
+  "version": "0.0.4",
   "type": "module",
+  "scripts": {
+    "prepack": "yarn prep --move dist",
+    "postpack": "yarn prep --clean",
+    "build": "yarn tsup --dts"
+  },
   "dependencies": {
     "@baeta/plugin": "workspace:^",
     "@baeta/plugin-graphql": "workspace:^",
@@ -9,6 +14,7 @@
   },
   "devDependencies": {
     "@baeta/core": "workspace:^",
+    "@baeta/prep": "workspace:^",
     "@types/node": "^18.7.23",
     "graphql": "^16.6.0",
     "typescript": "^4.8.3"
@@ -16,5 +22,20 @@
   "peerDependencies": {
     "@baeta/core": "workspace:^",
     "graphql": "^15.3.0 || ^16.0.0"
+  },
+  "files": [
+    "*.js",
+    "*.cjs",
+    "*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./index.js",
+        "require": "./index.cjs",
+        "types": "./index.d.ts"
+      }
+    }
   }
 }

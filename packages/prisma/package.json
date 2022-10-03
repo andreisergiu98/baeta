@@ -1,6 +1,7 @@
 {
   "name": "@baeta/prisma",
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "dependencies": {
     "decimal.js": "^10.4.1",

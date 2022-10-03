@@ -73,6 +73,7 @@ export async function generate(options: GraphqlPluginConfig) {
       makeResolverTypeCallable: true,
       includeDirectives: true,
       resolverTypeWrapperSignature: "T",
+      emitLegacyCommonJSImports: false,
       scalars: {
         BigInt: "number",
         Bytes: "Buffer",

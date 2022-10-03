@@ -1,6 +1,7 @@
 {
   "name": "@baeta/plugin-prisma",
   "version": "0.0.1",
+  "private": true,
   "type": "module",
   "dependencies": {
     "@baeta/plugin": "workspace:^",

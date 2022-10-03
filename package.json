@@ -17,6 +17,7 @@
   ],
   "packageManager": "yarn@3.2.3",
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
     "@changesets/cli": "^2.25.0",
     "@yarnpkg/sdks": "^3.0.0-rc.21",
     "eslint": "^8.24.0",

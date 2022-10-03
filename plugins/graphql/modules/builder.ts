@@ -185,7 +185,7 @@ export function buildModule(
   function printMetadata() {
     return `export namespace ModuleMetadata {
   export const id = '${name}';
-  export const dirname = __dirname;
+  export const dirname = './${name}';
   export const typedef = ${JSON.stringify(doc)} as unknown as DocumentNode;
   ${printBaetaManager()}
 }`;

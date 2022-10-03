@@ -57,7 +57,8 @@
   "files": [
     "*.js",
     "*.cjs",
-    "*.d.ts"
+    "*.d.ts",
+    "!.eslintrc.cjs"
   ],
   "publishConfig": {
     "access": "public",

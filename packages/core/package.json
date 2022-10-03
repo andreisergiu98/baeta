@@ -1,6 +1,17 @@
 {
   "name": "@baeta/core",
   "version": "0.0.11",
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
   "type": "module",
   "scripts": {
     "prepack": "yarn prep --move dist",

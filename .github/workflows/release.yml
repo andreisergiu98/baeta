@@ -9,7 +9,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: PR
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -24,7 +24,7 @@ jobs:
       - name: Install Dependencies
         run: yarn install --no-immutable
 
-      - name: Create Release Pull Request
+      - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
         with:

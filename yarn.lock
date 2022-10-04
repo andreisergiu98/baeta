@@ -999,13 +999,13 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
     "@baeta/prisma": "workspace:^"
-    "@prisma/client": ^4.3.1
-    "@types/node": ^18.7.23
-    "@yarnpkg/pnpify": ^4.0.0-rc.21
+    "@prisma/client": ^4.4.0
+    "@types/node": ^18.8.1
+    "@yarnpkg/pnpify": ^4.0.0-rc.22
     apollo-server: ^3.10.2
     graphql: ^16.6.0
     pretty-error: ^4.0.0
-    prisma: ^4.3.1
+    prisma: ^4.4.0
     source-map-support: ^0.5.21
     typescript: ^4.8.3
   languageName: unknown
@@ -2236,17 +2236,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "@prisma/client@npm:4.3.1"
+"@prisma/client@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@prisma/client@npm:4.4.0"
   dependencies:
-    "@prisma/engines-version": 4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b
+    "@prisma/engines-version": 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 2e3e6319bb0974f9ab67ab4620b775f82c54e00c4690db59bbd4736967c1afae7b4487ac54a78d221b7f898287b387422c7e8de026dfd66e97c1ca1e79eb06f7
+  checksum: 7ecd1dbfd7158baef5365beaead3d863841812cd939b7b1f5287f163281119de311ffdeb422d1105b15c939b50ca3760bb459ede63a34d5f7acda510d7c30b03
   languageName: node
   linkType: hard
 
@@ -2325,10 +2325,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b":
-  version: 4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b
-  resolution: "@prisma/engines-version@npm:4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b"
-  checksum: 268eb72da6ef70f3e0ce9c43f1b1500af3df24adb0589972f2fbbb949e5f3847c0c2377998537ad425995f78ad59cd06e65e1b07040d0ea937cefe02e441a5d1
+"@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6":
+  version: 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
+  resolution: "@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6"
+  checksum: 91ca927a69f53ffd05ee02b25666531997202642dbe92ae2c6df6a28a38726894e3728377c49d2327a323461d92f5b7eedae0795ab6ca50ed59ae28c2775b38a
   languageName: node
   linkType: hard
 
@@ -2343,6 +2343,13 @@ __metadata:
   version: 4.3.1
   resolution: "@prisma/engines@npm:4.3.1"
   checksum: a407ecb8e15373890d82fc01682ddb1c473c7a5e81e07b603bdf3064bad936ee7cfa9d3ac68d5c4b845f476df53b92b705e7ec6a24a7364354ac78eb9084cbcc
+  languageName: node
+  linkType: hard
+
+"@prisma/engines@npm:4.4.0":
+  version: 4.4.0
+  resolution: "@prisma/engines@npm:4.4.0"
+  checksum: e5a62e6c905cbe325f8aa15afe698f8a0a47fe7fdc4d4affdc8df86fcdc6fdd2857ac498611217daf5f8304846a32e199d100165c748b4e8a959bbf0670507a1
   languageName: node
   linkType: hard
 
@@ -2907,6 +2914,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^18.8.1":
+  version: 18.8.2
+  resolution: "@types/node@npm:18.8.2"
+  checksum: b7c74dea0e835fb7faf69b4a2e87d43c1d228d88adacdff464d9e92d18a0b43bec6147b9eb3287650ac75fe5af730c53391869d02175e6b032dcb99ae2f54c92
+  languageName: node
+  linkType: hard
+
 "@types/normalize-package-data@npm:^2.4.0":
   version: 2.4.1
   resolution: "@types/normalize-package-data@npm:2.4.1"
@@ -3222,12 +3236,54 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yarnpkg/core@npm:^4.0.0-rc.22":
+  version: 4.0.0-rc.22
+  resolution: "@yarnpkg/core@npm:4.0.0-rc.22"
+  dependencies:
+    "@arcanis/slice-ansi": ^1.1.1
+    "@types/semver": ^7.1.0
+    "@types/treeify": ^1.0.0
+    "@yarnpkg/fslib": ^3.0.0-rc.22
+    "@yarnpkg/libzip": ^3.0.0-rc.22
+    "@yarnpkg/parsers": ^3.0.0-rc.22
+    "@yarnpkg/shell": ^4.0.0-rc.22
+    camelcase: ^5.3.1
+    chalk: ^3.0.0
+    ci-info: ^3.2.0
+    clipanion: ^3.2.0-rc.10
+    cross-spawn: 7.0.3
+    diff: ^5.1.0
+    globby: ^11.0.1
+    got: ^11.7.0
+    lodash: ^4.17.15
+    micromatch: ^4.0.2
+    p-limit: ^2.2.0
+    semver: ^7.1.2
+    strip-ansi: ^6.0.0
+    tar: ^6.0.5
+    tinylogic: ^2.0.0
+    treeify: ^1.1.0
+    tslib: ^2.4.0
+    tunnel: ^0.0.6
+  checksum: f20c34d82af129a842d037264d90a3acba04359683ad9f8e35774ef8c04f29432aacc26cbf89e63e067ec9ad16baf5b6954728ff57339ef80acdae6444da7ebe
+  languageName: node
+  linkType: hard
+
 "@yarnpkg/fslib@npm:^3.0.0-rc.21":
   version: 3.0.0-rc.21
   resolution: "@yarnpkg/fslib@npm:3.0.0-rc.21"
   dependencies:
     tslib: ^2.4.0
   checksum: edc6f1e5d8a2d7dc0ca0d71126a0b8e783898a07f23bce16a8d0eb117d1b8ee6770fb174ecb458844ed1ae3d074a212fbcb7dbe4023c3f722f73c81ab6816cf5
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/fslib@npm:^3.0.0-rc.22":
+  version: 3.0.0-rc.22
+  resolution: "@yarnpkg/fslib@npm:3.0.0-rc.22"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: e6c4055cefdef2328f456cb6fb3c17818d6c9e5a7f574e329277579fe904caeacb0c44d0aedbbd8bac32ae7791075e778f2c7945b274341d1ae06b7e14b500bc
   languageName: node
   linkType: hard
 
@@ -3244,13 +3300,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/nm@npm:^4.0.0-rc.21":
-  version: 4.0.0-rc.21
-  resolution: "@yarnpkg/nm@npm:4.0.0-rc.21"
+"@yarnpkg/libzip@npm:^3.0.0-rc.22":
+  version: 3.0.0-rc.22
+  resolution: "@yarnpkg/libzip@npm:3.0.0-rc.22"
   dependencies:
-    "@yarnpkg/core": ^4.0.0-rc.21
-    "@yarnpkg/fslib": ^3.0.0-rc.21
-  checksum: d5d87e7bf00cbdfdc121cd37cfb30dd86ff8b1a630402f65c751bc9f51606cf2339f7842bc814901c98ba5bcfe2e30410ca0b40a57656d0e5eb5525935dbf9ee
+    "@types/emscripten": ^1.39.6
+    "@yarnpkg/fslib": ^3.0.0-rc.22
+    tslib: ^2.4.0
+  peerDependencies:
+    "@yarnpkg/fslib": ^3.0.0-rc.22
+  checksum: bd48f861bdb88d4f9d49121199ef24fe04d68fd2221d919e18c4c0b1606900e1cb88b303b74a090fa12f349bed68abb45b7db778b34d97cd40dc48cd6e78f45c
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/nm@npm:^4.0.0-rc.22":
+  version: 4.0.0-rc.22
+  resolution: "@yarnpkg/nm@npm:4.0.0-rc.22"
+  dependencies:
+    "@yarnpkg/core": ^4.0.0-rc.22
+    "@yarnpkg/fslib": ^3.0.0-rc.22
+  checksum: 195096081b65d503e9259e68ccc80e2bd97c5c11e5a01e47fbaf49d0e8a4439209a8c55a01857c0398beadc0919a13cef84f426e73b12f9a4e6bdfc6d2c9c645
   languageName: node
   linkType: hard
 
@@ -3264,18 +3333,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/pnpify@npm:^4.0.0-rc.21":
-  version: 4.0.0-rc.21
-  resolution: "@yarnpkg/pnpify@npm:4.0.0-rc.21"
+"@yarnpkg/parsers@npm:^3.0.0-rc.22":
+  version: 3.0.0-rc.22
+  resolution: "@yarnpkg/parsers@npm:3.0.0-rc.22"
   dependencies:
-    "@yarnpkg/core": ^4.0.0-rc.21
-    "@yarnpkg/fslib": ^3.0.0-rc.21
-    "@yarnpkg/nm": ^4.0.0-rc.21
+    js-yaml: ^3.10.0
+    tslib: ^2.4.0
+  checksum: 4a31b4faad853b6cb09ff198017dd2f81782cb57ff8aaa2446ab9c8eb51aacaad3fa740e0c156c60c66cdb9cff8939f99b2b09c9890e2b8d015dcbed0150cb8a
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/pnpify@npm:^4.0.0-rc.22":
+  version: 4.0.0-rc.22
+  resolution: "@yarnpkg/pnpify@npm:4.0.0-rc.22"
+  dependencies:
+    "@yarnpkg/core": ^4.0.0-rc.22
+    "@yarnpkg/fslib": ^3.0.0-rc.22
+    "@yarnpkg/nm": ^4.0.0-rc.22
     clipanion: ^3.2.0-rc.10
     tslib: ^2.4.0
   bin:
     pnpify: ./lib/cli.js
-  checksum: b92c42d0b7a821d0aae5749b832f12cf94e605da8142446b33244bbe9530ed09f627545676cf3eea99c4d4740a310e9c8ac2f4b1e2845770276854f16c041970
+  checksum: 2d5b2d8c2caf726f41c375d51e4d64c06febfe712d3a95a16b3cce39e29cb31116ac335d7dc3d81bd7257d9ae0e4762a05f93cd6e890baa9145835db0bef8c82
   languageName: node
   linkType: hard
 
@@ -3312,6 +3391,24 @@ __metadata:
   bin:
     shell: ./lib/cli.js
   checksum: 8812cc3f3c29097ba7bd8a5c76319c6cac301eef0c8ef37305f76d179c5b412b5f74613b2eaeff91b8c549413f8be278d5aee03c1d82de2794ece34c116da771
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/shell@npm:^4.0.0-rc.22":
+  version: 4.0.0-rc.22
+  resolution: "@yarnpkg/shell@npm:4.0.0-rc.22"
+  dependencies:
+    "@yarnpkg/fslib": ^3.0.0-rc.22
+    "@yarnpkg/parsers": ^3.0.0-rc.22
+    chalk: ^3.0.0
+    clipanion: ^3.2.0-rc.10
+    cross-spawn: 7.0.3
+    fast-glob: ^3.2.2
+    micromatch: ^4.0.2
+    tslib: ^2.4.0
+  bin:
+    shell: ./lib/cli.js
+  checksum: 9e1536e252ae5a1558db63c129a755b4e7dfe627fb33fff1e4206836e5e4de11578122ee90ad46951f7b0a10bb45073cb5b43449c36cef61faf62f8a9632b629
   languageName: node
   linkType: hard
 
@@ -9094,15 +9191,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "prisma@npm:4.3.1"
+"prisma@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "prisma@npm:4.4.0"
   dependencies:
-    "@prisma/engines": 4.3.1
+    "@prisma/engines": 4.4.0
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: f97133c11ecbb09a40c0ec006af50e8789f3b76376e29d5eb041b1592d2c289af22bcb9b5c49789ffb8bbe0b24f470c1ec668a94194c5859e18b601398cf80c8
+  checksum: fb44f8b36d59c411711b2f5cecbe112a6487c387a7dd7ade350c73c0e9f821dfdb30cd6271c2f2b9b713fda3a31eec4b241c482754b26bfcb6df831ba521a58e
   languageName: node
   linkType: hard
 

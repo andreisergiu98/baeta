@@ -37,7 +37,10 @@ export type GeneratorPluginV1WatchOptions<PluginConfig> = (
   ignore: Matcher;
 };
 
-export interface GeneratorPluginV1WithConfig<Config = unknown, Ctx = {}> {
+export interface GeneratorPluginV1WithConfig<
+  Config = unknown,
+  Ctx = Record<string, unknown>
+> {
   name: string;
   version: GeneratorPluginVersion.V1;
   type: PluginType.Generator;
@@ -54,7 +57,7 @@ const defaultPluginFn: GeneratorPluginFn<unknown, unknown> = async (params) => {
 
 const defaultWatchFn = () => ({ include: [], ignore: [] });
 
-export function createPluginFactoryV1<Config, Ctx = {}>(
+export function createPluginFactoryV1<Config, Ctx = Record<string, unknown>>(
   options: GeneratorPluginV1<Config, Ctx>
 ) {
   return (config: Config) =>

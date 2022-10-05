@@ -37,7 +37,7 @@ function extendManager<T>(manager: T, options: ExtendOptions): T {
       id: module.id,
       typeDefs: module.typedef,
       dirname: module.dirname,
-      resolvers: resolvers,
+      resolvers,
       middlewares: middlewares as GM.GMMiddlewareMap,
     });
   };

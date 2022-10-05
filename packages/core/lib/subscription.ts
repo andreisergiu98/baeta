@@ -60,6 +60,7 @@ export type SubscriptionObjectWithPayload<
   ) => boolean | Promise<boolean>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type SubscriptionResolver<Result, Key extends string, Root, Context, Args> = {
   subscribe: SubscriptionSubscribeFn<Result, Root, Context, Args>;
 };

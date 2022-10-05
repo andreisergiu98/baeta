@@ -47,7 +47,7 @@ function isObjectType(type: GraphQLNamedType): type is GraphQLObjectType {
 }
 
 function getFieldsWithArgumentsAndInputObjectTypes(schema: GraphQLSchema) {
-  const fieldsWithArguments: GraphQLField<unknown, unknown>[] = [];
+  const fieldsWithArguments: Array<GraphQLField<unknown, unknown>> = [];
   const inputObjectTypes: GraphQLInputObjectType[] = [];
   const types = Object.values(schema.getTypeMap());
 
@@ -130,7 +130,7 @@ async function validateListType(
     (validation) => validation.target === 'list' && validation.listDepth === listDepth
   );
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const promises: Array<Promise<ValidationError[]>> = [];
 
   for (const validation of listValidations) {
     promises.push(handleResolver(validation, type, path, root, args, ctx, info));
@@ -173,7 +173,7 @@ async function validateObjectType(
     (validation) => validation.target === 'object'
   );
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const promises: Array<Promise<ValidationError[]>> = [];
 
   for (const validation of objectValidations) {
     promises.push(handleResolver(validation, type, path, root, args, ctx, info));
@@ -217,7 +217,7 @@ async function validateScalarType(
     return [];
   }
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const promises: Array<Promise<ValidationError[]>> = [];
 
   for (const validation of validations) {
     promises.push(handleResolver(validation, type, path, root, args, ctx, info));
@@ -291,7 +291,7 @@ async function validateFieldArguments(
     argsDefinitionMap[arg.name] = arg;
   }
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const promises: Array<Promise<ValidationError[]>> = [];
 
   for (const [argumentName, argumentValue] of argEntries) {
     const argumentDefinition = argsDefinitionMap[argumentName];
@@ -319,7 +319,7 @@ async function validateFieldArguments(
 }
 
 function wrapValidatedFieldResolvers(
-  fieldsWithArguments: GraphQLField<unknown, unknown>[]
+  fieldsWithArguments: Array<GraphQLField<unknown, unknown>>
 ) {
   const fieldsToValidate = fieldsWithArguments.filter((field) => {
     if (hasArgumentValidationsExtension(field)) {

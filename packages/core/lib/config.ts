@@ -4,7 +4,7 @@ import type { GraphqlPluginConfig } from '@baeta/plugin-graphql';
 
 export interface Config {
   graphql: GraphqlPluginConfig;
-  plugins?: Array<GeneratorPluginV1WithConfig>;
+  plugins?: GeneratorPluginV1WithConfig[];
   compiler?: CompilerOptions;
 }
 

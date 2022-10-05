@@ -22,7 +22,7 @@ export type MiddlewareFromResolver<R> = R extends Resolver<
 type MiddlewareFromResolvers<R> = R extends {
   [K in keyof R]: infer Inner;
 }
-  ? Inner extends Resolver<infer Result, infer Parent, infer Context, infer Args>
+  ? Inner extends Resolver<unknown, infer Parent, infer Context, unknown>
     ? Middleware<unknown, Parent, Context, {}>
     : never
   : never;
@@ -78,7 +78,7 @@ function normalizeMiddleware(middleware: Middleware<unknown>) {
   return normalizedMiddleware;
 }
 
-export type MiddlewaresMap = Record<string, Record<string, Array<unknown>>>;
+export type MiddlewaresMap = Record<string, Record<string, unknown[]>>;
 
 export function addMiddleware(
   map: MiddlewaresMap,

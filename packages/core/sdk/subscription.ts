@@ -14,7 +14,7 @@ import { ResolversMap } from './resolver';
 
 export type SubscriptionOptions<Payload, Sub> = Sub extends SubscriptionResolver<
   infer Result,
-  infer Key,
+  string,
   infer Root,
   infer Context,
   infer Args
@@ -109,7 +109,7 @@ export function createSubscriptionBuilder<Subscription>(
 
 export function createSubscriptionsBuilder<Resolvers, ResolversType>(
   options: ManagerOptions,
-  {}: ResolversType,
+  _type: ResolversType,
   resolvers: Resolvers
 ) {
   return resolvers;

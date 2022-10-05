@@ -8,7 +8,7 @@ import {
   MiddlewareFromResolver,
 } from './middleware';
 
-export type WithIndex<T> = T & Record<string, any>;
+export type WithIndex<T> = T & Record<string, unknown>;
 export type ResolversObject<T> = WithIndex<T>;
 
 export type OnResolver = (
@@ -21,6 +21,7 @@ type ResolverRegisterer<T> = ((resolver: T) => void) & {
   $use: (middleware: MiddlewareFromResolver<T>) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function createResolverBuilder<T extends Resolver<any, any, any, any>>(
   type: string,
   field: string,
@@ -39,7 +40,7 @@ export function createResolverBuilder<T extends Resolver<any, any, any, any>>(
 export function createResolversBuilder<Resolvers, ResolversType>(
   name: string,
   options: ManagerOptions,
-  {}: ResolversType,
+  _type: ResolversType,
   resolvers: Resolvers
 ) {
   return {

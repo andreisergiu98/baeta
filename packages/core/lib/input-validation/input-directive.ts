@@ -23,13 +23,13 @@ export type ValidationDirectiveFn<
 ) => void | Promise<void>;
 
 function getObjectSelector(args: Record<string, unknown>, path: Array<string | number>) {
-  let i = 0;
+  const i = 0;
   let key: string | number;
-  let obj: Record<string, any> = args;
+  let obj: Record<string, unknown> = args;
 
   for (let i = 0; i < path.length - 1; ++i) {
     key = path[i];
-    obj = obj[key];
+    obj = obj[key] as Record<string, unknown>;
   }
 
   key = path[i + 1];

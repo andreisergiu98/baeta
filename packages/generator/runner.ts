@@ -4,7 +4,9 @@ import { GeneratorCtx } from './generate';
 export function createRunner(
   ctx: GeneratorCtx,
   plugins: GeneratorPluginV1WithConfig[],
-  getFn: (plugin: GeneratorPluginV1WithConfig) => GeneratorPluginFn<unknown, {}>,
+  getFn: (
+    plugin: GeneratorPluginV1WithConfig
+  ) => GeneratorPluginFn<unknown, Record<string, unknown>>,
   onFinish?: (plugin: GeneratorPluginV1WithConfig) => void
 ) {
   let i = 0;
@@ -33,7 +35,9 @@ export function createRunner(
 export function startRunner(
   ctx: GeneratorCtx,
   plugins: GeneratorPluginV1WithConfig[],
-  getFn: (plugin: GeneratorPluginV1WithConfig) => GeneratorPluginFn<unknown, {}>,
+  getFn: (
+    plugin: GeneratorPluginV1WithConfig
+  ) => GeneratorPluginFn<unknown, Record<string, unknown>>,
   onFinish?: (plugin: GeneratorPluginV1WithConfig) => void
 ) {
   const run = createRunner(ctx, plugins, getFn, onFinish);

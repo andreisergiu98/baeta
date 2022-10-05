@@ -9,7 +9,7 @@ export interface GeneratorConfig {
   plugins: GeneratorPluginV1WithConfig[];
 }
 
-export type GeneratorCtx<T = {}> = {
+export type GeneratorCtx<T = Record<string, unknown>> = {
   fileManager: FileManager;
   didSetup: string[];
   didGenerate: string[];

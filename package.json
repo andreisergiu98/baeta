@@ -14,12 +14,14 @@
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
   "workspaces": [
+    "website",
     "packages/*",
     "tools/*",
     "examples/*"
   ],
   "scripts": {
     "build": "yarn workspaces foreach -pv --no-private run build",
+    "docs": "yarn workspace @baeta/website build",
     "linter:check": "rome check .",
     "prepare": "husky install",
     "prettier:check": "prettier --check .",

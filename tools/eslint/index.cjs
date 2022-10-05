@@ -24,6 +24,8 @@ module.exports = {
         accessibility: 'no-public',
       },
     ],
+    '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/ban-types': 'off',
     eqeqeq: ['warn', 'smart'],
     'guard-for-in': 'error',
     'no-console': 'error',

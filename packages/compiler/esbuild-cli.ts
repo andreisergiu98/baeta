@@ -72,7 +72,9 @@ export function esbuildCliPlugin(options: CommandsOptions) {
   let startTime = 0;
   const processes: ExecaChildProcess[] = [];
 
-  let cleanup = () => {};
+  let cleanup = () => {
+    // definition
+  };
 
   const plugin: Plugin = {
     name: 'esbuild-plugin-baeta-cli',

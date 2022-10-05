@@ -6,6 +6,7 @@
   "scripts": {
     "build": "yarn workspaces foreach -pv --no-private run build",
     "lint": "yarn workspaces foreach -pv run lint",
+    "docs": "yarn workspace @baeta/website build",
     "prettier:check": "yarn prettier --check .",
     "release": "yarn build && yarn changeset publish",
     "prepare": "husky install"
@@ -13,7 +14,8 @@
   "workspaces": [
     "packages/*",
     "plugins/*",
-    "tools/*"
+    "tools/*",
+    "website"
   ],
   "packageManager": "yarn@3.2.3",
   "devDependencies": {

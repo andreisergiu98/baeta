@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - docs
+    paths:
+      - website/**
+
 jobs:
   deploy:
     name: Deploy to GitHub Pages

@@ -12,7 +12,7 @@ interface Props {
 
 function formatError(error: unknown) {
   if (error instanceof GraphQLError) {
-    let path = error.source?.name;
+    const path = error.source?.name;
     if (path == null) {
       return error.message;
     }

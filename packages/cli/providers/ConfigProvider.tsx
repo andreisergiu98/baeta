@@ -22,7 +22,6 @@ export function useConfigStore(props: ConfigProps) {
       return;
     }
 
-    const root = process.cwd();
     const instance = chokidar
       .watch(`./baeta.{js,cjs,mjs,ts,cts,mts}`, {
         ignoreInitial: true,

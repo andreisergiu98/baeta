@@ -9,7 +9,6 @@ export async function importCompiler(): Promise<Build> {
     const { build } = require('@baeta/compiler');
     return build;
   } catch (e) {
-    console.log(e);
     throw new Error('@baeta/compiler is not installed!');
   }
 }

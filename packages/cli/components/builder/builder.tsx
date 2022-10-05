@@ -33,7 +33,7 @@ export function Builder(props: Props) {
       const build = await importCompiler();
 
       if (config?.compiler == null) {
-        console.log('Compiler is not configured!');
+        exit(new Error('Compiler is not configured!'));
         return;
       }
 
@@ -82,7 +82,7 @@ export function Builder(props: Props) {
         result?.stop?.();
       };
     },
-    [props.watch, props.hideWarnings, props.onSuccess, props.onError]
+    [props.watch, props.onSuccess, props.onError, exit]
   );
 
   useEffect(() => {

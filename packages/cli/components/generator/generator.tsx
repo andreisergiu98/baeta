@@ -10,12 +10,13 @@ export interface GeneratorProps {
 }
 
 export function Generator(props: GeneratorProps) {
+  const { watch, skipInitial, onSuccess } = props;
   const config = useConfig();
   const [running, setRunning] = useState(false);
   const [error, setError] = useState<unknown>(undefined);
 
   useEffect(() => {
-    if (props.watch === true && props.skipInitial === true) {
+    if (watch === true && skipInitial === true) {
       return;
     }
 
@@ -29,7 +30,7 @@ export function Generator(props: GeneratorProps) {
 
       try {
         await generate(config);
-        props.onSuccess?.();
+        onSuccess?.();
       } catch (err) {
         setError(err);
       } finally {
@@ -38,10 +39,10 @@ export function Generator(props: GeneratorProps) {
     };
 
     handler();
-  }, [config, props.watch, props.onSuccess]);
+  }, [config, watch, skipInitial, onSuccess]);
 
   useEffect(() => {
-    if (props.watch !== true) {
+    if (watch !== true) {
       return;
     }
 
@@ -56,7 +57,7 @@ export function Generator(props: GeneratorProps) {
       },
       onEnd: () => {
         setRunning(false);
-        props.onSuccess?.();
+        onSuccess?.();
       },
       onError: (error) => {
         setRunning(false);
@@ -67,7 +68,7 @@ export function Generator(props: GeneratorProps) {
     return () => {
       instance.close();
     };
-  }, [config, props.watch, props.onSuccess]);
+  }, [config, watch, onSuccess]);
 
   return <GeneratorStatus error={error} running={running} watching={props.watch} />;
 }

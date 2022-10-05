@@ -9,7 +9,9 @@ interface PendingTask {
 }
 
 function resolve(task: PendingTask) {
-  return task.callback().catch((e) => console.log(e));
+  return task.callback().catch(() => {
+    // do nothing
+  });
 }
 
 function removeCurrentTask(current: PendingTask | undefined, incoming: PendingTask) {

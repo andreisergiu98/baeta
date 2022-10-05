@@ -383,31 +383,37 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     const lines: string[] = [];
 
     for (const kind in registry) {
-      const k = kind as RegistryKeys;
-      if (registry.hasOwnProperty(k) && resolverKeys.includes(k as any)) {
-        const types = registry[k];
-
-        types.forEach((typeName) => {
-          if (k === 'enums') {
-            return;
-          }
-          if (k === 'scalars') {
-            lines.push(
-              `${typeName}?: ${encapsulateTypeName(
-                importNamespace
-              )}.Resolvers['${typeName}'];`
-            );
-          } else {
-            // In case of enabled `requireRootResolvers` flag, the preset has to produce a non-optional property.
-            const fieldModifier =
-              requireRootResolvers && rootTypes.includes(typeName) ? '' : '?';
-
-            lines.push(
-              `${typeName}${fieldModifier}: ${encapsulateTypeName(typeName)}Resolvers;`
-            );
-          }
-        });
+      if (!Object.prototype.hasOwnProperty.call(registry, kind)) {
+        continue;
       }
+
+      if (!resolverKeys.includes(kind as 'objects' | 'scalars' | 'enums')) {
+        continue;
+      }
+
+      const k = kind as RegistryKeys;
+      const types = registry[k];
+
+      types.forEach((typeName) => {
+        if (k === 'enums') {
+          return;
+        }
+        if (k === 'scalars') {
+          lines.push(
+            `${typeName}?: ${encapsulateTypeName(
+              importNamespace
+            )}.Resolvers['${typeName}'];`
+          );
+        } else {
+          // In case of enabled `requireRootResolvers` flag, the preset has to produce a non-optional property.
+          const fieldModifier =
+            requireRootResolvers && rootTypes.includes(typeName) ? '' : '?';
+
+          lines.push(
+            `${typeName}${fieldModifier}: ${encapsulateTypeName(typeName)}Resolvers;`
+          );
+        }
+      });
     }
 
     return buildBlock({

@@ -1,5 +1,6 @@
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
+import { Source } from '@graphql-tools/utils';
 import { concatAST, DocumentNode, isScalarType } from 'graphql';
 import { join, relative, resolve } from 'path';
 import { buildModule } from './builder';
@@ -34,11 +35,9 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
       throw new Error(`Preset "graphql-modules" requires to use GraphQL SDL`);
     }
 
-    const extensions: any = options.schemaAst!.extensions;
-    const sourcesByModuleMap = groupSourcesByModule(
-      extensions.extendedSources,
-      baseOutputDir
-    );
+    const extensions = options.schemaAst?.extensions;
+    const sources = (extensions?.extendedSources ?? []) as Source[];
+    const sourcesByModuleMap = groupSourcesByModule(sources, baseOutputDir);
     const modules = Object.keys(sourcesByModuleMap);
 
     const baseVisitor = new BaseVisitor(options.config, {});
@@ -83,7 +82,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
         ...options.config,
         enumsAsTypes: true,
       },
-      schemaAst: options.schemaAst!,
+      schemaAst: options.schemaAst,
     };
 
     const baseTypesFilename = baseTypesPath.replace(/\.(js|ts|d.ts)$/, '');

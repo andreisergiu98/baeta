@@ -231,7 +231,7 @@ export function pushUnique<T>(list: T[], item: T): void {
   }
 }
 
-export function concatByKey<T extends Record<string, any[]>, K extends keyof T>(
+export function concatByKey<T extends Record<string, string[]>, K extends keyof T>(
   left: T,
   right: T,
   key: K
@@ -240,7 +240,7 @@ export function concatByKey<T extends Record<string, any[]>, K extends keyof T>(
   return [...new Set([...left[key], ...right[key]])];
 }
 
-export function uniqueByKey<T extends Record<string, any[]>, K extends keyof T>(
+export function uniqueByKey<T extends Record<string, string[]>, K extends keyof T>(
   left: T,
   right: T,
   key: K
@@ -249,7 +249,7 @@ export function uniqueByKey<T extends Record<string, any[]>, K extends keyof T>(
 }
 
 export function createObject<K extends string, T>(keys: K[], valueFn: (key: K) => T) {
-  const obj: Record<K, T> = {} as any;
+  const obj: Record<K, T> = {} as Record<K, T>;
 
   keys.forEach((key) => {
     obj[key] = valueFn(key);

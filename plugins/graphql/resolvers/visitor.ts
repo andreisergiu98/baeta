@@ -124,6 +124,7 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
     return this.clearOptional(baseValue);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getPunctuation(_declarationKind: DeclarationKind): string {
     return ';';
   }
@@ -134,7 +135,8 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
   ): string {
     const valuesMap = `{ ${(node.values || [])
       .map(
-        (v) => `${v.name as any as string}${this.config.avoidOptionals ? '' : '?'}: any`
+        (v) =>
+          `${v.name as unknown as string}${this.config.avoidOptionals ? '' : '?'}: any`
       )
       .join(', ')} }`;
 
@@ -149,7 +151,7 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
   ): string {
     return `{ ${(node.values || [])
       .map((v) => {
-        const valueName = v.name as any as string;
+        const valueName = v.name as unknown as string;
         const mappedValue = valuesMapping[valueName];
 
         return `${valueName}: ${

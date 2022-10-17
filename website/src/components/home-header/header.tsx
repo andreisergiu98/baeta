@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './header.module.css';
 
-export function Header() {
+export function HomeHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero', styles.heroBanner)}>

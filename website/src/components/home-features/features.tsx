@@ -37,7 +37,7 @@ const FeatureList: FeatureProps[] = [
   },
 ];
 
-export function Features() {
+export function HomeFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">

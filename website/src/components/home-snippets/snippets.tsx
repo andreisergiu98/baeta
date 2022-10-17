@@ -109,7 +109,7 @@ extend type User {
   },
 ];
 
-export function Snippets() {
+export function HomeSnippets() {
   return (
     <section>
       <div className="container">

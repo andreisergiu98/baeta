@@ -116,15 +116,18 @@ export type NewStitchingResolver<TResult, TParent, TContext, TArgs> = {
   selectionSet: string | ((fieldNode: FieldNode) => SelectionSetNode);
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };`;
-  const stitchingResolverType = `export type StitchingResolver<TResult, TParent, TContext, TArgs> = LegacyStitchingResolver<TResult, TParent, TContext, TArgs> | NewStitchingResolver<TResult, TParent, TContext, TArgs>;`;
+  const stitchingResolverType =
+    'export type StitchingResolver<TResult, TParent, TContext, TArgs> = LegacyStitchingResolver<TResult, TParent, TContext, TArgs> | NewStitchingResolver<TResult, TParent, TContext, TArgs>;';
   const resolverWithResolve = `
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };`;
-  const resolverType = `export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =`;
-  const resolverFnUsage = `ResolverFn<TResult, TParent, TContext, TArgs>`;
-  const resolverWithResolveUsage = `ResolverWithResolve<TResult, TParent, TContext, TArgs>`;
-  const stitchingResolverUsage = `StitchingResolver<TResult, TParent, TContext, TArgs>`;
+  const resolverType =
+    'export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =';
+  const resolverFnUsage = 'ResolverFn<TResult, TParent, TContext, TArgs>';
+  const resolverWithResolveUsage =
+    'ResolverWithResolve<TResult, TParent, TContext, TArgs>';
+  const stitchingResolverUsage = 'StitchingResolver<TResult, TParent, TContext, TArgs>';
 
   if (visitor.hasFederation()) {
     if (visitor.config.wrapFieldDefinitions) {
@@ -172,7 +175,7 @@ export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
         stitchingResolverType,
         resolverType,
         `  | ${resolverFnUsage}`,
-        config.makeResolverTypeCallable ? `` : `  | ${resolverWithResolveUsage}`,
+        config.makeResolverTypeCallable ? '' : `  | ${resolverWithResolveUsage}`,
         `  | ${stitchingResolverUsage};`,
       ].join('\n')
     );

@@ -41,8 +41,8 @@ export function GeneratorStatus(props: Props) {
 
 function GeneratorStatusContent(props: Props) {
   if (props.error) {
-    const errorMessage = errorNamespace + ' ' + formatError(props.error);
-    return <Errors errors={[errorMessage]}></Errors>;
+    const errorMessage = `${errorNamespace} ${formatError(props.error)}`;
+    return <Errors errors={[errorMessage]} />;
   }
 
   if (props.running) {

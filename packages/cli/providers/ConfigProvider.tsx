@@ -23,7 +23,7 @@ export function useConfigStore(props: ConfigProps) {
     }
 
     const instance = chokidar
-      .watch(`./baeta.{js,cjs,mjs,ts,cts,mts}`, {
+      .watch('./baeta.{js,cjs,mjs,ts,cts,mts}', {
         ignoreInitial: true,
       })
       .on('add', updateConfig)

@@ -40,7 +40,7 @@ const registryKeys: RegistryKeys[] = [
   'unions',
   'enums',
 ];
-const resolverKeys: Array<Extract<RegistryKeys, 'objects' | 'enums' | 'scalars'>> = [
+const resolverKeys: Extract<RegistryKeys, 'objects' | 'enums' | 'scalars'>[] = [
   'scalars',
   'objects',
   'enums',
@@ -161,18 +161,18 @@ export function buildModule(
   });
 
   if (encapsulate === 'namespace') {
-    content =
-      `${shouldDeclare ? 'declare' : 'export'} namespace ${baseVisitor.convertName(name, {
-        suffix: 'Module',
-        useTypesPrefix: false,
-        useTypesSuffix: false,
-      })} {\n` +
-      (shouldDeclare ? `${indent(2)(imports.join('\n'))}\n` : '') +
-      indent(2)(content) +
-      '\n}';
+    content = `${
+      shouldDeclare ? 'declare' : 'export'
+    } namespace ${baseVisitor.convertName(name, {
+      suffix: 'Module',
+      useTypesPrefix: false,
+      useTypesSuffix: false,
+    })} {\n${shouldDeclare ? `${indent(2)(imports.join('\n'))}\n` : ''}${indent(2)(
+      content
+    )}\n}`;
   }
 
-  return [...(!shouldDeclare ? imports : []), content, printFactoryMethod()]
+  return [...(shouldDeclare ? [] : imports), content, printFactoryMethod()]
     .filter(Boolean)
     .join('\n');
 
@@ -190,7 +190,7 @@ export function buildModule(
    */
   function printDefinedFields() {
     return buildBlock({
-      name: `interface DefinedFields`,
+      name: 'interface DefinedFields',
       lines: [...visited.objects, ...visited.interfaces].map(
         (typeName) =>
           `${typeName}: ${printPicks(typeName, {
@@ -255,7 +255,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       printSubscriptionFieldBuilder(subscription)
     );
 
-    const resolversType = `SubscriptionResolvers`;
+    const resolversType = 'SubscriptionResolvers';
     const content = `{\n${fields.map(indent(2)).join('\n')}\n}`;
     return `Subscription: Baeta.createSubscriptionsBuilder(options, {} as ${resolversType}, ${content}),`;
   }
@@ -299,7 +299,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
    */
   function printDefinedEnumValues() {
     return buildBlock({
-      name: `interface DefinedEnumValues`,
+      name: 'interface DefinedEnumValues',
       lines: visited.enums.map(
         (typeName) => `${typeName}: ${printPicks(typeName, picks.enums)};`
       ),
@@ -319,7 +319,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
    */
   function printDefinedInputFields() {
     return buildBlock({
-      name: `interface DefinedInputFields`,
+      name: 'interface DefinedInputFields',
       lines: visited.inputs.map(
         (typeName) => `${typeName}: ${printPicks(typeName, picks.inputs)};`
       ),

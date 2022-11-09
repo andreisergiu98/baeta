@@ -11,6 +11,7 @@
     "baeta",
     "callsite",
     "camelcase",
+    "clsx",
     "codegen",
     "Datamodel",
     "dirpath",

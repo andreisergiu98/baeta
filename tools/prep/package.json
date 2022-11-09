@@ -7,7 +7,7 @@
     "tsup": "./bin/tsup.js"
   },
   "dependencies": {
-    "tsup": "^6.2.3"
+    "tsup": "^6.4.0"
   },
   "exports": {
     "./tsup": "./tsup.js"

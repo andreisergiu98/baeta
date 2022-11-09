@@ -18,10 +18,11 @@ export default createPluginFactoryV1<PrismaPluginOptions, PrismaPluginCtx>({
   name: 'prisma',
   watch: (baetaConfig, pluginConfig) => {
     const root = baetaConfig.graphql.modulesDir || 'src/modules';
-    const modulesMatcher =
-      root + '/*/' + (pluginConfig.schemaNamespace || 'prisma-schema') + '/**';
+    const modulesMatcher = `${root}/*/${
+      pluginConfig.schemaNamespace || 'prisma-schema'
+    }/**`;
 
-    const prismaModule = root + '/prisma' + '/**';
+    const prismaModule = `${root}/prisma/**`;
 
     return {
       include: [],

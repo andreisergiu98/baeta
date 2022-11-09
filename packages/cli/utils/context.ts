@@ -70,12 +70,12 @@ function createWrappedProvider<T, Props>(
 function createErrorMessage(name?: string) {
   let hook = 'useContext';
   if (name) {
-    hook = 'use' + name;
+    hook = `use${name}`;
   }
 
   let context = 'Context';
   if (name) {
-    context = name + 'Context';
+    context = `${name}Context`;
   }
 
   return `${hook}: \`${context}\` is undefined. Seems you forgot to wrap component within the Provider`;
@@ -97,7 +97,7 @@ export function createContextProvider<Type, Props>(
   const { name, strict = true, errorMessage = createErrorMessage(name) } = options;
 
   const Context = createContext<Type | undefined>(undefined);
-  Context.displayName = name + 'Context';
+  Context.displayName = `${name}Context`;
 
   const useContextWrapper = createHook(Context, strict, errorMessage, name);
 

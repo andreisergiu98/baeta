@@ -43,6 +43,6 @@ function printFunction(
   return [
     `${upperCaseFirst(namespace)}.${func}(({ ${args.join(', ')} }) => {`,
     `  ${content}`,
-    `});`,
+    '});',
   ].join('\n');
 }

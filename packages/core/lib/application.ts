@@ -6,11 +6,11 @@ import { GM } from './graphql-modules';
 import { addValidationToSchema } from './input-validation/input-schema';
 
 export interface Options {
-  modules: Array<Record<string, unknown>>;
+  modules: Record<string, unknown>[];
   pruneSchema?: boolean;
 }
 
-function transformSchema(schema: GraphQLSchema, modules: Array<SdkModule<unknown>>) {
+function transformSchema(schema: GraphQLSchema, modules: SdkModule<unknown>[]) {
   let rebuiltSchema = schema;
 
   for (const module of modules) {
@@ -21,7 +21,7 @@ function transformSchema(schema: GraphQLSchema, modules: Array<SdkModule<unknown
 }
 
 export function createApplication(options: Options) {
-  const modules = options.modules as Array<SdkModule<unknown>>;
+  const modules = options.modules as SdkModule<unknown>[];
   const builtModules = modules.map((module) => module.__build());
 
   const app = GM.createGMApplication({

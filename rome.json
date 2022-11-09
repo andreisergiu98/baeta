@@ -1,0 +1,23 @@
+{
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "nursery": {
+        "noExplicitAny": "error"
+      }
+    },
+    "ignore": [
+      "./packages/*/dist/**",
+      "./plugins/*/dist/**",
+      "./tools/*/dist/**",
+      "./website/build/**",
+      "./website/.docusaurus/**",
+      "./packages/demo/**",
+      "./node_modules/**",
+      "./.yarn/**",
+      "./.pnp.cjs",
+      "./.pnp.loader.mjs"
+    ]
+  }
+}

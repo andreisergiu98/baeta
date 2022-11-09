@@ -15,14 +15,14 @@ function requireConfig(file: string, skipCache: boolean): Config | undefined {
   const req = createRequire(import.meta.url);
   const module = req.resolve(file);
   if (skipCache) {
-    delete req.cache[module];
+    req.cache[module] = undefined;
   }
   return req(module)?.default?.config;
 }
 
 export function loadConfig(skipCache = false) {
   registerCompiler();
-  const file = process.cwd() + '/baeta.ts';
+  const file = `${process.cwd()}/baeta.ts`;
   const config = requireConfig(file, skipCache);
 
   if (!config) {

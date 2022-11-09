@@ -21,7 +21,7 @@ type ResolverRegisterer<T> = ((resolver: T) => void) & {
   $use: (middleware: MiddlewareFromResolver<T>) => void;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// rome-ignore lint(nursery/noExplicitAny): TODO
 export function createResolverBuilder<T extends Resolver<any, any, any, any>>(
   type: string,
   field: string,

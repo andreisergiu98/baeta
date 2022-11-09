@@ -25,7 +25,7 @@ jobs:
         run: yarn install --no-immutable
 
       - name: Run linting
-        run: yarn lint
+        run: yarn linter:check
 
   prettier:
     name: Prettier check

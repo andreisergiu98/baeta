@@ -14,10 +14,10 @@ export function Time(props: Props) {
 
     if (props.value > 1000) {
       const seconds = props.value / 1000;
-      return seconds.toFixed(2) + 's';
+      return `${seconds.toFixed(2)}s`;
     }
 
-    return Math.round(props.value) + 'ms';
+    return `${Math.round(props.value)}ms`;
   }, [props.value]);
 
   if (!time) {

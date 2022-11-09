@@ -219,7 +219,7 @@ function ensureStartsWithSeparator(path: string) {
     ? path.replace(/^(..\/)|(.\/)/, '/')
     : path.startsWith('/')
     ? path
-    : '/' + path;
+    : `/${path}`;
 }
 
 /**

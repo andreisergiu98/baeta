@@ -4,7 +4,7 @@ type Constraint = { minFields?: number; maxFields?: number };
 
 function createFieldMessage(count: number) {
   const variant = count === 1 ? 'field' : 'fields';
-  return count + ' ' + variant;
+  return `${count} ${variant}`;
 }
 
 export function validate(arg: unknown, constraints: Constraint) {

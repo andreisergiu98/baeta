@@ -21,7 +21,7 @@ export function createGlobalSchemas(
   definition: GlobalSchemaDefinition,
   options: SchemaFileOptions
 ) {
-  const dir = options.root + '/prisma';
+  const dir = `${options.root}/prisma`;
 
   const files = [
     createSchemaFile(

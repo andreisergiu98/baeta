@@ -19,9 +19,9 @@
     "prepack": "cp package.json dist/package.json"
   },
   "dependencies": {
-    "@baeta/config": "workspace:^0.0.2",
+    "@baeta/config": "workspace:^",
     "@baeta/generator": "workspace:^",
-    "@baeta/plugin": "workspace:^0.0.7",
+    "@baeta/plugin": "workspace:^",
     "chalk": "^5.1.2",
     "chokidar": "^3.5.3",
     "cli-spinners": "^2.7.0",

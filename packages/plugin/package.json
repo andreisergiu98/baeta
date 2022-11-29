@@ -19,6 +19,9 @@
     "prepack": "prep --move dist",
     "postpack": "prep --clean"
   },
+  "dependencies": {
+    "@baeta/config": "workspace:^"
+  },
   "devDependencies": {
     "@types/node": "^18.11.9",
     "tsup": "^6.5.0",
@@ -39,8 +42,5 @@
         "types": "./index.d.ts"
       }
     }
-  },
-  "dependencies": {
-    "@baeta/config": "workspace:^0.0.2"
   }
 }

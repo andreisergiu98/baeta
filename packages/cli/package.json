@@ -1,6 +1,6 @@
 {
   "name": "@baeta/cli",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
@@ -19,9 +19,9 @@
     "prepack": "cp package.json dist/package.json"
   },
   "dependencies": {
-    "@baeta/config": "workspace:^0.0.1",
+    "@baeta/config": "workspace:^0.0.2",
     "@baeta/generator": "workspace:^",
-    "@baeta/plugin": "workspace:^0.0.6",
+    "@baeta/plugin": "workspace:^0.0.7",
     "chalk": "^5.1.2",
     "chokidar": "^3.5.3",
     "cli-spinners": "^2.7.0",

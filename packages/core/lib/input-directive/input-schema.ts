@@ -34,9 +34,7 @@ export type ValidateParams<Context = unknown> = {
   info: GraphQLResolveInfo;
 };
 
-export type ValidateFn = <Context>(
-  params: ValidateParams<Context>
-) => void | Promise<void>;
+export type ValidateFn = <Context>(params: ValidateParams<Context>) => void | Promise<void>;
 
 function isInputObjectType(type: GraphQLNamedType): type is GraphQLInputObjectType {
   return type.astNode?.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION;
@@ -166,9 +164,7 @@ async function validateObjectType(
   type: GraphQLInputObjectType,
   validations: ValidationOptions[] = []
 ) {
-  const withInputValidations = validations.concat(
-    getValidationsFromExtension(type) ?? []
-  );
+  const withInputValidations = validations.concat(getValidationsFromExtension(type) ?? []);
   const objectValidations = withInputValidations.filter(
     (validation) => validation.target === 'object'
   );
@@ -318,9 +314,7 @@ async function validateFieldArguments(
   }
 }
 
-function wrapValidatedFieldResolvers(
-  fieldsWithArguments: GraphQLField<unknown, unknown>[]
-) {
+function wrapValidatedFieldResolvers(fieldsWithArguments: GraphQLField<unknown, unknown>[]) {
   const fieldsToValidate = fieldsWithArguments.filter((field) => {
     if (hasArgumentValidationsExtension(field)) {
       return true;

@@ -1,71 +1,63 @@
+import { GraphQLFieldResolver } from 'graphql';
 import { Resolver } from '../lib';
-import { GM } from '../lib/graphql-modules';
 import { nameFunction } from '../utils/functions';
-import { ManagerOptions } from './manager';
 import {
   createMiddlewareBuilder,
-  createObjectTypeMiddlewareBuilder,
   MiddlewareFromResolver,
+  MiddlewareFromResolvers,
 } from './middleware';
+import { ModuleBuilder } from './module';
 
 export type WithIndex<T> = T & Record<string, unknown>;
 export type ResolversObject<T> = WithIndex<T>;
-
-export type OnResolver = (
-  type: string,
-  field: string,
-  resolver: Resolver<unknown>
-) => void;
-
-type ResolverRegisterer<T> = ((resolver: T) => void) & {
-  $use: (middleware: MiddlewareFromResolver<T>) => void;
-};
+export type NativeResolver = GraphQLFieldResolver<unknown, unknown>;
 
 // rome-ignore lint(nursery/noExplicitAny): TODO
-export function createResolverBuilder<T extends Resolver<any, any, any, any>>(
+type GenericResolver = Resolver<any, any, any, any>;
+
+export function createResolverBuilder<T extends GenericResolver>(
+  module: ModuleBuilder,
   type: string,
-  field: string,
-  options: ManagerOptions
-): ResolverRegisterer<T> {
+  field: string
+) {
   const builder = (resolver: T) => {
-    nameFunction(resolver, `${type}.${field}`);
-    options.onResolver(type, field, resolver);
+    registerResolver(module, type, field, resolver);
   };
 
-  builder.$use = createMiddlewareBuilder(type, field, options);
-
+  builder.$use = createMiddlewareBuilder<MiddlewareFromResolver<T>>(module, type, field);
+  builder.$scopes = {} as any;
+  builder.$defineScope = (a: any, b: any) => {};
+  builder.$defaultScope = (a: any, b: any) => {};
   return builder;
 }
 
-export function createResolversBuilder<Resolvers, ResolversType>(
-  name: string,
-  options: ManagerOptions,
+function registerResolver(
+  module: ModuleBuilder,
+  type: string,
+  field: string,
+  resolver: GenericResolver
+) {
+  nameFunction(resolver, `${type}.${field}`);
+  module.onResolver(type, field, createAdapter(resolver));
+}
+
+function createAdapter(resolver: GenericResolver): NativeResolver {
+  return function adapter(root, args, ctx, info) {
+    return resolver({ root, args, ctx, info });
+  };
+}
+
+export function aggregateResolvers<Resolvers, ResolversType>(
+  module: ModuleBuilder,
+  type: string,
   _type: ResolversType,
   resolvers: Resolvers
 ) {
   return {
     ...resolvers,
-    $use: createObjectTypeMiddlewareBuilder<ResolversType>(name, options),
+    $use: createMiddlewareBuilder<MiddlewareFromResolvers<Resolvers>>(module, type, '*'),
+    $scopes: {} as any,
+    $defineScope: (a: any, b: any) => {},
+    $defaultScope: (a: any, b: any) => {},
   };
-}
-
-function normalizeResolver<T>(resolver: Resolver<T>) {
-  const normalizedResolver: GM.Resolver<unknown> = (root, args, ctx, info) => {
-    return resolver({ root, args, ctx, info });
-  };
-  return normalizedResolver;
-}
-
-export type ResolversMap = Record<string, Record<string, unknown>>;
-
-export function addResolver(
-  map: ResolversMap,
-  type: string,
-  field: string,
-  resolver: Resolver<unknown>
-) {
-  if (map[type] == null) {
-    map[type] = {};
-  }
-  map[type][field] = normalizeResolver(resolver);
 }

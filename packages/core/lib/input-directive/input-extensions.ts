@@ -28,9 +28,7 @@ export type ValidateExtension = {
   validate: true;
 };
 
-function initValidationsExtension(
-  config: GraphQLInputObjectType | GraphQLInputFieldConfig
-) {
+function initValidationsExtension(config: GraphQLInputObjectType | GraphQLInputFieldConfig) {
   if (config.extensions?.validations == null) {
     Object.defineProperty(config.extensions, 'validations', {
       value: [],
@@ -40,9 +38,7 @@ function initValidationsExtension(
   return config.extensions as ValidationsExtension;
 }
 
-function initArgumentValidationsExtension(
-  config: GraphQLFieldConfig<unknown, unknown, unknown>
-) {
+function initArgumentValidationsExtension(config: GraphQLFieldConfig<unknown, unknown, unknown>) {
   if (config.extensions?.argumentValidations == null) {
     Object.defineProperty(config.extensions, 'argumentValidations', {
       value: {},
@@ -84,23 +80,17 @@ export function hasValidateExtension(type: GraphQLNamedInputType) {
   return extension?.validate === true;
 }
 
-export function hasValidationsExtension(
-  type: GraphQLInputObjectType | GraphQLInputField
-) {
+export function hasValidationsExtension(type: GraphQLInputObjectType | GraphQLInputField) {
   const extension = type.extensions as Maybe<ValidationsExtension>;
   return extension?.validations != null;
 }
 
-export function hasArgumentValidationsExtension(
-  type: GraphQLField<unknown, unknown, unknown>
-) {
+export function hasArgumentValidationsExtension(type: GraphQLField<unknown, unknown, unknown>) {
   const extension = type.extensions as Maybe<ArgumentValidationsExtension>;
   return extension?.argumentValidations != null;
 }
 
-export function getValidationsFromExtension(
-  type: GraphQLInputField | GraphQLInputObjectType
-) {
+export function getValidationsFromExtension(type: GraphQLInputField | GraphQLInputObjectType) {
   const extension = type.extensions as Maybe<ValidationsExtension>;
   return extension?.validations;
 }

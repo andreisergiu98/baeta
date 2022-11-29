@@ -15,10 +15,7 @@ type ValidationDirectiveFnParams<DirectiveConfig, Context> = ValidateParams<Cont
   setValue: (newValue: unknown) => void;
 };
 
-export type ValidationDirectiveFn<
-  DirectiveConfig = Record<string, unknown>,
-  Context = unknown
-> = (
+export type ValidationDirectiveFn<DirectiveConfig = Record<string, unknown>, Context = unknown> = (
   params: ValidationDirectiveFnParams<DirectiveConfig, Context>
 ) => void | Promise<void>;
 
@@ -49,10 +46,7 @@ function getObjectSelector(args: Record<string, unknown>, path: Array<string | n
   return { get, set };
 }
 
-function createMutateValueFn(
-  args: Record<string, unknown>,
-  path: Array<string | number>
-) {
+function createMutateValueFn(args: Record<string, unknown>, path: Array<string | number>) {
   return (newValue: unknown) => {
     const selector = getObjectSelector(args, path);
     selector?.set(newValue);

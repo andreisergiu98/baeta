@@ -1,98 +1,102 @@
-import { DocumentNode, GraphQLSchema } from 'graphql';
-import { Middleware, Resolver, ScalarResolver } from '../lib';
-import { GM } from '../lib/graphql-modules';
-import { SubscriptionObjectWithoutPayload } from '../lib/subscription';
-import { SchemaTransformer, transformSchema } from './directive';
-import { ManagerOptions } from './manager';
-import { addMiddleware, MiddlewaresMap } from './middleware';
-import { addResolver, ResolversMap } from './resolver';
-import { addScalar } from './scalar';
-import { addSubscription } from './subscription';
+import { composeResolvers, ResolversComposerMapping } from '@graphql-tools/resolvers-composition';
+import { DocumentNode, GraphQLFieldResolver, GraphQLSchema } from 'graphql';
+import { ScalarResolver } from '../lib';
+import {
+  createMiddlewareBuilder,
+  MiddlewareFromResolverObject,
+  NativeMiddleware,
+} from './middleware';
+import { NativeSubscribe } from './subscription';
+import { SchemaTransformer, transformSchema } from './transformer';
 
-export interface Module<T> {
+// rome-ignore lint(nursery/noExplicitAny): TODO
+export type ResolversMap = Record<string, any>;
+
+export interface ModuleMetadata<T> {
   id: string;
   dirname: string;
   typedef: DocumentNode;
-  createManager: (options: ManagerOptions) => T;
+  createManager: (builder: ModuleBuilder) => T;
+}
+export class ModuleBuilder {
+  private resolvers: ResolversMap = {};
+  private middlewares: Record<string, NativeMiddleware[]> = {};
+  private transformers: SchemaTransformer[] = [];
+
+  constructor(
+    public readonly id: string,
+    public readonly dirname: string,
+    private readonly typedef: DocumentNode
+  ) {}
+
+  onResolver = (type: string, field: string, resolver: GraphQLFieldResolver<unknown, unknown>) => {
+    if (this.resolvers[type] == null) {
+      this.resolvers[type] = {};
+    }
+    this.resolvers[type][field] = resolver;
+  };
+
+  onScalar = (scalar: string, resolver: ScalarResolver) => {
+    if (this.resolvers[scalar] == null) {
+      this.resolvers[scalar] = {};
+    }
+    this.resolvers[scalar] = resolver;
+  };
+
+  onSubscription = (field: string, resolver: NativeSubscribe) => {
+    if (this.resolvers.Subscription == null) {
+      this.resolvers.Subscription = {};
+    }
+    this.resolvers.Subscription[field] = resolver;
+  };
+
+  onMiddleware = (type: string, field: string, middleware: NativeMiddleware) => {
+    const key = `${type}.${field}`;
+    if (this.middlewares[key] == null) {
+      this.middlewares[key] = [];
+    }
+    this.middlewares[key].push(middleware);
+  };
+
+  onDirective = (transformer: SchemaTransformer) => {
+    this.transformers.push(transformer);
+  };
+
+  transform = (schema: GraphQLSchema) => {
+    return transformSchema(schema, this.transformers);
+  };
+
+  build = () => {
+    const withMiddlewares = composeResolvers(
+      this.resolvers,
+      this.middlewares as ResolversComposerMapping
+    );
+    return {
+      resolvers: withMiddlewares,
+      typedef: this.typedef,
+      transform: this.transform,
+    };
+  };
 }
 
-export type SdkModule<T> = T & {
-  __build: () => GM.GMModule;
-  __transformSchema: (schema: GraphQLSchema) => GraphQLSchema;
-};
-
-interface ExtendOptions {
-  module: Module<unknown>;
-  resolvers: ResolversMap;
-  middlewares: MiddlewaresMap;
-  transformers: SchemaTransformer[];
+export function getModuleBuilder(module: Record<string, unknown>) {
+  if (module.$module instanceof ModuleBuilder) {
+    return module.$module;
+  }
+  throw new Error('Invalid module', module);
 }
 
-function extendManager<T>(manager: T, options: ExtendOptions): T {
-  const { module, resolvers, middlewares, transformers } = options;
-  const extended = manager as SdkModule<T>;
-
-  extended.__build = () => {
-    return GM.createGMModule({
-      id: module.id,
-      typeDefs: module.typedef,
-      dirname: module.dirname,
-      resolvers,
-      middlewares: middlewares as GM.GMMiddlewareMap,
-    });
+export function aggregateBuilders<Map, Resolvers extends {}>(
+  module: ModuleBuilder,
+  _type: Resolvers,
+  map: Map
+) {
+  return {
+    ...map,
+    $use: createMiddlewareBuilder<MiddlewareFromResolverObject<Resolvers>>(module, '*', '*'),
+    $module: module,
+    $directive: module.onDirective,
   };
-
-  extended.__transformSchema = (schema) => {
-    return transformSchema(schema, transformers);
-  };
-
-  return extended;
-}
-
-export function createModule<T>(module: Module<T>) {
-  const resolvers: ResolversMap = {};
-  const middlewares: MiddlewaresMap = {};
-  const transformers: SchemaTransformer[] = [];
-
-  const onScalar = (scalar: string, resolver: ScalarResolver) => {
-    addScalar(resolvers, scalar, resolver);
-  };
-
-  const onResolver = (type: string, field: string, resolver: Resolver<unknown>) => {
-    addResolver(resolvers, type, field, resolver);
-  };
-
-  const onSubscription = (
-    field: string,
-    subscription: SubscriptionObjectWithoutPayload<unknown>
-  ) => {
-    addSubscription(resolvers, field, subscription);
-  };
-
-  const onMiddleware = (type: string, field: string, resolver: Middleware<unknown>) => {
-    addMiddleware(middlewares, type, field, resolver);
-  };
-
-  const onDirective = (transformer: SchemaTransformer) => {
-    transformers.push(transformer);
-  };
-
-  const manager = module.createManager({
-    onScalar,
-    onResolver,
-    onMiddleware,
-    onSubscription,
-    onDirective,
-  });
-
-  extendManager(manager, {
-    module,
-    resolvers,
-    middlewares,
-    transformers,
-  });
-
-  return manager;
 }
 
 export function createSingletonModule<T>(create: () => T) {
@@ -103,4 +107,14 @@ export function createSingletonModule<T>(create: () => T) {
     }
     return module;
   };
+}
+
+export function createModuleManager<T>(moduleMetadata: ModuleMetadata<T>) {
+  const moduleBuilder = new ModuleBuilder(
+    moduleMetadata.id,
+    moduleMetadata.dirname,
+    moduleMetadata.typedef
+  );
+  const manager = moduleMetadata.createManager(moduleBuilder);
+  return manager as Omit<T, 'module'>;
 }

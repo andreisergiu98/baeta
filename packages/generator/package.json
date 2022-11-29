@@ -29,7 +29,7 @@
     "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.9",
     "graphql": "^16.6.0",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.3"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",

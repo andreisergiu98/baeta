@@ -1,16 +1,19 @@
+import { GraphQLFieldResolver } from 'graphql';
 import { FilterFn, ResolverFn, withFilter } from 'graphql-subscriptions';
-import { GM } from '../lib/graphql-modules';
 import {
-  SubscriptionFilterFn,
-  SubscriptionObjectWithoutPayload,
-  SubscriptionObjectWithPayload,
-  SubscriptionResolveFn,
+  Subscribe,
+  SubscribeFilter,
+  SubscribeResolve,
+  Subscription,
   SubscriptionResolver,
-  SubscriptionSubscribeFn,
 } from '../lib/subscription';
 import { nameFunction } from '../utils/functions';
-import { ManagerOptions } from './manager';
-import { ResolversMap } from './resolver';
+import { ModuleBuilder } from './module';
+
+export type NativeSubscribe = {
+  subscribe: GraphQLFieldResolver<{}, {}>;
+  resolve?: GraphQLFieldResolver<{}, {}>;
+};
 
 export type SubscriptionOptions<Payload, Sub> = Sub extends SubscriptionResolver<
   infer Result,
@@ -19,113 +22,87 @@ export type SubscriptionOptions<Payload, Sub> = Sub extends SubscriptionResolver
   infer Context,
   infer Args
 >
-  ? Payload extends Result
-    ? SubscriptionObjectWithoutPayload<Result, Root, Context, Args>
-    : SubscriptionObjectWithPayload<Result, Payload, Root, Context, Args>
+  ? Subscription<Payload, Result, Root, Context, Args>
   : never;
 
-function normalizeSubscribe<Payload>(
-  subscribe: SubscriptionSubscribeFn<Payload>,
-  filter?: SubscriptionFilterFn<Payload>
+export function createSubscriptionBuilder<Subscription>(module: ModuleBuilder, field: string) {
+  const builder = <Payload>(subscription: SubscriptionOptions<Payload, Subscription>) => {
+    registerSubscription(module, field, subscription);
+  };
+  return builder;
+}
+
+function registerSubscription<Payload, Subscription>(
+  module: ModuleBuilder,
+  field: string,
+  subscription: SubscriptionOptions<Payload, Subscription>
 ) {
-  const normalizedSubscribe: ResolverFn = (root, args, context, info) => {
-    return subscribe({
+  nameFunction(subscription.subscribe, `${field}.subscribe`);
+  nameFunction(subscription.resolve, `${field}.resolve`);
+  nameFunction(subscription.filter, `${field}.filter`);
+
+  const resolver: NativeSubscribe = {
+    subscribe: createSubscribeAdapter(subscription.subscribe, subscription.filter),
+  };
+
+  if (subscription.resolve != null) {
+    resolver.resolve = createResolverAdapter(subscription.resolve);
+  }
+
+  module.onSubscription(field, resolver);
+}
+
+function createSubscribeAdapter<Payload>(
+  subscribe: Subscribe<Payload>,
+  filter?: SubscribeFilter<Payload>
+) {
+  const adapter: ResolverFn = (root, args, context, info) => {
+    const params = {
       root,
       args,
       ctx: context,
       info,
-    });
+    };
+    return subscribe(params);
   };
 
-  const normalizedFilter = normalizeFilter(filter);
-
-  if (normalizedFilter == null) {
-    return normalizedSubscribe;
-  }
-
-  return withFilter(normalizedSubscribe, normalizedFilter);
-}
-
-function normalizeFilter<Payload>(filter?: SubscriptionFilterFn<Payload>) {
   if (filter == null) {
-    return;
+    return adapter;
   }
 
-  const normalizedFilter: FilterFn = (payload, args, context, info) => {
-    return filter({
+  return withFilter(adapter, createFilterAdapter(filter));
+}
+
+function createFilterAdapter<Payload>(filter: SubscribeFilter<Payload>): FilterFn {
+  return function adapter(payload, args, context, info) {
+    const params = {
       payload,
       args,
       info,
       ctx: context,
-    });
+    };
+    return filter(params);
   };
-
-  return normalizedFilter;
 }
 
-function normalizeResolver<Payload>(resolve?: SubscriptionResolveFn<unknown, Payload>) {
-  if (resolve == null) {
-    return;
-  }
-
-  const normalizedResolver: GM.Resolver<unknown, Payload> = (
-    payload: Payload,
-    args,
-    context,
-    info
-  ) => {
-    return resolve({
-      payload,
+function createResolverAdapter<Payload>(
+  resolve: SubscribeResolve<unknown, Payload>
+): GraphQLFieldResolver<unknown, {}> {
+  return function adapter(payload, args, context, info) {
+    const params = {
       args,
       info,
       ctx: context,
-    });
+      payload: payload as Payload,
+    };
+    return resolve(params);
   };
-
-  return normalizedResolver;
 }
 
-export type OnSubscription = (
-  field: string,
-  options: SubscriptionObjectWithoutPayload<unknown>
-) => void;
-
-export function createSubscriptionBuilder<Subscription>(
-  field: string,
-  options: ManagerOptions
-) {
-  const builder = <Payload>(subscription: SubscriptionOptions<Payload, Subscription>) => {
-    nameFunction(subscription.subscribe, `${field}.subscribe`);
-    nameFunction(subscription.resolve, `${field}.resolve`);
-    nameFunction(subscription.filter, `${field}.filter`);
-    options.onSubscription(
-      field,
-      subscription as SubscriptionObjectWithoutPayload<unknown>
-    );
-  };
-
-  return builder;
-}
-
-export function createSubscriptionsBuilder<Resolvers, ResolversType>(
-  options: ManagerOptions,
+export function aggregateSubscriptions<Resolvers, ResolversType>(
+  module: ModuleBuilder,
   _type: ResolversType,
   resolvers: Resolvers
 ) {
   return resolvers;
-}
-
-export function addSubscription(
-  map: ResolversMap,
-  field: string,
-  subscription: SubscriptionObjectWithoutPayload<unknown>
-) {
-  const subscribe = normalizeSubscribe(subscription.subscribe, subscription.filter);
-  const resolve = normalizeResolver(subscription.resolve);
-
-  if (map.Subscription == null) {
-    map.Subscription = {};
-  }
-
-  map.Subscription[field] = { subscribe, resolve };
 }

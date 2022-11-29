@@ -1,66 +1,44 @@
 import { GraphQLResolveInfo } from 'graphql';
 
-export type SubscriptionSubscribeParams<Root, Context, Args> = {
+export type Subscribe<Payload, Root = {}, Context = {}, Args = {}> = (
+  params: SubscribeParams<Root, Context, Args>
+) => AsyncIterator<Payload>;
+
+export type SubscribeParams<Root, Context, Args> = {
   root: Root;
   args: Args;
   ctx: Context;
   info: GraphQLResolveInfo;
 };
 
-export type SubscriptionSubscribeFn<Payload, Root = {}, Context = {}, Args = {}> = (
-  params: SubscriptionSubscribeParams<Root, Context, Args>
-) => AsyncIterator<Payload>;
-
-export type SubscriptionResolveParams<Payload, Context, Args> = {
-  payload: Payload;
-  args: Args;
-  ctx: Context;
-  info: GraphQLResolveInfo;
-};
-
-export type SubscriptionResolveFn<Result, Payload, Context = {}, Args = {}> = (
-  params: SubscriptionResolveParams<Payload, Context, Args>
+export type SubscribeResolve<Result, Payload, Context = {}, Args = {}> = (
+  params: SubscribeResolveParams<Payload, Context, Args>
 ) => Result | Promise<Result>;
 
-export type SubscriptionFilterParams<Payload, Context, Args> = {
+export type SubscribeResolveParams<Payload, Context, Args> = {
   payload: Payload;
   args: Args;
   ctx: Context;
   info: GraphQLResolveInfo;
 };
 
-export type SubscriptionFilterFn<Payload, Context = {}, Args = {}> = (
-  params: SubscriptionFilterParams<Payload, Context, Args>
+export type SubscribeFilter<Payload, Context = {}, Args = {}> = (
+  params: SubscribeFilterParams<Payload, Context, Args>
 ) => boolean | Promise<boolean>;
 
-export type SubscriptionObjectWithoutPayload<
-  Result,
-  Root = {},
-  Context = {},
-  Args = {}
-> = {
-  subscribe: SubscriptionSubscribeFn<Result, Root, Context, Args>;
-  resolve?: SubscriptionResolveFn<Result, Result, Context, Args>;
-  filter?: SubscriptionFilterFn<Result, Context, Args>;
+export type SubscribeFilterParams<Payload, Context, Args> = {
+  payload: Payload;
+  args: Args;
+  ctx: Context;
+  info: GraphQLResolveInfo;
 };
 
-export type SubscriptionObjectWithPayload<
-  Result,
-  Payload,
-  Root = {},
-  Context = {},
-  Args = {}
-> = {
-  subscribe: SubscriptionSubscribeFn<Payload, Root, Context, Args>;
-  resolve: <A extends Result>(
-    params: SubscriptionResolveParams<A & Result, Context, Args>
-  ) => A | Promise<A>;
-  filter?: <A extends Result>(
-    params: SubscriptionFilterParams<A & Result, Context, Args>
-  ) => boolean | Promise<boolean>;
+export type Subscription<Payload, Result, Root = {}, Context = {}, Args = {}> = {
+  subscribe: Subscribe<Payload, Root, Context, Args>;
+  filter?: SubscribeFilter<Payload, Context, Args>;
+  resolve?: SubscribeResolve<Result, Payload, Context, Args>;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export type SubscriptionResolver<Result, Key extends string, Root, Context, Args> = {
-  subscribe: SubscriptionSubscribeFn<Result, Root, Context, Args>;
+export type SubscriptionResolver<Result, Key extends string, Root = {}, Context = {}, Args = {}> = {
+  subscribe: Subscribe<Result, Root, Context, Args>;
 };

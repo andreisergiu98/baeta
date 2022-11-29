@@ -24,7 +24,7 @@
     "@baeta/generator": "workspace:^",
     "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.9",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.3"
   },
   "files": [
     "*.js",

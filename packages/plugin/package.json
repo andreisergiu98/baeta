@@ -14,28 +14,24 @@
   },
   "type": "module",
   "scripts": {
-    "prepack": "yarn prep --move dist",
-    "postpack": "yarn prep --clean",
-    "build": "yarn tsup --dts",
-    "lint": "yarn eslint './**/*.ts'"
+    "build": "tsup --dts",
+    "types": "tsc --noEmit",
+    "prepack": "prep --move dist",
+    "postpack": "prep --clean"
   },
   "devDependencies": {
-    "@baeta/core": "workspace:^",
-    "@baeta/eslint-config": "workspace:^",
-    "@baeta/generator": "workspace:^",
-    "@baeta/prep": "workspace:^",
-    "@types/node": "^18.7.23",
-    "eslint": "^8.24.0",
-    "typescript": "^4.8.3"
+    "@types/node": "^18.11.9",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3"
   },
   "files": [
     "*.js",
     "*.cjs",
-    "*.d.ts",
-    "!.eslintrc.cjs"
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
+    "directory": "dist",
     "exports": {
       ".": {
         "import": "./index.js",
@@ -43,5 +39,8 @@
         "types": "./index.d.ts"
       }
     }
+  },
+  "dependencies": {
+    "@baeta/config": "workspace:^0.0.1"
   }
 }

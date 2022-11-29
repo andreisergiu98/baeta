@@ -14,40 +14,36 @@
   },
   "type": "module",
   "scripts": {
-    "prepack": "yarn prep --move dist",
-    "postpack": "yarn prep --clean",
-    "build": "yarn tsup --dts",
-    "lint": "yarn eslint './**/*.{ts,tsx}'"
+    "build": "tsup",
+    "types": "tsc --noEmit",
+    "prepack": "cp package.json dist/package.json"
   },
   "dependencies": {
+    "@baeta/config": "workspace:^0.0.1",
     "@baeta/generator": "workspace:^",
-    "chalk": "^5.0.1",
+    "@baeta/plugin": "workspace:^0.0.6",
+    "chalk": "^5.1.2",
     "chokidar": "^3.5.3",
     "cli-spinners": "^2.7.0",
     "ink": "^3.2.0",
     "nanoid": "^4.0.0",
     "react": "^17.0.2",
-    "yargs": "^17.5.1"
-  },
-  "devDependencies": {
-    "@baeta/core": "workspace:^",
-    "@baeta/eslint-config": "workspace:^",
-    "@baeta/prep": "workspace:^",
-    "@types/node": "^18.7.23",
-    "@types/react": "^18.0.21",
-    "@types/yargs": "^17.0.13",
-    "eslint": "^8.24.0",
-    "eslint-plugin-react": "^7.31.8",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "graphql": "^16.6.0",
-    "typescript": "^4.8.3"
+    "yargs": "^17.6.2"
   },
   "peerDependencies": {
-    "@baeta/core": "workspace:^",
     "graphql": "^15.3.0 || ^16.0.0"
   },
   "optionalDependencies": {
     "@baeta/compiler": "workspace:^"
+  },
+  "devDependencies": {
+    "@baeta/core": "workspace:^",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/yargs": "^17.0.15",
+    "graphql": "^16.6.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3"
   },
   "bin": {
     "baeta": "./bin/cli-dev.cjs"
@@ -55,11 +51,11 @@
   "files": [
     "*.js",
     "*.cjs",
-    "*.d.ts",
-    "!.eslintrc.cjs"
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
+    "directory": "dist",
     "bin": {
       "baeta": "./cli.js"
     }

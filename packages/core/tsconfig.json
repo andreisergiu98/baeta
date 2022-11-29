@@ -2,8 +2,7 @@
   "extends": "../../config/tsconfig.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "dist",
-    "esModuleInterop": true
+    "outDir": "dist"
   },
   "exclude": ["dist"]
 }

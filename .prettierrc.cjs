@@ -1,6 +1,6 @@
 module.exports = {
   singleQuote: true,
-  printWidth: 90,
+  printWidth: 100,
   overrides: [
     {
       files: ['.vscode/**/*.json'],

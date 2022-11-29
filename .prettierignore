@@ -7,3 +7,8 @@ node_modules
 ### build ###
 dist
 demo
+build
+.docusaurus
+
+### lockfile ###
+pnpm-lock.yaml

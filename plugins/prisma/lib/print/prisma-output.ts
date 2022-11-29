@@ -10,10 +10,7 @@ export function printPrismaOutput(outputType: DMMF.OutputType) {
   return printObject('type', outputType.name, content);
 }
 
-export function printPrismaOperation(
-  operations: ModelsOperationsMap,
-  field: DMMF.SchemaField
-) {
+export function printPrismaOperation(operations: ModelsOperationsMap, field: DMMF.SchemaField) {
   const operation = operations[field.name];
 
   if (!operation) {

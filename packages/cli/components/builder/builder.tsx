@@ -1,6 +1,6 @@
-import type { Config } from '@baeta/core/lib';
 import { useApp } from 'ink';
 import React, { useCallback, useEffect, useState } from 'react';
+import type { BaetaOptions } from '../../lib/config';
 import { useConfig } from '../../providers/ConfigProvider';
 import { AppOutput } from '../app';
 import { WithGenerator } from '../generator';
@@ -29,7 +29,7 @@ export function Builder(props: Props) {
   const [buildTime, setBuildTime] = useState(0);
 
   const handler = useCallback(
-    async (config?: Config) => {
+    async (config?: BaetaOptions) => {
       const build = await importCompiler();
 
       if (config?.compiler == null) {

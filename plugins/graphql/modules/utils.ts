@@ -27,10 +27,7 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
   function findRelated(
     node: DefinitionNode | FieldDefinitionNode | InputValueDefinitionNode | NamedTypeNode
   ) {
-    if (
-      node.kind === Kind.OBJECT_TYPE_DEFINITION ||
-      node.kind === Kind.OBJECT_TYPE_EXTENSION
-    ) {
+    if (node.kind === Kind.OBJECT_TYPE_DEFINITION || node.kind === Kind.OBJECT_TYPE_EXTENSION) {
       // Object
       markAsUsed(node.name.value);
 
@@ -75,10 +72,7 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
       if (node.types) {
         node.types.forEach(findRelated);
       }
-    } else if (
-      node.kind === Kind.ENUM_TYPE_DEFINITION ||
-      node.kind === Kind.ENUM_TYPE_EXTENSION
-    ) {
+    } else if (node.kind === Kind.ENUM_TYPE_DEFINITION || node.kind === Kind.ENUM_TYPE_EXTENSION) {
       // Enum
       markAsUsed(node.name.value);
     } else if (
@@ -219,7 +213,7 @@ function ensureStartsWithSeparator(path: string) {
     ? path.replace(/^(..\/)|(.\/)/, '/')
     : path.startsWith('/')
     ? path
-    : '/' + path;
+    : `/${path}`;
 }
 
 /**

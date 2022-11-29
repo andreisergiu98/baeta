@@ -1,16 +1,15 @@
 {
-  "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
+  "search.exclude": {},
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.turbo": true
   },
-  "eslint.nodePath": ".yarn/sdks",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
   "cSpell.words": [
     "baeta",
     "callsite",
     "camelcase",
+    "clsx",
     "codegen",
     "Datamodel",
     "dirpath",

@@ -37,10 +37,7 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
         avoidOptionals: getConfigValue(pluginConfig.avoidOptionals, false),
         useIndexSignature: getConfigValue(pluginConfig.useIndexSignature, false),
         wrapFieldDefinitions: getConfigValue(pluginConfig.wrapFieldDefinitions, false),
-        allowParentTypeOverride: getConfigValue(
-          pluginConfig.allowParentTypeOverride,
-          false
-        ),
+        allowParentTypeOverride: getConfigValue(pluginConfig.allowParentTypeOverride, false),
         optionalInfoArgument: getConfigValue(pluginConfig.optionalInfoArgument, false),
       } as ParsedTypeScriptResolversConfig,
       schema
@@ -82,10 +79,11 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
     declarationKind: DeclarationKind
   ): string {
     const avoidOptionals =
+      // @ts-expect-error
       this.config.avoidOptionals?.resolvers ?? this.config.avoidOptionals === true;
-    return `${schemaTypeName}${
-      avoidOptionals ? '' : '?'
-    }: ${resolverType}${this.getPunctuation(declarationKind)}`;
+    return `${schemaTypeName}${avoidOptionals ? '' : '?'}: ${resolverType}${this.getPunctuation(
+      declarationKind
+    )}`;
   }
 
   private clearOptional(str: string): string {
@@ -105,10 +103,7 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
   }
 
   protected getParentTypeForSignature(node: FieldDefinitionNode) {
-    if (
-      this._federation.isResolveReferenceField(node) &&
-      this.config.wrapFieldDefinitions
-    ) {
+    if (this._federation.isResolveReferenceField(node) && this.config.wrapFieldDefinitions) {
       return 'UnwrappedObject<ParentType>';
     }
     return 'ParentType';
@@ -134,10 +129,7 @@ export class TypeScriptResolversVisitor extends BaseResolversVisitor<
     mappedEnumType: string
   ): string {
     const valuesMap = `{ ${(node.values || [])
-      .map(
-        (v) =>
-          `${v.name as unknown as string}${this.config.avoidOptionals ? '' : '?'}: any`
-      )
+      .map((v) => `${v.name as unknown as string}${this.config.avoidOptionals ? '' : '?'}: any`)
       .join(', ')} }`;
 
     this._globalDeclarations.add(ENUM_RESOLVERS_SIGNATURE);

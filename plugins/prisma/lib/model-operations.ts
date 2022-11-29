@@ -15,10 +15,7 @@ export function createModelsOperationsMaps(dmmf: DMMF.Document) {
     .reduce((a, b) => ({ ...a, ...b }));
 }
 
-export function findModelByOperationSchema(
-  map: ModelsOperationsMap,
-  schema: DMMF.SchemaField
-) {
+export function findModelByOperationSchema(map: ModelsOperationsMap, schema: DMMF.SchemaField) {
   return map[schema.name]?.model;
 }
 

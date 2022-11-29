@@ -49,7 +49,7 @@ export function createResolversBuilder(store: Store, options: GenerateOptions) {
       const model = findModelByOperationSchema(operationsMap, field);
       const operations = operationsMap[field.name];
 
-      if (!model || !operations) {
+      if (!(model && operations)) {
         continue;
       }
 

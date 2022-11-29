@@ -28,12 +28,7 @@ export function printRelationResolver(
   return printFunction(model, relation.name, instruction, true);
 }
 
-function printFunction(
-  namespace: string,
-  func: string,
-  content: string,
-  rootArg = false
-) {
+function printFunction(namespace: string, func: string, content: string, rootArg = false) {
   const args = ['args', 'ctx'];
 
   if (rootArg) {
@@ -43,6 +38,6 @@ function printFunction(
   return [
     `${upperCaseFirst(namespace)}.${func}(({ ${args.join(', ')} }) => {`,
     `  ${content}`,
-    `});`,
+    '});',
   ].join('\n');
 }

@@ -3,11 +3,11 @@ import { DMMF } from '@prisma/generator-helper';
 type VisitorInput<T> = (model: T) => void | Promise<void>;
 
 export interface Visitor {
-  model: Array<VisitorInput<DMMF.Model>>;
-  modelEnum: Array<VisitorInput<DMMF.DatamodelEnum>>;
-  schemaEnum: Array<VisitorInput<DMMF.SchemaEnum>>;
-  inputType: Array<VisitorInput<DMMF.InputType>>;
-  outputType: Array<VisitorInput<DMMF.OutputType>>;
+  model: VisitorInput<DMMF.Model>[];
+  modelEnum: VisitorInput<DMMF.DatamodelEnum>[];
+  schemaEnum: VisitorInput<DMMF.SchemaEnum>[];
+  inputType: VisitorInput<DMMF.InputType>[];
+  outputType: VisitorInput<DMMF.OutputType>[];
 }
 
 export type VisitorBuilder = ReturnType<typeof createVisitorBuilder>;
@@ -58,7 +58,7 @@ export function createVisitorBuilder() {
 function visitItem<T>(
   item: T,
   visitor: Visitor,
-  getInputs: (visitor: Visitor) => Array<VisitorInput<T>>
+  getInputs: (visitor: Visitor) => VisitorInput<T>[]
 ) {
   const handlers = getInputs(visitor);
   return handlers.map((handler) => handler(item));
@@ -67,7 +67,7 @@ function visitItem<T>(
 export function visitItems<T>(
   items: T[],
   visitors: Visitor[],
-  getInputs: (visitor: Visitor) => Array<VisitorInput<T>>
+  getInputs: (visitor: Visitor) => VisitorInput<T>[]
 ) {
   const promises: Array<void | Promise<void>> = [];
 
@@ -81,17 +81,9 @@ export function visitItems<T>(
 }
 
 export function visit(document: DMMF.Document, visitors: Visitor[]) {
-  const models = visitItems(
-    document.datamodel.models,
-    visitors,
-    (visitor) => visitor.model
-  );
+  const models = visitItems(document.datamodel.models, visitors, (visitor) => visitor.model);
 
-  const modelEnums = visitItems(
-    document.datamodel.enums,
-    visitors,
-    (visitor) => visitor.modelEnum
-  );
+  const modelEnums = visitItems(document.datamodel.enums, visitors, (visitor) => visitor.modelEnum);
 
   const inputTypes = visitItems(
     document.schema.inputObjectTypes.prisma,
@@ -111,9 +103,7 @@ export function visit(document: DMMF.Document, visitors: Visitor[]) {
     (visitor) => visitor.schemaEnum
   );
 
-  return Promise.all([models, modelEnums, inputTypes, outputTypes, enumTypes]).then(
-    () => {
-      // do nothing
-    }
-  );
+  return Promise.all([models, modelEnums, inputTypes, outputTypes, enumTypes]).then(() => {
+    // do nothing
+  });
 }

@@ -5,8 +5,8 @@ export function printPrismaModule() {
   ].join('\n');
 
   const content = [
-    `export const prismaModule = createPrismaModule();`,
-    `registerPrismaModule(prismaModule);`,
+    'export const prismaModule = createPrismaModule();',
+    'registerPrismaModule(prismaModule);',
   ].join('\n');
 
   return [imports, content].join('\n');

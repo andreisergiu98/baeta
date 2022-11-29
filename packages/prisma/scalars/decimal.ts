@@ -3,8 +3,7 @@ import { GraphQLScalarType } from 'graphql';
 
 export const DecimalJSScalar = new GraphQLScalarType({
   name: 'Decimal',
-  description:
-    'GraphQL Scalar representing the Decimal type, based on Decimal.js library.',
+  description: 'GraphQL Scalar representing the Decimal type, based on Decimal.js library.',
   serialize: (value: unknown) => {
     if (!Decimal.isDecimal(value)) {
       throw new Error(
@@ -17,9 +16,7 @@ export const DecimalJSScalar = new GraphQLScalarType({
   },
   parseValue: (value: unknown) => {
     if (!(typeof value === 'string')) {
-      throw new Error(
-        `[DecimalError] Invalid argument: ${typeof value}. Expected string.`
-      );
+      throw new Error(`[DecimalError] Invalid argument: ${typeof value}. Expected string.`);
     }
     return new Decimal(value);
   },

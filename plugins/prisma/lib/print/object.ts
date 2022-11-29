@@ -7,7 +7,7 @@ export function printObject(
   directive?: string
 ) {
   const directiveLine = directive ? ` ${directive}` : '';
-  const firstLine = kind + ' ' + name + directiveLine + ' {';
+  const firstLine = `${kind} ${name}${directiveLine} {`;
   const content = filterEmpty(fields).map(indent(2)).join('\n');
   const lastLine = '}';
 

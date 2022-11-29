@@ -1,6 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 
-export type Resolver<Result, Root = {}, Context = {}, Args = {}> = (
+export type Resolver<Result, Root = undefined, Context = undefined, Args = undefined> = (
   params: ResolverParams<Root, Context, Args>
 ) => Result | Promise<Result>;
 

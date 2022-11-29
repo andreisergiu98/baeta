@@ -1,50 +1,45 @@
-import { makeExecutableSchema } from '@graphql-tools/schema';
+import { mergeTypeDefs } from '@graphql-tools/merge';
+import { IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import { pruneSchema } from '@graphql-tools/utils';
-import { GraphQLSchema } from 'graphql';
-import { SdkModule } from '../sdk/module';
-import { GM } from './graphql-modules';
-import { addValidationToSchema } from './input-validation/input-schema';
+import { printSchema } from 'graphql';
+import { writeFile } from 'node:fs/promises';
+import { getModuleBuilder, transformSchema } from '../sdk';
+import { addValidationToSchema } from './input-directive/input-schema';
 
 export interface Options {
-  modules: Array<Record<string, unknown>>;
+  modules: Record<string, unknown>[];
   pruneSchema?: boolean;
-}
-
-function transformSchema(schema: GraphQLSchema, modules: Array<SdkModule<unknown>>) {
-  let rebuiltSchema = schema;
-
-  for (const module of modules) {
-    rebuiltSchema = module.__transformSchema(rebuiltSchema);
-  }
-
-  return rebuiltSchema;
+  printSchema?: boolean | string;
+  executableSchemaOptions?: Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
 }
 
 export function createApplication(options: Options) {
-  const modules = options.modules as Array<SdkModule<unknown>>;
-  const builtModules = modules.map((module) => module.__build());
+  const builders = options.modules.map((module) => getModuleBuilder(module));
+  const builtModules = builders.map((builder) => builder.build());
 
-  const app = GM.createGMApplication({
-    modules: builtModules,
-    schemaBuilder(input) {
-      let schema = makeExecutableSchema({
-        ...input,
-      });
-      if (pruneSchema) {
-        schema = pruneSchema(schema);
-      }
-      schema = transformSchema(schema, modules);
-      schema = addValidationToSchema(schema);
-      return schema;
-    },
+  const typeDefs = builtModules.map((b) => b.typedef);
+  const resolvers = builtModules.map((b) => b.resolvers).flat();
+  const transformers = builtModules.map((b) => b.transform).flat();
+
+  let schema = makeExecutableSchema({
+    ...options.executableSchemaOptions,
+    typeDefs: mergeTypeDefs(typeDefs),
+    resolvers,
   });
 
+  schema = transformSchema(schema, transformers);
+  schema = addValidationToSchema(schema);
+
+  if (options.pruneSchema) {
+    schema = pruneSchema(schema);
+  }
+
+  if (options.printSchema) {
+    const path = typeof options.printSchema === 'string' ? options.printSchema : 'schema.graphql';
+    writeFile(path, printSchema(schema), 'utf-8');
+  }
+
   return {
-    schema: app.schema,
-    typedef: app.typeDefs,
-    createApolloExecutor: app.createApolloExecutor,
-    createExecution: app.createExecution,
-    createOperationController: app.createOperationController,
-    createSubscription: app.createSubscription,
+    schema,
   };
 }

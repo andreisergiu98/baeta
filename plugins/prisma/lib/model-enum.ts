@@ -6,11 +6,11 @@ export function findModelByEnum(models: string[], enumType: DMMF.SchemaEnum) {
       continue;
     }
 
-    if (model + 'ScalarFieldEnum' === enumType.name) {
+    if (`${model}ScalarFieldEnum` === enumType.name) {
       return model;
     }
 
-    if (model + 'OrderByRelevanceFieldEnum' === enumType.name) {
+    if (`${model}OrderByRelevanceFieldEnum` === enumType.name) {
       return model;
     }
   }

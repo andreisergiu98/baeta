@@ -4,7 +4,7 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "noExplicitAny": "error"
+        "noExplicitAny": "off"
       }
     },
     "ignore": [

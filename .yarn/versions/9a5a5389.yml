@@ -1,8 +1,0 @@
-undecided:
-  - "@baeta/cli"
-  - "@baeta/compiler"
-  - "@baeta/core"
-  - "@baeta/generator"
-  - "@baeta/plugin"
-  - "@baeta/prisma"
-  - "@baeta/plugin-prisma"

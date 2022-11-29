@@ -1,4 +1,4 @@
-import { createPluginFactoryV1, GeneratorCtx } from '@baeta/plugin';
+import { createPluginFactoryV1 } from '@baeta/plugin';
 import { createContext, Store } from './lib/context';
 import { generate } from './lib/generator';
 import { Casing } from './utils/casing';
@@ -10,17 +10,16 @@ export interface PrismaPluginOptions {
   resolverExport?: boolean;
 }
 
-export type PrismaPluginCtx = GeneratorCtx<{
-  prisma: Store;
-}>;
-
-export default createPluginFactoryV1<PrismaPluginOptions, PrismaPluginCtx>({
+export default createPluginFactoryV1<
+  PrismaPluginOptions,
+  {
+    prisma: Store;
+  }
+>({
   name: 'prisma',
   watch: (baetaConfig, pluginConfig) => {
     const root = baetaConfig.graphql.modulesDir || 'src/modules';
-    const modulesMatcher = `${root}/*/${
-      pluginConfig.schemaNamespace || 'prisma-schema'
-    }/**`;
+    const modulesMatcher = `${root}/*/${pluginConfig.schemaNamespace || 'prisma-schema'}/**`;
 
     const prismaModule = `${root}/prisma/**`;
 

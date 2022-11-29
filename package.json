@@ -4,21 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "linter:check": "yarn rome check .",
-    "prettier:check": "yarn prettier --check .",
-    "types:check": "yarn workspaces foreach -pv --no-private run types",
-    "build": "yarn workspaces foreach -pv --no-private run build",
-    "release": "yarn build && yarn changeset publish",
+    "linter:check": "rome check .",
+    "prettier:check": "prettier --check .",
+    "types:check": "turbo run types --parallel",
+    "build": "turbo run build --parallel",
+    "release": "build && changeset publish",
     "prepare": "husky install"
   },
-  "workspaces": [
-    "packages/*",
-    "plugins/*",
-    "tools/*"
-  ],
-  "packageManager": "yarn@3.3.0",
   "devDependencies": {
-    "@andreisergiu98/changesets-cli": "^2.25.1",
+    "@changesets/cli": "^2.25.2",
     "@changesets/changelog-github": "^0.4.7",
     "@yarnpkg/sdks": "^3.0.0-rc.31",
     "husky": "^8.0.2",
@@ -26,9 +20,7 @@
     "prettier-plugin-organize-imports": "^3.2.1",
     "pretty-quick": "^3.1.3",
     "rome": "^10.0.1",
+    "turbo": "^1.6.3",
     "typescript": "^4.9.3"
-  },
-  "resolutions": {
-    "chalk": "4.*"
   }
 }

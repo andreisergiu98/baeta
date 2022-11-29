@@ -14,12 +14,12 @@
   },
   "type": "module",
   "scripts": {
-    "build": "tsup --dts",
+    "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "prep --move dist",
-    "postpack": "prep --clean"
+    "prepack": "cp package.json dist/package.json"
   },
   "dependencies": {
+    "@baeta/config": "workspace:^",
     "@baeta/plugin": "workspace:^",
     "@graphql-codegen/core": "^2.6.6",
     "@graphql-codegen/plugin-helpers": "^2.7.2",
@@ -42,10 +42,10 @@
     "tslib": "^2.4.1"
   },
   "devDependencies": {
-    "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.9",
     "@types/parse-filepath": "1.0.0",
     "graphql": "^16.6.0",
+    "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
@@ -59,6 +59,7 @@
   ],
   "publishConfig": {
     "access": "public",
+    "directory": "dist",
     "exports": {
       ".": {
         "import": "./index.js",

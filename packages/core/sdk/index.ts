@@ -1,4 +1,3 @@
-export * from './config';
 export * from './middleware';
 export * from './module';
 export * from './resolver';

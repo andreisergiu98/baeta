@@ -1,8 +1,7 @@
-import { Config } from '@baeta/core';
-import { loadConfig } from '@baeta/core/sdk';
 import chokidar from 'chokidar';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { ConfigStatus } from '../components/config';
+import { BaetaOptions, loadConfig } from '../lib/config';
 import { createContextProvider } from '../utils/context';
 
 export interface ConfigProps {
@@ -10,7 +9,7 @@ export interface ConfigProps {
 }
 
 export function useConfigStore(props: ConfigProps) {
-  const [config, setConfig] = useState<Config | undefined>(() => loadConfig());
+  const [config, setConfig] = useState<BaetaOptions | undefined>(() => loadConfig());
 
   const updateConfig = useCallback(async () => {
     const config = loadConfig();

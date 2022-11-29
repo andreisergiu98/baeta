@@ -1,10 +1,8 @@
+import { GraphqlPluginOptions } from '@baeta/config';
 import { createPluginFactoryV1 } from '@baeta/plugin';
-import { generate } from './codegen';
-import { GraphqlPluginConfig } from './config';
+import { generate } from './lib/codegen';
 
-export type { GraphqlPluginConfig };
-
-export default createPluginFactoryV1<GraphqlPluginConfig>({
+export default createPluginFactoryV1<GraphqlPluginOptions>({
   name: 'graphql',
   watch: (baetaConfig, pluginConfig) => {
     return {

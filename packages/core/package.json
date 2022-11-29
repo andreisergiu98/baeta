@@ -14,10 +14,9 @@
   },
   "type": "module",
   "scripts": {
-    "build": "tsup --dts",
+    "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "prep --move dist",
-    "postpack": "prep --clean"
+    "prepack": "cp -f package.json dist/package.json"
   },
   "dependencies": {
     "@graphql-tools/merge": "^8.3.12",
@@ -27,13 +26,9 @@
     "graphql-subscriptions": "^2.0.0"
   },
   "devDependencies": {
-    "@baeta/compiler": "workspace:^",
-    "@baeta/generator": "workspace:^",
-    "@baeta/plugin": "workspace:^",
-    "@baeta/plugin-graphql": "workspace:^",
-    "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.9",
     "graphql": "^16.6.0",
+    "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
@@ -46,6 +41,7 @@
   ],
   "publishConfig": {
     "access": "public",
+    "directory": "dist",
     "exports": {
       ".": {
         "import": "./index.js",

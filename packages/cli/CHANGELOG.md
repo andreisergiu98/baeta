@@ -1,5 +1,11 @@
 # @baeta/cli
 
+## 0.0.12
+
+### Patch Changes
+
+- [`ae7a358`](https://github.com/andreisergiu98/baeta/commit/ae7a3588d5fb81094d3a46cecf6d736811e9557d) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Export index
+
 ## 0.0.11
 
 ### Patch Changes

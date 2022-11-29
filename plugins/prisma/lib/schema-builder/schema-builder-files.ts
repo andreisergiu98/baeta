@@ -24,26 +24,10 @@ export function createGlobalSchemas(
   const dir = `${options.root}/prisma`;
 
   const files = [
-    createSchemaFile(
-      dir,
-      createName('prisma', 'enums', options.casing),
-      definition.enums
-    ),
-    createSchemaFile(
-      dir,
-      createName('prisma', 'inputs', options.casing),
-      definition.inputTypes
-    ),
-    createSchemaFile(
-      dir,
-      createName('prisma', 'outputs', options.casing),
-      definition.outputTypes
-    ),
-    createSchemaFile(
-      dir,
-      createName('prisma', 'scalars', options.casing),
-      definition.scalars
-    ),
+    createSchemaFile(dir, createName('prisma', 'enums', options.casing), definition.enums),
+    createSchemaFile(dir, createName('prisma', 'inputs', options.casing), definition.inputTypes),
+    createSchemaFile(dir, createName('prisma', 'outputs', options.casing), definition.outputTypes),
+    createSchemaFile(dir, createName('prisma', 'scalars', options.casing), definition.scalars),
     createSchemaFile(
       dir,
       createName('prisma', 'directives', options.casing),
@@ -71,26 +55,13 @@ function createModuleSchema(
   }
 
   const name = definition.name;
-  const dir = createSchemaPath(
-    definition,
-    options.root,
-    options.namespace,
-    options.casing
-  );
+  const dir = createSchemaPath(definition, options.root, options.namespace, options.casing);
 
   const files = [
     createSchemaFile(dir, createName(name, 'model', options.casing), definition.model),
     createSchemaFile(dir, createName(name, 'enums', options.casing), definition.enums),
-    createSchemaFile(
-      dir,
-      createName(name, 'input', options.casing),
-      definition.inputTypes
-    ),
-    createSchemaFile(
-      dir,
-      createName(name, 'output', options.casing),
-      definition.outputTypes
-    ),
+    createSchemaFile(dir, createName(name, 'input', options.casing), definition.inputTypes),
+    createSchemaFile(dir, createName(name, 'output', options.casing), definition.outputTypes),
     createSDLOperationFile(
       'Query',
       dir,
@@ -108,12 +79,7 @@ function createModuleSchema(
   return filterEmpty(files);
 }
 
-function createSDLOperationFile(
-  type: string,
-  dir: string,
-  name: string,
-  content: string[]
-) {
+function createSDLOperationFile(type: string, dir: string, name: string, content: string[]) {
   if (content.length === 0) {
     return;
   }

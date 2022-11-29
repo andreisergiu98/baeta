@@ -1,10 +1,5 @@
 import type { ScalarResolver } from '@baeta/core';
-import {
-  BigIntResolver,
-  ByteResolver,
-  DateTimeResolver,
-  JSONResolver,
-} from 'graphql-scalars';
+import { BigIntResolver, ByteResolver, DateTimeResolver, JSONResolver } from 'graphql-scalars';
 import { DecimalJSScalar } from './decimal';
 
 interface ModuleRegisterer {

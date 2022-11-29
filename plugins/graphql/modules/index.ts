@@ -5,22 +5,14 @@ import { concatAST, DocumentNode, isScalarType } from 'graphql';
 import { join, relative, resolve } from 'path';
 import { buildModule } from './builder';
 import { ModulesConfig } from './config';
-import {
-  groupSourcesByModule,
-  isGraphQLPrimitive,
-  normalize,
-  stripFilename,
-} from './utils';
+import { groupSourcesByModule, isGraphQLPrimitive, normalize, stripFilename } from './utils';
 
 export const preset: Types.OutputPreset<ModulesConfig> = {
   buildGeneratesSection: (options) => {
     const { baseOutputDir } = options;
     const { baseTypesPath, encapsulateModuleTypes } = options.presetConfig;
 
-    const requireRootResolvers = getConfigValue(
-      options?.presetConfig.requireRootResolvers,
-      false
-    );
+    const requireRootResolvers = getConfigValue(options?.presetConfig.requireRootResolvers, false);
 
     const cwd = resolve(options.presetConfig.cwd || process.cwd());
     const importTypesNamespace = options.presetConfig.importTypesNamespace || 'Types';
@@ -61,12 +53,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 
             return Object.keys(typeMap)
               .map((t) => {
-                if (
-                  t &&
-                  typeMap[t] &&
-                  isScalarType(typeMap[t]) &&
-                  !isGraphQLPrimitive(t)
-                ) {
+                if (t && typeMap[t] && isScalarType(typeMap[t]) && !isGraphQLPrimitive(t)) {
                   const convertedName = baseVisitor.convertName(t);
                   return `export type ${convertedName} = Scalars["${t}"];`;
                 }
@@ -90,12 +77,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 
     // One file per each module
     const outputs: Types.GenerateOptions[] = modules.map((moduleName) => {
-      const filename = resolve(
-        cwd,
-        baseOutputDir,
-        moduleName,
-        options.presetConfig.filename
-      );
+      const filename = resolve(cwd, baseOutputDir, moduleName, options.presetConfig.filename);
       const dirpath = stripFilename(filename);
       const relativePath = relative(dirpath, baseTypesDir);
       const importPath =

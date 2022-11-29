@@ -12,9 +12,7 @@ export function printPrismaInput(inputType: DMMF.InputType) {
     directive = printInputConstraintDirective(minNumFields, maxNumFields);
   }
 
-  const fields = inputType.fields.map((field) =>
-    printInputField(field, requireConstraint)
-  );
+  const fields = inputType.fields.map((field) => printInputField(field, requireConstraint));
 
   return printObject('input', inputType.name, fields, directive);
 }

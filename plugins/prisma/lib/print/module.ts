@@ -13,13 +13,9 @@ export function printModule(model: ModuleResolvers) {
 
   const queries = model.queries.map((operations) => printResolver('Query', operations));
 
-  const mutations = model.mutations.map((operations) =>
-    printResolver('Mutation', operations)
-  );
+  const mutations = model.mutations.map((operations) => printResolver('Mutation', operations));
 
-  const relations = model.relations.map((relation) =>
-    printRelationResolver(model.name, relation)
-  );
+  const relations = model.relations.map((relation) => printRelationResolver(model.name, relation));
 
   return [
     printImports(name),

@@ -23,12 +23,7 @@ export function createModuleFiles(map: ModuleResolversMap, options: ModuleFileOp
       continue;
     }
 
-    const modulePath = createModulePath(
-      model,
-      options.root,
-      options.namespace,
-      options.casing
-    );
+    const modulePath = createModulePath(model, options.root, options.namespace, options.casing);
 
     files.push(createModuleResolvers(model, modulePath, options.filename));
 

@@ -86,9 +86,7 @@ export function createContextProvider<Type, Props>(
   useValue: (props: Props) => Type
 ): WithValue<Type, Props>;
 
-export function createContextProvider<Type>(
-  options: CreateContextOptions
-): WithoutValue<Type>;
+export function createContextProvider<Type>(options: CreateContextOptions): WithoutValue<Type>;
 
 export function createContextProvider<Type, Props>(
   options: CreateContextOptions = {},

@@ -81,17 +81,9 @@ export function visitItems<T>(
 }
 
 export function visit(document: DMMF.Document, visitors: Visitor[]) {
-  const models = visitItems(
-    document.datamodel.models,
-    visitors,
-    (visitor) => visitor.model
-  );
+  const models = visitItems(document.datamodel.models, visitors, (visitor) => visitor.model);
 
-  const modelEnums = visitItems(
-    document.datamodel.enums,
-    visitors,
-    (visitor) => visitor.modelEnum
-  );
+  const modelEnums = visitItems(document.datamodel.enums, visitors, (visitor) => visitor.modelEnum);
 
   const inputTypes = visitItems(
     document.schema.inputObjectTypes.prisma,
@@ -111,9 +103,7 @@ export function visit(document: DMMF.Document, visitors: Visitor[]) {
     (visitor) => visitor.schemaEnum
   );
 
-  return Promise.all([models, modelEnums, inputTypes, outputTypes, enumTypes]).then(
-    () => {
-      // do nothing
-    }
-  );
+  return Promise.all([models, modelEnums, inputTypes, outputTypes, enumTypes]).then(() => {
+    // do nothing
+  });
 }

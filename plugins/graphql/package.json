@@ -49,7 +49,6 @@
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
-    "@baeta/core": "workspace:^",
     "graphql": "^15.3.0 || ^16.0.0"
   },
   "files": [

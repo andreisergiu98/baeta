@@ -16,8 +16,7 @@
   "scripts": {
     "build": "tsup --dts",
     "types": "tsc --noEmit",
-    "prepack": "prep --move dist",
-    "postpack": "prep --clean"
+    "prepack": "cp package.json dist/package.json"
   },
   "dependencies": {
     "@baeta/config": "workspace:^"

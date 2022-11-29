@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "cp -f package.json dist/package.json"
+    "prepack": "cp package.json dist/package.json"
   },
   "dependencies": {
     "@graphql-tools/merge": "^8.3.12",

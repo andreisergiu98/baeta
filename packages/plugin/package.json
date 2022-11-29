@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
@@ -41,6 +41,6 @@
     }
   },
   "dependencies": {
-    "@baeta/config": "workspace:^0.0.1"
+    "@baeta/config": "workspace:^0.0.2"
   }
 }

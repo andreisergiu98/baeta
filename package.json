@@ -8,7 +8,7 @@
     "prettier:check": "prettier --check .",
     "types:check": "turbo run types --parallel",
     "build": "turbo run build --parallel",
-    "release": "build && changeset publish",
+    "release": "pnpm build && pnpm publish -r",
     "prepare": "husky install"
   },
   "devDependencies": {

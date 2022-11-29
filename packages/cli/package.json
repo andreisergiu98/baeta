@@ -58,6 +58,13 @@
     "directory": "dist",
     "bin": {
       "baeta": "./cli.js"
+    },
+    "exports": {
+      ".": {
+        "import": "./index.js",
+        "require": "./index.cjs",
+        "types": "./index.d.ts"
+      }
     }
   }
 }

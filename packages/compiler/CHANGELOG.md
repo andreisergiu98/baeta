@@ -1,5 +1,14 @@
 # @baeta/compiler
 
+## 0.0.10
+
+### Patch Changes
+
+- [`a262a56`](https://github.com/andreisergiu98/baeta/commit/a262a56db0f5b08a9b256e0a8402e60cd1be7b51) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix type declarations
+
+- Updated dependencies [[`a262a56`](https://github.com/andreisergiu98/baeta/commit/a262a56db0f5b08a9b256e0a8402e60cd1be7b51)]:
+  - @baeta/config@0.0.4
+
 ## 0.0.9
 
 ### Patch Changes

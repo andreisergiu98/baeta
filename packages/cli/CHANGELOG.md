@@ -1,5 +1,16 @@
 # @baeta/cli
 
+## 0.0.16
+
+### Patch Changes
+
+- [`f2429cd`](https://github.com/andreisergiu98/baeta/commit/f2429cdec7fe4522f7df0a90d582a06fcf792ef7) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix build, remove turborepo
+
+- Updated dependencies [[`f2429cd`](https://github.com/andreisergiu98/baeta/commit/f2429cdec7fe4522f7df0a90d582a06fcf792ef7)]:
+  - @baeta/config@0.0.5
+  - @baeta/generator@0.0.10
+  - @baeta/plugin@0.0.10
+
 ## 0.0.15
 
 ### Patch Changes

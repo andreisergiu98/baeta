@@ -1,5 +1,11 @@
 # @baeta/prisma
 
+## 0.0.4
+
+### Patch Changes
+
+- [`f2429cd`](https://github.com/andreisergiu98/baeta/commit/f2429cdec7fe4522f7df0a90d582a06fcf792ef7) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix build, remove turborepo
+
 ## 0.0.3
 
 ### Patch Changes

@@ -1,2 +1,2 @@
 require('@baeta/compiler/register.cjs');
-require('../index');
+require('../cli');

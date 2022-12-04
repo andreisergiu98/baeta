@@ -23,7 +23,6 @@ yarn-error.log*
 
 ### build ###
 dist
-demo
 
 ### cache ###
 .turbo

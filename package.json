@@ -16,7 +16,8 @@
   "workspaces": [
     "packages/*",
     "plugins/*",
-    "tools/*"
+    "tools/*",
+    "examples/*"
   ],
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.7",

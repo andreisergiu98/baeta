@@ -4,8 +4,11 @@ node_modules
 .yarn/*
 .pnp.*
 
+### examples ###
+examples/**/__generated__/*
+examples/**/typedef.ts
+
 ### build ###
 dist
-demo
 build
 .docusaurus

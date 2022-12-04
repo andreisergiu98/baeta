@@ -1,0 +1,19 @@
+{
+  "name": "@baeta/examples-apollo",
+  "private": true,
+  "scripts": {
+    "start:dev": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'",
+    "build-example": "baeta build --generate"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.2.2",
+    "@baeta/core": "workspace:",
+    "@baeta/prisma": "workspace:",
+    "graphql": "^16.6.0"
+  },
+  "devDependencies": {
+    "@baeta/cli": "workspace:^",
+    "@types/node": "^18.11.10",
+    "typescript": "^4.9.3"
+  }
+}

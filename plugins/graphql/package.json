@@ -15,17 +15,16 @@
   "type": "module",
   "scripts": {
     "build": "tsup",
-    "types": "tsc --noEmit",
-    "prepack": "cp package.json dist/package.json"
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/config": "workspace:^",
     "@baeta/plugin": "workspace:^",
     "@graphql-codegen/core": "^2.6.6",
     "@graphql-codegen/plugin-helpers": "^2.7.2",
-    "@graphql-codegen/typescript": "^2.8.2",
-    "@graphql-codegen/typescript-resolvers": "^2.7.7",
-    "@graphql-codegen/visitor-plugin-common": "2.13.2",
+    "@graphql-codegen/typescript": "^2.8.3",
+    "@graphql-codegen/typescript-resolvers": "^2.7.8",
+    "@graphql-codegen/visitor-plugin-common": "2.13.3",
     "@graphql-tools/apollo-engine-loader": "^7.3.19",
     "@graphql-tools/code-file-loader": "^7.3.13",
     "@graphql-tools/git-loader": "^7.2.13",
@@ -33,8 +32,8 @@
     "@graphql-tools/graphql-file-loader": "^7.5.11",
     "@graphql-tools/json-file-loader": "^7.4.12",
     "@graphql-tools/load": "^7.8.6",
-    "@graphql-tools/prisma-loader": "^7.2.40",
-    "@graphql-tools/url-loader": "^7.16.20",
+    "@graphql-tools/prisma-loader": "^7.2.42",
+    "@graphql-tools/url-loader": "^7.16.22",
     "@graphql-tools/utils": "^9.1.1",
     "auto-bind": "^5.0.1",
     "change-case-all": "1.0.15",
@@ -42,28 +41,26 @@
     "tslib": "^2.4.1"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.11.10",
     "@types/parse-filepath": "1.0.0",
     "graphql": "^16.6.0",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
-    "graphql": "^15.3.0 || ^16.0.0"
+    "graphql": "^16.6.0"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
     "directory": "dist",
     "exports": {
       ".": {
-        "import": "./index.js",
-        "require": "./index.cjs",
-        "types": "./index.d.ts"
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
       }
     }
   }

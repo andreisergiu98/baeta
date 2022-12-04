@@ -8,13 +8,19 @@
     "prettier:check": "prettier --check .",
     "types:check": "turbo run types --parallel",
     "build": "turbo run build --parallel",
-    "release": "pnpm build && pnpm publish -r",
+    "publish": "yarn workspaces foreach --no-private npm publish --tolerate-republish",
+    "release": "yarn build && yarn publish",
     "prepare": "husky install"
   },
+  "packageManager": "yarn@3.3.0",
+  "workspaces": [
+    "packages/*",
+    "plugins/*"
+  ],
   "devDependencies": {
-    "@changesets/cli": "^2.25.2",
     "@changesets/changelog-github": "^0.4.7",
-    "@yarnpkg/sdks": "^3.0.0-rc.31",
+    "@changesets/cli": "^2.25.2",
+    "@yarnpkg/sdks": "^3.0.0-rc.32",
     "husky": "^8.0.2",
     "prettier": "^2.8.0",
     "prettier-plugin-organize-imports": "^3.2.1",

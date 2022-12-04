@@ -1,6 +1,6 @@
 {
   "name": "@baeta/cli",
-  "version": "0.0.12",
+  "version": "0.0.11",
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
@@ -15,8 +15,7 @@
   "type": "module",
   "scripts": {
     "build": "tsup",
-    "types": "tsc --noEmit",
-    "prepack": "cp package.json dist/package.json"
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/config": "workspace:^",
@@ -31,15 +30,15 @@
     "yargs": "^17.6.2"
   },
   "peerDependencies": {
-    "graphql": "^15.3.0 || ^16.0.0"
+    "graphql": "^16.6.0"
   },
   "optionalDependencies": {
     "@baeta/compiler": "workspace:^"
   },
   "devDependencies": {
     "@baeta/core": "workspace:^",
-    "@types/node": "^18.11.9",
-    "@types/react": "^18.0.25",
+    "@types/node": "^18.11.10",
+    "@types/react": "^18.0.26",
     "@types/yargs": "^17.0.15",
     "graphql": "^16.6.0",
     "tsup": "^6.5.0",
@@ -49,21 +48,18 @@
     "baeta": "./bin/cli-dev.cjs"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
-    "directory": "dist",
     "bin": {
-      "baeta": "./cli.js"
+      "baeta": "./dist/bin/cli.js"
     },
     "exports": {
       ".": {
-        "import": "./index.js",
-        "require": "./index.cjs",
-        "types": "./index.d.ts"
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
       }
     }
   }

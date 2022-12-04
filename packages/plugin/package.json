@@ -15,30 +15,26 @@
   "type": "module",
   "scripts": {
     "build": "tsup --dts",
-    "types": "tsc --noEmit",
-    "prepack": "cp package.json dist/package.json"
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/config": "workspace:^"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.11.10",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
-    "directory": "dist",
     "exports": {
       ".": {
-        "import": "./index.js",
-        "require": "./index.cjs",
-        "types": "./index.d.ts"
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
       }
     }
   }

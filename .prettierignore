@@ -9,6 +9,3 @@ dist
 demo
 build
 .docusaurus
-
-### lockfile ###
-pnpm-lock.yaml

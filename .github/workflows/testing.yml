@@ -15,22 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 7
-
       - name: Setup Node.js 18
         uses: actions/setup-node@v2
         with:
           node-version: 18
-          cache: "pnpm"
+          cache: "yarn"
 
       - name: Install dependencies
-        run: pnpm install
+        run: yarn install --no-immutable
 
       - name: Run linting
-        run: pnpm linter:check
+        run: yarn linter:check
 
   prettier:
     name: Prettier check
@@ -38,19 +33,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 7
-
       - name: Setup Node.js 18
         uses: actions/setup-node@v2
         with:
           node-version: 18
-          cache: "pnpm"
+          cache: "yarn"
 
       - name: Install dependencies
-        run: pnpm install
+        run: yarn install --no-immutable
 
       - name: Run prettier
-        run: pnpm prettier:check
+        run: yarn prettier:check

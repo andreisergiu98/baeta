@@ -1,5 +1,11 @@
 # @baeta/cli
 
+## 0.0.13
+
+### Patch Changes
+
+- [`5804575`](https://github.com/andreisergiu98/baeta/commit/5804575f17ede2fb76fa733230c7996f193523f3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix cli release version
+
 ## 0.0.12
 
 ### Patch Changes

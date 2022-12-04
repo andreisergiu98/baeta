@@ -1,5 +1,11 @@
 # @baeta/config
 
+## 0.0.3
+
+### Patch Changes
+
+- [`f87d828`](https://github.com/andreisergiu98/baeta/commit/f87d828a87a6a12326a3bfcb5846b4390431f0c4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - change export dir
+
 ## 0.0.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 0.0.16
+
+### Patch Changes
+
+- [`a262a56`](https://github.com/andreisergiu98/baeta/commit/a262a56db0f5b08a9b256e0a8402e60cd1be7b51) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix type declarations
+
 ## 0.0.15
 
 ### Patch Changes

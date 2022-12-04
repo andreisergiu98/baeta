@@ -14,27 +14,31 @@
   },
   "type": "module",
   "scripts": {
-    "build": "tsup --dts",
-    "types": "tsc --noEmit"
+    "build": "tsup",
+    "types": "tsc --noEmit",
+    "prepack": "yarn prep --move dist",
+    "postpack": "yarn prep --clean"
   },
   "dependencies": {
     "@baeta/config": "workspace:^"
   },
   "devDependencies": {
+    "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.10",
-    "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "files": [
-    "dist"
+    "*.js",
+    "*.cjs",
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs",
-        "types": "./dist/index.d.ts"
+        "import": "./index.js",
+        "require": "./index.cjs",
+        "types": "./index.d.ts"
       }
     }
   }

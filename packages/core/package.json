@@ -15,7 +15,9 @@
   "type": "module",
   "scripts": {
     "build": "tsup",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "prepack": "yarn prep --move dist",
+    "postpack": "yarn prep --clean"
   },
   "dependencies": {
     "@graphql-tools/merge": "^8.3.12",
@@ -25,29 +27,31 @@
     "graphql-subscriptions": "^2.0.0"
   },
   "devDependencies": {
+    "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.10",
     "graphql": "^16.6.0",
-    "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
   "files": [
-    "dist"
+    "*.js",
+    "*.cjs",
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs",
-        "types": "./dist/index.d.ts"
+        "import": "./index.js",
+        "require": "./index.cjs",
+        "types": "./index.d.ts"
       },
       "./sdk": {
-        "import": "./dist/sdk/index.js",
-        "require": "./dist/sdk/index.cjs",
-        "types": "./dist/sdk/index.d.ts"
+        "import": "./sdk/index.js",
+        "require": "./sdk/index.cjs",
+        "types": "./sdk/index.d.ts"
       }
     }
   }

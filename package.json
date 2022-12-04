@@ -15,7 +15,8 @@
   "packageManager": "yarn@3.3.0",
   "workspaces": [
     "packages/*",
-    "plugins/*"
+    "plugins/*",
+    "tools/*"
   ],
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.7",

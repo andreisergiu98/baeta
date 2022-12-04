@@ -15,7 +15,9 @@
   "type": "module",
   "scripts": {
     "build": "tsup",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "prepack": "yarn prep --move dist",
+    "postpack": "yarn prep --clean"
   },
   "dependencies": {
     "@baeta/config": "workspace:^",
@@ -41,26 +43,28 @@
     "tslib": "^2.4.1"
   },
   "devDependencies": {
+    "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.10",
     "@types/parse-filepath": "1.0.0",
     "graphql": "^16.6.0",
-    "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
   "files": [
-    "dist"
+    "*.js",
+    "*.cjs",
+    "*.d.ts"
   ],
   "publishConfig": {
     "access": "public",
     "directory": "dist",
     "exports": {
       ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs",
-        "types": "./dist/index.d.ts"
+        "import": "./index.js",
+        "require": "./index.cjs",
+        "types": "./index.d.ts"
       }
     }
   }

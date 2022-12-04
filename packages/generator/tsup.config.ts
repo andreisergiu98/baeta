@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from '@baeta/prep';
 
 export default defineConfig({
   entry: ['index.ts', '!dist'],

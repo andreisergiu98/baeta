@@ -3192,9 +3192,6 @@ __metadata:
     pretty-quick: ^3.1.3
     rome: ^10.0.1
     typescript: ^4.9.3
-  dependenciesMeta:
-    "@graphql-tools/resolvers-composition@6.5.12":
-      unplugged: true
   languageName: unknown
   linkType: soft
 

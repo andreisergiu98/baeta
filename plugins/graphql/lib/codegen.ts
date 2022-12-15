@@ -5,11 +5,10 @@ import { normalizeConfig, normalizeInstanceOrArray } from '@graphql-codegen/plug
 import * as typescriptPlugin from '@graphql-codegen/typescript';
 import { UnnormalizedTypeDefPointer } from '@graphql-tools/load';
 import path from 'path';
-import * as contextPlugin from '../context';
-import * as modules from '../modules';
-import * as typescriptResolversPlugin from '../resolvers';
 import { createCache } from '../utils/cache';
 import { loadSchema } from '../utils/load';
+import * as contextPlugin from './context';
+import * as modules from './modules';
 
 export async function generate(options: GraphqlPluginOptions) {
   const root = process.cwd();
@@ -26,7 +25,6 @@ export async function generate(options: GraphqlPluginOptions) {
     pluginMap: {
       typescript: typescriptPlugin,
       context: contextPlugin,
-      'typescript-resolvers': typescriptResolversPlugin,
     },
   };
 
@@ -62,7 +60,6 @@ export async function generate(options: GraphqlPluginOptions) {
       inputMaybeValue: 'T | undefined',
       contextType: rootConfig.contextType,
       useTypeImports: true,
-      federation: true,
       scalars: {
         BigInt: 'number',
         Bytes: 'Buffer',

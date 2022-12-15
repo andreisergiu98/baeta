@@ -18,7 +18,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: Date;
-  _FieldSet: any;
 };
 
 export type UserPhoto = {
@@ -46,4 +45,3 @@ export type QueryUserArgs = {
 };
 
 export type DateTime = Scalars["DateTime"];
-export type _FieldSet = Scalars["_FieldSet"];

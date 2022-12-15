@@ -15,6 +15,7 @@
   "type": "module",
   "scripts": {
     "build": "tsup",
+    "test": "ava",
     "types": "tsc --noEmit",
     "prepack": "yarn prep --move dist",
     "postpack": "yarn prep --clean"
@@ -26,9 +27,11 @@
     "ramda": "^0.28.0"
   },
   "devDependencies": {
+    "@baeta/compiler": "workspace:^",
     "@baeta/prep": "workspace:^",
     "@types/node": "^18.11.15",
     "@types/ramda": "^0.28.20",
+    "ava": "^5.1.0",
     "graphql": "^16.6.0",
     "typescript": "^4.9.3"
   },

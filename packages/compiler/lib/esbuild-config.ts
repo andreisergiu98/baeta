@@ -32,7 +32,7 @@ export function createEsbuildConfig(options: CompilerOptions) {
   const entryPoints = Array.isArray(options.src) ? options.src : [options.src];
 
   const buildOptions: BuildOptions = {
-    target: 'node16',
+    target: 'node18',
     bundle: true,
     sourcemap: true,
     platform: 'node',

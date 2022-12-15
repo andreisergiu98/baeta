@@ -7,6 +7,6 @@
     "tsup": "./bin/tsup.js"
   },
   "dependencies": {
-    "tsup": "^6.2.3"
+    "tsup": "^6.5.0"
   }
 }

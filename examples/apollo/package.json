@@ -6,7 +6,7 @@
     "build-example": "baeta build --generate"
   },
   "dependencies": {
-    "@apollo/server": "^4.2.2",
+    "@apollo/server": "^4.3.0",
     "@baeta/core": "workspace:",
     "@baeta/prisma": "workspace:",
     "body-parser": "^1.20.1",
@@ -19,11 +19,11 @@
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
-    "@types/body-parser": "^1",
-    "@types/cors": "^2",
-    "@types/express": "^4",
-    "@types/node": "^18.11.10",
-    "@types/ws": "^8",
+    "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.15",
+    "@types/ws": "^8.5.3",
     "typescript": "^4.9.3"
   }
 }

@@ -43,7 +43,7 @@ export function createModuleSchemas(
   options: SchemaFileOptions
 ) {
   const definitions = Object.values(definitionMap);
-  return definitions.map((definition) => createModuleSchema(definition, options)).flat();
+  return definitions.flatMap((definition) => createModuleSchema(definition, options));
 }
 
 function createModuleSchema(

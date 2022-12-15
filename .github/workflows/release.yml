@@ -30,8 +30,8 @@ jobs:
         with:
           publish: yarn release
           version: yarn changeset version
-          commit: Publish packages
-          title: Publish packages
+          commit: "chore: publish packages"
+          title: "chore: publish packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

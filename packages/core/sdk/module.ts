@@ -1,17 +1,21 @@
-import { composeResolvers, ResolversComposerMapping } from '@graphql-tools/resolvers-composition';
 import { defaultFieldResolver, DocumentNode, GraphQLFieldResolver, GraphQLSchema } from 'graphql';
-import { UnionToIntersection } from 'type-fest';
 import { Middleware, Resolver, ScalarResolver } from '../lib';
 import { Subscription } from '../lib/subscription';
+import { UnionToIntersection } from '../types/union';
 import { extendFunction, nameFunction } from '../utils/functions';
+import { composeResolvers, ResolversComposerMapping } from './compose';
 import { createMiddlewareAdapter, GenericMiddleware, NativeMiddleware } from './middleware';
 import { PluginA, PluginB, PluginC, PluginV1Builder } from './plugin-v1';
 import { createResolverAdapter } from './resolver';
 import { createSubscriptionAdapter, NativeSubscribe } from './subscription';
 import { SchemaTransformer, transformSchema } from './transformer';
 
-// rome-ignore lint/suspicious/noExplicitAny: <explanation>
-export type ResolversMap = Record<string, any>;
+export type FieldResolvers = Record<string, GraphQLFieldResolver<unknown, unknown>>;
+export type SubscriptionsResolvers = {
+  Subscription?: Record<string, NativeSubscribe | undefined> | undefined;
+};
+
+export type ResolversMap = Record<string, FieldResolvers | ScalarResolver> & SubscriptionsResolvers;
 
 export interface Module<T> {
   id: string;
@@ -22,7 +26,7 @@ export interface Module<T> {
 
 export class ModuleBuilder {
   resolvers: ResolversMap = {};
-  middlewares: Record<string, NativeMiddleware[]> = {};
+  middlewares: ResolversComposerMapping = {};
   transformers: SchemaTransformer[] = [];
   plugins;
 
@@ -119,7 +123,7 @@ export class ModuleBuilder {
     if (this.resolvers[type] == null) {
       this.resolvers[type] = {};
     }
-    this.resolvers[type][field] = resolver;
+    (this.resolvers[type] as FieldResolvers)[field] = resolver;
   };
 
   private addScalar = (scalar: string, resolver: ScalarResolver) => {
@@ -153,7 +157,13 @@ export class ModuleBuilder {
     if (['Query', 'Mutation', 'Subscription'].includes(type)) {
       return;
     }
-    if (this.resolvers[type]?.[field] != null) {
+
+    if (field === '*') {
+      return;
+    }
+
+    const typeResolvers = this.resolvers[type] as FieldResolvers | undefined;
+    if (typeResolvers?.[field] != null) {
       return;
     }
     this.addResolver(type, field, defaultFieldResolver);

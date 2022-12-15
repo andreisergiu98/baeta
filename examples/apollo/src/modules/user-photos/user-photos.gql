@@ -6,3 +6,5 @@ type UserPhoto {
 extend type User {
   photos: [UserPhoto!]
 }
+
+scalar DateTime

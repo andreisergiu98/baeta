@@ -5,6 +5,7 @@ import { normalizeConfig, normalizeInstanceOrArray } from '@graphql-codegen/plug
 import * as typescriptPlugin from '@graphql-codegen/typescript';
 import { UnnormalizedTypeDefPointer } from '@graphql-tools/load';
 import path from 'path';
+import * as contextPlugin from '../context';
 import * as modules from '../modules';
 import * as typescriptResolversPlugin from '../resolvers';
 import { createCache } from '../utils/cache';
@@ -21,9 +22,10 @@ export async function generate(options: GraphqlPluginOptions) {
     contextType: options.contextType,
     moduleDefinitionName: options.moduleDefinitionName || 'typedef.ts',
     scalars: options.scalars,
-    plugins: normalizeConfig(['typescript', 'typescript-resolvers']),
+    plugins: normalizeConfig(['typescript', 'context']),
     pluginMap: {
       typescript: typescriptPlugin,
+      context: contextPlugin,
       'typescript-resolvers': typescriptResolversPlugin,
     },
   };
@@ -57,17 +59,10 @@ export async function generate(options: GraphqlPluginOptions) {
     pluginMap: rootConfig.pluginMap,
     plugins: rootConfig.plugins,
     config: {
-      useIndexSignature: true,
       inputMaybeValue: 'T | undefined',
-      mapperTypeSuffix: 'Prisma',
       contextType: rootConfig.contextType,
-      customResolverFn: '@baeta/core#Resolver',
-      customSubscriptionResolver: '@baeta/core#SubscriptionResolver',
       useTypeImports: true,
-      makeResolverTypeCallable: true,
-      includeDirectives: true,
-      resolverTypeWrapperSignature: 'T',
-      emitLegacyCommonJSImports: false,
+      federation: true,
       scalars: {
         BigInt: 'number',
         Bytes: 'Buffer',

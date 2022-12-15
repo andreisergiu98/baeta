@@ -1,6 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 
-export type Middleware<Result, Root = {}, Context = {}, Args = {}> = (
+export type Middleware<Result, Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>,
   next: MiddlewareNext<Result>
 ) => Promise<Result>;

@@ -5,7 +5,13 @@ import { concatAST, DocumentNode, isScalarType } from 'graphql';
 import { join, relative, resolve } from 'path';
 import { buildModule } from './builder';
 import { ModulesConfig } from './config';
-import { groupSourcesByModule, isGraphQLPrimitive, normalize, stripFilename } from './utils';
+import {
+  collectObjectFieldTypesAndArguments,
+  groupSourcesByModule,
+  isGraphQLPrimitive,
+  normalize,
+  stripFilename,
+} from './utils';
 
 export const preset: Types.OutputPreset<ModulesConfig> = {
   buildGeneratesSection: (options) => {
@@ -33,6 +39,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
     const modules = Object.keys(sourcesByModuleMap);
 
     const baseVisitor = new BaseVisitor(options.config, {});
+    const { fieldTypes, fieldArguments } = collectObjectFieldTypesAndArguments(options.schemaAst);
 
     // One file with an output from all plugins
     const baseOutput: Types.GenerateOptions = {
@@ -114,6 +121,8 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
                 schema,
                 baseVisitor,
                 useGraphQLModules: false,
+                fieldTypes,
+                fieldArguments,
                 rootTypes: [
                   schema.getQueryType()?.name || '',
                   schema.getMutationType()?.name || '',

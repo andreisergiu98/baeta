@@ -28,6 +28,7 @@ export class ModuleBuilder {
   resolvers: ResolversMap = {};
   middlewares: ResolversComposerMapping = {};
   transformers: SchemaTransformer[] = [];
+  typeFields: Record<string, string[]> = {};
   plugins;
 
   constructor(
@@ -40,6 +41,8 @@ export class ModuleBuilder {
   }
 
   createResolverBuilder = <Result, Root, Context, Args>(type: string, field: string) => {
+    this.registerTypeField(type, field);
+
     const builder = (resolver: Resolver<Result, Root, Context, Args>) => {
       nameFunction(resolver, `${type}.${field}`);
       const adaptedResolver = createResolverAdapter(resolver);
@@ -55,6 +58,8 @@ export class ModuleBuilder {
   };
 
   createSubscriptionBuilder = <Result, Root, Context, Args>(field: string) => {
+    this.registerTypeField('Subscription', field);
+
     const builder = <Payload>(subscription: Subscription<Payload, Result, Root, Context, Args>) => {
       nameFunction(subscription.subscribe, `${field}.subscribe`);
       nameFunction(subscription.resolve, `${field}.resolve`);
@@ -64,9 +69,13 @@ export class ModuleBuilder {
     };
 
     const methods = {
-      $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
+      $subscribeUse: this.createSubscribeMiddlewareBuilder<Root, Context, Args>(
         'Subscription',
-        `${field}`
+        `${field}.subscribe`
+      ),
+      $resolveUse: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
+        'Subscription',
+        `${field}.resolve`
       ),
     };
 
@@ -89,6 +98,19 @@ export class ModuleBuilder {
     return builder;
   };
 
+  createSubscribeMiddlewareBuilder = <Root, Context, Args>(type: string, field: string) => {
+    const builder = <Payload>(
+      middleware: Middleware<AsyncIterator<Payload>, Root, Context, Args>
+    ) => {
+      nameFunction(middleware, `${type}.${field}.$use`);
+      const adaptedMiddleware = createMiddlewareAdapter(
+        middleware as Middleware<unknown, unknown, unknown, unknown>
+      );
+      this.addMiddleware(type, field, adaptedMiddleware);
+    };
+    return builder;
+  };
+
   createTypeMethods = <Root, Context>(type: string) => {
     return {
       ...this.getTypePluginMethods(type),
@@ -98,7 +120,6 @@ export class ModuleBuilder {
 
   createSubscriptionMethods = <Root, Context>() => {
     return {
-      ...this.getTypePluginMethods('Subscription'),
       $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(
         'Subscription',
         '*'
@@ -146,27 +167,45 @@ export class ModuleBuilder {
       this.middlewares[key] = [];
     }
     this.middlewares[key].push(middleware);
-    this.addDefaultFieldResolver(type, field);
+    this.addDefaultResolvers(type, field);
   };
 
   private addTransformer = (transformer: SchemaTransformer) => {
     this.transformers.push(transformer);
   };
 
-  private addDefaultFieldResolver = (type: string, field: string) => {
+  private addDefaultResolvers = (type: string, field: string) => {
     if (['Query', 'Mutation', 'Subscription'].includes(type)) {
       return;
     }
 
-    if (field === '*') {
-      return;
+    if (field !== '*') {
+      return this.addDefaultResolver(type, field);
     }
 
+    for (const field of this.typeFields[type]) {
+      this.addDefaultResolver(type, field);
+    }
+  };
+
+  private addDefaultResolver = (type: string, field: string) => {
     const typeResolvers = this.resolvers[type] as FieldResolvers | undefined;
     if (typeResolvers?.[field] != null) {
       return;
     }
     this.addResolver(type, field, defaultFieldResolver);
+  };
+
+  private registerTypeField = (type: string, field: string) => {
+    if (this.typeFields[type] == null) {
+      this.typeFields[type] = [];
+    }
+
+    if (this.typeFields[type].includes(field)) {
+      return;
+    }
+
+    this.typeFields[type].push(field);
   };
 
   private getResolverPluginMethods = (type: string, field: string) => {

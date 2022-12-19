@@ -33,8 +33,8 @@
     "@graphql-tools/graphql-file-loader": "^7.5.13",
     "@graphql-tools/json-file-loader": "^7.4.14",
     "@graphql-tools/load": "^7.8.8",
-    "@graphql-tools/prisma-loader": "^7.2.46",
-    "@graphql-tools/url-loader": "^7.16.26",
+    "@graphql-tools/prisma-loader": "^7.2.47",
+    "@graphql-tools/url-loader": "^7.16.27",
     "@graphql-tools/utils": "^9.1.3",
     "auto-bind": "^5.0.1",
     "change-case-all": "1.0.15",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@baeta/prep": "workspace:^",
-    "@types/node": "^18.11.15",
+    "@types/node": "^18.11.17",
     "@types/parse-filepath": "1.0.0",
     "graphql": "^16.6.0",
     "typescript": "^4.9.3"

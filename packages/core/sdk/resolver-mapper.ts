@@ -1,3 +1,4 @@
+import { IResolvers } from '@graphql-tools/utils';
 import { defaultFieldResolver, GraphQLFieldResolver } from 'graphql';
 import { ScalarResolver } from '../lib';
 import { composeResolvers, ResolversComposerMapping } from './compose';
@@ -52,6 +53,6 @@ export class ResolverMapper {
   }
 
   compose() {
-    return composeResolvers(this.resolvers, this.middlewares);
+    return composeResolvers(this.resolvers, this.middlewares) as IResolvers;
   }
 }

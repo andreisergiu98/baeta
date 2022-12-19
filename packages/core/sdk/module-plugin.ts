@@ -1,9 +1,7 @@
 import { ModuleBuilder } from './module';
-import { PluginVersion } from './plugin';
 import { SchemaTransformer } from './transformer';
 
-export class PluginV1 {
-  version = PluginVersion.V1;
+export class ModulePlugin {
   transformers: SchemaTransformer[] = [];
 
   constructor(readonly module: ModuleBuilder) {}
@@ -23,7 +21,7 @@ export class PluginV1 {
   }
 }
 
-export class PluginA extends PluginV1 {
+export class PluginA extends ModulePlugin {
   resolverMethods(type: string, field: string) {
     return {
       $test1: () => {
@@ -36,7 +34,7 @@ export class PluginA extends PluginV1 {
   }
 }
 
-export class PluginB extends PluginV1 {
+export class PluginB extends ModulePlugin {
   resolverMethods(type: string, field: string) {
     return {
       $test3: () => {
@@ -49,7 +47,7 @@ export class PluginB extends PluginV1 {
   }
 }
 
-export class PluginC extends PluginV1 {
+export class PluginC extends ModulePlugin {
   resolverMethods(type: string, field: string) {
     return {
       $test5: () => {
@@ -61,5 +59,3 @@ export class PluginC extends PluginV1 {
     };
   }
 }
-
-export type PluginV1Builder = (module: ModuleBuilder) => PluginV1;

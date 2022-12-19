@@ -1,7 +1,7 @@
 import { GraphQLFieldResolver } from 'graphql';
 import { lensPath, set, view } from 'ramda';
 import { chainFunctions } from '../utils/functions';
-import { FieldResolvers, ResolversMap } from './module';
+import { FieldResolvers, ResolversMap } from './resolver-mapper';
 
 export type ResolversComposition<
   Resolver extends GraphQLFieldResolver<unknown, unknown> = GraphQLFieldResolver<unknown, unknown>

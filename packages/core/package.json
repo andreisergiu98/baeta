@@ -17,8 +17,7 @@
     "build": "tsup",
     "test": "ava",
     "types": "tsc --noEmit",
-    "prepack": "yarn prep --move dist",
-    "postpack": "yarn prep --clean"
+    "postpack": "yarn prep"
   },
   "dependencies": {
     "@graphql-tools/schema": "^9.0.12",
@@ -27,8 +26,7 @@
     "ramda": "^0.28.0"
   },
   "devDependencies": {
-    "@baeta/compiler": "workspace:^",
-    "@baeta/prep": "workspace:^",
+    "@baeta/build-tools": "workspace:^",
     "@types/node": "^18.11.17",
     "@types/ramda": "^0.28.20",
     "ava": "^5.1.0",
@@ -39,12 +37,11 @@
     "graphql": "^16.6.0"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
+    "publishDir": "dist",
     "exports": {
       ".": {
         "import": "./index.js",

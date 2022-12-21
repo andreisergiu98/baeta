@@ -1,0 +1,33 @@
+{
+  "name": "@baeta/build-tools",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "prep": "./bin/prep.cjs",
+    "tsup": "./bin/tsup.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.16.9",
+    "esbuild-register": "^3.4.2",
+    "tar-stream": "^3.0.0",
+    "tsup": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/gunzip-maybe": "^1",
+    "@types/node": "^18.11.17",
+    "@types/tar": "^6",
+    "@types/tar-stream": "^2.2.2"
+  },
+  "exports": {
+    "./tsup": {
+      "import": "./tsup.js",
+      "types": "./tsup.d.ts"
+    },
+    "./tsrun": {
+      "require": "./tsrun.cjs"
+    },
+    "./tsrun.cjs": {
+      "require": "./tsrun.cjs"
+    }
+  }
+}

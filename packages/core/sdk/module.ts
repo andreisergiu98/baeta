@@ -2,31 +2,35 @@ import { DocumentNode, GraphQLSchema } from 'graphql';
 import { Middleware, Resolver, ScalarResolver } from '../lib';
 import { Subscription } from '../lib/subscription';
 import { extendFunction, nameFunction } from '../utils/functions';
+import { createExtensionManager, Extension, ExtensionManager, mergeExtensions } from './extension';
 import { createMiddlewareAdapter, GenericMiddleware } from './middleware';
 import { createResolverAdapter } from './resolver';
 import { ResolverMapper } from './resolver-mapper';
 import { createSubscriptionAdapter } from './subscription';
-import { SchemaTransformer, transformSchema } from './transformer';
+import { SchemaTransformer } from './transformer';
 
-export interface Module<T> {
+export interface Module<T, E extends Extension> {
   id: string;
   dirname: string;
   typedef: DocumentNode;
-  createManager: (builder: ModuleBuilder) => T;
+  createManager: (builder: ModuleBuilder<E>) => T;
 }
 
-export class ModuleBuilder {
+type Merge<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+
+export class ModuleBuilder<E extends Extension> {
   mapper = new ResolverMapper();
   transformers: SchemaTransformer[] = [];
   typeFields: Record<string, string[]> = {};
-  // plugins;
+  extensionManager: ExtensionManager<E>;
 
   constructor(
     readonly id: string,
     readonly dirname: string,
-    readonly typedef: DocumentNode // pluginsBuilder: PluginBuilders
+    readonly typedef: DocumentNode,
+    readonly extensions: E[]
   ) {
-    // this.plugins = pluginsBuilder.map((createPlugin) => createPlugin(this));
+    this.extensionManager = createExtensionManager(extensions);
   }
 
   createResolverBuilder<Result, Root, Context, Args>(type: string, field: string) {
@@ -38,7 +42,7 @@ export class ModuleBuilder {
     };
 
     return extendFunction(builder, {
-      // ...this.getResolverPluginMethods(type, field),
+      // ...this.getResolverExtensions<Result, Root, Context, Args>(type, field),
       $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(type, field),
     });
   }
@@ -84,7 +88,6 @@ export class ModuleBuilder {
 
   createTypeMethods<Root, Context>(type: string) {
     return {
-      // ...this.getTypePluginMethods(type),
       $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(type, '*'),
     };
   }
@@ -100,7 +103,8 @@ export class ModuleBuilder {
 
   createModuleMethods<Context>() {
     return {
-      $builder: this as ModuleBuilder,
+      // ...this.getModuleExtensions(),
+      $builder: this as ModuleBuilder<E>,
       $use: this.createMiddlewareBuilder<Middleware<unknown, unknown, Context, unknown>>('*', '*'),
       $directive: this.addTransformer,
     };
@@ -136,33 +140,53 @@ export class ModuleBuilder {
     this.typeFields[type].push(field);
   }
 
-  // private getResolverPluginMethods(type: string, field: string) {
-  //   return this.mergePluginMethods(
-  //     this.plugins.map((plugin) => plugin.resolverMethods(type, field))
-  //   );
-  // }
+  private getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
+    // return this.mergeExtensions(
+    //   this.extensions.map((extension) =>
+    //     extension.getResolverExtensions<Result, Root, Context, Args>(type, field)
+    //   )
+    // );
+  }
 
-  // private getTypePluginMethods(type: string) {
-  //   return this.mergePluginMethods(this.plugins.map((plugin) => plugin.typeMethods(type)));
-  // }
+  getTypeExtensions<Root, Context>(type: string) {
+    const handler: E['getTypeExtensions'] = (type: string) => {
+      return mergeExtensions(this.extensions, (extension) =>
+        extension.getTypeExtensions<Root, Context>(type)
+      );
+    };
+    return handler;
+  }
 
-  // private getModulePluginMethods() {
-  //   return this.mergePluginMethods(this.plugins.map((plugin) => plugin.moduleMethods()));
-  // }
+  private getModuleExtensions() {
+    // const list = this.extensions.map((extension) => extension.getModuleExtensions());
+    // return this.mergeExtensions(list);
+  }
 
-  // private mergePluginMethods<T>(list: T[]) {
-  //   return list.reduce((acc, handler) => ({ ...acc, ...handler })) as UnionToIntersection<T>;
-  // }
+  private mergeExt<T, K>(items: T[], callback: (item: T) => K) {
+    const list = items.map(callback);
+    const reduced = list.reduce((acc, handler) => ({
+      ...acc,
+      ...handler,
+    }));
+    return reduced;
+  }
+
+  private mergeExtensions<T>(list: T[]) {
+    return list.reduce((acc, handler) => ({ ...acc, ...handler }));
+  }
 
   private transform = (schema: GraphQLSchema) => {
-    // const pluginTransformers = this.plugins.flatMap((plugin) => plugin.transformers);
+    // const pluginTransformers = this.extensions.flatMap((extension) => extension.getTransformers());
     // const transformers = pluginTransformers.concat(this.transformers);
-    return transformSchema(schema, this.transformers);
+    // return transformSchema(schema, transformers);
+    return schema;
   };
 
-  build() {
-    // for (const plugin of this.plugins) {
-    //   plugin.build();
+  build = () => {
+    // for (const extension of this.extensions) {
+    //   extension.build?.();
+    //   extension.setResolvers?.(this.mapper, this.typeFields);
+    //   extension.registerMiddlewares?.(this.mapper, this.typeFields);
     // }
 
     return {
@@ -170,7 +194,7 @@ export class ModuleBuilder {
       resolvers: this.mapper.compose(),
       transform: this.transform,
     };
-  }
+  };
 }
 
 export function getModuleBuilder(module: Record<string, unknown>) {
@@ -190,11 +214,15 @@ export function createSingletonModule<T>(create: () => T) {
   };
 }
 
-export function createModuleManager<T>(moduleMetadata: Module<T>) {
+export function createModuleManager<T, E extends Extension>(
+  moduleMetadata: Module<T, E>,
+  extensions: E[]
+) {
   const moduleBuilder = new ModuleBuilder(
     moduleMetadata.id,
     moduleMetadata.dirname,
-    moduleMetadata.typedef
+    moduleMetadata.typedef,
+    extensions
   );
   const manager = moduleMetadata.createManager(moduleBuilder);
   return manager as Omit<T, '$builder'>;

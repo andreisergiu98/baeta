@@ -1,6 +1,6 @@
 import { getUserModule } from './typedef';
 
-const { Query } = getUserModule();
+const { User, Query } = getUserModule();
 
 Query.user(async ({ args }) => {
   return {
@@ -8,3 +8,9 @@ Query.user(async ({ args }) => {
     name: 'John Doe',
   };
 });
+
+User.name.$auth();
+
+Query.$genericAuth();
+
+Query.$genericFuck();

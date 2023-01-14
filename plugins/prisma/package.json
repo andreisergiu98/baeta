@@ -16,15 +16,15 @@
   "type": "module",
   "dependencies": {
     "@baeta/plugin": "workspace:^",
-    "@prisma/generator-helper": "^4.7.1",
-    "@prisma/internals": "^4.7.1",
+    "@prisma/generator-helper": "^4.8.1",
+    "@prisma/internals": "^4.8.1",
     "change-case-all": "^1.0.15",
     "pluralize": "^8.0.0",
     "ramda": "^0.28.0",
     "tslib": "^2.4.1"
   },
   "devDependencies": {
-    "@types/node": "^18.11.17",
+    "@types/node": "^18.11.18",
     "@types/pluralize": "^0.0.29",
     "@types/ramda": "^0.28.20",
     "graphql": "^16.6.0",

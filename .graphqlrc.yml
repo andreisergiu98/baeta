@@ -1,0 +1,6 @@
+projects:
+  examples/apollo:
+    schema:
+      - "examples/apollo/src/modules/**/*.gql"
+    include:
+      - "examples/apollo/src/**/*.gql"

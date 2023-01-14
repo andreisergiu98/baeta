@@ -106,9 +106,9 @@ export class ModuleBuilder {
     };
   }
 
-  private addTransformer(transformer: SchemaTransformer) {
+  private addTransformer = (transformer: SchemaTransformer) => {
     this.transformers.push(transformer);
-  }
+  };
 
   private setDefaultResolvers(type: string, field: string) {
     if (['Query', 'Mutation', 'Subscription'].includes(type)) {

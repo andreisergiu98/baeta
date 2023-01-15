@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 0.0.19
+
+### Patch Changes
+
+- [`a4a64a3`](https://github.com/andreisergiu98/baeta/commit/a4a64a35a75e66ca4077a86a9fd5d3ffad481b55) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix broken publishing
+
 ## 0.0.18
 
 ### Patch Changes

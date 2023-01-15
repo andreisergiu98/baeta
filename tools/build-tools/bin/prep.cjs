@@ -1,2 +1,2 @@
-require("esbuild-register");
-require("../lib/prep");
+require('esbuild-register');
+require('../lib/prep');

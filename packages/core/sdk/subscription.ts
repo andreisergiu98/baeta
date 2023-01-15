@@ -2,7 +2,6 @@ import { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
 import { FilterFn, ResolverFn, withFilter } from 'graphql-subscriptions';
 import { Subscribe, SubscribeFilter, SubscribeResolve, Subscription } from '../lib/subscription';
 
-// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 export type NativeSubscribe<Payload = any, Result = any, Root = any, Context = any, Args = any> = {
   subscribe: (
     source: Root,

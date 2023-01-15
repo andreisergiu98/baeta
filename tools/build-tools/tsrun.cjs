@@ -1,1 +1,1 @@
-require("esbuild-register");
+require('esbuild-register');

@@ -5,7 +5,6 @@ export type NativeMiddleware = (
   next: GraphQLFieldResolver<unknown, unknown, unknown, unknown | Promise<unknown>>
 ) => GraphQLFieldResolver<unknown, unknown>;
 
-// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 export type GenericMiddleware = Middleware<any, any, any, any>;
 
 export function createMiddlewareAdapter(

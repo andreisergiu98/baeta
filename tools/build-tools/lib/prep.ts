@@ -11,7 +11,7 @@ function changeFileRoot(root: string | undefined, name: string) {
   if (!root) {
     return name;
   }
-  const currentRoot = join(`package/`, root, '/');
+  const currentRoot = join('package/', root, '/');
   const wantedRoot = 'package/';
   return name.replace(currentRoot, wantedRoot);
 }

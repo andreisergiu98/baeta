@@ -1,5 +1,16 @@
 # @baeta/cli
 
+## 0.0.17
+
+### Patch Changes
+
+- [#15](https://github.com/andreisergiu98/baeta/pull/15) [`af4859a`](https://github.com/andreisergiu98/baeta/commit/af4859ae2aee4768d5710189d094059d50647e59) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - support for runtime extensions part 1
+
+- Updated dependencies [[`af4859a`](https://github.com/andreisergiu98/baeta/commit/af4859ae2aee4768d5710189d094059d50647e59)]:
+  - @baeta/generator@0.0.11
+  - @baeta/config@0.0.6
+  - @baeta/plugin@0.0.11
+
 ## 0.0.16
 
 ### Patch Changes

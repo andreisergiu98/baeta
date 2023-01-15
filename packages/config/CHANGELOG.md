@@ -1,5 +1,11 @@
 # @baeta/config
 
+## 0.0.6
+
+### Patch Changes
+
+- [#15](https://github.com/andreisergiu98/baeta/pull/15) [`af4859a`](https://github.com/andreisergiu98/baeta/commit/af4859ae2aee4768d5710189d094059d50647e59) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - support for runtime extensions part 1
+
 ## 0.0.5
 
 ### Patch Changes

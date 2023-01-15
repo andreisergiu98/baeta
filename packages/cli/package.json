@@ -59,7 +59,7 @@
     "access": "public",
     "publishDir": "dist",
     "bin": {
-      "baeta": "./bin/cli.js"
+      "baeta": "./bin/cli.cjs"
     },
     "exports": {
       ".": {

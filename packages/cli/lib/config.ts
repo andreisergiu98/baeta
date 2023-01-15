@@ -1,12 +1,10 @@
 import { BaetaOptions, createConfig } from '@baeta/config';
-import { createRequire } from 'node:module';
 
 export { createConfig };
 export type { BaetaOptions };
 
 function registerCompiler() {
   try {
-    const require = createRequire(import.meta.url);
     require('@baeta/compiler/register.cjs');
     return true;
   } catch (e) {
@@ -15,12 +13,11 @@ function registerCompiler() {
 }
 
 function requireConfig(file: string, skipCache: boolean): BaetaOptions | undefined {
-  const req = createRequire(import.meta.url);
-  const module = req.resolve(file);
+  const module = require.resolve(file);
   if (skipCache) {
-    req.cache[module] = undefined;
+    require.cache[module] = undefined;
   }
-  return req(module)?.default?.config;
+  return require(module)?.default?.config;
 }
 
 export function loadConfig(skipCache = false) {

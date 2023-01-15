@@ -23,8 +23,7 @@
     "@graphql-tools/schema": "^9.0.13",
     "@graphql-tools/utils": "^9.1.4",
     "graphql-subscriptions": "^2.0.0",
-    "ramda": "^0.28.0",
-    "type-fest": "^3.5.1"
+    "ramda": "^0.28.0"
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",

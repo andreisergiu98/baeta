@@ -2,36 +2,31 @@ import { DocumentNode, GraphQLSchema } from 'graphql';
 import { Middleware, Resolver, ScalarResolver } from '../lib';
 import { Subscription } from '../lib/subscription';
 import { extendFunction, nameFunction } from '../utils/functions';
-import { createExtensionManager, Extension, ExtensionManager, mergeExtensions } from './extension';
+import { Extension, ExtensionFactory, mergeExtensions, resolveExtensions } from './extension';
 import { createMiddlewareAdapter, GenericMiddleware } from './middleware';
 import { createResolverAdapter } from './resolver';
 import { ResolverMapper } from './resolver-mapper';
 import { createSubscriptionAdapter } from './subscription';
-import { SchemaTransformer } from './transformer';
+import { SchemaTransformer, transformSchema } from './transformer';
 
-export interface Module<T, E extends Extension> {
+export interface Module<T> {
   id: string;
   dirname: string;
   typedef: DocumentNode;
-  createManager: (builder: ModuleBuilder<E>) => T;
+  createManager: (builder: ModuleBuilder) => T;
 }
 
-type Merge<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
-
-export class ModuleBuilder<E extends Extension> {
-  mapper = new ResolverMapper();
-  transformers: SchemaTransformer[] = [];
-  typeFields: Record<string, string[]> = {};
-  extensionManager: ExtensionManager<E>;
+export class ModuleBuilder {
+  readonly mapper = new ResolverMapper();
+  readonly transformers: SchemaTransformer[] = [];
+  readonly typeFields: Record<string, string[]> = {};
 
   constructor(
     readonly id: string,
     readonly dirname: string,
     readonly typedef: DocumentNode,
-    readonly extensions: E[]
-  ) {
-    this.extensionManager = createExtensionManager(extensions);
-  }
+    private readonly extensions: Extension[]
+  ) {}
 
   createResolverBuilder<Result, Root, Context, Args>(type: string, field: string) {
     this.registerTypeField(type, field);
@@ -42,7 +37,7 @@ export class ModuleBuilder<E extends Extension> {
     };
 
     return extendFunction(builder, {
-      // ...this.getResolverExtensions<Result, Root, Context, Args>(type, field),
+      ...this.getResolverExtensions<Result, Root, Context, Args>(type, field),
       $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(type, field),
     });
   }
@@ -50,23 +45,31 @@ export class ModuleBuilder<E extends Extension> {
   createSubscriptionBuilder<Result, Root, Context, Args>(field: string) {
     this.registerTypeField('Subscription', field);
 
+    const subscribeField = `${field}.subscribe`;
+    const resolveField = `${field}.resolve`;
+    const filterField = `${field}.filter`;
+
     const builder = <Payload>(subscription: Subscription<Payload, Result, Root, Context, Args>) => {
-      nameFunction(subscription.subscribe, `${field}.subscribe`);
-      nameFunction(subscription.resolve, `${field}.resolve`);
-      nameFunction(subscription.filter, `${field}.filter`);
+      nameFunction(subscription.subscribe, subscribeField);
+      nameFunction(subscription.resolve, resolveField);
+      nameFunction(subscription.filter, filterField);
       this.mapper.setSubscription(field, createSubscriptionAdapter(subscription));
     };
 
     return extendFunction(builder, {
-      $subscribeUse: this.createMiddlewareBuilder('Subscription', `${field}.subscribe`) as <
-        Payload
-      >(
-        middleware: Middleware<AsyncIterator<Payload>, Root, Context, Args>
-      ) => void,
-      $resolveUse: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
-        'Subscription',
-        `${field}.resolve`
-      ),
+      subscribe: {
+        ...this.getSubscriptionSubscribeExtensions<Root, Context, Args>(field),
+        $use: this.createMiddlewareBuilder('Subscription', subscribeField) as <Payload>(
+          middleware: Middleware<AsyncIterator<Payload>, Root, Context, Args>
+        ) => void,
+      },
+      resolve: {
+        ...this.getSubscriptionResolveExtensions<Result, Root, Context, Args>(field),
+        $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
+          'Subscription',
+          resolveField
+        ),
+      },
     });
   }
 
@@ -88,12 +91,14 @@ export class ModuleBuilder<E extends Extension> {
 
   createTypeMethods<Root, Context>(type: string) {
     return {
+      ...this.getTypeExtensions<Root, Context>(type),
       $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(type, '*'),
     };
   }
 
   createSubscriptionMethods<Root, Context>() {
     return {
+      ...this.createTypeMethods<Root, Context>('Subscription'),
       $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(
         'Subscription',
         '*'
@@ -103,11 +108,41 @@ export class ModuleBuilder<E extends Extension> {
 
   createModuleMethods<Context>() {
     return {
-      // ...this.getModuleExtensions(),
-      $builder: this as ModuleBuilder<E>,
+      ...this.getModuleExtensions(),
+      $builder: this as ModuleBuilder,
       $use: this.createMiddlewareBuilder<Middleware<unknown, unknown, Context, unknown>>('*', '*'),
       $directive: this.addTransformer,
     };
+  }
+
+  private getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
+    return mergeExtensions(this.extensions, (ext) =>
+      ext.getResolverExtensions(type, field)
+    ) as BaetaExtensions.ResolverExtensions<Result, Root, Context, Args>;
+  }
+
+  private getTypeExtensions<Root, Context>(type: string) {
+    return mergeExtensions(this.extensions, (ext) =>
+      ext.getTypeExtensions(type)
+    ) as BaetaExtensions.TypeExtensions<Root, Context>;
+  }
+
+  private getSubscriptionSubscribeExtensions<Root, Context, Args>(type: string) {
+    return mergeExtensions(this.extensions, (ext) =>
+      ext.getSubscriptionSubscribeExtensions(type)
+    ) as BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args>;
+  }
+
+  private getSubscriptionResolveExtensions<Result, Root, Context, Args>(type: string) {
+    return mergeExtensions(this.extensions, (ext) =>
+      ext.getSubscriptionResolveExtensions(type)
+    ) as BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args>;
+  }
+
+  private getModuleExtensions() {
+    return mergeExtensions(this.extensions, (ext) =>
+      ext.getModuleExtensions()
+    ) as BaetaExtensions.ModuleExtensions;
   }
 
   private addTransformer = (transformer: SchemaTransformer) => {
@@ -140,54 +175,17 @@ export class ModuleBuilder<E extends Extension> {
     this.typeFields[type].push(field);
   }
 
-  private getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
-    // return this.mergeExtensions(
-    //   this.extensions.map((extension) =>
-    //     extension.getResolverExtensions<Result, Root, Context, Args>(type, field)
-    //   )
-    // );
-  }
-
-  getTypeExtensions<Root, Context>(type: string) {
-    const handler: E['getTypeExtensions'] = (type: string) => {
-      return mergeExtensions(this.extensions, (extension) =>
-        extension.getTypeExtensions<Root, Context>(type)
-      );
-    };
-    return handler;
-  }
-
-  private getModuleExtensions() {
-    // const list = this.extensions.map((extension) => extension.getModuleExtensions());
-    // return this.mergeExtensions(list);
-  }
-
-  private mergeExt<T, K>(items: T[], callback: (item: T) => K) {
-    const list = items.map(callback);
-    const reduced = list.reduce((acc, handler) => ({
-      ...acc,
-      ...handler,
-    }));
-    return reduced;
-  }
-
-  private mergeExtensions<T>(list: T[]) {
-    return list.reduce((acc, handler) => ({ ...acc, ...handler }));
-  }
-
   private transform = (schema: GraphQLSchema) => {
-    // const pluginTransformers = this.extensions.flatMap((extension) => extension.getTransformers());
-    // const transformers = pluginTransformers.concat(this.transformers);
-    // return transformSchema(schema, transformers);
-    return schema;
+    return transformSchema(schema, [
+      ...this.transformers,
+      ...this.extensions.flatMap((ext) => ext.getTransformers()),
+    ]);
   };
 
   build = () => {
-    // for (const extension of this.extensions) {
-    //   extension.build?.();
-    //   extension.setResolvers?.(this.mapper, this.typeFields);
-    //   extension.registerMiddlewares?.(this.mapper, this.typeFields);
-    // }
+    for (const extension of this.extensions) {
+      extension.build(this.mapper, this.typeFields);
+    }
 
     return {
       typedef: this.typedef,
@@ -214,15 +212,15 @@ export function createSingletonModule<T>(create: () => T) {
   };
 }
 
-export function createModuleManager<T, E extends Extension>(
-  moduleMetadata: Module<T, E>,
-  extensions: E[]
+export function createModuleManager<T>(
+  moduleMetadata: Module<T>,
+  extensions?: ExtensionFactory<Extension>[]
 ) {
   const moduleBuilder = new ModuleBuilder(
     moduleMetadata.id,
     moduleMetadata.dirname,
     moduleMetadata.typedef,
-    extensions
+    resolveExtensions(extensions ?? [])
   );
   const manager = moduleMetadata.createManager(moduleBuilder);
   return manager as Omit<T, '$builder'>;

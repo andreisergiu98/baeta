@@ -9,8 +9,6 @@ Query.user(async ({ args }) => {
   };
 });
 
-User.name.$auth();
-
-Query.$genericAuth();
-
-Query.$genericFuck();
+User.name.$use((params, next) => {
+  return next();
+});

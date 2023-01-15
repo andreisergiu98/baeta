@@ -1,5 +1,11 @@
 # @baeta/cli
 
+## 0.0.20
+
+### Patch Changes
+
+- [`55f1d45`](https://github.com/andreisergiu98/baeta/commit/55f1d45572ae1f0c0b1c8934172f8482c6897674) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - remove import.meta
+
 ## 0.0.19
 
 ### Patch Changes

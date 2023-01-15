@@ -1,46 +1,20 @@
-import { GraphQLFieldResolver } from 'graphql';
+import { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
 import { FilterFn, ResolverFn, withFilter } from 'graphql-subscriptions';
-import {
-  Subscribe,
-  SubscribeFilter,
-  SubscribeResolve,
-  Subscription,
-  SubscriptionResolver,
-} from '../lib/subscription';
-import { nameFunction } from '../utils/functions';
-import { ModuleBuilder } from './module';
+import { Subscribe, SubscribeFilter, SubscribeResolve, Subscription } from '../lib/subscription';
 
-export type NativeSubscribe = {
-  subscribe: GraphQLFieldResolver<{}, {}>;
-  resolve?: GraphQLFieldResolver<{}, {}>;
+export type NativeSubscribe<Payload = any, Result = any, Root = any, Context = any, Args = any> = {
+  subscribe: (
+    source: Root,
+    args: Args,
+    context: Context,
+    info: GraphQLResolveInfo
+  ) => AsyncIterator<Payload>;
+  resolve?: GraphQLFieldResolver<Payload, Context, Args, Result>;
 };
 
-export type SubscriptionOptions<Payload, Sub> = Sub extends SubscriptionResolver<
-  infer Result,
-  string,
-  infer Root,
-  infer Context,
-  infer Args
->
-  ? Subscription<Payload, Result, Root, Context, Args>
-  : never;
-
-export function createSubscriptionBuilder<Subscription>(module: ModuleBuilder, field: string) {
-  const builder = <Payload>(subscription: SubscriptionOptions<Payload, Subscription>) => {
-    registerSubscription(module, field, subscription);
-  };
-  return builder;
-}
-
-function registerSubscription<Payload, Subscription>(
-  module: ModuleBuilder,
-  field: string,
-  subscription: SubscriptionOptions<Payload, Subscription>
+export function createSubscriptionAdapter<Payload, Result, Root, Context, Args>(
+  subscription: Subscription<Payload, Result, Root, Context, Args>
 ) {
-  nameFunction(subscription.subscribe, `${field}.subscribe`);
-  nameFunction(subscription.resolve, `${field}.resolve`);
-  nameFunction(subscription.filter, `${field}.filter`);
-
   const resolver: NativeSubscribe = {
     subscribe: createSubscribeAdapter(subscription.subscribe, subscription.filter),
   };
@@ -49,12 +23,12 @@ function registerSubscription<Payload, Subscription>(
     resolver.resolve = createResolverAdapter(subscription.resolve);
   }
 
-  module.onSubscription(field, resolver);
+  return resolver;
 }
 
-function createSubscribeAdapter<Payload>(
-  subscribe: Subscribe<Payload>,
-  filter?: SubscribeFilter<Payload>
+function createSubscribeAdapter<Payload, Root, Context, Args>(
+  subscribe: Subscribe<Payload, Root, Context, Args>,
+  filter?: SubscribeFilter<Payload, Context, Args>
 ) {
   const adapter: ResolverFn = (root, args, context, info) => {
     const params = {
@@ -73,7 +47,9 @@ function createSubscribeAdapter<Payload>(
   return withFilter(adapter, createFilterAdapter(filter));
 }
 
-function createFilterAdapter<Payload>(filter: SubscribeFilter<Payload>): FilterFn {
+function createFilterAdapter<Payload, Context, Args>(
+  filter: SubscribeFilter<Payload, Context, Args>
+): FilterFn {
   return function adapter(payload, args, context, info) {
     const params = {
       payload,
@@ -85,24 +61,16 @@ function createFilterAdapter<Payload>(filter: SubscribeFilter<Payload>): FilterF
   };
 }
 
-function createResolverAdapter<Payload>(
-  resolve: SubscribeResolve<unknown, Payload>
-): GraphQLFieldResolver<unknown, {}> {
+function createResolverAdapter<Payload, Result, Context, Args>(
+  resolve: SubscribeResolve<Result, Payload, Context, Args>
+): GraphQLFieldResolver<Payload, Context, Args, Result> {
   return function adapter(payload, args, context, info) {
     const params = {
       args,
       info,
       ctx: context,
-      payload: payload as Payload,
+      payload: payload,
     };
-    return resolve(params);
+    return resolve(params) as Result;
   };
-}
-
-export function aggregateSubscriptions<Resolvers, ResolversType>(
-  module: ModuleBuilder,
-  _type: ResolversType,
-  resolvers: Resolvers
-) {
-  return resolvers;
 }

@@ -58,6 +58,8 @@ export function buildModule(
     rootTypes,
     schema,
     baseVisitor,
+    fieldTypes,
+    fieldArguments,
   }: {
     importNamespace: string;
     importPath: string;
@@ -68,6 +70,8 @@ export function buildModule(
     baseVisitor: BaseVisitor;
     schema?: GraphQLSchema;
     useGraphQLModules: boolean;
+    fieldTypes: Record<string, Record<string, string>>;
+    fieldArguments: Record<string, Record<string, boolean>>;
   }
 ): string {
   const picks: Record<RegistryKeys, Record<string, string[]>> = createObject(
@@ -146,9 +150,6 @@ export function buildModule(
     printDefinedEnumValues(),
     printDefinedInputFields(),
     printSchemaTypes(usedTypes),
-    printScalars(visited),
-    printResolveSignaturesPerType(visited),
-    printResolversType(visited),
     printMetadata(),
   ]
     .filter(Boolean)
@@ -213,8 +214,11 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
    */
 
   function printObjectFieldResolverBuilder(typeName: string, field: string) {
-    const resolverType = `${typeName}Resolvers["${field}"]`;
-    return `${field}: Baeta.createResolverBuilder<NonNullable<${resolverType}>>(module, "${typeName}", "${field}"),`;
+    const parentType = getParentType(typeName);
+    const resultType = getResultType(typeName, field);
+    const argumentsType = getArgsType(typeName, field);
+    const contextType = getContextType();
+    return `${field}: module.createResolverBuilder<${resultType}, ${parentType}, ${contextType}, ${argumentsType}>("${typeName}", "${field}"),`;
   }
 
   function printObjectResolverBuilder(typeName: string, objects: Record<string, string[]>) {
@@ -227,14 +231,21 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       return '';
     }
 
-    const resolversType = `${typeName}Resolvers`;
-    const content = `{\n${fields.map(indent(2)).join('\n')}\n}`;
-    return `${typeName}: Baeta.aggregateResolvers(module, "${typeName}", {} as ${resolversType}, ${content}),`;
+    const parentType = getParentType(typeName);
+    const contextType = getContextType();
+
+    const addons = [`...module.createTypeMethods<${parentType}, ${contextType}>("${typeName}"),`];
+    const contentBody = [...addons, ...fields].map(indent(2)).join('\n');
+    const content = `{\n${contentBody}\n}`;
+    return `${typeName}: ${content},`;
   }
 
   function printSubscriptionFieldBuilder(field: string) {
-    const resolverType = `SubscriptionResolvers["${field}"]`;
-    return `${field}: Baeta.createSubscriptionBuilder<${resolverType}>(module, "${field}"),`;
+    const parentType = getParentType('Subscription');
+    const resultType = getResultType('Subscription', field);
+    const argumentsType = getArgsType('Subscription', field);
+    const contextType = getContextType();
+    return `${field}: module.createSubscriptionBuilder<${resultType}, ${parentType}, ${contextType}, ${argumentsType}>("${field}"),`;
   }
 
   function printSubscriptionObjectBuilder() {
@@ -246,9 +257,13 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
 
     const fields = subscriptions.map((subscription) => printSubscriptionFieldBuilder(subscription));
 
-    const resolversType = 'SubscriptionResolvers';
-    const content = `{\n${fields.map(indent(2)).join('\n')}\n}`;
-    return `Subscription: Baeta.aggregateSubscriptions(module, {} as ${resolversType}, ${content}),`;
+    const parentType = getParentType('Subscription');
+    const contextType = getContextType();
+    const addons = [`...module.createSubscriptionMethods<${parentType}, ${contextType}>(),`];
+    const contentBody = [...addons, ...fields].map(indent(2)).join('\n');
+
+    const content = `{\n${contentBody}\n}`;
+    return `Subscription: ${content},`;
   }
 
   function printScalarBuilder() {
@@ -257,9 +272,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       return '';
     }
 
-    const fields = scalars.map(
-      (scalar) => `${scalar}: Baeta.createScalarBuilder(module, "${scalar}"),`
-    );
+    const fields = scalars.map((scalar) => `${scalar}: module.createScalarBuilder("${scalar}"),`);
     const content = fields.map(indent(2)).join('\n');
     return `Scalar: {\n${content}\n},`;
   }
@@ -270,14 +283,22 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       .map((typeName) => printObjectResolverBuilder(typeName, picks.objects))
       .filter(Boolean);
 
-    const bodyFields = [...objects, printScalarBuilder(), printSubscriptionObjectBuilder()];
+    const contextType = getContextType();
+    const addons = [`...module.createModuleMethods<${contextType}>(),`];
+
+    const bodyFields = [
+      ...addons,
+      ...objects,
+      printScalarBuilder(),
+      printSubscriptionObjectBuilder(),
+    ];
 
     const body = bodyFields.filter(Boolean).map(indent(6)).join('\n');
     const content = `{\n${body}\n    }`;
 
     return `
   export function createManager(module: Baeta.ModuleBuilder) {
-    return Baeta.aggregateBuilders(module, {} as Resolvers, ${content});
+    return ${content};
   }`;
   }
 
@@ -319,98 +340,6 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       .filter((type) => !visited.scalars.includes(type))
       .map(printExportType)
       .join('\n');
-  }
-
-  function printResolveSignaturesPerType(registry: Registry) {
-    return [
-      [...registry.objects, ...registry.interfaces]
-        .map((name) =>
-          printResolverType(
-            name,
-            'DefinedFields',
-            // In case of enabled `requireRootResolvers` flag, the preset has to produce a non-optional properties.
-            requireRootResolvers && rootTypes.includes(name),
-            !rootTypes.includes(name) && defined.objects.includes(name) ? ` | '__isTypeOf'` : ''
-          )
-        )
-        .join('\n'),
-    ].join('\n');
-  }
-
-  function printScalars(registry: Registry) {
-    if (!registry.scalars.length) {
-      return '';
-    }
-
-    return [
-      `export type ${encapsulateTypeName(
-        'Scalars'
-      )} = Pick<${importNamespace}.Scalars, ${registry.scalars.map(withQuotes).join(' | ')}>;`,
-      ...registry.scalars.map((scalar) => {
-        const convertedName = baseVisitor.convertName(scalar, {
-          suffix: 'ScalarConfig',
-        });
-        return `export type ${encapsulateTypeName(
-          convertedName
-        )} = ${importNamespace}.${convertedName};`;
-      }),
-    ].join('\n');
-  }
-
-  /**
-   * Aggregation of type resolver signatures
-   */
-  function printResolversType(registry: Registry) {
-    const lines: string[] = [];
-
-    for (const kind in registry) {
-      if (!Object.prototype.hasOwnProperty.call(registry, kind)) {
-        continue;
-      }
-
-      if (!resolverKeys.includes(kind as 'objects' | 'scalars' | 'enums')) {
-        continue;
-      }
-
-      const k = kind as RegistryKeys;
-      const types = registry[k];
-
-      types.forEach((typeName) => {
-        if (k === 'enums') {
-          return;
-        }
-        if (k === 'scalars') {
-          lines.push(
-            `${typeName}?: ${encapsulateTypeName(importNamespace)}.Resolvers['${typeName}'];`
-          );
-        } else {
-          // In case of enabled `requireRootResolvers` flag, the preset has to produce a non-optional property.
-          const fieldModifier = requireRootResolvers && rootTypes.includes(typeName) ? '' : '?';
-
-          lines.push(`${typeName}${fieldModifier}: ${encapsulateTypeName(typeName)}Resolvers;`);
-        }
-      });
-    }
-
-    return buildBlock({
-      name: `export interface ${encapsulateTypeName('Resolvers')}`,
-      lines,
-    });
-  }
-
-  function printResolverType(
-    typeName: string,
-    picksTypeName: string,
-    requireFieldsResolvers = false,
-    extraKeys = ''
-  ) {
-    const typeSignature = `Pick<${importNamespace}.${baseVisitor.convertName(typeName, {
-      suffix: 'Resolvers',
-    })}, ${picksTypeName}['${typeName}']${extraKeys}>`;
-
-    return `export type ${encapsulateTypeName(`${typeName}Resolvers`)} = ${
-      requireFieldsResolvers ? `Required<${typeSignature}>` : typeSignature
-    };`;
   }
 
   function printPicks(typeName: string, records: Record<string, string[]>): string {
@@ -580,5 +509,29 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
         break;
       }
     }
+  }
+
+  function getParentType(type: string) {
+    if (['Query', 'Mutation', 'Subscription'].includes(type)) {
+      return '{}';
+    }
+    return type;
+  }
+
+  function getResultType(type: string, field: string) {
+    return fieldTypes?.[type]?.[field] || '{}';
+  }
+
+  function getArgsType(type: string, field: string) {
+    const hasArgs = fieldArguments?.[type]?.[field] ?? false;
+    if (!hasArgs) {
+      return '{}';
+    }
+    const fieldUpper = field[0].toUpperCase() + field.slice(1);
+    return `Types.${type}${fieldUpper}Args`;
+  }
+
+  function getContextType() {
+    return 'Types.ContextType';
   }
 }

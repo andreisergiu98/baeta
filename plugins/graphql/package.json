@@ -16,50 +16,46 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "yarn prep --move dist",
-    "postpack": "yarn prep --clean"
+    "postpack": "yarn prep"
   },
   "dependencies": {
     "@baeta/config": "workspace:^",
     "@baeta/plugin": "workspace:^",
-    "@graphql-codegen/core": "^2.6.6",
-    "@graphql-codegen/plugin-helpers": "^2.7.2",
-    "@graphql-codegen/typescript": "^2.8.3",
-    "@graphql-codegen/typescript-resolvers": "^2.7.8",
-    "@graphql-codegen/visitor-plugin-common": "2.13.3",
-    "@graphql-tools/apollo-engine-loader": "^7.3.19",
-    "@graphql-tools/code-file-loader": "^7.3.13",
-    "@graphql-tools/git-loader": "^7.2.13",
-    "@graphql-tools/github-loader": "^7.3.20",
-    "@graphql-tools/graphql-file-loader": "^7.5.11",
-    "@graphql-tools/json-file-loader": "^7.4.12",
-    "@graphql-tools/load": "^7.8.6",
-    "@graphql-tools/prisma-loader": "^7.2.42",
-    "@graphql-tools/url-loader": "^7.16.22",
-    "@graphql-tools/utils": "^9.1.1",
+    "@graphql-codegen/core": "^2.6.8",
+    "@graphql-codegen/plugin-helpers": "^3.1.2",
+    "@graphql-codegen/typescript": "^2.8.7",
+    "@graphql-codegen/visitor-plugin-common": "2.13.7",
+    "@graphql-tools/apollo-engine-loader": "^7.3.22",
+    "@graphql-tools/code-file-loader": "^7.3.16",
+    "@graphql-tools/git-loader": "^7.2.16",
+    "@graphql-tools/github-loader": "^7.3.23",
+    "@graphql-tools/graphql-file-loader": "^7.5.14",
+    "@graphql-tools/json-file-loader": "^7.4.15",
+    "@graphql-tools/load": "^7.8.9",
+    "@graphql-tools/prisma-loader": "^7.2.52",
+    "@graphql-tools/url-loader": "^7.17.1",
+    "@graphql-tools/utils": "^9.1.4",
     "auto-bind": "^5.0.1",
     "change-case-all": "1.0.15",
     "parse-filepath": "^1.0.2",
     "tslib": "^2.4.1"
   },
   "devDependencies": {
-    "@baeta/prep": "workspace:^",
-    "@types/node": "^18.11.10",
+    "@baeta/build-tools": "workspace:^",
+    "@types/node": "^18.11.18",
     "@types/parse-filepath": "1.0.0",
     "graphql": "^16.6.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
-    "directory": "dist",
+    "publishDir": "dist",
     "exports": {
       ".": {
         "import": "./index.js",

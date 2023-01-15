@@ -1,9 +1,9 @@
-import { defineConfig } from '@baeta/prep';
+import { defineConfig } from '@baeta/build-tools/tsup';
 
 export default defineConfig({
   entry: ['index.ts', 'sdk/index.ts'],
   format: ['esm', 'cjs'],
-  external: ['@baeta/compiler'],
   dts: true,
   clean: true,
+  splitting: true,
 });

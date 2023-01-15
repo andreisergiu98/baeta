@@ -16,14 +16,13 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "yarn prep --move dist",
-    "postpack": "yarn prep --clean"
+    "postpack": "yarn prep"
   },
   "dependencies": {
     "@baeta/config": "workspace:^",
     "@baeta/generator": "workspace:^",
     "@baeta/plugin": "workspace:^",
-    "chalk": "^5.1.2",
+    "chalk": "^5.2.0",
     "chokidar": "^3.5.3",
     "cli-spinners": "^2.7.0",
     "ink": "^3.2.0",
@@ -38,24 +37,23 @@
     "@baeta/compiler": "workspace:^"
   },
   "devDependencies": {
+    "@baeta/build-tools": "workspace:^",
     "@baeta/core": "workspace:^",
-    "@baeta/prep": "workspace:^",
-    "@types/node": "^18.11.10",
+    "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
-    "@types/yargs": "^17.0.15",
+    "@types/yargs": "^17.0.19",
     "graphql": "^16.6.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   },
   "bin": {
     "baeta": "./bin/cli-dev.cjs"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
+    "publishDir": "dist",
     "bin": {
       "baeta": "./bin/cli.js"
     },

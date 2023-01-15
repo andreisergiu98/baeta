@@ -76,8 +76,8 @@ export function generateAndWatch(config: BaetaOptions, watchOptions?: WatchOptio
   const plugins = getPlugins(config);
 
   const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(config, plugin.config));
-  const toWatch = pluginsWatchOptions.map((options) => options.include).flat();
-  const toIgnore = pluginsWatchOptions.map((options) => options.ignore).flat();
+  const toWatch = pluginsWatchOptions.flatMap((options) => options.include);
+  const toIgnore = pluginsWatchOptions.flatMap((options) => options.ignore);
 
   let previousCtx: GeneratorCtxV1 | undefined;
 

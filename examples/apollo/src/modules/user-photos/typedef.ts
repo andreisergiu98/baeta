@@ -14,29 +14,27 @@ interface DefinedFields {
 export type UserPhoto = Pick<Types.UserPhoto, DefinedFields['UserPhoto']>;
 export type User = Types.User;
 
-export type UserPhotoResolvers = Pick<Types.UserPhotoResolvers, DefinedFields['UserPhoto'] | '__isTypeOf'>;
-export type UserResolvers = Pick<Types.UserResolvers, DefinedFields['User']>;
-
-export interface Resolvers {
-  UserPhoto?: UserPhotoResolvers;
-  User?: UserResolvers;
-};
-
 export namespace ModuleMetadata {
   export const id = 'user-photos';
   export const dirname = './user-photos';
-  export const typedef = {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":19,"end":21}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":23,"end":25}},"loc":{"start":23,"end":25}},"loc":{"start":23,"end":26}},"directives":[],"loc":{"start":19,"end":26}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":29,"end":32}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":34,"end":40}},"loc":{"start":34,"end":40}},"loc":{"start":34,"end":41}},"directives":[],"loc":{"start":29,"end":41}}],"loc":{"start":0,"end":43}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":57,"end":61}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":66,"end":72}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":75,"end":84}},"loc":{"start":75,"end":84}},"loc":{"start":75,"end":85}},"loc":{"start":74,"end":86}},"directives":[],"loc":{"start":66,"end":86}}],"loc":{"start":45,"end":88}}]} as unknown as DocumentNode;
+  export const typedef = {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":19,"end":21}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":23,"end":25}},"loc":{"start":23,"end":25}},"loc":{"start":23,"end":26}},"directives":[],"loc":{"start":19,"end":26}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":29,"end":32}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":34,"end":40}},"loc":{"start":34,"end":40}},"loc":{"start":34,"end":41}},"directives":[],"loc":{"start":29,"end":41}}],"loc":{"start":0,"end":43}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":57,"end":61}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":66,"end":72}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":75,"end":84}},"loc":{"start":75,"end":84}},"loc":{"start":75,"end":85}},"loc":{"start":74,"end":86}},"directives":[],"loc":{"start":66,"end":86}}],"loc":{"start":45,"end":88}},{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":97,"end":105}},"directives":[],"loc":{"start":90,"end":105}}]} as unknown as DocumentNode;
   
   export function createManager(module: Baeta.ModuleBuilder) {
-    return Baeta.aggregateBuilders(module, {} as Resolvers, {
-      UserPhoto: Baeta.aggregateResolvers(module, "UserPhoto", {} as UserPhotoResolvers, {
-        id: Baeta.createResolverBuilder<NonNullable<UserPhotoResolvers["id"]>>(module, "UserPhoto", "id"),
-        url: Baeta.createResolverBuilder<NonNullable<UserPhotoResolvers["url"]>>(module, "UserPhoto", "url"),
-      }),
-      User: Baeta.aggregateResolvers(module, "User", {} as UserResolvers, {
-        photos: Baeta.createResolverBuilder<NonNullable<UserResolvers["photos"]>>(module, "User", "photos"),
-      }),
-    });
+    return {
+      ...module.createModuleMethods<Types.ContextType>(),
+      UserPhoto: {
+        ...module.createTypeMethods<UserPhoto, Types.ContextType>("UserPhoto"),
+        id: module.createResolverBuilder<Types.Scalars["ID"], UserPhoto, Types.ContextType, {}>("UserPhoto", "id"),
+        url: module.createResolverBuilder<Types.Scalars["String"], UserPhoto, Types.ContextType, {}>("UserPhoto", "url"),
+      },
+      User: {
+        ...module.createTypeMethods<User, Types.ContextType>("User"),
+        photos: module.createResolverBuilder<Types.Maybe<Array<UserPhoto>>, User, Types.ContextType, {}>("User", "photos"),
+      },
+      Scalar: {
+        DateTime: module.createScalarBuilder("DateTime"),
+      },
+    };
   }
 }
 

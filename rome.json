@@ -3,8 +3,9 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "nursery": {
-        "noExplicitAny": "off"
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off"
       }
     },
     "ignore": [
@@ -21,5 +22,8 @@
       "./.pnp.cjs",
       "./.pnp.loader.mjs"
     ]
+  },
+  "formatter": {
+    "enabled": false
   }
 }

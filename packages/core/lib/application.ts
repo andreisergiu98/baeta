@@ -1,4 +1,3 @@
-import { mergeTypeDefs } from '@graphql-tools/merge';
 import { IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import { pruneSchema } from '@graphql-tools/utils';
 import { printSchema } from 'graphql';
@@ -16,14 +15,13 @@ export interface Options {
 export function createApplication(options: Options) {
   const builders = options.modules.map((module) => getModuleBuilder(module));
   const builtModules = builders.map((builder) => builder.build());
-
   const typeDefs = builtModules.map((b) => b.typedef);
-  const resolvers = builtModules.map((b) => b.resolvers).flat();
-  const transformers = builtModules.map((b) => b.transform).flat();
+  const resolvers = builtModules.map((b) => b.resolvers);
+  const transformers = builtModules.flatMap((b) => b.transform);
 
   let schema = makeExecutableSchema({
     ...options.executableSchemaOptions,
-    typeDefs: mergeTypeDefs(typeDefs),
+    typeDefs,
     resolvers,
   });
 

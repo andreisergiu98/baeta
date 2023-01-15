@@ -1,26 +1,52 @@
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { createApplication } from '@baeta/core';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import { createServer } from 'http';
+import { WebSocketServer } from 'ws';
 import { userModule } from './modules/user';
 import { userPhotosModule } from './modules/user-photos';
-import { Context } from './types/context';
 
-const app = createApplication({
+const baeta = createApplication({
   modules: [userModule, userPhotosModule],
   pruneSchema: true,
 });
 
-const apollo = new ApolloServer<Context>({
-  schema: app.schema,
+const app = express();
+const httpServer = createServer(app);
+
+const ws = new WebSocketServer({
+  path: '/graphql',
+  server: httpServer,
 });
 
-startStandaloneServer(apollo, {
-  listen: { port: 5000 },
-  context: async ({ req, res }) => {
-    return {
-      userId: '123',
-    };
-  },
-}).then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+const cleanup = useServer({ schema: baeta.schema }, ws);
+
+const apollo = new ApolloServer({
+  schema: baeta.schema,
+  plugins: [
+    ApolloServerPluginDrainHttpServer({ httpServer }),
+    {
+      async serverWillStart() {
+        return {
+          async drainServer() {
+            await cleanup.dispose();
+          },
+        };
+      },
+    },
+  ],
 });
+
+async function start() {
+  await apollo.start();
+  app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(apollo));
+  await new Promise<void>((resolve) => httpServer.listen({ port: 5000 }, resolve));
+  console.log('🚀 Server ready at http://localhost:5000/graphql');
+}
+
+start();

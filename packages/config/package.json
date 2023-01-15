@@ -16,22 +16,20 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "yarn prep --move dist",
-    "postpack": "yarn prep --clean"
+    "postpack": "yarn prep"
   },
   "devDependencies": {
-    "@baeta/prep": "workspace:^",
-    "@types/node": "^18.11.10",
-    "esbuild": "^0.15.17",
-    "typescript": "^4.9.3"
+    "@baeta/build-tools": "workspace:^",
+    "@types/node": "^18.11.18",
+    "esbuild": "^0.16.17",
+    "typescript": "^4.9.4"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
+    "publishDir": "dist",
     "exports": {
       ".": {
         "import": "./index.js",

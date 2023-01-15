@@ -1,11 +1,17 @@
+import { getBaseType } from '@graphql-codegen/plugin-helpers';
+import { DEFAULT_SCALARS, wrapTypeWithModifiers } from '@graphql-codegen/visitor-plugin-common';
 import { Source } from '@graphql-tools/utils';
 import {
   DefinitionNode,
   DocumentNode,
   FieldDefinitionNode,
+  GraphQLFieldMap,
+  GraphQLObjectType,
+  GraphQLSchema,
   InputValueDefinitionNode,
   Kind,
   NamedTypeNode,
+  ObjectTypeDefinitionNode,
   TypeNode,
 } from 'graphql';
 import parse from 'parse-filepath';
@@ -103,6 +109,77 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
   }
 
   return used;
+}
+
+function collectObjectFieldType(
+  node: ObjectTypeDefinitionNode,
+  fieldDefinition: FieldDefinitionNode,
+  fieldsMap: GraphQLFieldMap<unknown, unknown>,
+  fieldTypes: Record<string, Record<string, string>>
+) {
+  const objectName = node.name.value;
+  const fieldName = fieldDefinition.name.value;
+
+  const field = fieldsMap[fieldDefinition.name.value];
+  const baseName = getBaseType(field.type).name;
+  const isDefaultScalar = DEFAULT_SCALARS[baseName] != null;
+  const name = isDefaultScalar ? `Types.Scalars["${baseName}"]` : baseName;
+
+  const type = wrapTypeWithModifiers(name, field.type, {
+    wrapOptional: (str: string) => {
+      return `Types.Maybe<${str}>`;
+    },
+    wrapArray: (str: string) => {
+      return `Array<${str}>`;
+    },
+  });
+
+  if (fieldTypes[objectName] == null) {
+    fieldTypes[objectName] = {};
+  }
+  fieldTypes[objectName][fieldName] = type;
+}
+
+function collectObjectFieldArguments(
+  node: ObjectTypeDefinitionNode,
+  fieldDefinition: FieldDefinitionNode,
+  fieldArguments: Record<string, Record<string, boolean>>
+) {
+  const objectName = node.name.value;
+  const fieldName = fieldDefinition.name.value;
+  const hasArguments = fieldDefinition.arguments != null && fieldDefinition.arguments.length > 0;
+
+  if (fieldArguments[objectName] == null) {
+    fieldArguments[objectName] = {};
+  }
+  fieldArguments[objectName][fieldName] = hasArguments;
+}
+
+export function collectObjectFieldTypesAndArguments(schema?: GraphQLSchema) {
+  const fieldTypes: Record<string, Record<string, string>> = {};
+  const fieldArguments: Record<string, Record<string, boolean>> = {};
+
+  if (!schema) {
+    return { fieldTypes, fieldArguments };
+  }
+
+  const schemaTypes = schema.getTypeMap();
+
+  for (const type of Object.values(schemaTypes)) {
+    if (type.astNode?.kind !== Kind.OBJECT_TYPE_DEFINITION) {
+      continue;
+    }
+
+    const schemaType = schemaTypes[type.name] as GraphQLObjectType;
+    const fieldsMap = schemaType.getFields();
+
+    for (const field of type.astNode.fields ?? []) {
+      collectObjectFieldArguments(type.astNode, field, fieldArguments);
+      collectObjectFieldType(type.astNode, field, fieldsMap, fieldTypes);
+    }
+  }
+
+  return { fieldTypes, fieldArguments };
 }
 
 export function resolveTypeNode(node: TypeNode): NamedTypeNode {

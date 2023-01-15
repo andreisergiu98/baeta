@@ -4,5 +4,6 @@ export interface GraphqlPluginOptions {
   moduleDefinitionName?: string;
   baseTypesPath?: string;
   contextType?: string;
+  extensions?: string;
   scalars?: Record<string, string>;
 }

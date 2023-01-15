@@ -60,6 +60,7 @@ export function buildModule(
     baseVisitor,
     fieldTypes,
     fieldArguments,
+    extensionsPath,
   }: {
     importNamespace: string;
     importPath: string;
@@ -72,6 +73,7 @@ export function buildModule(
     useGraphQLModules: boolean;
     fieldTypes: Record<string, Record<string, string>>;
     fieldArguments: Record<string, Record<string, boolean>>;
+    extensionsPath?: string;
   }
 ): string {
   const picks: Record<RegistryKeys, Record<string, string[]>> = createObject(
@@ -145,6 +147,12 @@ export function buildModule(
     'import * as Baeta from "@baeta/core/sdk";',
   ];
 
+  if (extensionsPath) {
+    imports.push(`import baetaExtensions from "${extensionsPath}";`);
+  }
+
+  imports.push('\n');
+
   let content = [
     printDefinedFields(),
     printDefinedEnumValues(),
@@ -202,9 +210,10 @@ export function buildModule(
     const name = moduleNamespace.slice(0, moduleNamespace.length - 6);
     const createModuleFn = `create${name}Module`;
     const getModuleFn = `get${name}Module`;
+    const extensionsArg = extensionsPath ? ', baetaExtensions' : '';
 
     return `
-export const ${createModuleFn} = () => Baeta.createModuleManager(ModuleMetadata);
+export const ${createModuleFn} = () => Baeta.createModuleManager(ModuleMetadata${extensionsArg});
 export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
 `;
   }

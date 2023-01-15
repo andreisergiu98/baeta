@@ -6,4 +6,5 @@ export type ModulesConfig = {
   filename: string;
   encapsulateModuleTypes: 'prefix' | 'namespace' | 'none';
   requireRootResolvers?: boolean;
+  extensionsPath?: string;
 };

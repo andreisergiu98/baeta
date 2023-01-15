@@ -69,3 +69,10 @@ export function mergeExtensions<T, K extends Record<string, unknown>>(
   );
   return reduced;
 }
+
+export function withExtensions<Core, Ext>(core: Core, ext: Ext) {
+  return {
+    ...ext,
+    ...core,
+  } as Ext & Core;
+}

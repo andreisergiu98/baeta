@@ -12,10 +12,7 @@ export function nameFunction(fn: Function | undefined, name: string) {
   });
 }
 
-export function extendFunction<
-  B extends Function,
-  M extends Record<string, Function | Record<string, Function>>
->(fn: B, ext: M) {
+export function extendFunction<B extends Function, M extends {}>(fn: B, ext: M): B & M {
   const fnExtended = fn as B & M;
   const entries = Object.entries(ext);
 

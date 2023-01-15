@@ -16,7 +16,7 @@ import {
 export const preset: Types.OutputPreset<ModulesConfig> = {
   buildGeneratesSection: (options) => {
     const { baseOutputDir } = options;
-    const { baseTypesPath, encapsulateModuleTypes } = options.presetConfig;
+    const { baseTypesPath, extensionsPath, encapsulateModuleTypes } = options.presetConfig;
 
     const requireRootResolvers = getConfigValue(options?.presetConfig.requireRootResolvers, false);
 
@@ -123,6 +123,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
                 useGraphQLModules: false,
                 fieldTypes,
                 fieldArguments,
+                extensionsPath,
                 rootTypes: [
                   schema.getQueryType()?.name || '',
                   schema.getMutationType()?.name || '',

@@ -13,6 +13,8 @@ import * as modules from './modules';
 export async function generate(options: GraphqlPluginOptions) {
   const root = process.cwd();
   const modulesDir = path.relative(root, options.modulesDir || 'modules');
+  const extensionsPath =
+    options.extensions && path.relative(path.join(modulesDir, 'module'), options.extensions);
 
   const rootConfig = {
     schemas: normalizeInstanceOrArray(options.schemas),
@@ -50,6 +52,7 @@ export async function generate(options: GraphqlPluginOptions) {
       baseTypesPath: rootConfig.baseTypesPath,
       filename: rootConfig.moduleDefinitionName,
       encapsulateModuleTypes: 'none',
+      extensionsPath,
     },
     schema: result.outputSchema,
     schemaAst: result.outputSchemaAst,

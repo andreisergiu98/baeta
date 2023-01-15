@@ -1,5 +1,11 @@
 # @baeta/cli
 
+## 0.0.19
+
+### Patch Changes
+
+- [`528794c`](https://github.com/andreisergiu98/baeta/commit/528794cea68558efb0e468f4812c0e992a36345b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - use the cjs version of binary
+
 ## 0.0.18
 
 ### Patch Changes

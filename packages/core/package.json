@@ -17,7 +17,8 @@
     "build": "tsup",
     "test": "ava",
     "types": "tsc --noEmit",
-    "postpack": "yarn prep"
+    "prepack": "yarn prep --copy dist",
+    "postpack": "yarn prep --clean"
   },
   "dependencies": {
     "@graphql-tools/schema": "^9.0.13",
@@ -37,7 +38,10 @@
     "graphql": "^16.6.0"
   },
   "files": [
-    "dist"
+    "*.js",
+    "*.cjs",
+    "*.d.ts",
+    "!ava.config.js"
   ],
   "publishConfig": {
     "access": "public",

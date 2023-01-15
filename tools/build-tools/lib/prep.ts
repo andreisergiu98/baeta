@@ -1,98 +1,86 @@
-import { createReadStream, createWriteStream } from 'node:fs';
-import { rename } from 'node:fs/promises';
-import { join } from 'node:path';
-import { PassThrough } from 'node:stream';
-import zlib from 'node:zlib';
-import tar, { Headers, Pack } from 'tar-stream';
-import { getPackageJSON } from '../utils/package';
-import { streamToString } from '../utils/stream';
+import fs from 'fs/promises';
+import path from 'path';
 
-function changeFileRoot(root: string | undefined, name: string) {
-  if (!root) {
-    return name;
+const manifest = '.publish.json';
+
+async function getManifest() {
+  const manifestContent = await fs.readFile(manifest, 'utf-8').catch(() => null);
+  if (!manifestContent) {
+    return;
   }
-  const currentRoot = join('package/', root, '/');
-  const wantedRoot = 'package/';
-  return name.replace(currentRoot, wantedRoot);
+  return JSON.parse(manifestContent);
 }
 
-async function changePackageJson(content: string) {
-  const body = JSON.parse(content);
-
-  body.scripts = undefined;
-  body.files = undefined;
-
-  if (body.publishConfig != null) {
-    body.publishConfig.bin = undefined;
-    body.publishConfig.exports = undefined;
-    body.publishConfig.publishDir = undefined;
-  }
-
-  return JSON.stringify(body, null, 2);
+async function writeManifest(files: string[], to: string) {
+  const dest = files.map((file) => path.join(to, file));
+  await fs.writeFile(manifest, JSON.stringify(dest), 'utf-8');
 }
 
-function redoPackageFiles(input: string, output: string, publishDir?: string) {
-  return new Promise<void>((resolve, reject) => {
-    function error(err: unknown) {
-      return reject(err);
+async function getAllFiles(dir: string) {
+  const result = await fs.readdir(dir, { withFileTypes: true });
+  const files: string[] = [];
+  for (const item of result) {
+    if (item.isDirectory()) {
+      const res = await getAllFiles(path.join(dir, item.name));
+      const innerFiles = res.map((file) => path.join(item.name, file));
+      files.push(...innerFiles);
+    } else {
+      files.push(item.name);
     }
-
-    const readPkg = createReadStream(input);
-    const writePkg = createWriteStream(output);
-
-    const extract = tar.extract();
-    const pack = tar.pack();
-
-    extract.on('entry', (header, stream, next) => {
-      header.name = changeFileRoot(publishDir, header.name);
-
-      if (header.name === 'package/package.json') {
-        const opt = { header, stream, pack, next };
-        return patchContent(opt, changePackageJson).catch(error);
-      }
-
-      return stream.pipe(pack.entry(header, next));
-    });
-
-    extract.on('finish', () => pack.finalize());
-
-    pack.on('close', () => resolve());
-
-    readPkg.on('error', error);
-
-    writePkg.on('error', error);
-
-    extract.on('error', error);
-
-    pack.on('error', error);
-
-    readPkg.pipe(zlib.createGunzip()).pipe(extract);
-
-    pack.pipe(zlib.createGzip()).pipe(writePkg);
-  });
+  }
+  return files;
 }
 
-async function patchContent(
-  opt: {
-    header: Headers;
-    stream: PassThrough;
-    pack: Pack;
-    next: (err?: unknown) => void;
-  },
-  patch: (current: string) => string | Promise<string>
-) {
-  const content = await streamToString(opt.stream);
-  const result = await patch(content);
-  opt.pack.entry({ ...opt.header, size: undefined }, result, opt.next);
+async function copyFile(file: string, from: string, to: string) {
+  const fromPath = path.join(from, file);
+  const toPath = path.join(to, file);
+  const toDir = path.dirname(toPath);
+  await fs.mkdir(path.resolve(toDir), { recursive: true });
+  return fs.cp(fromPath, toPath);
 }
 
-async function updatePackage() {
-  const config = await getPackageJSON();
-  const publishDir = config?.publishConfig?.publishDir;
-  const src = 'package.tgz';
-  const tmp = 'package.tgz.tmp';
-  await redoPackageFiles(src, tmp, publishDir);
-  await rename(tmp, src);
+async function copyFiles(from: string, to: string) {
+  const manifest = await getManifest();
+  if (manifest != null) {
+    throw new Error('Remove manifest before copying files');
+  }
+
+  const files = await getAllFiles(from);
+  const promises = [];
+  for (const file of files) {
+    promises.push(copyFile(file, from, to));
+  }
+  await Promise.all(promises);
+  await fs.rm(from, { recursive: true });
+  return writeManifest(files, to);
 }
 
-updatePackage();
+async function cleanFiles() {
+  const files = await getManifest();
+  if (files == null) {
+    return;
+  }
+
+  const promises = [fs.unlink(manifest)];
+  for (const file of files) {
+    promises.push(fs.unlink(file));
+  }
+
+  await Promise.all(promises);
+}
+
+const arg = process.argv[2];
+
+if (arg === '--copy') {
+  const from = process.argv[3];
+
+  if (!from) {
+    throw new Error('Missing from path');
+  }
+
+  copyFiles(from, '.');
+} else if (arg === '--clean') {
+  cleanFiles();
+} else {
+  [console.log('Usage: prep.js [--copy|--clean]')];
+}

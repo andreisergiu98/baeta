@@ -16,7 +16,8 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "postpack": "yarn prep"
+    "prepack": "yarn prep --copy dist",
+    "postpack": "yarn prep --clean"
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
@@ -25,7 +26,10 @@
     "typescript": "^4.9.4"
   },
   "files": [
-    "dist"
+    "*.js",
+    "*.cjs",
+    "*.d.ts",
+    "!ava.config.js"
   ],
   "publishConfig": {
     "access": "public",

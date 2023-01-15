@@ -16,7 +16,8 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "postpack": "yarn prep"
+    "prepack": "yarn prep --copy dist",
+    "postpack": "yarn prep --clean"
   },
   "dependencies": {
     "@baeta/config": "workspace:^",
@@ -51,7 +52,10 @@
     "graphql": "^16.6.0"
   },
   "files": [
-    "dist"
+    "*.js",
+    "*.cjs",
+    "*.d.ts",
+    "!ava.config.js"
   ],
   "publishConfig": {
     "access": "public",

@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 0.0.21
+
+### Patch Changes
+
+- [`dfaf0dc`](https://github.com/andreisergiu98/baeta/commit/dfaf0dc108244b0ada332ab978aa7f39fbfe7e7d) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add generator support for runtime extensions
+
 ## 0.0.20
 
 ### Patch Changes

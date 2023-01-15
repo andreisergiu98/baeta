@@ -1,5 +1,14 @@
 # @baeta/cli
 
+## 0.0.21
+
+### Patch Changes
+
+- Updated dependencies [[`dfaf0dc`](https://github.com/andreisergiu98/baeta/commit/dfaf0dc108244b0ada332ab978aa7f39fbfe7e7d)]:
+  - @baeta/config@0.0.8
+  - @baeta/generator@0.0.13
+  - @baeta/plugin@0.0.13
+
 ## 0.0.20
 
 ### Patch Changes

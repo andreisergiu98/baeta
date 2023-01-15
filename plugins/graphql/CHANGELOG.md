@@ -1,5 +1,15 @@
 # @baeta/plugin-graphql
 
+## 0.0.14
+
+### Patch Changes
+
+- [`dfaf0dc`](https://github.com/andreisergiu98/baeta/commit/dfaf0dc108244b0ada332ab978aa7f39fbfe7e7d) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add generator support for runtime extensions
+
+- Updated dependencies [[`dfaf0dc`](https://github.com/andreisergiu98/baeta/commit/dfaf0dc108244b0ada332ab978aa7f39fbfe7e7d)]:
+  - @baeta/config@0.0.8
+  - @baeta/plugin@0.0.13
+
 ## 0.0.13
 
 ### Patch Changes

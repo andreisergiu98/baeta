@@ -1,5 +1,16 @@
 # @baeta/generator
 
+## 0.0.12
+
+### Patch Changes
+
+- [`a4a64a3`](https://github.com/andreisergiu98/baeta/commit/a4a64a35a75e66ca4077a86a9fd5d3ffad481b55) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix broken publishing
+
+- Updated dependencies [[`a4a64a3`](https://github.com/andreisergiu98/baeta/commit/a4a64a35a75e66ca4077a86a9fd5d3ffad481b55)]:
+  - @baeta/config@0.0.7
+  - @baeta/plugin@0.0.12
+  - @baeta/plugin-graphql@0.0.13
+
 ## 0.0.11
 
 ### Patch Changes

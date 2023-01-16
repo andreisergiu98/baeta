@@ -1,22 +1,21 @@
 import chokidar from 'chokidar';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { ConfigStatus } from '../components/config';
-import { BaetaOptions, loadConfig } from '../lib/config';
+import { loadConfig, LoadedBaetaConfig } from '../lib/config';
 import { createContextProvider } from '../utils/context';
 
 export interface ConfigProps {
-  initialConfig: BaetaOptions;
-  configPath: string;
+  initialConfig: LoadedBaetaConfig;
   watchConfig?: boolean;
 }
 
 export function useConfigStore(props: ConfigProps) {
-  const [config, setConfig] = useState<BaetaOptions>(props.initialConfig);
+  const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);
 
   const updateConfig = useCallback(async () => {
-    const result = await loadConfig();
-    if (result?.config) {
-      setConfig(result.config);
+    const config = await loadConfig();
+    if (config) {
+      setConfig(config);
     }
   }, []);
 
@@ -25,9 +24,8 @@ export function useConfigStore(props: ConfigProps) {
       return;
     }
 
-
     const instance = chokidar
-      .watch(props.configPath, {
+      .watch(props.initialConfig.location, {
         ignoreInitial: true,
       })
       .on('add', updateConfig)
@@ -37,7 +35,7 @@ export function useConfigStore(props: ConfigProps) {
     return () => {
       instance.close();
     };
-  }, [props.watchConfig, props.configPath, updateConfig]);
+  }, [props.watchConfig, props.initialConfig.location, updateConfig]);
 
   return config;
 }
@@ -45,7 +43,6 @@ export function useConfigStore(props: ConfigProps) {
 export const [ConfigProviderBase, useConfig] = createContextProvider(
   {
     name: 'Config',
-    strict: false,
   },
   useConfigStore
 );

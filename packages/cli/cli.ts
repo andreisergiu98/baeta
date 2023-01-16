@@ -6,8 +6,8 @@ import { loadConfig } from './lib/config';
 loadConfig().then((config) => {
   yargs(process.argv.slice(2))
     .scriptName('baeta')
-    .command(createBuildCommand(config?.config, config?.location))
-    .command(createGenerateCommand(config?.config, config?.location))
+    .command(createBuildCommand(config))
+    .command(createGenerateCommand(config))
     .demandCommand()
     .version(false)
     .help().argv;

@@ -1,41 +1,45 @@
 import { BaetaOptions, createConfig } from '@baeta/config';
-import glob from 'glob';
-import { createRequire } from 'node:module';
+import fg from 'fast-glob';
+import { relative } from 'path';
+import { makeErrorMessage } from '../components/errors';
+import { getModuleLoader } from '../utils/loader';
 
 export { createConfig };
 export type { BaetaOptions };
 
-const matcher = `${process.cwd()}/baeta.?(ts|mts|cts|js|mjs|cjs)`;
+export interface LoadedBaetaConfig {
+  config: BaetaOptions;
+  location: string;
+  relativeLocation: string;
+}
 
-export function discoverBaetaConfig() {
-  return new Promise<string | undefined>((resolve) => {
-    glob(matcher, {}, (err, files) => {
-      if (err) {
-        return resolve(undefined);
-      }
-      return resolve(files[0]);
-    });
+const configNames = ['baeta', '.baeta'];
+const configExtensions = ['ts', 'mts', 'cts', 'js', 'mjs', 'cjs'];
+
+export async function discoverBaetaConfig() {
+  const entries = configNames.flatMap((name) => {
+    return configExtensions.map((ext) => `${process.cwd()}/${name}.${ext}`);
   });
+
+  return fg(entries)
+    .then((res) => res[0])
+    .catch(() => null);
 }
 
-function getLoader() {
-  if (import.meta.url == null) {
-    return require;
-  }
-  return createRequire(import.meta.url);
+function getRelativeConfigPath(path: string) {
+  return relative(process.cwd(), path);
 }
 
-let compilerImported = false;
-
-function importCompiler() {
-  if (compilerImported) {
+let compilerRegistered = false;
+function registerCompiler() {
+  if (compilerRegistered) {
     return true;
   }
 
   try {
-    const req = getLoader();
+    const req = getModuleLoader();
     req('@baeta/compiler/register.cjs');
-    compilerImported = true;
+    compilerRegistered = true;
     return true;
   } catch (e) {
     return false;
@@ -43,13 +47,16 @@ function importCompiler() {
 }
 
 function importTypeScriptConfig(path: string) {
-  const registered = importCompiler();
+  const registered = registerCompiler();
 
   if (!registered) {
-    return;
+    console.log(
+      makeErrorMessage(`@baeta/compiler is required to load ${getRelativeConfigPath(path)}`, true)
+    );
+    process.exit(1);
   }
 
-  const req = getLoader();
+  const req = getModuleLoader();
 
   const moduleKey = req.resolve(path);
   req.cache[moduleKey] = undefined;
@@ -71,7 +78,7 @@ async function importConfig(path: string) {
   return importJavaScriptConfig(path);
 }
 
-export async function loadConfig(path?: string) {
+export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | undefined> {
   const configPath = path ?? (await discoverBaetaConfig());
 
   if (configPath == null) {
@@ -84,5 +91,5 @@ export async function loadConfig(path?: string) {
     return;
   }
 
-  return { config, location: configPath };
+  return { config, location: configPath, relativeLocation: getRelativeConfigPath(configPath) };
 }

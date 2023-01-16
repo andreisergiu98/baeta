@@ -16,11 +16,13 @@ export function Layout(props: LayoutProps) {
     <Box flexDirection="column">
       <Box>
         <Text color={props.color} bold={true}>
-          {props.loading && <Spinner />}
-          {props.loading && ' '}
           {props.title}
         </Text>
         {props.time != null && <Time prefix={props.timePrefix} value={props.time} />}
+        <Text color={props.color} bold={true}>
+          {props.loading && ' '}
+          {props.loading && <Spinner />}
+        </Text>
       </Box>
       <Box marginLeft={2} flexDirection="column">
         {props.children}

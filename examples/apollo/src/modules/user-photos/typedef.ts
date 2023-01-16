@@ -6,6 +6,8 @@
 import * as Types from "../../__generated__/types";
 import { DocumentNode } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
+
+
 interface DefinedFields {
   UserPhoto: 'id' | 'url';
   User: 'photos';

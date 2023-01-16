@@ -11,7 +11,7 @@ export interface GeneratorProps {
 
 export function Generator(props: GeneratorProps) {
   const { watch, skipInitial, onSuccess } = props;
-  const config = useConfig();
+  const { config } = useConfig();
   const [running, setRunning] = useState(false);
   const [error, setError] = useState<unknown>(undefined);
 

@@ -1,5 +1,6 @@
-import { BaetaOptions } from '@baeta/config';
 import { Builder, BuilderWithGenerator } from '../components/builder';
+import { makeErrorMessage } from '../components/errors';
+import { LoadedBaetaConfig } from '../lib/config';
 import { createCommand } from '../utils/command';
 import { renderComponent } from '../utils/render-component';
 
@@ -10,7 +11,7 @@ interface Args {
   onError?: string;
 }
 
-export function createBuildCommand(config?: BaetaOptions, configPath?: string) {
+export function createBuildCommand(config?: LoadedBaetaConfig) {
   return createCommand<Args>({
     command: 'build',
     aliases: ['b'],
@@ -37,27 +38,26 @@ export function createBuildCommand(config?: BaetaOptions, configPath?: string) {
           describe: 'command to run on a build error',
         });
     },
-    handler: createHandler(config, configPath),
+    handler: createHandler(config),
   });
 }
 
-function createHandler(config?: BaetaOptions, configPath?: string) {
+function createHandler(config?: LoadedBaetaConfig) {
   return (args: Args) => {
     if (!config) {
-      throw new Error('0');
+      console.log(makeErrorMessage("baeta.ts is required to run 'build'"));
+      return;
     }
 
     if (args.generate) {
       return renderComponent(BuilderWithGenerator, args, {
         watchConfig: args.watch,
         initialConfig: config,
-        configPath: configPath || '',
       });
     }
     return renderComponent(Builder, args, {
       watchConfig: args.watch,
       initialConfig: config,
-      configPath: configPath || '',
     });
   };
 }

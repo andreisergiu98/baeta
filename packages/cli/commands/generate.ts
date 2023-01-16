@@ -1,5 +1,6 @@
-import { BaetaOptions } from '@baeta/config';
+import { makeErrorMessage } from '../components/errors';
 import { Generator } from '../components/generator';
+import { LoadedBaetaConfig } from '../lib/config';
 import { createCommand } from '../utils/command';
 import { renderComponent } from '../utils/render-component';
 
@@ -8,7 +9,7 @@ interface Args {
   skipInitial?: boolean;
 }
 
-export function createGenerateCommand(config?: BaetaOptions, configPath?: string) {
+export function createGenerateCommand(config?: LoadedBaetaConfig) {
   return createCommand<Args>({
     command: 'generate',
     aliases: ['g'],
@@ -26,14 +27,15 @@ export function createGenerateCommand(config?: BaetaOptions, configPath?: string
           describe: 'skip initial generation when running in watch mode',
         });
     },
-    handler: createHandler(config, configPath),
+    handler: createHandler(config),
   });
 }
 
-function createHandler(config?: BaetaOptions, configPath?: string) {
+function createHandler(config?: LoadedBaetaConfig) {
   return (args: Args) => {
     if (!config) {
-      throw new Error('');
+      console.log(makeErrorMessage("baeta.ts is required to run 'generate'"));
+      return;
     }
 
     return renderComponent(
@@ -45,7 +47,6 @@ function createHandler(config?: BaetaOptions, configPath?: string) {
       {
         watchConfig: args.watch,
         initialConfig: config,
-        configPath: configPath || '',
       }
     );
   };

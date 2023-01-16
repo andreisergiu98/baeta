@@ -34,7 +34,7 @@ export function createGenerateCommand(config?: LoadedBaetaConfig) {
 function createHandler(config?: LoadedBaetaConfig) {
   return (args: Args) => {
     if (!config) {
-      console.log(makeErrorMessage("baeta.ts is required to run 'generate'"));
+      console.log(makeErrorMessage("baeta.js is required to run 'generate'"));
       return;
     }
 

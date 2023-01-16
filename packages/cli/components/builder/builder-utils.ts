@@ -1,18 +1,18 @@
-import type { build, createEsbuildCliHooksPlugin } from '@baeta/compiler';
-import { getModuleLoader } from '../../utils/loader';
-
-export type Build = typeof build;
-export type CreateEsbuildCliHooksPlugin = typeof createEsbuildCliHooksPlugin;
-
 export async function importCompiler() {
   try {
-    const req = getModuleLoader();
-    const compiler = req('@baeta/compiler');
+    const { build, createEsbuildCliHooksPlugin } = await dynamicImportCompiler();
     return {
-      build: compiler.build as Build,
-      createCliPlugin: compiler.createEsbuildCliHooksPlugin as CreateEsbuildCliHooksPlugin,
+      build,
+      createCliPlugin: createEsbuildCliHooksPlugin,
     };
   } catch (e) {
     return null;
   }
+}
+
+async function dynamicImportCompiler() {
+  if (process.env.BAETA_CLI_DEV === '1') {
+    return require('@baeta/compiler') as typeof import('/home/andrei/Projects/baeta/packages/compiler/index');
+  }
+  return import('@baeta/compiler');
 }

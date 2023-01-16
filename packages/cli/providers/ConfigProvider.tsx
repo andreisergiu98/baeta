@@ -5,15 +5,19 @@ import { BaetaOptions, loadConfig } from '../lib/config';
 import { createContextProvider } from '../utils/context';
 
 export interface ConfigProps {
+  initialConfig: BaetaOptions;
+  configPath: string;
   watchConfig?: boolean;
 }
 
 export function useConfigStore(props: ConfigProps) {
-  const [config, setConfig] = useState<BaetaOptions | undefined>(() => loadConfig());
+  const [config, setConfig] = useState<BaetaOptions>(props.initialConfig);
 
   const updateConfig = useCallback(async () => {
-    const config = loadConfig();
-    setConfig(config);
+    const result = await loadConfig();
+    if (result?.config) {
+      setConfig(result.config);
+    }
   }, []);
 
   useEffect(() => {
@@ -21,8 +25,9 @@ export function useConfigStore(props: ConfigProps) {
       return;
     }
 
+
     const instance = chokidar
-      .watch('./baeta.{js,cjs,mjs,ts,cts,mts}', {
+      .watch(props.configPath, {
         ignoreInitial: true,
       })
       .on('add', updateConfig)
@@ -32,7 +37,7 @@ export function useConfigStore(props: ConfigProps) {
     return () => {
       instance.close();
     };
-  }, [props.watchConfig, updateConfig]);
+  }, [props.watchConfig, props.configPath, updateConfig]);
 
   return config;
 }

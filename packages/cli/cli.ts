@@ -1,11 +1,14 @@
 import yargs from 'yargs';
-import build from './commands/build';
-import generate from './commands/generate';
+import { createBuildCommand } from './commands/build';
+import { createGenerateCommand } from './commands/generate';
+import { loadConfig } from './lib/config';
 
-yargs(process.argv.slice(2))
-  .scriptName('baeta')
-  .command(build)
-  .command(generate)
-  .demandCommand()
-  .version(false)
-  .help().argv;
+loadConfig().then((config) => {
+  yargs(process.argv.slice(2))
+    .scriptName('baeta')
+    .command(createBuildCommand(config?.config, config?.location))
+    .command(createGenerateCommand(config?.config, config?.location))
+    .demandCommand()
+    .version(false)
+    .help().argv;
+});

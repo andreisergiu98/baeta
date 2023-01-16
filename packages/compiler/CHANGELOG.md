@@ -1,5 +1,11 @@
 # @baeta/compiler
 
+## 0.0.20
+
+### Patch Changes
+
+- [`a14b6e3`](https://github.com/andreisergiu98/baeta/commit/a14b6e39e27ab91281310cafb95195127f4ffbeb) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix compiler export
+
 ## 0.0.19
 
 ### Patch Changes

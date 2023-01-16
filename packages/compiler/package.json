@@ -44,7 +44,7 @@
       "./esbuild": {
         "import": "./dist/esbuild/index.js",
         "require": "./dist/esbuild/index.cjs",
-        "types": "./dist/esbuild.d/index.ts"
+        "types": "./dist/esbuild/index.d.ts"
       }
     }
   }

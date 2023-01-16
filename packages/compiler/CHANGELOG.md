@@ -1,5 +1,13 @@
 # @baeta/compiler
 
+## 0.0.15
+
+### Patch Changes
+
+- [#21](https://github.com/andreisergiu98/baeta/pull/21) [`034fd48`](https://github.com/andreisergiu98/baeta/commit/034fd488d9942e27e4debc1044bf8084231fced2) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - rewrite config loader
+
+- [#21](https://github.com/andreisergiu98/baeta/pull/21) [`034fd48`](https://github.com/andreisergiu98/baeta/commit/034fd488d9942e27e4debc1044bf8084231fced2) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - move onSuccess responsability to cli
+
 ## 0.0.14
 
 ### Patch Changes

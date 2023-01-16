@@ -1,5 +1,15 @@
 # @baeta/plugin-graphql
 
+## 0.0.15
+
+### Patch Changes
+
+- [`11031eb`](https://github.com/andreisergiu98/baeta/commit/11031ebf71808e1c20e8f8e98259359ceb50cd77) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add a more reliable publishing method
+
+- Updated dependencies [[`c034d77`](https://github.com/andreisergiu98/baeta/commit/c034d77a1e3c75871ed768ab8bf3594635b02c0a), [`11031eb`](https://github.com/andreisergiu98/baeta/commit/11031ebf71808e1c20e8f8e98259359ceb50cd77)]:
+  - @baeta/config@0.0.9
+  - @baeta/plugin@0.0.14
+
 ## 0.0.14
 
 ### Patch Changes

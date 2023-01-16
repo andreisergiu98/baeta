@@ -23,12 +23,15 @@
     "@baeta/config": "workspace:^",
     "@baeta/generator": "workspace:^",
     "@baeta/plugin": "workspace:^",
-    "chalk": "^5.2.0",
+    "ansi-styles": "^6.2.1",
     "chokidar": "^3.5.3",
     "cli-spinners": "^2.7.0",
+    "execa": "^6.1.0",
+    "fast-glob": "^3.2.12",
     "ink": "^3.2.0",
     "nanoid": "^4.0.0",
     "react": "^17.0.2",
+    "tree-kill": "^1.2.2",
     "yargs": "^17.6.2"
   },
   "peerDependencies": {
@@ -59,7 +62,7 @@
     "access": "public",
     "publishDir": "dist",
     "bin": {
-      "baeta": "./bin/cli.cjs"
+      "baeta": "./bin/cli.js"
     },
     "exports": {
       ".": {

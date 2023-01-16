@@ -26,25 +26,18 @@ export function BuilderStatus(props: StatusProps) {
 }
 
 function BuilderStatusContent(props: StatusProps) {
+  const hasErrors = props.errors != null && props.errors.length > 0;
+  if (hasErrors) {
+    return <Errors warnings={props.warnings} errors={props.errors} />;
+  }
+
   if (props.running) {
     return <Text>Building...</Text>;
   }
 
-  const hasErrors = props.errors != null && props.errors.length > 0;
-
-  let message = 'Done';
-  if (hasErrors) {
-    message = '';
-  }
-
   if (props.watching) {
-    message = 'Watching for changes';
+    return <Text>Watching for changes</Text>;
   }
 
-  return (
-    <>
-      <Errors warnings={props.warnings} errors={props.errors} />
-      {message && <Text>{message}</Text>}
-    </>
-  );
+  return <Text>Done</Text>;
 }

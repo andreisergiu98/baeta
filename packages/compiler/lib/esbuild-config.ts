@@ -1,5 +1,4 @@
-import { BuildOptions, Plugin } from 'esbuild';
-import { addCliPlugin, CommandsOptions } from './esbuild-cli';
+import { BuildOptions } from 'esbuild';
 import { getExternals } from './esbuild-externals';
 
 export interface CompilerOptions {
@@ -8,7 +7,6 @@ export interface CompilerOptions {
   watch?: boolean;
   bundleDeps?: boolean;
   bundleWorkspaces?: boolean;
-  commands?: CommandsOptions;
   esbuild?: Partial<Omit<BuildOptions, 'outdir' | 'watch' | 'entryPoints'>>;
 }
 
@@ -17,13 +15,9 @@ export interface Hooks {
 }
 
 export function createEsbuildConfig(options: CompilerOptions) {
-  const plugins: Plugin[] = [];
   const hooks: Hooks = {
     onStop: [],
   };
-
-  addCliPlugin(plugins, hooks, options.commands);
-  plugins.push(...(options.esbuild?.plugins ?? []));
 
   const external = getExternals(options.bundleDeps, options.watch || options.bundleWorkspaces);
 
@@ -42,7 +36,6 @@ export function createEsbuildConfig(options: CompilerOptions) {
     outdir,
     external,
     ...options.esbuild,
-    plugins,
   };
 
   return {

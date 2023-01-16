@@ -2,7 +2,7 @@ import { render } from 'ink';
 import { createElement, FunctionComponent } from 'react';
 import { ConfigProps, ConfigProvider } from '../providers/ConfigProvider';
 
-export function renderComponentDumb<P extends {}>(
+export function renderComponentWithoutConfig<P extends {}>(
   component: FunctionComponent<P>,
   props?: P | null
 ) {

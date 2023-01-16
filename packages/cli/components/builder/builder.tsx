@@ -1,11 +1,13 @@
-import { useApp } from 'ink';
-import React, { useCallback, useEffect, useState } from 'react';
-import type { BaetaOptions } from '../../lib/config';
+import type { CompilerOptions } from '@baeta/compiler';
+import { ExecaChildProcess } from 'execa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useConfig } from '../../providers/ConfigProvider';
 import { AppOutput } from '../app';
+import { makeErrorMessage } from '../errors';
 import { WithGenerator } from '../generator';
+import { killProcesses, startProcess } from './builder-plugin';
 import { BuilderStatus } from './builder-status';
-import { importCompiler } from './builder-utils';
+import { Build, CreateEsbuildCliHooksPlugin, importCompiler } from './builder-utils';
 
 interface Props {
   watch?: boolean;
@@ -18,8 +20,8 @@ interface Props {
 const emptyArray: string[] = [];
 
 export function Builder(props: Props) {
-  const { exit } = useApp();
-  const config = useConfig();
+  const { config, relativeLocation } = useConfig();
+  const [isConfigured, setIsConfigured] = useState(() => config.compiler != null);
 
   const [output, setOutput] = useState<string[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
@@ -28,97 +30,147 @@ export function Builder(props: Props) {
   const [running, setRunning] = useState(false);
   const [buildTime, setBuildTime] = useState(0);
 
-  const handler = useCallback(
-    async (config?: BaetaOptions) => {
-      const build = await importCompiler();
+  const processesRef = useRef<ExecaChildProcess[]>([]);
 
-      if (config?.compiler == null) {
-        exit(new Error('Compiler is not configured!'));
+  const killHanging = useCallback(() => {
+    return killProcesses(processesRef.current);
+  }, []);
+
+  const handleCommand = useCallback(
+    async (command?: string) => {
+      await killHanging();
+
+      if (!command) {
         return;
       }
 
-      if (props.watch) {
-        config.compiler.watch = true;
+      return startProcess(
+        processesRef.current,
+        command,
+        (output) => {
+          setOutput((current) => [...current, output]);
+        },
+        () => {}
+      );
+    },
+    [killHanging]
+  );
+
+  const handleStart = useCallback(async () => {
+    await killHanging();
+
+    setRunning(true);
+    setOutput(emptyArray);
+    setWarnings(emptyArray);
+    setErrors(emptyArray);
+  }, [killHanging]);
+
+  const handleEnd = useCallback(
+    (buildTime: number, warnings: string[], errors: string[]) => {
+      setRunning(false);
+      setBuildTime(buildTime);
+      setWarnings(warnings);
+      setErrors(errors);
+
+      if (errors.length > 0) {
+        return handleCommand(props.onError);
       }
 
-      config.compiler.commands = {
-        onBuildStart: () => {
-          setRunning(true);
-          setOutput(emptyArray);
-          setErrors(emptyArray);
-          setWarnings(emptyArray);
+      return handleCommand(props.onSuccess);
+    },
+    [props.onSuccess, props.onError, handleCommand]
+  );
+
+  const handler = useCallback(
+    async (config: CompilerOptions, build: Build, createCliPlugin: CreateEsbuildCliHooksPlugin) => {
+      if (props.watch) {
+        config.watch = true;
+      }
+
+      const plugins = config.esbuild?.plugins ?? [];
+
+      plugins.push(
+        createCliPlugin({
+          onBuildStart: handleStart,
+          onBuildEnd: handleEnd,
+        })
+      );
+
+      const options = {
+        ...config,
+        watch: props.watch,
+        esbuild: {
+          ...config.esbuild,
+          plugins,
         },
-        onBuildEnd: (buildTime) => {
-          setRunning(false);
-          setBuildTime(buildTime);
-        },
-        onBuildErrors: (errors) => {
-          setErrors(errors);
-        },
-        onBuildWarnings: (warnings) => {
-          setWarnings(warnings);
-        },
-        onSuccess: props.onSuccess
-          ? {
-              command: props.onSuccess,
-              stdout: (data) => {
-                setOutput((current) => [...current, data]);
-              },
-            }
-          : undefined,
-        onError: props.onError
-          ? {
-              command: props.onError,
-            }
-          : undefined,
       };
 
-      const result = await build(config.compiler).catch((err) => {
-        exit(err);
-        return null;
+      const result = await build(options).catch((err) => {
+        console.log(err);
+        process.exit(1);
       });
 
       return () => {
         result?.stop?.();
       };
     },
-    [props.watch, props.onSuccess, props.onError, exit]
+    [props.watch, props.onSuccess, props.onError, handleStart, handleEnd]
   );
 
   useEffect(() => {
     let stop: (() => void) | undefined = undefined;
     let stopped = false;
 
-    const cleanup = () => {
-      stop?.();
-      stopped = true;
-    };
+    const run = async () => {
+      setIsConfigured(config.compiler != null);
 
-    const runHandler = async () => {
-      stop = await handler(config);
+      if (config.compiler == null) {
+        return;
+      }
+
+      const compiler = await importCompiler();
+
+      if (compiler == null) {
+        console.log(makeErrorMessage("@baeta/compiler is required for 'build' command`", true));
+        process.exit(1);
+      }
+
+      stop = await handler(config.compiler, compiler.build, compiler.createCliPlugin);
 
       if (stopped) {
         stop?.();
       }
     };
 
-    runHandler();
+    run();
 
     return () => {
-      cleanup();
+      stopped = true;
+      stop?.();
     };
   }, [config, handler]);
 
   return (
     <>
-      <BuilderStatus
-        running={running}
-        watching={props.watch}
-        errors={errors}
-        warnings={warnings}
-        buildTime={buildTime}
-      />
-      {errors.length === 0 && !!props.onSuccess && <AppOutput output={output} />}
+      {isConfigured && (
+        <BuilderStatus
+          running={running}
+          watching={props.watch}
+          errors={errors}
+          warnings={warnings}
+          buildTime={buildTime}
+        />
+      )}
+      {!isConfigured && (
+        <BuilderStatus
+          running={running}
+          watching={props.watch}
+          errors={[makeErrorMessage(`compiler is not configured, check ${relativeLocation}`)]}
+          warnings={emptyArray}
+          buildTime={buildTime}
+        />
+      )}
+      {isConfigured && errors.length === 0 && !!props.onSuccess && <AppOutput output={output} />}
     </>
   );
 }

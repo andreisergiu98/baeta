@@ -929,13 +929,16 @@ __metadata:
     "@types/node": ^18.11.18
     "@types/react": ^18.0.26
     "@types/yargs": ^17.0.19
-    chalk: ^5.2.0
+    ansi-styles: ^6.2.1
     chokidar: ^3.5.3
     cli-spinners: ^2.7.0
+    execa: ^6.1.0
+    fast-glob: ^3.2.12
     graphql: ^16.6.0
     ink: ^3.2.0
     nanoid: ^4.0.0
     react: ^17.0.2
+    tree-kill: ^1.2.2
     typescript: ^4.9.4
     yargs: ^17.6.2
   peerDependencies:
@@ -957,8 +960,6 @@ __metadata:
     "@types/node": ^18.11.18
     esbuild: ^0.16.17
     esbuild-register: ^3.4.2
-    execa: ^6.1.0
-    tree-kill: ^1.2.2
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -3879,7 +3880,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.1.2, chalk@npm:^5.2.0":
+"chalk@npm:^5.1.2":
   version: 5.2.0
   resolution: "chalk@npm:5.2.0"
   checksum: 03d8060277de6cf2fd567dc25fcf770593eb5bb85f460ce443e49255a30ff1242edd0c90a06a03803b0466ff0687a939b41db1757bec987113e83de89a003caa
@@ -5355,7 +5356,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.9":
+"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.9":
   version: 3.2.12
   resolution: "fast-glob@npm:3.2.12"
   dependencies:

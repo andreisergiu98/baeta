@@ -1,7 +1,7 @@
 import { GraphQLError } from 'graphql';
 import { Text } from 'ink';
 import React from 'react';
-import { errorNamespace, Errors } from '../errors';
+import { Errors, makeErrorMessage } from '../errors';
 import { Layout } from '../layout';
 
 interface Props {
@@ -41,8 +41,7 @@ export function GeneratorStatus(props: Props) {
 
 function GeneratorStatusContent(props: Props) {
   if (props.error) {
-    const errorMessage = `${errorNamespace} ${formatError(props.error)}`;
-    return <Errors errors={[errorMessage]} />;
+    return <Errors errors={[makeErrorMessage(formatError(props.error))]} />;
   }
 
   if (props.running) {

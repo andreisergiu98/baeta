@@ -6,8 +6,7 @@ import { Spinner } from '../spinner';
 export function ConfigStatus() {
   const [configChanged, setConfigChanged] = useState(false);
   const skipInitial = useRef(true);
-
-  const config = useConfig();
+  const { config } = useConfig();
 
   useEffect(() => {
     if (skipInitial.current) {

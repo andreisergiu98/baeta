@@ -7,7 +7,7 @@ import { makeErrorMessage } from '../errors';
 import { WithGenerator } from '../generator';
 import { killProcesses, startProcess } from './builder-plugin';
 import { BuilderStatus } from './builder-status';
-import { Build, CreateEsbuildCliHooksPlugin, importCompiler } from './builder-utils';
+import { Build, CreateCliPlugin, importCompiler } from './builder-utils';
 
 interface Props {
   watch?: boolean;
@@ -82,7 +82,7 @@ export function Builder(props: Props) {
   );
 
   const handler = useCallback(
-    async (config: CompilerOptions, build: Build, createCliPlugin: CreateEsbuildCliHooksPlugin) => {
+    async (config: CompilerOptions, build: Build, createCliPlugin: CreateCliPlugin) => {
       if (props.watch) {
         config.watch = true;
       }

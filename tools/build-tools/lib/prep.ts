@@ -1,5 +1,31 @@
 import fs from 'fs/promises';
-import path from 'path';
+import { join } from 'path';
+
+interface Pkg {
+  name?: string;
+  type?: string;
+  sideEffects?: boolean;
+  publishConfig?: PkgPublishConfig;
+}
+
+interface PkgPublishConfig {
+  exports?: Record<string, PkgExport>;
+}
+
+interface PkgExport {
+  types?: string;
+  import?: string;
+  require?: string;
+}
+
+interface ForgedPkg {
+  name: string;
+  type?: string;
+  main?: string;
+  module?: string;
+  types?: string;
+  sideEffects?: boolean;
+}
 
 const manifest = '.publish.json';
 
@@ -11,51 +37,14 @@ async function getManifest() {
   return JSON.parse(manifestContent);
 }
 
-async function writeManifest(files: string[], to: string) {
-  const dest = files.map((file) => path.join(to, file));
-  await fs.writeFile(manifest, JSON.stringify(dest), 'utf-8');
-}
-
-async function getAllFiles(dir: string) {
-  const result = await fs.readdir(dir, { withFileTypes: true });
-  const files: string[] = [];
-  for (const item of result) {
-    if (item.isDirectory()) {
-      const res = await getAllFiles(path.join(dir, item.name));
-      const innerFiles = res.map((file) => path.join(item.name, file));
-      files.push(...innerFiles);
-    } else {
-      files.push(item.name);
-    }
+async function writeManifest(files: string[]) {
+  if (files.length === 0) {
+    return;
   }
-  return files;
+  await fs.writeFile(manifest, JSON.stringify(files), 'utf-8');
 }
 
-async function copyFile(file: string, from: string, to: string) {
-  const fromPath = path.join(from, file);
-  const toPath = path.join(to, file);
-  const toDir = path.dirname(toPath);
-  await fs.mkdir(path.resolve(toDir), { recursive: true });
-  return fs.cp(fromPath, toPath);
-}
-
-async function copyFiles(from: string, to: string) {
-  const manifest = await getManifest();
-  if (manifest != null) {
-    throw new Error('Remove manifest before copying files');
-  }
-
-  const files = await getAllFiles(from);
-  const promises = [];
-  for (const file of files) {
-    promises.push(copyFile(file, from, to));
-  }
-  await Promise.all(promises);
-  await fs.rm(from, { recursive: true });
-  return writeManifest(files, to);
-}
-
-async function cleanFiles() {
+async function removeNestedPackages() {
   const files = await getManifest();
   if (files == null) {
     return;
@@ -69,18 +58,96 @@ async function cleanFiles() {
   await Promise.all(promises);
 }
 
-const arg = process.argv[2];
+async function loadPackageJson(): Promise<Pkg> {
+  const content = await fs.readFile(`${process.cwd()}/package.json`, 'utf-8');
+  return JSON.parse(content);
+}
 
-if (arg === '--copy') {
-  const from = process.argv[3];
+function forgePackage(pkgName: string, entry: string, exports: PkgExport) {
+  const name = join(pkgName, entry);
 
-  if (!from) {
-    throw new Error('Missing from path');
+  if (name === pkgName) {
+    return;
   }
 
-  copyFiles(from, '.');
-} else if (arg === '--clean') {
-  cleanFiles();
-} else {
-  [console.log('Usage: prep.js [--copy|--clean]')];
+  const forged: ForgedPkg = {
+    name,
+  };
+
+  if (exports.types) {
+    forged.types = join('../', exports.types);
+  }
+
+  return forged;
 }
+
+async function createNestedPackages() {
+  const pkg = await loadPackageJson();
+
+  if (pkg.name == null) {
+    console.log('Missing name, skipping...');
+    return;
+  }
+
+  if (pkg.publishConfig == null) {
+    console.log('Missing publishConfig, skipping...');
+    return;
+  }
+
+  if (pkg.publishConfig?.exports == null) {
+    console.log('Missing publishConfig.exports, skipping...');
+    return;
+  }
+
+  const entries = Object.entries(pkg.publishConfig.exports);
+  const created: string[] = [];
+  const promises: Promise<void>[] = [];
+
+  for (const [path, exports] of entries) {
+    const forged = forgePackage(pkg.name, path, exports);
+
+    if (!forged) {
+      continue;
+    }
+
+    if (pkg.type) {
+      forged.type = pkg.type;
+    }
+
+    if (pkg.sideEffects) {
+      forged.sideEffects = pkg.sideEffects;
+    }
+
+    const dist = join(path, 'package.json');
+    created.push(dist);
+    promises.push(fs.writeFile(dist, JSON.stringify(forged, null, 2)));
+  }
+
+  await promises;
+  writeManifest(created);
+  return created;
+}
+
+async function run() {
+  const arg = process.argv[2];
+
+  if (arg === '--help') {
+    console.log('Usage: prep.js prepares packages for publish [--clean cleans afterwards]');
+    return;
+  }
+
+  if (arg === '--clean') {
+    removeNestedPackages();
+    return;
+  }
+
+  const manifest = await getManifest();
+  if (manifest != null) {
+    console.log('[ERROR] Remove manifest before preparing');
+    process.exit(1);
+  }
+
+  createNestedPackages();
+}
+
+run();

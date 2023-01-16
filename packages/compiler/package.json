@@ -16,12 +16,12 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "yarn prep --copy dist",
+    "prepack": "yarn prep",
     "postpack": "yarn prep --clean"
   },
   "dependencies": {
     "@baeta/config": "workspace:^",
-    "esbuild": "^0.17.1"
+    "esbuild": "^0.16.17"
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
@@ -29,24 +29,22 @@
     "typescript": "^4.9.4"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts",
-    "!ava.config.js"
+    "dist",
+    "package.json"
   ],
   "publishConfig": {
     "access": "public",
-    "publishDir": "dist",
+    "types": "dist/index.d.ts",
     "exports": {
       ".": {
-        "import": "./index.js",
-        "require": "./index.cjs",
-        "types": "./index.d.ts"
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
       },
       "./esbuild": {
-        "import": "./esbuild.js",
-        "require": "./esbuild.cjs",
-        "types": "./esbuild.d.ts"
+        "import": "./dist/esbuild/index.js",
+        "require": "./dist/esbuild/index.cjs",
+        "types": "./dist/esbuild.d/index.ts"
       }
     }
   }

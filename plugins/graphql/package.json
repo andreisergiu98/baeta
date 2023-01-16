@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsup",
     "types": "tsc --noEmit",
-    "prepack": "yarn prep --copy dist",
+    "prepack": "yarn prep",
     "postpack": "yarn prep --clean"
   },
   "dependencies": {
@@ -52,19 +52,17 @@
     "graphql": "^16.6.0"
   },
   "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts",
-    "!ava.config.js"
+    "dist",
+    "package.json"
   ],
   "publishConfig": {
     "access": "public",
-    "publishDir": "dist",
+    "types": "dist/index.d.ts",
     "exports": {
       ".": {
-        "import": "./index.js",
-        "require": "./index.cjs",
-        "types": "./index.d.ts"
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
       }
     }
   }

@@ -1,4 +1,5 @@
-import { generate, generateAndWatch } from '@baeta/generator';
+import { generate, generateAndWatch, getGeneratorPlugins } from '@baeta/generator';
+import graphqlPlugin from '@baeta/plugin-graphql';
 import React, { useEffect, useState } from 'react';
 import { useConfig } from '../../providers/ConfigProvider';
 import { GeneratorStatus } from './generator-status';
@@ -16,29 +17,30 @@ export function Generator(props: GeneratorProps) {
   const [error, setError] = useState<unknown>(undefined);
 
   useEffect(() => {
-    if (watch === true && skipInitial === true) {
-      return;
-    }
-
     if (!config) {
       return;
     }
 
-    const handler = async () => {
-      setRunning(true);
-      setError(undefined);
+    if (watch === true && skipInitial === true) {
+      return;
+    }
 
-      try {
-        await generate(config);
-        onSuccess?.();
-      } catch (err) {
-        setError(err);
-      } finally {
+    const plugins = [graphqlPlugin(config.graphql), ...getGeneratorPlugins(config.plugins)];
+
+    generate(config.graphql, plugins, {
+      onStart: () => {
+        setRunning(true);
+        setError(undefined);
+      },
+      onEnd: () => {
         setRunning(false);
-      }
-    };
-
-    handler();
+        onSuccess?.();
+      },
+      onError: (error) => {
+        setRunning(false);
+        setError(error);
+      },
+    });
   }, [config, watch, skipInitial, onSuccess]);
 
   useEffect(() => {
@@ -50,7 +52,9 @@ export function Generator(props: GeneratorProps) {
       return;
     }
 
-    const instance = generateAndWatch(config, {
+    const plugins = [graphqlPlugin(config.graphql), ...getGeneratorPlugins(config.plugins)];
+
+    const instance = generateAndWatch(config.graphql, plugins, {
       onStart: () => {
         setRunning(true);
         setError(undefined);

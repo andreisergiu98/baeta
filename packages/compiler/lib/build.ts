@@ -1,20 +1,15 @@
-import { build as esbuildBuild } from 'esbuild';
+import { context } from 'esbuild';
 import { CompilerOptions, createEsbuildConfig } from './esbuild-config';
 
 export async function build(options: CompilerOptions) {
-  const { buildOptions, hooks } = createEsbuildConfig(options);
+  const esbuildConfig = createEsbuildConfig(options);
+  const ctx = await context(esbuildConfig);
+  return ctx.dispose();
+}
 
-  if (buildOptions.watch !== true) {
-    return esbuildBuild(buildOptions);
-  }
-
-  const result = await esbuildBuild(buildOptions);
-  const { stop } = result;
-
-  result.stop = () => {
-    hooks.onStop.forEach((hook) => hook());
-    return stop?.();
-  };
-
-  return result;
+export async function buildAndWatch(options: CompilerOptions) {
+  const esbuildConfig = createEsbuildConfig(options, true);
+  const ctx = await context(esbuildConfig);
+  await ctx.watch();
+  return ctx;
 }

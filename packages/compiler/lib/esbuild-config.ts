@@ -4,24 +4,18 @@ import { getExternals } from './esbuild-externals';
 export interface CompilerOptions {
   src: string | string[];
   dist: string;
-  watch?: boolean;
   bundleDeps?: boolean;
   bundleWorkspaces?: boolean;
-  esbuild?: Partial<Omit<BuildOptions, 'outdir' | 'watch' | 'entryPoints'>>;
+  esbuild?: Partial<Omit<BuildOptions, 'outdir' | 'entryPoints'>>;
 }
 
 export interface Hooks {
   onStop: Array<() => void | Promise<void>>;
 }
 
-export function createEsbuildConfig(options: CompilerOptions) {
-  const hooks: Hooks = {
-    onStop: [],
-  };
+export function createEsbuildConfig(options: CompilerOptions, watchMode?: boolean) {
+  const external = getExternals(options.bundleDeps, watchMode || options.bundleWorkspaces);
 
-  const external = getExternals(options.bundleDeps, options.watch || options.bundleWorkspaces);
-
-  const watch = options.watch;
   const outdir = options.dist;
   const entryPoints = Array.isArray(options.src) ? options.src : [options.src];
 
@@ -31,15 +25,11 @@ export function createEsbuildConfig(options: CompilerOptions) {
     sourcemap: true,
     platform: 'node',
     logLevel: 'silent',
-    watch,
     entryPoints,
     outdir,
     external,
     ...options.esbuild,
   };
 
-  return {
-    hooks,
-    buildOptions,
-  };
+  return buildOptions;
 }

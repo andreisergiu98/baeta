@@ -1,4 +1,5 @@
 import type { CompilerOptions } from '@baeta/compiler';
+import type { BuildContext } from '@baeta/compiler/esbuild';
 import { ExecaChildProcess } from 'execa';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useConfig } from '../../providers/ConfigProvider';
@@ -7,7 +8,7 @@ import { makeErrorMessage } from '../errors';
 import { WithGenerator } from '../generator';
 import { killProcesses, startProcess } from './builder-plugin';
 import { BuilderStatus } from './builder-status';
-import { Build, CreateCliPlugin, importCompiler } from './builder-utils';
+import { Build, BuildAndWatch, CreateCliPlugin, importCompiler } from './builder-utils';
 
 interface Props {
   watch?: boolean;
@@ -82,43 +83,47 @@ export function Builder(props: Props) {
   );
 
   const handler = useCallback(
-    async (config: CompilerOptions, build: Build, createCliPlugin: CreateCliPlugin) => {
-      if (props.watch) {
-        config.watch = true;
-      }
+    async (
+      config: CompilerOptions,
+      build: Build,
+      buildAndWatch: BuildAndWatch,
+      createCliPlugin: CreateCliPlugin
+    ) => {
+      const configPlugins = config.esbuild?.plugins ?? [];
 
-      const plugins = config.esbuild?.plugins ?? [];
-
-      plugins.push(
+      const plugins = [
         createCliPlugin({
           onBuildStart: handleStart,
           onBuildEnd: handleEnd,
-        })
-      );
+        }),
+        ...configPlugins,
+      ];
 
       const options = {
         ...config,
-        watch: props.watch,
         esbuild: {
           ...config.esbuild,
           plugins,
         },
       };
 
-      const result = await build(options).catch((err) => {
+      if (!props.watch) {
+        return build(options).catch((err) => {
+          console.log(err);
+          process.exit(1);
+        });
+      }
+
+      return buildAndWatch(options).catch((err) => {
         console.log(err);
         process.exit(1);
       });
-
-      return () => {
-        result?.stop?.();
-      };
     },
     [props.watch, props.onSuccess, props.onError, handleStart, handleEnd]
   );
 
   useEffect(() => {
-    let stop: (() => void) | undefined = undefined;
+    let ctx: BuildContext | undefined | void;
     let stopped = false;
 
     const run = async () => {
@@ -135,10 +140,15 @@ export function Builder(props: Props) {
         process.exit(1);
       }
 
-      stop = await handler(config.compiler, compiler.build, compiler.createCliPlugin);
+      ctx = await handler(
+        config.compiler,
+        compiler.build,
+        compiler.buildAndWatch,
+        compiler.createCliPlugin
+      );
 
       if (stopped) {
-        stop?.();
+        ctx?.dispose();
       }
     };
 
@@ -146,7 +156,7 @@ export function Builder(props: Props) {
 
     return () => {
       stopped = true;
-      stop?.();
+      ctx?.dispose();
     };
   }, [config, handler]);
 

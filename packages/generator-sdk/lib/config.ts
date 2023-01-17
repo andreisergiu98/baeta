@@ -1,4 +1,4 @@
-export interface GraphqlPluginOptions {
+export interface GeneratorOptions {
   schemas: string[];
   modulesDir?: string;
   moduleDefinitionName?: string;

@@ -1,12 +1,11 @@
-import { GraphqlPluginOptions } from '@baeta/config';
-import { createPluginFactoryV1 } from '@baeta/plugin';
+import { createPluginFactoryV1, GeneratorOptions } from '@baeta/generator-sdk';
 import { generate } from './lib/codegen';
 
-export default createPluginFactoryV1<GraphqlPluginOptions>({
+export default createPluginFactoryV1<GeneratorOptions>({
   name: 'graphql',
-  watch: (baetaConfig, pluginConfig) => {
+  watch: (generatorOptions, pluginOptions) => {
     return {
-      include: pluginConfig.schemas,
+      include: pluginOptions.schemas,
       ignore: [],
     };
   },

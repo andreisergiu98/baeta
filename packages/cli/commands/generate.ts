@@ -1,6 +1,6 @@
 import { makeErrorMessage } from '../components/errors';
 import { Generator } from '../components/generator';
-import { LoadedBaetaConfig } from '../lib/config';
+import { LoadedBaetaConfig } from '../lib/config-loader';
 import { createCommand } from '../utils/command';
 import { renderComponent } from '../utils/render-component';
 

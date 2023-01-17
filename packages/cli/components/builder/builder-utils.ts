@@ -1,14 +1,17 @@
-import type { build, createEsbuildCliHooksPlugin } from '@baeta/compiler';
+import type { build, buildAndWatch, createEsbuildCliHooksPlugin } from '@baeta/compiler';
 
 export type Build = typeof build;
 
 export type CreateCliPlugin = typeof createEsbuildCliHooksPlugin;
 
+export type BuildAndWatch = typeof buildAndWatch;
+
 export async function importCompiler() {
   try {
-    const { build, createEsbuildCliHooksPlugin } = await dynamicImportCompiler();
+    const { build, buildAndWatch, createEsbuildCliHooksPlugin } = await dynamicImportCompiler();
     return {
       build,
+      buildAndWatch,
       createCliPlugin: createEsbuildCliHooksPlugin,
     };
   } catch (e) {

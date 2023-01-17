@@ -19,9 +19,6 @@
     "prepack": "yarn prep",
     "postpack": "yarn prep --clean"
   },
-  "dependencies": {
-    "@baeta/config": "workspace:^"
-  },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
     "@types/node": "^18.11.18",

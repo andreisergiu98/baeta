@@ -6,6 +6,7 @@
   "scripts": {
     "linter:check": "rome check .",
     "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write .",
     "type:check": "yarn workspaces foreach -pv run types",
     "build": "yarn workspaces foreach -pv --no-private run build",
     "publish": "yarn workspaces foreach --no-private npm publish --tolerate-republish",

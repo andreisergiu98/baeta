@@ -1,12 +1,11 @@
-import { BaetaOptions, GeneratorCtxV1, GeneratorPluginV1WithConfig } from '@baeta/config';
-import { FileManager } from './file-manager';
+import { Ctx, FileManager, GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator-sdk';
 
-export function createGeneratorCtxV1(
-  config: BaetaOptions,
-  plugins: GeneratorPluginV1WithConfig<unknown, unknown>[]
-): GeneratorCtxV1 {
+export function createCtx(
+  config: GeneratorOptions,
+  plugins: GeneratorPluginV1<unknown, unknown>[]
+): Ctx {
   return {
-    config,
+    graphqlConfig: config,
     fileManager: new FileManager(),
     didSetup: [],
     didGenerate: [],

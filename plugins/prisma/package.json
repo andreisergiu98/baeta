@@ -20,8 +20,7 @@
     "@prisma/internals": "^4.8.1",
     "change-case-all": "^1.0.15",
     "pluralize": "^8.0.0",
-    "ramda": "^0.28.0",
-    "tslib": "^2.4.1"
+    "ramda": "^0.28.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

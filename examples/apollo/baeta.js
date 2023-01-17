@@ -1,6 +1,6 @@
-import { createConfig } from '@baeta/cli';
+import { defineConfig } from '@baeta/cli';
 
-export default createConfig({
+export default defineConfig({
   graphql: {
     schemas: ['./src/**/*.gql'],
     modulesDir: './src/modules',

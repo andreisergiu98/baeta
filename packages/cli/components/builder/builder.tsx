@@ -1,13 +1,14 @@
 import type { CompilerOptions } from '@baeta/compiler';
+import type { BuildContext } from '@baeta/compiler/esbuild';
 import { ExecaChildProcess } from 'execa';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useConfig } from '../../providers/ConfigProvider';
+import { dynamicImportCompiler } from '../../utils/compiler';
 import { AppOutput } from '../app';
 import { makeErrorMessage } from '../errors';
 import { WithGenerator } from '../generator';
 import { killProcesses, startProcess } from './builder-plugin';
 import { BuilderStatus } from './builder-status';
-import { Build, CreateCliPlugin, importCompiler } from './builder-utils';
 
 interface Props {
   watch?: boolean;
@@ -81,44 +82,46 @@ export function Builder(props: Props) {
     [props.onSuccess, props.onError, handleCommand]
   );
 
-  const handler = useCallback(
-    async (config: CompilerOptions, build: Build, createCliPlugin: CreateCliPlugin) => {
-      if (props.watch) {
-        config.watch = true;
-      }
+  const compile = useCallback(
+    async (
+      { build, buildAndWatch, createEsbuildCliHooksPlugin }: typeof import('@baeta/compiler'),
+      config: CompilerOptions
+    ) => {
+      const configPlugins = config.esbuild?.plugins ?? [];
 
-      const plugins = config.esbuild?.plugins ?? [];
-
-      plugins.push(
-        createCliPlugin({
+      const plugins = [
+        createEsbuildCliHooksPlugin({
           onBuildStart: handleStart,
           onBuildEnd: handleEnd,
-        })
-      );
+        }),
+        ...configPlugins,
+      ];
 
       const options = {
         ...config,
-        watch: props.watch,
         esbuild: {
           ...config.esbuild,
           plugins,
         },
       };
 
-      const result = await build(options).catch((err) => {
+      if (!props.watch) {
+        return build(options).catch((err) => {
+          console.log(err);
+          process.exit(1);
+        });
+      }
+
+      return buildAndWatch(options).catch((err) => {
         console.log(err);
         process.exit(1);
       });
-
-      return () => {
-        result?.stop?.();
-      };
     },
     [props.watch, props.onSuccess, props.onError, handleStart, handleEnd]
   );
 
   useEffect(() => {
-    let stop: (() => void) | undefined = undefined;
+    let ctx: BuildContext | undefined | void;
     let stopped = false;
 
     const run = async () => {
@@ -128,17 +131,17 @@ export function Builder(props: Props) {
         return;
       }
 
-      const compiler = await importCompiler();
+      const compiler = await dynamicImportCompiler().catch(() => null);
 
       if (compiler == null) {
         console.log(makeErrorMessage("@baeta/compiler is required for 'build' command`", true));
         process.exit(1);
       }
 
-      stop = await handler(config.compiler, compiler.build, compiler.createCliPlugin);
+      ctx = await compile(compiler, config.compiler);
 
       if (stopped) {
-        stop?.();
+        ctx?.dispose();
       }
     };
 
@@ -146,9 +149,9 @@ export function Builder(props: Props) {
 
     return () => {
       stopped = true;
-      stop?.();
+      ctx?.dispose();
     };
-  }, [config, handler]);
+  }, [config, compile]);
 
   return (
     <>

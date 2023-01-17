@@ -1,5 +1,4 @@
-import { GraphqlPluginOptions } from '@baeta/config';
-import { File } from '@baeta/plugin';
+import { File, GeneratorOptions } from '@baeta/generator-sdk';
 import { codegen as gqlCodegen } from '@graphql-codegen/core';
 import { normalizeConfig, normalizeInstanceOrArray } from '@graphql-codegen/plugin-helpers';
 import * as typescriptPlugin from '@graphql-codegen/typescript';
@@ -10,7 +9,7 @@ import { loadSchema } from '../utils/load';
 import * as contextPlugin from './context';
 import * as modules from './modules';
 
-export async function generate(options: GraphqlPluginOptions) {
+export async function generate(options: GeneratorOptions) {
   const root = process.cwd();
   const modulesDir = path.relative(root, options.modulesDir || 'modules');
   const extensionsPath =

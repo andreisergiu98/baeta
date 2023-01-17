@@ -1,6 +1,6 @@
-import { createConfig } from '@baeta/cli';
+import { defineConfig } from '@baeta/cli';
 
-export default createConfig({
+export default defineConfig({
   graphql: {
     schemas: ['./src/**/*.gql'],
     modulesDir: './src/modules',
@@ -11,6 +11,8 @@ export default createConfig({
     src: './src/app',
     dist: './dist',
     bundleWorkspaces: true,
-    esbuild: {},
+    esbuild: {
+      format: 'cjs',
+    },
   },
 });

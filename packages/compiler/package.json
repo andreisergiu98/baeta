@@ -20,8 +20,7 @@
     "postpack": "yarn prep --clean"
   },
   "dependencies": {
-    "@baeta/config": "workspace:^",
-    "esbuild": "^0.16.17"
+    "esbuild": "^0.17.2"
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",

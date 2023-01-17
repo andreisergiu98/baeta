@@ -20,9 +20,8 @@
     "postpack": "yarn prep --clean"
   },
   "dependencies": {
-    "@baeta/config": "workspace:^",
     "@baeta/generator": "workspace:^",
-    "@baeta/plugin": "workspace:^",
+    "@baeta/plugin-graphql": "workspace:^",
     "ansi-styles": "^6.2.1",
     "chokidar": "^3.5.3",
     "cli-spinners": "^2.7.0",

@@ -1,94 +1,79 @@
-import {
-  BaetaOptions,
-  GeneratorCtxV1,
-  GeneratorPluginV1WithConfig,
-  PluginType,
-} from '@baeta/config';
-import graphqlPlugin from '@baeta/plugin-graphql';
+import { Ctx, GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator-sdk';
 import chokidar from 'chokidar';
-import { createGeneratorCtxV1 } from './ctx';
+import { createCtx } from './ctx';
+import { cleanPreviousFiles } from './file-utils';
 import { startRunner } from './runner';
 
-function getPlugins(config: BaetaOptions) {
-  const plugins = config.plugins?.filter((plugin) => plugin.type === PluginType.Generator) ?? [];
-  plugins.push(graphqlPlugin(config.graphql));
-  return plugins;
-}
-
 async function executeGenerator(
-  config: BaetaOptions,
-  plugins: GeneratorPluginV1WithConfig<unknown, unknown>[],
-  prev?: GeneratorCtxV1
+  config: GeneratorOptions,
+  plugins: GeneratorPluginV1<unknown, unknown>[],
+  hooks?: HookOptions,
+  prev?: Ctx
 ) {
-  const ctx = createGeneratorCtxV1(config, plugins);
+  const ctx = createCtx(config, plugins);
   const first = plugins[0];
 
   if (first == null) {
     return;
   }
 
-  const onSetup = (plugin: GeneratorPluginV1WithConfig<unknown, unknown>) => {
+  const onSetup = (plugin: GeneratorPluginV1<unknown, unknown>) => {
     ctx.didSetup.push(plugin.name);
   };
 
-  const onGenerate = (plugin: GeneratorPluginV1WithConfig<unknown, unknown>) => {
+  const onGenerate = (plugin: GeneratorPluginV1<unknown, unknown>) => {
     ctx.didGenerate.push(plugin.name);
   };
 
-  const onEnd = (plugin: GeneratorPluginV1WithConfig<unknown, unknown>) => {
+  const onEnd = (plugin: GeneratorPluginV1<unknown, unknown>) => {
     ctx.didEnd.push(plugin.name);
   };
 
-  await startRunner(ctx, plugins, (plugin) => plugin.setup, onSetup);
-  await startRunner(ctx, plugins, (plugin) => plugin.generate, onGenerate);
-  await startRunner(ctx, plugins, (plugin) => plugin.end, onEnd);
+  try {
+    await hooks?.onStart?.()?.catch(() => null);
 
-  await ctx.fileManager.writeAll();
+    await startRunner(ctx, plugins, (plugin) => plugin.setup, onSetup);
+    await startRunner(ctx, plugins, (plugin) => plugin.generate, onGenerate);
+    await startRunner(ctx, plugins, (plugin) => plugin.end, onEnd);
 
-  if (prev) {
-    const currentFiles = ctx.fileManager.getAll();
+    await ctx.fileManager.writeAll();
+    await cleanPreviousFiles(ctx.fileManager, prev?.fileManager);
 
-    for (const file of currentFiles) {
-      if (!file.persisted) {
-        continue;
-      }
-      prev.fileManager.remove(file.filename);
-    }
-
-    prev.fileManager.unlinkAll();
+    await hooks?.onEnd?.()?.catch(() => null);
+  } catch (e) {
+    await hooks?.onError?.(e)?.catch(() => null);
   }
 
   return ctx;
 }
 
-interface WatchOptions {
-  onStart?: () => void;
-  onEnd?: () => void;
-  onError?: (error: unknown) => void;
+interface HookOptions {
+  onStart?: () => void | Promise<void>;
+  onEnd?: () => void | Promise<void>;
+  onError?: (error: unknown) => void | Promise<void>;
 }
 
-export async function generate(config: BaetaOptions) {
-  const plugins = getPlugins(config);
-  await executeGenerator(config, plugins);
+export async function generate(
+  options: GeneratorOptions,
+  plugins: GeneratorPluginV1<any, any>[],
+  hooks?: HookOptions
+) {
+  return executeGenerator(options, plugins, hooks);
 }
 
-export function generateAndWatch(config: BaetaOptions, watchOptions?: WatchOptions) {
-  const plugins = getPlugins(config);
-
-  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(config, plugin.config));
+export function generateAndWatch(
+  options: GeneratorOptions,
+  plugins: GeneratorPluginV1<any, any>[],
+  hooks?: HookOptions
+) {
+  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(options, plugin.config));
   const toWatch = pluginsWatchOptions.flatMap((options) => options.include);
   const toIgnore = pluginsWatchOptions.flatMap((options) => options.ignore);
 
-  let previousCtx: GeneratorCtxV1 | undefined;
+  let previousCtx: Ctx | undefined;
 
   const handler = async () => {
-    try {
-      watchOptions?.onStart?.();
-      previousCtx = await executeGenerator(config, plugins, previousCtx);
-      watchOptions?.onEnd?.();
-    } catch (err) {
-      watchOptions?.onError?.(err);
-    }
+    previousCtx = await executeGenerator(options, plugins, hooks, previousCtx);
   };
 
   return chokidar

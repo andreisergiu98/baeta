@@ -1,4 +1,4 @@
-import { File } from '@baeta/plugin';
+import { File } from './file';
 
 export class FileManager {
   files: File[] = [];
@@ -38,10 +38,12 @@ export class FileManager {
 
   writeByTag(tag: string) {
     const files = this.getByTag(tag);
-    return Promise.all(this.files.map((file) => file.write()));
+    return Promise.all(files.map((file) => file.write()));
   }
 
   unlinkAll() {
-    return Promise.all(this.files.map((file) => file.unlink()));
+    return Promise.all(this.files.map((file) => file.unlink())).then(() => {
+      // void
+    });
   }
 }

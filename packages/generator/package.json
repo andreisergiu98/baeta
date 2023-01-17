@@ -20,19 +20,13 @@
     "postpack": "yarn prep --clean"
   },
   "dependencies": {
-    "@baeta/config": "workspace:^",
-    "@baeta/plugin": "workspace:^",
-    "@baeta/plugin-graphql": "workspace:^",
+    "@baeta/generator-sdk": "workspace:^",
     "chokidar": "^3.5.3"
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
     "@types/node": "^18.11.18",
-    "graphql": "^16.6.0",
     "typescript": "^4.9.4"
-  },
-  "peerDependencies": {
-    "graphql": "^16.6.0"
   },
   "files": [
     "dist",

@@ -7,7 +7,7 @@
     "tsup": "./bin/tsup.js"
   },
   "dependencies": {
-    "esbuild": "^0.17.1",
+    "esbuild": "^0.17.2",
     "esbuild-register": "^3.4.2",
     "tsup": "^6.5.0"
   },

@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import { createBuildCommand } from './commands/build';
 import { createGenerateCommand } from './commands/generate';
-import { loadConfig } from './lib/config';
+import { loadConfig } from './lib/config-loader';
 
 loadConfig().then((config) => {
   yargs(process.argv.slice(2))

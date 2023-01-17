@@ -1065,7 +1065,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-prisma@workspace:plugins/prisma"
   dependencies:
-    "@baeta/plugin": "workspace:^"
+    "@baeta/generator-sdk": "workspace:^"
     "@prisma/generator-helper": ^4.8.1
     "@prisma/internals": ^4.8.1
     "@types/node": ^18.11.18

@@ -19,9 +19,9 @@ export type GeneratorPluginV1Fn<Config, Store> = (
   params: GeneratorPluginV1Params<Config, Store>
 ) => Promise<void>;
 
-export type GeneratorPluginV1WatchOptions<PluginConfig> = (
+export type GeneratorPluginV1WatchOptions<Config> = (
   generatorOptions: GeneratorOptions,
-  pluginConfig: PluginConfig
+  pluginConfig: Config
 ) => {
   include: string | string[];
   ignore: Matcher;

@@ -5,7 +5,7 @@ export function createCtx(
   plugins: GeneratorPluginV1<unknown, unknown>[]
 ): Ctx {
   return {
-    graphqlConfig: config,
+    generatorOptions: config,
     fileManager: new FileManager(),
     didSetup: [],
     didGenerate: [],

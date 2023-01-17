@@ -1,4 +1,4 @@
-import { createPluginFactoryV1 } from '@baeta/plugin';
+import { createPluginFactoryV1 } from '@baeta/generator-sdk';
 import { createContext, Store } from './lib/context';
 import { generate } from './lib/generator';
 import { Casing } from './utils/casing';
@@ -17,9 +17,9 @@ export default createPluginFactoryV1<
   }
 >({
   name: 'prisma',
-  watch: (baetaConfig, pluginConfig) => {
-    const root = baetaConfig.graphql.modulesDir || 'src/modules';
-    const modulesMatcher = `${root}/*/${pluginConfig.schemaNamespace || 'prisma-schema'}/**`;
+  watch: (generatorOptions, pluginOptions) => {
+    const root = generatorOptions.modulesDir || 'src/modules';
+    const modulesMatcher = `${root}/*/${pluginOptions.schemaNamespace || 'prisma-schema'}/**`;
 
     const prismaModule = `${root}/prisma/**`;
 
@@ -34,7 +34,7 @@ export default createPluginFactoryV1<
   },
   generate: async (params) => {
     const files = await generate(params.ctx.prisma, {
-      modulesDir: params.ctx.config.graphql.modulesDir || 'src/modules',
+      modulesDir: params.ctx.generatorOptions.modulesDir || 'src/modules',
       casing: params.config.casing || 'kebab-case',
       schemaNamespace: params.config.schemaNamespace || 'prisma-schema',
       resolverNamespace: params.config.resolverNamespace || 'prisma-resolver',

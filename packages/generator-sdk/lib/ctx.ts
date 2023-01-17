@@ -7,5 +7,5 @@ export type Ctx<T = Record<string, unknown>> = {
   didGenerate: string[];
   didEnd: string[];
   pluginNames: string[];
-  graphqlConfig: GeneratorOptions;
+  generatorOptions: GeneratorOptions;
 } & T;

@@ -15,7 +15,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@baeta/plugin": "workspace:^",
+    "@baeta/generator-sdk": "workspace:^",
     "@prisma/generator-helper": "^4.8.1",
     "@prisma/internals": "^4.8.1",
     "change-case-all": "^1.0.15",
@@ -28,8 +28,5 @@
     "@types/ramda": "^0.28.21",
     "graphql": "^16.6.0",
     "typescript": "^4.9.4"
-  },
-  "peerDependencies": {
-    "graphql": "^16.6.0"
   }
 }

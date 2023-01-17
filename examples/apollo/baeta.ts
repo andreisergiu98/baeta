@@ -11,6 +11,8 @@ export default defineConfig({
     src: './src/app',
     dist: './dist',
     bundleWorkspaces: true,
-    esbuild: {},
+    esbuild: {
+      format: 'cjs',
+    },
   },
 });

@@ -3,12 +3,12 @@ import type { BuildContext } from '@baeta/compiler/esbuild';
 import { ExecaChildProcess } from 'execa';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useConfig } from '../../providers/ConfigProvider';
+import { dynamicImportCompiler } from '../../utils/compiler';
 import { AppOutput } from '../app';
 import { makeErrorMessage } from '../errors';
 import { WithGenerator } from '../generator';
 import { killProcesses, startProcess } from './builder-plugin';
 import { BuilderStatus } from './builder-status';
-import { Build, BuildAndWatch, CreateCliPlugin, importCompiler } from './builder-utils';
 
 interface Props {
   watch?: boolean;
@@ -82,17 +82,15 @@ export function Builder(props: Props) {
     [props.onSuccess, props.onError, handleCommand]
   );
 
-  const handler = useCallback(
+  const compile = useCallback(
     async (
-      config: CompilerOptions,
-      build: Build,
-      buildAndWatch: BuildAndWatch,
-      createCliPlugin: CreateCliPlugin
+      { build, buildAndWatch, createEsbuildCliHooksPlugin }: typeof import('@baeta/compiler'),
+      config: CompilerOptions
     ) => {
       const configPlugins = config.esbuild?.plugins ?? [];
 
       const plugins = [
-        createCliPlugin({
+        createEsbuildCliHooksPlugin({
           onBuildStart: handleStart,
           onBuildEnd: handleEnd,
         }),
@@ -133,19 +131,14 @@ export function Builder(props: Props) {
         return;
       }
 
-      const compiler = await importCompiler();
+      const compiler = await dynamicImportCompiler().catch(() => null);
 
       if (compiler == null) {
         console.log(makeErrorMessage("@baeta/compiler is required for 'build' command`", true));
         process.exit(1);
       }
 
-      ctx = await handler(
-        config.compiler,
-        compiler.build,
-        compiler.buildAndWatch,
-        compiler.createCliPlugin
-      );
+      ctx = await compile(compiler, config.compiler);
 
       if (stopped) {
         ctx?.dispose();
@@ -158,7 +151,7 @@ export function Builder(props: Props) {
       stopped = true;
       ctx?.dispose();
     };
-  }, [config, handler]);
+  }, [config, compile]);
 
   return (
     <>

@@ -1,23 +1,23 @@
 {
   "name": "@baeta/plugin-prisma",
   "version": "0.0.12",
-  "license": "MIT",
-  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "private": true,
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
     "directory": "plugins/prisma"
   },
-  "bugs": {
-    "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "private": true,
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
-    "@prisma/generator-helper": "^4.8.1",
-    "@prisma/internals": "^4.8.1",
+    "@prisma/generator-helper": "^4.9.0",
+    "@prisma/internals": "^4.9.0",
     "change-case-all": "^1.0.15",
     "pluralize": "^8.0.0",
     "ramda": "^0.28.0"

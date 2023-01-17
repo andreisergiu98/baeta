@@ -1,19 +1,17 @@
 {
   "name": "@baeta/build-tools",
-  "type": "module",
   "private": true,
-  "bin": {
-    "prep": "./bin/prep.cjs",
-    "tsup": "./bin/tsup.js"
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
   },
-  "dependencies": {
-    "esbuild": "^0.17.2",
-    "esbuild-register": "^3.4.2",
-    "tsup": "^6.5.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "tools/build-tools"
   },
-  "devDependencies": {
-    "@types/node": "^18.11.18"
-  },
+  "license": "MIT",
+  "type": "module",
   "exports": {
     "./tsup": {
       "import": "./tsup.js",
@@ -25,5 +23,17 @@
     "./tsrun.cjs": {
       "require": "./tsrun.cjs"
     }
+  },
+  "bin": {
+    "prep": "./bin/prep.cjs",
+    "tsup": "./bin/tsup.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.17.2",
+    "esbuild-register": "^3.4.2",
+    "tsup": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18"
   }
 }

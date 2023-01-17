@@ -1,23 +1,30 @@
 {
   "name": "@baeta/cli",
   "version": "0.0.28",
-  "license": "MIT",
-  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
     "directory": "packages/cli"
   },
-  "bugs": {
-    "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
+  "bin": {
+    "baeta": "./bin/cli-dev.cjs"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "build": "tsup",
-    "types": "tsc --noEmit",
-    "prepack": "yarn prep",
-    "postpack": "yarn prep --clean"
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/generator": "workspace:^",
@@ -33,12 +40,6 @@
     "tree-kill": "^1.2.2",
     "yargs": "^17.6.2"
   },
-  "peerDependencies": {
-    "graphql": "^16.6.0"
-  },
-  "optionalDependencies": {
-    "@baeta/compiler": "workspace:^"
-  },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
     "@baeta/core": "workspace:^",
@@ -48,25 +49,27 @@
     "graphql": "^16.6.0",
     "typescript": "^4.9.4"
   },
-  "bin": {
-    "baeta": "./bin/cli-dev.cjs"
+  "peerDependencies": {
+    "graphql": "^16.6.0"
   },
-  "files": [
-    "dist",
-    "package.json"
-  ],
+  "optionalDependencies": {
+    "@baeta/compiler": "workspace:^"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "publishConfig": {
     "access": "public",
     "bin": {
       "baeta": "./dist/bin/cli.js"
     },
-    "types": "dist/index.d.ts",
     "exports": {
       ".": {
         "import": "./dist/index.js",
         "require": "./dist/index.cjs",
         "types": "./dist/index.d.ts"
       }
-    }
+    },
+    "types": "dist/index.d.ts"
   }
 }

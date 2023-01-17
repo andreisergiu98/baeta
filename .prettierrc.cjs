@@ -16,5 +16,5 @@ module.exports = {
       },
     },
   ],
-  plugins: [require('prettier-plugin-organize-imports')],
+  plugins: [require('prettier-plugin-organize-imports'), require('prettier-plugin-packagejson')],
 };

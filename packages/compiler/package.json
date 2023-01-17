@@ -1,23 +1,27 @@
 {
   "name": "@baeta/compiler",
   "version": "0.0.21",
-  "license": "MIT",
-  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
     "directory": "packages/compiler"
   },
-  "bugs": {
-    "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "build": "tsup",
-    "types": "tsc --noEmit",
-    "prepack": "yarn prep",
-    "postpack": "yarn prep --clean"
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "esbuild": "^0.17.2"
@@ -27,13 +31,11 @@
     "@types/node": "^18.11.18",
     "typescript": "^4.9.4"
   },
-  "files": [
-    "dist",
-    "package.json"
-  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "publishConfig": {
     "access": "public",
-    "types": "dist/index.d.ts",
     "exports": {
       ".": {
         "import": "./dist/index.js",
@@ -45,6 +47,7 @@
         "require": "./dist/esbuild/index.cjs",
         "types": "./dist/esbuild/index.d.ts"
       }
-    }
+    },
+    "types": "dist/index.d.ts"
   }
 }

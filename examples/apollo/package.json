@@ -1,14 +1,24 @@
 {
   "name": "@baeta/examples-apollo",
   "private": true,
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "examples/apollo"
+  },
+  "license": "MIT",
   "scripts": {
-    "start:dev": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'",
-    "build-example": "baeta build --generate"
+    "build-example": "baeta build --generate",
+    "start:dev": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
   },
   "dependencies": {
     "@apollo/server": "^4.3.0",
-    "@baeta/core": "workspace:",
-    "@baeta/prisma": "workspace:",
+    "@baeta/core": "workspace:^",
+    "@baeta/prisma": "workspace:^",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",

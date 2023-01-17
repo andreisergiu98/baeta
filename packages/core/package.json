@@ -1,24 +1,28 @@
 {
   "name": "@baeta/core",
   "version": "0.0.22",
-  "license": "MIT",
-  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
     "directory": "packages/core"
   },
-  "bugs": {
-    "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
     "test": "ava",
-    "types": "tsc --noEmit",
-    "prepack": "yarn prep",
-    "postpack": "yarn prep --clean"
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@graphql-tools/schema": "^9.0.13",
@@ -37,13 +41,11 @@
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
-  "files": [
-    "dist",
-    "package.json"
-  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "publishConfig": {
     "access": "public",
-    "types": "dist/index.d.ts",
     "exports": {
       ".": {
         "import": "./dist/index.js",
@@ -55,6 +57,7 @@
         "require": "./dist/sdk/index.cjs",
         "types": "./dist/sdk/index.d.ts"
       }
-    }
+    },
+    "types": "dist/index.d.ts"
   }
 }

@@ -1,5 +1,11 @@
 # @baeta/plugin
 
+## 0.0.16
+
+### Patch Changes
+
+- [`02936ae`](https://github.com/andreisergiu98/baeta/commit/02936aeb606c75a2a79b6ce4524851c6c62afb82) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - bump packages
+
 ## 0.0.15
 
 ### Patch Changes

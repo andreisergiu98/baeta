@@ -1,5 +1,13 @@
 # @baeta/compiler
 
+## 0.0.21
+
+### Patch Changes
+
+- [#25](https://github.com/andreisergiu98/baeta/pull/25) [`c2c5875`](https://github.com/andreisergiu98/baeta/commit/c2c5875f8356e166f34a20b3e4384f9bce093e61) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add support for ts config files
+
+- [#25](https://github.com/andreisergiu98/baeta/pull/25) [`c2c5875`](https://github.com/andreisergiu98/baeta/commit/c2c5875f8356e166f34a20b3e4384f9bce093e61) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - refactor cli and plugins
+
 ## 0.0.20
 
 ### Patch Changes

@@ -1076,8 +1076,6 @@ __metadata:
     pluralize: ^8.0.0
     ramda: ^0.28.0
     typescript: ^4.9.4
-  peerDependencies:
-    graphql: ^16.6.0
   languageName: unknown
   linkType: soft
 

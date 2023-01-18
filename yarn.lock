@@ -925,6 +925,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/generator": "workspace:^"
     "@baeta/plugin-graphql": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.11.18
     "@types/react": ^18.0.26
     "@types/yargs": ^17.0.19
@@ -955,6 +956,7 @@ __metadata:
   resolution: "@baeta/compiler@workspace:packages/compiler"
   dependencies:
     "@baeta/build-tools": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.11.18
     esbuild: ^0.17.2
     typescript: ^4.9.4
@@ -966,6 +968,7 @@ __metadata:
   resolution: "@baeta/core@workspace:packages/core"
   dependencies:
     "@baeta/build-tools": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/schema": ^9.0.13
     "@graphql-tools/utils": ^9.1.4
     "@types/node": ^18.11.18
@@ -1010,6 +1013,7 @@ __metadata:
   dependencies:
     "@baeta/build-tools": "workspace:^"
     "@baeta/plugin": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.11.18
     chokidar: ^3.5.3
     typescript: ^4.9.4
@@ -1022,6 +1026,7 @@ __metadata:
   dependencies:
     "@baeta/build-tools": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.11.18
     chokidar: ^3.5.3
     typescript: ^4.9.4
@@ -1034,6 +1039,7 @@ __metadata:
   dependencies:
     "@baeta/build-tools": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@graphql-codegen/core": ^2.6.8
     "@graphql-codegen/plugin-helpers": ^3.1.2
     "@graphql-codegen/typescript": ^2.8.7
@@ -1066,6 +1072,7 @@ __metadata:
   resolution: "@baeta/plugin-prisma@workspace:plugins/prisma"
   dependencies:
     "@baeta/generator-sdk": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@prisma/generator-helper": ^4.9.0
     "@prisma/internals": ^4.9.0
     "@types/node": ^18.11.18
@@ -1084,6 +1091,7 @@ __metadata:
   resolution: "@baeta/plugin@workspace:packages/plugin"
   dependencies:
     "@baeta/build-tools": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.11.18
     typescript: ^4.9.4
   languageName: unknown
@@ -1100,6 +1108,12 @@ __metadata:
     typescript: ^4.9.4
   peerDependencies:
     graphql: ^16.6.0
+  languageName: unknown
+  linkType: soft
+
+"@baeta/tsconfig@workspace:^, @baeta/tsconfig@workspace:tools/tsconfig":
+  version: 0.0.0-use.local
+  resolution: "@baeta/tsconfig@workspace:tools/tsconfig"
   languageName: unknown
   linkType: soft
 
@@ -8478,8 +8492,8 @@ __metadata:
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
-    loose-envify: "npm:^1.1.0"
-    object-assign: "npm:^4.1.1"
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
   checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
   languageName: node
   linkType: hard

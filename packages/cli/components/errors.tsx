@@ -1,6 +1,5 @@
 import style from 'ansi-styles';
 import { Text } from 'ink';
-import React from 'react';
 
 interface MessagesProps {
   warnings?: string[];

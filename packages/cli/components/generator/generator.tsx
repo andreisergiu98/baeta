@@ -1,6 +1,6 @@
 import { generate, generateAndWatch, getGeneratorPlugins } from '@baeta/generator';
 import graphqlPlugin from '@baeta/plugin-graphql';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useConfig } from '../../providers/ConfigProvider';
 import { GeneratorStatus } from './generator-status';
 

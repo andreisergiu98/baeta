@@ -22,6 +22,9 @@
     },
     "./tsrun.cjs": {
       "require": "./tsrun.cjs"
+    },
+    "./tsregister.cjs": {
+      "require": "./tsregister.cjs"
     }
   },
   "bin": {

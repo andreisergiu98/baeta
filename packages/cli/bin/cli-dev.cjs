@@ -1,3 +1,9 @@
 process.env.BAETA_CLI_DEV = '1';
-require('@baeta/build-tools/tsrun');
+
+const { register } = require('@baeta/build-tools/tsregister.cjs');
+
+register({
+  jsx: 'automatic',
+});
+
 require('../cli');

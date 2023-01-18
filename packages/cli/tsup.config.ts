@@ -6,4 +6,8 @@ export default defineConfig({
   dts: true,
   clean: true,
   splitting: true,
+  inject: ['./utils/shim.ts'],
+  jsxFactory: '__jsx__',
+  jsxFragment: '__fragment__',
+  tsconfig: './tsconfig.build.json',
 });

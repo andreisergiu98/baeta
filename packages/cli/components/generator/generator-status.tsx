@@ -1,6 +1,5 @@
 import { GraphQLError } from 'graphql';
 import { Text } from 'ink';
-import React from 'react';
 import { Errors, makeErrorMessage } from '../errors';
 import { Layout } from '../layout';
 

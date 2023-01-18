@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback, useState } from 'react';
+import { PropsWithChildren, useCallback, useState } from 'react';
 import { Generator, GeneratorProps } from './generator';
 
 export function WithGenerator(props: GeneratorProps & PropsWithChildren) {

@@ -1,5 +1,5 @@
 import { Text } from 'ink';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 interface Props {
   value?: number;

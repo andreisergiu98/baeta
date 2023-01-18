@@ -1,5 +1,5 @@
 import { Box, Text, TextProps } from 'ink';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { Spinner } from './spinner';
 import { Time } from './time';
 

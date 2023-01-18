@@ -1,5 +1,4 @@
 import { Text } from 'ink';
-import React from 'react';
 import { Layout } from '../layout';
 
 export function AppOutput({ output }: { output: string[] }) {

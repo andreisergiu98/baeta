@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.11.18",
     "@types/parse-filepath": "1.0.0",
     "graphql": "^16.6.0",

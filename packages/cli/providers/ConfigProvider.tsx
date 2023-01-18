@@ -1,5 +1,5 @@
 import chokidar from 'chokidar';
-import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { ConfigStatus } from '../components/config';
 import { loadConfig, LoadedBaetaConfig } from '../lib/config-loader';
 import { createContextProvider } from '../utils/context';

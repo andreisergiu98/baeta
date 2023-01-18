@@ -1,7 +1,7 @@
 import type { CompilerOptions } from '@baeta/compiler';
 import type { BuildContext } from '@baeta/compiler/esbuild';
 import { ExecaChildProcess } from 'execa';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useConfig } from '../../providers/ConfigProvider';
 import { dynamicImportCompiler } from '../../utils/compiler';
 import { AppOutput } from '../app';

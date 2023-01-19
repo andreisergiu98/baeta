@@ -15,12 +15,10 @@ export interface Hooks {
 
 export function createEsbuildConfig(options: CompilerOptions, watchMode?: boolean) {
   const external = getExternals(options.bundleDeps, watchMode || options.bundleWorkspaces);
-
   const outdir = options.dist;
   const entryPoints = Array.isArray(options.src) ? options.src : [options.src];
 
   const buildOptions: BuildOptions = {
-    target: 'node18',
     bundle: true,
     sourcemap: true,
     platform: 'node',

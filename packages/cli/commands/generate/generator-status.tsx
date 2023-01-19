@@ -1,7 +1,7 @@
 import { GraphQLError } from 'graphql';
 import { Text } from 'ink';
-import { Errors, makeErrorMessage } from '../errors';
-import { Layout } from '../layout';
+import React from 'react';
+import { Errors, Layout, makeErrorMessage } from '../../sdk';
 
 interface Props {
   error?: unknown;

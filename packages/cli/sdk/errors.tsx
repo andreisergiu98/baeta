@@ -1,7 +1,8 @@
 import style from 'ansi-styles';
 import { Text } from 'ink';
+import React from 'react';
 
-interface MessagesProps {
+export interface ErrorsProps {
   warnings?: string[];
   errors?: string[];
 }
@@ -21,7 +22,7 @@ export function makeErrorMessage(message: string, bold = false) {
   return `${style.bold.open}${wrapped}${style.bold.close}`;
 }
 
-export function Errors(props: MessagesProps) {
+export function Errors(props: ErrorsProps) {
   return (
     <>
       {props.warnings?.map((warning, index) => (

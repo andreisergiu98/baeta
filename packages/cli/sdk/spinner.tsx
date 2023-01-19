@@ -1,12 +1,12 @@
 import spinners, { SpinnerName } from 'cli-spinners';
 import { Text } from 'ink';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-interface Props {
+export interface SpinnerProps {
   type?: SpinnerName;
 }
 
-export function Spinner({ type = 'dots' }: Props) {
+export function Spinner({ type = 'dots' }: SpinnerProps) {
   const [frame, setFrame] = useState(0);
   const spinner = spinners[type];
 

@@ -1,12 +1,11 @@
 import type { CompilerOptions } from '@baeta/compiler';
 import type { BuildContext } from '@baeta/compiler/esbuild';
 import { ExecaChildProcess } from 'execa';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useConfig } from '../../providers/ConfigProvider';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { makeErrorMessage, useConfig } from '../../sdk';
 import { dynamicImportCompiler } from '../../utils/compiler';
-import { AppOutput } from '../app';
-import { makeErrorMessage } from '../errors';
-import { WithGenerator } from '../generator';
+import { WithGenerator } from '../generate/with-generator';
+import { AppStatus } from './app-status';
 import { killProcesses, startProcess } from './builder-plugin';
 import { BuilderStatus } from './builder-status';
 
@@ -173,7 +172,7 @@ export function Builder(props: Props) {
           buildTime={buildTime}
         />
       )}
-      {isConfigured && errors.length === 0 && !!props.onSuccess && <AppOutput output={output} />}
+      {isConfigured && errors.length === 0 && !!props.onSuccess && <AppStatus output={output} />}
     </>
   );
 }

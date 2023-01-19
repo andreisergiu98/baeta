@@ -1,12 +1,12 @@
 import { Text } from 'ink';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
-interface Props {
+export interface TimeProps {
   value?: number;
   prefix?: string;
 }
 
-export function Time(props: Props) {
+export function Time(props: TimeProps) {
   const time = useMemo(() => {
     if (!props.value) {
       return '';

@@ -1,8 +1,6 @@
-import { Builder, BuilderWithGenerator } from '../components/builder';
-import { makeErrorMessage } from '../components/errors';
-import { LoadedBaetaConfig } from '../lib/config-loader';
-import { createCommand } from '../utils/command';
-import { renderComponent } from '../utils/render-component';
+import { LoadedBaetaConfig } from '../../lib/config-loader';
+import { createCommand, makeErrorMessage, renderComponent } from '../../sdk';
+import { Builder, BuilderWithGenerator } from './builder';
 
 interface Args {
   watch?: boolean;

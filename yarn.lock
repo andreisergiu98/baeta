@@ -922,7 +922,6 @@ __metadata:
   dependencies:
     "@baeta/build-tools": "workspace:^"
     "@baeta/compiler": "workspace:^"
-    "@baeta/core": "workspace:^"
     "@baeta/generator": "workspace:^"
     "@baeta/plugin-graphql": "workspace:^"
     "@baeta/tsconfig": "workspace:^"

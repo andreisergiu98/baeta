@@ -2,7 +2,7 @@ import fg from 'fast-glob';
 import fs from 'fs/promises';
 import { relative } from 'path';
 import { pathToFileURL } from 'url';
-import { makeErrorMessage } from '../components/errors';
+import { makeErrorMessage } from '../sdk/errors';
 import { dynamicImportCompiler } from '../utils/compiler';
 import { dynamicImport } from '../utils/import';
 import { BaetaOptions } from './config';

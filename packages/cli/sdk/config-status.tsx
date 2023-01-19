@@ -1,7 +1,7 @@
 import { Box, Text } from 'ink';
-import { useEffect, useRef, useState } from 'react';
-import { useConfig } from '../../providers/ConfigProvider';
-import { Spinner } from '../spinner';
+import React, { useEffect, useRef, useState } from 'react';
+import { useConfig } from './config-provider';
+import { Spinner } from './spinner';
 
 export function ConfigStatus() {
   const [configChanged, setConfigChanged] = useState(false);

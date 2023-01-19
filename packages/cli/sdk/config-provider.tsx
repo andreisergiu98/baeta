@@ -1,8 +1,8 @@
 import chokidar from 'chokidar';
-import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { ConfigStatus } from '../components/config';
+import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { loadConfig, LoadedBaetaConfig } from '../lib/config-loader';
 import { createContextProvider } from '../utils/context';
+import { ConfigStatus } from './config-status';
 
 export interface ConfigProps {
   initialConfig: LoadedBaetaConfig;

@@ -1,9 +1,9 @@
 import { Box, Text, TextProps } from 'ink';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Spinner } from './spinner';
 import { Time } from './time';
 
-interface LayoutProps extends PropsWithChildren {
+export interface LayoutProps {
   loading?: boolean;
   title?: string;
   color?: TextProps['color'];
@@ -11,7 +11,7 @@ interface LayoutProps extends PropsWithChildren {
   timePrefix?: string;
 }
 
-export function Layout(props: LayoutProps) {
+export function Layout(props: PropsWithChildren<LayoutProps>) {
   return (
     <Box flexDirection="column">
       <Box>

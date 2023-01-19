@@ -1,7 +1,7 @@
-import { PropsWithChildren, useCallback, useState } from 'react';
+import React, { PropsWithChildren, useCallback, useState } from 'react';
 import { Generator, GeneratorProps } from './generator';
 
-export function WithGenerator(props: GeneratorProps & PropsWithChildren) {
+export function WithGenerator(props: PropsWithChildren<GeneratorProps>) {
   const { children, ...rest } = props;
   const [generated, setGenerated] = useState(false);
 

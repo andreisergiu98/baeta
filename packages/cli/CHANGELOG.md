@@ -1,5 +1,17 @@
 # @baeta/cli
 
+## 0.0.32
+
+### Patch Changes
+
+- [`d1190c1`](https://github.com/andreisergiu98/baeta/commit/d1190c10e3c259c73ddeeb73a4bd312b22bf2ea4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - create cli sdk
+  release prisma plugin
+  update dependencies
+  refactor generator plugins
+- Updated dependencies [[`d1190c1`](https://github.com/andreisergiu98/baeta/commit/d1190c10e3c259c73ddeeb73a4bd312b22bf2ea4)]:
+  - @baeta/generator@0.0.19
+  - @baeta/plugin-graphql@0.0.18
+
 ## 0.0.31
 
 ### Patch Changes

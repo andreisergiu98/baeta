@@ -1,5 +1,14 @@
 # @baeta/plugin
 
+## 0.0.17
+
+### Patch Changes
+
+- [`d1190c1`](https://github.com/andreisergiu98/baeta/commit/d1190c10e3c259c73ddeeb73a4bd312b22bf2ea4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - create cli sdk
+  release prisma plugin
+  update dependencies
+  refactor generator plugins
+
 ## 0.0.16
 
 ### Patch Changes

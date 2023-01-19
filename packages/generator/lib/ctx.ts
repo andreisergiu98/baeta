@@ -1,15 +1,21 @@
 import { Ctx, FileManager, GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator-sdk';
 
-export function createCtx(
-  config: GeneratorOptions,
-  plugins: GeneratorPluginV1<unknown, unknown>[]
-): Ctx {
+interface CtxOptions {
+  generatorOptions: GeneratorOptions;
+  plugins: GeneratorPluginV1[];
+  changedFile?: string;
+  watching?: boolean;
+}
+
+export function createCtx(options: CtxOptions): Ctx {
   return {
-    generatorOptions: config,
+    generatorOptions: structuredClone(options.generatorOptions),
     fileManager: new FileManager(),
     didSetup: [],
     didGenerate: [],
     didEnd: [],
-    pluginNames: plugins.map((plugin) => plugin.name),
+    pluginNames: options.plugins.map((plugin) => plugin.name),
+    watching: options.watching ?? false,
+    changedFile: options.changedFile,
   };
 }

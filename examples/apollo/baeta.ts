@@ -1,4 +1,5 @@
 import { defineConfig } from '@baeta/cli';
+import { prismaPlugin } from '@baeta/plugin-prisma';
 
 export default defineConfig({
   graphql: {
@@ -6,6 +7,9 @@ export default defineConfig({
     modulesDir: './src/modules',
     baseTypesPath: './src/__generated__/types.ts',
     contextType: '../types/context#Context',
+    scalars: {
+      DateTime: 'Date',
+    },
   },
   compiler: {
     src: './src/app',
@@ -15,4 +19,11 @@ export default defineConfig({
       format: 'cjs',
     },
   },
+  plugins: [
+    prismaPlugin({
+      prismaSchema: 'schema.prisma',
+      generateCommand: 'yarn prisma generate',
+      generatedSchemaPath: './src/__generated/prisma/schema.prisma',
+    }),
+  ],
 });

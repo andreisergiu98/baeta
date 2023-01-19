@@ -4,37 +4,103 @@ import { createCtx } from './ctx';
 import { cleanPreviousFiles } from './file-utils';
 import { startRunner } from './runner';
 
+export interface GeneratorHooks {
+  onStart?: () => void | Promise<void>;
+  onEnd?: () => void | Promise<void>;
+  onError?: (error: unknown) => void | Promise<void>;
+  onPluginStepStart?: (
+    plugin: GeneratorPluginV1,
+    step: 'setup' | 'generate' | 'end'
+  ) => void | Promise<void>;
+  onPluginStepEnd?: (
+    plugin: GeneratorPluginV1,
+    step: 'setup' | 'generate' | 'end'
+  ) => void | Promise<void>;
+}
+
+export async function generate(
+  options: GeneratorOptions,
+  plugins: GeneratorPluginV1<any>[],
+  hooks?: GeneratorHooks
+) {
+  const ctx = createCtx({ generatorOptions: options, plugins });
+  return executeGenerator(ctx, plugins, hooks);
+}
+
+export function generateAndWatch(
+  options: GeneratorOptions,
+  plugins: GeneratorPluginV1<any>[],
+  hooks?: GeneratorHooks
+) {
+  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(options));
+  const toWatch = pluginsWatchOptions.flatMap((options) => options.include);
+  const toIgnore = pluginsWatchOptions.flatMap((options) => options.ignore);
+
+  let previousCtx: Ctx | undefined;
+
+  const handleChange = async (file: string) => {
+    const ctx = createCtx({
+      generatorOptions: options,
+      plugins,
+      watching: true,
+      changedFile: file,
+    });
+    previousCtx = await executeGenerator(ctx, plugins, hooks, previousCtx);
+  };
+
+  return chokidar
+    .watch(toWatch, {
+      ignored: toIgnore,
+    })
+    .on('change', handleChange)
+    .on('unlink', handleChange);
+}
+
 async function executeGenerator(
-  config: GeneratorOptions,
-  plugins: GeneratorPluginV1<unknown, unknown>[],
-  hooks?: HookOptions,
+  ctx: Ctx,
+  plugins: GeneratorPluginV1[],
+  hooks?: GeneratorHooks,
   prev?: Ctx
 ) {
-  const ctx = createCtx(config, plugins);
   const first = plugins[0];
 
   if (first == null) {
     return;
   }
 
-  const onSetup = (plugin: GeneratorPluginV1<unknown, unknown>) => {
+  const onSetupStart = (plugin: GeneratorPluginV1) => {
+    hooks?.onPluginStepStart?.(plugin, 'setup');
+  };
+
+  const onGenerateStart = (plugin: GeneratorPluginV1) => {
+    hooks?.onPluginStepStart?.(plugin, 'generate');
+  };
+
+  const onEndStart = (plugin: GeneratorPluginV1) => {
+    hooks?.onPluginStepStart?.(plugin, 'end');
+  };
+
+  const onSetupEnd = (plugin: GeneratorPluginV1) => {
     ctx.didSetup.push(plugin.name);
+    hooks?.onPluginStepEnd?.(plugin, 'setup');
   };
 
-  const onGenerate = (plugin: GeneratorPluginV1<unknown, unknown>) => {
+  const onGenerateEnd = (plugin: GeneratorPluginV1) => {
     ctx.didGenerate.push(plugin.name);
+    hooks?.onPluginStepEnd?.(plugin, 'generate');
   };
 
-  const onEnd = (plugin: GeneratorPluginV1<unknown, unknown>) => {
+  const onEndEnd = (plugin: GeneratorPluginV1) => {
     ctx.didEnd.push(plugin.name);
+    hooks?.onPluginStepEnd?.(plugin, 'setup');
   };
 
   try {
     await hooks?.onStart?.()?.catch(() => null);
 
-    await startRunner(ctx, plugins, (plugin) => plugin.setup, onSetup);
-    await startRunner(ctx, plugins, (plugin) => plugin.generate, onGenerate);
-    await startRunner(ctx, plugins, (plugin) => plugin.end, onEnd);
+    await startRunner(ctx, plugins, (plugin) => plugin.setup, onSetupStart, onSetupEnd);
+    await startRunner(ctx, plugins, (plugin) => plugin.generate, onGenerateStart, onGenerateEnd);
+    await startRunner(ctx, plugins, (plugin) => plugin.end, onEndStart, onEndEnd);
 
     await ctx.fileManager.writeAll();
     await cleanPreviousFiles(ctx.fileManager, prev?.fileManager);
@@ -45,41 +111,4 @@ async function executeGenerator(
   }
 
   return ctx;
-}
-
-interface HookOptions {
-  onStart?: () => void | Promise<void>;
-  onEnd?: () => void | Promise<void>;
-  onError?: (error: unknown) => void | Promise<void>;
-}
-
-export async function generate(
-  options: GeneratorOptions,
-  plugins: GeneratorPluginV1<any, any>[],
-  hooks?: HookOptions
-) {
-  return executeGenerator(options, plugins, hooks);
-}
-
-export function generateAndWatch(
-  options: GeneratorOptions,
-  plugins: GeneratorPluginV1<any, any>[],
-  hooks?: HookOptions
-) {
-  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(options, plugin.config));
-  const toWatch = pluginsWatchOptions.flatMap((options) => options.include);
-  const toIgnore = pluginsWatchOptions.flatMap((options) => options.ignore);
-
-  let previousCtx: Ctx | undefined;
-
-  const handler = async () => {
-    previousCtx = await executeGenerator(options, plugins, hooks, previousCtx);
-  };
-
-  return chokidar
-    .watch(toWatch, {
-      ignored: toIgnore,
-    })
-    .on('change', handler)
-    .on('unlink', handler);
 }

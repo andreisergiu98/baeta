@@ -1,17 +1,20 @@
-import { createPluginFactoryV1, GeneratorOptions } from '@baeta/generator-sdk';
+import { createPluginV1 } from '@baeta/generator-sdk';
 import { generate } from './lib/codegen';
 
-export default createPluginFactoryV1<GeneratorOptions>({
-  name: 'graphql',
-  watch: (generatorOptions, pluginOptions) => {
-    return {
-      include: pluginOptions.schemas,
-      ignore: [],
-    };
-  },
-  generate: async (params) => {
-    const files = await generate(params.config);
-    params.ctx.fileManager.add(...files);
-    return params.next();
-  },
-});
+export function graphqlPlugin() {
+  return createPluginV1({
+    name: 'graphql',
+    actionName: 'GraphQL modules',
+    watch: (options) => {
+      return {
+        include: options.schemas,
+        ignore: [],
+      };
+    },
+    generate: async (ctx, next) => {
+      const files = await generate(ctx.generatorOptions);
+      ctx.fileManager.add(...files);
+      return next();
+    },
+  });
+}

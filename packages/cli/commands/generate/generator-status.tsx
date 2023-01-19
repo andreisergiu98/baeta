@@ -1,12 +1,14 @@
 import { GraphQLError } from 'graphql';
 import { Text } from 'ink';
 import React from 'react';
-import { Errors, Layout, makeErrorMessage } from '../../sdk';
+import { Errors, Layout, makeErrorMessage, Spinner } from '../../sdk';
 
 interface Props {
   error?: unknown;
   running: boolean;
   watching?: boolean;
+  startedPlugins: string[];
+  finishedPlugins: string[];
 }
 
 function formatError(error: unknown) {
@@ -44,7 +46,7 @@ function GeneratorStatusContent(props: Props) {
   }
 
   if (props.running) {
-    return <Text>Generating...</Text>;
+    return <GeneratorPluginsStatus {...props} />;
   }
 
   if (props.watching) {
@@ -52,4 +54,33 @@ function GeneratorStatusContent(props: Props) {
   }
 
   return <Text>Generated</Text>;
+}
+
+function GeneratorPluginsStatus(props: Props) {
+  if (props.startedPlugins.length === 0) {
+    return <Text>Generating...</Text>;
+  }
+
+  const pluginMessages = props.startedPlugins.map((startedPlugin, index) => {
+    const isFinished = props.finishedPlugins.includes(startedPlugin);
+    return <GeneratorPluginStatus key={index} plugin={startedPlugin} isFinished={isFinished} />;
+  });
+
+  return <>{pluginMessages}</>;
+}
+
+interface PluginStatus {
+  plugin: string;
+  isFinished: boolean;
+}
+
+function GeneratorPluginStatus(props: PluginStatus) {
+  const status = props.isFinished ? '✔' : <Spinner />;
+  const task = props.isFinished ? `Generated ${props.plugin}` : `Generating ${props.plugin}...`;
+
+  return (
+    <Text>
+      {status} {task}
+    </Text>
+  );
 }

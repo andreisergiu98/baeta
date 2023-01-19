@@ -2,11 +2,10 @@ import { Ctx, GeneratorPluginV1, GeneratorPluginV1Fn } from '@baeta/generator-sd
 
 export function createRunner(
   ctx: Ctx,
-  plugins: GeneratorPluginV1<unknown, unknown>[],
-  getFn: (
-    plugin: GeneratorPluginV1<unknown, unknown>
-  ) => GeneratorPluginV1Fn<unknown, Record<string, unknown>>,
-  onFinish?: (plugin: GeneratorPluginV1<unknown, unknown>) => void
+  plugins: GeneratorPluginV1[],
+  getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
+  onStart?: (plugin: GeneratorPluginV1) => void,
+  onFinish?: (plugin: GeneratorPluginV1) => void
 ) {
   let i = 0;
 
@@ -19,26 +18,24 @@ export function createRunner(
 
     const fn = getFn(plugin);
 
-    await fn({
-      config: plugin.config,
-      ctx,
-      next,
-    });
+    onStart?.(plugin);
 
-    onFinish?.(plugin);
+    await fn(ctx, async () => {
+      onFinish?.(plugin);
+      return next();
+    });
   };
 
   return next;
 }
 
 export function startRunner(
-  ctx: Ctx,
-  plugins: GeneratorPluginV1<unknown, unknown>[],
-  getFn: (
-    plugin: GeneratorPluginV1<unknown, unknown>
-  ) => GeneratorPluginV1Fn<unknown, Record<string, unknown>>,
-  onFinish?: (plugin: GeneratorPluginV1<unknown, unknown>) => void
+  ctx: Ctx<unknown>,
+  plugins: GeneratorPluginV1[],
+  getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
+  onStart?: (plugin: GeneratorPluginV1) => void,
+  onFinish?: (plugin: GeneratorPluginV1) => void
 ) {
-  const run = createRunner(ctx, plugins, getFn, onFinish);
+  const run = createRunner(ctx, plugins, getFn, onStart, onFinish);
   return run();
 }

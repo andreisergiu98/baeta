@@ -63,11 +63,6 @@ export async function generate(options: GeneratorOptions) {
       contextType: rootConfig.contextType,
       useTypeImports: true,
       scalars: {
-        BigInt: 'number',
-        Bytes: 'Buffer',
-        DateTime: 'Date',
-        Decimal: 'number',
-        Json: '{}',
         ...rootConfig.scalars,
       },
     },

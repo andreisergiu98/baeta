@@ -1,0 +1,50 @@
+{
+  "name": "@baeta/plugin-exec",
+  "version": "0.0.1",
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "plugins/exec"
+  },
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/generator-sdk": "workspace:^",
+    "execa": "^6.1.0"
+  },
+  "devDependencies": {
+    "@baeta/build-tools": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
+      }
+    },
+    "types": "dist/index.d.ts"
+  }
+}

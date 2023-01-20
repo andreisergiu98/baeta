@@ -902,6 +902,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@baeta/auth@workspace:packages/auth":
+  version: 0.0.0-use.local
+  resolution: "@baeta/auth@workspace:packages/auth"
+  dependencies:
+    "@baeta/build-tools": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": ^18.11.18
+    typescript: ^4.9.4
+  peerDependencies:
+    "@baeta/core": "workspace:^"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/build-tools@workspace:^, @baeta/build-tools@workspace:tools/build-tools":
   version: 0.0.0-use.local
   resolution: "@baeta/build-tools@workspace:tools/build-tools"

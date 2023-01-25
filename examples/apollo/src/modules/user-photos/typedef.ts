@@ -6,6 +6,7 @@
 import * as Types from "../../__generated__/types";
 import { DocumentNode } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
+import baetaExtensions from "../../extensions";
 
 
 interface DefinedFields {
@@ -42,5 +43,5 @@ export namespace ModuleMetadata {
   }
 }
 
-export const createUserPhotosModule = () => Baeta.createModuleManager(ModuleMetadata);
+export const createUserPhotosModule = () => Baeta.createModuleManager(ModuleMetadata, baetaExtensions);
 export const getUserPhotosModule = Baeta.createSingletonModule(createUserPhotosModule);

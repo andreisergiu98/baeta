@@ -989,6 +989,7 @@ __metadata:
     "@apollo/server": ^4.3.0
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
+    "@baeta/extension-auth": "workspace:^"
     "@baeta/plugin-pagination": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
     "@prisma/client": ^4.9.0
@@ -1010,7 +1011,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/extension-auth@workspace:extensions/auth":
+"@baeta/extension-auth@workspace:^, @baeta/extension-auth@workspace:extensions/auth":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-auth@workspace:extensions/auth"
   dependencies:

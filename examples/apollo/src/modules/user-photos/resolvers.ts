@@ -28,3 +28,7 @@ User.photosConnection(({ args, root }) => {
     ],
   };
 });
+
+User.photos.$auth({
+  $granted: 'readUserPhotos',
+});

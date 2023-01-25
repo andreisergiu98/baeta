@@ -8,75 +8,19 @@ import { ScopesInitializer } from './scope-loader';
 import { getAuthStore } from './store';
 import { loadAuthStore } from './store-loader';
 
-declare global {
-  export namespace BaetaExtensions {
-    interface RequireAuthOptions {
-      grants?: string | string[];
-    }
-
-    export interface ResolverExtensions<Result, Root, Context, Args> {
-      $auth: (
-        scopes: RequiredScopes | GetPreScopes<Root, Context, Args>,
-        options?: RequireAuthOptions
-      ) => void;
-      $postAuth: (
-        getScopes: GetPostScopes<Result, Root, Context, Args>,
-        options?: RequireAuthOptions
-      ) => void;
-    }
-
-    export interface TypeExtensions<Root, Context> {
-      $auth: (
-        scopes: RequiredScopes | GetPreScopes<Root, Context, unknown>,
-        options?: RequireAuthOptions
-      ) => void;
-      $postAuth: (
-        getScopes: GetPostScopes<unknown, Root, Context, unknown>,
-        options?: RequireAuthOptions
-      ) => void;
-    }
-
-    export interface SubscriptionSubscribeExtensions<Root, Context, Args> {
-      $auth: (
-        scopes: RequiredScopes | GetPreScopes<Root, Context, Args>,
-        options?: RequireAuthOptions
-      ) => void;
-      $postAuth: (
-        getScopes: GetPostScopes<unknown, Root, Context, Args>,
-        options?: RequireAuthOptions
-      ) => void;
-    }
-
-    export interface SubscriptionResolveExtensions<Result, Root, Context, Args> {
-      $auth: (
-        scopes: RequiredScopes | GetPreScopes<Root, Context, Args>,
-        options?: RequireAuthOptions
-      ) => void;
-      $postAuth: (
-        getScopes: GetPostScopes<Result, Root, Context, Args>,
-        options?: RequireAuthOptions
-      ) => void;
-    }
-
-    export interface ModuleExtensions {}
-  }
-
-  export namespace AuthExtension {
-    export interface Scopes {}
-  }
-}
-
-export type Scopes = keyof AuthExtension.Scopes;
-
 export interface AuthOptions {
   defaultScopes?: AuthExtension.Scopes;
 }
 
-type GetPreScopes<Root, Context, Args> = (
+export interface AuthMethodOptions {
+  grants?: string | string[];
+}
+
+export type GetRequiredScopes<Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>
 ) => RequiredScopes | Promise<RequiredScopes> | true | Promise<true>;
 
-type GetPostScopes<Result, Root, Context, Args> = (
+export type GetPostRequiredScopes<Result, Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>,
   result: Result
 ) => RequiredScopes | Promise<RequiredScopes> | true | Promise<true>;
@@ -171,8 +115,8 @@ export class AuthExtension<T> extends Extension {
   }
 
   private createMiddleware(
-    getScopes: GetPreScopes<unknown, unknown, unknown>,
-    options?: BaetaExtensions.RequireAuthOptions
+    getScopes: GetRequiredScopes<unknown, unknown, unknown>,
+    options?: AuthMethodOptions
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -193,8 +137,8 @@ export class AuthExtension<T> extends Extension {
   }
 
   private createPostMiddleware(
-    getScopes: GetPostScopes<unknown, unknown, unknown, unknown>,
-    options?: BaetaExtensions.RequireAuthOptions
+    getScopes: GetPostRequiredScopes<unknown, unknown, unknown, unknown>,
+    options?: AuthMethodOptions
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -217,12 +161,12 @@ export class AuthExtension<T> extends Extension {
 
   private createPreAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
-      scopes: RequiredScopes | GetPreScopes<Root, Context, Args>,
-      options?: BaetaExtensions.RequireAuthOptions
+      scopes: RequiredScopes | GetRequiredScopes<Root, Context, Args>,
+      options?: AuthMethodOptions
     ) => {
       const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
       const middleware = this.createMiddleware(
-        getScopes as GetPreScopes<unknown, unknown, unknown>,
+        getScopes as GetRequiredScopes<unknown, unknown, unknown>,
         options
       );
       this.registerMiddleware(type, field, middleware);
@@ -231,11 +175,11 @@ export class AuthExtension<T> extends Extension {
 
   private createPostAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
-      getScopes: GetPostScopes<Result, Root, Context, Args>,
-      options?: BaetaExtensions.RequireAuthOptions
+      getScopes: GetPostRequiredScopes<Result, Root, Context, Args>,
+      options?: AuthMethodOptions
     ) => {
       const middleware = this.createPostMiddleware(
-        getScopes as GetPostScopes<unknown, unknown, unknown, unknown>,
+        getScopes as GetPostRequiredScopes<unknown, unknown, unknown, unknown>,
         options
       );
       this.registerMiddleware(type, field, middleware);
@@ -248,8 +192,4 @@ export class AuthExtension<T> extends Extension {
     }
     this.authMap[type][field] = middleware;
   }
-}
-
-export function authExtension<Ctx>(loadScopes: ScopesInitializer<Ctx>, options: AuthOptions = {}) {
-  return () => new AuthExtension(loadScopes, options);
 }

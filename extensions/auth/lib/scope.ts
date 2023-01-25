@@ -1,4 +1,5 @@
-import { isGrantedRule, isLogicRule, LogicRule } from './rule';
+import { isGrantedKey } from './grant';
+import { isLogicRule, LogicRule } from './rule';
 import { getAuthStore } from './store';
 
 export type Scopes = keyof AuthExtension.Scopes;
@@ -18,7 +19,7 @@ function getResolver(ctx: unknown, scopes: RequiredScopes, key: string, parentPa
     return async () => resolveScopes(ctx, scopes[key], key, parentPath);
   }
 
-  if (isGrantedRule(key)) {
+  if (isGrantedKey(key)) {
     return async () => resolveGrant(ctx, scopes[key], parentPath);
   }
 

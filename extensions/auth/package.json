@@ -1,5 +1,5 @@
 {
-  "name": "@baeta/auth",
+  "name": "@baeta/extension-auth",
   "version": "0.0.0",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/auth"
+    "directory": "extensions/auth"
   },
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",

@@ -5,7 +5,7 @@ export type ScopesInitializer<Ctx> = (ctx: Ctx) => ScopeMap | Promise<ScopeMap>;
 
 type ScopeLoader<T> = boolean | ((value: T) => boolean | Promise<boolean>);
 
-type ScopeResolver = (value: unknown) => Promise<true>;
+type ScopeResolver = (value: unknown) => true | Promise<true>;
 
 type ScopeMap = {
   [K in Scopes]: ScopeLoader<AuthExtension.Scopes[K]>;
@@ -26,7 +26,7 @@ function createScopeResolver(ctx: unknown, name: string, value: ScopeLoader<any>
   const isFunction = typeof value === 'function';
 
   if (!isFunction) {
-    return async () => resolveBoolean(value);
+    return () => resolveBoolean(value);
   }
 
   return async (param: unknown) => {

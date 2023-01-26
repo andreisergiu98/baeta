@@ -10,7 +10,7 @@ export interface AuthStore {
 
 export const authStoreKey = Symbol('getAuthStore');
 
-export async function getAuthStore(_ctx: unknown) {
+export function getAuthStore(_ctx: unknown) {
   const ctx = _ctx as Record<symbol, unknown>;
   if (!ctx[authStoreKey]) {
     throw new Error('Auth Store not initialized');

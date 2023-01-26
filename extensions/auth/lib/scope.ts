@@ -16,11 +16,11 @@ export type RequiredScopes = {
 
 function getResolver(ctx: unknown, scopes: RequiredScopes, key: string, parentPath: string) {
   if (isLogicRule(key)) {
-    return async () => resolveScopes(ctx, scopes[key], key, parentPath);
+    return () => resolveScopes(ctx, scopes[key], key, parentPath);
   }
 
   if (isGrantedKey(key)) {
-    return async () => resolveGrant(ctx, scopes[key], parentPath);
+    return () => resolveGrant(ctx, scopes[key], parentPath);
   }
 
   return async () => {

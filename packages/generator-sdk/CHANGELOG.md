@@ -1,5 +1,13 @@
 # @baeta/generator-sdk
 
+## 0.0.5
+
+### Patch Changes
+
+- [#40](https://github.com/andreisergiu98/baeta/pull/40) [`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - avoid rewriting persisted files
+
+- [#40](https://github.com/andreisergiu98/baeta/pull/40) [`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - normalize config
+
 ## 0.0.4
 
 ### Patch Changes

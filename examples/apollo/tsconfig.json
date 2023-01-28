@@ -1,5 +1,5 @@
 {
-  "extends": "../../config/tsconfig.json",
+  "extends": "@baeta/tsconfig/tsconfig.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",

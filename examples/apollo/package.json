@@ -34,6 +34,7 @@
     "@baeta/cli": "workspace:^",
     "@baeta/plugin-pagination": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
     "@prisma/client": "^4.9.0",
     "@types/body-parser": "^1.19.2",
     "@types/cors": "^2.8.13",

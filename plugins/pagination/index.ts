@@ -27,7 +27,7 @@ ${printFields(fields)}
 }
 
 function printTypes(types: string[]) {
-  return types.join('\n\n');
+  return types.join('\n\n') + '\n';
 }
 
 function printPageInfo(addFields: string[] = []) {
@@ -44,7 +44,8 @@ function printExport(moduleDefinitionName: string) {
 
   return `import { getConnectionsModule } from "./${importName}";
 
-export const connectionsModule = getConnectionsModule()`;
+export const connectionsModule = getConnectionsModule();
+`;
 }
 
 function printConnectionTypes(name: string, typeOptions: TypeOptions, options: PaginationOptions) {

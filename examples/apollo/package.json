@@ -12,6 +12,7 @@
     "directory": "examples/apollo"
   },
   "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "scripts": {
     "build-example": "baeta build --generate",
     "prisma": "pnpify prisma",

@@ -4,6 +4,9 @@ gen_enforced_field(WorkspaceCwd, 'homepage', 'https://github.com/andreisergiu98/
 % This rule will enforce that all packages must have bugs url defined
 gen_enforced_field(WorkspaceCwd, 'bugs.url', 'https://github.com/andreisergiu98/baeta/issues').
 
+% This rule will enforce that all packages must have the author defined
+gen_enforced_field(WorkspaceCwd, 'author', 'Andrei Pampu <pampu.andrei@pm.me>').
+
 % This rule will enforce that all packages must have repository defined
 gen_enforced_field(WorkspaceCwd, 'repository.type', 'git').
 gen_enforced_field(WorkspaceCwd, 'repository.url', 'https://github.com/andreisergiu98/baeta.git').

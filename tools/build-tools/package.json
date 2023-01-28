@@ -11,6 +11,7 @@
     "directory": "tools/build-tools"
   },
   "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
   "exports": {
     "./tsup": {

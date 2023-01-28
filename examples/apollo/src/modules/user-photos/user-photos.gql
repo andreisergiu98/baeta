@@ -5,6 +5,7 @@ type UserPhoto {
 
 extend type User {
   photos: [UserPhoto!]
+  photosConnection: UserPhotoConnection
 }
 
 scalar DateTime

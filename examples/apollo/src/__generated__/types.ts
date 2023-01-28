@@ -20,6 +20,36 @@ export type Scalars = {
   DateTime: Date;
 };
 
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  hasPreviousPage: Scalars['Boolean'];
+  hasNextPage: Scalars['Boolean'];
+};
+
+export type UserConnection = {
+  __typename?: 'UserConnection';
+  pageInfo: PageInfo;
+  edges?: Maybe<Array<Maybe<UserEdge>>>;
+};
+
+export type UserEdge = {
+  __typename?: 'UserEdge';
+  cursor: Scalars['String'];
+  node?: Maybe<User>;
+};
+
+export type UserPhotoConnection = {
+  __typename?: 'UserPhotoConnection';
+  pageInfo: PageInfo;
+  edges?: Maybe<Array<Maybe<UserPhotoEdge>>>;
+};
+
+export type UserPhotoEdge = {
+  __typename?: 'UserPhotoEdge';
+  cursor: Scalars['String'];
+  node?: Maybe<UserPhoto>;
+};
+
 export type UserPhoto = {
   __typename?: 'UserPhoto';
   id: Scalars['ID'];
@@ -29,6 +59,7 @@ export type UserPhoto = {
 export type User = {
   __typename?: 'User';
   photos?: Maybe<Array<UserPhoto>>;
+  photosConnection?: Maybe<UserPhotoConnection>;
   id: Scalars['ID'];
   name: Scalars['String'];
   birthday?: Maybe<Scalars['DateTime']>;

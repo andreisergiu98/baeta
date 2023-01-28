@@ -22,7 +22,7 @@ export function Generator(props: GeneratorProps) {
 
   const plugins = useMemo(() => {
     const generatorPlugins = getGeneratorPlugins(flattenArrays(config.plugins ?? []));
-    return [graphqlPlugin(), ...generatorPlugins];
+    return [...generatorPlugins, graphqlPlugin()];
   }, [config.plugins]);
 
   const getHooks = useCallback((): GeneratorHooks => {

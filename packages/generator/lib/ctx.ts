@@ -1,7 +1,12 @@
-import { Ctx, FileManager, GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator-sdk';
+import {
+  Ctx,
+  FileManager,
+  GeneratorPluginV1,
+  NormalizedGeneratorOptions,
+} from '@baeta/generator-sdk';
 
 interface CtxOptions {
-  generatorOptions: GeneratorOptions;
+  generatorOptions: NormalizedGeneratorOptions;
   plugins: GeneratorPluginV1[];
   changedFile?: string;
   watching?: boolean;

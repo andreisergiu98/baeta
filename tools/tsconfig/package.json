@@ -11,5 +11,6 @@
     "directory": "tools/tsconfig"
   },
   "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module"
 }

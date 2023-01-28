@@ -1,5 +1,5 @@
 import { PluginType } from '@baeta/plugin';
-import { GeneratorOptions } from './config';
+import { NormalizedGeneratorOptions } from './config';
 import { Ctx } from './ctx';
 
 type MatchPattern = string | RegExp;
@@ -14,7 +14,7 @@ export type GeneratorPluginV1Fn<Store = unknown> = (
   next: () => Promise<void>
 ) => Promise<void>;
 
-export type GeneratorPluginV1WatchOptions = (options: GeneratorOptions) => {
+export type GeneratorPluginV1WatchOptions = (options: NormalizedGeneratorOptions) => {
   include: string | string[];
   ignore: Matcher;
 };

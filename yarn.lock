@@ -1081,6 +1081,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/plugin-pagination@workspace:plugins/pagination":
+  version: 0.0.0-use.local
+  resolution: "@baeta/plugin-pagination@workspace:plugins/pagination"
+  dependencies:
+    "@baeta/build-tools": "workspace:^"
+    "@baeta/generator-sdk": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": ^18.11.18
+    graphql: ^16.6.0
+    typescript: ^4.9.4
+  peerDependencies:
+    graphql: ^16.6.0
+  languageName: unknown
+  linkType: soft
+
 "@baeta/plugin-prisma@workspace:^, @baeta/plugin-prisma@workspace:plugins/prisma":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-prisma@workspace:plugins/prisma"

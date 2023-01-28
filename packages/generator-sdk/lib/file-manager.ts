@@ -33,12 +33,14 @@ export class FileManager {
   }
 
   writeAll() {
-    return Promise.all(this.files.map((file) => file.write()));
+    const toWrite = this.files.filter((file) => !file.persisted);
+    return Promise.all(toWrite.map((file) => file.write()));
   }
 
   writeByTag(tag: string) {
     const files = this.getByTag(tag);
-    return Promise.all(files.map((file) => file.write()));
+    const toWrite = files.filter((file) => !file.persisted);
+    return Promise.all(toWrite.map((file) => file.write()));
   }
 
   unlinkAll() {

@@ -1,3 +1,4 @@
+import { ForbiddenError } from '@baeta/errors';
 import { isGrantedKey } from './grant';
 import { isLogicRule, LogicRule } from './rule';
 import { getAuthStore } from './store';
@@ -47,7 +48,7 @@ async function resolveGrant(
     return true;
   }
 
-  throw new Error('');
+  throw new ForbiddenError();
 }
 
 async function resolveChainScopes(
@@ -79,7 +80,7 @@ async function resolveRaceScopes(
     }
   }
 
-  throw new Error('');
+  throw new ForbiddenError();
 }
 
 async function resolveOrScopes(
@@ -95,7 +96,9 @@ async function resolveOrScopes(
     promises.push(resolve());
   }
 
-  return Promise.any(promises);
+  return Promise.any(promises).catch((e) => {
+    throw new ForbiddenError();
+  });
 }
 
 async function resolveAndScopes(
@@ -111,7 +114,11 @@ async function resolveAndScopes(
     promises.push(resolve());
   }
 
-  return Promise.all(promises).then(() => true);
+  return Promise.all(promises)
+    .then(() => true as const)
+    .catch(() => {
+      throw new ForbiddenError();
+    });
 }
 
 export async function resolveScopes(
@@ -121,13 +128,13 @@ export async function resolveScopes(
   parentPath: string
 ): Promise<true> {
   if (scopes == null) {
-    throw new Error('');
+    throw new Error('Scope definitions cannot be empty!');
   }
 
   const keys = Object.keys(scopes);
 
   if (keys.length === 0) {
-    throw new Error('');
+    throw new Error('Scope definitions cannot be empty!');
   }
 
   if (rule === '$chain') {

@@ -1,5 +1,5 @@
 {
-  "name": "@baeta/extension-auth",
+  "name": "@baeta/errors",
   "version": "0.0.0",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "extensions/auth"
+    "directory": "packages/errors"
   },
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
@@ -23,20 +23,14 @@
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
   },
-  "dependencies": {
-    "@baeta/errors": "workspace:^",
-    "fast-json-stable-stringify": "^2.1.0"
-  },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
-    "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.11.18",
     "graphql": "^16.6.0",
     "typescript": "^4.9.4"
   },
   "peerDependencies": {
-    "@baeta/core": "workspace:^",
     "graphql": "^16.6.0"
   },
   "engines": {

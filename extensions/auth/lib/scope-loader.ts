@@ -1,3 +1,4 @@
+import { ForbiddenError } from '@baeta/errors';
 import { Scopes } from './scope';
 import { getAuthStore } from './store';
 
@@ -17,7 +18,7 @@ export type ScopeResolverMap = {
 
 function resolveBoolean(param: boolean) {
   if (param !== true) {
-    throw new Error('');
+    throw new ForbiddenError();
   }
   return true as const;
 }

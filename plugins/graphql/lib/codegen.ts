@@ -1,26 +1,20 @@
-import { File, GeneratorOptions } from '@baeta/generator-sdk';
+import { File, NormalizedGeneratorOptions } from '@baeta/generator-sdk';
 import { codegen as gqlCodegen } from '@graphql-codegen/core';
 import { normalizeConfig, normalizeInstanceOrArray } from '@graphql-codegen/plugin-helpers';
 import * as typescriptPlugin from '@graphql-codegen/typescript';
 import { UnnormalizedTypeDefPointer } from '@graphql-tools/load';
-import path from 'path';
 import { createCache } from '../utils/cache';
 import { loadSchema } from '../utils/load';
 import * as contextPlugin from './context';
 import * as modules from './modules';
 
-export async function generate(options: GeneratorOptions) {
-  const root = process.cwd();
-  const modulesDir = path.relative(root, options.modulesDir || 'modules');
-  const extensionsPath =
-    options.extensions && path.relative(path.join(modulesDir, 'module'), options.extensions);
-
+export async function generate(options: NormalizedGeneratorOptions) {
   const rootConfig = {
     schemas: normalizeInstanceOrArray(options.schemas),
-    modulesDir,
-    baseTypesPath: path.relative(modulesDir, options.baseTypesPath || './__generated__/types.ts'),
+    modulesDir: options.modulesDir,
+    baseTypesPath: options.baseTypesPath,
     contextType: options.contextType,
-    moduleDefinitionName: options.moduleDefinitionName || 'typedef.ts',
+    moduleDefinitionName: options.moduleDefinitionName,
     scalars: options.scalars,
     plugins: normalizeConfig(['typescript', 'context']),
     pluginMap: {
@@ -42,16 +36,16 @@ export async function generate(options: GeneratorOptions) {
 
   const hash = JSON.stringify(schemaPointerMap);
   const result = await cache('schema', hash, async () => {
-    return loadSchema(schemaPointerMap, root);
+    return loadSchema(schemaPointerMap, options.cwd);
   });
 
   const outputs = await modules.preset.buildGeneratesSection({
-    baseOutputDir: modulesDir,
+    baseOutputDir: options.modulesDir,
     presetConfig: {
       baseTypesPath: rootConfig.baseTypesPath,
       filename: rootConfig.moduleDefinitionName,
       encapsulateModuleTypes: 'none',
-      extensionsPath,
+      extensionsPath: options.extensions,
     },
     schema: result.outputSchema,
     schemaAst: result.outputSchemaAst,

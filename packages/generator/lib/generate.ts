@@ -1,5 +1,6 @@
 import { Ctx, GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator-sdk';
 import chokidar from 'chokidar';
+import { loadOptions } from './config';
 import { createCtx } from './ctx';
 import { cleanPreviousFiles } from './file-utils';
 import { startRunner } from './runner';
@@ -23,7 +24,8 @@ export async function generate(
   plugins: GeneratorPluginV1<any>[],
   hooks?: GeneratorHooks
 ) {
-  const ctx = createCtx({ generatorOptions: options, plugins });
+  const generatorOptions = loadOptions(options);
+  const ctx = createCtx({ generatorOptions, plugins });
   return executeGenerator(ctx, plugins, hooks);
 }
 
@@ -32,7 +34,8 @@ export function generateAndWatch(
   plugins: GeneratorPluginV1<any>[],
   hooks?: GeneratorHooks
 ) {
-  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(options));
+  const generatorOptions = loadOptions(options);
+  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(generatorOptions));
   const toWatch = pluginsWatchOptions.flatMap((options) => options.include);
   const toIgnore = pluginsWatchOptions.flatMap((options) => options.ignore);
 
@@ -40,7 +43,7 @@ export function generateAndWatch(
 
   const handleChange = async (file: string) => {
     const ctx = createCtx({
-      generatorOptions: options,
+      generatorOptions,
       plugins,
       watching: true,
       changedFile: file,

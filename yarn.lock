@@ -989,6 +989,7 @@ __metadata:
     "@apollo/server": ^4.3.0
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
+    "@baeta/plugin-pagination": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
     "@prisma/client": ^4.9.0
     "@types/body-parser": ^1.19.2
@@ -1081,7 +1082,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/plugin-pagination@workspace:plugins/pagination":
+"@baeta/plugin-pagination@workspace:^, @baeta/plugin-pagination@workspace:plugins/pagination":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-pagination@workspace:plugins/pagination"
   dependencies:

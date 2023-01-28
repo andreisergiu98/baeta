@@ -8,11 +8,12 @@ import express from 'express';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
+import { connectionsModule } from './modules/connections';
 import { userModule } from './modules/user';
 import { userPhotosModule } from './modules/user-photos';
 
 const baeta = createApplication({
-  modules: [userModule, userPhotosModule],
+  modules: [userModule, userPhotosModule, connectionsModule],
   pruneSchema: true,
 });
 

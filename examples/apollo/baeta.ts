@@ -1,4 +1,5 @@
 import { defineConfig } from '@baeta/cli';
+import { paginationPlugin } from '@baeta/plugin-pagination';
 import { prismaPlugin } from '@baeta/plugin-prisma';
 
 export default defineConfig({
@@ -24,6 +25,12 @@ export default defineConfig({
       prismaSchema: 'schema.prisma',
       generateCommand: 'yarn prisma generate',
       generatedSchemaPath: 'src/__generated__/prisma/schema.prisma',
+    }),
+    paginationPlugin({
+      types: {
+        User: true,
+        UserPhoto: true,
+      },
     }),
   ],
 });

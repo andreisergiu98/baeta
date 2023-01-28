@@ -1,4 +1,5 @@
 import { createPluginV1, File } from '@baeta/generator-sdk';
+import { join, parse } from 'path';
 
 interface TypeOptions {
   nodeType?: string;
@@ -11,6 +12,8 @@ interface PaginationOptions {
   types: Record<string, boolean | TypeOptions>;
   nullableNode?: boolean;
   pageInfoFields?: string[];
+  moduleName?: string;
+  createExport?: boolean;
 }
 
 function printFields(fields: string[]) {
@@ -36,7 +39,10 @@ function printPageInfo(addFields: string[] = []) {
 }
 
 function printExport(moduleDefinitionName: string) {
-  return `import { getConnectionsModule } from "./${moduleDefinitionName}";
+  const parsed = parse(moduleDefinitionName);
+  const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
+
+  return `import { getConnectionsModule } from "./${importName}";
 
 export const connectionsModule = getConnectionsModule()`;
 }
@@ -81,20 +87,29 @@ export function paginationPlugin(options: PaginationOptions) {
         types.push(...printConnectionTypes(name, typeOptions === true ? {} : typeOptions, options));
       }
 
+      const connectionModuleDir = join(
+        ctx.generatorOptions.modulesDir,
+        options.moduleName ?? 'connections'
+      );
+
       const definitionFile = new File(
-        'src/modules/connections/connections.gql',
+        `${connectionModuleDir}/connections.gql`,
         printTypes(types),
         'pagination'
       );
 
-      const exportFile = new File(
-        'src/modules/connections/index.ts',
-        printExport(ctx.generatorOptions.moduleDefinitionName || 'typedef'),
-        'pagination'
-      );
-
       await definitionFile.write();
-      ctx.fileManager.add(definitionFile, exportFile);
+
+      ctx.fileManager.add(definitionFile);
+
+      if (options.createExport !== false) {
+        const exportFile = new File(
+          `${connectionModuleDir}/index.ts`,
+          printExport(ctx.generatorOptions.moduleDefinitionName),
+          'pagination'
+        );
+        ctx.fileManager.add(exportFile);
+      }
 
       return next();
     },

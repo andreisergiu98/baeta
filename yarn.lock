@@ -982,6 +982,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/errors@workspace:^, @baeta/errors@workspace:packages/errors":
+  version: 0.0.0-use.local
+  resolution: "@baeta/errors@workspace:packages/errors"
+  dependencies:
+    "@baeta/build-tools": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": ^18.11.18
+    graphql: ^16.6.0
+    typescript: ^4.9.4
+  peerDependencies:
+    graphql: ^16.6.0
+  languageName: unknown
+  linkType: soft
+
 "@baeta/examples-apollo@workspace:examples/apollo":
   version: 0.0.0-use.local
   resolution: "@baeta/examples-apollo@workspace:examples/apollo"
@@ -1017,6 +1031,7 @@ __metadata:
   dependencies:
     "@baeta/build-tools": "workspace:^"
     "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.11.18
     fast-json-stable-stringify: ^2.1.0

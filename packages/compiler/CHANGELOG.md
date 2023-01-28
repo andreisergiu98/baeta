@@ -1,5 +1,11 @@
 # @baeta/compiler
 
+## 0.0.26
+
+### Patch Changes
+
+- [`ce495b1`](https://github.com/andreisergiu98/baeta/commit/ce495b1a8d059fa27f3c420775d31c23cda5f8d3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - remove default compiler target
+
 ## 0.0.25
 
 ### Patch Changes

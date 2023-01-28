@@ -1,5 +1,17 @@
 # @baeta/cli
 
+## 0.0.33
+
+### Patch Changes
+
+- [#40](https://github.com/andreisergiu98/baeta/pull/40) [`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - normalize config
+
+- [#40](https://github.com/andreisergiu98/baeta/pull/40) [`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - change generator plugin order
+
+- Updated dependencies [[`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056)]:
+  - @baeta/generator@0.0.20
+  - @baeta/plugin-graphql@0.0.19
+
 ## 0.0.32
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @baeta/plugin-graphql
 
+## 0.0.19
+
+### Patch Changes
+
+- [#40](https://github.com/andreisergiu98/baeta/pull/40) [`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - normalize config
+
+- Updated dependencies [[`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056), [`9f937f4`](https://github.com/andreisergiu98/baeta/commit/9f937f47d3464a082680047414ee13a76cf6c056)]:
+  - @baeta/generator-sdk@0.0.5
+
 ## 0.0.18
 
 ### Patch Changes

@@ -96,9 +96,7 @@ async function resolveOrScopes(
     promises.push(resolve());
   }
 
-  return Promise.any(promises).catch((e) => {
-    throw new ForbiddenError();
-  });
+  return Promise.any(promises);
 }
 
 async function resolveAndScopes(
@@ -114,11 +112,7 @@ async function resolveAndScopes(
     promises.push(resolve());
   }
 
-  return Promise.all(promises)
-    .then(() => true as const)
-    .catch(() => {
-      throw new ForbiddenError();
-    });
+  return Promise.all(promises).then(() => true as const);
 }
 
 export async function resolveScopes(

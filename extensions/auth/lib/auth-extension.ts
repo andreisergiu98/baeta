@@ -2,6 +2,7 @@ import { MiddlewareParams } from '@baeta/core';
 import { Extension, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
 import { GraphQLResolveInfo } from 'graphql';
 import { createResolverPath } from '../utils/resolver';
+import { aggregateErrorResolver, ErrorResolver, resolveError } from './error';
 import { LogicRule } from './rule';
 import { RequiredScopes, resolveScopes } from './scope';
 import { ScopesInitializer } from './scope-loader';
@@ -10,10 +11,12 @@ import { loadAuthStore } from './store-loader';
 
 export interface AuthOptions {
   defaultScopes?: AuthExtension.Scopes;
+  errorResolver?: ErrorResolver;
 }
 
-export interface AuthMethodOptions {
+export interface AuthMethodOptions<Result, Root, Context, Args> {
   grants?: string | string[];
+  errorResolver?: ErrorResolver;
 }
 
 export type GetRequiredScopes<Root, Context, Args> = (
@@ -102,8 +105,11 @@ export class AuthExtension<T> extends Extension {
   };
 
   private async saveGrants(
+    root: unknown,
+    args: unknown,
     ctx: unknown,
     info: GraphQLResolveInfo,
+    result: unknown,
     grants: undefined | string | string[]
   ) {
     if (!grants) {
@@ -116,7 +122,7 @@ export class AuthExtension<T> extends Extension {
 
   private createMiddleware(
     getScopes: GetRequiredScopes<unknown, unknown, unknown>,
-    options?: AuthMethodOptions
+    options?: AuthMethodOptions<unknown, unknown, unknown, unknown>
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -129,16 +135,24 @@ export class AuthExtension<T> extends Extension {
 
       const parentPath = createResolverPath(info.path.prev);
 
-      await resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath);
-      await this.saveGrants(ctx, info, options?.grants);
+      const errorResolver =
+        options?.errorResolver ?? this.options.errorResolver ?? aggregateErrorResolver;
 
-      return next(root, args, ctx, info);
+      await resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath).catch((err) =>
+        resolveError(err, errorResolver)
+      );
+
+      const result = await next(root, args, ctx, info);
+
+      await this.saveGrants(root, args, ctx, info, result, options?.grants);
+
+      return result;
     };
   }
 
   private createPostMiddleware(
     getScopes: GetPostRequiredScopes<unknown, unknown, unknown, unknown>,
-    options?: AuthMethodOptions
+    options?: AuthMethodOptions<unknown, unknown, unknown, unknown>
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -152,8 +166,14 @@ export class AuthExtension<T> extends Extension {
 
       const parentPath = createResolverPath(info.path.prev);
 
-      await resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath);
-      await this.saveGrants(ctx, info, options?.grants);
+      const errorResolver =
+        options?.errorResolver ?? this.options.errorResolver ?? aggregateErrorResolver;
+
+      await resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath).catch((err) =>
+        resolveError(err, errorResolver)
+      );
+
+      await this.saveGrants(root, args, ctx, info, result, options?.grants);
 
       return result;
     };

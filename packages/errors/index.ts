@@ -1,12 +1,12 @@
 import { GraphQLError, GraphQLErrorOptions } from 'graphql';
 
 export enum BaetaErrorCode {
-  Unauthorized = 'UNAUTHORIZED',
+  Unauthenticated = 'UNAUTHENTICATED',
   Forbidden = 'FORBIDDEN',
   BadUserInput = 'BAD_USER_INPUT',
 }
 
-export class UnauthorizedError extends GraphQLError {
+export class UnauthenticatedError extends GraphQLError {
   constructor(
     message: string = 'Access denied! You need to be authorized to perform this action!',
     options?: GraphQLErrorOptions
@@ -14,7 +14,10 @@ export class UnauthorizedError extends GraphQLError {
     super(message, {
       ...options,
       extensions: {
-        code: BaetaErrorCode.Unauthorized,
+        code: BaetaErrorCode.Unauthenticated,
+        http: {
+          status: 401,
+        },
         ...options?.extensions,
       },
     });

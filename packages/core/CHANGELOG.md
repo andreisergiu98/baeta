@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 0.0.25
+
+### Patch Changes
+
+- [#31](https://github.com/andreisergiu98/baeta/pull/31) [`f122a1e`](https://github.com/andreisergiu98/baeta/commit/f122a1e2970d915ce3c24931d4309db26665c739) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add context store utility
+
 ## 0.0.24
 
 ### Patch Changes

@@ -14,7 +14,7 @@ type GetGrantFn<Result, Root, Context, Args> = (
   result: Result
 ) => GetGrantResult | PromiseLike<GetGrantResult>;
 
-export type GetGrantOption<Result, Root, Context, Args> =
+export type GetGrant<Result, Root, Context, Args> =
   | GetGrantFn<Result, Root, Context, Args>
   | GetGrantResult;
 
@@ -28,7 +28,7 @@ export async function saveGrants(
   ctx: unknown,
   info: GraphQLResolveInfo,
   result: unknown,
-  grants: GetGrantOption<unknown, unknown, unknown, unknown>
+  grants: GetGrant<unknown, unknown, unknown, unknown>
 ) {
   const [store, resolvedGrants] = await Promise.all([
     getAuthStore(ctx),
@@ -44,7 +44,7 @@ async function resolveGrants(
   ctx: unknown,
   info: GraphQLResolveInfo,
   result: unknown,
-  grants: GetGrantOption<unknown, unknown, unknown, unknown>
+  grants: GetGrant<unknown, unknown, unknown, unknown>
 ) {
   if (typeof grants !== 'function') {
     return grants;

@@ -1,42 +1,42 @@
 import { MiddlewareParams } from '@baeta/core';
 import { Extension, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
 import { createResolverPath, isOperationType } from '../utils/resolver';
-import { aggregateErrorResolver, ErrorResolver, resolveError } from './error';
-import { GetGrantOption, saveGrants } from './grant';
+import { aggregateErrorResolver, resolveError, ScopeErrorResolver } from './error';
+import { GetGrant, saveGrants } from './grant';
 import { LogicRule } from './rule';
-import { RequiredScopes, resolveScopes } from './scope';
-import { ScopesInitializer } from './scope-loader';
+import { GetScopeLoader } from './scope-resolver';
+import { ScopeRules, verifyScopes } from './scope-rules';
 import { loadAuthStore } from './store-loader';
 
 export interface AuthOptions {
   defaultScopes?: {
-    Query?: RequiredScopes;
-    Mutation?: RequiredScopes;
-    Subscription?: RequiredScopes;
+    Query?: ScopeRules;
+    Mutation?: ScopeRules;
+    Subscription?: ScopeRules;
   };
-  errorResolver?: ErrorResolver;
+  errorResolver?: ScopeErrorResolver;
 }
 
 export interface AuthMethodOptions<Result, Root, Context, Args> {
-  grants?: GetGrantOption<Result, Root, Context, Args>;
+  grants?: GetGrant<Result, Root, Context, Args>;
   skipDefaults?: boolean;
-  onError?: ErrorResolver;
+  onError?: ScopeErrorResolver;
 }
 
-export type GetRequiredScopes<Root, Context, Args> = (
+export type GetScopeRules<Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>
-) => RequiredScopes | Promise<RequiredScopes> | true | Promise<true>;
+) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
 
-export type GetPostRequiredScopes<Result, Root, Context, Args> = (
+export type GetPostScopeRules<Result, Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>,
   result: Result
-) => RequiredScopes | Promise<RequiredScopes> | true | Promise<true>;
+) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
 
 export class AuthExtension<T> extends Extension {
   private defaultRule: LogicRule = '$or';
   private authMap: Record<string, Record<string, undefined | NativeMiddleware>> = {};
 
-  constructor(readonly loadScopes: ScopesInitializer<T>, readonly options: AuthOptions = {}) {
+  constructor(readonly loadScopes: GetScopeLoader<T>, readonly options: AuthOptions = {}) {
     super();
   }
 
@@ -126,9 +126,9 @@ export class AuthExtension<T> extends Extension {
   };
 
   private createMiddleware(
-    getScopes: GetRequiredScopes<unknown, unknown, unknown>,
+    getScopes: GetScopeRules<unknown, unknown, unknown>,
     options?: AuthMethodOptions<unknown, unknown, unknown, unknown>,
-    defaultScopes?: RequiredScopes
+    defaultScopes?: ScopeRules
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -145,8 +145,8 @@ export class AuthExtension<T> extends Extension {
         options?.onError ?? this.options.errorResolver ?? aggregateErrorResolver;
 
       await Promise.all([
-        defaultScopes && resolveScopes(ctx, defaultScopes, this.defaultRule, parentPath),
-        resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath),
+        defaultScopes && verifyScopes(ctx, defaultScopes, this.defaultRule, parentPath),
+        verifyScopes(ctx, requiredScopes, this.defaultRule, parentPath),
       ]).catch((err) => resolveError(err, errorResolver));
 
       const result = await next(root, args, ctx, info);
@@ -160,9 +160,9 @@ export class AuthExtension<T> extends Extension {
   }
 
   private createPostMiddleware(
-    getScopes: GetPostRequiredScopes<unknown, unknown, unknown, unknown>,
+    getScopes: GetPostScopeRules<unknown, unknown, unknown, unknown>,
     options?: AuthMethodOptions<unknown, unknown, unknown, unknown>,
-    defaultScopes?: RequiredScopes
+    defaultScopes?: ScopeRules
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -180,8 +180,8 @@ export class AuthExtension<T> extends Extension {
         options?.onError ?? this.options.errorResolver ?? aggregateErrorResolver;
 
       await Promise.all([
-        defaultScopes && resolveScopes(ctx, defaultScopes, this.defaultRule, parentPath),
-        resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath),
+        defaultScopes && verifyScopes(ctx, defaultScopes, this.defaultRule, parentPath),
+        verifyScopes(ctx, requiredScopes, this.defaultRule, parentPath),
       ]).catch((err) => resolveError(err, errorResolver));
 
       if (options?.grants) {
@@ -194,7 +194,7 @@ export class AuthExtension<T> extends Extension {
 
   private createPreAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
-      scopes: RequiredScopes | GetRequiredScopes<Root, Context, Args>,
+      scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
       options?: AuthMethodOptions<Result, Root, Context, Args>
     ) => {
       const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
@@ -205,7 +205,7 @@ export class AuthExtension<T> extends Extension {
           : undefined;
 
       const middleware = this.createMiddleware(
-        getScopes as GetRequiredScopes<unknown, unknown, unknown>,
+        getScopes as GetScopeRules<unknown, unknown, unknown>,
         options as AuthMethodOptions<unknown, unknown, unknown, unknown>,
         defaultScopes
       );
@@ -215,7 +215,7 @@ export class AuthExtension<T> extends Extension {
 
   private createPostAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
-      getScopes: GetPostRequiredScopes<Result, Root, Context, Args>,
+      getScopes: GetPostScopeRules<Result, Root, Context, Args>,
       options?: AuthMethodOptions<Result, Root, Context, Args>
     ) => {
       const defaultScopes =
@@ -224,7 +224,7 @@ export class AuthExtension<T> extends Extension {
           : undefined;
 
       const middleware = this.createPostMiddleware(
-        getScopes as GetPostRequiredScopes<unknown, unknown, unknown, unknown>,
+        getScopes as GetPostScopeRules<unknown, unknown, unknown, unknown>,
         options as AuthMethodOptions<unknown, unknown, unknown, unknown>,
         defaultScopes
       );

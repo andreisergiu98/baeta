@@ -1,14 +1,14 @@
 import { ForbiddenError } from '@baeta/errors';
-import { Scopes } from './scope';
+import { Scopes } from './scope-rules';
 import { getAuthStore } from './store';
 
-export type ScopesInitializer<Ctx> = (ctx: Ctx) => ScopeMap | Promise<ScopeMap>;
+export type GetScopeLoader<Ctx> = (ctx: Ctx) => ScopeLoaderMap | Promise<ScopeLoaderMap>;
 
 type ScopeLoader<T> = boolean | ((value: T) => boolean | Promise<boolean>);
 
 type ScopeResolver = (value: unknown) => true | Promise<true>;
 
-type ScopeMap = {
+type ScopeLoaderMap = {
   [K in Scopes]: ScopeLoader<AuthExtension.Scopes[K]>;
 };
 
@@ -47,10 +47,13 @@ function createScopeResolver(ctx: unknown, name: string, value: ScopeLoader<any>
   };
 }
 
-export function createScopeResolverMap(ctx: unknown, scopes: ScopeMap): ScopeResolverMap {
+export function createScopeResolverMap(
+  ctx: unknown,
+  scopeLoaderMap: ScopeLoaderMap
+): ScopeResolverMap {
   const map: ScopeResolverMap = {};
 
-  for (const [key, value] of Object.entries(scopes)) {
+  for (const [key, value] of Object.entries(scopeLoaderMap)) {
     map[key] = createScopeResolver(ctx, key, value as ScopeLoader<any>);
   }
 

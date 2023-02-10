@@ -1,13 +1,13 @@
 import { createGrantCache } from './grant-cache';
 import { createScopeCache } from './scope-cache';
-import { createScopeResolverMap, ScopesInitializer } from './scope-loader';
+import { createScopeResolverMap, GetScopeLoader } from './scope-resolver';
 import { setAuthStore } from './store';
 
-export function loadAuthStore<T>(ctx: T, initialize: ScopesInitializer<T>) {
+export function loadAuthStore<T>(ctx: T, getScopeLoader: GetScopeLoader<T>) {
   setAuthStore(ctx, async () => {
-    const scopeMap = await initialize(ctx);
+    const scopeLoaders = await getScopeLoader(ctx);
     return {
-      scopes: createScopeResolverMap(ctx, scopeMap),
+      scopes: createScopeResolverMap(ctx, scopeLoaders),
       scopeCache: createScopeCache(),
       grantCache: createGrantCache(),
     };

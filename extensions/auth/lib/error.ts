@@ -1,9 +1,9 @@
 import { ForbiddenError, UnauthenticatedError } from '@baeta/errors';
 import { GraphQLError } from 'graphql';
 
-export type ErrorResolver = (err: unknown) => Error | unknown;
+export type ScopeErrorResolver = (err: unknown) => Error | unknown;
 
-export function resolveError(err: unknown, resolve: ErrorResolver) {
+export function resolveError(err: unknown, resolve: ScopeErrorResolver) {
   const resolvedError = resolve(err);
   if (resolvedError) {
     throw resolvedError;

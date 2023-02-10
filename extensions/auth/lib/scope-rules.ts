@@ -5,34 +5,34 @@ import { getAuthStore } from './store';
 
 export type Scopes = keyof AuthExtension.Scopes;
 
-type RequireScope<T> = T extends boolean ? true : T;
+type ScopeRule<T> = T extends boolean ? true : T;
 
-export type RequiredScopes = {
-  [K in Scopes]?: RequireScope<AuthExtension.Scopes[K]>;
+export type ScopeRules = {
+  [K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]>;
 } & {
-  [r in LogicRule]?: RequiredScopes;
+  [r in LogicRule]?: ScopeRules;
 } & {
   $granted?: string;
 };
 
-function getResolver(ctx: unknown, scopes: RequiredScopes, key: string, parentPath: string) {
+function getResolver(ctx: unknown, scopes: ScopeRules, key: string, parentPath: string) {
   if (isLogicRule(key)) {
-    return () => resolveScopes(ctx, scopes[key], key, parentPath);
+    return () => verifyScopes(ctx, scopes[key], key, parentPath);
   }
 
   if (isGrantedKey(key)) {
-    return () => resolveGrant(ctx, scopes[key], parentPath);
+    return () => verifyGrant(ctx, scopes[key], parentPath);
   }
 
   return async () => {
-    const value = scopes[key as Scopes];
     const store = await getAuthStore(ctx);
+    const value = scopes[key as Scopes];
     const resolve = store.scopes[key];
     return resolve(value);
   };
 }
 
-async function resolveGrant(
+async function verifyGrant(
   ctx: unknown,
   grant: string | undefined,
   parentPath: string
@@ -51,9 +51,9 @@ async function resolveGrant(
   throw new ForbiddenError();
 }
 
-async function resolveChainScopes(
+async function verifyChainScopes(
   ctx: unknown,
-  scopes: RequiredScopes,
+  scopes: ScopeRules,
   keys: string[],
   parentPath: string
 ): Promise<true> {
@@ -65,9 +65,9 @@ async function resolveChainScopes(
   return true;
 }
 
-async function resolveRaceScopes(
+async function verifyRaceScopes(
   ctx: unknown,
-  scopes: RequiredScopes,
+  scopes: ScopeRules,
   keys: string[],
   parentPath: string
 ): Promise<true> {
@@ -83,9 +83,9 @@ async function resolveRaceScopes(
   throw new ForbiddenError();
 }
 
-async function resolveOrScopes(
+async function verifyOrScopes(
   ctx: unknown,
-  scopes: RequiredScopes,
+  scopes: ScopeRules,
   keys: string[],
   parentPath: string
 ): Promise<true> {
@@ -99,9 +99,9 @@ async function resolveOrScopes(
   return Promise.any(promises);
 }
 
-async function resolveAndScopes(
+async function verifyAndScopes(
   ctx: unknown,
-  scopes: RequiredScopes,
+  scopes: ScopeRules,
   keys: string[],
   parentPath: string
 ): Promise<true> {
@@ -115,9 +115,9 @@ async function resolveAndScopes(
   return Promise.all(promises).then(() => true as const);
 }
 
-export async function resolveScopes(
+export async function verifyScopes(
   ctx: unknown,
-  scopes: RequiredScopes | undefined,
+  scopes: ScopeRules | undefined,
   rule: LogicRule = '$or',
   parentPath: string
 ): Promise<true> {
@@ -132,19 +132,19 @@ export async function resolveScopes(
   }
 
   if (rule === '$chain') {
-    return resolveChainScopes(ctx, scopes, keys, parentPath);
+    return verifyChainScopes(ctx, scopes, keys, parentPath);
   }
 
   if (rule === '$race') {
-    return resolveRaceScopes(ctx, scopes, keys, parentPath);
+    return verifyRaceScopes(ctx, scopes, keys, parentPath);
   }
 
   if (rule === '$or') {
-    return resolveOrScopes(ctx, scopes, keys, parentPath);
+    return verifyOrScopes(ctx, scopes, keys, parentPath);
   }
 
   if (rule === '$and') {
-    return resolveAndScopes(ctx, scopes, keys, parentPath);
+    return verifyAndScopes(ctx, scopes, keys, parentPath);
   }
 
   throw new Error("This line shouldn't be reached.");

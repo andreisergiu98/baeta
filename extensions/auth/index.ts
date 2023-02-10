@@ -1,15 +1,18 @@
 import { AuthExtension, AuthOptions } from './lib/auth-extension';
 import './lib/global-types';
-import { ScopesInitializer } from './lib/scope-loader';
+import { GetScopeLoader } from './lib/scope-resolver';
 
 export type {
   AuthMethodOptions,
   AuthOptions,
-  GetPostRequiredScopes,
-  GetRequiredScopes,
+  GetPostScopeRules,
+  GetScopeRules,
 } from './lib/auth-extension';
-export type { RequiredScopes, Scopes } from './lib/scope';
+export { aggregateErrorResolver } from './lib/error';
+export type { ScopeErrorResolver } from './lib/error';
+export type { GetGrant } from './lib/grant';
+export type { ScopeRules, Scopes } from './lib/scope-rules';
 
-export function authExtension<Ctx>(loadScopes: ScopesInitializer<Ctx>, options: AuthOptions = {}) {
+export function authExtension<Ctx>(loadScopes: GetScopeLoader<Ctx>, options: AuthOptions = {}) {
   return () => new AuthExtension(loadScopes, options);
 }

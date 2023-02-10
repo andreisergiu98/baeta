@@ -11,3 +11,7 @@ export function createResolverPath(path: Path | undefined, prevKey: string = '')
 
   return `${prevKey}.${path.typename}.${path.key}`;
 }
+
+export function isOperationType(type: string): type is 'Query' | 'Mutation' | 'Subscription' {
+  return ['Query', 'Mutation', 'Subscription'].includes(type);
+}

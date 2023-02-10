@@ -6,7 +6,7 @@ export type ErrorResolver = (err: unknown) => Error | unknown;
 export function resolveError(err: unknown, resolve: ErrorResolver) {
   const resolvedError = resolve(err);
   if (resolvedError) {
-    throw resolveError;
+    throw resolvedError;
   }
   throw err;
 }

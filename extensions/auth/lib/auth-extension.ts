@@ -1,22 +1,26 @@
 import { MiddlewareParams } from '@baeta/core';
 import { Extension, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
-import { GraphQLResolveInfo } from 'graphql';
-import { createResolverPath } from '../utils/resolver';
+import { createResolverPath, isOperationType } from '../utils/resolver';
 import { aggregateErrorResolver, ErrorResolver, resolveError } from './error';
+import { GetGrantOption, saveGrants } from './grant';
 import { LogicRule } from './rule';
 import { RequiredScopes, resolveScopes } from './scope';
 import { ScopesInitializer } from './scope-loader';
-import { getAuthStore } from './store';
 import { loadAuthStore } from './store-loader';
 
 export interface AuthOptions {
-  defaultScopes?: AuthExtension.Scopes;
+  defaultScopes?: {
+    Query?: RequiredScopes;
+    Mutation?: RequiredScopes;
+    Subscription?: RequiredScopes;
+  };
   errorResolver?: ErrorResolver;
 }
 
 export interface AuthMethodOptions<Result, Root, Context, Args> {
-  grants?: string | string[];
-  errorResolver?: ErrorResolver;
+  grants?: GetGrantOption<Result, Root, Context, Args>;
+  skipDefaults?: boolean;
+  onError?: ErrorResolver;
 }
 
 export type GetRequiredScopes<Root, Context, Args> = (
@@ -78,12 +82,14 @@ export class AuthExtension<T> extends Extension {
   };
 
   build = (mapper: ResolverMapper) => {
-    const authTypes = Object.keys(this.authMap);
+    for (const type in mapper.typeFields) {
+      const fieldsWithScopes = Object.keys(this.authMap[type] ?? {});
 
-    for (const type of authTypes) {
-      const fields = Object.keys(this.authMap[type]);
+      let fieldsWithoutScopes = mapper.typeFields[type].filter(
+        (field) => !fieldsWithScopes.includes(field)
+      );
 
-      for (const field of fields) {
+      for (const field of fieldsWithScopes) {
         const middleware = this.authMap[type][field];
 
         if (middleware == null) {
@@ -95,34 +101,34 @@ export class AuthExtension<T> extends Extension {
           continue;
         }
 
-        const remainingFields = mapper.typeFields[type].filter((field) => field.includes(field));
-
-        for (const remainingField of remainingFields) {
-          mapper.addMiddleware(type, remainingField, middleware, true);
+        for (const fieldWithoutScope of fieldsWithoutScopes) {
+          mapper.addMiddleware(type, fieldWithoutScope, middleware, true);
         }
+
+        fieldsWithoutScopes = [];
+      }
+
+      if (!isOperationType(type)) {
+        continue;
+      }
+
+      const defaultScopes = this.options.defaultScopes?.[type];
+
+      if (defaultScopes == null) {
+        continue;
+      }
+
+      for (const field of fieldsWithoutScopes) {
+        const middleware = this.createMiddleware(() => defaultScopes);
+        mapper.addMiddleware(type, field, middleware, true);
       }
     }
   };
 
-  private async saveGrants(
-    root: unknown,
-    args: unknown,
-    ctx: unknown,
-    info: GraphQLResolveInfo,
-    result: unknown,
-    grants: undefined | string | string[]
-  ) {
-    if (!grants) {
-      return;
-    }
-
-    const store = await getAuthStore(ctx);
-    store.grantCache.setGrants(createResolverPath(info.path), grants);
-  }
-
   private createMiddleware(
     getScopes: GetRequiredScopes<unknown, unknown, unknown>,
-    options?: AuthMethodOptions<unknown, unknown, unknown, unknown>
+    options?: AuthMethodOptions<unknown, unknown, unknown, unknown>,
+    defaultScopes?: RequiredScopes
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -136,15 +142,18 @@ export class AuthExtension<T> extends Extension {
       const parentPath = createResolverPath(info.path.prev);
 
       const errorResolver =
-        options?.errorResolver ?? this.options.errorResolver ?? aggregateErrorResolver;
+        options?.onError ?? this.options.errorResolver ?? aggregateErrorResolver;
 
-      await resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath).catch((err) =>
-        resolveError(err, errorResolver)
-      );
+      await Promise.all([
+        defaultScopes && resolveScopes(ctx, defaultScopes, this.defaultRule, parentPath),
+        resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath),
+      ]).catch((err) => resolveError(err, errorResolver));
 
       const result = await next(root, args, ctx, info);
 
-      await this.saveGrants(root, args, ctx, info, result, options?.grants);
+      if (options?.grants) {
+        await saveGrants(root, args, ctx, info, result, options.grants);
+      }
 
       return result;
     };
@@ -152,7 +161,8 @@ export class AuthExtension<T> extends Extension {
 
   private createPostMiddleware(
     getScopes: GetPostRequiredScopes<unknown, unknown, unknown, unknown>,
-    options?: AuthMethodOptions<unknown, unknown, unknown, unknown>
+    options?: AuthMethodOptions<unknown, unknown, unknown, unknown>,
+    defaultScopes?: RequiredScopes
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -167,13 +177,16 @@ export class AuthExtension<T> extends Extension {
       const parentPath = createResolverPath(info.path.prev);
 
       const errorResolver =
-        options?.errorResolver ?? this.options.errorResolver ?? aggregateErrorResolver;
+        options?.onError ?? this.options.errorResolver ?? aggregateErrorResolver;
 
-      await resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath).catch((err) =>
-        resolveError(err, errorResolver)
-      );
+      await Promise.all([
+        defaultScopes && resolveScopes(ctx, defaultScopes, this.defaultRule, parentPath),
+        resolveScopes(ctx, requiredScopes, this.defaultRule, parentPath),
+      ]).catch((err) => resolveError(err, errorResolver));
 
-      await this.saveGrants(root, args, ctx, info, result, options?.grants);
+      if (options?.grants) {
+        await saveGrants(root, args, ctx, info, result, options.grants);
+      }
 
       return result;
     };
@@ -182,12 +195,19 @@ export class AuthExtension<T> extends Extension {
   private createPreAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
       scopes: RequiredScopes | GetRequiredScopes<Root, Context, Args>,
-      options?: AuthMethodOptions
+      options?: AuthMethodOptions<Result, Root, Context, Args>
     ) => {
       const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
+
+      const defaultScopes =
+        isOperationType(type) && options?.skipDefaults !== true
+          ? this.options.defaultScopes?.[type]
+          : undefined;
+
       const middleware = this.createMiddleware(
         getScopes as GetRequiredScopes<unknown, unknown, unknown>,
-        options
+        options as AuthMethodOptions<unknown, unknown, unknown, unknown>,
+        defaultScopes
       );
       this.registerMiddleware(type, field, middleware);
     };
@@ -196,11 +216,17 @@ export class AuthExtension<T> extends Extension {
   private createPostAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
       getScopes: GetPostRequiredScopes<Result, Root, Context, Args>,
-      options?: AuthMethodOptions
+      options?: AuthMethodOptions<Result, Root, Context, Args>
     ) => {
+      const defaultScopes =
+        isOperationType(type) && options?.skipDefaults !== true
+          ? this.options.defaultScopes?.[type]
+          : undefined;
+
       const middleware = this.createPostMiddleware(
         getScopes as GetPostRequiredScopes<unknown, unknown, unknown, unknown>,
-        options
+        options as AuthMethodOptions<unknown, unknown, unknown, unknown>,
+        defaultScopes
       );
       this.registerMiddleware(type, field, middleware);
     };

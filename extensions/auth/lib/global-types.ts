@@ -54,5 +54,6 @@ declare global {
 
   export namespace AuthExtension {
     export interface Scopes {}
+    export type Grants = string;
   }
 }

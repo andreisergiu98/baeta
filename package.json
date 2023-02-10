@@ -14,6 +14,7 @@
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
   "workspaces": [
+    "extensions/*",
     "packages/*",
     "plugins/*",
     "tools/*",
@@ -26,12 +27,12 @@
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "publish": "yarn workspaces foreach --no-private npm publish --tolerate-republish",
-    "release": "yarn build && yarn publish",
+    "release": "yarn build && changeset publish",
     "type:check": "yarn workspaces foreach -pv run types"
   },
   "devDependencies": {
+    "@andreisergiu98/changesets-cli": "^2.25.1",
     "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.0",
     "@yarnpkg/sdks": "^3.0.0-rc.36",
     "husky": "^8.0.3",
     "prettier": "^2.8.3",

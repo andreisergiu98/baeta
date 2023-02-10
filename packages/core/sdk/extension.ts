@@ -48,7 +48,7 @@ export class Extension {
     return [];
   }
 
-  build(mapper: ResolverMapper, typeFields: Record<string, string[]>): void {}
+  build(mapper: ResolverMapper): void {}
 }
 
 export function resolveExtensions<T>(list: Array<() => T>): T[] {

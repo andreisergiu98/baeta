@@ -1,0 +1,50 @@
+{
+  "name": "@baeta/errors",
+  "version": "0.0.0",
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/errors"
+  },
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@baeta/build-tools": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/node": "^18.11.18",
+    "graphql": "^16.6.0",
+    "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "graphql": "^16.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
+      }
+    },
+    "types": "dist/index.d.ts"
+  }
+}

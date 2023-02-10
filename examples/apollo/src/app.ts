@@ -11,6 +11,7 @@ import { WebSocketServer } from 'ws';
 import { connectionsModule } from './modules/connections';
 import { userModule } from './modules/user';
 import { userPhotosModule } from './modules/user-photos';
+import { Context } from './types/context';
 
 const baeta = createApplication({
   modules: [userModule, userPhotosModule, connectionsModule],
@@ -27,7 +28,7 @@ const ws = new WebSocketServer({
 
 const cleanup = useServer({ schema: baeta.schema }, ws);
 
-const apollo = new ApolloServer({
+const apollo = new ApolloServer<Context>({
   schema: baeta.schema,
   plugins: [
     ApolloServerPluginDrainHttpServer({ httpServer }),
@@ -45,8 +46,11 @@ const apollo = new ApolloServer({
 
 async function start() {
   await apollo.start();
+
   app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(apollo));
+
   await new Promise<void>((resolve) => httpServer.listen({ port: 5000 }, resolve));
+
   console.log('🚀 Server ready at http://localhost:5000/graphql');
 }
 

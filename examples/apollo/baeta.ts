@@ -11,6 +11,7 @@ export default defineConfig({
     scalars: {
       DateTime: 'Date',
     },
+    extensions: 'src/extensions',
   },
   compiler: {
     src: './src/app',

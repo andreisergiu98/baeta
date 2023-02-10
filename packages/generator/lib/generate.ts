@@ -54,6 +54,7 @@ export function generateAndWatch(
   return chokidar
     .watch(toWatch, {
       ignored: toIgnore,
+      cwd: generatorOptions.cwd,
     })
     .on('change', handleChange)
     .on('unlink', handleChange);

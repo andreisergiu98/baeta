@@ -25,7 +25,6 @@ export interface Module<T> {
 export class ModuleBuilder {
   readonly mapper = new ResolverMapper();
   readonly transformers: SchemaTransformer[] = [];
-  readonly typeFields: Record<string, string[]> = {};
 
   constructor(
     readonly id: string,
@@ -35,7 +34,7 @@ export class ModuleBuilder {
   ) {}
 
   createResolverBuilder<Result, Root, Context, Args>(type: string, field: string) {
-    this.registerTypeField(type, field);
+    this.mapper.registerTypeField(type, field);
 
     const builder = (resolver: Resolver<Result, Root, Context, Args>) => {
       nameFunction(resolver, `${type}.${field}`);
@@ -53,7 +52,7 @@ export class ModuleBuilder {
   }
 
   createSubscriptionBuilder<Result, Root, Context, Args>(field: string) {
-    this.registerTypeField('Subscription', field);
+    this.mapper.registerTypeField('Subscription', field);
 
     const subscribeField = `${field}.subscribe`;
     const resolveField = `${field}.resolve`;
@@ -101,7 +100,6 @@ export class ModuleBuilder {
   createMiddlewareBuilder<M extends GenericMiddleware>(type: string, field: string) {
     const builder = (middleware: M) => {
       nameFunction(middleware, `${type}.${field}.$use`);
-      this.setDefaultResolvers(type, field);
       this.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));
     };
     return builder;
@@ -176,32 +174,6 @@ export class ModuleBuilder {
     this.transformers.push(transformer);
   };
 
-  private setDefaultResolvers(type: string, field: string) {
-    if (['Query', 'Mutation', 'Subscription'].includes(type)) {
-      return;
-    }
-
-    if (field !== '*') {
-      return this.mapper.setDefaultFieldResolver(type, field);
-    }
-
-    for (const field of this.typeFields[type]) {
-      this.mapper.setDefaultFieldResolver(type, field);
-    }
-  }
-
-  private registerTypeField(type: string, field: string) {
-    if (this.typeFields[type] == null) {
-      this.typeFields[type] = [];
-    }
-
-    if (this.typeFields[type].includes(field)) {
-      return;
-    }
-
-    this.typeFields[type].push(field);
-  }
-
   private transform = (schema: GraphQLSchema) => {
     return transformSchema(schema, [
       ...this.transformers,
@@ -211,7 +183,7 @@ export class ModuleBuilder {
 
   build = () => {
     for (const extension of this.extensions) {
-      extension.build(this.mapper, this.typeFields);
+      extension.build(this.mapper);
     }
 
     return {

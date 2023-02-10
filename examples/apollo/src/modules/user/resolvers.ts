@@ -1,14 +1,26 @@
 import { getUserModule } from './typedef';
 
-const { User, Query } = getUserModule();
+const { Query, User } = getUserModule();
 
-Query.user(async ({ args }) => {
+Query.user(async (params) => {
   return {
-    id: args.id,
+    id: params.args.id ?? 'id',
     name: 'John Doe',
   };
 });
 
-User.name.$use((params, next) => {
+Query.user.$use((params, next) => {
+  console.log('fetched User with args: ', JSON.stringify(params.args, null, 2));
   return next();
 });
+
+Query.user.$auth(
+  {
+    isPublic: true,
+    isLoggedIn: true,
+  },
+  {
+    skipDefaults: true,
+    grants: ['readUserPhotos'],
+  }
+);

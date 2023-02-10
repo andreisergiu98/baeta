@@ -1,3 +1,3 @@
 export type Context = {
-  userId: string;
+  userId?: string;
 };

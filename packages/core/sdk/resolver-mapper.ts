@@ -15,8 +15,9 @@ export type ResolversMap = Record<string, FieldResolvers | ScalarResolver | unde
   SubscriptionsResolvers;
 
 export class ResolverMapper {
-  resolvers: ResolversMap = {};
-  middlewares: ResolversComposerMapping = {};
+  readonly resolvers: ResolversMap = {};
+  readonly middlewares: ResolversComposerMapping = {};
+  readonly typeFields: Record<string, string[]> = {};
 
   setResolver(type: string, field: string, resolver: GraphQLFieldResolver<unknown, unknown>) {
     if (this.resolvers[type] == null) {
@@ -36,12 +37,18 @@ export class ResolverMapper {
     this.resolvers.Subscription[field] = resolver;
   }
 
-  addMiddleware(type: string, field: string, middleware: NativeMiddleware) {
+  addMiddleware(type: string, field: string, middleware: NativeMiddleware, unshift = false) {
     const key = `${type}.${field}`;
     if (this.middlewares[key] == null) {
       this.middlewares[key] = [];
     }
-    this.middlewares[key].push(middleware);
+    this.setDefaultResolvers(type, field);
+
+    if (unshift) {
+      this.middlewares[key].unshift(middleware);
+    } else {
+      this.middlewares[key].push(middleware);
+    }
   }
 
   setDefaultFieldResolver(type: string, field: string) {
@@ -52,7 +59,33 @@ export class ResolverMapper {
     this.setResolver(type, field, defaultFieldResolver);
   }
 
+  registerTypeField(type: string, field: string) {
+    if (this.typeFields[type] == null) {
+      this.typeFields[type] = [];
+    }
+
+    if (this.typeFields[type].includes(field)) {
+      return;
+    }
+
+    this.typeFields[type].push(field);
+  }
+
   compose() {
     return composeResolvers(this.resolvers, this.middlewares) as IResolvers;
+  }
+
+  private setDefaultResolvers(type: string, field: string) {
+    if (['Query', 'Mutation', 'Subscription'].includes(type)) {
+      return;
+    }
+
+    if (field !== '*') {
+      return this.setDefaultFieldResolver(type, field);
+    }
+
+    for (const field of this.typeFields[type]) {
+      this.setDefaultFieldResolver(type, field);
+    }
   }
 }

@@ -21,6 +21,7 @@
   "dependencies": {
     "@apollo/server": "^4.3.0",
     "@baeta/core": "workspace:^",
+    "@baeta/errors": "workspace:^",
     "@baeta/extension-auth": "workspace:^",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",

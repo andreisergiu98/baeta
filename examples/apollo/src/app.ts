@@ -47,16 +47,7 @@ const apollo = new ApolloServer<Context>({
 async function start() {
   await apollo.start();
 
-  app.use(
-    '/graphql',
-    cors<cors.CorsRequest>(),
-    bodyParser.json(),
-    expressMiddleware(apollo, {
-      context: async () => {
-        return { userId: 'id1' };
-      },
-    })
-  );
+  app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(apollo));
 
   await new Promise<void>((resolve) => httpServer.listen({ port: 5000 }, resolve));
 

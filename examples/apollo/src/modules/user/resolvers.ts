@@ -2,9 +2,9 @@ import { getUserModule } from './typedef';
 
 const { Query, User } = getUserModule();
 
-Query.user(async ({ args }) => {
+Query.user(async (params) => {
   return {
-    id: args.id,
+    id: params.args.id ?? 'id',
     name: 'John Doe',
   };
 });
@@ -14,11 +14,13 @@ Query.user.$use((params, next) => {
   return next();
 });
 
-Query.$auth(
+Query.user.$auth(
   {
+    isPublic: true,
     isLoggedIn: true,
   },
   {
+    skipDefaults: true,
     grants: ['readUserPhotos'],
   }
 );

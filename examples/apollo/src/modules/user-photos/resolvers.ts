@@ -29,6 +29,8 @@ User.photosConnection(({ args, root }) => {
   };
 });
 
-User.photos.$auth({
-  $granted: 'readUserPhotos',
+User.photosConnection.$auth((params) => {
+  return {
+    $granted: 'readUserPhotos',
+  };
 });

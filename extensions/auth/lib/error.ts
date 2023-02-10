@@ -1,4 +1,4 @@
-import { ForbiddenError, UnauthenticatedError } from '@baeta/errors';
+import { AggregateGraphQLError } from '@baeta/errors';
 import { GraphQLError } from 'graphql';
 
 export type ScopeErrorResolver = (err: unknown) => Error | unknown;
@@ -16,41 +16,29 @@ export function aggregateErrorResolver(err: unknown): Error {
     return err as Error;
   }
 
-  let forbiddenError: ForbiddenError | undefined;
-  let graphqlError: GraphQLError | undefined;
-  let unauthenticatedError: UnauthenticatedError | undefined;
+  if (err.errors.length === 1) {
+    return err.errors[1];
+  }
+
+  let http: { status?: number } = {};
+  const errors: GraphQLError[] = [];
 
   for (const error of err.errors) {
-    if (error instanceof UnauthenticatedError) {
-      unauthenticatedError = error;
+    if (!(error instanceof GraphQLError)) {
       continue;
     }
 
-    if (error instanceof ForbiddenError) {
-      forbiddenError = error;
-      continue;
+    errors.push(error);
+
+    if (error.extensions.http && http?.status !== 401) {
+      http = error.extensions.http;
+      error.extensions.http = undefined;
     }
-
-    if (error instanceof GraphQLError) {
-      graphqlError = error;
-      continue;
-    }
-
-    // most likely internal server error
-    return error;
   }
 
-  if (unauthenticatedError) {
-    return unauthenticatedError;
-  }
-
-  if (forbiddenError) {
-    return forbiddenError;
-  }
-
-  if (graphqlError) {
-    return graphqlError;
-  }
-
-  return err;
+  return new AggregateGraphQLError(err.errors, undefined, {
+    extensions: {
+      http,
+    },
+  });
 }

@@ -4,6 +4,7 @@ export enum BaetaErrorCode {
   Unauthenticated = 'UNAUTHENTICATED',
   Forbidden = 'FORBIDDEN',
   BadUserInput = 'BAD_USER_INPUT',
+  AggregateError = 'AGGREGATE_ERROR',
 }
 
 export class UnauthenticatedError extends GraphQLError {
@@ -46,6 +47,29 @@ export class BadUserInput extends GraphQLError {
       extensions: {
         code: BaetaErrorCode.BadUserInput,
         ...options?.extensions,
+      },
+    });
+  }
+}
+
+export class AggregateGraphQLError extends GraphQLError {
+  constructor(
+    errors: GraphQLError[],
+    message: string = 'Multiple errors encountered',
+    options?: GraphQLErrorOptions
+  ) {
+    super(message, {
+      ...options,
+      extensions: {
+        ...options?.extensions,
+        code: BaetaErrorCode.AggregateError,
+        errors: errors.map((error) => ({
+          message: error.message,
+          path: error.path,
+          locations: error.locations,
+          extensions: error.extensions,
+          stacktrace: process.env.NODE_ENV === 'production' ? undefined : error.stack,
+        })),
       },
     });
   }

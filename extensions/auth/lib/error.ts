@@ -32,8 +32,9 @@ export function aggregateErrorResolver(err: unknown): Error {
 
     if (error.extensions.http && http?.status !== 401) {
       http = error.extensions.http;
-      error.extensions.http = undefined;
     }
+
+    error.extensions.http = undefined;
   }
 
   return new AggregateGraphQLError(err.errors, undefined, {

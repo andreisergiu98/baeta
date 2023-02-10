@@ -71,10 +71,28 @@ function printConnectionTypes(name: string, typeOptions: TypeOptions, options: P
   return [connection, edge];
 }
 
+function createConnectionModuleDir(modulesDir: string, moduleName = 'connections') {
+  return join(modulesDir, moduleName);
+}
+
+function createGqlFilename(moduleDir: string) {
+  return `${moduleDir}/connections.gql`;
+}
+
+function createExportFilename(moduleDir: string) {
+  return `${moduleDir}/index.ts`;
+}
+
 export function paginationPlugin(options: PaginationOptions) {
   return createPluginV1({
     name: 'pagination',
     actionName: 'pagination connections',
+    watch: (generatorOptions) => {
+      return {
+        include: [],
+        ignore: [createConnectionModuleDir(generatorOptions.modulesDir, options.moduleName)],
+      };
+    },
     generate: async (ctx, next) => {
       const types: string[] = [printPageInfo(options.pageInfoFields)];
 
@@ -88,13 +106,13 @@ export function paginationPlugin(options: PaginationOptions) {
         types.push(...printConnectionTypes(name, typeOptions === true ? {} : typeOptions, options));
       }
 
-      const connectionModuleDir = join(
+      const moduleDir = createConnectionModuleDir(
         ctx.generatorOptions.modulesDir,
-        options.moduleName ?? 'connections'
+        options.moduleName
       );
 
       const definitionFile = new File(
-        `${connectionModuleDir}/connections.gql`,
+        createGqlFilename(moduleDir),
         printTypes(types),
         'pagination'
       );
@@ -105,7 +123,7 @@ export function paginationPlugin(options: PaginationOptions) {
 
       if (options.createExport !== false) {
         const exportFile = new File(
-          `${connectionModuleDir}/index.ts`,
+          createExportFilename(moduleDir),
           printExport(ctx.generatorOptions.moduleDefinitionName),
           'pagination'
         );

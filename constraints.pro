@@ -49,7 +49,9 @@ gen_enforced_field(WorkspaceCwd, 'scripts.postpack', 'prep --clean') :-
   % Private packages aren't covered
     \+ workspace_field_test(WorkspaceCwd, 'private', 'true').
 
+no_module('@baeta/examples-apollo').
+no_module('@baeta/website').
+
 gen_enforced_field(WorkspaceCwd, 'type', 'module') :-
   workspace(WorkspaceCwd),
-  % Example requires cjs to load .ts files
-    \+ workspace_ident(WorkspaceCwd, '@baeta/examples-apollo').
+    \+ (workspace_ident(WorkspaceCwd, WorkspaceIdent), no_module(WorkspaceIdent)).

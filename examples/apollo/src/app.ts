@@ -9,12 +9,13 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
 import { connectionsModule } from './modules/connections';
+import { directiveModule } from './modules/directives';
 import { userModule } from './modules/user';
 import { userPhotosModule } from './modules/user-photos';
 import { Context } from './types/context';
 
 const baeta = createApplication({
-  modules: [userModule, userPhotosModule, connectionsModule],
+  modules: [userModule, userPhotosModule, connectionsModule, directiveModule],
   pruneSchema: true,
 });
 

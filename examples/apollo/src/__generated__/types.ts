@@ -50,6 +50,11 @@ export type UserPhotoEdge = {
   node?: Maybe<UserPhoto>;
 };
 
+export type StringFormat =
+  | 'EMAIL'
+  | 'UUID'
+  | 'URL';
+
 export type UserPhoto = {
   __typename?: 'UserPhoto';
   id: Scalars['ID'];
@@ -65,6 +70,11 @@ export type User = {
   birthday?: Maybe<Scalars['DateTime']>;
 };
 
+export type UserWhereUnique = {
+  id?: InputMaybe<Scalars['ID']>;
+  email?: InputMaybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
@@ -72,7 +82,7 @@ export type Query = {
 
 
 export type QueryUserArgs = {
-  id?: InputMaybe<Scalars['ID']>;
+  where?: InputMaybe<UserWhereUnique>;
 };
 
 export type DateTime = Scalars["DateTime"];

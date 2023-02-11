@@ -4,6 +4,11 @@ type User {
   birthday: DateTime
 }
 
+input UserWhereUnique @constraints(minFields: 1, maxFields: 1) {
+  id: ID
+  email: String @trim @lower @validString(format: EMAIL)
+}
+
 type Query {
-  user(id: ID): User
+  user(where: UserWhereUnique): User
 }

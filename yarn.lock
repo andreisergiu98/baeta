@@ -2017,6 +2017,7 @@ __metadata:
   resolution: "@baeta/core@workspace:packages/core"
   dependencies:
     "@baeta/builder": "workspace:^"
+    "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/schema": ^9.0.16
     "@graphql-tools/utils": ^9.2.1
@@ -2029,6 +2030,24 @@ __metadata:
     typescript: ^4.9.5
   peerDependencies:
     graphql: ^16.6.0
+  languageName: unknown
+  linkType: soft
+
+"@baeta/directives@workspace:packages/directives":
+  version: 0.0.0-use.local
+  resolution: "@baeta/directives@workspace:packages/directives"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/is-url": ^1
+    "@types/node": ^18.11.18
+    email-validator: ^2.0.4
+    is-url: ^1.2.4
+    typescript: ^4.9.4
+  peerDependencies:
+    "@baeta/core": "workspace:^"
   languageName: unknown
   linkType: soft
 
@@ -4478,6 +4497,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/is-url@npm:^1":
+  version: 1.2.30
+  resolution: "@types/is-url@npm:1.2.30"
+  checksum: 81f337a7442f56d160ec0f63b2847cff368c5701f46a32c3c4fff5a1424b6afb4ad3eb7206febd26760a869680d61b7626e41f0ad652003f5783bcfda5b41d9e
+  languageName: node
+  linkType: hard
+
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0":
   version: 2.0.4
   resolution: "@types/istanbul-lib-coverage@npm:2.0.4"
@@ -4589,7 +4615,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^18.11.11, @types/node@npm:^18.14.1":
+"@types/node@npm:*, @types/node@npm:^18.11.11, @types/node@npm:^18.11.18, @types/node@npm:^18.14.1":
   version: 18.14.1
   resolution: "@types/node@npm:18.14.1"
   checksum: 58556bbdb0050e44a4934742c1da2530812782c06d266a758e669e44c5aa196166c5fce45fdb03f016876717e3840478b3220129bb77367f979607564047f0a3
@@ -7822,6 +7848,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"email-validator@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "email-validator@npm:2.0.4"
+  checksum: e702fee24e1b9efb7e6a84abb309bebdb4ddde137fdb99a61e24bd82ac0b605be34e191b1c4d04fbc855be7b94cad967f932a456c0def2240303881f4e388f2d
+  languageName: node
+  linkType: hard
+
 "emittery@npm:^1.0.1":
   version: 1.0.1
   resolution: "emittery@npm:1.0.1"
@@ -10427,6 +10460,13 @@ __metadata:
   dependencies:
     tslib: ^2.0.3
   checksum: cf4fd43c00c2e72cd5cff911923070b89f0933b464941bd782e2315385f80b5a5acd772db3b796542e5e3cfed735f4dffd88c54d62db1ebfc5c3daa7b1af2bc6
+  languageName: node
+  linkType: hard
+
+"is-url@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "is-url@npm:1.2.4"
+  checksum: 100e74b3b1feab87a43ef7653736e88d997eb7bd32e71fd3ebc413e58c1cbe56269699c776aaea84244b0567f2a7d68dfaa512a062293ed2f9fdecb394148432
   languageName: node
   linkType: hard
 
@@ -15493,7 +15533,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.9.5":
+"typescript@npm:^4.9.4, typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -15503,7 +15543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:

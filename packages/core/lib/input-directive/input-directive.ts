@@ -1,4 +1,4 @@
-import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils';
+import { getDirectives, MapperKind, mapSchema } from '@graphql-tools/utils';
 import { GraphQLSchema } from 'graphql';
 import {
   addArgumentValidationsExtension,
@@ -17,19 +17,17 @@ type ValidationDirectiveFnParams<DirectiveConfig, Context> = ValidateParams<Cont
 
 export type ValidationDirectiveFn<DirectiveConfig = Record<string, unknown>, Context = unknown> = (
   params: ValidationDirectiveFnParams<DirectiveConfig, Context>
-) => void | Promise<void>;
+) => void;
 
 function getObjectSelector(args: Record<string, unknown>, path: Array<string | number>) {
   const i = 0;
-  let key: string | number;
+  let key: string | number = path[0];
   let obj: Record<string, unknown> = args;
 
-  for (let i = 0; i < path.length - 1; ++i) {
-    key = path[i];
+  for (let i = 1; i < path.length; i++) {
     obj = obj[key] as Record<string, unknown>;
+    key = path[i];
   }
-
-  key = path[i + 1];
 
   if (key == null) {
     return;
@@ -80,14 +78,22 @@ function applyInputDirective(
 ) {
   return mapSchema(schema, {
     [MapperKind.INPUT_OBJECT_FIELD]: (fieldConfig) => {
-      const directiveConfigs = getDirective(schema, fieldConfig, name);
+      const directives = getDirectives(schema, fieldConfig);
 
-      if (directiveConfigs == null) {
+      if (directives.length === 0) {
         return;
       }
 
-      for (const directiveConfig of directiveConfigs) {
-        addValidationsExtension(fieldConfig, {
+      for (let i = 0; i < directives.length; i++) {
+        const directive = directives[i];
+
+        if (directive.name !== name) {
+          continue;
+        }
+
+        const directiveConfig = directive.args ?? {};
+
+        addValidationsExtension(fieldConfig, i, {
           target,
           listDepth: getDepth?.(directiveConfig) ?? 0,
           fn: createValidationFn(directiveConfig, validate),
@@ -97,14 +103,22 @@ function applyInputDirective(
       return fieldConfig;
     },
     [MapperKind.INPUT_OBJECT_TYPE]: (inputObjectType) => {
-      const directiveConfigs = getDirective(schema, inputObjectType, name);
+      const directives = getDirectives(schema, inputObjectType);
 
-      if (directiveConfigs == null) {
+      if (directives.length === 0) {
         return;
       }
 
-      for (const directiveConfig of directiveConfigs) {
-        addValidationsExtension(inputObjectType, {
+      for (let i = 0; i < directives.length; i++) {
+        const directive = directives[i];
+
+        if (directive.name !== name) {
+          continue;
+        }
+
+        const directiveConfig = directive.args ?? {};
+
+        addValidationsExtension(inputObjectType, i, {
           target,
           listDepth: 0,
           fn: createValidationFn(directiveConfig, validate),
@@ -115,29 +129,52 @@ function applyInputDirective(
     },
     [MapperKind.OBJECT_FIELD]: (fieldConfig) => {
       const argsEntries = Object.entries(fieldConfig.args ?? {});
-      const validationsByArgumentName: Record<string, ValidationOptions[]> = {};
+      const validationsByArgumentName: Record<
+        string,
+        Array<{ index: number; options: ValidationOptions }>
+      > = {};
 
       for (const [argumentName, argumentConfig] of argsEntries) {
-        const directiveConfigs = getDirective(schema, argumentConfig, name);
+        const directives = getDirectives(schema, argumentConfig);
 
-        if (directiveConfigs == null) {
+        if (directives.length === 0) {
           continue;
         }
 
-        const argumentValidations = directiveConfigs.map((directiveConfig) => ({
-          target,
-          listDepth: getDepth?.(directiveConfig) ?? 0,
-          fn: createValidationFn(directiveConfig, validate),
-        }));
+        for (let i = 0; i < directives.length; i++) {
+          const directive = directives[i];
 
-        validationsByArgumentName[argumentName] = argumentValidations;
+          if (directive.name !== name) {
+            continue;
+          }
+
+          if (validationsByArgumentName[argumentName] == null) {
+            validationsByArgumentName[argumentName] = [];
+          }
+
+          const directiveConfig = directive.args ?? {};
+
+          validationsByArgumentName[argumentName].push({
+            index: i,
+            options: {
+              target,
+              listDepth: getDepth?.(directiveConfig) ?? 0,
+              fn: createValidationFn(directiveConfig, validate),
+            },
+          });
+        }
       }
 
       const validationEntries = Object.entries(validationsByArgumentName);
 
       for (const [argumentName, argValidations] of validationEntries) {
         for (const validationMeta of argValidations) {
-          addArgumentValidationsExtension(fieldConfig, argumentName, validationMeta);
+          addArgumentValidationsExtension(
+            fieldConfig,
+            argumentName,
+            validationMeta.index,
+            validationMeta.options
+          );
         }
       }
 

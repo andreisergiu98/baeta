@@ -1,6 +1,6 @@
 {
-  "name": "@baeta/core",
-  "version": "0.0.25",
+  "name": "@baeta/plugin-directives",
+  "version": "0.0.1",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/core"
+    "directory": "plugins/directives"
   },
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
@@ -21,27 +21,21 @@
     "build": "tsup",
     "prepack": "prep",
     "postpack": "prep --clean",
-    "test": "ava",
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@baeta/errors": "workspace:^",
-    "@graphql-tools/schema": "^9.0.16",
-    "@graphql-tools/utils": "^9.2.1",
-    "graphql-subscriptions": "^2.0.0",
-    "ramda": "^0.28.0"
+    "@baeta/generator-sdk": "workspace:^"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
+    "@baeta/directives": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.14.1",
-    "@types/ramda": "^0.28.23",
-    "ava": "^5.2.0",
+    "@types/node": "^18.11.18",
     "graphql": "^16.6.0",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.4"
   },
   "peerDependencies": {
-    "graphql": "^16.6.0"
+    "@baeta/directives": "workspace:^"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -53,11 +47,6 @@
         "import": "./dist/index.js",
         "require": "./dist/index.cjs",
         "types": "./dist/index.d.ts"
-      },
-      "./sdk": {
-        "import": "./dist/sdk/index.js",
-        "require": "./dist/sdk/index.cjs",
-        "types": "./dist/sdk/index.d.ts"
       }
     },
     "types": "dist/index.d.ts"

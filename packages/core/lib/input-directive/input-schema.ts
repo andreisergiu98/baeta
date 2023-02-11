@@ -1,6 +1,8 @@
+import { AggregateGraphQLError, BadUserInput } from '@baeta/errors';
 import {
   getNamedType,
   GraphQLArgument,
+  GraphQLError,
   GraphQLField,
   GraphQLInputObjectType,
   GraphQLList,
@@ -12,8 +14,6 @@ import {
   GraphQLType,
   Kind,
 } from 'graphql';
-import { flattenPromises } from '../../utils/promises';
-import { AggregateValidationError } from './aggregate-error';
 import {
   addValidateExtension,
   getArgumentValidationsFromExtensions,
@@ -23,7 +23,6 @@ import {
   hasValidationsExtension,
   ValidationOptions,
 } from './input-extensions';
-import { ValidationError } from './validation-error';
 
 export type ValidateParams<Context = unknown> = {
   path: Array<number | string>;
@@ -95,7 +94,7 @@ function addValidateExtensionToInputObjectTypesRecursive(
   return validate;
 }
 
-async function handleResolver(
+function handleResolver(
   validation: ValidationOptions,
   type: GraphQLType,
   path: Array<number | string>,
@@ -105,15 +104,13 @@ async function handleResolver(
   info: GraphQLResolveInfo
 ) {
   try {
-    await validation.fn({ type, path, root, args, ctx, info });
-    return [];
+    validation.fn({ type, path, root, args, ctx, info });
   } catch (err) {
-    const validationError = new ValidationError(err as Error, path);
-    return [validationError];
+    return err;
   }
 }
 
-async function validateListType(
+function validateListType(
   root: unknown,
   args: Record<string, unknown>,
   ctx: unknown,
@@ -128,16 +125,19 @@ async function validateListType(
     (validation) => validation.target === 'list' && validation.listDepth === listDepth
   );
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const errors: unknown[] = [];
 
   for (const validation of listValidations) {
-    promises.push(handleResolver(validation, type, path, root, args, ctx, info));
+    const err = handleResolver(validation, type, path, root, args, ctx, info);
+    if (err) {
+      errors.push(err);
+    }
   }
 
   for (let index = 0; index < value.length; index++) {
     const item = value[index];
-    promises.push(
-      validateRecursive(
+    errors.push(
+      ...validateRecursive(
         root,
         args,
         ctx,
@@ -151,10 +151,10 @@ async function validateListType(
     );
   }
 
-  return flattenPromises(promises);
+  return errors;
 }
 
-async function validateObjectType(
+function validateObjectType(
   root: unknown,
   args: Record<string, unknown>,
   ctx: unknown,
@@ -169,22 +169,25 @@ async function validateObjectType(
     (validation) => validation.target === 'object'
   );
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const errors: unknown[] = [];
 
   for (const validation of objectValidations) {
-    promises.push(handleResolver(validation, type, path, root, args, ctx, info));
+    const err = handleResolver(validation, type, path, root, args, ctx, info);
+    if (err) {
+      errors.push(err);
+    }
   }
 
   if (!hasValidateExtension(type)) {
-    return flattenPromises(promises);
+    return errors;
   }
 
   const fields = Object.values(type.getFields());
 
   for (const field of fields) {
     const fieldValidations = getValidationsFromExtension(field) ?? [];
-    promises.push(
-      validateRecursive(
+    errors.push(
+      ...validateRecursive(
         root,
         args,
         ctx,
@@ -197,10 +200,10 @@ async function validateObjectType(
     );
   }
 
-  return flattenPromises(promises);
+  return errors;
 }
 
-async function validateScalarType(
+function validateScalarType(
   root: unknown,
   args: Record<string, unknown>,
   ctx: unknown,
@@ -213,16 +216,19 @@ async function validateScalarType(
     return [];
   }
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const errors: unknown[] = [];
 
   for (const validation of validations) {
-    promises.push(handleResolver(validation, type, path, root, args, ctx, info));
+    const err = handleResolver(validation, type, path, root, args, ctx, info);
+    if (err) {
+      errors.push(err);
+    }
   }
 
-  return flattenPromises(promises);
+  return errors;
 }
 
-async function validateRecursive<TSource, TContext>(
+function validateRecursive<TSource, TContext>(
   root: TSource,
   args: Record<string, unknown>,
   ctx: TContext,
@@ -232,7 +238,7 @@ async function validateRecursive<TSource, TContext>(
   type: GraphQLType,
   validations: ValidationOptions[] = [],
   listDepth = 0
-): Promise<ValidationError[]> {
+): unknown[] {
   if (value == null) {
     return [];
   }
@@ -273,7 +279,7 @@ async function validateRecursive<TSource, TContext>(
   return validateScalarType(root, args, ctx, info, path, valueType, validations);
 }
 
-async function validateFieldArguments(
+function validateFieldArguments(
   field: GraphQLField<unknown, unknown, unknown>,
   root: unknown,
   args: Record<string, unknown>,
@@ -287,14 +293,14 @@ async function validateFieldArguments(
     argsDefinitionMap[arg.name] = arg;
   }
 
-  const promises: Promise<ValidationError[]>[] = [];
+  const errors: unknown[] = [];
 
   for (const [argumentName, argumentValue] of argEntries) {
     const argumentDefinition = argsDefinitionMap[argumentName];
     const argumentValidations = getArgumentValidationsFromExtensions(field, argumentName);
 
-    promises.push(
-      validateRecursive(
+    errors.push(
+      ...validateRecursive(
         root,
         args,
         ctx,
@@ -307,10 +313,18 @@ async function validateFieldArguments(
     );
   }
 
-  const errors = await flattenPromises(promises);
+  const graphqlErrors = errors.filter((err) => err instanceof GraphQLError) as GraphQLError[];
 
-  if (errors.length) {
-    throw new AggregateValidationError(errors);
+  if (graphqlErrors.length === 1) {
+    throw graphqlErrors[0];
+  }
+
+  if (graphqlErrors.length > 0) {
+    throw new AggregateGraphQLError(graphqlErrors);
+  }
+
+  if (errors.length > 0) {
+    throw new BadUserInput();
   }
 }
 
@@ -329,8 +343,8 @@ function wrapValidatedFieldResolvers(fieldsWithArguments: GraphQLField<unknown, 
       continue;
     }
 
-    field.resolve = async (source, args, context, info) => {
-      await validateFieldArguments(field, source, args, context, info);
+    field.resolve = (source, args, context, info) => {
+      validateFieldArguments(field, source, args, context, info);
       return originalResolve(source, args, context, info);
     };
   }

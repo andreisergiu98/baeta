@@ -17,7 +17,7 @@ export function aggregateErrorResolver(err: unknown): Error {
   }
 
   if (err.errors.length === 1) {
-    return err.errors[1];
+    return err.errors[0];
   }
 
   let http: { status?: number } = {};

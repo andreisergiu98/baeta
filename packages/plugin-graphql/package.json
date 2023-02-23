@@ -26,8 +26,8 @@
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
     "@graphql-codegen/core": "^3.1.0",
-    "@graphql-codegen/plugin-helpers": "^4.0.0",
-    "@graphql-codegen/typescript": "^2.8.8",
+    "@graphql-codegen/plugin-helpers": "^4.1.0",
+    "@graphql-codegen/typescript": "^3.0.1",
     "@graphql-codegen/visitor-plugin-common": "3.0.1",
     "@graphql-tools/apollo-engine-loader": "^7.3.26",
     "@graphql-tools/code-file-loader": "^7.3.21",

@@ -25,19 +25,19 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@graphql-tools/schema": "^9.0.13",
-    "@graphql-tools/utils": "^9.1.4",
+    "@graphql-tools/schema": "^9.0.16",
+    "@graphql-tools/utils": "^9.2.1",
     "graphql-subscriptions": "^2.0.0",
     "ramda": "^0.28.0"
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.11.18",
-    "@types/ramda": "^0.28.21",
-    "ava": "^5.1.1",
+    "@types/node": "^18.14.1",
+    "@types/ramda": "^0.28.23",
+    "ava": "^5.2.0",
     "graphql": "^16.6.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"

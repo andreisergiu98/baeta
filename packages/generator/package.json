@@ -30,8 +30,8 @@
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.11.18",
-    "typescript": "^4.9.4"
+    "@types/node": "^18.14.1",
+    "typescript": "^4.9.5"
   },
   "engines": {
     "node": ">=18.0.0"

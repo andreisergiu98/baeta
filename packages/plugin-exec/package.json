@@ -1,5 +1,5 @@
 {
-  "name": "@baeta/plugin-pagination",
+  "name": "@baeta/plugin-exec",
   "version": "0.0.3",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "plugins/pagination"
+    "directory": "packages/plugin-exec"
   },
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
@@ -24,17 +24,14 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@baeta/generator-sdk": "workspace:^"
+    "@baeta/generator-sdk": "workspace:^",
+    "execa": "^6.1.0"
   },
   "devDependencies": {
     "@baeta/build-tools": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.14.1",
-    "graphql": "^16.6.0",
     "typescript": "^4.9.5"
-  },
-  "peerDependencies": {
-    "graphql": "^16.6.0"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -14,9 +14,7 @@
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
   "workspaces": [
-    "extensions/*",
     "packages/*",
-    "plugins/*",
     "tools/*",
     "examples/*"
   ],

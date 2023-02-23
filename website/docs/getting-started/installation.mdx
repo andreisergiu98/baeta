@@ -1,0 +1,24 @@
+---
+sidebar_position: 1
+description: ''
+---
+
+# Installation
+
+## Requirements
+
+- [Node.js](https://nodejs.org) version 18 or above.
+- [TypeScript](https://www.typescriptlang.org) version 4.9 or above.
+- Any package manager.
+
+## Setup
+
+First things first add the core package. For a basic installation this is the only package required at runtime.
+
+import { PackageManagerAdd } from '@site/components/package-manager';
+
+<PackageManagerAdd package="@baeta/core" />
+
+Now add the cli and compiler. The compiler is optional, but highly recommended, as it will provide a more seamless integration and allow you to write configuration files in TypeScript.
+
+<PackageManagerAdd dev={true} package="@baeta/cli @baeta/compiler" />

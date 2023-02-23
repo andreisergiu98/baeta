@@ -1,0 +1,51 @@
+---
+sidebar_position: 2
+description: ''
+---
+
+# Configuration
+
+Assuming [@baeta/compiler](https://www.npmjs.com/package/@baeta/compiler) is installed the configuration is defined in `baeta.ts`.
+Otherwise `.js`, `.cjs`, `.mjs` files are also handled accordingly.
+
+First things first define the pattern of your schemas and the location of your modules.
+
+```typescript
+import { defineConfig } from '@baeta/cli';
+
+export default defineConfig({
+  graphql: {
+    schemas: ['src/**.gql'],
+    modulesDir: 'src/modules',
+  },
+});
+```
+
+Then define the entry point of your app and the location where the compiler should build.
+
+```typescript
+import { defineConfig } from '@baeta/cli';
+
+export default defineConfig({
+  graphql: {
+    schemas: ['src/**.gql'],
+    modulesDir: 'src/modules',
+  },
+  compiler: {
+    src: 'src/app.ts',
+    dist: 'dist',
+  },
+});
+```
+
+Add the following scripts to `package.json`:
+
+```json
+"scripts": {
+    "build": "baeta build --generate",
+    "generate": "baeta generate",
+    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'"
+}
+```
+
+This will do for a simple, initial setup. For more configuration options and defaults check the advanced guide.

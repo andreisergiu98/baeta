@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "plugins/directives"
+    "directory": "packages/plugin-directives"
   },
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",

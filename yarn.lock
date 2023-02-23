@@ -2146,7 +2146,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-directives@workspace:packages/plugin-directives"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/directives": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"

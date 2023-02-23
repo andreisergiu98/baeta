@@ -1,17 +1,16 @@
 import React from 'react';
 import { Snippet, SnippetProps } from './snippet';
 
-const FeatureList: SnippetProps[] = [
+const featureList: Array<Omit<SnippetProps, 'idx'>> = [
   {
     title: 'SDL',
     description: (
       <>
-        Adopting the schema first pattern will make GraphQL APIs easier to write and more
-        readable.
+        Adopting the schema first pattern will make GraphQL APIs easier to write and more readable.
         <br />
         <br />
-        Not only that, but it will encourage you to think about the API first, rather than
-        the implementation.
+        Not only that, but it will encourage you to think about the API first, rather than the
+        implementation.
       </>
     ),
     path: 'modules/user/user.gql',
@@ -34,40 +33,34 @@ type Query {
 }`,
   },
   {
-    title: 'Implement resolvers',
+    title: 'Typed resolvers',
     description: (
       <>
-        Baeta takes care of type safety and type definitions so you can focus on
-        implementing your resolvers in a flat and readable way.
-        <br />
-        <br />
-        Middlewares and directives are also supported.
+        Baeta takes care of type safety and type definitions so you can focus on implementing your
+        resolvers in a flat and readable way.
       </>
     ),
-    left: true,
     path: 'modules/user/resolvers.ts',
     language: 'typescript',
-    snippet: `import { getUserModule, User, UserWhereUnique } from "./typedef";
+    snippet: `import { getUserModule } from "./typedef";
 
-const { Query, User } = getUserModule();
+const { Query } = getUserModule();
     
 Query.user(({ args }) => {
     return dataSource.user.find(args.where);
 });
 
-Query.user.$use(async ({ args }, next) => {
-    const result = await next();
-    console.log("Found user", result, "for args", args);
-    return result;
-});`,
+Query.users(() => {
+    return dataSource.user.findMany();
+});
+`,
   },
   {
-    title: 'Extend other types',
+    title: 'Extend other modules',
     description: (
       <>
-        By using <a href="https://www.the-guild.dev/graphql/modules">GraphQL Modules</a>{' '}
-        under the hood, you can extend other types and split your schema into small,
-        reusable and maintainable pieces.
+        Modular by design, you can extend other types and split your schema into small, reusable and
+        maintainable pieces.
       </>
     ),
     path: 'modules/user-photos/user-photos.gql',
@@ -90,11 +83,8 @@ extend type User {
 }`,
   },
   {
-    title: 'Custom directives',
-    description: (
-      <>Easily define your own custom directives to validate or mutate input fields.</>
-    ),
-    left: true,
+    title: 'Directives',
+    description: <>Easily define your own directives to validate or mutate input fields.</>,
     language: 'typescript',
     snippet: `const trimDirective = createInputDirective({
     name: "trim",
@@ -113,8 +103,8 @@ export function HomeSnippets() {
   return (
     <section>
       <div className="container">
-        {FeatureList.map((props, idx) => (
-          <Snippet key={idx} {...props} />
+        {featureList.map((props, idx) => (
+          <Snippet key={idx} idx={idx} {...props} />
         ))}
       </div>
     </section>

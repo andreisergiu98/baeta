@@ -6,7 +6,7 @@ import React from 'react';
 
 export default function Home(): JSX.Element {
   return (
-    <Layout title={`Home`} description="Schema first without the hassle">
+    <Layout description="Schema first without the hassle">
       <HomeHeader />
       <main>
         <HomeFeatures />

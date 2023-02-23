@@ -20,4 +20,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 14px;
+}
+
+.logo {
+  height: 100px;
+  margin-right: 18px;
+}
+
+.titleContainer {
+  display: inline-flex;
+  margin-bottom: 18px;
+}
+
+:global(.hero__title) {
+  margin-top: auto;
+  margin-bottom: auto;
 }

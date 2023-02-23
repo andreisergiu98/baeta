@@ -6,34 +6,22 @@ const FeatureList: FeatureProps[] = [
   {
     title: 'Schema First',
     Svg: require('@site/static/img/logo-graphql.svg').default,
-    description: <>Design your schema using the language made specifically for it.</>,
+    description: <>First class SDL support like you've never seen before.</>,
   },
   {
-    title: 'GraphQL Modules',
-    Svg: require('@site/static/img/logo-graphql-modules.svg').default,
-    description: (
-      <>GraphQL Modules is built in so you can split your schema into reusable modules.</>
-    ),
+    title: 'Modular',
+    Svg: require('@site/static/img/logo-modular.svg').default,
+    description: <>Split your api into small, maintainable and extendable modules.</>,
   },
   {
     title: 'Type Safe',
     Svg: require('@site/static/img/logo-typescript.svg').default,
-    description: (
-      <>
-        Implement your API using TypeScript. Baeta makes sure your resolvers are type
-        safe.
-      </>
-    ),
+    description: <>Baeta makes sure your resolvers are completely type safe.</>,
   },
   {
     title: 'Advanced Features',
     Svg: require('@site/static/img/logo-rocket.svg').default,
-    description: (
-      <>
-        Use directives to validate or mutate values, extend your api using middlewares and
-        more...
-      </>
-    ),
+    description: <>Middlewares and directives out of the box. Extensible through plugins.</>,
   },
 ];
 

@@ -1,7 +1,18 @@
 {
-  // This file is not used in compilation. It is here just for a nice editor experience.
-  "extends": "@tsconfig/docusaurus/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "docs": "https://v2.docusaurus.io/docs/typescript-support",
   "compilerOptions": {
-    "baseUrl": "."
+    "jsx": "react",
+    "lib": ["dom"],
+    "moduleResolution": "node16",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noEmit": true,
+    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
+    "baseUrl": ".",
+    "paths": {
+      "@site/*": ["./*"]
+    },
+    "skipLibCheck": true
   }
 }

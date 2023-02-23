@@ -52,7 +52,7 @@ const config = {
         title: 'Baeta',
         logo: {
           alt: 'Baeta Logo',
-          src: '/img/logo.svg',
+          src: '/img/logo-baeta.svg',
         },
         items: [
           {

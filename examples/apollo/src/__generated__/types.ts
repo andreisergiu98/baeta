@@ -20,6 +20,11 @@ export type Scalars = {
   DateTime: Date;
 };
 
+export type StringFormat =
+  | 'EMAIL'
+  | 'UUID'
+  | 'URL';
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   hasPreviousPage: Scalars['Boolean'];
@@ -49,11 +54,6 @@ export type UserPhotoEdge = {
   cursor: Scalars['String'];
   node?: Maybe<UserPhoto>;
 };
-
-export type StringFormat =
-  | 'EMAIL'
-  | 'UUID'
-  | 'URL';
 
 export type UserPhoto = {
   __typename?: 'UserPhoto';

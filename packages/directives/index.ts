@@ -1,3 +1,4 @@
+import { SchemaTransformer } from '@baeta/core/sdk';
 import { Definition } from './lib/definition';
 import { floatValidation } from './lib/float/float-validation';
 import { inputConstraints } from './lib/input/input-validation';
@@ -14,3 +15,11 @@ export const definitions: Definition[] = [
   lower,
   upper,
 ];
+
+export function registerDirectives(module: {
+  $directive: (transformer: SchemaTransformer) => void;
+}) {
+  for (const definition of definitions) {
+    module.$directive(definition.directive);
+  }
+}

@@ -1,4 +1,9 @@
-import { createPluginV1, File } from '@baeta/generator-sdk';
+import {
+  createPluginV1,
+  File,
+  getModuleGetName,
+  getModuleVariableName,
+} from '@baeta/generator-sdk';
 import { join, parse } from 'path';
 
 interface TypeOptions {
@@ -38,13 +43,14 @@ function printPageInfo(addFields: string[] = []) {
   ]);
 }
 
-function printExport(moduleDefinitionName: string) {
+function printExport(moduleDefinitionName: string, moduleName: string) {
   const parsed = parse(moduleDefinitionName);
+  const method = getModuleGetName(moduleName);
   const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
-  return `import { getConnectionsModule } from "./${importName}";
+  return `import { ${method} } from "./${importName}";
 
-export const connectionsModule = getConnectionsModule();
+export const ${getModuleVariableName(moduleName)} = ${method}();
 `;
 }
 
@@ -71,7 +77,7 @@ function printConnectionTypes(name: string, typeOptions: TypeOptions, options: P
   return [connection, edge];
 }
 
-function createConnectionModuleDir(modulesDir: string, moduleName = 'connections') {
+function createConnectionModuleDir(modulesDir: string, moduleName: string) {
   return join(modulesDir, moduleName);
 }
 
@@ -84,13 +90,15 @@ function createExportFilename(moduleDir: string) {
 }
 
 export function paginationPlugin(options: PaginationOptions) {
+  const { moduleName = 'baeta-pagination' } = options;
+
   return createPluginV1({
     name: 'pagination',
     actionName: 'pagination connections',
     watch: (generatorOptions) => {
       return {
         include: [],
-        ignore: [createConnectionModuleDir(generatorOptions.modulesDir, options.moduleName)],
+        ignore: [createConnectionModuleDir(generatorOptions.modulesDir, moduleName)],
       };
     },
     generate: async (ctx, next) => {
@@ -103,13 +111,16 @@ export function paginationPlugin(options: PaginationOptions) {
           continue;
         }
 
-        types.push(...printConnectionTypes(name, typeOptions === true ? {} : typeOptions, options));
+        const connectionTypes = printConnectionTypes(
+          name,
+          typeOptions === true ? {} : typeOptions,
+          options
+        );
+
+        types.push(...connectionTypes);
       }
 
-      const moduleDir = createConnectionModuleDir(
-        ctx.generatorOptions.modulesDir,
-        options.moduleName
-      );
+      const moduleDir = createConnectionModuleDir(ctx.generatorOptions.modulesDir, moduleName);
 
       const definitionFile = new File(
         createGqlFilename(moduleDir),
@@ -121,14 +132,17 @@ export function paginationPlugin(options: PaginationOptions) {
 
       ctx.fileManager.add(definitionFile);
 
-      if (options.createExport !== false) {
-        const exportFile = new File(
-          createExportFilename(moduleDir),
-          printExport(ctx.generatorOptions.moduleDefinitionName),
-          'pagination'
-        );
-        ctx.fileManager.add(exportFile);
+      if (options.createExport === false) {
+        return next();
       }
+
+      const exportFile = new File(
+        createExportFilename(moduleDir),
+        printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
+        'pagination'
+      );
+
+      ctx.fileManager.add(exportFile);
 
       return next();
     },

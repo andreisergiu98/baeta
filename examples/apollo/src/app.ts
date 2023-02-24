@@ -8,14 +8,14 @@ import express from 'express';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
-import { connectionsModule } from './modules/connections';
-import { directiveModule } from './modules/directives';
+import { baetaDirectivesModule } from './modules/baeta-directives';
+import { baetaPaginationModule } from './modules/baeta-pagination';
 import { userModule } from './modules/user';
 import { userPhotosModule } from './modules/user-photos';
 import { Context } from './types/context';
 
 const baeta = createApplication({
-  modules: [userModule, userPhotosModule, connectionsModule, directiveModule],
+  modules: [userModule, userPhotosModule, baetaPaginationModule, baetaDirectivesModule],
   pruneSchema: true,
 });
 

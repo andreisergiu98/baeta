@@ -27,31 +27,42 @@ interface ForgedPkg {
   sideEffects?: boolean;
 }
 
-const manifest = '.publish.json';
+interface Manifest {
+  files: string[];
+}
+
+const manifestPath = '.publish.prep';
 
 async function getManifest() {
-  const manifestContent = await fs.readFile(manifest, 'utf-8').catch(() => null);
+  const manifestContent = await fs.readFile(manifestPath, 'utf-8').catch(() => null);
   if (!manifestContent) {
     return;
   }
-  return JSON.parse(manifestContent);
+  return JSON.parse(manifestContent) as Manifest;
 }
 
 async function writeManifest(files: string[]) {
   if (files.length === 0) {
     return;
   }
-  await fs.writeFile(manifest, JSON.stringify(files), 'utf-8');
+
+  const manifest: Manifest = {
+    files,
+  };
+
+  await fs.writeFile(manifestPath, JSON.stringify(manifest), 'utf-8');
 }
 
 async function removeNestedPackages() {
-  const files = await getManifest();
-  if (files == null) {
+  const manifest = await getManifest();
+
+  if (manifest == null) {
     return;
   }
 
-  const promises = [fs.unlink(manifest)];
-  for (const file of files) {
+  const promises = [fs.unlink(manifestPath)];
+
+  for (const file of manifest.files) {
     promises.push(fs.unlink(file));
   }
 
@@ -119,12 +130,14 @@ async function createNestedPackages() {
     }
 
     const dist = join(path, 'package.json');
+    const content = JSON.stringify(forged, null, 2);
+
     created.push(dist);
-    promises.push(fs.writeFile(dist, JSON.stringify(forged, null, 2)));
+    promises.push(fs.writeFile(dist, content, 'utf-8'));
   }
 
-  await promises;
-  writeManifest(created);
+  promises.push(writeManifest(created));
+  await Promise.all(promises);
   return created;
 }
 
@@ -132,18 +145,17 @@ async function run() {
   const arg = process.argv[2];
 
   if (arg === '--help') {
-    console.log('Usage: prep.js prepares packages for publish [--clean cleans afterwards]');
-    return;
+    return console.log('Usage: prep.js prepares packages for publish [--clean cleans afterwards]');
   }
 
   if (arg === '--clean') {
-    removeNestedPackages();
-    return;
+    return removeNestedPackages();
   }
 
   const manifest = await getManifest();
+
   if (manifest != null) {
-    console.log('[ERROR] Remove manifest before preparing');
+    console.error('[ERROR] Remove manifest before preparing');
     process.exit(1);
   }
 

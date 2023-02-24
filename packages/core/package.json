@@ -31,7 +31,7 @@
     "ramda": "^0.28.0"
   },
   "devDependencies": {
-    "@baeta/build-tools": "workspace:^",
+    "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.14.1",
     "@types/ramda": "^0.28.23",

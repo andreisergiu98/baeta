@@ -1,4 +1,4 @@
-import { defineConfig } from '@baeta/build-tools/tsup';
+import { defineConfig } from '@baeta/builder/tsup';
 
 export default defineConfig({
   entry: ['./index.ts', '!dist'],

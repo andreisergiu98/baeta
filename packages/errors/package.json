@@ -24,7 +24,7 @@
     "types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@baeta/build-tools": "workspace:^",
+    "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.14.1",
     "graphql": "^16.6.0",

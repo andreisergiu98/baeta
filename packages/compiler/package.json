@@ -27,7 +27,7 @@
     "esbuild": "^0.17.10"
   },
   "devDependencies": {
-    "@baeta/build-tools": "workspace:^",
+    "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.14.1",
     "typescript": "^4.9.5"

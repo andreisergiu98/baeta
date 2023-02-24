@@ -13,9 +13,9 @@
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "scripts": {
-    "build-example": "baeta build --generate",
+    "build": "baeta build --generate",
     "prisma": "pnpify prisma",
-    "start:dev": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
+    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
   },
   "dependencies": {
     "@apollo/server": "^4.4.0",

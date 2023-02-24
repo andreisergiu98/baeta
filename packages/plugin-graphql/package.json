@@ -44,7 +44,7 @@
     "parse-filepath": "^1.0.2"
   },
   "devDependencies": {
-    "@baeta/build-tools": "workspace:^",
+    "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.14.1",
     "@types/parse-filepath": "1.0.0",

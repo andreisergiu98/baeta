@@ -940,9 +940,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@baeta/build-tools@workspace:^, @baeta/build-tools@workspace:tools/build-tools":
+"@baeta/builder@workspace:^, @baeta/builder@workspace:tools/builder":
   version: 0.0.0-use.local
-  resolution: "@baeta/build-tools@workspace:tools/build-tools"
+  resolution: "@baeta/builder@workspace:tools/builder"
   dependencies:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
@@ -960,7 +960,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/cli@workspace:packages/cli"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/compiler": "workspace:^"
     "@baeta/generator": "workspace:^"
     "@baeta/plugin-graphql": "workspace:^"
@@ -994,7 +994,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/compiler@workspace:packages/compiler"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
     esbuild: ^0.17.10
@@ -1006,7 +1006,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/core@workspace:packages/core"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/schema": ^9.0.16
     "@graphql-tools/utils": ^9.2.1
@@ -1026,7 +1026,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/errors@workspace:packages/errors"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
     graphql: ^16.6.0
@@ -1071,7 +1071,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/extension-auth@workspace:packages/extension-auth"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
@@ -1089,7 +1089,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/generator-sdk@workspace:packages/generator-sdk"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/plugin": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
@@ -1102,7 +1102,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/generator@workspace:packages/generator"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
@@ -1115,7 +1115,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-exec@workspace:packages/plugin-exec"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
@@ -1128,7 +1128,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-graphql@workspace:packages/plugin-graphql"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@graphql-codegen/core": ^3.1.0
@@ -1161,7 +1161,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-pagination@workspace:packages/plugin-pagination"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
@@ -1176,7 +1176,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-prisma@workspace:packages/plugin-prisma"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/plugin-exec": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
@@ -1190,7 +1190,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/plugin@workspace:packages/plugin"
   dependencies:
-    "@baeta/build-tools": "workspace:^"
+    "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.14.1
     typescript: ^4.9.5

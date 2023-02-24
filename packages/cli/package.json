@@ -41,7 +41,7 @@
     "yargs": "^17.7.1"
   },
   "devDependencies": {
-    "@baeta/build-tools": "workspace:^",
+    "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.14.1",
     "@types/react": "^17.0.53",

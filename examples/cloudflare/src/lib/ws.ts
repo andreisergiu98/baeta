@@ -117,3 +117,17 @@ export function createGraphqlWSHandler(schema: GraphQLSchema) {
     });
   };
 }
+
+type FetchHandler = (ctx: HonoContext) => Response | Promise<Response>;
+
+export function splitWS(handleWs: FetchHandler, handleGraphql: FetchHandler) {
+  return (ctx: HonoContext) => {
+    const upgradeHeader = ctx.req.headers.get('upgrade');
+
+    if (upgradeHeader === 'websocket') {
+      return handleWs(ctx);
+    }
+
+    return handleGraphql(ctx);
+  };
+}

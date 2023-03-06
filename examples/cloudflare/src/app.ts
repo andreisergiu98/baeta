@@ -1,8 +1,7 @@
 import { createApplication } from '@baeta/core';
 import { Hono } from 'hono';
 import { createGraphqlHandler } from './lib/apollo';
-import { splitWS } from './lib/apollo-ws';
-import { createGraphqlWSHandler } from './lib/ws';
+import { createGraphqlWSHandler, splitWS } from './lib/ws';
 import { userModule } from './modules/user';
 
 const baeta = createApplication({

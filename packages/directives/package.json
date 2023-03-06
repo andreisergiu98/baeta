@@ -32,9 +32,9 @@
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/is-url": "^1",
-    "@types/node": "^18.11.18",
-    "typescript": "^4.9.4"
+    "@types/is-url": "^1.2.30",
+    "@types/node": "^18.14.1",
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^"

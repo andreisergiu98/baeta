@@ -13,10 +13,7 @@ const handleGraphqlWs = createGraphqlWSHandler(baeta.schema);
 
 const router = new Hono();
 
-router.get('/', handleGraphql);
-
 router.get('/graphql', splitWS(handleGraphqlWs, handleGraphql));
-
 router.post('/graphql', handleGraphql);
 
 export default router;

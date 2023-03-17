@@ -32,12 +32,12 @@ export function getPubsub() {
   return pubsub;
 }
 
-export function createPubSubWrapper(ctx: ExecutionContext): PubSubEngine {
+export function createPubSubWrapper(execCtx: ExecutionContext): PubSubEngine {
   return {
     async publish(target: string, payload: unknown) {
       const pubsub = getPubsub();
       const promise = pubsub.publish(target, payload);
-      await ctx.waitUntil(promise);
+      execCtx.waitUntil(promise);
       return promise;
     },
     asyncIterator<T>(triggers: string | string[]) {

@@ -5,20 +5,24 @@ import { startServerAndCreateCloudflareWorkersHandler } from '@as-integrations/c
 import { GraphQLSchema } from 'graphql';
 import { Context as HonoContext } from 'hono';
 import { Context } from '../types/context';
-import { createPubSubWrapper } from './pubsub';
+import { createContext } from './context';
 
 interface ReqState {
-  executionCtx: ExecutionContext;
-}
-
-function setApolloRequest(ctx: HonoContext) {
-  (ctx.req.raw as ApolloRequest).state = {
-    executionCtx: ctx.executionCtx,
-  };
+  hono: HonoContext;
 }
 
 interface ApolloRequest extends Request {
   state: ReqState;
+}
+
+function setApolloRequest(ctx: HonoContext) {
+  (ctx.req.raw as ApolloRequest).state = {
+    hono: ctx,
+  };
+}
+
+function createApolloContext({ request }: { request: ApolloRequest }) {
+  return createContext(request.state.hono);
 }
 
 export function createGraphqlHandler(schema: GraphQLSchema) {
@@ -31,12 +35,7 @@ export function createGraphqlHandler(schema: GraphQLSchema) {
   const handleApollo: CloudflareWorkersHandler = startServerAndCreateCloudflareWorkersHandler(
     apollo,
     {
-      context: async ({ request }: { request: ApolloRequest }): Promise<Context> => {
-        return {
-          executionCtx: request.state.executionCtx,
-          pubsub: createPubSubWrapper(request.state.executionCtx),
-        };
-      },
+      context: createApolloContext,
     }
   );
 

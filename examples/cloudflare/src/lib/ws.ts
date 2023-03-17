@@ -1,8 +1,7 @@
 import { GraphQLSchema } from 'graphql';
 import { handleProtocols, makeServer, MessageType, stringifyMessage } from 'graphql-ws';
 import { Context as HonoContext } from 'hono';
-import { Context as AppContext } from '../types/context';
-import { createPubSubWrapper } from './pubsub';
+import { createContext } from './context';
 
 export function createWebsocketPair() {
   const pair = new WebSocketPair();
@@ -21,24 +20,27 @@ export function useWebsocket(
 
   const server = makeServer({
     schema,
-    context: (): AppContext => {
-      return {
-        executionCtx: ctx.executionCtx,
-        pubsub: createPubSubWrapper(ctx.executionCtx),
-      };
-    },
+    context: createContext(ctx),
   });
 
   socket.accept();
 
   const pingMessage = stringifyMessage({ type: MessageType.Ping });
 
-  const pinger = setInterval(() => ping(), 12000);
+  const pinger: number = setInterval(() => ping(), 12000);
   let pongTimeout: number | null = null;
 
-  const handlePongTimeout = () => {
+  const stopPinger = () => {
     clearInterval(pinger);
-    close();
+  };
+
+  const stopPongTimeout = () => {
+    clearTimeout(pongTimeout);
+  };
+
+  const startPongTimeout = () => {
+    clearTimeout(pongTimeout);
+    pongTimeout = setTimeout(onPongTimeout, 6000);
   };
 
   const ping = () => {
@@ -47,7 +49,15 @@ export function useWebsocket(
     }
 
     socket.send(pingMessage);
-    pongTimeout = setTimeout(handlePongTimeout, 6000);
+    startPongTimeout();
+  };
+
+  const onPong = () => {
+    clearTimeout(pongTimeout);
+  };
+
+  const onPongTimeout = () => {
+    close();
   };
 
   const send = (data: string) => {
@@ -58,12 +68,9 @@ export function useWebsocket(
     socket.close(code, reason);
   };
 
-  const onPong = () => {
-    clearTimeout(pongTimeout);
-  };
-
   const handleEvent = (event: MessageEvent, callback: MessageCallback) => {
     callback(event.data.toString()).catch((err) => {
+      console.log('callback err', err);
       close(1011, 'Internal error');
     });
   };
@@ -73,9 +80,14 @@ export function useWebsocket(
   };
 
   const onClose = (e: CloseEvent) => {
-    clearTimeout(pongTimeout);
-    clearInterval(pinger);
-    closed(e.code || 1000, e.reason || 'Normal Closure');
+    console.log('on close');
+
+    stopPinger();
+    stopPongTimeout();
+
+    closed(e.code || 1000, e.reason || 'Normal Closure').catch((err) => {
+      console.log('closed err', err);
+    });
   };
 
   const closed = server.opened(
@@ -98,9 +110,9 @@ export function createGraphqlWSHandler(schema: GraphQLSchema) {
 
     const protoHeader = 'Sec-WebSocket-Protocol';
     const protoHeaderValue = ctx.req.headers.get(protoHeader) || '';
-    const protocol = handleProtocols(protoHeaderValue) || '';
+    const protocol = handleProtocols(protoHeaderValue);
 
-    useWebsocket(schema, server, ctx, protocol);
+    useWebsocket(schema, server, ctx, protocol || '');
 
     const headers: HeadersInit = {};
 

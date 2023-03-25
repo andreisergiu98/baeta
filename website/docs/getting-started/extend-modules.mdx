@@ -1,0 +1,48 @@
+---
+sidebar_position: 4
+description: ''
+---
+
+# Extend modules
+
+One of the powerful features of Baeta is the ability to extend modules with other modules.
+Let's extend our user module with a `user-photos` module.
+
+We create a new schema file at `src/modules/user-photos/user-photos.gql`:
+
+```graphql
+type UserPhoto {
+  id: ID!
+  url: String!
+}
+
+extend type User {
+  photos: [UserPhoto!]
+}
+```
+
+Generate types again and then we create a resolver for the photos field in `src/modules/user-photos/resolvers.ts`:
+
+```typescript
+import { getUserPhotosModule } from './typedef';
+
+const { User } = getUserPhotosModule();
+
+User.photos(({ args, root, info, ctx }) => {
+  return [
+    {
+      id: '1',
+      url: 'https://baeta.io/img/logo.svg',
+    },
+  ];
+});
+```
+
+Next, we export the `userPhotosModule` in `src/modules/user-photos/index.ts`:
+
+```typescript
+import './resolvers';
+import { getUserPhotosModule } from './typedef';
+
+export const userPhotosModule = getUserPhotosModule();
+```

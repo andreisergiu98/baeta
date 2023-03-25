@@ -10,4 +10,5 @@ examples/**/typedef.ts
 
 ### build ###
 dist
-.docusaurus
+website/.docusaurus
+website/build

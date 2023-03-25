@@ -15,7 +15,7 @@ It provides a powerful and flexible architecture for building scalable and maint
 
 ## Getting started
 
-To get started with Baeta, check out the official [website](https://baeta.io) and the [documentation](https://baeta.io/docs) for detailed guides and API references.
+To get started with Baeta, check out the official [website](https://baeta.io) and the [documentation](https://baeta.io/docs/intro) for detailed guides and API references.
 
 ## License
 

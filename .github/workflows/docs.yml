@@ -3,7 +3,7 @@ name: Deploy website
 on:
   push:
     branches:
-      - docs
+      - main
     paths:
       - website/**
 

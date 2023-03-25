@@ -5,10 +5,10 @@ description: ''
 
 # Configuration
 
-Assuming [@baeta/compiler](https://www.npmjs.com/package/@baeta/compiler) is installed the configuration is defined in `baeta.ts`.
-Otherwise `.js`, `.cjs`, `.mjs` files are also handled accordingly.
+Assuming [@baeta/compiler](https://www.npmjs.com/package/@baeta/compiler) is installed, the configuration is defined in `baeta.ts`.
+Otherwise `.js`, `.cjs`, `.mjs` files will be handled accordingly.
 
-First things first define the pattern of your schemas and the location of your modules.
+First things first, define the schemas and modules directory.
 
 ```typescript
 import { defineConfig } from '@baeta/cli';
@@ -21,7 +21,7 @@ export default defineConfig({
 });
 ```
 
-Then define the entry point of your app and the location where the compiler should build.
+After defining the schemas and modules directory, define the entry point of your app and the location where the compiler should build.
 
 ```typescript
 import { defineConfig } from '@baeta/cli';
@@ -38,7 +38,7 @@ export default defineConfig({
 });
 ```
 
-Add the following scripts to `package.json`:
+Finally, add the following scripts to `package.json`:
 
 ```json
 "scripts": {
@@ -48,4 +48,6 @@ Add the following scripts to `package.json`:
 }
 ```
 
-This will do for a simple, initial setup. For more configuration options and defaults check the advanced guide.
+These scripts will build your app and start it. You can modify these scripts based on your requirements.
+
+For more configuration options and defaults, check out the advanced guide.

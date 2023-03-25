@@ -4,44 +4,26 @@ sidebar_position: 1
 
 # Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## What is Baeta?
 
-## Getting Started
+Baeta is a modern, open-source GraphQL framework that enables developers to build powerful and scalable GraphQL APIs with ease. It provides a modular architecture, a schema-first approach, and automatic code generation, making it easy to build and maintain robust GraphQL APIs.
 
-Get started by **creating a new site**.
+## Why use Baeta?
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Baeta makes it easy to build better GraphQL APIs. Here are some of the key reasons why you should consider using Baeta:
 
-### What you'll need
+**Modular architecture:** Baeta's modular design allows you to organize your GraphQL API into smaller, more manageable modules that can be added or removed as needed. This makes it easier to maintain and scale your API over time.
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+**Schema-first approach:** With Baeta, you define your schema first, and then the code is automatically generated for you. This approach ensures a consistent and well-defined API for your clients and reduces boilerplate code.
 
-## Generate a new site
+**Type safety:** Baeta provides automatic code generation, which ensures type safety and reduces errors. This improves the stability and reliability of your API.
 
-Generate a new Docusaurus site using the **classic template**.
+**Middleware and directives:** Baeta supports middleware and directives, which allow you to add custom behavior to your resolvers and schema validation. This makes it easy to add authentication, logging, or other custom behavior to your API.
 
-The classic template will automatically be added to your project after you run the command:
+## Compatibility
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Baeta is compatible with all GraphQL servers, which makes it easy to integrate with your existing stack. It works seamlessly with popular GraphQL server libraries such as `graphql-yoga` and `Apollo Server`, as well as other popular tools like `Prisma` and `Kysely`.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## Ready to get started?
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Head over to the the next page to learn more and get started today!

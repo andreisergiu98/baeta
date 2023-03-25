@@ -13,11 +13,17 @@ description: ''
 
 ## Setup
 
-First things first add the core package. For a basic installation this is the only package required at runtime.
+### Runtime
+
+Install the core package.
 
 import { PackageManagerAdd } from '@site/components/package-manager';
 
 <PackageManagerAdd package="@baeta/core" />
+
+This is the only package required at runtime for a basic installation.
+
+### CLI and Compiler
 
 Now add the cli and compiler. The compiler is optional, but highly recommended, as it will provide a more seamless integration and allow you to write configuration files in TypeScript.
 

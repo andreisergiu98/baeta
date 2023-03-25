@@ -14,7 +14,7 @@ Baeta makes it easy to build better GraphQL APIs. Here are some of the key reaso
 
 **Modular architecture:** Baeta's modular design allows you to organize your GraphQL API into smaller, more manageable modules that can be added or removed as needed. This makes it easier to maintain and scale your API over time.
 
-**Schema-first approach:** With Baeta, you define your schema first, and then the code is automatically generated for you. This approach ensures a consistent and well-defined API for your clients and reduces boilerplate code.
+**Schema-first approach:** With Baeta, you define your schema first, and then logic and resolvers. This approach ensures a consistent and well-defined API for your clients and reduces boilerplate code.
 
 **Type safety:** Baeta provides automatic code generation, which ensures type safety and reduces errors. This improves the stability and reliability of your API.
 

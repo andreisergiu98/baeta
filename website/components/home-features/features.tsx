@@ -27,7 +27,7 @@ const FeatureList: FeatureProps[] = [
   {
     title: 'Advanced Features',
     Svg: LogoRocket,
-    description: <>Extensible, including support for middleware, directives and plugins.</>,
+    description: <>Extensible, including support for middlewares, directives and plugins.</>,
   },
 ];
 

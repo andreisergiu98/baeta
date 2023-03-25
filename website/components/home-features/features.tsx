@@ -10,22 +10,24 @@ const FeatureList: FeatureProps[] = [
   {
     title: 'Schema First',
     Svg: LogoGraphql,
-    description: <>First class SDL support like you've never seen before.</>,
+    description: <>Schema-first approach for a consistent and well-defined API.</>,
   },
   {
     title: 'Modular',
     Svg: LogoModular,
-    description: <>Split your api into small, maintainable and extendable modules.</>,
+    description: <>Modular architecture for easy organization and scalability.</>,
   },
   {
     title: 'Type Safe',
     Svg: LogoTypescript,
-    description: <>Baeta makes sure your resolvers are completely type safe.</>,
+    description: (
+      <>Automatic code generation for type safety, increased productivity, and reduced errors.</>
+    ),
   },
   {
     title: 'Advanced Features',
     Svg: LogoRocket,
-    description: <>Middlewares and directives out of the box. Extensible through plugins.</>,
+    description: <>Extensible, including support for middleware, directives and plugins.</>,
   },
 ];
 

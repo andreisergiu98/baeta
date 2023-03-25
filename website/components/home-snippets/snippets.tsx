@@ -6,11 +6,9 @@ const featureList: Array<Omit<SnippetProps, 'idx'>> = [
     title: 'SDL',
     description: (
       <>
-        Adopting the schema first pattern will make GraphQL APIs easier to write and more readable.
-        <br />
-        <br />
-        Not only that, but it will encourage you to think about the API first, rather than the
-        implementation.
+        Baeta's schema-first pattern makes it easy to write and maintain GraphQL APIs that are easy
+        to read and understand. By defining your schema first, you can focus on the API design and
+        structure, rather than the implementation details.
       </>
     ),
     path: 'modules/user/user.gql',
@@ -36,7 +34,7 @@ type Query {
     title: 'Typed resolvers',
     description: (
       <>
-        Baeta takes care of type safety and type definitions so you can focus on implementing your
+        Baeta takes care of type safety and type definitions, so you can focus on implementing your
         resolvers in a flat and readable way.
       </>
     ),
@@ -59,8 +57,9 @@ Query.users(() => {
     title: 'Extend other modules',
     description: (
       <>
-        Modular by design, you can extend other types and split your schema into small, reusable and
-        maintainable pieces.
+        Baeta's modular architecture allows you to easily extend other types and split your schema
+        into small, reusable, and maintainable pieces. Here's an example of how to extend the User
+        type with a photos field.
       </>
     ),
     path: 'modules/user-photos/user-photos.gql',
@@ -84,7 +83,13 @@ extend type User {
   },
   {
     title: 'Directives',
-    description: <>Easily define your own directives to validate or mutate input fields.</>,
+    description: (
+      <>
+        Baeta also supports custom directives, which allow you to define your own validation or
+        mutation rules for input fields. Here's an example of a trim directive that trims whitespace
+        from a string input.
+      </>
+    ),
     language: 'typescript',
     snippet: `const trimDirective = createInputDirective({
     name: "trim",

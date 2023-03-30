@@ -32,9 +32,7 @@ const trimDirective = createInputDirective<TrimArgs>({
       return params.setValue(value.trimEnd());
     }
 
-    console.log(params.args);
     params.setValue(value.trim());
-    console.log(params.args);
   },
 });
 

@@ -34,7 +34,6 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.14.1",
     "@types/ramda": "^0.28.23",
     "ava": "^5.2.0",
     "graphql": "^16.6.0",

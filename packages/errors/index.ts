@@ -68,7 +68,7 @@ export class AggregateGraphQLError extends GraphQLError {
           path: error.path,
           locations: error.locations,
           extensions: error.extensions,
-          stacktrace: process.env.NODE_ENV === 'production' ? undefined : error.stack,
+          // stacktrace: process.env.NODE_ENV === 'production' ? undefined : error.stack,
         })),
       },
     });

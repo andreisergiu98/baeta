@@ -45,8 +45,6 @@ const directive = createInputDirective<Args>({
   resolve(params) {
     const value = params.getValue();
 
-    console.log('validation val', value);
-
     if (typeof value !== 'string') {
       return;
     }

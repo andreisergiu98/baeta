@@ -3,20 +3,25 @@ import { SchemaTransformer } from './transformer';
 
 declare global {
   export namespace BaetaExtensions {
+    // rome-ignore lint/suspicious/noEmptyInterface: is template
     export interface ResolverExtensions<Result, Root, Context, Args> {}
 
+    // rome-ignore lint/suspicious/noEmptyInterface: is template
     export interface TypeExtensions<Root, Context> {}
 
+    // rome-ignore lint/suspicious/noEmptyInterface: is template
     export interface SubscriptionSubscribeExtensions<Root, Context, Args> {}
 
+    // rome-ignore lint/suspicious/noEmptyInterface: is template
     export interface SubscriptionResolveExtensions<Result, Root, Context, Args> {}
 
+    // rome-ignore lint/suspicious/noEmptyInterface: is template
     export interface ModuleExtensions {}
   }
 }
 
 export enum ExtensionVersion {
-  V1,
+  V1 = 'v1',
 }
 
 export type ExtensionFactory<E extends Extension> = () => E;

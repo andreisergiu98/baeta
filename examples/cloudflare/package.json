@@ -17,22 +17,22 @@
     "start": "baeta build --watch --generate --onSuccess='miniflare --modules dist/app.mjs'"
   },
   "dependencies": {
-    "@apollo/server": "^4.4.0",
+    "@apollo/server": "^4.5.0",
     "@as-integrations/cloudflare-workers": "^0.1.1",
     "@baeta/core": "workspace:^",
     "async-mqtt": "^2.6.3",
     "graphql": "^16.6.0",
     "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.12.0",
-    "hono": "^3.0.3"
+    "hono": "^3.1.4"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20230228.0",
+    "@cloudflare/workers-types": "^4.20230321.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
-    "miniflare": "^2.12.1",
+    "miniflare": "^2.13.0",
     "typescript": "^4.9.5"
   }
 }

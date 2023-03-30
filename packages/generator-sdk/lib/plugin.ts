@@ -6,7 +6,7 @@ type MatchPattern = string | RegExp;
 type Matcher = MatchPattern | MatchPattern[];
 
 export enum GeneratorPluginVersion {
-  V1,
+  V1 = 'v1',
 }
 
 export type GeneratorPluginV1Fn<Store = unknown> = (

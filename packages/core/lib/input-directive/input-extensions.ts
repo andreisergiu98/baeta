@@ -74,6 +74,8 @@ export function addArgumentValidationsExtension(
   if (extensions.argumentValidations[name] == null) {
     extensions.argumentValidations[name] = [];
   }
+
+  // rome-ignore lint/style/noNonNullAssertion: initialized above
   extensions.argumentValidations[name]![index] = validation;
 }
 

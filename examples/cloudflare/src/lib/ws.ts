@@ -102,7 +102,7 @@ export function createGraphqlWSHandler(schema: GraphQLSchema) {
 
     useWebsocket(schema, server, ctx, protocol);
 
-    let headers: HeadersInit = {};
+    const headers: HeadersInit = {};
 
     // As per the WS spec, if the server does not accept any subprotocol - it should omit this header.
     // Beware that doing so will have Chrome abruptly close the WebSocket connection with a 1006 code.

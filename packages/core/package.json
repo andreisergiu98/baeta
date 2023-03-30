@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@baeta/errors": "workspace:^",
-    "@graphql-tools/schema": "^9.0.16",
+    "@graphql-tools/schema": "^9.0.17",
     "@graphql-tools/utils": "^9.2.1",
     "graphql-subscriptions": "^2.0.0",
     "ramda": "^0.28.0"

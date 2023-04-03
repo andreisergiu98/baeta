@@ -50,6 +50,7 @@ gen_enforced_field(WorkspaceCwd, 'scripts.postpack', 'prep --clean') :-
     \+ workspace_field_test(WorkspaceCwd, 'private', 'true').
 
 no_module('@baeta/examples-apollo').
+no_module('@baeta/examples-cloudflare').
 no_module('@baeta/website').
 
 gen_enforced_field(WorkspaceCwd, 'type', 'module') :-

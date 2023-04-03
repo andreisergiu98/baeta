@@ -1,0 +1,9 @@
+name = "jolly"
+main = "dist/app.mjs"
+compatibility_date = "2023-02-24"
+usage_model = "bundled"
+env = { }
+no_bundle = true
+
+[triggers]
+crons = [ ]

@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+  mqtt:
+    image: emqx/nanomq:latest
+    environment:
+      NANOMQ_ALLOW_ANONYMOUS: true
+      NANOMQ_HTTP_SERVER_ENABLE: true
+      NANOMQ_HTTP_SERVER_PORT: 1445
+      NANOMQ_HTTP_SERVER_USERNAME: nanomq
+      NANOMQ_HTTP_SERVER_PASSWORD: nanomq_server_password
+    ports:
+      - "8083:8083"
+      - "1445:1445"
+      # - EMQX_LOADED_PLUGINS= "emqx_bridge_mqtt"
+      # - EMQX_ADMIN_PASSWORD=brokerpw1
+      # - EMQX_BRIDGE__MQTT__AWS__ADDRESS=172.26.0.2:1883 #ip:port of mqtt-cloud
+      # - EMQX_BRIDGE__MQTT__AWS__PROTO_VER=mqttv3
+      # - EMQX_BRIDGE__MQTT__AWS__BRIDGE_MODE=true
+      # - EMQX_BRIDGE__MQTT__AWS__CLEAN_START=true
+      # - EMQX_BRIDGE__MQTT__AWS__USERNAME=user
+      # - EMQX_BRIDGE__MQTT__AWS__PASSWORD=passw
+      # - EMQX_BRIDGE__MQTT__AWS__CLIENTID=bridge_aws
+      # - EMQX_BRIDGE__MQTT__AWS__KEEPALIVE=10s
+      # - EMQX_BRIDGE__MQTT__AWS__FORWARDS=sensor1/#

@@ -1,7 +1,17 @@
 import { handleProtocols, SubscribeMessage } from 'graphql-ws';
-import { SubscriptionsOptions } from './cloudflare-subscription';
-import { createSubscriptionInfo } from './graphql';
+import { PublishData } from './publish';
+import { createSubscriptionInfo } from './subscribe';
+import { SubscriptionsOptions } from './subscription';
 import { useWebsocket } from './use-websocket';
+
+const forgedCtx: ExecutionContext = {
+  passThroughOnException() {
+    console.error("passThroughOnException is not supported for 'subscribe'");
+  },
+  waitUntil() {
+    console.error("waitUntil is not supported for 'subscribe'");
+  },
+};
 
 export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>) {
   return class WsConnections implements DurableObject {
@@ -11,6 +21,7 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
 
     async fetch(request: Request) {
       const pathName = new URL(request.url).pathname.slice(1);
+
       const path = pathName.split('/');
       const action = path[0];
 
@@ -19,11 +30,11 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       }
 
       if (action === 'close') {
-        return this.close(request, path);
+        return this.close(path);
       }
 
       if (action === 'publish') {
-        return this.publish(request, path);
+        return this.publish(request);
       }
 
       throw new Error('bad_request');
@@ -44,15 +55,25 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       const connectionPoolId = this.state.id.toString();
 
       const handleCreateSubscription = (message: SubscribeMessage) => {
+        const contextParams = options.context?.getContextParams(request, this.env);
+        const context = options.context?.createContext(contextParams, this.env, forgedCtx);
+
         const subscriptionInfo = createSubscriptionInfo(
           options.schema,
           message,
           connectionId,
-          connectionPoolId
+          connectionPoolId,
+          context,
+          contextParams
         );
 
         const db = options.getDatabase(this.env);
         return db.createSubscription(subscriptionInfo);
+      };
+
+      const handleDeleteSubscription = (id: string) => {
+        const db = options.getDatabase(this.env);
+        return db.deleteSubscription(id);
       };
 
       const handleDeleteSubscriptions = () => {
@@ -60,12 +81,11 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
         return db.deleteSubscriptions(connectionId);
       };
 
-      await useWebsocket(
-        request,
+      useWebsocket(
         connection,
-        options.schema,
         protocol,
         handleCreateSubscription,
+        handleDeleteSubscription,
         handleDeleteSubscriptions
       );
 
@@ -76,16 +96,16 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       });
     }
 
-    private async close(request: Request, path: string[]) {
+    private async close(path: string[]) {
       const connectionId = path[1];
 
       const connection = this.connections.get(connectionId);
 
-      if (!connection) {
+      if (!connection || connection.readyState === WebSocket.READY_STATE_CLOSED) {
+        const db = options.getDatabase(this.env);
+        await db.deleteSubscriptions(connectionId);
         throw new Error('bad_request');
       }
-
-      // TODO: delete from d1
 
       connection.close(1000, 'closed');
       this.connections.delete(connectionId);
@@ -93,7 +113,23 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       return new Response('ok');
     }
 
-    private async publish(request: Request, path: string[]) {
+    private async publish(request: Request) {
+      const db = options.getDatabase(this.env);
+      const messagesAndConnectionIds: PublishData[] = await request.json();
+
+      const deletePromises: Promise<void>[] = [];
+
+      for (const { message, connectionId } of messagesAndConnectionIds) {
+        const connection = this.connections.get(connectionId);
+        if (!connection || connection.readyState === WebSocket.READY_STATE_CLOSED) {
+          deletePromises.push(db.deleteSubscriptions(connectionId));
+          continue;
+        }
+        connection.send(JSON.stringify(message));
+      }
+
+      await Promise.all(deletePromises);
+
       return new Response('ok');
     }
   };

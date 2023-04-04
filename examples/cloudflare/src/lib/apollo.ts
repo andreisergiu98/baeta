@@ -3,7 +3,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { GraphQLSchema } from 'graphql';
 
 interface ApolloOptions<Env, Context> {
-  context: (request: Request, env: {}, ctx: ExecutionContext) => Promise<Context>;
+  context: (request: Request, env: Env, ctx: ExecutionContext) => Promise<Context>;
 }
 
 export function createGraphqlHandler<Env, Context extends BaseContext>(
@@ -18,7 +18,7 @@ export function createGraphqlHandler<Env, Context extends BaseContext>(
 
   apollo.startInBackgroundHandlingStartupErrorsByLoggingAndFailingAllRequests();
 
-  return async (request: Request, env: {}, ctx: ExecutionContext) => {
+  return async (request: Request, env: Env, ctx: ExecutionContext) => {
     try {
       if (request.method === 'OPTIONS') {
         return new Response('', { status: 204 });

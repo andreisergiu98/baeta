@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20230321.0",
     "@types/uuid": "^9",
@@ -37,7 +36,6 @@
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "@baeta/core": "workspace:^",
     "graphql": "^16.6.0"
   },
   "engines": {

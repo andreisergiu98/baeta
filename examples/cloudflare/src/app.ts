@@ -6,47 +6,62 @@ import { Context } from './types/context';
 
 import { createCloudflareSubscription, D1Subscription } from '@baeta/cloudflare-subscriptions';
 
-interface Env {
+export type Env = {
   WS_CONNECTIONS: DurableObjectNamespace;
-  D1_SUBSCRIPTIONS: D1Database;
+  SUBSCRIPTIONS: D1Database;
+};
+
+interface ContextParams {
+  userId: string;
 }
 
 const baeta = createApplication({
   modules: [userModule],
 });
 
-const handleGraphql = createGraphqlHandler<Env, Context>(baeta.schema, {
-  context: async (request, env, ctx) => {
-    return {
-      executionCtx: ctx,
-    };
-  },
-});
+const createContext = (
+  params: ContextParams,
+  env: Env,
+  executionContext: ExecutionContext
+): Context => {
+  return {
+    userId: params.userId,
+    executionCtx: executionContext,
+    publish: subscriptions.createPublisher(env, executionContext),
+    subscribe: subscriptions.createSubscriber(),
+  };
+};
 
-const subscriptions = createCloudflareSubscription<Env, Context>({
+const getContextParams = (request: Request, env: Env): ContextParams => {
+  return { userId: '123' };
+};
+
+const subscriptions = createCloudflareSubscription<Env, Context, ContextParams>({
   schema: baeta.schema,
-  createContext(request, env, ctx) {
-    return {
-      executionCtx: ctx,
-    };
-  },
   getWSConnections(env) {
     return env.WS_CONNECTIONS;
   },
   getDatabase(env) {
-    return new D1Subscription(env.D1_SUBSCRIPTIONS);
+    return new D1Subscription(env.SUBSCRIPTIONS);
+  },
+  context: {
+    createContext,
+    getContextParams,
   },
 });
 
-// @ts-expect-error todo
-const router = new Hono<{ Bindings: Env }>();
-
-router.get('/', (ctx) => {
-  return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
+const handleGraphql = createGraphqlHandler<Env, Context>(baeta.schema, {
+  context: async (request, env, ctx) => {
+    const contextParams = getContextParams(request, env);
+    return createContext(contextParams, env, ctx);
+  },
 });
+
+const router = new Hono<{ Bindings: Env }>();
 
 router.get('/graphql', (ctx) => {
   const upgradeHeader = ctx.req.headers.get('upgrade');
+  console.log('upgradeHeader', upgradeHeader);
   if (upgradeHeader === 'websocket') {
     return subscriptions.handleWS(ctx.req.raw, ctx.env, ctx.executionCtx);
   }
@@ -58,3 +73,5 @@ router.post('/graphql', (ctx) => {
 });
 
 export default router;
+
+export const WsConnections = subscriptions.createWsConnectionsClass();

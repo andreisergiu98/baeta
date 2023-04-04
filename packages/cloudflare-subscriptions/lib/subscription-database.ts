@@ -1,12 +1,4 @@
-import { SubscribePayload } from 'graphql-ws';
-
-export interface SubscriptionInfo {
-  id: string;
-  connectionId: string;
-  connectionPoolId: string;
-  topic: string;
-  subscription: SubscribePayload;
-}
+import { SubscriptionInfo } from './subscribe';
 
 export abstract class SubscriptionDatabase {
   async getSubscriptions(topic: string): Promise<SubscriptionInfo[]> {

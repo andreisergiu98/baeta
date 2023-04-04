@@ -15,13 +15,16 @@ export interface SubscriptionInfo {
   connectionPoolId: string;
   topic: string;
   subscription: SubscribePayload;
+  contextParams: unknown;
 }
 
 export function createSubscriptionInfo(
   schema: GraphQLSchema,
   message: SubscribeMessage,
   connectionId: string,
-  connectionPoolId: string
+  connectionPoolId: string,
+  context: unknown,
+  contextParams: unknown
 ) {
   const execContext = buildExecutionContext({
     schema: schema,
@@ -34,28 +37,32 @@ export function createSubscriptionInfo(
     throw new AggregateError(execContext);
   }
 
-  const { field, root, args, context, info } = getResolverAndArgs({ execContext });
+  const { field, root, args, info } = getResolverAndArgs({ execContext });
 
   if (!field.subscribe) {
     throw new Error('No field');
   }
 
-  const result = field.subscribe(root, args, context, info);
+  const result = field.subscribe(root, args, context, info) as { topic: string };
 
   const subInfo: SubscriptionInfo = {
     id: message.id,
     connectionId,
     connectionPoolId,
-    // @ts-expect-error todo
-    topic: result.topic as string,
+    topic: result.topic,
     subscription: message.payload,
+    contextParams,
   };
 
   return subInfo;
 }
 
+export function subscribe<T>(topic: string) {
+  return { topic } as unknown as AsyncIterator<T>;
+}
+
 function getResolverAndArgs({ execContext }: { execContext: ExecutionContext }) {
-  const { schema, fragments, operation, variableValues, rootValue } = execContext;
+  const { schema, fragments, operation, variableValues, contextValue } = execContext;
   const rootType = schema.getSubscriptionType();
 
   if (rootType == null) {
@@ -93,7 +100,7 @@ function getResolverAndArgs({ execContext }: { execContext: ExecutionContext }) 
     args,
     info,
     field: fieldDef,
-    context: execContext.contextValue,
+    context: contextValue,
   };
 }
 

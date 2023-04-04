@@ -3,8 +3,6 @@ import { getUserModule } from './typedef';
 const { Query, Mutation, Subscription } = getUserModule();
 
 Query.user(async (params) => {
-  // params.ctx.pubsub.publish('on-user-update', 'some id');
-
   return {
     id: 'some-id',
     name: 'John Doe',
@@ -12,21 +10,26 @@ Query.user(async (params) => {
 });
 
 Mutation.updateUser(async ({ args, ctx }) => {
+  const id = args?.where?.id || 'some-id';
+
+  ctx.publish('on-user-updated', id);
+
   return {
-    id: args.where?.id || 'some-id',
+    id,
     name: args.data?.name || 'John Doe',
     birthday: args.data?.birthday || '01-01-2000',
   };
 });
 
-// Subscription.onUserUpdate<string>({
-//   subscribe: ({ ctx }) => {
-//     return ctx.pubsub.subscribe('on-user-update');
-//   },
-//   resolve: (params) => {
-//     return {
-//       id: params.payload,
-//       name: 'Jon',
-//     };
-//   },
-// });
+Subscription.onUserUpdate({
+  subscribe: ({ ctx }) => {
+    console.log('subscribe', ctx.subscribe);
+    return ctx.subscribe('on-user-updated');
+  },
+  resolve: (params) => {
+    return {
+      id: params.payload,
+      name: 'Jon',
+    };
+  },
+});

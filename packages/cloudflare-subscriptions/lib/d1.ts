@@ -1,4 +1,4 @@
-import { SubscriptionInfo } from './graphql';
+import { SubscriptionInfo } from './subscribe';
 import { SubscriptionDatabase } from './subscription-database';
 
 interface D1SubscriptionRow {
@@ -11,6 +11,7 @@ interface D1SubscriptionRow {
 
 interface D1SubscriptionRowData {
   subscription: SubscriptionInfo['subscription'];
+  contextParams: unknown;
 }
 
 export class D1Subscription implements SubscriptionDatabase {
@@ -18,8 +19,8 @@ export class D1Subscription implements SubscriptionDatabase {
 
   async getSubscriptions(topic: string): Promise<SubscriptionInfo[]> {
     const res = await this.db
-      .prepare('SELECT * FROM subscriptions WHERE topic = ?')
-      .bind([topic])
+      .prepare('SELECT * FROM Subscriptions WHERE topic = ?')
+      .bind(topic)
       .all<D1SubscriptionRow>();
 
     const results = res.results ?? [];
@@ -33,6 +34,7 @@ export class D1Subscription implements SubscriptionDatabase {
         connectionId: row.connectionId,
         connectionPoolId: row.connectionPoolId,
         subscription: data.subscription,
+        contextParams: data.contextParams,
       };
     });
   }
@@ -40,20 +42,20 @@ export class D1Subscription implements SubscriptionDatabase {
   async createSubscription(info: SubscriptionInfo): Promise<void> {
     await this.db
       .prepare(
-        'INSERT INTO subscriptions (id, connectionId, connectionPoolId, topic, data) VALUES (?, ?, ?, ?, ?)'
+        'INSERT INTO Subscriptions (id, connectionId, connectionPoolId, topic, data) VALUES (?, ?, ?, ?, ?)'
       )
-      .bind([info.id, info.connectionId, info.connectionPoolId, info.topic, serializeData(info)])
+      .bind(info.id, info.connectionId, info.connectionPoolId, info.topic, serializeData(info))
       .run();
   }
 
   async deleteSubscription(id: string): Promise<void> {
-    await this.db.prepare('DELETE FROM subscriptions WHERE id = ?').bind([id]).run();
+    await this.db.prepare('DELETE FROM Subscriptions WHERE id = ?').bind(id).run();
   }
 
   async deleteSubscriptions(connectionId: string): Promise<void> {
     await this.db
-      .prepare('DELETE FROM subscriptions WHERE connectionId = ?')
-      .bind([connectionId])
+      .prepare('DELETE FROM Subscriptions WHERE connectionId = ?')
+      .bind(connectionId)
       .run();
   }
 }
@@ -61,11 +63,11 @@ export class D1Subscription implements SubscriptionDatabase {
 export function serializeData(info: SubscriptionInfo) {
   const data: D1SubscriptionRowData = {
     subscription: info.subscription,
+    contextParams: info.contextParams,
   };
   return JSON.stringify(data);
 }
 
-export function parseData(data: string) {
-  const parsed = JSON.parse(data) as D1SubscriptionRowData;
-  return parsed;
+export function parseData(data: string): D1SubscriptionRowData {
+  return JSON.parse(data);
 }

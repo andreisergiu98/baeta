@@ -1,0 +1,55 @@
+{
+  "name": "@baeta/directives",
+  "version": "0.0.1",
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/directives"
+  },
+  "license": "MIT",
+  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/errors": "workspace:^",
+    "email-validator": "^2.0.4",
+    "is-url": "^1.2.4"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/core": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/is-url": "^1.2.30",
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "@baeta/core": "workspace:^"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
+      }
+    },
+    "types": "dist/index.d.ts"
+  }
+}

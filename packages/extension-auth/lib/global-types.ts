@@ -48,11 +48,10 @@ declare global {
         options?: AuthMethodOptions<Result, Root, Context, Args>
       ) => void;
     }
-
-    export interface ModuleExtensions {}
   }
 
   export namespace AuthExtension {
+    // rome-ignore lint/suspicious/noEmptyInterface: is template
     export interface Scopes {}
     export type Grants = string;
   }

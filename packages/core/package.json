@@ -25,15 +25,15 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@graphql-tools/schema": "^9.0.16",
+    "@baeta/errors": "workspace:^",
+    "@graphql-tools/schema": "^9.0.17",
     "@graphql-tools/utils": "^9.2.1",
     "graphql-subscriptions": "^2.0.0",
-    "ramda": "^0.28.0"
+    "ramda": "^0.29.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.14.1",
     "@types/ramda": "^0.28.23",
     "ava": "^5.2.0",
     "graphql": "^16.6.0",

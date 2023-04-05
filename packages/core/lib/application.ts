@@ -1,7 +1,5 @@
 import { IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import { pruneSchema } from '@graphql-tools/utils';
-import { printSchema } from 'graphql';
-import { writeFile } from 'node:fs/promises';
 import { getModuleBuilder, transformSchema } from '../sdk';
 import { addValidationToSchema } from './input-directive/input-schema';
 
@@ -47,11 +45,6 @@ export function createApplication(options: Options) {
 
   if (options.pruneSchema) {
     schema = pruneSchema(schema);
-  }
-
-  if (options.printSchema) {
-    const path = typeof options.printSchema === 'string' ? options.printSchema : 'schema.graphql';
-    writeFile(path, printSchema(schema), 'utf-8');
   }
 
   return {

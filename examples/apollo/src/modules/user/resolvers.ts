@@ -4,7 +4,7 @@ const { Query, User } = getUserModule();
 
 Query.user(async (params) => {
   return {
-    id: params.args.id ?? 'id',
+    id: params.args.where?.id ?? 'id',
     name: 'John Doe',
   };
 });

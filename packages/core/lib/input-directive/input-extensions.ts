@@ -57,22 +57,26 @@ export function addValidateExtension(type: GraphQLInputObjectType) {
 
 export function addValidationsExtension(
   config: GraphQLInputObjectType | GraphQLInputFieldConfig,
+  index: number,
   validation: ValidationOptions
 ) {
   const extensions = initValidationsExtension(config);
-  extensions.validations.push(validation);
+  extensions.validations[index] = validation;
 }
 
 export function addArgumentValidationsExtension(
   config: GraphQLFieldConfig<unknown, unknown, unknown>,
   name: string,
+  index: number,
   validation: ValidationOptions
 ) {
   const extensions = initArgumentValidationsExtension(config);
   if (extensions.argumentValidations[name] == null) {
     extensions.argumentValidations[name] = [];
   }
-  extensions.argumentValidations[name]?.push(validation);
+
+  // rome-ignore lint/style/noNonNullAssertion: initialized above
+  extensions.argumentValidations[name]![index] = validation;
 }
 
 export function hasValidateExtension(type: GraphQLNamedInputType) {
@@ -92,7 +96,7 @@ export function hasArgumentValidationsExtension(type: GraphQLField<unknown, unkn
 
 export function getValidationsFromExtension(type: GraphQLInputField | GraphQLInputObjectType) {
   const extension = type.extensions as Maybe<ValidationsExtension>;
-  return extension?.validations;
+  return extension?.validations?.filter((opt) => opt != null);
 }
 
 export function getArgumentValidationsFromExtensions(
@@ -100,5 +104,5 @@ export function getArgumentValidationsFromExtensions(
   name: string
 ) {
   const extension = type.extensions as Maybe<ArgumentValidationsExtension>;
-  return extension?.argumentValidations?.[name];
+  return extension?.argumentValidations?.[name]?.filter((opt) => opt != null);
 }

@@ -118,7 +118,7 @@ async function verifyAndScopes(
 export async function verifyScopes(
   ctx: unknown,
   scopes: ScopeRules | undefined,
-  rule: LogicRule = '$or',
+  rule: LogicRule,
   parentPath: string
 ): Promise<true> {
   if (scopes == null) {

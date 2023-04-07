@@ -2055,9 +2055,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/cloudflare-subscriptions@workspace:^, @baeta/cloudflare-subscriptions@workspace:packages/cloudflare-subscriptions":
+"@baeta/cloudflare-subscriptions@workspace:^, @baeta/cloudflare-subscriptions@workspace:packages/subscriptions-cloudflare":
   version: 0.0.0-use.local
-  resolution: "@baeta/cloudflare-subscriptions@workspace:packages/cloudflare-subscriptions"
+  resolution: "@baeta/cloudflare-subscriptions@workspace:packages/subscriptions-cloudflare"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"

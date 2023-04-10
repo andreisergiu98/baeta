@@ -1,5 +1,11 @@
 # @baeta/plugin-graphql
 
+## 0.0.21
+
+### Patch Changes
+
+- [#52](https://github.com/andreisergiu98/baeta/pull/52) [`d88cca7`](https://github.com/andreisergiu98/baeta/commit/d88cca7c271ce99e6296396e2ada5e3a905f886a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
 ## 0.0.20
 
 ### Patch Changes

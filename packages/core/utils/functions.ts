@@ -30,13 +30,3 @@ export function extendFunction<B extends Function, M extends {}>(fn: B, ext: M):
 
   return fnExtended;
 }
-
-export function chainFunctions(funcs: Function[]) {
-  if (funcs.length === 1) {
-    return funcs[0];
-  }
-
-  return funcs.reduce((a, b) => {
-    return (...args: unknown[]) => a(b(...args));
-  });
-}

@@ -1965,7 +1965,7 @@ __metadata:
   dependencies:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.15.11
-    esbuild: ^0.17.15
+    esbuild: ^0.17.16
     esbuild-register: ^3.4.2
     tsup: ^6.7.0
     typescript: ^4.9.5
@@ -1985,7 +1985,7 @@ __metadata:
     "@baeta/plugin-graphql": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.15.11
-    "@types/react": ^17.0.56
+    "@types/react": ^17.0.57
     "@types/yargs": ^17.0.24
     ansi-styles: ^6.2.1
     chokidar: ^3.5.3
@@ -2016,7 +2016,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": ^18.15.11
-    esbuild: ^0.17.15
+    esbuild: ^0.17.16
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -2030,11 +2030,8 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/schema": ^9.0.17
     "@graphql-tools/utils": ^9.2.1
-    "@types/ramda": ^0.28.23
     ava: ^5.2.0
     graphql: ^16.6.0
-    graphql-subscriptions: ^2.0.0
-    ramda: ^0.29.0
     typescript: ^4.9.5
   peerDependencies:
     graphql: ^16.6.0
@@ -2191,12 +2188,12 @@ __metadata:
     "@graphql-tools/apollo-engine-loader": ^7.3.26
     "@graphql-tools/code-file-loader": ^7.3.21
     "@graphql-tools/git-loader": ^7.2.20
-    "@graphql-tools/github-loader": ^7.3.27
+    "@graphql-tools/github-loader": ^7.3.28
     "@graphql-tools/graphql-file-loader": ^7.5.16
     "@graphql-tools/json-file-loader": ^7.4.17
     "@graphql-tools/load": ^7.8.13
-    "@graphql-tools/prisma-loader": ^7.2.66
-    "@graphql-tools/url-loader": ^7.17.14
+    "@graphql-tools/prisma-loader": ^7.2.69
+    "@graphql-tools/url-loader": ^7.17.17
     "@graphql-tools/utils": ^9.2.1
     "@types/node": ^18.15.11
     "@types/parse-filepath": 1.0.0
@@ -2267,13 +2264,13 @@ __metadata:
     "@docusaurus/types": ^2.4.0
     "@mdx-js/react": ^1.6.22
     clsx: ^1.2.1
-    esbuild: ^0.17.15
+    esbuild: ^0.17.16
     esbuild-loader: ^3.0.1
     prism-react-renderer: ^1.3.5
     react: ^17.0.2
     react-dom: ^17.0.2
     typescript: ^4.9.5
-    webpack: ^5.77.0
+    webpack: ^5.78.0
   languageName: unknown
   linkType: soft
 
@@ -3075,9 +3072,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/android-arm64@npm:0.17.15"
+"@esbuild/android-arm64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/android-arm64@npm:0.17.16"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -3089,9 +3086,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/android-arm@npm:0.17.15"
+"@esbuild/android-arm@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/android-arm@npm:0.17.16"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
@@ -3103,9 +3100,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/android-x64@npm:0.17.15"
+"@esbuild/android-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/android-x64@npm:0.17.16"
   conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
@@ -3117,9 +3114,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-arm64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/darwin-arm64@npm:0.17.15"
+"@esbuild/darwin-arm64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/darwin-arm64@npm:0.17.16"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -3131,9 +3128,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/darwin-x64@npm:0.17.15"
+"@esbuild/darwin-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/darwin-x64@npm:0.17.16"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -3145,9 +3142,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-arm64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/freebsd-arm64@npm:0.17.15"
+"@esbuild/freebsd-arm64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/freebsd-arm64@npm:0.17.16"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -3159,9 +3156,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/freebsd-x64@npm:0.17.15"
+"@esbuild/freebsd-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/freebsd-x64@npm:0.17.16"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
@@ -3173,9 +3170,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-arm64@npm:0.17.15"
+"@esbuild/linux-arm64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-arm64@npm:0.17.16"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
@@ -3187,9 +3184,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-arm@npm:0.17.15"
+"@esbuild/linux-arm@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-arm@npm:0.17.16"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -3201,9 +3198,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ia32@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-ia32@npm:0.17.15"
+"@esbuild/linux-ia32@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-ia32@npm:0.17.16"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
@@ -3215,9 +3212,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-loong64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-loong64@npm:0.17.15"
+"@esbuild/linux-loong64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-loong64@npm:0.17.16"
   conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
@@ -3229,9 +3226,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-mips64el@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-mips64el@npm:0.17.15"
+"@esbuild/linux-mips64el@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-mips64el@npm:0.17.16"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
@@ -3243,9 +3240,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ppc64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-ppc64@npm:0.17.15"
+"@esbuild/linux-ppc64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-ppc64@npm:0.17.16"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
@@ -3257,9 +3254,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-riscv64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-riscv64@npm:0.17.15"
+"@esbuild/linux-riscv64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-riscv64@npm:0.17.16"
   conditions: os=linux & cpu=riscv64
   languageName: node
   linkType: hard
@@ -3271,9 +3268,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-s390x@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-s390x@npm:0.17.15"
+"@esbuild/linux-s390x@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-s390x@npm:0.17.16"
   conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
@@ -3285,9 +3282,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/linux-x64@npm:0.17.15"
+"@esbuild/linux-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/linux-x64@npm:0.17.16"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -3299,9 +3296,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/netbsd-x64@npm:0.17.15"
+"@esbuild/netbsd-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/netbsd-x64@npm:0.17.16"
   conditions: os=netbsd & cpu=x64
   languageName: node
   linkType: hard
@@ -3313,9 +3310,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/openbsd-x64@npm:0.17.15"
+"@esbuild/openbsd-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/openbsd-x64@npm:0.17.16"
   conditions: os=openbsd & cpu=x64
   languageName: node
   linkType: hard
@@ -3327,9 +3324,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/sunos-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/sunos-x64@npm:0.17.15"
+"@esbuild/sunos-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/sunos-x64@npm:0.17.16"
   conditions: os=sunos & cpu=x64
   languageName: node
   linkType: hard
@@ -3341,9 +3338,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-arm64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/win32-arm64@npm:0.17.15"
+"@esbuild/win32-arm64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/win32-arm64@npm:0.17.16"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -3355,9 +3352,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-ia32@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/win32-ia32@npm:0.17.15"
+"@esbuild/win32-ia32@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/win32-ia32@npm:0.17.16"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
@@ -3369,9 +3366,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-x64@npm:0.17.15":
-  version: 0.17.15
-  resolution: "@esbuild/win32-x64@npm:0.17.15"
+"@esbuild/win32-x64@npm:0.17.16":
+  version: 0.17.16
+  resolution: "@esbuild/win32-x64@npm:0.17.16"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -3520,12 +3517,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/delegate@npm:9.0.28, @graphql-tools/delegate@npm:^9.0.27":
-  version: 9.0.28
-  resolution: "@graphql-tools/delegate@npm:9.0.28"
+"@graphql-tools/delegate@npm:9.0.30, @graphql-tools/delegate@npm:^9.0.30":
+  version: 9.0.30
+  resolution: "@graphql-tools/delegate@npm:9.0.30"
   dependencies:
     "@graphql-tools/batch-execute": ^8.5.18
-    "@graphql-tools/executor": ^0.0.15
+    "@graphql-tools/executor": ^0.0.16
     "@graphql-tools/schema": ^9.0.16
     "@graphql-tools/utils": ^9.2.1
     dataloader: ^2.2.2
@@ -3533,28 +3530,28 @@ __metadata:
     value-or-promise: ^1.0.12
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: e24c757ea15a2b654268194bbf76188fca6692486d1b019b0ad7d48c264f92b7b681a43c8a8355ace48a29f9dd566c20e8707b6cef281331a813f23ee1c94375
+  checksum: cae1924584ecc7e0472486dd69c0b6fa04688c9eb43cb48265fc76cb835e3c578894e7743260e669a863ff0b6be9df8cf41bd0f89381c29d233d77ab396dd1ad
   languageName: node
   linkType: hard
 
-"@graphql-tools/executor-graphql-ws@npm:^0.0.12":
-  version: 0.0.12
-  resolution: "@graphql-tools/executor-graphql-ws@npm:0.0.12"
+"@graphql-tools/executor-graphql-ws@npm:^0.0.13":
+  version: 0.0.13
+  resolution: "@graphql-tools/executor-graphql-ws@npm:0.0.13"
   dependencies:
     "@graphql-tools/utils": 9.2.1
     "@repeaterjs/repeater": 3.0.4
     "@types/ws": ^8.0.0
-    graphql-ws: 5.12.0
+    graphql-ws: 5.12.1
     isomorphic-ws: 5.0.0
     tslib: ^2.4.0
-    ws: 8.12.1
+    ws: 8.13.0
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 017f970c19e843c24da9f2b2cf45b5d922f5652b05e34c69fb27c3882618c8cc6a6ee008d4e767c1e74b2ba8630147ec8c7821996ff0eb1724f15dc27b95d1fd
+  checksum: 812964341b593b5e1ca1f2ceef9982dfe753fe79a018989b4d2358785346f2646b6575ba9ce8f116a0d3f8d3322cd85b351a5ac2e9389727b82d621c1892aef8
   languageName: node
   linkType: hard
 
-"@graphql-tools/executor-http@npm:^0.1.7":
+"@graphql-tools/executor-http@npm:^0.1.7, @graphql-tools/executor-http@npm:^0.1.9":
   version: 0.1.9
   resolution: "@graphql-tools/executor-http@npm:0.1.9"
   dependencies:
@@ -3572,33 +3569,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/executor-legacy-ws@npm:^0.0.9":
-  version: 0.0.9
-  resolution: "@graphql-tools/executor-legacy-ws@npm:0.0.9"
+"@graphql-tools/executor-legacy-ws@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@graphql-tools/executor-legacy-ws@npm:0.0.10"
   dependencies:
     "@graphql-tools/utils": 9.2.1
     "@types/ws": ^8.0.0
     isomorphic-ws: 5.0.0
     tslib: ^2.4.0
-    ws: 8.12.1
+    ws: 8.13.0
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 9f35a38d1e064d4c82eee8d91d0b12552f75b65a413e1defc3831c726c6304f26b3651d3bd26aff3f58e049e40639ddf9b27f681a8bc49fdf11fb693e0d05392
+  checksum: 13e648675dfdcda95454a37fe1a0db9b726d5bf9584f84a214307a2ff370078290c4d24595b384194dcbdaafcb2055d6337ab6ab60191a9e51a265ef7ef2acb1
   languageName: node
   linkType: hard
 
-"@graphql-tools/executor@npm:^0.0.15":
-  version: 0.0.15
-  resolution: "@graphql-tools/executor@npm:0.0.15"
+"@graphql-tools/executor@npm:^0.0.16":
+  version: 0.0.16
+  resolution: "@graphql-tools/executor@npm:0.0.16"
   dependencies:
     "@graphql-tools/utils": 9.2.1
-    "@graphql-typed-document-node/core": 3.1.2
+    "@graphql-typed-document-node/core": 3.2.0
     "@repeaterjs/repeater": 3.0.4
     tslib: ^2.4.0
     value-or-promise: 1.0.12
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 7a963d6fcd00bd9c2a42f35a33bc9178576a1eeac755ce69981aa1e2c61238953b7ab9c11ffcfc86e49fdcf4fc057698c6f7169d6be580298e286076276b1295
+  checksum: e91dfd6338a137a0e29619723fcf3da2651a70447689869ee77fb951323c4df3d78aecc0e92682893efbba3fabacdb89fe8f65936a6da75a09b885cab6c05a47
   languageName: node
   linkType: hard
 
@@ -3618,18 +3615,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/github-loader@npm:^7.3.27":
-  version: 7.3.27
-  resolution: "@graphql-tools/github-loader@npm:7.3.27"
+"@graphql-tools/github-loader@npm:^7.3.28":
+  version: 7.3.28
+  resolution: "@graphql-tools/github-loader@npm:7.3.28"
   dependencies:
     "@ardatan/sync-fetch": ^0.0.1
+    "@graphql-tools/executor-http": ^0.1.9
     "@graphql-tools/graphql-tag-pluck": ^7.4.6
     "@graphql-tools/utils": ^9.2.1
     "@whatwg-node/fetch": ^0.8.0
     tslib: ^2.4.0
+    value-or-promise: ^1.0.12
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 467d5c9f0df5a26656dbd5939768335277eb25023331a359fd4748c2cd85de85affe8d7ac93ac9d51202ed208c54357561e32e2520fae28fdbc42dda72dd99f4
+  checksum: 1ef168d72b0615e5e05408794fef549e841c399a12b7074ae4764fee28d145aebdf50ba573f0695159edced626f5757b7825be2b246c437bbdf5457aeff13e5b
   languageName: node
   linkType: hard
 
@@ -3740,11 +3739,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/prisma-loader@npm:^7.2.66":
-  version: 7.2.66
-  resolution: "@graphql-tools/prisma-loader@npm:7.2.66"
+"@graphql-tools/prisma-loader@npm:^7.2.69":
+  version: 7.2.69
+  resolution: "@graphql-tools/prisma-loader@npm:7.2.69"
   dependencies:
-    "@graphql-tools/url-loader": 7.17.14
+    "@graphql-tools/url-loader": 7.17.17
     "@graphql-tools/utils": 9.2.1
     "@types/js-yaml": ^4.0.0
     "@types/json-stable-stringify": ^1.0.32
@@ -3764,7 +3763,7 @@ __metadata:
     yaml-ast-parser: ^0.0.43
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: fa3cd1f9357fcfb5a82cbc04664eab0a3dbaaaf2e1cb14dc3f2966445999b9fb347cf7d9e6f11fef2f87971454c6cf9dd5641f274814ab7e2cccf501158f2169
+  checksum: bea7effa896f68ce568f6bbc872c411132e94227e42aa637a356a608684fa1ca015fe87ce77025d6380cebb754487ddb8a56a615dee0f652e5359f9aded4c60e
   languageName: node
   linkType: hard
 
@@ -3809,17 +3808,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/url-loader@npm:7.17.14, @graphql-tools/url-loader@npm:^7.17.14":
-  version: 7.17.14
-  resolution: "@graphql-tools/url-loader@npm:7.17.14"
+"@graphql-tools/url-loader@npm:7.17.17, @graphql-tools/url-loader@npm:^7.17.17":
+  version: 7.17.17
+  resolution: "@graphql-tools/url-loader@npm:7.17.17"
   dependencies:
     "@ardatan/sync-fetch": ^0.0.1
-    "@graphql-tools/delegate": ^9.0.27
-    "@graphql-tools/executor-graphql-ws": ^0.0.12
+    "@graphql-tools/delegate": ^9.0.30
+    "@graphql-tools/executor-graphql-ws": ^0.0.13
     "@graphql-tools/executor-http": ^0.1.7
-    "@graphql-tools/executor-legacy-ws": ^0.0.9
+    "@graphql-tools/executor-legacy-ws": ^0.0.10
     "@graphql-tools/utils": ^9.2.1
-    "@graphql-tools/wrap": ^9.3.8
+    "@graphql-tools/wrap": ^9.4.1
     "@types/ws": ^8.0.0
     "@whatwg-node/fetch": ^0.8.0
     isomorphic-ws: ^5.0.0
@@ -3828,7 +3827,7 @@ __metadata:
     ws: ^8.12.0
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: a9473c0d49299d4807c5ab881407b7e96989a06cc583bddd34eb059295fd847df982bf95b82fc713150ac60fe1ccdd1db78bc17e3903db44684b5cce0f7cb82a
+  checksum: daf1357dafc8d5175b6886b116a574c09c4914e2f04858cf6da289955a51fb8b5a323ecbfe7af63d4921ada1a2f5c83cfdeb0297eca3f48082967b984b4adcdf
   languageName: node
   linkType: hard
 
@@ -3844,22 +3843,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/wrap@npm:^9.3.8":
-  version: 9.3.8
-  resolution: "@graphql-tools/wrap@npm:9.3.8"
+"@graphql-tools/wrap@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "@graphql-tools/wrap@npm:9.4.1"
   dependencies:
-    "@graphql-tools/delegate": 9.0.28
+    "@graphql-tools/delegate": 9.0.30
     "@graphql-tools/schema": 9.0.17
     "@graphql-tools/utils": 9.2.1
     tslib: ^2.4.0
     value-or-promise: 1.0.12
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 1f280b939f1c8c33be8fbd92c0584e9125e30c59ce6f75f20657235d24e5a2c01eb3214eda9ae74d431d9da072cdfa6cedeafdc5b352dd33de439ba42402efcb
+  checksum: a1ef937190058b7457abbc56ef35180a078b0581c8160e83f045ef61deabf6d84f6f278fb628160c357c14908c8ba28ad01b96107fc0c81674cea4b6dfa29112
   languageName: node
   linkType: hard
 
-"@graphql-typed-document-node/core@npm:3.1.2, @graphql-typed-document-node/core@npm:^3.1.1":
+"@graphql-typed-document-node/core@npm:3.2.0":
+  version: 3.2.0
+  resolution: "@graphql-typed-document-node/core@npm:3.2.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: fa44443accd28c8cf4cb96aaaf39d144a22e8b091b13366843f4e97d19c7bfeaf609ce3c7603a4aeffe385081eaf8ea245d078633a7324c11c5ec4b2011bb76d
+  languageName: node
+  linkType: hard
+
+"@graphql-typed-document-node/core@npm:^3.1.1":
   version: 3.1.2
   resolution: "@graphql-typed-document-node/core@npm:3.1.2"
   peerDependencies:
@@ -4896,15 +4904,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:^0.28.23":
-  version: 0.28.23
-  resolution: "@types/ramda@npm:0.28.23"
-  dependencies:
-    ts-toolbelt: ^6.15.1
-  checksum: 61d7416c0f4f189c6524e093c7546ca2f159553e54d7933836d46aac1332611aa7b02fd8c8bfa98c0865f262fd9e99e06e3d9538deba0bab1f6153cbcf841160
-  languageName: node
-  linkType: hard
-
 "@types/range-parser@npm:*":
   version: 1.2.4
   resolution: "@types/range-parser@npm:1.2.4"
@@ -4955,14 +4954,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.56":
-  version: 17.0.56
-  resolution: "@types/react@npm:17.0.56"
+"@types/react@npm:^17.0.57":
+  version: 17.0.57
+  resolution: "@types/react@npm:17.0.57"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: c9e156395c5b97407ae51886659c2ba16a8e62d4fad8ceb29293f76931b58de42a385a179b32da725e72cd04d74c2d60e54cd495c8815b4feee2e4da381b7e52
+  checksum: c6cb8d6d261fbdc2650e00260efaf0c0a241ca72f22a43e96f32f7ab0379e5e1522f4936b6d8f97c0d8793a4fd949a90e863daa2449824f7586903cc4d299d92
   languageName: node
   linkType: hard
 
@@ -8312,32 +8311,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.17.15":
-  version: 0.17.15
-  resolution: "esbuild@npm:0.17.15"
+"esbuild@npm:^0.17.16":
+  version: 0.17.16
+  resolution: "esbuild@npm:0.17.16"
   dependencies:
-    "@esbuild/android-arm": 0.17.15
-    "@esbuild/android-arm64": 0.17.15
-    "@esbuild/android-x64": 0.17.15
-    "@esbuild/darwin-arm64": 0.17.15
-    "@esbuild/darwin-x64": 0.17.15
-    "@esbuild/freebsd-arm64": 0.17.15
-    "@esbuild/freebsd-x64": 0.17.15
-    "@esbuild/linux-arm": 0.17.15
-    "@esbuild/linux-arm64": 0.17.15
-    "@esbuild/linux-ia32": 0.17.15
-    "@esbuild/linux-loong64": 0.17.15
-    "@esbuild/linux-mips64el": 0.17.15
-    "@esbuild/linux-ppc64": 0.17.15
-    "@esbuild/linux-riscv64": 0.17.15
-    "@esbuild/linux-s390x": 0.17.15
-    "@esbuild/linux-x64": 0.17.15
-    "@esbuild/netbsd-x64": 0.17.15
-    "@esbuild/openbsd-x64": 0.17.15
-    "@esbuild/sunos-x64": 0.17.15
-    "@esbuild/win32-arm64": 0.17.15
-    "@esbuild/win32-ia32": 0.17.15
-    "@esbuild/win32-x64": 0.17.15
+    "@esbuild/android-arm": 0.17.16
+    "@esbuild/android-arm64": 0.17.16
+    "@esbuild/android-x64": 0.17.16
+    "@esbuild/darwin-arm64": 0.17.16
+    "@esbuild/darwin-x64": 0.17.16
+    "@esbuild/freebsd-arm64": 0.17.16
+    "@esbuild/freebsd-x64": 0.17.16
+    "@esbuild/linux-arm": 0.17.16
+    "@esbuild/linux-arm64": 0.17.16
+    "@esbuild/linux-ia32": 0.17.16
+    "@esbuild/linux-loong64": 0.17.16
+    "@esbuild/linux-mips64el": 0.17.16
+    "@esbuild/linux-ppc64": 0.17.16
+    "@esbuild/linux-riscv64": 0.17.16
+    "@esbuild/linux-s390x": 0.17.16
+    "@esbuild/linux-x64": 0.17.16
+    "@esbuild/netbsd-x64": 0.17.16
+    "@esbuild/openbsd-x64": 0.17.16
+    "@esbuild/sunos-x64": 0.17.16
+    "@esbuild/win32-arm64": 0.17.16
+    "@esbuild/win32-ia32": 0.17.16
+    "@esbuild/win32-x64": 0.17.16
   dependenciesMeta:
     "@esbuild/android-arm":
       optional: true
@@ -8385,7 +8384,7 @@ __metadata:
       optional: true
   bin:
     esbuild: bin/esbuild
-  checksum: 4e3640d7bc8f6edb3465c076eb519ccb7684382714a1b883e000a7a592f8e285501ec7e82cb68441dfec8f7be7f70f40b00129ceb05057f6fa87f95d2187370a
+  checksum: c9787d8e05b9c4f762761be31a7847b5b4492b9b997808b7098479fef9a3260f1b8ca01e9b38376b6698f4394bfe088acb4f797a697b45b965cd664e103aafa7
   languageName: node
   linkType: hard
 
@@ -9540,16 +9539,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-ws@npm:5.12.0":
-  version: 5.12.0
-  resolution: "graphql-ws@npm:5.12.0"
-  peerDependencies:
-    graphql: ">=0.11 <=16"
-  checksum: 5c683e2d5bdadfcfec0639eda69b8a66ef275e68e64f662bd75da6779a87b34395cbce8e37cb66830a9febca1871f7dc2575e6814f6f6e899904fe72e245f216
-  languageName: node
-  linkType: hard
-
-"graphql-ws@npm:^5.12.1":
+"graphql-ws@npm:5.12.1, graphql-ws@npm:^5.12.1":
   version: 5.12.1
   resolution: "graphql-ws@npm:5.12.1"
   peerDependencies:
@@ -13534,13 +13524,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ramda@npm:^0.29.0":
-  version: 0.29.0
-  resolution: "ramda@npm:0.29.0"
-  checksum: 9ab26c06eb7545cbb7eebcf75526d6ee2fcaae19e338f165b2bf32772121e7b28192d6664d1ba222ff76188ba26ab307342d66e805dbb02c860560adc4d5dd57
-  languageName: node
-  linkType: hard
-
 "randombytes@npm:^2.1.0":
   version: 2.1.0
   resolution: "randombytes@npm:2.1.0"
@@ -15669,13 +15652,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-toolbelt@npm:^6.15.1":
-  version: 6.15.5
-  resolution: "ts-toolbelt@npm:6.15.5"
-  checksum: 24ad00cfd9ce735c76c873a9b1347eac475b94e39ebbdf100c9019dce88dd5f4babed52884cf82bb456a38c28edd0099ab6f704b84b2e5e034852b618472c1f3
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:^2.5.0, tslib@npm:~2.5.0":
   version: 2.5.0
   resolution: "tslib@npm:2.5.0"
@@ -16552,9 +16528,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.77.0":
-  version: 5.77.0
-  resolution: "webpack@npm:5.77.0"
+"webpack@npm:^5.78.0":
+  version: 5.78.0
+  resolution: "webpack@npm:5.78.0"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^0.0.51
@@ -16585,7 +16561,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 21341bb72cbbf61dfb3af91eabe9290a6c05139f268eff3c419e5339deb6c79f2f36de55d9abf017d3ccbad290a535c02325001b2816acc393f3c022e67ac17c
+  checksum: 4213e5bcc23e54c2f2a589e8e96f1fb71a2c05d5033ffda6dd8bae32284abfa0eb6b6d0707806e8dcfa48a8fcda2448d3af6c4539061679251d94c0996bebf99
   languageName: node
   linkType: hard
 
@@ -16818,9 +16794,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:8.12.1, ws@npm:^8.12.0, ws@npm:^8.4.2":
-  version: 8.12.1
-  resolution: "ws@npm:8.12.1"
+"ws@npm:8.13.0, ws@npm:^8.13.0":
+  version: 8.13.0
+  resolution: "ws@npm:8.13.0"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ">=5.0.2"
@@ -16829,7 +16805,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 97301c1c4d838fc81bd413f370f75c12aabe44527b31323b761eab3043a9ecb7e32ffd668548382c9a6a5ad3a1c3a9249608e8338e6b939f2f9540f1e21970b5
+  checksum: 53e991bbf928faf5dc6efac9b8eb9ab6497c69feeb94f963d648b7a3530a720b19ec2e0ec037344257e05a4f35bd9ad04d9de6f289615ffb133282031b18c61c
   languageName: node
   linkType: hard
 
@@ -16848,9 +16824,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.13.0":
-  version: 8.13.0
-  resolution: "ws@npm:8.13.0"
+"ws@npm:^8.12.0, ws@npm:^8.4.2":
+  version: 8.12.1
+  resolution: "ws@npm:8.12.1"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ">=5.0.2"
@@ -16859,7 +16835,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 53e991bbf928faf5dc6efac9b8eb9ab6497c69feeb94f963d648b7a3530a720b19ec2e0ec037344257e05a4f35bd9ad04d9de6f289615ffb133282031b18c61c
+  checksum: 97301c1c4d838fc81bd413f370f75c12aabe44527b31323b761eab3043a9ecb7e32ffd668548382c9a6a5ad3a1c3a9249608e8338e6b939f2f9540f1e21970b5
   languageName: node
   linkType: hard
 

@@ -38,7 +38,7 @@ export function createContextStore<T, Context = unknown>(
       loader,
     };
 
-    if (lazy) {
+    if (!lazy) {
       value.promise = loader();
     }
 

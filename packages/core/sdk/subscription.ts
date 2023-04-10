@@ -1,6 +1,5 @@
 import { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
-import { FilterFn, ResolverFn, withFilter } from 'graphql-subscriptions';
-import { Subscribe, SubscribeFilter, SubscribeResolve, Subscription } from '../lib/subscription';
+import { Subscribe, SubscribeResolve, Subscription } from '../lib/subscription';
 
 export type NativeSubscribe<Payload = any, Result = any, Root = any, Context = any, Args = any> = {
   subscribe: (
@@ -16,7 +15,7 @@ export function createSubscriptionAdapter<Payload, Result, Root, Context, Args>(
   subscription: Subscription<Payload, Result, Root, Context, Args>
 ) {
   const resolver: NativeSubscribe = {
-    subscribe: createSubscribeAdapter(subscription.subscribe, subscription.filter),
+    subscribe: createSubscribeAdapter(subscription.subscribe),
   };
 
   if (subscription.resolve != null) {
@@ -27,10 +26,9 @@ export function createSubscriptionAdapter<Payload, Result, Root, Context, Args>(
 }
 
 function createSubscribeAdapter<Payload, Root, Context, Args>(
-  subscribe: Subscribe<Payload, Root, Context, Args>,
-  filter?: SubscribeFilter<Payload, Context, Args>
+  subscribe: Subscribe<Payload, Root, Context, Args>
 ) {
-  const adapter: ResolverFn = (root, args, context, info) => {
+  const adapter: NativeSubscribe['subscribe'] = (root, args, context, info) => {
     const params = {
       root,
       args,
@@ -40,25 +38,7 @@ function createSubscribeAdapter<Payload, Root, Context, Args>(
     return subscribe(params);
   };
 
-  if (filter == null) {
-    return adapter;
-  }
-
-  return withFilter(adapter, createFilterAdapter(filter));
-}
-
-function createFilterAdapter<Payload, Context, Args>(
-  filter: SubscribeFilter<Payload, Context, Args>
-): FilterFn {
-  return function adapter(payload, args, context, info) {
-    const params = {
-      payload,
-      args,
-      info,
-      ctx: context,
-    };
-    return filter(params);
-  };
+  return adapter;
 }
 
 function createResolverAdapter<Payload, Result, Context, Args>(

@@ -56,12 +56,10 @@ export class ModuleBuilder {
 
     const subscribeField = `${field}.subscribe`;
     const resolveField = `${field}.resolve`;
-    const filterField = `${field}.filter`;
 
     const builder = <Payload>(subscription: Subscription<Payload, Result, Root, Context, Args>) => {
       nameFunction(subscription.subscribe, subscribeField);
       nameFunction(subscription.resolve, resolveField);
-      nameFunction(subscription.filter, filterField);
       this.mapper.setSubscription(field, createSubscriptionAdapter(subscription));
     };
 

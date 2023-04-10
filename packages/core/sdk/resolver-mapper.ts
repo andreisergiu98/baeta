@@ -1,4 +1,3 @@
-import { IResolvers } from '@graphql-tools/utils';
 import { defaultFieldResolver, GraphQLFieldResolver } from 'graphql';
 import { ScalarResolver } from '../lib';
 import { composeResolvers, ResolversComposerMapping } from './compose';
@@ -38,11 +37,33 @@ export class ResolverMapper {
   }
 
   addMiddleware(type: string, field: string, middleware: NativeMiddleware, unshift = false) {
+    if (type === '*') {
+      const types = Object.keys(this.typeFields);
+
+      for (const t of types) {
+        this.addMiddleware(t, field, middleware, unshift);
+      }
+
+      return;
+    }
+
+    if (field === '*') {
+      const fields = this.typeFields[type];
+
+      for (const field of fields) {
+        this.addMiddleware(type, field, middleware, unshift);
+      }
+
+      return;
+    }
+
     const key = `${type}.${field}`;
+
     if (this.middlewares[key] == null) {
       this.middlewares[key] = [];
     }
-    this.setDefaultResolvers(type, field);
+
+    this.setDefaultFieldResolver(type, field);
 
     if (unshift) {
       this.middlewares[key].unshift(middleware);
@@ -52,10 +73,15 @@ export class ResolverMapper {
   }
 
   setDefaultFieldResolver(type: string, field: string) {
+    if (['Query', 'Mutation', 'Subscription'].includes(type)) {
+      return;
+    }
+
     const typeResolvers = this.resolvers[type] as FieldResolvers | undefined;
     if (typeResolvers?.[field] != null) {
       return;
     }
+
     this.setResolver(type, field, defaultFieldResolver);
   }
 
@@ -72,20 +98,6 @@ export class ResolverMapper {
   }
 
   compose() {
-    return composeResolvers(this.resolvers, this.middlewares) as IResolvers;
-  }
-
-  private setDefaultResolvers(type: string, field: string) {
-    if (['Query', 'Mutation', 'Subscription'].includes(type)) {
-      return;
-    }
-
-    if (field !== '*') {
-      return this.setDefaultFieldResolver(type, field);
-    }
-
-    for (const field of this.typeFields[type]) {
-      this.setDefaultFieldResolver(type, field);
-    }
+    return composeResolvers(this.resolvers, this.middlewares);
   }
 }

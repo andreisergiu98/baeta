@@ -1,5 +1,6 @@
 import { getDirectives, MapperKind, mapSchema } from '@graphql-tools/utils';
 import { GraphQLSchema } from 'graphql';
+import { createObjectLens } from '../../utils/object';
 import {
   addArgumentValidationsExtension,
   addValidationsExtension,
@@ -19,42 +20,17 @@ export type ValidationDirectiveFn<DirectiveConfig = Record<string, unknown>, Con
   params: ValidationDirectiveFnParams<DirectiveConfig, Context>
 ) => void;
 
-function getObjectSelector(args: Record<string, unknown>, path: Array<string | number>) {
-  const i = 0;
-  let key: string | number = path[0];
-  let obj: Record<string, unknown> = args;
-
-  for (let i = 1; i < path.length; i++) {
-    obj = obj[key] as Record<string, unknown>;
-    key = path[i];
-  }
-
-  if (key == null) {
-    return;
-  }
-
-  const get = () => {
-    return obj[key];
-  };
-
-  const set = (newValue: unknown) => {
-    obj[key] = newValue;
-  };
-
-  return { get, set };
-}
-
 function createMutateValueFn(args: Record<string, unknown>, path: Array<string | number>) {
   return (newValue: unknown) => {
-    const selector = getObjectSelector(args, path);
-    selector?.set(newValue);
+    const lens = createObjectLens(args, path);
+    lens.set(newValue);
   };
 }
 
 function createGetValueFn(args: Record<string, unknown>, path: Array<string | number>) {
   return () => {
-    const selector = getObjectSelector(args, path);
-    return selector?.get();
+    const lens = createObjectLens(args, path);
+    return lens.get();
   };
 }
 

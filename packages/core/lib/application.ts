@@ -8,7 +8,6 @@ type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'r
 export interface Options {
   modules: Record<string, unknown>[];
   pruneSchema?: boolean;
-  printSchema?: boolean | string;
   executableSchemaOptions?: ExecutableSchemaOptions;
 }
 

@@ -1,5 +1,15 @@
 # @baeta/core
 
+## 0.0.27
+
+### Patch Changes
+
+- [#52](https://github.com/andreisergiu98/baeta/pull/52) [`d88cca7`](https://github.com/andreisergiu98/baeta/commit/d88cca7c271ce99e6296396e2ada5e3a905f886a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix lazy loading of ctx store
+
+- [#52](https://github.com/andreisergiu98/baeta/pull/52) [`d88cca7`](https://github.com/andreisergiu98/baeta/commit/d88cca7c271ce99e6296396e2ada5e3a905f886a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#52](https://github.com/andreisergiu98/baeta/pull/52) [`d88cca7`](https://github.com/andreisergiu98/baeta/commit/d88cca7c271ce99e6296396e2ada5e3a905f886a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - simplify middleware glob
+
 ## 0.0.26
 
 ### Patch Changes

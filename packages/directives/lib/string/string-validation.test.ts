@@ -4,7 +4,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import test from 'ava';
 import { execute, GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
-import { stringValidation } from '../lib/string/string-validation';
+import { stringValidation } from '../string/string-validation';
 
 const typeDefs = `
     ${stringValidation.sdl}

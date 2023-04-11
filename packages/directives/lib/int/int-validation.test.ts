@@ -4,7 +4,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import test from 'ava';
 import { execute, GraphQLError } from 'graphql';
 import { gql } from 'graphql-tag';
-import { intValidation } from '../lib/int/int-validation';
+import { intValidation } from '../int/int-validation';
 
 const typeDefs = `
     ${intValidation.sdl}

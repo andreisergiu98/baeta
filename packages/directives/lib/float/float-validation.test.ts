@@ -4,7 +4,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import test from 'ava';
 import { execute, GraphQLError } from 'graphql';
 import { gql } from 'graphql-tag';
-import { floatValidation } from '../lib/float/float-validation';
+import { floatValidation } from '../float/float-validation';
 
 const typeDefs = `
     ${floatValidation.sdl}

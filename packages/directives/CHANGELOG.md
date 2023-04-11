@@ -1,5 +1,11 @@
 # @baeta/directives
 
+## 0.0.4
+
+### Patch Changes
+
+- [#54](https://github.com/andreisergiu98/baeta/pull/54) [`cd88e77`](https://github.com/andreisergiu98/baeta/commit/cd88e77f9dde512f1dc6b1aef0503d56c94d167e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix string validation
+
 ## 0.0.3
 
 ### Patch Changes

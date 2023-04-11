@@ -76,18 +76,15 @@ const directive = createInputDirective<Args>({
       throw new BadUserInput(`Value must be at least ${config.minLength} characters`);
     }
 
-    if (
-      config.startsWith != null &&
-      value.slice(0, config.startsWith.length) !== config.startsWith
-    ) {
+    if (config.startsWith != null && !value.startsWith(config.startsWith)) {
       throw new BadUserInput(`Value must start with '${config.startsWith}'`);
     }
 
-    if (config.endsWith != null && value.endsWith(config.endsWith)) {
+    if (config.endsWith != null && !value.endsWith(config.endsWith)) {
       throw new BadUserInput(`Value must end with '${config.endsWith}'`);
     }
 
-    if (config.includes != null && value.includes(config.includes)) {
+    if (config.includes != null && !value.includes(config.includes)) {
       throw new BadUserInput(`Value must include '${config.includes}'`);
     }
 

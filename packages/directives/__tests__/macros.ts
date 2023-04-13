@@ -131,3 +131,7 @@ export function makeQueryResolverMacro<T, R>(
     t.is(result.errors, undefined);
   });
 }
+
+test('pass macros', (t) => {
+  t.pass();
+});

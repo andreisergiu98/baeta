@@ -1,19 +1,10 @@
-import { IResolvers } from '@graphql-tools/utils';
-import { GraphQLFieldResolver } from 'graphql';
 import { createObjectLens } from '../utils/object';
-import { ResolversMap } from './resolver-mapper';
+import { MiddlewareMap, ResolversMap } from './resolver-mapper';
 
-export type ResolversComposition<
-  Resolver extends GraphQLFieldResolver<unknown, unknown> = GraphQLFieldResolver<unknown, unknown>
-> = (next: Resolver) => Resolver;
-
-export type ResolversComposerMapping = Record<string, ResolversComposition[]>;
-
-export function composeResolvers(resolvers: ResolversMap, mapping: ResolversComposerMapping = {}) {
-  for (const key in mapping) {
-    const fns = mapping[key];
+export function composeResolvers(resolvers: ResolversMap, middlewareMap: MiddlewareMap = {}) {
+  for (const key in middlewareMap) {
+    const fns = middlewareMap[key];
     const path = key.split('.');
-
     const lens = createObjectLens(resolvers, path);
 
     const originalResolver = lens.get();
@@ -25,11 +16,9 @@ export function composeResolvers(resolvers: ResolversMap, mapping: ResolversComp
     const createResolver = chainResolvers([...fns, () => originalResolver]);
     lens.set(createResolver());
   }
-
-  return resolvers as IResolvers;
 }
 
-function chainResolvers(funcs: Function[]) {
+export function chainResolvers(funcs: Function[]) {
   if (funcs.length === 1) {
     return funcs[0];
   }

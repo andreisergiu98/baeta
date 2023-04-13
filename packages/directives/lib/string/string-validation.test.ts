@@ -1,519 +1,399 @@
-import { addValidationToSchema } from '@baeta/core/lib/input-directive/input-schema';
-import { BaetaErrorCode } from '@baeta/errors';
-import { makeExecutableSchema } from '@graphql-tools/schema';
 import test from 'ava';
-import { execute, GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
+import {
+  makeAggregateErrorsInputMacro,
+  makeInvalidInputMacro,
+  makeValidInputMacro,
+} from '../../__tests__/macros';
 import { stringValidation } from '../string/string-validation';
 
-const typeDefs = `
-    ${stringValidation.sdl}
+const typeDefs = gql`
+  input EmailInput {
+    email: String @validString(format: EMAIL)
+  }
 
-    input EmailInput {
-        email: String @validString(format: EMAIL)
-    }
+  input UrlInput {
+    url: String @validString(format: URL)
+  }
 
-    input UrlInput {
-        url: String @validString(format: URL)
-    }
+  input UUIDInput {
+    uuid: String @validString(format: UUID)
+  }
 
-    input UUIDInput {
-        uuid: String @validString(format: UUID)
-    }
+  input MinInput {
+    min: String @validString(minLength: 3)
+  }
 
-    input MinInput {
-        min: String @validString(minLength: 3)
-    }
+  input MaxInput {
+    max: String @validString(maxLength: 3)
+  }
 
-    input MaxInput {
-        max: String @validString(maxLength: 3)
-    }
+  input StartsWithInput {
+    startsWith: String @validString(startsWith: "foo")
+  }
 
-    input StartsWithInput {
-        startsWith: String @validString(startsWith: "foo")
-    }
+  input EndsWithInput {
+    endsWith: String @validString(endsWith: "foo")
+  }
 
-    input EndsWithInput {
-        endsWith: String @validString(endsWith: "foo")
-    }
+  input IncludesInput {
+    includes: String @validString(includes: "foo")
+  }
 
-    input IncludesInput {
-        includes: String @validString(includes: "foo")
-    }
+  input RegexInput {
+    regex: String @validString(regex: "^[A-Z]+$")
+  }
 
-    input RegexInput {
-        regex: String @validString(regex: "^[A-Z]+$")
-    }
+  input RegexFlagsInput {
+    regex: String @validString(regex: "^[A-Z]+$", regexFlags: "i")
+  }
 
-    input RegexFlagsInput {
-        regex: String @validString(regex: "^[A-Z]+$", regexFlags: "i")
-    }
+  input OneOfInput {
+    oneOf: String @validString(oneOf: ["foo", "bar", "baz"])
+  }
 
-    input OneOfInput {
-        oneOf: String @validString(oneOf: ["foo", "bar", "baz"])
-    }
+  input NotOneOfInput {
+    notOneOf: String @validString(notOneOf: ["foo", "bar", "baz"])
+  }
 
-    input NotOneOfInput {
-        notOneOf: String @validString(notOneOf: ["foo", "bar", "baz"])
-    }
+  input AggregateInput {
+    min: String @validString(minLength: 3)
+    max: String @validString(maxLength: 3)
+    startsWith: String @validString(startsWith: "foo")
+    endsWith: String @validString(endsWith: "foo")
+    includes: String @validString(includes: "foo")
+    regex: String @validString(regex: "^[A-Z]+$")
+    oneOf: String @validString(oneOf: ["foo", "bar", "baz"])
+    notOneOf: String @validString(notOneOf: ["foo", "bar", "baz"])
+  }
 
-    input AggregateInput {
-        min: String @validString(minLength: 3)
-        max: String @validString(maxLength: 3)
-        startsWith: String @validString(startsWith: "foo")
-        endsWith: String @validString(endsWith: "foo")
-        includes: String @validString(includes: "foo")
-        regex: String @validString(regex: "^[A-Z]+$")
-        oneOf: String @validString(oneOf: ["foo", "bar", "baz"])
-        notOneOf: String @validString(notOneOf: ["foo", "bar", "baz"])
-    }
+  input BadTypeInput {
+    badType: Int @validString(minLength: 3)
+  }
 
-    input BadTypeInput {
-      badType: Int @validString(minLength: 3)
-    }
-
-    type Query {
-        email(input: EmailInput!): String
-        url(input: UrlInput!): String
-        uuid(input: UUIDInput!): String
-        min(input: MinInput!): String
-        max(input: MaxInput!): String
-        startsWith(input: StartsWithInput!): String
-        endsWith(input: EndsWithInput!): String
-        includes(input: IncludesInput!): String
-        regex(input: RegexInput!): String
-        regexFlags(input: RegexFlagsInput!): String
-        oneOf(input: OneOfInput!): String
-        notOneOf(input: NotOneOfInput!): String
-        aggregate(input: AggregateInput!): String
-        badType(input: BadTypeInput!): String
-    }    
+  ${stringValidation.sdl}
 `;
 
-const executableSchema = makeExecutableSchema({
-  typeDefs,
-  resolvers: {
-    Query: {
-      email: () => 'foo',
-      url: () => 'foo',
-      uuid: () => 'foo',
-      min: () => 'foo',
-      max: () => 'foo',
-      startsWith: () => 'foo',
-      endsWith: () => 'foo',
-      includes: () => 'foo',
-      regex: () => 'foo',
-      regexFlags: () => 'foo',
-      oneOf: () => 'foo',
-      notOneOf: () => 'foo',
-      aggregate: () => 'foo',
-      badType: () => 'foo',
-    },
-  },
-});
+const validInputMacro = makeValidInputMacro(typeDefs, stringValidation.directive);
+const invalidInputMacro = makeInvalidInputMacro(typeDefs, stringValidation.directive);
+const aggregateErrorMacro = makeAggregateErrorsInputMacro(typeDefs, stringValidation.directive);
 
-const schema = addValidationToSchema(stringValidation.directive(executableSchema));
+test(
+  'email',
+  validInputMacro,
+  'EmailInput!',
+  gql`
+    query {
+      value(input: { email: "test@test.com" })
+    }
+  `
+);
 
-test('email', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        email(input: { email: "test@test.com" })
-      }
-    `,
-  });
+test(
+  'url',
+  validInputMacro,
+  'UrlInput!',
+  gql`
+    query {
+      value(input: { url: "https://test.com" })
+    }
+  `
+);
 
-  t.is(result.data?.email, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'uuid',
+  validInputMacro,
+  'UUIDInput!',
+  gql`
+    query {
+      value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" })
+    }
+  `
+);
 
-test('url', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        url(input: { url: "https://test.com" })
-      }
-    `,
-  });
+test(
+  'min',
+  validInputMacro,
+  'MinInput!',
+  gql`
+    query {
+      value(input: { min: "foo" })
+    }
+  `
+);
 
-  t.is(result.data?.url, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'max',
+  validInputMacro,
+  'MaxInput!',
+  gql`
+    query {
+      value(input: { max: "foo" })
+    }
+  `
+);
 
-test('uuid', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        uuid(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" })
-      }
-    `,
-  });
+test(
+  'startsWith',
+  validInputMacro,
+  'StartsWithInput!',
+  gql`
+    query {
+      value(input: { startsWith: "foo bar" })
+    }
+  `
+);
 
-  t.is(result.data?.uuid, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'endsWith',
+  validInputMacro,
+  'EndsWithInput!',
+  gql`
+    query {
+      value(input: { endsWith: "bar foo" })
+    }
+  `
+);
 
-test('min', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        min(input: { min: "foo" })
-      }
-    `,
-  });
+test(
+  'includes',
+  validInputMacro,
+  'IncludesInput!',
+  gql`
+    query {
+      value(input: { includes: "bar foo baz" })
+    }
+  `
+);
 
-  t.is(result.data?.min, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'regex',
+  validInputMacro,
+  'RegexInput!',
+  gql`
+    query {
+      value(input: { regex: "FOO" })
+    }
+  `
+);
 
-test('max', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        max(input: { max: "foo" })
-      }
-    `,
-  });
+test(
+  'regex flags',
+  validInputMacro,
+  'RegexFlagsInput!',
+  gql`
+    query {
+      value(input: { regex: "Foo" })
+    }
+  `
+);
 
-  t.is(result.data?.max, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'oneOf',
+  validInputMacro,
+  'OneOfInput!',
+  gql`
+    query {
+      value(input: { oneOf: "foo" })
+    }
+  `
+);
 
-test('startsWith', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        startsWith(input: { startsWith: "foo bar" })
-      }
-    `,
-  });
+test(
+  'notOneOf',
+  validInputMacro,
+  'NotOneOfInput!',
+  gql`
+    query {
+      value(input: { notOneOf: "barr" })
+    }
+  `
+);
 
-  t.is(result.data?.startsWith, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'aggregate',
+  validInputMacro,
+  'AggregateInput!',
+  gql`
+    query {
+      value(
+        input: {
+          min: "foo"
+          max: "foo"
+          startsWith: "foo bar"
+          endsWith: "bar foo"
+          includes: "foo bar baz"
+          regex: "FOO"
+          oneOf: "foo"
+          notOneOf: "barr"
+        }
+      )
+    }
+  `
+);
 
-test('endsWith', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        endsWith(input: { endsWith: "bar foo" })
-      }
-    `,
-  });
+test(
+  'invalid email',
+  invalidInputMacro,
+  'EmailInput!',
+  gql`
+    query {
+      value(input: { email: "test@test" })
+    }
+  `
+);
 
-  t.is(result.data?.endsWith, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'invalid url',
+  invalidInputMacro,
+  'UrlInput!',
+  gql`
+    query {
+      value(input: { url: "https://test" })
+    }
+  `
+);
 
-test('includes', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        includes(input: { includes: "bar foo baz" })
-      }
-    `,
-  });
+test(
+  'invalid uuid',
+  invalidInputMacro,
+  'UUIDInput!',
+  gql`
+    query {
+      value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11 a" })
+    }
+  `
+);
 
-  t.is(result.data?.includes, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'invalid min',
+  invalidInputMacro,
+  'MinInput!',
+  gql`
+    query {
+      value(input: { min: "fo" })
+    }
+  `
+);
 
-test('regex', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        regex(input: { regex: "FOO" })
-      }
-    `,
-  });
+test(
+  'invalid max',
+  invalidInputMacro,
+  'MaxInput!',
+  gql`
+    query {
+      value(input: { max: "fooo" })
+    }
+  `
+);
 
-  t.is(result.data?.regex, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'invalid startsWith',
+  invalidInputMacro,
+  'StartsWithInput!',
+  gql`
+    query {
+      value(input: { startsWith: "bar foo" })
+    }
+  `
+);
 
-test('regex flags', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        regexFlags(input: { regex: "Foo" })
-      }
-    `,
-  });
+test(
+  'invalid endsWith',
+  invalidInputMacro,
+  'EndsWithInput!',
+  gql`
+    query {
+      value(input: { endsWith: "foo bar" })
+    }
+  `
+);
 
-  t.is(result.data?.regexFlags, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'invalid includes',
+  invalidInputMacro,
+  'IncludesInput!',
+  gql`
+    query {
+      value(input: { includes: "bar baz" })
+    }
+  `
+);
 
-test('oneOf', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        oneOf(input: { oneOf: "foo" })
-      }
-    `,
-  });
+test(
+  'invalid regex',
+  invalidInputMacro,
+  'RegexInput!',
+  gql`
+    query {
+      value(input: { regex: "foo" })
+    }
+  `
+);
 
-  t.is(result.data?.oneOf, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'invalid regex flags',
+  invalidInputMacro,
+  'RegexFlagsInput!',
+  gql`
+    query {
+      value(input: { regex: "Foo1" })
+    }
+  `
+);
 
-test('notOneOf', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        notOneOf(input: { notOneOf: "barr" })
-      }
-    `,
-  });
+test(
+  'invalid oneOf',
+  invalidInputMacro,
+  'OneOfInput!',
+  gql`
+    query {
+      value(input: { oneOf: "barr" })
+    }
+  `
+);
 
-  t.is(result.data?.notOneOf, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'invalid notOneOf',
+  invalidInputMacro,
+  'NotOneOfInput!',
+  gql`
+    query {
+      value(input: { notOneOf: "foo" })
+    }
+  `
+);
 
-test('aggregate', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        aggregate(
-          input: {
-            min: "foo"
-            max: "foo"
-            startsWith: "foo bar"
-            endsWith: "bar foo"
-            includes: "foo bar baz"
-            regex: "FOO"
-            oneOf: "foo"
-            notOneOf: "barr"
-          }
-        )
-      }
-    `,
-  });
+test(
+  'invalid aggregate',
+  aggregateErrorMacro,
+  'AggregateInput!',
+  gql`
+    query {
+      value(
+        input: {
+          min: "fo"
+          max: "fooo"
+          startsWith: "bar foo"
+          endsWith: "foo bar"
+          includes: "bar baz"
+          regex: "foo"
+          oneOf: "barr"
+          notOneOf: "foo"
+        }
+      )
+    }
+  `,
+  8
+);
 
-  t.is(result.data?.aggregate, 'foo');
-  t.is(result.errors, undefined);
-});
-
-test('bad email', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        email(input: { email: "test@test" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad url', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        url(input: { url: "https://test" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad uuid', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        uuid(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11 a" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad min', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        min(input: { min: "fo" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad max', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        max(input: { max: "fooo" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad startsWith', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        startsWith(input: { startsWith: "bar foo" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad endsWith', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        endsWith(input: { endsWith: "foo bar" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad includes', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        includes(input: { includes: "bar baz" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad regex', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        regex(input: { regex: "foo" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad regex flags', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        regexFlags(input: { regex: "Foo1" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad oneOf', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        oneOf(input: { oneOf: "barr" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad notOneOf', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        notOneOf(input: { notOneOf: "foo" })
-      }
-    `,
-  });
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
-});
-
-test('bad aggregate', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        aggregate(
-          input: {
-            min: "fo"
-            max: "fooo"
-            startsWith: "bar foo"
-            endsWith: "foo bar"
-            includes: "bar baz"
-            regex: "foo"
-            oneOf: "barr"
-            notOneOf: "foo"
-          }
-        )
-      }
-    `,
-  });
-
-  const errors = result.errors?.[0].extensions.errors as GraphQLError[] | undefined;
-
-  t.is(result.errors?.length, 1);
-  t.is(result.errors?.[0].extensions.code, BaetaErrorCode.AggregateError);
-  t.is(errors?.length, 8);
-  t.true(errors?.every((error) => error.extensions.code === BaetaErrorCode.BadUserInput));
-});
-
-test('skip bad types', async (t) => {
-  const result = await execute({
-    schema,
-    document: gql`
-      query {
-        badType(input: { badType: 10 })
-      }
-    `,
-  });
-
-  t.is(result.data?.badType, 'foo');
-  t.is(result.errors, undefined);
-});
+test(
+  'skip bad types',
+  validInputMacro,
+  'BadTypeInput!',
+  gql`
+    query {
+      value(input: { badType: 10 })
+    }
+  `
+);

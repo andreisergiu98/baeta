@@ -29,11 +29,15 @@ const directive = createInputDirective<Args>({
     const keys = Object.keys(value);
 
     if (config.maxFields && keys.length > config.maxFields) {
-      throw new BadUserInput(`Maximum ${config.maxFields} number of fields allowed!`);
+      throw new BadUserInput(
+        `Maximum ${config.maxFields} number of fields allowed, got ${keys.length}!`
+      );
     }
 
     if (config.minFields && keys.length < config.minFields) {
-      throw new BadUserInput(`Minimum ${config.minFields} number of fields allowed!`);
+      throw new BadUserInput(
+        `Minimum ${config.minFields} number of fields allowed, got ${keys.length}!`
+      );
     }
   },
 });

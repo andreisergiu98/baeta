@@ -2046,8 +2046,12 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@graphql-tools/schema": ^9.0.17
     "@types/is-url": ^1.2.30
+    ava: ^5.2.0
     email-validator: ^2.0.4
+    graphql: ^16.6.0
+    graphql-tag: ^2.12.6
     is-url: ^1.2.4
     typescript: ^4.9.5
   peerDependencies:
@@ -9528,7 +9532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-tag@npm:^2.11.0":
+"graphql-tag@npm:^2.11.0, graphql-tag@npm:^2.12.6":
   version: 2.12.6
   resolution: "graphql-tag@npm:2.12.6"
   dependencies:

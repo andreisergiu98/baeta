@@ -2149,6 +2149,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/plugin-autoload@workspace:packages/plugin-autoload":
+  version: 0.0.0-use.local
+  resolution: "@baeta/plugin-autoload@workspace:packages/plugin-autoload"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/generator-sdk": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": ^18.15.11
+    typescript: ^4.9.5
+  languageName: unknown
+  linkType: soft
+
 "@baeta/plugin-directives@workspace:^, @baeta/plugin-directives@workspace:packages/plugin-directives":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-directives@workspace:packages/plugin-directives"

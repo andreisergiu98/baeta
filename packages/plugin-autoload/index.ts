@@ -1,6 +1,6 @@
-import { File, createPluginV1, getModuleGetName } from "@baeta/generator-sdk";
-import * as fs from "node:fs/promises";
-import * as path from "node:path";
+import { createPluginV1, File, getModuleGetName } from '@baeta/generator-sdk';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
 
 interface ResolverOptions {
   suffix?: string;
@@ -41,32 +41,45 @@ function suffix(str: string) {
 
 export function autoloadPlugin(options?: AutoloadPluginOptions) {
   const enableResolversAutoload = options?.resolvers !== false;
-  const resolversSuffix = (typeof options?.resolvers === "object" ? options.resolvers.suffix : undefined) ?? "resolver.ts";
-  const resolversMatcher = (typeof options?.resolvers === "object" ? options.resolvers.match : undefined) ?? (() => true);
+  const resolversSuffix =
+    (typeof options?.resolvers === 'object' ? options.resolvers.suffix : undefined) ??
+    'resolver.ts';
+  const resolversMatcher =
+    (typeof options?.resolvers === 'object' ? options.resolvers.match : undefined) ?? (() => true);
 
   const enableModulesAutoload = options?.modules !== false;
-  const modulesMatcher = (typeof options?.modules === "object" ? options.modules.match : undefined) ?? (() => true);
+  const modulesMatcher =
+    (typeof options?.modules === 'object' ? options.modules.match : undefined) ?? (() => true);
 
   const outputPath = options?.output;
 
   return createPluginV1({
-    name: "autoload",
-    actionName: "autoload",
+    name: 'autoload',
+    actionName: 'autoload',
     async generate(ctx, next) {
       await next();
 
       const resolvers = (
-        !enableResolversAutoload ? [] : await findFiles(ctx.generatorOptions.modulesDir, suffix(resolversSuffix))
+        !enableResolversAutoload
+          ? []
+          : await findFiles(ctx.generatorOptions.modulesDir, suffix(resolversSuffix))
       ).filter(resolversMatcher);
 
       const typedefs = !enableModulesAutoload
         ? []
-        : ctx.fileManager.getByTag("graphql").filter((file) => file.filename.endsWith(ctx.generatorOptions.moduleDefinitionName));
+        : ctx.fileManager
+            .getByTag('graphql')
+            .filter((file) => file.filename.endsWith(ctx.generatorOptions.moduleDefinitionName));
 
       let text =
         resolvers
-          .map((resolver) => `import "./${path.relative(ctx.generatorOptions.modulesDir, resolver).replace(".ts", "")}";`)
-          .join("\n") + "\n\n";
+          .map(
+            (resolver) =>
+              `import "./${path
+                .relative(ctx.generatorOptions.modulesDir, resolver)
+                .replace('.ts', '')}";`
+          )
+          .join('\n') + '\n\n';
 
       const moduleGetters: string[] = [];
       for (const typedef of typedefs) {
@@ -77,15 +90,17 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
 
         text += `import {${moduleGetter}} from "./${path
           .relative(ctx.generatorOptions.modulesDir, typedef.filename)
-          .replace(".ts", "")}";\n`;
+          .replace('.ts', '')}";\n`;
 
-        moduleGetters.push(moduleGetter + "()");
+        moduleGetters.push(moduleGetter + '()');
       }
 
-      text += `\nexport const modules = [${moduleGetters.join(", ")}];\n`;
+      text += `\nexport const modules = [${moduleGetters.join(', ')}];\n`;
 
-      const generatedFileName = outputPath ? path.join(ctx.generatorOptions.cwd, outputPath) : path.join(ctx.generatorOptions.modulesDir, "autoload.ts");
-      const file = new File(generatedFileName, text, "autoloader");
+      const generatedFileName = outputPath
+        ? path.join(ctx.generatorOptions.cwd, outputPath)
+        : path.join(ctx.generatorOptions.modulesDir, 'autoload.ts');
+      const file = new File(generatedFileName, text, 'autoloader');
       ctx.fileManager.add(file);
     },
   });

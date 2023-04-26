@@ -93,7 +93,7 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
           .relative(ctx.generatorOptions.modulesDir, typedef.filename)
           .replace('.ts', '')}";\n`;
 
-        moduleGetters.push(moduleGetter + '()');
+        moduleGetters.push(`${moduleGetter}()`);
       }
 
       text += `\nexport const modules = [${moduleGetters.join(', ')}];\n`;

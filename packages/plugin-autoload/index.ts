@@ -84,9 +84,10 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
       const moduleGetters: string[] = [];
       for (const typedef of typedefs) {
         const moduleName = path.dirname(typedef.filename).split(path.sep).pop();
-        if (!modulesMatcher(moduleName!)) continue;
+        if (!moduleName) continue;
+        if (!modulesMatcher(moduleName)) continue;
 
-        const moduleGetter = getModuleGetName(moduleName!);
+        const moduleGetter = getModuleGetName(moduleName);
 
         text += `import {${moduleGetter}} from "./${path
           .relative(ctx.generatorOptions.modulesDir, typedef.filename)

@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 0.0.28
+
+### Patch Changes
+
+- [#62](https://github.com/andreisergiu98/baeta/pull/62) [`a197f81`](https://github.com/andreisergiu98/baeta/commit/a197f8136b12010ec554123dbfa23574c2c2e0f3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix middleware composition with null resolver
+
 ## 0.0.27
 
 ### Patch Changes

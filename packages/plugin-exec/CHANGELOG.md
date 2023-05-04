@@ -1,5 +1,14 @@
 # @baeta/plugin-exec
 
+## 0.0.5
+
+### Patch Changes
+
+- [#64](https://github.com/andreisergiu98/baeta/pull/64) [`6a2dd11`](https://github.com/andreisergiu98/baeta/commit/6a2dd110d6ffd2bff25d9c4501faebb052e0cd40) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix(plugin-exec): make exec plugin compatible with cjs
+
+- Updated dependencies []:
+  - @baeta/generator-sdk@0.0.7
+
 ## 0.0.4
 
 ### Patch Changes

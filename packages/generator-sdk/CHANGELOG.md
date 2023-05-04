@@ -1,5 +1,12 @@
 # @baeta/generator-sdk
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`6a2dd11`](https://github.com/andreisergiu98/baeta/commit/6a2dd110d6ffd2bff25d9c4501faebb052e0cd40)]:
+  - @baeta/plugin@0.0.19
+
 ## 0.0.6
 
 ### Patch Changes

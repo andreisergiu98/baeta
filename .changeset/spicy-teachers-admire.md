@@ -1,5 +1,5 @@
 ---
-"@baeta/cli": patch
+'@baeta/cli': patch
 ---
 
 fix(cli): add missing shebang

@@ -1,5 +1,4 @@
 import { createPluginV1, Ctx, GeneratorPluginV1WatchOptions } from '@baeta/generator-sdk';
-import { execaCommand } from 'execa';
 
 export interface ExecPluginOptions {
   name?: string;
@@ -9,7 +8,7 @@ export interface ExecPluginOptions {
   skip?: (ctx: Ctx) => boolean | Promise<boolean>;
 }
 
-export default createExecPlugin;
+let execa: typeof import('execa') | undefined;
 
 export function createExecPlugin(options: ExecPluginOptions) {
   return createPluginV1({
@@ -17,6 +16,10 @@ export function createExecPlugin(options: ExecPluginOptions) {
     actionName: options.actionName || 'custom command',
     watch: options.watch,
     generate: async (ctx, next) => {
+      if (!execa) {
+        execa = await import('execa');
+      }
+
       const skipped = await options.skip?.(ctx);
 
       if (skipped === true) {
@@ -28,7 +31,7 @@ export function createExecPlugin(options: ExecPluginOptions) {
         return next();
       }
 
-      const child = execaCommand(options.exec, {
+      const child = execa.execaCommand(options.exec, {
         cwd: process.cwd(),
         stdio: 'pipe',
       });
@@ -41,3 +44,5 @@ export function createExecPlugin(options: ExecPluginOptions) {
     },
   });
 }
+
+export default createExecPlugin;

@@ -11,18 +11,28 @@ interface DirectivesOptions {
   moduleName?: string;
 }
 
+function printResolver(moduleDefinitionName: string, moduleName: string) {
+  const parsed = parse(moduleDefinitionName);
+  const method = getModuleGetName(moduleName);
+  const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
+
+  return `import { registerDirectives } from "@baeta/directives";
+import { ${method} } from "./${importName}";
+
+registerDirectives(${method}());
+`;
+}
+
 function printExport(moduleDefinitionName: string, moduleName: string) {
   const parsed = parse(moduleDefinitionName);
   const method = getModuleGetName(moduleName);
   const variable = getModuleVariableName(moduleName);
   const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
-  return `import { registerDirectives } from "@baeta/directives";
-import { ${method} } from "./${importName}";
+  return `import { ${method} } from "./${importName}";
+import "./directives.baeta.ts";
 
 export const ${variable} = ${method}();
-
-registerDirectives(${variable});
 `;
 }
 
@@ -36,6 +46,10 @@ function createDirectivesModuleDir(modulesDir: string, moduleName: string) {
 
 function createGqlFilename(moduleDir: string) {
   return `${moduleDir}/directives.gql`;
+}
+
+function createResolverFilename(moduleDir: string) {
+  return `${moduleDir}/directives.baeta.ts`;
 }
 
 function createExportFilename(moduleDir: string) {
@@ -65,7 +79,11 @@ export function directivesPlugin(options?: DirectivesOptions) {
 
       await definitionFile.write();
 
-      ctx.fileManager.add(definitionFile);
+      const resolverFile = new File(
+        createResolverFilename(moduleDir),
+        printResolver(ctx.generatorOptions.moduleDefinitionName, moduleName),
+        'directives'
+      );
 
       const exportFile = new File(
         createExportFilename(moduleDir),
@@ -73,7 +91,9 @@ export function directivesPlugin(options?: DirectivesOptions) {
         'directives'
       );
 
+      ctx.fileManager.add(definitionFile);
       ctx.fileManager.add(exportFile);
+      ctx.fileManager.add(resolverFile);
 
       return next();
     },

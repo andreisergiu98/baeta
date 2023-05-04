@@ -1,9 +1,9 @@
-import { createPluginV1, File, getModuleGetName } from '@baeta/generator-sdk';
+import { createPluginV1, File, FileManager, getModuleGetName } from '@baeta/generator-sdk';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 
 interface ResolverOptions {
-  suffix?: string;
+  suffix?: string | string[];
   match?: (filename: string) => boolean;
 }
 
@@ -17,91 +17,171 @@ export interface AutoloadPluginOptions {
   output?: string;
 }
 
-async function findFiles(baseDir: string, predicate: (file: string) => boolean) {
-  const matchedPaths: string[] = [];
+async function findFilesForPath(fullPath: string, predicate: (file: string) => boolean) {
+  const stat = await fs.stat(fullPath);
 
-  const entries = await fs.readdir(baseDir);
-  for (const entry of entries) {
-    const fullPath = path.isAbsolute(entry) ? entry : path.join(baseDir, entry);
-    const stat = await fs.stat(fullPath);
-
-    if (stat.isFile() && predicate(fullPath)) {
-      matchedPaths.push(fullPath);
-    } else if (stat.isDirectory()) {
-      entries.push(...(await findFiles(fullPath, predicate)));
-    }
+  if (stat.isDirectory()) {
+    return findFiles(fullPath, predicate);
   }
 
-  return matchedPaths;
+  if (!predicate(fullPath)) {
+    return [];
+  }
+
+  return [fullPath];
 }
 
-function suffix(str: string) {
-  return (input: string) => input.endsWith(str);
+async function findFiles(baseDir: string, predicate: (file: string) => boolean) {
+  const entries = await fs.readdir(baseDir);
+  const promises: Array<Promise<string[]>> = [];
+
+  for (const entry of entries) {
+    const fullPath = path.isAbsolute(entry) ? entry : path.join(baseDir, entry);
+    promises.push(findFilesForPath(fullPath, predicate));
+  }
+
+  return Promise.all(promises).then((results) => results.flat());
+}
+
+function getResolverSuffixes(options?: AutoloadPluginOptions) {
+  if (typeof options?.resolvers !== 'object') {
+    return ['resolver', 'baeta'];
+  }
+
+  if (options.resolvers.suffix == null) {
+    return ['resolver', 'baeta'];
+  }
+
+  if (!Array.isArray(options.resolvers.suffix)) {
+    return [options.resolvers.suffix, 'baeta'];
+  }
+
+  return [...options.resolvers.suffix, 'baeta'];
+}
+
+function getResolverMatcher(options?: AutoloadPluginOptions) {
+  if (typeof options?.resolvers !== 'object') {
+    return () => true;
+  }
+  return options.resolvers.match ?? (() => true);
+}
+
+async function getResolvers(modulesDir: string, options?: AutoloadPluginOptions) {
+  if (options?.resolvers === false) {
+    return [];
+  }
+
+  const suffixes = getResolverSuffixes(options);
+
+  const files = await findFiles(modulesDir, (input: string) =>
+    suffixes.some((suffix) => input.endsWith(`${suffix}.ts`))
+  );
+
+  return files.filter(getResolverMatcher(options));
+}
+
+function getTypeDefs(
+  fileManager: FileManager,
+  moduleDefinitionName: string,
+  options?: AutoloadPluginOptions
+) {
+  if (options?.modules === false) {
+    return [];
+  }
+
+  const files = fileManager.getByTag('graphql');
+  return files.filter((file) => file.filename.endsWith(moduleDefinitionName));
+}
+
+function getModuleMatcher(options?: AutoloadPluginOptions) {
+  if (typeof options?.modules !== 'object') {
+    return () => true;
+  }
+  return options.modules.match ?? (() => true);
+}
+
+function buildResolverImport(resolver: string, modulesDir: string) {
+  return `import "./${path.relative(modulesDir, resolver).replace('.ts', '')}";\n`;
+}
+
+function buildModuleImport(moduleName: string, modulesDir: string, filename: string) {
+  const modulePath = path.relative(modulesDir, filename).replace('.ts', '');
+  return `import {${getModuleGetName(moduleName)}} from "./${modulePath}";\n`;
+}
+
+function buildModuleList(moduleNames: string[]) {
+  const moduleGetters = moduleNames.map((moduleName) => `${getModuleGetName(moduleName)}()`);
+  return `export const modules = [${moduleGetters.join(', ')}];\n`;
 }
 
 export function autoloadPlugin(options?: AutoloadPluginOptions) {
-  const enableResolversAutoload = options?.resolvers !== false;
-  const resolversSuffix =
-    (typeof options?.resolvers === 'object' ? options.resolvers.suffix : undefined) ??
-    'resolver.ts';
-  const resolversMatcher =
-    (typeof options?.resolvers === 'object' ? options.resolvers.match : undefined) ?? (() => true);
-
-  const enableModulesAutoload = options?.modules !== false;
-  const modulesMatcher =
-    (typeof options?.modules === 'object' ? options.modules.match : undefined) ?? (() => true);
-
-  const outputPath = options?.output;
+  const modulesMatcher = getModuleMatcher(options);
 
   return createPluginV1({
     name: 'autoload',
     actionName: 'autoload',
+    watch: (generatorOptions) => {
+      if (options?.resolvers === false) {
+        return {
+          include: [],
+          ignore: [],
+        };
+      }
+
+      const suffixes = getResolverSuffixes(options);
+
+      const include = suffixes.map((suffix) =>
+        path.join(generatorOptions.modulesDir, '**', `*.${suffix}.ts`)
+      );
+
+      return {
+        include,
+        ignore: [],
+      };
+    },
     async generate(ctx, next) {
       await next();
 
-      const resolvers = (
-        !enableResolversAutoload
-          ? []
-          : await findFiles(ctx.generatorOptions.modulesDir, suffix(resolversSuffix))
-      ).filter(resolversMatcher);
+      const resolvers = await getResolvers(ctx.generatorOptions.modulesDir, options);
 
-      const typedefs = !enableModulesAutoload
-        ? []
-        : ctx.fileManager
-            .getByTag('graphql')
-            .filter((file) => file.filename.endsWith(ctx.generatorOptions.moduleDefinitionName));
+      const typeDefs = getTypeDefs(
+        ctx.fileManager,
+        ctx.generatorOptions.moduleDefinitionName,
+        options
+      );
 
-      let text =
-        resolvers
-          .map(
-            (resolver) =>
-              `import "./${path
-                .relative(ctx.generatorOptions.modulesDir, resolver)
-                .replace('.ts', '')}";`
-          )
-          .join('\n') + '\n\n';
+      const content = resolvers.map((resolver) =>
+        buildResolverImport(resolver, ctx.generatorOptions.modulesDir)
+      );
 
-      const moduleGetters: string[] = [];
-      for (const typedef of typedefs) {
+      const moduleNames: string[] = [];
+
+      for (const typedef of typeDefs) {
         const moduleName = path.dirname(typedef.filename).split(path.sep).pop();
-        if (!moduleName) continue;
-        if (!modulesMatcher(moduleName)) continue;
 
-        const moduleGetter = getModuleGetName(moduleName);
+        if (!moduleName) {
+          continue;
+        }
 
-        text += `import {${moduleGetter}} from "./${path
-          .relative(ctx.generatorOptions.modulesDir, typedef.filename)
-          .replace('.ts', '')}";\n`;
+        if (!modulesMatcher(moduleName)) {
+          continue;
+        }
 
-        moduleGetters.push(`${moduleGetter}()`);
+        moduleNames.push(moduleName);
+
+        content.push(
+          buildModuleImport(moduleName, ctx.generatorOptions.modulesDir, typedef.filename)
+        );
       }
 
-      text += `\nexport const modules = [${moduleGetters.join(', ')}];\n`;
+      content.push(buildModuleList(moduleNames));
 
-      const generatedFileName = outputPath
-        ? path.join(ctx.generatorOptions.cwd, outputPath)
+      const generatedFileName = options?.output
+        ? path.join(ctx.generatorOptions.cwd, options.output)
         : path.join(ctx.generatorOptions.modulesDir, 'autoload.ts');
-      const file = new File(generatedFileName, text, 'autoloader');
+
+      const file = new File(generatedFileName, content.join('\n'), 'autoloader');
+
       ctx.fileManager.add(file);
     },
   });

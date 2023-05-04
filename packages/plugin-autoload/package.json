@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-autoload",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"

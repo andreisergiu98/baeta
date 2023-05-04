@@ -1,5 +1,12 @@
 # @baeta/generator
 
+## 0.0.23
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @baeta/generator-sdk@0.0.7
+
 ## 0.0.22
 
 ### Patch Changes

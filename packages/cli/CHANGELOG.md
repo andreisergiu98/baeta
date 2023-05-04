@@ -1,5 +1,11 @@
 # @baeta/cli
 
+## 0.0.37
+
+### Patch Changes
+
+- [#61](https://github.com/andreisergiu98/baeta/pull/61) [`d969dca`](https://github.com/andreisergiu98/baeta/commit/d969dca6f7f81f3387032887ff96ad00c35b6081) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix(cli): add missing shebang
+
 ## 0.0.36
 
 ### Patch Changes

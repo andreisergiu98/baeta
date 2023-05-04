@@ -15,7 +15,14 @@ export function composeResolvers(resolvers: ResolversMap, mapping: ResolversComp
     const path = key.split('.');
 
     const lens = createObjectLens(resolvers, path);
-    const createResolver = chainResolvers([...fns, () => lens.get()]);
+
+    const originalResolver = lens.get();
+
+    if (!originalResolver) {
+      continue;
+    }
+
+    const createResolver = chainResolvers([...fns, () => originalResolver]);
     lens.set(createResolver());
   }
 

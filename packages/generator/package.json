@@ -33,8 +33,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@baeta/generator-sdk": "workspace:^",
-    "chokidar": "^3.5.3"
+    "@baeta/generator-sdk": "workspace:^"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

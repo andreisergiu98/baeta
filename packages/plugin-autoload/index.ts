@@ -1,4 +1,12 @@
-import { createPluginV1, File, FileManager, getModuleGetName } from '@baeta/generator-sdk';
+import {
+  createPluginV1,
+  Ctx,
+  File,
+  FileManager,
+  getModuleGetName,
+  isMatch,
+  WatcherFile,
+} from '@baeta/generator-sdk';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 
@@ -66,7 +74,9 @@ function getResolverMatcher(options?: AutoloadPluginOptions) {
   return options.resolvers.match ?? (() => true);
 }
 
-async function getResolvers(modulesDir: string, options?: AutoloadPluginOptions) {
+async function getResolvers(ctx: Ctx, options?: AutoloadPluginOptions) {
+  const modulesDir = ctx.generatorOptions.modulesDir;
+
   if (options?.resolvers === false) {
     return [];
   }
@@ -77,7 +87,9 @@ async function getResolvers(modulesDir: string, options?: AutoloadPluginOptions)
     suffixes.some((suffix) => input.endsWith(`${suffix}.ts`))
   );
 
-  return files.filter(getResolverMatcher(options));
+  const generatedFiles = ctx.fileManager.getByTag('resolvers').map((file) => file.filename);
+
+  return [...files, ...generatedFiles].filter(getResolverMatcher(options));
 }
 
 function getTypeDefs(
@@ -120,29 +132,32 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
   return createPluginV1({
     name: 'autoload',
     actionName: 'autoload',
-    watch: (generatorOptions) => {
+    watch: (generatorOptions, watcher, reload) => {
       if (options?.resolvers === false) {
-        return {
-          include: [],
-          ignore: [],
-        };
+        return;
       }
 
+      const matches = getResolverMatcher(options);
       const suffixes = getResolverSuffixes(options);
+      const glob = path.join(generatorOptions.modulesDir, '**', `*.{${suffixes.join(',')}}.ts`);
 
-      const include = suffixes.map((suffix) =>
-        path.join(generatorOptions.modulesDir, '**', `*.${suffix}.ts`)
-      );
+      const handleChange = (file: WatcherFile) => {
+        if (!matches(file.path)) {
+          return;
+        }
 
-      return {
-        include,
-        ignore: [],
+        if (isMatch(file.path, glob)) {
+          reload(file);
+        }
       };
+
+      watcher.on('create', handleChange);
+      watcher.on('delete', handleChange);
     },
     async generate(ctx, next) {
       await next();
 
-      const resolvers = await getResolvers(ctx.generatorOptions.modulesDir, options);
+      const resolvers = await getResolvers(ctx, options);
 
       const typeDefs = getTypeDefs(
         ctx.fileManager,

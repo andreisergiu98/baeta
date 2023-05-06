@@ -1,4 +1,4 @@
-import { Ctx } from '@baeta/generator-sdk';
+import { Ctx, WatcherFile } from '@baeta/generator-sdk';
 import { createExecPlugin } from '@baeta/plugin-exec';
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';
@@ -18,7 +18,7 @@ export function createPrismaClientPlugin(options: PrismaPluginOptions) {
   const skip = async (ctx: Ctx) => {
     const schema = resolve(ctx.generatorOptions.cwd, prismaSchema);
 
-    if (ctx.watching && ctx.changedFile !== schema) {
+    if (ctx.watching && ctx.changedFile?.path !== schema) {
       return true;
     }
 
@@ -33,11 +33,17 @@ export function createPrismaClientPlugin(options: PrismaPluginOptions) {
     name: 'prisma-client',
     actionName: 'Prisma client',
     exec: generateCommand ?? 'prisma generate',
-    watch: (generatorOptions) => {
-      return {
-        include: [resolve(generatorOptions.cwd, prismaSchema)],
-        ignore: [],
+    watch: (generatorOptions, watcher, reload) => {
+      const prismaPath = resolve(generatorOptions.cwd, prismaSchema);
+
+      const handleChange = (file: WatcherFile) => {
+        if (file.path === prismaPath) {
+          reload(file);
+        }
       };
+
+      watcher.on('update', handleChange);
+      watcher.on('delete', handleChange);
     },
     skip,
   });

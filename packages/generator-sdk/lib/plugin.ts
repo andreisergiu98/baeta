@@ -1,9 +1,7 @@
 import { PluginType } from '@baeta/plugin';
 import { NormalizedGeneratorOptions } from './config';
 import { Ctx } from './ctx';
-
-type MatchPattern = string | RegExp;
-type Matcher = MatchPattern | MatchPattern[];
+import { Watcher, WatcherFile } from './fs-watcher';
 
 export enum GeneratorPluginVersion {
   V1 = 'v1',
@@ -14,10 +12,13 @@ export type GeneratorPluginV1Fn<Store = unknown> = (
   next: () => Promise<void>
 ) => Promise<void>;
 
-export type GeneratorPluginV1WatchOptions = (options: NormalizedGeneratorOptions) => {
-  include: string | string[];
-  ignore: Matcher;
-};
+export type GeneratorPluginV1ReloadFn = (file: WatcherFile) => void;
+
+export type GeneratorPluginV1WatchOptions = (
+  options: NormalizedGeneratorOptions,
+  watcher: Watcher,
+  reload: GeneratorPluginV1ReloadFn
+) => void;
 
 export type GeneratorPluginV1Factory<Store = unknown> = {
   name: string;

@@ -1,5 +1,6 @@
 import { NormalizedGeneratorOptions } from './config';
 import { FileManager } from './file-manager';
+import { WatcherFile } from './fs-watcher';
 
 export type Ctx<T = unknown> = {
   fileManager: FileManager;
@@ -9,5 +10,5 @@ export type Ctx<T = unknown> = {
   pluginNames: string[];
   generatorOptions: NormalizedGeneratorOptions;
   watching: boolean;
-  changedFile?: string;
+  changedFile?: WatcherFile;
 } & T;

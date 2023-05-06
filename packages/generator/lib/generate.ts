@@ -1,5 +1,10 @@
-import { Ctx, GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator-sdk';
-import chokidar from 'chokidar';
+import {
+  Ctx,
+  GeneratorOptions,
+  GeneratorPluginV1,
+  Watcher,
+  WatcherFile,
+} from '@baeta/generator-sdk';
 import { loadOptions } from './config';
 import { createCtx } from './ctx';
 import { cleanPreviousFiles } from './file-utils';
@@ -35,13 +40,11 @@ export function generateAndWatch(
   hooks?: GeneratorHooks
 ) {
   const generatorOptions = loadOptions(options);
-  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(generatorOptions));
-  const toWatch = pluginsWatchOptions.flatMap((options) => options.include);
-  const toIgnore = pluginsWatchOptions.flatMap((options) => options.ignore);
+  const watcher = new Watcher(generatorOptions.cwd);
 
   let previousCtx: Ctx | undefined;
 
-  const handleChange = async (file: string) => {
+  const reload = async (file: WatcherFile) => {
     const ctx = createCtx({
       generatorOptions,
       plugins,
@@ -51,13 +54,9 @@ export function generateAndWatch(
     previousCtx = await executeGenerator(ctx, plugins, hooks, previousCtx);
   };
 
-  return chokidar
-    .watch(toWatch, {
-      ignored: toIgnore,
-      cwd: generatorOptions.cwd,
-    })
-    .on('change', handleChange)
-    .on('unlink', handleChange);
+  plugins.forEach((plugin) => plugin.watch(generatorOptions, watcher, reload));
+
+  return watcher;
 }
 
 async function executeGenerator(

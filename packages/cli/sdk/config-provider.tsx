@@ -1,4 +1,5 @@
-import chokidar from 'chokidar';
+import { Watcher } from '@baeta/generator';
+import path from 'path';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { loadConfig, LoadedBaetaConfig } from '../lib/config-loader';
 import { createContextProvider } from '../utils/context';
@@ -12,7 +13,7 @@ export interface ConfigProps {
 export function useConfigStore(props: ConfigProps) {
   const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);
 
-  const updateConfig = useCallback(async () => {
+  const updateConfig = useCallback(async (f) => {
     const config = await loadConfig();
     if (config) {
       setConfig(config);
@@ -24,16 +25,19 @@ export function useConfigStore(props: ConfigProps) {
       return;
     }
 
-    const instance = chokidar
-      .watch(props.initialConfig.location, {
-        ignoreInitial: true,
-      })
-      .on('add', updateConfig)
-      .on('change', updateConfig)
-      .on('unlink', updateConfig);
+    const configDir = path.dirname(props.initialConfig.location);
+    const relativeConfigFile = path.relative(process.cwd(), props.initialConfig.location);
+
+    const watcher = new Watcher(configDir, {
+      ignore: [`!${relativeConfigFile}`],
+    });
+
+    watcher.on('create', updateConfig);
+    watcher.on('update', updateConfig);
+    watcher.on('delete', updateConfig);
 
     return () => {
-      instance.close();
+      watcher.close();
     };
   }, [props.watchConfig, props.initialConfig.location, updateConfig]);
 

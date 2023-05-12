@@ -1994,7 +1994,6 @@ __metadata:
     "@types/react": ^17.0.57
     "@types/yargs": ^17.0.24
     ansi-styles: ^6.2.1
-    chokidar: ^3.5.3
     cli-spinners: ^2.8.0
     execa: ^6.1.0
     fast-glob: ^3.2.12

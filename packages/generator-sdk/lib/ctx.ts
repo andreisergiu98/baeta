@@ -1,6 +1,6 @@
 import { NormalizedGeneratorOptions } from './config';
 import { FileManager } from './file-manager';
-import { WatcherFile } from './fs-watcher';
+import { WatcherFile } from './watcher';
 
 export type Ctx<T = unknown> = {
   fileManager: FileManager;

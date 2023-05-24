@@ -8,6 +8,7 @@ import {
 import { loadOptions } from './config';
 import { createCtx } from './ctx';
 import { cleanPreviousFiles } from './file-utils';
+import { getStateFilename, saveState } from './persistence';
 import { startRunner } from './runner';
 
 export interface GeneratorHooks {
@@ -30,8 +31,9 @@ export async function generate(
   hooks?: GeneratorHooks
 ) {
   const generatorOptions = loadOptions(options);
+  const stateFilename = getStateFilename(generatorOptions.cwd);
   const ctx = createCtx({ generatorOptions, plugins });
-  return executeGenerator(ctx, plugins, hooks);
+  return executeGenerator(ctx, plugins, stateFilename, hooks);
 }
 
 export function generateAndWatch(
@@ -40,6 +42,7 @@ export function generateAndWatch(
   hooks?: GeneratorHooks
 ) {
   const generatorOptions = loadOptions(options);
+  const stateFilename = getStateFilename(generatorOptions.cwd);
   const watcher = new Watcher(generatorOptions.cwd);
 
   let previousCtx: Ctx | undefined;
@@ -51,7 +54,7 @@ export function generateAndWatch(
       watching: true,
       changedFile: file,
     });
-    previousCtx = await executeGenerator(ctx, plugins, hooks, previousCtx);
+    previousCtx = await executeGenerator(ctx, plugins, stateFilename, hooks, previousCtx);
   };
 
   plugins.forEach((plugin) => plugin.watch(generatorOptions, watcher, reload));
@@ -62,6 +65,7 @@ export function generateAndWatch(
 async function executeGenerator(
   ctx: Ctx,
   plugins: GeneratorPluginV1[],
+  stateFilename: string,
   hooks?: GeneratorHooks,
   prev?: Ctx
 ) {
@@ -106,12 +110,15 @@ async function executeGenerator(
     await startRunner(ctx, plugins, (plugin) => plugin.end, onEndStart, onEndEnd);
 
     await ctx.fileManager.writeAll();
-    await cleanPreviousFiles(ctx.fileManager, prev?.fileManager);
+
+    await cleanPreviousFiles(ctx.fileManager, stateFilename, prev?.fileManager);
 
     await hooks?.onEnd?.()?.catch(() => null);
   } catch (e) {
     await hooks?.onError?.(e)?.catch(() => null);
   }
+
+  saveState(stateFilename, ctx);
 
   return ctx;
 }

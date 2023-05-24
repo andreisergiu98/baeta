@@ -14,8 +14,7 @@ export interface WatcherFile {
   relativePath: string;
 }
 export class Watcher {
-  private subscriptionPromise: Promise<AsyncSubscription>;
-  private subscription: AsyncSubscription | undefined;
+  private subscription: AsyncSubscription;
 
   private listeners: Record<EventType, WatcherListener[]> = {
     create: [],
@@ -23,13 +22,11 @@ export class Watcher {
     delete: [],
   };
 
-  private watcherIgnore = new WatcherIgnore();
+  private watcherIgnore: WatcherIgnore;
 
-  constructor(private readonly cwd: string, options?: Options) {
-    this.subscriptionPromise = subscribe(cwd, this.onEvents, options);
-    this.subscriptionPromise.then((subscription) => {
-      this.subscription = subscription;
-    });
+  constructor(private readonly cwd: string, private readonly options?: Options) {
+    this.watcherIgnore = new WatcherIgnore(cwd);
+    this.subscription = this.createSubscription();
   }
 
   onEvents = (err: Error | null, events: Event[]) => {
@@ -69,8 +66,20 @@ export class Watcher {
     this.watcherIgnore.unignore(pattern);
   }
 
-  async close() {
-    const subscription = this.subscription || (await this.subscriptionPromise);
-    await subscription.unsubscribe();
+  createSubscription() {
+    const promise = subscribe(this.cwd, this.onEvents, this.options);
+
+    const unsubscribe = async () => {
+      const subscription = await promise;
+      await subscription.unsubscribe();
+    };
+
+    return {
+      unsubscribe,
+    };
+  }
+
+  close() {
+    return this.subscription.unsubscribe();
   }
 }

@@ -48,4 +48,12 @@ export class FileManager {
       // void
     });
   }
+
+  getPersistedFiles() {
+    return this.files.filter((file) => file.persisted);
+  }
+
+  getPersistedFileNames() {
+    return this.getPersistedFiles().map((file) => file.filename);
+  }
 }

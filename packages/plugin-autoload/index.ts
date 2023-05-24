@@ -25,6 +25,18 @@ export interface AutoloadPluginOptions {
   output?: string;
 }
 
+const defaultSuffixes = [
+  'resolver',
+  'resolvers',
+  'query',
+  'queries',
+  'mutation',
+  'mutations',
+  'subscription',
+  'subscriptions',
+  'baeta',
+];
+
 async function findFilesForPath(fullPath: string, predicate: (file: string) => boolean) {
   const stat = await fs.stat(fullPath);
 
@@ -53,11 +65,11 @@ async function findFiles(baseDir: string, predicate: (file: string) => boolean) 
 
 function getResolverSuffixes(options?: AutoloadPluginOptions) {
   if (typeof options?.resolvers !== 'object') {
-    return ['resolver', 'baeta'];
+    return defaultSuffixes;
   }
 
   if (options.resolvers.suffix == null) {
-    return ['resolver', 'baeta'];
+    return defaultSuffixes;
   }
 
   if (!Array.isArray(options.resolvers.suffix)) {

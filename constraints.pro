@@ -34,6 +34,11 @@ gen_enforced_field(WorkspaceCwd, 'scripts.build', 'tsup') :-
   % Private packages aren't covered
     \+ workspace_field_test(WorkspaceCwd, 'private', 'true').
 
+gen_enforced_field(WorkspaceCwd, 'scripts.dev', 'tsup --watch') :-
+  workspace(WorkspaceCwd),
+  % Private packages aren't covered
+    \+ workspace_field_test(WorkspaceCwd, 'private', 'true').
+
 gen_enforced_field(WorkspaceCwd, 'scripts.types', 'tsc --noEmit') :-
   workspace(WorkspaceCwd),
   % Private packages aren't covered

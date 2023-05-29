@@ -13,12 +13,26 @@
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./esbuild": {
+      "import": "./dist/esbuild/index.js",
+      "require": "./dist/esbuild/index.cjs",
+      "types": "./dist/esbuild/index.d.ts"
+    }
+  },
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "package.json"
   ],
   "scripts": {
     "build": "tsup",
+    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -36,19 +50,6 @@
     "node": ">=18.0.0"
   },
   "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs",
-        "types": "./dist/index.d.ts"
-      },
-      "./esbuild": {
-        "import": "./dist/esbuild/index.js",
-        "require": "./dist/esbuild/index.cjs",
-        "types": "./dist/esbuild/index.d.ts"
-      }
-    },
-    "types": "dist/index.d.ts"
+    "access": "public"
   }
 }

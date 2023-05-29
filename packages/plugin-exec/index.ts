@@ -8,6 +8,10 @@ export interface ExecPluginOptions {
   skip?: (ctx: Ctx) => boolean | Promise<boolean>;
 }
 
+export const dynamicImport = new Function('file', 'return import(file)') as <T = any>(
+  file: string
+) => Promise<T>;
+
 let execa: typeof import('execa') | undefined;
 
 export function createExecPlugin(options: ExecPluginOptions) {
@@ -17,7 +21,7 @@ export function createExecPlugin(options: ExecPluginOptions) {
     watch: options.watch,
     generate: async (ctx, next) => {
       if (!execa) {
-        execa = await import('execa');
+        execa = await dynamicImport<typeof import('execa')>('execa');
       }
 
       const skipped = await options.skip?.(ctx);

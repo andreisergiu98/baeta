@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",
-    "dev": "yarn devwatch ./packages/**/tsup.watch.ts",
+    "dev": "yarn build && devwatch ./packages/**/tsup.watch.ts",
     "docs": "yarn workspace @baeta/website build",
     "linter:check": "rome check .",
     "prepare": "husky install",

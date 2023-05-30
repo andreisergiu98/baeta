@@ -20,7 +20,8 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach -pv --no-private run build",
+    "build": "yarn turbo build --filter='./packages/*'",
+    "dev": "yarn build && devwatch ./packages/**/tsup.watch.ts",
     "docs": "yarn workspace @baeta/website build",
     "linter:check": "rome check .",
     "prepare": "husky install",
@@ -28,11 +29,12 @@
     "prettier:write": "prettier --write .",
     "publish": "yarn workspaces foreach --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",
-    "test": "yarn workspaces foreach -pv run test",
+    "test": "yarn turbo test --filter='./packages/*'",
     "type:check": "yarn workspaces foreach -pv run types"
   },
   "devDependencies": {
     "@andreisergiu98/changesets-cli": "^2.25.1",
+    "@baeta/builder": "workspace:^",
     "@changesets/changelog-github": "^0.4.8",
     "@yarnpkg/sdks": "^3.0.0-rc.42",
     "husky": "^8.0.3",
@@ -41,6 +43,7 @@
     "prettier-plugin-packagejson": "^2.4.3",
     "pretty-quick": "^3.1.3",
     "rome": "^12.0.0",
+    "turbo": "^1.9.9",
     "typescript": "^4.9.5"
   },
   "packageManager": "yarn@3.5.0"

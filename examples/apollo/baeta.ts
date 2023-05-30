@@ -19,7 +19,7 @@ export default defineConfig({
     dist: './dist',
     bundleWorkspaces: true,
     esbuild: {
-      format: 'cjs',
+      format: 'esm',
     },
   },
   plugins: [

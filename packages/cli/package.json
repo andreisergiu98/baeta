@@ -13,8 +13,26 @@
   "license": "MIT",
   "author": "Andrei Pampu <pampu.andrei@pm.me>",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./ink": {
+      "import": "./dist/ink/index.js",
+      "require": "./dist/ink/index.cjs",
+      "types": "./dist/ink/index.d.ts"
+    },
+    "./sdk": {
+      "import": "./dist/sdk/index.js",
+      "require": "./dist/sdk/index.cjs",
+      "types": "./dist/sdk/index.d.ts"
+    }
+  },
+  "types": "dist/index.d.ts",
   "bin": {
-    "baeta": "./bin/cli-dev.cjs"
+    "baeta": "./dist/bin/cli.js"
   },
   "files": [
     "dist",
@@ -22,6 +40,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -59,27 +78,6 @@
     "node": ">=18.0.0"
   },
   "publishConfig": {
-    "access": "public",
-    "bin": {
-      "baeta": "./dist/bin/cli.js"
-    },
-    "exports": {
-      ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs",
-        "types": "./dist/index.d.ts"
-      },
-      "./ink": {
-        "import": "./dist/ink/index.js",
-        "require": "./dist/ink/index.cjs",
-        "types": "./dist/ink/index.d.ts"
-      },
-      "./sdk": {
-        "import": "./dist/sdk/index.js",
-        "require": "./dist/sdk/index.cjs",
-        "types": "./dist/sdk/index.d.ts"
-      }
-    },
-    "types": "dist/index.d.ts"
+    "access": "public"
   }
 }

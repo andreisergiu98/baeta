@@ -34,7 +34,7 @@ async function cleanByState(current: FileManager, stateFile: string) {
 
   const currentFilenames = current.getPersistedFileNames();
   const toUnlink = state.previousFiles.filter((file) => !currentFilenames.includes(file));
-  const promises = toUnlink.map((file) => fs.unlink(file));
+  const promises = toUnlink.map((file) => fs.unlink(file).catch(() => {}));
 
-  return Promise.all(promises);
+  return Promise.all(promises).then(() => {});
 }

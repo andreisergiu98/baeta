@@ -3,8 +3,8 @@ import micromatch from 'micromatch';
 import path from 'path';
 import { MatchPattern, WatcherIgnore } from './watcher-ignore';
 
-export { isMatch } from 'micromatch';
 export { micromatch };
+export const isMatch = micromatch.isMatch;
 
 export type WatcherListener = (path: WatcherFile) => void;
 

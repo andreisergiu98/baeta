@@ -1,4 +1,4 @@
-import { matcher, scan } from 'micromatch';
+import micromatch from 'micromatch';
 import path from 'path';
 
 export type MatchFn = (testString: string) => boolean;
@@ -30,12 +30,12 @@ export class WatcherIgnore {
       return;
     }
 
-    this.globsMap.set(pattern, matcher(pattern));
+    this.globsMap.set(pattern, micromatch.matcher(pattern));
     this.globs = Array.from(this.globsMap.values());
   }
 
   isMicromatch(pattern: string) {
-    const result = scan(pattern);
+    const result = micromatch.scan(pattern);
     return result.isBrace || result.isGlobstar || result.isExtglob || result.isGlob;
   }
 

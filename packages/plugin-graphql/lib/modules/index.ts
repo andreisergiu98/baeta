@@ -1,7 +1,7 @@
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
 import { Source } from '@graphql-tools/utils';
-import { concatAST, DocumentNode, isScalarType } from 'graphql';
+import { DocumentNode, concatAST, isScalarType } from 'graphql';
 import { join, relative, resolve } from 'path';
 import { buildModule } from './builder';
 import { ModulesConfig } from './config';

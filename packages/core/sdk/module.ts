@@ -9,7 +9,7 @@ import {
   resolveExtensions,
   withExtensions,
 } from './extension';
-import { createMiddlewareAdapter, GenericMiddleware } from './middleware';
+import { GenericMiddleware, createMiddlewareAdapter } from './middleware';
 import { createResolverAdapter } from './resolver';
 import { ResolverMapper } from './resolver-mapper';
 import { createSubscriptionAdapter } from './subscription';

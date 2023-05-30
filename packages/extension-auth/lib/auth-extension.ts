@@ -1,7 +1,7 @@
 import { MiddlewareParams } from '@baeta/core';
 import { Extension, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
 import { createResolverPath, isOperationType } from '../utils/resolver';
-import { aggregateErrorResolver, resolveError, ScopeErrorResolver } from './error';
+import { ScopeErrorResolver, aggregateErrorResolver, resolveError } from './error';
 import { GetGrant, saveGrants } from './grant';
 import { LogicRule } from './rule';
 import { GetScopeLoader } from './scope-resolver';

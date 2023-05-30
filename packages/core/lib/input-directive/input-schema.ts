@@ -1,6 +1,5 @@
 import { AggregateGraphQLError, BadUserInput } from '@baeta/errors';
 import {
-  getNamedType,
   GraphQLArgument,
   GraphQLError,
   GraphQLField,
@@ -13,15 +12,16 @@ import {
   GraphQLSchema,
   GraphQLType,
   Kind,
+  getNamedType,
 } from 'graphql';
 import {
+  ValidationOptions,
   addValidateExtension,
   getArgumentValidationsFromExtensions,
   getValidationsFromExtension,
   hasArgumentValidationsExtension,
   hasValidateExtension,
   hasValidationsExtension,
-  ValidationOptions,
 } from './input-extensions';
 
 export type ValidateParams<Context = unknown> = {

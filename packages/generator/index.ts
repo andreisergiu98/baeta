@@ -1,4 +1,4 @@
-export { getGeneratorPlugins, Watcher } from '@baeta/generator-sdk';
+export { Watcher, getGeneratorPlugins } from '@baeta/generator-sdk';
 export type {
   GeneratorOptions,
   GeneratorPluginV1,

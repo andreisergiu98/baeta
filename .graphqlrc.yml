@@ -4,9 +4,3 @@ projects:
       - "examples/apollo/src/modules/**/*.gql"
     include:
       - "examples/apollo/src/**/*.gql"
-
-  examples/cloudflare:
-    schema:
-      - "examples/cloudflare/src/modules/**/*.gql"
-    include:
-      - "examples/cloudflare/src/**/*.gql"

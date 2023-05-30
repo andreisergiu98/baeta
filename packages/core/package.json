@@ -40,15 +40,15 @@
   },
   "dependencies": {
     "@baeta/errors": "workspace:^",
-    "@graphql-tools/schema": "^9.0.17",
-    "@graphql-tools/utils": "^9.2.1"
+    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-tools/utils": "^10.0.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "ava": "^5.2.0",
+    "ava": "^5.3.0",
     "graphql": "^16.6.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.4"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"

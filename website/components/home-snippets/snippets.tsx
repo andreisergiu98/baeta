@@ -109,6 +109,7 @@ export function HomeSnippets() {
     <section>
       <div className="container">
         {featureList.map((props, idx) => (
+          // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <Snippet key={idx} idx={idx} {...props} />
         ))}
       </div>

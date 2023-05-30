@@ -63,6 +63,7 @@ function GeneratorPluginsStatus(props: Props) {
 
   const pluginMessages = props.startedPlugins.map((startedPlugin, index) => {
     const isFinished = props.finishedPlugins.includes(startedPlugin);
+    // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
     return <GeneratorPluginStatus key={index} plugin={startedPlugin} isFinished={isFinished} />;
   });
 

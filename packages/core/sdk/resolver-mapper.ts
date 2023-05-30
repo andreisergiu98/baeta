@@ -100,10 +100,10 @@ export class ResolverMapper {
   }
 
   compose() {
-    composeResolvers(this.resolvers, this.middlewares);
+    const resolvers = composeResolvers(this.resolvers, this.middlewares);
 
     return {
-      ...this.resolvers,
+      ...resolvers,
       ...this.scalars,
     } as IResolvers;
   }

@@ -3,12 +3,13 @@ import {
   FileManager,
   GeneratorPluginV1,
   NormalizedGeneratorOptions,
+  WatcherFile,
 } from '@baeta/generator-sdk';
 
 interface CtxOptions {
   generatorOptions: NormalizedGeneratorOptions;
   plugins: GeneratorPluginV1[];
-  changedFile?: string;
+  changedFile?: WatcherFile;
   watching?: boolean;
 }
 

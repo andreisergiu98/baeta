@@ -95,11 +95,8 @@ export function paginationPlugin(options: PaginationOptions) {
   return createPluginV1({
     name: 'pagination',
     actionName: 'pagination connections',
-    watch: (generatorOptions) => {
-      return {
-        include: [],
-        ignore: [createConnectionModuleDir(generatorOptions.modulesDir, moduleName)],
-      };
+    watch: (generatorOptions, watcher) => {
+      watcher.ignore(`${createConnectionModuleDir(generatorOptions.modulesDir, moduleName)}/**`);
     },
     generate: async (ctx, next) => {
       const types: string[] = [printPageInfo(options.pageInfoFields)];
@@ -122,11 +119,7 @@ export function paginationPlugin(options: PaginationOptions) {
 
       const moduleDir = createConnectionModuleDir(ctx.generatorOptions.modulesDir, moduleName);
 
-      const definitionFile = new File(
-        createGqlFilename(moduleDir),
-        printTypes(types),
-        'pagination'
-      );
+      const definitionFile = new File(createGqlFilename(moduleDir), printTypes(types), 'schema');
 
       await definitionFile.write();
 
@@ -139,7 +132,7 @@ export function paginationPlugin(options: PaginationOptions) {
       const exportFile = new File(
         createExportFilename(moduleDir),
         printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
-        'pagination'
+        'export'
       );
 
       ctx.fileManager.add(exportFile);

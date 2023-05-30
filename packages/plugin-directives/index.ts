@@ -62,33 +62,26 @@ export function directivesPlugin(options?: DirectivesOptions) {
   return createPluginV1({
     name: 'directives',
     actionName: 'directives',
-    watch: (generatorOptions) => {
-      return {
-        include: [],
-        ignore: [createDirectivesModuleDir(generatorOptions.modulesDir, moduleName)],
-      };
+    watch: (generatorOptions, watcher) => {
+      watcher.ignore(`${createDirectivesModuleDir(generatorOptions.modulesDir, moduleName)}/**`);
     },
     generate: async (ctx, next) => {
       const moduleDir = createDirectivesModuleDir(ctx.generatorOptions.modulesDir, moduleName);
 
-      const definitionFile = new File(
-        createGqlFilename(moduleDir),
-        printDefinitions(),
-        'directives'
-      );
+      const definitionFile = new File(createGqlFilename(moduleDir), printDefinitions(), 'schema');
 
       await definitionFile.write();
 
       const resolverFile = new File(
         createResolverFilename(moduleDir),
         printResolver(ctx.generatorOptions.moduleDefinitionName, moduleName),
-        'directives'
+        'resolvers'
       );
 
       const exportFile = new File(
         createExportFilename(moduleDir),
         printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
-        'directives'
+        'export'
       );
 
       ctx.fileManager.add(definitionFile);

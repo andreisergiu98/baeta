@@ -3,7 +3,7 @@
 /* eslint-disable */
 /* prettier-ignore */
 
-import "./directives.baeta.ts";
+import { registerDirectives } from "@baeta/directives";
 import { getBaetaDirectivesModule } from './typedef';
 
-export const baetaDirectivesModule = getBaetaDirectivesModule();
+registerDirectives(getBaetaDirectivesModule());

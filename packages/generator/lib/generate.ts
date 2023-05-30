@@ -1,8 +1,14 @@
-import { Ctx, GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator-sdk';
-import chokidar from 'chokidar';
+import {
+  Ctx,
+  GeneratorOptions,
+  GeneratorPluginV1,
+  Watcher,
+  WatcherFile,
+} from '@baeta/generator-sdk';
 import { loadOptions } from './config';
 import { createCtx } from './ctx';
 import { cleanPreviousFiles } from './file-utils';
+import { getStateFilename, saveState } from './persistence';
 import { startRunner } from './runner';
 
 export interface GeneratorHooks {
@@ -25,8 +31,9 @@ export async function generate(
   hooks?: GeneratorHooks
 ) {
   const generatorOptions = loadOptions(options);
+  const stateFilename = getStateFilename(generatorOptions.cwd);
   const ctx = createCtx({ generatorOptions, plugins });
-  return executeGenerator(ctx, plugins, hooks);
+  return executeGenerator(ctx, plugins, stateFilename, hooks);
 }
 
 export function generateAndWatch(
@@ -35,34 +42,30 @@ export function generateAndWatch(
   hooks?: GeneratorHooks
 ) {
   const generatorOptions = loadOptions(options);
-  const pluginsWatchOptions = plugins.map((plugin) => plugin.watch(generatorOptions));
-  const toWatch = pluginsWatchOptions.flatMap((options) => options.include);
-  const toIgnore = pluginsWatchOptions.flatMap((options) => options.ignore);
+  const stateFilename = getStateFilename(generatorOptions.cwd);
+  const watcher = new Watcher(generatorOptions.cwd);
 
   let previousCtx: Ctx | undefined;
 
-  const handleChange = async (file: string) => {
+  const reload = async (file: WatcherFile) => {
     const ctx = createCtx({
       generatorOptions,
       plugins,
       watching: true,
       changedFile: file,
     });
-    previousCtx = await executeGenerator(ctx, plugins, hooks, previousCtx);
+    previousCtx = await executeGenerator(ctx, plugins, stateFilename, hooks, previousCtx);
   };
 
-  return chokidar
-    .watch(toWatch, {
-      ignored: toIgnore,
-      cwd: generatorOptions.cwd,
-    })
-    .on('change', handleChange)
-    .on('unlink', handleChange);
+  plugins.forEach((plugin) => plugin.watch(generatorOptions, watcher, reload));
+
+  return watcher;
 }
 
 async function executeGenerator(
   ctx: Ctx,
   plugins: GeneratorPluginV1[],
+  stateFilename: string,
   hooks?: GeneratorHooks,
   prev?: Ctx
 ) {
@@ -107,12 +110,15 @@ async function executeGenerator(
     await startRunner(ctx, plugins, (plugin) => plugin.end, onEndStart, onEndEnd);
 
     await ctx.fileManager.writeAll();
-    await cleanPreviousFiles(ctx.fileManager, prev?.fileManager);
+
+    await cleanPreviousFiles(ctx.fileManager, stateFilename, prev?.fileManager);
 
     await hooks?.onEnd?.()?.catch(() => null);
   } catch (e) {
     await hooks?.onError?.(e)?.catch(() => null);
   }
+
+  saveState(stateFilename, ctx);
 
   return ctx;
 }

@@ -1,5 +1,14 @@
 # @baeta/plugin-graphql
 
+## 0.0.23
+
+### Patch Changes
+
+- [#66](https://github.com/andreisergiu98/baeta/pull/66) [`9a4a021`](https://github.com/andreisergiu98/baeta/commit/9a4a0214351b70295ce4f7eecaa8c49ab0e1325b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - replace chokidar with @parcel/watcher
+
+- Updated dependencies [[`9a4a021`](https://github.com/andreisergiu98/baeta/commit/9a4a0214351b70295ce4f7eecaa8c49ab0e1325b)]:
+  - @baeta/generator-sdk@0.0.8
+
 ## 0.0.22
 
 ### Patch Changes

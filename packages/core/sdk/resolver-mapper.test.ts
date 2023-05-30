@@ -1,8 +1,5 @@
 import test from 'ava';
 import { defaultFieldResolver, GraphQLResolveInfo } from 'graphql';
-import { NativeResolver } from './resolver';
-import { ResolverMapper } from './resolver-mapper';
-import { NativeSubscribe } from './subscription';
 import {
   forgeNativeMiddleware,
   forgeNativeResolver,
@@ -10,6 +7,9 @@ import {
   getSubscriptionFromMap,
   mockedScalar,
 } from './__test__/utils';
+import { NativeResolver } from './resolver';
+import { ResolverMapper } from './resolver-mapper';
+import { NativeSubscribe } from './subscription';
 
 test('setResolver adds a resolver to the map', (t) => {
   const mapper = new ResolverMapper();

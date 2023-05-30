@@ -1,10 +1,10 @@
 import test from 'ava';
 import { GraphQLResolveInfo } from 'graphql';
+import { forgeNativeResolver, forgeResolverArgs, getResolverFromMap } from './__test__/utils';
 import { chainResolvers, composeResolvers } from './compose';
 import { NativeMiddleware } from './middleware';
 import { NativeResolver } from './resolver';
 import { MiddlewareMap } from './resolver-mapper';
-import { forgeNativeResolver, forgeResolverArgs, getResolverFromMap } from './__test__/utils';
 
 function createMockedResolverMap() {
   return {

@@ -1,9 +1,8 @@
-import { createHandler } from '@baeta/builder/dev-watch';
+import { defineOptions } from '@baeta/builder/dev-watch';
 
-export default createHandler({
-  dir: __dirname,
-  ignore: ['.turbo/', 'dist/', 'tsup.watch.ts'],
-  onEvent: async (event, spawn) => {
+export default defineOptions({
+  ignore: ['dist/'],
+  onEvent: (_, spawn) => {
     return spawn('yarn build');
   },
 });

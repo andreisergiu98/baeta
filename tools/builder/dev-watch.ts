@@ -6,7 +6,6 @@ import fg from 'fast-glob';
 import path from 'path';
 
 interface Options {
-  dir: string;
   ignore?: string[];
   onEvent: (ev: Event, spawn: (cmd: string) => void | Promise<void>) => void | Promise<void>;
 }
@@ -21,20 +20,29 @@ interface Metadata {
   name: string;
 }
 
-export function createHandler(options: Options): Handler {
+export function defineOptions(options: Options): Options {
+  return options;
+}
+
+export function createHandler(root: string, options: Options): Handler {
+  const ignore = ['node_modules/', '.turbo/', 'tsup.watch.ts', ...(options.ignore ?? [])].map(
+    (item) => path.join(root, item)
+  );
+
   return {
-    ...options,
-    dir: path.join(options.dir, '/'),
-    ignore: options.ignore?.map((item) => path.join(options.dir, item)),
+    dir: root,
+    ignore,
+    onEvent: options.onEvent,
   };
 }
 
 export function loadHandler(file: string) {
-  const module = require(file) as { default: Handler };
-  const packageJson = require(path.join(path.dirname(file), 'package.json')) as Metadata;
+  const root = path.join(path.dirname(file), '/');
+  const module = require(file) as { default: Options };
+  const packageJson = require(path.join(root, 'package.json')) as Metadata;
 
   return {
-    handler: module.default,
+    handler: createHandler(root, module.default),
     metadata: packageJson,
   };
 }
@@ -138,6 +146,10 @@ export async function run() {
         if (handler.ignore?.some((item) => fileEvent.path.startsWith(item))) {
           continue;
         }
+
+        console.log(
+          `${style.blueBright.open}WATCHER:${style.color.close} Change in ${metadata.name} - ${fileEvent.type} - ${fileEvent.path}`
+        );
 
         await handler.onEvent(fileEvent, createSpawner(handler, metadata));
       }

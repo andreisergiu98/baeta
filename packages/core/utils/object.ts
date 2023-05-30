@@ -1,8 +1,9 @@
 export function createObjectLens<T = unknown>(
-  obj: Record<string, unknown>,
+  input: Record<string, unknown>,
   path: Array<string | number>
 ) {
   let i = 0;
+  let obj = input;
 
   for (; i < path.length - 1; i++) {
     if (obj == null) {

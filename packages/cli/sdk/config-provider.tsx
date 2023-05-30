@@ -1,7 +1,7 @@
 import { Watcher } from '@baeta/generator';
 import path from 'path';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { loadConfig, LoadedBaetaConfig } from '../lib/config-loader';
+import { LoadedBaetaConfig, loadConfig } from '../lib/config-loader';
 import { createContextProvider } from '../utils/context';
 import { ConfigStatus } from './config-status';
 

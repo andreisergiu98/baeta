@@ -9,7 +9,7 @@ export enum BaetaErrorCode {
 
 export class UnauthenticatedError extends GraphQLError {
   constructor(
-    message: string = 'Access denied! You need to be authorized to perform this action!',
+    message = 'Access denied! You need to be authorized to perform this action!',
     options?: GraphQLErrorOptions
   ) {
     super(message, {
@@ -27,7 +27,7 @@ export class UnauthenticatedError extends GraphQLError {
 
 export class ForbiddenError extends GraphQLError {
   constructor(
-    message: string = "Access denied! You don't have permission to perform this action!",
+    message = "Access denied! You don't have permission to perform this action!",
     options?: GraphQLErrorOptions
   ) {
     super(message, {
@@ -41,7 +41,7 @@ export class ForbiddenError extends GraphQLError {
 }
 
 export class BadUserInput extends GraphQLError {
-  constructor(message: string = 'Invalid user input!', options?: GraphQLErrorOptions) {
+  constructor(message = 'Invalid user input!', options?: GraphQLErrorOptions) {
     super(message, {
       ...options,
       extensions: {
@@ -55,7 +55,7 @@ export class BadUserInput extends GraphQLError {
 export class AggregateGraphQLError extends GraphQLError {
   constructor(
     errors: GraphQLError[],
-    message: string = 'Multiple errors encountered',
+    message = 'Multiple errors encountered',
     options?: GraphQLErrorOptions
   ) {
     super(message, {

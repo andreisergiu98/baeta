@@ -37,6 +37,7 @@ export function HomeFeatures() {
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (
+            // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <Feature key={idx} {...props} />
           ))}
         </div>

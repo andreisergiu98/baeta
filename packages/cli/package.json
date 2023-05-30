@@ -49,23 +49,23 @@
     "@baeta/generator": "workspace:^",
     "@baeta/plugin-graphql": "workspace:^",
     "ansi-styles": "^6.2.1",
-    "cli-spinners": "^2.8.0",
-    "execa": "^6.1.0",
+    "cli-spinners": "^2.9.0",
+    "execa": "^7.1.1",
     "fast-glob": "^3.2.12",
     "ink": "^3.2.0",
     "nanoid": "^4.0.2",
     "react": "^17.0.2",
     "tree-kill": "^1.2.2",
-    "yargs": "^17.7.1"
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.15.11",
-    "@types/react": "^17.0.57",
+    "@types/node": "^18.16.16",
+    "@types/react": "^17.0.60",
     "@types/yargs": "^17.0.24",
     "graphql": "^16.6.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.4"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"

@@ -29,7 +29,7 @@
     "prettier:write": "prettier --write .",
     "publish": "yarn workspaces foreach --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",
-    "test": "yarn workspaces foreach -pv run test",
+    "test": "yarn turbo test --filter='./packages/*'",
     "type:check": "yarn workspaces foreach -pv run types"
   },
   "devDependencies": {

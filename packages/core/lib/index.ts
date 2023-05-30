@@ -3,7 +3,7 @@ export type { Options } from './application';
 export { createContextStore } from './ctx-store';
 export type { ContextStoreOptions } from './ctx-store';
 export { createExtensions } from './extensions';
-export { createInputDirective } from './input-directive';
+export { addValidationToSchema, createInputDirective } from './input-directive';
 export type { ValidationDirectiveFn, ValidationTarget } from './input-directive';
 export type { Middleware, MiddlewareNext, MiddlewareParams } from './middleware';
 export type { Resolver, ResolverParams } from './resolver';

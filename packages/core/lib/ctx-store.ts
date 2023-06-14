@@ -2,9 +2,10 @@ export interface ContextStoreOptions {
   lazy?: boolean;
 }
 
-interface ContextStoreValue<T> {
+export interface ContextStoreValue<T> {
   loader: () => T | PromiseLike<T>;
-  promise?: T | PromiseLike<T>;
+  isLoaded: boolean;
+  result?: T | PromiseLike<T>;
 }
 
 export function createContextStore<T, Context = unknown>(
@@ -20,11 +21,14 @@ export function createContextStore<T, Context = unknown>(
       throw new Error('Context store not initialized');
     }
 
-    if (!item.promise) {
-      item.promise = item.loader();
+    if (item.isLoaded) {
+      return item.result as T | PromiseLike<T>;
     }
 
-    return item.promise;
+    item.result = item.loader();
+    item.isLoaded = true;
+
+    return item.result;
   };
 
   const load = (_ctx: Context, loader: () => T | PromiseLike<T>) => {
@@ -34,15 +38,17 @@ export function createContextStore<T, Context = unknown>(
       return;
     }
 
-    const value: ContextStoreValue<T> = {
+    const item: ContextStoreValue<T> = {
       loader,
+      isLoaded: false,
     };
 
     if (!lazy) {
-      value.promise = loader();
+      item.result = loader();
+      item.isLoaded = true;
     }
 
-    ctx[key] = value;
+    ctx[key] = item;
   };
 
   return [get, load] as const;

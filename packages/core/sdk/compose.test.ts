@@ -41,10 +41,9 @@ function createMockedMiddlewareMap(): MiddlewareMap {
 test('composeResolvers replaces the default resolver with the composed resolver', (t) => {
   const resolverMap = createMockedResolverMap();
   const middlewareMap = createMockedMiddlewareMap();
+  const composed = composeResolvers(resolverMap, middlewareMap);
 
-  composeResolvers(resolverMap, middlewareMap);
-
-  const resolver = getResolverFromMap(resolverMap, 'Query', 'user');
+  const resolver = getResolverFromMap(composed, 'Query', 'user');
   const resolverArgs = forgeResolverArgs();
 
   t.deepEqual(resolver(...resolverArgs.native), {
@@ -57,10 +56,9 @@ test('composeResolvers replaces the default resolver with the composed resolver'
 test('composeResolvers does not replace resolvers for non-mapped types', (t) => {
   const resolverMap = createMockedResolverMap();
   const middlewareMap = createMockedMiddlewareMap();
+  const composed = composeResolvers(resolverMap, middlewareMap);
 
-  composeResolvers(resolverMap, middlewareMap);
-
-  const mutationResolver = getResolverFromMap(resolverMap, 'Mutation', 'createUser');
+  const mutationResolver = getResolverFromMap(composed, 'Mutation', 'createUser');
 
   t.is(mutationResolver, resolverMap.Mutation.createUser);
 });

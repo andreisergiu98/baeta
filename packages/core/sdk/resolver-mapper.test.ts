@@ -80,9 +80,10 @@ test('composes middlewares with resolvers', (t) => {
 
   mapper.setResolver('Query', 'hello', forgeNativeResolver('hello'));
   mapper.addMiddleware('Query', 'hello', middleware);
-  mapper.compose();
 
-  const resolver = getResolverFromMap(mapper.resolvers, 'Query', 'hello');
+  const composed = mapper.compose();
+
+  const resolver = getResolverFromMap(composed, 'Query', 'hello');
 
   t.is(resolver({}, {}, {}, {} as GraphQLResolveInfo), 'hello world');
 });

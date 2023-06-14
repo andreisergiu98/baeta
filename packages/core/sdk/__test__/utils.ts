@@ -1,3 +1,4 @@
+import { IResolvers } from '@graphql-tools/utils';
 import { GraphQLResolveInfo, GraphQLScalarType } from 'graphql';
 import { Middleware, Resolver } from '../../lib';
 import { NativeMiddleware } from '../middleware';
@@ -39,7 +40,11 @@ export async function executeNativeMiddleware<T>(value: T, middleware: NativeMid
   return resolve(...resolverArgs.native) as Promise<T>;
 }
 
-export function getResolverFromMap(map: ResolversMap, type: string, field: string): NativeResolver {
+export function getResolverFromMap(
+  map: ResolversMap | IResolvers,
+  type: string,
+  field: string
+): NativeResolver {
   const resolver = (map[type] as FieldResolvers)[field];
 
   if (resolver == null) {

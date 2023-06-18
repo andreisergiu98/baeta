@@ -33,9 +33,9 @@
     "type:check": "yarn workspaces foreach -pv run types"
   },
   "devDependencies": {
-    "@andreisergiu98/changesets-cli": "^2.25.1",
     "@baeta/builder": "workspace:^",
     "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "npm:@andreisergiu98/changesets-cli@^2.25.1",
     "@yarnpkg/sdks": "^3.0.0-rc.45",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",

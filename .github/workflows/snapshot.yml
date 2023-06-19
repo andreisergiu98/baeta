@@ -77,7 +77,9 @@ jobs:
         run: yarn install
 
       - name: Publish Snapshot
-        id: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           yarn changeset version --snapshot ${{ github.event.issue.number }}
 
@@ -90,20 +92,16 @@ jobs:
 
           yarn release:snapshot
 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Add failure reaction
         uses: peter-evans/create-or-update-comment@v2
-        if: steps.publish.conclusion == 'failure'
+        if: failure()
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: confused
 
       - name: Add success reaction
         uses: peter-evans/create-or-update-comment@v2
-        if: steps.publish.conclusion == 'success'
+        if: success()
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: rocket

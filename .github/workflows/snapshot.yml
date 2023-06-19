@@ -88,6 +88,11 @@ jobs:
             fi
 
             echo "Publishing snapshot"
+        
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        
 
       - name: Add final reaction
         uses: peter-evans/create-or-update-comment@v2

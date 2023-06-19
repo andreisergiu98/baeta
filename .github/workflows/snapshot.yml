@@ -86,7 +86,7 @@ jobs:
           if [[ `git status --porcelain` ]]; then
               echo "Changes detected, publishing snapshot"
           else
-              echo "No changes detected, skipping snapshot"
+              echo "::error::No changes detected, skipping snapshot"
               exit 1
           fi
 

@@ -77,25 +77,33 @@ jobs:
         run: yarn install
 
       - name: Publish Snapshot
+        id: publish
         run: |
-            yarn changeset version --snapshot ${{ github.event.issue.number }}
-          
-            if [[ `git status --porcelain` ]]; then
-                echo "Changes detected, publishing snapshot"
-            else
-                echo "No changes detected, skipping snapshot"
-                exit 1
-            fi
+          yarn changeset version --snapshot ${{ github.event.issue.number }}
 
-            echo "Publishing snapshot"
-        
+          if [[ `git status --porcelain` ]]; then
+              echo "Changes detected, publishing snapshot"
+          else
+              echo "No changes detected, skipping snapshot"
+              exit 1
+          fi
+
+          yarn release:snapshot
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        
 
-      - name: Add final reaction
+      - name: Add failure reaction
         uses: peter-evans/create-or-update-comment@v2
+        if: steps.publish.conclusion == 'failure'
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          reactions: confused
+
+      - name: Add success reaction
+        uses: peter-evans/create-or-update-comment@v2
+        if: steps.publish.conclusion == 'success'
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: rocket

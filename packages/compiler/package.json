@@ -38,7 +38,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "esbuild": "^0.18.2"
+    "esbuild": "^0.18.4"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

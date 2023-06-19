@@ -7,6 +7,7 @@ export function defineConfig(config) {
     format: ['esm', 'cjs'],
     dts: true,
     clean: true,
+    target: 'es2022',
     splitting: true,
     sourcemap: true,
     ...config,

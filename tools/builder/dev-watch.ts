@@ -25,9 +25,13 @@ export function defineOptions(options: Options): Options {
 }
 
 export function createHandler(root: string, options: Options): Handler {
-  const ignore = ['node_modules/', '.turbo/', 'tsup.watch.ts', ...(options.ignore ?? [])].map(
-    (item) => path.join(root, item)
-  );
+  const ignore = [
+    'node_modules/',
+    '.turbo/',
+    'tsup.watch',
+    'tsup.config',
+    ...(options.ignore ?? []),
+  ].map((item) => path.join(root, item));
 
   return {
     dir: root,

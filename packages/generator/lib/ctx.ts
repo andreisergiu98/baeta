@@ -13,10 +13,23 @@ interface CtxOptions {
   watching?: boolean;
 }
 
+function cloneGeneratorOptions(options: NormalizedGeneratorOptions) {
+  const fileOptions = {...options.fileOptions};
+  options.fileOptions = undefined;
+
+  const clonedOptions = structuredClone(options);
+  clonedOptions.fileOptions = fileOptions;
+
+  return clonedOptions;
+}
+
 export function createCtx(options: CtxOptions): Ctx {
+  const generatorOptions = cloneGeneratorOptions(options.generatorOptions);
+
+  
   return {
-    generatorOptions: structuredClone(options.generatorOptions),
-    fileManager: new FileManager(),
+    generatorOptions,
+    fileManager: new FileManager(generatorOptions.fileOptions),
     didSetup: [],
     didGenerate: [],
     didEnd: [],

@@ -16,7 +16,7 @@ export default defineConfig({
   },
   compiler: {
     src: './src/app',
-    dist: './dist',
+    dist: 'dist',
     bundleWorkspaces: true,
     esbuild: {
       format: 'esm',

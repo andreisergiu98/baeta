@@ -3,10 +3,11 @@ import { isAbsolute, join, relative, resolve } from 'path';
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
   const root = options.cwd ?? process.cwd();
-  const modulesDir = resolve(root, options.modulesDir || 'modules');
+  const modulesDir = resolve(root, options.modulesDir || 'src/modules');
   const moduleDefinitionName = options.moduleDefinitionName || 'typedef.ts';
 
-  const baseTypesRoot = resolve(root, options.baseTypesPath || '__generated__/types.ts');
+  const defaultBaseTypesRoot = resolve(modulesDir, '../__generated__/types.ts');
+  const baseTypesRoot = resolve(root, options.baseTypesPath || defaultBaseTypesRoot);
   const baseTypesPath = relative(modulesDir, baseTypesRoot);
 
   return {

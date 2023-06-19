@@ -76,17 +76,32 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Create Release Snapshot
-        uses: "the-guild-org/changesets-snapshot-action@v0.0.1"
-        with:
-          tag: alpha
-          prepareScript: "yarn build"
+      - name: Publish Snapshot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          yarn changeset version --snapshot ${{ github.event.issue.number }}
 
-      - name: Add final reaction
+          if [[ `git status --porcelain` ]]; then
+              echo "Changes detected, publishing snapshot"
+          else
+              echo "No changes detected, skipping snapshot"
+              exit 1
+          fi
+
+          yarn release:snapshot
+
+      - name: Add failure reaction
         uses: peter-evans/create-or-update-comment@v2
+        if: failure()
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          reactions: confused
+
+      - name: Add success reaction
+        uses: peter-evans/create-or-update-comment@v2
+        if: success()
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: rocket

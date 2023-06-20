@@ -2,10 +2,13 @@
   "name": "@baeta/directives",
   "version": "0.0.5",
   "keywords": [
+    "baeta",
     "graphql",
     "schema",
     "types",
-    "typescript"
+    "typescript",
+    "framework",
+    "builder"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {

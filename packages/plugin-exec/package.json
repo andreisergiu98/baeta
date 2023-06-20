@@ -2,10 +2,13 @@
   "name": "@baeta/plugin-exec",
   "version": "0.0.6",
   "keywords": [
+    "baeta",
     "graphql",
     "schema",
     "types",
-    "typescript"
+    "typescript",
+    "framework",
+    "builder"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {

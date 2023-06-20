@@ -24,7 +24,7 @@ gen_enforced_dependency(WorkspaceCwd, DependencyIdent, 'workspace:^', Dependency
 gen_enforced_field(WorkspaceCwd, 'license', 'MIT').
 
 % This rule will enforce that all packages must have the keywords field
-gen_enforced_field(WorkspaceCwd, 'keywords', ['graphql', 'schema', 'types', 'typescript' ]).
+gen_enforced_field(WorkspaceCwd, 'keywords', ['baeta', 'graphql', 'schema', 'types', 'typescript', 'framework', 'builder']).
 
 % This rule will enforce that all packages must have an correct engines.node field
 gen_enforced_field(WorkspaceCwd, 'engines.node', '>=18.0.0') :-

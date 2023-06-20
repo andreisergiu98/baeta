@@ -14,7 +14,7 @@ interface CtxOptions {
 }
 
 function cloneGeneratorOptions(options: NormalizedGeneratorOptions) {
-  const fileOptions = {...options.fileOptions};
+  const fileOptions = { ...options.fileOptions };
   options.fileOptions = undefined;
 
   const clonedOptions = structuredClone(options);
@@ -26,7 +26,6 @@ function cloneGeneratorOptions(options: NormalizedGeneratorOptions) {
 export function createCtx(options: CtxOptions): Ctx {
   const generatorOptions = cloneGeneratorOptions(options.generatorOptions);
 
-  
   return {
     generatorOptions,
     fileManager: new FileManager(generatorOptions.fileOptions),

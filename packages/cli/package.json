@@ -1,6 +1,12 @@
 {
   "name": "@baeta/cli",
   "version": "0.0.39",
+  "keywords": [
+    "graphql",
+    "schema",
+    "types",
+    "typescript"
+  ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
@@ -11,7 +17,10 @@
     "directory": "packages/cli"
   },
   "license": "MIT",
-  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
   "type": "module",
   "exports": {
     ".": {

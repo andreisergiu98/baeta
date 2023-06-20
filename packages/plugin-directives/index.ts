@@ -12,6 +12,7 @@ function printResolver(moduleDefinitionName: string, moduleName: string) {
   const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
   return `import { registerDirectives } from "@baeta/directives";
+
 import { ${method} } from "./${importName}";
 
 registerDirectives(${method}());
@@ -25,6 +26,7 @@ function printExport(moduleDefinitionName: string, moduleName: string) {
   const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
   return `import { ${method} } from "./${importName}";
+
 import "./directives.baeta.ts";
 
 export const ${variable} = ${method}();

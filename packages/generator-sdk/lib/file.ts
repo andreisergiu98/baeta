@@ -2,12 +2,10 @@ import fs from 'fs/promises';
 import { dirname, extname } from 'path';
 
 export interface FileOptions {
+  eslintDisable?: boolean;
+  generationNotice?: boolean;
   addHeader?: (name: string, content: string, tag: string) => string;
   transformContent?: (name: string, content: string, tag: string) => string | Promise<string>;
-
-  generationNotice?: boolean;
-  eslintDisable?: boolean;
-  prettierIgnore?: boolean;
 }
 
 export class File {
@@ -62,10 +60,6 @@ export class File {
 
     if (this.options?.eslintDisable !== false) {
       headerItems.push(this.createComment('eslint-disable', ext));
-    }
-
-    if (this.options?.prettierIgnore !== false) {
-      headerItems.push(this.createComment('prettier-ignore', ext));
     }
 
     if (this.options?.addHeader) {

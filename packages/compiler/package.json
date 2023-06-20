@@ -1,6 +1,15 @@
 {
   "name": "@baeta/compiler",
   "version": "0.0.28",
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
@@ -11,7 +20,10 @@
     "directory": "packages/compiler"
   },
   "license": "MIT",
-  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -38,7 +50,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "esbuild": "^0.18.2"
+    "esbuild": "^0.18.4"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

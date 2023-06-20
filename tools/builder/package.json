@@ -1,6 +1,15 @@
 {
   "name": "@baeta/builder",
   "private": true,
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
@@ -11,7 +20,10 @@
     "directory": "tools/builder"
   },
   "license": "MIT",
-  "author": "Andrei Pampu <pampu.andrei@pm.me>",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
   "type": "module",
   "exports": {
     "./tsup": {
@@ -40,10 +52,10 @@
     "@parcel/watcher": "^2.1.0",
     "ansi-styles": "^6.2.1",
     "color-hash": "^2.0.2",
-    "esbuild": "^0.18.2",
+    "esbuild": "^0.18.4",
     "esbuild-register": "^3.4.2",
     "fast-glob": "^3.2.12",
-    "tsup": "^6.7.0"
+    "tsup": "^7.0.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",

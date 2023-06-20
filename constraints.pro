@@ -5,7 +5,8 @@ gen_enforced_field(WorkspaceCwd, 'homepage', 'https://github.com/andreisergiu98/
 gen_enforced_field(WorkspaceCwd, 'bugs.url', 'https://github.com/andreisergiu98/baeta/issues').
 
 % This rule will enforce that all packages must have the author defined
-gen_enforced_field(WorkspaceCwd, 'author', 'Andrei Pampu <pampu.andrei@pm.me>').
+gen_enforced_field(WorkspaceCwd, 'author.name', 'Andrei Pampu').
+gen_enforced_field(WorkspaceCwd, 'author.url', 'https://github.com/andreisergiu98').
 
 % This rule will enforce that all packages must have repository defined
 gen_enforced_field(WorkspaceCwd, 'repository.type', 'git').
@@ -21,6 +22,9 @@ gen_enforced_dependency(WorkspaceCwd, DependencyIdent, 'workspace:^', Dependency
 
 % This rule will enforce that all packages must have a "MIT" license field
 gen_enforced_field(WorkspaceCwd, 'license', 'MIT').
+
+% This rule will enforce that all packages must have the keywords field
+gen_enforced_field(WorkspaceCwd, 'keywords', ['baeta', 'graphql', 'schema', 'types', 'typescript', 'framework', 'builder']).
 
 % This rule will enforce that all packages must have an correct engines.node field
 gen_enforced_field(WorkspaceCwd, 'engines.node', '>=18.0.0') :-
@@ -54,7 +58,6 @@ gen_enforced_field(WorkspaceCwd, 'scripts.postpack', 'prep --clean') :-
   % Private packages aren't covered
     \+ workspace_field_test(WorkspaceCwd, 'private', 'true').
 
-no_module('@baeta/examples-apollo').
 no_module('@baeta/website').
 
 gen_enforced_field(WorkspaceCwd, 'type', 'module') :-

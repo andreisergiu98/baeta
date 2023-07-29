@@ -1,7 +1,15 @@
-import { File } from './file';
+import { File, FileOptions } from './file';
 
 export class FileManager {
   files: File[] = [];
+
+  constructor(private fileOptions?: FileOptions) {}
+
+  createAndAdd(filename: string, content: string, tag: string) {
+    const file = new File(filename, content, tag, this.fileOptions);
+    this.add(file);
+    return file;
+  }
 
   add(...file: File[]) {
     this.files.push(...file);

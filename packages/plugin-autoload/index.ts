@@ -1,7 +1,6 @@
 import {
   createPluginV1,
   Ctx,
-  File,
   FileManager,
   getModuleGetName,
   isMatch,
@@ -207,9 +206,7 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
         ? path.join(ctx.generatorOptions.cwd, options.output)
         : path.join(ctx.generatorOptions.modulesDir, 'autoload.ts');
 
-      const file = new File(generatedFileName, content.join('\n'), 'autoloader');
-
-      ctx.fileManager.add(file);
+      ctx.fileManager.createAndAdd(generatedFileName, content.join('\n'), 'autoloader');
     },
   });
 }

@@ -1,4 +1,4 @@
-import { File, NormalizedGeneratorOptions } from '@baeta/generator-sdk';
+import { NormalizedGeneratorOptions } from '@baeta/generator-sdk';
 import { codegen as gqlCodegen } from '@graphql-codegen/core';
 import { normalizeConfig, normalizeInstanceOrArray } from '@graphql-codegen/plugin-helpers';
 import * as typescriptPlugin from '@graphql-codegen/typescript';
@@ -67,7 +67,11 @@ export async function generate(options: NormalizedGeneratorOptions) {
       ...output,
       cache,
     });
-    return new File(output.filename, result, 'graphql');
+
+    return {
+      filename: output.filename,
+      content: result,
+    };
   });
 
   return Promise.all(promises);

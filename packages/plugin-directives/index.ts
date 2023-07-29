@@ -1,10 +1,5 @@
 import { definitions } from '@baeta/directives';
-import {
-  createPluginV1,
-  File,
-  getModuleGetName,
-  getModuleVariableName,
-} from '@baeta/generator-sdk';
+import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
 import { join, parse } from 'path';
 
 interface DirectivesOptions {
@@ -17,6 +12,7 @@ function printResolver(moduleDefinitionName: string, moduleName: string) {
   const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
   return `import { registerDirectives } from "@baeta/directives";
+
 import { ${method} } from "./${importName}";
 
 registerDirectives(${method}());
@@ -30,6 +26,7 @@ function printExport(moduleDefinitionName: string, moduleName: string) {
   const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
   return `import { ${method} } from "./${importName}";
+
 import "./directives.baeta.ts";
 
 export const ${variable} = ${method}();
@@ -68,25 +65,24 @@ export function directivesPlugin(options?: DirectivesOptions) {
     generate: async (ctx, next) => {
       const moduleDir = createDirectivesModuleDir(ctx.generatorOptions.modulesDir, moduleName);
 
-      const definitionFile = new File(createGqlFilename(moduleDir), printDefinitions(), 'schema');
-
+      const definitionFile = ctx.fileManager.createAndAdd(
+        createGqlFilename(moduleDir),
+        printDefinitions(),
+        'schema'
+      );
       await definitionFile.write();
 
-      const resolverFile = new File(
+      ctx.fileManager.createAndAdd(
         createResolverFilename(moduleDir),
         printResolver(ctx.generatorOptions.moduleDefinitionName, moduleName),
         'resolvers'
       );
 
-      const exportFile = new File(
+      ctx.fileManager.createAndAdd(
         createExportFilename(moduleDir),
         printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
         'export'
       );
-
-      ctx.fileManager.add(definitionFile);
-      ctx.fileManager.add(exportFile);
-      ctx.fileManager.add(resolverFile);
 
       return next();
     },

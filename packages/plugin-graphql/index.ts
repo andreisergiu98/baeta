@@ -16,8 +16,12 @@ export function graphqlPlugin() {
       watcher.on('delete', handleChange);
     },
     generate: async (ctx, next) => {
-      const files = await generate(ctx.generatorOptions);
-      ctx.fileManager.add(...files);
+      const items = await generate(ctx.generatorOptions);
+
+      for (const item of items) {
+        ctx.fileManager.createAndAdd(item.filename, item.content, 'graphql');
+      }
+
       return next();
     },
   });

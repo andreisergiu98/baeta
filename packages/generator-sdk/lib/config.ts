@@ -1,3 +1,5 @@
+import { FileOptions } from './file';
+
 export interface GeneratorOptions {
   cwd?: string;
   schemas: string[];
@@ -7,6 +9,7 @@ export interface GeneratorOptions {
   contextType?: string;
   extensions?: string;
   scalars?: Record<string, string>;
+  fileOptions?: FileOptions;
 }
 
 export interface NormalizedGeneratorOptions {
@@ -18,4 +21,5 @@ export interface NormalizedGeneratorOptions {
   contextType?: string;
   extensions?: string;
   scalars?: Record<string, string>;
+  fileOptions?: FileOptions;
 }

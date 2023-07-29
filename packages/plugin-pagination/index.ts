@@ -1,9 +1,4 @@
-import {
-  createPluginV1,
-  File,
-  getModuleGetName,
-  getModuleVariableName,
-} from '@baeta/generator-sdk';
+import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
 import { join, parse } from 'path';
 
 interface TypeOptions {
@@ -119,8 +114,11 @@ export function paginationPlugin(options: PaginationOptions) {
 
       const moduleDir = createConnectionModuleDir(ctx.generatorOptions.modulesDir, moduleName);
 
-      const definitionFile = new File(createGqlFilename(moduleDir), printTypes(types), 'schema');
-
+      const definitionFile = ctx.fileManager.createAndAdd(
+        createGqlFilename(moduleDir),
+        printTypes(types),
+        'schema'
+      );
       await definitionFile.write();
 
       ctx.fileManager.add(definitionFile);
@@ -129,13 +127,11 @@ export function paginationPlugin(options: PaginationOptions) {
         return next();
       }
 
-      const exportFile = new File(
+      ctx.fileManager.createAndAdd(
         createExportFilename(moduleDir),
         printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
         'export'
       );
-
-      ctx.fileManager.add(exportFile);
 
       return next();
     },

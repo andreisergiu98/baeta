@@ -28,7 +28,7 @@ export type ValidateExtension = {
   validate: true;
 };
 
-function initValidationsExtension(config: GraphQLInputObjectType | GraphQLInputFieldConfig) {
+export function initValidationsExtension(config: GraphQLInputObjectType | GraphQLInputFieldConfig) {
   if (config.extensions?.validations == null) {
     Object.defineProperty(config.extensions, 'validations', {
       value: [],
@@ -38,7 +38,9 @@ function initValidationsExtension(config: GraphQLInputObjectType | GraphQLInputF
   return config.extensions as ValidationsExtension;
 }
 
-function initArgumentValidationsExtension(config: GraphQLFieldConfig<unknown, unknown, unknown>) {
+export function initArgumentValidationsExtension(
+  config: GraphQLFieldConfig<unknown, unknown, unknown>
+) {
   if (config.extensions?.argumentValidations == null) {
     Object.defineProperty(config.extensions, 'argumentValidations', {
       value: {},

@@ -31,7 +31,7 @@
     "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
   },
   "dependencies": {
-    "@apollo/server": "^4.7.4",
+    "@apollo/server": "^4.9.3",
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@baeta/errors": "workspace:^",

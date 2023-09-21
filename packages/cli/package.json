@@ -76,11 +76,11 @@
     "@types/node": "^18.16.18",
     "@types/react": "^17.0.62",
     "@types/yargs": "^17.0.24",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "typescript": "^5.1.3"
   },
   "peerDependencies": {
-    "graphql": "^16.6.0"
+    "graphql": "^16.8.1"
   },
   "optionalDependencies": {
     "@baeta/compiler": "workspace:^"

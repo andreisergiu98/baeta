@@ -116,11 +116,16 @@ export function Builder(props: Props) {
         process.exit(1);
       });
     },
-    [props.watch, props.onSuccess, props.onError, handleStart, handleEnd]
+    [
+      props.watch,
+      // props.onSuccess, props.onError,
+      handleStart,
+      handleEnd,
+    ]
   );
 
   useEffect(() => {
-    let ctx: BuildContext | undefined | void;
+    let ctx: BuildContext | undefined;
     let stopped = false;
 
     const run = async () => {
@@ -137,7 +142,7 @@ export function Builder(props: Props) {
         process.exit(1);
       }
 
-      ctx = await compile(compiler, config.compiler);
+      ctx = (await compile(compiler, config.compiler)) ?? undefined;
 
       if (stopped) {
         ctx?.dispose();

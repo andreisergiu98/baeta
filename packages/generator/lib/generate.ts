@@ -57,7 +57,9 @@ export function generateAndWatch(
     previousCtx = await executeGenerator(ctx, plugins, stateFilename, hooks, previousCtx);
   };
 
-  plugins.forEach((plugin) => plugin.watch(generatorOptions, watcher, reload));
+  for (const plugin of plugins) {
+    plugin.watch(generatorOptions, watcher, reload);
+  }
 
   return watcher;
 }

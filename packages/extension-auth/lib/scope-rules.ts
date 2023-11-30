@@ -15,23 +15,6 @@ export type ScopeRules = {
   $granted?: string;
 };
 
-function getResolver(ctx: unknown, scopes: ScopeRules, key: string, parentPath: string) {
-  if (isLogicRule(key)) {
-    return () => verifyScopes(ctx, scopes[key], key, parentPath);
-  }
-
-  if (isGrantedKey(key)) {
-    return () => verifyGrant(ctx, scopes[key], parentPath);
-  }
-
-  return async () => {
-    const store = await getAuthStore(ctx);
-    const value = scopes[key as Scopes];
-    const resolve = store.scopes[key];
-    return resolve(value);
-  };
-}
-
 async function verifyGrant(
   ctx: unknown,
   grant: string | undefined,
@@ -44,11 +27,26 @@ async function verifyGrant(
   const store = await getAuthStore(ctx);
   const granted = store.grantCache.getGrants(parentPath);
 
-  if (granted?.includes(grant)) {
-    return true;
+  if (granted?.includes(grant) !== true) {
+    throw new ForbiddenError();
   }
 
-  throw new ForbiddenError();
+  return true;
+}
+
+async function verifyScope(ctx: unknown, scopes: ScopeRules, key: string, parentPath: string) {
+  if (isLogicRule(key)) {
+    return verifyScopes(ctx, scopes[key], key, parentPath);
+  }
+
+  if (isGrantedKey(key)) {
+    return verifyGrant(ctx, scopes[key], parentPath);
+  }
+
+  const store = await getAuthStore(ctx);
+  const value = scopes[key as Scopes];
+  const resolve = store.scopes[key];
+  return resolve(value);
 }
 
 async function verifyChainScopes(
@@ -58,8 +56,7 @@ async function verifyChainScopes(
   parentPath: string
 ): Promise<true> {
   for (const key of keys) {
-    const resolve = getResolver(ctx, scopes, key, parentPath);
-    await resolve();
+    await verifyScope(ctx, scopes, key, parentPath);
   }
 
   return true;
@@ -72,8 +69,7 @@ async function verifyRaceScopes(
   parentPath: string
 ): Promise<true> {
   for (const key of keys) {
-    const resolve = getResolver(ctx, scopes, key, parentPath);
-    const result = await resolve().catch((err) => err);
+    const result = await verifyScope(ctx, scopes, key, parentPath).catch((err) => err);
 
     if (result === true) {
       return true;
@@ -92,8 +88,7 @@ async function verifyOrScopes(
   const promises: Promise<true>[] = [];
 
   for (const key of keys) {
-    const resolve = getResolver(ctx, scopes, key, parentPath);
-    promises.push(resolve());
+    promises.push(verifyScope(ctx, scopes, key, parentPath));
   }
 
   return Promise.any(promises);
@@ -108,8 +103,7 @@ async function verifyAndScopes(
   const promises: Promise<true>[] = [];
 
   for (const key of keys) {
-    const resolve = getResolver(ctx, scopes, key, parentPath);
-    promises.push(resolve());
+    promises.push(verifyScope(ctx, scopes, key, parentPath));
   }
 
   return Promise.all(promises).then(() => true as const);

@@ -258,7 +258,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
   }
 
   function printSubscriptionObjectBuilder() {
-    const subscriptions = picks.objects['Subscription']?.filter(unique) ?? [];
+    const subscriptions = picks.objects.Subscription?.filter(unique) ?? [];
 
     if (subscriptions.length === 0) {
       return '';
@@ -417,9 +417,9 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
         picksObj[name] = [];
       }
 
-      node.fields.forEach((field) => {
+      for (const field of node.fields) {
         picksObj[name].push(field.name.value);
-      });
+      }
     }
   }
 
@@ -431,9 +431,9 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
         picks.enums[name] = [];
       }
 
-      node.values.forEach((field) => {
+      for (const field of node.values) {
         picks.enums[name].push(field.name.value);
-      });
+      }
     }
   }
 

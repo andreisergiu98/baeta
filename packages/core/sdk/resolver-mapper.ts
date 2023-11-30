@@ -62,13 +62,13 @@ export class ResolverMapper {
       return;
     }
 
+    this.setDefaultFieldResolver(type, field);
+
     const key = `${type}.${field}`;
 
     if (this.middlewares[key] == null) {
       this.middlewares[key] = [];
     }
-
-    this.setDefaultFieldResolver(type, field);
 
     if (unshift) {
       this.middlewares[key].unshift(middleware);

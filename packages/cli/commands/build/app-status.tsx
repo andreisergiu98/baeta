@@ -6,7 +6,7 @@ export function AppStatus({ output }: { output: string[] }) {
   return (
     <Layout title="App" color="blue">
       {output.map((value, index) => (
-        // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+        // biome-ignore lint/suspicious/noArrayIndexKey: it is safe in this case
         <Text key={index}>{value}</Text>
       ))}
     </Layout>

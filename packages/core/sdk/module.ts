@@ -41,10 +41,12 @@ export class ModuleBuilder {
       this.mapper.setResolver(type, field, createResolverAdapter(resolver));
     };
 
+    const coreAddons = {
+      $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(type, field),
+    };
+
     const addons = withExtensions(
-      {
-        $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(type, field),
-      },
+      coreAddons,
       this.getResolverExtensions<Result, Root, Context, Args>(type, field)
     );
 
@@ -54,35 +56,39 @@ export class ModuleBuilder {
   createSubscriptionBuilder<Result, Root, Context, Args>(field: string) {
     this.mapper.registerTypeField('Subscription', field);
 
-    const subscribeField = `${field}.subscribe`;
-    const resolveField = `${field}.resolve`;
-
     const builder = <Payload>(subscription: Subscription<Payload, Result, Root, Context, Args>) => {
-      nameFunction(subscription.subscribe, subscribeField);
-      nameFunction(subscription.resolve, resolveField);
+      nameFunction(subscription.subscribe, `${field}.subscribe`);
+      nameFunction(subscription.resolve, `${field}.resolve`);
       this.mapper.setSubscription(field, createSubscriptionAdapter(subscription));
     };
 
+    const coreSubscribeAddons = {
+      $use: this.createMiddlewareBuilder('Subscription', `${field}.subscribe`) as <Payload>(
+        middleware: Middleware<AsyncIterator<Payload>, Root, Context, Args>
+      ) => void,
+    };
+
+    const coreResolveAddons = {
+      $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
+        'Subscription',
+        `${field}.resolve`
+      ),
+    };
+
+    const addons = this.getSubscriptionExtensions<Root, Context, Args>(field);
+
     const subscribeAddons = withExtensions(
-      {
-        $use: this.createMiddlewareBuilder('Subscription', subscribeField) as <Payload>(
-          middleware: Middleware<AsyncIterator<Payload>, Root, Context, Args>
-        ) => void,
-      },
+      coreSubscribeAddons,
       this.getSubscriptionSubscribeExtensions<Root, Context, Args>(field)
     );
 
     const resolveAddons = withExtensions(
-      {
-        $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
-          'Subscription',
-          resolveField
-        ),
-      },
+      coreResolveAddons,
       this.getSubscriptionResolveExtensions<Result, Root, Context, Args>(field)
     );
 
     return extendFunction(builder, {
+      ...addons,
       subscribe: subscribeAddons,
       resolve: resolveAddons,
     });
@@ -104,38 +110,29 @@ export class ModuleBuilder {
   }
 
   createTypeMethods<Root, Context>(type: string) {
-    return withExtensions(
-      {
-        $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(type, '*'),
-      },
-      this.getTypeExtensions<Root, Context>(type)
-    );
+    const addons = {
+      $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(type, '*'),
+    };
+    return withExtensions(addons, this.getTypeExtensions<Root, Context>(type));
   }
 
   createSubscriptionMethods<Root, Context>() {
-    return withExtensions(
-      {
-        $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(
-          'Subscription',
-          '*'
-        ),
-      },
-      this.createTypeMethods<Root, Context>('Subscription')
-    );
+    const addons = {
+      $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(
+        'Subscription',
+        '*'
+      ),
+    };
+    return withExtensions(addons, this.createTypeMethods<Root, Context>('Subscription'));
   }
 
   createModuleMethods<Context>() {
-    return withExtensions(
-      {
-        $builder: this as ModuleBuilder,
-        $use: this.createMiddlewareBuilder<Middleware<unknown, unknown, Context, unknown>>(
-          '*',
-          '*'
-        ),
-        $directive: this.addTransformer,
-      },
-      this.getModuleExtensions()
-    );
+    const addons = {
+      $builder: this as ModuleBuilder,
+      $use: this.createMiddlewareBuilder<Middleware<unknown, unknown, Context, unknown>>('*', '*'),
+      $directive: this.addTransformer,
+    };
+    return withExtensions(addons, this.getModuleExtensions());
   }
 
   private getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
@@ -148,6 +145,12 @@ export class ModuleBuilder {
     return mergeExtensions(this.extensions, (ext) =>
       ext.getTypeExtensions(type)
     ) as BaetaExtensions.TypeExtensions<Root, Context>;
+  }
+
+  private getSubscriptionExtensions<Root, Context, Args>(type: string) {
+    return mergeExtensions(this.extensions, (ext) =>
+      ext.getSubscriptionExtensions(type)
+    ) as BaetaExtensions.SubscriptionExtensions<Root, Context, Args>;
   }
 
   private getSubscriptionSubscribeExtensions<Root, Context, Args>(type: string) {

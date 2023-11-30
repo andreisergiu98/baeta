@@ -22,7 +22,7 @@ function formatError(error: unknown) {
       .filter((x) => x != null)
       .join(':');
 
-    return error.message + '\n\n' + location;
+    return `${error.message}\n\n${location}`;
   }
 
   if (error instanceof Error) {
@@ -63,7 +63,7 @@ function GeneratorPluginsStatus(props: Props) {
 
   const pluginMessages = props.startedPlugins.map((startedPlugin, index) => {
     const isFinished = props.finishedPlugins.includes(startedPlugin);
-    // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+    // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
     return <GeneratorPluginStatus key={index} plugin={startedPlugin} isFinished={isFinished} />;
   });
 

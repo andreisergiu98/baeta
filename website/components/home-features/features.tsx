@@ -37,7 +37,7 @@ export function HomeFeatures() {
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (
-            // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            // biome-ignore lint/suspicious/noArrayIndexKey: static list
             <Feature key={idx} {...props} />
           ))}
         </div>

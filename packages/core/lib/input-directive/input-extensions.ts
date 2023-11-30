@@ -73,12 +73,8 @@ export function addArgumentValidationsExtension(
   validation: ValidationOptions
 ) {
   const extensions = initArgumentValidationsExtension(config);
-  if (extensions.argumentValidations[name] == null) {
-    extensions.argumentValidations[name] = [];
-  }
-
-  // rome-ignore lint/style/noNonNullAssertion: initialized above
-  extensions.argumentValidations[name]![index] = validation;
+  extensions.argumentValidations[name] ??= [];
+  (extensions.argumentValidations[name] as ValidationOptions[])[index] = validation;
 }
 
 export function hasValidateExtension(type: GraphQLNamedInputType) {

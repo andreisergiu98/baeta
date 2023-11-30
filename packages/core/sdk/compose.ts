@@ -46,7 +46,7 @@ export function copyResolvers<T extends ResolversMap>(resolvers: T): T {
 
   for (const key in resolvers) {
     if (key === 'Subscription') {
-      copy['Subscription'] = copySubscriptionResolvers(resolvers);
+      copy.Subscription = copySubscriptionResolvers(resolvers);
       continue;
     }
 

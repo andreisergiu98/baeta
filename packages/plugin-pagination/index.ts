@@ -27,7 +27,7 @@ ${printFields(fields)}
 }
 
 function printTypes(types: string[]) {
-  return types.join('\n\n') + '\n';
+  return `${types.join('\n\n')}\n`;
 }
 
 function printPageInfo(addFields: string[] = []) {

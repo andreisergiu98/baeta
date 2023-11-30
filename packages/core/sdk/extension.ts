@@ -3,19 +3,22 @@ import { SchemaTransformer } from './transformer';
 
 declare global {
   export namespace BaetaExtensions {
-    // rome-ignore lint/suspicious/noEmptyInterface: is template
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface ResolverExtensions<Result, Root, Context, Args> {}
 
-    // rome-ignore lint/suspicious/noEmptyInterface: is template
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface TypeExtensions<Root, Context> {}
 
-    // rome-ignore lint/suspicious/noEmptyInterface: is template
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
+    export interface SubscriptionExtensions<Root, Context, Args> {}
+
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface SubscriptionSubscribeExtensions<Root, Context, Args> {}
 
-    // rome-ignore lint/suspicious/noEmptyInterface: is template
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface SubscriptionResolveExtensions<Result, Root, Context, Args> {}
 
-    // rome-ignore lint/suspicious/noEmptyInterface: is template
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface ModuleExtensions {}
   }
 }
@@ -38,6 +41,10 @@ export class Extension {
   }
 
   getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
+    return {};
+  }
+
+  getSubscriptionExtensions<Root, Context, Args>(field: string) {
     return {};
   }
 
@@ -65,14 +72,16 @@ export function mergeExtensions<T, K extends Record<string, unknown>>(
   callback: (item: T) => K
 ) {
   const list = items.map(callback);
-  const reduced = list.reduce(
-    (acc, handler) => ({
-      ...acc,
-      ...handler,
-    }),
-    {}
-  );
-  return reduced;
+
+  const merged: Record<string, unknown> = {};
+
+  for (const item of list) {
+    for (const key in item) {
+      merged[key] = item[key];
+    }
+  }
+
+  return merged;
 }
 
 export function withExtensions<Core, Ext>(core: Core, ext: Ext) {

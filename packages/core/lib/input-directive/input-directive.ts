@@ -45,7 +45,7 @@ function createValidationFn<DirectiveConfig, Context>(
   };
 }
 
-function applyInputDirective(
+export function applyInputDirective(
   schema: GraphQLSchema,
   name: string,
   target: ValidationTarget,

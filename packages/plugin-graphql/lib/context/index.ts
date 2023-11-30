@@ -9,7 +9,7 @@ interface Config {
 export const plugin: PluginFunction<Config> = async (
   schema: GraphQLSchema,
   documents: Types.DocumentFile[],
-  config: Config
+  config: Config,
 ): Promise<Types.PluginOutput> => {
   const prepend: string[] = [];
   const mapper = parseMapper(config.contextType || 'any');
@@ -25,7 +25,7 @@ export const plugin: PluginFunction<Config> = async (
           asDefault: mapper.default,
         },
       ],
-      true
+      true,
     );
 
     if (result) {

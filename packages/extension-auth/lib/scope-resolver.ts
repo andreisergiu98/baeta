@@ -49,7 +49,7 @@ function createScopeResolver(ctx: unknown, name: string, value: ScopeLoader<any>
 
 export function createScopeResolverMap(
   ctx: unknown,
-  scopeLoaderMap: ScopeLoaderMap
+  scopeLoaderMap: ScopeLoaderMap,
 ): ScopeResolverMap {
   const map: ScopeResolverMap = {};
 

@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 
 export type Subscribe<Payload, Root = {}, Context = {}, Args = {}> = (
-  params: SubscribeParams<Root, Context, Args>
+  params: SubscribeParams<Root, Context, Args>,
 ) => AsyncIterator<Payload>;
 
 export type SubscribeParams<Root, Context, Args> = {
@@ -12,7 +12,7 @@ export type SubscribeParams<Root, Context, Args> = {
 };
 
 export type SubscribeResolve<Result, Payload, Context = {}, Args = {}> = (
-  params: SubscribeResolveParams<Payload, Context, Args>
+  params: SubscribeResolveParams<Payload, Context, Args>,
 ) => Result | Promise<Result>;
 
 export type SubscribeResolveParams<Payload, Context, Args> = {
@@ -23,7 +23,7 @@ export type SubscribeResolveParams<Payload, Context, Args> = {
 };
 
 export type SubscribeFilter<Payload, Context = {}, Args = {}> = (
-  params: SubscribeFilterParams<Payload, Context, Args>
+  params: SubscribeFilterParams<Payload, Context, Args>,
 ) => boolean | Promise<boolean>;
 
 export type SubscribeFilterParams<Payload, Context, Args> = {

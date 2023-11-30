@@ -41,7 +41,7 @@ function externalizePlugin(): Plugin {
 function injectFileScopesPlugin(
   dirnameVarName: string,
   filenameVarName: string,
-  importMetaUrlVarName: string
+  importMetaUrlVarName: string,
 ): Plugin {
   return {
     name: 'inject-file-scope-variables',
@@ -65,7 +65,7 @@ function injectFileScopesPlugin(
 
 export async function bundleFile(
   fileName: string,
-  isESM: boolean
+  isESM: boolean,
 ): Promise<{ code: string; dependencies: string[] }> {
   const dirnameVarName = '__baeta_injected_original_dirname';
   const filenameVarName = '__baeta_injected_original_filename';

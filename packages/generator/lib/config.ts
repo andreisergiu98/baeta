@@ -42,7 +42,7 @@ function resolveContextType(root: string, baseTypesRoot: string, contextType?: s
 function resolveExtensionPath(
   modulesDir: string,
   moduleDefinitionName: string,
-  extensionsPath?: string
+  extensionsPath?: string,
 ) {
   if (!extensionsPath) {
     return;

@@ -86,7 +86,7 @@ test(
     query {
       value(input: { email: "test@test.com" })
     }
-  `
+  `,
 );
 
 test(
@@ -97,7 +97,7 @@ test(
     query {
       value(input: { url: "https://test.com" })
     }
-  `
+  `,
 );
 
 test(
@@ -108,7 +108,7 @@ test(
     query {
       value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" })
     }
-  `
+  `,
 );
 
 test(
@@ -119,7 +119,7 @@ test(
     query {
       value(input: { min: "foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -130,7 +130,7 @@ test(
     query {
       value(input: { max: "foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -141,7 +141,7 @@ test(
     query {
       value(input: { startsWith: "foo bar" })
     }
-  `
+  `,
 );
 
 test(
@@ -152,7 +152,7 @@ test(
     query {
       value(input: { endsWith: "bar foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -163,7 +163,7 @@ test(
     query {
       value(input: { includes: "bar foo baz" })
     }
-  `
+  `,
 );
 
 test(
@@ -174,7 +174,7 @@ test(
     query {
       value(input: { regex: "FOO" })
     }
-  `
+  `,
 );
 
 test(
@@ -185,7 +185,7 @@ test(
     query {
       value(input: { regex: "Foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -196,7 +196,7 @@ test(
     query {
       value(input: { oneOf: "foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -207,7 +207,7 @@ test(
     query {
       value(input: { notOneOf: "barr" })
     }
-  `
+  `,
 );
 
 test(
@@ -229,7 +229,7 @@ test(
         }
       )
     }
-  `
+  `,
 );
 
 test(
@@ -240,7 +240,7 @@ test(
     query {
       value(input: { email: "test@test" })
     }
-  `
+  `,
 );
 
 test(
@@ -251,7 +251,7 @@ test(
     query {
       value(input: { url: "https://test" })
     }
-  `
+  `,
 );
 
 test(
@@ -262,7 +262,7 @@ test(
     query {
       value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11 a" })
     }
-  `
+  `,
 );
 
 test(
@@ -273,7 +273,7 @@ test(
     query {
       value(input: { min: "fo" })
     }
-  `
+  `,
 );
 
 test(
@@ -284,7 +284,7 @@ test(
     query {
       value(input: { max: "fooo" })
     }
-  `
+  `,
 );
 
 test(
@@ -295,7 +295,7 @@ test(
     query {
       value(input: { startsWith: "bar foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -306,7 +306,7 @@ test(
     query {
       value(input: { endsWith: "foo bar" })
     }
-  `
+  `,
 );
 
 test(
@@ -317,7 +317,7 @@ test(
     query {
       value(input: { includes: "bar baz" })
     }
-  `
+  `,
 );
 
 test(
@@ -328,7 +328,7 @@ test(
     query {
       value(input: { regex: "foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -339,7 +339,7 @@ test(
     query {
       value(input: { regex: "Foo1" })
     }
-  `
+  `,
 );
 
 test(
@@ -350,7 +350,7 @@ test(
     query {
       value(input: { oneOf: "barr" })
     }
-  `
+  `,
 );
 
 test(
@@ -361,7 +361,7 @@ test(
     query {
       value(input: { notOneOf: "foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -384,7 +384,7 @@ test(
       )
     }
   `,
-  8
+  8,
 );
 
 test(
@@ -395,5 +395,5 @@ test(
     query {
       value(input: { badType: 10 })
     }
-  `
+  `,
 );

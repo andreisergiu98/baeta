@@ -68,20 +68,20 @@ export function directivesPlugin(options?: DirectivesOptions) {
       const definitionFile = ctx.fileManager.createAndAdd(
         createGqlFilename(moduleDir),
         printDefinitions(),
-        'schema'
+        'schema',
       );
       await definitionFile.write();
 
       ctx.fileManager.createAndAdd(
         createResolverFilename(moduleDir),
         printResolver(ctx.generatorOptions.moduleDefinitionName, moduleName),
-        'resolvers'
+        'resolvers',
       );
 
       ctx.fileManager.createAndAdd(
         createExportFilename(moduleDir),
         printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
-        'export'
+        'export',
       );
 
       return next();

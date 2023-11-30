@@ -24,7 +24,10 @@ export class Watcher {
 
   private watcherIgnore: WatcherIgnore;
 
-  constructor(private readonly cwd: string, private readonly options?: Options) {
+  constructor(
+    private readonly cwd: string,
+    private readonly options?: Options,
+  ) {
     this.watcherIgnore = new WatcherIgnore(cwd);
     this.subscription = this.createSubscription();
   }

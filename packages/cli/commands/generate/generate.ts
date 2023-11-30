@@ -45,7 +45,7 @@ function createHandler(config?: LoadedBaetaConfig) {
       {
         watchConfig: args.watch,
         initialConfig: config,
-      }
+      },
     );
   };
 }

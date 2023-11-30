@@ -17,18 +17,18 @@ export interface GeneratorHooks {
   onError?: (error: unknown) => void | Promise<void>;
   onPluginStepStart?: (
     plugin: GeneratorPluginV1,
-    step: 'setup' | 'generate' | 'end'
+    step: 'setup' | 'generate' | 'end',
   ) => void | Promise<void>;
   onPluginStepEnd?: (
     plugin: GeneratorPluginV1,
-    step: 'setup' | 'generate' | 'end'
+    step: 'setup' | 'generate' | 'end',
   ) => void | Promise<void>;
 }
 
 export async function generate(
   options: GeneratorOptions,
   plugins: GeneratorPluginV1<any>[],
-  hooks?: GeneratorHooks
+  hooks?: GeneratorHooks,
 ) {
   const generatorOptions = loadOptions(options);
   const stateFilename = getStateFilename(generatorOptions.cwd);
@@ -39,7 +39,7 @@ export async function generate(
 export function generateAndWatch(
   options: GeneratorOptions,
   plugins: GeneratorPluginV1<any>[],
-  hooks?: GeneratorHooks
+  hooks?: GeneratorHooks,
 ) {
   const generatorOptions = loadOptions(options);
   const stateFilename = getStateFilename(generatorOptions.cwd);
@@ -69,7 +69,7 @@ async function executeGenerator(
   plugins: GeneratorPluginV1[],
   stateFilename: string,
   hooks?: GeneratorHooks,
-  prev?: Ctx
+  prev?: Ctx,
 ) {
   const first = plugins[0];
 

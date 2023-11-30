@@ -69,7 +69,7 @@ export function resolveExtensions<T>(list: Array<() => T>): T[] {
 
 export function mergeExtensions<T, K extends Record<string, unknown>>(
   items: T[],
-  callback: (item: T) => K
+  callback: (item: T) => K,
 ) {
   const list = items.map(callback);
 

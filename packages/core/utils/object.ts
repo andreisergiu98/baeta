@@ -1,6 +1,6 @@
 export function createObjectLens<T = unknown>(
   input: Record<string, unknown>,
-  path: Array<string | number>
+  path: Array<string | number>,
 ) {
   let i = 0;
   let obj = input;

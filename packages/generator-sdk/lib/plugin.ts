@@ -9,7 +9,7 @@ export enum GeneratorPluginVersion {
 
 export type GeneratorPluginV1Fn<Store = unknown> = (
   ctx: Ctx<Store>,
-  next: () => Promise<void>
+  next: () => Promise<void>,
 ) => Promise<void>;
 
 export type GeneratorPluginV1ReloadFn = (file: WatcherFile) => void;
@@ -17,7 +17,7 @@ export type GeneratorPluginV1ReloadFn = (file: WatcherFile) => void;
 export type GeneratorPluginV1WatchOptions = (
   options: NormalizedGeneratorOptions,
   watcher: Watcher,
-  reload: GeneratorPluginV1ReloadFn
+  reload: GeneratorPluginV1ReloadFn,
 ) => void;
 
 export type GeneratorPluginV1Factory<Store = unknown> = {
@@ -47,7 +47,7 @@ const defaultPluginFn: GeneratorPluginV1Fn<unknown> = async (ctx, next) => {
 const defaultWatchFn = () => ({ include: [], ignore: [] });
 
 export function createPluginV1<Store = {}>(
-  options: GeneratorPluginV1Factory<Store>
+  options: GeneratorPluginV1Factory<Store>,
 ): GeneratorPluginV1<Store> {
   return {
     name: options.name,

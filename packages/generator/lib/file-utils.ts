@@ -5,7 +5,7 @@ import { readState } from './persistence';
 export function cleanPreviousFiles(
   current: FileManager,
   stateFile: string,
-  previous?: FileManager
+  previous?: FileManager,
 ) {
   if (previous) {
     return cleanByFileManager(current, previous);

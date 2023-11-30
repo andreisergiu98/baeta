@@ -13,7 +13,7 @@ export interface ConfigProps {
 export function useConfigStore(props: ConfigProps) {
   const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);
 
-  const updateConfig = useCallback(async (f) => {
+  const updateConfig = useCallback(async () => {
     const config = await loadConfig();
     if (config) {
       setConfig(config);
@@ -48,7 +48,7 @@ export const [ConfigProviderBase, useConfig] = createContextProvider(
   {
     name: 'Config',
   },
-  useConfigStore
+  useConfigStore,
 );
 
 export function ConfigProvider(props: PropsWithChildren<ConfigProps>) {

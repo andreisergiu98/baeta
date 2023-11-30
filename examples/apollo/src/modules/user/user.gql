@@ -11,4 +11,5 @@ input UserWhereUnique @constraints(minFields: 1, maxFields: 1) {
 
 type Query {
   user(where: UserWhereUnique): User
+  users(id: String): [User]
 }

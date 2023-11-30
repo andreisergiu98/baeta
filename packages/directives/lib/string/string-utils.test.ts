@@ -84,19 +84,19 @@ const argsValueMacro = makeQueryResolverMacro(
   typeDefs,
   transformer,
   (args: ValueArgs) => args.input.value,
-  'String'
+  'String',
 );
 const argsAggregateMacro = makeQueryResolverMacro(
   typeDefs,
   transformer,
   (args: AggregateArgs) => [args.input.trim, args.input.lower, args.input.upper].join(''),
-  'String'
+  'String',
 );
 const argsBadTypeMacro = makeQueryResolverMacro(
   typeDefs,
   transformer,
   (args: BadTypeArgs) => args.input.badTrim + args.input.badLower + args.input.badUpper,
-  'Int'
+  'Int',
 );
 
 test(
@@ -108,7 +108,7 @@ test(
     query {
       value(input: { value: "  foo  " })
     }
-  `
+  `,
 );
 
 test(
@@ -120,7 +120,7 @@ test(
     query {
       value(input: { value: "  foo  " })
     }
-  `
+  `,
 );
 
 test(
@@ -132,7 +132,7 @@ test(
     query {
       value(input: { value: "  foo  " })
     }
-  `
+  `,
 );
 
 test(
@@ -144,7 +144,7 @@ test(
     query {
       value(input: { value: "  foo  " })
     }
-  `
+  `,
 );
 
 test(
@@ -156,7 +156,7 @@ test(
     query {
       value(input: { value: "  foo  " })
     }
-  `
+  `,
 );
 
 test(
@@ -168,7 +168,7 @@ test(
     query {
       value(input: { value: "  foo  " })
     }
-  `
+  `,
 );
 
 test(
@@ -180,7 +180,7 @@ test(
     query {
       value(input: { value: "FOO" })
     }
-  `
+  `,
 );
 
 test(
@@ -192,7 +192,7 @@ test(
     query {
       value(input: { value: "foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -204,7 +204,7 @@ test(
     query {
       value(input: { trim: "  foo  ", lower: "FOO", upper: "foo" })
     }
-  `
+  `,
 );
 
 test(
@@ -216,5 +216,5 @@ test(
     query {
       value(input: { badTrim: 10, badLower: 10, badUpper: 10 })
     }
-  `
+  `,
 );

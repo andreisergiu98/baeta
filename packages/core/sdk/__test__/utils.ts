@@ -43,7 +43,7 @@ export async function executeNativeMiddleware<T>(value: T, middleware: NativeMid
 export function getResolverFromMap(
   map: ResolversMap | IResolvers,
   type: string,
-  field: string
+  field: string,
 ): NativeResolver {
   const resolver = (map[type] as FieldResolvers)[field];
 

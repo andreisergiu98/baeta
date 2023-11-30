@@ -59,13 +59,13 @@ const directive = createInputDirective<Args>({
 
     if (config.oneOf != null && !config.oneOf.includes(value)) {
       throw new BadUserInput(
-        `Value must be one of ${config.oneOf.map((n) => n.toString()).join(', ')}`
+        `Value must be one of ${config.oneOf.map((n) => n.toString()).join(', ')}`,
       );
     }
 
     if (config.notOneOf?.includes(value)) {
       throw new BadUserInput(
-        `Value must not be one of ${config.notOneOf.map((n) => n.toString()).join(', ')}`
+        `Value must not be one of ${config.notOneOf.map((n) => n.toString()).join(', ')}`,
       );
     }
   },

@@ -39,7 +39,7 @@ export function initValidationsExtension(config: GraphQLInputObjectType | GraphQ
 }
 
 export function initArgumentValidationsExtension(
-  config: GraphQLFieldConfig<unknown, unknown, unknown>
+  config: GraphQLFieldConfig<unknown, unknown, unknown>,
 ) {
   if (config.extensions?.argumentValidations == null) {
     Object.defineProperty(config.extensions, 'argumentValidations', {
@@ -60,7 +60,7 @@ export function addValidateExtension(type: GraphQLInputObjectType) {
 export function addValidationsExtension(
   config: GraphQLInputObjectType | GraphQLInputFieldConfig,
   index: number,
-  validation: ValidationOptions
+  validation: ValidationOptions,
 ) {
   const extensions = initValidationsExtension(config);
   extensions.validations[index] = validation;
@@ -70,7 +70,7 @@ export function addArgumentValidationsExtension(
   config: GraphQLFieldConfig<unknown, unknown, unknown>,
   name: string,
   index: number,
-  validation: ValidationOptions
+  validation: ValidationOptions,
 ) {
   const extensions = initArgumentValidationsExtension(config);
   extensions.argumentValidations[name] ??= [];
@@ -99,7 +99,7 @@ export function getValidationsFromExtension(type: GraphQLInputField | GraphQLInp
 
 export function getArgumentValidationsFromExtensions(
   type: GraphQLField<unknown, unknown, unknown>,
-  name: string
+  name: string,
 ) {
   const extension = type.extensions as Maybe<ArgumentValidationsExtension>;
   return extension?.argumentValidations?.[name]?.filter((opt) => opt != null);

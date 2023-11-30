@@ -61,7 +61,7 @@
     "@graphql-tools/url-loader": "^8.0.0",
     "@graphql-tools/utils": "^10.0.11",
     "auto-bind": "^5.0.1",
-    "change-case-all": "1.0.15",
+    "change-case-all": "2.1.0",
     "parse-filepath": "^1.0.2"
   },
   "devDependencies": {

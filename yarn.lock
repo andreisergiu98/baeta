@@ -3358,7 +3358,7 @@ __metadata:
     "@parcel/watcher": "npm:^2.3.0"
     "@types/micromatch": "npm:^4.0.6"
     "@types/node": "npm:^18.19.0"
-    change-case-all: "npm:1.0.15"
+    change-case-all: "npm:2.1.0"
     micromatch: "npm:^4.0.5"
     typescript: "npm:^5.3.2"
   languageName: unknown
@@ -3441,7 +3441,7 @@ __metadata:
     "@types/node": "npm:^18.19.0"
     "@types/parse-filepath": "npm:1.0.2"
     auto-bind: "npm:^5.0.1"
-    change-case-all: "npm:1.0.15"
+    change-case-all: "npm:2.1.0"
     graphql: "npm:^16.8.1"
     parse-filepath: "npm:^1.0.2"
     typescript: "npm:^5.3.2"
@@ -3509,7 +3509,7 @@ __metadata:
     clsx: "npm:^2.0.0"
     esbuild: "npm:^0.19.8"
     esbuild-loader: "npm:^4.0.2"
-    prism-react-renderer: "npm:^1.3.5"
+    prism-react-renderer: "npm:^2.3.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     typescript: "npm:^5.3.2"
@@ -8268,6 +8268,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"change-case-all@npm:2.1.0":
+  version: 2.1.0
+  resolution: "change-case-all@npm:2.1.0"
+  dependencies:
+    change-case: "npm:^5.2.0"
+    sponge-case: "npm:^2.0.2"
+    swap-case: "npm:^3.0.2"
+    title-case: "npm:^3.0.3"
+  checksum: b115f39532d66f062aafd1c86352ea87027061111508feb11d125c6c49e54e545295933ded889c4225c7d88e4667aa56661365b9433aa41d61f852677e949cfb
+  languageName: node
+  linkType: hard
+
 "change-case@npm:^4.1.2":
   version: 4.1.2
   resolution: "change-case@npm:4.1.2"
@@ -8285,6 +8297,13 @@ __metadata:
     snake-case: "npm:^3.0.4"
     tslib: "npm:^2.0.3"
   checksum: e4bc4a093a1f7cce8b33896665cf9e456e3bc3cc0def2ad7691b1994cfca99b3188d0a513b16855b01a6bd20692fcde12a7d4d87a5615c4c515bbbf0e651f116
+  languageName: node
+  linkType: hard
+
+"change-case@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "change-case@npm:5.2.0"
+  checksum: 2ca74f92051a70077d2022e064c1a17227c21abe513226e591f1b949667e00ec8c4919a96e737893ff81125b37410d910a35441344413de1fc7dad4b67664291
   languageName: node
   linkType: hard
 
@@ -15971,15 +15990,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:^1.3.5":
-  version: 1.3.5
-  resolution: "prism-react-renderer@npm:1.3.5"
-  peerDependencies:
-    react: ">=0.14.9"
-  checksum: 6deeef1bf497b5ce2ea5113f253f5d5e0842caa74eee385f15f17b75012fdea994cddf097759d0a2a9426ff857ea44bf2febe219392be4c72f887c7df88cc34d
-  languageName: node
-  linkType: hard
-
 "prism-react-renderer@npm:^2.3.0":
   version: 2.3.0
   resolution: "prism-react-renderer@npm:2.3.0"
@@ -17789,6 +17799,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sponge-case@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "sponge-case@npm:2.0.2"
+  checksum: dce11bb497880e95a1a1640446ac0eba8e083db1bac59936f1f69223de3517ed4df0d495f1f1a5fd29f49aa11fed637d1daa463880051b35a8510cf55f31e803
+  languageName: node
+  linkType: hard
+
 "sprintf-js@npm:~1.0.2":
   version: 1.0.3
   resolution: "sprintf-js@npm:1.0.3"
@@ -18138,6 +18155,13 @@ __metadata:
   dependencies:
     tslib: "npm:^2.0.3"
   checksum: 6e21c9e1b3cd5735eb2af679a99ec3efc78a14e3d4d5e3fd594e254b91cfd37185b3d1c6e41b22f53a2cdf5d1b963ce30c0fe8b78337e3fd43d0137084670a5f
+  languageName: node
+  linkType: hard
+
+"swap-case@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "swap-case@npm:3.0.2"
+  checksum: 2f643807fbc965e6ba3e86fafee5d38f6a13f3062ea98c7900553692a8118bfb039cd8e2ab9190d908cc28c1f4b7d4308bc31a01e6d1d589167d7bde026c63c6
   languageName: node
   linkType: hard
 

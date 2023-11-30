@@ -72,7 +72,7 @@ function getRelativeConfigPath(path: string) {
 export async function loadConfigFromBundledFile(
   fileName: string,
   bundledCode: string,
-  isEsm: boolean
+  isEsm: boolean,
 ): Promise<any> {
   const ext = isEsm ? 'mjs' : 'cjs';
   const fileBase = `${fileName}.timestamp-${Date.now()}`;
@@ -112,8 +112,8 @@ async function importTypeScriptConfig(configPath: string): Promise<BaetaOptions 
     console.log(
       makeErrorMessage(
         `@baeta/compiler is required to load ${getRelativeConfigPath(configPath)}`,
-        true
-      )
+        true,
+      ),
     );
     process.exit(1);
   }

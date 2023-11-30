@@ -129,7 +129,7 @@ export async function run() {
   const results = entries.map((item) => loadHandler(path.join(process.cwd(), item)));
 
   console.log(
-    `${style.blueBright.open}WATCHER:${style.color.close} Watching ${results.length} packages...`
+    `${style.blueBright.open}WATCHER:${style.color.close} Watching ${results.length} packages...`,
   );
 
   await subscribe(process.cwd(), async (err, event) => {
@@ -152,7 +152,7 @@ export async function run() {
         }
 
         console.log(
-          `${style.blueBright.open}WATCHER:${style.color.close} Change in ${metadata.name} - ${fileEvent.type} - ${fileEvent.path}`
+          `${style.blueBright.open}WATCHER:${style.color.close} Change in ${metadata.name} - ${fileEvent.type} - ${fileEvent.path}`,
         );
 
         await handler.onEvent(fileEvent, createSpawner(handler, metadata));

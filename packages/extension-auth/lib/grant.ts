@@ -11,7 +11,7 @@ type GetGrantResult = AuthExtension.Grants | AuthExtension.Grants[];
 
 type GetGrantFn<Result, Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>,
-  result: Result
+  result: Result,
 ) => GetGrantResult | PromiseLike<GetGrantResult>;
 
 export type GetGrant<Result, Root, Context, Args> =
@@ -28,7 +28,7 @@ export async function saveGrants(
   ctx: unknown,
   info: GraphQLResolveInfo,
   result: unknown,
-  grants: GetGrant<unknown, unknown, unknown, unknown>
+  grants: GetGrant<unknown, unknown, unknown, unknown>,
 ) {
   const [store, resolvedGrants] = await Promise.all([
     getAuthStore(ctx),
@@ -44,7 +44,7 @@ async function resolveGrants(
   ctx: unknown,
   info: GraphQLResolveInfo,
   result: unknown,
-  grants: GetGrant<unknown, unknown, unknown, unknown>
+  grants: GetGrant<unknown, unknown, unknown, unknown>,
 ) {
   if (typeof grants !== 'function') {
     return grants;

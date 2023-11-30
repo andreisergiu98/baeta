@@ -4,7 +4,7 @@ import { ConfigProps, ConfigProvider } from './config-provider';
 
 export function renderComponentWithoutConfig<P extends {}>(
   component: FunctionComponent<P>,
-  props?: P | null
+  props?: P | null,
 ) {
   render(createElement(component, props));
 }
@@ -12,7 +12,7 @@ export function renderComponentWithoutConfig<P extends {}>(
 export function renderComponent<P extends {}>(
   Component: FunctionComponent<P>,
   props: P,
-  configProps?: ConfigProps
+  configProps?: ConfigProps,
 ) {
   render(createElement(ConfigProvider, configProps, createElement(Component, props)));
 }

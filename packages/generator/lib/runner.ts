@@ -5,7 +5,7 @@ export function createRunner(
   plugins: GeneratorPluginV1[],
   getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
   onStart?: (plugin: GeneratorPluginV1) => void,
-  onFinish?: (plugin: GeneratorPluginV1) => void
+  onFinish?: (plugin: GeneratorPluginV1) => void,
 ) {
   let i = 0;
 
@@ -34,7 +34,7 @@ export function startRunner(
   plugins: GeneratorPluginV1[],
   getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
   onStart?: (plugin: GeneratorPluginV1) => void,
-  onFinish?: (plugin: GeneratorPluginV1) => void
+  onFinish?: (plugin: GeneratorPluginV1) => void,
 ) {
   const run = createRunner(ctx, plugins, getFn, onStart, onFinish);
   return run();

@@ -62,7 +62,7 @@ const directive = createInputDirective<Args>({
     if (
       config.format === 'UUID' &&
       !/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi.test(
-        value
+        value,
       )
     ) {
       throw new BadUserInput('Value must be be a valid UUID');
@@ -92,19 +92,19 @@ const directive = createInputDirective<Args>({
       throw new BadUserInput(
         `Value must match pattern '${config.regex}'${
           config.regexFlags != null ? ` with flags '${config.regexFlags}'` : ''
-        }`
+        }`,
       );
     }
 
     if (config.oneOf != null && !config.oneOf.includes(value)) {
       throw new BadUserInput(
-        `Value must be one of ${config.oneOf.map((s) => `'${s}'`).join(', ')}`
+        `Value must be one of ${config.oneOf.map((s) => `'${s}'`).join(', ')}`,
       );
     }
 
     if (config.notOneOf?.includes(value)) {
       throw new BadUserInput(
-        `Value must not be one of ${config.notOneOf.map((s) => `'${s}'`).join(', ')}`
+        `Value must not be one of ${config.notOneOf.map((s) => `'${s}'`).join(', ')}`,
       );
     }
   },

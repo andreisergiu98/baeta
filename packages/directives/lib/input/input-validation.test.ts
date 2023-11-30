@@ -33,7 +33,7 @@ test(
     query {
       value(input: { id: "1" })
     }
-  `
+  `,
 );
 
 test(
@@ -44,7 +44,7 @@ test(
     query {
       value(input: { id: "1" })
     }
-  `
+  `,
 );
 
 test(
@@ -55,7 +55,7 @@ test(
     query {
       value(input: { id: "1" })
     }
-  `
+  `,
 );
 
 test(
@@ -66,7 +66,7 @@ test(
     query {
       value(input: {})
     }
-  `
+  `,
 );
 
 test(
@@ -77,7 +77,7 @@ test(
     query {
       value(input: { id: "1", email: "test@test.com" })
     }
-  `
+  `,
 );
 
 test(
@@ -88,7 +88,7 @@ test(
     query {
       value(input: {})
     }
-  `
+  `,
 );
 
 test(
@@ -99,5 +99,5 @@ test(
     query {
       value(input: { id: "1", email: "test@test.com" })
     }
-  `
+  `,
 );

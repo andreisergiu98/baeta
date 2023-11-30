@@ -1,7 +1,7 @@
 export function createCache(): <T>(
   namespace: string,
   key: string,
-  factory: () => Promise<T>
+  factory: () => Promise<T>,
 ) => Promise<T> {
   const cache = new Map<string, Promise<unknown>>();
 

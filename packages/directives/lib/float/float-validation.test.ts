@@ -65,7 +65,7 @@ test(
     query {
       value(input: { min: 10.5 })
     }
-  `
+  `,
 );
 
 test(
@@ -76,7 +76,7 @@ test(
     query {
       value(input: { max: 10.5 })
     }
-  `
+  `,
 );
 
 test(
@@ -87,7 +87,7 @@ test(
     query {
       value(input: { exclusiveMin: 10.6 })
     }
-  `
+  `,
 );
 test(
   'exclusiveMax',
@@ -97,7 +97,7 @@ test(
     query {
       value(input: { exclusiveMax: 10.4 })
     }
-  `
+  `,
 );
 
 test(
@@ -108,7 +108,7 @@ test(
     query {
       value(input: { multipleOf: 105 })
     }
-  `
+  `,
 );
 
 test(
@@ -119,7 +119,7 @@ test(
     query {
       value(input: { oneOf: 10.5 })
     }
-  `
+  `,
 );
 
 test(
@@ -130,7 +130,7 @@ test(
     query {
       value(input: { notOneOf: 10.6 })
     }
-  `
+  `,
 );
 
 test(
@@ -151,7 +151,7 @@ test(
         }
       )
     }
-  `
+  `,
 );
 
 test(
@@ -162,7 +162,7 @@ test(
     query {
       value(input: { min: 10.4 })
     }
-  `
+  `,
 );
 
 test(
@@ -173,7 +173,7 @@ test(
     query {
       value(input: { max: 10.6 })
     }
-  `
+  `,
 );
 
 test(
@@ -184,7 +184,7 @@ test(
     query {
       value(input: { exclusiveMin: 10.5 })
     }
-  `
+  `,
 );
 
 test(
@@ -195,7 +195,7 @@ test(
     query {
       value(input: { exclusiveMax: 10.5 })
     }
-  `
+  `,
 );
 
 test(
@@ -206,7 +206,7 @@ test(
     query {
       value(input: { multipleOf: 10 })
     }
-  `
+  `,
 );
 
 test(
@@ -217,7 +217,7 @@ test(
     query {
       value(input: { oneOf: 10.6 })
     }
-  `
+  `,
 );
 
 test(
@@ -228,7 +228,7 @@ test(
     query {
       value(input: { notOneOf: 10.5 })
     }
-  `
+  `,
 );
 
 test(
@@ -250,7 +250,7 @@ test(
       )
     }
   `,
-  7
+  7,
 );
 
 test(
@@ -261,5 +261,5 @@ test(
     query {
       value(input: { badType: "10.5" })
     }
-  `
+  `,
 );

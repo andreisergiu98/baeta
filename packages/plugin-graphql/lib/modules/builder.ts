@@ -74,11 +74,11 @@ export function buildModule(
     fieldTypes: Record<string, Record<string, string>>;
     fieldArguments: Record<string, Record<string, boolean>>;
     extensionsPath?: string;
-  }
+  },
 ): string {
   const picks: Record<RegistryKeys, Record<string, string[]>> = createObject(
     registryKeys,
-    () => ({})
+    () => ({}),
   );
   const defined: Registry = createObject(registryKeys, () => []);
   const extended: Registry = createObject(registryKeys, () => []);
@@ -124,12 +124,12 @@ export function buildModule(
 
   // Defined and Extended types
   const visited: Registry = createObject(registryKeys, (key) =>
-    concatByKey(defined, extended, key)
+    concatByKey(defined, extended, key),
   );
 
   // Types that are not defined or extended in a module, they come from other modules
   const external: Registry = createObject(registryKeys, (key) =>
-    uniqueByKey(extended, defined, key)
+    uniqueByKey(extended, defined, key),
   );
 
   //
@@ -201,7 +201,7 @@ export function buildModule(
           `${typeName}: ${printPicks(typeName, {
             ...picks.objects,
             ...picks.interfaces,
-          })};`
+          })};`,
       ),
     });
   }
@@ -336,7 +336,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     return buildBlock({
       name: 'interface DefinedInputFields',
       lines: visited.inputs.map(
-        (typeName) => `${typeName}: ${printPicks(typeName, picks.inputs)};`
+        (typeName) => `${typeName}: ${printPicks(typeName, picks.inputs)};`,
       ),
     });
   }
@@ -408,7 +408,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       | InterfaceTypeExtensionNode
       | InputObjectTypeDefinitionNode
       | InputObjectTypeExtensionNode,
-    picksObj: Record<string, string[]>
+    picksObj: Record<string, string[]>,
   ) {
     const name = node.name.value;
 

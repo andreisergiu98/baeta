@@ -33,7 +33,7 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
   }
 
   function findRelated(
-    node: DefinitionNode | FieldDefinitionNode | InputValueDefinitionNode | NamedTypeNode
+    node: DefinitionNode | FieldDefinitionNode | InputValueDefinitionNode | NamedTypeNode,
   ) {
     if (node.kind === Kind.OBJECT_TYPE_DEFINITION || node.kind === Kind.OBJECT_TYPE_EXTENSION) {
       // Object
@@ -131,7 +131,7 @@ function collectObjectFieldType(
   node: ObjectTypeDefinitionNode,
   fieldDefinition: FieldDefinitionNode,
   fieldsMap: GraphQLFieldMap<unknown, unknown>,
-  fieldTypes: Record<string, Record<string, string>>
+  fieldTypes: Record<string, Record<string, string>>,
 ) {
   const objectName = node.name.value;
   const fieldName = fieldDefinition.name.value;
@@ -159,7 +159,7 @@ function collectObjectFieldType(
 function collectObjectFieldArguments(
   node: ObjectTypeDefinitionNode,
   fieldDefinition: FieldDefinitionNode,
-  fieldArguments: Record<string, Record<string, boolean>>
+  fieldArguments: Record<string, Record<string, boolean>>,
 ) {
   const objectName = node.name.value;
   const fieldName = fieldDefinition.name.value;
@@ -246,7 +246,7 @@ export function buildBlock({ name, lines }: { name: string; lines: string[] }): 
 const getRelativePath = (filepath: string, basePath: string) => {
   const normalizedFilepath = normalize(filepath);
   const normalizedBasePath = ensureStartsWithSeparator(
-    normalize(ensureEndsWithSeparator(basePath))
+    normalize(ensureEndsWithSeparator(basePath)),
   );
   const [, relativePath] = normalizedFilepath.split(normalizedBasePath);
   return relativePath;
@@ -254,7 +254,7 @@ const getRelativePath = (filepath: string, basePath: string) => {
 
 export function groupSourcesByModule(
   sources: Source[],
-  basePath: string
+  basePath: string,
 ): Record<string, Source[]> {
   const grouped: Record<string, Source[]> = {};
 
@@ -305,8 +305,8 @@ function ensureStartsWithSeparator(path: string) {
   return path.startsWith('.')
     ? path.replace(/^(..\/)|(.\/)/, '/')
     : path.startsWith('/')
-    ? path
-    : `/${path}`;
+      ? path
+      : `/${path}`;
 }
 
 /**
@@ -321,7 +321,7 @@ export function pushUnique<T>(list: T[], item: T): void {
 export function concatByKey<T extends Record<string, string[]>, K extends keyof T>(
   left: T,
   right: T,
-  key: K
+  key: K,
 ) {
   // Remove duplicate, if an element is in right & left, it will be only once in the returned array.
   //@ts-expect-error check compiler settings
@@ -331,7 +331,7 @@ export function concatByKey<T extends Record<string, string[]>, K extends keyof 
 export function uniqueByKey<T extends Record<string, string[]>, K extends keyof T>(
   left: T,
   right: T,
-  key: K
+  key: K,
 ) {
   return left[key].filter((item) => !right[key].includes(item));
 }

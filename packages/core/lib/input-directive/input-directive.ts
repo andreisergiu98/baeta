@@ -17,7 +17,7 @@ type ValidationDirectiveFnParams<DirectiveConfig, Context> = ValidateParams<Cont
 };
 
 export type ValidationDirectiveFn<DirectiveConfig = Record<string, unknown>, Context = unknown> = (
-  params: ValidationDirectiveFnParams<DirectiveConfig, Context>
+  params: ValidationDirectiveFnParams<DirectiveConfig, Context>,
 ) => void;
 
 function createMutateValueFn(args: Record<string, unknown>, path: Array<string | number>) {
@@ -36,7 +36,7 @@ function createGetValueFn(args: Record<string, unknown>, path: Array<string | nu
 
 function createValidationFn<DirectiveConfig, Context>(
   directiveConfig: DirectiveConfig,
-  validate: ValidationDirectiveFn<DirectiveConfig, Context>
+  validate: ValidationDirectiveFn<DirectiveConfig, Context>,
 ) {
   return (params: ValidateParams<Context>) => {
     const getValue = createGetValueFn(params.args, params.path);
@@ -50,7 +50,7 @@ export function applyInputDirective(
   name: string,
   target: ValidationTarget,
   validate: ValidationDirectiveFn,
-  getDepth?: (config: unknown) => number
+  getDepth?: (config: unknown) => number,
 ) {
   return mapSchema(schema, {
     [MapperKind.INPUT_OBJECT_FIELD]: (fieldConfig) => {
@@ -149,7 +149,7 @@ export function applyInputDirective(
             fieldConfig,
             argumentName,
             validationMeta.index,
-            validationMeta.options
+            validationMeta.options,
           );
         }
       }
@@ -167,7 +167,7 @@ type InputDirectiveOptions<DirectiveConfig, Context> = {
 };
 
 export function createInputDirective<DirectiveConfig, Context = unknown>(
-  options: InputDirectiveOptions<DirectiveConfig, Context>
+  options: InputDirectiveOptions<DirectiveConfig, Context>,
 ) {
   return (schema: GraphQLSchema) => {
     return applyInputDirective(
@@ -175,7 +175,7 @@ export function createInputDirective<DirectiveConfig, Context = unknown>(
       options.name,
       options.target,
       options.resolve as ValidationDirectiveFn<Record<string, unknown>, unknown>,
-      options.getListDepth as (config: unknown) => number
+      options.getListDepth as (config: unknown) => number,
     );
   };
 }

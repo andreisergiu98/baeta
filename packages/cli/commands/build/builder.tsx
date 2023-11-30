@@ -50,10 +50,10 @@ export function Builder(props: Props) {
         (output) => {
           setOutput((current) => [...current, output]);
         },
-        () => {}
+        () => {},
       );
     },
-    [killHanging]
+    [killHanging],
   );
 
   const handleStart = useCallback(async () => {
@@ -78,13 +78,13 @@ export function Builder(props: Props) {
 
       return handleCommand(props.onSuccess);
     },
-    [props.onSuccess, props.onError, handleCommand]
+    [props.onSuccess, props.onError, handleCommand],
   );
 
   const compile = useCallback(
     async (
       { build, buildAndWatch, createEsbuildCliHooksPlugin }: typeof import('@baeta/compiler'),
-      config: CompilerOptions
+      config: CompilerOptions,
     ) => {
       const configPlugins = config.esbuild?.plugins ?? [];
 
@@ -121,7 +121,7 @@ export function Builder(props: Props) {
       // props.onSuccess, props.onError,
       handleStart,
       handleEnd,
-    ]
+    ],
   );
 
   useEffect(() => {

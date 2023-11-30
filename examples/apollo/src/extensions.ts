@@ -45,7 +45,7 @@ const auth = authExtension<Context>(
         isLoggedIn: true,
       },
     },
-  }
+  },
 );
 
 export default createExtensions(auth);

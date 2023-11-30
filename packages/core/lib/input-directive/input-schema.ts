@@ -65,7 +65,7 @@ function getFieldsWithArgumentsAndInputObjectTypes(schema: GraphQLSchema) {
 
 function addValidateExtensionToInputObjectTypesRecursive(
   inputObjectType: GraphQLInputObjectType,
-  visitedTypes: GraphQLInputObjectType[] = []
+  visitedTypes: GraphQLInputObjectType[] = [],
 ) {
   const newVisitedTypes = [...visitedTypes, inputObjectType];
   const inputFields = Object.values(inputObjectType.getFields());
@@ -101,7 +101,7 @@ function handleResolver(
   root: unknown,
   args: Record<string, unknown>,
   ctx: unknown,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) {
   try {
     validation.fn({ type, path, root, args, ctx, info });
@@ -119,10 +119,10 @@ function validateListType(
   value: unknown[],
   type: GraphQLList<GraphQLType>,
   validations: ValidationOptions[] = [],
-  listDepth = 0
+  listDepth = 0,
 ) {
   const listValidations = validations.filter(
-    (validation) => validation.target === 'list' && validation.listDepth === listDepth
+    (validation) => validation.target === 'list' && validation.listDepth === listDepth,
   );
 
   const errors: unknown[] = [];
@@ -146,8 +146,8 @@ function validateListType(
         item,
         type.ofType,
         validations,
-        listDepth + 1
-      )
+        listDepth + 1,
+      ),
     );
   }
 
@@ -162,11 +162,11 @@ function validateObjectType(
   path: Array<number | string>,
   value: Record<string, unknown>,
   type: GraphQLInputObjectType,
-  validations: ValidationOptions[] = []
+  validations: ValidationOptions[] = [],
 ) {
   const withInputValidations = validations.concat(getValidationsFromExtension(type) ?? []);
   const objectValidations = withInputValidations.filter(
-    (validation) => validation.target === 'object'
+    (validation) => validation.target === 'object',
   );
 
   const errors: unknown[] = [];
@@ -195,8 +195,8 @@ function validateObjectType(
         [...path, field.name],
         value[field.name],
         field.type,
-        fieldValidations
-      )
+        fieldValidations,
+      ),
     );
   }
 
@@ -210,7 +210,7 @@ function validateScalarType(
   info: GraphQLResolveInfo,
   path: Array<number | string>,
   type: GraphQLType,
-  validations: ValidationOptions[] = []
+  validations: ValidationOptions[] = [],
 ) {
   if (validations.length === 0) {
     return [];
@@ -237,7 +237,7 @@ function validateRecursive<TSource, TContext>(
   value: unknown,
   type: GraphQLType,
   validations: ValidationOptions[] = [],
-  listDepth = 0
+  listDepth = 0,
 ): unknown[] {
   if (value == null) {
     return [];
@@ -259,7 +259,7 @@ function validateRecursive<TSource, TContext>(
       value as unknown[],
       listType,
       validations,
-      listDepth
+      listDepth,
     );
   }
 
@@ -272,7 +272,7 @@ function validateRecursive<TSource, TContext>(
       path,
       value as Record<string, unknown>,
       valueType,
-      validations
+      validations,
     );
   }
 
@@ -284,7 +284,7 @@ function validateFieldArguments(
   root: unknown,
   args: Record<string, unknown>,
   ctx: unknown,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) {
   const argEntries = Object.entries(args);
   const argsDefinitionMap: Record<string, GraphQLArgument> = {};
@@ -308,8 +308,8 @@ function validateFieldArguments(
         [argumentName],
         argumentValue,
         argumentDefinition.type,
-        argumentValidations
-      )
+        argumentValidations,
+      ),
     );
   }
 

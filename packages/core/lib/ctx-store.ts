@@ -10,7 +10,7 @@ export interface ContextStoreValue<T> {
 
 export function createContextStore<T, Context = unknown>(
   key: symbol,
-  options?: ContextStoreOptions
+  options?: ContextStoreOptions,
 ) {
   const { lazy = true } = options ?? {};
 

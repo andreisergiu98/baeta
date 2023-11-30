@@ -11,7 +11,7 @@ export async function startProcess(
   processes: ExecaChildProcess[],
   command: string,
   stdout: (data: string) => void,
-  onError: (err: unknown) => void
+  onError: (err: unknown) => void,
 ) {
   const child = execaCommand(command, {
     stdout: 'pipe',

@@ -33,7 +33,7 @@ function createHook<T>(
   Context: ContextType<T | undefined>,
   strict: boolean,
   errorMessage: string,
-  name?: string
+  name?: string,
 ) {
   const useContextWrapper = () => {
     const context = useContext(Context);
@@ -56,7 +56,7 @@ function createHook<T>(
 function createWrappedProvider<T, Props>(
   Context: ContextType<T | undefined>,
   useValue: (props: Props) => T,
-  name?: string
+  name?: string,
 ) {
   const ProviderWrapper = (props: PropsWithChildren<Props>) => {
     const value = useValue(props);
@@ -83,14 +83,14 @@ function createErrorMessage(name?: string) {
 
 export function createContextProvider<Type, Props>(
   options: CreateContextOptions,
-  useValue: (props: Props) => Type
+  useValue: (props: Props) => Type,
 ): WithValue<Type, Props>;
 
 export function createContextProvider<Type>(options: CreateContextOptions): WithoutValue<Type>;
 
 export function createContextProvider<Type, Props>(
   options: CreateContextOptions = {},
-  useValue?: (props: Props) => Type
+  useValue?: (props: Props) => Type,
 ) {
   const { name, strict = true, errorMessage = createErrorMessage(name) } = options;
 

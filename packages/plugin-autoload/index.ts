@@ -95,7 +95,7 @@ async function getResolvers(ctx: Ctx, options?: AutoloadPluginOptions) {
   const suffixes = getResolverSuffixes(options);
 
   const files = await findFiles(modulesDir, (input: string) =>
-    suffixes.some((suffix) => input.endsWith(`${suffix}.ts`))
+    suffixes.some((suffix) => input.endsWith(`${suffix}.ts`)),
   );
 
   const generatedFiles = ctx.fileManager.getByTag('resolvers').map((file) => file.filename);
@@ -106,7 +106,7 @@ async function getResolvers(ctx: Ctx, options?: AutoloadPluginOptions) {
 function getTypeDefs(
   fileManager: FileManager,
   moduleDefinitionName: string,
-  options?: AutoloadPluginOptions
+  options?: AutoloadPluginOptions,
 ) {
   if (options?.modules === false) {
     return [];
@@ -173,11 +173,11 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
       const typeDefs = getTypeDefs(
         ctx.fileManager,
         ctx.generatorOptions.moduleDefinitionName,
-        options
+        options,
       );
 
       const content = resolvers.map((resolver) =>
-        buildResolverImport(resolver, ctx.generatorOptions.modulesDir)
+        buildResolverImport(resolver, ctx.generatorOptions.modulesDir),
       );
 
       const moduleNames: string[] = [];
@@ -196,7 +196,7 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
         moduleNames.push(moduleName);
 
         content.push(
-          buildModuleImport(moduleName, ctx.generatorOptions.modulesDir, typedef.filename)
+          buildModuleImport(moduleName, ctx.generatorOptions.modulesDir, typedef.filename),
         );
       }
 

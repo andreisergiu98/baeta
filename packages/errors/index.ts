@@ -10,7 +10,7 @@ export enum BaetaErrorCode {
 export class UnauthenticatedError extends GraphQLError {
   constructor(
     message = 'Access denied! You need to be authorized to perform this action!',
-    options?: GraphQLErrorOptions
+    options?: GraphQLErrorOptions,
   ) {
     super(message, {
       ...options,
@@ -28,7 +28,7 @@ export class UnauthenticatedError extends GraphQLError {
 export class ForbiddenError extends GraphQLError {
   constructor(
     message = "Access denied! You don't have permission to perform this action!",
-    options?: GraphQLErrorOptions
+    options?: GraphQLErrorOptions,
   ) {
     super(message, {
       ...options,
@@ -56,7 +56,7 @@ export class AggregateGraphQLError extends GraphQLError {
   constructor(
     errors: GraphQLError[],
     message = 'Multiple errors encountered',
-    options?: GraphQLErrorOptions
+    options?: GraphQLErrorOptions,
   ) {
     super(message, {
       ...options,

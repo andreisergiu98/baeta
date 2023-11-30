@@ -104,14 +104,14 @@ test('hasArgumentValidationsExtension returns true if config has argument valida
   addArgumentValidationsExtension(config, 'arg', 0, { target: 'list', listDepth: 0, fn: () => {} });
 
   t.true(
-    hasArgumentValidationsExtension(config as unknown as GraphQLField<unknown, unknown, unknown>)
+    hasArgumentValidationsExtension(config as unknown as GraphQLField<unknown, unknown, unknown>),
   );
 });
 
 test('hasArgumentValidationsExtension returns false if config does not have argument validations extension', (t) => {
   const config = mockEmtpyFieldConfig();
   t.false(
-    hasArgumentValidationsExtension(config as unknown as GraphQLField<unknown, unknown, unknown>)
+    hasArgumentValidationsExtension(config as unknown as GraphQLField<unknown, unknown, unknown>),
   );
 });
 
@@ -132,7 +132,7 @@ test('getArgumentValidationsFromExtensions returns argument validations from ext
   addArgumentValidationsExtension(config, 'arg', 0, validationOptions);
   const validations = getArgumentValidationsFromExtensions(
     config as unknown as GraphQLField<unknown, unknown>,
-    'arg'
+    'arg',
   );
 
   t.deepEqual(validationOptions, validations?.[0]);

@@ -11,7 +11,7 @@ export function createAndExecute(
   transformer: (schema: GraphQLSchema) => GraphQLSchema,
   query: DocumentNode,
   resolvers: IExecutableSchemaDefinition['resolvers'],
-  returnType: string
+  returnType: string,
 ) {
   const queryDef = gql`
     type Query {
@@ -34,7 +34,7 @@ export function createAndExecute(
 
 export function makeValidInputMacro(
   typeDefs: DocumentNode,
-  transformer: (schema: GraphQLSchema) => GraphQLSchema
+  transformer: (schema: GraphQLSchema) => GraphQLSchema,
 ) {
   return test.macro(async (t, inputType: string, query: DocumentNode) => {
     const result = await createAndExecute(
@@ -47,7 +47,7 @@ export function makeValidInputMacro(
           value: () => true,
         },
       },
-      'Boolean'
+      'Boolean',
     );
 
     t.is(result.data?.value, true);
@@ -57,7 +57,7 @@ export function makeValidInputMacro(
 
 export function makeInvalidInputMacro(
   typeDefs: DocumentNode,
-  transformer: (schema: GraphQLSchema) => GraphQLSchema
+  transformer: (schema: GraphQLSchema) => GraphQLSchema,
 ) {
   return test.macro(async (t, inputType: string, query: DocumentNode) => {
     const result = await createAndExecute(
@@ -70,7 +70,7 @@ export function makeInvalidInputMacro(
           value: () => true,
         },
       },
-      'Boolean'
+      'Boolean',
     );
 
     t.is(result.errors?.length, 1);
@@ -80,7 +80,7 @@ export function makeInvalidInputMacro(
 
 export function makeAggregateErrorsInputMacro(
   typeDefs: DocumentNode,
-  transformer: (schema: GraphQLSchema) => GraphQLSchema
+  transformer: (schema: GraphQLSchema) => GraphQLSchema,
 ) {
   return test.macro(async (t, inputType: string, query: DocumentNode, expectedErrors: number) => {
     const result = await createAndExecute(
@@ -93,7 +93,7 @@ export function makeAggregateErrorsInputMacro(
           value: () => true,
         },
       },
-      'Boolean'
+      'Boolean',
     );
 
     const errors = result.errors?.[0].extensions.errors as GraphQLError[] | undefined;
@@ -109,7 +109,7 @@ export function makeQueryResolverMacro<T, R>(
   typeDefs: DocumentNode,
   transformer: (schema: GraphQLSchema) => GraphQLSchema,
   resolver: (args: T) => R,
-  returnType: string
+  returnType: string,
 ) {
   return test.macro(async (t, inputType: string, expect: R, query: DocumentNode) => {
     const resolvers = {
@@ -124,7 +124,7 @@ export function makeQueryResolverMacro<T, R>(
       transformer,
       query,
       resolvers,
-      returnType
+      returnType,
     );
 
     t.is(result.data?.value, expect);

@@ -18,7 +18,7 @@ export type ScopeRules = {
 async function verifyGrant(
   ctx: unknown,
   grant: string | undefined,
-  parentPath: string
+  parentPath: string,
 ): Promise<true> {
   if (grant == null) {
     throw new Error();
@@ -53,7 +53,7 @@ async function verifyChainScopes(
   ctx: unknown,
   scopes: ScopeRules,
   keys: string[],
-  parentPath: string
+  parentPath: string,
 ): Promise<true> {
   for (const key of keys) {
     await verifyScope(ctx, scopes, key, parentPath);
@@ -66,7 +66,7 @@ async function verifyRaceScopes(
   ctx: unknown,
   scopes: ScopeRules,
   keys: string[],
-  parentPath: string
+  parentPath: string,
 ): Promise<true> {
   for (const key of keys) {
     const result = await verifyScope(ctx, scopes, key, parentPath).catch((err) => err);
@@ -83,7 +83,7 @@ async function verifyOrScopes(
   ctx: unknown,
   scopes: ScopeRules,
   keys: string[],
-  parentPath: string
+  parentPath: string,
 ): Promise<true> {
   const promises: Promise<true>[] = [];
 
@@ -98,7 +98,7 @@ async function verifyAndScopes(
   ctx: unknown,
   scopes: ScopeRules,
   keys: string[],
-  parentPath: string
+  parentPath: string,
 ): Promise<true> {
   const promises: Promise<true>[] = [];
 
@@ -113,7 +113,7 @@ export async function verifyScopes(
   ctx: unknown,
   scopes: ScopeRules | undefined,
   rule: LogicRule,
-  parentPath: string
+  parentPath: string,
 ): Promise<true> {
   if (scopes == null) {
     throw new Error('Scope definitions cannot be empty!');

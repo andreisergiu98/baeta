@@ -30,7 +30,7 @@ export class ModuleBuilder {
     readonly id: string,
     readonly dirname: string,
     readonly typedef: DocumentNode,
-    private readonly extensions: Extension[]
+    private readonly extensions: Extension[],
   ) {}
 
   createResolverBuilder<Result, Root, Context, Args>(type: string, field: string) {
@@ -47,7 +47,7 @@ export class ModuleBuilder {
 
     const addons = withExtensions(
       coreAddons,
-      this.getResolverExtensions<Result, Root, Context, Args>(type, field)
+      this.getResolverExtensions<Result, Root, Context, Args>(type, field),
     );
 
     return extendFunction(builder, addons);
@@ -64,14 +64,14 @@ export class ModuleBuilder {
 
     const coreSubscribeAddons = {
       $use: this.createMiddlewareBuilder('Subscription', `${field}.subscribe`) as <Payload>(
-        middleware: Middleware<AsyncIterator<Payload>, Root, Context, Args>
+        middleware: Middleware<AsyncIterator<Payload>, Root, Context, Args>,
       ) => void,
     };
 
     const coreResolveAddons = {
       $use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
         'Subscription',
-        `${field}.resolve`
+        `${field}.resolve`,
       ),
     };
 
@@ -79,12 +79,12 @@ export class ModuleBuilder {
 
     const subscribeAddons = withExtensions(
       coreSubscribeAddons,
-      this.getSubscriptionSubscribeExtensions<Root, Context, Args>(field)
+      this.getSubscriptionSubscribeExtensions<Root, Context, Args>(field),
     );
 
     const resolveAddons = withExtensions(
       coreResolveAddons,
-      this.getSubscriptionResolveExtensions<Result, Root, Context, Args>(field)
+      this.getSubscriptionResolveExtensions<Result, Root, Context, Args>(field),
     );
 
     return extendFunction(builder, {
@@ -120,7 +120,7 @@ export class ModuleBuilder {
     const addons = {
       $use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(
         'Subscription',
-        '*'
+        '*',
       ),
     };
     return withExtensions(addons, this.createTypeMethods<Root, Context>('Subscription'));
@@ -137,37 +137,37 @@ export class ModuleBuilder {
 
   private getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getResolverExtensions(type, field)
+      ext.getResolverExtensions(type, field),
     ) as BaetaExtensions.ResolverExtensions<Result, Root, Context, Args>;
   }
 
   private getTypeExtensions<Root, Context>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getTypeExtensions(type)
+      ext.getTypeExtensions(type),
     ) as BaetaExtensions.TypeExtensions<Root, Context>;
   }
 
   private getSubscriptionExtensions<Root, Context, Args>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getSubscriptionExtensions(type)
+      ext.getSubscriptionExtensions(type),
     ) as BaetaExtensions.SubscriptionExtensions<Root, Context, Args>;
   }
 
   private getSubscriptionSubscribeExtensions<Root, Context, Args>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getSubscriptionSubscribeExtensions(type)
+      ext.getSubscriptionSubscribeExtensions(type),
     ) as BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args>;
   }
 
   private getSubscriptionResolveExtensions<Result, Root, Context, Args>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getSubscriptionResolveExtensions(type)
+      ext.getSubscriptionResolveExtensions(type),
     ) as BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args>;
   }
 
   private getModuleExtensions() {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getModuleExtensions()
+      ext.getModuleExtensions(),
     ) as BaetaExtensions.ModuleExtensions;
   }
 
@@ -214,13 +214,13 @@ export function createSingletonModule<T>(create: () => T) {
 
 export function createModuleManager<T>(
   moduleMetadata: Module<T>,
-  extensions?: ExtensionFactory<Extension>[]
+  extensions?: ExtensionFactory<Extension>[],
 ) {
   const moduleBuilder = new ModuleBuilder(
     moduleMetadata.id,
     moduleMetadata.dirname,
     moduleMetadata.typedef,
-    resolveExtensions(extensions ?? [])
+    resolveExtensions(extensions ?? []),
   );
   const manager = moduleMetadata.createManager(moduleBuilder);
   return manager as Omit<T, '$builder'>;

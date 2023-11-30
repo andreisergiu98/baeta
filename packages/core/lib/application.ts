@@ -14,7 +14,7 @@ export interface Options {
 function makeSchema(
   typeDefs: IExecutableSchemaDefinition['typeDefs'],
   resolvers: IExecutableSchemaDefinition['resolvers'],
-  options?: ExecutableSchemaOptions
+  options?: ExecutableSchemaOptions,
 ) {
   try {
     return makeExecutableSchema({

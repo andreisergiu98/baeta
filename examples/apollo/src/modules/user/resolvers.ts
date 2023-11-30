@@ -22,5 +22,5 @@ Query.user.$auth(
   {
     skipDefaults: true,
     grants: ['readUserPhotos'],
-  }
+  },
 );

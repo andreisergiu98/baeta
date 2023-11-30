@@ -72,6 +72,7 @@
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
+    "@baeta/compiler": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.16.18",
     "@types/react": "^17.0.62",

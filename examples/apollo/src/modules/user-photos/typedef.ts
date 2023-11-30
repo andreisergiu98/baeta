@@ -27,8 +27,8 @@ export namespace ModuleMetadata {
       ...module.createModuleMethods<Types.ContextType>(),
       UserPhoto: {
         ...module.createTypeMethods<UserPhoto, Types.ContextType>("UserPhoto"),
-        id: module.createResolverBuilder<Types.Scalars["ID"], UserPhoto, Types.ContextType, {}>("UserPhoto", "id"),
-        url: module.createResolverBuilder<Types.Scalars["String"], UserPhoto, Types.ContextType, {}>("UserPhoto", "url"),
+        id: module.createResolverBuilder<Types.Scalars["ID"]["output"], UserPhoto, Types.ContextType, {}>("UserPhoto", "id"),
+        url: module.createResolverBuilder<Types.Scalars["String"]["output"], UserPhoto, Types.ContextType, {}>("UserPhoto", "url"),
       },
       User: {
         ...module.createTypeMethods<User, Types.ContextType>("User"),

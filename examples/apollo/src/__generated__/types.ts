@@ -8,15 +8,17 @@ export type InputMaybe<T> = T | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 export type { ContextType }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  DateTime: Date;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: Date; output: Date; }
 };
 
 export type StringFormat =
@@ -26,8 +28,8 @@ export type StringFormat =
 
 export type PageInfo = {
   __typename?: 'PageInfo';
-  hasPreviousPage: Scalars['Boolean'];
-  hasNextPage: Scalars['Boolean'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  hasNextPage: Scalars['Boolean']['output'];
 };
 
 export type UserConnection = {
@@ -38,7 +40,7 @@ export type UserConnection = {
 
 export type UserEdge = {
   __typename?: 'UserEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node?: Maybe<User>;
 };
 
@@ -50,38 +52,44 @@ export type UserPhotoConnection = {
 
 export type UserPhotoEdge = {
   __typename?: 'UserPhotoEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node?: Maybe<UserPhoto>;
 };
 
 export type UserPhoto = {
   __typename?: 'UserPhoto';
-  id: Scalars['ID'];
-  url: Scalars['String'];
+  id: Scalars['ID']['output'];
+  url: Scalars['String']['output'];
 };
 
 export type User = {
   __typename?: 'User';
   photos?: Maybe<Array<UserPhoto>>;
   photosConnection?: Maybe<UserPhotoConnection>;
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  birthday?: Maybe<Scalars['DateTime']>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  birthday?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type UserWhereUnique = {
-  id?: InputMaybe<Scalars['ID']>;
-  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
+  users?: Maybe<Array<Maybe<User>>>;
 };
 
 
 export type QueryUserArgs = {
   where?: InputMaybe<UserWhereUnique>;
+};
+
+
+export type QueryUsersArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DateTime = Scalars["DateTime"];

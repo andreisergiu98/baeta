@@ -34,8 +34,8 @@ export namespace ModuleMetadata {
       ...module.createModuleMethods<Types.ContextType>(),
       PageInfo: {
         ...module.createTypeMethods<PageInfo, Types.ContextType>("PageInfo"),
-        hasPreviousPage: module.createResolverBuilder<Types.Scalars["Boolean"], PageInfo, Types.ContextType, {}>("PageInfo", "hasPreviousPage"),
-        hasNextPage: module.createResolverBuilder<Types.Scalars["Boolean"], PageInfo, Types.ContextType, {}>("PageInfo", "hasNextPage"),
+        hasPreviousPage: module.createResolverBuilder<Types.Scalars["Boolean"]["output"], PageInfo, Types.ContextType, {}>("PageInfo", "hasPreviousPage"),
+        hasNextPage: module.createResolverBuilder<Types.Scalars["Boolean"]["output"], PageInfo, Types.ContextType, {}>("PageInfo", "hasNextPage"),
       },
       UserConnection: {
         ...module.createTypeMethods<UserConnection, Types.ContextType>("UserConnection"),
@@ -44,7 +44,7 @@ export namespace ModuleMetadata {
       },
       UserEdge: {
         ...module.createTypeMethods<UserEdge, Types.ContextType>("UserEdge"),
-        cursor: module.createResolverBuilder<Types.Scalars["String"], UserEdge, Types.ContextType, {}>("UserEdge", "cursor"),
+        cursor: module.createResolverBuilder<Types.Scalars["String"]["output"], UserEdge, Types.ContextType, {}>("UserEdge", "cursor"),
         node: module.createResolverBuilder<Types.Maybe<User>, UserEdge, Types.ContextType, {}>("UserEdge", "node"),
       },
       UserPhotoConnection: {
@@ -54,7 +54,7 @@ export namespace ModuleMetadata {
       },
       UserPhotoEdge: {
         ...module.createTypeMethods<UserPhotoEdge, Types.ContextType>("UserPhotoEdge"),
-        cursor: module.createResolverBuilder<Types.Scalars["String"], UserPhotoEdge, Types.ContextType, {}>("UserPhotoEdge", "cursor"),
+        cursor: module.createResolverBuilder<Types.Scalars["String"]["output"], UserPhotoEdge, Types.ContextType, {}>("UserPhotoEdge", "cursor"),
         node: module.createResolverBuilder<Types.Maybe<UserPhoto>, UserPhotoEdge, Types.ContextType, {}>("UserPhotoEdge", "node"),
       },
     };

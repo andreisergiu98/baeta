@@ -19,7 +19,7 @@ export function extendFunction<B extends Function, M extends {}>(fn: B, ext: M):
   const properties: PropertyDescriptorMap = {};
 
   for (const [key, value] of entries) {
-    properties[key] = value as PropertyDescriptor;
+    properties[key] = { value };
   }
 
   Object.defineProperties(fnExtended, properties);

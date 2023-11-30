@@ -26,13 +26,13 @@ export function Errors(props: ErrorsProps) {
   return (
     <>
       {props.warnings?.map((warning, index) => (
-        // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+        // biome-ignore lint/suspicious/noArrayIndexKey: it is safe in this case
         <Text key={index} bold={true}>
           {warning}
         </Text>
       ))}
       {props.errors?.map((error, index) => (
-        // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+        // biome-ignore lint/suspicious/noArrayIndexKey: it is safe in this case
         <Text key={index} bold={true}>
           {error}
         </Text>

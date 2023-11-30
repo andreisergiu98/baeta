@@ -24,7 +24,9 @@ const sep = '/';
 export function collectUsedTypes(doc: DocumentNode): string[] {
   const used: string[] = [];
 
-  doc.definitions.forEach(findRelated);
+  for (const definition of doc.definitions) {
+    findRelated(definition);
+  }
 
   function markAsUsed(type: string) {
     pushUnique(used, type);
@@ -38,11 +40,15 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
       markAsUsed(node.name.value);
 
       if (node.fields) {
-        node.fields.forEach(findRelated);
+        for (const field of node.fields) {
+          findRelated(field);
+        }
       }
 
       if (node.interfaces) {
-        node.interfaces.forEach(findRelated);
+        for (const _interface of node.interfaces) {
+          findRelated(_interface);
+        }
       }
     } else if (
       node.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION ||
@@ -52,7 +58,9 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
       markAsUsed(node.name.value);
 
       if (node.fields) {
-        node.fields.forEach(findRelated);
+        for (const field of node.fields) {
+          findRelated(field);
+        }
       }
     } else if (
       node.kind === Kind.INTERFACE_TYPE_DEFINITION ||
@@ -62,11 +70,15 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
       markAsUsed(node.name.value);
 
       if (node.fields) {
-        node.fields.forEach(findRelated);
+        for (const field of node.fields) {
+          findRelated(field);
+        }
       }
 
       if (node.interfaces) {
-        node.interfaces.forEach(findRelated);
+        for (const _interface of node.interfaces) {
+          findRelated(_interface);
+        }
       }
     } else if (
       node.kind === Kind.UNION_TYPE_DEFINITION ||
@@ -76,7 +88,9 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
       markAsUsed(node.name.value);
 
       if (node.types) {
-        node.types.forEach(findRelated);
+        for (const type of node.types) {
+          findRelated(type);
+        }
       }
     } else if (node.kind === Kind.ENUM_TYPE_DEFINITION || node.kind === Kind.ENUM_TYPE_EXTENSION) {
       // Enum
@@ -97,7 +111,9 @@ export function collectUsedTypes(doc: DocumentNode): string[] {
       findRelated(resolveTypeNode(node.type));
 
       if (node.arguments) {
-        node.arguments.forEach(findRelated);
+        for (const argument of node.arguments) {
+          findRelated(argument);
+        }
       }
     } else if (
       node.kind === Kind.NAMED_TYPE &&
@@ -227,7 +243,7 @@ export function buildBlock({ name, lines }: { name: string; lines: string[] }): 
   return [`${name} {`, ...lines.map(indent(2)), '};'].join('\n');
 }
 
-const getRelativePath = function (filepath: string, basePath: string) {
+const getRelativePath = (filepath: string, basePath: string) => {
   const normalizedFilepath = normalize(filepath);
   const normalizedBasePath = ensureStartsWithSeparator(
     normalize(ensureEndsWithSeparator(basePath))
@@ -242,9 +258,9 @@ export function groupSourcesByModule(
 ): Record<string, Source[]> {
   const grouped: Record<string, Source[]> = {};
 
-  sources.forEach((source) => {
+  for (const source of sources) {
     if (!source.location) {
-      return;
+      continue;
     }
 
     const relativePath = getRelativePath(source.location, basePath);
@@ -259,7 +275,7 @@ export function groupSourcesByModule(
 
       grouped[mod].push(source);
     }
-  });
+  }
 
   return grouped;
 }
@@ -308,6 +324,7 @@ export function concatByKey<T extends Record<string, string[]>, K extends keyof 
   key: K
 ) {
   // Remove duplicate, if an element is in right & left, it will be only once in the returned array.
+  //@ts-expect-error check compiler settings
   return [...new Set([...left[key], ...right[key]])];
 }
 
@@ -322,9 +339,9 @@ export function uniqueByKey<T extends Record<string, string[]>, K extends keyof 
 export function createObject<K extends string, T>(keys: K[], valueFn: (key: K) => T) {
   const obj: Record<K, T> = {} as Record<K, T>;
 
-  keys.forEach((key) => {
+  for (const key of keys) {
     obj[key] = valueFn(key);
-  });
+  }
 
   return obj;
 }

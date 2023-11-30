@@ -68,6 +68,15 @@ export type User = {
   id: Scalars['ID'];
   name: Scalars['String'];
   birthday?: Maybe<Scalars['DateTime']>;
+  messages?: Maybe<Array<Message>>;
+};
+
+export type Message = {
+  __typename?: 'Message';
+  id: Scalars['ID'];
+  text: Scalars['String'];
+  from: User;
+  to: User;
 };
 
 export type UserWhereUnique = {
@@ -78,10 +87,22 @@ export type UserWhereUnique = {
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
+  users?: Maybe<User>;
+  inactiveUsers?: Maybe<User>;
 };
 
 
 export type QueryUserArgs = {
+  where?: InputMaybe<UserWhereUnique>;
+};
+
+
+export type QueryUsersArgs = {
+  where?: InputMaybe<UserWhereUnique>;
+};
+
+
+export type QueryInactiveUsersArgs = {
   where?: InputMaybe<UserWhereUnique>;
 };
 

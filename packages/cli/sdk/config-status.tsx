@@ -8,6 +8,7 @@ export function ConfigStatus() {
   const skipInitial = useRef(true);
   const { config } = useConfig();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we want to run this effect when config changes
   useEffect(() => {
     if (skipInitial.current) {
       skipInitial.current = false;

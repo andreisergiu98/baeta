@@ -1,0 +1,33 @@
+import test from 'ava';
+import { GraphQLResolveInfo } from 'graphql';
+import { createMiddlewareAdapter } from './middleware';
+import { createResolverAdapter } from './resolver';
+
+test('createMiddlewareAdapter should map parameters correctly', (t) => {
+  const root = {};
+  const args = {};
+  const ctx = {};
+  const info = {} as GraphQLResolveInfo;
+
+  const resolver = createResolverAdapter((params) => params);
+
+  const adapted = createMiddlewareAdapter((params, next) => {
+    t.is(params.root, root);
+    t.is(params.args, args);
+    t.is(params.ctx, ctx);
+    t.is(params.info, info);
+    return next();
+  });
+
+  const result = adapted(resolver)(root, args, ctx, info) as {
+    root: unknown;
+    args: unknown;
+    ctx: unknown;
+    info: unknown;
+  };
+
+  t.is(result.root, root);
+  t.is(result.args, args);
+  t.is(result.ctx, ctx);
+  t.is(result.info, info);
+});

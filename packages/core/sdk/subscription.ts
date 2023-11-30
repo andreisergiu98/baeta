@@ -28,11 +28,11 @@ export function createSubscriptionAdapter<Payload, Result, Root, Context, Args>(
 function createSubscribeAdapter<Payload, Root, Context, Args>(
   subscribe: Subscribe<Payload, Root, Context, Args>
 ) {
-  const adapter: NativeSubscribe['subscribe'] = (root, args, context, info) => {
+  const adapter: NativeSubscribe['subscribe'] = (root, args, ctx, info) => {
     const params = {
       root,
       args,
-      ctx: context,
+      ctx,
       info,
     };
     return subscribe(params);
@@ -44,12 +44,12 @@ function createSubscribeAdapter<Payload, Root, Context, Args>(
 function createResolverAdapter<Payload, Result, Context, Args>(
   resolve: SubscribeResolve<Result, Payload, Context, Args>
 ): GraphQLFieldResolver<Payload, Context, Args, Result> {
-  return function adapter(payload, args, context, info) {
+  return function adapter(payload, args, ctx, info) {
     const params = {
       args,
       info,
-      ctx: context,
-      payload: payload,
+      ctx,
+      payload,
     };
     return resolve(params) as Result;
   };

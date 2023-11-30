@@ -1,6 +1,7 @@
+import { IResolvers } from '@graphql-tools/utils';
 import { defaultFieldResolver, GraphQLFieldResolver } from 'graphql';
 import { ScalarResolver } from '../lib';
-import { composeResolvers, ResolversComposerMapping } from './compose';
+import { composeResolvers } from './compose';
 import { NativeMiddleware } from './middleware';
 import { NativeSubscribe } from './subscription';
 
@@ -10,12 +11,16 @@ export type SubscriptionsResolvers = {
   Subscription?: Record<string, NativeSubscribe | undefined> | undefined;
 };
 
-export type ResolversMap = Record<string, FieldResolvers | ScalarResolver | undefined> &
-  SubscriptionsResolvers;
+export type ResolversMap = Record<string, FieldResolvers | undefined> & SubscriptionsResolvers;
+
+export type MiddlewareMap = Record<string, NativeMiddleware[]>;
+
+export type ScalarsMap = Record<string, ScalarResolver | undefined>;
 
 export class ResolverMapper {
+  readonly scalars: ScalarsMap = {};
   readonly resolvers: ResolversMap = {};
-  readonly middlewares: ResolversComposerMapping = {};
+  readonly middlewares: MiddlewareMap = {};
   readonly typeFields: Record<string, string[]> = {};
 
   setResolver(type: string, field: string, resolver: GraphQLFieldResolver<unknown, unknown>) {
@@ -26,7 +31,7 @@ export class ResolverMapper {
   }
 
   setScalar(scalar: string, resolver: ScalarResolver) {
-    this.resolvers[scalar] = resolver;
+    this.scalars[scalar] = resolver;
   }
 
   setSubscription(field: string, resolver: NativeSubscribe) {
@@ -78,11 +83,10 @@ export class ResolverMapper {
     }
 
     const typeResolvers = this.resolvers[type] as FieldResolvers | undefined;
-    if (typeResolvers?.[field] != null) {
-      return;
-    }
 
-    this.setResolver(type, field, defaultFieldResolver);
+    if (typeResolvers?.[field] == null) {
+      this.setResolver(type, field, defaultFieldResolver);
+    }
   }
 
   registerTypeField(type: string, field: string) {
@@ -90,14 +94,17 @@ export class ResolverMapper {
       this.typeFields[type] = [];
     }
 
-    if (this.typeFields[type].includes(field)) {
-      return;
+    if (!this.typeFields[type].includes(field)) {
+      this.typeFields[type].push(field);
     }
-
-    this.typeFields[type].push(field);
   }
 
   compose() {
-    return composeResolvers(this.resolvers, this.middlewares);
+    const resolvers = composeResolvers(this.resolvers, this.middlewares);
+
+    return {
+      ...resolvers,
+      ...this.scalars,
+    } as IResolvers;
   }
 }

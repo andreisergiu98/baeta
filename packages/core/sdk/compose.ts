@@ -1,20 +1,13 @@
-import { IResolvers } from '@graphql-tools/utils';
-import { GraphQLFieldResolver } from 'graphql';
 import { createObjectLens } from '../utils/object';
-import { ResolversMap } from './resolver-mapper';
+import { MiddlewareMap, ResolversMap, SubscriptionsResolvers } from './resolver-mapper';
 
-export type ResolversComposition<
-  Resolver extends GraphQLFieldResolver<unknown, unknown> = GraphQLFieldResolver<unknown, unknown>
-> = (next: Resolver) => Resolver;
+export function composeResolvers(resolvers: ResolversMap, middlewareMap: MiddlewareMap = {}) {
+  const composed = copyResolvers(resolvers);
 
-export type ResolversComposerMapping = Record<string, ResolversComposition[]>;
-
-export function composeResolvers(resolvers: ResolversMap, mapping: ResolversComposerMapping = {}) {
-  for (const key in mapping) {
-    const fns = mapping[key];
+  for (const key in middlewareMap) {
+    const fns = middlewareMap[key];
     const path = key.split('.');
-
-    const lens = createObjectLens(resolvers, path);
+    const lens = createObjectLens(composed, path);
 
     const originalResolver = lens.get();
 
@@ -26,10 +19,46 @@ export function composeResolvers(resolvers: ResolversMap, mapping: ResolversComp
     lens.set(createResolver());
   }
 
-  return resolvers as IResolvers;
+  return composed;
 }
 
-function chainResolvers(funcs: Function[]) {
+export function copySubscriptionResolvers(map: ResolversMap) {
+  if (map.Subscription == null) {
+    return;
+  }
+
+  const subscription = map.Subscription;
+  const copy = {} as NonNullable<SubscriptionsResolvers['Subscription']>;
+
+  for (const key in subscription) {
+    const resolvers = subscription[key];
+
+    if (resolvers) {
+      copy[key] = { ...resolvers };
+    }
+  }
+
+  return copy;
+}
+
+export function copyResolvers<T extends ResolversMap>(resolvers: T): T {
+  const copy = {} as T;
+
+  for (const key in resolvers) {
+    if (key === 'Subscription') {
+      copy['Subscription'] = copySubscriptionResolvers(resolvers);
+      continue;
+    }
+
+    if (resolvers[key]) {
+      copy[key] = { ...resolvers[key] };
+    }
+  }
+
+  return copy;
+}
+
+export function chainResolvers(funcs: Function[]) {
   if (funcs.length === 1) {
     return funcs[0];
   }

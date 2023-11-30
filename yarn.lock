@@ -14132,12 +14132,12 @@ __metadata:
   linkType: hard
 
 "react-devtools-core@npm:^4.19.1":
-  version: 4.27.2
-  resolution: "react-devtools-core@npm:4.27.2"
+  version: 4.28.5
+  resolution: "react-devtools-core@npm:4.28.5"
   dependencies:
     shell-quote: "npm:^1.6.1"
     ws: "npm:^7"
-  checksum: 71bcf8a24a424213cbbcf38258dc2d71e0a7e70e541c020dd6aed33494e19f128555e6f20bbd29e56ab28785037ac88818688f85feb1253fbb30689e4f26cb51
+  checksum: 7c951a6a9b773e4fd56b2f1894c83aaec417373cf01aa261bd2dd286e6c6f1d8c67a3749ecb1d106dbf9e8cda0e6ed1bfd6ce1b61c81e035f2527be3dd9eebc2
   languageName: node
   linkType: hard
 

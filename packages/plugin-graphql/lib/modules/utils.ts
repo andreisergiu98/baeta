@@ -139,7 +139,7 @@ function collectObjectFieldType(
   const field = fieldsMap[fieldDefinition.name.value];
   const baseName = getBaseType(field.type).name;
   const isDefaultScalar = DEFAULT_SCALARS[baseName] != null;
-  const name = isDefaultScalar ? `Types.Scalars["${baseName}"]` : baseName;
+  const name = isDefaultScalar ? `Types.Scalars["${baseName}"]["output"]` : baseName;
 
   const type = wrapTypeWithModifiers(name, field.type, {
     wrapOptional: (str: string) => {

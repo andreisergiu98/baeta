@@ -80,10 +80,13 @@
     "typescript": "^5.1.3"
   },
   "peerDependencies": {
+    "@baeta/compiler": "workspace:^",
     "graphql": "^16.6.0"
   },
-  "optionalDependencies": {
-    "@baeta/compiler": "workspace:^"
+  "peerDependenciesMeta": {
+    "@baeta/compiler": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=18.0.0"

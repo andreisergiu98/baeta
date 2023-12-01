@@ -51,7 +51,7 @@ declare global {
   }
 
   export namespace AuthExtension {
-    // rome-ignore lint/suspicious/noEmptyInterface: is template
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface Scopes {}
     export type Grants = string;
   }

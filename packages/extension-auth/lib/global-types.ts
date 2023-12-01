@@ -27,13 +27,16 @@ declare global {
       ) => void;
     }
 
-    export interface SubscriptionSubscribeExtensions<Root, Context, Args> {
+    export interface SubscriptionExtensions<Root, Context, Args> {
       $auth: (
         scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
         options?: AuthMethodOptions<unknown, Root, Context, Args>
       ) => void;
-      $postAuth: (
-        getScopes: GetPostScopeRules<unknown, Root, Context, Args>,
+    }
+
+    export interface SubscriptionSubscribeExtensions<Root, Context, Args> {
+      $auth: (
+        scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
         options?: AuthMethodOptions<unknown, Root, Context, Args>
       ) => void;
     }

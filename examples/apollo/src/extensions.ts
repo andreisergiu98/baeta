@@ -46,10 +46,12 @@ const auth = authExtension<Context>(
         isLoggedIn: true,
       },
       Subscription: {
-        isLoggedIn: true,
+        subscribe: {
+          isLoggedIn: true,
+        },
       },
     },
-  },
+  }
 );
 
 export default createExtensions(auth);

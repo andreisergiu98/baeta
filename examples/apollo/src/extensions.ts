@@ -10,6 +10,10 @@ declare global {
       isLoggedIn: boolean;
       hasAccess: string;
     }
+
+    export interface GrantsMap {
+      readUserPhotos: boolean;
+    }
   }
 }
 

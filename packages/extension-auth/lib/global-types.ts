@@ -53,6 +53,10 @@ declare global {
   export namespace AuthExtension {
     // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface Scopes {}
-    export type Grants = string;
+
+    // biome-ignore lint/suspicious/noEmptyInterface: is template
+    export interface GrantsMap {}
+
+    export type Grants = keyof GrantsMap;
   }
 }

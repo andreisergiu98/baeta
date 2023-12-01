@@ -24,12 +24,12 @@ export interface AuthMethodOptions<Result, Root, Context, Args> {
 }
 
 export type GetScopeRules<Root, Context, Args> = (
-  params: MiddlewareParams<Root, Context, Args>,
+  params: MiddlewareParams<Root, Context, Args>
 ) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
 
 export type GetPostScopeRules<Result, Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>,
-  result: Result,
+  result: Result
 ) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
 
 export class AuthExtension<T> extends Extension {
@@ -38,7 +38,7 @@ export class AuthExtension<T> extends Extension {
 
   constructor(
     readonly loadScopes: GetScopeLoader<T>,
-    readonly options: AuthOptions = {},
+    readonly options: AuthOptions = {}
   ) {
     super();
   }
@@ -48,7 +48,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getTypeExtensions = <Root, Context>(
-    type: string,
+    type: string
   ): BaetaExtensions.TypeExtensions<Root, Context> => {
     return {
       $auth: this.createPreAuthMethod(type, '*'),
@@ -58,7 +58,7 @@ export class AuthExtension<T> extends Extension {
 
   getResolverExtensions = <Result, Root, Context, Args>(
     type: string,
-    field: string,
+    field: string
   ): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
     return {
       $auth: this.createPreAuthMethod(type, field),
@@ -67,7 +67,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getSubscriptionSubscribeExtensions = <Root, Context, Args>(
-    field: string,
+    field: string
   ): BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args> => {
     return {
       $auth: this.createPreAuthMethod('Subscription', `${field}.subscribe`),
@@ -76,7 +76,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getSubscriptionResolveExtensions = <Result, Root, Context, Args>(
-    field: string,
+    field: string
   ): BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args> => {
     return {
       $auth: this.createPreAuthMethod('Subscription', `${field}.resolve`),
@@ -129,7 +129,7 @@ export class AuthExtension<T> extends Extension {
   private createMiddleware(
     getScopes: GetScopeRules<unknown, unknown, unknown>,
     options?: AuthMethodOptions<unknown, unknown, unknown, unknown>,
-    defaultScopes?: ScopeRules,
+    defaultScopes?: ScopeRules
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -163,7 +163,7 @@ export class AuthExtension<T> extends Extension {
   private createPostMiddleware(
     getScopes: GetPostScopeRules<unknown, unknown, unknown, unknown>,
     options?: AuthMethodOptions<unknown, unknown, unknown, unknown>,
-    defaultScopes?: ScopeRules,
+    defaultScopes?: ScopeRules
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
@@ -196,7 +196,7 @@ export class AuthExtension<T> extends Extension {
   private createPreAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
       scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-      options?: AuthMethodOptions<Result, Root, Context, Args>,
+      options?: AuthMethodOptions<Result, Root, Context, Args>
     ) => {
       const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
 
@@ -208,7 +208,7 @@ export class AuthExtension<T> extends Extension {
       const middleware = this.createMiddleware(
         getScopes as GetScopeRules<unknown, unknown, unknown>,
         options as AuthMethodOptions<unknown, unknown, unknown, unknown>,
-        defaultScopes,
+        defaultScopes
       );
       this.registerMiddleware(type, field, middleware);
     };
@@ -217,7 +217,7 @@ export class AuthExtension<T> extends Extension {
   private createPostAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
     return (
       getScopes: GetPostScopeRules<Result, Root, Context, Args>,
-      options?: AuthMethodOptions<Result, Root, Context, Args>,
+      options?: AuthMethodOptions<Result, Root, Context, Args>
     ) => {
       const defaultScopes =
         isOperationType(type) && options?.skipDefaults !== true
@@ -227,7 +227,7 @@ export class AuthExtension<T> extends Extension {
       const middleware = this.createPostMiddleware(
         getScopes as GetPostScopeRules<unknown, unknown, unknown, unknown>,
         options as AuthMethodOptions<unknown, unknown, unknown, unknown>,
-        defaultScopes,
+        defaultScopes
       );
       this.registerMiddleware(type, field, middleware);
     };

@@ -84,9 +84,9 @@ export function mergeExtensions<T, K extends Record<string, unknown>>(
   return merged;
 }
 
-export function withExtensions<Core, Ext>(core: Core, ext: Ext) {
+export function withExtensions<Core, Ext>(core: Core, ext: Ext): Ext & Core {
   return {
     ...ext,
     ...core,
-  } as Ext & Core;
+  };
 }

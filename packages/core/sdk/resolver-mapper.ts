@@ -8,26 +8,36 @@ import { NativeSubscribe } from './subscription';
 export type FieldResolvers = Record<string, GraphQLFieldResolver<unknown, unknown>>;
 
 export type SubscriptionsResolvers = {
-  Subscription?: Record<string, NativeSubscribe | undefined> | undefined;
+  Subscription?: Record<string, NativeSubscribe | undefined>;
 };
 
-export type ResolversMap = Record<string, FieldResolvers | undefined> & SubscriptionsResolvers;
-
-export type MiddlewareMap = Record<string, NativeMiddleware[]>;
+export type ResolversMap = {
+  [type: string]: FieldResolvers | undefined;
+} & SubscriptionsResolvers;
 
 export type ScalarsMap = Record<string, ScalarResolver | undefined>;
+export type MiddlewareMap = Record<string, NativeMiddleware[] | undefined>;
 
 export class ResolverMapper {
-  readonly scalars: ScalarsMap = {};
-  readonly resolvers: ResolversMap = {};
-  readonly middlewares: MiddlewareMap = {};
-  readonly typeFields: Record<string, string[]> = {};
+  readonly scalars: ScalarsMap = Object.create(null);
+  readonly resolvers: ResolversMap = Object.create(null);
+  readonly middlewares: MiddlewareMap = Object.create(null);
+
+  readonly types: string[] = [];
+  readonly typeFields: Record<string, string[] | undefined> = Object.create(null);
+
+  getTypes() {
+    return this.types;
+  }
+
+  getTypeFields(type: string) {
+    return this.typeFields[type] ?? [];
+  }
 
   setResolver(type: string, field: string, resolver: GraphQLFieldResolver<unknown, unknown>) {
-    if (this.resolvers[type] == null) {
-      this.resolvers[type] = {};
-    }
-    (this.resolvers[type] as FieldResolvers)[field] = resolver;
+    this.resolvers[type] ??= {};
+    // biome-ignore lint/style/noNonNullAssertion: map initialized above
+    this.resolvers[type]![field] = resolver;
   }
 
   setScalar(scalar: string, resolver: ScalarResolver) {
@@ -35,17 +45,13 @@ export class ResolverMapper {
   }
 
   setSubscription(field: string, resolver: NativeSubscribe) {
-    if (this.resolvers.Subscription == null) {
-      this.resolvers.Subscription = {};
-    }
+    this.resolvers.Subscription ??= {};
     this.resolvers.Subscription[field] = resolver;
   }
 
   addMiddleware(type: string, field: string, middleware: NativeMiddleware, unshift = false) {
     if (type === '*') {
-      const types = Object.keys(this.typeFields);
-
-      for (const t of types) {
+      for (const t of this.getTypes()) {
         this.addMiddleware(t, field, middleware, unshift);
       }
 
@@ -53,9 +59,7 @@ export class ResolverMapper {
     }
 
     if (field === '*') {
-      const fields = this.typeFields[type];
-
-      for (const field of fields) {
+      for (const field of this.getTypeFields(type)) {
         this.addMiddleware(type, field, middleware, unshift);
       }
 
@@ -63,17 +67,15 @@ export class ResolverMapper {
     }
 
     this.setDefaultFieldResolver(type, field);
-
     const key = `${type}.${field}`;
-
-    if (this.middlewares[key] == null) {
-      this.middlewares[key] = [];
-    }
+    this.middlewares[key] ??= [];
 
     if (unshift) {
-      this.middlewares[key].unshift(middleware);
+      // biome-ignore lint/style/noNonNullAssertion: initialized above
+      this.middlewares[key]!.unshift(middleware);
     } else {
-      this.middlewares[key].push(middleware);
+      // biome-ignore lint/style/noNonNullAssertion: initialized above
+      this.middlewares[key]!.push(middleware);
     }
   }
 
@@ -82,20 +84,20 @@ export class ResolverMapper {
       return;
     }
 
-    const typeResolvers = this.resolvers[type] as FieldResolvers | undefined;
-
-    if (typeResolvers?.[field] == null) {
+    if (this.resolvers[type]?.[field] == null) {
       this.setResolver(type, field, defaultFieldResolver);
     }
   }
 
   registerTypeField(type: string, field: string) {
-    if (this.typeFields[type] == null) {
-      this.typeFields[type] = [];
+    if (!this.types.includes(type)) {
+      this.types.push(type);
     }
 
-    if (!this.typeFields[type].includes(field)) {
-      this.typeFields[type].push(field);
+    if (!this.typeFields[type]?.includes(field)) {
+      this.typeFields[type] ??= [];
+      // biome-ignore lint/style/noNonNullAssertion: map initialized above
+      this.typeFields[type]!.push(field);
     }
   }
 

@@ -5,10 +5,14 @@ export function composeResolvers(resolvers: ResolversMap, middlewareMap: Middlew
   const composed = copyResolvers(resolvers);
 
   for (const key in middlewareMap) {
-    const fns = middlewareMap[key];
+    const fns = middlewareMap[key] ?? [];
+
+    if (fns.length === 0) {
+      continue;
+    }
+
     const path = key.split('.');
     const lens = createObjectLens(composed, path);
-
     const originalResolver = lens.get();
 
     if (!originalResolver) {

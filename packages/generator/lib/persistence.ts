@@ -1,8 +1,7 @@
 import { Ctx } from '@baeta/generator-sdk';
-import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
-import os from 'node:os';
 import path from 'node:path';
+import { createContextualTmpDir } from '../utils/tmp';
 
 export interface PersistedState {
   version: '1';
@@ -22,12 +21,8 @@ function isVersion1(state: unknown): state is PersistedState {
 }
 
 export function getStateFilename(cwd: string) {
-  const hash = crypto.createHash('shake256', {
-    outputLength: 8,
-  });
-  hash.update(cwd);
-  const name = hash.digest('hex');
-  return path.join(os.tmpdir(), 'baeta', `${name}.json`);
+  const dir = createContextualTmpDir(cwd);
+  return path.join(dir, 'generator.json');
 }
 
 export async function readState(filename: string) {

@@ -65,8 +65,8 @@ test('addMiddleware registers middleware for a type and field', (t) => {
   mapper.addMiddleware('Query', 'hello', middleware1);
   mapper.addMiddleware('Query', 'hello', middleware2, true);
 
-  t.is(mapper.middlewares['Query.hello'][0], middleware2);
-  t.is(mapper.middlewares['Query.hello'][1], middleware1);
+  t.is(mapper.middlewares['Query.hello']?.[0], middleware2);
+  t.is(mapper.middlewares['Query.hello']?.[1], middleware1);
 });
 
 test('composes middlewares with resolvers', (t) => {
@@ -95,25 +95,25 @@ test('addMiddleware registers middleware for all fields of a type', (t) => {
   const middleware = forgeNativeMiddleware();
   mapper.addMiddleware('Query', '*', middleware);
 
-  t.is(mapper.middlewares['Query.hello'][0], middleware);
-  t.is(mapper.middlewares['Query.world'][0], middleware);
+  t.is(mapper.middlewares['Query.hello']?.[0], middleware);
+  t.is(mapper.middlewares['Query.world']?.[0], middleware);
 });
 
 test('addMiddleware registers middleware for all types', (t) => {
   const mapper = new ResolverMapper();
-  mapper.typeFields['Query'] = ['hello'];
-  mapper.typeFields['Mutation'] = ['hello'];
+  mapper.registerTypeField('Query', 'hello');
+  mapper.registerTypeField('Mutation', 'hello');
 
   const middleware = forgeNativeMiddleware();
   mapper.addMiddleware('*', '*', middleware);
 
-  t.is(mapper.middlewares['Query.hello'][0], middleware);
-  t.is(mapper.middlewares['Mutation.hello'][0], middleware);
+  t.is(mapper.middlewares['Query.hello']?.[0], middleware);
+  t.is(mapper.middlewares['Mutation.hello']?.[0], middleware);
 });
 
 test('addMiddleware registers default resolvers when there are none', (t) => {
   const mapper = new ResolverMapper();
-  mapper.typeFields['User'] = ['name'];
+  mapper.registerTypeField('User', 'name');
 
   const middleware = forgeNativeMiddleware();
   mapper.addMiddleware('User', 'name', middleware);

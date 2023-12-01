@@ -85,12 +85,10 @@ export class AuthExtension<T> extends Extension {
   };
 
   build = (mapper: ResolverMapper) => {
-    for (const type in mapper.typeFields) {
+    for (const type of mapper.getTypes()) {
+      const fields = mapper.getTypeFields(type);
       const fieldsWithScopes = Object.keys(this.authMap[type] ?? {});
-
-      let fieldsWithoutScopes = mapper.typeFields[type].filter(
-        (field) => !fieldsWithScopes.includes(field),
-      );
+      let fieldsWithoutScopes = fields.filter((field) => !fieldsWithScopes.includes(field));
 
       for (const field of fieldsWithScopes) {
         const middleware = this.authMap[type][field];

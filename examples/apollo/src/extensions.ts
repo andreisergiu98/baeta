@@ -51,7 +51,7 @@ const auth = authExtension<Context>(
         },
       },
     },
-  }
+  },
 );
 
 export default createExtensions(auth);

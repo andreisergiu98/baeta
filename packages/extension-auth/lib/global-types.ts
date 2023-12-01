@@ -8,47 +8,47 @@ declare global {
     export interface ResolverExtensions<Result, Root, Context, Args> {
       $auth: (
         scopes: ScopeRules | NewType<Root, Context, Args>,
-        options?: AuthMethodOptions<Result, Root, Context, Args>
+        options?: AuthMethodOptions<Result, Root, Context, Args>,
       ) => void;
       $postAuth: (
         getScopes: GetPostScopeRules<Result, Root, Context, Args>,
-        options?: AuthMethodOptions<Result, Root, Context, Args>
+        options?: AuthMethodOptions<Result, Root, Context, Args>,
       ) => void;
     }
 
     export interface TypeExtensions<Root, Context> {
       $auth: (
         scopes: ScopeRules | GetScopeRules<Root, Context, unknown>,
-        options?: AuthMethodOptions<unknown, Root, Context, unknown>
+        options?: AuthMethodOptions<unknown, Root, Context, unknown>,
       ) => void;
       $postAuth: (
         getScopes: GetPostScopeRules<unknown, Root, Context, unknown>,
-        options?: AuthMethodOptions<unknown, Root, Context, unknown>
+        options?: AuthMethodOptions<unknown, Root, Context, unknown>,
       ) => void;
     }
 
     export interface SubscriptionExtensions<Root, Context, Args> {
       $auth: (
         scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-        options?: AuthMethodOptions<unknown, Root, Context, Args>
+        options?: AuthMethodOptions<unknown, Root, Context, Args>,
       ) => void;
     }
 
     export interface SubscriptionSubscribeExtensions<Root, Context, Args> {
       $auth: (
         scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-        options?: AuthMethodOptions<unknown, Root, Context, Args>
+        options?: AuthMethodOptions<unknown, Root, Context, Args>,
       ) => void;
     }
 
     export interface SubscriptionResolveExtensions<Result, Root, Context, Args> {
       $auth: (
         scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-        options?: AuthMethodOptions<Result, Root, Context, Args>
+        options?: AuthMethodOptions<Result, Root, Context, Args>,
       ) => void;
       $postAuth: (
         getScopes: GetPostScopeRules<Result, Root, Context, Args>,
-        options?: AuthMethodOptions<Result, Root, Context, Args>
+        options?: AuthMethodOptions<Result, Root, Context, Args>,
       ) => void;
     }
   }

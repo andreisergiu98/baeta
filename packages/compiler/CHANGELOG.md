@@ -1,5 +1,15 @@
 # @baeta/compiler
 
+## 0.0.29
+
+### Patch Changes
+
+- [#69](https://github.com/andreisergiu98/baeta/pull/69) [`3cdd9b3`](https://github.com/andreisergiu98/baeta/commit/3cdd9b30369d21179769a4b8d5f76e326ae6db37) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#91](https://github.com/andreisergiu98/baeta/pull/91) [`e0944f6`](https://github.com/andreisergiu98/baeta/commit/e0944f6320e6cf2f0a3d2c9f51edd282bdce0546) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#79](https://github.com/andreisergiu98/baeta/pull/79) [`4a5fbfa`](https://github.com/andreisergiu98/baeta/commit/4a5fbfa0c97253fcd49178a702ca96e9f6248100) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - esbuild: 0.18.2 -> 0.18.4
+
 ## 0.0.28
 
 ### Patch Changes

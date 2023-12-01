@@ -1,5 +1,19 @@
 # @baeta/extension-auth
 
+## 0.0.6
+
+### Patch Changes
+
+- [#69](https://github.com/andreisergiu98/baeta/pull/69) [`3cdd9b3`](https://github.com/andreisergiu98/baeta/commit/3cdd9b30369d21179769a4b8d5f76e326ae6db37) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#98](https://github.com/andreisergiu98/baeta/pull/98) [`d2a0a63`](https://github.com/andreisergiu98/baeta/commit/d2a0a6380124fe49199a80bf2e3bed2ceddf8ba6) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix(extension-auth): fix default scopes for subscriptions and grant type
+
+- [#91](https://github.com/andreisergiu98/baeta/pull/91) [`e0944f6`](https://github.com/andreisergiu98/baeta/commit/e0944f6320e6cf2f0a3d2c9f51edd282bdce0546) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`3cdd9b3`](https://github.com/andreisergiu98/baeta/commit/3cdd9b30369d21179769a4b8d5f76e326ae6db37), [`e0944f6`](https://github.com/andreisergiu98/baeta/commit/e0944f6320e6cf2f0a3d2c9f51edd282bdce0546)]:
+  - @baeta/core@0.0.29
+  - @baeta/errors@0.0.2
+
 ## 0.0.5
 
 ### Patch Changes

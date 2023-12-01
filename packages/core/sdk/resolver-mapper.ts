@@ -19,12 +19,12 @@ export type ScalarsMap = Record<string, ScalarResolver | undefined>;
 export type MiddlewareMap = Record<string, NativeMiddleware[] | undefined>;
 
 export class ResolverMapper {
-  readonly scalars: ScalarsMap = {};
-  readonly resolvers: ResolversMap = {};
-  readonly middlewares: MiddlewareMap = {};
+  readonly scalars: ScalarsMap = Object.create(null);
+  readonly resolvers: ResolversMap = Object.create(null);
+  readonly middlewares: MiddlewareMap = Object.create(null);
 
   readonly types: string[] = [];
-  readonly typeFields: Record<string, string[] | undefined> = {};
+  readonly typeFields: Record<string, string[] | undefined> = Object.create(null);
 
   getTypes() {
     return this.types;

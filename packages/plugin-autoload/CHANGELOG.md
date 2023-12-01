@@ -1,5 +1,18 @@
 # @baeta/plugin-autoload
 
+## 0.0.4
+
+### Patch Changes
+
+- [#81](https://github.com/andreisergiu98/baeta/pull/81) [`3ff5e54`](https://github.com/andreisergiu98/baeta/commit/3ff5e54f31cf42ba2264b12309338d6e78710722) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add file transformation function from config
+
+- [#69](https://github.com/andreisergiu98/baeta/pull/69) [`3cdd9b3`](https://github.com/andreisergiu98/baeta/commit/3cdd9b30369d21179769a4b8d5f76e326ae6db37) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#91](https://github.com/andreisergiu98/baeta/pull/91) [`e0944f6`](https://github.com/andreisergiu98/baeta/commit/e0944f6320e6cf2f0a3d2c9f51edd282bdce0546) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`3ff5e54`](https://github.com/andreisergiu98/baeta/commit/3ff5e54f31cf42ba2264b12309338d6e78710722), [`3cdd9b3`](https://github.com/andreisergiu98/baeta/commit/3cdd9b30369d21179769a4b8d5f76e326ae6db37), [`e0944f6`](https://github.com/andreisergiu98/baeta/commit/e0944f6320e6cf2f0a3d2c9f51edd282bdce0546)]:
+  - @baeta/generator-sdk@0.0.9
+
 ## 0.0.3
 
 ### Patch Changes

@@ -12,3 +12,7 @@ examples/**/typedef.ts
 dist
 website/.docusaurus
 website/build
+
+
+### misc ###
+.changeset/**/*.md

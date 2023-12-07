@@ -1,4 +1,4 @@
-import { AggregateGraphQLError } from '@baeta/errors';
+import { AggregateGraphQLError, InternalServerError } from '@baeta/errors';
 import { GraphQLError } from 'graphql';
 
 export type ScopeErrorResolver = (err: unknown) => Error | unknown;
@@ -11,11 +11,14 @@ export function resolveError(err: unknown, resolve: ScopeErrorResolver) {
   throw err;
 }
 
-export function aggregateErrorResolver(err: unknown): Error {
-  if (!(err instanceof AggregateError)) {
-    return err as Error;
+export function defaultErrorResolver(err: unknown) {
+  if (err instanceof AggregateError) {
+    return aggregateErrorResolver(err);
   }
+  return err;
+}
 
+export function aggregateErrorResolver(err: AggregateError): AggregateGraphQLError {
   if (err.errors.length === 1) {
     return err.errors[0];
   }
@@ -25,6 +28,7 @@ export function aggregateErrorResolver(err: unknown): Error {
 
   for (const error of err.errors) {
     if (!(error instanceof GraphQLError)) {
+      errors.push(new InternalServerError(error));
       continue;
     }
 
@@ -37,7 +41,7 @@ export function aggregateErrorResolver(err: unknown): Error {
     error.extensions.http = undefined;
   }
 
-  return new AggregateGraphQLError(err.errors, undefined, {
+  return new AggregateGraphQLError(errors, undefined, {
     extensions: {
       http,
     },

@@ -2,7 +2,7 @@ import { MiddlewareParams } from '@baeta/core';
 import { Extension, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
 import { GraphQLResolveInfo } from 'graphql';
 import { createResolverPath, isOperationType } from '../utils/resolver';
-import { ScopeErrorResolver, aggregateErrorResolver, resolveError } from './error';
+import { ScopeErrorResolver, defaultErrorResolver, resolveError } from './error';
 import { GetGrant, saveGrants } from './grant';
 import { LogicRule } from './rule';
 import { GetScopeLoader } from './scope-resolver';
@@ -312,6 +312,6 @@ export class AuthExtension<T> extends Extension {
   }
 
   private createErrorResolver(errorResolver?: ScopeErrorResolver) {
-    return errorResolver ?? this.options.errorResolver ?? aggregateErrorResolver;
+    return errorResolver ?? this.options.errorResolver ?? defaultErrorResolver;
   }
 }

@@ -3282,6 +3282,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-env": "workspace:^"
     graphql: "npm:^16.8.1"
     typescript: "npm:^5.3.2"
   peerDependencies:
@@ -3330,6 +3331,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-log": "workspace:^"
     fast-json-stable-stringify: "npm:^2.1.0"
     graphql: "npm:^16.8.1"
     typescript: "npm:^5.3.2"
@@ -3484,6 +3486,26 @@ __metadata:
 "@baeta/tsconfig@workspace:^, @baeta/tsconfig@workspace:tools/tsconfig":
   version: 0.0.0-use.local
   resolution: "@baeta/tsconfig@workspace:tools/tsconfig"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/util-env@workspace:^, @baeta/util-env@workspace:packages/util-env":
+  version: 0.0.0-use.local
+  resolution: "@baeta/util-env@workspace:packages/util-env"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    typescript: "npm:^5.3.2"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/util-log@workspace:^, @baeta/util-log@workspace:packages/util-log":
+  version: 0.0.0-use.local
+  resolution: "@baeta/util-log@workspace:packages/util-log"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    typescript: "npm:^5.3.2"
   languageName: unknown
   linkType: soft
 

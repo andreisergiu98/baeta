@@ -1,15 +1,19 @@
+import { isDevelopmentMode } from '@baeta/util-env';
 import { GraphQLError, GraphQLErrorOptions } from 'graphql';
+
+const isDev = isDevelopmentMode();
 
 export enum BaetaErrorCode {
   Unauthenticated = 'UNAUTHENTICATED',
   Forbidden = 'FORBIDDEN',
   BadUserInput = 'BAD_USER_INPUT',
   AggregateError = 'AGGREGATE_ERROR',
+  InternalServerError = 'INTERNAL_SERVER_ERROR',
 }
 
 export class UnauthenticatedError extends GraphQLError {
   constructor(
-    message = 'Access denied! You need to be authorized to perform this action!',
+    message = 'Access denied! You need to be authenticated to perform this action!',
     options?: GraphQLErrorOptions,
   ) {
     super(message, {
@@ -52,6 +56,26 @@ export class BadUserInput extends GraphQLError {
   }
 }
 
+export class InternalServerError extends GraphQLError {
+  constructor(err: Error, message = 'Internal server error!', options?: GraphQLErrorOptions) {
+    super(isDev ? err.message : message, {
+      ...options,
+      originalError: isDev ? err : undefined,
+      extensions: {
+        code: BaetaErrorCode.InternalServerError,
+        ...options?.extensions,
+      },
+    });
+  }
+}
+
+function getStackTrace(err: Error) {
+  if (err instanceof GraphQLError) {
+    return err.originalError?.stack ?? err.stack;
+  }
+  return err.stack;
+}
+
 export class AggregateGraphQLError extends GraphQLError {
   constructor(
     errors: GraphQLError[],
@@ -63,12 +87,12 @@ export class AggregateGraphQLError extends GraphQLError {
       extensions: {
         ...options?.extensions,
         code: BaetaErrorCode.AggregateError,
-        errors: errors.map((error) => ({
-          message: error.message,
-          path: error.path,
-          locations: error.locations,
-          extensions: error.extensions,
-          // stacktrace: process.env.NODE_ENV === 'production' ? undefined : error.stack,
+        errors: errors.map((err) => ({
+          message: err.message,
+          path: err.path,
+          locations: err.locations,
+          extensions: err.extensions,
+          stacktrace: isDev ? getStackTrace(err) : undefined,
         })),
       },
     });

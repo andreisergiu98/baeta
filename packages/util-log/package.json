@@ -1,6 +1,6 @@
 {
-  "name": "@baeta/extension-auth",
-  "version": "0.0.6",
+  "name": "@baeta/util-log",
+  "version": "0.0.1",
   "keywords": [
     "baeta",
     "graphql",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/extension-auth"
+    "directory": "packages/util-log"
   },
   "license": "MIT",
   "author": {
@@ -44,21 +44,10 @@
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
   },
-  "dependencies": {
-    "@baeta/errors": "workspace:^",
-    "@baeta/util-log": "workspace:^",
-    "fast-json-stable-stringify": "^2.1.0"
-  },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.8.1",
     "typescript": "^5.3.2"
-  },
-  "peerDependencies": {
-    "@baeta/core": "workspace:^",
-    "graphql": "^16.6.0"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -2,7 +2,7 @@ import { MiddlewareParams } from '@baeta/core';
 import { Extension, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
 import { GraphQLResolveInfo } from 'graphql';
 import { createResolverPath, isOperationType } from '../utils/resolver';
-import { ScopeErrorResolver, aggregateErrorResolver, resolveError } from './error';
+import { ScopeErrorResolver, defaultErrorResolver, resolveError } from './error';
 import { GetGrant, saveGrants } from './grant';
 import { LogicRule } from './rule';
 import { GetScopeLoader } from './scope-resolver';
@@ -298,6 +298,7 @@ export class AuthExtension<T> extends Extension {
     defaultScopes: ScopeRules | undefined,
     requiredScopes: ScopeRules | undefined,
   ) {
+    const fullPath = createResolverPath(info.path);
     const parentPath = createResolverPath(info.path.prev);
     const errorResolver = this.createErrorResolver(options?.onError);
 
@@ -308,10 +309,10 @@ export class AuthExtension<T> extends Extension {
     }
     promises.push(verifyScopes(ctx, requiredScopes, this.defaultRule, parentPath));
 
-    return Promise.all(promises).catch((err) => resolveError(err, errorResolver));
+    return Promise.all(promises).catch((err) => resolveError(err, errorResolver, fullPath));
   }
 
   private createErrorResolver(errorResolver?: ScopeErrorResolver) {
-    return errorResolver ?? this.options.errorResolver ?? aggregateErrorResolver;
+    return errorResolver ?? this.options.errorResolver ?? defaultErrorResolver;
   }
 }

@@ -13,7 +13,7 @@ export enum BaetaErrorCode {
 
 export class UnauthenticatedError extends GraphQLError {
   constructor(
-    message = 'Access denied! You need to be authorized to perform this action!',
+    message = 'Access denied! You need to be authenticated to perform this action!',
     options?: GraphQLErrorOptions,
   ) {
     super(message, {

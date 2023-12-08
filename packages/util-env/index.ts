@@ -79,16 +79,13 @@ export function getEnv(key: string): string | undefined {
 
 export function isDevelopmentMode() {
   const modeKeys = ['BAETA_ENV', 'NODE_ENV', 'ENVIRONMENT'];
+  const modeValues = modeKeys.map((key) => getEnv(key));
 
-  const anyIsProduction = modeKeys.some((key) => getEnv(key) === 'production');
-
-  if (anyIsProduction) {
+  if (modeValues.includes('production')) {
     return false;
   }
 
-  const anyIsDevelopment = modeKeys.some((key) => getEnv(key) === 'development');
-
-  if (anyIsDevelopment) {
+  if (modeValues.includes('development')) {
     return true;
   }
 

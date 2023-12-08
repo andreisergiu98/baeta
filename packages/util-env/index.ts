@@ -20,12 +20,6 @@ type EnvGlobal = {
   };
 };
 
-type ImportMetaWithEnv = ImportMeta & {
-  env?: {
-    [key: string]: string | undefined;
-  };
-};
-
 function supportsNodeEnv(global: Record<string, unknown>): global is NodeGlobal {
   return global.process != null;
 }
@@ -50,15 +44,6 @@ function getEnvFromGlobal(global: EnvGlobal, key: string) {
   return global.env[key];
 }
 
-function tryESMEnv(key: string) {
-  try {
-    const meta = import.meta as ImportMetaWithEnv | null | undefined;
-    return meta?.env?.[key];
-  } catch (err) {
-    return undefined;
-  }
-}
-
 export function getEnv(key: string): string | undefined {
   const global = globalThis;
 
@@ -74,7 +59,7 @@ export function getEnv(key: string): string | undefined {
     return getEnvFromGlobal(global, key);
   }
 
-  return tryESMEnv(key);
+  return undefined;
 }
 
 export function isDevelopmentMode() {

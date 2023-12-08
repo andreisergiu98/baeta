@@ -298,6 +298,7 @@ export class AuthExtension<T> extends Extension {
     defaultScopes: ScopeRules | undefined,
     requiredScopes: ScopeRules | undefined,
   ) {
+    const fullPath = createResolverPath(info.path);
     const parentPath = createResolverPath(info.path.prev);
     const errorResolver = this.createErrorResolver(options?.onError);
 
@@ -308,7 +309,7 @@ export class AuthExtension<T> extends Extension {
     }
     promises.push(verifyScopes(ctx, requiredScopes, this.defaultRule, parentPath));
 
-    return Promise.all(promises).catch((err) => resolveError(err, errorResolver));
+    return Promise.all(promises).catch((err) => resolveError(err, errorResolver, fullPath));
   }
 
   private createErrorResolver(errorResolver?: ScopeErrorResolver) {

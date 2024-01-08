@@ -93,3 +93,13 @@ export type QueryUsersArgs = {
 };
 
 export type DateTime = Scalars["DateTime"];
+
+export type DefinedFieldsWithoutExtensions = {
+  PageInfo: "hasPreviousPage" | "hasNextPage";
+  UserConnection: "pageInfo" | "edges";
+  UserEdge: "cursor" | "node";
+  UserPhotoConnection: "pageInfo" | "edges";
+  UserPhotoEdge: "cursor" | "node";
+  UserPhoto: "id" | "url";
+  User: "id" | "name" | "birthday";
+};

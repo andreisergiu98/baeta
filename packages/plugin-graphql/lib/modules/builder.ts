@@ -356,17 +356,19 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
   }
 
   function printTypeBody(typeName: string): string {
-    const coreType = `${importNamespace}.${baseVisitor.convertName(typeName, {
+    const normalizedTypeName = baseVisitor.convertName(typeName, {
       useTypesSuffix: true,
       useTypesPrefix: true,
-    })}`;
+    });
+
+    const coreType = `${importNamespace}.${normalizedTypeName}`;
 
     if (external.enums.includes(typeName) || external.objects.includes(typeName)) {
       if (schema && isScalarType(schema.getType(typeName))) {
         return `${importNamespace}.Scalars['${typeName}']`;
       }
 
-      return coreType;
+      return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;
     }
 
     if (defined.enums.includes(typeName) && picks.enums[typeName]) {
@@ -385,7 +387,11 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       return `Pick<${coreType}, DefinedInputFields['${typeName}']>`;
     }
 
-    return coreType;
+    if (isScalarType(schema?.getType(typeName))) {
+      return coreType;
+    }
+
+    return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;
   }
 
   function printExportType(typeName: string): string {

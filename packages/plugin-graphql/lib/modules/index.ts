@@ -1,7 +1,7 @@
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
 import { Source } from '@graphql-tools/utils';
-import { DocumentNode, concatAST, isScalarType } from 'graphql';
+import { DocumentNode, ObjectTypeDefinitionNode, concatAST, isScalarType } from 'graphql';
 import { join, relative, resolve } from 'path';
 import { buildModule } from './builder';
 import { ModulesConfig } from './config';
@@ -51,6 +51,9 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
         {
           'modules-exported-scalars': {},
         },
+        {
+          'modules-exported-picks': {},
+        },
       ],
       pluginMap: {
         ...options.pluginMap,
@@ -69,6 +72,41 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
               })
               .filter(Boolean)
               .join('\n');
+          },
+        },
+        'modules-exported-picks': {
+          plugin: (schema) => {
+            const typePicks: string[] = [];
+
+            for (const moduleName of modules) {
+              const sources = sourcesByModuleMap[moduleName];
+              const documents = sources.map((source) => source.document) as DocumentNode[];
+              const moduleDocument = concatAST(documents);
+
+              const types = moduleDocument.definitions.filter(
+                (def) => def.kind === 'ObjectTypeDefinition',
+              ) as ObjectTypeDefinitionNode[];
+
+              for (const type of types) {
+                const name = type.name.value;
+
+                if (name === 'Query' || name === 'Mutation' || name === 'Subscription') {
+                  continue;
+                }
+
+                const fields = type.fields ?? [];
+
+                if (fields.length === 0) {
+                  continue;
+                }
+
+                const fieldNames = fields.map((f) => `"${f.name.value}"`).join(' | ');
+
+                typePicks.push(`  ${name}: ${fieldNames};`);
+              }
+            }
+
+            return `\nexport type DefinedFieldsWithoutExtensions = {\n${typePicks.join('\n')}\n};`;
           },
         },
       },

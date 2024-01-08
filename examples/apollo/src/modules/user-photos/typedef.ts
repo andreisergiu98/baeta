@@ -14,8 +14,8 @@ interface DefinedFields {
 };
 
 export type UserPhoto = Pick<Types.UserPhoto, DefinedFields['UserPhoto']>;
-export type User = Types.User;
-export type UserPhotoConnection = Types.UserPhotoConnection;
+export type User = Pick<Types.User, Types.DefinedFieldsWithoutExtensions["User"]>;
+export type UserPhotoConnection = Pick<Types.UserPhotoConnection, Types.DefinedFieldsWithoutExtensions["UserPhotoConnection"]>;
 
 export namespace ModuleMetadata {
   export const id = 'user-photos';

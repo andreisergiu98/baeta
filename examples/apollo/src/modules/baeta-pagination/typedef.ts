@@ -19,10 +19,10 @@ interface DefinedFields {
 export type PageInfo = Pick<Types.PageInfo, DefinedFields['PageInfo']>;
 export type UserConnection = Pick<Types.UserConnection, DefinedFields['UserConnection']>;
 export type UserEdge = Pick<Types.UserEdge, DefinedFields['UserEdge']>;
-export type User = Types.User;
+export type User = Pick<Types.User, Types.DefinedFieldsWithoutExtensions["User"]>;
 export type UserPhotoConnection = Pick<Types.UserPhotoConnection, DefinedFields['UserPhotoConnection']>;
 export type UserPhotoEdge = Pick<Types.UserPhotoEdge, DefinedFields['UserPhotoEdge']>;
-export type UserPhoto = Types.UserPhoto;
+export type UserPhoto = Pick<Types.UserPhoto, Types.DefinedFieldsWithoutExtensions["UserPhoto"]>;
 
 export namespace ModuleMetadata {
   export const id = 'baeta-pagination';

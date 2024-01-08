@@ -12,7 +12,7 @@ export type ScopeRules = {
 } & {
   [r in LogicRule]?: ScopeRules;
 } & {
-  $granted?: string;
+  $granted?: AuthExtension.Grants;
 };
 
 async function verifyGrant(

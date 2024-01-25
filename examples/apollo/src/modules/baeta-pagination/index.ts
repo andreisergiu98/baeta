@@ -2,6 +2,6 @@
 
 /* eslint-disable */
 
-import { getBaetaPaginationModule } from './typedef';
+import { getBaetaPaginationModule } from "./typedef";
 
 export const baetaPaginationModule = getBaetaPaginationModule();

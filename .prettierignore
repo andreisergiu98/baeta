@@ -6,7 +6,8 @@ node_modules
 
 ### examples ###
 examples/**/__generated__/*
-examples/**/typedef.ts
+examples/**/modules/baeta-*/*
+examples/**/modules/*/typedef.ts
 
 ### build ###
 dist

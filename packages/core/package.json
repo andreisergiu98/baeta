@@ -53,7 +53,7 @@
   "dependencies": {
     "@baeta/errors": "workspace:^",
     "@graphql-tools/schema": "^10.0.2",
-    "@graphql-tools/utils": "^10.0.11"
+    "@graphql-tools/utils": "^10.0.13"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
@@ -61,7 +61,7 @@
     "ava": "^5.3.1",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"

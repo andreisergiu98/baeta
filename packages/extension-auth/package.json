@@ -54,7 +54,7 @@
     "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "graphql": "^16.8.1",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",

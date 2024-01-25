@@ -5,12 +5,15 @@ interface Pkg {
   name?: string;
   type?: string;
   sideEffects?: boolean;
+  exports?: Exports;
   publishConfig?: PkgPublishConfig;
 }
 
 interface PkgPublishConfig {
-  exports?: Record<string, PkgExport>;
+  exports?: Exports;
 }
+
+type Exports = Record<string, PkgExport>;
 
 interface PkgExport {
   types?: string;
@@ -100,17 +103,14 @@ async function createNestedPackages() {
     return;
   }
 
-  if (pkg.publishConfig == null) {
-    console.log('Missing publishConfig, skipping...');
+  const pkgExports = pkg.publishConfig?.exports || pkg.exports;
+
+  if (pkgExports == null) {
+    console.log('Missing publishConfig.exports and exports, skipping...');
     return;
   }
 
-  if (pkg.publishConfig?.exports == null) {
-    console.log('Missing publishConfig.exports, skipping...');
-    return;
-  }
-
-  const entries = Object.entries(pkg.publishConfig.exports);
+  const entries = Object.entries(pkgExports);
   const created: string[] = [];
   const promises: Promise<void>[] = [];
 

@@ -11,8 +11,8 @@
     "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
     "baseUrl": ".",
     "paths": {
-      "@site/*": ["./*"]
+      "@site/*": ["./*"],
     },
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+  },
 }

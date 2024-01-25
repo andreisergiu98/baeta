@@ -5,7 +5,7 @@
     "outDir": "dist",
     "jsx": "react",
     "types": ["react"],
-    "allowJs": true
+    "allowJs": true,
   },
-  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"],
 }

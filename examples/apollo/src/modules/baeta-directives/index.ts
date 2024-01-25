@@ -2,8 +2,8 @@
 
 /* eslint-disable */
 
-import { getBaetaDirectivesModule } from './typedef';
+import { getBaetaDirectivesModule } from "./typedef";
 
-import './directives.baeta.ts';
+import "./directives.baeta.ts";
 
 export const baetaDirectivesModule = getBaetaDirectivesModule();

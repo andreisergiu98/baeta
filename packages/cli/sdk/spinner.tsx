@@ -1,5 +1,5 @@
+import { Text } from '@baeta/ink';
 import spinners, { SpinnerName } from 'cli-spinners';
-import { Text } from 'ink';
 import React, { useEffect, useState } from 'react';
 
 export interface SpinnerProps {

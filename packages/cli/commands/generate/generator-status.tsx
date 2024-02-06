@@ -1,5 +1,5 @@
+import { Text } from '@baeta/ink';
 import { GraphQLError } from 'graphql';
-import { Text } from 'ink';
 import React from 'react';
 import { Errors, Layout, makeErrorMessage, Spinner } from '../../sdk';
 

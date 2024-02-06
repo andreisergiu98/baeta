@@ -1,5 +1,5 @@
 import { GeneratorOptions, NormalizedGeneratorOptions } from '@baeta/generator-sdk';
-import { posixPath, isAbsolute, join, relative, resolve } from '@baeta/util-path';
+import { isAbsolute, join, posixPath, relative, resolve } from '@baeta/util-path';
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
   const root = options.cwd ?? process.cwd();

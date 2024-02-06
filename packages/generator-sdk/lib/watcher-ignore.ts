@@ -1,5 +1,5 @@
-import micromatch from 'micromatch';
 import path from '@baeta/util-path';
+import micromatch from 'micromatch';
 
 export type MatchFn = (testString: string) => boolean;
 export type MatchPattern = string | RegExp | MatchFn;

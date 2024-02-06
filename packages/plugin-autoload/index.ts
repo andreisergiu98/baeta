@@ -6,8 +6,8 @@ import {
   isMatch,
   WatcherFile,
 } from '@baeta/generator-sdk';
-import * as fs from 'node:fs/promises';
 import * as path from '@baeta/util-path';
+import * as fs from 'node:fs/promises';
 
 interface ResolverOptions {
   suffix?: string | string[];

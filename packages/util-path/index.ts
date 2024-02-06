@@ -1,12 +1,11 @@
-import path from "path"
-import upath from 'upath'
-import os from "os";
+import path from 'path';
+import upath from 'upath';
 
-export const addExt = upath.addExt
-export const basename = upath.basename
-export const changeExt = upath.changeExt
-export const defaultExt = upath.defaultExt
-export const delimiter = upath.delimiter
+export const addExt = upath.addExt;
+export const basename = upath.basename;
+export const changeExt = upath.changeExt;
+export const defaultExt = upath.defaultExt;
+export const delimiter = upath.delimiter;
 export const dirname = upath.dirname;
 export const extname = upath.extname;
 export const format = upath.format;
@@ -27,11 +26,11 @@ export const trimExt = upath.trimExt;
 export const win32 = upath.win32;
 
 export function posixPath(pathname: string) {
-    return pathname.split(path.win32.sep).join(path.posix.sep);
+  return pathname.split(path.win32.sep).join(path.posix.sep);
 }
 
 export function winPath(pathname: string) {
-    return pathname.split(path.posix.sep).join(path.win32.sep)
+  return pathname.split(path.posix.sep).join(path.win32.sep);
 }
 
 export default upath;

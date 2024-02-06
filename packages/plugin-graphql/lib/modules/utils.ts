@@ -303,7 +303,7 @@ function ensureEndsWithSeparator(path: string) {
 }
 
 function ensureStartsWithSeparator(path: string) {
-  if(platform() === "win32") {
+  if (platform() === 'win32') {
     return path;
   }
 

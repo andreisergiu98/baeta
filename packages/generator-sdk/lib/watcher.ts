@@ -1,7 +1,7 @@
 import { AsyncSubscription, Event, EventType, Options, subscribe } from '@parcel/watcher';
 import micromatch from 'micromatch';
-import path from 'path';
 import { MatchPattern, WatcherIgnore } from './watcher-ignore';
+import path,{ posixPath } from '@baeta/util-path';
 
 export { micromatch };
 export const isMatch = micromatch.isMatch;
@@ -39,15 +39,15 @@ export class Watcher {
     }
 
     const filteredEvents = events.filter((event) => {
-      return !this.watcherIgnore.isIgnored(event.path);
+      return !this.watcherIgnore.isIgnored(posixPath(event.path));
     });
 
     for (const event of filteredEvents) {
       for (const listener of this.listeners[event.type]) {
         listener({
           type: event.type,
-          path: event.path,
-          relativePath: path.relative(this.cwd, event.path),
+          path: posixPath(event.path),
+          relativePath: posixPath(path.relative(this.cwd, event.path)),
         });
       }
     }

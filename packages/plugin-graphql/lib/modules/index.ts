@@ -2,7 +2,7 @@ import { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
 import { Source } from '@graphql-tools/utils';
 import { DocumentNode, ObjectTypeDefinitionNode, concatAST, isScalarType } from 'graphql';
-import { join, relative, resolve } from 'path';
+import { join, relative, resolve } from '@baeta/util-path';
 import { buildModule } from './builder';
 import { ModulesConfig } from './config';
 import {

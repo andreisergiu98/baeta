@@ -50,6 +50,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
+    "@baeta/util-path": "workspace:^",
     "esbuild": "^0.19.12"
   },
   "devDependencies": {

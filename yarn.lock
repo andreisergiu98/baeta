@@ -3201,6 +3201,7 @@ __metadata:
     "@baeta/ink": "npm:^4.4.1"
     "@baeta/plugin-graphql": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "npm:^18.19.9"
     "@types/react": "npm:^18.2.48"
     "@types/yargs": "npm:^17.0.32"
@@ -3230,6 +3231,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "npm:^18.19.9"
     esbuild: "npm:^0.19.12"
     typescript: "npm:^5.3.3"
@@ -3299,6 +3301,7 @@ __metadata:
     "@baeta/directives": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/extension-auth": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/plugin-pagination": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
@@ -3347,6 +3350,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/plugin": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@parcel/watcher": "npm:^2.4.0"
     "@types/micromatch": "npm:^4.0.6"
     "@types/node": "npm:^18.19.9"
@@ -3363,6 +3367,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "npm:^18.19.9"
     typescript: "npm:^5.3.3"
   languageName: unknown
@@ -3409,13 +3414,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@baeta/plugin-autoload@workspace:packages/plugin-autoload":
+"@baeta/plugin-autoload@workspace:^, @baeta/plugin-autoload@workspace:packages/plugin-autoload":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-autoload@workspace:packages/plugin-autoload"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "npm:^18.19.9"
     typescript: "npm:^5.3.3"
   languageName: unknown
@@ -3429,6 +3435,7 @@ __metadata:
     "@baeta/directives": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "npm:^18.19.9"
     graphql: "npm:^16.8.1"
     typescript: "npm:^5.3.3"
@@ -3457,6 +3464,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@graphql-codegen/core": "npm:^4.0.1"
     "@graphql-codegen/plugin-helpers": "npm:^5.0.2"
     "@graphql-codegen/typescript": "npm:^4.0.2"
@@ -3490,6 +3498,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "npm:^18.19.9"
     graphql: "npm:^16.8.1"
     typescript: "npm:^5.3.3"
@@ -3506,6 +3515,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/plugin-exec": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "npm:^18.19.9"
     execa: "npm:^8.0.1"
     typescript: "npm:^5.3.3"
@@ -3546,6 +3556,18 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/util-path@workspace:^, @baeta/util-path@workspace:packages/util-path":
+  version: 0.0.0-use.local
+  resolution: "@baeta/util-path@workspace:packages/util-path"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^18.19.9"
+    typescript: "npm:^5.3.3"
+    upath: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
 
@@ -19219,6 +19241,13 @@ __metadata:
   version: 1.0.0
   resolution: "unpipe@npm:1.0.0"
   checksum: 4fa18d8d8d977c55cb09715385c203197105e10a6d220087ec819f50cb68870f02942244f1017565484237f1f8c5d3cd413631b1ae104d3096f24fdfde1b4aa2
+  languageName: node
+  linkType: hard
+
+"upath@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "upath@npm:2.0.1"
+  checksum: 7b98a83559a295d59f87f7a8d615c7549d19e4aec4dd9d52be2bf1ba93e1d6ee7d8f2188cdecbf303a22cea3768abff4268b960350152a0264125f577d9ed79e
   languageName: node
   linkType: hard
 

@@ -1,5 +1,23 @@
 # @baeta/cli
 
+## 0.0.41
+
+### Patch Changes
+
+- [#102](https://github.com/andreisergiu98/baeta/pull/102) [`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#104](https://github.com/andreisergiu98/baeta/pull/104) [`de442e8`](https://github.com/andreisergiu98/baeta/commit/de442e8dcb48681e2be8064b934cad5af38a1829) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix error when installing ink
+
+- [#102](https://github.com/andreisergiu98/baeta/pull/102) [`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies and builder
+
+- [#106](https://github.com/andreisergiu98/baeta/pull/106) [`01788ab`](https://github.com/andreisergiu98/baeta/commit/01788ab04ff6956b2b50186af5bec8ed7ebbe76e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add compatibility with windows
+
+- Updated dependencies [[`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c), [`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c), [`01788ab`](https://github.com/andreisergiu98/baeta/commit/01788ab04ff6956b2b50186af5bec8ed7ebbe76e), [`03d1353`](https://github.com/andreisergiu98/baeta/commit/03d1353bcedf211d3b7dcfbe38132e43422742b1)]:
+  - @baeta/compiler@0.0.30
+  - @baeta/generator@0.0.26
+  - @baeta/plugin-graphql@0.0.25
+  - @baeta/util-path@0.0.2
+
 ## 0.0.40
 
 ### Patch Changes

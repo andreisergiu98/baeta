@@ -4,7 +4,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "noEmit": true,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": false
   },
-  "exclude": ["./baeta.ts"],
+  "exclude": ["./baeta.ts"]
 }

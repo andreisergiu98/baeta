@@ -8,6 +8,7 @@ node_modules
 examples/**/__generated__/*
 examples/**/modules/baeta-*/*
 examples/**/modules/*/typedef.ts
+examples/**/modules/autoload.ts
 
 ### build ###
 dist

@@ -3301,6 +3301,7 @@ __metadata:
     "@baeta/directives": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/extension-auth": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/plugin-pagination": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
@@ -3413,7 +3414,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@baeta/plugin-autoload@workspace:packages/plugin-autoload":
+"@baeta/plugin-autoload@workspace:^, @baeta/plugin-autoload@workspace:packages/plugin-autoload":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-autoload@workspace:packages/plugin-autoload"
   dependencies:

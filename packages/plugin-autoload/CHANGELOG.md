@@ -1,5 +1,19 @@
 # @baeta/plugin-autoload
 
+## 0.0.5
+
+### Patch Changes
+
+- [#102](https://github.com/andreisergiu98/baeta/pull/102) [`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#102](https://github.com/andreisergiu98/baeta/pull/102) [`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies and builder
+
+- [#106](https://github.com/andreisergiu98/baeta/pull/106) [`01788ab`](https://github.com/andreisergiu98/baeta/commit/01788ab04ff6956b2b50186af5bec8ed7ebbe76e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add compatibility with windows
+
+- Updated dependencies [[`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c), [`c9e37fd`](https://github.com/andreisergiu98/baeta/commit/c9e37fd1d64588fd8eb63facd7eda08c0009470c), [`01788ab`](https://github.com/andreisergiu98/baeta/commit/01788ab04ff6956b2b50186af5bec8ed7ebbe76e)]:
+  - @baeta/generator-sdk@0.0.10
+  - @baeta/util-path@0.0.2
+
 ## 0.0.4
 
 ### Patch Changes

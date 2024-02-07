@@ -1,5 +1,5 @@
 import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
-import { join, parse } from 'path';
+import { join, parse } from '@baeta/util-path';
 
 interface TypeOptions {
   nodeType?: string;

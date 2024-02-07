@@ -1,7 +1,7 @@
 import { Ctx, WatcherFile } from '@baeta/generator-sdk';
 import { createExecPlugin } from '@baeta/plugin-exec';
+import { resolve } from '@baeta/util-path';
 import { readFile } from 'fs/promises';
-import { resolve } from 'path';
 import { PrismaPluginOptions } from './options';
 
 async function compareSchemas(cwd: string, current: string, generated: string) {

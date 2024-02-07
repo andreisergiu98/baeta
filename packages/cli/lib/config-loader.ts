@@ -1,6 +1,6 @@
+import { relative } from '@baeta/util-path';
 import fg from 'fast-glob';
 import fs from 'fs/promises';
-import { relative } from 'path';
 import { pathToFileURL } from 'url';
 import { makeErrorMessage } from '../sdk/errors';
 import { dynamicImportCompiler } from '../utils/compiler';
@@ -57,10 +57,10 @@ export async function getLoaderType(configPath: string): Promise<'esm' | 'cjs'> 
 
 export async function discoverBaetaConfig() {
   const entries = configNames.flatMap((name) => {
-    return configExtensions.map((ext) => `${process.cwd()}/${name}.${ext}`);
+    return configExtensions.map((ext) => `${name}.${ext}`);
   });
 
-  return fg(entries)
+  return fg(entries, { cwd: process.cwd() })
     .then((res) => res[0])
     .catch(() => null);
 }

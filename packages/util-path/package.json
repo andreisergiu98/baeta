@@ -1,6 +1,6 @@
 {
-  "name": "@baeta/cli",
-  "version": "0.0.40",
+  "name": "@baeta/util-path",
+  "version": "0.0.1",
   "keywords": [
     "baeta",
     "graphql",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/cli"
+    "directory": "packages/util-path"
   },
   "license": "MIT",
   "author": {
@@ -30,22 +30,9 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
-    },
-    "./ink": {
-      "import": "./dist/ink/index.js",
-      "require": "./dist/ink/index.cjs",
-      "types": "./dist/ink/index.d.ts"
-    },
-    "./sdk": {
-      "import": "./dist/sdk/index.js",
-      "require": "./dist/sdk/index.cjs",
-      "types": "./dist/sdk/index.d.ts"
     }
   },
   "types": "dist/index.d.ts",
-  "bin": {
-    "baeta": "./dist/bin/cli.js"
-  },
   "files": [
     "dist",
     "package.json"
@@ -58,36 +45,13 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@baeta/generator": "workspace:^",
-    "@baeta/ink": "^4.4.1",
-    "@baeta/plugin-graphql": "workspace:^",
-    "@baeta/util-path": "workspace:^",
-    "ansi-styles": "^6.2.1",
-    "cli-spinners": "^2.9.2",
-    "execa": "^8.0.1",
-    "fast-glob": "^3.3.2",
-    "react": "^18.2.0",
-    "tree-kill": "^1.2.2",
-    "yargs": "^17.7.2"
+    "upath": "^2.0.1"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/compiler": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^18.19.9",
-    "@types/react": "^18.2.48",
-    "@types/yargs": "^17.0.32",
-    "graphql": "^16.8.1",
     "typescript": "^5.3.3"
-  },
-  "peerDependencies": {
-    "@baeta/compiler": "workspace:^",
-    "graphql": "^16.6.0"
-  },
-  "peerDependenciesMeta": {
-    "@baeta/compiler": {
-      "optional": true
-    }
   },
   "engines": {
     "node": ">=18.0.0"

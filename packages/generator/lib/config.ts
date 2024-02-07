@@ -1,5 +1,5 @@
 import { GeneratorOptions, NormalizedGeneratorOptions } from '@baeta/generator-sdk';
-import { isAbsolute, join, relative, resolve } from 'path';
+import { isAbsolute, join, posixPath, relative, resolve } from '@baeta/util-path';
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
   const root = options.cwd ?? process.cwd();
@@ -12,10 +12,10 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 
   return {
     ...options,
-    cwd: root,
-    modulesDir,
-    moduleDefinitionName,
-    baseTypesPath,
+    cwd: posixPath(root),
+    modulesDir: posixPath(modulesDir),
+    moduleDefinitionName: posixPath(moduleDefinitionName),
+    baseTypesPath: posixPath(baseTypesPath),
     contextType: resolveContextType(root, baseTypesRoot, options.contextType),
     extensions: resolveExtensionPath(modulesDir, moduleDefinitionName, options.extensions),
   };
@@ -36,7 +36,7 @@ function resolveContextType(root: string, baseTypesRoot: string, contextType?: s
 
   const contextTypeRoot = resolve(root, contextType);
 
-  return relative(join(baseTypesRoot, '../'), contextTypeRoot);
+  return posixPath(relative(join(baseTypesRoot, '../'), contextTypeRoot));
 }
 
 function resolveExtensionPath(
@@ -56,5 +56,5 @@ function resolveExtensionPath(
     return extensionsPath.slice(1);
   }
 
-  return relative(join(modulesDir, moduleDefinitionName), extensionsPath);
+  return posixPath(relative(join(modulesDir, moduleDefinitionName), extensionsPath));
 }

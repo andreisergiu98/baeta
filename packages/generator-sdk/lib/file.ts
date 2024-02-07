@@ -1,5 +1,5 @@
+import { dirname, extname } from '@baeta/util-path';
 import fs from 'fs/promises';
-import { dirname, extname } from 'path';
 
 export interface FileOptions {
   eslintDisable?: boolean;

@@ -47,6 +47,7 @@
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/plugin-exec": "workspace:^",
+    "@baeta/util-path": "workspace:^",
     "execa": "^8.0.1"
   },
   "devDependencies": {

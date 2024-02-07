@@ -1,4 +1,5 @@
 import { defineConfig } from '@baeta/cli';
+import { autoloadPlugin } from '@baeta/plugin-autoload';
 import { directivesPlugin } from '@baeta/plugin-directives';
 import { paginationPlugin } from '@baeta/plugin-pagination';
 import { prismaPlugin } from '@baeta/plugin-prisma';
@@ -23,6 +24,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    autoloadPlugin(),
     prismaPlugin({
       prismaSchema: 'schema.prisma',
       generateCommand: 'yarn prisma generate',

@@ -157,6 +157,29 @@ export function Builder(props: Props) {
     };
   }, [config, compile]);
 
+  useEffect(() => {
+    const listener = async () => {
+      await killHanging();
+      process.exit();
+    };
+
+    process.on('exit', listener);
+    process.on('SIGINT', listener);
+    process.on('SIGUSR1', listener);
+    process.on('SIGUSR2', listener);
+    process.on('SIGINT', listener);
+    process.on('uncaughtException', listener);
+
+    return () => {
+      process.off('exit', listener);
+      process.off('SIGINT', listener);
+      process.off('SIGUSR1', listener);
+      process.off('SIGUSR2', listener);
+      process.off('SIGINT', listener);
+      process.off('uncaughtException', listener);
+    };
+  }, [killHanging]);
+
   return (
     <>
       {isConfigured && (

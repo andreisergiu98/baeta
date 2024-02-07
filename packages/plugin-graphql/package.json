@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
+    "@baeta/util-path": "workspace:^",
     "@graphql-codegen/core": "^4.0.1",
     "@graphql-codegen/plugin-helpers": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.2",

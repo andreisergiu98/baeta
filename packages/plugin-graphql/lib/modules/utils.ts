@@ -14,6 +14,7 @@ import {
   ObjectTypeDefinitionNode,
   TypeNode,
 } from 'graphql';
+import { platform } from 'os';
 import parse from 'parse-filepath';
 
 const sep = '/';
@@ -302,6 +303,10 @@ function ensureEndsWithSeparator(path: string) {
 }
 
 function ensureStartsWithSeparator(path: string) {
+  if (platform() === 'win32') {
+    return path;
+  }
+
   return path.startsWith('.')
     ? path.replace(/^(..\/)|(.\/)/, '/')
     : path.startsWith('/')

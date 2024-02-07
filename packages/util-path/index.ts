@@ -1,6 +1,14 @@
 import path from 'path';
 import upath from 'upath';
 
+export function posixPath(pathname: string) {
+  return pathname.split(path.win32.sep).join(path.posix.sep);
+}
+
+export function winPath(pathname: string) {
+  return pathname.split(path.posix.sep).join(path.win32.sep);
+}
+
 export const addExt = upath.addExt;
 export const basename = upath.basename;
 export const changeExt = upath.changeExt;
@@ -25,12 +33,30 @@ export const toUnix = upath.toUnix;
 export const trimExt = upath.trimExt;
 export const win32 = upath.win32;
 
-export function posixPath(pathname: string) {
-  return pathname.split(path.win32.sep).join(path.posix.sep);
-}
-
-export function winPath(pathname: string) {
-  return pathname.split(path.posix.sep).join(path.win32.sep);
-}
-
-export default upath;
+export default {
+  addExt,
+  basename,
+  changeExt,
+  defaultExt,
+  delimiter,
+  dirname,
+  extname,
+  format,
+  isAbsolute,
+  join,
+  joinSafe,
+  normalize,
+  normalizeSafe,
+  normalizeTrim,
+  parse,
+  posix,
+  relative,
+  removeExt,
+  resolve,
+  sep,
+  toUnix,
+  trimExt,
+  win32,
+  posixPath,
+  winPath,
+};

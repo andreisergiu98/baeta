@@ -3301,7 +3301,6 @@ __metadata:
     "@baeta/directives": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/extension-auth": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/plugin-pagination": "workspace:^"
@@ -3344,21 +3343,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/extension-cache@workspace:^, @baeta/extension-cache@workspace:packages/extension-cache":
+"@baeta/extension-cache@workspace:packages/extension-cache":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-cache@workspace:packages/extension-cache"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^18.19.0"
+    "@types/node": "npm:^18.19.9"
     dataloader: "npm:^2.2.2"
     fast-json-stable-stringify: "npm:^2.1.0"
     flat: "npm:^6.0.1"
     graphql: "npm:^16.8.1"
     ioredis: "npm:^5.3.2"
     keyv: "npm:^4.5.4"
-    typescript: "npm:^5.3.2"
+    typescript: "npm:^5.3.3"
   peerDependencies:
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
@@ -6791,15 +6790,6 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 508e90549c2893ec3b8e5f133763a3983adf37b6c8cfb3f1ea066f63d45f57a7246cf6c23aa859417d41d5c0b3f76883d66a749d2f1aa1ca486a47231286a01f
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^18.19.0":
-  version: 18.19.14
-  resolution: "@types/node@npm:18.19.14"
-  dependencies:
-    undici-types: "npm:~5.26.4"
-  checksum: c81d9f01ccaaa4f8a25c48fb888bd4dd5196562ebefccae6948d3b884eb3195f877826e12c5856d04690c215324c48b8d4c1d88c1e52d4428760c5612369b87b
   languageName: node
   linkType: hard
 
@@ -19136,7 +19126,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.3.2, typescript@npm:^5.3.3":
+"typescript@npm:^5.3.3":
   version: 5.3.3
   resolution: "typescript@npm:5.3.3"
   bin:
@@ -19146,7 +19136,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.3.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
   version: 5.3.3
   resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
   bin:

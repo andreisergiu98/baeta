@@ -62,7 +62,8 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@baeta/core": "workspace:^"
+    "@baeta/core": "workspace:^",
+    "graphql": "^16.6.0"
   },
   "engines": {
     "node": ">=18.0.0"

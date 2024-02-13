@@ -3274,6 +3274,7 @@ __metadata:
     typescript: "npm:^5.3.3"
   peerDependencies:
     "@baeta/core": "workspace:^"
+    graphql: ^16.6.0
   languageName: unknown
   linkType: soft
 

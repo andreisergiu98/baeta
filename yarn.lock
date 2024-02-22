@@ -3278,6 +3278,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/env@workspace:packages/env":
+  version: 0.0.0-use.local
+  resolution: "@baeta/env@workspace:packages/env"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/errors@workspace:^, @baeta/errors@workspace:packages/errors":
   version: 0.0.0-use.local
   resolution: "@baeta/errors@workspace:packages/errors"

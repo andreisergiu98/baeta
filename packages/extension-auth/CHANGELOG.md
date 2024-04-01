@@ -1,5 +1,16 @@
 # @baeta/extension-auth
 
+## 0.1.1
+
+### Patch Changes
+
+- [#119](https://github.com/andreisergiu98/baeta/pull/119) [`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a)]:
+  - @baeta/core@0.0.31
+  - @baeta/errors@0.0.4
+  - @baeta/util-log@0.0.3
+
 ## 0.1.0
 
 ### Minor Changes

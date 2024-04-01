@@ -1,5 +1,19 @@
 # @baeta/cli
 
+## 0.0.42
+
+### Patch Changes
+
+- [#117](https://github.com/andreisergiu98/baeta/pull/117) [`18db339`](https://github.com/andreisergiu98/baeta/commit/18db339719aa309c619372d2161c5fdbc08fa316) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add comments to config types
+
+- [#119](https://github.com/andreisergiu98/baeta/pull/119) [`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`18db339`](https://github.com/andreisergiu98/baeta/commit/18db339719aa309c619372d2161c5fdbc08fa316), [`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a)]:
+  - @baeta/generator@0.0.27
+  - @baeta/compiler@0.0.31
+  - @baeta/plugin-graphql@0.0.26
+  - @baeta/util-path@0.0.3
+
 ## 0.0.41
 
 ### Patch Changes

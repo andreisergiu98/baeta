@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-prisma",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "keywords": [
     "baeta",
     "graphql",

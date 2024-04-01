@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import { useServer } from 'graphql-ws/lib/use/ws';
-import { createServer } from 'http';
+import { createServer } from 'node:http';
 import { WebSocketServer } from 'ws';
 import { modules } from './modules/autoload';
 import { Context } from './types/context';

@@ -3314,6 +3314,7 @@ __metadata:
     "@baeta/extension-auth": "workspace:^"
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
+    "@baeta/plugin-gitignore": "workspace:^"
     "@baeta/plugin-pagination": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
@@ -3464,6 +3465,18 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^18.19.9"
     execa: "npm:^8.0.1"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/plugin-gitignore@workspace:^, @baeta/plugin-gitignore@workspace:packages/plugin-gitignore":
+  version: 0.0.0-use.local
+  resolution: "@baeta/plugin-gitignore@workspace:packages/plugin-gitignore"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/generator-sdk": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^18.19.9"
     typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft

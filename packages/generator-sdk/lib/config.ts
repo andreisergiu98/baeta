@@ -2,7 +2,7 @@ import { isAbsolute, join, posixPath, relative, resolve } from '@baeta/util-path
 import { FileOptions } from './file';
 
 /**
- * Generator options.
+ * Options for the graphql generator.
  */
 export interface GeneratorOptions {
   /**
@@ -12,25 +12,25 @@ export interface GeneratorOptions {
   cwd?: string;
 
   /**
-   * Glob pattern(s) to search for schema files.
+   * Glob pattern(s) to load graphql schema files.
    * @default ['src/∗∗/∗.graphql']
    */
   schemas: string[];
 
   /**
-   * Directory where modules are generated.
+   * Directory where modules are defined.
    * @default 'src/modules'
    */
   modulesDir?: string;
 
   /**
-   * Name of the module definition file.
+   * Name for the generated module definition file. This will contain type definitions and the graphql ast.
    * @default 'typedef.ts'
    */
   moduleDefinitionName?: string;
 
   /**
-   * Path to the generated base types file.
+   * Path for the generated base types file.
    * @default `${modulesDir}/../__generated__/types.ts`
    */
   baseTypesPath?: string;
@@ -44,7 +44,7 @@ export interface GeneratorOptions {
   contextType?: string;
 
   /**
-   * Path where extensions (ex. auth-extension) are exported.
+   * Path where extensions (ex. auth-extension) are exported. Only default export is supported.
    * @example 'src/extensions'
    * @default undefined
    */

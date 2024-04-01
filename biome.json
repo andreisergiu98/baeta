@@ -16,21 +16,19 @@
       }
     },
     "ignore": [
-      "./packages/*/dist/**",
-      "./plugins/*/dist/**",
-      "./tools/*/dist/**",
       "./website/build/**",
       "./website/.docusaurus/**",
-      "./examples/*/dist/**",
       "./examples/**/__generated__/**",
       "./examples/**/typedef.ts",
-      "./node_modules/**",
-      "./.yarn/**",
-      "./.pnp.cjs",
-      "./.pnp.loader.mjs"
+      "./.yarn/**"
     ]
   },
   "formatter": {
     "enabled": false
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   }
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.6.3/schema.json",
   "organizeImports": {
     "enabled": false
   },
@@ -13,6 +13,9 @@
       "complexity": {
         "noBannedTypes": "off",
         "useLiteralKeys": "off"
+      },
+      "style": {
+        "useImportType": "off"
       }
     },
     "ignore": [

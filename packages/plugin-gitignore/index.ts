@@ -1,6 +1,6 @@
 import { createPluginV1, File } from '@baeta/generator-sdk';
-import { readFile, stat } from 'fs/promises';
-import { relative, resolve } from 'path';
+import { readFile, stat } from 'node:fs/promises';
+import { relative, resolve } from 'node:path';
 
 export function gitignorePlugin() {
   return createPluginV1({

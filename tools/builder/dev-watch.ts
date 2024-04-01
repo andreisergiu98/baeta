@@ -1,9 +1,9 @@
 import { Event, subscribe } from '@parcel/watcher';
 import style from 'ansi-styles';
-import { exec } from 'child_process';
 import ColorHash from 'color-hash';
 import fg from 'fast-glob';
-import path from 'path';
+import { exec } from 'node:child_process';
+import path from 'node:path';
 
 interface Options {
   ignore?: string[];

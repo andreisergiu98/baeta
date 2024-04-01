@@ -74,11 +74,11 @@
     "@baeta/builder": "workspace:^",
     "@baeta/compiler": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.19.9",
-    "@types/react": "^18.2.48",
+    "@types/node": "^18.19.28",
+    "@types/react": "^18.2.73",
     "@types/yargs": "^17.0.32",
     "graphql": "^16.8.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.3"
   },
   "peerDependencies": {
     "@baeta/compiler": "workspace:^",

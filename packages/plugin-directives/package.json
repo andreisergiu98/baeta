@@ -52,9 +52,9 @@
     "@baeta/builder": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.19.9",
+    "@types/node": "^18.19.28",
     "graphql": "^16.8.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.3"
   },
   "peerDependencies": {
     "@baeta/directives": "workspace:^"

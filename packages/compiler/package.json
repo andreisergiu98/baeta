@@ -51,13 +51,13 @@
   },
   "dependencies": {
     "@baeta/util-path": "workspace:^",
-    "esbuild": "^0.19.12"
+    "esbuild": "^0.20.2"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.19.9",
-    "typescript": "^5.3.3"
+    "@types/node": "^18.19.28",
+    "typescript": "^5.4.3"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -14,7 +14,7 @@ import {
   ObjectTypeDefinitionNode,
   TypeNode,
 } from 'graphql';
-import { platform } from 'os';
+import { platform } from 'node:os';
 import parse from 'parse-filepath';
 
 const sep = '/';

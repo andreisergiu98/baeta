@@ -1,9 +1,9 @@
 "use strict";
-exports.id = 650;
-exports.ids = [650];
+exports.id = 610;
+exports.ids = [610];
 exports.modules = {
 
-/***/ 6650:
+/***/ 5516:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -20,35 +20,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const frontMatter = {
-	sidebar_position: 2,
+	sidebar_position: 4,
 	description: ''
 };
-const contentTitle = 'Configuration';
+const contentTitle = 'Extend modules';
 const metadata = {
-  "id": "getting-started/configuration",
-  "title": "Configuration",
+  "id": "getting-started/extend-modules",
+  "title": "Extend modules",
   "description": "",
-  "source": "@site/docs/getting-started/configuration.mdx",
+  "source": "@site/docs/getting-started/extend-modules.mdx",
   "sourceDirName": "getting-started",
-  "slug": "/getting-started/configuration",
-  "permalink": "/docs/getting-started/configuration",
+  "slug": "/getting-started/extend-modules",
+  "permalink": "/docs/getting-started/extend-modules",
   "draft": false,
   "unlisted": false,
   "tags": [],
   "version": "current",
-  "sidebarPosition": 2,
+  "sidebarPosition": 4,
   "frontMatter": {
-    "sidebar_position": 2,
+    "sidebar_position": 4,
     "description": ""
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Installation",
-    "permalink": "/docs/getting-started/installation"
-  },
-  "next": {
     "title": "First module",
     "permalink": "/docs/getting-started/first-module"
+  },
+  "next": {
+    "title": "Wrapping up",
+    "permalink": "/docs/getting-started/wrapping-up"
   }
 };
 const assets = {
@@ -60,7 +60,6 @@ const assets = {
 const toc = [];
 function _createMdxContent(props) {
   const _components = {
-    a: "a",
     code: "code",
     h1: "h1",
     p: "p",
@@ -70,48 +69,41 @@ function _createMdxContent(props) {
   };
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h1, {
-      id: "configuration",
-      children: "Configuration"
+      id: "extend-modules",
+      children: "Extend modules"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Assuming ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "https://www.npmjs.com/package/@baeta/compiler",
-        children: "@baeta/compiler"
-      }), " is installed, the configuration is defined in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "baeta.ts"
-      }), ".\nOtherwise ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: ".js"
-      }), ", ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: ".cjs"
-      }), ", ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: ".mjs"
-      }), " files will be handled accordingly."]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "First things first, define the schemas and modules directory."
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        className: "language-typescript",
-        children: "import { defineConfig } from '@baeta/cli';\n\nexport default defineConfig({\n  graphql: {\n    schemas: ['src/**.gql'],\n    modulesDir: 'src/modules',\n  },\n});\n"
-      })
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "After defining the schemas and modules directory, define the entry point of your app and the location where the compiler should build."
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        className: "language-typescript",
-        children: "import { defineConfig } from '@baeta/cli';\n\nexport default defineConfig({\n  graphql: {\n    schemas: ['src/**.gql'],\n    modulesDir: 'src/modules',\n  },\n  compiler: {\n    src: 'src/app.ts',\n    dist: 'dist',\n  },\n});\n"
-      })
+      children: ["One of the powerful features of Baeta is the ability to extend modules with other modules.\nLet's extend our user module with a ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "user-photos"
+      }), " module."]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Finally, add the following scripts to ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "package.json"
+      children: ["We create a new schema file at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/modules/user-photos/user-photos.gql"
       }), ":"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        className: "language-json",
-        children: "\"scripts\": {\n    \"build\": \"baeta build --generate\",\n    \"generate\": \"baeta generate\",\n    \"start\": \"baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'\"\n}\n"
+        className: "language-graphql",
+        children: "type UserPhoto {\n  id: ID!\n  url: String!\n}\n\nextend type User {\n  photos: [UserPhoto!]\n}\n"
       })
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "These scripts will build your app and start it. You can modify these scripts based on your requirements."
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "For more configuration options and defaults, check out the advanced guide."
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["Generate types again and then we create a resolver for the photos field in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/modules/user-photos/resolvers.ts"
+      }), ":"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        className: "language-typescript",
+        children: "import { getUserPhotosModule } from './typedef';\n\nconst { User } = getUserPhotosModule();\n\nUser.photos(({ args, root, info, ctx }) => {\n  return [\n    {\n      id: '1',\n      url: 'https://baeta.io/img/logo.svg',\n    },\n  ];\n});\n"
+      })
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["Next, we export the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "userPhotosModule"
+      }), " in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/modules/user-photos/index.ts"
+      }), ":"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        className: "language-typescript",
+        children: "import './resolvers';\nimport { getUserPhotosModule } from './typedef';\n\nexport const userPhotosModule = getUserPhotosModule();\n"
+      })
     })]
   });
 }

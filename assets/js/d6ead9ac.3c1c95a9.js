@@ -1,9 +1,9 @@
 "use strict";
-exports.id = 610;
-exports.ids = [610];
+exports.id = 432;
+exports.ids = [432];
 exports.modules = {
 
-/***/ 199:
+/***/ 5389:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -20,35 +20,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const frontMatter = {
-	sidebar_position: 4,
+	sidebar_position: 3,
 	description: ''
 };
-const contentTitle = 'Extend modules';
+const contentTitle = 'First module';
 const metadata = {
-  "id": "getting-started/extend-modules",
-  "title": "Extend modules",
+  "id": "getting-started/first-module",
+  "title": "First module",
   "description": "",
-  "source": "@site/docs/getting-started/extend-modules.mdx",
+  "source": "@site/docs/getting-started/first-module.mdx",
   "sourceDirName": "getting-started",
-  "slug": "/getting-started/extend-modules",
-  "permalink": "/docs/getting-started/extend-modules",
+  "slug": "/getting-started/first-module",
+  "permalink": "/docs/getting-started/first-module",
   "draft": false,
   "unlisted": false,
   "tags": [],
   "version": "current",
-  "sidebarPosition": 4,
+  "sidebarPosition": 3,
   "frontMatter": {
-    "sidebar_position": 4,
+    "sidebar_position": 3,
     "description": ""
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "First module",
-    "permalink": "/docs/getting-started/first-module"
+    "title": "Configuration",
+    "permalink": "/docs/getting-started/configuration"
   },
   "next": {
-    "title": "Wrapping up",
-    "permalink": "/docs/getting-started/wrapping-up"
+    "title": "Extend modules",
+    "permalink": "/docs/getting-started/extend-modules"
   }
 };
 const assets = {
@@ -57,11 +57,29 @@ const assets = {
 
 
 
-const toc = [];
+const toc = [{
+  "value": "Create module schema",
+  "id": "create-module-schema",
+  "level": 3
+}, {
+  "value": "Generate types",
+  "id": "generate-types",
+  "level": 3
+}, {
+  "value": "Add resolver",
+  "id": "add-resolver",
+  "level": 3
+}, {
+  "value": "Exporting the module and registering resolvers",
+  "id": "exporting-the-module-and-registering-resolvers",
+  "level": 3
+}];
 function _createMdxContent(props) {
   const _components = {
+    admonition: "admonition",
     code: "code",
     h1: "h1",
+    h3: "h3",
     p: "p",
     pre: "pre",
     ...(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .useMDXComponents */ .a)(),
@@ -69,40 +87,86 @@ function _createMdxContent(props) {
   };
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h1, {
-      id: "extend-modules",
-      children: "Extend modules"
+      id: "first-module",
+      children: "First module"
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "Baeta is a schema-first and modular framework, where each module has its own schema definitions and resolvers.\nIn this guide, we will cover how to create your first module and extend it with another module."
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h3, {
+      id: "create-module-schema",
+      children: "Create module schema"
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "A module can have multiple schema files, so there are many ways to organize it.\nOne way is to separate files for types, inputs, and operations."
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["One of the powerful features of Baeta is the ability to extend modules with other modules.\nLet's extend our user module with a ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "user-photos"
-      }), " module."]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["We create a new schema file at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "src/modules/user-photos/user-photos.gql"
+      children: ["Let's start with a simple schema file for our user module at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/modules/user/user.gql"
       }), ":"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         className: "language-graphql",
-        children: "type UserPhoto {\n  id: ID!\n  url: String!\n}\n\nextend type User {\n  photos: [UserPhoto!]\n}\n"
+        children: "type User {\n  id: ID!\n  name: String!\n}\n\ntype Query {\n  user(id: ID): User\n}\n"
+      })
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h3, {
+      id: "generate-types",
+      children: "Generate types"
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "After creating the schema, we need to generate the type definitions for the module.\nWe can do this with the following command:"
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        className: "language-bash",
+        children: "yarn generate\n# or\nyarn baeta generate\n"
       })
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Generate types again and then we create a resolver for the photos field in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "src/modules/user-photos/resolvers.ts"
+      children: ["This command will generate an autogenerated file ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/modules/user/typedef.ts"
+      }), " that contains the type definitions of the module."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.admonition, {
+      type: "note",
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+        children: ["Baeta can watch for changes with the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "--watch"
+        }), " flag."]
+      })
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h3, {
+      id: "add-resolver",
+      children: "Add resolver"
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["Now we can add a resolver for the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "user"
+      }), " query field in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/modules/user/resolvers.ts"
       }), ":"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         className: "language-typescript",
-        children: "import { getUserPhotosModule } from './typedef';\n\nconst { User } = getUserPhotosModule();\n\nUser.photos(({ args, root, info, ctx }) => {\n  return [\n    {\n      id: '1',\n      url: 'https://baeta.io/img/logo.svg',\n    },\n  ];\n});\n"
+        children: "import { getUserModule } from './typedef';\n\nconst { Query } = getUserModule();\n\nQuery.user(async (params) => {\n  return {\n    id: params.args.id ?? 'id',\n    name: 'John Doe',\n  };\n});\n"
       })
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Next, we export the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "userPhotosModule"
-      }), " in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "src/modules/user-photos/index.ts"
+      children: ["We import the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "getUserModule"
+      }), " function from our autogenerated ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "typedef.ts"
+      }), " file, and use it to access the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "Query"
+      }), " type.\nWe then add a resolver for the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "user"
+      }), " field that returns a hardcoded ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "user"
+      }), " object with an ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "id"
+      }), " and ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "name"
+      }), "."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h3, {
+      id: "exporting-the-module-and-registering-resolvers",
+      children: "Exporting the module and registering resolvers"
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["Next, we need to export the module and register its resolvers in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/modules/user/index.ts"
       }), ":"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         className: "language-typescript",
-        children: "import './resolvers';\nimport { getUserPhotosModule } from './typedef';\n\nexport const userPhotosModule = getUserPhotosModule();\n"
+        children: "import './resolvers';\nimport { getUserModule } from './typedef';\n\nexport const userModule = getUserModule();\n"
       })
     })]
   });

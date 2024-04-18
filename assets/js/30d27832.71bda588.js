@@ -1,9 +1,9 @@
 "use strict";
-exports.id = 713;
-exports.ids = [713];
+exports.id = 650;
+exports.ids = [650];
 exports.modules = {
 
-/***/ 9556:
+/***/ 9802:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -20,31 +20,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const frontMatter = {
-	sidebar_position: 5,
+	sidebar_position: 2,
 	description: ''
 };
-const contentTitle = 'Wrapping up';
+const contentTitle = 'Configuration';
 const metadata = {
-  "id": "getting-started/wrapping-up",
-  "title": "Wrapping up",
+  "id": "getting-started/configuration",
+  "title": "Configuration",
   "description": "",
-  "source": "@site/docs/getting-started/wrapping-up.mdx",
+  "source": "@site/docs/getting-started/configuration.mdx",
   "sourceDirName": "getting-started",
-  "slug": "/getting-started/wrapping-up",
-  "permalink": "/docs/getting-started/wrapping-up",
+  "slug": "/getting-started/configuration",
+  "permalink": "/docs/getting-started/configuration",
   "draft": false,
   "unlisted": false,
   "tags": [],
   "version": "current",
-  "sidebarPosition": 5,
+  "sidebarPosition": 2,
   "frontMatter": {
-    "sidebar_position": 5,
+    "sidebar_position": 2,
     "description": ""
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Extend modules",
-    "permalink": "/docs/getting-started/extend-modules"
+    "title": "Installation",
+    "permalink": "/docs/getting-started/installation"
+  },
+  "next": {
+    "title": "First module",
+    "permalink": "/docs/getting-started/first-module"
   }
 };
 const assets = {
@@ -53,21 +57,12 @@ const assets = {
 
 
 
-const toc = [{
-  "value": "Create the application",
-  "id": "create-the-application",
-  "level": 3
-}, {
-  "value": "Start the application",
-  "id": "start-the-application",
-  "level": 3
-}];
+const toc = [];
 function _createMdxContent(props) {
   const _components = {
-    admonition: "admonition",
+    a: "a",
     code: "code",
     h1: "h1",
-    h3: "h3",
     p: "p",
     pre: "pre",
     ...(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .useMDXComponents */ .a)(),
@@ -75,35 +70,48 @@ function _createMdxContent(props) {
   };
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h1, {
-      id: "wrapping-up",
-      children: "Wrapping up"
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h3, {
-      id: "create-the-application",
-      children: "Create the application"
+      id: "configuration",
+      children: "Configuration"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Our modules are now ready to use!\nWe can create an entry point for our application in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "src/app.ts"
-      }), ":"]
+      children: ["Assuming ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        href: "https://www.npmjs.com/package/@baeta/compiler",
+        children: "@baeta/compiler"
+      }), " is installed, the configuration is defined in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "baeta.ts"
+      }), ".\nOtherwise ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: ".js"
+      }), ", ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: ".cjs"
+      }), ", ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: ".mjs"
+      }), " files will be handled accordingly."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "First things first, define the schemas and modules directory."
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         className: "language-typescript",
-        children: "import { createApplication } from '@baeta/core';\nimport { userModule } from './modules/user';\nimport { userPhotosModule } from './modules/user-photos';\n\nimport { createYoga } from 'graphql-yoga';\nimport { createServer } from 'node:http';\n\nconst baeta = createApplication({\n  modules: [userModule, userPhotosModule],\n});\n\nconst yoga = createYoga({\n  schema: baeta.schema,\n});\n\nconst server = createServer(yoga);\n\nserver.listen(4000, () => {\n  console.log('🚀 Server ready at http://localhost:4000/graphql');\n});\n"
+        children: "import { defineConfig } from '@baeta/cli';\n\nexport default defineConfig({\n  graphql: {\n    schemas: ['src/**.gql'],\n    modulesDir: 'src/modules',\n  },\n});\n"
       })
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.admonition, {
-      type: "note",
-      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-        children: "We are using graphql-yoga because it's very easy to setup, but Baeta is compatible with all graphql servers."
-      })
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h3, {
-      id: "start-the-application",
-      children: "Start the application"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "That's it! You can now start your application by running the following command:"
+      children: "After defining the schemas and modules directory, define the entry point of your app and the location where the compiler should build."
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        className: "language-bash",
-        children: "yarn start\n# or\nyarn baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'\n"
+        className: "language-typescript",
+        children: "import { defineConfig } from '@baeta/cli';\n\nexport default defineConfig({\n  graphql: {\n    schemas: ['src/**.gql'],\n    modulesDir: 'src/modules',\n  },\n  compiler: {\n    src: 'src/app.ts',\n    dist: 'dist',\n  },\n});\n"
       })
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["Finally, add the following scripts to ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "package.json"
+      }), ":"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        className: "language-json",
+        children: "\"scripts\": {\n    \"build\": \"baeta build --generate\",\n    \"generate\": \"baeta generate\",\n    \"start\": \"baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'\"\n}\n"
+      })
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "These scripts will build your app and start it. You can modify these scripts based on your requirements."
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "For more configuration options and defaults, check out the advanced guide."
     })]
   });
 }

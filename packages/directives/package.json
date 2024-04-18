@@ -59,14 +59,14 @@
     "ava": "^5.3.1",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",
     "graphql": "^16.6.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "publishConfig": {
     "access": "public"

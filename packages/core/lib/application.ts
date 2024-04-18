@@ -6,8 +6,20 @@ import { addValidationToSchema } from './input-directive/input-schema';
 type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
 
 export interface Options {
+  /**
+   * Modules to include in the application
+   */
   modules: Record<string, unknown>[];
+
+  /**
+   * Whether to remove fields with no resolvers
+   * @default false
+   */
   pruneSchema?: boolean;
+
+  /**
+   * Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
+   */
   executableSchemaOptions?: ExecutableSchemaOptions;
 }
 

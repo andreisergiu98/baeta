@@ -37,22 +37,22 @@ export interface GeneratorOptions {
 
   /**
    * Path where the context type is exported.
-   * @example 'src/types/context#Context' // for named export
-   * @example 'src/types/context' // for default export
+   * @example contextType: 'src/types/context#Context' // for named export
+   * @example contextType: 'src/types/context' // for default export
    * @default undefined
    */
   contextType?: string;
 
   /**
    * Path where extensions (ex. auth-extension) are exported. Only default export is supported.
-   * @example 'src/extensions'
+   * @example extensions: 'src/extensions'
    * @default undefined
    */
   extensions?: string;
 
   /**
    * Custom scalar mappings.
-   * @example { DateTime: 'Date' }
+   * @example scalars: { DateTime: 'Date' }
    * @default undefined
    */
   scalars?: Record<string, string>;

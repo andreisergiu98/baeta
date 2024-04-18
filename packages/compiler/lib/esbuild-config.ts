@@ -2,10 +2,34 @@ import { BuildOptions } from 'esbuild';
 import { getExternals } from './esbuild-externals';
 
 export interface CompilerOptions {
+  /**
+   * The source file or files to compile
+   * @example src: 'src/index.ts'
+   */
   src: string | string[];
+
+  /**
+   * The output directory
+   * @example dist: 'dist'
+   */
   dist: string;
+
+  /**
+   * If true the bundle will also include all dependencies
+   * @default false
+   */
   bundleDeps?: boolean;
+
+  /**
+   * If true the bundle will also include all workspace dependencies.
+   * @default true // in watch mode
+   * @default false // in build mode
+   */
   bundleWorkspaces?: boolean;
+
+  /**
+   * Options to pass to esbuild
+   */
   esbuild?: Partial<Omit<BuildOptions, 'outdir' | 'entryPoints'>>;
 }
 

@@ -22,7 +22,7 @@ const baeta = createApplication({
 const createContext = (
   params: ContextParams,
   env: Env,
-  executionContext: ExecutionContext
+  executionContext: ExecutionContext,
 ): Context => {
   return {
     userId: params.userId,
@@ -60,7 +60,7 @@ const handleGraphql = createGraphqlHandler<Env, Context>(baeta.schema, {
 const router = new Hono<{ Bindings: Env }>();
 
 router.get('/graphql', (ctx) => {
-  const upgradeHeader = ctx.req.headers.get('upgrade');
+  const upgradeHeader = ctx.req.header('upgrade');
   console.log('upgradeHeader', upgradeHeader);
   if (upgradeHeader === 'websocket') {
     return subscriptions.handleWS(ctx.req.raw, ctx.env, ctx.executionCtx);

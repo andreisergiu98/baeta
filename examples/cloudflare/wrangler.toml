@@ -10,7 +10,7 @@ crons = [ ]
 [durable_objects]
 bindings = [{name = "WS_CONNECTIONS", class_name = "WsConnections"}]
 
-[[ d1_databases ]]
+[[d1_databases]]
 binding = "SUBSCRIPTIONS"
 database_name = "SUBSCRIPTIONS"
 database_id = "7a6f91c0-9455-402f-ab6a-508d140da0e1"

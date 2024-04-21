@@ -117,7 +117,7 @@ export function paginationPlugin(options: PaginationOptions) {
       const definitionFile = ctx.fileManager.createAndAdd(
         createGqlFilename(moduleDir),
         printTypes(types),
-        'schema',
+        'pagination',
       );
       await definitionFile.write();
 
@@ -130,7 +130,7 @@ export function paginationPlugin(options: PaginationOptions) {
       ctx.fileManager.createAndAdd(
         createExportFilename(moduleDir),
         printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
-        'export',
+        'pagination',
       );
 
       return next();

@@ -28,7 +28,7 @@ export function useWebsocket(
   protocol: string | false,
   createSubscription: (message: SubscribeMessage) => Promise<void>,
   deleteSubscription: (id: string) => Promise<void>,
-  deleteSubscriptions: () => Promise<void>
+  deleteSubscriptions: () => Promise<void>,
 ) {
   socket.accept();
 
@@ -71,7 +71,7 @@ export function useWebsocket(
     if (connectionInitReceived) {
       return socket.close(
         CloseCode.TooManyInitialisationRequests,
-        'Too many initialisations requests'
+        'Too many initialisations requests',
       );
     }
 
@@ -80,7 +80,7 @@ export function useWebsocket(
 
     const response: ConnectionAckMessage = createMessage(
       MessageType.ConnectionAck,
-      message.payload
+      message.payload,
     );
 
     return socket.send(stringifyMessage(response));

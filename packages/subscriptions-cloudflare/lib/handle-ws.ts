@@ -6,7 +6,7 @@ export function handleWS<Env>(
   request: Request,
   env: Env,
   ctx: ExecutionContext,
-  options: SubscriptionsOptions<Env>
+  options: SubscriptionsOptions<Env>,
 ) {
   const upgradeHeader = request.headers.get('upgrade');
 
@@ -23,6 +23,6 @@ export function handleWS<Env>(
 
   return stub.fetch(
     `https://ws-connections-durable-object.internal/connect/${connectionId}`,
-    request
+    request,
   );
 }

@@ -2,6 +2,13 @@ import { v4 as uuid } from 'uuid';
 
 export type PoolingType = 'global' | 'colo' | 'continent' | 'none';
 
+function parseCfPropertyWithFallback(property: unknown, fallback: string) {
+  if (typeof property === 'string') {
+    return property;
+  }
+  return fallback;
+}
+
 export function getPoolingId(request: Request, poolingType: PoolingType): string {
   switch (poolingType) {
     case 'global':
@@ -13,11 +20,4 @@ export function getPoolingId(request: Request, poolingType: PoolingType): string
     case 'none':
       return uuid();
   }
-}
-
-function parseCfPropertyWithFallback(property: unknown, fallback: string) {
-  if (typeof property === 'string') {
-    return property;
-  }
-  return fallback;
 }

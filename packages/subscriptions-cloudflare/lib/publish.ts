@@ -13,21 +13,22 @@ export async function publish<Env>(
   executionContext: ExecutionContext,
   options: SubscriptionsOptions<Env>,
   topic: string,
-  payload: any
+  payload: any,
 ) {
   const db = options.getDatabase(env);
   const subscriptions = await db.getSubscriptions(topic);
   const connectionPoolMap = createConnectionMap(subscriptions);
+  const connectionPoolIds = Object.keys(connectionPoolMap);
 
-  const promises = Object.keys(connectionPoolMap).map((poolingId) =>
+  const promises = connectionPoolIds.map((poolingId) =>
     publishToConnectionPool(
       env,
       executionContext,
       options,
       poolingId,
       connectionPoolMap[poolingId],
-      payload
-    )
+      payload,
+    ),
   );
 
   return Promise.all(promises).then(() => {});
@@ -39,19 +40,18 @@ async function publishToConnectionPool<Env>(
   options: SubscriptionsOptions<Env>,
   connectionPoolId: string,
   subscriptions: SubscriptionInfo[],
-  payload: any
+  payload: any,
 ) {
   const promises = subscriptions.map((subInfo) =>
-    publishToSubscription(env, executionContext, options, subInfo, payload)
+    publishToSubscription(env, executionContext, options, subInfo, payload),
   );
 
   const messages = await Promise.all(promises);
+  const connections = options.getWSConnections(env);
+  const stubId = connections.idFromString(connectionPoolId);
+  const stub = connections.get(stubId);
 
-  const wsConnections = options.getWSConnections(env);
-  const stubId = wsConnections.idFromString(connectionPoolId);
-  const stub = wsConnections.get(stubId);
-
-  return stub.fetch('https://ws-connections-durable-object.internal/publish', {
+  return stub.fetch('https://baeta-ws-connections-durable-object.internal/publish', {
     method: 'POST',
     body: JSON.stringify(messages),
     headers: { 'content-type': 'application/json' },
@@ -63,7 +63,7 @@ async function publishToSubscription<Env>(
   executionContext: ExecutionContext,
   options: SubscriptionsOptions<Env>,
   subInfo: SubscriptionInfo,
-  payload: any
+  payload: any,
 ): Promise<PublishData> {
   const context = options.context?.createContext(subInfo.contextParams, env, executionContext);
 

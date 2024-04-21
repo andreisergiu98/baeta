@@ -14,10 +14,13 @@ const forgedCtx: ExecutionContext = {
 };
 
 export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>) {
-  return class WsConnections implements DurableObject {
-    private connections = new Map<string, WebSocket>();
+  return class BaetaWsConnections implements DurableObject {
+    connections = new Map<string, WebSocket>();
 
-    constructor(private state: DurableObjectState, private env: Env) {}
+    constructor(
+      public state: DurableObjectState,
+      public env: Env,
+    ) {}
 
     async fetch(request: Request) {
       const pathName = new URL(request.url).pathname.slice(1);
@@ -40,7 +43,7 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       throw new Error('bad_request');
     }
 
-    private async connect(request: Request, path: string[]) {
+    async connect(request: Request, path: string[]) {
       const connectionId = path[1];
 
       const wsPair = new WebSocketPair();
@@ -50,7 +53,7 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       this.connections.set(connectionId, connection);
 
       const protocolHeader = request.headers.get('Sec-WebSocket-Protocol');
-      const protocol = handleProtocols(protocolHeader || '');
+      const protocol = handleProtocols(protocolHeader ?? '');
 
       const connectionPoolId = this.state.id.toString();
 
@@ -64,7 +67,7 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
           connectionId,
           connectionPoolId,
           context,
-          contextParams
+          contextParams,
         );
 
         const db = options.getDatabase(this.env);
@@ -86,7 +89,7 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
         protocol,
         handleCreateSubscription,
         handleDeleteSubscription,
-        handleDeleteSubscriptions
+        handleDeleteSubscriptions,
       );
 
       return new Response(null, {
@@ -96,7 +99,7 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       });
     }
 
-    private async close(path: string[]) {
+    async close(path: string[]) {
       const connectionId = path[1];
 
       const connection = this.connections.get(connectionId);
@@ -113,7 +116,7 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
       return new Response('ok');
     }
 
-    private async publish(request: Request) {
+    async publish(request: Request) {
       const db = options.getDatabase(this.env);
       const messagesAndConnectionIds: PublishData[] = await request.json();
 

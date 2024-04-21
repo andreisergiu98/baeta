@@ -14,12 +14,14 @@ interface D1SubscriptionRowData {
   contextParams: unknown;
 }
 
-export class D1Subscription implements SubscriptionDatabase {
+export class SubscriptionDatabaseD1 implements SubscriptionDatabase {
   constructor(private db: D1Database) {}
+
+  protected table = 'Subscriptions';
 
   async getSubscriptions(topic: string): Promise<SubscriptionInfo[]> {
     const res = await this.db
-      .prepare('SELECT * FROM Subscriptions WHERE topic = ?')
+      .prepare(`SELECT * FROM ${this.table} WHERE topic = ?`)
       .bind(topic)
       .all<D1SubscriptionRow>();
 
@@ -42,19 +44,19 @@ export class D1Subscription implements SubscriptionDatabase {
   async createSubscription(info: SubscriptionInfo): Promise<void> {
     await this.db
       .prepare(
-        'INSERT INTO Subscriptions (id, connectionId, connectionPoolId, topic, data) VALUES (?, ?, ?, ?, ?)'
+        `INSERT INTO ${this.table} (id, connectionId, connectionPoolId, topic, data) VALUES (?, ?, ?, ?, ?)`,
       )
       .bind(info.id, info.connectionId, info.connectionPoolId, info.topic, serializeData(info))
       .run();
   }
 
   async deleteSubscription(id: string): Promise<void> {
-    await this.db.prepare('DELETE FROM Subscriptions WHERE id = ?').bind(id).run();
+    await this.db.prepare(`DELETE FROM ${this.table} WHERE id = ?`).bind(id).run();
   }
 
   async deleteSubscriptions(connectionId: string): Promise<void> {
     await this.db
-      .prepare('DELETE FROM Subscriptions WHERE connectionId = ?')
+      .prepare(`DELETE FROM ${this.table} WHERE connectionId = ?`)
       .bind(connectionId)
       .run();
   }

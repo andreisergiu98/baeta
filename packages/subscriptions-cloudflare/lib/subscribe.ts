@@ -18,13 +18,62 @@ export interface SubscriptionInfo {
   contextParams: unknown;
 }
 
+function isExecutionContext(
+  execContext: readonly GraphQLError[] | ExecutionContext,
+): execContext is ExecutionContext {
+  return !Array.isArray(execContext);
+}
+
+function getResolverAndArgs({ execContext }: { execContext: ExecutionContext }) {
+  const { schema, fragments, operation, variableValues, contextValue } = execContext;
+  const rootType = schema.getSubscriptionType();
+
+  if (rootType == null) {
+    throw new GraphQLError('Schema is not configured to execute subscription operation.', {
+      nodes: operation,
+    });
+  }
+
+  const rootFields = collectFields(
+    schema,
+    fragments,
+    variableValues,
+    rootType,
+    operation.selectionSet,
+  );
+
+  const firstRootField = rootFields.entries().next().value;
+  const [responseName, fieldNodes] = firstRootField;
+  const fieldDef = getFieldDef(schema, rootType, fieldNodes[0]);
+
+  if (!fieldDef) {
+    const fieldName = fieldNodes[0].name.value;
+
+    throw new GraphQLError(`The subscription field "${fieldName}" is not defined.`, {
+      nodes: fieldNodes,
+    });
+  }
+
+  const path = addPath(undefined, responseName, rootType.name);
+  const info = buildResolveInfo(execContext, fieldDef, fieldNodes, rootType, path);
+  const args = getArgumentValues(fieldDef, fieldNodes[0], variableValues);
+
+  return {
+    root: null,
+    args,
+    info,
+    field: fieldDef,
+    context: contextValue,
+  };
+}
+
 export function createSubscriptionInfo(
   schema: GraphQLSchema,
   message: SubscribeMessage,
   connectionId: string,
   connectionPoolId: string,
   context: unknown,
-  contextParams: unknown
+  contextParams: unknown,
 ) {
   const execContext = buildExecutionContext({
     schema: schema,
@@ -59,53 +108,4 @@ export function createSubscriptionInfo(
 
 export function subscribe<T>(topic: string) {
   return { topic } as unknown as AsyncIterator<T>;
-}
-
-function getResolverAndArgs({ execContext }: { execContext: ExecutionContext }) {
-  const { schema, fragments, operation, variableValues, contextValue } = execContext;
-  const rootType = schema.getSubscriptionType();
-
-  if (rootType == null) {
-    throw new GraphQLError('Schema is not configured to execute subscription operation.', {
-      nodes: operation,
-    });
-  }
-
-  const rootFields = collectFields(
-    schema,
-    fragments,
-    variableValues,
-    rootType,
-    operation.selectionSet
-  );
-
-  const firstRootField = rootFields.entries().next().value;
-  const [responseName, fieldNodes] = firstRootField;
-  const fieldDef = getFieldDef(schema, rootType, fieldNodes[0]);
-
-  if (!fieldDef) {
-    const fieldName = fieldNodes[0].name.value;
-
-    throw new GraphQLError(`The subscription field "${fieldName}" is not defined.`, {
-      nodes: fieldNodes,
-    });
-  }
-
-  const path = addPath(undefined, responseName, rootType.name);
-  const info = buildResolveInfo(execContext, fieldDef, fieldNodes, rootType, path);
-  const args = getArgumentValues(fieldDef, fieldNodes[0], variableValues);
-
-  return {
-    root: null,
-    args,
-    info,
-    field: fieldDef,
-    context: contextValue,
-  };
-}
-
-function isExecutionContext(
-  execContext: readonly GraphQLError[] | ExecutionContext
-): execContext is ExecutionContext {
-  return !Array.isArray(execContext);
 }

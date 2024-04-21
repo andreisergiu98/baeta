@@ -1,6 +1,5 @@
 import { defineConfig } from '@baeta/cli';
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
+import { cloudflarePlugin } from '@baeta/plugin-cloudflare';
 
 export default defineConfig({
   graphql: {
@@ -22,16 +21,15 @@ export default defineConfig({
       outExtension: { '.js': '.mjs' },
       minify: true,
       treeShaking: true,
-      plugins: [
-        NodeModulesPolyfillPlugin(),
-        NodeGlobalsPolyfillPlugin({
-          process: true,
-          buffer: true,
-        }),
-      ],
       define: {
         IS_CLOUDFLARE_WORKER: 'true',
       },
     },
   },
+  plugins: [
+    cloudflarePlugin({
+      databaseId: '7a6f91c0-9455-402f-ab6a-508d140da0e1',
+      databaseMigrationsPath: './migrations/subscriptions',
+    }),
+  ],
 });

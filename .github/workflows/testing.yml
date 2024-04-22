@@ -9,19 +9,26 @@ on:
       - main
 
 jobs:
+  types:
+    name: Type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: andreisergiu98/baeta/ci/setup@ci/composite
+
+      - name: Run type check
+        run: yarn type:check
+
   tests:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: yarn install
+      - name: Setup env
+        uses: andreisergiu98/baeta/ci/setup@ci/composite
 
       - name: Run tests
         run: yarn test
@@ -30,16 +37,10 @@ jobs:
     name: Linting check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: "yarn"
-
-      - name: Install dependencies
-        run: yarn install
+      - name: Setup env
+        uses: andreisergiu98/baeta/ci/setup@ci/composite
 
       - name: Run linting
         run: yarn linter:check
@@ -48,16 +49,10 @@ jobs:
     name: Prettier check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: "yarn"
-
-      - name: Install dependencies
-        run: yarn install
+      - name: Setup env
+        uses: andreisergiu98/baeta/ci/setup@ci/composite
 
       - name: Run prettier
         run: yarn prettier:check
@@ -66,15 +61,10 @@ jobs:
     name: Package constraints
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: "yarn"
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: yarn install
+      - name: Setup env
+        uses: andreisergiu98/baeta/ci/setup@ci/composite
 
       - name: Check package constraints
         run: yarn constraints

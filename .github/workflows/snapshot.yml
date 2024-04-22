@@ -58,7 +58,7 @@ jobs:
             }
 
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # issue_comment requires us to checkout the branch
       # https://github.com/actions/checkout/issues/331#issuecomment-1120113003
@@ -67,14 +67,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: "yarn"
-
-      - name: Install Dependencies
-        run: yarn install
+      - name: Setup env
+        uses: andreisergiu98/baeta/ci/setup@ci/composite
 
       - name: Publish Snapshot
         env:

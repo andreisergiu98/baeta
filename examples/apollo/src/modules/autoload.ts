@@ -7,8 +7,6 @@ import "./user/resolvers";
 
 import "./user-photos/resolvers";
 
-import "./baeta-directives/directives.baeta";
-
 import {getBaetaDirectivesModule} from "./baeta-directives/typedef";
 
 import {getBaetaPaginationModule} from "./baeta-pagination/typedef";

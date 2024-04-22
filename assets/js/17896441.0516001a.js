@@ -587,8 +587,8 @@ function useCodeWordWrap() {
   return { codeBlockRef, isEnabled, isCodeScrollable, toggle };
 }
 
-// EXTERNAL MODULE: ../.yarn/__virtual__/prism-react-renderer-virtual-1f5dbc9e90/0/cache/prism-react-renderer-npm-2.3.0-47266bd402-f582e0de68.zip/node_modules/prism-react-renderer/dist/index.mjs
-var dist = __webpack_require__(3641);
+// EXTERNAL MODULE: ../.yarn/__virtual__/prism-react-renderer-virtual-5d3ba774ca/0/cache/prism-react-renderer-npm-2.3.0-47266bd402-f582e0de68.zip/node_modules/prism-react-renderer/dist/index.mjs
+var dist = __webpack_require__(9363);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-112765c6ca/0/cache/@docusaurus-theme-classic-npm-3.2.1-8ce1757871-384b7289b8.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Line/styles.module.css
 var Line_styles_module = __webpack_require__(5099);
 var Line_styles_module_default = /*#__PURE__*/__webpack_require__.n(Line_styles_module);
@@ -2648,7 +2648,7 @@ function DocVersionBadge({ className }) {
 /* harmony import */ var _docusaurus_useDocusaurusContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7895);
 /* harmony import */ var _docusaurus_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3262);
 /* harmony import */ var _docusaurus_Translate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2472);
-/* harmony import */ var _docusaurus_plugin_content_docs_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5688);
+/* harmony import */ var _docusaurus_plugin_content_docs_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6870);
 /* harmony import */ var _docusaurus_theme_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8515);
 /* harmony import */ var _docusaurus_theme_common_internal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2743);
 /* harmony import */ var _docusaurus_theme_common_internal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5364);

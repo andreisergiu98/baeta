@@ -12,14 +12,11 @@ jobs:
     name: Deploy website
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: yarn
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: yarn install --no-immutable
+      - name: Setup env
+        uses: andreisergiu98/baeta/ci/setup@main
+
       - name: Build website
         run: yarn docs
 

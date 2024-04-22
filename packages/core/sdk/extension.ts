@@ -67,13 +67,13 @@ export function resolveExtensions<T>(list: Array<() => T>): T[] {
   return list.map((ext) => ext());
 }
 
-export function mergeExtensions<T, K extends Record<string, unknown>>(
+export function mergeExtensions<T, K extends Record<string, any>>(
   items: T[],
   callback: (item: T) => K,
 ) {
   const list = items.map(callback);
 
-  const merged: Record<string, unknown> = {};
+  const merged: Record<string, any> = {};
 
   for (const item of list) {
     for (const key in item) {

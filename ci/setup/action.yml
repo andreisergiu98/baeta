@@ -1,0 +1,29 @@
+name: Setup environment
+description: Composite action for Node.js and dependencies installation
+inputs:
+  node-version:
+    description: Node.js version to use
+    required: true
+    default: "20"
+
+runs:
+  using: composite
+  steps:
+    - name: Cancel Previous Run
+      uses: styfle/cancel-workflow-action@0.12.1
+      continue-on-error: true
+      with:
+        access_token: ${{ github.token }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: "yarn"
+        cache-dependency-path: |
+          **/yarn.lock
+
+    - name: Install dependencies
+      shell: bash
+      run: yarn install
+      working-directory: ${{ inputs.workingDirectory }}

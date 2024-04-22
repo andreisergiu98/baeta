@@ -2,7 +2,7 @@ import { getUserModule } from './typedef';
 
 const { Query, Mutation, Subscription } = getUserModule();
 
-Query.user(async (params) => {
+Query.user(async () => {
   return {
     id: 'some-id',
     name: 'John Doe',
@@ -23,7 +23,6 @@ Mutation.updateUser(async ({ args, ctx }) => {
 
 Subscription.onUserUpdate({
   subscribe: ({ ctx }) => {
-    console.log('subscribe', ctx.subscribe);
     return ctx.subscribe('on-user-updated');
   },
   resolve: (params) => {

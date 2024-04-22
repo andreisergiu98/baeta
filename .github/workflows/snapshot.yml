@@ -68,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup env
-        uses: andreisergiu98/baeta/ci/setup@ci/composite
+        uses: andreisergiu98/baeta/ci/setup@main
 
       - name: Publish Snapshot
         env:

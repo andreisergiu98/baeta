@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup env
-        uses: andreisergiu98/baeta/ci/setup@ci/composite
+        uses: andreisergiu98/baeta/ci/setup@main
 
       - name: Build website
         run: yarn docs

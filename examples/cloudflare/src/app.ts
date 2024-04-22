@@ -71,8 +71,6 @@ const router = new Hono<{ Bindings: Env }>();
 router.get('/graphql', (ctx) => {
   const upgradeHeader = ctx.req.header('upgrade');
 
-  console.log('upgradeHeader', upgradeHeader);
-
   if (upgradeHeader === 'websocket') {
     return subscriptions.handleWS(ctx.req.raw, ctx.env, ctx.executionCtx);
   }

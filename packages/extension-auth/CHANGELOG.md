@@ -1,5 +1,22 @@
 # @baeta/extension-auth
 
+## 0.1.1
+
+### Patch Changes
+
+- [#119](https://github.com/andreisergiu98/baeta/pull/119) [`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a)]:
+  - @baeta/core@0.0.31
+  - @baeta/errors@0.0.4
+  - @baeta/util-log@0.0.3
+
+## 0.1.0
+
+### Minor Changes
+
+- [#112](https://github.com/andreisergiu98/baeta/pull/112) [`87493ed`](https://github.com/andreisergiu98/baeta/commit/87493edd2bfc9647407c3c4a05ea87b47f8f9a27) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - change default rule to $and for security reasons
+
 ## 0.0.7
 
 ### Patch Changes

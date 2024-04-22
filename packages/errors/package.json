@@ -1,6 +1,6 @@
 {
   "name": "@baeta/errors",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [
     "baeta",
     "graphql",
@@ -51,13 +51,13 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "graphql": "^16.8.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "publishConfig": {
     "access": "public"

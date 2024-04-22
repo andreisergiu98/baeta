@@ -3,7 +3,7 @@ import { File, FileOptions } from './file';
 export class FileManager {
   files: File[] = [];
 
-  constructor(private fileOptions?: FileOptions) {}
+  constructor(public fileOptions?: FileOptions) {}
 
   createAndAdd(filename: string, content: string, tag: string) {
     const file = new File(filename, content, tag, this.fileOptions);

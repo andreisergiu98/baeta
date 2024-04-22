@@ -1,5 +1,21 @@
 # @baeta/directives
 
+## 0.0.9
+
+### Patch Changes
+
+- [#119](https://github.com/andreisergiu98/baeta/pull/119) [`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a)]:
+  - @baeta/core@0.0.31
+  - @baeta/errors@0.0.4
+
+## 0.0.8
+
+### Patch Changes
+
+- [#108](https://github.com/andreisergiu98/baeta/pull/108) [`f5c2e2d`](https://github.com/andreisergiu98/baeta/commit/f5c2e2d7da5d40679c8ccce2eb79c3e5abdf8140) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix missing peer dependency
+
 ## 0.0.7
 
 ### Patch Changes

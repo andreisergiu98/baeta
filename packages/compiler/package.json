@@ -1,6 +1,6 @@
 {
   "name": "@baeta/compiler",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "keywords": [
     "baeta",
     "graphql",
@@ -51,16 +51,16 @@
   },
   "dependencies": {
     "@baeta/util-path": "workspace:^",
-    "esbuild": "^0.19.12"
+    "esbuild": "^0.20.2"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.19.9",
-    "typescript": "^5.3.3"
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "publishConfig": {
     "access": "public"

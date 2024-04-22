@@ -1,5 +1,3 @@
-// @ts-check
-
 const { themes } = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;

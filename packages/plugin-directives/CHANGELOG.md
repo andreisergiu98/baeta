@@ -1,5 +1,23 @@
 # @baeta/plugin-directives
 
+## 0.0.11
+
+### Patch Changes
+
+- [#119](https://github.com/andreisergiu98/baeta/pull/119) [`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`18db339`](https://github.com/andreisergiu98/baeta/commit/18db339719aa309c619372d2161c5fdbc08fa316), [`643a2eb`](https://github.com/andreisergiu98/baeta/commit/643a2eb17c2789cd25361ddeede149a0e459e68a)]:
+  - @baeta/generator-sdk@0.0.11
+  - @baeta/directives@0.0.9
+  - @baeta/util-path@0.0.3
+
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`f5c2e2d`](https://github.com/andreisergiu98/baeta/commit/f5c2e2d7da5d40679c8ccce2eb79c3e5abdf8140)]:
+  - @baeta/directives@0.0.8
+
 ## 0.0.9
 
 ### Patch Changes

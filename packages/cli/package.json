@@ -1,6 +1,6 @@
 {
   "name": "@baeta/cli",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "keywords": [
     "baeta",
     "graphql",
@@ -74,11 +74,11 @@
     "@baeta/builder": "workspace:^",
     "@baeta/compiler": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^18.19.9",
-    "@types/react": "^18.2.48",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.2.79",
     "@types/yargs": "^17.0.32",
     "graphql": "^16.8.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "@baeta/compiler": "workspace:^",
@@ -90,7 +90,7 @@
     }
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "publishConfig": {
     "access": "public"

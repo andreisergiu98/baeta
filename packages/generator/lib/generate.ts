@@ -4,8 +4,8 @@ import {
   GeneratorPluginV1,
   Watcher,
   WatcherFile,
+  loadOptions,
 } from '@baeta/generator-sdk';
-import { loadOptions } from './config';
 import { createCtx } from './ctx';
 import { cleanPreviousFiles } from './file-utils';
 import { getStateFilename, saveState } from './persistence';

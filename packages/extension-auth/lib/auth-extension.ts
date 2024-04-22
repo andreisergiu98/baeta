@@ -39,7 +39,7 @@ export type GetPostScopeRules<Result, Root, Context, Args> = (
 ) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
 
 export class AuthExtension<T> extends Extension {
-  private defaultRule: LogicRule = '$or';
+  private defaultRule: LogicRule = '$and';
   private authMap: Record<string, Record<string, undefined | NativeMiddleware>> = {};
 
   private readonly defaultMiddlewares: OperationOptions<NativeMiddleware>;

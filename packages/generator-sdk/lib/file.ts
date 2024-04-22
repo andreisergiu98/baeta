@@ -57,7 +57,7 @@ export class File {
     return fs.unlink(this.filename);
   };
 
-  private async buildContent() {
+  protected async buildContent() {
     const content = this.buildHeader() + this.content;
 
     if (this.options?.transformContent) {

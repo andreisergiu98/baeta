@@ -39,6 +39,7 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/plugin-cloudflare": "workspace:^",
+    "@baeta/plugin-gitignore": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20240405.0",
     "miniflare": "^3.20240405.2",

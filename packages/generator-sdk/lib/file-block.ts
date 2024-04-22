@@ -1,4 +1,5 @@
-import { readFile, stat } from 'node:fs/promises';
+import { dirname } from '@baeta/util-path';
+import { mkdir, open, writeFile } from 'node:fs/promises';
 import { File, FileOptions } from './file';
 
 export class FileBlock extends File {
@@ -13,63 +14,64 @@ export class FileBlock extends File {
     super(filename, content, tag, {
       addEslintDisableHeader: options?.addEslintDisableHeader ?? false,
       addGenerationNoticeHeader: options?.addGenerationNoticeHeader ?? false,
-      transformContent: async (name, content, tag) => {
-        const existingContent = await this.getExistingContent();
-        const transformed = this.replaceBlock(existingContent, content);
-
-        if (options?.transformContent) {
-          return options.transformContent(name, transformed, tag);
-        }
-
-        return transformed;
-      },
     });
   }
 
-  protected async getExistingContent() {
-    const exists = await stat(this.filename)
-      .then(() => true)
-      .catch(() => false);
-
-    if (!exists) {
-      return '';
+  write = async () => {
+    if (this.persisted) {
+      return;
     }
+    this.persisted = true;
 
-    return readFile(this.filename, 'utf-8');
+    const dir = dirname(this.filename);
+    await mkdir(dir, { recursive: true });
+
+    const [existingContent, fd] = await this.getExistingContent();
+    this.addBlockToContent(existingContent);
+    const content = await this.buildContent();
+
+    if (fd) {
+      await fd.write(content, 0, 'utf-8');
+      await fd.close();
+    } else {
+      await writeFile(this.filename, content, 'utf-8');
+    }
+  };
+
+  protected async getExistingContent() {
+    try {
+      const fd = await open(this.filename, 'r+');
+      const existingContent = await fd.readFile('utf-8');
+      return [existingContent, fd] as const;
+    } catch (err) {
+      return ['', null] as const;
+    }
   }
 
-  protected replaceBlock(existingContent: string, incoming: string) {
-    const block = `${this.start}\n${incoming}\n${this.end}`;
-    return (
-      this.getStartSlice(existingContent) +
-      this.buildPadding(existingContent) +
-      block +
-      this.getEndSlice(existingContent)
-    );
+  protected getSlices(existingContent: string) {
+    const startMarkerIndex = existingContent.indexOf(this.start);
+    const endMarkerIndex = existingContent.indexOf(this.end);
+
+    if (startMarkerIndex === -1 || endMarkerIndex === -1) {
+      return [existingContent, ''] as const;
+    }
+
+    return [
+      existingContent.slice(0, startMarkerIndex),
+      existingContent.slice(endMarkerIndex + this.end.length),
+    ] as const;
+  }
+
+  protected addBlockToContent(existingContent: string) {
+    const block = `${this.start}\n${this.content}\n${this.end}`;
+    const padding = this.buildPadding(existingContent);
+    const [startSlice, endSlice] = this.getSlices(existingContent);
+    this.content = startSlice + padding + block + endSlice;
   }
 
   protected stripBlock(existingContent: string) {
-    return this.getStartSlice(existingContent) + this.getEndSlice(existingContent);
-  }
-
-  protected getStartSlice(existingContent: string) {
-    const startMarkerIndex = existingContent.indexOf(this.start);
-
-    if (startMarkerIndex === -1) {
-      return existingContent;
-    }
-
-    return existingContent.slice(0, startMarkerIndex);
-  }
-
-  protected getEndSlice(existingContent: string) {
-    const endMarkerIndex = existingContent.indexOf(this.end);
-
-    if (endMarkerIndex === -1) {
-      return '';
-    }
-
-    return existingContent.slice(endMarkerIndex + this.end.length);
+    const [startSlice, endSlice] = this.getSlices(existingContent);
+    return startSlice + endSlice;
   }
 
   protected buildPadding(existingContent: string) {

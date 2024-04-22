@@ -3363,6 +3363,7 @@ __metadata:
     "@baeta/cloudflare-subscriptions": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/plugin-cloudflare": "workspace:^"
+    "@baeta/plugin-gitignore": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20240405.0"
     graphql: "npm:^16.8.1"

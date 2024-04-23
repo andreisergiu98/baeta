@@ -1,3 +1,4 @@
+import { ModuleBuilder } from './module';
 import { ResolverMapper } from './resolver-mapper';
 import { SchemaTransformer } from './transformer';
 
@@ -36,23 +37,33 @@ export class Extension {
     return {};
   }
 
-  getTypeExtensions<Result, Context>(type: string) {
+  getTypeExtensions<Result, Context>(module: ModuleBuilder, type: string) {
     return {};
   }
 
-  getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
+  getResolverExtensions<Result, Root, Context, Args>(
+    module: ModuleBuilder,
+    type: string,
+    field: string,
+  ) {
     return {};
   }
 
-  getSubscriptionExtensions<Root, Context, Args>(field: string) {
+  getSubscriptionExtensions<Root, Context, Args>(module: ModuleBuilder, field: string) {
     return {};
   }
 
-  getSubscriptionSubscribeExtensions<Iterator, Root, Context, Args>(field: string) {
+  getSubscriptionSubscribeExtensions<Iterator, Root, Context, Args>(
+    module: ModuleBuilder,
+    field: string,
+  ) {
     return {};
   }
 
-  getSubscriptionResolveExtensions<Result, Root, Context, Args>(field: string) {
+  getSubscriptionResolveExtensions<Result, Root, Context, Args>(
+    module: ModuleBuilder,
+    field: string,
+  ) {
     return {};
   }
 
@@ -60,7 +71,7 @@ export class Extension {
     return [];
   }
 
-  build(mapper: ResolverMapper): void {}
+  build(module: ModuleBuilder, mapper: ResolverMapper): void {}
 }
 
 export function resolveExtensions<T>(list: Array<() => T>): T[] {

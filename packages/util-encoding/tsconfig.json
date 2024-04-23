@@ -1,0 +1,10 @@
+{
+  "extends": "@baeta/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "typeRoots": ["./typings"]
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+}

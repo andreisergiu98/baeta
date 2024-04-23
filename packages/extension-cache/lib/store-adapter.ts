@@ -1,21 +1,20 @@
 import { Middleware } from '@baeta/core';
+import { encodeBase64Url } from '@baeta/util-encoding';
 import DataLoader from 'dataloader';
-import stringify from 'fast-json-stable-stringify';
 import { flatten } from 'flat';
 
 export type Ref = string | number;
 
 export type ParentRef = Ref | null | undefined;
 
-export interface Options {
+export interface StoreAdapterOptions {
   ttl?: number;
 }
 
-export interface StoreOptions<Root> extends Options {
+export interface StoreOptions<Root> extends StoreAdapterOptions {
   getRef?: (root: Root) => Ref;
-  version?: string;
+  version?: number;
 }
-
 export abstract class StoreAdapter<Item> {
   constructor(
     protected options: StoreOptions<Item> | undefined,
@@ -23,57 +22,30 @@ export abstract class StoreAdapter<Item> {
     protected hash: string,
   ) {}
 
-  protected dataRead = new DataLoader<Ref, Item | null>(async (refs) => {
-    const results = await this.loadMany(refs as Ref[]);
-
-    if (results == null) {
-      return new Array(refs.length).fill(null);
-    }
-
-    return results;
-  });
-
-  protected abstract loadMany: (refs: Ref[]) => Promise<Array<Item | null> | null>;
-
-  get = (ref: Ref): Promise<Item | null> => {
-    return this.dataRead.load(ref);
-  };
-
-  getMany = async (refs: Ref[]): Promise<Array<Item> | null> => {
-    const results = await this.getMany(refs);
-
-    if (results == null) {
-      return null;
-    }
-
-    const isPartial = results.some((result) => result == null);
-
-    if (isPartial) {
-      return null;
-    }
-
-    return results as Item[];
-  };
-
-  getManyPartially = async (refs: Ref[]): Promise<Array<Item | null> | null> => {
-    return Promise.all(refs.map((ref) => this.get(ref)));
-  };
-
-  abstract save: (item: Item) => Promise<void>;
+  protected loader = new DataLoader<Ref, Item | null>(
+    async (refs) => {
+      const results = await this.loadMany(refs as Ref[]);
+      if (results == null) {
+        return new Array(refs.length).fill(null);
+      }
+      return results;
+    },
+    {
+      cache: false,
+    },
+  );
 
   abstract saveMany: (items: Item[]) => Promise<void>;
 
-  abstract getQueryResult: (
-    queryRef: string,
-    parentRef: ParentRef,
-    args: Record<string, unknown>,
-  ) => Promise<Item | null>;
+  abstract deleteMany: (refs: Ref[], evictQueries?: boolean) => Promise<void>;
 
-  abstract getQueryResults: (
+  protected abstract loadMany: (refs: Ref[]) => Promise<Array<Item | null> | null>;
+
+  protected abstract loadQueryResults: (
     queryRef: string,
     parentRef: ParentRef,
     args: Record<string, unknown>,
-  ) => Promise<Array<Item> | null>;
+  ) => Promise<{ items: Item[]; isList: boolean } | null>;
 
   abstract saveQueryResult: (
     queryRef: string,
@@ -82,33 +54,83 @@ export abstract class StoreAdapter<Item> {
     data: Item | Item[],
   ) => Promise<void>;
 
-  abstract deleteOne: (ref: Ref, evictQueries?: boolean) => Promise<void>;
-
-  abstract deleteMany: (refs: Ref[], evictQueries?: boolean) => Promise<void>;
-
   abstract deleteQueries: (
     queryRef?: string,
     parentRef?: NonNullable<ParentRef>,
     args?: Record<string, unknown>,
   ) => Promise<void>;
 
+  createKey(ref: Ref) {
+    return `${this.type}:items:${this.getVersion()}:${ref}`;
+  }
+
+  createQueryKey(queryRef: string, parentRef: ParentRef, args: Record<string, unknown>) {
+    const namespace = this.createQueryKeyNamespace(queryRef);
+    const metadata = this.createQueryKeyMetadata(parentRef, args);
+    return `${namespace}:${metadata}`;
+  }
+
+  get = (ref: Ref): Promise<Item | null> => {
+    return this.loader.load(ref);
+  };
+
+  getMany = async (refs: Ref[]): Promise<Array<Item> | null> => {
+    const results = await this.getManyPartially(refs);
+    const isPartial = results?.some((result) => result == null);
+    if (results == null || isPartial) {
+      return null;
+    }
+    return results as Item[];
+  };
+
+  save = async (item: Item) => {
+    return this.saveMany([item]);
+  };
+
+  deleteOne = async (ref: Ref, evictQueries = true) => {
+    return this.deleteMany([ref], evictQueries);
+  };
+
+  getManyPartially = async (refs: Ref[]): Promise<Array<Item | null> | null> => {
+    if (refs.length === 0) {
+      return null;
+    }
+    return this.loadMany(refs);
+  };
+
+  getQueryResult = async (
+    queryRef: string,
+    parentRef: ParentRef,
+    args: Record<string, unknown>,
+  ) => {
+    const result = await this.loadQueryResults(queryRef, parentRef, args);
+    return result?.items[0] ?? null;
+  };
+
+  getQueryResults = async (
+    queryRef: string,
+    parentRef: ParentRef,
+    args: Record<string, unknown>,
+  ) => {
+    const result = await this.loadQueryResults(queryRef, parentRef, args);
+    return result?.items ?? null;
+  };
+
   createQueryMiddleware = <T>(
     queryRef: string,
   ): Middleware<T, any, any, Record<string, unknown>> => {
     return async (params, next): Promise<T> => {
-      const cached = await this.getQueryResults(queryRef, params.root?.id, params.args);
+      const cached = await this.loadQueryResults(queryRef, params.root?.id, params.args);
 
       if (cached) {
-        const isList = cached.pop() === '1';
-
+        const isList = cached.isList;
         if (isList) {
-          return cached as T;
+          return cached.items as T;
         }
 
-        const result = cached[0];
-
-        if (result) {
-          return result as T;
+        const item = cached.items[0];
+        if (item) {
+          return item as T;
         }
       }
 
@@ -122,26 +144,24 @@ export abstract class StoreAdapter<Item> {
     };
   };
 
-  protected createKey(ref: Ref) {
-    return `${this.type}:${this.hash}#${ref}`;
+  protected getVersion() {
+    const version = this.options?.version?.toString() || '0';
+    const hash = this.hash || 'hash';
+    return `v${version}_${hash}`;
   }
 
   protected createKeyByItem(item: Item) {
     return this.createKey(this.getRef(item));
   }
 
-  protected createQueryKey(queryRef: string, parentRef: ParentRef, args: Record<string, unknown>) {
-    return `${this.createQueryKeyNamespace(queryRef)}:${this.serializeQueryKeyMeta(
-      parentRef,
-      args,
-    )}`;
+  protected createQueryKeyNamespace(queryRef: string) {
+    return `${this.type}:${queryRef}:${this.getVersion()}`;
   }
 
-  protected serializeQueryKeyMeta(parentRef: ParentRef, args: Record<string, unknown>) {
-    const normalizedArgs = this.normalizeQueryArgs(args);
-    const normalizedParentRef = this.normalizeQueryParentRef(parentRef);
-    const serialized = `["${normalizedParentRef}",${stringify(normalizedArgs)}]`;
-    return serialized;
+  protected createQueryKeyMetadata(parentRef: ParentRef, args: Record<string, unknown>) {
+    const encodedArgs = this.encodeQueryArgs(args);
+    const encodedParentRef = this.encodePrimitive(parentRef);
+    return `parent#${encodedParentRef}#args#${encodedArgs}`;
   }
 
   protected createQueryKeyRegExpMatcher(
@@ -149,22 +169,9 @@ export abstract class StoreAdapter<Item> {
     parentRef: NonNullable<ParentRef>,
     args: Record<string, unknown>,
   ) {
-    const serializedArgs = stringify(this.normalizeQueryArgs(args));
-    const serializedParentRef = this.normalizeQueryParentRef(parentRef);
-
-    const innerArgs = serializedArgs.slice(1, -1);
-
-    const queryRefPattern = queryRef === '*' ? '.*' : this.escapeRegExpCharacters(queryRef);
-    const parentRefPattern =
-      serializedParentRef === '*' ? '.*' : this.escapeRegExpCharacters(serializedParentRef);
-
-    const escapedNamespace = this.escapeRegExpCharacters(this.createQueryKeyNamespace(''));
-    const escapedInnerArgs = this.escapeRegExpCharacters(innerArgs);
-
-    const argsMatcher = `\\{.*${escapedInnerArgs}.*\\}`;
-
-    const pattern = `^${escapedNamespace}${queryRefPattern}:${parentRefPattern}:${argsMatcher}$`;
-
+    const parentMatcher = this.encodePrimitive(parentRef, '.*');
+    const argsMatcher = this.encodeQueryArgs(args, '.*');
+    const pattern = `^${this.createQueryKeyNamespace(queryRef)}:parent#${parentMatcher}#args#.*${argsMatcher}.*`;
     return new RegExp(pattern);
   }
 
@@ -173,45 +180,80 @@ export abstract class StoreAdapter<Item> {
     parentRef: NonNullable<ParentRef>,
     args: Record<string, unknown>,
   ) {
-    const serializedArgs = stringify(this.normalizeQueryArgs(args));
-    const serializedParentRef = this.normalizeQueryParentRef(parentRef);
-
-    const innerArgs = serializedArgs.slice(1, serializedArgs.length - 2);
-
-    const escapedNamespace = this.escapeGlobCharacters(this.createQueryKeyNamespace(queryRef));
-    const escapedInnerArgs = this.escapeGlobCharacters(innerArgs);
-
-    const argsMatcher = `\\{*${escapedInnerArgs}*\\}`;
-
-    const metaMatcher = `\\[\\"${serializedParentRef}\\"\\,${argsMatcher}\\]\\`;
-
-    return `${escapedNamespace}\\:${metaMatcher}`;
+    const parentMatcher = this.encodePrimitive(parentRef, '*');
+    const argsMatcher = this.encodeQueryArgs(args, '*');
+    return `${this.createQueryKeyNamespace(queryRef)}:parent#${parentMatcher}#args#*${argsMatcher}*`;
   }
 
-  protected createQueryKeyNamespace(ref: string) {
-    return `${this.type}:${this.hash}:query:${ref}`;
-  }
+  protected encodeQueryArgs(args: Record<string, unknown>, catchAll?: string) {
+    const encoded: Record<string, string> = {};
+    const flattened = flatten(args) as Record<string, string | boolean | null>;
 
-  protected normalizeQueryParentRef(parentRef: ParentRef) {
-    return this.normalizePrimitive(parentRef);
-  }
+    for (const key in flattened) {
+      const value = flattened[key];
+      const encodedKey = this.encodeProperty(key);
+      const encodedValue = this.encodePrimitive(value, catchAll);
 
-  protected normalizeQueryArgs(args: Record<string, unknown>) {
-    const normalized = flatten(args) as Record<string, string | boolean | null>;
+      if (encodedValue == null) {
+        continue;
+      }
 
-    for (const key in normalized) {
-      normalized[key] = this.normalizePrimitive(normalized[key]);
+      encoded[encodedKey] = encodedValue;
     }
 
-    return normalized;
+    const entries = Object.entries(encoded).sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
+    const serializedPairs = entries.map(([key, value]) => `${key}#${value}`);
+
+    return serializedPairs.join(catchAll ?? ',');
   }
 
-  protected normalizePrimitive(value: string | number | boolean | null | undefined) {
-    if (value == null) {
-      return 'null';
+  protected encodePrimitive(
+    value: string | number | boolean | null | undefined,
+    catchAll?: string,
+  ) {
+    if (catchAll && value === '*') {
+      return catchAll;
     }
-    // We add underscore to avoid collisions with the 'null' from above
-    return `_${value.toString()}`;
+
+    if (value === null) {
+      return '_null_';
+    }
+
+    if (value === undefined) {
+      return catchAll ? null : '_null_';
+    }
+
+    const type = typeof value;
+    const supported = ['string', 'number', 'boolean'];
+    const isSupported = supported.includes(type);
+
+    if (!isSupported) {
+      return catchAll ? null : '_empty_';
+    }
+
+    const str = value.toString();
+
+    if (str === '' && catchAll) {
+      return catchAll ? null : '_empty_';
+    }
+
+    if (!this.shouldEncode(str)) {
+      return str;
+    }
+
+    return encodeBase64Url(value.toString());
+  }
+
+  protected encodeProperty(value: string) {
+    const key = value.replaceAll('.', '_');
+    if (!this.shouldEncode(key)) {
+      return key;
+    }
+    return encodeBase64Url(key);
+  }
+
+  protected shouldEncode(value: string) {
+    return /^[a-z0-9_]+$/i.test(value) === false;
   }
 
   protected getRef(root: Item): Ref {
@@ -220,7 +262,7 @@ export abstract class StoreAdapter<Item> {
     }
 
     if (root == null) {
-      throw new Error('Object does not have id. Define getRef function in cache options');
+      throw new Error('Object is null or undefined, cannot get ref');
     }
 
     if (typeof root === 'object' && 'id' in root) {
@@ -229,53 +271,9 @@ export abstract class StoreAdapter<Item> {
           'Object id must be string or number. Define getRef function in cache options',
         );
       }
-
       return root.id;
     }
 
     throw new Error('Object does not have id. Define getRef function in cache options');
-  }
-
-  protected escapeRegExpCharacters(str: string) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-  }
-
-  protected escapeGlobCharacters(value: string) {
-    const replacements: Record<string, string | undefined> = {
-      ',': '\\,',
-      '.': '\\.',
-      '<': '\\<',
-      '>': '\\>',
-      '{': '\\{',
-      '}': '\\}',
-      '[': '\\[',
-      ']': '\\]',
-      '"': '\\"',
-      "'": "\\'",
-      ':': '\\:',
-      ';': '\\;',
-      '!': '\\!',
-      '@': '\\@',
-      '#': '\\#',
-      $: '\\$',
-      '%': '\\%',
-      '^': '\\^',
-      '&': '\\&',
-      '*': '\\*',
-      '(': '\\(',
-      ')': '\\)',
-      '-': '\\-',
-      '+': '\\+',
-      '=': '\\=',
-      '~': '\\~',
-    };
-
-    const newValue = value.replace(
-      /,|\.|<|>|\{|\}|\[|\]|"|'|:|;|!|@|#|\$|%|\^|&|\*|\(|\)|-|\+|=|~/g,
-      (x) => {
-        return replacements[x] || x;
-      },
-    );
-    return newValue;
   }
 }

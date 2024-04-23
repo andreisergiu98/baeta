@@ -2,12 +2,12 @@ import { Middleware } from '@baeta/core';
 import { Extension } from '@baeta/core/sdk';
 import { TypeGetter } from './global-types';
 import { Store } from './store';
-import { Options, ParentRef, StoreAdapter, StoreOptions } from './store-adapter';
+import { ParentRef, StoreAdapter, StoreAdapterOptions, StoreOptions } from './store-adapter';
 
 export class CacheExtension extends Extension {
   constructor(
     private store: Store,
-    private defaultOptions?: Options,
+    private defaultOptions?: StoreAdapterOptions,
   ) {
     super();
   }
@@ -30,7 +30,7 @@ export class CacheExtension extends Extension {
     type: string,
     field: string,
   ): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
-    const ref = `${type}.${field}`;
+    const ref = `${type}_${field}`;
     return {
       $cacheRef: ref,
       $cacheMiddleware: (store: StoreAdapter<TypeGetter<Result>>) => {

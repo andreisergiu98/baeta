@@ -3191,6 +3191,58 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/cache-cloudflare@workspace:packages/cache-cloudflare":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-cloudflare@workspace:packages/cache-cloudflare"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@cloudflare/workers-types": "npm:^4.20240405.0"
+    graphql: "npm:^16.8.1"
+    typescript: "npm:^5.4.5"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
+    "@cloudflare/workers-types": ^4
+  languageName: unknown
+  linkType: soft
+
+"@baeta/cache-keyv@workspace:packages/cache-keyv":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-keyv@workspace:packages/cache-keyv"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    graphql: "npm:^16.8.1"
+    keyv: "npm:^4.5.4"
+    typescript: "npm:^5.4.5"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
+    keyv: ^4.5.4
+  languageName: unknown
+  linkType: soft
+
+"@baeta/cache-redis@workspace:packages/cache-redis":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-redis@workspace:packages/cache-redis"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^20.12.7"
+    graphql: "npm:^16.8.1"
+    ioredis: "npm:^5.4.1"
+    typescript: "npm:^5.4.5"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
+    ioredis: ^5.4.1
+  languageName: unknown
+  linkType: soft
+
 "@baeta/cli@workspace:^, @baeta/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@baeta/cli@workspace:packages/cli"
@@ -3393,31 +3445,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/extension-cache@workspace:packages/extension-cache":
+"@baeta/extension-cache@workspace:^, @baeta/extension-cache@workspace:packages/extension-cache":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-cache@workspace:packages/extension-cache"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^20.12.7"
+    "@baeta/util-encoding": "workspace:^"
     dataloader: "npm:^2.2.2"
-    fast-json-stable-stringify: "npm:^2.1.0"
     flat: "npm:^6.0.1"
     graphql: "npm:^16.8.1"
-    ioredis: "npm:^5.4.1"
-    keyv: "npm:^4.5.4"
     typescript: "npm:^5.4.5"
   peerDependencies:
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
-    ioredis: ^5.3.2
-    keyv: ^4.5.4
-  peerDependenciesMeta:
-    ioredis:
-      optional: true
-    keyv:
-      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3643,6 +3685,16 @@ __metadata:
 "@baeta/tsconfig@workspace:^, @baeta/tsconfig@workspace:tools/tsconfig":
   version: 0.0.0-use.local
   resolution: "@baeta/tsconfig@workspace:tools/tsconfig"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/util-encoding@workspace:^, @baeta/util-encoding@workspace:packages/util-encoding":
+  version: 0.0.0-use.local
+  resolution: "@baeta/util-encoding@workspace:packages/util-encoding"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    typescript: "npm:^5.4.5"
   languageName: unknown
   linkType: soft
 

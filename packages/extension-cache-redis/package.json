@@ -1,5 +1,5 @@
 {
-  "name": "@baeta/cache-cloudflare",
+  "name": "@baeta/extension-cache-redis",
   "version": "0.0.0",
   "keywords": [
     "baeta",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/cache-cloudflare"
+    "directory": "packages/extension-cache-redis"
   },
   "license": "MIT",
   "author": {
@@ -49,13 +49,14 @@
     "@baeta/core": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20240423.0",
+    "@types/node": "^20.12.7",
     "graphql": "^16.8.1",
+    "ioredis": "^5.4.1",
     "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",
-    "@cloudflare/workers-types": "^4"
+    "ioredis": "^5.4.1"
   },
   "engines": {
     "node": ">=20.0.0"

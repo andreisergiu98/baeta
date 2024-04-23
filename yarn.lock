@@ -3694,6 +3694,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^20.12.7"
     typescript: "npm:^5.4.5"
   languageName: unknown
   linkType: soft

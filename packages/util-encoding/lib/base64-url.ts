@@ -1,6 +1,9 @@
+import { decodeBase64, encodeBase64 } from './base64';
+import { decodeBinary, encodeBinary } from './text-encoder';
+
 export function encodeBase64Url(value: string): string {
-  const utf8Bytes = new TextEncoder().encode(value);
-  const base64Encoded = btoa(String.fromCharCode(...utf8Bytes));
+  const utf8Bytes = encodeBinary(value);
+  const base64Encoded = encodeBase64(String.fromCharCode(...utf8Bytes));
   return base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
@@ -17,11 +20,11 @@ export function decodeBase64Url(base64Url: string): string {
   const padding = createPadding(base64Url.length);
   const base64WithPadding = base64Encoded + padding;
 
-  const binaryString = atob(base64WithPadding);
+  const binaryString = decodeBase64(base64WithPadding);
   const bytes = new Uint8Array(binaryString.length);
   for (let i = 0; i < binaryString.length; i++) {
     bytes[i] = binaryString.charCodeAt(i);
   }
 
-  return new TextDecoder().decode(bytes);
+  return decodeBinary(bytes);
 }

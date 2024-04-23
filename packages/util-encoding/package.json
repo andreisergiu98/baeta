@@ -44,9 +44,6 @@
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
   },
-  "dependencies": {
-    "@types/node": "^20.12.7"
-  },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",

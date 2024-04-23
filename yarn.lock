@@ -3199,7 +3199,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240405.0"
+    "@cloudflare/workers-types": "npm:^4.20240423.0"
     graphql: "npm:^16.8.1"
     typescript: "npm:^5.4.5"
   peerDependencies:
@@ -3283,7 +3283,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240405.0"
+    "@cloudflare/workers-types": "npm:^4.20240423.0"
     "@types/uuid": "npm:^9.0.8"
     graphql: "npm:^16.8.1"
     graphql-ws: "npm:^5.16.0"
@@ -3388,7 +3388,7 @@ __metadata:
     "@baeta/plugin-pagination": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@prisma/client": "npm:^5.12.1"
+    "@prisma/client": "npm:^5.13.0"
     "@types/body-parser": "npm:^1.19.5"
     "@types/cors": "npm:^2.8.17"
     "@types/express": "npm:^4.17.21"
@@ -3401,7 +3401,7 @@ __metadata:
     graphql: "npm:^16.8.1"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
-    prisma: "npm:^5.12.1"
+    prisma: "npm:^5.13.0"
     typescript: "npm:^5.4.5"
     ws: "npm:^8.16.0"
   languageName: unknown
@@ -3417,13 +3417,13 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/plugin-gitignore": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240405.0"
+    "@cloudflare/workers-types": "npm:^4.20240423.0"
     graphql: "npm:^16.8.1"
     graphql-yoga: "npm:^5.3.0"
-    hono: "npm:^4.2.5"
+    hono: "npm:^4.2.7"
     miniflare: "npm:^3.20240405.2"
     typescript: "npm:^5.4.5"
-    wrangler: "npm:^3.51.0"
+    wrangler: "npm:^3.51.2"
   languageName: unknown
   linkType: soft
 
@@ -3555,7 +3555,7 @@ __metadata:
     "@baeta/cloudflare-subscriptions": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240405.0"
+    "@cloudflare/workers-types": "npm:^4.20240423.0"
     "@types/node": "npm:^20.12.7"
     typescript: "npm:^5.4.5"
   peerDependencies:
@@ -3742,7 +3742,7 @@ __metadata:
     "@mdx-js/react": "npm:^3.0.1"
     "@types/react": "npm:^18.2.79"
     "@types/react-dom": "npm:^18.2.25"
-    clsx: "npm:^2.1.0"
+    clsx: "npm:^2.1.1"
     esbuild: "npm:^0.20.2"
     esbuild-loader: "npm:^4.1.0"
     prism-react-renderer: "npm:^2.3.1"
@@ -3753,18 +3753,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@biomejs/biome@npm:^1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/biome@npm:1.7.0"
+"@biomejs/biome@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/biome@npm:1.7.1"
   dependencies:
-    "@biomejs/cli-darwin-arm64": "npm:1.7.0"
-    "@biomejs/cli-darwin-x64": "npm:1.7.0"
-    "@biomejs/cli-linux-arm64": "npm:1.7.0"
-    "@biomejs/cli-linux-arm64-musl": "npm:1.7.0"
-    "@biomejs/cli-linux-x64": "npm:1.7.0"
-    "@biomejs/cli-linux-x64-musl": "npm:1.7.0"
-    "@biomejs/cli-win32-arm64": "npm:1.7.0"
-    "@biomejs/cli-win32-x64": "npm:1.7.0"
+    "@biomejs/cli-darwin-arm64": "npm:1.7.1"
+    "@biomejs/cli-darwin-x64": "npm:1.7.1"
+    "@biomejs/cli-linux-arm64": "npm:1.7.1"
+    "@biomejs/cli-linux-arm64-musl": "npm:1.7.1"
+    "@biomejs/cli-linux-x64": "npm:1.7.1"
+    "@biomejs/cli-linux-x64-musl": "npm:1.7.1"
+    "@biomejs/cli-win32-arm64": "npm:1.7.1"
+    "@biomejs/cli-win32-x64": "npm:1.7.1"
   dependenciesMeta:
     "@biomejs/cli-darwin-arm64":
       optional: true
@@ -3784,62 +3784,62 @@ __metadata:
       optional: true
   bin:
     biome: bin/biome
-  checksum: 10/cf5b0bf2351686dce17ad07455a3b66af5371830e593968a58a89380f0893142a6337947239ee1b840babc753dc0542fa0a1685a5340a5512cc414f37a0e4a78
+  checksum: 10/e8aab3e9320f49088daed24970c40f6874aca139717bebf2880386c3f0f7a6e92146484f27a292d616f33194823b3729cb167fd076fba458e201f80005f9c4ea
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-arm64@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-darwin-arm64@npm:1.7.0"
+"@biomejs/cli-darwin-arm64@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-darwin-arm64@npm:1.7.1"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-x64@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-darwin-x64@npm:1.7.0"
+"@biomejs/cli-darwin-x64@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-darwin-x64@npm:1.7.1"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64-musl@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-linux-arm64-musl@npm:1.7.0"
+"@biomejs/cli-linux-arm64-musl@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:1.7.1"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-linux-arm64@npm:1.7.0"
+"@biomejs/cli-linux-arm64@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-linux-arm64@npm:1.7.1"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64-musl@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-linux-x64-musl@npm:1.7.0"
+"@biomejs/cli-linux-x64-musl@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-linux-x64-musl@npm:1.7.1"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-linux-x64@npm:1.7.0"
+"@biomejs/cli-linux-x64@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-linux-x64@npm:1.7.1"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-arm64@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-win32-arm64@npm:1.7.0"
+"@biomejs/cli-win32-arm64@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-win32-arm64@npm:1.7.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-x64@npm:1.7.0":
-  version: 1.7.0
-  resolution: "@biomejs/cli-win32-x64@npm:1.7.0"
+"@biomejs/cli-win32-x64@npm:1.7.1":
+  version: 1.7.1
+  resolution: "@biomejs/cli-win32-x64@npm:1.7.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -4123,10 +4123,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20240405.0":
-  version: 4.20240405.0
-  resolution: "@cloudflare/workers-types@npm:4.20240405.0"
-  checksum: 10/03e5f5b48b2f4633fd6fca137b64b70b74f3aba2bd98ca66db375c94fb69dc18c96c05abfc26ccc7490579fd14e68af9a83d89256b269c51e5f80c211b009bc9
+"@cloudflare/workers-types@npm:^4.20240423.0":
+  version: 4.20240423.0
+  resolution: "@cloudflare/workers-types@npm:4.20240423.0"
+  checksum: 10/70beae06cf929b01883c847d0a41aee8ac6734350785a8d1b913fe8b7ceb050b0d339967e373b7016da0b7697bf8d58dfb69de5c8a3b79cf2bbc72f2681695eb
   languageName: node
   linkType: hard
 
@@ -6343,61 +6343,61 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^5.12.1":
-  version: 5.12.1
-  resolution: "@prisma/client@npm:5.12.1"
+"@prisma/client@npm:^5.13.0":
+  version: 5.13.0
+  resolution: "@prisma/client@npm:5.13.0"
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 10/650a40d17ddf84bcff2390bb867da38bf253a988e19a86627040344095aca60bf8d81cdcb43096a78b3995c604ad124e20d329ff33646e1ae8fc6f6692817e5e
+  checksum: 10/52762970542c282ea203294eb5adebe0075e077c9edf2b2f62be3f2206d35d94d17129c26e8491082e037da3b2024e788cb5bb588f7de6cb6870b84e9f86b00c
   languageName: node
   linkType: hard
 
-"@prisma/debug@npm:5.12.1":
-  version: 5.12.1
-  resolution: "@prisma/debug@npm:5.12.1"
-  checksum: 10/960ae84e8262f597cecd34798502a4d130fedc113f7c83ef8fdb1a750ea94612598ae4b7419ab7c8505deea54288272da6c8f9376f1f9dcd862c3abe72b1e02e
+"@prisma/debug@npm:5.13.0":
+  version: 5.13.0
+  resolution: "@prisma/debug@npm:5.13.0"
+  checksum: 10/3f061d9fdcbd396f54085d2a0d51b98dc0d733bfcd0647faccc54eef667b26ca56ac9f7583f1fb31bb63f7d47260bac5a8c62258a51b2514143ab37ccde4f316
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:5.12.0-21.473ed3124229e22d881cb7addf559799debae1ab":
-  version: 5.12.0-21.473ed3124229e22d881cb7addf559799debae1ab
-  resolution: "@prisma/engines-version@npm:5.12.0-21.473ed3124229e22d881cb7addf559799debae1ab"
-  checksum: 10/99db2c71a0efc6a4fd3fc34d2ec27dd1dcc05156e269d83e4813ead716342bd7e03aec59f484193a344d227bc4855a0b5dc7794931db0d5f3653d3e9aae31065
+"@prisma/engines-version@npm:5.13.0-23.b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b":
+  version: 5.13.0-23.b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
+  resolution: "@prisma/engines-version@npm:5.13.0-23.b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
+  checksum: 10/1ef94b67607eafad820aa5acee1c85c69da38e6b32a6f4c2f7c75ec236394b9a751838f0f341e0333fc882786bbe6fb4484f8fd7c1b6c414fb2dbeaf6b9642b0
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:5.12.1":
-  version: 5.12.1
-  resolution: "@prisma/engines@npm:5.12.1"
+"@prisma/engines@npm:5.13.0":
+  version: 5.13.0
+  resolution: "@prisma/engines@npm:5.13.0"
   dependencies:
-    "@prisma/debug": "npm:5.12.1"
-    "@prisma/engines-version": "npm:5.12.0-21.473ed3124229e22d881cb7addf559799debae1ab"
-    "@prisma/fetch-engine": "npm:5.12.1"
-    "@prisma/get-platform": "npm:5.12.1"
-  checksum: 10/5482107d9f79a8ab0b7d32d1180ac1315dc60098574e339f0e5e564b0fd56193e141d7225ad126ec35832db6a96ef968b2348067dc6fd0cbcb639acc6bef5e24
+    "@prisma/debug": "npm:5.13.0"
+    "@prisma/engines-version": "npm:5.13.0-23.b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
+    "@prisma/fetch-engine": "npm:5.13.0"
+    "@prisma/get-platform": "npm:5.13.0"
+  checksum: 10/3385032b5972db7a6474988e43c99183d66a963e04972fc06771e8f36b355bd88c887f3f026bda6cc379244089d82691c16f4826057b9e146540479d4ed12eff
   languageName: node
   linkType: hard
 
-"@prisma/fetch-engine@npm:5.12.1":
-  version: 5.12.1
-  resolution: "@prisma/fetch-engine@npm:5.12.1"
+"@prisma/fetch-engine@npm:5.13.0":
+  version: 5.13.0
+  resolution: "@prisma/fetch-engine@npm:5.13.0"
   dependencies:
-    "@prisma/debug": "npm:5.12.1"
-    "@prisma/engines-version": "npm:5.12.0-21.473ed3124229e22d881cb7addf559799debae1ab"
-    "@prisma/get-platform": "npm:5.12.1"
-  checksum: 10/b66e5ab9955c0892f2f0cec990502a34f5e7864e579e6eaa8ee2cc82546586b8f58e387384caf660f3820369d1ab767e9e9864e382ac3db5909b16b328ba5bd8
+    "@prisma/debug": "npm:5.13.0"
+    "@prisma/engines-version": "npm:5.13.0-23.b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
+    "@prisma/get-platform": "npm:5.13.0"
+  checksum: 10/fcce109375ee9fd232d68dea9559ec4d8e6a25de408671f7bee7a21c60046207a981d035c04fe770da74d1b0ec5c20baf5882ff738c106a81da79e9e387e4e71
   languageName: node
   linkType: hard
 
-"@prisma/get-platform@npm:5.12.1":
-  version: 5.12.1
-  resolution: "@prisma/get-platform@npm:5.12.1"
+"@prisma/get-platform@npm:5.13.0":
+  version: 5.13.0
+  resolution: "@prisma/get-platform@npm:5.13.0"
   dependencies:
-    "@prisma/debug": "npm:5.12.1"
-  checksum: 10/77c19615829c7c95f2cf44152f2d7661f8ba825b3f66ee47252ae97b654c73d90228b45f06f0b9f1760a7764a5b8c73b439291453b84f3a3951ca744d82f3167
+    "@prisma/debug": "npm:5.13.0"
+  checksum: 10/843b5d1d5513499108a4dfc632694afc4dc7535811e57f10a1634029097c62bfdde4a4abd5a5e373d566e277a8895fc09720ff7abdad650b5dbd1e8cdd987830
   languageName: node
   linkType: hard
 
@@ -8700,7 +8700,7 @@ __metadata:
   dependencies:
     "@andreisergiu98/changesets-cli": "npm:^2.25.1"
     "@baeta/builder": "workspace:^"
-    "@biomejs/biome": "npm:^1.7.0"
+    "@biomejs/biome": "npm:^1.7.1"
     "@changesets/changelog-github": "npm:^0.5.0"
     "@yarnpkg/sdks": "npm:^3.1.0"
     "@yarnpkg/types": "npm:^4.0.0"
@@ -9560,10 +9560,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "clsx@npm:2.1.0"
-  checksum: 10/2e0ce7c3b6803d74fc8147c408f88e79245583202ac14abd9691e2aebb9f312de44270b79154320d10bb7804a9197869635d1291741084826cff20820f31542b
+"clsx@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "clsx@npm:2.1.1"
+  checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
   languageName: node
   linkType: hard
 
@@ -12858,10 +12858,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.2.5":
-  version: 4.2.5
-  resolution: "hono@npm:4.2.5"
-  checksum: 10/18c464f5bab7b8ce887f24b6155da6573ffde4a031141677b66f31b5d50c87d661f655e8cc066fc9879066c51c7fd5e2fc094b2bbcc72b90d2b3cb62d9033760
+"hono@npm:^4.2.7":
+  version: 4.2.7
+  resolution: "hono@npm:4.2.7"
+  checksum: 10/ba4863eeb4ba602d9aa7f5ba83940d12cc3055c1078df4697f8b0f9726efbdd299dc7170e2b3a656c353359b0bc7a9f1287fae8ea904b760b5148b32df26ec37
   languageName: node
   linkType: hard
 
@@ -17266,14 +17266,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^5.12.1":
-  version: 5.12.1
-  resolution: "prisma@npm:5.12.1"
+"prisma@npm:^5.13.0":
+  version: 5.13.0
+  resolution: "prisma@npm:5.13.0"
   dependencies:
-    "@prisma/engines": "npm:5.12.1"
+    "@prisma/engines": "npm:5.13.0"
   bin:
     prisma: build/index.js
-  checksum: 10/874c85b4ac0b99fb1fa0b6210106cb020563902bec2b9d974e33c053eda9ed59329c500a4ef74e584e812e5413b958a87d0a27c2fdaf86563acb36cc75bdddd2
+  checksum: 10/3b5c108aa25e815115872d64ee5dfd777c5351ee787f469149dab925cd78fc00f22b7a6bab3ea41aecc0cc0d9f16c5e2bcdff4caa37e1479231e593126e55f4e
   languageName: node
   linkType: hard
 
@@ -21004,9 +21004,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrangler@npm:^3.51.0":
-  version: 3.51.0
-  resolution: "wrangler@npm:3.51.0"
+"wrangler@npm:^3.51.2":
+  version: 3.51.2
+  resolution: "wrangler@npm:3.51.2"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:0.3.1"
     "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
@@ -21035,7 +21035,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 10/c7cb0b8eb0618bfe1799f20d0da8a4065bdf09f7950b97f1217882f19fadf01595749a4a7031addacf001ca5f4367b6b3cd9b38fe8194b577e7b1ddd17ceb00b
+  checksum: 10/f2c0a752f3585ea9eb6c6e8c0819e4993b71b2a72d9cd85e27c09790ab970874c087b535f12b370316302479db636ecf571959613c879a51ac11ad10bcd9783c
   languageName: node
   linkType: hard
 

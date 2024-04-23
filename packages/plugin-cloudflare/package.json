@@ -51,7 +51,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/cloudflare-subscriptions": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20240405.0",
+    "@cloudflare/workers-types": "^4.20240423.0",
     "@types/node": "^20.12.7",
     "typescript": "^5.4.5"
   },

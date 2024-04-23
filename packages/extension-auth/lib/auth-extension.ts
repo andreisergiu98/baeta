@@ -1,5 +1,5 @@
 import { MiddlewareParams } from '@baeta/core';
-import { Extension, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
+import { Extension, ModuleBuilder, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
 import { GraphQLResolveInfo } from 'graphql';
 import { createResolverPath, isOperationType } from '../utils/resolver';
 import { ScopeErrorResolver, defaultErrorResolver, resolveError } from './error';
@@ -57,6 +57,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getTypeExtensions = <Root, Context>(
+    module: ModuleBuilder,
     type: string,
   ): BaetaExtensions.TypeExtensions<Root, Context> => {
     return {
@@ -66,6 +67,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getResolverExtensions = <Result, Root, Context, Args>(
+    module: ModuleBuilder,
     type: string,
     field: string,
   ): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
@@ -76,6 +78,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getSubscriptionExtensions = <Root, Context, Args>(
+    module: ModuleBuilder,
     field: string,
   ): BaetaExtensions.SubscriptionExtensions<Root, Context, Args> => {
     return {
@@ -84,6 +87,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getSubscriptionSubscribeExtensions = <Root, Context, Args>(
+    module: ModuleBuilder,
     field: string,
   ): BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args> => {
     return {
@@ -92,6 +96,7 @@ export class AuthExtension<T> extends Extension {
   };
 
   getSubscriptionResolveExtensions = <Result, Root, Context, Args>(
+    module: ModuleBuilder,
     field: string,
   ): BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args> => {
     return {
@@ -100,7 +105,7 @@ export class AuthExtension<T> extends Extension {
     };
   };
 
-  build = (mapper: ResolverMapper) => {
+  build = (module: ModuleBuilder, mapper: ResolverMapper) => {
     for (const type of mapper.getTypes()) {
       const fields = mapper.getTypeFields(type);
       const fieldsWithScopes = Object.keys(this.authMap[type] ?? {});

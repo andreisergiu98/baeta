@@ -1,5 +1,5 @@
 import { Middleware } from '@baeta/core';
-import { Extension } from '@baeta/core/sdk';
+import { Extension, ModuleBuilder, createMiddlewareAdapter, nameFunction } from '@baeta/core/sdk';
 import { TypeGetter } from './global-types';
 import { Store } from './store';
 import { ParentRef, StoreAdapter, StoreAdapterOptions, StoreOptions } from './store-adapter';
@@ -13,6 +13,7 @@ export class CacheExtension extends Extension {
   }
 
   getTypeExtensions = <Root, Context>(
+    module: ModuleBuilder,
     type: string,
   ): BaetaExtensions.TypeExtensions<Root, Context> => {
     return {
@@ -27,14 +28,22 @@ export class CacheExtension extends Extension {
   };
 
   getResolverExtensions = <Result, Root, Context, Args>(
+    module: ModuleBuilder,
     type: string,
     field: string,
   ): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
     const ref = `${type}_${field}`;
     return {
       $cacheRef: ref,
-      $cacheMiddleware: (store: StoreAdapter<TypeGetter<Result>>) => {
-        return store.createQueryMiddleware(ref) as Middleware<Result, Root, Context, Args>;
+      $useCache: (store: StoreAdapter<TypeGetter<Result>>) => {
+        const middleware = store.createQueryMiddleware(ref) as Middleware<
+          unknown,
+          unknown,
+          unknown,
+          unknown
+        >;
+        nameFunction(middleware, `${type}.${field}.$useCache`);
+        module.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));
       },
       $clearCache: (
         store: StoreAdapter<TypeGetter<Result>>,

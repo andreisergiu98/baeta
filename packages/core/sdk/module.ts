@@ -137,31 +137,31 @@ export class ModuleBuilder {
 
   private getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getResolverExtensions(type, field),
+      ext.getResolverExtensions(this, type, field),
     ) as BaetaExtensions.ResolverExtensions<Result, Root, Context, Args>;
   }
 
   private getTypeExtensions<Root, Context>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getTypeExtensions(type),
+      ext.getTypeExtensions(this, type),
     ) as BaetaExtensions.TypeExtensions<Root, Context>;
   }
 
   private getSubscriptionExtensions<Root, Context, Args>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getSubscriptionExtensions(type),
+      ext.getSubscriptionExtensions(this, type),
     ) as BaetaExtensions.SubscriptionExtensions<Root, Context, Args>;
   }
 
   private getSubscriptionSubscribeExtensions<Root, Context, Args>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getSubscriptionSubscribeExtensions(type),
+      ext.getSubscriptionSubscribeExtensions(this, type),
     ) as BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args>;
   }
 
   private getSubscriptionResolveExtensions<Result, Root, Context, Args>(type: string) {
     return mergeExtensions(this.extensions, (ext) =>
-      ext.getSubscriptionResolveExtensions(type),
+      ext.getSubscriptionResolveExtensions(this, type),
     ) as BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args>;
   }
 
@@ -184,7 +184,7 @@ export class ModuleBuilder {
 
   build = () => {
     for (const extension of this.extensions) {
-      extension.build(this.mapper);
+      extension.build(this, this.mapper);
     }
 
     return {

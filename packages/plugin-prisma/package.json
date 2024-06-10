@@ -39,7 +39,6 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -48,12 +47,12 @@
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/plugin-exec": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "execa": "^8.0.1"
+    "execa": "^9.2.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.14.2",
     "typescript": "^5.4.5"
   },
   "engines": {

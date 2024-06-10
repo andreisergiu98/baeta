@@ -102,3 +102,7 @@ export type DefinedFieldsWithoutExtensions = {
   UserPhoto: "id" | "url";
   User: "id" | "name" | "birthday";
 };
+
+export type DefinedUnionsWithoutExtensions = {
+
+};

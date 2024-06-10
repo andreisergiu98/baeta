@@ -1,6 +1,6 @@
 import type { CompilerOptions } from '@baeta/compiler';
 import type { BuildContext } from '@baeta/compiler/esbuild';
-import { ExecaChildProcess } from 'execa';
+import { Subprocess } from 'execa';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { makeErrorMessage, useConfig } from '../../sdk';
 import { dynamicImportCompiler } from '../../utils/compiler';
@@ -30,7 +30,7 @@ export function Builder(props: Props) {
   const [running, setRunning] = useState(false);
   const [buildTime, setBuildTime] = useState(0);
 
-  const processesRef = useRef<ExecaChildProcess[]>([]);
+  const processesRef = useRef<Subprocess[]>([]);
 
   const killHanging = useCallback(() => {
     return killProcesses(processesRef.current);

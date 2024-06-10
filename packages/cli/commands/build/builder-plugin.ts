@@ -1,19 +1,21 @@
-import { ExecaChildProcess, execaCommand } from 'execa';
+import { Subprocess, execa, parseCommandString } from 'execa';
 import { Writable } from 'node:stream';
 import kill from 'tree-kill';
 
-export async function killProcesses(processes: ExecaChildProcess[]) {
+export async function killProcesses(processes: Subprocess[]) {
   await Promise.all(processes.map((process) => killProcess(process)));
   processes.splice(0, processes.length);
 }
 
 export async function startProcess(
-  processes: ExecaChildProcess[],
+  processes: Subprocess[],
   command: string,
   stdout: (data: string) => void,
   onError: (err: unknown) => void,
 ) {
-  const child = execaCommand(command, {
+  const [file, ...args] = parseCommandString(command);
+
+  const child = execa(file, args, {
     stdout: 'pipe',
     stderr: 'pipe',
     stripFinalNewline: true,
@@ -30,7 +32,7 @@ export async function startProcess(
   processes.push(child);
 }
 
-async function killProcess(process: ExecaChildProcess) {
+async function killProcess(process: Subprocess) {
   return new Promise<void>((resolve) => {
     if (process.pid == null) {
       return resolve();

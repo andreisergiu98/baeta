@@ -3775,7 +3775,6 @@ __metadata:
     tsup: "npm:^8.1.0"
     typescript: "npm:^5.4.5"
   bin:
-    devwatch: ./bin/dev-watch.cjs
     prep: ./bin/prep.cjs
     tsup: ./bin/tsup.js
   languageName: unknown

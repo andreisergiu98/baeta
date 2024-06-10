@@ -30,9 +30,6 @@
       "import": "./tsup.js",
       "types": "./tsup.d.ts"
     },
-    "./dev-watch": {
-      "require": "./dev-watch.ts"
-    },
     "./tsrun": {
       "require": "./tsrun.cjs"
     },
@@ -44,7 +41,6 @@
     }
   },
   "bin": {
-    "devwatch": "./bin/dev-watch.cjs",
     "prep": "./bin/prep.cjs",
     "tsup": "./bin/tsup.js"
   },

@@ -64,7 +64,7 @@
     "prettier-plugin-organize-imports@3.2.4": {
       "unplugged": true
     },
-    "prettier-plugin-packagejson@2.4.14": {
+    "prettier-plugin-packagejson@2.5.0": {
       "unplugged": true
     }
   },

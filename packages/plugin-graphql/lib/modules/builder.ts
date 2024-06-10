@@ -15,6 +15,7 @@ import {
   ObjectTypeExtensionNode,
   TypeDefinitionNode,
   TypeExtensionNode,
+  UnionTypeDefinitionNode,
   visit,
 } from 'graphql';
 import { ModulesConfig } from './config';
@@ -375,6 +376,10 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       return `DefinedEnumValues['${typeName}']`;
     }
 
+    if (defined.unions.includes(typeName) && picks.unions[typeName]) {
+      return `${picks.unions[typeName].join(' | ')};`;
+    }
+
     if (defined.objects.includes(typeName) && picks.objects[typeName]) {
       return `Pick<${coreType}, DefinedFields['${typeName}']>`;
     }
@@ -443,6 +448,20 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     }
   }
 
+  function collectUnionTypes(node: UnionTypeDefinitionNode) {
+    const name = node.name.value;
+
+    if (node.types) {
+      if (!picks.unions[name]) {
+        picks.unions[name] = [];
+      }
+
+      for (const type of node.types) {
+        picks.unions[name].push(type.name.value);
+      }
+    }
+  }
+
   function collectTypeDefinition(node: TypeDefinitionNode) {
     const name = node.name.value;
 
@@ -477,6 +496,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       }
 
       case Kind.UNION_TYPE_DEFINITION: {
+        collectUnionTypes(node);
         defined.unions.push(name);
         break;
       }

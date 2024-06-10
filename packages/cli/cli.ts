@@ -3,8 +3,8 @@ import { createBuildCommand } from './commands/build';
 import { createGenerateCommand } from './commands/generate';
 import { loadConfig } from './lib/config-loader';
 
-const fixCursor = '\x1B[?25h';
 process.on('exit', () => {
+  const fixCursor = '\x1B[?25h';
   process.stdout.write(fixCursor);
 });
 

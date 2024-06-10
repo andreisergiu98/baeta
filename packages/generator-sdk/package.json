@@ -49,13 +49,13 @@
     "@baeta/util-path": "workspace:^",
     "@parcel/watcher": "^2.4.1",
     "change-case-all": "2.1.0",
-    "micromatch": "^4.0.5"
+    "micromatch": "^4.0.7"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/micromatch": "^4.0.7",
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.14.2",
     "typescript": "^5.4.5"
   },
   "engines": {

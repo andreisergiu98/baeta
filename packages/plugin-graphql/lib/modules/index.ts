@@ -2,7 +2,14 @@ import { join, relative, resolve } from '@baeta/util-path';
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
 import { Source } from '@graphql-tools/utils';
-import { DocumentNode, ObjectTypeDefinitionNode, concatAST, isScalarType } from 'graphql';
+import {
+  DocumentNode,
+  ObjectTypeDefinitionNode,
+  UnionTypeDefinitionNode,
+  UnionTypeExtensionNode,
+  concatAST,
+  isScalarType,
+} from 'graphql';
 import { buildModule } from './builder';
 import { ModulesConfig } from './config';
 import {
@@ -77,6 +84,9 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
         'modules-exported-picks': {
           plugin: (schema) => {
             const typePicks: string[] = [];
+            const unionPicks: string[] = [];
+
+            const unionTypesMap: Record<string, string[] | undefined> = {};
 
             for (const moduleName of modules) {
               const sources = sourcesByModuleMap[moduleName];
@@ -86,6 +96,16 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
               const types = moduleDocument.definitions.filter(
                 (def) => def.kind === 'ObjectTypeDefinition',
               ) as ObjectTypeDefinitionNode[];
+
+              const unionsDefinition = moduleDocument.definitions.filter(
+                (def) => def.kind === 'UnionTypeDefinition',
+              ) as UnionTypeDefinitionNode[];
+
+              const unionsExtensions = moduleDocument.definitions.filter(
+                (def) => def.kind === 'UnionTypeExtension',
+              ) as UnionTypeExtensionNode[];
+
+              const unions = [...unionsDefinition, ...unionsExtensions];
 
               for (const type of types) {
                 const name = type.name.value;
@@ -104,9 +124,34 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 
                 typePicks.push(`  ${name}: ${fieldNames};`);
               }
+
+              for (const union of unions) {
+                const types = union.types?.map((t) => t.name.value) ?? [];
+                const mappedTypes = types.map((t) => `DefinedFieldsWithoutExtensions["${t}"]`);
+
+                if (unionTypesMap[union.name.value] == null) {
+                  unionTypesMap[union.name.value] = [];
+                }
+
+                unionTypesMap[union.name.value]?.push(...mappedTypes);
+              }
             }
 
-            return `\nexport type DefinedFieldsWithoutExtensions = {\n${typePicks.join('\n')}\n};`;
+            for (const unionName in unionTypesMap) {
+              const types = unionTypesMap[unionName];
+
+              if (types == null || types.length === 0) {
+                unionPicks.push(`  ${unionName}: never;`);
+                continue;
+              }
+
+              unionPicks.push(`  ${unionName}: ${types.join(' | ')};`);
+            }
+
+            const fieldsDefinition = `export type DefinedFieldsWithoutExtensions = {\n${typePicks.join('\n')}\n};`;
+            const unionsDefinition = `export type DefinedUnionsWithoutExtensions = {\n${unionPicks.join('\n')}\n};`;
+
+            return `\n${fieldsDefinition}\n\n${unionsDefinition}`;
           },
         },
       },

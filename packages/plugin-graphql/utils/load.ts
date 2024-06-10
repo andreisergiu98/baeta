@@ -8,7 +8,7 @@ import { JsonFileLoader } from '@graphql-tools/json-file-loader';
 import { loadSchema as loadSchemaToolkit, UnnormalizedTypeDefPointer } from '@graphql-tools/load';
 import { PrismaLoader } from '@graphql-tools/prisma-loader';
 import { UrlLoader } from '@graphql-tools/url-loader';
-import { GraphQLSchemaExtensions } from 'graphql';
+import { GraphQLSchemaExtensions, validateSchema } from 'graphql';
 import { hashSchema } from './hash';
 
 export async function loadSchema(schemaPointerMap: UnnormalizedTypeDefPointer, cwd: string) {
@@ -26,6 +26,14 @@ export async function loadSchema(schemaPointerMap: UnnormalizedTypeDefPointer, c
     cwd,
     includeSources: true,
   });
+
+  const errors = validateSchema(outputSchemaAst);
+
+  if (errors.length > 0) {
+    const messages = errors.map((e) => e.toString()).join('\n\n--------------------\n\n');
+    const subject = errors.length === 1 ? 'error' : 'errors';
+    throw new Error(`Invalid schema. Found ${errors.length} ${subject}:\n\n${messages}`);
+  }
 
   if (!outputSchemaAst.extensions) {
     outputSchemaAst.extensions = {};

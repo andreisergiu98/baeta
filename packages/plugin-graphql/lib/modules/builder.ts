@@ -372,12 +372,16 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;
     }
 
+    if (external.unions.includes(typeName)) {
+      return `${importNamespace}.DefinedUnionsWithoutExtensions["${normalizedTypeName}"]`;
+    }
+
     if (defined.enums.includes(typeName) && picks.enums[typeName]) {
       return `DefinedEnumValues['${typeName}']`;
     }
 
     if (defined.unions.includes(typeName) && picks.unions[typeName]) {
-      return `${picks.unions[typeName].join(' | ')};`;
+      return `${importNamespace}.DefinedUnionsWithoutExtensions["${normalizedTypeName}"]`;
     }
 
     if (defined.objects.includes(typeName) && picks.objects[typeName]) {
@@ -496,8 +500,8 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       }
 
       case Kind.UNION_TYPE_DEFINITION: {
-        collectUnionTypes(node);
         defined.unions.push(name);
+        collectUnionTypes(node);
         break;
       }
     }

@@ -4,8 +4,8 @@ export interface ContextStoreOptions {
 
 export interface ContextStoreValue<T> {
   isLoaded: boolean;
-  result?: T | PromiseLike<T>;
-  loader: () => T | PromiseLike<T>;
+  result?: Promise<T>;
+  load: () => Promise<T>;
 }
 
 export function createContextStore<T, Context = unknown>(
@@ -14,7 +14,7 @@ export function createContextStore<T, Context = unknown>(
 ) {
   const { lazy = true } = options ?? {};
 
-  const get = async (ctx: Context): Promise<T> => {
+  const get = (ctx: Context): Promise<T> => {
     const item = (ctx as Record<symbol, ContextStoreValue<T> | undefined>)[key];
 
     if (item == null) {
@@ -25,7 +25,7 @@ export function createContextStore<T, Context = unknown>(
       return item.result as Promise<T>;
     }
 
-    item.result = item.loader();
+    item.result = item.load();
     item.isLoaded = true;
 
     return item.result;
@@ -39,12 +39,12 @@ export function createContextStore<T, Context = unknown>(
     }
 
     const item: ContextStoreValue<T> = {
-      loader,
+      load: async () => loader(),
       isLoaded: false,
     };
 
     if (lazy === false) {
-      item.result = loader();
+      item.result = item.load();
       item.isLoaded = true;
     }
 

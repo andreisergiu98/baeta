@@ -1,5 +1,17 @@
 # @baeta/cli
 
+## 0.0.43
+
+### Patch Changes
+
+- [#121](https://github.com/andreisergiu98/baeta/pull/121) [`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update Node to v20
+
+- Updated dependencies [[`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454), [`5ab9740`](https://github.com/andreisergiu98/baeta/commit/5ab97405bbdeac3d9baa59cfe9502cdbff101163)]:
+  - @baeta/compiler@0.0.32
+  - @baeta/generator@0.0.28
+  - @baeta/plugin-graphql@0.0.27
+  - @baeta/util-path@0.0.4
+
 ## 0.0.42
 
 ### Patch Changes

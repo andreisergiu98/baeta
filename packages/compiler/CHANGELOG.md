@@ -1,5 +1,14 @@
 # @baeta/compiler
 
+## 0.0.32
+
+### Patch Changes
+
+- [#121](https://github.com/andreisergiu98/baeta/pull/121) [`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update Node to v20
+
+- Updated dependencies [[`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454)]:
+  - @baeta/util-path@0.0.4
+
 ## 0.0.31
 
 ### Patch Changes

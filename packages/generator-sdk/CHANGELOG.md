@@ -1,5 +1,17 @@
 # @baeta/generator-sdk
 
+## 0.0.12
+
+### Patch Changes
+
+- [#121](https://github.com/andreisergiu98/baeta/pull/121) [`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update Node to v20
+
+- [#51](https://github.com/andreisergiu98/baeta/pull/51) [`d94ee47`](https://github.com/andreisergiu98/baeta/commit/d94ee47bc485c541ff011290c4ac6ef0c145c83f) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add native support for file monifications
+
+- Updated dependencies [[`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454)]:
+  - @baeta/plugin@0.0.23
+  - @baeta/util-path@0.0.4
+
 ## 0.0.11
 
 ### Patch Changes

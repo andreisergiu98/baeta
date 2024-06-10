@@ -1,5 +1,12 @@
 # @baeta/plugin-graphql
 
+## 0.0.28
+
+### Patch Changes
+
+- [`74a06d6`](https://github.com/andreisergiu98/baeta/commit/74a06d65345e1ae3bd454e9015ff70f7178b5ff2) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - feat: add validation errors when parsing schema
+  feat: improve union type generation
+
 ## 0.0.27
 
 ### Patch Changes

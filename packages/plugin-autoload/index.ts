@@ -11,6 +11,7 @@ import * as fs from 'node:fs/promises';
 
 interface ResolverOptions {
   suffix?: string | string[];
+  disableDefaultSuffixes?: boolean;
   match?: (filename: string) => boolean;
 }
 
@@ -25,6 +26,7 @@ export interface AutoloadPluginOptions {
 }
 
 const defaultSuffixes = [
+  'auth',
   'resolver',
   'resolvers',
   'query',
@@ -71,11 +73,13 @@ function getResolverSuffixes(options?: AutoloadPluginOptions) {
     return defaultSuffixes;
   }
 
+  const suffixes = options.resolvers.disableDefaultSuffixes === true ? ['baeta'] : defaultSuffixes;
+
   if (!Array.isArray(options.resolvers.suffix)) {
-    return [options.resolvers.suffix, 'baeta'];
+    return [options.resolvers.suffix, ...suffixes];
   }
 
-  return [...options.resolvers.suffix, 'baeta'];
+  return [...options.resolvers.suffix, ...suffixes];
 }
 
 function getResolverMatcher(options?: AutoloadPluginOptions) {

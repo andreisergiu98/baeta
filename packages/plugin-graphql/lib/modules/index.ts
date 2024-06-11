@@ -127,7 +127,9 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 
               for (const union of unions) {
                 const types = union.types?.map((t) => t.name.value) ?? [];
-                const mappedTypes = types.map((t) => `DefinedFieldsWithoutExtensions["${t}"]`);
+                const mappedTypes = types.map(
+                  (t) => `Pick<${t}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`,
+                );
 
                 if (unionTypesMap[union.name.value] == null) {
                   unionTypesMap[union.name.value] = [];

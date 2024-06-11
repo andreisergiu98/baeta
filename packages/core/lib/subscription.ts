@@ -2,7 +2,7 @@ import { GraphQLResolveInfo } from 'graphql';
 
 export type Subscribe<Payload, Root = {}, Context = {}, Args = {}> = (
   params: SubscribeParams<Root, Context, Args>,
-) => AsyncIterator<Payload>;
+) => AsyncIterator<Payload> | Promise<AsyncIterator<Payload>>;
 
 export type SubscribeParams<Root, Context, Args> = {
   root: Root;

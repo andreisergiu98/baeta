@@ -7,7 +7,7 @@ export type NativeSubscribe<Payload = any, Result = any, Root = any, Context = a
     args: Args,
     context: Context,
     info: GraphQLResolveInfo,
-  ) => AsyncIterator<Payload>;
+  ) => AsyncIterator<Payload> | Promise<AsyncIterator<Payload>>;
   resolve?: GraphQLFieldResolver<Payload, Context, Args, Result>;
 };
 

@@ -1,5 +1,11 @@
 # @baeta/plugin-autoload
 
+## 0.0.9
+
+### Patch Changes
+
+- [`921a8fa`](https://github.com/andreisergiu98/baeta/commit/921a8fa67f8028b35c7e016ee33e9f701bc52637) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add option to disable default suffixes
+
 ## 0.0.8
 
 ### Patch Changes

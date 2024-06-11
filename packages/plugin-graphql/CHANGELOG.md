@@ -1,5 +1,11 @@
 # @baeta/plugin-graphql
 
+## 0.0.31
+
+### Patch Changes
+
+- [#133](https://github.com/andreisergiu98/baeta/pull/133) [`325f623`](https://github.com/andreisergiu98/baeta/commit/325f623caa9aab2d6ae45258f214be1d7518396a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add support for type resolver for interfaces and unions
+
 ## 0.0.30
 
 ### Patch Changes

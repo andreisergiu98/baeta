@@ -1,5 +1,12 @@
 # @baeta/directives
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies [[`7313d92`](https://github.com/andreisergiu98/baeta/commit/7313d92b06e164663e4c6164a79f7c1ba4762d7e)]:
+  - @baeta/core@0.0.34
+
 ## 0.0.11
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 0.0.34
+
+### Patch Changes
+
+- [`7313d92`](https://github.com/andreisergiu98/baeta/commit/7313d92b06e164663e4c6164a79f7c1ba4762d7e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - allow promise asynciterator on subscribe
+
 ## 0.0.33
 
 ### Patch Changes

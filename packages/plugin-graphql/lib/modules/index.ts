@@ -85,8 +85,12 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
           plugin: (schema) => {
             const typePicks: string[] = [];
             const unionPicks: string[] = [];
+            const unionResults: string[] = [];
+            const interfacePicks: string[] = [];
+            const interfaceResults: string[] = [];
 
             const unionTypesMap: Record<string, string[] | undefined> = {};
+            const interfacesTypesMap: Record<string, string[] | undefined> = {};
 
             for (const moduleName of modules) {
               const sources = sourcesByModuleMap[moduleName];
@@ -110,6 +114,16 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
               for (const type of types) {
                 const name = type.name.value;
 
+                for (const interfaceNode of type.interfaces ?? []) {
+                  const interfaceName = interfaceNode.name.value;
+
+                  if (interfacesTypesMap[interfaceName] == null) {
+                    interfacesTypesMap[interfaceName] = [];
+                  }
+
+                  interfacesTypesMap[interfaceName]?.push(name);
+                }
+
                 if (name === 'Query' || name === 'Mutation' || name === 'Subscription') {
                   continue;
                 }
@@ -127,15 +141,12 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 
               for (const union of unions) {
                 const types = union.types?.map((t) => t.name.value) ?? [];
-                const mappedTypes = types.map(
-                  (t) => `Pick<${t}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`,
-                );
 
                 if (unionTypesMap[union.name.value] == null) {
                   unionTypesMap[union.name.value] = [];
                 }
 
-                unionTypesMap[union.name.value]?.push(...mappedTypes);
+                unionTypesMap[union.name.value]?.push(...types);
               }
             }
 
@@ -144,16 +155,56 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 
               if (types == null || types.length === 0) {
                 unionPicks.push(`  ${unionName}: never;`);
+                unionResults.push(`  ${unionName}: null;`);
                 continue;
               }
 
-              unionPicks.push(`  ${unionName}: ${types.join(' | ')};`);
+              const typePicks = types.map(
+                (t) => `Pick<${t}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`,
+              );
+
+              const resultPicks = types.map((t) => `"${t}"`);
+
+              unionPicks.push(`  ${unionName}: ${typePicks.join(' | ')};`);
+              unionResults.push(`  ${unionName}: ${resultPicks.join(' | ')} | null;`);
+            }
+
+            for (const interfaceName in interfacesTypesMap) {
+              const types = interfacesTypesMap[interfaceName];
+
+              if (types == null || types.length === 0) {
+                interfacePicks.push(`  ${interfaceName}: never;`);
+                interfaceResults.push(`  ${interfaceName}: null;`);
+                continue;
+              }
+
+              const typePicks = types.map(
+                (t) => `Pick<${t}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`,
+              );
+
+              const resultPicks = types.map((t) => `"${t}"`);
+
+              interfacePicks.push(`  ${interfaceName}: ${typePicks.join(' | ')};`);
+              interfaceResults.push(`  ${interfaceName}: ${resultPicks.join(' | ')} | null;`);
             }
 
             const fieldsDefinition = `export type DefinedFieldsWithoutExtensions = {\n${typePicks.join('\n')}\n};`;
             const unionsDefinition = `export type DefinedUnionsWithoutExtensions = {\n${unionPicks.join('\n')}\n};`;
+            const unionsResultsDefinition = `export type DefinedUnionsResults = {\n${unionResults.join('\n')}\n};`;
+            const interfacesDefinition = `export type DefinedInterfacesWithoutExtensions = {\n${interfacePicks.join('\n')}\n};`;
+            const interfacesResultsDefinition = `export type DefinedInterfacesResults = {\n${interfaceResults.join(
+              '\n',
+            )}\n};`;
 
-            return `\n${fieldsDefinition}\n\n${unionsDefinition}`;
+            const result = [
+              fieldsDefinition,
+              unionsDefinition,
+              unionsResultsDefinition,
+              interfacesDefinition,
+              interfacesResultsDefinition,
+            ].join('\n\n');
+
+            return `\n${result}\n`;
           },
         },
       },

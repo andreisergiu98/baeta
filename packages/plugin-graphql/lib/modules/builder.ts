@@ -287,6 +287,54 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     return `Scalar: {\n${content}\n},`;
   }
 
+  function printTypenameResolverBuilder(
+    name: string,
+    resultNamespace: string,
+    valueNamespace: string,
+  ) {
+    const resultType = `${importNamespace}.${resultNamespace}["${name}"]`;
+    const valueType = `${importNamespace}.${valueNamespace}["${name}"]`;
+    const contextType = getContextType();
+    const resolver = `$resolveType: module.createResolveType<${resultType}, ${valueType}, ${contextType}>("${name}"),`;
+    return `${name}: {\n${indent(2)(resolver)}\n},`;
+  }
+
+  function printInterfaceBuilder() {
+    const interfaces = defined.interfaces;
+
+    if (interfaces.length === 0) {
+      return '';
+    }
+
+    return interfaces
+      .map((interfaceName) =>
+        printTypenameResolverBuilder(
+          interfaceName,
+          'DefinedInterfacesResults',
+          'DefinedInterfacesWithoutExtensions',
+        ),
+      )
+      .join('\n');
+  }
+
+  function printUnionBuilder() {
+    const unions = defined.unions;
+
+    if (unions.length === 0) {
+      return '';
+    }
+
+    return unions
+      .map((unionName) =>
+        printTypenameResolverBuilder(
+          unionName,
+          'DefinedUnionsResults',
+          'DefinedUnionsWithoutExtensions',
+        ),
+      )
+      .join('\n');
+  }
+
   function printBaetaManager() {
     const objects = visited.objects
       .filter((type) => type !== 'Subscription')
@@ -301,6 +349,8 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       ...objects,
       printScalarBuilder(),
       printSubscriptionObjectBuilder(),
+      printInterfaceBuilder(),
+      printUnionBuilder(),
     ];
 
     const body = bodyFields.filter(Boolean).map(indent(6)).join('\n');
@@ -376,6 +426,10 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       return `${importNamespace}.DefinedUnionsWithoutExtensions["${normalizedTypeName}"]`;
     }
 
+    if (external.interfaces.includes(typeName)) {
+      return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;
+    }
+
     if (defined.enums.includes(typeName) && picks.enums[typeName]) {
       return `DefinedEnumValues['${typeName}']`;
     }
@@ -389,7 +443,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     }
 
     if (defined.interfaces.includes(typeName) && picks.interfaces[typeName]) {
-      return `Pick<${coreType}, DefinedFields['${typeName}']>`;
+      return `${importNamespace}.DefinedInterfacesWithoutExtensions["${normalizedTypeName}"]`;
     }
 
     if (defined.inputs.includes(typeName) && picks.inputs[typeName]) {
@@ -398,6 +452,12 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
 
     if (isScalarType(schema?.getType(typeName))) {
       return coreType;
+    }
+
+    const node = schema?.getType(typeName)?.astNode;
+
+    if (node?.kind === Kind.INTERFACE_TYPE_DEFINITION) {
+      return `${importNamespace}.DefinedInterfacesWithoutExtensions["${normalizedTypeName}"]`;
     }
 
     return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;

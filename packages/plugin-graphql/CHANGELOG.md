@@ -1,5 +1,11 @@
 # @baeta/plugin-graphql
 
+## 0.0.30
+
+### Patch Changes
+
+- [`0896994`](https://github.com/andreisergiu98/baeta/commit/089699451b41dbbe92d96bb4b9987e13893e7501) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add typename to union
+
 ## 0.0.29
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @baeta/cli
 
+## 0.0.46
+
+### Patch Changes
+
+- Updated dependencies [[`0896994`](https://github.com/andreisergiu98/baeta/commit/089699451b41dbbe92d96bb4b9987e13893e7501)]:
+  - @baeta/plugin-graphql@0.0.30
+
 ## 0.0.45
 
 ### Patch Changes

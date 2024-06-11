@@ -1,5 +1,5 @@
 import { DocumentNode, GraphQLSchema } from 'graphql';
-import { Middleware, Resolver, ScalarResolver } from '../lib';
+import { Middleware, Resolver, ScalarResolver, TypeResolver } from '../lib';
 import { Subscription } from '../lib/subscription';
 import { extendFunction, nameFunction } from '../utils/functions';
 import {
@@ -12,6 +12,7 @@ import {
 import { GenericMiddleware, createMiddlewareAdapter } from './middleware';
 import { createResolverAdapter } from './resolver';
 import { ResolverMapper } from './resolver-mapper';
+import { createTypeResolverAdapter } from './resolver-type';
 import { createSubscriptionAdapter } from './subscription';
 import { SchemaTransformer, transformSchema } from './transformer';
 
@@ -97,6 +98,14 @@ export class ModuleBuilder {
   createScalarBuilder(scalar: string) {
     const builder = (resolver: ScalarResolver) => {
       this.mapper.setScalar(scalar, resolver);
+    };
+    return builder;
+  }
+
+  createResolveType<Result, Value, Context>(type: string) {
+    const builder = (resolver: TypeResolver<Result, Value, Context>) => {
+      nameFunction(resolver, `${type}.$resolveType`);
+      this.mapper.setTypenameResolver(type, createTypeResolverAdapter(resolver));
     };
     return builder;
   }

@@ -3,9 +3,12 @@ import { defaultFieldResolver, GraphQLFieldResolver } from 'graphql';
 import { ScalarResolver } from '../lib';
 import { composeResolvers } from './compose';
 import { NativeMiddleware } from './middleware';
+import { NativeTypeResolver } from './resolver-type';
 import { NativeSubscribe } from './subscription';
 
-export type FieldResolvers = Record<string, GraphQLFieldResolver<unknown, unknown>>;
+export type FieldResolvers = Record<string, GraphQLFieldResolver<unknown, unknown>> & {
+  __resolveType?: NativeTypeResolver;
+};
 
 export type SubscriptionsResolvers = {
   Subscription?: Record<string, NativeSubscribe | undefined>;
@@ -47,6 +50,12 @@ export class ResolverMapper {
   setSubscription(field: string, resolver: NativeSubscribe) {
     this.resolvers.Subscription ??= {};
     this.resolvers.Subscription[field] = resolver;
+  }
+
+  setTypenameResolver(type: string, resolver: NativeTypeResolver) {
+    this.resolvers[type] ??= {};
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    this.resolvers[type]!.__resolveType = resolver;
   }
 
   addMiddleware(type: string, field: string, middleware: NativeMiddleware, unshift = false) {

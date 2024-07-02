@@ -1,5 +1,11 @@
 # @baeta/plugin-graphql
 
+## 0.0.32
+
+### Patch Changes
+
+- [`5d22b52`](https://github.com/andreisergiu98/baeta/commit/5d22b520e0181ee44111f6438036380050d140c3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix type for unions and interfaces when the name is not pascal case
+
 ## 0.0.31
 
 ### Patch Changes

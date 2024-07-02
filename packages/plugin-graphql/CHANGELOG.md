@@ -1,5 +1,11 @@
 # @baeta/plugin-graphql
 
+## 0.0.33
+
+### Patch Changes
+
+- [`966e1b7`](https://github.com/andreisergiu98/baeta/commit/966e1b7697090b1de5a3ed1638aee474b48088c3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix union withouth extension pick
+
 ## 0.0.32
 
 ### Patch Changes

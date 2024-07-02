@@ -419,15 +419,15 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
         return `${importNamespace}.Scalars['${typeName}']`;
       }
 
-      return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;
+      return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${typeName}"]>`;
     }
 
     if (external.unions.includes(typeName)) {
-      return `${importNamespace}.DefinedUnionsWithoutExtensions["${normalizedTypeName}"]`;
+      return `${importNamespace}.DefinedUnionsWithoutExtensions["${typeName}"]`;
     }
 
     if (external.interfaces.includes(typeName)) {
-      return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;
+      return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${typeName}"]>`;
     }
 
     if (defined.enums.includes(typeName) && picks.enums[typeName]) {
@@ -435,7 +435,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     }
 
     if (defined.unions.includes(typeName) && picks.unions[typeName]) {
-      return `${importNamespace}.DefinedUnionsWithoutExtensions["${normalizedTypeName}"]`;
+      return `${importNamespace}.DefinedUnionsWithoutExtensions["${typeName}"]`;
     }
 
     if (defined.objects.includes(typeName) && picks.objects[typeName]) {
@@ -443,7 +443,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     }
 
     if (defined.interfaces.includes(typeName) && picks.interfaces[typeName]) {
-      return `${importNamespace}.DefinedInterfacesWithoutExtensions["${normalizedTypeName}"]`;
+      return `${importNamespace}.DefinedInterfacesWithoutExtensions["${typeName}"]`;
     }
 
     if (defined.inputs.includes(typeName) && picks.inputs[typeName]) {
@@ -457,10 +457,10 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
     const node = schema?.getType(typeName)?.astNode;
 
     if (node?.kind === Kind.INTERFACE_TYPE_DEFINITION) {
-      return `${importNamespace}.DefinedInterfacesWithoutExtensions["${normalizedTypeName}"]`;
+      return `${importNamespace}.DefinedInterfacesWithoutExtensions["${typeName}"]`;
     }
 
-    return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${normalizedTypeName}"]>`;
+    return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${typeName}"]>`;
   }
 
   function printExportType(typeName: string): string {

@@ -159,9 +159,13 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
                 continue;
               }
 
-              const typePicks = types.map(
-                (t) => `Pick<${t}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`,
-              );
+              const typePicks = types.map((t) => {
+                const normalizedTypeName = baseVisitor.convertName(t, {
+                  useTypesSuffix: true,
+                  useTypesPrefix: true,
+                });
+                return `Pick<${normalizedTypeName}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`;
+              });
 
               const resultPicks = types.map((t) => `"${t}"`);
 
@@ -178,9 +182,13 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
                 continue;
               }
 
-              const typePicks = types.map(
-                (t) => `Pick<${t}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`,
-              );
+              const typePicks = types.map((t) => {
+                const normalizedTypeName = baseVisitor.convertName(t, {
+                  useTypesSuffix: true,
+                  useTypesPrefix: true,
+                });
+                return `Pick<${normalizedTypeName}, DefinedFieldsWithoutExtensions["${t}"] | "__typename">`;
+              });
 
               const resultPicks = types.map((t) => `"${t}"`);
 

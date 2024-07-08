@@ -1,4 +1,4 @@
-import { Text } from '@baeta/ink';
+import { Text } from 'ink';
 import React, { useMemo } from 'react';
 
 export interface TimeProps {

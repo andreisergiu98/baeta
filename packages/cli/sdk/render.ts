@@ -1,4 +1,4 @@
-import { render } from '@baeta/ink';
+import { render } from 'ink';
 import { createElement, FunctionComponent } from 'react';
 import { ConfigProps, ConfigProvider } from './config-provider';
 

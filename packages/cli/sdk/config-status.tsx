@@ -1,4 +1,4 @@
-import { Box, Text } from '@baeta/ink';
+import { Box, Text } from 'ink';
 import React, { useEffect, useRef, useState } from 'react';
 import { useConfig } from './config-provider';
 import { Spinner } from './spinner';

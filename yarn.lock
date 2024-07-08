@@ -4076,6 +4076,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20240620.0"
     "@types/node": "npm:^20.14.10"
+    graphql: "npm:^16.9.0"
     typescript: "npm:^5.5.3"
   peerDependencies:
     "@baeta/cloudflare-subscriptions": "workspace:^"

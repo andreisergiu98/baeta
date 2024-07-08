@@ -19,7 +19,7 @@ jobs:
         uses: andreisergiu98/baeta/ci/setup@main
 
       - name: Run type check
-        run: yarn type:check
+        run: yarn build && yarn type:check
 
   tests:
     name: Tests

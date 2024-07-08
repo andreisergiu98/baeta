@@ -58,7 +58,7 @@
     "ava": "^5.3.1",
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.3"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",

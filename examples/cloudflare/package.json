@@ -43,7 +43,7 @@
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20240620.0",
     "miniflare": "^3.20240701.0",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.3",
     "wrangler": "^3.63.1"
   }
 }

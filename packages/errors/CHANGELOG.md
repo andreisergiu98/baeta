@@ -1,5 +1,16 @@
 # @baeta/errors
 
+## 0.0.7
+
+### Patch Changes
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update typescript
+
+- Updated dependencies [[`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4)]:
+  - @baeta/util-env@0.0.6
+
 ## 0.0.6
 
 ### Patch Changes

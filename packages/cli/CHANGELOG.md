@@ -1,5 +1,21 @@
 # @baeta/cli
 
+## 0.0.50
+
+### Patch Changes
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update typescript
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update ink and switch to official release
+
+- Updated dependencies [[`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4), [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4), [`c403694`](https://github.com/andreisergiu98/baeta/commit/c403694c89aa51259866dddc9b93f3cf4566e341)]:
+  - @baeta/compiler@0.0.34
+  - @baeta/generator@0.0.30
+  - @baeta/plugin-graphql@0.0.34
+  - @baeta/util-path@0.0.6
+
 ## 0.0.49
 
 ### Patch Changes

@@ -1,5 +1,20 @@
 # @baeta/extension-auth
 
+## 0.1.6
+
+### Patch Changes
+
+- [`65a51d2`](https://github.com/andreisergiu98/baeta/commit/65a51d28fa1f5fde67c749b58911bb0522a756c8) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix auth for subscribe
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update typescript
+
+- Updated dependencies [[`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4), [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4)]:
+  - @baeta/core@0.0.36
+  - @baeta/errors@0.0.7
+  - @baeta/util-log@0.0.6
+
 ## 0.1.5
 
 ### Patch Changes

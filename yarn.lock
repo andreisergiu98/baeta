@@ -3795,7 +3795,6 @@ __metadata:
     "@types/react": "npm:^18.3.3"
     "@types/yargs": "npm:^17.0.32"
     ansi-styles: "npm:^6.2.1"
-    cli-spinners: "npm:^2.9.2"
     execa: "npm:^9.3.0"
     fast-glob: "npm:^3.3.2"
     graphql: "npm:^16.9.0"
@@ -10090,13 +10089,6 @@ __metadata:
   dependencies:
     restore-cursor: "npm:^4.0.0"
   checksum: 10/ab3f3ea2076e2176a1da29f9d64f72ec3efad51c0960898b56c8a17671365c26e67b735920530eaf7328d61f8bd41c27f46b9cf6e4e10fe2fa44b5e8c0e392cc
-  languageName: node
-  linkType: hard
-
-"cli-spinners@npm:^2.9.2":
-  version: 2.9.2
-  resolution: "cli-spinners@npm:2.9.2"
-  checksum: 10/a0a863f442df35ed7294424f5491fa1756bd8d2e4ff0c8736531d886cec0ece4d85e8663b77a5afaf1d296e3cbbebff92e2e99f52bbea89b667cbe789b994794
   languageName: node
   linkType: hard
 

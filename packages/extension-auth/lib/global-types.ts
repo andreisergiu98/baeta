@@ -1,4 +1,9 @@
-import { AuthMethodOptions, GetPostScopeRules, GetScopeRules } from './auth-extension';
+import {
+  AuthMethodOptions,
+  AuthMethodSubscribeOptions,
+  GetPostScopeRules,
+  GetScopeRules,
+} from './auth-extension';
 import { ScopeRules } from './scope-rules';
 
 declare global {
@@ -37,7 +42,7 @@ declare global {
     export interface SubscriptionSubscribeExtensions<Root, Context, Args> {
       $auth: (
         scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-        options?: AuthMethodOptions<unknown, Root, Context, Args>,
+        options?: AuthMethodSubscribeOptions<Root, Context, Args>,
       ) => void;
     }
 

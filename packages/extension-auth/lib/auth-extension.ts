@@ -29,6 +29,11 @@ export interface AuthMethodOptions<Result, Root, Context, Args> {
   onError?: ScopeErrorResolver;
 }
 
+export interface AuthMethodSubscribeOptions<Root, Context, Args> {
+  skipDefaults?: boolean;
+  onError?: ScopeErrorResolver;
+}
+
 export type GetScopeRules<Root, Context, Args> = (
   params: MiddlewareParams<Root, Context, Args>,
 ) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
@@ -87,7 +92,7 @@ export class AuthExtension<T> extends Extension {
     field: string,
   ): BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args> => {
     return {
-      $auth: this.createPreAuthMethod('Subscription', `${field}.subscribe`),
+      $auth: this.createPreAuthMethod('Subscription', `${field}.subscribe`, true),
     };
   };
 
@@ -102,7 +107,12 @@ export class AuthExtension<T> extends Extension {
 
   build = (mapper: ResolverMapper) => {
     for (const type of mapper.getTypes()) {
-      const fields = mapper.getTypeFields(type);
+      let fields = mapper.getTypeFields(type);
+
+      if (type === 'Subscription') {
+        fields = fields.flatMap((field) => [`${field}.subscribe`, `${field}.resolve`]);
+      }
+
       const fieldsWithScopes = Object.keys(this.authMap[type] ?? {});
       let fieldsWithoutScopes = fields.filter((field) => !fieldsWithScopes.includes(field));
 
@@ -142,19 +152,22 @@ export class AuthExtension<T> extends Extension {
   };
 
   private createDefaultMiddlewares() {
-    const createDefaultMiddleware = (rules?: ScopeRules) => {
+    const createDefaultMiddleware = (rules?: ScopeRules, isSubscribe = false) => {
       if (rules == null) {
         return;
       }
-      return this.createPreMiddleware(() => rules);
+      return this.createPreMiddleware(() => rules, undefined, undefined, isSubscribe);
     };
 
     return {
       Query: createDefaultMiddleware(this.options.defaultScopes?.Query),
       Mutation: createDefaultMiddleware(this.options.defaultScopes?.Mutation),
       Subscription: {
+        subscribe: createDefaultMiddleware(
+          this.options.defaultScopes?.Subscription?.subscribe,
+          true,
+        ),
         resolve: createDefaultMiddleware(this.options.defaultScopes?.Subscription?.resolve),
-        subscribe: createDefaultMiddleware(this.options.defaultScopes?.Subscription?.subscribe),
       },
     };
   }
@@ -180,25 +193,56 @@ export class AuthExtension<T> extends Extension {
     }
 
     return (mapper: ResolverMapper, field: string) => {
-      if (subscribeDefaultMiddleware) {
-        mapper.addMiddleware(type, `${field}.subscribe`, subscribeDefaultMiddleware, true);
+      if (subscribeDefaultMiddleware && field.endsWith('.subscribe')) {
+        mapper.addMiddleware(type, field, subscribeDefaultMiddleware, true);
       }
 
-      if (resolveDefaultMiddleware) {
-        mapper.addMiddleware(type, `${field}.resolve`, resolveDefaultMiddleware, true);
+      if (resolveDefaultMiddleware && field.endsWith('.resolve')) {
+        mapper.addMiddleware(type, field, resolveDefaultMiddleware, true);
       }
     };
   }
 
-  private createPreAuthMethod<Result, Root, Context, Args>(type: string, field: string) {
+  private selectDefaultScopes(skipDefaults: boolean | undefined, type: string, field: string) {
+    if (!isOperationType(type)) {
+      return;
+    }
+
+    if (skipDefaults === true) {
+      return;
+    }
+
+    if (type === 'Query') {
+      return this.options.defaultScopes?.Query;
+    }
+
+    if (type === 'Mutation') {
+      return this.options.defaultScopes?.Mutation;
+    }
+
+    if (type === 'Subscription') {
+      if (field.endsWith('.subscribe')) {
+        return this.options.defaultScopes?.Subscription?.subscribe;
+      }
+
+      if (field.endsWith('.resolve')) {
+        return this.options.defaultScopes?.Subscription?.resolve;
+      }
+    }
+  }
+
+  private createPreAuthMethod<Result, Root, Context, Args>(
+    type: string,
+    field: string,
+    isSubscribe = false,
+  ) {
     return (
       scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
       options?: AuthMethodOptions<Result, Root, Context, Args>,
     ) => {
+      const defaultScopes = this.selectDefaultScopes(options?.skipDefaults, type, field);
       const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
-      const shouldUseDefaultScopes = options?.skipDefaults !== true && isOperationType(type);
-      const defaultScopes = shouldUseDefaultScopes ? this.options.defaultScopes?.[type] : undefined;
-      const middleware = this.createPreMiddleware(getScopes, options, defaultScopes);
+      const middleware = this.createPreMiddleware(getScopes, options, defaultScopes, isSubscribe);
       this.registerMiddleware(type, field, middleware);
     };
   }
@@ -208,8 +252,7 @@ export class AuthExtension<T> extends Extension {
       getScopes: GetPostScopeRules<Result, Root, Context, Args>,
       options?: AuthMethodOptions<Result, Root, Context, Args>,
     ) => {
-      const shouldUseDefaultScopes = options?.skipDefaults !== true && isOperationType(type);
-      const defaultScopes = shouldUseDefaultScopes ? this.options.defaultScopes?.[type] : undefined;
+      const defaultScopes = this.selectDefaultScopes(options?.skipDefaults, type, field);
       const middleware = this.createPostMiddleware(getScopes, options, defaultScopes);
       this.registerMiddleware(type, field, middleware);
     };
@@ -238,17 +281,19 @@ export class AuthExtension<T> extends Extension {
     getScopes: GetScopeRules<any, any, any>,
     options?: AuthMethodOptions<any, any, any, any>,
     defaultScopes?: ScopeRules,
+    isSubscribe = false,
   ): NativeMiddleware {
     return (next) => async (root, args, ctx, info) => {
       loadAuthStore(ctx as T, this.loadScopes);
 
       const requiredScopes = await getScopes({ root, args, ctx, info });
 
-      if (requiredScopes === true) {
+      await this.verifyAllScopes(ctx, info, options, defaultScopes, requiredScopes);
+
+      if (isSubscribe) {
         return next(root, args, ctx, info);
       }
 
-      await this.verifyAllScopes(ctx, info, options, defaultScopes, requiredScopes);
       const result = await next(root, args, ctx, info);
 
       if (options?.grants) {
@@ -269,10 +314,6 @@ export class AuthExtension<T> extends Extension {
 
       const result = await next(root, args, ctx, info);
       const requiredScopes = await getScopes({ root, args, ctx, info }, result);
-
-      if (requiredScopes === true) {
-        return result;
-      }
 
       await this.verifyAllScopes(ctx, info, options, defaultScopes, requiredScopes);
 
@@ -296,7 +337,7 @@ export class AuthExtension<T> extends Extension {
     info: GraphQLResolveInfo,
     options: AuthMethodOptions<any, any, any, any> | undefined,
     defaultScopes: ScopeRules | undefined,
-    requiredScopes: ScopeRules | undefined,
+    requiredScopes: ScopeRules | true | undefined,
   ) {
     const fullPath = createResolverPath(info.path);
     const parentPath = createResolverPath(info.path.prev);
@@ -307,7 +348,14 @@ export class AuthExtension<T> extends Extension {
     if (defaultScopes) {
       promises.push(verifyScopes(ctx, defaultScopes, this.defaultRule, parentPath));
     }
-    promises.push(verifyScopes(ctx, requiredScopes, this.defaultRule, parentPath));
+
+    if (requiredScopes !== true) {
+      promises.push(verifyScopes(ctx, requiredScopes, this.defaultRule, parentPath));
+    }
+
+    if (promises.length === 0) {
+      return;
+    }
 
     return Promise.all(promises).catch((err) => resolveError(err, errorResolver, fullPath));
   }

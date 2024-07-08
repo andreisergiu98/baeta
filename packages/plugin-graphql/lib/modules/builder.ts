@@ -9,7 +9,9 @@ import {
   InputObjectTypeExtensionNode,
   InterfaceTypeDefinitionNode,
   InterfaceTypeExtensionNode,
+  isInterfaceType,
   isScalarType,
+  isUnionType,
   Kind,
   ObjectTypeDefinitionNode,
   ObjectTypeExtensionNode,
@@ -454,10 +456,12 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
       return coreType;
     }
 
-    const node = schema?.getType(typeName)?.astNode;
-
-    if (node?.kind === Kind.INTERFACE_TYPE_DEFINITION) {
+    if (isInterfaceType(schema?.getType(typeName))) {
       return `${importNamespace}.DefinedInterfacesWithoutExtensions["${typeName}"]`;
+    }
+
+    if (isUnionType(schema?.getType(typeName))) {
+      return `${importNamespace}.DefinedUnionsWithoutExtensions["${typeName}"]`;
     }
 
     return `Pick<${coreType}, ${importNamespace}.DefinedFieldsWithoutExtensions["${typeName}"]>`;

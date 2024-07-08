@@ -106,3 +106,15 @@ export type DefinedFieldsWithoutExtensions = {
 export type DefinedUnionsWithoutExtensions = {
 
 };
+
+export type DefinedUnionsResults = {
+
+};
+
+export type DefinedInterfacesWithoutExtensions = {
+
+};
+
+export type DefinedInterfacesResults = {
+
+};

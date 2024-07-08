@@ -63,9 +63,9 @@
     "@docusaurus/types": "^3.4.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "esbuild": "^0.21.5",
-    "esbuild-loader": "^4.1.0",
-    "typescript": "^5.4.5",
-    "webpack": "^5.91.0"
+    "esbuild": "^0.23.0",
+    "esbuild-loader": "^4.2.0",
+    "typescript": "^5.5.3",
+    "webpack": "^5.92.1"
   }
 }

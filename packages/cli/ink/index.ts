@@ -1,1 +1,1 @@
-export * from '@baeta/ink';
+export * from 'ink';

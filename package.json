@@ -48,25 +48,25 @@
   "devDependencies": {
     "@andreisergiu98/changesets-cli": "^2.25.1",
     "@baeta/builder": "workspace:^",
-    "@biomejs/biome": "^1.8.1",
+    "@biomejs/biome": "^1.8.3",
     "@changesets/changelog-github": "^0.5.0",
     "@yarnpkg/sdks": "^3.1.3",
     "@yarnpkg/types": "^4.0.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.5",
-    "prettier": "^3.3.1",
-    "prettier-plugin-organize-imports": "^3.2.4",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+    "prettier-plugin-organize-imports": "^4.0.0",
     "prettier-plugin-packagejson": "^2.5.0",
-    "turbo": "^2.0.3",
-    "typescript": "^5.4.5"
+    "turbo": "^2.0.6",
+    "typescript": "^5.5.3"
   },
   "dependenciesMeta": {
-    "prettier-plugin-organize-imports@3.2.4": {
+    "prettier-plugin-organize-imports@4.0.0": {
       "unplugged": true
     },
     "prettier-plugin-packagejson@2.5.0": {
       "unplugged": true
     }
   },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.3.1"
 }

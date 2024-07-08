@@ -55,10 +55,10 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20240605.0",
-    "@types/uuid": "^9.0.8",
-    "graphql": "^16.8.1",
-    "typescript": "^5.4.5"
+    "@cloudflare/workers-types": "^4.20240620.0",
+    "@types/uuid": "^10.0.0",
+    "graphql": "^16.9.0",
+    "typescript": "^5.5.3"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4",

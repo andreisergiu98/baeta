@@ -50,9 +50,10 @@
     "@baeta/builder": "workspace:^",
     "@baeta/cloudflare-subscriptions": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20240605.0",
-    "@types/node": "^20.14.2",
-    "typescript": "^5.4.5"
+    "@cloudflare/workers-types": "^4.20240620.0",
+    "@types/node": "^20.14.10",
+    "graphql": "^16.9.0",
+    "typescript": "^5.5.3"
   },
   "peerDependencies": {
     "@baeta/cloudflare-subscriptions": "workspace:^",

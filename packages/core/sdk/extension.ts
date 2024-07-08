@@ -3,22 +3,16 @@ import { SchemaTransformer } from './transformer';
 
 declare global {
   export namespace BaetaExtensions {
-    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface ResolverExtensions<Result, Root, Context, Args> {}
 
-    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface TypeExtensions<Root, Context> {}
 
-    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface SubscriptionExtensions<Root, Context, Args> {}
 
-    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface SubscriptionSubscribeExtensions<Root, Context, Args> {}
 
-    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface SubscriptionResolveExtensions<Result, Root, Context, Args> {}
 
-    // biome-ignore lint/suspicious/noEmptyInterface: is template
     export interface ModuleExtensions {}
   }
 }

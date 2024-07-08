@@ -52,7 +52,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.8.1",
+    "graphql": "^16.9.0",
     "typescript": "^5.4.5"
   },
   "peerDependencies": {

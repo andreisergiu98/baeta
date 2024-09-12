@@ -48,7 +48,7 @@
     "@baeta/util-path": "workspace:^",
     "@parcel/watcher": "^2.4.1",
     "change-case-all": "2.1.0",
-    "micromatch": "^4.0.7"
+    "micromatch": "^4.0.8"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

@@ -43,6 +43,13 @@ function getResolverAndArgs({ execContext }: { execContext: ExecutionContext }) 
   );
 
   const firstRootField = rootFields.entries().next().value;
+
+  if (!firstRootField) {
+    throw new GraphQLError('No root field', {
+      nodes: operation,
+    });
+  }
+
   const [responseName, fieldNodes] = firstRootField;
   const fieldDef = getFieldDef(schema, rootType, fieldNodes[0]);
 

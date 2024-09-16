@@ -27,7 +27,7 @@ function printExport(moduleDefinitionName: string, moduleName: string) {
 
   return `import { ${method} } from "./${importName}";
 
-import "./directives.baeta.ts";
+import "./directives.baeta";
 
 export const ${variable} = ${method}();
 `;

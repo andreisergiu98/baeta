@@ -42,7 +42,7 @@
     "formatter": {
       "indentWidth": 2,
       "indentStyle": "space",
-      "lineWidth": 10
+      "lineWidth": 1
     }
   },
   "organizeImports": {

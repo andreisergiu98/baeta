@@ -1,15 +1,7 @@
 {
   "name": "@baeta/env",
   "version": "0.0.5",
-  "keywords": [
-    "baeta",
-    "graphql",
-    "schema",
-    "types",
-    "typescript",
-    "framework",
-    "builder"
-  ],
+  "keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
@@ -33,10 +25,7 @@
     }
   },
   "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "package.json"
-  ],
+  "files": ["dist", "package.json"],
   "scripts": {
     "build": "tsup",
     "prepack": "prep",

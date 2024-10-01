@@ -1,15 +1,7 @@
 {
   "name": "@baeta/website",
   "private": true,
-  "keywords": [
-    "baeta",
-    "graphql",
-    "schema",
-    "types",
-    "typescript",
-    "framework",
-    "builder"
-  ],
+  "keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
@@ -37,16 +29,8 @@
     "write-translations": "docusaurus write-translations"
   },
   "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.5%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "dependencies": {
     "@docusaurus/core": "^3.5.2",

@@ -1,15 +1,7 @@
 {
   "name": "@baeta/tsconfig",
   "private": true,
-  "keywords": [
-    "baeta",
-    "graphql",
-    "schema",
-    "types",
-    "typescript",
-    "framework",
-    "builder"
-  ],
+  "keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"

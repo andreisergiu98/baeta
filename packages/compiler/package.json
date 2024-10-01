@@ -1,56 +1,67 @@
 {
-	"name": "@baeta/compiler",
-	"version": "0.0.34",
-	"keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
-	"homepage": "https://github.com/andreisergiu98/baeta#readme",
-	"bugs": {
-		"url": "https://github.com/andreisergiu98/baeta/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/andreisergiu98/baeta.git",
-		"directory": "packages/compiler"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Andrei Pampu",
-		"url": "https://github.com/andreisergiu98"
-	},
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs",
-			"types": "./dist/index.d.ts"
-		},
-		"./esbuild": {
-			"import": "./dist/esbuild/index.js",
-			"require": "./dist/esbuild/index.cjs",
-			"types": "./dist/esbuild/index.d.ts"
-		}
-	},
-	"types": "dist/index.d.ts",
-	"files": ["dist", "package.json"],
-	"scripts": {
-		"build": "tsup",
-		"prepack": "prep",
-		"postpack": "prep --clean",
-		"types": "tsc --noEmit"
-	},
-	"dependencies": {
-		"@baeta/util-path": "workspace:^",
-		"esbuild": "^0.24.0"
-	},
-	"devDependencies": {
-		"@baeta/builder": "workspace:^",
-		"@baeta/tsconfig": "workspace:^",
-		"@types/node": "^20.16.10",
-		"typescript": "^5.6.2"
-	},
-	"engines": {
-		"node": ">=20.0.0"
-	},
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@baeta/compiler",
+  "version": "0.0.34",
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/compiler"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./esbuild": {
+      "import": "./dist/esbuild/index.js",
+      "require": "./dist/esbuild/index.cjs",
+      "types": "./dist/esbuild/index.d.ts"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/util-path": "workspace:^",
+    "esbuild": "^0.24.0"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/node": "^20.16.10",
+    "typescript": "^5.6.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

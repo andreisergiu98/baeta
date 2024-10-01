@@ -1,9 +1,15 @@
 {
-	"extends": "@baeta/tsconfig/tsconfig.json",
-	"compilerOptions": {
-		"rootDir": ".",
-		"outDir": "dist",
-		"types": ["@cloudflare/workers-types"]
-	},
-	"exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+  "extends": "@baeta/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "types": [
+      "@cloudflare/workers-types"
+    ]
+  },
+  "exclude": [
+    "dist",
+    "tsup.config.ts",
+    "tsup.watch.ts"
+  ]
 }

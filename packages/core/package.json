@@ -1,63 +1,74 @@
 {
-	"name": "@baeta/core",
-	"version": "0.0.36",
-	"keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
-	"homepage": "https://github.com/andreisergiu98/baeta#readme",
-	"bugs": {
-		"url": "https://github.com/andreisergiu98/baeta/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/andreisergiu98/baeta.git",
-		"directory": "packages/core"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Andrei Pampu",
-		"url": "https://github.com/andreisergiu98"
-	},
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs",
-			"types": "./dist/index.d.ts"
-		},
-		"./sdk": {
-			"import": "./dist/sdk/index.js",
-			"require": "./dist/sdk/index.cjs",
-			"types": "./dist/sdk/index.d.ts"
-		}
-	},
-	"types": "dist/index.d.ts",
-	"files": ["dist", "package.json"],
-	"scripts": {
-		"build": "tsup",
-		"prepack": "prep",
-		"postpack": "prep --clean",
-		"test": "ava",
-		"types": "tsc --noEmit"
-	},
-	"dependencies": {
-		"@baeta/errors": "workspace:^",
-		"@graphql-tools/schema": "^10.0.6",
-		"@graphql-tools/utils": "^10.5.4"
-	},
-	"devDependencies": {
-		"@baeta/builder": "workspace:^",
-		"@baeta/tsconfig": "workspace:^",
-		"ava": "^5.3.1",
-		"graphql": "^16.9.0",
-		"graphql-tag": "^2.12.6",
-		"typescript": "^5.6.2"
-	},
-	"peerDependencies": {
-		"graphql": "^16.6.0"
-	},
-	"engines": {
-		"node": ">=20.0.0"
-	},
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@baeta/core",
+  "version": "0.0.36",
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/core"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./sdk": {
+      "import": "./dist/sdk/index.js",
+      "require": "./dist/sdk/index.cjs",
+      "types": "./dist/sdk/index.d.ts"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "test": "ava",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/errors": "workspace:^",
+    "@graphql-tools/schema": "^10.0.6",
+    "@graphql-tools/utils": "^10.5.4"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "ava": "^5.3.1",
+    "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
+    "typescript": "^5.6.2"
+  },
+  "peerDependencies": {
+    "graphql": "^16.6.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

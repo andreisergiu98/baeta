@@ -1,55 +1,71 @@
 {
-	"name": "@baeta/website",
-	"private": true,
-	"keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
-	"homepage": "https://github.com/andreisergiu98/baeta#readme",
-	"bugs": {
-		"url": "https://github.com/andreisergiu98/baeta/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/andreisergiu98/baeta.git",
-		"directory": "website"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Andrei Pampu",
-		"url": "https://github.com/andreisergiu98"
-	},
-	"scripts": {
-		"build": "docusaurus build",
-		"clear": "docusaurus clear",
-		"deploy": "docusaurus deploy",
-		"docusaurus": "docusaurus",
-		"serve": "docusaurus serve",
-		"start": "docusaurus start",
-		"swizzle": "docusaurus swizzle",
-		"types": "tsc",
-		"write-heading-ids": "docusaurus write-heading-ids",
-		"write-translations": "docusaurus write-translations"
-	},
-	"browserslist": {
-		"production": [">0.5%", "not dead", "not op_mini all"],
-		"development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
-	},
-	"dependencies": {
-		"@docusaurus/core": "^3.5.2",
-		"@docusaurus/preset-classic": "^3.5.2",
-		"@docusaurus/theme-classic": "^3.5.2",
-		"@mdx-js/react": "^3.0.1",
-		"clsx": "^2.1.1",
-		"prism-react-renderer": "^2.4.0",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1"
-	},
-	"devDependencies": {
-		"@docusaurus/module-type-aliases": "3.5.2",
-		"@docusaurus/types": "^3.5.2",
-		"@types/react": "^18.3.10",
-		"@types/react-dom": "^18.3.0",
-		"esbuild": "^0.24.0",
-		"esbuild-loader": "^4.2.2",
-		"typescript": "^5.6.2",
-		"webpack": "^5.95.0"
-	}
+  "name": "@baeta/website",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "website"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "scripts": {
+    "build": "docusaurus build",
+    "clear": "docusaurus clear",
+    "deploy": "docusaurus deploy",
+    "docusaurus": "docusaurus",
+    "serve": "docusaurus serve",
+    "start": "docusaurus start",
+    "swizzle": "docusaurus swizzle",
+    "types": "tsc",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "write-translations": "docusaurus write-translations"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.5.2",
+    "@docusaurus/preset-classic": "^3.5.2",
+    "@docusaurus/theme-classic": "^3.5.2",
+    "@mdx-js/react": "^3.0.1",
+    "clsx": "^2.1.1",
+    "prism-react-renderer": "^2.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.5.2",
+    "@docusaurus/types": "^3.5.2",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "esbuild": "^0.24.0",
+    "esbuild-loader": "^4.2.2",
+    "typescript": "^5.6.2",
+    "webpack": "^5.95.0"
+  }
 }

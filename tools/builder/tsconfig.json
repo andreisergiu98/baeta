@@ -1,8 +1,10 @@
 {
-	"extends": "@baeta/tsconfig/tsconfig.json",
-	"compilerOptions": {
-		"rootDir": ".",
-		"outDir": "dist"
-	},
-	"exclude": ["dist"]
+  "extends": "@baeta/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "dist"
+  ]
 }

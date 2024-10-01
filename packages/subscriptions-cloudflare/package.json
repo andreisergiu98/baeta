@@ -1,62 +1,73 @@
 {
-	"name": "@baeta/cloudflare-subscriptions",
-	"version": "0.0.3",
-	"keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
-	"homepage": "https://github.com/andreisergiu98/baeta#readme",
-	"bugs": {
-		"url": "https://github.com/andreisergiu98/baeta/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/andreisergiu98/baeta.git",
-		"directory": "packages/subscriptions-cloudflare"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Andrei Pampu",
-		"url": "https://github.com/andreisergiu98"
-	},
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs",
-			"types": "./dist/index.d.ts"
-		},
-		"./sdk": {
-			"import": "./dist/sdk/index.js",
-			"require": "./dist/sdk/index.cjs",
-			"types": "./dist/sdk/index.d.ts"
-		}
-	},
-	"types": "dist/index.d.ts",
-	"files": ["dist", "package.json"],
-	"scripts": {
-		"build": "tsup",
-		"prepack": "prep",
-		"postpack": "prep --clean",
-		"types": "tsc --noEmit"
-	},
-	"dependencies": {
-		"graphql-ws": "^5.16.0",
-		"uuid": "^10.0.0"
-	},
-	"devDependencies": {
-		"@baeta/builder": "workspace:^",
-		"@baeta/tsconfig": "workspace:^",
-		"@cloudflare/workers-types": "^4.20240925.0",
-		"@types/uuid": "^10.0.0",
-		"graphql": "^16.9.0",
-		"typescript": "^5.6.2"
-	},
-	"peerDependencies": {
-		"@cloudflare/workers-types": "^4",
-		"graphql": "^16.6.0"
-	},
-	"engines": {
-		"node": ">=20.0.0"
-	},
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@baeta/cloudflare-subscriptions",
+  "version": "0.0.3",
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/subscriptions-cloudflare"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./sdk": {
+      "import": "./dist/sdk/index.js",
+      "require": "./dist/sdk/index.cjs",
+      "types": "./dist/sdk/index.d.ts"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "graphql-ws": "^5.16.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@cloudflare/workers-types": "^4.20240925.0",
+    "@types/uuid": "^10.0.0",
+    "graphql": "^16.9.0",
+    "typescript": "^5.6.2"
+  },
+  "peerDependencies": {
+    "@cloudflare/workers-types": "^4",
+    "graphql": "^16.6.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

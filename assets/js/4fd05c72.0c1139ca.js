@@ -128,7 +128,7 @@ var clsx = __webpack_require__(9679);
 var contexts_colorMode = __webpack_require__(7388);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/useThemeConfig.js
 var useThemeConfig = __webpack_require__(6467);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/usePrismTheme.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/usePrismTheme.js
 
 
 function usePrismTheme() {
@@ -145,7 +145,7 @@ var ThemeClassNames = __webpack_require__(196);
 // EXTERNAL MODULE: ../.yarn/cache/parse-numeric-range-npm-1.3.0-71baf377a4-289ca126d5.zip/node_modules/parse-numeric-range/index.js
 var parse_numeric_range = __webpack_require__(1642);
 var parse_numeric_range_default = /*#__PURE__*/__webpack_require__.n(parse_numeric_range);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/codeBlockUtils.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/codeBlockUtils.js
 
 const codeBlockTitleRegex = /title=(?<quote>["'])(?<title>.*?)\1/;
 const metastringLinesRangeRegex = /\{(?<range>[\d,-]+)\}/;
@@ -314,7 +314,7 @@ function getPrismCssVariables(prismTheme) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Container/styles.module.css
 var styles_module = __webpack_require__(2938);
 var styles_module_default = /*#__PURE__*/__webpack_require__.n(styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Container/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Container/index.js
 
 
 
@@ -340,7 +340,7 @@ function CodeBlockContainer({ as: As, ...props }) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/styles.module.css
 var Content_styles_module = __webpack_require__(124);
 var Content_styles_module_default = /*#__PURE__*/__webpack_require__.n(Content_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/Element.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/Element.js
 
 
 
@@ -359,7 +359,7 @@ function CodeBlockJSX({ children, className }) {
 
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/reactUtils.js
 var reactUtils = __webpack_require__(9705);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useMutationObserver.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useMutationObserver.js
 
 
 const DefaultOptions = {
@@ -380,7 +380,7 @@ function useMutationObserver(target, callback, options = DefaultOptions) {
   }, [target, stableCallback, stableOptions]);
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useCodeWordWrap.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useCodeWordWrap.js
 
 
 function useTabBecameVisibleCallback(codeBlockRef, callback) {
@@ -440,12 +440,12 @@ function useCodeWordWrap() {
   return { codeBlockRef, isEnabled, isCodeScrollable, toggle };
 }
 
-// EXTERNAL MODULE: ../.yarn/__virtual__/prism-react-renderer-virtual-c67823487e/0/cache/prism-react-renderer-npm-2.3.1-79c80bb723-8ef6b3b667.zip/node_modules/prism-react-renderer/dist/index.mjs
-var dist = __webpack_require__(5562);
+// EXTERNAL MODULE: ../.yarn/__virtual__/prism-react-renderer-virtual-adf6992597/0/cache/prism-react-renderer-npm-2.4.0-3fab7693fe-74a3e23b22.zip/node_modules/prism-react-renderer/dist/index.mjs
+var dist = __webpack_require__(6190);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Line/styles.module.css
 var Line_styles_module = __webpack_require__(4695);
 var Line_styles_module_default = /*#__PURE__*/__webpack_require__.n(Line_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Line/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Line/index.js
 
 
 
@@ -467,7 +467,7 @@ function CodeBlockLine({
   return /* @__PURE__ */ react.createElement("span", { ...lineProps }, showLineNumbers ? /* @__PURE__ */ react.createElement(react.Fragment, null, /* @__PURE__ */ react.createElement("span", { className: (Line_styles_module_default()).codeLineNumber }), /* @__PURE__ */ react.createElement("span", { className: (Line_styles_module_default()).codeLineContent }, lineTokens)) : lineTokens, /* @__PURE__ */ react.createElement("br", null));
 }
 
-;// CONCATENATED MODULE: ../.yarn/cache/copy-text-to-clipboard-npm-3.2.0-46c47374b9-df7115c197.zip/node_modules/copy-text-to-clipboard/index.js
+;// ../.yarn/cache/copy-text-to-clipboard-npm-3.2.0-46c47374b9-df7115c197.zip/node_modules/copy-text-to-clipboard/index.js
 function copyTextToClipboard(text, { target = document.body } = {}) {
   if (typeof text !== "string") {
     throw new TypeError(`Expected parameter \`text\` to be a \`string\`, got \`${typeof text}\`.`);
@@ -504,7 +504,7 @@ function copyTextToClipboard(text, { target = document.body } = {}) {
 
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-core-virtual-cdb03efbd3/0/cache/@docusaurus-core-npm-3.5.2-17f2b76749-4515fe7502.zip/node_modules/@docusaurus/core/lib/client/exports/Translate.js + 1 modules
 var Translate = __webpack_require__(3020);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Copy/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Copy/index.js
 
 function IconCopy(props) {
   return /* @__PURE__ */ react.createElement("svg", { viewBox: "0 0 24 24", ...props }, /* @__PURE__ */ react.createElement(
@@ -516,7 +516,7 @@ function IconCopy(props) {
   ));
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Success/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Success/index.js
 
 function IconSuccess(props) {
   return /* @__PURE__ */ react.createElement("svg", { viewBox: "0 0 24 24", ...props }, /* @__PURE__ */ react.createElement(
@@ -531,7 +531,7 @@ function IconSuccess(props) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/CopyButton/styles.module.css
 var CopyButton_styles_module = __webpack_require__(1490);
 var CopyButton_styles_module_default = /*#__PURE__*/__webpack_require__.n(CopyButton_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/CopyButton/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/CopyButton/index.js
 
 
 
@@ -580,7 +580,7 @@ function CopyButton({ code, className }) {
   );
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/WordWrap/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/WordWrap/index.js
 
 function IconWordWrap(props) {
   return /* @__PURE__ */ react.createElement("svg", { viewBox: "0 0 24 24", ...props }, /* @__PURE__ */ react.createElement(
@@ -595,7 +595,7 @@ function IconWordWrap(props) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/WordWrapButton/styles.module.css
 var WordWrapButton_styles_module = __webpack_require__(153);
 var WordWrapButton_styles_module_default = /*#__PURE__*/__webpack_require__.n(WordWrapButton_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/WordWrapButton/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/WordWrapButton/index.js
 
 
 
@@ -624,7 +624,7 @@ function WordWrapButton({ className, onClick, isEnabled }) {
   );
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/String.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/String.js
 
 
 
@@ -711,7 +711,7 @@ function CodeBlockString({
   );
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/index.js
 
 
 
@@ -746,7 +746,7 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ../.yarn/cache/react-npm-18.3.1-af38f3c1ae-261137d3f3.zip/node_modules/react/index.js
 var react = __webpack_require__(7402);
-;// CONCATENATED MODULE: ./static/img/logo-graphql.svg
+;// ./static/img/logo-graphql.svg
 var _path, _circle, _circle2, _circle3, _circle4, _circle5, _circle6;
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
@@ -796,7 +796,7 @@ const SvgLogoGraphql = _ref => {
   })));
 };
 /* harmony default export */ const logo_graphql = (SvgLogoGraphql);
-;// CONCATENATED MODULE: ./static/img/logo-modular.svg
+;// ./static/img/logo-modular.svg
 var logo_modular_path;
 function logo_modular_extends() { return logo_modular_extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, logo_modular_extends.apply(null, arguments); }
 
@@ -819,7 +819,7 @@ const SvgLogoModular = _ref => {
   })));
 };
 /* harmony default export */ const logo_modular = (SvgLogoModular);
-;// CONCATENATED MODULE: ./static/img/logo-rocket.svg
+;// ./static/img/logo-rocket.svg
 function logo_rocket_extends() { return logo_rocket_extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, logo_rocket_extends.apply(null, arguments); }
 
 const SvgLogoRocket = _ref => {
@@ -1043,7 +1043,7 @@ const SvgLogoRocket = _ref => {
   }));
 };
 /* harmony default export */ const logo_rocket = (SvgLogoRocket);
-;// CONCATENATED MODULE: ./static/img/logo-typescript.svg
+;// ./static/img/logo-typescript.svg
 var _rect, logo_typescript_path;
 function logo_typescript_extends() { return logo_typescript_extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, logo_typescript_extends.apply(null, arguments); }
 
@@ -1078,14 +1078,14 @@ const SvgLogoTypescript = _ref => {
 // EXTERNAL MODULE: ./components/home-features/feature.module.css
 var feature_module = __webpack_require__(3975);
 var feature_module_default = /*#__PURE__*/__webpack_require__.n(feature_module);
-;// CONCATENATED MODULE: ./components/home-features/feature.tsx
+;// ./components/home-features/feature.tsx
 
 
 function Feature({ title, Svg, description }) {
   return /* @__PURE__ */ react.createElement("div", { className: "col col--3" }, /* @__PURE__ */ react.createElement("div", { className: "text--center margin-bottom--md" }, /* @__PURE__ */ react.createElement(Svg, { className: (feature_module_default()).featureSvg, role: "img" })), /* @__PURE__ */ react.createElement("div", { className: "text--center padding-horiz--md" }, /* @__PURE__ */ react.createElement("h3", null, title), /* @__PURE__ */ react.createElement("p", null, description)));
 }
 
-;// CONCATENATED MODULE: ./components/home-features/features.tsx
+;// ./components/home-features/features.tsx
 
 
 
@@ -1122,14 +1122,14 @@ function HomeFeatures() {
   )))));
 }
 
-;// CONCATENATED MODULE: ./components/home-features/index.ts
+;// ./components/home-features/index.ts
 
 
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-core-virtual-cdb03efbd3/0/cache/@docusaurus-core-npm-3.5.2-17f2b76749-4515fe7502.zip/node_modules/@docusaurus/core/lib/client/exports/Link.js + 1 modules
 var Link = __webpack_require__(2735);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-core-virtual-cdb03efbd3/0/cache/@docusaurus-core-npm-3.5.2-17f2b76749-4515fe7502.zip/node_modules/@docusaurus/core/lib/client/exports/useDocusaurusContext.js
 var useDocusaurusContext = __webpack_require__(1441);
-;// CONCATENATED MODULE: ./static/img/logo-baeta.svg
+;// ./static/img/logo-baeta.svg
 var _g;
 function logo_baeta_extends() { return logo_baeta_extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, logo_baeta_extends.apply(null, arguments); }
 
@@ -1161,7 +1161,7 @@ var clsx = __webpack_require__(9679);
 // EXTERNAL MODULE: ./components/home-header/header.module.css
 var header_module = __webpack_require__(6006);
 var header_module_default = /*#__PURE__*/__webpack_require__.n(header_module);
-;// CONCATENATED MODULE: ./components/home-header/header.tsx
+;// ./components/home-header/header.tsx
 
 
 
@@ -1180,7 +1180,7 @@ function HomeHeader() {
   ))));
 }
 
-;// CONCATENATED MODULE: ./components/home-header/index.ts
+;// ./components/home-header/index.ts
 
 
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/index.js + 14 modules
@@ -1188,7 +1188,7 @@ var CodeBlock = __webpack_require__(4081);
 // EXTERNAL MODULE: ./components/home-snippets/snippet.module.css
 var snippet_module = __webpack_require__(5101);
 var snippet_module_default = /*#__PURE__*/__webpack_require__.n(snippet_module);
-;// CONCATENATED MODULE: ./components/home-snippets/snippet.tsx
+;// ./components/home-snippets/snippet.tsx
 
 
 
@@ -1198,7 +1198,7 @@ function Snippet(props) {
   return /* @__PURE__ */ react.createElement("div", { className: "row" }, /* @__PURE__ */ react.createElement("div", { className: (0,clsx/* default */.A)("col col--6", left && (snippet_module_default()).second) }, /* @__PURE__ */ react.createElement("div", { className: (snippet_module_default()).snippetDescription }, /* @__PURE__ */ react.createElement("h3", null, props.title), /* @__PURE__ */ react.createElement("p", null, props.description))), /* @__PURE__ */ react.createElement("div", { className: (0,clsx/* default */.A)("col col--6", left && (snippet_module_default()).first) }, /* @__PURE__ */ react.createElement(CodeBlock/* default */.A, { title: props.path, language: props.language }, props.snippet)));
 }
 
-;// CONCATENATED MODULE: ./components/home-snippets/snippets.tsx
+;// ./components/home-snippets/snippets.tsx
 
 
 const featureList = [
@@ -1287,12 +1287,12 @@ function HomeSnippets() {
   ))));
 }
 
-;// CONCATENATED MODULE: ./components/home-snippets/index.ts
+;// ./components/home-snippets/index.ts
 
 
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Layout/index.js + 53 modules
 var Layout = __webpack_require__(8663);
-;// CONCATENATED MODULE: ./pages/index.tsx
+;// ./pages/index.tsx
 
 
 

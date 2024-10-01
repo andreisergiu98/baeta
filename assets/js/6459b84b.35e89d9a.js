@@ -32,7 +32,7 @@ var clsx = __webpack_require__(9679);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/TabItem/styles.module.css
 var styles_module = __webpack_require__(8940);
 var styles_module_default = /*#__PURE__*/__webpack_require__.n(styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/TabItem/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/TabItem/index.js
 
 
 
@@ -60,7 +60,7 @@ var historyUtils = __webpack_require__(8084);
 var jsUtils = __webpack_require__(3069);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/storageUtils.js + 1 modules
 var storageUtils = __webpack_require__(2536);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/tabsUtils.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/tabsUtils.js
 
 
 
@@ -204,7 +204,7 @@ var useIsBrowser = __webpack_require__(684);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Tabs/styles.module.css
 var Tabs_styles_module = __webpack_require__(9680);
 var Tabs_styles_module_default = /*#__PURE__*/__webpack_require__.n(Tabs_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Tabs/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Tabs/index.js
 
 
 
@@ -315,7 +315,7 @@ function Tabs(props) {
   );
 }
 
-;// CONCATENATED MODULE: ./components/package-manager/package-manager-add.tsx
+;// ./components/package-manager/package-manager-add.tsx
 
 
 
@@ -324,10 +324,10 @@ function PackageManagerAdd(props) {
   return /* @__PURE__ */ react.createElement(Tabs, { groupId: "package-manager" }, /* @__PURE__ */ react.createElement(TabItem, { value: "yarn" }, /* @__PURE__ */ react.createElement(CodeBlock/* default */.A, { language: "bash" }, "yarn add ", props.package, props.dev ? " -D" : "")), /* @__PURE__ */ react.createElement(TabItem, { value: "npm" }, /* @__PURE__ */ react.createElement(CodeBlock/* default */.A, { language: "bash" }, "npm install ", props.package, props.dev ? " --save-dev" : "")), /* @__PURE__ */ react.createElement(TabItem, { value: "pnpm" }, /* @__PURE__ */ react.createElement(CodeBlock/* default */.A, { language: "bash" }, "pnpm add ", props.package, props.dev ? " -D" : "")));
 }
 
-;// CONCATENATED MODULE: ./components/package-manager/index.ts
+;// ./components/package-manager/index.ts
 
 
-;// CONCATENATED MODULE: ./docs/getting-started/installation.mdx
+;// ./docs/getting-started/installation.mdx
 
 
 const frontMatter = {
@@ -572,7 +572,7 @@ var clsx = __webpack_require__(9679);
 var contexts_colorMode = __webpack_require__(7388);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/useThemeConfig.js
 var useThemeConfig = __webpack_require__(6467);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/usePrismTheme.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/usePrismTheme.js
 
 
 function usePrismTheme() {
@@ -589,7 +589,7 @@ var ThemeClassNames = __webpack_require__(196);
 // EXTERNAL MODULE: ../.yarn/cache/parse-numeric-range-npm-1.3.0-71baf377a4-289ca126d5.zip/node_modules/parse-numeric-range/index.js
 var parse_numeric_range = __webpack_require__(1642);
 var parse_numeric_range_default = /*#__PURE__*/__webpack_require__.n(parse_numeric_range);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/codeBlockUtils.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/codeBlockUtils.js
 
 const codeBlockTitleRegex = /title=(?<quote>["'])(?<title>.*?)\1/;
 const metastringLinesRangeRegex = /\{(?<range>[\d,-]+)\}/;
@@ -758,7 +758,7 @@ function getPrismCssVariables(prismTheme) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Container/styles.module.css
 var styles_module = __webpack_require__(2938);
 var styles_module_default = /*#__PURE__*/__webpack_require__.n(styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Container/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Container/index.js
 
 
 
@@ -784,7 +784,7 @@ function CodeBlockContainer({ as: As, ...props }) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/styles.module.css
 var Content_styles_module = __webpack_require__(124);
 var Content_styles_module_default = /*#__PURE__*/__webpack_require__.n(Content_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/Element.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/Element.js
 
 
 
@@ -803,7 +803,7 @@ function CodeBlockJSX({ children, className }) {
 
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/utils/reactUtils.js
 var reactUtils = __webpack_require__(9705);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useMutationObserver.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useMutationObserver.js
 
 
 const DefaultOptions = {
@@ -824,7 +824,7 @@ function useMutationObserver(target, callback, options = DefaultOptions) {
   }, [target, stableCallback, stableOptions]);
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useCodeWordWrap.js
+;// ../.yarn/__virtual__/@docusaurus-theme-common-virtual-2eb87fd520/0/cache/@docusaurus-theme-common-npm-3.5.2-dcff6c65ad-1cb8f97516.zip/node_modules/@docusaurus/theme-common/lib/hooks/useCodeWordWrap.js
 
 
 function useTabBecameVisibleCallback(codeBlockRef, callback) {
@@ -884,12 +884,12 @@ function useCodeWordWrap() {
   return { codeBlockRef, isEnabled, isCodeScrollable, toggle };
 }
 
-// EXTERNAL MODULE: ../.yarn/__virtual__/prism-react-renderer-virtual-c67823487e/0/cache/prism-react-renderer-npm-2.3.1-79c80bb723-8ef6b3b667.zip/node_modules/prism-react-renderer/dist/index.mjs
-var dist = __webpack_require__(5562);
+// EXTERNAL MODULE: ../.yarn/__virtual__/prism-react-renderer-virtual-adf6992597/0/cache/prism-react-renderer-npm-2.4.0-3fab7693fe-74a3e23b22.zip/node_modules/prism-react-renderer/dist/index.mjs
+var dist = __webpack_require__(6190);
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Line/styles.module.css
 var Line_styles_module = __webpack_require__(4695);
 var Line_styles_module_default = /*#__PURE__*/__webpack_require__.n(Line_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Line/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Line/index.js
 
 
 
@@ -911,7 +911,7 @@ function CodeBlockLine({
   return /* @__PURE__ */ react.createElement("span", { ...lineProps }, showLineNumbers ? /* @__PURE__ */ react.createElement(react.Fragment, null, /* @__PURE__ */ react.createElement("span", { className: (Line_styles_module_default()).codeLineNumber }), /* @__PURE__ */ react.createElement("span", { className: (Line_styles_module_default()).codeLineContent }, lineTokens)) : lineTokens, /* @__PURE__ */ react.createElement("br", null));
 }
 
-;// CONCATENATED MODULE: ../.yarn/cache/copy-text-to-clipboard-npm-3.2.0-46c47374b9-df7115c197.zip/node_modules/copy-text-to-clipboard/index.js
+;// ../.yarn/cache/copy-text-to-clipboard-npm-3.2.0-46c47374b9-df7115c197.zip/node_modules/copy-text-to-clipboard/index.js
 function copyTextToClipboard(text, { target = document.body } = {}) {
   if (typeof text !== "string") {
     throw new TypeError(`Expected parameter \`text\` to be a \`string\`, got \`${typeof text}\`.`);
@@ -948,7 +948,7 @@ function copyTextToClipboard(text, { target = document.body } = {}) {
 
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-core-virtual-cdb03efbd3/0/cache/@docusaurus-core-npm-3.5.2-17f2b76749-4515fe7502.zip/node_modules/@docusaurus/core/lib/client/exports/Translate.js + 1 modules
 var Translate = __webpack_require__(3020);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Copy/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Copy/index.js
 
 function IconCopy(props) {
   return /* @__PURE__ */ react.createElement("svg", { viewBox: "0 0 24 24", ...props }, /* @__PURE__ */ react.createElement(
@@ -960,7 +960,7 @@ function IconCopy(props) {
   ));
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Success/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/Success/index.js
 
 function IconSuccess(props) {
   return /* @__PURE__ */ react.createElement("svg", { viewBox: "0 0 24 24", ...props }, /* @__PURE__ */ react.createElement(
@@ -975,7 +975,7 @@ function IconSuccess(props) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/CopyButton/styles.module.css
 var CopyButton_styles_module = __webpack_require__(1490);
 var CopyButton_styles_module_default = /*#__PURE__*/__webpack_require__.n(CopyButton_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/CopyButton/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/CopyButton/index.js
 
 
 
@@ -1024,7 +1024,7 @@ function CopyButton({ code, className }) {
   );
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/WordWrap/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/Icon/WordWrap/index.js
 
 function IconWordWrap(props) {
   return /* @__PURE__ */ react.createElement("svg", { viewBox: "0 0 24 24", ...props }, /* @__PURE__ */ react.createElement(
@@ -1039,7 +1039,7 @@ function IconWordWrap(props) {
 // EXTERNAL MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/WordWrapButton/styles.module.css
 var WordWrapButton_styles_module = __webpack_require__(153);
 var WordWrapButton_styles_module_default = /*#__PURE__*/__webpack_require__.n(WordWrapButton_styles_module);
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/WordWrapButton/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/WordWrapButton/index.js
 
 
 
@@ -1068,7 +1068,7 @@ function WordWrapButton({ className, onClick, isEnabled }) {
   );
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/String.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/Content/String.js
 
 
 
@@ -1155,7 +1155,7 @@ function CodeBlockString({
   );
 }
 
-;// CONCATENATED MODULE: ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/index.js
+;// ../.yarn/__virtual__/@docusaurus-theme-classic-virtual-e59815984d/0/cache/@docusaurus-theme-classic-npm-3.5.2-6a9884ef88-74a4bf64ba.zip/node_modules/@docusaurus/theme-classic/lib/theme/CodeBlock/index.js
 
 
 

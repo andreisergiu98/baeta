@@ -8,14 +8,13 @@ type InferType<T extends Types> = T extends 'string'
 
 type InferTypeFromOptions<
   O extends EnvOptions<Types, boolean | undefined, InferType<Types> | undefined>,
-> =
-  O extends EnvOptions<infer T, infer R, infer D>
-    ? R extends true
-      ? InferType<T>
-      : D extends undefined
-        ? InferType<T> | undefined
-        : InferType<T>
-    : never;
+> = O extends EnvOptions<infer T, infer R, infer D>
+  ? R extends true
+    ? InferType<T>
+    : D extends undefined
+      ? InferType<T> | undefined
+      : InferType<T>
+  : never;
 
 export interface EnvOptions<
   T extends Types,

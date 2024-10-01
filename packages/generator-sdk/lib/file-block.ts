@@ -1,5 +1,5 @@
-import { dirname } from '@baeta/util-path';
 import { mkdir, open, writeFile } from 'node:fs/promises';
+import { dirname } from '@baeta/util-path';
 import { File, FileOptions } from './file';
 
 export class FileBlock extends File {

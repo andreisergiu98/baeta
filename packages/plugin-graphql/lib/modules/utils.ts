@@ -1,3 +1,4 @@
+import { platform } from 'node:os';
 import { getBaseType } from '@graphql-codegen/plugin-helpers';
 import { DEFAULT_SCALARS, wrapTypeWithModifiers } from '@graphql-codegen/visitor-plugin-common';
 import { Source } from '@graphql-tools/utils';
@@ -14,7 +15,6 @@ import {
   ObjectTypeDefinitionNode,
   TypeNode,
 } from 'graphql';
-import { platform } from 'node:os';
 import parse from 'parse-filepath';
 
 const sep = '/';

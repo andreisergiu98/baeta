@@ -1,7 +1,7 @@
-import { relative } from '@baeta/util-path';
-import fg from 'fast-glob';
 import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
+import { relative } from '@baeta/util-path';
+import fg from 'fast-glob';
 import { makeErrorMessage } from '../sdk/errors';
 import { dynamicImportCompiler } from '../utils/compiler';
 import { dynamicImport } from '../utils/import';

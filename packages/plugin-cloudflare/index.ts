@@ -1,10 +1,10 @@
+import { resolve } from 'node:path';
 import {
   databaseMigrations,
   durableObjectsMigrations,
   wsConnectionClassName,
 } from '@baeta/cloudflare-subscriptions/sdk';
 import { FileBlock, createPluginV1 } from '@baeta/generator-sdk';
-import { resolve } from 'node:path';
 
 export interface CloudflarePluginOptions {
   databaseId?: string;

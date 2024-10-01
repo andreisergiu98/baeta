@@ -1,5 +1,5 @@
 import { IResolvers } from '@graphql-tools/utils';
-import { defaultFieldResolver, GraphQLFieldResolver } from 'graphql';
+import { GraphQLFieldResolver, defaultFieldResolver } from 'graphql';
 import { ScalarResolver } from '../lib';
 import { composeResolvers } from './compose';
 import { NativeMiddleware } from './middleware';

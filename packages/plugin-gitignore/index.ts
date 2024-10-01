@@ -1,5 +1,5 @@
-import { createPluginV1, FileBlock } from '@baeta/generator-sdk';
 import { relative, resolve } from 'node:path';
+import { FileBlock, createPluginV1 } from '@baeta/generator-sdk';
 
 export interface GitignoreOptions {
   ignoreTags?: string[];

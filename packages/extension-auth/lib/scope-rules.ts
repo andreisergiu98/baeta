@@ -1,6 +1,6 @@
 import { ForbiddenError } from '@baeta/errors';
 import { isGrantedKey } from './grant';
-import { isLogicRule, LogicRule } from './rule';
+import { LogicRule, isLogicRule } from './rule';
 import { getAuthStore } from './store';
 
 export type Scopes = keyof AuthExtension.Scopes;

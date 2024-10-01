@@ -5,7 +5,7 @@ import { GitLoader } from '@graphql-tools/git-loader';
 import { GithubLoader } from '@graphql-tools/github-loader';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { JsonFileLoader } from '@graphql-tools/json-file-loader';
-import { loadSchema as loadSchemaToolkit, UnnormalizedTypeDefPointer } from '@graphql-tools/load';
+import { UnnormalizedTypeDefPointer, loadSchema as loadSchemaToolkit } from '@graphql-tools/load';
 import { PrismaLoader } from '@graphql-tools/prisma-loader';
 import { UrlLoader } from '@graphql-tools/url-loader';
 import { GraphQLSchemaExtensions, validateSchema } from 'graphql';

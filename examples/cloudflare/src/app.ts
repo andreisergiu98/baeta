@@ -5,8 +5,8 @@ import { userModule } from './modules/user';
 import { Context } from './types/context';
 
 import {
-  createCloudflareSubscription,
   SubscriptionDatabaseD1,
+  createCloudflareSubscription,
 } from '@baeta/cloudflare-subscriptions';
 
 export type Env = {

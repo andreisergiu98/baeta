@@ -1,5 +1,5 @@
-import { dirname, extname } from '@baeta/util-path';
 import fs from 'node:fs/promises';
+import { dirname, extname } from '@baeta/util-path';
 
 /**
  * Options for generated files.

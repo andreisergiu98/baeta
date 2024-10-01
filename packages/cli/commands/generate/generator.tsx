@@ -1,4 +1,4 @@
-import { generate, generateAndWatch, GeneratorHooks, getGeneratorPlugins } from '@baeta/generator';
+import { GeneratorHooks, generate, generateAndWatch, getGeneratorPlugins } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useConfig } from '../../sdk';

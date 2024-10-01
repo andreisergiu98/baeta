@@ -5,11 +5,11 @@ import {
   GRAPHQL_TRANSPORT_WS_PROTOCOL,
   Message,
   MessageType,
-  parseMessage,
   PingMessage,
   PongMessage,
-  stringifyMessage,
   SubscribeMessage,
+  parseMessage,
+  stringifyMessage,
 } from 'graphql-ws';
 
 const CONNECTION_INIT_TIMEOUT = 5000;

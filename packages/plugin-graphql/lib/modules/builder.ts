@@ -9,15 +9,15 @@ import {
   InputObjectTypeExtensionNode,
   InterfaceTypeDefinitionNode,
   InterfaceTypeExtensionNode,
-  isInterfaceType,
-  isScalarType,
-  isUnionType,
   Kind,
   ObjectTypeDefinitionNode,
   ObjectTypeExtensionNode,
   TypeDefinitionNode,
   TypeExtensionNode,
   UnionTypeDefinitionNode,
+  isInterfaceType,
+  isScalarType,
+  isUnionType,
   visit,
 } from 'graphql';
 import { ModulesConfig } from './config';

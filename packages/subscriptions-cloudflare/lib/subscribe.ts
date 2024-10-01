@@ -1,10 +1,10 @@
-import { getArgumentValues, GraphQLError, GraphQLSchema, parse } from 'graphql';
+import { GraphQLError, GraphQLSchema, getArgumentValues, parse } from 'graphql';
 import { SubscribeMessage, SubscribePayload } from 'graphql-ws';
 import { collectFields } from 'graphql/execution/collectFields';
 import {
+  ExecutionContext,
   buildExecutionContext,
   buildResolveInfo,
-  ExecutionContext,
   getFieldDef,
 } from 'graphql/execution/execute';
 import { addPath } from 'graphql/jsutils/Path';

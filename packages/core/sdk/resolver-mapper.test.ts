@@ -1,5 +1,5 @@
 import test from 'ava';
-import { defaultFieldResolver, GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, defaultFieldResolver } from 'graphql';
 import {
   forgeNativeMiddleware,
   forgeNativeResolver,

@@ -1,4 +1,4 @@
-import { handleProtocols, SubscribeMessage } from 'graphql-ws';
+import { SubscribeMessage, handleProtocols } from 'graphql-ws';
 import { PublishData } from './publish';
 import { createSubscriptionInfo } from './subscribe';
 import { SubscriptionsOptions } from './subscription';

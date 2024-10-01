@@ -1,13 +1,13 @@
+import * as fs from 'node:fs/promises';
 import {
-  createPluginV1,
   Ctx,
   FileManager,
+  WatcherFile,
+  createPluginV1,
   getModuleGetName,
   isMatch,
-  WatcherFile,
 } from '@baeta/generator-sdk';
 import * as path from '@baeta/util-path';
-import * as fs from 'node:fs/promises';
 
 interface ResolverOptions {
   suffix?: string | string[];

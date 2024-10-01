@@ -1,10 +1,10 @@
-import { getDirectives, MapperKind, mapSchema } from '@graphql-tools/utils';
+import { MapperKind, getDirectives, mapSchema } from '@graphql-tools/utils';
 import { GraphQLSchema } from 'graphql';
 import { createObjectLens } from '../../utils/object';
 import {
+  ValidationOptions,
   addArgumentValidationsExtension,
   addValidationsExtension,
-  ValidationOptions,
 } from './input-extensions';
 import { ValidateParams } from './input-schema';
 

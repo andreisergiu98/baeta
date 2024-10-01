@@ -67,7 +67,7 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^20.16.5",
+    "@types/node": "^20.16.10",
     "@types/parse-filepath": "1.0.2",
     "graphql": "^16.9.0",
     "typescript": "^5.6.2"

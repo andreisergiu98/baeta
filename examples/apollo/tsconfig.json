@@ -1,10 +1,10 @@
 {
-  "extends": "@baeta/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "noEmit": true,
-    "emitDeclarationOnly": false
-  },
-  "exclude": ["./baeta.ts"]
+	"extends": "@baeta/tsconfig/tsconfig.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "dist",
+		"noEmit": true,
+		"emitDeclarationOnly": false
+	},
+	"exclude": ["./baeta.ts"]
 }

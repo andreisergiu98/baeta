@@ -4,9 +4,9 @@ import { ScopeCache } from './scope-cache';
 import { ScopeResolverMap } from './scope-resolver';
 
 export interface AuthStore {
-  scopes: ScopeResolverMap;
-  scopeCache: ScopeCache;
-  grantCache: GrantCache;
+	scopes: ScopeResolverMap;
+	scopeCache: ScopeCache;
+	grantCache: GrantCache;
 }
 
 export const authStoreKey = Symbol('auth-extension');

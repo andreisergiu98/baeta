@@ -8,138 +8,138 @@ export type Scopes = keyof AuthExtension.Scopes;
 type ScopeRule<T> = T extends boolean ? true : T;
 
 export type ScopeRules = {
-  [K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]>;
+	[K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]>;
 } & {
-  [r in LogicRule]?: ScopeRules;
+	[r in LogicRule]?: ScopeRules;
 } & {
-  $granted?: AuthExtension.Grants;
+	$granted?: AuthExtension.Grants;
 };
 
 async function verifyGrant(
-  ctx: unknown,
-  grant: string | undefined,
-  parentPath: string,
+	ctx: unknown,
+	grant: string | undefined,
+	parentPath: string,
 ): Promise<true> {
-  if (grant == null) {
-    throw new Error();
-  }
+	if (grant == null) {
+		throw new Error();
+	}
 
-  const store = await getAuthStore(ctx);
-  const granted = store.grantCache.getGrants(parentPath);
+	const store = await getAuthStore(ctx);
+	const granted = store.grantCache.getGrants(parentPath);
 
-  if (granted?.includes(grant) !== true) {
-    throw new ForbiddenError();
-  }
+	if (granted?.includes(grant) !== true) {
+		throw new ForbiddenError();
+	}
 
-  return true;
+	return true;
 }
 
 async function verifyScope(ctx: unknown, scopes: ScopeRules, key: string, parentPath: string) {
-  if (isLogicRule(key)) {
-    return verifyScopes(ctx, scopes[key], key, parentPath);
-  }
+	if (isLogicRule(key)) {
+		return verifyScopes(ctx, scopes[key], key, parentPath);
+	}
 
-  if (isGrantedKey(key)) {
-    return verifyGrant(ctx, scopes[key], parentPath);
-  }
+	if (isGrantedKey(key)) {
+		return verifyGrant(ctx, scopes[key], parentPath);
+	}
 
-  const store = await getAuthStore(ctx);
-  const value = scopes[key as Scopes];
-  const resolve = store.scopes[key];
-  return resolve(value);
+	const store = await getAuthStore(ctx);
+	const value = scopes[key as Scopes];
+	const resolve = store.scopes[key];
+	return resolve(value);
 }
 
 async function verifyChainScopes(
-  ctx: unknown,
-  scopes: ScopeRules,
-  keys: string[],
-  parentPath: string,
+	ctx: unknown,
+	scopes: ScopeRules,
+	keys: string[],
+	parentPath: string,
 ): Promise<true> {
-  for (const key of keys) {
-    await verifyScope(ctx, scopes, key, parentPath);
-  }
+	for (const key of keys) {
+		await verifyScope(ctx, scopes, key, parentPath);
+	}
 
-  return true;
+	return true;
 }
 
 async function verifyRaceScopes(
-  ctx: unknown,
-  scopes: ScopeRules,
-  keys: string[],
-  parentPath: string,
+	ctx: unknown,
+	scopes: ScopeRules,
+	keys: string[],
+	parentPath: string,
 ): Promise<true> {
-  for (const key of keys) {
-    const result = await verifyScope(ctx, scopes, key, parentPath).catch((err) => err);
+	for (const key of keys) {
+		const result = await verifyScope(ctx, scopes, key, parentPath).catch((err) => err);
 
-    if (result === true) {
-      return true;
-    }
-  }
+		if (result === true) {
+			return true;
+		}
+	}
 
-  throw new ForbiddenError();
+	throw new ForbiddenError();
 }
 
 async function verifyOrScopes(
-  ctx: unknown,
-  scopes: ScopeRules,
-  keys: string[],
-  parentPath: string,
+	ctx: unknown,
+	scopes: ScopeRules,
+	keys: string[],
+	parentPath: string,
 ): Promise<true> {
-  const promises: Promise<true>[] = [];
+	const promises: Promise<true>[] = [];
 
-  for (const key of keys) {
-    promises.push(verifyScope(ctx, scopes, key, parentPath));
-  }
+	for (const key of keys) {
+		promises.push(verifyScope(ctx, scopes, key, parentPath));
+	}
 
-  return Promise.any(promises);
+	return Promise.any(promises);
 }
 
 async function verifyAndScopes(
-  ctx: unknown,
-  scopes: ScopeRules,
-  keys: string[],
-  parentPath: string,
+	ctx: unknown,
+	scopes: ScopeRules,
+	keys: string[],
+	parentPath: string,
 ): Promise<true> {
-  const promises: Promise<true>[] = [];
+	const promises: Promise<true>[] = [];
 
-  for (const key of keys) {
-    promises.push(verifyScope(ctx, scopes, key, parentPath));
-  }
+	for (const key of keys) {
+		promises.push(verifyScope(ctx, scopes, key, parentPath));
+	}
 
-  return Promise.all(promises).then(() => true as const);
+	return Promise.all(promises).then(() => true as const);
 }
 
 export async function verifyScopes(
-  ctx: unknown,
-  scopes: ScopeRules | undefined,
-  rule: LogicRule,
-  parentPath: string,
+	ctx: unknown,
+	scopes: ScopeRules | undefined,
+	rule: LogicRule,
+	parentPath: string,
 ): Promise<true> {
-  if (scopes == null) {
-    throw new Error('Scope definitions cannot be empty!');
-  }
+	if (scopes == null) {
+		throw new Error('Scope definitions cannot be empty!');
+	}
 
-  const keys = Object.keys(scopes);
+	const keys = Object.keys(scopes);
 
-  if (keys.length === 0) {
-    throw new Error('Scope definitions cannot be empty!');
-  }
+	if (keys.length === 0) {
+		throw new Error('Scope definitions cannot be empty!');
+	}
 
-  if (rule === '$chain') {
-    return verifyChainScopes(ctx, scopes, keys, parentPath);
-  }
+	if (rule === '$chain') {
+		return verifyChainScopes(ctx, scopes, keys, parentPath);
+	}
 
-  if (rule === '$race') {
-    return verifyRaceScopes(ctx, scopes, keys, parentPath);
-  }
+	if (rule === '$race') {
+		return verifyRaceScopes(ctx, scopes, keys, parentPath);
+	}
 
-  if (rule === '$or') {
-    return verifyOrScopes(ctx, scopes, keys, parentPath);
-  }
+	if (rule === '$or') {
+		return verifyOrScopes(ctx, scopes, keys, parentPath);
+	}
 
-  if (rule === '$and') {
-    return verifyAndScopes(ctx, scopes, keys, parentPath);
-  }
+	if (rule === '$and') {
+		return verifyAndScopes(ctx, scopes, keys, parentPath);
+	}
 
-  throw new Error("This line shouldn't be reached.");
+	throw new Error("This line shouldn't be reached.");
 }

@@ -1,55 +1,55 @@
 {
-  "name": "@baeta/generator-sdk",
-  "version": "0.0.14",
-  "keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
-  "homepage": "https://github.com/andreisergiu98/baeta#readme",
-  "bugs": {
-    "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/generator-sdk"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Andrei Pampu",
-    "url": "https://github.com/andreisergiu98"
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "types": "dist/index.d.ts",
-  "files": ["dist", "package.json"],
-  "scripts": {
-    "build": "tsup",
-    "prepack": "prep",
-    "postpack": "prep --clean",
-    "types": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@baeta/plugin": "workspace:^",
-    "@baeta/util-path": "workspace:^",
-    "@parcel/watcher": "^2.4.1",
-    "change-case-all": "2.1.0",
-    "micromatch": "^4.0.8"
-  },
-  "devDependencies": {
-    "@baeta/builder": "workspace:^",
-    "@baeta/tsconfig": "workspace:^",
-    "@types/micromatch": "^4.0.9",
-    "@types/node": "^20.16.10",
-    "typescript": "^5.6.2"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@baeta/generator-sdk",
+	"version": "0.0.14",
+	"keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
+	"homepage": "https://github.com/andreisergiu98/baeta#readme",
+	"bugs": {
+		"url": "https://github.com/andreisergiu98/baeta/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/andreisergiu98/baeta.git",
+		"directory": "packages/generator-sdk"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Andrei Pampu",
+		"url": "https://github.com/andreisergiu98"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"types": "dist/index.d.ts",
+	"files": ["dist", "package.json"],
+	"scripts": {
+		"build": "tsup",
+		"prepack": "prep",
+		"postpack": "prep --clean",
+		"types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@baeta/plugin": "workspace:^",
+		"@baeta/util-path": "workspace:^",
+		"@parcel/watcher": "^2.4.1",
+		"change-case-all": "2.1.0",
+		"micromatch": "^4.0.8"
+	},
+	"devDependencies": {
+		"@baeta/builder": "workspace:^",
+		"@baeta/tsconfig": "workspace:^",
+		"@types/micromatch": "^4.0.9",
+		"@types/node": "^20.16.10",
+		"typescript": "^5.6.2"
+	},
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }

@@ -1,27 +1,27 @@
 type User {
-  id: ID!
-  name: String!
-  birthday: String
+	id: ID!
+	name: String!
+	birthday: String
 }
 
 input UserWhereUnique {
-  id: ID
-  email: String
+	id: ID
+	email: String
 }
 
 input UserUpdateInput {
-  name: String
-  birthday: String
+	name: String
+	birthday: String
 }
 
 type Query {
-  user(where: UserWhereUnique): User
+	user(where: UserWhereUnique): User
 }
 
 type Mutation {
-  updateUser(where: UserWhereUnique, data: UserUpdateInput): User
+	updateUser(where: UserWhereUnique, data: UserUpdateInput): User
 }
 
 type Subscription {
-  onUserUpdate: User
+	onUserUpdate: User
 }

@@ -1,20 +1,20 @@
 {
-  "name": "@baeta/tsconfig",
-  "private": true,
-  "keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
-  "homepage": "https://github.com/andreisergiu98/baeta#readme",
-  "bugs": {
-    "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "tools/tsconfig"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Andrei Pampu",
-    "url": "https://github.com/andreisergiu98"
-  },
-  "type": "module"
+	"name": "@baeta/tsconfig",
+	"private": true,
+	"keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
+	"homepage": "https://github.com/andreisergiu98/baeta#readme",
+	"bugs": {
+		"url": "https://github.com/andreisergiu98/baeta/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/andreisergiu98/baeta.git",
+		"directory": "tools/tsconfig"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Andrei Pampu",
+		"url": "https://github.com/andreisergiu98"
+	},
+	"type": "module"
 }

@@ -1,9 +1,9 @@
 import test from 'ava';
 import { gql } from 'graphql-tag';
 import {
-  makeAggregateErrorsInputMacro,
-  makeInvalidInputMacro,
-  makeValidInputMacro,
+	makeAggregateErrorsInputMacro,
+	makeInvalidInputMacro,
+	makeValidInputMacro,
 } from '../../__tests__/macros';
 import { intValidation } from '../int/int-validation';
 
@@ -58,10 +58,10 @@ const invalidInputMacro = makeInvalidInputMacro(typeDefs, intValidation.directiv
 const aggregateErrorMacro = makeAggregateErrorsInputMacro(typeDefs, intValidation.directive);
 
 test(
-  'min',
-  validInputMacro,
-  'MinInput!',
-  gql`
+	'min',
+	validInputMacro,
+	'MinInput!',
+	gql`
     query {
       value(input: { min: 10 })
     }
@@ -69,10 +69,10 @@ test(
 );
 
 test(
-  'max',
-  validInputMacro,
-  'MaxInput!',
-  gql`
+	'max',
+	validInputMacro,
+	'MaxInput!',
+	gql`
     query {
       value(input: { max: 10 })
     }
@@ -80,10 +80,10 @@ test(
 );
 
 test(
-  'exclusiveMin',
-  validInputMacro,
-  'ExclusiveMinInput!',
-  gql`
+	'exclusiveMin',
+	validInputMacro,
+	'ExclusiveMinInput!',
+	gql`
     query {
       value(input: { exclusiveMin: 11 })
     }
@@ -91,10 +91,10 @@ test(
 );
 
 test(
-  'exclusiveMax',
-  validInputMacro,
-  'ExclusiveMaxInput!',
-  gql`
+	'exclusiveMax',
+	validInputMacro,
+	'ExclusiveMaxInput!',
+	gql`
     query {
       value(input: { exclusiveMax: 0 })
     }
@@ -102,10 +102,10 @@ test(
 );
 
 test(
-  'multipleOf',
-  validInputMacro,
-  'MultipleOfInput!',
-  gql`
+	'multipleOf',
+	validInputMacro,
+	'MultipleOfInput!',
+	gql`
     query {
       value(input: { multipleOf: 100 })
     }
@@ -113,10 +113,10 @@ test(
 );
 
 test(
-  'oneOf',
-  validInputMacro,
-  'OneOfInput!',
-  gql`
+	'oneOf',
+	validInputMacro,
+	'OneOfInput!',
+	gql`
     query {
       value(input: { oneOf: 10 })
     }
@@ -124,10 +124,10 @@ test(
 );
 
 test(
-  'notOneOf',
-  validInputMacro,
-  'NotOneOfInput!',
-  gql`
+	'notOneOf',
+	validInputMacro,
+	'NotOneOfInput!',
+	gql`
     query {
       value(input: { notOneOf: 11 })
     }
@@ -135,10 +135,10 @@ test(
 );
 
 test(
-  'aggregate',
-  validInputMacro,
-  'AggregateInput!',
-  gql`
+	'aggregate',
+	validInputMacro,
+	'AggregateInput!',
+	gql`
     query {
       value(
         input: {
@@ -156,10 +156,10 @@ test(
 );
 
 test(
-  'invalid min',
-  invalidInputMacro,
-  'MinInput!',
-  gql`
+	'invalid min',
+	invalidInputMacro,
+	'MinInput!',
+	gql`
     query {
       value(input: { min: 9 })
     }
@@ -167,10 +167,10 @@ test(
 );
 
 test(
-  'invalid max',
-  invalidInputMacro,
-  'MaxInput!',
-  gql`
+	'invalid max',
+	invalidInputMacro,
+	'MaxInput!',
+	gql`
     query {
       value(input: { max: 11 })
     }
@@ -178,10 +178,10 @@ test(
 );
 
 test(
-  'invalid exclusiveMin',
-  invalidInputMacro,
-  'ExclusiveMinInput!',
-  gql`
+	'invalid exclusiveMin',
+	invalidInputMacro,
+	'ExclusiveMinInput!',
+	gql`
     query {
       value(input: { exclusiveMin: 10 })
     }
@@ -189,10 +189,10 @@ test(
 );
 
 test(
-  'invalid exclusiveMax',
-  invalidInputMacro,
-  'ExclusiveMaxInput!',
-  gql`
+	'invalid exclusiveMax',
+	invalidInputMacro,
+	'ExclusiveMaxInput!',
+	gql`
     query {
       value(input: { exclusiveMax: 10 })
     }
@@ -200,10 +200,10 @@ test(
 );
 
 test(
-  'invalid multipleOf',
-  invalidInputMacro,
-  'MultipleOfInput!',
-  gql`
+	'invalid multipleOf',
+	invalidInputMacro,
+	'MultipleOfInput!',
+	gql`
     query {
       value(input: { multipleOf: 5 })
     }
@@ -211,10 +211,10 @@ test(
 );
 
 test(
-  'invalid oneOf',
-  invalidInputMacro,
-  'OneOfInput!',
-  gql`
+	'invalid oneOf',
+	invalidInputMacro,
+	'OneOfInput!',
+	gql`
     query {
       value(input: { oneOf: 11 })
     }
@@ -222,10 +222,10 @@ test(
 );
 
 test(
-  'invalid notOneOf',
-  invalidInputMacro,
-  'NotOneOfInput!',
-  gql`
+	'invalid notOneOf',
+	invalidInputMacro,
+	'NotOneOfInput!',
+	gql`
     query {
       value(input: { notOneOf: 10 })
     }
@@ -233,10 +233,10 @@ test(
 );
 
 test(
-  'invalid aggregate',
-  aggregateErrorMacro,
-  'AggregateInput!',
-  gql`
+	'invalid aggregate',
+	aggregateErrorMacro,
+	'AggregateInput!',
+	gql`
     query {
       value(
         input: {
@@ -251,14 +251,14 @@ test(
       )
     }
   `,
-  7,
+	7,
 );
 
 test(
-  'skip bad types',
-  validInputMacro,
-  'BadTypeInput!',
-  gql`
+	'skip bad types',
+	validInputMacro,
+	'BadTypeInput!',
+	gql`
     query {
       value(input: { badType: "10" })
     }

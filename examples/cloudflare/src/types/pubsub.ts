@@ -1,3 +1,3 @@
 export interface PubSubMap {
-  'on-user-updated': string;
+	'on-user-updated': string;
 }

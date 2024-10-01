@@ -1,9 +1,9 @@
 {
-  "recommendations": [
-    "arcanis.vscode-zipfs",
-    "esbenp.prettier-vscode",
-    "biomejs.biome",
-    "graphql.vscode-graphql",
-    "graphql.vscode-graphql-syntax"
-  ]
+	"recommendations": [
+		"arcanis.vscode-zipfs",
+		"esbenp.prettier-vscode",
+		"biomejs.biome",
+		"graphql.vscode-graphql",
+		"graphql.vscode-graphql-syntax"
+	]
 }

@@ -1,11 +1,11 @@
 {
-  "extends": "@baeta/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist",
-    "jsx": "react",
-    "types": ["react"],
-    "allowJs": true
-  },
-  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+	"extends": "@baeta/tsconfig/tsconfig.json",
+	"compilerOptions": {
+		"rootDir": ".",
+		"outDir": "dist",
+		"jsx": "react",
+		"types": ["react"],
+		"allowJs": true
+	},
+	"exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
 }

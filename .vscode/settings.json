@@ -1,27 +1,27 @@
 {
-  "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
-  },
-  "files.exclude": {
-    "**/node_modules": true
-  },
-  "cSpell.words": [
-    "baeta",
-    "callsite",
-    "camelcase",
-    "clsx",
-    "codegen",
-    "Datamodel",
-    "dirpath",
-    "dmmf",
-    "esbuild",
-    "execa",
-    "middlewares",
-    "outdir",
-    "Unnormalized"
-  ],
-  "editor.defaultFormatter": "biomejs.biome",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+	"search.exclude": {
+		"**/.yarn": true,
+		"**/.pnp.*": true
+	},
+	"files.exclude": {
+		"**/node_modules": true
+	},
+	"cSpell.words": [
+		"baeta",
+		"callsite",
+		"camelcase",
+		"clsx",
+		"codegen",
+		"Datamodel",
+		"dirpath",
+		"dmmf",
+		"esbuild",
+		"execa",
+		"middlewares",
+		"outdir",
+		"Unnormalized"
+	],
+	"editor.defaultFormatter": "biomejs.biome",
+	"typescript.tsdk": ".yarn/sdks/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true
 }

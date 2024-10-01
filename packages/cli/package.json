@@ -1,85 +1,85 @@
 {
-  "name": "@baeta/cli",
-  "version": "0.0.50",
-  "keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
-  "homepage": "https://github.com/andreisergiu98/baeta#readme",
-  "bugs": {
-    "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/cli"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Andrei Pampu",
-    "url": "https://github.com/andreisergiu98"
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./ink": {
-      "import": "./dist/ink/index.js",
-      "require": "./dist/ink/index.cjs",
-      "types": "./dist/ink/index.d.ts"
-    },
-    "./sdk": {
-      "import": "./dist/sdk/index.js",
-      "require": "./dist/sdk/index.cjs",
-      "types": "./dist/sdk/index.d.ts"
-    }
-  },
-  "types": "dist/index.d.ts",
-  "bin": {
-    "baeta": "./dist/bin/cli.js"
-  },
-  "files": ["dist", "package.json"],
-  "scripts": {
-    "build": "tsup",
-    "prepack": "prep",
-    "postpack": "prep --clean",
-    "types": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@baeta/generator": "workspace:^",
-    "@baeta/plugin-graphql": "workspace:^",
-    "@baeta/util-path": "workspace:^",
-    "ansi-styles": "^6.2.1",
-    "execa": "^9.4.0",
-    "fast-glob": "^3.3.2",
-    "ink": "^5.0.1",
-    "react": "^18.3.1",
-    "tree-kill": "^1.2.2",
-    "yargs": "^17.7.2"
-  },
-  "devDependencies": {
-    "@baeta/builder": "workspace:^",
-    "@baeta/compiler": "workspace:^",
-    "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^20.16.10",
-    "@types/react": "^18.3.10",
-    "@types/yargs": "^17.0.33",
-    "graphql": "^16.9.0",
-    "typescript": "^5.6.2"
-  },
-  "peerDependencies": {
-    "@baeta/compiler": "workspace:^",
-    "graphql": "^16.6.0"
-  },
-  "peerDependenciesMeta": {
-    "@baeta/compiler": {
-      "optional": true
-    }
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@baeta/cli",
+	"version": "0.0.50",
+	"keywords": ["baeta", "graphql", "schema", "types", "typescript", "framework", "builder"],
+	"homepage": "https://github.com/andreisergiu98/baeta#readme",
+	"bugs": {
+		"url": "https://github.com/andreisergiu98/baeta/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/andreisergiu98/baeta.git",
+		"directory": "packages/cli"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Andrei Pampu",
+		"url": "https://github.com/andreisergiu98"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs",
+			"types": "./dist/index.d.ts"
+		},
+		"./ink": {
+			"import": "./dist/ink/index.js",
+			"require": "./dist/ink/index.cjs",
+			"types": "./dist/ink/index.d.ts"
+		},
+		"./sdk": {
+			"import": "./dist/sdk/index.js",
+			"require": "./dist/sdk/index.cjs",
+			"types": "./dist/sdk/index.d.ts"
+		}
+	},
+	"types": "dist/index.d.ts",
+	"bin": {
+		"baeta": "./dist/bin/cli.js"
+	},
+	"files": ["dist", "package.json"],
+	"scripts": {
+		"build": "tsup",
+		"prepack": "prep",
+		"postpack": "prep --clean",
+		"types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@baeta/generator": "workspace:^",
+		"@baeta/plugin-graphql": "workspace:^",
+		"@baeta/util-path": "workspace:^",
+		"ansi-styles": "^6.2.1",
+		"execa": "^9.4.0",
+		"fast-glob": "^3.3.2",
+		"ink": "^5.0.1",
+		"react": "^18.3.1",
+		"tree-kill": "^1.2.2",
+		"yargs": "^17.7.2"
+	},
+	"devDependencies": {
+		"@baeta/builder": "workspace:^",
+		"@baeta/compiler": "workspace:^",
+		"@baeta/tsconfig": "workspace:^",
+		"@types/node": "^20.16.10",
+		"@types/react": "^18.3.10",
+		"@types/yargs": "^17.0.33",
+		"graphql": "^16.9.0",
+		"typescript": "^5.6.2"
+	},
+	"peerDependencies": {
+		"@baeta/compiler": "workspace:^",
+		"graphql": "^16.6.0"
+	},
+	"peerDependenciesMeta": {
+		"@baeta/compiler": {
+			"optional": true
+		}
+	},
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }

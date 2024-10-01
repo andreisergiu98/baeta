@@ -2,79 +2,79 @@ import test from 'ava';
 import { ContextStoreValue, createContextStore } from './ctx-store';
 
 test('store should wait for get before loading to ctx when lazy', (t) => {
-  const storeKey = Symbol('storeKey');
-  const [get, set] = createContextStore(storeKey, {
-    lazy: true,
-  });
+	const storeKey = Symbol('storeKey');
+	const [get, set] = createContextStore(storeKey, {
+		lazy: true,
+	});
 
-  const ctx = {} as Record<string | symbol, unknown>;
+	const ctx = {} as Record<string | symbol, unknown>;
 
-  const loader = async () => 1;
-  set(ctx, loader);
+	const loader = async () => 1;
+	set(ctx, loader);
 
-  const store = ctx[storeKey] as ContextStoreValue<1>;
+	const store = ctx[storeKey] as ContextStoreValue<1>;
 
-  t.is(store.isLoaded, false);
-  t.is(store.result, undefined);
+	t.is(store.isLoaded, false);
+	t.is(store.result, undefined);
 });
 
 test('store should preload when not lazy', async (t) => {
-  const storeKey = Symbol('storeKey');
-  const [get, set] = createContextStore(storeKey, {
-    lazy: false,
-  });
+	const storeKey = Symbol('storeKey');
+	const [get, set] = createContextStore(storeKey, {
+		lazy: false,
+	});
 
-  const ctx = {} as Record<string | symbol, unknown>;
+	const ctx = {} as Record<string | symbol, unknown>;
 
-  const loader = async () => 1;
-  set(ctx, loader);
+	const loader = async () => 1;
+	set(ctx, loader);
 
-  const store = ctx[storeKey] as ContextStoreValue<1>;
+	const store = ctx[storeKey] as ContextStoreValue<1>;
 
-  t.is(store.isLoaded, true);
-  t.is(await store.result, 1);
+	t.is(store.isLoaded, true);
+	t.is(await store.result, 1);
 });
 
 test("store should be loaded when get is called and it's lazy", async (t) => {
-  const storeKey = Symbol('storeKey');
-  const [get, set] = createContextStore(storeKey, {
-    lazy: true,
-  });
+	const storeKey = Symbol('storeKey');
+	const [get, set] = createContextStore(storeKey, {
+		lazy: true,
+	});
 
-  const ctx = {} as Record<string | symbol, unknown>;
+	const ctx = {} as Record<string | symbol, unknown>;
 
-  const loader = async () => 1;
-  set(ctx, loader);
+	const loader = async () => 1;
+	set(ctx, loader);
 
-  const store = ctx[storeKey] as ContextStoreValue<1>;
+	const store = ctx[storeKey] as ContextStoreValue<1>;
 
-  t.is(store.isLoaded, false);
+	t.is(store.isLoaded, false);
 
-  get(ctx);
+	get(ctx);
 
-  t.is(store.isLoaded, true);
+	t.is(store.isLoaded, true);
 });
 
 test('get should return loader value', async (t) => {
-  const storeKey = Symbol('storeKey');
-  const [get, set] = createContextStore(storeKey);
+	const storeKey = Symbol('storeKey');
+	const [get, set] = createContextStore(storeKey);
 
-  const ctx = {} as Record<string | symbol, unknown>;
+	const ctx = {} as Record<string | symbol, unknown>;
 
-  const loader = async () => 1;
-  set(ctx, loader);
+	const loader = async () => 1;
+	set(ctx, loader);
 
-  t.is(await get(ctx), await loader());
+	t.is(await get(ctx), await loader());
 });
 
 test('get should return the same promise when called multiple times', (t) => {
-  const storeKey = Symbol('storeKey');
-  const [get, set] = createContextStore(storeKey);
+	const storeKey = Symbol('storeKey');
+	const [get, set] = createContextStore(storeKey);
 
-  const ctx = {} as Record<string | symbol, unknown>;
+	const ctx = {} as Record<string | symbol, unknown>;
 
-  const loader = async () => 1;
-  set(ctx, loader);
+	const loader = async () => 1;
+	set(ctx, loader);
 
-  t.is(get(ctx), get(ctx));
+	t.is(get(ctx), get(ctx));
 });

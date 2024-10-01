@@ -1,4 +1,4 @@
 export enum PluginType {
-  Generator = 'generator',
-  Cli = 'cli',
+	Generator = 'generator',
+	Cli = 'cli',
 }

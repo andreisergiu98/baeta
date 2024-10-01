@@ -2046,12 +2046,11 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@parcel/watcher": "npm:^2.4.1"
     "@types/color-hash": "npm:^2.0.0"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     ansi-styles: "npm:^6.2.1"
     color-hash: "npm:^2.0.2"
     esbuild: "npm:^0.24.0"
     esbuild-register: "npm:^3.6.0"
-    fast-glob: "npm:^3.3.2"
     tsup: "npm:^8.3.0"
     typescript: "npm:^5.6.2"
   bin:
@@ -2070,12 +2069,11 @@ __metadata:
     "@baeta/plugin-graphql": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     "@types/react": "npm:^18.3.10"
     "@types/yargs": "npm:^17.0.33"
     ansi-styles: "npm:^6.2.1"
     execa: "npm:^9.4.0"
-    fast-glob: "npm:^3.3.2"
     graphql: "npm:^16.9.0"
     ink: "npm:^5.0.1"
     react: "npm:^18.3.1"
@@ -2118,7 +2116,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     esbuild: "npm:^0.24.0"
     typescript: "npm:^5.6.2"
   languageName: unknown
@@ -2207,8 +2205,8 @@ __metadata:
     "@prisma/client": "npm:^5.20.0"
     "@types/body-parser": "npm:^1.19.5"
     "@types/cors": "npm:^2.8.17"
-    "@types/express": "npm:^5.0.0"
-    "@types/node": "npm:^20.16.10"
+    "@types/express": "npm:^4.17.21"
+    "@types/node": "npm:^22.7.4"
     "@types/ws": "npm:^8.5.12"
     "@yarnpkg/pnpify": "npm:^4.1.2"
     body-parser: "npm:^1.20.3"
@@ -2239,7 +2237,7 @@ __metadata:
     hono: "npm:^4.6.3"
     miniflare: "npm:^3.20240925.0"
     typescript: "npm:^5.6.2"
-    wrangler: "npm:^3.78.12"
+    wrangler: "npm:^3.79.0"
   languageName: unknown
   linkType: soft
 
@@ -2271,7 +2269,7 @@ __metadata:
     "@baeta/util-path": "workspace:^"
     "@parcel/watcher": "npm:^2.4.1"
     "@types/micromatch": "npm:^4.0.9"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     change-case-all: "npm:2.1.0"
     micromatch: "npm:^4.0.8"
     typescript: "npm:^5.6.2"
@@ -2286,7 +2284,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
@@ -2299,7 +2297,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
@@ -2313,7 +2311,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20240925.0"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -2331,7 +2329,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -2346,7 +2344,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     execa: "npm:^9.4.0"
     typescript: "npm:^5.6.2"
   languageName: unknown
@@ -2359,7 +2357,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
@@ -2386,7 +2384,7 @@ __metadata:
     "@graphql-tools/prisma-loader": "npm:^8.0.4"
     "@graphql-tools/url-loader": "npm:^8.0.2"
     "@graphql-tools/utils": "npm:^10.5.4"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     "@types/parse-filepath": "npm:1.0.2"
     auto-bind: "npm:^5.0.1"
     change-case-all: "npm:2.1.0"
@@ -2406,7 +2404,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -2423,7 +2421,7 @@ __metadata:
     "@baeta/plugin-exec": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     execa: "npm:^9.4.0"
     typescript: "npm:^5.6.2"
   languageName: unknown
@@ -2435,7 +2433,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
@@ -2472,7 +2470,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^20.16.10"
+    "@types/node": "npm:^22.7.4"
     typescript: "npm:^5.6.2"
     upath: "npm:^2.0.1"
   languageName: unknown
@@ -5726,14 +5724,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:*, @types/estree@npm:^1.0.0, @types/estree@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@types/estree@npm:1.0.5"
-  checksum: 10/7de6d928dd4010b0e20c6919e1a6c27b61f8d4567befa89252055fad503d587ecb9a1e3eab1b1901f923964d7019796db810b7fd6430acb26c32866d126fd408
-  languageName: node
-  linkType: hard
-
-"@types/estree@npm:1.0.6":
+"@types/estree@npm:*, @types/estree@npm:1.0.6, @types/estree@npm:^1.0.0, @types/estree@npm:^1.0.5":
   version: 1.0.6
   resolution: "@types/estree@npm:1.0.6"
   checksum: 10/9d35d475095199c23e05b431bcdd1f6fec7380612aed068b14b2a08aa70494de8a9026765a5a91b1073f636fb0368f6d8973f518a31391d519e20c59388ed88d
@@ -5763,7 +5754,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^5.0.0":
+"@types/express@npm:*":
   version: 5.0.0
   resolution: "@types/express@npm:5.0.0"
   dependencies:
@@ -5775,7 +5766,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:^4.17.13":
+"@types/express@npm:^4.17.13, @types/express@npm:^4.17.21":
   version: 4.17.21
   resolution: "@types/express@npm:4.17.21"
   dependencies:
@@ -5967,12 +5958,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.16.10":
-  version: 20.16.10
-  resolution: "@types/node@npm:20.16.10"
+"@types/node@npm:*, @types/node@npm:^22.7.4":
+  version: 22.7.4
+  resolution: "@types/node@npm:22.7.4"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10/f0832d16fed07737c2c3edd6cb6414a22e8379173e56e701ab8890b8798c8f9bc37337332631818f813ff7f8c0e168e9900e8f44cdfd2406d15150289c813acc
+  checksum: 10/19ddab80c4eba2253c855ed67c9bbc47417183049d01e59010a738bd80d47338bab79fd1f44ae51516bd63a1db4bf21ddb38b16bf6401a2e93252068ec52e88b
   languageName: node
   linkType: hard
 
@@ -10261,7 +10252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2":
+"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.9":
   version: 3.3.2
   resolution: "fast-glob@npm:3.3.2"
   dependencies:
@@ -19375,9 +19366,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrangler@npm:^3.78.12":
-  version: 3.78.12
-  resolution: "wrangler@npm:3.78.12"
+"wrangler@npm:^3.79.0":
+  version: 3.79.0
+  resolution: "wrangler@npm:3.79.0"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:0.3.4"
     "@cloudflare/workers-shared": "npm:0.5.4"
@@ -19408,7 +19399,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 10/f87da7bf026c224108ac28d3df30a5bcf2db9a4f1a09ee51d1d505cbf1286270f9f392ca4185efb89936328972ca376edb89cb5576c33474dc9e63aa03a76669
+  checksum: 10/cc8e58797d5190768914d2fe1bec1d3733bbe261f4827dc1ce27ef35ab379f08d1657ef13538159f1fd9a07204b795ea52e51a5feddbe9b69bc59593692ef895
   languageName: node
   linkType: hard
 

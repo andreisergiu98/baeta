@@ -50,13 +50,12 @@
     "color-hash": "^2.0.2",
     "esbuild": "^0.24.0",
     "esbuild-register": "^3.6.0",
-    "fast-glob": "^3.3.2",
     "tsup": "^8.3.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/color-hash": "^2.0.0",
-    "@types/node": "^20.16.10",
+    "@types/node": "^22.7.4",
     "typescript": "^5.6.2"
   }
 }

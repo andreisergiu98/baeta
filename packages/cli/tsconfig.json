@@ -4,8 +4,14 @@
     "rootDir": ".",
     "outDir": "dist",
     "jsx": "react",
-    "types": ["react"],
+    "types": [
+      "react"
+    ],
     "allowJs": true
   },
-  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+  "exclude": [
+    "dist",
+    "tsup.config.ts",
+    "tsup.watch.ts"
+  ]
 }

@@ -1,6 +1,11 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "andreisergiu98/baeta" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "andreisergiu98/baeta"
+    }
+  ],
   "commit": false,
   "access": "public",
   "baseBranch": "main",
@@ -11,5 +16,8 @@
   },
   "fixed": [],
   "linked": [],
-  "ignore": ["@baeta/examples-apollo", "@baeta/examples-cloudflare"]
+  "ignore": [
+    "@baeta/examples-apollo",
+    "@baeta/examples-cloudflare"
+  ]
 }

@@ -1,4 +1,4 @@
 export default {
-  extensions: ['ts'],
-  require: ['@baeta/builder/tsrun'],
+	extensions: ['ts'],
+	require: ['@baeta/builder/tsrun'],
 };

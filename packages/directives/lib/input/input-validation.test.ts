@@ -26,10 +26,10 @@ const validInputMacro = makeValidInputMacro(typeDefs, inputConstraints.directive
 const invalidInputMacro = makeInvalidInputMacro(typeDefs, inputConstraints.directive);
 
 test(
-  'min fields',
-  validInputMacro,
-  'MinFieldsInput!',
-  gql`
+	'min fields',
+	validInputMacro,
+	'MinFieldsInput!',
+	gql`
     query {
       value(input: { id: "1" })
     }
@@ -37,10 +37,10 @@ test(
 );
 
 test(
-  'max fields',
-  validInputMacro,
-  'MaxFieldsInput!',
-  gql`
+	'max fields',
+	validInputMacro,
+	'MaxFieldsInput!',
+	gql`
     query {
       value(input: { id: "1" })
     }
@@ -48,10 +48,10 @@ test(
 );
 
 test(
-  'min max fields',
-  validInputMacro,
-  'MinMaxFieldsInput!',
-  gql`
+	'min max fields',
+	validInputMacro,
+	'MinMaxFieldsInput!',
+	gql`
     query {
       value(input: { id: "1" })
     }
@@ -59,10 +59,10 @@ test(
 );
 
 test(
-  'invalid min fields',
-  invalidInputMacro,
-  'MinFieldsInput!',
-  gql`
+	'invalid min fields',
+	invalidInputMacro,
+	'MinFieldsInput!',
+	gql`
     query {
       value(input: {})
     }
@@ -70,10 +70,10 @@ test(
 );
 
 test(
-  'invalid max fields',
-  invalidInputMacro,
-  'MaxFieldsInput!',
-  gql`
+	'invalid max fields',
+	invalidInputMacro,
+	'MaxFieldsInput!',
+	gql`
     query {
       value(input: { id: "1", email: "test@test.com" })
     }
@@ -81,10 +81,10 @@ test(
 );
 
 test(
-  'invalid min max fields',
-  invalidInputMacro,
-  'MinMaxFieldsInput!',
-  gql`
+	'invalid min max fields',
+	invalidInputMacro,
+	'MinMaxFieldsInput!',
+	gql`
     query {
       value(input: {})
     }
@@ -92,10 +92,10 @@ test(
 );
 
 test(
-  'invalid min max fields 2',
-  invalidInputMacro,
-  'MinMaxFieldsInput!',
-  gql`
+	'invalid min max fields 2',
+	invalidInputMacro,
+	'MinMaxFieldsInput!',
+	gql`
     query {
       value(input: { id: "1", email: "test@test.com" })
     }

@@ -7,19 +7,19 @@ import { lower, trim, upper } from './lib/string/string-utils';
 import { stringValidation } from './lib/string/string-validation';
 
 export const definitions: Definition[] = [
-  floatValidation,
-  intValidation,
-  stringValidation,
-  inputConstraints,
-  trim,
-  lower,
-  upper,
+	floatValidation,
+	intValidation,
+	stringValidation,
+	inputConstraints,
+	trim,
+	lower,
+	upper,
 ];
 
 export function registerDirectives(module: {
-  $directive: (transformer: SchemaTransformer) => void;
+	$directive: (transformer: SchemaTransformer) => void;
 }) {
-  for (const definition of definitions) {
-    module.$directive(definition.directive);
-  }
+	for (const definition of definitions) {
+		module.$directive(definition.directive);
+	}
 }

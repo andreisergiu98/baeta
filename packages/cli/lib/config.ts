@@ -5,22 +5,22 @@ export type Plugin = GeneratorPluginV1<any>;
 export type Plugins = Array<Plugin | Array<Plugin>>;
 
 export interface BaetaOptions {
-  /**
-   * Options for the graphql generator.
-   */
-  graphql: GeneratorOptions;
+	/**
+	 * Options for the graphql generator.
+	 */
+	graphql: GeneratorOptions;
 
-  /**
-   * Plugins to run.
-   */
-  plugins?: Plugins;
+	/**
+	 * Plugins to run.
+	 */
+	plugins?: Plugins;
 
-  /**
-   * Options for the compiler.
-   */
-  compiler?: CompilerOptions;
+	/**
+	 * Options for the compiler.
+	 */
+	compiler?: CompilerOptions;
 }
 
 export function defineConfig(config: BaetaOptions) {
-  return { config };
+	return { config };
 }

@@ -5,8 +5,8 @@ export type { PrismaPluginOptions };
 export default prismaPlugin;
 
 export function prismaPlugin(options: PrismaPluginOptions) {
-  if (options.generateClient === false) {
-    return [];
-  }
-  return [createPrismaClientPlugin(options)];
+	if (options.generateClient === false) {
+		return [];
+	}
+	return [createPrismaClientPlugin(options)];
 }

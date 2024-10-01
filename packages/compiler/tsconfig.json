@@ -4,6 +4,12 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "include": ["**/*.ts"],
-  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "tsup.config.ts",
+    "tsup.watch.ts"
+  ]
 }

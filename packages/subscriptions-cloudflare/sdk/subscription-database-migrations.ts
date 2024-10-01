@@ -1,11 +1,11 @@
 interface Migration {
-  name: string;
-  sql: string;
+	name: string;
+	sql: string;
 }
 
 const migration0: Migration = {
-  name: '0-baeta-subscription-init',
-  sql: `
+	name: '0-baeta-subscription-init',
+	sql: `
 CREATE TABLE Subscriptions (
   id VARCHAR(64) NOT NULL,
   topic VARCHAR(255) NOT NULL,

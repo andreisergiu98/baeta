@@ -1,7 +1,15 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.1/schema.json",
-  "organizeImports": {
-    "enabled": false
+  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+  "files": {
+    "ignore": [
+      "website/build/**",
+      "website/.docusaurus/**",
+      "examples/**/modules/baeta-*/*",
+      "examples/**/modules/autoload.ts",
+      "examples/**/__generated__/**",
+      "examples/**/typedef.ts",
+      ".yarn/**"
+    ]
   },
   "linter": {
     "enabled": true,
@@ -18,17 +26,27 @@
       "style": {
         "useImportType": "off"
       }
-    },
-    "ignore": [
-      "./website/build/**",
-      "./website/.docusaurus/**",
-      "./examples/**/__generated__/**",
-      "./examples/**/typedef.ts",
-      "./.yarn/**"
-    ]
+    }
   },
   "formatter": {
-    "enabled": false
+    "enabled": true,
+    "lineWidth": 100,
+    "indentStyle": "tab"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "json": {
+    "formatter": {
+      "indentWidth": 2,
+      "indentStyle": "space",
+      "lineWidth": 1
+    }
+  },
+  "organizeImports": {
+    "enabled": true
   },
   "css": {
     "parser": {

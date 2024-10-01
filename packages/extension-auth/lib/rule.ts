@@ -7,9 +7,9 @@ type LogicRuleMap = Record<string, boolean | undefined>;
 const logicRuleMap: LogicRuleMap = {};
 
 for (const rule of logicRules) {
-  logicRuleMap[rule] = true;
+	logicRuleMap[rule] = true;
 }
 
 export function isLogicRule(rule: string): rule is LogicRule {
-  return logicRuleMap[rule] === true;
+	return logicRuleMap[rule] === true;
 }

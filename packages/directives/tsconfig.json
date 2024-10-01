@@ -4,5 +4,9 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+  "exclude": [
+    "dist",
+    "tsup.config.ts",
+    "tsup.watch.ts"
+  ]
 }

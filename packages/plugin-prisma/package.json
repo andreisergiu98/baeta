@@ -47,12 +47,12 @@
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/plugin-exec": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "execa": "^9.3.1"
+    "execa": "^9.4.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^20.16.5",
+    "@types/node": "^20.16.10",
     "typescript": "^5.6.2"
   },
   "engines": {

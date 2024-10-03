@@ -3385,9 +3385,9 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240423.0"
-    graphql: "npm:^16.8.1"
-    typescript: "npm:^5.4.5"
+    "@cloudflare/workers-types": "npm:^4.20240925.0"
+    graphql: "npm:^16.9.0"
+    typescript: "npm:^5.6.2"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
     "@cloudflare/workers-types": ^4
@@ -3402,9 +3402,9 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    graphql: "npm:^16.8.1"
+    graphql: "npm:^16.9.0"
     keyv: "npm:^4.5.4"
-    typescript: "npm:^5.4.5"
+    typescript: "npm:^5.6.2"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
     keyv: ^4.5.4
@@ -3419,10 +3419,10 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^20.12.7"
-    graphql: "npm:^16.8.1"
+    "@types/node": "npm:^20.16.10"
+    graphql: "npm:^16.9.0"
     ioredis: "npm:^5.4.1"
-    typescript: "npm:^5.4.5"
+    typescript: "npm:^5.6.2"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
     ioredis: ^5.4.1
@@ -3439,8 +3439,8 @@ __metadata:
     "@baeta/util-encoding": "workspace:^"
     dataloader: "npm:^2.2.2"
     flat: "npm:^6.0.1"
-    graphql: "npm:^16.8.1"
-    typescript: "npm:^5.4.5"
+    graphql: "npm:^16.9.0"
+    typescript: "npm:^5.6.2"
   peerDependencies:
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
@@ -3638,7 +3638,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    typescript: "npm:^5.4.5"
+    typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
 
@@ -4074,13 +4074,6 @@ __metadata:
     mime: "npm:^3.0.0"
     zod: "npm:^3.22.3"
   checksum: 10/161600b627169048ae7fe7108363d8ef83e273db4f3fd0677ab296d444529e73662d192d3d841c09722f557a57295b738bddb2fc644a267968f7b57acef9e68b
-  languageName: node
-  linkType: hard
-
-"@cloudflare/workers-types@npm:^4.20240423.0":
-  version: 4.20240423.0
-  resolution: "@cloudflare/workers-types@npm:4.20240423.0"
-  checksum: 10/70beae06cf929b01883c847d0a41aee8ac6734350785a8d1b913fe8b7ceb050b0d339967e373b7016da0b7697bf8d58dfb69de5c8a3b79cf2bbc72f2681695eb
   languageName: node
   linkType: hard
 
@@ -7343,15 +7336,6 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10/508e90549c2893ec3b8e5f133763a3983adf37b6c8cfb3f1ea066f63d45f57a7246cf6c23aa859417d41d5c0b3f76883d66a749d2f1aa1ca486a47231286a01f
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^20.12.7":
-  version: 20.12.7
-  resolution: "@types/node@npm:20.12.7"
-  dependencies:
-    undici-types: "npm:~5.26.4"
-  checksum: 10/b4a28a3b593a9bdca5650880b6a9acef46911d58cf7cfa57268f048e9a7157a7c3196421b96cea576850ddb732e3b54bc982c8eb5e1e5ef0635d4424c2fce801
   languageName: node
   linkType: hard
 
@@ -12621,13 +12605,6 @@ __metadata:
   peerDependencies:
     graphql: ^15.2.0 || ^16.0.0
   checksum: 10/1338f7461cff4b8dc0f6db9f6176c1f2a362e5ab4f69ad60a4d6a6a39a24a2dcd590796790cce44a899f8b4c0012c52a5f6d030b4fcfd363e9e32a82cf59b79a
-  languageName: node
-  linkType: hard
-
-"graphql@npm:^16.8.1":
-  version: 16.8.1
-  resolution: "graphql@npm:16.8.1"
-  checksum: 10/7a09d3ec5f75061afe2bd2421a2d53cf37273d2ecaad8f34febea1f1ac205dfec2834aec3419fa0a10fcc9fb345863b2f893562fb07ea825da2ae82f6392893c
   languageName: node
   linkType: hard
 
@@ -20160,16 +20137,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.4.5":
-  version: 5.4.5
-  resolution: "typescript@npm:5.4.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10/d04a9e27e6d83861f2126665aa8d84847e8ebabcea9125b9ebc30370b98cb38b5dff2508d74e2326a744938191a83a69aa9fddab41f193ffa43eabfdf3f190a5
-  languageName: node
-  linkType: hard
-
 "typescript@npm:^5.6.2":
   version: 5.6.2
   resolution: "typescript@npm:5.6.2"
@@ -20177,16 +20144,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10/f95365d4898f357823e93d334ecda9fcade54f009b397c7d05b7621cd9e865981033cf89ccde0f3e3a7b73b1fdbae18e92bc77db237b43e912f053fef0f9a53b
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>":
-  version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10/760f7d92fb383dbf7dee2443bf902f4365db2117f96f875cf809167f6103d55064de973db9f78fe8f31ec08fff52b2c969aee0d310939c0a3798ec75d0bca2e1
   languageName: node
   linkType: hard
 

@@ -73,7 +73,7 @@
     "@baeta/compiler": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^20.16.10",
-    "@types/react": "^18.3.10",
+    "@types/react": "^18.3.11",
     "@types/yargs": "^17.0.33",
     "graphql": "^16.9.0",
     "typescript": "^5.6.2"

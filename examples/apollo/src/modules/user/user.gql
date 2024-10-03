@@ -1,15 +1,15 @@
 type User {
-  id: ID!
-  name: String!
-  birthday: DateTime
+	id: ID!
+	name: String!
+	birthday: DateTime
 }
 
 input UserWhereUnique @constraints(minFields: 1, maxFields: 1) {
-  id: ID
-  email: String @trim @lower @validString(format: EMAIL)
+	id: ID
+	email: String @trim @lower @validString(format: EMAIL)
 }
 
 type Query {
-  user(where: UserWhereUnique): User
-  users(id: String): [User]
+	user(where: UserWhereUnique): User
+	users(id: String): [User]
 }

@@ -1,55 +1,55 @@
 export interface ContextStoreOptions {
-  lazy?: boolean;
+	lazy?: boolean;
 }
 
 export interface ContextStoreValue<T> {
-  loader: () => T | PromiseLike<T>;
-  isLoaded: boolean;
-  result?: T | PromiseLike<T>;
+	isLoaded: boolean;
+	result?: Promise<T>;
+	load: () => Promise<T>;
 }
 
 export function createContextStore<T, Context = unknown>(
-  key: symbol,
-  options?: ContextStoreOptions,
+	key: symbol,
+	options?: ContextStoreOptions,
 ) {
-  const { lazy = true } = options ?? {};
+	const { lazy = true } = options ?? {};
 
-  const get = (ctx: Context) => {
-    const item = (ctx as Record<symbol, ContextStoreValue<T> | undefined>)[key];
+	const get = (ctx: Context): Promise<T> => {
+		const item = (ctx as Record<symbol, ContextStoreValue<T> | undefined>)[key];
 
-    if (item == null) {
-      throw new Error('Context store not initialized');
-    }
+		if (item == null) {
+			throw new Error('Context store not initialized');
+		}
 
-    if (item.isLoaded) {
-      return item.result as T | PromiseLike<T>;
-    }
+		if (item.isLoaded) {
+			return item.result as Promise<T>;
+		}
 
-    item.result = item.loader();
-    item.isLoaded = true;
+		item.result = item.load();
+		item.isLoaded = true;
 
-    return item.result;
-  };
+		return item.result;
+	};
 
-  const load = (_ctx: Context, loader: () => T | PromiseLike<T>) => {
-    const ctx = _ctx as Record<symbol, ContextStoreValue<T> | undefined>;
+	const load = (_ctx: Context, loader: () => T | PromiseLike<T>) => {
+		const ctx = _ctx as Record<symbol, ContextStoreValue<T> | undefined>;
 
-    if (ctx[key] != null) {
-      return;
-    }
+		if (ctx[key] != null) {
+			return;
+		}
 
-    const item: ContextStoreValue<T> = {
-      loader,
-      isLoaded: false,
-    };
+		const item: ContextStoreValue<T> = {
+			load: async () => loader(),
+			isLoaded: false,
+		};
 
-    if (!lazy) {
-      item.result = loader();
-      item.isLoaded = true;
-    }
+		if (lazy === false) {
+			item.result = item.load();
+			item.isLoaded = true;
+		}
 
-    ctx[key] = item;
-  };
+		ctx[key] = item;
+	};
 
-  return [get, load] as const;
+	return [get, load] as const;
 }

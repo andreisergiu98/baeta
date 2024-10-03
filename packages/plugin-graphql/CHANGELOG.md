@@ -1,5 +1,72 @@
 # @baeta/plugin-graphql
 
+## 0.0.34
+
+### Patch Changes
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update typescript
+
+- [`c403694`](https://github.com/andreisergiu98/baeta/commit/c403694c89aa51259866dddc9b93f3cf4566e341) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix type for external unions
+
+- Updated dependencies [[`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4), [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4)]:
+  - @baeta/generator-sdk@0.0.14
+  - @baeta/util-path@0.0.6
+
+## 0.0.33
+
+### Patch Changes
+
+- [`966e1b7`](https://github.com/andreisergiu98/baeta/commit/966e1b7697090b1de5a3ed1638aee474b48088c3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix union withouth extension pick
+
+## 0.0.32
+
+### Patch Changes
+
+- [`5d22b52`](https://github.com/andreisergiu98/baeta/commit/5d22b520e0181ee44111f6438036380050d140c3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix type for unions and interfaces when the name is not pascal case
+
+## 0.0.31
+
+### Patch Changes
+
+- [#133](https://github.com/andreisergiu98/baeta/pull/133) [`325f623`](https://github.com/andreisergiu98/baeta/commit/325f623caa9aab2d6ae45258f214be1d7518396a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add support for type resolver for interfaces and unions
+
+## 0.0.30
+
+### Patch Changes
+
+- [`0896994`](https://github.com/andreisergiu98/baeta/commit/089699451b41dbbe92d96bb4b9987e13893e7501) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add typename to union
+
+## 0.0.29
+
+### Patch Changes
+
+- [#128](https://github.com/andreisergiu98/baeta/pull/128) [`534917a`](https://github.com/andreisergiu98/baeta/commit/534917a18e7ed5d788a90a0335a5370d6af8f4a4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`534917a`](https://github.com/andreisergiu98/baeta/commit/534917a18e7ed5d788a90a0335a5370d6af8f4a4)]:
+  - @baeta/generator-sdk@0.0.13
+  - @baeta/util-path@0.0.5
+
+## 0.0.28
+
+### Patch Changes
+
+- [`74a06d6`](https://github.com/andreisergiu98/baeta/commit/74a06d65345e1ae3bd454e9015ff70f7178b5ff2) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - feat: add validation errors when parsing schema
+  feat: improve union type generation
+
+## 0.0.27
+
+### Patch Changes
+
+- [#121](https://github.com/andreisergiu98/baeta/pull/121) [`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update Node to v20
+
+- [`5ab9740`](https://github.com/andreisergiu98/baeta/commit/5ab97405bbdeac3d9baa59cfe9502cdbff101163) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix type definition of union
+
+- Updated dependencies [[`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454), [`d94ee47`](https://github.com/andreisergiu98/baeta/commit/d94ee47bc485c541ff011290c4ac6ef0c145c83f)]:
+  - @baeta/generator-sdk@0.0.12
+  - @baeta/util-path@0.0.4
+
 ## 0.0.26
 
 ### Patch Changes

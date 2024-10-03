@@ -1,6 +1,6 @@
 {
   "name": "@baeta/directives",
-  "version": "0.0.9",
+  "version": "0.0.14",
   "keywords": [
     "baeta",
     "graphql",
@@ -39,7 +39,6 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
     "test": "ava",
@@ -54,12 +53,12 @@
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@graphql-tools/schema": "^10.0.3",
+    "@graphql-tools/schema": "^10.0.6",
     "@types/is-url": "^1.2.32",
     "ava": "^5.3.1",
-    "graphql": "^16.8.1",
+    "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
-    "typescript": "^5.4.5"
+    "typescript": "^5.6.2"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",

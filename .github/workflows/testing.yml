@@ -19,7 +19,7 @@ jobs:
         uses: andreisergiu98/baeta/ci/setup@main
 
       - name: Run type check
-        run: yarn type:check
+        run: yarn build && yarn type:check
 
   tests:
     name: Tests
@@ -44,18 +44,6 @@ jobs:
 
       - name: Run linting
         run: yarn linter:check
-
-  prettier:
-    name: Prettier check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup env
-        uses: andreisergiu98/baeta/ci/setup@main
-
-      - name: Run prettier
-        run: yarn prettier:check
 
   pkg-constraints:
     name: Package constraints

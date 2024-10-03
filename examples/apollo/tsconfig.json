@@ -6,5 +6,7 @@
     "noEmit": true,
     "emitDeclarationOnly": false
   },
-  "exclude": ["./baeta.ts"]
+  "exclude": [
+    "./baeta.ts"
+  ]
 }

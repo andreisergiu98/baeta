@@ -33,40 +33,27 @@
   ],
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",
-    "dev": "yarn build && devwatch ./packages/**/tsup.watch.ts",
     "docs": "yarn workspace @baeta/website build",
     "linter:check": "biome check .",
     "prepare": "husky install",
-    "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write .",
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",
     "test": "yarn turbo test --filter='./packages/*'",
-    "type:check": "yarn workspaces foreach -Apv run types"
+    "type:check": "yarn workspaces foreach -Apv run types",
+    "watch": "yarn turbo watch build --filter='./packages/*'"
   },
   "devDependencies": {
     "@andreisergiu98/changesets-cli": "^2.25.1",
     "@baeta/builder": "workspace:^",
-    "@biomejs/biome": "^1.7.1",
+    "@biomejs/biome": "^1.9.3",
     "@changesets/changelog-github": "^0.5.0",
-    "@yarnpkg/sdks": "^3.1.0",
+    "@yarnpkg/sdks": "^3.2.0",
     "@yarnpkg/types": "^4.0.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "prettier-plugin-packagejson": "^2.5.0",
-    "turbo": "^1.13.2",
-    "typescript": "^5.4.5"
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "turbo": "^2.1.3",
+    "typescript": "^5.6.2"
   },
-  "dependenciesMeta": {
-    "prettier-plugin-organize-imports@3.2.4": {
-      "unplugged": true
-    },
-    "prettier-plugin-packagejson@2.4.14": {
-      "unplugged": true
-    }
-  },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.5.0"
 }

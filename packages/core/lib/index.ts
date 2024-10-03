@@ -7,5 +7,6 @@ export { addValidationToSchema, createInputDirective } from './input-directive';
 export type { ValidationDirectiveFn, ValidationTarget } from './input-directive';
 export type { Middleware, MiddlewareNext, MiddlewareParams } from './middleware';
 export type { Resolver, ResolverParams } from './resolver';
+export type { TypeResolver, TypeResolverParams } from './resolver-type';
 export type { ScalarResolver } from './scalar';
 export type { SubscriptionResolver } from './subscription';

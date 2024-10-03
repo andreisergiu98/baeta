@@ -55,56 +55,56 @@ const typeDefs = gql`
 `;
 
 interface ValueArgs {
-  input: {
-    value: string;
-  };
+	input: {
+		value: string;
+	};
 }
 
 interface BadTypeArgs {
-  input: {
-    badTrim: number;
-    badLower: number;
-    badUpper: number;
-  };
+	input: {
+		badTrim: number;
+		badLower: number;
+		badUpper: number;
+	};
 }
 
 interface AggregateArgs {
-  input: {
-    trim: string;
-    lower: string;
-    upper: string;
-  };
+	input: {
+		trim: string;
+		lower: string;
+		upper: string;
+	};
 }
 
 const transformer = (schema: GraphQLSchema) => {
-  return trim.directive(upper.directive(lower.directive(schema)));
+	return trim.directive(upper.directive(lower.directive(schema)));
 };
 
 const argsValueMacro = makeQueryResolverMacro(
-  typeDefs,
-  transformer,
-  (args: ValueArgs) => args.input.value,
-  'String',
+	typeDefs,
+	transformer,
+	(args: ValueArgs) => args.input.value,
+	'String',
 );
 const argsAggregateMacro = makeQueryResolverMacro(
-  typeDefs,
-  transformer,
-  (args: AggregateArgs) => [args.input.trim, args.input.lower, args.input.upper].join(''),
-  'String',
+	typeDefs,
+	transformer,
+	(args: AggregateArgs) => [args.input.trim, args.input.lower, args.input.upper].join(''),
+	'String',
 );
 const argsBadTypeMacro = makeQueryResolverMacro(
-  typeDefs,
-  transformer,
-  (args: BadTypeArgs) => args.input.badTrim + args.input.badLower + args.input.badUpper,
-  'Int',
+	typeDefs,
+	transformer,
+	(args: BadTypeArgs) => args.input.badTrim + args.input.badLower + args.input.badUpper,
+	'Int',
 );
 
 test(
-  'trim',
-  argsValueMacro,
-  'TrimInput!',
-  'foo',
-  gql`
+	'trim',
+	argsValueMacro,
+	'TrimInput!',
+	'foo',
+	gql`
     query {
       value(input: { value: "  foo  " })
     }
@@ -112,11 +112,11 @@ test(
 );
 
 test(
-  'trim 2',
-  argsValueMacro,
-  'Trim2Input!',
-  'foo',
-  gql`
+	'trim 2',
+	argsValueMacro,
+	'Trim2Input!',
+	'foo',
+	gql`
     query {
       value(input: { value: "  foo  " })
     }
@@ -124,11 +124,11 @@ test(
 );
 
 test(
-  'trim start',
-  argsValueMacro,
-  'TrimStartInput!',
-  'foo  ',
-  gql`
+	'trim start',
+	argsValueMacro,
+	'TrimStartInput!',
+	'foo  ',
+	gql`
     query {
       value(input: { value: "  foo  " })
     }
@@ -136,11 +136,11 @@ test(
 );
 
 test(
-  'trim start 2',
-  argsValueMacro,
-  'TrimStart2Input!',
-  'foo  ',
-  gql`
+	'trim start 2',
+	argsValueMacro,
+	'TrimStart2Input!',
+	'foo  ',
+	gql`
     query {
       value(input: { value: "  foo  " })
     }
@@ -148,11 +148,11 @@ test(
 );
 
 test(
-  'trim end',
-  argsValueMacro,
-  'TrimEndInput!',
-  '  foo',
-  gql`
+	'trim end',
+	argsValueMacro,
+	'TrimEndInput!',
+	'  foo',
+	gql`
     query {
       value(input: { value: "  foo  " })
     }
@@ -160,11 +160,11 @@ test(
 );
 
 test(
-  'trim end 2',
-  argsValueMacro,
-  'TrimEnd2Input!',
-  '  foo',
-  gql`
+	'trim end 2',
+	argsValueMacro,
+	'TrimEnd2Input!',
+	'  foo',
+	gql`
     query {
       value(input: { value: "  foo  " })
     }
@@ -172,11 +172,11 @@ test(
 );
 
 test(
-  'lower',
-  argsValueMacro,
-  'LowerInput!',
-  'foo',
-  gql`
+	'lower',
+	argsValueMacro,
+	'LowerInput!',
+	'foo',
+	gql`
     query {
       value(input: { value: "FOO" })
     }
@@ -184,11 +184,11 @@ test(
 );
 
 test(
-  'upper',
-  argsValueMacro,
-  'UpperInput!',
-  'FOO',
-  gql`
+	'upper',
+	argsValueMacro,
+	'UpperInput!',
+	'FOO',
+	gql`
     query {
       value(input: { value: "foo" })
     }
@@ -196,11 +196,11 @@ test(
 );
 
 test(
-  'aggregate',
-  argsAggregateMacro,
-  'AggregateInput!',
-  'foofooFOO',
-  gql`
+	'aggregate',
+	argsAggregateMacro,
+	'AggregateInput!',
+	'foofooFOO',
+	gql`
     query {
       value(input: { trim: "  foo  ", lower: "FOO", upper: "foo" })
     }
@@ -208,11 +208,11 @@ test(
 );
 
 test(
-  'skip bad types',
-  argsBadTypeMacro,
-  'BadTypeInput!',
-  30,
-  gql`
+	'skip bad types',
+	argsBadTypeMacro,
+	'BadTypeInput!',
+	30,
+	gql`
     query {
       value(input: { badTrim: 10, badLower: 10, badUpper: 10 })
     }

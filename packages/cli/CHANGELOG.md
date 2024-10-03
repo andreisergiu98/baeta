@@ -1,5 +1,80 @@
 # @baeta/cli
 
+## 0.0.50
+
+### Patch Changes
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update typescript
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update ink and switch to official release
+
+- Updated dependencies [[`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4), [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4), [`c403694`](https://github.com/andreisergiu98/baeta/commit/c403694c89aa51259866dddc9b93f3cf4566e341)]:
+  - @baeta/compiler@0.0.34
+  - @baeta/generator@0.0.30
+  - @baeta/plugin-graphql@0.0.34
+  - @baeta/util-path@0.0.6
+
+## 0.0.49
+
+### Patch Changes
+
+- Updated dependencies [[`966e1b7`](https://github.com/andreisergiu98/baeta/commit/966e1b7697090b1de5a3ed1638aee474b48088c3)]:
+  - @baeta/plugin-graphql@0.0.33
+
+## 0.0.48
+
+### Patch Changes
+
+- Updated dependencies [[`5d22b52`](https://github.com/andreisergiu98/baeta/commit/5d22b520e0181ee44111f6438036380050d140c3)]:
+  - @baeta/plugin-graphql@0.0.32
+
+## 0.0.47
+
+### Patch Changes
+
+- Updated dependencies [[`325f623`](https://github.com/andreisergiu98/baeta/commit/325f623caa9aab2d6ae45258f214be1d7518396a)]:
+  - @baeta/plugin-graphql@0.0.31
+
+## 0.0.46
+
+### Patch Changes
+
+- Updated dependencies [[`0896994`](https://github.com/andreisergiu98/baeta/commit/089699451b41dbbe92d96bb4b9987e13893e7501)]:
+  - @baeta/plugin-graphql@0.0.30
+
+## 0.0.45
+
+### Patch Changes
+
+- [#128](https://github.com/andreisergiu98/baeta/pull/128) [`534917a`](https://github.com/andreisergiu98/baeta/commit/534917a18e7ed5d788a90a0335a5370d6af8f4a4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`534917a`](https://github.com/andreisergiu98/baeta/commit/534917a18e7ed5d788a90a0335a5370d6af8f4a4)]:
+  - @baeta/compiler@0.0.33
+  - @baeta/generator@0.0.29
+  - @baeta/plugin-graphql@0.0.29
+  - @baeta/util-path@0.0.5
+
+## 0.0.44
+
+### Patch Changes
+
+- Updated dependencies [[`74a06d6`](https://github.com/andreisergiu98/baeta/commit/74a06d65345e1ae3bd454e9015ff70f7178b5ff2)]:
+  - @baeta/plugin-graphql@0.0.28
+
+## 0.0.43
+
+### Patch Changes
+
+- [#121](https://github.com/andreisergiu98/baeta/pull/121) [`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update Node to v20
+
+- Updated dependencies [[`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454), [`5ab9740`](https://github.com/andreisergiu98/baeta/commit/5ab97405bbdeac3d9baa59cfe9502cdbff101163)]:
+  - @baeta/compiler@0.0.32
+  - @baeta/generator@0.0.28
+  - @baeta/plugin-graphql@0.0.27
+  - @baeta/util-path@0.0.4
+
 ## 0.0.42
 
 ### Patch Changes

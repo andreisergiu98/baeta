@@ -1,27 +1,30 @@
-import { Text } from '@baeta/ink';
-import spinners, { SpinnerName } from 'cli-spinners';
-import React, { useEffect, useState } from 'react';
+import { Text } from 'ink';
+import React, { useCallback, useEffect, useState } from 'react';
 
-export interface SpinnerProps {
-  type?: SpinnerName;
-}
+const spinner = {
+	interval: 80,
+	frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'],
+};
 
-export function Spinner({ type = 'dots' }: SpinnerProps) {
-  const [frame, setFrame] = useState(0);
-  const spinner = spinners[type];
+export function Spinner() {
+	const [frame, setFrame] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFrame((previousFrame) => {
-        const isLastFrame = previousFrame === spinner.frames.length - 1;
-        return isLastFrame ? 0 : previousFrame + 1;
-      });
-    }, spinner.interval);
+	const nextFrame = useCallback(() => {
+		setFrame((previousFrame) => {
+			if (previousFrame >= spinner.frames.length) {
+				return 0;
+			}
+			return previousFrame + 1;
+		});
+	}, []);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, [spinner]);
+	useEffect(() => {
+		const timer = setInterval(nextFrame, spinner.interval);
 
-  return <Text>{spinner.frames[frame]}</Text>;
+		return () => {
+			clearInterval(timer);
+		};
+	}, [nextFrame]);
+
+	return <Text>{spinner.frames[frame]}</Text>;
 }

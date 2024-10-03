@@ -1,5 +1,50 @@
 # @baeta/core
 
+## 0.0.36
+
+### Patch Changes
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#139](https://github.com/andreisergiu98/baeta/pull/139) [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update typescript
+
+- Updated dependencies [[`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4), [`00dbc8f`](https://github.com/andreisergiu98/baeta/commit/00dbc8f35839aaa6524a6c0125ff38a766e45be4)]:
+  - @baeta/errors@0.0.7
+
+## 0.0.35
+
+### Patch Changes
+
+- [#133](https://github.com/andreisergiu98/baeta/pull/133) [`325f623`](https://github.com/andreisergiu98/baeta/commit/325f623caa9aab2d6ae45258f214be1d7518396a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add support for type resolver for interfaces and unions
+
+## 0.0.34
+
+### Patch Changes
+
+- [`7313d92`](https://github.com/andreisergiu98/baeta/commit/7313d92b06e164663e4c6164a79f7c1ba4762d7e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - allow promise asynciterator on subscribe
+
+## 0.0.33
+
+### Patch Changes
+
+- [#128](https://github.com/andreisergiu98/baeta/pull/128) [`534917a`](https://github.com/andreisergiu98/baeta/commit/534917a18e7ed5d788a90a0335a5370d6af8f4a4) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`534917a`](https://github.com/andreisergiu98/baeta/commit/534917a18e7ed5d788a90a0335a5370d6af8f4a4)]:
+  - @baeta/errors@0.0.6
+
+## 0.0.32
+
+### Patch Changes
+
+- [#121](https://github.com/andreisergiu98/baeta/pull/121) [`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update Node to v20
+
+- [`5ab9740`](https://github.com/andreisergiu98/baeta/commit/5ab97405bbdeac3d9baa59cfe9502cdbff101163) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix return type of store->get
+
+- [#51](https://github.com/andreisergiu98/baeta/pull/51) [`d94ee47`](https://github.com/andreisergiu98/baeta/commit/d94ee47bc485c541ff011290c4ac6ef0c145c83f) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - remove subscription filter option
+
+- Updated dependencies [[`ceae50d`](https://github.com/andreisergiu98/baeta/commit/ceae50d88e4e59b22c603637620f4fc6b28b2454)]:
+  - @baeta/errors@0.0.5
+
 ## 0.0.31
 
 ### Patch Changes

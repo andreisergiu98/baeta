@@ -3,16 +3,24 @@
   "docs": "https://v2.docusaurus.io/docs/typescript-support",
   "compilerOptions": {
     "jsx": "react",
-    "lib": ["dom", "es2020"],
+    "lib": [
+      "dom",
+      "es2020"
+    ],
     "module": "node16",
     "moduleResolution": "node16",
     "esModuleInterop": true,
     "allowJs": true,
     "noEmit": true,
-    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
+    "types": [
+      "@docusaurus/module-type-aliases",
+      "@docusaurus/theme-classic"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@site/*": ["./*"]
+      "@site/*": [
+        "./*"
+      ]
     },
     "skipLibCheck": true
   }

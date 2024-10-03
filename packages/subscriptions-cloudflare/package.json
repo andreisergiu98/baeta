@@ -1,6 +1,6 @@
 {
   "name": "@baeta/cloudflare-subscriptions",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "keywords": [
     "baeta",
     "graphql",
@@ -44,22 +44,21 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
   },
   "dependencies": {
     "graphql-ws": "^5.16.0",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20240423.0",
-    "@types/uuid": "^9.0.8",
-    "graphql": "^16.8.1",
-    "typescript": "^5.4.5"
+    "@cloudflare/workers-types": "^4.20240925.0",
+    "@types/uuid": "^10.0.0",
+    "graphql": "^16.9.0",
+    "typescript": "^5.6.2"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4",

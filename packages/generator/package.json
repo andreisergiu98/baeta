@@ -1,6 +1,6 @@
 {
   "name": "@baeta/generator",
-  "version": "0.0.27",
+  "version": "0.0.30",
   "keywords": [
     "baeta",
     "graphql",
@@ -39,7 +39,6 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -51,8 +50,8 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^20.12.7",
-    "typescript": "^5.4.5"
+    "@types/node": "^20.16.10",
+    "typescript": "^5.6.2"
   },
   "engines": {
     "node": ">=20.0.0"

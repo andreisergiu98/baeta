@@ -10,15 +10,17 @@
 "@baeta/generator-sdk": patch
 "@baeta/plugin": patch
 "@baeta/plugin-autoload": patch
+"@baeta/plugin-cloudflare": patch
 "@baeta/plugin-directives": patch
 "@baeta/plugin-exec": patch
 "@baeta/plugin-gitignore": patch
 "@baeta/plugin-graphql": patch
 "@baeta/plugin-pagination": patch
 "@baeta/plugin-prisma": patch
+"@baeta/cloudflare-subscriptions": patch
 "@baeta/util-env": patch
 "@baeta/util-log": patch
 "@baeta/util-path": patch
 ---
 
-Update Node to v20
+update dependencies

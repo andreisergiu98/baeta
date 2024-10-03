@@ -1,3 +1,3 @@
 export function getModuleLoader() {
-  return require;
+	return require;
 }

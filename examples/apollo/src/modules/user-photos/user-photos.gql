@@ -1,11 +1,11 @@
 type UserPhoto {
-  id: ID!
-  url: String!
+	id: ID!
+	url: String!
 }
 
 extend type User {
-  photos: [UserPhoto!]
-  photosConnection: UserPhotoConnection
+	photos: [UserPhoto!]
+	photosConnection: UserPhotoConnection
 }
 
 scalar DateTime

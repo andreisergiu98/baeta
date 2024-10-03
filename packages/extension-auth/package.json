@@ -1,6 +1,6 @@
 {
   "name": "@baeta/extension-auth",
-  "version": "0.1.1",
+  "version": "0.1.6",
   "keywords": [
     "baeta",
     "graphql",
@@ -39,7 +39,6 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -53,8 +52,8 @@
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.8.1",
-    "typescript": "^5.4.5"
+    "graphql": "^16.9.0",
+    "typescript": "^5.6.2"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",

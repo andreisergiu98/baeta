@@ -3,7 +3,13 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist",
-    "types": ["@cloudflare/workers-types"]
+    "types": [
+      "@cloudflare/workers-types"
+    ]
   },
-  "exclude": ["dist", "tsup.config.ts", "tsup.watch.ts"]
+  "exclude": [
+    "dist",
+    "tsup.config.ts",
+    "tsup.watch.ts"
+  ]
 }

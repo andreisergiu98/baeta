@@ -1,32 +1,32 @@
-import { Text } from '@baeta/ink';
+import { Text } from 'ink';
 import React, { useMemo } from 'react';
 
 export interface TimeProps {
-  value?: number;
-  prefix?: string;
+	value?: number;
+	prefix?: string;
 }
 
 export function Time(props: TimeProps) {
-  const time = useMemo(() => {
-    if (!props.value) {
-      return '';
-    }
+	const time = useMemo(() => {
+		if (!props.value) {
+			return '';
+		}
 
-    if (props.value > 1000) {
-      const seconds = props.value / 1000;
-      return `${seconds.toFixed(2)}s`;
-    }
+		if (props.value > 1000) {
+			const seconds = props.value / 1000;
+			return `${seconds.toFixed(2)}s`;
+		}
 
-    return `${Math.round(props.value)}ms`;
-  }, [props.value]);
+		return `${Math.round(props.value)}ms`;
+	}, [props.value]);
 
-  if (!time) {
-    return null;
-  }
+	if (!time) {
+		return null;
+	}
 
-  return (
-    <Text>
-      {props.prefix}[{time}]
-    </Text>
-  );
+	return (
+		<Text>
+			{props.prefix}[{time}]
+		</Text>
+	);
 }

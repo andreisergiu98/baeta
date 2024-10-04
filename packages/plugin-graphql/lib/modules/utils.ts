@@ -329,7 +329,6 @@ export function concatByKey<T extends Record<string, string[]>, K extends keyof 
 	key: K,
 ) {
 	// Remove duplicate, if an element is in right & left, it will be only once in the returned array.
-	//@ts-expect-error check compiler settings
 	return [...new Set([...left[key], ...right[key]])];
 }
 

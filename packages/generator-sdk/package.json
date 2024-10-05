@@ -1,6 +1,6 @@
 {
   "name": "@baeta/generator-sdk",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "keywords": [
     "baeta",
     "graphql",

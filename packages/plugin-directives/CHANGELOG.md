@@ -1,5 +1,24 @@
 # @baeta/plugin-directives
 
+## 1.0.0
+
+### Minor Changes
+
+- [#156](https://github.com/andreisergiu98/baeta/pull/156) [`01f3c20`](https://github.com/andreisergiu98/baeta/commit/01f3c20365539fad6e8a8694c59a8e86c95784e8) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - raise engine requirement to node >= 22
+
+### Patch Changes
+
+- [#152](https://github.com/andreisergiu98/baeta/pull/152) [`d538c79`](https://github.com/andreisergiu98/baeta/commit/d538c7905e6ba96d9f294e2d528f9252e83acbe7) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update formatter
+
+- [#146](https://github.com/andreisergiu98/baeta/pull/146) [`e7ddddd`](https://github.com/andreisergiu98/baeta/commit/e7ddddd5f76216177ce302974240552fdd2054fb) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - do not print extension in import
+
+- [#145](https://github.com/andreisergiu98/baeta/pull/145) [`08428d4`](https://github.com/andreisergiu98/baeta/commit/08428d4f03b79cab9c116ff7b3a3cf9a0b2620f2) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`01f3c20`](https://github.com/andreisergiu98/baeta/commit/01f3c20365539fad6e8a8694c59a8e86c95784e8), [`d538c79`](https://github.com/andreisergiu98/baeta/commit/d538c7905e6ba96d9f294e2d528f9252e83acbe7), [`08428d4`](https://github.com/andreisergiu98/baeta/commit/08428d4f03b79cab9c116ff7b3a3cf9a0b2620f2)]:
+  - @baeta/directives@1.0.0
+  - @baeta/generator-sdk@0.1.0
+  - @baeta/util-path@0.1.0
+
 ## 0.0.16
 
 ### Patch Changes

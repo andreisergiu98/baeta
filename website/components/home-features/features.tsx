@@ -4,7 +4,7 @@ import LogoRocket from '@site/static/img/logo-rocket.svg';
 import LogoTypescript from '@site/static/img/logo-typescript.svg';
 import React from 'react';
 import styles from './feature.module.css';
-import { Feature, type FeatureProps } from './feature.ts';
+import { Feature, type FeatureProps } from './feature.tsx';
 
 const FeatureList: FeatureProps[] = [
 	{

@@ -1,1 +1,1 @@
-export * from './package-manager-add.ts';
+export * from './package-manager-add.tsx';

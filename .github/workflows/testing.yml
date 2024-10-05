@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup env
-        uses: andreisergiu98/baeta/ci/setup@feat/node22
+        uses: andreisergiu98/baeta/ci/setup@node22
 
       - name: Run tests
         run: yarn test

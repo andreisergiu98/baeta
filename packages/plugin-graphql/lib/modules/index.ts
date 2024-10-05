@@ -1,24 +1,24 @@
 import { join, relative, resolve } from '@baeta/util-path';
-import { Types } from '@graphql-codegen/plugin-helpers';
+import type { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
-import { Source } from '@graphql-tools/utils';
+import type { Source } from '@graphql-tools/utils';
 import {
-	DocumentNode,
-	ObjectTypeDefinitionNode,
-	UnionTypeDefinitionNode,
-	UnionTypeExtensionNode,
+	type DocumentNode,
+	type ObjectTypeDefinitionNode,
+	type UnionTypeDefinitionNode,
+	type UnionTypeExtensionNode,
 	concatAST,
 	isScalarType,
 } from 'graphql';
-import { buildModule } from './builder';
-import { ModulesConfig } from './config';
+import { buildModule } from './builder.ts';
+import type { ModulesConfig } from './config.ts';
 import {
 	collectObjectFieldTypesAndArguments,
 	groupSourcesByModule,
 	isGraphQLPrimitive,
 	normalize,
 	stripFilename,
-} from './utils';
+} from './utils.ts';
 
 export const preset: Types.OutputPreset<ModulesConfig> = {
 	buildGeneratesSection: (options) => {

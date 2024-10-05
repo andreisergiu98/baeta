@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
     "types": [
       "@docusaurus/module-type-aliases",
       "@docusaurus/theme-classic"

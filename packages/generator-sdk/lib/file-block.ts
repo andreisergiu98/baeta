@@ -1,6 +1,6 @@
 import { mkdir, open, writeFile } from 'node:fs/promises';
 import { dirname } from '@baeta/util-path';
-import { File, FileOptions } from './file';
+import { File, type FileOptions } from './file.ts';
 
 export class FileBlock extends File {
 	constructor(

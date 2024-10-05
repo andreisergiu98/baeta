@@ -1,28 +1,28 @@
 import { AggregateGraphQLError, BadUserInput } from '@baeta/errors';
 import {
-	GraphQLArgument,
+	type GraphQLArgument,
 	GraphQLError,
-	GraphQLField,
+	type GraphQLField,
 	GraphQLInputObjectType,
 	GraphQLList,
-	GraphQLNamedType,
+	type GraphQLNamedType,
 	GraphQLNonNull,
-	GraphQLObjectType,
-	GraphQLResolveInfo,
-	GraphQLSchema,
-	GraphQLType,
+	type GraphQLObjectType,
+	type GraphQLResolveInfo,
+	type GraphQLSchema,
+	type GraphQLType,
 	Kind,
 	getNamedType,
 } from 'graphql';
 import {
-	ValidationOptions,
+	type ValidationOptions,
 	addValidateExtension,
 	getArgumentValidationsFromExtensions,
 	getValidationsFromExtension,
 	hasArgumentValidationsExtension,
 	hasValidateExtension,
 	hasValidationsExtension,
-} from './input-extensions';
+} from './input-extensions.ts';
 
 export type ValidateParams<Context = unknown> = {
 	path: Array<number | string>;

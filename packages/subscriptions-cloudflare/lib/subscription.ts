@@ -1,11 +1,11 @@
-import { GraphQLSchema } from 'graphql';
-import { handleWS } from './handle-ws';
-import { PoolingType } from './pooling-type';
-import { publish } from './publish';
-import { DefaultPubSubMap } from './pubsub-map';
-import { subscribe } from './subscribe';
-import { SubscriptionDatabase } from './subscription-database';
-import { createWsConnectionsClass } from './ws-connections';
+import type { GraphQLSchema } from 'graphql';
+import { handleWS } from './handle-ws.ts';
+import type { PoolingType } from './pooling-type.ts';
+import { publish } from './publish.ts';
+import type { DefaultPubSubMap } from './pubsub-map.ts';
+import { subscribe } from './subscribe.ts';
+import type { SubscriptionDatabase } from './subscription-database.ts';
+import { createWsConnectionsClass } from './ws-connections.ts';
 
 export interface SubscriptionsOptions<Env, Context = any, ContextParams = any> {
 	schema: GraphQLSchema;

@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import type { GraphQLResolveInfo } from 'graphql';
 
 export type Resolver<Result, Root, Context, Args> = (
 	params: ResolverParams<Root, Context, Args>,

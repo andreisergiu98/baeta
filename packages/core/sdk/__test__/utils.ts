@@ -1,10 +1,10 @@
-import { IResolvers } from '@graphql-tools/utils';
-import { GraphQLResolveInfo, GraphQLScalarType } from 'graphql';
-import { Middleware, Resolver } from '../../lib';
-import { NativeMiddleware } from '../middleware';
-import { NativeResolver } from '../resolver';
-import { FieldResolvers, ResolversMap } from '../resolver-mapper';
-import { NativeSubscribe } from '../subscription';
+import type { IResolvers } from '@graphql-tools/utils';
+import { type GraphQLResolveInfo, GraphQLScalarType } from 'graphql';
+import type { Middleware, Resolver } from '../../lib/index.ts';
+import type { NativeMiddleware } from '../middleware.ts';
+import type { FieldResolvers, ResolversMap } from '../resolver-mapper.ts';
+import type { NativeResolver } from '../resolver.ts';
+import type { NativeSubscribe } from '../subscription.ts';
 
 export function forgeResolverArgs(root = {}, args = {}, ctx = {}, info = {} as GraphQLResolveInfo) {
 	return {

@@ -1,7 +1,7 @@
 import test from 'ava';
 import { gql } from 'graphql-tag';
-import { makeInvalidInputMacro, makeValidInputMacro } from '../../__tests__/macros';
-import { inputConstraints } from './input-validation';
+import { makeInvalidInputMacro, makeValidInputMacro } from '../../__tests__/macros.ts';
+import { inputConstraints } from './input-validation.ts';
 
 const typeDefs = gql`
   input MinFieldsInput @constraints(minFields: 1) {

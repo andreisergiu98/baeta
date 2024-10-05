@@ -1,6 +1,6 @@
-import { NormalizedGeneratorOptions } from './config';
-import { FileManager } from './file-manager';
-import { WatcherFile } from './watcher';
+import type { NormalizedGeneratorOptions } from './config.ts';
+import type { FileManager } from './file-manager.ts';
+import type { WatcherFile } from './watcher.ts';
 
 export type Ctx<T = unknown> = {
 	fileManager: FileManager;

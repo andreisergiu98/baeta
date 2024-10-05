@@ -1,6 +1,6 @@
 import test from 'ava';
-import { GraphQLResolveInfo } from 'graphql';
-import { createResolverAdapter } from './resolver';
+import type { GraphQLResolveInfo } from 'graphql';
+import { createResolverAdapter } from './resolver.ts';
 
 test('createResolverAdapter should map parameters correctly', (t) => {
 	const adapted = createResolverAdapter((params) => {

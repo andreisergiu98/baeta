@@ -1,5 +1,5 @@
 import { performance } from 'node:perf_hooks';
-import { Plugin, formatMessages } from 'esbuild';
+import { type Plugin, formatMessages } from 'esbuild';
 
 export interface HooksOptions {
 	onBuildStart: (startTime: number) => void | Promise<void>;

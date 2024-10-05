@@ -1,10 +1,10 @@
-import { IResolvers } from '@graphql-tools/utils';
-import { GraphQLFieldResolver, defaultFieldResolver } from 'graphql';
-import { ScalarResolver } from '../lib';
-import { composeResolvers } from './compose';
-import { NativeMiddleware } from './middleware';
-import { NativeTypeResolver } from './resolver-type';
-import { NativeSubscribe } from './subscription';
+import type { IResolvers } from '@graphql-tools/utils';
+import { type GraphQLFieldResolver, defaultFieldResolver } from 'graphql';
+import type { ScalarResolver } from '../lib/index.ts';
+import { composeResolvers } from './compose.ts';
+import type { NativeMiddleware } from './middleware.ts';
+import type { NativeTypeResolver } from './resolver-type.ts';
+import type { NativeSubscribe } from './subscription.ts';
 
 export type FieldResolvers = Record<string, GraphQLFieldResolver<unknown, unknown>> & {
 	__resolveType?: NativeTypeResolver;

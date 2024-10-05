@@ -1,5 +1,5 @@
 import { context } from 'esbuild';
-import { CompilerOptions, createEsbuildConfig } from './esbuild-config';
+import { type CompilerOptions, createEsbuildConfig } from './esbuild-config.ts';
 
 export async function build(options: CompilerOptions) {
 	const esbuildConfig = createEsbuildConfig(options);

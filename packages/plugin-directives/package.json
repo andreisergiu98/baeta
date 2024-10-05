@@ -51,7 +51,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^20.16.10",
+    "@types/node": "^22.7.4",
     "graphql": "^16.9.0",
     "typescript": "^5.6.2"
   },
@@ -59,9 +59,18 @@
     "@baeta/directives": "workspace:^"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--no-warnings",
+      "--experimental-transform-types"
+    ]
   }
 }

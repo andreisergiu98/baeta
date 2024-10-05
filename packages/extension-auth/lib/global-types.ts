@@ -1,10 +1,10 @@
-import {
+import type {
 	AuthMethodOptions,
 	AuthMethodSubscribeOptions,
 	GetPostScopeRules,
 	GetScopeRules,
-} from './auth-extension';
-import { ScopeRules } from './scope-rules';
+} from './auth-extension.ts';
+import type { ScopeRules } from './scope-rules.ts';
 
 declare global {
 	export namespace BaetaExtensions {

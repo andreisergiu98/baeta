@@ -1,7 +1,7 @@
-import { Box, Text, TextProps } from 'ink';
-import React, { PropsWithChildren } from 'react';
-import { Spinner } from './spinner';
-import { Time } from './time';
+import { Box, Text, type TextProps } from 'ink';
+import React, { type PropsWithChildren } from 'react';
+import { Spinner } from './spinner.tsx';
+import { Time } from './time.tsx';
 
 export interface LayoutProps {
 	loading?: boolean;

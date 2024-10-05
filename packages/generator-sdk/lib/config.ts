@@ -1,5 +1,5 @@
 import { isAbsolute, join, posixPath, relative, resolve } from '@baeta/util-path';
-import { FileOptions } from './file';
+import type { FileOptions } from './file.ts';
 
 /**
  * Options for the graphql generator.

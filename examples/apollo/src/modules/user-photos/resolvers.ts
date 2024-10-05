@@ -1,4 +1,4 @@
-import { getUserPhotosModule } from './typedef';
+import { getUserPhotosModule } from './typedef.ts';
 
 const { User } = getUserPhotosModule();
 

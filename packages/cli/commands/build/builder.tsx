@@ -1,13 +1,13 @@
 import type { CompilerOptions } from '@baeta/compiler';
 import type { BuildContext } from '@baeta/compiler/esbuild';
-import { Subprocess } from 'execa';
+import type { Subprocess } from 'execa';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { makeErrorMessage, useConfig } from '../../sdk';
-import { dynamicImportCompiler } from '../../utils/compiler';
-import { WithGenerator } from '../generate/with-generator';
-import { AppStatus } from './app-status';
-import { killProcesses, startProcess } from './builder-plugin';
-import { BuilderStatus } from './builder-status';
+import { makeErrorMessage, useConfig } from '../../sdk/index.ts';
+import { dynamicImportCompiler } from '../../utils/compiler.ts';
+import { WithGenerator } from '../generate/with-generator.tsx';
+import { AppStatus } from './app-status.tsx';
+import { killProcesses, startProcess } from './builder-plugin.ts';
+import { BuilderStatus } from './builder-status.tsx';
 
 interface Props {
 	watch?: boolean;

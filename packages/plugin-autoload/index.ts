@@ -1,8 +1,8 @@
 import * as fs from 'node:fs/promises';
 import {
-	Ctx,
-	FileManager,
-	WatcherFile,
+	type Ctx,
+	type FileManager,
+	type WatcherFile,
 	createPluginV1,
 	getModuleGetName,
 	isMatch,

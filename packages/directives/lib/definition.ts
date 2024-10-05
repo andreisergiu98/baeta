@@ -1,4 +1,4 @@
-import { SchemaTransformer } from '@baeta/core/sdk';
+import type { SchemaTransformer } from '@baeta/core/sdk';
 
 export interface Definition {
 	sdl: string;

@@ -14,7 +14,9 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 			continue;
 		}
 
-		for (const otherDependency of Yarn.dependencies({ ident: dependency.ident })) {
+		for (const otherDependency of Yarn.dependencies({
+			ident: dependency.ident,
+		})) {
 			if (otherDependency.type === 'peerDependencies') {
 				continue;
 			}
@@ -58,11 +60,14 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
-			workspace.set('engines.node', '>=20.0.0');
+			workspace.set('engines.node', '>=22.0.0');
 			workspace.set('scripts.build', 'tsup');
 			workspace.set('scripts.types', 'tsc --noEmit');
 			workspace.set('scripts.prepack', 'prep');
 			workspace.set('scripts.postpack', 'prep --clean');
+
+			workspace.set('ava.extensions.ts', 'module');
+			workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
 		}
 	}
 }

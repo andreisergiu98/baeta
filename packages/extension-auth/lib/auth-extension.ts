@@ -1,13 +1,18 @@
-import { MiddlewareParams } from '@baeta/core';
-import { Extension, ModuleBuilder, NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
-import { GraphQLResolveInfo } from 'graphql';
-import { createResolverPath, isOperationType } from '../utils/resolver';
-import { ScopeErrorResolver, defaultErrorResolver, resolveError } from './error';
-import { GetGrant, saveGrants } from './grant';
-import { LogicRule } from './rule';
-import { GetScopeLoader } from './scope-resolver';
-import { ScopeRules, verifyScopes } from './scope-rules';
-import { loadAuthStore } from './store-loader';
+import type { MiddlewareParams } from '@baeta/core';
+import {
+	Extension,
+	type ModuleBuilder,
+	type NativeMiddleware,
+	type ResolverMapper,
+} from '@baeta/core/sdk';
+import type { GraphQLResolveInfo } from 'graphql';
+import { createResolverPath, isOperationType } from '../utils/resolver.ts';
+import { type ScopeErrorResolver, defaultErrorResolver, resolveError } from './error.ts';
+import { type GetGrant, saveGrants } from './grant.ts';
+import type { LogicRule } from './rule.ts';
+import type { GetScopeLoader } from './scope-resolver.ts';
+import { type ScopeRules, verifyScopes } from './scope-rules.ts';
+import { loadAuthStore } from './store-loader.ts';
 
 interface OperationOptions<T> {
 	Query?: T;

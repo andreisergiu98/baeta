@@ -1,5 +1,5 @@
 import { Writable } from 'node:stream';
-import { Subprocess, execa, parseCommandString } from 'execa';
+import { type Subprocess, execa, parseCommandString } from 'execa';
 import kill from 'tree-kill';
 
 export async function killProcesses(processes: Subprocess[]) {

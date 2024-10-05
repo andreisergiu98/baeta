@@ -11,6 +11,8 @@
     "noImplicitAny": true,
     "isolatedModules": true,
     "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,

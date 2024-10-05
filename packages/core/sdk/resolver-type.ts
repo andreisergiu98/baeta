@@ -1,5 +1,5 @@
-import { GraphQLTypeResolver } from 'graphql';
-import { TypeResolver } from '../lib';
+import type { GraphQLTypeResolver } from 'graphql';
+import type { TypeResolver } from '../lib/index.ts';
 
 export type NativeTypeResolver = GraphQLTypeResolver<unknown, unknown>;
 

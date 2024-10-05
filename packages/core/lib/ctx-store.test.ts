@@ -1,5 +1,5 @@
 import test from 'ava';
-import { ContextStoreValue, createContextStore } from './ctx-store';
+import { type ContextStoreValue, createContextStore } from './ctx-store.ts';
 
 test('store should wait for get before loading to ctx when lazy', (t) => {
 	const storeKey = Symbol('storeKey');

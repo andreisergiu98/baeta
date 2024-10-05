@@ -1,8 +1,8 @@
-import { GraphQLError, GraphQLSchema, getArgumentValues, parse } from 'graphql';
-import { SubscribeMessage, SubscribePayload } from 'graphql-ws';
+import { GraphQLError, type GraphQLSchema, getArgumentValues, parse } from 'graphql';
+import type { SubscribeMessage, SubscribePayload } from 'graphql-ws';
 import { collectFields } from 'graphql/execution/collectFields';
 import {
-	ExecutionContext,
+	type ExecutionContext,
 	buildExecutionContext,
 	buildResolveInfo,
 	getFieldDef,

@@ -1,5 +1,5 @@
 import test from 'ava';
-import { createObjectLens } from './object';
+import { createObjectLens } from './object.ts';
 
 test('get function returns the value at the specified path', (t) => {
 	const input = { foo: { bar: { baz: 'hello' } } };

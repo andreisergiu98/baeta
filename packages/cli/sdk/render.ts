@@ -1,6 +1,6 @@
 import { render } from 'ink';
-import { FunctionComponent, createElement } from 'react';
-import { ConfigProps, ConfigProvider } from './config-provider';
+import { type FunctionComponent, createElement } from 'react';
+import { type ConfigProps, ConfigProvider } from './config-provider.tsx';
 
 export function renderComponentWithoutConfig<P extends {}>(
 	component: FunctionComponent<P>,

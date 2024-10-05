@@ -3385,7 +3385,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240925.0"
+    "@cloudflare/workers-types": "npm:^4.20241004.0"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -4077,7 +4077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20240925.0, @cloudflare/workers-types@npm:^4.20241004.0":
+"@cloudflare/workers-types@npm:^4.20241004.0":
   version: 4.20241004.0
   resolution: "@cloudflare/workers-types@npm:4.20241004.0"
   checksum: 10/0ee4e5bb608d2a67b1c349cebb3545c133699309262f62983f651c9faef53b881f236ee80f30c4b4d58148e53ac7b159c704f867ec86ae70e3e2abaea939283a

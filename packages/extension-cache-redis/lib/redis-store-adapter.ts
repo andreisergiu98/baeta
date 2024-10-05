@@ -53,31 +53,21 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 	};
 
-	saveQueryResult = async (
+	protected saveQueryMetadata = async (
 		queryRef: string,
 		parentRef: ParentRef,
 		args: Record<string, unknown>,
-		data: Item | Item[],
+		meta: string[],
 	) => {
-		const isList = Array.isArray(data);
-		const items = isList ? data : [data];
-
-		if (items.length === 0) {
-			return;
-		}
-
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
-		const refs = items.map((item) => this.getRef(item));
 
 		const pipeline = this.client.pipeline();
 		pipeline.unlink(key);
-		pipeline.rpush(key, isList ? '1' : '0', ...refs);
+		pipeline.rpush(key, ...meta);
 
 		if (this.options?.ttl) {
 			pipeline.expire(key, this.options.ttl);
 		}
-
-		await this.saveMany(items.filter((item) => item != null));
 
 		const result = await pipeline.exec();
 		const err = collectPipelineErrors(result ?? []);
@@ -85,6 +75,19 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (err) {
 			throw err;
 		}
+	};
+
+	protected loadQueryMetadata = async (
+		queryRef: string,
+		parentRef: ParentRef,
+		args: Record<string, unknown>,
+	) => {
+		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const meta = await this.client.lrange(key, 0, -1);
+		if (meta.length === 0) {
+			return null;
+		}
+		return meta;
 	};
 
 	deleteQueries = async (
@@ -105,28 +108,6 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		const keys = refs.map((ref) => this.createKey(ref));
 		const results = await this.client.mget(keys);
 		return results.map((result) => (result == null ? null : (JSON.parse(result) as Item)));
-	};
-
-	protected loadQueryResults = async (
-		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
-	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
-		const [isListStr, ...refs] = await this.client.lrange(key, 0, -1);
-
-		if (refs.length < 1) {
-			return null;
-		}
-
-		const isList = isListStr === '1';
-		const items = await this.getMany(refs);
-
-		if (items == null) {
-			return null;
-		}
-
-		return { items, isList };
 	};
 
 	protected async searchQueries(

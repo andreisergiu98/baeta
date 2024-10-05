@@ -41,23 +41,27 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		return this.client.get(keys).then((res) => res ?? null);
 	};
 
-	saveQueryResult = async (
+	protected saveQueryMetadata = async (
 		queryRef: string,
 		parentRef: ParentRef,
 		args: Record<string, unknown>,
-		data: Item | Item[],
+		meta: string[],
 	) => {
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
-		const isList = Array.isArray(data);
-		const items = isList ? data : [data];
-		const refs = items.map((item) => this.getRef(item));
+		await this.client.set(key, meta, this.getTtl());
+	};
 
-		if (refs.length === 0) {
-			return;
+	protected loadQueryMetadata = async (
+		queryRef: string,
+		parentRef: ParentRef,
+		args: Record<string, unknown>,
+	) => {
+		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const meta = await this.client.get(key).then((res) => (res ?? []) as string[]);
+		if (meta.length === 0) {
+			return null;
 		}
-
-		await this.saveMany(items);
-		await this.client.set(key, [isList ? '1' : '0', ...refs], this.getTtl());
+		return meta;
 	};
 
 	deleteQueries = async (
@@ -76,28 +80,6 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (this.options?.ttl) {
 			return this.options.ttl * 1000;
 		}
-	};
-
-	protected loadQueryResults = async (
-		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
-	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
-		const [isListStr, ...refs] = await this.client.get(key).then((res) => (res ?? []) as string[]);
-
-		if (refs.length < 1) {
-			return null;
-		}
-
-		const isList = isListStr === '1';
-		const items = await this.getMany(refs);
-
-		if (items == null) {
-			return null;
-		}
-
-		return { items, isList };
 	};
 
 	protected async searchQueries(

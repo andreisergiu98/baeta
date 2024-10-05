@@ -3,8 +3,7 @@ import { encodeBase64Url } from '@baeta/util-encoding';
 import DataLoader from 'dataloader';
 import { flatten } from 'flat';
 
-export type Ref = string | number;
-
+export type Ref = string;
 export type ParentRef = Ref | null | undefined;
 
 export interface StoreAdapterOptions {
@@ -28,18 +27,18 @@ export abstract class StoreAdapter<Item> {
 
 	protected abstract loadMany: (refs: Ref[]) => Promise<Array<Item | null> | null>;
 
-	protected abstract loadQueryResults: (
+	protected abstract saveQueryMetadata: (
 		queryRef: string,
 		parentRef: ParentRef,
 		args: Record<string, unknown>,
-	) => Promise<{ items: Array<Item>; isList: boolean } | null>;
-
-	abstract saveQueryResult: (
-		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
-		data: Item | Array<Item>,
+		meta: string[],
 	) => Promise<void>;
+
+	protected abstract loadQueryMetadata: (
+		queryRef: string,
+		parentRef: ParentRef,
+		args: Record<string, unknown>,
+	) => Promise<string[] | null>;
 
 	abstract deleteQueries: (
 		queryRef?: string,
@@ -69,7 +68,7 @@ export abstract class StoreAdapter<Item> {
 
 	createKeyByQuery(queryRef: string, parentRef: ParentRef, args: Record<string, unknown>) {
 		const namespace = this.createQueryKeyNamespace(queryRef);
-		const metadata = this.createQueryKeyMetadata(parentRef, args);
+		const metadata = this.createQueryKeyHeader(parentRef, args);
 		return `${namespace}:${metadata}`;
 	}
 
@@ -83,7 +82,7 @@ export abstract class StoreAdapter<Item> {
 		return `${this.type}:${queryRef}:${this.getVersion()}`;
 	}
 
-	protected createQueryKeyMetadata(parentRef: ParentRef, args: Record<string, unknown>) {
+	protected createQueryKeyHeader(parentRef: ParentRef, args: Record<string, unknown>) {
 		const encodedArgs = this.encodeQueryArgs(args);
 		const encodedParentRef = this.encodePrimitive(parentRef);
 		return `parent#${encodedParentRef}#args#${encodedArgs}`;
@@ -148,7 +147,83 @@ export abstract class StoreAdapter<Item> {
 		return { query: result.items };
 	};
 
-	createQueryMiddleware = <T extends Item | Item[]>(
+	saveQueryResult = async (
+		queryRef: string,
+		parentRef: ParentRef,
+		args: Record<string, unknown>,
+		data: null | Item | Array<Item | null>,
+	) => {
+		const isList = Array.isArray(data);
+		const isListIndicator = isList ? '1' : '0';
+
+		const items = isList ? data : [data];
+		const itemsFiltered = items.filter((item) => item != null);
+
+		const encodedRefs = items.map((item) => this.encodeQueryItemRef(item));
+
+		const itemsData = [isListIndicator, ...encodedRefs];
+
+		if (items.length > 0) {
+			await this.saveMany(itemsFiltered);
+		}
+
+		return this.saveQueryMetadata(queryRef, parentRef, args, itemsData);
+	};
+
+	protected async loadQueryResults(
+		queryRef: string,
+		parentRef: ParentRef,
+		args: Record<string, unknown>,
+	): Promise<{ items: Array<Item | null>; isList: boolean } | null> {
+		const meta = await this.loadQueryMetadata(queryRef, parentRef, args);
+
+		if (meta == null) {
+			return null;
+		}
+
+		const [isListIndicator, ...encodedRefs] = meta;
+
+		const isList = isListIndicator === '1';
+
+		const nullableRefs = encodedRefs.map((encodedRef) => this.decodeQueryItemRef(encodedRef));
+		const refs = nullableRefs.filter((ref) => ref != null);
+
+		const items = await this.getMany(refs);
+
+		if (items == null) {
+			return null;
+		}
+
+		const ordered: Array<Item | null> = [];
+
+		for (let i = 0, j = 0; i < nullableRefs.length; i++) {
+			if (nullableRefs[i] == null) {
+				ordered.push(null);
+			} else {
+				ordered.push(items[j]);
+				j++;
+			}
+		}
+
+		return { items: ordered, isList };
+	}
+
+	protected encodeQueryItemRef(item: null | Item) {
+		if (item == null) {
+			return '_null_';
+		}
+		const ref = this.getRef(item);
+		return `_ref_${ref}`;
+	}
+
+	protected decodeQueryItemRef(encodedRef: string) {
+		if (encodedRef === '_null_') {
+			return null;
+		}
+		return encodedRef.substring(5);
+	}
+
+	createQueryMiddleware = <T extends null | Item | Item[] | Array<Item | null>>(
 		queryRef: string,
 	): Middleware<T, any, any, Record<string, unknown>> => {
 		return async (params, next): Promise<T> => {
@@ -263,15 +338,17 @@ export abstract class StoreAdapter<Item> {
 
 		if (typeof root === 'object' && 'id' in root) {
 			this.validateRefType(root.id);
-			return root.id;
+			return root.id.toString();
 		}
 
 		throw new Error('Object does not have id. Define getRef function in cache options');
 	}
 
-	protected validateRefType(ref: unknown): asserts ref is Ref {
-		if (typeof ref !== 'string' && typeof ref !== 'number') {
-			throw new Error('Reference must be string or number');
+	protected validateRefType(ref: unknown): asserts ref is string | number | bigint {
+		if (typeof ref !== 'string' && typeof ref !== 'number' && typeof ref !== 'bigint') {
+			throw new Error(
+				'Reference must be string, number or bigint. Define getRef function in cache options',
+			);
 		}
 	}
 }

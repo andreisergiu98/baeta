@@ -1,6 +1,6 @@
 {
   "name": "@baeta/cloudflare-subscriptions",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "keywords": [
     "baeta",
     "graphql",

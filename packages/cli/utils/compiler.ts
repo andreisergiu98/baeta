@@ -1,4 +1,4 @@
-import { dynamicImport } from './import';
+import { dynamicImport } from './import.ts';
 
 export async function dynamicImportCompiler() {
 	if (process.env.BAETA_CLI_DEV === '1') {

@@ -1,12 +1,12 @@
-import { NormalizedGeneratorOptions } from '@baeta/generator-sdk';
+import type { NormalizedGeneratorOptions } from '@baeta/generator-sdk';
 import { codegen as gqlCodegen } from '@graphql-codegen/core';
 import { normalizeConfig, normalizeInstanceOrArray } from '@graphql-codegen/plugin-helpers';
 import * as typescriptPlugin from '@graphql-codegen/typescript';
-import { UnnormalizedTypeDefPointer } from '@graphql-tools/load';
-import { createCache } from '../utils/cache';
-import { loadSchema } from '../utils/load';
-import * as contextPlugin from './context';
-import * as modules from './modules';
+import type { UnnormalizedTypeDefPointer } from '@graphql-tools/load';
+import { createCache } from '../utils/cache.ts';
+import { loadSchema } from '../utils/load.ts';
+import * as contextPlugin from './context/index.ts';
+import * as modules from './modules/index.ts';
 
 export async function generate(options: NormalizedGeneratorOptions) {
 	const rootConfig = {

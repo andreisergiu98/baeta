@@ -1,5 +1,5 @@
-import { createObjectLens } from '../utils/object';
-import { MiddlewareMap, ResolversMap, SubscriptionsResolvers } from './resolver-mapper';
+import { createObjectLens } from '../utils/object.ts';
+import type { MiddlewareMap, ResolversMap, SubscriptionsResolvers } from './resolver-mapper.ts';
 
 export function composeResolvers(resolvers: ResolversMap, middlewareMap: MiddlewareMap = {}) {
 	const composed = copyResolvers(resolvers);

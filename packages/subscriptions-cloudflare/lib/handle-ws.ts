@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { getPoolingId } from './pooling-type';
-import { SubscriptionsOptions } from './subscription';
+import { getPoolingId } from './pooling-type.ts';
+import type { SubscriptionsOptions } from './subscription.ts';
 
 export function handleWS<Env>(
 	request: Request,

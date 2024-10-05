@@ -1,6 +1,6 @@
 import { Text } from 'ink';
 import React from 'react';
-import { Layout } from '../../sdk';
+import { Layout } from '../../sdk/index.ts';
 
 export function AppStatus({ output }: { output: string[] }) {
 	return (

@@ -1,7 +1,7 @@
-import { MiddlewareParams } from '@baeta/core';
-import { GraphQLResolveInfo } from 'graphql';
-import { createResolverPath } from '../utils/resolver';
-import { getAuthStore } from './store';
+import type { MiddlewareParams } from '@baeta/core';
+import type { GraphQLResolveInfo } from 'graphql';
+import { createResolverPath } from '../utils/resolver.ts';
+import { getAuthStore } from './store.ts';
 
 export const grantRule = '$granted' as const;
 

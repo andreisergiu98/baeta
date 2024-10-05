@@ -1,26 +1,26 @@
-import { BaseVisitor } from '@graphql-codegen/visitor-plugin-common';
+import type { BaseVisitor } from '@graphql-codegen/visitor-plugin-common';
 import { pascalCase } from 'change-case-all';
 import {
-	DocumentNode,
-	EnumTypeDefinitionNode,
-	EnumTypeExtensionNode,
-	GraphQLSchema,
-	InputObjectTypeDefinitionNode,
-	InputObjectTypeExtensionNode,
-	InterfaceTypeDefinitionNode,
-	InterfaceTypeExtensionNode,
+	type DocumentNode,
+	type EnumTypeDefinitionNode,
+	type EnumTypeExtensionNode,
+	type GraphQLSchema,
+	type InputObjectTypeDefinitionNode,
+	type InputObjectTypeExtensionNode,
+	type InterfaceTypeDefinitionNode,
+	type InterfaceTypeExtensionNode,
 	Kind,
-	ObjectTypeDefinitionNode,
-	ObjectTypeExtensionNode,
-	TypeDefinitionNode,
-	TypeExtensionNode,
-	UnionTypeDefinitionNode,
+	type ObjectTypeDefinitionNode,
+	type ObjectTypeExtensionNode,
+	type TypeDefinitionNode,
+	type TypeExtensionNode,
+	type UnionTypeDefinitionNode,
 	isInterfaceType,
 	isScalarType,
 	isUnionType,
 	visit,
 } from 'graphql';
-import { ModulesConfig } from './config';
+import type { ModulesConfig } from './config.ts';
 import {
 	buildBlock,
 	collectUsedTypes,
@@ -31,7 +31,7 @@ import {
 	unique,
 	uniqueByKey,
 	withQuotes,
-} from './utils';
+} from './utils.ts';
 
 type RegistryKeys = 'objects' | 'inputs' | 'interfaces' | 'scalars' | 'unions' | 'enums';
 type Registry = Record<RegistryKeys, string[]>;

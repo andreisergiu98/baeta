@@ -4,8 +4,8 @@ import {
 	makeAggregateErrorsInputMacro,
 	makeInvalidInputMacro,
 	makeValidInputMacro,
-} from '../../__tests__/macros';
-import { stringValidation } from '../string/string-validation';
+} from '../../__tests__/macros.ts';
+import { stringValidation } from '../string/string-validation.ts';
 
 const typeDefs = gql`
   input EmailInput {

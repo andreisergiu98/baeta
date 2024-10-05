@@ -1,7 +1,7 @@
 import { PluginType } from '@baeta/plugin';
-import { NormalizedGeneratorOptions } from './config';
-import { Ctx } from './ctx';
-import { Watcher, WatcherFile } from './watcher';
+import type { NormalizedGeneratorOptions } from './config.ts';
+import type { Ctx } from './ctx.ts';
+import type { Watcher, WatcherFile } from './watcher.ts';
 
 export enum GeneratorPluginVersion {
 	V1 = 'v1',

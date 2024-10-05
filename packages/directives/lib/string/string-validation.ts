@@ -2,7 +2,7 @@ import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
 import { validate as validateEmail } from 'email-validator';
 import isUrl from 'is-url';
-import { Definition } from '../definition';
+import type { Definition } from '../definition.ts';
 
 interface Args {
 	format?: 'EMAIL' | 'UUID' | 'URL';

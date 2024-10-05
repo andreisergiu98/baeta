@@ -1,6 +1,6 @@
 import { ForbiddenError } from '@baeta/errors';
-import { Scopes } from './scope-rules';
-import { getAuthStore } from './store';
+import type { Scopes } from './scope-rules.ts';
+import { getAuthStore } from './store.ts';
 
 export type GetScopeLoader<Ctx> = (ctx: Ctx) => ScopeLoaderMap | Promise<ScopeLoaderMap>;
 

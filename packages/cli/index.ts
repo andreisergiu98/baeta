@@ -1,2 +1,2 @@
-export { defineConfig } from './lib/config';
-export type { BaetaOptions } from './lib/config';
+export { defineConfig } from './lib/config.ts';
+export type { BaetaOptions } from './lib/config.ts';

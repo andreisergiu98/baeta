@@ -1,5 +1,5 @@
-import { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
-import { Subscribe, SubscribeResolve, Subscription } from '../lib/subscription';
+import type { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
+import type { Subscribe, SubscribeResolve, Subscription } from '../lib/subscription.ts';
 
 export type NativeSubscribe<Payload = any, Result = any, Root = any, Context = any, Args = any> = {
 	subscribe: (

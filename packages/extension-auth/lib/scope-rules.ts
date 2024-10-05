@@ -1,7 +1,7 @@
 import { ForbiddenError } from '@baeta/errors';
-import { isGrantedKey } from './grant';
-import { LogicRule, isLogicRule } from './rule';
-import { getAuthStore } from './store';
+import { isGrantedKey } from './grant.ts';
+import { type LogicRule, isLogicRule } from './rule.ts';
+import { getAuthStore } from './store.ts';
 
 export type Scopes = keyof AuthExtension.Scopes;
 

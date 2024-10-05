@@ -1,7 +1,7 @@
 import yargs from 'yargs';
-import { createBuildCommand } from './commands/build';
-import { createGenerateCommand } from './commands/generate';
-import { loadConfig } from './lib/config-loader';
+import { createBuildCommand } from './commands/build/index.ts';
+import { createGenerateCommand } from './commands/generate/index.ts';
+import { loadConfig } from './lib/config-loader.ts';
 
 process.on('exit', () => {
 	const fixCursor = '\x1B[?25h';

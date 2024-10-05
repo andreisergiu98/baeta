@@ -12,19 +12,37 @@
     "camelcase",
     "clsx",
     "codegen",
-    "Datamodel",
+    "datamodel",
     "dirpath",
     "dmmf",
     "esbuild",
     "execa",
     "middlewares",
     "outdir",
-    "Unnormalized"
+    "unnormalized"
   ],
-  "editor.defaultFormatter": "biomejs.biome",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifierEnding": "auto",
   "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[graphql]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
     "editor.defaultFormatter": "biomejs.biome"
   }
 }

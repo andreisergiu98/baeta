@@ -1,5 +1,5 @@
 import React from 'react';
-import { Snippet, SnippetProps } from './snippet';
+import { Snippet, type SnippetProps } from './snippet.ts';
 
 const featureList: Array<Omit<SnippetProps, 'idx'>> = [
 	{

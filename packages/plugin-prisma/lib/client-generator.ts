@@ -1,8 +1,8 @@
 import { readFile } from 'node:fs/promises';
-import { Ctx, WatcherFile } from '@baeta/generator-sdk';
+import type { Ctx, WatcherFile } from '@baeta/generator-sdk';
 import { createExecPlugin } from '@baeta/plugin-exec';
 import { resolve } from '@baeta/util-path';
-import { PrismaPluginOptions } from './options';
+import type { PrismaPluginOptions } from './options.ts';
 
 async function compareSchemas(cwd: string, current: string, generated: string) {
 	const [currentSchema, generatedSchema] = await Promise.all([

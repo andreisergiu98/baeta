@@ -1,12 +1,12 @@
 import { MapperKind, getDirectives, mapSchema } from '@graphql-tools/utils';
-import { GraphQLSchema } from 'graphql';
-import { createObjectLens } from '../../utils/object';
+import type { GraphQLSchema } from 'graphql';
+import { createObjectLens } from '../../utils/object.ts';
 import {
-	ValidationOptions,
+	type ValidationOptions,
 	addArgumentValidationsExtension,
 	addValidationsExtension,
-} from './input-extensions';
-import { ValidateParams } from './input-schema';
+} from './input-extensions.ts';
+import type { ValidateParams } from './input-schema.ts';
 
 export type ValidationTarget = 'list' | 'object' | 'scalar';
 

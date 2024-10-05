@@ -1,9 +1,9 @@
 import {
-	Ctx,
+	type Ctx,
 	FileManager,
-	GeneratorPluginV1,
-	NormalizedGeneratorOptions,
-	WatcherFile,
+	type GeneratorPluginV1,
+	type NormalizedGeneratorOptions,
+	type WatcherFile,
 } from '@baeta/generator-sdk';
 
 interface CtxOptions {

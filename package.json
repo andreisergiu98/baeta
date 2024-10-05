@@ -34,13 +34,13 @@
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",
     "docs": "yarn workspace @baeta/website build",
-    "linter:check": "biome check .",
+    "linter": "biome check .",
     "prepare": "husky install",
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",
     "test": "yarn turbo test --filter='./packages/*'",
-    "type:check": "yarn workspaces foreach -Apv run types",
+    "types": "yarn workspaces foreach -Apv run types",
     "watch": "yarn turbo watch build --filter='./packages/*'"
   },
   "devDependencies": {

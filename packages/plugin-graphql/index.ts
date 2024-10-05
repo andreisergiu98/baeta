@@ -1,5 +1,5 @@
-import { WatcherFile, createPluginV1, isMatch } from '@baeta/generator-sdk';
-import { generate } from './lib/codegen';
+import { type WatcherFile, createPluginV1, isMatch } from '@baeta/generator-sdk';
+import { generate } from './lib/codegen.ts';
 
 export function graphqlPlugin() {
 	return createPluginV1({

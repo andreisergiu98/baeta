@@ -6,7 +6,7 @@ const { defineConfig } = require('@yarnpkg/types');
 /**
  * This rule will enforce that a workspace MUST depend on the same version of
  * a dependency as the one used by the other workspaces.
- * @param {import('@yarnpkg/types/lib/constraints').Context} context
+ * @param {import('@yarnpkg/types').Yarn.Constraints.Context} context
  */
 function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 	for (const dependency of Yarn.dependencies()) {
@@ -14,7 +14,9 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 			continue;
 		}
 
-		for (const otherDependency of Yarn.dependencies({ ident: dependency.ident })) {
+		for (const otherDependency of Yarn.dependencies({
+			ident: dependency.ident,
+		})) {
 			if (otherDependency.type === 'peerDependencies') {
 				continue;
 			}
@@ -26,7 +28,7 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 
 /**
  * This rule will enforce consistent metadata across all packages.
- * @param {import('@yarnpkg/types/lib/constraints').Context} context
+ * @param {import('@yarnpkg/types').Yarn.Constraints.Context} context
  */
 function enforceWorkspaceMetadata({ Yarn }) {
 	for (const workspace of Yarn.workspaces()) {
@@ -58,11 +60,14 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
-			workspace.set('engines.node', '>=20.0.0');
+			workspace.set('engines.node', '>=22.0.0');
 			workspace.set('scripts.build', 'tsup');
 			workspace.set('scripts.types', 'tsc --noEmit');
 			workspace.set('scripts.prepack', 'prep');
 			workspace.set('scripts.postpack', 'prep --clean');
+
+			workspace.set('ava.extensions.ts', 'module');
+			workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
 		}
 	}
 }

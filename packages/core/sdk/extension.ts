@@ -1,6 +1,6 @@
-import { ModuleBuilder } from './module';
-import { ResolverMapper } from './resolver-mapper';
-import { SchemaTransformer } from './transformer';
+import type { ModuleBuilder } from './module.ts';
+import type { ResolverMapper } from './resolver-mapper.ts';
+import type { SchemaTransformer } from './transformer.ts';
 
 declare global {
 	export namespace BaetaExtensions {

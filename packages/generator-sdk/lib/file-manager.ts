@@ -1,4 +1,4 @@
-import { File, FileOptions } from './file';
+import { File, type FileOptions } from './file.ts';
 
 export class FileManager {
 	files: File[] = [];

@@ -1,6 +1,6 @@
-import { LoadedBaetaConfig } from '../../lib/config-loader';
-import { createCommand, makeErrorMessage, renderComponent } from '../../sdk';
-import { Generator } from './generator';
+import type { LoadedBaetaConfig } from '../../lib/config-loader.ts';
+import { createCommand, makeErrorMessage, renderComponent } from '../../sdk/index.ts';
+import { Generator } from './generator.tsx';
 
 interface Args {
 	watch?: boolean;

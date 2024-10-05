@@ -1,6 +1,6 @@
-import { PluginFunction, Types } from '@graphql-codegen/plugin-helpers';
+import type { PluginFunction, Types } from '@graphql-codegen/plugin-helpers';
 import { buildMapperImport, parseMapper } from '@graphql-codegen/visitor-plugin-common';
-import { GraphQLSchema } from 'graphql';
+import type { GraphQLSchema } from 'graphql';
 
 interface Config {
 	contextType: string | undefined;

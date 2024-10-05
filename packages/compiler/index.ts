@@ -1,4 +1,4 @@
-export { build, buildAndWatch } from './lib/build';
-export { bundleFile } from './lib/bundle-file';
-export { createEsbuildCliHooksPlugin } from './lib/esbuild-cli';
-export type { CompilerOptions } from './lib/esbuild-config';
+export { build, buildAndWatch } from './lib/build.ts';
+export { bundleFile } from './lib/bundle-file.ts';
+export { createEsbuildCliHooksPlugin } from './lib/esbuild-cli.ts';
+export type { CompilerOptions } from './lib/esbuild-config.ts';

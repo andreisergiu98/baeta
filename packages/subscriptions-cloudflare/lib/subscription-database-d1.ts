@@ -1,5 +1,5 @@
-import { SubscriptionInfo } from './subscribe';
-import { SubscriptionDatabase } from './subscription-database';
+import type { SubscriptionInfo } from './subscribe.ts';
+import type { SubscriptionDatabase } from './subscription-database.ts';
 
 interface D1SubscriptionRow {
 	id: string;

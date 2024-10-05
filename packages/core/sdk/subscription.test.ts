@@ -1,6 +1,6 @@
 import test from 'ava';
-import { GraphQLResolveInfo } from 'graphql';
-import { createSubscriptionAdapter } from './subscription';
+import type { GraphQLResolveInfo } from 'graphql';
+import { createSubscriptionAdapter } from './subscription.ts';
 
 test('createSubscriptionAdapter should map parameters correctly', async (t) => {
 	const root = {};

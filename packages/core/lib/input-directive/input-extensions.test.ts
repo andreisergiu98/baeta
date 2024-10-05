@@ -1,14 +1,14 @@
 import test from 'ava';
-import {
+import type {
 	GraphQLField,
 	GraphQLFieldConfig,
 	GraphQLInputFieldConfig,
 	GraphQLInputObjectType,
 } from 'graphql';
 import {
-	ArgumentValidationsExtension,
-	ValidationOptions,
-	ValidationsExtension,
+	type ArgumentValidationsExtension,
+	type ValidationOptions,
+	type ValidationsExtension,
 	addArgumentValidationsExtension,
 	addValidateExtension,
 	addValidationsExtension,
@@ -19,7 +19,7 @@ import {
 	hasValidationsExtension,
 	initArgumentValidationsExtension,
 	initValidationsExtension,
-} from './input-extensions';
+} from './input-extensions.ts';
 
 function mockEmptyInputConfig() {
 	return { extensions: {} } as GraphQLInputObjectType | GraphQLInputFieldConfig;

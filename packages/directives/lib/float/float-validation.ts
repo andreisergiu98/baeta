@@ -1,6 +1,6 @@
 import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
-import { Definition } from '../definition';
+import type { Definition } from '../definition.ts';
 
 interface Args {
 	multipleOf?: number;

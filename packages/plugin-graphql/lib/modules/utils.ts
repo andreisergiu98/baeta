@@ -1,19 +1,19 @@
 import { platform } from 'node:os';
 import { getBaseType } from '@graphql-codegen/plugin-helpers';
 import { DEFAULT_SCALARS, wrapTypeWithModifiers } from '@graphql-codegen/visitor-plugin-common';
-import { Source } from '@graphql-tools/utils';
+import type { Source } from '@graphql-tools/utils';
 import {
-	DefinitionNode,
-	DocumentNode,
-	FieldDefinitionNode,
-	GraphQLFieldMap,
-	GraphQLObjectType,
-	GraphQLSchema,
-	InputValueDefinitionNode,
+	type DefinitionNode,
+	type DocumentNode,
+	type FieldDefinitionNode,
+	type GraphQLFieldMap,
+	type GraphQLObjectType,
+	type GraphQLSchema,
+	type InputValueDefinitionNode,
 	Kind,
-	NamedTypeNode,
-	ObjectTypeDefinitionNode,
-	TypeNode,
+	type NamedTypeNode,
+	type ObjectTypeDefinitionNode,
+	type TypeNode,
 } from 'graphql';
 import parse from 'parse-filepath';
 

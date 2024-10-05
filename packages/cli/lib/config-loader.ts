@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { relative } from '@baeta/util-path';
+import fg from 'fast-glob';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { dynamicImportCompiler } from '../utils/compiler.ts';
 import { dynamicImport } from '../utils/import.ts';
@@ -59,13 +60,9 @@ export async function discoverBaetaConfig() {
 		return configExtensions.map((ext) => `${name}.${ext}`);
 	});
 
-	try {
-		for await (const entry of fs.glob(entries, { cwd: process.cwd() })) {
-			return entry;
-		}
-	} catch (e) {
-		return null;
-	}
+	return fg(entries, { cwd: process.cwd() })
+		.then((res) => res[0])
+		.catch(() => null);
 }
 
 function getRelativeConfigPath(path: string) {

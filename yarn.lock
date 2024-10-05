@@ -3215,7 +3215,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240925.0"
+    "@cloudflare/workers-types": "npm:^4.20241004.0"
     "@types/uuid": "npm:^10.0.0"
     graphql: "npm:^16.9.0"
     graphql-ws: "npm:^5.16.0"
@@ -3349,13 +3349,13 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/plugin-gitignore": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240925.0"
+    "@cloudflare/workers-types": "npm:^4.20241004.0"
     graphql: "npm:^16.9.0"
     graphql-yoga: "npm:^5.7.0"
     hono: "npm:^4.6.3"
     miniflare: "npm:^3.20240925.0"
     typescript: "npm:^5.6.2"
-    wrangler: "npm:^3.79.0"
+    wrangler: "npm:^3.80.0"
   languageName: unknown
   linkType: soft
 
@@ -3428,7 +3428,7 @@ __metadata:
     "@baeta/cloudflare-subscriptions": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20240925.0"
+    "@cloudflare/workers-types": "npm:^4.20241004.0"
     "@types/node": "npm:^20.16.10"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.6.2"
@@ -3997,10 +3997,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20240925.0":
-  version: 4.20240925.0
-  resolution: "@cloudflare/workers-types@npm:4.20240925.0"
-  checksum: 10/caac1d2f638cd01bcfa44bf7effbf22e96cbe8f58ad4fb8472721ccd05a64a8b3ed2da45c90270ee52bf3fdf3275cd3460f2175f4f1d5a5e3420918e0ee87527
+"@cloudflare/workers-types@npm:^4.20241004.0":
+  version: 4.20241004.0
+  resolution: "@cloudflare/workers-types@npm:4.20241004.0"
+  checksum: 10/0ee4e5bb608d2a67b1c349cebb3545c133699309262f62983f651c9faef53b881f236ee80f30c4b4d58148e53ac7b159c704f867ec86ae70e3e2abaea939283a
   languageName: node
   linkType: hard
 
@@ -20861,9 +20861,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrangler@npm:^3.79.0":
-  version: 3.79.0
-  resolution: "wrangler@npm:3.79.0"
+"wrangler@npm:^3.80.0":
+  version: 3.80.0
+  resolution: "wrangler@npm:3.80.0"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:0.3.4"
     "@cloudflare/workers-shared": "npm:0.5.4"
@@ -20894,7 +20894,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 10/cc8e58797d5190768914d2fe1bec1d3733bbe261f4827dc1ce27ef35ab379f08d1657ef13538159f1fd9a07204b795ea52e51a5feddbe9b69bc59593692ef895
+  checksum: 10/026eed9e10f24f8ecbecf0ad8ec03d5935553a097595e4a6f154e755ba6df4bce0c5cc9159b14a4e0e174fbb0bec471ecf0d884be747be080eeccf801d8954cc
   languageName: node
   linkType: hard
 

@@ -1,3 +1,5 @@
+export * from '../utils/functions';
+export * from '../utils/object';
 export * from './extension';
 export * from './middleware';
 export * from './module';

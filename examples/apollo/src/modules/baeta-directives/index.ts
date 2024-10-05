@@ -3,6 +3,6 @@
 
 import { getBaetaDirectivesModule } from "./typedef";
 
-import "./directives.baeta.ts";
+import "./directives.baeta";
 
 export const baetaDirectivesModule = getBaetaDirectivesModule();

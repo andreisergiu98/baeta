@@ -51,6 +51,7 @@ function createContext(
 	return {
 		userId: params.userId,
 		executionCtx: executionContext,
+		waitUntil: executionContext.waitUntil,
 		publish: subscriptions.createPublisher(env, executionContext),
 		subscribe: subscriptions.createSubscriber(),
 	};

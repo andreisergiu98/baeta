@@ -67,7 +67,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('scripts.postpack', 'prep --clean');
 
 			workspace.set('ava.extensions.ts', 'module');
-			workspace.set('ava.nodeArguments', ['--experimental-transform-types']);
+			workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
 		}
 	}
 }

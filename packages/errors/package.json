@@ -66,6 +66,7 @@
       "ts": "module"
     },
     "nodeArguments": [
+      "--no-warnings",
       "--experimental-transform-types"
     ]
   }

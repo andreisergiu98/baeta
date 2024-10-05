@@ -3310,6 +3310,8 @@ __metadata:
     "@baeta/directives": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/extension-auth": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/extension-cache-redis": "workspace:^"
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/plugin-gitignore": "workspace:^"
@@ -3329,6 +3331,7 @@ __metadata:
     graphql: "npm:^16.9.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
+    ioredis: "npm:^5.4.1"
     prisma: "npm:^5.20.0"
     typescript: "npm:^5.6.2"
     ws: "npm:^8.18.0"
@@ -3407,7 +3410,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/extension-cache-redis@workspace:packages/extension-cache-redis":
+"@baeta/extension-cache-redis@workspace:^, @baeta/extension-cache-redis@workspace:packages/extension-cache-redis":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-cache-redis@workspace:packages/extension-cache-redis"
   dependencies:

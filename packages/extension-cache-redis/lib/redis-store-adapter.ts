@@ -17,19 +17,14 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 			return;
 		}
 
-		if (items.length === 1) {
-			const item = items[0];
-			const key = this.createKeyByItem(item);
-			const ttl = this.options?.ttl ?? -1;
-			return this.client.set(key, JSON.stringify(item), 'EX', ttl).then(() => {});
-		}
-
 		const pipeline = this.client.pipeline();
 
 		for (const item of items) {
 			const key = this.createKeyByItem(item);
-			const ttl = this.options?.ttl ?? -1;
-			pipeline.set(key, JSON.stringify(item), 'EX', ttl);
+			pipeline.set(key, JSON.stringify(item));
+			if (this.options?.ttl) {
+				pipeline.expire(key, this.options.ttl);
+			}
 		}
 
 		const result = await pipeline.exec();

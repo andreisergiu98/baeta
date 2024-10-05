@@ -2,7 +2,12 @@ import { getUserModule } from './typedef.ts';
 
 const { Query, User } = getUserModule();
 
+const userCache = User.$createCache({
+	version: 2,
+});
+
 Query.user(async (params) => {
+	console.log('got data from resolver');
 	return {
 		id: params.args.where?.id ?? 'id',
 		name: 'John Doe',
@@ -14,10 +19,14 @@ Query.user.$use((params, next) => {
 	return next();
 });
 
+Query.user.$useCache(userCache);
+
 Query.user.$auth(
 	{
-		isPublic: true,
-		isLoggedIn: true,
+		$or: {
+			isPublic: true,
+			isLoggedIn: true,
+		},
 	},
 	{
 		skipDefaults: true,

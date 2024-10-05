@@ -4,7 +4,7 @@
 import * as Types from "../../__generated__/types";
 import { DocumentNode } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import baetaExtensions from "../../extensions";
+import baetaExtensions from "../../extensions/index.ts";
 
 
 interface DefinedEnumValues {

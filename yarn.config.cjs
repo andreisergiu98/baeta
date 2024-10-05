@@ -6,7 +6,7 @@ const { defineConfig } = require('@yarnpkg/types');
 /**
  * This rule will enforce that a workspace MUST depend on the same version of
  * a dependency as the one used by the other workspaces.
- * @param {import('@yarnpkg/types/lib/constraints').Context} context
+ * @param {import('@yarnpkg/types').Yarn.Constraints.Context} context
  */
 function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 	for (const dependency of Yarn.dependencies()) {
@@ -28,7 +28,7 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 
 /**
  * This rule will enforce consistent metadata across all packages.
- * @param {import('@yarnpkg/types/lib/constraints').Context} context
+ * @param {import('@yarnpkg/types').Yarn.Constraints.Context} context
  */
 function enforceWorkspaceMetadata({ Yarn }) {
 	for (const workspace of Yarn.workspaces()) {

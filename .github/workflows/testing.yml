@@ -19,7 +19,7 @@ jobs:
         uses: andreisergiu98/baeta/ci/setup@main
 
       - name: Run type check
-        run: yarn build && yarn type:check
+        run: yarn build && yarn types
 
   tests:
     name: Tests
@@ -43,7 +43,7 @@ jobs:
         uses: andreisergiu98/baeta/ci/setup@main
 
       - name: Run linting
-        run: yarn linter:check
+        run: yarn linter
 
   pkg-constraints:
     name: Package constraints

@@ -3160,11 +3160,8 @@ __metadata:
   resolution: "@baeta/builder@workspace:tools/builder"
   dependencies:
     "@baeta/tsconfig": "workspace:^"
-    "@parcel/watcher": "npm:^2.4.1"
     "@types/color-hash": "npm:^2.0.0"
     "@types/node": "npm:^22.7.4"
-    ansi-styles: "npm:^6.2.1"
-    color-hash: "npm:^2.0.2"
     esbuild: "npm:^0.24.0"
     esbuild-register: "npm:^3.6.0"
     tsup: "npm:^8.3.0"
@@ -9502,13 +9499,6 @@ __metadata:
   dependencies:
     color-name: "npm:~1.1.4"
   checksum: 10/fa00c91b4332b294de06b443923246bccebe9fab1b253f7fe1772d37b06a2269b4039a85e309abe1fe11b267b11c08d1d0473fda3badd6167f57313af2887a64
-  languageName: node
-  linkType: hard
-
-"color-hash@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "color-hash@npm:2.0.2"
-  checksum: 10/f8c28a698ffdf48fe4863072be45c21c2e77b00ba9cc0460c38a87ca9228e806a24376faebff43b046edca01d66731896002f8d027e0811cdfa174d584a257a5
   languageName: node
   linkType: hard
 

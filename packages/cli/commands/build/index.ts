@@ -1,1 +1,1 @@
-export { createBuildCommand } from './build';
+export { createBuildCommand } from './build.ts';

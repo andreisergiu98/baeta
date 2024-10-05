@@ -1,7 +1,7 @@
 import {
-	Context as ContextType,
-	PropsWithChildren,
-	Provider as ProviderType,
+	type Context as ContextType,
+	type PropsWithChildren,
+	type Provider as ProviderType,
 	createContext,
 	createElement,
 	useContext,

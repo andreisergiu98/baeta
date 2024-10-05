@@ -1,7 +1,7 @@
-import { IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
+import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import { pruneSchema } from '@graphql-tools/utils';
-import { getModuleBuilder, transformSchema } from '../sdk';
-import { addValidationToSchema } from './input-directive/input-schema';
+import { getModuleBuilder, transformSchema } from '../sdk/index.ts';
+import { addValidationToSchema } from './input-directive/input-schema.ts';
 
 type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
 

@@ -1,5 +1,5 @@
 import { isDevelopmentMode } from '@baeta/util-env';
-import { GraphQLError, GraphQLErrorOptions } from 'graphql';
+import { GraphQLError, type GraphQLErrorOptions } from 'graphql';
 
 const isDev = isDevelopmentMode();
 

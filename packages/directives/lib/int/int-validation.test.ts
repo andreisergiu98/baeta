@@ -4,8 +4,8 @@ import {
 	makeAggregateErrorsInputMacro,
 	makeInvalidInputMacro,
 	makeValidInputMacro,
-} from '../../__tests__/macros';
-import { intValidation } from '../int/int-validation';
+} from '../../__tests__/macros.ts';
+import { intValidation } from '../int/int-validation.ts';
 
 const typeDefs = gql`
   input MinInput {

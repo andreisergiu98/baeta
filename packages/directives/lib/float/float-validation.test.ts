@@ -4,8 +4,8 @@ import {
 	makeAggregateErrorsInputMacro,
 	makeInvalidInputMacro,
 	makeValidInputMacro,
-} from '../../__tests__/macros';
-import { floatValidation } from '../float/float-validation';
+} from '../../__tests__/macros.ts';
+import { floatValidation } from '../float/float-validation.ts';
 
 const typeDefs = gql`
   input MinInput {

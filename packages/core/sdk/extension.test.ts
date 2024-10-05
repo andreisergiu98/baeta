@@ -1,5 +1,5 @@
 import test from 'ava';
-import { mergeExtensions } from './extension';
+import { mergeExtensions } from './extension.ts';
 
 test('mergeExtensions merges items correctly', (t) => {
 	const items = [

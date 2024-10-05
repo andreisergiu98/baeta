@@ -1,9 +1,14 @@
-import { GeneratorHooks, generate, generateAndWatch, getGeneratorPlugins } from '@baeta/generator';
+import {
+	type GeneratorHooks,
+	generate,
+	generateAndWatch,
+	getGeneratorPlugins,
+} from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useConfig } from '../../sdk';
-import { flattenArrays } from '../../utils/array';
-import { GeneratorStatus } from './generator-status';
+import { useConfig } from '../../sdk/index.ts';
+import { flattenArrays } from '../../utils/array.ts';
+import { GeneratorStatus } from './generator-status.tsx';
 
 export interface GeneratorProps {
 	watch?: boolean;

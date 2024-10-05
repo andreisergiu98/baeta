@@ -1,4 +1,4 @@
-import { SubscriptionInfo } from './subscribe';
+import type { SubscriptionInfo } from './subscribe.ts';
 
 export abstract class SubscriptionDatabase {
 	async getSubscriptions(topic: string): Promise<SubscriptionInfo[]> {

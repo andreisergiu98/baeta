@@ -1,8 +1,8 @@
-import { SubscribeMessage, handleProtocols } from 'graphql-ws';
-import { PublishData } from './publish';
-import { createSubscriptionInfo } from './subscribe';
-import { SubscriptionsOptions } from './subscription';
-import { useWebsocket } from './use-websocket';
+import { type SubscribeMessage, handleProtocols } from 'graphql-ws';
+import type { PublishData } from './publish.ts';
+import { createSubscriptionInfo } from './subscribe.ts';
+import type { SubscriptionsOptions } from './subscription.ts';
+import { useWebsocket } from './use-websocket.ts';
 
 const forgedCtx: ExecutionContext = {
 	passThroughOnException() {

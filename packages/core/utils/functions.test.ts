@@ -1,5 +1,5 @@
 import test from 'ava';
-import { extendFunction, nameFunction } from './functions';
+import { extendFunction, nameFunction } from './functions.ts';
 
 test('extendFunction extends the function with the provided properties', (t) => {
 	const originalFn = () => {};

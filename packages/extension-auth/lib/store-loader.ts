@@ -1,7 +1,7 @@
-import { createGrantCache } from './grant-cache';
-import { createScopeCache } from './scope-cache';
-import { GetScopeLoader, createScopeResolverMap } from './scope-resolver';
-import { setAuthStore } from './store';
+import { createGrantCache } from './grant-cache.ts';
+import { createScopeCache } from './scope-cache.ts';
+import { type GetScopeLoader, createScopeResolverMap } from './scope-resolver.ts';
+import { setAuthStore } from './store.ts';
 
 export function loadAuthStore<T>(ctx: T, getScopeLoader: GetScopeLoader<T>) {
 	setAuthStore(ctx, async () => {

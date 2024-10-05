@@ -7,6 +7,6 @@
   "exclude": [
     "dist",
     "tsup.config.ts",
-    "tsup.watch.ts"
+    ""
   ]
 }

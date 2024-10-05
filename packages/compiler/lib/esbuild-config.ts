@@ -1,5 +1,5 @@
-import { BuildOptions } from 'esbuild';
-import { getExternals } from './esbuild-externals';
+import type { BuildOptions } from 'esbuild';
+import { getExternals } from './esbuild-externals.ts';
 
 export interface CompilerOptions {
 	/**

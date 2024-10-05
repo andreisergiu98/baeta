@@ -1,1 +1,1 @@
-export { createGenerateCommand } from './generate';
+export { createGenerateCommand } from './generate.ts';

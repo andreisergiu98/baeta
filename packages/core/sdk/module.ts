@@ -1,20 +1,20 @@
-import { DocumentNode, GraphQLSchema } from 'graphql';
-import { Middleware, Resolver, ScalarResolver, TypeResolver } from '../lib';
-import { Subscription } from '../lib/subscription';
-import { extendFunction, nameFunction } from '../utils/functions';
+import type { DocumentNode, GraphQLSchema } from 'graphql';
+import type { Middleware, Resolver, ScalarResolver, TypeResolver } from '../lib/index.ts';
+import type { Subscription } from '../lib/subscription.ts';
+import { extendFunction, nameFunction } from '../utils/functions.ts';
 import {
-	Extension,
-	ExtensionFactory,
+	type Extension,
+	type ExtensionFactory,
 	mergeExtensions,
 	resolveExtensions,
 	withExtensions,
-} from './extension';
-import { GenericMiddleware, createMiddlewareAdapter } from './middleware';
-import { createResolverAdapter } from './resolver';
-import { ResolverMapper } from './resolver-mapper';
-import { createTypeResolverAdapter } from './resolver-type';
-import { createSubscriptionAdapter } from './subscription';
-import { SchemaTransformer, transformSchema } from './transformer';
+} from './extension.ts';
+import { type GenericMiddleware, createMiddlewareAdapter } from './middleware.ts';
+import { ResolverMapper } from './resolver-mapper.ts';
+import { createTypeResolverAdapter } from './resolver-type.ts';
+import { createResolverAdapter } from './resolver.ts';
+import { createSubscriptionAdapter } from './subscription.ts';
+import { type SchemaTransformer, transformSchema } from './transformer.ts';
 
 export interface Module<T> {
 	id: string;

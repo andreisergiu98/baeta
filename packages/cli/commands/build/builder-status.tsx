@@ -1,6 +1,6 @@
 import { Text } from 'ink';
 import React from 'react';
-import { Errors, Layout } from '../../sdk';
+import { Errors, Layout } from '../../sdk/index.ts';
 
 interface StatusProps {
 	running: boolean;

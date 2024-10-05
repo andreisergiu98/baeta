@@ -1,2 +1,2 @@
-export * from './input-directive';
-export { addValidationToSchema } from './input-schema';
+export * from './input-directive.ts';
+export { addValidationToSchema } from './input-schema.ts';

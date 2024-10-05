@@ -1,5 +1,5 @@
-import { Maybe } from '@graphql-tools/utils';
-import {
+import type { Maybe } from '@graphql-tools/utils';
+import type {
 	GraphQLField,
 	GraphQLFieldConfig,
 	GraphQLInputField,
@@ -7,8 +7,8 @@ import {
 	GraphQLInputObjectType,
 	GraphQLNamedInputType,
 } from 'graphql';
-import { ValidationTarget } from './input-directive';
-import { ValidateFn } from './input-schema';
+import type { ValidationTarget } from './input-directive.ts';
+import type { ValidateFn } from './input-schema.ts';
 
 export type ValidationOptions = {
 	target: ValidationTarget;

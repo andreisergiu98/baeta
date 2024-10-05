@@ -23,8 +23,8 @@
         "noBannedTypes": "off",
         "useLiteralKeys": "off"
       },
-      "style": {
-        "useImportType": "off"
+      "correctness": {
+        "useImportExtensions": "error"
       }
     }
   },

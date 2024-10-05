@@ -1,4 +1,4 @@
-import { Ctx, GeneratorPluginV1, GeneratorPluginV1Fn } from '@baeta/generator-sdk';
+import type { Ctx, GeneratorPluginV1, GeneratorPluginV1Fn } from '@baeta/generator-sdk';
 
 export function createRunner(
 	ctx: Ctx,

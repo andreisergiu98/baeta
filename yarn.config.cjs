@@ -14,7 +14,9 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 			continue;
 		}
 
-		for (const otherDependency of Yarn.dependencies({ ident: dependency.ident })) {
+		for (const otherDependency of Yarn.dependencies({
+			ident: dependency.ident,
+		})) {
 			if (otherDependency.type === 'peerDependencies') {
 				continue;
 			}
@@ -63,6 +65,9 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('scripts.types', 'tsc --noEmit');
 			workspace.set('scripts.prepack', 'prep');
 			workspace.set('scripts.postpack', 'prep --clean');
+
+			workspace.set('ava.extensions.ts', 'module');
+			workspace.set('ava.nodeArguments', ['--experimental-transform-types']);
 		}
 	}
 }

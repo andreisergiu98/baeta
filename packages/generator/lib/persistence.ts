@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { Ctx } from '@baeta/generator-sdk';
-import { createContextualTmpDir } from '../utils/tmp';
+import type { Ctx } from '@baeta/generator-sdk';
+import { createContextualTmpDir } from '../utils/tmp.ts';
 
 export interface PersistedState {
 	version: '1';

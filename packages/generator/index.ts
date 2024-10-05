@@ -5,4 +5,4 @@ export type {
 	WatcherFile,
 	WatcherListener,
 } from '@baeta/generator-sdk';
-export * from './lib/generate';
+export * from './lib/generate.ts';

@@ -24,6 +24,7 @@
   "editor.defaultFormatter": "biomejs.biome",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifierEnding": "auto",
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
   }

@@ -1,8 +1,8 @@
 import test from 'ava';
-import { GraphQLSchema } from 'graphql';
+import type { GraphQLSchema } from 'graphql';
 import gql from 'graphql-tag';
-import { makeQueryResolverMacro } from '../../__tests__/macros';
-import { lower, trim, upper } from '../string/string-utils';
+import { makeQueryResolverMacro } from '../../__tests__/macros.ts';
+import { lower, trim, upper } from '../string/string-utils.ts';
 
 const typeDefs = gql`
   input TrimInput {

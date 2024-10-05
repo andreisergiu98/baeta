@@ -1,5 +1,5 @@
 import { createInputDirective } from '@baeta/core';
-import { Definition } from '../definition';
+import type { Definition } from '../definition.ts';
 
 interface TrimArgs {
 	end?: boolean;

@@ -1,5 +1,5 @@
-import { GraphQLFieldResolver } from 'graphql';
-import { Middleware } from '../lib';
+import type { GraphQLFieldResolver } from 'graphql';
+import type { Middleware } from '../lib/index.ts';
 
 export type NativeMiddleware = (
 	next: GraphQLFieldResolver<unknown, unknown, unknown, unknown | Promise<unknown>>,

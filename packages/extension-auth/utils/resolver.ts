@@ -1,4 +1,4 @@
-import { Path } from 'graphql/jsutils/Path';
+import type { Path } from 'graphql/jsutils/Path';
 
 export function createResolverPath(path: Path | undefined, prevKey = ''): string {
 	if (!path) {

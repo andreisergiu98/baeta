@@ -1,7 +1,7 @@
 import test from 'ava';
-import { GraphQLResolveInfo } from 'graphql';
-import { createMiddlewareAdapter } from './middleware';
-import { createResolverAdapter } from './resolver';
+import type { GraphQLResolveInfo } from 'graphql';
+import { createMiddlewareAdapter } from './middleware.ts';
+import { createResolverAdapter } from './resolver.ts';
 
 test('createMiddlewareAdapter should map parameters correctly', (t) => {
 	const root = {};

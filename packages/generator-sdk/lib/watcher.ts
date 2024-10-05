@@ -1,7 +1,13 @@
 import path, { posixPath } from '@baeta/util-path';
-import { AsyncSubscription, Event, EventType, Options, subscribe } from '@parcel/watcher';
+import {
+	type AsyncSubscription,
+	type Event,
+	type EventType,
+	type Options,
+	subscribe,
+} from '@parcel/watcher';
 import micromatch from 'micromatch';
-import { MatchPattern, WatcherIgnore } from './watcher-ignore';
+import { type MatchPattern, WatcherIgnore } from './watcher-ignore.ts';
 
 export { micromatch };
 export const isMatch = micromatch.isMatch;

@@ -1,5 +1,5 @@
-import { GraphQLFieldResolver } from 'graphql';
-import { Resolver } from '../lib';
+import type { GraphQLFieldResolver } from 'graphql';
+import type { Resolver } from '../lib/index.ts';
 
 export type NativeResolver = GraphQLFieldResolver<unknown, unknown>;
 

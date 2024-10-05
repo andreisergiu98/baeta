@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { relative } from '@baeta/util-path';
-import { makeErrorMessage } from '../sdk/errors';
-import { dynamicImportCompiler } from '../utils/compiler';
-import { dynamicImport } from '../utils/import';
-import { BaetaOptions } from './config';
+import { makeErrorMessage } from '../sdk/errors.tsx';
+import { dynamicImportCompiler } from '../utils/compiler.ts';
+import { dynamicImport } from '../utils/import.ts';
+import type { BaetaOptions } from './config.ts';
 
 export interface LoadedBaetaConfig {
 	config: BaetaOptions;

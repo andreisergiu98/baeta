@@ -62,5 +62,13 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--experimental-transform-types"
+    ]
   }
 }

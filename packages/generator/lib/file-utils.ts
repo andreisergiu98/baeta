@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
-import { FileManager } from '@baeta/generator-sdk';
-import { readState } from './persistence';
+import type { FileManager } from '@baeta/generator-sdk';
+import { readState } from './persistence.ts';
 
 export function cleanPreviousFiles(
 	current: FileManager,

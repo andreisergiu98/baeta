@@ -1,15 +1,15 @@
 import {
-	Ctx,
-	GeneratorOptions,
-	GeneratorPluginV1,
+	type Ctx,
+	type GeneratorOptions,
+	type GeneratorPluginV1,
 	Watcher,
-	WatcherFile,
+	type WatcherFile,
 	loadOptions,
 } from '@baeta/generator-sdk';
-import { createCtx } from './ctx';
-import { cleanPreviousFiles } from './file-utils';
-import { getStateFilename, saveState } from './persistence';
-import { startRunner } from './runner';
+import { createCtx } from './ctx.ts';
+import { cleanPreviousFiles } from './file-utils.ts';
+import { getStateFilename, saveState } from './persistence.ts';
+import { startRunner } from './runner.ts';
 
 export interface GeneratorHooks {
 	onStart?: () => void | Promise<void>;

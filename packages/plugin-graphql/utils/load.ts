@@ -5,11 +5,14 @@ import { GitLoader } from '@graphql-tools/git-loader';
 import { GithubLoader } from '@graphql-tools/github-loader';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { JsonFileLoader } from '@graphql-tools/json-file-loader';
-import { UnnormalizedTypeDefPointer, loadSchema as loadSchemaToolkit } from '@graphql-tools/load';
+import {
+	type UnnormalizedTypeDefPointer,
+	loadSchema as loadSchemaToolkit,
+} from '@graphql-tools/load';
 import { PrismaLoader } from '@graphql-tools/prisma-loader';
 import { UrlLoader } from '@graphql-tools/url-loader';
-import { GraphQLSchemaExtensions, validateSchema } from 'graphql';
-import { hashSchema } from './hash';
+import { type GraphQLSchemaExtensions, validateSchema } from 'graphql';
+import { hashSchema } from './hash.ts';
 
 export async function loadSchema(schemaPointerMap: UnnormalizedTypeDefPointer, cwd: string) {
 	const outputSchemaAst = await loadSchemaToolkit(schemaPointerMap, {

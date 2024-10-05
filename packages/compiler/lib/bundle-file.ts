@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { Plugin, build } from '@baeta/compiler/esbuild';
+import { type Plugin, build } from '@baeta/compiler/esbuild';
 import path from '@baeta/util-path';
-import { isBuiltin } from '../utils/builtins';
+import { isBuiltin } from '../utils/builtins.ts';
 
 function externalizePlugin(): Plugin {
 	return {

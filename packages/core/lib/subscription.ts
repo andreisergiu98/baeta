@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import type { GraphQLResolveInfo } from 'graphql';
 
 export type Subscribe<Payload, Root = {}, Context = {}, Args = {}> = (
 	params: SubscribeParams<Root, Context, Args>,

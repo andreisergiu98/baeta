@@ -1,8 +1,8 @@
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
 import { Hono } from 'hono';
-import { userModule } from './modules/user';
-import { Context } from './types/context';
+import { userModule } from './modules/user.ts';
+import type { Context } from './types/context.ts';
 
 import {
 	SubscriptionDatabaseD1,

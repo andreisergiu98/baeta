@@ -210,17 +210,17 @@ export abstract class StoreAdapter<Item> {
 
 	protected encodeQueryItemRef(item: null | Item) {
 		if (item == null) {
-			return '_null_';
+			return 'null';
 		}
 		const ref = this.getRef(item);
-		return `_ref_${ref}`;
+		return `ref_${ref}`;
 	}
 
 	protected decodeQueryItemRef(encodedRef: string) {
-		if (encodedRef === '_null_') {
+		if (encodedRef === 'null') {
 			return null;
 		}
-		return encodedRef.substring(5);
+		return encodedRef.substring(4);
 	}
 
 	createQueryMiddleware = <T extends null | Item | Item[] | Array<Item | null>>(
@@ -284,26 +284,26 @@ export abstract class StoreAdapter<Item> {
 	protected encodeProperty(value: string) {
 		const key = value.replaceAll('.', '_');
 		if (!this.shouldEncode(key)) {
-			return key;
+			return `_${key}`;
 		}
-		return `_base64_${encodeBase64Url(key)}`;
+		return `enc_${encodeBase64Url(key)}`;
 	}
 
 	protected encodePrimitive(value: unknown, catchAll?: string) {
 		if (value === null) {
-			return '_null_';
+			return 'null';
 		}
 
 		if (value === undefined) {
-			return catchAll ? null : '_null_';
+			return catchAll ? null : 'null';
 		}
 
 		if (value === '') {
-			return catchAll ? null : '_empty_';
+			return catchAll ? null : 'empty';
 		}
 
 		if (value === '*') {
-			return catchAll ? catchAll : '_wildcard_';
+			return catchAll ? catchAll : 'star';
 		}
 
 		const type = typeof value;
@@ -311,16 +311,16 @@ export abstract class StoreAdapter<Item> {
 		const isSupported = supported.includes(type);
 
 		if (!isSupported) {
-			return catchAll ? null : '_empty_';
+			return catchAll ? null : 'empty';
 		}
 
-		const prefixed = `_${type}_${value}`;
+		const valStr = value.toString();
 
-		if (!this.shouldEncode(prefixed)) {
-			return prefixed;
+		if (!this.shouldEncode(valStr)) {
+			return `_${value}`;
 		}
 
-		return `_base64_${encodeBase64Url(prefixed)}`;
+		return `enc_${encodeBase64Url(valStr)}`;
 	}
 
 	protected shouldEncode(value: string) {

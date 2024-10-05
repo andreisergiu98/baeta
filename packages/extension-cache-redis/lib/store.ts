@@ -1,6 +1,6 @@
-import { Store, StoreAdapter, StoreAdapterOptions } from '@baeta/extension-cache';
-import Redis from 'ioredis';
-import { RedisStoreAdapter } from './redis-store-adapter';
+import { Store, type StoreAdapter, type StoreAdapterOptions } from '@baeta/extension-cache';
+import type Redis from 'ioredis';
+import { RedisStoreAdapter } from './redis-store-adapter.ts';
 
 export class RedisStore extends Store {
 	constructor(protected client: Redis) {

@@ -1,5 +1,5 @@
-import { DurableObjectNamespace } from '@cloudflare/workers-types';
-import { Action, GetAction, ListAction, PutAction } from './baeta-cache';
+import type { DurableObjectNamespace } from '@cloudflare/workers-types';
+import type { Action, GetAction, ListAction, PutAction } from './baeta-cache.ts';
 
 export class CloudflareCacheClient {
 	constructor(public durableObject: DurableObjectNamespace) {}

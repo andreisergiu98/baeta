@@ -1,10 +1,10 @@
 import {
-	FieldDefinitionNode,
-	InputValueDefinitionNode,
+	type FieldDefinitionNode,
+	type InputValueDefinitionNode,
 	Kind,
-	ObjectTypeDefinitionNode,
-	ObjectTypeExtensionNode,
-	TypeNode,
+	type ObjectTypeDefinitionNode,
+	type ObjectTypeExtensionNode,
+	type TypeNode,
 } from 'graphql';
 
 export function getObjectTypeHash(node: ObjectTypeDefinitionNode | ObjectTypeExtensionNode) {

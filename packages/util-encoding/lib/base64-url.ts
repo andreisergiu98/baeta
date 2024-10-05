@@ -1,5 +1,5 @@
-import { decodeBase64, encodeBase64 } from './base64';
-import { decodeBinary, encodeBinary } from './text-encoder';
+import { decodeBase64, encodeBase64 } from './base64.ts';
+import { decodeBinary, encodeBinary } from './text-encoder.ts';
 
 export function encodeBase64Url(value: string): string {
 	const utf8Bytes = encodeBinary(value);

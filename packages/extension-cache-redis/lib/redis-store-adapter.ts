@@ -1,6 +1,6 @@
-import { ParentRef, Ref, StoreAdapter, StoreOptions } from '@baeta/extension-cache';
+import { type ParentRef, type Ref, StoreAdapter, type StoreOptions } from '@baeta/extension-cache';
 import type Redis from 'ioredis';
-import { collectPipelineErrors } from '../utils/pipeline';
+import { collectPipelineErrors } from '../utils/pipeline.ts';
 
 export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	constructor(

@@ -1,4 +1,4 @@
-import { ParentRef, StoreAdapter, StoreOptions } from './store-adapter';
+import type { ParentRef, StoreAdapter, StoreOptions } from './store-adapter.ts';
 
 export type TypeGetter<T> = NonNullable<T> extends Array<infer G> ? G : NonNullable<T>;
 

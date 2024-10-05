@@ -1,4 +1,4 @@
-import { Middleware } from '@baeta/core';
+import type { Middleware } from '@baeta/core';
 import { encodeBase64Url } from '@baeta/util-encoding';
 import DataLoader from 'dataloader';
 import { flatten } from 'flat';

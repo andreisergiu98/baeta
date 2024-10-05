@@ -1,8 +1,18 @@
-import { Middleware } from '@baeta/core';
-import { Extension, ModuleBuilder, createMiddlewareAdapter, nameFunction } from '@baeta/core/sdk';
-import { TypeGetter } from './global-types';
-import { Store } from './store';
-import { ParentRef, StoreAdapter, StoreAdapterOptions, StoreOptions } from './store-adapter';
+import type { Middleware } from '@baeta/core';
+import {
+	Extension,
+	type ModuleBuilder,
+	createMiddlewareAdapter,
+	nameFunction,
+} from '@baeta/core/sdk';
+import type { TypeGetter } from './global-types.ts';
+import type {
+	ParentRef,
+	StoreAdapter,
+	StoreAdapterOptions,
+	StoreOptions,
+} from './store-adapter.ts';
+import type { Store } from './store.ts';
 
 export class CacheExtension extends Extension {
 	constructor(

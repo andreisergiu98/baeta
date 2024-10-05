@@ -1,4 +1,9 @@
-import { DurableObject, DurableObjectState, Request, Response } from '@cloudflare/workers-types';
+import {
+	type DurableObject,
+	type DurableObjectState,
+	type Request,
+	Response,
+} from '@cloudflare/workers-types';
 
 export type GetAction = {
 	type: 'get';

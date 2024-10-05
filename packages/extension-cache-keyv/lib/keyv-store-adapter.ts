@@ -1,4 +1,4 @@
-import { ParentRef, Ref, StoreAdapter, StoreOptions } from '@baeta/extension-cache';
+import { type ParentRef, type Ref, StoreAdapter, type StoreOptions } from '@baeta/extension-cache';
 import type Keyv from 'keyv';
 
 export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {

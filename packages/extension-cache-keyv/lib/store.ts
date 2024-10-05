@@ -1,6 +1,6 @@
-import { Store, StoreAdapter, StoreAdapterOptions } from '@baeta/extension-cache';
-import Keyv from 'keyv';
-import { KeyvStoreAdapter } from './keyv-store-adapter';
+import { Store, type StoreAdapter, type StoreAdapterOptions } from '@baeta/extension-cache';
+import type Keyv from 'keyv';
+import { KeyvStoreAdapter } from './keyv-store-adapter.ts';
 
 export class KeyvStore extends Store {
 	constructor(protected keyv: Keyv) {

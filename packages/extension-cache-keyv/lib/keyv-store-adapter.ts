@@ -47,7 +47,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		args: Record<string, unknown>,
 		data: Item | Item[],
 	) => {
-		const key = this.createQueryKey(queryRef, parentRef, args);
+		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		const isList = Array.isArray(data);
 		const items = isList ? data : [data];
 		const refs = items.map((item) => this.getRef(item));
@@ -83,7 +83,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		parentRef: ParentRef,
 		args: Record<string, unknown>,
 	) => {
-		const key = this.createQueryKey(queryRef, parentRef, args);
+		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		const [isListStr, ...refs] = await this.client.get(key).then((res) => (res ?? []) as string[]);
 
 		if (refs.length < 1) {

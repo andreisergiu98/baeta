@@ -59,14 +59,15 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		args: Record<string, unknown>,
 		data: Item | Item[],
 	) => {
-		const key = this.createQueryKey(queryRef, parentRef, args);
 		const isList = Array.isArray(data);
 		const items = isList ? data : [data];
-		const refs = items.map((item) => this.getRef(item));
 
-		if (refs.length === 0) {
+		if (items.length === 0) {
 			return;
 		}
+
+		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const refs = items.map((item) => this.getRef(item));
 
 		const pipeline = this.client.pipeline();
 		pipeline.unlink(key);
@@ -76,7 +77,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 			pipeline.expire(key, this.options.ttl);
 		}
 
-		await this.saveMany(items);
+		await this.saveMany(items.filter((item) => item != null));
 
 		const result = await pipeline.exec();
 		const err = collectPipelineErrors(result ?? []);
@@ -111,7 +112,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		parentRef: ParentRef,
 		args: Record<string, unknown>,
 	) => {
-		const key = this.createQueryKey(queryRef, parentRef, args);
+		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		const [isListStr, ...refs] = await this.client.lrange(key, 0, -1);
 
 		if (refs.length < 1) {
@@ -134,10 +135,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		args: Record<string, unknown> = {},
 	) {
 		const matcher = this.createQueryKeyGlobMatcher(queryRef, parentRef, args);
-		return this.scanKeys(matcher);
-	}
 
-	protected async scanKeys(matcher: string) {
 		return new Promise<string[]>((resolve, reject) => {
 			const keys: string[] = [];
 

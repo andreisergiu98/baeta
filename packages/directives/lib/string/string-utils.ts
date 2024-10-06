@@ -36,7 +36,7 @@ const trimDirective = createInputDirective<TrimArgs>({
 	},
 });
 
-const lowerDirective = createInputDirective<{}>({
+const lowerDirective = createInputDirective<{ [k: string]: never }>({
 	name: 'lower',
 	target: 'scalar',
 	resolve(params) {
@@ -47,7 +47,7 @@ const lowerDirective = createInputDirective<{}>({
 	},
 });
 
-const upperDirective = createInputDirective<{}>({
+const upperDirective = createInputDirective<{ [k: string]: never }>({
 	name: 'upper',
 	target: 'scalar',
 	resolve(params) {

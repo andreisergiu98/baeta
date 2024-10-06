@@ -1,26 +1,27 @@
+import type { GraphQLFieldResolver } from 'graphql';
 import { createObjectLens } from '../utils/object.ts';
+import type { NativeMiddleware } from './middleware.ts';
 import type { MiddlewareMap, ResolversMap, SubscriptionsResolvers } from './resolver-mapper.ts';
 
 export function composeResolvers(resolvers: ResolversMap, middlewareMap: MiddlewareMap = {}) {
 	const composed = copyResolvers(resolvers);
 
 	for (const key in middlewareMap) {
-		const fns = middlewareMap[key] ?? [];
+		const middlewares = middlewareMap[key] ?? [];
 
-		if (fns.length === 0) {
+		if (middlewares.length === 0) {
 			continue;
 		}
 
 		const path = key.split('.');
-		const lens = createObjectLens(composed, path);
+		const lens = createObjectLens<GraphQLFieldResolver<unknown, unknown>>(composed, path);
 		const originalResolver = lens.get();
 
 		if (!originalResolver) {
 			continue;
 		}
 
-		const createResolver = chainResolvers([...fns, () => originalResolver]);
-		lens.set(createResolver());
+		lens.set(chainMiddlewares(middlewares, originalResolver));
 	}
 
 	return composed;
@@ -62,12 +63,17 @@ export function copyResolvers<T extends ResolversMap>(resolvers: T): T {
 	return copy;
 }
 
-export function chainResolvers(funcs: Function[]) {
-	if (funcs.length === 1) {
-		return funcs[0];
+export function chainMiddlewares(
+	middlewares: NativeMiddleware[],
+	resolver: GraphQLFieldResolver<unknown, unknown>,
+) {
+	if (middlewares.length === 0) {
+		return resolver;
 	}
 
-	return funcs.reduce((a, b) => {
-		return (...args: unknown[]) => a(b(...args));
+	const chain = middlewares.reduce((a, b) => {
+		return (next) => a(b(next));
 	});
+
+	return chain(resolver);
 }

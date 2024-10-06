@@ -104,13 +104,14 @@ extend type User {
 	},
 ];
 
+const featureListWithIdx = featureList.map((props, idx) => ({ ...props, idx }));
+
 export function HomeSnippets() {
 	return (
 		<section>
 			<div className="container">
-				{featureList.map((props, idx) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: static list
-					<Snippet key={idx} idx={idx} {...props} />
+				{featureListWithIdx.map((props) => (
+					<Snippet key={props.idx} {...props} />
 				))}
 			</div>
 		</section>

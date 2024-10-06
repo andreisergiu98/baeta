@@ -4,7 +4,7 @@ import type { Middleware, Resolver } from '../../lib/index.ts';
 import type { NativeMiddleware } from '../middleware.ts';
 import type { FieldResolvers, ResolversMap } from '../resolver-mapper.ts';
 import type { NativeResolver } from '../resolver.ts';
-import type { NativeSubscribe } from '../subscription.ts';
+import type { NativeSubscription } from '../subscription.ts';
 
 export function forgeResolverArgs(root = {}, args = {}, ctx = {}, info = {} as GraphQLResolveInfo) {
 	return {
@@ -54,7 +54,7 @@ export function getResolverFromMap(
 	return resolver;
 }
 
-export function getSubscriptionFromMap(map: ResolversMap, field: string): NativeSubscribe {
+export function getSubscriptionFromMap(map: ResolversMap, field: string): NativeSubscription {
 	const subscription = map.Subscription?.[field];
 
 	if (subscription == null) {

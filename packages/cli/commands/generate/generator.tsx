@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import {
 	type GeneratorHooks,
 	generate,
@@ -8,7 +9,7 @@ import { graphqlPlugin } from '@baeta/plugin-graphql';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useConfig } from '../../sdk/index.ts';
 import { flattenArrays } from '../../utils/array.ts';
-import { GeneratorStatus } from './generator-status.tsx';
+import { type GeneratorPluginName, GeneratorStatus } from './generator-status.tsx';
 
 export interface GeneratorProps {
 	watch?: boolean;
@@ -22,8 +23,8 @@ export function Generator(props: GeneratorProps) {
 	const [running, setRunning] = useState(false);
 	const [error, setError] = useState<unknown>(undefined);
 
-	const [startedPlugins, setStartedPlugins] = useState<string[]>([]);
-	const [finishedPlugins, setFinishedPlugins] = useState<string[]>([]);
+	const [startedPlugins, setStartedPlugins] = useState<GeneratorPluginName[]>([]);
+	const [finishedPlugins, setFinishedPlugins] = useState<GeneratorPluginName[]>([]);
 
 	const plugins = useMemo(() => {
 		const generatorPlugins = getGeneratorPlugins(flattenArrays(config.plugins ?? []));
@@ -52,12 +53,26 @@ export function Generator(props: GeneratorProps) {
 			},
 			onPluginStepStart: (plugin, step) => {
 				if (step === 'generate') {
-					setStartedPlugins((current) => [...current, plugin.actionName]);
+					setStartedPlugins((current) => [
+						...current,
+						{
+							id: randomUUID(),
+							name: plugin.name,
+							actionName: plugin.actionName,
+						},
+					]);
 				}
 			},
 			onPluginStepEnd: (plugin, step) => {
 				if (step === 'generate') {
-					setFinishedPlugins((current) => [...current, plugin.actionName]);
+					setFinishedPlugins((current) => [
+						...current,
+						{
+							id: randomUUID(),
+							name: plugin.name,
+							actionName: plugin.actionName,
+						},
+					]);
 				}
 			},
 		};

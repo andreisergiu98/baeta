@@ -2,11 +2,11 @@ import { v4 as uuid } from 'uuid';
 import { getPoolingId } from './pooling-type.ts';
 import type { SubscriptionsOptions } from './subscription.ts';
 
-export function handleWS<Env>(
+export function handleWS<Env, Context, ContextParams>(
 	request: Request,
 	env: Env,
 	ctx: ExecutionContext,
-	options: SubscriptionsOptions<Env>,
+	options: SubscriptionsOptions<Env, Context, ContextParams>,
 ) {
 	const upgradeHeader = request.headers.get('upgrade');
 

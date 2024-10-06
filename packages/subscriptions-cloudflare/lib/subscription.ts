@@ -7,7 +7,7 @@ import { subscribe } from './subscribe.ts';
 import type { SubscriptionDatabase } from './subscription-database.ts';
 import { createWsConnectionsClass } from './ws-connections.ts';
 
-export interface SubscriptionsOptions<Env, Context = any, ContextParams = any> {
+export interface SubscriptionsOptions<Env, Context, ContextParams> {
 	schema: GraphQLSchema;
 	poolingType?: PoolingType;
 	context?: ContextLoader<Env, Context, ContextParams>;
@@ -31,8 +31,8 @@ interface ContextLoader<Env, Context, ContextParams> {
 
 export function createCloudflareSubscription<
 	Env,
-	Context = any,
-	ContextParams = any,
+	Context,
+	ContextParams,
 	PubSubMap extends DefaultPubSubMap = DefaultPubSubMap,
 >(options: SubscriptionsOptions<Env, Context, ContextParams>) {
 	return {

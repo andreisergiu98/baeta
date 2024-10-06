@@ -23,7 +23,11 @@ function resolveBoolean(param: boolean) {
 	return true as const;
 }
 
-function createScopeResolver(ctx: unknown, name: string, value: ScopeLoader<any>): ScopeResolver {
+function createScopeResolver(
+	ctx: unknown,
+	name: string,
+	value: ScopeLoader<unknown>,
+): ScopeResolver {
 	const isFunction = typeof value === 'function';
 
 	if (!isFunction) {
@@ -54,7 +58,7 @@ export function createScopeResolverMap(
 	const map: ScopeResolverMap = {};
 
 	for (const [key, value] of Object.entries(scopeLoaderMap)) {
-		map[key] = createScopeResolver(ctx, key, value as ScopeLoader<any>);
+		map[key] = createScopeResolver(ctx, key, value as ScopeLoader<unknown>);
 	}
 
 	return map;

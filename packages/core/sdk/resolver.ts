@@ -1,11 +1,16 @@
 import type { GraphQLFieldResolver } from 'graphql';
 import type { Resolver } from '../lib/index.ts';
 
-export type NativeResolver = GraphQLFieldResolver<unknown, unknown>;
+export type NativeResolver<
+	Result = unknown,
+	Root = unknown,
+	Context = unknown,
+	Args = unknown,
+> = GraphQLFieldResolver<Root, Context, Args, Result>;
 
-export type GenericResolver = Resolver<any, any, any, any>;
-
-export function createResolverAdapter(resolver: GenericResolver): NativeResolver {
+export function createResolverAdapter<Result, Root, Context, Args>(
+	resolver: Resolver<Result, Root, Context, Args>,
+): NativeResolver<Result | PromiseLike<Result>, Root, Context, Args> {
 	return function adapter(root, args, ctx, info) {
 		return resolver({ root, args, ctx, info });
 	};

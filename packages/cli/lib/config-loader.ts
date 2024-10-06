@@ -73,6 +73,7 @@ export async function loadConfigFromBundledFile(
 	fileName: string,
 	bundledCode: string,
 	isEsm: boolean,
+	// biome-ignore lint/suspicious/noExplicitAny: TODO: add config validation, but since it is already typed, it is not a priority
 ): Promise<any> {
 	const ext = isEsm ? 'mjs' : 'cjs';
 	const fileBase = `${fileName}.timestamp-${Date.now()}`;
@@ -101,7 +102,8 @@ function bustRequire(configPath: string) {
 let cacheIndex = 1;
 async function importJavaScriptConfig(configPath: string): Promise<BaetaOptions | undefined> {
 	bustRequire(configPath);
-	const module = await dynamicImport(`${configPath}?v${cacheIndex++}`);
+	// biome-ignore lint/suspicious/noExplicitAny: TODO: add config validation, but since it is already typed, it is not a priority
+	const module = await dynamicImport<any>(`${configPath}?v${cacheIndex++}`);
 	return module?.default?.default?.config || module?.default?.config || module?.config;
 }
 

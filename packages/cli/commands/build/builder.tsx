@@ -1,8 +1,10 @@
+import { randomUUID } from 'node:crypto';
 import type { CompilerOptions } from '@baeta/compiler';
 import type { BuildContext } from '@baeta/compiler/esbuild';
 import type { Subprocess } from 'execa';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { makeErrorMessage, useConfig } from '../../sdk/index.ts';
+import { makeErrorMessage, makeErrorOutput, useConfig } from '../../sdk/index.ts';
+import type { TextOutput } from '../../types/text.ts';
 import { dynamicImportCompiler } from '../../utils/compiler.ts';
 import { WithGenerator } from '../generate/with-generator.tsx';
 import { AppStatus } from './app-status.tsx';
@@ -17,15 +19,15 @@ interface Props {
 	hideWarnings?: boolean;
 }
 
-const emptyArray: string[] = [];
+const emptyArray: TextOutput[] = [];
 
 export function Builder(props: Props) {
 	const { config, relativeLocation } = useConfig();
 	const [isConfigured, setIsConfigured] = useState(() => config.compiler != null);
 
-	const [output, setOutput] = useState<string[]>([]);
-	const [errors, setErrors] = useState<string[]>([]);
-	const [warnings, setWarnings] = useState<string[]>([]);
+	const [output, setOutput] = useState<TextOutput[]>([]);
+	const [errors, setErrors] = useState<TextOutput[]>([]);
+	const [warnings, setWarnings] = useState<TextOutput[]>([]);
 
 	const [running, setRunning] = useState(false);
 	const [buildTime, setBuildTime] = useState(0);
@@ -48,7 +50,13 @@ export function Builder(props: Props) {
 				processesRef.current,
 				command,
 				(output) => {
-					setOutput((current) => [...current, output]);
+					setOutput((current) => [
+						...current,
+						{
+							id: randomUUID(),
+							text: output,
+						},
+					]);
 				},
 				() => {},
 			);
@@ -69,8 +77,21 @@ export function Builder(props: Props) {
 		(buildTime: number, warnings: string[], errors: string[]) => {
 			setRunning(false);
 			setBuildTime(buildTime);
-			setWarnings(warnings);
-			setErrors(errors);
+
+			const tickId = randomUUID();
+
+			const warningOutputs = warnings.map((warning, idx) => ({
+				id: tickId + idx,
+				text: warning,
+			}));
+
+			const errorOutputs = errors.map((error, idx) => ({
+				id: tickId + idx,
+				text: error,
+			}));
+
+			setWarnings(warningOutputs);
+			setErrors(errorOutputs);
 
 			if (errors.length > 0) {
 				return handleCommand(props.onError);
@@ -195,7 +216,12 @@ export function Builder(props: Props) {
 				<BuilderStatus
 					running={running}
 					watching={props.watch}
-					errors={[makeErrorMessage(`compiler is not configured, check ${relativeLocation}`)]}
+					errors={[
+						makeErrorOutput(
+							'config-error',
+							`compiler is not configured, check ${relativeLocation}`,
+						),
+					]}
 					warnings={emptyArray}
 					buildTime={buildTime}
 				/>

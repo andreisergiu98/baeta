@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import * as Types from "../../__generated__/types";
-import { DocumentNode } from "graphql";
+import type { DocumentNode } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
 import baetaExtensions from "../../extensions";
 
@@ -26,13 +26,13 @@ export namespace ModuleMetadata {
       ...module.createModuleMethods<Types.ContextType>(),
       UserPhoto: {
         ...module.createTypeMethods<UserPhoto, Types.ContextType>("UserPhoto"),
-        id: module.createResolverBuilder<Types.Scalars["ID"]["output"], UserPhoto, Types.ContextType, {}>("UserPhoto", "id"),
-        url: module.createResolverBuilder<Types.Scalars["String"]["output"], UserPhoto, Types.ContextType, {}>("UserPhoto", "url"),
+        id: module.createResolverBuilder<Types.Scalars["ID"]["output"], UserPhoto, Types.ContextType, { [k: string]: never }>("UserPhoto", "id"),
+        url: module.createResolverBuilder<Types.Scalars["String"]["output"], UserPhoto, Types.ContextType, { [k: string]: never }>("UserPhoto", "url"),
       },
       User: {
         ...module.createTypeMethods<User, Types.ContextType>("User"),
-        photos: module.createResolverBuilder<Types.Maybe<Array<UserPhoto>>, User, Types.ContextType, {}>("User", "photos"),
-        photosConnection: module.createResolverBuilder<Types.Maybe<UserPhotoConnection>, User, Types.ContextType, {}>("User", "photosConnection"),
+        photos: module.createResolverBuilder<Types.Maybe<Array<UserPhoto>>, User, Types.ContextType, { [k: string]: never }>("User", "photos"),
+        photosConnection: module.createResolverBuilder<Types.Maybe<UserPhotoConnection>, User, Types.ContextType, { [k: string]: never }>("User", "photosConnection"),
       },
       Scalar: {
         DateTime: module.createScalarBuilder("DateTime"),

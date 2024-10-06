@@ -1,14 +1,20 @@
 import { GraphQLError } from 'graphql';
 import { Text } from 'ink';
 import React from 'react';
-import { Errors, Layout, Spinner, makeErrorMessage } from '../../sdk/index.ts';
+import { Errors, Layout, Spinner, makeErrorOutput } from '../../sdk/index.ts';
+
+export type GeneratorPluginName = {
+	id: string;
+	name: string;
+	actionName: string;
+};
 
 interface Props {
 	error?: unknown;
 	running: boolean;
 	watching?: boolean;
-	startedPlugins: string[];
-	finishedPlugins: string[];
+	startedPlugins: GeneratorPluginName[];
+	finishedPlugins: GeneratorPluginName[];
 }
 
 function formatError(error: unknown) {
@@ -42,7 +48,7 @@ export function GeneratorStatus(props: Props) {
 
 function GeneratorStatusContent(props: Props) {
 	if (props.error) {
-		return <Errors errors={[makeErrorMessage(formatError(props.error))]} />;
+		return <Errors errors={[makeErrorOutput('generator-error', formatError(props.error))]} />;
 	}
 
 	if (props.running) {
@@ -61,23 +67,30 @@ function GeneratorPluginsStatus(props: Props) {
 		return <Text>Generating...</Text>;
 	}
 
-	const pluginMessages = props.startedPlugins.map((startedPlugin, index) => {
-		const isFinished = props.finishedPlugins.includes(startedPlugin);
-		// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-		return <GeneratorPluginStatus key={index} plugin={startedPlugin} isFinished={isFinished} />;
+	const finishedActions = props.finishedPlugins.map((plugin) => plugin.actionName);
+
+	const pluginMessages = props.startedPlugins.map((startedPlugin) => {
+		const isFinished = finishedActions.includes(startedPlugin.actionName);
+		return (
+			<GeneratorPluginStatus
+				key={startedPlugin.id}
+				name={startedPlugin.actionName}
+				isFinished={isFinished}
+			/>
+		);
 	});
 
 	return <>{pluginMessages}</>;
 }
 
 interface PluginStatus {
-	plugin: string;
+	name: string;
 	isFinished: boolean;
 }
 
 function GeneratorPluginStatus(props: PluginStatus) {
 	const status = props.isFinished ? '✔' : <Spinner />;
-	const task = props.isFinished ? `Generated ${props.plugin}` : `Generating ${props.plugin}...`;
+	const task = props.isFinished ? `Generated ${props.name}` : `Generating ${props.name}...`;
 
 	return (
 		<Text>

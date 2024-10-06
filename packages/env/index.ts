@@ -87,16 +87,16 @@ function validateValue<
 		throw new Error(`Env param '${key}' is required and doesn't have a default value!`);
 	}
 
-	// biome-ignore lint/suspicious/useValidTypeof: <explanation>
-	if (typeof value !== options.type?.toLowerCase()) {
+	// biome-ignore lint/suspicious/useValidTypeof: type needs to be checked dynamically
+	if (typeof value !== options.type) {
 		if (options.resolver) {
 			throw new Error(
-				`Return type of custom resolver not matching type of property for key '${key}'. Expected '${options.type?.toLowerCase()}' but got '${typeof value}'`,
+				`Return type of custom resolver not matching type of property for key '${key}'. Expected '${options.type}' but got '${typeof value}'`,
 			);
 		}
 
 		throw new Error(
-			`Type mismatch for property with key '${key}'. Expected '${options.type?.toLowerCase()}' but got '${typeof value}'.`,
+			`Type mismatch for property with key '${key}'. Expected '${options.type}' but got '${typeof value}'.`,
 		);
 	}
 }

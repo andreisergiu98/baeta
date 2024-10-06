@@ -27,7 +27,7 @@ export interface GeneratorHooks {
 
 export async function generate(
 	options: GeneratorOptions,
-	plugins: GeneratorPluginV1<any>[],
+	plugins: GeneratorPluginV1[],
 	hooks?: GeneratorHooks,
 ) {
 	const generatorOptions = loadOptions(options);
@@ -38,7 +38,7 @@ export async function generate(
 
 export function generateAndWatch(
 	options: GeneratorOptions,
-	plugins: GeneratorPluginV1<any>[],
+	plugins: GeneratorPluginV1[],
 	hooks?: GeneratorHooks,
 ) {
 	const generatorOptions = loadOptions(options);

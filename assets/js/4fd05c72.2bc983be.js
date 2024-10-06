@@ -1093,7 +1093,7 @@ function Feature({ title, Svg, description }) {
 
 
 
-const FeatureList = [
+const featureList = [
   {
     title: "Schema First",
     Svg: logo_graphql,
@@ -1115,11 +1115,9 @@ const FeatureList = [
     description: /* @__PURE__ */ react.createElement(react.Fragment, null, "Extensible, including support for middlewares, directives and plugins.")
   }
 ];
+const featureListWithIdx = featureList.map((props, idx) => ({ ...props, idx }));
 function HomeFeatures() {
-  return /* @__PURE__ */ react.createElement("section", { className: (feature_module_default()).features }, /* @__PURE__ */ react.createElement("div", { className: "container" }, /* @__PURE__ */ react.createElement("div", { className: "row" }, FeatureList.map((props, idx) => (
-    // biome-ignore lint/suspicious/noArrayIndexKey: static list
-    /* @__PURE__ */ react.createElement(Feature, { key: idx, ...props })
-  )))));
+  return /* @__PURE__ */ react.createElement("section", { className: (feature_module_default()).features }, /* @__PURE__ */ react.createElement("div", { className: "container" }, /* @__PURE__ */ react.createElement("div", { className: "row" }, featureListWithIdx.map((props) => /* @__PURE__ */ react.createElement(Feature, { key: props.idx, ...props })))));
 }
 
 ;// ./components/home-features/index.ts
@@ -1201,7 +1199,7 @@ function Snippet(props) {
 ;// ./components/home-snippets/snippets.tsx
 
 
-const featureList = [
+const snippets_featureList = [
   {
     title: "SDL",
     description: /* @__PURE__ */ react.createElement(react.Fragment, null, "Baeta's schema-first pattern makes it easy to write and maintain GraphQL APIs that are easy to read and understand. By defining your schema first, you can focus on the API design and structure, rather than the implementation details."),
@@ -1280,11 +1278,9 @@ extend type User {
 });`
   }
 ];
+const snippets_featureListWithIdx = snippets_featureList.map((props, idx) => ({ ...props, idx }));
 function HomeSnippets() {
-  return /* @__PURE__ */ react.createElement("section", null, /* @__PURE__ */ react.createElement("div", { className: "container" }, featureList.map((props, idx) => (
-    // biome-ignore lint/suspicious/noArrayIndexKey: static list
-    /* @__PURE__ */ react.createElement(Snippet, { key: idx, idx, ...props })
-  ))));
+  return /* @__PURE__ */ react.createElement("section", null, /* @__PURE__ */ react.createElement("div", { className: "container" }, snippets_featureListWithIdx.map((props) => /* @__PURE__ */ react.createElement(Snippet, { key: props.idx, ...props }))));
 }
 
 ;// ./components/home-snippets/index.ts

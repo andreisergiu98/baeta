@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './feature.module.css';
 import { Feature, type FeatureProps } from './feature.tsx';
 
-const FeatureList: FeatureProps[] = [
+const featureList: FeatureProps[] = [
 	{
 		title: 'Schema First',
 		Svg: LogoGraphql,
@@ -31,14 +31,15 @@ const FeatureList: FeatureProps[] = [
 	},
 ];
 
+const featureListWithIdx = featureList.map((props, idx) => ({ ...props, idx }));
+
 export function HomeFeatures() {
 	return (
 		<section className={styles.features}>
 			<div className="container">
 				<div className="row">
-					{FeatureList.map((props, idx) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: static list
-						<Feature key={idx} {...props} />
+					{featureListWithIdx.map((props) => (
+						<Feature key={props.idx} {...props} />
 					))}
 				</div>
 			</div>

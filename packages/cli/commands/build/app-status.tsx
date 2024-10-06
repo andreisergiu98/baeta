@@ -1,13 +1,13 @@
 import { Text } from 'ink';
 import React from 'react';
 import { Layout } from '../../sdk/index.ts';
+import type { TextOutput } from '../../types/text.ts';
 
-export function AppStatus({ output }: { output: string[] }) {
+export function AppStatus({ output }: { output: TextOutput[] }) {
 	return (
 		<Layout title="App" color="blue">
-			{output.map((value, index) => (
-				// biome-ignore lint/suspicious/noArrayIndexKey: it is safe in this case
-				<Text key={index}>{value}</Text>
+			{output.map((value) => (
+				<Text key={value.id}>{value.text}</Text>
 			))}
 		</Layout>
 	);

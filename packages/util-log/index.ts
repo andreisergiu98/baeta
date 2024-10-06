@@ -2,7 +2,7 @@ type GlobalConsoleLog = {
 	console: ConsoleLogger;
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: console.log is a variadic function
+// biome-ignore lint/suspicious/noExplicitAny: respects console.log spec
 type Payload = any[];
 
 type ConsoleLogger = {

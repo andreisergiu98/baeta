@@ -19,6 +19,10 @@ export function createObjectLens<T = unknown>(
 	};
 
 	const set = (value: T) => {
+		if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+			throw new Error(`Setting ${key} is not allowed to prevent prototype pollution.`);
+		}
+
 		if (obj != null) {
 			obj[key] = value;
 		}

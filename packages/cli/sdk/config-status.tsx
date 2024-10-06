@@ -1,21 +1,28 @@
 import { Box, Text } from 'ink';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useConfig } from './config-provider.tsx';
 import { Spinner } from './spinner.tsx';
 
 export function ConfigStatus() {
+	const { events } = useConfig();
 	const [configChanged, setConfigChanged] = useState(false);
-	const skipInitial = useRef(true);
-	const { config } = useConfig();
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: we want to run this effect when config changes
 	useEffect(() => {
-		if (skipInitial.current) {
-			skipInitial.current = false;
+		const showConfigChanged = () => {
+			setConfigChanged(true);
+		};
+
+		events.on('update', showConfigChanged);
+
+		return () => {
+			events.off('update', showConfigChanged);
+		};
+	}, [events]);
+
+	useEffect(() => {
+		if (!configChanged) {
 			return;
 		}
-
-		setConfigChanged(true);
 
 		const id = setTimeout(() => {
 			setConfigChanged(false);
@@ -24,7 +31,7 @@ export function ConfigStatus() {
 		return () => {
 			clearTimeout(id);
 		};
-	}, [config]);
+	}, [configChanged]);
 
 	if (!configChanged) {
 		return null;

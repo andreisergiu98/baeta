@@ -1,5 +1,6 @@
 import test from 'ava';
 import type { GraphQLResolveInfo } from 'graphql';
+import type { EmptyObject } from '../types/object.ts';
 import { forgeNativeResolver, forgeResolverArgs, getResolverFromMap } from './__test__/utils.ts';
 import { chainResolvers, composeResolvers } from './compose.ts';
 import type { NativeMiddleware } from './middleware.ts';
@@ -67,7 +68,12 @@ test('chainResolvers correctly composes multiple resolvers', (t) => {
 	const resolver = forgeNativeResolver(0);
 
 	const middleware = (next: NativeResolver) => {
-		return (root: {}, args: {}, context: {}, info: GraphQLResolveInfo) => {
+		return (
+			root: EmptyObject,
+			args: EmptyObject,
+			context: EmptyObject,
+			info: GraphQLResolveInfo,
+		) => {
 			const result = next(root, args, context, info);
 
 			if (typeof result === 'number') {

@@ -271,13 +271,13 @@ export class AuthExtension<T> extends Extension {
 	private createSubscriptionPreAuthMethod<Root, Context, Args>(field: string) {
 		return (
 			scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-			options?: AuthMethodOptions<{}, Root, Context, Args>,
+			options?: AuthMethodOptions<unknown, Root, Context, Args>,
 		) => {
-			const registerResolve = this.createPreAuthMethod<{}, Root, Context, Args>(
+			const registerResolve = this.createPreAuthMethod<unknown, Root, Context, Args>(
 				'Subscription',
 				`${field}.resolve`,
 			);
-			const registerSubscribe = this.createPreAuthMethod<{}, Root, Context, Args>(
+			const registerSubscribe = this.createPreAuthMethod<unknown, Root, Context, Args>(
 				'Subscription',
 				`${field}.subscribe`,
 			);
@@ -287,14 +287,14 @@ export class AuthExtension<T> extends Extension {
 		};
 	}
 
-	private createPreMiddleware(
-		getScopes: GetScopeRules<any, any, any>,
-		options?: AuthMethodOptions<any, any, any, any>,
+	private createPreMiddleware<Result, Root, Context, Args>(
+		getScopes: GetScopeRules<Root, Context, Args>,
+		options?: AuthMethodOptions<Result, Root, Context, Args>,
 		defaultScopes?: ScopeRules,
 		isSubscribe = false,
-	): NativeMiddleware {
+	): NativeMiddleware<Result, Root, Context, Args> {
 		return (next) => async (root, args, ctx, info) => {
-			loadAuthStore(ctx as T, this.loadScopes);
+			loadAuthStore(ctx as unknown as T, this.loadScopes);
 
 			const requiredScopes = await getScopes({ root, args, ctx, info });
 
@@ -314,13 +314,13 @@ export class AuthExtension<T> extends Extension {
 		};
 	}
 
-	private createPostMiddleware(
-		getScopes: GetPostScopeRules<any, any, any, any>,
-		options?: AuthMethodOptions<any, any, any, any>,
+	private createPostMiddleware<Result, Root, Context, Args>(
+		getScopes: GetPostScopeRules<Result, Root, Context, Args>,
+		options?: AuthMethodOptions<Result, Root, Context, Args>,
 		defaultScopes?: ScopeRules,
-	): NativeMiddleware {
+	): NativeMiddleware<Result, Root, Context, Args> {
 		return (next) => async (root, args, ctx, info) => {
-			loadAuthStore(ctx as T, this.loadScopes);
+			loadAuthStore(ctx as unknown as T, this.loadScopes);
 
 			const result = await next(root, args, ctx, info);
 			const requiredScopes = await getScopes({ root, args, ctx, info }, result);
@@ -335,17 +335,21 @@ export class AuthExtension<T> extends Extension {
 		};
 	}
 
-	private registerMiddleware(type: string, field: string, middleware: NativeMiddleware) {
+	private registerMiddleware<Result, Root, Context, Args>(
+		type: string,
+		field: string,
+		middleware: NativeMiddleware<Result, Root, Context, Args>,
+	) {
 		if (this.authMap[type] == null) {
 			this.authMap[type] = {};
 		}
-		this.authMap[type][field] = middleware;
+		this.authMap[type][field] = middleware as NativeMiddleware;
 	}
 
-	private async verifyAllScopes(
-		ctx: unknown,
+	private async verifyAllScopes<Result, Root, Context, Args>(
+		ctx: Context,
 		info: GraphQLResolveInfo,
-		options: AuthMethodOptions<any, any, any, any> | undefined,
+		options: AuthMethodOptions<Result, Root, Context, Args> | undefined,
 		defaultScopes: ScopeRules | undefined,
 		requiredScopes: ScopeRules | true | undefined,
 	) {

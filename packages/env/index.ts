@@ -87,7 +87,7 @@ function validateValue<
 		throw new Error(`Env param '${key}' is required and doesn't have a default value!`);
 	}
 
-	// biome-ignore lint/suspicious/useValidTypeof: <explanation>
+	// biome-ignore lint/suspicious/useValidTypeof: it is a scoped string
 	if (typeof value !== options.type?.toLowerCase()) {
 		if (options.resolver) {
 			throw new Error(

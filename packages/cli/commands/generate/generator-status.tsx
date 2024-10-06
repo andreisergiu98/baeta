@@ -63,7 +63,7 @@ function GeneratorPluginsStatus(props: Props) {
 
 	const pluginMessages = props.startedPlugins.map((startedPlugin, index) => {
 		const isFinished = props.finishedPlugins.includes(startedPlugin);
-		// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+		// biome-ignore lint/suspicious/noArrayIndexKey: it is safe in this case
 		return <GeneratorPluginStatus key={index} plugin={startedPlugin} isFinished={isFinished} />;
 	});
 

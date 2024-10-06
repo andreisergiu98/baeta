@@ -22,13 +22,13 @@ export function isGrantedKey(rule: string): rule is GrantKey {
 	return rule === grantRule;
 }
 
-export async function saveGrants(
-	root: unknown,
-	args: unknown,
-	ctx: unknown,
+export async function saveGrants<Result, Root, Context, Args>(
+	root: Root,
+	args: Args,
+	ctx: Context,
 	info: GraphQLResolveInfo,
-	result: unknown,
-	grants: GetGrant<unknown, unknown, unknown, unknown>,
+	result: Result,
+	grants: GetGrant<Result, Root, Context, Args>,
 ) {
 	const [store, resolvedGrants] = await Promise.all([
 		getAuthStore(ctx),
@@ -38,13 +38,13 @@ export async function saveGrants(
 	store.grantCache.setGrants(createResolverPath(info.path), resolvedGrants);
 }
 
-async function resolveGrants(
-	root: unknown,
-	args: unknown,
-	ctx: unknown,
+async function resolveGrants<Result, Root, Context, Args>(
+	root: Root,
+	args: Args,
+	ctx: Context,
 	info: GraphQLResolveInfo,
-	result: unknown,
-	grants: GetGrant<unknown, unknown, unknown, unknown>,
+	result: Result,
+	grants: GetGrant<Result, Root, Context, Args>,
 ) {
 	if (typeof grants !== 'function') {
 		return grants;

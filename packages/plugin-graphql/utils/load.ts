@@ -42,7 +42,7 @@ export async function loadSchema(schemaPointerMap: UnnormalizedTypeDefPointer, c
 		outputSchemaAst.extensions = {};
 	}
 
-	(outputSchemaAst.extensions as GraphQLSchemaExtensions)['hash'] = hashSchema(outputSchemaAst);
+	(outputSchemaAst.extensions as GraphQLSchemaExtensions).hash = hashSchema(outputSchemaAst);
 
 	return {
 		outputSchemaAst,

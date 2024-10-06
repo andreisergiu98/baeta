@@ -13,7 +13,9 @@ const forgedCtx: ExecutionContext = {
 	},
 };
 
-export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>) {
+export function createWsConnectionsClass<Env, Context, ContextParams>(
+	options: SubscriptionsOptions<Env, Context, ContextParams>,
+) {
 	return class BaetaWsConnections implements DurableObject {
 		connections = new Map<string, WebSocket>();
 
@@ -59,7 +61,11 @@ export function createWsConnectionsClass<Env>(options: SubscriptionsOptions<Env>
 
 			const handleCreateSubscription = (message: SubscribeMessage) => {
 				const contextParams = options.context?.getContextParams(request, this.env);
-				const context = options.context?.createContext(contextParams, this.env, forgedCtx);
+				const context = options.context?.createContext(
+					contextParams as ContextParams,
+					this.env,
+					forgedCtx,
+				);
 
 				const subscriptionInfo = createSubscriptionInfo(
 					options.schema,

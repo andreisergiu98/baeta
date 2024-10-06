@@ -146,7 +146,7 @@ export function buildModule(
 	// An actual output
 	const imports = [
 		`import * as ${importNamespace} from "${importPath}";`,
-		'import { DocumentNode } from "graphql";',
+		'import type { DocumentNode } from "graphql";',
 		'import * as Baeta from "@baeta/core/sdk";',
 	];
 
@@ -616,19 +616,19 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
 
 	function getParentType(type: string) {
 		if (['Query', 'Mutation', 'Subscription'].includes(type)) {
-			return '{}';
+			return '{ [k: string]: never }';
 		}
 		return type;
 	}
 
 	function getResultType(type: string, field: string) {
-		return fieldTypes?.[type]?.[field] || '{}';
+		return fieldTypes?.[type]?.[field] || '{ [k: string]: never }';
 	}
 
 	function getArgsType(type: string, field: string) {
 		const hasArgs = fieldArguments?.[type]?.[field] ?? false;
 		if (!hasArgs) {
-			return '{}';
+			return '{ [k: string]: never }';
 		}
 		const fieldUpper = field[0].toUpperCase() + field.slice(1);
 		return `Types.${type}${fieldUpper}Args`;

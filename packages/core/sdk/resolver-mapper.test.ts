@@ -9,7 +9,7 @@ import {
 } from './__test__/utils.ts';
 import { ResolverMapper } from './resolver-mapper.ts';
 import type { NativeResolver } from './resolver.ts';
-import type { NativeSubscribe } from './subscription.ts';
+import type { NativeSubscription } from './subscription.ts';
 
 test('setResolver adds a resolver to the map', (t) => {
 	const mapper = new ResolverMapper();
@@ -42,7 +42,7 @@ test('setSubscription adds a subscription resolver to the map', (t) => {
 		yield 'world 3';
 	};
 
-	const subscribe: NativeSubscribe['subscribe'] = () => {
+	const subscribe: NativeSubscription['subscribe'] = () => {
 		return getIterator();
 	};
 
@@ -90,7 +90,7 @@ test('composes middlewares with resolvers', (t) => {
 
 test('addMiddleware registers middleware for all fields of a type', (t) => {
 	const mapper = new ResolverMapper();
-	mapper.typeFields['Query'] = ['hello', 'world'];
+	mapper.typeFields.Query = ['hello', 'world'];
 
 	const middleware = forgeNativeMiddleware();
 	mapper.addMiddleware('Query', '*', middleware);
@@ -125,5 +125,5 @@ test('addMiddleware registers default resolvers when there are none', (t) => {
 test('setScalar adds a scalar to the map', (t) => {
 	const mapper = new ResolverMapper();
 	mapper.setScalar('MockedScalar', mockedScalar);
-	t.is(mapper.scalars['MockedScalar'], mockedScalar);
+	t.is(mapper.scalars.MockedScalar, mockedScalar);
 });

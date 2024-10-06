@@ -62,6 +62,7 @@ export function copyResolvers<T extends ResolversMap>(resolvers: T): T {
 	return copy;
 }
 
+// biome-ignore lint/complexity/noBannedTypes: we want to accept any kind of function
 export function chainResolvers(funcs: Function[]) {
 	if (funcs.length === 1) {
 		return funcs[0];

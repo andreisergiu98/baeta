@@ -1,17 +1,18 @@
 import type { IResolvers } from '@graphql-tools/utils';
-import { type GraphQLFieldResolver, defaultFieldResolver } from 'graphql';
+import { defaultFieldResolver } from 'graphql';
 import type { ScalarResolver } from '../lib/index.ts';
 import { composeResolvers } from './compose.ts';
 import type { NativeMiddleware } from './middleware.ts';
 import type { NativeTypeResolver } from './resolver-type.ts';
-import type { NativeSubscribe } from './subscription.ts';
+import type { NativeResolver } from './resolver.ts';
+import type { NativeSubscription } from './subscription.ts';
 
-export type FieldResolvers = Record<string, GraphQLFieldResolver<unknown, unknown>> & {
+export type FieldResolvers = Record<string, NativeResolver> & {
 	__resolveType?: NativeTypeResolver;
 };
 
 export type SubscriptionsResolvers = {
-	Subscription?: Record<string, NativeSubscribe | undefined>;
+	Subscription?: Record<string, NativeSubscription | undefined>;
 };
 
 export type ResolversMap = {
@@ -37,28 +38,41 @@ export class ResolverMapper {
 		return this.typeFields[type] ?? [];
 	}
 
-	setResolver(type: string, field: string, resolver: GraphQLFieldResolver<unknown, unknown>) {
+	setResolver<Result, Root, Context, Args>(
+		type: string,
+		field: string,
+		resolver: NativeResolver<Result, Root, Context, Args>,
+	) {
 		this.resolvers[type] ??= {};
-		// biome-ignore lint/style/noNonNullAssertion: map initialized above
-		this.resolvers[type]![field] = resolver;
+		this.resolvers[type][field] = resolver as NativeResolver;
 	}
 
 	setScalar(scalar: string, resolver: ScalarResolver) {
 		this.scalars[scalar] = resolver;
 	}
 
-	setSubscription(field: string, resolver: NativeSubscribe) {
+	setSubscription<Payload, Result, Root, Context, Args>(
+		field: string,
+		resolver: NativeSubscription<Payload, Result, Root, Context, Args>,
+	) {
 		this.resolvers.Subscription ??= {};
-		this.resolvers.Subscription[field] = resolver;
+		this.resolvers.Subscription[field] = resolver as NativeSubscription;
 	}
 
-	setTypenameResolver(type: string, resolver: NativeTypeResolver) {
+	setTypenameResolver<Result, Value, Context>(
+		type: string,
+		resolver: NativeTypeResolver<Result, Value, Context>,
+	) {
 		this.resolvers[type] ??= {};
-		// biome-ignore lint/style/noNonNullAssertion: <explanation>
-		this.resolvers[type]!.__resolveType = resolver;
+		this.resolvers[type].__resolveType = resolver as NativeTypeResolver;
 	}
 
-	addMiddleware(type: string, field: string, middleware: NativeMiddleware, unshift = false) {
+	addMiddleware<Result, Root, Context, Args>(
+		type: string,
+		field: string,
+		middleware: NativeMiddleware<Result, Root, Context, Args>,
+		unshift = false,
+	) {
 		if (type === '*') {
 			for (const t of this.getTypes()) {
 				this.addMiddleware(t, field, middleware, unshift);
@@ -80,11 +94,9 @@ export class ResolverMapper {
 		this.middlewares[key] ??= [];
 
 		if (unshift) {
-			// biome-ignore lint/style/noNonNullAssertion: initialized above
-			this.middlewares[key]!.unshift(middleware);
+			this.middlewares[key].unshift(middleware as NativeMiddleware);
 		} else {
-			// biome-ignore lint/style/noNonNullAssertion: initialized above
-			this.middlewares[key]!.push(middleware);
+			this.middlewares[key].push(middleware as NativeMiddleware);
 		}
 	}
 
@@ -105,8 +117,7 @@ export class ResolverMapper {
 
 		if (!this.typeFields[type]?.includes(field)) {
 			this.typeFields[type] ??= [];
-			// biome-ignore lint/style/noNonNullAssertion: map initialized above
-			this.typeFields[type]!.push(field);
+			this.typeFields[type].push(field);
 		}
 	}
 

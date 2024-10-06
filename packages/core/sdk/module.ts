@@ -9,7 +9,7 @@ import {
 	resolveExtensions,
 	withExtensions,
 } from './extension.ts';
-import { type GenericMiddleware, createMiddlewareAdapter } from './middleware.ts';
+import { createMiddlewareAdapter } from './middleware.ts';
 import { ResolverMapper } from './resolver-mapper.ts';
 import { createTypeResolverAdapter } from './resolver-type.ts';
 import { createResolverAdapter } from './resolver.ts';
@@ -43,7 +43,7 @@ export class ModuleBuilder {
 		};
 
 		const coreAddons = {
-			$use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(type, field),
+			$use: this.createMiddlewareBuilder<Result, Root, Context, Args>(type, field),
 		};
 
 		const addons = withExtensions(
@@ -70,7 +70,7 @@ export class ModuleBuilder {
 		};
 
 		const coreResolveAddons = {
-			$use: this.createMiddlewareBuilder<Middleware<Result, Root, Context, Args>>(
+			$use: this.createMiddlewareBuilder<Result, Root, Context, Args>(
 				'Subscription',
 				`${field}.resolve`,
 			),
@@ -110,8 +110,8 @@ export class ModuleBuilder {
 		return builder;
 	}
 
-	createMiddlewareBuilder<M extends GenericMiddleware>(type: string, field: string) {
-		const builder = (middleware: M) => {
+	createMiddlewareBuilder<Result, Root, Context, Args>(type: string, field: string) {
+		const builder = (middleware: Middleware<Result, Root, Context, Args>) => {
 			nameFunction(middleware, `${type}.${field}.$use`);
 			this.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));
 		};
@@ -120,17 +120,14 @@ export class ModuleBuilder {
 
 	createTypeMethods<Root, Context>(type: string) {
 		const addons = {
-			$use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(type, '*'),
+			$use: this.createMiddlewareBuilder<unknown, Root, Context, unknown>(type, '*'),
 		};
 		return withExtensions(addons, this.getTypeExtensions<Root, Context>(type));
 	}
 
 	createSubscriptionMethods<Root, Context>() {
 		const addons = {
-			$use: this.createMiddlewareBuilder<Middleware<unknown, Root, Context, unknown>>(
-				'Subscription',
-				'*',
-			),
+			$use: this.createMiddlewareBuilder<unknown, Root, Context, unknown>('Subscription', '*'),
 		};
 		return withExtensions(addons, this.createTypeMethods<Root, Context>('Subscription'));
 	}
@@ -138,7 +135,7 @@ export class ModuleBuilder {
 	createModuleMethods<Context>() {
 		const addons = {
 			$builder: this as ModuleBuilder,
-			$use: this.createMiddlewareBuilder<Middleware<unknown, unknown, Context, unknown>>('*', '*'),
+			$use: this.createMiddlewareBuilder<unknown, unknown, Context, unknown>('*', '*'),
 			$directive: this.addTransformer,
 		};
 		return withExtensions(addons, this.getModuleExtensions());

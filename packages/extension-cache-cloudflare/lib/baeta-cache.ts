@@ -38,7 +38,7 @@ export type CacheValue = {
 export class BaetaCache implements DurableObject {
 	constructor(
 		public state: DurableObjectState,
-		public env: {},
+		public env: { [key: string]: never },
 	) {}
 
 	async fetch(request: Request) {

@@ -225,9 +225,13 @@ export abstract class StoreAdapter<Item> {
 
 	createQueryMiddleware = <T extends null | Item | Item[] | Array<Item | null>>(
 		queryRef: string,
-	): Middleware<T, any, any, Record<string, unknown>> => {
+	): Middleware<T, unknown, unknown, Record<string, unknown>> => {
 		return async (params, next): Promise<T> => {
-			const cached = await this.loadQueryResults(queryRef, params.root?.id, params.args);
+			const cached = await this.loadQueryResults(
+				queryRef,
+				this.getRefFallback(params.root),
+				params.args,
+			);
 
 			if (cached) {
 				return (cached.isList ? cached.items : cached.items[0]) as T;
@@ -235,7 +239,7 @@ export abstract class StoreAdapter<Item> {
 
 			const result = await next();
 
-			this.saveQueryResult(queryRef, params.root?.id, params.args, result);
+			this.saveQueryResult(queryRef, this.getRefFallback(params.root), params.args, result);
 
 			return result;
 		};
@@ -342,6 +346,19 @@ export abstract class StoreAdapter<Item> {
 		}
 
 		throw new Error('Object does not have id. Define getRef function in cache options');
+	}
+
+	protected getRefFallback(root: unknown) {
+		if (root == null) {
+			return undefined;
+		}
+
+		if (typeof root === 'object' && 'id' in root) {
+			this.validateRefType(root.id);
+			return root.id.toString();
+		}
+
+		return undefined;
 	}
 
 	protected validateRefType(ref: unknown): asserts ref is string | number | bigint {

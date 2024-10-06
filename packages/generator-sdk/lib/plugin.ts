@@ -46,7 +46,7 @@ const defaultPluginFn: GeneratorPluginV1Fn<unknown> = async (ctx, next) => {
 
 const defaultWatchFn = () => ({ include: [], ignore: [] });
 
-export function createPluginV1<Store = {}>(
+export function createPluginV1<Store = unknown>(
 	options: GeneratorPluginV1Factory<Store>,
 ): GeneratorPluginV1<Store> {
 	return {

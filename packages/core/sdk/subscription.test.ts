@@ -1,5 +1,6 @@
 import test from 'ava';
 import type { GraphQLResolveInfo } from 'graphql';
+import type { EmptyObject } from '../types/object.ts';
 import { createSubscriptionAdapter } from './subscription.ts';
 
 test('createSubscriptionAdapter should map parameters correctly', async (t) => {
@@ -35,7 +36,11 @@ test('createSubscriptionAdapter should map parameters correctly', async (t) => {
 		return;
 	}
 
-	const subs = adapted.subscribe(root, args, ctx, info) as AsyncGenerator<{}, void, unknown>;
+	const subs = adapted.subscribe(root, args, ctx, info) as AsyncGenerator<
+		EmptyObject,
+		void,
+		unknown
+	>;
 
 	let iterations = 0;
 

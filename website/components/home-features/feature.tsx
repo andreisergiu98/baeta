@@ -1,10 +1,9 @@
-// biome-ignore lint/style/useImportType: <explanation>
-import React from 'react';
+import React, { type ComponentProps, type ComponentType } from 'react';
 import styles from './feature.module.css';
 
 export interface FeatureProps {
 	title: string;
-	Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+	Svg: ComponentType<ComponentProps<'svg'>>;
 	description: JSX.Element;
 }
 

@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import * as Types from "../../__generated__/types";
-import { DocumentNode } from "graphql";
+import type { DocumentNode } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
 import baetaExtensions from "../../extensions/index.ts";
 
@@ -31,14 +31,14 @@ export namespace ModuleMetadata {
       ...module.createModuleMethods<Types.ContextType>(),
       User: {
         ...module.createTypeMethods<User, Types.ContextType>("User"),
-        id: module.createResolverBuilder<Types.Scalars["ID"]["output"], User, Types.ContextType, {}>("User", "id"),
-        name: module.createResolverBuilder<Types.Scalars["String"]["output"], User, Types.ContextType, {}>("User", "name"),
-        birthday: module.createResolverBuilder<Types.Maybe<DateTime>, User, Types.ContextType, {}>("User", "birthday"),
+        id: module.createResolverBuilder<Types.Scalars["ID"]["output"], User, Types.ContextType, { [k: string]: never }>("User", "id"),
+        name: module.createResolverBuilder<Types.Scalars["String"]["output"], User, Types.ContextType, { [k: string]: never }>("User", "name"),
+        birthday: module.createResolverBuilder<Types.Maybe<DateTime>, User, Types.ContextType, { [k: string]: never }>("User", "birthday"),
       },
       Query: {
-        ...module.createTypeMethods<{}, Types.ContextType>("Query"),
-        user: module.createResolverBuilder<Types.Maybe<User>, {}, Types.ContextType, Types.QueryUserArgs>("Query", "user"),
-        users: module.createResolverBuilder<Types.Maybe<Array<Types.Maybe<User>>>, {}, Types.ContextType, Types.QueryUsersArgs>("Query", "users"),
+        ...module.createTypeMethods<{ [k: string]: never }, Types.ContextType>("Query"),
+        user: module.createResolverBuilder<Types.Maybe<User>, { [k: string]: never }, Types.ContextType, Types.QueryUserArgs>("Query", "user"),
+        users: module.createResolverBuilder<Types.Maybe<Array<Types.Maybe<User>>>, { [k: string]: never }, Types.ContextType, Types.QueryUsersArgs>("Query", "users"),
       },
     };
   }

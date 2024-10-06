@@ -1,18 +1,21 @@
 import type { GraphQLFieldResolver } from 'graphql';
 import type { Middleware } from '../lib/index.ts';
 
-export type NativeMiddleware = (
-	next: GraphQLFieldResolver<unknown, unknown, unknown, unknown | Promise<unknown>>,
-) => GraphQLFieldResolver<unknown, unknown>;
+export type NativeMiddleware<
+	Result = unknown,
+	Root = unknown,
+	Context = unknown,
+	Args = unknown,
+> = (
+	next: GraphQLFieldResolver<Root, Context, Args, Result | PromiseLike<Result>>,
+) => GraphQLFieldResolver<Root, Context, Args, Result | PromiseLike<Result>>;
 
-export type GenericMiddleware = Middleware<any, any, any, any>;
-
-export function createMiddlewareAdapter(
-	middleware: Middleware<unknown, unknown, unknown, unknown>,
-): NativeMiddleware {
+export function createMiddlewareAdapter<Result, Root, Context, Args>(
+	middleware: Middleware<Result, Root, Context, Args>,
+): NativeMiddleware<Result, Root, Context, Args> {
 	return (nextResolver) => {
 		return function adapter(root, args, ctx, info) {
-			const next = () => nextResolver(root, args, ctx, info) as Promise<unknown>;
+			const next = () => nextResolver(root, args, ctx, info) as Promise<Result>;
 			return middleware({ root, args, info, ctx }, next);
 		};
 	};

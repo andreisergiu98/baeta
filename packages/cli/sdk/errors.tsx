@@ -1,10 +1,11 @@
 import style from 'ansi-styles';
 import { Text } from 'ink';
 import React from 'react';
+import type { TextOutput } from '../types/text.ts';
 
 export interface ErrorsProps {
-	warnings?: string[];
-	errors?: string[];
+	warnings?: TextOutput[];
+	errors?: TextOutput[];
 }
 
 const errorIcon = `${style.red.open}✘${style.red.close}`;
@@ -22,19 +23,24 @@ export function makeErrorMessage(message: string, bold = false) {
 	return `${style.bold.open}${wrapped}${style.bold.close}`;
 }
 
+export function makeErrorOutput(id: string, message: string, bold = false) {
+	return {
+		id,
+		text: makeErrorMessage(message, bold),
+	};
+}
+
 export function Errors(props: ErrorsProps) {
 	return (
 		<>
-			{props.warnings?.map((warning, index) => (
-				// biome-ignore lint/suspicious/noArrayIndexKey: it is safe in this case
-				<Text key={index} bold={true}>
-					{warning}
+			{props.warnings?.map((warning) => (
+				<Text key={warning.id} bold={true}>
+					{warning.text}
 				</Text>
 			))}
-			{props.errors?.map((error, index) => (
-				// biome-ignore lint/suspicious/noArrayIndexKey: it is safe in this case
-				<Text key={index} bold={true}>
-					{error}
+			{props.errors?.map((error) => (
+				<Text key={error.id} bold={true}>
+					{error.text}
 				</Text>
 			))}
 		</>

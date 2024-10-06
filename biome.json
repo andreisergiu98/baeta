@@ -8,7 +8,10 @@
       "examples/**/modules/autoload.ts",
       "examples/**/__generated__/**",
       "examples/**/typedef.ts",
-      ".yarn/**"
+      ".yarn/**",
+      ".tsup/**",
+      ".turbo/**",
+      "dist/**"
     ]
   },
   "linter": {
@@ -16,12 +19,7 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noExplicitAny": "off",
         "noExportsInTest": "off"
-      },
-      "complexity": {
-        "noBannedTypes": "off",
-        "useLiteralKeys": "off"
       },
       "correctness": {
         "useImportExtensions": "error"

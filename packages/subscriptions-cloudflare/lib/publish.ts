@@ -8,12 +8,12 @@ export interface PublishData {
 	connectionId: string;
 }
 
-export async function publish<Env>(
+export async function publish<Env, Context, ContextParams>(
 	env: Env,
 	executionContext: ExecutionContext,
-	options: SubscriptionsOptions<Env>,
+	options: SubscriptionsOptions<Env, Context, ContextParams>,
 	topic: string,
-	payload: any,
+	payload: unknown,
 ) {
 	const db = options.getDatabase(env);
 	const subscriptions = await db.getSubscriptions(topic);
@@ -34,13 +34,13 @@ export async function publish<Env>(
 	return Promise.all(promises).then(() => {});
 }
 
-async function publishToConnectionPool<Env>(
+async function publishToConnectionPool<Env, Context, ContextParams>(
 	env: Env,
 	executionContext: ExecutionContext,
-	options: SubscriptionsOptions<Env>,
+	options: SubscriptionsOptions<Env, Context, ContextParams>,
 	connectionPoolId: string,
 	subscriptions: SubscriptionInfo[],
-	payload: any,
+	payload: unknown,
 ) {
 	const promises = subscriptions.map((subInfo) =>
 		publishToSubscription(env, executionContext, options, subInfo, payload),
@@ -58,14 +58,18 @@ async function publishToConnectionPool<Env>(
 	});
 }
 
-async function publishToSubscription<Env>(
+async function publishToSubscription<Env, Context, ContextParams>(
 	env: Env,
 	executionContext: ExecutionContext,
-	options: SubscriptionsOptions<Env>,
+	options: SubscriptionsOptions<Env, Context, ContextParams>,
 	subInfo: SubscriptionInfo,
-	payload: any,
+	payload: unknown,
 ): Promise<PublishData> {
-	const context = options.context?.createContext(subInfo.contextParams, env, executionContext);
+	const context = options.context?.createContext(
+		subInfo.contextParams as ContextParams,
+		env,
+		executionContext,
+	);
 
 	const result = await execute({
 		schema: options.schema,

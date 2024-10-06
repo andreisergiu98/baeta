@@ -1,2 +1,2 @@
 require('esbuild-register');
-require('../lib/prep.cjs');
+require('../lib/prep.ts');

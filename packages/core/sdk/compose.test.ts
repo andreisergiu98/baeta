@@ -1,8 +1,7 @@
 import test from 'ava';
 import type { GraphQLResolveInfo } from 'graphql';
-import type { EmptyObject } from '../types/object.ts';
 import { forgeNativeResolver, forgeResolverArgs, getResolverFromMap } from './__test__/utils.ts';
-import { chainResolvers, composeResolvers } from './compose.ts';
+import { chainMiddlewares, composeResolvers } from './compose.ts';
 import type { NativeMiddleware } from './middleware.ts';
 import type { MiddlewareMap } from './resolver-mapper.ts';
 import type { NativeResolver } from './resolver.ts';
@@ -67,13 +66,8 @@ test('composeResolvers does not replace resolvers for non-mapped types', (t) => 
 test('chainResolvers correctly composes multiple resolvers', (t) => {
 	const resolver = forgeNativeResolver(0);
 
-	const middleware = (next: NativeResolver) => {
-		return (
-			root: EmptyObject,
-			args: EmptyObject,
-			context: EmptyObject,
-			info: GraphQLResolveInfo,
-		) => {
+	const middleware: NativeMiddleware = (next) => {
+		return (root, args, context, info) => {
 			const result = next(root, args, context, info);
 
 			if (typeof result === 'number') {
@@ -84,15 +78,13 @@ test('chainResolvers correctly composes multiple resolvers', (t) => {
 		};
 	};
 
-	const createResolver = chainResolvers([middleware, middleware, () => resolver]);
-	const composedResolver = createResolver();
+	const composedResolver = chainMiddlewares([middleware, middleware], resolver);
 
-	t.is(composedResolver(), 2);
+	t.is(composedResolver({}, {}, {}, {} as GraphQLResolveInfo), 2);
 });
 
 test('chainResolvers returns the original resolver if there is only one function', (t) => {
 	const resolver = forgeNativeResolver(0);
-	const createResolver = chainResolvers([() => resolver]);
-	const composedResolver = createResolver();
-	t.is(composedResolver(), 0);
+	const composedResolver = chainMiddlewares([], resolver);
+	t.is(composedResolver({}, {}, {}, {} as GraphQLResolveInfo), 0);
 });

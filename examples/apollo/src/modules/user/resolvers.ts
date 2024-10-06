@@ -9,15 +9,17 @@ Query.user(async (params) => {
 	};
 });
 
-Query.user.$use((params, next) => {
+Query.user.$use(async (params, next) => {
 	console.log('fetched User with args: ', JSON.stringify(params.args, null, 2));
 	return next();
 });
 
 Query.user.$auth(
 	{
-		isPublic: true,
-		isLoggedIn: true,
+		$or: {
+			isPublic: true,
+			isLoggedIn: true,
+		},
 	},
 	{
 		skipDefaults: true,

@@ -1,5 +1,13 @@
 # @baeta/core
 
+## 0.1.1
+
+### Patch Changes
+
+- [`594e47e`](https://github.com/andreisergiu98/baeta/commit/594e47e9ddb0ba7fdb975c48cd8df3af130b5c9e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - prevent prototype pollution through object lens
+
+- [#157](https://github.com/andreisergiu98/baeta/pull/157) [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - stricter linting, better type safety
+
 ## 0.1.0
 
 ### Minor Changes

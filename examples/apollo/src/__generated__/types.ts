@@ -65,7 +65,7 @@ export type User = {
   __typename?: 'User';
   photos?: Maybe<Array<UserPhoto>>;
   photosConnection?: Maybe<UserPhotoConnection>;
-  id: Scalars['ID']['output'];
+  pid: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   birthday?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -100,7 +100,7 @@ export type DefinedFieldsWithoutExtensions = {
   UserPhotoConnection: "pageInfo" | "edges";
   UserPhotoEdge: "cursor" | "node";
   UserPhoto: "id" | "url";
-  User: "id" | "name" | "birthday";
+  User: "pid" | "name" | "birthday";
 };
 
 export type DefinedUnionsWithoutExtensions = {

@@ -1,4 +1,9 @@
-import { type ParentRef, type Ref, StoreAdapter, type StoreOptions } from '@baeta/extension-cache';
+import {
+	type ItemRef,
+	type ParentRef,
+	StoreAdapter,
+	type StoreOptions,
+} from '@baeta/extension-cache';
 import type { DurableObjectNamespace } from '@cloudflare/workers-types';
 import { CloudflareCacheClient } from './cloudflare-cache-client.ts';
 
@@ -7,7 +12,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	constructor(
 		durableObject: DurableObjectNamespace,
-		options: StoreOptions<Item> | undefined,
+		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
@@ -22,7 +27,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		await this.client.put(pairs, this.getTtl());
 	};
 
-	deleteMany = async (refs: Ref[], evictQueries = true) => {
+	deleteMany = async (refs: ItemRef[], evictQueries = true) => {
 		if (refs.length === 0) {
 			return;
 		}
@@ -35,7 +40,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 	};
 
-	protected loadMany = async (refs: Ref[]): Promise<Array<Item | null> | null> => {
+	protected loadMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
 		if (refs.length === 0) {
 			return null;
 		}
@@ -46,9 +51,9 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	protected saveQueryMetadata = async (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
 		meta: string[],
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => {
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		await this.client.putOne(key, JSON.stringify(meta), this.getTtl());
@@ -56,8 +61,8 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	protected loadQueryMetadata = async (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => {
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		const meta = await this.client
@@ -71,7 +76,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		return meta;
 	};
 
-	deleteQueries = async (
+	protected deleteQueriesByRef = async (
 		queryRef?: string,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,

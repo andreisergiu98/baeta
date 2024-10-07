@@ -1,11 +1,16 @@
-import { type ParentRef, type Ref, StoreAdapter, type StoreOptions } from '@baeta/extension-cache';
+import {
+	type ItemRef,
+	type ParentRef,
+	StoreAdapter,
+	type StoreOptions,
+} from '@baeta/extension-cache';
 import type Redis from 'ioredis';
 import { collectPipelineErrors } from '../utils/pipeline.ts';
 
 export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	constructor(
 		private client: Redis,
-		options: StoreOptions<Item> | undefined,
+		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
@@ -35,7 +40,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 	};
 
-	deleteMany = async (refs: Ref[], evictQueries = true) => {
+	deleteMany = async (refs: ItemRef[], evictQueries = true) => {
 		if (refs.length === 0) {
 			return;
 		}
@@ -50,9 +55,9 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	protected saveQueryMetadata = async (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
 		meta: string[],
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => {
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
 
@@ -74,8 +79,8 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	protected loadQueryMetadata = async (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => {
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		const meta = await this.client.lrange(key, 0, -1);
@@ -85,7 +90,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		return meta;
 	};
 
-	deleteQueries = async (
+	protected deleteQueriesByRef = async (
 		queryRef?: string,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
@@ -96,7 +101,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 	};
 
-	protected loadMany = async (refs: Ref[]): Promise<Array<Item | null> | null> => {
+	protected loadMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
 		if (refs.length === 0) {
 			return null;
 		}

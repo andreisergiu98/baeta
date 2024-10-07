@@ -1,4 +1,3 @@
-import type { Middleware } from '@baeta/core';
 import {
 	Extension,
 	type ModuleBuilder,
@@ -6,33 +5,31 @@ import {
 	nameFunction,
 } from '@baeta/core/sdk';
 import type { TypeGetter } from './global-types.ts';
-import type {
-	ParentRef,
-	StoreAdapter,
-	StoreAdapterOptions,
-	StoreOptions,
-} from './store-adapter.ts';
+import type { MiddlewareOptions } from './middleware-options.ts';
+import { CacheRef } from './ref.ts';
+import type { QueryMatching, StoreAdapter } from './store-adapter.ts';
+import type { DefaultStoreOptions, StoreOptions } from './store-options.ts';
 import type { Store } from './store.ts';
 
 export class CacheExtension extends Extension {
 	constructor(
 		private store: Store,
-		private defaultOptions?: StoreAdapterOptions,
+		private defaultOptions?: DefaultStoreOptions,
 	) {
 		super();
 	}
 
 	getTypeExtensions = <Root, Context>(
-		module: ModuleBuilder,
+		_module: ModuleBuilder,
 		type: string,
 	): BaetaExtensions.TypeExtensions<Root, Context> => {
 		return {
-			$createCache: (options?: StoreOptions<Root>) => {
+			$createCache: (options: StoreOptions<Root>) => {
 				const mergedOptions = {
 					...this.defaultOptions,
 					...options,
 				};
-				return this.store.createStoreAdapter<Root>(mergedOptions, type, '');
+				return this.store.createStoreAdapter<Root>(mergedOptions, type, 'hash');
 			},
 		};
 	};
@@ -42,25 +39,16 @@ export class CacheExtension extends Extension {
 		type: string,
 		field: string,
 	): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
-		const ref = `${type}_${field}`;
+		const ref = new CacheRef<Result, Root, Args>(type, field);
 		return {
 			$cacheRef: ref,
-			$useCache: (store: StoreAdapter<TypeGetter<Result>>) => {
-				const middleware = store.createQueryMiddleware(ref) as Middleware<
-					unknown,
-					unknown,
-					unknown,
-					unknown
-				>;
+			$useCache: (store: StoreAdapter<TypeGetter<Result>>, options: MiddlewareOptions<Root>) => {
+				const middleware = store.createMiddleware(ref, options);
 				nameFunction(middleware, `${type}.${field}.$useCache`);
 				module.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));
 			},
-			$clearCache: (
-				store: StoreAdapter<TypeGetter<Result>>,
-				parentRef?: ParentRef,
-				args?: Partial<Args>,
-			) => {
-				return store.deleteQueries(ref, parentRef ?? undefined, args);
+			$clearCache: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => {
+				return store.deleteQueries(ref, matcher);
 			},
 		};
 	};

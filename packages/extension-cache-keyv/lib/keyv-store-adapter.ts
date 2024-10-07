@@ -1,10 +1,15 @@
-import { type ParentRef, type Ref, StoreAdapter, type StoreOptions } from '@baeta/extension-cache';
+import {
+	type ItemRef,
+	type ParentRef,
+	StoreAdapter,
+	type StoreOptions,
+} from '@baeta/extension-cache';
 import type Keyv from 'keyv';
 
 export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 	constructor(
 		private client: Keyv,
-		options: StoreOptions<Item> | undefined,
+		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
@@ -20,7 +25,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		await Promise.all(items.map((root) => this.save(root)));
 	};
 
-	deleteMany = async (refs: Ref[], evictQueries = true) => {
+	deleteMany = async (refs: ItemRef[], evictQueries = true) => {
 		if (refs.length === 0) {
 			return;
 		}
@@ -33,7 +38,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 	};
 
-	protected loadMany = async (refs: Ref[]): Promise<Array<Item | null> | null> => {
+	protected loadMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
 		if (refs.length === 0) {
 			return null;
 		}
@@ -43,9 +48,9 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	protected saveQueryMetadata = async (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
 		meta: string[],
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => {
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		await this.client.set(key, meta, this.getTtl());
@@ -53,8 +58,8 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	protected loadQueryMetadata = async (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => {
 		const key = this.createKeyByQuery(queryRef, parentRef, args);
 		const meta = await this.client.get(key).then((res) => (res ?? []) as string[]);
@@ -64,7 +69,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		return meta;
 	};
 
-	deleteQueries = async (
+	protected deleteQueriesByRef = async (
 		queryRef?: string,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,

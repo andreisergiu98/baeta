@@ -1,8 +1,9 @@
-import type { StoreAdapter, StoreAdapterOptions } from './store-adapter.ts';
+import type { StoreAdapter } from './store-adapter.ts';
+import type { DefaultStoreOptions } from './store-options.ts';
 
 export abstract class Store {
 	abstract createStoreAdapter<T>(
-		options: StoreAdapterOptions,
+		options: DefaultStoreOptions,
 		type: string,
 		hash: string,
 	): StoreAdapter<T>;

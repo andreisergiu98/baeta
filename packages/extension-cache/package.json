@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@baeta/util-encoding": "workspace:^",
+    "@baeta/util-log": "workspace:^",
     "dataloader": "^2.2.2",
     "flat": "^6.0.1"
   },

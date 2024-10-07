@@ -1,4 +1,4 @@
-import { Store, type StoreAdapter, type StoreAdapterOptions } from '@baeta/extension-cache';
+import { Store, type StoreAdapter, type StoreOptions } from '@baeta/extension-cache';
 import type Keyv from 'keyv';
 import { KeyvStoreAdapter } from './keyv-store-adapter.ts';
 
@@ -7,7 +7,7 @@ export class KeyvStore extends Store {
 		super();
 	}
 
-	createStoreAdapter<T>(options: StoreAdapterOptions, type: string, hash: string): StoreAdapter<T> {
+	createStoreAdapter<T>(options: StoreOptions<T>, type: string, hash: string): StoreAdapter<T> {
 		return new KeyvStoreAdapter<T>(this.keyv, options, type, hash);
 	}
 }

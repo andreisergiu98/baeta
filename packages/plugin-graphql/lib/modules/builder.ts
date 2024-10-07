@@ -616,19 +616,19 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
 
 	function getParentType(type: string) {
 		if (['Query', 'Mutation', 'Subscription'].includes(type)) {
-			return '{ [k: string]: never }';
+			return '{ }';
 		}
 		return type;
 	}
 
 	function getResultType(type: string, field: string) {
-		return fieldTypes?.[type]?.[field] || '{ [k: string]: never }';
+		return fieldTypes?.[type]?.[field] || '{ }';
 	}
 
 	function getArgsType(type: string, field: string) {
 		const hasArgs = fieldArguments?.[type]?.[field] ?? false;
 		if (!hasArgs) {
-			return '{ [k: string]: never }';
+			return '{ }';
 		}
 		const fieldUpper = field[0].toUpperCase() + field.slice(1);
 		return `Types.${type}${fieldUpper}Args`;

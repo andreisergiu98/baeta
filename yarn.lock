@@ -3436,6 +3436,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-encoding": "workspace:^"
+    "@baeta/util-log": "workspace:^"
     dataloader: "npm:^2.2.2"
     flat: "npm:^6.0.1"
     graphql: "npm:^16.9.0"

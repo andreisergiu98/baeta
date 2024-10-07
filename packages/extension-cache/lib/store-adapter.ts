@@ -1,72 +1,75 @@
 import type { Middleware } from '@baeta/core';
 import { encodeBase64Url } from '@baeta/util-encoding';
+import { log } from '@baeta/util-log';
 import DataLoader from 'dataloader';
 import { flatten } from 'flat';
+import type { CacheArgs } from './cache-args.ts';
+import type { MiddlewareOptions } from './middleware-options.ts';
+import type { CacheRef, ItemRef, ParentRef } from './ref.ts';
+import type { StoreOptions } from './store-options.ts';
 
-export type Ref = string;
-export type ParentRef = Ref | null | undefined;
+export type QueryMatching<Args> = {
+	parentRef?: ParentRef;
+	args?: CacheArgs<Args>;
+};
 
-export interface StoreAdapterOptions {
-	ttl?: number;
-}
-
-export interface StoreOptions<Root> extends StoreAdapterOptions {
-	getRef?: (root: Root) => Ref;
-	version?: number;
-}
 export abstract class StoreAdapter<Item> {
 	constructor(
-		protected options: StoreOptions<Item> | undefined,
+		protected options: StoreOptions<Item>,
 		protected type: string,
 		protected hash: string,
 	) {}
 
 	abstract saveMany: (items: Item[]) => Promise<void>;
 
-	abstract deleteMany: (refs: Ref[], evictQueries?: boolean) => Promise<void>;
+	abstract deleteMany: (refs: ItemRef[], evictQueries?: boolean) => Promise<void>;
 
-	protected abstract loadMany: (refs: Ref[]) => Promise<Array<Item | null> | null>;
+	protected abstract loadMany: (refs: ItemRef[]) => Promise<Array<Item | null> | null>;
 
 	protected abstract saveQueryMetadata: (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
 		meta: string[],
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => Promise<void>;
 
 	protected abstract loadQueryMetadata: (
 		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
 	) => Promise<string[] | null>;
 
-	abstract deleteQueries: (
+	protected abstract deleteQueriesByRef: <Result, Root, Args>(
 		queryRef?: string,
-		parentRef?: NonNullable<ParentRef>,
+		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => Promise<void>;
 
-	protected loaderFn = async (refs: readonly Ref[]) => {
-		const results = await this.loadMany(refs as Ref[]);
+	protected loaderFn = async (refs: readonly ItemRef[]) => {
+		const results = await this.loadMany(refs as ItemRef[]);
 		if (results != null) {
 			return results;
 		}
 		return new Array(refs.length).fill(null);
 	};
 
-	protected loader = new DataLoader<Ref, Item | null>(this.loaderFn, {
+	protected loader = new DataLoader<ItemRef, Item | null>(this.loaderFn, {
 		cache: false,
 	});
 
-	createKey(ref: Ref) {
-		return `${this.type}:items:${this.getVersion()}:${ref}`;
+	protected createKey(ref: ItemRef) {
+		return `${this.type}:items:${this.getVersion()}:${ref.toString()}`;
 	}
 
-	createKeyByItem(item: Item) {
+	protected createKeyByItem(item: Item) {
 		return this.createKey(this.getRef(item));
 	}
 
-	createKeyByQuery(queryRef: string, parentRef: ParentRef, args: Record<string, unknown>) {
+	protected createKeyByQuery(
+		queryRef: string,
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
+	) {
 		const namespace = this.createQueryKeyNamespace(queryRef);
 		const metadata = this.createQueryKeyHeader(parentRef, args);
 		return `${namespace}:${metadata}`;
@@ -74,25 +77,24 @@ export abstract class StoreAdapter<Item> {
 
 	protected getVersion() {
 		const version = this.options?.version?.toString() || '0';
-		const hash = this.hash || 'hash';
-		return `v${version}_${hash}`;
+		return `v${version}_${this.hash}`;
 	}
 
 	protected createQueryKeyNamespace(queryRef: string) {
 		return `${this.type}:${queryRef}:${this.getVersion()}`;
 	}
 
-	protected createQueryKeyHeader(parentRef: ParentRef, args: Record<string, unknown>) {
+	protected createQueryKeyHeader(parentRef: ParentRef, args?: Record<string, unknown>) {
 		const encodedArgs = this.encodeQueryArgs(args);
 		const encodedParentRef = this.encodePrimitive(parentRef);
 		return `parent#${encodedParentRef}#args#${encodedArgs}`;
 	}
 
-	get = (ref: Ref): Promise<Item | null> => {
+	get = (ref: ItemRef): Promise<Item | null> => {
 		return this.loader.load(ref);
 	};
 
-	getMany = async (refs: Ref[]): Promise<Array<Item> | null> => {
+	getMany = async (refs: ItemRef[]): Promise<Array<Item> | null> => {
 		const results = await this.getPartialMany(refs);
 
 		if (results == null) {
@@ -108,7 +110,7 @@ export abstract class StoreAdapter<Item> {
 		return results as Item[];
 	};
 
-	getPartialMany = async (refs: Ref[]): Promise<Array<Item | null> | null> => {
+	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
 		if (refs.length === 0) {
 			return null;
 		}
@@ -119,39 +121,53 @@ export abstract class StoreAdapter<Item> {
 		return this.saveMany([item]);
 	};
 
-	delete = (ref: Ref, evictQueries?: boolean) => {
+	delete = (ref: ItemRef, evictQueries?: boolean) => {
 		return this.deleteMany([ref], evictQueries);
 	};
 
-	getQueryResult = async (
-		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
+	deleteQueries = <Result, Root, Args>(
+		queryRef?: CacheRef<Result, Root, Args>,
+		matcher?: QueryMatching<Args>,
 	) => {
-		const result = await this.loadQueryResults(queryRef, parentRef, args);
-		if (result == null) {
-			return null;
-		}
-		return { query: result.items[0] };
+		return this.deleteQueriesByRef(queryRef?.toString(), matcher?.parentRef, matcher?.args);
 	};
 
-	getQueryResults = async (
-		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
+	getQueryResult = async <Result, Root, Args>(
+		queryRef: CacheRef<Result, Root, Args>,
+		matcher?: QueryMatching<Args>,
 	) => {
-		const result = await this.loadQueryResults(queryRef, parentRef, args);
-		if (result == null) {
+		const meta = await this.loadQueryMetadata(
+			queryRef.toString(),
+			matcher?.parentRef,
+			matcher?.args,
+		);
+
+		if (meta == null) {
 			return null;
 		}
-		return { query: result.items };
+
+		const [isListIndicator, ...encodedRefs] = meta;
+		const isList = isListIndicator === '1';
+
+		const nullableRefs = encodedRefs.map(this.decodeQueryItemRef);
+		const refs = nullableRefs.filter((ref) => ref != null);
+
+		const items = await this.getMany(refs);
+
+		if (items == null) {
+			return null;
+		}
+
+		const ordered = this.refillNullQueryItems(nullableRefs, items);
+		const result = isList ? ordered : ordered[0];
+
+		return { query: result as Result };
 	};
 
-	saveQueryResult = async (
-		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
-		data: null | Item | Array<Item | null>,
+	saveQueryResult = async <Result, Root, Args>(
+		queryRef: CacheRef<Result, Root, Args>,
+		data: Result,
+		matcher?: QueryMatching<Args>,
 	) => {
 		const isList = Array.isArray(data);
 		const isListIndicator = isList ? '1' : '0';
@@ -167,45 +183,58 @@ export abstract class StoreAdapter<Item> {
 			await this.saveMany(itemsFiltered);
 		}
 
-		return this.saveQueryMetadata(queryRef, parentRef, args, itemsData);
+		return this.saveQueryMetadata(
+			queryRef.toString(),
+			itemsData,
+			matcher?.parentRef,
+			matcher?.args,
+		);
 	};
 
-	protected async loadQueryResults(
-		queryRef: string,
-		parentRef: ParentRef,
-		args: Record<string, unknown>,
-	): Promise<{ items: Array<Item | null>; isList: boolean } | null> {
-		const meta = await this.loadQueryMetadata(queryRef, parentRef, args);
+	createMiddleware = <Result extends null | Item | Item[] | Array<Item | null>, Root, Args>(
+		queryRef: CacheRef<Result, Root, Args>,
+		options: MiddlewareOptions<Root>,
+	): Middleware<Result, Root, unknown, Args> => {
+		return async (params, next): Promise<Result> => {
+			const parentRef = options?.getRootRef
+				? options.getRootRef(params.root)
+				: this.getRefFallback(params.root);
 
-		if (meta == null) {
-			return null;
+			const matcher = { parentRef, args: params.args };
+			const cached = await this.getQueryResult(queryRef, matcher).catch((err) => {
+				log.error(err, `Failed to get query result for ${queryRef}. Proceeding with resolver.`);
+				return null;
+			});
+
+			if (cached) {
+				return cached.query;
+			}
+
+			const result = await next();
+			this.saveQueryResult(queryRef, result, matcher).catch((err) => {
+				log.error(err, `Failed to save query result for ${queryRef}`);
+			});
+			return result;
+		};
+	};
+
+	protected refillNullQueryItems(nullableRefs: Array<ItemRef | null>, items: Item[]) {
+		if (nullableRefs.length === items.length) {
+			return items;
 		}
 
-		const [isListIndicator, ...encodedRefs] = meta;
-
-		const isList = isListIndicator === '1';
-
-		const nullableRefs = encodedRefs.map((encodedRef) => this.decodeQueryItemRef(encodedRef));
-		const refs = nullableRefs.filter((ref) => ref != null);
-
-		const items = await this.getMany(refs);
-
-		if (items == null) {
-			return null;
-		}
-
-		const ordered: Array<Item | null> = [];
+		const filled: Array<Item | null> = [];
 
 		for (let i = 0, j = 0; i < nullableRefs.length; i++) {
 			if (nullableRefs[i] == null) {
-				ordered.push(null);
+				filled.push(null);
 			} else {
-				ordered.push(items[j]);
+				filled.push(items[j]);
 				j++;
 			}
 		}
 
-		return { items: ordered, isList };
+		return filled;
 	}
 
 	protected encodeQueryItemRef(item: null | Item) {
@@ -222,28 +251,6 @@ export abstract class StoreAdapter<Item> {
 		}
 		return encodedRef.substring(4);
 	}
-
-	createQueryMiddleware = <T extends null | Item | Item[] | Array<Item | null>>(
-		queryRef: string,
-	): Middleware<T, unknown, unknown, Record<string, unknown>> => {
-		return async (params, next): Promise<T> => {
-			const cached = await this.loadQueryResults(
-				queryRef,
-				this.getRefFallback(params.root),
-				params.args,
-			);
-
-			if (cached) {
-				return (cached.isList ? cached.items : cached.items[0]) as T;
-			}
-
-			const result = await next();
-
-			this.saveQueryResult(queryRef, this.getRefFallback(params.root), params.args, result);
-
-			return result;
-		};
-	};
 
 	protected createQueryKeyRegExpMatcher(
 		queryRef: string,
@@ -266,7 +273,7 @@ export abstract class StoreAdapter<Item> {
 		return `${this.createQueryKeyNamespace(queryRef)}:parent#${parentMatcher}#args#*${argsMatcher}*`;
 	}
 
-	protected encodeQueryArgs(args: Record<string, unknown>, catchAll?: string) {
+	protected encodeQueryArgs(args: Record<string, unknown> = {}, catchAll?: string) {
 		const entries: Array<[string, string]> = [];
 		const flattened = flatten<Record<string, unknown>, Record<string, unknown>>(args);
 
@@ -331,7 +338,7 @@ export abstract class StoreAdapter<Item> {
 		return /^[a-z0-9_]+$/i.test(value) === false;
 	}
 
-	protected getRef(root: Item): Ref {
+	protected getRef(root: Item): ItemRef {
 		if (this.options?.getRef) {
 			return this.options.getRef(root);
 		}

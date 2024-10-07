@@ -3577,6 +3577,7 @@ __metadata:
     auto-bind: "npm:^5.0.1"
     change-case-all: "npm:2.1.0"
     graphql: "npm:^16.9.0"
+    murmurhash: "npm:^2.0.1"
     parse-filepath: "npm:^1.0.2"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -15984,6 +15985,13 @@ __metadata:
   bin:
     multicast-dns: cli.js
   checksum: 10/e9add8035fb7049ccbc87b1b069f05bb3b31e04fe057bf7d0116739d81295165afc2568291a4a962bee01a5074e475996816eed0f50c8110d652af5abb74f95a
+  languageName: node
+  linkType: hard
+
+"murmurhash@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "murmurhash@npm:2.0.1"
+  checksum: 10/8bb90f43b1c41b1d046efe662a02dcc3cdbda4b42fbbadf7488046772d9eecf2b37ffb6cb73d0d96f2ff489d9f4a8252c674bbae588a6179f60854fe0bfe3325
   languageName: node
   linkType: hard
 

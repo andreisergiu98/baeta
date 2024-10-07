@@ -20,7 +20,7 @@ export class CacheExtension extends Extension {
 	}
 
 	getTypeExtensions = <Root, Context>(
-		_module: ModuleBuilder,
+		module: ModuleBuilder,
 		type: string,
 	): BaetaExtensions.TypeExtensions<Root, Context> => {
 		return {
@@ -29,7 +29,8 @@ export class CacheExtension extends Extension {
 					...this.defaultOptions,
 					...options,
 				};
-				return this.store.createStoreAdapter<Root>(mergedOptions, type, 'hash');
+				const typeHash = module.hashes[type]?.hash ?? '0';
+				return this.store.createStoreAdapter<Root>(mergedOptions, type, typeHash);
 			},
 		};
 	};
@@ -39,7 +40,8 @@ export class CacheExtension extends Extension {
 		type: string,
 		field: string,
 	): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
-		const ref = new CacheRef<Result, Root, Args>(type, field);
+		const fieldHash = module.hashes[type]?.fieldsHashes[field] ?? '0';
+		const ref = new CacheRef<Result, Root, Args>(type, field, fieldHash);
 		return {
 			$cacheRef: ref,
 			$cacheRevision: (revision: number) => {

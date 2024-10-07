@@ -1,52 +1,51 @@
 import {
 	type FieldDefinitionNode,
-	type InputValueDefinitionNode,
 	Kind,
 	type ObjectTypeDefinitionNode,
 	type ObjectTypeExtensionNode,
 	type TypeNode,
 } from 'graphql';
+import hash from 'murmurhash';
 
-export function getObjectTypeHash(node: ObjectTypeDefinitionNode | ObjectTypeExtensionNode) {
-	const name = node.name.value;
-	const fields = buildFieldsNames(node.fields);
-	return `${name}${fields}`;
-}
+export type TypeHash = {
+	hash: string;
+	fieldsHashes: Record<string, string>;
+};
 
-function buildFieldsNames(fields: readonly FieldDefinitionNode[] = []): string {
-	if (fields.length === 0) {
-		return '';
+export function getObjectTypeHash(
+	node: ObjectTypeDefinitionNode | ObjectTypeExtensionNode,
+): TypeHash {
+	const fieldNames = buildFieldsNames(node.fields);
+	const typeFields = fieldNames
+		.map(([fieldName, fieldType]) => `${fieldName}:${fieldType}`)
+		.join(',');
+
+	const fieldMap: Record<string, string> = {};
+
+	for (const [fieldName, fieldType] of fieldNames) {
+		fieldMap[fieldName] = hash.v3(fieldType).toString(36);
 	}
 
-	const fieldsNames: string[] = [];
+	return {
+		hash: hash.v3(typeFields).toString(36),
+		fieldsHashes: fieldMap,
+	};
+}
+
+function buildFieldsNames(fields: readonly FieldDefinitionNode[] = []) {
+	if (fields.length === 0) {
+		return [];
+	}
+
+	const fieldsNames: Array<[string, string]> = [];
 
 	for (const field of fields) {
 		const fieldName = field.name.value;
 		const fieldType = buildTypeName(field.type);
-		const argsNames = buildArgsNames(field.arguments);
-		fieldsNames.push(`${fieldName}${argsNames}:${fieldType}`);
+		fieldsNames.push([fieldName, fieldType]);
 	}
 
-	return `{${fieldsNames.join(',')}}`;
-}
-
-function buildArgsNames(args: readonly InputValueDefinitionNode[] = []): string {
-	if (args.length === 0) {
-		return '';
-	}
-
-	const argsNames: string[] = [];
-
-	for (const arg of args) {
-		const argName = arg.name.value;
-
-		// console.log(arg);
-
-		const argTypeName = buildTypeName(arg.type);
-		argsNames.push(`${argName}:${argTypeName}`);
-	}
-
-	return `(${argsNames.join(',')})`;
+	return fieldsNames.sort(([a], [b]) => a.localeCompare(b));
 }
 
 function buildTypeName(node: TypeNode): string {

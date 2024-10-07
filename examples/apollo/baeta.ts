@@ -13,7 +13,7 @@ export default defineConfig({
 		scalars: {
 			DateTime: 'Date',
 		},
-		extensions: 'src/extensions',
+		extensions: 'src/extensions/index.ts',
 	},
 	compiler: {
 		src: './src/app',

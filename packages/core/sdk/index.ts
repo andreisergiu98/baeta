@@ -1,6 +1,7 @@
 export * from '../utils/functions.ts';
 export * from '../utils/object.ts';
 export * from './extension.ts';
+export * from './hash.ts';
 export * from './middleware.ts';
 export * from './module.ts';
 export * from './resolver.ts';

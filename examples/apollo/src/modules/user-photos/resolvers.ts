@@ -1,6 +1,8 @@
 import { getUserPhotosModule } from './typedef.ts';
 
-const { User } = getUserPhotosModule();
+const { User, UserPhoto } = getUserPhotosModule();
+
+const userPhotoCache = UserPhoto.$createCache({});
 
 User.photos(({ args, root }) => {
 	return [
@@ -9,6 +11,12 @@ User.photos(({ args, root }) => {
 			url: 'https://example.com/1.jpg',
 		},
 	];
+});
+
+User.photos.$useCache(userPhotoCache, {
+	getRootRef(root) {
+		return root.pid;
+	},
 });
 
 User.photosConnection(({ args, root }) => {

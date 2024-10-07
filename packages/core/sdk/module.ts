@@ -9,6 +9,7 @@ import {
 	resolveExtensions,
 	withExtensions,
 } from './extension.ts';
+import type { TypeHashMap } from './hash.ts';
 import { createMiddlewareAdapter } from './middleware.ts';
 import { ResolverMapper } from './resolver-mapper.ts';
 import { createTypeResolverAdapter } from './resolver-type.ts';
@@ -19,6 +20,7 @@ import { type SchemaTransformer, transformSchema } from './transformer.ts';
 export interface Module<T> {
 	id: string;
 	dirname: string;
+	hashes: TypeHashMap;
 	typedef: DocumentNode;
 	createManager: (builder: ModuleBuilder) => T;
 }
@@ -30,6 +32,7 @@ export class ModuleBuilder {
 	constructor(
 		readonly id: string,
 		readonly dirname: string,
+		readonly hashes: TypeHashMap,
 		readonly typedef: DocumentNode,
 		private readonly extensions: Extension[],
 	) {}
@@ -225,6 +228,7 @@ export function createModuleManager<T>(
 	const moduleBuilder = new ModuleBuilder(
 		moduleMetadata.id,
 		moduleMetadata.dirname,
+		moduleMetadata.hashes,
 		moduleMetadata.typedef,
 		resolveExtensions(extensions ?? []),
 	);

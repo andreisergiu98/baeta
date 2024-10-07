@@ -3310,6 +3310,8 @@ __metadata:
     "@baeta/directives": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/extension-auth": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/extension-cache-redis": "workspace:^"
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/plugin-gitignore": "workspace:^"
@@ -3329,6 +3331,7 @@ __metadata:
     graphql: "npm:^16.9.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
+    ioredis: "npm:^5.4.1"
     prisma: "npm:^5.20.0"
     typescript: "npm:^5.6.2"
     ws: "npm:^8.18.0"
@@ -3365,6 +3368,77 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-log": "workspace:^"
     fast-json-stable-stringify: "npm:^2.1.0"
+    graphql: "npm:^16.9.0"
+    typescript: "npm:^5.6.2"
+  peerDependencies:
+    "@baeta/core": "workspace:^"
+    graphql: ^16.6.0
+  languageName: unknown
+  linkType: soft
+
+"@baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare":
+  version: 0.0.0-use.local
+  resolution: "@baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@cloudflare/workers-types": "npm:^4.20241004.0"
+    graphql: "npm:^16.9.0"
+    typescript: "npm:^5.6.2"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
+    "@cloudflare/workers-types": ^4
+  languageName: unknown
+  linkType: soft
+
+"@baeta/extension-cache-keyv@workspace:packages/extension-cache-keyv":
+  version: 0.0.0-use.local
+  resolution: "@baeta/extension-cache-keyv@workspace:packages/extension-cache-keyv"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    graphql: "npm:^16.9.0"
+    keyv: "npm:^4.5.4"
+    typescript: "npm:^5.6.2"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
+    keyv: ^4.5.4
+  languageName: unknown
+  linkType: soft
+
+"@baeta/extension-cache-redis@workspace:^, @baeta/extension-cache-redis@workspace:packages/extension-cache-redis":
+  version: 0.0.0-use.local
+  resolution: "@baeta/extension-cache-redis@workspace:packages/extension-cache-redis"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.7.4"
+    graphql: "npm:^16.9.0"
+    ioredis: "npm:^5.4.1"
+    typescript: "npm:^5.6.2"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
+    ioredis: ^5.4.1
+  languageName: unknown
+  linkType: soft
+
+"@baeta/extension-cache@workspace:^, @baeta/extension-cache@workspace:packages/extension-cache":
+  version: 0.0.0-use.local
+  resolution: "@baeta/extension-cache@workspace:packages/extension-cache"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-encoding": "workspace:^"
+    "@baeta/util-log": "workspace:^"
+    dataloader: "npm:^2.2.2"
+    flat: "npm:^6.0.1"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -3503,6 +3577,7 @@ __metadata:
     auto-bind: "npm:^5.0.1"
     change-case-all: "npm:2.1.0"
     graphql: "npm:^16.9.0"
+    murmurhash: "npm:^2.0.1"
     parse-filepath: "npm:^1.0.2"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -3555,6 +3630,16 @@ __metadata:
 "@baeta/tsconfig@workspace:^, @baeta/tsconfig@workspace:tools/tsconfig":
   version: 0.0.0-use.local
   resolution: "@baeta/tsconfig@workspace:tools/tsconfig"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/util-encoding@workspace:^, @baeta/util-encoding@workspace:packages/util-encoding":
+  version: 0.0.0-use.local
+  resolution: "@baeta/util-encoding@workspace:packages/util-encoding"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    typescript: "npm:^5.6.2"
   languageName: unknown
   linkType: soft
 
@@ -5886,6 +5971,13 @@ __metadata:
   dependencies:
     "@hapi/hoek": "npm:^9.0.0"
   checksum: 10/084bfa647015f4fd3fdd51fadb2747d09ef2f5e1443d6cbada2988b0c88494f85edf257ec606c790db146ac4e34ff57f3fcb22e3299b8e06ed5c87ba7583495c
+  languageName: node
+  linkType: hard
+
+"@ioredis/commands@npm:^1.1.1":
+  version: 1.2.0
+  resolution: "@ioredis/commands@npm:1.2.0"
+  checksum: 10/a8253c9539b7e5463d4a98e6aa5b1b863fb4a4978191ba9dc42ec2c0fb5179d8d1fe4a29096d5954f91ba9600d1bdc6c1d18b044eab36f645f267fd37d7c0906
   languageName: node
   linkType: hard
 
@@ -9469,6 +9561,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cluster-key-slot@npm:^1.1.0":
+  version: 1.1.2
+  resolution: "cluster-key-slot@npm:1.1.2"
+  checksum: 10/516ed8b5e1a14d9c3a9c96c72ef6de2d70dfcdbaa0ec3a90bc7b9216c5457e39c09a5775750c272369070308542e671146120153062ab5f2f481bed5de2c925f
+  languageName: node
+  linkType: hard
+
 "code-excerpt@npm:^4.0.0":
   version: 4.0.0
   resolution: "code-excerpt@npm:4.0.0"
@@ -10404,6 +10503,13 @@ __metadata:
   version: 1.0.0
   resolution: "delegates@npm:1.0.0"
   checksum: 10/a51744d9b53c164ba9c0492471a1a2ffa0b6727451bdc89e31627fdf4adda9d51277cfcbfb20f0a6f08ccb3c436f341df3e92631a3440226d93a8971724771fd
+  languageName: node
+  linkType: hard
+
+"denque@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "denque@npm:2.1.0"
+  checksum: 10/8ea05321576624b90acfc1ee9208b8d1d04b425cf7573b9b4fa40a2c3ed4d4b0af5190567858f532f677ed2003d4d2b73c8130b34e3c7b8d5e88cdcfbfaa1fe7
   languageName: node
   linkType: hard
 
@@ -11922,6 +12028,15 @@ __metadata:
   bin:
     flat: cli.js
   checksum: 10/72479e651c15eab53e25ce04c31bab18cfaac0556505cac19221dbbe85bbb9686bc76e4d397e89e5bf516ce667dcf818f8b07e585568edba55abc2bf1f698fb5
+  languageName: node
+  linkType: hard
+
+"flat@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "flat@npm:6.0.1"
+  bin:
+    flat: cli.js
+  checksum: 10/c7a5f2e7e3ba0bec28b9c3aca27e68ff74df446df15cdb77ddef9e3d4fd0e9321ca52e49ca8b861c46157215006666b0dad25457f231083fc7bd2f7fcb67d7eb
   languageName: node
   linkType: hard
 
@@ -13446,6 +13561,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ioredis@npm:^5.4.1":
+  version: 5.4.1
+  resolution: "ioredis@npm:5.4.1"
+  dependencies:
+    "@ioredis/commands": "npm:^1.1.1"
+    cluster-key-slot: "npm:^1.1.0"
+    debug: "npm:^4.3.4"
+    denque: "npm:^2.1.0"
+    lodash.defaults: "npm:^4.2.0"
+    lodash.isarguments: "npm:^3.1.0"
+    redis-errors: "npm:^1.2.0"
+    redis-parser: "npm:^3.0.0"
+    standard-as-callback: "npm:^2.1.0"
+  checksum: 10/9043b812ac58065e80c759d130602cc64490fcaeaacf93723453fda04c7ba61dab0e2f50380eacb045592378ededf44f270c0d43e13e3e8b8d7c5a8d7fecb823
+  languageName: node
+  linkType: hard
+
 "ip@npm:^2.0.0":
   version: 2.0.1
   resolution: "ip@npm:2.0.1"
@@ -14219,7 +14351,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keyv@npm:^4.0.0, keyv@npm:^4.5.3":
+"keyv@npm:^4.0.0, keyv@npm:^4.5.3, keyv@npm:^4.5.4":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
   dependencies:
@@ -14415,6 +14547,20 @@ __metadata:
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: 10/cd0b2819786e6e80cb9f5cda26b1a8fc073daaf04e48d4cb462fa4663ec9adb3a5387aa22d7129e48eed1afa05b482e2a6b79bfc99b86886364449500cbb00fd
+  languageName: node
+  linkType: hard
+
+"lodash.defaults@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "lodash.defaults@npm:4.2.0"
+  checksum: 10/6a2a9ea5ad7585aff8d76836c9e1db4528e5f5fa50fc4ad81183152ba8717d83aef8aec4fa88bf3417ed946fd4b4358f145ee08fbc77fb82736788714d3e12db
+  languageName: node
+  linkType: hard
+
+"lodash.isarguments@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "lodash.isarguments@npm:3.1.0"
+  checksum: 10/e5186d5fe0384dcb0652501d9d04ebb984863ebc9c9faa2d4b9d5dfd81baef9ffe8e2887b9dc471d62ed092bc0788e5f1d42e45c72457a2884bbb54ac132ed92
   languageName: node
   linkType: hard
 
@@ -15839,6 +15985,13 @@ __metadata:
   bin:
     multicast-dns: cli.js
   checksum: 10/e9add8035fb7049ccbc87b1b069f05bb3b31e04fe057bf7d0116739d81295165afc2568291a4a962bee01a5074e475996816eed0f50c8110d652af5abb74f95a
+  languageName: node
+  linkType: hard
+
+"murmurhash@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "murmurhash@npm:2.0.1"
+  checksum: 10/8bb90f43b1c41b1d046efe662a02dcc3cdbda4b42fbbadf7488046772d9eecf2b37ffb6cb73d0d96f2ff489d9f4a8252c674bbae588a6179f60854fe0bfe3325
   languageName: node
   linkType: hard
 
@@ -17865,6 +18018,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"redis-errors@npm:^1.0.0, redis-errors@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "redis-errors@npm:1.2.0"
+  checksum: 10/001c11f63ddd52d7c80eb4f4ede3a9433d29a458a7eea06b9154cb37c9802a218d93b7988247aa8c958d4b5d274b18354e8853c148f1096fda87c6e675cfd3ee
+  languageName: node
+  linkType: hard
+
+"redis-parser@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "redis-parser@npm:3.0.0"
+  dependencies:
+    redis-errors: "npm:^1.0.0"
+  checksum: 10/b10846844b4267f19ce1a6529465819c3d78c3e89db7eb0c3bb4eb19f83784797ec411274d15a77dbe08038b48f95f76014b83ca366dc955a016a3a0a0234650
+  languageName: node
+  linkType: hard
+
 "regenerate-unicode-properties@npm:^10.1.0":
   version: 10.1.0
   resolution: "regenerate-unicode-properties@npm:10.1.0"
@@ -19175,6 +19344,13 @@ __metadata:
     as-table: "npm:^1.0.36"
     get-source: "npm:^2.0.12"
   checksum: 10/c87f708b639636788c4b46ecc6e503c27b6124bec724bcdc3180d7cdddfab0dee370225009e3b407adaedf847362cfc77af64f01c805516e39a28d16c6d40df8
+  languageName: node
+  linkType: hard
+
+"standard-as-callback@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "standard-as-callback@npm:2.1.0"
+  checksum: 10/88bec83ee220687c72d94fd86a98d5272c91d37ec64b66d830dbc0d79b62bfa6e47f53b71646011835fc9ce7fae62739545d13124262b53be4fbb3e2ebad551c
   languageName: node
   linkType: hard
 

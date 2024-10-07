@@ -21,6 +21,7 @@ import {
 	visit,
 } from 'graphql';
 import type { ModulesConfig } from './config.ts';
+import { type TypeHash, getObjectTypeHash } from './hashes.ts';
 import {
 	buildBlock,
 	collectUsedTypes,
@@ -85,6 +86,8 @@ export function buildModule(
 	);
 	const defined: Registry = createObject(registryKeys, () => []);
 	const extended: Registry = createObject(registryKeys, () => []);
+
+	const hashes: Record<string, TypeHash> = {};
 
 	// List of types used in objects, fields, arguments etc
 	const usedTypes = collectUsedTypes(doc);
@@ -188,6 +191,7 @@ export function buildModule(
 		return `export namespace ModuleMetadata {
   export const id = '${name}';
   export const dirname = './${name}';
+  export const hashes = ${JSON.stringify(hashes)};
   export const typedef = ${JSON.stringify(doc)} as unknown as DocumentNode;
   ${printBaetaManager()}
 }`;
@@ -537,6 +541,7 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
 			case Kind.OBJECT_TYPE_DEFINITION: {
 				defined.objects.push(name);
 				collectFields(node, picks.objects);
+				hashes[name] = getObjectTypeHash(node);
 				break;
 			}
 
@@ -577,6 +582,8 @@ export const ${getModuleFn} = Baeta.createSingletonModule(${createModuleFn});
 		switch (node.kind) {
 			case Kind.OBJECT_TYPE_EXTENSION: {
 				collectFields(node, picks.objects);
+				hashes[name] = getObjectTypeHash(node);
+
 				// Do not include root types as extensions
 				// so we can use them in DefinedFields
 				if (rootTypes.includes(name)) {

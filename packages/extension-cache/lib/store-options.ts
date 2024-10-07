@@ -5,7 +5,7 @@ export interface DefaultStoreOptions {
 }
 
 type StoreOptionsBase = DefaultStoreOptions & {
-	version?: number;
+	revision?: number;
 };
 
 type StoreOptionsRefFn<Root> = {

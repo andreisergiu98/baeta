@@ -42,13 +42,16 @@ export class CacheExtension extends Extension {
 		const ref = new CacheRef<Result, Root, Args>(type, field);
 		return {
 			$cacheRef: ref,
+			$cacheRevision: (revision: number) => {
+				ref.setRevision(revision);
+			},
+			$cacheClear: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => {
+				return store.deleteQueries(ref, matcher);
+			},
 			$useCache: (store: StoreAdapter<TypeGetter<Result>>, options: MiddlewareOptions<Root>) => {
 				const middleware = store.createMiddleware(ref, options);
 				nameFunction(middleware, `${type}.${field}.$useCache`);
 				module.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));
-			},
-			$clearCache: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => {
-				return store.deleteQueries(ref, matcher);
 			},
 		};
 	};

@@ -58,7 +58,7 @@ export abstract class StoreAdapter<Item> {
 	});
 
 	protected createKey(ref: ItemRef) {
-		return `${this.type}:items:${this.getVersion()}:${ref.toString()}`;
+		return `${this.type}:items:${this.getRevision()}:${ref.toString()}`;
 	}
 
 	protected createKeyByItem(item: Item) {
@@ -75,13 +75,13 @@ export abstract class StoreAdapter<Item> {
 		return `${namespace}:${metadata}`;
 	}
 
-	protected getVersion() {
-		const version = this.options?.version?.toString() || '0';
-		return `v${version}_${this.hash}`;
+	protected getRevision() {
+		const version = this.options?.revision?.toString() || '0';
+		return `r${version}_${this.hash}`;
 	}
 
 	protected createQueryKeyNamespace(queryRef: string) {
-		return `${this.type}:${queryRef}:${this.getVersion()}`;
+		return `${this.type}:${queryRef}:${this.getRevision()}`;
 	}
 
 	protected createQueryKeyHeader(parentRef: ParentRef, args?: Record<string, unknown>) {

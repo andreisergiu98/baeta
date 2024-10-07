@@ -13,11 +13,12 @@ declare global {
 
 		export interface ResolverExtensions<Result, Root, Context, Args> {
 			$cacheRef: CacheRef<Result, Root, Args>;
+			$cacheRevision: (number: number) => void;
+			$cacheClear: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => void;
 			$useCache: (
 				store: StoreAdapter<TypeGetter<Result>>,
 				options: MiddlewareOptions<Root>,
 			) => void;
-			$clearCache: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => void;
 		}
 	}
 }

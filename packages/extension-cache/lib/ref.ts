@@ -7,9 +7,14 @@ export class CacheRef<Result, Root, Args> {
 	constructor(
 		private type: string,
 		private field: string,
+		private revision = 1,
 	) {}
 
 	toString() {
-		return `${this.type}.${this.field}`;
+		return `${this.type}.${this.field}#r${this.revision}`;
+	}
+
+	setRevision(revision: number) {
+		this.revision = revision;
 	}
 }

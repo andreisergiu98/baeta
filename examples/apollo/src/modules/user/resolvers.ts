@@ -3,7 +3,7 @@ import { getUserModule } from './typedef.ts';
 const { Query, User } = getUserModule();
 
 const userCache = User.$createCache({
-	version: 2,
+	revision: 2,
 	getRef(root) {
 		return root.pid;
 	},

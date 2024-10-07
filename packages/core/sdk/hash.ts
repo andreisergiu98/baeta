@@ -1,5 +1,5 @@
 export type TypeHash = {
-	hash: number;
+	hash: string;
 	fieldsHashes: Record<string, string | undefined>;
 };
 

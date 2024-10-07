@@ -1,5 +1,15 @@
 # @baeta/cli
 
+## 1.0.1
+
+### Patch Changes
+
+- [#157](https://github.com/andreisergiu98/baeta/pull/157) [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - stricter linting, better type safety
+
+- Updated dependencies [[`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1), [`34877dc`](https://github.com/andreisergiu98/baeta/commit/34877dce585a36abd3bb21adfaa2b84075a416a9)]:
+  - @baeta/generator@0.1.1
+  - @baeta/plugin-graphql@0.1.1
+
 ## 1.0.0
 
 ### Minor Changes

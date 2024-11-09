@@ -61,34 +61,80 @@ export type UserPhoto = {
   url: Scalars['String']['output'];
 };
 
+export type UserPhotoPage = {
+  cursor?: InputMaybe<Scalars['ID']['input']>;
+  limit: Scalars['Int']['input'];
+};
+
 export type User = {
   __typename?: 'User';
   photos?: Maybe<Array<UserPhoto>>;
   photosConnection?: Maybe<UserPhotoConnection>;
   id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  lastName: Scalars['String']['output'];
+  profile?: Maybe<Scalars['String']['output']>;
+  givenName?: Maybe<Scalars['String']['output']>;
   birthday?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type UserWhereUnique = {
+
+export type UserPhotosConnectionArgs = {
+  page: UserPhotoPage;
+};
+
+export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateUserInput = {
+  email: Scalars['String']['input'];
+  lastName: Scalars['String']['input'];
+  givenName?: InputMaybe<Scalars['String']['input']>;
+  birthday?: InputMaybe<Scalars['DateTime']['input']>;
+  profile?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateUserInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  lastName?: InputMaybe<Scalars['String']['input']>;
+  givenName?: InputMaybe<Scalars['String']['input']>;
+  birthday?: InputMaybe<Scalars['DateTime']['input']>;
+  profile?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
-  users?: Maybe<Array<Maybe<User>>>;
+  users?: Maybe<Array<User>>;
 };
 
 
 export type QueryUserArgs = {
-  where?: InputMaybe<UserWhereUnique>;
+  where: UserWhereUniqueInput;
 };
 
 
 export type QueryUsersArgs = {
-  id?: InputMaybe<Scalars['String']['input']>;
+  where?: InputMaybe<UserWhereUniqueInput>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createUser: User;
+  updateUser?: Maybe<User>;
+};
+
+
+export type MutationCreateUserArgs = {
+  data: CreateUserInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  where: UserWhereUniqueInput;
+  data: UpdateUserInput;
 };
 
 export type DateTime = Scalars["DateTime"];
@@ -100,7 +146,7 @@ export type DefinedFieldsWithoutExtensions = {
   UserPhotoConnection: "pageInfo" | "edges";
   UserPhotoEdge: "cursor" | "node";
   UserPhoto: "id" | "url";
-  User: "id" | "name" | "birthday";
+  User: "id" | "email" | "lastName" | "profile" | "givenName" | "birthday";
 };
 
 export type DefinedUnionsWithoutExtensions = {

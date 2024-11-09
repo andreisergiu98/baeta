@@ -3,9 +3,13 @@
 
 import "./baeta-directives/directives.baeta";
 
-import "./user/resolvers";
+import "./user/resolvers.mutations";
 
-import "./user-photos/resolvers";
+import "./user/resolvers.queries";
+
+import "./user-photos/user-photos-pagination.resolvers";
+
+import "./user-photos/user-photos-relations.resolvers";
 
 import {getBaetaDirectivesModule} from "./baeta-directives/typedef";
 

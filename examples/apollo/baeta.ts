@@ -13,12 +13,13 @@ export default defineConfig({
 		scalars: {
 			DateTime: 'Date',
 		},
-		extensions: 'src/extensions',
+		extensions: 'src/extensions/index.ts',
 	},
 	compiler: {
 		src: './src/app',
 		dist: 'dist',
 		bundleWorkspaces: true,
+		cjsGlobals: true, // Required for Prisma to work with ESM
 		esbuild: {
 			format: 'esm',
 		},

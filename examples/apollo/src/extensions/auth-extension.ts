@@ -1,7 +1,7 @@
 import { createExtensions } from '@baeta/core';
 import { UnauthenticatedError } from '@baeta/errors';
 import { authExtension } from '@baeta/extension-auth';
-import type { Context } from './types/context.ts';
+import type { Context } from '../types/context.ts';
 
 declare global {
 	export namespace AuthExtension {
@@ -26,7 +26,7 @@ function isLoggedIn(ctx: Context) {
 	};
 }
 
-const auth = authExtension<Context>(
+export const authExt = authExtension<Context>(
 	async (ctx) => {
 		const accessList: string[] = [];
 		return {
@@ -53,5 +53,3 @@ const auth = authExtension<Context>(
 		},
 	},
 );
-
-export default createExtensions(auth);

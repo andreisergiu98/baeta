@@ -15,7 +15,15 @@ export class CacheRef<Result, Root, Args> {
 		return `${this.type}.${this.field}:r${this.revision}_${this.hash}`;
 	}
 
+	getRevision() {
+		return this.revision;
+	}
+
 	setRevision(revision: number) {
 		this.revision = revision;
+	}
+
+	getHash() {
+		return this.hash;
 	}
 }

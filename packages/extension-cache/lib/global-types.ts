@@ -3,7 +3,7 @@ import type { CacheRef } from './ref.ts';
 import type { QueryMatching, StoreAdapter } from './store-adapter.ts';
 import type { StoreOptions } from './store-options.ts';
 
-export type TypeGetter<T> = NonNullable<T> extends Array<infer G> ? G : NonNullable<T>;
+export type TypeGetter<T> = NonNullable<T> extends Array<infer G> ? NonNullable<G> : NonNullable<T>;
 
 declare global {
 	export namespace BaetaExtensions {

@@ -1,5 +1,5 @@
 {
-  "name": "@baeta/examples-yoga-ws",
+  "name": "@baeta/examples-internal",
   "private": true,
   "keywords": [
     "baeta",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "examples/yoga-ws"
+    "directory": "examples/_internal"
   },
   "license": "MIT",
   "author": {
@@ -31,20 +31,13 @@
   },
   "dependencies": {
     "@baeta/core": "workspace:^",
-    "@baeta/errors": "workspace:^",
-    "express": "^4.21.1",
-    "graphql": "^16.9.0",
-    "graphql-subscriptions": "^2.0.0",
-    "graphql-ws": "^5.16.0",
-    "graphql-yoga": "^5.9.0",
-    "ws": "^8.18.0"
+    "graphql": "^16.9.0"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^22.9.0",
-    "@types/ws": "^8.5.13",
     "typescript": "^5.6.3"
   }
 }

@@ -5,7 +5,7 @@ import {
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
 import { Hono } from 'hono';
-import { userModule } from './modules/user/index.ts';
+import { modules } from './modules/autoload.ts';
 import type { Context } from './types/context.ts';
 
 export type Env = {
@@ -18,7 +18,7 @@ interface ContextParams {
 }
 
 const baeta = createApplication({
-	modules: [userModule],
+	modules,
 });
 
 const yoga = createYoga({

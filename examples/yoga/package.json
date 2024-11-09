@@ -27,11 +27,7 @@
   "type": "module",
   "scripts": {
     "build": "baeta build --generate",
-    "prisma": "pnpify prisma",
     "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
-  },
-  "prisma": {
-    "seed": "yarn node --experimental-transform-types --no-warnings ./src/lib/db/seed.ts"
   },
   "dependencies": {
     "@baeta/core": "workspace:^",

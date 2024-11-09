@@ -4,13 +4,13 @@ import { createYoga } from 'graphql-yoga';
 import { pubsub } from './lib/pubsub.ts';
 import { useWebSocketServer } from './lib/ws.ts';
 import { modules } from './modules/autoload.ts';
-import type { ServerContext, UserContext } from './types/context.ts';
+import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
 	modules,
 });
 
-const yoga = createYoga<ServerContext, UserContext>({
+const yoga = createYoga<ServerContext, Context>({
 	schema: baeta.schema,
 	context: {
 		appVersion: '1.0.0',

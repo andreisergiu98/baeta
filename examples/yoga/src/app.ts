@@ -2,13 +2,13 @@ import { createServer } from 'node:http';
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
 import { modules } from './modules/autoload.ts';
-import type { ServerContext, UserContext } from './types/context.ts';
+import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
 	modules,
 });
 
-export const yoga = createYoga<ServerContext, UserContext>({
+export const yoga = createYoga<ServerContext, Context>({
 	schema: baeta.schema,
 	context: {
 		appVersion: '1.0.0',

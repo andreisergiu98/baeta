@@ -4,7 +4,7 @@ import { autoloadPlugin } from '@baeta/plugin-autoload';
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
-		contextType: 'src/types/context#UserContext',
+		contextType: 'src/types/context#Context',
 	},
 	compiler: {
 		src: 'src/app.ts',

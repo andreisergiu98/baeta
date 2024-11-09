@@ -39,6 +39,7 @@
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",
+    "sync:examples": "./examples/sync.sh",
     "test": "yarn turbo test --filter='./packages/*'",
     "types": "yarn workspaces foreach -Apv run types",
     "watch": "yarn turbo watch build --filter='./packages/*'"

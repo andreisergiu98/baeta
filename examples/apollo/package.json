@@ -59,7 +59,7 @@
     "@baeta/plugin-pagination": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@faker-js/faker": "^9.0.3",
+    "@faker-js/faker": "^9.2.0",
     "@prisma/client": "^5.22.0",
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",

@@ -1,0 +1,27 @@
+type User {
+	id: ID!
+	email: String!
+	lastName: String!
+	profile: String
+	givenName: String
+}
+
+input UserWhereUniqueInput @constraints(minFields: 1, maxFields: 1) {
+	id: ID
+	email: String
+}
+
+type Query {
+	user(where: UserWhereUniqueInput!): User
+}
+
+input CreateUserInput {
+	email: String! @trim @lower @validString(format: EMAIL, minLength: 5, maxLength: 128)
+	username: String! @trim @lower @validString(minLength: 4, maxLength: 32)
+	lastName: String! @trim
+	firstName: String @trim
+}
+
+type Mutation {
+	createUser(email: String!, lastName: String!): User
+}

@@ -2067,6 +2067,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/examples-directives@workspace:examples/directives":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-directives@workspace:examples/directives"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/directives": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    graphql: "npm:^16.9.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/examples-prisma@workspace:examples/prisma":
   version: 0.0.0-use.local
   resolution: "@baeta/examples-prisma@workspace:examples/prisma"
@@ -2137,7 +2156,6 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.9.0"
     "@types/ws": "npm:^8.5.13"
-    express: "npm:^4.21.1"
     graphql: "npm:^16.9.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
@@ -2158,7 +2176,6 @@ __metadata:
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.9.0"
-    express: "npm:^4.21.1"
     graphql: "npm:^16.9.0"
     graphql-yoga: "npm:^5.9.0"
     typescript: "npm:^5.6.3"

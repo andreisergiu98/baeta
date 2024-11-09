@@ -2024,15 +2024,33 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/examples-cloudflare-ws@workspace:examples/cloudflare-ws":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-cloudflare-ws@workspace:examples/cloudflare-ws"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/cloudflare-subscriptions": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-cloudflare": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@cloudflare/workers-types": "npm:^4.20241106.0"
+    graphql: "npm:^16.9.0"
+    graphql-yoga: "npm:^5.9.0"
+    hono: "npm:^4.6.9"
+    miniflare: "npm:^3.20241106.0"
+    typescript: "npm:^5.6.3"
+    wrangler: "npm:^3.86.0"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/examples-cloudflare@workspace:examples/cloudflare":
   version: 0.0.0-use.local
   resolution: "@baeta/examples-cloudflare@workspace:examples/cloudflare"
   dependencies:
     "@baeta/cli": "workspace:^"
-    "@baeta/cloudflare-subscriptions": "workspace:^"
     "@baeta/core": "workspace:^"
-    "@baeta/plugin-cloudflare": "workspace:^"
-    "@baeta/plugin-gitignore": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20241106.0"
     graphql: "npm:^16.9.0"

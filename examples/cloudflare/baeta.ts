@@ -5,13 +5,11 @@ import { gitignorePlugin } from '@baeta/plugin-gitignore';
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
-		modulesDir: 'src/modules',
-		baseTypesPath: 'src/__generated__/types.ts',
 		contextType: 'src/types/context#Context',
 	},
 	compiler: {
-		src: './src/app',
-		dist: './dist',
+		src: 'src/app',
+		dist: 'dist',
 		bundleDeps: true,
 		bundleWorkspaces: true,
 		esbuild: {

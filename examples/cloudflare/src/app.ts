@@ -1,13 +1,12 @@
+import {
+	SubscriptionDatabaseD1,
+	createCloudflareSubscription,
+} from '@baeta/cloudflare-subscriptions';
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
 import { Hono } from 'hono';
 import { userModule } from './modules/user/index.ts';
 import type { Context } from './types/context.ts';
-
-import {
-	SubscriptionDatabaseD1,
-	createCloudflareSubscription,
-} from '@baeta/cloudflare-subscriptions';
 
 export type Env = {
 	WS_CONNECTIONS: DurableObjectNamespace;
@@ -83,6 +82,6 @@ router.post('/graphql', (ctx) => {
 	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
 });
 
-export default router;
-
 export const BaetaWsConnections = subscriptions.createWsConnectionsClass();
+
+export default router;

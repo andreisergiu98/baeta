@@ -1,12 +1,15 @@
 import { PubSub } from 'graphql-subscriptions';
 import type { User } from '../__generated__/types.ts';
 
+export type PubSubMap = {
+	'user-updated': User;
+};
+
 /**
  *  This is for a simple, single-instance example. For a real-world application use a more robust solution, like Redis pubsub.
  */
 
 // This is a simple wrapper around PubSub that enforces a map of channels to types and supports channel prefixes.
-
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export class TypedPubsub<Map extends Record<string, any>> {
 	constructor(
@@ -44,9 +47,5 @@ export class TypedPubsub<Map extends Record<string, any>> {
 		return this.mapChannel(triggers);
 	};
 }
-
-export type PubSubMap = {
-	'user-updated': User;
-};
 
 export const pubsub = new TypedPubsub<PubSubMap>(new PubSub());

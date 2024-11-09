@@ -30,6 +30,9 @@
     "prisma": "pnpify prisma",
     "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
   },
+  "prisma": {
+    "seed": "yarn node --experimental-transform-types --no-warnings ./src/lib/db/seed.ts"
+  },
   "dependencies": {
     "@apollo/server": "^4.11.0",
     "@baeta/core": "workspace:^",
@@ -56,6 +59,7 @@
     "@baeta/plugin-pagination": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
+    "@faker-js/faker": "^9.0.3",
     "@prisma/client": "^5.20.0",
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",

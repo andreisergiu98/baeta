@@ -14,6 +14,10 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		hash: string,
 	) {
 		super(options, type, hash);
+
+		if (this.client.iterator == null) {
+			throw new Error('Keyv client does not support iterator');
+		}
 	}
 
 	save = async (item: Item) => {
@@ -96,7 +100,11 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		const matcher = this.createQueryKeyRegExpMatcher(queryRef, parentRef, args);
 		const namespace = queryRef === '*' ? '' : this.createQueryKeyNamespace(queryRef);
 
-		for await (const item of this.client.iterator()) {
+		if (this.client.iterator == null) {
+			throw new Error('Keyv client does not support iterator');
+		}
+
+		for await (const item of this.client.iterator(undefined)) {
 			const key: string = item[0];
 
 			if (!key.startsWith(namespace)) {

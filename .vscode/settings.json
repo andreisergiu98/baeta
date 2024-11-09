@@ -17,6 +17,7 @@
     "dmmf",
     "esbuild",
     "execa",
+    "keyv",
     "middlewares",
     "outdir",
     "unnormalized"

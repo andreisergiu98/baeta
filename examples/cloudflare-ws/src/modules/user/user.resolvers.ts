@@ -33,14 +33,14 @@ Mutation.updateUser(({ args, ctx }) => {
 		lastName: args.data.lastName ?? 'Doe',
 	};
 
-	ctx.pubsub.publish('user-updated', updatedUser);
+	ctx.publish('user-updated', updatedUser);
 
 	return updatedUser;
 });
 
 Subscription.userUpdated({
 	subscribe(params) {
-		return params.ctx.pubsub.asyncIterator('user-updated');
+		return params.ctx.subscribe('user-updated');
 	},
 	resolve(params) {
 		return params.payload;

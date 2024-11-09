@@ -30,8 +30,13 @@ export default defineConfig({
 	plugins: [
 		gitignorePlugin(),
 		cloudflarePlugin({
-			databaseId: '7a6f91c0-9455-402f-ab6a-508d140da0e1',
-			databaseMigrationsPath: './migrations/subscriptions',
+			ws: {
+				databaseId: '7a6f91c0-9455-402f-ab6a-508d140da0e1',
+				databaseMigrationsPath: './migrations/subscriptions',
+			},
+			cache: {
+				enable: false,
+			},
 		}),
 	],
 });

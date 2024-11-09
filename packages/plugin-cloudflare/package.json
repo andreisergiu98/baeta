@@ -49,6 +49,7 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/cloudflare-subscriptions": "workspace:^",
+    "@baeta/extension-cache-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20241106.0",
     "@types/node": "^22.9.0",
@@ -57,7 +58,16 @@
   },
   "peerDependencies": {
     "@baeta/cloudflare-subscriptions": "workspace:^",
+    "@baeta/extension-cache-cloudflare": "workspace:^",
     "@cloudflare/workers-types": "^4"
+  },
+  "peerDependenciesMeta": {
+    "@baeta/cloudflare-subscriptions": {
+      "optional": true
+    },
+    "@baeta/extension-cache-cloudflare": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=22.0.0"

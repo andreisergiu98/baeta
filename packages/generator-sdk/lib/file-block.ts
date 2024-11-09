@@ -27,10 +27,12 @@ export class FileBlock extends File {
 		await mkdir(dir, { recursive: true });
 
 		const [existingContent, fd] = await this.getExistingContent();
-		this.addBlockToContent(existingContent);
+
+		this.content = this.addBlockToContent(existingContent);
 		const content = await this.buildContent();
 
 		if (fd) {
+			await fd.truncate(0);
 			await fd.write(content, 0, 'utf-8');
 			await fd.close();
 		} else {
@@ -50,42 +52,36 @@ export class FileBlock extends File {
 
 	protected getSlices(existingContent: string) {
 		const startMarkerIndex = existingContent.indexOf(this.start);
-		const endMarkerIndex = existingContent.indexOf(this.end);
+		const endMarkerIndex = existingContent.lastIndexOf(this.end);
 
 		if (startMarkerIndex === -1 || endMarkerIndex === -1) {
-			return [existingContent, ''] as const;
+			return [existingContent, '', false] as const;
 		}
 
 		return [
 			existingContent.slice(0, startMarkerIndex),
 			existingContent.slice(endMarkerIndex + this.end.length),
+			true,
 		] as const;
 	}
 
 	protected addBlockToContent(existingContent: string) {
 		const block = `${this.start}\n${this.content}\n${this.end}`;
-		const padding = this.buildPadding(existingContent);
-		const [startSlice, endSlice] = this.getSlices(existingContent);
-		this.content = startSlice + padding + block + endSlice;
-	}
-
-	protected stripBlock(existingContent: string) {
-		const [startSlice, endSlice] = this.getSlices(existingContent);
-		return startSlice + endSlice;
+		const [startSlice, endSlice, hasMarkers] = this.getSlices(existingContent);
+		const padding = hasMarkers ? '' : this.buildPadding(existingContent);
+		return startSlice + padding + block + endSlice;
 	}
 
 	protected buildPadding(existingContent: string) {
-		const existingStripped = this.stripBlock(existingContent);
-
-		if (existingStripped === '') {
+		if (existingContent === '') {
 			return '';
 		}
 
-		if (existingStripped.endsWith('\n\n')) {
+		if (existingContent.endsWith('\n\n')) {
 			return '';
 		}
 
-		if (existingStripped.endsWith('\n')) {
+		if (existingContent.endsWith('\n')) {
 			return '\n';
 		}
 

@@ -4,7 +4,7 @@ interface DurableObjectMigration {
 }
 
 const wsConnectionCreateMigration: DurableObjectMigration = {
-	tag: 'v1',
+	tag: 'baeta-subs-v1',
 	content: ['new_classes = ["BaetaWsConnections"]'],
 };
 

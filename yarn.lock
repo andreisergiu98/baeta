@@ -2062,7 +2062,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare":
+"@baeta/extension-cache-cloudflare@workspace:^, @baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare"
   dependencies:
@@ -2200,6 +2200,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/cloudflare-subscriptions": "workspace:^"
+    "@baeta/extension-cache-cloudflare": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20241106.0"
@@ -2208,7 +2209,13 @@ __metadata:
     typescript: "npm:^5.6.3"
   peerDependencies:
     "@baeta/cloudflare-subscriptions": "workspace:^"
+    "@baeta/extension-cache-cloudflare": "workspace:^"
     "@cloudflare/workers-types": ^4
+  peerDependenciesMeta:
+    "@baeta/cloudflare-subscriptions":
+      optional: true
+    "@baeta/extension-cache-cloudflare":
+      optional: true
   languageName: unknown
   linkType: soft
 

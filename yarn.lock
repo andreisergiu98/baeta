@@ -2062,6 +2062,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/examples-scalars@workspace:examples/scalars":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-scalars@workspace:examples/scalars"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    express: "npm:^4.21.1"
+    graphql: "npm:^16.9.0"
+    graphql-scalars: "npm:^1.23.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/examples-yoga-ws@workspace:examples/yoga-ws":
   version: 0.0.0-use.local
   resolution: "@baeta/examples-yoga-ws@workspace:examples/yoga-ws"
@@ -11028,6 +11046,17 @@ __metadata:
   peerDependencies:
     graphql: 14 - 16
   checksum: 10/a9c6f2eeaad972cdecb91437c15c785a282263fd0ef36f6fc5648e0945da488cdc10ab4736891ee1fbb928c7bf6e0bc8e0284df514254adefe02cc406ba5fce5
+  languageName: node
+  linkType: hard
+
+"graphql-scalars@npm:^1.23.0":
+  version: 1.23.0
+  resolution: "graphql-scalars@npm:1.23.0"
+  dependencies:
+    tslib: "npm:^2.5.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 10/6faa5dea621b708b485cb8c5047098c3daf7c092c8f1f53b87ff6999ef0b28553e5c904ddc01da54141685fcd5798672c4cf997d9738a04dd4e60529450ab707
   languageName: node
   linkType: hard
 

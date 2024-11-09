@@ -7,7 +7,7 @@ export default defineConfig({
 		contextType: 'src/types/context#UserContext',
 	},
 	compiler: {
-		src: './src/app.ts',
+		src: 'src/app.ts',
 		dist: 'dist',
 		bundleWorkspaces: true,
 		esbuild: {

@@ -19,6 +19,7 @@ export default defineConfig({
 		src: './src/app',
 		dist: 'dist',
 		bundleWorkspaces: true,
+		cjsGlobals: true, // Required for Prisma to work with ESM
 		esbuild: {
 			format: 'esm',
 		},

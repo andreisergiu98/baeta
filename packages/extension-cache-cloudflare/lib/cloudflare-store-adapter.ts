@@ -20,6 +20,15 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		this.client = new CloudflareCacheClient(durableObject);
 	}
 
+	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
+		if (refs.length === 0) {
+			return null;
+		}
+		const keys = refs.map((ref) => this.createKey(ref));
+		const results = await this.client.get(keys).then((res) => res ?? null);
+		return results.map((result) => (result == null ? null : (JSON.parse(result) as Item)));
+	};
+
 	saveMany = async (items: Item[]) => {
 		const pairs = items.map(
 			(item) => [this.createKeyByItem(item), JSON.stringify(item)] as [string, string],
@@ -38,15 +47,6 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (evictQueries) {
 			await this.deleteQueries();
 		}
-	};
-
-	protected loadMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
-		if (refs.length === 0) {
-			return null;
-		}
-		const keys = refs.map((ref) => this.createKey(ref));
-		const results = await this.client.get(keys).then((res) => res ?? null);
-		return results.map((result) => (result == null ? null : (JSON.parse(result) as Item)));
 	};
 
 	protected saveQueryMetadata = async (

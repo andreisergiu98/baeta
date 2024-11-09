@@ -17,6 +17,15 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		super(options, type, hash);
 	}
 
+	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
+		if (refs.length === 0) {
+			return null;
+		}
+		const keys = refs.map((ref) => this.createKey(ref));
+		const results = await this.client.mget(keys);
+		return results.map((result) => (result == null ? null : (JSON.parse(result) as Item)));
+	};
+
 	saveMany = async (items: Item[]) => {
 		if (items.length === 0) {
 			return;
@@ -99,15 +108,6 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (keys.length > 0) {
 			await this.client.unlink(keys);
 		}
-	};
-
-	protected loadMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
-		if (refs.length === 0) {
-			return null;
-		}
-		const keys = refs.map((ref) => this.createKey(ref));
-		const results = await this.client.mget(keys);
-		return results.map((result) => (result == null ? null : (JSON.parse(result) as Item)));
 	};
 
 	protected async searchQueries(

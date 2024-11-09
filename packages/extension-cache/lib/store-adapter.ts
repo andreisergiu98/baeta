@@ -20,11 +20,11 @@ export abstract class StoreAdapter<Item> {
 		protected hash: string,
 	) {}
 
+	abstract getPartialMany: (refs: ItemRef[]) => Promise<Array<Item | null> | null>;
+
 	abstract saveMany: (items: Item[]) => Promise<void>;
 
 	abstract deleteMany: (refs: ItemRef[], evictQueries?: boolean) => Promise<void>;
-
-	protected abstract loadMany: (refs: ItemRef[]) => Promise<Array<Item | null> | null>;
 
 	protected abstract saveQueryMetadata: (
 		queryRef: string,
@@ -46,7 +46,7 @@ export abstract class StoreAdapter<Item> {
 	) => Promise<void>;
 
 	protected loaderFn = async (refs: readonly ItemRef[]) => {
-		const results = await this.loadMany(refs as ItemRef[]);
+		const results = await this.getPartialMany(refs as ItemRef[]);
 		if (results != null) {
 			return results;
 		}
@@ -108,13 +108,6 @@ export abstract class StoreAdapter<Item> {
 		}
 
 		return results as Item[];
-	};
-
-	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
-		if (refs.length === 0) {
-			return null;
-		}
-		return this.loadMany(refs);
 	};
 
 	save = async (item: Item) => {

@@ -20,6 +20,14 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 	}
 
+	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
+		if (refs.length === 0) {
+			return null;
+		}
+		const keys = refs.map((ref) => this.createKey(ref));
+		return this.client.get(keys).then((res) => res ?? null);
+	};
+
 	save = async (item: Item) => {
 		const key = this.createKeyByItem(item);
 		await this.client.set(key, item, this.getTtl());
@@ -40,14 +48,6 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (evictQueries) {
 			await this.deleteQueries();
 		}
-	};
-
-	protected loadMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
-		if (refs.length === 0) {
-			return null;
-		}
-		const keys = refs.map((ref) => this.createKey(ref));
-		return this.client.get(keys).then((res) => res ?? null);
 	};
 
 	protected saveQueryMetadata = async (

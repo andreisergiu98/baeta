@@ -1,5 +1,5 @@
 type User {
-	id: ID!
+	id: UUID!
 	email: String!
 	birthday: DateTime!
 }

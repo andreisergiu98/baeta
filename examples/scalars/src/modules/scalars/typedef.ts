@@ -10,13 +10,14 @@ export namespace ModuleMetadata {
   export const id = 'scalars';
   export const dirname = './scalars';
   export const hashes = {};
-  export const typedef = {"kind":"Document","definitions":[{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":7,"end":15}},"directives":[],"loc":{"start":0,"end":15}}]} as unknown as DocumentNode;
+  export const typedef = {"kind":"Document","definitions":[{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":7,"end":15}},"directives":[],"loc":{"start":0,"end":15}},{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"UUID","loc":{"start":24,"end":28}},"directives":[],"loc":{"start":17,"end":28}}]} as unknown as DocumentNode;
   
   export function createManager(module: Baeta.ModuleBuilder) {
     return {
       ...module.createModuleMethods<Types.ContextType>(),
       Scalar: {
         DateTime: module.createScalarBuilder("DateTime"),
+        UUID: module.createScalarBuilder("UUID"),
       },
     };
   }

@@ -6,6 +6,7 @@ export default defineConfig({
 		schemas: ['src/**/*.gql'],
 		scalars: {
 			DateTime: 'Date',
+			UUID: '../types/scalars.ts#UUID',
 		},
 	},
 	compiler: {

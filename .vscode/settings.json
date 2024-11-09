@@ -20,7 +20,8 @@
     "keyv",
     "middlewares",
     "outdir",
-    "unnormalized"
+    "unnormalized",
+    "upstash"
   ],
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

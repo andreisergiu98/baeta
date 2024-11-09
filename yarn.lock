@@ -2114,6 +2114,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/extension-cache-upstash@workspace:packages/extension-cache-upstash":
+  version: 0.0.0-use.local
+  resolution: "@baeta/extension-cache-upstash@workspace:packages/extension-cache-upstash"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    "@upstash/redis": "npm:^1.34.3"
+    graphql: "npm:^16.9.0"
+    typescript: "npm:^5.6.3"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
+    "@upstash/redis": ^1.34.3
+  languageName: unknown
+  linkType: soft
+
 "@baeta/extension-cache@workspace:^, @baeta/extension-cache@workspace:packages/extension-cache":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-cache@workspace:packages/extension-cache"
@@ -6070,6 +6088,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@upstash/redis@npm:^1.34.3":
+  version: 1.34.3
+  resolution: "@upstash/redis@npm:1.34.3"
+  dependencies:
+    crypto-js: "npm:^4.2.0"
+  checksum: 10/bc56656b80b368e318287eaeac861c65b7b35b5227564bbea54670aa1de0bc225bde72a36edef4ae4e379dd0b7fa2be6e003cbfc779fe6d4ffdb478af0196cfc
+  languageName: node
+  linkType: hard
+
 "@vercel/nft@npm:^0.27.5":
   version: 0.27.6
   resolution: "@vercel/nft@npm:0.27.6"
@@ -8424,6 +8451,13 @@ __metadata:
     shebang-command: "npm:^1.2.0"
     which: "npm:^1.2.9"
   checksum: 10/726939c9954fc70c20e538923feaaa33bebc253247d13021737c3c7f68cdc3e0a57f720c0fe75057c0387995349f3f12e20e9bfdbf12274db28019c7ea4ec166
+  languageName: node
+  linkType: hard
+
+"crypto-js@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "crypto-js@npm:4.2.0"
+  checksum: 10/c7bcc56a6e01c3c397e95aa4a74e4241321f04677f9a618a8f48a63b5781617248afb9adb0629824792e7ec20ca0d4241a49b6b2938ae6f973ec4efc5c53c924
   languageName: node
   linkType: hard
 

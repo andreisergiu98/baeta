@@ -13,7 +13,6 @@ const baeta = createApplication({
 const yoga = createYoga<ServerContext, Context>({
 	schema: baeta.schema,
 	context: {
-		appVersion: '1.0.0',
 		pubsub,
 	},
 	graphiql: {

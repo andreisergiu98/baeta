@@ -1,7 +1,7 @@
 import { createExtensions } from '@baeta/core';
 import { UnauthenticatedError } from '@baeta/errors';
 import { authExtension } from '@baeta/extension-auth';
-import type { Context } from '../types/context.ts';
+import type { Context } from '../types/context.js';
 
 declare global {
 	export namespace AuthExtension {

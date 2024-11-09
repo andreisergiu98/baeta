@@ -40,6 +40,12 @@ export type UserWhereUniqueInput = {
   id: Scalars['ID']['input'];
 };
 
+export type UserUpdateInput = {
+  lastName?: InputMaybe<Scalars['String']['input']>;
+  profile?: InputMaybe<Scalars['String']['input']>;
+  givenName?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
@@ -49,6 +55,22 @@ export type Query = {
 
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  updateUser?: Maybe<User>;
+};
+
+
+export type MutationUpdateUserArgs = {
+  where: UserWhereUniqueInput;
+  data: UserUpdateInput;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  userUpdated?: Maybe<User>;
 };
 
 

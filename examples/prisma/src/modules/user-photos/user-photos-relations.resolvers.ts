@@ -1,6 +1,6 @@
-import { db } from '../../lib/db/prisma.ts';
-import { getUserPhotosModule } from './typedef.ts';
-import { userPhotoCache } from './user-photos-cache.ts';
+import { db } from '../../lib/db/prisma.js';
+import { getUserPhotosModule } from './typedef.js';
+import { userPhotoCache } from './user-photos-cache.js';
 
 const { User } = getUserPhotosModule();
 

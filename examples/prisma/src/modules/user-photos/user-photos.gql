@@ -1,0 +1,16 @@
+type UserPhoto {
+	id: ID!
+	url: String!
+}
+
+input UserPhotoPage {
+	cursor: ID
+	limit: Int! @validInt(min: 1, max: 50)
+}
+
+extend type User {
+	photos: [UserPhoto!]
+	photosConnection(page: UserPhotoPage!): UserPhotoConnection
+}
+
+scalar DateTime

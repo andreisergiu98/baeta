@@ -1,6 +1,6 @@
-import { db } from '../../lib/db/prisma.ts';
-import { getUserModule } from './typedef.ts';
-import { userCache } from './user-cache.ts';
+import { db } from '../../lib/db/prisma.js';
+import { getUserModule } from './typedef.js';
+import { userCache } from './user-cache.js';
 
 const { Query } = getUserModule();
 

@@ -1,4 +1,4 @@
-import { getUserModule } from './typedef.ts';
+import { getUserModule } from './typedef.js';
 
 const { User } = getUserModule();
 

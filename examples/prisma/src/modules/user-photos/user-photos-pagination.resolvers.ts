@@ -1,10 +1,10 @@
 import { CacheRef } from '@baeta/extension-cache';
 import { ne } from '@faker-js/faker';
-import type * as Types from '../../__generated__/types.ts';
-import { db } from '../../lib/db/prisma.ts';
-import { createEdges } from '../../utils/pagination.ts';
-import { getUserPhotosModule } from './typedef.ts';
-import { userPhotoCache } from './user-photos-cache.ts';
+import type * as Types from '../../__generated__/types.js';
+import { db } from '../../lib/db/prisma.js';
+import { createEdges } from '../../utils/pagination.js';
+import { getUserPhotosModule } from './typedef.js';
+import { userPhotoCache } from './user-photos-cache.js';
 
 const { User } = getUserPhotosModule();
 

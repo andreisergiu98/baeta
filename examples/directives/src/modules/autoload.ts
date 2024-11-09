@@ -3,10 +3,18 @@
 
 import "./baeta-directives/directives.baeta";
 
+import "./custom-input-directive/custom-input-directive.resolvers";
+
+import "./custom-native-directive/custon-native-directive.resolvers";
+
 import "./user/user.resolvers";
 
 import {getBaetaDirectivesModule} from "./baeta-directives/typedef";
 
+import {getCustomInputDirectiveModule} from "./custom-input-directive/typedef";
+
+import {getCustomNativeDirectiveModule} from "./custom-native-directive/typedef";
+
 import {getUserModule} from "./user/typedef";
 
-export const modules = [getBaetaDirectivesModule(), getUserModule()];
+export const modules = [getBaetaDirectivesModule(), getCustomInputDirectiveModule(), getCustomNativeDirectiveModule(), getUserModule()];

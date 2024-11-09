@@ -2079,6 +2079,7 @@ __metadata:
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@graphql-tools/utils": "npm:^10.5.5"
     "@types/node": "npm:^22.9.0"
     graphql: "npm:^16.9.0"
     graphql-yoga: "npm:^5.9.0"

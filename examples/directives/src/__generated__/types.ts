@@ -24,6 +24,33 @@ export type StringFormat =
   | 'UUID'
   | 'URL';
 
+export type Query = {
+  __typename?: 'Query';
+  testIncrementDirective: Scalars['Int']['output'];
+  testUpperDirective?: Maybe<NameWithUpper>;
+  user?: Maybe<User>;
+};
+
+
+export type QueryTestIncrementDirectiveArgs = {
+  value: Scalars['Int']['input'];
+};
+
+
+export type QueryTestUpperDirectiveArgs = {
+  name: Scalars['String']['input'];
+};
+
+
+export type QueryUserArgs = {
+  where: UserWhereUniqueInput;
+};
+
+export type NameWithUpper = {
+  __typename?: 'NameWithUpper';
+  name: Scalars['String']['output'];
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['ID']['output'];
@@ -36,16 +63,6 @@ export type User = {
 export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Query = {
-  __typename?: 'Query';
-  user?: Maybe<User>;
-};
-
-
-export type QueryUserArgs = {
-  where: UserWhereUniqueInput;
 };
 
 export type CreateUserInput = {
@@ -68,6 +85,7 @@ export type MutationCreateUserArgs = {
 
 
 export type DefinedFieldsWithoutExtensions = {
+  NameWithUpper: "name";
   User: "id" | "email" | "lastName" | "profile" | "givenName";
 };
 

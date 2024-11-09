@@ -7,6 +7,7 @@
     "**/node_modules": true
   },
   "cSpell.words": [
+    "autoload",
     "baeta",
     "callsite",
     "camelcase",

@@ -2044,6 +2044,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/examples-yoga@workspace:examples/yoga":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-yoga@workspace:examples/yoga"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    express: "npm:^4.21.1"
+    graphql: "npm:^16.9.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/extension-auth@workspace:^, @baeta/extension-auth@workspace:packages/extension-auth":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-auth@workspace:packages/extension-auth"

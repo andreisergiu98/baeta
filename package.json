@@ -34,6 +34,8 @@
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",
     "docs": "yarn workspace @baeta/website build",
+    "examples:sync": "./examples/sync.sh",
+    "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "linter": "biome check .",
     "prepare": "husky install",
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",

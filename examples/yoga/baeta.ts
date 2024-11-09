@@ -4,9 +4,10 @@ import { autoloadPlugin } from '@baeta/plugin-autoload';
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
+		contextType: 'src/types/context#UserContext',
 	},
 	compiler: {
-		src: './src/app',
+		src: './src/app.ts',
 		dist: 'dist',
 		bundleWorkspaces: true,
 		esbuild: {

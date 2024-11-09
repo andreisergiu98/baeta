@@ -1,14 +1,18 @@
 import { createServer } from 'node:http';
 import { createApplication } from '@baeta/core';
-import { Plugin, createGraphQLError, createSchema, createYoga } from 'graphql-yoga';
-import { modules } from './modules/autoload.js';
+import { createYoga } from 'graphql-yoga';
+import { modules } from './modules/autoload.ts';
+import type { ServerContext, UserContext } from './types/context.ts';
 
 const baeta = createApplication({
 	modules,
 });
 
-export const yoga = createYoga({
+export const yoga = createYoga<ServerContext, UserContext>({
 	schema: baeta.schema,
+	context: {
+		appVersion: '1.0.0',
+	},
 });
 
 const server = createServer(yoga);

@@ -1,14 +1,15 @@
 ---
 sidebar_position: 4
-description: ''
+description: "Learn how to extend modules in Baeta"
 ---
 
 # Extend modules
 
-One of the powerful features of Baeta is the ability to extend modules with other modules.
-Let's extend our user module with a `user-photos` module.
+One of the powerful features of Baeta is the ability to extend existing modules. In this guide, we'll extend our user module by adding photo capabilities.
 
-We create a new schema file at `src/modules/user-photos/user-photos.gql`:
+### 1. Define Extension Schema
+
+Create a new schema file at `src/modules/user-photos/user-photos.gql`:
 
 ```graphql
 type UserPhoto {
@@ -21,28 +22,73 @@ extend type User {
 }
 ```
 
-Generate types again and then we create a resolver for the photos field in `src/modules/user-photos/resolvers.ts`:
+:::tip
+Use the **extend** keyword to add new fields to existing types from other modules.
+:::
+
+### 2. Generate Types
+
+Generate TypeScript definitions for your new schema:
+
+```bash
+yarn generate
+```
+
+:::tip
+If you are using the watch mode, types will be automatically generated on each change.
+:::
+
+### 3. Add Resolver
+
+Create `src/modules/user-photos/resolvers.ts` to implement the photos field:
 
 ```typescript
-import { getUserPhotosModule } from './typedef';
+import { getUserPhotosModule } from "./typedef";
 
 const { User } = getUserPhotosModule();
 
 User.photos(({ args, root, info, ctx }) => {
   return [
     {
-      id: '1',
-      url: 'https://baeta.io/img/logo.svg',
+      id: "1",
+      url: "https://baeta.io/img/logo.svg",
     },
   ];
 });
 ```
 
-Next, we export the `userPhotosModule` in `src/modules/user-photos/index.ts`:
+### 4. Export Module
+
+Create `src/modules/user-photos/index.ts` to export your extension module:
 
 ```typescript
-import './resolvers';
-import { getUserPhotosModule } from './typedef';
+import "./resolvers";
+import { getUserPhotosModule } from "./typedef";
 
 export const userPhotosModule = getUserPhotosModule();
 ```
+
+:::tip
+Remember that **@baeta/plugin-autoload** can automatically handle module loading and exports for you.
+:::
+
+## Project Structure
+
+Your extended modules should now look like this:
+
+```
+src/modules/
+├── user/
+│   ├── user.gql
+│   ├── resolvers.ts
+│   ├── typedef.ts
+│   └── index.ts
+└── user-photos/
+    ├── user-photos.gql
+    ├── resolvers.ts
+    ├── typedef.ts
+    └── index.ts
+```
+
+## Next Steps
+Let's [wrap everything up](./wrapping-up) and see how to use our modules.

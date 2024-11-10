@@ -1,53 +1,63 @@
 ---
 sidebar_position: 2
-description: ''
+description: "Configure your Baeta project with TypeScript"
 ---
 
 # Configuration
 
-Assuming [@baeta/compiler](https://www.npmjs.com/package/@baeta/compiler) is installed, the configuration is defined in `baeta.ts`.
-Otherwise `.js`, `.cjs`, `.mjs` files will be handled accordingly.
+Set up your Baeta project configuration in a few simple steps.
 
-First things first, define the schemas and modules directory.
+## Setup Configuration File
+
+### 1. Define Schema Location
+
+First, specify where your GraphQL schemas are located:
 
 ```typescript
-import { defineConfig } from '@baeta/cli';
+import { defineConfig } from "@baeta/cli";
 
 export default defineConfig({
   graphql: {
-    schemas: ['src/**.gql'],
-    modulesDir: 'src/modules',
+    schemas: ["src/**.gql"], // Location of your GraphQL schemas
   },
 });
 ```
 
-After defining the schemas and modules directory, define the entry point of your app and the location where the compiler should build.
+### 2. Configure Build Settings
+
+Add compiler configuration to specify your app's entry point and build output:
 
 ```typescript
-import { defineConfig } from '@baeta/cli';
+import { defineConfig } from "@baeta/cli";
 
 export default defineConfig({
   graphql: {
-    schemas: ['src/**.gql'],
-    modulesDir: 'src/modules',
+    schemas: ["src/**.gql"],
+    modulesDir: "src/modules",
   },
   compiler: {
-    src: 'src/app.ts',
-    dist: 'dist',
+    src: "src/app.ts", // Your application entry point
+    dist: "dist", // Build output directory
   },
 });
 ```
 
-Finally, add the following scripts to `package.json`:
+### 3.Add NPM Scripts
 
 ```json
-"scripts": {
+{
+  "scripts": {
     "build": "baeta build --generate",
     "generate": "baeta generate",
     "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'"
+  }
 }
 ```
 
-These scripts will build your app and start it. You can modify these scripts based on your requirements.
+These scripts provide:
+- **build**: Builds your project and generates necessary files
+- **generate**: Updates GraphQL types and resolvers
+- **start**: Runs development server with hot reload
 
-For more configuration options and defaults, check out the advanced guide.
+## Next Steps
+Once configured, you're ready to [create your first module](./first-module).

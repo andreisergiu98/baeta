@@ -1,7 +1,6 @@
 import { defineConfig } from '@baeta/cli';
 import { autoloadPlugin } from '@baeta/plugin-autoload';
 import { directivesPlugin } from '@baeta/plugin-directives';
-import { paginationPlugin } from '@baeta/plugin-pagination';
 import { prismaPlugin } from '@baeta/plugin-prisma';
 
 export default defineConfig({
@@ -11,7 +10,6 @@ export default defineConfig({
 		scalars: {
 			DateTime: 'Date',
 		},
-		extensions: 'src/extensions/index.ts',
 	},
 	compiler: {
 		src: 'src/app',
@@ -28,12 +26,6 @@ export default defineConfig({
 			prismaSchema: 'schema.prisma',
 			generateCommand: 'yarn prisma generate',
 			generatedSchemaPath: 'src/__generated__/prisma/schema.prisma',
-		}),
-		paginationPlugin({
-			types: {
-				User: true,
-				UserPhoto: true,
-			},
 		}),
 		directivesPlugin(),
 	],

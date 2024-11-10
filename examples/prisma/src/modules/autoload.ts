@@ -3,20 +3,22 @@
 
 import "./baeta-directives/directives.baeta";
 
-import "./user/resolvers.mutations";
+import "./scalars/scalars.resolvers";
 
-import "./user/resolvers.queries";
+import "./user/user.mutations";
 
-import "./user-photos/user-photos-pagination.resolvers";
+import "./user/user.queries";
 
-import "./user-photos/user-photos-relations.resolvers";
+import "./user/user.subscriptions";
+
+import "./user-photos/user-photos.resolvers";
 
 import {getBaetaDirectivesModule} from "./baeta-directives/typedef";
 
-import {getBaetaPaginationModule} from "./baeta-pagination/typedef";
+import {getScalarsModule} from "./scalars/typedef";
 
 import {getUserPhotosModule} from "./user-photos/typedef";
 
 import {getUserModule} from "./user/typedef";
 
-export const modules = [getBaetaDirectivesModule(), getBaetaPaginationModule(), getUserPhotosModule(), getUserModule()];
+export const modules = [getBaetaDirectivesModule(), getScalarsModule(), getUserPhotosModule(), getUserModule()];

@@ -18,6 +18,7 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   DateTime: { input: Date; output: Date; }
+  UUID: { input: any; output: any; }
 };
 
 export type StringFormat =
@@ -25,62 +26,21 @@ export type StringFormat =
   | 'UUID'
   | 'URL';
 
-export type PageInfo = {
-  __typename?: 'PageInfo';
-  hasPreviousPage: Scalars['Boolean']['output'];
-  hasNextPage: Scalars['Boolean']['output'];
-};
-
-export type UserConnection = {
-  __typename?: 'UserConnection';
-  pageInfo: PageInfo;
-  edges?: Maybe<Array<Maybe<UserEdge>>>;
-};
-
-export type UserEdge = {
-  __typename?: 'UserEdge';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<User>;
-};
-
-export type UserPhotoConnection = {
-  __typename?: 'UserPhotoConnection';
-  pageInfo: PageInfo;
-  edges?: Maybe<Array<Maybe<UserPhotoEdge>>>;
-};
-
-export type UserPhotoEdge = {
-  __typename?: 'UserPhotoEdge';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<UserPhoto>;
-};
-
 export type UserPhoto = {
   __typename?: 'UserPhoto';
   id: Scalars['ID']['output'];
   url: Scalars['String']['output'];
 };
 
-export type UserPhotoPage = {
-  cursor?: InputMaybe<Scalars['ID']['input']>;
-  limit: Scalars['Int']['input'];
-};
-
 export type User = {
   __typename?: 'User';
   photos?: Maybe<Array<UserPhoto>>;
-  photosConnection?: Maybe<UserPhotoConnection>;
   id: Scalars['ID']['output'];
   email: Scalars['String']['output'];
   lastName: Scalars['String']['output'];
   profile?: Maybe<Scalars['String']['output']>;
   givenName?: Maybe<Scalars['String']['output']>;
   birthday?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type UserPhotosConnectionArgs = {
-  page: UserPhotoPage;
 };
 
 export type UserWhereUniqueInput = {
@@ -137,14 +97,16 @@ export type MutationUpdateUserArgs = {
   data: UpdateUserInput;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  userCreated: User;
+  userUpdated: User;
+};
+
 export type DateTime = Scalars["DateTime"];
+export type Uuid = Scalars["UUID"];
 
 export type DefinedFieldsWithoutExtensions = {
-  PageInfo: "hasPreviousPage" | "hasNextPage";
-  UserConnection: "pageInfo" | "edges";
-  UserEdge: "cursor" | "node";
-  UserPhotoConnection: "pageInfo" | "edges";
-  UserPhotoEdge: "cursor" | "node";
   UserPhoto: "id" | "url";
   User: "id" | "email" | "lastName" | "profile" | "givenName" | "birthday";
 };

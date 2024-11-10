@@ -1,55 +1,39 @@
 import { createServer } from 'node:http';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { createApplication } from '@baeta/core';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import express from 'express';
-import { useServer } from 'graphql-ws/lib/use/ws';
-import { WebSocketServer } from 'ws';
-import { modules } from './modules/autoload.js';
-import type { Context } from './types/context.js';
+import { createYoga } from 'graphql-yoga';
+import { pubsub } from './lib/pubsub.ts';
+import { useWebSocketServer } from './lib/ws.ts';
+import { modules } from './modules/autoload.ts';
+import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
 	modules,
-	pruneSchema: true,
 });
 
-const app = express();
-const httpServer = createServer(app);
-
-const ws = new WebSocketServer({
-	path: '/graphql',
-	server: httpServer,
-});
-
-const cleanup = useServer({ schema: baeta.schema }, ws);
-
-const apollo = new ApolloServer<Context>({
+const yoga = createYoga<ServerContext, Context>({
 	schema: baeta.schema,
-	plugins: [
-		ApolloServerPluginDrainHttpServer({ httpServer }),
-		{
-			async serverWillStart() {
-				return {
-					async drainServer() {
-						await cleanup.dispose();
-					},
-				};
-			},
-		},
-	],
+	context: {
+		pubsub,
+	},
+	graphiql: {
+		subscriptionsProtocol: 'WS',
+	},
 });
 
-async function start() {
-	await apollo.start();
+const server = createServer(yoga);
 
-	app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(apollo));
+const ws = useWebSocketServer(server, yoga);
 
-	await new Promise<void>((resolve) => httpServer.listen({ port: 5001 }, resolve));
+server.listen(4000, () => {
+	console.log(`🚀 Server ready at http://localhost:4000${yoga.graphqlEndpoint}`);
+});
 
-	console.log('🚀 Server ready at http://localhost:5001/graphql');
-}
+const stop = async () => {
+	await ws.dispose();
+	return new Promise<void>((resolve) => server.close(() => resolve()));
+};
 
-start();
+process.on('SIGINT', async () => {
+	await stop();
+	process.exit(0);
+});

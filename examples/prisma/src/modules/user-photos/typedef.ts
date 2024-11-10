@@ -4,28 +4,21 @@
 import * as Types from "../../__generated__/types";
 import type { DocumentNode } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import baetaExtensions from "../../extensions/index.ts";
 
 
 interface DefinedFields {
   UserPhoto: 'id' | 'url';
-  User: 'photos' | 'photosConnection';
-};
-
-interface DefinedInputFields {
-  UserPhotoPage: 'cursor' | 'limit';
+  User: 'photos';
 };
 
 export type UserPhoto = Pick<Types.UserPhoto, DefinedFields['UserPhoto']>;
-export type UserPhotoPage = Pick<Types.UserPhotoPage, DefinedInputFields['UserPhotoPage']>;
 export type User = Pick<Types.User, Types.DefinedFieldsWithoutExtensions["User"]>;
-export type UserPhotoConnection = Pick<Types.UserPhotoConnection, Types.DefinedFieldsWithoutExtensions["UserPhotoConnection"]>;
 
 export namespace ModuleMetadata {
   export const id = 'user-photos';
   export const dirname = './user-photos';
-  export const hashes = {"UserPhoto":{"hash":"3noyzl","fieldsHashes":{"id":"1ij53kg","url":"bsmiek"}},"User":{"hash":"6z6n7l","fieldsHashes":{"photos":"1ve18yx","photosConnection":"1v9b3p5"}}};
-  export const typedef = {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":18,"end":20}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":22,"end":24}},"loc":{"start":22,"end":24}},"loc":{"start":22,"end":25}},"directives":[],"loc":{"start":18,"end":25}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":27,"end":30}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":32,"end":38}},"loc":{"start":32,"end":38}},"loc":{"start":32,"end":39}},"directives":[],"loc":{"start":27,"end":39}}],"loc":{"start":0,"end":41}},{"kind":"InputObjectTypeDefinition","name":{"kind":"Name","value":"UserPhotoPage","loc":{"start":49,"end":62}},"directives":[],"fields":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"cursor","loc":{"start":66,"end":72}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":74,"end":76}},"loc":{"start":74,"end":76}},"directives":[],"loc":{"start":66,"end":76}},{"kind":"InputValueDefinition","name":{"kind":"Name","value":"limit","loc":{"start":78,"end":83}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":85,"end":88}},"loc":{"start":85,"end":88}},"loc":{"start":85,"end":89}},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"validInt","loc":{"start":91,"end":99}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"min","loc":{"start":100,"end":103}},"value":{"kind":"IntValue","value":"1","loc":{"start":105,"end":106}},"loc":{"start":100,"end":106}},{"kind":"Argument","name":{"kind":"Name","value":"max","loc":{"start":108,"end":111}},"value":{"kind":"IntValue","value":"50","loc":{"start":113,"end":115}},"loc":{"start":108,"end":115}}],"loc":{"start":90,"end":116}}],"loc":{"start":78,"end":116}}],"loc":{"start":43,"end":118}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":132,"end":136}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":140,"end":146}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":149,"end":158}},"loc":{"start":149,"end":158}},"loc":{"start":149,"end":159}},"loc":{"start":148,"end":160}},"directives":[],"loc":{"start":140,"end":160}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"photosConnection","loc":{"start":162,"end":178}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"page","loc":{"start":179,"end":183}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoPage","loc":{"start":185,"end":198}},"loc":{"start":185,"end":198}},"loc":{"start":185,"end":199}},"directives":[],"loc":{"start":179,"end":199}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoConnection","loc":{"start":202,"end":221}},"loc":{"start":202,"end":221}},"directives":[],"loc":{"start":162,"end":221}}],"loc":{"start":120,"end":223}},{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":232,"end":240}},"directives":[],"loc":{"start":225,"end":240}}]} as unknown as DocumentNode;
+  export const hashes = {"UserPhoto":{"hash":"3noyzl","fieldsHashes":{"id":"1ij53kg","url":"bsmiek"}},"User":{"hash":"11vpwyu","fieldsHashes":{"photos":"1ve18yx"}}};
+  export const typedef = {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":18,"end":20}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":22,"end":24}},"loc":{"start":22,"end":24}},"loc":{"start":22,"end":25}},"directives":[],"loc":{"start":18,"end":25}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":27,"end":30}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":32,"end":38}},"loc":{"start":32,"end":38}},"loc":{"start":32,"end":39}},"directives":[],"loc":{"start":27,"end":39}}],"loc":{"start":0,"end":41}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":55,"end":59}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":63,"end":69}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":72,"end":81}},"loc":{"start":72,"end":81}},"loc":{"start":72,"end":82}},"loc":{"start":71,"end":83}},"directives":[],"loc":{"start":63,"end":83}}],"loc":{"start":43,"end":85}}]} as unknown as DocumentNode;
   
   export function createManager(module: Baeta.ModuleBuilder) {
     return {
@@ -38,14 +31,10 @@ export namespace ModuleMetadata {
       User: {
         ...module.createTypeMethods<User, Types.ContextType>("User"),
         photos: module.createResolverBuilder<Types.Maybe<Array<UserPhoto>>, User, Types.ContextType, { }>("User", "photos"),
-        photosConnection: module.createResolverBuilder<Types.Maybe<UserPhotoConnection>, User, Types.ContextType, Types.UserPhotosConnectionArgs>("User", "photosConnection"),
-      },
-      Scalar: {
-        DateTime: module.createScalarBuilder("DateTime"),
       },
     };
   }
 }
 
-export const createUserPhotosModule = () => Baeta.createModuleManager(ModuleMetadata, baetaExtensions);
+export const createUserPhotosModule = () => Baeta.createModuleManager(ModuleMetadata);
 export const getUserPhotosModule = Baeta.createSingletonModule(createUserPhotosModule);

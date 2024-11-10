@@ -4,7 +4,6 @@
 import * as Types from "../../__generated__/types";
 import type { DocumentNode } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import baetaExtensions from "../../extensions/index.ts";
 
 
 interface DefinedEnumValues {
@@ -26,5 +25,5 @@ export namespace ModuleMetadata {
   }
 }
 
-export const createBaetaDirectivesModule = () => Baeta.createModuleManager(ModuleMetadata, baetaExtensions);
+export const createBaetaDirectivesModule = () => Baeta.createModuleManager(ModuleMetadata);
 export const getBaetaDirectivesModule = Baeta.createSingletonModule(createBaetaDirectivesModule);

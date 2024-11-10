@@ -37,3 +37,8 @@ type Mutation {
 	createUser(data: CreateUserInput!): User!
 	updateUser(where: UserWhereUniqueInput!, data: UpdateUserInput!): User
 }
+
+type Subscription {
+	userCreated: User!
+	userUpdated: User!
+}

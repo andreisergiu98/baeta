@@ -1,6 +1,14 @@
 import { isAbsolute, join, posixPath, relative, resolve } from '@baeta/util-path';
 import type { FileOptions } from './file.ts';
 
+// biome-ignore lint/suspicious/noExplicitAny: We don't want to import graphql for this type
+export interface Loader<TOptions = any> {
+	// biome-ignore lint/suspicious/noExplicitAny: Same reason as above
+	load(pointer: string, options?: TOptions): Promise<any[] | null | never>;
+	// biome-ignore lint/suspicious/noExplicitAny: Same reason as above
+	loadSync?(pointer: string, options?: TOptions): any[] | null | never;
+}
+
 /**
  * Options for the graphql generator.
  */
@@ -61,6 +69,11 @@ export interface GeneratorOptions {
 	 * Options for generated files.
 	 */
 	fileOptions?: FileOptions;
+
+	/**
+	 * Additional schema loaders to be used for "schemas" option.
+	 */
+	loaders?: Loader[];
 }
 
 export interface NormalizedGeneratorOptions {
@@ -73,6 +86,7 @@ export interface NormalizedGeneratorOptions {
 	extensions?: string;
 	scalars?: Record<string, string>;
 	fileOptions?: FileOptions;
+	loaders?: Loader[];
 }
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
@@ -98,6 +112,7 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 		extensions,
 		scalars: options.scalars,
 		fileOptions: options.fileOptions,
+		loaders: options.loaders,
 	};
 }
 

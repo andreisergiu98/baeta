@@ -35,7 +35,7 @@
     "build": "yarn turbo build --filter='./packages/*'",
     "docs": "yarn workspace @baeta/website build",
     "examples:sync": "./examples/sync.sh",
-    "examples:build": "yarn turbo watch build --filter='./examples/*'",
+    "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
     "linter": "biome check .",
     "prepare": "husky install",

@@ -1,0 +1,6 @@
+services:
+  redis:
+    image: redis:6
+    container_name: baeta-example-cache-advanced-redis
+    ports:
+      - "6380:6379"

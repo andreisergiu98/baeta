@@ -23,5 +23,8 @@ input CreateUserInput {
 }
 
 type Mutation {
-	createUser(email: String!, lastName: String!): User
+	createUser(
+		email: String! @trim @lower @validString(format: EMAIL, minLength: 5, maxLength: 128)
+		lastName: String!
+	): User
 }

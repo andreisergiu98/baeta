@@ -1,0 +1,14 @@
+interface Readable {
+	id: ID!
+	pages: Int!
+}
+
+type Comic implements Readable {
+	id: ID!
+	title: String!
+	year: Int!
+	artist: String!
+	pages: Int!
+}
+
+extend union Media = Comic

@@ -1,17 +1,14 @@
 import { defineConfig } from '@baeta/cli';
-import { cloudflarePlugin } from '@baeta/plugin-cloudflare';
-import { gitignorePlugin } from '@baeta/plugin-gitignore';
+import { autoloadPlugin } from '@baeta/plugin-autoload';
 
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
-		modulesDir: 'src/modules',
-		baseTypesPath: 'src/__generated__/types.ts',
 		contextType: 'src/types/context#Context',
 	},
 	compiler: {
-		src: './src/app',
-		dist: './dist',
+		src: 'src/app',
+		dist: 'dist',
 		bundleDeps: true,
 		bundleWorkspaces: true,
 		esbuild: {
@@ -27,16 +24,5 @@ export default defineConfig({
 			},
 		},
 	},
-	plugins: [
-		gitignorePlugin(),
-		cloudflarePlugin({
-			ws: {
-				databaseId: '7a6f91c0-9455-402f-ab6a-508d140da0e1',
-				databaseMigrationsPath: './migrations/subscriptions',
-			},
-			cache: {
-				enable: false,
-			},
-		}),
-	],
+	plugins: [autoloadPlugin()],
 });

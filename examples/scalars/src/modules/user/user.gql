@@ -1,0 +1,9 @@
+type User {
+	id: UUID!
+	email: String!
+	birthday: DateTime!
+}
+
+type Query {
+	user: User
+}

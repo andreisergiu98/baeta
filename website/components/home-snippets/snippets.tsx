@@ -3,12 +3,12 @@ import { Snippet, type SnippetProps } from './snippet.tsx';
 
 const featureList: Array<Omit<SnippetProps, 'idx'>> = [
 	{
-		title: 'SDL',
+		title: 'Define Your API Contract',
 		description: (
 			<>
-				Baeta's schema-first pattern makes it easy to write and maintain GraphQL APIs that are easy
-				to read and understand. By defining your schema first, you can focus on the API design and
-				structure, rather than the implementation details.
+				Start with a clear, readable schema that serves as your API contract. Baeta's schema-first
+				approach lets you focus on designing the perfect API before diving into implementation
+				details.
 			</>
 		),
 		path: 'modules/user/user.gql',
@@ -31,11 +31,12 @@ type Query {
 }`,
 	},
 	{
-		title: 'Typed resolvers',
+		title: 'Write Clean, Type-Safe Resolvers',
 		description: (
 			<>
-				Baeta takes care of type safety and type definitions, so you can focus on implementing your
-				resolvers in a flat and readable way.
+				Focus purely on your business logic while Baeta handles all type definitions and safety. No
+				more type gymnastics or complex and nested resolver patterns - just clean, straightforward
+				code.
 			</>
 		),
 		path: 'modules/user/resolvers.ts',
@@ -54,12 +55,12 @@ Query.users(() => {
 `,
 	},
 	{
-		title: 'Extend other modules',
+		title: 'Compose and Extend',
 		description: (
 			<>
-				Baeta's modular architecture allows you to easily extend other types and split your schema
-				into small, reusable, and maintainable pieces. Here's an example of how to extend the User
-				type with a photos field.
+				Build your API like building blocks. Baeta's modular architecture lets you split your schema
+				into small, focused pieces that are easy to maintain. Extend existing types seamlessly as
+				your API grows.
 			</>
 		),
 		path: 'modules/user-photos/user-photos.gql',
@@ -81,13 +82,57 @@ extend type User {
     photos: [Photo!]!
 }`,
 	},
+
 	{
-		title: 'Directives',
+		title: 'Scope-Based Authorization',
 		description: (
 			<>
-				Baeta also supports custom directives, which allow you to define your own validation or
-				mutation rules for input fields. Here's an example of a trim directive that trims whitespace
-				from a string input.
+				Secure your API with granular, scope-based authorization. Define permissions directly in
+				your schema and let Baeta handle the rest.
+			</>
+		),
+		language: 'typescript',
+		snippet: `const { Query, Mutation } = getUserModule();
+
+Query.users.$auth({
+	$or: {
+		isPublic: true,
+		isLoggedIn: true,
+	},
+});`,
+	},
+	{
+		title: 'Simple, Effective Caching',
+		description: (
+			<>
+				Add automatic caching to your queries with minimal setup. Update cached data easily and
+				predictably when mutations occur.
+			</>
+		),
+		language: 'typescript',
+		snippet: `import { getUserModule } from './typedef.ts';
+
+const { User, Query } = getUserModule();
+
+export const userCache = User.$createCache({});
+
+Query.user.$useCache(userCache, {});
+Query.users.$useCache(userCache, {});
+
+Mutation.updateUser.$use(async (params, next) => {
+	const user = await next();
+	await userCache.save(user);
+	return user;
+});
+`,
+	},
+	{
+		title: 'Powerful Custom Directives',
+		description: (
+			<>
+				Add custom behavior exactly where you need it. Create your own directives for validation,
+				transformation, or any custom logic. Baeta makes it simple to apply complex behaviors
+				declaratively in your schema.
 			</>
 		),
 		language: 'typescript',

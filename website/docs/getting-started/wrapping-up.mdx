@@ -1,22 +1,23 @@
 ---
 sidebar_position: 5
-description: ''
+description: "Create and run your Baeta GraphQL application"
 ---
 
 # Wrapping up
 
-### Create the application
+Now that we have our modules ready, let's create and run our GraphQL application.
 
-Our modules are now ready to use!
-We can create an entry point for our application in `src/app.ts`:
+## Create the application
+
+Create an entry point for your application in `src/app.ts`:
 
 ```typescript
-import { createApplication } from '@baeta/core';
-import { userModule } from './modules/user';
-import { userPhotosModule } from './modules/user-photos';
+import { createApplication } from "@baeta/core";
+import { userModule } from "./modules/user";
+import { userPhotosModule } from "./modules/user-photos";
 
-import { createYoga } from 'graphql-yoga';
-import { createServer } from 'node:http';
+import { createYoga } from "graphql-yoga";
+import { createServer } from "node:http";
 
 const baeta = createApplication({
   modules: [userModule, userPhotosModule],
@@ -29,20 +30,36 @@ const yoga = createYoga({
 const server = createServer(yoga);
 
 server.listen(4000, () => {
-  console.log('🚀 Server ready at http://localhost:4000/graphql');
+  console.log("🚀 Server ready at http://localhost:4000/graphql");
 });
 ```
 
 :::note
-We are using graphql-yoga because it's very easy to setup, but Baeta is compatible with all graphql servers.
+We're using GraphQL Yoga for this example due to its simple setup, but Baeta is compatible with all GraphQL servers like Apollo Server, Express GraphQL, and others.
 :::
 
 ### Start the application
 
-That's it! You can now start your application by running the following command:
+Run your application with:
 
 ```bash
 yarn start
-# or
+```
+
+Or with the full command:
+
+```bash
 yarn baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'
 ```
+
+## What's Next?
+
+Now that you have a running GraphQL API, you can:
+- [Add authentication](./authentication)
+- [Implement caching](./caching)
+- [Add custom directives](./directives)
+- [Explore best practices](./best-practices)
+
+:::tip
+Visit our [examples repository](https://github.com/andreisergiu98/baeta/tree/chore/examples/examples) for more complex implementations and real-world usage patterns.
+:::

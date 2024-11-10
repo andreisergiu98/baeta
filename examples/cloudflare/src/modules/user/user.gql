@@ -1,27 +1,16 @@
 type User {
 	id: ID!
-	name: String!
-	birthday: String
+	email: String!
+	lastName: String!
+	profile: String
+	givenName: String
 }
 
-input UserWhereUnique {
-	id: ID
-	email: String
-}
-
-input UserUpdateInput {
-	name: String
-	birthday: String
+input UserWhereUniqueInput {
+	id: ID!
 }
 
 type Query {
-	user(where: UserWhereUnique): User
-}
-
-type Mutation {
-	updateUser(where: UserWhereUnique, data: UserUpdateInput): User
-}
-
-type Subscription {
-	onUserUpdate: User
+	user(where: UserWhereUniqueInput!): User
+	users: [User!]
 }

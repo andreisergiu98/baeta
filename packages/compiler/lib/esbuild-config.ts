@@ -1,3 +1,4 @@
+import path from 'node:path';
 import type { BuildOptions, Format } from 'esbuild';
 import { getExternals } from './esbuild-externals.ts';
 
@@ -71,10 +72,27 @@ const __dirname = __baeta_node_dirname(__filename);
 	return { ...currentBanner, js };
 }
 
+function normalizeSrc(src: string) {
+	if (path.isAbsolute(src)) {
+		return src;
+	}
+
+	if (
+		src.startsWith('./') ||
+		src.startsWith('../') ||
+		src.startsWith('.\\') ||
+		src.startsWith('..\\')
+	) {
+		return src;
+	}
+
+	return `./${src}`;
+}
+
 export function createEsbuildConfig(options: CompilerOptions, watchMode?: boolean) {
 	const external = getExternals(options.bundleDeps, watchMode || options.bundleWorkspaces);
 	const outdir = options.dist;
-	const entryPoints = Array.isArray(options.src) ? options.src : [options.src];
+	const entryPoints = (Array.isArray(options.src) ? options.src : [options.src]).map(normalizeSrc);
 
 	const buildOptions: BuildOptions = {
 		bundle: true,

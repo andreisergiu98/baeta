@@ -1,0 +1,44 @@
+type User {
+	id: ID!
+	email: String!
+	lastName: String!
+	profile: String
+	givenName: String
+	birthday: DateTime
+}
+
+input UserWhereUniqueInput @constraints(minFields: 1, maxFields: 1) {
+	id: ID
+	email: String @trim @lower @validString(format: EMAIL)
+}
+
+input CreateUserInput {
+	email: String! @trim @lower @validString(format: EMAIL)
+	lastName: String! @trim @validString(minLength: 3, maxLength: 20)
+	givenName: String @trim @validString(minLength: 3, maxLength: 20)
+	birthday: DateTime
+	profile: String @trim @validString(format: URL)
+}
+
+input UpdateUserInput @constraints(minFields: 1) {
+	email: String @trim @lower @validString(format: EMAIL)
+	lastName: String @trim @validString(minLength: 3, maxLength: 20)
+	givenName: String @trim @validString(minLength: 3, maxLength: 20)
+	birthday: DateTime
+	profile: String @trim @validString(format: URL)
+}
+
+type Query {
+	user(where: UserWhereUniqueInput!): User
+	users(where: UserWhereUniqueInput): [User!]
+}
+
+type Mutation {
+	createUser(data: CreateUserInput!): User!
+	updateUser(where: UserWhereUniqueInput!, data: UpdateUserInput!): User
+}
+
+type Subscription {
+	userCreated: User!
+	userUpdated: User!
+}

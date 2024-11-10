@@ -1,0 +1,26 @@
+type Movie {
+	id: ID!
+	title: String!
+	year: Int!
+}
+
+type TVShow {
+	id: ID!
+	title: String!
+	year: Int!
+	seasons: Int!
+}
+
+type Book implements Readable {
+	id: ID!
+	title: String!
+	year: Int!
+	author: String!
+	pages: Int!
+}
+
+union Media = Movie | TVShow | Book
+
+type Query {
+	media: [Media!]!
+}

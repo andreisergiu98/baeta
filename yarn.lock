@@ -1976,38 +1976,101 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/examples-apollo@workspace:examples/apollo":
+"@baeta/examples-apollo-ws@workspace:examples/apollo-ws":
   version: 0.0.0-use.local
-  resolution: "@baeta/examples-apollo@workspace:examples/apollo"
+  resolution: "@baeta/examples-apollo-ws@workspace:examples/apollo-ws"
   dependencies:
     "@apollo/server": "npm:^4.11.2"
     "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
     "@baeta/core": "workspace:^"
-    "@baeta/directives": "workspace:^"
-    "@baeta/errors": "workspace:^"
-    "@baeta/extension-auth": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
-    "@baeta/extension-cache-redis": "workspace:^"
     "@baeta/plugin-autoload": "workspace:^"
-    "@baeta/plugin-directives": "workspace:^"
-    "@baeta/plugin-gitignore": "workspace:^"
-    "@baeta/plugin-pagination": "workspace:^"
-    "@baeta/plugin-prisma": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@faker-js/faker": "npm:^9.2.0"
-    "@prisma/client": "npm:^5.22.0"
     "@types/body-parser": "npm:^1.19.5"
     "@types/cors": "npm:^2.8.17"
     "@types/express": "npm:^4.17.21"
     "@types/node": "npm:^22.9.0"
     "@types/ws": "npm:^8.5.13"
-    "@yarnpkg/pnpify": "npm:^4.1.3"
     body-parser: "npm:^1.20.3"
     cors: "npm:^2.8.5"
     express: "npm:^4.21.1"
     graphql: "npm:^16.9.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
+    typescript: "npm:^5.6.3"
+    ws: "npm:^8.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-apollo@workspace:examples/apollo":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-apollo@workspace:examples/apollo"
+  dependencies:
+    "@apollo/server": "npm:^4.11.2"
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    graphql: "npm:^16.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-auth@workspace:examples/auth":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-auth@workspace:examples/auth"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/directives": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/extension-auth": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
+    "@baeta/plugin-prisma": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@faker-js/faker": "npm:^9.2.0"
+    "@prisma/client": "npm:^5.22.0"
+    "@types/node": "npm:^22.9.0"
+    "@types/ws": "npm:^8.5.13"
+    "@yarnpkg/pnpify": "npm:^4.1.3"
+    graphql: "npm:^16.9.0"
+    graphql-scalars: "npm:^1.23.0"
+    graphql-subscriptions: "npm:^2.0.0"
+    graphql-ws: "npm:^5.16.0"
+    graphql-yoga: "npm:^5.9.0"
+    prisma: "npm:^5.22.0"
+    typescript: "npm:^5.6.3"
+    ws: "npm:^8.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-cache-advanced@workspace:examples/cache-advanced":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-cache-advanced@workspace:examples/cache-advanced"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/directives": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/extension-cache-redis": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
+    "@baeta/plugin-pagination": "workspace:^"
+    "@baeta/plugin-prisma": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@faker-js/faker": "npm:^9.2.0"
+    "@prisma/client": "npm:^5.22.0"
+    "@types/node": "npm:^22.9.0"
+    "@types/ws": "npm:^8.5.13"
+    "@yarnpkg/pnpify": "npm:^4.1.3"
+    graphql: "npm:^16.9.0"
+    graphql-scalars: "npm:^1.23.0"
+    graphql-subscriptions: "npm:^2.0.0"
+    graphql-ws: "npm:^5.16.0"
+    graphql-yoga: "npm:^5.9.0"
     ioredis: "npm:^5.4.1"
     prisma: "npm:^5.22.0"
     typescript: "npm:^5.6.3"
@@ -2015,15 +2078,46 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/examples-cloudflare@workspace:examples/cloudflare":
+"@baeta/examples-cache@workspace:examples/cache":
   version: 0.0.0-use.local
-  resolution: "@baeta/examples-cloudflare@workspace:examples/cloudflare"
+  resolution: "@baeta/examples-cache@workspace:examples/cache"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/directives": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/extension-cache-redis": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
+    "@baeta/plugin-prisma": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@faker-js/faker": "npm:^9.2.0"
+    "@prisma/client": "npm:^5.22.0"
+    "@types/node": "npm:^22.9.0"
+    "@types/ws": "npm:^8.5.13"
+    "@yarnpkg/pnpify": "npm:^4.1.3"
+    graphql: "npm:^16.9.0"
+    graphql-scalars: "npm:^1.23.0"
+    graphql-subscriptions: "npm:^2.0.0"
+    graphql-ws: "npm:^5.16.0"
+    graphql-yoga: "npm:^5.9.0"
+    ioredis: "npm:^5.4.1"
+    prisma: "npm:^5.22.0"
+    typescript: "npm:^5.6.3"
+    ws: "npm:^8.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-cloudflare-ws@workspace:examples/cloudflare-ws":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-cloudflare-ws@workspace:examples/cloudflare-ws"
   dependencies:
     "@baeta/cli": "workspace:^"
     "@baeta/cloudflare-subscriptions": "workspace:^"
+    "@baeta/compiler": "workspace:^"
     "@baeta/core": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-cloudflare": "workspace:^"
-    "@baeta/plugin-gitignore": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20241106.0"
     graphql: "npm:^16.9.0"
@@ -2032,6 +2126,174 @@ __metadata:
     miniflare: "npm:^3.20241106.0"
     typescript: "npm:^5.6.3"
     wrangler: "npm:^3.86.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-cloudflare@workspace:examples/cloudflare":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-cloudflare@workspace:examples/cloudflare"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@cloudflare/workers-types": "npm:^4.20241106.0"
+    graphql: "npm:^16.9.0"
+    graphql-yoga: "npm:^5.9.0"
+    hono: "npm:^4.6.9"
+    miniflare: "npm:^3.20241106.0"
+    typescript: "npm:^5.6.3"
+    wrangler: "npm:^3.86.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-directives@workspace:examples/directives":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-directives@workspace:examples/directives"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/directives": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@graphql-tools/utils": "npm:^10.5.5"
+    "@types/node": "npm:^22.9.0"
+    graphql: "npm:^16.9.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-prisma@workspace:examples/prisma":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-prisma@workspace:examples/prisma"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/directives": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
+    "@baeta/plugin-prisma": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@faker-js/faker": "npm:^9.2.0"
+    "@prisma/client": "npm:^5.22.0"
+    "@types/node": "npm:^22.9.0"
+    "@types/ws": "npm:^8.5.13"
+    "@yarnpkg/pnpify": "npm:^4.1.3"
+    graphql: "npm:^16.9.0"
+    graphql-scalars: "npm:^1.23.0"
+    graphql-subscriptions: "npm:^2.0.0"
+    graphql-ws: "npm:^5.16.0"
+    graphql-yoga: "npm:^5.9.0"
+    prisma: "npm:^5.22.0"
+    typescript: "npm:^5.6.3"
+    ws: "npm:^8.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-relay-pagination@workspace:examples/relay-pagination":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-relay-pagination@workspace:examples/relay-pagination"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/directives": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
+    "@baeta/plugin-pagination": "workspace:^"
+    "@baeta/plugin-prisma": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@faker-js/faker": "npm:^9.2.0"
+    "@prisma/client": "npm:^5.22.0"
+    "@types/node": "npm:^22.9.0"
+    "@types/ws": "npm:^8.5.13"
+    "@yarnpkg/pnpify": "npm:^4.1.3"
+    graphql: "npm:^16.9.0"
+    graphql-scalars: "npm:^1.23.0"
+    graphql-subscriptions: "npm:^2.0.0"
+    graphql-ws: "npm:^5.16.0"
+    graphql-yoga: "npm:^5.9.0"
+    prisma: "npm:^5.22.0"
+    typescript: "npm:^5.6.3"
+    ws: "npm:^8.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-scalars@workspace:examples/scalars":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-scalars@workspace:examples/scalars"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    express: "npm:^4.21.1"
+    graphql: "npm:^16.9.0"
+    graphql-scalars: "npm:^1.23.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-unions-interfaces@workspace:examples/unions-interfaces":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-unions-interfaces@workspace:examples/unions-interfaces"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    graphql: "npm:^16.9.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-yoga-ws@workspace:examples/yoga-ws":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-yoga-ws@workspace:examples/yoga-ws"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    "@types/ws": "npm:^8.5.13"
+    graphql: "npm:^16.9.0"
+    graphql-subscriptions: "npm:^2.0.0"
+    graphql-ws: "npm:^5.16.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+    ws: "npm:^8.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-yoga@workspace:examples/yoga":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-yoga@workspace:examples/yoga"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    graphql: "npm:^16.9.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
 
@@ -2240,7 +2502,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/plugin-gitignore@workspace:^, @baeta/plugin-gitignore@workspace:packages/plugin-gitignore":
+"@baeta/plugin-gitignore@workspace:packages/plugin-gitignore":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-gitignore@workspace:packages/plugin-gitignore"
   dependencies:
@@ -10685,6 +10947,17 @@ __metadata:
   version: 1.0.4
   resolution: "grapheme-splitter@npm:1.0.4"
   checksum: 10/fdb2f51fd430ce881e18e44c4934ad30e59736e46213f7ad35ea5970a9ebdf7d0fe56150d15cc98230d55d2fd48c73dc6781494c38d8cf2405718366c36adb88
+  languageName: node
+  linkType: hard
+
+"graphql-scalars@npm:^1.23.0":
+  version: 1.23.0
+  resolution: "graphql-scalars@npm:1.23.0"
+  dependencies:
+    tslib: "npm:^2.5.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 10/6faa5dea621b708b485cb8c5047098c3daf7c092c8f1f53b87ff6999ef0b28553e5c904ddc01da54141685fcd5798672c4cf997d9738a04dd4e60529450ab707
   languageName: node
   linkType: hard
 

@@ -30,7 +30,6 @@
     "start": "baeta build --watch --generate --onSuccess='wrangler dev'"
   },
   "dependencies": {
-    "@baeta/cloudflare-subscriptions": "workspace:^",
     "@baeta/core": "workspace:^",
     "graphql": "^16.9.0",
     "graphql-yoga": "^5.9.0",
@@ -38,8 +37,8 @@
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
-    "@baeta/plugin-cloudflare": "workspace:^",
-    "@baeta/plugin-gitignore": "workspace:^",
+    "@baeta/compiler": "workspace:^",
+    "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20241106.0",
     "miniflare": "^3.20241106.0",

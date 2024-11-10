@@ -27,6 +27,10 @@ export interface AutoloadPluginOptions {
 
 const defaultSuffixes = [
 	'auth',
+	'authorization',
+	'authorizations',
+	'cache',
+	'caches',
 	'resolver',
 	'resolvers',
 	'query',

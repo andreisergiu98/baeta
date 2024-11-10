@@ -10,24 +10,42 @@ const featureList: FeatureProps[] = [
 	{
 		title: 'Schema First',
 		Svg: LogoGraphql,
-		description: <>Schema-first approach for a consistent and well-defined API.</>,
+		description: (
+			<>
+				Define your API contract upfront with a clear, schema-first approach that ensures
+				consistency and maintainability.
+			</>
+		),
 	},
 	{
-		title: 'Modular',
+		title: 'Modular By Design',
 		Svg: LogoModular,
-		description: <>Modular architecture for easy organization and scalability.</>,
+		description: (
+			<>
+				Build your API piece by piece. Baeta's modular architecture lets you organize code into
+				small, maintainable modules.
+			</>
+		),
 	},
 	{
 		title: 'Type Safe',
 		Svg: LogoTypescript,
 		description: (
-			<>Automatic code generation for type safety, increased productivity, and reduced errors.</>
+			<>
+				Focus on your logic while Baeta handles type safety with automatic code generation and
+				TypeScript integration.
+			</>
 		),
 	},
 	{
-		title: 'Advanced Features',
+		title: 'Flexible & Extensible',
 		Svg: LogoRocket,
-		description: <>Extensible, including support for middlewares, directives and plugins.</>,
+		description: (
+			<>
+				Use only what you need. Add powerful features through official extensions when your API
+				grows.
+			</>
+		),
 	},
 ];
 

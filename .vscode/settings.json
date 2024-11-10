@@ -1,12 +1,24 @@
 {
   "search.exclude": {
+    "**/.docusaurus": true,
+    "**/.pnp.*": true,
+    "**/.tsup": true,
+    "**/.turbo": true,
     "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/dist": true,
+    "**/build": true
   },
   "files.exclude": {
-    "**/node_modules": true
+    "**/.docusaurus": true,
+    "**/.tsup": true,
+    "**/.turbo": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "website/.yarn": true
   },
   "cSpell.words": [
+    "autoload",
     "baeta",
     "callsite",
     "camelcase",

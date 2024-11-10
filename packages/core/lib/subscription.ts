@@ -35,7 +35,7 @@ export type SubscribeFilterParams<Payload, Context, Args> = {
 
 export type Subscription<Payload, Result, Root, Context, Args> = {
 	subscribe: Subscribe<Payload, Root, Context, Args>;
-	resolve?: SubscribeResolve<Result, Payload, Context, Args>;
+	resolve: SubscribeResolve<Result, Payload, Context, Args>;
 };
 
 export type SubscriptionResolver<Result, Key extends string, Root, Context, Args> = {

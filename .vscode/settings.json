@@ -1,16 +1,21 @@
 {
   "search.exclude": {
+    "**/.docusaurus": true,
     "**/.pnp.*": true,
     "**/.tsup": true,
     "**/.turbo": true,
     "**/.yarn": true,
-    "**/dist": true
+    "**/dist": true,
+    "**/build": true
   },
   "files.exclude": {
+    "**/.docusaurus": true,
+    "**/.tsup": true,
+    "**/.turbo": true,
     "**/node_modules": true,
     "**/dist": true,
-    "**/.tsup": true,
-    "**/.turbo": true
+    "**/build": true,
+    "website/.yarn": true
   },
   "cSpell.words": [
     "autoload",

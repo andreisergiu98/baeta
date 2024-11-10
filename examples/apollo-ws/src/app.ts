@@ -8,9 +8,9 @@ import cors from 'cors';
 import express from 'express';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { WebSocketServer } from 'ws';
-import { pubsub } from './lib/pubsub.js';
-import { modules } from './modules/autoload.js';
-import type { Context } from './types/context.js';
+import { pubsub } from './lib/pubsub.ts';
+import { modules } from './modules/autoload.ts';
+import type { Context } from './types/context.ts';
 
 const baeta = createApplication({
 	modules,

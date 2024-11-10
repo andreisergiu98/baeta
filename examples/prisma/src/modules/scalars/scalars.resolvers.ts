@@ -1,5 +1,5 @@
 import { DateTimeResolver, UUIDResolver } from 'graphql-scalars';
-import { getScalarsModule } from './typedef.js';
+import { getScalarsModule } from './typedef.ts';
 
 const { Scalar } = getScalarsModule();
 

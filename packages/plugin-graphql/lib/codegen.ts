@@ -36,7 +36,7 @@ export async function generate(options: NormalizedGeneratorOptions) {
 
 	const hash = JSON.stringify(schemaPointerMap);
 	const result = await cache('schema', hash, async () => {
-		return loadSchema(schemaPointerMap, options.cwd);
+		return loadSchema(schemaPointerMap, options.cwd, options.loaders);
 	});
 
 	const outputs = await modules.preset.buildGeneratesSection({

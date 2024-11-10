@@ -1,0 +1,61 @@
+{
+  "name": "@baeta/examples-relay-pagination",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "examples/prisma"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "baeta build --generate",
+    "prisma": "pnpify prisma",
+    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
+  },
+  "prisma": {
+    "seed": "yarn node --experimental-transform-types --no-warnings ./src/lib/db/seed.ts"
+  },
+  "dependencies": {
+    "@baeta/core": "workspace:^",
+    "@baeta/directives": "workspace:^",
+    "graphql": "^16.9.0",
+    "graphql-scalars": "^1.23.0",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.16.0",
+    "graphql-yoga": "^5.9.0",
+    "prisma": "^5.22.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@baeta/cli": "workspace:^",
+    "@baeta/plugin-autoload": "workspace:^",
+    "@baeta/plugin-directives": "workspace:^",
+    "@baeta/plugin-pagination": "workspace:^",
+    "@baeta/plugin-prisma": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@faker-js/faker": "^9.2.0",
+    "@prisma/client": "^5.22.0",
+    "@types/node": "^22.9.0",
+    "@types/ws": "^8.5.13",
+    "@yarnpkg/pnpify": "^4.1.3",
+    "typescript": "^5.6.3"
+  }
+}

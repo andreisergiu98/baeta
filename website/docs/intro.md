@@ -11,16 +11,16 @@ Building GraphQL APIs shouldn't be complicated. **Baeta** helps developers focus
 Baeta is a modern, modular, open-source GraphQL framework designed with flexibility in mind. It follows a granular approach where you only add what you need. Starting with a powerful core for building GraphQL APIs, you can progressively add features through official extensions based on your requirements
 
 ### Key Features
-- 📦 **Modular Architecture**: Organize your API into manageable modules
-- 🎯 **Schema-First Development**: Define your API contract upfront
-- 🛡️ **Type Safety**: Automatic code generation for type-safe development
-- 🔌 **Middleware & Directives**: Easy integration of custom behaviors
-- 🚀 **High Performance**: Built for scalability and efficiency
+- **Modular Architecture**: Organize your API into manageable modules
+- **Schema-First Development**: Define your API contract upfront
+- **Type Safety**: Automatic code generation for type-safe development
+- **Middleware & Directives**: Easy integration of custom behaviors
+- **High Performance**: Built for scalability and efficiency
 
 
 #### And optional extensions and plugins
-- 🔐 **@baeta/extension-auth**: Add powerful scope-based authorization
-- 💾 **@baeta/extension-cache**: Implement automatic caching with simple update patterns
+- **@baeta/extension-auth**: Add powerful scope-based authorization
+- **@baeta/extension-cache**: Implement automatic caching with simple update patterns
 - ... and more!
 
 ## Why use Baeta?

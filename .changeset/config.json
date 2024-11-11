@@ -17,7 +17,6 @@
   "fixed": [],
   "linked": [],
   "ignore": [
-    "@baeta/examples-apollo",
-    "@baeta/examples-cloudflare"
+    "@baeta/examples*"
   ]
 }

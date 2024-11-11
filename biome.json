@@ -8,6 +8,7 @@
       "examples/**/modules/autoload.ts",
       "examples/**/__generated__/**",
       "examples/**/typedef.ts",
+      "examples/**/.wrangler/**",
       ".yarn/**",
       ".tsup/**",
       ".turbo/**",

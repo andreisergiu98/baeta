@@ -2259,6 +2259,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/examples-yoga-sse@workspace:examples/yoga-sse":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-yoga-sse@workspace:examples/yoga-sse"
+  dependencies:
+    "@baeta/cli": "workspace:^"
+    "@baeta/compiler": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-autoload": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.9.0"
+    graphql: "npm:^16.9.0"
+    graphql-subscriptions: "npm:^2.0.0"
+    graphql-yoga: "npm:^5.9.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/examples-yoga-ws@workspace:examples/yoga-ws":
   version: 0.0.0-use.local
   resolution: "@baeta/examples-yoga-ws@workspace:examples/yoga-ws"

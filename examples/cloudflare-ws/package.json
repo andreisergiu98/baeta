@@ -33,7 +33,7 @@
     "@baeta/cloudflare-subscriptions": "workspace:^",
     "@baeta/core": "workspace:^",
     "graphql": "^16.9.0",
-    "graphql-yoga": "^5.9.0",
+    "graphql-yoga": "^5.10.0",
     "hono": "^4.6.9"
   },
   "devDependencies": {

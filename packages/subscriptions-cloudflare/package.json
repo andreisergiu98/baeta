@@ -49,8 +49,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "graphql-ws": "^5.16.0",
-    "uuid": "^11.0.2"
+    "graphql-ws": "^5.16.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

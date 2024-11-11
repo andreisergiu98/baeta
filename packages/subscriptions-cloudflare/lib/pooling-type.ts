@@ -1,5 +1,3 @@
-import { v4 as uuid } from 'uuid';
-
 export type PoolingType = 'global' | 'colo' | 'continent' | 'none';
 
 function parseCfPropertyWithFallback(property: unknown, fallback: string) {
@@ -18,6 +16,6 @@ export function getPoolingId(request: Request, poolingType: PoolingType): string
 		case 'continent':
 			return parseCfPropertyWithFallback(request.cf?.continent, 'global');
 		case 'none':
-			return uuid();
+			return crypto.randomUUID();
 	}
 }

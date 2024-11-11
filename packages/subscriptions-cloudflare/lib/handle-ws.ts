@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { getPoolingId } from './pooling-type.ts';
 import type { SubscriptionsOptions } from './subscription.ts';
 
@@ -19,7 +18,7 @@ export function handleWS<Env, Context, ContextParams>(
 	const stubId = connectionPool.idFromName(poolingId);
 	const stub = connectionPool.get(stubId);
 
-	const connectionId = uuid();
+	const connectionId = crypto.randomUUID();
 
 	return stub.fetch(
 		`https://ws-connections-durable-object.internal/connect/${connectionId}`,

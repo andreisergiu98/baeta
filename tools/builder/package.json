@@ -27,8 +27,8 @@
   "type": "module",
   "exports": {
     "./tsup": {
-      "import": "./tsup.js",
-      "types": "./tsup.d.ts"
+      "types": "./tsup.d.ts",
+      "import": "./tsup.js"
     }
   },
   "bin": {

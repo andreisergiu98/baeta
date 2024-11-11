@@ -27,19 +27,19 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./ink": {
+      "types": "./dist/ink/index.d.ts",
       "import": "./dist/ink/index.js",
-      "require": "./dist/ink/index.cjs",
-      "types": "./dist/ink/index.d.ts"
+      "require": "./dist/ink/index.cjs"
     },
     "./sdk": {
+      "types": "./dist/sdk/index.d.ts",
       "import": "./dist/sdk/index.js",
-      "require": "./dist/sdk/index.cjs",
-      "types": "./dist/sdk/index.d.ts"
+      "require": "./dist/sdk/index.cjs"
     }
   },
   "types": "dist/index.d.ts",

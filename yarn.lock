@@ -2614,6 +2614,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    ava: "npm:^6.2.0"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -2624,6 +2625,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    ava: "npm:^6.2.0"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -2645,6 +2647,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.9.0"
+    ava: "npm:^6.2.0"
     typescript: "npm:^5.6.3"
     upath: "npm:^2.0.1"
   languageName: unknown

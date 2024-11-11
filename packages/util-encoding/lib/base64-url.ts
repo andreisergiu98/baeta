@@ -19,9 +19,10 @@ export function decodeBase64Url(base64Url: string): string {
 	const base64Encoded = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 	const padding = createPadding(base64Url.length);
 	const base64WithPadding = base64Encoded + padding;
-
 	const binaryString = decodeBase64(base64WithPadding);
+
 	const bytes = new Uint8Array(binaryString.length);
+
 	for (let i = 0; i < binaryString.length; i++) {
 		bytes[i] = binaryString.charCodeAt(i);
 	}

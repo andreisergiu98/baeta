@@ -23,7 +23,8 @@ import {
 export const preset: Types.OutputPreset<ModulesConfig> = {
 	buildGeneratesSection: (options) => {
 		const { baseOutputDir } = options;
-		const { baseTypesPath, extensionsPath, encapsulateModuleTypes } = options.presetConfig;
+		const { baseTypesPath, extensionsPath, encapsulateModuleTypes, importExtension } =
+			options.presetConfig;
 
 		const requireRootResolvers = getConfigValue(options?.presetConfig.requireRootResolvers, false);
 
@@ -223,7 +224,8 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 			schemaAst: options.schemaAst,
 		};
 
-		const baseTypesFilename = baseTypesPath.replace(/\.(js|ts|d.ts)$/, '');
+		const baseTypesFilename =
+			baseTypesPath.replace(/\.(js|ts|d.ts)$/, '') + (importExtension || '');
 		const baseTypesDir = stripFilename(baseOutput.filename);
 
 		// One file per each module

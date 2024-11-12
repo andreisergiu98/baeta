@@ -46,6 +46,7 @@ export async function generate(options: NormalizedGeneratorOptions) {
 			filename: rootConfig.moduleDefinitionName,
 			encapsulateModuleTypes: 'none',
 			extensionsPath: options.extensions,
+			importExtension: options.importExtension,
 		},
 		schema: result.outputSchema,
 		schemaAst: result.outputSchemaAst,

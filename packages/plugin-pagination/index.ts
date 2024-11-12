@@ -38,12 +38,12 @@ function printPageInfo(addFields: string[] = []) {
 	]);
 }
 
-function printExport(moduleDefinitionName: string, moduleName: string) {
+function printExport(moduleDefinitionName: string, moduleName: string, importExt = '') {
 	const parsed = parse(moduleDefinitionName);
 	const method = getModuleGetName(moduleName);
 	const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
-	return `import { ${method} } from "./${importName}";
+	return `import { ${method} } from "./${importName}${importExt}";
 
 export const ${getModuleVariableName(moduleName)} = ${method}();
 `;
@@ -129,7 +129,11 @@ export function paginationPlugin(options: PaginationOptions) {
 
 			ctx.fileManager.createAndAdd(
 				createExportFilename(moduleDir),
-				printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
+				printExport(
+					ctx.generatorOptions.moduleDefinitionName,
+					moduleName,
+					ctx.generatorOptions.importExtension,
+				),
 				'pagination',
 			);
 

@@ -2,6 +2,7 @@
 
 /** @type {import('@yarnpkg/types')} */
 const { defineConfig } = require('@yarnpkg/types');
+const path = require('node:path');
 
 /**
  * This rule will enforce that a workspace MUST depend on the same version of
@@ -24,6 +25,31 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 			dependency.update(otherDependency.range);
 		}
 	}
+}
+
+/**
+ * This rule will enforce consistent metadata exports across all packages.
+ * @param {import('@yarnpkg/types').Yarn.Constraints.Workspace} workspace
+ */
+function enforceConsistentMetadataExports(workspace) {
+	if (!workspace.manifest.exports) {
+		workspace.unset('exports');
+		return;
+	}
+
+	const exports = {};
+
+	for (const key in workspace.manifest.exports) {
+		const dir = key === '.' ? '' : key.replace('./', '');
+
+		exports[key] = {
+			types: `./${path.join('./dist', dir, 'index.d.ts')}`,
+			import: `./${path.join('./dist', dir, 'index.js')}`,
+			require: `./${path.join('./dist', dir, 'index.cjs')}`,
+		};
+	}
+
+	workspace.set('exports', exports);
 }
 
 /**
@@ -68,6 +94,8 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 			workspace.set('ava.extensions.ts', 'module');
 			workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
+
+			enforceConsistentMetadataExports(workspace);
 		}
 	}
 }

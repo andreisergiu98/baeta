@@ -1,5 +1,14 @@
 # @baeta/generator
 
+## 0.1.2
+
+### Patch Changes
+
+- [`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - revert fileblock instead of removing the file
+
+- Updated dependencies [[`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b)]:
+  - @baeta/generator-sdk@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

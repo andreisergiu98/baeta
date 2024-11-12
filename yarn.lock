@@ -2039,7 +2039,7 @@ __metadata:
     graphql-scalars: "npm:^1.23.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     prisma: "npm:^5.22.0"
     typescript: "npm:^5.6.3"
     ws: "npm:^8.18.0"
@@ -2069,7 +2069,7 @@ __metadata:
     graphql-scalars: "npm:^1.23.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     ioredis: "npm:^5.4.1"
     prisma: "npm:^5.22.0"
     typescript: "npm:^5.6.3"
@@ -2099,7 +2099,7 @@ __metadata:
     graphql-scalars: "npm:^1.23.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     ioredis: "npm:^5.4.1"
     prisma: "npm:^5.22.0"
     typescript: "npm:^5.6.3"
@@ -2120,11 +2120,11 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20241106.0"
     graphql: "npm:^16.9.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     hono: "npm:^4.6.9"
     miniflare: "npm:^3.20241106.0"
     typescript: "npm:^5.6.3"
-    wrangler: "npm:^3.86.0"
+    wrangler: "npm:^3.86.1"
   languageName: unknown
   linkType: soft
 
@@ -2139,11 +2139,11 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20241106.0"
     graphql: "npm:^16.9.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     hono: "npm:^4.6.9"
     miniflare: "npm:^3.20241106.0"
     typescript: "npm:^5.6.3"
-    wrangler: "npm:^3.86.0"
+    wrangler: "npm:^3.86.1"
   languageName: unknown
   linkType: soft
 
@@ -2159,7 +2159,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.9.0"
     graphql: "npm:^16.9.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -2179,7 +2179,7 @@ __metadata:
     "@graphql-tools/utils": "npm:^10.5.5"
     "@types/node": "npm:^22.9.0"
     graphql: "npm:^16.9.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -2204,7 +2204,7 @@ __metadata:
     graphql-scalars: "npm:^1.23.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     prisma: "npm:^5.22.0"
     typescript: "npm:^5.6.3"
     ws: "npm:^8.18.0"
@@ -2232,7 +2232,7 @@ __metadata:
     graphql-scalars: "npm:^1.23.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     prisma: "npm:^5.22.0"
     typescript: "npm:^5.6.3"
     ws: "npm:^8.18.0"
@@ -2253,7 +2253,7 @@ __metadata:
     express: "npm:^4.21.1"
     graphql: "npm:^16.9.0"
     graphql-scalars: "npm:^1.23.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -2270,7 +2270,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.9.0"
     graphql: "npm:^16.9.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -2288,7 +2288,7 @@ __metadata:
     "@types/node": "npm:^22.9.0"
     graphql: "npm:^16.9.0"
     graphql-subscriptions: "npm:^2.0.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -2308,7 +2308,7 @@ __metadata:
     graphql: "npm:^16.9.0"
     graphql-subscriptions: "npm:^2.0.0"
     graphql-ws: "npm:^5.16.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     typescript: "npm:^5.6.3"
     ws: "npm:^8.18.0"
   languageName: unknown
@@ -2326,7 +2326,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.9.0"
     graphql: "npm:^16.9.0"
-    graphql-yoga: "npm:^5.10.0"
+    graphql-yoga: "npm:^5.10.1"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -6334,25 +6334,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@whatwg-node/fetch@npm:^0.9.22":
-  version: 0.9.23
-  resolution: "@whatwg-node/fetch@npm:0.9.23"
+"@whatwg-node/fetch@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "@whatwg-node/fetch@npm:0.10.1"
   dependencies:
-    "@whatwg-node/node-fetch": "npm:^0.6.0"
+    "@whatwg-node/node-fetch": "npm:^0.7.1"
     urlpattern-polyfill: "npm:^10.0.0"
-  checksum: 10/6024a3fcc2175de6a20ea4833c009d0488cf68c01cd235541ec0dba0ce59bb0b0befcd4cd788db0e65b99a5a8755bc00d490dc9d7beeb0c2f35058ef46732fe0
-  languageName: node
-  linkType: hard
-
-"@whatwg-node/node-fetch@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@whatwg-node/node-fetch@npm:0.6.0"
-  dependencies:
-    "@kamilkisiela/fast-url-parser": "npm:^1.1.4"
-    busboy: "npm:^1.6.0"
-    fast-querystring: "npm:^1.1.1"
-    tslib: "npm:^2.6.3"
-  checksum: 10/87ad7c4cc68b24499089166617d16cbe25d9107b4d9354c804232f8c53c4fc27d1e2166471d878390442620e09588aa1d8705a8e2ea5bcc2d728a558ad1156c3
+  checksum: 10/dd1096a33c565ec8bdd1b3d5318f4a49bb4215c78024d166f081af6ef29f3c099a68dd9000576d10345ca23cc35a76500973795fa463617caff3ece407343e8f
   languageName: node
   linkType: hard
 
@@ -6368,13 +6356,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@whatwg-node/server@npm:^0.9.50":
-  version: 0.9.53
-  resolution: "@whatwg-node/server@npm:0.9.53"
+"@whatwg-node/node-fetch@npm:^0.7.1":
+  version: 0.7.2
+  resolution: "@whatwg-node/node-fetch@npm:0.7.2"
+  dependencies:
+    "@kamilkisiela/fast-url-parser": "npm:^1.1.4"
+    busboy: "npm:^1.6.0"
+    fast-querystring: "npm:^1.1.1"
+    tslib: "npm:^2.6.3"
+  checksum: 10/e5204cca4fe1e228c8fb8792db87a5b97e7b76bbba0b9d4197036b5a84c610741f4957c8f0bf5a26360378626cd45ecdf12b5c7b769a68b2f85e99f1d4e3faa9
+  languageName: node
+  linkType: hard
+
+"@whatwg-node/server@npm:^0.9.54":
+  version: 0.9.54
+  resolution: "@whatwg-node/server@npm:0.9.54"
   dependencies:
     "@whatwg-node/fetch": "npm:^0.10.0"
     tslib: "npm:^2.6.3"
-  checksum: 10/40dc6688e85365f5004bb38c62b872f1a6633ab7865903a1ea0134acad948be26ab7dbfe6b5dbbd5e136c6cab4b3f983fb578c7e31e6741a773575626ddd8b30
+  checksum: 10/96386356d3be79f4ab83c03d7ee2b4b0984a8f73cf7e7531fdbbafce84d8e213a159239137fb6718c56fd163bade5d696c981c783662b498bb29c8bb2ed5aba3
   languageName: node
   linkType: hard
 
@@ -11029,9 +11029,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-yoga@npm:^5.10.0":
-  version: 5.10.0
-  resolution: "graphql-yoga@npm:5.10.0"
+"graphql-yoga@npm:^5.10.1":
+  version: 5.10.1
+  resolution: "graphql-yoga@npm:5.10.1"
   dependencies:
     "@envelop/core": "npm:^5.0.1"
     "@graphql-tools/executor": "npm:^1.3.0"
@@ -11039,14 +11039,14 @@ __metadata:
     "@graphql-tools/utils": "npm:^10.3.2"
     "@graphql-yoga/logger": "npm:^2.0.0"
     "@graphql-yoga/subscription": "npm:^5.0.1"
-    "@whatwg-node/fetch": "npm:^0.9.22"
-    "@whatwg-node/server": "npm:^0.9.50"
+    "@whatwg-node/fetch": "npm:^0.10.1"
+    "@whatwg-node/server": "npm:^0.9.54"
     dset: "npm:^3.1.1"
     lru-cache: "npm:^10.0.0"
     tslib: "npm:^2.5.2"
   peerDependencies:
     graphql: ^15.2.0 || ^16.0.0
-  checksum: 10/81f7efb0158d767aa976008b586055049d33b303d9e4c0ee9f2666d70344797181b2f58cbd66e8492851af21e959402ecbbbad7cf676ad2b6de13a81735cad6e
+  checksum: 10/d018cca9212e5ffe76916bc16c17519fc6b40f895ff7955848f293392336b4709a0888812f2314b3a2e530b2a0f4404caf368155dde090e0ef9aea3e2e4f29c7
   languageName: node
   linkType: hard
 
@@ -19388,9 +19388,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrangler@npm:^3.86.0":
-  version: 3.86.0
-  resolution: "wrangler@npm:3.86.0"
+"wrangler@npm:^3.86.1":
+  version: 3.86.1
+  resolution: "wrangler@npm:3.86.1"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:0.3.4"
     "@cloudflare/workers-shared": "npm:0.7.1"
@@ -19423,7 +19423,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 10/109c9bfb8e90594b4a5ff7302eac6aef0785891386dbafa276f75805f28b998e94482e482733d7479636ef9934997d18a2d16f207d36b6de6ad9937e4645ec9e
+  checksum: 10/443d050ddf1c96c810bcef3584b7e29d7bf8a556beee3ea881d45478fc685f0810978eb1e4cc1e452e46ad420f4fbc283680057947cebf45cc2c1a77e9ee7bfb
   languageName: node
   linkType: hard
 

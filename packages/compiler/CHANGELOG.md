@@ -1,5 +1,20 @@
 # @baeta/compiler
 
+## 0.1.1
+
+### Patch Changes
+
+- [#107](https://github.com/andreisergiu98/baeta/pull/107) [`b6e87ce`](https://github.com/andreisergiu98/baeta/commit/b6e87ce347406164a9c0fca49172f1d5d4f50f74) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add support for cjs globals
+
+- [#162](https://github.com/andreisergiu98/baeta/pull/162) [`1c42409`](https://github.com/andreisergiu98/baeta/commit/1c424095518f47a057dd8b475c3c634eeb59bb92) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - normalize compiler src paths
+
+- [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix exports order in package.json
+
+- [#161](https://github.com/andreisergiu98/baeta/pull/161) [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a), [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0)]:
+  - @baeta/util-path@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # @baeta/util-path
 
+## 0.1.1
+
+### Patch Changes
+
+- [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix exports order in package.json
+
+- [#161](https://github.com/andreisergiu98/baeta/pull/161) [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
 ## 0.1.0
 
 ### Minor Changes

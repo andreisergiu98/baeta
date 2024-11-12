@@ -1,5 +1,21 @@
 # @baeta/cli
 
+## 1.0.1
+
+### Patch Changes
+
+- [#157](https://github.com/andreisergiu98/baeta/pull/157) [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - stricter linting, better type safety
+
+- [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix exports order in package.json
+
+- [#161](https://github.com/andreisergiu98/baeta/pull/161) [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`7f1958c`](https://github.com/andreisergiu98/baeta/commit/7f1958c44d1b9bed473e48c875fdaa7020c434fa), [`b6e87ce`](https://github.com/andreisergiu98/baeta/commit/b6e87ce347406164a9c0fca49172f1d5d4f50f74), [`1c42409`](https://github.com/andreisergiu98/baeta/commit/1c424095518f47a057dd8b475c3c634eeb59bb92), [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1), [`9d8d6a1`](https://github.com/andreisergiu98/baeta/commit/9d8d6a15d63579a2e0bdaa07b7efdcf10aff2492), [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a), [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0), [`34877dc`](https://github.com/andreisergiu98/baeta/commit/34877dce585a36abd3bb21adfaa2b84075a416a9), [`b6e87ce`](https://github.com/andreisergiu98/baeta/commit/b6e87ce347406164a9c0fca49172f1d5d4f50f74)]:
+  - @baeta/plugin-graphql@0.1.1
+  - @baeta/compiler@0.1.1
+  - @baeta/generator@0.1.1
+  - @baeta/util-path@0.1.1
+
 ## 1.0.0
 
 ### Minor Changes

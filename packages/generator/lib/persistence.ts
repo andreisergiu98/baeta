@@ -1,19 +1,35 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type { Ctx } from '@baeta/generator-sdk';
+import { type Ctx, FileBlock } from '@baeta/generator-sdk';
 import { createContextualTmpDir } from '../utils/tmp.ts';
 
-export interface PersistedState {
-	version: '1';
-	previousFiles: string[];
-}
+type PreviousFile = {
+	type: 'file';
+	filename: string;
+	content: string;
+	tag: string;
+};
 
-function isVersion1(state: unknown): state is PersistedState {
+type PreviousFileBlock = {
+	type: 'file-block';
+	filename: string;
+	content: string;
+	start: string;
+	end: string;
+	tag: string;
+};
+
+export type PersistedState = {
+	version: '2';
+	previousFiles: Array<PreviousFile | PreviousFileBlock>;
+};
+
+function isVersion2(state: unknown): state is PersistedState {
 	if (typeof state !== 'object' || state === null) {
 		return false;
 	}
 
-	if ((state as Record<string, unknown>).version !== '1') {
+	if ((state as Record<string, unknown>).version !== '2') {
 		return false;
 	}
 
@@ -30,7 +46,7 @@ export async function readState(filename: string) {
 		const content = await fs.readFile(filename, 'utf-8');
 		const state = JSON.parse(content) as PersistedState;
 
-		if (isVersion1(state)) {
+		if (isVersion2(state)) {
 			return state;
 		}
 	} catch (error) {
@@ -41,9 +57,29 @@ export async function readState(filename: string) {
 }
 
 export async function saveState(filename: string, ctx: Ctx) {
+	const previousFiles = ctx.fileManager.getPersistedFiles().map((file) => {
+		if (file instanceof FileBlock) {
+			return {
+				type: 'file-block',
+				filename: file.filename,
+				content: file.content,
+				start: file.start,
+				end: file.end,
+				tag: file.tag,
+			} as const;
+		}
+
+		return {
+			type: 'file',
+			filename: file.filename,
+			content: file.content,
+			tag: file.tag,
+		} as const;
+	});
+
 	const state: PersistedState = {
-		version: '1',
-		previousFiles: ctx.fileManager.getPersistedFileNames(),
+		version: '2',
+		previousFiles,
 	};
 
 	try {

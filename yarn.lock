@@ -2624,6 +2624,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/typed-pubsub@workspace:packages/typed-pubsub":
+  version: 0.0.0-use.local
+  resolution: "@baeta/typed-pubsub@workspace:packages/typed-pubsub"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    ava: "npm:^6.2.0"
+    graphql-subscriptions-v2: "npm:graphql-subscriptions@^2.0.0"
+    graphql-subscriptions-v3: "npm:graphql-subscriptions@^3.0.0"
+    typescript: "npm:^5.6.3"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/util-encoding@workspace:^, @baeta/util-encoding@workspace:packages/util-encoding":
   version: 0.0.0-use.local
   resolution: "@baeta/util-encoding@workspace:packages/util-encoding"
@@ -10998,7 +11011,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-subscriptions@npm:^2.0.0":
+"graphql-subscriptions-v2@npm:graphql-subscriptions@^2.0.0, graphql-subscriptions@npm:^2.0.0":
   version: 2.0.0
   resolution: "graphql-subscriptions@npm:2.0.0"
   dependencies:
@@ -11006,6 +11019,15 @@ __metadata:
   peerDependencies:
     graphql: ^15.7.2 || ^16.0.0
   checksum: 10/fcf47bd8cef90f3d38f07b49b4b0e70514c22d56e3604a6cde03a250d3129a6c5b3e8420953a6fe5dab68e48d092a4d13fa39bcc61610bdd6c4a0804b9ee2f82
+  languageName: node
+  linkType: hard
+
+"graphql-subscriptions-v3@npm:graphql-subscriptions@^3.0.0":
+  version: 3.0.0
+  resolution: "graphql-subscriptions@npm:3.0.0"
+  peerDependencies:
+    graphql: ^15.7.2 || ^16.0.0
+  checksum: 10/9dbee94d1f8a8742631e6deba33fed4a688b893bb5e287c346b5d01a237b80f96eb4ed2576a3b44c608e553cfd1f2cb400f88b0ffc882cb4effaa4db789f1ce0
   languageName: node
   linkType: hard
 

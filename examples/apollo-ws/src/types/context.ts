@@ -1,5 +1,7 @@
-import type { PubSubMap, TypedPubsub } from '../lib/pubsub.ts';
+import type { TypedPubSub } from '@baeta/core';
+import type { PubSub } from 'graphql-subscriptions';
+import type { PubSubMap } from '../lib/pubsub.ts';
 
 export type Context = {
-	pubsub: TypedPubsub<PubSubMap>;
+	pubsub: TypedPubSub<PubSub, PubSubMap>;
 };

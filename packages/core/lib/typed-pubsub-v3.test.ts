@@ -1,6 +1,6 @@
 import testFn, { type TestFn } from 'ava';
 import { PubSub } from 'graphql-subscriptions-v3';
-import { TypedPubSubV3 } from './typed-pubsub.ts';
+import { type TypedPubSub, createTypedPubSub } from './typed-pubsub.ts';
 
 interface TestEventMap {
 	'user:created': { id: string; name: string };
@@ -8,7 +8,7 @@ interface TestEventMap {
 }
 
 type Ctx = {
-	pubsub: TypedPubSubV3<PubSub, TestEventMap>;
+	pubsub: TypedPubSub<PubSub, TestEventMap>;
 	originalPubsub: PubSub;
 };
 
@@ -24,7 +24,7 @@ function createAsyncCallback<T = null>() {
 
 test.beforeEach((t) => {
 	const pubsub = new PubSub();
-	const typedPubSub = new TypedPubSubV3<PubSub, TestEventMap>(pubsub);
+	const typedPubSub = createTypedPubSub<PubSub, TestEventMap>(pubsub);
 	t.context = {
 		pubsub: typedPubSub,
 		originalPubsub: pubsub,
@@ -32,7 +32,7 @@ test.beforeEach((t) => {
 });
 
 test('channel prefix should work', async (t) => {
-	const pubsub = new TypedPubSubV3<PubSub, TestEventMap>(t.context.originalPubsub, {
+	const pubsub = createTypedPubSub<PubSub, TestEventMap>(t.context.originalPubsub, {
 		prefix: 'test:',
 	});
 

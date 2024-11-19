@@ -98,10 +98,10 @@ class TypedPubSubBase<Engine extends PubSubEngineBase, Map extends PubSubMap> {
 	};
 }
 
-export class TypedPubSubV2<
-	Engine extends PubSubEngineV2,
-	Map extends PubSubMap,
-> extends TypedPubSubBase<Engine, Map> {
+class TypedPubSubV2<Engine extends PubSubEngineV2, Map extends PubSubMap> extends TypedPubSubBase<
+	Engine,
+	Map
+> {
 	asyncIterator = <C extends keyof Map>(
 		triggers: C | C[],
 		...rest: RestAsyncIteratorFnArgs<Engine['asyncIterator']>
@@ -110,14 +110,41 @@ export class TypedPubSubV2<
 	};
 }
 
-export class TypedPubSubV3<
-	Engine extends PubSubEngineV3,
-	Map extends PubSubMap,
-> extends TypedPubSubBase<Engine, Map> {
+class TypedPubSubV3<Engine extends PubSubEngineV3, Map extends PubSubMap> extends TypedPubSubBase<
+	Engine,
+	Map
+> {
 	asyncIterableIterator = <C extends keyof Map>(
 		triggers: C | C[],
 		...rest: RestAsyncIterableIteratorFnArgs<Engine['asyncIterableIterator']>
 	) => {
 		return this.pubsub.asyncIterableIterator<Map[C]>(this.mapTriggers(triggers), ...rest);
 	};
+}
+
+export type TypedPubSub<
+	Engine extends PubSubEngineV2 | PubSubEngineV3,
+	Map extends PubSubMap,
+> = Engine extends PubSubEngineV3
+	? TypedPubSubV3<Engine, Map>
+	: Engine extends PubSubEngineV2
+		? TypedPubSubV2<Engine, Map>
+		: never;
+
+export function createTypedPubSub<
+	Engine extends PubSubEngineV2 | PubSubEngineV3,
+	Map extends PubSubMap,
+>(pubsub: Engine, options?: TypedPubSubOptions): TypedPubSub<Engine, Map> {
+	if ('asyncIterator' in pubsub) {
+		return new TypedPubSubV2<PubSubEngineV2, Map>(pubsub, options) as TypedPubSub<Engine, Map>;
+	}
+
+	if ('asyncIterableIterator' in pubsub) {
+		return new TypedPubSubV3<PubSubEngineV3, PubSubMap>(pubsub, options) as TypedPubSub<
+			Engine,
+			Map
+		>;
+	}
+
+	throw new Error('Unsupported PubSub');
 }

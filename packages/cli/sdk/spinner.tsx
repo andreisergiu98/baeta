@@ -1,5 +1,5 @@
 import { Text } from 'ink';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const spinner = {
 	interval: 80,
@@ -11,7 +11,7 @@ export function Spinner() {
 
 	const nextFrame = useCallback(() => {
 		setFrame((previousFrame) => {
-			if (previousFrame >= spinner.frames.length) {
+			if (previousFrame >= spinner.frames.length - 1) {
 				return 0;
 			}
 			return previousFrame + 1;

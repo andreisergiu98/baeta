@@ -21,7 +21,7 @@ interface PubSubEngineV2 extends PubSubEngineBase {
 interface PubSubEngineV3 extends PubSubEngineBase {
 	asyncIterableIterator: <T>(
 		triggers: string | readonly string[],
-		...rest: Any
+		...rest: Any[]
 	) => AsyncIterableIterator<T>;
 }
 

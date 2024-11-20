@@ -1,5 +1,6 @@
 import testFn, { type TestFn } from 'ava';
-import { PubSub } from 'graphql-subscriptions-v2';
+import { PubSub as PubSubV2 } from 'graphql-subscriptions-v2';
+import { PubSub as PubSubV3 } from 'graphql-subscriptions-v3';
 import { type TypedPubSub, createTypedPubSub } from './typed-pubsub.ts';
 
 interface TestEventMap {
@@ -8,8 +9,8 @@ interface TestEventMap {
 }
 
 type Ctx = {
-	pubsub: TypedPubSub<PubSub, TestEventMap>;
-	originalPubsub: PubSub;
+	pubsub: TypedPubSub<PubSubV2, TestEventMap>;
+	originalPubsub: PubSubV2;
 };
 
 const test = testFn as TestFn<Ctx>;
@@ -23,8 +24,8 @@ function createAsyncCallback<T = null>() {
 }
 
 test.beforeEach((t) => {
-	const pubsub = new PubSub();
-	const typedPubSub = createTypedPubSub<PubSub, TestEventMap>(pubsub);
+	const pubsub = new PubSubV2();
+	const typedPubSub = createTypedPubSub<PubSubV2, TestEventMap>(pubsub);
 	t.context = {
 		pubsub: typedPubSub,
 		originalPubsub: pubsub,
@@ -94,7 +95,7 @@ test('unsubscribe should stop receiving messages after unsubscribe', async (t) =
 });
 
 test('channel prefix should work', async (t) => {
-	const pubsub = createTypedPubSub<PubSub, TestEventMap>(t.context.originalPubsub, {
+	const pubsub = createTypedPubSub<PubSubV2, TestEventMap>(t.context.originalPubsub, {
 		prefix: 'test:',
 	});
 
@@ -158,6 +159,66 @@ test('asyncIterator should create iterator for multiple triggers', async (t) => 
 	const { pubsub } = t.context;
 
 	const iterator = pubsub.asyncIterator(['user:created', 'user:updated']);
+	const createdPayload = { id: '1', name: 'John' };
+	const updatedPayload = { id: '1', updates: { name: 'John Doe' } };
+
+	const createPromise = iterator.next();
+	pubsub.publish('user:created', createdPayload);
+	const createResult = await createPromise;
+
+	const updatePromise = iterator.next();
+	pubsub.publish('user:updated', updatedPayload);
+	const updateResult = await updatePromise;
+
+	t.deepEqual(createResult.value, createdPayload);
+	t.deepEqual(updateResult.value, updatedPayload);
+});
+
+test('asyncIterableIterator should work with channel prefix', async (t) => {
+	const originalPubsub = new PubSubV3();
+
+	const pubsub = createTypedPubSub<PubSubV3, TestEventMap>(originalPubsub, {
+		prefix: 'test:',
+	});
+
+	const mockedUser = {
+		id: '1',
+		name: 'John',
+	};
+
+	originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
+
+	const typedAsyncIterator = pubsub.asyncIterableIterator('user:created');
+
+	const asyncIteratorPromise = typedAsyncIterator.next();
+
+	originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
+
+	t.deepEqual((await asyncIteratorPromise).value, mockedUser);
+});
+
+test('asyncIterableIterator should create iterator for single trigger', async (t) => {
+	const originalPubsub = new PubSubV3();
+	const pubsub = createTypedPubSub<PubSubV3, TestEventMap>(originalPubsub);
+
+	const iterator = pubsub.asyncIterableIterator('user:created');
+	const payload = { id: '1', name: 'John' };
+
+	const resultPromise = iterator.next();
+
+	pubsub.publish('user:created', payload);
+
+	const result = await resultPromise;
+
+	t.deepEqual(result.value, payload);
+	t.false(result.done);
+});
+
+test('asyncIterableIterator should create iterator for multiple triggers', async (t) => {
+	const originalPubsub = new PubSubV3();
+	const pubsub = createTypedPubSub<PubSubV3, TestEventMap>(originalPubsub);
+
+	const iterator = pubsub.asyncIterableIterator(['user:created', 'user:updated']);
 	const createdPayload = { id: '1', name: 'John' };
 	const updatedPayload = { id: '1', updates: { name: 'John Doe' } };
 

@@ -40,7 +40,7 @@ Mutation.updateUser(({ args, ctx }) => {
 
 Subscription.userUpdated({
 	subscribe(params) {
-		return params.ctx.pubsub.asyncIterator('user-updated');
+		return params.ctx.pubsub.subscribe('user-updated');
 	},
 	resolve(params) {
 		return params.payload;

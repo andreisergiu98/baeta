@@ -33,7 +33,6 @@
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
     "graphql": "^16.9.0",
-    "graphql-subscriptions": "^2.0.0",
     "graphql-yoga": "^5.10.1"
   },
   "devDependencies": {

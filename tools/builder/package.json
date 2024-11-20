@@ -32,6 +32,7 @@
     }
   },
   "bin": {
+    "madge": "./bin/madge.js",
     "prep": "./bin/prep.cjs",
     "tsup": "./bin/tsup.js"
   },

@@ -1,7 +1,7 @@
 import type { GraphQLFieldResolver } from 'graphql';
 import { createObjectLens } from '../utils/object.ts';
 import type { NativeMiddleware } from './middleware.ts';
-import type { MiddlewareMap, ResolversMap, SubscriptionsResolvers } from './resolver-mapper.ts';
+import type { MiddlewareMap, ResolversMap, SubscriptionsResolvers } from './resolver-map.ts';
 
 export function composeResolvers(resolvers: ResolversMap, middlewareMap: MiddlewareMap = {}) {
 	const composed = copyResolvers(resolvers);

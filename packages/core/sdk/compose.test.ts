@@ -3,7 +3,7 @@ import type { GraphQLResolveInfo } from 'graphql';
 import { forgeNativeResolver, forgeResolverArgs, getResolverFromMap } from './__test__/utils.ts';
 import { chainMiddlewares, composeResolvers } from './compose.ts';
 import type { NativeMiddleware } from './middleware.ts';
-import type { MiddlewareMap } from './resolver-mapper.ts';
+import type { MiddlewareMap } from './resolver-map.ts';
 
 function createMockedResolverMap() {
 	return {

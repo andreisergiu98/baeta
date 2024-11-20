@@ -113,10 +113,10 @@ Query.users.$auth({
 
 const { User, Query } = getUserModule();
 
-export const userCache = User.$createCache({});
+export const userCache = User.$createCache();
 
-Query.user.$useCache(userCache, {});
-Query.users.$useCache(userCache, {});
+Query.user.$useCache(userCache);
+Query.users.$useCache(userCache);
 
 Mutation.updateUser.$use(async (params, next) => {
 	const user = await next();

@@ -1,19 +1,14 @@
-import type { ItemRef, RefCompatibleRoot } from './ref.ts';
+import type { ItemRef } from './ref.ts';
 
 export interface DefaultStoreOptions {
 	ttl?: number;
 }
 
-type StoreOptionsBase = DefaultStoreOptions & {
+export interface StoreOptions<Root> extends DefaultStoreOptions {
 	revision?: number;
-};
-
-type StoreOptionsRefFn<Root> = {
 	getRef?: (root: Root) => ItemRef;
-};
+}
 
-type StoreOptionsRef<Root> = Root extends RefCompatibleRoot
-	? StoreOptionsRefFn<Root>
-	: Required<StoreOptionsRefFn<Root>>;
-
-export type StoreOptions<Root> = StoreOptionsBase & StoreOptionsRef<Root>;
+export interface RequiredStoreOptions<Root> extends StoreOptions<Root> {
+	getRef: (root: Root) => ItemRef;
+}

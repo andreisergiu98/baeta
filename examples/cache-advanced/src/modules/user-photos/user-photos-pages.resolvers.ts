@@ -7,7 +7,7 @@ import type * as Types from '../../__generated__/types.ts';
 
 const { User, UserPhoto } = getUserPhotosModule();
 
-const userPhotoCache = UserPhoto.$createCache({});
+const userPhotoCache = UserPhoto.$createCache();
 
 export function userPhotosConnectionRef() {
 	return new CacheRef<Types.UserPhoto[], Types.User, Types.UserPhotosConnectionArgs>(

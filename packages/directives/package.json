@@ -53,7 +53,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@graphql-tools/schema": "^10.0.7",
+    "@graphql-tools/schema": "^10.0.8",
     "@types/is-url": "^1.2.32",
     "ava": "^6.2.0",
     "graphql": "^16.9.0",

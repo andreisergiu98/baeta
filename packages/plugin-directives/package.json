@@ -51,7 +51,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.1",
     "graphql": "^16.9.0",
     "typescript": "^5.6.3"
   },

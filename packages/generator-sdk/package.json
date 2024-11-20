@@ -54,7 +54,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/micromatch": "^4.0.9",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.1",
     "typescript": "^5.6.3"
   },
   "engines": {

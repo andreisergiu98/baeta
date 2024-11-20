@@ -76,10 +76,10 @@ import { getUserModule } from './typedef.ts';
 
 const { User, Query } = getUserModule();
 
-export const userCache = User.$createCache({});
+export const userCache = User.$createCache();
 
-Query.user.$useCache(userCache, {});
-Query.users.$useCache(userCache, {});
+Query.user.$useCache(userCache);
+Query.users.$useCache(userCache);
 ```
 ## Compatibility
 

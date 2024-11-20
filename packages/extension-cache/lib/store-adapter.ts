@@ -4,8 +4,8 @@ import { log } from '@baeta/util-log';
 import DataLoader from 'dataloader';
 import { flatten } from 'flat';
 import type { CacheArgs } from './cache-args.ts';
-import type { MiddlewareOptions } from './middleware-options.ts';
-import type { CacheRef, ItemRef, ParentRef } from './ref.ts';
+import type { MiddlewareOptions, RequiredMiddlewareOptions } from './middleware-options.ts';
+import type { CacheRef, ItemRef, ParentRef, RefCompatibleRoot } from './ref.ts';
 import type { StoreOptions } from './store-options.ts';
 
 export type QueryMatching<Args> = {
@@ -186,14 +186,19 @@ export abstract class StoreAdapter<Item> {
 
 	createMiddleware = <Result extends null | Item | Item[] | Array<Item | null>, Root, Args>(
 		queryRef: CacheRef<Result, Root, Args>,
-		options: MiddlewareOptions<Root>,
+		...args: Root extends RefCompatibleRoot
+			? [options?: MiddlewareOptions<Root>]
+			: [options: RequiredMiddlewareOptions<Root>]
 	): Middleware<Result, Root, unknown, Args> => {
 		return async (params, next): Promise<Result> => {
+			const [options] = args;
+
 			const parentRef = options?.getRootRef
 				? options.getRootRef(params.root)
 				: this.getRefFallback(params.root);
 
 			const matcher = { parentRef, args: params.args };
+
 			const cached = await this.getQueryResult(queryRef, matcher).catch((err) => {
 				log.error(err, `Failed to get query result for ${queryRef}. Proceeding with resolver.`);
 				return null;

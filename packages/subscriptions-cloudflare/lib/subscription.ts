@@ -1,19 +1,9 @@
-import type { GraphQLSchema } from 'graphql';
 import { handleWS } from './handle-ws.ts';
-import type { PoolingType } from './pooling-type.ts';
 import { publish } from './publish.ts';
 import type { DefaultPubSubMap } from './pubsub-map.ts';
 import { subscribe } from './subscribe.ts';
-import type { SubscriptionDatabase } from './subscription-database.ts';
+import type { SubscriptionsOptions } from './subscription-options.ts';
 import { createWsConnectionsClass } from './ws-connections.ts';
-
-export interface SubscriptionsOptions<Env, Context, ContextParams> {
-	schema: GraphQLSchema;
-	poolingType?: PoolingType;
-	context?: ContextLoader<Env, Context, ContextParams>;
-	getDatabase: (env: Env) => SubscriptionDatabase;
-	getWSConnections: (env: Env) => DurableObjectNamespace;
-}
 
 export type Publish<Map extends DefaultPubSubMap> = <C extends keyof Map, P extends Map[C]>(
 	topic: C,
@@ -23,11 +13,6 @@ export type Publish<Map extends DefaultPubSubMap> = <C extends keyof Map, P exte
 export type Subscribe<Map extends DefaultPubSubMap> = <C extends keyof Map, P extends Map[C]>(
 	topic: C,
 ) => AsyncIterator<P>;
-
-interface ContextLoader<Env, Context, ContextParams> {
-	createContext: (params: ContextParams, env: Env, executionContext: ExecutionContext) => Context;
-	getContextParams: (request: Request, env: Env) => ContextParams;
-}
 
 export function createCloudflareSubscription<
 	Env,

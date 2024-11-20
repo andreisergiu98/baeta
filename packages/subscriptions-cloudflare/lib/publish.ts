@@ -1,7 +1,7 @@
 import { execute, parse } from 'graphql';
 import { MessageType, type NextMessage } from 'graphql-ws';
 import type { SubscriptionInfo } from './subscribe.ts';
-import type { SubscriptionsOptions } from './subscription.ts';
+import type { SubscriptionsOptions } from './subscription-options.ts';
 
 export interface PublishData {
 	message: NextMessage;

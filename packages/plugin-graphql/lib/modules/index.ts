@@ -1,4 +1,4 @@
-import { join, relative, resolve } from '@baeta/util-path';
+import { basename, join, relative, resolve } from '@baeta/util-path';
 import type { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
 import type { Source } from '@graphql-tools/utils';
@@ -225,7 +225,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 		};
 
 		const baseTypesFilename =
-			baseTypesPath.replace(/\.(js|ts|d.ts)$/, '') + (importExtension || '');
+			basename(baseTypesPath).replace(/\.(js|ts|d.ts)$/, '') + (importExtension || '');
 		const baseTypesDir = stripFilename(baseOutput.filename);
 
 		// One file per each module

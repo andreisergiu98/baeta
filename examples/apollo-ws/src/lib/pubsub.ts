@@ -1,4 +1,4 @@
-import { createTypedPubSub } from '@baeta/core';
+import { createTypedPubSub } from '@baeta/subscriptions-pubsub';
 import { PubSub } from 'graphql-subscriptions';
 import type { User } from '../__generated__/types.ts';
 

@@ -1,6 +1,6 @@
 {
-  "name": "@baeta/core",
-  "version": "0.1.1",
+  "name": "@baeta/subscriptions-pubsub",
+  "version": "0.0.0",
   "keywords": [
     "baeta",
     "graphql",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/core"
+    "directory": "packages/subscriptions-pubsub"
   },
   "license": "MIT",
   "author": {
@@ -30,11 +30,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./sdk": {
-      "types": "./dist/sdk/index.d.ts",
-      "import": "./dist/sdk/index.js",
-      "require": "./dist/sdk/index.cjs"
     }
   },
   "types": "dist/index.d.ts",
@@ -49,21 +44,14 @@
     "test": "ava",
     "types": "tsc --noEmit"
   },
-  "dependencies": {
-    "@baeta/errors": "workspace:^",
-    "@graphql-tools/schema": "^10.0.7",
-    "@graphql-tools/utils": "^10.5.5"
-  },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "ava": "^6.2.0",
     "graphql": "^16.9.0",
-    "graphql-tag": "^2.12.6",
+    "graphql-subscriptions-v2": "npm:graphql-subscriptions@^2.0.0",
+    "graphql-subscriptions-v3": "npm:graphql-subscriptions@^3.0.0",
     "typescript": "^5.6.3"
-  },
-  "peerDependencies": {
-    "graphql": "^16.6.0"
   },
   "engines": {
     "node": ">=22.0.0"

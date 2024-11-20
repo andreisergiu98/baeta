@@ -1,9 +1,10 @@
-import type { PubSubMap, TypedPubsub } from '../lib/pubsub.ts';
+import type { PubSub } from 'graphql-yoga';
+import type { PubSubMap } from '../lib/pubsub.ts';
 
 export type Context = {
 	userId?: string;
-	pubsub: TypedPubsub<PubSubMap>;
+	pubsub: PubSub<PubSubMap>;
 };
 
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
+// biome-ignore lint/complexity/noBannedTypes: Empty context
 export type ServerContext = {};

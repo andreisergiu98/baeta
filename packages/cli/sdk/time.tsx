@@ -1,5 +1,5 @@
 import { Text } from 'ink';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 export interface TimeProps {
 	value?: number;

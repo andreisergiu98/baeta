@@ -1,4 +1,4 @@
-import React, { type ComponentProps, type ComponentType } from 'react';
+import type { ComponentProps, ComponentType } from 'react';
 import styles from './feature.module.css';
 
 export interface FeatureProps {

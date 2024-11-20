@@ -2,7 +2,6 @@ import LogoGraphql from '@site/static/img/logo-graphql.svg';
 import LogoModular from '@site/static/img/logo-modular.svg';
 import LogoRocket from '@site/static/img/logo-rocket.svg';
 import LogoTypescript from '@site/static/img/logo-typescript.svg';
-import React from 'react';
 import styles from './feature.module.css';
 import { Feature, type FeatureProps } from './feature.tsx';
 

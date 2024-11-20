@@ -1,5 +1,5 @@
 import { Box, Text } from 'ink';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useConfig } from './config-provider.tsx';
 import { Spinner } from './spinner.tsx';
 

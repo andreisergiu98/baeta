@@ -1,6 +1,6 @@
 import CodeBlock from '@theme/CodeBlock';
 import clsx from 'clsx';
-import React, { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import style from './snippet.module.css';
 
 export interface SnippetProps {

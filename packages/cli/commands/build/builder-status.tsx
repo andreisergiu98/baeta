@@ -1,5 +1,4 @@
 import { Text } from 'ink';
-import React from 'react';
 import { Errors, Layout } from '../../sdk/index.ts';
 import type { TextOutput } from '../../types/text.ts';
 

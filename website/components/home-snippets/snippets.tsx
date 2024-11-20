@@ -1,4 +1,3 @@
-import React from 'react';
 import { Snippet, type SnippetProps } from './snippet.tsx';
 
 const featureList: Array<Omit<SnippetProps, 'idx'>> = [

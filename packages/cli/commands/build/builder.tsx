@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { CompilerOptions } from '@baeta/compiler';
 import type { BuildContext } from '@baeta/compiler/esbuild';
 import type { Subprocess } from 'execa';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { makeErrorMessage, makeErrorOutput, useConfig } from '../../sdk/index.ts';
 import type { TextOutput } from '../../types/text.ts';
 import { dynamicImportCompiler } from '../../utils/compiler.ts';

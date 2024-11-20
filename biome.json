@@ -23,7 +23,8 @@
         "noExportsInTest": "off"
       },
       "correctness": {
-        "useImportExtensions": "error"
+        "useImportExtensions": "error",
+        "noUnusedImports": "warn"
       }
     }
   },

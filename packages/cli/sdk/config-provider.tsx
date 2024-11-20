@@ -1,7 +1,7 @@
 import { EventEmitter } from 'node:events';
 import { Watcher } from '@baeta/generator';
 import path from '@baeta/util-path';
-import React, { type PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
+import { type PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
 import { type LoadedBaetaConfig, loadConfig } from '../lib/config-loader.ts';
 import { createContextProvider } from '../utils/context.ts';
 import { ConfigStatus } from './config-status.tsx';

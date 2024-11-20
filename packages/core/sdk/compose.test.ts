@@ -4,7 +4,6 @@ import { forgeNativeResolver, forgeResolverArgs, getResolverFromMap } from './__
 import { chainMiddlewares, composeResolvers } from './compose.ts';
 import type { NativeMiddleware } from './middleware.ts';
 import type { MiddlewareMap } from './resolver-mapper.ts';
-import type { NativeResolver } from './resolver.ts';
 
 function createMockedResolverMap() {
 	return {

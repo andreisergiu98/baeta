@@ -37,7 +37,7 @@
     "examples:sync": "./examples/sync.sh",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
-    "linter": "biome check .",
+    "linter": "biome check --organize-imports-enabled=true .",
     "prepare": "husky install",
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",

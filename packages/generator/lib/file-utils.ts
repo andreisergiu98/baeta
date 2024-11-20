@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises';
 import { File, FileBlock, type FileManager } from '@baeta/generator-sdk';
 import { readState } from './persistence.ts';
 

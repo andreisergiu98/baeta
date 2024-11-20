@@ -1,7 +1,6 @@
 import CodeBlock from '@theme/CodeBlock';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
-import React from 'react';
 
 interface Props {
 	package: string;

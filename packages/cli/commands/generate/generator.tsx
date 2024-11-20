@@ -6,7 +6,7 @@ import {
 	getGeneratorPlugins,
 } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useConfig } from '../../sdk/index.ts';
 import { flattenArrays } from '../../utils/array.ts';
 import { type GeneratorPluginName, GeneratorStatus } from './generator-status.tsx';

@@ -1,6 +1,5 @@
 import { GraphQLError } from 'graphql';
 import { Text } from 'ink';
-import React from 'react';
 import { Errors, Layout, Spinner, makeErrorOutput } from '../../sdk/index.ts';
 
 export type GeneratorPluginName = {

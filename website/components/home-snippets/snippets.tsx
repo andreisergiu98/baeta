@@ -91,13 +91,15 @@ extend type User {
 			</>
 		),
 		language: 'typescript',
-		snippet: `const { Query, Mutation } = getUserModule();
+		snippet: `import { getUserModule } from './typedef';
+
+const { Query, Mutation } = getUserModule();
 
 Query.users.$auth({
-	$or: {
-		isPublic: true,
-		isLoggedIn: true,
-	},
+    $or: {
+        isPublic: true,
+        isLoggedIn: true,
+    },
 });`,
 	},
 	{
@@ -109,7 +111,7 @@ Query.users.$auth({
 			</>
 		),
 		language: 'typescript',
-		snippet: `import { getUserModule } from './typedef.ts';
+		snippet: `import { getUserModule } from './typedef';
 
 const { User, Query } = getUserModule();
 
@@ -119,9 +121,9 @@ Query.user.$useCache(userCache);
 Query.users.$useCache(userCache);
 
 Mutation.updateUser.$use(async (params, next) => {
-	const user = await next();
-	await userCache.save(user);
-	return user;
+    const user = await next();
+    await userCache.save(user);
+    return user;
 });
 `,
 	},

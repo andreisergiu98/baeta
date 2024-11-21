@@ -1,0 +1,170 @@
+---
+sidebar_position: 80
+---
+
+# Subscriptions
+
+Baeta provides type-safe real-time functionality through GraphQL subscriptions.
+
+## PubSub Setup
+
+While you can use any PubSub implementation directly, Baeta offers a typed wrapper through `@baeta/subscriptions-pubsub` for enhanced type safety:
+
+:::warning
+`graphql-subscriptions` is for a single server instance. If you need to scale your application, consider using a more robust solution like `graphql-redis-subscriptions`.
+:::
+
+```typescript
+// src/lib/pubsub.ts
+import { createTypedPubSub } from '@baeta/subscriptions-pubsub';
+import { PubSub } from 'graphql-subscriptions';
+import type { User } from '../__generated__/types';
+
+export type PubSubMap = {
+  'user-created': string;
+  'user-updated': User;
+};
+
+export const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub());
+// Or use PubSub directly without the wrapper
+// export const pubsub = new PubSub();
+```
+
+## Context Integration
+
+Add PubSub to your context:
+
+```typescript
+// src/types/context.ts
+import type { TypedPubSub } from '@baeta/subscriptions-pubsub';
+import type { PubSubMap } from '../lib/pubsub';
+
+export type Context = {
+  pubsub: TypedPubSub<PubSubMap>;
+};
+```
+
+## Schema Definition
+
+Define your subscription types:
+
+```graphql
+# src/modules/user/user.gql
+type Subscription {
+  userCreated: User!
+  userUpdated: User!
+}
+```
+
+Implementing Subscriptions
+
+:::note
+The subscription API differs between versions:
+- Use `asyncIterator` for graphql-subscriptions v2.x
+- Use `asyncIterableIterator` for graphql-subscriptions v3.x
+:::
+
+```typescript
+// src/modules/user/resolvers.ts
+import { db } from '../../lib/db/prisma';
+import { getUserModule } from './typedef';
+
+const { Subscription } = getUserModule();
+
+// Subscription with database lookup
+Subscription.userCreated({
+  subscribe(params) {
+    return params.ctx.pubsub.asyncIterableIterator('user-created');
+  },
+  resolve(params) {
+    return db.user.findFirstOrThrow({ 
+      where: { id: params.payload } 
+    });
+  },
+});
+
+// Direct subscription
+Subscription.userUpdated({
+  subscribe({ ctx }) {
+    return ctx.pubsub.asyncIterableIterator('user-updated');
+  },
+  resolve({ payload }) {
+    return payload;
+  },
+});
+```
+
+## Publishing Events
+
+Publish events from your mutations or other resolvers:
+
+```typescript
+// Publishing after user update
+Mutation.updateUser.$use(async ({ ctx }, next) => {
+  const user = await next();
+  if (user) {
+    ctx.pubsub.publish('user-updated', user);
+  }
+  return user;
+});
+
+// Publishing after user creation
+Mutation.createUser(async ({ args, ctx }) => {
+  const user = await ctx.db.user.create({
+    data: args.data
+  });
+  ctx.pubsub.publish('user-created', user.id);
+  return user;
+});
+```
+
+## Production Setup
+
+For production environments, consider using a multi-instance solution:
+
+```typescript
+// src/lib/pubsub.ts
+import { createTypedPubSub } from '@baeta/subscriptions-pubsub';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import * as Redis from 'ioredis';
+import type { PubSubMap } from './types';
+
+const options = {
+  host: REDIS_DOMAIN_NAME,
+  port: PORT_NUMBER,
+};
+
+const redisPubSub = new RedisPubSub({
+  publisher: new Redis(options),
+  subscriber: new Redis(options)
+});
+
+export const pubsub = createTypedPubSub<RedisPubSub, PubSubMap>(redisPubSub);
+```
+
+## Type Safety
+
+The TypedPubSub wrapper ensures type safety for both publishing and subscribing:
+
+```typescript
+// TypeScript will error if channel or payload type doesn't match
+ctx.pubsub.publish('user-updated', 123); // Error: payload should be User
+ctx.pubsub.publish('invalid-channel', user); // Error: channel doesn't exist
+```
+
+## Alternative Solutions
+
+While this documentation uses `graphql-subscriptions`, you can also use other PubSub implementations:
+
+### graphql-yoga
+
+```typescript
+import { createPubSub } from 'graphql-yoga';
+
+export type PubSubMap = {
+  'user-created': [string];
+  'user-updated': [User];
+};
+
+export const pubsub = createPubSub<PubSubMap>();
+```

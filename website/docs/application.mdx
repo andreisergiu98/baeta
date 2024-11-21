@@ -1,0 +1,107 @@
+---
+sidebar_position: 50
+---
+
+# Application
+
+This guide explains how to set up a Baeta application and integrate it with a GraphQL server.
+
+## Manual Module Registration
+
+Without autoloading, you need to manually register your modules:
+
+```typescript
+// src/modules/user/index.ts
+import "./resolvers";
+import { getUserModule } from "./typedef";
+
+export const userModule = getUserModule();
+
+// src/app.ts
+import { createApplication } from "@baeta/core";
+import { userModule } from "./modules/user";
+import { postModule } from "./modules/post";
+import { scalarsModule } from "./modules/scalars";
+
+const baeta = createApplication({
+  modules: [userModule, postModule, scalarsModule],
+});
+```
+
+## Automatic Registration (Autoloading)
+
+Using `@baeta/plugin-autoload` simplifies the setup:
+
+```typescript
+// baeta.ts
+import { defineConfig } from "@baeta/cli";
+import { autoloadPlugin } from "@baeta/plugin-autoload";
+
+export default defineConfig({
+  plugins: [autoloadPlugin()],
+  // ... other config
+});
+
+// src/app.ts
+import { createApplication } from "@baeta/core";
+import { modules } from "./modules/autoload.ts";
+
+const baeta = createApplication({
+  // Modules are loaded automatically
+  modules,
+});
+```
+
+## Server Integration
+
+### Apollo Server
+
+```typescript
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { createApplication } from "@baeta/core";
+import { modules } from "./modules/autoload.ts";
+import { Context, createContext } from "./context.ts";
+
+const baeta = createApplication({
+  modules,
+});
+
+const server = new ApolloServer<Context>({
+  schema: baeta.schema,
+});
+
+const { url } = await startStandaloneServer(server, {
+  listen: { port: 4000 },
+  context: createContext,
+});
+
+console.log(`🚀  Server ready at: ${url}`);
+```
+
+### GraphQL Yoga
+
+```typescript
+import { createServer } from "node:http";
+import { createApplication } from "@baeta/core";
+import { createYoga } from "graphql-yoga";
+import { modules } from "./modules/autoload.ts";
+import { Context, ServerContext, createContext } from "./context.ts";
+
+const baeta = createApplication({
+  modules,
+});
+
+export const yoga = createYoga<ServerContext, Context>({
+  schema: baeta.schema,
+  context: createContext,
+});
+
+const server = createServer(yoga);
+
+server.listen(4000, () => {
+  console.log(
+    `🚀 Server ready at http://localhost:4000${yoga.graphqlEndpoint}`
+  );
+});
+```

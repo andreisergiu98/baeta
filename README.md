@@ -69,10 +69,22 @@ Query.users(() => {
 });
 ```
 
-#### 3. Add caching
+#### 3. Add authorization
+```typescript
+const { Query, Mutation } = getUserModule();
+
+Query.users.$auth({
+    $or: {
+        isPublic: true,
+        isLoggedIn: true,
+    },
+});
+```
+
+#### 4. Add caching
 
 ```typescript
-import { getUserModule } from "./typedef.ts";
+import { getUserModule } from "./typedef";
 
 const { User, Query } = getUserModule();
 
@@ -83,10 +95,10 @@ Query.users.$useCache(userCache);
 ```
 
 ## Documentation
+
 - [Website](https://baeta.io)
 - [Official Documentation](https://baeta.io/docs/intro/)
 - [Examples](https://github.com/andreisergiu98/baeta/tree/main/examples)
-
 
 ## Compatibility
 

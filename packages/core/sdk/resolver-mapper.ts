@@ -3,7 +3,7 @@ import { defaultFieldResolver } from 'graphql';
 import type { ScalarResolver } from '../lib/scalar.ts';
 import { composeResolvers } from './compose.ts';
 import type { NativeMiddleware } from './middleware.ts';
-import type { MiddlewareMap, ResolversMap, ScalarsMap } from './resolver-map.ts';
+import type { MiddlewareMap, ResolversMap, ScalarsMap } from './resolver-maps.ts';
 import type { NativeTypeResolver } from './resolver-type.ts';
 import type { NativeResolver } from './resolver.ts';
 import type { NativeSubscription } from './subscription.ts';

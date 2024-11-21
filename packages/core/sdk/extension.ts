@@ -24,7 +24,7 @@ export enum ExtensionVersion {
 
 export type ExtensionFactory<E extends Extension> = () => E;
 
-export abstract class Extension {
+export class Extension {
 	version = ExtensionVersion.V1;
 
 	getModuleExtensions() {
@@ -65,7 +65,7 @@ export abstract class Extension {
 		return [];
 	}
 
-	abstract build(module: ModuleBuilder, mapper: ResolverMapper): void;
+	build(module: ModuleBuilder, mapper: ResolverMapper): void;
 }
 
 export function resolveExtensions<T>(list: Array<() => T>): T[] {

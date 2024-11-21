@@ -147,37 +147,37 @@ export class ModuleBuilder {
 	private getResolverExtensions<Result, Root, Context, Args>(type: string, field: string) {
 		return mergeExtensions(this.extensions, (ext) =>
 			ext.getResolverExtensions(this, type, field),
-		) as BaetaExtensions.ResolverExtensions<Result, Root, Context, Args>;
+		) as unknown as BaetaExtensions.ResolverExtensions<Result, Root, Context, Args>;
 	}
 
 	private getTypeExtensions<Root, Context>(type: string) {
 		return mergeExtensions(this.extensions, (ext) =>
 			ext.getTypeExtensions(this, type),
-		) as BaetaExtensions.TypeExtensions<Root, Context>;
+		) as unknown as BaetaExtensions.TypeExtensions<Root, Context>;
 	}
 
 	private getSubscriptionExtensions<Root, Context, Args>(type: string) {
 		return mergeExtensions(this.extensions, (ext) =>
 			ext.getSubscriptionExtensions(this, type),
-		) as BaetaExtensions.SubscriptionExtensions<Root, Context, Args>;
+		) as unknown as BaetaExtensions.SubscriptionExtensions<Root, Context, Args>;
 	}
 
 	private getSubscriptionSubscribeExtensions<Root, Context, Args>(type: string) {
 		return mergeExtensions(this.extensions, (ext) =>
 			ext.getSubscriptionSubscribeExtensions(this, type),
-		) as BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args>;
+		) as unknown as BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args>;
 	}
 
 	private getSubscriptionResolveExtensions<Result, Root, Context, Args>(type: string) {
 		return mergeExtensions(this.extensions, (ext) =>
 			ext.getSubscriptionResolveExtensions(this, type),
-		) as BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args>;
+		) as unknown as BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args>;
 	}
 
 	private getModuleExtensions() {
 		return mergeExtensions(this.extensions, (ext) =>
 			ext.getModuleExtensions(),
-		) as BaetaExtensions.ModuleExtensions;
+		) as unknown as BaetaExtensions.ModuleExtensions;
 	}
 
 	private addTransformer = (transformer: SchemaTransformer) => {

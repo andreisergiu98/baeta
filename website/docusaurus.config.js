@@ -1,4 +1,6 @@
 const { themes } = require('prism-react-renderer');
+const { injectTypeDocSidebar } = require('./api-docs.js');
+
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 
@@ -20,13 +22,20 @@ const config = {
 		locales: ['en'],
 	},
 
+	markdown: {
+		format: 'detect',
+	},
+
 	presets: [
 		[
 			'classic',
 			/** @type {import('@docusaurus/preset-classic').Options} */
 			({
 				docs: {
-					sidebarPath: require.resolve('./sidebars.js'),
+					// sidebarPath: require.resolve('./sidebars.js'),
+					async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args }) {
+						return injectTypeDocSidebar(await defaultSidebarItemsGenerator(args));
+					},
 				},
 				pages: {
 					path: 'pages',

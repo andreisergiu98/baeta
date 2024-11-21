@@ -27,7 +27,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
@@ -62,7 +62,14 @@
     "node": ">=22.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      }
+    }
   },
   "ava": {
     "extensions": {
@@ -72,5 +79,12 @@
       "--no-warnings",
       "--experimental-transform-types"
     ]
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json"
   }
 }

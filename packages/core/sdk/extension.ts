@@ -65,7 +65,7 @@ export class Extension {
 		return [];
 	}
 
-	build(module: ModuleBuilder, mapper: ResolverMapper): void;
+	build(module: ModuleBuilder, mapper: ResolverMapper): void {}
 }
 
 export function resolveExtensions<T>(list: Array<() => T>): T[] {

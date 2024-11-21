@@ -23,6 +23,7 @@ import type { User } from '../__generated__/types';
 export type PubSubMap = {
   'user-created': string;
   'user-updated': User;
+  [c: `user-updated-${string}`]: User; // Dynamic channel
 };
 
 export const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub());

@@ -22,7 +22,10 @@ declare global {
 		export interface ResolverExtensions<Result, Root, Context, Args> {
 			$cacheRef: CacheRef<Result, Root, Args>;
 			$cacheRevision: (number: number) => void;
-			$cacheClear: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => void;
+			$cacheClear: (
+				store: StoreAdapter<TypeGetter<Result>>,
+				matcher?: QueryMatching<Args>,
+			) => Promise<void>;
 			$useCache: (...args: UseCacheArgs<Result, Root>) => void;
 		}
 	}

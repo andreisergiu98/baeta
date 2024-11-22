@@ -1,5 +1,16 @@
 # @baeta/extension-cache
 
+## 0.0.2
+
+### Patch Changes
+
+- [#168](https://github.com/andreisergiu98/baeta/pull/168) [`14d936b`](https://github.com/andreisergiu98/baeta/commit/14d936b50b606ed748c9414faf1365824c0cc10f) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - make cache options optional if root has compatible shape
+
+- [`519f5b6`](https://github.com/andreisergiu98/baeta/commit/519f5b675309cf9d111979cc0bc4e80cc3b9f455) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - make $cacheClear awaitable
+
+- Updated dependencies [[`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321), [`cf9f094`](https://github.com/andreisergiu98/baeta/commit/cf9f09468f84d99b069eb0f55e1fc207e2a41dd8)]:
+  - @baeta/core@0.1.2
+
 ## 0.0.1
 
 ### Patch Changes

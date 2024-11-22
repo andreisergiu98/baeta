@@ -52,7 +52,7 @@ Mutation.updateUser.$auth(async (params) => {
 	});
 
 	if (user && user.id === params.ctx.userId) {
-		return {};
+		return true;
 	}
 
 	if (!user) {

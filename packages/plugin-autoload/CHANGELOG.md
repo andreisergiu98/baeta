@@ -1,5 +1,17 @@
 # @baeta/plugin-autoload
 
+## 0.1.2
+
+### Patch Changes
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#176](https://github.com/andreisergiu98/baeta/pull/176) [`d77cd8a`](https://github.com/andreisergiu98/baeta/commit/d77cd8a1810fdf72cfbbb08d05c207bbc893c822) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - feat: add complexity extension
+
+- Updated dependencies [[`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b), [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321)]:
+  - @baeta/generator-sdk@0.1.2
+  - @baeta/util-path@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

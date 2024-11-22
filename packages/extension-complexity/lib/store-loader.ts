@@ -1,4 +1,4 @@
-import type { ComplexityLimit } from './complexity-extension.ts';
+import type { ComplexityLimit } from './complexity-limits.ts';
 import { setComplexityStoreLoader } from './store.ts';
 
 export function loadComplexityStore<T>(

@@ -1,5 +1,5 @@
 import { createContextStore } from '@baeta/core';
-import type { ComplexityLimit } from './complexity-extension.ts';
+import type { ComplexityLimit } from './complexity-limits.ts';
 
 export interface ComplexityStore {
 	limits: Required<ComplexityLimit>;

@@ -24,17 +24,6 @@ import {
 	hasValidationsExtension,
 } from './input-extensions.ts';
 
-export type ValidateParams<Context = unknown> = {
-	path: Array<number | string>;
-	type: GraphQLType;
-	root: unknown;
-	args: Record<string, unknown>;
-	ctx: Context;
-	info: GraphQLResolveInfo;
-};
-
-export type ValidateFn = <Context>(params: ValidateParams<Context>) => void | Promise<void>;
-
 function isInputObjectType(type: GraphQLNamedType): type is GraphQLInputObjectType {
 	return type.astNode?.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION;
 }

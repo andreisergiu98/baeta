@@ -1,5 +1,8 @@
 import type { DocumentNode, GraphQLSchema } from 'graphql';
-import type { Middleware, Resolver, ScalarResolver, TypeResolver } from '../lib/index.ts';
+import type { Middleware } from '../lib/middleware.ts';
+import type { TypeResolver } from '../lib/resolver-type.ts';
+import type { Resolver } from '../lib/resolver.ts';
+import type { ScalarResolver } from '../lib/scalar.ts';
 import type { Subscription } from '../lib/subscription.ts';
 import { extendFunction, nameFunction } from '../utils/functions.ts';
 import {

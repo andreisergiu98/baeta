@@ -1,5 +1,11 @@
 # @baeta/errors
 
+## 0.1.2
+
+### Patch Changes
+
+- [#176](https://github.com/andreisergiu98/baeta/pull/176) [`d77cd8a`](https://github.com/andreisergiu98/baeta/commit/d77cd8a1810fdf72cfbbb08d05c207bbc893c822) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - feat: add complexity extension
+
 ## 0.1.1
 
 ### Patch Changes

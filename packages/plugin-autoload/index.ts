@@ -31,6 +31,8 @@ const defaultSuffixes = [
 	'authorizations',
 	'cache',
 	'caches',
+	'complexity',
+	'complexities',
 	'resolver',
 	'resolvers',
 	'query',

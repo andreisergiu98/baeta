@@ -1,5 +1,17 @@
 # @baeta/plugin-graphql
 
+## 0.1.2
+
+### Patch Changes
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#169](https://github.com/andreisergiu98/baeta/pull/169) [`e84137f`](https://github.com/andreisergiu98/baeta/commit/e84137f5a0cd65402e88cd56224fff450057c473) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix #163, resolve custom scalar types relative to baeta config
+
+- Updated dependencies [[`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b), [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321)]:
+  - @baeta/generator-sdk@0.1.2
+  - @baeta/util-path@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

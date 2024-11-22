@@ -1,5 +1,14 @@
 # @baeta/extension-cache-upstash
 
+## 0.0.2
+
+### Patch Changes
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`14d936b`](https://github.com/andreisergiu98/baeta/commit/14d936b50b606ed748c9414faf1365824c0cc10f), [`519f5b6`](https://github.com/andreisergiu98/baeta/commit/519f5b675309cf9d111979cc0bc4e80cc3b9f455)]:
+  - @baeta/extension-cache@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes

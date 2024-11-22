@@ -44,14 +44,14 @@ export type GetPostScopeRules<Result, Root, Context, Args> = (
 	result: Result,
 ) => boolean | ScopeRules | Promise<boolean | ScopeRules>;
 
-export class AuthExtension<T> extends Extension {
+export class AuthExtension<Ctx> extends Extension {
 	private defaultRule: LogicRule = '$and';
 	private authMap: Record<string, Record<string, undefined | NativeMiddleware>> = {};
 
 	private readonly defaultMiddlewares: DefaultScopesMiddlewares;
 
 	constructor(
-		readonly loadScopes: GetScopeLoader<T>,
+		readonly loadScopes: GetScopeLoader<Ctx>,
 		readonly options: AuthOptions = {},
 	) {
 		super();
@@ -206,7 +206,7 @@ export class AuthExtension<T> extends Extension {
 		isSubscribe = false,
 	): NativeMiddleware<Result, Root, Context, Args> {
 		return (next) => async (root, args, ctx, info) => {
-			loadAuthStore(ctx as unknown as T, this.loadScopes);
+			loadAuthStore(ctx as unknown as Ctx, this.loadScopes);
 
 			const requiredScopes = await getScopes({ root, args, ctx, info });
 
@@ -232,7 +232,7 @@ export class AuthExtension<T> extends Extension {
 		defaultScopes?: ScopeRules,
 	): NativeMiddleware<Result, Root, Context, Args> {
 		return (next) => async (root, args, ctx, info) => {
-			loadAuthStore(ctx as unknown as T, this.loadScopes);
+			loadAuthStore(ctx as unknown as Ctx, this.loadScopes);
 
 			const result = await next(root, args, ctx, info);
 			const requiredScopes = await getScopes({ root, args, ctx, info }, result);

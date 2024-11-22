@@ -38,18 +38,31 @@ function enforceConsistentMetadataExports(workspace) {
 	}
 
 	const exports = {};
+	const publishExports = {};
 
 	for (const key in workspace.manifest.exports) {
 		const dir = key === '.' ? '' : key.replace('./', '');
 
+		const importEntry = `./${path.join('./dist', dir, 'index.js')}`;
+		const requireEntry = `./${path.join('./dist', dir, 'index.cjs')}`;
+		const typesEntry = `./${path.join('./dist', dir, 'index.d.ts')}`;
+		const devTypesEntry = `./${path.join(dir, 'index.ts')}`;
+
 		exports[key] = {
-			types: `./${path.join('./dist', dir, 'index.d.ts')}`,
-			import: `./${path.join('./dist', dir, 'index.js')}`,
-			require: `./${path.join('./dist', dir, 'index.cjs')}`,
+			types: devTypesEntry,
+			import: importEntry,
+			require: requireEntry,
+		};
+
+		publishExports[key] = {
+			types: typesEntry,
+			import: importEntry,
+			require: requireEntry,
 		};
 	}
 
 	workspace.set('exports', exports);
+	workspace.set('publishConfig.exports', publishExports);
 }
 
 /**

@@ -27,12 +27,12 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./esbuild": {
-      "types": "./dist/esbuild/index.d.ts",
+      "types": "./esbuild/index.ts",
       "import": "./dist/esbuild/index.js",
       "require": "./dist/esbuild/index.cjs"
     }
@@ -62,7 +62,19 @@
     "node": ">=22.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
+      "./esbuild": {
+        "types": "./dist/esbuild/index.d.ts",
+        "import": "./dist/esbuild/index.js",
+        "require": "./dist/esbuild/index.cjs"
+      }
+    }
   },
   "ava": {
     "extensions": {

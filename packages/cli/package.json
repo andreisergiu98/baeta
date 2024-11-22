@@ -27,17 +27,17 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./ink": {
-      "types": "./dist/ink/index.d.ts",
+      "types": "./ink/index.ts",
       "import": "./dist/ink/index.js",
       "require": "./dist/ink/index.cjs"
     },
     "./sdk": {
-      "types": "./dist/sdk/index.d.ts",
+      "types": "./sdk/index.ts",
       "import": "./dist/sdk/index.js",
       "require": "./dist/sdk/index.cjs"
     }
@@ -91,7 +91,24 @@
     "node": ">=22.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
+      "./ink": {
+        "types": "./dist/ink/index.d.ts",
+        "import": "./dist/ink/index.js",
+        "require": "./dist/ink/index.cjs"
+      },
+      "./sdk": {
+        "types": "./dist/sdk/index.d.ts",
+        "import": "./dist/sdk/index.js",
+        "require": "./dist/sdk/index.cjs"
+      }
+    }
   },
   "ava": {
     "extensions": {

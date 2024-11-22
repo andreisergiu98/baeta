@@ -48,3 +48,13 @@ export function getFieldComplexitySettings<Context>(
 		return wildCardComplexity({ args, ctx });
 	}
 }
+
+export function registerFieldSettingsSetter<Context, Args>(
+	type: string,
+	field: string,
+	fn: GetFieldSettings<Context, Args>,
+	map: FieldSettingsMap,
+) {
+	map[type] ??= {};
+	map[type][field] = fn;
+}

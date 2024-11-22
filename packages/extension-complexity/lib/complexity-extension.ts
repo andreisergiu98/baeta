@@ -11,7 +11,7 @@ import {
 	defaultLimits,
 	normalizeOptions,
 } from './complexity-options.ts';
-import type { FieldSettingsMap, GetFieldSettings } from './field-settings.ts';
+import { type FieldSettingsMap, registerFieldSettingsSetter } from './field-settings.ts';
 import { loadComplexityStore } from './store-loader.ts';
 import { getComplexityStore } from './store.ts';
 
@@ -31,7 +31,7 @@ export class ComplexityExtension<Ctx> extends Extension {
 	): BaetaExtensions.TypeExtensions<Root, Context> => {
 		return {
 			$complexity: (fn) => {
-				this.registerFieldComplexityFn(type, '*', fn);
+				registerFieldSettingsSetter(type, '*', fn, this.fieldSettingsMap);
 			},
 		};
 	};
@@ -43,7 +43,7 @@ export class ComplexityExtension<Ctx> extends Extension {
 	): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
 		return {
 			$complexity: (fn) => {
-				this.registerFieldComplexityFn(type, field, fn);
+				registerFieldSettingsSetter(type, field, fn, this.fieldSettingsMap);
 			},
 		};
 	};
@@ -54,19 +54,10 @@ export class ComplexityExtension<Ctx> extends Extension {
 	): BaetaExtensions.SubscriptionExtensions<Root, Context, Args> => {
 		return {
 			$complexity: (fn) => {
-				this.registerFieldComplexityFn('Subscription', field, fn);
+				registerFieldSettingsSetter('Subscription', field, fn, this.fieldSettingsMap);
 			},
 		};
 	};
-
-	registerFieldComplexityFn<Context, Args>(
-		type: string,
-		field: string,
-		fn: GetFieldSettings<Context, Args>,
-	) {
-		this.fieldSettingsMap[type] ??= {};
-		this.fieldSettingsMap[type][field] = fn;
-	}
 
 	createComplexityMiddleware<Result, Root, Context, Args>(): NativeMiddleware<
 		Result,

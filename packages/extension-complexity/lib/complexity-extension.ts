@@ -18,7 +18,7 @@ import { getComplexityStore } from './store.ts';
 export class ComplexityExtension<Ctx> extends Extension {
 	private readonly options: Required<ComplexityExtensionOptions<Ctx>>;
 
-	constructor(options: ComplexityExtensionOptions<Ctx>) {
+	constructor(options: ComplexityExtensionOptions<Ctx> = {}) {
 		super();
 		this.options = normalizeOptions(options);
 	}

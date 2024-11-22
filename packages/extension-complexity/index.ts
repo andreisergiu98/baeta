@@ -7,6 +7,6 @@ export { ComplexityErrorKind, type GetComplexityError } from './lib/complexity-e
 export type { ComplexityLimit, GetComplexityLimit } from './lib/complexity-limits.ts';
 export type { ComplexityExtensionOptions } from './lib/complexity-options.ts';
 
-export function complexityExtension<Ctx>(options: ComplexityExtensionOptions<Ctx>) {
+export function complexityExtension<Ctx>(options?: ComplexityExtensionOptions<Ctx>) {
 	return () => new ComplexityExtension(options);
 }

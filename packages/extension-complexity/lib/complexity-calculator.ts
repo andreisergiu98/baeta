@@ -150,9 +150,9 @@ function complexityFromField<Context>(
 
 	if (!field) {
 		return {
-			depth: 0,
-			breadth: 0,
-			complexity: 0,
+			depth: 1,
+			breadth: 1,
+			complexity: 1,
 		};
 	}
 

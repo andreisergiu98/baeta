@@ -8010,6 +8010,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@biomejs/biome": "npm:^1.9.4"
     "@changesets/changelog-github": "npm:^0.5.0"
+    "@types/node": "npm:^22.9.1"
     "@yarnpkg/sdks": "npm:^3.2.0"
     "@yarnpkg/types": "npm:^4.0.0"
     husky: "npm:^9.1.7"

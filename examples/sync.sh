@@ -8,6 +8,8 @@ cp -r ./examples/yoga/src/{modules,__generated__} ./examples/cloudflare/src
 
 cp -r ./examples/yoga-sse/src/{modules,__generated__} ./examples/cloudflare-ws/src
 
+cp -r ./examples/yoga/src/{modules,__generated__} ./examples/complexity/src
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i '' -e 's/ctx\.pubsub\.publish/ctx.publish/g' -e 's/ctx\.pubsub\.subscribe/ctx.subscribe/g' ./examples/cloudflare-ws/src/modules/user/user.resolvers.ts
 else

@@ -2283,9 +2283,9 @@ __metadata:
     graphql: "npm:^16.9.0"
     graphql-yoga: "npm:^5.10.3"
     hono: "npm:^4.6.11"
-    miniflare: "npm:^3.20241106.0"
+    miniflare: "npm:^3.20241106.1"
     typescript: "npm:^5.6.3"
-    wrangler: "npm:^3.88.0"
+    wrangler: "npm:^3.90.0"
   languageName: unknown
   linkType: soft
 
@@ -2302,9 +2302,9 @@ __metadata:
     graphql: "npm:^16.9.0"
     graphql-yoga: "npm:^5.10.3"
     hono: "npm:^4.6.11"
-    miniflare: "npm:^3.20241106.0"
+    miniflare: "npm:^3.20241106.1"
     typescript: "npm:^5.6.3"
-    wrangler: "npm:^3.88.0"
+    wrangler: "npm:^3.90.0"
   languageName: unknown
   linkType: soft
 
@@ -3236,13 +3236,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-shared@npm:0.7.1":
-  version: 0.7.1
-  resolution: "@cloudflare/workers-shared@npm:0.7.1"
+"@cloudflare/workers-shared@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@cloudflare/workers-shared@npm:0.8.0"
   dependencies:
     mime: "npm:^3.0.0"
     zod: "npm:^3.22.3"
-  checksum: 10/2571639d898c81d604873b7a1af2fa58de599c70f4df0bbb28991f38f42b3438a61689de80700d5d4336b8d3876393aecad6360449b8836afec448f366c1f5f1
+  checksum: 10/a3ea82412023c0ee4c6e2bf88fdd831bc95578252b7dd8f7abc957d91bae3a21bdf558c575cb86e0af9074b9fc38050147c90a519a30a84c10c9968d354e8676
   languageName: node
   linkType: hard
 
@@ -8065,11 +8065,12 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@biomejs/biome": "npm:^1.9.4"
     "@changesets/changelog-github": "npm:^0.5.0"
+    "@types/node": "npm:^22.9.1"
     "@yarnpkg/sdks": "npm:^3.2.0"
     "@yarnpkg/types": "npm:^4.0.0"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^15.2.10"
-    turbo: "npm:^2.3.0"
+    turbo: "npm:^2.3.1"
     typescript: "npm:^5.6.3"
   languageName: unknown
   linkType: soft
@@ -15484,9 +15485,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"miniflare@npm:3.20241106.0, miniflare@npm:^3.20241106.0":
-  version: 3.20241106.0
-  resolution: "miniflare@npm:3.20241106.0"
+"miniflare@npm:3.20241106.1, miniflare@npm:^3.20241106.1":
+  version: 3.20241106.1
+  resolution: "miniflare@npm:3.20241106.1"
   dependencies:
     "@cspotcode/source-map-support": "npm:0.8.1"
     acorn: "npm:^8.8.0"
@@ -15502,7 +15503,7 @@ __metadata:
     zod: "npm:^3.22.3"
   bin:
     miniflare: bootstrap.js
-  checksum: 10/eb9e5e12c0ad9e18a54e3ad8a39d6602d0f21401aaddd1d4444b80d9b97640016fc6acdfd30e8bef16748eddbf01c9abe5b39bae15d83fe928be956e43c11954
+  checksum: 10/f1c51de67f02e440c1c84e1cd6da9895e1b4c3c93f2e40c3bb2543a0a89651d9bb4d40c2203295179e8a05318ad890cbe03e23d0acc40e3d7584f5a960fd2858
   languageName: node
   linkType: hard
 
@@ -20455,58 +20456,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.3.0":
-  version: 2.3.0
-  resolution: "turbo-darwin-64@npm:2.3.0"
+"turbo-darwin-64@npm:2.3.1":
+  version: 2.3.1
+  resolution: "turbo-darwin-64@npm:2.3.1"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:2.3.0":
-  version: 2.3.0
-  resolution: "turbo-darwin-arm64@npm:2.3.0"
+"turbo-darwin-arm64@npm:2.3.1":
+  version: 2.3.1
+  resolution: "turbo-darwin-arm64@npm:2.3.1"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:2.3.0":
-  version: 2.3.0
-  resolution: "turbo-linux-64@npm:2.3.0"
+"turbo-linux-64@npm:2.3.1":
+  version: 2.3.1
+  resolution: "turbo-linux-64@npm:2.3.1"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:2.3.0":
-  version: 2.3.0
-  resolution: "turbo-linux-arm64@npm:2.3.0"
+"turbo-linux-arm64@npm:2.3.1":
+  version: 2.3.1
+  resolution: "turbo-linux-arm64@npm:2.3.1"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:2.3.0":
-  version: 2.3.0
-  resolution: "turbo-windows-64@npm:2.3.0"
+"turbo-windows-64@npm:2.3.1":
+  version: 2.3.1
+  resolution: "turbo-windows-64@npm:2.3.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:2.3.0":
-  version: 2.3.0
-  resolution: "turbo-windows-arm64@npm:2.3.0"
+"turbo-windows-arm64@npm:2.3.1":
+  version: 2.3.1
+  resolution: "turbo-windows-arm64@npm:2.3.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "turbo@npm:2.3.0"
+"turbo@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "turbo@npm:2.3.1"
   dependencies:
-    turbo-darwin-64: "npm:2.3.0"
-    turbo-darwin-arm64: "npm:2.3.0"
-    turbo-linux-64: "npm:2.3.0"
-    turbo-linux-arm64: "npm:2.3.0"
-    turbo-windows-64: "npm:2.3.0"
-    turbo-windows-arm64: "npm:2.3.0"
+    turbo-darwin-64: "npm:2.3.1"
+    turbo-darwin-arm64: "npm:2.3.1"
+    turbo-linux-64: "npm:2.3.1"
+    turbo-linux-arm64: "npm:2.3.1"
+    turbo-windows-64: "npm:2.3.1"
+    turbo-windows-arm64: "npm:2.3.1"
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -20522,7 +20523,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10/adabcc54514d0b670caea01c6de088da2f78ef8b4f1e204799c4602aee958148d2f5f29885f49129a8d127a00832a99635af2518ee692ca6b788e2e424bb5b74
+  checksum: 10/720c77c0e79341eeaa69a5d99ae9f48515a8125c1dad8d7025bc80428ded718cefaff1f2e6eef902e2eafd64b7e79a45a3589db31c299ef71e2191854506fbb6
   languageName: node
   linkType: hard
 
@@ -21580,12 +21581,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrangler@npm:^3.88.0":
-  version: 3.88.0
-  resolution: "wrangler@npm:3.88.0"
+"wrangler@npm:^3.90.0":
+  version: 3.90.0
+  resolution: "wrangler@npm:3.90.0"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:0.3.4"
-    "@cloudflare/workers-shared": "npm:0.7.1"
+    "@cloudflare/workers-shared": "npm:0.8.0"
     "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
     "@esbuild-plugins/node-modules-polyfill": "npm:^0.2.2"
     blake3-wasm: "npm:^2.1.5"
@@ -21594,7 +21595,7 @@ __metadata:
     esbuild: "npm:0.17.19"
     fsevents: "npm:~2.3.2"
     itty-time: "npm:^1.0.6"
-    miniflare: "npm:3.20241106.0"
+    miniflare: "npm:3.20241106.1"
     nanoid: "npm:^3.3.3"
     path-to-regexp: "npm:^6.3.0"
     resolve: "npm:^1.22.8"
@@ -21615,7 +21616,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 10/7bd3ada6a5c6fdf742884d51605bbcbfeae9ba80ec3a2ddc0ca06ef0395609397d73a002e0a66da23754bdace603ced15f8816750b869677d16dc71b706aa025
+  checksum: 10/229e9139e1d038fd1d296ccf46fa5a9a0c5232919e7e0a802ed4952ea5515d7875a36a5b013e7935db8eb52481094659b8a105c3600976797db1dfa1f654e7e1
   languageName: node
   linkType: hard
 

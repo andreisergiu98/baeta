@@ -31,3 +31,5 @@ cp -r ./examples/prisma/src/{lib,modules,types,app.ts} ./examples/relay-paginati
 cp -r ./examples/prisma/{dev.db,.gitignore,schema.prisma} ./examples/relay-pagination
 
 yarn examples:build
+
+./examples/sync-graphqlrc.sh

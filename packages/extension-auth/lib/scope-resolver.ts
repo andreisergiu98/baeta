@@ -43,11 +43,9 @@ function createScopeResolver(
 			return resolveBoolean(cached);
 		}
 
-		const promise = value(param);
-		store.scopeCache.setScopeValue(key, promise);
-		const result = await promise;
-
-		return resolveBoolean(result);
+		const awaitableResult = value(param);
+		store.scopeCache.setScopeValue(key, awaitableResult);
+		return resolveBoolean(await awaitableResult);
 	};
 }
 

@@ -32,12 +32,14 @@
     }
   },
   "bin": {
+    "madge": "./bin/madge.js",
     "prep": "./bin/prep.cjs",
     "tsup": "./bin/tsup.js"
   },
   "dependencies": {
     "esbuild": "^0.24.0",
     "esbuild-register": "^3.6.0",
+    "madge": "^8.0.0",
     "tsup": "^8.3.5"
   },
   "devDependencies": {

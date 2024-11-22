@@ -6,9 +6,22 @@ import type {
 	GraphQLInputFieldConfig,
 	GraphQLInputObjectType,
 	GraphQLNamedInputType,
+	GraphQLResolveInfo,
+	GraphQLType,
 } from 'graphql';
-import type { ValidationTarget } from './input-directive.ts';
-import type { ValidateFn } from './input-schema.ts';
+
+export type ValidationTarget = 'list' | 'object' | 'scalar';
+
+export type ValidateParams<Context = unknown> = {
+	path: Array<number | string>;
+	type: GraphQLType;
+	root: unknown;
+	args: Record<string, unknown>;
+	ctx: Context;
+	info: GraphQLResolveInfo;
+};
+
+export type ValidateFn = <Context>(params: ValidateParams<Context>) => void | Promise<void>;
 
 export type ValidationOptions = {
 	target: ValidationTarget;

@@ -1,5 +1,5 @@
 import { getPoolingId } from './pooling-type.ts';
-import type { SubscriptionsOptions } from './subscription.ts';
+import type { SubscriptionsOptions } from './subscription-options.ts';
 
 export function handleWS<Env, Context, ContextParams>(
 	request: Request,

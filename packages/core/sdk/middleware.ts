@@ -1,5 +1,5 @@
 import type { GraphQLFieldResolver } from 'graphql';
-import type { Middleware } from '../lib/index.ts';
+import type { Middleware } from '../lib/middleware.ts';
 
 export type NativeMiddleware<
 	Result = unknown,

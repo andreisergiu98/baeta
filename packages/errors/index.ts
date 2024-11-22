@@ -7,8 +7,9 @@ export enum BaetaErrorCode {
 	Unauthenticated = 'UNAUTHENTICATED',
 	Forbidden = 'FORBIDDEN',
 	BadUserInput = 'BAD_USER_INPUT',
-	AggregateError = 'AGGREGATE_ERROR',
+	ValidationError = 'VALIDATION_ERROR',
 	InternalServerError = 'INTERNAL_SERVER_ERROR',
+	AggregateError = 'AGGREGATE_ERROR',
 }
 
 export class UnauthenticatedError extends GraphQLError {
@@ -50,6 +51,18 @@ export class BadUserInput extends GraphQLError {
 			...options,
 			extensions: {
 				code: BaetaErrorCode.BadUserInput,
+				...options?.extensions,
+			},
+		});
+	}
+}
+
+export class ValidationError extends GraphQLError {
+	constructor(message = 'Validation error!', options?: GraphQLErrorOptions) {
+		super(message, {
+			...options,
+			extensions: {
+				code: BaetaErrorCode.ValidationError,
 				...options?.extensions,
 			},
 		});

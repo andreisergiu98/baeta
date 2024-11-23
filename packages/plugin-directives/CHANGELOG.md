@@ -1,5 +1,12 @@
 # @baeta/plugin-directives
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @baeta/directives@1.0.3
+
 ## 1.0.2
 
 ### Patch Changes

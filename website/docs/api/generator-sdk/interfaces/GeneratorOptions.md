@@ -16,7 +16,7 @@ Path for the generated base types file.
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:44](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L44)
+[packages/generator-sdk/lib/config.ts:44](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L44)
 
 ***
 
@@ -44,7 +44,7 @@ undefined
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:52](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L52)
+[packages/generator-sdk/lib/config.ts:52](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L52)
 
 ***
 
@@ -62,7 +62,7 @@ process.cwd()
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:20](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L20)
+[packages/generator-sdk/lib/config.ts:20](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L20)
 
 ***
 
@@ -86,7 +86,7 @@ undefined
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:59](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L59)
+[packages/generator-sdk/lib/config.ts:59](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L59)
 
 ***
 
@@ -98,7 +98,7 @@ Options for generated files.
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:71](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L71)
+[packages/generator-sdk/lib/config.ts:71](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L71)
 
 ***
 
@@ -110,7 +110,7 @@ File extension for generated import statements.
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:81](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L81)
+[packages/generator-sdk/lib/config.ts:81](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L81)
 
 ***
 
@@ -122,7 +122,7 @@ Additional schema loaders to be used for "schemas" option.
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:76](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L76)
+[packages/generator-sdk/lib/config.ts:76](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L76)
 
 ***
 
@@ -140,7 +140,7 @@ Name for the generated module definition file. This will contain type definition
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:38](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L38)
+[packages/generator-sdk/lib/config.ts:38](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L38)
 
 ***
 
@@ -158,7 +158,7 @@ Directory where modules are defined.
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:32](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L32)
+[packages/generator-sdk/lib/config.ts:32](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L32)
 
 ***
 
@@ -182,7 +182,7 @@ undefined
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:66](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L66)
+[packages/generator-sdk/lib/config.ts:66](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L66)
 
 ***
 
@@ -200,4 +200,4 @@ Glob pattern(s) to load graphql schema files.
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:26](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/config.ts#L26)
+[packages/generator-sdk/lib/config.ts:26](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L26)

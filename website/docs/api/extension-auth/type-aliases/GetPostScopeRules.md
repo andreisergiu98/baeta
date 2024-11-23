@@ -1,6 +1,6 @@
 # Type Alias: GetPostScopeRules()\<Result, Root, Context, Args\>
 
-> **GetPostScopeRules**\<`Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => [`ScopeRules`](ScopeRules.md) \| `Promise`\<[`ScopeRules`](ScopeRules.md)\> \| `true` \| `Promise`\<`true`\>
+> **GetPostScopeRules**\<`Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => `boolean` \| [`ScopeRules`](ScopeRules.md) \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\>
 
 ## Type Parameters
 
@@ -20,8 +20,8 @@
 
 ## Returns
 
-[`ScopeRules`](ScopeRules.md) \| `Promise`\<[`ScopeRules`](ScopeRules.md)\> \| `true` \| `Promise`\<`true`\>
+`boolean` \| [`ScopeRules`](ScopeRules.md) \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\>
 
 ## Defined in
 
-[lib/auth-extension.ts:46](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-auth/lib/auth-extension.ts#L46)
+[lib/auth-extension.ts:42](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-auth/lib/auth-extension.ts#L42)

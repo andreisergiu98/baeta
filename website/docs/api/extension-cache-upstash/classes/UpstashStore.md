@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[store.ts:6](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-upstash/lib/store.ts#L6)
+[store.ts:6](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-upstash/lib/store.ts#L6)
 
 ## Properties
 
@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[store.ts:6](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-upstash/lib/store.ts#L6)
+[store.ts:6](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-upstash/lib/store.ts#L6)
 
 ## Methods
 
@@ -64,4 +64,4 @@
 
 #### Defined in
 
-[store.ts:10](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-upstash/lib/store.ts#L10)
+[store.ts:10](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-upstash/lib/store.ts#L10)

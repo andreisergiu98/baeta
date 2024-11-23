@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/errors/index.ts:60](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/errors/index.ts#L60)
+[packages/errors/index.ts:73](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/errors/index.ts#L73)
 
 ## Properties
 

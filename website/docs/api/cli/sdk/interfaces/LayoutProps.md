@@ -8,7 +8,7 @@
 
 #### Defined in
 
-[packages/cli/sdk/layout.tsx:9](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/cli/sdk/layout.tsx#L9)
+[packages/cli/sdk/layout.tsx:9](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/layout.tsx#L9)
 
 ***
 
@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/cli/sdk/layout.tsx:7](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/cli/sdk/layout.tsx#L7)
+[packages/cli/sdk/layout.tsx:7](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/layout.tsx#L7)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/cli/sdk/layout.tsx:10](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/cli/sdk/layout.tsx#L10)
+[packages/cli/sdk/layout.tsx:10](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/layout.tsx#L10)
 
 ***
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[packages/cli/sdk/layout.tsx:11](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/cli/sdk/layout.tsx#L11)
+[packages/cli/sdk/layout.tsx:11](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/layout.tsx#L11)
 
 ***
 
@@ -48,4 +48,4 @@
 
 #### Defined in
 
-[packages/cli/sdk/layout.tsx:8](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/cli/sdk/layout.tsx#L8)
+[packages/cli/sdk/layout.tsx:8](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/layout.tsx#L8)

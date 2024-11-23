@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[lib/auth-extension.ts:32](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-auth/lib/auth-extension.ts#L32)
+[lib/auth-extension.ts:28](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-auth/lib/auth-extension.ts#L28)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[lib/auth-extension.ts:34](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-auth/lib/auth-extension.ts#L34)
+[lib/auth-extension.ts:30](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-auth/lib/auth-extension.ts#L30)
 
 ***
 
@@ -38,4 +38,4 @@
 
 #### Defined in
 
-[lib/auth-extension.ts:33](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-auth/lib/auth-extension.ts#L33)
+[lib/auth-extension.ts:29](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-auth/lib/auth-extension.ts#L29)

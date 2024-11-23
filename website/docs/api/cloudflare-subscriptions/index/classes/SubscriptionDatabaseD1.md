@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[lib/subscription-database-d1.ts:18](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L18)
+[lib/subscription-database-d1.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L18)
 
 ## Properties
 
@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[lib/subscription-database-d1.ts:20](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L20)
+[lib/subscription-database-d1.ts:20](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L20)
 
 ## Methods
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[lib/subscription-database-d1.ts:44](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L44)
+[lib/subscription-database-d1.ts:44](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L44)
 
 ***
 
@@ -74,7 +74,7 @@
 
 #### Defined in
 
-[lib/subscription-database-d1.ts:53](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L53)
+[lib/subscription-database-d1.ts:53](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L53)
 
 ***
 
@@ -96,7 +96,7 @@
 
 #### Defined in
 
-[lib/subscription-database-d1.ts:57](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L57)
+[lib/subscription-database-d1.ts:57](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L57)
 
 ***
 
@@ -118,4 +118,4 @@
 
 #### Defined in
 
-[lib/subscription-database-d1.ts:22](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L22)
+[lib/subscription-database-d1.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L22)

@@ -8,4 +8,4 @@
 
 ## Defined in
 
-[packages/cli/sdk/config-status.tsx:6](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/cli/sdk/config-status.tsx#L6)
+[packages/cli/sdk/config-status.tsx:6](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/config-status.tsx#L6)

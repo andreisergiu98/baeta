@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:5](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L5)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:5](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L5)
 
 ## Properties
 
@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:5](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L5)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:5](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L5)
 
 ## Methods
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:47](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L47)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:47](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L47)
 
 ***
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:56](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L56)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:56](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L56)
 
 ***
 
@@ -80,7 +80,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:17](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L17)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:17](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L17)
 
 ***
 
@@ -98,7 +98,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:27](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L27)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:27](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L27)
 
 ***
 
@@ -120,7 +120,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:61](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L61)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:61](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L61)
 
 ***
 
@@ -138,7 +138,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:7](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L7)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:7](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L7)
 
 ***
 
@@ -158,7 +158,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:32](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L32)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:32](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L32)
 
 ***
 
@@ -180,4 +180,4 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:42](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L42)
+[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:42](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L42)

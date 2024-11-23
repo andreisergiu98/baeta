@@ -18,7 +18,7 @@ true
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:18](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/file.ts#L18)
+[packages/generator-sdk/lib/file.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L18)
 
 ***
 
@@ -36,7 +36,7 @@ true
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:12](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/file.ts#L12)
+[packages/generator-sdk/lib/file.ts:12](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L12)
 
 ***
 
@@ -60,7 +60,7 @@ Add custom header at the beginning of the file.
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:23](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/file.ts#L23)
+[packages/generator-sdk/lib/file.ts:23](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L23)
 
 ***
 
@@ -84,4 +84,4 @@ Edit the content of the file before writing it.
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:28](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/file.ts#L28)
+[packages/generator-sdk/lib/file.ts:28](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L28)

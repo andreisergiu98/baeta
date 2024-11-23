@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:28](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L28)
+[sdk/extension.ts:28](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L28)
 
 ## Methods
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:68](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L68)
+[sdk/extension.ts:68](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L68)
 
 ***
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:30](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L30)
+[sdk/extension.ts:30](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L30)
 
 ***
 
@@ -84,7 +84,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:38](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L38)
+[sdk/extension.ts:38](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L38)
 
 ***
 
@@ -112,7 +112,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:46](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L46)
+[sdk/extension.ts:46](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L46)
 
 ***
 
@@ -142,7 +142,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:57](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L57)
+[sdk/extension.ts:57](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L57)
 
 ***
 
@@ -172,7 +172,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:50](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L50)
+[sdk/extension.ts:50](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L50)
 
 ***
 
@@ -186,7 +186,7 @@
 
 #### Defined in
 
-[sdk/extension.ts:64](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L64)
+[sdk/extension.ts:64](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L64)
 
 ***
 
@@ -212,4 +212,4 @@
 
 #### Defined in
 
-[sdk/extension.ts:34](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/extension.ts#L34)
+[sdk/extension.ts:34](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/extension.ts#L34)

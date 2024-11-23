@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[index.ts:25](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/env/index.ts#L25)
+[index.ts:25](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/env/index.ts#L25)
 
 ***
 
@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[index.ts:24](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/env/index.ts#L24)
+[index.ts:24](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/env/index.ts#L24)
 
 ***
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[index.ts:27](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/env/index.ts#L27)
+[index.ts:27](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/env/index.ts#L27)
 
 ***
 
@@ -54,4 +54,4 @@
 
 #### Defined in
 
-[index.ts:26](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/env/index.ts#L26)
+[index.ts:26](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/env/index.ts#L26)

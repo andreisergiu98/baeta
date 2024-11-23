@@ -16,4 +16,4 @@
 
 ## Defined in
 
-[packages/generator-sdk/lib/plugin.ts:17](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/plugin.ts#L17)
+[packages/generator-sdk/lib/plugin.ts:17](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L17)

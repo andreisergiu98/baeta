@@ -16,4 +16,4 @@ Note that the unix / is returned everywhere, so windows \ is always converted to
 
 ## Defined in
 
-[packages/util-path/index.ts:22](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/util-path/index.ts#L22)
+[packages/util-path/index.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/util-path/index.ts#L22)

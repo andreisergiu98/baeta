@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/ref.ts:7](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache/lib/ref.ts#L7)
+[packages/extension-cache/lib/ref.ts:7](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/ref.ts#L7)
 
 ## Methods
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/ref.ts:26](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache/lib/ref.ts#L26)
+[packages/extension-cache/lib/ref.ts:26](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/ref.ts#L26)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/ref.ts:18](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache/lib/ref.ts#L18)
+[packages/extension-cache/lib/ref.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/ref.ts#L18)
 
 ***
 
@@ -76,7 +76,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/ref.ts:22](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache/lib/ref.ts#L22)
+[packages/extension-cache/lib/ref.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/ref.ts#L22)
 
 ***
 
@@ -90,4 +90,4 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/ref.ts:14](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/extension-cache/lib/ref.ts#L14)
+[packages/extension-cache/lib/ref.ts:14](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/ref.ts#L14)

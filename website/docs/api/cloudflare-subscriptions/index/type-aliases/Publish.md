@@ -24,4 +24,4 @@
 
 ## Defined in
 
-[lib/subscription.ts:18](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/subscriptions-cloudflare/lib/subscription.ts#L18)
+[lib/subscription.ts:8](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription.ts#L8)

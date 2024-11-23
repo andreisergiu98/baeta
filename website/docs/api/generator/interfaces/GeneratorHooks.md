@@ -12,7 +12,7 @@
 
 #### Defined in
 
-[generator/lib/generate.ts:16](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator/lib/generate.ts#L16)
+[generator/lib/generate.ts:16](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator/lib/generate.ts#L16)
 
 ***
 
@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[generator/lib/generate.ts:17](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator/lib/generate.ts#L17)
+[generator/lib/generate.ts:17](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator/lib/generate.ts#L17)
 
 ***
 
@@ -50,7 +50,7 @@
 
 #### Defined in
 
-[generator/lib/generate.ts:22](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator/lib/generate.ts#L22)
+[generator/lib/generate.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator/lib/generate.ts#L22)
 
 ***
 
@@ -70,7 +70,7 @@
 
 #### Defined in
 
-[generator/lib/generate.ts:18](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator/lib/generate.ts#L18)
+[generator/lib/generate.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator/lib/generate.ts#L18)
 
 ***
 
@@ -84,4 +84,4 @@
 
 #### Defined in
 
-[generator/lib/generate.ts:15](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator/lib/generate.ts#L15)
+[generator/lib/generate.ts:15](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator/lib/generate.ts#L15)

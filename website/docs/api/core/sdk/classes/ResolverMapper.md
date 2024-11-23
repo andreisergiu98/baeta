@@ -14,31 +14,41 @@
 
 ### middlewares
 
-> `readonly` **middlewares**: [`MiddlewareMap`](../type-aliases/MiddlewareMap.md)
+> `readonly` **middlewares**: `MiddlewareMap`
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:28](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L28)
+[sdk/resolver-mapper.ts:19](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L19)
+
+***
+
+### prependedMiddlewares
+
+> `readonly` **prependedMiddlewares**: `MiddlewareMap`
+
+#### Defined in
+
+[sdk/resolver-mapper.ts:20](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L20)
 
 ***
 
 ### resolvers
 
-> `readonly` **resolvers**: [`ResolversMap`](../type-aliases/ResolversMap.md)
+> `readonly` **resolvers**: `ResolversMap`
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:27](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L27)
+[sdk/resolver-mapper.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L18)
 
 ***
 
 ### scalars
 
-> `readonly` **scalars**: [`ScalarsMap`](../type-aliases/ScalarsMap.md)
+> `readonly` **scalars**: `ScalarsMap`
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:26](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L26)
+[sdk/resolver-mapper.ts:17](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L17)
 
 ***
 
@@ -48,7 +58,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:31](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L31)
+[sdk/resolver-mapper.ts:23](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L23)
 
 ***
 
@@ -58,13 +68,13 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:30](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L30)
+[sdk/resolver-mapper.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L22)
 
 ## Methods
 
 ### addMiddleware()
 
-> **addMiddleware**\<`Result`, `Root`, `Context`, `Args`\>(`type`, `field`, `middleware`, `unshift`): `void`
+> **addMiddleware**\<`Result`, `Root`, `Context`, `Args`\>(`type`, `field`, `middleware`): `void`
 
 #### Type Parameters
 
@@ -84,7 +94,39 @@
 
 • **middleware**: [`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
 
-• **unshift**: `boolean` = `false`
+#### Returns
+
+`void`
+
+#### Defined in
+
+[sdk/resolver-mapper.ts:89](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L89)
+
+***
+
+### addMiddlewareToMap()
+
+> `protected` **addMiddlewareToMap**\<`Result`, `Root`, `Context`, `Args`\>(`map`, `type`, `field`, `middleware`): `void`
+
+#### Type Parameters
+
+• **Result**
+
+• **Root**
+
+• **Context**
+
+• **Args**
+
+#### Parameters
+
+• **map**: `MiddlewareMap`
+
+• **type**: `string`
+
+• **field**: `string`
+
+• **middleware**: [`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 #### Returns
 
@@ -92,7 +134,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:70](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L70)
+[sdk/resolver-mapper.ts:62](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L62)
 
 ***
 
@@ -106,7 +148,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:124](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L124)
+[sdk/resolver-mapper.ts:126](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L126)
 
 ***
 
@@ -124,7 +166,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:37](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L37)
+[sdk/resolver-mapper.ts:29](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L29)
 
 ***
 
@@ -138,7 +180,39 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:33](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L33)
+[sdk/resolver-mapper.ts:25](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L25)
+
+***
+
+### prependMiddleware()
+
+> **prependMiddleware**\<`Result`, `Root`, `Context`, `Args`\>(`type`, `field`, `middleware`): `void`
+
+#### Type Parameters
+
+• **Result**
+
+• **Root**
+
+• **Context**
+
+• **Args**
+
+#### Parameters
+
+• **type**: `string`
+
+• **field**: `string`
+
+• **middleware**: [`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[sdk/resolver-mapper.ts:97](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L97)
 
 ***
 
@@ -158,7 +232,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:113](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L113)
+[sdk/resolver-mapper.ts:115](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L115)
 
 ***
 
@@ -178,7 +252,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:103](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L103)
+[sdk/resolver-mapper.ts:105](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L105)
 
 ***
 
@@ -210,7 +284,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:41](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L41)
+[sdk/resolver-mapper.ts:33](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L33)
 
 ***
 
@@ -230,7 +304,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:50](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L50)
+[sdk/resolver-mapper.ts:42](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L42)
 
 ***
 
@@ -262,7 +336,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:54](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L54)
+[sdk/resolver-mapper.ts:46](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L46)
 
 ***
 
@@ -290,4 +364,4 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:62](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/core/sdk/resolver-mapper.ts#L62)
+[sdk/resolver-mapper.ts:54](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L54)

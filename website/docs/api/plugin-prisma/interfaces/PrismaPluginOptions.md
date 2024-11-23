@@ -8,7 +8,7 @@
 
 #### Defined in
 
-[lib/options.ts:2](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/plugin-prisma/lib/options.ts#L2)
+[lib/options.ts:2](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/plugin-prisma/lib/options.ts#L2)
 
 ***
 
@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[lib/options.ts:3](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/plugin-prisma/lib/options.ts#L3)
+[lib/options.ts:3](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/plugin-prisma/lib/options.ts#L3)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[lib/options.ts:5](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/plugin-prisma/lib/options.ts#L5)
+[lib/options.ts:5](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/plugin-prisma/lib/options.ts#L5)
 
 ***
 
@@ -38,4 +38,4 @@
 
 #### Defined in
 
-[lib/options.ts:4](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/plugin-prisma/lib/options.ts#L4)
+[lib/options.ts:4](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/plugin-prisma/lib/options.ts#L4)

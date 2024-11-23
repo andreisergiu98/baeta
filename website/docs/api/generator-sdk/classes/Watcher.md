@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:33](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L33)
+[packages/generator-sdk/lib/watcher.ts:33](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L33)
 
 ## Methods
 
@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:91](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L91)
+[packages/generator-sdk/lib/watcher.ts:91](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L91)
 
 ***
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:78](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L78)
+[packages/generator-sdk/lib/watcher.ts:78](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L78)
 
 ***
 
@@ -72,7 +72,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:70](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L70)
+[packages/generator-sdk/lib/watcher.ts:70](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L70)
 
 ***
 
@@ -92,7 +92,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:66](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L66)
+[packages/generator-sdk/lib/watcher.ts:66](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L66)
 
 ***
 
@@ -112,7 +112,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:62](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L62)
+[packages/generator-sdk/lib/watcher.ts:62](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L62)
 
 ***
 
@@ -132,7 +132,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:41](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L41)
+[packages/generator-sdk/lib/watcher.ts:41](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L41)
 
 ***
 
@@ -150,4 +150,4 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/watcher.ts:74](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/generator-sdk/lib/watcher.ts#L74)
+[packages/generator-sdk/lib/watcher.ts:74](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/watcher.ts#L74)

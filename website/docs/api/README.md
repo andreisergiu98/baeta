@@ -14,6 +14,7 @@
 - [@baeta/extension-cache-keyv](extension-cache-keyv/README.md)
 - [@baeta/extension-cache-redis](extension-cache-redis/README.md)
 - [@baeta/extension-cache-upstash](extension-cache-upstash/README.md)
+- [@baeta/extension-complexity](extension-complexity/README.md)
 - [@baeta/generator](generator/README.md)
 - [@baeta/generator-sdk](generator-sdk/README.md)
 - [@baeta/plugin](plugin/README.md)

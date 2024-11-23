@@ -17,4 +17,4 @@ At times we have two absolute paths, and we need to derive the relative path fro
 
 ## Defined in
 
-[packages/util-path/index.ts:28](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/util-path/index.ts#L28)
+[packages/util-path/index.ts:28](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/util-path/index.ts#L28)

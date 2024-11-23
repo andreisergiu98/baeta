@@ -18,4 +18,4 @@ string path to normalize.
 
 ## Defined in
 
-[packages/util-path/index.ts:24](https://github.com/andreisergiu98/baeta/blob/e352a1ec749c5b23df693f5f8373ac0b75347349/packages/util-path/index.ts#L24)
+[packages/util-path/index.ts:24](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/util-path/index.ts#L24)

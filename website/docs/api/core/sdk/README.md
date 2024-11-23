@@ -19,16 +19,11 @@
 ### Type Aliases
 
 - [ExtensionFactory](type-aliases/ExtensionFactory.md)
-- [FieldResolvers](type-aliases/FieldResolvers.md)
-- [MiddlewareMap](type-aliases/MiddlewareMap.md)
 - [NativeMiddleware](type-aliases/NativeMiddleware.md)
 - [NativeResolver](type-aliases/NativeResolver.md)
 - [NativeSubscription](type-aliases/NativeSubscription.md)
 - [NativeTypeResolver](type-aliases/NativeTypeResolver.md)
-- [ResolversMap](type-aliases/ResolversMap.md)
-- [ScalarsMap](type-aliases/ScalarsMap.md)
 - [SchemaTransformer](type-aliases/SchemaTransformer.md)
-- [SubscriptionsResolvers](type-aliases/SubscriptionsResolvers.md)
 - [TypeHash](type-aliases/TypeHash.md)
 - [TypeHashMap](type-aliases/TypeHashMap.md)
 

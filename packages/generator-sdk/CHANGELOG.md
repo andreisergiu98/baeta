@@ -1,5 +1,17 @@
 # @baeta/generator-sdk
 
+## 0.1.2
+
+### Patch Changes
+
+- [`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - revert fileblock instead of removing the file
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321)]:
+  - @baeta/plugin@0.1.2
+  - @baeta/util-path@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

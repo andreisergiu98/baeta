@@ -18,3 +18,15 @@ export type ResolversMap = {
 
 export type ScalarsMap = Record<string, ScalarResolver | undefined>;
 export type MiddlewareMap = Record<string, NativeMiddleware[] | undefined>;
+
+export function mergeMiddlewareMaps(target: MiddlewareMap, source: MiddlewareMap): MiddlewareMap {
+	const map: MiddlewareMap = { ...target };
+
+	for (const type in source) {
+		if (source[type]) {
+			map[type] ??= [];
+			map[type].push(...source[type]);
+		}
+	}
+	return map;
+}

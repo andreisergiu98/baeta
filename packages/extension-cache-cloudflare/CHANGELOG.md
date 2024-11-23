@@ -1,5 +1,12 @@
 # @baeta/extension-cache-cloudflare
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @baeta/extension-cache@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes

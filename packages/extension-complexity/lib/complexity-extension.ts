@@ -111,13 +111,13 @@ export class ComplexityExtension<Ctx> extends Extension {
 
 			if (type !== 'Subscription') {
 				for (const field of mapper.getTypeFields(type)) {
-					mapper.addMiddleware(type, field, this.createComplexityMiddleware());
+					mapper.prependMiddleware(type, field, this.createComplexityMiddleware());
 				}
 				continue;
 			}
 
 			for (const field of mapper.getTypeFields(type)) {
-				mapper.addMiddleware(type, `${field}.subscribe`, this.createComplexityMiddleware());
+				mapper.prependMiddleware(type, `${field}.subscribe`, this.createComplexityMiddleware());
 			}
 		}
 	};

@@ -8,6 +8,7 @@ import {
 	mockedScalar,
 } from './__test__/utils.ts';
 import { ResolverMapper } from './resolver-mapper.ts';
+import { mergeMiddlewareMaps } from './resolver-maps.ts';
 import type { NativeResolver } from './resolver.ts';
 import type { NativeSubscription } from './subscription.ts';
 
@@ -63,10 +64,14 @@ test('addMiddleware registers middleware for a type and field', (t) => {
 	const middleware2 = forgeNativeMiddleware();
 
 	mapper.addMiddleware('Query', 'hello', middleware1);
-	mapper.addMiddleware('Query', 'hello', middleware2, true);
+	mapper.prependMiddleware('Query', 'hello', middleware2);
 
-	t.is(mapper.middlewares['Query.hello']?.[0], middleware2);
-	t.is(mapper.middlewares['Query.hello']?.[1], middleware1);
+	const mergedMiddlewares = mergeMiddlewareMaps(mapper.prependedMiddlewares, mapper.middlewares);
+
+	t.is(mapper.middlewares['Query.hello']?.[0], middleware1);
+	t.is(mapper.prependedMiddlewares['Query.hello']?.[0], middleware2);
+	t.is(mergedMiddlewares['Query.hello']?.[0], middleware2);
+	t.is(mergedMiddlewares['Query.hello']?.[1], middleware1);
 });
 
 test('composes middlewares with resolvers', (t) => {

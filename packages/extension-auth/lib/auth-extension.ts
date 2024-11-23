@@ -126,12 +126,12 @@ export class AuthExtension<Ctx> extends Extension {
 				}
 
 				if (field !== '*') {
-					mapper.addMiddleware(type, field, middleware, true);
+					mapper.prependMiddleware(type, field, middleware);
 					continue;
 				}
 
 				for (const fieldWithoutScope of fieldsWithoutScopes) {
-					mapper.addMiddleware(type, fieldWithoutScope, middleware, true);
+					mapper.prependMiddleware(type, fieldWithoutScope, middleware);
 				}
 
 				fieldsWithoutScopes = [];
@@ -275,7 +275,7 @@ export class AuthExtension<Ctx> extends Extension {
 				return;
 			}
 			return (mapper: ResolverMapper, field: string) => {
-				mapper.addMiddleware(type, field, middleware, true);
+				mapper.prependMiddleware(type, field, middleware);
 			};
 		}
 
@@ -288,11 +288,11 @@ export class AuthExtension<Ctx> extends Extension {
 
 		return (mapper: ResolverMapper, field: string) => {
 			if (subscribeDefaultMiddleware && field.endsWith('.subscribe')) {
-				mapper.addMiddleware(type, field, subscribeDefaultMiddleware, true);
+				mapper.prependMiddleware(type, field, subscribeDefaultMiddleware);
 			}
 
 			if (resolveDefaultMiddleware && field.endsWith('.resolve')) {
-				mapper.addMiddleware(type, field, resolveDefaultMiddleware, true);
+				mapper.prependMiddleware(type, field, resolveDefaultMiddleware);
 			}
 		};
 	}

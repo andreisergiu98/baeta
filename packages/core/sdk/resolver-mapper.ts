@@ -3,7 +3,12 @@ import { defaultFieldResolver } from 'graphql';
 import type { ScalarResolver } from '../lib/scalar.ts';
 import { composeResolvers } from './compose.ts';
 import type { NativeMiddleware } from './middleware.ts';
-import type { MiddlewareMap, ResolversMap, ScalarsMap } from './resolver-maps.ts';
+import {
+	type MiddlewareMap,
+	type ResolversMap,
+	type ScalarsMap,
+	mergeMiddlewareMaps,
+} from './resolver-maps.ts';
 import type { NativeTypeResolver } from './resolver-type.ts';
 import type { NativeResolver } from './resolver.ts';
 import type { NativeSubscription } from './subscription.ts';
@@ -12,6 +17,7 @@ export class ResolverMapper {
 	readonly scalars: ScalarsMap = Object.create(null);
 	readonly resolvers: ResolversMap = Object.create(null);
 	readonly middlewares: MiddlewareMap = Object.create(null);
+	readonly prependedMiddlewares: MiddlewareMap = Object.create(null);
 
 	readonly types: string[] = [];
 	readonly typeFields: Record<string, string[] | undefined> = Object.create(null);
@@ -53,37 +59,47 @@ export class ResolverMapper {
 		this.resolvers[type].__resolveType = resolver as NativeTypeResolver;
 	}
 
-	addMiddleware<Result, Root, Context, Args>(
+	protected addMiddlewareToMap<Result, Root, Context, Args>(
+		map: MiddlewareMap,
 		type: string,
 		field: string,
 		middleware: NativeMiddleware<Result, Root, Context, Args>,
-		unshift = false,
 	) {
 		if (type === '*') {
 			for (const t of this.getTypes()) {
-				this.addMiddleware(t, field, middleware, unshift);
+				this.addMiddlewareToMap(map, t, field, middleware);
 			}
-
 			return;
 		}
 
 		if (field === '*') {
 			for (const field of this.getTypeFields(type)) {
-				this.addMiddleware(type, field, middleware, unshift);
+				this.addMiddlewareToMap(map, type, field, middleware);
 			}
-
 			return;
 		}
 
 		this.setDefaultFieldResolver(type, field);
-		const key = `${type}.${field}`;
-		this.middlewares[key] ??= [];
 
-		if (unshift) {
-			this.middlewares[key].unshift(middleware as NativeMiddleware);
-		} else {
-			this.middlewares[key].push(middleware as NativeMiddleware);
-		}
+		const key = `${type}.${field}`;
+		map[key] ??= [];
+		map[key].push(middleware as NativeMiddleware);
+	}
+
+	addMiddleware<Result, Root, Context, Args>(
+		type: string,
+		field: string,
+		middleware: NativeMiddleware<Result, Root, Context, Args>,
+	) {
+		this.addMiddlewareToMap(this.middlewares, type, field, middleware);
+	}
+
+	prependMiddleware<Result, Root, Context, Args>(
+		type: string,
+		field: string,
+		middleware: NativeMiddleware<Result, Root, Context, Args>,
+	) {
+		this.addMiddlewareToMap(this.prependedMiddlewares, type, field, middleware);
 	}
 
 	setDefaultFieldResolver(type: string, field: string) {
@@ -108,7 +124,10 @@ export class ResolverMapper {
 	}
 
 	compose() {
-		const resolvers = composeResolvers(this.resolvers, this.middlewares);
+		const resolvers = composeResolvers(
+			this.resolvers,
+			mergeMiddlewareMaps(this.prependedMiddlewares, this.middlewares),
+		);
 
 		return {
 			...resolvers,

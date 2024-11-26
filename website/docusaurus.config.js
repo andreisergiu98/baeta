@@ -119,6 +119,11 @@ const config = {
 				theme: lightCodeTheme,
 				darkTheme: darkCodeTheme,
 			},
+			algolia: {
+				appId: '4FC0N9XMY9',
+				apiKey: '4d2e8517e7336f96a0ef90266f9e0f72',
+				indexName: 'baeta',
+			},
 		}),
 	webpack: {
 		jsLoader: (isServer) => ({

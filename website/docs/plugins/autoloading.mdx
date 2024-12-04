@@ -26,6 +26,10 @@ export default defineConfig({
 });
 ```
 
+:::warning
+For the plugin to work correctly, it should be registered **before** plugins that generate **GraphQL files, modules or resolvers**.
+:::
+
 ## Project Structure
 
 The autoloader expects a specific project structure:

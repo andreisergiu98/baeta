@@ -1,0 +1,128 @@
+---
+sidebar_position: 120
+title: Typed PubSub
+---
+
+# Typed PubSub System
+
+Baeta provides a type-safe wrapper around `graphql-subscriptions` PubSub system. This utility ensures that your subscription channels and their payloads are properly typed, helping catch potential errors at compile time.
+
+:::tip
+If you are using GraphQL Yoga this is package is unnecessary as it already provides a type-safe PubSub system.
+:::
+
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/subscriptions-pubsub" />
+
+## Basic Setup
+
+1. Define Your Event Map
+
+First, create a type map that defines your subscription channels and their corresponding payload types:
+
+```typescript
+import { createTypedPubSub } from '@baeta/subscriptions-pubsub';
+import { PubSub } from 'graphql-subscriptions';
+import type { User } from '../__generated__/types';
+
+export type PubSubMap = {
+  'user-updated': User;
+  [c: `user-updated-${string}`]: User;
+  // Add more channels as needed:
+  // 'post-created': Post;
+  // 'comment-deleted': { postId: string; commentId: string };
+};
+```
+
+2. Create the Typed PubSub Instance
+
+```typescript
+/**
+ * For development/simple setups. For production, consider using
+ * more robust solutions like graphql-redis-subscriptions
+ */
+export const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub())
+```
+
+3. Add to Your Context
+
+```typescript
+export interface Context {
+  pubsub: typeof pubsub;
+  // ... other context properties
+}
+
+export function createContext(): Context {
+  return {
+    pubsub,
+    // ... other context properties
+  };
+}
+```
+
+## Usage
+
+### Publishing Events
+
+The typed PubSub system ensures you can only publish to defined channels with the correct payload type:
+
+```typescript
+Mutation.updateUser(({ args, ctx }) => {
+  const updatedUser = {
+    id: args.where.id,
+    email: 'jon.doe@baeta.io',
+    givenName: args.data.givenName ?? 'Jon',
+    lastName: args.data.lastName ?? 'Doe',
+  };
+
+  // Type-safe publish - TypeScript will error if channel or payload type is incorrect
+  ctx.pubsub.publish('user-updated', updatedUser);
+
+  return updatedUser;
+});
+```
+
+### Subscribing to Events
+    
+Create subscription resolvers using the typed asyncIterableIterator:
+
+```typescript
+Subscription.userUpdated({
+  subscribe(params) {
+    // Type-safe subscription - channel name is autocompleted and type-checked
+    return params.ctx.pubsub.asyncIterableIterator('user-updated');
+  },
+  resolve(params) {
+    // params.payload is properly inferred as User
+    return params.payload;
+  },
+});
+```
+
+### Using with Redis
+
+For production environments, you might want to use a more robust solution like `graphql-redis-subscriptions`:
+
+```typescript
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import Redis from 'ioredis';
+
+const options = {
+  host: 'redis-server',
+  port: 6379,
+  retryStrategy: times => Math.min(times * 50, 2000),
+};
+
+const pubsub = createTypedPubSub<RedisPubSub, PubSubMap>(
+  new RedisPubSub({
+    publisher: new Redis(options),
+    subscriber: new Redis(options),
+  }), {
+	prefix: 'feature-1:', // Optionally supports prefixing channels
+  }
+);
+```

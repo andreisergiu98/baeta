@@ -75,7 +75,11 @@ export const authExt = authExtension<Context>(
 import { createExtensions } from '@baeta/core';
 import { authExt } from './auth-extension';
 
-export default createExtensions(authExt);
+export default createExtensions(
+  //... other extensions  
+  authExt
+  //... other extensions
+);
 ```
 
 3. Point Baeta to extensions entrypoint (if you haven't already)

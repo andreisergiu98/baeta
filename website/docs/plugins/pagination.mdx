@@ -1,0 +1,74 @@
+---
+sidebar_position: 30
+---
+
+# Pagination
+
+The Pagination plugin adds support for Relay-style pagination, automatically generating the necessary GraphQL types for cursor-based pagination.
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/plugin-pagination" dev={true} />
+
+## Configuration
+
+Enable pagination plugin in your `baeta.ts`:
+
+```typescript
+import { defineConfig } from "@baeta/cli";
+import { paginationPlugin } from "@baeta/plugin-pagination";
+
+export default defineConfig({
+  plugins: [
+    paginationPlugin({
+      // Customize the PageInfo type with additional fields
+      pageInfoFields: ['hasMorePages: Boolean!'],
+      
+      // Make the node field nullable in all connections
+      nullableNode: true,
+      
+      // Configure pagination for specific types
+      types: {
+        // Simple configuration - generate default connection types
+        User: true,
+        UserPhoto: true,
+        
+        // Advanced configuration with custom fields
+        UserCustom: {
+          nodeType: 'User', // Use a different type for nodes
+          cursorType: 'UUID!', // Specify cursor type (default: String!)
+          connectionFields: ['totalCount: Int!'], // Add fields to connection type
+          edgeFields: ['hasPhotos: Boolean!'], // Add fields to edge type
+        },
+      },
+    }),
+  ],
+});
+```
+
+## Usage
+
+Define your pagination input type and use the generated connection type:
+
+```graphql
+input UserPhotoPage {
+  cursor: ID
+  limit: Int! @validInt(min: 1, max: 50)
+}
+
+extend type User {
+  photosConnection(page: UserPhotoPage!): UserPhotoConnection
+}
+```
+
+The plugin will automatically generate:
+- Connection types (e.g., UserPhotoConnection)
+- Edge types (e.g., UserPhotoEdge)
+- PageInfo type with standard and custom fields
+- All necessary TypeScript types for your resolvers
+
+:::tip
+The implementation of resolvers depends on your data source (ORM, database, etc.).
+For a showcase of how to implement pagination with Prisma, check out the [pagination example](https://github.com/andreisergiu98/baeta/blob/main/examples/relay-pagination/src/modules/user-photos/user-photos-pages.resolvers.ts).

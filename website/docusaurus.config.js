@@ -82,6 +82,21 @@ const config = {
 						label: 'Docs',
 					},
 					{
+						position: 'left',
+						label: 'Examples',
+						href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+					},
+					{
+						href: 'https://github.com/sponsors/andreisergiu98',
+						label: 'Donate',
+						position: 'right',
+					},
+					{
+						href: 'https://discord.gg/j6Y8xRc7ep',
+						label: 'Discord',
+						position: 'right',
+					},
+					{
 						href: 'https://github.com/andreisergiu98/baeta',
 						label: 'GitHub',
 						position: 'right',
@@ -102,6 +117,10 @@ const config = {
 								label: 'Getting Started',
 								to: '/docs/getting-started/installation',
 							},
+							{
+								label: 'Examples',
+								href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+							},
 						],
 					},
 					{
@@ -110,6 +129,14 @@ const config = {
 							{
 								label: 'GitHub',
 								href: 'https://github.com/andreisergiu98/baeta',
+							},
+							{
+								label: 'Discord',
+								href: 'https://discord.gg/j6Y8xRc7ep',
+							},
+							{
+								label: 'Donate',
+								href: 'https://github.com/sponsors/andreisergiu98',
 							},
 						],
 					},
@@ -125,6 +152,19 @@ const config = {
 				indexName: 'baeta',
 			},
 		}),
+	plugins: [
+		[
+			require.resolve('@docusaurus/plugin-client-redirects'),
+			{
+				redirects: [
+					{
+						from: '/docs',
+						to: '/docs/intro',
+					},
+				],
+			},
+		],
+	],
 	webpack: {
 		jsLoader: (isServer) => ({
 			loader: require.resolve('esbuild-loader'),

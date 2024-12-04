@@ -2880,6 +2880,7 @@ __metadata:
   dependencies:
     "@docusaurus/core": "npm:^3.6.3"
     "@docusaurus/module-type-aliases": "npm:3.6.3"
+    "@docusaurus/plugin-client-redirects": "npm:^3.6.3"
     "@docusaurus/plugin-sitemap": "npm:^3.6.3"
     "@docusaurus/preset-classic": "npm:^3.6.3"
     "@docusaurus/theme-classic": "npm:^3.6.3"
@@ -4034,6 +4035,26 @@ __metadata:
     react: "*"
     react-dom: "*"
   checksum: 10/0347a7fee1a6f3c66f03f6610d587c3f5a1b5ca2996edcda3c66a8d4353bc1fd8c60e92067c222673ecf4cc25fd8419881e247b0e446adab123baaee23691177
+  languageName: node
+  linkType: hard
+
+"@docusaurus/plugin-client-redirects@npm:^3.6.3":
+  version: 3.6.3
+  resolution: "@docusaurus/plugin-client-redirects@npm:3.6.3"
+  dependencies:
+    "@docusaurus/core": "npm:3.6.3"
+    "@docusaurus/logger": "npm:3.6.3"
+    "@docusaurus/utils": "npm:3.6.3"
+    "@docusaurus/utils-common": "npm:3.6.3"
+    "@docusaurus/utils-validation": "npm:3.6.3"
+    eta: "npm:^2.2.0"
+    fs-extra: "npm:^11.1.1"
+    lodash: "npm:^4.17.21"
+    tslib: "npm:^2.6.0"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 10/6cf032d8fbe164ee53aee4c95de46e2970a3dd79ae92a241c22c14e955ddf821c2d0fee93521b3129d1e413cb00b9508218e4f95dc04eb948874be177f12718c
   languageName: node
   linkType: hard
 

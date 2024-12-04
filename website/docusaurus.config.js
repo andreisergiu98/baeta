@@ -82,6 +82,16 @@ const config = {
 						label: 'Docs',
 					},
 					{
+						position: 'left',
+						label: 'Examples',
+						href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+					},
+					{
+						href: 'https://discord.gg/j6Y8xRc7ep',
+						label: 'Discord',
+						position: 'right',
+					},
+					{
 						href: 'https://github.com/andreisergiu98/baeta',
 						label: 'GitHub',
 						position: 'right',
@@ -102,6 +112,10 @@ const config = {
 								label: 'Getting Started',
 								to: '/docs/getting-started/installation',
 							},
+							{
+								label: 'Examples',
+								href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+							},
 						],
 					},
 					{
@@ -110,6 +124,10 @@ const config = {
 							{
 								label: 'GitHub',
 								href: 'https://github.com/andreisergiu98/baeta',
+							},
+							{
+								label: 'Discord',
+								href: 'https://discord.gg/j6Y8xRc7ep',
 							},
 						],
 					},

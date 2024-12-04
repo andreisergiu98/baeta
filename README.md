@@ -97,7 +97,7 @@ Query.users.$useCache(userCache);
 ## Documentation
 
 - [Website](https://baeta.io)
-- [Official Documentation](https://baeta.io/docs/intro/)
+- [Documentation](https://baeta.io/docs/intro/)
 - [Examples](https://github.com/andreisergiu98/baeta/tree/main/examples)
 
 ## Compatibility

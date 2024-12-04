@@ -1,5 +1,5 @@
 ---
-sidebar_position: 150
+sidebar_position: 10
 ---
 
 # Authorization
@@ -48,24 +48,24 @@ declare global {
 }
 
 export const authExt = authExtension<Context>(
-    async (ctx) => {
-        const accessList: string[] = ['guest', 'user'];
+  async (ctx) => {
+    const accessList: string[] = ['guest', 'user'];
 
-        // You can fetch data before the scopes are created
+    // You can fetch data before the scopes are created
 
-        return {
-            isPublic: true,
-            isLoggedIn: async () => { // But you can also use scope loaders, which will be resolved lazily, when needed
-                if (!ctx.userId) {
-                    throw new UnauthenticatedError();
-                }
-                return true;
-            },
-            hasAccess: (access: string) => { // Scope loaders are also required for non-boolean scopes
-                return ctx.user?.accessList.includes(access) ?? false;
-            },
-        };
-    },
+    return {
+      isPublic: true,
+      isLoggedIn: async () => { // But you can also use scope loaders, which will be resolved lazily, when needed
+        if (!ctx.userId) {
+          throw new UnauthenticatedError();
+        }
+        return true;
+      },
+      hasAccess: (access: string) => { // Scope loaders are also required for non-boolean scopes
+        return ctx.user?.accessList.includes(access) ?? false;
+      },
+    };
+  },
 );
 ```
 
@@ -78,7 +78,7 @@ import { authExt } from './auth-extension';
 export default createExtensions(authExt);
 ```
 
-3. Point Baeta to registered extensions
+3. Point Baeta to extensions entrypoint (if you haven't already)
 
 ```typescript
 export default defineConfig({
@@ -115,7 +115,7 @@ Mutation.createUser.$auth({
 // Useful to avoid double database queries when you need the resource for permission checking
 Query.user.$postAuth((params, result) => {
   if (result && result.id === params.ctx.userId) {
-    return {}; // Allow access if user is requesting their own data
+    return true; // Allow access if user is requesting their own data
   }
   return { hasAccess: 'admin' }; // Require admin access for other users' data
 });

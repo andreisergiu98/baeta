@@ -1,0 +1,57 @@
+---
+sidebar_position: 1
+title: Extensions
+---
+
+# Understanding Extensions
+
+
+While plugins enhance Baeta during build time, extensions add functionality at runtime, allowing you to extend your GraphQL schema with additional capabilities. Extensions provide methods (similar to middlewares) that can be applied to fields and resolvers, enabling features like authorization, caching, logging, and more.
+## How Extensions Work
+
+Extensions attach additional methods to your GraphQL types and fields using a type-safe API. For example, the authorization extension adds the `$auth()` method to your resolvers, allowing you to define access control rules:
+```typescript
+Query.user.$auth({
+  isLoggedIn: true
+});
+```
+
+## Extension Setup
+
+1. Install the desired extensions:
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/extension-auth @baeta/extension-complexity" />
+
+2. Register your extensions:
+
+```typescript
+
+import { createExtensions } from '@baeta/core';
+import { authExtension } from '@baeta/extension-auth';
+import { complexityExtension } from '@baeta/extension-complexity';
+
+
+export default createExtensions(
+  authExtension(...),
+  complexityExtension(...),
+  // other extensions...
+);
+```
+
+3. Configure Baeta to use the extensions:
+
+Since extensions are runtime features, the generators need to know where to find them. 
+You must specify the path to extensions entrypoint in `baeta.ts` configuration file:
+
+```typescript
+export default defineConfig({
+  graphql: {
+    extensions: 'src/extensions/index.ts',
+    // ... other config
+  },
+});
+```
+
+For detailed information about specific extensions, check their respective documentation pages.

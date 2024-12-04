@@ -1,0 +1,42 @@
+---
+sidebar_position: 1
+title: Plugins
+---
+
+# Plugins
+
+Plugins are part of the core building blocks in Baeta that add functionality at build time. They can generate code, execute commands, transform files, and more.
+
+## Configuration
+
+Plugins are registered in your Baeta configuration file `baeta.ts`:
+
+```typescript
+import { defineConfig } from "@baeta/cli";
+import { autoloadPlugin } from "@baeta/plugin-autoload";
+import { gitignorePlugin } from "@baeta/plugin-gitignore";
+import { prismaPlugin } from "@baeta/plugin-prisma";
+import { execPlugin } from "@baeta/plugin-exec";
+
+export default defineConfig({
+  plugins: [
+    gitignorePlugin({
+      // plugin options
+    }),
+    autoloadPlugin({
+      // plugin options
+    }),
+    prismaPlugin({
+      // plugin options
+    }),
+    execPlugin({
+      // plugin options
+    }),
+    // Add more plugins here
+  ],
+});
+```
+
+:::tip
+Sometimes the order of plugins matters. Check the plugin documentation for any specific requirements.
+:::

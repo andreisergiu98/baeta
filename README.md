@@ -104,6 +104,10 @@ Query.users.$useCache(userCache);
 
 Baeta is compatible with all GraphQL servers, which makes it easy to integrate with your existing stack. It works seamlessly with popular GraphQL server libraries such as **Graphql Yoga** and **Apollo Server**, as well as other popular tools like **Prisma**, **Drizzle** and **Kysely**.
 
+## Credits
+
+Baeta was inspired by several amazing projects and people in the GraphQL ecosystem. Check out our [Credits page](https://baeta.io/docs/credits) to learn more about the individuals and projects that influenced Baeta's development.
+
 ## License
 
 Baeta is licensed under the [MIT License](./LICENSE).

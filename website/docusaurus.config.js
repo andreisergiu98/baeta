@@ -87,6 +87,11 @@ const config = {
 						href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
 					},
 					{
+						href: 'https://github.com/sponsors/andreisergiu98',
+						label: 'Donate',
+						position: 'right',
+					},
+					{
 						href: 'https://discord.gg/j6Y8xRc7ep',
 						label: 'Discord',
 						position: 'right',
@@ -129,6 +134,10 @@ const config = {
 								label: 'Discord',
 								href: 'https://discord.gg/j6Y8xRc7ep',
 							},
+							{
+								label: 'Donate',
+								href: 'https://github.com/sponsors/andreisergiu98',
+							},
 						],
 					},
 				],
@@ -143,6 +152,19 @@ const config = {
 				indexName: 'baeta',
 			},
 		}),
+	plugins: [
+		[
+			require.resolve('@docusaurus/plugin-client-redirects'),
+			{
+				redirects: [
+					{
+						from: '/docs',
+						to: '/docs/intro',
+					},
+				],
+			},
+		],
+	],
 	webpack: {
 		jsLoader: (isServer) => ({
 			loader: require.resolve('esbuild-loader'),

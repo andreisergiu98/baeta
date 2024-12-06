@@ -8,7 +8,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:89](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L89)
+[packages/generator-sdk/lib/config.ts:89](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L89)
 
 ***
 
@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:90](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L90)
+[packages/generator-sdk/lib/config.ts:90](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L90)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:85](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L85)
+[packages/generator-sdk/lib/config.ts:85](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L85)
 
 ***
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:91](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L91)
+[packages/generator-sdk/lib/config.ts:91](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L91)
 
 ***
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:93](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L93)
+[packages/generator-sdk/lib/config.ts:93](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L93)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:95](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L95)
+[packages/generator-sdk/lib/config.ts:95](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L95)
 
 ***
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:94](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L94)
+[packages/generator-sdk/lib/config.ts:94](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L94)
 
 ***
 
@@ -78,7 +78,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:88](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L88)
+[packages/generator-sdk/lib/config.ts:88](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L88)
 
 ***
 
@@ -88,7 +88,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:87](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L87)
+[packages/generator-sdk/lib/config.ts:87](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L87)
 
 ***
 
@@ -98,7 +98,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:92](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L92)
+[packages/generator-sdk/lib/config.ts:92](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L92)
 
 ***
 
@@ -108,4 +108,4 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/config.ts:86](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/config.ts#L86)
+[packages/generator-sdk/lib/config.ts:86](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L86)

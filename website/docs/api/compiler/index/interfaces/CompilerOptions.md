@@ -16,7 +16,7 @@ false
 
 #### Defined in
 
-[packages/compiler/lib/esbuild-config.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/compiler/lib/esbuild-config.ts#L22)
+[packages/compiler/lib/esbuild-config.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L22)
 
 ***
 
@@ -40,7 +40,7 @@ false // in build mode
 
 #### Defined in
 
-[packages/compiler/lib/esbuild-config.ts:29](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/compiler/lib/esbuild-config.ts#L29)
+[packages/compiler/lib/esbuild-config.ts:29](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L29)
 
 ***
 
@@ -61,7 +61,7 @@ false
 
 #### Defined in
 
-[packages/compiler/lib/esbuild-config.ts:38](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/compiler/lib/esbuild-config.ts#L38)
+[packages/compiler/lib/esbuild-config.ts:38](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L38)
 
 ***
 
@@ -79,7 +79,7 @@ dist: 'dist'
 
 #### Defined in
 
-[packages/compiler/lib/esbuild-config.ts:16](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/compiler/lib/esbuild-config.ts#L16)
+[packages/compiler/lib/esbuild-config.ts:16](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L16)
 
 ***
 
@@ -91,7 +91,7 @@ Options to pass to esbuild
 
 #### Defined in
 
-[packages/compiler/lib/esbuild-config.ts:43](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/compiler/lib/esbuild-config.ts#L43)
+[packages/compiler/lib/esbuild-config.ts:43](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L43)
 
 ***
 
@@ -109,4 +109,4 @@ src: 'src/index.ts'
 
 #### Defined in
 
-[packages/compiler/lib/esbuild-config.ts:10](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/compiler/lib/esbuild-config.ts#L10)
+[packages/compiler/lib/esbuild-config.ts:10](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L10)

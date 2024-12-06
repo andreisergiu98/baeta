@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:17](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L17)
+[packages/extension-cache/lib/store-adapter.ts:17](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L17)
 
 ## Properties
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:27](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L27)
+[packages/extension-cache/lib/store-adapter.ts:27](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L27)
 
 ***
 
@@ -74,7 +74,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:42](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L42)
+[packages/extension-cache/lib/store-adapter.ts:42](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L42)
 
 ***
 
@@ -92,7 +92,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:23](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L23)
+[packages/extension-cache/lib/store-adapter.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L23)
 
 ***
 
@@ -102,7 +102,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:20](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L20)
+[packages/extension-cache/lib/store-adapter.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L20)
 
 ***
 
@@ -112,7 +112,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:56](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L56)
+[packages/extension-cache/lib/store-adapter.ts:56](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L56)
 
 ***
 
@@ -134,7 +134,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:36](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L36)
+[packages/extension-cache/lib/store-adapter.ts:36](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L36)
 
 ***
 
@@ -144,7 +144,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L18)
+[packages/extension-cache/lib/store-adapter.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L18)
 
 ***
 
@@ -162,7 +162,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:25](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L25)
+[packages/extension-cache/lib/store-adapter.ts:25](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L25)
 
 ***
 
@@ -186,7 +186,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:29](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L29)
+[packages/extension-cache/lib/store-adapter.ts:29](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L29)
 
 ***
 
@@ -196,7 +196,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:19](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L19)
+[packages/extension-cache/lib/store-adapter.ts:19](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L19)
 
 ## Methods
 
@@ -214,7 +214,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:60](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L60)
+[packages/extension-cache/lib/store-adapter.ts:60](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L60)
 
 ***
 
@@ -232,7 +232,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:64](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L64)
+[packages/extension-cache/lib/store-adapter.ts:64](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L64)
 
 ***
 
@@ -254,7 +254,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:68](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L68)
+[packages/extension-cache/lib/store-adapter.ts:68](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L68)
 
 ***
 
@@ -282,7 +282,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:187](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L187)
+[packages/extension-cache/lib/store-adapter.ts:187](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L187)
 
 ***
 
@@ -304,7 +304,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:264](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L264)
+[packages/extension-cache/lib/store-adapter.ts:264](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L264)
 
 ***
 
@@ -324,7 +324,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:87](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L87)
+[packages/extension-cache/lib/store-adapter.ts:87](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L87)
 
 ***
 
@@ -342,7 +342,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:83](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L83)
+[packages/extension-cache/lib/store-adapter.ts:83](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L83)
 
 ***
 
@@ -364,7 +364,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:253](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L253)
+[packages/extension-cache/lib/store-adapter.ts:253](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L253)
 
 ***
 
@@ -382,7 +382,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:246](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L246)
+[packages/extension-cache/lib/store-adapter.ts:246](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L246)
 
 ***
 
@@ -402,7 +402,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:117](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L117)
+[packages/extension-cache/lib/store-adapter.ts:117](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L117)
 
 ***
 
@@ -430,7 +430,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:121](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L121)
+[packages/extension-cache/lib/store-adapter.ts:121](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L121)
 
 ***
 
@@ -450,7 +450,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:301](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L301)
+[packages/extension-cache/lib/store-adapter.ts:301](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L301)
 
 ***
 
@@ -468,7 +468,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:293](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L293)
+[packages/extension-cache/lib/store-adapter.ts:293](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L293)
 
 ***
 
@@ -488,7 +488,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:274](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L274)
+[packages/extension-cache/lib/store-adapter.ts:274](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L274)
 
 ***
 
@@ -506,7 +506,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:238](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L238)
+[packages/extension-cache/lib/store-adapter.ts:238](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L238)
 
 ***
 
@@ -524,7 +524,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:93](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L93)
+[packages/extension-cache/lib/store-adapter.ts:93](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L93)
 
 ***
 
@@ -542,7 +542,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:97](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L97)
+[packages/extension-cache/lib/store-adapter.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L97)
 
 ***
 
@@ -570,7 +570,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:128](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L128)
+[packages/extension-cache/lib/store-adapter.ts:128](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L128)
 
 ***
 
@@ -588,7 +588,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:339](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L339)
+[packages/extension-cache/lib/store-adapter.ts:339](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L339)
 
 ***
 
@@ -606,7 +606,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:356](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L356)
+[packages/extension-cache/lib/store-adapter.ts:356](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L356)
 
 ***
 
@@ -620,7 +620,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:78](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L78)
+[packages/extension-cache/lib/store-adapter.ts:78](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L78)
 
 ***
 
@@ -638,7 +638,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:48](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L48)
+[packages/extension-cache/lib/store-adapter.ts:48](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L48)
 
 ***
 
@@ -658,7 +658,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:219](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L219)
+[packages/extension-cache/lib/store-adapter.ts:219](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L219)
 
 ***
 
@@ -676,7 +676,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:113](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L113)
+[packages/extension-cache/lib/store-adapter.ts:113](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L113)
 
 ***
 
@@ -706,7 +706,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:160](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L160)
+[packages/extension-cache/lib/store-adapter.ts:160](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L160)
 
 ***
 
@@ -724,7 +724,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:335](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L335)
+[packages/extension-cache/lib/store-adapter.ts:335](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L335)
 
 ***
 
@@ -742,4 +742,4 @@ asserts ref is string \| number \| bigint
 
 #### Defined in
 
-[packages/extension-cache/lib/store-adapter.ts:369](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-adapter.ts#L369)
+[packages/extension-cache/lib/store-adapter.ts:369](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L369)

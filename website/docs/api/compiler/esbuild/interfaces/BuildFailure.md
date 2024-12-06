@@ -16,7 +16,7 @@
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es2022.error.d.ts:24
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es2022.error.d.ts:26
 
 ***
 
@@ -40,7 +40,7 @@
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es5.d.ts:1077
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1077
 
 ***
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es5.d.ts:1076
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1076
 
 ***
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es5.d.ts:1078
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1078
 
 ***
 

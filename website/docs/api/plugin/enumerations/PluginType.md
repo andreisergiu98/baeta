@@ -8,7 +8,7 @@
 
 #### Defined in
 
-[index.ts:3](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/plugin/index.ts#L3)
+[index.ts:3](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/plugin/index.ts#L3)
 
 ***
 
@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[index.ts:2](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/plugin/index.ts#L2)
+[index.ts:2](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/plugin/index.ts#L2)

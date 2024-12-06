@@ -41,4 +41,4 @@ Stdin stream passed to `render()` in `options.stdin` or `process.stdin` by defau
 
 ## Defined in
 
-.yarn/\_\_virtual\_\_/ink-virtual-aec70b31ab/0/cache/ink-npm-5.0.1-25988da7ed-03eab53468.zip/node\_modules/ink/build/components/StdinContext.d.ts:5
+.yarn/\_\_virtual\_\_/ink-virtual-46a2052950/0/cache/ink-npm-5.1.0-5eb899d847-aa60256b38.zip/node\_modules/ink/build/components/StdinContext.d.ts:2

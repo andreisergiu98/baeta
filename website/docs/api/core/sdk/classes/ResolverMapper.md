@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:19](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L19)
+[sdk/resolver-mapper.ts:19](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L19)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:20](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L20)
+[sdk/resolver-mapper.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L20)
 
 ***
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L18)
+[sdk/resolver-mapper.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L18)
 
 ***
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:17](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L17)
+[sdk/resolver-mapper.ts:17](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L17)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:23](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L23)
+[sdk/resolver-mapper.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L23)
 
 ***
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L22)
+[sdk/resolver-mapper.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L22)
 
 ## Methods
 
@@ -100,7 +100,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:89](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L89)
+[sdk/resolver-mapper.ts:89](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L89)
 
 ***
 
@@ -134,7 +134,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:62](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L62)
+[sdk/resolver-mapper.ts:62](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L62)
 
 ***
 
@@ -148,7 +148,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:126](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L126)
+[sdk/resolver-mapper.ts:126](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L126)
 
 ***
 
@@ -166,7 +166,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:29](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L29)
+[sdk/resolver-mapper.ts:29](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L29)
 
 ***
 
@@ -180,7 +180,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:25](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L25)
+[sdk/resolver-mapper.ts:25](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L25)
 
 ***
 
@@ -212,7 +212,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:97](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L97)
+[sdk/resolver-mapper.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L97)
 
 ***
 
@@ -232,7 +232,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:115](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L115)
+[sdk/resolver-mapper.ts:115](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L115)
 
 ***
 
@@ -252,7 +252,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:105](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L105)
+[sdk/resolver-mapper.ts:105](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L105)
 
 ***
 
@@ -284,7 +284,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:33](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L33)
+[sdk/resolver-mapper.ts:33](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L33)
 
 ***
 
@@ -304,7 +304,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:42](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L42)
+[sdk/resolver-mapper.ts:42](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L42)
 
 ***
 
@@ -336,7 +336,7 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:46](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L46)
+[sdk/resolver-mapper.ts:46](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L46)
 
 ***
 
@@ -364,4 +364,4 @@
 
 #### Defined in
 
-[sdk/resolver-mapper.ts:54](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/resolver-mapper.ts#L54)
+[sdk/resolver-mapper.ts:54](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L54)

@@ -24,4 +24,4 @@
 
 ## Defined in
 
-[sdk/subscription.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/subscription.ts#L22)
+[sdk/subscription.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/subscription.ts#L22)

@@ -22,4 +22,4 @@
 
 ## Defined in
 
-[sdk/middleware.ts:13](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/sdk/middleware.ts#L13)
+[sdk/middleware.ts:13](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/middleware.ts#L13)

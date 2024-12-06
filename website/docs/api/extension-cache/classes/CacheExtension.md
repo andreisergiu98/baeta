@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/cache-extension.ts:15](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/cache-extension.ts#L15)
+[packages/extension-cache/lib/cache-extension.ts:15](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/cache-extension.ts#L15)
 
 ## Properties
 
@@ -118,7 +118,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/cache-extension.ts:39](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/cache-extension.ts#L39)
+[packages/extension-cache/lib/cache-extension.ts:40](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/cache-extension.ts#L40)
 
 ***
 
@@ -266,4 +266,4 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/cache-extension.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/cache-extension.ts#L22)
+[packages/extension-cache/lib/cache-extension.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/cache-extension.ts#L22)

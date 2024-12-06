@@ -203,7 +203,7 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ##### Parameters
 
-• **input**: `string` \| `Uint8Array`
+• **input**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
 • **options?**: [`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](TransformOptions.md), `T`\>
 
@@ -228,7 +228,7 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ##### Parameters
 
-• **input**: `string` \| `Uint8Array`
+• **input**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
 • **options?**: [`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](TransformOptions.md), `T`\>
 

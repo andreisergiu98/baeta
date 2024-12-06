@@ -12,7 +12,7 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:34](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L34)
+[generator-sdk/lib/plugin.ts:34](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L34)
 
 ***
 
@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:39](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L39)
+[generator-sdk/lib/plugin.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L39)
 
 ***
 
@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:38](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L38)
+[generator-sdk/lib/plugin.ts:38](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L38)
 
 ***
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:33](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L33)
+[generator-sdk/lib/plugin.ts:33](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L33)
 
 ***
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:37](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L37)
+[generator-sdk/lib/plugin.ts:37](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L37)
 
 ***
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:36](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L36)
+[generator-sdk/lib/plugin.ts:36](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L36)
 
 ***
 
@@ -72,7 +72,7 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:35](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L35)
+[generator-sdk/lib/plugin.ts:35](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L35)
 
 ***
 
@@ -82,4 +82,4 @@
 
 #### Defined in
 
-[generator-sdk/lib/plugin.ts:40](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/plugin.ts#L40)
+[generator-sdk/lib/plugin.ts:40](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/plugin.ts#L40)

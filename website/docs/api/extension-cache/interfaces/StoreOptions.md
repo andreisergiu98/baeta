@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-options.ts:9](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-options.ts#L9)
+[packages/extension-cache/lib/store-options.ts:9](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-options.ts#L9)
 
 ***
 
@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-options.ts:8](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-options.ts#L8)
+[packages/extension-cache/lib/store-options.ts:8](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-options.ts#L8)
 
 ***
 
@@ -48,4 +48,4 @@
 
 #### Defined in
 
-[packages/extension-cache/lib/store-options.ts:4](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache/lib/store-options.ts#L4)
+[packages/extension-cache/lib/store-options.ts:4](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-options.ts#L4)

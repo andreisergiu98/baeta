@@ -8,4 +8,4 @@
 
 ## Defined in
 
-[lib/complexity-limits.ts:7](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-complexity/lib/complexity-limits.ts#L7)
+[lib/complexity-limits.ts:7](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-complexity/lib/complexity-limits.ts#L7)

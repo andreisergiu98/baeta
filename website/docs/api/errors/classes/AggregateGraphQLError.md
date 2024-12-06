@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/errors/index.ts:93](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/errors/index.ts#L93)
+[packages/errors/index.ts:93](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/errors/index.ts#L93)
 
 ## Properties
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es2022.error.d.ts:24
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es2022.error.d.ts:26
 
 ***
 
@@ -95,7 +95,7 @@ Enumerable, and appears in the result of JSON.stringify().
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es5.d.ts:1077
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1077
 
 ***
 
@@ -109,7 +109,7 @@ Enumerable, and appears in the result of JSON.stringify().
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es5.d.ts:1076
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1076
 
 ***
 
@@ -210,7 +210,7 @@ represent nodes after the first node.
 
 #### Defined in
 
-.yarn/cache/typescript-patch-8964a48ba3-00504c01ee.zip/node\_modules/typescript/lib/lib.es5.d.ts:1078
+.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1078
 
 ## Accessors
 

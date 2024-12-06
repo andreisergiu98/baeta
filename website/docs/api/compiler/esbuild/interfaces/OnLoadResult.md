@@ -6,7 +6,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 
 ### contents?
 
-> `optional` **contents**: `string` \| `Uint8Array`
+> `optional` **contents**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
 #### Defined in
 

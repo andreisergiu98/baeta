@@ -8,7 +8,7 @@
 
 #### Defined in
 
-[packages/cli/sdk/config-provider.tsx:10](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/config-provider.tsx#L10)
+[packages/cli/sdk/config-provider.tsx:10](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/cli/sdk/config-provider.tsx#L10)
 
 ***
 
@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[packages/cli/sdk/config-provider.tsx:11](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/cli/sdk/config-provider.tsx#L11)
+[packages/cli/sdk/config-provider.tsx:11](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/cli/sdk/config-provider.tsx#L11)

@@ -30,4 +30,4 @@
 
 ## Defined in
 
-[lib/middleware.ts:8](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/lib/middleware.ts#L8)
+[lib/middleware.ts:8](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/lib/middleware.ts#L8)

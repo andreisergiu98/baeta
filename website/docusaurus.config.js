@@ -1,5 +1,5 @@
 const { themes } = require('prism-react-renderer');
-const { injectTypeDocSidebar } = require('./api-docs.js');
+const { injectTypeDocSidebar } = require('./docusaurus.sidebars.js');
 
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;

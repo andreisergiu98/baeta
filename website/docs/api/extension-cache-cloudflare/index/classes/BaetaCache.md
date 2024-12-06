@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:39](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L39)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L39)
 
 ## Properties
 
@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:41](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L41)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:41](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L41)
 
 ***
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:40](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L40)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:40](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L40)
 
 ## Methods
 
@@ -64,7 +64,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:164](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L164)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:164](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L164)
 
 ***
 
@@ -82,7 +82,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:108](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L108)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:108](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L108)
 
 ***
 
@@ -104,7 +104,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:44](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L44)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:44](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L44)
 
 ***
 
@@ -122,7 +122,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:71](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L71)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:71](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L71)
 
 ***
 
@@ -136,7 +136,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:113](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L113)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:113](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L113)
 
 ***
 
@@ -158,7 +158,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:98](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L98)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:98](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L98)
 
 ***
 
@@ -178,7 +178,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:79](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L79)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:79](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L79)
 
 ***
 
@@ -196,4 +196,4 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:155](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L155)
+[packages/extension-cache-cloudflare/lib/baeta-cache.ts:155](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L155)

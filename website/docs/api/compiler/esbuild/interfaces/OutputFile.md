@@ -4,7 +4,7 @@
 
 ### contents
 
-> **contents**: `Uint8Array`
+> **contents**: `Uint8Array`\<`ArrayBufferLike`\>
 
 #### Defined in
 

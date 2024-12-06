@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:6](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L6)
+[packages/generator-sdk/lib/file-manager.ts:6](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L6)
 
 ## Properties
 
@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:6](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L6)
+[packages/generator-sdk/lib/file-manager.ts:6](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L6)
 
 ***
 
@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:4](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L4)
+[packages/generator-sdk/lib/file-manager.ts:4](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L4)
 
 ## Methods
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:14](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L14)
+[packages/generator-sdk/lib/file-manager.ts:14](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L14)
 
 ***
 
@@ -76,7 +76,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:8](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L8)
+[packages/generator-sdk/lib/file-manager.ts:8](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L8)
 
 ***
 
@@ -94,7 +94,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L18)
+[packages/generator-sdk/lib/file-manager.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L18)
 
 ***
 
@@ -108,7 +108,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:22](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L22)
+[packages/generator-sdk/lib/file-manager.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L22)
 
 ***
 
@@ -126,7 +126,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:26](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L26)
+[packages/generator-sdk/lib/file-manager.ts:26](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L26)
 
 ***
 
@@ -140,7 +140,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:60](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L60)
+[packages/generator-sdk/lib/file-manager.ts:60](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L60)
 
 ***
 
@@ -158,7 +158,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:30](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L30)
+[packages/generator-sdk/lib/file-manager.ts:30](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L30)
 
 ***
 
@@ -172,7 +172,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:35](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L35)
+[packages/generator-sdk/lib/file-manager.ts:35](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L35)
 
 ***
 
@@ -190,7 +190,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:39](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L39)
+[packages/generator-sdk/lib/file-manager.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L39)
 
 ***
 
@@ -204,7 +204,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:54](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L54)
+[packages/generator-sdk/lib/file-manager.ts:54](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L54)
 
 ***
 
@@ -218,7 +218,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:43](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L43)
+[packages/generator-sdk/lib/file-manager.ts:43](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L43)
 
 ***
 
@@ -236,4 +236,4 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-manager.ts:48](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-manager.ts#L48)
+[packages/generator-sdk/lib/file-manager.ts:48](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L48)

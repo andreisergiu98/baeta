@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[lib/subscription-options.ts:13](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-options.ts#L13)
+[lib/subscription-options.ts:13](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-options.ts#L13)
 
 ***
 
@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[lib/subscription-options.ts:14](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-options.ts#L14)
+[lib/subscription-options.ts:14](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-options.ts#L14)
 
 ***
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[lib/subscription-options.ts:15](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-options.ts#L15)
+[lib/subscription-options.ts:15](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-options.ts#L15)
 
 ***
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[lib/subscription-options.ts:12](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-options.ts#L12)
+[lib/subscription-options.ts:12](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-options.ts#L12)
 
 ***
 
@@ -72,4 +72,4 @@
 
 #### Defined in
 
-[lib/subscription-options.ts:11](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/subscriptions-cloudflare/lib/subscription-options.ts#L11)
+[lib/subscription-options.ts:11](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-options.ts#L11)

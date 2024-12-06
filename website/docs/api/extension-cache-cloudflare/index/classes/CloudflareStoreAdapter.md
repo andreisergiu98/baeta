@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:13](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L13)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:13](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L13)
 
 ## Properties
 
@@ -360,7 +360,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:39](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L39)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L39)
 
 ***
 
@@ -418,7 +418,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:79](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L79)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:79](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L79)
 
 ***
 
@@ -576,7 +576,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:23](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L23)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L23)
 
 ***
 
@@ -684,7 +684,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:91](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L91)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:91](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L91)
 
 ***
 
@@ -732,7 +732,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:62](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L62)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:62](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L62)
 
 ***
 
@@ -800,7 +800,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:32](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L32)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L32)
 
 ***
 
@@ -828,7 +828,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:52](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L52)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:52](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L52)
 
 ***
 
@@ -884,7 +884,7 @@
 
 #### Defined in
 
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:97](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L97)
+[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L97)
 
 ***
 

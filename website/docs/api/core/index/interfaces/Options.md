@@ -10,7 +10,7 @@ Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools
 
 #### Defined in
 
-[lib/application.ts:23](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/lib/application.ts#L23)
+[lib/application.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/lib/application.ts#L23)
 
 ***
 
@@ -22,7 +22,7 @@ Modules to include in the application
 
 #### Defined in
 
-[lib/application.ts:12](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/lib/application.ts#L12)
+[lib/application.ts:12](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/lib/application.ts#L12)
 
 ***
 
@@ -40,4 +40,4 @@ false
 
 #### Defined in
 
-[lib/application.ts:18](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/core/lib/application.ts#L18)
+[lib/application.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/lib/application.ts#L18)

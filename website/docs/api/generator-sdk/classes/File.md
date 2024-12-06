@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:34](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L34)
+[packages/generator-sdk/lib/file.ts:34](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L34)
 
 ## Properties
 
@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:36](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L36)
+[packages/generator-sdk/lib/file.ts:36](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L36)
 
 ***
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:35](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L35)
+[packages/generator-sdk/lib/file.ts:35](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L35)
 
 ***
 
@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:32](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L32)
+[packages/generator-sdk/lib/file.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L32)
 
 ***
 
@@ -66,7 +66,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:37](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L37)
+[packages/generator-sdk/lib/file.ts:37](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L37)
 
 ## Methods
 
@@ -80,7 +80,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:60](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L60)
+[packages/generator-sdk/lib/file.ts:60](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L60)
 
 ***
 
@@ -94,7 +94,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:70](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L70)
+[packages/generator-sdk/lib/file.ts:70](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L70)
 
 ***
 
@@ -112,7 +112,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:97](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L97)
+[packages/generator-sdk/lib/file.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L97)
 
 ***
 
@@ -126,7 +126,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:55](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L55)
+[packages/generator-sdk/lib/file.ts:55](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L55)
 
 ***
 
@@ -140,4 +140,4 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:41](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L41)
+[packages/generator-sdk/lib/file.ts:41](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L41)

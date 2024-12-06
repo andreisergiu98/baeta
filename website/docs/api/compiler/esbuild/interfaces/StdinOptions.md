@@ -4,7 +4,7 @@
 
 ### contents
 
-> **contents**: `string` \| `Uint8Array`
+> **contents**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
 #### Defined in
 

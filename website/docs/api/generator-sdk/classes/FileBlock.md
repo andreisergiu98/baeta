@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:6](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L6)
+[packages/generator-sdk/lib/file-block.ts:6](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L6)
 
 ## Properties
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:8](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L8)
+[packages/generator-sdk/lib/file-block.ts:8](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L8)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:10](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L10)
+[packages/generator-sdk/lib/file-block.ts:10](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L10)
 
 ***
 
@@ -72,7 +72,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:7](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L7)
+[packages/generator-sdk/lib/file-block.ts:7](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L7)
 
 ***
 
@@ -86,7 +86,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:32](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L32)
+[packages/generator-sdk/lib/file.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L32)
 
 ***
 
@@ -96,7 +96,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:9](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L9)
+[packages/generator-sdk/lib/file-block.ts:9](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L9)
 
 ***
 
@@ -110,7 +110,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:11](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L11)
+[packages/generator-sdk/lib/file-block.ts:11](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L11)
 
 ## Methods
 
@@ -128,7 +128,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:81](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L81)
+[packages/generator-sdk/lib/file-block.ts:81](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L81)
 
 ***
 
@@ -146,7 +146,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:60](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L60)
+[packages/generator-sdk/lib/file.ts:60](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L60)
 
 ***
 
@@ -164,7 +164,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:70](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L70)
+[packages/generator-sdk/lib/file.ts:70](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L70)
 
 ***
 
@@ -182,7 +182,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:88](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L88)
+[packages/generator-sdk/lib/file-block.ts:88](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L88)
 
 ***
 
@@ -204,7 +204,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file.ts:97](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file.ts#L97)
+[packages/generator-sdk/lib/file.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L97)
 
 ***
 
@@ -218,7 +218,7 @@
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:56](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L56)
+[packages/generator-sdk/lib/file-block.ts:56](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L56)
 
 ***
 
@@ -236,7 +236,7 @@ readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:66](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L66)
+[packages/generator-sdk/lib/file-block.ts:66](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L66)
 
 ***
 
@@ -254,7 +254,7 @@ readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:43](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L43)
+[packages/generator-sdk/lib/file-block.ts:43](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L43)
 
 ***
 
@@ -272,4 +272,4 @@ readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 
 #### Defined in
 
-[packages/generator-sdk/lib/file-block.ts:20](https://github.com/andreisergiu98/baeta/blob/277f62f15bfdecc05d507a84e60b62e5bc08a747/packages/generator-sdk/lib/file-block.ts#L20)
+[packages/generator-sdk/lib/file-block.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L20)

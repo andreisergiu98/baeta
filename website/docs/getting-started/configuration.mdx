@@ -33,7 +33,7 @@ import { defineConfig } from "@baeta/cli";
 
 export default defineConfig({
   graphql: {
-    schemas: ["src/**.gql"], // Location of your GraphQL schemas
+    schemas: ["src/**/*.gql"], // Location of your GraphQL schemas
   },
 });
 ```
@@ -47,7 +47,7 @@ import { defineConfig } from "@baeta/cli";
 
 export default defineConfig({
   graphql: {
-    schemas: ["src/**.gql"],
+    schemas: ["src/**/*.gql"],
     modulesDir: "src/modules",
   },
   compiler: {

@@ -28,18 +28,15 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.js"
     },
     "./ink": {
       "types": "./ink/index.ts",
-      "import": "./dist/ink/index.js",
-      "require": "./dist/ink/index.cjs"
+      "default": "./dist/ink/index.js"
     },
     "./sdk": {
       "types": "./sdk/index.ts",
-      "import": "./dist/sdk/index.js",
-      "require": "./dist/sdk/index.cjs"
+      "default": "./dist/sdk/index.js"
     }
   },
   "types": "dist/index.d.ts",
@@ -88,25 +85,22 @@
     }
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.12.0"
   },
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
+        "default": "./dist/index.js"
       },
       "./ink": {
         "types": "./dist/ink/index.d.ts",
-        "import": "./dist/ink/index.js",
-        "require": "./dist/ink/index.cjs"
+        "default": "./dist/ink/index.js"
       },
       "./sdk": {
         "types": "./dist/sdk/index.d.ts",
-        "import": "./dist/sdk/index.js",
-        "require": "./dist/sdk/index.cjs"
+        "default": "./dist/sdk/index.js"
       }
     }
   },

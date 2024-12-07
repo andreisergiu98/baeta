@@ -1,22 +1,24 @@
 import { builtinModules } from 'node:module';
 
-export const builtins = new Set([
-	...builtinModules,
-	'assert/strict',
-	'diagnostics_channel',
-	'dns/promises',
-	'fs/promises',
-	'path/posix',
-	'path/win32',
-	'readline/promises',
-	'stream/consumers',
-	'stream/promises',
-	'stream/web',
-	'timers/promises',
-	'util/types',
-	'wasi',
-]);
+const NODE_BUILTIN_NAMESPACE = 'node:';
+const NPM_BUILTIN_NAMESPACE = 'npm:';
+const BUN_BUILTIN_NAMESPACE = 'bun:';
 
-export function isBuiltin(id: string): boolean {
-	return builtins.has(id.replace(/^node:/, ''));
+const nodeBuiltins = builtinModules.filter((id) => !id.includes(':'));
+
+export function isNodeBuiltin(id: string) {
+	if (id.startsWith(NODE_BUILTIN_NAMESPACE)) {
+		return true;
+	}
+	return nodeBuiltins.includes(id);
+}
+
+export function isBuiltin(id: string) {
+	if (process.versions.deno && id.startsWith(NPM_BUILTIN_NAMESPACE)) {
+		return true;
+	}
+	if (process.versions.bun && id.startsWith(BUN_BUILTIN_NAMESPACE)) {
+		return true;
+	}
+	return isNodeBuiltin(id);
 }

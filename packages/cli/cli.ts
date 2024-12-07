@@ -2,6 +2,7 @@ import yargs from 'yargs';
 import { createBuildCommand } from './commands/build/index.ts';
 import { createGenerateCommand } from './commands/generate/index.ts';
 import { loadConfig } from './lib/config-loader.ts';
+import { version } from './package.json';
 
 process.on('exit', () => {
 	const fixCursor = '\x1B[?25h';
@@ -14,6 +15,6 @@ loadConfig().then((config) => {
 		.command(createBuildCommand(config))
 		.command(createGenerateCommand(config))
 		.demandCommand()
-		.version(false)
+		.version(version)
 		.help().argv;
 });

@@ -1,5 +1,11 @@
 # @baeta/subscriptions-pubsub
 
+## 0.0.2
+
+### Patch Changes
+
+- [`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add readme
+
 ## 0.0.1
 
 ### Patch Changes

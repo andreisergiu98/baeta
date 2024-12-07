@@ -142,6 +142,14 @@ const config = {
 					},
 				],
 			},
+			image: 'img/banner.png',
+			metadata: [
+				{
+					name: 'keywords',
+					content: 'baeta, graphql, schema, types, typescript, framework, builder',
+				},
+				{ name: 'twitter:card', content: 'img/banner.png' },
+			],
 			prism: {
 				theme: lightCodeTheme,
 				darkTheme: darkCodeTheme,
@@ -155,6 +163,16 @@ const config = {
 				indexName: 'baeta',
 			},
 		}),
+
+	headTags: [
+		{
+			tagName: 'link',
+			attributes: {
+				rel: 'preconnect',
+				href: 'https://baeta.io',
+			},
+		},
+	],
 	plugins: [
 		[
 			require.resolve('@docusaurus/plugin-client-redirects'),

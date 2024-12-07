@@ -32,10 +32,6 @@
 
 `StoreAdapter<Item>.constructor`
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:13](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L13)
-
 ## Properties
 
 ### hash
@@ -45,10 +41,6 @@
 #### Inherited from
 
 `StoreAdapter.hash`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:20
 
 ***
 
@@ -60,10 +52,6 @@
 
 `StoreAdapter.loader`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:56
-
 ***
 
 ### options
@@ -74,10 +62,6 @@
 
 `StoreAdapter.options`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:18
-
 ***
 
 ### type
@@ -87,10 +71,6 @@
 #### Inherited from
 
 `StoreAdapter.type`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:19
 
 ## Methods
 
@@ -110,10 +90,6 @@
 
 `StoreAdapter.createKey`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:60
-
 ***
 
 ### createKeyByItem()
@@ -131,10 +107,6 @@
 #### Inherited from
 
 `StoreAdapter.createKeyByItem`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:64
 
 ***
 
@@ -157,10 +129,6 @@
 #### Inherited from
 
 `StoreAdapter.createKeyByQuery`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:68
 
 ***
 
@@ -190,10 +158,6 @@
 
 `StoreAdapter.createMiddleware`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:187
-
 ***
 
 ### createQueryKeyGlobMatcher()
@@ -216,10 +180,6 @@
 
 `StoreAdapter.createQueryKeyGlobMatcher`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:264
-
 ***
 
 ### createQueryKeyHeader()
@@ -240,10 +200,6 @@
 
 `StoreAdapter.createQueryKeyHeader`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:87
-
 ***
 
 ### createQueryKeyNamespace()
@@ -261,10 +217,6 @@
 #### Inherited from
 
 `StoreAdapter.createQueryKeyNamespace`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:83
 
 ***
 
@@ -288,10 +240,6 @@
 
 `StoreAdapter.createQueryKeyRegExpMatcher`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:253
-
 ***
 
 ### decodeQueryItemRef()
@@ -309,10 +257,6 @@
 #### Inherited from
 
 `StoreAdapter.decodeQueryItemRef`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:246
 
 ***
 
@@ -334,10 +278,6 @@
 
 `StoreAdapter.delete`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:117
-
 ***
 
 ### deleteMany()
@@ -357,10 +297,6 @@
 #### Overrides
 
 `StoreAdapter.deleteMany`
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L39)
 
 ***
 
@@ -390,10 +326,6 @@
 
 `StoreAdapter.deleteQueries`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:121
-
 ***
 
 ### deleteQueriesByRef()
@@ -416,10 +348,6 @@
 
 `StoreAdapter.deleteQueriesByRef`
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:79](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L79)
-
 ***
 
 ### encodePrimitive()
@@ -440,10 +368,6 @@
 
 `StoreAdapter.encodePrimitive`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:301
-
 ***
 
 ### encodeProperty()
@@ -461,10 +385,6 @@
 #### Inherited from
 
 `StoreAdapter.encodeProperty`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:293
 
 ***
 
@@ -486,10 +406,6 @@
 
 `StoreAdapter.encodeQueryArgs`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:274
-
 ***
 
 ### encodeQueryItemRef()
@@ -507,10 +423,6 @@
 #### Inherited from
 
 `StoreAdapter.encodeQueryItemRef`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:238
 
 ***
 
@@ -530,10 +442,6 @@
 
 `StoreAdapter.get`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:93
-
 ***
 
 ### getMany()
@@ -552,10 +460,6 @@
 
 `StoreAdapter.getMany`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:97
-
 ***
 
 ### getPartialMany()
@@ -573,10 +477,6 @@
 #### Overrides
 
 `StoreAdapter.getPartialMany`
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L23)
 
 ***
 
@@ -606,10 +506,6 @@
 
 `StoreAdapter.getQueryResult`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:128
-
 ***
 
 ### getRef()
@@ -627,10 +523,6 @@
 #### Inherited from
 
 `StoreAdapter.getRef`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:339
 
 ***
 
@@ -650,10 +542,6 @@
 
 `StoreAdapter.getRefFallback`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:356
-
 ***
 
 ### getRevision()
@@ -668,10 +556,6 @@
 
 `StoreAdapter.getRevision`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:78
-
 ***
 
 ### getTtl()
@@ -681,10 +565,6 @@
 #### Returns
 
 `undefined` \| `number`
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:91](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L91)
 
 ***
 
@@ -703,10 +583,6 @@
 #### Inherited from
 
 `StoreAdapter.loaderFn`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:48
 
 ***
 
@@ -730,10 +606,6 @@
 
 `StoreAdapter.loadQueryMetadata`
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:62](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L62)
-
 ***
 
 ### refillNullQueryItems()
@@ -754,10 +626,6 @@
 
 `StoreAdapter.refillNullQueryItems`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:219
-
 ***
 
 ### save()
@@ -776,10 +644,6 @@
 
 `StoreAdapter.save`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:113
-
 ***
 
 ### saveMany()
@@ -797,10 +661,6 @@
 #### Overrides
 
 `StoreAdapter.saveMany`
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L32)
 
 ***
 
@@ -825,10 +685,6 @@
 #### Overrides
 
 `StoreAdapter.saveQueryMetadata`
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:52](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L52)
 
 ***
 
@@ -860,10 +716,6 @@
 
 `StoreAdapter.saveQueryResult`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:160
-
 ***
 
 ### searchQueries()
@@ -881,10 +733,6 @@
 #### Returns
 
 `Promise`\<`string`[]\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-store-adapter.ts#L97)
 
 ***
 
@@ -904,10 +752,6 @@
 
 `StoreAdapter.shouldEncode`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:335
-
 ***
 
 ### validateRefType()
@@ -925,7 +769,3 @@ asserts ref is string \| number \| bigint
 #### Inherited from
 
 `StoreAdapter.validateRefType`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-extension-cache-virtual-9b62c84fde/1/packages/extension-cache/lib/store-adapter.ts:369

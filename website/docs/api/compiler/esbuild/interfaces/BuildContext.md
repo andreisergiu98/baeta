@@ -14,10 +14,6 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:523
-
 ***
 
 ### dispose()
@@ -27,10 +23,6 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:524
 
 ***
 
@@ -43,10 +35,6 @@ Documentation: https://esbuild.github.io/api/#rebuild
 #### Returns
 
 `Promise`\<[`BuildResult`](BuildResult.md)\<`ProvidedOptions`\>\>
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:515
 
 ***
 
@@ -64,10 +52,6 @@ Documentation: https://esbuild.github.io/api/#serve
 
 `Promise`\<[`ServeResult`](ServeResult.md)\>
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:521
-
 ***
 
 ### watch()
@@ -83,7 +67,3 @@ Documentation: https://esbuild.github.io/api/#watch
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:518

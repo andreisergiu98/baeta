@@ -20,10 +20,6 @@
 
 [`BaetaCache`](BaetaCache.md)
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L39)
-
 ## Properties
 
 ### env
@@ -34,19 +30,11 @@
 
  \[`key`: `string`\]: `never`
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:41](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L41)
-
 ***
 
 ### state
 
 > **state**: `DurableObjectState`
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:40](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L40)
 
 ## Methods
 
@@ -62,10 +50,6 @@
 
 `DurableObject.alarm`
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:164](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L164)
-
 ***
 
 ### delete()
@@ -79,10 +63,6 @@
 #### Returns
 
 `Promise`\<`null`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:108](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L108)
 
 ***
 
@@ -102,10 +82,6 @@
 
 `DurableObject.fetch`
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:44](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L44)
-
 ***
 
 ### get()
@@ -120,10 +96,6 @@
 
 `Promise`\<`string`\>
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:71](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L71)
-
 ***
 
 ### handleEviction()
@@ -133,10 +105,6 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:113](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L113)
 
 ***
 
@@ -156,10 +124,6 @@
 
 `Promise`\<`string`\>
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:98](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L98)
-
 ***
 
 ### put()
@@ -176,10 +140,6 @@
 
 `Promise`\<`null`\>
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:79](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L79)
-
 ***
 
 ### scheduledEviction()
@@ -193,7 +153,3 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/baeta-cache.ts:155](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/baeta-cache.ts#L155)

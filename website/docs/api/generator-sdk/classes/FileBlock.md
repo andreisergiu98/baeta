@@ -32,10 +32,6 @@
 
 [`File`](File.md).[`constructor`](File.md#constructors)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:6](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L6)
-
 ## Properties
 
 ### content
@@ -46,19 +42,11 @@
 
 [`File`](File.md).[`content`](File.md#content)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:8](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L8)
-
 ***
 
 ### end
 
 > **end**: `string`
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:10](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L10)
 
 ***
 
@@ -70,10 +58,6 @@
 
 [`File`](File.md).[`filename`](File.md#filename)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:7](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L7)
-
 ***
 
 ### persisted
@@ -84,19 +68,11 @@
 
 [`File`](File.md).[`persisted`](File.md#persisted)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L32)
-
 ***
 
 ### start
 
 > **start**: `string`
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:9](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L9)
 
 ***
 
@@ -107,10 +83,6 @@
 #### Inherited from
 
 [`File`](File.md).[`tag`](File.md#tag)
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:11](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L11)
 
 ## Methods
 
@@ -126,10 +98,6 @@
 
 `string`
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:81](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L81)
-
 ***
 
 ### buildContent()
@@ -143,10 +111,6 @@
 #### Inherited from
 
 [`File`](File.md).[`buildContent`](File.md#buildcontent)
-
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:60](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L60)
 
 ***
 
@@ -162,10 +126,6 @@
 
 [`File`](File.md).[`buildHeader`](File.md#buildheader)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:70](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L70)
-
 ***
 
 ### buildPadding()
@@ -179,10 +139,6 @@
 #### Returns
 
 `""` \| "\n" \| "\n\n"
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:88](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L88)
 
 ***
 
@@ -202,10 +158,6 @@
 
 [`File`](File.md).[`createComment`](File.md#createcomment)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L97)
-
 ***
 
 ### getExistingContent()
@@ -215,10 +167,6 @@
 #### Returns
 
 `Promise`\<readonly [`string`, `FileHandle`] \| readonly [`""`, `null`]\>
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:56](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L56)
 
 ***
 
@@ -234,10 +182,6 @@
 
 readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:66](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L66)
-
 ***
 
 ### unlink()
@@ -252,10 +196,6 @@ readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 
 [`File`](File.md).[`unlink`](File.md#unlink)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:43](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L43)
-
 ***
 
 ### write()
@@ -269,7 +209,3 @@ readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 #### Overrides
 
 [`File`](File.md).[`write`](File.md#write)
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-block.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-block.ts#L20)

@@ -33,7 +33,3 @@ mm(list, patterns[, options]);
 console.log(mm(['a.js', 'a.txt'], ['*.js']));
 //=> [ 'a.js' ]
 ```
-
-## Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:4

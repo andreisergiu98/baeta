@@ -63,7 +63,3 @@ Make the text underlined.
 This property tells Ink to wrap or truncate text if its width is larger than container.
 If `wrap` is passed (by default), Ink will wrap text and split it into multiple lines.
 If `truncate-*` is passed, Ink will truncate text instead, which will result in one line of text with the rest cut off.
-
-## Defined in
-
-.yarn/\_\_virtual\_\_/ink-virtual-46a2052950/0/cache/ink-npm-5.1.0-5eb899d847-aa60256b38.zip/node\_modules/ink/build/components/Text.d.ts:5

@@ -22,19 +22,11 @@
 
 [`ModuleBuilder`](ModuleBuilder.md)
 
-#### Defined in
-
-[sdk/module.ts:35](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L35)
-
 ## Properties
 
 ### dirname
 
 > `readonly` **dirname**: `string`
-
-#### Defined in
-
-[sdk/module.ts:37](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L37)
 
 ***
 
@@ -42,19 +34,11 @@
 
 > `readonly` **hashes**: [`TypeHashMap`](../type-aliases/TypeHashMap.md)
 
-#### Defined in
-
-[sdk/module.ts:38](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L38)
-
 ***
 
 ### id
 
 > `readonly` **id**: `string`
-
-#### Defined in
-
-[sdk/module.ts:36](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L36)
 
 ***
 
@@ -62,29 +46,17 @@
 
 > `readonly` **mapper**: [`ResolverMapper`](ResolverMapper.md)
 
-#### Defined in
-
-[sdk/module.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L32)
-
 ***
 
 ### transformers
 
 > `readonly` **transformers**: [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[] = `[]`
 
-#### Defined in
-
-[sdk/module.ts:33](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L33)
-
 ***
 
 ### typedef
 
 > `readonly` **typedef**: `DocumentNode`
-
-#### Defined in
-
-[sdk/module.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L39)
 
 ## Methods
 
@@ -115,10 +87,6 @@
 ##### typedef
 
 > **typedef**: `DocumentNode`
-
-#### Defined in
-
-[sdk/module.ts:197](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L197)
 
 ***
 
@@ -154,10 +122,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/module.ts:119](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L119)
-
 ***
 
 ### createModuleMethods()
@@ -171,10 +135,6 @@
 #### Returns
 
 `ModuleExtensions` & `object`
-
-#### Defined in
-
-[sdk/module.ts:141](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L141)
 
 ***
 
@@ -201,10 +161,6 @@
 #### Returns
 
 (`resolver`) => `void` & `ResolverExtensions`\<`Result`, `Root`, `Context`, `Args`\> & `object`
-
-#### Defined in
-
-[sdk/module.ts:43](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L43)
 
 ***
 
@@ -236,10 +192,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/module.ts:111](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L111)
-
 ***
 
 ### createScalarBuilder()
@@ -261,10 +213,6 @@
 ##### Returns
 
 `void`
-
-#### Defined in
-
-[sdk/module.ts:104](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L104)
 
 ***
 
@@ -290,10 +238,6 @@
 
 \<`Payload`\>(`subscription`) => `void` & `object`
 
-#### Defined in
-
-[sdk/module.ts:63](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L63)
-
 ***
 
 ### createSubscriptionMethods()
@@ -309,10 +253,6 @@
 #### Returns
 
 `TypeExtensions`\<`Root`, `Context`\> & `object` & `object`
-
-#### Defined in
-
-[sdk/module.ts:134](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L134)
 
 ***
 
@@ -333,7 +273,3 @@
 #### Returns
 
 `TypeExtensions`\<`Root`, `Context`\> & `object`
-
-#### Defined in
-
-[sdk/module.ts:127](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/module.ts#L127)

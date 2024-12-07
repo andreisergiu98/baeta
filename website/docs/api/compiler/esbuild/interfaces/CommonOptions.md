@@ -13,10 +13,6 @@
 
 Documentation: https://esbuild.github.io/api/#charset
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:52
-
 ***
 
 ### color?
@@ -24,10 +20,6 @@ Documentation: https://esbuild.github.io/api/#charset
 > `optional` **color**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#color
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:79
 
 ***
 
@@ -41,10 +33,6 @@ Documentation: https://esbuild.github.io/api/#define
 
  \[`key`: `string`\]: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:72
-
 ***
 
 ### drop?
@@ -52,10 +40,6 @@ Documentation: https://esbuild.github.io/api/#define
 > `optional` **drop**: [`Drop`](../type-aliases/Drop.md)[]
 
 Documentation: https://esbuild.github.io/api/#drop
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:38
 
 ***
 
@@ -65,10 +49,6 @@ Documentation: https://esbuild.github.io/api/#drop
 
 Documentation: https://esbuild.github.io/api/#drop-labels
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:40
-
 ***
 
 ### format?
@@ -76,10 +56,6 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 > `optional` **format**: [`Format`](../type-aliases/Format.md)
 
 Documentation: https://esbuild.github.io/api/#format
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:19
 
 ***
 
@@ -89,10 +65,6 @@ Documentation: https://esbuild.github.io/api/#format
 
 Documentation: https://esbuild.github.io/api/#global-name
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:21
-
 ***
 
 ### ignoreAnnotations?
@@ -100,10 +72,6 @@ Documentation: https://esbuild.github.io/api/#global-name
 > `optional` **ignoreAnnotations**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#ignore-annotations
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:56
 
 ***
 
@@ -113,10 +81,6 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 
 Documentation: https://esbuild.github.io/api/#jsx
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:59
-
 ***
 
 ### jsxDev?
@@ -124,10 +88,6 @@ Documentation: https://esbuild.github.io/api/#jsx
 > `optional` **jsxDev**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#jsx-development
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:67
 
 ***
 
@@ -137,10 +97,6 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 
 Documentation: https://esbuild.github.io/api/#jsx-factory
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:61
-
 ***
 
 ### jsxFragment?
@@ -148,10 +104,6 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 > `optional` **jsxFragment**: `string`
 
 Documentation: https://esbuild.github.io/api/#jsx-fragment
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:63
 
 ***
 
@@ -161,10 +113,6 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 
 Documentation: https://esbuild.github.io/api/#jsx-import-source
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:65
-
 ***
 
 ### jsxSideEffects?
@@ -172,10 +120,6 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 > `optional` **jsxSideEffects**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#jsx-side-effects
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:69
 
 ***
 
@@ -185,10 +129,6 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 
 Documentation: https://esbuild.github.io/api/#keep-names
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:76
-
 ***
 
 ### legalComments?
@@ -196,10 +136,6 @@ Documentation: https://esbuild.github.io/api/#keep-names
 > `optional` **legalComments**: `"external"` \| `"linked"` \| `"inline"` \| `"none"` \| `"eof"`
 
 Documentation: https://esbuild.github.io/api/#legal-comments
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:12
 
 ***
 
@@ -209,10 +145,6 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 
 Documentation: https://esbuild.github.io/api/#line-limit
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:50
-
 ***
 
 ### logLevel?
@@ -220,10 +152,6 @@ Documentation: https://esbuild.github.io/api/#line-limit
 > `optional` **logLevel**: [`LogLevel`](../type-aliases/LogLevel.md)
 
 Documentation: https://esbuild.github.io/api/#log-level
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:81
 
 ***
 
@@ -233,10 +161,6 @@ Documentation: https://esbuild.github.io/api/#log-level
 
 Documentation: https://esbuild.github.io/api/#log-limit
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:83
-
 ***
 
 ### logOverride?
@@ -244,10 +168,6 @@ Documentation: https://esbuild.github.io/api/#log-limit
 > `optional` **logOverride**: `Record`\<`string`, [`LogLevel`](../type-aliases/LogLevel.md)\>
 
 Documentation: https://esbuild.github.io/api/#log-override
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:85
 
 ***
 
@@ -257,10 +177,6 @@ Documentation: https://esbuild.github.io/api/#log-override
 
 Documentation: https://esbuild.github.io/api/#mangle-props
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:36
-
 ***
 
 ### mangleProps?
@@ -268,10 +184,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 > `optional` **mangleProps**: `RegExp`
 
 Documentation: https://esbuild.github.io/api/#mangle-props
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:30
 
 ***
 
@@ -281,10 +193,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#mangle-props
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:34
-
 ***
 
 ### minify?
@@ -292,10 +200,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 > `optional` **minify**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#minify
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:42
 
 ***
 
@@ -305,10 +209,6 @@ Documentation: https://esbuild.github.io/api/#minify
 
 Documentation: https://esbuild.github.io/api/#minify
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:46
-
 ***
 
 ### minifySyntax?
@@ -316,10 +216,6 @@ Documentation: https://esbuild.github.io/api/#minify
 > `optional` **minifySyntax**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#minify
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:48
 
 ***
 
@@ -329,10 +225,6 @@ Documentation: https://esbuild.github.io/api/#minify
 
 Documentation: https://esbuild.github.io/api/#minify
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:44
-
 ***
 
 ### platform?
@@ -340,10 +232,6 @@ Documentation: https://esbuild.github.io/api/#minify
 > `optional` **platform**: [`Platform`](../type-aliases/Platform.md)
 
 Documentation: https://esbuild.github.io/api/#platform
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:27
 
 ***
 
@@ -353,10 +241,6 @@ Documentation: https://esbuild.github.io/api/#platform
 
 Documentation: https://esbuild.github.io/api/#pure
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:74
-
 ***
 
 ### reserveProps?
@@ -364,10 +248,6 @@ Documentation: https://esbuild.github.io/api/#pure
 > `optional` **reserveProps**: `RegExp`
 
 Documentation: https://esbuild.github.io/api/#mangle-props
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:32
 
 ***
 
@@ -377,10 +257,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#sourcemap
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:10
-
 ***
 
 ### sourceRoot?
@@ -388,10 +264,6 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 > `optional` **sourceRoot**: `string`
 
 Documentation: https://esbuild.github.io/api/#source-root
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:14
 
 ***
 
@@ -401,10 +273,6 @@ Documentation: https://esbuild.github.io/api/#source-root
 
 Documentation: https://esbuild.github.io/api/#sources-content
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:16
-
 ***
 
 ### supported?
@@ -412,10 +280,6 @@ Documentation: https://esbuild.github.io/api/#sources-content
 > `optional` **supported**: `Record`\<`string`, `boolean`\>
 
 Documentation: https://esbuild.github.io/api/#supported
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:25
 
 ***
 
@@ -425,10 +289,6 @@ Documentation: https://esbuild.github.io/api/#supported
 
 Documentation: https://esbuild.github.io/api/#target
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:23
-
 ***
 
 ### treeShaking?
@@ -437,10 +297,6 @@ Documentation: https://esbuild.github.io/api/#target
 
 Documentation: https://esbuild.github.io/api/#tree-shaking
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:54
-
 ***
 
 ### tsconfigRaw?
@@ -448,7 +304,3 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 > `optional` **tsconfigRaw**: `string` \| [`TsconfigRaw`](TsconfigRaw.md)
 
 Documentation: https://esbuild.github.io/api/#tsconfig-raw
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:88

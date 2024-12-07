@@ -14,29 +14,17 @@
 
 [`FileManager`](FileManager.md)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:6](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L6)
-
 ## Properties
 
 ### fileOptions?
 
 > `optional` **fileOptions**: [`FileOptions`](../interfaces/FileOptions.md)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:6](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L6)
-
 ***
 
 ### files
 
 > **files**: [`File`](File.md)[] = `[]`
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:4](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L4)
 
 ## Methods
 
@@ -51,10 +39,6 @@
 #### Returns
 
 `void`
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:14](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L14)
 
 ***
 
@@ -74,10 +58,6 @@
 
 [`File`](File.md)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:8](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L8)
-
 ***
 
 ### get()
@@ -92,10 +72,6 @@
 
 `undefined` \| [`File`](File.md)
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L18)
-
 ***
 
 ### getAll()
@@ -105,10 +81,6 @@
 #### Returns
 
 [`File`](File.md)[]
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L22)
 
 ***
 
@@ -124,10 +96,6 @@
 
 [`File`](File.md)[]
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:26](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L26)
-
 ***
 
 ### getPersistedFiles()
@@ -137,10 +105,6 @@
 #### Returns
 
 [`File`](File.md)[]
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:60](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L60)
 
 ***
 
@@ -156,10 +120,6 @@
 
 `void`
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:30](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L30)
-
 ***
 
 ### removeAll()
@@ -169,10 +129,6 @@
 #### Returns
 
 `void`
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:35](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L35)
 
 ***
 
@@ -188,10 +144,6 @@
 
 `void`
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:39](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L39)
-
 ***
 
 ### unlinkAll()
@@ -202,10 +154,6 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:54](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L54)
-
 ***
 
 ### writeAll()
@@ -215,10 +163,6 @@
 #### Returns
 
 `Promise`\<`void`[]\>
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:43](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L43)
 
 ***
 
@@ -233,7 +177,3 @@
 #### Returns
 
 `Promise`\<`void`[]\>
-
-#### Defined in
-
-[packages/generator-sdk/lib/file-manager.ts:48](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file-manager.ts#L48)

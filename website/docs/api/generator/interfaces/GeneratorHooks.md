@@ -10,10 +10,6 @@
 
 `void` \| `Promise`\<`void`\>
 
-#### Defined in
-
-[generator/lib/generate.ts:16](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator/lib/generate.ts#L16)
-
 ***
 
 ### onError()?
@@ -27,10 +23,6 @@
 #### Returns
 
 `void` \| `Promise`\<`void`\>
-
-#### Defined in
-
-[generator/lib/generate.ts:17](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator/lib/generate.ts#L17)
 
 ***
 
@@ -48,10 +40,6 @@
 
 `void` \| `Promise`\<`void`\>
 
-#### Defined in
-
-[generator/lib/generate.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator/lib/generate.ts#L22)
-
 ***
 
 ### onPluginStepStart()?
@@ -68,10 +56,6 @@
 
 `void` \| `Promise`\<`void`\>
 
-#### Defined in
-
-[generator/lib/generate.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator/lib/generate.ts#L18)
-
 ***
 
 ### onStart()?
@@ -81,7 +65,3 @@
 #### Returns
 
 `void` \| `Promise`\<`void`\>
-
-#### Defined in
-
-[generator/lib/generate.ts:15](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator/lib/generate.ts#L15)

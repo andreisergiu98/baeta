@@ -28,10 +28,6 @@ mm(['a/b.js', 'a/c.md'], '*.js', {matchBase: true});
 //=> ['a/b.js']
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:26
-
 ***
 
 ### bash?
@@ -58,10 +54,6 @@ console.log(mm(files, '[a-c]*'));
 console.log(mm(files, '[a-c]*', {bash: false}));
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:43
-
 ***
 
 ### capture?
@@ -75,10 +67,6 @@ Return regex matches in supporting methods.
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:49
 
 ***
 
@@ -94,10 +82,6 @@ Allows glob to match any part of the given string(s).
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:55
-
 ***
 
 ### cwd?
@@ -111,10 +95,6 @@ Current working directory. Used by `picomatch.split()`
 ```ts
 process.cwd()
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:61
 
 ***
 
@@ -130,10 +110,6 @@ Debug regular expressions when an error is thrown.
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:67
-
 ***
 
 ### dot?
@@ -147,10 +123,6 @@ Match dotfiles. Otherwise dotfiles are ignored unless a `.` is explicitly define
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:73
 
 ***
 
@@ -180,10 +152,6 @@ It's recommended that returned strings be wrapped in parentheses. This option is
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:81
-
 ***
 
 ### failglob?
@@ -197,10 +165,6 @@ Similar to the `--failglob` behavior in Bash, throws an error when no matches ar
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:87
 
 ***
 
@@ -216,10 +180,6 @@ To speed up processing, full parsing is skipped for a handful common glob patter
 true
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:93
-
 ***
 
 ### flags?
@@ -233,10 +193,6 @@ Regex flags to use in the generated regex. If defined, the `nocase` option will 
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:99
 
 ***
 
@@ -260,10 +216,6 @@ Custom function for formatting the returned string. This is useful for removing 
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:105
-
 ***
 
 ### ignore?
@@ -277,10 +229,6 @@ One or more glob patterns for excluding strings that should not be matched from 
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:111
 
 ***
 
@@ -296,10 +244,6 @@ Retain quotes in the generated regex, since quotes may also be used as an altern
 false
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:117
-
 ***
 
 ### literalBrackets?
@@ -313,10 +257,6 @@ When `true`, brackets in the glob pattern will be escaped so that only literal b
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:123
 
 ***
 
@@ -332,10 +272,6 @@ Support regex positive and negative lookbehinds. Note that you must be using Nod
 true
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:129
-
 ***
 
 ### matchBase?
@@ -349,10 +285,6 @@ Alias for `basename`.
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:135
 
 ***
 
@@ -368,10 +300,6 @@ Limit the max length of the input string. An error is thrown if the input string
 65536
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:141
-
 ***
 
 ### nobrace?
@@ -386,10 +314,6 @@ Disable brace matching, so that `{a,b}` and `{1..3}` would be treated as literal
 false
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:147
-
 ***
 
 ### nobracket?
@@ -403,10 +327,6 @@ Disable matching with regex brackets.
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:153
 
 ***
 
@@ -423,10 +343,6 @@ Note that this option is ignored when the `flags` option is defined.
 false
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:160
-
 ***
 
 ### noext?
@@ -440,10 +356,6 @@ Alias for `noextglob`
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:166
 
 ***
 
@@ -459,10 +371,6 @@ Disable support for matching with extglobs (like `+(a|b)`)
 false
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:172
-
 ***
 
 ### noglobstar?
@@ -476,10 +384,6 @@ Disable matching with globstars (`**`).
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:178
 
 ***
 
@@ -495,10 +399,6 @@ Disallow negation (`!`) patterns, and treat leading `!` as a literal character t
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:184
-
 ***
 
 ### noquantifiers?
@@ -512,10 +412,6 @@ Disable support for regex quantifiers (like `a{1,2}`) and treat them as brace pa
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:190
 
 ***
 
@@ -539,10 +435,6 @@ Function to be called on ignored items.
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:196
-
 ***
 
 ### onMatch()?
@@ -564,10 +456,6 @@ Function to be called on matched items.
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:202
 
 ***
 
@@ -591,10 +479,6 @@ Function to be called on all items, regardless of whether or not they are matche
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:208
-
 ***
 
 ### posix?
@@ -608,10 +492,6 @@ Support POSIX character classes ("posix brackets").
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:214
 
 ***
 
@@ -627,10 +507,6 @@ String to prepend to the generated regex used for matching.
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:220
-
 ***
 
 ### regex?
@@ -644,10 +520,6 @@ Use regular expression rules for `+` (instead of matching literal `+`), and for 
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:226
 
 ***
 
@@ -663,10 +535,6 @@ Throw an error if brackets, braces, or parens are imbalanced.
 undefined
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:232
-
 ***
 
 ### strictSlashes?
@@ -680,10 +548,6 @@ When true, picomatch won't match trailing slashes with single stars.
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:238
 
 ***
 
@@ -711,10 +575,6 @@ mm.match(['abc', 'a\\*c'], 'a\\*c', {unescape: true});
 //=> ['a*c']
 ```
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:255
-
 ***
 
 ### windows?
@@ -728,7 +588,3 @@ Convert all slashes in file paths to forward slashes. This does not convert slas
 ```ts
 undefined
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:261

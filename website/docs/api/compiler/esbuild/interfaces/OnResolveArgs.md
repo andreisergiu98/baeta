@@ -8,19 +8,11 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 
 > **importer**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:378
-
 ***
 
 ### kind
 
 > **kind**: [`ImportKind`](../type-aliases/ImportKind.md)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:381
 
 ***
 
@@ -28,19 +20,11 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 
 > **namespace**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:379
-
 ***
 
 ### path
 
 > **path**: `string`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:377
 
 ***
 
@@ -48,26 +32,14 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 
 > **pluginData**: `any`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:382
-
 ***
 
 ### resolveDir
 
 > **resolveDir**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:380
-
 ***
 
 ### with
 
 > **with**: `Record`\<`string`, `string`\>
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:383

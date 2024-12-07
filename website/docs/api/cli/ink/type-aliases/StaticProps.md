@@ -37,7 +37,3 @@ Array of items of any type to render using a function you pass as a component ch
 > `readonly` `optional` **style**: `Styles`
 
 Styles to apply to a container of child elements. See <Box> for supported properties.
-
-## Defined in
-
-.yarn/\_\_virtual\_\_/ink-virtual-46a2052950/0/cache/ink-npm-5.1.0-5eb899d847-aa60256b38.zip/node\_modules/ink/build/components/Static.d.ts:3

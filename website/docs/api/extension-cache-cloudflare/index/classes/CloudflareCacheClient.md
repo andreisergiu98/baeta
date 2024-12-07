@@ -14,19 +14,11 @@
 
 [`CloudflareCacheClient`](CloudflareCacheClient.md)
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:5](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L5)
-
 ## Properties
 
 ### durableObject
 
 > **durableObject**: `DurableObjectNamespace`\<`undefined`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:5](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L5)
 
 ## Methods
 
@@ -42,10 +34,6 @@
 
 `Promise`\<`null`\>
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:47](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L47)
-
 ***
 
 ### deleteOne()
@@ -59,10 +47,6 @@
 #### Returns
 
 `Promise`\<`null`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:56](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L56)
 
 ***
 
@@ -78,10 +62,6 @@
 
 `Promise`\<(`null` \| `string`)[]\>
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:17](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L17)
-
 ***
 
 ### getOne()
@@ -95,10 +75,6 @@
 #### Returns
 
 `Promise`\<`null` \| `string`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:27](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L27)
 
 ***
 
@@ -118,10 +94,6 @@
 
 `Promise`\<`string`[]\>
 
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:61](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L61)
-
 ***
 
 ### post()
@@ -135,10 +107,6 @@
 #### Returns
 
 `Promise`\<`Response`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:7](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L7)
 
 ***
 
@@ -155,10 +123,6 @@
 #### Returns
 
 `Promise`\<`null`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L32)
 
 ***
 
@@ -177,7 +141,3 @@
 #### Returns
 
 `Promise`\<`null`\>
-
-#### Defined in
-
-[packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts:42](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache-cloudflare/lib/cloudflare-cache-client.ts#L42)

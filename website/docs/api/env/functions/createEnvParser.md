@@ -27,7 +27,3 @@
 ### Returns
 
 `R` *extends* `true` ? `InferType`\<`T`\> : `D` *extends* `undefined` ? `undefined` \| `InferType`\<`T`\> : `InferType`\<`T`\>
-
-## Defined in
-
-[index.ts:104](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/env/index.ts#L104)

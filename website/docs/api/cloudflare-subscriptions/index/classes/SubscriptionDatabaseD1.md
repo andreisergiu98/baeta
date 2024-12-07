@@ -18,19 +18,11 @@
 
 [`SubscriptionDatabaseD1`](SubscriptionDatabaseD1.md)
 
-#### Defined in
-
-[lib/subscription-database-d1.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L18)
-
 ## Properties
 
 ### table
 
 > `protected` **table**: `string` = `'Subscriptions'`
-
-#### Defined in
-
-[lib/subscription-database-d1.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L20)
 
 ## Methods
 
@@ -50,10 +42,6 @@
 
 [`SubscriptionDatabase`](SubscriptionDatabase.md).[`createSubscription`](SubscriptionDatabase.md#createsubscription)
 
-#### Defined in
-
-[lib/subscription-database-d1.ts:44](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L44)
-
 ***
 
 ### deleteSubscription()
@@ -71,10 +59,6 @@
 #### Implementation of
 
 [`SubscriptionDatabase`](SubscriptionDatabase.md).[`deleteSubscription`](SubscriptionDatabase.md#deletesubscription)
-
-#### Defined in
-
-[lib/subscription-database-d1.ts:53](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L53)
 
 ***
 
@@ -94,10 +78,6 @@
 
 [`SubscriptionDatabase`](SubscriptionDatabase.md).[`deleteSubscriptions`](SubscriptionDatabase.md#deletesubscriptions)
 
-#### Defined in
-
-[lib/subscription-database-d1.ts:57](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L57)
-
 ***
 
 ### getSubscriptions()
@@ -115,7 +95,3 @@
 #### Implementation of
 
 [`SubscriptionDatabase`](SubscriptionDatabase.md).[`getSubscriptions`](SubscriptionDatabase.md#getsubscriptions)
-
-#### Defined in
-
-[lib/subscription-database-d1.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database-d1.ts#L22)

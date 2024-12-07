@@ -32,10 +32,6 @@ mm(['a/b.js', 'a/c.md'], '*.js', {matchBase: true});
 
 [`Options`](Options.md).[`basename`](Options.md#basename)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:26
-
 ***
 
 ### bash?
@@ -66,10 +62,6 @@ console.log(mm(files, '[a-c]*', {bash: false}));
 
 [`Options`](Options.md).[`bash`](Options.md#bash)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:43
-
 ***
 
 ### capture?
@@ -87,10 +79,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`capture`](Options.md#capture)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:49
 
 ***
 
@@ -110,10 +98,6 @@ undefined
 
 [`Options`](Options.md).[`contains`](Options.md#contains)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:55
-
 ***
 
 ### cwd?
@@ -131,10 +115,6 @@ process.cwd()
 #### Inherited from
 
 [`Options`](Options.md).[`cwd`](Options.md#cwd)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:61
 
 ***
 
@@ -154,10 +134,6 @@ undefined
 
 [`Options`](Options.md).[`debug`](Options.md#debug)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:67
-
 ***
 
 ### dot?
@@ -175,10 +151,6 @@ false
 #### Inherited from
 
 [`Options`](Options.md).[`dot`](Options.md#dot)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:73
 
 ***
 
@@ -212,10 +184,6 @@ undefined
 
 [`Options`](Options.md).[`expandRange`](Options.md#expandrange)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:81
-
 ***
 
 ### failglob?
@@ -233,10 +201,6 @@ false
 #### Inherited from
 
 [`Options`](Options.md).[`failglob`](Options.md#failglob)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:87
 
 ***
 
@@ -256,10 +220,6 @@ true
 
 [`Options`](Options.md).[`fastpaths`](Options.md#fastpaths)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:93
-
 ***
 
 ### flags?
@@ -277,10 +237,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`flags`](Options.md#flags)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:99
 
 ***
 
@@ -308,10 +264,6 @@ undefined
 
 [`Options`](Options.md).[`format`](Options.md#format)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:105
-
 ***
 
 ### ignore?
@@ -329,10 +281,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`ignore`](Options.md#ignore)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:111
 
 ***
 
@@ -352,10 +300,6 @@ false
 
 [`Options`](Options.md).[`keepQuotes`](Options.md#keepquotes)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:117
-
 ***
 
 ### literalBrackets?
@@ -373,10 +317,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`literalBrackets`](Options.md#literalbrackets)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:123
 
 ***
 
@@ -396,10 +336,6 @@ true
 
 [`Options`](Options.md).[`lookbehinds`](Options.md#lookbehinds)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:129
-
 ***
 
 ### matchBase?
@@ -417,10 +353,6 @@ false
 #### Inherited from
 
 [`Options`](Options.md).[`matchBase`](Options.md#matchbase)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:135
 
 ***
 
@@ -440,10 +372,6 @@ Limit the max length of the input string. An error is thrown if the input string
 
 [`Options`](Options.md).[`maxLength`](Options.md#maxlength)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:141
-
 ***
 
 ### nobrace?
@@ -462,10 +390,6 @@ false
 
 [`Options`](Options.md).[`nobrace`](Options.md#nobrace)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:147
-
 ***
 
 ### nobracket?
@@ -483,10 +407,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`nobracket`](Options.md#nobracket)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:153
 
 ***
 
@@ -507,10 +427,6 @@ false
 
 [`Options`](Options.md).[`nocase`](Options.md#nocase)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:160
-
 ***
 
 ### noext?
@@ -528,10 +444,6 @@ false
 #### Inherited from
 
 [`Options`](Options.md).[`noext`](Options.md#noext)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:166
 
 ***
 
@@ -551,10 +463,6 @@ false
 
 [`Options`](Options.md).[`noextglob`](Options.md#noextglob)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:172
-
 ***
 
 ### noglobstar?
@@ -572,10 +480,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`noglobstar`](Options.md#noglobstar)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:178
 
 ***
 
@@ -595,10 +499,6 @@ undefined
 
 [`Options`](Options.md).[`nonegate`](Options.md#nonegate)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:184
-
 ***
 
 ### noquantifiers?
@@ -616,10 +516,6 @@ false
 #### Inherited from
 
 [`Options`](Options.md).[`noquantifiers`](Options.md#noquantifiers)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:190
 
 ***
 
@@ -647,10 +543,6 @@ undefined
 
 [`Options`](Options.md).[`onIgnore`](Options.md#onignore)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:196
-
 ***
 
 ### onMatch()?
@@ -676,10 +568,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`onMatch`](Options.md#onmatch)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:202
 
 ***
 
@@ -707,10 +595,6 @@ undefined
 
 [`Options`](Options.md).[`onResult`](Options.md#onresult)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:208
-
 ***
 
 ### parts?
@@ -725,10 +609,6 @@ This is automatically enabled when `options.tokens` is `true`.
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:277
 
 ***
 
@@ -748,10 +628,6 @@ false
 
 [`Options`](Options.md).[`posix`](Options.md#posix)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:214
-
 ***
 
 ### prepend?
@@ -769,10 +645,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`prepend`](Options.md#prepend)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:220
 
 ***
 
@@ -792,10 +664,6 @@ false
 
 [`Options`](Options.md).[`regex`](Options.md#regex)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:226
-
 ***
 
 ### strictBrackets?
@@ -813,10 +681,6 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`strictBrackets`](Options.md#strictbrackets)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:232
 
 ***
 
@@ -836,10 +700,6 @@ undefined
 
 [`Options`](Options.md).[`strictSlashes`](Options.md#strictslashes)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:238
-
 ***
 
 ### tokens?
@@ -853,10 +713,6 @@ When `true`, the returned object will include an array of `tokens` (objects), re
 ```ts
 false
 ```
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:270
 
 ***
 
@@ -888,10 +744,6 @@ mm.match(['abc', 'a\\*c'], 'a\\*c', {unescape: true});
 
 [`Options`](Options.md).[`unescape`](Options.md#unescape)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:255
-
 ***
 
 ### windows?
@@ -909,7 +761,3 @@ undefined
 #### Inherited from
 
 [`Options`](Options.md).[`windows`](Options.md#windows)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:261

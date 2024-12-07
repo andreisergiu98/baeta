@@ -24,10 +24,6 @@
 
 `Extension.constructor`
 
-#### Defined in
-
-[packages/extension-cache/lib/cache-extension.ts:15](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/cache-extension.ts#L15)
-
 ## Properties
 
 ### version
@@ -37,10 +33,6 @@
 #### Inherited from
 
 `Extension.version`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-core-virtual-59ab5efd02/1/packages/core/sdk/extension.ts:28
 
 ## Methods
 
@@ -62,10 +54,6 @@
 
 `Extension.build`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-core-virtual-59ab5efd02/1/packages/core/sdk/extension.ts:68
-
 ***
 
 ### getModuleExtensions()
@@ -79,10 +67,6 @@
 #### Inherited from
 
 `Extension.getModuleExtensions`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-core-virtual-59ab5efd02/1/packages/core/sdk/extension.ts:30
 
 ***
 
@@ -116,10 +100,6 @@
 
 `Extension.getResolverExtensions`
 
-#### Defined in
-
-[packages/extension-cache/lib/cache-extension.ts:40](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/cache-extension.ts#L40)
-
 ***
 
 ### getSubscriptionExtensions()
@@ -147,10 +127,6 @@
 #### Inherited from
 
 `Extension.getSubscriptionExtensions`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-core-virtual-59ab5efd02/1/packages/core/sdk/extension.ts:46
 
 ***
 
@@ -182,10 +158,6 @@
 
 `Extension.getSubscriptionResolveExtensions`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-core-virtual-59ab5efd02/1/packages/core/sdk/extension.ts:57
-
 ***
 
 ### getSubscriptionSubscribeExtensions()
@@ -216,10 +188,6 @@
 
 `Extension.getSubscriptionSubscribeExtensions`
 
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-core-virtual-59ab5efd02/1/packages/core/sdk/extension.ts:50
-
 ***
 
 ### getTransformers()
@@ -233,10 +201,6 @@
 #### Inherited from
 
 `Extension.getTransformers`
-
-#### Defined in
-
-.yarn/\_\_virtual\_\_/@baeta-core-virtual-59ab5efd02/1/packages/core/sdk/extension.ts:64
 
 ***
 
@@ -263,7 +227,3 @@
 #### Overrides
 
 `Extension.getTypeExtensions`
-
-#### Defined in
-
-[packages/extension-cache/lib/cache-extension.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/cache-extension.ts#L22)

@@ -18,10 +18,6 @@
 
 [`ScanInfo`](ScanInfo.md).[`base`](ScanInfo.md#base)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:284
-
 ***
 
 ### glob
@@ -31,10 +27,6 @@
 #### Inherited from
 
 [`ScanInfo`](ScanInfo.md).[`glob`](ScanInfo.md#glob)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:285
 
 ***
 
@@ -46,10 +38,6 @@
 
 [`ScanInfo`](ScanInfo.md).[`input`](ScanInfo.md#input)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:282
-
 ***
 
 ### isBrace
@@ -59,10 +47,6 @@
 #### Inherited from
 
 [`ScanInfo`](ScanInfo.md).[`isBrace`](ScanInfo.md#isbrace)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:286
 
 ***
 
@@ -74,10 +58,6 @@
 
 [`ScanInfo`](ScanInfo.md).[`isBracket`](ScanInfo.md#isbracket)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:287
-
 ***
 
 ### isExtglob
@@ -87,10 +67,6 @@
 #### Inherited from
 
 [`ScanInfo`](ScanInfo.md).[`isExtglob`](ScanInfo.md#isextglob)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:289
 
 ***
 
@@ -102,10 +78,6 @@
 
 [`ScanInfo`](ScanInfo.md).[`isGlob`](ScanInfo.md#isglob)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:288
-
 ***
 
 ### isGlobstar
@@ -115,10 +87,6 @@
 #### Inherited from
 
 [`ScanInfo`](ScanInfo.md).[`isGlobstar`](ScanInfo.md#isglobstar)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:290
 
 ***
 
@@ -130,10 +98,6 @@
 
 [`ScanInfo`](ScanInfo.md).[`negated`](ScanInfo.md#negated)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:291
-
 ***
 
 ### negatedExtglob
@@ -144,19 +108,11 @@
 
 [`ScanInfo`](ScanInfo.md).[`negatedExtglob`](ScanInfo.md#negatedextglob)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:292
-
 ***
 
 ### parts
 
 > **parts**: `string`[]
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:311
 
 ***
 
@@ -168,19 +124,11 @@
 
 [`ScanInfo`](ScanInfo.md).[`prefix`](ScanInfo.md#prefix)
 
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:281
-
 ***
 
 ### slashes
 
 > **slashes**: `number`[]
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:310
 
 ***
 
@@ -191,7 +139,3 @@
 #### Inherited from
 
 [`ScanInfo`](ScanInfo.md).[`start`](ScanInfo.md#start)
-
-#### Defined in
-
-.yarn/cache/@types-micromatch-npm-4.0.9-c49f1284da-324f4bcb4a.zip/node\_modules/@types/micromatch/index.d.ts:283

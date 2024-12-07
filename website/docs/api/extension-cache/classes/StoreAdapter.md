@@ -22,10 +22,6 @@
 
 [`StoreAdapter`](StoreAdapter.md)\<`Item`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:17](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L17)
-
 ## Properties
 
 ### deleteMany()
@@ -41,10 +37,6 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:27](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L27)
 
 ***
 
@@ -72,10 +64,6 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:42](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L42)
-
 ***
 
 ### getPartialMany()
@@ -90,29 +78,17 @@
 
 `Promise`\<`null` \| (`null` \| `Item`)[]\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L23)
-
 ***
 
 ### hash
 
 > `protected` **hash**: `string`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L20)
-
 ***
 
 ### loader
 
 > `protected` **loader**: `DataLoader`\<[`ItemRef`](../type-aliases/ItemRef.md), `null` \| `Item`, [`ItemRef`](../type-aliases/ItemRef.md)\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:56](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L56)
 
 ***
 
@@ -132,19 +108,11 @@
 
 `Promise`\<`null` \| `string`[]\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:36](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L36)
-
 ***
 
 ### options
 
 > `protected` **options**: [`StoreOptions`](../interfaces/StoreOptions.md)\<`Item`\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L18)
 
 ***
 
@@ -159,10 +127,6 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:25](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L25)
 
 ***
 
@@ -184,19 +148,11 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:29](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L29)
-
 ***
 
 ### type
 
 > `protected` **type**: `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:19](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L19)
 
 ## Methods
 
@@ -212,10 +168,6 @@
 
 `string`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:60](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L60)
-
 ***
 
 ### createKeyByItem()
@@ -229,10 +181,6 @@
 #### Returns
 
 `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:64](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L64)
 
 ***
 
@@ -251,10 +199,6 @@
 #### Returns
 
 `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:68](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L68)
 
 ***
 
@@ -280,10 +224,6 @@
 
 `Middleware`\<`Result`, `Root`, `unknown`, `Args`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:187](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L187)
-
 ***
 
 ### createQueryKeyGlobMatcher()
@@ -302,10 +242,6 @@
 
 `string`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:264](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L264)
-
 ***
 
 ### createQueryKeyHeader()
@@ -322,10 +258,6 @@
 
 `string`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:87](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L87)
-
 ***
 
 ### createQueryKeyNamespace()
@@ -339,10 +271,6 @@
 #### Returns
 
 `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:83](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L83)
 
 ***
 
@@ -362,10 +290,6 @@
 
 `RegExp`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:253](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L253)
-
 ***
 
 ### decodeQueryItemRef()
@@ -379,10 +303,6 @@
 #### Returns
 
 `null` \| `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:246](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L246)
 
 ***
 
@@ -399,10 +319,6 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:117](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L117)
 
 ***
 
@@ -428,10 +344,6 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:121](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L121)
-
 ***
 
 ### encodePrimitive()
@@ -448,10 +360,6 @@
 
 `null` \| `string`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:301](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L301)
-
 ***
 
 ### encodeProperty()
@@ -465,10 +373,6 @@
 #### Returns
 
 `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:293](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L293)
 
 ***
 
@@ -486,10 +390,6 @@
 
 `string`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:274](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L274)
-
 ***
 
 ### encodeQueryItemRef()
@@ -503,10 +403,6 @@
 #### Returns
 
 `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:238](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L238)
 
 ***
 
@@ -522,10 +418,6 @@
 
 `Promise`\<`null` \| `Item`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:93](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L93)
-
 ***
 
 ### getMany()
@@ -539,10 +431,6 @@
 #### Returns
 
 `Promise`\<`null` \| `Item`[]\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L97)
 
 ***
 
@@ -568,10 +456,6 @@
 
 `Promise`\<`null` \| `object`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:128](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L128)
-
 ***
 
 ### getRef()
@@ -585,10 +469,6 @@
 #### Returns
 
 [`ItemRef`](../type-aliases/ItemRef.md)
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:339](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L339)
 
 ***
 
@@ -604,10 +484,6 @@
 
 `undefined` \| `string`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:356](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L356)
-
 ***
 
 ### getRevision()
@@ -617,10 +493,6 @@
 #### Returns
 
 `string`
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:78](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L78)
 
 ***
 
@@ -635,10 +507,6 @@
 #### Returns
 
 `Promise`\<`any`[]\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:48](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L48)
 
 ***
 
@@ -656,10 +524,6 @@
 
 (`null` \| `Item`)[]
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:219](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L219)
-
 ***
 
 ### save()
@@ -673,10 +537,6 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:113](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L113)
 
 ***
 
@@ -704,10 +564,6 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:160](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L160)
-
 ***
 
 ### shouldEncode()
@@ -722,10 +578,6 @@
 
 `boolean`
 
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:335](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L335)
-
 ***
 
 ### validateRefType()
@@ -739,7 +591,3 @@
 #### Returns
 
 asserts ref is string \| number \| bigint
-
-#### Defined in
-
-[packages/extension-cache/lib/store-adapter.ts:369](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/extension-cache/lib/store-adapter.ts#L369)

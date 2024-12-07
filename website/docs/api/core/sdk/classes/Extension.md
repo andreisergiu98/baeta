@@ -16,10 +16,6 @@
 
 > **version**: [`V1`](../enumerations/ExtensionVersion.md#v1) = `ExtensionVersion.V1`
 
-#### Defined in
-
-[sdk/extension.ts:28](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L28)
-
 ## Methods
 
 ### build()
@@ -36,10 +32,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/extension.ts:68](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L68)
-
 ***
 
 ### getModuleExtensions()
@@ -49,10 +41,6 @@
 #### Returns
 
 `object`
-
-#### Defined in
-
-[sdk/extension.ts:30](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L30)
 
 ***
 
@@ -82,10 +70,6 @@
 
 `object`
 
-#### Defined in
-
-[sdk/extension.ts:38](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L38)
-
 ***
 
 ### getSubscriptionExtensions()
@@ -109,10 +93,6 @@
 #### Returns
 
 `object`
-
-#### Defined in
-
-[sdk/extension.ts:46](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L46)
 
 ***
 
@@ -140,10 +120,6 @@
 
 `object`
 
-#### Defined in
-
-[sdk/extension.ts:57](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L57)
-
 ***
 
 ### getSubscriptionSubscribeExtensions()
@@ -170,10 +146,6 @@
 
 `object`
 
-#### Defined in
-
-[sdk/extension.ts:50](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L50)
-
 ***
 
 ### getTransformers()
@@ -183,10 +155,6 @@
 #### Returns
 
 [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
-
-#### Defined in
-
-[sdk/extension.ts:64](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L64)
 
 ***
 
@@ -209,7 +177,3 @@
 #### Returns
 
 `object`
-
-#### Defined in
-
-[sdk/extension.ts:34](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/extension.ts#L34)

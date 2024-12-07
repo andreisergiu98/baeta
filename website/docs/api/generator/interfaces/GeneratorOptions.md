@@ -14,10 +14,6 @@ Path for the generated base types file.
 
 `${modulesDir}/../__generated__/types.ts`
 
-#### Defined in
-
-[generator-sdk/lib/config.ts:44](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L44)
-
 ***
 
 ### contextType?
@@ -42,10 +38,6 @@ contextType: 'src/types/context' // for default export
 undefined
 ```
 
-#### Defined in
-
-[generator-sdk/lib/config.ts:52](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L52)
-
 ***
 
 ### cwd?
@@ -59,10 +51,6 @@ Current working directory.
 ```ts
 process.cwd()
 ```
-
-#### Defined in
-
-[generator-sdk/lib/config.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L20)
 
 ***
 
@@ -84,10 +72,6 @@ extensions: 'src/extensions'
 undefined
 ```
 
-#### Defined in
-
-[generator-sdk/lib/config.ts:59](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L59)
-
 ***
 
 ### fileOptions?
@@ -95,10 +79,6 @@ undefined
 > `optional` **fileOptions**: [`FileOptions`](../../generator-sdk/interfaces/FileOptions.md)
 
 Options for generated files.
-
-#### Defined in
-
-[generator-sdk/lib/config.ts:71](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L71)
 
 ***
 
@@ -108,10 +88,6 @@ Options for generated files.
 
 File extension for generated import statements.
 
-#### Defined in
-
-[generator-sdk/lib/config.ts:81](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L81)
-
 ***
 
 ### loaders?
@@ -119,10 +95,6 @@ File extension for generated import statements.
 > `optional` **loaders**: [`Loader`](../../generator-sdk/interfaces/Loader.md)\<`any`\>[]
 
 Additional schema loaders to be used for "schemas" option.
-
-#### Defined in
-
-[generator-sdk/lib/config.ts:76](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L76)
 
 ***
 
@@ -138,10 +110,6 @@ Name for the generated module definition file. This will contain type definition
 'typedef.ts'
 ```
 
-#### Defined in
-
-[generator-sdk/lib/config.ts:38](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L38)
-
 ***
 
 ### modulesDir?
@@ -155,10 +123,6 @@ Directory where modules are defined.
 ```ts
 'src/modules'
 ```
-
-#### Defined in
-
-[generator-sdk/lib/config.ts:32](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L32)
 
 ***
 
@@ -180,10 +144,6 @@ scalars: { DateTime: 'Date' }
 undefined
 ```
 
-#### Defined in
-
-[generator-sdk/lib/config.ts:66](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L66)
-
 ***
 
 ### schemas
@@ -197,7 +157,3 @@ Glob pattern(s) to load graphql schema files.
 ```ts
 ['src/∗∗/∗.graphql']
 ```
-
-#### Defined in
-
-[generator-sdk/lib/config.ts:26](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/config.ts#L26)

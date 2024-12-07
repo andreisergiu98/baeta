@@ -24,10 +24,6 @@
 
 `GraphQLError.constructor`
 
-#### Defined in
-
-[packages/errors/index.ts:34](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/errors/index.ts#L34)
-
 ## Properties
 
 ### cause?
@@ -37,10 +33,6 @@
 #### Inherited from
 
 `GraphQLError.cause`
-
-#### Defined in
-
-.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es2022.error.d.ts:26
 
 ***
 
@@ -53,10 +45,6 @@ Extension fields to add to the formatted error.
 #### Inherited from
 
 `GraphQLError.extensions`
-
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:77
 
 ***
 
@@ -77,10 +65,6 @@ Enumerable, and appears in the result of JSON.stringify().
 
 `GraphQLError.locations`
 
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:46
-
 ***
 
 ### message
@@ -91,10 +75,6 @@ Enumerable, and appears in the result of JSON.stringify().
 
 `GraphQLError.message`
 
-#### Defined in
-
-.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1077
-
 ***
 
 ### name
@@ -104,10 +84,6 @@ Enumerable, and appears in the result of JSON.stringify().
 #### Inherited from
 
 `GraphQLError.name`
-
-#### Defined in
-
-.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1076
 
 ***
 
@@ -121,10 +97,6 @@ An array of GraphQL AST Nodes corresponding to this error.
 
 `GraphQLError.nodes`
 
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:57
-
 ***
 
 ### originalError
@@ -136,10 +108,6 @@ The original error thrown from a field resolver during execution.
 #### Inherited from
 
 `GraphQLError.originalError`
-
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:73
 
 ***
 
@@ -156,10 +124,6 @@ Enumerable, and appears in the result of JSON.stringify().
 
 `GraphQLError.path`
 
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:53
-
 ***
 
 ### positions
@@ -172,10 +136,6 @@ which correspond to this error.
 #### Inherited from
 
 `GraphQLError.positions`
-
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:69
 
 ***
 
@@ -192,10 +152,6 @@ represent nodes after the first node.
 
 `GraphQLError.source`
 
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:64
-
 ***
 
 ### stack?
@@ -205,10 +161,6 @@ represent nodes after the first node.
 #### Inherited from
 
 `GraphQLError.stack`
-
-#### Defined in
-
-.yarn/cache/typescript-patch-aed9e5263d-d75ca10141.zip/node\_modules/typescript/lib/lib.es5.d.ts:1078
 
 ## Accessors
 
@@ -226,10 +178,6 @@ represent nodes after the first node.
 
 `GraphQLError.[toStringTag]`
 
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:95
-
 ## Methods
 
 ### toJSON()
@@ -243,10 +191,6 @@ represent nodes after the first node.
 #### Inherited from
 
 `GraphQLError.toJSON`
-
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:97
 
 ***
 
@@ -263,7 +207,3 @@ Returns a string representation of an object.
 #### Inherited from
 
 `GraphQLError.toString`
-
-#### Defined in
-
-.yarn/cache/graphql-npm-16.9.0-a36f71845f-5833f82bb6.zip/node\_modules/graphql/error/GraphQLError.d.ts:96

@@ -12,10 +12,6 @@
 
 Documentation: https://esbuild.github.io/api/#working-directory
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:168
-
 ***
 
 ### alias?
@@ -23,10 +19,6 @@ Documentation: https://esbuild.github.io/api/#working-directory
 > `optional` **alias**: `Record`\<`string`, `string`\>
 
 Documentation: https://esbuild.github.io/api/#alias
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:130
 
 ***
 
@@ -36,10 +28,6 @@ Documentation: https://esbuild.github.io/api/#alias
 
 Documentation: https://esbuild.github.io/api/#allow-overwrite
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:142
-
 ***
 
 ### assetNames?
@@ -47,10 +35,6 @@ Documentation: https://esbuild.github.io/api/#allow-overwrite
 > `optional` **assetNames**: `string`
 
 Documentation: https://esbuild.github.io/api/#asset-names
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:154
 
 ***
 
@@ -64,10 +48,6 @@ Documentation: https://esbuild.github.io/api/#banner
 
  \[`type`: `string`\]: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:158
-
 ***
 
 ### bundle?
@@ -75,10 +55,6 @@ Documentation: https://esbuild.github.io/api/#banner
 > `optional` **bundle**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#bundle
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:112
 
 ***
 
@@ -92,10 +68,6 @@ Documentation: https://esbuild.github.io/api/#charset
 
 [`CommonOptions`](CommonOptions.md).[`charset`](CommonOptions.md#charset)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:52
-
 ***
 
 ### chunkNames?
@@ -103,10 +75,6 @@ Documentation: https://esbuild.github.io/api/#charset
 > `optional` **chunkNames**: `string`
 
 Documentation: https://esbuild.github.io/api/#chunk-names
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:152
 
 ***
 
@@ -120,10 +88,6 @@ Documentation: https://esbuild.github.io/api/#color
 
 [`CommonOptions`](CommonOptions.md).[`color`](CommonOptions.md#color)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:79
-
 ***
 
 ### conditions?
@@ -131,10 +95,6 @@ Documentation: https://esbuild.github.io/api/#color
 > `optional` **conditions**: `string`[]
 
 Documentation: https://esbuild.github.io/api/#conditions
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:138
 
 ***
 
@@ -152,10 +112,6 @@ Documentation: https://esbuild.github.io/api/#define
 
 [`CommonOptions`](CommonOptions.md).[`define`](CommonOptions.md#define)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:72
-
 ***
 
 ### drop?
@@ -167,10 +123,6 @@ Documentation: https://esbuild.github.io/api/#drop
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`drop`](CommonOptions.md#drop)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:38
 
 ***
 
@@ -184,10 +136,6 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 
 [`CommonOptions`](CommonOptions.md).[`dropLabels`](CommonOptions.md#droplabels)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:40
-
 ***
 
 ### entryNames?
@@ -195,10 +143,6 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 > `optional` **entryNames**: `string`
 
 Documentation: https://esbuild.github.io/api/#entry-names
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:150
 
 ***
 
@@ -208,10 +152,6 @@ Documentation: https://esbuild.github.io/api/#entry-names
 
 Documentation: https://esbuild.github.io/api/#entry-points
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:162
-
 ***
 
 ### external?
@@ -219,10 +159,6 @@ Documentation: https://esbuild.github.io/api/#entry-points
 > `optional` **external**: `string`[]
 
 Documentation: https://esbuild.github.io/api/#external
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:126
 
 ***
 
@@ -236,10 +172,6 @@ Documentation: https://esbuild.github.io/api/#footer
 
  \[`type`: `string`\]: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:160
-
 ***
 
 ### format?
@@ -251,10 +183,6 @@ Documentation: https://esbuild.github.io/api/#format
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`format`](CommonOptions.md#format)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:19
 
 ***
 
@@ -268,10 +196,6 @@ Documentation: https://esbuild.github.io/api/#global-name
 
 [`CommonOptions`](CommonOptions.md).[`globalName`](CommonOptions.md#globalname)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:21
-
 ***
 
 ### ignoreAnnotations?
@@ -284,10 +208,6 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 
 [`CommonOptions`](CommonOptions.md).[`ignoreAnnotations`](CommonOptions.md#ignoreannotations)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:56
-
 ***
 
 ### inject?
@@ -295,10 +215,6 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 > `optional` **inject**: `string`[]
 
 Documentation: https://esbuild.github.io/api/#inject
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:156
 
 ***
 
@@ -312,10 +228,6 @@ Documentation: https://esbuild.github.io/api/#jsx
 
 [`CommonOptions`](CommonOptions.md).[`jsx`](CommonOptions.md#jsx)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:59
-
 ***
 
 ### jsxDev?
@@ -327,10 +239,6 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`jsxDev`](CommonOptions.md#jsxdev)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:67
 
 ***
 
@@ -344,10 +252,6 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 
 [`CommonOptions`](CommonOptions.md).[`jsxFactory`](CommonOptions.md#jsxfactory)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:61
-
 ***
 
 ### jsxFragment?
@@ -359,10 +263,6 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`jsxFragment`](CommonOptions.md#jsxfragment)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:63
 
 ***
 
@@ -376,10 +276,6 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 
 [`CommonOptions`](CommonOptions.md).[`jsxImportSource`](CommonOptions.md#jsximportsource)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:65
-
 ***
 
 ### jsxSideEffects?
@@ -391,10 +287,6 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`jsxSideEffects`](CommonOptions.md#jsxsideeffects)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:69
 
 ***
 
@@ -408,10 +300,6 @@ Documentation: https://esbuild.github.io/api/#keep-names
 
 [`CommonOptions`](CommonOptions.md).[`keepNames`](CommonOptions.md#keepnames)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:76
-
 ***
 
 ### legalComments?
@@ -423,10 +311,6 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`legalComments`](CommonOptions.md#legalcomments)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:12
 
 ***
 
@@ -440,10 +324,6 @@ Documentation: https://esbuild.github.io/api/#line-limit
 
 [`CommonOptions`](CommonOptions.md).[`lineLimit`](CommonOptions.md#linelimit)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:50
-
 ***
 
 ### loader?
@@ -455,10 +335,6 @@ Documentation: https://esbuild.github.io/api/#loader
 #### Index Signature
 
  \[`ext`: `string`\]: [`Loader`](../type-aliases/Loader.md)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:132
 
 ***
 
@@ -472,10 +348,6 @@ Documentation: https://esbuild.github.io/api/#log-level
 
 [`CommonOptions`](CommonOptions.md).[`logLevel`](CommonOptions.md#loglevel)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:81
-
 ***
 
 ### logLimit?
@@ -487,10 +359,6 @@ Documentation: https://esbuild.github.io/api/#log-limit
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`logLimit`](CommonOptions.md#loglimit)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:83
 
 ***
 
@@ -504,10 +372,6 @@ Documentation: https://esbuild.github.io/api/#log-override
 
 [`CommonOptions`](CommonOptions.md).[`logOverride`](CommonOptions.md#logoverride)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:85
-
 ***
 
 ### mainFields?
@@ -515,10 +379,6 @@ Documentation: https://esbuild.github.io/api/#log-override
 > `optional` **mainFields**: `string`[]
 
 Documentation: https://esbuild.github.io/api/#main-fields
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:136
 
 ***
 
@@ -532,10 +392,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 [`CommonOptions`](CommonOptions.md).[`mangleCache`](CommonOptions.md#manglecache)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:36
-
 ***
 
 ### mangleProps?
@@ -547,10 +403,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`mangleProps`](CommonOptions.md#mangleprops)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:30
 
 ***
 
@@ -564,10 +416,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 [`CommonOptions`](CommonOptions.md).[`mangleQuoted`](CommonOptions.md#manglequoted)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:34
-
 ***
 
 ### metafile?
@@ -575,10 +423,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 > `optional` **metafile**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#metafile
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:120
 
 ***
 
@@ -592,10 +436,6 @@ Documentation: https://esbuild.github.io/api/#minify
 
 [`CommonOptions`](CommonOptions.md).[`minify`](CommonOptions.md#minify)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:42
-
 ***
 
 ### minifyIdentifiers?
@@ -607,10 +447,6 @@ Documentation: https://esbuild.github.io/api/#minify
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`minifyIdentifiers`](CommonOptions.md#minifyidentifiers)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:46
 
 ***
 
@@ -624,10 +460,6 @@ Documentation: https://esbuild.github.io/api/#minify
 
 [`CommonOptions`](CommonOptions.md).[`minifySyntax`](CommonOptions.md#minifysyntax)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:48
-
 ***
 
 ### minifyWhitespace?
@@ -640,10 +472,6 @@ Documentation: https://esbuild.github.io/api/#minify
 
 [`CommonOptions`](CommonOptions.md).[`minifyWhitespace`](CommonOptions.md#minifywhitespace)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:44
-
 ***
 
 ### nodePaths?
@@ -651,10 +479,6 @@ Documentation: https://esbuild.github.io/api/#minify
 > `optional` **nodePaths**: `string`[]
 
 Documentation: https://esbuild.github.io/api/#node-paths
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:170
 
 ***
 
@@ -664,10 +488,6 @@ Documentation: https://esbuild.github.io/api/#node-paths
 
 Documentation: https://esbuild.github.io/api/#outbase
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:124
-
 ***
 
 ### outdir?
@@ -675,10 +495,6 @@ Documentation: https://esbuild.github.io/api/#outbase
 > `optional` **outdir**: `string`
 
 Documentation: https://esbuild.github.io/api/#outdir
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:122
 
 ***
 
@@ -692,10 +508,6 @@ Documentation: https://esbuild.github.io/api/#out-extension
 
  \[`ext`: `string`\]: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:146
-
 ***
 
 ### outfile?
@@ -704,10 +516,6 @@ Documentation: https://esbuild.github.io/api/#out-extension
 
 Documentation: https://esbuild.github.io/api/#outfile
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:118
-
 ***
 
 ### packages?
@@ -715,10 +523,6 @@ Documentation: https://esbuild.github.io/api/#outfile
 > `optional` **packages**: `"bundle"` \| `"external"`
 
 Documentation: https://esbuild.github.io/api/#packages
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:128
 
 ***
 
@@ -732,10 +536,6 @@ Documentation: https://esbuild.github.io/api/#platform
 
 [`CommonOptions`](CommonOptions.md).[`platform`](CommonOptions.md#platform)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:27
-
 ***
 
 ### plugins?
@@ -743,10 +543,6 @@ Documentation: https://esbuild.github.io/api/#platform
 > `optional` **plugins**: [`Plugin`](Plugin.md)[]
 
 Documentation: https://esbuild.github.io/plugins/
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:166
 
 ***
 
@@ -756,10 +552,6 @@ Documentation: https://esbuild.github.io/plugins/
 
 Documentation: https://esbuild.github.io/api/#preserve-symlinks
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:116
-
 ***
 
 ### publicPath?
@@ -767,10 +559,6 @@ Documentation: https://esbuild.github.io/api/#preserve-symlinks
 > `optional` **publicPath**: `string`
 
 Documentation: https://esbuild.github.io/api/#public-path
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:148
 
 ***
 
@@ -784,10 +572,6 @@ Documentation: https://esbuild.github.io/api/#pure
 
 [`CommonOptions`](CommonOptions.md).[`pure`](CommonOptions.md#pure)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:74
-
 ***
 
 ### reserveProps?
@@ -800,10 +584,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 [`CommonOptions`](CommonOptions.md).[`reserveProps`](CommonOptions.md#reserveprops)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:32
-
 ***
 
 ### resolveExtensions?
@@ -811,10 +591,6 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 > `optional` **resolveExtensions**: `string`[]
 
 Documentation: https://esbuild.github.io/api/#resolve-extensions
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:134
 
 ***
 
@@ -828,10 +604,6 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 
 [`CommonOptions`](CommonOptions.md).[`sourcemap`](CommonOptions.md#sourcemap)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:10
-
 ***
 
 ### sourceRoot?
@@ -843,10 +615,6 @@ Documentation: https://esbuild.github.io/api/#source-root
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`sourceRoot`](CommonOptions.md#sourceroot)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:14
 
 ***
 
@@ -860,10 +628,6 @@ Documentation: https://esbuild.github.io/api/#sources-content
 
 [`CommonOptions`](CommonOptions.md).[`sourcesContent`](CommonOptions.md#sourcescontent)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:16
-
 ***
 
 ### splitting?
@@ -872,10 +636,6 @@ Documentation: https://esbuild.github.io/api/#sources-content
 
 Documentation: https://esbuild.github.io/api/#splitting
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:114
-
 ***
 
 ### stdin?
@@ -883,10 +643,6 @@ Documentation: https://esbuild.github.io/api/#splitting
 > `optional` **stdin**: [`StdinOptions`](StdinOptions.md)
 
 Documentation: https://esbuild.github.io/api/#stdin
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:164
 
 ***
 
@@ -900,10 +656,6 @@ Documentation: https://esbuild.github.io/api/#supported
 
 [`CommonOptions`](CommonOptions.md).[`supported`](CommonOptions.md#supported)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:25
-
 ***
 
 ### target?
@@ -915,10 +667,6 @@ Documentation: https://esbuild.github.io/api/#target
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`target`](CommonOptions.md#target)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:23
 
 ***
 
@@ -932,10 +680,6 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 
 [`CommonOptions`](CommonOptions.md).[`treeShaking`](CommonOptions.md#treeshaking)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:54
-
 ***
 
 ### tsconfig?
@@ -943,10 +687,6 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 > `optional` **tsconfig**: `string`
 
 Documentation: https://esbuild.github.io/api/#tsconfig
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:144
 
 ***
 
@@ -960,10 +700,6 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 
 [`CommonOptions`](CommonOptions.md).[`tsconfigRaw`](CommonOptions.md#tsconfigraw)
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:88
-
 ***
 
 ### write?
@@ -971,7 +707,3 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 > `optional` **write**: `boolean`
 
 Documentation: https://esbuild.github.io/api/#write
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:140

@@ -16,19 +16,11 @@
 
 > `readonly` **middlewares**: `MiddlewareMap`
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:19](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L19)
-
 ***
 
 ### prependedMiddlewares
 
 > `readonly` **prependedMiddlewares**: `MiddlewareMap`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:20](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L20)
 
 ***
 
@@ -36,19 +28,11 @@
 
 > `readonly` **resolvers**: `ResolversMap`
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L18)
-
 ***
 
 ### scalars
 
 > `readonly` **scalars**: `ScalarsMap`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:17](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L17)
 
 ***
 
@@ -56,19 +40,11 @@
 
 > `readonly` **typeFields**: `Record`\<`string`, `undefined` \| `string`[]\>
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L23)
-
 ***
 
 ### types
 
 > `readonly` **types**: `string`[] = `[]`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L22)
 
 ## Methods
 
@@ -97,10 +73,6 @@
 #### Returns
 
 `void`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:89](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L89)
 
 ***
 
@@ -132,10 +104,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:62](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L62)
-
 ***
 
 ### compose()
@@ -145,10 +113,6 @@
 #### Returns
 
 `IResolvers`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:126](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L126)
 
 ***
 
@@ -164,10 +128,6 @@
 
 `string`[]
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:29](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L29)
-
 ***
 
 ### getTypes()
@@ -177,10 +137,6 @@
 #### Returns
 
 `string`[]
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:25](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L25)
 
 ***
 
@@ -210,10 +166,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:97](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L97)
-
 ***
 
 ### registerTypeField()
@@ -230,10 +182,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:115](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L115)
-
 ***
 
 ### setDefaultFieldResolver()
@@ -249,10 +197,6 @@
 #### Returns
 
 `void`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:105](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L105)
 
 ***
 
@@ -282,10 +226,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:33](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L33)
-
 ***
 
 ### setScalar()
@@ -301,10 +241,6 @@
 #### Returns
 
 `void`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:42](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L42)
 
 ***
 
@@ -334,10 +270,6 @@
 
 `void`
 
-#### Defined in
-
-[sdk/resolver-mapper.ts:46](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L46)
-
 ***
 
 ### setTypenameResolver()
@@ -361,7 +293,3 @@
 #### Returns
 
 `void`
-
-#### Defined in
-
-[sdk/resolver-mapper.ts:54](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/core/sdk/resolver-mapper.ts#L54)

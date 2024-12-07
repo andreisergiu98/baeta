@@ -8,19 +8,11 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 
 > `optional` **errors**: [`PartialMessage`](PartialMessage.md)[]
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:404
-
 ***
 
 ### external?
 
 > `optional` **external**: `boolean`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:408
 
 ***
 
@@ -28,19 +20,11 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 
 > `optional` **namespace**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:410
-
 ***
 
 ### path?
 
 > `optional` **path**: `string`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:407
 
 ***
 
@@ -48,19 +32,11 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 
 > `optional` **pluginData**: `any`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:412
-
 ***
 
 ### pluginName?
 
 > `optional` **pluginName**: `string`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:402
 
 ***
 
@@ -68,19 +44,11 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 
 > `optional` **sideEffects**: `boolean`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:409
-
 ***
 
 ### suffix?
 
 > `optional` **suffix**: `string`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:411
 
 ***
 
@@ -88,26 +56,14 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 
 > `optional` **warnings**: [`PartialMessage`](PartialMessage.md)[]
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:405
-
 ***
 
 ### watchDirs?
 
 > `optional` **watchDirs**: `string`[]
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:415
-
 ***
 
 ### watchFiles?
 
 > `optional` **watchFiles**: `string`[]
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:414

@@ -16,10 +16,6 @@ Add eslint-disable comment at the beginning of the file.
 true
 ```
 
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:18](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L18)
-
 ***
 
 ### addGenerationNoticeHeader?
@@ -33,10 +29,6 @@ Add generation notice at the beginning of the file.
 ```ts
 true
 ```
-
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:12](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L12)
 
 ***
 
@@ -58,10 +50,6 @@ Add custom header at the beginning of the file.
 
 `string`
 
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:23](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L23)
-
 ***
 
 ### transformContent()?
@@ -81,7 +69,3 @@ Edit the content of the file before writing it.
 #### Returns
 
 `string` \| `Promise`\<`string`\>
-
-#### Defined in
-
-[packages/generator-sdk/lib/file.ts:28](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/generator-sdk/lib/file.ts#L28)

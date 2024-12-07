@@ -24,10 +24,6 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[lib/subscription-database.ts:8](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database.ts#L8)
-
 ***
 
 ### deleteSubscription()
@@ -41,10 +37,6 @@
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[lib/subscription-database.ts:10](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database.ts#L10)
 
 ***
 
@@ -60,10 +52,6 @@
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[lib/subscription-database.ts:12](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database.ts#L12)
-
 ***
 
 ### getSubscriptions()
@@ -77,7 +65,3 @@
 #### Returns
 
 `Promise`\<`SubscriptionInfo`[]\>
-
-#### Defined in
-
-[lib/subscription-database.ts:4](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/subscriptions-cloudflare/lib/subscription-database.ts#L4)

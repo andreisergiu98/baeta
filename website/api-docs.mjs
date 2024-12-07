@@ -20,6 +20,7 @@ async function generateDocs() {
 		hideBreadcrumbs: true,
 		excludeExternals: true,
 		excludeScopesInPaths: true,
+		disableSources: true,
 	});
 
 	const project = await app.convert();

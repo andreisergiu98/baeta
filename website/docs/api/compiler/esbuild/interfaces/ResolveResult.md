@@ -8,19 +8,11 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 
 > **errors**: [`Message`](Message.md)[]
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:348
-
 ***
 
 ### external
 
 > **external**: `boolean`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:352
 
 ***
 
@@ -28,19 +20,11 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 
 > **namespace**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:354
-
 ***
 
 ### path
 
 > **path**: `string`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:351
 
 ***
 
@@ -48,19 +32,11 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 
 > **pluginData**: `any`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:356
-
 ***
 
 ### sideEffects
 
 > **sideEffects**: `boolean`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:353
 
 ***
 
@@ -68,16 +44,8 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 
 > **suffix**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:355
-
 ***
 
 ### warnings
 
 > **warnings**: [`Message`](Message.md)[]
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:349

@@ -14,10 +14,6 @@ If true the bundle will also include all dependencies
 false
 ```
 
-#### Defined in
-
-[packages/compiler/lib/esbuild-config.ts:22](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L22)
-
 ***
 
 ### bundleWorkspaces?
@@ -38,10 +34,6 @@ true // in watch mode
 false // in build mode
 ```
 
-#### Defined in
-
-[packages/compiler/lib/esbuild-config.ts:29](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L29)
-
 ***
 
 ### cjsGlobals?
@@ -59,10 +51,6 @@ Adds CommonJS global variables within esm bundle like:
 false
 ```
 
-#### Defined in
-
-[packages/compiler/lib/esbuild-config.ts:38](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L38)
-
 ***
 
 ### dist
@@ -77,10 +65,6 @@ The output directory
 dist: 'dist'
 ```
 
-#### Defined in
-
-[packages/compiler/lib/esbuild-config.ts:16](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L16)
-
 ***
 
 ### esbuild?
@@ -88,10 +72,6 @@ dist: 'dist'
 > `optional` **esbuild**: `Partial`\<`Omit`\<[`BuildOptions`](../../esbuild/interfaces/BuildOptions.md), `"outdir"` \| `"entryPoints"`\>\>
 
 Options to pass to esbuild
-
-#### Defined in
-
-[packages/compiler/lib/esbuild-config.ts:43](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L43)
 
 ***
 
@@ -106,7 +86,3 @@ The source file or files to compile
 ```ts
 src: 'src/index.ts'
 ```
-
-#### Defined in
-
-[packages/compiler/lib/esbuild-config.ts:10](https://github.com/andreisergiu98/baeta/blob/4c16a2c8fa14b6d48e42b6a2c2893542bd64b987/packages/compiler/lib/esbuild-config.ts#L10)

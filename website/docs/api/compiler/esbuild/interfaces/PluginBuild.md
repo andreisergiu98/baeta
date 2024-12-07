@@ -240,10 +240,6 @@ Documentation: https://esbuild.github.io/api/#transform
 
 > **version**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:320
-
 ***
 
 ### initialOptions
@@ -251,10 +247,6 @@ Documentation: https://esbuild.github.io/api/#transform
 > **initialOptions**: [`BuildOptions`](BuildOptions.md)
 
 Documentation: https://esbuild.github.io/plugins/#build-options
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:295
 
 ## Methods
 
@@ -272,10 +264,6 @@ Documentation: https://esbuild.github.io/plugins/#on-dispose
 
 `void`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:317
-
 ***
 
 ### onEnd()
@@ -291,10 +279,6 @@ Documentation: https://esbuild.github.io/plugins/#on-end
 #### Returns
 
 `void`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:305
 
 ***
 
@@ -314,10 +298,6 @@ Documentation: https://esbuild.github.io/plugins/#on-load
 
 `void`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:313
-
 ***
 
 ### onResolve()
@@ -336,10 +316,6 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve
 
 `void`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:309
-
 ***
 
 ### onStart()
@@ -355,10 +331,6 @@ Documentation: https://esbuild.github.io/plugins/#on-start
 #### Returns
 
 `void`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:301
 
 ***
 
@@ -377,7 +349,3 @@ Documentation: https://esbuild.github.io/plugins/#resolve
 #### Returns
 
 `Promise`\<[`ResolveResult`](ResolveResult.md)\>
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:298

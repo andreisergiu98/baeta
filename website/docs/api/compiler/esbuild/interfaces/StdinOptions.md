@@ -6,19 +6,11 @@
 
 > **contents**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:174
-
 ***
 
 ### loader?
 
 > `optional` **loader**: [`Loader`](../type-aliases/Loader.md)
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:177
 
 ***
 
@@ -26,16 +18,8 @@
 
 > `optional` **resolveDir**: `string`
 
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:175
-
 ***
 
 ### sourcefile?
 
 > `optional` **sourcefile**: `string`
-
-#### Defined in
-
-.yarn/unplugged/esbuild-npm-0.24.0-1252872327/node\_modules/esbuild/lib/main.d.ts:176

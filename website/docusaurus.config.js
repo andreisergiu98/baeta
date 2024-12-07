@@ -7,7 +7,8 @@ const darkCodeTheme = themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 	title: 'Baeta',
-	tagline: 'Schema first without the hassle',
+	tagline:
+		'Baeta is a modern, type-safe, schema first GraphQL framework that enables developers to build powerful and scalable GraphQL APIs with ease.',
 	url: 'https://baeta.io',
 	baseUrl: '/',
 	onBrokenLinks: 'throw',

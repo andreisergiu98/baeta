@@ -42,7 +42,7 @@
 
 `StoreAdapter.hash`
 
-***
+---
 
 ### loader
 
@@ -52,7 +52,7 @@
 
 `StoreAdapter.loader`
 
-***
+---
 
 ### options
 
@@ -62,7 +62,7 @@
 
 `StoreAdapter.options`
 
-***
+---
 
 ### type
 
@@ -90,7 +90,7 @@
 
 `StoreAdapter.createKey`
 
-***
+---
 
 ### createKeyByItem()
 
@@ -108,7 +108,7 @@
 
 `StoreAdapter.createKeyByItem`
 
-***
+---
 
 ### createKeyByQuery()
 
@@ -130,7 +130,7 @@
 
 `StoreAdapter.createKeyByQuery`
 
-***
+---
 
 ### createMiddleware()
 
@@ -148,7 +148,7 @@
 
 • **queryRef**: `CacheRef`\<`Result`, `Root`, `Args`\>
 
-• ...**args**: `Root` *extends* `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
+• ...**args**: `Root` _extends_ `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
 
 #### Returns
 
@@ -158,7 +158,7 @@
 
 `StoreAdapter.createMiddleware`
 
-***
+---
 
 ### createQueryKeyGlobMatcher()
 
@@ -180,7 +180,7 @@
 
 `StoreAdapter.createQueryKeyGlobMatcher`
 
-***
+---
 
 ### createQueryKeyHeader()
 
@@ -200,7 +200,7 @@
 
 `StoreAdapter.createQueryKeyHeader`
 
-***
+---
 
 ### createQueryKeyNamespace()
 
@@ -218,7 +218,7 @@
 
 `StoreAdapter.createQueryKeyNamespace`
 
-***
+---
 
 ### createQueryKeyRegExpMatcher()
 
@@ -240,7 +240,7 @@
 
 `StoreAdapter.createQueryKeyRegExpMatcher`
 
-***
+---
 
 ### decodeQueryItemRef()
 
@@ -258,7 +258,7 @@
 
 `StoreAdapter.decodeQueryItemRef`
 
-***
+---
 
 ### delete()
 
@@ -278,7 +278,7 @@
 
 `StoreAdapter.delete`
 
-***
+---
 
 ### deleteMany()
 
@@ -298,7 +298,7 @@
 
 `StoreAdapter.deleteMany`
 
-***
+---
 
 ### deleteQueries()
 
@@ -326,7 +326,7 @@
 
 `StoreAdapter.deleteQueries`
 
-***
+---
 
 ### deleteQueriesByRef()
 
@@ -348,7 +348,7 @@
 
 `StoreAdapter.deleteQueriesByRef`
 
-***
+---
 
 ### encodePrimitive()
 
@@ -368,7 +368,7 @@
 
 `StoreAdapter.encodePrimitive`
 
-***
+---
 
 ### encodeProperty()
 
@@ -386,7 +386,7 @@
 
 `StoreAdapter.encodeProperty`
 
-***
+---
 
 ### encodeQueryArgs()
 
@@ -406,7 +406,7 @@
 
 `StoreAdapter.encodeQueryArgs`
 
-***
+---
 
 ### encodeQueryItemRef()
 
@@ -424,7 +424,7 @@
 
 `StoreAdapter.encodeQueryItemRef`
 
-***
+---
 
 ### get()
 
@@ -442,7 +442,7 @@
 
 `StoreAdapter.get`
 
-***
+---
 
 ### getMany()
 
@@ -460,7 +460,7 @@
 
 `StoreAdapter.getMany`
 
-***
+---
 
 ### getPartialMany()
 
@@ -478,7 +478,7 @@
 
 `StoreAdapter.getPartialMany`
 
-***
+---
 
 ### getQueryResult()
 
@@ -506,7 +506,7 @@
 
 `StoreAdapter.getQueryResult`
 
-***
+---
 
 ### getRef()
 
@@ -524,7 +524,7 @@
 
 `StoreAdapter.getRef`
 
-***
+---
 
 ### getRefFallback()
 
@@ -542,7 +542,7 @@
 
 `StoreAdapter.getRefFallback`
 
-***
+---
 
 ### getRevision()
 
@@ -556,7 +556,7 @@
 
 `StoreAdapter.getRevision`
 
-***
+---
 
 ### getTtl()
 
@@ -566,7 +566,7 @@
 
 `undefined` \| `number`
 
-***
+---
 
 ### loaderFn()
 
@@ -584,7 +584,7 @@
 
 `StoreAdapter.loaderFn`
 
-***
+---
 
 ### loadQueryMetadata()
 
@@ -606,7 +606,7 @@
 
 `StoreAdapter.loadQueryMetadata`
 
-***
+---
 
 ### refillNullQueryItems()
 
@@ -626,7 +626,7 @@
 
 `StoreAdapter.refillNullQueryItems`
 
-***
+---
 
 ### save()
 
@@ -644,7 +644,7 @@
 
 `StoreAdapter.save`
 
-***
+---
 
 ### saveMany()
 
@@ -662,7 +662,7 @@
 
 `StoreAdapter.saveMany`
 
-***
+---
 
 ### saveQueryMetadata()
 
@@ -686,7 +686,7 @@
 
 `StoreAdapter.saveQueryMetadata`
 
-***
+---
 
 ### saveQueryResult()
 
@@ -716,7 +716,7 @@
 
 `StoreAdapter.saveQueryResult`
 
-***
+---
 
 ### searchQueries()
 
@@ -734,7 +734,7 @@
 
 `Promise`\<`string`[]\>
 
-***
+---
 
 ### shouldEncode()
 
@@ -752,7 +752,7 @@
 
 `StoreAdapter.shouldEncode`
 
-***
+---
 
 ### validateRefType()
 

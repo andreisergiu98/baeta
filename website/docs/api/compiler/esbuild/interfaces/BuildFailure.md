@@ -14,13 +14,13 @@
 
 `Error.cause`
 
-***
+---
 
 ### errors
 
 > **errors**: [`Message`](Message.md)[]
 
-***
+---
 
 ### message
 
@@ -30,7 +30,7 @@
 
 `Error.message`
 
-***
+---
 
 ### name
 
@@ -40,7 +40,7 @@
 
 `Error.name`
 
-***
+---
 
 ### stack?
 
@@ -50,7 +50,7 @@
 
 `Error.stack`
 
-***
+---
 
 ### warnings
 

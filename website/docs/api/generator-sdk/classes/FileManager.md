@@ -20,7 +20,7 @@
 
 > `optional` **fileOptions**: [`FileOptions`](../interfaces/FileOptions.md)
 
-***
+---
 
 ### files
 
@@ -40,7 +40,7 @@
 
 `void`
 
-***
+---
 
 ### createAndAdd()
 
@@ -58,7 +58,7 @@
 
 [`File`](File.md)
 
-***
+---
 
 ### get()
 
@@ -72,7 +72,7 @@
 
 `undefined` \| [`File`](File.md)
 
-***
+---
 
 ### getAll()
 
@@ -82,7 +82,7 @@
 
 [`File`](File.md)[]
 
-***
+---
 
 ### getByTag()
 
@@ -96,7 +96,7 @@
 
 [`File`](File.md)[]
 
-***
+---
 
 ### getPersistedFiles()
 
@@ -106,7 +106,7 @@
 
 [`File`](File.md)[]
 
-***
+---
 
 ### remove()
 
@@ -120,7 +120,7 @@
 
 `void`
 
-***
+---
 
 ### removeAll()
 
@@ -130,7 +130,7 @@
 
 `void`
 
-***
+---
 
 ### removeByTag()
 
@@ -144,7 +144,7 @@
 
 `void`
 
-***
+---
 
 ### unlinkAll()
 
@@ -154,7 +154,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### writeAll()
 
@@ -164,7 +164,7 @@
 
 `Promise`\<`void`[]\>
 
-***
+---
 
 ### writeByTag()
 

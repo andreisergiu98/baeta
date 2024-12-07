@@ -8,25 +8,25 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 
 > `optional` **certfile**: `string`
 
-***
+---
 
 ### fallback?
 
 > `optional` **fallback**: `string`
 
-***
+---
 
 ### host?
 
 > `optional` **host**: `string`
 
-***
+---
 
 ### keyfile?
 
 > `optional` **keyfile**: `string`
 
-***
+---
 
 ### onRequest()?
 
@@ -40,13 +40,13 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 
 `void`
 
-***
+---
 
 ### port?
 
 > `optional` **port**: `number`
 
-***
+---
 
 ### servedir?
 

@@ -65,7 +65,7 @@ Documentation: https://esbuild.github.io/api/#build
 
 ##### Type Parameters
 
-• **T** *extends* [`BuildOptions`](BuildOptions.md)
+• **T** _extends_ [`BuildOptions`](BuildOptions.md)
 
 ##### Parameters
 
@@ -88,7 +88,7 @@ Documentation: https://esbuild.github.io/api/#build
 
 ##### Type Parameters
 
-• **T** *extends* [`BuildOptions`](BuildOptions.md)
+• **T** _extends_ [`BuildOptions`](BuildOptions.md)
 
 ##### Parameters
 
@@ -112,7 +112,7 @@ Documentation: https://esbuild.github.io/api/#build
 
 ##### Type Parameters
 
-• **T** *extends* [`BuildOptions`](BuildOptions.md)
+• **T** _extends_ [`BuildOptions`](BuildOptions.md)
 
 ##### Parameters
 
@@ -199,7 +199,7 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ##### Type Parameters
 
-• **T** *extends* [`TransformOptions`](TransformOptions.md)
+• **T** _extends_ [`TransformOptions`](TransformOptions.md)
 
 ##### Parameters
 
@@ -224,7 +224,7 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ##### Type Parameters
 
-• **T** *extends* [`TransformOptions`](TransformOptions.md)
+• **T** _extends_ [`TransformOptions`](TransformOptions.md)
 
 ##### Parameters
 
@@ -240,7 +240,7 @@ Documentation: https://esbuild.github.io/api/#transform
 
 > **version**: `string`
 
-***
+---
 
 ### initialOptions
 
@@ -264,7 +264,7 @@ Documentation: https://esbuild.github.io/plugins/#on-dispose
 
 `void`
 
-***
+---
 
 ### onEnd()
 
@@ -280,7 +280,7 @@ Documentation: https://esbuild.github.io/plugins/#on-end
 
 `void`
 
-***
+---
 
 ### onLoad()
 
@@ -298,7 +298,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load
 
 `void`
 
-***
+---
 
 ### onResolve()
 
@@ -316,7 +316,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve
 
 `void`
 
-***
+---
 
 ### onStart()
 
@@ -332,7 +332,7 @@ Documentation: https://esbuild.github.io/plugins/#on-start
 
 `void`
 
-***
+---
 
 ### resolve()
 

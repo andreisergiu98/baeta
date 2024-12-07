@@ -6,19 +6,19 @@
 
 > `optional` **generateClient**: `boolean`
 
-***
+---
 
 ### generateCommand?
 
 > `optional` **generateCommand**: `string`
 
-***
+---
 
 ### generatedSchemaPath
 
 > **generatedSchemaPath**: `string`
 
-***
+---
 
 ### prismaSchema
 

@@ -24,23 +24,23 @@ export default defineConfig({
   plugins: [
     paginationPlugin({
       // Customize the PageInfo type with additional fields
-      pageInfoFields: ['hasMorePages: Boolean!'],
-      
+      pageInfoFields: ["hasMorePages: Boolean!"],
+
       // Make the node field nullable in all connections
       nullableNode: true,
-      
+
       // Configure pagination for specific types
       types: {
         // Simple configuration - generate default connection types
         User: true,
         UserPhoto: true,
-        
+
         // Advanced configuration with custom fields
         UserCustom: {
-          nodeType: 'User', // Use a different type for nodes
-          cursorType: 'UUID!', // Specify cursor type (default: String!)
-          connectionFields: ['totalCount: Int!'], // Add fields to connection type
-          edgeFields: ['hasPhotos: Boolean!'], // Add fields to edge type
+          nodeType: "User", // Use a different type for nodes
+          cursorType: "UUID!", // Specify cursor type (default: String!)
+          connectionFields: ["totalCount: Int!"], // Add fields to connection type
+          edgeFields: ["hasPhotos: Boolean!"], // Add fields to edge type
         },
       },
     }),
@@ -64,6 +64,7 @@ extend type User {
 ```
 
 The plugin will automatically generate:
+
 - Connection types (e.g., UserPhotoConnection)
 - Edge types (e.g., UserPhotoEdge)
 - PageInfo type with standard and custom fields

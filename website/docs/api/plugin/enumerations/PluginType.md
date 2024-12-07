@@ -6,7 +6,7 @@
 
 > **Cli**: `"cli"`
 
-***
+---
 
 ### Generator
 

@@ -6,13 +6,13 @@
 
 > `optional` **breadth**: `number`
 
-***
+---
 
 ### complexity?
 
 > `optional` **complexity**: `number`
 
-***
+---
 
 ### depth?
 

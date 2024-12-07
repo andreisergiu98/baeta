@@ -96,7 +96,7 @@ Baeta allows you to define resolvers for any field in your types, not just Query
 const { User } = getUserModule();
 
 User.email(({ root }) => {
-    return root.email.toLowerCase();
+  return root.email.toLowerCase();
 });
 ```
 

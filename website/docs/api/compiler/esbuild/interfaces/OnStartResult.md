@@ -6,7 +6,7 @@
 
 > `optional` **errors**: [`PartialMessage`](PartialMessage.md)[]
 
-***
+---
 
 ### warnings?
 

@@ -14,7 +14,7 @@
 
 > `optional` **enable**: `boolean`
 
-***
+---
 
 ### ws?
 

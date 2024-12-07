@@ -29,16 +29,16 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 1. Define Authorization Scopes
 
 ```typescript
-import { UnauthenticatedError } from '@baeta/errors';
-import { authExtension } from '@baeta/extension-auth';
-import type { Context } from '../types/context';
+import { UnauthenticatedError } from "@baeta/errors";
+import { authExtension } from "@baeta/extension-auth";
+import type { Context } from "../types/context";
 
 declare global {
   export namespace AuthExtension {
     export interface Scopes {
       isPublic: boolean;
       isLoggedIn: boolean;
-      hasAccess: 'guest' | 'user' | 'moderator' | 'admin';
+      hasAccess: "guest" | "user" | "moderator" | "admin";
     }
 
     export interface GrantsMap {
@@ -47,37 +47,37 @@ declare global {
   }
 }
 
-export const authExt = authExtension<Context>(
-  async (ctx) => {
-    const accessList: string[] = ['guest', 'user'];
+export const authExt = authExtension<Context>(async (ctx) => {
+  const accessList: string[] = ["guest", "user"];
 
-    // You can fetch data before the scopes are created
+  // You can fetch data before the scopes are created
 
-    return {
-      isPublic: true,
-      isLoggedIn: async () => { // But you can also use scope loaders, which will be resolved lazily, when needed
-        if (!ctx.userId) {
-          throw new UnauthenticatedError();
-        }
-        return true;
-      },
-      hasAccess: (access: string) => { // Scope loaders are also required for non-boolean scopes
-        return ctx.user?.accessList.includes(access) ?? false;
-      },
-    };
-  },
-);
+  return {
+    isPublic: true,
+    isLoggedIn: async () => {
+      // But you can also use scope loaders, which will be resolved lazily, when needed
+      if (!ctx.userId) {
+        throw new UnauthenticatedError();
+      }
+      return true;
+    },
+    hasAccess: (access: string) => {
+      // Scope loaders are also required for non-boolean scopes
+      return ctx.user?.accessList.includes(access) ?? false;
+    },
+  };
+});
 ```
 
 2. Register the Extension
 
 ```typescript
-import { createExtensions } from '@baeta/core';
-import { authExt } from './auth-extension';
+import { createExtensions } from "@baeta/core";
+import { authExt } from "./auth-extension";
 
 export default createExtensions(
-  //... other extensions  
-  authExt
+  //... other extensions
+  authExt,
   //... other extensions
 );
 ```
@@ -87,7 +87,7 @@ export default createExtensions(
 ```typescript
 export default defineConfig({
   graphql: {
-    extensions: 'src/extensions/index.ts',
+    extensions: "src/extensions/index.ts",
     // ... other config
   },
 });
@@ -108,7 +108,7 @@ Query.user.$auth({
 
 // Admin-only access
 Mutation.createUser.$auth({
-  hasAccess: 'admin',
+  hasAccess: "admin",
 });
 ```
 
@@ -121,22 +121,23 @@ Query.user.$postAuth((params, result) => {
   if (result && result.id === params.ctx.userId) {
     return true; // Allow access if user is requesting their own data
   }
-  return { hasAccess: 'admin' }; // Require admin access for other users' data
+  return { hasAccess: "admin" }; // Require admin access for other users' data
 });
 
 // Compared to pre-resolution auth which might require an extra database query
 Query.user.$auth(async (params) => {
-  const user = await db.user.findFirst({ // Extra database query
+  const user = await db.user.findFirst({
+    // Extra database query
     where: { id: params.args.id },
   });
 
   if (user && user.id === params.ctx.userId) return {};
-  return { hasAccess: 'admin' };
+  return { hasAccess: "admin" };
 });
 ```
 
 ### Subscription Rules
-    
+
 ```typescript
 // Apply to subscription phase
 Subscription.userCreated.subscribe.$auth({
@@ -155,6 +156,7 @@ Subscription.userCreated.$auth({
 ```
 
 ### Type-wide Rules
+
 ```typescript
 // Apply to all Query fields
 Query.$auth({
@@ -176,13 +178,13 @@ Query.user.$auth(
     $or: { isPublic: true, isLoggedIn: true },
   },
   {
-    grants: ['readUserPhotos'],
-  }
+    grants: ["readUserPhotos"],
+  },
 );
 
 // Use granted permission
 User.photos.$auth({
-  $granted: 'readUserPhotos',
+  $granted: "readUserPhotos",
 });
 ```
 
@@ -237,7 +239,7 @@ Query.publicContent.$auth(
   },
   {
     skipDefaults: true,
-  }
+  },
 );
 ```
 

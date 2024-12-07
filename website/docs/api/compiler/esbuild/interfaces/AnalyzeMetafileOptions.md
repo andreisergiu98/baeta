@@ -6,7 +6,7 @@
 
 > `optional` **color**: `boolean`
 
-***
+---
 
 ### verbose?
 

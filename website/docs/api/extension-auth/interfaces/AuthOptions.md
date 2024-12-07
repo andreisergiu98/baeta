@@ -6,7 +6,7 @@
 
 > `optional` **defaultScopes**: `DefaultScopes`
 
-***
+---
 
 ### errorResolver?
 

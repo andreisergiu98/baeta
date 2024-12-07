@@ -2,7 +2,7 @@
 
 > **resolve**(...`pathSegments`): `string`
 
-The right-most parameter is considered {to}.  Other parameters are considered an array of {from}.
+The right-most parameter is considered {to}. Other parameters are considered an array of {from}.
 
 Starting from leftmost {from} parameter, resolves {to} to an absolute path.
 
@@ -12,7 +12,7 @@ If {to} isn't already absolute, {from} arguments are prepended in right to left 
 
 • ...**pathSegments**: `any`[]
 
-string paths to join.  Non-string arguments are ignored.
+string paths to join. Non-string arguments are ignored.
 
 ## Returns
 

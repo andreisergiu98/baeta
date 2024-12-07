@@ -46,7 +46,7 @@ Unions allow you to combine multiple types into a single field, without requirin
 ### Defining a Union
 
 `src/modules/media/media.gql`
-    
+
 ```graphql
 type Movie {
   id: ID!
@@ -81,7 +81,7 @@ extend union Media = Comic
 Type resolution must be defined in the module where the union or interface is originally defined, regardless of where types implement or extend them:
 
 ```typescript
-import { getMediaModule } from './typedef';
+import { getMediaModule } from "./typedef";
 
 const { Media, Query } = getMediaModule();
 
@@ -92,19 +92,19 @@ Media.$resolveType(({ value }) => {
   }
 
   // Check for distinctive fields
-  if ('author' in value) {
-    return 'Book';
+  if ("author" in value) {
+    return "Book";
   }
 
-  if ('artist' in value) {
-    return 'Comic';
+  if ("artist" in value) {
+    return "Comic";
   }
 
-  if ('seasons' in value) {
-    return 'TVShow';
+  if ("seasons" in value) {
+    return "TVShow";
   }
 
-  return 'Movie';
+  return "Movie";
 });
 ```
 
@@ -116,26 +116,26 @@ Here's an example of resolving a union field:
 Query.media(() => {
   return [
     {
-      id: '1',
-      title: 'The Book',
-      author: 'Jon Doe',
+      id: "1",
+      title: "The Book",
+      author: "Jon Doe",
       year: 2021,
     },
     {
-      id: '2',
-      title: 'The Movie',
+      id: "2",
+      title: "The Movie",
       year: 2022,
     },
     {
-      id: '3',
-      title: 'The TV Show',
+      id: "3",
+      title: "The TV Show",
       year: 2023,
       seasons: 1,
     },
     {
-      __typename: 'Movie',
-      id: '4',
-      title: 'Another Movie',
+      __typename: "Movie",
+      id: "4",
+      title: "Another Movie",
       year: 2023,
     },
   ];

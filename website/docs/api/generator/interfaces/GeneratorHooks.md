@@ -10,7 +10,7 @@
 
 `void` \| `Promise`\<`void`\>
 
-***
+---
 
 ### onError()?
 
@@ -24,7 +24,7 @@
 
 `void` \| `Promise`\<`void`\>
 
-***
+---
 
 ### onPluginStepEnd()?
 
@@ -40,7 +40,7 @@
 
 `void` \| `Promise`\<`void`\>
 
-***
+---
 
 ### onPluginStepStart()?
 
@@ -56,7 +56,7 @@
 
 `void` \| `Promise`\<`void`\>
 
-***
+---
 
 ### onStart()?
 

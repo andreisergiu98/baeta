@@ -20,7 +20,7 @@
 
 `Promise`\<`null` \| `any`[]\>
 
-***
+---
 
 ### loadSync()?
 

@@ -14,7 +14,7 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ## Type Parameters
 
-• **T** *extends* [`TransformOptions`](../interfaces/TransformOptions.md)
+• **T** _extends_ [`TransformOptions`](../interfaces/TransformOptions.md)
 
 ## Parameters
 

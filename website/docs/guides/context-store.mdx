@@ -22,8 +22,9 @@ type Context = {
 
 // Forces unnecessary null checks even in authenticated resolvers
 Query.profile(({ ctx }) => {
-  if (!ctx.user) { // Required even though we know it's authenticated
-    throw new Error('Unauthenticated'); 
+  if (!ctx.user) {
+    // Required even though we know it's authenticated
+    throw new Error("Unauthenticated");
   }
   return ctx.user;
 });
@@ -40,6 +41,7 @@ const user = await getUser(ctx); // User - for authenticated routes, automatical
 ### 2. Lazy Loading & Performance
 
 Context Store prevents unnecessary database queries by:
+
 - Loading data only when it's actually needed
 - Caching the result for the entire request lifecycle
 
@@ -48,7 +50,7 @@ For example:
 ```typescript
 // Without Context Store
 const context = {
-  user: await db.user.findUnique({ where: { id: userId }}), // Always queries DB even if user data isn't needed
+  user: await db.user.findUnique({ where: { id: userId } }), // Always queries DB even if user data isn't needed
 };
 
 // With Context Store
@@ -75,32 +77,30 @@ const userAgain = await getUser(ctx); // Uses cached data
 Use `createContextStore` to define a store with its loading logic:
 
 ```typescript
-import { createContextStore } from '@baeta/core';
-import { UnauthenticatedError } from '@baeta/errors';
-import type { User } from './modules/user/typedef';
-import type { Context } from './types/context';
+import { createContextStore } from "@baeta/core";
+import { UnauthenticatedError } from "@baeta/errors";
+import type { User } from "./modules/user/typedef";
+import type { Context } from "./types/context";
 
 // Define the loader function
 async function loadOptionalUser(ctx: Context) {
   if (!ctx.userId) {
     return null;
   }
-  
+
   const user = await db.user.findUnique({
-    where: { id: ctx.userId }
+    where: { id: ctx.userId },
   });
-  
+
   return user;
 }
 
 // Create the store
-const optionalUserStoreKey = Symbol('optionalUserStore');
-export const [getOptionalUser, setOptionalUserLoader] = createContextStore<User | null>(
-  optionalUserStoreKey,
-  {
+const optionalUserStoreKey = Symbol("optionalUserStore");
+export const [getOptionalUser, setOptionalUserLoader] =
+  createContextStore<User | null>(optionalUserStoreKey, {
     lazy: true, // Load the user only when requested
-  }
-);
+  });
 ```
 
 ## Chaining Stores
@@ -119,7 +119,7 @@ async function loadUser(ctx: Context) {
   return user;
 }
 
-const userStoreKey = Symbol('userStore');
+const userStoreKey = Symbol("userStore");
 export const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, {
   lazy: true,
 });
@@ -134,7 +134,7 @@ export const yoga = createYoga<ServerContext, Context>({
   schema: baeta.schema,
   context: () => {
     const ctx: Context = {
-      userId: '1',
+      userId: "1",
     };
 
     // Set up the loaders
@@ -156,10 +156,10 @@ const { Query } = getUserModule();
 Query.me(async ({ ctx }) => {
   // Optional user store - won't throw if user isn't authenticated
   const optionalUser = await getOptionalUser(ctx); // User | null
-  
+
   // Required user store - will throw UnauthenticatedError if user isn't authenticated
   const requiredUser = await getUser(ctx); // User
-  
+
   return requiredUser;
 });
 ```
@@ -176,7 +176,7 @@ Query.example(async ({ ctx }) => {
     getOptionalUser(ctx),
     getOptionalUser(ctx),
   ]);
-  
+
   // Uses cached value
   const user = await getOptionalUser(ctx);
 });

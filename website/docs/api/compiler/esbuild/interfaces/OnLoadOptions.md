@@ -8,7 +8,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-options
 
 > **filter**: `RegExp`
 
-***
+---
 
 ### namespace?
 

@@ -13,7 +13,7 @@ is a typed array or ArrayBuffer containing the binary code of the
 You can use this as an alternative to "wasmURL" for environments where it's
 not possible to download the WebAssembly module.
 
-***
+---
 
 ### wasmURL?
 
@@ -22,7 +22,7 @@ not possible to download the WebAssembly module.
 The URL of the "esbuild.wasm" file. This must be provided when running
 esbuild in the browser.
 
-***
+---
 
 ### worker?
 

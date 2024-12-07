@@ -10,7 +10,7 @@
 
 • **ContextParams**
 
-• **PubSubMap** *extends* `DefaultPubSubMap` = `DefaultPubSubMap`
+• **PubSubMap** _extends_ `DefaultPubSubMap` = `DefaultPubSubMap`
 
 ## Parameters
 
@@ -44,11 +44,11 @@
 
 ### createWsConnectionsClass()
 
-> **createWsConnectionsClass**: () => *typeof* `BaetaWsConnections`
+> **createWsConnectionsClass**: () => _typeof_ `BaetaWsConnections`
 
 #### Returns
 
-*typeof* `BaetaWsConnections`
+_typeof_ `BaetaWsConnections`
 
 ### handleWS()
 

@@ -10,19 +10,19 @@
 
 > `optional` **complexityError**: [`GetComplexityError`](../type-aliases/GetComplexityError.md)
 
-***
+---
 
 ### defaultComplexity?
 
 > `optional` **defaultComplexity**: `number`
 
-***
+---
 
 ### defaultListMultiplier?
 
 > `optional` **defaultListMultiplier**: `number`
 
-***
+---
 
 ### limit?
 

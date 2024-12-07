@@ -1,3 +1,3 @@
 # Variable: posix
 
-> `const` **posix**: *typeof* `posix` = `upath.posix`
+> `const` **posix**: _typeof_ `posix` = `upath.posix`

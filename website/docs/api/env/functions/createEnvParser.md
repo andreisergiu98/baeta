@@ -1,6 +1,6 @@
 # Function: createEnvParser()
 
-> **createEnvParser**(`getValue`): \<`T`, `R`, `D`\>(`key`, `options`) => `R` *extends* `true` ? `InferType`\<`T`\> : `D` *extends* `undefined` ? `undefined` \| `InferType`\<`T`\> : `InferType`\<`T`\>
+> **createEnvParser**(`getValue`): \<`T`, `R`, `D`\>(`key`, `options`) => `R` _extends_ `true` ? `InferType`\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| `InferType`\<`T`\> : `InferType`\<`T`\>
 
 ## Parameters
 
@@ -12,11 +12,11 @@
 
 ### Type Parameters
 
-• **T** *extends* `Types`
+• **T** _extends_ `Types`
 
-• **R** *extends* `undefined` \| `boolean`
+• **R** _extends_ `undefined` \| `boolean`
 
-• **D** *extends* `undefined` \| `string` \| `number` \| `boolean`
+• **D** _extends_ `undefined` \| `string` \| `number` \| `boolean`
 
 ### Parameters
 
@@ -26,4 +26,4 @@
 
 ### Returns
 
-`R` *extends* `true` ? `InferType`\<`T`\> : `D` *extends* `undefined` ? `undefined` \| `InferType`\<`T`\> : `InferType`\<`T`\>
+`R` _extends_ `true` ? `InferType`\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| `InferType`\<`T`\> : `InferType`\<`T`\>

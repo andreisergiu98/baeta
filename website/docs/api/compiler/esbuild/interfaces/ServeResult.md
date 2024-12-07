@@ -8,7 +8,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 
 > **host**: `string`
 
-***
+---
 
 ### port
 

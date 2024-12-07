@@ -6,13 +6,13 @@
 
 > `optional` **modules**: `boolean` \| `ModuleOptions`
 
-***
+---
 
 ### output?
 
 > `optional` **output**: `string`
 
-***
+---
 
 ### resolvers?
 

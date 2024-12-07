@@ -4,9 +4,9 @@
 
 ## Type Parameters
 
-• **Engine** *extends* `PubSubEngineV2` \| `PubSubEngineV3`
+• **Engine** _extends_ `PubSubEngineV2` \| `PubSubEngineV3`
 
-• **Map** *extends* `PubSubMap`
+• **Map** _extends_ `PubSubMap`
 
 ## Parameters
 

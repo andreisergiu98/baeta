@@ -4,7 +4,7 @@
 
 ## Type Parameters
 
-• **E** *extends* [`Extension`](../classes/Extension.md)
+• **E** _extends_ [`Extension`](../classes/Extension.md)
 
 ## Returns
 

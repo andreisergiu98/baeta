@@ -54,7 +54,7 @@
 
 `Extension.build`
 
-***
+---
 
 ### getModuleExtensions()
 
@@ -68,7 +68,7 @@
 
 `Extension.getModuleExtensions`
 
-***
+---
 
 ### getResolverExtensions()
 
@@ -100,7 +100,7 @@
 
 `Extension.getResolverExtensions`
 
-***
+---
 
 ### getSubscriptionExtensions()
 
@@ -128,7 +128,7 @@
 
 `Extension.getSubscriptionExtensions`
 
-***
+---
 
 ### getSubscriptionResolveExtensions()
 
@@ -158,7 +158,7 @@
 
 `Extension.getSubscriptionResolveExtensions`
 
-***
+---
 
 ### getSubscriptionSubscribeExtensions()
 
@@ -188,7 +188,7 @@
 
 `Extension.getSubscriptionSubscribeExtensions`
 
-***
+---
 
 ### getTransformers()
 
@@ -202,7 +202,7 @@
 
 `Extension.getTransformers`
 
-***
+---
 
 ### getTypeExtensions()
 

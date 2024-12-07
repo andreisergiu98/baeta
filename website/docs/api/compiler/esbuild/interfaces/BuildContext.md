@@ -2,7 +2,7 @@
 
 ## Type Parameters
 
-• **ProvidedOptions** *extends* [`BuildOptions`](BuildOptions.md) = [`BuildOptions`](BuildOptions.md)
+• **ProvidedOptions** _extends_ [`BuildOptions`](BuildOptions.md) = [`BuildOptions`](BuildOptions.md)
 
 ## Methods
 
@@ -14,7 +14,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### dispose()
 
@@ -24,7 +24,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### rebuild()
 
@@ -36,7 +36,7 @@ Documentation: https://esbuild.github.io/api/#rebuild
 
 `Promise`\<[`BuildResult`](BuildResult.md)\<`ProvidedOptions`\>\>
 
-***
+---
 
 ### serve()
 
@@ -52,7 +52,7 @@ Documentation: https://esbuild.github.io/api/#serve
 
 `Promise`\<[`ServeResult`](ServeResult.md)\>
 
-***
+---
 
 ### watch()
 

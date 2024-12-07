@@ -38,7 +38,7 @@
 
 `string`
 
-***
+---
 
 ### getRevision()
 
@@ -48,7 +48,7 @@
 
 `number`
 
-***
+---
 
 ### setRevision()
 
@@ -62,7 +62,7 @@
 
 `void`
 
-***
+---
 
 ### toString()
 

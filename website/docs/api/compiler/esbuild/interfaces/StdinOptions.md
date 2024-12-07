@@ -6,19 +6,19 @@
 
 > **contents**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
 
-***
+---
 
 ### loader?
 
 > `optional` **loader**: [`Loader`](../type-aliases/Loader.md)
 
-***
+---
 
 ### resolveDir?
 
 > `optional` **resolveDir**: `string`
 
-***
+---
 
 ### sourcefile?
 

@@ -12,7 +12,7 @@ Documentation: https://esbuild.github.io/api/#build
 
 ## Type Parameters
 
-• **T** *extends* [`BuildOptions`](../interfaces/BuildOptions.md)
+• **T** _extends_ [`BuildOptions`](../interfaces/BuildOptions.md)
 
 ## Parameters
 

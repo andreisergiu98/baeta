@@ -6,19 +6,19 @@
 
 > **contents**: `Uint8Array`\<`ArrayBufferLike`\>
 
-***
+---
 
 ### hash
 
 > **hash**: `string`
 
-***
+---
 
 ### path
 
 > **path**: `string`
 
-***
+---
 
 ### text
 

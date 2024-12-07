@@ -30,19 +30,19 @@
 
 > **content**: `string`
 
-***
+---
 
 ### filename
 
 > **filename**: `string`
 
-***
+---
 
 ### persisted
 
 > **persisted**: `boolean` = `false`
 
-***
+---
 
 ### tag
 
@@ -58,7 +58,7 @@
 
 `Promise`\<`string`\>
 
-***
+---
 
 ### buildHeader()
 
@@ -68,7 +68,7 @@
 
 `string`
 
-***
+---
 
 ### createComment()
 
@@ -82,7 +82,7 @@
 
 `string`
 
-***
+---
 
 ### unlink()
 
@@ -92,7 +92,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### write()
 

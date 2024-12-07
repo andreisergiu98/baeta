@@ -28,31 +28,31 @@
 
 > `readonly` **dirname**: `string`
 
-***
+---
 
 ### hashes
 
 > `readonly` **hashes**: [`TypeHashMap`](../type-aliases/TypeHashMap.md)
 
-***
+---
 
 ### id
 
 > `readonly` **id**: `string`
 
-***
+---
 
 ### mapper
 
 > `readonly` **mapper**: [`ResolverMapper`](ResolverMapper.md)
 
-***
+---
 
 ### transformers
 
 > `readonly` **transformers**: [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[] = `[]`
 
-***
+---
 
 ### typedef
 
@@ -88,7 +88,7 @@
 
 > **typedef**: `DocumentNode`
 
-***
+---
 
 ### createMiddlewareBuilder()
 
@@ -122,7 +122,7 @@
 
 `void`
 
-***
+---
 
 ### createModuleMethods()
 
@@ -136,7 +136,7 @@
 
 `ModuleExtensions` & `object`
 
-***
+---
 
 ### createResolverBuilder()
 
@@ -162,7 +162,7 @@
 
 (`resolver`) => `void` & `ResolverExtensions`\<`Result`, `Root`, `Context`, `Args`\> & `object`
 
-***
+---
 
 ### createResolveType()
 
@@ -192,7 +192,7 @@
 
 `void`
 
-***
+---
 
 ### createScalarBuilder()
 
@@ -214,7 +214,7 @@
 
 `void`
 
-***
+---
 
 ### createSubscriptionBuilder()
 
@@ -238,7 +238,7 @@
 
 \<`Payload`\>(`subscription`) => `void` & `object`
 
-***
+---
 
 ### createSubscriptionMethods()
 
@@ -254,7 +254,7 @@
 
 `TypeExtensions`\<`Root`, `Context`\> & `object` & `object`
 
-***
+---
 
 ### createTypeMethods()
 

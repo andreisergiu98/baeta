@@ -16,13 +16,13 @@ While you can use any PubSub implementation directly, Baeta offers a typed wrapp
 
 ```typescript
 // src/lib/pubsub.ts
-import { createTypedPubSub } from '@baeta/subscriptions-pubsub';
-import { PubSub } from 'graphql-subscriptions';
-import type { User } from '../__generated__/types';
+import { createTypedPubSub } from "@baeta/subscriptions-pubsub";
+import { PubSub } from "graphql-subscriptions";
+import type { User } from "../__generated__/types";
 
 export type PubSubMap = {
-  'user-created': string;
-  'user-updated': User;
+  "user-created": string;
+  "user-updated": User;
   [c: `user-updated-${string}`]: User; // Dynamic channel
 };
 
@@ -37,8 +37,8 @@ Add PubSub to your context:
 
 ```typescript
 // src/types/context.ts
-import type { TypedPubSub } from '@baeta/subscriptions-pubsub';
-import type { PubSubMap } from '../lib/pubsub';
+import type { TypedPubSub } from "@baeta/subscriptions-pubsub";
+import type { PubSubMap } from "../lib/pubsub";
 
 export type Context = {
   pubsub: TypedPubSub<PubSubMap>;
@@ -61,25 +61,26 @@ Implementing Subscriptions
 
 :::note
 The subscription API differs between versions:
+
 - Use `asyncIterator` for graphql-subscriptions v2.x
 - Use `asyncIterableIterator` for graphql-subscriptions v3.x
-:::
+  :::
 
 ```typescript
 // src/modules/user/resolvers.ts
-import { db } from '../../lib/db/prisma';
-import { getUserModule } from './typedef';
+import { db } from "../../lib/db/prisma";
+import { getUserModule } from "./typedef";
 
 const { Subscription } = getUserModule();
 
 // Subscription with database lookup
 Subscription.userCreated({
   subscribe(params) {
-    return params.ctx.pubsub.asyncIterableIterator('user-created');
+    return params.ctx.pubsub.asyncIterableIterator("user-created");
   },
   resolve(params) {
-    return db.user.findFirstOrThrow({ 
-      where: { id: params.payload } 
+    return db.user.findFirstOrThrow({
+      where: { id: params.payload },
     });
   },
 });
@@ -87,7 +88,7 @@ Subscription.userCreated({
 // Direct subscription
 Subscription.userUpdated({
   subscribe({ ctx }) {
-    return ctx.pubsub.asyncIterableIterator('user-updated');
+    return ctx.pubsub.asyncIterableIterator("user-updated");
   },
   resolve({ payload }) {
     return payload;
@@ -104,7 +105,7 @@ Publish events from your mutations or other resolvers:
 Mutation.updateUser.$use(async ({ ctx }, next) => {
   const user = await next();
   if (user) {
-    ctx.pubsub.publish('user-updated', user);
+    ctx.pubsub.publish("user-updated", user);
   }
   return user;
 });
@@ -112,9 +113,9 @@ Mutation.updateUser.$use(async ({ ctx }, next) => {
 // Publishing after user creation
 Mutation.createUser(async ({ args, ctx }) => {
   const user = await ctx.db.user.create({
-    data: args.data
+    data: args.data,
   });
-  ctx.pubsub.publish('user-created', user.id);
+  ctx.pubsub.publish("user-created", user.id);
   return user;
 });
 ```
@@ -125,10 +126,10 @@ For production environments, consider using a multi-instance solution:
 
 ```typescript
 // src/lib/pubsub.ts
-import { createTypedPubSub } from '@baeta/subscriptions-pubsub';
-import { RedisPubSub } from 'graphql-redis-subscriptions';
-import * as Redis from 'ioredis';
-import type { PubSubMap } from './types';
+import { createTypedPubSub } from "@baeta/subscriptions-pubsub";
+import { RedisPubSub } from "graphql-redis-subscriptions";
+import * as Redis from "ioredis";
+import type { PubSubMap } from "./types";
 
 const options = {
   host: REDIS_DOMAIN_NAME,
@@ -137,7 +138,7 @@ const options = {
 
 const redisPubSub = new RedisPubSub({
   publisher: new Redis(options),
-  subscriber: new Redis(options)
+  subscriber: new Redis(options),
 });
 
 export const pubsub = createTypedPubSub<RedisPubSub, PubSubMap>(redisPubSub);
@@ -149,8 +150,8 @@ The TypedPubSub wrapper ensures type safety for both publishing and subscribing:
 
 ```typescript
 // TypeScript will error if channel or payload type doesn't match
-ctx.pubsub.publish('user-updated', 123); // Error: payload should be User
-ctx.pubsub.publish('invalid-channel', user); // Error: channel doesn't exist
+ctx.pubsub.publish("user-updated", 123); // Error: payload should be User
+ctx.pubsub.publish("invalid-channel", user); // Error: channel doesn't exist
 ```
 
 ## Alternative Solutions
@@ -160,11 +161,11 @@ While this documentation uses `graphql-subscriptions`, you can also use other Pu
 ### graphql-yoga
 
 ```typescript
-import { createPubSub } from 'graphql-yoga';
+import { createPubSub } from "graphql-yoga";
 
 export type PubSubMap = {
-  'user-created': [string];
-  'user-updated': [User];
+  "user-created": [string];
+  "user-updated": [User];
 };
 
 export const pubsub = createPubSub<PubSubMap>();

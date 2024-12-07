@@ -6,25 +6,25 @@
 
 > **method**: `string`
 
-***
+---
 
 ### path
 
 > **path**: `string`
 
-***
+---
 
 ### remoteAddress
 
 > **remoteAddress**: `string`
 
-***
+---
 
 ### status
 
 > **status**: `number`
 
-***
+---
 
 ### timeInMS
 

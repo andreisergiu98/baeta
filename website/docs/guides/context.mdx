@@ -12,9 +12,9 @@ First, define your context type:
 
 ```typescript
 // src/context.ts
-import type { PubSub } from 'graphql-yoga';
-import type { PubSubMap } from '../lib/pubsub';
-import type { PrismaClient } from '../lib/db/prisma';
+import type { PubSub } from "graphql-yoga";
+import type { PubSubMap } from "../lib/pubsub";
+import type { PrismaClient } from "../lib/db/prisma";
 
 export type Context = {
   db: PrismaClient;
@@ -27,13 +27,13 @@ export type Context = {
 Add the context type path to your `baeta.ts` configuration:
 
 ```typescript
-import { defineConfig } from '@baeta/cli';
-import { autoloadPlugin } from '@baeta/plugin-autoload';
+import { defineConfig } from "@baeta/cli";
+import { autoloadPlugin } from "@baeta/plugin-autoload";
 
 export default defineConfig({
   graphql: {
-    schemas: ['src/**/*.gql'],
-    contextType: 'src/context#Context',  // Path to context type
+    schemas: ["src/**/*.gql"],
+    contextType: "src/context#Context", // Path to context type
   },
   // ... rest of config
 });
@@ -49,7 +49,7 @@ const { Query } = getUserModule();
 Query.user(({ args, ctx }) => {
   // ctx is typed as Context
   return ctx.db.user.findUnique({
-    where: args.where
+    where: args.where,
   });
 });
 ```
@@ -57,12 +57,12 @@ Query.user(({ args, ctx }) => {
 ## Usage in Middlewares
 
 Middlewares also get the typed context:
-    
+
 ```typescript
 Mutation.updateUser.$use(async ({ ctx }, next) => {
   // ctx is typed as Context
   const result = await next();
-  ctx.pubsub.publish('user-updated', result);
+  ctx.pubsub.publish("user-updated", result);
   return result;
 });
 ```

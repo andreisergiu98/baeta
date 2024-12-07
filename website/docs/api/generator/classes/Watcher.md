@@ -26,7 +26,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### createSubscription()
 
@@ -44,7 +44,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### ignore()
 
@@ -58,7 +58,7 @@
 
 `void`
 
-***
+---
 
 ### off()
 
@@ -74,7 +74,7 @@
 
 `void`
 
-***
+---
 
 ### on()
 
@@ -90,7 +90,7 @@
 
 `void`
 
-***
+---
 
 ### onEvents()
 
@@ -106,7 +106,7 @@
 
 `void`
 
-***
+---
 
 ### unignore()
 

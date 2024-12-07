@@ -8,37 +8,37 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 
 > `optional` **importer**: `string`
 
-***
+---
 
 ### kind?
 
 > `optional` **kind**: [`ImportKind`](../type-aliases/ImportKind.md)
 
-***
+---
 
 ### namespace?
 
 > `optional` **namespace**: `string`
 
-***
+---
 
 ### pluginData?
 
 > `optional` **pluginData**: `any`
 
-***
+---
 
 ### pluginName?
 
 > `optional` **pluginName**: `string`
 
-***
+---
 
 ### resolveDir?
 
 > `optional` **resolveDir**: `string`
 
-***
+---
 
 ### with?
 

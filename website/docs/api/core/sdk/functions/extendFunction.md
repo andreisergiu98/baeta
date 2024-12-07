@@ -4,9 +4,9 @@
 
 ## Type Parameters
 
-• **B** *extends* `GenericFn`
+• **B** _extends_ `GenericFn`
 
-• **M** *extends* `object`
+• **M** _extends_ `object`
 
 ## Parameters
 

@@ -13,7 +13,7 @@
 
 Documentation: https://esbuild.github.io/api/#charset
 
-***
+---
 
 ### color?
 
@@ -21,7 +21,7 @@ Documentation: https://esbuild.github.io/api/#charset
 
 Documentation: https://esbuild.github.io/api/#color
 
-***
+---
 
 ### define?
 
@@ -31,9 +31,9 @@ Documentation: https://esbuild.github.io/api/#define
 
 #### Index Signature
 
- \[`key`: `string`\]: `string`
+\[`key`: `string`\]: `string`
 
-***
+---
 
 ### drop?
 
@@ -41,7 +41,7 @@ Documentation: https://esbuild.github.io/api/#define
 
 Documentation: https://esbuild.github.io/api/#drop
 
-***
+---
 
 ### dropLabels?
 
@@ -49,7 +49,7 @@ Documentation: https://esbuild.github.io/api/#drop
 
 Documentation: https://esbuild.github.io/api/#drop-labels
 
-***
+---
 
 ### format?
 
@@ -57,7 +57,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 
 Documentation: https://esbuild.github.io/api/#format
 
-***
+---
 
 ### globalName?
 
@@ -65,7 +65,7 @@ Documentation: https://esbuild.github.io/api/#format
 
 Documentation: https://esbuild.github.io/api/#global-name
 
-***
+---
 
 ### ignoreAnnotations?
 
@@ -73,7 +73,7 @@ Documentation: https://esbuild.github.io/api/#global-name
 
 Documentation: https://esbuild.github.io/api/#ignore-annotations
 
-***
+---
 
 ### jsx?
 
@@ -81,7 +81,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 
 Documentation: https://esbuild.github.io/api/#jsx
 
-***
+---
 
 ### jsxDev?
 
@@ -89,7 +89,7 @@ Documentation: https://esbuild.github.io/api/#jsx
 
 Documentation: https://esbuild.github.io/api/#jsx-development
 
-***
+---
 
 ### jsxFactory?
 
@@ -97,7 +97,7 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 
 Documentation: https://esbuild.github.io/api/#jsx-factory
 
-***
+---
 
 ### jsxFragment?
 
@@ -105,7 +105,7 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 
 Documentation: https://esbuild.github.io/api/#jsx-fragment
 
-***
+---
 
 ### jsxImportSource?
 
@@ -113,7 +113,7 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 
 Documentation: https://esbuild.github.io/api/#jsx-import-source
 
-***
+---
 
 ### jsxSideEffects?
 
@@ -121,7 +121,7 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 
 Documentation: https://esbuild.github.io/api/#jsx-side-effects
 
-***
+---
 
 ### keepNames?
 
@@ -129,7 +129,7 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 
 Documentation: https://esbuild.github.io/api/#keep-names
 
-***
+---
 
 ### legalComments?
 
@@ -137,7 +137,7 @@ Documentation: https://esbuild.github.io/api/#keep-names
 
 Documentation: https://esbuild.github.io/api/#legal-comments
 
-***
+---
 
 ### lineLimit?
 
@@ -145,7 +145,7 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 
 Documentation: https://esbuild.github.io/api/#line-limit
 
-***
+---
 
 ### logLevel?
 
@@ -153,7 +153,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 
 Documentation: https://esbuild.github.io/api/#log-level
 
-***
+---
 
 ### logLimit?
 
@@ -161,7 +161,7 @@ Documentation: https://esbuild.github.io/api/#log-level
 
 Documentation: https://esbuild.github.io/api/#log-limit
 
-***
+---
 
 ### logOverride?
 
@@ -169,7 +169,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 
 Documentation: https://esbuild.github.io/api/#log-override
 
-***
+---
 
 ### mangleCache?
 
@@ -177,7 +177,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 
 Documentation: https://esbuild.github.io/api/#mangle-props
 
-***
+---
 
 ### mangleProps?
 
@@ -185,7 +185,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#mangle-props
 
-***
+---
 
 ### mangleQuoted?
 
@@ -193,7 +193,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#mangle-props
 
-***
+---
 
 ### minify?
 
@@ -201,7 +201,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#minify
 
-***
+---
 
 ### minifyIdentifiers?
 
@@ -209,7 +209,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 Documentation: https://esbuild.github.io/api/#minify
 
-***
+---
 
 ### minifySyntax?
 
@@ -217,7 +217,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 Documentation: https://esbuild.github.io/api/#minify
 
-***
+---
 
 ### minifyWhitespace?
 
@@ -225,7 +225,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 Documentation: https://esbuild.github.io/api/#minify
 
-***
+---
 
 ### platform?
 
@@ -233,7 +233,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 Documentation: https://esbuild.github.io/api/#platform
 
-***
+---
 
 ### pure?
 
@@ -241,7 +241,7 @@ Documentation: https://esbuild.github.io/api/#platform
 
 Documentation: https://esbuild.github.io/api/#pure
 
-***
+---
 
 ### reserveProps?
 
@@ -249,7 +249,7 @@ Documentation: https://esbuild.github.io/api/#pure
 
 Documentation: https://esbuild.github.io/api/#mangle-props
 
-***
+---
 
 ### sourcemap?
 
@@ -257,7 +257,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#sourcemap
 
-***
+---
 
 ### sourceRoot?
 
@@ -265,7 +265,7 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 
 Documentation: https://esbuild.github.io/api/#source-root
 
-***
+---
 
 ### sourcesContent?
 
@@ -273,7 +273,7 @@ Documentation: https://esbuild.github.io/api/#source-root
 
 Documentation: https://esbuild.github.io/api/#sources-content
 
-***
+---
 
 ### supported?
 
@@ -281,7 +281,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 
 Documentation: https://esbuild.github.io/api/#supported
 
-***
+---
 
 ### target?
 
@@ -289,7 +289,7 @@ Documentation: https://esbuild.github.io/api/#supported
 
 Documentation: https://esbuild.github.io/api/#target
 
-***
+---
 
 ### treeShaking?
 
@@ -297,7 +297,7 @@ Documentation: https://esbuild.github.io/api/#target
 
 Documentation: https://esbuild.github.io/api/#tree-shaking
 
-***
+---
 
 ### tsconfigRaw?
 

@@ -14,7 +14,7 @@ Path for the generated base types file.
 
 `${modulesDir}/../__generated__/types.ts`
 
-***
+---
 
 ### contextType?
 
@@ -25,20 +25,20 @@ Path where the context type is exported.
 #### Examples
 
 ```ts
-contextType: 'src/types/context#Context' // for named export
+contextType: "src/types/context#Context"; // for named export
 ```
 
 ```ts
-contextType: 'src/types/context' // for default export
+contextType: "src/types/context"; // for default export
 ```
 
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### cwd?
 
@@ -49,10 +49,10 @@ Current working directory.
 #### Default
 
 ```ts
-process.cwd()
+process.cwd();
 ```
 
-***
+---
 
 ### extensions?
 
@@ -63,16 +63,16 @@ Path where extensions (ex. auth-extension) are exported. Only default export is 
 #### Example
 
 ```ts
-extensions: 'src/extensions'
+extensions: "src/extensions";
 ```
 
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### fileOptions?
 
@@ -80,7 +80,7 @@ undefined
 
 Options for generated files.
 
-***
+---
 
 ### importExtension?
 
@@ -88,7 +88,7 @@ Options for generated files.
 
 File extension for generated import statements.
 
-***
+---
 
 ### loaders?
 
@@ -96,7 +96,7 @@ File extension for generated import statements.
 
 Additional schema loaders to be used for "schemas" option.
 
-***
+---
 
 ### moduleDefinitionName?
 
@@ -107,10 +107,10 @@ Name for the generated module definition file. This will contain type definition
 #### Default
 
 ```ts
-'typedef.ts'
+"typedef.ts";
 ```
 
-***
+---
 
 ### modulesDir?
 
@@ -121,10 +121,10 @@ Directory where modules are defined.
 #### Default
 
 ```ts
-'src/modules'
+"src/modules";
 ```
 
-***
+---
 
 ### scalars?
 
@@ -135,16 +135,18 @@ Custom scalar mappings.
 #### Example
 
 ```ts
-scalars: { DateTime: 'Date' }
+scalars: {
+  DateTime: "Date";
+}
 ```
 
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### schemas
 
@@ -155,5 +157,5 @@ Glob pattern(s) to load graphql schema files.
 #### Default
 
 ```ts
-['src/∗∗/∗.graphql']
+["src/∗∗/∗.graphql"];
 ```

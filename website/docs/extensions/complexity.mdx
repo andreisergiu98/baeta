@@ -16,7 +16,6 @@ Baeta provides a query complexity analysis system that helps protect your GraphQ
 - Depth and breadth limitations
 - Context-aware complexity rules
 
-
 ## Installation
 
 import { PackageManagerAdd } from "@site/components/package-manager";
@@ -28,12 +27,12 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 1. Register the Extension
 
 ```typescript
-import { createExtensions } from '@baeta/core';
-import { complexityExtension } from '@baeta/extension-complexity';
-import type { Context } from './types/context';
+import { createExtensions } from "@baeta/core";
+import { complexityExtension } from "@baeta/extension-complexity";
+import type { Context } from "./types/context";
 
 export default createExtensions(
-  //... other extensions  
+  //... other extensions
   complexityExtension<Context>({
     // Default complexity score for fields
     defaultComplexity: 1,
@@ -42,8 +41,8 @@ export default createExtensions(
     // Dynamic limits based on context
     async limit(ctx) {
       return {
-        depth: 10,      // Maximum query depth
-        breadth: 50,    // Maximum number of fields at each level
+        depth: 10, // Maximum query depth
+        breadth: 50, // Maximum number of fields at each level
         complexity: 1000, // Maximum total complexity score
       };
     },
@@ -54,7 +53,7 @@ export default createExtensions(
     //   complexity: 1000,
     // }
   }),
-  //... other extensions 
+  //... other extensions
 );
 ```
 
@@ -67,7 +66,7 @@ If you want to check complexity before authorization, place the extension before
 ```typescript
 export default defineConfig({
   graphql: {
-    extensions: 'src/extensions/index.ts',
+    extensions: "src/extensions/index.ts",
     // ... other config
   },
 });
@@ -80,7 +79,7 @@ export default defineConfig({
 You can customize complexity rules for specific fields or types:
 
 ```typescript
-import { getUserModule } from './typedef';
+import { getUserModule } from "./typedef";
 
 const { Query } = getUserModule();
 
@@ -89,10 +88,9 @@ Query.user.$complexity(() => false);
 
 // Custom complexity score for specific field
 Query.users.$complexity(({ args, ctx }) => ({
-  complexity: 1,    // Base complexity score
-  multiplier: 5,    // Custom multiplier for list operations
+  complexity: 1, // Base complexity score
+  multiplier: 5, // Custom multiplier for list operations
 }));
-
 ```
 
 ### Dynamic Complexity Rules
@@ -119,10 +117,12 @@ Example:
 
 ```graphql
 query {
-  users(first: 10) {  # complexity: 1 * 10 (multiplier)
-    name              # complexity: 1 * 10 (inherited multiplier)
-    posts {           # complexity: 1 * 10 * 10 (nested list)
-      title           # complexity: 1 * 10 * 10 (inherited multiplier)
+  users(first: 10) {
+    # complexity: 1 * 10 (multiplier)
+    name # complexity: 1 * 10 (inherited multiplier)
+    posts {
+      # complexity: 1 * 10 * 10 (nested list)
+      title # complexity: 1 * 10 * 10 (inherited multiplier)
     }
   }
 }

@@ -14,7 +14,7 @@
 
 > `optional` **context**: `ContextLoader`\<`Env`, `Context`, `ContextParams`\>
 
-***
+---
 
 ### getDatabase()
 
@@ -28,7 +28,7 @@
 
 [`SubscriptionDatabase`](../classes/SubscriptionDatabase.md)
 
-***
+---
 
 ### getWSConnections()
 
@@ -42,13 +42,13 @@
 
 `DurableObjectNamespace`\<`undefined`\>
 
-***
+---
 
 ### poolingType?
 
 > `optional` **poolingType**: `PoolingType`
 
-***
+---
 
 ### schema
 

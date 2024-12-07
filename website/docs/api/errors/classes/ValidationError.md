@@ -34,7 +34,7 @@
 
 `GraphQLError.cause`
 
-***
+---
 
 ### extensions
 
@@ -46,7 +46,7 @@ Extension fields to add to the formatted error.
 
 `GraphQLError.extensions`
 
-***
+---
 
 ### locations
 
@@ -65,7 +65,7 @@ Enumerable, and appears in the result of JSON.stringify().
 
 `GraphQLError.locations`
 
-***
+---
 
 ### message
 
@@ -75,7 +75,7 @@ Enumerable, and appears in the result of JSON.stringify().
 
 `GraphQLError.message`
 
-***
+---
 
 ### name
 
@@ -85,7 +85,7 @@ Enumerable, and appears in the result of JSON.stringify().
 
 `GraphQLError.name`
 
-***
+---
 
 ### nodes
 
@@ -97,7 +97,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 
 `GraphQLError.nodes`
 
-***
+---
 
 ### originalError
 
@@ -109,7 +109,7 @@ The original error thrown from a field resolver during execution.
 
 `GraphQLError.originalError`
 
-***
+---
 
 ### path
 
@@ -124,7 +124,7 @@ Enumerable, and appears in the result of JSON.stringify().
 
 `GraphQLError.path`
 
-***
+---
 
 ### positions
 
@@ -137,7 +137,7 @@ which correspond to this error.
 
 `GraphQLError.positions`
 
-***
+---
 
 ### source
 
@@ -152,7 +152,7 @@ represent nodes after the first node.
 
 `GraphQLError.source`
 
-***
+---
 
 ### stack?
 
@@ -192,7 +192,7 @@ represent nodes after the first node.
 
 `GraphQLError.toJSON`
 
-***
+---
 
 ### toString()
 

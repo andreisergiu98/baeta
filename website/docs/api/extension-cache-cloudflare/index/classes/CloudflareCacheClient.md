@@ -34,7 +34,7 @@
 
 `Promise`\<`null`\>
 
-***
+---
 
 ### deleteOne()
 
@@ -48,7 +48,7 @@
 
 `Promise`\<`null`\>
 
-***
+---
 
 ### get()
 
@@ -62,7 +62,7 @@
 
 `Promise`\<(`null` \| `string`)[]\>
 
-***
+---
 
 ### getOne()
 
@@ -76,7 +76,7 @@
 
 `Promise`\<`null` \| `string`\>
 
-***
+---
 
 ### list()
 
@@ -94,7 +94,7 @@
 
 `Promise`\<`string`[]\>
 
-***
+---
 
 ### post()
 
@@ -108,7 +108,7 @@
 
 `Promise`\<`Response`\>
 
-***
+---
 
 ### put()
 
@@ -124,7 +124,7 @@
 
 `Promise`\<`null`\>
 
-***
+---
 
 ### putOne()
 

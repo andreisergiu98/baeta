@@ -8,13 +8,13 @@
 
 0-based, in bytes
 
-***
+---
 
 ### file
 
 > **file**: `string`
 
-***
+---
 
 ### length
 
@@ -22,7 +22,7 @@
 
 in bytes
 
-***
+---
 
 ### line
 
@@ -30,19 +30,19 @@ in bytes
 
 1-based
 
-***
+---
 
 ### lineText
 
 > **lineText**: `string`
 
-***
+---
 
 ### namespace
 
 > **namespace**: `string`
 
-***
+---
 
 ### suggestion
 

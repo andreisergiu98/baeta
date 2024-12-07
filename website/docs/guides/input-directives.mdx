@@ -35,18 +35,18 @@ Use the `createInputDirective` utility from `@baeta/core` to implement the direc
 `src/modules/directives/input-directives.ts`
 
 ```typescript
-import { createInputDirective } from '@baeta/core';
-import type { Context } from '../../types/context';
-import { getCustomInputDirectiveModule } from './typedef';
+import { createInputDirective } from "@baeta/core";
+import type { Context } from "../../types/context";
+import { getCustomInputDirectiveModule } from "./typedef";
 
 const { $directive, Query } = getCustomInputDirectiveModule();
 
 const incrementDirective = createInputDirective<{ by: number }, Context>({
-  name: 'increment',
-  target: 'scalar',
+  name: "increment",
+  target: "scalar",
   resolve: ({ directiveConfig, getValue, setValue }) => {
     const value = getValue();
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       setValue(value + directiveConfig.by);
     }
   },

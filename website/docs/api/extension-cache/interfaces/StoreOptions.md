@@ -22,13 +22,13 @@
 
 [`ItemRef`](../type-aliases/ItemRef.md)
 
-***
+---
 
 ### revision?
 
 > `optional` **revision**: `number`
 
-***
+---
 
 ### ttl?
 

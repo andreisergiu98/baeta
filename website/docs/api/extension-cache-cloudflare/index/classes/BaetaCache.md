@@ -28,9 +28,9 @@
 
 #### Index Signature
 
- \[`key`: `string`\]: `never`
+\[`key`: `string`\]: `never`
 
-***
+---
 
 ### state
 
@@ -50,7 +50,7 @@
 
 `DurableObject.alarm`
 
-***
+---
 
 ### delete()
 
@@ -64,7 +64,7 @@
 
 `Promise`\<`null`\>
 
-***
+---
 
 ### fetch()
 
@@ -82,7 +82,7 @@
 
 `DurableObject.fetch`
 
-***
+---
 
 ### get()
 
@@ -96,7 +96,7 @@
 
 `Promise`\<`string`\>
 
-***
+---
 
 ### handleEviction()
 
@@ -106,7 +106,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### list()
 
@@ -124,7 +124,7 @@
 
 `Promise`\<`string`\>
 
-***
+---
 
 ### put()
 
@@ -140,7 +140,7 @@
 
 `Promise`\<`null`\>
 
-***
+---
 
 ### scheduledEviction()
 

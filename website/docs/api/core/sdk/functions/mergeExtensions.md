@@ -6,7 +6,7 @@
 
 • **T**
 
-• **K** *extends* `Record`\<`string`, `unknown`\>
+• **K** _extends_ `Record`\<`string`, `unknown`\>
 
 ## Parameters
 

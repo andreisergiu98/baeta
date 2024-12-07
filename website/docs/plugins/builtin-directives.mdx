@@ -19,8 +19,8 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 Add the directives plugin to your `baeta.ts` configuration:
 
 ```typescript
-import { defineConfig } from '@baeta/cli';
-import { directivesPlugin } from '@baeta/plugin-directives';
+import { defineConfig } from "@baeta/cli";
+import { directivesPlugin } from "@baeta/plugin-directives";
 
 export default defineConfig({
   plugins: [directivesPlugin()],
@@ -36,7 +36,7 @@ The plugin will generate a `baeta-directives` module that will be automatically 
 
 ```graphql
 directive @validString(
-  format: StringFormat      # EMAIL, UUID, URL
+  format: StringFormat # EMAIL, UUID, URL
   maxLength: Int
   minLength: Int
   startsWith: String
@@ -76,16 +76,16 @@ directive @validInt(
 ### Object Validation
 
 ```graphql
-directive @constraints(
-  minFields: Int
-  maxFields: Int
-) on INPUT_OBJECT
+directive @constraints(minFields: Int, maxFields: Int) on INPUT_OBJECT
 ```
 
 ### String Transformation
 
 ```graphql
-directive @trim(start: Boolean, end: Boolean) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+directive @trim(
+  start: Boolean
+  end: Boolean
+) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 directive @lower on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 ```

@@ -11,10 +11,10 @@ If true the bundle will also include all dependencies
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### bundleWorkspaces?
 
@@ -25,22 +25,23 @@ If true the bundle will also include all workspace dependencies.
 #### Default
 
 ```ts
-true // in watch mode
+true; // in watch mode
 ```
 
 #### Default
 
 ```ts
-false // in build mode
+false; // in build mode
 ```
 
-***
+---
 
 ### cjsGlobals?
 
 > `optional` **cjsGlobals**: `boolean`
 
 Adds CommonJS global variables within esm bundle like:
+
 - `__dirname` - Corresponds to the directory of the generated bundle file
 - `__filename` - Corresponds to the file path of the generated bundle file
 - `require` - Corresponds to the Node.js synchronous function to import modules
@@ -48,10 +49,10 @@ Adds CommonJS global variables within esm bundle like:
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### dist
 
@@ -62,10 +63,10 @@ The output directory
 #### Example
 
 ```ts
-dist: 'dist'
+dist: "dist";
 ```
 
-***
+---
 
 ### esbuild?
 
@@ -73,7 +74,7 @@ dist: 'dist'
 
 Options to pass to esbuild
 
-***
+---
 
 ### src
 
@@ -84,5 +85,5 @@ The source file or files to compile
 #### Example
 
 ```ts
-src: 'src/index.ts'
+src: "src/index.ts";
 ```

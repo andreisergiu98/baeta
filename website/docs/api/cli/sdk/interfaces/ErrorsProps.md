@@ -6,7 +6,7 @@
 
 > `optional` **errors**: `TextOutput`[]
 
-***
+---
 
 ### warnings?
 

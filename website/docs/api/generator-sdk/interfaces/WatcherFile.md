@@ -6,13 +6,13 @@
 
 > **path**: `string`
 
-***
+---
 
 ### relativePath
 
 > **relativePath**: `string`
 
-***
+---
 
 ### type
 

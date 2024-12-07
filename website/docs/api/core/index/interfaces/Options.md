@@ -8,7 +8,7 @@
 
 Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
 
-***
+---
 
 ### modules
 
@@ -16,7 +16,7 @@ Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools
 
 Modules to include in the application
 
-***
+---
 
 ### pruneSchema?
 
@@ -27,5 +27,5 @@ Whether to remove fields with no resolvers
 #### Default
 
 ```ts
-false
+false;
 ```

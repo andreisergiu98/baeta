@@ -12,9 +12,9 @@
 
 > **childNodes**: `DOMNode`[]
 
-### internal\_transform?
+### internal_transform?
 
-> `optional` **internal\_transform**: `OutputTransformer`
+> `optional` **internal_transform**: `OutputTransformer`
 
 ### isStaticDirty?
 

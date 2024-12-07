@@ -13,5 +13,5 @@ Number of newlines to insert.
 #### Default
 
 ```ts
-1
+1;
 ```

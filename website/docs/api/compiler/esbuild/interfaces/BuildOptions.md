@@ -12,7 +12,7 @@
 
 Documentation: https://esbuild.github.io/api/#working-directory
 
-***
+---
 
 ### alias?
 
@@ -20,7 +20,7 @@ Documentation: https://esbuild.github.io/api/#working-directory
 
 Documentation: https://esbuild.github.io/api/#alias
 
-***
+---
 
 ### allowOverwrite?
 
@@ -28,7 +28,7 @@ Documentation: https://esbuild.github.io/api/#alias
 
 Documentation: https://esbuild.github.io/api/#allow-overwrite
 
-***
+---
 
 ### assetNames?
 
@@ -36,7 +36,7 @@ Documentation: https://esbuild.github.io/api/#allow-overwrite
 
 Documentation: https://esbuild.github.io/api/#asset-names
 
-***
+---
 
 ### banner?
 
@@ -46,9 +46,9 @@ Documentation: https://esbuild.github.io/api/#banner
 
 #### Index Signature
 
- \[`type`: `string`\]: `string`
+\[`type`: `string`\]: `string`
 
-***
+---
 
 ### bundle?
 
@@ -56,7 +56,7 @@ Documentation: https://esbuild.github.io/api/#banner
 
 Documentation: https://esbuild.github.io/api/#bundle
 
-***
+---
 
 ### charset?
 
@@ -68,7 +68,7 @@ Documentation: https://esbuild.github.io/api/#charset
 
 [`CommonOptions`](CommonOptions.md).[`charset`](CommonOptions.md#charset)
 
-***
+---
 
 ### chunkNames?
 
@@ -76,7 +76,7 @@ Documentation: https://esbuild.github.io/api/#charset
 
 Documentation: https://esbuild.github.io/api/#chunk-names
 
-***
+---
 
 ### color?
 
@@ -88,7 +88,7 @@ Documentation: https://esbuild.github.io/api/#color
 
 [`CommonOptions`](CommonOptions.md).[`color`](CommonOptions.md#color)
 
-***
+---
 
 ### conditions?
 
@@ -96,7 +96,7 @@ Documentation: https://esbuild.github.io/api/#color
 
 Documentation: https://esbuild.github.io/api/#conditions
 
-***
+---
 
 ### define?
 
@@ -106,13 +106,13 @@ Documentation: https://esbuild.github.io/api/#define
 
 #### Index Signature
 
- \[`key`: `string`\]: `string`
+\[`key`: `string`\]: `string`
 
 #### Inherited from
 
 [`CommonOptions`](CommonOptions.md).[`define`](CommonOptions.md#define)
 
-***
+---
 
 ### drop?
 
@@ -124,7 +124,7 @@ Documentation: https://esbuild.github.io/api/#drop
 
 [`CommonOptions`](CommonOptions.md).[`drop`](CommonOptions.md#drop)
 
-***
+---
 
 ### dropLabels?
 
@@ -136,7 +136,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 
 [`CommonOptions`](CommonOptions.md).[`dropLabels`](CommonOptions.md#droplabels)
 
-***
+---
 
 ### entryNames?
 
@@ -144,7 +144,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 
 Documentation: https://esbuild.github.io/api/#entry-names
 
-***
+---
 
 ### entryPoints?
 
@@ -152,7 +152,7 @@ Documentation: https://esbuild.github.io/api/#entry-names
 
 Documentation: https://esbuild.github.io/api/#entry-points
 
-***
+---
 
 ### external?
 
@@ -160,7 +160,7 @@ Documentation: https://esbuild.github.io/api/#entry-points
 
 Documentation: https://esbuild.github.io/api/#external
 
-***
+---
 
 ### footer?
 
@@ -170,9 +170,9 @@ Documentation: https://esbuild.github.io/api/#footer
 
 #### Index Signature
 
- \[`type`: `string`\]: `string`
+\[`type`: `string`\]: `string`
 
-***
+---
 
 ### format?
 
@@ -184,7 +184,7 @@ Documentation: https://esbuild.github.io/api/#format
 
 [`CommonOptions`](CommonOptions.md).[`format`](CommonOptions.md#format)
 
-***
+---
 
 ### globalName?
 
@@ -196,7 +196,7 @@ Documentation: https://esbuild.github.io/api/#global-name
 
 [`CommonOptions`](CommonOptions.md).[`globalName`](CommonOptions.md#globalname)
 
-***
+---
 
 ### ignoreAnnotations?
 
@@ -208,7 +208,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 
 [`CommonOptions`](CommonOptions.md).[`ignoreAnnotations`](CommonOptions.md#ignoreannotations)
 
-***
+---
 
 ### inject?
 
@@ -216,7 +216,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 
 Documentation: https://esbuild.github.io/api/#inject
 
-***
+---
 
 ### jsx?
 
@@ -228,7 +228,7 @@ Documentation: https://esbuild.github.io/api/#jsx
 
 [`CommonOptions`](CommonOptions.md).[`jsx`](CommonOptions.md#jsx)
 
-***
+---
 
 ### jsxDev?
 
@@ -240,7 +240,7 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 
 [`CommonOptions`](CommonOptions.md).[`jsxDev`](CommonOptions.md#jsxdev)
 
-***
+---
 
 ### jsxFactory?
 
@@ -252,7 +252,7 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 
 [`CommonOptions`](CommonOptions.md).[`jsxFactory`](CommonOptions.md#jsxfactory)
 
-***
+---
 
 ### jsxFragment?
 
@@ -264,7 +264,7 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 
 [`CommonOptions`](CommonOptions.md).[`jsxFragment`](CommonOptions.md#jsxfragment)
 
-***
+---
 
 ### jsxImportSource?
 
@@ -276,7 +276,7 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 
 [`CommonOptions`](CommonOptions.md).[`jsxImportSource`](CommonOptions.md#jsximportsource)
 
-***
+---
 
 ### jsxSideEffects?
 
@@ -288,7 +288,7 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 
 [`CommonOptions`](CommonOptions.md).[`jsxSideEffects`](CommonOptions.md#jsxsideeffects)
 
-***
+---
 
 ### keepNames?
 
@@ -300,7 +300,7 @@ Documentation: https://esbuild.github.io/api/#keep-names
 
 [`CommonOptions`](CommonOptions.md).[`keepNames`](CommonOptions.md#keepnames)
 
-***
+---
 
 ### legalComments?
 
@@ -312,7 +312,7 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 
 [`CommonOptions`](CommonOptions.md).[`legalComments`](CommonOptions.md#legalcomments)
 
-***
+---
 
 ### lineLimit?
 
@@ -324,7 +324,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 
 [`CommonOptions`](CommonOptions.md).[`lineLimit`](CommonOptions.md#linelimit)
 
-***
+---
 
 ### loader?
 
@@ -334,9 +334,9 @@ Documentation: https://esbuild.github.io/api/#loader
 
 #### Index Signature
 
- \[`ext`: `string`\]: [`Loader`](../type-aliases/Loader.md)
+\[`ext`: `string`\]: [`Loader`](../type-aliases/Loader.md)
 
-***
+---
 
 ### logLevel?
 
@@ -348,7 +348,7 @@ Documentation: https://esbuild.github.io/api/#log-level
 
 [`CommonOptions`](CommonOptions.md).[`logLevel`](CommonOptions.md#loglevel)
 
-***
+---
 
 ### logLimit?
 
@@ -360,7 +360,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 
 [`CommonOptions`](CommonOptions.md).[`logLimit`](CommonOptions.md#loglimit)
 
-***
+---
 
 ### logOverride?
 
@@ -372,7 +372,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 
 [`CommonOptions`](CommonOptions.md).[`logOverride`](CommonOptions.md#logoverride)
 
-***
+---
 
 ### mainFields?
 
@@ -380,7 +380,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 
 Documentation: https://esbuild.github.io/api/#main-fields
 
-***
+---
 
 ### mangleCache?
 
@@ -392,7 +392,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 [`CommonOptions`](CommonOptions.md).[`mangleCache`](CommonOptions.md#manglecache)
 
-***
+---
 
 ### mangleProps?
 
@@ -404,7 +404,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 [`CommonOptions`](CommonOptions.md).[`mangleProps`](CommonOptions.md#mangleprops)
 
-***
+---
 
 ### mangleQuoted?
 
@@ -416,7 +416,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 [`CommonOptions`](CommonOptions.md).[`mangleQuoted`](CommonOptions.md#manglequoted)
 
-***
+---
 
 ### metafile?
 
@@ -424,7 +424,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#metafile
 
-***
+---
 
 ### minify?
 
@@ -436,7 +436,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 [`CommonOptions`](CommonOptions.md).[`minify`](CommonOptions.md#minify)
 
-***
+---
 
 ### minifyIdentifiers?
 
@@ -448,7 +448,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 [`CommonOptions`](CommonOptions.md).[`minifyIdentifiers`](CommonOptions.md#minifyidentifiers)
 
-***
+---
 
 ### minifySyntax?
 
@@ -460,7 +460,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 [`CommonOptions`](CommonOptions.md).[`minifySyntax`](CommonOptions.md#minifysyntax)
 
-***
+---
 
 ### minifyWhitespace?
 
@@ -472,7 +472,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 [`CommonOptions`](CommonOptions.md).[`minifyWhitespace`](CommonOptions.md#minifywhitespace)
 
-***
+---
 
 ### nodePaths?
 
@@ -480,7 +480,7 @@ Documentation: https://esbuild.github.io/api/#minify
 
 Documentation: https://esbuild.github.io/api/#node-paths
 
-***
+---
 
 ### outbase?
 
@@ -488,7 +488,7 @@ Documentation: https://esbuild.github.io/api/#node-paths
 
 Documentation: https://esbuild.github.io/api/#outbase
 
-***
+---
 
 ### outdir?
 
@@ -496,7 +496,7 @@ Documentation: https://esbuild.github.io/api/#outbase
 
 Documentation: https://esbuild.github.io/api/#outdir
 
-***
+---
 
 ### outExtension?
 
@@ -506,9 +506,9 @@ Documentation: https://esbuild.github.io/api/#out-extension
 
 #### Index Signature
 
- \[`ext`: `string`\]: `string`
+\[`ext`: `string`\]: `string`
 
-***
+---
 
 ### outfile?
 
@@ -516,7 +516,7 @@ Documentation: https://esbuild.github.io/api/#out-extension
 
 Documentation: https://esbuild.github.io/api/#outfile
 
-***
+---
 
 ### packages?
 
@@ -524,7 +524,7 @@ Documentation: https://esbuild.github.io/api/#outfile
 
 Documentation: https://esbuild.github.io/api/#packages
 
-***
+---
 
 ### platform?
 
@@ -536,7 +536,7 @@ Documentation: https://esbuild.github.io/api/#platform
 
 [`CommonOptions`](CommonOptions.md).[`platform`](CommonOptions.md#platform)
 
-***
+---
 
 ### plugins?
 
@@ -544,7 +544,7 @@ Documentation: https://esbuild.github.io/api/#platform
 
 Documentation: https://esbuild.github.io/plugins/
 
-***
+---
 
 ### preserveSymlinks?
 
@@ -552,7 +552,7 @@ Documentation: https://esbuild.github.io/plugins/
 
 Documentation: https://esbuild.github.io/api/#preserve-symlinks
 
-***
+---
 
 ### publicPath?
 
@@ -560,7 +560,7 @@ Documentation: https://esbuild.github.io/api/#preserve-symlinks
 
 Documentation: https://esbuild.github.io/api/#public-path
 
-***
+---
 
 ### pure?
 
@@ -572,7 +572,7 @@ Documentation: https://esbuild.github.io/api/#pure
 
 [`CommonOptions`](CommonOptions.md).[`pure`](CommonOptions.md#pure)
 
-***
+---
 
 ### reserveProps?
 
@@ -584,7 +584,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 [`CommonOptions`](CommonOptions.md).[`reserveProps`](CommonOptions.md#reserveprops)
 
-***
+---
 
 ### resolveExtensions?
 
@@ -592,7 +592,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 
 Documentation: https://esbuild.github.io/api/#resolve-extensions
 
-***
+---
 
 ### sourcemap?
 
@@ -604,7 +604,7 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 
 [`CommonOptions`](CommonOptions.md).[`sourcemap`](CommonOptions.md#sourcemap)
 
-***
+---
 
 ### sourceRoot?
 
@@ -616,7 +616,7 @@ Documentation: https://esbuild.github.io/api/#source-root
 
 [`CommonOptions`](CommonOptions.md).[`sourceRoot`](CommonOptions.md#sourceroot)
 
-***
+---
 
 ### sourcesContent?
 
@@ -628,7 +628,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 
 [`CommonOptions`](CommonOptions.md).[`sourcesContent`](CommonOptions.md#sourcescontent)
 
-***
+---
 
 ### splitting?
 
@@ -636,7 +636,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 
 Documentation: https://esbuild.github.io/api/#splitting
 
-***
+---
 
 ### stdin?
 
@@ -644,7 +644,7 @@ Documentation: https://esbuild.github.io/api/#splitting
 
 Documentation: https://esbuild.github.io/api/#stdin
 
-***
+---
 
 ### supported?
 
@@ -656,7 +656,7 @@ Documentation: https://esbuild.github.io/api/#supported
 
 [`CommonOptions`](CommonOptions.md).[`supported`](CommonOptions.md#supported)
 
-***
+---
 
 ### target?
 
@@ -668,7 +668,7 @@ Documentation: https://esbuild.github.io/api/#target
 
 [`CommonOptions`](CommonOptions.md).[`target`](CommonOptions.md#target)
 
-***
+---
 
 ### treeShaking?
 
@@ -680,7 +680,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 
 [`CommonOptions`](CommonOptions.md).[`treeShaking`](CommonOptions.md#treeshaking)
 
-***
+---
 
 ### tsconfig?
 
@@ -688,7 +688,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 
 Documentation: https://esbuild.github.io/api/#tsconfig
 
-***
+---
 
 ### tsconfigRaw?
 
@@ -700,7 +700,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 
 [`CommonOptions`](CommonOptions.md).[`tsconfigRaw`](CommonOptions.md#tsconfigraw)
 
-***
+---
 
 ### write?
 

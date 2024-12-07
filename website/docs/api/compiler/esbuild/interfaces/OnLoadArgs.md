@@ -8,25 +8,25 @@ Documentation: https://esbuild.github.io/plugins/#on-load-arguments
 
 > **namespace**: `string`
 
-***
+---
 
 ### path
 
 > **path**: `string`
 
-***
+---
 
 ### pluginData
 
 > **pluginData**: `any`
 
-***
+---
 
 ### suffix
 
 > **suffix**: `string`
 
-***
+---
 
 ### with
 

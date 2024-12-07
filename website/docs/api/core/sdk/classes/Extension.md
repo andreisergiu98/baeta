@@ -32,7 +32,7 @@
 
 `void`
 
-***
+---
 
 ### getModuleExtensions()
 
@@ -42,7 +42,7 @@
 
 `object`
 
-***
+---
 
 ### getResolverExtensions()
 
@@ -70,7 +70,7 @@
 
 `object`
 
-***
+---
 
 ### getSubscriptionExtensions()
 
@@ -94,7 +94,7 @@
 
 `object`
 
-***
+---
 
 ### getSubscriptionResolveExtensions()
 
@@ -120,7 +120,7 @@
 
 `object`
 
-***
+---
 
 ### getSubscriptionSubscribeExtensions()
 
@@ -146,7 +146,7 @@
 
 `object`
 
-***
+---
 
 ### getTransformers()
 
@@ -156,7 +156,7 @@
 
 [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
 
-***
+---
 
 ### getTypeExtensions()
 

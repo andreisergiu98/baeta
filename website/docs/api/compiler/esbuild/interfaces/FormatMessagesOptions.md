@@ -6,13 +6,13 @@
 
 > `optional` **color**: `boolean`
 
-***
+---
 
 ### kind
 
 > **kind**: `"warning"` \| `"error"`
 
-***
+---
 
 ### terminalWidth?
 

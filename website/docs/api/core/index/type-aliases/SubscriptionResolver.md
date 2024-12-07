@@ -6,7 +6,7 @@
 
 • **Result**
 
-• **Key** *extends* `string`
+• **Key** _extends_ `string`
 
 • **Root**
 

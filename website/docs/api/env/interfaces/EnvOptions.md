@@ -2,11 +2,11 @@
 
 ## Type Parameters
 
-• **T** *extends* `Types`
+• **T** _extends_ `Types`
 
-• **R** *extends* `boolean` \| `undefined`
+• **R** _extends_ `boolean` \| `undefined`
 
-• **D** *extends* `InferType`\<`T`\> \| `undefined`
+• **D** _extends_ `InferType`\<`T`\> \| `undefined`
 
 ## Properties
 
@@ -14,13 +14,13 @@
 
 > `optional` **default**: `D`
 
-***
+---
 
 ### required?
 
 > `optional` **required**: `R`
 
-***
+---
 
 ### resolver()?
 
@@ -34,7 +34,7 @@
 
 `InferType`\<`T`\>
 
-***
+---
 
 ### type
 

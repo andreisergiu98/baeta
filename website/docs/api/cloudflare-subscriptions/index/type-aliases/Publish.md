@@ -4,13 +4,13 @@
 
 ## Type Parameters
 
-• **Map** *extends* `DefaultPubSubMap`
+• **Map** _extends_ `DefaultPubSubMap`
 
 ## Type Parameters
 
-• **C** *extends* keyof `Map`
+• **C** _extends_ keyof `Map`
 
-• **P** *extends* `Map`\[`C`\]
+• **P** _extends_ `Map`\[`C`\]
 
 ## Parameters
 

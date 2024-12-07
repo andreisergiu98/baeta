@@ -6,7 +6,7 @@
 
 > `optional` **location**: `null` \| `Partial`\<[`Location`](Location.md)\>
 
-***
+---
 
 ### text?
 

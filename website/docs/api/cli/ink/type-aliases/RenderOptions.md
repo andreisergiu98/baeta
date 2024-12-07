@@ -13,7 +13,7 @@ If true, each update will be rendered as a separate output, without replacing th
 #### Default
 
 ```ts
-false
+false;
 ```
 
 ### exitOnCtrlC?
@@ -25,7 +25,7 @@ Configure whether Ink should listen to Ctrl+C keyboard input and exit the app. T
 #### Default
 
 ```ts
-true
+true;
 ```
 
 ### patchConsole?
@@ -37,7 +37,7 @@ Patch console methods to ensure console output doesn't mix with Ink output.
 #### Default
 
 ```ts
-true
+true;
 ```
 
 ### stderr?
@@ -49,7 +49,7 @@ Error stream.
 #### Default
 
 ```ts
-process.stderr
+process.stderr;
 ```
 
 ### stdin?
@@ -61,7 +61,7 @@ Input stream where app will listen for input.
 #### Default
 
 ```ts
-process.stdin
+process.stdin;
 ```
 
 ### stdout?
@@ -73,5 +73,5 @@ Output stream where app will be rendered.
 #### Default
 
 ```ts
-process.stdout
+process.stdout;
 ```

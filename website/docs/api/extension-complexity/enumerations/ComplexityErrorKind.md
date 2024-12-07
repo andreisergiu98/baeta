@@ -6,13 +6,13 @@
 
 > **Breadth**: `"BreadthExceeded"`
 
-***
+---
 
 ### Complexity
 
 > **Complexity**: `"ComplexityExceeded"`
 
-***
+---
 
 ### Depth
 

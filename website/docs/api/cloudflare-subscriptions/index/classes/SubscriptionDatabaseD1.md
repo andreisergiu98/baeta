@@ -42,7 +42,7 @@
 
 [`SubscriptionDatabase`](SubscriptionDatabase.md).[`createSubscription`](SubscriptionDatabase.md#createsubscription)
 
-***
+---
 
 ### deleteSubscription()
 
@@ -60,7 +60,7 @@
 
 [`SubscriptionDatabase`](SubscriptionDatabase.md).[`deleteSubscription`](SubscriptionDatabase.md#deletesubscription)
 
-***
+---
 
 ### deleteSubscriptions()
 
@@ -78,7 +78,7 @@
 
 [`SubscriptionDatabase`](SubscriptionDatabase.md).[`deleteSubscriptions`](SubscriptionDatabase.md#deletesubscriptions)
 
-***
+---
 
 ### getSubscriptions()
 

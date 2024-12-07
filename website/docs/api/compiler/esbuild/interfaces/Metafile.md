@@ -10,9 +10,9 @@ Documentation: https://esbuild.github.io/api/#metafile
 
 #### Index Signature
 
- \[`path`: `string`\]: `object`
+\[`path`: `string`\]: `object`
 
-***
+---
 
 ### outputs
 
@@ -20,4 +20,4 @@ Documentation: https://esbuild.github.io/api/#metafile
 
 #### Index Signature
 
- \[`path`: `string`\]: `object`
+\[`path`: `string`\]: `object`

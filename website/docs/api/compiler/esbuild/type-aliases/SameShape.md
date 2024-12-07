@@ -6,4 +6,4 @@
 
 • **Out**
 
-• **In** *extends* `Out`
+• **In** _extends_ `Out`

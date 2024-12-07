@@ -14,7 +14,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`base`](ScanInfoWithParts.md#base)
 
-***
+---
 
 ### glob
 
@@ -24,7 +24,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`glob`](ScanInfoWithParts.md#glob)
 
-***
+---
 
 ### input
 
@@ -34,7 +34,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`input`](ScanInfoWithParts.md#input)
 
-***
+---
 
 ### isBrace
 
@@ -44,7 +44,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`isBrace`](ScanInfoWithParts.md#isbrace)
 
-***
+---
 
 ### isBracket
 
@@ -54,7 +54,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`isBracket`](ScanInfoWithParts.md#isbracket)
 
-***
+---
 
 ### isExtglob
 
@@ -64,7 +64,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`isExtglob`](ScanInfoWithParts.md#isextglob)
 
-***
+---
 
 ### isGlob
 
@@ -74,7 +74,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`isGlob`](ScanInfoWithParts.md#isglob)
 
-***
+---
 
 ### isGlobstar
 
@@ -84,13 +84,13 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`isGlobstar`](ScanInfoWithParts.md#isglobstar)
 
-***
+---
 
 ### maxDepth
 
 > **maxDepth**: `number`
 
-***
+---
 
 ### negated
 
@@ -100,7 +100,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`negated`](ScanInfoWithParts.md#negated)
 
-***
+---
 
 ### negatedExtglob
 
@@ -110,7 +110,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`negatedExtglob`](ScanInfoWithParts.md#negatedextglob)
 
-***
+---
 
 ### parts
 
@@ -120,7 +120,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`parts`](ScanInfoWithParts.md#parts)
 
-***
+---
 
 ### prefix
 
@@ -130,7 +130,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`prefix`](ScanInfoWithParts.md#prefix)
 
-***
+---
 
 ### slashes
 
@@ -140,7 +140,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`slashes`](ScanInfoWithParts.md#slashes)
 
-***
+---
 
 ### start
 
@@ -150,7 +150,7 @@
 
 [`ScanInfoWithParts`](ScanInfoWithParts.md).[`start`](ScanInfoWithParts.md#start)
 
-***
+---
 
 ### tokens
 

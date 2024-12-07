@@ -6,19 +6,19 @@
 
 > `optional` **actionName**: `string`
 
-***
+---
 
 ### exec
 
 > **exec**: `string` \| (`ctx`) => `void` \| `Promise`\<`void`\>
 
-***
+---
 
 ### name?
 
 > `optional` **name**: `string`
 
-***
+---
 
 ### skip()?
 
@@ -48,7 +48,7 @@
 
 `boolean` \| `Promise`\<`boolean`\>
 
-***
+---
 
 ### watch?
 

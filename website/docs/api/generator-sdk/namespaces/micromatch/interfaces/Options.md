@@ -15,20 +15,20 @@ Allow glob patterns without slashes to match a file path based on its basename. 
 #### Default
 
 ```ts
-false
+false;
 ```
 
 #### Example
 
 ```js
-mm(['a/b.js', 'a/c.md'], '*.js');
+mm(["a/b.js", "a/c.md"], "*.js");
 //=> []
 
-mm(['a/b.js', 'a/c.md'], '*.js', {matchBase: true});
+mm(["a/b.js", "a/c.md"], "*.js", { matchBase: true });
 //=> ['a/b.js']
 ```
 
-***
+---
 
 ### bash?
 
@@ -41,20 +41,20 @@ Instead, the star is treated the same as an other star.
 #### Default
 
 ```ts
-true
+true;
 ```
 
 #### Example
 
 ```js
-var files = ['abc', 'ajz'];
-console.log(mm(files, '[a-c]*'));
+var files = ["abc", "ajz"];
+console.log(mm(files, "[a-c]*"));
 //=> ['abc', 'ajz']
 
-console.log(mm(files, '[a-c]*', {bash: false}));
+console.log(mm(files, "[a-c]*", { bash: false }));
 ```
 
-***
+---
 
 ### capture?
 
@@ -65,10 +65,10 @@ Return regex matches in supporting methods.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### contains?
 
@@ -79,10 +79,10 @@ Allows glob to match any part of the given string(s).
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### cwd?
 
@@ -93,10 +93,10 @@ Current working directory. Used by `picomatch.split()`
 #### Default
 
 ```ts
-process.cwd()
+process.cwd();
 ```
 
-***
+---
 
 ### debug?
 
@@ -107,10 +107,10 @@ Debug regular expressions when an error is thrown.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### dot?
 
@@ -121,10 +121,10 @@ Match dotfiles. Otherwise dotfiles are ignored unless a `.` is explicitly define
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### expandRange()?
 
@@ -149,10 +149,10 @@ It's recommended that returned strings be wrapped in parentheses. This option is
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### failglob?
 
@@ -163,10 +163,10 @@ Similar to the `--failglob` behavior in Bash, throws an error when no matches ar
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### fastpaths?
 
@@ -177,10 +177,10 @@ To speed up processing, full parsing is skipped for a handful common glob patter
 #### Default
 
 ```ts
-true
+true;
 ```
 
-***
+---
 
 ### flags?
 
@@ -191,10 +191,10 @@ Regex flags to use in the generated regex. If defined, the `nocase` option will 
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### format()?
 
@@ -213,10 +213,10 @@ Custom function for formatting the returned string. This is useful for removing 
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### ignore?
 
@@ -227,10 +227,10 @@ One or more glob patterns for excluding strings that should not be matched from 
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### keepQuotes?
 
@@ -241,10 +241,10 @@ Retain quotes in the generated regex, since quotes may also be used as an altern
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### literalBrackets?
 
@@ -255,10 +255,10 @@ When `true`, brackets in the glob pattern will be escaped so that only literal b
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### lookbehinds?
 
@@ -269,10 +269,10 @@ Support regex positive and negative lookbehinds. Note that you must be using Nod
 #### Default
 
 ```ts
-true
+true;
 ```
 
-***
+---
 
 ### matchBase?
 
@@ -283,10 +283,10 @@ Alias for `basename`.
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### maxLength?
 
@@ -297,10 +297,10 @@ Limit the max length of the input string. An error is thrown if the input string
 #### Default
 
 ```ts
-65536
+65536;
 ```
 
-***
+---
 
 ### nobrace?
 
@@ -311,10 +311,10 @@ Disable brace matching, so that `{a,b}` and `{1..3}` would be treated as literal
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### nobracket?
 
@@ -325,10 +325,10 @@ Disable matching with regex brackets.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### nocase?
 
@@ -340,10 +340,10 @@ Note that this option is ignored when the `flags` option is defined.
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### noext?
 
@@ -354,10 +354,10 @@ Alias for `noextglob`
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### noextglob?
 
@@ -368,10 +368,10 @@ Disable support for matching with extglobs (like `+(a|b)`)
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### noglobstar?
 
@@ -382,10 +382,10 @@ Disable matching with globstars (`**`).
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### nonegate?
 
@@ -396,10 +396,10 @@ Disallow negation (`!`) patterns, and treat leading `!` as a literal character t
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### noquantifiers?
 
@@ -410,10 +410,10 @@ Disable support for regex quantifiers (like `a{1,2}`) and treat them as brace pa
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### onIgnore()?
 
@@ -432,10 +432,10 @@ Function to be called on ignored items.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### onMatch()?
 
@@ -454,10 +454,10 @@ Function to be called on matched items.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### onResult()?
 
@@ -476,10 +476,10 @@ Function to be called on all items, regardless of whether or not they are matche
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### posix?
 
@@ -490,10 +490,10 @@ Support POSIX character classes ("posix brackets").
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### prepend?
 
@@ -504,10 +504,10 @@ String to prepend to the generated regex used for matching.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### regex?
 
@@ -518,10 +518,10 @@ Use regular expression rules for `+` (instead of matching literal `+`), and for 
 #### Default
 
 ```ts
-false
+false;
 ```
 
-***
+---
 
 ### strictBrackets?
 
@@ -532,10 +532,10 @@ Throw an error if brackets, braces, or parens are imbalanced.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### strictSlashes?
 
@@ -546,10 +546,10 @@ When true, picomatch won't match trailing slashes with single stars.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
-***
+---
 
 ### unescape?
 
@@ -560,7 +560,7 @@ Remove backslashes from returned matches.
 #### Default
 
 ```ts
-undefined
+undefined;
 ```
 
 #### Example
@@ -568,14 +568,14 @@ undefined
 In this example we want to match a literal `*`:
 
 ```js
-mm.match(['abc', 'a\\*c'], 'a\\*c');
+mm.match(["abc", "a\\*c"], "a\\*c");
 //=> ['a\\*c']
 
-mm.match(['abc', 'a\\*c'], 'a\\*c', {unescape: true});
+mm.match(["abc", "a\\*c"], "a\\*c", { unescape: true });
 //=> ['a*c']
 ```
 
-***
+---
 
 ### windows?
 
@@ -586,5 +586,5 @@ Convert all slashes in file paths to forward slashes. This does not convert slas
 #### Default
 
 ```ts
-undefined
+undefined;
 ```

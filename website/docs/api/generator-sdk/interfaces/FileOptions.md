@@ -13,10 +13,10 @@ Add eslint-disable comment at the beginning of the file.
 #### Default
 
 ```ts
-true
+true;
 ```
 
-***
+---
 
 ### addGenerationNoticeHeader?
 
@@ -27,10 +27,10 @@ Add generation notice at the beginning of the file.
 #### Default
 
 ```ts
-true
+true;
 ```
 
-***
+---
 
 ### addHeader()?
 
@@ -50,7 +50,7 @@ Add custom header at the beginning of the file.
 
 `string`
 
-***
+---
 
 ### transformContent()?
 

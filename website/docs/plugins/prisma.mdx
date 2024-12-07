@@ -25,9 +25,9 @@ export default defineConfig({
   // ... other config
   plugins: [
     prismaPlugin({
-      prismaSchema: 'schema.prisma',
-      generatedSchemaPath: 'src/__generated__/prisma/schema.prisma', // OR node_modules/@prisma/client/schema.prisma
-      generateCommand: 'prisma generate', // this is the default value
+      prismaSchema: "schema.prisma",
+      generatedSchemaPath: "src/__generated__/prisma/schema.prisma", // OR node_modules/@prisma/client/schema.prisma
+      generateCommand: "prisma generate", // this is the default value
     }),
   ],
 });
@@ -36,6 +36,7 @@ export default defineConfig({
 ## How It Works
 
 The plugin will automatically:
+
 - Watch for changes in your Prisma schema
 - Generate the client when changes are detected
 - Place the generated files in the specified path

@@ -38,7 +38,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### deleteQueriesByRef()
 
@@ -64,7 +64,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### getPartialMany()
 
@@ -78,19 +78,19 @@
 
 `Promise`\<`null` \| (`null` \| `Item`)[]\>
 
-***
+---
 
 ### hash
 
 > `protected` **hash**: `string`
 
-***
+---
 
 ### loader
 
 > `protected` **loader**: `DataLoader`\<[`ItemRef`](../type-aliases/ItemRef.md), `null` \| `Item`, [`ItemRef`](../type-aliases/ItemRef.md)\>
 
-***
+---
 
 ### loadQueryMetadata()
 
@@ -108,13 +108,13 @@
 
 `Promise`\<`null` \| `string`[]\>
 
-***
+---
 
 ### options
 
 > `protected` **options**: [`StoreOptions`](../interfaces/StoreOptions.md)\<`Item`\>
 
-***
+---
 
 ### saveMany()
 
@@ -128,7 +128,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### saveQueryMetadata()
 
@@ -148,7 +148,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### type
 
@@ -168,7 +168,7 @@
 
 `string`
 
-***
+---
 
 ### createKeyByItem()
 
@@ -182,7 +182,7 @@
 
 `string`
 
-***
+---
 
 ### createKeyByQuery()
 
@@ -200,7 +200,7 @@
 
 `string`
 
-***
+---
 
 ### createMiddleware()
 
@@ -218,13 +218,13 @@
 
 • **queryRef**: [`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
 
-• ...**args**: `Root` *extends* `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
+• ...**args**: `Root` _extends_ `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
 
 #### Returns
 
 `Middleware`\<`Result`, `Root`, `unknown`, `Args`\>
 
-***
+---
 
 ### createQueryKeyGlobMatcher()
 
@@ -242,7 +242,7 @@
 
 `string`
 
-***
+---
 
 ### createQueryKeyHeader()
 
@@ -258,7 +258,7 @@
 
 `string`
 
-***
+---
 
 ### createQueryKeyNamespace()
 
@@ -272,7 +272,7 @@
 
 `string`
 
-***
+---
 
 ### createQueryKeyRegExpMatcher()
 
@@ -290,7 +290,7 @@
 
 `RegExp`
 
-***
+---
 
 ### decodeQueryItemRef()
 
@@ -304,7 +304,7 @@
 
 `null` \| `string`
 
-***
+---
 
 ### delete()
 
@@ -320,7 +320,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### deleteQueries()
 
@@ -344,7 +344,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### encodePrimitive()
 
@@ -360,7 +360,7 @@
 
 `null` \| `string`
 
-***
+---
 
 ### encodeProperty()
 
@@ -374,7 +374,7 @@
 
 `string`
 
-***
+---
 
 ### encodeQueryArgs()
 
@@ -390,7 +390,7 @@
 
 `string`
 
-***
+---
 
 ### encodeQueryItemRef()
 
@@ -404,7 +404,7 @@
 
 `string`
 
-***
+---
 
 ### get()
 
@@ -418,7 +418,7 @@
 
 `Promise`\<`null` \| `Item`\>
 
-***
+---
 
 ### getMany()
 
@@ -432,7 +432,7 @@
 
 `Promise`\<`null` \| `Item`[]\>
 
-***
+---
 
 ### getQueryResult()
 
@@ -456,7 +456,7 @@
 
 `Promise`\<`null` \| `object`\>
 
-***
+---
 
 ### getRef()
 
@@ -470,7 +470,7 @@
 
 [`ItemRef`](../type-aliases/ItemRef.md)
 
-***
+---
 
 ### getRefFallback()
 
@@ -484,7 +484,7 @@
 
 `undefined` \| `string`
 
-***
+---
 
 ### getRevision()
 
@@ -494,7 +494,7 @@
 
 `string`
 
-***
+---
 
 ### loaderFn()
 
@@ -508,7 +508,7 @@
 
 `Promise`\<`any`[]\>
 
-***
+---
 
 ### refillNullQueryItems()
 
@@ -524,7 +524,7 @@
 
 (`null` \| `Item`)[]
 
-***
+---
 
 ### save()
 
@@ -538,7 +538,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### saveQueryResult()
 
@@ -564,7 +564,7 @@
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### shouldEncode()
 
@@ -578,7 +578,7 @@
 
 `boolean`
 
-***
+---
 
 ### validateRefType()
 

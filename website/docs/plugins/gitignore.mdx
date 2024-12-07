@@ -22,10 +22,8 @@ import { defineConfig } from "@baeta/cli";
 import { gitignorePlugin } from "@baeta/plugin-gitignore";
 
 export default defineConfig({
-  // ... other config  
-  plugins: [
-    gitignorePlugin(),
-  ],
+  // ... other config
+  plugins: [gitignorePlugin()],
 });
 ```
 
@@ -37,6 +35,7 @@ For most use cases, it should be the first plugin in the list, before even the `
 ## How It Works
 
 The plugin automatically:
+
 - Detects all generated files from other Baeta plugins
 - Adds appropriate entries to your `.gitignore` file
 - Updates the `.gitignore` file when the configuration changes

@@ -6,7 +6,7 @@
 
 > **initialConfig**: `LoadedBaetaConfig`
 
-***
+---
 
 ### watchConfig?
 

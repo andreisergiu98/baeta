@@ -6,7 +6,7 @@
 
 > `optional` **prefix**: `string`
 
-***
+---
 
 ### value?
 

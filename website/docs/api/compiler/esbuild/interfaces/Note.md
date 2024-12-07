@@ -6,7 +6,7 @@
 
 > **location**: `null` \| [`Location`](Location.md)
 
-***
+---
 
 ### text
 

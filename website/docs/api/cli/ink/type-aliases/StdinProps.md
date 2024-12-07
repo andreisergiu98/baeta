@@ -4,13 +4,13 @@
 
 ## Type declaration
 
-### internal\_eventEmitter
+### internal_eventEmitter
 
-> `readonly` **internal\_eventEmitter**: `EventEmitter`
+> `readonly` **internal_eventEmitter**: `EventEmitter`
 
-### internal\_exitOnCtrlC
+### internal_exitOnCtrlC
 
-> `readonly` **internal\_exitOnCtrlC**: `boolean`
+> `readonly` **internal_exitOnCtrlC**: `boolean`
 
 ### isRawModeSupported
 

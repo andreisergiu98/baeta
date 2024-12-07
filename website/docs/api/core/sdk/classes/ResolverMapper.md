@@ -16,31 +16,31 @@
 
 > `readonly` **middlewares**: `MiddlewareMap`
 
-***
+---
 
 ### prependedMiddlewares
 
 > `readonly` **prependedMiddlewares**: `MiddlewareMap`
 
-***
+---
 
 ### resolvers
 
 > `readonly` **resolvers**: `ResolversMap`
 
-***
+---
 
 ### scalars
 
 > `readonly` **scalars**: `ScalarsMap`
 
-***
+---
 
 ### typeFields
 
 > `readonly` **typeFields**: `Record`\<`string`, `undefined` \| `string`[]\>
 
-***
+---
 
 ### types
 
@@ -74,7 +74,7 @@
 
 `void`
 
-***
+---
 
 ### addMiddlewareToMap()
 
@@ -104,7 +104,7 @@
 
 `void`
 
-***
+---
 
 ### compose()
 
@@ -114,7 +114,7 @@
 
 `IResolvers`
 
-***
+---
 
 ### getTypeFields()
 
@@ -128,7 +128,7 @@
 
 `string`[]
 
-***
+---
 
 ### getTypes()
 
@@ -138,7 +138,7 @@
 
 `string`[]
 
-***
+---
 
 ### prependMiddleware()
 
@@ -166,7 +166,7 @@
 
 `void`
 
-***
+---
 
 ### registerTypeField()
 
@@ -182,7 +182,7 @@
 
 `void`
 
-***
+---
 
 ### setDefaultFieldResolver()
 
@@ -198,7 +198,7 @@
 
 `void`
 
-***
+---
 
 ### setResolver()
 
@@ -226,7 +226,7 @@
 
 `void`
 
-***
+---
 
 ### setScalar()
 
@@ -242,7 +242,7 @@
 
 `void`
 
-***
+---
 
 ### setSubscription()
 
@@ -270,7 +270,7 @@
 
 `void`
 
-***
+---
 
 ### setTypenameResolver()
 

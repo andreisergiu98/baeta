@@ -8,7 +8,7 @@
 
 Options for the compiler.
 
-***
+---
 
 ### graphql
 
@@ -16,7 +16,7 @@ Options for the compiler.
 
 Options for the graphql generator.
 
-***
+---
 
 ### plugins?
 

@@ -18,7 +18,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`base`](ScanInfo.md#base)
 
-***
+---
 
 ### glob
 
@@ -28,7 +28,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`glob`](ScanInfo.md#glob)
 
-***
+---
 
 ### input
 
@@ -38,7 +38,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`input`](ScanInfo.md#input)
 
-***
+---
 
 ### isBrace
 
@@ -48,7 +48,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`isBrace`](ScanInfo.md#isbrace)
 
-***
+---
 
 ### isBracket
 
@@ -58,7 +58,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`isBracket`](ScanInfo.md#isbracket)
 
-***
+---
 
 ### isExtglob
 
@@ -68,7 +68,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`isExtglob`](ScanInfo.md#isextglob)
 
-***
+---
 
 ### isGlob
 
@@ -78,7 +78,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`isGlob`](ScanInfo.md#isglob)
 
-***
+---
 
 ### isGlobstar
 
@@ -88,7 +88,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`isGlobstar`](ScanInfo.md#isglobstar)
 
-***
+---
 
 ### negated
 
@@ -98,7 +98,7 @@
 
 [`ScanInfo`](ScanInfo.md).[`negated`](ScanInfo.md#negated)
 
-***
+---
 
 ### negatedExtglob
 
@@ -108,13 +108,13 @@
 
 [`ScanInfo`](ScanInfo.md).[`negatedExtglob`](ScanInfo.md#negatedextglob)
 
-***
+---
 
 ### parts
 
 > **parts**: `string`[]
 
-***
+---
 
 ### prefix
 
@@ -124,13 +124,13 @@
 
 [`ScanInfo`](ScanInfo.md).[`prefix`](ScanInfo.md#prefix)
 
-***
+---
 
 ### slashes
 
 > **slashes**: `number`[]
 
-***
+---
 
 ### start
 

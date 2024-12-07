@@ -4,7 +4,7 @@
 
 ## Type Parameters
 
-• **P** *extends* `object`
+• **P** _extends_ `object`
 
 ## Parameters
 

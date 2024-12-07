@@ -4,7 +4,7 @@
 
 <div align="center">
   <h1>Baeta</h1>
-  <a href="https://baeta.io/docs/category/getting-started">Getting Started</a>
+  <a href="https://baeta.io/docs/getting-started/installation">Getting Started</a>
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
   <a href="https://www.baeta.io/">Website</a>
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
@@ -16,8 +16,6 @@
   <br />
   <hr />
 </div>
-
-<br />
 
 # What is Baeta?
 

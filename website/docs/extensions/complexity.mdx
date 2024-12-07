@@ -24,41 +24,51 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 ## Basic Setup
 
-1. Register the Extension
+1. Create the Extension
 
 ```typescript
 import { createExtensions } from "@baeta/core";
 import { complexityExtension } from "@baeta/extension-complexity";
 import type { Context } from "./types/context";
 
+const complexity = complexityExtension<Context>({
+  // Default complexity score for fields
+  defaultComplexity: 1,
+  // Multiplier applied to list fields
+  defaultListMultiplier: 10,
+  // Dynamic limits based on context
+  async limit(ctx) {
+    return {
+      depth: 10, // Maximum query depth
+      breadth: 50, // Maximum number of fields at each level
+      complexity: 1000, // Maximum total complexity score
+    };
+  },
+  // Alternatively, use static limits
+  // limit: {
+  //   depth: 10,
+  //   breadth: 50,
+  //   complexity: 1000,
+  // }
+});
+```
+
+2. Afterwards register it
+
+```typescript
+import { createExtensions } from "@baeta/core";
+import { complexity } from "./complexity-extension";
+import { authExt } from "./auth-extension";
+
 export default createExtensions(
-  //... other extensions
-  complexityExtension<Context>({
-    // Default complexity score for fields
-    defaultComplexity: 1,
-    // Multiplier applied to list fields
-    defaultListMultiplier: 10,
-    // Dynamic limits based on context
-    async limit(ctx) {
-      return {
-        depth: 10, // Maximum query depth
-        breadth: 50, // Maximum number of fields at each level
-        complexity: 1000, // Maximum total complexity score
-      };
-    },
-    // Alternatively, use static limits
-    // limit: {
-    //   depth: 10,
-    //   breadth: 50,
-    //   complexity: 1000,
-    // }
-  }),
+  complexity,
+  authExt,
   //... other extensions
 );
 ```
 
 :::tip
-If you want to check complexity before authorization, place the extension before the authorization extension in the extensions list.
+Consider placing complexity checks before authorization. This can prevent unnecessary permission checks on queries that would be rejected for being too complex anyway.
 :::
 
 2. Point Baeta to registered extensions (if you haven't already)

@@ -76,11 +76,15 @@ import { createExtensions } from "@baeta/core";
 import { authExt } from "./auth-extension";
 
 export default createExtensions(
-  //... other extensions
   authExt,
   //... other extensions
 );
 ```
+
+:::tip
+Authorization checks should be registered first in your chain, as they determine if a request can proceed at all. This ensures unauthorized requests are rejected early in the process.
+The only exception being the `complexity` extension.
+:::
 
 3. Point Baeta to extensions entrypoint (if you haven't already)
 

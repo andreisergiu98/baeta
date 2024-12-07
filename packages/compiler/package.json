@@ -28,13 +28,11 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.js"
     },
     "./esbuild": {
       "types": "./esbuild/index.ts",
-      "import": "./dist/esbuild/index.js",
-      "require": "./dist/esbuild/index.cjs"
+      "default": "./dist/esbuild/index.js"
     }
   },
   "types": "dist/index.d.ts",
@@ -59,20 +57,18 @@
     "typescript": "^5.7.2"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.12.0"
   },
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
+        "default": "./dist/index.js"
       },
       "./esbuild": {
         "types": "./dist/esbuild/index.d.ts",
-        "import": "./dist/esbuild/index.js",
-        "require": "./dist/esbuild/index.cjs"
+        "default": "./dist/esbuild/index.js"
       }
     }
   },

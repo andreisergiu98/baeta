@@ -91,7 +91,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 		]);
 
 		if (workspace.ident !== '@baeta/website') {
-			// workspace.set('type', 'module');
+			workspace.set('type', 'module');
 		}
 
 		if (!workspace.manifest.private) {

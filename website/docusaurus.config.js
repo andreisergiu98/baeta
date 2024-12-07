@@ -1,4 +1,6 @@
 const { themes } = require('prism-react-renderer');
+const { injectTypeDocSidebar } = require('./docusaurus.sidebars.js');
+
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 
@@ -20,13 +22,20 @@ const config = {
 		locales: ['en'],
 	},
 
+	markdown: {
+		format: 'detect',
+	},
+
 	presets: [
 		[
 			'classic',
 			/** @type {import('@docusaurus/preset-classic').Options} */
 			({
 				docs: {
-					sidebarPath: require.resolve('./sidebars.js'),
+					// sidebarPath: require.resolve('./sidebars.js'),
+					async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args }) {
+						return injectTypeDocSidebar(await defaultSidebarItemsGenerator(args));
+					},
 				},
 				pages: {
 					path: 'pages',
@@ -39,6 +48,18 @@ const config = {
 						require.resolve('./style/custom.css'),
 						require.resolve('./style/utilities.css'),
 					],
+				},
+				sitemap: {
+					lastmod: 'date',
+					changefreq: 'weekly',
+					priority: 0.5,
+					ignorePatterns: ['/tags/**'],
+					filename: 'sitemap.xml',
+					createSitemapItems: async (params) => {
+						const { defaultCreateSitemapItems, ...rest } = params;
+						const items = await defaultCreateSitemapItems(rest);
+						return items.filter((item) => !item.url.includes('/page/'));
+					},
 				},
 			}),
 		],
@@ -61,6 +82,21 @@ const config = {
 						label: 'Docs',
 					},
 					{
+						position: 'left',
+						label: 'Examples',
+						href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+					},
+					{
+						href: 'https://github.com/sponsors/andreisergiu98',
+						label: 'Donate',
+						position: 'right',
+					},
+					{
+						href: 'https://discord.gg/j6Y8xRc7ep',
+						label: 'Discord',
+						position: 'right',
+					},
+					{
 						href: 'https://github.com/andreisergiu98/baeta',
 						label: 'GitHub',
 						position: 'right',
@@ -81,6 +117,10 @@ const config = {
 								label: 'Getting Started',
 								to: '/docs/getting-started/installation',
 							},
+							{
+								label: 'Examples',
+								href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+							},
 						],
 					},
 					{
@@ -90,6 +130,14 @@ const config = {
 								label: 'GitHub',
 								href: 'https://github.com/andreisergiu98/baeta',
 							},
+							{
+								label: 'Discord',
+								href: 'https://discord.gg/j6Y8xRc7ep',
+							},
+							{
+								label: 'Donate',
+								href: 'https://github.com/sponsors/andreisergiu98',
+							},
 						],
 					},
 				],
@@ -98,7 +146,25 @@ const config = {
 				theme: lightCodeTheme,
 				darkTheme: darkCodeTheme,
 			},
+			algolia: {
+				appId: '4FC0N9XMY9',
+				apiKey: '4d2e8517e7336f96a0ef90266f9e0f72',
+				indexName: 'baeta',
+			},
 		}),
+	plugins: [
+		[
+			require.resolve('@docusaurus/plugin-client-redirects'),
+			{
+				redirects: [
+					{
+						from: '/docs',
+						to: '/docs/intro',
+					},
+				],
+			},
+		],
+	],
 	webpack: {
 		jsLoader: (isServer) => ({
 			loader: require.resolve('esbuild-loader'),

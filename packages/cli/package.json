@@ -112,5 +112,14 @@
       "--no-warnings",
       "--experimental-transform-types"
     ]
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts",
+      "./ink/index.ts",
+      "./sdk/index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json"
   }
 }

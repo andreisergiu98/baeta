@@ -7,7 +7,22 @@ description: "Configure your Baeta project with TypeScript"
 
 Set up your Baeta project configuration in a few simple steps.
 
-## Setup Configuration File
+## Configuration File
+
+Baeta looks for a configuration file in your project root with one of these names:
+
+- `baeta.js`
+- `.baeta.js`
+- `baeta.mjs`
+- `.baeta.mjs`
+- `baeta.ts` (requires `@baeta/compiler`)
+- `.baeta.ts` (requires `@baeta/compiler`)
+
+:::note
+While Baeta supports **CommonJS**, the configuration file must use **ESM**. If using `.js` file, ensure `"type": "module"` is set in your `package.json`, otherwise use the `.mjs` file extension.
+:::
+
+## Basic Configuration
 
 ### 1. Define Schema Location
 
@@ -55,9 +70,15 @@ export default defineConfig({
 ```
 
 These scripts provide:
+
 - **build**: Builds your project and generates necessary files
 - **generate**: Updates GraphQL types and resolvers
 - **start**: Runs development server with hot reload
 
+:::tip
+Run `baeta generate --help` or `baeta build --help` to see all command options
+:::
+
 ## Next Steps
+
 Once configured, you're ready to [create your first module](./first-module).

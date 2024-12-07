@@ -84,5 +84,13 @@
       "--no-warnings",
       "--experimental-transform-types"
     ]
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts",
+      "./sdk/index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json"
   }
 }

@@ -69,10 +69,22 @@ Query.users(() => {
 });
 ```
 
-#### 3. Add caching
+#### 3. Add authorization
+```typescript
+const { Query, Mutation } = getUserModule();
+
+Query.users.$auth({
+    $or: {
+        isPublic: true,
+        isLoggedIn: true,
+    },
+});
+```
+
+#### 4. Add caching
 
 ```typescript
-import { getUserModule } from "./typedef.ts";
+import { getUserModule } from "./typedef";
 
 const { User, Query } = getUserModule();
 
@@ -83,14 +95,18 @@ Query.users.$useCache(userCache);
 ```
 
 ## Documentation
-- [Website](https://baeta.io)
-- [Official Documentation](https://baeta.io/docs/intro/)
-- [Examples](https://github.com/andreisergiu98/baeta/tree/main/examples)
 
+- [Website](https://baeta.io)
+- [Documentation](https://baeta.io/docs/intro/)
+- [Examples](https://github.com/andreisergiu98/baeta/tree/main/examples)
 
 ## Compatibility
 
 Baeta is compatible with all GraphQL servers, which makes it easy to integrate with your existing stack. It works seamlessly with popular GraphQL server libraries such as **Graphql Yoga** and **Apollo Server**, as well as other popular tools like **Prisma**, **Drizzle** and **Kysely**.
+
+## Credits
+
+Baeta was inspired by several amazing projects and people in the GraphQL ecosystem. Check out our [Credits page](https://baeta.io/docs/credits) to learn more about the individuals and projects that influenced Baeta's development.
 
 ## License
 

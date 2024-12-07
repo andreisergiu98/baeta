@@ -31,7 +31,7 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
  * This rule will enforce consistent metadata exports across all packages.
  * @param {import('@yarnpkg/types').Yarn.Constraints.Workspace} workspace
  */
-function enforceConsistentMetadataExports(workspace) {
+function enforceConsistentEntries(workspace) {
 	if (!workspace.manifest.exports) {
 		workspace.unset('exports');
 		return;
@@ -39,6 +39,7 @@ function enforceConsistentMetadataExports(workspace) {
 
 	const exports = {};
 	const publishExports = {};
+	const typedocEntries = [];
 
 	for (const key in workspace.manifest.exports) {
 		const dir = key === '.' ? '' : key.replace('./', '');
@@ -56,10 +57,13 @@ function enforceConsistentMetadataExports(workspace) {
 			types: typesEntry,
 			default: importEntry,
 		};
+
+		typedocEntries.push(`./${path.join(dir, 'index.ts')}`);
 	}
 
 	workspace.set('exports', exports);
 	workspace.set('publishConfig.exports', publishExports);
+	workspace.set('typedocOptions.entryPoints', typedocEntries);
 }
 
 /**
@@ -105,7 +109,10 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('ava.extensions.ts', 'module');
 			workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
 
-			enforceConsistentMetadataExports(workspace);
+			enforceConsistentEntries(workspace);
+
+			workspace.set('typedocOptions.readme', 'none');
+			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
 		}
 	}
 }

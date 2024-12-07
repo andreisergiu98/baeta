@@ -27,6 +27,7 @@ export class CacheExtension extends Extension {
 			$createCache: (...args: CreateCacheArgs<Root>) => {
 				const [options] = args;
 				const mergedOptions = {
+					ttl: 3600,
 					...this.defaultOptions,
 					...options,
 				};

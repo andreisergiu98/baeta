@@ -76,5 +76,12 @@
   },
   "dependencies": {
     "@baeta/errors": "workspace:^"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json"
   }
 }

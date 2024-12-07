@@ -84,7 +84,9 @@ function validateValue<
 	}
 
 	if (value == null && options.required === true) {
-		throw new Error(`Env param '${key}' is required and doesn't have a default value!`);
+		throw new Error(
+			`Env param '${key}' is required, not provided and doesn't have a default value!`,
+		);
 	}
 
 	// biome-ignore lint/suspicious/useValidTypeof: type needs to be checked dynamically

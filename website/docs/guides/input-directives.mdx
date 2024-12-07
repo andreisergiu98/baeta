@@ -1,0 +1,84 @@
+---
+sidebar_position: 110
+---
+
+# Input Directives
+
+While GraphQL doesn't natively support modifying query arguments and inputs through directives, Baeta provides a utility called Input Directives that enables this functionality.
+
+## Target Types
+
+Input directives can target different types of inputs:
+
+- `scalar`: For primitive values like numbers, strings, etc.
+- `list`: For array values
+- `object`: For complex object inputs
+
+## Defining Input Directives
+
+First, define your input directive in the schema:
+
+`src/modules/directives/input-directives.gql`
+
+```graphql
+directive @increment(by: Int!) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+type Query {
+  testIncrementDirective(value: Int! @increment(by: 1)): Int!
+}
+```
+
+## Implementing Input Directives
+
+Use the `createInputDirective` utility from `@baeta/core` to implement the directive's behavior:
+
+`src/modules/directives/input-directives.ts`
+
+```typescript
+import { createInputDirective } from "@baeta/core";
+import type { Context } from "../../types/context";
+import { getCustomInputDirectiveModule } from "./typedef";
+
+const { $directive, Query } = getCustomInputDirectiveModule();
+
+const incrementDirective = createInputDirective<{ by: number }, Context>({
+  name: "increment",
+  target: "scalar",
+  resolve: ({ directiveConfig, getValue, setValue }) => {
+    const value = getValue();
+    if (typeof value === "number") {
+      setValue(value + directiveConfig.by);
+    }
+  },
+});
+
+$directive(incrementDirective);
+
+Query.testIncrementDirective(({ args }) => {
+  return args.value;
+});
+```
+
+## How It Works
+
+The input directive processes the input value before it reaches the resolver:
+
+1. `getValue()` retrieves the original input value.
+2. The directive logic modifies the value.
+3. `setValue()` updates the input value.
+
+## Usage
+
+When querying, the directive will modify the input before it reaches the resolver:
+
+```graphql
+query {
+  testIncrementDirective(value: 5) {
+    # value will be incremented to 6 before reaching the resolver
+  }
+}
+```
+
+This feature is particularly useful for input validation and data transformation.
+
+For more examples and implementations, visit the [Baeta directives examples](https://github.com/andreisergiu98/baeta/tree/main/examples/directives).

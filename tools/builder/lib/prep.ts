@@ -141,6 +141,17 @@ async function createNestedPackages() {
 	return created;
 }
 
+function copyReadme() {
+	const readmePath = join(process.cwd(), '../../README.md');
+	const readmeDist = join(process.cwd(), 'README.md');
+	return fs.copyFile(readmePath, readmeDist);
+}
+
+function removeReadme() {
+	const readmeDist = join(process.cwd(), 'README.md');
+	return fs.unlink(readmeDist);
+}
+
 async function run() {
 	const arg = process.argv[2];
 
@@ -149,7 +160,7 @@ async function run() {
 	}
 
 	if (arg === '--clean') {
-		return removeNestedPackages();
+		return Promise.all([removeNestedPackages(), removeReadme()]);
 	}
 
 	const manifest = await getManifest();
@@ -159,7 +170,7 @@ async function run() {
 		process.exit(1);
 	}
 
-	createNestedPackages();
+	return Promise.all([copyReadme(), createNestedPackages()]);
 }
 
-run();
+run().catch(console.error);

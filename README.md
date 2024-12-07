@@ -1,8 +1,25 @@
 <p align="center">
-  <img src="./website/static/img/logo-baeta.svg" alt="Baeta Logo" width="150"/>
+  <img src="https://raw.githubusercontent.com/andreisergiu98/baeta/refs/heads/main/website/static/img/logo-baeta.svg" alt="Baeta Logo" width="150"/>
 </p>
 
-# Baeta
+<div align="center">
+  <h1>Baeta</h1>
+  <a href="https://baeta.io/docs/category/getting-started">Getting Started</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://www.baeta.io/">Website</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://baeta.io/docs/intro">Docs</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://github.com/andreisergiu98/baeta/tree/main/examples">Examples</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://discord.gg/BHFXHvyj">Discord</a>
+  <br />
+  <hr />
+</div>
+
+<br />
+
+# What is Baeta?
 
 Building GraphQL APIs shouldn't be complicated. **Baeta** is a modern, modular, open-source GraphQL framework designed with flexibility in mind. It follows a granular approach where you only add what you need, helping developers focus on what matters most - creating powerful, scalable APIs without the boilerplate.
 
@@ -94,12 +111,6 @@ export const userCache = User.$createCache();
 Query.user.$useCache(userCache);
 Query.users.$useCache(userCache);
 ```
-
-## Documentation
-
-- [Website](https://baeta.io)
-- [Documentation](https://baeta.io/docs/intro/)
-- [Examples](https://github.com/andreisergiu98/baeta/tree/main/examples)
 
 ## Compatibility
 

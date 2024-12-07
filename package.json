@@ -39,7 +39,7 @@
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
     "linter": "biome check --organize-imports-enabled=true .",
-    "prepare": "husky install",
+    "prepare": "husky",
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",

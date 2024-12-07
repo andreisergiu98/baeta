@@ -4,7 +4,7 @@ export * from 'tsup';
 
 export function defineConfig(config) {
 	return originalDefineConfig({
-		format: ['esm', 'cjs'],
+		format: 'esm',
 		target: 'es2024',
 		dts: true,
 		clean: true,

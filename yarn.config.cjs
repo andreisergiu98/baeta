@@ -44,20 +44,17 @@ function enforceConsistentMetadataExports(workspace) {
 		const dir = key === '.' ? '' : key.replace('./', '');
 
 		const importEntry = `./${path.join('./dist', dir, 'index.js')}`;
-		const requireEntry = `./${path.join('./dist', dir, 'index.cjs')}`;
 		const typesEntry = `./${path.join('./dist', dir, 'index.d.ts')}`;
 		const devTypesEntry = `./${path.join(dir, 'index.ts')}`;
 
 		exports[key] = {
 			types: devTypesEntry,
-			import: importEntry,
-			require: requireEntry,
+			default: importEntry,
 		};
 
 		publishExports[key] = {
 			types: typesEntry,
-			import: importEntry,
-			require: requireEntry,
+			default: importEntry,
 		};
 	}
 
@@ -99,7 +96,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
-			workspace.set('engines.node', '>=22.0.0');
+			workspace.set('engines.node', '>=22.12.0');
 			workspace.set('scripts.build', 'tsup');
 			workspace.set('scripts.types', 'tsc --noEmit');
 			workspace.set('scripts.prepack', 'prep');

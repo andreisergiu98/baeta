@@ -70,14 +70,15 @@ Query.users(() => {
 ```
 
 #### 3. Add authorization
+
 ```typescript
 const { Query, Mutation } = getUserModule();
 
 Query.users.$auth({
-    $or: {
-        isPublic: true,
-        isLoggedIn: true,
-    },
+  $or: {
+    isPublic: true,
+    isLoggedIn: true,
+  },
 });
 ```
 

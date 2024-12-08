@@ -2478,6 +2478,7 @@ __metadata:
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.10.1"
+    create-baeta: "workspace:^"
     graphql: "npm:^16.9.0"
     graphql-yoga: "npm:^5.10.4"
     typescript: "npm:^5.7.2"
@@ -2801,9 +2802,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/template-apollo@workspace:packages/create-baeta/templates/apollo":
+"@baeta/template-apollo@workspace:packages/create-baeta/meta/apollo":
   version: 0.0.0-use.local
-  resolution: "@baeta/template-apollo@workspace:packages/create-baeta/templates/apollo"
+  resolution: "@baeta/template-apollo@workspace:packages/create-baeta/meta/apollo"
   dependencies:
     "@apollo/server": "npm:^4.11.2"
     "@baeta/cli": "workspace:^"
@@ -2818,9 +2819,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/template-yoga@workspace:packages/create-baeta/templates/yoga":
+"@baeta/template-yoga@workspace:packages/create-baeta/meta/yoga":
   version: 0.0.0-use.local
-  resolution: "@baeta/template-yoga@workspace:packages/create-baeta/templates/yoga"
+  resolution: "@baeta/template-yoga@workspace:packages/create-baeta/meta/yoga"
   dependencies:
     "@baeta/cli": "workspace:^"
     "@baeta/compiler": "workspace:^"
@@ -9548,7 +9549,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-baeta@workspace:packages/create-baeta":
+"create-baeta@workspace:^, create-baeta@workspace:packages/create-baeta":
   version: 0.0.0-use.local
   resolution: "create-baeta@workspace:packages/create-baeta"
   dependencies:

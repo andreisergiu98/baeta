@@ -30,7 +30,7 @@
     "packages/*",
     "tools/*",
     "examples/*",
-    "packages/create-baeta/templates/*"
+    "packages/create-baeta/meta/*"
   ],
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",

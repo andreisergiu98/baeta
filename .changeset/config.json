@@ -17,6 +17,7 @@
   "fixed": [],
   "linked": [],
   "ignore": [
-    "@baeta/examples*"
+    "@baeta/examples*",
+    "@baeta/template*"
   ]
 }

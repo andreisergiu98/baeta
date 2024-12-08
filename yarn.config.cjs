@@ -72,6 +72,10 @@ function enforceConsistentEntries(workspace) {
  */
 function enforceWorkspaceMetadata({ Yarn }) {
 	for (const workspace of Yarn.workspaces()) {
+		if (workspace.manifest.name?.startsWith('@baeta/template-')) {
+			continue;
+		}
+
 		workspace.set('homepage', 'https://github.com/andreisergiu98/baeta#readme');
 		workspace.set('bugs.url', 'https://github.com/andreisergiu98/baeta/issues');
 
@@ -101,8 +105,11 @@ function enforceWorkspaceMetadata({ Yarn }) {
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
 			workspace.set('engines.node', '>=22.12.0');
-			workspace.set('scripts.build', 'tsup');
-			workspace.set('scripts.types', 'tsc --noEmit');
+
+			if (workspace.manifest.name !== 'create-baeta') {
+				workspace.set('scripts.build', 'tsup');
+				workspace.set('scripts.types', 'tsc --noEmit');
+			}
 			workspace.set('scripts.prepack', 'prep');
 			workspace.set('scripts.postpack', 'prep --clean');
 

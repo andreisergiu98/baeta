@@ -3,6 +3,6 @@
 
 import { registerDirectives } from "@baeta/directives";
 
-import { getBaetaDirectivesModule } from "./typedef";
+import { getBaetaDirectivesModule } from "./typedef.ts";
 
 registerDirectives(getBaetaDirectivesModule());

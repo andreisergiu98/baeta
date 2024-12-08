@@ -11,5 +11,9 @@ export const packageManagers = Object.keys(lockfileNames) as PackageManager[];
 
 export type PackageManager = keyof typeof lockfileNames;
 
+export type JavaScriptRuntime = 'node' | 'deno' | 'bun';
+
+export const defaultJavaScriptRuntime = 'node';
+
 export const gitignoreUrl =
 	'https://raw.githubusercontent.com/github/gitignore/refs/heads/main/Node.gitignore';

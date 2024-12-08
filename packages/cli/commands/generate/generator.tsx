@@ -6,14 +6,18 @@ import {
 	getGeneratorPlugins,
 } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useConfig } from '../../sdk/index.ts';
+import type { TextOutput } from '../../types/text.ts';
 import { flattenArrays } from '../../utils/array.ts';
+import { type PtyProcess, startProcessWithPty } from '../../utils/process.ts';
+import { AppStatus } from '../build/app-status.tsx';
 import { type GeneratorPluginName, GeneratorStatus } from './generator-status.tsx';
 
 export interface GeneratorProps {
 	watch?: boolean;
 	skipInitial?: boolean;
+	run?: string;
 	onSuccess?: () => void;
 }
 
@@ -31,6 +35,36 @@ export function Generator(props: GeneratorProps) {
 		return [...generatorPlugins, graphqlPlugin()];
 	}, [config.plugins]);
 
+	const runRef = useRef<PtyProcess | null>(null);
+	const [runOutput, setRunOutput] = useState<TextOutput[]>([]);
+
+	const runCommand = useCallback(() => {
+		if (props.run == null) {
+			return;
+		}
+
+		if (runRef.current && !runRef.current.didExit) {
+			return;
+		}
+
+		runRef.current = startProcessWithPty(
+			props.run,
+			(data, clear) => {
+				setRunOutput((current) => {
+					const output = {
+						id: randomUUID(),
+						text: data,
+					};
+					if (clear) {
+						return [output];
+					}
+					return [...current, output];
+				});
+			},
+			() => {},
+		);
+	}, [props.run]);
+
 	const getHooks = useCallback((): GeneratorHooks => {
 		return {
 			onStart: () => {
@@ -38,6 +72,7 @@ export function Generator(props: GeneratorProps) {
 				setStartedPlugins([]);
 				setFinishedPlugins([]);
 				setError(undefined);
+				runCommand();
 			},
 			onEnd: () => {
 				setRunning(false);
@@ -76,7 +111,7 @@ export function Generator(props: GeneratorProps) {
 				}
 			},
 		};
-	}, [onSuccess]);
+	}, [onSuccess, runCommand]);
 
 	useEffect(() => {
 		if (!config) {
@@ -107,12 +142,15 @@ export function Generator(props: GeneratorProps) {
 	}, [config, watch, plugins, getHooks]);
 
 	return (
-		<GeneratorStatus
-			error={error}
-			running={running}
-			watching={props.watch}
-			startedPlugins={startedPlugins}
-			finishedPlugins={finishedPlugins}
-		/>
+		<>
+			<GeneratorStatus
+				error={error}
+				running={running}
+				watching={props.watch}
+				startedPlugins={startedPlugins}
+				finishedPlugins={finishedPlugins}
+			/>
+			{props.run && <AppStatus output={runOutput} />}
+		</>
 	);
 }

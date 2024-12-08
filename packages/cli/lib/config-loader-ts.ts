@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { dynamicImportCompiler } from '../utils/compiler.ts';
@@ -25,9 +26,28 @@ async function loadConfigFromBundledFile(
 	}
 }
 
+let cacheIndex = 1;
+let importFailed: boolean | undefined;
+async function tryImportTypeScriptConfig(configPath: string): Promise<BaetaOptions | undefined> {
+	try {
+		const modulePath = path.resolve(process.cwd(), configPath);
+		const module = await dynamicImport<ConfigModule>(`${modulePath}?v${cacheIndex++}`);
+		return selectConfigFromModule(module);
+	} catch (e) {
+		importFailed = true;
+	}
+}
+
 export async function importTypeScriptConfig(
 	configPath: string,
 ): Promise<BaetaOptions | undefined> {
+	if (importFailed !== true) {
+		const config = await tryImportTypeScriptConfig(configPath);
+		if (config != null) {
+			return config;
+		}
+	}
+
 	const compiler = await dynamicImportCompiler().catch((err) => null);
 
 	if (compiler == null) {

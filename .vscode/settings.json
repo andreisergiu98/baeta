@@ -6,7 +6,7 @@
     "**/.turbo": true,
     "**/.yarn": true,
     "**/dist": true,
-    "**/build": true
+    "website/build": true
   },
   "files.exclude": {
     "**/.docusaurus": true,
@@ -14,7 +14,7 @@
     "**/.turbo": true,
     "**/node_modules": true,
     "**/dist": true,
-    "**/build": true,
+    "website/build": true,
     "website/.yarn": true
   },
   "cSpell.words": [

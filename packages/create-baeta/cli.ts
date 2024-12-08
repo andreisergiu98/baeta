@@ -22,7 +22,7 @@ yargs(hideBin(process.argv))
 	.version(version)
 	.command({
 		command: '* [appName] [template] [rootDir]',
-		describe: 'Initialize website',
+		describe: 'Initialize Baeta application',
 		builder: (yargs) => {
 			return yargs
 				.option('package-manager', {

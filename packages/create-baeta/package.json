@@ -35,7 +35,7 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "templates",
+    "templates/**/*",
     "package.json"
   ],
   "scripts": {

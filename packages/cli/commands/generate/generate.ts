@@ -5,6 +5,7 @@ import { Generator } from './generator.tsx';
 interface Args {
 	watch?: boolean;
 	skipInitial?: boolean;
+	run?: string;
 }
 
 export function createGenerateCommand(config?: LoadedBaetaConfig) {
@@ -17,12 +18,18 @@ export function createGenerateCommand(config?: LoadedBaetaConfig) {
 				.option('watch', {
 					alias: 'w',
 					boolean: true,
-					describe: 'watch for changes',
+					describe: 'Watch for changes',
 				})
 				.option('skipInitial', {
 					alias: 's',
 					boolean: true,
-					describe: 'skip initial generation when running in watch mode',
+					describe: 'Skip initial generation when running in watch mode',
+				})
+				.option('run', {
+					alias: 'r',
+					string: true,
+					describe:
+						"Command to run after generation. If it's a long running process (ie. `bun --watch`), it will be kept alive.",
 				});
 		},
 		handler: createHandler(config),
@@ -41,6 +48,7 @@ function createHandler(config?: LoadedBaetaConfig) {
 			{
 				watch: args.watch,
 				skipInitial: args.skipInitial,
+				run: args.run,
 			},
 			{
 				watchConfig: args.watch,

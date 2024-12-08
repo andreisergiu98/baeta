@@ -6,14 +6,19 @@ import {
 	getGeneratorPlugins,
 } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { Subprocess } from 'execa';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useConfig } from '../../sdk/index.ts';
+import type { TextOutput } from '../../types/text.ts';
 import { flattenArrays } from '../../utils/array.ts';
+import { startProcess } from '../../utils/process.ts';
+import { AppStatus } from '../build/app-status.tsx';
 import { type GeneratorPluginName, GeneratorStatus } from './generator-status.tsx';
 
 export interface GeneratorProps {
 	watch?: boolean;
 	skipInitial?: boolean;
+	run?: string;
 	onSuccess?: () => void;
 }
 
@@ -30,6 +35,33 @@ export function Generator(props: GeneratorProps) {
 		const generatorPlugins = getGeneratorPlugins(flattenArrays(config.plugins ?? []));
 		return [...generatorPlugins, graphqlPlugin()];
 	}, [config.plugins]);
+
+	const runRef = useRef<Subprocess | null>(null);
+	const [runOutput, setRunOutput] = useState<TextOutput[]>([]);
+
+	const runCommand = useCallback(() => {
+		if (props.run == null) {
+			return;
+		}
+
+		if (runRef.current && runRef.current.exitCode == null) {
+			return;
+		}
+
+		runRef.current = startProcess(
+			props.run,
+			(data) => {
+				setRunOutput((current) => [
+					...current,
+					{
+						id: randomUUID(),
+						text: data,
+					},
+				]);
+			},
+			() => {},
+		);
+	}, [props.run]);
 
 	const getHooks = useCallback((): GeneratorHooks => {
 		return {
@@ -107,12 +139,15 @@ export function Generator(props: GeneratorProps) {
 	}, [config, watch, plugins, getHooks]);
 
 	return (
-		<GeneratorStatus
-			error={error}
-			running={running}
-			watching={props.watch}
-			startedPlugins={startedPlugins}
-			finishedPlugins={finishedPlugins}
-		/>
+		<>
+			<GeneratorStatus
+				error={error}
+				running={running}
+				watching={props.watch}
+				startedPlugins={startedPlugins}
+				finishedPlugins={finishedPlugins}
+			/>
+			{props.run && <AppStatus output={runOutput} />}
+		</>
 	);
 }

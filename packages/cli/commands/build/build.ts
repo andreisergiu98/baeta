@@ -19,21 +19,21 @@ export function createBuildCommand(config?: LoadedBaetaConfig) {
 				.option('watch', {
 					alias: 'w',
 					boolean: true,
-					describe: 'watch for changes',
+					describe: 'Watch for changes',
 				})
 				.options('generate', {
 					alias: 'g',
 					boolean: true,
-					describe: 'run generator before building',
+					describe: 'Run generator before building',
 				})
 				.option('onSuccess', {
 					string: true,
-					describe: 'command to run on a successful build',
+					describe: 'Command to run on a successful build',
 				})
 				.option('onError', {
 					alias: 'f',
 					string: true,
-					describe: 'command to run on a build error',
+					describe: 'Command to run on a build error',
 				});
 		},
 		handler: createHandler(config),

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import semver from 'semver';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';

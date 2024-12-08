@@ -32,7 +32,6 @@ async function tryImportTypeScriptConfig(configPath: string): Promise<BaetaOptio
 	try {
 		const modulePath = path.resolve(process.cwd(), configPath);
 		const module = await dynamicImport<ConfigModule>(`${modulePath}?v${cacheIndex++}`);
-		console.log('Imported TypeScript config');
 		return selectConfigFromModule(module);
 	} catch (e) {
 		importFailed = true;

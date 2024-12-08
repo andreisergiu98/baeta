@@ -3,10 +3,8 @@ import { fileURLToPath } from 'node:url';
 import { logger } from '@docusaurus/logger';
 import fs from 'fs-extra';
 import prompts, { type Choice } from 'prompts';
-import apolloPackageJson from '../meta/apollo/package.json';
-import yogaPackageJson from '../meta/yoga/package.json';
-import dependenciesVersions from '../versions.json';
-import { gitignoreUrl } from './constants.ts';
+import { type JavaScriptRuntime, gitignoreUrl } from './constants.ts';
+import { getPackageJson } from './package-json.ts';
 import { createTsconfig } from './tsconfig.ts';
 
 const recommendedTemplate = 'yoga';
@@ -15,43 +13,10 @@ const templatesDir = fileURLToPath(new URL('../templates', import.meta.url));
 type Template = {
 	name: string;
 	path: string;
-	packageJson?: string;
+	packageJsn?: string;
 };
 
-function createPackageJSON(
-	appName: string,
-	packageJson: {
-		name: string;
-		dependencies: Record<string, string>;
-		devDependencies: Record<string, string>;
-	},
-) {
-	const meta = structuredClone(packageJson);
-
-	for (const [dep, version] of Object.entries(dependenciesVersions)) {
-		if (dep in meta.dependencies) {
-			meta.dependencies[dep] = version;
-		} else if (dep in packageJson.devDependencies) {
-			meta.devDependencies[dep] = version;
-		}
-	}
-
-	meta.name = appName;
-
-	return JSON.stringify(meta, null, 2);
-}
-
-function getPackageJson(appName: string, templateName: string) {
-	if (templateName === 'yoga') {
-		return createPackageJSON(appName, yogaPackageJson);
-	}
-
-	if (templateName === 'apollo') {
-		return createPackageJSON(appName, apolloPackageJson);
-	}
-}
-
-async function readTemplates(appName: string): Promise<Template[]> {
+async function readTemplates(): Promise<Template[]> {
 	const dirContents = await fs.readdir(templatesDir);
 
 	const templates = dirContents
@@ -59,7 +24,6 @@ async function readTemplates(appName: string): Promise<Template[]> {
 		.map((template) => ({
 			name: template,
 			path: path.join(templatesDir, template),
-			packageJson: getPackageJson(appName, template),
 		}));
 
 	return templates.sort(
@@ -112,8 +76,8 @@ async function fetchGitignore() {
 	} catch (error) {}
 }
 
-export async function getTemplate(appName: string, reqTemplate: string | undefined) {
-	const templates = await readTemplates(appName);
+export async function getTemplate(reqTemplate: string | undefined) {
+	const templates = await readTemplates();
 
 	const userProvided = reqTemplate ? templates.find((t) => t.name === reqTemplate) : null;
 	const template = userProvided ?? (await askTemplateChoice({ templates }));
@@ -125,15 +89,22 @@ export async function getTemplate(appName: string, reqTemplate: string | undefin
 	return template;
 }
 
-export async function copyTemplate(template: Template, dest: string) {
+export async function copyTemplate(
+	appName: string,
+	runtime: JavaScriptRuntime,
+	template: Template,
+	dest: string,
+) {
 	await fs.copy(path.join(templatesDir, 'shared'), dest);
 
 	await fs.copy(template.path, dest, {
 		filter: async (filePath) => !(await fs.lstat(filePath)).isSymbolicLink(),
 	});
 
-	if (template.packageJson) {
-		await fs.writeFile(join(dest, 'package.json'), template.packageJson);
+	const packageJson = getPackageJson(appName, runtime, template.name);
+
+	if (packageJson) {
+		await fs.writeFile(join(dest, 'package.json'), packageJson);
 	}
 
 	await fs.writeFile(join(dest, 'tsconfig.json'), JSON.stringify(createTsconfig(), null, 2));

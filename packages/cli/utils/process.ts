@@ -1,5 +1,6 @@
 import { Writable } from 'node:stream';
 import { type Subprocess, execa, parseCommandString } from 'execa';
+import pty from 'node-pty';
 import kill from 'tree-kill';
 
 export async function killProcesses(processes: Subprocess[]) {
@@ -65,6 +66,41 @@ export function startProcess(
 	return child;
 }
 
+export type PtyProcess = ReturnType<typeof startProcessWithPty>;
+
+export function startProcessWithPty(
+	command: string,
+	stdout: (data: string, clear: boolean) => void,
+	onError: (err: unknown) => void,
+) {
+	const [file, ...args] = parseCommandString(command);
+
+	const ptyProc = pty.spawn(file, args, {
+		cwd: process.cwd(),
+		env: process.env,
+		cols: process.stdout.columns,
+		rows: process.stdout.rows,
+	});
+
+	process.stdout.on('resize', () => {
+		ptyProc.resize(process.stdout.columns, process.stdout.rows);
+	});
+
+	ptyProc.onData((data) => {
+		stdout(data, containsClearSequence(data));
+	});
+
+	const procData = {
+		didExit: false,
+	};
+
+	ptyProc.onExit(() => {
+		procData.didExit = true;
+	});
+
+	return procData;
+}
+
 function createStream(onData: (data: string) => void) {
 	const stream = new Writable({
 		write(chunk, encoding, next) {
@@ -73,4 +109,20 @@ function createStream(onData: (data: string) => void) {
 		},
 	});
 	return stream;
+}
+
+const CLEAR_SEQUENCES = [
+	'\x1bc', // Full reset (RIS)
+	'\x1b[H\x1b[2J', // Clear screen and move to home
+	'\x1b[2J', // Clear entire screen
+	'\x1b[3J', // Clear screen and scrollback buffer
+	'\x1b[H\x1b[J', // Alternative clear sequence
+	'\x1b[0f\x1b[J', // Another variant
+	'\x1b[2K', // Clear current line
+	'\x1b[H', // Move to home position
+	'\r\x1b[K', // Carriage return + clear line
+];
+
+function containsClearSequence(data: string) {
+	return CLEAR_SEQUENCES.some((seq) => data.includes(seq));
 }

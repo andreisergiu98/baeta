@@ -6,12 +6,11 @@ import {
 	getGeneratorPlugins,
 } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
-import type { Subprocess } from 'execa';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useConfig } from '../../sdk/index.ts';
 import type { TextOutput } from '../../types/text.ts';
 import { flattenArrays } from '../../utils/array.ts';
-import { startProcess } from '../../utils/process.ts';
+import { type PtyProcess, startProcessWithPty } from '../../utils/process.ts';
 import { AppStatus } from '../build/app-status.tsx';
 import { type GeneratorPluginName, GeneratorStatus } from './generator-status.tsx';
 
@@ -36,7 +35,7 @@ export function Generator(props: GeneratorProps) {
 		return [...generatorPlugins, graphqlPlugin()];
 	}, [config.plugins]);
 
-	const runRef = useRef<Subprocess | null>(null);
+	const runRef = useRef<PtyProcess | null>(null);
 	const [runOutput, setRunOutput] = useState<TextOutput[]>([]);
 
 	const runCommand = useCallback(() => {
@@ -44,20 +43,23 @@ export function Generator(props: GeneratorProps) {
 			return;
 		}
 
-		if (runRef.current && runRef.current.exitCode == null) {
+		if (runRef.current && !runRef.current.didExit) {
 			return;
 		}
 
-		runRef.current = startProcess(
+		runRef.current = startProcessWithPty(
 			props.run,
-			(data) => {
-				setRunOutput((current) => [
-					...current,
-					{
+			(data, clear) => {
+				setRunOutput((current) => {
+					const output = {
 						id: randomUUID(),
 						text: data,
-					},
-				]);
+					};
+					if (clear) {
+						return [output];
+					}
+					return [...current, output];
+				});
 			},
 			() => {},
 		);
@@ -70,6 +72,7 @@ export function Generator(props: GeneratorProps) {
 				setStartedPlugins([]);
 				setFinishedPlugins([]);
 				setError(undefined);
+				runCommand();
 			},
 			onEnd: () => {
 				setRunning(false);
@@ -108,7 +111,7 @@ export function Generator(props: GeneratorProps) {
 				}
 			},
 		};
-	}, [onSuccess]);
+	}, [onSuccess, runCommand]);
 
 	useEffect(() => {
 		if (!config) {

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "baeta build --generate",
-    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
+    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app.js'"
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
@@ -18,6 +18,8 @@
     "@baeta/cli": "workspace:^",
     "@baeta/compiler": "workspace:^",
     "@baeta/plugin-autoload": "workspace:^",
+    "@types/bun": "^1.1.14",
+    "@types/deno": "^2.0.0",
     "@types/node": "^22.10.1",
     "typescript": "^5.7.2"
   }

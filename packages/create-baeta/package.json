@@ -42,7 +42,7 @@
     "build:versions": "node --no-warnings --experimental-transform-types ./scripts/version-manifest.ts",
     "prepack": "prep",
     "postpack": "prep --clean",
-    "types": "tsc --noEmit"
+    "types": "yarn build:versions && tsc --noEmit"
   },
   "dependencies": {
     "@docusaurus/logger": "^3.6.3",

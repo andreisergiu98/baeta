@@ -105,10 +105,11 @@ function enforceWorkspaceMetadata({ Yarn }) {
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
 			workspace.set('engines.node', '>=22.12.0');
+
 			if (workspace.manifest.name !== 'create-baeta') {
 				workspace.set('scripts.build', 'tsup');
+				workspace.set('scripts.types', 'tsc --noEmit');
 			}
-			workspace.set('scripts.types', 'tsc --noEmit');
 			workspace.set('scripts.prepack', 'prep');
 			workspace.set('scripts.postpack', 'prep --clean');
 

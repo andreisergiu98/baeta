@@ -29,7 +29,8 @@
     "website",
     "packages/*",
     "tools/*",
-    "examples/*"
+    "examples/*",
+    "packages/create-baeta/templates/*"
   ],
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",

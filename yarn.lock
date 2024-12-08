@@ -2478,7 +2478,6 @@ __metadata:
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.10.1"
-    create-baeta: "workspace:^"
     graphql: "npm:^16.9.0"
     graphql-yoga: "npm:^5.10.4"
     typescript: "npm:^5.7.2"
@@ -9549,7 +9548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-baeta@workspace:^, create-baeta@workspace:packages/create-baeta":
+"create-baeta@workspace:packages/create-baeta":
   version: 0.0.0-use.local
   resolution: "create-baeta@workspace:packages/create-baeta"
   dependencies:

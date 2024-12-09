@@ -5,6 +5,7 @@ import supportsColor from 'supports-color';
 import { getAppName } from './app-name.ts';
 import type { PackageManager } from './constants.ts';
 import { getInstallCommand, getPackageManager } from './package-manager.ts';
+import { getRuntime } from './runtime.ts';
 import { copyTemplate, getTemplate } from './templates.ts';
 
 interface Args {
@@ -19,12 +20,14 @@ export async function handler(args: Args) {
 	const appName = await getAppName(args.appName, args.rootDir);
 	const dest = path.resolve(args.rootDir, appName);
 
-	const template = await getTemplate(appName, args.template);
+	const template = await getTemplate(args.template);
+
+	const runtime = await getRuntime();
 
 	logger.info('Creating new Baeta project...');
 
 	try {
-		await copyTemplate(template, dest);
+		await copyTemplate(appName, runtime, template, dest);
 	} catch (err) {
 		logger.error`Copying Baeta template name=${template.name} failed!`;
 		throw err;

@@ -78,7 +78,7 @@ export interface GeneratorOptions {
 	/**
 	 * File extension for generated import statements.
 	 */
-	importExtension?: '.js' | '.ts';
+	importExtension?: '.js' | '.ts' | false;
 }
 
 export interface NormalizedGeneratorOptions {
@@ -119,7 +119,8 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 		scalars: options.scalars,
 		fileOptions: options.fileOptions,
 		loaders: options.loaders,
-		importExtension: options.importExtension,
+		importExtension:
+			options.importExtension === false ? undefined : (options.importExtension ?? '.ts'),
 	};
 }
 

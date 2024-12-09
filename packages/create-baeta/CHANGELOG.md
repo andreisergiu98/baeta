@@ -1,5 +1,11 @@
 # create-baeta
 
+## 0.0.3
+
+### Patch Changes
+
+- [`bcbfb49`](https://github.com/andreisergiu98/baeta/commit/bcbfb49b16daf5d6f195ba273f52b1aa89602c1c) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix yoga entrypoint for bun and deno
+
 ## 0.0.2
 
 ### Patch Changes

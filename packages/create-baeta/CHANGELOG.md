@@ -1,5 +1,11 @@
 # create-baeta
 
+## 0.0.2
+
+### Patch Changes
+
+- [#184](https://github.com/andreisergiu98/baeta/pull/184) [`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add runtime selector
+
 ## 0.0.1
 
 ### Patch Changes

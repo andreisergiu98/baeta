@@ -1,5 +1,19 @@
 # @baeta/cli
 
+## 1.0.5
+
+### Patch Changes
+
+- [#184](https://github.com/andreisergiu98/baeta/pull/184) [`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add option to run the app without compiling
+
+- [#184](https://github.com/andreisergiu98/baeta/pull/184) [`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add option to run command if build is not necessary
+
+- [#184](https://github.com/andreisergiu98/baeta/pull/184) [`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - try importing baeta.ts before compiling
+
+- Updated dependencies []:
+  - @baeta/generator@0.1.5
+  - @baeta/plugin-graphql@0.1.5
+
 ## 1.0.4
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @baeta/generator
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b)]:
+  - @baeta/generator-sdk@0.1.5
+
 ## 0.1.4
 
 ### Patch Changes

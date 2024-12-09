@@ -84,7 +84,7 @@ Options for generated files.
 
 ### importExtension?
 
-> `optional` **importExtension**: `".js"` \| `".ts"`
+> `optional` **importExtension**: `false` \| `".js"` \| `".ts"`
 
 File extension for generated import statements.
 

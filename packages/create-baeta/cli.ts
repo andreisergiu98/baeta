@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { logger } from '@docusaurus/logger';
 import semver from 'semver';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
@@ -10,13 +11,13 @@ import { engines, version } from './package.json';
 const requiredVersion = engines.node;
 
 if (!semver.satisfies(process.version, requiredVersion)) {
-	console.log('Minimum Node.js version not met :(');
-	console.info`You are using Node.js number=${process.version}, Requirement: Node.js number=${requiredVersion}.`;
+	logger.error('Minimum Node.js version not met :(');
+	logger.info`You are using Node.js number=${process.version}, Requirement: Node.js number=${requiredVersion}.`;
 	process.exit(1);
 }
 
 process.on('unhandledRejection', (err) => {
-	console.log(err);
+	logger.error(err);
 	process.exit(1);
 });
 

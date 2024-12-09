@@ -1,5 +1,14 @@
 # @baeta/plugin-cloudflare
 
+## 1.0.7
+
+### Patch Changes
+
+- [#188](https://github.com/andreisergiu98/baeta/pull/188) [`cdb3964`](https://github.com/andreisergiu98/baeta/commit/cdb3964446088a87c736af80ecd852df1f88da1e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - rename cloudflare subscriptions package
+
+- Updated dependencies [[`cdb3964`](https://github.com/andreisergiu98/baeta/commit/cdb3964446088a87c736af80ecd852df1f88da1e)]:
+  - @baeta/subscriptions-cloudflare@0.1.5
+
 ## 1.0.6
 
 ### Patch Changes

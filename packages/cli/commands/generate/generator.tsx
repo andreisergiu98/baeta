@@ -6,6 +6,7 @@ import {
 	getGeneratorPlugins,
 } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
+import { useStdin } from 'ink';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useConfig } from '../../sdk/index.ts';
 import type { TextOutput } from '../../types/text.ts';
@@ -37,6 +38,24 @@ export function Generator(props: GeneratorProps) {
 
 	const runRef = useRef<PtyProcess | null>(null);
 	const [runOutput, setRunOutput] = useState<TextOutput[]>([]);
+
+	const stdin = useStdin();
+
+	useEffect(() => {
+		if (stdin == null) {
+			return;
+		}
+
+		const handleData = (data: Buffer<ArrayBufferLike>) => {
+			runRef.current?.write(data.toString());
+		};
+
+		stdin.stdin.on('data', handleData);
+
+		return () => {
+			stdin.stdin.off('data', handleData);
+		};
+	}, [stdin]);
 
 	const runCommand = useCallback(() => {
 		if (props.run == null) {

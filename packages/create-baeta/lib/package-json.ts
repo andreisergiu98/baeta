@@ -29,7 +29,7 @@ function createPackageJSON(
 	}
 
 	if (runtime === 'bun') {
-		meta.scripts.start = `bunx --bun baeta generate --watch --run='bun --watch --inspect src/app.ts'`;
+		meta.scripts.start = `baeta generate --watch --run='bun --watch --inspect src/app.ts'`;
 		meta.devDependencies['@types/node'] = undefined;
 		meta.devDependencies['@types/deno'] = undefined;
 	}

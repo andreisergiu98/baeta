@@ -6,7 +6,9 @@ export function AppStatus({ output }: { output: TextOutput[] }) {
 	return (
 		<Layout title="App" color="blue">
 			{output.map((value) => (
-				<Text key={value.id}>{value.text}</Text>
+				<Text key={value.id} wrap={'wrap'}>
+					{value.text}
+				</Text>
 			))}
 		</Layout>
 	);

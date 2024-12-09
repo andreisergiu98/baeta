@@ -86,12 +86,22 @@ export function startProcessWithPty(
 		ptyProc.resize(process.stdout.columns, process.stdout.rows);
 	});
 
+	let buffer = '';
 	ptyProc.onData((data) => {
-		stdout(data, containsClearSequence(data));
+		buffer += data;
+
+		if (containsClearSequence(data)) {
+			buffer = removeClearSequence(data);
+		}
+
+		stdout(buffer, true);
 	});
 
 	const procData = {
 		didExit: false,
+		write: (data: string) => {
+			ptyProc.write(data);
+		},
 	};
 
 	ptyProc.onExit(() => {
@@ -125,4 +135,8 @@ const CLEAR_SEQUENCES = [
 
 function containsClearSequence(data: string) {
 	return CLEAR_SEQUENCES.some((seq) => data.includes(seq));
+}
+
+function removeClearSequence(data: string) {
+	return CLEAR_SEQUENCES.reduce((acc, seq) => acc.replace(seq, ''), data);
 }

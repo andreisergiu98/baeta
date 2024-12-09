@@ -21,7 +21,7 @@ async function generateConfigForSubscriptions(options: CloudflarePluginOptions['
 		return null;
 	}
 
-	const result = await import('@baeta/cloudflare-subscriptions/sdk').catch(() => {
+	const result = await import('@baeta/subscriptions-cloudflare/sdk').catch(() => {
 		return null;
 	});
 

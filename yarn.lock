@@ -2024,22 +2024,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/cloudflare-subscriptions@workspace:^, @baeta/cloudflare-subscriptions@workspace:packages/subscriptions-cloudflare":
-  version: 0.0.0-use.local
-  resolution: "@baeta/cloudflare-subscriptions@workspace:packages/subscriptions-cloudflare"
-  dependencies:
-    "@baeta/builder": "workspace:^"
-    "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20241205.0"
-    graphql: "npm:^16.9.0"
-    graphql-ws: "npm:^5.16.0"
-    typescript: "npm:^5.7.2"
-  peerDependencies:
-    "@cloudflare/workers-types": ^4
-    graphql: ^16.6.0
-  languageName: unknown
-  linkType: soft
-
 "@baeta/compiler@workspace:^, @baeta/compiler@workspace:packages/compiler":
   version: 0.0.0-use.local
   resolution: "@baeta/compiler@workspace:packages/compiler"
@@ -2252,11 +2236,11 @@ __metadata:
   resolution: "@baeta/examples-cloudflare-ws@workspace:examples/cloudflare-ws"
   dependencies:
     "@baeta/cli": "workspace:^"
-    "@baeta/cloudflare-subscriptions": "workspace:^"
     "@baeta/compiler": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/plugin-cloudflare": "workspace:^"
+    "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20241205.0"
     graphql: "npm:^16.9.0"
@@ -2656,22 +2640,22 @@ __metadata:
   resolution: "@baeta/plugin-cloudflare@workspace:packages/plugin-cloudflare"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/cloudflare-subscriptions": "workspace:^"
     "@baeta/extension-cache-cloudflare": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
+    "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20241205.0"
     "@types/node": "npm:^22.10.1"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.7.2"
   peerDependencies:
-    "@baeta/cloudflare-subscriptions": "workspace:^"
     "@baeta/extension-cache-cloudflare": "workspace:^"
+    "@baeta/subscriptions-cloudflare": "workspace:^"
     "@cloudflare/workers-types": ^4
   peerDependenciesMeta:
-    "@baeta/cloudflare-subscriptions":
-      optional: true
     "@baeta/extension-cache-cloudflare":
+      optional: true
+    "@baeta/subscriptions-cloudflare":
       optional: true
   languageName: unknown
   linkType: soft
@@ -2785,6 +2769,22 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.10.1"
     typescript: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/subscriptions-cloudflare@workspace:^, @baeta/subscriptions-cloudflare@workspace:packages/subscriptions-cloudflare":
+  version: 0.0.0-use.local
+  resolution: "@baeta/subscriptions-cloudflare@workspace:packages/subscriptions-cloudflare"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@cloudflare/workers-types": "npm:^4.20241205.0"
+    graphql: "npm:^16.9.0"
+    graphql-ws: "npm:^5.16.0"
+    typescript: "npm:^5.7.2"
+  peerDependencies:
+    "@cloudflare/workers-types": ^4
+    graphql: ^16.6.0
   languageName: unknown
   linkType: soft
 

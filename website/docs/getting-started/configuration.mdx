@@ -57,7 +57,7 @@ export default defineConfig({
 });
 ```
 
-### 3.Add NPM Scripts
+### 3.Add Package.json Scripts
 
 ```json
 {
@@ -74,6 +74,18 @@ These scripts provide:
 - **build**: Builds your project and generates necessary files
 - **generate**: Updates GraphQL types and resolvers
 - **start**: Runs development server with hot reload
+
+:::tip
+If you're using Bun or Deno you might prefer to run the TypeScript source directly. In that case replace `start` with:
+
+```json
+{
+  "start:bun": "baeta generate --watch --run='bun --watch --inspect src/app.ts'",
+  "start:deno": "baeta generate --watch --run='deno --watch --inspect --allow-net --allow-read --allow-env src/app.ts'"
+}
+```
+
+:::
 
 :::tip
 Run `baeta generate --help` or `baeta build --help` to see all command options

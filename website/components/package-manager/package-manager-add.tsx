@@ -29,6 +29,12 @@ export function PackageManagerAdd(props: Props) {
 					{devFlag}
 				</CodeBlock>
 			</TabItem>
+			<TabItem value="bun">
+				<CodeBlock language="bash">
+					bun add {props.package}
+					{devFlag}
+				</CodeBlock>
+			</TabItem>
 		</Tabs>
 	);
 }

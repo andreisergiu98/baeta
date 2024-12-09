@@ -11,7 +11,9 @@ export const packageManagers = Object.keys(lockfileNames) as PackageManager[];
 
 export type PackageManager = keyof typeof lockfileNames;
 
-export type JavaScriptRuntime = 'node' | 'deno' | 'bun';
+export const runtimes = ['node', 'deno', 'bun'] as const;
+
+export type JavaScriptRuntime = (typeof runtimes)[number];
 
 export const defaultJavaScriptRuntime = 'node';
 

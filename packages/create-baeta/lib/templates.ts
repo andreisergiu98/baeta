@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { logger } from '@docusaurus/logger';
 import fs from 'fs-extra';
 import prompts, { type Choice } from 'prompts';
-import { type JavaScriptRuntime, gitignoreUrl } from './constants.ts';
+import { type JavaScriptRuntime, gitignoreUrl, runtimes } from './constants.ts';
 import { getPackageJson } from './package-json.ts';
 import { createTsconfig } from './tsconfig.ts';
 
@@ -112,5 +112,14 @@ export async function copyTemplate(
 	const gitignore = await fetchGitignore();
 	if (gitignore) {
 		await fs.writeFile(join(dest, '.gitignore'), gitignore);
+	}
+
+	const hasRuntimeEntry = await fs.pathExists(join(dest, 'src', `app.${runtime}.ts`));
+
+	if (hasRuntimeEntry) {
+		await fs.copyFile(join(dest, 'src', `app.${runtime}.ts`), join(dest, 'src', 'app.ts'));
+		await Promise.all(
+			runtimes.map((r) => fs.remove(join(dest, 'src', `app.${r}.ts`)).catch(() => {})),
+		);
 	}
 }

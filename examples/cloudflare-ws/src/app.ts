@@ -1,8 +1,8 @@
+import { createApplication } from '@baeta/core';
 import {
 	SubscriptionDatabaseD1,
 	createCloudflareSubscription,
-} from '@baeta/cloudflare-subscriptions';
-import { createApplication } from '@baeta/core';
+} from '@baeta/subscriptions-cloudflare';
 import { createYoga } from 'graphql-yoga';
 import { Hono } from 'hono';
 import { modules } from './modules/autoload.ts';

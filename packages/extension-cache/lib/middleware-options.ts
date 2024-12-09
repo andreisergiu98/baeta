@@ -1,11 +1,9 @@
-import type { ItemRef, RefCompatibleRoot } from './ref.ts';
+import type { ItemRef } from './ref.ts';
 
-type MiddlewareOptionsRefFn<Root> = {
+export interface MiddlewareOptions<Root> {
 	getRootRef?: (root: Root) => ItemRef;
-};
+}
 
-type MiddlewareOptionsRef<Root> = Root extends RefCompatibleRoot
-	? MiddlewareOptionsRefFn<Root>
-	: Required<MiddlewareOptionsRefFn<Root>>;
-
-export type MiddlewareOptions<Root> = MiddlewareOptionsRef<Root>;
+export interface RequiredMiddlewareOptions<Root> extends MiddlewareOptions<Root> {
+	getRootRef: (root: Root) => ItemRef;
+}

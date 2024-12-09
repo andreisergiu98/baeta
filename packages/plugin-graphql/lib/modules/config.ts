@@ -7,4 +7,5 @@ export type ModulesConfig = {
 	encapsulateModuleTypes: 'prefix' | 'namespace' | 'none';
 	requireRootResolvers?: boolean;
 	extensionsPath?: string;
+	importExtension?: '.js' | '.ts';
 };

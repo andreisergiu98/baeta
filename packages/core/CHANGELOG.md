@@ -1,5 +1,61 @@
 # @baeta/core
 
+## 0.1.5
+
+### Patch Changes
+
+- [`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add readme
+
+- Updated dependencies [[`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820)]:
+  - @baeta/errors@0.1.4
+
+## 0.1.4
+
+### Patch Changes
+
+- [#180](https://github.com/andreisergiu98/baeta/pull/180) [`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Raise minimum required NodeJS version to 22.12.0. Drop CommonJS builds in favor of the require_esm feature from NodeJS 22.12.0 onwards.
+
+- [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - raise es target to 2024
+
+- Updated dependencies [[`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72), [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857)]:
+  - @baeta/errors@0.1.3
+
+## 0.1.3
+
+### Patch Changes
+
+- [`c8dea0c`](https://github.com/andreisergiu98/baeta/commit/c8dea0c6a7824039cf4de13a8d2c0b1682ea3d02) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - maintain order of prepended middlewares
+
+## 0.1.2
+
+### Patch Changes
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [`cf9f094`](https://github.com/andreisergiu98/baeta/commit/cf9f09468f84d99b069eb0f55e1fc207e2a41dd8) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - remove unused imports
+
+- Updated dependencies [[`d77cd8a`](https://github.com/andreisergiu98/baeta/commit/d77cd8a1810fdf72cfbbb08d05c207bbc893c822)]:
+  - @baeta/errors@0.1.2
+
+## 0.1.1
+
+### Patch Changes
+
+- [`594e47e`](https://github.com/andreisergiu98/baeta/commit/594e47e9ddb0ba7fdb975c48cd8df3af130b5c9e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - prevent prototype pollution through object lens
+
+- [#157](https://github.com/andreisergiu98/baeta/pull/157) [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - stricter linting, better type safety
+
+- [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix exports order in package.json
+
+- [#161](https://github.com/andreisergiu98/baeta/pull/161) [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [`44a7975`](https://github.com/andreisergiu98/baeta/commit/44a7975a65a1903d2e1aec27d55fed23f193187b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - make subscription resolver always required
+
+- [#107](https://github.com/andreisergiu98/baeta/pull/107) [`b6e87ce`](https://github.com/andreisergiu98/baeta/commit/b6e87ce347406164a9c0fca49172f1d5d4f50f74) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add type hashes
+
+- Updated dependencies [[`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a), [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0)]:
+  - @baeta/errors@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

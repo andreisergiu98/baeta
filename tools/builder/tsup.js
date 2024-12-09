@@ -4,8 +4,8 @@ export * from 'tsup';
 
 export function defineConfig(config) {
 	return originalDefineConfig({
-		format: ['esm', 'cjs'],
-		target: 'es2022',
+		format: 'esm',
+		target: 'es2024',
 		dts: true,
 		clean: true,
 		splitting: true,

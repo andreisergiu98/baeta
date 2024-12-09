@@ -6,7 +6,7 @@
     "**/.turbo": true,
     "**/.yarn": true,
     "**/dist": true,
-    "**/build": true
+    "website/build": true
   },
   "files.exclude": {
     "**/.docusaurus": true,
@@ -14,11 +14,12 @@
     "**/.turbo": true,
     "**/node_modules": true,
     "**/dist": true,
-    "**/build": true,
+    "website/build": true,
     "website/.yarn": true
   },
   "cSpell.words": [
     "autoload",
+    "autoloading",
     "baeta",
     "callsite",
     "camelcase",
@@ -36,15 +37,19 @@
     "upstash"
   ],
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "[javascriptreact]": {
+  "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "[typescriptreact]": {
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[json]": {
@@ -58,5 +63,11 @@
   },
   "[css]": {
     "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

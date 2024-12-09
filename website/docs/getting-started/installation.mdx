@@ -1,23 +1,35 @@
 ---
 sidebar_position: 1
-description: 'Get Baeta up and running in your project in just a few steps'
+description: "Get Baeta up and running in your project in just a few steps"
 ---
 
 # Installation
+
 Get Baeta up and running in your project in just a few steps.
 
 ## Requirements
 
-- [Node.js](https://nodejs.org) version 22 or above
+- [Node.js](https://nodejs.org) version 22.12.0 or above (while Bun and Deno are supported, Node is still needed for the CLI)
 - [TypeScript](https://www.typescriptlang.org) version 5.6 or above
-- Package manager of your choice (npm, yarn, or pnpm)
+- Package manager of your choice (npm, yarn, pnpm or bun)
+
+## Quick Start
+
+Baeta comes with a `create baeta` command to quickly set up a new project:
+
+import { PackageManagerCreate } from "@site/components/package-manager";
+
+<PackageManagerCreate package="baeta" />
+
+If you prefer to set up the project manually, follow the steps below.
 
 ## Setup
 
 ### 1. Core Package
+
 First, install the core package which provides all essential functionality:
 
-import { PackageManagerAdd } from '@site/components/package-manager';
+import { PackageManagerAdd } from "@site/components/package-manager";
 
 <PackageManagerAdd package="@baeta/core" />
 
@@ -30,6 +42,7 @@ For the best development experience, install our CLI and compiler tools:
 <PackageManagerAdd dev={true} package="@baeta/cli @baeta/compiler" />
 
 The compiler is optional but recommended as it provides:
+
 - TypeScript configuration support
 - Hot reload of the application
 

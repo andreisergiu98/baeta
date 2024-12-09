@@ -141,6 +141,20 @@ async function createNestedPackages() {
 	return created;
 }
 
+function copyReadmeAndLicense() {
+	const readmePath = join(process.cwd(), '../../README.md');
+	const readmeDist = join(process.cwd(), 'README.md');
+	const licensePath = join(process.cwd(), '../../LICENSE');
+	const licenseDist = join(process.cwd(), 'LICENSE');
+	return Promise.all([fs.copyFile(readmePath, readmeDist), fs.copyFile(licensePath, licenseDist)]);
+}
+
+function removeReadmeAndLicense() {
+	const readmeDist = join(process.cwd(), 'README.md');
+	const licenseDist = join(process.cwd(), 'LICENSE');
+	return Promise.all([fs.unlink(readmeDist), fs.unlink(licenseDist)]);
+}
+
 async function run() {
 	const arg = process.argv[2];
 
@@ -149,7 +163,7 @@ async function run() {
 	}
 
 	if (arg === '--clean') {
-		return removeNestedPackages();
+		return Promise.all([removeNestedPackages(), removeReadmeAndLicense()]);
 	}
 
 	const manifest = await getManifest();
@@ -159,7 +173,7 @@ async function run() {
 		process.exit(1);
 	}
 
-	createNestedPackages();
+	return Promise.all([copyReadmeAndLicense(), createNestedPackages()]);
 }
 
-run();
+run().catch(console.error);

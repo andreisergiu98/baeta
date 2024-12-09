@@ -4,11 +4,11 @@ import { File, type FileOptions } from './file.ts';
 
 export class FileBlock extends File {
 	constructor(
-		filename: string,
-		content: string,
-		protected start: string,
-		protected end: string,
-		tag: string,
+		public filename: string,
+		public content: string,
+		public start: string,
+		public end: string,
+		public tag: string,
 		options?: FileOptions,
 	) {
 		super(filename, content, tag, {
@@ -37,6 +37,19 @@ export class FileBlock extends File {
 			await fd.close();
 		} else {
 			await writeFile(this.filename, content, 'utf-8');
+		}
+	};
+
+	unlink = async () => {
+		this.persisted = false;
+
+		const [existingContent, fd] = await this.getExistingContent();
+
+		if (fd) {
+			const [start, end] = this.getSlices(existingContent);
+			await fd.truncate(0);
+			await fd.write(start + end, 0, 'utf-8');
+			await fd.close();
 		}
 	};
 

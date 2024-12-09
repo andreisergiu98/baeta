@@ -1,5 +1,65 @@
 # @baeta/plugin-prisma
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b)]:
+  - @baeta/generator-sdk@0.1.5
+  - @baeta/plugin-exec@0.1.5
+
+## 0.1.4
+
+### Patch Changes
+
+- [`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add readme
+
+- Updated dependencies [[`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820)]:
+  - @baeta/generator-sdk@0.1.4
+  - @baeta/plugin-exec@0.1.4
+  - @baeta/util-path@0.1.4
+
+## 0.1.3
+
+### Patch Changes
+
+- [#180](https://github.com/andreisergiu98/baeta/pull/180) [`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Raise minimum required NodeJS version to 22.12.0. Drop CommonJS builds in favor of the require_esm feature from NodeJS 22.12.0 onwards.
+
+- [#174](https://github.com/andreisergiu98/baeta/pull/174) [`3f2befb`](https://github.com/andreisergiu98/baeta/commit/3f2befbb4b645e2970727482e970c4e78f0ed598) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix skip generate
+
+- [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - raise es target to 2024
+
+- Updated dependencies [[`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72), [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857)]:
+  - @baeta/generator-sdk@0.1.3
+  - @baeta/plugin-exec@0.1.3
+  - @baeta/util-path@0.1.3
+
+## 0.1.2
+
+### Patch Changes
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b), [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321)]:
+  - @baeta/generator-sdk@0.1.2
+  - @baeta/plugin-exec@0.1.2
+  - @baeta/util-path@0.1.2
+
+## 0.1.1
+
+### Patch Changes
+
+- [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix exports order in package.json
+
+- [#161](https://github.com/andreisergiu98/baeta/pull/161) [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [#162](https://github.com/andreisergiu98/baeta/pull/162) [`1c42409`](https://github.com/andreisergiu98/baeta/commit/1c424095518f47a057dd8b475c3c634eeb59bb92) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - make generated schema path required
+
+- Updated dependencies [[`7f1958c`](https://github.com/andreisergiu98/baeta/commit/7f1958c44d1b9bed473e48c875fdaa7020c434fa), [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1), [`fd3a5d2`](https://github.com/andreisergiu98/baeta/commit/fd3a5d27b497aca4b8807155e801b1c1197c5fe2), [`9d8d6a1`](https://github.com/andreisergiu98/baeta/commit/9d8d6a15d63579a2e0bdaa07b7efdcf10aff2492), [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a), [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0)]:
+  - @baeta/generator-sdk@0.1.1
+  - @baeta/plugin-exec@0.1.1
+  - @baeta/util-path@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

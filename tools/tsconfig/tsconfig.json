@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "es2022",
+    "target": "es2023",
     "lib": [
-      "es2022"
+      "es2024"
     ],
     "module": "esnext",
     "noEmit": true,

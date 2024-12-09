@@ -1,5 +1,79 @@
 # @baeta/cli
 
+## 1.0.5
+
+### Patch Changes
+
+- [#184](https://github.com/andreisergiu98/baeta/pull/184) [`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add option to run the app without compiling
+
+- [#184](https://github.com/andreisergiu98/baeta/pull/184) [`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add option to run command if build is not necessary
+
+- [#184](https://github.com/andreisergiu98/baeta/pull/184) [`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - try importing baeta.ts before compiling
+
+- Updated dependencies []:
+  - @baeta/generator@0.1.5
+  - @baeta/plugin-graphql@0.1.5
+
+## 1.0.4
+
+### Patch Changes
+
+- [`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add readme
+
+- Updated dependencies [[`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820)]:
+  - @baeta/compiler@0.1.4
+  - @baeta/generator@0.1.4
+  - @baeta/plugin-graphql@0.1.4
+  - @baeta/util-path@0.1.4
+
+## 1.0.3
+
+### Patch Changes
+
+- [#180](https://github.com/andreisergiu98/baeta/pull/180) [`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Raise minimum required NodeJS version to 22.12.0. Drop CommonJS builds in favor of the require_esm feature from NodeJS 22.12.0 onwards.
+
+- [#180](https://github.com/andreisergiu98/baeta/pull/180) [`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Drop support for CommonJS config files
+
+- [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - raise es target to 2024
+
+- Updated dependencies [[`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72), [`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72), [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857)]:
+  - @baeta/compiler@0.1.3
+  - @baeta/generator@0.1.3
+  - @baeta/plugin-graphql@0.1.3
+  - @baeta/util-path@0.1.3
+
+## 1.0.2
+
+### Patch Changes
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- [`1497d54`](https://github.com/andreisergiu98/baeta/commit/1497d541ad844c746c272668c4634be96ac33153) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix spinner animation
+
+- [`cf9f094`](https://github.com/andreisergiu98/baeta/commit/cf9f09468f84d99b069eb0f55e1fc207e2a41dd8) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - remove unused imports
+
+- Updated dependencies [[`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b), [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321), [`e84137f`](https://github.com/andreisergiu98/baeta/commit/e84137f5a0cd65402e88cd56224fff450057c473)]:
+  - @baeta/generator@0.1.2
+  - @baeta/compiler@0.1.2
+  - @baeta/plugin-graphql@0.1.2
+  - @baeta/util-path@0.1.2
+
+## 1.0.1
+
+### Patch Changes
+
+- [#157](https://github.com/andreisergiu98/baeta/pull/157) [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - stricter linting, better type safety
+
+- [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix exports order in package.json
+
+- [#161](https://github.com/andreisergiu98/baeta/pull/161) [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`7f1958c`](https://github.com/andreisergiu98/baeta/commit/7f1958c44d1b9bed473e48c875fdaa7020c434fa), [`b6e87ce`](https://github.com/andreisergiu98/baeta/commit/b6e87ce347406164a9c0fca49172f1d5d4f50f74), [`1c42409`](https://github.com/andreisergiu98/baeta/commit/1c424095518f47a057dd8b475c3c634eeb59bb92), [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1), [`9d8d6a1`](https://github.com/andreisergiu98/baeta/commit/9d8d6a15d63579a2e0bdaa07b7efdcf10aff2492), [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a), [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0), [`34877dc`](https://github.com/andreisergiu98/baeta/commit/34877dce585a36abd3bb21adfaa2b84075a416a9), [`b6e87ce`](https://github.com/andreisergiu98/baeta/commit/b6e87ce347406164a9c0fca49172f1d5d4f50f74)]:
+  - @baeta/plugin-graphql@0.1.1
+  - @baeta/compiler@0.1.1
+  - @baeta/generator@0.1.1
+  - @baeta/util-path@0.1.1
+
 ## 1.0.0
 
 ### Minor Changes

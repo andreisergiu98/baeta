@@ -2,13 +2,12 @@ import { MapperKind, getDirectives, mapSchema } from '@graphql-tools/utils';
 import type { GraphQLSchema } from 'graphql';
 import { createObjectLens } from '../../utils/object.ts';
 import {
+	type ValidateParams,
 	type ValidationOptions,
+	type ValidationTarget,
 	addArgumentValidationsExtension,
 	addValidationsExtension,
 } from './input-extensions.ts';
-import type { ValidateParams } from './input-schema.ts';
-
-export type ValidationTarget = 'list' | 'object' | 'scalar';
 
 type ValidationDirectiveFnParams<DirectiveConfig, Context> = ValidateParams<Context> & {
 	directiveConfig: DirectiveConfig;

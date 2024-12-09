@@ -1,5 +1,5 @@
 import { Box, Text, type TextProps } from 'ink';
-import React, { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Spinner } from './spinner.tsx';
 import { Time } from './time.tsx';
 

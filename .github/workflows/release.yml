@@ -20,12 +20,13 @@ jobs:
 
       - name: Create Release Pull Request or Publish
         id: changesets
-        uses: changesets/action@v1
+        uses: dotansimha/changesets-action@v1.5.2
         with:
           publish: yarn release
           version: yarn changeset version
           commit: "chore: publish packages"
           title: "chore: publish packages"
+          createGithubReleases: aggregate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

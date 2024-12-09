@@ -1,0 +1,224 @@
+---
+sidebar_position: 130
+title: Environment
+---
+
+# Environment Parser
+
+Baeta provides a type-safe environment variable parser that helps you validate and transform environment variables at runtime while maintaining full type safety.
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/env" />
+
+## Basic Usage
+
+```typescript
+import { createEnvParser } from "@baeta/env";
+
+// Create a parser that reads from process.env
+const parse = createEnvParser((key) => process.env[key]);
+
+export const config = {
+  // Basic string parsing
+  apiKey: parse("API_KEY", {
+    type: "string",
+    required: true,
+  }),
+
+  // Number with default value
+  port: parse("PORT", {
+    type: "number",
+    default: 3000,
+  }),
+
+  // Boolean with custom resolver
+  isDevelopment: parse("NODE_ENV", {
+    type: "boolean",
+    default: true,
+    resolver: (value) => value === "development",
+  }),
+};
+```
+
+## Configuration Options
+
+### Types
+
+The parser supports three basic types:
+
+- `string`
+- `number`
+- `boolean`
+
+## TypeScript Support
+
+The parser provides full type inference:
+
+```typescript
+const config = {
+  port: parse("PORT", {
+    type: "number",
+    default: 3000,
+  }),
+  cachePrefix: parse("CACHE_PREFIX", {
+    type: "string",
+  }),
+};
+
+// config.port is inferred as number
+const port: number = config.port; // OK
+const port: string = config.port; // Type error
+const prefix: string = config.cachePrefix; // Possible type undefined is not assignable to string
+```
+
+## Error Handling
+
+The parser will throw descriptive errors when:
+
+- A required variable is missing
+- Type conversion fails (e.g., parsing a number)
+- Custom resolver throws an error
+
+## Examples
+
+### Required Variables
+
+```typescript
+const config = {
+  databaseUrl: parse("DATABASE_URL", {
+    type: "string",
+    required: true, // Will throw if not provided
+  }),
+};
+```
+
+### Default Values
+
+```typescript
+const config = {
+  logLevel: parse("LOG_LEVEL", {
+    type: "string",
+    default: "info", // Uses 'info' if not provided
+  }),
+};
+```
+
+### Custom Resolvers
+
+```typescript
+const config = {
+  isProduction: parse("NODE_ENV", {
+    type: "boolean",
+    default: false,
+    resolver: (value) => value === "production",
+  }),
+};
+```
+
+### Complex Configuration Example
+
+Here's a more comprehensive example showing various use cases:
+
+```typescript
+import { createEnvParser } from "@baeta/env";
+
+const parse = createEnvParser((key) => process.env[key]);
+
+export const config = {
+  // Basic required string
+  apiUrl: parse("API_URL", {
+    type: "string",
+    required: true,
+  }),
+
+  // Number with default
+  serverPort: parse("PORT", {
+    type: "number",
+    default: 80,
+  }),
+
+  // Boolean with custom resolver
+  isProduction: parse("NODE_ENV", {
+    type: "boolean",
+    default: false,
+    resolver: (value) => value === "production",
+  }),
+
+  // Optional string
+  cachePrefix: parse("CACHE_PREFIX", {
+    type: "string",
+    required: false,
+  }),
+
+  // Required with custom error handling
+  secretKey: parse("SECRET_KEY", {
+    type: "string",
+    required: true,
+  }),
+};
+```
+
+## Environment Sources
+
+### Node.js
+
+Using Node's built-in `process.env`:
+
+```typescript
+const parse = createEnvParser((key) => process.env[key]);
+```
+
+### Deno
+
+Using Deno's built-in Deno.env:
+
+```typescript
+const parse = createEnvParser((key) => Deno.env.get(key));
+```
+
+### Bun
+
+Using Bun's built-in process.env or Bun.env:
+
+```typescript
+// Using process.env (Node.js compatible)
+const parse = createEnvParser((key) => process.env[key]);
+
+// Using Bun.env (Bun specific)
+const parse = createEnvParser((key) => Bun.env[key]);
+```
+
+### Vite
+
+When using Vite, you can access environment variables through `import.meta.env`:
+
+```typescript
+const parse = createEnvParser((key) => import.meta.env[key]);
+```
+
+### Next.js
+
+Next.js requires special handling of environment variables during bundling. Only variables prefixed with `NEXT_PUBLIC_` are included in the client bundle, and they must be accessed via `process.env.NEXT_PUBLIC_*` directly in your code, since the bundler inlines them.
+
+To work around this limitation, you can create a map of your environment variables:
+
+```typescript
+const envMap = {
+  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  // ... other env vars
+} as const;
+
+const parse = createEnvParser((key) => envMap[key as keyof typeof envMap]);
+
+export const config = {
+  apiUrl: parse("NEXT_PUBLIC_API_URL", {
+    type: "string",
+    required: true,
+  }),
+};
+```
+
+Or you can edit the Webpack configuration to include a global map of public variables.

@@ -2,7 +2,6 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import LogoBaeta from '@site/static/img/logo-baeta.svg';
 import clsx from 'clsx';
-import React from 'react';
 import styles from './header.module.css';
 
 export function HomeHeader() {

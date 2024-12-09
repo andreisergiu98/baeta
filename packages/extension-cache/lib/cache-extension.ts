@@ -4,11 +4,11 @@ import {
 	createMiddlewareAdapter,
 	nameFunction,
 } from '@baeta/core/sdk';
-import type { TypeGetter } from './global-types.ts';
-import type { MiddlewareOptions } from './middleware-options.ts';
-import { CacheRef } from './ref.ts';
+import type { CreateCacheArgs, TypeGetter, UseCacheArgs } from './global-types.ts';
+import type { MiddlewareOptions, RequiredMiddlewareOptions } from './middleware-options.ts';
+import { CacheRef, type RefCompatibleRoot } from './ref.ts';
 import type { QueryMatching, StoreAdapter } from './store-adapter.ts';
-import type { DefaultStoreOptions, StoreOptions } from './store-options.ts';
+import type { DefaultStoreOptions } from './store-options.ts';
 import type { Store } from './store.ts';
 
 export class CacheExtension extends Extension {
@@ -24,8 +24,10 @@ export class CacheExtension extends Extension {
 		type: string,
 	): BaetaExtensions.TypeExtensions<Root, Context> => {
 		return {
-			$createCache: (options: StoreOptions<Root>) => {
+			$createCache: (...args: CreateCacheArgs<Root>) => {
+				const [options] = args;
 				const mergedOptions = {
+					ttl: 3600,
 					...this.defaultOptions,
 					...options,
 				};
@@ -50,8 +52,13 @@ export class CacheExtension extends Extension {
 			$cacheClear: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => {
 				return store.deleteQueries(ref, matcher);
 			},
-			$useCache: (store: StoreAdapter<TypeGetter<Result>>, options: MiddlewareOptions<Root>) => {
-				const middleware = store.createMiddleware(ref, options);
+			$useCache: (...args: UseCacheArgs<Result, Root>) => {
+				const [store, options] = args;
+				// We try to please the compiler
+				const middlewareArgs = [options] as Root extends RefCompatibleRoot
+					? [options?: MiddlewareOptions<Root>]
+					: [options: RequiredMiddlewareOptions<Root>];
+				const middleware = store.createMiddleware(ref, ...middlewareArgs);
 				nameFunction(middleware, `${type}.${field}.$useCache`);
 				module.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));
 			},

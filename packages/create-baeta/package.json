@@ -1,0 +1,96 @@
+{
+  "name": "create-baeta",
+  "version": "0.0.3",
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/create-baeta"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "bin": "dist/cli.js",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "templates",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "yarn build:versions && tsup",
+    "build:versions": "node --no-warnings --experimental-transform-types ./scripts/version-manifest.ts",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "types": "yarn build:versions && tsc --noEmit"
+  },
+  "dependencies": {
+    "@docusaurus/logger": "^3.6.3",
+    "fs-extra": "^11.2.0",
+    "prompts": "^2.4.2",
+    "semver": "^7.6.3",
+    "shelljs": "^0.8.5",
+    "supports-color": "^9.4.0",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.10.1",
+    "@types/prompts": "^2.4.9",
+    "@types/semver": "^7.5.8",
+    "@types/shelljs": "^0.8.15",
+    "@types/yargs": "^17.0.33",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--no-warnings",
+      "--experimental-transform-types"
+    ]
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json"
+  }
+}

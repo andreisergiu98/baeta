@@ -1,6 +1,5 @@
 import style from 'ansi-styles';
 import { Text } from 'ink';
-import React from 'react';
 import type { TextOutput } from '../types/text.ts';
 
 export interface ErrorsProps {

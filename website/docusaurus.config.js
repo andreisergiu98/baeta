@@ -1,11 +1,14 @@
 const { themes } = require('prism-react-renderer');
+const { injectTypeDocSidebar } = require('./docusaurus.sidebars.js');
+
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 	title: 'Baeta',
-	tagline: 'Schema first without the hassle',
+	tagline:
+		'Baeta is a modern, type-safe, schema first GraphQL framework that enables developers to build powerful and scalable GraphQL APIs with ease.',
 	url: 'https://baeta.io',
 	baseUrl: '/',
 	onBrokenLinks: 'throw',
@@ -20,13 +23,20 @@ const config = {
 		locales: ['en'],
 	},
 
+	markdown: {
+		format: 'detect',
+	},
+
 	presets: [
 		[
 			'classic',
 			/** @type {import('@docusaurus/preset-classic').Options} */
 			({
 				docs: {
-					sidebarPath: require.resolve('./sidebars.js'),
+					// sidebarPath: require.resolve('./sidebars.js'),
+					async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args }) {
+						return injectTypeDocSidebar(await defaultSidebarItemsGenerator(args));
+					},
 				},
 				pages: {
 					path: 'pages',
@@ -39,6 +49,18 @@ const config = {
 						require.resolve('./style/custom.css'),
 						require.resolve('./style/utilities.css'),
 					],
+				},
+				sitemap: {
+					lastmod: 'date',
+					changefreq: 'weekly',
+					priority: 0.5,
+					ignorePatterns: ['/tags/**'],
+					filename: 'sitemap.xml',
+					createSitemapItems: async (params) => {
+						const { defaultCreateSitemapItems, ...rest } = params;
+						const items = await defaultCreateSitemapItems(rest);
+						return items.filter((item) => !item.url.includes('/page/'));
+					},
 				},
 			}),
 		],
@@ -61,6 +83,21 @@ const config = {
 						label: 'Docs',
 					},
 					{
+						position: 'left',
+						label: 'Examples',
+						href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+					},
+					{
+						href: 'https://github.com/sponsors/andreisergiu98',
+						label: 'Donate',
+						position: 'right',
+					},
+					{
+						href: 'https://discord.gg/j6Y8xRc7ep',
+						label: 'Discord',
+						position: 'right',
+					},
+					{
 						href: 'https://github.com/andreisergiu98/baeta',
 						label: 'GitHub',
 						position: 'right',
@@ -81,6 +118,10 @@ const config = {
 								label: 'Getting Started',
 								to: '/docs/getting-started/installation',
 							},
+							{
+								label: 'Examples',
+								href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+							},
 						],
 					},
 					{
@@ -90,15 +131,62 @@ const config = {
 								label: 'GitHub',
 								href: 'https://github.com/andreisergiu98/baeta',
 							},
+							{
+								label: 'Discord',
+								href: 'https://discord.gg/j6Y8xRc7ep',
+							},
+							{
+								label: 'Donate',
+								href: 'https://github.com/sponsors/andreisergiu98',
+							},
 						],
 					},
 				],
 			},
+			image: 'img/banner.png',
+			metadata: [
+				{
+					name: 'keywords',
+					content: 'baeta, graphql, schema, types, typescript, framework, builder',
+				},
+				{ name: 'twitter:card', content: 'img/banner.png' },
+			],
 			prism: {
 				theme: lightCodeTheme,
 				darkTheme: darkCodeTheme,
 			},
+			colorMode: {
+				defaultMode: 'dark',
+			},
+			algolia: {
+				appId: '4FC0N9XMY9',
+				apiKey: '4d2e8517e7336f96a0ef90266f9e0f72',
+				indexName: 'baeta',
+			},
 		}),
+
+	headTags: [
+		{
+			tagName: 'link',
+			attributes: {
+				rel: 'preconnect',
+				href: 'https://baeta.io',
+			},
+		},
+	],
+	plugins: [
+		[
+			require.resolve('@docusaurus/plugin-client-redirects'),
+			{
+				redirects: [
+					{
+						from: '/docs',
+						to: '/docs/intro',
+					},
+				],
+			},
+		],
+	],
 	webpack: {
 		jsLoader: (isServer) => ({
 			loader: require.resolve('esbuild-loader'),

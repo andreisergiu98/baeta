@@ -1,0 +1,250 @@
+---
+sidebar_position: 10
+---
+
+# Authorization
+
+Baeta provides a flexible and type-safe authorization system that allows you to define granular access controls at both operation and field levels. With support for default scopes, dynamic rules, and a permission granting system, you can implement complex authorization patterns while maintaining clean and maintainable code.
+
+## Key Features
+
+- Type-safe authorization rules
+- Default scopes with override capability
+- Pre and post-resolution authorization
+- Granular field-level permissions
+- Permission grants between resolvers
+- Scope caching for performance
+- Async/sync authorization support
+- Subscription-specific controls
+- Type-wide authorization rules
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/extension-auth" />
+
+## Basic Setup
+
+1. Define Authorization Scopes
+
+```typescript
+import { UnauthenticatedError } from "@baeta/errors";
+import { authExtension } from "@baeta/extension-auth";
+import type { Context } from "../types/context";
+
+declare global {
+  export namespace AuthExtension {
+    export interface Scopes {
+      isPublic: boolean;
+      isLoggedIn: boolean;
+      hasAccess: "guest" | "user" | "moderator" | "admin";
+    }
+
+    export interface GrantsMap {
+      readUserPhotos: boolean;
+    }
+  }
+}
+
+export const authExt = authExtension<Context>(async (ctx) => {
+  const accessList: string[] = ["guest", "user"];
+
+  // You can fetch data before the scopes are created
+
+  return {
+    isPublic: true,
+    isLoggedIn: async () => {
+      // But you can also use scope loaders, which will be resolved lazily, when needed
+      if (!ctx.userId) {
+        throw new UnauthenticatedError();
+      }
+      return true;
+    },
+    hasAccess: (access: string) => {
+      // Scope loaders are also required for non-boolean scopes
+      return ctx.user?.accessList.includes(access) ?? false;
+    },
+  };
+});
+```
+
+2. Register the Extension
+
+```typescript
+import { createExtensions } from "@baeta/core";
+import { authExt } from "./auth-extension";
+
+export default createExtensions(
+  authExt,
+  //... other extensions
+);
+```
+
+:::tip
+Authorization checks should be registered first in your chain, as they determine if a request can proceed at all. This ensures unauthorized requests are rejected early in the process.
+The only exception being the `complexity` extension.
+:::
+
+3. Point Baeta to extensions entrypoint (if you haven't already)
+
+```typescript
+export default defineConfig({
+  graphql: {
+    extensions: "src/extensions/index.ts",
+    // ... other config
+  },
+});
+```
+
+## Authorization Examples
+
+### Basic Static Rules
+
+```typescript
+// Public or authenticated access
+Query.user.$auth({
+  $or: {
+    isPublic: true,
+    isLoggedIn: true,
+  },
+});
+
+// Admin-only access
+Mutation.createUser.$auth({
+  hasAccess: "admin",
+});
+```
+
+### Post-Resolution Authorization
+
+```typescript
+// Post-auth checks permission after resolver execution
+// Useful to avoid double database queries when you need the resource for permission checking
+Query.user.$postAuth((params, result) => {
+  if (result && result.id === params.ctx.userId) {
+    return true; // Allow access if user is requesting their own data
+  }
+  return { hasAccess: "admin" }; // Require admin access for other users' data
+});
+
+// Compared to pre-resolution auth which might require an extra database query
+Query.user.$auth(async (params) => {
+  const user = await db.user.findFirst({
+    // Extra database query
+    where: { id: params.args.id },
+  });
+
+  if (user && user.id === params.ctx.userId) return {};
+  return { hasAccess: "admin" };
+});
+```
+
+### Subscription Rules
+
+```typescript
+// Apply to subscription phase
+Subscription.userCreated.subscribe.$auth({
+  isLoggedIn: true,
+});
+
+// Apply to resolve phase
+Subscription.userCreated.resolve.$auth({
+  isLoggedIn: true,
+});
+
+// Apply to both phases
+Subscription.userCreated.$auth({
+  isLoggedIn: true,
+});
+```
+
+### Type-wide Rules
+
+```typescript
+// Apply to all Query fields
+Query.$auth({
+  isLoggedIn: true,
+});
+
+// Apply to all User fields
+User.$auth({
+  isLoggedIn: true,
+});
+```
+
+### Grants system
+
+```typescript
+// Grant permission
+Query.user.$auth(
+  {
+    $or: { isPublic: true, isLoggedIn: true },
+  },
+  {
+    grants: ["readUserPhotos"],
+  },
+);
+
+// Use granted permission
+User.photos.$auth({
+  $granted: "readUserPhotos",
+});
+```
+
+### Authorization Operators
+
+- `$or`: Any condition must be true
+- `$and`: All conditions must be true
+- `$chain`: Sequential evaluation
+- `$race`: Parallel evaluation
+- `$granted`: Check granted permissions
+
+## Default Scopes
+
+Default scopes provide base authorization rules that apply to all operations. They are defined when creating the auth extension and are combined with local rules using an AND operator.
+
+### Defining Default Scopes
+
+```typescript
+export const authExt = authExtension<Context>(
+  async (ctx) => {
+    // Define user scope values as explained above
+    return {...};
+  },
+  {
+    // All queries, mutations, and subscriptions will require the user to be logged in.
+    // You will still need to pay attention for relationships and nested queries.
+    defaultScopes: {
+      Query: {
+        isLoggedIn: true,
+      },
+      Mutation: {
+        isLoggedIn: true,
+      },
+      Subscription: {
+        subscribe: {
+          isLoggedIn: true,
+        },
+      },
+    },
+  },
+)
+```
+
+### Skipping Default Scopes
+
+You can bypass default scopes for specific operations using the `skipDefaults` option:
+
+```typescript
+Query.publicContent.$auth(
+  {
+    isPublic: true,
+  },
+  {
+    skipDefaults: true,
+  },
+);
+```
+
+For detailed examples, see the [Baeta authorization example](https://github.com/andreisergiu98/baeta/tree/main/examples/auth).

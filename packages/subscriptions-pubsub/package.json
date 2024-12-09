@@ -1,0 +1,83 @@
+{
+  "name": "@baeta/subscriptions-pubsub",
+  "version": "0.0.2",
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/subscriptions-pubsub"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "prep",
+    "postpack": "prep --clean",
+    "test": "ava",
+    "types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "ava": "^6.2.0",
+    "graphql": "^16.9.0",
+    "graphql-subscriptions-v2": "npm:graphql-subscriptions@^2.0.0",
+    "graphql-subscriptions-v3": "npm:graphql-subscriptions@^3.0.0",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--no-warnings",
+      "--experimental-transform-types"
+    ]
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json"
+  }
+}

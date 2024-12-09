@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren, useCallback, useState } from 'react';
+import { type PropsWithChildren, useCallback, useState } from 'react';
 import { Generator, type GeneratorProps } from './generator.tsx';
 
 export function WithGenerator(props: PropsWithChildren<GeneratorProps>) {

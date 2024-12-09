@@ -1,8 +1,29 @@
 <p align="center">
-  <img src="./website/static/img/logo-baeta.svg" alt="Baeta Logo" width="150"/>
+  <img src="https://raw.githubusercontent.com/andreisergiu98/baeta/refs/heads/main/website/static/img/logo-baeta.svg" alt="Baeta Logo" width="150"/>
 </p>
 
-# Baeta
+<div align="center">
+  <h1>Baeta</h1>
+  <a href="https://www.npmjs.com/package/@baeta/cli"><img src="https://img.shields.io/npm/v/@baeta/cli.svg?style=flat" /></a>
+   <a href="https://github.com/andreisergiu98/baeta/actions/workflows/testing.yml"><img src="https://img.shields.io/github/actions/workflow/status/andreisergiu98/baeta/testing.yml" /></a>
+  <a href="https://github.com/andreisergiu98/baeta/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>
+  <a href="https://github.com/andreisergiu98/baeta/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" /></a>
+  <br />
+  <br />
+  <a href="https://baeta.io/docs/getting-started/installation">Getting Started</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://www.baeta.io/">Website</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://baeta.io/docs/intro">Docs</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://github.com/andreisergiu98/baeta/tree/main/examples">Examples</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://discord.gg/BHFXHvyj">Discord</a>
+  <br />
+  <hr />
+</div>
+
+# What is Baeta?
 
 Building GraphQL APIs shouldn't be complicated. **Baeta** is a modern, modular, open-source GraphQL framework designed with flexibility in mind. It follows a granular approach where you only add what you need, helping developers focus on what matters most - creating powerful, scalable APIs without the boilerplate.
 
@@ -69,28 +90,49 @@ Query.users(() => {
 });
 ```
 
-#### 3. Add caching
+#### 3. Add authorization
 
 ```typescript
-import { getUserModule } from "./typedef.ts";
+const { Query, Mutation } = getUserModule();
+
+Query.users.$auth({
+  $or: {
+    isPublic: true,
+    isLoggedIn: true,
+  },
+});
+```
+
+#### 4. Add caching
+
+```typescript
+import { getUserModule } from "./typedef";
 
 const { User, Query } = getUserModule();
 
-export const userCache = User.$createCache({});
+export const userCache = User.$createCache();
 
-Query.user.$useCache(userCache, {});
-Query.users.$useCache(userCache, {});
+Query.user.$useCache(userCache);
+Query.users.$useCache(userCache);
 ```
-
-## Documentation
-- [Website](https://baeta.io)
-- [Official Documentation](https://baeta.io/docs/intro/)
-- [Examples](https://github.com/andreisergiu98/baeta/tree/main/examples)
-
 
 ## Compatibility
 
 Baeta is compatible with all GraphQL servers, which makes it easy to integrate with your existing stack. It works seamlessly with popular GraphQL server libraries such as **Graphql Yoga** and **Apollo Server**, as well as other popular tools like **Prisma**, **Drizzle** and **Kysely**.
+
+Baeta's development tools are built for Node.js, but the runtime code is environment-agnostic. This means your Baeta applications can run anywhere JavaScript runs, including:
+
+- Deno
+- Cloudflare Workers
+- AWS Lambda
+- Vercel Edge Functions
+- Bun
+- Node.js
+- Any other JavaScript runtime
+
+## Credits
+
+Baeta was inspired by several amazing projects and people in the GraphQL ecosystem. Check out our [Credits page](https://baeta.io/docs/credits) to learn more about the individuals and projects that influenced Baeta's development.
 
 ## License
 

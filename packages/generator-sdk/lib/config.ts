@@ -74,6 +74,11 @@ export interface GeneratorOptions {
 	 * Additional schema loaders to be used for "schemas" option.
 	 */
 	loaders?: Loader[];
+
+	/**
+	 * File extension for generated import statements.
+	 */
+	importExtension?: '.js' | '.ts' | false;
 }
 
 export interface NormalizedGeneratorOptions {
@@ -87,6 +92,7 @@ export interface NormalizedGeneratorOptions {
 	scalars?: Record<string, string>;
 	fileOptions?: FileOptions;
 	loaders?: Loader[];
+	importExtension?: '.js' | '.ts';
 }
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
@@ -113,6 +119,8 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 		scalars: options.scalars,
 		fileOptions: options.fileOptions,
 		loaders: options.loaders,
+		importExtension:
+			options.importExtension === false ? undefined : (options.importExtension ?? '.ts'),
 	};
 }
 

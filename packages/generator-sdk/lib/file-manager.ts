@@ -60,8 +60,4 @@ export class FileManager {
 	getPersistedFiles() {
 		return this.files.filter((file) => file.persisted);
 	}
-
-	getPersistedFileNames() {
-		return this.getPersistedFiles().map((file) => file.filename);
-	}
 }

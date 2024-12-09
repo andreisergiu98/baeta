@@ -1,15 +1,39 @@
 projects:
+  examples/apollo-ws:
+    schema:
+      - "examples/apollo-ws/src/modules/**/*.gql"
+    include:
+      - "examples/apollo-ws/src/**/*.gql"
+
   examples/apollo:
     schema:
       - "examples/apollo/src/modules/**/*.gql"
     include:
       - "examples/apollo/src/**/*.gql"
 
-  examples/apollo-ws:
+  examples/auth:
     schema:
-      - "examples/apollo-ws/src/modules/**/*.gql"
+      - "examples/auth/src/modules/**/*.gql"
     include:
-      - "examples/apollo-ws/src/**/*.gql"
+      - "examples/auth/src/**/*.gql"
+
+  examples/cache-advanced:
+    schema:
+      - "examples/cache-advanced/src/modules/**/*.gql"
+    include:
+      - "examples/cache-advanced/src/**/*.gql"
+
+  examples/cache:
+    schema:
+      - "examples/cache/src/modules/**/*.gql"
+    include:
+      - "examples/cache/src/**/*.gql"
+
+  examples/cloudflare-ws:
+    schema:
+      - "examples/cloudflare-ws/src/modules/**/*.gql"
+    include:
+      - "examples/cloudflare-ws/src/**/*.gql"
 
   examples/cloudflare:
     schema:
@@ -17,11 +41,17 @@ projects:
     include:
       - "examples/cloudflare/src/**/*.gql"
 
-  examples/cloudflare-ws:
+  examples/complexity:
     schema:
-      - "examples/cloudflare-ws/src/modules/**/*.gql"
+      - "examples/complexity/src/modules/**/*.gql"
     include:
-      - "examples/cloudflare-ws/src/**/*.gql"
+      - "examples/complexity/src/**/*.gql"
+
+  examples/context-store:
+    schema:
+      - "examples/context-store/src/modules/**/*.gql"
+    include:
+      - "examples/context-store/src/**/*.gql"
 
   examples/directives:
     schema:
@@ -31,9 +61,15 @@ projects:
 
   examples/prisma:
     schema:
-      - "examples/apollo/src/modules/**/*.gql"
+      - "examples/prisma/src/modules/**/*.gql"
     include:
-      - "examples/apollo/src/**/*.gql"
+      - "examples/prisma/src/**/*.gql"
+
+  examples/relay-pagination:
+    schema:
+      - "examples/relay-pagination/src/modules/**/*.gql"
+    include:
+      - "examples/relay-pagination/src/**/*.gql"
 
   examples/scalars:
     schema:
@@ -41,14 +77,27 @@ projects:
     include:
       - "examples/scalars/src/**/*.gql"
 
-  examples/yoga:
+  examples/unions-interfaces:
     schema:
-      - "examples/yoga/src/modules/**/*.gql"
+      - "examples/unions-interfaces/src/modules/**/*.gql"
     include:
-      - "examples/yoga/src/**/*.gql"
+      - "examples/unions-interfaces/src/**/*.gql"
+
+  examples/yoga-sse:
+    schema:
+      - "examples/yoga-sse/src/modules/**/*.gql"
+    include:
+      - "examples/yoga-sse/src/**/*.gql"
 
   examples/yoga-ws:
     schema:
       - "examples/yoga-ws/src/modules/**/*.gql"
     include:
       - "examples/yoga-ws/src/**/*.gql"
+
+  examples/yoga:
+    schema:
+      - "examples/yoga/src/modules/**/*.gql"
+    include:
+      - "examples/yoga/src/**/*.gql"
+

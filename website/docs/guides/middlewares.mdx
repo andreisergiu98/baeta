@@ -1,0 +1,113 @@
+---
+sidebar_position: 30
+---
+
+# Middlewares
+
+Baeta provides a powerful middleware system that allows you to add functionality before and after your resolvers.
+
+## Basic Usage
+
+```typescript
+import { getUserModule } from "./typedef.ts";
+
+const { Query } = getUserModule();
+
+Query.user.$use(async ({ args, ctx }, next) => {
+  console.log("Before resolver:", args);
+  const result = await next();
+  console.log("After resolver:", result);
+  return result;
+});
+```
+
+## Common Use Cases
+
+### Logging
+
+```typescript
+Query.user.$use(async (context, next) => {
+  const startTime = Date.now();
+  const result = await next();
+  const duration = Date.now() - startTime;
+
+  console.log(`Query.user took ${duration}ms`);
+  return result;
+});
+```
+
+### Authentication
+
+```typescript
+Query.user.$use(async ({ ctx }, next) => {
+  if (!ctx.user) {
+    throw new UnauthenticatedError();
+  }
+  return next();
+});
+```
+
+### Data Transformation
+
+```typescript
+Query.user.$use(async (context, next) => {
+  const user = await next();
+  if (user) {
+    // Remove sensitive data
+    delete user.internalNotes;
+  }
+  return user;
+});
+```
+
+### Error Handling
+
+```typescript
+Query.user.$use(async (context, next) => {
+  try {
+    return await next();
+  } catch (error) {
+    console.error("Error in user resolver:", error);
+    throw new GraphQLError("Failed to fetch user");
+  }
+});
+```
+
+## Middleware Context
+
+Middlewares receive the same context as resolvers:
+
+- `args`: Arguments passed to the resolver
+- `ctx`: Context object
+- `root`: Parent object
+- `info`: GraphQL resolve info
+
+## Multiple Middlewares
+
+Middlewares are executed in the order they are defined:
+
+```typescript
+const { Query } = getUserModule();
+
+// First middleware
+Query.user.$use(async (context, next) => {
+  console.log("First middleware - before");
+  const result = await next();
+  console.log("First middleware - after");
+  return result;
+});
+
+// Second middleware
+Query.user.$use(async (context, next) => {
+  console.log("Second middleware - before");
+  const result = await next();
+  console.log("Second middleware - after");
+  return result;
+});
+
+// Output order:
+// First middleware - before
+// Second middleware - before
+// Second middleware - after
+// First middleware - after
+```

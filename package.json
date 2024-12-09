@@ -29,22 +29,24 @@
     "website",
     "packages/*",
     "tools/*",
-    "examples/*"
+    "examples/*",
+    "packages/create-baeta/meta/*"
   ],
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",
     "docs": "yarn workspace @baeta/website build",
+    "docs:api": "yarn workspace @baeta/website write-api",
     "examples:sync": "./examples/sync.sh",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
-    "linter": "biome check .",
-    "prepare": "husky install",
+    "linter": "biome check --organize-imports-enabled=true .",
+    "prepare": "husky",
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",
     "release": "yarn build && changeset publish",
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",
     "sync:examples": "./examples/sync.sh",
     "test": "yarn turbo test --filter='./packages/*'",
-    "types": "yarn workspaces foreach -Apv run types",
+    "types": "yarn turbo types --filter='./packages/*'",
     "watch": "yarn turbo watch build --filter='./packages/*'"
   },
   "devDependencies": {
@@ -52,12 +54,14 @@
     "@baeta/builder": "workspace:^",
     "@biomejs/biome": "^1.9.4",
     "@changesets/changelog-github": "^0.5.0",
+    "@types/node": "^22.10.1",
     "@yarnpkg/sdks": "^3.2.0",
     "@yarnpkg/types": "^4.0.0",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
-    "turbo": "^2.2.3",
-    "typescript": "^5.6.3"
+    "prettier": "^3.4.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.5.3"
 }

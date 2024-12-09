@@ -7,7 +7,22 @@ description: "Configure your Baeta project with TypeScript"
 
 Set up your Baeta project configuration in a few simple steps.
 
-## Setup Configuration File
+## Configuration File
+
+Baeta looks for a configuration file in your project root with one of these names:
+
+- `baeta.js`
+- `.baeta.js`
+- `baeta.mjs`
+- `.baeta.mjs`
+- `baeta.ts` (requires `@baeta/compiler`)
+- `.baeta.ts` (requires `@baeta/compiler`)
+
+:::note
+While Baeta supports **CommonJS**, the configuration file must use **ESM**. If using `.js` file, ensure `"type": "module"` is set in your `package.json`, otherwise use the `.mjs` file extension.
+:::
+
+## Basic Configuration
 
 ### 1. Define Schema Location
 
@@ -18,7 +33,7 @@ import { defineConfig } from "@baeta/cli";
 
 export default defineConfig({
   graphql: {
-    schemas: ["src/**.gql"], // Location of your GraphQL schemas
+    schemas: ["src/**/*.gql"], // Location of your GraphQL schemas
   },
 });
 ```
@@ -32,7 +47,7 @@ import { defineConfig } from "@baeta/cli";
 
 export default defineConfig({
   graphql: {
-    schemas: ["src/**.gql"],
+    schemas: ["src/**/*.gql"],
     modulesDir: "src/modules",
   },
   compiler: {
@@ -42,7 +57,7 @@ export default defineConfig({
 });
 ```
 
-### 3.Add NPM Scripts
+### 3.Add Package.json Scripts
 
 ```json
 {
@@ -55,9 +70,27 @@ export default defineConfig({
 ```
 
 These scripts provide:
+
 - **build**: Builds your project and generates necessary files
 - **generate**: Updates GraphQL types and resolvers
 - **start**: Runs development server with hot reload
 
+:::tip
+If you're using Bun or Deno you might prefer to run the TypeScript source directly. In that case replace `start` with:
+
+```json
+{
+  "start:bun": "baeta generate --watch --run='bun --watch --inspect src/app.ts'",
+  "start:deno": "baeta generate --watch --run='deno --watch --inspect --allow-net --allow-read --allow-env src/app.ts'"
+}
+```
+
+:::
+
+:::tip
+Run `baeta generate --help` or `baeta build --help` to see all command options
+:::
+
 ## Next Steps
+
 Once configured, you're ready to [create your first module](./first-module).

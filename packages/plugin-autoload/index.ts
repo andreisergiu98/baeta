@@ -31,6 +31,8 @@ const defaultSuffixes = [
 	'authorizations',
 	'cache',
 	'caches',
+	'complexity',
+	'complexities',
 	'resolver',
 	'resolvers',
 	'query',
@@ -131,13 +133,19 @@ function getModuleMatcher(options?: AutoloadPluginOptions) {
 	return options.modules.match ?? (() => true);
 }
 
-function buildResolverImport(resolver: string, modulesDir: string) {
-	return `import "./${path.relative(modulesDir, resolver).replace('.ts', '')}";\n`;
+function buildResolverImport(resolver: string, modulesDir: string, extension: string) {
+	const resolverPath = path.relative(modulesDir, resolver).replace('.ts', '');
+	return `import "./${resolverPath}${extension}";\n`;
 }
 
-function buildModuleImport(moduleName: string, modulesDir: string, filename: string) {
+function buildModuleImport(
+	moduleName: string,
+	modulesDir: string,
+	filename: string,
+	extension: string,
+) {
 	const modulePath = path.relative(modulesDir, filename).replace('.ts', '');
-	return `import {${getModuleGetName(moduleName)}} from "./${modulePath}";\n`;
+	return `import {${getModuleGetName(moduleName)}} from "./${modulePath}${extension}";\n`;
 }
 
 function buildModuleList(moduleNames: string[]) {
@@ -185,7 +193,11 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
 			);
 
 			const content = resolvers.map((resolver) =>
-				buildResolverImport(resolver, ctx.generatorOptions.modulesDir),
+				buildResolverImport(
+					resolver,
+					ctx.generatorOptions.modulesDir,
+					ctx.generatorOptions.importExtension ?? '',
+				),
 			);
 
 			const moduleNames: string[] = [];
@@ -204,7 +216,12 @@ export function autoloadPlugin(options?: AutoloadPluginOptions) {
 				moduleNames.push(moduleName);
 
 				content.push(
-					buildModuleImport(moduleName, ctx.generatorOptions.modulesDir, typedef.filename),
+					buildModuleImport(
+						moduleName,
+						ctx.generatorOptions.modulesDir,
+						typedef.filename,
+						ctx.generatorOptions.importExtension ?? '',
+					),
 				);
 			}
 

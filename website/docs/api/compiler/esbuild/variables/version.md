@@ -1,0 +1,3 @@
+# Variable: version
+
+> **version**: `string`

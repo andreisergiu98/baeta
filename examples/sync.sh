@@ -4,16 +4,16 @@ cp -r ./examples/yoga/src/{modules,__generated__} ./examples/apollo/src
 
 cp -r ./examples/yoga-sse/src/{lib,modules,__generated__} ./examples/yoga-ws/src
 
-cp -r ./examples/yoga-sse/src/{lib,modules,__generated__} ./examples/apollo-ws/src
-
 cp -r ./examples/yoga/src/{modules,__generated__} ./examples/cloudflare/src
 
 cp -r ./examples/yoga-sse/src/{modules,__generated__} ./examples/cloudflare-ws/src
 
+cp -r ./examples/yoga/src/{modules,__generated__} ./examples/complexity/src
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' -e 's/ctx\.pubsub\.publish/ctx.publish/g' -e 's/ctx\.pubsub\.asyncIterator/ctx.subscribe/g' ./examples/cloudflare-ws/src/modules/user/user.resolvers.ts
+    sed -i '' -e 's/ctx\.pubsub\.publish/ctx.publish/g' -e 's/ctx\.pubsub\.subscribe/ctx.subscribe/g' ./examples/cloudflare-ws/src/modules/user/user.resolvers.ts
 else
-    sed -i -e 's/ctx\.pubsub\.publish/ctx.publish/g' -e 's/ctx\.pubsub\.asyncIterator/ctx.subscribe/g' ./examples/cloudflare-ws/src/modules/user/user.resolvers.ts
+    sed -i -e 's/ctx\.pubsub\.publish/ctx.publish/g' -e 's/ctx\.pubsub\.subscribe/ctx.subscribe/g' ./examples/cloudflare-ws/src/modules/user/user.resolvers.ts
 fi
 
 cp -r ./examples/yoga-ws/src/app.ts ./examples/prisma/src
@@ -31,3 +31,5 @@ cp -r ./examples/prisma/src/{lib,modules,types,app.ts} ./examples/relay-paginati
 cp -r ./examples/prisma/{dev.db,.gitignore,schema.prisma} ./examples/relay-pagination
 
 yarn examples:build
+
+./examples/sync-graphqlrc.sh

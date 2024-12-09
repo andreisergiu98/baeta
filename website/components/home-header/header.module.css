@@ -16,6 +16,18 @@
 	}
 }
 
+@media screen and (max-width: 768px) {
+	.buttons {
+		gap: 8px;
+	}
+
+	.buttons a {
+		font-size: 18px;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+}
+
 .buttons {
 	display: flex;
 	align-items: center;

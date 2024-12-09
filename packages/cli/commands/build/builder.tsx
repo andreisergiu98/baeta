@@ -2,13 +2,13 @@ import { randomUUID } from 'node:crypto';
 import type { CompilerOptions } from '@baeta/compiler';
 import type { BuildContext } from '@baeta/compiler/esbuild';
 import type { Subprocess } from 'execa';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { makeErrorMessage, makeErrorOutput, useConfig } from '../../sdk/index.ts';
 import type { TextOutput } from '../../types/text.ts';
 import { dynamicImportCompiler } from '../../utils/compiler.ts';
+import { addProcess, killProcesses } from '../../utils/process.ts';
 import { WithGenerator } from '../generate/with-generator.tsx';
 import { AppStatus } from './app-status.tsx';
-import { killProcesses, startProcess } from './builder-plugin.ts';
 import { BuilderStatus } from './builder-status.tsx';
 
 interface Props {
@@ -46,7 +46,7 @@ export function Builder(props: Props) {
 				return;
 			}
 
-			return startProcess(
+			return addProcess(
 				processesRef.current,
 				command,
 				(output) => {
@@ -137,12 +137,7 @@ export function Builder(props: Props) {
 				process.exit(1);
 			});
 		},
-		[
-			props.watch,
-			// props.onSuccess, props.onError,
-			handleStart,
-			handleEnd,
-		],
+		[props.watch, handleStart, handleEnd],
 	);
 
 	useEffect(() => {

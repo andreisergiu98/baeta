@@ -1,5 +1,4 @@
-import fs from 'node:fs/promises';
-import type { FileManager } from '@baeta/generator-sdk';
+import { File, FileBlock, type FileManager } from '@baeta/generator-sdk';
 import { readState } from './persistence.ts';
 
 export function cleanPreviousFiles(
@@ -32,9 +31,18 @@ async function cleanByState(current: FileManager, stateFile: string) {
 		return;
 	}
 
-	const currentFilenames = current.getPersistedFileNames();
-	const toUnlink = state.previousFiles.filter((file) => !currentFilenames.includes(file));
-	const promises = toUnlink.map((file) => fs.unlink(file).catch(() => {}));
+	const currentFilenames = current.getPersistedFiles().map((file) => file.filename);
+
+	const toUnlink = state.previousFiles
+		.filter((file) => !currentFilenames.includes(file.filename))
+		.map((data) => {
+			if (data.type === 'file-block') {
+				return new FileBlock(data.filename, data.content, data.start, data.end, data.tag);
+			}
+			return new File(data.filename, data.content, data.tag);
+		});
+
+	const promises = toUnlink.map((file) => file.unlink().catch(() => {}));
 
 	return Promise.all(promises).then(() => {});
 }

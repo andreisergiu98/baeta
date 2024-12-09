@@ -8,11 +8,9 @@ import type { ScopeRules } from './scope-rules.ts';
 
 declare global {
 	export namespace BaetaExtensions {
-		type NewType<Root, Context, Args> = GetScopeRules<Root, Context, Args>;
-
 		export interface ResolverExtensions<Result, Root, Context, Args> {
 			$auth: (
-				scopes: ScopeRules | NewType<Root, Context, Args>,
+				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
 				options?: AuthMethodOptions<Result, Root, Context, Args>,
 			) => void;
 			$postAuth: (

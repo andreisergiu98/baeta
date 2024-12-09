@@ -10,21 +10,17 @@ import { createResolverPath, isOperationType } from '../utils/resolver.ts';
 import { type ScopeErrorResolver, defaultErrorResolver, resolveError } from './error.ts';
 import { type GetGrant, saveGrants } from './grant.ts';
 import type { LogicRule } from './rule.ts';
+import {
+	type DefaultScopes,
+	type DefaultScopesMiddlewares,
+	selectDefaultScopes,
+} from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
 import { type ScopeRules, verifyScopes } from './scope-rules.ts';
 import { loadAuthStore } from './store-loader.ts';
 
-interface OperationOptions<T> {
-	Query?: T;
-	Mutation?: T;
-	Subscription?: {
-		subscribe?: T;
-		resolve?: T;
-	};
-}
-
 export interface AuthOptions {
-	defaultScopes?: OperationOptions<ScopeRules>;
+	defaultScopes?: DefaultScopes;
 	errorResolver?: ScopeErrorResolver;
 }
 
@@ -41,81 +37,77 @@ export interface AuthMethodSubscribeOptions<Root, Context, Args> {
 
 export type GetScopeRules<Root, Context, Args> = (
 	params: MiddlewareParams<Root, Context, Args>,
-) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
+) => boolean | ScopeRules | Promise<boolean | ScopeRules>;
 
 export type GetPostScopeRules<Result, Root, Context, Args> = (
 	params: MiddlewareParams<Root, Context, Args>,
 	result: Result,
-) => ScopeRules | Promise<ScopeRules> | true | Promise<true>;
+) => boolean | ScopeRules | Promise<boolean | ScopeRules>;
 
-export class AuthExtension<T> extends Extension {
+export class AuthExtension<Ctx> extends Extension {
 	private defaultRule: LogicRule = '$and';
 	private authMap: Record<string, Record<string, undefined | NativeMiddleware>> = {};
 
-	private readonly defaultMiddlewares: OperationOptions<NativeMiddleware>;
+	private readonly defaultMiddlewares: DefaultScopesMiddlewares;
 
 	constructor(
-		readonly loadScopes: GetScopeLoader<T>,
+		readonly loadScopes: GetScopeLoader<Ctx>,
 		readonly options: AuthOptions = {},
 	) {
 		super();
 		this.defaultMiddlewares = this.createDefaultMiddlewares();
 	}
 
-	getModuleExtensions = () => {
-		return {};
-	};
-
 	getTypeExtensions = <Root, Context>(
-		module: ModuleBuilder,
+		_module: ModuleBuilder,
 		type: string,
 	): BaetaExtensions.TypeExtensions<Root, Context> => {
 		return {
-			$auth: this.createPreAuthMethod(type, '*'),
+			$auth: this.createAuthMethod(type, '*'),
 			$postAuth: this.createPostAuthMethod(type, '*'),
 		};
 	};
 
 	getResolverExtensions = <Result, Root, Context, Args>(
-		module: ModuleBuilder,
+		_module: ModuleBuilder,
 		type: string,
 		field: string,
 	): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
 		return {
-			$auth: this.createPreAuthMethod(type, field),
+			$auth: this.createAuthMethod(type, field),
 			$postAuth: this.createPostAuthMethod(type, field),
 		};
 	};
 
 	getSubscriptionExtensions = <Root, Context, Args>(
-		module: ModuleBuilder,
+		_module: ModuleBuilder,
 		field: string,
 	): BaetaExtensions.SubscriptionExtensions<Root, Context, Args> => {
 		return {
-			$auth: this.createSubscriptionPreAuthMethod(field),
+			$auth: this.createSubscriptionAuthMethod(field),
 		};
 	};
 
 	getSubscriptionSubscribeExtensions = <Root, Context, Args>(
-		module: ModuleBuilder,
+		_module: ModuleBuilder,
 		field: string,
 	): BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args> => {
 		return {
-			$auth: this.createPreAuthMethod('Subscription', `${field}.subscribe`),
+			$auth: this.createAuthMethod('Subscription', `${field}.subscribe`),
 		};
 	};
 
 	getSubscriptionResolveExtensions = <Result, Root, Context, Args>(
-		module: ModuleBuilder,
+		_module: ModuleBuilder,
 		field: string,
 	): BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args> => {
 		return {
-			$auth: this.createPreAuthMethod('Subscription', `${field}.resolve`),
+			$auth: this.createAuthMethod('Subscription', `${field}.resolve`),
 			$postAuth: this.createPostAuthMethod('Subscription', `${field}.resolve`),
 		};
 	};
 
-	build = (module: ModuleBuilder, mapper: ResolverMapper) => {
+	build = (_module: ModuleBuilder, mapper: ResolverMapper) => {
 		for (const type of mapper.getTypes()) {
 			let fields = mapper.getTypeFields(type);
 
@@ -134,12 +126,12 @@ export class AuthExtension<T> extends Extension {
 				}
 
 				if (field !== '*') {
-					mapper.addMiddleware(type, field, middleware, true);
+					mapper.prependMiddleware(type, field, middleware);
 					continue;
 				}
 
 				for (const fieldWithoutScope of fieldsWithoutScopes) {
-					mapper.addMiddleware(type, fieldWithoutScope, middleware, true);
+					mapper.prependMiddleware(type, fieldWithoutScope, middleware);
 				}
 
 				fieldsWithoutScopes = [];
@@ -161,87 +153,7 @@ export class AuthExtension<T> extends Extension {
 		}
 	};
 
-	private createDefaultMiddlewares() {
-		const createDefaultMiddleware = (rules?: ScopeRules, isSubscribe = false) => {
-			if (rules == null) {
-				return;
-			}
-			return this.createPreMiddleware(() => rules, undefined, undefined, isSubscribe);
-		};
-
-		return {
-			Query: createDefaultMiddleware(this.options.defaultScopes?.Query),
-			Mutation: createDefaultMiddleware(this.options.defaultScopes?.Mutation),
-			Subscription: {
-				subscribe: createDefaultMiddleware(
-					this.options.defaultScopes?.Subscription?.subscribe,
-					true,
-				),
-				resolve: createDefaultMiddleware(this.options.defaultScopes?.Subscription?.resolve),
-			},
-		};
-	}
-
-	private createDefaultMiddlewareBuilder(type: 'Query' | 'Mutation' | 'Subscription') {
-		if (type !== 'Subscription') {
-			const middleware = this.defaultMiddlewares[type];
-
-			if (middleware == null) {
-				return;
-			}
-
-			return (mapper: ResolverMapper, field: string) => {
-				mapper.addMiddleware(type, field, middleware, true);
-			};
-		}
-
-		const subscribeDefaultMiddleware = this.defaultMiddlewares?.Subscription?.subscribe;
-		const resolveDefaultMiddleware = this.defaultMiddlewares.Subscription?.resolve;
-
-		if (resolveDefaultMiddleware == null && subscribeDefaultMiddleware == null) {
-			return;
-		}
-
-		return (mapper: ResolverMapper, field: string) => {
-			if (subscribeDefaultMiddleware && field.endsWith('.subscribe')) {
-				mapper.addMiddleware(type, field, subscribeDefaultMiddleware, true);
-			}
-
-			if (resolveDefaultMiddleware && field.endsWith('.resolve')) {
-				mapper.addMiddleware(type, field, resolveDefaultMiddleware, true);
-			}
-		};
-	}
-
-	private selectDefaultScopes(skipDefaults: boolean | undefined, type: string, field: string) {
-		if (!isOperationType(type)) {
-			return;
-		}
-
-		if (skipDefaults === true) {
-			return;
-		}
-
-		if (type === 'Query') {
-			return this.options.defaultScopes?.Query;
-		}
-
-		if (type === 'Mutation') {
-			return this.options.defaultScopes?.Mutation;
-		}
-
-		if (type === 'Subscription') {
-			if (field.endsWith('.subscribe')) {
-				return this.options.defaultScopes?.Subscription?.subscribe;
-			}
-
-			if (field.endsWith('.resolve')) {
-				return this.options.defaultScopes?.Subscription?.resolve;
-			}
-		}
-	}
-
-	private createPreAuthMethod<Result, Root, Context, Args>(
+	private createAuthMethod<Result, Root, Context, Args>(
 		type: string,
 		field: string,
 		isSubscribe = false,
@@ -250,9 +162,9 @@ export class AuthExtension<T> extends Extension {
 			scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
 			options?: AuthMethodOptions<Result, Root, Context, Args>,
 		) => {
-			const defaultScopes = this.selectDefaultScopes(options?.skipDefaults, type, field);
+			const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, field);
 			const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
-			const middleware = this.createPreMiddleware(getScopes, options, defaultScopes, isSubscribe);
+			const middleware = this.createMiddleware(getScopes, options, defaultScopes, isSubscribe);
 			this.registerMiddleware(type, field, middleware);
 		};
 	}
@@ -262,22 +174,22 @@ export class AuthExtension<T> extends Extension {
 			getScopes: GetPostScopeRules<Result, Root, Context, Args>,
 			options?: AuthMethodOptions<Result, Root, Context, Args>,
 		) => {
-			const defaultScopes = this.selectDefaultScopes(options?.skipDefaults, type, field);
+			const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, field);
 			const middleware = this.createPostMiddleware(getScopes, options, defaultScopes);
 			this.registerMiddleware(type, field, middleware);
 		};
 	}
 
-	private createSubscriptionPreAuthMethod<Root, Context, Args>(field: string) {
+	private createSubscriptionAuthMethod<Root, Context, Args>(field: string) {
 		return (
 			scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
 			options?: AuthMethodOptions<unknown, Root, Context, Args>,
 		) => {
-			const registerResolve = this.createPreAuthMethod<unknown, Root, Context, Args>(
+			const registerResolve = this.createAuthMethod<unknown, Root, Context, Args>(
 				'Subscription',
 				`${field}.resolve`,
 			);
-			const registerSubscribe = this.createPreAuthMethod<unknown, Root, Context, Args>(
+			const registerSubscribe = this.createAuthMethod<unknown, Root, Context, Args>(
 				'Subscription',
 				`${field}.subscribe`,
 			);
@@ -287,14 +199,14 @@ export class AuthExtension<T> extends Extension {
 		};
 	}
 
-	private createPreMiddleware<Result, Root, Context, Args>(
+	private createMiddleware<Result, Root, Context, Args>(
 		getScopes: GetScopeRules<Root, Context, Args>,
 		options?: AuthMethodOptions<Result, Root, Context, Args>,
 		defaultScopes?: ScopeRules,
 		isSubscribe = false,
 	): NativeMiddleware<Result, Root, Context, Args> {
 		return (next) => async (root, args, ctx, info) => {
-			loadAuthStore(ctx as unknown as T, this.loadScopes);
+			loadAuthStore(ctx as unknown as Ctx, this.loadScopes);
 
 			const requiredScopes = await getScopes({ root, args, ctx, info });
 
@@ -320,7 +232,7 @@ export class AuthExtension<T> extends Extension {
 		defaultScopes?: ScopeRules,
 	): NativeMiddleware<Result, Root, Context, Args> {
 		return (next) => async (root, args, ctx, info) => {
-			loadAuthStore(ctx as unknown as T, this.loadScopes);
+			loadAuthStore(ctx as unknown as Ctx, this.loadScopes);
 
 			const result = await next(root, args, ctx, info);
 			const requiredScopes = await getScopes({ root, args, ctx, info }, result);
@@ -332,6 +244,56 @@ export class AuthExtension<T> extends Extension {
 			}
 
 			return result;
+		};
+	}
+
+	private createDefaultMiddlewares() {
+		const createDefaultMiddleware = (rules?: ScopeRules, isSubscribe = false) => {
+			if (rules == null) {
+				return;
+			}
+			return this.createMiddleware(() => rules, undefined, undefined, isSubscribe);
+		};
+
+		return {
+			Query: createDefaultMiddleware(this.options.defaultScopes?.Query),
+			Mutation: createDefaultMiddleware(this.options.defaultScopes?.Mutation),
+			Subscription: {
+				subscribe: createDefaultMiddleware(
+					this.options.defaultScopes?.Subscription?.subscribe,
+					true,
+				),
+				resolve: createDefaultMiddleware(this.options.defaultScopes?.Subscription?.resolve),
+			},
+		};
+	}
+
+	private createDefaultMiddlewareBuilder(type: 'Query' | 'Mutation' | 'Subscription') {
+		if (type !== 'Subscription') {
+			const middleware = this.defaultMiddlewares[type];
+			if (middleware == null) {
+				return;
+			}
+			return (mapper: ResolverMapper, field: string) => {
+				mapper.prependMiddleware(type, field, middleware);
+			};
+		}
+
+		const subscribeDefaultMiddleware = this.defaultMiddlewares?.Subscription?.subscribe;
+		const resolveDefaultMiddleware = this.defaultMiddlewares.Subscription?.resolve;
+
+		if (resolveDefaultMiddleware == null && subscribeDefaultMiddleware == null) {
+			return;
+		}
+
+		return (mapper: ResolverMapper, field: string) => {
+			if (subscribeDefaultMiddleware && field.endsWith('.subscribe')) {
+				mapper.prependMiddleware(type, field, subscribeDefaultMiddleware);
+			}
+
+			if (resolveDefaultMiddleware && field.endsWith('.resolve')) {
+				mapper.prependMiddleware(type, field, resolveDefaultMiddleware);
+			}
 		};
 	}
 

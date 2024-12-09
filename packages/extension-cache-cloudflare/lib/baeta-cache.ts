@@ -78,7 +78,7 @@ export class BaetaCache implements DurableObject {
 
 	put = async (values: [string, string][], ttl?: number) => {
 		const entries: Record<string, CacheValue> = {};
-		const expireAt = ttl ? Date.now() + ttl * 1000 : undefined;
+		const expireAt = ttl ? Date.now() + ttl : undefined;
 
 		for (const [key, value] of values) {
 			entries[key] = {

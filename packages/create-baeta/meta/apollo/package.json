@@ -1,0 +1,26 @@
+{
+  "name": "@baeta/template-apollo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "baeta build --generate",
+    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app.js'"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "@baeta/core": "workspace:^",
+    "@baeta/errors": "workspace:^",
+    "@baeta/extension-complexity": "workspace:^",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "@baeta/cli": "workspace:^",
+    "@baeta/compiler": "workspace:^",
+    "@baeta/plugin-autoload": "workspace:^",
+    "@types/bun": "^1.1.14",
+    "@types/deno": "^2.0.0",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  }
+}

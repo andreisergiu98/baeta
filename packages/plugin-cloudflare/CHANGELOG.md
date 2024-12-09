@@ -1,5 +1,69 @@
 # @baeta/plugin-cloudflare
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`bf2d1a3`](https://github.com/andreisergiu98/baeta/commit/bf2d1a326235e5f34e723a5acc81cd7b974b913b)]:
+  - @baeta/generator-sdk@0.1.5
+
+## 1.0.5
+
+### Patch Changes
+
+- [`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add readme
+
+- Updated dependencies [[`b59db50`](https://github.com/andreisergiu98/baeta/commit/b59db501a83275ab2d964933080e688a3a5d8820)]:
+  - @baeta/extension-cache-cloudflare@0.0.5
+  - @baeta/generator-sdk@0.1.4
+  - @baeta/cloudflare-subscriptions@0.1.4
+
+## 1.0.4
+
+### Patch Changes
+
+- [#180](https://github.com/andreisergiu98/baeta/pull/180) [`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Raise minimum required NodeJS version to 22.12.0. Drop CommonJS builds in favor of the require_esm feature from NodeJS 22.12.0 onwards.
+
+- [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - raise es target to 2024
+
+- Updated dependencies [[`3f2befb`](https://github.com/andreisergiu98/baeta/commit/3f2befbb4b645e2970727482e970c4e78f0ed598), [`483c709`](https://github.com/andreisergiu98/baeta/commit/483c70932f815fd114732c00b74f9488d7924c72), [`de6e89c`](https://github.com/andreisergiu98/baeta/commit/de6e89c1b592e280967c73a4137d24ee56ef1857)]:
+  - @baeta/extension-cache-cloudflare@0.0.4
+  - @baeta/generator-sdk@0.1.3
+  - @baeta/cloudflare-subscriptions@0.1.3
+
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @baeta/extension-cache-cloudflare@0.0.3
+
+## 1.0.2
+
+### Patch Changes
+
+- [#170](https://github.com/andreisergiu98/baeta/pull/170) [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`e3fb6f8`](https://github.com/andreisergiu98/baeta/commit/e3fb6f877b4b20e248ad79cbaa3655cabe973f6b), [`59bbb9c`](https://github.com/andreisergiu98/baeta/commit/59bbb9c4baaf716f27dc251fe7aeb0231e6c5321)]:
+  - @baeta/generator-sdk@0.1.2
+  - @baeta/extension-cache-cloudflare@0.0.2
+  - @baeta/cloudflare-subscriptions@0.1.2
+
+## 1.0.1
+
+### Patch Changes
+
+- [`fd3a5d2`](https://github.com/andreisergiu98/baeta/commit/fd3a5d27b497aca4b8807155e801b1c1197c5fe2) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - handle cloudflare cache in cloudflare plugin
+
+- [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix exports order in package.json
+
+- [#161](https://github.com/andreisergiu98/baeta/pull/161) [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`7f1958c`](https://github.com/andreisergiu98/baeta/commit/7f1958c44d1b9bed473e48c875fdaa7020c434fa), [`b9638eb`](https://github.com/andreisergiu98/baeta/commit/b9638eb9fb713507efa9821b4f04cc7896a997b1), [`1452c52`](https://github.com/andreisergiu98/baeta/commit/1452c52c85dd397acd52614444b255729032975d), [`fd3a5d2`](https://github.com/andreisergiu98/baeta/commit/fd3a5d27b497aca4b8807155e801b1c1197c5fe2), [`9d8d6a1`](https://github.com/andreisergiu98/baeta/commit/9d8d6a15d63579a2e0bdaa07b7efdcf10aff2492), [`a3f0e5d`](https://github.com/andreisergiu98/baeta/commit/a3f0e5d03fc9ef21a87d3ec6bf264d0e9707636a), [`cca37dd`](https://github.com/andreisergiu98/baeta/commit/cca37dd7135a2852f1f6e287c46911306bdc8da0)]:
+  - @baeta/generator-sdk@0.1.1
+  - @baeta/cloudflare-subscriptions@0.1.1
+  - @baeta/extension-cache-cloudflare@0.0.1
+
 ## 1.0.0
 
 ### Minor Changes

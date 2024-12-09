@@ -6,26 +6,26 @@ interface DirectivesOptions {
 	moduleName?: string;
 }
 
-function printResolver(moduleDefinitionName: string, moduleName: string) {
+function printResolver(moduleDefinitionName: string, moduleName: string, importExt = '') {
 	const parsed = parse(moduleDefinitionName);
 	const method = getModuleGetName(moduleName);
 	const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
 	return `import { registerDirectives } from "@baeta/directives";
 
-import { ${method} } from "./${importName}";
+import { ${method} } from "./${importName}${importExt}";
 
 registerDirectives(${method}());
 `;
 }
 
-function printExport(moduleDefinitionName: string, moduleName: string) {
+function printExport(moduleDefinitionName: string, moduleName: string, importExt = '') {
 	const parsed = parse(moduleDefinitionName);
 	const method = getModuleGetName(moduleName);
 	const variable = getModuleVariableName(moduleName);
 	const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
 
-	return `import { ${method} } from "./${importName}";
+	return `import { ${method} } from "./${importName}${importExt}";
 
 import "./directives.baeta";
 
@@ -74,13 +74,21 @@ export function directivesPlugin(options?: DirectivesOptions) {
 
 			ctx.fileManager.createAndAdd(
 				createResolverFilename(moduleDir),
-				printResolver(ctx.generatorOptions.moduleDefinitionName, moduleName),
+				printResolver(
+					ctx.generatorOptions.moduleDefinitionName,
+					moduleName,
+					ctx.generatorOptions.importExtension,
+				),
 				'directives',
 			);
 
 			ctx.fileManager.createAndAdd(
 				createExportFilename(moduleDir),
-				printExport(ctx.generatorOptions.moduleDefinitionName, moduleName),
+				printExport(
+					ctx.generatorOptions.moduleDefinitionName,
+					moduleName,
+					ctx.generatorOptions.importExtension,
+				),
 				'directives',
 			);
 

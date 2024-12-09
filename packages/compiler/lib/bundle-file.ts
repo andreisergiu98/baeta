@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { type Plugin, build } from '@baeta/compiler/esbuild';
 import path from '@baeta/util-path';
-import { isBuiltin } from '../utils/builtins.ts';
+import { isBuiltin, isNodeBuiltin } from '../utils/builtins.ts';
 
 function externalizePlugin(): Plugin {
 	return {
@@ -10,27 +10,15 @@ function externalizePlugin(): Plugin {
 		setup(build) {
 			// externalize bare imports
 			build.onResolve({ filter: /^[^.].*/ }, async ({ path: id, importer, kind }) => {
-				if (kind === 'entry-point' || path.isAbsolute(id) || isBuiltin(id)) {
+				if (kind === 'entry-point' || path.isAbsolute(id) || isNodeBuiltin(id)) {
 					return;
 				}
 
-				// partial deno support as `npm:` does not work with esbuild
-				if (id.startsWith('npm:')) {
+				if (isBuiltin(id)) {
 					return { external: true };
 				}
 
-				// const isIdESM = isESM || kind === 'dynamic-import';
-				// let idFsPath = tryNodeResolve(
-				//   id,
-				//   importer,
-				//   { ...options, isRequire: !isIdESM },
-				//   false
-				// )?.id;
-				// if (idFsPath && isIdESM) {
-				//   idFsPath = pathToFileURL(idFsPath).href;
-				// }
 				return {
-					//   path: idFsPath,
 					external: true,
 				};
 			});
@@ -65,7 +53,6 @@ function injectFileScopesPlugin(
 
 export async function bundleFile(
 	fileName: string,
-	isESM: boolean,
 ): Promise<{ code: string; dependencies: string[] }> {
 	const dirnameVarName = '__baeta_injected_original_dirname';
 	const filenameVarName = '__baeta_injected_original_filename';
@@ -74,19 +61,21 @@ export async function bundleFile(
 	const result = await build({
 		absWorkingDir: process.cwd(),
 		entryPoints: [fileName],
-		outfile: 'out.js',
 		write: false,
-		target: ['node18'],
+		target: ['node22'],
 		platform: 'node',
 		bundle: true,
-		format: isESM ? 'esm' : 'cjs',
+		format: 'esm',
 		mainFields: ['main'],
 		sourcemap: 'inline',
+		sourceRoot: path.dirname(fileName) + path.sep,
 		metafile: true,
 		define: {
 			__dirname: dirnameVarName,
 			__filename: filenameVarName,
 			'import.meta.url': importMetaUrlVarName,
+			'import.meta.dirname': dirnameVarName,
+			'import.meta.filename': filenameVarName,
 		},
 		plugins: [
 			externalizePlugin(),

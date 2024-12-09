@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-pagination",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "keywords": [
     "baeta",
     "graphql",
@@ -27,9 +27,8 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "types": "./index.ts",
+      "default": "./dist/index.js"
     }
   },
   "types": "dist/index.d.ts",
@@ -50,18 +49,24 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.10.1",
     "graphql": "^16.9.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.12.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
   },
   "ava": {
     "extensions": {
@@ -71,5 +76,12 @@
       "--no-warnings",
       "--experimental-transform-types"
     ]
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json"
   }
 }

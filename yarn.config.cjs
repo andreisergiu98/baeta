@@ -2,6 +2,7 @@
 
 /** @type {import('@yarnpkg/types')} */
 const { defineConfig } = require('@yarnpkg/types');
+const path = require('node:path');
 
 /**
  * This rule will enforce that a workspace MUST depend on the same version of
@@ -27,11 +28,54 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 }
 
 /**
+ * This rule will enforce consistent metadata exports across all packages.
+ * @param {import('@yarnpkg/types').Yarn.Constraints.Workspace} workspace
+ */
+function enforceConsistentEntries(workspace) {
+	if (!workspace.manifest.exports) {
+		workspace.unset('exports');
+		return;
+	}
+
+	const exports = {};
+	const publishExports = {};
+	const typedocEntries = [];
+
+	for (const key in workspace.manifest.exports) {
+		const dir = key === '.' ? '' : key.replace('./', '');
+
+		const importEntry = `./${path.join('./dist', dir, 'index.js')}`;
+		const typesEntry = `./${path.join('./dist', dir, 'index.d.ts')}`;
+		const devTypesEntry = `./${path.join(dir, 'index.ts')}`;
+
+		exports[key] = {
+			types: devTypesEntry,
+			default: importEntry,
+		};
+
+		publishExports[key] = {
+			types: typesEntry,
+			default: importEntry,
+		};
+
+		typedocEntries.push(`./${path.join(dir, 'index.ts')}`);
+	}
+
+	workspace.set('exports', exports);
+	workspace.set('publishConfig.exports', publishExports);
+	workspace.set('typedocOptions.entryPoints', typedocEntries);
+}
+
+/**
  * This rule will enforce consistent metadata across all packages.
  * @param {import('@yarnpkg/types').Yarn.Constraints.Context} context
  */
 function enforceWorkspaceMetadata({ Yarn }) {
 	for (const workspace of Yarn.workspaces()) {
+		if (workspace.manifest.name?.startsWith('@baeta/template-')) {
+			continue;
+		}
+
 		workspace.set('homepage', 'https://github.com/andreisergiu98/baeta#readme');
 		workspace.set('bugs.url', 'https://github.com/andreisergiu98/baeta/issues');
 
@@ -60,14 +104,22 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
-			workspace.set('engines.node', '>=22.0.0');
-			workspace.set('scripts.build', 'tsup');
-			workspace.set('scripts.types', 'tsc --noEmit');
+			workspace.set('engines.node', '>=22.12.0');
+
+			if (workspace.manifest.name !== 'create-baeta') {
+				workspace.set('scripts.build', 'tsup');
+				workspace.set('scripts.types', 'tsc --noEmit');
+			}
 			workspace.set('scripts.prepack', 'prep');
 			workspace.set('scripts.postpack', 'prep --clean');
 
 			workspace.set('ava.extensions.ts', 'module');
 			workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
+
+			enforceConsistentEntries(workspace);
+
+			workspace.set('typedocOptions.readme', 'none');
+			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
 		}
 	}
 }

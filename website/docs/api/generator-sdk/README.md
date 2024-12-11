@@ -14,6 +14,7 @@
 - [FileBlock](classes/FileBlock.md)
 - [FileManager](classes/FileManager.md)
 - [Watcher](classes/Watcher.md)
+- [WatcherIgnore](classes/WatcherIgnore.md)
 
 ## Interfaces
 
@@ -31,6 +32,8 @@
 - [GeneratorPluginV1Fn](type-aliases/GeneratorPluginV1Fn.md)
 - [GeneratorPluginV1ReloadFn](type-aliases/GeneratorPluginV1ReloadFn.md)
 - [GeneratorPluginV1WatchOptions](type-aliases/GeneratorPluginV1WatchOptions.md)
+- [MatchFn](type-aliases/MatchFn.md)
+- [MatchPattern](type-aliases/MatchPattern.md)
 - [WatcherListener](type-aliases/WatcherListener.md)
 
 ## Functions

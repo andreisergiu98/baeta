@@ -6,7 +6,7 @@
 
 ### global
 
-`Global` = `globalThis`
+`Record`\<`string`, `unknown`\> = `globalThis`
 
 ## Returns
 

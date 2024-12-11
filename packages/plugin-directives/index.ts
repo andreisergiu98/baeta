@@ -2,7 +2,7 @@ import { definitions } from '@baeta/directives';
 import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
 import { join, parse } from '@baeta/util-path';
 
-interface DirectivesOptions {
+export interface DirectivesOptions {
 	moduleName?: string;
 }
 

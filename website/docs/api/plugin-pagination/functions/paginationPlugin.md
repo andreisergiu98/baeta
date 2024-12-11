@@ -6,7 +6,7 @@
 
 ### options
 
-`PaginationOptions`
+[`PaginationOptions`](../interfaces/PaginationOptions.md)
 
 ## Returns
 

@@ -1,15 +1,15 @@
 import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
 import { join, parse } from '@baeta/util-path';
 
-interface TypeOptions {
+export interface PaginationTypeOptions {
 	nodeType?: string;
 	cursorType?: string;
 	edgeFields?: string[];
 	connectionFields?: string[];
 }
 
-interface PaginationOptions {
-	types: Record<string, boolean | TypeOptions>;
+export interface PaginationOptions {
+	types: Record<string, boolean | PaginationTypeOptions>;
 	nullableNode?: boolean;
 	pageInfoFields?: string[];
 	moduleName?: string;
@@ -49,7 +49,11 @@ export const ${getModuleVariableName(moduleName)} = ${method}();
 `;
 }
 
-function printConnectionTypes(name: string, typeOptions: TypeOptions, options: PaginationOptions) {
+function printConnectionTypes(
+	name: string,
+	typeOptions: PaginationTypeOptions,
+	options: PaginationOptions,
+) {
 	const {
 		cursorType = 'String!',
 		nodeType = name,

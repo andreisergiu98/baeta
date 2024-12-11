@@ -2,6 +2,10 @@
 
 ## Index
 
+### Interfaces
+
+- [DurableObjectMigration](interfaces/DurableObjectMigration.md)
+
 ### Variables
 
 - [baetaCacheName](variables/baetaCacheName.md)

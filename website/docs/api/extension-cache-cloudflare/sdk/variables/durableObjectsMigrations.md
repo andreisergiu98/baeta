@@ -1,3 +1,3 @@
 # Variable: durableObjectsMigrations
 
-> `const` **durableObjectsMigrations**: `DurableObjectMigration`[]
+> `const` **durableObjectsMigrations**: [`DurableObjectMigration`](../interfaces/DurableObjectMigration.md)[]

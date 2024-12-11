@@ -6,7 +6,7 @@
 
 ### options?
 
-`DirectivesOptions`
+[`DirectivesOptions`](../interfaces/DirectivesOptions.md)
 
 ## Returns
 

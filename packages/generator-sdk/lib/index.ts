@@ -6,3 +6,4 @@ export * from './file-manager.ts';
 export * from './module.ts';
 export * from './plugin.ts';
 export * from './watcher.ts';
+export * from './watcher-ignore.ts';

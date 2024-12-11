@@ -1,5 +1,7 @@
 # Interface: Loader\<TOptions\>
 
+Interface for custom schema loaders.
+
 ## Type Parameters
 
 • **TOptions** = `any`

@@ -14,7 +14,13 @@ Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools
 
 > **modules**: `Record`\<`string`, `unknown`\>[]
 
-Modules to include in the application
+Array of module objects to include in the application.
+
+#### Example
+
+```typescript
+const modules = [userModule, postModule, commentModule];
+```
 
 ---
 
@@ -22,7 +28,7 @@ Modules to include in the application
 
 > `optional` **pruneSchema**: `boolean`
 
-Whether to remove fields with no resolvers
+When true, removes fields that don't have corresponding resolvers.
 
 #### Default
 

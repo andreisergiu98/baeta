@@ -6,7 +6,8 @@
 
 > `optional` **compiler**: [`CompilerOptions`](../../../compiler/index/interfaces/CompilerOptions.md)
 
-Options for the compiler.
+Configuration for the TypeScript compiler.
+It uses esbuild under the hood and creates an optimized bundle.
 
 ---
 
@@ -14,7 +15,7 @@ Options for the compiler.
 
 > **graphql**: [`GeneratorOptions`](../../../generator/interfaces/GeneratorOptions.md)
 
-Options for the graphql generator.
+Configuration for the GraphQL code generator.
 
 ---
 
@@ -22,4 +23,4 @@ Options for the graphql generator.
 
 > `optional` **plugins**: [`Plugins`](../type-aliases/Plugins.md)
 
-Plugins to run.
+Plugins to extend Baeta's functionality.

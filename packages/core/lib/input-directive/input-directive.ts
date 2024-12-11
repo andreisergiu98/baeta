@@ -158,13 +158,79 @@ export function applyInputDirective(
 	});
 }
 
+/**
+ * Configuration options for creating an input directive.
+ * @template DirectiveConfig - Type of the directive arguments
+ * @template Context - Type of the context
+ */
 export type InputDirectiveOptions<DirectiveConfig, Context> = {
+	/**
+	 * Name of the directive as it appears in the GraphQL schema (without '@' prefix)
+	 * @example 'trim' for '@trim' directive
+	 */
 	name: string;
+	/**
+	 * Validation target indicating when the directive should be applied
+	 */
 	target: ValidationTarget;
+	/**
+	 * Function that implements the directive's validation/transformation logic
+	 */
 	resolve: ValidationDirectiveFn<DirectiveConfig, Context>;
+	/**
+	 * Returns the depth of list of lists validated by this directive.
+	 * The depth 0 indicates the topmost list of a field or argument.
+	 * The depth 1 indicates the first nested list.
+	 * The depth 2 indicates the second nested list, and so on.
+	 *
+	 * The directive config is provided as an argument, so depth can be based on directive arguments.
+	 *
+	 * So in the following example:
+	 * ```
+	 * input Input {
+	 *   list: [[[String!]!]!]! @validList(maxItems: 2, listDepth: 0) @validList(maxItems: 5, listDepth: 1) @validList(maxItems: 3, listDepth: 2)
+	 * }
+	 * ```
+	 */
 	getListDepth?: (config: DirectiveConfig) => number;
 };
 
+/**
+ * Creates a schema transformer that applies an input directive to a GraphQL schema.
+ * The directive can be used to validate or transform input fields, arguments, and input types.
+ * See https://baeta.io//docs/guides/directives and https://baeta.io//docs/guides/input-directives
+ *
+ * @template DirectiveConfig - Type of the directive configuration object
+ * @template Context - Type of the GraphQL context
+ *
+ * @param options - Configuration options for the input directive
+ * @returns A function that transforms a GraphQL schema by applying the directive
+ *
+ * @example
+ * ```typescript
+ * const trimDirective = createInputDirective<TrimArgs>({
+ * 	name: 'trim',
+ * 	target: 'scalar',
+ * 	resolve(params) {
+ * 		const value = params.getValue();
+ *
+ * 		if (typeof value !== 'string') {
+ * 			return;
+ * 		}
+ *
+ * 		const config = params.directiveConfig;
+ *
+ * 		if (config.start === true && config.end !== true) {
+ * 			return params.setValue(value.trimStart());
+ * 		}
+ * 		if (config.end === true && config.start !== true) {
+ * 			return params.setValue(value.trimEnd());
+ * 		}
+ *
+ * 		params.setValue(value.trim());
+ * 	},
+ * });
+ */
 export function createInputDirective<DirectiveConfig, Context = unknown>(
 	options: InputDirectiveOptions<DirectiveConfig, Context>,
 ) {

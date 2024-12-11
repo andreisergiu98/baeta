@@ -39,6 +39,7 @@
 
 ### Functions
 
+- [addValidationToSchema](functions/addValidationToSchema.md)
 - [createMiddlewareAdapter](functions/createMiddlewareAdapter.md)
 - [createModuleManager](functions/createModuleManager.md)
 - [createObjectLens](functions/createObjectLens.md)

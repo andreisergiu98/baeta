@@ -7,12 +7,22 @@ export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDef
 
 export interface Options {
 	/**
-	 * Modules to include in the application
+	 * Array of module objects to include in the application.
+	 *
+	 * @example
+	 * ```typescript
+	 * const modules = [
+	 *   userModule,
+	 *   postModule,
+	 *   commentModule
+	 * ];
+	 * ```
 	 */
 	modules: Record<string, unknown>[];
 
 	/**
-	 * Whether to remove fields with no resolvers
+	 * When true, removes fields that don't have corresponding resolvers.
+	 *
 	 * @default false
 	 */
 	pruneSchema?: boolean;
@@ -41,6 +51,21 @@ function makeSchema(
 	}
 }
 
+/**
+ * Creates a Baeta application by combining the modules.
+ *
+ * @param options - Configuration options for the application
+ * @returns An object containing the GraphQL schema
+ *
+ * @example
+ * ```typescript
+ * const baeta = createApplication({
+ *   modules: [userModule, postModule],
+ * });
+ *
+ * const { schema } = baeta;
+ * ```
+ */
 export function createApplication(options: Options) {
 	const builders = options.modules.map((module) => getModuleBuilder(module));
 	const builtModules = builders.map((builder) => builder.build());

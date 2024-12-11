@@ -2,7 +2,6 @@ export { createApplication, type Options, type ExecutableSchemaOptions } from '.
 export { createContextStore, type ContextStoreOptions } from './ctx-store.ts';
 export { createExtensions } from './extensions.ts';
 export {
-	addValidationToSchema,
 	createInputDirective,
 	type ValidationDirectiveFn,
 	type ValidationDirectiveFnParams,

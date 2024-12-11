@@ -2,6 +2,8 @@
 
 > **defineConfig**(`config`): `object`
 
+Helper function to define a type-safe Baeta configuration.
+
 ## Parameters
 
 ### config

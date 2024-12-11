@@ -1,6 +1,6 @@
 # Interface: GeneratorOptions
 
-Options for the graphql generator.
+Options for the Baeta Generator.
 
 ## Properties
 
@@ -8,11 +8,13 @@ Options for the graphql generator.
 
 > `optional` **baseTypesPath**: `string`
 
-Path for the generated base types file.
+Output path for the generated base types file.
 
 #### Default
 
-`${modulesDir}/../__generated__/types.ts`
+```ts
+`${modulesDir}/../__generated__/types.ts`;
+```
 
 ---
 
@@ -20,16 +22,17 @@ Path for the generated base types file.
 
 > `optional` **contextType**: `string`
 
-Path where the context type is exported.
+Path to the context type definition.
+Supports both named and default exports.
 
 #### Examples
 
 ```ts
-contextType: "src/types/context#Context"; // for named export
+contextType: "src/types/context.ts#Context"; // for named export
 ```
 
 ```ts
-contextType: "src/types/context"; // for default export
+contextType: "src/types/context.ts"; // for default export
 ```
 
 #### Default
@@ -44,7 +47,7 @@ undefined;
 
 > `optional` **cwd**: `string`
 
-Current working directory.
+Current working directory for resolving relative paths.
 
 #### Default
 
@@ -58,12 +61,13 @@ process.cwd();
 
 > `optional` **extensions**: `string`
 
-Path where extensions (ex. auth-extension) are exported. Only default export is supported.
+Path to Baeta Extensions (ex. auth-extension).
+Only default export is supported.
 
 #### Example
 
 ```ts
-extensions: "src/extensions";
+extensions: "src/extensions.ts";
 ```
 
 #### Default
@@ -78,7 +82,7 @@ undefined;
 
 > `optional` **fileOptions**: [`FileOptions`](../../generator-sdk/interfaces/FileOptions.md)
 
-Options for generated files.
+Configuration options for generated files.
 
 ---
 
@@ -86,7 +90,14 @@ Options for generated files.
 
 > `optional` **importExtension**: `false` \| `".js"` \| `".ts"`
 
-File extension for generated import statements.
+File extension to use in generated import statements.
+Set to false to omit extensions.
+
+#### Default
+
+```ts
+".ts";
+```
 
 ---
 
@@ -94,7 +105,7 @@ File extension for generated import statements.
 
 > `optional` **loaders**: [`Loader`](../../generator-sdk/interfaces/Loader.md)\<`any`\>[]
 
-Additional schema loaders to be used for "schemas" option.
+Custom schema loaders for processing schema files.
 
 ---
 
@@ -102,7 +113,8 @@ Additional schema loaders to be used for "schemas" option.
 
 > `optional` **moduleDefinitionName**: `string`
 
-Name for the generated module definition file. This will contain type definitions and the graphql ast.
+Filename for the generated module definition file.
+Contains type definitions and the GraphQL AST.
 
 #### Default
 
@@ -116,7 +128,7 @@ Name for the generated module definition file. This will contain type definition
 
 > `optional` **modulesDir**: `string`
 
-Directory where modules are defined.
+Root directory where GraphQL modules are defined.
 
 #### Default
 
@@ -130,14 +142,14 @@ Directory where modules are defined.
 
 > `optional` **scalars**: `Record`\<`string`, `string`\>
 
-Custom scalar mappings.
+Custom scalar type mappings.
+Maps GraphQL scalar types to TypeScript types.
+Supports global types and imports.
 
 #### Example
 
 ```ts
-scalars: {
-  DateTime: "Date";
-}
+{ DateTime: 'Date', JSON: 'Record<string, unknown>' }	 *
 ```
 
 #### Default
@@ -152,10 +164,10 @@ undefined;
 
 > **schemas**: `string`[]
 
-Glob pattern(s) to load graphql schema files.
+Glob pattern(s) to locate GraphQL schema files.
 
 #### Default
 
 ```ts
-["src/∗∗/∗.graphql"];
+["src/∗∗/∗.gql", "src/∗∗/∗.graphql"];
 ```

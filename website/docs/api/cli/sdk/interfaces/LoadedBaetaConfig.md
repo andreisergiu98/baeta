@@ -1,22 +1,18 @@
-# Function: useConfig()
+# Interface: LoadedBaetaConfig
 
-> **useConfig**(): `object`
-
-## Returns
-
-`object`
+## Properties
 
 ### config
 
 > **config**: [`BaetaOptions`](../../index/interfaces/BaetaOptions.md)
 
-### events
-
-> **events**: `EventEmitter`\<[`ConfigEventMap`](../type-aliases/ConfigEventMap.md)\>
+---
 
 ### location
 
 > **location**: `string`
+
+---
 
 ### relativeLocation
 

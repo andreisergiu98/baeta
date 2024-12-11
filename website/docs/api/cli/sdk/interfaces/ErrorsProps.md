@@ -4,10 +4,10 @@
 
 ### errors?
 
-> `optional` **errors**: `TextOutput`[]
+> `optional` **errors**: [`TextOutput`](../type-aliases/TextOutput.md)[]
 
 ---
 
 ### warnings?
 
-> `optional` **warnings**: `TextOutput`[]
+> `optional` **warnings**: [`TextOutput`](../type-aliases/TextOutput.md)[]

@@ -5,6 +5,7 @@
 ### Interfaces
 
 - [CompilerOptions](interfaces/CompilerOptions.md)
+- [HooksOptions](interfaces/HooksOptions.md)
 
 ### Functions
 

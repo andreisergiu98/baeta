@@ -1,6 +1,5 @@
 import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
-import type { Definition } from '../definition.ts';
 
 interface Args {
 	multipleOf?: number;
@@ -71,7 +70,7 @@ const directive = createInputDirective<Args>({
 	},
 });
 
-export const floatValidation: Definition = {
+export const floatValidation = {
 	sdl,
 	directive,
 };

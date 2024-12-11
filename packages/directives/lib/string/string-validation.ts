@@ -2,7 +2,6 @@ import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
 import { validate as validateEmail } from 'email-validator';
 import isUrl from 'is-url';
-import type { Definition } from '../definition.ts';
 
 interface Args {
 	format?: 'EMAIL' | 'UUID' | 'URL';
@@ -110,7 +109,7 @@ const directive = createInputDirective<Args>({
 	},
 });
 
-export const stringValidation: Definition = {
+export const stringValidation = {
 	sdl,
 	directive,
 };

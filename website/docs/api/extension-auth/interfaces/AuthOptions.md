@@ -4,7 +4,7 @@
 
 ### defaultScopes?
 
-> `optional` **defaultScopes**: `DefaultScopes`
+> `optional` **defaultScopes**: [`DefaultScopes`](../type-aliases/DefaultScopes.md)
 
 ---
 

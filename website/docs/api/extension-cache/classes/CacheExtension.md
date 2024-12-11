@@ -80,7 +80,7 @@
 
 ### getResolverExtensions()
 
-> **getResolverExtensions**\<`Result`, `Root`, `Context`, `Args`\>(`module`, `type`, `field`): `ResolverExtensions`\<`Result`, `Root`, `Context`, `Args`\>
+> **getResolverExtensions**\<`Result`, `Root`, `Context`, `Args`\>(`module`, `type`, `field`): [`ResolverExtensions`](../../extension-auth/namespaces/AuthExtensionMethods/interfaces/ResolverExtensions.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 #### Type Parameters
 
@@ -108,7 +108,7 @@
 
 #### Returns
 
-`ResolverExtensions`\<`Result`, `Root`, `Context`, `Args`\>
+[`ResolverExtensions`](../../extension-auth/namespaces/AuthExtensionMethods/interfaces/ResolverExtensions.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 #### Overrides
 
@@ -232,7 +232,7 @@
 
 ### getTypeExtensions()
 
-> **getTypeExtensions**\<`Root`, `Context`\>(`module`, `type`): `TypeExtensions`\<`Root`, `Context`\>
+> **getTypeExtensions**\<`Root`, `Context`\>(`module`, `type`): [`TypeExtensions`](../../extension-auth/namespaces/AuthExtensionMethods/interfaces/TypeExtensions.md)\<`Root`, `Context`\>
 
 #### Type Parameters
 
@@ -252,7 +252,7 @@
 
 #### Returns
 
-`TypeExtensions`\<`Root`, `Context`\>
+[`TypeExtensions`](../../extension-auth/namespaces/AuthExtensionMethods/interfaces/TypeExtensions.md)\<`Root`, `Context`\>
 
 #### Overrides
 

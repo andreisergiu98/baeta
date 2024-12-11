@@ -6,7 +6,7 @@
 
 ### args
 
-`Args`
+[`Args`](../interfaces/Args.md)
 
 ## Returns
 

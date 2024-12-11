@@ -7,9 +7,9 @@ export const grantRule = '$granted' as const;
 
 export type GrantKey = typeof grantRule;
 
-type GetGrantResult = AuthExtension.Grants | AuthExtension.Grants[];
+export type GetGrantResult = AuthExtension.Grants | AuthExtension.Grants[];
 
-type GetGrantFn<Result, Root, Context, Args> = (
+export type GetGrantFn<Result, Root, Context, Args> = (
 	params: MiddlewareParams<Root, Context, Args>,
 	result: Result,
 ) => GetGrantResult | PromiseLike<GetGrantResult>;

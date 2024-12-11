@@ -4,13 +4,13 @@ import { getAuthStore } from './store.ts';
 
 export type GetScopeLoader<Ctx> = (ctx: Ctx) => ScopeLoaderMap | Promise<ScopeLoaderMap>;
 
-type ScopeLoader<T> = boolean | ((value: T) => boolean | Promise<boolean>);
+export type ScopeLoader<T> = boolean | ((value: T) => boolean | Promise<boolean>);
 
-type ScopeResolver = (value: unknown) => true | Promise<true>;
-
-type ScopeLoaderMap = {
+export type ScopeLoaderMap = {
 	[K in Scopes]: ScopeLoader<AuthExtension.Scopes[K]>;
 };
+
+type ScopeResolver = (value: unknown) => true | Promise<true>;
 
 export type ScopeResolverMap = {
 	[k: string]: ScopeResolver;

@@ -1,6 +1,6 @@
 # Function: authExtension()
 
-> **authExtension**\<`Ctx`\>(`loadScopes`, `options`): () => `AuthExtension`\<`Ctx`\>
+> **authExtension**\<`Ctx`\>(`loadScopes`, `options`): () => `Extension`
 
 ## Type Parameters
 
@@ -10,7 +10,7 @@
 
 ### loadScopes
 
-`GetScopeLoader`\<`Ctx`\>
+[`GetScopeLoader`](../type-aliases/GetScopeLoader.md)\<`Ctx`\>
 
 ### options
 
@@ -22,4 +22,4 @@
 
 ### Returns
 
-`AuthExtension`\<`Ctx`\>
+`Extension`

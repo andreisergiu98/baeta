@@ -2,6 +2,10 @@
 
 ## Index
 
+### Namespaces
+
+- [BaetaExtensions](namespaces/BaetaExtensions/README.md)
+
 ### Enumerations
 
 - [ExtensionVersion](enumerations/ExtensionVersion.md)

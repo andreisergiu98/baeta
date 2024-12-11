@@ -10,7 +10,7 @@ import { createTsconfig } from './tsconfig.ts';
 const recommendedTemplate = 'yoga';
 const templatesDir = fileURLToPath(new URL('../templates', import.meta.url));
 
-type Template = {
+export type Template = {
 	name: string;
 	path: string;
 	packageJsn?: string;

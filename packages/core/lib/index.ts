@@ -5,8 +5,10 @@ export {
 	addValidationToSchema,
 	createInputDirective,
 	type ValidationDirectiveFn,
+	type ValidationDirectiveFnParams,
 	type ValidationTarget,
 	type InputDirectiveOptions,
+	type ValidateParams,
 } from './input-directive/index.ts';
 export type { Middleware, MiddlewareNext, MiddlewareParams } from './middleware.ts';
 export type { Resolver, ResolverParams } from './resolver.ts';

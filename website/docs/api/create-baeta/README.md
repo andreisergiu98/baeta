@@ -2,12 +2,14 @@
 
 ## Interfaces
 
+- [Args](interfaces/Args.md)
 - [CliOptions](interfaces/CliOptions.md)
 
 ## Type Aliases
 
 - [JavaScriptRuntime](type-aliases/JavaScriptRuntime.md)
 - [PackageManager](type-aliases/PackageManager.md)
+- [Template](type-aliases/Template.md)
 
 ## Variables
 

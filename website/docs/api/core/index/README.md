@@ -24,7 +24,9 @@
 - [Subscription](type-aliases/Subscription.md)
 - [TypeResolver](type-aliases/TypeResolver.md)
 - [TypeResolverParams](type-aliases/TypeResolverParams.md)
+- [ValidateParams](type-aliases/ValidateParams.md)
 - [ValidationDirectiveFn](type-aliases/ValidationDirectiveFn.md)
+- [ValidationDirectiveFnParams](type-aliases/ValidationDirectiveFnParams.md)
 - [ValidationTarget](type-aliases/ValidationTarget.md)
 
 ### Functions

@@ -6,7 +6,7 @@
 <title data-rh="true">Interface: GeneratorHooks | Baeta</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" name="twitter:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" property="og:url" content="https://baeta.io/docs/api/generator/interfaces/GeneratorHooks"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="baeta, graphql, schema, types, typescript, framework, builder"><meta data-rh="true" name="twitter:card" content="img/banner.png"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Interface: GeneratorHooks | Baeta"><meta data-rh="true" name="description" content="Properties"><meta data-rh="true" property="og:description" content="Properties"><link data-rh="true" rel="icon" href="/img/favicon.ico?v=1"><link data-rh="true" rel="canonical" href="https://baeta.io/docs/api/generator/interfaces/GeneratorHooks"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/generator/interfaces/GeneratorHooks" hreflang="en"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/generator/interfaces/GeneratorHooks" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://4FC0N9XMY9-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="Baeta" href="/opensearch.xml">
 
 <link rel="preconnect" href="https://baeta.io"><link rel="stylesheet" href="/assets/css/styles.fc862cbe.css">
-<script src="/assets/js/runtime~main.0cedca6d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.894b7259.js" defer="defer"></script>
 <script src="/assets/js/main.6c86f190.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -24,7 +24,8 @@
 <p><code>optional</code> <strong>onError</strong>: (<code>error</code>) =&gt; <code>void</code> | <code>Promise</code>&lt;<code>void</code>&gt;</p>
 </blockquote>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters">Parameters<a href="#parameters" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>error</strong>: <code>unknown</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="error">error<a href="#error" class="hash-link" aria-label="Direct link to error" title="Direct link to error">​</a></h5>
+<p><code>unknown</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-1">Returns<a href="#returns-1" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>void</code> | <code>Promise</code>&lt;<code>void</code>&gt;</p>
 <hr>
@@ -33,8 +34,10 @@
 <p><code>optional</code> <strong>onPluginStepEnd</strong>: (<code>plugin</code>, <code>step</code>) =&gt; <code>void</code> | <code>Promise</code>&lt;<code>void</code>&gt;</p>
 </blockquote>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-1">Parameters<a href="#parameters-1" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>plugin</strong>: <a href="/docs/api/generator/interfaces/GeneratorPluginV1"><code>GeneratorPluginV1</code></a>&lt;<code>unknown</code>&gt;</p>
-<p>• <strong>step</strong>: <code>&quot;end&quot;</code> | <code>&quot;setup&quot;</code> | <code>&quot;generate&quot;</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="plugin">plugin<a href="#plugin" class="hash-link" aria-label="Direct link to plugin" title="Direct link to plugin">​</a></h5>
+<p><a href="/docs/api/generator/interfaces/GeneratorPluginV1"><code>GeneratorPluginV1</code></a>&lt;<code>unknown</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="step">step<a href="#step" class="hash-link" aria-label="Direct link to step" title="Direct link to step">​</a></h5>
+<p><code>&quot;end&quot;</code> | <code>&quot;setup&quot;</code> | <code>&quot;generate&quot;</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-2">Returns<a href="#returns-2" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>void</code> | <code>Promise</code>&lt;<code>void</code>&gt;</p>
 <hr>
@@ -43,8 +46,10 @@
 <p><code>optional</code> <strong>onPluginStepStart</strong>: (<code>plugin</code>, <code>step</code>) =&gt; <code>void</code> | <code>Promise</code>&lt;<code>void</code>&gt;</p>
 </blockquote>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-2">Parameters<a href="#parameters-2" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>plugin</strong>: <a href="/docs/api/generator/interfaces/GeneratorPluginV1"><code>GeneratorPluginV1</code></a>&lt;<code>unknown</code>&gt;</p>
-<p>• <strong>step</strong>: <code>&quot;end&quot;</code> | <code>&quot;setup&quot;</code> | <code>&quot;generate&quot;</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="plugin-1">plugin<a href="#plugin-1" class="hash-link" aria-label="Direct link to plugin" title="Direct link to plugin">​</a></h5>
+<p><a href="/docs/api/generator/interfaces/GeneratorPluginV1"><code>GeneratorPluginV1</code></a>&lt;<code>unknown</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="step-1">step<a href="#step-1" class="hash-link" aria-label="Direct link to step" title="Direct link to step">​</a></h5>
+<p><code>&quot;end&quot;</code> | <code>&quot;setup&quot;</code> | <code>&quot;generate&quot;</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-3">Returns<a href="#returns-3" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>void</code> | <code>Promise</code>&lt;<code>void</code>&gt;</p>
 <hr>

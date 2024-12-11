@@ -6,7 +6,7 @@
 <title data-rh="true">Variable: default | Baeta</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" name="twitter:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" property="og:url" content="https://baeta.io/docs/api/util-path/variables/default"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="baeta, graphql, schema, types, typescript, framework, builder"><meta data-rh="true" name="twitter:card" content="img/banner.png"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Variable: default | Baeta"><meta data-rh="true" name="description" content="default: object"><meta data-rh="true" property="og:description" content="default: object"><link data-rh="true" rel="icon" href="/img/favicon.ico?v=1"><link data-rh="true" rel="canonical" href="https://baeta.io/docs/api/util-path/variables/default"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/util-path/variables/default" hreflang="en"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/util-path/variables/default" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://4FC0N9XMY9-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="Baeta" href="/opensearch.xml">
 
 <link rel="preconnect" href="https://baeta.io"><link rel="stylesheet" href="/assets/css/styles.fc862cbe.css">
-<script src="/assets/js/runtime~main.0cedca6d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.894b7259.js" defer="defer"></script>
 <script src="/assets/js/main.6c86f190.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -21,9 +21,11 @@
 </blockquote>
 <p>Adds .ext to filename, but only if it doesn&#x27;t already have the exact extension.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters">Parameters<a href="#parameters" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>file</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="file">file<a href="#file" class="hash-link" aria-label="Direct link to file" title="Direct link to file">​</a></h5>
+<p><code>string</code></p>
 <p>string filename to add extension to</p>
-<p>• <strong>ext</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ext">ext<a href="#ext" class="hash-link" aria-label="Direct link to ext" title="Direct link to ext">​</a></h5>
+<p><code>string</code></p>
 <p>string extension to add</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns">Returns<a href="#returns" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -34,9 +36,11 @@
 <p>Return the last portion of a path. Similar to the Unix basename command.
 Often used to extract the file name from a fully qualified path.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-1">Parameters<a href="#parameters-1" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>p</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p">p<a href="#p" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p><code>string</code></p>
 <p>the path to evaluate.</p>
-<p>• <strong>ext?</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ext-1">ext?<a href="#ext-1" class="hash-link" aria-label="Direct link to ext?" title="Direct link to ext?">​</a></h5>
+<p><code>string</code></p>
 <p>optionally, an extension to remove from the result.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-1">Returns<a href="#returns-1" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -48,13 +52,17 @@ Often used to extract the file name from a fully qualified path.</p>
 <p>Valid extensions are considered to be up to maxSize chars long, counting the dot (defaults to 7).</p>
 <p>An Array of ignoreExts (eg [&#x27;.min&#x27;]) prevents these from being considered as extension, thus are not changed - the new extension is added instead.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-2">Parameters<a href="#parameters-2" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>filename</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="filename">filename<a href="#filename" class="hash-link" aria-label="Direct link to filename" title="Direct link to filename">​</a></h5>
+<p><code>string</code></p>
 <p>string filename to change it&#x27;s extension</p>
-<p>• <strong>ext</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ext-2">ext<a href="#ext-2" class="hash-link" aria-label="Direct link to ext" title="Direct link to ext">​</a></h5>
+<p><code>string</code></p>
 <p>string extension to change to</p>
-<p>• <strong>ignoreExts?</strong>: <code>string</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ignoreexts">ignoreExts?<a href="#ignoreexts" class="hash-link" aria-label="Direct link to ignoreExts?" title="Direct link to ignoreExts?">​</a></h5>
+<p><code>string</code>[]</p>
 <p>array extensions to ignore</p>
-<p>• <strong>maxSize?</strong>: <code>number</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="maxsize">maxSize?<a href="#maxsize" class="hash-link" aria-label="Direct link to maxSize?" title="Direct link to maxSize?">​</a></h5>
+<p><code>number</code></p>
 <p>number max length of the extension</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-2">Returns<a href="#returns-2" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -66,13 +74,17 @@ Often used to extract the file name from a fully qualified path.</p>
 <p>(Old) extensions are considered to be up to maxSize chars long, counting the dot (defaults to 7).</p>
 <p>An Array of ignoreExts (eg [&#x27;.min&#x27;]) will force adding default .ext even if one of these is present.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-3">Parameters<a href="#parameters-3" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>filename</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="filename-1">filename<a href="#filename-1" class="hash-link" aria-label="Direct link to filename" title="Direct link to filename">​</a></h5>
+<p><code>string</code></p>
 <p>string filename to default to it&#x27;s extension</p>
-<p>• <strong>ext</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ext-3">ext<a href="#ext-3" class="hash-link" aria-label="Direct link to ext" title="Direct link to ext">​</a></h5>
+<p><code>string</code></p>
 <p>string extension to default to</p>
-<p>• <strong>ignoreExts?</strong>: <code>string</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ignoreexts-1">ignoreExts?<a href="#ignoreexts-1" class="hash-link" aria-label="Direct link to ignoreExts?" title="Direct link to ignoreExts?">​</a></h5>
+<p><code>string</code>[]</p>
 <p>array extensions to ignore</p>
-<p>• <strong>maxSize?</strong>: <code>number</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="maxsize-1">maxSize?<a href="#maxsize-1" class="hash-link" aria-label="Direct link to maxSize?" title="Direct link to maxSize?">​</a></h5>
+<p><code>number</code></p>
 <p>number max length of the extension</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-3">Returns<a href="#returns-3" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -86,7 +98,8 @@ Often used to extract the file name from a fully qualified path.</p>
 </blockquote>
 <p>Return the directory name of a path. Similar to the Unix dirname command.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-4">Parameters<a href="#parameters-4" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>p</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p-1">p<a href="#p-1" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p><code>string</code></p>
 <p>the path to evaluate.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-4">Returns<a href="#returns-4" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -97,7 +110,8 @@ Often used to extract the file name from a fully qualified path.</p>
 <p>Return the extension of the path, from the last &#x27;.&#x27; to end of string in the last portion of the path.
 If there is no &#x27;.&#x27; in the last portion of the path or the first character of it is &#x27;.&#x27;, then it returns an empty string</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-5">Parameters<a href="#parameters-5" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>p</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p-2">p<a href="#p-2" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p><code>string</code></p>
 <p>the path to evaluate.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-5">Returns<a href="#returns-5" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -107,7 +121,8 @@ If there is no &#x27;.&#x27; in the last portion of the path or the first charac
 </blockquote>
 <p>Returns a path string from an object - the opposite of parse().</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-6">Parameters<a href="#parameters-6" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>pathObject</strong>: <code>ParsedPath</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="pathobject">pathObject<a href="#pathobject" class="hash-link" aria-label="Direct link to pathObject" title="Direct link to pathObject">​</a></h5>
+<p><code>ParsedPath</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-6">Returns<a href="#returns-6" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
 <h3 class="anchor anchorWithStickyNavbar_AIAF" id="isabsolute">isAbsolute()<a href="#isabsolute" class="hash-link" aria-label="Direct link to isAbsolute()" title="Direct link to isAbsolute()">​</a></h3>
@@ -116,7 +131,8 @@ If there is no &#x27;.&#x27; in the last portion of the path or the first charac
 </blockquote>
 <p>Determines whether {path} is an absolute path. An absolute path will always resolve to the same location, regardless of the working directory.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-7">Parameters<a href="#parameters-7" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>path</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="path">path<a href="#path" class="hash-link" aria-label="Direct link to path" title="Direct link to path">​</a></h5>
+<p><code>string</code></p>
 <p>path to test.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-7">Returns<a href="#returns-7" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>boolean</code></p>
@@ -127,14 +143,16 @@ If there is no &#x27;.&#x27; in the last portion of the path or the first charac
 <p>Join all arguments together and normalize the resulting path.
 Arguments must be strings. In v0.8, non-string arguments were silently ignored. In v0.10 and up, an exception is thrown.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-8">Parameters<a href="#parameters-8" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• ...<strong>paths</strong>: <code>any</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="paths">paths<a href="#paths" class="hash-link" aria-label="Direct link to paths" title="Direct link to paths">​</a></h5>
+<p>...<code>any</code>[]</p>
 <p>string paths to join.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-8">Returns<a href="#returns-8" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
 <p>Join all arguments together and normalize the resulting path.
 Arguments must be strings. In v0.8, non-string arguments were silently ignored. In v0.10 and up, an exception is thrown.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-9">Parameters<a href="#parameters-9" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• ...<strong>paths</strong>: <code>string</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="paths-1">paths<a href="#paths-1" class="hash-link" aria-label="Direct link to paths" title="Direct link to paths">​</a></h5>
+<p>...<code>string</code>[]</p>
 <p>string paths to join.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-9">Returns<a href="#returns-9" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -145,7 +163,8 @@ Arguments must be strings. In v0.8, non-string arguments were silently ignored. 
 <p>Exactly like path.join(), but it keeps the first meaningful ./.</p>
 <p>Note that the unix / is returned everywhere, so windows \ is always converted to unix /.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-10">Parameters<a href="#parameters-10" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• ...<strong>p</strong>: <code>any</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p-3">p<a href="#p-3" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p>...<code>any</code>[]</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-10">Returns<a href="#returns-10" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
 <h3 class="anchor anchorWithStickyNavbar_AIAF" id="normalize">normalize()<a href="#normalize" class="hash-link" aria-label="Direct link to normalize()" title="Direct link to normalize()">​</a></h3>
@@ -155,7 +174,8 @@ Arguments must be strings. In v0.8, non-string arguments were silently ignored. 
 <p>Normalize a string path, reducing &#x27;..&#x27; and &#x27;.&#x27; parts.
 When multiple slashes are found, they&#x27;re replaced by a single one; when the path contains a trailing slash, it is preserved. On Windows backslashes are used.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-11">Parameters<a href="#parameters-11" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>p</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p-4">p<a href="#p-4" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p><code>string</code></p>
 <p>string path to normalize.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-11">Returns<a href="#returns-11" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -166,7 +186,8 @@ When multiple slashes are found, they&#x27;re replaced by a single one; when the
 <p>Exactly like path.normalize(path), but it keeps the first meaningful ./.</p>
 <p>Note that the unix / is returned everywhere, so windows \ is always converted to unix /.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-12">Parameters<a href="#parameters-12" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>p</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p-5">p<a href="#p-5" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p><code>string</code></p>
 <p>string path to normalize.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-12">Returns<a href="#returns-12" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -176,7 +197,8 @@ When multiple slashes are found, they&#x27;re replaced by a single one; when the
 </blockquote>
 <p>Exactly like path.normalizeSafe(path), but it trims any useless ending /.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-13">Parameters<a href="#parameters-13" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>p</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p-6">p<a href="#p-6" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p><code>string</code></p>
 <p>string path to normalize</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-13">Returns<a href="#returns-13" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -186,7 +208,8 @@ When multiple slashes are found, they&#x27;re replaced by a single one; when the
 </blockquote>
 <p>Returns an object from a path string - the opposite of format().</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-14">Parameters<a href="#parameters-14" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>pathString</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="pathstring">pathString<a href="#pathstring" class="hash-link" aria-label="Direct link to pathString" title="Direct link to pathString">​</a></h5>
+<p><code>string</code></p>
 <p>path to evaluate.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-14">Returns<a href="#returns-14" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>ParsedPath</code></p>
@@ -199,7 +222,8 @@ When multiple slashes are found, they&#x27;re replaced by a single one; when the
 <p><strong>posixPath</strong>: (<code>pathname</code>) =&gt; <code>string</code></p>
 </blockquote>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-15">Parameters<a href="#parameters-15" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>pathname</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="pathname">pathname<a href="#pathname" class="hash-link" aria-label="Direct link to pathname" title="Direct link to pathname">​</a></h5>
+<p><code>string</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-15">Returns<a href="#returns-15" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
 <h3 class="anchor anchorWithStickyNavbar_AIAF" id="relative">relative()<a href="#relative" class="hash-link" aria-label="Direct link to relative()" title="Direct link to relative()">​</a></h3>
@@ -209,8 +233,10 @@ When multiple slashes are found, they&#x27;re replaced by a single one; when the
 <p>Solve the relative path from {from} to {to}.
 At times we have two absolute paths, and we need to derive the relative path from one to the other. This is actually the reverse transform of path.resolve.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-16">Parameters<a href="#parameters-16" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>from</strong>: <code>string</code></p>
-<p>• <strong>to</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="from">from<a href="#from" class="hash-link" aria-label="Direct link to from" title="Direct link to from">​</a></h5>
+<p><code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="to">to<a href="#to" class="hash-link" aria-label="Direct link to to" title="Direct link to to">​</a></h5>
+<p><code>string</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-16">Returns<a href="#returns-16" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
 <h3 class="anchor anchorWithStickyNavbar_AIAF" id="removeext">removeExt()<a href="#removeext" class="hash-link" aria-label="Direct link to removeExt()" title="Direct link to removeExt()">​</a></h3>
@@ -219,8 +245,10 @@ At times we have two absolute paths, and we need to derive the relative path fro
 </blockquote>
 <p>Removes the specific ext extension from filename, if it has it. Otherwise it leaves it as is. As in all upath functions, it be .ext or ext.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-17">Parameters<a href="#parameters-17" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>filename</strong>: <code>string</code></p>
-<p>• <strong>ext</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="filename-2">filename<a href="#filename-2" class="hash-link" aria-label="Direct link to filename" title="Direct link to filename">​</a></h5>
+<p><code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ext-4">ext<a href="#ext-4" class="hash-link" aria-label="Direct link to ext" title="Direct link to ext">​</a></h5>
+<p><code>string</code></p>
 <p>string extension to remove</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-17">Returns<a href="#returns-17" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -232,7 +260,8 @@ At times we have two absolute paths, and we need to derive the relative path fro
 <p>Starting from leftmost {from} parameter, resolves {to} to an absolute path.</p>
 <p>If {to} isn&#x27;t already absolute, {from} arguments are prepended in right to left order, until an absolute path is found. If after using all {from} paths still no absolute path is found, the current working directory is used as well. The resulting path is normalized, and trailing slashes are removed unless the path gets resolved to the root directory.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-18">Parameters<a href="#parameters-18" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• ...<strong>pathSegments</strong>: <code>any</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="pathsegments">pathSegments<a href="#pathsegments" class="hash-link" aria-label="Direct link to pathSegments" title="Direct link to pathSegments">​</a></h5>
+<p>...<code>any</code>[]</p>
 <p>string paths to join. Non-string arguments are ignored.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-18">Returns<a href="#returns-18" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -246,7 +275,8 @@ At times we have two absolute paths, and we need to derive the relative path fro
 </blockquote>
 <p>Just converts all <code>to/</code> and consolidates duplicates, without performing any normalization.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-19">Parameters<a href="#parameters-19" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>p</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="p-7">p<a href="#p-7" class="hash-link" aria-label="Direct link to p" title="Direct link to p">​</a></h5>
+<p><code>string</code></p>
 <p>string path to convert to unix.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-19">Returns<a href="#returns-19" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -258,11 +288,14 @@ At times we have two absolute paths, and we need to derive the relative path fro
 <p>Extensions are considered to be up to maxSize chars long, counting the dot (defaults to 7).</p>
 <p>An Array of ignoreExts (eg [&#x27;.min&#x27;]) prevents these from being considered as extension, thus are not trimmed.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-20">Parameters<a href="#parameters-20" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>filename</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="filename-3">filename<a href="#filename-3" class="hash-link" aria-label="Direct link to filename" title="Direct link to filename">​</a></h5>
+<p><code>string</code></p>
 <p>string filename to trim it&#x27;s extension</p>
-<p>• <strong>ignoreExts?</strong>: <code>string</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="ignoreexts-2">ignoreExts?<a href="#ignoreexts-2" class="hash-link" aria-label="Direct link to ignoreExts?" title="Direct link to ignoreExts?">​</a></h5>
+<p><code>string</code>[]</p>
 <p>array extensions to ignore</p>
-<p>• <strong>maxSize?</strong>: <code>number</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="maxsize-2">maxSize?<a href="#maxsize-2" class="hash-link" aria-label="Direct link to maxSize?" title="Direct link to maxSize?">​</a></h5>
+<p><code>number</code></p>
 <p>number max length of the extension</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-20">Returns<a href="#returns-20" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
@@ -275,7 +308,8 @@ At times we have two absolute paths, and we need to derive the relative path fro
 <p><strong>winPath</strong>: (<code>pathname</code>) =&gt; <code>string</code></p>
 </blockquote>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-21">Parameters<a href="#parameters-21" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>pathname</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="pathname-1">pathname<a href="#pathname-1" class="hash-link" aria-label="Direct link to pathname" title="Direct link to pathname">​</a></h5>
+<p><code>string</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-21">Returns<a href="#returns-21" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/util-path/functions/winPath"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Function: winPath()</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/util-path/variables/delimiter"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Variable: delimiter</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_X3si thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#type-declaration" class="table-of-contents__link toc-highlight">Type declaration</a><ul><li><a href="#addext" class="table-of-contents__link toc-highlight">addExt()</a></li><li><a href="#basename" class="table-of-contents__link toc-highlight">basename()</a></li><li><a href="#changeext" class="table-of-contents__link toc-highlight">changeExt()</a></li><li><a href="#defaultext" class="table-of-contents__link toc-highlight">defaultExt()</a></li><li><a href="#delimiter" class="table-of-contents__link toc-highlight">delimiter</a></li><li><a href="#dirname" class="table-of-contents__link toc-highlight">dirname()</a></li><li><a href="#extname" class="table-of-contents__link toc-highlight">extname()</a></li><li><a href="#format" class="table-of-contents__link toc-highlight">format()</a></li><li><a href="#isabsolute" class="table-of-contents__link toc-highlight">isAbsolute()</a></li><li><a href="#join" class="table-of-contents__link toc-highlight">join()</a></li><li><a href="#joinsafe" class="table-of-contents__link toc-highlight">joinSafe()</a></li><li><a href="#normalize" class="table-of-contents__link toc-highlight">normalize()</a></li><li><a href="#normalizesafe" class="table-of-contents__link toc-highlight">normalizeSafe()</a></li><li><a href="#normalizetrim" class="table-of-contents__link toc-highlight">normalizeTrim()</a></li><li><a href="#parse" class="table-of-contents__link toc-highlight">parse()</a></li><li><a href="#posix" class="table-of-contents__link toc-highlight">posix</a></li><li><a href="#posixpath" class="table-of-contents__link toc-highlight">posixPath()</a></li><li><a href="#relative" class="table-of-contents__link toc-highlight">relative()</a></li><li><a href="#removeext" class="table-of-contents__link toc-highlight">removeExt()</a></li><li><a href="#resolve" class="table-of-contents__link toc-highlight">resolve()</a></li><li><a href="#sep" class="table-of-contents__link toc-highlight">sep</a></li><li><a href="#tounix" class="table-of-contents__link toc-highlight">toUnix()</a></li><li><a href="#trimext" class="table-of-contents__link toc-highlight">trimExt()</a></li><li><a href="#win32" class="table-of-contents__link toc-highlight">win32</a></li><li><a href="#winpath" class="table-of-contents__link toc-highlight">winPath()</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Introduction</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/getting-started/installation">Getting Started</a></li><li class="footer__item"><a href="https://github.com/andreisergiu98/baeta/tree/main/examples" target="_blank" rel="noopener noreferrer" class="footer__link-item">Examples<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_yi7P"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/andreisergiu98/baeta" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_yi7P"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discord.gg/j6Y8xRc7ep" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_yi7P"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/sponsors/andreisergiu98" target="_blank" rel="noopener noreferrer" class="footer__link-item">Donate<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_yi7P"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div></div></footer></div>
 </body>

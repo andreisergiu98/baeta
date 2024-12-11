@@ -6,7 +6,7 @@
 <title data-rh="true">Interface: ScanOptions | Baeta</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" name="twitter:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" property="og:url" content="https://baeta.io/docs/api/generator-sdk/namespaces/micromatch/interfaces/ScanOptions"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="baeta, graphql, schema, types, typescript, framework, builder"><meta data-rh="true" name="twitter:card" content="img/banner.png"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Interface: ScanOptions | Baeta"><meta data-rh="true" name="description" content="Extends"><meta data-rh="true" property="og:description" content="Extends"><link data-rh="true" rel="icon" href="/img/favicon.ico?v=1"><link data-rh="true" rel="canonical" href="https://baeta.io/docs/api/generator-sdk/namespaces/micromatch/interfaces/ScanOptions"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/generator-sdk/namespaces/micromatch/interfaces/ScanOptions" hreflang="en"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/generator-sdk/namespaces/micromatch/interfaces/ScanOptions" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://4FC0N9XMY9-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="Baeta" href="/opensearch.xml">
 
 <link rel="preconnect" href="https://baeta.io"><link rel="stylesheet" href="/assets/css/styles.fc862cbe.css">
-<script src="/assets/js/runtime~main.0cedca6d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.894b7259.js" defer="defer"></script>
 <script src="/assets/js/main.6c86f190.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -100,9 +100,12 @@ Instead, the star is treated the same as an other star.</p>
 The function receives the range values as two arguments, and it must return a string to be used in the generated regex.
 It&#x27;s recommended that returned strings be wrapped in parentheses. This option is overridden by the expandBrace option.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters">Parameters<a href="#parameters" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>left</strong>: <code>string</code></p>
-<p>• <strong>right</strong>: <code>string</code></p>
-<p>• <strong>options</strong>: <a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Options"><code>Options</code></a></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="left">left<a href="#left" class="hash-link" aria-label="Direct link to left" title="Direct link to left">​</a></h5>
+<p><code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="right">right<a href="#right" class="hash-link" aria-label="Direct link to right" title="Direct link to right">​</a></h5>
+<p><code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="options">options<a href="#options" class="hash-link" aria-label="Direct link to options" title="Direct link to options">​</a></h5>
+<p><a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Options"><code>Options</code></a></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns">Returns<a href="#returns" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="default-7">Default<a href="#default-7" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default">​</a></h4>
@@ -146,7 +149,8 @@ It&#x27;s recommended that returned strings be wrapped in parentheses. This opti
 </blockquote>
 <p>Custom function for formatting the returned string. This is useful for removing leading slashes, converting Windows paths to Posix paths, etc.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-1">Parameters<a href="#parameters-1" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>returnedString</strong>: <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="returnedstring">returnedString<a href="#returnedstring" class="hash-link" aria-label="Direct link to returnedString" title="Direct link to returnedString">​</a></h5>
+<p><code>string</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-1">Returns<a href="#returns-1" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>string</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="default-11">Default<a href="#default-11" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default">​</a></h4>
@@ -301,7 +305,8 @@ Note that this option is ignored when the <code>flags</code> option is defined.<
 </blockquote>
 <p>Function to be called on ignored items.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-2">Parameters<a href="#parameters-2" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>item</strong>: <a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Item"><code>Item</code></a></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="item">item<a href="#item" class="hash-link" aria-label="Direct link to item" title="Direct link to item">​</a></h5>
+<p><a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Item"><code>Item</code></a></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-2">Returns<a href="#returns-2" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>void</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="default-26">Default<a href="#default-26" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default">​</a></h4>
@@ -315,7 +320,8 @@ Note that this option is ignored when the <code>flags</code> option is defined.<
 </blockquote>
 <p>Function to be called on matched items.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-3">Parameters<a href="#parameters-3" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>item</strong>: <a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Item"><code>Item</code></a></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="item-1">item<a href="#item-1" class="hash-link" aria-label="Direct link to item" title="Direct link to item">​</a></h5>
+<p><a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Item"><code>Item</code></a></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-3">Returns<a href="#returns-3" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>void</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="default-27">Default<a href="#default-27" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default">​</a></h4>
@@ -329,7 +335,8 @@ Note that this option is ignored when the <code>flags</code> option is defined.<
 </blockquote>
 <p>Function to be called on all items, regardless of whether or not they are matched or ignored.</p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="parameters-4">Parameters<a href="#parameters-4" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
-<p>• <strong>item</strong>: <a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Item"><code>Item</code></a></p>
+<h5 class="anchor anchorWithStickyNavbar_AIAF" id="item-2">item<a href="#item-2" class="hash-link" aria-label="Direct link to item" title="Direct link to item">​</a></h5>
+<p><a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Item"><code>Item</code></a></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="returns-4">Returns<a href="#returns-4" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>void</code></p>
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="default-28">Default<a href="#default-28" class="hash-link" aria-label="Direct link to Default" title="Direct link to Default">​</a></h4>
@@ -414,7 +421,7 @@ This is automatically enabled when <code>options.tokens</code> is <code>true</co
 <h4 class="anchor anchorWithStickyNavbar_AIAF" id="example-2">Example<a href="#example-2" class="hash-link" aria-label="Direct link to Example" title="Direct link to Example">​</a></h4>
 <p>In this example we want to match a literal <code>*</code>:</p>
 <div class="language-js codeBlockContainer_r_He theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_lW1d"><pre tabindex="0" class="prism-code language-js codeBlock_aRIy thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_iaXh"><span class="token-line" style="color:#F8F8F2"><span class="token plain">mm</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token method function property-access" style="color:rgb(80, 250, 123)">match</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">&quot;abc&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;a\\*c&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;a\\*c&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">//=&gt; [&#x27;a\\*c&#x27;]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">mm</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token method function property-access" style="color:rgb(80, 250, 123)">match</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">&quot;abc&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;a\\*c&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;a\\*c&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> </span><span class="token literal-property property">unescape</span><span class="token operator">:</span><span class="token plain"> </span><span class="token boolean">true</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">//=&gt; [&#x27;a*c&#x27;]</span><br></span></code></pre><div class="buttonGroup_K8yE"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_HXdw" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_is2C"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_w2pz"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h4 class="anchor anchorWithStickyNavbar_AIAF" id="inherited-from-34">Inherited from<a href="#inherited-from-34" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_AIAF" id="inherited-from-34">Inherited from<a href="#inherited-from-34" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from">  ​</a></h4>
 <p><a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Options"><code>Options</code></a>.<a href="/docs/api/generator-sdk/namespaces/micromatch/interfaces/Options#unescape"><code>unescape</code></a></p>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_AIAF" id="windows">windows?<a href="#windows" class="hash-link" aria-label="Direct link to windows?" title="Direct link to windows?">​</a></h3>

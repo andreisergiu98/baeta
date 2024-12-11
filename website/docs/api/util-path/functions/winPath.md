@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **pathname**: `string`
+### pathname
+
+`string`
 
 ## Returns
 

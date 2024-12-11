@@ -8,7 +8,9 @@
 
 #### Parameters
 
-• **durableObject**: `DurableObjectNamespace`\<`undefined`\>
+##### durableObject
+
+`DurableObjectNamespace`\<`undefined`\>
 
 #### Returns
 
@@ -28,7 +30,9 @@
 
 #### Parameters
 
-• **keys**: `string`[]
+##### keys
+
+`string`[]
 
 #### Returns
 
@@ -42,7 +46,9 @@
 
 #### Parameters
 
-• **key**: `string`
+##### key
+
+`string`
 
 #### Returns
 
@@ -56,7 +62,9 @@
 
 #### Parameters
 
-• **keys**: `string`[]
+##### keys
+
+`string`[]
 
 #### Returns
 
@@ -70,7 +78,9 @@
 
 #### Parameters
 
-• **key**: `string`
+##### key
+
+`string`
 
 #### Returns
 
@@ -84,11 +94,17 @@
 
 #### Parameters
 
-• **prefix**: `string`
+##### prefix
 
-• **startAfter?**: `string`
+`string`
 
-• **limit?**: `number`
+##### startAfter?
+
+`string`
+
+##### limit?
+
+`number`
 
 #### Returns
 
@@ -102,7 +118,9 @@
 
 #### Parameters
 
-• **body**: `Action`
+##### body
+
+`Action`
 
 #### Returns
 
@@ -116,9 +134,13 @@
 
 #### Parameters
 
-• **values**: [`string`, `string`][]
+##### values
 
-• **ttl?**: `number`
+[`string`, `string`][]
+
+##### ttl?
+
+`number`
 
 #### Returns
 
@@ -132,11 +154,17 @@
 
 #### Parameters
 
-• **key**: `string`
+##### key
 
-• **value**: `string`
+`string`
 
-• **ttl?**: `number`
+##### value
+
+`string`
+
+##### ttl?
+
+`number`
 
 #### Returns
 

@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **plugins?**: `object`[]
+### plugins?
+
+`object`[]
 
 ## Returns
 

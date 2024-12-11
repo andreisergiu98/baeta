@@ -7,7 +7,9 @@ If there is no '.' in the last portion of the path or the first character of it 
 
 ## Parameters
 
-• **p**: `string`
+### p
+
+`string`
 
 the path to evaluate.
 

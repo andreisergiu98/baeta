@@ -4,9 +4,11 @@
 
 ## Parameters
 
-• **module**
+### module
 
-• **module.$directive**
+#### $directive
+
+(`transformer`) => `void`
 
 ## Returns
 

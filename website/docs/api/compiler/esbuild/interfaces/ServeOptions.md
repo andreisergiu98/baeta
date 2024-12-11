@@ -34,7 +34,9 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 
 #### Parameters
 
-• **args**: [`ServeOnRequestArgs`](ServeOnRequestArgs.md)
+##### args
+
+[`ServeOnRequestArgs`](ServeOnRequestArgs.md)
 
 #### Returns
 

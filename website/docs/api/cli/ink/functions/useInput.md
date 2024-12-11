@@ -27,9 +27,13 @@ const UserInput = () => {
 
 ## Parameters
 
-• **inputHandler**: `Handler`
+### inputHandler
 
-• **options?**: `Options`
+`Handler`
+
+### options?
+
+`Options`
 
 ## Returns
 

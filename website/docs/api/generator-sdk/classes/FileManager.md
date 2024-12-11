@@ -8,7 +8,9 @@
 
 #### Parameters
 
-• **fileOptions?**: [`FileOptions`](../interfaces/FileOptions.md)
+##### fileOptions?
+
+[`FileOptions`](../interfaces/FileOptions.md)
 
 #### Returns
 
@@ -34,7 +36,9 @@
 
 #### Parameters
 
-• ...**file**: [`File`](File.md)[]
+##### file
+
+...[`File`](File.md)[]
 
 #### Returns
 
@@ -48,11 +52,17 @@
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
 
-• **content**: `string`
+`string`
 
-• **tag**: `string`
+##### content
+
+`string`
+
+##### tag
+
+`string`
 
 #### Returns
 
@@ -66,7 +76,9 @@
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
+
+`string`
 
 #### Returns
 
@@ -90,7 +102,9 @@
 
 #### Parameters
 
-• **tag**: `string`
+##### tag
+
+`string`
 
 #### Returns
 
@@ -114,7 +128,9 @@
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
+
+`string`
 
 #### Returns
 
@@ -138,7 +154,9 @@
 
 #### Parameters
 
-• **tag**: `string`
+##### tag
+
+`string`
 
 #### Returns
 
@@ -172,7 +190,9 @@
 
 #### Parameters
 
-• **tag**: `string`
+##### tag
+
+`string`
 
 #### Returns
 

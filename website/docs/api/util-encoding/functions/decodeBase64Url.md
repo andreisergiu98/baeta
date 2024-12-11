@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **base64Url**: `string`
+### base64Url
+
+`string`
 
 ## Returns
 

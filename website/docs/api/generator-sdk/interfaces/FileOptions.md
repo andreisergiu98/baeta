@@ -40,11 +40,17 @@ Add custom header at the beginning of the file.
 
 #### Parameters
 
-• **name**: `string`
+##### name
 
-• **content**: `string`
+`string`
 
-• **tag**: `string`
+##### content
+
+`string`
+
+##### tag
+
+`string`
 
 #### Returns
 
@@ -60,11 +66,17 @@ Edit the content of the file before writing it.
 
 #### Parameters
 
-• **name**: `string`
+##### name
 
-• **content**: `string`
+`string`
 
-• **tag**: `string`
+##### content
+
+`string`
+
+##### tag
+
+`string`
 
 #### Returns
 

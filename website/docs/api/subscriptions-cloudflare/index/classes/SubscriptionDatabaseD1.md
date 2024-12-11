@@ -12,7 +12,9 @@
 
 #### Parameters
 
-• **db**: `D1Database`
+##### db
+
+`D1Database`
 
 #### Returns
 
@@ -32,7 +34,9 @@
 
 #### Parameters
 
-• **info**: `SubscriptionInfo`
+##### info
+
+`SubscriptionInfo`
 
 #### Returns
 
@@ -50,7 +54,9 @@
 
 #### Parameters
 
-• **id**: `string`
+##### id
+
+`string`
 
 #### Returns
 
@@ -68,7 +74,9 @@
 
 #### Parameters
 
-• **connectionId**: `string`
+##### connectionId
+
+`string`
 
 #### Returns
 
@@ -86,7 +94,9 @@
 
 #### Parameters
 
-• **topic**: `string`
+##### topic
+
+`string`
 
 #### Returns
 

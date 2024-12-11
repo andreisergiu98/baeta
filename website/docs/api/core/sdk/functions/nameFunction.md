@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **fn**: `undefined` \| `GenericFn`
+### fn
 
-• **name**: `string`
+`undefined` | `GenericFn`
+
+### name
+
+`string`
 
 ## Returns
 

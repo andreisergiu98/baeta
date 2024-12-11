@@ -6,11 +6,15 @@ Adds .ext to filename, but only if it doesn't already have the exact extension.
 
 ## Parameters
 
-• **file**: `string`
+### file
+
+`string`
 
 string filename to add extension to
 
-• **ext**: `string`
+### ext
+
+`string`
 
 string extension to add
 

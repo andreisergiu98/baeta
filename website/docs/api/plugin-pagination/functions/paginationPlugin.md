@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options**: `PaginationOptions`
+### options
+
+`PaginationOptions`
 
 ## Returns
 

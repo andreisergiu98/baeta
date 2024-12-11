@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options**: [`Options`](../interfaces/Options.md)
+### options
+
+[`Options`](../interfaces/Options.md)
 
 ## Returns
 

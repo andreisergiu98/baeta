@@ -12,7 +12,9 @@
 
 #### Parameters
 
-• **client**: `Redis`
+##### client
+
+`Redis`
 
 #### Returns
 
@@ -40,11 +42,17 @@
 
 #### Parameters
 
-• **options**: `StoreOptions`\<`T`\>
+##### options
 
-• **type**: `string`
+`StoreOptions`\<`T`\>
 
-• **hash**: `string`
+##### type
+
+`string`
+
+##### hash
+
+`string`
 
 #### Returns
 

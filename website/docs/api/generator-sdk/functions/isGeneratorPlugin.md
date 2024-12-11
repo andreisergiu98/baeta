@@ -4,9 +4,11 @@
 
 ## Parameters
 
-• **plugin**
+### plugin
 
-• **plugin.type**: [`PluginType`](../../plugin/enumerations/PluginType.md)
+#### type
+
+[`PluginType`](../../plugin/enumerations/PluginType.md)
 
 ## Returns
 

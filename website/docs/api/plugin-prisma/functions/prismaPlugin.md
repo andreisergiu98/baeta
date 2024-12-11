@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options**: [`PrismaPluginOptions`](../interfaces/PrismaPluginOptions.md)
+### options
+
+[`PrismaPluginOptions`](../interfaces/PrismaPluginOptions.md)
 
 ## Returns
 

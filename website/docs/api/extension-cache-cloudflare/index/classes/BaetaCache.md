@@ -12,9 +12,11 @@
 
 #### Parameters
 
-• **state**: `DurableObjectState`
+##### state
 
-• **env**
+`DurableObjectState`
+
+##### env
 
 #### Returns
 
@@ -58,7 +60,9 @@
 
 #### Parameters
 
-• **keys**: `string`[]
+##### keys
+
+`string`[]
 
 #### Returns
 
@@ -72,7 +76,9 @@
 
 #### Parameters
 
-• **request**: `Request`\<`unknown`, `CfProperties`\<`unknown`\>\>
+##### request
+
+`Request`\<`unknown`, `CfProperties`\<`unknown`\>\>
 
 #### Returns
 
@@ -90,7 +96,9 @@
 
 #### Parameters
 
-• **keys**: `string`[]
+##### keys
+
+`string`[]
 
 #### Returns
 
@@ -114,11 +122,17 @@
 
 #### Parameters
 
-• **prefix**: `string`
+##### prefix
 
-• **startAfter?**: `string`
+`string`
 
-• **limit?**: `number`
+##### startAfter?
+
+`string`
+
+##### limit?
+
+`number`
 
 #### Returns
 
@@ -132,9 +146,13 @@
 
 #### Parameters
 
-• **values**: [`string`, `string`][]
+##### values
 
-• **ttl?**: `number`
+[`string`, `string`][]
+
+##### ttl?
+
+`number`
 
 #### Returns
 
@@ -148,7 +166,9 @@
 
 #### Parameters
 
-• **at**: `number`
+##### at
+
+`number`
 
 #### Returns
 

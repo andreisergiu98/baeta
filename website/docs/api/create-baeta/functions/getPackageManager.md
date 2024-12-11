@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **dest**: `string`
+### dest
 
-• **\_\_namedParameters**: [`CliOptions`](../interfaces/CliOptions.md)
+`string`
+
+### \_\_namedParameters
+
+[`CliOptions`](../interfaces/CliOptions.md)
 
 ## Returns
 

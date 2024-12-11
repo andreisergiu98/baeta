@@ -8,7 +8,9 @@
 
 ## Parameters
 
-• **options**: [`GeneratorPluginV1Factory`](../type-aliases/GeneratorPluginV1Factory.md)\<`Store`\>
+### options
+
+[`GeneratorPluginV1Factory`](../type-aliases/GeneratorPluginV1Factory.md)\<`Store`\>
 
 ## Returns
 

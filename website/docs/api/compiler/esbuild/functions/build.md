@@ -17,7 +17,9 @@ Documentation: https://esbuild.github.io/api/#build
 
 ## Parameters
 
-• **options**: [`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](../interfaces/BuildOptions.md), `T`\>
+### options
+
+[`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](../interfaces/BuildOptions.md), `T`\>
 
 ## Returns
 

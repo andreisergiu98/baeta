@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **args**: `Args`
+### args
+
+`Args`
 
 ## Returns
 

@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options?**: [`AutoloadPluginOptions`](../interfaces/AutoloadPluginOptions.md)
+### options?
+
+[`AutoloadPluginOptions`](../interfaces/AutoloadPluginOptions.md)
 
 ## Returns
 

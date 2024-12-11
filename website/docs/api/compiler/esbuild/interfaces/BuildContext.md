@@ -46,7 +46,9 @@ Documentation: https://esbuild.github.io/api/#serve
 
 #### Parameters
 
-• **options?**: [`ServeOptions`](ServeOptions.md)
+##### options?
+
+[`ServeOptions`](ServeOptions.md)
 
 #### Returns
 
@@ -62,7 +64,9 @@ Documentation: https://esbuild.github.io/api/#watch
 
 #### Parameters
 
-• **options?**: [`WatchOptions`](WatchOptions.md)
+##### options?
+
+[`WatchOptions`](WatchOptions.md)
 
 #### Returns
 

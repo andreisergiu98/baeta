@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **message**: `string`
+### message
 
-• **bold**: `boolean` = `false`
+`string`
+
+### bold
+
+`boolean` = `false`
 
 ## Returns
 

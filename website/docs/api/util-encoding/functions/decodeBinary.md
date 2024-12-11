@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **value**: `Uint8Array`\<`ArrayBufferLike`\>
+### value
+
+`Uint8Array`\<`ArrayBufferLike`\>
 
 ## Returns
 

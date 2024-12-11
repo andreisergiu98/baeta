@@ -8,15 +8,25 @@
 
 #### Parameters
 
-• **id**: `string`
+##### id
 
-• **dirname**: `string`
+`string`
 
-• **hashes**: [`TypeHashMap`](../type-aliases/TypeHashMap.md)
+##### dirname
 
-• **typedef**: `DocumentNode`
+`string`
 
-• **extensions**: [`Extension`](Extension.md)[]
+##### hashes
+
+[`TypeHashMap`](../type-aliases/TypeHashMap.md)
+
+##### typedef
+
+`DocumentNode`
+
+##### extensions
+
+[`Extension`](Extension.md)[]
 
 #### Returns
 
@@ -78,7 +88,9 @@
 
 ###### Parameters
 
-• **schema**: `GraphQLSchema`
+###### schema
+
+`GraphQLSchema`
 
 ###### Returns
 
@@ -106,9 +118,13 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -116,7 +132,9 @@
 
 ##### Parameters
 
-• **middleware**: [`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Root`, `Context`, `Args`\>
+###### middleware
+
+[`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 ##### Returns
 
@@ -154,9 +172,13 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -178,7 +200,9 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 #### Returns
 
@@ -186,7 +210,9 @@
 
 ##### Parameters
 
-• **resolver**: [`TypeResolver`](../../index/type-aliases/TypeResolver.md)\<`Result`, `Value`, `Context`\>
+###### resolver
+
+[`TypeResolver`](../../index/type-aliases/TypeResolver.md)\<`Result`, `Value`, `Context`\>
 
 ##### Returns
 
@@ -200,7 +226,9 @@
 
 #### Parameters
 
-• **scalar**: `string`
+##### scalar
+
+`string`
 
 #### Returns
 
@@ -208,7 +236,9 @@
 
 ##### Parameters
 
-• **resolver**: [`ScalarResolver`](../../index/type-aliases/ScalarResolver.md)
+###### resolver
+
+[`ScalarResolver`](../../index/type-aliases/ScalarResolver.md)
 
 ##### Returns
 
@@ -232,7 +262,9 @@
 
 #### Parameters
 
-• **field**: `string`
+##### field
+
+`string`
 
 #### Returns
 
@@ -268,7 +300,9 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 #### Returns
 

@@ -12,11 +12,17 @@
 
 #### Parameters
 
-• **options**: [`StoreOptions`](../interfaces/StoreOptions.md)\<`Item`\>
+##### options
 
-• **type**: `string`
+[`StoreOptions`](../interfaces/StoreOptions.md)\<`Item`\>
 
-• **hash**: `string`
+##### type
+
+`string`
+
+##### hash
+
+`string`
 
 #### Returns
 
@@ -30,9 +36,13 @@
 
 #### Parameters
 
-• **refs**: [`ItemRef`](../type-aliases/ItemRef.md)[]
+##### refs
 
-• **evictQueries?**: `boolean`
+[`ItemRef`](../type-aliases/ItemRef.md)[]
+
+##### evictQueries?
+
+`boolean`
 
 #### Returns
 
@@ -54,11 +64,17 @@
 
 #### Parameters
 
-• **queryRef?**: `string`
+##### queryRef?
 
-• **parentRef?**: [`ParentRef`](../type-aliases/ParentRef.md)
+`string`
 
-• **args?**: `Record`\<`string`, `unknown`\>
+##### parentRef?
+
+[`ParentRef`](../type-aliases/ParentRef.md)
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -72,7 +88,9 @@
 
 #### Parameters
 
-• **refs**: [`ItemRef`](../type-aliases/ItemRef.md)[]
+##### refs
+
+[`ItemRef`](../type-aliases/ItemRef.md)[]
 
 #### Returns
 
@@ -98,11 +116,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef?**: [`ParentRef`](../type-aliases/ParentRef.md)
+`string`
 
-• **args?**: `Record`\<`string`, `unknown`\>
+##### parentRef?
+
+[`ParentRef`](../type-aliases/ParentRef.md)
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -122,7 +146,9 @@
 
 #### Parameters
 
-• **items**: `Item`[]
+##### items
+
+`Item`[]
 
 #### Returns
 
@@ -136,13 +162,21 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **meta**: `string`[]
+`string`
 
-• **parentRef?**: [`ParentRef`](../type-aliases/ParentRef.md)
+##### meta
 
-• **args?**: `Record`\<`string`, `unknown`\>
+`string`[]
+
+##### parentRef?
+
+[`ParentRef`](../type-aliases/ParentRef.md)
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -162,7 +196,9 @@
 
 #### Parameters
 
-• **ref**: [`ItemRef`](../type-aliases/ItemRef.md)
+##### ref
+
+[`ItemRef`](../type-aliases/ItemRef.md)
 
 #### Returns
 
@@ -176,7 +212,9 @@
 
 #### Parameters
 
-• **item**: `Item`
+##### item
+
+`Item`
 
 #### Returns
 
@@ -190,11 +228,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef?**: [`ParentRef`](../type-aliases/ParentRef.md)
+`string`
 
-• **args?**: `Record`\<`string`, `unknown`\>
+##### parentRef?
+
+[`ParentRef`](../type-aliases/ParentRef.md)
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -216,9 +260,13 @@
 
 #### Parameters
 
-• **queryRef**: [`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+##### queryRef
 
-• ...**args**: `Root` _extends_ `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
+[`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+
+##### args
+
+...`Root` _extends_ `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
 
 #### Returns
 
@@ -232,11 +280,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef**: `NonNullable`\<[`ParentRef`](../type-aliases/ParentRef.md)\>
+`string`
 
-• **args**: `Record`\<`string`, `unknown`\>
+##### parentRef
+
+`NonNullable`\<[`ParentRef`](../type-aliases/ParentRef.md)\>
+
+##### args
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -250,9 +304,13 @@
 
 #### Parameters
 
-• **parentRef**: [`ParentRef`](../type-aliases/ParentRef.md)
+##### parentRef
 
-• **args?**: `Record`\<`string`, `unknown`\>
+[`ParentRef`](../type-aliases/ParentRef.md)
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -266,7 +324,9 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
+
+`string`
 
 #### Returns
 
@@ -280,11 +340,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef**: `NonNullable`\<[`ParentRef`](../type-aliases/ParentRef.md)\>
+`string`
 
-• **args**: `Record`\<`string`, `unknown`\>
+##### parentRef
+
+`NonNullable`\<[`ParentRef`](../type-aliases/ParentRef.md)\>
+
+##### args
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -298,7 +364,9 @@
 
 #### Parameters
 
-• **encodedRef**: `string`
+##### encodedRef
+
+`string`
 
 #### Returns
 
@@ -312,9 +380,13 @@
 
 #### Parameters
 
-• **ref**: [`ItemRef`](../type-aliases/ItemRef.md)
+##### ref
 
-• **evictQueries?**: `boolean`
+[`ItemRef`](../type-aliases/ItemRef.md)
+
+##### evictQueries?
+
+`boolean`
 
 #### Returns
 
@@ -336,9 +408,13 @@
 
 #### Parameters
 
-• **queryRef?**: [`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+##### queryRef?
 
-• **matcher?**: `QueryMatching`\<`Args`\>
+[`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+
+##### matcher?
+
+`QueryMatching`\<`Args`\>
 
 #### Returns
 
@@ -352,9 +428,13 @@
 
 #### Parameters
 
-• **value**: `unknown`
+##### value
 
-• **catchAll?**: `string`
+`unknown`
+
+##### catchAll?
+
+`string`
 
 #### Returns
 
@@ -368,7 +448,9 @@
 
 #### Parameters
 
-• **value**: `string`
+##### value
+
+`string`
 
 #### Returns
 
@@ -382,9 +464,13 @@
 
 #### Parameters
 
-• **args**: `Record`\<`string`, `unknown`\> = `{}`
+##### args
 
-• **catchAll?**: `string`
+`Record`\<`string`, `unknown`\> = `{}`
+
+##### catchAll?
+
+`string`
 
 #### Returns
 
@@ -398,7 +484,9 @@
 
 #### Parameters
 
-• **item**: `null` \| `Item`
+##### item
+
+`null` | `Item`
 
 #### Returns
 
@@ -412,7 +500,9 @@
 
 #### Parameters
 
-• **ref**: [`ItemRef`](../type-aliases/ItemRef.md)
+##### ref
+
+[`ItemRef`](../type-aliases/ItemRef.md)
 
 #### Returns
 
@@ -426,7 +516,9 @@
 
 #### Parameters
 
-• **refs**: [`ItemRef`](../type-aliases/ItemRef.md)[]
+##### refs
+
+[`ItemRef`](../type-aliases/ItemRef.md)[]
 
 #### Returns
 
@@ -436,7 +528,7 @@
 
 ### getQueryResult()
 
-> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher`?): `Promise`\<`null` \| `object`\>
+> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher`?): `Promise`\<`null` \| \{ `query`: `Result`; \}\>
 
 #### Type Parameters
 
@@ -448,13 +540,17 @@
 
 #### Parameters
 
-• **queryRef**: [`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+##### queryRef
 
-• **matcher?**: `QueryMatching`\<`Args`\>
+[`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+
+##### matcher?
+
+`QueryMatching`\<`Args`\>
 
 #### Returns
 
-`Promise`\<`null` \| `object`\>
+`Promise`\<`null` \| \{ `query`: `Result`; \}\>
 
 ---
 
@@ -464,7 +560,9 @@
 
 #### Parameters
 
-• **root**: `Item`
+##### root
+
+`Item`
 
 #### Returns
 
@@ -478,7 +576,9 @@
 
 #### Parameters
 
-• **root**: `unknown`
+##### root
+
+`unknown`
 
 #### Returns
 
@@ -502,7 +602,9 @@
 
 #### Parameters
 
-• **refs**: readonly [`ItemRef`](../type-aliases/ItemRef.md)[]
+##### refs
+
+readonly [`ItemRef`](../type-aliases/ItemRef.md)[]
 
 #### Returns
 
@@ -516,9 +618,13 @@
 
 #### Parameters
 
-• **nullableRefs**: (`null` \| [`ItemRef`](../type-aliases/ItemRef.md))[]
+##### nullableRefs
 
-• **items**: `Item`[]
+(`null` \| [`ItemRef`](../type-aliases/ItemRef.md))[]
+
+##### items
+
+`Item`[]
 
 #### Returns
 
@@ -532,7 +638,9 @@
 
 #### Parameters
 
-• **item**: `Item`
+##### item
+
+`Item`
 
 #### Returns
 
@@ -554,11 +662,17 @@
 
 #### Parameters
 
-• **queryRef**: [`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+##### queryRef
 
-• **data**: `Result`
+[`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
 
-• **matcher?**: `QueryMatching`\<`Args`\>
+##### data
+
+`Result`
+
+##### matcher?
+
+`QueryMatching`\<`Args`\>
 
 #### Returns
 
@@ -572,7 +686,9 @@
 
 #### Parameters
 
-• **value**: `string`
+##### value
+
+`string`
 
 #### Returns
 
@@ -586,7 +702,9 @@
 
 #### Parameters
 
-• **ref**: `unknown`
+##### ref
+
+`unknown`
 
 #### Returns
 

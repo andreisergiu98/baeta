@@ -6,7 +6,9 @@ This component can display text, and change its style to make it colorful, bold,
 
 ## Parameters
 
-• **\_\_namedParameters**: [`TextProps`](../type-aliases/TextProps.md)
+### \_\_namedParameters
+
+[`TextProps`](../type-aliases/TextProps.md)
 
 ## Returns
 

@@ -7,9 +7,13 @@ At times we have two absolute paths, and we need to derive the relative path fro
 
 ## Parameters
 
-• **from**: `string`
+### from
 
-• **to**: `string`
+`string`
+
+### to
+
+`string`
 
 ## Returns
 

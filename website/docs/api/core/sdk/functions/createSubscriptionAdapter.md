@@ -16,7 +16,9 @@
 
 ## Parameters
 
-• **subscription**: `Subscription`\<`Payload`, `Result`, `Root`, `Context`, `Args`\>
+### subscription
+
+`Subscription`\<`Payload`, `Result`, `Root`, `Context`, `Args`\>
 
 ## Returns
 

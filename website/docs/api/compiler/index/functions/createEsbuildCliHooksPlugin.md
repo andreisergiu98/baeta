@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options**: `HooksOptions`
+### options
+
+`HooksOptions`
 
 ## Returns
 

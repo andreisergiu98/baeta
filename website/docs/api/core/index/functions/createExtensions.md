@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• ...**extensions**: () => [`Extension`](../../sdk/classes/Extension.md)[]
+### extensions
+
+...() => [`Extension`](../../sdk/classes/Extension.md)[]
 
 ## Returns
 

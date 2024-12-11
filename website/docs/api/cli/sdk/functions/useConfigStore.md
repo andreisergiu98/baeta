@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **props**: [`ConfigProps`](../interfaces/ConfigProps.md)
+### props
+
+[`ConfigProps`](../interfaces/ConfigProps.md)
 
 ## Returns
 

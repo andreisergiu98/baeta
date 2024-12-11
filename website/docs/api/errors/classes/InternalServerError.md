@@ -12,11 +12,17 @@
 
 #### Parameters
 
-• **err**: `Error`
+##### err
 
-• **message**: `string` = `'Internal server error!'`
+`Error`
 
-• **options?**: `GraphQLErrorOptions`
+##### message
+
+`string` = `'Internal server error!'`
+
+##### options?
+
+`GraphQLErrorOptions`
 
 #### Returns
 

@@ -14,7 +14,9 @@
 
 ## Parameters
 
-• **params**: [`ResolverParams`](ResolverParams.md)\<`Root`, `Context`, `Args`\>
+### params
+
+[`ResolverParams`](ResolverParams.md)\<`Root`, `Context`, `Args`\>
 
 ## Returns
 

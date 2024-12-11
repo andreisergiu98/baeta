@@ -27,7 +27,9 @@ If the `stdin` stream passed to Ink does not support setRawMode, this function d
 
 #### Parameters
 
-• **value**: `boolean`
+##### value
+
+`boolean`
 
 #### Returns
 

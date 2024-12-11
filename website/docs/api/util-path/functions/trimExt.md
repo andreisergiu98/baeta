@@ -10,15 +10,21 @@ An Array of ignoreExts (eg ['.min']) prevents these from being considered as ext
 
 ## Parameters
 
-• **filename**: `string`
+### filename
+
+`string`
 
 string filename to trim it's extension
 
-• **ignoreExts?**: `string`[]
+### ignoreExts?
+
+`string`[]
 
 array extensions to ignore
 
-• **maxSize?**: `number`
+### maxSize?
+
+`number`
 
 number max length of the extension
 

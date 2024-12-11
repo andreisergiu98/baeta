@@ -12,17 +12,29 @@
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
 
-• **content**: `string`
+`string`
 
-• **start**: `string`
+##### content
 
-• **end**: `string`
+`string`
 
-• **tag**: `string`
+##### start
 
-• **options?**: [`FileOptions`](../interfaces/FileOptions.md)
+`string`
+
+##### end
+
+`string`
+
+##### tag
+
+`string`
+
+##### options?
+
+[`FileOptions`](../interfaces/FileOptions.md)
 
 #### Returns
 
@@ -40,7 +52,7 @@
 
 #### Inherited from
 
-[`File`](File.md).[`content`](File.md#content)
+[`File`](File.md).[`content`](File.md#content-1)
 
 ---
 
@@ -56,7 +68,7 @@
 
 #### Inherited from
 
-[`File`](File.md).[`filename`](File.md#filename)
+[`File`](File.md).[`filename`](File.md#filename-1)
 
 ---
 
@@ -82,7 +94,7 @@
 
 #### Inherited from
 
-[`File`](File.md).[`tag`](File.md#tag)
+[`File`](File.md).[`tag`](File.md#tag-1)
 
 ## Methods
 
@@ -92,7 +104,9 @@
 
 #### Parameters
 
-• **existingContent**: `string`
+##### existingContent
+
+`string`
 
 #### Returns
 
@@ -134,7 +148,9 @@
 
 #### Parameters
 
-• **existingContent**: `string`
+##### existingContent
+
+`string`
 
 #### Returns
 
@@ -148,7 +164,9 @@
 
 #### Parameters
 
-• **comment**: `string`
+##### comment
+
+`string`
 
 #### Returns
 
@@ -176,7 +194,9 @@
 
 #### Parameters
 
-• **existingContent**: `string`
+##### existingContent
+
+`string`
 
 #### Returns
 

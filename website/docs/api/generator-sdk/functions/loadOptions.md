@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options**: [`GeneratorOptions`](../interfaces/GeneratorOptions.md)
+### options
+
+[`GeneratorOptions`](../interfaces/GeneratorOptions.md)
 
 ## Returns
 

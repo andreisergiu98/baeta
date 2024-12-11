@@ -10,7 +10,9 @@ If {to} isn't already absolute, {from} arguments are prepended in right to left 
 
 ## Parameters
 
-• ...**pathSegments**: `any`[]
+### pathSegments
+
+...`any`[]
 
 string paths to join. Non-string arguments are ignored.
 

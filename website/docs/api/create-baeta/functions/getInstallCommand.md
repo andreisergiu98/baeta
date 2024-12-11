@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **pkgManager**: `"npm"` \| `"yarn"` \| `"pnpm"` \| `"bun"`
+### pkgManager
+
+`"npm"` | `"yarn"` | `"pnpm"` | `"bun"`
 
 ## Returns
 

@@ -8,7 +8,9 @@ Note that the unix / is returned everywhere, so windows \ is always converted to
 
 ## Parameters
 
-• **p**: `string`
+### p
+
+`string`
 
 string path to normalize.
 

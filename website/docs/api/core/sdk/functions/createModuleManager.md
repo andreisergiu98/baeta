@@ -8,9 +8,13 @@
 
 ## Parameters
 
-• **moduleMetadata**: [`Module`](../interfaces/Module.md)\<`T`\>
+### moduleMetadata
 
-• **extensions?**: [`ExtensionFactory`](../type-aliases/ExtensionFactory.md)\<[`Extension`](../classes/Extension.md)\>[]
+[`Module`](../interfaces/Module.md)\<`T`\>
+
+### extensions?
+
+[`ExtensionFactory`](../type-aliases/ExtensionFactory.md)\<[`Extension`](../classes/Extension.md)\>[]
 
 ## Returns
 

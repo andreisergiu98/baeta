@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **global**: `Global` = `globalThis`
+### global
+
+`Global` = `globalThis`
 
 ## Returns
 

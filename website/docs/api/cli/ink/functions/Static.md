@@ -19,7 +19,9 @@ to display a list of generated pages, while still displaying a live progress bar
 
 ## Parameters
 
-• **props**: [`StaticProps`](../type-aliases/StaticProps.md)\<`T`\>
+### props
+
+[`StaticProps`](../type-aliases/StaticProps.md)\<`T`\>
 
 ## Returns
 

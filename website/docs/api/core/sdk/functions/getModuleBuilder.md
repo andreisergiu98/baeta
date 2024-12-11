@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **module**: `Record`\<`string`, `unknown`\>
+### module
+
+`Record`\<`string`, `unknown`\>
 
 ## Returns
 

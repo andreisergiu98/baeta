@@ -10,9 +10,13 @@
 
 ## Parameters
 
-• **pubsub**: `Engine`
+### pubsub
 
-• **options?**: [`TypedPubSubOptions`](../interfaces/TypedPubSubOptions.md)
+`Engine`
+
+### options?
+
+[`TypedPubSubOptions`](../interfaces/TypedPubSubOptions.md)
 
 ## Returns
 

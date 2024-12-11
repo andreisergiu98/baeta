@@ -26,23 +26,39 @@
 
 #### Parameters
 
-• **ctx**
+##### ctx
 
-• **ctx.changedFile?**: [`WatcherFile`](../../generator/interfaces/WatcherFile.md)
+###### changedFile
 
-• **ctx.didEnd**: `string`[]
+[`WatcherFile`](../../generator/interfaces/WatcherFile.md)
 
-• **ctx.didGenerate**: `string`[]
+###### didEnd
 
-• **ctx.didSetup**: `string`[]
+`string`[]
 
-• **ctx.fileManager**: [`FileManager`](../../generator-sdk/classes/FileManager.md)
+###### didGenerate
 
-• **ctx.generatorOptions**: [`NormalizedGeneratorOptions`](../../generator-sdk/interfaces/NormalizedGeneratorOptions.md)
+`string`[]
 
-• **ctx.pluginNames**: `string`[]
+###### didSetup
 
-• **ctx.watching**: `boolean`
+`string`[]
+
+###### fileManager
+
+[`FileManager`](../../generator-sdk/classes/FileManager.md)
+
+###### generatorOptions
+
+[`NormalizedGeneratorOptions`](../../generator-sdk/interfaces/NormalizedGeneratorOptions.md)
+
+###### pluginNames
+
+`string`[]
+
+###### watching
+
+`boolean`
 
 #### Returns
 

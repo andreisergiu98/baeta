@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options?**: [`CloudflarePluginOptions`](../interfaces/CloudflarePluginOptions.md)
+### options?
+
+[`CloudflarePluginOptions`](../interfaces/CloudflarePluginOptions.md)
 
 ## Returns
 

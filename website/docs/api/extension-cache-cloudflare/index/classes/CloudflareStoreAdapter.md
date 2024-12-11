@@ -16,13 +16,21 @@
 
 #### Parameters
 
-• **durableObject**: `DurableObjectNamespace`\<`undefined`\>
+##### durableObject
 
-• **options**: `StoreOptions`\<`Item`\>
+`DurableObjectNamespace`\<`undefined`\>
 
-• **type**: `string`
+##### options
 
-• **hash**: `string`
+`StoreOptions`\<`Item`\>
+
+##### type
+
+`string`
+
+##### hash
+
+`string`
 
 #### Returns
 
@@ -80,7 +88,9 @@
 
 #### Parameters
 
-• **ref**: `ItemRef`
+##### ref
+
+`ItemRef`
 
 #### Returns
 
@@ -98,7 +108,9 @@
 
 #### Parameters
 
-• **item**: `Item`
+##### item
+
+`Item`
 
 #### Returns
 
@@ -116,11 +128,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef?**: `ParentRef`
+`string`
 
-• **args?**: `Record`\<`string`, `unknown`\>
+##### parentRef?
+
+`ParentRef`
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -146,9 +164,13 @@
 
 #### Parameters
 
-• **queryRef**: `CacheRef`\<`Result`, `Root`, `Args`\>
+##### queryRef
 
-• ...**args**: `Root` _extends_ `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
+`CacheRef`\<`Result`, `Root`, `Args`\>
+
+##### args
+
+...`Root` _extends_ `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
 
 #### Returns
 
@@ -166,11 +188,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef**: `NonNullable`\<`ParentRef`\>
+`string`
 
-• **args**: `Record`\<`string`, `unknown`\>
+##### parentRef
+
+`NonNullable`\<`ParentRef`\>
+
+##### args
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -188,9 +216,13 @@
 
 #### Parameters
 
-• **parentRef**: `ParentRef`
+##### parentRef
 
-• **args?**: `Record`\<`string`, `unknown`\>
+`ParentRef`
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -208,7 +240,9 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
+
+`string`
 
 #### Returns
 
@@ -226,11 +260,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef**: `NonNullable`\<`ParentRef`\>
+`string`
 
-• **args**: `Record`\<`string`, `unknown`\>
+##### parentRef
+
+`NonNullable`\<`ParentRef`\>
+
+##### args
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -248,7 +288,9 @@
 
 #### Parameters
 
-• **encodedRef**: `string`
+##### encodedRef
+
+`string`
 
 #### Returns
 
@@ -266,9 +308,13 @@
 
 #### Parameters
 
-• **ref**: `ItemRef`
+##### ref
 
-• **evictQueries?**: `boolean`
+`ItemRef`
+
+##### evictQueries?
+
+`boolean`
 
 #### Returns
 
@@ -286,9 +332,13 @@
 
 #### Parameters
 
-• **refs**: `ItemRef`[]
+##### refs
 
-• **evictQueries**: `boolean` = `true`
+`ItemRef`[]
+
+##### evictQueries
+
+`boolean` = `true`
 
 #### Returns
 
@@ -314,9 +364,13 @@
 
 #### Parameters
 
-• **queryRef?**: `CacheRef`\<`Result`, `Root`, `Args`\>
+##### queryRef?
 
-• **matcher?**: `QueryMatching`\<`Args`\>
+`CacheRef`\<`Result`, `Root`, `Args`\>
+
+##### matcher?
+
+`QueryMatching`\<`Args`\>
 
 #### Returns
 
@@ -334,11 +388,17 @@
 
 #### Parameters
 
-• **queryRef?**: `string`
+##### queryRef?
 
-• **parentRef?**: `ParentRef`
+`string`
 
-• **args?**: `Record`\<`string`, `unknown`\>
+##### parentRef?
+
+`ParentRef`
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -356,9 +416,13 @@
 
 #### Parameters
 
-• **value**: `unknown`
+##### value
 
-• **catchAll?**: `string`
+`unknown`
+
+##### catchAll?
+
+`string`
 
 #### Returns
 
@@ -376,7 +440,9 @@
 
 #### Parameters
 
-• **value**: `string`
+##### value
+
+`string`
 
 #### Returns
 
@@ -394,9 +460,13 @@
 
 #### Parameters
 
-• **args**: `Record`\<`string`, `unknown`\> = `{}`
+##### args
 
-• **catchAll?**: `string`
+`Record`\<`string`, `unknown`\> = `{}`
+
+##### catchAll?
+
+`string`
 
 #### Returns
 
@@ -414,7 +484,9 @@
 
 #### Parameters
 
-• **item**: `null` \| `Item`
+##### item
+
+`null` | `Item`
 
 #### Returns
 
@@ -432,7 +504,9 @@
 
 #### Parameters
 
-• **ref**: `ItemRef`
+##### ref
+
+`ItemRef`
 
 #### Returns
 
@@ -450,7 +524,9 @@
 
 #### Parameters
 
-• **refs**: `ItemRef`[]
+##### refs
+
+`ItemRef`[]
 
 #### Returns
 
@@ -468,7 +544,9 @@
 
 #### Parameters
 
-• **refs**: `ItemRef`[]
+##### refs
+
+`ItemRef`[]
 
 #### Returns
 
@@ -482,7 +560,7 @@
 
 ### getQueryResult()
 
-> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher`?): `Promise`\<`null` \| `object`\>
+> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher`?): `Promise`\<`null` \| \{ `query`: `Result`; \}\>
 
 #### Type Parameters
 
@@ -494,13 +572,17 @@
 
 #### Parameters
 
-• **queryRef**: `CacheRef`\<`Result`, `Root`, `Args`\>
+##### queryRef
 
-• **matcher?**: `QueryMatching`\<`Args`\>
+`CacheRef`\<`Result`, `Root`, `Args`\>
+
+##### matcher?
+
+`QueryMatching`\<`Args`\>
 
 #### Returns
 
-`Promise`\<`null` \| `object`\>
+`Promise`\<`null` \| \{ `query`: `Result`; \}\>
 
 #### Inherited from
 
@@ -514,7 +596,9 @@
 
 #### Parameters
 
-• **root**: `Item`
+##### root
+
+`Item`
 
 #### Returns
 
@@ -532,7 +616,9 @@
 
 #### Parameters
 
-• **root**: `unknown`
+##### root
+
+`unknown`
 
 #### Returns
 
@@ -574,7 +660,9 @@
 
 #### Parameters
 
-• **refs**: readonly `ItemRef`[]
+##### refs
+
+readonly `ItemRef`[]
 
 #### Returns
 
@@ -592,11 +680,17 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **parentRef?**: `ParentRef`
+`string`
 
-• **args?**: `Record`\<`string`, `unknown`\>
+##### parentRef?
+
+`ParentRef`
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -614,9 +708,13 @@
 
 #### Parameters
 
-• **nullableRefs**: (`null` \| `ItemRef`)[]
+##### nullableRefs
 
-• **items**: `Item`[]
+(`null` \| `ItemRef`)[]
+
+##### items
+
+`Item`[]
 
 #### Returns
 
@@ -634,7 +732,9 @@
 
 #### Parameters
 
-• **item**: `Item`
+##### item
+
+`Item`
 
 #### Returns
 
@@ -652,7 +752,9 @@
 
 #### Parameters
 
-• **items**: `Item`[]
+##### items
+
+`Item`[]
 
 #### Returns
 
@@ -670,13 +772,21 @@
 
 #### Parameters
 
-• **queryRef**: `string`
+##### queryRef
 
-• **meta**: `string`[]
+`string`
 
-• **parentRef?**: `ParentRef`
+##### meta
 
-• **args?**: `Record`\<`string`, `unknown`\>
+`string`[]
+
+##### parentRef?
+
+`ParentRef`
+
+##### args?
+
+`Record`\<`string`, `unknown`\>
 
 #### Returns
 
@@ -702,11 +812,17 @@
 
 #### Parameters
 
-• **queryRef**: `CacheRef`\<`Result`, `Root`, `Args`\>
+##### queryRef
 
-• **data**: `Result`
+`CacheRef`\<`Result`, `Root`, `Args`\>
 
-• **matcher?**: `QueryMatching`\<`Args`\>
+##### data
+
+`Result`
+
+##### matcher?
+
+`QueryMatching`\<`Args`\>
 
 #### Returns
 
@@ -724,11 +840,17 @@
 
 #### Parameters
 
-• **queryRef**: `string` = `'*'`
+##### queryRef
 
-• **parentRef**: `NonNullable`\<`ParentRef`\> = `'*'`
+`string` = `'*'`
 
-• **args**: `Record`\<`string`, `unknown`\> = `{}`
+##### parentRef
+
+`NonNullable`\<`ParentRef`\> = `'*'`
+
+##### args
+
+`Record`\<`string`, `unknown`\> = `{}`
 
 #### Returns
 
@@ -742,7 +864,9 @@
 
 #### Parameters
 
-• **value**: `string`
+##### value
+
+`string`
 
 #### Returns
 
@@ -760,7 +884,9 @@
 
 #### Parameters
 
-• **ref**: `unknown`
+##### ref
+
+`unknown`
 
 #### Returns
 

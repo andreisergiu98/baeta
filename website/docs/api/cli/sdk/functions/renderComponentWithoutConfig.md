@@ -8,9 +8,13 @@
 
 ## Parameters
 
-• **component**: `FunctionComponent`\<`P`\>
+### component
 
-• **props?**: `null` \| `P`
+`FunctionComponent`\<`P`\>
+
+### props?
+
+`null` | `P`
 
 ## Returns
 

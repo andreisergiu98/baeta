@@ -6,7 +6,9 @@ Exactly like path.normalizeSafe(path), but it trims any useless ending /.
 
 ## Parameters
 
-• **p**: `string`
+### p
+
+`string`
 
 string path to normalize
 

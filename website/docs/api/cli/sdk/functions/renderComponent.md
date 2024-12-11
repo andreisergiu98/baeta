@@ -8,11 +8,17 @@
 
 ## Parameters
 
-• **Component**: `FunctionComponent`\<`P`\>
+### Component
 
-• **props**: `P`
+`FunctionComponent`\<`P`\>
 
-• **configProps?**: [`ConfigProps`](../interfaces/ConfigProps.md)
+### props
+
+`P`
+
+### configProps?
+
+[`ConfigProps`](../interfaces/ConfigProps.md)
 
 ## Returns
 

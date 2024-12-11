@@ -14,9 +14,13 @@
 
 ## Parameters
 
-• **params**: [`MiddlewareParams`](MiddlewareParams.md)\<`Root`, `Context`, `Args`\>
+### params
 
-• **next**: [`MiddlewareNext`](MiddlewareNext.md)\<`Result`\>
+[`MiddlewareParams`](MiddlewareParams.md)\<`Root`, `Context`, `Args`\>
+
+### next
+
+[`MiddlewareNext`](MiddlewareNext.md)\<`Result`\>
 
 ## Returns
 

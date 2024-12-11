@@ -64,11 +64,17 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
 
-• **middleware**: [`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
+##### field
+
+`string`
+
+##### middleware
+
+[`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 #### Returns
 
@@ -92,13 +98,21 @@
 
 #### Parameters
 
-• **map**: `MiddlewareMap`
+##### map
 
-• **type**: `string`
+`MiddlewareMap`
 
-• **field**: `string`
+##### type
 
-• **middleware**: [`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
+`string`
+
+##### field
+
+`string`
+
+##### middleware
+
+[`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 #### Returns
 
@@ -122,7 +136,9 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 #### Returns
 
@@ -156,11 +172,17 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
 
-• **middleware**: [`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
+##### field
+
+`string`
+
+##### middleware
+
+[`NativeMiddleware`](../type-aliases/NativeMiddleware.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 #### Returns
 
@@ -174,9 +196,13 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -190,9 +216,13 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -216,11 +246,17 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
 
-• **resolver**: [`NativeResolver`](../type-aliases/NativeResolver.md)\<`Result`, `Root`, `Context`, `Args`\>
+##### field
+
+`string`
+
+##### resolver
+
+[`NativeResolver`](../type-aliases/NativeResolver.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 #### Returns
 
@@ -234,9 +270,13 @@
 
 #### Parameters
 
-• **scalar**: `string`
+##### scalar
 
-• **resolver**: [`ScalarResolver`](../../index/type-aliases/ScalarResolver.md)
+`string`
+
+##### resolver
+
+[`ScalarResolver`](../../index/type-aliases/ScalarResolver.md)
 
 #### Returns
 
@@ -262,9 +302,13 @@
 
 #### Parameters
 
-• **field**: `string`
+##### field
 
-• **resolver**: [`NativeSubscription`](../type-aliases/NativeSubscription.md)\<`Payload`, `Result`, `Root`, `Context`, `Args`\>
+`string`
+
+##### resolver
+
+[`NativeSubscription`](../type-aliases/NativeSubscription.md)\<`Payload`, `Result`, `Root`, `Context`, `Args`\>
 
 #### Returns
 
@@ -286,9 +330,13 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **resolver**: [`NativeTypeResolver`](../type-aliases/NativeTypeResolver.md)\<`Result`, `Value`, `Context`\>
+`string`
+
+##### resolver
+
+[`NativeTypeResolver`](../type-aliases/NativeTypeResolver.md)\<`Result`, `Value`, `Context`\>
 
 #### Returns
 

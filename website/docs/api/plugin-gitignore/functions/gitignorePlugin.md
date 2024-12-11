@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options?**: [`GitignoreOptions`](../interfaces/GitignoreOptions.md)
+### options?
+
+[`GitignoreOptions`](../interfaces/GitignoreOptions.md)
 
 ## Returns
 

@@ -6,7 +6,9 @@ Returns an object from a path string - the opposite of format().
 
 ## Parameters
 
-• **pathString**: `string`
+### pathString
+
+`string`
 
 path to evaluate.
 

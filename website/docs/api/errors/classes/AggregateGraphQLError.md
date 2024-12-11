@@ -12,11 +12,17 @@
 
 #### Parameters
 
-• **errors**: `GraphQLError`[]
+##### errors
 
-• **message**: `string` = `'Multiple errors encountered'`
+`GraphQLError`[]
 
-• **options?**: `GraphQLErrorOptions`
+##### message
+
+`string` = `'Multiple errors encountered'`
+
+##### options?
+
+`GraphQLErrorOptions`
 
 #### Returns
 

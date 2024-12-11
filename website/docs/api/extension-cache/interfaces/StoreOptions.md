@@ -16,7 +16,9 @@
 
 #### Parameters
 
-• **root**: `Root`
+##### root
+
+`Root`
 
 #### Returns
 

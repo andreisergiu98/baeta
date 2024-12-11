@@ -10,7 +10,9 @@
 
 ## Parameters
 
-• **options**: `InputDirectiveOptions`\<`DirectiveConfig`, `Context`\>
+### options
+
+`InputDirectiveOptions`\<`DirectiveConfig`, `Context`\>
 
 ## Returns
 
@@ -18,7 +20,9 @@
 
 ### Parameters
 
-• **schema**: `GraphQLSchema`
+#### schema
+
+`GraphQLSchema`
 
 ### Returns
 

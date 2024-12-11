@@ -6,15 +6,21 @@ The main function takes a list of strings and one or more glob patterns to use f
 
 ## Parameters
 
-• **list**: readonly `string`[]
+### list
+
+readonly `string`[]
 
 A list of strings to match
 
-• **patterns**: `string` \| readonly `string`[]
+### patterns
 
 One or more glob patterns to use for matching.
 
-• **options?**: [`Options`](../namespaces/micromatch/interfaces/Options.md)
+`string` | readonly `string`[]
+
+### options?
+
+[`Options`](../namespaces/micromatch/interfaces/Options.md)
 
 See available options for changing how matches are performed
 

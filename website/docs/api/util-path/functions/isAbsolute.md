@@ -6,7 +6,9 @@ Determines whether {path} is an absolute path. An absolute path will always reso
 
 ## Parameters
 
-• **path**: `string`
+### path
+
+`string`
 
 path to test.
 

@@ -4,11 +4,17 @@
 
 ## Parameters
 
-• **options**: [`NormalizedGeneratorOptions`](../interfaces/NormalizedGeneratorOptions.md)
+### options
 
-• **watcher**: [`Watcher`](../classes/Watcher.md)
+[`NormalizedGeneratorOptions`](../interfaces/NormalizedGeneratorOptions.md)
 
-• **reload**: [`GeneratorPluginV1ReloadFn`](GeneratorPluginV1ReloadFn.md)
+### watcher
+
+[`Watcher`](../classes/Watcher.md)
+
+### reload
+
+[`GeneratorPluginV1ReloadFn`](GeneratorPluginV1ReloadFn.md)
 
 ## Returns
 

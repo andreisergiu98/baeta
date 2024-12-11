@@ -8,7 +8,9 @@
 
 ## Parameters
 
-• **options**: `CommandModule`\<`Args`, `Args`\>
+### options
+
+`CommandModule`\<`Args`, `Args`\>
 
 ## Returns
 

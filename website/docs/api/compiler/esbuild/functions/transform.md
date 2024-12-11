@@ -18,9 +18,13 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ## Parameters
 
-• **input**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
+### input
 
-• **options?**: [`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](../interfaces/TransformOptions.md), `T`\>
+`string` | `Uint8Array`\<`ArrayBufferLike`\>
+
+### options?
+
+[`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](../interfaces/TransformOptions.md), `T`\>
 
 ## Returns
 

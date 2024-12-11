@@ -1,6 +1,6 @@
 # Function: join()
 
-## join(paths)
+## Call Signature
 
 > **join**(...`paths`): `string`
 
@@ -9,7 +9,9 @@ Arguments must be strings. In v0.8, non-string arguments were silently ignored. 
 
 ### Parameters
 
-• ...**paths**: `any`[]
+#### paths
+
+...`any`[]
 
 string paths to join.
 
@@ -17,7 +19,7 @@ string paths to join.
 
 `string`
 
-## join(paths)
+## Call Signature
 
 > **join**(...`paths`): `string`
 
@@ -26,7 +28,9 @@ Arguments must be strings. In v0.8, non-string arguments were silently ignored. 
 
 ### Parameters
 
-• ...**paths**: `string`[]
+#### paths
+
+...`string`[]
 
 string paths to join.
 

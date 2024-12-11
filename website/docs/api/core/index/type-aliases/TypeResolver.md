@@ -12,7 +12,9 @@
 
 ## Parameters
 
-• **params**: [`TypeResolverParams`](TypeResolverParams.md)\<`Value`, `Context`\>
+### params
+
+[`TypeResolverParams`](TypeResolverParams.md)\<`Value`, `Context`\>
 
 ## Returns
 

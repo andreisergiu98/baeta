@@ -24,9 +24,13 @@
 
 #### Parameters
 
-• **module**: [`ModuleBuilder`](ModuleBuilder.md)
+##### module
 
-• **mapper**: [`ResolverMapper`](ResolverMapper.md)
+[`ModuleBuilder`](ModuleBuilder.md)
+
+##### mapper
+
+[`ResolverMapper`](ResolverMapper.md)
 
 #### Returns
 
@@ -60,11 +64,17 @@
 
 #### Parameters
 
-• **module**: [`ModuleBuilder`](ModuleBuilder.md)
+##### module
 
-• **type**: `string`
+[`ModuleBuilder`](ModuleBuilder.md)
 
-• **field**: `string`
+##### type
+
+`string`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -86,9 +96,13 @@
 
 #### Parameters
 
-• **module**: [`ModuleBuilder`](ModuleBuilder.md)
+##### module
 
-• **field**: `string`
+[`ModuleBuilder`](ModuleBuilder.md)
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -112,9 +126,13 @@
 
 #### Parameters
 
-• **module**: [`ModuleBuilder`](ModuleBuilder.md)
+##### module
 
-• **field**: `string`
+[`ModuleBuilder`](ModuleBuilder.md)
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -138,9 +156,13 @@
 
 #### Parameters
 
-• **module**: [`ModuleBuilder`](ModuleBuilder.md)
+##### module
 
-• **field**: `string`
+[`ModuleBuilder`](ModuleBuilder.md)
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -170,9 +192,13 @@
 
 #### Parameters
 
-• **module**: [`ModuleBuilder`](ModuleBuilder.md)
+##### module
 
-• **type**: `string`
+[`ModuleBuilder`](ModuleBuilder.md)
+
+##### type
+
+`string`
 
 #### Returns
 

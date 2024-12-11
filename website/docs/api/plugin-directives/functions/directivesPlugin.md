@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options?**: `DirectivesOptions`
+### options?
+
+`DirectivesOptions`
 
 ## Returns
 

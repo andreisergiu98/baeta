@@ -12,7 +12,9 @@
 
 #### Parameters
 
-• **keyv**: `Keyv`\<`any`\>
+##### keyv
+
+`Keyv`\<`any`\>
 
 #### Returns
 
@@ -40,11 +42,17 @@
 
 #### Parameters
 
-• **options**: `StoreOptions`\<`T`\>
+##### options
 
-• **type**: `string`
+`StoreOptions`\<`T`\>
 
-• **hash**: `string`
+##### type
+
+`string`
+
+##### hash
+
+`string`
 
 #### Returns
 

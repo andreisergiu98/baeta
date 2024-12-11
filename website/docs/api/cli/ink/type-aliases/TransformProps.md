@@ -16,9 +16,13 @@ Function which transforms children output. It accepts children and must return t
 
 #### Parameters
 
-• **children**: `string`
+##### children
 
-• **index**: `number`
+`string`
+
+##### index
+
+`number`
 
 #### Returns
 

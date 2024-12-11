@@ -6,9 +6,13 @@ Mount a component and render the output.
 
 ## Parameters
 
-• **node**: `ReactNode`
+### node
 
-• **options?**: `WriteStream` \| [`RenderOptions`](../type-aliases/RenderOptions.md)
+`ReactNode`
+
+### options?
+
+`WriteStream` | [`RenderOptions`](../type-aliases/RenderOptions.md)
 
 ## Returns
 

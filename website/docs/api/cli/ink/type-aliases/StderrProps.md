@@ -20,7 +20,9 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 
 #### Parameters
 
-• **data**: `string`
+##### data
+
+`string`
 
 #### Returns
 

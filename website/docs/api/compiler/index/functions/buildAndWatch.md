@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options**: [`CompilerOptions`](../interfaces/CompilerOptions.md)
+### options
+
+[`CompilerOptions`](../interfaces/CompilerOptions.md)
 
 ## Returns
 

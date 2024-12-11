@@ -9,7 +9,9 @@ That's what <Transform> component does, it gives you an output string of its chi
 
 ## Parameters
 
-• **\_\_namedParameters**: [`TransformProps`](../type-aliases/TransformProps.md)
+### \_\_namedParameters
+
+[`TransformProps`](../type-aliases/TransformProps.md)
 
 ## Returns
 

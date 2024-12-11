@@ -6,7 +6,9 @@ Returns a path string from an object - the opposite of parse().
 
 ## Parameters
 
-• **pathObject**: `ParsedPath`
+### pathObject
+
+`ParsedPath`
 
 ## Returns
 

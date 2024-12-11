@@ -10,19 +10,27 @@ An Array of ignoreExts (eg ['.min']) will force adding default .ext even if one 
 
 ## Parameters
 
-• **filename**: `string`
+### filename
+
+`string`
 
 string filename to default to it's extension
 
-• **ext**: `string`
+### ext
+
+`string`
 
 string extension to default to
 
-• **ignoreExts?**: `string`[]
+### ignoreExts?
+
+`string`[]
 
 array extensions to ignore
 
-• **maxSize?**: `number`
+### maxSize?
+
+`number`
 
 number max length of the extension
 

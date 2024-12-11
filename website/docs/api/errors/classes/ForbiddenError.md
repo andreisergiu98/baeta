@@ -12,9 +12,13 @@
 
 #### Parameters
 
-• **message**: `string` = `"Access denied! You don't have permission to perform this action!"`
+##### message
 
-• **options?**: `GraphQLErrorOptions`
+`string` = `"Access denied! You don't have permission to perform this action!"`
+
+##### options?
+
+`GraphQLErrorOptions`
 
 #### Returns
 

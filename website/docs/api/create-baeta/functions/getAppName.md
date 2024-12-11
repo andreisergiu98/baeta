@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **reqName**: `undefined` \| `string`
+### reqName
 
-• **rootDir**: `string`
+`undefined` | `string`
+
+### rootDir
+
+`string`
 
 ## Returns
 

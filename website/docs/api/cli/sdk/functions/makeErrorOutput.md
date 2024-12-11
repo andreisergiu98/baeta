@@ -4,11 +4,17 @@
 
 ## Parameters
 
-• **id**: `string`
+### id
 
-• **message**: `string`
+`string`
 
-• **bold**: `boolean` = `false`
+### message
+
+`string`
+
+### bold
+
+`boolean` = `false`
 
 ## Returns
 

@@ -14,7 +14,9 @@
 
 ## Parameters
 
-• **resolver**: [`Resolver`](../../index/type-aliases/Resolver.md)\<`Result`, `Root`, `Context`, `Args`\>
+### resolver
+
+[`Resolver`](../../index/type-aliases/Resolver.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 ## Returns
 

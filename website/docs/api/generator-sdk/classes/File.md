@@ -12,13 +12,21 @@
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
 
-• **content**: `string`
+`string`
 
-• **tag**: `string`
+##### content
 
-• **options?**: [`FileOptions`](../interfaces/FileOptions.md)
+`string`
+
+##### tag
+
+`string`
+
+##### options?
+
+[`FileOptions`](../interfaces/FileOptions.md)
 
 #### Returns
 
@@ -76,7 +84,9 @@
 
 #### Parameters
 
-• **comment**: `string`
+##### comment
+
+`string`
 
 #### Returns
 

@@ -8,9 +8,13 @@
 
 ## Parameters
 
-• **loadScopes**: `GetScopeLoader`\<`Ctx`\>
+### loadScopes
 
-• **options**: [`AuthOptions`](../interfaces/AuthOptions.md) = `{}`
+`GetScopeLoader`\<`Ctx`\>
+
+### options
+
+[`AuthOptions`](../interfaces/AuthOptions.md) = `{}`
 
 ## Returns
 

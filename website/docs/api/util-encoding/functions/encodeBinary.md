@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **value**: `string`
+### value
+
+`string`
 
 ## Returns
 

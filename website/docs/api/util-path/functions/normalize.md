@@ -7,7 +7,9 @@ When multiple slashes are found, they're replaced by a single one; when the path
 
 ## Parameters
 
-• **p**: `string`
+### p
+
+`string`
 
 string path to normalize.
 

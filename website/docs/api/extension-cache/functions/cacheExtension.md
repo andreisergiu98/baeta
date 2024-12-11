@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **store**: [`Store`](../classes/Store.md)
+### store
 
-• **options?**: [`DefaultStoreOptions`](../interfaces/DefaultStoreOptions.md)
+[`Store`](../classes/Store.md)
+
+### options?
+
+[`DefaultStoreOptions`](../interfaces/DefaultStoreOptions.md)
 
 ## Returns
 

@@ -8,7 +8,9 @@
 
 ## Parameters
 
-• **options?**: [`ComplexityExtensionOptions`](../interfaces/ComplexityExtensionOptions.md)\<`Ctx`\>
+### options?
+
+[`ComplexityExtensionOptions`](../interfaces/ComplexityExtensionOptions.md)\<`Ctx`\>
 
 ## Returns
 

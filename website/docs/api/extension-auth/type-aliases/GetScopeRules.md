@@ -12,7 +12,9 @@
 
 ## Parameters
 
-• **params**: `MiddlewareParams`\<`Root`, `Context`, `Args`\>
+### params
+
+`MiddlewareParams`\<`Root`, `Context`, `Args`\>
 
 ## Returns
 

@@ -7,11 +7,15 @@ Often used to extract the file name from a fully qualified path.
 
 ## Parameters
 
-• **p**: `string`
+### p
+
+`string`
 
 the path to evaluate.
 
-• **ext?**: `string`
+### ext?
+
+`string`
 
 optionally, an extension to remove from the result.
 

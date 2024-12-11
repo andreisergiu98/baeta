@@ -4,13 +4,21 @@
 
 ## Parameters
 
-• **appName**: `string`
+### appName
 
-• **runtime**: `"bun"` \| `"node"` \| `"deno"`
+`string`
 
-• **template**: `Template`
+### runtime
 
-• **dest**: `string`
+`"bun"` | `"node"` | `"deno"`
+
+### template
+
+`Template`
+
+### dest
+
+`string`
 
 ## Returns
 

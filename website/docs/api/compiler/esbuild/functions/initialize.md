@@ -13,7 +13,9 @@ Documentation: https://esbuild.github.io/api/#browser
 
 ## Parameters
 
-• **options**: [`InitializeOptions`](../interfaces/InitializeOptions.md)
+### options
+
+[`InitializeOptions`](../interfaces/InitializeOptions.md)
 
 ## Returns
 

@@ -8,9 +8,13 @@
 
 ## Parameters
 
-• **ctx**: [`Ctx`](Ctx.md)\<`Store`\>
+### ctx
 
-• **next**
+[`Ctx`](Ctx.md)\<`Store`\>
+
+### next
+
+() => `Promise`\<`void`\>
 
 ## Returns
 

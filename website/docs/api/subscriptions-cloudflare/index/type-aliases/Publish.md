@@ -14,9 +14,13 @@
 
 ## Parameters
 
-• **topic**: `C`
+### topic
 
-• **payload**: `P`
+`C`
+
+### payload
+
+`P`
 
 ## Returns
 

@@ -12,9 +12,13 @@
 
 #### Parameters
 
-• **store**: [`Store`](Store.md)
+##### store
 
-• **defaultOptions?**: [`DefaultStoreOptions`](../interfaces/DefaultStoreOptions.md)
+[`Store`](Store.md)
+
+##### defaultOptions?
+
+[`DefaultStoreOptions`](../interfaces/DefaultStoreOptions.md)
 
 #### Returns
 
@@ -42,9 +46,13 @@
 
 #### Parameters
 
-• **module**: `ModuleBuilder`
+##### module
 
-• **mapper**: `ResolverMapper`
+`ModuleBuilder`
+
+##### mapper
+
+`ResolverMapper`
 
 #### Returns
 
@@ -86,11 +94,17 @@
 
 #### Parameters
 
-• **module**: `ModuleBuilder`
+##### module
 
-• **type**: `string`
+`ModuleBuilder`
 
-• **field**: `string`
+##### type
+
+`string`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -116,9 +130,13 @@
 
 #### Parameters
 
-• **module**: `ModuleBuilder`
+##### module
 
-• **field**: `string`
+`ModuleBuilder`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -146,9 +164,13 @@
 
 #### Parameters
 
-• **module**: `ModuleBuilder`
+##### module
 
-• **field**: `string`
+`ModuleBuilder`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -176,9 +198,13 @@
 
 #### Parameters
 
-• **module**: `ModuleBuilder`
+##### module
 
-• **field**: `string`
+`ModuleBuilder`
+
+##### field
+
+`string`
 
 #### Returns
 
@@ -216,9 +242,13 @@
 
 #### Parameters
 
-• **module**: `ModuleBuilder`
+##### module
 
-• **type**: `string`
+`ModuleBuilder`
+
+##### type
+
+`string`
 
 #### Returns
 

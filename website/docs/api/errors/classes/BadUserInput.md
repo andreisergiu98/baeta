@@ -12,9 +12,13 @@
 
 #### Parameters
 
-• **message**: `string` = `'Invalid user input!'`
+##### message
 
-• **options?**: `GraphQLErrorOptions`
+`string` = `'Invalid user input!'`
+
+##### options?
+
+`GraphQLErrorOptions`
 
 #### Returns
 

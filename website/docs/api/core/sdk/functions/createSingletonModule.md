@@ -8,7 +8,9 @@
 
 ## Parameters
 
-• **create**
+### create
+
+() => `T`
 
 ## Returns
 

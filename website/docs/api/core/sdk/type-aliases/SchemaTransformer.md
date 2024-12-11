@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **schema**: `GraphQLSchema`
+### schema
+
+`GraphQLSchema`
 
 ## Returns
 

@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **reqTemplate**: `undefined` \| `string`
+### reqTemplate
+
+`undefined` | `string`
 
 ## Returns
 

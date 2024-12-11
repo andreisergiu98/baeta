@@ -11,9 +11,13 @@ Documentation: https://esbuild.github.io/api/#analyze
 
 ## Parameters
 
-• **metafile**: `string` \| [`Metafile`](../interfaces/Metafile.md)
+### metafile
 
-• **options?**: [`AnalyzeMetafileOptions`](../interfaces/AnalyzeMetafileOptions.md)
+`string` | [`Metafile`](../interfaces/Metafile.md)
+
+### options?
+
+[`AnalyzeMetafileOptions`](../interfaces/AnalyzeMetafileOptions.md)
 
 ## Returns
 

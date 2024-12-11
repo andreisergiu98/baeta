@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **schema**: `GraphQLSchema`
+### schema
 
-• **transformers**: [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
+`GraphQLSchema`
+
+### transformers
+
+[`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
 
 ## Returns
 

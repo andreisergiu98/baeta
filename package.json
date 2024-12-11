@@ -35,7 +35,7 @@
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",
     "docs": "yarn workspace @baeta/website build",
-    "docs:api": "yarn workspace @baeta/website write-api && prettier --write website/**/*.md",
+    "docs:api": "yarn workspace @baeta/website write-api",
     "examples:sync": "./examples/sync.sh",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
@@ -58,7 +58,7 @@
     "@yarnpkg/sdks": "^3.2.0",
     "@yarnpkg/types": "^4.0.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.2.11",
     "prettier": "^3.4.2",
     "turbo": "^2.3.3",
     "typescript": "^5.7.2"

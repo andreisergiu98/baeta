@@ -10,9 +10,13 @@ A lens to get and set values in an object, that fails silently if the path does 
 
 ## Parameters
 
-• **input**: `Record`\<`string`, `unknown`\>
+### input
 
-• **path**: (`string` \| `number`)[]
+`Record`\<`string`, `unknown`\>
+
+### path
+
+(`string` \| `number`)[]
 
 ## Returns
 
@@ -32,7 +36,9 @@ A lens to get and set values in an object, that fails silently if the path does 
 
 #### Parameters
 
-• **value**: `T`
+##### value
+
+`T`
 
 #### Returns
 

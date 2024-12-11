@@ -21,6 +21,8 @@ async function generateDocs() {
 		excludeExternals: true,
 		excludeScopesInPaths: true,
 		disableSources: true,
+		formatWithPrettier: true,
+		out: './docs/api',
 	});
 
 	const project = await app.convert();
@@ -29,7 +31,7 @@ async function generateDocs() {
 		throw new Error('Failed to convert project');
 	}
 
-	await app.generateDocs(project, './docs/api/');
+	await app.generateOutputs(project);
 
 	await cleanupDocs();
 

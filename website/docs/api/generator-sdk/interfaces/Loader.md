@@ -12,9 +12,13 @@
 
 #### Parameters
 
-• **pointer**: `string`
+##### pointer
 
-• **options?**: `TOptions`
+`string`
+
+##### options?
+
+`TOptions`
 
 #### Returns
 
@@ -28,9 +32,13 @@
 
 #### Parameters
 
-• **pointer**: `string`
+##### pointer
 
-• **options?**: `TOptions`
+`string`
+
+##### options?
+
+`TOptions`
 
 #### Returns
 

@@ -6,15 +6,21 @@ Returns true if the specified `string` matches the given glob `pattern`.
 
 ## Parameters
 
-• **string**: `string`
+### string
+
+`string`
 
 String to match
 
-• **pattern**: `string` \| readonly `string`[]
+### pattern
 
 Glob pattern to use for matching.
 
-• **options?**: [`Options`](../namespaces/micromatch/interfaces/Options.md)
+`string` | readonly `string`[]
+
+### options?
+
+[`Options`](../namespaces/micromatch/interfaces/Options.md)
 
 See available options for changing how matches are performed
 

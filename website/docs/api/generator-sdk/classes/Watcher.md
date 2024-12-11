@@ -8,9 +8,13 @@
 
 #### Parameters
 
-• **cwd**: `string`
+##### cwd
 
-• **options?**: `Options`
+`string`
+
+##### options?
+
+`Options`
 
 #### Returns
 
@@ -52,7 +56,9 @@
 
 #### Parameters
 
-• **pattern**: `MatchPattern`
+##### pattern
+
+`MatchPattern`
 
 #### Returns
 
@@ -66,9 +72,13 @@
 
 #### Parameters
 
-• **event**: `EventType`
+##### event
 
-• **listener**: [`WatcherListener`](../type-aliases/WatcherListener.md)
+`EventType`
+
+##### listener
+
+[`WatcherListener`](../type-aliases/WatcherListener.md)
 
 #### Returns
 
@@ -82,9 +92,13 @@
 
 #### Parameters
 
-• **event**: `EventType`
+##### event
 
-• **listener**: [`WatcherListener`](../type-aliases/WatcherListener.md)
+`EventType`
+
+##### listener
+
+[`WatcherListener`](../type-aliases/WatcherListener.md)
 
 #### Returns
 
@@ -98,9 +112,13 @@
 
 #### Parameters
 
-• **err**: `null` \| `Error`
+##### err
 
-• **events**: `Event`[]
+`null` | `Error`
+
+##### events
+
+`Event`[]
 
 #### Returns
 
@@ -114,7 +132,9 @@
 
 #### Parameters
 
-• **pattern**: `MatchPattern`
+##### pattern
+
+`MatchPattern`
 
 #### Returns
 

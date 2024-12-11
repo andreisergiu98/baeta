@@ -10,9 +10,13 @@
 
 ## Parameters
 
-• **key**: `symbol`
+### key
 
-• **options?**: [`ContextStoreOptions`](../interfaces/ContextStoreOptions.md)
+`symbol`
+
+### options?
+
+[`ContextStoreOptions`](../interfaces/ContextStoreOptions.md)
 
 ## Returns
 

@@ -10,9 +10,13 @@
 
 ## Parameters
 
-• **fn**: `B`
+### fn
 
-• **ext**: `M`
+`B`
+
+### ext
+
+`M`
 
 ## Returns
 

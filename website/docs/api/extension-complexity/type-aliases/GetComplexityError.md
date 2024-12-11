@@ -4,11 +4,17 @@
 
 ## Parameters
 
-• **kind**: [`ComplexityErrorKind`](../enumerations/ComplexityErrorKind.md)
+### kind
 
-• **limits**: `number`
+[`ComplexityErrorKind`](../enumerations/ComplexityErrorKind.md)
 
-• **results**: `number`
+### limits
+
+`number`
+
+### results
+
+`number`
 
 ## Returns
 

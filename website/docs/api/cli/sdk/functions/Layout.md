@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **props**: `PropsWithChildren`\<[`LayoutProps`](../interfaces/LayoutProps.md)\>
+### props
+
+`PropsWithChildren`\<[`LayoutProps`](../interfaces/LayoutProps.md)\>
 
 ## Returns
 

@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **key**: `string`
+### key
 
-• **global**: `Global` = `globalThis`
+`string`
+
+### global
+
+`Global` = `globalThis`
 
 ## Returns
 

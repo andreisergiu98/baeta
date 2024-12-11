@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **options**: [`ExecPluginOptions`](../interfaces/ExecPluginOptions.md)
+### options
+
+[`ExecPluginOptions`](../interfaces/ExecPluginOptions.md)
 
 ## Returns
 

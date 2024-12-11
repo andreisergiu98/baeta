@@ -18,7 +18,9 @@
 
 #### Parameters
 
-• **error**: `unknown`
+##### error
+
+`unknown`
 
 #### Returns
 
@@ -32,9 +34,13 @@
 
 #### Parameters
 
-• **plugin**: [`GeneratorPluginV1`](GeneratorPluginV1.md)\<`unknown`\>
+##### plugin
 
-• **step**: `"end"` \| `"setup"` \| `"generate"`
+[`GeneratorPluginV1`](GeneratorPluginV1.md)\<`unknown`\>
+
+##### step
+
+`"end"` | `"setup"` | `"generate"`
 
 #### Returns
 
@@ -48,9 +54,13 @@
 
 #### Parameters
 
-• **plugin**: [`GeneratorPluginV1`](GeneratorPluginV1.md)\<`unknown`\>
+##### plugin
 
-• **step**: `"end"` \| `"setup"` \| `"generate"`
+[`GeneratorPluginV1`](GeneratorPluginV1.md)\<`unknown`\>
+
+##### step
+
+`"end"` | `"setup"` | `"generate"`
 
 #### Returns
 

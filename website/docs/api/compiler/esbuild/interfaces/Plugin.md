@@ -14,7 +14,9 @@
 
 #### Parameters
 
-• **build**: [`PluginBuild`](PluginBuild.md)
+##### build
+
+[`PluginBuild`](PluginBuild.md)
 
 #### Returns
 

@@ -5,7 +5,6 @@
 - [@baeta/cli](cli/README.md)
 - [@baeta/compiler](compiler/README.md)
 - [@baeta/core](core/README.md)
-- [create-baeta](create-baeta/README.md)
 - [@baeta/directives](directives/README.md)
 - [@baeta/env](env/README.md)
 - [@baeta/errors](errors/README.md)
@@ -33,3 +32,4 @@
 - [@baeta/util-env](util-env/README.md)
 - [@baeta/util-log](util-log/README.md)
 - [@baeta/util-path](util-path/README.md)
+- [create-baeta](create-baeta/README.md)

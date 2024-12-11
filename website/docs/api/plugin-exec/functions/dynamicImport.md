@@ -8,7 +8,9 @@
 
 ## Parameters
 
-• **file**: `string`
+### file
+
+`string`
 
 ## Returns
 

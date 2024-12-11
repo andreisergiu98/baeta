@@ -1,19 +1,13 @@
 # Function: bundleFile()
 
-> **bundleFile**(`fileName`): `Promise`\<`object`\>
+> **bundleFile**(`fileName`): `Promise`\<\{ `code`: `string`; `dependencies`: `string`[]; \}\>
 
 ## Parameters
 
-• **fileName**: `string`
+### fileName
+
+`string`
 
 ## Returns
 
-`Promise`\<`object`\>
-
-### code
-
-> **code**: `string`
-
-### dependencies
-
-> **dependencies**: `string`[]
+`Promise`\<\{ `code`: `string`; `dependencies`: `string`[]; \}\>

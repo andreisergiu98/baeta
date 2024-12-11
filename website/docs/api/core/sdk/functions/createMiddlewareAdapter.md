@@ -14,7 +14,9 @@
 
 ## Parameters
 
-• **middleware**: [`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Root`, `Context`, `Args`\>
+### middleware
+
+[`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Root`, `Context`, `Args`\>
 
 ## Returns
 

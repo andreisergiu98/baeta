@@ -10,9 +10,13 @@
 
 ## Parameters
 
-• **core**: `Core`
+### core
 
-• **ext**: `Ext`
+`Core`
+
+### ext
+
+`Ext`
 
 ## Returns
 

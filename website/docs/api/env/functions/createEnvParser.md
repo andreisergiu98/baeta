@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **getValue**
+### getValue
+
+(`key`) => `undefined` \| `string`
 
 ## Returns
 
@@ -20,9 +22,13 @@
 
 ### Parameters
 
-• **key**: `string`
+#### key
 
-• **options**: [`EnvOptions`](../interfaces/EnvOptions.md)\<`T`, `R`, `D`\>
+`string`
+
+#### options
+
+[`EnvOptions`](../interfaces/EnvOptions.md)\<`T`, `R`, `D`\>
 
 ### Returns
 

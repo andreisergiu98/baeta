@@ -11,7 +11,9 @@ determines if this component is focused or not.
 
 ## Parameters
 
-• **\_\_namedParameters?**: `Input`
+### \_\_namedParameters?
+
+`Input`
 
 ## Returns
 

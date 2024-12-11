@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **props**: `PropsWithChildren`\<[`ConfigProps`](../interfaces/ConfigProps.md)\>
+### props
+
+`PropsWithChildren`\<[`ConfigProps`](../interfaces/ConfigProps.md)\>
 
 ## Returns
 

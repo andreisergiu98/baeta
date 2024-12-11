@@ -12,9 +12,13 @@
 
 #### Parameters
 
-• **message**: `string` = `'Validation error!'`
+##### message
 
-• **options?**: `GraphQLErrorOptions`
+`string` = `'Validation error!'`
+
+##### options?
+
+`GraphQLErrorOptions`
 
 #### Returns
 

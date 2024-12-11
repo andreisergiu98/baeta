@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **config**: [`BaetaOptions`](../interfaces/BaetaOptions.md)
+### config
+
+[`BaetaOptions`](../interfaces/BaetaOptions.md)
 
 ## Returns
 

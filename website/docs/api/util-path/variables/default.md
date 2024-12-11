@@ -12,11 +12,15 @@ Adds .ext to filename, but only if it doesn't already have the exact extension.
 
 #### Parameters
 
-• **file**: `string`
+##### file
+
+`string`
 
 string filename to add extension to
 
-• **ext**: `string`
+##### ext
+
+`string`
 
 string extension to add
 
@@ -33,11 +37,15 @@ Often used to extract the file name from a fully qualified path.
 
 #### Parameters
 
-• **p**: `string`
+##### p
+
+`string`
 
 the path to evaluate.
 
-• **ext?**: `string`
+##### ext?
+
+`string`
 
 optionally, an extension to remove from the result.
 
@@ -57,19 +65,27 @@ An Array of ignoreExts (eg ['.min']) prevents these from being considered as ext
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
+
+`string`
 
 string filename to change it's extension
 
-• **ext**: `string`
+##### ext
+
+`string`
 
 string extension to change to
 
-• **ignoreExts?**: `string`[]
+##### ignoreExts?
+
+`string`[]
 
 array extensions to ignore
 
-• **maxSize?**: `number`
+##### maxSize?
+
+`number`
 
 number max length of the extension
 
@@ -89,19 +105,27 @@ An Array of ignoreExts (eg ['.min']) will force adding default .ext even if one 
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
+
+`string`
 
 string filename to default to it's extension
 
-• **ext**: `string`
+##### ext
+
+`string`
 
 string extension to default to
 
-• **ignoreExts?**: `string`[]
+##### ignoreExts?
+
+`string`[]
 
 array extensions to ignore
 
-• **maxSize?**: `number`
+##### maxSize?
+
+`number`
 
 number max length of the extension
 
@@ -121,7 +145,9 @@ Return the directory name of a path. Similar to the Unix dirname command.
 
 #### Parameters
 
-• **p**: `string`
+##### p
+
+`string`
 
 the path to evaluate.
 
@@ -138,7 +164,9 @@ If there is no '.' in the last portion of the path or the first character of it 
 
 #### Parameters
 
-• **p**: `string`
+##### p
+
+`string`
 
 the path to evaluate.
 
@@ -154,7 +182,9 @@ Returns a path string from an object - the opposite of parse().
 
 #### Parameters
 
-• **pathObject**: `ParsedPath`
+##### pathObject
+
+`ParsedPath`
 
 #### Returns
 
@@ -168,7 +198,9 @@ Determines whether {path} is an absolute path. An absolute path will always reso
 
 #### Parameters
 
-• **path**: `string`
+##### path
+
+`string`
 
 path to test.
 
@@ -185,7 +217,9 @@ Arguments must be strings. In v0.8, non-string arguments were silently ignored. 
 
 #### Parameters
 
-• ...**paths**: `any`[]
+##### paths
+
+...`any`[]
 
 string paths to join.
 
@@ -198,7 +232,9 @@ Arguments must be strings. In v0.8, non-string arguments were silently ignored. 
 
 #### Parameters
 
-• ...**paths**: `string`[]
+##### paths
+
+...`string`[]
 
 string paths to join.
 
@@ -216,7 +252,9 @@ Note that the unix / is returned everywhere, so windows \ is always converted to
 
 #### Parameters
 
-• ...**p**: `any`[]
+##### p
+
+...`any`[]
 
 #### Returns
 
@@ -231,7 +269,9 @@ When multiple slashes are found, they're replaced by a single one; when the path
 
 #### Parameters
 
-• **p**: `string`
+##### p
+
+`string`
 
 string path to normalize.
 
@@ -249,7 +289,9 @@ Note that the unix / is returned everywhere, so windows \ is always converted to
 
 #### Parameters
 
-• **p**: `string`
+##### p
+
+`string`
 
 string path to normalize.
 
@@ -265,7 +307,9 @@ Exactly like path.normalizeSafe(path), but it trims any useless ending /.
 
 #### Parameters
 
-• **p**: `string`
+##### p
+
+`string`
 
 string path to normalize
 
@@ -281,7 +325,9 @@ Returns an object from a path string - the opposite of format().
 
 #### Parameters
 
-• **pathString**: `string`
+##### pathString
+
+`string`
 
 path to evaluate.
 
@@ -299,7 +345,9 @@ path to evaluate.
 
 #### Parameters
 
-• **pathname**: `string`
+##### pathname
+
+`string`
 
 #### Returns
 
@@ -314,9 +362,13 @@ At times we have two absolute paths, and we need to derive the relative path fro
 
 #### Parameters
 
-• **from**: `string`
+##### from
 
-• **to**: `string`
+`string`
+
+##### to
+
+`string`
 
 #### Returns
 
@@ -330,9 +382,13 @@ Removes the specific ext extension from filename, if it has it. Otherwise it lea
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
 
-• **ext**: `string`
+`string`
+
+##### ext
+
+`string`
 
 string extension to remove
 
@@ -352,7 +408,9 @@ If {to} isn't already absolute, {from} arguments are prepended in right to left 
 
 #### Parameters
 
-• ...**pathSegments**: `any`[]
+##### pathSegments
+
+...`any`[]
 
 string paths to join. Non-string arguments are ignored.
 
@@ -372,7 +430,9 @@ Just converts all `to/` and consolidates duplicates, without performing any norm
 
 #### Parameters
 
-• **p**: `string`
+##### p
+
+`string`
 
 string path to convert to unix.
 
@@ -392,15 +452,21 @@ An Array of ignoreExts (eg ['.min']) prevents these from being considered as ext
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
+
+`string`
 
 string filename to trim it's extension
 
-• **ignoreExts?**: `string`[]
+##### ignoreExts?
+
+`string`[]
 
 array extensions to ignore
 
-• **maxSize?**: `number`
+##### maxSize?
+
+`number`
 
 number max length of the extension
 
@@ -418,7 +484,9 @@ number max length of the extension
 
 #### Parameters
 
-• **pathname**: `string`
+##### pathname
+
+`string`
 
 #### Returns
 

@@ -6,9 +6,13 @@ Removes the specific ext extension from filename, if it has it. Otherwise it lea
 
 ## Parameters
 
-• **filename**: `string`
+### filename
 
-• **ext**: `string`
+`string`
+
+### ext
+
+`string`
 
 string extension to remove
 

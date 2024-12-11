@@ -164,11 +164,17 @@ It's recommended that returned strings be wrapped in parentheses. This option is
 
 #### Parameters
 
-• **left**: `string`
+##### left
 
-• **right**: `string`
+`string`
 
-• **options**: [`Options`](Options.md)
+##### right
+
+`string`
+
+##### options
+
+[`Options`](Options.md)
 
 #### Returns
 
@@ -248,7 +254,9 @@ Custom function for formatting the returned string. This is useful for removing 
 
 #### Parameters
 
-• **returnedString**: `string`
+##### returnedString
+
+`string`
 
 #### Returns
 
@@ -527,7 +535,9 @@ Function to be called on ignored items.
 
 #### Parameters
 
-• **item**: [`Item`](Item.md)
+##### item
+
+[`Item`](Item.md)
 
 #### Returns
 
@@ -553,7 +563,9 @@ Function to be called on matched items.
 
 #### Parameters
 
-• **item**: [`Item`](Item.md)
+##### item
+
+[`Item`](Item.md)
 
 #### Returns
 
@@ -579,7 +591,9 @@ Function to be called on all items, regardless of whether or not they are matche
 
 #### Parameters
 
-• **item**: [`Item`](Item.md)
+##### item
+
+[`Item`](Item.md)
 
 #### Returns
 

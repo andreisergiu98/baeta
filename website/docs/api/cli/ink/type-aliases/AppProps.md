@@ -12,7 +12,9 @@ Exit (unmount) the whole Ink app.
 
 #### Parameters
 
-• **error?**: `Error`
+##### error?
+
+`Error`
 
 #### Returns
 

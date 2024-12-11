@@ -14,7 +14,9 @@
 
 ## Parameters
 
-• **options**: [`SubscriptionsOptions`](../interfaces/SubscriptionsOptions.md)\<`Env`, `Context`, `ContextParams`\>
+### options
+
+[`SubscriptionsOptions`](../interfaces/SubscriptionsOptions.md)\<`Env`, `Context`, `ContextParams`\>
 
 ## Returns
 
@@ -26,9 +28,13 @@
 
 #### Parameters
 
-• **env**: `Env`
+##### env
 
-• **execContext**: `ExecutionContext`
+`Env`
+
+##### execContext
+
+`ExecutionContext`
 
 #### Returns
 
@@ -56,11 +62,17 @@ _typeof_ `BaetaWsConnections`
 
 #### Parameters
 
-• **request**: `Request`\<`unknown`, `CfProperties`\<`unknown`\>\>
+##### request
 
-• **env**: `Env`
+`Request`\<`unknown`, `CfProperties`\<`unknown`\>\>
 
-• **execContext**: `ExecutionContext`
+##### env
+
+`Env`
+
+##### execContext
+
+`ExecutionContext`
 
 #### Returns
 

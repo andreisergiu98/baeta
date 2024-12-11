@@ -14,7 +14,9 @@
 
 ## Parameters
 
-• **next**: `GraphQLFieldResolver`\<`Root`, `Context`, `Args`, `Result` \| `PromiseLike`\<`Result`\>\>
+### next
+
+`GraphQLFieldResolver`\<`Root`, `Context`, `Args`, `Result` \| `PromiseLike`\<`Result`\>\>
 
 ## Returns
 

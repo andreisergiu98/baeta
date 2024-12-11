@@ -11,9 +11,13 @@ log message formatter. This is a batch-oriented API for efficiency.
 
 ## Parameters
 
-• **messages**: [`PartialMessage`](../interfaces/PartialMessage.md)[]
+### messages
 
-• **options**: [`FormatMessagesOptions`](../interfaces/FormatMessagesOptions.md)
+[`PartialMessage`](../interfaces/PartialMessage.md)[]
+
+### options
+
+[`FormatMessagesOptions`](../interfaces/FormatMessagesOptions.md)
 
 ## Returns
 

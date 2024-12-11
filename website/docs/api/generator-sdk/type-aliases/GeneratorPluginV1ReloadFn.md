@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **file**: [`WatcherFile`](../interfaces/WatcherFile.md)
+### file
+
+[`WatcherFile`](../interfaces/WatcherFile.md)
 
 ## Returns
 

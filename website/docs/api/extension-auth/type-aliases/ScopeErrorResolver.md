@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **err**: `unknown`
+### err
 
-• **path**: `string`
+`unknown`
+
+### path
+
+`string`
 
 ## Returns
 

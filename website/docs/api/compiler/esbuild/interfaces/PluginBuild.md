@@ -21,9 +21,13 @@ Documentation: https://esbuild.github.io/api/#analyze
 
 ##### Parameters
 
-• **metafile**: `string` \| [`Metafile`](Metafile.md)
+###### metafile
 
-• **options?**: [`AnalyzeMetafileOptions`](AnalyzeMetafileOptions.md)
+`string` | [`Metafile`](Metafile.md)
+
+###### options?
+
+[`AnalyzeMetafileOptions`](AnalyzeMetafileOptions.md)
 
 ##### Returns
 
@@ -42,9 +46,13 @@ Documentation: https://esbuild.github.io/api/#analyze
 
 ##### Parameters
 
-• **metafile**: `string` \| [`Metafile`](Metafile.md)
+###### metafile
 
-• **options?**: [`AnalyzeMetafileOptions`](AnalyzeMetafileOptions.md)
+`string` | [`Metafile`](Metafile.md)
+
+###### options?
+
+[`AnalyzeMetafileOptions`](AnalyzeMetafileOptions.md)
 
 ##### Returns
 
@@ -69,7 +77,9 @@ Documentation: https://esbuild.github.io/api/#build
 
 ##### Parameters
 
-• **options**: [`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](BuildOptions.md), `T`\>
+###### options
+
+[`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](BuildOptions.md), `T`\>
 
 ##### Returns
 
@@ -92,7 +102,9 @@ Documentation: https://esbuild.github.io/api/#build
 
 ##### Parameters
 
-• **options**: [`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](BuildOptions.md), `T`\>
+###### options
+
+[`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](BuildOptions.md), `T`\>
 
 ##### Returns
 
@@ -116,7 +128,9 @@ Documentation: https://esbuild.github.io/api/#build
 
 ##### Parameters
 
-• **options**: [`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](BuildOptions.md), `T`\>
+###### options
+
+[`SameShape`](../type-aliases/SameShape.md)\<[`BuildOptions`](BuildOptions.md), `T`\>
 
 ##### Returns
 
@@ -135,9 +149,13 @@ log message formatter. This is a batch-oriented API for efficiency.
 
 ##### Parameters
 
-• **messages**: [`PartialMessage`](PartialMessage.md)[]
+###### messages
 
-• **options**: [`FormatMessagesOptions`](FormatMessagesOptions.md)
+[`PartialMessage`](PartialMessage.md)[]
+
+###### options
+
+[`FormatMessagesOptions`](FormatMessagesOptions.md)
 
 ##### Returns
 
@@ -154,9 +172,13 @@ A synchronous version of "formatMessages".
 
 ##### Parameters
 
-• **messages**: [`PartialMessage`](PartialMessage.md)[]
+###### messages
 
-• **options**: [`FormatMessagesOptions`](FormatMessagesOptions.md)
+[`PartialMessage`](PartialMessage.md)[]
+
+###### options
+
+[`FormatMessagesOptions`](FormatMessagesOptions.md)
 
 ##### Returns
 
@@ -177,7 +199,9 @@ Documentation: https://esbuild.github.io/api/#browser
 
 ##### Parameters
 
-• **options**: [`InitializeOptions`](InitializeOptions.md)
+###### options
+
+[`InitializeOptions`](InitializeOptions.md)
 
 ##### Returns
 
@@ -203,9 +227,13 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ##### Parameters
 
-• **input**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
+###### input
 
-• **options?**: [`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](TransformOptions.md), `T`\>
+`string` | `Uint8Array`\<`ArrayBufferLike`\>
+
+###### options?
+
+[`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](TransformOptions.md), `T`\>
 
 ##### Returns
 
@@ -228,9 +256,13 @@ Documentation: https://esbuild.github.io/api/#transform
 
 ##### Parameters
 
-• **input**: `string` \| `Uint8Array`\<`ArrayBufferLike`\>
+###### input
 
-• **options?**: [`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](TransformOptions.md), `T`\>
+`string` | `Uint8Array`\<`ArrayBufferLike`\>
+
+###### options?
+
+[`SameShape`](../type-aliases/SameShape.md)\<[`TransformOptions`](TransformOptions.md), `T`\>
 
 ##### Returns
 
@@ -258,7 +290,9 @@ Documentation: https://esbuild.github.io/plugins/#on-dispose
 
 #### Parameters
 
-• **callback**
+##### callback
+
+() => `void`
 
 #### Returns
 
@@ -274,7 +308,9 @@ Documentation: https://esbuild.github.io/plugins/#on-end
 
 #### Parameters
 
-• **callback**
+##### callback
+
+(`result`) => `null` \| `void` \| [`OnEndResult`](OnEndResult.md) \| `Promise`\<`null` \| `void` \| [`OnEndResult`](OnEndResult.md)\>
 
 #### Returns
 
@@ -290,9 +326,13 @@ Documentation: https://esbuild.github.io/plugins/#on-load
 
 #### Parameters
 
-• **options**: [`OnLoadOptions`](OnLoadOptions.md)
+##### options
 
-• **callback**
+[`OnLoadOptions`](OnLoadOptions.md)
+
+##### callback
+
+(`args`) => `undefined` \| `null` \| [`OnLoadResult`](OnLoadResult.md) \| `Promise`\<`undefined` \| `null` \| [`OnLoadResult`](OnLoadResult.md)\>
 
 #### Returns
 
@@ -308,9 +348,13 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve
 
 #### Parameters
 
-• **options**: [`OnResolveOptions`](OnResolveOptions.md)
+##### options
 
-• **callback**
+[`OnResolveOptions`](OnResolveOptions.md)
+
+##### callback
+
+(`args`) => `undefined` \| `null` \| [`OnResolveResult`](OnResolveResult.md) \| `Promise`\<`undefined` \| `null` \| [`OnResolveResult`](OnResolveResult.md)\>
 
 #### Returns
 
@@ -326,7 +370,9 @@ Documentation: https://esbuild.github.io/plugins/#on-start
 
 #### Parameters
 
-• **callback**
+##### callback
+
+() => `null` \| `void` \| [`OnStartResult`](OnStartResult.md) \| `Promise`\<`null` \| `void` \| [`OnStartResult`](OnStartResult.md)\>
 
 #### Returns
 
@@ -342,9 +388,13 @@ Documentation: https://esbuild.github.io/plugins/#resolve
 
 #### Parameters
 
-• **path**: `string`
+##### path
 
-• **options?**: [`ResolveOptions`](ResolveOptions.md)
+`string`
+
+##### options?
+
+[`ResolveOptions`](ResolveOptions.md)
 
 #### Returns
 

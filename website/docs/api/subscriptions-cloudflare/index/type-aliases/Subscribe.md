@@ -14,7 +14,9 @@
 
 ## Parameters
 
-• **topic**: `C`
+### topic
+
+`C`
 
 ## Returns
 

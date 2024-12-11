@@ -4,9 +4,13 @@
 
 ## Parameters
 
-• **err**: `AggregateError`
+### err
 
-• **path**: `string`
+`AggregateError`
+
+### path
+
+`string`
 
 ## Returns
 

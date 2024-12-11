@@ -8,7 +8,9 @@
 
 ## Parameters
 
-• **list**: () => `T`[]
+### list
+
+() => `T`[]
 
 ## Returns
 

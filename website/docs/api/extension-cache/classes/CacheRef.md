@@ -16,13 +16,21 @@
 
 #### Parameters
 
-• **type**: `string`
+##### type
 
-• **field**: `string`
+`string`
 
-• **hash**: `string`
+##### field
 
-• **revision**: `number` = `1`
+`string`
+
+##### hash
+
+`string`
+
+##### revision
+
+`number` = `1`
 
 #### Returns
 
@@ -56,7 +64,9 @@
 
 #### Parameters
 
-• **revision**: `number`
+##### revision
+
+`number`
 
 #### Returns
 

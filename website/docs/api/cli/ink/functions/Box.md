@@ -6,7 +6,9 @@
 
 ## Parameters
 
-• **props**: `object` & `object` & `RefAttributes`\<[`DOMElement`](../type-aliases/DOMElement.md)\>
+### props
+
+`object` & `object` & `RefAttributes`\<[`DOMElement`](../type-aliases/DOMElement.md)\>
 
 ## Returns
 

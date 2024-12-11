@@ -4,11 +4,17 @@
 
 ## Parameters
 
-• **options**: [`GeneratorOptions`](../interfaces/GeneratorOptions.md)
+### options
 
-• **plugins**: [`GeneratorPluginV1`](../interfaces/GeneratorPluginV1.md)\<`unknown`\>[]
+[`GeneratorOptions`](../interfaces/GeneratorOptions.md)
 
-• **hooks?**: [`GeneratorHooks`](../interfaces/GeneratorHooks.md)
+### plugins
+
+[`GeneratorPluginV1`](../interfaces/GeneratorPluginV1.md)\<`unknown`\>[]
+
+### hooks?
+
+[`GeneratorHooks`](../interfaces/GeneratorHooks.md)
 
 ## Returns
 

@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **props**: [`ErrorsProps`](../interfaces/ErrorsProps.md)
+### props
+
+[`ErrorsProps`](../interfaces/ErrorsProps.md)
 
 ## Returns
 

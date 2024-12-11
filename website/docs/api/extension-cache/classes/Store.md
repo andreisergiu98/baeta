@@ -22,11 +22,17 @@
 
 #### Parameters
 
-• **options**: [`StoreOptions`](../interfaces/StoreOptions.md)\<`T`\>
+##### options
 
-• **type**: `string`
+[`StoreOptions`](../interfaces/StoreOptions.md)\<`T`\>
 
-• **hash**: `string`
+##### type
+
+`string`
+
+##### hash
+
+`string`
 
 #### Returns
 

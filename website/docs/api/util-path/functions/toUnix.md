@@ -6,7 +6,9 @@ Just converts all `to/` and consolidates duplicates, without performing any norm
 
 ## Parameters
 
-• **p**: `string`
+### p
+
+`string`
 
 string path to convert to unix.
 

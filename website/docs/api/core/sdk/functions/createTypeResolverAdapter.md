@@ -12,7 +12,9 @@
 
 ## Parameters
 
-• **resolver**: [`TypeResolver`](../../index/type-aliases/TypeResolver.md)\<`Result`, `Value`, `Context`\>
+### resolver
+
+[`TypeResolver`](../../index/type-aliases/TypeResolver.md)\<`Result`, `Value`, `Context`\>
 
 ## Returns
 

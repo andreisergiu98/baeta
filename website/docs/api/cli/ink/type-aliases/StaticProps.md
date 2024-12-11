@@ -18,9 +18,13 @@ Note that `key` must be assigned to the root component.
 
 #### Parameters
 
-• **item**: `T`
+##### item
 
-• **index**: `number`
+`T`
+
+##### index
+
+`number`
 
 #### Returns
 

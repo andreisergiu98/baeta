@@ -10,7 +10,9 @@
 
 ## Parameters
 
-• **params**: `ValidationDirectiveFnParams`\<`DirectiveConfig`, `Context`\>
+### params
+
+`ValidationDirectiveFnParams`\<`DirectiveConfig`, `Context`\>
 
 ## Returns
 

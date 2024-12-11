@@ -10,9 +10,13 @@
 
 ## Parameters
 
-• **items**: `T`[]
+### items
 
-• **callback**
+`T`[]
+
+### callback
+
+(`item`) => `K`
 
 ## Returns
 

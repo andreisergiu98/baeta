@@ -12,7 +12,9 @@
 
 #### Parameters
 
-• **builder**: [`ModuleBuilder`](../classes/ModuleBuilder.md)
+##### builder
+
+[`ModuleBuilder`](../classes/ModuleBuilder.md)
 
 #### Returns
 

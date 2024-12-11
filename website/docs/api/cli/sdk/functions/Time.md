@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **props**: [`TimeProps`](../interfaces/TimeProps.md)
+### props
+
+[`TimeProps`](../interfaces/TimeProps.md)
 
 ## Returns
 

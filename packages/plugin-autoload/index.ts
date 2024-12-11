@@ -10,18 +10,33 @@ import {
 import * as path from '@baeta/util-path';
 
 export interface AutoloadResolverOptions {
+	/**
+	 * Custom suffix(es) to identify resolver files
+	 * Used together with the default suffixes, unless disabled
+	 */
 	suffix?: string | string[];
+	/** If true, disables the default resolver suffixes */
 	disableDefaultSuffixes?: boolean;
+	/** Custom function to determine if a resolver file should be included */
 	match?: (filename: string) => boolean;
 }
 
 export interface AutoloadModuleOptions {
+	/** Custom function to determine if a module should be included */
 	match?: (moduleName: string) => boolean;
 }
 
 export interface AutoloadPluginOptions {
+	/** Configuration for resolver autoloading. Set to false to disable */
 	resolvers?: boolean | AutoloadResolverOptions;
+	/** Configuration for module autoloading. Set to false to disable */
 	modules?: boolean | AutoloadModuleOptions;
+	/**
+	 * Output path for the generated autoload file
+	 * @default ```ts
+	 * `${modulesDir}/autoload.ts`
+	 * ```
+	 */
 	output?: string;
 }
 
@@ -153,6 +168,14 @@ function buildModuleList(moduleNames: string[]) {
 	return `export const modules = [${moduleGetters.join(', ')}];\n`;
 }
 
+/**
+ * A plugin that automatically loads GraphQL resolvers and modules based on file names.
+ * See https://baeta.io/docs/plugins/autoloading
+ *
+ * @param options - Configuration options for the autoload plugin
+ * @returns A Baeta generator plugin
+ *
+ */
 export function autoloadPlugin(options?: AutoloadPluginOptions) {
 	const modulesMatcher = getModuleMatcher(options);
 

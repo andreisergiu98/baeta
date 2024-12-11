@@ -13,4 +13,3 @@ Renames and re-exports [createExecPlugin](functions/createExecPlugin.md)
 ## Functions
 
 - [createExecPlugin](functions/createExecPlugin.md)
-- [dynamicImport](functions/dynamicImport.md)

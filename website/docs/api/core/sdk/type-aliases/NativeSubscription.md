@@ -22,4 +22,4 @@
 
 ### subscribe
 
-> **subscribe**: `NativeSubscriptionSubscribe`\<`Payload`, `Root`, `Context`, `Args`\>
+> **subscribe**: [`NativeSubscriptionSubscribe`](NativeSubscriptionSubscribe.md)\<`Payload`, `Root`, `Context`, `Args`\>

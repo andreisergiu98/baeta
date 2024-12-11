@@ -3,7 +3,7 @@ import { pruneSchema } from '@graphql-tools/utils';
 import { getModuleBuilder, transformSchema } from '../sdk/index.ts';
 import { addValidationToSchema } from './input-directive/input-schema.ts';
 
-type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
+export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
 
 export interface Options {
 	/**

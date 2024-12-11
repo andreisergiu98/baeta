@@ -4,7 +4,7 @@
 
 ## Type Parameters
 
-• **B** _extends_ `GenericFn`
+• **B** _extends_ (...`args`) => `any`
 
 • **M** _extends_ `object`
 

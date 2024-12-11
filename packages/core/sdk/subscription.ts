@@ -12,7 +12,7 @@ export type NativeSubscription<
 	resolve?: GraphQLFieldResolver<Payload, Context, Args, Result>;
 };
 
-type NativeSubscriptionSubscribe<Payload, Root, Context, Args> = (
+export type NativeSubscriptionSubscribe<Payload, Root, Context, Args> = (
 	source: Root,
 	args: Args,
 	context: Context,

@@ -9,7 +9,7 @@ import {
 	addValidationsExtension,
 } from './input-extensions.ts';
 
-type ValidationDirectiveFnParams<DirectiveConfig, Context> = ValidateParams<Context> & {
+export type ValidationDirectiveFnParams<DirectiveConfig, Context> = ValidateParams<Context> & {
 	directiveConfig: DirectiveConfig;
 	getValue: () => unknown;
 	setValue: (newValue: unknown) => void;
@@ -158,7 +158,7 @@ export function applyInputDirective(
 	});
 }
 
-type InputDirectiveOptions<DirectiveConfig, Context> = {
+export type InputDirectiveOptions<DirectiveConfig, Context> = {
 	name: string;
 	target: ValidationTarget;
 	resolve: ValidationDirectiveFn<DirectiveConfig, Context>;

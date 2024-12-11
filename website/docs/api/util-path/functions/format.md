@@ -10,6 +10,8 @@ Returns a path string from an object - the opposite of parse().
 
 `ParsedPath`
 
+path to evaluate.
+
 ## Returns
 
 `string`

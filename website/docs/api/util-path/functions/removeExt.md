@@ -10,6 +10,8 @@ Removes the specific ext extension from filename, if it has it. Otherwise it lea
 
 `string`
 
+string filename to remove extension to
+
 ### ext
 
 `string`

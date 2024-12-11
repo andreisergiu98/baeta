@@ -178,8 +178,6 @@ the path to evaluate.
 
 > **format**: (`pathObject`) => `string`
 
-Returns a path string from an object - the opposite of parse().
-
 #### Parameters
 
 ##### pathObject
@@ -244,15 +242,11 @@ string paths to join.
 
 ### joinSafe()
 
-> **joinSafe**: (...`p`) => `string`
-
-Exactly like path.join(), but it keeps the first meaningful ./.
-
-Note that the unix / is returned everywhere, so windows \ is always converted to unix /.
+> **joinSafe**: (...`paths`) => `string`
 
 #### Parameters
 
-##### p
+##### paths
 
 ...`any`[]
 
@@ -378,8 +372,6 @@ At times we have two absolute paths, and we need to derive the relative path fro
 
 > **removeExt**: (`filename`, `ext`) => `string`
 
-Removes the specific ext extension from filename, if it has it. Otherwise it leaves it as is. As in all upath functions, it be .ext or ext.
-
 #### Parameters
 
 ##### filename
@@ -389,8 +381,6 @@ Removes the specific ext extension from filename, if it has it. Otherwise it lea
 ##### ext
 
 `string`
-
-string extension to remove
 
 #### Returns
 

@@ -9,10 +9,13 @@
 
 ### Interfaces
 
+- [SubscriptionInfo](interfaces/SubscriptionInfo.md)
+- [SubscriptionsContextLoader](interfaces/SubscriptionsContextLoader.md)
 - [SubscriptionsOptions](interfaces/SubscriptionsOptions.md)
 
 ### Type Aliases
 
+- [PoolingType](type-aliases/PoolingType.md)
 - [Publish](type-aliases/Publish.md)
 - [Subscribe](type-aliases/Subscribe.md)
 

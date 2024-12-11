@@ -12,7 +12,7 @@
 
 ### context?
 
-> `optional` **context**: `ContextLoader`\<`Env`, `Context`, `ContextParams`\>
+> `optional` **context**: [`SubscriptionsContextLoader`](SubscriptionsContextLoader.md)\<`Env`, `Context`, `ContextParams`\>
 
 ---
 
@@ -50,7 +50,7 @@
 
 ### poolingType?
 
-> `optional` **poolingType**: `PoolingType`
+> `optional` **poolingType**: [`PoolingType`](../type-aliases/PoolingType.md)
 
 ---
 

@@ -1,5 +1,7 @@
 # Class: ForbiddenError
 
+Thrown when an authenticated user lacks the required permissions.
+
 ## Extends
 
 - `GraphQLError`

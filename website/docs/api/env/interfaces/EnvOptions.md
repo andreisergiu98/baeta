@@ -14,11 +14,15 @@
 
 > **type**: `T`
 
+The expected type of the environment variable.
+
 ---
 
 ### default?
 
 > `optional` **default**: `D`
+
+Default value if the environment variable is not provided.
 
 ---
 
@@ -26,11 +30,15 @@
 
 > `optional` **required**: `R`
 
+Whether the environment variable is required.
+
 ---
 
 ### resolver()?
 
 > `optional` **resolver**: (`value`) => [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
+
+Custom resolver to convert the environment variable to the expected type.
 
 #### Parameters
 

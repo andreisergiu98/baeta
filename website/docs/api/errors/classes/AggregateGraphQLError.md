@@ -1,5 +1,8 @@
 # Class: AggregateGraphQLError
 
+Represents multiple GraphQL errors that occurred simultaneously.
+Useful for batch operations where multiple errors need to be reported.
+
 ## Extends
 
 - `GraphQLError`

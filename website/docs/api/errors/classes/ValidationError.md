@@ -1,5 +1,7 @@
 # Class: ValidationError
 
+Thrown when input validation rules are not satisfied.
+
 ## Extends
 
 - `GraphQLError`

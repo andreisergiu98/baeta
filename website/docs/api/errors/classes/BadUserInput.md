@@ -1,5 +1,7 @@
 # Class: BadUserInput
 
+Thrown when the user provides invalid input data.
+
 ## Extends
 
 - `GraphQLError`

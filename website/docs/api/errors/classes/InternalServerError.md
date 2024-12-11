@@ -1,5 +1,9 @@
 # Class: InternalServerError
 
+Thrown when an unexpected server-side error occurs.
+In development mode, includes the original error message and stack trace.
+In production, shows a generic error message.
+
 ## Extends
 
 - `GraphQLError`

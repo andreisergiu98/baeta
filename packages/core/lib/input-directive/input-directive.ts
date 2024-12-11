@@ -198,7 +198,7 @@ export type InputDirectiveOptions<DirectiveConfig, Context> = {
 /**
  * Creates a schema transformer that applies an input directive to a GraphQL schema.
  * The directive can be used to validate or transform input fields, arguments, and input types.
- * See https://baeta.io//docs/guides/directives and https://baeta.io//docs/guides/input-directives
+ * See https://baeta.io/docs/guides/directives and https://baeta.io/docs/guides/input-directives
  *
  * @template DirectiveConfig - Type of the directive configuration object
  * @template Context - Type of the GraphQL context

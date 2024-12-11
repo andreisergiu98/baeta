@@ -4,7 +4,7 @@
 
 Creates a schema transformer that applies an input directive to a GraphQL schema.
 The directive can be used to validate or transform input fields, arguments, and input types.
-See https://baeta.io//docs/guides/directives and https://baeta.io//docs/guides/input-directives
+See https://baeta.io/docs/guides/directives and https://baeta.io/docs/guides/input-directives
 
 ## Type Parameters
 

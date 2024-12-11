@@ -1,5 +1,12 @@
+/**
+ * Supported environment variable types.
+ */
 export type EnvTypes = 'string' | 'number' | 'boolean';
 
+/**
+ * Maps environment variable types to their TypeScript equivalents.
+ * @template T - The environment variable type
+ */
 export type EnvInferType<T extends EnvTypes> = T extends 'string'
 	? string
 	: T extends 'number'
@@ -21,9 +28,21 @@ export interface EnvOptions<
 	R extends boolean | undefined,
 	D extends EnvInferType<T> | undefined,
 > {
+	/**
+	 * Whether the environment variable is required.
+	 */
 	required?: R;
+	/**
+	 * Default value if the environment variable is not provided.
+	 */
 	default?: D;
+	/**
+	 * The expected type of the environment variable.
+	 */
 	type: T;
+	/**
+	 * Custom resolver to convert the environment variable to the expected type.
+	 */
 	resolver?: (value: string) => EnvInferType<T>;
 }
 
@@ -103,6 +122,34 @@ function validateValue<
 	}
 }
 
+/**
+ * Creates an environment variable parser..
+ * See https://baeta.io/docs/guides/environment
+ *
+ * @param getValue - Function to retrieve environment variable values
+ * @returns A parsing function that converts environment variables to strongly-typed values
+ *
+ * @example
+ * ```typescript
+ * const parse = createEnvParser((key) => process.env[key]);
+ *
+ * const port = parse('PORT', {
+ *   type: 'number',
+ *   required: true,
+ *   default: 3000
+ * });
+ *
+ * const debug = parse('DEBUG', {
+ *   type: 'boolean',
+ *   default: false
+ * });
+ * ```
+ *
+ * @throws {Error} When:
+ * - A required value is missing and has no default
+ * - The value type doesn't match the specified type
+ * - A custom resolver returns an incorrect type
+ */
 export function createEnvParser(getValue: (key: string) => string | undefined) {
 	return function parse<
 		T extends EnvTypes,

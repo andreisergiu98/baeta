@@ -1,5 +1,8 @@
 # Class: UnauthenticatedError
 
+Thrown when a user attempts to access a resource without authentication.
+Results in a 401 HTTP status code.
+
 ## Extends
 
 - `GraphQLError`

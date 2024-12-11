@@ -18,15 +18,15 @@
 
 ## Properties
 
-### fileOptions?
-
-> `optional` **fileOptions**: [`FileOptions`](../interfaces/FileOptions.md)
-
----
-
 ### files
 
 > **files**: [`File`](File.md)[] = `[]`
+
+---
+
+### fileOptions?
+
+> `optional` **fileOptions**: [`FileOptions`](../interfaces/FileOptions.md)
 
 ## Methods
 

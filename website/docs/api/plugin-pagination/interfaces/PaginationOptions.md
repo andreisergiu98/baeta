@@ -2,6 +2,12 @@
 
 ## Properties
 
+### types
+
+> **types**: `Record`\<`string`, `boolean` \| [`PaginationTypeOptions`](PaginationTypeOptions.md)\>
+
+---
+
 ### createExport?
 
 > `optional` **createExport**: `boolean`
@@ -23,9 +29,3 @@
 ### pageInfoFields?
 
 > `optional` **pageInfoFields**: `string`[]
-
----
-
-### types
-
-> **types**: `Record`\<`string`, `boolean` \| [`PaginationTypeOptions`](PaginationTypeOptions.md)\>

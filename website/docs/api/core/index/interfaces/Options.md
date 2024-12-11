@@ -2,14 +2,6 @@
 
 ## Properties
 
-### executableSchemaOptions?
-
-> `optional` **executableSchemaOptions**: [`ExecutableSchemaOptions`](../type-aliases/ExecutableSchemaOptions.md)
-
-Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
-
----
-
 ### modules
 
 > **modules**: `Record`\<`string`, `unknown`\>[]
@@ -21,6 +13,14 @@ Array of module objects to include in the application.
 ```typescript
 const modules = [userModule, postModule, commentModule];
 ```
+
+---
+
+### executableSchemaOptions?
+
+> `optional` **executableSchemaOptions**: [`ExecutableSchemaOptions`](../type-aliases/ExecutableSchemaOptions.md)
+
+Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
 
 ---
 

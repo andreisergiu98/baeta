@@ -2,15 +2,15 @@
 
 ## Properties
 
-### color?
-
-> `optional` **color**: `boolean`
-
----
-
 ### kind
 
 > **kind**: `"warning"` \| `"error"`
+
+---
+
+### color?
+
+> `optional` **color**: `boolean`
 
 ---
 

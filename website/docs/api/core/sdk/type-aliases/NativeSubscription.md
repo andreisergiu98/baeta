@@ -16,10 +16,10 @@
 
 ## Type declaration
 
-### resolve?
-
-> `optional` **resolve**: `GraphQLFieldResolver`\<`Payload`, `Context`, `Args`, `Result`\>
-
 ### subscribe
 
 > **subscribe**: [`NativeSubscriptionSubscribe`](NativeSubscriptionSubscribe.md)\<`Payload`, `Root`, `Context`, `Args`\>
+
+### resolve?
+
+> `optional` **resolve**: `GraphQLFieldResolver`\<`Payload`, `Context`, `Args`, `Result`\>

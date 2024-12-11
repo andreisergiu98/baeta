@@ -2,15 +2,15 @@
 
 ## Properties
 
-### actionName?
-
-> `optional` **actionName**: `string`
-
----
-
 ### exec
 
 > **exec**: `string` \| (`ctx`) => `void` \| `Promise`\<`void`\>
+
+---
+
+### actionName?
+
+> `optional` **actionName**: `string`
 
 ---
 
@@ -27,10 +27,6 @@
 #### Parameters
 
 ##### ctx
-
-###### changedFile
-
-[`WatcherFile`](../../generator/interfaces/WatcherFile.md)
 
 ###### didEnd
 
@@ -59,6 +55,10 @@
 ###### watching
 
 `boolean`
+
+###### changedFile
+
+[`WatcherFile`](../../generator/interfaces/WatcherFile.md)
 
 #### Returns
 

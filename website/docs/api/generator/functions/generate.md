@@ -1,6 +1,6 @@
 # Function: generate()
 
-> **generate**(`options`, `plugins`, `hooks`?): `Promise`\<`undefined` \| \{ `changedFile`: [`WatcherFile`](../interfaces/WatcherFile.md); `didEnd`: `string`[]; `didGenerate`: `string`[]; `didSetup`: `string`[]; `fileManager`: [`FileManager`](../../generator-sdk/classes/FileManager.md); `generatorOptions`: [`NormalizedGeneratorOptions`](../../generator-sdk/interfaces/NormalizedGeneratorOptions.md); `pluginNames`: `string`[]; `watching`: `boolean`; \}\>
+> **generate**(`options`, `plugins`, `hooks`?): `Promise`\<`undefined` \| \{ `didEnd`: `string`[]; `didGenerate`: `string`[]; `didSetup`: `string`[]; `fileManager`: [`FileManager`](../../generator-sdk/classes/FileManager.md); `generatorOptions`: [`NormalizedGeneratorOptions`](../../generator-sdk/interfaces/NormalizedGeneratorOptions.md); `pluginNames`: `string`[]; `watching`: `boolean`; `changedFile`: [`WatcherFile`](../interfaces/WatcherFile.md); \}\>
 
 ## Parameters
 
@@ -18,4 +18,4 @@
 
 ## Returns
 
-`Promise`\<`undefined` \| \{ `changedFile`: [`WatcherFile`](../interfaces/WatcherFile.md); `didEnd`: `string`[]; `didGenerate`: `string`[]; `didSetup`: `string`[]; `fileManager`: [`FileManager`](../../generator-sdk/classes/FileManager.md); `generatorOptions`: [`NormalizedGeneratorOptions`](../../generator-sdk/interfaces/NormalizedGeneratorOptions.md); `pluginNames`: `string`[]; `watching`: `boolean`; \}\>
+`Promise`\<`undefined` \| \{ `didEnd`: `string`[]; `didGenerate`: `string`[]; `didSetup`: `string`[]; `fileManager`: [`FileManager`](../../generator-sdk/classes/FileManager.md); `generatorOptions`: [`NormalizedGeneratorOptions`](../../generator-sdk/interfaces/NormalizedGeneratorOptions.md); `pluginNames`: `string`[]; `watching`: `boolean`; `changedFile`: [`WatcherFile`](../interfaces/WatcherFile.md); \}\>

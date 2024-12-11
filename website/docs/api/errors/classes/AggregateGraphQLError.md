@@ -34,16 +34,6 @@
 
 ## Properties
 
-### cause?
-
-> `optional` **cause**: `unknown`
-
-#### Inherited from
-
-`GraphQLError.cause`
-
----
-
 ### extensions
 
 > `readonly` **extensions**: `GraphQLErrorExtensions`
@@ -159,6 +149,16 @@ represent nodes after the first node.
 #### Inherited from
 
 `GraphQLError.source`
+
+---
+
+### cause?
+
+> `optional` **cause**: `unknown`
+
+#### Inherited from
+
+`GraphQLError.cause`
 
 ---
 

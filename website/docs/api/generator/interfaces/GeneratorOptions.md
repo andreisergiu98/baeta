@@ -4,6 +4,20 @@ Options for the Baeta Generator.
 
 ## Properties
 
+### schemas
+
+> **schemas**: `string`[]
+
+Glob pattern(s) to locate GraphQL schema files.
+
+#### Default
+
+```ts
+["src/∗∗/∗.gql", "src/∗∗/∗.graphql"];
+```
+
+---
+
 ### baseTypesPath?
 
 > `optional` **baseTypesPath**: `string`
@@ -156,18 +170,4 @@ Supports global types and imports.
 
 ```ts
 undefined;
-```
-
----
-
-### schemas
-
-> **schemas**: `string`[]
-
-Glob pattern(s) to locate GraphQL schema files.
-
-#### Default
-
-```ts
-["src/∗∗/∗.gql", "src/∗∗/∗.graphql"];
 ```

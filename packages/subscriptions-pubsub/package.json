@@ -82,6 +82,12 @@
     "intentionallyNotExported": [
       "TypedPubSubV2",
       "TypedPubSubV3"
+    ],
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
     ]
   }
 }

@@ -12,6 +12,10 @@
 
 > **actionName**: `string`
 
+### name
+
+> **name**: `string`
+
 ### end?
 
 > `optional` **end**: [`GeneratorPluginV1Fn`](GeneratorPluginV1Fn.md)\<`Store`\>
@@ -19,10 +23,6 @@
 ### generate?
 
 > `optional` **generate**: [`GeneratorPluginV1Fn`](GeneratorPluginV1Fn.md)\<`Store`\>
-
-### name
-
-> **name**: `string`
 
 ### setup?
 

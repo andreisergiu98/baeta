@@ -12,6 +12,10 @@
 
 > **childNodes**: `DOMNode`[]
 
+### nodeName
+
+> **nodeName**: `ElementNames`
+
 ### internal_transform?
 
 > `optional` **internal_transform**: `OutputTransformer`
@@ -19,10 +23,6 @@
 ### isStaticDirty?
 
 > `optional` **isStaticDirty**: `boolean`
-
-### nodeName
-
-> **nodeName**: `ElementNames`
 
 ### onComputeLayout()?
 

@@ -2,6 +2,34 @@
 
 ## Properties
 
+### dist
+
+> **dist**: `string`
+
+The output directory
+
+#### Example
+
+```ts
+dist: "dist";
+```
+
+---
+
+### src
+
+> **src**: `string` \| `string`[]
+
+The source file or files to compile
+
+#### Example
+
+```ts
+src: "src/index.ts";
+```
+
+---
+
 ### bundleDeps?
 
 > `optional` **bundleDeps**: `boolean`
@@ -54,36 +82,8 @@ false;
 
 ---
 
-### dist
-
-> **dist**: `string`
-
-The output directory
-
-#### Example
-
-```ts
-dist: "dist";
-```
-
----
-
 ### esbuild?
 
 > `optional` **esbuild**: `Partial`\<`Omit`\<[`BuildOptions`](../../esbuild/interfaces/BuildOptions.md), `"outdir"` \| `"entryPoints"`\>\>
 
 Options to pass to esbuild
-
----
-
-### src
-
-> **src**: `string` \| `string`[]
-
-The source file or files to compile
-
-#### Example
-
-```ts
-src: "src/index.ts";
-```

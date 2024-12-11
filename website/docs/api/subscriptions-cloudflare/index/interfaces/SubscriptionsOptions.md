@@ -10,12 +10,6 @@
 
 ## Properties
 
-### context?
-
-> `optional` **context**: [`SubscriptionsContextLoader`](SubscriptionsContextLoader.md)\<`Env`, `Context`, `ContextParams`\>
-
----
-
 ### getDatabase()
 
 > **getDatabase**: (`env`) => [`SubscriptionDatabase`](../classes/SubscriptionDatabase.md)
@@ -48,12 +42,18 @@
 
 ---
 
-### poolingType?
-
-> `optional` **poolingType**: [`PoolingType`](../type-aliases/PoolingType.md)
-
----
-
 ### schema
 
 > **schema**: `GraphQLSchema`
+
+---
+
+### context?
+
+> `optional` **context**: [`SubscriptionsContextLoader`](SubscriptionsContextLoader.md)\<`Env`, `Context`, `ContextParams`\>
+
+---
+
+### poolingType?
+
+> `optional` **poolingType**: [`PoolingType`](../type-aliases/PoolingType.md)

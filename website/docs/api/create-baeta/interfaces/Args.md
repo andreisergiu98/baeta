@@ -2,6 +2,12 @@
 
 ## Properties
 
+### rootDir
+
+> **rootDir**: `string`
+
+---
+
 ### appName?
 
 > `optional` **appName**: `string`
@@ -11,12 +17,6 @@
 ### packageManager?
 
 > `optional` **packageManager**: `"npm"` \| `"yarn"` \| `"pnpm"` \| `"bun"`
-
----
-
-### rootDir
-
-> **rootDir**: `string`
 
 ---
 

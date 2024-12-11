@@ -10,6 +10,12 @@
 
 ## Properties
 
+### type
+
+> **type**: `T`
+
+---
+
 ### default?
 
 > `optional` **default**: `D`
@@ -35,9 +41,3 @@
 #### Returns
 
 [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
-
----
-
-### type
-
-> **type**: `T`

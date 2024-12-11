@@ -6,16 +6,6 @@
 
 ## Properties
 
-### cause?
-
-> `optional` **cause**: `unknown`
-
-#### Inherited from
-
-`Error.cause`
-
----
-
 ### errors
 
 > **errors**: [`Message`](Message.md)[]
@@ -42,6 +32,22 @@
 
 ---
 
+### warnings
+
+> **warnings**: [`Message`](Message.md)[]
+
+---
+
+### cause?
+
+> `optional` **cause**: `unknown`
+
+#### Inherited from
+
+`Error.cause`
+
+---
+
 ### stack?
 
 > `optional` **stack**: `string`
@@ -49,9 +55,3 @@
 #### Inherited from
 
 `Error.stack`
-
----
-
-### warnings
-
-> **warnings**: [`Message`](Message.md)[]

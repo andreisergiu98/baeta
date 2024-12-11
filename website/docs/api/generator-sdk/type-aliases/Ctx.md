@@ -4,10 +4,6 @@
 
 ## Type declaration
 
-### changedFile?
-
-> `optional` **changedFile**: [`WatcherFile`](../interfaces/WatcherFile.md)
-
 ### didEnd
 
 > **didEnd**: `string`[]
@@ -35,6 +31,10 @@
 ### watching
 
 > **watching**: `boolean`
+
+### changedFile?
+
+> `optional` **changedFile**: [`WatcherFile`](../interfaces/WatcherFile.md)
 
 ## Type Parameters
 

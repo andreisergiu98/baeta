@@ -8,15 +8,33 @@
 
 ---
 
-### contextType?
-
-> `optional` **contextType**: `string`
-
----
-
 ### cwd
 
 > **cwd**: `string`
+
+---
+
+### moduleDefinitionName
+
+> **moduleDefinitionName**: `string`
+
+---
+
+### modulesDir
+
+> **modulesDir**: `string`
+
+---
+
+### schemas
+
+> **schemas**: `string`[]
+
+---
+
+### contextType?
+
+> `optional` **contextType**: `string`
 
 ---
 
@@ -44,24 +62,6 @@
 
 ---
 
-### moduleDefinitionName
-
-> **moduleDefinitionName**: `string`
-
----
-
-### modulesDir
-
-> **modulesDir**: `string`
-
----
-
 ### scalars?
 
 > `optional` **scalars**: `Record`\<`string`, `string`\>
-
----
-
-### schemas
-
-> **schemas**: `string`[]

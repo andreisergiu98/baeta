@@ -2,15 +2,27 @@
 
 ## Properties
 
-### backslashes?
-
-> `optional` **backslashes**: `boolean`
-
----
-
 ### depth
 
 > **depth**: `number`
+
+---
+
+### isGlob
+
+> **isGlob**: `boolean`
+
+---
+
+### value
+
+> **value**: `string`
+
+---
+
+### backslashes?
+
+> `optional` **backslashes**: `boolean`
 
 ---
 
@@ -32,12 +44,6 @@
 
 ---
 
-### isGlob
-
-> **isGlob**: `boolean`
-
----
-
 ### isGlobstar?
 
 > `optional` **isGlobstar**: `boolean`
@@ -53,9 +59,3 @@
 ### negated?
 
 > `optional` **negated**: `boolean`
-
----
-
-### value
-
-> **value**: `string`

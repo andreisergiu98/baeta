@@ -8,10 +8,10 @@
 
 > **name**: `string`
 
-### packageJsn?
-
-> `optional` **packageJsn**: `string`
-
 ### path
 
 > **path**: `string`
+
+### packageJsn?
+
+> `optional` **packageJsn**: `string`

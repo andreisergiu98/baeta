@@ -16,6 +16,30 @@ Type of the context
 
 ## Type declaration
 
+### name
+
+> **name**: `string`
+
+Name of the directive as it appears in the GraphQL schema (without '@' prefix)
+
+#### Example
+
+```ts
+'trim' for '@trim' directive
+```
+
+### resolve
+
+> **resolve**: [`ValidationDirectiveFn`](ValidationDirectiveFn.md)\<`DirectiveConfig`, `Context`\>
+
+Function that implements the directive's validation/transformation logic
+
+### target
+
+> **target**: [`ValidationTarget`](ValidationTarget.md)
+
+Validation target indicating when the directive should be applied
+
 ### getListDepth()?
 
 > `optional` **getListDepth**: (`config`) => `number`
@@ -44,27 +68,3 @@ input Input {
 #### Returns
 
 `number`
-
-### name
-
-> **name**: `string`
-
-Name of the directive as it appears in the GraphQL schema (without '@' prefix)
-
-#### Example
-
-```ts
-'trim' for '@trim' directive
-```
-
-### resolve
-
-> **resolve**: [`ValidationDirectiveFn`](ValidationDirectiveFn.md)\<`DirectiveConfig`, `Context`\>
-
-Function that implements the directive's validation/transformation logic
-
-### target
-
-> **target**: [`ValidationTarget`](ValidationTarget.md)
-
-Validation target indicating when the directive should be applied

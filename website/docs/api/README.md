@@ -27,7 +27,7 @@
 - [@baeta/plugin-graphql](plugin-graphql/README.md)
 - [@baeta/plugin-pagination](plugin-pagination/README.md)
 - [@baeta/plugin-prisma](plugin-prisma/README.md)
-- [@baeta/cloudflare-subscriptions](cloudflare-subscriptions/README.md)
+- [@baeta/subscriptions-cloudflare](subscriptions-cloudflare/README.md)
 - [@baeta/subscriptions-pubsub](subscriptions-pubsub/README.md)
 - [@baeta/util-encoding](util-encoding/README.md)
 - [@baeta/util-env](util-env/README.md)

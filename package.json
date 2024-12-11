@@ -35,7 +35,7 @@
   "scripts": {
     "build": "yarn turbo build --filter='./packages/*'",
     "docs": "yarn workspace @baeta/website build",
-    "docs:api": "yarn workspace @baeta/website write-api",
+    "docs:api": "yarn workspace @baeta/website write-api && prettier --write website/**/*.md",
     "examples:sync": "./examples/sync.sh",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",

@@ -1,4 +1,4 @@
-# @baeta/cloudflare-subscriptions
+# @baeta/subscriptions-cloudflare
 
 ## Modules
 

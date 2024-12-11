@@ -1,6 +1,6 @@
 # Function: complexityExtension()
 
-> **complexityExtension**\<`Ctx`\>(`options`?): () => `ComplexityExtension`\<`Ctx`\>
+> **complexityExtension**\<`Ctx`\>(`options`?): () => `Extension`
 
 ## Type Parameters
 
@@ -18,4 +18,4 @@
 
 ### Returns
 
-`ComplexityExtension`\<`Ctx`\>
+`Extension`

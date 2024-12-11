@@ -20,7 +20,7 @@
 
 ##### info
 
-`SubscriptionInfo`
+[`SubscriptionInfo`](../interfaces/SubscriptionInfo.md)
 
 #### Returns
 
@@ -62,7 +62,7 @@
 
 ### getSubscriptions()
 
-> **getSubscriptions**(`topic`): `Promise`\<`SubscriptionInfo`[]\>
+> **getSubscriptions**(`topic`): `Promise`\<[`SubscriptionInfo`](../interfaces/SubscriptionInfo.md)[]\>
 
 #### Parameters
 
@@ -72,4 +72,4 @@
 
 #### Returns
 
-`Promise`\<`SubscriptionInfo`[]\>
+`Promise`\<[`SubscriptionInfo`](../interfaces/SubscriptionInfo.md)[]\>

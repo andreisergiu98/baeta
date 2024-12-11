@@ -12,7 +12,7 @@
 
 ### options
 
-`InputDirectiveOptions`\<`DirectiveConfig`, `Context`\>
+[`InputDirectiveOptions`](../type-aliases/InputDirectiveOptions.md)\<`DirectiveConfig`, `Context`\>
 
 ## Returns
 

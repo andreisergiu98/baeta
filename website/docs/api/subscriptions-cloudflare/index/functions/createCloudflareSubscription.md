@@ -10,7 +10,7 @@
 
 • **ContextParams**
 
-• **PubSubMap** _extends_ `DefaultPubSubMap` = `DefaultPubSubMap`
+• **PubSubMap** _extends_ `Record`\<`string`, `any`\> = `Record`\<`string`, `any`\>
 
 ## Parameters
 
@@ -50,11 +50,25 @@
 
 ### createWsConnectionsClass()
 
-> **createWsConnectionsClass**: () => _typeof_ `BaetaWsConnections`
+> **createWsConnectionsClass**: () => (`state`, `env`) => `DurableObject`
 
 #### Returns
 
-_typeof_ `BaetaWsConnections`
+`Function`
+
+##### Parameters
+
+###### state
+
+`DurableObjectState`
+
+###### env
+
+`Env`
+
+##### Returns
+
+`DurableObject`
 
 ### handleWS()
 

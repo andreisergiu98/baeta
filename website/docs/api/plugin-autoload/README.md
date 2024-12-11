@@ -2,7 +2,9 @@
 
 ## Interfaces
 
+- [AutoloadModuleOptions](interfaces/AutoloadModuleOptions.md)
 - [AutoloadPluginOptions](interfaces/AutoloadPluginOptions.md)
+- [AutoloadResolverOptions](interfaces/AutoloadResolverOptions.md)
 
 ## Functions
 

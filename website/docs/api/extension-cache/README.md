@@ -2,20 +2,24 @@
 
 ## Classes
 
-- [CacheExtension](classes/CacheExtension.md)
 - [CacheRef](classes/CacheRef.md)
 - [Store](classes/Store.md)
 - [StoreAdapter](classes/StoreAdapter.md)
 
 ## Interfaces
 
+- [CacheMiddlewareOptions](interfaces/CacheMiddlewareOptions.md)
 - [DefaultStoreOptions](interfaces/DefaultStoreOptions.md)
+- [RequiredCacheMiddlewareOptions](interfaces/RequiredCacheMiddlewareOptions.md)
 - [StoreOptions](interfaces/StoreOptions.md)
 
 ## Type Aliases
 
+- [CacheArgs](type-aliases/CacheArgs.md)
+- [CacheQueryMatching](type-aliases/CacheQueryMatching.md)
 - [ItemRef](type-aliases/ItemRef.md)
 - [ParentRef](type-aliases/ParentRef.md)
+- [RefCompatibleRoot](type-aliases/RefCompatibleRoot.md)
 
 ## Functions
 

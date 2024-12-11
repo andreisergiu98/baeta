@@ -4,7 +4,7 @@
 
 ## Type Parameters
 
-• **Map** _extends_ `DefaultPubSubMap`
+• **Map** _extends_ `Record`\<`string`, `any`\>
 
 ## Type Parameters
 

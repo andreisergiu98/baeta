@@ -1,3 +1,5 @@
+import type { PubSubEngineV2, PubSubEngineV3 } from './pubsub-engine.ts';
+
 export interface TypedPubSubOptions {
 	prefix?: string;
 }
@@ -7,23 +9,6 @@ type Any = any;
 
 type PubSubMap = Record<string, Any>;
 type OnMessage<Payload> = (message: Payload) => Promise<void> | void;
-
-interface PubSubEngineBase {
-	publish: (triggerName: string, payload: Any, ...rest: Any[]) => Promise<void>;
-	subscribe: (triggerName: string, onMessage: OnMessage<Any>, ...rest: Any[]) => Promise<number>;
-	unsubscribe: (subId: number, ...rest: Any[]) => void;
-}
-
-interface PubSubEngineV2 extends PubSubEngineBase {
-	asyncIterator: <T>(triggers: string | string[], ...rest: Any[]) => AsyncIterator<T>;
-}
-
-interface PubSubEngineV3 extends PubSubEngineBase {
-	asyncIterableIterator: <T>(
-		triggers: string | readonly string[],
-		...rest: Any[]
-	) => AsyncIterableIterator<T>;
-}
 
 type RestPayloadFnArgs<Fn> = Fn extends (
 	triggerName: string,
@@ -59,7 +44,7 @@ type RestAsyncIterableIteratorFnArgs<Fn> = Fn extends (
 	? Rest
 	: never;
 
-class TypedPubSubBase<Engine extends PubSubEngineBase, Map extends PubSubMap> {
+class TypedPubSubBase<Engine extends PubSubEngineV2 | PubSubEngineV3, Map extends PubSubMap> {
 	protected channelPrefix: string;
 
 	constructor(
@@ -110,6 +95,7 @@ class TypedPubSubV2<Engine extends PubSubEngineV2, Map extends PubSubMap> extend
 	};
 }
 
+/** @hidden */
 class TypedPubSubV3<Engine extends PubSubEngineV3, Map extends PubSubMap> extends TypedPubSubBase<
 	Engine,
 	Map
@@ -124,7 +110,8 @@ class TypedPubSubV3<Engine extends PubSubEngineV3, Map extends PubSubMap> extend
 
 export type TypedPubSub<
 	Engine extends PubSubEngineV2 | PubSubEngineV3,
-	Map extends PubSubMap,
+	// biome-ignore lint/suspicious/noExplicitAny: accept any for dynamic typing
+	Map extends Record<string, any>,
 > = Engine extends PubSubEngineV3
 	? TypedPubSubV3<Engine, Map>
 	: Engine extends PubSubEngineV2
@@ -133,7 +120,8 @@ export type TypedPubSub<
 
 export function createTypedPubSub<
 	Engine extends PubSubEngineV2 | PubSubEngineV3,
-	Map extends PubSubMap,
+	// biome-ignore lint/suspicious/noExplicitAny: accept any for dynamic typing
+	Map extends Record<string, any>,
 >(pubsub: Engine, options?: TypedPubSubOptions): TypedPubSub<Engine, Map> {
 	if ('asyncIterator' in pubsub) {
 		return new TypedPubSubV2<PubSubEngineV2, Map>(pubsub, options) as TypedPubSub<Engine, Map>;

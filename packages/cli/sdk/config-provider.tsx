@@ -11,9 +11,11 @@ export interface ConfigProps {
 	watchConfig?: boolean;
 }
 
-type ConfigEventMap = {
+export type ConfigEventMap = {
 	update: [LoadedBaetaConfig];
 };
+
+export type { LoadedBaetaConfig };
 
 export function useConfigStore(props: ConfigProps) {
 	const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);

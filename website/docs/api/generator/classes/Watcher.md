@@ -58,7 +58,7 @@
 
 ##### pattern
 
-`MatchPattern`
+[`MatchPattern`](../../generator-sdk/type-aliases/MatchPattern.md)
 
 #### Returns
 
@@ -134,7 +134,7 @@
 
 ##### pattern
 
-`MatchPattern`
+[`MatchPattern`](../../generator-sdk/type-aliases/MatchPattern.md)
 
 #### Returns
 

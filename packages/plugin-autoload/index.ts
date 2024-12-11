@@ -9,19 +9,19 @@ import {
 } from '@baeta/generator-sdk';
 import * as path from '@baeta/util-path';
 
-interface ResolverOptions {
+export interface AutoloadResolverOptions {
 	suffix?: string | string[];
 	disableDefaultSuffixes?: boolean;
 	match?: (filename: string) => boolean;
 }
 
-interface ModuleOptions {
+export interface AutoloadModuleOptions {
 	match?: (moduleName: string) => boolean;
 }
 
 export interface AutoloadPluginOptions {
-	resolvers?: boolean | ResolverOptions;
-	modules?: boolean | ModuleOptions;
+	resolvers?: boolean | AutoloadResolverOptions;
+	modules?: boolean | AutoloadModuleOptions;
 	output?: string;
 }
 

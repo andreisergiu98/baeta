@@ -1,7 +1,5 @@
 // biome-ignore lint/suspicious/noExplicitAny: Accepts any generic function
-type GenericFn = (...args: any[]) => any;
-
-export function nameFunction(fn: GenericFn | undefined, name: string) {
+export function nameFunction(fn: (...args: any[]) => any | undefined, name: string) {
 	if (!fn) {
 		return;
 	}
@@ -15,7 +13,11 @@ export function nameFunction(fn: GenericFn | undefined, name: string) {
 	});
 }
 
-export function extendFunction<B extends GenericFn, M extends {}>(fn: B, ext: M): B & M {
+// biome-ignore lint/suspicious/noExplicitAny: Accepts any generic function
+export function extendFunction<B extends (...args: any[]) => any, M extends {}>(
+	fn: B,
+	ext: M,
+): B & M {
 	const fnExtended = fn as B & M;
 	const entries = Object.entries(ext);
 

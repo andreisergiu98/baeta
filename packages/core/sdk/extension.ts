@@ -18,6 +18,8 @@ declare global {
 	}
 }
 
+export type { BaetaExtensions };
+
 export enum ExtensionVersion {
 	V1 = 'v1',
 }

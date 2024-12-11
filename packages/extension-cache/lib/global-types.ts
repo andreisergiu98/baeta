@@ -1,6 +1,9 @@
-import type { MiddlewareOptions, RequiredMiddlewareOptions } from './middleware-options.ts';
+import type {
+	CacheMiddlewareOptions,
+	RequiredCacheMiddlewareOptions,
+} from './middleware-options.ts';
 import type { CacheRef, RefCompatibleRoot } from './ref.ts';
-import type { QueryMatching, StoreAdapter } from './store-adapter.ts';
+import type { CacheQueryMatching, StoreAdapter } from './store-adapter.ts';
 import type { RequiredStoreOptions, StoreOptions } from './store-options.ts';
 
 export type TypeGetter<T> = NonNullable<T> extends Array<infer G> ? NonNullable<G> : NonNullable<T>;
@@ -10,8 +13,8 @@ export type CreateCacheArgs<Root> = Root extends RefCompatibleRoot
 	: [options: RequiredStoreOptions<Root>];
 
 export type UseCacheArgs<Result, Root> = Root extends RefCompatibleRoot
-	? [store: StoreAdapter<TypeGetter<Result>>, options?: MiddlewareOptions<Root>]
-	: [store: StoreAdapter<TypeGetter<Result>>, options: RequiredMiddlewareOptions<Root>];
+	? [store: StoreAdapter<TypeGetter<Result>>, options?: CacheMiddlewareOptions<Root>]
+	: [store: StoreAdapter<TypeGetter<Result>>, options: RequiredCacheMiddlewareOptions<Root>];
 
 declare global {
 	export namespace BaetaExtensions {
@@ -24,7 +27,7 @@ declare global {
 			$cacheRevision: (number: number) => void;
 			$cacheClear: (
 				store: StoreAdapter<TypeGetter<Result>>,
-				matcher?: QueryMatching<Args>,
+				matcher?: CacheQueryMatching<Args>,
 			) => Promise<void>;
 			$useCache: (...args: UseCacheArgs<Result, Root>) => void;
 		}

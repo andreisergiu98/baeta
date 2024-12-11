@@ -6,7 +6,7 @@
 
 ### fn
 
-`undefined` | `GenericFn`
+(...`args`) => `any`
 
 ### name
 

@@ -18,7 +18,7 @@
 
 ### events
 
-> **events**: `EventEmitter`\<`ConfigEventMap`\>
+> **events**: `EventEmitter`\<[`ConfigEventMap`](../type-aliases/ConfigEventMap.md)\>
 
 ### location
 

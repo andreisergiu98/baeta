@@ -5,7 +5,7 @@ import { getAuthStore } from './store.ts';
 
 export type Scopes = keyof AuthExtension.Scopes;
 
-type ScopeRule<T> = T extends boolean ? true : T;
+export type ScopeRule<T> = T extends boolean ? true : T;
 
 export type ScopeRules = {
 	[K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]>;

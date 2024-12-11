@@ -6,7 +6,7 @@
 
 ### options
 
-`HooksOptions`
+[`HooksOptions`](../interfaces/HooksOptions.md)
 
 ## Returns
 

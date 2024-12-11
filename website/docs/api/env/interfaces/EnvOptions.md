@@ -2,11 +2,11 @@
 
 ## Type Parameters
 
-• **T** _extends_ `Types`
+• **T** _extends_ [`EnvTypes`](../type-aliases/EnvTypes.md)
 
 • **R** _extends_ `boolean` \| `undefined`
 
-• **D** _extends_ `InferType`\<`T`\> \| `undefined`
+• **D** _extends_ [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> \| `undefined`
 
 ## Properties
 
@@ -24,7 +24,7 @@
 
 ### resolver()?
 
-> `optional` **resolver**: (`value`) => `InferType`\<`T`\>
+> `optional` **resolver**: (`value`) => [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
 
 #### Parameters
 
@@ -34,7 +34,7 @@
 
 #### Returns
 
-`InferType`\<`T`\>
+[`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
 
 ---
 

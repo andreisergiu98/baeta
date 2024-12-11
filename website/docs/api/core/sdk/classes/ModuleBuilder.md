@@ -144,7 +144,7 @@
 
 ### createModuleMethods()
 
-> **createModuleMethods**\<`Context`\>(): `ModuleExtensions` & `object`
+> **createModuleMethods**\<`Context`\>(): [`ModuleExtensions`](../namespaces/BaetaExtensions/interfaces/ModuleExtensions.md) & `object`
 
 #### Type Parameters
 
@@ -152,13 +152,13 @@
 
 #### Returns
 
-`ModuleExtensions` & `object`
+[`ModuleExtensions`](../namespaces/BaetaExtensions/interfaces/ModuleExtensions.md) & `object`
 
 ---
 
 ### createResolverBuilder()
 
-> **createResolverBuilder**\<`Result`, `Root`, `Context`, `Args`\>(`type`, `field`): (`resolver`) => `void` & `ResolverExtensions`\<`Result`, `Root`, `Context`, `Args`\> & `object`
+> **createResolverBuilder**\<`Result`, `Root`, `Context`, `Args`\>(`type`, `field`): (`resolver`) => `void` & [`ResolverExtensions`](../namespaces/BaetaExtensions/interfaces/ResolverExtensions.md)\<`Result`, `Root`, `Context`, `Args`\> & `object`
 
 #### Type Parameters
 
@@ -182,7 +182,7 @@
 
 #### Returns
 
-(`resolver`) => `void` & `ResolverExtensions`\<`Result`, `Root`, `Context`, `Args`\> & `object`
+(`resolver`) => `void` & [`ResolverExtensions`](../namespaces/BaetaExtensions/interfaces/ResolverExtensions.md)\<`Result`, `Root`, `Context`, `Args`\> & `object`
 
 ---
 
@@ -274,7 +274,7 @@
 
 ### createSubscriptionMethods()
 
-> **createSubscriptionMethods**\<`Root`, `Context`\>(): `TypeExtensions`\<`Root`, `Context`\> & `object` & `object`
+> **createSubscriptionMethods**\<`Root`, `Context`\>(): [`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object` & `object`
 
 #### Type Parameters
 
@@ -284,13 +284,13 @@
 
 #### Returns
 
-`TypeExtensions`\<`Root`, `Context`\> & `object` & `object`
+[`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object` & `object`
 
 ---
 
 ### createTypeMethods()
 
-> **createTypeMethods**\<`Root`, `Context`\>(`type`): `TypeExtensions`\<`Root`, `Context`\> & `object`
+> **createTypeMethods**\<`Root`, `Context`\>(`type`): [`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object`
 
 #### Type Parameters
 
@@ -306,4 +306,4 @@
 
 #### Returns
 
-`TypeExtensions`\<`Root`, `Context`\> & `object`
+[`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object`

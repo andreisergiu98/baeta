@@ -20,6 +20,6 @@ Options for the graphql generator.
 
 ### plugins?
 
-> `optional` **plugins**: `Plugins`
+> `optional` **plugins**: [`Plugins`](../type-aliases/Plugins.md)
 
 Plugins to run.

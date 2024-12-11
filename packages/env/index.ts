@@ -1,30 +1,30 @@
-type Types = 'string' | 'number' | 'boolean';
+export type EnvTypes = 'string' | 'number' | 'boolean';
 
-type InferType<T extends Types> = T extends 'string'
+export type EnvInferType<T extends EnvTypes> = T extends 'string'
 	? string
 	: T extends 'number'
 		? number
 		: boolean;
 
 type InferTypeFromOptions<
-	O extends EnvOptions<Types, boolean | undefined, InferType<Types> | undefined>,
+	O extends EnvOptions<EnvTypes, boolean | undefined, EnvInferType<EnvTypes> | undefined>,
 > = O extends EnvOptions<infer T, infer R, infer D>
 	? R extends true
-		? InferType<T>
+		? EnvInferType<T>
 		: D extends undefined
-			? InferType<T> | undefined
-			: InferType<T>
+			? EnvInferType<T> | undefined
+			: EnvInferType<T>
 	: never;
 
 export interface EnvOptions<
-	T extends Types,
+	T extends EnvTypes,
 	R extends boolean | undefined,
-	D extends InferType<T> | undefined,
+	D extends EnvInferType<T> | undefined,
 > {
 	required?: R;
 	default?: D;
 	type: T;
-	resolver?: (value: string) => InferType<T>;
+	resolver?: (value: string) => EnvInferType<T>;
 }
 
 function resolveString(value: string) {
@@ -40,9 +40,9 @@ function resolveBoolean(value: string) {
 }
 
 function resolveParam<
-	T extends Types,
+	T extends EnvTypes,
 	R extends boolean | undefined,
-	D extends InferType<T> | undefined,
+	D extends EnvInferType<T> | undefined,
 >(key: string, options: EnvOptions<T, R, D>, rawValue: string | undefined) {
 	if (!rawValue) {
 		return options.default;
@@ -75,9 +75,9 @@ function resolveParam<
 }
 
 function validateValue<
-	T extends Types,
+	T extends EnvTypes,
 	R extends boolean | undefined,
-	D extends InferType<T> | undefined,
+	D extends EnvInferType<T> | undefined,
 >(key: string, value: string | number | boolean | undefined, options: EnvOptions<T, R, D>) {
 	if (value == null && options.required !== true) {
 		return;
@@ -105,9 +105,9 @@ function validateValue<
 
 export function createEnvParser(getValue: (key: string) => string | undefined) {
 	return function parse<
-		T extends Types,
+		T extends EnvTypes,
 		R extends boolean | undefined,
-		D extends InferType<T> | undefined,
+		D extends EnvInferType<T> | undefined,
 	>(key: string, options: EnvOptions<T, R, D>) {
 		const value = resolveParam(key, options, getValue(key));
 		validateValue(key, value, options);

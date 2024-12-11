@@ -4,9 +4,9 @@
 
 ## Type Parameters
 
-• **Engine** _extends_ `PubSubEngineV2` \| `PubSubEngineV3`
+• **Engine** _extends_ [`PubSubEngineV2`](../interfaces/PubSubEngineV2.md) \| [`PubSubEngineV3`](../interfaces/PubSubEngineV3.md)
 
-• **Map** _extends_ `PubSubMap`
+• **Map** _extends_ `Record`\<`string`, `any`\>
 
 ## Parameters
 

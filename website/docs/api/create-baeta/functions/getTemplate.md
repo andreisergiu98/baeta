@@ -1,6 +1,6 @@
 # Function: getTemplate()
 
-> **getTemplate**(`reqTemplate`): `Promise`\<`Template`\>
+> **getTemplate**(`reqTemplate`): `Promise`\<[`Template`](../type-aliases/Template.md)\>
 
 ## Parameters
 
@@ -10,4 +10,4 @@
 
 ## Returns
 
-`Promise`\<`Template`\>
+`Promise`\<[`Template`](../type-aliases/Template.md)\>

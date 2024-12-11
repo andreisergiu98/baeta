@@ -4,7 +4,7 @@ import type { Action, GetAction, ListAction, PutAction } from './baeta-cache.ts'
 export class CloudflareCacheClient {
 	constructor(public durableObject: DurableObjectNamespace) {}
 
-	protected async post(body: Action) {
+	private async post(body: Action) {
 		const stubId = this.durableObject.idFromString('');
 		const stub = this.durableObject.get(stubId);
 		return stub.fetch('https://baeta-cache-durable-object.internal', {

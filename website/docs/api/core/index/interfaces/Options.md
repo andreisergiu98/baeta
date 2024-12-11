@@ -4,7 +4,7 @@
 
 ### executableSchemaOptions?
 
-> `optional` **executableSchemaOptions**: `ExecutableSchemaOptions`
+> `optional` **executableSchemaOptions**: [`ExecutableSchemaOptions`](../type-aliases/ExecutableSchemaOptions.md)
 
 Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
 

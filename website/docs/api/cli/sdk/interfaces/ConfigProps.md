@@ -4,7 +4,7 @@
 
 ### initialConfig
 
-> **initialConfig**: `LoadedBaetaConfig`
+> **initialConfig**: [`LoadedBaetaConfig`](LoadedBaetaConfig.md)
 
 ---
 

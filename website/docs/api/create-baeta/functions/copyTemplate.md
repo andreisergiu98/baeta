@@ -14,7 +14,7 @@
 
 ### template
 
-`Template`
+[`Template`](../type-aliases/Template.md)
 
 ### dest
 

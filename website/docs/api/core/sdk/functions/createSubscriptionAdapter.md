@@ -18,7 +18,7 @@
 
 ### subscription
 
-`Subscription`\<`Payload`, `Result`, `Root`, `Context`, `Args`\>
+[`Subscription`](../../index/type-aliases/Subscription.md)\<`Payload`, `Result`, `Root`, `Context`, `Args`\>
 
 ## Returns
 

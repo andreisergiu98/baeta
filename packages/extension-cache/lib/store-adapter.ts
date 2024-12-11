@@ -4,11 +4,14 @@ import { log } from '@baeta/util-log';
 import DataLoader from 'dataloader';
 import { flatten } from 'flat';
 import type { CacheArgs } from './cache-args.ts';
-import type { MiddlewareOptions, RequiredMiddlewareOptions } from './middleware-options.ts';
+import type {
+	CacheMiddlewareOptions,
+	RequiredCacheMiddlewareOptions,
+} from './middleware-options.ts';
 import type { CacheRef, ItemRef, ParentRef, RefCompatibleRoot } from './ref.ts';
 import type { StoreOptions } from './store-options.ts';
 
-export type QueryMatching<Args> = {
+export type CacheQueryMatching<Args> = {
 	parentRef?: ParentRef;
 	args?: CacheArgs<Args>;
 };
@@ -120,14 +123,14 @@ export abstract class StoreAdapter<Item> {
 
 	deleteQueries = <Result, Root, Args>(
 		queryRef?: CacheRef<Result, Root, Args>,
-		matcher?: QueryMatching<Args>,
+		matcher?: CacheQueryMatching<Args>,
 	) => {
 		return this.deleteQueriesByRef(queryRef?.toString(), matcher?.parentRef, matcher?.args);
 	};
 
 	getQueryResult = async <Result, Root, Args>(
 		queryRef: CacheRef<Result, Root, Args>,
-		matcher?: QueryMatching<Args>,
+		matcher?: CacheQueryMatching<Args>,
 	) => {
 		const meta = await this.loadQueryMetadata(
 			queryRef.toString(),
@@ -160,7 +163,7 @@ export abstract class StoreAdapter<Item> {
 	saveQueryResult = async <Result, Root, Args>(
 		queryRef: CacheRef<Result, Root, Args>,
 		data: Result,
-		matcher?: QueryMatching<Args>,
+		matcher?: CacheQueryMatching<Args>,
 	) => {
 		const isList = Array.isArray(data);
 		const isListIndicator = isList ? '1' : '0';
@@ -187,8 +190,8 @@ export abstract class StoreAdapter<Item> {
 	createMiddleware = <Result extends null | Item | Item[] | Array<Item | null>, Root, Args>(
 		queryRef: CacheRef<Result, Root, Args>,
 		...args: Root extends RefCompatibleRoot
-			? [options?: MiddlewareOptions<Root>]
-			: [options: RequiredMiddlewareOptions<Root>]
+			? [options?: CacheMiddlewareOptions<Root>]
+			: [options: RequiredCacheMiddlewareOptions<Root>]
 	): Middleware<Result, Root, unknown, Args> => {
 		return async (params, next): Promise<Result> => {
 			const [options] = args;

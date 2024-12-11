@@ -266,7 +266,7 @@
 
 ##### args
 
-...`Root` _extends_ `RefCompatibleRoot` ? [`MiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredMiddlewareOptions`\<`Root`\>]
+...`Root` _extends_ [`RefCompatibleRoot`](../type-aliases/RefCompatibleRoot.md) ? [[`CacheMiddlewareOptions`](../interfaces/CacheMiddlewareOptions.md)\<`Root`\<`Root`\>\>] : [[`RequiredCacheMiddlewareOptions`](../interfaces/RequiredCacheMiddlewareOptions.md)\<`Root`\>]
 
 #### Returns
 
@@ -414,7 +414,7 @@
 
 ##### matcher?
 
-`QueryMatching`\<`Args`\>
+[`CacheQueryMatching`](../type-aliases/CacheQueryMatching.md)\<`Args`\>
 
 #### Returns
 
@@ -546,7 +546,7 @@
 
 ##### matcher?
 
-`QueryMatching`\<`Args`\>
+[`CacheQueryMatching`](../type-aliases/CacheQueryMatching.md)\<`Args`\>
 
 #### Returns
 
@@ -672,7 +672,7 @@ readonly [`ItemRef`](../type-aliases/ItemRef.md)[]
 
 ##### matcher?
 
-`QueryMatching`\<`Args`\>
+[`CacheQueryMatching`](../type-aliases/CacheQueryMatching.md)\<`Args`\>
 
 #### Returns
 

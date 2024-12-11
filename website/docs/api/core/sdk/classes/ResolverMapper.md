@@ -14,25 +14,25 @@
 
 ### middlewares
 
-> `readonly` **middlewares**: `MiddlewareMap`
+> `readonly` **middlewares**: [`MiddlewareMap`](../type-aliases/MiddlewareMap.md)
 
 ---
 
 ### prependedMiddlewares
 
-> `readonly` **prependedMiddlewares**: `MiddlewareMap`
+> `readonly` **prependedMiddlewares**: [`MiddlewareMap`](../type-aliases/MiddlewareMap.md)
 
 ---
 
 ### resolvers
 
-> `readonly` **resolvers**: `ResolversMap`
+> `readonly` **resolvers**: [`ResolversMap`](../type-aliases/ResolversMap.md)
 
 ---
 
 ### scalars
 
-> `readonly` **scalars**: `ScalarsMap`
+> `readonly` **scalars**: [`ScalarsMap`](../type-aliases/ScalarsMap.md)
 
 ---
 
@@ -100,7 +100,7 @@
 
 ##### map
 
-`MiddlewareMap`
+[`MiddlewareMap`](../type-aliases/MiddlewareMap.md)
 
 ##### type
 

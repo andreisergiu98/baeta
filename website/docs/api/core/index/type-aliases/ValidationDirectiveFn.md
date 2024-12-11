@@ -12,7 +12,7 @@
 
 ### params
 
-`ValidationDirectiveFnParams`\<`DirectiveConfig`, `Context`\>
+[`ValidationDirectiveFnParams`](ValidationDirectiveFnParams.md)\<`DirectiveConfig`, `Context`\>
 
 ## Returns
 

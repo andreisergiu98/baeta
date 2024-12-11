@@ -1,9 +1,4 @@
-interface Migration {
-	name: string;
-	sql: string;
-}
-
-const migration0: Migration = {
+const migration0 = {
 	name: '0-baeta-subscription-init',
 	sql: `
 CREATE TABLE Subscriptions (
@@ -16,4 +11,4 @@ CREATE TABLE Subscriptions (
 `,
 };
 
-export const databaseMigrations: Migration[] = [migration0];
+export const databaseMigrations = [migration0];

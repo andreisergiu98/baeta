@@ -1,6 +1,6 @@
 # Function: cacheExtension()
 
-> **cacheExtension**(`store`, `options`?): () => [`CacheExtension`](../classes/CacheExtension.md)
+> **cacheExtension**(`store`, `options`?): () => `Extension`
 
 ## Parameters
 
@@ -18,4 +18,4 @@
 
 ### Returns
 
-[`CacheExtension`](../classes/CacheExtension.md)
+`Extension`

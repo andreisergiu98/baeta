@@ -1,9 +1,9 @@
 # Type Alias: ScopeRules
 
-> **ScopeRules**: `{ [K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]> }` & `{ [r in LogicRule]?: ScopeRules }` & `object`
+> **ScopeRules**: `{ [K in Scopes]?: ScopeRule<Scopes[K]> }` & `{ [r in LogicRule]?: ScopeRules }` & `object`
 
 ## Type declaration
 
 ### $granted?
 
-> `optional` **$granted**: `AuthExtension.Grants`
+> `optional` **$granted**: [`Grants`](../namespaces/AuthExtension/type-aliases/Grants.md)

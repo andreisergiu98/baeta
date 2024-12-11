@@ -112,22 +112,6 @@
 
 ---
 
-### post()
-
-> `protected` **post**(`body`): `Promise`\<`Response`\>
-
-#### Parameters
-
-##### body
-
-`Action`
-
-#### Returns
-
-`Promise`\<`Response`\>
-
----
-
 ### put()
 
 > **put**(`values`, `ttl`?): `Promise`\<`null`\>

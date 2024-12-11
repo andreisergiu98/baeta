@@ -4,7 +4,7 @@
 
 ### modules?
 
-> `optional` **modules**: `boolean` \| `ModuleOptions`
+> `optional` **modules**: `boolean` \| [`AutoloadModuleOptions`](AutoloadModuleOptions.md)
 
 ---
 
@@ -16,4 +16,4 @@
 
 ### resolvers?
 
-> `optional` **resolvers**: `boolean` \| `ResolverOptions`
+> `optional` **resolvers**: `boolean` \| [`AutoloadResolverOptions`](AutoloadResolverOptions.md)

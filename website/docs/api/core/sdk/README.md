@@ -2,6 +2,10 @@
 
 ## Index
 
+### Namespaces
+
+- [BaetaExtensions](namespaces/BaetaExtensions/README.md)
+
 ### Enumerations
 
 - [ExtensionVersion](enumerations/ExtensionVersion.md)
@@ -19,11 +23,17 @@
 ### Type Aliases
 
 - [ExtensionFactory](type-aliases/ExtensionFactory.md)
+- [FieldResolvers](type-aliases/FieldResolvers.md)
+- [MiddlewareMap](type-aliases/MiddlewareMap.md)
 - [NativeMiddleware](type-aliases/NativeMiddleware.md)
 - [NativeResolver](type-aliases/NativeResolver.md)
 - [NativeSubscription](type-aliases/NativeSubscription.md)
+- [NativeSubscriptionSubscribe](type-aliases/NativeSubscriptionSubscribe.md)
 - [NativeTypeResolver](type-aliases/NativeTypeResolver.md)
+- [ResolversMap](type-aliases/ResolversMap.md)
+- [ScalarsMap](type-aliases/ScalarsMap.md)
 - [SchemaTransformer](type-aliases/SchemaTransformer.md)
+- [SubscriptionsResolvers](type-aliases/SubscriptionsResolvers.md)
 - [TypeHash](type-aliases/TypeHash.md)
 - [TypeHashMap](type-aliases/TypeHashMap.md)
 
@@ -39,6 +49,7 @@
 - [extendFunction](functions/extendFunction.md)
 - [getModuleBuilder](functions/getModuleBuilder.md)
 - [mergeExtensions](functions/mergeExtensions.md)
+- [mergeMiddlewareMaps](functions/mergeMiddlewareMaps.md)
 - [nameFunction](functions/nameFunction.md)
 - [resolveExtensions](functions/resolveExtensions.md)
 - [transformSchema](functions/transformSchema.md)

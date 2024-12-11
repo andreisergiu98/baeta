@@ -1,9 +1,9 @@
 import type { ItemRef } from './ref.ts';
 
-export interface MiddlewareOptions<Root> {
+export interface CacheMiddlewareOptions<Root> {
 	getRootRef?: (root: Root) => ItemRef;
 }
 
-export interface RequiredMiddlewareOptions<Root> extends MiddlewareOptions<Root> {
+export interface RequiredCacheMiddlewareOptions<Root> extends CacheMiddlewareOptions<Root> {
 	getRootRef: (root: Root) => ItemRef;
 }

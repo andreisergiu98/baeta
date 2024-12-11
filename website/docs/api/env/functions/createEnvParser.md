@@ -1,6 +1,6 @@
 # Function: createEnvParser()
 
-> **createEnvParser**(`getValue`): \<`T`, `R`, `D`\>(`key`, `options`) => `R` _extends_ `true` ? `InferType`\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| `InferType`\<`T`\> : `InferType`\<`T`\>
+> **createEnvParser**(`getValue`): \<`T`, `R`, `D`\>(`key`, `options`) => `R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
 
 ## Parameters
 
@@ -14,7 +14,7 @@
 
 ### Type Parameters
 
-• **T** _extends_ `Types`
+• **T** _extends_ [`EnvTypes`](../type-aliases/EnvTypes.md)
 
 • **R** _extends_ `undefined` \| `boolean`
 
@@ -32,4 +32,4 @@
 
 ### Returns
 
-`R` _extends_ `true` ? `InferType`\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| `InferType`\<`T`\> : `InferType`\<`T`\>
+`R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>

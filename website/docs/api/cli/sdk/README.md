@@ -7,7 +7,13 @@
 - [ConfigProps](interfaces/ConfigProps.md)
 - [ErrorsProps](interfaces/ErrorsProps.md)
 - [LayoutProps](interfaces/LayoutProps.md)
+- [LoadedBaetaConfig](interfaces/LoadedBaetaConfig.md)
 - [TimeProps](interfaces/TimeProps.md)
+
+### Type Aliases
+
+- [ConfigEventMap](type-aliases/ConfigEventMap.md)
+- [TextOutput](type-aliases/TextOutput.md)
 
 ### Variables
 

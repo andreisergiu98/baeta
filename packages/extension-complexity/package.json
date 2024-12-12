@@ -74,9 +74,6 @@
       "--experimental-transform-types"
     ]
   },
-  "dependencies": {
-    "@baeta/errors": "workspace:^"
-  },
   "typedocOptions": {
     "entryPoints": [
       "./index.ts"

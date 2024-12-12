@@ -1,5 +1,27 @@
 # Class: KeyvStore
 
+Keyv-based cache store implementation.
+
+## Remarks
+
+Not recommended for production environments with high query volumes.
+Consider using Redis or Upstash for production deployments.
+
+## Example
+
+```typescript
+import { KeyvStore } from "@baeta/extension-cache-keyv";
+import Keyv from "keyv";
+
+const keyv = new Keyv();
+const store = new KeyvStore(keyv);
+
+// Use with cache extension
+const cacheExt = cacheExtension(store, {
+  ttl: 3600,
+});
+```
+
 ## Extends
 
 - `Store`

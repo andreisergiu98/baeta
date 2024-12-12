@@ -2,6 +2,30 @@ import { Store, type StoreAdapter, type StoreOptions } from '@baeta/extension-ca
 import type { Redis } from '@upstash/redis';
 import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
 
+/**
+ * Upstash Redis-based cache store implementation.
+ * Provides a serverless-optimized caching solution ideal for edge and serverless environments.
+ *
+ * @remarks
+ * This implementation uses Upstash Redis and is designed for serverless architectures.
+ *
+ * @example
+ * ```typescript
+ * import { UpstashStore } from '@baeta/extension-cache-upstash';
+ * import { Redis } from '@upstash/redis';
+ *
+ * const redis = new Redis({
+ *   url: "UPSTASH_REDIS_URL",
+ *   token: "UPSTASH_REDIS_TOKEN",
+ * });
+ * const store = new UpstashStore(redis);
+ *
+ * // Use with cache extension
+ * const cacheExt = cacheExtension(store, {
+ *   ttl: 3600
+ * });
+ * ```
+ */
 export class UpstashStore extends Store {
 	constructor(protected client: Redis) {
 		super();

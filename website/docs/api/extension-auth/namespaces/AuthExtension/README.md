@@ -1,5 +1,7 @@
 # AuthExtension
 
+Define the scopes available in your application.
+
 ## Index
 
 ### Interfaces

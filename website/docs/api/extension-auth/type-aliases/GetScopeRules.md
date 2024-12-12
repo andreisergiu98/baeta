@@ -2,6 +2,8 @@
 
 > **GetScopeRules**\<`Root`, `Context`, `Args`\>: (`params`) => `boolean` \| [`ScopeRules`](ScopeRules.md) \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\>
 
+Function to get scope rules for pre-resolution authorization
+
 ## Type Parameters
 
 • **Root**

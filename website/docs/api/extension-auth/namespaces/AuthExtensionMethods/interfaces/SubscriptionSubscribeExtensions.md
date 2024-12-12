@@ -1,5 +1,7 @@
 # Interface: SubscriptionSubscribeExtensions\<Root, Context, Args\>
 
+Authorization methods for subscription subscribe phase.
+
 ## Type Parameters
 
 • **Root**
@@ -14,9 +16,13 @@
 
 > **$auth**: (`scopes`, `options`?) => `void`
 
+Checks authorization before subscribe.
+
 #### Parameters
 
 ##### scopes
+
+Authorization rules to check
 
 [`ScopeRules`](../../../type-aliases/ScopeRules.md) | [`GetScopeRules`](../../../type-aliases/GetScopeRules.md)\<`Root`, `Context`, `Args`\>
 
@@ -24,6 +30,17 @@
 
 [`AuthMethodSubscribeOptions`](../../../interfaces/AuthMethodSubscribeOptions.md)\<`Root`, `Context`, `Args`\>
 
+Additional authorization options
+
 #### Returns
 
 `void`
+
+#### Example
+
+```typescript
+Subscription.userUpdated.subscribe.$auth({
+  isLoggedIn: true,
+  hasRole: "admin",
+});
+```

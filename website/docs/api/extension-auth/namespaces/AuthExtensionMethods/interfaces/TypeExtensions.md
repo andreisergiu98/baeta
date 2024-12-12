@@ -1,5 +1,7 @@
 # Interface: TypeExtensions\<Root, Context\>
 
+Authorization methods that apply to all fields of a GraphQL type.
+
 ## Type Parameters
 
 • **Root**
@@ -11,6 +13,9 @@
 ### $auth()
 
 > **$auth**: (`scopes`, `options`?) => `void`
+
+Checks authorization before field resolution.
+Applied to all fields of the type.
 
 #### Parameters
 
@@ -31,6 +36,10 @@
 ### $postAuth()
 
 > **$postAuth**: (`getScopes`, `options`?) => `void`
+
+Checks authorization after field resolution.
+Applied to all fields of the type.
+Useful when authorization depends on resolved field values.
 
 #### Parameters
 

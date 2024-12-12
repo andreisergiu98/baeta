@@ -2,6 +2,8 @@
 
 > **GetPostScopeRules**\<`Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => `boolean` \| [`ScopeRules`](ScopeRules.md) \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\>
 
+Function to get scope rules for post-resolution authorization
+
 ## Type Parameters
 
 • **Result**

@@ -2,6 +2,9 @@
 
 > **GetGrantFn**\<`Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => `any`[] \| `PromiseLike`\<`any`[]\>
 
+Function that determines grants based on resolver parameters and result.
+Used for dynamic permission granting based on resolved data.
+
 ## Type Parameters
 
 • **Result**

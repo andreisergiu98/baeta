@@ -6,7 +6,7 @@ import type { ItemRef } from './ref.ts';
 export interface DefaultStoreOptions {
 	/**
 	 * Time-to-live in seconds
-	 * @default 3600
+	 * @defaultValue 3600
 	 */
 	ttl?: number;
 }

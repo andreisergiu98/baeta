@@ -2,10 +2,238 @@
 
 ## Interfaces
 
-- [AutoloadModuleOptions](interfaces/AutoloadModuleOptions.md)
-- [AutoloadPluginOptions](interfaces/AutoloadPluginOptions.md)
-- [AutoloadResolverOptions](interfaces/AutoloadResolverOptions.md)
+### AutoloadModuleOptions
+
+#### Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`match?`
+
+</td>
+<td>
+
+(`moduleName`: `string`) => `boolean`
+
+</td>
+<td>
+
+Custom function to determine if a module should be included
+
+</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+### AutoloadPluginOptions
+
+#### Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`modules?`
+
+</td>
+<td>
+
+`boolean` \| [`AutoloadModuleOptions`](index.md#autoloadmoduleoptions)
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Configuration for module autoloading. Set to false to disable
+
+</td>
+</tr>
+<tr>
+<td>
+
+`output?`
+
+</td>
+<td>
+
+`string`
+
+</td>
+<td>
+
+```ts
+`${modulesDir}/autoload.ts`;
+```
+
+</td>
+<td>
+
+Output path for the generated autoload file
+
+</td>
+</tr>
+<tr>
+<td>
+
+`resolvers?`
+
+</td>
+<td>
+
+`boolean` \| [`AutoloadResolverOptions`](index.md#autoloadresolveroptions)
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Configuration for resolver autoloading. Set to false to disable
+
+</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+### AutoloadResolverOptions
+
+#### Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`disableDefaultSuffixes?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+If true, disables the default resolver suffixes
+
+</td>
+</tr>
+<tr>
+<td>
+
+`match?`
+
+</td>
+<td>
+
+(`filename`: `string`) => `boolean`
+
+</td>
+<td>
+
+Custom function to determine if a resolver file should be included
+
+</td>
+</tr>
+<tr>
+<td>
+
+`suffix?`
+
+</td>
+<td>
+
+`string` \| `string`[]
+
+</td>
+<td>
+
+Custom suffix(es) to identify resolver files
+Used together with the default suffixes, unless disabled
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Functions
 
-- [autoloadPlugin](functions/autoloadPlugin.md)
+### autoloadPlugin()
+
+> **autoloadPlugin**(`options`?): [`GeneratorPluginV1`](../generator/index.md#generatorpluginv1store)\<`unknown`\>
+
+A plugin that automatically loads GraphQL resolvers and modules based on file names.
+See https://baeta.io/docs/plugins/autoloading
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`options`?
+
+</td>
+<td>
+
+[`AutoloadPluginOptions`](index.md#autoloadpluginoptions)
+
+</td>
+<td>
+
+Configuration options for the autoload plugin
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+[`GeneratorPluginV1`](../generator/index.md#generatorpluginv1store)\<`unknown`\>
+
+A Baeta generator plugin

@@ -17,14 +17,14 @@ export interface CompilerOptions {
 
 	/**
 	 * If true the bundle will also include all dependencies
-	 * @default false
+	 * @defaultValue false
 	 */
 	bundleDeps?: boolean;
 
 	/**
 	 * If true the bundle will also include all workspace dependencies.
-	 * @default true // in watch mode
-	 * @default false // in build mode
+	 * @defaultValue true // in watch mode
+	 * @defaultValue false // in build mode
 	 */
 	bundleWorkspaces?: boolean;
 
@@ -33,7 +33,7 @@ export interface CompilerOptions {
 	 * - `__dirname` - Corresponds to the directory of the generated bundle file
 	 * - `__filename` - Corresponds to the file path of the generated bundle file
 	 * - `require` - Corresponds to the Node.js synchronous function to import modules
-	 * @default false
+	 * @defaultValue false
 	 */
 	cjsGlobals?: boolean;
 

@@ -8,7 +8,7 @@ export interface PaginationTypeOptions {
 	/** The GraphQL type for nodes (e.g., "User!") */
 	nodeType?: string;
 	/** The GraphQL type for cursors
-	 * @default "ID!"
+	 * @defaultValue "ID!"
 	 */
 	cursorType?: string;
 	/**
@@ -48,7 +48,7 @@ export interface PaginationOptions {
 	types: Record<string, boolean | PaginationTypeOptions>;
 	/**
 	 * Whether the node field should be nullable in all connections
-	 * @default true
+	 * @defaultValue true
 	 */
 	nullableNode?: boolean;
 	/**
@@ -60,7 +60,7 @@ export interface PaginationOptions {
 	createExport?: boolean;
 	/**
 	 * Custom name for the pagination module
-	 * @default 'baeta-pagination'
+	 * @defaultValue 'baeta-pagination'
 	 */
 	moduleName?: string;
 }

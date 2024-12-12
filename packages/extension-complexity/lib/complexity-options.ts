@@ -9,12 +9,12 @@ export interface ComplexityExtensionOptions<Context> {
 	limit?: GetComplexityLimit<Context>;
 	/**
 	 * Base complexity score for fields
-	 * @default 1
+	 * @defaultValue 1
 	 */
 	defaultComplexity?: number;
 	/**
 	 * Multiplier applied to list fields
-	 * @default 10
+	 * @defaultValue 10
 	 */
 	defaultListMultiplier?: number;
 	/** Custom error message generator */

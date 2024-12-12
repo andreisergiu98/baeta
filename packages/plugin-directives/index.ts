@@ -8,7 +8,7 @@ import { join, parse } from '@baeta/util-path';
 export interface DirectivesOptions {
 	/**
 	 * Custom name for the directives module
-	 * @default 'baeta-directives'
+	 * @defaultValue 'baeta-directives'
 	 */
 	moduleName?: string;
 }

@@ -4,7 +4,7 @@
 export interface ContextStoreOptions {
 	/**
 	 * Whether to load the value lazily (on first access) or eagerly (immediately).
-	 * @default true
+	 * @defaultValue true
 	 */
 	lazy?: boolean;
 }

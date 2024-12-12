@@ -2,5 +2,5 @@
 
 ## Modules
 
-- [esbuild](esbuild/index.md)
-- [index](index/index.md)
+- [esbuild](esbuild.md)
+- [index](module_index.md)

@@ -33,7 +33,7 @@ export interface AutoloadPluginOptions {
 	modules?: boolean | AutoloadModuleOptions;
 	/**
 	 * Output path for the generated autoload file
-	 * @default ```ts
+	 * @defaultValue ```ts
 	 * `${modulesDir}/autoload.ts`
 	 * ```
 	 */

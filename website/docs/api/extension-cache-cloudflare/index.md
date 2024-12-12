@@ -2,5 +2,5 @@
 
 ## Modules
 
-- [index](index/index.md)
-- [sdk](sdk/index.md)
+- [index](module_index.md)
+- [sdk](sdk.md)

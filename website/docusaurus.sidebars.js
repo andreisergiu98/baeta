@@ -1,34 +1,40 @@
+function getApiEntry(item) {
+	return {
+		...item,
+		label: 'API',
+		items: item.items.map(getApiPackage),
+	};
+}
+
+function getApiPackage(item) {
+	if (!item.link) {
+		return item;
+	}
+
+	const pattern = /api\/([^\/]+)\/index/;
+	const match = item.link.id.match(pattern);
+	const dir = match[1];
+
+	return {
+		...item,
+		label: dir,
+		items: item.items?.toSorted((a, b) => {
+			if (a.id?.endsWith('module_index')) {
+				return -1;
+			}
+			if (b.id?.endsWith('module_index')) {
+				return 1;
+			}
+			return 0;
+		}),
+	};
+}
+
 function injectTypeDocSidebar(items) {
 	return items.map((item) => {
-		if (item?.link?.id !== 'api/README') {
-			return item;
+		if (item?.link?.id === 'api/index') {
+			return getApiEntry(item);
 		}
-
-		item.label = 'API';
-		item.items = item.items.map((item) => {
-			if (!item.link) {
-				return item;
-			}
-
-			const pattern = /api\/([^\/]+)\/README/;
-			const match = item.link.id.match(pattern);
-			const dir = match[1];
-			item.label = dir;
-
-			item.items = item.items.map((item) => {
-				if (!item.link) {
-					return item;
-				}
-				const pattern = /api\/[^\/]+\/([^\/]+)\/README/;
-				const match = item.link.id.match(pattern);
-				const file = match[1];
-				item.label = file;
-				return item;
-			});
-
-			return item;
-		});
-
 		return item;
 	});
 }

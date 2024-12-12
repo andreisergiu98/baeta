@@ -1,5 +1,0 @@
-# Type Alias: ItemRef
-
-> **ItemRef**: `string` \| `number` \| `bigint`
-
-Reference type for cached items

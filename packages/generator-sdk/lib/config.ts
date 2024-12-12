@@ -18,13 +18,13 @@ export interface Loader<TOptions = any> {
 export interface GeneratorOptions {
 	/**
 	 * Current working directory for resolving relative paths.
-	 * @default process.cwd()
+	 * @defaultValue process.cwd()
 	 */
 	cwd?: string;
 
 	/**
 	 * Glob pattern(s) to locate GraphQL schema files.
-	 * @default ```ts
+	 * @defaultValue ```ts
 	 * ['src/∗∗/∗.gql', 'src/∗∗/∗.graphql']
 	 * ```
 	 */
@@ -32,20 +32,20 @@ export interface GeneratorOptions {
 
 	/**
 	 * Root directory where GraphQL modules are defined.
-	 * @default 'src/modules'
+	 * @defaultValue 'src/modules'
 	 */
 	modulesDir?: string;
 
 	/**
 	 * Filename for the generated module definition file.
 	 * Contains type definitions and the GraphQL AST.
-	 * @default 'typedef.ts'
+	 * @defaultValue 'typedef.ts'
 	 */
 	moduleDefinitionName?: string;
 
 	/**
 	 * Output path for the generated base types file.
-	 * @default ```ts
+	 * @defaultValue ```ts
 	 * `${modulesDir}/../__generated__/types.ts`
 	 * ```
 	 */
@@ -56,7 +56,7 @@ export interface GeneratorOptions {
 	 * Supports both named and default exports.
 	 * @example contextType: 'src/types/context.ts#Context' // for named export
 	 * @example contextType: 'src/types/context.ts' // for default export
-	 * @default undefined
+	 * @defaultValue undefined
 	 */
 	contextType?: string;
 
@@ -64,7 +64,7 @@ export interface GeneratorOptions {
 	 * Path to Baeta Extensions (ex. auth-extension).
 	 * Only default export is supported.
 	 * @example extensions: 'src/extensions.ts'
-	 * @default undefined
+	 * @defaultValue undefined
 	 */
 	extensions?: string;
 
@@ -72,7 +72,7 @@ export interface GeneratorOptions {
 	 * Custom scalar type mappings.
 	 * Maps GraphQL scalar types to TypeScript types.
 	 * Supports global types and imports.
-	 * @example { DateTime: 'Date', JSON: 'Record<string, unknown>' }	 * @default undefined
+	 * @example { DateTime: 'Date', JSON: 'Record<string, unknown>' }	 * @defaultValue undefined
 	 */
 	scalars?: Record<string, string>;
 
@@ -89,7 +89,7 @@ export interface GeneratorOptions {
 	/**
 	 * File extension to use in generated import statements.
 	 * Set to false to omit extensions.
-	 * @default '.ts'
+	 * @defaultValue '.ts'
 	 */
 	importExtension?: '.js' | '.ts' | false;
 }

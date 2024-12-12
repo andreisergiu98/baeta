@@ -23,7 +23,7 @@ export interface Options {
 	/**
 	 * When true, removes fields that don't have corresponding resolvers.
 	 *
-	 * @default false
+	 * @defaultValue false
 	 */
 	pruneSchema?: boolean;
 

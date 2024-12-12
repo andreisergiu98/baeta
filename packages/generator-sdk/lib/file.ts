@@ -7,13 +7,13 @@ import { dirname, extname } from '@baeta/util-path';
 export interface FileOptions {
 	/**
 	 * Add generation notice at the beginning of the file.
-	 * @default true
+	 * @defaultValue true
 	 */
 	addGenerationNoticeHeader?: boolean;
 
 	/**
 	 * Add eslint-disable comment at the beginning of the file.
-	 * @default true
+	 * @defaultValue true
 	 */
 	addEslintDisableHeader?: boolean;
 

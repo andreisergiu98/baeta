@@ -2,4 +2,10 @@
 
 ## Functions
 
-- [graphqlPlugin](functions/graphqlPlugin.md)
+### graphqlPlugin()
+
+> **graphqlPlugin**(): [`GeneratorPluginV1`](../generator/index.md#generatorpluginv1store)\<`unknown`\>
+
+#### Returns
+
+[`GeneratorPluginV1`](../generator/index.md#generatorpluginv1store)\<`unknown`\>

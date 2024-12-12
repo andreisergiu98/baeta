@@ -4,13 +4,13 @@
 export interface PrismaPluginOptions {
 	/**
 	 * Whether to generate the Prisma client
-	 * @default true
+	 * @defaultValue true
 	 */
 	generateClient?: boolean;
 
 	/**
 	 * Custom command to generate Prisma client
-	 * @default 'prisma generate'
+	 * @defaultValue 'prisma generate'
 	 */
 	generateCommand?: string;
 

@@ -11,4 +11,3 @@
 - [ForbiddenError](classes/ForbiddenError.md)
 - [InternalServerError](classes/InternalServerError.md)
 - [UnauthenticatedError](classes/UnauthenticatedError.md)
-- [ValidationError](classes/ValidationError.md)

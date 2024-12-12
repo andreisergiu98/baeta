@@ -1,5 +1,25 @@
-import { ValidationError } from '@baeta/errors';
-import type { GraphQLError } from 'graphql';
+import { GraphQLError, type GraphQLErrorOptions } from 'graphql';
+
+/** Complexity error code */
+export const ComplexityErrorCode = 'COMPLEXITY_ERROR';
+
+/**
+ * Thrown when a query exceeds the complexity limits.
+ */
+export class ComplexityError extends GraphQLError {
+	constructor(
+		message = "Complexity limit exceeded! Please reduce the query's complexity.",
+		options?: GraphQLErrorOptions,
+	) {
+		super(message, {
+			...options,
+			extensions: {
+				code: ComplexityErrorCode,
+				...options?.extensions,
+			},
+		});
+	}
+}
 
 /**
  * Types of complexity validation errors that can occur during query analysis.
@@ -33,15 +53,33 @@ export function getDefaultComplexityError(
 	result: number,
 ): GraphQLError {
 	if (kind === ComplexityErrorKind.Depth) {
-		return new ValidationError(`Depth limit of ${limit} exceeded, got: ${result}`);
+		return new ComplexityError(`Depth limit of ${limit} exceeded, got: ${result}`, {
+			extensions: {
+				kind: ComplexityErrorKind.Depth,
+				limit,
+				got: result,
+			},
+		});
 	}
 
 	if (kind === ComplexityErrorKind.Breadth) {
-		return new ValidationError(`Breadth limit of ${limit} exceeded, got: ${result}`);
+		return new ComplexityError(`Breadth limit of ${limit} exceeded, got: ${result}`, {
+			extensions: {
+				kind: ComplexityErrorKind.Breadth,
+				limit,
+				got: result,
+			},
+		});
 	}
 
 	if (kind === ComplexityErrorKind.Complexity) {
-		return new ValidationError(`Complexity limit of ${limit} exceeded, got: ${result}`);
+		return new ComplexityError(`Complexity limit of ${limit} exceeded, got: ${result}`, {
+			extensions: {
+				kind: ComplexityErrorKind.Complexity,
+				limit,
+				got: result,
+			},
+		});
 	}
 
 	throw new Error('Unknown complexity error kind');

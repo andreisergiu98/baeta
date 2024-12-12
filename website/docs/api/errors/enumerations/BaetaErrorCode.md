@@ -41,11 +41,3 @@ Unexpected server-side error
 > **Unauthenticated**: `"UNAUTHENTICATED"`
 
 Authentication is required but was not provided
-
----
-
-### ValidationError
-
-> **ValidationError**: `"VALIDATION_ERROR"`
-
-Validation failed

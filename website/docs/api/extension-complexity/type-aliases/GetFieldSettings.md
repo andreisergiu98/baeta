@@ -24,18 +24,3 @@ Object containing field arguments and context
 [`FieldSettings`](FieldSettings.md) \| `false`
 
 Field settings object or false
-
-## Example
-
-```typescript
-// Custom complexity based on arguments
-const getSettings: GetFieldSettings<Context, { limit: number }> = ({
-  args,
-}) => ({
-  complexity: 1,
-  multiplier: args.limit,
-});
-
-// Disable complexity calculation
-const disableComplexity: GetFieldSettings<Context, any> = () => false;
-```

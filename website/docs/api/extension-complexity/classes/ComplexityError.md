@@ -1,6 +1,6 @@
-# Class: ValidationError
+# Class: ComplexityError
 
-Thrown when input validation rules are not satisfied.
+Thrown when a query exceeds the complexity limits.
 
 ## Extends
 
@@ -8,15 +8,15 @@ Thrown when input validation rules are not satisfied.
 
 ## Constructors
 
-### new ValidationError()
+### new ComplexityError()
 
-> **new ValidationError**(`message`, `options`?): [`ValidationError`](ValidationError.md)
+> **new ComplexityError**(`message`, `options`?): [`ComplexityError`](ComplexityError.md)
 
 #### Parameters
 
 ##### message
 
-`string` = `'Validation error!'`
+`string` = `"Complexity limit exceeded! Please reduce the query's complexity."`
 
 ##### options?
 
@@ -24,7 +24,7 @@ Thrown when input validation rules are not satisfied.
 
 #### Returns
 
-[`ValidationError`](ValidationError.md)
+[`ComplexityError`](ComplexityError.md)
 
 #### Overrides
 

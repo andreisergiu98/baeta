@@ -8,6 +8,10 @@
 
 - [ComplexityErrorKind](enumerations/ComplexityErrorKind.md)
 
+## Classes
+
+- [ComplexityError](classes/ComplexityError.md)
+
 ## Interfaces
 
 - [ComplexityExtensionOptions](interfaces/ComplexityExtensionOptions.md)
@@ -20,6 +24,10 @@
 - [GetComplexityLimit](type-aliases/GetComplexityLimit.md)
 - [GetFieldSettings](type-aliases/GetFieldSettings.md)
 - [GetFieldSettingsArgs](type-aliases/GetFieldSettingsArgs.md)
+
+## Variables
+
+- [ComplexityErrorCode](variables/ComplexityErrorCode.md)
 
 ## Functions
 

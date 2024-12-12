@@ -13,8 +13,6 @@ export enum BaetaErrorCode {
 	Forbidden = 'FORBIDDEN',
 	/** Invalid input provided by the user */
 	BadUserInput = 'BAD_USER_INPUT',
-	/** Validation failed */
-	ValidationError = 'VALIDATION_ERROR',
 	/** Unexpected server-side error */
 	InternalServerError = 'INTERNAL_SERVER_ERROR',
 	/** Multiple errors occurred simultaneously */
@@ -70,21 +68,6 @@ export class BadUserInput extends GraphQLError {
 			...options,
 			extensions: {
 				code: BaetaErrorCode.BadUserInput,
-				...options?.extensions,
-			},
-		});
-	}
-}
-
-/**
- * Thrown when input validation rules are not satisfied.
- */
-export class ValidationError extends GraphQLError {
-	constructor(message = 'Validation error!', options?: GraphQLErrorOptions) {
-		super(message, {
-			...options,
-			extensions: {
-				code: BaetaErrorCode.ValidationError,
 				...options?.extensions,
 			},
 		});

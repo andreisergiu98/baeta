@@ -5,7 +5,7 @@ const noRm = process.argv.includes('--no-rm');
 
 async function generateDocs() {
 	if (!noRm) {
-		await fs.rm('./docs', { recursive: true, force: true });
+		await fs.rm('./docs/api', { recursive: true, force: true });
 	}
 
 	const packagesDir = await fs.readdir('../packages', { withFileTypes: true });

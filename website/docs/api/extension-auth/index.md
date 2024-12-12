@@ -1084,4 +1084,3 @@ const authExt = authExtension<Context>(
 ## Namespaces
 
 - [AuthExtension](namespaces/AuthExtension.md)
-- [AuthExtensionMethods](namespaces/AuthExtensionMethods.md)

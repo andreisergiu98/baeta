@@ -1111,7 +1111,3 @@ const complexity = complexityExtension<Context>({
   },
 });
 ```
-
-## Namespaces
-
-- [ComplexityExtensionMethods](namespaces/ComplexityExtensionMethods.md)

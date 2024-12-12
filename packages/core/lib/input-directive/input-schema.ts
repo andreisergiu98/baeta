@@ -1,3 +1,9 @@
+/**
+ * Originally based on graphql-validation-directives
+ * Source: https://github.com/marcduez/graphql-validation-directives/blob/main/src/base-validation-directive.ts
+ * Copyright (c) 2022-present Marc Duez
+ * Modified by Baeta developers
+ */
 import { AggregateGraphQLError, BadUserInput } from '@baeta/errors';
 import {
 	type GraphQLArgument,

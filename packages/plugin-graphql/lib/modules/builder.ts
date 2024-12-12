@@ -1,3 +1,9 @@
+/**
+ * Originally based on graphql-modules preset of graphql-code-generator
+ * Source: https://github.com/dotansimha/graphql-code-generator/blob/master/packages/presets/graphql-modules/src/builder.ts
+ * Copyright (c) 2016 Dotan Simha
+ * Modified by Baeta developers
+ */
 import type { BaseVisitor } from '@graphql-codegen/visitor-plugin-common';
 import { pascalCase } from 'change-case-all';
 import {

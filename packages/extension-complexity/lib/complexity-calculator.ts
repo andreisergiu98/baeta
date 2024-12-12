@@ -1,3 +1,9 @@
+/**
+ * Originally based on plugin-complexity of Pothos
+ * Source: https://github.com/hayes/pothos/blob/main/packages/plugin-complexity/src/calculate-complexity.ts
+ * Copyright (c) 2021 Michael Hayes
+ * Adapted by Baeta developers
+ */
 import {
 	type FieldNode,
 	type FragmentDefinitionNode,

@@ -1,3 +1,9 @@
+/**
+ * Originally based on graphql-modules preset of graphql-code-generator
+ * Source: https://github.com/dotansimha/graphql-code-generator/blob/master/packages/presets/graphql-modules/src/index.ts
+ * Copyright (c) 2016 Dotan Simha
+ * Modified by Baeta developers
+ */
 import { basename, join, relative, resolve } from '@baeta/util-path';
 import type { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';

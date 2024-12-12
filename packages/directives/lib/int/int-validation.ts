@@ -1,3 +1,9 @@
+/**
+ * Originally based on graphql-validation-directives
+ * Source: https://github.com/marcduez/graphql-validation-directives/blob/main/src/valid-int-directive.ts
+ * Copyright (c) 2022-present Marc Duez
+ * Adapted by Baeta developers
+ */
 import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
 

@@ -1,5 +1,7 @@
 # Interface: RequiredCacheMiddlewareOptions\<Root\>
 
+Required options for cache middleware
+
 ## Extends
 
 - [`CacheMiddlewareOptions`](CacheMiddlewareOptions.md)\<`Root`\>
@@ -13,6 +15,8 @@
 ### getRootRef()
 
 > **getRootRef**: (`root`) => [`ItemRef`](../type-aliases/ItemRef.md)
+
+Function to extract object reference id
 
 #### Parameters
 

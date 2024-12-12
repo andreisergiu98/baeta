@@ -36,6 +36,8 @@
 
 > **createStoreAdapter**\<`T`\>(`options`, `type`, `hash`): `StoreAdapter`\<`T`\>
 
+Creates a new store adapter for a specific type
+
 #### Type Parameters
 
 • **T**
@@ -46,13 +48,19 @@
 
 `StoreOptions`\<`T`\>
 
+Store configuration options
+
 ##### type
 
 `string`
 
+Type name for the cached items
+
 ##### hash
 
 `string`
+
+Unique hash for the type
 
 #### Returns
 

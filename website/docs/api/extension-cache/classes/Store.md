@@ -1,5 +1,7 @@
 # Class: `abstract` Store
 
+Base class for cache storage implementations
+
 ## Constructors
 
 ### new Store()
@@ -16,6 +18,8 @@
 
 > `abstract` **createStoreAdapter**\<`T`\>(`options`, `type`, `hash`): [`StoreAdapter`](StoreAdapter.md)\<`T`\>
 
+Creates a new store adapter for a specific type
+
 #### Type Parameters
 
 • **T**
@@ -26,13 +30,19 @@
 
 [`StoreOptions`](../interfaces/StoreOptions.md)\<`T`\>
 
+Store configuration options
+
 ##### type
 
 `string`
 
+Type name for the cached items
+
 ##### hash
 
 `string`
+
+Unique hash for the type
 
 #### Returns
 

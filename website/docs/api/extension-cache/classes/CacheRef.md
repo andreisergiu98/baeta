@@ -1,5 +1,7 @@
 # Class: CacheRef\<Result, Root, Args\>
 
+Cache reference for a type field or query
+
 ## Type Parameters
 
 • **Result**

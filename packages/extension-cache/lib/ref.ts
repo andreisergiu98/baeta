@@ -1,8 +1,20 @@
+/**
+ * Reference type for cached items
+ */
 export type ItemRef = string | number | bigint;
+/**
+ * Reference type for query parent
+ */
 export type ParentRef = ItemRef | null | undefined;
 
+/**
+ * Type constraint for objects that are compatible with default cache ref
+ */
 export type RefCompatibleRoot = { id: string | number | bigint } | { [key: string]: never };
 
+/**
+ * Cache reference for a type field or query
+ */
 export class CacheRef<Result, Root, Args> {
 	constructor(
 		private type: string,

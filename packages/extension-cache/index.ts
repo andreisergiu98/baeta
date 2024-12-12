@@ -7,12 +7,6 @@ import type { Store } from './lib/store.ts';
 
 export type { CacheArgs } from './lib/cache-args.ts';
 export type {
-	CacheExtensionMethods,
-	CreateCacheArgs,
-	TypeGetter,
-	UseCacheArgs,
-} from './lib/global-types.ts';
-export type {
 	CacheMiddlewareOptions,
 	RequiredCacheMiddlewareOptions,
 } from './lib/middleware-options.ts';

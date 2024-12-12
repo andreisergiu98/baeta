@@ -99,7 +99,7 @@ declare global {
 		 */
 		export interface SubscriptionSubscribeExtensions<Root, Context, Args> {
 			/**
-			 * Checks authorization before subscribe.
+			 * Checks authorization for both subscribe and resolve phases.
 			 *
 			 * @param scopes - Authorization rules to check
 			 * @param options - Additional authorization options

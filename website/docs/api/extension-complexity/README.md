@@ -1,5 +1,9 @@
 # @baeta/extension-complexity
 
+## Namespaces
+
+- [ComplexityExtensionMethods](namespaces/ComplexityExtensionMethods/README.md)
+
 ## Enumerations
 
 - [ComplexityErrorKind](enumerations/ComplexityErrorKind.md)
@@ -11,8 +15,11 @@
 
 ## Type Aliases
 
+- [FieldSettings](type-aliases/FieldSettings.md)
 - [GetComplexityError](type-aliases/GetComplexityError.md)
 - [GetComplexityLimit](type-aliases/GetComplexityLimit.md)
+- [GetFieldSettings](type-aliases/GetFieldSettings.md)
+- [GetFieldSettingsArgs](type-aliases/GetFieldSettingsArgs.md)
 
 ## Functions
 

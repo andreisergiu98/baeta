@@ -16,7 +16,7 @@ Authorization methods for subscription subscribe phase.
 
 > **$auth**: (`scopes`, `options`?) => `void`
 
-Checks authorization before subscribe.
+Checks authorization for both subscribe and resolve phases.
 
 #### Parameters
 

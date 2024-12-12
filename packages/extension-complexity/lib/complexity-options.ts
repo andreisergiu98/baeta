@@ -1,10 +1,23 @@
 import { type GetComplexityError, getDefaultComplexityError } from './complexity-errors.ts';
 import type { GetComplexityLimit } from './complexity-limits.ts';
 
+/**
+ * Configuration options for the complexity extension.
+ */
 export interface ComplexityExtensionOptions<Context> {
+	/** Static limits or function to determine limits based on context */
 	limit?: GetComplexityLimit<Context>;
+	/**
+	 * Base complexity score for fields
+	 * @default 1
+	 */
 	defaultComplexity?: number;
+	/**
+	 * Multiplier applied to list fields
+	 * @default 10
+	 */
 	defaultListMultiplier?: number;
+	/** Custom error message generator */
 	complexityError?: GetComplexityError;
 }
 

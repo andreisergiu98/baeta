@@ -2,7 +2,7 @@
 
 ## Namespaces
 
-- [ComplexityExtensionMethods](namespaces/ComplexityExtensionMethods/README.md)
+- [ComplexityExtensionMethods](namespaces/ComplexityExtensionMethods/index.md)
 
 ## Enumerations
 

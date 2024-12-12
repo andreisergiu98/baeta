@@ -2,7 +2,7 @@
 
 ## Namespaces
 
-- [micromatch](namespaces/micromatch/README.md)
+- [micromatch](namespaces/micromatch/index.md)
 
 ## Enumerations
 

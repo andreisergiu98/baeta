@@ -4,7 +4,7 @@
 
 ### Namespaces
 
-- [BaetaExtensions](namespaces/BaetaExtensions/README.md)
+- [BaetaExtensions](namespaces/BaetaExtensions/index.md)
 
 ### Enumerations
 

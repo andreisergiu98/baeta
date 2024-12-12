@@ -2,8 +2,8 @@
 
 ## Namespaces
 
-- [AuthExtension](namespaces/AuthExtension/README.md)
-- [AuthExtensionMethods](namespaces/AuthExtensionMethods/README.md)
+- [AuthExtension](namespaces/AuthExtension/index.md)
+- [AuthExtensionMethods](namespaces/AuthExtensionMethods/index.md)
 
 ## Interfaces
 

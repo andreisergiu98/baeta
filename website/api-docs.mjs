@@ -3,7 +3,8 @@ import * as TypeDoc from 'typedoc';
 
 async function cleanupDocs() {
 	await fs.rm('./docs/api/_media', { recursive: true, force: true });
-	await fs.unlink('./docs/api/README.md');
+	await fs.unlink('./docs/api/index.md');
+	await fs.rename('./docs/api/packages.md', './docs/api/index.md');
 }
 
 async function generateDocs() {
@@ -23,6 +24,7 @@ async function generateDocs() {
 		disableSources: true,
 		formatWithPrettier: true,
 		out: './docs/api',
+		entryFileName: 'index.md',
 	});
 
 	const project = await app.convert();
@@ -34,8 +36,6 @@ async function generateDocs() {
 	await app.generateOutputs(project);
 
 	await cleanupDocs();
-
-	await fs.rename('./docs/api/packages.md', './docs/api/README.md');
 }
 
 generateDocs().catch(console.error);

@@ -1,6 +1,10 @@
 import type { PubSubEngineV2, PubSubEngineV3 } from './pubsub-engine.ts';
 
+/**
+ * Configuration options for TypedPubSub
+ */
 export interface TypedPubSubOptions {
+	/** Optional prefix for channel names */
 	prefix?: string;
 }
 
@@ -118,6 +122,38 @@ export type TypedPubSub<
 		? TypedPubSubV2<Engine, Map>
 		: never;
 
+/**
+ * Creates a type-safe wrapper around a PubSub implementation.
+ *
+ * This utility ensures that your subscription channels and their payloads
+ * are properly typed, helping catch potential errors at compile time.
+ *
+ * @param pubsub - The PubSub engine instance (e.g., PubSub, RedisPubSub)
+ * @param options - Configuration options
+ *
+ * @example
+ * ```typescript
+ * // Define your event map
+ * type PubSubMap = {
+ *   "user-updated": User;
+ *   [c: `user-updated-${string}`]: User;
+ * };
+ *
+ * // Create typed PubSub instance
+ * const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub());
+ *
+ * // Usage with Redis
+ * const pubsub = createTypedPubSub<RedisPubSub, PubSubMap>(
+ *   new RedisPubSub({
+ *     publisher: new Redis(options),
+ *     subscriber: new Redis(options),
+ *   }),
+ *   {
+ *     prefix: "feature-1:",
+ *   }
+ * );
+ * ```
+ */
 export function createTypedPubSub<
 	Engine extends PubSubEngineV2 | PubSubEngineV3,
 	// biome-ignore lint/suspicious/noExplicitAny: accept any for dynamic typing

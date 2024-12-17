@@ -16,7 +16,6 @@ export type { GetGrant, GetGrantFn, GetGrantResult } from './lib/grant.ts';
 export type { LogicRule } from './lib/rule.ts';
 export type { ScopeRules, ScopeRule, Scopes } from './lib/scope-rules.ts';
 export type { GetScopeLoader, ScopeLoader, ScopeLoaderMap } from './lib/scope-resolver.ts';
-export type { AuthExtension } from './lib/global-types.ts';
 
 /**
  * Creates an authentication extension.

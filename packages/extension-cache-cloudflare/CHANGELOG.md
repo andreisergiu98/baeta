@@ -1,5 +1,14 @@
 # @baeta/extension-cache-cloudflare
 
+## 0.0.6
+
+### Patch Changes
+
+- [#189](https://github.com/andreisergiu98/baeta/pull/189) [`d500378`](https://github.com/andreisergiu98/baeta/commit/d500378198e0a9c48298c4242913bca8ad348228) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add jsdocs
+
+- Updated dependencies [[`d500378`](https://github.com/andreisergiu98/baeta/commit/d500378198e0a9c48298c4242913bca8ad348228)]:
+  - @baeta/extension-cache@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes

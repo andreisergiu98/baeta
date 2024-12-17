@@ -1,23 +1,23 @@
 ---
-"create-baeta": major
-"@baeta/compiler": major
-"@baeta/core": major
-"@baeta/env": major
-"@baeta/errors": major
-"@baeta/generator": major
-"@baeta/generator-sdk": major
-"@baeta/plugin": major
-"@baeta/plugin-autoload": major
-"@baeta/plugin-exec": major
-"@baeta/plugin-gitignore": major
-"@baeta/plugin-graphql": major
-"@baeta/plugin-pagination": major
-"@baeta/plugin-prisma": major
-"@baeta/subscriptions-pubsub": major
-"@baeta/util-encoding": major
-"@baeta/util-env": major
-"@baeta/util-log": major
-"@baeta/util-path": major
+"create-baeta": minor
+"@baeta/compiler": minor
+"@baeta/core": minor
+"@baeta/env": minor
+"@baeta/errors": minor
+"@baeta/generator": minor
+"@baeta/generator-sdk": minor
+"@baeta/plugin": minor
+"@baeta/plugin-autoload": minor
+"@baeta/plugin-exec": minor
+"@baeta/plugin-gitignore": minor
+"@baeta/plugin-graphql": minor
+"@baeta/plugin-pagination": minor
+"@baeta/plugin-prisma": minor
+"@baeta/subscriptions-pubsub": minor
+"@baeta/util-encoding": minor
+"@baeta/util-env": minor
+"@baeta/util-log": minor
+"@baeta/util-path": minor
 ---
 
 mark as stable

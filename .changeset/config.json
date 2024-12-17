@@ -15,7 +15,25 @@
     "prereleaseTemplate": "{tag}-{datetime}-{commit}"
   },
   "fixed": [],
-  "linked": [],
+  "linked": [
+    [
+      "create-baeta",
+      "@baeta/cli",
+      "@baeta/compiler",
+      "@baeta/core",
+      "@baeta/directives",
+      "@baeta/env",
+      "@baeta/errors",
+      "@baeta/plugin-autoload",
+      "@baeta/plugin-directives",
+      "@baeta/plugin-exec",
+      "@baeta/plugin-gitignore",
+      "@baeta/plugin-graphql",
+      "@baeta/plugin-pagination",
+      "@baeta/plugin-prisma",
+      "@baeta/subscriptions-pubsub"
+    ]
+  ],
   "ignore": [
     "@baeta/examples*",
     "@baeta/template*"

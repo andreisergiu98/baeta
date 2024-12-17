@@ -26,6 +26,7 @@
       "@baeta/errors",
       "@baeta/extension-auth",
       "@baeta/plugin-autoload",
+      "@baeta/plugin-cloudflare",
       "@baeta/plugin-directives",
       "@baeta/plugin-exec",
       "@baeta/plugin-gitignore",

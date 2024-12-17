@@ -8,7 +8,7 @@ import { getInstallCommand, getPackageManager } from './package-manager.ts';
 import { getRuntime } from './runtime.ts';
 import { copyTemplate, getTemplate } from './templates.ts';
 
-interface Args {
+export interface Args {
 	packageManager?: PackageManager;
 	skipInstall?: boolean;
 	appName?: string;

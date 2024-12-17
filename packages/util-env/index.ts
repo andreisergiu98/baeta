@@ -20,8 +20,6 @@ type EnvGlobal = {
 	};
 };
 
-type Global = NodeGlobal | DenoGlobal | EnvGlobal | Record<string, unknown>;
-
 function supportsNodeEnv(global: Record<string, unknown>): global is NodeGlobal {
 	return global.process != null;
 }
@@ -46,7 +44,10 @@ function getEnvFromGlobal(global: EnvGlobal, key: string) {
 	return global.env[key];
 }
 
-export function getEnv(key: string, global: Global = globalThis): string | undefined {
+export function getEnv(
+	key: string,
+	global: Record<string, unknown> = globalThis,
+): string | undefined {
 	if (supportsNodeEnv(global)) {
 		return getEnvFromNode(global, key);
 	}
@@ -62,7 +63,7 @@ export function getEnv(key: string, global: Global = globalThis): string | undef
 	return undefined;
 }
 
-export function isDevelopmentMode(global: Global = globalThis): boolean {
+export function isDevelopmentMode(global: Record<string, unknown> = globalThis): boolean {
 	const modeKeys = ['BAETA_ENV', 'NODE_ENV', 'ENVIRONMENT'];
 	const modeValues = modeKeys.map((key) => getEnv(key, global));
 

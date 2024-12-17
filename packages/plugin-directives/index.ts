@@ -2,7 +2,14 @@ import { definitions } from '@baeta/directives';
 import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
 import { join, parse } from '@baeta/util-path';
 
-interface DirectivesOptions {
+/**
+ * Configuration options for the directives plugin.
+ */
+export interface DirectivesOptions {
+	/**
+	 * Custom name for the directives module
+	 * @defaultValue 'baeta-directives'
+	 */
 	moduleName?: string;
 }
 
@@ -53,6 +60,14 @@ function createExportFilename(moduleDir: string) {
 	return `${moduleDir}/index.ts`;
 }
 
+/**
+ * A plugin that generates the directives and resolvers for the built-in Baeta directives.
+ * See https://baeta.io/docs/plugins/builtin-directives
+ *
+ * @param options - Configuration options for the directives plugin
+ * @returns A Baeta generator plugin
+ *
+ */
 export function directivesPlugin(options?: DirectivesOptions) {
 	const { moduleName = 'baeta-directives' } = options ?? {};
 

@@ -1,6 +1,9 @@
 import { isAbsolute, join, posixPath, relative, resolve } from '@baeta/util-path';
 import type { FileOptions } from './file.ts';
 
+/**
+ * Interface for custom schema loaders.
+ */
 // biome-ignore lint/suspicious/noExplicitAny: We don't want to import graphql for this type
 export interface Loader<TOptions = any> {
 	// biome-ignore lint/suspicious/noExplicitAny: Same reason as above
@@ -10,73 +13,83 @@ export interface Loader<TOptions = any> {
 }
 
 /**
- * Options for the graphql generator.
+ * Options for the Baeta Generator.
  */
 export interface GeneratorOptions {
 	/**
-	 * Current working directory.
-	 * @default process.cwd()
+	 * Current working directory for resolving relative paths.
+	 * @defaultValue process.cwd()
 	 */
 	cwd?: string;
 
 	/**
-	 * Glob pattern(s) to load graphql schema files.
-	 * @default ['src/∗∗/∗.graphql']
+	 * Glob pattern(s) to locate GraphQL schema files.
+	 * @defaultValue ```ts
+	 * ['src/∗∗/∗.gql', 'src/∗∗/∗.graphql']
+	 * ```
 	 */
 	schemas: string[];
 
 	/**
-	 * Directory where modules are defined.
-	 * @default 'src/modules'
+	 * Root directory where GraphQL modules are defined.
+	 * @defaultValue 'src/modules'
 	 */
 	modulesDir?: string;
 
 	/**
-	 * Name for the generated module definition file. This will contain type definitions and the graphql ast.
-	 * @default 'typedef.ts'
+	 * Filename for the generated module definition file.
+	 * Contains type definitions and the GraphQL AST.
+	 * @defaultValue 'typedef.ts'
 	 */
 	moduleDefinitionName?: string;
 
 	/**
-	 * Path for the generated base types file.
-	 * @default `${modulesDir}/../__generated__/types.ts`
+	 * Output path for the generated base types file.
+	 * @defaultValue ```ts
+	 * `${modulesDir}/../__generated__/types.ts`
+	 * ```
 	 */
 	baseTypesPath?: string;
 
 	/**
-	 * Path where the context type is exported.
-	 * @example contextType: 'src/types/context#Context' // for named export
-	 * @example contextType: 'src/types/context' // for default export
-	 * @default undefined
+	 * Path to the context type definition.
+	 * Supports both named and default exports.
+	 * @example contextType: 'src/types/context.ts#Context' // for named export
+	 * @example contextType: 'src/types/context.ts' // for default export
+	 * @defaultValue undefined
 	 */
 	contextType?: string;
 
 	/**
-	 * Path where extensions (ex. auth-extension) are exported. Only default export is supported.
-	 * @example extensions: 'src/extensions'
-	 * @default undefined
+	 * Path to Baeta Extensions (ex. auth-extension).
+	 * Only default export is supported.
+	 * @example extensions: 'src/extensions.ts'
+	 * @defaultValue undefined
 	 */
 	extensions?: string;
 
 	/**
-	 * Custom scalar mappings.
-	 * @example scalars: { DateTime: 'Date' }
-	 * @default undefined
+	 * Custom scalar type mappings.
+	 * Maps GraphQL scalar types to TypeScript types.
+	 * Supports global types and imports.
+	 * @example { DateTime: 'Date', JSON: 'Record<string, unknown>' }	 * @defaultValue undefined
 	 */
 	scalars?: Record<string, string>;
 
 	/**
-	 * Options for generated files.
+	 * Configuration options for generated files.
 	 */
 	fileOptions?: FileOptions;
 
 	/**
-	 * Additional schema loaders to be used for "schemas" option.
+	 * Custom schema loaders for processing schema files.
 	 */
 	loaders?: Loader[];
 
 	/**
-	 * File extension for generated import statements.
+	 * File extension to use in generated import statements.
+	 * Set to false to omit extensions.
+	 * @defaultValue '.ts'
 	 */
 	importExtension?: '.js' | '.ts' | false;
 }

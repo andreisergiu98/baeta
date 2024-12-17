@@ -1,19 +1,68 @@
 import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
 import { join, parse } from '@baeta/util-path';
 
-interface TypeOptions {
+/**
+ * Configuration options for a specific pagination type
+ */
+export interface PaginationTypeOptions {
+	/** The GraphQL type for nodes (e.g., "User!") */
 	nodeType?: string;
+	/** The GraphQL type for cursors
+	 * @defaultValue "ID!"
+	 */
 	cursorType?: string;
+	/**
+	 * Additional fields to add to the edge type
+	 * @example edgeFields: ["hasPhotos: Boolean!"]
+	 */
 	edgeFields?: string[];
+	/**
+	 *  Additional fields to add to the connection type
+	 * @example connectionFields: ["totalCount: Int!"]
+	 */
 	connectionFields?: string[];
 }
 
-interface PaginationOptions {
-	types: Record<string, boolean | TypeOptions>;
+/**
+ * Configuration options for the pagination plugin
+ */
+export interface PaginationOptions {
+	/**
+	 * Map of type names to their pagination configuration.
+	 * @example
+	 * ```typescript
+	 * {
+	 *   // Simple configuration
+	 *   User: true,
+	 *
+	 *   // Advanced configuration
+	 *   UserCustom: {
+	 *     nodeType: "User",
+	 *     cursorType: "UUID!",
+	 *     connectionFields: ["totalCount: Int!"],
+	 *     edgeFields: ["hasPhotos: Boolean!"]
+	 *   }
+	 * }
+	 * ```
+	 */
+	types: Record<string, boolean | PaginationTypeOptions>;
+	/**
+	 * Whether the node field should be nullable in all connections
+	 * @defaultValue true
+	 */
 	nullableNode?: boolean;
+	/**
+	 * Additional fields to add to the PageInfo type
+	 * @example ["hasMorePages: Boolean!"]
+	 */
 	pageInfoFields?: string[];
-	moduleName?: string;
+	/** Whether to create an export file */
 	createExport?: boolean;
+	/**
+	 * Custom name for the pagination module
+	 * @defaultValue 'baeta-pagination'
+	 */
+	moduleName?: string;
 }
 
 function printFields(fields: string[]) {
@@ -49,9 +98,13 @@ export const ${getModuleVariableName(moduleName)} = ${method}();
 `;
 }
 
-function printConnectionTypes(name: string, typeOptions: TypeOptions, options: PaginationOptions) {
+function printConnectionTypes(
+	name: string,
+	typeOptions: PaginationTypeOptions,
+	options: PaginationOptions,
+) {
 	const {
-		cursorType = 'String!',
+		cursorType = 'ID!',
 		nodeType = name,
 		connectionFields = [],
 		edgeFields = [],
@@ -84,6 +137,13 @@ function createExportFilename(moduleDir: string) {
 	return `${moduleDir}/index.ts`;
 }
 
+/**
+ * A plugin that generates Relay-style pagination types for GraphQL.
+ * See https://baeta.io/docs/plugins/pagination for more details
+ *
+ * @param options - Configuration options for the pagination plugin
+ * @returns A Baeta generator plugin
+ */
 export function paginationPlugin(options: PaginationOptions) {
 	const { moduleName = 'baeta-pagination' } = options;
 

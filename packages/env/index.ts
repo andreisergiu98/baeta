@@ -1,30 +1,49 @@
-type Types = 'string' | 'number' | 'boolean';
+/**
+ * Supported environment variable types.
+ */
+export type EnvTypes = 'string' | 'number' | 'boolean';
 
-type InferType<T extends Types> = T extends 'string'
+/**
+ * Maps environment variable types to their TypeScript equivalents.
+ * @template T - The environment variable type
+ */
+export type EnvInferType<T extends EnvTypes> = T extends 'string'
 	? string
 	: T extends 'number'
 		? number
 		: boolean;
 
 type InferTypeFromOptions<
-	O extends EnvOptions<Types, boolean | undefined, InferType<Types> | undefined>,
+	O extends EnvOptions<EnvTypes, boolean | undefined, EnvInferType<EnvTypes> | undefined>,
 > = O extends EnvOptions<infer T, infer R, infer D>
 	? R extends true
-		? InferType<T>
+		? EnvInferType<T>
 		: D extends undefined
-			? InferType<T> | undefined
-			: InferType<T>
+			? EnvInferType<T> | undefined
+			: EnvInferType<T>
 	: never;
 
 export interface EnvOptions<
-	T extends Types,
+	T extends EnvTypes,
 	R extends boolean | undefined,
-	D extends InferType<T> | undefined,
+	D extends EnvInferType<T> | undefined,
 > {
+	/**
+	 * Whether the environment variable is required.
+	 */
 	required?: R;
+	/**
+	 * Default value if the environment variable is not provided.
+	 */
 	default?: D;
+	/**
+	 * The expected type of the environment variable.
+	 */
 	type: T;
-	resolver?: (value: string) => InferType<T>;
+	/**
+	 * Custom resolver to convert the environment variable to the expected type.
+	 */
+	resolver?: (value: string) => EnvInferType<T>;
 }
 
 function resolveString(value: string) {
@@ -40,9 +59,9 @@ function resolveBoolean(value: string) {
 }
 
 function resolveParam<
-	T extends Types,
+	T extends EnvTypes,
 	R extends boolean | undefined,
-	D extends InferType<T> | undefined,
+	D extends EnvInferType<T> | undefined,
 >(key: string, options: EnvOptions<T, R, D>, rawValue: string | undefined) {
 	if (!rawValue) {
 		return options.default;
@@ -75,9 +94,9 @@ function resolveParam<
 }
 
 function validateValue<
-	T extends Types,
+	T extends EnvTypes,
 	R extends boolean | undefined,
-	D extends InferType<T> | undefined,
+	D extends EnvInferType<T> | undefined,
 >(key: string, value: string | number | boolean | undefined, options: EnvOptions<T, R, D>) {
 	if (value == null && options.required !== true) {
 		return;
@@ -103,11 +122,39 @@ function validateValue<
 	}
 }
 
+/**
+ * Creates an environment variable parser..
+ * See https://baeta.io/docs/guides/environment
+ *
+ * @param getValue - Function to retrieve environment variable values
+ * @returns A parsing function that converts environment variables to strongly-typed values
+ *
+ * @example
+ * ```typescript
+ * const parse = createEnvParser((key) => process.env[key]);
+ *
+ * const port = parse('PORT', {
+ *   type: 'number',
+ *   required: true,
+ *   default: 3000
+ * });
+ *
+ * const debug = parse('DEBUG', {
+ *   type: 'boolean',
+ *   default: false
+ * });
+ * ```
+ *
+ * @throws {Error} When:
+ * - A required value is missing and has no default
+ * - The value type doesn't match the specified type
+ * - A custom resolver returns an incorrect type
+ */
 export function createEnvParser(getValue: (key: string) => string | undefined) {
 	return function parse<
-		T extends Types,
+		T extends EnvTypes,
 		R extends boolean | undefined,
-		D extends InferType<T> | undefined,
+		D extends EnvInferType<T> | undefined,
 	>(key: string, options: EnvOptions<T, R, D>) {
 		const value = resolveParam(key, options, getValue(key));
 		validateValue(key, value, options);

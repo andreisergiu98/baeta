@@ -1,12 +1,29 @@
 import { relative, resolve } from 'node:path';
 import { FileBlock, createPluginV1 } from '@baeta/generator-sdk';
 
+/**
+ * Configuration options for the gitignore plugin.
+ */
+export interface GitignoreOptions {
+	/**
+	 * Array of file tags to exclude from .gitignore.
+	 * File tags are identifiers assigned to generated files
+	 * to categorize them by their plugin or purpose.
+	 */
+	ignoreTags?: string[];
+}
 export interface GitignoreOptions {
 	ignoreTags?: string[];
 }
 
-const allowedTags = ['cloudflare'];
+const defaultIgnoredTags = ['cloudflare'];
 
+/**
+ * A plugin that adds .gitignore entries for generated files.
+ *
+ * @param options - Plugin configuration options
+ * @returns A Baeta generator plugin
+ */
 export function gitignorePlugin(options?: GitignoreOptions) {
 	return createPluginV1({
 		name: 'gitignore-plugin',
@@ -14,7 +31,7 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 		generate: async (ctx, next) => {
 			await next();
 
-			const ignoredTags = [...(options?.ignoreTags ?? []), ...allowedTags];
+			const ignoredTags = [...(options?.ignoreTags ?? []), ...defaultIgnoredTags];
 
 			const modulesDir = ctx.generatorOptions.modulesDir;
 			const moduleDefinitionName = ctx.generatorOptions.moduleDefinitionName;

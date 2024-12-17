@@ -19,26 +19,48 @@ import type { GetScopeLoader } from './scope-resolver.ts';
 import { type ScopeRules, verifyScopes } from './scope-rules.ts';
 import { loadAuthStore } from './store-loader.ts';
 
+/**
+ * Configuration options for the Auth Extension
+ */
 export interface AuthOptions {
+	/** Default authorization scopes for queries, mutations or subscriptions */
 	defaultScopes?: DefaultScopes;
+	/** Custom error resolver for authorization failures */
 	errorResolver?: ScopeErrorResolver;
 }
 
+/**
+ * Options for authorization methods
+ */
 export interface AuthMethodOptions<Result, Root, Context, Args> {
+	/** Permissions to grant after successful authorization */
 	grants?: GetGrant<Result, Root, Context, Args>;
+	/** Whether to skip default scopes for this operation */
 	skipDefaults?: boolean;
+	/** Custom error handler for this operation */
 	onError?: ScopeErrorResolver;
 }
 
+/**
+ * Options for subscription authorization
+ */
 export interface AuthMethodSubscribeOptions<Root, Context, Args> {
+	/** Whether to skip default scopes for this subscription */
 	skipDefaults?: boolean;
+	/** Custom error handler for this subscription */
 	onError?: ScopeErrorResolver;
 }
 
+/**
+ * Function to get scope rules for pre-resolution authorization
+ */
 export type GetScopeRules<Root, Context, Args> = (
 	params: MiddlewareParams<Root, Context, Args>,
 ) => boolean | ScopeRules | Promise<boolean | ScopeRules>;
 
+/**
+ * Function to get scope rules for post-resolution authorization
+ */
 export type GetPostScopeRules<Result, Root, Context, Args> = (
 	params: MiddlewareParams<Root, Context, Args>,
 	result: Result,

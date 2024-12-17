@@ -4,7 +4,6 @@
  * Copyright (c) 2021 Michael Hayes
  * Adapted by Baeta developers
  */
-import { ValidationError } from '@baeta/errors';
 import {
 	type FieldNode,
 	type FragmentDefinitionNode,
@@ -21,6 +20,7 @@ import {
 } from 'graphql';
 import { isListOrNullableList } from '../utils/graphlq.ts';
 import { capitalize } from '../utils/string.ts';
+import { ComplexityError } from './complexity-errors.ts';
 import { type FieldSettingsMap, getFieldComplexitySettings } from './field-settings.ts';
 
 interface ComplexityDefaults {
@@ -38,7 +38,7 @@ export function calculateComplexity<Context>(
 	const operationType = info.schema.getType(operationName);
 
 	if (!operationType || !isOutputType(operationType)) {
-		throw new ValidationError(`Unsupported operation ${operationName}`);
+		throw new ComplexityError(`Unsupported operation ${operationName}`);
 	}
 
 	return complexityFromSelectionSet(
@@ -98,7 +98,7 @@ function complexityFromSelection<Context>(
 		const fragment = info.fragments[selection.name.value];
 
 		if (!fragment) {
-			throw new ValidationError(`Fragment ${selection.name.value} not found`);
+			throw new ComplexityError(`Fragment ${selection.name.value} not found`);
 		}
 
 		return complexityFromFragment(ctx, info, type, fragment, fieldSettingsMap, defaults);
@@ -120,11 +120,11 @@ function complexityFromFragment<Context>(
 		: type;
 
 	if (!isOutputType(fragmentType)) {
-		throw new ValidationError(`Unsupported fragment type ${fragmentType}`);
+		throw new ComplexityError(`Unsupported fragment type ${fragmentType}`);
 	}
 
 	if (!fragmentType) {
-		throw new ValidationError(`Fragment type ${fragmentType} not found`);
+		throw new ComplexityError(`Fragment type ${fragmentType} not found`);
 	}
 
 	return complexityFromSelectionSet(
@@ -151,7 +151,7 @@ function complexityFromField<Context>(
 		isObjectType(type) || isInterfaceType(type) ? type.getFields()[fieldName] : undefined;
 
 	if (!field && !fieldName.startsWith('__')) {
-		throw new ValidationError(`Field ${fieldName} not found on type ${type.name}`);
+		throw new ComplexityError(`Field ${fieldName} not found on type ${type.name}`);
 	}
 
 	if (!field) {

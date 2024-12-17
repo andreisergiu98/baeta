@@ -2,18 +2,29 @@ import type { NativeMiddleware } from '@baeta/core/sdk';
 import { isOperationType } from '../utils/resolver.ts';
 import type { ScopeRules } from './scope-rules.ts';
 
-interface OperationOptions<T> {
-	Query?: T;
-	Mutation?: T;
+/** Configuration for default authorization scopes that apply to all operations of a specific type. */
+export type DefaultScopes = {
+	/** Default scopes applied to all Query operations */
+	Query?: ScopeRules;
+	/** Default scopes applied to all Mutation operations */
+	Mutation?: ScopeRules;
+	/** Default scopes for Subscription operations */
 	Subscription?: {
-		subscribe?: T;
-		resolve?: T;
+		/** Scopes applied during the subscription phase */
+		subscribe?: ScopeRules;
+		/** Scopes applied during the resolve phase */
+		resolve?: ScopeRules;
 	};
-}
+};
 
-export type DefaultScopes = OperationOptions<ScopeRules>;
-
-export type DefaultScopesMiddlewares = OperationOptions<NativeMiddleware>;
+export type DefaultScopesMiddlewares = {
+	Query?: NativeMiddleware;
+	Mutation?: NativeMiddleware;
+	Subscription?: {
+		subscribe?: NativeMiddleware;
+		resolve?: NativeMiddleware;
+	};
+};
 
 export function selectDefaultScopes(
 	skipDefaults: boolean | undefined,

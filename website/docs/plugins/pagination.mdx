@@ -38,7 +38,7 @@ export default defineConfig({
         // Advanced configuration with custom fields
         UserCustom: {
           nodeType: "User", // Use a different type for nodes
-          cursorType: "UUID!", // Specify cursor type (default: String!)
+          cursorType: "UUID!", // Specify cursor type (default: ID!)
           connectionFields: ["totalCount: Int!"], // Add fields to connection type
           edgeFields: ["hasPhotos: Boolean!"], // Add fields to edge type
         },

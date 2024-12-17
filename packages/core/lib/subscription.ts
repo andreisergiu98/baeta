@@ -22,22 +22,7 @@ export type SubscribeResolveParams<Payload, Context, Args> = {
 	info: GraphQLResolveInfo;
 };
 
-export type SubscribeFilter<Payload, Context, Args> = (
-	params: SubscribeFilterParams<Payload, Context, Args>,
-) => boolean | Promise<boolean>;
-
-export type SubscribeFilterParams<Payload, Context, Args> = {
-	payload: Payload;
-	args: Args;
-	ctx: Context;
-	info: GraphQLResolveInfo;
-};
-
 export type Subscription<Payload, Result, Root, Context, Args> = {
 	subscribe: Subscribe<Payload, Root, Context, Args>;
 	resolve: SubscribeResolve<Result, Payload, Context, Args>;
-};
-
-export type SubscriptionResolver<Result, Key extends string, Root, Context, Args> = {
-	subscribe: Subscribe<Result, Root, Context, Args>;
 };

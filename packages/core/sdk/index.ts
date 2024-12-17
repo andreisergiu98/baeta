@@ -6,6 +6,8 @@ export * from './middleware.ts';
 export * from './module.ts';
 export * from './resolver.ts';
 export * from './resolver-mapper.ts';
+export * from './resolver-maps.ts';
 export * from './resolver-type.ts';
 export * from './subscription.ts';
 export * from './transformer.ts';
+export { addValidationToSchema } from '../lib/input-directive/index.ts';

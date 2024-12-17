@@ -12,16 +12,31 @@ export type FieldSettingsMap = Record<
 	Record<string, GetFieldSettings<any, any> | undefined> | undefined
 >;
 
+/**
+ * Configuration for field complexity calculation.
+ */
 export type FieldSettings = {
 	complexity?: number;
 	multiplier?: number;
 };
 
+/**
+ * Arguments passed to field settings functions.
+ */
 export type GetFieldSettingsArgs<Context, Args> = {
+	/** Arguments passed to the GraphQL field */
 	args: Args;
+	/** Request context */
 	ctx: Context;
 };
 
+/**
+ * Function to determine complexity settings for a field.
+ * Returns either field settings or false to disable complexity calculation.
+ *
+ * @param params - Object containing field arguments and context
+ * @returns Field settings object or false
+ */
 export type GetFieldSettings<Context, Args> = (
 	params: GetFieldSettingsArgs<Context, Args>,
 ) => FieldSettings | false;

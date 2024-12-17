@@ -87,6 +87,12 @@
       "./esbuild/index.ts"
     ],
     "readme": "none",
-    "tsconfig": "./tsconfig.json"
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
   }
 }

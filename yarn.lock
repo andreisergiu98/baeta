@@ -2582,7 +2582,6 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
-    "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     graphql: "npm:^16.9.0"
     typescript: "npm:^5.7.2"

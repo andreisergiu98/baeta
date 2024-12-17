@@ -1,3 +1,2 @@
-export * from './lib/base64.ts';
-export * from './lib/base64-url.ts';
-export * from './lib/text-encoder.ts';
+export { decodeBase64Url, encodeBase64Url } from './lib/base64-url.ts';
+export { decodeBase64, encodeBase64 } from './lib/base64.ts';

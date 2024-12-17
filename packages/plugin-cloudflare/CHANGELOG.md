@@ -1,5 +1,13 @@
 # @baeta/plugin-cloudflare
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies [[`d500378`](https://github.com/andreisergiu98/baeta/commit/d500378198e0a9c48298c4242913bca8ad348228), [`1334c2a`](https://github.com/andreisergiu98/baeta/commit/1334c2a866676c88f0f3d380b22133d81c4e98bc)]:
+  - @baeta/extension-cache-cloudflare@0.0.6
+  - @baeta/generator-sdk@1.0.0
+
 ## 1.0.7
 
 ### Patch Changes

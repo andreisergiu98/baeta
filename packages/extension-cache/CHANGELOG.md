@@ -1,5 +1,16 @@
 # @baeta/extension-cache
 
+## 0.0.6
+
+### Patch Changes
+
+- [#189](https://github.com/andreisergiu98/baeta/pull/189) [`d500378`](https://github.com/andreisergiu98/baeta/commit/d500378198e0a9c48298c4242913bca8ad348228) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - add jsdocs
+
+- Updated dependencies [[`d500378`](https://github.com/andreisergiu98/baeta/commit/d500378198e0a9c48298c4242913bca8ad348228), [`1334c2a`](https://github.com/andreisergiu98/baeta/commit/1334c2a866676c88f0f3d380b22133d81c4e98bc), [`bf92611`](https://github.com/andreisergiu98/baeta/commit/bf9261183eb05f35a54145671c4c6890a5912a34)]:
+  - @baeta/core@1.0.8
+  - @baeta/util-encoding@1.0.0
+  - @baeta/util-log@1.0.0
+
 ## 0.0.5
 
 ### Patch Changes

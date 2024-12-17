@@ -39,42 +39,7 @@
 
 ### decodeBase64Url()
 
-> **decodeBase64Url**(`base64Url`): `string`
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`base64Url`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`string`
-
----
-
-### decodeBinary()
-
-> **decodeBinary**(`value`): `string`
+> **decodeBase64Url**(`value`): `string`
 
 #### Parameters
 
@@ -94,7 +59,7 @@
 </td>
 <td>
 
-`Uint8Array`\<`ArrayBufferLike`\>
+`string`
 
 </td>
 </tr>
@@ -174,38 +139,3 @@
 #### Returns
 
 `string`
-
----
-
-### encodeBinary()
-
-> **encodeBinary**(`value`): `Uint8Array`
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`value`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`Uint8Array`

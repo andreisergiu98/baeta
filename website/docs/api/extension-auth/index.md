@@ -502,7 +502,7 @@ Used for dynamic permission granting based on resolved data.
 
 ### GetGrantResult
 
-> **GetGrantResult**: [`Grants`](namespaces/AuthExtension.md#grants) \| [`Grants`](namespaces/AuthExtension.md#grants)[]
+> **GetGrantResult**: `AuthExtension.Grants` \| `AuthExtension.Grants`[]
 
 Represents the result of a grant operation.
 Can be either a single grant or an array of grants defined in AuthExtension.GrantsMap.
@@ -842,7 +842,7 @@ const roleLoader: ScopeLoader<string> = (role) => userRole === role;
 
 ### ScopeLoaderMap
 
-> **ScopeLoaderMap**: `{ [K in Scopes]: ScopeLoader<Scopes[K]> }`
+> **ScopeLoaderMap**: `{ [K in Scopes]: ScopeLoader<AuthExtension.Scopes[K]> }`
 
 Maps scope names to their respective loaders.
 Each loader handles authorization checks for its scope.
@@ -889,7 +889,7 @@ For non-boolean scopes, preserves the original type.
 
 ### ScopeRules
 
-> **ScopeRules**: `{ [K in Scopes]?: ScopeRule<Scopes[K]> }` & `{ [r in LogicRule]?: ScopeRules }` & `object`
+> **ScopeRules**: `{ [K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]> }` & `{ [r in LogicRule]?: ScopeRules }` & `object`
 
 Defines the structure of authorization scope rules.
 Combines individual scope rules with logical operators and granted permissions.
@@ -912,7 +912,7 @@ Combines individual scope rules with logical operators and granted permissions.
 </td>
 <td>
 
-[`Grants`](namespaces/AuthExtension.md#grants)
+`AuthExtension.Grants`
 
 </td>
 </tr>
@@ -923,7 +923,7 @@ Combines individual scope rules with logical operators and granted permissions.
 
 ### Scopes
 
-> **Scopes**: keyof [`Scopes`](namespaces/AuthExtension.md#scopes)
+> **Scopes**: keyof `AuthExtension.Scopes`
 
 Type alias representing all available scope keys defined in AuthExtension.Scopes.
 Used as the base for constructing scope rules.
@@ -1080,7 +1080,3 @@ const authExt = authExtension<Context>(
   },
 );
 ```
-
-## Namespaces
-
-- [AuthExtension](namespaces/AuthExtension.md)

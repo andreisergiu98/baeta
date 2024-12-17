@@ -7,6 +7,8 @@ export interface ErrorsProps {
 	errors?: TextOutput[];
 }
 
+export type { TextOutput };
+
 const errorIcon = `${style.red.open}✘${style.red.close}`;
 const errorTag = `${style.bgRed.open}[ERROR]${style.bgRed.close}`;
 

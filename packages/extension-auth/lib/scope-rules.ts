@@ -3,10 +3,22 @@ import { isGrantedKey } from './grant.ts';
 import { type LogicRule, isLogicRule } from './rule.ts';
 import { getAuthStore } from './store.ts';
 
+/**
+ * Type alias representing all available scope keys defined in AuthExtension.Scopes.
+ * Used as the base for constructing scope rules.
+ */
 export type Scopes = keyof AuthExtension.Scopes;
 
-type ScopeRule<T> = T extends boolean ? true : T;
+/**
+ * Utility type that enforces boolean scopes must be true.
+ * For non-boolean scopes, preserves the original type.
+ */
+export type ScopeRule<T> = T extends boolean ? true : T;
 
+/**
+ * Defines the structure of authorization scope rules.
+ * Combines individual scope rules with logical operators and granted permissions.
+ */
 export type ScopeRules = {
 	[K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]>;
 } & {

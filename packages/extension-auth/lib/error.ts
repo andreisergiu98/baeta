@@ -2,6 +2,7 @@ import { AggregateGraphQLError, InternalServerError } from '@baeta/errors';
 import { log } from '@baeta/util-log';
 import { GraphQLError } from 'graphql';
 
+/** Custom error resolver function for authorization failures. */
 export type ScopeErrorResolver = (err: unknown, path: string) => Error | unknown;
 
 export function resolveError(err: unknown, resolve: ScopeErrorResolver, path: string) {
@@ -26,6 +27,10 @@ export function defaultErrorResolver(err: unknown, path: string) {
 	return err;
 }
 
+/**
+ * Default error resolver for authorization failures.
+ * If multiple authorization errors are encountered they are combined into `AggregateGraphQLError` with proper HTTP status codes.
+ */
 export function aggregateErrorResolver(err: AggregateError, path: string) {
 	if (err.errors.length === 1) {
 		if (!isGraphqlError(err.errors[0])) {

@@ -1,5 +1,4 @@
-type DeepPartial<T> = {
-	[P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+/** Optional query arguments */
+export type CacheArgs<T> = {
+	[P in keyof T]?: T[P] extends object ? CacheArgs<T[P]> : T[P];
 };
-
-export type CacheArgs<T> = DeepPartial<T>;

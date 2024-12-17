@@ -3,13 +3,13 @@ type GlobalConsoleLog = {
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: respects console.log spec
-type Payload = any[];
+export type ConsolePayload = any[];
 
-type ConsoleLogger = {
-	debug: (...args: Payload) => void;
-	info: (...args: Payload) => void;
-	warn: (...args: Payload) => void;
-	error: (...args: Payload) => void;
+export type ConsoleLogger = {
+	debug: (...args: ConsolePayload) => void;
+	info: (...args: ConsolePayload) => void;
+	warn: (...args: ConsolePayload) => void;
+	error: (...args: ConsolePayload) => void;
 };
 
 function hasConsoleLog(global: Record<string, unknown>): global is GlobalConsoleLog {
@@ -29,10 +29,10 @@ function createLogger(): ConsoleLogger {
 	}
 
 	return {
-		debug: (...args: Payload) => global.console.debug('[baeta:debug]', ...args),
-		info: (...args: Payload) => global.console.info('[baeta:info]', ...args),
-		warn: (...args: Payload) => global.console.warn('[baeta:warn]', ...args),
-		error: (...args: Payload) => global.console.error('[baeta:error]', ...args),
+		debug: (...args: ConsolePayload) => global.console.debug('[baeta:debug]', ...args),
+		info: (...args: ConsolePayload) => global.console.info('[baeta:info]', ...args),
+		warn: (...args: ConsolePayload) => global.console.warn('[baeta:warn]', ...args),
+		error: (...args: ConsolePayload) => global.console.error('[baeta:error]', ...args),
 	};
 }
 

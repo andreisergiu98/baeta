@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-cloudflare",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "keywords": [
     "baeta",
     "graphql",
@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/cloudflare-subscriptions": "workspace:^",
     "@baeta/extension-cache-cloudflare": "workspace:^",
+    "@baeta/subscriptions-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20241205.0",
     "@types/node": "^22.10.1",
@@ -56,15 +56,15 @@
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
-    "@baeta/cloudflare-subscriptions": "workspace:^",
     "@baeta/extension-cache-cloudflare": "workspace:^",
+    "@baeta/subscriptions-cloudflare": "workspace:^",
     "@cloudflare/workers-types": "^4"
   },
   "peerDependenciesMeta": {
-    "@baeta/cloudflare-subscriptions": {
+    "@baeta/extension-cache-cloudflare": {
       "optional": true
     },
-    "@baeta/extension-cache-cloudflare": {
+    "@baeta/subscriptions-cloudflare": {
       "optional": true
     }
   },
@@ -94,6 +94,12 @@
       "./index.ts"
     ],
     "readme": "none",
-    "tsconfig": "./tsconfig.json"
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
   }
 }

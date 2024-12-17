@@ -118,6 +118,12 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 			enforceConsistentEntries(workspace);
 
+			workspace.set('typedocOptions.sort', [
+				'kind',
+				'instance-first',
+				'required-first',
+				'alphabetical-ignoring-documents',
+			]);
 			workspace.set('typedocOptions.readme', 'none');
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
 		}

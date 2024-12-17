@@ -1,4 +1,4 @@
-import { addValidationToSchema } from '@baeta/core';
+import { addValidationToSchema } from '@baeta/core/sdk';
 import { BaetaErrorCode } from '@baeta/errors';
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import test from 'ava';

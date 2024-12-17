@@ -46,7 +46,7 @@
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/plugin-exec": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "execa": "^9.5.1"
+    "execa": "^9.5.2"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
@@ -80,6 +80,12 @@
       "./index.ts"
     ],
     "readme": "none",
-    "tsconfig": "./tsconfig.json"
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
   }
 }

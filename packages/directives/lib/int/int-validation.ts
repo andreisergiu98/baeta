@@ -1,6 +1,11 @@
+/**
+ * Originally based on graphql-validation-directives
+ * Source: https://github.com/marcduez/graphql-validation-directives/blob/main/src/valid-int-directive.ts
+ * Copyright (c) 2022-present Marc Duez
+ * Adapted by Baeta developers
+ */
 import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
-import type { Definition } from '../definition.ts';
 
 interface Args {
 	multipleOf?: number;
@@ -71,7 +76,7 @@ const directive = createInputDirective<Args>({
 	},
 });
 
-export const intValidation: Definition = {
+export const intValidation = {
 	sdl,
 	directive,
 };

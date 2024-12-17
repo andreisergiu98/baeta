@@ -1,4 +1,10 @@
+import type { PubSubEngineV2, PubSubEngineV3 } from './pubsub-engine.ts';
+
+/**
+ * Configuration options for TypedPubSub
+ */
 export interface TypedPubSubOptions {
+	/** Optional prefix for channel names */
 	prefix?: string;
 }
 
@@ -7,23 +13,6 @@ type Any = any;
 
 type PubSubMap = Record<string, Any>;
 type OnMessage<Payload> = (message: Payload) => Promise<void> | void;
-
-interface PubSubEngineBase {
-	publish: (triggerName: string, payload: Any, ...rest: Any[]) => Promise<void>;
-	subscribe: (triggerName: string, onMessage: OnMessage<Any>, ...rest: Any[]) => Promise<number>;
-	unsubscribe: (subId: number, ...rest: Any[]) => void;
-}
-
-interface PubSubEngineV2 extends PubSubEngineBase {
-	asyncIterator: <T>(triggers: string | string[], ...rest: Any[]) => AsyncIterator<T>;
-}
-
-interface PubSubEngineV3 extends PubSubEngineBase {
-	asyncIterableIterator: <T>(
-		triggers: string | readonly string[],
-		...rest: Any[]
-	) => AsyncIterableIterator<T>;
-}
 
 type RestPayloadFnArgs<Fn> = Fn extends (
 	triggerName: string,
@@ -59,7 +48,7 @@ type RestAsyncIterableIteratorFnArgs<Fn> = Fn extends (
 	? Rest
 	: never;
 
-class TypedPubSubBase<Engine extends PubSubEngineBase, Map extends PubSubMap> {
+class TypedPubSubBase<Engine extends PubSubEngineV2 | PubSubEngineV3, Map extends PubSubMap> {
 	protected channelPrefix: string;
 
 	constructor(
@@ -110,6 +99,7 @@ class TypedPubSubV2<Engine extends PubSubEngineV2, Map extends PubSubMap> extend
 	};
 }
 
+/** @hidden */
 class TypedPubSubV3<Engine extends PubSubEngineV3, Map extends PubSubMap> extends TypedPubSubBase<
 	Engine,
 	Map
@@ -124,16 +114,50 @@ class TypedPubSubV3<Engine extends PubSubEngineV3, Map extends PubSubMap> extend
 
 export type TypedPubSub<
 	Engine extends PubSubEngineV2 | PubSubEngineV3,
-	Map extends PubSubMap,
+	// biome-ignore lint/suspicious/noExplicitAny: accept any for dynamic typing
+	Map extends Record<string, any>,
 > = Engine extends PubSubEngineV3
 	? TypedPubSubV3<Engine, Map>
 	: Engine extends PubSubEngineV2
 		? TypedPubSubV2<Engine, Map>
 		: never;
 
+/**
+ * Creates a type-safe wrapper around a PubSub implementation.
+ *
+ * This utility ensures that your subscription channels and their payloads
+ * are properly typed, helping catch potential errors at compile time.
+ *
+ * @param pubsub - The PubSub engine instance (e.g., PubSub, RedisPubSub)
+ * @param options - Configuration options
+ *
+ * @example
+ * ```typescript
+ * // Define your event map
+ * type PubSubMap = {
+ *   "user-updated": User;
+ *   [c: `user-updated-${string}`]: User;
+ * };
+ *
+ * // Create typed PubSub instance
+ * const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub());
+ *
+ * // Usage with Redis
+ * const pubsub = createTypedPubSub<RedisPubSub, PubSubMap>(
+ *   new RedisPubSub({
+ *     publisher: new Redis(options),
+ *     subscriber: new Redis(options),
+ *   }),
+ *   {
+ *     prefix: "feature-1:",
+ *   }
+ * );
+ * ```
+ */
 export function createTypedPubSub<
 	Engine extends PubSubEngineV2 | PubSubEngineV3,
-	Map extends PubSubMap,
+	// biome-ignore lint/suspicious/noExplicitAny: accept any for dynamic typing
+	Map extends Record<string, any>,
 >(pubsub: Engine, options?: TypedPubSubOptions): TypedPubSub<Engine, Map> {
 	if ('asyncIterator' in pubsub) {
 		return new TypedPubSubV2<PubSubEngineV2, Map>(pubsub, options) as TypedPubSub<Engine, Map>;

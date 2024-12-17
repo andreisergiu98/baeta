@@ -3,17 +3,27 @@ import { pruneSchema } from '@graphql-tools/utils';
 import { getModuleBuilder, transformSchema } from '../sdk/index.ts';
 import { addValidationToSchema } from './input-directive/input-schema.ts';
 
-type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
+export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
 
 export interface Options {
 	/**
-	 * Modules to include in the application
+	 * Array of module objects to include in the application.
+	 *
+	 * @example
+	 * ```typescript
+	 * const modules = [
+	 *   userModule,
+	 *   postModule,
+	 *   commentModule
+	 * ];
+	 * ```
 	 */
 	modules: Record<string, unknown>[];
 
 	/**
-	 * Whether to remove fields with no resolvers
-	 * @default false
+	 * When true, removes fields that don't have corresponding resolvers.
+	 *
+	 * @defaultValue false
 	 */
 	pruneSchema?: boolean;
 
@@ -41,6 +51,21 @@ function makeSchema(
 	}
 }
 
+/**
+ * Creates a Baeta application by combining the modules.
+ *
+ * @param options - Configuration options for the application
+ * @returns An object containing the GraphQL schema
+ *
+ * @example
+ * ```typescript
+ * const baeta = createApplication({
+ *   modules: [userModule, postModule],
+ * });
+ *
+ * const { schema } = baeta;
+ * ```
+ */
 export function createApplication(options: Options) {
 	const builders = options.modules.map((module) => getModuleBuilder(module));
 	const builtModules = builders.map((builder) => builder.build());

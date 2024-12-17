@@ -1,5 +1,4 @@
 import { createInputDirective } from '@baeta/core';
-import type { Definition } from '../definition.ts';
 
 interface TrimArgs {
 	end?: boolean;
@@ -58,17 +57,17 @@ const upperDirective = createInputDirective<{ [k: string]: never }>({
 	},
 });
 
-export const trim: Definition = {
+export const trim = {
 	sdl: trimSdl,
 	directive: trimDirective,
 };
 
-export const lower: Definition = {
+export const lower = {
 	sdl: lowerSdl,
 	directive: lowerDirective,
 };
 
-export const upper: Definition = {
+export const upper = {
 	sdl: upperSdl,
 	directive: upperDirective,
 };

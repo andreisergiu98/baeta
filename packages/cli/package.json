@@ -58,7 +58,7 @@
     "@baeta/plugin-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
     "ansi-styles": "^6.2.1",
-    "execa": "^9.5.1",
+    "execa": "^9.5.2",
     "fast-glob": "^3.3.2",
     "ink": "^5.1.0",
     "node-pty": "^1.0.0",
@@ -121,6 +121,12 @@
       "./sdk/index.ts"
     ],
     "readme": "none",
-    "tsconfig": "./tsconfig.json"
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
   }
 }

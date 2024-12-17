@@ -1,31 +1,24 @@
-import { decodeBase64, encodeBase64 } from './base64.ts';
-import { decodeBinary, encodeBinary } from './text-encoder.ts';
+import {
+	hasNodeBase64Requirements,
+	nodeDecodeBase64Url,
+	nodeEncodeBase64Url,
+} from './base64-node.ts';
+import { nativeDecodeBase64Url, nativeEncodeBase64Url } from './base64-url-native.ts';
 
-export function encodeBase64Url(value: string): string {
-	const utf8Bytes = encodeBinary(value);
-	const base64Encoded = encodeBase64(String.fromCharCode(...utf8Bytes));
-	return base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
+function createBase64UrlEncoder() {
+	const global = globalThis;
 
-function createPadding(length: number): string {
-	const padding = 4 - (length % 4);
-	if (padding < 4) {
-		return '='.repeat(padding);
-	}
-	return '';
-}
-
-export function decodeBase64Url(base64Url: string): string {
-	const base64Encoded = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-	const padding = createPadding(base64Url.length);
-	const base64WithPadding = base64Encoded + padding;
-	const binaryString = decodeBase64(base64WithPadding);
-
-	const bytes = new Uint8Array(binaryString.length);
-
-	for (let i = 0; i < binaryString.length; i++) {
-		bytes[i] = binaryString.charCodeAt(i);
+	if (hasNodeBase64Requirements(global)) {
+		return {
+			encodeBase64Url: (value: string): string => nodeEncodeBase64Url(global, value),
+			decodeBase64Url: (value: string): string => nodeDecodeBase64Url(global, value),
+		};
 	}
 
-	return decodeBinary(bytes);
+	return {
+		encodeBase64Url: (value: string): string => nativeEncodeBase64Url(value),
+		decodeBase64Url: (value: string): string => nativeDecodeBase64Url(value),
+	};
 }
+
+export const { encodeBase64Url, decodeBase64Url } = createBase64UrlEncoder();

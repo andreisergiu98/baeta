@@ -1,5 +1,11 @@
 # create-baeta
 
+## 0.0.4
+
+### Patch Changes
+
+- [`770fef4`](https://github.com/andreisergiu98/baeta/commit/770fef4974fd8926886162424f326c4cda2ad21b) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - fix package entrypoint
+
 ## 0.0.3
 
 ### Patch Changes

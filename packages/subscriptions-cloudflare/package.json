@@ -1,6 +1,6 @@
 {
-  "name": "@baeta/cloudflare-subscriptions",
-  "version": "0.1.4",
+  "name": "@baeta/subscriptions-cloudflare",
+  "version": "0.1.5",
   "keywords": [
     "baeta",
     "graphql",
@@ -91,6 +91,12 @@
       "./sdk/index.ts"
     ],
     "readme": "none",
-    "tsconfig": "./tsconfig.json"
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
   }
 }

@@ -5,9 +5,12 @@ import {
 	nameFunction,
 } from '@baeta/core/sdk';
 import type { CreateCacheArgs, TypeGetter, UseCacheArgs } from './global-types.ts';
-import type { MiddlewareOptions, RequiredMiddlewareOptions } from './middleware-options.ts';
+import type {
+	CacheMiddlewareOptions,
+	RequiredCacheMiddlewareOptions,
+} from './middleware-options.ts';
 import { CacheRef, type RefCompatibleRoot } from './ref.ts';
-import type { QueryMatching, StoreAdapter } from './store-adapter.ts';
+import type { CacheQueryMatching, StoreAdapter } from './store-adapter.ts';
 import type { DefaultStoreOptions } from './store-options.ts';
 import type { Store } from './store.ts';
 
@@ -49,15 +52,18 @@ export class CacheExtension extends Extension {
 			$cacheRevision: (revision: number) => {
 				ref.setRevision(revision);
 			},
-			$cacheClear: (store: StoreAdapter<TypeGetter<Result>>, matcher?: QueryMatching<Args>) => {
+			$cacheClear: (
+				store: StoreAdapter<TypeGetter<Result>>,
+				matcher?: CacheQueryMatching<Args>,
+			) => {
 				return store.deleteQueries(ref, matcher);
 			},
 			$useCache: (...args: UseCacheArgs<Result, Root>) => {
 				const [store, options] = args;
 				// We try to please the compiler
 				const middlewareArgs = [options] as Root extends RefCompatibleRoot
-					? [options?: MiddlewareOptions<Root>]
-					: [options: RequiredMiddlewareOptions<Root>];
+					? [options?: CacheMiddlewareOptions<Root>]
+					: [options: RequiredCacheMiddlewareOptions<Root>];
 				const middleware = store.createMiddleware(ref, ...middlewareArgs);
 				nameFunction(middleware, `${type}.${field}.$useCache`);
 				module.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));

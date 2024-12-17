@@ -1,4 +1,4 @@
-interface DurableObjectMigration {
+export interface DurableObjectMigration {
 	tag: string;
 	content: string[];
 }

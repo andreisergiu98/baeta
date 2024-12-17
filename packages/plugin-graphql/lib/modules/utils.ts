@@ -1,3 +1,9 @@
+/**
+ * Originally based on graphql-modules preset of graphql-code-generator
+ * Source: https://github.com/dotansimha/graphql-code-generator/blob/master/packages/presets/graphql-modules/src/utils.ts
+ * Copyright (c) 2016 Dotan Simha
+ * Modified by Baeta developers
+ */
 import { platform } from 'node:os';
 import { getBaseType } from '@graphql-codegen/plugin-helpers';
 import { DEFAULT_SCALARS, wrapTypeWithModifiers } from '@graphql-codegen/visitor-plugin-common';

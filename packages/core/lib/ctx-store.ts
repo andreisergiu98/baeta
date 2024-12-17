@@ -1,4 +1,11 @@
+/**
+ * Configuration options for the context store.
+ */
 export interface ContextStoreOptions {
+	/**
+	 * Whether to load the value lazily (on first access) or eagerly (immediately).
+	 * @defaultValue true
+	 */
 	lazy?: boolean;
 }
 
@@ -8,6 +15,29 @@ export interface ContextStoreValue<T> {
 	load: () => Promise<T>;
 }
 
+/**
+ * Creates a context store for managing asynchronous values within a context object.
+ * See https://baeta.io/docs/guides/context-store
+ *
+ * @param key - A unique symbol to identify the stored value in the context
+ * @param options - Configuration options for the store
+ * @returns A tuple containing get and load functions for managing the stored value
+ *
+ * @example
+ * ```typescript
+ * // Create a store for user data
+ * const userStoreKey = Symbol('userStore');
+ * const [getUser, loadUser] = createContextStore<User>(userStoreKey, { lazy: true });
+ *
+ * // Initialize the store when you create the context
+ * loadUser(ctx, async () => {
+ *   return fetchUser(userId);
+ * });
+ *
+ * // Later, retrieve the user in a resolver
+ * const user = await getUser(ctx);
+ * ```
+ */
 export function createContextStore<T, Context = unknown>(
 	key: symbol,
 	options?: ContextStoreOptions,

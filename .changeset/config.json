@@ -24,7 +24,7 @@
       "@baeta/directives",
       "@baeta/env",
       "@baeta/errors",
-      "@baeta/extensions-auth",
+      "@baeta/extension-auth",
       "@baeta/plugin-autoload",
       "@baeta/plugin-directives",
       "@baeta/plugin-exec",

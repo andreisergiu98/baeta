@@ -21,7 +21,9 @@ export abstract class StoreAdapter<Item> {
 		protected options: StoreOptions<Item>,
 		protected type: string,
 		protected hash: string,
-	) {}
+	) {
+		this.getMany.bind(this);
+	}
 
 	abstract getPartialMany: (refs: ItemRef[]) => Promise<Array<Item | null> | null>;
 
@@ -60,58 +62,65 @@ export abstract class StoreAdapter<Item> {
 		cache: false,
 	});
 
-	protected createKey(ref: ItemRef) {
-		return `${this.type}:items:${this.getRevision()}:${ref.toString()}`;
-	}
-
-	protected createKeyByItem(item: Item) {
-		return this.createKey(this.getRef(item));
-	}
-
-	protected createKeyByQuery(
-		queryRef: string,
-		parentRef?: ParentRef,
-		args?: Record<string, unknown>,
-	) {
-		const namespace = this.createQueryKeyNamespace(queryRef);
-		const metadata = this.createQueryKeyHeader(parentRef, args);
-		return `${namespace}:${metadata}`;
-	}
-
-	protected getRevision() {
-		const version = this.options?.revision?.toString() || '0';
-		return `r${version}_${this.hash}`;
-	}
-
-	protected createQueryKeyNamespace(queryRef: string) {
-		return `${this.type}:${queryRef}:${this.getRevision()}`;
-	}
-
-	protected createQueryKeyHeader(parentRef: ParentRef, args?: Record<string, unknown>) {
-		const encodedArgs = this.encodeQueryArgs(args);
-		const encodedParentRef = this.encodePrimitive(parentRef);
-		return `parent#${encodedParentRef}#args#${encodedArgs}`;
-	}
-
 	get = (ref: ItemRef): Promise<Item | null> => {
 		return this.loader.load(ref);
 	};
 
-	getMany = async (refs: ItemRef[]): Promise<Array<Item> | null> => {
+	getMany(refs: ItemRef[]): Promise<Item[] | null>;
+	getMany<T extends ItemRef>(
+		refs: T[],
+		fallback: (refs: T[]) => Promise<Array<Item>>,
+	): Promise<Item[]>;
+	async getMany<T extends ItemRef>(refs: T[], fallback?: (refs: T[]) => Promise<Array<Item>>) {
 		const results = await this.getPartialMany(refs);
 
-		if (results == null) {
-			return null;
+		if (!fallback) {
+			if (results == null) {
+				return null;
+			}
+
+			const isPartial = results.some((result) => result == null);
+
+			if (isPartial) {
+				return null;
+			}
+
+			return results as Item[];
 		}
 
-		const isPartial = results.some((result) => result == null);
+		const missingRefs =
+			results == null ? refs : refs.filter((_ref, index) => results[index] == null);
 
-		if (isPartial) {
-			return null;
+		const missingItems = await fallback(missingRefs);
+
+		this.saveMany(missingItems).catch((err) => {
+			log.error(err, 'Failed to save missing items');
+		});
+
+		if (missingItems.length < missingRefs.length) {
+			throw new Error(
+				'Item count returned by the fallback method is less than missing refs count.',
+			);
+		}
+
+		if (missingItems.length > missingRefs.length) {
+			log.warn(
+				'Item count returned by the fallback method is greater than missing refs count. Extra items will be ignored.',
+			);
+		}
+
+		if (results == null) {
+			return missingItems;
+		}
+
+		for (let i = 0, j = 0; i < results.length; i++) {
+			if (results[i] == null) {
+				results[i] = missingItems[j++];
+			}
 		}
 
 		return results as Item[];
-	};
+	}
 
 	save = async (item: Item) => {
 		return this.saveMany([item]);
@@ -219,38 +228,37 @@ export abstract class StoreAdapter<Item> {
 		};
 	};
 
-	protected refillNullQueryItems(nullableRefs: Array<ItemRef | null>, items: Item[]) {
-		if (nullableRefs.length === items.length) {
-			return items;
-		}
-
-		const filled: Array<Item | null> = [];
-
-		for (let i = 0, j = 0; i < nullableRefs.length; i++) {
-			if (nullableRefs[i] == null) {
-				filled.push(null);
-			} else {
-				filled.push(items[j]);
-				j++;
-			}
-		}
-
-		return filled;
+	protected createKey(ref: ItemRef) {
+		return `${this.type}:items:${this.getRevision()}:${ref.toString()}`;
 	}
 
-	protected encodeQueryItemRef(item: null | Item) {
-		if (item == null) {
-			return 'null';
-		}
-		const ref = this.getRef(item);
-		return `ref_${ref}`;
+	protected createKeyByItem(item: Item) {
+		return this.createKey(this.getRef(item));
 	}
 
-	protected decodeQueryItemRef(encodedRef: string) {
-		if (encodedRef === 'null') {
-			return null;
-		}
-		return encodedRef.substring(4);
+	protected createKeyByQuery(
+		queryRef: string,
+		parentRef?: ParentRef,
+		args?: Record<string, unknown>,
+	) {
+		const namespace = this.createQueryKeyNamespace(queryRef);
+		const metadata = this.createQueryKeyHeader(parentRef, args);
+		return `${namespace}:${metadata}`;
+	}
+
+	protected getRevision() {
+		const version = this.options?.revision?.toString() || '0';
+		return `r${version}_${this.hash}`;
+	}
+
+	protected createQueryKeyNamespace(queryRef: string) {
+		return `${this.type}:${queryRef}:${this.getRevision()}`;
+	}
+
+	protected createQueryKeyHeader(parentRef: ParentRef, args?: Record<string, unknown>) {
+		const encodedArgs = this.encodeQueryArgs(args);
+		const encodedParentRef = this.encodePrimitive(parentRef);
+		return `parent#${encodedParentRef}#args#${encodedArgs}`;
 	}
 
 	protected createQueryKeyRegExpMatcher(
@@ -335,8 +343,19 @@ export abstract class StoreAdapter<Item> {
 		return `enc_${encodeBase64Url(valStr)}`;
 	}
 
-	protected shouldEncode(value: string) {
-		return /^[a-z0-9_]+$/i.test(value) === false;
+	protected encodeQueryItemRef(item: null | Item) {
+		if (item == null) {
+			return 'null';
+		}
+		const ref = this.getRef(item);
+		return `ref_${ref}`;
+	}
+
+	protected decodeQueryItemRef(encodedRef: string) {
+		if (encodedRef === 'null') {
+			return null;
+		}
+		return encodedRef.substring(4);
 	}
 
 	protected getRef(root: Item): ItemRef {
@@ -354,6 +373,10 @@ export abstract class StoreAdapter<Item> {
 		}
 
 		throw new Error('Object does not have id. Define getRef function in cache options');
+	}
+
+	protected shouldEncode(value: string) {
+		return /^[a-z0-9_]+$/i.test(value) === false;
 	}
 
 	protected getRefFallback(root: unknown) {
@@ -375,5 +398,24 @@ export abstract class StoreAdapter<Item> {
 				'Reference must be string, number or bigint. Define getRef function in cache options',
 			);
 		}
+	}
+
+	protected refillNullQueryItems(nullableRefs: Array<ItemRef | null>, items: Item[]) {
+		if (nullableRefs.length === items.length) {
+			return items;
+		}
+
+		const filled: Array<Item | null> = [];
+
+		for (let i = 0, j = 0; i < nullableRefs.length; i++) {
+			if (nullableRefs[i] == null) {
+				filled.push(null);
+			} else {
+				filled.push(items[j]);
+				j++;
+			}
+		}
+
+		return filled;
 	}
 }

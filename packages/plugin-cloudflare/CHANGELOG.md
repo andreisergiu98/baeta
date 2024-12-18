@@ -1,5 +1,12 @@
 # @baeta/plugin-cloudflare
 
+## 1.0.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @baeta/extension-cache-cloudflare@0.0.7
+
 ## 1.0.8
 
 ### Patch Changes

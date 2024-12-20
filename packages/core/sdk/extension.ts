@@ -49,10 +49,7 @@ export class Extension {
 		return {};
 	}
 
-	getSubscriptionSubscribeExtensions<Iterator, Root, Context, Args>(
-		module: ModuleBuilder,
-		field: string,
-	) {
+	getSubscriptionSubscribeExtensions<Root, Context, Args>(module: ModuleBuilder, field: string) {
 		return {};
 	}
 

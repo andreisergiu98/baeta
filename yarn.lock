@@ -2083,6 +2083,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    ava: "npm:^6.2.0"
     typescript: "npm:^5.7.2"
   languageName: unknown
   linkType: soft

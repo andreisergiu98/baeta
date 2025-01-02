@@ -40,11 +40,13 @@
     "build": "tsup",
     "prepack": "prep",
     "postpack": "prep --clean",
+    "test": "ava",
     "types": "tsc --noEmit"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
+    "ava": "^6.2.0",
     "typescript": "^5.7.2"
   },
   "engines": {

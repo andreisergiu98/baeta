@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_baeta_website=self.webpackChunk_baeta_website||[]).push([[6865],{6865:(e,a,s)=>{s.r(a),s.d(a,{DocSearchModal:()=>b.a1});var b=s(485)}}]);

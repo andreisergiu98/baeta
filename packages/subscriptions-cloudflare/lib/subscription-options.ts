@@ -3,7 +3,11 @@ import type { PoolingType } from './pooling-type.ts';
 import type { SubscriptionDatabase } from './subscription-database.ts';
 
 export interface SubscriptionsContextLoader<Env, Context, ContextParams> {
-	createContext: (params: ContextParams, env: Env, executionContext: ExecutionContext) => Context;
+	createContext: (
+		params: ContextParams,
+		env: Env,
+		executionContext: Pick<ExecutionContext, 'passThroughOnException' | 'waitUntil'>,
+	) => Context;
 	getContextParams: (request: Request, env: Env) => ContextParams;
 }
 

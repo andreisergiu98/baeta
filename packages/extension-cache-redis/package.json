@@ -48,10 +48,10 @@
     "@baeta/core": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.10.1",
-    "graphql": "^16.9.0",
-    "ioredis": "^5.4.1",
-    "typescript": "^5.7.2"
+    "@types/node": "^22.13.1",
+    "graphql": "^16.10.0",
+    "ioredis": "^5.4.2",
+    "typescript": "^5.7.3"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",

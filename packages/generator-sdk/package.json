@@ -45,7 +45,7 @@
   "dependencies": {
     "@baeta/plugin": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "@parcel/watcher": "^2.5.0",
+    "@parcel/watcher": "^2.5.1",
     "change-case-all": "2.1.0",
     "micromatch": "^4.0.8"
   },
@@ -53,8 +53,8 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/micromatch": "^4.0.9",
-    "@types/node": "^22.10.1",
-    "typescript": "^5.7.2"
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=22.12.0"

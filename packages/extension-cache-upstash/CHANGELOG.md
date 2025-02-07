@@ -1,5 +1,12 @@
 # @baeta/extension-cache-upstash
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`c2e5623`](https://github.com/andreisergiu98/baeta/commit/c2e5623819c1b2b6069ab0663b5c5ad4e09e81b5)]:
+  - @baeta/extension-cache@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes

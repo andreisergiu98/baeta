@@ -27,7 +27,7 @@ export type ScopeRules = {
 	$granted?: AuthExtension.Grants;
 };
 
-async function verifyGrant(
+export async function verifyGrant(
 	ctx: unknown,
 	grant: string | undefined,
 	parentPath: string,
@@ -46,7 +46,12 @@ async function verifyGrant(
 	return true;
 }
 
-async function verifyScope(ctx: unknown, scopes: ScopeRules, key: string, parentPath: string) {
+export async function verifyScope(
+	ctx: unknown,
+	scopes: ScopeRules,
+	key: string,
+	parentPath: string,
+) {
 	if (isLogicRule(key)) {
 		return verifyScopes(ctx, scopes[key], key, parentPath);
 	}
@@ -61,7 +66,7 @@ async function verifyScope(ctx: unknown, scopes: ScopeRules, key: string, parent
 	return resolve(value);
 }
 
-async function verifyChainScopes(
+export async function verifyChainScopes(
 	ctx: unknown,
 	scopes: ScopeRules,
 	keys: string[],
@@ -74,7 +79,7 @@ async function verifyChainScopes(
 	return true;
 }
 
-async function verifyRaceScopes(
+export async function verifyRaceScopes(
 	ctx: unknown,
 	scopes: ScopeRules,
 	keys: string[],
@@ -91,7 +96,7 @@ async function verifyRaceScopes(
 	throw new ForbiddenError();
 }
 
-async function verifyOrScopes(
+export async function verifyOrScopes(
 	ctx: unknown,
 	scopes: ScopeRules,
 	keys: string[],
@@ -106,7 +111,7 @@ async function verifyOrScopes(
 	return Promise.any(promises);
 }
 
-async function verifyAndScopes(
+export async function verifyAndScopes(
 	ctx: unknown,
 	scopes: ScopeRules,
 	keys: string[],
@@ -153,5 +158,5 @@ export async function verifyScopes(
 		return verifyAndScopes(ctx, scopes, keys, parentPath);
 	}
 
-	throw new Error("This line shouldn't be reached.");
+	throw new Error("Invalid logic rule! Must be one of '$chain', '$race', '$or', or '$and'.");
 }

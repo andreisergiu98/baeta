@@ -1,9 +1,9 @@
 import type {
-	AuthMethodOptions,
-	AuthMethodSubscribeOptions,
+	AuthMiddlewareOptions,
+	AuthMiddlewareSubscribeOptions,
 	GetPostScopeRules,
 	GetScopeRules,
-} from './auth-extension.ts';
+} from './auth-middlewares.ts';
 import type { ScopeRules } from './scope-rules.ts';
 
 declare global {
@@ -29,7 +29,7 @@ declare global {
 			 */
 			$auth: (
 				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-				options?: AuthMethodOptions<Result, Root, Context, Args>,
+				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
 			) => void;
 
 			/**
@@ -51,7 +51,7 @@ declare global {
 			 */
 			$postAuth: (
 				getScopes: GetPostScopeRules<Result, Root, Context, Args>,
-				options?: AuthMethodOptions<Result, Root, Context, Args>,
+				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
 			) => void;
 		}
 
@@ -65,7 +65,7 @@ declare global {
 			 */
 			$auth: (
 				scopes: ScopeRules | GetScopeRules<Root, Context, unknown>,
-				options?: AuthMethodOptions<unknown, Root, Context, unknown>,
+				options?: AuthMiddlewareOptions<unknown, Root, Context, unknown>,
 			) => void;
 
 			/**
@@ -75,22 +75,7 @@ declare global {
 			 */
 			$postAuth: (
 				getScopes: GetPostScopeRules<unknown, Root, Context, unknown>,
-				options?: AuthMethodOptions<unknown, Root, Context, unknown>,
-			) => void;
-		}
-
-		/**
-		 * Authorization methods for subscriptions.
-		 */
-		export interface SubscriptionExtensions<Root, Context, Args> {
-			/**
-			 * Applies pre-resolution authorization rules for all subscriptions.
-			 * @param scopes - Authorization rules to apply
-			 * @param options - Additional authorization options
-			 */
-			$auth: (
-				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-				options?: AuthMethodOptions<unknown, Root, Context, Args>,
+				options?: AuthMiddlewareOptions<unknown, Root, Context, unknown>,
 			) => void;
 		}
 
@@ -114,7 +99,7 @@ declare global {
 			 */
 			$auth: (
 				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-				options?: AuthMethodSubscribeOptions<Root, Context, Args>,
+				options?: AuthMiddlewareSubscribeOptions<Root, Context, Args>,
 			) => void;
 		}
 
@@ -139,7 +124,7 @@ declare global {
 			 */
 			$auth: (
 				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-				options?: AuthMethodOptions<Result, Root, Context, Args>,
+				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
 			) => void;
 			/**
 			 * Checks authorization after resolver execution.
@@ -160,7 +145,7 @@ declare global {
 			 */
 			$postAuth: (
 				getScopes: GetPostScopeRules<Result, Root, Context, Args>,
-				options?: AuthMethodOptions<Result, Root, Context, Args>,
+				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
 			) => void;
 		}
 	}

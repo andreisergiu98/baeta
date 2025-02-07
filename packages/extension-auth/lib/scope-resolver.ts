@@ -60,14 +60,14 @@ export type ScopeResolverMap = {
 	[k: string]: ScopeResolver;
 };
 
-function resolveBoolean(param: boolean) {
+export function resolveBoolean(param: boolean) {
 	if (param !== true) {
 		throw new ForbiddenError();
 	}
 	return true as const;
 }
 
-function createScopeResolver(
+export function createScopeResolver(
 	ctx: unknown,
 	name: string,
 	value: ScopeLoader<unknown>,

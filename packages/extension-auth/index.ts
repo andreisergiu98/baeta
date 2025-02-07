@@ -1,15 +1,16 @@
+import './lib/global-types.ts';
+
 import type { Extension } from '@baeta/core/sdk';
 import { AuthExtension, type AuthOptions } from './lib/auth-extension.ts';
-import './lib/global-types.ts';
 import type { GetScopeLoader } from './lib/scope-resolver.ts';
 
+export type { AuthOptions } from './lib/auth-extension.ts';
 export type {
-	AuthMethodOptions,
-	AuthMethodSubscribeOptions,
-	AuthOptions,
+	AuthMiddlewareOptions,
+	AuthMiddlewareSubscribeOptions,
 	GetPostScopeRules,
 	GetScopeRules,
-} from './lib/auth-extension.ts';
+} from './lib/auth-middlewares.ts';
 export type { DefaultScopes } from './lib/scope-defaults.ts';
 export { aggregateErrorResolver, type ScopeErrorResolver } from './lib/error.ts';
 export type { GetGrant, GetGrantFn, GetGrantResult } from './lib/grant.ts';

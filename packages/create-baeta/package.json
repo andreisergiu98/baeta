@@ -46,24 +46,24 @@
     "types": "yarn build:versions && tsc --noEmit"
   },
   "dependencies": {
-    "@docusaurus/logger": "^3.6.3",
-    "fs-extra": "^11.2.0",
+    "@docusaurus/logger": "^3.7.0",
+    "fs-extra": "^11.3.0",
     "prompts": "^2.4.2",
-    "semver": "^7.6.3",
+    "semver": "^7.7.1",
     "shelljs": "^0.8.5",
-    "supports-color": "^9.4.0",
+    "supports-color": "^10.0.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.13.1",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.5.8",
     "@types/shelljs": "^0.8.15",
     "@types/yargs": "^17.0.33",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=22.12.0"

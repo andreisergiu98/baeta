@@ -40,7 +40,7 @@ export type UserConnection = {
 
 export type UserEdge = {
   __typename?: 'UserEdge';
-  cursor: Scalars['String']['output'];
+  cursor: Scalars['ID']['output'];
   node?: Maybe<User>;
 };
 
@@ -52,7 +52,7 @@ export type UserPhotoConnection = {
 
 export type UserPhotoEdge = {
   __typename?: 'UserPhotoEdge';
-  cursor: Scalars['String']['output'];
+  cursor: Scalars['ID']['output'];
   node?: Maybe<UserPhoto>;
 };
 

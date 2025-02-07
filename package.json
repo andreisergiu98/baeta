@@ -46,7 +46,7 @@
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",
     "sync:examples": "./examples/sync.sh",
     "test": "yarn turbo test --filter='./packages/*'",
-    "types": "yarn turbo types --filter='./packages/*'",
+    "types": "yarn turbo types",
     "watch": "yarn turbo watch build --filter='./packages/*'"
   },
   "devDependencies": {
@@ -54,14 +54,14 @@
     "@baeta/builder": "workspace:^",
     "@biomejs/biome": "^1.9.4",
     "@changesets/changelog-github": "^0.5.0",
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.13.1",
     "@yarnpkg/sdks": "^3.2.0",
     "@yarnpkg/types": "^4.0.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.11",
+    "lint-staged": "^15.4.3",
     "prettier": "^3.4.2",
-    "turbo": "^2.3.3",
-    "typescript": "^5.7.2"
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.3"
   },
   "packageManager": "yarn@4.5.3"
 }

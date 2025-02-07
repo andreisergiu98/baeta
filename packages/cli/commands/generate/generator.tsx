@@ -141,8 +141,10 @@ export function Generator(props: GeneratorProps) {
 			return;
 		}
 
-		generate(config.graphql, plugins, getHooks());
-	}, [config, watch, skipInitial, plugins, getHooks]);
+		generate(config.graphql, plugins, getHooks()).then(() => {
+			stdin.stdin.destroy();
+		});
+	}, [config, watch, skipInitial, plugins, stdin, getHooks]);
 
 	useEffect(() => {
 		if (watch !== true) {
@@ -157,8 +159,9 @@ export function Generator(props: GeneratorProps) {
 
 		return () => {
 			instance.close();
+			stdin.stdin.destroy();
 		};
-	}, [config, watch, plugins, getHooks]);
+	}, [config, watch, plugins, stdin, getHooks]);
 
 	return (
 		<>

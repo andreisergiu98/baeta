@@ -5,6 +5,7 @@ import type { SubscriptionsOptions } from './subscription-options.ts';
 import { useWebsocket } from './use-websocket.ts';
 
 const forgedCtx: ExecutionContext = {
+	props: {},
 	passThroughOnException() {
 		console.error("passThroughOnException is not supported for 'subscribe'");
 	},

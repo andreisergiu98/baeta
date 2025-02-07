@@ -47,10 +47,10 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "ava": "^6.2.0",
-    "graphql": "^16.9.0",
+    "graphql": "^16.10.0",
     "graphql-subscriptions-v2": "npm:graphql-subscriptions@^2.0.0",
     "graphql-subscriptions-v3": "npm:graphql-subscriptions@^3.0.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=22.12.0"

@@ -47,14 +47,14 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "graphql-ws": "^5.16.0"
+    "graphql-ws": "^6.0.3"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20241205.0",
-    "graphql": "^16.9.0",
-    "typescript": "^5.7.2"
+    "@cloudflare/workers-types": "^4.20250204.0",
+    "graphql": "^16.10.0",
+    "typescript": "^5.7.3"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4",

@@ -1,5 +1,5 @@
 import { isDevelopmentMode } from '@baeta/util-env';
-import { GraphQLError, type GraphQLErrorOptions } from 'graphql';
+import { GraphQLError, type GraphQLErrorExtensions, type GraphQLErrorOptions } from 'graphql';
 
 const isDev = isDevelopmentMode();
 
@@ -24,6 +24,11 @@ export enum BaetaErrorCode {
  * Results in a 401 HTTP status code.
  */
 export class UnauthenticatedError extends GraphQLError {
+	declare readonly extensions: GraphQLErrorExtensions & {
+		code: BaetaErrorCode.Unauthenticated;
+		http: { status: 401 };
+	};
+
 	constructor(
 		message = 'Access denied! You need to be authenticated to perform this action!',
 		options?: GraphQLErrorOptions,
@@ -45,6 +50,10 @@ export class UnauthenticatedError extends GraphQLError {
  * Thrown when an authenticated user lacks the required permissions.
  */
 export class ForbiddenError extends GraphQLError {
+	declare readonly extensions: GraphQLErrorExtensions & {
+		code: BaetaErrorCode.Forbidden;
+	};
+
 	constructor(
 		message = "Access denied! You don't have permission to perform this action!",
 		options?: GraphQLErrorOptions,
@@ -63,6 +72,10 @@ export class ForbiddenError extends GraphQLError {
  * Thrown when the user provides invalid input data.
  */
 export class BadUserInput extends GraphQLError {
+	declare readonly extensions: GraphQLErrorExtensions & {
+		code: BaetaErrorCode.BadUserInput;
+	};
+
 	constructor(message = 'Invalid user input!', options?: GraphQLErrorOptions) {
 		super(message, {
 			...options,
@@ -80,6 +93,10 @@ export class BadUserInput extends GraphQLError {
  * In production, shows a generic error message.
  */
 export class InternalServerError extends GraphQLError {
+	declare readonly extensions: GraphQLErrorExtensions & {
+		code: BaetaErrorCode.InternalServerError;
+	};
+
 	constructor(err: Error, message = 'Internal server error!', options?: GraphQLErrorOptions) {
 		super(isDev ? err.message : message, {
 			...options,
@@ -104,6 +121,17 @@ function getStackTrace(err: Error) {
  * Useful for batch operations where multiple errors need to be reported.
  */
 export class AggregateGraphQLError extends GraphQLError {
+	declare readonly extensions: GraphQLErrorExtensions & {
+		code: BaetaErrorCode.AggregateError;
+		errors: Array<{
+			message: string;
+			path?: (string | number)[];
+			locations?: readonly { line: number; column: number }[];
+			extensions?: GraphQLErrorExtensions;
+			stacktrace?: string;
+		}>;
+	};
+
 	constructor(
 		errors: GraphQLError[],
 		message = 'Multiple errors encountered',

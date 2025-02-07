@@ -46,7 +46,6 @@ export async function saveGrants<Result, Root, Context, Args>(
 		getAuthStore(ctx),
 		resolveGrants(root, args, ctx, info, result, grants),
 	]);
-
 	store.grantCache.setGrants(createResolverPath(info.path), resolvedGrants);
 }
 

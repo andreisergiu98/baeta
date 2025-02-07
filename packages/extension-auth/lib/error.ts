@@ -8,14 +8,14 @@ export type ScopeErrorResolver = (err: unknown, path: string) => Error | unknown
 export function resolveError(err: unknown, resolve: ScopeErrorResolver, path: string) {
 	const resolvedError = resolve(err, path);
 
-	if (resolvedError) {
+	if (resolvedError instanceof Error) {
 		throw resolvedError;
 	}
 
 	throw err;
 }
 
-export function defaultErrorResolver(err: unknown, path: string) {
+export function defaultErrorResolver(err: unknown, path: string): Error | unknown {
 	if (err instanceof AggregateError) {
 		return aggregateErrorResolver(err, path);
 	}

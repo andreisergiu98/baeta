@@ -6,7 +6,7 @@ import { createApplication } from '@baeta/core';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
-import { useServer } from 'graphql-ws/lib/use/ws';
+import { useServer } from 'graphql-ws/use/ws';
 import { WebSocketServer } from 'ws';
 import { pubsub } from './lib/pubsub.ts';
 import { modules } from './modules/autoload.ts';

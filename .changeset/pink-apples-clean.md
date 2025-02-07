@@ -6,6 +6,8 @@
 "@baeta/generator-sdk": patch
 "@baeta/plugin-graphql": patch
 "@baeta/subscriptions-cloudflare": patch
+"@baeta/extension-auth": patch
+"@baeta/extension-cache-redis": patch
 ---
 
 update dependencies

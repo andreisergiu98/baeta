@@ -2045,7 +2045,7 @@ __metadata:
     graphql-scalars: "npm:^1.24.1"
     graphql-ws: "npm:^6.0.3"
     graphql-yoga: "npm:^5.11.0"
-    ioredis: "npm:^5.4.2"
+    ioredis: "npm:^5.5.0"
     prisma: "npm:^6.3.1"
     typescript: "npm:^5.7.3"
     ws: "npm:^8.18.0"
@@ -2074,7 +2074,7 @@ __metadata:
     graphql-scalars: "npm:^1.24.1"
     graphql-ws: "npm:^6.0.3"
     graphql-yoga: "npm:^5.11.0"
-    ioredis: "npm:^5.4.2"
+    ioredis: "npm:^5.5.0"
     prisma: "npm:^6.3.1"
     typescript: "npm:^5.7.3"
     ws: "npm:^8.18.0"
@@ -2093,9 +2093,9 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20250204.0"
+    "@hono/graphql-server": "npm:^0.5.1"
     graphql: "npm:^16.10.0"
-    graphql-yoga: "npm:^5.11.0"
-    hono: "npm:^4.6.20"
+    hono: "npm:^4.7.0"
     miniflare: "npm:^3.20250129.0"
     typescript: "npm:^5.7.3"
     wrangler: "npm:^3.107.3"
@@ -2114,7 +2114,7 @@ __metadata:
     "@cloudflare/workers-types": "npm:^4.20250204.0"
     graphql: "npm:^16.10.0"
     graphql-yoga: "npm:^5.11.0"
-    hono: "npm:^4.6.20"
+    hono: "npm:^4.7.0"
     miniflare: "npm:^3.20250129.0"
     typescript: "npm:^5.7.3"
     wrangler: "npm:^3.107.3"
@@ -2381,7 +2381,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.13.1"
     graphql: "npm:^16.10.0"
-    ioredis: "npm:^5.4.2"
+    ioredis: "npm:^5.5.0"
     typescript: "npm:^5.7.3"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
@@ -5135,6 +5135,17 @@ __metadata:
   dependencies:
     "@hapi/hoek": "npm:^9.0.0"
   checksum: 10/084bfa647015f4fd3fdd51fadb2747d09ef2f5e1443d6cbada2988b0c88494f85edf257ec606c790db146ac4e34ff57f3fcb22e3299b8e06ed5c87ba7583495c
+  languageName: node
+  linkType: hard
+
+"@hono/graphql-server@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@hono/graphql-server@npm:0.5.1"
+  dependencies:
+    graphql: "npm:^16.5.0"
+  peerDependencies:
+    hono: ">=3.0.0"
+  checksum: 10/7b3bf1671a74c9810b92cd591c9d3094c5d2ad15802841af8b70211955a892e4aae9000c84b99a2a2af26658fe6496b99039ac96ba6ab9dbcbf3d21f7b29ed26
   languageName: node
   linkType: hard
 
@@ -12382,7 +12393,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.10.0":
+"graphql@npm:^16.10.0, graphql@npm:^16.5.0":
   version: 16.10.0
   resolution: "graphql@npm:16.10.0"
   checksum: 10/d42cf81ddcf3a61dfb213217576bf33c326f15b02c4cee369b373dc74100cbdcdc4479b3b797e79b654dabd8fddf50ef65ff75420e9ce5596c02e21f24c9126a
@@ -12681,10 +12692,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.6.20":
-  version: 4.6.20
-  resolution: "hono@npm:4.6.20"
-  checksum: 10/33e9e32db43f9b12efeda8a3770fb331b3fd2349c2ee259c5aeb2869f49e1302ec13e0dc865ca758dbec55b2d986a380336b0c122f44bcce7113d706da5e5893
+"hono@npm:^4.7.0":
+  version: 4.7.0
+  resolution: "hono@npm:4.7.0"
+  checksum: 10/b827180fd9cfb3a1005454a3d3049bd1c3f69c8174ed2e766b3c77fa41c85d08d67c5ce54765ec8b45d1933ebca69444db6fdce8ba6b10ced75d970de69d2fca
   languageName: node
   linkType: hard
 
@@ -13221,9 +13232,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ioredis@npm:^5.4.2":
-  version: 5.4.2
-  resolution: "ioredis@npm:5.4.2"
+"ioredis@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "ioredis@npm:5.5.0"
   dependencies:
     "@ioredis/commands": "npm:^1.1.1"
     cluster-key-slot: "npm:^1.1.0"
@@ -13234,7 +13245,7 @@ __metadata:
     redis-errors: "npm:^1.2.0"
     redis-parser: "npm:^3.0.0"
     standard-as-callback: "npm:^2.1.0"
-  checksum: 10/1ba306dfb5ec03b07f797e7c55da99207448ce5f733ffd46b03a215ec4db73bd572adb7cf20c993e04f437e80ba4ebe261077d0fc98ed14162cd1b09aa4b8634
+  checksum: 10/2f54b669974a8128c795c87909869405cefda60f4736c8eacd52597fac5e1a706ae14cd410e17ccd523142e9f7ba353a28414d1169990a2058f9ee445d51ddfd
   languageName: node
   linkType: hard
 

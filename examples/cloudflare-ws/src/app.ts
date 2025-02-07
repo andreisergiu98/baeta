@@ -3,8 +3,8 @@ import {
 	SubscriptionDatabaseD1,
 	createCloudflareSubscription,
 } from '@baeta/subscriptions-cloudflare';
-import { createYoga } from 'graphql-yoga';
-import { Hono } from 'hono';
+import { graphqlServer } from '@hono/graphql-server';
+import { Hono, type MiddlewareHandler } from 'hono';
 import { modules } from './modules/autoload.ts';
 import type { Context } from './types/context.ts';
 
@@ -21,11 +21,9 @@ const baeta = createApplication({
 	modules,
 });
 
-const yoga = createYoga({
+const server = graphqlServer({
 	schema: baeta.schema,
-	graphiql: {
-		subscriptionsProtocol: 'WS',
-	},
+	graphiql: true,
 });
 
 const subscriptions = createCloudflareSubscription<Env, Context, ContextParams>({
@@ -60,27 +58,25 @@ function getContextParams(request: Request, env: Env): ContextParams {
 	return { userId: 'id-0' };
 }
 
-function handleGraphql(request: Request, env: Env, ctx: ExecutionContext) {
-	const contextParams = getContextParams(request, env);
-	const context = createContext(contextParams, env, ctx);
-	return yoga.handleRequest(request, context);
-}
+const wsMiddleware: MiddlewareHandler = (ctx, next) => {
+	const upgradeHeader = ctx.req.header('upgrade');
+	if (upgradeHeader !== 'websocket') {
+		return next();
+	}
+	return subscriptions.handleWS(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
+};
+
+const graphqlMiddleware: MiddlewareHandler = (ctx, next) => {
+	const contextParams = getContextParams(ctx.req.raw, ctx.env);
+	const context = createContext(contextParams, ctx.env, ctx.executionCtx as ExecutionContext);
+	Object.assign(ctx.executionCtx, context);
+	return server(ctx, next);
+};
 
 const router = new Hono<{ Bindings: Env }>();
 
-router.get('/graphql', (ctx) => {
-	const upgradeHeader = ctx.req.header('upgrade');
-
-	if (upgradeHeader === 'websocket') {
-		return subscriptions.handleWS(ctx.req.raw, ctx.env, ctx.executionCtx);
-	}
-
-	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
-});
-
-router.post('/graphql', (ctx) => {
-	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
-});
+router.get('/graphql', wsMiddleware, graphqlMiddleware);
+router.post('/graphql', graphqlMiddleware);
 
 export const BaetaWsConnections = subscriptions.createWsConnectionsClass();
 

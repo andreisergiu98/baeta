@@ -32,9 +32,9 @@
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
+    "@hono/graphql-server": "^0.5.1",
     "graphql": "^16.10.0",
-    "graphql-yoga": "^5.11.0",
-    "hono": "^4.6.20"
+    "hono": "^4.7.0"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",

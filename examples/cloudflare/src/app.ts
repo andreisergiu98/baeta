@@ -21,17 +21,18 @@ function handleGraphql(request: Request, env: Env, ctx: ExecutionContext) {
 		executionCtx: ctx,
 		waitUntil: ctx.waitUntil,
 	};
-	return yoga.handleRequest(request, context);
+	return yoga.fetch(request, context);
 }
 
 const router = new Hono<{ Bindings: Env }>();
 
 router.get('/graphql', (ctx) => {
-	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
+	ctx.executionCtx;
+	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
 });
 
 router.post('/graphql', (ctx) => {
-	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
+	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
 });
 
 export default router;

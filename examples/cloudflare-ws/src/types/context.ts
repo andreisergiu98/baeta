@@ -1,4 +1,4 @@
-import type { Publish, Subscribe } from '@baeta/cloudflare-subscriptions';
+import type { Publish, Subscribe } from '@baeta/subscriptions-cloudflare';
 import type { PubSubMap } from './pubsub.ts';
 
 export type Context = {

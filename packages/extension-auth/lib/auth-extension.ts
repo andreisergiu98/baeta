@@ -56,7 +56,7 @@ export interface AuthMethodSubscribeOptions<Root, Context, Args> {
  */
 export type GetScopeRules<Root, Context, Args> = (
 	params: MiddlewareParams<Root, Context, Args>,
-) => boolean | ScopeRules | Promise<boolean | ScopeRules>;
+) => true | ScopeRules | Promise<true | ScopeRules>;
 
 /**
  * Function to get scope rules for post-resolution authorization
@@ -64,7 +64,7 @@ export type GetScopeRules<Root, Context, Args> = (
 export type GetPostScopeRules<Result, Root, Context, Args> = (
 	params: MiddlewareParams<Root, Context, Args>,
 	result: Result,
-) => boolean | ScopeRules | Promise<boolean | ScopeRules>;
+) => true | ScopeRules | Promise<true | ScopeRules>;
 
 export class AuthExtension<Ctx> extends Extension {
 	private defaultRule: LogicRule = '$and';

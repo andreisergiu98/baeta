@@ -46,7 +46,7 @@
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",
     "sync:examples": "./examples/sync.sh",
     "test": "yarn turbo test --filter='./packages/*'",
-    "types": "yarn turbo types --filter='./packages/*'",
+    "types": "yarn turbo types",
     "watch": "yarn turbo watch build --filter='./packages/*'"
   },
   "devDependencies": {

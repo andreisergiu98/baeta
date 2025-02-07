@@ -1,5 +1,18 @@
 # @baeta/cli
 
+## 1.0.9
+
+### Patch Changes
+
+- [`dd686bf`](https://github.com/andreisergiu98/baeta/commit/dd686bf8057f0786ab12273cc3a0736f34bf07b7) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix cli not closing after generate
+
+- [`e4e1b97`](https://github.com/andreisergiu98/baeta/commit/e4e1b97dee7bb8e1170b978225ccefe4b36c0d3a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - update dependencies
+
+- Updated dependencies [[`e4e1b97`](https://github.com/andreisergiu98/baeta/commit/e4e1b97dee7bb8e1170b978225ccefe4b36c0d3a)]:
+  - @baeta/compiler@1.0.9
+  - @baeta/plugin-graphql@1.0.9
+  - @baeta/generator@1.0.1
+
 ## 1.0.8
 
 ### Patch Changes

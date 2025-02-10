@@ -1,5 +1,5 @@
 import { ForbiddenError } from '@baeta/errors';
-import type { Scopes } from './scope-rules.ts';
+import type { ScopesShape } from './scope-rules.ts';
 import { getAuthStore } from './store.ts';
 
 /**
@@ -20,7 +20,9 @@ import { getAuthStore } from './store.ts';
  * });
  * ```
  */
-export type GetScopeLoader<Ctx> = (ctx: Ctx) => ScopeLoaderMap | Promise<ScopeLoaderMap>;
+export type GetScopeLoader<Scopes extends ScopesShape, Ctx> = (
+	ctx: Ctx,
+) => ScopeLoaderMap<Scopes> | Promise<ScopeLoaderMap<Scopes>>;
 
 /**
  * Represents a scope loader that can be either a boolean value or a function.
@@ -50,8 +52,8 @@ export type ScopeLoader<T> = boolean | ((value: T) => boolean | Promise<boolean>
  * };
  * ```
  */
-export type ScopeLoaderMap = {
-	[K in Scopes]: ScopeLoader<AuthExtension.Scopes[K]>;
+export type ScopeLoaderMap<Scopes extends ScopesShape> = {
+	[K in keyof Scopes]: ScopeLoader<Scopes[K]>;
 };
 
 type ScopeResolver = (value: unknown) => true | Promise<true>;
@@ -93,9 +95,9 @@ export function createScopeResolver(
 	};
 }
 
-export function createScopeResolverMap(
+export function createScopeResolverMap<Scopes extends ScopesShape>(
 	ctx: unknown,
-	scopeLoaderMap: ScopeLoaderMap,
+	scopeLoaderMap: ScopeLoaderMap<Scopes>,
 ): ScopeResolverMap {
 	const map: ScopeResolverMap = {};
 

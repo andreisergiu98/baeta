@@ -22,7 +22,7 @@ import type { ScopeRules } from './scope-rules.ts';
  */
 export interface AuthOptions {
 	/** Default authorization scopes for queries, mutations or subscriptions */
-	defaultScopes?: DefaultScopes;
+	defaultScopes?: DefaultScopes<AuthExtension.Scopes, AuthExtension.Grants>;
 	/** Custom error resolver for authorization failures */
 	errorResolver?: ScopeErrorResolver;
 }
@@ -31,10 +31,14 @@ export class AuthExtension<Ctx> extends Extension {
 	private authMap: Record<string, Record<string, undefined | NativeMiddleware>> = {};
 
 	constructor(
-		readonly loadScopes: GetScopeLoader<Ctx>,
+		readonly loadScopes: GetScopeLoader<AuthExtension.Scopes, Ctx>,
 		readonly options: AuthOptions = {},
 	) {
 		super();
+	}
+
+	getMiddlewareMap() {
+		return this.authMap;
 	}
 
 	getTypeExtensions = <Root, Context extends Ctx>(
@@ -78,7 +82,7 @@ export class AuthExtension<Ctx> extends Extension {
 	};
 
 	build = (_module: ModuleBuilder, mapper: ResolverMapper) => {
-		compileMiddlewares<Ctx>(
+		compileMiddlewares<AuthExtension.Scopes, AuthExtension.Grants, Ctx>(
 			mapper,
 			this.authMap,
 			this.loadScopes,
@@ -89,8 +93,10 @@ export class AuthExtension<Ctx> extends Extension {
 
 	private createAuthMethod<Result, Root, Context extends Ctx, Args>(type: string, field: string) {
 		return (
-			scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-			options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
+			scopes:
+				| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
+				| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Root, Context, Args>,
+			options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
 		) => {
 			const middleware = createMiddleware(
 				type,
@@ -110,8 +116,15 @@ export class AuthExtension<Ctx> extends Extension {
 		field: string,
 	) {
 		return (
-			scopes: GetPostScopeRules<Result, Root, Context, Args>,
-			options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
+			scopes: GetPostScopeRules<
+				AuthExtension.Scopes,
+				AuthExtension.Grants,
+				Result,
+				Root,
+				Context,
+				Args
+			>,
+			options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
 		) => {
 			const middleware = createPostMiddleware(
 				type,

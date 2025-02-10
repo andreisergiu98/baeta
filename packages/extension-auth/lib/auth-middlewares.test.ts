@@ -8,8 +8,8 @@ import {
 	createPostMiddleware,
 	verifyMiddlewareScopes,
 } from './auth-middlewares.ts';
-import type { GetGrantFn } from './grant.ts';
 import type { DefaultScopes } from './scope-defaults.ts';
+import type { ScopeLoaderMap } from './scope-resolver.ts';
 import type { ScopeRules } from './scope-rules.ts';
 import { loadAuthStore } from './store-loader.ts';
 import { getAuthStore } from './store.ts';
@@ -17,9 +17,17 @@ import { getAuthStore } from './store.ts';
 declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
-async function loadScopes() {
+type TestScopes = {
+	trueScope: true;
+	falseScope: true;
+	lazyTrueScope: true;
+	lazyFalseScope: true;
+};
+
+type TestGrants = 'grant';
+
+async function loadScopes(): Promise<ScopeLoaderMap<TestScopes>> {
 	return {
-		isPublic: true,
 		trueScope: true,
 		falseScope: false,
 		lazyTrueScope: async () => {
@@ -33,8 +41,8 @@ async function loadScopes() {
 	};
 }
 
-function createGetGrantFn(grants: string[]) {
-	return (() => grants as never[]) as GetGrantFn<unknown, unknown, unknown, unknown>;
+function createGetGrantFn(grants: TestGrants[]) {
+	return () => grants;
 }
 
 function createArgs() {
@@ -70,13 +78,23 @@ const postMiddlewareAdapter: typeof createMiddleware = (
 	);
 };
 
-function testCreateMiddleware(createMiddlewareHelper: typeof createMiddleware, name: string) {
+function testCreateMiddleware(
+	createMiddlewareHelper: typeof createMiddleware<
+		TestScopes,
+		TestGrants,
+		unknown,
+		unknown,
+		unknown,
+		unknown
+	>,
+	name: string,
+) {
 	test(`${name} calls resolver for valid scopes`, async (t) => {
 		const { ctx, info } = createArgs();
 
-		const scopes = {
+		const scopes: ScopeRules<TestScopes, TestGrants> = {
 			trueScope: true,
-		} as ScopeRules;
+		};
 
 		const middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes);
 
@@ -90,15 +108,15 @@ function testCreateMiddleware(createMiddlewareHelper: typeof createMiddleware, n
 	test(`${name} handles global scopes`, async (t) => {
 		const { ctx, info } = createArgs();
 
-		const scopes = {
+		const scopes: ScopeRules<TestScopes, TestGrants> = {
 			trueScope: true,
-		} as ScopeRules;
+		};
 
-		const globalScopes = {
+		const globalScopes: DefaultScopes<TestScopes, TestGrants> = {
 			Query: {
 				falseScope: true,
 			},
-		} as DefaultScopes;
+		};
 
 		const resolver = sinon.spy(async () => 'result');
 
@@ -115,15 +133,15 @@ function testCreateMiddleware(createMiddlewareHelper: typeof createMiddleware, n
 	test(`${name} respects skipDefaultScopes`, async (t) => {
 		const { ctx, info } = createArgs();
 
-		const scopes = {
+		const scopes: ScopeRules<TestScopes, TestGrants> = {
 			trueScope: true,
-		} as ScopeRules;
+		};
 
-		const globalScopes = {
+		const globalScopes: DefaultScopes<TestScopes, TestGrants> = {
 			Query: {
 				falseScope: true,
 			},
-		} as DefaultScopes;
+		};
 
 		const resolver = sinon.spy(async () => 'result');
 
@@ -141,16 +159,13 @@ function testCreateMiddleware(createMiddlewareHelper: typeof createMiddleware, n
 		const next = sinon.spy(async () => 'result');
 		const grantFn = sinon.spy(createGetGrantFn(['grant']));
 
-		const middleware = createMiddlewareHelper(
-			'Query',
-			'test',
-			loadScopes,
-			{ trueScope: true } as ScopeRules,
-			undefined,
-			{
-				grants: grantFn,
-			},
-		);
+		const scopes: ScopeRules<TestScopes, TestGrants> = {
+			trueScope: true,
+		};
+
+		const middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes, undefined, {
+			grants: grantFn,
+		});
 
 		await middleware(next)(null, {}, ctx, info);
 
@@ -166,16 +181,13 @@ function testCreateMiddleware(createMiddlewareHelper: typeof createMiddleware, n
 		const next = sinon.spy(async () => 'result');
 		const grantFn = sinon.spy(createGetGrantFn(['grant']));
 
-		const middleware = createMiddlewareHelper(
-			'Query',
-			'test',
-			loadScopes,
-			{ falseScope: true } as ScopeRules,
-			undefined,
-			{
-				grants: grantFn,
-			},
-		);
+		const scopes: ScopeRules<TestScopes, TestGrants> = {
+			falseScope: true,
+		};
+
+		const middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes, undefined, {
+			grants: grantFn,
+		});
 
 		await t.throwsAsync(middleware(next)(null, {}, ctx, info) as Promise<unknown>, {
 			instanceOf: ForbiddenError,
@@ -197,11 +209,15 @@ function testCreateMiddleware(createMiddlewareHelper: typeof createMiddleware, n
 			return err;
 		});
 
+		const scopes: ScopeRules<TestScopes, TestGrants> = {
+			falseScope: true,
+		};
+
 		const middleware = createMiddlewareHelper(
 			'Query',
 			'test',
 			loadScopes,
-			{ falseScope: true } as ScopeRules,
+			scopes,
 			undefined,
 			undefined,
 			errorResolver,
@@ -230,11 +246,15 @@ function testCreateMiddleware(createMiddlewareHelper: typeof createMiddleware, n
 			return err;
 		});
 
+		const scopes: ScopeRules<TestScopes, TestGrants> = {
+			falseScope: true,
+		};
+
 		const middleware = createMiddlewareHelper(
 			'Query',
 			'test',
 			loadScopes,
-			{ falseScope: true } as ScopeRules,
+			scopes,
 			undefined,
 			{ onError: localErrorResolver },
 			globalErrorResolver,
@@ -255,9 +275,9 @@ testCreateMiddleware(postMiddlewareAdapter, 'createPostMiddleware');
 test("createMiddleware doesn't call resolver for failing scopes", async (t) => {
 	const { ctx, info } = createArgs();
 
-	const scopes = {
+	const scopes: ScopeRules<TestScopes, TestGrants> = {
 		falseScope: true,
-	} as ScopeRules;
+	};
 
 	const middleware = createMiddleware('Query', 'test', loadScopes, scopes);
 
@@ -273,7 +293,7 @@ test("createMiddleware doesn't call resolver for failing scopes", async (t) => {
 test('verifyMiddlewareScopes resolves valid scopes', async (t) => {
 	const { ctx, info } = createArgs();
 
-	const requiredScopes = { trueScope: true } as ScopeRules;
+	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
 
 	await t.notThrowsAsync(verifyMiddlewareScopes(ctx, info, undefined, requiredScopes, () => null));
 });
@@ -304,8 +324,8 @@ test('verifyMiddlewareScopes throws when no scopes are empty', async (t) => {
 test('verifyMiddlewareScopes throws for failing default scopes', async (t) => {
 	const { ctx, info } = createArgs();
 
-	const defaultScopes = { falseScope: true } as ScopeRules;
-	const requiredScopes = { trueScope: true } as ScopeRules;
+	const defaultScopes: ScopeRules<TestScopes, TestGrants> = { falseScope: true };
+	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
 
 	await t.throwsAsync(
 		verifyMiddlewareScopes(ctx, info, defaultScopes, requiredScopes, () => null),
@@ -318,8 +338,8 @@ test('verifyMiddlewareScopes throws for failing default scopes', async (t) => {
 test('verifyMiddlewareScopes resolves default scopes', async (t) => {
 	const { ctx, info } = createArgs();
 
-	const defaultScopes = { trueScope: true } as ScopeRules;
-	const requiredScopes = { trueScope: true } as ScopeRules;
+	const defaultScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
+	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
 
 	await t.notThrowsAsync(
 		verifyMiddlewareScopes(ctx, info, defaultScopes, requiredScopes, () => null),
@@ -329,7 +349,7 @@ test('verifyMiddlewareScopes resolves default scopes', async (t) => {
 test('verifyMiddlewareScopes handles errors with error resolver', async (t) => {
 	const { ctx, info } = createArgs();
 
-	const requiredScopes = { falseScope: true } as ScopeRules;
+	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { falseScope: true };
 
 	const errorResolver = sinon.spy((err: unknown) => {
 		if (!(err instanceof Error)) {

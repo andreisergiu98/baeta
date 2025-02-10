@@ -15,7 +15,7 @@ export type { DefaultScopes } from './lib/scope-defaults.ts';
 export { aggregateErrorResolver, type ScopeErrorResolver } from './lib/error.ts';
 export type { GetGrant, GetGrantFn, GetGrantResult } from './lib/grant.ts';
 export type { LogicRule } from './lib/rule.ts';
-export type { ScopeRules, ScopeRule, Scopes } from './lib/scope-rules.ts';
+export type { ScopesShape, ScopeRules, ScopeRule } from './lib/scope-rules.ts';
 export type { GetScopeLoader, ScopeLoader, ScopeLoaderMap } from './lib/scope-resolver.ts';
 
 /**
@@ -42,6 +42,9 @@ export type { GetScopeLoader, ScopeLoader, ScopeLoaderMap } from './lib/scope-re
  * );
  * ```
  */
-export function authExtension<Ctx>(loadScopes: GetScopeLoader<Ctx>, options: AuthOptions = {}) {
+export function authExtension<Ctx>(
+	loadScopes: GetScopeLoader<AuthExtension.Scopes, Ctx>,
+	options: AuthOptions = {},
+) {
 	return (): Extension => new AuthExtension(loadScopes, options);
 }

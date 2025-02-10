@@ -6,6 +6,13 @@ import { loadAuthStore } from './store-loader.ts';
 declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
+function createCtx() {
+	const ctx = {};
+	const scopes = {};
+	loadAuthStore<typeof scopes, typeof ctx>(ctx, async () => ({}));
+	return { ctx };
+}
+
 test('resolveBoolean returns true for true input', (t) => {
 	t.is(resolveBoolean(true), true);
 });
@@ -15,8 +22,7 @@ test('resolveBoolean throws ForbiddenError for false input', (t) => {
 });
 
 test('createScopeResolver handles boolean loader', async (t) => {
-	const ctx = {};
-	loadAuthStore(ctx, async () => ({}));
+	const { ctx } = createCtx();
 
 	const trueResolver = createScopeResolver(ctx, 'fn-true', true);
 	await t.notThrows(() => trueResolver(null));
@@ -26,8 +32,7 @@ test('createScopeResolver handles boolean loader', async (t) => {
 });
 
 test('createScopeResolver handles function loader', async (t) => {
-	const ctx = {};
-	loadAuthStore(ctx, async () => ({}));
+	const { ctx } = createCtx();
 
 	const trueResolver = createScopeResolver(ctx, 'fn-true', async () => {
 		await delay(10);
@@ -43,8 +48,7 @@ test('createScopeResolver handles function loader', async (t) => {
 });
 
 test('createScopeResolver caches function loaders', async (t) => {
-	const ctx = {};
-	loadAuthStore(ctx, async () => ({}));
+	const { ctx } = createCtx();
 
 	const trueResolver = createScopeResolver(ctx, 'fn-true', async () => {
 		await delay(10);

@@ -4,14 +4,15 @@ import { createFallbackMiddleware } from './auth-middlewares.ts';
 import type { ScopeErrorResolver } from './error.ts';
 import type { DefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
+import type { ScopesShape } from './scope-rules.ts';
 
 export type MiddlewareMap = Record<string, Record<string, undefined | NativeMiddleware>>;
 
-export function compileMiddlewares<Context>(
+export function compileMiddlewares<Scopes extends ScopesShape, Grants extends string, Context>(
 	mapper: ResolverMapper,
 	middlewareMap: MiddlewareMap,
-	loadScopes: GetScopeLoader<Context>,
-	defaultScopes?: DefaultScopes,
+	loadScopes: GetScopeLoader<Scopes, Context>,
+	defaultScopes?: DefaultScopes<Scopes, Grants>,
 	errorResolver?: ScopeErrorResolver,
 ) {
 	for (const type of mapper.getTypes()) {

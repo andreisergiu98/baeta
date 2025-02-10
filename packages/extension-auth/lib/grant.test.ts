@@ -1,14 +1,17 @@
 import test from 'ava';
 import type { GraphQLResolveInfo } from 'graphql';
 import type { Path } from 'graphql/jsutils/Path.js';
-import { type GetGrantFn, type GetGrantResult, isGrantedKey, saveGrants } from './grant.ts';
+import { type GetGrantFn, isGrantedKey, saveGrants } from './grant.ts';
 import { loadAuthStore } from './store-loader.ts';
 import { getAuthStore } from './store.ts';
 
+type TestGrant = 'grant1';
+
 function createGrantResolverArgs() {
 	const ctx = {};
+	const scopes = {};
 
-	loadAuthStore(ctx, async () => ({}));
+	loadAuthStore<typeof scopes, typeof ctx>(ctx, async () => scopes);
 
 	const path: Path = {
 		key: 'photos',
@@ -38,7 +41,7 @@ test('isGrantedKey: should return false for other rules', (t) => {
 });
 
 test('saveGrants: should save resolved grants to the store', async (t) => {
-	const grants = 'grant1' as unknown as GetGrantResult;
+	const grants = 'grant1';
 	const args = createGrantResolverArgs();
 
 	await saveGrants(...args, grants);
@@ -53,9 +56,9 @@ test('saveGrants: should resolve grants if grants is a function', async (t) => {
 
 	let fnCalled = false;
 
-	const grants: GetGrantFn<unknown, unknown, unknown, unknown> = (args, result) => {
+	const grants: GetGrantFn<TestGrant, unknown, unknown, unknown, unknown> = (args, result) => {
 		fnCalled = true;
-		return 'grant1' as unknown as GetGrantResult;
+		return 'grant1';
 	};
 
 	await saveGrants(...args, grants);

@@ -28,8 +28,10 @@ declare global {
 			 * ```
 			 */
 			$auth: (
-				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
+				scopes:
+					| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
+					| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Root, Context, Args>,
+				options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
 			) => void;
 
 			/**
@@ -50,8 +52,15 @@ declare global {
 			 * ```
 			 */
 			$postAuth: (
-				getScopes: GetPostScopeRules<Result, Root, Context, Args>,
-				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
+				getScopes: GetPostScopeRules<
+					AuthExtension.Scopes,
+					AuthExtension.Grants,
+					Result,
+					Root,
+					Context,
+					Args
+				>,
+				options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
 			) => void;
 		}
 
@@ -64,8 +73,10 @@ declare global {
 			 * Applied to all fields of the type.
 			 */
 			$auth: (
-				scopes: ScopeRules | GetScopeRules<Root, Context, unknown>,
-				options?: AuthMiddlewareOptions<unknown, Root, Context, unknown>,
+				scopes:
+					| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
+					| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Root, Context, unknown>,
+				options?: AuthMiddlewareOptions<AuthExtension.Grants, unknown, Root, Context, unknown>,
 			) => void;
 
 			/**
@@ -74,8 +85,15 @@ declare global {
 			 * Useful when authorization depends on resolved field values.
 			 */
 			$postAuth: (
-				getScopes: GetPostScopeRules<unknown, Root, Context, unknown>,
-				options?: AuthMiddlewareOptions<unknown, Root, Context, unknown>,
+				getScopes: GetPostScopeRules<
+					AuthExtension.Scopes,
+					AuthExtension.Grants,
+					unknown,
+					Root,
+					Context,
+					unknown
+				>,
+				options?: AuthMiddlewareOptions<AuthExtension.Grants, unknown, Root, Context, unknown>,
 			) => void;
 		}
 
@@ -98,7 +116,9 @@ declare global {
 			 * ```
 			 */
 			$auth: (
-				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
+				scopes:
+					| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
+					| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Root, Context, Args>,
 				options?: AuthMiddlewareSubscribeOptions<Root, Context, Args>,
 			) => void;
 		}
@@ -123,8 +143,10 @@ declare global {
 			 * ```
 			 */
 			$auth: (
-				scopes: ScopeRules | GetScopeRules<Root, Context, Args>,
-				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
+				scopes:
+					| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
+					| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Root, Context, Args>,
+				options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
 			) => void;
 			/**
 			 * Checks authorization after resolver execution.
@@ -144,8 +166,15 @@ declare global {
 			 * ```
 			 */
 			$postAuth: (
-				getScopes: GetPostScopeRules<Result, Root, Context, Args>,
-				options?: AuthMiddlewareOptions<Result, Root, Context, Args>,
+				getScopes: GetPostScopeRules<
+					AuthExtension.Scopes,
+					AuthExtension.Grants,
+					Result,
+					Root,
+					Context,
+					Args
+				>,
+				options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
 			) => void;
 		}
 	}

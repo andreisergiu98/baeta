@@ -6,7 +6,7 @@
 <title data-rh="true">@baeta/extension-cache | Baeta</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" name="twitter:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" property="og:url" content="https://baeta.io/docs/api/extension-cache/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="baeta, graphql, schema, types, typescript, framework, builder"><meta data-rh="true" name="twitter:card" content="img/banner.png"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="@baeta/extension-cache | Baeta"><meta data-rh="true" name="description" content="Classes"><meta data-rh="true" property="og:description" content="Classes"><link data-rh="true" rel="icon" href="/img/favicon.ico?v=1"><link data-rh="true" rel="canonical" href="https://baeta.io/docs/api/extension-cache/"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/extension-cache/" hreflang="en"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/extension-cache/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://4FC0N9XMY9-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="Baeta" href="/opensearch.xml">
 
 <link rel="preconnect" href="https://baeta.io"><link rel="stylesheet" href="/assets/css/styles.a96c5f91.css">
-<script src="/assets/js/runtime~main.9eded47a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.18785bd8.js" defer="defer"></script>
 <script src="/assets/js/main.12d937d8.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -157,61 +157,61 @@
 <p><a href="/docs/api/extension-cache/#storeadapteritem"><code>StoreAdapter</code></a>&lt;<code>Item</code>&gt;</p>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Modifier</th><th>Type</th></tr></thead><tbody><tr><td>
-<p><code>deleteMany</code></p>
+<p><a id="deletemany"></a> <code>deleteMany</code></p>
 </td><td>
 <p><code>abstract</code></p>
 </td><td>
 <p>(<code>refs</code>: <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>[], <code>evictQueries</code>?: <code>boolean</code>) =&gt; <code>Promise</code>&lt;<code>void</code>&gt;</p>
 </td></tr><tr><td>
-<p><code>deleteQueriesByRef</code></p>
+<p><a id="deletequeriesbyref"></a> <code>deleteQueriesByRef</code></p>
 </td><td>
 <p><code>abstract</code></p>
 </td><td>
 <p>&lt;<code>Result</code>, <code>Root</code>, <code>Args</code>&gt;(<code>queryRef</code>?: <code>string</code>, <code>parentRef</code>?: <a href="/docs/api/extension-cache/#parentref-1"><code>ParentRef</code></a>, <code>args</code>?: <code>Record</code>&lt;<code>string</code>, <code>unknown</code>&gt;) =&gt; <code>Promise</code>&lt;<code>void</code>&gt;</p>
 </td></tr><tr><td>
-<p><code>getPartialMany</code></p>
+<p><a id="getpartialmany"></a> <code>getPartialMany</code></p>
 </td><td>
 <p><code>abstract</code></p>
 </td><td>
 <p>(<code>refs</code>: <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>[]) =&gt; <code>Promise</code>&lt;<code>null</code> | (<code>null</code> | <code>Item</code>)[]&gt;</p>
 </td></tr><tr><td>
-<p><code>hash</code></p>
+<p><a id="hash"></a> <code>hash</code></p>
 </td><td>
 <p><code>protected</code></p>
 </td><td>
 <p><code>string</code></p>
 </td></tr><tr><td>
-<p><code>loader</code></p>
+<p><a id="loader"></a> <code>loader</code></p>
 </td><td>
 <p><code>protected</code></p>
 </td><td>
 <p><code>DataLoader</code>&lt;<a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>, <code>null</code> | <code>Item</code>, <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>&gt;</p>
 </td></tr><tr><td>
-<p><code>loadQueryMetadata</code></p>
+<p><a id="loadquerymetadata"></a> <code>loadQueryMetadata</code></p>
 </td><td>
 <p><code>abstract</code></p>
 </td><td>
 <p>(<code>queryRef</code>: <code>string</code>, <code>parentRef</code>?: <a href="/docs/api/extension-cache/#parentref-1"><code>ParentRef</code></a>, <code>args</code>?: <code>Record</code>&lt;<code>string</code>, <code>unknown</code>&gt;) =&gt; <code>Promise</code>&lt;<code>null</code> | <code>string</code>[]&gt;</p>
 </td></tr><tr><td>
-<p><code>options</code></p>
+<p><a id="options"></a> <code>options</code></p>
 </td><td>
 <p><code>protected</code></p>
 </td><td>
 <p><a href="/docs/api/extension-cache/#storeoptionsroot"><code>StoreOptions</code></a>&lt;<code>Item</code>&gt;</p>
 </td></tr><tr><td>
-<p><code>saveMany</code></p>
+<p><a id="savemany"></a> <code>saveMany</code></p>
 </td><td>
 <p><code>abstract</code></p>
 </td><td>
 <p>(<code>items</code>: <code>Item</code>[]) =&gt; <code>Promise</code>&lt;<code>void</code>&gt;</p>
 </td></tr><tr><td>
-<p><code>saveQueryMetadata</code></p>
+<p><a id="savequerymetadata"></a> <code>saveQueryMetadata</code></p>
 </td><td>
 <p><code>abstract</code></p>
 </td><td>
 <p>(<code>queryRef</code>: <code>string</code>, <code>meta</code>: <code>string</code>[], <code>parentRef</code>?: <a href="/docs/api/extension-cache/#parentref-1"><code>ParentRef</code></a>, <code>args</code>?: <code>Record</code>&lt;<code>string</code>, <code>unknown</code>&gt;) =&gt; <code>Promise</code>&lt;<code>void</code>&gt;</p>
 </td></tr><tr><td>
-<p><code>type</code></p>
+<p><a id="type"></a> <code>type</code></p>
 </td><td>
 <p><code>protected</code></p>
 </td><td>
@@ -475,6 +475,7 @@
 <h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-23">Returns<a href="#returns-23" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
 <p><code>Promise</code>&lt;<code>null</code> | <code>Item</code>&gt;</p>
 <h5 class="anchor anchorWithStickyNavbar_FCOn" id="getmany">getMany()<a href="#getmany" class="hash-link" aria-label="Direct link to getMany()" title="Direct link to getMany()">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="call-signature">Call Signature<a href="#call-signature" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature">​</a></h6>
 <blockquote>
 <p><strong>getMany</strong>(<code>refs</code>): <code>Promise</code>&lt;<code>null</code> | <code>Item</code>[]&gt;</p>
 </blockquote>
@@ -486,103 +487,29 @@
 </td></tr></tbody></table>
 <h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-24">Returns<a href="#returns-24" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
 <p><code>Promise</code>&lt;<code>null</code> | <code>Item</code>[]&gt;</p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getqueryresult">getQueryResult()<a href="#getqueryresult" class="hash-link" aria-label="Direct link to getQueryResult()" title="Direct link to getQueryResult()">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="call-signature-1">Call Signature<a href="#call-signature-1" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature">​</a></h6>
 <blockquote>
-<p><strong>getQueryResult</strong>&lt;<code>Result</code>, <code>Root</code>, <code>Args</code>&gt;(<code>queryRef</code>, <code>matcher</code>?): <code>Promise</code>&lt;<code>null</code> | { <code>query</code>: <code>Result</code>; }&gt;</p>
+<p><strong>getMany</strong>&lt;<code>T</code>&gt;(<code>refs</code>, <code>fallback</code>): <code>Promise</code>&lt;<code>Item</code>[]&gt;</p>
 </blockquote>
 <h6 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-5">Type Parameters<a href="#type-parameters-5" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h6>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
-<p><code>Result</code></p>
-</td></tr><tr><td>
-<p><code>Root</code></p>
-</td></tr><tr><td>
-<p><code>Args</code></p>
+<p><code>T</code> <em>extends</em> <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
 </td></tr></tbody></table>
 <h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-21">Parameters<a href="#parameters-21" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
 <table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
-<p><code>queryRef</code></p>
-</td><td>
-<p><a href="/docs/api/extension-cache/#cacherefresult-root-args"><code>CacheRef</code></a>&lt;<code>Result</code>, <code>Root</code>, <code>Args</code>&gt;</p>
-</td></tr><tr><td>
-<p><code>matcher</code>?</p>
-</td><td>
-<p><a href="/docs/api/extension-cache/#cachequerymatchingargs"><code>CacheQueryMatching</code></a>&lt;<code>Args</code>&gt;</p>
-</td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-25">Returns<a href="#returns-25" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
-<p><code>Promise</code>&lt;<code>null</code> | { <code>query</code>: <code>Result</code>; }&gt;</p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getref">getRef()<a href="#getref" class="hash-link" aria-label="Direct link to getRef()" title="Direct link to getRef()">​</a></h5>
-<blockquote>
-<p><code>protected</code> <strong>getRef</strong>(<code>root</code>): <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
-</blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-22">Parameters<a href="#parameters-22" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
-<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
-<p><code>root</code></p>
-</td><td>
-<p><code>Item</code></p>
-</td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-26">Returns<a href="#returns-26" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
-<p><a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getreffallback">getRefFallback()<a href="#getreffallback" class="hash-link" aria-label="Direct link to getRefFallback()" title="Direct link to getRefFallback()">​</a></h5>
-<blockquote>
-<p><code>protected</code> <strong>getRefFallback</strong>(<code>root</code>): <code>undefined</code> | <code>string</code></p>
-</blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-23">Parameters<a href="#parameters-23" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
-<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
-<p><code>root</code></p>
-</td><td>
-<p><code>unknown</code></p>
-</td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-27">Returns<a href="#returns-27" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
-<p><code>undefined</code> | <code>string</code></p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getrevision-1">getRevision()<a href="#getrevision-1" class="hash-link" aria-label="Direct link to getRevision()" title="Direct link to getRevision()">​</a></h5>
-<blockquote>
-<p><code>protected</code> <strong>getRevision</strong>(): <code>string</code></p>
-</blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-28">Returns<a href="#returns-28" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
-<p><code>string</code></p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="loaderfn">loaderFn()<a href="#loaderfn" class="hash-link" aria-label="Direct link to loaderFn()" title="Direct link to loaderFn()">​</a></h5>
-<blockquote>
-<p><code>protected</code> <strong>loaderFn</strong>(<code>refs</code>): <code>Promise</code>&lt;<code>any</code>[]&gt;</p>
-</blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-24">Parameters<a href="#parameters-24" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
-<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
 <p><code>refs</code></p>
 </td><td>
-<p>readonly <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>[]</p>
-</td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-29">Returns<a href="#returns-29" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
-<p><code>Promise</code>&lt;<code>any</code>[]&gt;</p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="refillnullqueryitems">refillNullQueryItems()<a href="#refillnullqueryitems" class="hash-link" aria-label="Direct link to refillNullQueryItems()" title="Direct link to refillNullQueryItems()">​</a></h5>
-<blockquote>
-<p><code>protected</code> <strong>refillNullQueryItems</strong>(<code>nullableRefs</code>, <code>items</code>): (<code>null</code> | <code>Item</code>)[]</p>
-</blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-25">Parameters<a href="#parameters-25" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
-<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
-<p><code>nullableRefs</code></p>
-</td><td>
-<p>(<code>null</code> | <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>)[]</p>
+<p><code>T</code>[]</p>
 </td></tr><tr><td>
-<p><code>items</code></p>
+<p><code>fallback</code></p>
 </td><td>
-<p><code>Item</code>[]</p>
+<p>(<code>refs</code>) =&gt; <code>Promise</code>&lt;<code>Item</code>[]&gt;</p>
 </td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-30">Returns<a href="#returns-30" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
-<p>(<code>null</code> | <code>Item</code>)[]</p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="save">save()<a href="#save" class="hash-link" aria-label="Direct link to save()" title="Direct link to save()">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-25">Returns<a href="#returns-25" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p><code>Promise</code>&lt;<code>Item</code>[]&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getqueryresult">getQueryResult()<a href="#getqueryresult" class="hash-link" aria-label="Direct link to getQueryResult()" title="Direct link to getQueryResult()">​</a></h5>
 <blockquote>
-<p><strong>save</strong>(<code>item</code>): <code>Promise</code>&lt;<code>void</code>&gt;</p>
-</blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-26">Parameters<a href="#parameters-26" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
-<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
-<p><code>item</code></p>
-</td><td>
-<p><code>Item</code></p>
-</td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-31">Returns<a href="#returns-31" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
-<p><code>Promise</code>&lt;<code>void</code>&gt;</p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="savequeryresult">saveQueryResult()<a href="#savequeryresult" class="hash-link" aria-label="Direct link to saveQueryResult()" title="Direct link to saveQueryResult()">​</a></h5>
-<blockquote>
-<p><strong>saveQueryResult</strong>&lt;<code>Result</code>, <code>Root</code>, <code>Args</code>&gt;(<code>queryRef</code>, <code>data</code>, <code>matcher</code>?): <code>Promise</code>&lt;<code>void</code>&gt;</p>
+<p><strong>getQueryResult</strong>&lt;<code>Result</code>, <code>Root</code>, <code>Args</code>&gt;(<code>queryRef</code>, <code>matcher</code>?): <code>Promise</code>&lt;<code>null</code> | { <code>query</code>: <code>Result</code>; }&gt;</p>
 </blockquote>
 <h6 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-6">Type Parameters<a href="#type-parameters-6" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h6>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
@@ -592,7 +519,101 @@
 </td></tr><tr><td>
 <p><code>Args</code></p>
 </td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-22">Parameters<a href="#parameters-22" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
+<p><code>queryRef</code></p>
+</td><td>
+<p><a href="/docs/api/extension-cache/#cacherefresult-root-args"><code>CacheRef</code></a>&lt;<code>Result</code>, <code>Root</code>, <code>Args</code>&gt;</p>
+</td></tr><tr><td>
+<p><code>matcher</code>?</p>
+</td><td>
+<p><a href="/docs/api/extension-cache/#cachequerymatchingargs"><code>CacheQueryMatching</code></a>&lt;<code>Args</code>&gt;</p>
+</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-26">Returns<a href="#returns-26" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p><code>Promise</code>&lt;<code>null</code> | { <code>query</code>: <code>Result</code>; }&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getref">getRef()<a href="#getref" class="hash-link" aria-label="Direct link to getRef()" title="Direct link to getRef()">​</a></h5>
+<blockquote>
+<p><code>protected</code> <strong>getRef</strong>(<code>root</code>): <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
+</blockquote>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-23">Parameters<a href="#parameters-23" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
+<p><code>root</code></p>
+</td><td>
+<p><code>Item</code></p>
+</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-27">Returns<a href="#returns-27" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p><a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getreffallback">getRefFallback()<a href="#getreffallback" class="hash-link" aria-label="Direct link to getRefFallback()" title="Direct link to getRefFallback()">​</a></h5>
+<blockquote>
+<p><code>protected</code> <strong>getRefFallback</strong>(<code>root</code>): <code>undefined</code> | <code>string</code></p>
+</blockquote>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-24">Parameters<a href="#parameters-24" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
+<p><code>root</code></p>
+</td><td>
+<p><code>unknown</code></p>
+</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-28">Returns<a href="#returns-28" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p><code>undefined</code> | <code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="getrevision-1">getRevision()<a href="#getrevision-1" class="hash-link" aria-label="Direct link to getRevision()" title="Direct link to getRevision()">​</a></h5>
+<blockquote>
+<p><code>protected</code> <strong>getRevision</strong>(): <code>string</code></p>
+</blockquote>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-29">Returns<a href="#returns-29" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p><code>string</code></p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="loaderfn">loaderFn()<a href="#loaderfn" class="hash-link" aria-label="Direct link to loaderFn()" title="Direct link to loaderFn()">​</a></h5>
+<blockquote>
+<p><code>protected</code> <strong>loaderFn</strong>(<code>refs</code>): <code>Promise</code>&lt;<code>any</code>[]&gt;</p>
+</blockquote>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-25">Parameters<a href="#parameters-25" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
+<p><code>refs</code></p>
+</td><td>
+<p>readonly <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>[]</p>
+</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-30">Returns<a href="#returns-30" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p><code>Promise</code>&lt;<code>any</code>[]&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="refillnullqueryitems">refillNullQueryItems()<a href="#refillnullqueryitems" class="hash-link" aria-label="Direct link to refillNullQueryItems()" title="Direct link to refillNullQueryItems()">​</a></h5>
+<blockquote>
+<p><code>protected</code> <strong>refillNullQueryItems</strong>(<code>nullableRefs</code>, <code>items</code>): (<code>null</code> | <code>Item</code>)[]</p>
+</blockquote>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-26">Parameters<a href="#parameters-26" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
+<p><code>nullableRefs</code></p>
+</td><td>
+<p>(<code>null</code> | <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a>)[]</p>
+</td></tr><tr><td>
+<p><code>items</code></p>
+</td><td>
+<p><code>Item</code>[]</p>
+</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-31">Returns<a href="#returns-31" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p>(<code>null</code> | <code>Item</code>)[]</p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="save">save()<a href="#save" class="hash-link" aria-label="Direct link to save()" title="Direct link to save()">​</a></h5>
+<blockquote>
+<p><strong>save</strong>(<code>item</code>): <code>Promise</code>&lt;<code>void</code>&gt;</p>
+</blockquote>
 <h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-27">Parameters<a href="#parameters-27" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
+<p><code>item</code></p>
+</td><td>
+<p><code>Item</code></p>
+</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-32">Returns<a href="#returns-32" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<p><code>Promise</code>&lt;<code>void</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="savequeryresult">saveQueryResult()<a href="#savequeryresult" class="hash-link" aria-label="Direct link to saveQueryResult()" title="Direct link to saveQueryResult()">​</a></h5>
+<blockquote>
+<p><strong>saveQueryResult</strong>&lt;<code>Result</code>, <code>Root</code>, <code>Args</code>&gt;(<code>queryRef</code>, <code>data</code>, <code>matcher</code>?): <code>Promise</code>&lt;<code>void</code>&gt;</p>
+</blockquote>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-7">Type Parameters<a href="#type-parameters-7" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h6>
+<table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
+<p><code>Result</code></p>
+</td></tr><tr><td>
+<p><code>Root</code></p>
+</td></tr><tr><td>
+<p><code>Args</code></p>
+</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-28">Parameters<a href="#parameters-28" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
 <table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
 <p><code>queryRef</code></p>
 </td><td>
@@ -606,31 +627,31 @@
 </td><td>
 <p><a href="/docs/api/extension-cache/#cachequerymatchingargs"><code>CacheQueryMatching</code></a>&lt;<code>Args</code>&gt;</p>
 </td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-32">Returns<a href="#returns-32" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-33">Returns<a href="#returns-33" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
 <p><code>Promise</code>&lt;<code>void</code>&gt;</p>
 <h5 class="anchor anchorWithStickyNavbar_FCOn" id="shouldencode">shouldEncode()<a href="#shouldencode" class="hash-link" aria-label="Direct link to shouldEncode()" title="Direct link to shouldEncode()">​</a></h5>
 <blockquote>
 <p><code>protected</code> <strong>shouldEncode</strong>(<code>value</code>): <code>boolean</code></p>
 </blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-28">Parameters<a href="#parameters-28" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-29">Parameters<a href="#parameters-29" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
 <table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
 <p><code>value</code></p>
 </td><td>
 <p><code>string</code></p>
 </td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-33">Returns<a href="#returns-33" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-34">Returns<a href="#returns-34" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
 <p><code>boolean</code></p>
 <h5 class="anchor anchorWithStickyNavbar_FCOn" id="validatereftype">validateRefType()<a href="#validatereftype" class="hash-link" aria-label="Direct link to validateRefType()" title="Direct link to validateRefType()">​</a></h5>
 <blockquote>
 <p><code>protected</code> <strong>validateRefType</strong>(<code>ref</code>): asserts ref is string | number | bigint</p>
 </blockquote>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-29">Parameters<a href="#parameters-29" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-30">Parameters<a href="#parameters-30" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h6>
 <table><thead><tr><th>Parameter</th><th>Type</th></tr></thead><tbody><tr><td>
 <p><code>ref</code></p>
 </td><td>
 <p><code>unknown</code></p>
 </td></tr></tbody></table>
-<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-34">Returns<a href="#returns-34" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
+<h6 class="anchor anchorWithStickyNavbar_FCOn" id="returns-35">Returns<a href="#returns-35" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h6>
 <p>asserts ref is string | number | bigint</p>
 <h2 class="anchor anchorWithStickyNavbar_FCOn" id="interfaces">Interfaces<a href="#interfaces" class="hash-link" aria-label="Direct link to Interfaces" title="Direct link to Interfaces">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_FCOn" id="cachemiddlewareoptionsroot">CacheMiddlewareOptions&lt;Root&gt;<a href="#cachemiddlewareoptionsroot" class="hash-link" aria-label="Direct link to CacheMiddlewareOptions&lt;Root&gt;" title="Direct link to CacheMiddlewareOptions&lt;Root&gt;">​</a></h3>
@@ -639,13 +660,13 @@
 <ul>
 <li><a href="/docs/api/extension-cache/#requiredcachemiddlewareoptionsroot"><code>RequiredCacheMiddlewareOptions</code></a></li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-7">Type Parameters<a href="#type-parameters-7" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-8">Type Parameters<a href="#type-parameters-8" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
 <p><code>Root</code></p>
 </td></tr></tbody></table>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties-1">Properties<a href="#properties-1" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>
-<p><code>getRootRef?</code></p>
+<p><a id="getrootref"></a> <code>getRootRef?</code></p>
 </td><td>
 <p>(<code>root</code>: <code>Root</code>) =&gt; <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
 </td><td>
@@ -660,7 +681,7 @@
 </ul>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties-2">Properties<a href="#properties-2" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Default value</th><th>Description</th></tr></thead><tbody><tr><td>
-<p><code>ttl?</code></p>
+<p><a id="ttl"></a> <code>ttl?</code></p>
 </td><td>
 <p><code>number</code></p>
 </td><td>
@@ -675,13 +696,13 @@
 <ul>
 <li><a href="/docs/api/extension-cache/#cachemiddlewareoptionsroot"><code>CacheMiddlewareOptions</code></a>&lt;<code>Root</code>&gt;</li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-8">Type Parameters<a href="#type-parameters-8" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-9">Type Parameters<a href="#type-parameters-9" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
 <p><code>Root</code></p>
 </td></tr></tbody></table>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties-3">Properties<a href="#properties-3" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Description</th><th>Overrides</th></tr></thead><tbody><tr><td>
-<p><code>getRootRef</code></p>
+<p><a id="getrootref-1"></a> <code>getRootRef</code></p>
 </td><td>
 <p>(<code>root</code>: <code>Root</code>) =&gt; <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
 </td><td>
@@ -696,13 +717,13 @@
 <ul>
 <li><a href="/docs/api/extension-cache/#storeoptionsroot"><code>StoreOptions</code></a>&lt;<code>Root</code>&gt;</li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-9">Type Parameters<a href="#type-parameters-9" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-10">Type Parameters<a href="#type-parameters-10" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
 <p><code>Root</code></p>
 </td></tr></tbody></table>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties-4">Properties<a href="#properties-4" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Default value</th><th>Description</th><th>Overrides</th><th>Inherited from</th></tr></thead><tbody><tr><td>
-<p><code>getRef</code></p>
+<p><a id="getref-1"></a> <code>getRef</code></p>
 </td><td>
 <p>(<code>root</code>: <code>Root</code>) =&gt; <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
 </td><td>
@@ -714,7 +735,7 @@
 </td><td>
 <p>‐</p>
 </td></tr><tr><td>
-<p><code>revision?</code></p>
+<p><a id="revision"></a> <code>revision?</code></p>
 </td><td>
 <p><code>number</code></p>
 </td><td>
@@ -726,7 +747,7 @@
 </td><td>
 <p><a href="/docs/api/extension-cache/#storeoptionsroot"><code>StoreOptions</code></a>.<a href="/docs/api/extension-cache/#revision-1"><code>revision</code></a></p>
 </td></tr><tr><td>
-<p><code>ttl?</code></p>
+<p><a id="ttl-1"></a> <code>ttl?</code></p>
 </td><td>
 <p><code>number</code></p>
 </td><td>
@@ -749,13 +770,13 @@
 <ul>
 <li><a href="/docs/api/extension-cache/#requiredstoreoptionsroot"><code>RequiredStoreOptions</code></a></li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-10">Type Parameters<a href="#type-parameters-10" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-11">Type Parameters<a href="#type-parameters-11" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
 <p><code>Root</code></p>
 </td></tr></tbody></table>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties-5">Properties<a href="#properties-5" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Default value</th><th>Description</th><th>Inherited from</th></tr></thead><tbody><tr><td>
-<p><code>getRef?</code></p>
+<p><a id="getref-2"></a> <code>getRef?</code></p>
 </td><td>
 <p>(<code>root</code>: <code>Root</code>) =&gt; <a href="/docs/api/extension-cache/#itemref"><code>ItemRef</code></a></p>
 </td><td>
@@ -765,7 +786,7 @@
 </td><td>
 <p>‐</p>
 </td></tr><tr><td>
-<p><code>revision?</code></p>
+<p><a id="revision-1"></a> <code>revision?</code></p>
 </td><td>
 <p><code>number</code></p>
 </td><td>
@@ -775,7 +796,7 @@
 </td><td>
 <p>‐</p>
 </td></tr><tr><td>
-<p><code>ttl?</code></p>
+<p><a id="ttl-2"></a> <code>ttl?</code></p>
 </td><td>
 <p><code>number</code></p>
 </td><td>
@@ -791,7 +812,7 @@
 <p><strong>CacheArgs</strong>&lt;<code>T</code>&gt;: <code>{ [P in keyof T]?: T[P] extends object ? CacheArgs&lt;T[P]&gt; : T[P] }</code></p>
 </blockquote>
 <p>Optional query arguments</p>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-11">Type Parameters<a href="#type-parameters-11" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-12">Type Parameters<a href="#type-parameters-12" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
 <p><code>T</code></p>
 </td></tr></tbody></table>
@@ -800,17 +821,17 @@
 <blockquote>
 <p><strong>CacheQueryMatching</strong>&lt;<code>Args</code>&gt;: <code>object</code></p>
 </blockquote>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-12">Type Parameters<a href="#type-parameters-12" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-parameters-13">Type Parameters<a href="#type-parameters-13" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters">​</a></h4>
 <table><thead><tr><th>Type Parameter</th></tr></thead><tbody><tr><td>
 <p><code>Args</code></p>
 </td></tr></tbody></table>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="type-declaration">Type declaration<a href="#type-declaration" class="hash-link" aria-label="Direct link to Type declaration" title="Direct link to Type declaration">​</a></h4>
 <table><thead><tr><th>Name</th><th>Type</th></tr></thead><tbody><tr><td>
-<p><code>args</code>?</p>
+<p><a id="args"></a> <code>args</code>?</p>
 </td><td>
 <p><a href="/docs/api/extension-cache/#cacheargst"><code>CacheArgs</code></a>&lt;<code>Args</code>&gt;</p>
 </td></tr><tr><td>
-<p><code>parentRef</code>?</p>
+<p><a id="parentref"></a> <code>parentRef</code>?</p>
 </td><td>
 <p><a href="/docs/api/extension-cache/#parentref-1"><code>ParentRef</code></a></p>
 </td></tr></tbody></table>
@@ -838,7 +859,7 @@
 <p><strong>cacheExtension</strong>(<code>store</code>, <code>options</code>?): () =&gt; <code>Extension</code></p>
 </blockquote>
 <p>Creates a cache extension</p>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-30">Parameters<a href="#parameters-30" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="parameters-31">Parameters<a href="#parameters-31" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters">​</a></h4>
 <table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>
 <p><code>store</code></p>
 </td><td>
@@ -852,10 +873,10 @@
 </td><td>
 <p>Default caching options</p>
 </td></tr></tbody></table>
-<h4 class="anchor anchorWithStickyNavbar_FCOn" id="returns-35">Returns<a href="#returns-35" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_FCOn" id="returns-36">Returns<a href="#returns-36" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h4>
 <p><code>Function</code></p>
 <p>Extension factory function</p>
-<h5 class="anchor anchorWithStickyNavbar_FCOn" id="returns-36">Returns<a href="#returns-36" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h5>
+<h5 class="anchor anchorWithStickyNavbar_FCOn" id="returns-37">Returns<a href="#returns-37" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns">​</a></h5>
 <p><code>Extension</code></p>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="example">Example<a href="#example" class="hash-link" aria-label="Direct link to Example" title="Direct link to Example">​</a></h4>
 <div class="language-typescript codeBlockContainer_PheF theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_OTjd"><pre tabindex="0" class="prism-code language-typescript codeBlock_bFGo thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_ZyBF"><span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">import</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> cacheExtension </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">from</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;@baeta/extension-cache&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">import</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> RedisStore </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">from</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;@baeta/extension-cache-redis&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">import</span><span class="token plain"> Redis </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">from</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;ioredis&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> redis </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">new</span><span class="token plain"> </span><span class="token class-name">Redis</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token string" style="color:rgb(255, 121, 198)">&quot;redis://localhost:6379&quot;</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> redisStore </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">new</span><span class="token plain"> </span><span class="token class-name">RedisStore</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">redis</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">export</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> cacheExt </span><span class="token operator">=</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">cacheExtension</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">redisStore</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  ttl</span><span class="token operator">:</span><span class="token plain"> </span><span class="token number">3600</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token comment" style="color:rgb(98, 114, 164)">// TTL in seconds (defaults to 1 hour)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><br></span></code></pre><div class="buttonGroup_cPI8"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_vcgF" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_DoMk"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_GPli"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/extension-auth/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">extension-auth</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/extension-cache-cloudflare/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">@baeta/extension-cache-cloudflare</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_U_WW thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#classes" class="table-of-contents__link toc-highlight">Classes</a><ul><li><a href="#cacherefresult-root-args" class="table-of-contents__link toc-highlight">CacheRef&lt;Result, Root, Args&gt;</a></li><li><a href="#abstract-store" class="table-of-contents__link toc-highlight"><code>abstract</code> Store</a></li><li><a href="#abstract-storeadapteritem" class="table-of-contents__link toc-highlight"><code>abstract</code> StoreAdapter&lt;Item&gt;</a></li></ul></li><li><a href="#interfaces" class="table-of-contents__link toc-highlight">Interfaces</a><ul><li><a href="#cachemiddlewareoptionsroot" class="table-of-contents__link toc-highlight">CacheMiddlewareOptions&lt;Root&gt;</a></li><li><a href="#defaultstoreoptions" class="table-of-contents__link toc-highlight">DefaultStoreOptions</a></li><li><a href="#requiredcachemiddlewareoptionsroot" class="table-of-contents__link toc-highlight">RequiredCacheMiddlewareOptions&lt;Root&gt;</a></li><li><a href="#requiredstoreoptionsroot" class="table-of-contents__link toc-highlight">RequiredStoreOptions&lt;Root&gt;</a></li><li><a href="#storeoptionsroot" class="table-of-contents__link toc-highlight">StoreOptions&lt;Root&gt;</a></li></ul></li><li><a href="#type-aliases" class="table-of-contents__link toc-highlight">Type Aliases</a><ul><li><a href="#cacheargst" class="table-of-contents__link toc-highlight">CacheArgs&lt;T&gt;</a></li><li><a href="#cachequerymatchingargs" class="table-of-contents__link toc-highlight">CacheQueryMatching&lt;Args&gt;</a></li><li><a href="#itemref" class="table-of-contents__link toc-highlight">ItemRef</a></li><li><a href="#parentref" class="table-of-contents__link toc-highlight">ParentRef</a></li><li><a href="#refcompatibleroot" class="table-of-contents__link toc-highlight">RefCompatibleRoot</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#cacheextension" class="table-of-contents__link toc-highlight">cacheExtension()</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Introduction</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/getting-started/installation">Getting Started</a></li><li class="footer__item"><a href="https://github.com/andreisergiu98/baeta/tree/main/examples" target="_blank" rel="noopener noreferrer" class="footer__link-item">Examples<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nuqV"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/andreisergiu98/baeta" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nuqV"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discord.gg/j6Y8xRc7ep" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nuqV"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/sponsors/andreisergiu98" target="_blank" rel="noopener noreferrer" class="footer__link-item">Donate<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nuqV"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div></div></footer></div>

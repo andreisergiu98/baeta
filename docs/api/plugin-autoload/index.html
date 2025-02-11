@@ -6,7 +6,7 @@
 <title data-rh="true">@baeta/plugin-autoload | Baeta</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" name="twitter:image" content="https://baeta.io/img/banner.png"><meta data-rh="true" property="og:url" content="https://baeta.io/docs/api/plugin-autoload/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="baeta, graphql, schema, types, typescript, framework, builder"><meta data-rh="true" name="twitter:card" content="img/banner.png"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="@baeta/plugin-autoload | Baeta"><meta data-rh="true" name="description" content="Interfaces"><meta data-rh="true" property="og:description" content="Interfaces"><link data-rh="true" rel="icon" href="/img/favicon.ico?v=1"><link data-rh="true" rel="canonical" href="https://baeta.io/docs/api/plugin-autoload/"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/plugin-autoload/" hreflang="en"><link data-rh="true" rel="alternate" href="https://baeta.io/docs/api/plugin-autoload/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://4FC0N9XMY9-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="Baeta" href="/opensearch.xml">
 
 <link rel="preconnect" href="https://baeta.io"><link rel="stylesheet" href="/assets/css/styles.a96c5f91.css">
-<script src="/assets/js/runtime~main.9eded47a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.18785bd8.js" defer="defer"></script>
 <script src="/assets/js/main.12d937d8.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -15,7 +15,7 @@
 <h3 class="anchor anchorWithStickyNavbar_FCOn" id="autoloadmoduleoptions">AutoloadModuleOptions<a href="#autoloadmoduleoptions" class="hash-link" aria-label="Direct link to AutoloadModuleOptions" title="Direct link to AutoloadModuleOptions">​</a></h3>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>
-<p><code>match?</code></p>
+<p><a id="match"></a> <code>match?</code></p>
 </td><td>
 <p>(<code>moduleName</code>: <code>string</code>) =&gt; <code>boolean</code></p>
 </td><td>
@@ -25,7 +25,7 @@
 <h3 class="anchor anchorWithStickyNavbar_FCOn" id="autoloadpluginoptions">AutoloadPluginOptions<a href="#autoloadpluginoptions" class="hash-link" aria-label="Direct link to AutoloadPluginOptions" title="Direct link to AutoloadPluginOptions">​</a></h3>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties-1">Properties<a href="#properties-1" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Default value</th><th>Description</th></tr></thead><tbody><tr><td>
-<p><code>modules?</code></p>
+<p><a id="modules"></a> <code>modules?</code></p>
 </td><td>
 <p><code>boolean</code> | <a href="/docs/api/plugin-autoload/#autoloadmoduleoptions"><code>AutoloadModuleOptions</code></a></p>
 </td><td>
@@ -33,7 +33,7 @@
 </td><td>
 <p>Configuration for module autoloading. Set to false to disable</p>
 </td></tr><tr><td>
-<p><code>output?</code></p>
+<p><a id="output"></a> <code>output?</code></p>
 </td><td>
 <p><code>string</code></p>
 </td><td>
@@ -41,7 +41,7 @@
 </td><td>
 <p>Output path for the generated autoload file</p>
 </td></tr><tr><td>
-<p><code>resolvers?</code></p>
+<p><a id="resolvers"></a> <code>resolvers?</code></p>
 </td><td>
 <p><code>boolean</code> | <a href="/docs/api/plugin-autoload/#autoloadresolveroptions"><code>AutoloadResolverOptions</code></a></p>
 </td><td>
@@ -53,19 +53,19 @@
 <h3 class="anchor anchorWithStickyNavbar_FCOn" id="autoloadresolveroptions">AutoloadResolverOptions<a href="#autoloadresolveroptions" class="hash-link" aria-label="Direct link to AutoloadResolverOptions" title="Direct link to AutoloadResolverOptions">​</a></h3>
 <h4 class="anchor anchorWithStickyNavbar_FCOn" id="properties-2">Properties<a href="#properties-2" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h4>
 <table><thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>
-<p><code>disableDefaultSuffixes?</code></p>
+<p><a id="disabledefaultsuffixes"></a> <code>disableDefaultSuffixes?</code></p>
 </td><td>
 <p><code>boolean</code></p>
 </td><td>
 <p>If true, disables the default resolver suffixes</p>
 </td></tr><tr><td>
-<p><code>match?</code></p>
+<p><a id="match-1"></a> <code>match?</code></p>
 </td><td>
 <p>(<code>filename</code>: <code>string</code>) =&gt; <code>boolean</code></p>
 </td><td>
 <p>Custom function to determine if a resolver file should be included</p>
 </td></tr><tr><td>
-<p><code>suffix?</code></p>
+<p><a id="suffix"></a> <code>suffix?</code></p>
 </td><td>
 <p><code>string</code> | <code>string</code>[]</p>
 </td><td>

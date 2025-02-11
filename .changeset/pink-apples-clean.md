@@ -10,4 +10,4 @@
 "@baeta/extension-cache-redis": patch
 ---
 
-update dependencies
+Updated dependencies

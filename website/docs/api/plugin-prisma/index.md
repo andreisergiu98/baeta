@@ -21,7 +21,7 @@ Configuration options for the Prisma plugin
 <tr>
 <td>
 
-`generatedSchemaPath`
+<a id="generatedschemapath"></a> `generatedSchemaPath`
 
 </td>
 <td>
@@ -50,7 +50,7 @@ Used to avoid unnecessary regeneration
 <tr>
 <td>
 
-`prismaSchema`
+<a id="prismaschema"></a> `prismaSchema`
 
 </td>
 <td>
@@ -78,7 +78,7 @@ Path to the Prisma schema file
 <tr>
 <td>
 
-`generateClient?`
+<a id="generateclient"></a> `generateClient?`
 
 </td>
 <td>
@@ -102,7 +102,7 @@ Whether to generate the Prisma client
 <tr>
 <td>
 
-`generateCommand?`
+<a id="generatecommand"></a> `generateCommand?`
 
 </td>
 <td>

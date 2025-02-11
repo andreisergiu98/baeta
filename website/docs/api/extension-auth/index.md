@@ -2,9 +2,9 @@
 
 ## Interfaces
 
-### AuthMethodOptions\<Result, Root, Context, Args\>
+### AuthMiddlewareOptions\<Grants, Result, Root, Context, Args\>
 
-Options for authorization methods
+Options for authorization middlewares
 
 #### Type Parameters
 
@@ -15,6 +15,13 @@ Options for authorization methods
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`Grants` _extends_ `string`
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -60,12 +67,12 @@ Options for authorization methods
 <tr>
 <td>
 
-`grants?`
+<a id="grants"></a> `grants?`
 
 </td>
 <td>
 
-[`GetGrant`](index.md#getgrantresult-root-context-args)\<`Result`, `Root`, `Context`, `Args`\>
+[`GetGrant`](index.md#getgrantgrants-result-root-context-args)\<`Grants`, `Result`, `Root`, `Context`, `Args`\>
 
 </td>
 <td>
@@ -77,7 +84,7 @@ Permissions to grant after successful authorization
 <tr>
 <td>
 
-`onError?`
+<a id="onerror"></a> `onError?`
 
 </td>
 <td>
@@ -94,7 +101,7 @@ Custom error handler for this operation
 <tr>
 <td>
 
-`skipDefaults?`
+<a id="skipdefaults"></a> `skipDefaults?`
 
 </td>
 <td>
@@ -113,9 +120,9 @@ Whether to skip default scopes for this operation
 
 ---
 
-### AuthMethodSubscribeOptions\<Root, Context, Args\>
+### AuthMiddlewareSubscribeOptions\<Root, Context, Args\>
 
-Options for subscription authorization
+Options for authorization middlewares
 
 #### Type Parameters
 
@@ -164,7 +171,7 @@ Options for subscription authorization
 <tr>
 <td>
 
-`onError?`
+<a id="onerror-1"></a> `onError?`
 
 </td>
 <td>
@@ -174,14 +181,14 @@ Options for subscription authorization
 </td>
 <td>
 
-Custom error handler for this subscription
+Custom error handler for this operation
 
 </td>
 </tr>
 <tr>
 <td>
 
-`skipDefaults?`
+<a id="skipdefaults-1"></a> `skipDefaults?`
 
 </td>
 <td>
@@ -191,7 +198,7 @@ Custom error handler for this subscription
 </td>
 <td>
 
-Whether to skip default scopes for this subscription
+Whether to skip default scopes for this operation
 
 </td>
 </tr>
@@ -218,12 +225,12 @@ Configuration options for the Auth Extension
 <tr>
 <td>
 
-`defaultScopes?`
+<a id="defaultscopes"></a> `defaultScopes?`
 
 </td>
 <td>
 
-[`DefaultScopes`](index.md#defaultscopes-1)
+[`DefaultScopes`](index.md#defaultscopesscopes-grants)\<`Scopes`, `never`\>
 
 </td>
 <td>
@@ -235,7 +242,7 @@ Default authorization scopes for queries, mutations or subscriptions
 <tr>
 <td>
 
-`errorResolver?`
+<a id="errorresolver"></a> `errorResolver?`
 
 </td>
 <td>
@@ -254,11 +261,37 @@ Custom error resolver for authorization failures
 
 ## Type Aliases
 
-### DefaultScopes
+### DefaultScopes\<Scopes, Grants\>
 
-> **DefaultScopes**: `object`
+> **DefaultScopes**\<`Scopes`, `Grants`\>: `object`
 
 Configuration for default authorization scopes that apply to all operations of a specific type.
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Scopes` _extends_ [`ScopesShape`](index.md#scopesshape)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Grants` _extends_ `string`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Type declaration
 
@@ -274,12 +307,12 @@ Configuration for default authorization scopes that apply to all operations of a
 <tr>
 <td>
 
-`Mutation`?
+<a id="mutation"></a> `Mutation`?
 
 </td>
 <td>
 
-[`ScopeRules`](index.md#scoperules)
+[`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>
 
 </td>
 <td>
@@ -291,12 +324,12 @@ Default scopes applied to all Mutation operations
 <tr>
 <td>
 
-`Query`?
+<a id="query"></a> `Query`?
 
 </td>
 <td>
 
-[`ScopeRules`](index.md#scoperules)
+[`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>
 
 </td>
 <td>
@@ -308,7 +341,7 @@ Default scopes applied to all Query operations
 <tr>
 <td>
 
-`Subscription`?
+<a id="subscription"></a> `Subscription`?
 
 </td>
 <td>
@@ -330,7 +363,7 @@ Default scopes for Subscription operations
 </td>
 <td>
 
-[`ScopeRules`](index.md#scoperules)
+[`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>
 
 </td>
 <td>
@@ -347,7 +380,7 @@ Scopes applied during the resolve phase
 </td>
 <td>
 
-[`ScopeRules`](index.md#scoperules)
+[`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>
 
 </td>
 <td>
@@ -361,9 +394,9 @@ Scopes applied during the subscription phase
 
 ---
 
-### GetGrant\<Result, Root, Context, Args\>
+### GetGrant\<Grants, Result, Root, Context, Args\>
 
-> **GetGrant**\<`Result`, `Root`, `Context`, `Args`\>: [`GetGrantFn`](index.md#getgrantfnresult-root-context-args)\<`Result`, `Root`, `Context`, `Args`\> \| `any`[]
+> **GetGrant**\<`Grants`, `Result`, `Root`, `Context`, `Args`\>: [`GetGrantFn`](index.md#getgrantfngrants-result-root-context-args)\<`Grants`, `Result`, `Root`, `Context`, `Args`\> \| [`GetGrantResult`](index.md#getgrantresultgrants)\<`Grants`\>
 
 Union type for grant specifications.
 Can be either a static grant result or a function that determines grants dynamically.
@@ -380,6 +413,13 @@ Can be either a static grant result or a function that determines grants dynamic
 <tr>
 <td>
 
+`Grants` _extends_ `string`
+
+</td>
+</tr>
+<tr>
+<td>
+
 `Result`
 
 </td>
@@ -410,9 +450,9 @@ Can be either a static grant result or a function that determines grants dynamic
 
 ---
 
-### GetGrantFn()\<Result, Root, Context, Args\>
+### GetGrantFn()\<Grants, Result, Root, Context, Args\>
 
-> **GetGrantFn**\<`Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => `any`[] \| `PromiseLike`\<`any`[]\>
+> **GetGrantFn**\<`Grants`, `Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => [`GetGrantResult`](index.md#getgrantresultgrants)\<`Grants`\> \| `PromiseLike`\<[`GetGrantResult`](index.md#getgrantresultgrants)\<`Grants`\>\>
 
 Function that determines grants based on resolver parameters and result.
 Used for dynamic permission granting based on resolved data.
@@ -429,6 +469,13 @@ Used for dynamic permission granting based on resolved data.
 <tr>
 <td>
 
+`Grants` _extends_ `string`
+
+</td>
+</tr>
+<tr>
+<td>
+
 `Result`
 
 </td>
@@ -496,22 +543,41 @@ Used for dynamic permission granting based on resolved data.
 
 #### Returns
 
-`any`[] \| `PromiseLike`\<`any`[]\>
+[`GetGrantResult`](index.md#getgrantresultgrants)\<`Grants`\> \| `PromiseLike`\<[`GetGrantResult`](index.md#getgrantresultgrants)\<`Grants`\>\>
 
 ---
 
-### GetGrantResult
+### GetGrantResult\<Grants\>
 
-> **GetGrantResult**: `AuthExtension.Grants` \| `AuthExtension.Grants`[]
+> **GetGrantResult**\<`Grants`\>: `Grants` \| `Grants`[]
 
 Represents the result of a grant operation.
 Can be either a single grant or an array of grants defined in AuthExtension.GrantsMap.
 
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Grants` _extends_ `string`
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ---
 
-### GetPostScopeRules()\<Result, Root, Context, Args\>
+### GetPostScopeRules()\<Scopes, Grants, Result, Root, Context, Args\>
 
-> **GetPostScopeRules**\<`Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => `boolean` \| [`ScopeRules`](index.md#scoperules) \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperules)\>
+> **GetPostScopeRules**\<`Scopes`, `Grants`, `Result`, `Root`, `Context`, `Args`\>: (`params`, `result`) => `boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>\>
 
 Function to get scope rules for post-resolution authorization
 
@@ -527,6 +593,20 @@ Function to get scope rules for post-resolution authorization
 <tr>
 <td>
 
+`Scopes` _extends_ [`ScopesShape`](index.md#scopesshape)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Grants` _extends_ `string`
+
+</td>
+</tr>
+<tr>
+<td>
+
 `Result`
 
 </td>
@@ -594,13 +674,13 @@ Function to get scope rules for post-resolution authorization
 
 #### Returns
 
-`boolean` \| [`ScopeRules`](index.md#scoperules) \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperules)\>
+`boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>\>
 
 ---
 
-### GetScopeLoader()\<Ctx\>
+### GetScopeLoader()\<Scopes, Ctx\>
 
-> **GetScopeLoader**\<`Ctx`\>: (`ctx`) => [`ScopeLoaderMap`](index.md#scopeloadermap) \| `Promise`\<[`ScopeLoaderMap`](index.md#scopeloadermap)\>
+> **GetScopeLoader**\<`Scopes`, `Ctx`\>: (`ctx`) => [`ScopeLoaderMap`](index.md#scopeloadermapscopes)\<`Scopes`\> \| `Promise`\<[`ScopeLoaderMap`](index.md#scopeloadermapscopes)\<`Scopes`\>\>
 
 Function that creates scope loaders for authorization checks.
 Returns a map of scope loaders that can be synchronous or asynchronous.
@@ -614,6 +694,13 @@ Returns a map of scope loaders that can be synchronous or asynchronous.
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`Scopes` _extends_ [`ScopesShape`](index.md#scopesshape)
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -657,7 +744,7 @@ The application context
 
 #### Returns
 
-[`ScopeLoaderMap`](index.md#scopeloadermap) \| `Promise`\<[`ScopeLoaderMap`](index.md#scopeloadermap)\>
+[`ScopeLoaderMap`](index.md#scopeloadermapscopes)\<`Scopes`\> \| `Promise`\<[`ScopeLoaderMap`](index.md#scopeloadermapscopes)\<`Scopes`\>\>
 
 A map of scope loaders or a promise resolving to scope loaders
 
@@ -675,9 +762,9 @@ const getScopeLoader: GetScopeLoader<Context> = (ctx) => ({
 
 ---
 
-### GetScopeRules()\<Root, Context, Args\>
+### GetScopeRules()\<Scopes, Grants, Root, Context, Args\>
 
-> **GetScopeRules**\<`Root`, `Context`, `Args`\>: (`params`) => `boolean` \| [`ScopeRules`](index.md#scoperules) \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperules)\>
+> **GetScopeRules**\<`Scopes`, `Grants`, `Root`, `Context`, `Args`\>: (`params`) => `boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>\>
 
 Function to get scope rules for pre-resolution authorization
 
@@ -690,6 +777,20 @@ Function to get scope rules for pre-resolution authorization
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`Scopes` _extends_ [`ScopesShape`](index.md#scopesshape)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Grants` _extends_ `string`
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -741,7 +842,7 @@ Function to get scope rules for pre-resolution authorization
 
 #### Returns
 
-`boolean` \| [`ScopeRules`](index.md#scoperules) \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperules)\>
+`boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](index.md#scoperulesscopes-grants)\<`Scopes`, `Grants`\>\>
 
 ---
 
@@ -840,12 +941,31 @@ const roleLoader: ScopeLoader<string> = (role) => userRole === role;
 
 ---
 
-### ScopeLoaderMap
+### ScopeLoaderMap\<Scopes\>
 
-> **ScopeLoaderMap**: `{ [K in Scopes]: ScopeLoader<AuthExtension.Scopes[K]> }`
+> **ScopeLoaderMap**\<`Scopes`\>: `{ [K in keyof Scopes]: ScopeLoader<Scopes[K]> }`
 
 Maps scope names to their respective loaders.
 Each loader handles authorization checks for its scope.
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Scopes` _extends_ [`ScopesShape`](index.md#scopesshape)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Example
 
@@ -887,9 +1007,9 @@ For non-boolean scopes, preserves the original type.
 
 ---
 
-### ScopeRules
+### ScopeRules\<Scopes, Grants\>
 
-> **ScopeRules**: `{ [K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]> }` & `{ [r in LogicRule]?: ScopeRules }` & `object`
+> **ScopeRules**\<`Scopes`, `Grants`\>: `{ [K in keyof Scopes]?: ScopeRule<Scopes[K]> }` & `{ [r in LogicRule]?: ScopeRules<Scopes, Grants> }` & `object`
 
 Defines the structure of authorization scope rules.
 Combines individual scope rules with logical operators and granted permissions.
@@ -912,7 +1032,33 @@ Combines individual scope rules with logical operators and granted permissions.
 </td>
 <td>
 
-`AuthExtension.Grants`
+`Grants`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Scopes`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Grants` _extends_ `string`
 
 </td>
 </tr>
@@ -921,12 +1067,9 @@ Combines individual scope rules with logical operators and granted permissions.
 
 ---
 
-### Scopes
+### ScopesShape
 
-> **Scopes**: keyof `AuthExtension.Scopes`
-
-Type alias representing all available scope keys defined in AuthExtension.Scopes.
-Used as the base for constructing scope rules.
+> **ScopesShape**: \{\} \| \{\}
 
 ## Functions
 
@@ -1024,7 +1167,7 @@ Creates an authentication extension.
 </td>
 <td>
 
-[`GetScopeLoader`](index.md#getscopeloaderctx)\<`Ctx`\>
+[`GetScopeLoader`](index.md#getscopeloaderscopes-ctx)\<`Scopes`, `Ctx`\>
 
 </td>
 <td>

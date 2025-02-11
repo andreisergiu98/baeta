@@ -3,11 +3,14 @@ import { isGrantedKey } from './grant.ts';
 import { type LogicRule, isLogicRule } from './rule.ts';
 import { getAuthStore } from './store.ts';
 
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
+export type ScopesShape = { [key: string]: unknown } | {};
+
 /**
  * Type alias representing all available scope keys defined in AuthExtension.Scopes.
  * Used as the base for constructing scope rules.
  */
-export type Scopes = keyof AuthExtension.Scopes;
+// export type Scopes = keyof AuthExtension.Scopes;
 
 /**
  * Utility type that enforces boolean scopes must be true.
@@ -19,21 +22,21 @@ export type ScopeRule<T> = T extends boolean ? true : T;
  * Defines the structure of authorization scope rules.
  * Combines individual scope rules with logical operators and granted permissions.
  */
-export type ScopeRules = {
-	[K in Scopes]?: ScopeRule<AuthExtension.Scopes[K]>;
+export type ScopeRules<Scopes, Grants extends string> = {
+	[K in keyof Scopes]?: ScopeRule<Scopes[K]>;
 } & {
-	[r in LogicRule]?: ScopeRules;
+	[r in LogicRule]?: ScopeRules<Scopes, Grants>;
 } & {
-	$granted?: AuthExtension.Grants;
+	$granted?: Grants;
 };
 
-async function verifyGrant(
+export async function verifyGrant(
 	ctx: unknown,
 	grant: string | undefined,
 	parentPath: string,
 ): Promise<true> {
 	if (grant == null) {
-		throw new Error();
+		throw new Error("Grant key '$granted' must be defined in the scope rules!");
 	}
 
 	const store = await getAuthStore(ctx);
@@ -46,7 +49,12 @@ async function verifyGrant(
 	return true;
 }
 
-async function verifyScope(ctx: unknown, scopes: ScopeRules, key: string, parentPath: string) {
+export async function verifyScope<Scopes extends ScopesShape, Grants extends string>(
+	ctx: unknown,
+	scopes: ScopeRules<Scopes, Grants>,
+	key: string,
+	parentPath: string,
+) {
 	if (isLogicRule(key)) {
 		return verifyScopes(ctx, scopes[key], key, parentPath);
 	}
@@ -56,14 +64,14 @@ async function verifyScope(ctx: unknown, scopes: ScopeRules, key: string, parent
 	}
 
 	const store = await getAuthStore(ctx);
-	const value = scopes[key as Scopes];
+	const value = (scopes as { [k: string]: unknown })[key];
 	const resolve = store.scopes[key];
 	return resolve(value);
 }
 
-async function verifyChainScopes(
+export async function verifyChainScopes<Scopes extends ScopesShape, Grants extends string>(
 	ctx: unknown,
-	scopes: ScopeRules,
+	scopes: ScopeRules<Scopes, Grants>,
 	keys: string[],
 	parentPath: string,
 ): Promise<true> {
@@ -74,9 +82,9 @@ async function verifyChainScopes(
 	return true;
 }
 
-async function verifyRaceScopes(
+export async function verifyRaceScopes<Scopes extends ScopesShape, Grants extends string>(
 	ctx: unknown,
-	scopes: ScopeRules,
+	scopes: ScopeRules<Scopes, Grants>,
 	keys: string[],
 	parentPath: string,
 ): Promise<true> {
@@ -91,9 +99,9 @@ async function verifyRaceScopes(
 	throw new ForbiddenError();
 }
 
-async function verifyOrScopes(
+export async function verifyOrScopes<Scopes extends ScopesShape, Grants extends string>(
 	ctx: unknown,
-	scopes: ScopeRules,
+	scopes: ScopeRules<Scopes, Grants>,
 	keys: string[],
 	parentPath: string,
 ): Promise<true> {
@@ -106,9 +114,9 @@ async function verifyOrScopes(
 	return Promise.any(promises);
 }
 
-async function verifyAndScopes(
+export async function verifyAndScopes<Scopes extends ScopesShape, Grants extends string>(
 	ctx: unknown,
-	scopes: ScopeRules,
+	scopes: ScopeRules<Scopes, Grants>,
 	keys: string[],
 	parentPath: string,
 ): Promise<true> {
@@ -121,9 +129,9 @@ async function verifyAndScopes(
 	return Promise.all(promises).then(() => true as const);
 }
 
-export async function verifyScopes(
+export async function verifyScopes<Scopes extends ScopesShape, Grants extends string>(
 	ctx: unknown,
-	scopes: ScopeRules | undefined,
+	scopes: ScopeRules<Scopes, Grants> | undefined,
 	rule: LogicRule,
 	parentPath: string,
 ): Promise<true> {
@@ -153,5 +161,5 @@ export async function verifyScopes(
 		return verifyAndScopes(ctx, scopes, keys, parentPath);
 	}
 
-	throw new Error("This line shouldn't be reached.");
+	throw new Error("Invalid logic rule! Must be one of '$chain', '$race', '$or', or '$and'.");
 }

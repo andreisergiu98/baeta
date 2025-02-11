@@ -1,5 +1,9 @@
 # @baeta/generator-sdk
 
+## Namespaces
+
+- [micromatch](namespaces/micromatch.md)
+
 ## Enumerations
 
 ### GeneratorPluginVersion
@@ -17,7 +21,7 @@
 <tr>
 <td>
 
-`V1`
+<a id="v1"></a> `V1`
 
 </td>
 <td>
@@ -123,7 +127,7 @@
 <tr>
 <td>
 
-`content`
+<a id="content"></a> `content`
 
 </td>
 <td>
@@ -145,7 +149,7 @@
 <tr>
 <td>
 
-`filename`
+<a id="filename"></a> `filename`
 
 </td>
 <td>
@@ -167,7 +171,7 @@
 <tr>
 <td>
 
-`persisted`
+<a id="persisted"></a> `persisted`
 
 </td>
 <td>
@@ -189,7 +193,7 @@
 <tr>
 <td>
 
-`tag`
+<a id="tag"></a> `tag`
 
 </td>
 <td>
@@ -401,7 +405,7 @@
 <tr>
 <td>
 
-`content`
+<a id="content-1"></a> `content`
 
 </td>
 <td>
@@ -428,7 +432,7 @@
 <tr>
 <td>
 
-`end`
+<a id="end"></a> `end`
 
 </td>
 <td>
@@ -455,7 +459,7 @@
 <tr>
 <td>
 
-`filename`
+<a id="filename-1"></a> `filename`
 
 </td>
 <td>
@@ -482,7 +486,7 @@
 <tr>
 <td>
 
-`persisted`
+<a id="persisted-1"></a> `persisted`
 
 </td>
 <td>
@@ -509,7 +513,7 @@
 <tr>
 <td>
 
-`start`
+<a id="start"></a> `start`
 
 </td>
 <td>
@@ -536,7 +540,7 @@
 <tr>
 <td>
 
-`tag`
+<a id="tag-1"></a> `tag`
 
 </td>
 <td>
@@ -694,15 +698,15 @@
 
 ##### getExistingContent()
 
-> `protected` **getExistingContent**(): `Promise`\<readonly [`string`, `FileHandle`] \| readonly [`""`, `null`]\>
+> `protected` **getExistingContent**(): `Promise`\<readonly \[`string`, `FileHandle`\] \| readonly \[`""`, `null`\]\>
 
 ###### Returns
 
-`Promise`\<readonly [`string`, `FileHandle`] \| readonly [`""`, `null`]\>
+`Promise`\<readonly \[`string`, `FileHandle`\] \| readonly \[`""`, `null`\]\>
 
 ##### getSlices()
 
-> `protected` **getSlices**(`existingContent`): readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
+> `protected` **getSlices**(`existingContent`): readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Parameters
 
@@ -731,7 +735,7 @@
 
 ###### Returns
 
-readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
+readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ##### unlink()
 
@@ -811,7 +815,7 @@ readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 <tr>
 <td>
 
-`files`
+<a id="files"></a> `files`
 
 </td>
 <td>
@@ -833,7 +837,7 @@ readonly [`string`, `""`, `false`] \| readonly [`string`, `string`, `true`]
 <tr>
 <td>
 
-`fileOptions?`
+<a id="fileoptions"></a> `fileOptions?`
 
 </td>
 <td>
@@ -1653,7 +1657,7 @@ Options for generated files.
 <tr>
 <td>
 
-`addEslintDisableHeader?`
+<a id="addeslintdisableheader"></a> `addEslintDisableHeader?`
 
 </td>
 <td>
@@ -1677,7 +1681,7 @@ Add eslint-disable comment at the beginning of the file.
 <tr>
 <td>
 
-`addGenerationNoticeHeader?`
+<a id="addgenerationnoticeheader"></a> `addGenerationNoticeHeader?`
 
 </td>
 <td>
@@ -1701,7 +1705,7 @@ Add generation notice at the beginning of the file.
 <tr>
 <td>
 
-`addHeader?`
+<a id="addheader"></a> `addHeader?`
 
 </td>
 <td>
@@ -1723,7 +1727,7 @@ Add custom header at the beginning of the file.
 <tr>
 <td>
 
-`transformContent?`
+<a id="transformcontent"></a> `transformContent?`
 
 </td>
 <td>
@@ -1766,7 +1770,7 @@ Options for the Baeta Generator.
 <tr>
 <td>
 
-`schemas`
+<a id="schemas"></a> `schemas`
 
 </td>
 <td>
@@ -1790,7 +1794,7 @@ Glob pattern(s) to locate GraphQL schema files.
 <tr>
 <td>
 
-`baseTypesPath?`
+<a id="basetypespath"></a> `baseTypesPath?`
 
 </td>
 <td>
@@ -1814,7 +1818,7 @@ Output path for the generated base types file.
 <tr>
 <td>
 
-`contextType?`
+<a id="contexttype"></a> `contextType?`
 
 </td>
 <td>
@@ -1849,7 +1853,7 @@ contextType: "src/types/context.ts"; // for default export
 <tr>
 <td>
 
-`cwd?`
+<a id="cwd"></a> `cwd?`
 
 </td>
 <td>
@@ -1873,7 +1877,7 @@ Current working directory for resolving relative paths.
 <tr>
 <td>
 
-`extensions?`
+<a id="extensions"></a> `extensions?`
 
 </td>
 <td>
@@ -1904,7 +1908,7 @@ extensions: "src/extensions.ts";
 <tr>
 <td>
 
-`fileOptions?`
+<a id="fileoptions-2"></a> `fileOptions?`
 
 </td>
 <td>
@@ -1926,7 +1930,7 @@ Configuration options for generated files.
 <tr>
 <td>
 
-`importExtension?`
+<a id="importextension"></a> `importExtension?`
 
 </td>
 <td>
@@ -1951,7 +1955,7 @@ Set to false to omit extensions.
 <tr>
 <td>
 
-`loaders?`
+<a id="loaders"></a> `loaders?`
 
 </td>
 <td>
@@ -1973,7 +1977,7 @@ Custom schema loaders for processing schema files.
 <tr>
 <td>
 
-`moduleDefinitionName?`
+<a id="moduledefinitionname"></a> `moduleDefinitionName?`
 
 </td>
 <td>
@@ -1998,7 +2002,7 @@ Contains type definitions and the GraphQL AST.
 <tr>
 <td>
 
-`modulesDir?`
+<a id="modulesdir"></a> `modulesDir?`
 
 </td>
 <td>
@@ -2022,7 +2026,7 @@ Root directory where GraphQL modules are defined.
 <tr>
 <td>
 
-`scalars?`
+<a id="scalars"></a> `scalars?`
 
 </td>
 <td>
@@ -2096,7 +2100,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`actionName`
+<a id="actionname"></a> `actionName`
 
 </td>
 <td>
@@ -2108,7 +2112,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`end`
+<a id="end-1"></a> `end`
 
 </td>
 <td>
@@ -2120,7 +2124,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`generate`
+<a id="generate"></a> `generate`
 
 </td>
 <td>
@@ -2132,7 +2136,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`name`
+<a id="name"></a> `name`
 
 </td>
 <td>
@@ -2144,7 +2148,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`setup`
+<a id="setup"></a> `setup`
 
 </td>
 <td>
@@ -2156,7 +2160,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`type`
+<a id="type"></a> `type`
 
 </td>
 <td>
@@ -2168,7 +2172,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`version`
+<a id="version"></a> `version`
 
 </td>
 <td>
@@ -2180,7 +2184,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`watch`
+<a id="watch"></a> `watch`
 
 </td>
 <td>
@@ -2332,7 +2336,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`baseTypesPath`
+<a id="basetypespath-1"></a> `baseTypesPath`
 
 </td>
 <td>
@@ -2344,7 +2348,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`cwd`
+<a id="cwd-1"></a> `cwd`
 
 </td>
 <td>
@@ -2356,7 +2360,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`moduleDefinitionName`
+<a id="moduledefinitionname-1"></a> `moduleDefinitionName`
 
 </td>
 <td>
@@ -2368,7 +2372,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`modulesDir`
+<a id="modulesdir-1"></a> `modulesDir`
 
 </td>
 <td>
@@ -2380,7 +2384,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`schemas`
+<a id="schemas-1"></a> `schemas`
 
 </td>
 <td>
@@ -2392,7 +2396,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`contextType?`
+<a id="contexttype-1"></a> `contextType?`
 
 </td>
 <td>
@@ -2404,7 +2408,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`extensions?`
+<a id="extensions-1"></a> `extensions?`
 
 </td>
 <td>
@@ -2416,7 +2420,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`fileOptions?`
+<a id="fileoptions-3"></a> `fileOptions?`
 
 </td>
 <td>
@@ -2428,7 +2432,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`importExtension?`
+<a id="importextension-1"></a> `importExtension?`
 
 </td>
 <td>
@@ -2440,7 +2444,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`loaders?`
+<a id="loaders-1"></a> `loaders?`
 
 </td>
 <td>
@@ -2452,7 +2456,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`scalars?`
+<a id="scalars-1"></a> `scalars?`
 
 </td>
 <td>
@@ -2481,7 +2485,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`path`
+<a id="path"></a> `path`
 
 </td>
 <td>
@@ -2493,7 +2497,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`relativePath`
+<a id="relativepath"></a> `relativePath`
 
 </td>
 <td>
@@ -2505,7 +2509,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`type`
+<a id="type-1"></a> `type`
 
 </td>
 <td>
@@ -2701,7 +2705,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`actionName`
+<a id="actionname-1"></a> `actionName`
 
 </td>
 <td>
@@ -2713,7 +2717,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`name`
+<a id="name-1"></a> `name`
 
 </td>
 <td>
@@ -2725,7 +2729,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`end`?
+<a id="end-2"></a> `end`?
 
 </td>
 <td>
@@ -2737,7 +2741,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`generate`?
+<a id="generate-1"></a> `generate`?
 
 </td>
 <td>
@@ -2749,7 +2753,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`setup`?
+<a id="setup-1"></a> `setup`?
 
 </td>
 <td>
@@ -2761,7 +2765,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`watch`?
+<a id="watch-1"></a> `watch`?
 
 </td>
 <td>
@@ -3476,7 +3480,3 @@ mm(list, patterns[, options]);
 console.log(mm(['a.js', 'a.txt'], ['*.js']));
 //=> [ 'a.js' ]
 ```
-
-## Namespaces
-
-- [micromatch](namespaces/micromatch.md)

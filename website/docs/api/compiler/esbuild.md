@@ -17,7 +17,7 @@
 <tr>
 <td>
 
-`color?`
+<a id="color"></a> `color?`
 
 </td>
 <td>
@@ -29,7 +29,7 @@
 <tr>
 <td>
 
-`verbose?`
+<a id="verbose"></a> `verbose?`
 
 </td>
 <td>
@@ -190,7 +190,7 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`errors`
+<a id="errors"></a> `errors`
 
 </td>
 <td>
@@ -207,7 +207,7 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`message`
+<a id="message"></a> `message`
 
 </td>
 <td>
@@ -224,7 +224,7 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`name`
+<a id="name"></a> `name`
 
 </td>
 <td>
@@ -241,7 +241,7 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`warnings`
+<a id="warnings"></a> `warnings`
 
 </td>
 <td>
@@ -258,7 +258,7 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`cause?`
+<a id="cause"></a> `cause?`
 
 </td>
 <td>
@@ -275,7 +275,7 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`stack?`
+<a id="stack"></a> `stack?`
 
 </td>
 <td>
@@ -315,7 +315,7 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`absWorkingDir?`
+<a id="absworkingdir"></a> `absWorkingDir?`
 
 </td>
 <td>
@@ -337,7 +337,7 @@ Documentation: https://esbuild.github.io/api/#working-directory
 <tr>
 <td>
 
-`alias?`
+<a id="alias"></a> `alias?`
 
 </td>
 <td>
@@ -359,7 +359,7 @@ Documentation: https://esbuild.github.io/api/#alias
 <tr>
 <td>
 
-`allowOverwrite?`
+<a id="allowoverwrite"></a> `allowOverwrite?`
 
 </td>
 <td>
@@ -381,7 +381,7 @@ Documentation: https://esbuild.github.io/api/#allow-overwrite
 <tr>
 <td>
 
-`assetNames?`
+<a id="assetnames"></a> `assetNames?`
 
 </td>
 <td>
@@ -403,7 +403,7 @@ Documentation: https://esbuild.github.io/api/#asset-names
 <tr>
 <td>
 
-`banner?`
+<a id="banner"></a> `banner?`
 
 </td>
 <td>
@@ -425,7 +425,7 @@ Documentation: https://esbuild.github.io/api/#banner
 <tr>
 <td>
 
-`bundle?`
+<a id="bundle"></a> `bundle?`
 
 </td>
 <td>
@@ -447,7 +447,7 @@ Documentation: https://esbuild.github.io/api/#bundle
 <tr>
 <td>
 
-`charset?`
+<a id="charset"></a> `charset?`
 
 </td>
 <td>
@@ -469,7 +469,7 @@ Documentation: https://esbuild.github.io/api/#charset
 <tr>
 <td>
 
-`chunkNames?`
+<a id="chunknames"></a> `chunkNames?`
 
 </td>
 <td>
@@ -491,7 +491,7 @@ Documentation: https://esbuild.github.io/api/#chunk-names
 <tr>
 <td>
 
-`color?`
+<a id="color-1"></a> `color?`
 
 </td>
 <td>
@@ -513,7 +513,7 @@ Documentation: https://esbuild.github.io/api/#color
 <tr>
 <td>
 
-`conditions?`
+<a id="conditions"></a> `conditions?`
 
 </td>
 <td>
@@ -535,7 +535,7 @@ Documentation: https://esbuild.github.io/api/#conditions
 <tr>
 <td>
 
-`define?`
+<a id="define"></a> `define?`
 
 </td>
 <td>
@@ -557,7 +557,7 @@ Documentation: https://esbuild.github.io/api/#define
 <tr>
 <td>
 
-`drop?`
+<a id="drop"></a> `drop?`
 
 </td>
 <td>
@@ -579,7 +579,7 @@ Documentation: https://esbuild.github.io/api/#drop
 <tr>
 <td>
 
-`dropLabels?`
+<a id="droplabels"></a> `dropLabels?`
 
 </td>
 <td>
@@ -601,7 +601,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 <tr>
 <td>
 
-`entryNames?`
+<a id="entrynames"></a> `entryNames?`
 
 </td>
 <td>
@@ -623,7 +623,7 @@ Documentation: https://esbuild.github.io/api/#entry-names
 <tr>
 <td>
 
-`entryPoints?`
+<a id="entrypoints"></a> `entryPoints?`
 
 </td>
 <td>
@@ -645,7 +645,7 @@ Documentation: https://esbuild.github.io/api/#entry-points
 <tr>
 <td>
 
-`external?`
+<a id="external"></a> `external?`
 
 </td>
 <td>
@@ -667,7 +667,7 @@ Documentation: https://esbuild.github.io/api/#external
 <tr>
 <td>
 
-`footer?`
+<a id="footer"></a> `footer?`
 
 </td>
 <td>
@@ -689,7 +689,7 @@ Documentation: https://esbuild.github.io/api/#footer
 <tr>
 <td>
 
-`format?`
+<a id="format"></a> `format?`
 
 </td>
 <td>
@@ -711,7 +711,7 @@ Documentation: https://esbuild.github.io/api/#format
 <tr>
 <td>
 
-`globalName?`
+<a id="globalname"></a> `globalName?`
 
 </td>
 <td>
@@ -733,7 +733,7 @@ Documentation: https://esbuild.github.io/api/#global-name
 <tr>
 <td>
 
-`ignoreAnnotations?`
+<a id="ignoreannotations"></a> `ignoreAnnotations?`
 
 </td>
 <td>
@@ -755,7 +755,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 <tr>
 <td>
 
-`inject?`
+<a id="inject"></a> `inject?`
 
 </td>
 <td>
@@ -777,7 +777,7 @@ Documentation: https://esbuild.github.io/api/#inject
 <tr>
 <td>
 
-`jsx?`
+<a id="jsx"></a> `jsx?`
 
 </td>
 <td>
@@ -799,7 +799,7 @@ Documentation: https://esbuild.github.io/api/#jsx
 <tr>
 <td>
 
-`jsxDev?`
+<a id="jsxdev"></a> `jsxDev?`
 
 </td>
 <td>
@@ -821,7 +821,7 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 <tr>
 <td>
 
-`jsxFactory?`
+<a id="jsxfactory"></a> `jsxFactory?`
 
 </td>
 <td>
@@ -843,7 +843,7 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 <tr>
 <td>
 
-`jsxFragment?`
+<a id="jsxfragment"></a> `jsxFragment?`
 
 </td>
 <td>
@@ -865,7 +865,7 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 <tr>
 <td>
 
-`jsxImportSource?`
+<a id="jsximportsource"></a> `jsxImportSource?`
 
 </td>
 <td>
@@ -887,7 +887,7 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 <tr>
 <td>
 
-`jsxSideEffects?`
+<a id="jsxsideeffects"></a> `jsxSideEffects?`
 
 </td>
 <td>
@@ -909,7 +909,7 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 <tr>
 <td>
 
-`keepNames?`
+<a id="keepnames"></a> `keepNames?`
 
 </td>
 <td>
@@ -931,7 +931,7 @@ Documentation: https://esbuild.github.io/api/#keep-names
 <tr>
 <td>
 
-`legalComments?`
+<a id="legalcomments"></a> `legalComments?`
 
 </td>
 <td>
@@ -953,7 +953,7 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 <tr>
 <td>
 
-`lineLimit?`
+<a id="linelimit"></a> `lineLimit?`
 
 </td>
 <td>
@@ -975,7 +975,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 <tr>
 <td>
 
-`loader?`
+<a id="loader"></a> `loader?`
 
 </td>
 <td>
@@ -997,7 +997,7 @@ Documentation: https://esbuild.github.io/api/#loader
 <tr>
 <td>
 
-`logLevel?`
+<a id="loglevel"></a> `logLevel?`
 
 </td>
 <td>
@@ -1019,7 +1019,7 @@ Documentation: https://esbuild.github.io/api/#log-level
 <tr>
 <td>
 
-`logLimit?`
+<a id="loglimit"></a> `logLimit?`
 
 </td>
 <td>
@@ -1041,7 +1041,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 <tr>
 <td>
 
-`logOverride?`
+<a id="logoverride"></a> `logOverride?`
 
 </td>
 <td>
@@ -1063,7 +1063,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 <tr>
 <td>
 
-`mainFields?`
+<a id="mainfields"></a> `mainFields?`
 
 </td>
 <td>
@@ -1085,7 +1085,7 @@ Documentation: https://esbuild.github.io/api/#main-fields
 <tr>
 <td>
 
-`mangleCache?`
+<a id="manglecache"></a> `mangleCache?`
 
 </td>
 <td>
@@ -1107,7 +1107,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`mangleProps?`
+<a id="mangleprops"></a> `mangleProps?`
 
 </td>
 <td>
@@ -1129,7 +1129,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`mangleQuoted?`
+<a id="manglequoted"></a> `mangleQuoted?`
 
 </td>
 <td>
@@ -1151,7 +1151,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`metafile?`
+<a id="metafile"></a> `metafile?`
 
 </td>
 <td>
@@ -1173,7 +1173,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 <tr>
 <td>
 
-`minify?`
+<a id="minify"></a> `minify?`
 
 </td>
 <td>
@@ -1195,7 +1195,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifyIdentifiers?`
+<a id="minifyidentifiers"></a> `minifyIdentifiers?`
 
 </td>
 <td>
@@ -1217,7 +1217,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifySyntax?`
+<a id="minifysyntax"></a> `minifySyntax?`
 
 </td>
 <td>
@@ -1239,7 +1239,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifyWhitespace?`
+<a id="minifywhitespace"></a> `minifyWhitespace?`
 
 </td>
 <td>
@@ -1261,7 +1261,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`nodePaths?`
+<a id="nodepaths"></a> `nodePaths?`
 
 </td>
 <td>
@@ -1283,7 +1283,7 @@ Documentation: https://esbuild.github.io/api/#node-paths
 <tr>
 <td>
 
-`outbase?`
+<a id="outbase"></a> `outbase?`
 
 </td>
 <td>
@@ -1305,7 +1305,7 @@ Documentation: https://esbuild.github.io/api/#outbase
 <tr>
 <td>
 
-`outdir?`
+<a id="outdir"></a> `outdir?`
 
 </td>
 <td>
@@ -1327,7 +1327,7 @@ Documentation: https://esbuild.github.io/api/#outdir
 <tr>
 <td>
 
-`outExtension?`
+<a id="outextension"></a> `outExtension?`
 
 </td>
 <td>
@@ -1349,7 +1349,7 @@ Documentation: https://esbuild.github.io/api/#out-extension
 <tr>
 <td>
 
-`outfile?`
+<a id="outfile"></a> `outfile?`
 
 </td>
 <td>
@@ -1371,7 +1371,7 @@ Documentation: https://esbuild.github.io/api/#outfile
 <tr>
 <td>
 
-`packages?`
+<a id="packages"></a> `packages?`
 
 </td>
 <td>
@@ -1393,7 +1393,7 @@ Documentation: https://esbuild.github.io/api/#packages
 <tr>
 <td>
 
-`platform?`
+<a id="platform"></a> `platform?`
 
 </td>
 <td>
@@ -1415,7 +1415,7 @@ Documentation: https://esbuild.github.io/api/#platform
 <tr>
 <td>
 
-`plugins?`
+<a id="plugins"></a> `plugins?`
 
 </td>
 <td>
@@ -1437,7 +1437,7 @@ Documentation: https://esbuild.github.io/plugins/
 <tr>
 <td>
 
-`preserveSymlinks?`
+<a id="preservesymlinks"></a> `preserveSymlinks?`
 
 </td>
 <td>
@@ -1459,7 +1459,7 @@ Documentation: https://esbuild.github.io/api/#preserve-symlinks
 <tr>
 <td>
 
-`publicPath?`
+<a id="publicpath"></a> `publicPath?`
 
 </td>
 <td>
@@ -1481,7 +1481,7 @@ Documentation: https://esbuild.github.io/api/#public-path
 <tr>
 <td>
 
-`pure?`
+<a id="pure"></a> `pure?`
 
 </td>
 <td>
@@ -1503,7 +1503,7 @@ Documentation: https://esbuild.github.io/api/#pure
 <tr>
 <td>
 
-`reserveProps?`
+<a id="reserveprops"></a> `reserveProps?`
 
 </td>
 <td>
@@ -1525,7 +1525,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`resolveExtensions?`
+<a id="resolveextensions"></a> `resolveExtensions?`
 
 </td>
 <td>
@@ -1547,7 +1547,7 @@ Documentation: https://esbuild.github.io/api/#resolve-extensions
 <tr>
 <td>
 
-`sourcemap?`
+<a id="sourcemap"></a> `sourcemap?`
 
 </td>
 <td>
@@ -1569,7 +1569,7 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 <tr>
 <td>
 
-`sourceRoot?`
+<a id="sourceroot"></a> `sourceRoot?`
 
 </td>
 <td>
@@ -1591,7 +1591,7 @@ Documentation: https://esbuild.github.io/api/#source-root
 <tr>
 <td>
 
-`sourcesContent?`
+<a id="sourcescontent"></a> `sourcesContent?`
 
 </td>
 <td>
@@ -1613,7 +1613,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 <tr>
 <td>
 
-`splitting?`
+<a id="splitting"></a> `splitting?`
 
 </td>
 <td>
@@ -1635,7 +1635,7 @@ Documentation: https://esbuild.github.io/api/#splitting
 <tr>
 <td>
 
-`stdin?`
+<a id="stdin"></a> `stdin?`
 
 </td>
 <td>
@@ -1657,7 +1657,7 @@ Documentation: https://esbuild.github.io/api/#stdin
 <tr>
 <td>
 
-`supported?`
+<a id="supported"></a> `supported?`
 
 </td>
 <td>
@@ -1679,7 +1679,7 @@ Documentation: https://esbuild.github.io/api/#supported
 <tr>
 <td>
 
-`target?`
+<a id="target"></a> `target?`
 
 </td>
 <td>
@@ -1701,7 +1701,7 @@ Documentation: https://esbuild.github.io/api/#target
 <tr>
 <td>
 
-`treeShaking?`
+<a id="treeshaking"></a> `treeShaking?`
 
 </td>
 <td>
@@ -1723,7 +1723,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 <tr>
 <td>
 
-`tsconfig?`
+<a id="tsconfig"></a> `tsconfig?`
 
 </td>
 <td>
@@ -1745,7 +1745,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig
 <tr>
 <td>
 
-`tsconfigRaw?`
+<a id="tsconfigraw"></a> `tsconfigRaw?`
 
 </td>
 <td>
@@ -1767,7 +1767,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`write?`
+<a id="write"></a> `write?`
 
 </td>
 <td>
@@ -1832,7 +1832,7 @@ Documentation: https://esbuild.github.io/api/#write
 <tr>
 <td>
 
-`errors`
+<a id="errors-1"></a> `errors`
 
 </td>
 <td>
@@ -1849,7 +1849,7 @@ Documentation: https://esbuild.github.io/api/#write
 <tr>
 <td>
 
-`mangleCache`
+<a id="manglecache-1"></a> `mangleCache`
 
 </td>
 <td>
@@ -1866,7 +1866,7 @@ Only when "mangleCache" is present
 <tr>
 <td>
 
-`metafile`
+<a id="metafile-1"></a> `metafile`
 
 </td>
 <td>
@@ -1883,7 +1883,7 @@ Only when "metafile: true"
 <tr>
 <td>
 
-`outputFiles`
+<a id="outputfiles"></a> `outputFiles`
 
 </td>
 <td>
@@ -1900,7 +1900,7 @@ Only when "write: false"
 <tr>
 <td>
 
-`warnings`
+<a id="warnings-1"></a> `warnings`
 
 </td>
 <td>
@@ -1940,7 +1940,7 @@ Only when "write: false"
 <tr>
 <td>
 
-`charset?`
+<a id="charset-1"></a> `charset?`
 
 </td>
 <td>
@@ -1957,7 +1957,7 @@ Documentation: https://esbuild.github.io/api/#charset
 <tr>
 <td>
 
-`color?`
+<a id="color-2"></a> `color?`
 
 </td>
 <td>
@@ -1974,7 +1974,7 @@ Documentation: https://esbuild.github.io/api/#color
 <tr>
 <td>
 
-`define?`
+<a id="define-1"></a> `define?`
 
 </td>
 <td>
@@ -1991,7 +1991,7 @@ Documentation: https://esbuild.github.io/api/#define
 <tr>
 <td>
 
-`drop?`
+<a id="drop-1"></a> `drop?`
 
 </td>
 <td>
@@ -2008,7 +2008,7 @@ Documentation: https://esbuild.github.io/api/#drop
 <tr>
 <td>
 
-`dropLabels?`
+<a id="droplabels-1"></a> `dropLabels?`
 
 </td>
 <td>
@@ -2025,7 +2025,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 <tr>
 <td>
 
-`format?`
+<a id="format-1"></a> `format?`
 
 </td>
 <td>
@@ -2042,7 +2042,7 @@ Documentation: https://esbuild.github.io/api/#format
 <tr>
 <td>
 
-`globalName?`
+<a id="globalname-1"></a> `globalName?`
 
 </td>
 <td>
@@ -2059,7 +2059,7 @@ Documentation: https://esbuild.github.io/api/#global-name
 <tr>
 <td>
 
-`ignoreAnnotations?`
+<a id="ignoreannotations-1"></a> `ignoreAnnotations?`
 
 </td>
 <td>
@@ -2076,7 +2076,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 <tr>
 <td>
 
-`jsx?`
+<a id="jsx-1"></a> `jsx?`
 
 </td>
 <td>
@@ -2093,7 +2093,7 @@ Documentation: https://esbuild.github.io/api/#jsx
 <tr>
 <td>
 
-`jsxDev?`
+<a id="jsxdev-1"></a> `jsxDev?`
 
 </td>
 <td>
@@ -2110,7 +2110,7 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 <tr>
 <td>
 
-`jsxFactory?`
+<a id="jsxfactory-1"></a> `jsxFactory?`
 
 </td>
 <td>
@@ -2127,7 +2127,7 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 <tr>
 <td>
 
-`jsxFragment?`
+<a id="jsxfragment-1"></a> `jsxFragment?`
 
 </td>
 <td>
@@ -2144,7 +2144,7 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 <tr>
 <td>
 
-`jsxImportSource?`
+<a id="jsximportsource-1"></a> `jsxImportSource?`
 
 </td>
 <td>
@@ -2161,7 +2161,7 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 <tr>
 <td>
 
-`jsxSideEffects?`
+<a id="jsxsideeffects-1"></a> `jsxSideEffects?`
 
 </td>
 <td>
@@ -2178,7 +2178,7 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 <tr>
 <td>
 
-`keepNames?`
+<a id="keepnames-1"></a> `keepNames?`
 
 </td>
 <td>
@@ -2195,7 +2195,7 @@ Documentation: https://esbuild.github.io/api/#keep-names
 <tr>
 <td>
 
-`legalComments?`
+<a id="legalcomments-1"></a> `legalComments?`
 
 </td>
 <td>
@@ -2212,7 +2212,7 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 <tr>
 <td>
 
-`lineLimit?`
+<a id="linelimit-1"></a> `lineLimit?`
 
 </td>
 <td>
@@ -2229,7 +2229,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 <tr>
 <td>
 
-`logLevel?`
+<a id="loglevel-1"></a> `logLevel?`
 
 </td>
 <td>
@@ -2246,7 +2246,7 @@ Documentation: https://esbuild.github.io/api/#log-level
 <tr>
 <td>
 
-`logLimit?`
+<a id="loglimit-1"></a> `logLimit?`
 
 </td>
 <td>
@@ -2263,7 +2263,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 <tr>
 <td>
 
-`logOverride?`
+<a id="logoverride-1"></a> `logOverride?`
 
 </td>
 <td>
@@ -2280,7 +2280,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 <tr>
 <td>
 
-`mangleCache?`
+<a id="manglecache-2"></a> `mangleCache?`
 
 </td>
 <td>
@@ -2297,7 +2297,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`mangleProps?`
+<a id="mangleprops-1"></a> `mangleProps?`
 
 </td>
 <td>
@@ -2314,7 +2314,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`mangleQuoted?`
+<a id="manglequoted-1"></a> `mangleQuoted?`
 
 </td>
 <td>
@@ -2331,7 +2331,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`minify?`
+<a id="minify-1"></a> `minify?`
 
 </td>
 <td>
@@ -2348,7 +2348,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifyIdentifiers?`
+<a id="minifyidentifiers-1"></a> `minifyIdentifiers?`
 
 </td>
 <td>
@@ -2365,7 +2365,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifySyntax?`
+<a id="minifysyntax-1"></a> `minifySyntax?`
 
 </td>
 <td>
@@ -2382,7 +2382,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifyWhitespace?`
+<a id="minifywhitespace-1"></a> `minifyWhitespace?`
 
 </td>
 <td>
@@ -2399,7 +2399,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`platform?`
+<a id="platform-1"></a> `platform?`
 
 </td>
 <td>
@@ -2416,7 +2416,7 @@ Documentation: https://esbuild.github.io/api/#platform
 <tr>
 <td>
 
-`pure?`
+<a id="pure-1"></a> `pure?`
 
 </td>
 <td>
@@ -2433,7 +2433,7 @@ Documentation: https://esbuild.github.io/api/#pure
 <tr>
 <td>
 
-`reserveProps?`
+<a id="reserveprops-1"></a> `reserveProps?`
 
 </td>
 <td>
@@ -2450,7 +2450,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`sourcemap?`
+<a id="sourcemap-1"></a> `sourcemap?`
 
 </td>
 <td>
@@ -2467,7 +2467,7 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 <tr>
 <td>
 
-`sourceRoot?`
+<a id="sourceroot-1"></a> `sourceRoot?`
 
 </td>
 <td>
@@ -2484,7 +2484,7 @@ Documentation: https://esbuild.github.io/api/#source-root
 <tr>
 <td>
 
-`sourcesContent?`
+<a id="sourcescontent-1"></a> `sourcesContent?`
 
 </td>
 <td>
@@ -2501,7 +2501,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 <tr>
 <td>
 
-`supported?`
+<a id="supported-1"></a> `supported?`
 
 </td>
 <td>
@@ -2518,7 +2518,7 @@ Documentation: https://esbuild.github.io/api/#supported
 <tr>
 <td>
 
-`target?`
+<a id="target-1"></a> `target?`
 
 </td>
 <td>
@@ -2535,7 +2535,7 @@ Documentation: https://esbuild.github.io/api/#target
 <tr>
 <td>
 
-`treeShaking?`
+<a id="treeshaking-1"></a> `treeShaking?`
 
 </td>
 <td>
@@ -2552,7 +2552,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 <tr>
 <td>
 
-`tsconfigRaw?`
+<a id="tsconfigraw-1"></a> `tsconfigRaw?`
 
 </td>
 <td>
@@ -2586,7 +2586,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`kind`
+<a id="kind"></a> `kind`
 
 </td>
 <td>
@@ -2598,7 +2598,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`color?`
+<a id="color-3"></a> `color?`
 
 </td>
 <td>
@@ -2610,7 +2610,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`terminalWidth?`
+<a id="terminalwidth"></a> `terminalWidth?`
 
 </td>
 <td>
@@ -2640,7 +2640,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`wasmModule?`
+<a id="wasmmodule"></a> `wasmModule?`
 
 </td>
 <td>
@@ -2662,7 +2662,7 @@ not possible to download the WebAssembly module.
 <tr>
 <td>
 
-`wasmURL?`
+<a id="wasmurl"></a> `wasmURL?`
 
 </td>
 <td>
@@ -2680,7 +2680,7 @@ esbuild in the browser.
 <tr>
 <td>
 
-`worker?`
+<a id="worker"></a> `worker?`
 
 </td>
 <td>
@@ -2717,7 +2717,7 @@ to false.
 <tr>
 <td>
 
-`column`
+<a id="column"></a> `column`
 
 </td>
 <td>
@@ -2734,7 +2734,7 @@ to false.
 <tr>
 <td>
 
-`file`
+<a id="file"></a> `file`
 
 </td>
 <td>
@@ -2751,7 +2751,7 @@ to false.
 <tr>
 <td>
 
-`length`
+<a id="length"></a> `length`
 
 </td>
 <td>
@@ -2768,7 +2768,7 @@ in bytes
 <tr>
 <td>
 
-`line`
+<a id="line"></a> `line`
 
 </td>
 <td>
@@ -2785,7 +2785,7 @@ in bytes
 <tr>
 <td>
 
-`lineText`
+<a id="linetext"></a> `lineText`
 
 </td>
 <td>
@@ -2802,7 +2802,7 @@ in bytes
 <tr>
 <td>
 
-`namespace`
+<a id="namespace"></a> `namespace`
 
 </td>
 <td>
@@ -2819,7 +2819,7 @@ in bytes
 <tr>
 <td>
 
-`suggestion`
+<a id="suggestion"></a> `suggestion`
 
 </td>
 <td>
@@ -2854,7 +2854,7 @@ in bytes
 <tr>
 <td>
 
-`detail`
+<a id="detail"></a> `detail`
 
 </td>
 <td>
@@ -2872,7 +2872,7 @@ use this to stash the original error, for example.
 <tr>
 <td>
 
-`id`
+<a id="id"></a> `id`
 
 </td>
 <td>
@@ -2889,7 +2889,7 @@ use this to stash the original error, for example.
 <tr>
 <td>
 
-`location`
+<a id="location-1"></a> `location`
 
 </td>
 <td>
@@ -2906,7 +2906,7 @@ use this to stash the original error, for example.
 <tr>
 <td>
 
-`notes`
+<a id="notes"></a> `notes`
 
 </td>
 <td>
@@ -2923,7 +2923,7 @@ use this to stash the original error, for example.
 <tr>
 <td>
 
-`pluginName`
+<a id="pluginname"></a> `pluginName`
 
 </td>
 <td>
@@ -2940,7 +2940,7 @@ use this to stash the original error, for example.
 <tr>
 <td>
 
-`text`
+<a id="text"></a> `text`
 
 </td>
 <td>
@@ -2976,7 +2976,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 <tr>
 <td>
 
-`inputs`
+<a id="inputs"></a> `inputs`
 
 </td>
 <td>
@@ -2988,7 +2988,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 <tr>
 <td>
 
-`outputs`
+<a id="outputs"></a> `outputs`
 
 </td>
 <td>
@@ -3017,7 +3017,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 <tr>
 <td>
 
-`location`
+<a id="location-2"></a> `location`
 
 </td>
 <td>
@@ -3029,7 +3029,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 <tr>
 <td>
 
-`text`
+<a id="text-1"></a> `text`
 
 </td>
 <td>
@@ -3058,7 +3058,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 <tr>
 <td>
 
-`errors?`
+<a id="errors-2"></a> `errors?`
 
 </td>
 <td>
@@ -3070,7 +3070,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 <tr>
 <td>
 
-`warnings?`
+<a id="warnings-2"></a> `warnings?`
 
 </td>
 <td>
@@ -3101,7 +3101,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-arguments
 <tr>
 <td>
 
-`namespace`
+<a id="namespace-1"></a> `namespace`
 
 </td>
 <td>
@@ -3113,7 +3113,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-arguments
 <tr>
 <td>
 
-`path`
+<a id="path"></a> `path`
 
 </td>
 <td>
@@ -3125,7 +3125,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-arguments
 <tr>
 <td>
 
-`pluginData`
+<a id="plugindata"></a> `pluginData`
 
 </td>
 <td>
@@ -3137,7 +3137,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-arguments
 <tr>
 <td>
 
-`suffix`
+<a id="suffix"></a> `suffix`
 
 </td>
 <td>
@@ -3149,7 +3149,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-arguments
 <tr>
 <td>
 
-`with`
+<a id="with"></a> `with`
 
 </td>
 <td>
@@ -3180,7 +3180,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-options
 <tr>
 <td>
 
-`filter`
+<a id="filter"></a> `filter`
 
 </td>
 <td>
@@ -3192,7 +3192,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-options
 <tr>
 <td>
 
-`namespace?`
+<a id="namespace-2"></a> `namespace?`
 
 </td>
 <td>
@@ -3223,7 +3223,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`contents?`
+<a id="contents"></a> `contents?`
 
 </td>
 <td>
@@ -3235,7 +3235,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`errors?`
+<a id="errors-3"></a> `errors?`
 
 </td>
 <td>
@@ -3247,7 +3247,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`loader?`
+<a id="loader-1"></a> `loader?`
 
 </td>
 <td>
@@ -3259,7 +3259,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`pluginData?`
+<a id="plugindata-1"></a> `pluginData?`
 
 </td>
 <td>
@@ -3271,7 +3271,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`pluginName?`
+<a id="pluginname-1"></a> `pluginName?`
 
 </td>
 <td>
@@ -3283,7 +3283,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`resolveDir?`
+<a id="resolvedir"></a> `resolveDir?`
 
 </td>
 <td>
@@ -3295,7 +3295,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`warnings?`
+<a id="warnings-3"></a> `warnings?`
 
 </td>
 <td>
@@ -3307,7 +3307,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`watchDirs?`
+<a id="watchdirs"></a> `watchDirs?`
 
 </td>
 <td>
@@ -3319,7 +3319,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 <tr>
 <td>
 
-`watchFiles?`
+<a id="watchfiles"></a> `watchFiles?`
 
 </td>
 <td>
@@ -3350,7 +3350,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 <tr>
 <td>
 
-`importer`
+<a id="importer"></a> `importer`
 
 </td>
 <td>
@@ -3362,7 +3362,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 <tr>
 <td>
 
-`kind`
+<a id="kind-1"></a> `kind`
 
 </td>
 <td>
@@ -3374,7 +3374,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 <tr>
 <td>
 
-`namespace`
+<a id="namespace-3"></a> `namespace`
 
 </td>
 <td>
@@ -3386,7 +3386,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 <tr>
 <td>
 
-`path`
+<a id="path-1"></a> `path`
 
 </td>
 <td>
@@ -3398,7 +3398,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 <tr>
 <td>
 
-`pluginData`
+<a id="plugindata-2"></a> `pluginData`
 
 </td>
 <td>
@@ -3410,7 +3410,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 <tr>
 <td>
 
-`resolveDir`
+<a id="resolvedir-1"></a> `resolveDir`
 
 </td>
 <td>
@@ -3422,7 +3422,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 <tr>
 <td>
 
-`with`
+<a id="with-1"></a> `with`
 
 </td>
 <td>
@@ -3453,7 +3453,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-options
 <tr>
 <td>
 
-`filter`
+<a id="filter-1"></a> `filter`
 
 </td>
 <td>
@@ -3465,7 +3465,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-options
 <tr>
 <td>
 
-`namespace?`
+<a id="namespace-4"></a> `namespace?`
 
 </td>
 <td>
@@ -3496,7 +3496,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`errors?`
+<a id="errors-4"></a> `errors?`
 
 </td>
 <td>
@@ -3508,7 +3508,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`external?`
+<a id="external-1"></a> `external?`
 
 </td>
 <td>
@@ -3520,7 +3520,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`namespace?`
+<a id="namespace-5"></a> `namespace?`
 
 </td>
 <td>
@@ -3532,7 +3532,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`path?`
+<a id="path-2"></a> `path?`
 
 </td>
 <td>
@@ -3544,7 +3544,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`pluginData?`
+<a id="plugindata-3"></a> `pluginData?`
 
 </td>
 <td>
@@ -3556,7 +3556,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`pluginName?`
+<a id="pluginname-2"></a> `pluginName?`
 
 </td>
 <td>
@@ -3568,7 +3568,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`sideEffects?`
+<a id="sideeffects"></a> `sideEffects?`
 
 </td>
 <td>
@@ -3580,7 +3580,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`suffix?`
+<a id="suffix-1"></a> `suffix?`
 
 </td>
 <td>
@@ -3592,7 +3592,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`warnings?`
+<a id="warnings-4"></a> `warnings?`
 
 </td>
 <td>
@@ -3604,7 +3604,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`watchDirs?`
+<a id="watchdirs-1"></a> `watchDirs?`
 
 </td>
 <td>
@@ -3616,7 +3616,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`watchFiles?`
+<a id="watchfiles-1"></a> `watchFiles?`
 
 </td>
 <td>
@@ -3645,7 +3645,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`errors?`
+<a id="errors-5"></a> `errors?`
 
 </td>
 <td>
@@ -3657,7 +3657,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`warnings?`
+<a id="warnings-5"></a> `warnings?`
 
 </td>
 <td>
@@ -3688,7 +3688,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`contents`
+<a id="contents-1"></a> `contents`
 
 </td>
 <td>
@@ -3698,7 +3698,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-`Uint8Array`\<`ArrayBufferLike`\>
+`Uint8Array`
 
 </td>
 <td>
@@ -3710,29 +3710,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`hash`
-
-</td>
-<td>
-
-`public`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-&hyphen;
-
-</td>
-</tr>
-<tr>
-<td>
-
-`path`
+<a id="hash"></a> `hash`
 
 </td>
 <td>
@@ -3754,7 +3732,29 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`text`
+<a id="path-3"></a> `path`
+
+</td>
+<td>
+
+`public`
+
+</td>
+<td>
+
+`string`
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="text-2"></a> `text`
 
 </td>
 <td>
@@ -3793,7 +3793,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`detail?`
+<a id="detail-1"></a> `detail?`
 
 </td>
 <td>
@@ -3805,7 +3805,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`id?`
+<a id="id-1"></a> `id?`
 
 </td>
 <td>
@@ -3817,7 +3817,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`location?`
+<a id="location-3"></a> `location?`
 
 </td>
 <td>
@@ -3829,7 +3829,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`notes?`
+<a id="notes-1"></a> `notes?`
 
 </td>
 <td>
@@ -3841,7 +3841,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`pluginName?`
+<a id="pluginname-3"></a> `pluginName?`
 
 </td>
 <td>
@@ -3853,7 +3853,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`text?`
+<a id="text-3"></a> `text?`
 
 </td>
 <td>
@@ -3882,7 +3882,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`location?`
+<a id="location-4"></a> `location?`
 
 </td>
 <td>
@@ -3894,7 +3894,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`text?`
+<a id="text-4"></a> `text?`
 
 </td>
 <td>
@@ -3923,7 +3923,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`name`
+<a id="name-1"></a> `name`
 
 </td>
 <td>
@@ -3935,7 +3935,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`setup`
+<a id="setup"></a> `setup`
 
 </td>
 <td>
@@ -3965,7 +3965,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`esbuild`
+<a id="esbuild"></a> `esbuild`
 
 </td>
 <td>
@@ -4169,7 +4169,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 <tr>
 <td>
 
-`initialOptions`
+<a id="initialoptions"></a> `initialOptions`
 
 </td>
 <td>
@@ -4453,7 +4453,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-`importer?`
+<a id="importer-1"></a> `importer?`
 
 </td>
 <td>
@@ -4465,7 +4465,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-`kind?`
+<a id="kind-2"></a> `kind?`
 
 </td>
 <td>
@@ -4477,7 +4477,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-`namespace?`
+<a id="namespace-6"></a> `namespace?`
 
 </td>
 <td>
@@ -4489,7 +4489,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-`pluginData?`
+<a id="plugindata-4"></a> `pluginData?`
 
 </td>
 <td>
@@ -4501,7 +4501,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-`pluginName?`
+<a id="pluginname-4"></a> `pluginName?`
 
 </td>
 <td>
@@ -4513,7 +4513,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-`resolveDir?`
+<a id="resolvedir-2"></a> `resolveDir?`
 
 </td>
 <td>
@@ -4525,7 +4525,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-`with?`
+<a id="with-2"></a> `with?`
 
 </td>
 <td>
@@ -4556,7 +4556,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`errors`
+<a id="errors-6"></a> `errors`
 
 </td>
 <td>
@@ -4568,7 +4568,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`external`
+<a id="external-2"></a> `external`
 
 </td>
 <td>
@@ -4580,7 +4580,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`namespace`
+<a id="namespace-7"></a> `namespace`
 
 </td>
 <td>
@@ -4592,7 +4592,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`path`
+<a id="path-4"></a> `path`
 
 </td>
 <td>
@@ -4604,7 +4604,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`pluginData`
+<a id="plugindata-5"></a> `pluginData`
 
 </td>
 <td>
@@ -4616,7 +4616,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`sideEffects`
+<a id="sideeffects-1"></a> `sideEffects`
 
 </td>
 <td>
@@ -4628,7 +4628,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`suffix`
+<a id="suffix-2"></a> `suffix`
 
 </td>
 <td>
@@ -4640,7 +4640,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`warnings`
+<a id="warnings-6"></a> `warnings`
 
 </td>
 <td>
@@ -4670,7 +4670,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`method`
+<a id="method"></a> `method`
 
 </td>
 <td>
@@ -4687,7 +4687,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`path`
+<a id="path-5"></a> `path`
 
 </td>
 <td>
@@ -4704,7 +4704,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`remoteAddress`
+<a id="remoteaddress"></a> `remoteAddress`
 
 </td>
 <td>
@@ -4721,7 +4721,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`status`
+<a id="status"></a> `status`
 
 </td>
 <td>
@@ -4738,7 +4738,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 <tr>
 <td>
 
-`timeInMS`
+<a id="timeinms"></a> `timeInMS`
 
 </td>
 <td>
@@ -4774,7 +4774,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
-`certfile?`
+<a id="certfile"></a> `certfile?`
 
 </td>
 <td>
@@ -4786,7 +4786,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
-`fallback?`
+<a id="fallback"></a> `fallback?`
 
 </td>
 <td>
@@ -4798,7 +4798,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
-`host?`
+<a id="host"></a> `host?`
 
 </td>
 <td>
@@ -4810,7 +4810,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
-`keyfile?`
+<a id="keyfile"></a> `keyfile?`
 
 </td>
 <td>
@@ -4822,7 +4822,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
-`onRequest?`
+<a id="onrequest"></a> `onRequest?`
 
 </td>
 <td>
@@ -4834,7 +4834,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
-`port?`
+<a id="port"></a> `port?`
 
 </td>
 <td>
@@ -4846,7 +4846,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
-`servedir?`
+<a id="servedir"></a> `servedir?`
 
 </td>
 <td>
@@ -4877,7 +4877,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`host`
+<a id="host-1"></a> `host`
 
 </td>
 <td>
@@ -4889,7 +4889,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`port`
+<a id="port-1"></a> `port`
 
 </td>
 <td>
@@ -4918,7 +4918,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`contents`
+<a id="contents-2"></a> `contents`
 
 </td>
 <td>
@@ -4930,7 +4930,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`loader?`
+<a id="loader-2"></a> `loader?`
 
 </td>
 <td>
@@ -4942,7 +4942,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`resolveDir?`
+<a id="resolvedir-3"></a> `resolveDir?`
 
 </td>
 <td>
@@ -4954,7 +4954,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`sourcefile?`
+<a id="sourcefile"></a> `sourcefile?`
 
 </td>
 <td>
@@ -4988,7 +4988,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`errors`
+<a id="errors-7"></a> `errors`
 
 </td>
 <td>
@@ -5005,7 +5005,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`message`
+<a id="message-2"></a> `message`
 
 </td>
 <td>
@@ -5022,7 +5022,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`name`
+<a id="name-2"></a> `name`
 
 </td>
 <td>
@@ -5039,7 +5039,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`warnings`
+<a id="warnings-7"></a> `warnings`
 
 </td>
 <td>
@@ -5056,7 +5056,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`cause?`
+<a id="cause-1"></a> `cause?`
 
 </td>
 <td>
@@ -5073,7 +5073,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`stack?`
+<a id="stack-1"></a> `stack?`
 
 </td>
 <td>
@@ -5113,7 +5113,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-`banner?`
+<a id="banner-1"></a> `banner?`
 
 </td>
 <td>
@@ -5135,7 +5135,7 @@ Documentation: https://esbuild.github.io/api/#banner
 <tr>
 <td>
 
-`charset?`
+<a id="charset-2"></a> `charset?`
 
 </td>
 <td>
@@ -5157,7 +5157,7 @@ Documentation: https://esbuild.github.io/api/#charset
 <tr>
 <td>
 
-`color?`
+<a id="color-4"></a> `color?`
 
 </td>
 <td>
@@ -5179,7 +5179,7 @@ Documentation: https://esbuild.github.io/api/#color
 <tr>
 <td>
 
-`define?`
+<a id="define-2"></a> `define?`
 
 </td>
 <td>
@@ -5201,7 +5201,7 @@ Documentation: https://esbuild.github.io/api/#define
 <tr>
 <td>
 
-`drop?`
+<a id="drop-2"></a> `drop?`
 
 </td>
 <td>
@@ -5223,7 +5223,7 @@ Documentation: https://esbuild.github.io/api/#drop
 <tr>
 <td>
 
-`dropLabels?`
+<a id="droplabels-2"></a> `dropLabels?`
 
 </td>
 <td>
@@ -5245,7 +5245,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 <tr>
 <td>
 
-`footer?`
+<a id="footer-1"></a> `footer?`
 
 </td>
 <td>
@@ -5267,7 +5267,7 @@ Documentation: https://esbuild.github.io/api/#footer
 <tr>
 <td>
 
-`format?`
+<a id="format-2"></a> `format?`
 
 </td>
 <td>
@@ -5289,7 +5289,7 @@ Documentation: https://esbuild.github.io/api/#format
 <tr>
 <td>
 
-`globalName?`
+<a id="globalname-2"></a> `globalName?`
 
 </td>
 <td>
@@ -5311,7 +5311,7 @@ Documentation: https://esbuild.github.io/api/#global-name
 <tr>
 <td>
 
-`ignoreAnnotations?`
+<a id="ignoreannotations-2"></a> `ignoreAnnotations?`
 
 </td>
 <td>
@@ -5333,7 +5333,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 <tr>
 <td>
 
-`jsx?`
+<a id="jsx-2"></a> `jsx?`
 
 </td>
 <td>
@@ -5355,7 +5355,7 @@ Documentation: https://esbuild.github.io/api/#jsx
 <tr>
 <td>
 
-`jsxDev?`
+<a id="jsxdev-2"></a> `jsxDev?`
 
 </td>
 <td>
@@ -5377,7 +5377,7 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 <tr>
 <td>
 
-`jsxFactory?`
+<a id="jsxfactory-2"></a> `jsxFactory?`
 
 </td>
 <td>
@@ -5399,7 +5399,7 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 <tr>
 <td>
 
-`jsxFragment?`
+<a id="jsxfragment-2"></a> `jsxFragment?`
 
 </td>
 <td>
@@ -5421,7 +5421,7 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 <tr>
 <td>
 
-`jsxImportSource?`
+<a id="jsximportsource-2"></a> `jsxImportSource?`
 
 </td>
 <td>
@@ -5443,7 +5443,7 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 <tr>
 <td>
 
-`jsxSideEffects?`
+<a id="jsxsideeffects-2"></a> `jsxSideEffects?`
 
 </td>
 <td>
@@ -5465,7 +5465,7 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 <tr>
 <td>
 
-`keepNames?`
+<a id="keepnames-2"></a> `keepNames?`
 
 </td>
 <td>
@@ -5487,7 +5487,7 @@ Documentation: https://esbuild.github.io/api/#keep-names
 <tr>
 <td>
 
-`legalComments?`
+<a id="legalcomments-2"></a> `legalComments?`
 
 </td>
 <td>
@@ -5509,7 +5509,7 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 <tr>
 <td>
 
-`lineLimit?`
+<a id="linelimit-2"></a> `lineLimit?`
 
 </td>
 <td>
@@ -5531,7 +5531,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 <tr>
 <td>
 
-`loader?`
+<a id="loader-3"></a> `loader?`
 
 </td>
 <td>
@@ -5553,7 +5553,7 @@ Documentation: https://esbuild.github.io/api/#loader
 <tr>
 <td>
 
-`logLevel?`
+<a id="loglevel-2"></a> `logLevel?`
 
 </td>
 <td>
@@ -5575,7 +5575,7 @@ Documentation: https://esbuild.github.io/api/#log-level
 <tr>
 <td>
 
-`logLimit?`
+<a id="loglimit-2"></a> `logLimit?`
 
 </td>
 <td>
@@ -5597,7 +5597,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 <tr>
 <td>
 
-`logOverride?`
+<a id="logoverride-2"></a> `logOverride?`
 
 </td>
 <td>
@@ -5619,7 +5619,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 <tr>
 <td>
 
-`mangleCache?`
+<a id="manglecache-3"></a> `mangleCache?`
 
 </td>
 <td>
@@ -5641,7 +5641,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`mangleProps?`
+<a id="mangleprops-2"></a> `mangleProps?`
 
 </td>
 <td>
@@ -5663,7 +5663,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`mangleQuoted?`
+<a id="manglequoted-2"></a> `mangleQuoted?`
 
 </td>
 <td>
@@ -5685,7 +5685,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`minify?`
+<a id="minify-2"></a> `minify?`
 
 </td>
 <td>
@@ -5707,7 +5707,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifyIdentifiers?`
+<a id="minifyidentifiers-2"></a> `minifyIdentifiers?`
 
 </td>
 <td>
@@ -5729,7 +5729,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifySyntax?`
+<a id="minifysyntax-2"></a> `minifySyntax?`
 
 </td>
 <td>
@@ -5751,7 +5751,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`minifyWhitespace?`
+<a id="minifywhitespace-2"></a> `minifyWhitespace?`
 
 </td>
 <td>
@@ -5773,7 +5773,7 @@ Documentation: https://esbuild.github.io/api/#minify
 <tr>
 <td>
 
-`platform?`
+<a id="platform-2"></a> `platform?`
 
 </td>
 <td>
@@ -5795,7 +5795,7 @@ Documentation: https://esbuild.github.io/api/#platform
 <tr>
 <td>
 
-`pure?`
+<a id="pure-2"></a> `pure?`
 
 </td>
 <td>
@@ -5817,7 +5817,7 @@ Documentation: https://esbuild.github.io/api/#pure
 <tr>
 <td>
 
-`reserveProps?`
+<a id="reserveprops-2"></a> `reserveProps?`
 
 </td>
 <td>
@@ -5839,7 +5839,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 <tr>
 <td>
 
-`sourcefile?`
+<a id="sourcefile-1"></a> `sourcefile?`
 
 </td>
 <td>
@@ -5861,7 +5861,7 @@ Documentation: https://esbuild.github.io/api/#sourcefile
 <tr>
 <td>
 
-`sourcemap?`
+<a id="sourcemap-2"></a> `sourcemap?`
 
 </td>
 <td>
@@ -5883,7 +5883,7 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 <tr>
 <td>
 
-`sourceRoot?`
+<a id="sourceroot-2"></a> `sourceRoot?`
 
 </td>
 <td>
@@ -5905,7 +5905,7 @@ Documentation: https://esbuild.github.io/api/#source-root
 <tr>
 <td>
 
-`sourcesContent?`
+<a id="sourcescontent-2"></a> `sourcesContent?`
 
 </td>
 <td>
@@ -5927,7 +5927,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 <tr>
 <td>
 
-`supported?`
+<a id="supported-2"></a> `supported?`
 
 </td>
 <td>
@@ -5949,7 +5949,7 @@ Documentation: https://esbuild.github.io/api/#supported
 <tr>
 <td>
 
-`target?`
+<a id="target-2"></a> `target?`
 
 </td>
 <td>
@@ -5971,7 +5971,7 @@ Documentation: https://esbuild.github.io/api/#target
 <tr>
 <td>
 
-`treeShaking?`
+<a id="treeshaking-2"></a> `treeShaking?`
 
 </td>
 <td>
@@ -5993,7 +5993,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 <tr>
 <td>
 
-`tsconfigRaw?`
+<a id="tsconfigraw-2"></a> `tsconfigRaw?`
 
 </td>
 <td>
@@ -6058,7 +6058,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`code`
+<a id="code"></a> `code`
 
 </td>
 <td>
@@ -6075,7 +6075,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`legalComments`
+<a id="legalcomments-3"></a> `legalComments`
 
 </td>
 <td>
@@ -6092,7 +6092,7 @@ Only when "legalComments" is "external"
 <tr>
 <td>
 
-`mangleCache`
+<a id="manglecache-4"></a> `mangleCache`
 
 </td>
 <td>
@@ -6109,7 +6109,7 @@ Only when "mangleCache" is present
 <tr>
 <td>
 
-`map`
+<a id="map"></a> `map`
 
 </td>
 <td>
@@ -6126,7 +6126,7 @@ Only when "mangleCache" is present
 <tr>
 <td>
 
-`warnings`
+<a id="warnings-8"></a> `warnings`
 
 </td>
 <td>
@@ -6160,7 +6160,7 @@ Only when "mangleCache" is present
 <tr>
 <td>
 
-`compilerOptions?`
+<a id="compileroptions"></a> `compilerOptions?`
 
 </td>
 <td>

@@ -17,7 +17,7 @@
 <tr>
 <td>
 
-`rootDir`
+<a id="rootdir"></a> `rootDir`
 
 </td>
 <td>
@@ -29,7 +29,7 @@
 <tr>
 <td>
 
-`appName?`
+<a id="appname"></a> `appName?`
 
 </td>
 <td>
@@ -41,7 +41,7 @@
 <tr>
 <td>
 
-`packageManager?`
+<a id="packagemanager"></a> `packageManager?`
 
 </td>
 <td>
@@ -53,7 +53,7 @@
 <tr>
 <td>
 
-`skipInstall?`
+<a id="skipinstall"></a> `skipInstall?`
 
 </td>
 <td>
@@ -65,7 +65,7 @@
 <tr>
 <td>
 
-`template?`
+<a id="template"></a> `template?`
 
 </td>
 <td>
@@ -94,7 +94,7 @@
 <tr>
 <td>
 
-`packageManager?`
+<a id="packagemanager-1"></a> `packageManager?`
 
 </td>
 <td>
@@ -106,7 +106,7 @@
 <tr>
 <td>
 
-`skipInstall?`
+<a id="skipinstall-1"></a> `skipInstall?`
 
 </td>
 <td>
@@ -149,7 +149,7 @@
 <tr>
 <td>
 
-`name`
+<a id="name"></a> `name`
 
 </td>
 <td>
@@ -161,7 +161,7 @@
 <tr>
 <td>
 
-`path`
+<a id="path"></a> `path`
 
 </td>
 <td>
@@ -173,7 +173,7 @@
 <tr>
 <td>
 
-`packageJsn`?
+<a id="packagejsn"></a> `packageJsn`?
 
 </td>
 <td>
@@ -223,7 +223,7 @@
 <tr>
 <td>
 
-`bun`
+<a id="bun"></a> `bun`
 
 </td>
 <td>
@@ -240,7 +240,7 @@
 <tr>
 <td>
 
-`npm`
+<a id="npm"></a> `npm`
 
 </td>
 <td>
@@ -257,7 +257,7 @@
 <tr>
 <td>
 
-`pnpm`
+<a id="pnpm"></a> `pnpm`
 
 </td>
 <td>
@@ -274,7 +274,7 @@
 <tr>
 <td>
 
-`yarn`
+<a id="yarn"></a> `yarn`
 
 </td>
 <td>
@@ -301,7 +301,7 @@
 
 ### runtimes
 
-> `const` **runtimes**: readonly [`"node"`, `"deno"`, `"bun"`]
+> `const` **runtimes**: readonly \[`"node"`, `"deno"`, `"bun"`\]
 
 ## Functions
 
@@ -403,7 +403,7 @@
 | `compilerOptions.rootDir`                          | `string`   | 'src'                                   |
 | `compilerOptions.skipLibCheck`                     | `boolean`  | true                                    |
 | `compilerOptions.strict`                           | `boolean`  | true                                    |
-| `compilerOptions.target`                           | `string`   | "es2023"                                |
+| `compilerOptions.target`                           | `string`   | "es2024"                                |
 | `compilerOptions.verbatimModuleSyntax`             | `boolean`  | true                                    |
 | `exclude`                                          | `string`[] | -                                       |
 
@@ -552,7 +552,7 @@
 
 ### getPackageManager()
 
-> **getPackageManager**(`dest`, `__namedParameters`): `Promise`\<[`PackageManager`](index.md#packagemanager-2)\>
+> **getPackageManager**(`dest`, `__namedParameters`): `Promise`\<`"npm"` \| `"yarn"` \| `"pnpm"` \| `"bun"`\>
 
 #### Parameters
 
@@ -593,17 +593,17 @@
 
 #### Returns
 
-`Promise`\<[`PackageManager`](index.md#packagemanager-2)\>
+`Promise`\<`"npm"` \| `"yarn"` \| `"pnpm"` \| `"bun"`\>
 
 ---
 
 ### getRuntime()
 
-> **getRuntime**(): `Promise`\<[`JavaScriptRuntime`](index.md#javascriptruntime)\>
+> **getRuntime**(): `Promise`\<`"bun"` \| `"node"` \| `"deno"`\>
 
 #### Returns
 
-`Promise`\<[`JavaScriptRuntime`](index.md#javascriptruntime)\>
+`Promise`\<`"bun"` \| `"node"` \| `"deno"`\>
 
 ---
 

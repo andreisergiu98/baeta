@@ -20,7 +20,7 @@
 <tr>
 <td>
 
-`exit`
+<a id="exit"></a> `exit`
 
 </td>
 <td>
@@ -190,7 +190,7 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`cleanup`
+<a id="cleanup"></a> `cleanup`
 
 </td>
 <td>
@@ -207,7 +207,7 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`clear`
+<a id="clear"></a> `clear`
 
 </td>
 <td>
@@ -224,7 +224,7 @@ Clear output.
 <tr>
 <td>
 
-`rerender`
+<a id="rerender"></a> `rerender`
 
 </td>
 <td>
@@ -241,7 +241,7 @@ Replace previous root node with a new one or update props of the current root no
 <tr>
 <td>
 
-`unmount`
+<a id="unmount"></a> `unmount`
 
 </td>
 <td>
@@ -258,7 +258,7 @@ Manually unmount the whole Ink app.
 <tr>
 <td>
 
-`waitUntilExit`
+<a id="waituntilexit"></a> `waitUntilExit`
 
 </td>
 <td>
@@ -297,7 +297,7 @@ Handy information about a key that was pressed.
 <tr>
 <td>
 
-`backspace`
+<a id="backspace"></a> `backspace`
 
 </td>
 <td>
@@ -314,7 +314,7 @@ Backspace key was pressed.
 <tr>
 <td>
 
-`ctrl`
+<a id="ctrl"></a> `ctrl`
 
 </td>
 <td>
@@ -331,7 +331,7 @@ Ctrl key was pressed.
 <tr>
 <td>
 
-`delete`
+<a id="delete"></a> `delete`
 
 </td>
 <td>
@@ -348,7 +348,7 @@ Delete key was pressed.
 <tr>
 <td>
 
-`downArrow`
+<a id="downarrow"></a> `downArrow`
 
 </td>
 <td>
@@ -365,7 +365,7 @@ Down arrow key was pressed.
 <tr>
 <td>
 
-`escape`
+<a id="escape"></a> `escape`
 
 </td>
 <td>
@@ -382,7 +382,7 @@ Escape key was pressed.
 <tr>
 <td>
 
-`leftArrow`
+<a id="leftarrow"></a> `leftArrow`
 
 </td>
 <td>
@@ -399,7 +399,7 @@ Left arrow key was pressed.
 <tr>
 <td>
 
-`meta`
+<a id="meta"></a> `meta`
 
 </td>
 <td>
@@ -416,7 +416,7 @@ Left arrow key was pressed.
 <tr>
 <td>
 
-`pageDown`
+<a id="pagedown"></a> `pageDown`
 
 </td>
 <td>
@@ -433,7 +433,7 @@ Page Down key was pressed.
 <tr>
 <td>
 
-`pageUp`
+<a id="pageup"></a> `pageUp`
 
 </td>
 <td>
@@ -450,7 +450,7 @@ Page Up key was pressed.
 <tr>
 <td>
 
-`return`
+<a id="return"></a> `return`
 
 </td>
 <td>
@@ -467,7 +467,7 @@ Return (Enter) key was pressed.
 <tr>
 <td>
 
-`rightArrow`
+<a id="rightarrow"></a> `rightArrow`
 
 </td>
 <td>
@@ -484,7 +484,7 @@ Right arrow key was pressed.
 <tr>
 <td>
 
-`shift`
+<a id="shift"></a> `shift`
 
 </td>
 <td>
@@ -501,7 +501,7 @@ Shift key was pressed.
 <tr>
 <td>
 
-`tab`
+<a id="tab"></a> `tab`
 
 </td>
 <td>
@@ -518,7 +518,7 @@ Tab key was pressed.
 <tr>
 <td>
 
-`upArrow`
+<a id="uparrow"></a> `upArrow`
 
 </td>
 <td>
@@ -555,7 +555,7 @@ Up arrow key was pressed.
 <tr>
 <td>
 
-`count`?
+<a id="count"></a> `count`?
 
 </td>
 <td>
@@ -598,7 +598,7 @@ Number of newlines to insert.
 <tr>
 <td>
 
-`debug`?
+<a id="debug"></a> `debug`?
 
 </td>
 <td>
@@ -621,7 +621,7 @@ false;
 <tr>
 <td>
 
-`exitOnCtrlC`?
+<a id="exitonctrlc"></a> `exitOnCtrlC`?
 
 </td>
 <td>
@@ -644,7 +644,7 @@ true;
 <tr>
 <td>
 
-`patchConsole`?
+<a id="patchconsole"></a> `patchConsole`?
 
 </td>
 <td>
@@ -667,7 +667,7 @@ true;
 <tr>
 <td>
 
-`stderr`?
+<a id="stderr"></a> `stderr`?
 
 </td>
 <td>
@@ -690,7 +690,7 @@ process.stderr;
 <tr>
 <td>
 
-`stdin`?
+<a id="stdin"></a> `stdin`?
 
 </td>
 <td>
@@ -713,7 +713,7 @@ process.stdin;
 <tr>
 <td>
 
-`stdout`?
+<a id="stdout"></a> `stdout`?
 
 </td>
 <td>
@@ -775,7 +775,7 @@ process.stdout;
 <tr>
 <td>
 
-`children`
+<a id="children"></a> `children`
 
 </td>
 <td>
@@ -794,7 +794,7 @@ Note that `key` must be assigned to the root component.
 <tr>
 <td>
 
-`items`
+<a id="items"></a> `items`
 
 </td>
 <td>
@@ -811,7 +811,7 @@ Array of items of any type to render using a function you pass as a component ch
 <tr>
 <td>
 
-`style`?
+<a id="style"></a> `style`?
 
 </td>
 <td>
@@ -848,7 +848,7 @@ Styles to apply to a container of child elements. See <Box> for supported proper
 <tr>
 <td>
 
-`stderr`
+<a id="stderr-1"></a> `stderr`
 
 </td>
 <td>
@@ -865,7 +865,7 @@ Stderr stream passed to `render()` in `options.stderr` or `process.stderr` by de
 <tr>
 <td>
 
-`write`
+<a id="write"></a> `write`
 
 </td>
 <td>
@@ -904,7 +904,7 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 <tr>
 <td>
 
-`internal_eventEmitter`
+<a id="internal_eventemitter"></a> `internal_eventEmitter`
 
 </td>
 <td>
@@ -921,7 +921,7 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 <tr>
 <td>
 
-`internal_exitOnCtrlC`
+<a id="internal_exitonctrlc"></a> `internal_exitOnCtrlC`
 
 </td>
 <td>
@@ -938,7 +938,7 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 <tr>
 <td>
 
-`isRawModeSupported`
+<a id="israwmodesupported"></a> `isRawModeSupported`
 
 </td>
 <td>
@@ -955,7 +955,7 @@ A boolean flag determining if the current `stdin` supports `setRawMode`. A compo
 <tr>
 <td>
 
-`setRawMode`
+<a id="setrawmode"></a> `setRawMode`
 
 </td>
 <td>
@@ -973,7 +973,7 @@ If the `stdin` stream passed to Ink does not support setRawMode, this function d
 <tr>
 <td>
 
-`stdin`
+<a id="stdin-1"></a> `stdin`
 
 </td>
 <td>
@@ -1010,7 +1010,7 @@ Stdin stream passed to `render()` in `options.stdin` or `process.stdin` by defau
 <tr>
 <td>
 
-`stdout`
+<a id="stdout-1"></a> `stdout`
 
 </td>
 <td>
@@ -1027,7 +1027,7 @@ Stdout stream passed to `render()` in `options.stdout` or `process.stdout` by de
 <tr>
 <td>
 
-`write`
+<a id="write-1"></a> `write`
 
 </td>
 <td>
@@ -1066,7 +1066,7 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 <tr>
 <td>
 
-`backgroundColor`?
+<a id="backgroundcolor"></a> `backgroundColor`?
 
 </td>
 <td>
@@ -1083,7 +1083,7 @@ Same as `color`, but for background.
 <tr>
 <td>
 
-`bold`?
+<a id="bold"></a> `bold`?
 
 </td>
 <td>
@@ -1100,7 +1100,7 @@ Make the text bold.
 <tr>
 <td>
 
-`children`?
+<a id="children-1"></a> `children`?
 
 </td>
 <td>
@@ -1117,7 +1117,7 @@ Make the text bold.
 <tr>
 <td>
 
-`color`?
+<a id="color"></a> `color`?
 
 </td>
 <td>
@@ -1134,7 +1134,7 @@ Change text color. Ink uses chalk under the hood, so all its functionality is su
 <tr>
 <td>
 
-`dimColor`?
+<a id="dimcolor"></a> `dimColor`?
 
 </td>
 <td>
@@ -1151,7 +1151,7 @@ Dim the color (emit a small amount of light).
 <tr>
 <td>
 
-`inverse`?
+<a id="inverse"></a> `inverse`?
 
 </td>
 <td>
@@ -1168,7 +1168,7 @@ Inverse background and foreground colors.
 <tr>
 <td>
 
-`italic`?
+<a id="italic"></a> `italic`?
 
 </td>
 <td>
@@ -1185,7 +1185,7 @@ Make the text italic.
 <tr>
 <td>
 
-`strikethrough`?
+<a id="strikethrough"></a> `strikethrough`?
 
 </td>
 <td>
@@ -1202,7 +1202,7 @@ Make the text crossed with a line.
 <tr>
 <td>
 
-`underline`?
+<a id="underline"></a> `underline`?
 
 </td>
 <td>
@@ -1219,7 +1219,7 @@ Make the text underlined.
 <tr>
 <td>
 
-`wrap`?
+<a id="wrap"></a> `wrap`?
 
 </td>
 <td>
@@ -1258,7 +1258,7 @@ If `truncate-*` is passed, Ink will truncate text instead, which will result in 
 <tr>
 <td>
 
-`transform`
+<a id="transform"></a> `transform`
 
 </td>
 <td>
@@ -1275,7 +1275,7 @@ Function which transforms children output. It accepts children and must return t
 <tr>
 <td>
 
-`children`?
+<a id="children-2"></a> `children`?
 
 </td>
 <td>
@@ -1370,7 +1370,7 @@ Measure the dimensions of a particular `<Box>` element.
 
 ### Newline()
 
-> **Newline**(`__namedParameters`): `React.JSX.Element`
+> **Newline**(`__namedParameters`): `Element`
 
 Adds one or more newline (\n) characters. Must be used within <Text> components.
 
@@ -1401,7 +1401,7 @@ Adds one or more newline (\n) characters. Must be used within <Text> components.
 
 #### Returns
 
-`React.JSX.Element`
+`Element`
 
 ---
 
@@ -1456,20 +1456,20 @@ Mount a component and render the output.
 
 ### Spacer()
 
-> **Spacer**(): `React.JSX.Element`
+> **Spacer**(): `Element`
 
 A flexible space that expands along the major axis of its containing layout.
 It's useful as a shortcut for filling all the available spaces between elements.
 
 #### Returns
 
-`React.JSX.Element`
+`Element`
 
 ---
 
 ### Static()
 
-> **Static**\<`T`\>(`props`): `React.JSX.Element`
+> **Static**\<`T`\>(`props`): `Element`
 
 `<Static>` component permanently renders its output above everything else.
 It's useful for displaying activity like completed tasks or logs - things that
@@ -1528,13 +1528,13 @@ to display a list of generated pages, while still displaying a live progress bar
 
 #### Returns
 
-`React.JSX.Element`
+`Element`
 
 ---
 
 ### Text()
 
-> **Text**(`__namedParameters`): `React.JSX.Element` \| `null`
+> **Text**(`__namedParameters`): `null` \| `Element`
 
 This component can display text, and change its style to make it colorful, bold, underline, italic or strikethrough.
 
@@ -1565,13 +1565,13 @@ This component can display text, and change its style to make it colorful, bold,
 
 #### Returns
 
-`React.JSX.Element` \| `null`
+`null` \| `Element`
 
 ---
 
 ### Transform()
 
-> **Transform**(`__namedParameters`): `React.JSX.Element` \| `null`
+> **Transform**(`__namedParameters`): `null` \| `Element`
 
 Transform a string representation of React components before they are written to output.
 For example, you might want to apply a gradient to text, add a clickable link or create some text effects.
@@ -1605,7 +1605,7 @@ That's what <Transform> component does, it gives you an output string of its chi
 
 #### Returns
 
-`React.JSX.Element` \| `null`
+`null` \| `Element`
 
 ---
 

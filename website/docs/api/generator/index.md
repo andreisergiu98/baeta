@@ -291,7 +291,7 @@
 <tr>
 <td>
 
-`onEnd?`
+<a id="onend"></a> `onEnd?`
 
 </td>
 <td>
@@ -303,7 +303,7 @@
 <tr>
 <td>
 
-`onError?`
+<a id="onerror"></a> `onError?`
 
 </td>
 <td>
@@ -315,31 +315,31 @@
 <tr>
 <td>
 
-`onPluginStepEnd?`
+<a id="onpluginstepend"></a> `onPluginStepEnd?`
 
 </td>
 <td>
 
-(`plugin`: [`GeneratorPluginV1`](index.md#generatorpluginv1store)\<`unknown`\>, `step`: `"end"` \| `"setup"` \| `"generate"`) => `void` \| `Promise`\<`void`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`onPluginStepStart?`
-
-</td>
-<td>
-
-(`plugin`: [`GeneratorPluginV1`](index.md#generatorpluginv1store)\<`unknown`\>, `step`: `"end"` \| `"setup"` \| `"generate"`) => `void` \| `Promise`\<`void`\>
+(`plugin`: [`GeneratorPluginV1`](index.md#generatorpluginv1store), `step`: `"end"` \| `"setup"` \| `"generate"`) => `void` \| `Promise`\<`void`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-`onStart?`
+<a id="onpluginstepstart"></a> `onPluginStepStart?`
+
+</td>
+<td>
+
+(`plugin`: [`GeneratorPluginV1`](index.md#generatorpluginv1store), `step`: `"end"` \| `"setup"` \| `"generate"`) => `void` \| `Promise`\<`void`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="onstart"></a> `onStart?`
 
 </td>
 <td>
@@ -372,7 +372,7 @@ Options for the Baeta Generator.
 <tr>
 <td>
 
-`schemas`
+<a id="schemas"></a> `schemas`
 
 </td>
 <td>
@@ -396,7 +396,7 @@ Glob pattern(s) to locate GraphQL schema files.
 <tr>
 <td>
 
-`baseTypesPath?`
+<a id="basetypespath"></a> `baseTypesPath?`
 
 </td>
 <td>
@@ -420,7 +420,7 @@ Output path for the generated base types file.
 <tr>
 <td>
 
-`contextType?`
+<a id="contexttype"></a> `contextType?`
 
 </td>
 <td>
@@ -455,7 +455,7 @@ contextType: "src/types/context.ts"; // for default export
 <tr>
 <td>
 
-`cwd?`
+<a id="cwd"></a> `cwd?`
 
 </td>
 <td>
@@ -479,7 +479,7 @@ Current working directory for resolving relative paths.
 <tr>
 <td>
 
-`extensions?`
+<a id="extensions"></a> `extensions?`
 
 </td>
 <td>
@@ -510,7 +510,7 @@ extensions: "src/extensions.ts";
 <tr>
 <td>
 
-`fileOptions?`
+<a id="fileoptions"></a> `fileOptions?`
 
 </td>
 <td>
@@ -532,7 +532,7 @@ Configuration options for generated files.
 <tr>
 <td>
 
-`importExtension?`
+<a id="importextension"></a> `importExtension?`
 
 </td>
 <td>
@@ -557,7 +557,7 @@ Set to false to omit extensions.
 <tr>
 <td>
 
-`loaders?`
+<a id="loaders"></a> `loaders?`
 
 </td>
 <td>
@@ -579,7 +579,7 @@ Custom schema loaders for processing schema files.
 <tr>
 <td>
 
-`moduleDefinitionName?`
+<a id="moduledefinitionname"></a> `moduleDefinitionName?`
 
 </td>
 <td>
@@ -604,7 +604,7 @@ Contains type definitions and the GraphQL AST.
 <tr>
 <td>
 
-`modulesDir?`
+<a id="modulesdir"></a> `modulesDir?`
 
 </td>
 <td>
@@ -628,7 +628,7 @@ Root directory where GraphQL modules are defined.
 <tr>
 <td>
 
-`scalars?`
+<a id="scalars"></a> `scalars?`
 
 </td>
 <td>
@@ -702,7 +702,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`actionName`
+<a id="actionname"></a> `actionName`
 
 </td>
 <td>
@@ -714,7 +714,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`end`
+<a id="end"></a> `end`
 
 </td>
 <td>
@@ -726,7 +726,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`generate`
+<a id="generate"></a> `generate`
 
 </td>
 <td>
@@ -738,7 +738,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`name`
+<a id="name"></a> `name`
 
 </td>
 <td>
@@ -750,7 +750,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`setup`
+<a id="setup"></a> `setup`
 
 </td>
 <td>
@@ -762,7 +762,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`type`
+<a id="type"></a> `type`
 
 </td>
 <td>
@@ -774,7 +774,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`version`
+<a id="version"></a> `version`
 
 </td>
 <td>
@@ -786,7 +786,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`watch`
+<a id="watch"></a> `watch`
 
 </td>
 <td>
@@ -815,7 +815,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`path`
+<a id="path"></a> `path`
 
 </td>
 <td>
@@ -827,7 +827,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`relativePath`
+<a id="relativepath"></a> `relativePath`
 
 </td>
 <td>
@@ -839,7 +839,7 @@ Supports global types and imports.
 <tr>
 <td>
 
-`type`
+<a id="type-1"></a> `type`
 
 </td>
 <td>

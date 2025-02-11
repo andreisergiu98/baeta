@@ -17,7 +17,7 @@
 <tr>
 <td>
 
-`content`
+<a id="content"></a> `content`
 
 </td>
 <td>
@@ -29,7 +29,7 @@
 <tr>
 <td>
 
-`tag`
+<a id="tag"></a> `tag`
 
 </td>
 <td>

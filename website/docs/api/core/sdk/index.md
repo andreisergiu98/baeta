@@ -1,8 +1,6 @@
 # sdk
 
-## Index
-
-### Namespaces
+## Namespaces
 
 - [BaetaExtensions](namespaces/BaetaExtensions.md)
 
@@ -23,7 +21,7 @@
 <tr>
 <td>
 
-`V1`
+<a id="v1"></a> `V1`
 
 </td>
 <td>
@@ -63,7 +61,7 @@
 <tr>
 <td>
 
-`version`
+<a id="version"></a> `version`
 
 </td>
 <td>
@@ -397,7 +395,7 @@
 
 ##### getSubscriptionSubscribeExtensions()
 
-> **getSubscriptionSubscribeExtensions**\<`Iterator`, `Root`, `Context`, `Args`\>(`module`, `field`): `object`
+> **getSubscriptionSubscribeExtensions**\<`Root`, `Context`, `Args`\>(`module`, `field`): `object`
 
 ###### Type Parameters
 
@@ -408,13 +406,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>
-
-`Iterator`
-
-</td>
-</tr>
 <tr>
 <td>
 
@@ -661,7 +652,7 @@
 <tr>
 <td>
 
-`dirname`
+<a id="dirname"></a> `dirname`
 
 </td>
 <td>
@@ -683,7 +674,7 @@
 <tr>
 <td>
 
-`hashes`
+<a id="hashes"></a> `hashes`
 
 </td>
 <td>
@@ -705,7 +696,7 @@
 <tr>
 <td>
 
-`id`
+<a id="id"></a> `id`
 
 </td>
 <td>
@@ -727,7 +718,7 @@
 <tr>
 <td>
 
-`mapper`
+<a id="mapper"></a> `mapper`
 
 </td>
 <td>
@@ -749,7 +740,7 @@
 <tr>
 <td>
 
-`transformers`
+<a id="transformers"></a> `transformers`
 
 </td>
 <td>
@@ -771,7 +762,7 @@
 <tr>
 <td>
 
-`typedef`
+<a id="typedef"></a> `typedef`
 
 </td>
 <td>
@@ -1387,7 +1378,7 @@
 <tr>
 <td>
 
-`middlewares`
+<a id="middlewares"></a> `middlewares`
 
 </td>
 <td>
@@ -1409,7 +1400,7 @@
 <tr>
 <td>
 
-`prependedMiddlewares`
+<a id="prependedmiddlewares"></a> `prependedMiddlewares`
 
 </td>
 <td>
@@ -1431,7 +1422,7 @@
 <tr>
 <td>
 
-`resolvers`
+<a id="resolvers"></a> `resolvers`
 
 </td>
 <td>
@@ -1453,7 +1444,7 @@
 <tr>
 <td>
 
-`scalars`
+<a id="scalars"></a> `scalars`
 
 </td>
 <td>
@@ -1475,7 +1466,7 @@
 <tr>
 <td>
 
-`typeFields`
+<a id="typefields"></a> `typeFields`
 
 </td>
 <td>
@@ -1497,7 +1488,7 @@
 <tr>
 <td>
 
-`types`
+<a id="types"></a> `types`
 
 </td>
 <td>
@@ -2311,7 +2302,7 @@
 <tr>
 <td>
 
-`createManager`
+<a id="createmanager"></a> `createManager`
 
 </td>
 <td>
@@ -2323,7 +2314,7 @@
 <tr>
 <td>
 
-`dirname`
+<a id="dirname-1"></a> `dirname`
 
 </td>
 <td>
@@ -2335,7 +2326,7 @@
 <tr>
 <td>
 
-`hashes`
+<a id="hashes-1"></a> `hashes`
 
 </td>
 <td>
@@ -2347,7 +2338,7 @@
 <tr>
 <td>
 
-`id`
+<a id="id-1"></a> `id`
 
 </td>
 <td>
@@ -2359,7 +2350,7 @@
 <tr>
 <td>
 
-`typedef`
+<a id="typedef-1"></a> `typedef`
 
 </td>
 <td>
@@ -2692,7 +2683,7 @@
 <tr>
 <td>
 
-`subscribe`
+<a id="subscribe"></a> `subscribe`
 
 </td>
 <td>
@@ -2704,7 +2695,7 @@
 <tr>
 <td>
 
-`resolve`?
+<a id="resolve"></a> `resolve`?
 
 </td>
 <td>
@@ -2948,7 +2939,7 @@
 <tr>
 <td>
 
-`Subscription`?
+<a id="subscription"></a> `Subscription`?
 
 </td>
 <td>
@@ -2979,7 +2970,7 @@
 <tr>
 <td>
 
-`fieldsHashes`
+<a id="fieldshashes"></a> `fieldsHashes`
 
 </td>
 <td>
@@ -2991,7 +2982,7 @@
 <tr>
 <td>
 
-`hash`
+<a id="hash"></a> `hash`
 
 </td>
 <td>

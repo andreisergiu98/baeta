@@ -17,19 +17,19 @@
 <tr>
 <td>
 
-`asyncIterator`
+<a id="asynciterator"></a> `asyncIterator`
 
 </td>
 <td>
 
-\<`T`\>(`triggers`: `string` \| `string`[], ...`rest`: `any`[]) => `AsyncIterator`\<`T`, `any`, `any`\>
+\<`T`\>(`triggers`: `string` \| `string`[], ...`rest`: `any`[]) => `AsyncIterator`\<`T`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-`publish`
+<a id="publish"></a> `publish`
 
 </td>
 <td>
@@ -41,7 +41,7 @@
 <tr>
 <td>
 
-`subscribe`
+<a id="subscribe"></a> `subscribe`
 
 </td>
 <td>
@@ -53,7 +53,7 @@
 <tr>
 <td>
 
-`unsubscribe`
+<a id="unsubscribe"></a> `unsubscribe`
 
 </td>
 <td>
@@ -82,19 +82,19 @@
 <tr>
 <td>
 
-`asyncIterableIterator`
+<a id="asynciterableiterator"></a> `asyncIterableIterator`
 
 </td>
 <td>
 
-\<`T`\>(`triggers`: `string` \| readonly `string`[], ...`rest`: `any`[]) => `AsyncIterableIterator`\<`T`, `any`, `any`\>
+\<`T`\>(`triggers`: `string` \| readonly `string`[], ...`rest`: `any`[]) => `AsyncIterableIterator`\<`T`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-`publish`
+<a id="publish-1"></a> `publish`
 
 </td>
 <td>
@@ -106,7 +106,7 @@
 <tr>
 <td>
 
-`subscribe`
+<a id="subscribe-1"></a> `subscribe`
 
 </td>
 <td>
@@ -118,7 +118,7 @@
 <tr>
 <td>
 
-`unsubscribe`
+<a id="unsubscribe-1"></a> `unsubscribe`
 
 </td>
 <td>
@@ -150,7 +150,7 @@ Configuration options for TypedPubSub
 <tr>
 <td>
 
-`prefix?`
+<a id="prefix"></a> `prefix?`
 
 </td>
 <td>

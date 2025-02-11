@@ -54,7 +54,7 @@ const cacheExt = cacheExtension(store, {
 </td>
 <td>
 
-`Keyv`\<`any`\>
+`Keyv`
 
 </td>
 </tr>
@@ -83,7 +83,7 @@ const cacheExt = cacheExtension(store, {
 <tr>
 <td>
 
-`keyv`
+<a id="keyv"></a> `keyv`
 
 </td>
 <td>
@@ -93,7 +93,7 @@ const cacheExt = cacheExtension(store, {
 </td>
 <td>
 
-`Keyv`\<`any`\>
+`Keyv`
 
 </td>
 </tr>

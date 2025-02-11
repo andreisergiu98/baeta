@@ -51,7 +51,7 @@
 <tr>
 <td>
 
-`type`
+<a id="type"></a> `type`
 
 </td>
 <td>
@@ -68,7 +68,7 @@ The expected type of the environment variable.
 <tr>
 <td>
 
-`default?`
+<a id="default"></a> `default?`
 
 </td>
 <td>
@@ -85,7 +85,7 @@ Default value if the environment variable is not provided.
 <tr>
 <td>
 
-`required?`
+<a id="required"></a> `required?`
 
 </td>
 <td>
@@ -102,7 +102,7 @@ Whether the environment variable is required.
 <tr>
 <td>
 
-`resolver?`
+<a id="resolver"></a> `resolver?`
 
 </td>
 <td>

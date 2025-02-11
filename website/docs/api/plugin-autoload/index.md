@@ -18,7 +18,7 @@
 <tr>
 <td>
 
-`match?`
+<a id="match"></a> `match?`
 
 </td>
 <td>
@@ -54,7 +54,7 @@ Custom function to determine if a module should be included
 <tr>
 <td>
 
-`modules?`
+<a id="modules"></a> `modules?`
 
 </td>
 <td>
@@ -76,7 +76,7 @@ Configuration for module autoloading. Set to false to disable
 <tr>
 <td>
 
-`output?`
+<a id="output"></a> `output?`
 
 </td>
 <td>
@@ -100,7 +100,7 @@ Output path for the generated autoload file
 <tr>
 <td>
 
-`resolvers?`
+<a id="resolvers"></a> `resolvers?`
 
 </td>
 <td>
@@ -140,7 +140,7 @@ Configuration for resolver autoloading. Set to false to disable
 <tr>
 <td>
 
-`disableDefaultSuffixes?`
+<a id="disabledefaultsuffixes"></a> `disableDefaultSuffixes?`
 
 </td>
 <td>
@@ -157,7 +157,7 @@ If true, disables the default resolver suffixes
 <tr>
 <td>
 
-`match?`
+<a id="match-1"></a> `match?`
 
 </td>
 <td>
@@ -174,7 +174,7 @@ Custom function to determine if a resolver file should be included
 <tr>
 <td>
 
-`suffix?`
+<a id="suffix"></a> `suffix?`
 
 </td>
 <td>

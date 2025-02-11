@@ -19,7 +19,7 @@
 <tr>
 <td>
 
-`debug`
+<a id="debug"></a> `debug`
 
 </td>
 <td>
@@ -31,7 +31,7 @@
 <tr>
 <td>
 
-`error`
+<a id="error"></a> `error`
 
 </td>
 <td>
@@ -43,7 +43,7 @@
 <tr>
 <td>
 
-`info`
+<a id="info"></a> `info`
 
 </td>
 <td>
@@ -55,7 +55,7 @@
 <tr>
 <td>
 
-`warn`
+<a id="warn"></a> `warn`
 
 </td>
 <td>

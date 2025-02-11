@@ -206,7 +206,7 @@
 <tr>
 <td>
 
-`table`
+<a id="table"></a> `table`
 
 </td>
 <td>
@@ -395,7 +395,7 @@
 <tr>
 <td>
 
-`connectionId`
+<a id="connectionid"></a> `connectionId`
 
 </td>
 <td>
@@ -407,7 +407,7 @@
 <tr>
 <td>
 
-`connectionPoolId`
+<a id="connectionpoolid"></a> `connectionPoolId`
 
 </td>
 <td>
@@ -419,7 +419,7 @@
 <tr>
 <td>
 
-`contextParams`
+<a id="contextparams"></a> `contextParams`
 
 </td>
 <td>
@@ -431,7 +431,7 @@
 <tr>
 <td>
 
-`id`
+<a id="id"></a> `id`
 
 </td>
 <td>
@@ -443,7 +443,7 @@
 <tr>
 <td>
 
-`subscription`
+<a id="subscription"></a> `subscription`
 
 </td>
 <td>
@@ -455,7 +455,7 @@
 <tr>
 <td>
 
-`topic`
+<a id="topic"></a> `topic`
 
 </td>
 <td>
@@ -517,7 +517,7 @@
 <tr>
 <td>
 
-`createContext`
+<a id="createcontext"></a> `createContext`
 
 </td>
 <td>
@@ -529,12 +529,12 @@
 <tr>
 <td>
 
-`getContextParams`
+<a id="getcontextparams"></a> `getContextParams`
 
 </td>
 <td>
 
-(`request`: `Request`\<`unknown`, `CfProperties`\<`unknown`\>\>, `env`: `Env`) => `ContextParams`
+(`request`: `Request`, `env`: `Env`) => `ContextParams`
 
 </td>
 </tr>
@@ -591,7 +591,7 @@
 <tr>
 <td>
 
-`getDatabase`
+<a id="getdatabase"></a> `getDatabase`
 
 </td>
 <td>
@@ -603,19 +603,19 @@
 <tr>
 <td>
 
-`getWSConnections`
+<a id="getwsconnections"></a> `getWSConnections`
 
 </td>
 <td>
 
-(`env`: `Env`) => `DurableObjectNamespace`\<`undefined`\>
+(`env`: `Env`) => `DurableObjectNamespace`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`schema`
+<a id="schema"></a> `schema`
 
 </td>
 <td>
@@ -627,7 +627,7 @@
 <tr>
 <td>
 
-`context?`
+<a id="context"></a> `context?`
 
 </td>
 <td>
@@ -639,7 +639,7 @@
 <tr>
 <td>
 
-`poolingType?`
+<a id="poolingtype"></a> `poolingType?`
 
 </td>
 <td>

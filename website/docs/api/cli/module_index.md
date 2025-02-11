@@ -18,7 +18,7 @@
 <tr>
 <td>
 
-`graphql`
+<a id="graphql"></a> `graphql`
 
 </td>
 <td>
@@ -35,7 +35,7 @@ Configuration for the GraphQL code generator.
 <tr>
 <td>
 
-`compiler?`
+<a id="compiler"></a> `compiler?`
 
 </td>
 <td>
@@ -53,7 +53,7 @@ It uses esbuild under the hood and creates an optimized bundle.
 <tr>
 <td>
 
-`plugins?`
+<a id="plugins"></a> `plugins?`
 
 </td>
 <td>

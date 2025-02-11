@@ -21,7 +21,7 @@ Configuration options for the pagination plugin
 <tr>
 <td>
 
-`types`
+<a id="types"></a> `types`
 
 </td>
 <td>
@@ -60,7 +60,7 @@ Map of type names to their pagination configuration.
 <tr>
 <td>
 
-`createExport?`
+<a id="createexport"></a> `createExport?`
 
 </td>
 <td>
@@ -82,7 +82,7 @@ Whether to create an export file
 <tr>
 <td>
 
-`moduleName?`
+<a id="modulename"></a> `moduleName?`
 
 </td>
 <td>
@@ -106,7 +106,7 @@ Custom name for the pagination module
 <tr>
 <td>
 
-`nullableNode?`
+<a id="nullablenode"></a> `nullableNode?`
 
 </td>
 <td>
@@ -130,7 +130,7 @@ Whether the node field should be nullable in all connections
 <tr>
 <td>
 
-`pageInfoFields?`
+<a id="pageinfofields"></a> `pageInfoFields?`
 
 </td>
 <td>
@@ -179,7 +179,7 @@ Configuration options for a specific pagination type
 <tr>
 <td>
 
-`connectionFields?`
+<a id="connectionfields"></a> `connectionFields?`
 
 </td>
 <td>
@@ -207,7 +207,7 @@ connectionFields: ["totalCount: Int!"];
 <tr>
 <td>
 
-`cursorType?`
+<a id="cursortype"></a> `cursorType?`
 
 </td>
 <td>
@@ -231,7 +231,7 @@ The GraphQL type for cursors
 <tr>
 <td>
 
-`edgeFields?`
+<a id="edgefields"></a> `edgeFields?`
 
 </td>
 <td>
@@ -259,7 +259,7 @@ edgeFields: ["hasPhotos: Boolean!"];
 <tr>
 <td>
 
-`nodeType?`
+<a id="nodetype"></a> `nodeType?`
 
 </td>
 <td>

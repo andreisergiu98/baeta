@@ -19,7 +19,7 @@
 <tr>
 <td>
 
-`addExt`
+<a id="addext"></a> `addExt`
 
 </td>
 <td>
@@ -31,7 +31,7 @@
 <tr>
 <td>
 
-`basename`
+<a id="basename"></a> `basename`
 
 </td>
 <td>
@@ -43,7 +43,7 @@
 <tr>
 <td>
 
-`changeExt`
+<a id="changeext"></a> `changeExt`
 
 </td>
 <td>
@@ -55,7 +55,7 @@
 <tr>
 <td>
 
-`defaultExt`
+<a id="defaultext"></a> `defaultExt`
 
 </td>
 <td>
@@ -67,7 +67,7 @@
 <tr>
 <td>
 
-`delimiter`
+<a id="delimiter"></a> `delimiter`
 
 </td>
 <td>
@@ -79,7 +79,7 @@
 <tr>
 <td>
 
-`dirname`
+<a id="dirname"></a> `dirname`
 
 </td>
 <td>
@@ -91,7 +91,7 @@
 <tr>
 <td>
 
-`extname`
+<a id="extname"></a> `extname`
 
 </td>
 <td>
@@ -103,7 +103,7 @@
 <tr>
 <td>
 
-`format`
+<a id="format"></a> `format`
 
 </td>
 <td>
@@ -115,7 +115,7 @@
 <tr>
 <td>
 
-`isAbsolute`
+<a id="isabsolute"></a> `isAbsolute`
 
 </td>
 <td>
@@ -127,7 +127,7 @@
 <tr>
 <td>
 
-`join`
+<a id="join"></a> `join`
 
 </td>
 <td>
@@ -139,7 +139,7 @@
 <tr>
 <td>
 
-`joinSafe`
+<a id="joinsafe"></a> `joinSafe`
 
 </td>
 <td>
@@ -151,7 +151,7 @@
 <tr>
 <td>
 
-`normalize`
+<a id="normalize"></a> `normalize`
 
 </td>
 <td>
@@ -163,7 +163,7 @@
 <tr>
 <td>
 
-`normalizeSafe`
+<a id="normalizesafe"></a> `normalizeSafe`
 
 </td>
 <td>
@@ -175,7 +175,7 @@
 <tr>
 <td>
 
-`normalizeTrim`
+<a id="normalizetrim"></a> `normalizeTrim`
 
 </td>
 <td>
@@ -187,7 +187,7 @@
 <tr>
 <td>
 
-`parse`
+<a id="parse"></a> `parse`
 
 </td>
 <td>
@@ -199,7 +199,7 @@
 <tr>
 <td>
 
-`posix`
+<a id="posix"></a> `posix`
 
 </td>
 <td>
@@ -211,7 +211,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`posixPath`
+<a id="posixpath"></a> `posixPath`
 
 </td>
 <td>
@@ -223,7 +223,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`relative`
+<a id="relative"></a> `relative`
 
 </td>
 <td>
@@ -235,7 +235,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`removeExt`
+<a id="removeext"></a> `removeExt`
 
 </td>
 <td>
@@ -247,7 +247,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`resolve`
+<a id="resolve"></a> `resolve`
 
 </td>
 <td>
@@ -259,7 +259,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`sep`
+<a id="sep"></a> `sep`
 
 </td>
 <td>
@@ -271,7 +271,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`toUnix`
+<a id="tounix"></a> `toUnix`
 
 </td>
 <td>
@@ -283,7 +283,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`trimExt`
+<a id="trimext"></a> `trimExt`
 
 </td>
 <td>
@@ -295,7 +295,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-`win32`
+<a id="win32"></a> `win32`
 
 </td>
 <td>
@@ -307,7 +307,7 @@ _typeof_ `win32`
 <tr>
 <td>
 
-`winPath`
+<a id="winpath"></a> `winPath`
 
 </td>
 <td>

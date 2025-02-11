@@ -17,7 +17,7 @@
 <tr>
 <td>
 
-`cache?`
+<a id="cache"></a> `cache?`
 
 </td>
 <td>
@@ -53,7 +53,7 @@
 <tr>
 <td>
 
-`ws?`
+<a id="ws"></a> `ws?`
 
 </td>
 <td>

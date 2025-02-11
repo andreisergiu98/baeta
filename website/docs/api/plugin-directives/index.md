@@ -21,7 +21,7 @@ Configuration options for the directives plugin.
 <tr>
 <td>
 
-`moduleName?`
+<a id="modulename"></a> `moduleName?`
 
 </td>
 <td>

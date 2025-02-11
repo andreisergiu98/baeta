@@ -21,7 +21,7 @@ Configuration options for the context store.
 <tr>
 <td>
 
-`lazy?`
+<a id="lazy"></a> `lazy?`
 
 </td>
 <td>
@@ -64,7 +64,7 @@ Whether to load the value lazily (on first access) or eagerly (immediately).
 <tr>
 <td>
 
-`modules`
+<a id="modules"></a> `modules`
 
 </td>
 <td>
@@ -92,7 +92,7 @@ const modules = [userModule, postModule, commentModule];
 <tr>
 <td>
 
-`executableSchemaOptions?`
+<a id="executableschemaoptions"></a> `executableSchemaOptions?`
 
 </td>
 <td>
@@ -114,7 +114,7 @@ Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools
 <tr>
 <td>
 
-`pruneSchema?`
+<a id="pruneschema"></a> `pruneSchema?`
 
 </td>
 <td>
@@ -203,7 +203,7 @@ Type of the context
 <tr>
 <td>
 
-`name`
+<a id="name"></a> `name`
 
 </td>
 <td>
@@ -226,7 +226,7 @@ Name of the directive as it appears in the GraphQL schema (without '@' prefix)
 <tr>
 <td>
 
-`resolve`
+<a id="resolve"></a> `resolve`
 
 </td>
 <td>
@@ -243,7 +243,7 @@ Function that implements the directive's validation/transformation logic
 <tr>
 <td>
 
-`target`
+<a id="target"></a> `target`
 
 </td>
 <td>
@@ -260,7 +260,7 @@ Validation target indicating when the directive should be applied
 <tr>
 <td>
 
-`getListDepth`?
+<a id="getlistdepth"></a> `getListDepth`?
 
 </td>
 <td>
@@ -458,7 +458,7 @@ input Input {
 <tr>
 <td>
 
-`args`
+<a id="args"></a> `args`
 
 </td>
 <td>
@@ -470,7 +470,7 @@ input Input {
 <tr>
 <td>
 
-`ctx`
+<a id="ctx"></a> `ctx`
 
 </td>
 <td>
@@ -482,7 +482,7 @@ input Input {
 <tr>
 <td>
 
-`info`
+<a id="info"></a> `info`
 
 </td>
 <td>
@@ -494,7 +494,7 @@ input Input {
 <tr>
 <td>
 
-`root`
+<a id="root"></a> `root`
 
 </td>
 <td>
@@ -633,7 +633,7 @@ input Input {
 <tr>
 <td>
 
-`args`
+<a id="args-1"></a> `args`
 
 </td>
 <td>
@@ -645,7 +645,7 @@ input Input {
 <tr>
 <td>
 
-`ctx`
+<a id="ctx-1"></a> `ctx`
 
 </td>
 <td>
@@ -657,7 +657,7 @@ input Input {
 <tr>
 <td>
 
-`info`
+<a id="info-1"></a> `info`
 
 </td>
 <td>
@@ -669,7 +669,7 @@ input Input {
 <tr>
 <td>
 
-`root`
+<a id="root-1"></a> `root`
 
 </td>
 <td>
@@ -814,7 +814,7 @@ input Input {
 <tr>
 <td>
 
-`args`
+<a id="args-2"></a> `args`
 
 </td>
 <td>
@@ -826,7 +826,7 @@ input Input {
 <tr>
 <td>
 
-`ctx`
+<a id="ctx-2"></a> `ctx`
 
 </td>
 <td>
@@ -838,7 +838,7 @@ input Input {
 <tr>
 <td>
 
-`info`
+<a id="info-2"></a> `info`
 
 </td>
 <td>
@@ -850,7 +850,7 @@ input Input {
 <tr>
 <td>
 
-`root`
+<a id="root-2"></a> `root`
 
 </td>
 <td>
@@ -989,7 +989,7 @@ input Input {
 <tr>
 <td>
 
-`args`
+<a id="args-3"></a> `args`
 
 </td>
 <td>
@@ -1001,7 +1001,7 @@ input Input {
 <tr>
 <td>
 
-`ctx`
+<a id="ctx-3"></a> `ctx`
 
 </td>
 <td>
@@ -1013,7 +1013,7 @@ input Input {
 <tr>
 <td>
 
-`info`
+<a id="info-3"></a> `info`
 
 </td>
 <td>
@@ -1025,7 +1025,7 @@ input Input {
 <tr>
 <td>
 
-`payload`
+<a id="payload"></a> `payload`
 
 </td>
 <td>
@@ -1103,7 +1103,7 @@ input Input {
 <tr>
 <td>
 
-`resolve`
+<a id="resolve-1"></a> `resolve`
 
 </td>
 <td>
@@ -1115,7 +1115,7 @@ input Input {
 <tr>
 <td>
 
-`subscribe`
+<a id="subscribe"></a> `subscribe`
 
 </td>
 <td>
@@ -1240,7 +1240,7 @@ input Input {
 <tr>
 <td>
 
-`ctx`
+<a id="ctx-4"></a> `ctx`
 
 </td>
 <td>
@@ -1252,7 +1252,7 @@ input Input {
 <tr>
 <td>
 
-`info`
+<a id="info-4"></a> `info`
 
 </td>
 <td>
@@ -1264,7 +1264,7 @@ input Input {
 <tr>
 <td>
 
-`type`
+<a id="type"></a> `type`
 
 </td>
 <td>
@@ -1276,7 +1276,7 @@ input Input {
 <tr>
 <td>
 
-`value`
+<a id="value"></a> `value`
 
 </td>
 <td>
@@ -1332,7 +1332,7 @@ input Input {
 <tr>
 <td>
 
-`args`
+<a id="args-4"></a> `args`
 
 </td>
 <td>
@@ -1344,7 +1344,7 @@ input Input {
 <tr>
 <td>
 
-`ctx`
+<a id="ctx-5"></a> `ctx`
 
 </td>
 <td>
@@ -1356,7 +1356,7 @@ input Input {
 <tr>
 <td>
 
-`info`
+<a id="info-5"></a> `info`
 
 </td>
 <td>
@@ -1368,7 +1368,7 @@ input Input {
 <tr>
 <td>
 
-`path`
+<a id="path"></a> `path`
 
 </td>
 <td>
@@ -1380,7 +1380,7 @@ input Input {
 <tr>
 <td>
 
-`root`
+<a id="root-3"></a> `root`
 
 </td>
 <td>
@@ -1392,7 +1392,7 @@ input Input {
 <tr>
 <td>
 
-`type`
+<a id="type-1"></a> `type`
 
 </td>
 <td>
@@ -1626,7 +1626,7 @@ const { schema } = baeta;
 
 ### createContextStore()
 
-> **createContextStore**\<`T`, `Context`\>(`key`, `options`?): readonly [(`ctx`) => `Promise`\<`T`\>, (`_ctx`, `loader`) => `void`]
+> **createContextStore**\<`T`, `Context`\>(`key`, `options`?): readonly \[(`ctx`) => `Promise`\<`T`\>, (`_ctx`, `loader`) => `void`\]
 
 Creates a context store for managing asynchronous values within a context object.
 See https://baeta.io/docs/guides/context-store
@@ -1718,7 +1718,7 @@ Configuration options for the store
 
 #### Returns
 
-readonly [(`ctx`) => `Promise`\<`T`\>, (`_ctx`, `loader`) => `void`]
+readonly \[(`ctx`) => `Promise`\<`T`\>, (`_ctx`, `loader`) => `void`\]
 
 A tuple containing get and load functions for managing the stored value
 

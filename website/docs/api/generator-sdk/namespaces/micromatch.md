@@ -17,7 +17,7 @@
 <tr>
 <td>
 
-`glob`
+<a id="glob"></a> `glob`
 
 </td>
 <td>
@@ -29,7 +29,7 @@
 <tr>
 <td>
 
-`input`
+<a id="input"></a> `input`
 
 </td>
 <td>
@@ -41,7 +41,7 @@
 <tr>
 <td>
 
-`output`
+<a id="output"></a> `output`
 
 </td>
 <td>
@@ -53,7 +53,7 @@
 <tr>
 <td>
 
-`regex`
+<a id="regex"></a> `regex`
 
 </td>
 <td>
@@ -87,7 +87,7 @@
 <tr>
 <td>
 
-`basename?`
+<a id="basename"></a> `basename?`
 
 </td>
 <td>
@@ -120,7 +120,7 @@ mm(["a/b.js", "a/c.md"], "*.js", { matchBase: true });
 <tr>
 <td>
 
-`bash?`
+<a id="bash"></a> `bash?`
 
 </td>
 <td>
@@ -155,7 +155,7 @@ console.log(mm(files, "[a-c]*", { bash: false }));
 <tr>
 <td>
 
-`capture?`
+<a id="capture"></a> `capture?`
 
 </td>
 <td>
@@ -178,7 +178,7 @@ undefined;
 <tr>
 <td>
 
-`contains?`
+<a id="contains"></a> `contains?`
 
 </td>
 <td>
@@ -201,7 +201,7 @@ undefined;
 <tr>
 <td>
 
-`cwd?`
+<a id="cwd"></a> `cwd?`
 
 </td>
 <td>
@@ -224,7 +224,7 @@ process.cwd();
 <tr>
 <td>
 
-`debug?`
+<a id="debug"></a> `debug?`
 
 </td>
 <td>
@@ -247,7 +247,7 @@ undefined;
 <tr>
 <td>
 
-`dot?`
+<a id="dot"></a> `dot?`
 
 </td>
 <td>
@@ -270,7 +270,7 @@ false;
 <tr>
 <td>
 
-`expandRange?`
+<a id="expandrange"></a> `expandRange?`
 
 </td>
 <td>
@@ -295,7 +295,7 @@ undefined;
 <tr>
 <td>
 
-`failglob?`
+<a id="failglob"></a> `failglob?`
 
 </td>
 <td>
@@ -318,7 +318,7 @@ false;
 <tr>
 <td>
 
-`fastpaths?`
+<a id="fastpaths"></a> `fastpaths?`
 
 </td>
 <td>
@@ -341,7 +341,7 @@ true;
 <tr>
 <td>
 
-`flags?`
+<a id="flags"></a> `flags?`
 
 </td>
 <td>
@@ -364,7 +364,7 @@ undefined;
 <tr>
 <td>
 
-`format?`
+<a id="format"></a> `format?`
 
 </td>
 <td>
@@ -387,7 +387,7 @@ undefined;
 <tr>
 <td>
 
-`ignore?`
+<a id="ignore"></a> `ignore?`
 
 </td>
 <td>
@@ -410,7 +410,7 @@ undefined;
 <tr>
 <td>
 
-`keepQuotes?`
+<a id="keepquotes"></a> `keepQuotes?`
 
 </td>
 <td>
@@ -433,7 +433,7 @@ false;
 <tr>
 <td>
 
-`literalBrackets?`
+<a id="literalbrackets"></a> `literalBrackets?`
 
 </td>
 <td>
@@ -456,7 +456,7 @@ undefined;
 <tr>
 <td>
 
-`lookbehinds?`
+<a id="lookbehinds"></a> `lookbehinds?`
 
 </td>
 <td>
@@ -479,7 +479,7 @@ true;
 <tr>
 <td>
 
-`matchBase?`
+<a id="matchbase"></a> `matchBase?`
 
 </td>
 <td>
@@ -502,7 +502,7 @@ false;
 <tr>
 <td>
 
-`maxLength?`
+<a id="maxlength"></a> `maxLength?`
 
 </td>
 <td>
@@ -525,7 +525,7 @@ Limit the max length of the input string. An error is thrown if the input string
 <tr>
 <td>
 
-`nobrace?`
+<a id="nobrace"></a> `nobrace?`
 
 </td>
 <td>
@@ -548,7 +548,7 @@ false;
 <tr>
 <td>
 
-`nobracket?`
+<a id="nobracket"></a> `nobracket?`
 
 </td>
 <td>
@@ -571,7 +571,7 @@ undefined;
 <tr>
 <td>
 
-`nocase?`
+<a id="nocase"></a> `nocase?`
 
 </td>
 <td>
@@ -595,7 +595,7 @@ false;
 <tr>
 <td>
 
-`noext?`
+<a id="noext"></a> `noext?`
 
 </td>
 <td>
@@ -618,7 +618,7 @@ false;
 <tr>
 <td>
 
-`noextglob?`
+<a id="noextglob"></a> `noextglob?`
 
 </td>
 <td>
@@ -641,7 +641,7 @@ false;
 <tr>
 <td>
 
-`noglobstar?`
+<a id="noglobstar"></a> `noglobstar?`
 
 </td>
 <td>
@@ -664,7 +664,7 @@ undefined;
 <tr>
 <td>
 
-`nonegate?`
+<a id="nonegate"></a> `nonegate?`
 
 </td>
 <td>
@@ -687,7 +687,7 @@ undefined;
 <tr>
 <td>
 
-`noquantifiers?`
+<a id="noquantifiers"></a> `noquantifiers?`
 
 </td>
 <td>
@@ -710,7 +710,7 @@ false;
 <tr>
 <td>
 
-`onIgnore?`
+<a id="onignore"></a> `onIgnore?`
 
 </td>
 <td>
@@ -733,7 +733,7 @@ undefined;
 <tr>
 <td>
 
-`onMatch?`
+<a id="onmatch"></a> `onMatch?`
 
 </td>
 <td>
@@ -756,7 +756,7 @@ undefined;
 <tr>
 <td>
 
-`onResult?`
+<a id="onresult"></a> `onResult?`
 
 </td>
 <td>
@@ -779,7 +779,7 @@ undefined;
 <tr>
 <td>
 
-`posix?`
+<a id="posix"></a> `posix?`
 
 </td>
 <td>
@@ -802,7 +802,7 @@ false;
 <tr>
 <td>
 
-`prepend?`
+<a id="prepend"></a> `prepend?`
 
 </td>
 <td>
@@ -825,7 +825,7 @@ undefined;
 <tr>
 <td>
 
-`regex?`
+<a id="regex-1"></a> `regex?`
 
 </td>
 <td>
@@ -848,7 +848,7 @@ false;
 <tr>
 <td>
 
-`strictBrackets?`
+<a id="strictbrackets"></a> `strictBrackets?`
 
 </td>
 <td>
@@ -871,7 +871,7 @@ undefined;
 <tr>
 <td>
 
-`strictSlashes?`
+<a id="strictslashes"></a> `strictSlashes?`
 
 </td>
 <td>
@@ -894,7 +894,7 @@ undefined;
 <tr>
 <td>
 
-`unescape?`
+<a id="unescape"></a> `unescape?`
 
 </td>
 <td>
@@ -929,7 +929,7 @@ mm.match(["abc", "a\\*c"], "a\\*c", { unescape: true });
 <tr>
 <td>
 
-`windows?`
+<a id="windows"></a> `windows?`
 
 </td>
 <td>
@@ -973,7 +973,7 @@ undefined;
 <tr>
 <td>
 
-`base`
+<a id="base"></a> `base`
 
 </td>
 <td>
@@ -985,7 +985,7 @@ undefined;
 <tr>
 <td>
 
-`glob`
+<a id="glob-1"></a> `glob`
 
 </td>
 <td>
@@ -997,7 +997,7 @@ undefined;
 <tr>
 <td>
 
-`input`
+<a id="input-1"></a> `input`
 
 </td>
 <td>
@@ -1009,7 +1009,7 @@ undefined;
 <tr>
 <td>
 
-`isBrace`
+<a id="isbrace"></a> `isBrace`
 
 </td>
 <td>
@@ -1021,7 +1021,7 @@ undefined;
 <tr>
 <td>
 
-`isBracket`
+<a id="isbracket"></a> `isBracket`
 
 </td>
 <td>
@@ -1033,7 +1033,7 @@ undefined;
 <tr>
 <td>
 
-`isExtglob`
+<a id="isextglob"></a> `isExtglob`
 
 </td>
 <td>
@@ -1045,7 +1045,7 @@ undefined;
 <tr>
 <td>
 
-`isGlob`
+<a id="isglob"></a> `isGlob`
 
 </td>
 <td>
@@ -1057,7 +1057,7 @@ undefined;
 <tr>
 <td>
 
-`isGlobstar`
+<a id="isglobstar"></a> `isGlobstar`
 
 </td>
 <td>
@@ -1069,7 +1069,7 @@ undefined;
 <tr>
 <td>
 
-`negated`
+<a id="negated"></a> `negated`
 
 </td>
 <td>
@@ -1081,7 +1081,7 @@ undefined;
 <tr>
 <td>
 
-`negatedExtglob`
+<a id="negatedextglob"></a> `negatedExtglob`
 
 </td>
 <td>
@@ -1093,7 +1093,7 @@ undefined;
 <tr>
 <td>
 
-`prefix`
+<a id="prefix"></a> `prefix`
 
 </td>
 <td>
@@ -1105,7 +1105,7 @@ undefined;
 <tr>
 <td>
 
-`start`
+<a id="start"></a> `start`
 
 </td>
 <td>
@@ -1134,7 +1134,7 @@ undefined;
 <tr>
 <td>
 
-`depth`
+<a id="depth"></a> `depth`
 
 </td>
 <td>
@@ -1146,7 +1146,7 @@ undefined;
 <tr>
 <td>
 
-`isGlob`
+<a id="isglob-1"></a> `isGlob`
 
 </td>
 <td>
@@ -1158,7 +1158,7 @@ undefined;
 <tr>
 <td>
 
-`value`
+<a id="value"></a> `value`
 
 </td>
 <td>
@@ -1170,7 +1170,7 @@ undefined;
 <tr>
 <td>
 
-`backslashes?`
+<a id="backslashes"></a> `backslashes?`
 
 </td>
 <td>
@@ -1182,7 +1182,7 @@ undefined;
 <tr>
 <td>
 
-`isBrace?`
+<a id="isbrace-1"></a> `isBrace?`
 
 </td>
 <td>
@@ -1194,7 +1194,7 @@ undefined;
 <tr>
 <td>
 
-`isBracket?`
+<a id="isbracket-1"></a> `isBracket?`
 
 </td>
 <td>
@@ -1206,7 +1206,7 @@ undefined;
 <tr>
 <td>
 
-`isExtglob?`
+<a id="isextglob-1"></a> `isExtglob?`
 
 </td>
 <td>
@@ -1218,7 +1218,7 @@ undefined;
 <tr>
 <td>
 
-`isGlobstar?`
+<a id="isglobstar-1"></a> `isGlobstar?`
 
 </td>
 <td>
@@ -1230,7 +1230,7 @@ undefined;
 <tr>
 <td>
 
-`isPrefix?`
+<a id="isprefix"></a> `isPrefix?`
 
 </td>
 <td>
@@ -1242,7 +1242,7 @@ undefined;
 <tr>
 <td>
 
-`negated?`
+<a id="negated-1"></a> `negated?`
 
 </td>
 <td>
@@ -1280,7 +1280,7 @@ undefined;
 <tr>
 <td>
 
-`base`
+<a id="base-1"></a> `base`
 
 </td>
 <td>
@@ -1297,7 +1297,7 @@ undefined;
 <tr>
 <td>
 
-`glob`
+<a id="glob-2"></a> `glob`
 
 </td>
 <td>
@@ -1314,7 +1314,7 @@ undefined;
 <tr>
 <td>
 
-`input`
+<a id="input-2"></a> `input`
 
 </td>
 <td>
@@ -1331,7 +1331,7 @@ undefined;
 <tr>
 <td>
 
-`isBrace`
+<a id="isbrace-2"></a> `isBrace`
 
 </td>
 <td>
@@ -1348,7 +1348,7 @@ undefined;
 <tr>
 <td>
 
-`isBracket`
+<a id="isbracket-2"></a> `isBracket`
 
 </td>
 <td>
@@ -1365,7 +1365,7 @@ undefined;
 <tr>
 <td>
 
-`isExtglob`
+<a id="isextglob-2"></a> `isExtglob`
 
 </td>
 <td>
@@ -1382,7 +1382,7 @@ undefined;
 <tr>
 <td>
 
-`isGlob`
+<a id="isglob-2"></a> `isGlob`
 
 </td>
 <td>
@@ -1399,7 +1399,7 @@ undefined;
 <tr>
 <td>
 
-`isGlobstar`
+<a id="isglobstar-2"></a> `isGlobstar`
 
 </td>
 <td>
@@ -1416,7 +1416,7 @@ undefined;
 <tr>
 <td>
 
-`negated`
+<a id="negated-2"></a> `negated`
 
 </td>
 <td>
@@ -1433,7 +1433,7 @@ undefined;
 <tr>
 <td>
 
-`negatedExtglob`
+<a id="negatedextglob-1"></a> `negatedExtglob`
 
 </td>
 <td>
@@ -1450,7 +1450,7 @@ undefined;
 <tr>
 <td>
 
-`parts`
+<a id="parts"></a> `parts`
 
 </td>
 <td>
@@ -1467,7 +1467,7 @@ undefined;
 <tr>
 <td>
 
-`prefix`
+<a id="prefix-1"></a> `prefix`
 
 </td>
 <td>
@@ -1484,7 +1484,7 @@ undefined;
 <tr>
 <td>
 
-`slashes`
+<a id="slashes"></a> `slashes`
 
 </td>
 <td>
@@ -1501,7 +1501,7 @@ undefined;
 <tr>
 <td>
 
-`start`
+<a id="start-1"></a> `start`
 
 </td>
 <td>
@@ -1540,7 +1540,7 @@ undefined;
 <tr>
 <td>
 
-`base`
+<a id="base-2"></a> `base`
 
 </td>
 <td>
@@ -1557,7 +1557,7 @@ undefined;
 <tr>
 <td>
 
-`glob`
+<a id="glob-3"></a> `glob`
 
 </td>
 <td>
@@ -1574,7 +1574,7 @@ undefined;
 <tr>
 <td>
 
-`input`
+<a id="input-3"></a> `input`
 
 </td>
 <td>
@@ -1591,7 +1591,7 @@ undefined;
 <tr>
 <td>
 
-`isBrace`
+<a id="isbrace-3"></a> `isBrace`
 
 </td>
 <td>
@@ -1608,7 +1608,7 @@ undefined;
 <tr>
 <td>
 
-`isBracket`
+<a id="isbracket-3"></a> `isBracket`
 
 </td>
 <td>
@@ -1625,7 +1625,7 @@ undefined;
 <tr>
 <td>
 
-`isExtglob`
+<a id="isextglob-3"></a> `isExtglob`
 
 </td>
 <td>
@@ -1642,7 +1642,7 @@ undefined;
 <tr>
 <td>
 
-`isGlob`
+<a id="isglob-3"></a> `isGlob`
 
 </td>
 <td>
@@ -1659,7 +1659,7 @@ undefined;
 <tr>
 <td>
 
-`isGlobstar`
+<a id="isglobstar-3"></a> `isGlobstar`
 
 </td>
 <td>
@@ -1676,7 +1676,7 @@ undefined;
 <tr>
 <td>
 
-`maxDepth`
+<a id="maxdepth"></a> `maxDepth`
 
 </td>
 <td>
@@ -1693,7 +1693,7 @@ undefined;
 <tr>
 <td>
 
-`negated`
+<a id="negated-3"></a> `negated`
 
 </td>
 <td>
@@ -1710,7 +1710,7 @@ undefined;
 <tr>
 <td>
 
-`negatedExtglob`
+<a id="negatedextglob-2"></a> `negatedExtglob`
 
 </td>
 <td>
@@ -1727,7 +1727,7 @@ undefined;
 <tr>
 <td>
 
-`parts`
+<a id="parts-1"></a> `parts`
 
 </td>
 <td>
@@ -1744,7 +1744,7 @@ undefined;
 <tr>
 <td>
 
-`prefix`
+<a id="prefix-2"></a> `prefix`
 
 </td>
 <td>
@@ -1761,7 +1761,7 @@ undefined;
 <tr>
 <td>
 
-`slashes`
+<a id="slashes-1"></a> `slashes`
 
 </td>
 <td>
@@ -1778,7 +1778,7 @@ undefined;
 <tr>
 <td>
 
-`start`
+<a id="start-2"></a> `start`
 
 </td>
 <td>
@@ -1795,7 +1795,7 @@ undefined;
 <tr>
 <td>
 
-`tokens`
+<a id="tokens"></a> `tokens`
 
 </td>
 <td>
@@ -1835,7 +1835,7 @@ undefined;
 <tr>
 <td>
 
-`basename?`
+<a id="basename-1"></a> `basename?`
 
 </td>
 <td>
@@ -1873,7 +1873,7 @@ mm(["a/b.js", "a/c.md"], "*.js", { matchBase: true });
 <tr>
 <td>
 
-`bash?`
+<a id="bash-1"></a> `bash?`
 
 </td>
 <td>
@@ -1913,7 +1913,7 @@ console.log(mm(files, "[a-c]*", { bash: false }));
 <tr>
 <td>
 
-`capture?`
+<a id="capture-1"></a> `capture?`
 
 </td>
 <td>
@@ -1941,7 +1941,7 @@ undefined;
 <tr>
 <td>
 
-`contains?`
+<a id="contains-1"></a> `contains?`
 
 </td>
 <td>
@@ -1969,7 +1969,7 @@ undefined;
 <tr>
 <td>
 
-`cwd?`
+<a id="cwd-1"></a> `cwd?`
 
 </td>
 <td>
@@ -1997,7 +1997,7 @@ process.cwd();
 <tr>
 <td>
 
-`debug?`
+<a id="debug-1"></a> `debug?`
 
 </td>
 <td>
@@ -2025,7 +2025,7 @@ undefined;
 <tr>
 <td>
 
-`dot?`
+<a id="dot-1"></a> `dot?`
 
 </td>
 <td>
@@ -2053,7 +2053,7 @@ false;
 <tr>
 <td>
 
-`expandRange?`
+<a id="expandrange-1"></a> `expandRange?`
 
 </td>
 <td>
@@ -2083,7 +2083,7 @@ undefined;
 <tr>
 <td>
 
-`failglob?`
+<a id="failglob-1"></a> `failglob?`
 
 </td>
 <td>
@@ -2111,7 +2111,7 @@ false;
 <tr>
 <td>
 
-`fastpaths?`
+<a id="fastpaths-1"></a> `fastpaths?`
 
 </td>
 <td>
@@ -2139,7 +2139,7 @@ true;
 <tr>
 <td>
 
-`flags?`
+<a id="flags-1"></a> `flags?`
 
 </td>
 <td>
@@ -2167,7 +2167,7 @@ undefined;
 <tr>
 <td>
 
-`format?`
+<a id="format-1"></a> `format?`
 
 </td>
 <td>
@@ -2195,7 +2195,7 @@ undefined;
 <tr>
 <td>
 
-`ignore?`
+<a id="ignore-1"></a> `ignore?`
 
 </td>
 <td>
@@ -2223,7 +2223,7 @@ undefined;
 <tr>
 <td>
 
-`keepQuotes?`
+<a id="keepquotes-1"></a> `keepQuotes?`
 
 </td>
 <td>
@@ -2251,7 +2251,7 @@ false;
 <tr>
 <td>
 
-`literalBrackets?`
+<a id="literalbrackets-1"></a> `literalBrackets?`
 
 </td>
 <td>
@@ -2279,7 +2279,7 @@ undefined;
 <tr>
 <td>
 
-`lookbehinds?`
+<a id="lookbehinds-1"></a> `lookbehinds?`
 
 </td>
 <td>
@@ -2307,7 +2307,7 @@ true;
 <tr>
 <td>
 
-`matchBase?`
+<a id="matchbase-1"></a> `matchBase?`
 
 </td>
 <td>
@@ -2335,7 +2335,7 @@ false;
 <tr>
 <td>
 
-`maxLength?`
+<a id="maxlength-1"></a> `maxLength?`
 
 </td>
 <td>
@@ -2363,7 +2363,7 @@ Limit the max length of the input string. An error is thrown if the input string
 <tr>
 <td>
 
-`nobrace?`
+<a id="nobrace-1"></a> `nobrace?`
 
 </td>
 <td>
@@ -2391,7 +2391,7 @@ false;
 <tr>
 <td>
 
-`nobracket?`
+<a id="nobracket-1"></a> `nobracket?`
 
 </td>
 <td>
@@ -2419,7 +2419,7 @@ undefined;
 <tr>
 <td>
 
-`nocase?`
+<a id="nocase-1"></a> `nocase?`
 
 </td>
 <td>
@@ -2448,7 +2448,7 @@ false;
 <tr>
 <td>
 
-`noext?`
+<a id="noext-1"></a> `noext?`
 
 </td>
 <td>
@@ -2476,7 +2476,7 @@ false;
 <tr>
 <td>
 
-`noextglob?`
+<a id="noextglob-1"></a> `noextglob?`
 
 </td>
 <td>
@@ -2504,7 +2504,7 @@ false;
 <tr>
 <td>
 
-`noglobstar?`
+<a id="noglobstar-1"></a> `noglobstar?`
 
 </td>
 <td>
@@ -2532,7 +2532,7 @@ undefined;
 <tr>
 <td>
 
-`nonegate?`
+<a id="nonegate-1"></a> `nonegate?`
 
 </td>
 <td>
@@ -2560,7 +2560,7 @@ undefined;
 <tr>
 <td>
 
-`noquantifiers?`
+<a id="noquantifiers-1"></a> `noquantifiers?`
 
 </td>
 <td>
@@ -2588,7 +2588,7 @@ false;
 <tr>
 <td>
 
-`onIgnore?`
+<a id="onignore-1"></a> `onIgnore?`
 
 </td>
 <td>
@@ -2616,7 +2616,7 @@ undefined;
 <tr>
 <td>
 
-`onMatch?`
+<a id="onmatch-1"></a> `onMatch?`
 
 </td>
 <td>
@@ -2644,7 +2644,7 @@ undefined;
 <tr>
 <td>
 
-`onResult?`
+<a id="onresult-1"></a> `onResult?`
 
 </td>
 <td>
@@ -2672,7 +2672,7 @@ undefined;
 <tr>
 <td>
 
-`parts?`
+<a id="parts-2"></a> `parts?`
 
 </td>
 <td>
@@ -2701,7 +2701,7 @@ false;
 <tr>
 <td>
 
-`posix?`
+<a id="posix-1"></a> `posix?`
 
 </td>
 <td>
@@ -2729,7 +2729,7 @@ false;
 <tr>
 <td>
 
-`prepend?`
+<a id="prepend-1"></a> `prepend?`
 
 </td>
 <td>
@@ -2757,7 +2757,7 @@ undefined;
 <tr>
 <td>
 
-`regex?`
+<a id="regex-2"></a> `regex?`
 
 </td>
 <td>
@@ -2785,7 +2785,7 @@ false;
 <tr>
 <td>
 
-`strictBrackets?`
+<a id="strictbrackets-1"></a> `strictBrackets?`
 
 </td>
 <td>
@@ -2813,7 +2813,7 @@ undefined;
 <tr>
 <td>
 
-`strictSlashes?`
+<a id="strictslashes-1"></a> `strictSlashes?`
 
 </td>
 <td>
@@ -2841,7 +2841,7 @@ undefined;
 <tr>
 <td>
 
-`tokens?`
+<a id="tokens-1"></a> `tokens?`
 
 </td>
 <td>
@@ -2869,7 +2869,7 @@ false;
 <tr>
 <td>
 
-`unescape?`
+<a id="unescape-1"></a> `unescape?`
 
 </td>
 <td>
@@ -2909,7 +2909,7 @@ mm.match(["abc", "a\\*c"], "a\\*c", { unescape: true });
 <tr>
 <td>
 
-`windows?`
+<a id="windows-1"></a> `windows?`
 
 </td>
 <td>

@@ -17,7 +17,7 @@
 <tr>
 <td>
 
-`Cli`
+<a id="cli"></a> `Cli`
 
 </td>
 <td>
@@ -29,7 +29,7 @@
 <tr>
 <td>
 
-`Generator`
+<a id="generator"></a> `Generator`
 
 </td>
 <td>

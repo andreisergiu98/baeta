@@ -19,7 +19,7 @@
 <tr>
 <td>
 
-`dist`
+<a id="dist"></a> `dist`
 
 </td>
 <td>
@@ -47,7 +47,7 @@ dist: "dist";
 <tr>
 <td>
 
-`src`
+<a id="src"></a> `src`
 
 </td>
 <td>
@@ -75,7 +75,7 @@ src: "src/index.ts";
 <tr>
 <td>
 
-`bundleDeps?`
+<a id="bundledeps"></a> `bundleDeps?`
 
 </td>
 <td>
@@ -99,7 +99,7 @@ If true the bundle will also include all dependencies
 <tr>
 <td>
 
-`bundleWorkspaces?`
+<a id="bundleworkspaces"></a> `bundleWorkspaces?`
 
 </td>
 <td>
@@ -123,7 +123,7 @@ If true the bundle will also include all workspace dependencies.
 <tr>
 <td>
 
-`cjsGlobals?`
+<a id="cjsglobals"></a> `cjsGlobals?`
 
 </td>
 <td>
@@ -151,7 +151,7 @@ Adds CommonJS global variables within esm bundle like:
 <tr>
 <td>
 
-`esbuild?`
+<a id="esbuild"></a> `esbuild?`
 
 </td>
 <td>
@@ -190,7 +190,7 @@ Options to pass to esbuild
 <tr>
 <td>
 
-`onBuildEnd`
+<a id="onbuildend"></a> `onBuildEnd`
 
 </td>
 <td>
@@ -202,7 +202,7 @@ Options to pass to esbuild
 <tr>
 <td>
 
-`onBuildStart`
+<a id="onbuildstart"></a> `onBuildStart`
 
 </td>
 <td>

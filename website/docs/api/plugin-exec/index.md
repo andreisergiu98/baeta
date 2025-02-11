@@ -20,7 +20,7 @@ Configuration options for the exec plugin.
 <tr>
 <td>
 
-`exec`
+<a id="exec"></a> `exec`
 
 </td>
 <td>
@@ -40,7 +40,7 @@ Command to execute - can be either:
 <tr>
 <td>
 
-`actionName?`
+<a id="actionname"></a> `actionName?`
 
 </td>
 <td>
@@ -58,7 +58,7 @@ Shows as "Generating {actionName}..."
 <tr>
 <td>
 
-`name?`
+<a id="name"></a> `name?`
 
 </td>
 <td>
@@ -75,7 +75,7 @@ Plugin name displayed in logs
 <tr>
 <td>
 
-`skip?`
+<a id="skip"></a> `skip?`
 
 </td>
 <td>
@@ -92,7 +92,7 @@ Optional function to determine if execution should be skipped
 <tr>
 <td>
 
-`watch?`
+<a id="watch"></a> `watch?`
 
 </td>
 <td>

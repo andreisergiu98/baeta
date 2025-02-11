@@ -20,7 +20,7 @@ Standard error codes used across the Baeta framework.
 <tr>
 <td>
 
-`AggregateError`
+<a id="aggregateerror"></a> `AggregateError`
 
 </td>
 <td>
@@ -37,7 +37,7 @@ Multiple errors occurred simultaneously
 <tr>
 <td>
 
-`BadUserInput`
+<a id="baduserinput"></a> `BadUserInput`
 
 </td>
 <td>
@@ -54,7 +54,7 @@ Invalid input provided by the user
 <tr>
 <td>
 
-`Forbidden`
+<a id="forbidden"></a> `Forbidden`
 
 </td>
 <td>
@@ -71,7 +71,7 @@ User is authenticated but lacks required permissions
 <tr>
 <td>
 
-`InternalServerError`
+<a id="internalservererror"></a> `InternalServerError`
 
 </td>
 <td>
@@ -88,7 +88,7 @@ Unexpected server-side error
 <tr>
 <td>
 
-`Unauthenticated`
+<a id="unauthenticated"></a> `Unauthenticated`
 
 </td>
 <td>
@@ -204,6 +204,7 @@ Useful for batch operations where multiple errors need to be reported.
 <th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
+<th>Overrides</th>
 <th>Inherited from</th>
 </tr>
 </thead>
@@ -211,7 +212,7 @@ Useful for batch operations where multiple errors need to be reported.
 <tr>
 <td>
 
-`extensions`
+<a id="extensions"></a> `extensions`
 
 </td>
 <td>
@@ -221,7 +222,7 @@ Useful for batch operations where multiple errors need to be reported.
 </td>
 <td>
 
-`GraphQLErrorExtensions`
+`GraphQLErrorExtensions` & `object`
 
 </td>
 <td>
@@ -234,11 +235,16 @@ Extension fields to add to the formatted error.
 `GraphQLError.extensions`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
-`locations`
+<a id="locations"></a> `locations`
 
 </td>
 <td>
@@ -265,6 +271,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.locations`
 
 </td>
@@ -272,7 +283,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`message`
+<a id="message"></a> `message`
 
 </td>
 <td>
@@ -283,6 +294,11 @@ Enumerable, and appears in the result of JSON.stringify().
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -299,7 +315,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`name`
+<a id="name"></a> `name`
 
 </td>
 <td>
@@ -319,6 +335,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.name`
 
 </td>
@@ -326,7 +347,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`nodes`
+<a id="nodes"></a> `nodes`
 
 </td>
 <td>
@@ -346,6 +367,11 @@ An array of GraphQL AST Nodes corresponding to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.nodes`
 
 </td>
@@ -353,7 +379,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 <tr>
 <td>
 
-`originalError`
+<a id="originalerror"></a> `originalError`
 
 </td>
 <td>
@@ -373,6 +399,11 @@ The original error thrown from a field resolver during execution.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.originalError`
 
 </td>
@@ -380,7 +411,7 @@ The original error thrown from a field resolver during execution.
 <tr>
 <td>
 
-`path`
+<a id="path"></a> `path`
 
 </td>
 <td>
@@ -403,6 +434,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.path`
 
 </td>
@@ -410,7 +446,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`positions`
+<a id="positions"></a> `positions`
 
 </td>
 <td>
@@ -431,6 +467,11 @@ which correspond to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.positions`
 
 </td>
@@ -438,7 +479,7 @@ which correspond to this error.
 <tr>
 <td>
 
-`source`
+<a id="source"></a> `source`
 
 </td>
 <td>
@@ -461,6 +502,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.source`
 
 </td>
@@ -468,7 +514,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`cause?`
+<a id="cause"></a> `cause?`
 
 </td>
 <td>
@@ -488,6 +534,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.cause`
 
 </td>
@@ -495,7 +546,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`stack?`
+<a id="stack"></a> `stack?`
 
 </td>
 <td>
@@ -506,6 +557,11 @@ represent nodes after the first node.
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -647,6 +703,7 @@ Thrown when the user provides invalid input data.
 <th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
+<th>Overrides</th>
 <th>Inherited from</th>
 </tr>
 </thead>
@@ -654,7 +711,7 @@ Thrown when the user provides invalid input data.
 <tr>
 <td>
 
-`extensions`
+<a id="extensions-1"></a> `extensions`
 
 </td>
 <td>
@@ -664,7 +721,7 @@ Thrown when the user provides invalid input data.
 </td>
 <td>
 
-`GraphQLErrorExtensions`
+`GraphQLErrorExtensions` & `object`
 
 </td>
 <td>
@@ -677,11 +734,16 @@ Extension fields to add to the formatted error.
 `GraphQLError.extensions`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
-`locations`
+<a id="locations-1"></a> `locations`
 
 </td>
 <td>
@@ -708,6 +770,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.locations`
 
 </td>
@@ -715,7 +782,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`message`
+<a id="message-1"></a> `message`
 
 </td>
 <td>
@@ -726,6 +793,11 @@ Enumerable, and appears in the result of JSON.stringify().
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -742,7 +814,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`name`
+<a id="name-1"></a> `name`
 
 </td>
 <td>
@@ -762,6 +834,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.name`
 
 </td>
@@ -769,7 +846,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`nodes`
+<a id="nodes-1"></a> `nodes`
 
 </td>
 <td>
@@ -789,6 +866,11 @@ An array of GraphQL AST Nodes corresponding to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.nodes`
 
 </td>
@@ -796,7 +878,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 <tr>
 <td>
 
-`originalError`
+<a id="originalerror-1"></a> `originalError`
 
 </td>
 <td>
@@ -816,6 +898,11 @@ The original error thrown from a field resolver during execution.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.originalError`
 
 </td>
@@ -823,7 +910,7 @@ The original error thrown from a field resolver during execution.
 <tr>
 <td>
 
-`path`
+<a id="path-1"></a> `path`
 
 </td>
 <td>
@@ -846,6 +933,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.path`
 
 </td>
@@ -853,7 +945,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`positions`
+<a id="positions-1"></a> `positions`
 
 </td>
 <td>
@@ -874,6 +966,11 @@ which correspond to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.positions`
 
 </td>
@@ -881,7 +978,7 @@ which correspond to this error.
 <tr>
 <td>
 
-`source`
+<a id="source-1"></a> `source`
 
 </td>
 <td>
@@ -904,6 +1001,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.source`
 
 </td>
@@ -911,7 +1013,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`cause?`
+<a id="cause-1"></a> `cause?`
 
 </td>
 <td>
@@ -931,6 +1033,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.cause`
 
 </td>
@@ -938,7 +1045,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`stack?`
+<a id="stack-1"></a> `stack?`
 
 </td>
 <td>
@@ -949,6 +1056,11 @@ represent nodes after the first node.
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -1090,6 +1202,7 @@ Thrown when an authenticated user lacks the required permissions.
 <th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
+<th>Overrides</th>
 <th>Inherited from</th>
 </tr>
 </thead>
@@ -1097,7 +1210,7 @@ Thrown when an authenticated user lacks the required permissions.
 <tr>
 <td>
 
-`extensions`
+<a id="extensions-2"></a> `extensions`
 
 </td>
 <td>
@@ -1107,7 +1220,7 @@ Thrown when an authenticated user lacks the required permissions.
 </td>
 <td>
 
-`GraphQLErrorExtensions`
+`GraphQLErrorExtensions` & `object`
 
 </td>
 <td>
@@ -1120,11 +1233,16 @@ Extension fields to add to the formatted error.
 `GraphQLError.extensions`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
-`locations`
+<a id="locations-2"></a> `locations`
 
 </td>
 <td>
@@ -1151,6 +1269,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.locations`
 
 </td>
@@ -1158,7 +1281,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`message`
+<a id="message-2"></a> `message`
 
 </td>
 <td>
@@ -1169,6 +1292,11 @@ Enumerable, and appears in the result of JSON.stringify().
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -1185,7 +1313,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`name`
+<a id="name-2"></a> `name`
 
 </td>
 <td>
@@ -1205,6 +1333,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.name`
 
 </td>
@@ -1212,7 +1345,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`nodes`
+<a id="nodes-2"></a> `nodes`
 
 </td>
 <td>
@@ -1232,6 +1365,11 @@ An array of GraphQL AST Nodes corresponding to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.nodes`
 
 </td>
@@ -1239,7 +1377,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 <tr>
 <td>
 
-`originalError`
+<a id="originalerror-2"></a> `originalError`
 
 </td>
 <td>
@@ -1259,6 +1397,11 @@ The original error thrown from a field resolver during execution.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.originalError`
 
 </td>
@@ -1266,7 +1409,7 @@ The original error thrown from a field resolver during execution.
 <tr>
 <td>
 
-`path`
+<a id="path-2"></a> `path`
 
 </td>
 <td>
@@ -1289,6 +1432,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.path`
 
 </td>
@@ -1296,7 +1444,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`positions`
+<a id="positions-2"></a> `positions`
 
 </td>
 <td>
@@ -1317,6 +1465,11 @@ which correspond to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.positions`
 
 </td>
@@ -1324,7 +1477,7 @@ which correspond to this error.
 <tr>
 <td>
 
-`source`
+<a id="source-2"></a> `source`
 
 </td>
 <td>
@@ -1347,6 +1500,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.source`
 
 </td>
@@ -1354,7 +1512,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`cause?`
+<a id="cause-2"></a> `cause?`
 
 </td>
 <td>
@@ -1374,6 +1532,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.cause`
 
 </td>
@@ -1381,7 +1544,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`stack?`
+<a id="stack-2"></a> `stack?`
 
 </td>
 <td>
@@ -1392,6 +1555,11 @@ represent nodes after the first node.
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -1552,6 +1720,7 @@ In production, shows a generic error message.
 <th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
+<th>Overrides</th>
 <th>Inherited from</th>
 </tr>
 </thead>
@@ -1559,7 +1728,7 @@ In production, shows a generic error message.
 <tr>
 <td>
 
-`extensions`
+<a id="extensions-3"></a> `extensions`
 
 </td>
 <td>
@@ -1569,7 +1738,7 @@ In production, shows a generic error message.
 </td>
 <td>
 
-`GraphQLErrorExtensions`
+`GraphQLErrorExtensions` & `object`
 
 </td>
 <td>
@@ -1582,11 +1751,16 @@ Extension fields to add to the formatted error.
 `GraphQLError.extensions`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
-`locations`
+<a id="locations-3"></a> `locations`
 
 </td>
 <td>
@@ -1613,6 +1787,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.locations`
 
 </td>
@@ -1620,7 +1799,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`message`
+<a id="message-3"></a> `message`
 
 </td>
 <td>
@@ -1631,6 +1810,11 @@ Enumerable, and appears in the result of JSON.stringify().
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -1647,7 +1831,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`name`
+<a id="name-3"></a> `name`
 
 </td>
 <td>
@@ -1667,6 +1851,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.name`
 
 </td>
@@ -1674,7 +1863,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`nodes`
+<a id="nodes-3"></a> `nodes`
 
 </td>
 <td>
@@ -1694,6 +1883,11 @@ An array of GraphQL AST Nodes corresponding to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.nodes`
 
 </td>
@@ -1701,7 +1895,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 <tr>
 <td>
 
-`originalError`
+<a id="originalerror-3"></a> `originalError`
 
 </td>
 <td>
@@ -1721,6 +1915,11 @@ The original error thrown from a field resolver during execution.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.originalError`
 
 </td>
@@ -1728,7 +1927,7 @@ The original error thrown from a field resolver during execution.
 <tr>
 <td>
 
-`path`
+<a id="path-3"></a> `path`
 
 </td>
 <td>
@@ -1751,6 +1950,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.path`
 
 </td>
@@ -1758,7 +1962,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`positions`
+<a id="positions-3"></a> `positions`
 
 </td>
 <td>
@@ -1779,6 +1983,11 @@ which correspond to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.positions`
 
 </td>
@@ -1786,7 +1995,7 @@ which correspond to this error.
 <tr>
 <td>
 
-`source`
+<a id="source-3"></a> `source`
 
 </td>
 <td>
@@ -1809,6 +2018,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.source`
 
 </td>
@@ -1816,7 +2030,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`cause?`
+<a id="cause-3"></a> `cause?`
 
 </td>
 <td>
@@ -1836,6 +2050,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.cause`
 
 </td>
@@ -1843,7 +2062,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`stack?`
+<a id="stack-3"></a> `stack?`
 
 </td>
 <td>
@@ -1854,6 +2073,11 @@ represent nodes after the first node.
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -1996,6 +2220,7 @@ Results in a 401 HTTP status code.
 <th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
+<th>Overrides</th>
 <th>Inherited from</th>
 </tr>
 </thead>
@@ -2003,7 +2228,7 @@ Results in a 401 HTTP status code.
 <tr>
 <td>
 
-`extensions`
+<a id="extensions-4"></a> `extensions`
 
 </td>
 <td>
@@ -2013,7 +2238,7 @@ Results in a 401 HTTP status code.
 </td>
 <td>
 
-`GraphQLErrorExtensions`
+`GraphQLErrorExtensions` & `object`
 
 </td>
 <td>
@@ -2026,11 +2251,16 @@ Extension fields to add to the formatted error.
 `GraphQLError.extensions`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
-`locations`
+<a id="locations-4"></a> `locations`
 
 </td>
 <td>
@@ -2057,6 +2287,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.locations`
 
 </td>
@@ -2064,7 +2299,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`message`
+<a id="message-4"></a> `message`
 
 </td>
 <td>
@@ -2075,6 +2310,11 @@ Enumerable, and appears in the result of JSON.stringify().
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -2091,7 +2331,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`name`
+<a id="name-4"></a> `name`
 
 </td>
 <td>
@@ -2111,6 +2351,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.name`
 
 </td>
@@ -2118,7 +2363,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`nodes`
+<a id="nodes-4"></a> `nodes`
 
 </td>
 <td>
@@ -2138,6 +2383,11 @@ An array of GraphQL AST Nodes corresponding to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.nodes`
 
 </td>
@@ -2145,7 +2395,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 <tr>
 <td>
 
-`originalError`
+<a id="originalerror-4"></a> `originalError`
 
 </td>
 <td>
@@ -2165,6 +2415,11 @@ The original error thrown from a field resolver during execution.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.originalError`
 
 </td>
@@ -2172,7 +2427,7 @@ The original error thrown from a field resolver during execution.
 <tr>
 <td>
 
-`path`
+<a id="path-4"></a> `path`
 
 </td>
 <td>
@@ -2195,6 +2450,11 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.path`
 
 </td>
@@ -2202,7 +2462,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`positions`
+<a id="positions-4"></a> `positions`
 
 </td>
 <td>
@@ -2223,6 +2483,11 @@ which correspond to this error.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.positions`
 
 </td>
@@ -2230,7 +2495,7 @@ which correspond to this error.
 <tr>
 <td>
 
-`source`
+<a id="source-4"></a> `source`
 
 </td>
 <td>
@@ -2253,6 +2518,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.source`
 
 </td>
@@ -2260,7 +2530,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`cause?`
+<a id="cause-4"></a> `cause?`
 
 </td>
 <td>
@@ -2280,6 +2550,11 @@ represent nodes after the first node.
 </td>
 <td>
 
+&hyphen;
+
+</td>
+<td>
+
 `GraphQLError.cause`
 
 </td>
@@ -2287,7 +2562,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`stack?`
+<a id="stack-4"></a> `stack?`
 
 </td>
 <td>
@@ -2298,6 +2573,11 @@ represent nodes after the first node.
 <td>
 
 `string`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>

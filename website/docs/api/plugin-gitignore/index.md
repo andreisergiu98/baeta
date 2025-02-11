@@ -20,7 +20,7 @@ Configuration options for the gitignore plugin.
 <tr>
 <td>
 
-`ignoreTags?`
+<a id="ignoretags"></a> `ignoreTags?`
 
 </td>
 <td>

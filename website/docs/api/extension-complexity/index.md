@@ -20,7 +20,7 @@ Types of complexity validation errors that can occur during query analysis.
 <tr>
 <td>
 
-`Breadth`
+<a id="breadth"></a> `Breadth`
 
 </td>
 <td>
@@ -37,7 +37,7 @@ Query exceeds maximum allowed breadth (fields per level)
 <tr>
 <td>
 
-`Complexity`
+<a id="complexity"></a> `Complexity`
 
 </td>
 <td>
@@ -54,7 +54,7 @@ Query exceeds total complexity score limit
 <tr>
 <td>
 
-`Depth`
+<a id="depth"></a> `Depth`
 
 </td>
 <td>
@@ -159,7 +159,7 @@ Thrown when a query exceeds the complexity limits.
 <tr>
 <td>
 
-`extensions`
+<a id="extensions"></a> `extensions`
 
 </td>
 <td>
@@ -186,7 +186,7 @@ Extension fields to add to the formatted error.
 <tr>
 <td>
 
-`locations`
+<a id="locations"></a> `locations`
 
 </td>
 <td>
@@ -220,7 +220,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`message`
+<a id="message"></a> `message`
 
 </td>
 <td>
@@ -247,7 +247,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`name`
+<a id="name"></a> `name`
 
 </td>
 <td>
@@ -274,7 +274,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`nodes`
+<a id="nodes"></a> `nodes`
 
 </td>
 <td>
@@ -301,7 +301,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 <tr>
 <td>
 
-`originalError`
+<a id="originalerror"></a> `originalError`
 
 </td>
 <td>
@@ -328,7 +328,7 @@ The original error thrown from a field resolver during execution.
 <tr>
 <td>
 
-`path`
+<a id="path"></a> `path`
 
 </td>
 <td>
@@ -358,7 +358,7 @@ Enumerable, and appears in the result of JSON.stringify().
 <tr>
 <td>
 
-`positions`
+<a id="positions"></a> `positions`
 
 </td>
 <td>
@@ -386,7 +386,7 @@ which correspond to this error.
 <tr>
 <td>
 
-`source`
+<a id="source"></a> `source`
 
 </td>
 <td>
@@ -416,7 +416,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`cause?`
+<a id="cause"></a> `cause?`
 
 </td>
 <td>
@@ -443,7 +443,7 @@ represent nodes after the first node.
 <tr>
 <td>
 
-`stack?`
+<a id="stack"></a> `stack?`
 
 </td>
 <td>
@@ -554,7 +554,7 @@ Configuration options for the complexity extension.
 <tr>
 <td>
 
-`complexityError?`
+<a id="complexityerror-1"></a> `complexityError?`
 
 </td>
 <td>
@@ -576,7 +576,7 @@ Custom error message generator
 <tr>
 <td>
 
-`defaultComplexity?`
+<a id="defaultcomplexity"></a> `defaultComplexity?`
 
 </td>
 <td>
@@ -600,7 +600,7 @@ Base complexity score for fields
 <tr>
 <td>
 
-`defaultListMultiplier?`
+<a id="defaultlistmultiplier"></a> `defaultListMultiplier?`
 
 </td>
 <td>
@@ -624,7 +624,7 @@ Multiplier applied to list fields
 <tr>
 <td>
 
-`limit?`
+<a id="limit"></a> `limit?`
 
 </td>
 <td>
@@ -666,7 +666,7 @@ Configuration for query complexity limits.
 <tr>
 <td>
 
-`breadth?`
+<a id="breadth-1"></a> `breadth?`
 
 </td>
 <td>
@@ -683,7 +683,7 @@ Maximum allowed fields per level
 <tr>
 <td>
 
-`complexity?`
+<a id="complexity-1"></a> `complexity?`
 
 </td>
 <td>
@@ -700,7 +700,7 @@ Maximum allowed total complexity score
 <tr>
 <td>
 
-`depth?`
+<a id="depth-1"></a> `depth?`
 
 </td>
 <td>
@@ -738,7 +738,7 @@ Configuration for field complexity calculation.
 <tr>
 <td>
 
-`complexity`?
+<a id="complexity-2"></a> `complexity`?
 
 </td>
 <td>
@@ -750,7 +750,7 @@ Configuration for field complexity calculation.
 <tr>
 <td>
 
-`multiplier`?
+<a id="multiplier"></a> `multiplier`?
 
 </td>
 <td>
@@ -988,7 +988,7 @@ Arguments passed to field settings functions.
 <tr>
 <td>
 
-`args`
+<a id="args"></a> `args`
 
 </td>
 <td>
@@ -1005,7 +1005,7 @@ Arguments passed to the GraphQL field
 <tr>
 <td>
 
-`ctx`
+<a id="ctx"></a> `ctx`
 
 </td>
 <td>

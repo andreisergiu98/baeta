@@ -17,7 +17,7 @@
 <tr>
 <td>
 
-`initialConfig`
+<a id="initialconfig"></a> `initialConfig`
 
 </td>
 <td>
@@ -29,7 +29,7 @@
 <tr>
 <td>
 
-`watchConfig?`
+<a id="watchconfig"></a> `watchConfig?`
 
 </td>
 <td>
@@ -58,7 +58,7 @@
 <tr>
 <td>
 
-`errors?`
+<a id="errors"></a> `errors?`
 
 </td>
 <td>
@@ -70,7 +70,7 @@
 <tr>
 <td>
 
-`warnings?`
+<a id="warnings"></a> `warnings?`
 
 </td>
 <td>
@@ -99,7 +99,7 @@
 <tr>
 <td>
 
-`color?`
+<a id="color"></a> `color?`
 
 </td>
 <td>
@@ -111,7 +111,7 @@
 <tr>
 <td>
 
-`loading?`
+<a id="loading"></a> `loading?`
 
 </td>
 <td>
@@ -123,7 +123,7 @@
 <tr>
 <td>
 
-`time?`
+<a id="time"></a> `time?`
 
 </td>
 <td>
@@ -135,7 +135,7 @@
 <tr>
 <td>
 
-`timePrefix?`
+<a id="timeprefix"></a> `timePrefix?`
 
 </td>
 <td>
@@ -147,7 +147,7 @@
 <tr>
 <td>
 
-`title?`
+<a id="title"></a> `title?`
 
 </td>
 <td>
@@ -176,7 +176,7 @@
 <tr>
 <td>
 
-`config`
+<a id="config"></a> `config`
 
 </td>
 <td>
@@ -188,7 +188,7 @@
 <tr>
 <td>
 
-`location`
+<a id="location"></a> `location`
 
 </td>
 <td>
@@ -200,7 +200,7 @@
 <tr>
 <td>
 
-`relativeLocation`
+<a id="relativelocation"></a> `relativeLocation`
 
 </td>
 <td>
@@ -229,7 +229,7 @@
 <tr>
 <td>
 
-`prefix?`
+<a id="prefix"></a> `prefix?`
 
 </td>
 <td>
@@ -241,7 +241,7 @@
 <tr>
 <td>
 
-`value?`
+<a id="value"></a> `value?`
 
 </td>
 <td>
@@ -272,12 +272,12 @@
 <tr>
 <td>
 
-`update`
+<a id="update"></a> `update`
 
 </td>
 <td>
 
-[[`LoadedBaetaConfig`](sdk.md#loadedbaetaconfig)]
+\[[`LoadedBaetaConfig`](sdk.md#loadedbaetaconfig)\]
 
 </td>
 </tr>
@@ -303,7 +303,7 @@
 <tr>
 <td>
 
-`id`
+<a id="id"></a> `id`
 
 </td>
 <td>
@@ -315,7 +315,7 @@
 <tr>
 <td>
 
-`text`
+<a id="text"></a> `text`
 
 </td>
 <td>

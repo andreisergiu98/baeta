@@ -398,7 +398,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`deleteMany`
+<a id="deletemany"></a> `deleteMany`
 
 </td>
 <td>
@@ -415,7 +415,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`deleteQueriesByRef`
+<a id="deletequeriesbyref"></a> `deleteQueriesByRef`
 
 </td>
 <td>
@@ -432,7 +432,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`getPartialMany`
+<a id="getpartialmany"></a> `getPartialMany`
 
 </td>
 <td>
@@ -449,7 +449,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`hash`
+<a id="hash"></a> `hash`
 
 </td>
 <td>
@@ -466,7 +466,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`loader`
+<a id="loader"></a> `loader`
 
 </td>
 <td>
@@ -483,7 +483,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`loadQueryMetadata`
+<a id="loadquerymetadata"></a> `loadQueryMetadata`
 
 </td>
 <td>
@@ -500,7 +500,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`options`
+<a id="options"></a> `options`
 
 </td>
 <td>
@@ -517,7 +517,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`saveMany`
+<a id="savemany"></a> `saveMany`
 
 </td>
 <td>
@@ -534,7 +534,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`saveQueryMetadata`
+<a id="savequerymetadata"></a> `saveQueryMetadata`
 
 </td>
 <td>
@@ -551,7 +551,7 @@ Unique hash for the type
 <tr>
 <td>
 
-`type`
+<a id="type"></a> `type`
 
 </td>
 <td>
@@ -760,7 +760,7 @@ Unique hash for the type
 </td>
 <td>
 
-`Root` _extends_ [`RefCompatibleRoot`](index.md#refcompatibleroot) ? [[`CacheMiddlewareOptions`](index.md#cachemiddlewareoptionsroot)\<`Root`\<`Root`\>\>] : [[`RequiredCacheMiddlewareOptions`](index.md#requiredcachemiddlewareoptionsroot)\<`Root`\>]
+`Root` _extends_ [`RefCompatibleRoot`](index.md#refcompatibleroot) ? \[[`CacheMiddlewareOptions`](index.md#cachemiddlewareoptionsroot)\<`Root`\<`Root`\>\>\] : \[[`RequiredCacheMiddlewareOptions`](index.md#requiredcachemiddlewareoptionsroot)\<`Root`\>\]
 
 </td>
 </tr>
@@ -1310,6 +1310,8 @@ Unique hash for the type
 
 ##### getMany()
 
+###### Call Signature
+
 > **getMany**(`refs`): `Promise`\<`null` \| `Item`[]\>
 
 ###### Parameters
@@ -1340,6 +1342,70 @@ Unique hash for the type
 ###### Returns
 
 `Promise`\<`null` \| `Item`[]\>
+
+###### Call Signature
+
+> **getMany**\<`T`\>(`refs`, `fallback`): `Promise`\<`Item`[]\>
+
+###### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`T` _extends_ [`ItemRef`](index.md#itemref)
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`refs`
+
+</td>
+<td>
+
+`T`[]
+
+</td>
+</tr>
+<tr>
+<td>
+
+`fallback`
+
+</td>
+<td>
+
+(`refs`) => `Promise`\<`Item`[]\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
+
+`Promise`\<`Item`[]\>
 
 ##### getQueryResult()
 
@@ -1803,7 +1869,7 @@ Options for cache middleware
 <tr>
 <td>
 
-`getRootRef?`
+<a id="getrootref"></a> `getRootRef?`
 
 </td>
 <td>
@@ -1845,7 +1911,7 @@ Default options for cache stores
 <tr>
 <td>
 
-`ttl?`
+<a id="ttl"></a> `ttl?`
 
 </td>
 <td>
@@ -1913,7 +1979,7 @@ Required options for cache middleware
 <tr>
 <td>
 
-`getRootRef`
+<a id="getrootref-1"></a> `getRootRef`
 
 </td>
 <td>
@@ -1981,7 +2047,7 @@ Required configuration options for cache stores
 <tr>
 <td>
 
-`getRef`
+<a id="getref-1"></a> `getRef`
 
 </td>
 <td>
@@ -2013,7 +2079,7 @@ Function to extract object reference id
 <tr>
 <td>
 
-`revision?`
+<a id="revision"></a> `revision?`
 
 </td>
 <td>
@@ -2045,7 +2111,7 @@ Manual cache version for invalidation
 <tr>
 <td>
 
-`ttl?`
+<a id="ttl-1"></a> `ttl?`
 
 </td>
 <td>
@@ -2128,7 +2194,7 @@ Configuration options for cache stores
 <tr>
 <td>
 
-`getRef?`
+<a id="getref-2"></a> `getRef?`
 
 </td>
 <td>
@@ -2155,7 +2221,7 @@ Function to extract object reference id
 <tr>
 <td>
 
-`revision?`
+<a id="revision-1"></a> `revision?`
 
 </td>
 <td>
@@ -2182,7 +2248,7 @@ Manual cache version for invalidation
 <tr>
 <td>
 
-`ttl?`
+<a id="ttl-2"></a> `ttl?`
 
 </td>
 <td>
@@ -2276,7 +2342,7 @@ Optional query arguments
 <tr>
 <td>
 
-`args`?
+<a id="args"></a> `args`?
 
 </td>
 <td>
@@ -2288,7 +2354,7 @@ Optional query arguments
 <tr>
 <td>
 
-`parentRef`?
+<a id="parentref"></a> `parentRef`?
 
 </td>
 <td>

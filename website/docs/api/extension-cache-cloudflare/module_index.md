@@ -69,7 +69,7 @@
 <tr>
 <td>
 
-`env`
+<a id="env"></a> `env`
 
 </td>
 <td>
@@ -86,7 +86,7 @@
 <tr>
 <td>
 
-`state`
+<a id="state"></a> `state`
 
 </td>
 <td>
@@ -172,7 +172,7 @@
 </td>
 <td>
 
-`Request`\<`unknown`, `CfProperties`\<`unknown`\>\>
+`Request`
 
 </td>
 </tr>
@@ -307,7 +307,7 @@
 </td>
 <td>
 
-[`string`, `string`][]
+\[`string`, `string`\][]
 
 </td>
 </tr>
@@ -391,7 +391,7 @@
 </td>
 <td>
 
-`DurableObjectNamespace`\<`undefined`\>
+`DurableObjectNamespace`
 
 </td>
 </tr>
@@ -416,7 +416,7 @@
 <tr>
 <td>
 
-`durableObject`
+<a id="durableobject"></a> `durableObject`
 
 </td>
 <td>
@@ -426,7 +426,7 @@
 </td>
 <td>
 
-`DurableObjectNamespace`\<`undefined`\>
+`DurableObjectNamespace`
 
 </td>
 </tr>
@@ -646,7 +646,7 @@
 </td>
 <td>
 
-[`string`, `string`][]
+\[`string`, `string`\][]
 
 </td>
 </tr>
@@ -777,7 +777,7 @@
 </td>
 <td>
 
-`DurableObjectNamespace`\<`undefined`\>
+`DurableObjectNamespace`
 
 </td>
 </tr>
@@ -843,7 +843,7 @@
 <tr>
 <td>
 
-`hash`
+<a id="hash"></a> `hash`
 
 </td>
 <td>
@@ -865,7 +865,7 @@
 <tr>
 <td>
 
-`loader`
+<a id="loader"></a> `loader`
 
 </td>
 <td>
@@ -887,7 +887,7 @@
 <tr>
 <td>
 
-`options`
+<a id="options"></a> `options`
 
 </td>
 <td>
@@ -909,7 +909,7 @@
 <tr>
 <td>
 
-`type`
+<a id="type"></a> `type`
 
 </td>
 <td>
@@ -1135,7 +1135,7 @@
 </td>
 <td>
 
-`Root` _extends_ `RefCompatibleRoot` ? [`CacheMiddlewareOptions`\<`Root`\<`Root`\>\>] : [`RequiredCacheMiddlewareOptions`\<`Root`\>]
+`Root` _extends_ `RefCompatibleRoot` ? \[`CacheMiddlewareOptions`\<`Root`\<`Root`\>\>\] : \[`RequiredCacheMiddlewareOptions`\<`Root`\>\]
 
 </td>
 </tr>
@@ -1858,6 +1858,8 @@
 
 ##### getMany()
 
+###### Call Signature
+
 > **getMany**(`refs`): `Promise`\<`null` \| `Item`[]\>
 
 ###### Parameters
@@ -1888,6 +1890,74 @@
 ###### Returns
 
 `Promise`\<`null` \| `Item`[]\>
+
+###### Inherited from
+
+`StoreAdapter.getMany`
+
+###### Call Signature
+
+> **getMany**\<`T`\>(`refs`, `fallback`): `Promise`\<`Item`[]\>
+
+###### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`T` _extends_ `ItemRef`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`refs`
+
+</td>
+<td>
+
+`T`[]
+
+</td>
+</tr>
+<tr>
+<td>
+
+`fallback`
+
+</td>
+<td>
+
+(`refs`) => `Promise`\<`Item`[]\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
+
+`Promise`\<`Item`[]\>
 
 ###### Inherited from
 

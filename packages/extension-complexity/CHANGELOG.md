@@ -1,5 +1,12 @@
 # @baeta/extension-complexity
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`e4e1b97`](https://github.com/andreisergiu98/baeta/commit/e4e1b97dee7bb8e1170b978225ccefe4b36c0d3a)]:
+  - @baeta/core@1.0.9
+
 ## 0.0.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @baeta/errors
 
+## 1.0.9
+
+### Patch Changes
+
+- [#194](https://github.com/andreisergiu98/baeta/pull/194) [`b5b53d3`](https://github.com/andreisergiu98/baeta/commit/b5b53d35d950b2b18014b02d472c401ed4721334) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Add type for error code
+
 ## 1.0.8
 
 ### Patch Changes

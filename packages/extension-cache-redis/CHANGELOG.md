@@ -1,5 +1,14 @@
 # @baeta/extension-cache-redis
 
+## 0.0.7
+
+### Patch Changes
+
+- [`e4e1b97`](https://github.com/andreisergiu98/baeta/commit/e4e1b97dee7bb8e1170b978225ccefe4b36c0d3a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Updated dependencies
+
+- Updated dependencies [[`c2e5623`](https://github.com/andreisergiu98/baeta/commit/c2e5623819c1b2b6069ab0663b5c5ad4e09e81b5)]:
+  - @baeta/extension-cache@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes

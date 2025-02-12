@@ -1,6 +1,6 @@
 import { ForbiddenError } from '@baeta/errors';
 import { sinon } from '@baeta/testing';
-import test from 'ava';
+import test from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
 import { createResolverPath } from '../utils/resolver.ts';
 import {

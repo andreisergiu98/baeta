@@ -1,5 +1,5 @@
 import { ForbiddenError } from '@baeta/errors';
-import test from 'ava';
+import test from '@baeta/testing';
 import { createScopeResolver, createScopeResolverMap, resolveBoolean } from './scope-resolver.ts';
 import { loadAuthStore } from './store-loader.ts';
 

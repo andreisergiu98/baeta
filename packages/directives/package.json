@@ -51,10 +51,10 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
+    "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@graphql-tools/schema": "^10.0.16",
     "@types/is-url": "^1.2.32",
-    "ava": "^6.2.0",
     "graphql": "^16.10.0",
     "graphql-tag": "^2.12.6",
     "typescript": "^5.7.3"

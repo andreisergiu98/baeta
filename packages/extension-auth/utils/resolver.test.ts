@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { createResolverPath, isOperationType } from './resolver.ts';
 
 test('createResolverPath should handle various path scenarios', (t) => {

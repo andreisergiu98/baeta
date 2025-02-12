@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { getEnv, isDevelopmentMode } from './index.ts';
 
 const createNodeGlobal = (envVars: Record<string, string | undefined> = {}) => ({

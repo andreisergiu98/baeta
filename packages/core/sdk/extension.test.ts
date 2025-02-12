@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { mergeExtensions } from './extension.ts';
 
 test('mergeExtensions merges items correctly', (t) => {

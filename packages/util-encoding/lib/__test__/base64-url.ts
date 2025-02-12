@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 
 type TestFn = (value: string) => string;
 

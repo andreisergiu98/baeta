@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import type { GraphQLSchema } from 'graphql';
 import gql from 'graphql-tag';
 import { makeQueryResolverMacro } from '../../__tests__/macros.ts';

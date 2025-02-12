@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { join, normalize, posixPath, toUnix, winPath } from './index.ts';
 
 test('posixPath: should convert Windows path to POSIX path', (t) => {

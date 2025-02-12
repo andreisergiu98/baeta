@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { createGrantCache } from './grant-cache.ts';
 
 test('setGrants: should ignore empty paths', (t) => {

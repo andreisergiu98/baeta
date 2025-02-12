@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
 import { createMiddlewareAdapter } from './middleware.ts';
 import { createResolverAdapter } from './resolver.ts';

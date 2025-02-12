@@ -1,7 +1,7 @@
 import { AggregateGraphQLError, BaetaErrorCode, UnauthenticatedError } from '@baeta/errors';
 import { sinon } from '@baeta/testing';
+import test from '@baeta/testing';
 import { log } from '@baeta/util-log';
-import test from 'ava';
 import { GraphQLError } from 'graphql';
 import { aggregateErrorResolver, defaultErrorResolver, resolveError } from './error.ts';
 

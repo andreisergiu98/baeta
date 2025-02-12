@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { createScopeCache } from './scope-cache.ts';
 
 declare function setTimeout(arg0: () => void, arg1: number): number;

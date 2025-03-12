@@ -7,15 +7,16 @@ export declare type SerializerClass = {
 	new (...args: SerializerAny[]): SerializerAny;
 };
 
-export declare type SerializerValue = SerializerPrimitive | SerializerArray | SerializerObject;
-
-export declare type SerializerPrimitive = string | number | boolean | undefined | null;
-
-export interface SerializerArray extends Array<SerializerValue> {}
-
-export interface SerializerObject {
-	[key: string]: SerializerValue;
-}
+export declare type SerializerValue =
+	| string
+	| number
+	| boolean
+	| undefined
+	| null
+	| Array<SerializerValue>
+	| {
+			[key: string]: SerializerValue;
+	  };
 
 export type CustomTransformer<Input, Output extends SerializerValue> = {
 	kind: 'custom';

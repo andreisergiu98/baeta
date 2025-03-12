@@ -17,7 +17,7 @@ import {
 } from './ref.ts';
 import type { Serializer } from './serializer.ts';
 import type { StoreOptions } from './store-options.ts';
-import { alignItemsWithRefs, fillNullItemsWithFallback } from './utils.ts';
+import { alignItemsWithRefs, arrayIsComplete, fillNullItemsWithFallback } from './utils.ts';
 
 export type CacheQueryMatching<Args> = {
 	parentRef?: ParentRef;
@@ -79,10 +79,9 @@ export abstract class StoreAdapter<Item> {
 	getMany<T extends ItemRef>(refs: T[], fallback: (refs: T[]) => Promise<Item[]>): Promise<Item[]>;
 	async getMany<T extends ItemRef>(refs: T[], fallback?: (refs: T[]) => Promise<Array<Item>>) {
 		const results = await this.getPartialMany(refs);
-		const isPartial = results?.some((result) => result == null) ?? true;
 
-		if (!isPartial) {
-			return results as Item[];
+		if (arrayIsComplete(results)) {
+			return results;
 		}
 
 		if (!fallback) {

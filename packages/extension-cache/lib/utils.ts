@@ -1,28 +1,51 @@
 import type { ItemRef } from './ref.ts';
 
-export function refillNullItems<T>(nullableRefs: Array<ItemRef | null>, items: T[]) {
-	if (nullableRefs.length === items.length) {
+export function arrayIsComplete<T>(items: Array<T | null> | null): items is T[] {
+	if (items == null) {
+		return false;
+	}
+	return items.every((item) => item != null);
+}
+
+export function alignItemsWithRefs<T>(partialRefs: Array<ItemRef | null>, items: T[]) {
+	if (partialRefs.length === items.length) {
 		return items;
 	}
 
-	const filled: Array<T | null> = [];
+	const aligned: Array<T | null> = [];
 
-	for (let i = 0, j = 0; i < nullableRefs.length; i++) {
-		if (nullableRefs[i] == null) {
-			filled.push(null);
+	let itemIndex = 0;
+
+	for (const ref of partialRefs) {
+		if (ref == null) {
+			aligned.push(null);
 		} else {
-			filled.push(items[j]);
-			j++;
+			aligned.push(items[itemIndex++]);
 		}
 	}
 
-	return filled;
+	return aligned;
 }
 
-export function validateRefType(ref: unknown): asserts ref is string | number | bigint {
-	if (typeof ref !== 'string' && typeof ref !== 'number' && typeof ref !== 'bigint') {
-		throw new Error(
-			'Reference must be string, number or bigint. Define getRef function in cache options',
-		);
+export function fillNullItemsWithFallback<T>(items: Array<T | null>, fallbacks: T[]) {
+	const completeItems: T[] = [];
+
+	let fallbackIndex = 0;
+
+	for (const item of items) {
+		if (item != null) {
+			completeItems.push(item);
+			continue;
+		}
+
+		if (fallbackIndex < fallbacks.length) {
+			completeItems.push(fallbacks[fallbackIndex++]);
+		}
 	}
+
+	return {
+		items: completeItems,
+		missing: items.length - completeItems.length,
+		extra: fallbacks.length - fallbackIndex,
+	};
 }

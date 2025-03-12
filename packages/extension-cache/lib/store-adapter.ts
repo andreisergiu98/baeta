@@ -17,7 +17,7 @@ import {
 } from './ref.ts';
 import type { Serializer } from './serializer.ts';
 import type { StoreOptions } from './store-options.ts';
-import { refillNullItems } from './utils.ts';
+import { alignItemsWithRefs, fillNullItemsWithFallback } from './utils.ts';
 
 export type CacheQueryMatching<Args> = {
 	parentRef?: ParentRef;
@@ -76,25 +76,17 @@ export abstract class StoreAdapter<Item> {
 	};
 
 	getMany(refs: ItemRef[]): Promise<Item[] | null>;
-	getMany<T extends ItemRef>(
-		refs: T[],
-		fallback: (refs: T[]) => Promise<Array<Item>>,
-	): Promise<Item[]>;
+	getMany<T extends ItemRef>(refs: T[], fallback: (refs: T[]) => Promise<Item[]>): Promise<Item[]>;
 	async getMany<T extends ItemRef>(refs: T[], fallback?: (refs: T[]) => Promise<Array<Item>>) {
 		const results = await this.getPartialMany(refs);
+		const isPartial = results?.some((result) => result == null) ?? true;
+
+		if (!isPartial) {
+			return results as Item[];
+		}
 
 		if (!fallback) {
-			if (results == null) {
-				return null;
-			}
-
-			const isPartial = results.some((result) => result == null);
-
-			if (isPartial) {
-				return null;
-			}
-
-			return results as Item[];
+			return null;
 		}
 
 		const missingRefs =
@@ -106,29 +98,21 @@ export abstract class StoreAdapter<Item> {
 			log.error(err, 'Failed to save missing items');
 		});
 
-		if (missingItems.length < missingRefs.length) {
+		const { items, missing, extra } = fillNullItemsWithFallback(results ?? [], missingItems);
+
+		if (missing > 0) {
 			throw new Error(
-				'Item count returned by the fallback method is less than missing refs count.',
+				`Item count returned by the fallback method is less than missing refs count by ${missing}`,
 			);
 		}
 
-		if (missingItems.length > missingRefs.length) {
+		if (extra > 0) {
 			log.warn(
-				'Item count returned by the fallback method is greater than missing refs count. Extra items will be ignored.',
+				`Item count returned by the fallback method is greater than missing refs count by ${extra}. Extra items will be ignored.`,
 			);
 		}
 
-		if (results == null) {
-			return missingItems;
-		}
-
-		for (let i = 0, j = 0; i < results.length; i++) {
-			if (results[i] == null) {
-				results[i] = missingItems[j++];
-			}
-		}
-
-		return results as Item[];
+		return items;
 	}
 
 	save = async (item: Item) => {
@@ -172,8 +156,8 @@ export abstract class StoreAdapter<Item> {
 			return null;
 		}
 
-		const ordered = refillNullItems(nullableRefs, items);
-		const result = isList ? ordered : ordered[0];
+		const aligned = alignItemsWithRefs(nullableRefs, items);
+		const result = isList ? aligned : aligned[0];
 
 		return { query: result as Result };
 	};

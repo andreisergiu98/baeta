@@ -41,12 +41,14 @@
     "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "test": "ava"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
+    "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^22.13.10",
     "graphql": "^16.10.0",
@@ -76,7 +78,11 @@
     "nodeArguments": [
       "--no-warnings",
       "--experimental-transform-types"
-    ]
+    ],
+    "environmentVariables": {
+      "REDIS_HOST": "localhost",
+      "REDIS_PORT": "65535"
+    }
   },
   "typedocOptions": {
     "entryPoints": [

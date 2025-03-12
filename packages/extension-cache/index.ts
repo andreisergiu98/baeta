@@ -29,6 +29,8 @@ export type {
 	SerializerValue,
 	SymbolTransformer,
 } from './lib/serializer.ts';
+export { createSerializer } from './lib/serializer.ts';
+
 /**
  * Creates a cache extension
  *

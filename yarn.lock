@@ -2409,6 +2409,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.13.10"
     graphql: "npm:^16.10.0"

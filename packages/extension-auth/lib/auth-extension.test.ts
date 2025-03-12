@@ -1,6 +1,6 @@
 import type { ModuleBuilder, ResolverMapper } from '@baeta/core/sdk';
 import { sinon } from '@baeta/testing';
-import test from 'ava';
+import test from '@baeta/testing';
 import { AuthExtension } from './auth-extension.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
 import type { ScopesShape } from './scope-rules.ts';

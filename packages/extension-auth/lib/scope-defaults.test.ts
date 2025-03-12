@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { selectDefaultScopes } from './scope-defaults.ts';
 
 test('returns undefined if no defaultScopes provided', (t) => {

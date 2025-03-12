@@ -18,14 +18,7 @@ function createBase64Encoder() {
 		};
 	}
 
-	return {
-		encodeBase64: (_value: string): string => {
-			throw new Error('No base64 encoder available.');
-		},
-		decodeBase64: (_value: string): string => {
-			throw new Error('No base64 decoder available.');
-		},
-	};
+	throw new Error('No base64 encoder available.');
 }
 
 export const { encodeBase64, decodeBase64 } = createBase64Encoder();

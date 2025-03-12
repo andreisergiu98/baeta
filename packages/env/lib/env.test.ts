@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { createEnvParser } from './env.ts';
 
 // Helper to create mock env getter

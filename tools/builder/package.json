@@ -26,20 +26,22 @@
   },
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
     "./tsup": {
       "types": "./tsup.d.ts",
       "import": "./tsup.js"
     }
   },
   "bin": {
-    "madge": "./bin/madge.js",
-    "prep": "./bin/prep.cjs",
+    "prep": "./bin/prep.js",
     "tsup": "./bin/tsup.js"
   },
   "dependencies": {
+    "@baeta/tools-utils": "workspace:^",
     "esbuild": "^0.25.0",
-    "esbuild-register": "^3.6.0",
-    "madge": "^8.0.0",
     "tsup": "^8.3.6"
   },
   "devDependencies": {

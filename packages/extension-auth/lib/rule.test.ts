@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { isLogicRule, logicRules } from './rule.ts';
 
 test('isLogicRule returns true for valid logic rules', (t) => {

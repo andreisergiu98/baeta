@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { createObjectLens } from './object.ts';
 
 test('get function returns the value at the specified path', (t) => {

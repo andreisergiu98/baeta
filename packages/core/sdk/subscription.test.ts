@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
 import type { EmptyObject } from '../types/object.ts';
 import { createSubscriptionAdapter } from './subscription.ts';

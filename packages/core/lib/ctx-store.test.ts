@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { type ContextStoreValue, createContextStore } from './ctx-store.ts';
 
 test('store should wait for get before loading to ctx when lazy', (t) => {

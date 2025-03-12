@@ -1,5 +1,5 @@
 import { ForbiddenError } from '@baeta/errors';
-import test from 'ava';
+import test from '@baeta/testing';
 import type { LogicRule } from './rule.ts';
 import type { ScopeLoaderMap } from './scope-resolver.ts';
 import {

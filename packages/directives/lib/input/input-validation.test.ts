@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { gql } from 'graphql-tag';
 import { makeInvalidInputMacro, makeValidInputMacro } from '../../__tests__/macros.ts';
 import { inputConstraints } from './input-validation.ts';

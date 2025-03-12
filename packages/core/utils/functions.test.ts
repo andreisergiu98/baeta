@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import { extendFunction, nameFunction } from './functions.ts';
 
 test('extendFunction extends the function with the provided properties', (t) => {

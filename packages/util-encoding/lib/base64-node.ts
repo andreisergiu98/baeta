@@ -25,7 +25,7 @@ export function nodeDecodeBase64(global: NodeGlobal, value: string): string {
 }
 
 export function nodeEncodeBase64Url(global: NodeGlobal, value: string): string {
-	return global.Buffer.from(value).toString('base64url');
+	return global.Buffer.from(value, 'utf-8').toString('base64url');
 }
 
 export function nodeDecodeBase64Url(global: NodeGlobal, value: string): string {

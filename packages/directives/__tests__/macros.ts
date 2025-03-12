@@ -1,7 +1,7 @@
 import { addValidationToSchema } from '@baeta/core/sdk';
 import { BaetaErrorCode } from '@baeta/errors';
+import test from '@baeta/testing';
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
-import test from 'ava';
 import { type DocumentNode, type GraphQLError, type GraphQLSchema, execute } from 'graphql';
 import { gql } from 'graphql-tag';
 

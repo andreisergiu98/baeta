@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
 import { forgeNativeResolver, forgeResolverArgs, getResolverFromMap } from './__test__/utils.ts';
 import { chainMiddlewares, composeResolvers } from './compose.ts';

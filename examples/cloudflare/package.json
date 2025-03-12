@@ -32,17 +32,17 @@
   "dependencies": {
     "@baeta/core": "workspace:^",
     "graphql": "^16.10.0",
-    "graphql-yoga": "^5.11.0",
-    "hono": "^4.7.0"
+    "graphql-yoga": "^5.13.1",
+    "hono": "^4.7.4"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/compiler": "workspace:^",
     "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250204.0",
-    "miniflare": "^3.20250129.0",
-    "typescript": "^5.7.3",
-    "wrangler": "^3.107.3"
+    "@cloudflare/workers-types": "^4.20250311.0",
+    "miniflare": "^3.20250310.0",
+    "typescript": "^5.8.2",
+    "wrangler": "^3.114.1"
   }
 }

@@ -41,13 +41,13 @@
   },
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
-    "esbuild": "^0.25.0",
-    "tsup": "^8.3.6"
+    "esbuild": "^0.25.1",
+    "tsup": "^8.4.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/color-hash": "^2.0.0",
-    "@types/node": "^22.13.1",
-    "typescript": "^5.7.3"
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
   }
 }

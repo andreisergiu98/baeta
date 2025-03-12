@@ -52,9 +52,9 @@
     "@baeta/core": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250204.0",
+    "@cloudflare/workers-types": "^4.20250311.0",
     "graphql": "^16.10.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",

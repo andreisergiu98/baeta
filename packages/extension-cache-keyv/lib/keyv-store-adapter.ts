@@ -1,6 +1,7 @@
 import {
 	type ItemRef,
 	type ParentRef,
+	type Serializer,
 	StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
@@ -9,11 +10,12 @@ import type Keyv from 'keyv';
 export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 	constructor(
 		private client: Keyv,
+		serializer: Serializer,
 		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
-		super(options, type, hash);
+		super(serializer, options, type, hash);
 
 		if (this.client.iterator == null) {
 			throw new Error('Keyv client does not support iterator');
@@ -24,13 +26,21 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (refs.length === 0) {
 			return null;
 		}
+
 		const keys = refs.map((ref) => this.createKey(ref));
-		return this.client.get(keys).then((res) => res ?? null);
+		const result = await this.client.get(keys);
+
+		return result.map((item) => {
+			if (item == null) {
+				return null;
+			}
+			return this.parseItem(item);
+		});
 	};
 
 	save = async (item: Item) => {
 		const key = this.createKeyByItem(item);
-		await this.client.set(key, item, this.getTtl());
+		await this.client.set(key, this.stringifyItem(item), this.getTtl());
 	};
 
 	saveMany = async (items: Item[]) => {

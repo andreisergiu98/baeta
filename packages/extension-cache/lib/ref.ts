@@ -39,3 +39,24 @@ export class CacheRef<Result, Root, Args> {
 		return this.hash;
 	}
 }
+
+export function getRefFallback(root: unknown) {
+	if (root == null) {
+		return undefined;
+	}
+
+	if (typeof root === 'object' && 'id' in root) {
+		validateRefType(root.id);
+		return root.id.toString();
+	}
+
+	return undefined;
+}
+
+export function validateRefType(ref: unknown): asserts ref is string | number | bigint {
+	if (typeof ref !== 'string' && typeof ref !== 'number' && typeof ref !== 'bigint') {
+		throw new Error(
+			'Reference must be string, number or bigint. Define getRef function in cache options',
+		);
+	}
+}

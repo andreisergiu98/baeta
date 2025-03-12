@@ -1,6 +1,7 @@
 import {
 	type ItemRef,
 	type ParentRef,
+	type Serializer,
 	StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
@@ -9,11 +10,12 @@ import type { Redis } from '@upstash/redis';
 export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 	constructor(
 		private client: Redis,
+		serializer: Serializer,
 		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
-		super(options, type, hash);
+		super(serializer, options, type, hash);
 	}
 
 	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
@@ -22,7 +24,7 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 		const keys = refs.map((ref) => this.createKey(ref));
 		const results = await this.client.mget<string[]>(keys);
-		return results.map((result) => (result == null ? null : (JSON.parse(result) as Item)));
+		return results.map((result) => (result == null ? null : this.parseItem(result)));
 	};
 
 	saveMany = async (items: Item[]) => {
@@ -34,7 +36,7 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 
 		for (const item of items) {
 			const key = this.createKeyByItem(item);
-			pipeline.set(key, JSON.stringify(item));
+			pipeline.set(key, this.stringifyItem(item));
 
 			if (this.options?.ttl) {
 				pipeline.expire(key, this.options.ttl);

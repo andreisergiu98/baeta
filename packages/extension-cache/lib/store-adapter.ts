@@ -1,15 +1,23 @@
 import type { Middleware } from '@baeta/core';
-import { encodeBase64Url } from '@baeta/util-encoding';
 import { log } from '@baeta/util-log';
 import DataLoader from 'dataloader';
-import { flatten } from 'flat';
 import type { CacheArgs } from './cache-args.ts';
+import { encodeArgs, encodeValue } from './encoder.ts';
 import type {
 	CacheMiddlewareOptions,
 	RequiredCacheMiddlewareOptions,
 } from './middleware-options.ts';
-import type { CacheRef, ItemRef, ParentRef, RefCompatibleRoot } from './ref.ts';
+import {
+	type CacheRef,
+	type ItemRef,
+	type ParentRef,
+	type RefCompatibleRoot,
+	getRefFallback,
+	validateRefType,
+} from './ref.ts';
+import type { Serializer } from './serializer.ts';
 import type { StoreOptions } from './store-options.ts';
+import { refillNullItems } from './utils.ts';
 
 export type CacheQueryMatching<Args> = {
 	parentRef?: ParentRef;
@@ -18,6 +26,7 @@ export type CacheQueryMatching<Args> = {
 
 export abstract class StoreAdapter<Item> {
 	constructor(
+		protected serializer: Serializer,
 		protected options: StoreOptions<Item>,
 		protected type: string,
 		protected hash: string,
@@ -163,7 +172,7 @@ export abstract class StoreAdapter<Item> {
 			return null;
 		}
 
-		const ordered = this.refillNullQueryItems(nullableRefs, items);
+		const ordered = refillNullItems(nullableRefs, items);
 		const result = isList ? ordered : ordered[0];
 
 		return { query: result as Result };
@@ -207,7 +216,7 @@ export abstract class StoreAdapter<Item> {
 
 			const parentRef = options?.getRootRef
 				? options.getRootRef(params.root)
-				: this.getRefFallback(params.root);
+				: getRefFallback(params.root);
 
 			const matcher = { parentRef, args: params.args };
 
@@ -241,14 +250,7 @@ export abstract class StoreAdapter<Item> {
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) {
-		const namespace = this.createQueryKeyNamespace(queryRef);
-		const metadata = this.createQueryKeyHeader(parentRef, args);
-		return `${namespace}:${metadata}`;
-	}
-
-	protected getRevision() {
-		const version = this.options?.revision?.toString() || '0';
-		return `r${version}_${this.hash}`;
+		return `${this.createQueryKeyNamespace(queryRef)}:${this.createQueryKeyHeader(parentRef, args)}`;
 	}
 
 	protected createQueryKeyNamespace(queryRef: string) {
@@ -256,8 +258,8 @@ export abstract class StoreAdapter<Item> {
 	}
 
 	protected createQueryKeyHeader(parentRef: ParentRef, args?: Record<string, unknown>) {
-		const encodedArgs = this.encodeQueryArgs(args);
-		const encodedParentRef = this.encodePrimitive(parentRef);
+		const encodedArgs = encodeArgs(this.serializer, args);
+		const encodedParentRef = encodeValue(this.serializer, parentRef);
 		return `parent#${encodedParentRef}#args#${encodedArgs}`;
 	}
 
@@ -266,8 +268,8 @@ export abstract class StoreAdapter<Item> {
 		parentRef: NonNullable<ParentRef>,
 		args: Record<string, unknown>,
 	) {
-		const parentMatcher = this.encodePrimitive(parentRef, '.*');
-		const argsMatcher = this.encodeQueryArgs(args, '.*');
+		const parentMatcher = encodeValue(this.serializer, parentRef, '.*');
+		const argsMatcher = encodeArgs(this.serializer, args, '.*');
 		const pattern = `^${this.createQueryKeyNamespace(queryRef)}:parent#${parentMatcher}#args#.*${argsMatcher}.*`;
 		return new RegExp(pattern);
 	}
@@ -277,70 +279,26 @@ export abstract class StoreAdapter<Item> {
 		parentRef: NonNullable<ParentRef>,
 		args: Record<string, unknown>,
 	) {
-		const parentMatcher = this.encodePrimitive(parentRef, '*');
-		const argsMatcher = this.encodeQueryArgs(args, '*');
+		const parentMatcher = encodeValue(this.serializer, parentRef, '*');
+		const argsMatcher = encodeArgs(this.serializer, args, '*');
 		return `${this.createQueryKeyNamespace(queryRef)}:parent#${parentMatcher}#args#*${argsMatcher}*`;
 	}
 
-	protected encodeQueryArgs(args: Record<string, unknown> = {}, catchAll?: string) {
-		const entries: Array<[string, string]> = [];
-		const flattened = flatten<Record<string, unknown>, Record<string, unknown>>(args);
-
-		for (const key in flattened) {
-			const value = flattened[key];
-			const encodedKey = this.encodeProperty(key);
-			const encodedValue = this.encodePrimitive(value, catchAll);
-
-			if (encodedValue) {
-				entries.push([encodedKey, encodedValue]);
-			}
+	protected getRef(root: Item): ItemRef {
+		if (this.options?.getRef) {
+			return this.options.getRef(root);
 		}
 
-		entries.sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
-		const pairs = entries.map(([key, value]) => `${key}#${value}`);
-		return pairs.join(catchAll ?? ',');
-	}
-
-	protected encodeProperty(value: string) {
-		const key = value.replaceAll('.', '_');
-		if (!this.shouldEncode(key)) {
-			return `_${key}`;
-		}
-		return `enc_${encodeBase64Url(key)}`;
-	}
-
-	protected encodePrimitive(value: unknown, catchAll?: string) {
-		if (value === null) {
-			return 'null';
+		if (root == null) {
+			throw new Error('Object is null or undefined, cannot get ref');
 		}
 
-		if (value === undefined) {
-			return catchAll ? null : 'null';
+		if (typeof root === 'object' && 'id' in root) {
+			validateRefType(root.id);
+			return root.id.toString();
 		}
 
-		if (value === '') {
-			return catchAll ? null : 'empty';
-		}
-
-		if (value === '*') {
-			return catchAll ? catchAll : 'star';
-		}
-
-		const type = typeof value;
-		const supported = ['string', 'number', 'boolean', 'bigint'];
-		const isSupported = supported.includes(type);
-
-		if (!isSupported) {
-			return catchAll ? null : 'empty';
-		}
-
-		const valStr = value.toString();
-
-		if (!this.shouldEncode(valStr)) {
-			return `_${value}`;
-		}
-
-		return `enc_${encodeBase64Url(valStr)}`;
+		throw new Error('Object does not have id. Define getRef function in cache options');
 	}
 
 	protected encodeQueryItemRef(item: null | Item) {
@@ -358,64 +316,16 @@ export abstract class StoreAdapter<Item> {
 		return encodedRef.substring(4);
 	}
 
-	protected getRef(root: Item): ItemRef {
-		if (this.options?.getRef) {
-			return this.options.getRef(root);
-		}
-
-		if (root == null) {
-			throw new Error('Object is null or undefined, cannot get ref');
-		}
-
-		if (typeof root === 'object' && 'id' in root) {
-			this.validateRefType(root.id);
-			return root.id.toString();
-		}
-
-		throw new Error('Object does not have id. Define getRef function in cache options');
+	protected getRevision() {
+		const version = this.options?.revision?.toString() || '0';
+		return `r${version}_${this.hash}`;
 	}
 
-	protected shouldEncode(value: string) {
-		return /^[a-z0-9_]+$/i.test(value) === false;
+	protected parseItem(value: string): Item {
+		return this.serializer.parse(value);
 	}
 
-	protected getRefFallback(root: unknown) {
-		if (root == null) {
-			return undefined;
-		}
-
-		if (typeof root === 'object' && 'id' in root) {
-			this.validateRefType(root.id);
-			return root.id.toString();
-		}
-
-		return undefined;
-	}
-
-	protected validateRefType(ref: unknown): asserts ref is string | number | bigint {
-		if (typeof ref !== 'string' && typeof ref !== 'number' && typeof ref !== 'bigint') {
-			throw new Error(
-				'Reference must be string, number or bigint. Define getRef function in cache options',
-			);
-		}
-	}
-
-	protected refillNullQueryItems(nullableRefs: Array<ItemRef | null>, items: Item[]) {
-		if (nullableRefs.length === items.length) {
-			return items;
-		}
-
-		const filled: Array<Item | null> = [];
-
-		for (let i = 0, j = 0; i < nullableRefs.length; i++) {
-			if (nullableRefs[i] == null) {
-				filled.push(null);
-			} else {
-				filled.push(items[j]);
-				j++;
-			}
-		}
-
-		return filled;
+	protected stringifyItem(item: Item) {
+		return this.serializer.stringify(item);
 	}
 }

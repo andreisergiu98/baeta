@@ -18,7 +18,17 @@ export type {
 	StoreOptions,
 } from './lib/store-options.ts';
 export { Store } from './lib/store.ts';
-
+export type {
+	Serializer,
+	SerializerTransformer,
+	ClassTransformer,
+	CustomTransformer,
+	SerializerAny,
+	SerializerClass,
+	SerializerResult,
+	SerializerValue,
+	SymbolTransformer,
+} from './lib/serializer.ts';
 /**
  * Creates a cache extension
  *

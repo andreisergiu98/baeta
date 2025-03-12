@@ -1,6 +1,7 @@
 import {
 	type ItemRef,
 	type ParentRef,
+	type Serializer,
 	StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
@@ -12,11 +13,12 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 
 	constructor(
 		durableObject: DurableObjectNamespace,
+		serializer: Serializer,
 		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
-		super(options, type, hash);
+		super(serializer, options, type, hash);
 		this.client = new CloudflareCacheClient(durableObject);
 	}
 
@@ -26,12 +28,12 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		}
 		const keys = refs.map((ref) => this.createKey(ref));
 		const results = await this.client.get(keys).then((res) => res ?? null);
-		return results.map((result) => (result == null ? null : (JSON.parse(result) as Item)));
+		return results.map((result) => (result == null ? null : this.parseItem(result)));
 	};
 
 	saveMany = async (items: Item[]) => {
 		const pairs = items.map(
-			(item) => [this.createKeyByItem(item), JSON.stringify(item)] as [string, string],
+			(item) => [this.createKeyByItem(item), this.stringifyItem(item)] as [string, string],
 		);
 		await this.client.put(pairs, this.getTtl());
 	};

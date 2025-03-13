@@ -2122,11 +2122,11 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20250311.0"
+    "@cloudflare/workers-types": "npm:^4.20250312.0"
     "@hono/graphql-server": "npm:^0.5.1"
     graphql: "npm:^16.10.0"
     hono: "npm:^4.7.4"
-    miniflare: "npm:^3.20250310.0"
+    miniflare: "npm:^4.20250310.0"
     typescript: "npm:^5.8.2"
     wrangler: "npm:^3.114.1"
   languageName: unknown
@@ -2141,11 +2141,11 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/plugin-autoload": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20250311.0"
+    "@cloudflare/workers-types": "npm:^4.20250312.0"
     graphql: "npm:^16.10.0"
     graphql-yoga: "npm:^5.13.1"
     hono: "npm:^4.7.4"
-    miniflare: "npm:^3.20250310.0"
+    miniflare: "npm:^4.20250310.0"
     typescript: "npm:^5.8.2"
     wrangler: "npm:^3.114.1"
   languageName: unknown
@@ -2375,9 +2375,13 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20250311.0"
+    "@cloudflare/workers-types": "npm:^4.20250312.0"
+    esbuild: "npm:^0.25.1"
     graphql: "npm:^16.10.0"
+    miniflare: "npm:^4.20250310.0"
     typescript: "npm:^5.8.2"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
@@ -2392,7 +2396,10 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@keyv/etcd": "npm:^2.1.0"
     graphql: "npm:^16.10.0"
     keyv: "npm:^5.3.1"
     typescript: "npm:^5.8.2"
@@ -2410,6 +2417,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.13.10"
     graphql: "npm:^16.10.0"
@@ -2428,6 +2436,8 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.13.10"
     "@upstash/redis": "npm:^1.34.5"
@@ -2528,7 +2538,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20250311.0"
+    "@cloudflare/workers-types": "npm:^4.20250312.0"
     "@types/node": "npm:^22.13.10"
     graphql: "npm:^16.10.0"
     typescript: "npm:^5.8.2"
@@ -2662,7 +2672,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20250311.0"
+    "@cloudflare/workers-types": "npm:^4.20250312.0"
     graphql: "npm:^16.10.0"
     graphql-ws: "npm:^6.0.4"
     typescript: "npm:^5.8.2"
@@ -2741,6 +2751,21 @@ __metadata:
     ava: ./bin/ava.js
     c8: ./bin/c8.js
     madge: ./bin/madge.js
+  languageName: unknown
+  linkType: soft
+
+"@baeta/tests-cache-stores@workspace:^, @baeta/tests-cache-stores@workspace:tests/cache-stores":
+  version: 0.0.0-use.local
+  resolution: "@baeta/tests-cache-stores@workspace:tests/cache-stores"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/extension-cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "npm:^22.13.10"
+    typescript: "npm:^5.8.2"
+  peerDependencies:
+    "@baeta/extension-cache": "workspace:^"
   languageName: unknown
   linkType: soft
 
@@ -3224,10 +3249,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20250311.0":
-  version: 4.20250311.0
-  resolution: "@cloudflare/workers-types@npm:4.20250311.0"
-  checksum: 10/188567a2cc2be6ffe0fea8e9b097ae39b2a4c47d4cd7d731f0f0574734a659943098c5528a3cb460be310fd7fd07335a83e31732b19f510f848cfbb0bb686536
+"@cloudflare/workers-types@npm:^4.20250312.0":
+  version: 4.20250312.0
+  resolution: "@cloudflare/workers-types@npm:4.20250312.0"
+  checksum: 10/120f68c7f589008b17f06d4db6dcdb1bf5fc8e82e9c2ad8e0035e69078d5a719b748edc3b67892e05e12177a2852b5fcdb4e9b7f25d782c61591724e7a0f9bcb
   languageName: node
   linkType: hard
 
@@ -5284,6 +5309,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@grpc/grpc-js@npm:^1.8.20":
+  version: 1.13.0
+  resolution: "@grpc/grpc-js@npm:1.13.0"
+  dependencies:
+    "@grpc/proto-loader": "npm:^0.7.13"
+    "@js-sdsl/ordered-map": "npm:^4.4.2"
+  checksum: 10/b98a559438d47ddd469af3c29c343d903421288df29c1c917551222bf47f25184c0b0a4ec1dc5f52903480815aade8ffc74af92227bac3c9ae3a52e59b876dea
+  languageName: node
+  linkType: hard
+
+"@grpc/proto-loader@npm:^0.7.13, @grpc/proto-loader@npm:^0.7.8":
+  version: 0.7.13
+  resolution: "@grpc/proto-loader@npm:0.7.13"
+  dependencies:
+    lodash.camelcase: "npm:^4.3.0"
+    long: "npm:^5.0.0"
+    protobufjs: "npm:^7.2.5"
+    yargs: "npm:^17.7.2"
+  bin:
+    proto-loader-gen-types: build/bin/proto-loader-gen-types.js
+  checksum: 10/7e2d842c2061cbaf6450c71da0077263be3bab165454d5c8a3e1ae4d3c6d2915f02fd27da63ff01f05e127b1221acd40705273f5d29303901e60514e852992f4
+  languageName: node
+  linkType: hard
+
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -5605,6 +5654,22 @@ __metadata:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
   checksum: 10/dced32160a44b49d531b80a4a2159dceab6b3ddf0c8e95a0deae4b0e894b172defa63d5ac52a19c2068e1fe7d31ea4ba931fbeec103233ecb4208953967120fc
+  languageName: node
+  linkType: hard
+
+"@js-sdsl/ordered-map@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "@js-sdsl/ordered-map@npm:4.4.2"
+  checksum: 10/ac64e3f0615ecc015461c9f527f124d2edaa9e68de153c1e270c627e01e83d046522d7e872692fd57a8c514578b539afceff75831c0d8b2a9a7a347fbed35af4
+  languageName: node
+  linkType: hard
+
+"@keyv/etcd@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@keyv/etcd@npm:2.1.0"
+  dependencies:
+    etcd3: "npm:^1.1.2"
+  checksum: 10/eb24f24ed88c9a8850aac77b877a28848c4cbc35947fa55cfe7cd1318731e3250133781c9bde6d43ef1aa8c80beeab5a5eed2518e18c5bcab976b171ee1ce724
   languageName: node
   linkType: hard
 
@@ -7025,6 +7090,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:>=13.7.0, @types/node@npm:^22.13.10":
+  version: 22.13.10
+  resolution: "@types/node@npm:22.13.10"
+  dependencies:
+    undici-types: "npm:~6.20.0"
+  checksum: 10/57dc6a5e0110ca9edea8d7047082e649fa7fa813f79e4a901653b9174141c622f4336435648baced5b38d9f39843f404fa2d8d7a10981610da26066bc8caab48
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^12.7.1":
   version: 12.20.55
   resolution: "@types/node@npm:12.20.55"
@@ -7045,15 +7119,6 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10/7bb1d06cd1483dd02462a3dd2894790e5c27ba0fa4cdd4a3da1062d66ed47b66affaab314aa72b346ff3e5538a74d5c3cb14bb1a634547504a1643679738f494
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^22.13.10":
-  version: 22.13.10
-  resolution: "@types/node@npm:22.13.10"
-  dependencies:
-    undici-types: "npm:~6.20.0"
-  checksum: 10/57dc6a5e0110ca9edea8d7047082e649fa7fa813f79e4a901653b9174141c622f4336435648baced5b38d9f39843f404fa2d8d7a10981610da26066bc8caab48
   languageName: node
   linkType: hard
 
@@ -8556,6 +8621,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bignumber.js@npm:^9.1.1":
+  version: 9.1.2
+  resolution: "bignumber.js@npm:9.1.2"
+  checksum: 10/d89b8800a987225d2c00dcbf8a69dc08e92aa0880157c851c287b307d31ceb2fc2acb0c62c3e3a3d42b6c5fcae9b004035f13eb4386e56d529d7edac18d5c9d8
+  languageName: node
+  linkType: hard
+
 "binary-extensions@npm:^2.0.0":
   version: 2.3.0
   resolution: "binary-extensions@npm:2.3.0"
@@ -9412,6 +9484,13 @@ __metadata:
   version: 1.1.2
   resolution: "cluster-key-slot@npm:1.1.2"
   checksum: 10/516ed8b5e1a14d9c3a9c96c72ef6de2d70dfcdbaa0ec3a90bc7b9216c5457e39c09a5775750c272369070308542e671146120153062ab5f2f481bed5de2c925f
+  languageName: node
+  linkType: hard
+
+"cockatiel@npm:^3.1.1":
+  version: 3.2.1
+  resolution: "cockatiel@npm:3.2.1"
+  checksum: 10/b022d588dc1e31db59a17527b89acd6ed52c6d8761402afe112c7688af8836363e260ebf71b6f07c7edd69e62047adbf9fc1b3ffcb9081b7a0a751e6018773a6
   languageName: node
   linkType: hard
 
@@ -11704,6 +11783,18 @@ __metadata:
   version: 1.8.1
   resolution: "etag@npm:1.8.1"
   checksum: 10/571aeb3dbe0f2bbd4e4fadbdb44f325fc75335cd5f6f6b6a091e6a06a9f25ed5392f0863c5442acb0646787446e816f13cbfc6edce5b07658541dff573cab1ff
+  languageName: node
+  linkType: hard
+
+"etcd3@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "etcd3@npm:1.1.2"
+  dependencies:
+    "@grpc/grpc-js": "npm:^1.8.20"
+    "@grpc/proto-loader": "npm:^0.7.8"
+    bignumber.js: "npm:^9.1.1"
+    cockatiel: "npm:^3.1.1"
+  checksum: 10/8ccbecbcbfd151ffd5c551f2ac9a3b6f837c6128bdfa696a917879f34c043cd36a4fed420f88be58a1968720729a1193c3eeecca3e96273443cd9e902f22fcc5
   languageName: node
   linkType: hard
 
@@ -14825,6 +14916,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.camelcase@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "lodash.camelcase@npm:4.3.0"
+  checksum: 10/c301cc379310441dc73cd6cebeb91fb254bea74e6ad3027f9346fc43b4174385153df420ffa521654e502fd34c40ef69ca4e7d40ee7129a99e06f306032bfc65
+  languageName: node
+  linkType: hard
+
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -14922,6 +15020,13 @@ __metadata:
   version: 4.0.0
   resolution: "long@npm:4.0.0"
   checksum: 10/8296e2ba7bab30f9cfabb81ebccff89c819af6a7a78b4bb5a70ea411aa764ee0532f7441381549dfa6a1a98d72abe9138bfcf99f4fa41238629849bc035b845b
+  languageName: node
+  linkType: hard
+
+"long@npm:^5.0.0":
+  version: 5.3.1
+  resolution: "long@npm:5.3.1"
+  checksum: 10/7713e10b4fe10db041d9939b7c4c3d73d3dd91785be72269ca8c5262feae7cb45f4eebed2b77bd346de7fe5f847e90f52c577c89ab3f2bd8a5ddc8b4098cbe35
   languageName: node
   linkType: hard
 
@@ -16140,7 +16245,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"miniflare@npm:3.20250310.0, miniflare@npm:^3.20250310.0":
+"miniflare@npm:3.20250310.0":
   version: 3.20250310.0
   resolution: "miniflare@npm:3.20250310.0"
   dependencies:
@@ -16158,6 +16263,27 @@ __metadata:
   bin:
     miniflare: bootstrap.js
   checksum: 10/97390952cb0d82c484f4b0f90196adf5165ced55ccc7e8cd5e4de2dd02984f559835bbdebd5a6eaee71e155a7c11ce6b86757c88e81a2fe76f6791299b19f5d1
+  languageName: node
+  linkType: hard
+
+"miniflare@npm:^4.20250310.0":
+  version: 4.20250310.0
+  resolution: "miniflare@npm:4.20250310.0"
+  dependencies:
+    "@cspotcode/source-map-support": "npm:0.8.1"
+    acorn: "npm:8.14.0"
+    acorn-walk: "npm:8.3.2"
+    exit-hook: "npm:2.2.1"
+    glob-to-regexp: "npm:0.4.1"
+    stoppable: "npm:1.1.0"
+    undici: "npm:^5.28.5"
+    workerd: "npm:1.20250310.0"
+    ws: "npm:8.18.0"
+    youch: "npm:3.2.3"
+    zod: "npm:3.22.3"
+  bin:
+    miniflare: bootstrap.js
+  checksum: 10/2cc47f4832a44f8556216b6267ac56809328bbaa116177e920758852201c3ca6c80df1954e6ac02cb9d1870929db37c2dd41a4dba16c112a78fd30d6d2223138
   languageName: node
   linkType: hard
 
@@ -18486,6 +18612,26 @@ __metadata:
   version: 1.2.4
   resolution: "proto-list@npm:1.2.4"
   checksum: 10/9cc3b46d613fa0d637033b225db1bc98e914c3c05864f7adc9bee728192e353125ef2e49f71129a413f6333951756000b0e54f299d921f02d3e9e370cc994100
+  languageName: node
+  linkType: hard
+
+"protobufjs@npm:^7.2.5":
+  version: 7.4.0
+  resolution: "protobufjs@npm:7.4.0"
+  dependencies:
+    "@protobufjs/aspromise": "npm:^1.1.2"
+    "@protobufjs/base64": "npm:^1.1.2"
+    "@protobufjs/codegen": "npm:^2.0.4"
+    "@protobufjs/eventemitter": "npm:^1.1.0"
+    "@protobufjs/fetch": "npm:^1.1.0"
+    "@protobufjs/float": "npm:^1.0.2"
+    "@protobufjs/inquire": "npm:^1.1.0"
+    "@protobufjs/path": "npm:^1.1.2"
+    "@protobufjs/pool": "npm:^1.1.0"
+    "@protobufjs/utf8": "npm:^1.1.0"
+    "@types/node": "npm:>=13.7.0"
+    long: "npm:^5.0.0"
+  checksum: 10/408423506610f70858d7593632f4a6aa4f05796c90fd632be9b9252457c795acc71aa6d3b54bb7f48a890141728fee4ca3906723ccea6c202ad71f21b3879b8b
   languageName: node
   linkType: hard
 

@@ -5,7 +5,6 @@ import {
 	StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
-import type { DurableObjectNamespace } from '@cloudflare/workers-types';
 import { CloudflareCacheClient } from './cloudflare-cache-client.ts';
 
 export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {

@@ -1,31 +1,28 @@
 import { type StoreOptions, createSerializer } from '@baeta/extension-cache';
 import test from '@baeta/testing';
 import { type TestItem, runTestsForStoreAdapter } from '@baeta/tests-cache-stores';
-import Redis from 'ioredis';
-import { RedisStoreAdapter } from './redis-store-adapter.ts';
+import KeyvEtcd from '@keyv/etcd';
+import Keyv from 'keyv';
+import { KeyvStoreAdapter } from './keyv-store-adapter.ts';
 
-const client = new Redis({
-	host: 'localhost',
-	port: 65535,
-	db: 0,
-	maxRetriesPerRequest: 0, // Fail fast in tests
-});
+const etcd = new KeyvEtcd('http://localhost:22379');
+const keyv = new Keyv({ store: etcd });
 
 function createStoreAdapter(options: StoreOptions<TestItem>) {
 	const serializer = createSerializer();
-	return new RedisStoreAdapter(client, serializer, options, 'test', 'test-hash');
+	return new KeyvStoreAdapter(keyv, serializer, options, 'test', 'test-hash');
 }
 
 test.beforeEach(async () => {
-	await client.flushall();
+	await keyv.clear();
 });
 
 test.after(async () => {
-	await client.quit();
+	await keyv.disconnect();
 });
 
 runTestsForStoreAdapter(createStoreAdapter, test, {
-	name: 'RedisStoreAdapter',
+	name: 'KeyvStoreAdapter',
 	serializer: createSerializer(),
 	testTtl: true,
 });

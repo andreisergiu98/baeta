@@ -1,31 +1,27 @@
 import { type StoreOptions, createSerializer } from '@baeta/extension-cache';
 import test from '@baeta/testing';
 import { type TestItem, runTestsForStoreAdapter } from '@baeta/tests-cache-stores';
-import Redis from 'ioredis';
-import { RedisStoreAdapter } from './redis-store-adapter.ts';
+import { UpstashClient } from './upstash-client.ts';
+import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
 
-const client = new Redis({
-	host: 'localhost',
-	port: 65535,
-	db: 0,
-	maxRetriesPerRequest: 0, // Fail fast in tests
+const client = new UpstashClient({
+	url: 'http://localhost:60080',
+	token: 'example_token',
 });
 
 function createStoreAdapter(options: StoreOptions<TestItem>) {
 	const serializer = createSerializer();
-	return new RedisStoreAdapter(client, serializer, options, 'test', 'test-hash');
+	return new UpstashStoreAdapter(client, serializer, options, 'test', 'test-hash');
 }
 
 test.beforeEach(async () => {
 	await client.flushall();
 });
 
-test.after(async () => {
-	await client.quit();
-});
+test.after(async () => {});
 
 runTestsForStoreAdapter(createStoreAdapter, test, {
-	name: 'RedisStoreAdapter',
+	name: 'UpstashStoreAdapter',
 	serializer: createSerializer(),
 	testTtl: true,
 });

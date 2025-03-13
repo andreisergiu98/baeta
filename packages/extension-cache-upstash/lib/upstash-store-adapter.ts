@@ -5,11 +5,11 @@ import {
 	StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
-import type { Redis } from '@upstash/redis';
+import type { UpstashClient } from './upstash-client.ts';
 
 export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 	constructor(
-		private client: Redis,
+		private client: UpstashClient,
 		serializer: Serializer,
 		options: StoreOptions<Item>,
 		type: string,
@@ -23,7 +23,7 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 			return null;
 		}
 		const keys = refs.map((ref) => this.createKey(ref));
-		const results = await this.client.mget<string[]>(keys);
+		const results = await this.client.mget<Array<string | null>>(keys);
 		return results.map((result) => (result == null ? null : this.parseItem(result)));
 	};
 
@@ -117,7 +117,7 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 		const nextKeys = res[1];
 
 		if (nextCursor === 0) {
-			return keys;
+			return [...keys, ...nextKeys];
 		}
 
 		return this.scanAll(match, nextCursor, [...keys, ...nextKeys]);

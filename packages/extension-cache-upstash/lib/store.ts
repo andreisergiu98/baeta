@@ -4,7 +4,7 @@ import {
 	type StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
-import type { Redis } from '@upstash/redis';
+import type { UpstashClient } from './upstash-client.ts';
 import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
 
 /**
@@ -32,7 +32,7 @@ import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
  * ```
  */
 export class UpstashStore extends Store {
-	constructor(protected client: Redis) {
+	constructor(protected client: UpstashClient) {
 		super();
 	}
 

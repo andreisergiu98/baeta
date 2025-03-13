@@ -253,7 +253,8 @@ export abstract class StoreAdapter<Item> {
 	) {
 		const parentMatcher = encodeValue(this.serializer, parentRef, '.*');
 		const argsMatcher = encodeArgs(this.serializer, args, '.*');
-		const pattern = `^${this.createQueryKeyNamespace(queryRef)}:parent#${parentMatcher}#args#.*${argsMatcher}.*`;
+		const queryRefMatcher = queryRef === '*' ? '.*' : queryRef;
+		const pattern = `^${this.createQueryKeyNamespace(queryRefMatcher)}:parent#${parentMatcher}#args#.*${argsMatcher}.*`;
 		return new RegExp(pattern);
 	}
 

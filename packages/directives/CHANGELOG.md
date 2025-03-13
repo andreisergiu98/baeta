@@ -1,5 +1,15 @@
 # @baeta/directives
 
+## 1.0.9
+
+### Patch Changes
+
+- [`583014f`](https://github.com/andreisergiu98/baeta/commit/583014f0bac810b25d9a8226bda2df4c9039f5e3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update dependencies
+
+- Updated dependencies [[`583014f`](https://github.com/andreisergiu98/baeta/commit/583014f0bac810b25d9a8226bda2df4c9039f5e3), [`b5b53d3`](https://github.com/andreisergiu98/baeta/commit/b5b53d35d950b2b18014b02d472c401ed4721334)]:
+  - @baeta/core@1.0.9
+  - @baeta/errors@1.0.9
+
 ## 1.0.8
 
 ### Patch Changes

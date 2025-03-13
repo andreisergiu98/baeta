@@ -40,11 +40,13 @@
     "build": "tsup",
     "prepack": "prep",
     "postpack": "prep --clean",
+    "test": "ava",
     "types": "tsc --noEmit"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
+    "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "graphql": "^16.10.0",
     "typescript": "^5.8.2"

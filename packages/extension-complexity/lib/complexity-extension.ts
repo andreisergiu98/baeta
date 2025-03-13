@@ -4,16 +4,9 @@ import {
 	type NativeMiddleware,
 	type ResolverMapper,
 } from '@baeta/core/sdk';
-import { calculateComplexity } from './complexity-calculator.ts';
-import { ComplexityErrorKind } from './complexity-errors.ts';
-import {
-	type ComplexityExtensionOptions,
-	defaultLimits,
-	normalizeOptions,
-} from './complexity-options.ts';
+import { createComplexityMiddleware } from './complexity-middleware.ts';
+import { type ComplexityExtensionOptions, normalizeOptions } from './complexity-options.ts';
 import { type FieldSettingsMap, registerFieldSettingsSetter } from './field-settings.ts';
-import { loadComplexityStore } from './store-loader.ts';
-import { getComplexityStore } from './store.ts';
 
 export class ComplexityExtension<Ctx> extends Extension {
 	private readonly options: Required<ComplexityExtensionOptions<Ctx>>;
@@ -65,42 +58,10 @@ export class ComplexityExtension<Ctx> extends Extension {
 		Context,
 		Args
 	> {
-		return (next) => async (root, args, ctx, info) => {
-			loadComplexityStore(ctx as unknown as Ctx, this.options.limit, defaultLimits);
-
-			const store = await getComplexityStore(ctx);
-
-			const limits = store.limits;
-
-			const results = store.cacheComplexity(() => {
-				return calculateComplexity(ctx as unknown as Ctx, info, this.fieldSettingsMap, {
-					complexity: this.options.defaultComplexity,
-					multiplier: this.options.defaultListMultiplier,
-				});
-			});
-
-			if (results.depth > limits.depth) {
-				throw this.options.complexityError(ComplexityErrorKind.Depth, limits.depth, results.depth);
-			}
-
-			if (results.breadth > limits.breadth) {
-				throw this.options.complexityError(
-					ComplexityErrorKind.Breadth,
-					limits.breadth,
-					results.breadth,
-				);
-			}
-
-			if (results.complexity > limits.complexity) {
-				throw this.options.complexityError(
-					ComplexityErrorKind.Complexity,
-					limits.complexity,
-					results.complexity,
-				);
-			}
-
-			return next(root, args, ctx, info);
-		};
+		return createComplexityMiddleware<Result, Root, Context, Args>(
+			this.options as Required<ComplexityExtensionOptions<Context>>,
+			this.fieldSettingsMap,
+		);
 	}
 
 	build = (_module: ModuleBuilder, mapper: ResolverMapper) => {

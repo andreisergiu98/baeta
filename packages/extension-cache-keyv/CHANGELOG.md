@@ -1,5 +1,12 @@
 # @baeta/extension-cache-keyv
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`18cfc12`](https://github.com/andreisergiu98/baeta/commit/18cfc120afe44fda1313893cf93bc7d31afd3785)]:
+  - @baeta/extension-cache@1.0.10
+
 ## 1.0.9
 
 ### Patch Changes

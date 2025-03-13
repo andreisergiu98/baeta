@@ -1,5 +1,12 @@
 # @baeta/tests-cache-stores
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`18cfc12`](https://github.com/andreisergiu98/baeta/commit/18cfc120afe44fda1313893cf93bc7d31afd3785)]:
+  - @baeta/extension-cache@1.0.10
+
 ## 1.0.1
 
 ### Patch Changes

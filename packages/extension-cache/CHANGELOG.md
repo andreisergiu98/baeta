@@ -1,5 +1,11 @@
 # @baeta/extension-cache
 
+## 1.0.10
+
+### Patch Changes
+
+- [`18cfc12`](https://github.com/andreisergiu98/baeta/commit/18cfc120afe44fda1313893cf93bc7d31afd3785) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Expose serialization transformers parameter
+
 ## 1.0.9
 
 ### Patch Changes

@@ -36,5 +36,5 @@ test.after(async () => {
 runTestsForStoreAdapter(createStoreAdapter, test, {
 	name: 'CloudflareStoreAdapter',
 	serializer: createSerializer(),
-	testTtl: false,
+	testTtl: true,
 });

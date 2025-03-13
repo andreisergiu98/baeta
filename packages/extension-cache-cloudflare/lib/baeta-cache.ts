@@ -146,18 +146,15 @@ export class BaetaCache implements DurableObject {
 					continue;
 				}
 
-				if (value.expireAt < now) {
-					expiredKeys.push(key);
-					continue;
-				}
-
 				if (earliestExpiry === undefined || value.expireAt < earliestExpiry) {
 					earliestExpiry = value.expireAt;
 				}
+
+				if (value.expireAt <= now) {
+					expiredKeys.push(key);
+				}
 			}
 		}
-
-		// console.log("removing", expiredKeys)
 
 		if (expiredKeys.length > 0) {
 			await this.state.storage.delete(expiredKeys);

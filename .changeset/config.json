@@ -25,6 +25,12 @@
       "@baeta/env",
       "@baeta/errors",
       "@baeta/extension-auth",
+      "@baeta/extension-cache",
+      "@baeta/extension-cache-cloudflare",
+      "@baeta/extension-cache-keyv",
+      "@baeta/extension-cache-redis",
+      "@baeta/extension-cache-upstash",
+      "@baeta/extension-complexity",
       "@baeta/plugin-autoload",
       "@baeta/plugin-cloudflare",
       "@baeta/plugin-directives",
@@ -38,6 +44,7 @@
   ],
   "ignore": [
     "@baeta/examples*",
-    "@baeta/template*"
+    "@baeta/template*",
+    "@baeta/tests*"
   ]
 }

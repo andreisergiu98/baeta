@@ -4877,12 +4877,12 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 <tr>
 <td>
 
-<a id="host-1"></a> `host`
+<a id="hosts"></a> `hosts`
 
 </td>
 <td>
 
-`string`
+`string`[]
 
 </td>
 </tr>

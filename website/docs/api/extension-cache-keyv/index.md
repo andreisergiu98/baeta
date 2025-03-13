@@ -104,7 +104,7 @@ const cacheExt = cacheExtension(store, {
 
 ##### createStoreAdapter()
 
-> **createStoreAdapter**\<`T`\>(`options`, `type`, `hash`): `StoreAdapter`\<`T`\>
+> **createStoreAdapter**\<`T`\>(`serializer`, `options`, `type`, `hash`): `StoreAdapter`\<`T`\>
 
 Creates a new store adapter for a specific type
 
@@ -138,6 +138,23 @@ Creates a new store adapter for a specific type
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`serializer`
+
+</td>
+<td>
+
+`Serializer`
+
+</td>
+<td>
+
+Serializer instance
+
+</td>
+</tr>
 <tr>
 <td>
 

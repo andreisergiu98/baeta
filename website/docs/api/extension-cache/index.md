@@ -210,7 +210,7 @@ Base class for cache storage implementations
 
 ##### createStoreAdapter()
 
-> `abstract` **createStoreAdapter**\<`T`\>(`options`, `type`, `hash`): [`StoreAdapter`](index.md#storeadapteritem)\<`T`\>
+> `abstract` **createStoreAdapter**\<`T`\>(`serializer`, `options`, `type`, `hash`): [`StoreAdapter`](index.md#storeadapteritem)\<`T`\>
 
 Creates a new store adapter for a specific type
 
@@ -244,6 +244,23 @@ Creates a new store adapter for a specific type
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`serializer`
+
+</td>
+<td>
+
+[`Serializer`](index.md#serializer-1)
+
+</td>
+<td>
+
+Serializer instance
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -329,7 +346,7 @@ Unique hash for the type
 
 ##### new StoreAdapter()
 
-> **new StoreAdapter**\<`Item`\>(`options`, `type`, `hash`): [`StoreAdapter`](index.md#storeadapteritem)\<`Item`\>
+> **new StoreAdapter**\<`Item`\>(`serializer`, `options`, `type`, `hash`): [`StoreAdapter`](index.md#storeadapteritem)\<`Item`\>
 
 ###### Parameters
 
@@ -341,6 +358,18 @@ Unique hash for the type
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`serializer`
+
+</td>
+<td>
+
+[`Serializer`](index.md#serializer-1)
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -545,6 +574,23 @@ Unique hash for the type
 <td>
 
 (`queryRef`: `string`, `meta`: `string`[], `parentRef`?: [`ParentRef`](index.md#parentref-1), `args`?: `Record`\<`string`, `unknown`\>) => `Promise`\<`void`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="serializer"></a> `serializer`
+
+</td>
+<td>
+
+`protected`
+
+</td>
+<td>
+
+[`Serializer`](index.md#serializer-1)
 
 </td>
 </tr>
@@ -1119,129 +1165,6 @@ Unique hash for the type
 
 `Promise`\<`void`\>
 
-##### encodePrimitive()
-
-> `protected` **encodePrimitive**(`value`, `catchAll`?): `null` \| `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`value`
-
-</td>
-<td>
-
-`unknown`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`catchAll`?
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`null` \| `string`
-
-##### encodeProperty()
-
-> `protected` **encodeProperty**(`value`): `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`value`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`string`
-
-##### encodeQueryArgs()
-
-> `protected` **encodeQueryArgs**(`args`, `catchAll`?): `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`args`
-
-</td>
-<td>
-
-`Record`\<`string`, `unknown`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`catchAll`?
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`string`
-
 ##### encodeQueryItemRef()
 
 > `protected` **encodeQueryItemRef**(`item`): `string`
@@ -1518,39 +1441,6 @@ Unique hash for the type
 
 [`ItemRef`](index.md#itemref)
 
-##### getRefFallback()
-
-> `protected` **getRefFallback**(`root`): `undefined` \| `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`root`
-
-</td>
-<td>
-
-`unknown`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`undefined` \| `string`
-
 ##### getRevision()
 
 > `protected` **getRevision**(): `string`
@@ -1592,9 +1482,9 @@ readonly [`ItemRef`](index.md#itemref)[]
 
 `Promise`\<`any`[]\>
 
-##### refillNullQueryItems()
+##### parseItem()
 
-> `protected` **refillNullQueryItems**(`nullableRefs`, `items`): (`null` \| `Item`)[]
+> `protected` **parseItem**(`value`): `Item`
 
 ###### Parameters
 
@@ -1609,24 +1499,12 @@ readonly [`ItemRef`](index.md#itemref)[]
 <tr>
 <td>
 
-`nullableRefs`
+`value`
 
 </td>
 <td>
 
-(`null` \| [`ItemRef`](index.md#itemref))[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`items`
-
-</td>
-<td>
-
-`Item`[]
+`string`
 
 </td>
 </tr>
@@ -1635,7 +1513,7 @@ readonly [`ItemRef`](index.md#itemref)[]
 
 ###### Returns
 
-(`null` \| `Item`)[]
+`Item`
 
 ##### save()
 
@@ -1760,9 +1638,9 @@ readonly [`ItemRef`](index.md#itemref)[]
 
 `Promise`\<`void`\>
 
-##### shouldEncode()
+##### stringifyItem()
 
-> `protected` **shouldEncode**(`value`): `boolean`
+> `protected` **stringifyItem**(`item`): `string`
 
 ###### Parameters
 
@@ -1777,54 +1655,21 @@ readonly [`ItemRef`](index.md#itemref)[]
 <tr>
 <td>
 
-`value`
+`item`
 
 </td>
 <td>
+
+`Item`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
 
 `string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`boolean`
-
-##### validateRefType()
-
-> `protected` **validateRefType**(`ref`): asserts ref is string \| number \| bigint
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`ref`
-
-</td>
-<td>
-
-`unknown`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-asserts ref is string \| number \| bigint
 
 ## Interfaces
 
@@ -2147,6 +1992,259 @@ Time-to-live in seconds
 
 ---
 
+### Serializer
+
+#### Methods
+
+##### deserialize()
+
+> **deserialize**\<`T`\>(`payload`): `T`
+
+###### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`T`
+
+</td>
+<td>
+
+`unknown`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`payload`
+
+</td>
+<td>
+
+[`SerializerResult`](index.md#serializerresult)
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
+
+`T`
+
+##### parse()
+
+> **parse**\<`T`\>(`string`): `T`
+
+###### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`T`
+
+</td>
+<td>
+
+`unknown`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`string`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
+
+`T`
+
+##### serialize()
+
+> **serialize**(`object`): [`SerializerResult`](index.md#serializerresult)
+
+###### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`object`
+
+</td>
+<td>
+
+`any`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
+
+[`SerializerResult`](index.md#serializerresult)
+
+##### stringify()
+
+> **stringify**(`object`): `string`
+
+###### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`object`
+
+</td>
+<td>
+
+`any`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
+
+`string`
+
+---
+
+### SerializerResult
+
+#### Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="json"></a> `json`
+
+</td>
+<td>
+
+`any`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="meta"></a> `meta?`
+
+</td>
+<td>
+
+`object`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`meta.referentialEqualities?`
+
+</td>
+<td>
+
+`any`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`meta.values?`
+
+</td>
+<td>
+
+`any`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+---
+
 ### StoreOptions\<Root\>
 
 Configuration options for cache stores
@@ -2368,6 +2466,178 @@ Optional query arguments
 
 ---
 
+### ClassTransformer
+
+> **ClassTransformer**: `object`
+
+#### Type declaration
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="class"></a> `class`
+
+</td>
+<td>
+
+[`SerializerClass`](index.md#serializerclass)
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="kind"></a> `kind`
+
+</td>
+<td>
+
+`"class"`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="allowprops"></a> `allowProps`?
+
+</td>
+<td>
+
+`string`[]
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="identifier"></a> `identifier`?
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+### CustomTransformer\<Input, Output\>
+
+> **CustomTransformer**\<`Input`, `Output`\>: `object`
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Input`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Output` _extends_ [`SerializerValue`](index.md#serializervalue)
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Type declaration
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="deserialize-1"></a> `deserialize`
+
+</td>
+<td>
+
+(`value`) => `Input`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="isapplicable"></a> `isApplicable`
+
+</td>
+<td>
+
+(`value`) => `value is Input`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="kind-1"></a> `kind`
+
+</td>
+<td>
+
+`"custom"`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="name"></a> `name`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="serialize-1"></a> `serialize`
+
+</td>
+<td>
+
+(`value`) => `Output`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+---
+
 ### ItemRef
 
 > **ItemRef**: `string` \| `number` \| `bigint`
@@ -2389,6 +2659,151 @@ Reference type for query parent
 > **RefCompatibleRoot**: \{ `id`: `string` \| `number` \| `bigint`; \} \| \{\}
 
 Type constraint for objects that are compatible with default cache ref
+
+---
+
+### SerializerAny
+
+> **SerializerAny**: `any`
+
+---
+
+### SerializerClass()
+
+> **SerializerClass**: (...`args`) => `any`
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+...`args`
+
+</td>
+<td>
+
+`any`[]
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`any`
+
+---
+
+### SerializerTransformer\<Input, Output\>
+
+> **SerializerTransformer**\<`Input`, `Output`\>: [`CustomTransformer`](index.md#customtransformerinput-output)\<`Input`, `Output`\> \| [`ClassTransformer`](index.md#classtransformer) \| [`SymbolTransformer`](index.md#symboltransformer)
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Input`
+
+</td>
+<td>
+
+[`SerializerAny`](index.md#serializerany)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Output` _extends_ [`SerializerValue`](index.md#serializervalue)
+
+</td>
+<td>
+
+[`SerializerAny`](index.md#serializerany)
+
+</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+### SerializerValue
+
+> **SerializerValue**: `string` \| `number` \| `boolean` \| `undefined` \| `null` \| [`SerializerValue`](index.md#serializervalue)[] \| \{\}
+
+---
+
+### SymbolTransformer
+
+> **SymbolTransformer**: `object`
+
+#### Type declaration
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="kind-2"></a> `kind`
+
+</td>
+<td>
+
+`"symbol"`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="symbol"></a> `symbol`
+
+</td>
+<td>
+
+`symbol`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="identifier-1"></a> `identifier`?
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Functions
 
@@ -2470,3 +2885,75 @@ export const cacheExt = cacheExtension(redisStore, {
   ttl: 3600, // TTL in seconds (defaults to 1 hour)
 });
 ```
+
+---
+
+### createSerializer()
+
+> **createSerializer**\<`Input`, `Output`\>(`serializers`?): [`Serializer`](index.md#serializer-1)
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Input`
+
+</td>
+<td>
+
+`any`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Output` _extends_ [`SerializerValue`](index.md#serializervalue)
+
+</td>
+<td>
+
+`any`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`serializers`?
+
+</td>
+<td>
+
+[`SerializerTransformer`](index.md#serializertransformerinput-output)\<`Input`, `Output`\>[]
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+[`Serializer`](index.md#serializer-1)

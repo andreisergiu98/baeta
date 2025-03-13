@@ -1,5 +1,10 @@
-import { Store, type StoreAdapter, type StoreOptions } from '@baeta/extension-cache';
-import type { Redis } from '@upstash/redis';
+import {
+	type Serializer,
+	Store,
+	type StoreAdapter,
+	type StoreOptions,
+} from '@baeta/extension-cache';
+import type { UpstashClient } from './upstash-client.ts';
 import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
 
 /**
@@ -27,11 +32,16 @@ import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
  * ```
  */
 export class UpstashStore extends Store {
-	constructor(protected client: Redis) {
+	constructor(protected client: UpstashClient) {
 		super();
 	}
 
-	createStoreAdapter<T>(options: StoreOptions<T>, type: string, hash: string): StoreAdapter<T> {
-		return new UpstashStoreAdapter<T>(this.client, options, type, hash);
+	createStoreAdapter<T>(
+		serializer: Serializer,
+		options: StoreOptions<T>,
+		type: string,
+		hash: string,
+	): StoreAdapter<T> {
+		return new UpstashStoreAdapter<T>(this.client, serializer, options, type, hash);
 	}
 }

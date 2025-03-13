@@ -1,0 +1,36 @@
+services:
+  redis-test:
+    image: redis:7-alpine
+    ports:
+      - "65535:6379"
+    command: redis-server --save "" --appendonly no  # Disable persistence for tests
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  serverless-redis-http:
+    ports:
+      - "60080:80"
+    image: hiett/serverless-redis-http:latest
+    environment:
+      SRH_MODE: env
+      SRH_TOKEN: example_token
+      SRH_CONNECTION_STRING: "redis://redis-test:6379/1"
+
+  etcd-test:
+    image: bitnami/etcd:latest
+    ports:
+      - "22379:2379"
+      - "22380:2380"
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-test:2379
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+

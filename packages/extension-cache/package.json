@@ -41,19 +41,23 @@
     "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
+    "test": "ava",
     "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/util-encoding": "workspace:^",
     "@baeta/util-log": "workspace:^",
     "dataloader": "^2.2.3",
-    "flat": "^6.0.1"
+    "flat": "^6.0.1",
+    "superjson": "^2.2.2"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
+    "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "graphql": "^16.10.0",
+    "minimatch": "^10.0.1",
     "typescript": "^5.8.2"
   },
   "peerDependencies": {

@@ -1,6 +1,6 @@
 {
-  "name": "@baeta/extension-cache-upstash",
-  "version": "0.0.6",
+  "name": "@baeta/tests-cache-stores",
+  "private": true,
   "keywords": [
     "baeta",
     "graphql",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/extension-cache-upstash"
+    "directory": "tests/cache-stores"
   },
   "license": "MIT",
   "author": {
@@ -25,51 +25,35 @@
     "url": "https://github.com/andreisergiu98"
   },
   "type": "module",
+  "types": "./index.ts",
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     }
   },
-  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "package.json"
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
     "prepack": "prep",
     "postpack": "prep --clean",
-    "test": "ava",
     "types": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@baeta/extension-cache": "workspace:^"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/core": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
     "@baeta/testing": "workspace:^",
-    "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@upstash/redis": "^1.34.5",
-    "graphql": "^16.10.0",
     "typescript": "^5.8.2"
-  },
-  "peerDependencies": {
-    "@baeta/extension-cache": "workspace:^",
-    "@upstash/redis": "^1.34.3"
   },
   "engines": {
     "node": ">=22.12.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
-    }
   },
   "ava": {
     "extensions": {

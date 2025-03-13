@@ -1,12 +1,12 @@
-import type { DurableObjectNamespace } from '@cloudflare/workers-types';
 import type { Action, GetAction, ListAction, PutAction } from './baeta-cache.ts';
 
 export class CloudflareCacheClient {
 	constructor(public durableObject: DurableObjectNamespace) {}
 
 	private async post(body: Action) {
-		const stubId = this.durableObject.idFromString('');
+		const stubId = this.durableObject.idFromName('BAETA_CACHE');
 		const stub = this.durableObject.get(stubId);
+
 		return stub.fetch('https://baeta-cache-durable-object.internal', {
 			method: 'POST',
 			body: JSON.stringify(body),
@@ -55,6 +55,14 @@ export class CloudflareCacheClient {
 
 	deleteOne = async (key: string) => {
 		await this.delete([key]);
+		return null;
+	};
+
+	flush = async () => {
+		const value: Action = {
+			type: 'flush',
+		};
+		await this.post(value);
 		return null;
 	};
 

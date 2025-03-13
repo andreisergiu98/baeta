@@ -187,6 +187,14 @@
 
 `DurableObject.fetch`
 
+##### flush()
+
+> **flush**(): `Promise`\<`null`\>
+
+###### Returns
+
+`Promise`\<`null`\>
+
 ##### get()
 
 > **get**(`keys`): `Promise`\<`string`\>
@@ -501,6 +509,14 @@
 
 `Promise`\<`null`\>
 
+##### flush()
+
+> **flush**(): `Promise`\<`null`\>
+
+###### Returns
+
+`Promise`\<`null`\>
+
 ##### get()
 
 > **get**(`keys`): `Promise`\<(`null` \| `string`)[]\>
@@ -757,7 +773,7 @@
 
 ##### new CloudflareStoreAdapter()
 
-> **new CloudflareStoreAdapter**\<`Item`\>(`durableObject`, `options`, `type`, `hash`): [`CloudflareStoreAdapter`](module_index.md#cloudflarestoreadapteritem)\<`Item`\>
+> **new CloudflareStoreAdapter**\<`Item`\>(`durableObject`, `serializer`, `options`, `type`, `hash`): [`CloudflareStoreAdapter`](module_index.md#cloudflarestoreadapteritem)\<`Item`\>
 
 ###### Parameters
 
@@ -778,6 +794,18 @@
 <td>
 
 `DurableObjectNamespace`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`serializer`
+
+</td>
+<td>
+
+`Serializer`
 
 </td>
 </tr>
@@ -903,6 +931,28 @@
 <td>
 
 `StoreAdapter.options`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="serializer"></a> `serializer`
+
+</td>
+<td>
+
+`protected`
+
+</td>
+<td>
+
+`Serializer`
+
+</td>
+<td>
+
+`StoreAdapter.serializer`
 
 </td>
 </tr>
@@ -1647,141 +1697,6 @@
 
 `StoreAdapter.deleteQueriesByRef`
 
-##### encodePrimitive()
-
-> `protected` **encodePrimitive**(`value`, `catchAll`?): `null` \| `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`value`
-
-</td>
-<td>
-
-`unknown`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`catchAll`?
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`null` \| `string`
-
-###### Inherited from
-
-`StoreAdapter.encodePrimitive`
-
-##### encodeProperty()
-
-> `protected` **encodeProperty**(`value`): `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`value`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`string`
-
-###### Inherited from
-
-`StoreAdapter.encodeProperty`
-
-##### encodeQueryArgs()
-
-> `protected` **encodeQueryArgs**(`args`, `catchAll`?): `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`args`
-
-</td>
-<td>
-
-`Record`\<`string`, `unknown`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`catchAll`?
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`string`
-
-###### Inherited from
-
-`StoreAdapter.encodeQueryArgs`
-
 ##### encodeQueryItemRef()
 
 > `protected` **encodeQueryItemRef**(`item`): `string`
@@ -2119,43 +2034,6 @@
 
 `StoreAdapter.getRef`
 
-##### getRefFallback()
-
-> `protected` **getRefFallback**(`root`): `undefined` \| `string`
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`root`
-
-</td>
-<td>
-
-`unknown`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`undefined` \| `string`
-
-###### Inherited from
-
-`StoreAdapter.getRefFallback`
-
 ##### getRevision()
 
 > `protected` **getRevision**(): `string`
@@ -2274,9 +2152,9 @@ readonly `ItemRef`[]
 
 `StoreAdapter.loadQueryMetadata`
 
-##### refillNullQueryItems()
+##### parseItem()
 
-> `protected` **refillNullQueryItems**(`nullableRefs`, `items`): (`null` \| `Item`)[]
+> `protected` **parseItem**(`value`): `Item`
 
 ###### Parameters
 
@@ -2291,24 +2169,12 @@ readonly `ItemRef`[]
 <tr>
 <td>
 
-`nullableRefs`
+`value`
 
 </td>
 <td>
 
-(`null` \| `ItemRef`)[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`items`
-
-</td>
-<td>
-
-`Item`[]
+`string`
 
 </td>
 </tr>
@@ -2317,11 +2183,11 @@ readonly `ItemRef`[]
 
 ###### Returns
 
-(`null` \| `Item`)[]
+`Item`
 
 ###### Inherited from
 
-`StoreAdapter.refillNullQueryItems`
+`StoreAdapter.parseItem`
 
 ##### save()
 
@@ -2637,9 +2503,9 @@ readonly `ItemRef`[]
 
 `Promise`\<`string`[]\>
 
-##### shouldEncode()
+##### stringifyItem()
 
-> `protected` **shouldEncode**(`value`): `boolean`
+> `protected` **stringifyItem**(`item`): `string`
 
 ###### Parameters
 
@@ -2654,59 +2520,22 @@ readonly `ItemRef`[]
 <tr>
 <td>
 
-`value`
+`item`
 
 </td>
 <td>
+
+`Item`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+###### Returns
 
 `string`
 
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-`boolean`
-
 ###### Inherited from
 
-`StoreAdapter.shouldEncode`
-
-##### validateRefType()
-
-> `protected` **validateRefType**(`ref`): asserts ref is string \| number \| bigint
-
-###### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`ref`
-
-</td>
-<td>
-
-`unknown`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-###### Returns
-
-asserts ref is string \| number \| bigint
-
-###### Inherited from
-
-`StoreAdapter.validateRefType`
+`StoreAdapter.stringifyItem`

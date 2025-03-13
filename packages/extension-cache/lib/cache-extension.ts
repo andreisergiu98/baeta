@@ -10,16 +10,21 @@ import type {
 	RequiredCacheMiddlewareOptions,
 } from './middleware-options.ts';
 import { CacheRef, type RefCompatibleRoot } from './ref.ts';
+import { type Serializer, type SerializerTransformer, createSerializer } from './serializer.ts';
 import type { CacheQueryMatching, StoreAdapter } from './store-adapter.ts';
 import type { DefaultStoreOptions } from './store-options.ts';
 import type { Store } from './store.ts';
 
 export class CacheExtension extends Extension {
+	private serializer: Serializer;
+
 	constructor(
 		private store: Store,
 		private defaultOptions?: DefaultStoreOptions,
+		transformers: SerializerTransformer[] = [],
 	) {
 		super();
+		this.serializer = createSerializer(transformers);
 	}
 
 	getTypeExtensions = <Root, Context>(
@@ -35,7 +40,7 @@ export class CacheExtension extends Extension {
 					...options,
 				};
 				const typeHash = module.hashes[type]?.hash ?? '0';
-				return this.store.createStoreAdapter<Root>(mergedOptions, type, typeHash);
+				return this.store.createStoreAdapter<Root>(this.serializer, mergedOptions, type, typeHash);
 			},
 		};
 	};

@@ -17,7 +17,7 @@ function createStoreAdapter(options: StoreOptions<TestItem>) {
 }
 
 test.beforeEach(async () => {
-	await client.flushall();
+	await client.flushdb();
 });
 
 test.after(async () => {

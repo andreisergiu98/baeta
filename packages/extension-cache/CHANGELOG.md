@@ -1,5 +1,20 @@
 # @baeta/extension-cache
 
+## 1.0.9
+
+### Patch Changes
+
+- [`583014f`](https://github.com/andreisergiu98/baeta/commit/583014f0bac810b25d9a8226bda2df4c9039f5e3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update dependencies
+
+- [#200](https://github.com/andreisergiu98/baeta/pull/200) [`399ae6c`](https://github.com/andreisergiu98/baeta/commit/399ae6c285d679c6886ab5181cd72461ee646019) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Add serializer to be able to serialize/deserialize some custom scalars
+
+- [`c2e5623`](https://github.com/andreisergiu98/baeta/commit/c2e5623819c1b2b6069ab0663b5c5ad4e09e81b5) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Allow fallback for store.getMany for easier dataloading
+
+- Updated dependencies [[`583014f`](https://github.com/andreisergiu98/baeta/commit/583014f0bac810b25d9a8226bda2df4c9039f5e3)]:
+  - @baeta/core@1.0.9
+  - @baeta/util-encoding@1.0.1
+  - @baeta/util-log@1.0.1
+
 ## 0.0.6
 
 ### Patch Changes

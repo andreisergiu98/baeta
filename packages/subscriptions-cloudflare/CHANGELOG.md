@@ -1,5 +1,11 @@
 # @baeta/subscriptions-cloudflare
 
+## 0.1.6
+
+### Patch Changes
+
+- [`583014f`](https://github.com/andreisergiu98/baeta/commit/583014f0bac810b25d9a8226bda2df4c9039f5e3) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update dependencies
+
 ## 0.1.5
 
 ### Patch Changes

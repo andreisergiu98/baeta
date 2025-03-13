@@ -44,7 +44,6 @@
   ],
   "ignore": [
     "@baeta/examples*",
-    "@baeta/template*",
-    "@baeta/tests*"
+    "@baeta/template*"
   ]
 }

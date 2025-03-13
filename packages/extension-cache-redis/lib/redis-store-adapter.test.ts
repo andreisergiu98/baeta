@@ -7,7 +7,7 @@ import { RedisStoreAdapter } from './redis-store-adapter.ts';
 const client = new Redis({
 	host: 'localhost',
 	port: 65535,
-	db: 0,
+	db: 5,
 	maxRetriesPerRequest: 0, // Fail fast in tests
 });
 

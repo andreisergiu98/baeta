@@ -49,7 +49,7 @@ jobs:
         env:
           SRH_MODE: env
           SRH_TOKEN: example_token
-          SRH_CONNECTION_STRING: "redis://redis:6379/1"
+          SRH_CONNECTION_STRING: "redis://redis:6379/0"
       etcd:
         image: bitnami/etcd:latest
         ports:

@@ -342,7 +342,7 @@ export function runTestsForStoreAdapter(
 		t.deepEqual(immediateResult?.query, item);
 
 		// Wait for TTL to expire
-		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await new Promise((resolve) => setTimeout(resolve, 1100));
 
 		// Item should be expired now
 		const expiredItem = await adapter.get('1');
@@ -376,7 +376,7 @@ export function runTestsForStoreAdapter(
 		});
 
 		// Wait for the original TTL to expire
-		await new Promise((resolve) => setTimeout(resolve, 550));
+		await new Promise((resolve) => setTimeout(resolve, 600));
 
 		// Item should still be available with updated value
 		const result = await adapter.getQueryResult(queryRef, {

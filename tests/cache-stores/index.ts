@@ -4,7 +4,7 @@ import {
 	type StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
-import type { TestFn } from '@baeta/testing';
+import { type TestFn, sleep } from '@baeta/testing';
 
 export interface TestItem {
 	id: string;
@@ -193,7 +193,8 @@ export function runTestsForStoreAdapter(
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		const urlArg = new URL('https://example.com/test?query=value');
+		// @ts-ignore
+		const urlArg = new URL('https://example.com/test?query=value') as unknown;
 		const urlArgs = { url: urlArg };
 
 		await adapter.saveQueryResult(queryRef, item, { parentRef, args: urlArgs });
@@ -207,7 +208,8 @@ export function runTestsForStoreAdapter(
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		const bufferArg = Buffer.from('test buffer');
+		// @ts-ignore
+		const bufferArg = Buffer.from('test buffer') as unknown;
 		const bufferArgs = { buffer: bufferArg };
 
 		await adapter.saveQueryResult(queryRef, item, { parentRef, args: bufferArgs });
@@ -342,7 +344,7 @@ export function runTestsForStoreAdapter(
 		t.deepEqual(immediateResult?.query, item);
 
 		// Wait for TTL to expire
-		await new Promise((resolve) => setTimeout(resolve, 1100));
+		await sleep(1100);
 
 		// Item should be expired now
 		const expiredItem = await adapter.get('1');
@@ -367,7 +369,7 @@ export function runTestsForStoreAdapter(
 		});
 
 		// Wait for half the TTL
-		await new Promise((resolve) => setTimeout(resolve, 500));
+		await sleep(500);
 
 		// Save the updated item with the same key
 		await adapter.saveQueryResult(queryRef, updatedItem, {
@@ -376,7 +378,7 @@ export function runTestsForStoreAdapter(
 		});
 
 		// Wait for the original TTL to expire
-		await new Promise((resolve) => setTimeout(resolve, 600));
+		await sleep(600);
 
 		// Item should still be available with updated value
 		const result = await adapter.getQueryResult(queryRef, {

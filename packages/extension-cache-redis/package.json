@@ -51,7 +51,6 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.13.10",
     "graphql": "^16.10.0",
     "ioredis": "^5.6.0",
     "typescript": "^5.8.2"

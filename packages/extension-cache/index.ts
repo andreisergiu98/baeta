@@ -2,6 +2,7 @@ import './lib/global-types.ts';
 
 import type { Extension } from '@baeta/core/sdk';
 import { CacheExtension } from './lib/cache-extension.ts';
+import type { SerializerTransformer } from './lib/serializer.ts';
 import type { DefaultStoreOptions } from './lib/store-options.ts';
 import type { Store } from './lib/store.ts';
 
@@ -36,6 +37,7 @@ export { createSerializer } from './lib/serializer.ts';
  *
  * @param store - Storage adapter implementation
  * @param options - Default caching options
+ * @param transformers - Serializer transformers for custom scalars that are not serializable by default
  * @returns Extension factory function
  *
  * @example
@@ -52,6 +54,10 @@ export { createSerializer } from './lib/serializer.ts';
  * });
  * ```
  */
-export function cacheExtension(store: Store, options?: DefaultStoreOptions) {
-	return (): Extension => new CacheExtension(store, options);
+export function cacheExtension(
+	store: Store,
+	options?: DefaultStoreOptions,
+	transformers?: SerializerTransformer[],
+) {
+	return (): Extension => new CacheExtension(store, options, transformers);
 }

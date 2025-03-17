@@ -2809,7 +2809,7 @@ Type constraint for objects that are compatible with default cache ref
 
 ### cacheExtension()
 
-> **cacheExtension**(`store`, `options`?): () => `Extension`
+> **cacheExtension**(`store`, `options`?, `transformers`?): () => `Extension`
 
 Creates a cache extension
 
@@ -2855,6 +2855,23 @@ Storage adapter implementation
 <td>
 
 Default caching options
+
+</td>
+</tr>
+<tr>
+<td>
+
+`transformers`?
+
+</td>
+<td>
+
+[`SerializerTransformer`](index.md#serializertransformerinput-output)[]
+
+</td>
+<td>
+
+Serializer transformers for custom scalars that are not serializable by default
 
 </td>
 </tr>

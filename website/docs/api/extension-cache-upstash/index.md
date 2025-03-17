@@ -4895,10 +4895,9 @@ This implementation uses Upstash Redis and is designed for serverless architectu
 #### Example
 
 ```typescript
-import { UpstashStore } from "@baeta/extension-cache-upstash";
-import { Redis } from "@upstash/redis";
+import { UpstashClient, UpstashStore } from "@baeta/extension-cache-upstash";
 
-const redis = new Redis({
+const redis = new UpstashClient({
   url: "UPSTASH_REDIS_URL",
   token: "UPSTASH_REDIS_TOKEN",
 });

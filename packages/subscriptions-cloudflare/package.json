@@ -52,9 +52,9 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250312.0",
+    "@cloudflare/workers-types": "^4.20250410.0",
     "graphql": "^16.10.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4",

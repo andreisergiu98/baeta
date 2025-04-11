@@ -65,13 +65,13 @@
     "@docusaurus/plugin-client-redirects": "^3.7.0",
     "@docusaurus/plugin-sitemap": "^3.7.0",
     "@docusaurus/types": "^3.7.0",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "esbuild": "^0.25.1",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
+    "esbuild": "^0.25.2",
     "esbuild-loader": "^4.3.0",
-    "typedoc": "0.27.9",
-    "typedoc-plugin-markdown": "4.4.2",
-    "typescript": "^5.8.2",
-    "webpack": "^5.98.0"
+    "typedoc": "0.28.2",
+    "typedoc-plugin-markdown": "4.6.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.5"
   }
 }

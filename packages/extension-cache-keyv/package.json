@@ -53,8 +53,8 @@
     "@baeta/tsconfig": "workspace:^",
     "@keyv/etcd": "^2.1.0",
     "graphql": "^16.10.0",
-    "keyv": "^5.3.1",
-    "typescript": "^5.8.2"
+    "keyv": "^5.3.2",
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",

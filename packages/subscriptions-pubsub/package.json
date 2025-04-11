@@ -50,7 +50,7 @@
     "graphql": "^16.10.0",
     "graphql-subscriptions-v2": "npm:graphql-subscriptions@^2.0.0",
     "graphql-subscriptions-v3": "npm:graphql-subscriptions@^3.0.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=22.12.0"

@@ -49,8 +49,8 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.13.10",
-    "typescript": "^5.8.2"
+    "@types/node": "^22.14.0",
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=22.12.0"

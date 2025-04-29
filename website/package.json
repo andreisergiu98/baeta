@@ -67,11 +67,11 @@
     "@docusaurus/types": "^3.7.0",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
-    "esbuild": "^0.25.2",
+    "esbuild": "^0.25.3",
     "esbuild-loader": "^4.3.0",
-    "typedoc": "0.28.2",
-    "typedoc-plugin-markdown": "4.6.2",
+    "typedoc": "0.28.3",
+    "typedoc-plugin-markdown": "4.6.3",
     "typescript": "^5.8.3",
-    "webpack": "^5.99.5"
+    "webpack": "^5.99.7"
   }
 }

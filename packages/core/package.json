@@ -56,7 +56,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.10.0",
+    "graphql": "^16.11.0",
     "graphql-tag": "^2.12.6",
     "typescript": "^5.8.3"
   },

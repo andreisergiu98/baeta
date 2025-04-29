@@ -12,15 +12,15 @@
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
     "@baeta/extension-complexity": "workspace:^",
-    "graphql": "^16.10.0"
+    "graphql": "^16.11.0"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/compiler": "workspace:^",
     "@baeta/plugin-autoload": "workspace:^",
-    "@types/bun": "^1.2.9",
+    "@types/bun": "^1.2.11",
     "@types/deno": "^2.2.0",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.15.3",
     "typescript": "^5.8.3"
   }
 }

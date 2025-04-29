@@ -50,9 +50,9 @@
     "@baeta/extension-cache-cloudflare": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250410.0",
-    "@types/node": "^22.14.0",
-    "graphql": "^16.10.0",
+    "@cloudflare/workers-types": "^4.20250429.0",
+    "@types/node": "^22.15.3",
+    "graphql": "^16.11.0",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {

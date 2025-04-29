@@ -36,7 +36,7 @@
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "graphql": "^16.10.0",
+    "graphql": "^16.11.0",
     "graphql-subscriptions": "^3.0.0",
     "graphql-ws": "^6.0.4",
     "ws": "^8.18.1"
@@ -49,7 +49,7 @@
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.15.3",
     "@types/ws": "^8.18.1",
     "typescript": "^5.8.3"
   }

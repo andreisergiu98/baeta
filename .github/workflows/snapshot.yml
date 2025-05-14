@@ -67,9 +67,10 @@ jobs:
       # issue_comment requires us to checkout the branch
       # https://github.com/actions/checkout/issues/331#issuecomment-1120113003
       - name: Checkout pull request branch
-        run: hub pr checkout ${{ github.event.issue.number }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup env
         uses: ./.github/actions/setup

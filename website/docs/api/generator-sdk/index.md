@@ -39,13 +39,13 @@
 
 #### Extended by
 
-- [`FileBlock`](index.md#fileblock)
+- [`FileBlock`](#fileblock)
 
 #### Constructors
 
-##### new File()
+##### Constructor
 
-> **new File**(`filename`, `content`, `tag`, `options`?): [`File`](index.md#file)
+> **new File**(`filename`, `content`, `tag`, `options?`): [`File`](#file)
 
 ###### Parameters
 
@@ -96,12 +96,12 @@
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`FileOptions`](index.md#fileoptions-1)
+[`FileOptions`](#fileoptions-1)
 
 </td>
 </tr>
@@ -110,7 +110,7 @@
 
 ###### Returns
 
-[`File`](index.md#file)
+[`File`](#file)
 
 #### Properties
 
@@ -288,13 +288,13 @@
 
 #### Extends
 
-- [`File`](index.md#file)
+- [`File`](#file)
 
 #### Constructors
 
-##### new FileBlock()
+##### Constructor
 
-> **new FileBlock**(`filename`, `content`, `start`, `end`, `tag`, `options`?): [`FileBlock`](index.md#fileblock)
+> **new FileBlock**(`filename`, `content`, `start`, `end`, `tag`, `options?`): [`FileBlock`](#fileblock)
 
 ###### Parameters
 
@@ -369,12 +369,12 @@
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`FileOptions`](index.md#fileoptions-1)
+[`FileOptions`](#fileoptions-1)
 
 </td>
 </tr>
@@ -383,11 +383,11 @@
 
 ###### Returns
 
-[`FileBlock`](index.md#fileblock)
+[`FileBlock`](#fileblock)
 
 ###### Overrides
 
-[`File`](index.md#file).[`constructor`](index.md#constructors)
+[`File`](#file).[`constructor`](#constructor)
 
 #### Properties
 
@@ -425,7 +425,7 @@
 </td>
 <td>
 
-[`File`](index.md#file).[`content`](index.md#content)
+[`File`](#file).[`content`](#content)
 
 </td>
 </tr>
@@ -479,7 +479,7 @@
 </td>
 <td>
 
-[`File`](index.md#file).[`filename`](index.md#filename)
+[`File`](#file).[`filename`](#filename)
 
 </td>
 </tr>
@@ -506,7 +506,7 @@
 </td>
 <td>
 
-[`File`](index.md#file).[`persisted`](index.md#persisted)
+[`File`](#file).[`persisted`](#persisted)
 
 </td>
 </tr>
@@ -560,7 +560,7 @@
 </td>
 <td>
 
-[`File`](index.md#file).[`tag`](index.md#tag)
+[`File`](#file).[`tag`](#tag)
 
 </td>
 </tr>
@@ -612,7 +612,7 @@
 
 ###### Inherited from
 
-[`File`](index.md#file).[`buildContent`](index.md#buildcontent)
+[`File`](#file).[`buildContent`](#buildcontent)
 
 ##### buildHeader()
 
@@ -624,7 +624,7 @@
 
 ###### Inherited from
 
-[`File`](index.md#file).[`buildHeader`](index.md#buildheader)
+[`File`](#file).[`buildHeader`](#buildheader)
 
 ##### buildPadding()
 
@@ -694,7 +694,7 @@
 
 ###### Inherited from
 
-[`File`](index.md#file).[`createComment`](index.md#createcomment)
+[`File`](#file).[`createComment`](#createcomment)
 
 ##### getExistingContent()
 
@@ -747,7 +747,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Overrides
 
-[`File`](index.md#file).[`unlink`](index.md#unlink)
+[`File`](#file).[`unlink`](#unlink)
 
 ##### write()
 
@@ -759,7 +759,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Overrides
 
-[`File`](index.md#file).[`write`](index.md#write)
+[`File`](#file).[`write`](#write)
 
 ---
 
@@ -767,9 +767,9 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 #### Constructors
 
-##### new FileManager()
+##### Constructor
 
-> **new FileManager**(`fileOptions`?): [`FileManager`](index.md#filemanager)
+> **new FileManager**(`fileOptions?`): [`FileManager`](#filemanager)
 
 ###### Parameters
 
@@ -784,12 +784,12 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 <tr>
 <td>
 
-`fileOptions`?
+`fileOptions?`
 
 </td>
 <td>
 
-[`FileOptions`](index.md#fileoptions-1)
+[`FileOptions`](#fileoptions-1)
 
 </td>
 </tr>
@@ -798,7 +798,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Returns
 
-[`FileManager`](index.md#filemanager)
+[`FileManager`](#filemanager)
 
 #### Properties
 
@@ -825,7 +825,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`File`](index.md#file)[]
+[`File`](#file)[]
 
 </td>
 <td>
@@ -847,7 +847,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`FileOptions`](index.md#fileoptions-1)
+[`FileOptions`](#fileoptions-1)
 
 </td>
 <td>
@@ -883,7 +883,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`File`](index.md#file)[]
+[`File`](#file)[]
 
 </td>
 </tr>
@@ -896,7 +896,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ##### createAndAdd()
 
-> **createAndAdd**(`filename`, `content`, `tag`): [`File`](index.md#file)
+> **createAndAdd**(`filename`, `content`, `tag`): [`File`](#file)
 
 ###### Parameters
 
@@ -949,11 +949,11 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Returns
 
-[`File`](index.md#file)
+[`File`](#file)
 
 ##### get()
 
-> **get**(`filename`): `undefined` \| [`File`](index.md#file)
+> **get**(`filename`): `undefined` \| [`File`](#file)
 
 ###### Parameters
 
@@ -982,19 +982,19 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Returns
 
-`undefined` \| [`File`](index.md#file)
+`undefined` \| [`File`](#file)
 
 ##### getAll()
 
-> **getAll**(): [`File`](index.md#file)[]
+> **getAll**(): [`File`](#file)[]
 
 ###### Returns
 
-[`File`](index.md#file)[]
+[`File`](#file)[]
 
 ##### getByTag()
 
-> **getByTag**(`tag`): [`File`](index.md#file)[]
+> **getByTag**(`tag`): [`File`](#file)[]
 
 ###### Parameters
 
@@ -1023,15 +1023,15 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Returns
 
-[`File`](index.md#file)[]
+[`File`](#file)[]
 
 ##### getPersistedFiles()
 
-> **getPersistedFiles**(): [`File`](index.md#file)[]
+> **getPersistedFiles**(): [`File`](#file)[]
 
 ###### Returns
 
-[`File`](index.md#file)[]
+[`File`](#file)[]
 
 ##### remove()
 
@@ -1162,9 +1162,9 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 #### Constructors
 
-##### new Watcher()
+##### Constructor
 
-> **new Watcher**(`cwd`, `options`?): [`Watcher`](index.md#watcher)
+> **new Watcher**(`cwd`, `options?`): [`Watcher`](#watcher)
 
 ###### Parameters
 
@@ -1191,7 +1191,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
@@ -1205,7 +1205,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Returns
 
-[`Watcher`](index.md#watcher)
+[`Watcher`](#watcher)
 
 #### Methods
 
@@ -1225,9 +1225,28 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 `object`
 
-| Name          | Type                      |
-| ------------- | ------------------------- |
-| `unsubscribe` | () => `Promise`\<`void`\> |
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`unsubscribe()`
+
+</td>
+<td>
+
+() => `Promise`\<`void`\>
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ##### ignore()
 
@@ -1251,7 +1270,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`MatchPattern`](index.md#matchpattern)
+[`MatchPattern`](#matchpattern)
 
 </td>
 </tr>
@@ -1296,7 +1315,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`WatcherListener`](index.md#watcherlistener)
+[`WatcherListener`](#watcherlistener)
 
 </td>
 </tr>
@@ -1341,7 +1360,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`WatcherListener`](index.md#watcherlistener)
+[`WatcherListener`](#watcherlistener)
 
 </td>
 </tr>
@@ -1419,7 +1438,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`MatchPattern`](index.md#matchpattern)
+[`MatchPattern`](#matchpattern)
 
 </td>
 </tr>
@@ -1436,9 +1455,9 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 #### Constructors
 
-##### new WatcherIgnore()
+##### Constructor
 
-> **new WatcherIgnore**(`cwd`): [`WatcherIgnore`](index.md#watcherignore)
+> **new WatcherIgnore**(`cwd`): [`WatcherIgnore`](#watcherignore-2)
 
 ###### Parameters
 
@@ -1467,7 +1486,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 ###### Returns
 
-[`WatcherIgnore`](index.md#watcherignore)
+[`WatcherIgnore`](#watcherignore-2)
 
 #### Methods
 
@@ -1493,7 +1512,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`MatchPattern`](index.md#matchpattern)
+[`MatchPattern`](#matchpattern)
 
 </td>
 </tr>
@@ -1625,7 +1644,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 </td>
 <td>
 
-[`MatchPattern`](index.md#matchpattern)
+[`MatchPattern`](#matchpattern)
 
 </td>
 </tr>
@@ -1710,7 +1729,7 @@ Add generation notice at the beginning of the file.
 </td>
 <td>
 
-(`name`: `string`, `content`: `string`, `tag`: `string`) => `string`
+(`name`, `content`, `tag`) => `string`
 
 </td>
 <td>
@@ -1732,7 +1751,7 @@ Add custom header at the beginning of the file.
 </td>
 <td>
 
-(`name`: `string`, `content`: `string`, `tag`: `string`) => `string` \| `Promise`\<`string`\>
+(`name`, `content`, `tag`) => `string` \| `Promise`\<`string`\>
 
 </td>
 <td>
@@ -1913,7 +1932,7 @@ extensions: "src/extensions.ts";
 </td>
 <td>
 
-[`FileOptions`](index.md#fileoptions-1)
+[`FileOptions`](#fileoptions-1)
 
 </td>
 <td>
@@ -1960,7 +1979,7 @@ Set to false to omit extensions.
 </td>
 <td>
 
-[`Loader`](index.md#loadertoptions)\<`any`\>[]
+[`Loader`](#loader)\<`any`\>[]
 
 </td>
 <td>
@@ -2117,7 +2136,7 @@ Supports global types and imports.
 </td>
 <td>
 
-[`GeneratorPluginV1Fn`](index.md#generatorpluginv1fnstore)\<`Store`\>
+[`GeneratorPluginV1Fn`](#generatorpluginv1fn)\<`Store`\>
 
 </td>
 </tr>
@@ -2129,7 +2148,7 @@ Supports global types and imports.
 </td>
 <td>
 
-[`GeneratorPluginV1Fn`](index.md#generatorpluginv1fnstore)\<`Store`\>
+[`GeneratorPluginV1Fn`](#generatorpluginv1fn)\<`Store`\>
 
 </td>
 </tr>
@@ -2153,7 +2172,7 @@ Supports global types and imports.
 </td>
 <td>
 
-[`GeneratorPluginV1Fn`](index.md#generatorpluginv1fnstore)\<`Store`\>
+[`GeneratorPluginV1Fn`](#generatorpluginv1fn)\<`Store`\>
 
 </td>
 </tr>
@@ -2165,7 +2184,7 @@ Supports global types and imports.
 </td>
 <td>
 
-[`Generator`](../plugin/index.md#generator)
+[`Generator`](../plugin.md#plugintype#generator)
 
 </td>
 </tr>
@@ -2177,7 +2196,7 @@ Supports global types and imports.
 </td>
 <td>
 
-[`V1`](index.md#v1)
+[`V1`](#v1)
 
 </td>
 </tr>
@@ -2189,7 +2208,7 @@ Supports global types and imports.
 </td>
 <td>
 
-[`GeneratorPluginV1WatchOptions`](index.md#generatorpluginv1watchoptions)
+[`GeneratorPluginV1WatchOptions`](#generatorpluginv1watchoptions)
 
 </td>
 </tr>
@@ -2231,7 +2250,7 @@ Interface for custom schema loaders.
 
 ##### load()
 
-> **load**(`pointer`, `options`?): `Promise`\<`null` \| `any`[]\>
+> **load**(`pointer`, `options?`): `Promise`\<`null` \| `any`[]\>
 
 ###### Parameters
 
@@ -2258,7 +2277,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
@@ -2276,7 +2295,7 @@ Interface for custom schema loaders.
 
 ##### loadSync()?
 
-> `optional` **loadSync**(`pointer`, `options`?): `null` \| `any`[]
+> `optional` **loadSync**(`pointer`, `options?`): `null` \| `any`[]
 
 ###### Parameters
 
@@ -2303,7 +2322,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
@@ -2425,7 +2444,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`FileOptions`](index.md#fileoptions-1)
+[`FileOptions`](#fileoptions-1)
 
 </td>
 </tr>
@@ -2449,7 +2468,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`Loader`](index.md#loadertoptions)\<`any`\>[]
+[`Loader`](#loader)\<`any`\>[]
 
 </td>
 </tr>
@@ -2525,7 +2544,7 @@ Interface for custom schema loaders.
 
 ### Ctx\<T\>
 
-> **Ctx**\<`T`\>: `object` & `T`
+> **Ctx**\<`T`\> = `object` & `T`
 
 #### Type declaration
 
@@ -2581,7 +2600,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`FileManager`](index.md#filemanager)
+[`FileManager`](#filemanager)
 
 </td>
 </tr>
@@ -2593,7 +2612,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`NormalizedGeneratorOptions`](index.md#normalizedgeneratoroptions)
+[`NormalizedGeneratorOptions`](#normalizedgeneratoroptions)
 
 </td>
 </tr>
@@ -2624,12 +2643,12 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`changedFile`?
+`changedFile?`
 
 </td>
 <td>
 
-[`WatcherFile`](index.md#watcherfile)
+[`WatcherFile`](#watcherfile)
 
 </td>
 </tr>
@@ -2665,7 +2684,7 @@ Interface for custom schema loaders.
 
 ### GeneratorPluginV1Factory\<Store\>
 
-> **GeneratorPluginV1Factory**\<`Store`\>: `object`
+> **GeneratorPluginV1Factory**\<`Store`\> = `object`
 
 #### Type Parameters
 
@@ -2692,12 +2711,12 @@ Interface for custom schema loaders.
 </tbody>
 </table>
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 </tr>
 </thead>
@@ -2729,48 +2748,48 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-<a id="end-2"></a> `end`?
+<a id="end-2"></a> `end?`
 
 </td>
 <td>
 
-[`GeneratorPluginV1Fn`](index.md#generatorpluginv1fnstore)\<`Store`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="generate-1"></a> `generate`?
-
-</td>
-<td>
-
-[`GeneratorPluginV1Fn`](index.md#generatorpluginv1fnstore)\<`Store`\>
+[`GeneratorPluginV1Fn`](#generatorpluginv1fn)\<`Store`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-<a id="setup-1"></a> `setup`?
+<a id="generate-1"></a> `generate?`
 
 </td>
 <td>
 
-[`GeneratorPluginV1Fn`](index.md#generatorpluginv1fnstore)\<`Store`\>
+[`GeneratorPluginV1Fn`](#generatorpluginv1fn)\<`Store`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-<a id="watch-1"></a> `watch`?
+<a id="setup-1"></a> `setup?`
 
 </td>
 <td>
 
-[`GeneratorPluginV1WatchOptions`](index.md#generatorpluginv1watchoptions)
+[`GeneratorPluginV1Fn`](#generatorpluginv1fn)\<`Store`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="watch-1"></a> `watch?`
+
+</td>
+<td>
+
+[`GeneratorPluginV1WatchOptions`](#generatorpluginv1watchoptions)
 
 </td>
 </tr>
@@ -2781,7 +2800,7 @@ Interface for custom schema loaders.
 
 ### GeneratorPluginV1Fn()\<Store\>
 
-> **GeneratorPluginV1Fn**\<`Store`\>: (`ctx`, `next`) => `Promise`\<`void`\>
+> **GeneratorPluginV1Fn**\<`Store`\> = (`ctx`, `next`) => `Promise`\<`void`\>
 
 #### Type Parameters
 
@@ -2826,7 +2845,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`Ctx`](index.md#ctxt)\<`Store`\>
+[`Ctx`](#ctx)\<`Store`\>
 
 </td>
 </tr>
@@ -2853,7 +2872,7 @@ Interface for custom schema loaders.
 
 ### GeneratorPluginV1ReloadFn()
 
-> **GeneratorPluginV1ReloadFn**: (`file`) => `void`
+> **GeneratorPluginV1ReloadFn** = (`file`) => `void`
 
 #### Parameters
 
@@ -2873,7 +2892,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`WatcherFile`](index.md#watcherfile)
+[`WatcherFile`](#watcherfile)
 
 </td>
 </tr>
@@ -2888,7 +2907,7 @@ Interface for custom schema loaders.
 
 ### GeneratorPluginV1WatchOptions()
 
-> **GeneratorPluginV1WatchOptions**: (`options`, `watcher`, `reload`) => `void`
+> **GeneratorPluginV1WatchOptions** = (`options`, `watcher`, `reload`) => `void`
 
 #### Parameters
 
@@ -2908,7 +2927,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`NormalizedGeneratorOptions`](index.md#normalizedgeneratoroptions)
+[`NormalizedGeneratorOptions`](#normalizedgeneratoroptions)
 
 </td>
 </tr>
@@ -2920,7 +2939,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`Watcher`](index.md#watcher)
+[`Watcher`](#watcher)
 
 </td>
 </tr>
@@ -2932,7 +2951,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`GeneratorPluginV1ReloadFn`](index.md#generatorpluginv1reloadfn)
+[`GeneratorPluginV1ReloadFn`](#generatorpluginv1reloadfn)
 
 </td>
 </tr>
@@ -2947,7 +2966,7 @@ Interface for custom schema loaders.
 
 ### MatchFn()
 
-> **MatchFn**: (`testString`) => `boolean`
+> **MatchFn** = (`testString`) => `boolean`
 
 #### Parameters
 
@@ -2982,13 +3001,13 @@ Interface for custom schema loaders.
 
 ### MatchPattern
 
-> **MatchPattern**: `string` \| `RegExp` \| [`MatchFn`](index.md#matchfn)
+> **MatchPattern** = `string` \| `RegExp` \| [`MatchFn`](#matchfn)
 
 ---
 
 ### WatcherListener()
 
-> **WatcherListener**: (`path`) => `void`
+> **WatcherListener** = (`path`) => `void`
 
 #### Parameters
 
@@ -3008,7 +3027,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`WatcherFile`](index.md#watcherfile)
+[`WatcherFile`](#watcherfile)
 
 </td>
 </tr>
@@ -3019,11 +3038,108 @@ Interface for custom schema loaders.
 
 `void`
 
+## Variables
+
+### isMatch()
+
+> `const` **isMatch**: (`string`, `pattern`, `options?`) => `boolean` = `micromatch.isMatch`
+
+Returns true if the specified `string` matches the given glob `pattern`.
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`string`
+
+</td>
+<td>
+
+`string`
+
+</td>
+<td>
+
+String to match
+
+</td>
+</tr>
+<tr>
+<td>
+
+`pattern`
+
+</td>
+<td>
+
+`string` \| readonly `string`[]
+
+</td>
+<td>
+
+Glob pattern to use for matching.
+
+</td>
+</tr>
+<tr>
+<td>
+
+`options?`
+
+</td>
+<td>
+
+[`Options`](namespaces/micromatch.md#options)
+
+</td>
+<td>
+
+See available options for changing how matches are performed
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`boolean`
+
+Returns true if the string matches the glob pattern.
+
+#### Example
+
+```js
+var mm = require('micromatch');
+mm.isMatch(string, pattern[, options]);
+
+console.log(mm.isMatch('a.a', '*.a'));
+//=> true
+console.log(mm.isMatch('a.b', '*.a'));
+//=> false
+```
+
+---
+
+### micromatch
+
+> **micromatch**: `Micromatch`
+
 ## Functions
 
 ### createPluginV1()
 
-> **createPluginV1**\<`Store`\>(`options`): [`GeneratorPluginV1`](index.md#generatorpluginv1store)\<`Store`\>
+> **createPluginV1**\<`Store`\>(`options`): [`GeneratorPluginV1`](#generatorpluginv1)\<`Store`\>
 
 #### Type Parameters
 
@@ -3068,7 +3184,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`GeneratorPluginV1Factory`](index.md#generatorpluginv1factorystore)\<`Store`\>
+[`GeneratorPluginV1Factory`](#generatorpluginv1factory)\<`Store`\>
 
 </td>
 </tr>
@@ -3077,13 +3193,13 @@ Interface for custom schema loaders.
 
 #### Returns
 
-[`GeneratorPluginV1`](index.md#generatorpluginv1store)\<`Store`\>
+[`GeneratorPluginV1`](#generatorpluginv1)\<`Store`\>
 
 ---
 
 ### getGeneratorPlugins()
 
-> **getGeneratorPlugins**(`plugins`?): [`GeneratorPluginV1`](index.md#generatorpluginv1store)\<`unknown`\>[]
+> **getGeneratorPlugins**(`plugins?`): [`GeneratorPluginV1`](#generatorpluginv1)\<`unknown`\>[]
 
 #### Parameters
 
@@ -3098,7 +3214,7 @@ Interface for custom schema loaders.
 <tr>
 <td>
 
-`plugins`?
+`plugins?`
 
 </td>
 <td>
@@ -3112,7 +3228,7 @@ Interface for custom schema loaders.
 
 #### Returns
 
-[`GeneratorPluginV1`](index.md#generatorpluginv1store)\<`unknown`\>[]
+[`GeneratorPluginV1`](#generatorpluginv1)\<`unknown`\>[]
 
 ---
 
@@ -3243,7 +3359,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-\{ `type`: [`PluginType`](../plugin/index.md#plugintype); \}
+\{ `type`: [`PluginType`](../plugin.md#plugintype); \}
 
 </td>
 </tr>
@@ -3255,7 +3371,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-[`PluginType`](../plugin/index.md#plugintype)
+[`PluginType`](../plugin.md#plugintype)
 
 </td>
 </tr>
@@ -3268,100 +3384,9 @@ Interface for custom schema loaders.
 
 ---
 
-### isMatch()
-
-> **isMatch**(`string`, `pattern`, `options`?): `boolean`
-
-Returns true if the specified `string` matches the given glob `pattern`.
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`string`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-String to match
-
-</td>
-</tr>
-<tr>
-<td>
-
-`pattern`
-
-</td>
-<td>
-
-`string` \| readonly `string`[]
-
-</td>
-<td>
-
-Glob pattern to use for matching.
-
-</td>
-</tr>
-<tr>
-<td>
-
-`options`?
-
-</td>
-<td>
-
-[`Options`](namespaces/micromatch.md#options)
-
-</td>
-<td>
-
-See available options for changing how matches are performed
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`boolean`
-
-Returns true if the string matches the glob pattern.
-
-#### Example
-
-```js
-var mm = require('micromatch');
-mm.isMatch(string, pattern[, options]);
-
-console.log(mm.isMatch('a.a', '*.a'));
-//=> true
-console.log(mm.isMatch('a.b', '*.a'));
-//=> false
-```
-
----
-
 ### loadOptions()
 
-> **loadOptions**(`options`): [`NormalizedGeneratorOptions`](index.md#normalizedgeneratoroptions)
+> **loadOptions**(`options`): [`NormalizedGeneratorOptions`](#normalizedgeneratoroptions)
 
 #### Parameters
 
@@ -3381,7 +3406,7 @@ console.log(mm.isMatch('a.b', '*.a'));
 </td>
 <td>
 
-[`GeneratorOptions`](index.md#generatoroptions)
+[`GeneratorOptions`](#generatoroptions)
 
 </td>
 </tr>
@@ -3390,93 +3415,4 @@ console.log(mm.isMatch('a.b', '*.a'));
 
 #### Returns
 
-[`NormalizedGeneratorOptions`](index.md#normalizedgeneratoroptions)
-
----
-
-### micromatch()
-
-> **micromatch**(`list`, `patterns`, `options`?): `string`[]
-
-The main function takes a list of strings and one or more glob patterns to use for matching.
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`list`
-
-</td>
-<td>
-
-readonly `string`[]
-
-</td>
-<td>
-
-A list of strings to match
-
-</td>
-</tr>
-<tr>
-<td>
-
-`patterns`
-
-</td>
-<td>
-
-`string` \| readonly `string`[]
-
-</td>
-<td>
-
-One or more glob patterns to use for matching.
-
-</td>
-</tr>
-<tr>
-<td>
-
-`options`?
-
-</td>
-<td>
-
-[`Options`](namespaces/micromatch.md#options)
-
-</td>
-<td>
-
-See available options for changing how matches are performed
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`string`[]
-
-Returns an array of matches
-
-#### Example
-
-```js
-var mm = require('micromatch');
-mm(list, patterns[, options]);
-
-console.log(mm(['a.js', 'a.txt'], ['*.js']));
-//=> [ 'a.js' ]
-```
+[`NormalizedGeneratorOptions`](#normalizedgeneratoroptions)

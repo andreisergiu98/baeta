@@ -3,4 +3,4 @@
 ## Modules
 
 - [esbuild](esbuild.md)
-- [index](module_index.md)
+- [index](index-1.md)

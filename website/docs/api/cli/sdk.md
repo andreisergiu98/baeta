@@ -22,7 +22,7 @@
 </td>
 <td>
 
-[`LoadedBaetaConfig`](sdk.md#loadedbaetaconfig)
+[`LoadedBaetaConfig`](#loadedbaetaconfig)
 
 </td>
 </tr>
@@ -63,7 +63,7 @@
 </td>
 <td>
 
-[`TextOutput`](sdk.md#textoutput)[]
+[`TextOutput`](#textoutput)[]
 
 </td>
 </tr>
@@ -75,7 +75,7 @@
 </td>
 <td>
 
-[`TextOutput`](sdk.md#textoutput)[]
+[`TextOutput`](#textoutput)[]
 
 </td>
 </tr>
@@ -181,7 +181,7 @@
 </td>
 <td>
 
-[`BaetaOptions`](module_index.md#baetaoptions)
+[`BaetaOptions`](index-1.md#baetaoptions)
 
 </td>
 </tr>
@@ -257,14 +257,14 @@
 
 ### ConfigEventMap
 
-> **ConfigEventMap**: `object`
+> **ConfigEventMap** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 </tr>
 </thead>
@@ -277,7 +277,7 @@
 </td>
 <td>
 
-\[[`LoadedBaetaConfig`](sdk.md#loadedbaetaconfig)\]
+\[[`LoadedBaetaConfig`](#loadedbaetaconfig)\]
 
 </td>
 </tr>
@@ -288,14 +288,14 @@
 
 ### TextOutput
 
-> **TextOutput**: `object`
+> **TextOutput** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 </tr>
 </thead>
@@ -329,9 +329,84 @@
 
 ## Variables
 
+### ConfigProviderBase
+
+> **ConfigProviderBase**: `ProviderWrapped`\<[`ConfigProps`](#configprops)\>
+
+---
+
 ### errorNamespace
 
 > `const` **errorNamespace**: `string`
+
+---
+
+### useConfig()
+
+> **useConfig**: () => `object`
+
+#### Returns
+
+`object`
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`config`
+
+</td>
+<td>
+
+[`BaetaOptions`](index-1.md#baetaoptions)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`events`
+
+</td>
+<td>
+
+`EventEmitter`\<[`ConfigEventMap`](#configeventmap)\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`location`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`relativeLocation`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Functions
 
@@ -357,42 +432,7 @@
 </td>
 <td>
 
-`PropsWithChildren`\<[`ConfigProps`](sdk.md#configprops)\>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`Element`
-
----
-
-### ConfigProviderBase()
-
-> **ConfigProviderBase**(`props`): `Element`
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`props`
-
-</td>
-<td>
-
-`PropsWithChildren`\<[`ConfigProps`](sdk.md#configprops)\>
+`PropsWithChildren`\<[`ConfigProps`](#configprops)\>
 
 </td>
 </tr>
@@ -491,7 +531,7 @@
 </td>
 <td>
 
-[`ErrorsProps`](sdk.md#errorsprops)
+[`ErrorsProps`](#errorsprops)
 
 </td>
 </tr>
@@ -526,7 +566,7 @@
 </td>
 <td>
 
-`PropsWithChildren`\<[`LayoutProps`](sdk.md#layoutprops)\>
+`PropsWithChildren`\<[`LayoutProps`](#layoutprops)\>
 
 </td>
 </tr>
@@ -670,16 +710,46 @@
 
 `object`
 
-| Name   | Type     |
-| ------ | -------- |
-| `id`   | `string` |
-| `text` | `string` |
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`id`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`text`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ---
 
 ### renderComponent()
 
-> **renderComponent**\<`P`\>(`Component`, `props`, `configProps`?): `void`
+> **renderComponent**\<`P`\>(`Component`, `props`, `configProps?`): `void`
 
 #### Type Parameters
 
@@ -737,12 +807,12 @@
 <tr>
 <td>
 
-`configProps`?
+`configProps?`
 
 </td>
 <td>
 
-[`ConfigProps`](sdk.md#configprops)
+[`ConfigProps`](#configprops)
 
 </td>
 </tr>
@@ -757,7 +827,7 @@
 
 ### renderComponentWithoutConfig()
 
-> **renderComponentWithoutConfig**\<`P`\>(`component`, `props`?): `void`
+> **renderComponentWithoutConfig**\<`P`\>(`component`, `props?`): `void`
 
 #### Type Parameters
 
@@ -803,7 +873,7 @@
 <tr>
 <td>
 
-`props`?
+`props?`
 
 </td>
 <td>
@@ -853,7 +923,7 @@
 </td>
 <td>
 
-[`TimeProps`](sdk.md#timeprops)
+[`TimeProps`](#timeprops)
 
 </td>
 </tr>
@@ -863,23 +933,6 @@
 #### Returns
 
 `null` \| `Element`
-
----
-
-### useConfig()
-
-> **useConfig**(): `object`
-
-#### Returns
-
-`object`
-
-| Name               | Type                                                        |
-| ------------------ | ----------------------------------------------------------- |
-| `config`           | [`BaetaOptions`](module_index.md#baetaoptions)              |
-| `events`           | `EventEmitter`\<[`ConfigEventMap`](sdk.md#configeventmap)\> |
-| `location`         | `string`                                                    |
-| `relativeLocation` | `string`                                                    |
 
 ---
 
@@ -905,7 +958,7 @@
 </td>
 <td>
 
-[`ConfigProps`](sdk.md#configprops)
+[`ConfigProps`](#configprops)
 
 </td>
 </tr>
@@ -916,9 +969,61 @@
 
 `object`
 
-| Name               | Type                                                        |
-| ------------------ | ----------------------------------------------------------- |
-| `config`           | [`BaetaOptions`](module_index.md#baetaoptions)              |
-| `events`           | `EventEmitter`\<[`ConfigEventMap`](sdk.md#configeventmap)\> |
-| `location`         | `string`                                                    |
-| `relativeLocation` | `string`                                                    |
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`config`
+
+</td>
+<td>
+
+[`BaetaOptions`](index-1.md#baetaoptions)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`events`
+
+</td>
+<td>
+
+`EventEmitter`\<[`ConfigEventMap`](#configeventmap)\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`location`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`relativeLocation`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+</tbody>
+</table>

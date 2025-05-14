@@ -30,7 +30,7 @@
 </td>
 <td>
 
-'0-baeta-subscription-init'
+`'0-baeta-subscription-init'`
 
 </td>
 </tr>
@@ -101,7 +101,7 @@
 </td>
 <td>
 
-'baeta-subs-v1'
+`'baeta-subs-v1'`
 
 </td>
 </tr>

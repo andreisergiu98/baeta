@@ -71,7 +71,7 @@
 
 #### Extended by
 
-- [`ScanOptions`](micromatch.md#scanoptions)
+- [`ScanOptions`](#scanoptions)
 
 #### Properties
 
@@ -275,7 +275,7 @@ false;
 </td>
 <td>
 
-(`left`: `string`, `right`: `string`, `options`: [`Options`](micromatch.md#options)) => `string`
+(`left`, `right`, `options`) => `string`
 
 </td>
 <td>
@@ -369,7 +369,7 @@ undefined;
 </td>
 <td>
 
-(`returnedString`: `string`) => `string`
+(`returnedString`) => `string`
 
 </td>
 <td>
@@ -715,7 +715,7 @@ false;
 </td>
 <td>
 
-(`item`: [`Item`](micromatch.md#item)) => `void`
+(`item`) => `void`
 
 </td>
 <td>
@@ -738,7 +738,7 @@ undefined;
 </td>
 <td>
 
-(`item`: [`Item`](micromatch.md#item)) => `void`
+(`item`) => `void`
 
 </td>
 <td>
@@ -761,7 +761,7 @@ undefined;
 </td>
 <td>
 
-(`item`: [`Item`](micromatch.md#item)) => `void`
+(`item`) => `void`
 
 </td>
 <td>
@@ -958,7 +958,7 @@ undefined;
 
 #### Extended by
 
-- [`ScanInfoWithParts`](micromatch.md#scaninfowithparts)
+- [`ScanInfoWithParts`](#scaninfowithparts)
 
 #### Properties
 
@@ -1260,11 +1260,11 @@ undefined;
 
 #### Extends
 
-- [`ScanInfo`](micromatch.md#scaninfo)
+- [`ScanInfo`](#scaninfo)
 
 #### Extended by
 
-- [`ScanInfoWithTokens`](micromatch.md#scaninfowithtokens)
+- [`ScanInfoWithTokens`](#scaninfowithtokens)
 
 #### Properties
 
@@ -1290,7 +1290,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`base`](micromatch.md#base)
+[`ScanInfo`](#scaninfo).[`base`](#base)
 
 </td>
 </tr>
@@ -1307,7 +1307,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`glob`](micromatch.md#glob-1)
+[`ScanInfo`](#scaninfo).[`glob`](#glob-1)
 
 </td>
 </tr>
@@ -1324,7 +1324,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`input`](micromatch.md#input-1)
+[`ScanInfo`](#scaninfo).[`input`](#input-1)
 
 </td>
 </tr>
@@ -1341,7 +1341,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`isBrace`](micromatch.md#isbrace)
+[`ScanInfo`](#scaninfo).[`isBrace`](#isbrace)
 
 </td>
 </tr>
@@ -1358,7 +1358,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`isBracket`](micromatch.md#isbracket)
+[`ScanInfo`](#scaninfo).[`isBracket`](#isbracket)
 
 </td>
 </tr>
@@ -1375,7 +1375,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`isExtglob`](micromatch.md#isextglob)
+[`ScanInfo`](#scaninfo).[`isExtglob`](#isextglob)
 
 </td>
 </tr>
@@ -1392,7 +1392,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`isGlob`](micromatch.md#isglob)
+[`ScanInfo`](#scaninfo).[`isGlob`](#isglob)
 
 </td>
 </tr>
@@ -1409,7 +1409,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`isGlobstar`](micromatch.md#isglobstar)
+[`ScanInfo`](#scaninfo).[`isGlobstar`](#isglobstar)
 
 </td>
 </tr>
@@ -1426,7 +1426,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`negated`](micromatch.md#negated)
+[`ScanInfo`](#scaninfo).[`negated`](#negated)
 
 </td>
 </tr>
@@ -1443,7 +1443,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`negatedExtglob`](micromatch.md#negatedextglob)
+[`ScanInfo`](#scaninfo).[`negatedExtglob`](#negatedextglob)
 
 </td>
 </tr>
@@ -1477,7 +1477,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`prefix`](micromatch.md#prefix)
+[`ScanInfo`](#scaninfo).[`prefix`](#prefix)
 
 </td>
 </tr>
@@ -1511,7 +1511,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfo`](micromatch.md#scaninfo).[`start`](micromatch.md#start)
+[`ScanInfo`](#scaninfo).[`start`](#start)
 
 </td>
 </tr>
@@ -1524,7 +1524,7 @@ undefined;
 
 #### Extends
 
-- [`ScanInfoWithParts`](micromatch.md#scaninfowithparts)
+- [`ScanInfoWithParts`](#scaninfowithparts)
 
 #### Properties
 
@@ -1550,7 +1550,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`base`](micromatch.md#base-1)
+[`ScanInfoWithParts`](#scaninfowithparts).[`base`](#base-1)
 
 </td>
 </tr>
@@ -1567,7 +1567,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`glob`](micromatch.md#glob-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`glob`](#glob-2)
 
 </td>
 </tr>
@@ -1584,7 +1584,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`input`](micromatch.md#input-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`input`](#input-2)
 
 </td>
 </tr>
@@ -1601,7 +1601,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`isBrace`](micromatch.md#isbrace-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`isBrace`](#isbrace-2)
 
 </td>
 </tr>
@@ -1618,7 +1618,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`isBracket`](micromatch.md#isbracket-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`isBracket`](#isbracket-2)
 
 </td>
 </tr>
@@ -1635,7 +1635,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`isExtglob`](micromatch.md#isextglob-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`isExtglob`](#isextglob-2)
 
 </td>
 </tr>
@@ -1652,7 +1652,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`isGlob`](micromatch.md#isglob-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`isGlob`](#isglob-2)
 
 </td>
 </tr>
@@ -1669,7 +1669,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`isGlobstar`](micromatch.md#isglobstar-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`isGlobstar`](#isglobstar-2)
 
 </td>
 </tr>
@@ -1703,7 +1703,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`negated`](micromatch.md#negated-2)
+[`ScanInfoWithParts`](#scaninfowithparts).[`negated`](#negated-2)
 
 </td>
 </tr>
@@ -1720,7 +1720,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`negatedExtglob`](micromatch.md#negatedextglob-1)
+[`ScanInfoWithParts`](#scaninfowithparts).[`negatedExtglob`](#negatedextglob-1)
 
 </td>
 </tr>
@@ -1737,7 +1737,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`parts`](micromatch.md#parts)
+[`ScanInfoWithParts`](#scaninfowithparts).[`parts`](#parts)
 
 </td>
 </tr>
@@ -1754,7 +1754,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`prefix`](micromatch.md#prefix-1)
+[`ScanInfoWithParts`](#scaninfowithparts).[`prefix`](#prefix-1)
 
 </td>
 </tr>
@@ -1771,7 +1771,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`slashes`](micromatch.md#slashes)
+[`ScanInfoWithParts`](#scaninfowithparts).[`slashes`](#slashes)
 
 </td>
 </tr>
@@ -1788,7 +1788,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoWithParts`](micromatch.md#scaninfowithparts).[`start`](micromatch.md#start-1)
+[`ScanInfoWithParts`](#scaninfowithparts).[`start`](#start-1)
 
 </td>
 </tr>
@@ -1800,7 +1800,7 @@ undefined;
 </td>
 <td>
 
-[`ScanInfoToken`](micromatch.md#scaninfotoken)[]
+[`ScanInfoToken`](#scaninfotoken)[]
 
 </td>
 <td>
@@ -1818,7 +1818,7 @@ undefined;
 
 #### Extends
 
-- [`Options`](micromatch.md#options)
+- [`Options`](#options)
 
 #### Properties
 
@@ -1866,7 +1866,7 @@ mm(["a/b.js", "a/c.md"], "*.js", { matchBase: true });
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`basename`](micromatch.md#basename)
+[`Options`](#options).[`basename`](#basename)
 
 </td>
 </tr>
@@ -1906,7 +1906,7 @@ console.log(mm(files, "[a-c]*", { bash: false }));
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`bash`](micromatch.md#bash)
+[`Options`](#options).[`bash`](#bash)
 
 </td>
 </tr>
@@ -1934,7 +1934,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`capture`](micromatch.md#capture)
+[`Options`](#options).[`capture`](#capture)
 
 </td>
 </tr>
@@ -1962,7 +1962,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`contains`](micromatch.md#contains)
+[`Options`](#options).[`contains`](#contains)
 
 </td>
 </tr>
@@ -1990,7 +1990,7 @@ process.cwd();
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`cwd`](micromatch.md#cwd)
+[`Options`](#options).[`cwd`](#cwd)
 
 </td>
 </tr>
@@ -2018,7 +2018,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`debug`](micromatch.md#debug)
+[`Options`](#options).[`debug`](#debug)
 
 </td>
 </tr>
@@ -2046,7 +2046,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`dot`](micromatch.md#dot)
+[`Options`](#options).[`dot`](#dot)
 
 </td>
 </tr>
@@ -2058,7 +2058,7 @@ false;
 </td>
 <td>
 
-(`left`: `string`, `right`: `string`, `options`: [`Options`](micromatch.md#options)) => `string`
+(`left`, `right`, `options`) => `string`
 
 </td>
 <td>
@@ -2076,7 +2076,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`expandRange`](micromatch.md#expandrange)
+[`Options`](#options).[`expandRange`](#expandrange)
 
 </td>
 </tr>
@@ -2104,7 +2104,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`failglob`](micromatch.md#failglob)
+[`Options`](#options).[`failglob`](#failglob)
 
 </td>
 </tr>
@@ -2132,7 +2132,7 @@ true;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`fastpaths`](micromatch.md#fastpaths)
+[`Options`](#options).[`fastpaths`](#fastpaths)
 
 </td>
 </tr>
@@ -2160,7 +2160,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`flags`](micromatch.md#flags)
+[`Options`](#options).[`flags`](#flags)
 
 </td>
 </tr>
@@ -2172,7 +2172,7 @@ undefined;
 </td>
 <td>
 
-(`returnedString`: `string`) => `string`
+(`returnedString`) => `string`
 
 </td>
 <td>
@@ -2188,7 +2188,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`format`](micromatch.md#format)
+[`Options`](#options).[`format`](#format)
 
 </td>
 </tr>
@@ -2216,7 +2216,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`ignore`](micromatch.md#ignore)
+[`Options`](#options).[`ignore`](#ignore)
 
 </td>
 </tr>
@@ -2244,7 +2244,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`keepQuotes`](micromatch.md#keepquotes)
+[`Options`](#options).[`keepQuotes`](#keepquotes)
 
 </td>
 </tr>
@@ -2272,7 +2272,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`literalBrackets`](micromatch.md#literalbrackets)
+[`Options`](#options).[`literalBrackets`](#literalbrackets)
 
 </td>
 </tr>
@@ -2300,7 +2300,7 @@ true;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`lookbehinds`](micromatch.md#lookbehinds)
+[`Options`](#options).[`lookbehinds`](#lookbehinds)
 
 </td>
 </tr>
@@ -2328,7 +2328,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`matchBase`](micromatch.md#matchbase)
+[`Options`](#options).[`matchBase`](#matchbase)
 
 </td>
 </tr>
@@ -2356,7 +2356,7 @@ Limit the max length of the input string. An error is thrown if the input string
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`maxLength`](micromatch.md#maxlength)
+[`Options`](#options).[`maxLength`](#maxlength)
 
 </td>
 </tr>
@@ -2384,7 +2384,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`nobrace`](micromatch.md#nobrace)
+[`Options`](#options).[`nobrace`](#nobrace)
 
 </td>
 </tr>
@@ -2412,7 +2412,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`nobracket`](micromatch.md#nobracket)
+[`Options`](#options).[`nobracket`](#nobracket)
 
 </td>
 </tr>
@@ -2441,7 +2441,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`nocase`](micromatch.md#nocase)
+[`Options`](#options).[`nocase`](#nocase)
 
 </td>
 </tr>
@@ -2469,7 +2469,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`noext`](micromatch.md#noext)
+[`Options`](#options).[`noext`](#noext)
 
 </td>
 </tr>
@@ -2497,7 +2497,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`noextglob`](micromatch.md#noextglob)
+[`Options`](#options).[`noextglob`](#noextglob)
 
 </td>
 </tr>
@@ -2525,7 +2525,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`noglobstar`](micromatch.md#noglobstar)
+[`Options`](#options).[`noglobstar`](#noglobstar)
 
 </td>
 </tr>
@@ -2553,7 +2553,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`nonegate`](micromatch.md#nonegate)
+[`Options`](#options).[`nonegate`](#nonegate)
 
 </td>
 </tr>
@@ -2581,7 +2581,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`noquantifiers`](micromatch.md#noquantifiers)
+[`Options`](#options).[`noquantifiers`](#noquantifiers)
 
 </td>
 </tr>
@@ -2593,7 +2593,7 @@ false;
 </td>
 <td>
 
-(`item`: [`Item`](micromatch.md#item)) => `void`
+(`item`) => `void`
 
 </td>
 <td>
@@ -2609,7 +2609,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`onIgnore`](micromatch.md#onignore)
+[`Options`](#options).[`onIgnore`](#onignore)
 
 </td>
 </tr>
@@ -2621,7 +2621,7 @@ undefined;
 </td>
 <td>
 
-(`item`: [`Item`](micromatch.md#item)) => `void`
+(`item`) => `void`
 
 </td>
 <td>
@@ -2637,7 +2637,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`onMatch`](micromatch.md#onmatch)
+[`Options`](#options).[`onMatch`](#onmatch)
 
 </td>
 </tr>
@@ -2649,7 +2649,7 @@ undefined;
 </td>
 <td>
 
-(`item`: [`Item`](micromatch.md#item)) => `void`
+(`item`) => `void`
 
 </td>
 <td>
@@ -2665,7 +2665,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`onResult`](micromatch.md#onresult)
+[`Options`](#options).[`onResult`](#onresult)
 
 </td>
 </tr>
@@ -2722,7 +2722,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`posix`](micromatch.md#posix)
+[`Options`](#options).[`posix`](#posix)
 
 </td>
 </tr>
@@ -2750,7 +2750,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`prepend`](micromatch.md#prepend)
+[`Options`](#options).[`prepend`](#prepend)
 
 </td>
 </tr>
@@ -2778,7 +2778,7 @@ false;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`regex`](micromatch.md#regex-1)
+[`Options`](#options).[`regex`](#regex-1)
 
 </td>
 </tr>
@@ -2806,7 +2806,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`strictBrackets`](micromatch.md#strictbrackets)
+[`Options`](#options).[`strictBrackets`](#strictbrackets)
 
 </td>
 </tr>
@@ -2834,7 +2834,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`strictSlashes`](micromatch.md#strictslashes)
+[`Options`](#options).[`strictSlashes`](#strictslashes)
 
 </td>
 </tr>
@@ -2902,7 +2902,7 @@ mm.match(["abc", "a\\*c"], "a\\*c", { unescape: true });
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`unescape`](micromatch.md#unescape)
+[`Options`](#options).[`unescape`](#unescape)
 
 </td>
 </tr>
@@ -2930,7 +2930,7 @@ undefined;
 </td>
 <td>
 
-[`Options`](micromatch.md#options).[`windows`](micromatch.md#windows)
+[`Options`](#options).[`windows`](#windows)
 
 </td>
 </tr>

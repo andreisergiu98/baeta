@@ -58,12 +58,12 @@
 <tr>
 <td>
 
-`ProvidedOptions` _extends_ [`BuildOptions`](esbuild.md#buildoptions)
+`ProvidedOptions` _extends_ [`BuildOptions`](#buildoptions)
 
 </td>
 <td>
 
-[`BuildOptions`](esbuild.md#buildoptions)
+[`BuildOptions`](#buildoptions)
 
 </td>
 </tr>
@@ -90,17 +90,17 @@
 
 ##### rebuild()
 
-> **rebuild**(): `Promise`\<[`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`ProvidedOptions`\>\>
+> **rebuild**(): `Promise`\<[`BuildResult`](#buildresult)\<`ProvidedOptions`\>\>
 
 Documentation: https://esbuild.github.io/api/#rebuild
 
 ###### Returns
 
-`Promise`\<[`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`ProvidedOptions`\>\>
+`Promise`\<[`BuildResult`](#buildresult)\<`ProvidedOptions`\>\>
 
 ##### serve()
 
-> **serve**(`options`?): `Promise`\<[`ServeResult`](esbuild.md#serveresult)\>
+> **serve**(`options?`): `Promise`\<[`ServeResult`](#serveresult)\>
 
 Documentation: https://esbuild.github.io/api/#serve
 
@@ -117,12 +117,12 @@ Documentation: https://esbuild.github.io/api/#serve
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`ServeOptions`](esbuild.md#serveoptions)
+[`ServeOptions`](#serveoptions)
 
 </td>
 </tr>
@@ -131,11 +131,11 @@ Documentation: https://esbuild.github.io/api/#serve
 
 ###### Returns
 
-`Promise`\<[`ServeResult`](esbuild.md#serveresult)\>
+`Promise`\<[`ServeResult`](#serveresult)\>
 
 ##### watch()
 
-> **watch**(`options`?): `Promise`\<`void`\>
+> **watch**(`options?`): `Promise`\<`void`\>
 
 Documentation: https://esbuild.github.io/api/#watch
 
@@ -152,12 +152,12 @@ Documentation: https://esbuild.github.io/api/#watch
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`WatchOptions`](esbuild.md#watchoptions)
+[`WatchOptions`](#watchoptions)
 
 </td>
 </tr>
@@ -195,7 +195,7 @@ Documentation: https://esbuild.github.io/api/#watch
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 <td>
@@ -246,7 +246,7 @@ Documentation: https://esbuild.github.io/api/#watch
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 <td>
@@ -298,7 +298,7 @@ Documentation: https://esbuild.github.io/api/#watch
 
 #### Extends
 
-- [`CommonOptions`](esbuild.md#commonoptions)
+- [`CommonOptions`](#commonoptions)
 
 #### Properties
 
@@ -452,7 +452,7 @@ Documentation: https://esbuild.github.io/api/#bundle
 </td>
 <td>
 
-[`Charset`](esbuild.md#charset-3)
+[`Charset`](#charset-3)
 
 </td>
 <td>
@@ -462,7 +462,7 @@ Documentation: https://esbuild.github.io/api/#charset
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`charset`](esbuild.md#charset-1)
+[`CommonOptions`](#commonoptions).[`charset`](#charset-1)
 
 </td>
 </tr>
@@ -506,7 +506,7 @@ Documentation: https://esbuild.github.io/api/#color
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`color`](esbuild.md#color-2)
+[`CommonOptions`](#commonoptions).[`color`](#color-2)
 
 </td>
 </tr>
@@ -550,7 +550,7 @@ Documentation: https://esbuild.github.io/api/#define
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`define`](esbuild.md#define-1)
+[`CommonOptions`](#commonoptions).[`define`](#define-1)
 
 </td>
 </tr>
@@ -562,7 +562,7 @@ Documentation: https://esbuild.github.io/api/#define
 </td>
 <td>
 
-[`Drop`](esbuild.md#drop-3)[]
+[`Drop`](#drop-3)[]
 
 </td>
 <td>
@@ -572,7 +572,7 @@ Documentation: https://esbuild.github.io/api/#drop
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`drop`](esbuild.md#drop-1)
+[`CommonOptions`](#commonoptions).[`drop`](#drop-1)
 
 </td>
 </tr>
@@ -594,7 +594,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`dropLabels`](esbuild.md#droplabels-1)
+[`CommonOptions`](#commonoptions).[`dropLabels`](#droplabels-1)
 
 </td>
 </tr>
@@ -694,7 +694,7 @@ Documentation: https://esbuild.github.io/api/#footer
 </td>
 <td>
 
-[`Format`](esbuild.md#format-3)
+[`Format`](#format-3)
 
 </td>
 <td>
@@ -704,7 +704,7 @@ Documentation: https://esbuild.github.io/api/#format
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`format`](esbuild.md#format-1)
+[`CommonOptions`](#commonoptions).[`format`](#format-1)
 
 </td>
 </tr>
@@ -726,7 +726,7 @@ Documentation: https://esbuild.github.io/api/#global-name
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`globalName`](esbuild.md#globalname-1)
+[`CommonOptions`](#commonoptions).[`globalName`](#globalname-1)
 
 </td>
 </tr>
@@ -748,7 +748,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`ignoreAnnotations`](esbuild.md#ignoreannotations-1)
+[`CommonOptions`](#commonoptions).[`ignoreAnnotations`](#ignoreannotations-1)
 
 </td>
 </tr>
@@ -792,7 +792,7 @@ Documentation: https://esbuild.github.io/api/#jsx
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsx`](esbuild.md#jsx-1)
+[`CommonOptions`](#commonoptions).[`jsx`](#jsx-1)
 
 </td>
 </tr>
@@ -814,7 +814,7 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxDev`](esbuild.md#jsxdev-1)
+[`CommonOptions`](#commonoptions).[`jsxDev`](#jsxdev-1)
 
 </td>
 </tr>
@@ -836,7 +836,7 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxFactory`](esbuild.md#jsxfactory-1)
+[`CommonOptions`](#commonoptions).[`jsxFactory`](#jsxfactory-1)
 
 </td>
 </tr>
@@ -858,7 +858,7 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxFragment`](esbuild.md#jsxfragment-1)
+[`CommonOptions`](#commonoptions).[`jsxFragment`](#jsxfragment-1)
 
 </td>
 </tr>
@@ -880,7 +880,7 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxImportSource`](esbuild.md#jsximportsource-1)
+[`CommonOptions`](#commonoptions).[`jsxImportSource`](#jsximportsource-1)
 
 </td>
 </tr>
@@ -902,7 +902,7 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxSideEffects`](esbuild.md#jsxsideeffects-1)
+[`CommonOptions`](#commonoptions).[`jsxSideEffects`](#jsxsideeffects-1)
 
 </td>
 </tr>
@@ -924,7 +924,7 @@ Documentation: https://esbuild.github.io/api/#keep-names
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`keepNames`](esbuild.md#keepnames-1)
+[`CommonOptions`](#commonoptions).[`keepNames`](#keepnames-1)
 
 </td>
 </tr>
@@ -946,7 +946,7 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`legalComments`](esbuild.md#legalcomments-1)
+[`CommonOptions`](#commonoptions).[`legalComments`](#legalcomments-1)
 
 </td>
 </tr>
@@ -968,7 +968,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`lineLimit`](esbuild.md#linelimit-1)
+[`CommonOptions`](#commonoptions).[`lineLimit`](#linelimit-1)
 
 </td>
 </tr>
@@ -1002,7 +1002,7 @@ Documentation: https://esbuild.github.io/api/#loader
 </td>
 <td>
 
-[`LogLevel`](esbuild.md#loglevel-3)
+[`LogLevel`](#loglevel-3)
 
 </td>
 <td>
@@ -1012,7 +1012,7 @@ Documentation: https://esbuild.github.io/api/#log-level
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`logLevel`](esbuild.md#loglevel-1)
+[`CommonOptions`](#commonoptions).[`logLevel`](#loglevel-1)
 
 </td>
 </tr>
@@ -1034,7 +1034,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`logLimit`](esbuild.md#loglimit-1)
+[`CommonOptions`](#commonoptions).[`logLimit`](#loglimit-1)
 
 </td>
 </tr>
@@ -1046,7 +1046,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 </td>
 <td>
 
-`Record`\<`string`, [`LogLevel`](esbuild.md#loglevel-3)\>
+`Record`\<`string`, [`LogLevel`](#loglevel-3)\>
 
 </td>
 <td>
@@ -1056,7 +1056,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`logOverride`](esbuild.md#logoverride-1)
+[`CommonOptions`](#commonoptions).[`logOverride`](#logoverride-1)
 
 </td>
 </tr>
@@ -1100,7 +1100,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`mangleCache`](esbuild.md#manglecache-2)
+[`CommonOptions`](#commonoptions).[`mangleCache`](#manglecache-2)
 
 </td>
 </tr>
@@ -1122,7 +1122,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`mangleProps`](esbuild.md#mangleprops-1)
+[`CommonOptions`](#commonoptions).[`mangleProps`](#mangleprops-1)
 
 </td>
 </tr>
@@ -1144,7 +1144,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`mangleQuoted`](esbuild.md#manglequoted-1)
+[`CommonOptions`](#commonoptions).[`mangleQuoted`](#manglequoted-1)
 
 </td>
 </tr>
@@ -1188,7 +1188,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minify`](esbuild.md#minify-1)
+[`CommonOptions`](#commonoptions).[`minify`](#minify-1)
 
 </td>
 </tr>
@@ -1210,7 +1210,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minifyIdentifiers`](esbuild.md#minifyidentifiers-1)
+[`CommonOptions`](#commonoptions).[`minifyIdentifiers`](#minifyidentifiers-1)
 
 </td>
 </tr>
@@ -1232,7 +1232,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minifySyntax`](esbuild.md#minifysyntax-1)
+[`CommonOptions`](#commonoptions).[`minifySyntax`](#minifysyntax-1)
 
 </td>
 </tr>
@@ -1254,7 +1254,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minifyWhitespace`](esbuild.md#minifywhitespace-1)
+[`CommonOptions`](#commonoptions).[`minifyWhitespace`](#minifywhitespace-1)
 
 </td>
 </tr>
@@ -1398,7 +1398,7 @@ Documentation: https://esbuild.github.io/api/#packages
 </td>
 <td>
 
-[`Platform`](esbuild.md#platform-3)
+[`Platform`](#platform-3)
 
 </td>
 <td>
@@ -1408,7 +1408,7 @@ Documentation: https://esbuild.github.io/api/#platform
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`platform`](esbuild.md#platform-1)
+[`CommonOptions`](#commonoptions).[`platform`](#platform-1)
 
 </td>
 </tr>
@@ -1420,7 +1420,7 @@ Documentation: https://esbuild.github.io/api/#platform
 </td>
 <td>
 
-[`Plugin`](esbuild.md#plugin)[]
+[`Plugin`](#plugin)[]
 
 </td>
 <td>
@@ -1496,7 +1496,7 @@ Documentation: https://esbuild.github.io/api/#pure
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`pure`](esbuild.md#pure-1)
+[`CommonOptions`](#commonoptions).[`pure`](#pure-1)
 
 </td>
 </tr>
@@ -1518,7 +1518,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`reserveProps`](esbuild.md#reserveprops-1)
+[`CommonOptions`](#commonoptions).[`reserveProps`](#reserveprops-1)
 
 </td>
 </tr>
@@ -1562,7 +1562,7 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`sourcemap`](esbuild.md#sourcemap-1)
+[`CommonOptions`](#commonoptions).[`sourcemap`](#sourcemap-1)
 
 </td>
 </tr>
@@ -1584,7 +1584,7 @@ Documentation: https://esbuild.github.io/api/#source-root
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`sourceRoot`](esbuild.md#sourceroot-1)
+[`CommonOptions`](#commonoptions).[`sourceRoot`](#sourceroot-1)
 
 </td>
 </tr>
@@ -1606,7 +1606,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`sourcesContent`](esbuild.md#sourcescontent-1)
+[`CommonOptions`](#commonoptions).[`sourcesContent`](#sourcescontent-1)
 
 </td>
 </tr>
@@ -1640,7 +1640,7 @@ Documentation: https://esbuild.github.io/api/#splitting
 </td>
 <td>
 
-[`StdinOptions`](esbuild.md#stdinoptions)
+[`StdinOptions`](#stdinoptions)
 
 </td>
 <td>
@@ -1672,7 +1672,7 @@ Documentation: https://esbuild.github.io/api/#supported
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`supported`](esbuild.md#supported-1)
+[`CommonOptions`](#commonoptions).[`supported`](#supported-1)
 
 </td>
 </tr>
@@ -1694,7 +1694,7 @@ Documentation: https://esbuild.github.io/api/#target
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`target`](esbuild.md#target-1)
+[`CommonOptions`](#commonoptions).[`target`](#target-1)
 
 </td>
 </tr>
@@ -1716,7 +1716,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`treeShaking`](esbuild.md#treeshaking-1)
+[`CommonOptions`](#commonoptions).[`treeShaking`](#treeshaking-1)
 
 </td>
 </tr>
@@ -1750,7 +1750,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig
 </td>
 <td>
 
-`string` \| [`TsconfigRaw`](esbuild.md#tsconfigraw-3)
+`string` \| [`TsconfigRaw`](#tsconfigraw-3)
 
 </td>
 <td>
@@ -1760,7 +1760,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`tsconfigRaw`](esbuild.md#tsconfigraw-1)
+[`CommonOptions`](#commonoptions).[`tsconfigRaw`](#tsconfigraw-1)
 
 </td>
 </tr>
@@ -1806,12 +1806,12 @@ Documentation: https://esbuild.github.io/api/#write
 <tr>
 <td>
 
-`ProvidedOptions` _extends_ [`BuildOptions`](esbuild.md#buildoptions)
+`ProvidedOptions` _extends_ [`BuildOptions`](#buildoptions)
 
 </td>
 <td>
 
-[`BuildOptions`](esbuild.md#buildoptions)
+[`BuildOptions`](#buildoptions)
 
 </td>
 </tr>
@@ -1837,7 +1837,7 @@ Documentation: https://esbuild.github.io/api/#write
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 <td>
@@ -1871,7 +1871,7 @@ Only when "mangleCache" is present
 </td>
 <td>
 
-[`Metafile`](esbuild.md#metafile-2) \| `ProvidedOptions`\[`"metafile"`\] _extends_ `true` ? `never` : `undefined`
+[`Metafile`](#metafile-2) \| `ProvidedOptions`\[`"metafile"`\] _extends_ `true` ? `never` : `undefined`
 
 </td>
 <td>
@@ -1888,7 +1888,7 @@ Only when "metafile: true"
 </td>
 <td>
 
-[`OutputFile`](esbuild.md#outputfile)[] \| `ProvidedOptions`\[`"write"`\] _extends_ `false` ? `never` : `undefined`
+[`OutputFile`](#outputfile)[] \| `ProvidedOptions`\[`"write"`\] _extends_ `false` ? `never` : `undefined`
 
 </td>
 <td>
@@ -1905,7 +1905,7 @@ Only when "write: false"
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 <td>
@@ -1923,8 +1923,8 @@ Only when "write: false"
 
 #### Extended by
 
-- [`BuildOptions`](esbuild.md#buildoptions)
-- [`TransformOptions`](esbuild.md#transformoptions)
+- [`BuildOptions`](#buildoptions)
+- [`TransformOptions`](#transformoptions)
 
 #### Properties
 
@@ -1945,7 +1945,7 @@ Only when "write: false"
 </td>
 <td>
 
-[`Charset`](esbuild.md#charset-3)
+[`Charset`](#charset-3)
 
 </td>
 <td>
@@ -1996,7 +1996,7 @@ Documentation: https://esbuild.github.io/api/#define
 </td>
 <td>
 
-[`Drop`](esbuild.md#drop-3)[]
+[`Drop`](#drop-3)[]
 
 </td>
 <td>
@@ -2030,7 +2030,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 </td>
 <td>
 
-[`Format`](esbuild.md#format-3)
+[`Format`](#format-3)
 
 </td>
 <td>
@@ -2234,7 +2234,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 </td>
 <td>
 
-[`LogLevel`](esbuild.md#loglevel-3)
+[`LogLevel`](#loglevel-3)
 
 </td>
 <td>
@@ -2268,7 +2268,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 </td>
 <td>
 
-`Record`\<`string`, [`LogLevel`](esbuild.md#loglevel-3)\>
+`Record`\<`string`, [`LogLevel`](#loglevel-3)\>
 
 </td>
 <td>
@@ -2404,7 +2404,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`Platform`](esbuild.md#platform-3)
+[`Platform`](#platform-3)
 
 </td>
 <td>
@@ -2557,12 +2557,43 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 </td>
 <td>
 
-`string` \| [`TsconfigRaw`](esbuild.md#tsconfigraw-3)
+`string` \| [`TsconfigRaw`](#tsconfigraw-3)
 
 </td>
 <td>
 
 Documentation: https://esbuild.github.io/api/#tsconfig-raw
+
+</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+### CORSOptions
+
+Documentation: https://esbuild.github.io/api/#cors
+
+#### Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="origin"></a> `origin?`
+
+</td>
+<td>
+
+`string` \| `string`[]
 
 </td>
 </tr>
@@ -2894,7 +2925,7 @@ use this to stash the original error, for example.
 </td>
 <td>
 
-`null` \| [`Location`](esbuild.md#location)
+`null` \| [`Location`](#location)
 
 </td>
 <td>
@@ -2911,7 +2942,7 @@ use this to stash the original error, for example.
 </td>
 <td>
 
-[`Note`](esbuild.md#note)[]
+[`Note`](#note)[]
 
 </td>
 <td>
@@ -3022,7 +3053,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 </td>
 <td>
 
-`null` \| [`Location`](esbuild.md#location)
+`null` \| [`Location`](#location)
 
 </td>
 </tr>
@@ -3063,7 +3094,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3075,7 +3106,7 @@ Documentation: https://esbuild.github.io/api/#metafile
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3240,7 +3271,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3252,7 +3283,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 </td>
 <td>
 
-[`Loader`](esbuild.md#loader-4)
+[`Loader`](#loader-4)
 
 </td>
 </tr>
@@ -3300,7 +3331,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load-results
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3367,7 +3398,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-arguments
 </td>
 <td>
 
-[`ImportKind`](esbuild.md#importkind)
+[`ImportKind`](#importkind)
 
 </td>
 </tr>
@@ -3501,7 +3532,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3597,7 +3628,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3650,7 +3681,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3662,7 +3693,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -3822,7 +3853,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-`null` \| `Partial`\<[`Location`](esbuild.md#location)\>
+`null` \| `Partial`\<[`Location`](#location)\>
 
 </td>
 </tr>
@@ -3834,7 +3865,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-[`PartialNote`](esbuild.md#partialnote)[]
+[`PartialNote`](#partialnote)[]
 
 </td>
 </tr>
@@ -3887,7 +3918,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-`null` \| `Partial`\<[`Location`](esbuild.md#location)\>
+`null` \| `Partial`\<[`Location`](#location)\>
 
 </td>
 </tr>
@@ -3940,7 +3971,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-(`build`: [`PluginBuild`](esbuild.md#pluginbuild)) => `void` \| `Promise`\<`void`\>
+(`build`) => `void` \| `Promise`\<`void`\>
 
 </td>
 </tr>
@@ -3987,7 +4018,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-(`metafile`: `string` \| [`Metafile`](esbuild.md#metafile-2), `options`?: [`AnalyzeMetafileOptions`](esbuild.md#analyzemetafileoptions)) => `Promise`\<`string`\>
+(`metafile`, `options?`) => `Promise`\<`string`\>
 
 </td>
 <td>
@@ -4004,7 +4035,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-(`metafile`: `string` \| [`Metafile`](esbuild.md#metafile-2), `options`?: [`AnalyzeMetafileOptions`](esbuild.md#analyzemetafileoptions)) => `string`
+(`metafile`, `options?`) => `string`
 
 </td>
 <td>
@@ -4021,7 +4052,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-\<`T`\>(`options`: [`SameShape`](esbuild.md#sameshapeout-in)\<[`BuildOptions`](esbuild.md#buildoptions), `T`\>) => `Promise`\<[`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`T`\>\>
+\<`T`\>(`options`) => `Promise`\<[`BuildResult`](#buildresult)\<`T`\>\>
 
 </td>
 <td>
@@ -4038,7 +4069,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-\<`T`\>(`options`: [`SameShape`](esbuild.md#sameshapeout-in)\<[`BuildOptions`](esbuild.md#buildoptions), `T`\>) => [`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`T`\>
+\<`T`\>(`options`) => [`BuildResult`](#buildresult)\<`T`\>
 
 </td>
 <td>
@@ -4055,7 +4086,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-\<`T`\>(`options`: [`SameShape`](esbuild.md#sameshapeout-in)\<[`BuildOptions`](esbuild.md#buildoptions), `T`\>) => `Promise`\<[`BuildContext`](esbuild.md#buildcontextprovidedoptions)\<`T`\>\>
+\<`T`\>(`options`) => `Promise`\<[`BuildContext`](#buildcontext)\<`T`\>\>
 
 </td>
 <td>
@@ -4072,7 +4103,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-(`messages`: [`PartialMessage`](esbuild.md#partialmessage)[], `options`: [`FormatMessagesOptions`](esbuild.md#formatmessagesoptions)) => `Promise`\<`string`[]\>
+(`messages`, `options`) => `Promise`\<`string`[]\>
 
 </td>
 <td>
@@ -4089,7 +4120,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-(`messages`: [`PartialMessage`](esbuild.md#partialmessage)[], `options`: [`FormatMessagesOptions`](esbuild.md#formatmessagesoptions)) => `string`[]
+(`messages`, `options`) => `string`[]
 
 </td>
 <td>
@@ -4106,7 +4137,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-(`options`: [`InitializeOptions`](esbuild.md#initializeoptions)) => `Promise`\<`void`\>
+(`options`) => `Promise`\<`void`\>
 
 </td>
 <td>
@@ -4123,7 +4154,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-\<`T`\>(`input`: `string` \| `Uint8Array`\<`ArrayBufferLike`\>, `options`?: [`SameShape`](esbuild.md#sameshapeout-in)\<[`TransformOptions`](esbuild.md#transformoptions), `T`\>) => `Promise`\<[`TransformResult`](esbuild.md#transformresultprovidedoptions)\<`T`\>\>
+\<`T`\>(`input`, `options?`) => `Promise`\<[`TransformResult`](#transformresult)\<`T`\>\>
 
 </td>
 <td>
@@ -4140,7 +4171,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-\<`T`\>(`input`: `string` \| `Uint8Array`\<`ArrayBufferLike`\>, `options`?: [`SameShape`](esbuild.md#sameshapeout-in)\<[`TransformOptions`](esbuild.md#transformoptions), `T`\>) => [`TransformResult`](esbuild.md#transformresultprovidedoptions)\<`T`\>
+\<`T`\>(`input`, `options?`) => [`TransformResult`](#transformresult)\<`T`\>
 
 </td>
 <td>
@@ -4174,7 +4205,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve-results
 </td>
 <td>
 
-[`BuildOptions`](esbuild.md#buildoptions)
+[`BuildOptions`](#buildoptions)
 
 </td>
 <td>
@@ -4247,7 +4278,7 @@ Documentation: https://esbuild.github.io/plugins/#on-end
 </td>
 <td>
 
-(`result`) => `null` \| `void` \| [`OnEndResult`](esbuild.md#onendresult) \| `Promise`\<`null` \| `void` \| [`OnEndResult`](esbuild.md#onendresult)\>
+(`result`) => `null` \| `void` \| [`OnEndResult`](#onendresult) \| `Promise`\<`null` \| `void` \| [`OnEndResult`](#onendresult)\>
 
 </td>
 </tr>
@@ -4282,7 +4313,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load
 </td>
 <td>
 
-[`OnLoadOptions`](esbuild.md#onloadoptions)
+[`OnLoadOptions`](#onloadoptions)
 
 </td>
 </tr>
@@ -4294,7 +4325,7 @@ Documentation: https://esbuild.github.io/plugins/#on-load
 </td>
 <td>
 
-(`args`) => `undefined` \| `null` \| [`OnLoadResult`](esbuild.md#onloadresult) \| `Promise`\<`undefined` \| `null` \| [`OnLoadResult`](esbuild.md#onloadresult)\>
+(`args`) => `undefined` \| `null` \| [`OnLoadResult`](#onloadresult) \| `Promise`\<`undefined` \| `null` \| [`OnLoadResult`](#onloadresult)\>
 
 </td>
 </tr>
@@ -4329,7 +4360,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve
 </td>
 <td>
 
-[`OnResolveOptions`](esbuild.md#onresolveoptions)
+[`OnResolveOptions`](#onresolveoptions)
 
 </td>
 </tr>
@@ -4341,7 +4372,7 @@ Documentation: https://esbuild.github.io/plugins/#on-resolve
 </td>
 <td>
 
-(`args`) => `undefined` \| `null` \| [`OnResolveResult`](esbuild.md#onresolveresult) \| `Promise`\<`undefined` \| `null` \| [`OnResolveResult`](esbuild.md#onresolveresult)\>
+(`args`) => `undefined` \| `null` \| [`OnResolveResult`](#onresolveresult) \| `Promise`\<`undefined` \| `null` \| [`OnResolveResult`](#onresolveresult)\>
 
 </td>
 </tr>
@@ -4376,7 +4407,7 @@ Documentation: https://esbuild.github.io/plugins/#on-start
 </td>
 <td>
 
-() => `null` \| `void` \| [`OnStartResult`](esbuild.md#onstartresult) \| `Promise`\<`null` \| `void` \| [`OnStartResult`](esbuild.md#onstartresult)\>
+() => `null` \| `void` \| [`OnStartResult`](#onstartresult) \| `Promise`\<`null` \| `void` \| [`OnStartResult`](#onstartresult)\>
 
 </td>
 </tr>
@@ -4389,7 +4420,7 @@ Documentation: https://esbuild.github.io/plugins/#on-start
 
 ##### resolve()
 
-> **resolve**(`path`, `options`?): `Promise`\<[`ResolveResult`](esbuild.md#resolveresult)\>
+> **resolve**(`path`, `options?`): `Promise`\<[`ResolveResult`](#resolveresult)\>
 
 Documentation: https://esbuild.github.io/plugins/#resolve
 
@@ -4418,12 +4449,12 @@ Documentation: https://esbuild.github.io/plugins/#resolve
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`ResolveOptions`](esbuild.md#resolveoptions)
+[`ResolveOptions`](#resolveoptions)
 
 </td>
 </tr>
@@ -4432,7 +4463,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve
 
 ###### Returns
 
-`Promise`\<[`ResolveResult`](esbuild.md#resolveresult)\>
+`Promise`\<[`ResolveResult`](#resolveresult)\>
 
 ---
 
@@ -4470,7 +4501,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 </td>
 <td>
 
-[`ImportKind`](esbuild.md#importkind)
+[`ImportKind`](#importkind)
 
 </td>
 </tr>
@@ -4501,7 +4532,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-options
 <tr>
 <td>
 
-<a id="pluginname-4"></a> `pluginName?`
+<a id="pluginname-5"></a> `pluginName?`
 
 </td>
 <td>
@@ -4561,7 +4592,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 </tr>
@@ -4645,7 +4676,7 @@ Documentation: https://esbuild.github.io/plugins/#resolve-results
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 </tr>
@@ -4786,6 +4817,18 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 <tr>
 <td>
 
+<a id="cors"></a> `cors?`
+
+</td>
+<td>
+
+[`CORSOptions`](#corsoptions)
+
+</td>
+</tr>
+<tr>
+<td>
+
 <a id="fallback"></a> `fallback?`
 
 </td>
@@ -4827,7 +4870,7 @@ Documentation: https://esbuild.github.io/api/#serve-arguments
 </td>
 <td>
 
-(`args`: [`ServeOnRequestArgs`](esbuild.md#serveonrequestargs)) => `void`
+(`args`) => `void`
 
 </td>
 </tr>
@@ -4935,7 +4978,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 </td>
 <td>
 
-[`Loader`](esbuild.md#loader-4)
+[`Loader`](#loader-4)
 
 </td>
 </tr>
@@ -4993,7 +5036,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 <td>
@@ -5044,7 +5087,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 <td>
@@ -5096,7 +5139,7 @@ Documentation: https://esbuild.github.io/api/#serve-return-values
 
 #### Extends
 
-- [`CommonOptions`](esbuild.md#commonoptions)
+- [`CommonOptions`](#commonoptions)
 
 #### Properties
 
@@ -5140,7 +5183,7 @@ Documentation: https://esbuild.github.io/api/#banner
 </td>
 <td>
 
-[`Charset`](esbuild.md#charset-3)
+[`Charset`](#charset-3)
 
 </td>
 <td>
@@ -5150,7 +5193,7 @@ Documentation: https://esbuild.github.io/api/#charset
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`charset`](esbuild.md#charset-1)
+[`CommonOptions`](#commonoptions).[`charset`](#charset-1)
 
 </td>
 </tr>
@@ -5172,7 +5215,7 @@ Documentation: https://esbuild.github.io/api/#color
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`color`](esbuild.md#color-2)
+[`CommonOptions`](#commonoptions).[`color`](#color-2)
 
 </td>
 </tr>
@@ -5194,7 +5237,7 @@ Documentation: https://esbuild.github.io/api/#define
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`define`](esbuild.md#define-1)
+[`CommonOptions`](#commonoptions).[`define`](#define-1)
 
 </td>
 </tr>
@@ -5206,7 +5249,7 @@ Documentation: https://esbuild.github.io/api/#define
 </td>
 <td>
 
-[`Drop`](esbuild.md#drop-3)[]
+[`Drop`](#drop-3)[]
 
 </td>
 <td>
@@ -5216,7 +5259,7 @@ Documentation: https://esbuild.github.io/api/#drop
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`drop`](esbuild.md#drop-1)
+[`CommonOptions`](#commonoptions).[`drop`](#drop-1)
 
 </td>
 </tr>
@@ -5238,7 +5281,7 @@ Documentation: https://esbuild.github.io/api/#drop-labels
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`dropLabels`](esbuild.md#droplabels-1)
+[`CommonOptions`](#commonoptions).[`dropLabels`](#droplabels-1)
 
 </td>
 </tr>
@@ -5272,7 +5315,7 @@ Documentation: https://esbuild.github.io/api/#footer
 </td>
 <td>
 
-[`Format`](esbuild.md#format-3)
+[`Format`](#format-3)
 
 </td>
 <td>
@@ -5282,7 +5325,7 @@ Documentation: https://esbuild.github.io/api/#format
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`format`](esbuild.md#format-1)
+[`CommonOptions`](#commonoptions).[`format`](#format-1)
 
 </td>
 </tr>
@@ -5304,7 +5347,7 @@ Documentation: https://esbuild.github.io/api/#global-name
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`globalName`](esbuild.md#globalname-1)
+[`CommonOptions`](#commonoptions).[`globalName`](#globalname-1)
 
 </td>
 </tr>
@@ -5326,7 +5369,7 @@ Documentation: https://esbuild.github.io/api/#ignore-annotations
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`ignoreAnnotations`](esbuild.md#ignoreannotations-1)
+[`CommonOptions`](#commonoptions).[`ignoreAnnotations`](#ignoreannotations-1)
 
 </td>
 </tr>
@@ -5348,7 +5391,7 @@ Documentation: https://esbuild.github.io/api/#jsx
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsx`](esbuild.md#jsx-1)
+[`CommonOptions`](#commonoptions).[`jsx`](#jsx-1)
 
 </td>
 </tr>
@@ -5370,7 +5413,7 @@ Documentation: https://esbuild.github.io/api/#jsx-development
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxDev`](esbuild.md#jsxdev-1)
+[`CommonOptions`](#commonoptions).[`jsxDev`](#jsxdev-1)
 
 </td>
 </tr>
@@ -5392,7 +5435,7 @@ Documentation: https://esbuild.github.io/api/#jsx-factory
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxFactory`](esbuild.md#jsxfactory-1)
+[`CommonOptions`](#commonoptions).[`jsxFactory`](#jsxfactory-1)
 
 </td>
 </tr>
@@ -5414,7 +5457,7 @@ Documentation: https://esbuild.github.io/api/#jsx-fragment
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxFragment`](esbuild.md#jsxfragment-1)
+[`CommonOptions`](#commonoptions).[`jsxFragment`](#jsxfragment-1)
 
 </td>
 </tr>
@@ -5436,7 +5479,7 @@ Documentation: https://esbuild.github.io/api/#jsx-import-source
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxImportSource`](esbuild.md#jsximportsource-1)
+[`CommonOptions`](#commonoptions).[`jsxImportSource`](#jsximportsource-1)
 
 </td>
 </tr>
@@ -5458,7 +5501,7 @@ Documentation: https://esbuild.github.io/api/#jsx-side-effects
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`jsxSideEffects`](esbuild.md#jsxsideeffects-1)
+[`CommonOptions`](#commonoptions).[`jsxSideEffects`](#jsxsideeffects-1)
 
 </td>
 </tr>
@@ -5480,7 +5523,7 @@ Documentation: https://esbuild.github.io/api/#keep-names
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`keepNames`](esbuild.md#keepnames-1)
+[`CommonOptions`](#commonoptions).[`keepNames`](#keepnames-1)
 
 </td>
 </tr>
@@ -5502,7 +5545,7 @@ Documentation: https://esbuild.github.io/api/#legal-comments
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`legalComments`](esbuild.md#legalcomments-1)
+[`CommonOptions`](#commonoptions).[`legalComments`](#legalcomments-1)
 
 </td>
 </tr>
@@ -5524,7 +5567,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`lineLimit`](esbuild.md#linelimit-1)
+[`CommonOptions`](#commonoptions).[`lineLimit`](#linelimit-1)
 
 </td>
 </tr>
@@ -5536,7 +5579,7 @@ Documentation: https://esbuild.github.io/api/#line-limit
 </td>
 <td>
 
-[`Loader`](esbuild.md#loader-4)
+[`Loader`](#loader-4)
 
 </td>
 <td>
@@ -5558,7 +5601,7 @@ Documentation: https://esbuild.github.io/api/#loader
 </td>
 <td>
 
-[`LogLevel`](esbuild.md#loglevel-3)
+[`LogLevel`](#loglevel-3)
 
 </td>
 <td>
@@ -5568,7 +5611,7 @@ Documentation: https://esbuild.github.io/api/#log-level
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`logLevel`](esbuild.md#loglevel-1)
+[`CommonOptions`](#commonoptions).[`logLevel`](#loglevel-1)
 
 </td>
 </tr>
@@ -5590,7 +5633,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`logLimit`](esbuild.md#loglimit-1)
+[`CommonOptions`](#commonoptions).[`logLimit`](#loglimit-1)
 
 </td>
 </tr>
@@ -5602,7 +5645,7 @@ Documentation: https://esbuild.github.io/api/#log-limit
 </td>
 <td>
 
-`Record`\<`string`, [`LogLevel`](esbuild.md#loglevel-3)\>
+`Record`\<`string`, [`LogLevel`](#loglevel-3)\>
 
 </td>
 <td>
@@ -5612,7 +5655,7 @@ Documentation: https://esbuild.github.io/api/#log-override
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`logOverride`](esbuild.md#logoverride-1)
+[`CommonOptions`](#commonoptions).[`logOverride`](#logoverride-1)
 
 </td>
 </tr>
@@ -5634,7 +5677,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`mangleCache`](esbuild.md#manglecache-2)
+[`CommonOptions`](#commonoptions).[`mangleCache`](#manglecache-2)
 
 </td>
 </tr>
@@ -5656,7 +5699,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`mangleProps`](esbuild.md#mangleprops-1)
+[`CommonOptions`](#commonoptions).[`mangleProps`](#mangleprops-1)
 
 </td>
 </tr>
@@ -5678,7 +5721,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`mangleQuoted`](esbuild.md#manglequoted-1)
+[`CommonOptions`](#commonoptions).[`mangleQuoted`](#manglequoted-1)
 
 </td>
 </tr>
@@ -5700,7 +5743,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minify`](esbuild.md#minify-1)
+[`CommonOptions`](#commonoptions).[`minify`](#minify-1)
 
 </td>
 </tr>
@@ -5722,7 +5765,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minifyIdentifiers`](esbuild.md#minifyidentifiers-1)
+[`CommonOptions`](#commonoptions).[`minifyIdentifiers`](#minifyidentifiers-1)
 
 </td>
 </tr>
@@ -5744,7 +5787,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minifySyntax`](esbuild.md#minifysyntax-1)
+[`CommonOptions`](#commonoptions).[`minifySyntax`](#minifysyntax-1)
 
 </td>
 </tr>
@@ -5766,7 +5809,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`minifyWhitespace`](esbuild.md#minifywhitespace-1)
+[`CommonOptions`](#commonoptions).[`minifyWhitespace`](#minifywhitespace-1)
 
 </td>
 </tr>
@@ -5778,7 +5821,7 @@ Documentation: https://esbuild.github.io/api/#minify
 </td>
 <td>
 
-[`Platform`](esbuild.md#platform-3)
+[`Platform`](#platform-3)
 
 </td>
 <td>
@@ -5788,7 +5831,7 @@ Documentation: https://esbuild.github.io/api/#platform
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`platform`](esbuild.md#platform-1)
+[`CommonOptions`](#commonoptions).[`platform`](#platform-1)
 
 </td>
 </tr>
@@ -5810,7 +5853,7 @@ Documentation: https://esbuild.github.io/api/#pure
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`pure`](esbuild.md#pure-1)
+[`CommonOptions`](#commonoptions).[`pure`](#pure-1)
 
 </td>
 </tr>
@@ -5832,7 +5875,7 @@ Documentation: https://esbuild.github.io/api/#mangle-props
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`reserveProps`](esbuild.md#reserveprops-1)
+[`CommonOptions`](#commonoptions).[`reserveProps`](#reserveprops-1)
 
 </td>
 </tr>
@@ -5876,7 +5919,7 @@ Documentation: https://esbuild.github.io/api/#sourcemap
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`sourcemap`](esbuild.md#sourcemap-1)
+[`CommonOptions`](#commonoptions).[`sourcemap`](#sourcemap-1)
 
 </td>
 </tr>
@@ -5898,7 +5941,7 @@ Documentation: https://esbuild.github.io/api/#source-root
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`sourceRoot`](esbuild.md#sourceroot-1)
+[`CommonOptions`](#commonoptions).[`sourceRoot`](#sourceroot-1)
 
 </td>
 </tr>
@@ -5920,7 +5963,7 @@ Documentation: https://esbuild.github.io/api/#sources-content
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`sourcesContent`](esbuild.md#sourcescontent-1)
+[`CommonOptions`](#commonoptions).[`sourcesContent`](#sourcescontent-1)
 
 </td>
 </tr>
@@ -5942,7 +5985,7 @@ Documentation: https://esbuild.github.io/api/#supported
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`supported`](esbuild.md#supported-1)
+[`CommonOptions`](#commonoptions).[`supported`](#supported-1)
 
 </td>
 </tr>
@@ -5964,7 +6007,7 @@ Documentation: https://esbuild.github.io/api/#target
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`target`](esbuild.md#target-1)
+[`CommonOptions`](#commonoptions).[`target`](#target-1)
 
 </td>
 </tr>
@@ -5986,7 +6029,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`treeShaking`](esbuild.md#treeshaking-1)
+[`CommonOptions`](#commonoptions).[`treeShaking`](#treeshaking-1)
 
 </td>
 </tr>
@@ -5998,7 +6041,7 @@ Documentation: https://esbuild.github.io/api/#tree-shaking
 </td>
 <td>
 
-`string` \| [`TsconfigRaw`](esbuild.md#tsconfigraw-3)
+`string` \| [`TsconfigRaw`](#tsconfigraw-3)
 
 </td>
 <td>
@@ -6008,7 +6051,7 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 </td>
 <td>
 
-[`CommonOptions`](esbuild.md#commonoptions).[`tsconfigRaw`](esbuild.md#tsconfigraw-1)
+[`CommonOptions`](#commonoptions).[`tsconfigRaw`](#tsconfigraw-1)
 
 </td>
 </tr>
@@ -6032,12 +6075,12 @@ Documentation: https://esbuild.github.io/api/#tsconfig-raw
 <tr>
 <td>
 
-`ProvidedOptions` _extends_ [`TransformOptions`](esbuild.md#transformoptions)
+`ProvidedOptions` _extends_ [`TransformOptions`](#transformoptions)
 
 </td>
 <td>
 
-[`TransformOptions`](esbuild.md#transformoptions)
+[`TransformOptions`](#transformoptions)
 
 </td>
 </tr>
@@ -6131,7 +6174,7 @@ Only when "mangleCache" is present
 </td>
 <td>
 
-[`Message`](esbuild.md#message-1)[]
+[`Message`](#message-1)[]
 
 </td>
 <td>
@@ -6348,49 +6391,49 @@ Only when "mangleCache" is present
 
 ### Charset
 
-> **Charset**: `"ascii"` \| `"utf8"`
+> **Charset** = `"ascii"` \| `"utf8"`
 
 ---
 
 ### Drop
 
-> **Drop**: `"console"` \| `"debugger"`
+> **Drop** = `"console"` \| `"debugger"`
 
 ---
 
 ### Format
 
-> **Format**: `"iife"` \| `"cjs"` \| `"esm"`
+> **Format** = `"iife"` \| `"cjs"` \| `"esm"`
 
 ---
 
 ### ImportKind
 
-> **ImportKind**: `"entry-point"` \| `"import-statement"` \| `"require-call"` \| `"dynamic-import"` \| `"require-resolve"` \| `"import-rule"` \| `"composes-from"` \| `"url-token"`
+> **ImportKind** = `"entry-point"` \| `"import-statement"` \| `"require-call"` \| `"dynamic-import"` \| `"require-resolve"` \| `"import-rule"` \| `"composes-from"` \| `"url-token"`
 
 ---
 
 ### Loader
 
-> **Loader**: `"base64"` \| `"binary"` \| `"copy"` \| `"css"` \| `"dataurl"` \| `"default"` \| `"empty"` \| `"file"` \| `"js"` \| `"json"` \| `"jsx"` \| `"local-css"` \| `"text"` \| `"ts"` \| `"tsx"`
+> **Loader** = `"base64"` \| `"binary"` \| `"copy"` \| `"css"` \| `"dataurl"` \| `"default"` \| `"empty"` \| `"file"` \| `"js"` \| `"json"` \| `"jsx"` \| `"local-css"` \| `"text"` \| `"ts"` \| `"tsx"`
 
 ---
 
 ### LogLevel
 
-> **LogLevel**: `"verbose"` \| `"debug"` \| `"info"` \| `"warning"` \| `"error"` \| `"silent"`
+> **LogLevel** = `"verbose"` \| `"debug"` \| `"info"` \| `"warning"` \| `"error"` \| `"silent"`
 
 ---
 
 ### Platform
 
-> **Platform**: `"browser"` \| `"node"` \| `"neutral"`
+> **Platform** = `"browser"` \| `"node"` \| `"neutral"`
 
 ---
 
 ### SameShape\<Out, In\>
 
-> **SameShape**\<`Out`, `In`\>: `In` & `{ [Key in Exclude<keyof In, keyof Out>]: never }`
+> **SameShape**\<`Out`, `In`\> = `In` & `{ [Key in Exclude<keyof In, keyof Out>]: never }`
 
 #### Type Parameters
 
@@ -6428,7 +6471,7 @@ Only when "mangleCache" is present
 
 ### analyzeMetafile()
 
-> **analyzeMetafile**(`metafile`, `options`?): `Promise`\<`string`\>
+> **analyzeMetafile**(`metafile`, `options?`): `Promise`\<`string`\>
 
 Pretty-prints an analysis of the metafile JSON to a string. This is just for
 convenience to be able to match esbuild's pretty-printing exactly. If you want
@@ -6457,19 +6500,19 @@ Documentation: https://esbuild.github.io/api/#analyze
 </td>
 <td>
 
-`string` \| [`Metafile`](esbuild.md#metafile-2)
+`string` \| [`Metafile`](#metafile-2)
 
 </td>
 </tr>
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`AnalyzeMetafileOptions`](esbuild.md#analyzemetafileoptions)
+[`AnalyzeMetafileOptions`](#analyzemetafileoptions)
 
 </td>
 </tr>
@@ -6484,7 +6527,7 @@ Documentation: https://esbuild.github.io/api/#analyze
 
 ### analyzeMetafileSync()
 
-> **analyzeMetafileSync**(`metafile`, `options`?): `string`
+> **analyzeMetafileSync**(`metafile`, `options?`): `string`
 
 A synchronous version of "analyzeMetafile".
 
@@ -6511,19 +6554,19 @@ Documentation: https://esbuild.github.io/api/#analyze
 </td>
 <td>
 
-`string` \| [`Metafile`](esbuild.md#metafile-2)
+`string` \| [`Metafile`](#metafile-2)
 
 </td>
 </tr>
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`AnalyzeMetafileOptions`](esbuild.md#analyzemetafileoptions)
+[`AnalyzeMetafileOptions`](#analyzemetafileoptions)
 
 </td>
 </tr>
@@ -6538,7 +6581,7 @@ Documentation: https://esbuild.github.io/api/#analyze
 
 ### build()
 
-> **build**\<`T`\>(`options`): `Promise`\<[`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`T`\>\>
+> **build**\<`T`\>(`options`): `Promise`\<[`BuildResult`](#buildresult)\<`T`\>\>
 
 This function invokes the "esbuild" command-line tool for you. It returns a
 promise that either resolves with a "BuildResult" object or rejects with a
@@ -6561,7 +6604,7 @@ Documentation: https://esbuild.github.io/api/#build
 <tr>
 <td>
 
-`T` _extends_ [`BuildOptions`](esbuild.md#buildoptions)
+`T` _extends_ [`BuildOptions`](#buildoptions)
 
 </td>
 </tr>
@@ -6586,7 +6629,7 @@ Documentation: https://esbuild.github.io/api/#build
 </td>
 <td>
 
-[`SameShape`](esbuild.md#sameshapeout-in)\<[`BuildOptions`](esbuild.md#buildoptions), `T`\>
+[`SameShape`](#sameshape)\<[`BuildOptions`](#buildoptions), `T`\>
 
 </td>
 </tr>
@@ -6595,13 +6638,13 @@ Documentation: https://esbuild.github.io/api/#build
 
 #### Returns
 
-`Promise`\<[`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`T`\>\>
+`Promise`\<[`BuildResult`](#buildresult)\<`T`\>\>
 
 ---
 
 ### buildSync()
 
-> **buildSync**\<`T`\>(`options`): [`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`T`\>
+> **buildSync**\<`T`\>(`options`): [`BuildResult`](#buildresult)\<`T`\>
 
 A synchronous version of "build".
 
@@ -6622,7 +6665,7 @@ Documentation: https://esbuild.github.io/api/#build
 <tr>
 <td>
 
-`T` _extends_ [`BuildOptions`](esbuild.md#buildoptions)
+`T` _extends_ [`BuildOptions`](#buildoptions)
 
 </td>
 </tr>
@@ -6647,7 +6690,7 @@ Documentation: https://esbuild.github.io/api/#build
 </td>
 <td>
 
-[`SameShape`](esbuild.md#sameshapeout-in)\<[`BuildOptions`](esbuild.md#buildoptions), `T`\>
+[`SameShape`](#sameshape)\<[`BuildOptions`](#buildoptions), `T`\>
 
 </td>
 </tr>
@@ -6656,13 +6699,13 @@ Documentation: https://esbuild.github.io/api/#build
 
 #### Returns
 
-[`BuildResult`](esbuild.md#buildresultprovidedoptions)\<`T`\>
+[`BuildResult`](#buildresult)\<`T`\>
 
 ---
 
 ### context()
 
-> **context**\<`T`\>(`options`): `Promise`\<[`BuildContext`](esbuild.md#buildcontextprovidedoptions)\<`T`\>\>
+> **context**\<`T`\>(`options`): `Promise`\<[`BuildContext`](#buildcontext)\<`T`\>\>
 
 This is the advanced long-running form of "build" that supports additional
 features such as watch mode and a local development server.
@@ -6684,7 +6727,7 @@ Documentation: https://esbuild.github.io/api/#build
 <tr>
 <td>
 
-`T` _extends_ [`BuildOptions`](esbuild.md#buildoptions)
+`T` _extends_ [`BuildOptions`](#buildoptions)
 
 </td>
 </tr>
@@ -6709,7 +6752,7 @@ Documentation: https://esbuild.github.io/api/#build
 </td>
 <td>
 
-[`SameShape`](esbuild.md#sameshapeout-in)\<[`BuildOptions`](esbuild.md#buildoptions), `T`\>
+[`SameShape`](#sameshape)\<[`BuildOptions`](#buildoptions), `T`\>
 
 </td>
 </tr>
@@ -6718,7 +6761,7 @@ Documentation: https://esbuild.github.io/api/#build
 
 #### Returns
 
-`Promise`\<[`BuildContext`](esbuild.md#buildcontextprovidedoptions)\<`T`\>\>
+`Promise`\<[`BuildContext`](#buildcontext)\<`T`\>\>
 
 ---
 
@@ -6751,7 +6794,7 @@ log message formatter. This is a batch-oriented API for efficiency.
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -6763,7 +6806,7 @@ log message formatter. This is a batch-oriented API for efficiency.
 </td>
 <td>
 
-[`FormatMessagesOptions`](esbuild.md#formatmessagesoptions)
+[`FormatMessagesOptions`](#formatmessagesoptions)
 
 </td>
 </tr>
@@ -6803,7 +6846,7 @@ A synchronous version of "formatMessages".
 </td>
 <td>
 
-[`PartialMessage`](esbuild.md#partialmessage)[]
+[`PartialMessage`](#partialmessage)[]
 
 </td>
 </tr>
@@ -6815,7 +6858,7 @@ A synchronous version of "formatMessages".
 </td>
 <td>
 
-[`FormatMessagesOptions`](esbuild.md#formatmessagesoptions)
+[`FormatMessagesOptions`](#formatmessagesoptions)
 
 </td>
 </tr>
@@ -6859,7 +6902,7 @@ Documentation: https://esbuild.github.io/api/#browser
 </td>
 <td>
 
-[`InitializeOptions`](esbuild.md#initializeoptions)
+[`InitializeOptions`](#initializeoptions)
 
 </td>
 </tr>
@@ -6884,7 +6927,7 @@ Documentation: https://esbuild.github.io/api/#browser
 
 ### transform()
 
-> **transform**\<`T`\>(`input`, `options`?): `Promise`\<[`TransformResult`](esbuild.md#transformresultprovidedoptions)\<`T`\>\>
+> **transform**\<`T`\>(`input`, `options?`): `Promise`\<[`TransformResult`](#transformresult)\<`T`\>\>
 
 This function transforms a single JavaScript file. It can be used to minify
 JavaScript, convert TypeScript/JSX to JavaScript, or convert newer JavaScript
@@ -6908,7 +6951,7 @@ Documentation: https://esbuild.github.io/api/#transform
 <tr>
 <td>
 
-`T` _extends_ [`TransformOptions`](esbuild.md#transformoptions)
+`T` _extends_ [`TransformOptions`](#transformoptions)
 
 </td>
 </tr>
@@ -6940,12 +6983,12 @@ Documentation: https://esbuild.github.io/api/#transform
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`SameShape`](esbuild.md#sameshapeout-in)\<[`TransformOptions`](esbuild.md#transformoptions), `T`\>
+[`SameShape`](#sameshape)\<[`TransformOptions`](#transformoptions), `T`\>
 
 </td>
 </tr>
@@ -6954,13 +6997,13 @@ Documentation: https://esbuild.github.io/api/#transform
 
 #### Returns
 
-`Promise`\<[`TransformResult`](esbuild.md#transformresultprovidedoptions)\<`T`\>\>
+`Promise`\<[`TransformResult`](#transformresult)\<`T`\>\>
 
 ---
 
 ### transformSync()
 
-> **transformSync**\<`T`\>(`input`, `options`?): [`TransformResult`](esbuild.md#transformresultprovidedoptions)\<`T`\>
+> **transformSync**\<`T`\>(`input`, `options?`): [`TransformResult`](#transformresult)\<`T`\>
 
 A synchronous version of "transform".
 
@@ -6981,7 +7024,7 @@ Documentation: https://esbuild.github.io/api/#transform
 <tr>
 <td>
 
-`T` _extends_ [`TransformOptions`](esbuild.md#transformoptions)
+`T` _extends_ [`TransformOptions`](#transformoptions)
 
 </td>
 </tr>
@@ -7013,12 +7056,12 @@ Documentation: https://esbuild.github.io/api/#transform
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-[`SameShape`](esbuild.md#sameshapeout-in)\<[`TransformOptions`](esbuild.md#transformoptions), `T`\>
+[`SameShape`](#sameshape)\<[`TransformOptions`](#transformoptions), `T`\>
 
 </td>
 </tr>
@@ -7027,4 +7070,4 @@ Documentation: https://esbuild.github.io/api/#transform
 
 #### Returns
 
-[`TransformResult`](esbuild.md#transformresultprovidedoptions)\<`T`\>
+[`TransformResult`](#transformresult)\<`T`\>

@@ -51,4 +51,4 @@
 
 ### durableObjectsMigrations
 
-> `const` **durableObjectsMigrations**: [`DurableObjectMigration`](sdk.md#durableobjectmigration)[]
+> `const` **durableObjectsMigrations**: [`DurableObjectMigration`](#durableobjectmigration)[]

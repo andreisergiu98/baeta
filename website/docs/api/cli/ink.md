@@ -4,14 +4,15 @@
 
 ### AppProps
 
-> **AppProps**: `object`
+> **AppProps** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -25,7 +26,12 @@
 </td>
 <td>
 
-(`error`?) => `void`
+`readonly`
+
+</td>
+<td>
+
+(`error?`) => `void`
 
 </td>
 <td>
@@ -41,13 +47,13 @@ Exit (unmount) the whole Ink app.
 
 ### BoxProps
 
-> **BoxProps**: `Except`\<`Styles`, `"textWrap"`\>
+> **BoxProps** = `Except`\<`Styles`, `"textWrap"`\>
 
 ---
 
 ### DOMElement
 
-> **DOMElement**: `object` & `InkNode`
+> **DOMElement** = `object` & `InkNode`
 
 #### Type declaration
 
@@ -98,7 +104,7 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`internal_transform`?
+`internal_transform?`
 
 </td>
 <td>
@@ -110,7 +116,7 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`isStaticDirty`?
+`isStaticDirty?`
 
 </td>
 <td>
@@ -122,7 +128,7 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`onComputeLayout`?
+`onComputeLayout()?`
 
 </td>
 <td>
@@ -134,7 +140,7 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`onImmediateRender`?
+`onImmediateRender()?`
 
 </td>
 <td>
@@ -146,7 +152,7 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`onRender`?
+`onRender()?`
 
 </td>
 <td>
@@ -158,12 +164,12 @@ Exit (unmount) the whole Ink app.
 <tr>
 <td>
 
-`staticNode`?
+`staticNode?`
 
 </td>
 <td>
 
-[`DOMElement`](ink.md#domelement)
+[`DOMElement`](#domelement)
 
 </td>
 </tr>
@@ -174,14 +180,14 @@ Exit (unmount) the whole Ink app.
 
 ### Instance
 
-> **Instance**: `object`
+> **Instance** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -279,16 +285,16 @@ Returns a promise, which resolves when app is unmounted.
 
 ### Key
 
-> **Key**: `object`
+> **Key** = `object`
 
 Handy information about a key that was pressed.
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -539,14 +545,15 @@ Up arrow key was pressed.
 
 ### NewlineProps
 
-> **NewlineProps**: `object`
+> **NewlineProps** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -555,7 +562,12 @@ Up arrow key was pressed.
 <tr>
 <td>
 
-<a id="count"></a> `count`?
+<a id="count"></a> `count?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -582,14 +594,14 @@ Number of newlines to insert.
 
 ### RenderOptions
 
-> **RenderOptions**: `object`
+> **RenderOptions** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -598,7 +610,7 @@ Number of newlines to insert.
 <tr>
 <td>
 
-<a id="debug"></a> `debug`?
+<a id="debug"></a> `debug?`
 
 </td>
 <td>
@@ -621,7 +633,7 @@ false;
 <tr>
 <td>
 
-<a id="exitonctrlc"></a> `exitOnCtrlC`?
+<a id="exitonctrlc"></a> `exitOnCtrlC?`
 
 </td>
 <td>
@@ -644,7 +656,7 @@ true;
 <tr>
 <td>
 
-<a id="patchconsole"></a> `patchConsole`?
+<a id="patchconsole"></a> `patchConsole?`
 
 </td>
 <td>
@@ -667,7 +679,7 @@ true;
 <tr>
 <td>
 
-<a id="stderr"></a> `stderr`?
+<a id="stderr"></a> `stderr?`
 
 </td>
 <td>
@@ -690,7 +702,7 @@ process.stderr;
 <tr>
 <td>
 
-<a id="stdin"></a> `stdin`?
+<a id="stdin"></a> `stdin?`
 
 </td>
 <td>
@@ -713,7 +725,7 @@ process.stdin;
 <tr>
 <td>
 
-<a id="stdout"></a> `stdout`?
+<a id="stdout"></a> `stdout?`
 
 </td>
 <td>
@@ -740,7 +752,7 @@ process.stdout;
 
 ### StaticProps\<T\>
 
-> **StaticProps**\<`T`\>: `object`
+> **StaticProps**\<`T`\> = `object`
 
 #### Type Parameters
 
@@ -761,12 +773,13 @@ process.stdout;
 </tbody>
 </table>
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -776,6 +789,11 @@ process.stdout;
 <td>
 
 <a id="children"></a> `children`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -799,6 +817,11 @@ Note that `key` must be assigned to the root component.
 </td>
 <td>
 
+`readonly`
+
+</td>
+<td>
+
 `T`[]
 
 </td>
@@ -811,7 +834,12 @@ Array of items of any type to render using a function you pass as a component ch
 <tr>
 <td>
 
-<a id="style"></a> `style`?
+<a id="style"></a> `style?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -832,14 +860,15 @@ Styles to apply to a container of child elements. See <Box> for supported proper
 
 ### StderrProps
 
-> **StderrProps**: `object`
+> **StderrProps** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -849,6 +878,11 @@ Styles to apply to a container of child elements. See <Box> for supported proper
 <td>
 
 <a id="stderr-1"></a> `stderr`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -866,6 +900,11 @@ Stderr stream passed to `render()` in `options.stderr` or `process.stderr` by de
 <td>
 
 <a id="write"></a> `write`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -888,14 +927,15 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 
 ### StdinProps
 
-> **StdinProps**: `object`
+> **StdinProps** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -905,6 +945,11 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 <td>
 
 <a id="internal_eventemitter"></a> `internal_eventEmitter`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -926,6 +971,11 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 </td>
 <td>
 
+`readonly`
+
+</td>
+<td>
+
 `boolean`
 
 </td>
@@ -943,6 +993,11 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 </td>
 <td>
 
+`readonly`
+
+</td>
+<td>
+
 `boolean`
 
 </td>
@@ -956,6 +1011,11 @@ A boolean flag determining if the current `stdin` supports `setRawMode`. A compo
 <td>
 
 <a id="setrawmode"></a> `setRawMode`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -978,6 +1038,11 @@ If the `stdin` stream passed to Ink does not support setRawMode, this function d
 </td>
 <td>
 
+`readonly`
+
+</td>
+<td>
+
 `NodeJS.ReadStream`
 
 </td>
@@ -994,14 +1059,15 @@ Stdin stream passed to `render()` in `options.stdin` or `process.stdin` by defau
 
 ### StdoutProps
 
-> **StdoutProps**: `object`
+> **StdoutProps** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1011,6 +1077,11 @@ Stdin stream passed to `render()` in `options.stdin` or `process.stdin` by defau
 <td>
 
 <a id="stdout-1"></a> `stdout`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1028,6 +1099,11 @@ Stdout stream passed to `render()` in `options.stdout` or `process.stdout` by de
 <td>
 
 <a id="write-1"></a> `write`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1050,14 +1126,15 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 
 ### TextProps
 
-> **TextProps**: `object`
+> **TextProps** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1066,7 +1143,12 @@ It's similar to `<Static>`, except it can't accept components, it only works wit
 <tr>
 <td>
 
-<a id="backgroundcolor"></a> `backgroundColor`?
+<a id="backgroundcolor"></a> `backgroundColor?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1083,7 +1165,12 @@ Same as `color`, but for background.
 <tr>
 <td>
 
-<a id="bold"></a> `bold`?
+<a id="bold"></a> `bold?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1100,7 +1187,12 @@ Make the text bold.
 <tr>
 <td>
 
-<a id="children-1"></a> `children`?
+<a id="children-1"></a> `children?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1117,7 +1209,12 @@ Make the text bold.
 <tr>
 <td>
 
-<a id="color"></a> `color`?
+<a id="color"></a> `color?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1134,7 +1231,12 @@ Change text color. Ink uses chalk under the hood, so all its functionality is su
 <tr>
 <td>
 
-<a id="dimcolor"></a> `dimColor`?
+<a id="dimcolor"></a> `dimColor?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1151,7 +1253,12 @@ Dim the color (emit a small amount of light).
 <tr>
 <td>
 
-<a id="inverse"></a> `inverse`?
+<a id="inverse"></a> `inverse?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1168,7 +1275,12 @@ Inverse background and foreground colors.
 <tr>
 <td>
 
-<a id="italic"></a> `italic`?
+<a id="italic"></a> `italic?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1185,7 +1297,12 @@ Make the text italic.
 <tr>
 <td>
 
-<a id="strikethrough"></a> `strikethrough`?
+<a id="strikethrough"></a> `strikethrough?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1202,7 +1319,12 @@ Make the text crossed with a line.
 <tr>
 <td>
 
-<a id="underline"></a> `underline`?
+<a id="underline"></a> `underline?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1219,7 +1341,12 @@ Make the text underlined.
 <tr>
 <td>
 
-<a id="wrap"></a> `wrap`?
+<a id="wrap"></a> `wrap?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1242,14 +1369,15 @@ If `truncate-*` is passed, Ink will truncate text instead, which will result in 
 
 ### TransformProps
 
-> **TransformProps**: `object`
+> **TransformProps** = `object`
 
-#### Type declaration
+#### Properties
 
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1259,6 +1387,11 @@ If `truncate-*` is passed, Ink will truncate text instead, which will result in 
 <td>
 
 <a id="transform"></a> `transform`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1275,7 +1408,12 @@ Function which transforms children output. It accepts children and must return t
 <tr>
 <td>
 
-<a id="children-2"></a> `children`?
+<a id="children-2"></a> `children?`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -1292,48 +1430,19 @@ Function which transforms children output. It accepts children and must return t
 </tbody>
 </table>
 
-## Functions
+## Variables
 
-### Box()
+### Box
 
-> **Box**(`props`): `ReactNode`
+> `const` **Box**: `React.ForwardRefExoticComponent`\<`object` & `object` & `React.RefAttributes`\<[`DOMElement`](#domelement)\>\>
 
 `<Box>` is an essential Ink component to build your layout. It's like `<div style="display: flex">` in the browser.
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`props`
-
-</td>
-<td>
-
-`object` & `object` & `RefAttributes`\<[`DOMElement`](ink.md#domelement)\>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`ReactNode`
 
 ---
 
 ### measureElement()
 
-> **measureElement**(`node`): `Output`
+> `const` **measureElement**: (`node`) => `Output`
 
 Measure the dimensions of a particular `<Box>` element.
 
@@ -1355,7 +1464,7 @@ Measure the dimensions of a particular `<Box>` element.
 </td>
 <td>
 
-[`DOMElement`](ink.md#domelement)
+[`DOMElement`](#domelement)
 
 </td>
 </tr>
@@ -1368,46 +1477,9 @@ Measure the dimensions of a particular `<Box>` element.
 
 ---
 
-### Newline()
-
-> **Newline**(`__namedParameters`): `Element`
-
-Adds one or more newline (\n) characters. Must be used within <Text> components.
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`__namedParameters`
-
-</td>
-<td>
-
-[`NewlineProps`](ink.md#newlineprops)
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`Element`
-
----
-
 ### render()
 
-> **render**(`node`, `options`?): [`Instance`](ink.md#instance)
+> `const` **render**: (`node`, `options?`) => [`Instance`](#instance)
 
 Mount a component and render the output.
 
@@ -1436,12 +1508,12 @@ Mount a component and render the output.
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
 
-`WriteStream` \| [`RenderOptions`](ink.md#renderoptions)
+`NodeJS.WriteStream` \| [`RenderOptions`](#renderoptions)
 
 </td>
 </tr>
@@ -1450,7 +1522,217 @@ Mount a component and render the output.
 
 #### Returns
 
-[`Instance`](ink.md#instance)
+[`Instance`](#instance)
+
+---
+
+### useApp()
+
+> `const` **useApp**: () => [`AppProps`](#appprops)
+
+`useApp` is a React hook, which exposes a method to manually exit the app (unmount).
+
+#### Returns
+
+[`AppProps`](#appprops)
+
+---
+
+### useFocus()
+
+> `const` **useFocus**: (`{ isActive, autoFocus, id: customId, }?`) => `Output`
+
+Component that uses `useFocus` hook becomes "focusable" to Ink,
+so when user presses <kbd>Tab</kbd>, Ink will switch focus to this component.
+If there are multiple components that execute `useFocus` hook, focus will be
+given to them in the order that these components are rendered in.
+This hook returns an object with `isFocused` boolean property, which
+determines if this component is focused or not.
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`{ isActive, autoFocus, id: customId, }?`
+
+</td>
+<td>
+
+`Input`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`Output`
+
+---
+
+### useFocusManager()
+
+> `const` **useFocusManager**: () => `Output`
+
+This hook exposes methods to enable or disable focus management for all
+components or manually switch focus to next or previous components.
+
+#### Returns
+
+`Output`
+
+---
+
+### useInput()
+
+> `const` **useInput**: (`inputHandler`, `options?`) => `void`
+
+This hook is used for handling user input.
+It's a more convenient alternative to using `StdinContext` and listening to `data` events.
+The callback you pass to `useInput` is called for each character when user enters any input.
+However, if user pastes text and it's more than one character, the callback will be called only once and the whole string will be passed as `input`.
+
+```
+import {useInput} from 'ink';
+
+const UserInput = () => {
+  useInput((input, key) => {
+    if (input === 'q') {
+      // Exit program
+    }
+
+    if (key.leftArrow) {
+      // Left arrow key pressed
+    }
+  });
+
+  return …
+};
+```
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`inputHandler`
+
+</td>
+<td>
+
+`Handler`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`options?`
+
+</td>
+<td>
+
+`Options`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`void`
+
+---
+
+### useStderr()
+
+> `const` **useStderr**: () => [`StderrProps`](#stderrprops)
+
+`useStderr` is a React hook, which exposes stderr stream.
+
+#### Returns
+
+[`StderrProps`](#stderrprops)
+
+---
+
+### useStdin()
+
+> `const` **useStdin**: () => [`StdinProps`](#stdinprops)
+
+`useStdin` is a React hook, which exposes stdin stream.
+
+#### Returns
+
+[`StdinProps`](#stdinprops)
+
+---
+
+### useStdout()
+
+> `const` **useStdout**: () => [`StdoutProps`](#stdoutprops)
+
+`useStdout` is a React hook, which exposes stdout stream.
+
+#### Returns
+
+[`StdoutProps`](#stdoutprops)
+
+## Functions
+
+### Newline()
+
+> **Newline**(`__namedParameters`): `Element`
+
+Adds one or more newline (\n) characters. Must be used within <Text> components.
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`__namedParameters`
+
+</td>
+<td>
+
+[`NewlineProps`](#newlineprops)
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`Element`
 
 ---
 
@@ -1519,7 +1801,7 @@ to display a list of generated pages, while still displaying a live progress bar
 </td>
 <td>
 
-[`StaticProps`](ink.md#staticpropst)\<`T`\>
+[`StaticProps`](#staticprops)\<`T`\>
 
 </td>
 </tr>
@@ -1556,7 +1838,7 @@ This component can display text, and change its style to make it colorful, bold,
 </td>
 <td>
 
-[`TextProps`](ink.md#textprops)
+[`TextProps`](#textprops)
 
 </td>
 </tr>
@@ -1596,7 +1878,7 @@ That's what <Transform> component does, it gives you an output string of its chi
 </td>
 <td>
 
-[`TransformProps`](ink.md#transformprops)
+[`TransformProps`](#transformprops)
 
 </td>
 </tr>
@@ -1606,176 +1888,3 @@ That's what <Transform> component does, it gives you an output string of its chi
 #### Returns
 
 `null` \| `Element`
-
----
-
-### useApp()
-
-> **useApp**(): [`AppProps`](ink.md#appprops)
-
-`useApp` is a React hook, which exposes a method to manually exit the app (unmount).
-
-#### Returns
-
-[`AppProps`](ink.md#appprops)
-
----
-
-### useFocus()
-
-> **useFocus**(`__namedParameters`?): `Output`
-
-Component that uses `useFocus` hook becomes "focusable" to Ink,
-so when user presses <kbd>Tab</kbd>, Ink will switch focus to this component.
-If there are multiple components that execute `useFocus` hook, focus will be
-given to them in the order that these components are rendered in.
-This hook returns an object with `isFocused` boolean property, which
-determines if this component is focused or not.
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`__namedParameters`?
-
-</td>
-<td>
-
-`Input`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`Output`
-
----
-
-### useFocusManager()
-
-> **useFocusManager**(): `Output`
-
-This hook exposes methods to enable or disable focus management for all
-components or manually switch focus to next or previous components.
-
-#### Returns
-
-`Output`
-
----
-
-### useInput()
-
-> **useInput**(`inputHandler`, `options`?): `void`
-
-This hook is used for handling user input.
-It's a more convenient alternative to using `StdinContext` and listening to `data` events.
-The callback you pass to `useInput` is called for each character when user enters any input.
-However, if user pastes text and it's more than one character, the callback will be called only once and the whole string will be passed as `input`.
-
-```
-import {useInput} from 'ink';
-
-const UserInput = () => {
-  useInput((input, key) => {
-    if (input === 'q') {
-      // Exit program
-    }
-
-    if (key.leftArrow) {
-      // Left arrow key pressed
-    }
-  });
-
-  return …
-};
-```
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`inputHandler`
-
-</td>
-<td>
-
-`Handler`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`options`?
-
-</td>
-<td>
-
-`Options`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`void`
-
----
-
-### useStderr()
-
-> **useStderr**(): [`StderrProps`](ink.md#stderrprops)
-
-`useStderr` is a React hook, which exposes stderr stream.
-
-#### Returns
-
-[`StderrProps`](ink.md#stderrprops)
-
----
-
-### useStdin()
-
-> **useStdin**(): [`StdinProps`](ink.md#stdinprops)
-
-`useStdin` is a React hook, which exposes stdin stream.
-
-#### Returns
-
-[`StdinProps`](ink.md#stdinprops)
-
----
-
-### useStdout()
-
-> **useStdout**(): [`StdoutProps`](ink.md#stdoutprops)
-
-`useStdout` is a React hook, which exposes stdout stream.
-
-#### Returns
-
-[`StdoutProps`](ink.md#stdoutprops)

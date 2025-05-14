@@ -1,5 +1,10 @@
 name: Deploy website
 
+permissions:
+  contents: read
+  pages: write
+  deployments: write
+
 on:
   push:
     branches:
@@ -16,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup env
-        uses: andreisergiu98/baeta/ci/setup@main
+        uses: ./.github/actions/setup
 
       - name: Build website
         run: yarn docs

@@ -50,8 +50,8 @@
     "@baeta/extension-cache-cloudflare": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250429.0",
-    "@types/node": "^22.15.3",
+    "@cloudflare/workers-types": "^4.20250514.0",
+    "@types/node": "^22.15.18",
     "graphql": "^16.11.0",
     "typescript": "^5.8.3"
   },

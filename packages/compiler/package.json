@@ -48,12 +48,12 @@
   },
   "dependencies": {
     "@baeta/util-path": "workspace:^",
-    "esbuild": "^0.25.3"
+    "esbuild": "^0.25.4"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.3",
+    "@types/node": "^22.15.18",
     "typescript": "^5.8.3"
   },
   "engines": {

@@ -42,7 +42,7 @@
     "@baeta/compiler": "workspace:^",
     "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.3",
+    "@types/node": "^22.15.18",
     "typescript": "^5.8.3"
   }
 }

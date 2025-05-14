@@ -38,10 +38,10 @@
     "@baeta/directives": "workspace:^",
     "graphql": "^16.11.0",
     "graphql-scalars": "^1.24.2",
-    "graphql-ws": "^6.0.4",
+    "graphql-ws": "^6.0.5",
     "graphql-yoga": "^5.13.4",
-    "prisma": "^6.6.0",
-    "ws": "^8.18.1"
+    "prisma": "^6.7.0",
+    "ws": "^8.18.2"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
@@ -50,8 +50,8 @@
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@faker-js/faker": "^9.7.0",
-    "@prisma/client": "^6.6.0",
-    "@types/node": "^22.15.3",
+    "@prisma/client": "^6.7.0",
+    "@types/node": "^22.15.18",
     "@types/ws": "^8.18.1",
     "@yarnpkg/pnpify": "^4.1.4",
     "typescript": "^5.8.3"

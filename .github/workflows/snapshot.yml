@@ -21,12 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Enforce permission requirement
-        uses: prince-chrismc/check-actor-permissions-action@v1
+        uses: prince-chrismc/check-actor-permissions-action@d504e74ba31658f4cdf4fcfeb509d4c09736d88e #v3.0.2
         with:
           permission: write
 
       - name: Add initial reaction
-        uses: peter-evans/create-or-update-comment@v2
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 #v4
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: eyes
@@ -97,14 +97,14 @@ jobs:
           yarn release:snapshot
 
       - name: Add failure reaction
-        uses: peter-evans/create-or-update-comment@v2
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 #v4
         if: failure()
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: confused
 
       - name: Add success reaction
-        uses: peter-evans/create-or-update-comment@v2
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 #v4
         if: success()
         with:
           comment-id: ${{ github.event.comment.id }}

@@ -72,7 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup env
-        uses: andreisergiu98/baeta/ci/setup@main
+        uses: ./.github/actions/setup
 
       - name: Publish Snapshot
         env:

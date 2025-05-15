@@ -2740,6 +2740,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     typedoc: "npm:0.28.4"
+    typedoc-docusaurus-theme: "npm:^1.4.0"
     typedoc-plugin-markdown: "npm:4.6.3"
     typescript: "npm:^5.8.3"
     webpack: "npm:^5.99.8"
@@ -21294,6 +21295,15 @@ __metadata:
   dependencies:
     is-typedarray: "npm:^1.0.0"
   checksum: 10/7c850c3433fbdf4d04f04edfc751743b8f577828b8e1eb93b95a3bce782d156e267d83e20fb32b3b47813e69a69ab5e9b5342653332f7d21c7d1210661a7a72c
+  languageName: node
+  linkType: hard
+
+"typedoc-docusaurus-theme@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "typedoc-docusaurus-theme@npm:1.4.0"
+  peerDependencies:
+    typedoc-plugin-markdown: ">=4.6.3"
+  checksum: 10/32625d980b72846cc3b812213b18622ad80d1236fa8dda787ea8dcf66df61fffc6fea7f21dfa54159020541b85fd269b5fb9f1336269857cc5e92942e1f4dd51
   languageName: node
   linkType: hard
 

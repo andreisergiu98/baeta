@@ -2,6 +2,6 @@
 
 ## Modules
 
-- [index](index-1.md)
-- [ink](ink.md)
-- [sdk](sdk.md)
+- [index](index/index.md)
+- [ink](ink/index.md)
+- [sdk](sdk/index.md)

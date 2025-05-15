@@ -1,39 +1,13 @@
-function getApiEntry(item) {
-	return {
-		...item,
-		label: 'API',
-		items: item.items.map(getApiPackage),
-	};
-}
-
-function getApiPackage(item) {
-	if (!item.link) {
-		return item;
-	}
-
-	const pattern = /api\/([^\/]+)\/index/;
-	const match = item.link.id.match(pattern);
-	const dir = match[1];
-
-	return {
-		...item,
-		label: dir,
-		items: item.items?.toSorted((a, b) => {
-			if (a.id?.endsWith('module_index')) {
-				return -1;
-			}
-			if (b.id?.endsWith('module_index')) {
-				return 1;
-			}
-			return 0;
-		}),
-	};
-}
+const typedocSidebar = require('./docs/api/typedoc-sidebar.cjs');
 
 function injectTypeDocSidebar(items) {
 	return items.map((item) => {
 		if (item?.link?.id === 'api/index') {
-			return getApiEntry(item);
+			return {
+				...item,
+				label: 'API',
+				items: typedocSidebar,
+			};
 		}
 		return item;
 	});

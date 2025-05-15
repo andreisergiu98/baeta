@@ -1,0 +1,3 @@
+# Drop
+
+> **Drop** = `"console"` \| `"debugger"`

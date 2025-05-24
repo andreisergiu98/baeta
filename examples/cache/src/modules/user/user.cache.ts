@@ -11,7 +11,7 @@ Query.users.$useCache(userCache);
 
 // This can be done inside the mutation resolver itself, but
 // we are also showcasing middleware usage here.
-Mutation.createUser.$use(async (params, next) => {
+Mutation.createUser.$use(async (_params, next) => {
 	const user = await next();
 
 	// We want to clear the cache for users, because
@@ -24,7 +24,7 @@ Mutation.createUser.$use(async (params, next) => {
 	return user;
 });
 
-Mutation.updateUser.$use(async (params, next) => {
+Mutation.updateUser.$use(async (_params, next) => {
 	const user = await next();
 
 	// Saving the user will automatically update all queries

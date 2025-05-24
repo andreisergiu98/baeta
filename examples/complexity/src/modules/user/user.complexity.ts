@@ -9,6 +9,7 @@ User.$complexity(() => {
 	};
 });
 
+// biome-ignore lint/correctness/noUnusedFunctionParameters: For demo purposes
 Query.users.$complexity(({ args, ctx }) => {
 	// Set complexity per field based on context or arguments
 	return {

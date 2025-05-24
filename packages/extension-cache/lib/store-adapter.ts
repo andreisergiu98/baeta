@@ -53,6 +53,7 @@ export abstract class StoreAdapter<Item> {
 		args?: Record<string, unknown>,
 	) => Promise<string[] | null>;
 
+	// biome-ignore lint/correctness/noUnusedVariables: defined for the base class
 	protected abstract deleteQueriesByRef: <Result, Root, Args>(
 		queryRef?: string,
 		parentRef?: ParentRef,

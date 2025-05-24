@@ -59,7 +59,7 @@ export class FileBlock extends File {
 			const fd = await open(this.filename, 'r+');
 			const existingContent = await fd.readFile('utf-8');
 			return [existingContent, fd] as const;
-		} catch (err) {
+		} catch {
 			return ['', null] as const;
 		}
 	}

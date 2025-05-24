@@ -119,7 +119,7 @@ declare global {
 				scopes:
 					| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
 					| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Root, Context, Args>,
-				options?: AuthMiddlewareSubscribeOptions<Root, Context, Args>,
+				options?: AuthMiddlewareSubscribeOptions,
 			) => void;
 		}
 

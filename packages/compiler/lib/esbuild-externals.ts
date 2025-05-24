@@ -7,7 +7,7 @@ function getDependencyMap(): DependencyMap {
 		const packageContent = fs.readFileSync(`${process.cwd()}/package.json`, 'utf-8');
 		const packageConfig = JSON.parse(packageContent);
 		return packageConfig.dependencies ?? {};
-	} catch (e) {
+	} catch {
 		return {};
 	}
 }

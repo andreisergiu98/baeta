@@ -23,7 +23,7 @@ export async function getPackageJSON(): Promise<Record<string, unknown> | null> 
 
 		cachedPkg = parsed;
 		return parsed;
-	} catch (e) {
+	} catch {
 		return null;
 	}
 }

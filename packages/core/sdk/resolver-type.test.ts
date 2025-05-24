@@ -4,7 +4,6 @@ import { createTypeResolverAdapter } from './resolver-type.ts';
 
 test('createTypeResolverAdapter should map parameters correctly', (t) => {
 	const root = {};
-	const args = {};
 	const ctx = {};
 	const info = {} as GraphQLResolveInfo;
 	const type = {} as GraphQLAbstractType;

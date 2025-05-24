@@ -15,7 +15,7 @@ const yoga = createYoga({
 	schema: baeta.schema,
 });
 
-function handleGraphql(request: Request, env: Env, ctx: ExecutionContext) {
+function handleGraphql(request: Request, _env: Env, ctx: ExecutionContext) {
 	const context: Context = {
 		userId: 'id-0',
 		executionCtx: ctx,

@@ -56,7 +56,7 @@ test('saveGrants: should resolve grants if grants is a function', async (t) => {
 
 	let fnCalled = false;
 
-	const grants: GetGrantFn<TestGrant, unknown, unknown, unknown, unknown> = (args, result) => {
+	const grants: GetGrantFn<TestGrant, unknown, unknown, unknown, unknown> = () => {
 		fnCalled = true;
 		return 'grant1';
 	};

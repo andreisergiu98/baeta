@@ -25,7 +25,7 @@ export interface AuthMiddlewareOptions<Grants extends string, Result, Root, Cont
 /**
  * Options for authorization middlewares
  */
-export interface AuthMiddlewareSubscribeOptions<Root, Context, Args> {
+export interface AuthMiddlewareSubscribeOptions {
 	/** Whether to skip default scopes for this operation */
 	skipDefaults?: boolean;
 	/** Custom error handler for this operation */

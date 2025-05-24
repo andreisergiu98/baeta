@@ -11,7 +11,7 @@ function createScopeLoader(): GetScopeLoader<ScopesShape, ''> {
 function createMapper() {
 	return {
 		getTypes: sinon.stub().returns(['Query']),
-		getTypeFields: sinon.stub((type: string) => {
+		getTypeFields: sinon.stub(() => {
 			return ['field1', 'field2'];
 		}),
 		prependMiddleware: sinon.spy(),

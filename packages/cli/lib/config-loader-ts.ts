@@ -33,7 +33,7 @@ async function tryImportTypeScriptConfig(configPath: string): Promise<BaetaOptio
 		const modulePath = path.resolve(process.cwd(), configPath);
 		const module = await dynamicImport<ConfigModule>(`${modulePath}?v${cacheIndex++}`);
 		return selectConfigFromModule(module);
-	} catch (e) {
+	} catch {
 		importFailed = true;
 	}
 }
@@ -48,7 +48,7 @@ export async function importTypeScriptConfig(
 		}
 	}
 
-	const compiler = await dynamicImportCompiler().catch((err) => null);
+	const compiler = await dynamicImportCompiler().catch(() => null);
 
 	if (compiler == null) {
 		console.log(makeErrorMessage(`@baeta/compiler is required to load ${configPath}`, true));

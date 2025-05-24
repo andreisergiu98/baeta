@@ -49,7 +49,7 @@ export async function readState(filename: string) {
 		if (isVersion2(state)) {
 			return state;
 		}
-	} catch (error) {
+	} catch {
 		// do nothing
 	}
 
@@ -86,7 +86,7 @@ export async function saveState(filename: string, ctx: Ctx) {
 		await fs.mkdir(path.dirname(filename), { recursive: true });
 		await fs.writeFile(filename, JSON.stringify(state, null, 2));
 		return true;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }

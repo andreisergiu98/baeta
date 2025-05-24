@@ -45,7 +45,7 @@ const apollo = new ApolloServer<Context>({
 await apollo.start();
 
 const apolloMiddleware = expressMiddleware<Context>(apollo, {
-	context: async ({ req }) => {
+	context: async () => {
 		return {
 			pubsub,
 		};

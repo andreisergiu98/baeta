@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noUnusedVariables: arguments used for inference */
 import type { GetFieldSettings } from './field-settings.ts';
 
 declare global {

@@ -12,7 +12,7 @@ Query.user(async (params) => {
 	});
 });
 
-Query.users(async (params) => {
+Query.users(async (_params) => {
 	return db.user.findMany({
 		where: {},
 	});

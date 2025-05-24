@@ -22,7 +22,7 @@ export function forgeNativeResolver<T>(value: T): NativeResolver {
 }
 
 export function forgeMiddleware(): Middleware<unknown, unknown, unknown, unknown> {
-	return (params, next) => next();
+	return (_params, next) => next();
 }
 
 export function forgeNativeMiddleware(): NativeMiddleware {

@@ -67,8 +67,14 @@ export function createSerializer<
 
 	for (const serializer of serializers ?? []) {
 		if (serializer.kind === 'custom') {
-			const { name, kind, ...handlers } = serializer;
-			superjson.registerCustom(handlers, serializer.name);
+			superjson.registerCustom(
+				{
+					isApplicable: serializer.isApplicable,
+					serialize: serializer.serialize,
+					deserialize: serializer.deserialize,
+				},
+				serializer.name,
+			);
 		}
 
 		if (serializer.kind === 'class') {

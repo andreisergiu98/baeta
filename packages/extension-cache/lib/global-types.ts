@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noUnusedVariables: arguments used for inference */
 import type {
 	CacheMiddlewareOptions,
 	RequiredCacheMiddlewareOptions,

@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/correctness/noUnusedFunctionParameters: parameters need to be defined */
+/** biome-ignore-all lint/correctness/noUnusedVariables: parameters need to be defined */
 import type { ModuleBuilder } from './module.ts';
 import type { ResolverMapper } from './resolver-mapper.ts';
 import type { SchemaTransformer } from './transformer.ts';

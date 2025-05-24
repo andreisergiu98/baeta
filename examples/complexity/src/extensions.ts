@@ -6,7 +6,7 @@ export default createExtensions(
 	complexityExtension<Context>({
 		defaultComplexity: 1,
 		defaultListMultiplier: 10,
-		async limit(ctx) {
+		async limit(_ctx) {
 			// Set limits dynamically based on user permissions, plan, etc.
 			return {
 				depth: 10,

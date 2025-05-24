@@ -1,58 +1,22 @@
-import path, { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { logger } from '@docusaurus/logger';
 import fs from 'fs-extra';
 import prompts, { type Choice } from 'prompts';
-import { type JavaScriptRuntime, gitignoreUrl, runtimes } from './constants.ts';
-import { getPackageJson } from './package-json.ts';
-import { createTsconfig } from './tsconfig.ts';
+import { makeApolloTemplate } from '../templates/apollo.ts';
+import { makeYogaTemplate } from '../templates/yoga.ts';
+import { type JavaScriptRuntime, type Template, templates } from './constants.ts';
 
-const recommendedTemplate = 'yoga';
-const templatesDir = fileURLToPath(new URL('../templates', import.meta.url));
-
-export type Template = {
-	name: string;
-	path: string;
-	packageJsn?: string;
-};
-
-async function readTemplates(): Promise<Template[]> {
-	const dirContents = await fs.readdir(templatesDir);
-
-	const templates = dirContents
-		.filter((template) => template !== 'shared')
-		.map((template) => ({
-			name: template,
-			path: path.join(templatesDir, template),
-		}));
-
-	return templates.sort(
-		(a, b) => Number(a.name !== recommendedTemplate) - Number(b.name !== recommendedTemplate),
-	);
+function createTemplateChoices(): Choice[] {
+	return templates.map((template) => ({ title: template, value: template }));
 }
 
-function createTemplateChoices(templates: Template[]): Choice[] {
-	function makeNameAndValueChoice(value: string | Template): Choice {
-		if (typeof value === 'string') {
-			return { title: value, value };
-		}
-		return { title: value.name, value };
-	}
-
-	return templates.map((template) => makeNameAndValueChoice(template));
-}
-
-async function askTemplateChoice({
-	templates,
-}: {
-	templates: Template[];
-}) {
+async function askTemplateChoice() {
 	return prompts(
 		{
 			type: 'select',
 			name: 'template',
 			message: 'Select a template below...',
-			choices: createTemplateChoices(templates),
+			choices: createTemplateChoices(),
 		},
 		{
 			onCancel() {
@@ -64,23 +28,10 @@ async function askTemplateChoice({
 		return (result as { template: Template }).template;
 	});
 }
-async function fetchGitignore() {
-	try {
-		const response = await fetch(gitignoreUrl);
-
-		if (!response.ok) {
-			throw new Error(`Failed to fetch gitignore: ${response.statusText}`);
-		}
-
-		return response.text();
-	} catch (error) {}
-}
 
 export async function getTemplate(reqTemplate: string | undefined) {
-	const templates = await readTemplates();
-
-	const userProvided = reqTemplate ? templates.find((t) => t.name === reqTemplate) : null;
-	const template = userProvided ?? (await askTemplateChoice({ templates }));
+	const userProvided = reqTemplate ? templates.find((t) => t === reqTemplate) : null;
+	const template = userProvided ?? (await askTemplateChoice());
 
 	if (!template) {
 		throw new Error('Template not found');
@@ -89,37 +40,29 @@ export async function getTemplate(reqTemplate: string | undefined) {
 	return template;
 }
 
+function getTemplateFiles(template: Template, appName: string, runtime: JavaScriptRuntime) {
+	switch (template) {
+		case 'yoga':
+			return makeYogaTemplate(appName, runtime);
+		case 'apollo':
+			return makeApolloTemplate(appName, runtime);
+		default:
+			return [] satisfies never[];
+	}
+}
+
 export async function copyTemplate(
 	appName: string,
 	runtime: JavaScriptRuntime,
 	template: Template,
 	dest: string,
 ) {
-	await fs.copy(path.join(templatesDir, 'shared'), dest);
+	const files = await getTemplateFiles(template, appName, runtime);
 
-	await fs.copy(template.path, dest, {
-		filter: async (filePath) => !(await fs.lstat(filePath)).isSymbolicLink(),
+	const promises = files.map((file) => {
+		const filePath = path.join(dest, file.relativePath);
+		return fs.ensureDir(path.dirname(filePath)).then(() => fs.writeFile(filePath, file.content));
 	});
 
-	const packageJson = getPackageJson(appName, runtime, template.name);
-
-	if (packageJson) {
-		await fs.writeFile(join(dest, 'package.json'), packageJson);
-	}
-
-	await fs.writeFile(join(dest, 'tsconfig.json'), JSON.stringify(createTsconfig(), null, 2));
-
-	const gitignore = await fetchGitignore();
-	if (gitignore) {
-		await fs.writeFile(join(dest, '.gitignore'), gitignore);
-	}
-
-	const hasRuntimeEntry = await fs.pathExists(join(dest, 'src', `app.${runtime}.ts`));
-
-	if (hasRuntimeEntry) {
-		await fs.copyFile(join(dest, 'src', `app.${runtime}.ts`), join(dest, 'src', 'app.ts'));
-		await Promise.all(
-			runtimes.map((r) => fs.remove(join(dest, 'src', `app.${r}.ts`)).catch(() => {})),
-		);
-	}
+	await Promise.all(promises);
 }

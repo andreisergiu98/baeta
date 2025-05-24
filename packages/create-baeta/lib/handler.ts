@@ -29,7 +29,7 @@ export async function handler(args: Args) {
 	try {
 		await copyTemplate(appName, runtime, template, dest);
 	} catch (err) {
-		logger.error`Copying Baeta template name=${template.name} failed!`;
+		logger.error`Copying Baeta template name=${template} failed!`;
 		throw err;
 	}
 
@@ -46,7 +46,7 @@ export async function handler(args: Args) {
 		});
 
 		if (result.code !== 0) {
-			console.log('Dependency installation failed.');
+			console.error('Dependency installation failed.');
 			logger.error('Dependency installation failed.');
 			logger.info`The app directory has already been created, and you can retry by typing:
 

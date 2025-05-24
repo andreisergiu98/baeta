@@ -17,5 +17,5 @@ export type JavaScriptRuntime = (typeof runtimes)[number];
 
 export const defaultJavaScriptRuntime = 'node';
 
-export const gitignoreUrl =
-	'https://raw.githubusercontent.com/github/gitignore/refs/heads/main/Node.gitignore';
+export const templates = ['yoga', 'apollo'] as const;
+export type Template = (typeof templates)[number];

@@ -1,9 +1,0 @@
-type UserPhoto {
-	id: ID!
-	userId: ID!
-	url: String!
-}
-
-extend type User {
-	photos: [UserPhoto!]
-}

@@ -12,8 +12,6 @@ async function readManifests() {
 		return dirs.filter((dirent) => dirent.isDirectory()).map((dir) => dir.name);
 	});
 
-	console.log(dirs);
-
 	const manifests = await Promise.all(dirs.map(parseManifest));
 
 	const map = manifests

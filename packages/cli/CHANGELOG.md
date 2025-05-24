@@ -1,5 +1,15 @@
 # @baeta/cli
 
+## 1.0.11
+
+### Patch Changes
+
+- [`b5024ae`](https://github.com/andreisergiu98/baeta/commit/b5024ae31964e69bc672d9acb081038b40db86b2) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Use sigterm instead of sigkill to terminate builder processes
+
+- Updated dependencies [[`c7b9c05`](https://github.com/andreisergiu98/baeta/commit/c7b9c0523eb9827c99b2bcfc7dbe02f5ef389f21)]:
+  - @baeta/plugin-graphql@1.0.11
+  - @baeta/generator@1.0.2
+
 ## 1.0.9
 
 ### Patch Changes

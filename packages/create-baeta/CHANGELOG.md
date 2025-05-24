@@ -1,5 +1,11 @@
 # create-baeta
 
+## 1.0.11
+
+### Patch Changes
+
+- [`d3b6040`](https://github.com/andreisergiu98/baeta/commit/d3b6040c0fe3b88297791fc68fe5904431b8739c) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Add static .gitignore template
+
 ## 1.0.9
 
 ### Patch Changes

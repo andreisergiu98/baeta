@@ -1,6 +1,5 @@
 import type { NativeMiddleware, ResolverMapper } from '@baeta/core/sdk';
-import { sinon } from '@baeta/testing';
-import test from '@baeta/testing';
+import test, { sinon } from '@baeta/testing';
 import { compileMiddlewares } from './auth-compiler.ts';
 import type { DefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';

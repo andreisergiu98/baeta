@@ -1,5 +1,5 @@
 import { Writable } from 'node:stream';
-import { type Subprocess, execa, parseCommandString } from 'execa';
+import { execa, parseCommandString, type Subprocess } from 'execa';
 import pty from 'node-pty';
 import kill from 'tree-kill';
 

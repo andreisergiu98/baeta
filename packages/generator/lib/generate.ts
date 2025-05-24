@@ -2,9 +2,9 @@ import {
 	type Ctx,
 	type GeneratorOptions,
 	type GeneratorPluginV1,
+	loadOptions,
 	Watcher,
 	type WatcherFile,
-	loadOptions,
 } from '@baeta/generator-sdk';
 import { createCtx } from './ctx.ts';
 import { cleanPreviousFiles } from './file-utils.ts';

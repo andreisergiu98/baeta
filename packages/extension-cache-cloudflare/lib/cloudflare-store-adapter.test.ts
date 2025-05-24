@@ -1,6 +1,6 @@
-import { type StoreOptions, createSerializer } from '@baeta/extension-cache';
+import { createSerializer, type StoreOptions } from '@baeta/extension-cache';
 import test from '@baeta/testing';
-import { type TestItem, runTestsForStoreAdapter } from '@baeta/tests-cache-stores';
+import { runTestsForStoreAdapter, type TestItem } from '@baeta/tests-cache-stores';
 import { Miniflare } from 'miniflare';
 import { bundleTest } from '../scripts/bundle-worker.ts';
 import { CloudflareCacheClient } from './cloudflare-cache-client.ts';

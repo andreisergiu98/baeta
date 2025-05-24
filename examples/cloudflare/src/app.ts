@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 import { modules } from './modules/autoload.ts';
 import type { Context } from './types/context.ts';
 
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
+// biome-ignore lint/complexity/noBannedTypes: allow {}
 export type Env = {};
 
 const baeta = createApplication({

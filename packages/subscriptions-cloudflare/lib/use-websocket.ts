@@ -7,8 +7,8 @@ import {
 	MessageType,
 	type PingMessage,
 	type PongMessage,
-	type SubscribeMessage,
 	parseMessage,
+	type SubscribeMessage,
 	stringifyMessage,
 } from 'graphql-ws';
 

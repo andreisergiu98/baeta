@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { type Plugin, build } from '@baeta/compiler/esbuild';
+import { build, type Plugin } from '@baeta/compiler/esbuild';
 import path from '@baeta/util-path';
 import { isBuiltin, isNodeBuiltin } from '../utils/builtins.ts';
 

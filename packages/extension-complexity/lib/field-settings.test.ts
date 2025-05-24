@@ -1,5 +1,4 @@
-import test from '@baeta/testing';
-import { sinon } from '@baeta/testing';
+import test, { sinon } from '@baeta/testing';
 import type { FieldNode, GraphQLField, GraphQLNamedType, GraphQLResolveInfo } from 'graphql';
 import {
 	type FieldSettingsMap,

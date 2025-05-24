@@ -15,19 +15,19 @@ import {
 	type InputObjectTypeExtensionNode,
 	type InterfaceTypeDefinitionNode,
 	type InterfaceTypeExtensionNode,
+	isInterfaceType,
+	isScalarType,
+	isUnionType,
 	Kind,
 	type ObjectTypeDefinitionNode,
 	type ObjectTypeExtensionNode,
 	type TypeDefinitionNode,
 	type TypeExtensionNode,
 	type UnionTypeDefinitionNode,
-	isInterfaceType,
-	isScalarType,
-	isUnionType,
 	visit,
 } from 'graphql';
 import type { ModulesConfig } from './config.ts';
-import { type TypeHash, getObjectTypeHash } from './hashes.ts';
+import { getObjectTypeHash, type TypeHash } from './hashes.ts';
 import {
 	buildBlock,
 	collectUsedTypes,

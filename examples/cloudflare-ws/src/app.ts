@@ -1,7 +1,7 @@
 import { createApplication } from '@baeta/core';
 import {
-	SubscriptionDatabaseD1,
 	createCloudflareSubscription,
+	SubscriptionDatabaseD1,
 } from '@baeta/subscriptions-cloudflare';
 import { graphqlServer } from '@hono/graphql-server';
 import { Hono, type MiddlewareHandler } from 'hono';

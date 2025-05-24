@@ -1,5 +1,5 @@
-import { createBase64UrlTests } from './__test__/base64-url.ts';
 import { createBase64Tests } from './__test__/base64.ts';
+import { createBase64UrlTests } from './__test__/base64-url.ts';
 import {
 	hasNodeBase64Requirements,
 	nodeDecodeBase64,

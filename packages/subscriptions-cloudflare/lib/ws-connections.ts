@@ -1,4 +1,4 @@
-import { type SubscribeMessage, handleProtocols } from 'graphql-ws';
+import { handleProtocols, type SubscribeMessage } from 'graphql-ws';
 import type { PublishData } from './publish.ts';
 import { createSubscriptionInfo } from './subscribe.ts';
 import type { SubscriptionsOptions } from './subscription-options.ts';

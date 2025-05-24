@@ -1,8 +1,8 @@
 import path from 'node:path';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { dynamicImport } from '../utils/import.ts';
-import { type ConfigModule, getLoaderType, selectConfigFromModule } from './config-loader-utils.ts';
 import type { BaetaOptions } from './config.ts';
+import { type ConfigModule, getLoaderType, selectConfigFromModule } from './config-loader-utils.ts';
 
 export interface LoadedBaetaConfig {
 	config: BaetaOptions;

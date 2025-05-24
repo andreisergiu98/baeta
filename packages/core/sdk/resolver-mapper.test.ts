@@ -1,5 +1,5 @@
 import test from '@baeta/testing';
-import { type GraphQLResolveInfo, defaultFieldResolver } from 'graphql';
+import { defaultFieldResolver, type GraphQLResolveInfo } from 'graphql';
 import {
 	forgeNativeMiddleware,
 	forgeNativeResolver,
@@ -7,9 +7,9 @@ import {
 	getSubscriptionFromMap,
 	mockedScalar,
 } from './__test__/utils.ts';
+import type { NativeResolver } from './resolver.ts';
 import { ResolverMapper } from './resolver-mapper.ts';
 import { mergeMiddlewareMaps } from './resolver-maps.ts';
-import type { NativeResolver } from './resolver.ts';
 import type { NativeSubscription } from './subscription.ts';
 
 test('setResolver adds a resolver to the map', (t) => {

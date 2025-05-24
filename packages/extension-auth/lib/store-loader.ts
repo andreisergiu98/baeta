@@ -1,6 +1,6 @@
 import { createGrantCache } from './grant-cache.ts';
 import { createScopeCache } from './scope-cache.ts';
-import { type GetScopeLoader, createScopeResolverMap } from './scope-resolver.ts';
+import { createScopeResolverMap, type GetScopeLoader } from './scope-resolver.ts';
 import type { ScopesShape } from './scope-rules.ts';
 import { setAuthStore } from './store.ts';
 

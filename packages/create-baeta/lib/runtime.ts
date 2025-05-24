@@ -1,7 +1,7 @@
 import { logger } from '@docusaurus/logger';
 import prompts from 'prompts';
 import shell from 'shelljs';
-import { type JavaScriptRuntime, defaultJavaScriptRuntime } from './constants.ts';
+import { defaultJavaScriptRuntime, type JavaScriptRuntime } from './constants.ts';
 
 export async function getRuntime(): Promise<JavaScriptRuntime> {
 	const hasBun = shell.exec('bun --version', { silent: true }).code === 0;

@@ -1,9 +1,9 @@
 import { ForbiddenError } from '@baeta/errors';
 import { isGrantedKey } from './grant.ts';
-import { type LogicRule, isLogicRule } from './rule.ts';
+import { isLogicRule, type LogicRule } from './rule.ts';
 import { getAuthStore } from './store.ts';
 
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
+// biome-ignore lint/complexity/noBannedTypes: allow {}
 export type ScopesShape = { [key: string]: unknown } | {};
 
 /**

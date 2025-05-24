@@ -7,10 +7,10 @@ import {
 import { compileMiddlewares } from './auth-compiler.ts';
 import {
 	type AuthMiddlewareOptions,
-	type GetPostScopeRules,
-	type GetScopeRules,
 	createMiddleware,
 	createPostMiddleware,
+	type GetPostScopeRules,
+	type GetScopeRules,
 } from './auth-middlewares.ts';
 import type { ScopeErrorResolver } from './error.ts';
 import type { DefaultScopes } from './scope-defaults.ts';

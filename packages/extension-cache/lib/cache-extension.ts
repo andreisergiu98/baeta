@@ -1,7 +1,7 @@
 import {
+	createMiddlewareAdapter,
 	Extension,
 	type ModuleBuilder,
-	createMiddlewareAdapter,
 	nameFunction,
 } from '@baeta/core/sdk';
 import type { CreateCacheArgs, TypeGetter, UseCacheArgs } from './global-types.ts';
@@ -10,10 +10,10 @@ import type {
 	RequiredCacheMiddlewareOptions,
 } from './middleware-options.ts';
 import { CacheRef, type RefCompatibleRoot } from './ref.ts';
-import { type Serializer, type SerializerTransformer, createSerializer } from './serializer.ts';
+import { createSerializer, type Serializer, type SerializerTransformer } from './serializer.ts';
+import type { Store } from './store.ts';
 import type { CacheQueryMatching, StoreAdapter } from './store-adapter.ts';
 import type { DefaultStoreOptions } from './store-options.ts';
-import type { Store } from './store.ts';
 
 export class CacheExtension extends Extension {
 	private serializer: Serializer;

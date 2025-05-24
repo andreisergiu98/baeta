@@ -9,14 +9,14 @@ import {
 	type FragmentDefinitionNode,
 	type GraphQLNamedType,
 	type GraphQLResolveInfo,
-	type InlineFragmentNode,
-	Kind,
-	type SelectionNode,
-	type SelectionSetNode,
 	getNamedType,
+	type InlineFragmentNode,
 	isInterfaceType,
 	isObjectType,
 	isOutputType,
+	Kind,
+	type SelectionNode,
+	type SelectionSetNode,
 } from 'graphql';
 import { isListOrNullableList } from '../utils/graphlq.ts';
 import { capitalize } from '../utils/string.ts';

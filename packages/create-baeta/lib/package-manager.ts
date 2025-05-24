@@ -5,9 +5,9 @@ import prompts from 'prompts';
 import shell from 'shelljs';
 import type { CliOptions } from './cli-options.ts';
 import {
-	type PackageManager,
 	defaultPackageManager,
 	lockfileNames,
+	type PackageManager,
 	packageManagers,
 } from './constants.ts';
 

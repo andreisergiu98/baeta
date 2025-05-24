@@ -1,7 +1,7 @@
 import testFn, { type TestFn } from '@baeta/testing';
 import { PubSub as PubSubV2 } from 'graphql-subscriptions-v2';
 import { PubSub as PubSubV3 } from 'graphql-subscriptions-v3';
-import { type TypedPubSub, createTypedPubSub } from './typed-pubsub.ts';
+import { createTypedPubSub, type TypedPubSub } from './typed-pubsub.ts';
 
 interface TestEventMap {
 	'user:created': { id: string; name: string };

@@ -17,17 +17,17 @@ import {
 	type GraphQLResolveInfo,
 	type GraphQLSchema,
 	type GraphQLType,
-	Kind,
 	getNamedType,
+	Kind,
 } from 'graphql';
 import {
-	type ValidationOptions,
 	addValidateExtension,
 	getArgumentValidationsFromExtensions,
 	getValidationsFromExtension,
 	hasArgumentValidationsExtension,
 	hasValidateExtension,
 	hasValidationsExtension,
+	type ValidationOptions,
 } from './input-extensions.ts';
 
 function isInputObjectType(type: GraphQLNamedType): type is GraphQLInputObjectType {

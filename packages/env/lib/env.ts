@@ -108,7 +108,6 @@ function validateValue<
 		);
 	}
 
-	// biome-ignore lint/suspicious/useValidTypeof: type needs to be checked dynamically
 	if (typeof value !== options.type) {
 		if (options.resolver) {
 			throw new Error(

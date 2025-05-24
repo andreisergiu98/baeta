@@ -3,7 +3,7 @@ import type { NativeMiddleware } from '@baeta/core/sdk';
 import { ForbiddenError } from '@baeta/errors';
 import type { GraphQLResolveInfo } from 'graphql';
 import { createResolverPath, isOperationType } from '../utils/resolver.ts';
-import { type ScopeErrorResolver, defaultErrorResolver, resolveError } from './error.ts';
+import { defaultErrorResolver, resolveError, type ScopeErrorResolver } from './error.ts';
 import { type GetGrant, saveGrants } from './grant.ts';
 import { type DefaultScopes, selectDefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';

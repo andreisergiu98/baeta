@@ -7,8 +7,6 @@ import type {
 } from 'graphql';
 import {
 	type ArgumentValidationsExtension,
-	type ValidationOptions,
-	type ValidationsExtension,
 	addArgumentValidationsExtension,
 	addValidateExtension,
 	addValidationsExtension,
@@ -19,6 +17,8 @@ import {
 	hasValidationsExtension,
 	initArgumentValidationsExtension,
 	initValidationsExtension,
+	type ValidationOptions,
+	type ValidationsExtension,
 } from './input-extensions.ts';
 
 function mockEmptyInputConfig() {

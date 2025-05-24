@@ -1,9 +1,8 @@
 import { CacheRef } from '@baeta/extension-cache';
+import type * as Types from '../../__generated__/types.ts';
 import { db } from '../../lib/db/prisma.ts';
 import { createEdges } from '../../utils/pagination.ts';
 import { getUserPhotosModule } from './typedef.ts';
-
-import type * as Types from '../../__generated__/types.ts';
 
 const { User, UserPhoto } = getUserPhotosModule();
 

@@ -1,6 +1,5 @@
 import { ForbiddenError } from '@baeta/errors';
-import { sinon } from '@baeta/testing';
-import test from '@baeta/testing';
+import test, { sinon } from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
 import { createResolverPath } from '../utils/resolver.ts';
 import {
@@ -11,8 +10,8 @@ import {
 import type { DefaultScopes } from './scope-defaults.ts';
 import type { ScopeLoaderMap } from './scope-resolver.ts';
 import type { ScopeRules } from './scope-rules.ts';
-import { loadAuthStore } from './store-loader.ts';
 import { getAuthStore } from './store.ts';
+import { loadAuthStore } from './store-loader.ts';
 
 declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));

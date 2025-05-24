@@ -1,4 +1,4 @@
-import { type Ctx, type GeneratorPluginV1WatchOptions, createPluginV1 } from '@baeta/generator-sdk';
+import { type Ctx, createPluginV1, type GeneratorPluginV1WatchOptions } from '@baeta/generator-sdk';
 import { execaCommand } from 'execa';
 
 /**

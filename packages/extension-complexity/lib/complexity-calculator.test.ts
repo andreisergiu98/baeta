@@ -1,12 +1,12 @@
 import test from '@baeta/testing';
 import {
+	execute,
 	GraphQLList,
 	GraphQLNonNull,
 	GraphQLObjectType,
 	type GraphQLResolveInfo,
 	GraphQLSchema,
 	GraphQLString,
-	execute,
 	parse,
 } from 'graphql';
 import { calculateComplexity } from './complexity-calculator.ts';

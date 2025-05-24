@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { FileBlock, createPluginV1 } from '@baeta/generator-sdk';
+import { createPluginV1, FileBlock } from '@baeta/generator-sdk';
 
 export interface CloudflarePluginOptions {
 	ws?: {

@@ -1,7 +1,7 @@
 import type { ScalarResolver } from '../lib/scalar.ts';
 import type { NativeMiddleware } from './middleware.ts';
-import type { NativeTypeResolver } from './resolver-type.ts';
 import type { NativeResolver } from './resolver.ts';
+import type { NativeTypeResolver } from './resolver-type.ts';
 import type { NativeSubscription } from './subscription.ts';
 
 export type FieldResolvers = Record<string, NativeResolver> & {

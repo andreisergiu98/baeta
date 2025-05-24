@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { Text } from 'ink';
-import { Errors, Layout, Spinner, makeErrorOutput } from '../../sdk/index.ts';
+import { Errors, Layout, makeErrorOutput, Spinner } from '../../sdk/index.ts';
 
 export type GeneratorPluginName = {
 	id: string;

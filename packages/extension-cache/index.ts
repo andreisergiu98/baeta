@@ -3,8 +3,8 @@ import './lib/global-types.ts';
 import type { Extension } from '@baeta/core/sdk';
 import { CacheExtension } from './lib/cache-extension.ts';
 import type { SerializerTransformer } from './lib/serializer.ts';
-import type { DefaultStoreOptions } from './lib/store-options.ts';
 import type { Store } from './lib/store.ts';
+import type { DefaultStoreOptions } from './lib/store-options.ts';
 
 export type { CacheArgs } from './lib/cache-args.ts';
 export type {
@@ -12,25 +12,25 @@ export type {
 	RequiredCacheMiddlewareOptions,
 } from './lib/middleware-options.ts';
 export { CacheRef, type ItemRef, type ParentRef, type RefCompatibleRoot } from './lib/ref.ts';
-export { StoreAdapter, type CacheQueryMatching } from './lib/store-adapter.ts';
+export type {
+	ClassTransformer,
+	CustomTransformer,
+	Serializer,
+	SerializerAny,
+	SerializerClass,
+	SerializerResult,
+	SerializerTransformer,
+	SerializerValue,
+	SymbolTransformer,
+} from './lib/serializer.ts';
+export { createSerializer } from './lib/serializer.ts';
+export { Store } from './lib/store.ts';
+export { type CacheQueryMatching, StoreAdapter } from './lib/store-adapter.ts';
 export type {
 	DefaultStoreOptions,
 	RequiredStoreOptions,
 	StoreOptions,
 } from './lib/store-options.ts';
-export { Store } from './lib/store.ts';
-export type {
-	Serializer,
-	SerializerTransformer,
-	ClassTransformer,
-	CustomTransformer,
-	SerializerAny,
-	SerializerClass,
-	SerializerResult,
-	SerializerValue,
-	SymbolTransformer,
-} from './lib/serializer.ts';
-export { createSerializer } from './lib/serializer.ts';
 
 /**
  * Creates a cache extension

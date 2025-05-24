@@ -9,10 +9,10 @@ import type {
 } from './middleware-options.ts';
 import {
 	type CacheRef,
+	getRefFallback,
 	type ItemRef,
 	type ParentRef,
 	type RefCompatibleRoot,
-	getRefFallback,
 	validateRefType,
 } from './ref.ts';
 import type { Serializer } from './serializer.ts';

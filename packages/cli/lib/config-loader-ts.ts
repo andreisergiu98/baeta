@@ -4,8 +4,8 @@ import { pathToFileURL } from 'node:url';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { dynamicImportCompiler } from '../utils/compiler.ts';
 import { dynamicImport } from '../utils/import.ts';
-import { type ConfigModule, selectConfigFromModule } from './config-loader-utils.ts';
 import type { BaetaOptions } from './config.ts';
+import { type ConfigModule, selectConfigFromModule } from './config-loader-utils.ts';
 
 async function loadConfigFromBundledFile(
 	fileName: string,

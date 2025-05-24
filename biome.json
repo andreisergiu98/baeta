@@ -1,18 +1,19 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
   "files": {
-    "ignore": [
-      "website/build/**",
-      "website/.docusaurus/**",
-      "examples/**/modules/baeta-*/*",
-      "examples/**/modules/autoload.ts",
-      "examples/**/__generated__/**",
-      "examples/**/typedef.ts",
-      "examples/**/.wrangler/**",
-      ".yarn/**",
-      ".tsup/**",
-      ".turbo/**",
-      "dist/**"
+    "includes": [
+      "**",
+      "!**/website/build/**",
+      "!**/website/.docusaurus/**",
+      "!**/examples/**/modules/baeta-*/*",
+      "!**/examples/**/modules/autoload.ts",
+      "!**/examples/**/__generated__/**",
+      "!**/examples/**/typedef.ts",
+      "!**/examples/**/.wrangler/**",
+      "!**/.yarn/**",
+      "!**/.tsup/**",
+      "!**/.turbo/**",
+      "!**/dist/**"
     ]
   },
   "linter": {
@@ -24,7 +25,21 @@
       },
       "correctness": {
         "useImportExtensions": "error",
+        "noUnusedVariables": "off",
+        "noUnusedFunctionParameters": "off",
         "noUnusedImports": "warn"
+      },
+      "style": {
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       }
     }
   },
@@ -45,8 +60,12 @@
       "lineWidth": 1
     }
   },
-  "organizeImports": {
-    "enabled": true
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "css": {
     "parser": {

@@ -1,8 +1,8 @@
 import { relative } from '@baeta/util-path';
 import fg from 'fast-glob';
+import type { BaetaOptions } from './config.ts';
 import { importJavaScriptConfig } from './config-loader-esm.ts';
 import { importTypeScriptConfig } from './config-loader-ts.ts';
-import type { BaetaOptions } from './config.ts';
 
 export interface LoadedBaetaConfig {
 	config: BaetaOptions;

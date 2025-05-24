@@ -1,6 +1,6 @@
-import { type StoreOptions, createSerializer } from '@baeta/extension-cache';
+import { createSerializer, type StoreOptions } from '@baeta/extension-cache';
 import test from '@baeta/testing';
-import { type TestItem, runTestsForStoreAdapter } from '@baeta/tests-cache-stores';
+import { runTestsForStoreAdapter, type TestItem } from '@baeta/tests-cache-stores';
 import KeyvEtcd from '@keyv/etcd';
 import Keyv from 'keyv';
 import { KeyvStoreAdapter } from './keyv-store-adapter.ts';

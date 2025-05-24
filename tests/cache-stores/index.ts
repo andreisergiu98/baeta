@@ -4,7 +4,7 @@ import {
 	type StoreAdapter,
 	type StoreOptions,
 } from '@baeta/extension-cache';
-import { type TestFn, sleep } from '@baeta/testing';
+import { sleep, type TestFn } from '@baeta/testing';
 
 export interface TestItem {
 	id: string;

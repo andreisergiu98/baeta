@@ -1,11 +1,11 @@
 import * as fs from 'node:fs/promises';
 import {
 	type Ctx,
-	type FileManager,
-	type WatcherFile,
 	createPluginV1,
+	type FileManager,
 	getModuleGetName,
 	isMatch,
+	type WatcherFile,
 } from '@baeta/generator-sdk';
 import * as path from '@baeta/util-path';
 

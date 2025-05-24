@@ -1,13 +1,12 @@
-import test from '@baeta/testing';
-import { sinon } from '@baeta/testing';
+import test, { sinon } from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
 import { ComplexityErrorKind } from './complexity-errors.ts';
 import type { ComplexityLimit } from './complexity-limits.ts';
 import { createComplexityMiddleware } from './complexity-middleware.ts';
 import type { ComplexityExtensionOptions } from './complexity-options.ts';
 import type { FieldSettingsMap } from './field-settings.ts';
-import { loadComplexityStore } from './store-loader.ts';
 import { getComplexityStore } from './store.ts';
+import { loadComplexityStore } from './store-loader.ts';
 
 const createMocks = async (
 	limit: Required<ComplexityLimit> = {

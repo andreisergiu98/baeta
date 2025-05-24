@@ -9,7 +9,7 @@ export function loadComplexityStore<T>(
 	setComplexityStoreLoader(ctx, async () => {
 		const limits = typeof getLimits === 'function' ? await getLimits(ctx) : getLimits;
 
-		let cache: Required<ComplexityLimit> | undefined = undefined;
+		let cache: Required<ComplexityLimit> | undefined;
 
 		const cacheComplexity = (fn: () => Required<ComplexityLimit>) => {
 			if (cache) {

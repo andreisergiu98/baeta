@@ -3,8 +3,8 @@ import { calculateComplexity } from './complexity-calculator.ts';
 import { ComplexityErrorKind } from './complexity-errors.ts';
 import { type ComplexityExtensionOptions, defaultLimits } from './complexity-options.ts';
 import type { FieldSettingsMap } from './field-settings.ts';
-import { loadComplexityStore } from './store-loader.ts';
 import { getComplexityStore } from './store.ts';
+import { loadComplexityStore } from './store-loader.ts';
 
 export function createComplexityMiddleware<Result, Root, Context, Args>(
 	options: Required<ComplexityExtensionOptions<Context>>,

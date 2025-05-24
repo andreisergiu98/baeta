@@ -9,7 +9,7 @@ import { WebSocketServer } from 'ws';
 /* for the original implementation
 */
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: allow all
 export function useWebSocketServer(server: Server, yoga: YogaServerInstance<any, any>) {
 	const wss = new WebSocketServer({
 		server,
@@ -18,9 +18,9 @@ export function useWebSocketServer(server: Server, yoga: YogaServerInstance<any,
 
 	const instance = useServer(
 		{
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			// biome-ignore lint/suspicious/noExplicitAny: allow all
 			execute: (args: any) => args.execute(args),
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			// biome-ignore lint/suspicious/noExplicitAny: allow all
 			subscribe: (args: any) => args.subscribe(args),
 			onSubscribe: async (ctx, _id, params) => {
 				const { schema, execute, subscribe, contextFactory, parse, validate } = yoga.getEnveloped({

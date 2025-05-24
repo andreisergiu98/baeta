@@ -2,8 +2,8 @@ import test from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
 import type { Path } from 'graphql/jsutils/Path.js';
 import { type GetGrantFn, isGrantedKey, saveGrants } from './grant.ts';
-import { loadAuthStore } from './store-loader.ts';
 import { getAuthStore } from './store.ts';
+import { loadAuthStore } from './store-loader.ts';
 
 type TestGrant = 'grant1';
 

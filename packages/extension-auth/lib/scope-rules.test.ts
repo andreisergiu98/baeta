@@ -12,8 +12,8 @@ import {
 	verifyScope,
 	verifyScopes,
 } from './scope-rules.ts';
-import { loadAuthStore } from './store-loader.ts';
 import { getAuthStore } from './store.ts';
+import { loadAuthStore } from './store-loader.ts';
 
 declare function setTimeout(callback: () => void, ms: number): void;
 

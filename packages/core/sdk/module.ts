@@ -1,7 +1,7 @@
 import type { DocumentNode, GraphQLSchema } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
-import type { TypeResolver } from '../lib/resolver-type.ts';
 import type { Resolver } from '../lib/resolver.ts';
+import type { TypeResolver } from '../lib/resolver-type.ts';
 import type { ScalarResolver } from '../lib/scalar.ts';
 import type { Subscription } from '../lib/subscription.ts';
 import { extendFunction, nameFunction } from '../utils/functions.ts';
@@ -14,9 +14,9 @@ import {
 } from './extension.ts';
 import type { TypeHashMap } from './hash.ts';
 import { createMiddlewareAdapter } from './middleware.ts';
+import { createResolverAdapter } from './resolver.ts';
 import { ResolverMapper } from './resolver-mapper.ts';
 import { createTypeResolverAdapter } from './resolver-type.ts';
-import { createResolverAdapter } from './resolver.ts';
 import { createSubscriptionAdapter } from './subscription.ts';
 import { type SchemaTransformer, transformSchema } from './transformer.ts';
 

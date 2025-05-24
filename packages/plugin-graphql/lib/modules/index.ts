@@ -9,12 +9,12 @@ import type { Types } from '@graphql-codegen/plugin-helpers';
 import { BaseVisitor, getConfigValue } from '@graphql-codegen/visitor-plugin-common';
 import type { Source } from '@graphql-tools/utils';
 import {
+	concatAST,
 	type DocumentNode,
+	isScalarType,
 	type ObjectTypeDefinitionNode,
 	type UnionTypeDefinitionNode,
 	type UnionTypeExtensionNode,
-	concatAST,
-	isScalarType,
 } from 'graphql';
 import { buildModule } from './builder.ts';
 import type { ModulesConfig } from './config.ts';

@@ -1,8 +1,8 @@
 import { getCachedDocumentNodeFromSchema } from '@graphql-codegen/plugin-helpers';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import {
-	type UnnormalizedTypeDefPointer,
 	loadSchema as loadSchemaToolkit,
+	type UnnormalizedTypeDefPointer,
 } from '@graphql-tools/load';
 import type { BaseLoaderOptions, Loader } from '@graphql-tools/utils';
 import { type GraphQLSchemaExtensions, validateSchema } from 'graphql';

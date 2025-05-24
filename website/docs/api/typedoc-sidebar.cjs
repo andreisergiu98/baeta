@@ -2195,6 +2195,11 @@ const typedocSidebar = {
 							label: 'PackageManager',
 						},
 						{ type: 'doc', id: 'api/create-baeta/type-aliases/Template', label: 'Template' },
+						{
+							type: 'doc',
+							id: 'api/create-baeta/type-aliases/TemplateFile',
+							label: 'TemplateFile',
+						},
 					],
 				},
 				{
@@ -2211,7 +2216,6 @@ const typedocSidebar = {
 							id: 'api/create-baeta/variables/defaultPackageManager',
 							label: 'defaultPackageManager',
 						},
-						{ type: 'doc', id: 'api/create-baeta/variables/gitignoreUrl', label: 'gitignoreUrl' },
 						{ type: 'doc', id: 'api/create-baeta/variables/lockfileNames', label: 'lockfileNames' },
 						{
 							type: 'doc',
@@ -2219,6 +2223,7 @@ const typedocSidebar = {
 							label: 'packageManagers',
 						},
 						{ type: 'doc', id: 'api/create-baeta/variables/runtimes', label: 'runtimes' },
+						{ type: 'doc', id: 'api/create-baeta/variables/templates', label: 'templates' },
 					],
 				},
 				{
@@ -2226,21 +2231,11 @@ const typedocSidebar = {
 					label: 'Functions',
 					items: [
 						{ type: 'doc', id: 'api/create-baeta/functions/copyTemplate', label: 'copyTemplate' },
-						{
-							type: 'doc',
-							id: 'api/create-baeta/functions/createTsconfig',
-							label: 'createTsconfig',
-						},
 						{ type: 'doc', id: 'api/create-baeta/functions/getAppName', label: 'getAppName' },
 						{
 							type: 'doc',
 							id: 'api/create-baeta/functions/getInstallCommand',
 							label: 'getInstallCommand',
-						},
-						{
-							type: 'doc',
-							id: 'api/create-baeta/functions/getPackageJson',
-							label: 'getPackageJson',
 						},
 						{
 							type: 'doc',

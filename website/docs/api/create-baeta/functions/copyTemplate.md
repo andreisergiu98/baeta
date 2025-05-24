@@ -44,7 +44,7 @@
 </td>
 <td>
 
-[`Template`](../type-aliases/Template.md)
+`"yoga"` \| `"apollo"`
 
 </td>
 </tr>

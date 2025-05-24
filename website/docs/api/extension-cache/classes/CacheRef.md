@@ -1,4 +1,4 @@
-# CacheRef\<Result, Root, Args\>
+# CacheRef\<\_Result, \_Root, \_Args\>
 
 Cache reference for a type field or query
 
@@ -14,21 +14,21 @@ Cache reference for a type field or query
 <tr>
 <td>
 
-`Result`
+`_Result`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`Root`
+`_Root`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`Args`
+`_Args`
 
 </td>
 </tr>
@@ -39,7 +39,7 @@ Cache reference for a type field or query
 
 ### Constructor
 
-> **new CacheRef**\<`Result`, `Root`, `Args`\>(`type`, `field`, `hash`, `revision`): `CacheRef`\<`Result`, `Root`, `Args`\>
+> **new CacheRef**\<`_Result`, `_Root`, `_Args`\>(`type`, `field`, `hash`, `revision`): `CacheRef`\<`_Result`, `_Root`, `_Args`\>
 
 #### Parameters
 
@@ -125,7 +125,7 @@ Cache reference for a type field or query
 
 #### Returns
 
-`CacheRef`\<`Result`, `Root`, `Args`\>
+`CacheRef`\<`_Result`, `_Root`, `_Args`\>
 
 ## Methods
 

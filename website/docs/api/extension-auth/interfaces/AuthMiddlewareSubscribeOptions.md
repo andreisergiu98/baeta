@@ -1,39 +1,6 @@
-# AuthMiddlewareSubscribeOptions\<Root, Context, Args\>
+# AuthMiddlewareSubscribeOptions
 
 Options for authorization middlewares
-
-## Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
 
 ## Properties
 

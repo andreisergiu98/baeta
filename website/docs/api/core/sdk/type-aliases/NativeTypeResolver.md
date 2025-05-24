@@ -1,6 +1,6 @@
-# NativeTypeResolver\<Result, Value, Context\>
+# NativeTypeResolver\<\_Result, Value, Context\>
 
-> **NativeTypeResolver**\<`Result`, `Value`, `Context`\> = `GraphQLTypeResolver`\<`Value`, `Context`\>
+> **NativeTypeResolver**\<`_Result`, `Value`, `Context`\> = `GraphQLTypeResolver`\<`Value`, `Context`\>
 
 ## Type Parameters
 
@@ -15,7 +15,7 @@
 <tr>
 <td>
 
-`Result`
+`_Result`
 
 </td>
 <td>

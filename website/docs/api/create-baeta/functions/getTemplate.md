@@ -1,6 +1,6 @@
 # getTemplate()
 
-> **getTemplate**(`reqTemplate`): `Promise`\<[`Template`](../type-aliases/Template.md)\>
+> **getTemplate**(`reqTemplate`): `Promise`\<`"yoga"` \| `"apollo"`\>
 
 ## Parameters
 
@@ -29,4 +29,4 @@
 
 ## Returns
 
-`Promise`\<[`Template`](../type-aliases/Template.md)\>
+`Promise`\<`"yoga"` \| `"apollo"`\>

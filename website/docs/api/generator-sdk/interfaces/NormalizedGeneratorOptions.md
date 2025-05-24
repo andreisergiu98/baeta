@@ -138,7 +138,7 @@
 </td>
 <td>
 
-`Record`\<`string`, `string`\>
+`Record`\<`string`, `string` \| \{ `input`: `string`; `output`: `string`; \}\>
 
 </td>
 </tr>

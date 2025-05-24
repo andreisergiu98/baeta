@@ -17,54 +17,6 @@ Options for generated files.
 <tr>
 <td>
 
-<a id="addeslintdisableheader"></a> `addEslintDisableHeader?`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-```ts
-true;
-```
-
-</td>
-<td>
-
-Add eslint-disable comment at the beginning of the file.
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="addgenerationnoticeheader"></a> `addGenerationNoticeHeader?`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-```ts
-true;
-```
-
-</td>
-<td>
-
-Add generation notice at the beginning of the file.
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="addheader"></a> `addHeader?`
 
 </td>
@@ -81,6 +33,78 @@ Add generation notice at the beginning of the file.
 <td>
 
 Add custom header at the beginning of the file.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="disablebiomeheader"></a> `disableBiomeHeader?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+```ts
+false;
+```
+
+</td>
+<td>
+
+Disable biome comment at the beginning of the file.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="disableeslintheader"></a> `disableEslintHeader?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+```ts
+false;
+```
+
+</td>
+<td>
+
+Disable eslint-disable comment at the beginning of the file.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="disablegenerationnoticeheader"></a> `disableGenerationNoticeHeader?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+```ts
+false;
+```
+
+</td>
+<td>
+
+Disable generation notice at the beginning of the file.
 
 </td>
 </tr>

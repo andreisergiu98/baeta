@@ -130,7 +130,7 @@ export function useWebsocket(
 	socket.addEventListener('close', handleClose);
 
 	socket.addEventListener('message', (ev) => {
-		handleEvent(ev).catch((e) => {
+		handleEvent(ev).catch(() => {
 			socket.close(1011, 'Internal error');
 		});
 	});

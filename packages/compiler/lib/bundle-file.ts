@@ -9,7 +9,7 @@ function externalizePlugin(): Plugin {
 		name: 'externalize-deps',
 		setup(build) {
 			// externalize bare imports
-			build.onResolve({ filter: /^[^.].*/ }, async ({ path: id, importer, kind }) => {
+			build.onResolve({ filter: /^[^.].*/ }, async ({ path: id, kind }) => {
 				if (kind === 'entry-point' || path.isAbsolute(id) || isNodeBuiltin(id)) {
 					return;
 				}

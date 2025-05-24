@@ -112,7 +112,7 @@ export function startProcessWithPty(
 
 function createStream(onData: (data: string) => void) {
 	const stream = new Writable({
-		write(chunk, encoding, next) {
+		write(chunk, _encoding, next) {
 			onData(chunk.toString());
 			next();
 		},

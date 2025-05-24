@@ -4,7 +4,7 @@ import type { SubscriptionsOptions } from './subscription-options.ts';
 export function handleWS<Env, Context, ContextParams>(
 	request: Request,
 	env: Env,
-	ctx: ExecutionContext,
+	_ctx: ExecutionContext,
 	options: SubscriptionsOptions<Env, Context, ContextParams>,
 ) {
 	const upgradeHeader = request.headers.get('upgrade');

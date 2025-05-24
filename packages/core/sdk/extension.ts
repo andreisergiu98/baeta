@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noUnusedFunctionParameters: parameters are used for the base class */
 import type { ModuleBuilder } from './module.ts';
 import type { ResolverMapper } from './resolver-mapper.ts';
 import type { SchemaTransformer } from './transformer.ts';

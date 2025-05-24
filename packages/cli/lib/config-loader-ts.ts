@@ -48,7 +48,7 @@ export async function importTypeScriptConfig(
 		}
 	}
 
-	const compiler = await dynamicImportCompiler().catch((err) => null);
+	const compiler = await dynamicImportCompiler().catch(() => null);
 
 	if (compiler == null) {
 		console.log(makeErrorMessage(`@baeta/compiler is required to load ${configPath}`, true));

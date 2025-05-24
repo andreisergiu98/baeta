@@ -89,7 +89,7 @@ export const preset: Types.OutputPreset<ModulesConfig> = {
 					},
 				},
 				'modules-exported-picks': {
-					plugin: (schema) => {
+					plugin: () => {
 						const typePicks: string[] = [];
 						const unionPicks: string[] = [];
 						const unionResults: string[] = [];

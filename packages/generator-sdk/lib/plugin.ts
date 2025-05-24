@@ -40,7 +40,7 @@ export interface GeneratorPluginV1<Store = unknown> {
 	watch: GeneratorPluginV1WatchOptions;
 }
 
-const defaultPluginFn: GeneratorPluginV1Fn<unknown> = async (ctx, next) => {
+const defaultPluginFn: GeneratorPluginV1Fn<unknown> = async (_ctx, next) => {
 	return next();
 };
 

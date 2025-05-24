@@ -3,7 +3,7 @@ import { getUserModule } from './typedef.ts';
 
 const { Query } = getUserModule();
 
-Query.user((params) => {
+Query.user((_params) => {
 	return {
 		id: randomUUID(),
 		email: 'jon.doe@baeta.io',

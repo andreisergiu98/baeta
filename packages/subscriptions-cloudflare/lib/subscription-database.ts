@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noUnusedFunctionParameters: parameters are used for the base class */
 import type { SubscriptionInfo } from './subscribe.ts';
 
 export abstract class SubscriptionDatabase {

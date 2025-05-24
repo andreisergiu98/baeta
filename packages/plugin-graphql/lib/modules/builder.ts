@@ -63,7 +63,6 @@ export function buildModule(
 		importNamespace,
 		importPath,
 		encapsulate,
-		requireRootResolvers,
 		shouldDeclare,
 		rootTypes,
 		schema,

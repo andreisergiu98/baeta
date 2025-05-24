@@ -54,7 +54,7 @@ function createContext(
 	};
 }
 
-function getContextParams(request: Request, env: Env): ContextParams {
+function getContextParams(_request: Request, _env: Env): ContextParams {
 	return { userId: 'id-0' };
 }
 

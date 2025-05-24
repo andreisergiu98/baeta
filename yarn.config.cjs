@@ -106,15 +106,25 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('publishConfig.access', 'public');
 			workspace.set('engines.node', '>=22.12.0');
 
-			if (workspace.manifest.name !== 'create-baeta') {
+			if (workspace.manifest.scripts?.prebuild == null) {
 				workspace.set('scripts.build', 'tsup');
 				workspace.set('scripts.types', 'tsc --noEmit');
+			} else {
+				workspace.set('scripts.build', 'yarn prebuild && tsup');
+				workspace.set('scripts.types', 'yarn prebuild && tsc --noEmit');
 			}
+
 			workspace.set('scripts.prepack', 'prep');
 			workspace.set('scripts.postpack', 'prep --clean');
 
-			workspace.set('ava.extensions.ts', 'module');
-			workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
+			if (workspace.manifest.devDependencies?.['@baeta/testing']) {
+				workspace.set('scripts.test', 'ava');
+				workspace.set('ava.extensions.ts', 'module');
+				workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
+			} else {
+				workspace.unset('scripts.test');
+				workspace.unset('ava');
+			}
 
 			enforceConsistentEntries(workspace);
 

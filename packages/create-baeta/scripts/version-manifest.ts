@@ -7,7 +7,9 @@ async function parseManifest(dir: string) {
 	} catch (err) {}
 }
 
-async function readManifests() {
+async function generateVersions() {
+	console.log('[create-baeta] Generating versions.json...');
+
 	const dirs = await fs.readdir('../', { withFileTypes: true }).then((dirs) => {
 		return dirs.filter((dirent) => dirent.isDirectory()).map((dir) => dir.name);
 	});
@@ -21,7 +23,9 @@ async function readManifests() {
 			return acc;
 		}, {});
 
-	return fs.writeFile('versions.json', JSON.stringify(map, null, 2));
+	await fs.writeFile('versions.json', JSON.stringify(map, null, 2));
+
+	console.log('[create-baeta] Generated versions.json');
 }
 
-readManifests().catch(console.log);
+await generateVersions();

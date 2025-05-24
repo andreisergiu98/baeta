@@ -1,5 +1,12 @@
 # @baeta/plugin-autoload
 
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies [[`7cbd2ef`](https://github.com/andreisergiu98/baeta/commit/7cbd2ef5b7697f703e4cc6f8d9612c7d01a10dd1), [`c7b9c05`](https://github.com/andreisergiu98/baeta/commit/c7b9c0523eb9827c99b2bcfc7dbe02f5ef389f21)]:
+  - @baeta/generator-sdk@1.0.2
+
 ## 1.0.9
 
 ### Patch Changes

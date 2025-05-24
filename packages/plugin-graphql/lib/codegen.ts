@@ -1,12 +1,10 @@
 import type { NormalizedGeneratorOptions } from '@baeta/generator-sdk';
-import { join } from '@baeta/util-path';
 import { codegen as gqlCodegen } from '@graphql-codegen/core';
 import { normalizeConfig, normalizeInstanceOrArray } from '@graphql-codegen/plugin-helpers';
 import * as typescriptPlugin from '@graphql-codegen/typescript';
 import type { UnnormalizedTypeDefPointer } from '@graphql-tools/load';
 import { createCache } from '../utils/cache.ts';
 import { loadSchema } from '../utils/load.ts';
-import { buildScalarMap } from '../utils/scalars.ts';
 import * as contextPlugin from './context/index.ts';
 import * as modules from './modules/index.ts';
 
@@ -59,11 +57,7 @@ export async function generate(options: NormalizedGeneratorOptions) {
 			inputMaybeValue: 'T | undefined',
 			contextType: rootConfig.contextType,
 			useTypeImports: true,
-			scalars: buildScalarMap(
-				rootConfig.scalars,
-				options.cwd,
-				join(options.modulesDir, options.baseTypesPath),
-			),
+			scalars: rootConfig.scalars,
 		},
 	});
 

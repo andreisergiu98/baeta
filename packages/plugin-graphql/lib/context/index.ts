@@ -7,8 +7,8 @@ interface Config {
 }
 
 export const plugin: PluginFunction<Config> = async (
-	schema: GraphQLSchema,
-	documents: Types.DocumentFile[],
+	_schema: GraphQLSchema,
+	_documents: Types.DocumentFile[],
 	config: Config,
 ): Promise<Types.PluginOutput> => {
 	const prepend: string[] = [];

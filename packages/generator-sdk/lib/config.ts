@@ -74,7 +74,7 @@ export interface GeneratorOptions {
 	 * Supports global types and imports.
 	 * @example { DateTime: 'Date', JSON: 'Record<string, unknown>' }	 * @defaultValue undefined
 	 */
-	scalars?: Record<string, string>;
+	scalars?: Record<string, string | { input: string; output: string }>;
 
 	/**
 	 * Configuration options for generated files.
@@ -102,7 +102,7 @@ export interface NormalizedGeneratorOptions {
 	baseTypesPath: string;
 	contextType?: string;
 	extensions?: string;
-	scalars?: Record<string, string>;
+	scalars?: Record<string, string | { input: string; output: string }>;
 	fileOptions?: FileOptions;
 	loaders?: Loader[];
 	importExtension?: '.js' | '.ts';
@@ -118,8 +118,11 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 	const baseTypesRoot = resolve(cwd, options.baseTypesPath || defaultBaseTypesRoot);
 	const baseTypesPath = posixPath(relative(modulesDir, baseTypesRoot));
 
-	const contextType = resolveContextType(cwd, baseTypesRoot, options.contextType);
+	const contextType =
+		options.contextType && resolvePotentialImport(cwd, baseTypesRoot, options.contextType);
 	const extensions = resolveExtensionPath(modulesDir, moduleDefinitionName, options.extensions);
+
+	const scalars = resolveScalars(cwd, baseTypesRoot, options.scalars);
 
 	return {
 		cwd,
@@ -129,7 +132,7 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 		baseTypesPath,
 		contextType,
 		extensions,
-		scalars: options.scalars,
+		scalars,
 		fileOptions: options.fileOptions,
 		loaders: options.loaders,
 		importExtension:
@@ -137,22 +140,48 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 	};
 }
 
-function resolveContextType(root: string, baseTypesRoot: string, contextType?: string) {
-	if (!contextType) {
+function resolvePotentialImport(root: string, baseTypesRoot: string, path: string) {
+	if (!path.includes('#')) {
+		return path;
+	}
+
+	if (isAbsolute(path) || path.startsWith('@')) {
+		return path;
+	}
+
+	if (path[0] === '!') {
+		return path.slice(1);
+	}
+
+	const contextTypeRoot = resolve(root, path);
+	return posixPath(relative(join(baseTypesRoot, '../'), contextTypeRoot));
+}
+
+function resolveScalars(
+	root: string,
+	baseTypesRoot: string,
+	scalars?: Record<string, string | { input: string; output: string }>,
+) {
+	if (!scalars) {
 		return;
 	}
 
-	if (isAbsolute(contextType)) {
-		return contextType;
+	const resolved: Record<string, string | { input: string; output: string }> = {};
+
+	for (const key in scalars) {
+		const value = scalars[key];
+
+		if (typeof value === 'string') {
+			resolved[key] = resolvePotentialImport(root, baseTypesRoot, value);
+		} else {
+			resolved[key] = {
+				input: resolvePotentialImport(root, baseTypesRoot, value.input),
+				output: resolvePotentialImport(root, baseTypesRoot, value.output),
+			};
+		}
 	}
 
-	if (contextType[0] === '!') {
-		return contextType.slice(1);
-	}
-
-	const contextTypeRoot = resolve(root, contextType);
-
-	return posixPath(relative(join(baseTypesRoot, '../'), contextTypeRoot));
+	return resolved;
 }
 
 function resolveExtensionPath(

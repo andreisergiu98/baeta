@@ -4,7 +4,7 @@ export async function getPackageJSON() {
 	try {
 		const content = await readFile('package.json', 'utf-8');
 		return JSON.parse(content);
-	} catch (e) {
+	} catch {
 		return null;
 	}
 }

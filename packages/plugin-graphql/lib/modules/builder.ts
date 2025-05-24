@@ -50,11 +50,6 @@ const registryKeys: RegistryKeys[] = [
 	'unions',
 	'enums',
 ];
-const resolverKeys: Extract<RegistryKeys, 'objects' | 'enums' | 'scalars'>[] = [
-	'scalars',
-	'objects',
-	'enums',
-];
 
 export function buildModule(
 	name: string,

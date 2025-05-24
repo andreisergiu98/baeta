@@ -4,7 +4,7 @@ async function parseManifest(dir: string) {
 	try {
 		const manifest = await fs.readFile(`../${dir}/package.json`, 'utf8');
 		return JSON.parse(manifest) as { name: string; version: string };
-	} catch (err) {}
+	} catch {}
 }
 
 async function generateVersions() {

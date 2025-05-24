@@ -102,7 +102,7 @@ export function useWebsocket(
 
 		try {
 			data = parseMessage(dataStr);
-		} catch (e) {
+		} catch {
 			return socket.close(CloseCode.BadRequest, 'Invalid message received');
 		}
 

@@ -75,6 +75,7 @@ export function createContextStore<T, Context = unknown>(
 
 		if (lazy === false) {
 			item.result = item.load();
+			item.result.catch(() => {});
 			item.isLoaded = true;
 		}
 

@@ -12,8 +12,9 @@ export class FileBlock extends File {
 		options?: FileOptions,
 	) {
 		super(filename, content, tag, {
-			addEslintDisableHeader: options?.addEslintDisableHeader ?? false,
-			addGenerationNoticeHeader: options?.addGenerationNoticeHeader ?? false,
+			disableBiomeHeader: options?.disableBiomeHeader ?? true,
+			disableEslintHeader: options?.disableEslintHeader ?? true,
+			disableGenerationNoticeHeader: options?.disableGenerationNoticeHeader ?? true,
 		});
 	}
 

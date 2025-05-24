@@ -34,7 +34,7 @@
     "@baeta/errors": "workspace:^",
     "graphql": "^16.11.0",
     "graphql-ws": "^6.0.5",
-    "graphql-yoga": "^5.13.4",
+    "graphql-yoga": "^5.13.5",
     "ws": "^8.18.2"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "@baeta/compiler": "workspace:^",
     "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.18",
+    "@types/node": "^22.15.21",
     "@types/ws": "^8.18.1",
     "typescript": "^5.8.3"
   }

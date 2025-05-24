@@ -42,12 +42,12 @@
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
     "esbuild": "^0.25.4",
-    "tsup": "^8.4.0"
+    "tsup": "^8.5.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/color-hash": "^2.0.0",
-    "@types/node": "^22.15.18",
+    "@types/node": "^22.15.21",
     "typescript": "^5.8.3"
   }
 }

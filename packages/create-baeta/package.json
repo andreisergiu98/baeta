@@ -58,7 +58,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.15.18",
+    "@types/node": "^22.15.21",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.0",
     "@types/shelljs": "^0.8.16",

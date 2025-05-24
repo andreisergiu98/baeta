@@ -41,8 +41,8 @@
     "graphql": "^16.11.0",
     "graphql-scalars": "^1.24.2",
     "graphql-ws": "^6.0.5",
-    "graphql-yoga": "^5.13.4",
-    "prisma": "^6.7.0",
+    "graphql-yoga": "^5.13.5",
+    "prisma": "^6.8.2",
     "ws": "^8.18.2"
   },
   "devDependencies": {
@@ -51,9 +51,9 @@
     "@baeta/plugin-directives": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@faker-js/faker": "^9.7.0",
-    "@prisma/client": "^6.7.0",
-    "@types/node": "^22.15.18",
+    "@faker-js/faker": "^9.8.0",
+    "@prisma/client": "^6.8.2",
+    "@types/node": "^22.15.21",
     "@types/ws": "^8.18.1",
     "@yarnpkg/pnpify": "^4.1.4",
     "typescript": "^5.8.3"

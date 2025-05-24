@@ -66,22 +66,18 @@ export function Generator(props: GeneratorProps) {
 			return;
 		}
 
-		runRef.current = startProcessWithPty(
-			props.run,
-			(data, clear) => {
-				setRunOutput((current) => {
-					const output = {
-						id: randomUUID(),
-						text: data,
-					};
-					if (clear) {
-						return [output];
-					}
-					return [...current, output];
-				});
-			},
-			() => {},
-		);
+		runRef.current = startProcessWithPty(props.run, (data, clear) => {
+			setRunOutput((current) => {
+				const output = {
+					id: randomUUID(),
+					text: data,
+				};
+				if (clear) {
+					return [output];
+				}
+				return [...current, output];
+			});
+		});
 	}, [props.run]);
 
 	const getHooks = useCallback((): GeneratorHooks => {

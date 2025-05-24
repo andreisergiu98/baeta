@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { makeErrorMessage, makeErrorOutput, useConfig } from '../../sdk/index.ts';
 import type { TextOutput } from '../../types/text.ts';
 import { dynamicImportCompiler } from '../../utils/compiler.ts';
-import { addProcess, killProcesses } from '../../utils/process.ts';
+import { addProcess, terminateProcesses } from '../../utils/process.ts';
 import { WithGenerator } from '../generate/with-generator.tsx';
 import { AppStatus } from './app-status.tsx';
 import { BuilderStatus } from './builder-status.tsx';
@@ -34,13 +34,13 @@ export function Builder(props: Props) {
 
 	const processesRef = useRef<Subprocess[]>([]);
 
-	const killHanging = useCallback(() => {
-		return killProcesses(processesRef.current);
+	const terminateHanging = useCallback(() => {
+		return terminateProcesses(processesRef.current);
 	}, []);
 
 	const handleCommand = useCallback(
 		async (command?: string) => {
-			await killHanging();
+			await terminateHanging();
 
 			if (!command) {
 				return;
@@ -61,17 +61,17 @@ export function Builder(props: Props) {
 				() => {},
 			);
 		},
-		[killHanging],
+		[terminateHanging],
 	);
 
 	const handleStart = useCallback(async () => {
-		await killHanging();
+		await terminateHanging();
 
 		setRunning(true);
 		setOutput(emptyArray);
 		setWarnings(emptyArray);
 		setErrors(emptyArray);
-	}, [killHanging]);
+	}, [terminateHanging]);
 
 	const handleEnd = useCallback(
 		(buildTime: number, warnings: string[], errors: string[]) => {
@@ -175,7 +175,7 @@ export function Builder(props: Props) {
 
 	useEffect(() => {
 		const listener = async () => {
-			await killHanging();
+			await terminateHanging();
 			process.exit();
 		};
 
@@ -194,7 +194,7 @@ export function Builder(props: Props) {
 			process.off('SIGINT', listener);
 			process.off('uncaughtException', listener);
 		};
-	}, [killHanging]);
+	}, [terminateHanging]);
 
 	return (
 		<>

@@ -1,19 +1,19 @@
 import { Writable } from 'node:stream';
 import { execa, parseCommandString, type Subprocess } from 'execa';
 import pty from 'node-pty';
-import kill from 'tree-kill';
+import terminate from 'tree-kill';
 
-export async function killProcesses(processes: Subprocess[]) {
-	await Promise.all(processes.map((process) => killProcess(process)));
+export async function terminateProcesses(processes: Subprocess[]) {
+	await Promise.all(processes.map((process) => terminateProcess(process)));
 	processes.splice(0, processes.length);
 }
 
-export async function killProcess(process: Subprocess) {
+export async function terminateProcess(process: Subprocess) {
 	return new Promise<void>((resolve) => {
 		if (process.pid == null) {
 			return resolve();
 		}
-		kill(process.pid, 'SIGKILL', () => resolve());
+		terminate(process.pid, 'SIGTERM', () => resolve());
 	});
 }
 
@@ -71,7 +71,6 @@ export type PtyProcess = ReturnType<typeof startProcessWithPty>;
 export function startProcessWithPty(
 	command: string,
 	stdout: (data: string, clear: boolean) => void,
-	onError: (err: unknown) => void,
 ) {
 	const [file, ...args] = parseCommandString(command);
 

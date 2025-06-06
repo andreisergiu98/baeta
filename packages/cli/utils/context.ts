@@ -2,6 +2,7 @@ import {
 	type Context as ContextType,
 	createContext,
 	createElement,
+	type JSX,
 	type PropsWithChildren,
 	type Provider as ProviderType,
 	useContext,

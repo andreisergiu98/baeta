@@ -34,7 +34,7 @@
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@hono/graphql-server": "^0.6.0",
     "graphql": "^16.11.0",
-    "hono": "^4.7.10"
+    "hono": "^4.7.11"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
@@ -42,9 +42,9 @@
     "@baeta/plugin-autoload": "workspace:^",
     "@baeta/plugin-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250524.0",
-    "miniflare": "^4.20250508.3",
+    "@cloudflare/workers-types": "^4.20250606.0",
+    "miniflare": "^4.20250525.1",
     "typescript": "^5.8.3",
-    "wrangler": "^4.16.1"
+    "wrangler": "^4.19.1"
   }
 }

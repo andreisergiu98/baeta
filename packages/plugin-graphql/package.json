@@ -46,10 +46,10 @@
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/util-path": "workspace:^",
     "@graphql-codegen/core": "^4.0.2",
-    "@graphql-codegen/plugin-helpers": "^5.1.0",
+    "@graphql-codegen/plugin-helpers": "^5.1.1",
     "@graphql-codegen/typescript": "^4.1.6",
     "@graphql-codegen/visitor-plugin-common": "5.8.0",
-    "@graphql-tools/graphql-file-loader": "^8.0.19",
+    "@graphql-tools/graphql-file-loader": "^8.0.20",
     "@graphql-tools/load": "^8.1.0",
     "@graphql-tools/utils": "^10.8.6",
     "auto-bind": "^5.0.1",
@@ -60,7 +60,7 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.30",
     "@types/parse-filepath": "1.0.2",
     "graphql": "^16.11.0",
     "typescript": "^5.8.3"

@@ -55,10 +55,10 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250524.0",
-    "esbuild": "^0.25.4",
+    "@cloudflare/workers-types": "^4.20250606.0",
+    "esbuild": "^0.25.5",
     "graphql": "^16.11.0",
-    "miniflare": "^4.20250508.3",
+    "miniflare": "^4.20250525.1",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {

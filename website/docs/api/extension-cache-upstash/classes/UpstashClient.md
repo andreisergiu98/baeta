@@ -3056,35 +3056,6 @@ https://redis.io/commands/sadd
 <tr>
 <td>
 
-<a id="scan"></a> `scan`
-
-</td>
-<td>
-
-`public`
-
-</td>
-<td>
-
-(`cursor`, `opts?`) => `Promise`\<\[`string`, `string`[]\]\>
-
-</td>
-<td>
-
-**See**
-
-https://redis.io/commands/scan
-
-</td>
-<td>
-
-`Redis.scan`
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="scard"></a> `scard`
 
 </td>
@@ -5254,6 +5225,123 @@ expect(arg1, "Hello World")
 #### Inherited from
 
 `Redis.createScript`
+
+---
+
+### scan()
+
+#### Call Signature
+
+> **scan**(`cursor`): `Promise`\<`ScanResultStandard`\>
+
+##### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`cursor`
+
+</td>
+<td>
+
+`string` \| `number`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+##### Returns
+
+`Promise`\<`ScanResultStandard`\>
+
+##### See
+
+https://redis.io/commands/scan
+
+##### Inherited from
+
+`Redis.scan`
+
+#### Call Signature
+
+> **scan**\<`TOptions`\>(`cursor`, `opts`): `Promise`\<`TOptions` _extends_ `object` ? `ScanResultWithType` : `ScanResultStandard`\>
+
+##### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`TOptions` _extends_ `ScanCommandOptions`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+##### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`cursor`
+
+</td>
+<td>
+
+`string` \| `number`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`opts`
+
+</td>
+<td>
+
+`TOptions`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+##### Returns
+
+`Promise`\<`TOptions` _extends_ `object` ? `ScanResultWithType` : `ScanResultStandard`\>
+
+##### See
+
+https://redis.io/commands/scan
+
+##### Inherited from
+
+`Redis.scan`
 
 ---
 

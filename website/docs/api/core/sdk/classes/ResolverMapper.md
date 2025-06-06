@@ -123,7 +123,7 @@
 </td>
 <td>
 
-`Record`\<`string`, `undefined` \| `string`[]\>
+`Record`\<`string`, `string`[] \| `undefined`\>
 
 </td>
 <td>

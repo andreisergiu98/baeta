@@ -50,7 +50,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.30",
     "typescript": "^5.8.3"
   },
   "engines": {

@@ -187,14 +187,9 @@ const config = {
 			},
 		],
 	],
-	webpack: {
-		jsLoader: (isServer) => ({
-			loader: require.resolve('esbuild-loader'),
-			options: {
-				loader: 'tsx',
-				target: isServer ? 'node12' : 'es2017',
-			},
-		}),
+	future: {
+		v4: true,
+		experimental_faster: true,
 	},
 };
 

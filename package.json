@@ -52,15 +52,15 @@
   "devDependencies": {
     "@andreisergiu98/changesets-cli": "^2.25.1",
     "@baeta/builder": "workspace:^",
-    "@biomejs/biome": "^2.0.0-beta.5",
+    "@biomejs/biome": "^2.0.0-beta.6",
     "@changesets/changelog-github": "^0.5.1",
-    "@types/node": "^22.15.21",
-    "@yarnpkg/sdks": "^3.2.1",
+    "@types/node": "^22.15.30",
+    "@yarnpkg/sdks": "^3.2.2",
     "@yarnpkg/types": "^4.0.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.2",
+    "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
-    "turbo": "^2.5.3",
+    "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
   "packageManager": "yarn@4.7.0"

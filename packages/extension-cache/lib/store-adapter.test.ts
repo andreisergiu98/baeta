@@ -63,7 +63,7 @@ test('StoreAdapter.saveQueryResult and getQueryResult', async (t) => {
 	const adapter = createTestAdapter();
 	const item: TestItem = { id: '2', value: 'test2' };
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, item);
 	const result = await adapter.getQueryResult(queryRef);
@@ -78,7 +78,7 @@ test('StoreAdapter.saveQueryResult and getQueryResult with list', async (t) => {
 		{ id: '2', value: 'test2' },
 	];
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, items);
 	const result = await adapter.getQueryResult(queryRef);
@@ -92,7 +92,7 @@ test('StoreAdapter.saveQueryResult with parent ref and args', async (t) => {
 	const parentRef = 'parent1';
 	const args = { filter: 'test' };
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, item, { parentRef, args });
 	const result = await adapter.getQueryResult(queryRef, { parentRef, args });
@@ -104,7 +104,7 @@ test('StoreAdapter.deleteQueries', async (t) => {
 	const adapter = createTestAdapter();
 	const item: TestItem = { id: '1', value: 'test1' };
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, item);
 	await adapter.deleteQueries(queryRef);
@@ -121,7 +121,7 @@ test('StoreAdapter handles null values in lists', async (t) => {
 		{ id: '2', value: 'test2' },
 	];
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, items);
 	const result = await adapter.getQueryResult(queryRef);
@@ -131,7 +131,7 @@ test('StoreAdapter handles null values in lists', async (t) => {
 
 test('StoreAdapter handles empty query results', async (t) => {
 	const adapter = createTestAdapter();
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 	await adapter.saveQueryResult(queryRef, []);
 	const result = await adapter.getQueryResult(queryRef);
 	t.deepEqual(result?.query, []);

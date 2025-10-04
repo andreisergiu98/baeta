@@ -1,26 +1,54 @@
-import { getUserModule } from './typedef.ts';
+import { UserModule } from './typedef.ts';
 
-const { Query } = getUserModule();
+const { Query, User } = UserModule;
 
-Query.user(({ args }) => {
-	return {
-		id: args.where.id,
-		email: 'jon.doe@baeta.io',
-		lastName: 'Doe',
-	};
+export const userResolver = User.$complexity(() => ({
+	complexity: 2,
+})).$fields({
+	id: User.id.key('id'),
+	email: User.email.key('email'),
+	lastName: User.lastName.key('lastName'),
+	profile: User.profile.key('profile'),
+	givenName: User.givenName.key('givenName'),
 });
 
-Query.user.$use(async ({ args }, next) => {
-	const result = await next();
-	console.log('Got user:', result, 'for args:', args);
-	return result;
-});
+const userQuery = Query.user
+	.use(async (next, { args }) => {
+		const result = await next();
+		console.log('Got user:', result, 'for args:', args);
+		return result;
+	})
+	.resolve(({ args }) => {
+		return {
+			id: args.where.id,
+			email: 'jon.doe@baeta.io',
+			lastName: 'Doe',
+			profile: null,
+			givenName: null,
+		};
+	});
 
-Query.users(() => {
-	const users = Array.from({ length: 10 }).map((_, i) => ({
-		id: i.toString(),
-		email: `jon.doe${i}@baeta.io`,
-		lastName: `Doe ${i}`,
-	}));
-	return users;
+const usersQuery = Query.users
+	.$complexity(({ ctx }) => {
+		if (ctx.appVersion === '1') {
+			return { multiplier: 1 };
+		}
+		return {
+			multiplier: 5,
+		};
+	})
+	.resolve(() => {
+		const users = Array.from({ length: 10 }).map((_, i) => ({
+			id: i.toString(),
+			email: `jon.doe${i}@baeta.io`,
+			lastName: `Doe ${i}`,
+			profile: null,
+			givenName: null,
+		}));
+		return users;
+	});
+
+export const queryResolver = Query.$fields({
+	user: userQuery,
+	users: usersQuery,
 });

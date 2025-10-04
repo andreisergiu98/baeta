@@ -47,7 +47,6 @@
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
-    "@baeta/plugin-autoload": "workspace:^",
     "@baeta/plugin-directives": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",

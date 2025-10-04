@@ -5,7 +5,7 @@ import {
 } from '@baeta/subscriptions-cloudflare';
 import { graphqlServer } from '@hono/graphql-server';
 import { Hono, type MiddlewareHandler } from 'hono';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
 export type Env = {

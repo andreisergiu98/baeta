@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "baeta build --generate",
-    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app.js'"
+    "build": "baeta generate",
+    "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
   "dependencies": {
     "@apollo/server": "^4.12.2",
@@ -17,7 +17,6 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/compiler": "workspace:^",
-    "@baeta/plugin-autoload": "workspace:^",
     "@types/bun": "^1.2.15",
     "@types/deno": "^2.3.0",
     "@types/node": "^22.15.30",

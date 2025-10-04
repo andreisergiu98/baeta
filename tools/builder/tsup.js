@@ -6,7 +6,7 @@ export function defineConfig(config) {
 	return originalDefineConfig({
 		format: 'esm',
 		target: 'es2024',
-		dts: true,
+		dts: false,
 		clean: true,
 		splitting: true,
 		sourcemap: true,

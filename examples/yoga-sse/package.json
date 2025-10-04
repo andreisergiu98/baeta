@@ -27,7 +27,7 @@
   "type": "module",
   "scripts": {
     "build": "baeta build --generate",
-    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
+    "start": "baeta generate --watch --run='node --watch --watch-preserve-output --enable-source-maps --inspect src/app.ts'"
   },
   "dependencies": {
     "@baeta/core": "workspace:^",
@@ -38,7 +38,6 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/compiler": "workspace:^",
-    "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^22.15.30",
     "typescript": "^5.8.3"

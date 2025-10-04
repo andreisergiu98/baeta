@@ -6,7 +6,7 @@
       "!**/website/build/**",
       "!**/website/.docusaurus/**",
       "!**/examples/**/modules/baeta-*/*",
-      "!**/examples/**/modules/autoload.ts",
+      "!**/examples/**/modules/index.ts",
       "!**/examples/**/__generated__/**",
       "!**/examples/**/typedef.ts",
       "!**/examples/**/.wrangler/**",

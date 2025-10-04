@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/correctness/noUnusedVariables: arguments used for inference */
+import type { FieldBuilder, TypeBuilder } from '@baeta/core/sdk';
 import type {
 	CacheMiddlewareOptions,
 	RequiredCacheMiddlewareOptions,
@@ -11,18 +12,23 @@ import type { RequiredStoreOptions, StoreOptions } from './store-options.ts';
 export type TypeGetter<T> = NonNullable<T> extends Array<infer G> ? NonNullable<G> : NonNullable<T>;
 
 /** Arguments for $createCache method */
-export type CreateCacheArgs<Root> = Root extends RefCompatibleRoot
-	? [options?: StoreOptions<Root>]
-	: [options: RequiredStoreOptions<Root>];
+export type CreateCacheArgs<Source> = Source extends RefCompatibleRoot
+	? [options?: StoreOptions<Source>]
+	: [options: RequiredStoreOptions<Source>];
 
 /** Arguments for $useCache method */
-export type UseCacheArgs<Result, Root> = Root extends RefCompatibleRoot
-	? [store: StoreAdapter<TypeGetter<Result>>, options?: CacheMiddlewareOptions<Root>]
-	: [store: StoreAdapter<TypeGetter<Result>>, options: RequiredCacheMiddlewareOptions<Root>];
+export type UseCacheArgs<Result, Source> = Source extends RefCompatibleRoot
+	? [store: StoreAdapter<TypeGetter<Result>>, options?: CacheMiddlewareOptions<Source>]
+	: [store: StoreAdapter<TypeGetter<Result>>, options: RequiredCacheMiddlewareOptions<Source>];
 
 declare global {
 	export namespace BaetaExtensions {
-		export interface TypeExtensions<Root, Context> {
+		export interface TypeExtensions<
+			Source,
+			Context,
+			Info,
+			Builder extends TypeBuilder<Source, Context, Info>,
+		> {
 			/**
 			 * Creates a cache store for a specific type.
 			 *
@@ -34,25 +40,21 @@ declare global {
 			 * const userCache = User.$createCache();
 			 * ```
 			 */
-			$createCache: (...args: CreateCacheArgs<Root>) => StoreAdapter<Root>;
+			$createCache: (...args: CreateCacheArgs<Source>) => StoreAdapter<Source>;
 		}
 
-		export interface ResolverExtensions<Result, Root, Context, Args> {
+		export interface FieldExtensions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			Builder extends FieldBuilder<Result, Source, Context, Args, Info>,
+		> {
 			/**
 			 * Reference cache object for a query or type field.
 			 */
-			$cacheRef: CacheRef<Result, Root, Args>;
-			/**
-			 * Updates the cache revision for a certain resolver.
-			 *
-			 * @param number - New revision number
-			 *
-			 * @example
-			 * ```typescript
-			 * Query.users.$cacheRevision(2);
-			 * ```
-			 */
-			$cacheRevision: (number: number) => void;
+			$cacheRef: CacheRef<Result, Source, Args>;
 			/**
 			 * Clears cached results for the resolver
 			 *
@@ -90,7 +92,7 @@ declare global {
 			 * });
 			 * ```
 			 */
-			$useCache: (...args: UseCacheArgs<Result, Root>) => void;
+			$useCache: (...args: UseCacheArgs<Result, Source>) => ReturnType<Builder['toMethods']>;
 		}
 	}
 }

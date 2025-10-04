@@ -1,9 +1,4 @@
-import {
-	createMiddlewareAdapter,
-	Extension,
-	type ModuleBuilder,
-	nameFunction,
-} from '@baeta/core/sdk';
+import { Extension, type FieldBuilder, type TypeBuilder } from '@baeta/core/sdk';
 import type { CreateCacheArgs, TypeGetter, UseCacheArgs } from './global-types.ts';
 import type {
 	CacheMiddlewareOptions,
@@ -15,7 +10,16 @@ import type { Store } from './store.ts';
 import type { CacheQueryMatching, StoreAdapter } from './store-adapter.ts';
 import type { DefaultStoreOptions } from './store-options.ts';
 
-export class CacheExtension extends Extension {
+declare global {
+	export namespace BaetaExtensions {
+		export interface Extensions {
+			cacheExtension: CacheExtension;
+		}
+	}
+}
+
+export class CacheExtension extends Extension<never> {
+	readonly stateKey = Symbol('cache-extension-state');
 	private serializer: Serializer;
 
 	constructor(
@@ -27,51 +31,59 @@ export class CacheExtension extends Extension {
 		this.serializer = createSerializer(transformers);
 	}
 
-	getTypeExtensions = <Root, Context>(
-		module: ModuleBuilder,
-		type: string,
-	): BaetaExtensions.TypeExtensions<Root, Context> => {
+	getTypeExtensions = <Source, Context, Info>(
+		builder: TypeBuilder<Source, Context, Info>,
+	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> => {
 		return {
-			$createCache: (...args: CreateCacheArgs<Root>) => {
+			$createCache: (...args: CreateCacheArgs<Source>) => {
 				const [options] = args;
 				const mergedOptions = {
 					ttl: 3600,
 					...this.defaultOptions,
 					...options,
 				};
-				const typeHash = module.hashes[type]?.hash ?? '0';
-				return this.store.createStoreAdapter<Root>(this.serializer, mergedOptions, type, typeHash);
+				return this.store.createStoreAdapter<Source>(
+					this.serializer,
+					mergedOptions,
+					builder.type,
+					'0',
+				);
 			},
 		};
 	};
 
-	getResolverExtensions = <Result, Root, Context, Args>(
-		module: ModuleBuilder,
-		type: string,
-		field: string,
-	): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
-		const fieldHash = module.hashes[type]?.fieldsHashes[field] ?? '0';
-		const ref = new CacheRef<Result, Root, Args>(type, field, fieldHash);
+	getResolverExtensions = <Result, Source, Context, Args, Info>(
+		builder: FieldBuilder<Result, Source, Context, Args, Info>,
+	): BaetaExtensions.FieldExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		FieldBuilder<Result, Source, Context, Args, Info>
+	> => {
+		const ref = new CacheRef<Result, Source, Args>(builder.type, builder.field);
 		return {
 			$cacheRef: ref,
-			$cacheRevision: (revision: number) => {
-				ref.setRevision(revision);
-			},
 			$cacheClear: (
 				store: StoreAdapter<TypeGetter<Result>>,
 				matcher?: CacheQueryMatching<Args>,
 			) => {
 				return store.deleteQueries(ref, matcher);
 			},
-			$useCache: (...args: UseCacheArgs<Result, Root>) => {
+			$useCache: (...args: UseCacheArgs<Result, Source>) => {
+				const editable = builder.edit();
 				const [store, options] = args;
 				// We try to please the compiler
-				const middlewareArgs = [options] as Root extends RefCompatibleRoot
-					? [options?: CacheMiddlewareOptions<Root>]
-					: [options: RequiredCacheMiddlewareOptions<Root>];
-				const middleware = store.createMiddleware(ref, ...middlewareArgs);
-				nameFunction(middleware, `${type}.${field}.$useCache`);
-				module.mapper.addMiddleware(type, field, createMiddlewareAdapter(middleware));
+				const middlewareArgs = [options] as Source extends RefCompatibleRoot
+					? [options?: CacheMiddlewareOptions<Source>]
+					: [options: RequiredCacheMiddlewareOptions<Source>];
+				const middleware = store.createMiddleware<Result, Source, Context, Args, Info>(
+					ref,
+					...middlewareArgs,
+				);
+				editable.addMiddleware(middleware);
+				return editable.commitToMethods();
 			},
 		};
 	};

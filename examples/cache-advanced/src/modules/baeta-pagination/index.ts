@@ -2,6 +2,27 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import { getBaetaPaginationModule } from "./typedef.ts";
+import { BaetaPaginationModule } from "./typedef.ts";
 
-export const baetaPaginationModule = getBaetaPaginationModule();
+export default BaetaPaginationModule.$schema({
+    PageInfo: BaetaPaginationModule.PageInfo.$fields({
+        hasNextPage: BaetaPaginationModule.PageInfo.hasNextPage.key('hasNextPage').undefinedAsNull(),
+        hasPreviousPage: BaetaPaginationModule.PageInfo.hasPreviousPage.key('hasPreviousPage').undefinedAsNull()
+    }),
+    UserConnection: BaetaPaginationModule.UserConnection.$fields({
+        pageInfo: BaetaPaginationModule.UserConnection.pageInfo.key('pageInfo').undefinedAsNull(),
+        edges: BaetaPaginationModule.UserConnection.edges.key('edges').undefinedAsNull()
+    }),
+    UserEdge: BaetaPaginationModule.UserEdge.$fields({
+        cursor: BaetaPaginationModule.UserEdge.cursor.key('cursor').undefinedAsNull(),
+        node: BaetaPaginationModule.UserEdge.node.key('node').undefinedAsNull()
+    }),
+    UserPhotoConnection: BaetaPaginationModule.UserPhotoConnection.$fields({
+        pageInfo: BaetaPaginationModule.UserPhotoConnection.pageInfo.key('pageInfo').undefinedAsNull(),
+        edges: BaetaPaginationModule.UserPhotoConnection.edges.key('edges').undefinedAsNull()
+    }),
+    UserPhotoEdge: BaetaPaginationModule.UserPhotoEdge.$fields({
+        cursor: BaetaPaginationModule.UserPhotoEdge.cursor.key('cursor').undefinedAsNull(),
+        node: BaetaPaginationModule.UserPhotoEdge.node.key('node').undefinedAsNull()
+    })
+});

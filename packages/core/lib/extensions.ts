@@ -27,6 +27,6 @@ import type { Extension } from '../sdk/index.ts';
  * @remarks
  * Extensions are executed in the order they are provided.
  */
-export function createExtensions(...extensions: Array<() => Extension>) {
-	return extensions;
+export function createExtensions(extensions: BaetaExtensions.Extensions): Extension[] {
+	return Object.values(extensions);
 }

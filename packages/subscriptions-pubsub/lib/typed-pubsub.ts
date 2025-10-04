@@ -50,12 +50,13 @@ type RestAsyncIterableIteratorFnArgs<Fn> = Fn extends (
 
 class TypedPubSubBase<Engine extends PubSubEngineV2 | PubSubEngineV3, Map extends PubSubMap> {
 	protected channelPrefix: string;
+	protected pubsub: Engine;
+	protected options?: TypedPubSubOptions;
 
-	constructor(
-		protected pubsub: Engine,
-		protected options?: TypedPubSubOptions,
-	) {
+	constructor(pubsub: Engine, options?: TypedPubSubOptions) {
 		this.channelPrefix = options?.prefix ?? '';
+		this.pubsub = pubsub;
+		this.options = options;
 	}
 
 	publish = <C extends keyof Map>(

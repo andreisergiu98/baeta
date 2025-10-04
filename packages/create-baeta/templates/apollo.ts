@@ -21,7 +21,7 @@ export async function makeApolloTemplate(
 			content: `import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { createApplication } from '@baeta/core';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
 const baeta = createApplication({

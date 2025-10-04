@@ -1,11 +1,9 @@
 import { defineConfig } from '@baeta/cli';
-import { autoloadPlugin } from '@baeta/plugin-autoload';
 import { cloudflarePlugin } from '@baeta/plugin-cloudflare';
 
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
-		contextType: 'src/types/context#Context',
 	},
 	compiler: {
 		src: 'src/app',
@@ -26,7 +24,6 @@ export default defineConfig({
 		},
 	},
 	plugins: [
-		autoloadPlugin(),
 		cloudflarePlugin({
 			ws: {
 				databaseId: '7a6f91c0-9455-402f-ab6a-508d140da0e1',

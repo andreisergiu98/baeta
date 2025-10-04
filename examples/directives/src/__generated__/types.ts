@@ -2,106 +2,78 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import type { Context as ContextType } from '../types/context';
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = T | undefined;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-export type { ContextType }
-/** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-};
+import * as BaetaUtility from "./utility.ts";
+import * as BaetaOverrides from "../modules/types.ts";
 
-export type StringFormat =
-  | 'EMAIL'
-  | 'UUID'
-  | 'URL';
+export type Scalars = BaetaOverrides.Scalars;
 
-export type Query = {
-  __typename?: 'Query';
-  testIncrementDirective: Scalars['Int']['output'];
-  testUpperDirective?: Maybe<NameWithUpper>;
-  user?: Maybe<User>;
-};
+export type Query = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Query"], {
+  testIncrementDirective: Scalars["Int"]
+  testUpperDirective: NameWithUpper | null
+  user: User | null
+}>
 
+export type Mutation = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Mutation"], {
+  createUser: User | null
+}>
+
+export type StringFormat = 'EMAIL' | 'UUID' | 'URL'
+
+export type NameWithUpper = BaetaUtility.Or<BaetaOverrides.ObjectTypes["NameWithUpper"], {
+  name: Scalars["String"]
+}>
+
+export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
+  id: Scalars["ID"]
+  email: Scalars["String"]
+  lastName: Scalars["String"]
+  profile: Scalars["String"] | null
+  givenName: Scalars["String"] | null
+}>
 
 export type QueryTestIncrementDirectiveArgs = {
-  value: Scalars['Int']['input'];
+  value: Scalars["Int"]
 };
-
 
 export type QueryTestUpperDirectiveArgs = {
-  name: Scalars['String']['input'];
+  name: Scalars["String"]
 };
-
 
 export type QueryUserArgs = {
-  where: UserWhereUniqueInput;
+  where: UserWhereUniqueInput
 };
 
-export type NameWithUpper = {
-  __typename?: 'NameWithUpper';
-  name: Scalars['String']['output'];
+export type NameWithUpperNameArgs = {
 };
 
-export type User = {
-  __typename?: 'User';
-  id: Scalars['ID']['output'];
-  email: Scalars['String']['output'];
-  lastName: Scalars['String']['output'];
-  profile?: Maybe<Scalars['String']['output']>;
-  givenName?: Maybe<Scalars['String']['output']>;
+export type UserIdArgs = {
+};
+
+export type UserEmailArgs = {
+};
+
+export type UserLastNameArgs = {
+};
+
+export type UserProfileArgs = {
+};
+
+export type UserGivenNameArgs = {
+};
+
+export type MutationCreateUserArgs = {
+  email: Scalars["String"]
+  lastName: Scalars["String"]
 };
 
 export type UserWhereUniqueInput = {
-  id?: InputMaybe<Scalars['ID']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars["ID"] | null
+  email: Scalars["String"] | null
 };
 
 export type CreateUserInput = {
-  email: Scalars['String']['input'];
-  username: Scalars['String']['input'];
-  lastName: Scalars['String']['input'];
-  firstName?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  createUser?: Maybe<User>;
-};
-
-
-export type MutationCreateUserArgs = {
-  email: Scalars['String']['input'];
-  lastName: Scalars['String']['input'];
-};
-
-
-export type DefinedFieldsWithoutExtensions = {
-  NameWithUpper: "name";
-  User: "id" | "email" | "lastName" | "profile" | "givenName";
-};
-
-export type DefinedUnionsWithoutExtensions = {
-
-};
-
-export type DefinedUnionsResults = {
-
-};
-
-export type DefinedInterfacesWithoutExtensions = {
-
-};
-
-export type DefinedInterfacesResults = {
-
+  email: Scalars["String"]
+  username: Scalars["String"]
+  lastName: Scalars["String"]
+  firstName: Scalars["String"] | null
 };

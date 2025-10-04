@@ -1,11 +1,15 @@
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import { pruneSchema } from '@graphql-tools/utils';
-import { getModuleBuilder, transformSchema } from '../sdk/index.ts';
+import {
+	type ModuleCompilerFactory,
+	type TypesResolversMap,
+	transformSchema,
+} from '../sdk/index.ts';
 import { addValidationToSchema } from './input-directive/input-schema.ts';
 
 export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
 
-export interface Options {
+export interface Options<Context, Info> {
 	/**
 	 * Array of module objects to include in the application.
 	 *
@@ -18,7 +22,7 @@ export interface Options {
 	 * ];
 	 * ```
 	 */
-	modules: Record<string, unknown>[];
+	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>;
 
 	/**
 	 * When true, removes fields that don't have corresponding resolvers.
@@ -66,23 +70,24 @@ function makeSchema(
  * const { schema } = baeta;
  * ```
  */
-export function createApplication(options: Options) {
-	const builders = options.modules.map((module) => getModuleBuilder(module));
-	const builtModules = builders.map((builder) => builder.build());
-
-	const typeDefs = builtModules.map((b) => b.typedef);
-	const resolvers = builtModules.map((b) => b.resolvers);
-	const transformers = builtModules.flatMap((b) => b.transform);
-
+export function createApplication<Context, Info>(options: Options<Context, Info>) {
+	if (options.modules.length === 0) {
+		throw new Error('Cannot create schema without modules.');
+	}
+	const moduleCompilers = options.modules.map((module) => module.__make());
+	// extensions are the same for all modules
+	const extensions = moduleCompilers[0].extensions;
+	extensions.forEach((ext) => ext.mutate(moduleCompilers));
+	const builtModules = moduleCompilers.map((module) => module.build());
+	const typeDefs = builtModules.map((m) => m.typedef);
+	const resolvers = builtModules.map((m) => m.resolvers);
+	const transformers = builtModules.flatMap((m) => m.transformers);
 	let schema = makeSchema(typeDefs, resolvers, options.executableSchemaOptions);
-
 	schema = transformSchema(schema, transformers);
 	schema = addValidationToSchema(schema);
-
 	if (options.pruneSchema) {
 		schema = pruneSchema(schema);
 	}
-
 	return {
 		schema,
 	};

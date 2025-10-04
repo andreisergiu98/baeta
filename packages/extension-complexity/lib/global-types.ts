@@ -1,9 +1,17 @@
 /** biome-ignore-all lint/correctness/noUnusedVariables: arguments used for inference */
+import type { FieldBuilder, SubscriptionBuilder, TypeBuilder } from '@baeta/core/sdk';
 import type { GetFieldSettings } from './field-settings.ts';
 
 declare global {
 	export namespace BaetaExtensions {
-		export interface ResolverExtensions<Result, Root, Context, Args> {
+		export interface FieldExtensions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			Builder extends FieldBuilder<Result, Source, Context, Args, Info>,
+		> {
 			/**
 			 * Configures complexity calculation for a type field.
 			 *
@@ -11,52 +19,68 @@ declare global {
 			 *
 			 * @example
 			 * ```typescript
-			 * Query.users.$complexity(({ args }) => ({
+			 * Query.users.$complexity((_, args) => ({
 			 *   complexity: 1,
 			 *   multiplier: args.limit || 10
-			 * }));
+			 * })).resolve(...);
 			 *
 			 * // Disable complexity calculation
 			 * Query.simple.$complexity(() => false);
 			 * ```
 			 */
-			$complexity: (fn: GetFieldSettings<Context, Args>) => void;
+			$complexity: (fn: GetFieldSettings<Context, Args>) => ReturnType<Builder['toMethods']>;
 		}
 
-		export interface TypeExtensions<Root, Context> {
+		export interface TypeExtensions<
+			Source,
+			Context,
+			Info,
+			Builder extends TypeBuilder<Source, Context, Info>,
+		> {
 			/**
-			 * Configures complexity calculation for all fields of a type.
+			 * Configures complexity calculation for a type field.
 			 *
 			 * @param fn - Function to determine complexity settings
 			 *
 			 * @example
 			 * ```typescript
-			 * User.$complexity(() => ({
-			 *   complexity: 2, // Higher base complexity for all User fields
-			 *   multiplier: 5
-			 * }));
+			 * Query.users.$complexity((_, args) => ({
+			 *   complexity: 1,
+			 *   multiplier: args.limit || 10
+			 * })).resolve(...);
+			 *
+			 * // Disable complexity calculation
+			 * Query.simple.$complexity(() => false);
 			 * ```
 			 */
-			$complexity: (fn: GetFieldSettings<Context, unknown>) => void;
+			$complexity: (fn: GetFieldSettings<Context, unknown>) => ReturnType<Builder['toMethods']>;
 		}
 
-		export interface SubscriptionExtensions<Root, Context, Args> {
+		export interface SubscriptionExtensions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			Builder extends SubscriptionBuilder<Result, Source, Context, Args, Info>,
+		> {
 			/**
-			 * Configures complexity calculation for subscription fields.
+			 * Configures complexity calculation for a type field.
 			 *
 			 * @param fn - Function to determine complexity settings
 			 *
 			 * @example
 			 * ```typescript
-			 * Subscription.userUpdates.$complexity(({ args }) => ({
-			 *   complexity: 5,
-			 *   multiplier: args.batchSize || 1
-			 * }));
+			 * Query.users.$complexity((_, args) => ({
+			 *   complexity: 1,
+			 *   multiplier: args.limit || 10
+			 * })).resolve(...);
+			 *
+			 * // Disable complexity calculation
+			 * Query.simple.$complexity(() => false);
 			 * ```
 			 */
-			$complexity: (fn: GetFieldSettings<Context, Args>) => void;
+			$complexity: (fn: GetFieldSettings<Context, Args>) => ReturnType<Builder['toMethods']>;
 		}
 	}
 }
-
-export type { BaetaExtensions as ComplexityExtensionMethods };

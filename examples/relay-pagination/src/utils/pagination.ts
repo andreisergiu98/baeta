@@ -1,6 +1,6 @@
 export function createEdges<T, C>(
 	items: T[],
-	cursor: C | undefined,
+	cursor: C | null,
 	take: number,
 	getCursor: (item: T) => C,
 ) {
@@ -23,8 +23,6 @@ export function createEdges<T, C>(
 		hasNextPage = true;
 		edges.splice(take);
 	}
-
-	console.log('edges', items.length, edges.length);
 
 	return {
 		pageInfo: {

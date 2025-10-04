@@ -44,7 +44,6 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/compiler": "workspace:^",
-    "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.18",

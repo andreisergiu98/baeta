@@ -36,7 +36,7 @@ export function makeSharedTemplate(
 			),
 		},
 		{
-			relativePath: './src/lib/extensions.ts',
+			relativePath: './src/modules/extensions.ts',
 			content: `import { createExtensions } from '@baeta/core';
 import { complexityExtension } from '@baeta/extension-complexity';
 import type { Context } from '../types/context.ts';
@@ -53,7 +53,9 @@ const complexity = complexityExtension<Context>({
 	},
 });
 
-export default createExtensions(complexity);
+export default createExtensions({
+	complexityExtension: complexity
+});
 `,
 		},
 		{
@@ -77,32 +79,50 @@ type Query {
 `,
 		},
 		{
-			relativePath: './src/modules/user/user.resolvers.ts',
-			content: `import { getUserModule } from './typedef.ts';
+			relativePath: './src/modules/user/index.ts',
+			content: `import { UserModule } from './typedef.ts';
 
-const { Query } = getUserModule();
+const { Query, User } = UserModule;
 
-Query.user(({ args }) => {
-	return {
-		id: args.where.id,
-		email: 'jon.doe@baeta.io',
-		lastName: 'Doe',
-	};
-});
+const userQuery = Query.user
+	.use(async (next, { args }) => {
+		const result = await next();
+		console.log('Got user:', result, 'for args:', args);
+		return result;
+	})
+	.resolve(({ args }) => {
+		return {
+			id: args.where.id,
+			email: 'jon.doe@baeta.io',
+			lastName: 'Doe',
+			givenName: null,
+			profile: null,
+		};
+	});
 
-Query.user.$use(async ({ args }, next) => {
-	const result = await next();
-	console.log('Got user:', result, 'for args:', args);
-	return result;
-});
-
-Query.users(() => {
+const usersQuery = Query.users.resolve(() => {
 	const users = Array.from({ length: 10 }).map((_, i) => ({
 		id: i.toString(),
 		email: \`jon.doe\${i}@baeta.io\`,
 		lastName: \`Doe \${i}\`,
+		givenName: null,
+		profile: null,
 	}));
 	return users;
+});
+
+export default UserModule.$schema({
+	User: User.$fields({
+		id: User.id.key('id'),
+		email: User.email.key('email'),
+		lastName: User.lastName.key('lastName'),
+		givenName: User.givenName.key('givenName').undefinedAsNull(),
+		profile: User.profile.key('profile').undefinedAsNull(),
+	}),
+	Query: Query.$fields({
+		user: userQuery,
+		users: usersQuery,
+	}),
 });
 `,
 		},
@@ -120,40 +140,60 @@ extend type User {
 `,
 		},
 		{
-			relativePath: './src/modules/user-photos/user-photos.resolvers.ts',
-			content: `import { getUserPhotosModule } from './typedef.ts';
+			relativePath: './src/modules/user-photos/index.ts',
+			content: `import { UserPhotosModule } from './typedef.ts';
 
-const { User } = getUserPhotosModule();
+const { User, UserPhoto } = UserPhotosModule;
 
-User.photos(({ root }) => {
-	return Array.from({ length: 10 }).map((_, i) => ({
-		id: \`u\${root.id}_p\${i}\`,
-		userId: root.id,
-		url: \`https://baeta.io/user/\${root.id}/photo/\${i}.png\`,
-	}));
+export default UserPhotosModule.$schema({
+	User: User.$fields({
+		photos: User.photos.resolve(({ source }) => {
+			return Array.from({ length: 10 }).map((_, i) => ({
+				id: \`u\${source.id}_p\${i}\`,
+				userId: source.id,
+				url: \`https://baeta.io/user/\${source.id}/photo/\${i}.png\`,
+			}));
+		}),
+	}),
+	UserPhoto: UserPhoto.$fields({
+		id: UserPhoto.id.key('id'),
+		url: UserPhoto.url.key('url'),
+		userId: UserPhoto.userId.key('userId'),
+	}),
 });
+`,
+		},
+		{
+			relativePath: './src/modules/types.ts',
+			content: `import type { GraphQLResolveInfo } from 'graphql';
+import type { BaseObjectTypes, BaseScalars } from '../__generated__/utility.ts';
+import type { Context } from '../types/context.ts';
+
+export interface Scalars extends BaseScalars {}
+
+export interface ObjectTypes extends BaseObjectTypes {
+	User: {
+		id: string;
+		email: string;
+		lastName: string;
+		givenName?: string | null;
+		profile?: string | null;
+	};
+}
+
+export type Ctx = Context;
+
+export type Info = GraphQLResolveInfo;
 `,
 		},
 		{
 			relativePath: './baeta.ts',
 			content: `import { defineConfig } from '@baeta/cli';
-import { autoloadPlugin } from '@baeta/plugin-autoload';
 
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
-		contextType: 'src/types/context#Context',
-		extensions: 'src/lib/extensions.ts',
 	},
-	compiler: {
-		src: 'src/app.ts',
-		dist: 'dist',
-		bundleWorkspaces: true,
-		esbuild: {
-			format: 'esm',
-		},
-	},
-	plugins: [autoloadPlugin()],
 });
 `,
 		},

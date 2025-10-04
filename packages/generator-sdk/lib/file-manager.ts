@@ -5,8 +5,8 @@ export class FileManager {
 
 	constructor(public fileOptions?: FileOptions) {}
 
-	createAndAdd(filename: string, content: string, tag: string) {
-		const file = new File(filename, content, tag, this.fileOptions);
+	createAndAdd(filename: string, content: string, tag: string, options?: FileOptions) {
+		const file = new File(filename, content, tag, { ...this.fileOptions, ...options });
 		this.add(file);
 		return file;
 	}

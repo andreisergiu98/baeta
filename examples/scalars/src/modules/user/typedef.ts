@@ -2,43 +2,61 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import * as Types from "../../__generated__/types.ts";
-import type { DocumentNode } from "graphql";
+import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
+import extensions from "../extensions.ts";
+import type {Ctx, Info} from "../types.ts";
+import * as Types from "../../__generated__/types.ts";
 
-
-interface DefinedFields {
-  User: 'id' | 'email' | 'birthday';
-  Query: 'user';
-};
-
-export type User = Pick<Types.User, DefinedFields['User']>;
-export type UUID = Types.Uuid;
-export type DateTime = Types.DateTime;
-export type Query = Pick<Types.Query, DefinedFields['Query']>;
-
-export namespace ModuleMetadata {
-  export const id = 'user';
-  export const dirname = './user';
-  export const hashes = {"User":{"hash":"13v0ak","fieldsHashes":{"birthday":"1mpx1p5","email":"bsmiek","id":"7nrrls"}},"Query":{"hash":"198ob4o","fieldsHashes":{"user":"14091bp"}}};
-  export const typedef = {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"User","loc":{"start":5,"end":9}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":13,"end":15}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID","loc":{"start":17,"end":21}},"loc":{"start":17,"end":21}},"loc":{"start":17,"end":22}},"directives":[],"loc":{"start":13,"end":22}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"email","loc":{"start":24,"end":29}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":31,"end":37}},"loc":{"start":31,"end":37}},"loc":{"start":31,"end":38}},"directives":[],"loc":{"start":24,"end":38}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"birthday","loc":{"start":40,"end":48}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime","loc":{"start":50,"end":58}},"loc":{"start":50,"end":58}},"loc":{"start":50,"end":59}},"directives":[],"loc":{"start":40,"end":59}}],"loc":{"start":0,"end":61}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":68,"end":73}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"user","loc":{"start":77,"end":81}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":83,"end":87}},"loc":{"start":83,"end":87}},"directives":[],"loc":{"start":77,"end":87}}],"loc":{"start":63,"end":89}}]} as unknown as DocumentNode;
-  
-  export function createManager(module: Baeta.ModuleBuilder) {
-    return {
-      ...module.createModuleMethods<Types.ContextType>(),
-      User: {
-        ...module.createTypeMethods<User, Types.ContextType>("User"),
-        id: module.createResolverBuilder<UUID, User, Types.ContextType, { }>("User", "id"),
-        email: module.createResolverBuilder<Types.Scalars["String"]["output"], User, Types.ContextType, { }>("User", "email"),
-        birthday: module.createResolverBuilder<DateTime, User, Types.ContextType, { }>("User", "birthday"),
-      },
-      Query: {
-        ...module.createTypeMethods<{ }, Types.ContextType>("Query"),
-        user: module.createResolverBuilder<Types.Maybe<User>, { }, Types.ContextType, { }>("Query", "user"),
-      },
-    };
-  }
+const moduleMetadata = {
+  id: 'user',
+  dirname: './user',
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"User","loc":{"start":5,"end":9}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":13,"end":15}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID","loc":{"start":17,"end":21}},"loc":{"start":17,"end":21}},"loc":{"start":17,"end":22}},"directives":[],"loc":{"start":13,"end":22}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"email","loc":{"start":24,"end":29}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":31,"end":37}},"loc":{"start":31,"end":37}},"loc":{"start":31,"end":38}},"directives":[],"loc":{"start":24,"end":38}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"birthday","loc":{"start":40,"end":48}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime","loc":{"start":50,"end":58}},"loc":{"start":50,"end":58}},"loc":{"start":50,"end":59}},"directives":[],"loc":{"start":40,"end":59}}],"loc":{"start":0,"end":61}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":68,"end":73}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"user","loc":{"start":77,"end":81}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":83,"end":87}},"loc":{"start":83,"end":87}},"directives":[],"loc":{"start":77,"end":87}}],"loc":{"start":63,"end":89}}]} as unknown as DocumentNode
 }
 
-export const createUserModule = () => Baeta.createModuleManager(ModuleMetadata);
-export const getUserModule = Baeta.createSingletonModule(createUserModule);
+interface BaetaModuleTypes {
+  Builders: {
+    User: Baeta.TypeMethods<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
+    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+  };
+  Factories: {
+    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Factory']>
+    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+  };
+};
+
+interface BaetaModuleObjectTypeFields {
+  User: {
+    Builder: {
+      id: Baeta.FieldMethods<Types.Scalars["UUID"], Types.User, Ctx, {}, Info>
+      email: Baeta.FieldMethods<Types.Scalars["String"], Types.User, Ctx, {}, Info>
+      birthday: Baeta.FieldMethods<Types.Scalars["DateTime"], Types.User, Ctx, {}, Info>
+    };
+    Factory: {
+      id: Baeta.Field<Types.Scalars["UUID"], Types.Scalars["UUID"], Types.User, Ctx, {}, Info>
+      email: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.User, Ctx, {}, Info>
+      birthday: Baeta.Field<Types.Scalars["DateTime"], Types.Scalars["DateTime"], Types.User, Ctx, {}, Info>
+    };
+  };
+  Query: {
+    Builder: {
+      user: Baeta.FieldMethods<Types.User | null, {}, Ctx, {}, Info>
+    };
+    Factory: {
+      user: Baeta.Field<Types.User | null, Types.User | null, {}, Ctx, {}, Info>
+    };
+  };
+};
+
+export const UserModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  User: Baeta.createTypeBuilder("User", {
+    id: Baeta.createFieldBuilder("User", "id", extensions),
+    email: Baeta.createFieldBuilder("User", "email", extensions),
+    birthday: Baeta.createFieldBuilder("User", "birthday", extensions)
+  }, extensions),
+  Query: Baeta.createTypeBuilder("Query", {
+    user: Baeta.createFieldBuilder("Query", "user", extensions)
+  }, extensions)
+}, {
+
+}, extensions);

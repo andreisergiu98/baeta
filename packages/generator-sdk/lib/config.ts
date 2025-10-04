@@ -1,4 +1,4 @@
-import { isAbsolute, join, posixPath, relative, resolve } from '@baeta/util-path';
+import { posixPath, resolve } from '@baeta/util-path';
 import type { FileOptions } from './file.ts';
 
 /**
@@ -44,37 +44,12 @@ export interface GeneratorOptions {
 	moduleDefinitionName?: string;
 
 	/**
-	 * Output path for the generated base types file.
+	 * Output path for the generated type files.
 	 * @defaultValue ```ts
 	 * `${modulesDir}/../__generated__/types.ts`
 	 * ```
 	 */
-	baseTypesPath?: string;
-
-	/**
-	 * Path to the context type definition.
-	 * Supports both named and default exports.
-	 * @example contextType: 'src/types/context.ts#Context' // for named export
-	 * @example contextType: 'src/types/context.ts' // for default export
-	 * @defaultValue undefined
-	 */
-	contextType?: string;
-
-	/**
-	 * Path to Baeta Extensions (ex. auth-extension).
-	 * Only default export is supported.
-	 * @example extensions: 'src/extensions.ts'
-	 * @defaultValue undefined
-	 */
-	extensions?: string;
-
-	/**
-	 * Custom scalar type mappings.
-	 * Maps GraphQL scalar types to TypeScript types.
-	 * Supports global types and imports.
-	 * @example { DateTime: 'Date', JSON: 'Record<string, unknown>' }	 * @defaultValue undefined
-	 */
-	scalars?: Record<string, string | { input: string; output: string }>;
+	typesDir?: string;
 
 	/**
 	 * Configuration options for generated files.
@@ -99,13 +74,10 @@ export interface NormalizedGeneratorOptions {
 	schemas: string[];
 	modulesDir: string;
 	moduleDefinitionName: string;
-	baseTypesPath: string;
-	contextType?: string;
-	extensions?: string;
-	scalars?: Record<string, string | { input: string; output: string }>;
+	typesDir: string;
 	fileOptions?: FileOptions;
 	loaders?: Loader[];
-	importExtension?: '.js' | '.ts';
+	importExtension: '.js' | '.ts' | '';
 }
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
@@ -113,93 +85,17 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 	const schemas = options.schemas ?? ['src/**/*.graphql'];
 	const modulesDir = posixPath(resolve(cwd, options.modulesDir || 'src/modules'));
 	const moduleDefinitionName = options.moduleDefinitionName || 'typedef.ts';
-
-	const defaultBaseTypesRoot = resolve(modulesDir, '../__generated__/types.ts');
-	const baseTypesRoot = resolve(cwd, options.baseTypesPath || defaultBaseTypesRoot);
-	const baseTypesPath = posixPath(relative(modulesDir, baseTypesRoot));
-
-	const contextType =
-		options.contextType && resolvePotentialImport(cwd, baseTypesRoot, options.contextType);
-	const extensions = resolveExtensionPath(modulesDir, moduleDefinitionName, options.extensions);
-
-	const scalars = resolveScalars(cwd, baseTypesRoot, options.scalars);
+	const defaultTypesDir = resolve(modulesDir, '../__generated__/');
+	const typesDir = resolve(cwd, options.typesDir || defaultTypesDir);
 
 	return {
 		cwd,
 		schemas,
 		modulesDir,
 		moduleDefinitionName,
-		baseTypesPath,
-		contextType,
-		extensions,
-		scalars,
+		typesDir,
 		fileOptions: options.fileOptions,
 		loaders: options.loaders,
-		importExtension:
-			options.importExtension === false ? undefined : (options.importExtension ?? '.ts'),
+		importExtension: options.importExtension === false ? '' : (options.importExtension ?? '.ts'),
 	};
-}
-
-function resolvePotentialImport(root: string, baseTypesRoot: string, path: string) {
-	if (!path.includes('#')) {
-		return path;
-	}
-
-	if (isAbsolute(path) || path.startsWith('@')) {
-		return path;
-	}
-
-	if (path[0] === '!') {
-		return path.slice(1);
-	}
-
-	const contextTypeRoot = resolve(root, path);
-	return posixPath(relative(join(baseTypesRoot, '../'), contextTypeRoot));
-}
-
-function resolveScalars(
-	root: string,
-	baseTypesRoot: string,
-	scalars?: Record<string, string | { input: string; output: string }>,
-) {
-	if (!scalars) {
-		return;
-	}
-
-	const resolved: Record<string, string | { input: string; output: string }> = {};
-
-	for (const key in scalars) {
-		const value = scalars[key];
-
-		if (typeof value === 'string') {
-			resolved[key] = resolvePotentialImport(root, baseTypesRoot, value);
-		} else {
-			resolved[key] = {
-				input: resolvePotentialImport(root, baseTypesRoot, value.input),
-				output: resolvePotentialImport(root, baseTypesRoot, value.output),
-			};
-		}
-	}
-
-	return resolved;
-}
-
-function resolveExtensionPath(
-	modulesDir: string,
-	moduleDefinitionName: string,
-	extensionsPath?: string,
-) {
-	if (!extensionsPath) {
-		return;
-	}
-
-	if (isAbsolute(extensionsPath)) {
-		return extensionsPath;
-	}
-
-	if (extensionsPath[0] === '!') {
-		return extensionsPath.slice(1);
-	}
-
-	return posixPath(relative(join(modulesDir, moduleDefinitionName), extensionsPath));
 }

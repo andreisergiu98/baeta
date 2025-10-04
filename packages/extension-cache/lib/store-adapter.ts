@@ -189,18 +189,18 @@ export abstract class StoreAdapter<Item> {
 		);
 	};
 
-	createMiddleware = <Result extends null | Item | Item[] | Array<Item | null>, Root, Args>(
-		queryRef: CacheRef<Result, Root, Args>,
-		...args: Root extends RefCompatibleRoot
-			? [options?: CacheMiddlewareOptions<Root>]
-			: [options: RequiredCacheMiddlewareOptions<Root>]
-	): Middleware<Result, Root, unknown, Args> => {
-		return async (params, next): Promise<Result> => {
-			const [options] = args;
+	createMiddleware = <Result, Source, Context, Args, Info>(
+		queryRef: CacheRef<Result, Source, Args>,
+		...optionsArray: Source extends RefCompatibleRoot
+			? [options?: CacheMiddlewareOptions<Source>]
+			: [options: RequiredCacheMiddlewareOptions<Source>]
+	): Middleware<Result, Source, Context, Args, Info> => {
+		return async (next, params): Promise<Result> => {
+			const [options] = optionsArray;
 
 			const parentRef = options?.getRootRef
-				? options.getRootRef(params.root)
-				: getRefFallback(params.root);
+				? options.getRootRef(params.source)
+				: getRefFallback(params.source);
 
 			const matcher = { parentRef, args: params.args };
 

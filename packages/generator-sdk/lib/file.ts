@@ -24,6 +24,12 @@ export interface FileOptions {
 	disableBiomeHeader?: boolean;
 
 	/**
+	 * Allow overwriting the file.
+	 * @defaultValue true
+	 */
+	allowOverwrite?: boolean;
+
+	/**
 	 * Add custom header at the beginning of the file.
 	 */
 	addHeader?: (name: string, content: string, tag: string) => string;
@@ -49,6 +55,14 @@ export class File {
 			return;
 		}
 		this.persisted = true;
+
+		if (this.options?.allowOverwrite === false) {
+			const exists = await fs
+				.stat(this.filename)
+				.then((res) => res.isFile())
+				.catch(() => false);
+			if (exists) return;
+		}
 
 		const dir = dirname(this.filename);
 		await fs.mkdir(dir, { recursive: true });

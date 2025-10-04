@@ -1,13 +1,8 @@
 import { defineConfig } from '@baeta/cli';
-import { autoloadPlugin } from '@baeta/plugin-autoload';
 
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
-		scalars: {
-			DateTime: 'Date',
-			UUID: 'src/types/scalars.ts#UUID',
-		},
 	},
 	compiler: {
 		src: 'src/app.ts',
@@ -17,5 +12,4 @@ export default defineConfig({
 			format: 'esm',
 		},
 	},
-	plugins: [autoloadPlugin()],
 });

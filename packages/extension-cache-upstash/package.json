@@ -28,7 +28,7 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     }
   },
   "types": "dist/index.d.ts",
@@ -51,9 +51,9 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@upstash/redis": "^1.35.0",
+    "@upstash/redis": "^1.35.5",
     "graphql": "^16.11.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",

@@ -8,7 +8,7 @@
     "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
   "dependencies": {
-    "@apollo/server": "^4.12.2",
+    "@apollo/server": "^5.0.0",
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
     "@baeta/extension-complexity": "workspace:^",
@@ -17,9 +17,9 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/compiler": "workspace:^",
-    "@types/bun": "^1.2.15",
-    "@types/deno": "^2.3.0",
-    "@types/node": "^22.15.30",
-    "typescript": "^5.8.3"
+    "@types/bun": "^1.2.23",
+    "@types/deno": "^2.5.0",
+    "@types/node": "^22.18.8",
+    "typescript": "^5.9.3"
   }
 }

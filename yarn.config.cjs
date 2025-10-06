@@ -50,7 +50,7 @@ function enforceConsistentEntries(workspace) {
 
 		exports[key] = {
 			types: devTypesEntry,
-			default: importEntry,
+			default: devTypesEntry,
 		};
 
 		publishExports[key] = {

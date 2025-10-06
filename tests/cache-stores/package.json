@@ -51,7 +51,7 @@
     "@baeta/extension-cache": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=22.12.0"

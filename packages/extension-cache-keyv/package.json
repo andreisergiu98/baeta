@@ -28,7 +28,7 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     }
   },
   "types": "dist/index.d.ts",
@@ -53,8 +53,8 @@
     "@baeta/tsconfig": "workspace:^",
     "@keyv/etcd": "^2.1.1",
     "graphql": "^16.11.0",
-    "keyv": "^5.3.3",
-    "typescript": "^5.8.3"
+    "keyv": "^5.5.3",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",

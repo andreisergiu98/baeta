@@ -28,7 +28,7 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     }
   },
   "types": "dist/index.d.ts",
@@ -45,17 +45,17 @@
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "@graphql-tools/graphql-file-loader": "^8.0.20",
-    "@graphql-tools/load": "^8.1.0",
-    "@graphql-tools/utils": "^10.8.6",
+    "@graphql-tools/graphql-file-loader": "^8.1.2",
+    "@graphql-tools/load": "^8.1.2",
+    "@graphql-tools/utils": "^10.9.1",
     "change-case-all": "2.1.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.30",
+    "@types/node": "^22.18.8",
     "graphql": "^16.11.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"

@@ -3,17 +3,17 @@
   "files": {
     "includes": [
       "**",
-      "!**/website/build/**",
-      "!**/website/.docusaurus/**",
+      "!**/website/build",
+      "!**/website/.docusaurus",
       "!**/examples/**/modules/baeta-*/*",
       "!**/examples/**/modules/index.ts",
-      "!**/examples/**/__generated__/**",
+      "!**/examples/**/__generated__",
       "!**/examples/**/typedef.ts",
-      "!**/examples/**/.wrangler/**",
-      "!**/.yarn/**",
-      "!**/.tsup/**",
-      "!**/.turbo/**",
-      "!**/dist/**"
+      "!**/examples/**/.wrangler",
+      "!**/.yarn",
+      "!**/.tsup",
+      "!**/.turbo",
+      "!**/dist"
     ]
   },
   "linter": {

@@ -193,7 +193,7 @@ export function runTestsForStoreAdapter(
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		// @ts-ignore
+		// @ts-expect-error
 		const urlArg = new URL('https://example.com/test?query=value') as unknown;
 		const urlArgs = { url: urlArg };
 
@@ -208,7 +208,7 @@ export function runTestsForStoreAdapter(
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		// @ts-ignore
+		// @ts-expect-error
 		const bufferArg = Buffer.from('test buffer') as unknown;
 		const bufferArgs = { buffer: bufferArg };
 

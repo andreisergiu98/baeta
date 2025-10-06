@@ -198,6 +198,7 @@ export function Builder(props: Props) {
 
 	return (
 		<>
+			{isConfigured && errors.length === 0 && !!props.onSuccess && <AppStatus output={output} />}
 			{isConfigured && (
 				<BuilderStatus
 					running={running}
@@ -221,7 +222,6 @@ export function Builder(props: Props) {
 					buildTime={buildTime}
 				/>
 			)}
-			{isConfigured && errors.length === 0 && !!props.onSuccess && <AppStatus output={output} />}
 		</>
 	);
 }

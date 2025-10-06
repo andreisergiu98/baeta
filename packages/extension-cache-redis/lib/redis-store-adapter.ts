@@ -9,14 +9,17 @@ import type Redis from 'ioredis';
 import { collectPipelineErrors } from '../utils/pipeline.ts';
 
 export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
+	private client: Redis;
+
 	constructor(
-		private client: Redis,
+		client: Redis,
 		serializer: Serializer,
 		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
 		super(serializer, options, type, hash);
+		this.client = client;
 	}
 
 	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {

@@ -27,11 +27,9 @@ export const defaultLimits = {
 	complexity: 1000,
 };
 
-export type NormalizedOptions<Context> = Required<ComplexityExtensionOptions<Context>>;
+export type NormalizedOptions = Required<ComplexityExtensionOptions<unknown>>;
 
-export function normalizeOptions<Context>(
-	options: ComplexityExtensionOptions<Context>,
-): NormalizedOptions<Context> {
+export function normalizeOptions(options: ComplexityExtensionOptions<any>): NormalizedOptions {
 	return {
 		limit: options.limit ?? defaultLimits,
 		defaultComplexity: options.defaultComplexity ?? 1,

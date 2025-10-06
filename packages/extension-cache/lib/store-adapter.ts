@@ -25,12 +25,15 @@ export type CacheQueryMatching<Args> = {
 };
 
 export abstract class StoreAdapter<Item> {
-	constructor(
-		protected serializer: Serializer,
-		protected options: StoreOptions<Item>,
-		protected type: string,
-		protected hash: string,
-	) {
+	protected serializer: Serializer;
+	protected options: StoreOptions<Item>;
+	protected type: string;
+	protected hash: string;
+	constructor(serializer: Serializer, options: StoreOptions<Item>, type: string, hash: string) {
+		this.serializer = serializer;
+		this.options = options;
+		this.type = type;
+		this.hash = hash;
 		this.getMany.bind(this);
 	}
 

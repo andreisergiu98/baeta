@@ -40,12 +40,13 @@ declare global {
 
 export class AuthExtension extends Extension<AuthState> {
 	readonly stateKey = Symbol('auth-state');
+	readonly loadScopes: GetScopeLoader<AuthExtension.Scopes, any>;
+	readonly options: AuthOptions;
 
-	constructor(
-		readonly loadScopes: GetScopeLoader<AuthExtension.Scopes, any>,
-		readonly options: AuthOptions = {},
-	) {
+	constructor(loadScopes: GetScopeLoader<AuthExtension.Scopes, any>, options: AuthOptions = {}) {
 		super();
+		this.loadScopes = loadScopes;
+		this.options = options;
 	}
 
 	getTypeExtensions = <Source, Context, Info>(

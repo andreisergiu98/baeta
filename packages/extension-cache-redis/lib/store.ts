@@ -26,8 +26,11 @@ import { RedisStoreAdapter } from './redis-store-adapter.ts';
  * ```
  */
 export class RedisStore extends Store {
-	constructor(protected client: Redis) {
+	protected client: Redis;
+
+	constructor(client: Redis) {
 		super();
+		this.client = client;
 	}
 
 	createStoreAdapter<T>(

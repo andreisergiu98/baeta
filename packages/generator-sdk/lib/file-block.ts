@@ -3,12 +3,17 @@ import { dirname } from '@baeta/util-path';
 import { File, type FileOptions } from './file.ts';
 
 export class FileBlock extends File {
+	public filename: string;
+	public content: string;
+	public start: string;
+	public end: string;
+	public tag: string;
 	constructor(
-		public filename: string,
-		public content: string,
-		public start: string,
-		public end: string,
-		public tag: string,
+		filename: string,
+		content: string,
+		start: string,
+		end: string,
+		tag: string,
 		options?: FileOptions,
 	) {
 		super(filename, content, tag, {
@@ -16,6 +21,11 @@ export class FileBlock extends File {
 			disableEslintHeader: options?.disableEslintHeader ?? true,
 			disableGenerationNoticeHeader: options?.disableGenerationNoticeHeader ?? true,
 		});
+		this.filename = filename;
+		this.content = content;
+		this.start = start;
+		this.end = end;
+		this.tag = tag;
 	}
 
 	write = async () => {

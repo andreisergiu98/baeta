@@ -161,6 +161,7 @@ export function Generator(props: GeneratorProps) {
 
 	return (
 		<>
+			{props.run && <AppStatus output={runOutput} />}
 			<GeneratorStatus
 				error={error}
 				running={running}
@@ -168,7 +169,6 @@ export function Generator(props: GeneratorProps) {
 				startedPlugins={startedPlugins}
 				finishedPlugins={finishedPlugins}
 			/>
-			{props.run && <AppStatus output={runOutput} />}
 		</>
 	);
 }

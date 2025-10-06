@@ -21,13 +21,16 @@ declare global {
 export class CacheExtension extends Extension<never> {
 	readonly stateKey = Symbol('cache-extension-state');
 	private serializer: Serializer;
-
+	private store: Store;
+	private defaultOptions?: DefaultStoreOptions;
 	constructor(
-		private store: Store,
-		private defaultOptions?: DefaultStoreOptions,
+		store: Store,
+		defaultOptions?: DefaultStoreOptions,
 		transformers: SerializerTransformer[] = [],
 	) {
 		super();
+		this.store = store;
+		this.defaultOptions = defaultOptions;
 		this.serializer = createSerializer(transformers);
 	}
 

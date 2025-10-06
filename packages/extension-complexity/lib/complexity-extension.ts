@@ -20,14 +20,14 @@ interface ComplexityState {
 declare global {
 	export namespace BaetaExtensions {
 		export interface Extensions {
-			complexityExtension: ComplexityExtension<any>;
+			complexityExtension: ComplexityExtension<unknown>;
 		}
 	}
 }
 
 export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 	readonly stateKey = Symbol('complexity-settings');
-	private readonly options: Required<ComplexityExtensionOptions<Ctx>>;
+	private readonly options: Required<ComplexityExtensionOptions<unknown>>;
 
 	constructor(options: ComplexityExtensionOptions<Ctx> = {}) {
 		super();
@@ -111,8 +111,8 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 			}
 		}
 
-		const middleware = createComplexityMiddleware<any, any, any, any, any>(
-			this.options as Required<ComplexityExtensionOptions<any>>,
+		const middleware = createComplexityMiddleware<unknown, unknown, unknown, unknown, unknown>(
+			this.options,
 			fieldSettingsMap,
 		);
 

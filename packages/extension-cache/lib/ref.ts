@@ -17,13 +17,14 @@ export type RefCompatibleRoot = { id: string | number | bigint } | { [key: strin
  */
 export class CacheRef<_Result, _Root, _Args> {
 	private hash: string;
+	private type: string;
+	private field: string;
+	private revision = 1;
 
-	constructor(
-		private type: string,
-		private field: string,
-		private revision = 1,
-	) {
-		this.hash = this.toString();
+	constructor(type: string, field: string, hash = '') {
+		this.hash = hash;
+		this.type = type;
+		this.field = field;
 	}
 
 	toString() {

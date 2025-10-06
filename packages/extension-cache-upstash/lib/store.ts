@@ -31,8 +31,10 @@ import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
  * ```
  */
 export class UpstashStore extends Store {
-	constructor(protected client: UpstashClient) {
+	protected client: UpstashClient;
+	constructor(client: UpstashClient) {
 		super();
+		this.client = client;
 	}
 
 	createStoreAdapter<T>(

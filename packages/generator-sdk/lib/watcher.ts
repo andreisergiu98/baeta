@@ -20,6 +20,9 @@ export interface WatcherFile {
 	relativePath: string;
 }
 export class Watcher {
+	private readonly cwd: string;
+	private readonly options?: Options;
+
 	private subscription: AsyncSubscription;
 
 	private listeners: Record<EventType, WatcherListener[]> = {
@@ -30,10 +33,9 @@ export class Watcher {
 
 	private watcherIgnore: WatcherIgnore;
 
-	constructor(
-		private readonly cwd: string,
-		private readonly options?: Options,
-	) {
+	constructor(cwd: string, options?: Options) {
+		this.cwd = cwd;
+		this.options = options;
 		this.watcherIgnore = new WatcherIgnore(cwd);
 		this.subscription = this.createSubscription();
 	}

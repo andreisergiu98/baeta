@@ -15,7 +15,10 @@ interface D1SubscriptionRowData {
 }
 
 export class SubscriptionDatabaseD1 implements SubscriptionDatabase {
-	constructor(private db: D1Database) {}
+	private db: D1Database;
+	constructor(db: D1Database) {
+		this.db = db;
+	}
 
 	protected table = 'Subscriptions';
 

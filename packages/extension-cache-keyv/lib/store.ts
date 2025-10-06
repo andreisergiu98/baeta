@@ -29,8 +29,10 @@ import { KeyvStoreAdapter } from './keyv-store-adapter.ts';
  * ```
  */
 export class KeyvStore extends Store {
-	constructor(protected keyv: Keyv) {
+	protected keyv: Keyv;
+	constructor(keyv: Keyv) {
 		super();
+		this.keyv = keyv;
 	}
 
 	createStoreAdapter<T>(

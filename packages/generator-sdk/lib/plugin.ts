@@ -3,9 +3,12 @@ import type { NormalizedGeneratorOptions } from './config.ts';
 import type { Ctx } from './ctx.ts';
 import type { Watcher, WatcherFile } from './watcher.ts';
 
-export enum GeneratorPluginVersion {
-	V1 = 'v1',
-}
+export const GeneratorPluginVersion = {
+	V1: 'v1',
+} as const;
+
+export type GeneratorPluginVersion =
+	(typeof GeneratorPluginVersion)[keyof typeof GeneratorPluginVersion];
 
 export type GeneratorPluginV1Fn<Store = unknown> = (
 	ctx: Ctx<Store>,
@@ -32,8 +35,8 @@ export type GeneratorPluginV1Factory<Store = unknown> = {
 export interface GeneratorPluginV1<Store = unknown> {
 	name: string;
 	actionName: string;
-	version: GeneratorPluginVersion.V1;
-	type: PluginType.Generator;
+	version: typeof GeneratorPluginVersion.V1;
+	type: typeof PluginType.Generator;
 	setup: GeneratorPluginV1Fn<Store>;
 	generate: GeneratorPluginV1Fn<Store>;
 	end: GeneratorPluginV1Fn<Store>;

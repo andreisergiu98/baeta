@@ -42,13 +42,17 @@ export interface FileOptions {
 
 export class File {
 	persisted = false;
+	filename: string;
+	content: string;
+	tag: string;
+	private options?: FileOptions;
 
-	constructor(
-		public filename: string,
-		public content: string,
-		public tag: string,
-		private options?: FileOptions,
-	) {}
+	constructor(filename: string, content: string, tag: string, options?: FileOptions) {
+		this.filename = filename;
+		this.content = content;
+		this.tag = tag;
+		this.options = options;
+	}
 
 	write = async () => {
 		if (this.persisted) {

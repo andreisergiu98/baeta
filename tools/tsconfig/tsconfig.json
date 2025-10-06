@@ -9,6 +9,7 @@
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
+    "erasableSyntaxOnly": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

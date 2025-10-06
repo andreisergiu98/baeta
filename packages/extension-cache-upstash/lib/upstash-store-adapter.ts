@@ -8,14 +8,16 @@ import {
 import type { UpstashClient } from './upstash-client.ts';
 
 export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
+	private client: UpstashClient;
 	constructor(
-		private client: UpstashClient,
+		client: UpstashClient,
 		serializer: Serializer,
 		options: StoreOptions<Item>,
 		type: string,
 		hash: string,
 	) {
 		super(serializer, options, type, hash);
+		this.client = client;
 	}
 
 	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {

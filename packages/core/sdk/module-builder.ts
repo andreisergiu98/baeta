@@ -57,7 +57,9 @@ export class ModuleBuilder<
 			},
 			addTransformer: (transformer: SchemaTransformer | SchemaTransformer[]) => {
 				if (Array.isArray(transformer)) {
-					transformer.forEach((t) => draftTransformers.push(t));
+					transformer.forEach((t) => {
+						draftTransformers.push(t);
+					});
 				} else {
 					draftTransformers.push(transformer);
 				}

@@ -4,10 +4,10 @@ import type { FieldHelpers } from './field-methods.ts';
 import type { SubscriptionBuilder } from './subscription-builder.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
 
-export type Subscription<Result> = AsyncIterable<Result> | AsyncIterator<Result>;
+export type Subscription<Result = unknown> = AsyncIterable<Result>;
 
-export type WrappedSubscribe<Result = unknown> = {
-	__internal__getAsyncIterable: () => Subscription<Result> | PromiseLike<Subscription<Result>>;
+export type SubscriptionWrapper<Result = unknown> = {
+	__internal__getAsyncIterable: () => AsyncIterable<Result>;
 };
 
 export type SubscriptionField<Expected, Result, Source, Context, Args, Info> = SubscriptionHelpers<
@@ -21,7 +21,7 @@ export type SubscriptionField<Expected, Result, Source, Context, Args, Info> = S
 
 export type SubscriptionMethods<Result, Source, Context, Args, Info> = {
 	use: (
-		middleware: Middleware<WrappedSubscribe, Source, Context, Args, Info>,
+		middleware: Middleware<SubscriptionWrapper, Source, Context, Args, Info>,
 	) => SubscriptionMethods<Result, Source, Context, Args, Info>;
 	subscribe: <T = Result>(
 		fn: Resolver<Subscription<T>, Source, Context, Args, Info>,

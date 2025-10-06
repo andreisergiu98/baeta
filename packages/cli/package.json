@@ -28,15 +28,15 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     },
     "./ink": {
       "types": "./ink/index.ts",
-      "default": "./dist/ink/index.js"
+      "default": "./ink/index.ts"
     },
     "./sdk": {
       "types": "./sdk/index.ts",
-      "default": "./dist/sdk/index.js"
+      "default": "./sdk/index.ts"
     }
   },
   "types": "dist/index.d.ts",

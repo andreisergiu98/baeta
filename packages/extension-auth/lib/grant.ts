@@ -49,7 +49,7 @@ export async function saveGrants<Grants extends string, Result, Root, Context, A
 	);
 }
 
-async function resolveGrants<Grants extends string, Result, Source, Context, Args, Info>(
+function resolveGrants<Grants extends string, Result, Source, Context, Args, Info>(
 	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
 	grants: GetGrant<Grants, Result, Source, Context, Args, Info>,

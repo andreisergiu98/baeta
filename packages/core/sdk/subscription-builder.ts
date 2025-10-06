@@ -1,6 +1,8 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
 import type { Any } from '../types/any.ts';
+import { lift } from '../utils/lift.ts';
+import { isThenable } from '../utils/promise.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { SubscriptionCompiler } from './subscription-compiler.ts';
 import type {
@@ -8,20 +10,22 @@ import type {
 	SubscriptionFieldWithMake,
 	SubscriptionHelpers,
 	SubscriptionMethods,
-	WrappedSubscribe,
+	SubscriptionWrapper,
 } from './subscription-methods.ts';
 
 export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	readonly #field: string;
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #extensions: ReadonlyArray<Extension>;
-	readonly #middlewares: ReadonlyArray<Middleware<WrappedSubscribe, Source, Context, Args, Info>>;
+	readonly #middlewares: ReadonlyArray<
+		Middleware<SubscriptionWrapper, Source, Context, Args, Info>
+	>;
 
 	constructor(
 		field: string,
 		extensions: ReadonlyArray<Extension>,
 		store: Map<symbol, Readonly<unknown>>,
-		middlewares: Array<Middleware<WrappedSubscribe, Source, Context, Args, Info>>,
+		middlewares: Array<Middleware<SubscriptionWrapper, Source, Context, Args, Info>>,
 	) {
 		this.#field = field;
 		this.#extensions = [...extensions];
@@ -38,7 +42,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 		const draftMiddlewares = [...this.#middlewares];
 		const session = {
 			field: this.#field,
-			addMiddleware: (middleware: Middleware<WrappedSubscribe, Source, Context, Args, Info>) => {
+			addMiddleware: (middleware: Middleware<SubscriptionWrapper, Source, Context, Args, Info>) => {
 				draftMiddlewares.push(middleware);
 				return session;
 			},
@@ -84,7 +88,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 			},
 			subscribe: <T = Result>(fn: Resolver<Subscription<T>, Source, Context, Args, Info>) => {
 				const subscribe = (params: ResolverParams<Source, Context, Args, Info>) => {
-					return Promise.resolve(fn(params)).then((iterator) => ({
+					return lift(fn(params), (iterator) => ({
 						__internal__getAsyncIterable: () => iterator,
 					}));
 				};
@@ -105,8 +109,8 @@ function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args
 	field: string,
 	extensions: ReadonlyArray<Extension>,
 	store: ReadonlyMap<symbol, Readonly<unknown>>,
-	middlewares: ReadonlyArray<Middleware<WrappedSubscribe<unknown>, Any, Context, Args, Info>>,
-	subscribe: Resolver<WrappedSubscribe<Any>, Any, Context, Args, Info>,
+	middlewares: ReadonlyArray<Middleware<SubscriptionWrapper, Any, Context, Args, Info>>,
+	subscribe: Resolver<SubscriptionWrapper<Any>, Any, Context, Args, Info>,
 	currentResolver: Resolver<Result, Source, Context, Args, Info>,
 ): SubscriptionHelpers<Expected, Result, Source, Context, Args, Info> {
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
@@ -119,9 +123,12 @@ function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args
 			resolver,
 		);
 	const map = <R>(fn: Resolver<R, Result, Context, Args, Info>) => {
-		const resolver = async (p: ResolverParams<Source, Context, Args, Info>) => {
-			const res = await currentResolver(p);
-			return fn({ source: res, args: p.args, ctx: p.ctx, info: p.info });
+		const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
+			const result = currentResolver(p);
+			if (isThenable(result)) {
+				return result.then((res) => fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }));
+			}
+			return fn({ source: result, args: p.args, ctx: p.ctx, info: p.info });
 		};
 		return make(resolver);
 	};
@@ -129,30 +136,33 @@ function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args
 		map,
 		resolve: map,
 		key: (key) => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return result[key];
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(result, (res) => res[key]);
 			};
 			return make(resolver);
 		},
 		to: (fn) => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return fn(result);
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(result, fn);
 			};
 			return make(resolver);
 		},
 		withDefault: (value) => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return result ?? value;
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(result, (res) => res ?? value);
 			};
 			return make(resolver);
 		},
 		undefinedAsNull: () => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return (result ?? null) as Result extends undefined ? NonNullable<Result> | null : Result;
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(
+					result,
+					(res) => (res ?? null) as Result extends undefined ? NonNullable<Result> | null : Result,
+				);
 			};
 			return make(resolver);
 		},

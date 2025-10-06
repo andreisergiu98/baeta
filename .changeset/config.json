@@ -31,7 +31,6 @@
       "@baeta/extension-cache-redis",
       "@baeta/extension-cache-upstash",
       "@baeta/extension-complexity",
-      "@baeta/plugin-autoload",
       "@baeta/plugin-cloudflare",
       "@baeta/plugin-directives",
       "@baeta/plugin-exec",

@@ -193,7 +193,8 @@ export function runTestsForStoreAdapter(
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		// @ts-expect-error
+		// biome-ignore lint/suspicious/noTsIgnore: ts-expect-error will fail with node types
+		// @ts-ignore URL is a node global
 		const urlArg = new URL('https://example.com/test?query=value') as unknown;
 		const urlArgs = { url: urlArg };
 
@@ -208,7 +209,8 @@ export function runTestsForStoreAdapter(
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		// @ts-expect-error
+		// biome-ignore lint/suspicious/noTsIgnore: ts-expect-error will fail with node types
+		// @ts-ignore Buffer is a node global
 		const bufferArg = Buffer.from('test buffer') as unknown;
 		const bufferArgs = { buffer: bufferArg };
 

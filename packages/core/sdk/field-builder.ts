@@ -1,5 +1,7 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
+import { lift } from '../utils/lift.ts';
+import { isThenable } from '../utils/promise.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { FieldCompiler } from './field-compiler.ts';
 import type { FieldHelpers, FieldMethods, FieldWithMake } from './field-methods.ts';
@@ -120,41 +122,47 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 			middlewares,
 			resolver,
 		);
-	const map = <R>(fn: Resolver<R, Result, Context, Args, Info>) => {
-		const resolver = async (p: ResolverParams<Source, Context, Args, Info>) => {
-			const res = await currentResolver(p);
-			return fn({ source: res, args: p.args, ctx: p.ctx, info: p.info });
+	const chain = <R>(fn: Resolver<R, Result, Context, Args, Info>) => {
+		const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
+			const result = currentResolver(p);
+			if (isThenable(result)) {
+				return result.then((res) => fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }));
+			}
+			return fn({ source: result, args: p.args, ctx: p.ctx, info: p.info });
 		};
 		return make(resolver);
 	};
 	const helpers: FieldWithMake<Expected, Result, Source, Context, Args, Info> = {
-		map,
-		resolve: map,
+		map: chain,
+		resolve: chain,
 		key: (key) => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return result[key];
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(result, (res) => res[key]);
 			};
 			return make(resolver);
 		},
 		to: (fn) => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return fn(result);
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(result, fn);
 			};
 			return make(resolver);
 		},
 		withDefault: (value) => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return result ?? value;
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(result, (res) => res ?? value);
 			};
 			return make(resolver);
 		},
 		undefinedAsNull: () => {
-			const resolver = async (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = await currentResolver(params);
-				return (result ?? null) as Result extends undefined ? NonNullable<Result> | null : Result;
+			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(params);
+				return lift(
+					result,
+					(res) => (res ?? null) as Result extends undefined ? NonNullable<Result> | null : Result,
+				);
 			};
 			return make(resolver);
 		},

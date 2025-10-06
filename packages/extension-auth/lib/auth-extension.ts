@@ -3,8 +3,8 @@ import {
 	type FieldBuilder,
 	type ModuleCompiler,
 	type SubscriptionBuilder,
+	type SubscriptionWrapper,
 	type TypeBuilder,
-	type WrappedSubscribe,
 } from '@baeta/core/sdk';
 import { isOperationType } from '../utils/resolver.ts';
 import {
@@ -158,7 +158,7 @@ export class AuthExtension extends Extension<AuthState> {
 				const middleware = createMiddleware<
 					AuthExtension.Scopes,
 					AuthExtension.Grants,
-					WrappedSubscribe<unknown>,
+					SubscriptionWrapper<unknown>,
 					Source,
 					Context,
 					Args,

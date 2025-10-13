@@ -41,8 +41,7 @@ export class UpstashStore extends Store {
 		serializer: Serializer,
 		options: StoreOptions<T>,
 		type: string,
-		hash: string,
 	): StoreAdapter<T> {
-		return new UpstashStoreAdapter<T>(this.client, serializer, options, type, hash);
+		return new UpstashStoreAdapter<T>(this.client, serializer, options, type);
 	}
 }

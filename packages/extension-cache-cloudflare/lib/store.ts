@@ -18,8 +18,7 @@ export class CloudflareStore extends Store {
 		serializer: Serializer,
 		options: StoreOptions<T>,
 		type: string,
-		hash: string,
 	): StoreAdapter<T> {
-		return new CloudflareStoreAdapter<T>(this.client, serializer, options, type, hash);
+		return new CloudflareStoreAdapter<T>(this.client, serializer, options, type);
 	}
 }

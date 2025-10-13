@@ -39,8 +39,7 @@ export class KeyvStore extends Store {
 		serializer: Serializer,
 		options: StoreOptions<T>,
 		type: string,
-		hash: string,
 	): StoreAdapter<T> {
-		return new KeyvStoreAdapter<T>(this.keyv, serializer, options, type, hash);
+		return new KeyvStoreAdapter<T>(this.keyv, serializer, options, type);
 	}
 }

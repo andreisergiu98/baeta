@@ -21,7 +21,7 @@ const store = env.BAETA_CACHE;
 
 function createStoreAdapter(options: StoreOptions<TestItem>) {
 	const serializer = createSerializer();
-	return new CloudflareStoreAdapter(store, serializer, options, 'test', 'test-hash');
+	return new CloudflareStoreAdapter(store, serializer, options, 'test');
 }
 
 test.beforeEach(async () => {

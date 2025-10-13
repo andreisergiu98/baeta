@@ -28,12 +28,10 @@ export abstract class StoreAdapter<Item> {
 	protected serializer: Serializer;
 	protected options: StoreOptions<Item>;
 	protected type: string;
-	protected hash: string;
-	constructor(serializer: Serializer, options: StoreOptions<Item>, type: string, hash: string) {
+	constructor(serializer: Serializer, options: StoreOptions<Item>, type: string) {
 		this.serializer = serializer;
 		this.options = options;
 		this.type = type;
-		this.hash = hash;
 		this.getMany.bind(this);
 	}
 
@@ -306,7 +304,7 @@ export abstract class StoreAdapter<Item> {
 
 	protected getRevision() {
 		const version = this.options?.revision?.toString() || '0';
-		return `r${version}_${this.hash}`;
+		return `r${version}`;
 	}
 
 	protected parseItem(value: string): Item {

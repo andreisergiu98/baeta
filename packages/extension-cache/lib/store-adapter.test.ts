@@ -142,7 +142,6 @@ test('StoreAdapter respects revision option', async (t) => {
 		createSerializer(),
 		{ getRef: (item) => item.id, revision: 2 },
 		'test',
-		'test-hash',
 	);
 	const key = adapter.exposeCreateKey('1');
 	t.is(key, 'test:items:r2_test-hash:1');
@@ -427,5 +426,5 @@ class MockStoreAdapter<T> extends StoreAdapter<T> {
 // Test setup helper
 function createTestAdapter<T = TestItem>(options: StoreOptions<T> = {}) {
 	const serializer = createSerializer();
-	return new MockStoreAdapter<T>(serializer, options, 'test', 'test-hash');
+	return new MockStoreAdapter<T>(serializer, options, 'test');
 }

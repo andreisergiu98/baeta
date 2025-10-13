@@ -37,8 +37,7 @@ export class RedisStore extends Store {
 		serialzier: Serializer,
 		options: StoreOptions<T>,
 		type: string,
-		hash: string,
 	): StoreAdapter<T> {
-		return new RedisStoreAdapter<T>(this.client, serialzier, options, type, hash);
+		return new RedisStoreAdapter<T>(this.client, serialzier, options, type);
 	}
 }

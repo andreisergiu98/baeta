@@ -11,14 +11,8 @@ import { collectPipelineErrors } from '../utils/pipeline.ts';
 export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	private client: Redis;
 
-	constructor(
-		client: Redis,
-		serializer: Serializer,
-		options: StoreOptions<Item>,
-		type: string,
-		hash: string,
-	) {
-		super(serializer, options, type, hash);
+	constructor(client: Redis, serializer: Serializer, options: StoreOptions<Item>, type: string) {
+		super(serializer, options, type);
 		this.client = client;
 	}
 

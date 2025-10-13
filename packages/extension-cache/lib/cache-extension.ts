@@ -78,9 +78,10 @@ export class CacheExtension extends Extension<never> {
 				const editable = builder.edit();
 				const [store, options] = args;
 				// We try to please the compiler
-				const middlewareArgs = [options] as Source extends RefCompatibleRoot
+				const middlewareArgs = options as Source extends RefCompatibleRoot
 					? [options?: CacheMiddlewareOptions<Source>]
 					: [options: RequiredCacheMiddlewareOptions<Source>];
+
 				const middleware = store.createMiddleware<Result, Source, Context, Args, Info>(
 					ref,
 					...middlewareArgs,

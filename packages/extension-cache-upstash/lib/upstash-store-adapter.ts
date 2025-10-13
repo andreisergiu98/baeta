@@ -14,9 +14,8 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 		serializer: Serializer,
 		options: StoreOptions<Item>,
 		type: string,
-		hash: string,
 	) {
-		super(serializer, options, type, hash);
+		super(serializer, options, type);
 		this.client = client;
 	}
 

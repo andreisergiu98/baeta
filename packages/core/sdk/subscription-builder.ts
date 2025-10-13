@@ -2,7 +2,7 @@ import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
 import type { Any } from '../types/any.ts';
 import { nameFunction } from '../utils/functions.ts';
-import { isPromise, mapMaybePromise } from '../utils/promise.ts';
+import { mapMaybePromise } from '../utils/promise.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { SubscriptionCompiler } from './subscription-compiler.ts';
 import type {

@@ -1,5 +1,3 @@
-/** biome-ignore-all lint/correctness/noUnusedFunctionParameters: parameters need to be defined */
-/** biome-ignore-all lint/correctness/noUnusedVariables: parameters need to be defined */
 import type { FieldBuilder } from './field-builder.ts';
 import type { ModuleBuilder } from './module-builder.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
@@ -19,21 +17,21 @@ export abstract class Extension<Settings = unknown> {
 	abstract readonly stateKey: symbol;
 
 	getFieldExtensions<Result, Source, Context, Args, Info>(
-		builder: FieldBuilder<Result, Source, Context, Args, Info>,
+		_builder: FieldBuilder<Result, Source, Context, Args, Info>,
 	) {
 		return {};
 	}
 
-	getTypeExtensions<Source, Context, Info>(builder: TypeBuilder<Source, Context, Info>) {
+	getTypeExtensions<Source, Context, Info>(_builder: TypeBuilder<Source, Context, Info>) {
 		return {};
 	}
 
-	getModuleExtensions<Context, Info>(builder: ModuleBuilder<Context, Info>) {
+	getModuleExtensions<Context, Info>(_builder: ModuleBuilder<Context, Info>) {
 		return {};
 	}
 
 	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
-		builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
+		_builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
 	) {
 		return {};
 	}
@@ -46,7 +44,7 @@ export abstract class Extension<Settings = unknown> {
 		builder.useStore<Settings>(this.stateKey).set(settings);
 	}
 
-	mutate(compilers: ModuleCompiler[]) {}
+	mutate(_compilers: ModuleCompiler[]) {}
 }
 
 export function mergeExtensions<T, K extends Record<string, unknown>>(

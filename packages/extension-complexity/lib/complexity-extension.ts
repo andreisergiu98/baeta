@@ -14,7 +14,7 @@ import {
 } from './field-settings.ts';
 
 interface ComplexityState {
-	fieldSettings: GetFieldSettings<any, any>;
+	fieldSettings: GetFieldSettings<unknown, unknown>;
 }
 
 declare global {
@@ -31,7 +31,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 
 	constructor(options: ComplexityExtensionOptions<Ctx> = {}) {
 		super();
-		this.options = normalizeOptions(options);
+		this.options = normalizeOptions(options as ComplexityExtensionOptions<unknown>);
 	}
 
 	getTypeExtensions = <Source, Context, Info>(
@@ -41,7 +41,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 			$complexity: (fn) => {
 				const editable = builder.edit();
 				this.setState(editable, {
-					fieldSettings: fn,
+					fieldSettings: fn as GetFieldSettings<unknown, unknown>,
 				});
 				return editable.commitToMethods();
 			},
@@ -62,7 +62,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 			$complexity: (fn) => {
 				const editable = builder.edit();
 				this.setState(editable, {
-					fieldSettings: fn,
+					fieldSettings: fn as GetFieldSettings<unknown, unknown>,
 				});
 				return editable.commitToMethods();
 			},
@@ -83,7 +83,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 			$complexity: (fn) => {
 				const editable = builder.edit();
 				this.setState(editable, {
-					fieldSettings: fn,
+					fieldSettings: fn as GetFieldSettings<unknown, unknown>,
 				});
 				return editable.commitToMethods();
 			},

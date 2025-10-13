@@ -34,19 +34,19 @@ interface AuthState {
 declare global {
 	export namespace BaetaExtensions {
 		export interface Extensions {
-			authExtension: AuthExtension;
+			authExtension: AuthExtension<unknown>;
 		}
 	}
 }
 
-export class AuthExtension extends Extension<AuthState> {
+export class AuthExtension<Ctx> extends Extension<AuthState> {
 	readonly stateKey = Symbol('auth-state');
-	readonly loadScopes: GetScopeLoader<AuthExtension.Scopes, any>;
+	readonly loadScopes: GetScopeLoader<AuthExtension.Scopes, unknown>;
 	readonly options: AuthOptions;
 
-	constructor(loadScopes: GetScopeLoader<AuthExtension.Scopes, any>, options: AuthOptions = {}) {
+	constructor(loadScopes: GetScopeLoader<AuthExtension.Scopes, Ctx>, options: AuthOptions = {}) {
 		super();
-		this.loadScopes = loadScopes;
+		this.loadScopes = loadScopes as GetScopeLoader<AuthExtension.Scopes, unknown>;
 		this.options = options;
 	}
 

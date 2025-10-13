@@ -5,11 +5,10 @@ import type { FileOptions } from './file.ts';
  * Interface for custom schema loaders.
  */
 // biome-ignore lint/suspicious/noExplicitAny: We don't want to import graphql for this type
-export interface Loader<TOptions = any> {
-	// biome-ignore lint/suspicious/noExplicitAny: Same reason as above
-	load(pointer: string, options?: TOptions): Promise<any[] | null | never>;
-	// biome-ignore lint/suspicious/noExplicitAny: Same reason as above
-	loadSync?(pointer: string, options?: TOptions): any[] | null | never;
+type GraphQlLoaderAny = any;
+export interface Loader<TOptions = GraphQlLoaderAny> {
+	load(pointer: string, options?: TOptions): Promise<GraphQlLoaderAny[] | null | never>;
+	loadSync?(pointer: string, options?: TOptions): GraphQlLoaderAny[] | null | never;
 }
 
 /**

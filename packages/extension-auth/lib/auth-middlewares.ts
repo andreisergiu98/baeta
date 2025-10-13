@@ -43,7 +43,7 @@ export type GetScopeRules<
 	Info,
 > = (
 	params: ResolverParams<Source, Context, Args, Info>,
-) => boolean | ScopeRules<Scopes, Grants> | Promise<boolean | ScopeRules<Scopes, Grants>>;
+) => boolean | ScopeRules<Scopes, Grants> | PromiseLike<boolean | ScopeRules<Scopes, Grants>>;
 
 /**
  * Function to get scope rules for post-resolution authorization
@@ -59,7 +59,7 @@ export type GetPostScopeRules<
 > = (
 	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
-) => boolean | ScopeRules<Scopes, Grants> | Promise<boolean | ScopeRules<Scopes, Grants>>;
+) => boolean | ScopeRules<Scopes, Grants> | PromiseLike<boolean | ScopeRules<Scopes, Grants>>;
 
 export function createMiddleware<
 	Scopes extends ScopesShape,

@@ -12,7 +12,11 @@ export interface ContextStoreOptions {
 export interface ContextStoreValue<T> {
 	isLoaded: boolean;
 	result?: Promise<T>;
-	load: () => Promise<T>;
+	load: () => PromiseLike<T>;
+}
+
+async function loadAsync<T>(fn: () => PromiseLike<T>) {
+	return await fn();
 }
 
 /**
@@ -55,7 +59,7 @@ export function createContextStore<T, Context = unknown>(
 			return item.result as Promise<T>;
 		}
 
-		item.result = item.load();
+		item.result = loadAsync(item.load);
 		item.isLoaded = true;
 
 		return item.result;
@@ -74,7 +78,7 @@ export function createContextStore<T, Context = unknown>(
 		};
 
 		if (lazy === false) {
-			item.result = item.load();
+			item.result = loadAsync(item.load);
 			item.result.catch(() => {});
 			item.isLoaded = true;
 		}

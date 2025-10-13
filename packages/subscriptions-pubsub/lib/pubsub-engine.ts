@@ -1,18 +1,15 @@
+// biome-ignore lint/suspicious/noExplicitAny: allow args
+type Any = any;
 export interface PubSubEngine {
-	// biome-ignore lint/suspicious/noExplicitAny: allow any
-	publish: (triggerName: string, payload: any, ...rest: any[]) => Promise<void>;
+	publish: (triggerName: string, payload: Any, ...rest: Any[]) => Promise<void>;
 	subscribe: (
 		triggerName: string,
-		// biome-ignore lint/suspicious/noExplicitAny: allow any
-		onMessage: (message: any) => Promise<void> | void,
-		// biome-ignore lint/suspicious/noExplicitAny: allow any
-		...rest: any[]
+		onMessage: (message: Any) => Promise<void> | void,
+		...rest: Any[]
 	) => Promise<number>;
-	// biome-ignore lint/suspicious/noExplicitAny: allow any
-	unsubscribe: (subId: number, ...rest: any[]) => void;
+	unsubscribe: (subId: number, ...rest: Any[]) => void;
 	asyncIterableIterator: <T>(
 		triggers: string | readonly string[],
-		// biome-ignore lint/suspicious/noExplicitAny: allow any
-		...rest: any[]
+		...rest: Any[]
 	) => AsyncIterableIterator<T>;
 }

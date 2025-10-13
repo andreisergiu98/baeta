@@ -12,15 +12,15 @@ export class ModuleCompiler<
 	Info = Any,
 	TypesResolvers extends TypesResolversMap<Context, Info> = Any,
 > {
-	readonly name: string;
-	readonly store: Map<symbol, unknown>;
-	readonly middlewares: Middleware<Any, Any, Context, Any, Info>[];
-	readonly types: ReadonlyArray<TypeCompiler>;
-	readonly typedef: Readonly<DocumentNode>;
-	readonly extensions: ReadonlyArray<Extension>;
-	readonly defaultResolvers: Readonly<IResolvers>;
-	readonly scalarResolvers: Array<[string, GraphQLScalarType]>;
-	readonly transformers: SchemaTransformer[];
+	readonly #name: string;
+	readonly #store: Map<symbol, unknown>;
+	readonly #middlewares: Middleware<Any, Any, Context, Any, Info>[];
+	readonly #types: ReadonlyArray<TypeCompiler>;
+	readonly #typedef: Readonly<DocumentNode>;
+	readonly #extensions: ReadonlyArray<Extension>;
+	readonly #defaultResolvers: Readonly<IResolvers>;
+	readonly #scalarResolvers: Array<[string, GraphQLScalarType]>;
+	readonly #transformers: SchemaTransformer[];
 
 	constructor(
 		name: string,
@@ -32,36 +32,51 @@ export class ModuleCompiler<
 		extensions: Readonly<Extension[]>,
 		transformers: SchemaTransformer[],
 	) {
-		this.name = name;
-		this.store = store;
-		this.middlewares = middlewares;
-		this.typedef = typedef;
-		this.defaultResolvers = defaultResolvers;
-		this.extensions = extensions;
-		this.transformers = transformers;
+		this.#name = name;
+		this.#store = store;
+		this.#middlewares = middlewares;
+		this.#typedef = typedef;
+		this.#defaultResolvers = defaultResolvers;
+		this.#extensions = extensions;
+		this.#transformers = transformers;
 		const { types, genericResolvers } = getTypeCompilersAndResolvers(typesMap);
-		this.types = types;
-		this.scalarResolvers = genericResolvers;
+		this.#types = types;
+		this.#scalarResolvers = genericResolvers;
+	}
+
+	get name() {
+		return this.#name;
+	}
+
+	get types() {
+		return this.#types;
+	}
+
+	get extensions() {
+		return this.#extensions;
+	}
+
+	addMiddleware(middleware: Middleware<Any, Any, Context, Any, Info>) {
+		this.#middlewares.push(middleware);
 	}
 
 	useStore<T>(key: symbol) {
-		return {
-			get: () => this.store.get(key) as T | undefined,
-			set: (value: Readonly<T>) => this.store.set(key, value),
-		};
+		const get = () => this.#store.get(key) as T | undefined;
+		const set = (value: Readonly<T>) => this.#store.set(key, value);
+		return { get, set };
 	}
 
 	build() {
 		const resolvers: IResolvers = {
-			...this.defaultResolvers,
+			...this.#defaultResolvers,
 		};
-		for (const [name, resolver] of this.scalarResolvers) {
+		for (const [name, resolver] of this.#scalarResolvers) {
 			resolvers[name] = resolver;
 		}
-		for (const compiler of this.types) {
-			resolvers[compiler.type] = compiler.build(this.middlewares);
+		for (const compiler of this.#types) {
+			resolvers[compiler.type] = compiler.build(this.#middlewares);
 		}
-		return { resolvers, typedef: this.typedef, transformers: this.transformers };
+		return { resolvers, typedef: this.#typedef, transformers: this.#transformers };
 	}
 }
 

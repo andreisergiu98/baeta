@@ -2,6 +2,7 @@ import {
 	Extension,
 	type FieldBuilder,
 	type ModuleCompiler,
+	nameFunction,
 	type SubscriptionBuilder,
 	type SubscriptionWrapper,
 	type TypeBuilder,
@@ -55,6 +56,9 @@ export class AuthExtension extends Extension<AuthState> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
 				const middleware = createMiddleware(
 					editable.type,
 					this.loadScopes,
@@ -63,14 +67,14 @@ export class AuthExtension extends Extension<AuthState> {
 					options,
 					this.options.errorResolver,
 				);
-				editable.addMiddleware(middleware);
-				this.setState(editable, {
-					hasAuth: true,
-				});
-				return editable.commitToMethods();
+				nameFunction(middleware, `${editable.type}.$auth`);
+				return editable.addMiddleware(middleware).commitToMethods();
 			},
 			$postAuth: (scopes, options) => {
 				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
 				const middleware = createPostMiddleware(
 					editable.type,
 					this.loadScopes,
@@ -79,11 +83,8 @@ export class AuthExtension extends Extension<AuthState> {
 					options,
 					this.options.errorResolver,
 				);
-				editable.addMiddleware(middleware);
-				this.setState(editable, {
-					hasAuth: true,
-				});
-				return editable.commitToMethods();
+				nameFunction(middleware, `${editable.type}.$postAuth`);
+				return editable.addMiddleware(middleware).commitToMethods();
 			},
 		};
 	};
@@ -101,6 +102,9 @@ export class AuthExtension extends Extension<AuthState> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
 				const middleware = createMiddleware<
 					AuthExtension.Scopes,
 					AuthExtension.Grants,
@@ -117,14 +121,14 @@ export class AuthExtension extends Extension<AuthState> {
 					options,
 					this.options.errorResolver,
 				);
-				editable.addMiddleware(middleware);
-				this.setState(editable, {
-					hasAuth: true,
-				});
-				return editable.commitToMethods();
+				nameFunction(middleware, `${editable.type}.${builder.field}.$auth`);
+				return editable.addMiddleware(middleware).commitToMethods();
 			},
 			$postAuth: (scopes, options) => {
 				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
 				const middleware = createPostMiddleware(
 					editable.type,
 					this.loadScopes,
@@ -133,11 +137,8 @@ export class AuthExtension extends Extension<AuthState> {
 					options,
 					this.options.errorResolver,
 				);
-				editable.addMiddleware(middleware);
-				this.setState(editable, {
-					hasAuth: true,
-				});
-				return editable.commitToMethods();
+				nameFunction(middleware, `${editable.type}.${builder.field}.$postAuth`);
+				return editable.addMiddleware(middleware).commitToMethods();
 			},
 		};
 	}
@@ -155,6 +156,9 @@ export class AuthExtension extends Extension<AuthState> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
 				const middleware = createMiddleware<
 					AuthExtension.Scopes,
 					AuthExtension.Grants,
@@ -171,19 +175,19 @@ export class AuthExtension extends Extension<AuthState> {
 					options,
 					this.options.errorResolver,
 				);
-				editable.addMiddleware(middleware);
-				this.setState(editable, {
-					hasAuth: true,
-				});
-				return editable.commitToMethods();
+				nameFunction(middleware, `Subscription.${editable.field}.$auth`);
+				return editable.addMiddleware(middleware).commitToMethods();
 			},
 		};
 	}
 
 	mutate(compilers: ModuleCompiler[]): void {
+		if (this.options.defaultScopes == null) return;
+
 		for (const compiler of compilers) {
 			for (const typeCompiler of compiler.types) {
 				if (!isOperationType(typeCompiler.type)) continue;
+				if (this.options.defaultScopes[typeCompiler.type] == null) continue;
 
 				const state = this.getState(typeCompiler);
 				if (state?.hasAuth === true) continue;
@@ -200,7 +204,7 @@ export class AuthExtension extends Extension<AuthState> {
 					);
 					if (middleware == null) continue;
 
-					fieldCompiler.initialMiddlewares.push(middleware);
+					fieldCompiler.addInitialMiddleware(middleware);
 				}
 			}
 		}

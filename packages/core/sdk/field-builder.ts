@@ -1,7 +1,7 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
-import { lift } from '../utils/lift.ts';
-import { isThenable } from '../utils/promise.ts';
+import { nameFunction } from '../utils/functions.ts';
+import { mapMaybePromise } from '../utils/promise.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { FieldCompiler } from './field-compiler.ts';
 import type { FieldHelpers, FieldMethods, FieldWithMake } from './field-methods.ts';
@@ -46,26 +46,34 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 				return session;
 			},
 			useStore: <T>(key: symbol) => {
-				return {
-					get: () => draftStore.get(key) as T | undefined,
-					set: (value: Readonly<T>) => {
-						draftStore.set(key, value);
-					},
+				const get = () => draftStore.get(key) as T | undefined;
+				const set = (value: Readonly<T>) => {
+					draftStore.set(key, value);
 				};
+				return { get, set };
 			},
 			setStore: (key: symbol, value: Readonly<unknown>) => {
 				draftStore.set(key, value);
 				return session;
 			},
-			commit: () =>
-				new FieldBuilder(this.#type, this.#field, this.#extensions, draftStore, draftMiddlewares),
-			commitToMethods: () => session.commit().toMethods(),
+			commit: () => {
+				return new FieldBuilder(
+					this.#type,
+					this.#field,
+					this.#extensions,
+					draftStore,
+					draftMiddlewares,
+				);
+			},
+			commitToMethods: () => {
+				return session.commit().toMethods();
+			},
 		} as const;
 		return session;
 	}
 
-	#withMake = <T>(resolver: Resolver<T, Source, Context, Args, Info>) =>
-		createFieldWithMake(
+	#withMake<T>(resolver: Resolver<T, Source, Context, Args, Info>) {
+		return createFieldWithMake(
 			this.#type,
 			this.#field,
 			this.#extensions,
@@ -73,6 +81,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 			this.#middlewares,
 			resolver,
 		);
+	}
 
 	toMethods(): FieldMethods<Result, Source, Context, Args, Info> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
@@ -88,17 +97,21 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 		return {
 			...extensions,
 			use: (middleware) => {
-				const editable = this.edit();
-				editable.addMiddleware(middleware);
-				return editable.commitToMethods();
+				nameFunction(middleware, `${this.#type}.${this.#field}.use`);
+				return this.edit().addMiddleware(middleware).commitToMethods();
 			},
 			key: <K extends keyof Source>(key: K) => {
-				return this.#withMake((params) => params.source[key]);
+				const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+					return params.source[key];
+				};
+				return this.#withMake(resolver);
 			},
 			map: (resolver) => {
+				nameFunction(resolver, `${this.#type}.${this.#field}.map`);
 				return this.#withMake(resolver);
 			},
 			resolve: (resolver) => {
+				nameFunction(resolver, `${this.#type}.${this.#field}.resolve`);
 				return this.#withMake(resolver);
 			},
 		};
@@ -122,44 +135,53 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 			middlewares,
 			resolver,
 		);
-	const chain = <R>(fn: Resolver<R, Result, Context, Args, Info>) => {
-		const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
-			const result = currentResolver(p);
-			if (isThenable(result)) {
-				return result.then((res) => fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }));
-			}
-			return fn({ source: result, args: p.args, ctx: p.ctx, info: p.info });
-		};
-		return make(resolver);
-	};
 	const helpers: FieldWithMake<Expected, Result, Source, Context, Args, Info> = {
-		map: chain,
-		resolve: chain,
+		map: (fn) => {
+			nameFunction(fn, `${type}.${field}.map`);
+			const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(p);
+				return mapMaybePromise(result, (res) =>
+					fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }),
+				);
+			};
+			return make(resolver);
+		},
+		resolve: (fn) => {
+			nameFunction(fn, `${type}.${field}.resolve`);
+			const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(p);
+				return mapMaybePromise(result, (res) =>
+					fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }),
+				);
+			};
+			return make(resolver);
+		},
 		key: (key) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(result, (res) => res[key]);
+				return mapMaybePromise(result, (res) => res[key]);
 			};
 			return make(resolver);
 		},
 		to: (fn) => {
+			nameFunction(fn, `${type}.${field}.to`);
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(result, fn);
+				return mapMaybePromise(result, fn);
 			};
 			return make(resolver);
 		},
 		withDefault: (value) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(result, (res) => res ?? value);
+				return mapMaybePromise(result, (res) => res ?? value);
 			};
 			return make(resolver);
 		},
 		undefinedAsNull: () => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(
+				return mapMaybePromise(
 					result,
 					(res) => (res ?? null) as Result extends undefined ? NonNullable<Result> | null : Result,
 				);

@@ -7,7 +7,7 @@ import type { SubscriptionCompiler } from './subscription-compiler.ts';
 export type Subscription<Result = unknown> = AsyncIterable<Result>;
 
 export type SubscriptionWrapper<Result = unknown> = {
-	__internal__getAsyncIterable: () => AsyncIterable<Result>;
+	__internal__asyncIterable: AsyncIterable<Result>;
 };
 
 export type SubscriptionField<Expected, Result, Source, Context, Args, Info> = SubscriptionHelpers<

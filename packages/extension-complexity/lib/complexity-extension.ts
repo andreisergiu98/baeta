@@ -122,7 +122,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 					continue;
 				}
 				for (const fieldCompiler of typeCompiler.fields) {
-					fieldCompiler.initialMiddlewares.push(middleware);
+					fieldCompiler.addInitialMiddleware(middleware);
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Any } from '../types/any.ts';
+import { nameFunction } from '../utils/functions.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { TypeCompiler } from './type-compiler.ts';
 import type { FieldsBuildersMap, FieldsResolversMap, TypeMethods } from './type-methods.ts';
@@ -86,6 +87,7 @@ export class TypeBuilder<
 					new TypeCompiler(this.#type, new Map(this.#store), [...this.#middlewares], fields),
 			}),
 			$use: (middleware) => {
+				nameFunction(middleware, `${this.#type}.$use`);
 				return this.edit().addMiddleware(middleware).commitToMethods();
 			},
 		};

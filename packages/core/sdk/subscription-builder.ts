@@ -1,8 +1,8 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
 import type { Any } from '../types/any.ts';
-import { lift } from '../utils/lift.ts';
-import { isThenable } from '../utils/promise.ts';
+import { nameFunction } from '../utils/functions.ts';
+import { isPromise, mapMaybePromise } from '../utils/promise.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { SubscriptionCompiler } from './subscription-compiler.ts';
 import type {
@@ -84,12 +84,14 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 		return {
 			...extensions,
 			use: (middleware) => {
+				nameFunction(middleware, `Subscription.${this.#field}.use`);
 				return this.edit().addMiddleware(middleware).commitToMethods();
 			},
 			subscribe: <T = Result>(fn: Resolver<Subscription<T>, Source, Context, Args, Info>) => {
+				nameFunction(fn, `Subscription.${this.#field}.subscribe`);
 				const subscribe = (params: ResolverParams<Source, Context, Args, Info>) => {
-					return lift(fn(params), (iterator) => ({
-						__internal__getAsyncIterable: () => iterator,
+					return mapMaybePromise(fn(params), (iterator) => ({
+						__internal__asyncIterable: iterator,
 					}));
 				};
 				return createSubscriptionFieldWithMake<Result, T, T, Context, Args, Info>(
@@ -122,44 +124,53 @@ function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args
 			subscribe,
 			resolver,
 		);
-	const map = <R>(fn: Resolver<R, Result, Context, Args, Info>) => {
-		const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
-			const result = currentResolver(p);
-			if (isThenable(result)) {
-				return result.then((res) => fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }));
-			}
-			return fn({ source: result, args: p.args, ctx: p.ctx, info: p.info });
-		};
-		return make(resolver);
-	};
 	const helpers: SubscriptionFieldWithMake<Expected, Result, Source, Context, Args, Info> = {
-		map,
-		resolve: map,
+		map: <R>(fn: Resolver<R, Result, Context, Args, Info>) => {
+			nameFunction(fn, `Subscription.${field}.map`);
+			const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(p);
+				return mapMaybePromise(result, (res) =>
+					fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }),
+				);
+			};
+			return make(resolver);
+		},
+		resolve: (fn) => {
+			nameFunction(fn, `Subscription.${field}.resolve`);
+			const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
+				const result = currentResolver(p);
+				return mapMaybePromise(result, (res) =>
+					fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }),
+				);
+			};
+			return make(resolver);
+		},
 		key: (key) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(result, (res) => res[key]);
+				return mapMaybePromise(result, (res) => res[key]);
 			};
 			return make(resolver);
 		},
 		to: (fn) => {
+			nameFunction(fn, `Subscription.${field}.to`);
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(result, fn);
+				return mapMaybePromise(result, fn);
 			};
 			return make(resolver);
 		},
 		withDefault: (value) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(result, (res) => res ?? value);
+				return mapMaybePromise(result, (res) => res ?? value);
 			};
 			return make(resolver);
 		},
 		undefinedAsNull: () => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
 				const result = currentResolver(params);
-				return lift(
+				return mapMaybePromise(
 					result,
 					(res) => (res ?? null) as Result extends undefined ? NonNullable<Result> | null : Result,
 				);

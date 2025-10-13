@@ -2,6 +2,7 @@ import type { IResolvers } from '@graphql-tools/utils';
 import type { DocumentNode } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { Any } from '../types/any.ts';
+import { nameFunction } from '../utils/functions.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { ModuleCompiler } from './module-compiler.ts';
 import type { ModuleMethods, TypesBuildersMap, TypesResolversMap } from './module-methods.ts';
@@ -112,6 +113,7 @@ export class ModuleBuilder<
 					),
 			}),
 			$use: (middleware) => {
+				nameFunction(middleware, `${this.#name}.$use`);
 				return this.edit().addMiddleware(middleware).commitToMethods();
 			},
 			$directive: (transformer) => {

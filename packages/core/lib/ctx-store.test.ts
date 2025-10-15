@@ -4,7 +4,7 @@ import { type ContextStoreValue, createContextStore } from './ctx-store.ts';
 test('store should wait for get before loading to ctx when lazy', (t) => {
 	const storeKey = Symbol('storeKey');
 	const [_get, set] = createContextStore(storeKey, {
-		lazy: true,
+		eager: false,
 	});
 
 	const ctx = {} as Record<string | symbol, unknown>;
@@ -15,13 +15,12 @@ test('store should wait for get before loading to ctx when lazy', (t) => {
 	const store = ctx[storeKey] as ContextStoreValue<1>;
 
 	t.is(store.isLoaded, false);
-	t.is(store.result, undefined);
 });
 
 test('store should preload when not lazy', async (t) => {
 	const storeKey = Symbol('storeKey');
 	const [_get, set] = createContextStore(storeKey, {
-		lazy: false,
+		eager: true,
 	});
 
 	const ctx = {} as Record<string | symbol, unknown>;
@@ -32,13 +31,15 @@ test('store should preload when not lazy', async (t) => {
 	const store = ctx[storeKey] as ContextStoreValue<1>;
 
 	t.is(store.isLoaded, true);
-	t.is(await store.result, 1);
+	if (store.isLoaded) {
+		t.is(await store.result, 1);
+	}
 });
 
 test("store should be loaded when get is called and it's lazy", async (t) => {
 	const storeKey = Symbol('storeKey');
 	const [get, set] = createContextStore(storeKey, {
-		lazy: true,
+		eager: false,
 	});
 
 	const ctx = {} as Record<string | symbol, unknown>;

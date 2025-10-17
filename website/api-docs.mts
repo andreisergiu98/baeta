@@ -1,9 +1,14 @@
 import fs from 'node:fs/promises';
+import type { TypeDocOptions } from 'typedoc';
 import * as TypeDoc from 'typedoc';
+import type { PluginOptions as DocusaurusThemePluginOptions } from 'typedoc-docusaurus-theme';
+import { load as loadDocusaurusTheme } from 'typedoc-docusaurus-theme';
+import type { PluginOptions as MarkdownPluginOptions } from 'typedoc-plugin-markdown';
+import { load as loadMarkdownPlugin } from 'typedoc-plugin-markdown';
 
 const noRm = process.argv.includes('--no-rm');
 
-async function generateDocs() {
+export async function generateDocs() {
 	if (!noRm) {
 		await fs.rm('./docs/api', { recursive: true, force: true });
 	}
@@ -11,18 +16,20 @@ async function generateDocs() {
 	const packagesDir = await fs.readdir('../packages', { withFileTypes: true });
 	const dirs = packagesDir.filter((dirent) => dirent.isDirectory()).map((dirent) => dirent.name);
 
-	const app = await TypeDoc.Application.bootstrapWithPlugins({
+	const plugin = [loadMarkdownPlugin, loadDocusaurusTheme] as unknown as TypeDocOptions['plugin'];
+
+	const options: TypeDocOptions & MarkdownPluginOptions & DocusaurusThemePluginOptions = {
 		out: './docs/api',
-		entryFileName: 'index.md',
 		entryPoints: dirs.map((dir) => `../packages/${dir}/`),
 		entryPointStrategy: 'packages',
-		plugin: ['typedoc-plugin-markdown', 'typedoc-docusaurus-theme'],
+		plugin,
 		readme: 'none',
+		excludeExternals: true,
+		disableSources: true,
+		entryFileName: 'index.md',
 		hidePageHeader: true,
 		hideBreadcrumbs: true,
-		excludeExternals: true,
 		excludeScopesInPaths: true,
-		disableSources: true,
 		formatWithPrettier: true,
 		parametersFormat: 'htmlTable',
 		propertiesFormat: 'htmlTable',
@@ -33,7 +40,15 @@ async function generateDocs() {
 			member: (args) => args.name,
 			module: (args) => args.name,
 		},
-	});
+		sidebar: {
+			pretty: true,
+			typescript: true,
+			autoConfiguration: true,
+			deprecatedItemClassName: 'typedoc-sidebar-item-deprecated',
+		},
+	};
+
+	const app = await TypeDoc.Application.bootstrapWithPlugins(options);
 
 	const project = await app.convert();
 
@@ -43,5 +58,3 @@ async function generateDocs() {
 
 	await app.generateOutputs(project);
 }
-
-generateDocs().catch(console.error);

@@ -6,6 +6,7 @@
       "es2024"
     ],
     "module": "esnext",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
@@ -16,7 +17,6 @@
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "bundler"
+    "forceConsistentCasingInFileNames": true
   }
 }

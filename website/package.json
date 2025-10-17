@@ -33,7 +33,7 @@
     "start": "docusaurus start --no-open",
     "swizzle": "docusaurus swizzle",
     "types": "tsc",
-    "write-api": "node ./api-docs.mjs",
+    "write-api": "node ./write-api.mjs",
     "write-heading-ids": "docusaurus write-heading-ids",
     "write-translations": "docusaurus write-translations"
   },

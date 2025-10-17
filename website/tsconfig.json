@@ -9,10 +9,16 @@
     ],
     "module": "node16",
     "moduleResolution": "node16",
-    "esModuleInterop": true,
-    "allowJs": true,
     "noEmit": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "erasableSyntaxOnly": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
     "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "types": [
       "@docusaurus/module-type-aliases",
       "@docusaurus/theme-classic"
@@ -22,7 +28,6 @@
       "@site/*": [
         "./*"
       ]
-    },
-    "skipLibCheck": true
+    }
   }
 }

@@ -1,7 +1,7 @@
+import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
 import { themes } from 'prism-react-renderer';
 import { injectTypeDocSidebar } from './docusaurus.sidebars.ts';
-import type { Config } from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
 
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;

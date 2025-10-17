@@ -47,7 +47,7 @@
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/color-hash": "^2.0.0",
-    "@types/node": "^22.18.8",
+    "@types/node": "^22.18.11",
     "typescript": "^5.9.3"
   }
 }

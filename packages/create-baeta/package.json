@@ -46,10 +46,10 @@
     "types": "yarn prebuild && tsc --noEmit"
   },
   "dependencies": {
-    "@docusaurus/logger": "^3.9.1",
+    "@docusaurus/logger": "^3.9.2",
     "fs-extra": "^11.3.2",
     "prompts": "^2.4.2",
-    "semver": "^7.7.2",
+    "semver": "^7.7.3",
     "shelljs": "^0.10.0",
     "supports-color": "^10.2.2",
     "yargs": "^18.0.0"
@@ -58,7 +58,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.18.8",
+    "@types/node": "^22.18.11",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
     "@types/shelljs": "^0.8.17",

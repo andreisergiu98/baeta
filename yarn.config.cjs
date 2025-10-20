@@ -104,7 +104,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
-			workspace.set('engines.node', '>=22.12.0');
+			workspace.set('engines.node', '>=22.20.0');
 
 			if (workspace.manifest.scripts?.prebuild == null) {
 				workspace.set('scripts.build', 'tsup');

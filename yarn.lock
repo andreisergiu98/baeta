@@ -1795,7 +1795,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/color-hash": "npm:^2.0.0"
     "@types/node": "npm:^22.18.11"
-    esbuild: "npm:^0.25.10"
+    esbuild: "npm:^0.25.11"
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.9.3"
   bin:
@@ -1813,7 +1813,7 @@ __metadata:
     "@baeta/plugin-graphql": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/lodash.throttle": "npm:^4"
+    "@types/lodash.throttle": "npm:^4.1.9"
     "@types/node": "npm:^22.18.11"
     "@types/react": "npm:^19.2.2"
     "@types/yargs": "npm:^17.0.33"
@@ -2273,7 +2273,7 @@ __metadata:
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20251011.0"
-    esbuild: "npm:^0.25.10"
+    esbuild: "npm:^0.25.11"
     graphql: "npm:^16.11.0"
     miniflare: "npm:^4.20251008.0"
     typescript: "npm:^5.9.3"
@@ -7274,7 +7274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash.throttle@npm:^4":
+"@types/lodash.throttle@npm:^4.1.9":
   version: 4.1.9
   resolution: "@types/lodash.throttle@npm:4.1.9"
   dependencies:
@@ -11639,7 +11639,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.25.0, esbuild@npm:^0.25.10":
+"esbuild@npm:^0.25.0, esbuild@npm:^0.25.11":
   version: 0.25.11
   resolution: "esbuild@npm:0.25.11"
   dependencies:

@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
-    "esbuild": "^0.25.10",
+    "esbuild": "^0.25.11",
     "tsup": "^8.5.0"
   },
   "devDependencies": {

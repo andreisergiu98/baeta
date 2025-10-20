@@ -46,8 +46,6 @@ export function createContextStore<Result, Context = unknown>(
 	key: symbol,
 	options?: ContextStoreOptions,
 ) {
-	const { eager = false } = options ?? {};
-
 	const get = (ctx: Context): Promise<Result> => {
 		const _ctx = ctx as Record<symbol, ContextStoreValue<Result> | undefined>;
 		const item = _ctx[key];
@@ -75,7 +73,7 @@ export function createContextStore<Result, Context = unknown>(
 			return;
 		}
 
-		if (eager) {
+		if (options?.eager) {
 			_ctx[key] = {
 				isLoaded: true,
 				result: loadAsync(loader),

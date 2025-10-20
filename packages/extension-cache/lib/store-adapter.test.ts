@@ -144,7 +144,7 @@ test('StoreAdapter respects revision option', async (t) => {
 		'test',
 	);
 	const key = adapter.exposeCreateKey('1');
-	t.is(key, 'test:items:r2_test-hash:1');
+	t.is(key, 'test:items:r2:1');
 });
 
 test('Protected methods - key generation', async (t) => {
@@ -152,10 +152,10 @@ test('Protected methods - key generation', async (t) => {
 	const item: TestItem = { id: '1', value: 'test' };
 
 	const key = adapter.exposeCreateKey('1');
-	t.is(key, 'test:items:r0_test-hash:1');
+	t.is(key, 'test:items:r0:1');
 
 	const itemKey = adapter.exposeCreateKeyByItem(item);
-	t.is(itemKey, 'test:items:r0_test-hash:1');
+	t.is(itemKey, 'test:items:r0:1');
 });
 
 test('Protected methods - query key generation', async (t) => {
@@ -163,7 +163,7 @@ test('Protected methods - query key generation', async (t) => {
 	const parentRef = 'parent1';
 	const args = { filter: 'test' };
 	const queryKey = adapter.exposeCreateKeyByQuery('TestQuery', parentRef, args);
-	t.is(queryKey, 'test:TestQuery:r0_test-hash:parent#_parent1#args#_filter#_test');
+	t.is(queryKey, 'test:TestQuery:r0:parent#_parent1#args#_filter#_test');
 });
 
 test('Protected methods - ref handling', async (t) => {

@@ -47,12 +47,13 @@ test("store should be loaded when get is called and it's lazy", async (t) => {
 	const loader = async () => 1;
 	set(ctx, loader);
 
-	const store = ctx[storeKey] as ContextStoreValue<1>;
+	let store = ctx[storeKey] as ContextStoreValue<1>;
 
 	t.is(store.isLoaded, false);
 
 	get(ctx);
 
+	store = ctx[storeKey] as ContextStoreValue<1>;
 	t.is(store.isLoaded, true);
 });
 

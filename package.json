@@ -43,14 +43,13 @@
     "linter": "biome check .",
     "prepare": "husky",
     "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish",
-    "release": "yarn build && changeset publish",
+    "release": "yarn build && changeset publish && changeset tag",
     "release:snapshot": "yarn build && changeset publish --snapshot --no-git-tag --tag alpha",
     "test": "yarn turbo test --filter='./packages/*'",
     "types": "yarn turbo types",
     "watch": "yarn turbo watch build --filter='./packages/*'"
   },
   "devDependencies": {
-    "@andreisergiu98/changesets-cli": "^2.25.1",
     "@baeta/builder": "workspace:^",
     "@biomejs/biome": "^2.2.6",
     "@changesets/changelog-github": "^0.5.1",
@@ -63,5 +62,8 @@
     "turbo": "^2.5.8",
     "typescript": "^5.9.3"
   },
-  "packageManager": "yarn@4.10.3"
+  "packageManager": "yarn@4.10.3",
+  "dependencies": {
+    "@changesets/cli": "^2.29.7"
+  }
 }

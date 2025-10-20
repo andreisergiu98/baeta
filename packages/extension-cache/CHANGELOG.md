@@ -1,5 +1,27 @@
 # @baeta/extension-cache
 
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Fix broken types
+
+- Updated dependencies []:
+  - @baeta/util-encoding@2.0.0-next.2
+  - @baeta/util-log@2.0.0-next.2
+  - @baeta/core@2.0.0-next.2
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- Fix release version
+
+- Updated dependencies []:
+  - @baeta/util-encoding@2.0.0-next.1
+  - @baeta/util-log@2.0.0-next.1
+  - @baeta/core@2.0.0-next.1
+
 ## 2.0.0-next.0
 
 ### Major Changes

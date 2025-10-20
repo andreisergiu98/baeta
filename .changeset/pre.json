@@ -36,6 +36,8 @@
     "@baeta/tests-cache-stores": "1.0.3"
   },
   "changesets": [
+    "fast-kids-hug",
+    "heavy-pandas-kneel",
     "late-dryers-occur"
   ]
 }

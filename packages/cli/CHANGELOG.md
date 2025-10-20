@@ -1,5 +1,27 @@
 # @baeta/cli
 
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Fix broken types
+
+- Updated dependencies []:
+  - @baeta/plugin-graphql@2.0.0-next.2
+  - @baeta/generator@2.0.0-next.2
+  - @baeta/util-path@2.0.0-next.2
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- Fix release version
+
+- Updated dependencies []:
+  - @baeta/plugin-graphql@2.0.0-next.1
+  - @baeta/generator@2.0.0-next.1
+  - @baeta/util-path@2.0.0-next.1
+
 ## 2.0.0-next.0
 
 ### Major Changes

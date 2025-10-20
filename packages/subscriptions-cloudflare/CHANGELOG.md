@@ -1,5 +1,17 @@
 # @baeta/subscriptions-cloudflare
 
+## 0.2.0-next.2
+
+### Patch Changes
+
+- Fix broken types
+
+## 0.2.0-next.1
+
+### Patch Changes
+
+- Fix release version
+
 ## 0.2.0-next.0
 
 ### Minor Changes

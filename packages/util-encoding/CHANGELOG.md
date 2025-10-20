@@ -1,5 +1,17 @@
 # @baeta/util-encoding
 
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Fix broken types
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- Fix release version
+
 ## 2.0.0-next.0
 
 ### Major Changes

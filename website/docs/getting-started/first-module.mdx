@@ -9,7 +9,7 @@ Learn how to create your first GraphQL module with Baeta. We'll create a simple 
 
 ## Creating a Module
 
-### 1. Define Schema
+### 1. Define the schema
 
 Create your first schema file at `src/modules/user/user.gql`:
 
@@ -28,7 +28,7 @@ type Query {
 You can split your schema into multiple files (types, inputs, queries) as your module grows.
 :::
 
-### 2. Generate Types
+### 2. Generate the types
 
 Generate TypeScript definitions for your schema:
 
@@ -44,32 +44,48 @@ This creates `src/modules/user/typedef.ts` with all necessary type definitions.
 Baeta can watch for changes with the `--watch` flag.
 :::
 
-### 3. Add Resolver
+### 3. Create the resolvers
 
 Create `src/modules/user/resolvers.ts` to implement your query:
 
 ```typescript
-import { getUserModule } from "./typedef";
+import { UserModule } from "./typedef.ts";
 
-const { Query } = getUserModule();
+const { Query, User } = UserModule;
 
-Query.user(async (params) => {
-  return {
-    id: params.args.id ?? "id",
-    name: "John Doe",
-  };
+export const userResolver = User.$fields({
+  id: User.id.key("id"),
+  name: User.name.key("name"),
+});
+
+export const queryResolver = Query.$fields({
+  user: Query.user.resolve(({ args }) => {
+    return {
+      id: args.id,
+      name: "John Doe",
+    };
+  }),
 });
 ```
 
-### 4. Export Module
+:::tip
+The `key` is a helper that picks the specified field from the source object and returns it.
+
+By default the source of a type is the same as the GraphQL type itself, but the source can always be overridden.
+:::
+
+### 4. Export the module
 
 Create `src/modules/user/index.ts` to export your module:
 
 ```typescript
-import "./resolvers";
-import { getUserModule } from "./typedef";
+import { queryResolver, userResolver } from "./resolvers.ts";
+import { UserModule } from "./typedef.ts";
 
-export const userModule = getUserModule();
+export default UserModule.$schema({
+  User: userResolver,
+  Query: queryResolver,
+});
 ```
 
 :::tip

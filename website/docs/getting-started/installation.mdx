@@ -9,7 +9,7 @@ Get Baeta up and running in your project in just a few steps.
 
 ## Requirements
 
-- [Node.js](https://nodejs.org) version 22.12.0 or above (while Bun and Deno are supported, Node is still needed for the CLI)
+- [Node.js](https://nodejs.org) version 22.20.0 or above (while Bun and Deno are supported, Node is still needed for the CLI)
 - [TypeScript](https://www.typescriptlang.org) version 5.6 or above
 - Package manager of your choice (npm, yarn, pnpm or bun)
 
@@ -37,14 +37,9 @@ This is all you need at runtime for a basic Baeta installation.
 
 ### 2. Development Tools
 
-For the best development experience, install our CLI and compiler tools:
+The CLI is required for code generation.
 
-<PackageManagerAdd dev={true} package="@baeta/cli @baeta/compiler" />
-
-The compiler is optional but recommended as it provides:
-
-- TypeScript configuration support
-- Hot reload of the application
+<PackageManagerAdd dev={true} package="@baeta/cli" />
 
 ## Next Steps
 

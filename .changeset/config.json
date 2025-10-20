@@ -19,7 +19,6 @@
     [
       "create-baeta",
       "@baeta/cli",
-      "@baeta/compiler",
       "@baeta/core",
       "@baeta/directives",
       "@baeta/env",

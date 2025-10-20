@@ -35,4 +35,6 @@ router.post('/graphql', (ctx) => {
 	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
 });
 
+console.log(router.routes);
+
 export default router;

@@ -38,7 +38,6 @@
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
-    "@baeta/compiler": "workspace:^",
     "@baeta/plugin-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20251011.0",

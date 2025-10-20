@@ -1,5 +1,4 @@
 import yargs from 'yargs';
-import { createBuildCommand } from './commands/build/index.ts';
 import { createGenerateCommand } from './commands/generate/index.ts';
 import { loadConfig } from './lib/config-loader.ts';
 import { version } from './package.json';
@@ -12,7 +11,6 @@ process.on('exit', () => {
 loadConfig().then((config) => {
 	yargs(process.argv.slice(2))
 		.scriptName('baeta')
-		.command(createBuildCommand(config))
 		.command(createGenerateCommand(config))
 		.demandCommand()
 		.version(version)

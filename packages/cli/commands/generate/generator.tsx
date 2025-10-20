@@ -6,24 +6,21 @@ import {
 	getGeneratorPlugins,
 } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
-import { useStdin } from 'ink';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useConfig } from '../../sdk/index.ts';
-import type { TextOutput } from '../../types/text.ts';
+import { makeErrorMessage, useConfig } from '../../sdk/index.ts';
 import { flattenArrays } from '../../utils/array.ts';
 import { type PtyProcess, startProcessWithPty } from '../../utils/process.ts';
-import { AppStatus } from '../build/app-status.tsx';
+import { AppStatus } from './app-status.tsx';
 import { type GeneratorPluginName, GeneratorStatus } from './generator-status.tsx';
 
 export interface GeneratorProps {
 	watch?: boolean;
 	skipInitial?: boolean;
 	run?: string;
-	onSuccess?: () => void;
 }
 
 export function Generator(props: GeneratorProps) {
-	const { watch, skipInitial, onSuccess } = props;
+	const { watch, skipInitial } = props;
 	const { config } = useConfig();
 	const [running, setRunning] = useState(false);
 	const [error, setError] = useState<unknown>(undefined);
@@ -37,25 +34,20 @@ export function Generator(props: GeneratorProps) {
 	}, [config.plugins]);
 
 	const runRef = useRef<PtyProcess | null>(null);
-	const [runOutput, setRunOutput] = useState<TextOutput[]>([]);
-
-	const stdin = useStdin();
+	const [runOutput, setRunOutput] = useState<string>('');
 
 	useEffect(() => {
-		if (stdin == null) {
-			return;
-		}
-
-		const handleData = (data: Buffer<ArrayBufferLike>) => {
-			runRef.current?.write(data.toString());
-		};
-
-		stdin.stdin.on('data', handleData);
-
-		return () => {
-			stdin.stdin.off('data', handleData);
-		};
-	}, [stdin]);
+		process.stdin.setRawMode(true);
+		process.stdin.resume();
+		process.stdin.setEncoding('utf8');
+		process.stdin.on('data', (data) => {
+			const value = data.toString();
+			if (value === '\u0003') {
+				process.exit();
+			}
+			runRef.current?.write(value);
+		});
+	}, []);
 
 	const runCommand = useCallback(() => {
 		if (props.run == null) {
@@ -66,18 +58,11 @@ export function Generator(props: GeneratorProps) {
 			return;
 		}
 
-		runRef.current = startProcessWithPty(props.run, (data, clear) => {
-			setRunOutput((current) => {
-				const output = {
-					id: randomUUID(),
-					text: data,
-				};
-				if (clear) {
-					return [output];
-				}
-				return [...current, output];
-			});
+		const proc = startProcessWithPty(props.run, (data) => {
+			setRunOutput(data);
 		});
+
+		runRef.current = proc;
 	}, [props.run]);
 
 	const getHooks = useCallback((): GeneratorHooks => {
@@ -87,13 +72,12 @@ export function Generator(props: GeneratorProps) {
 				setStartedPlugins([]);
 				setFinishedPlugins([]);
 				setError(undefined);
-				runCommand();
 			},
 			onEnd: () => {
 				setRunning(false);
 				setStartedPlugins([]);
 				setFinishedPlugins([]);
-				onSuccess?.();
+				runCommand();
 			},
 			onError: (error) => {
 				setRunning(false);
@@ -126,28 +110,21 @@ export function Generator(props: GeneratorProps) {
 				}
 			},
 		};
-	}, [onSuccess, runCommand]);
+	}, [runCommand]);
 
 	useEffect(() => {
-		if (!config) {
+		if (!config || (watch === true && skipInitial === true)) {
 			return;
 		}
 
-		if (watch === true && skipInitial === true) {
-			return;
-		}
-
-		generate(config.graphql, plugins, getHooks()).then(() => {
-			stdin.stdin.destroy();
+		generate(config.graphql, plugins, getHooks()).catch((error) => {
+			console.log(makeErrorMessage(error.message));
+			process.exit(1);
 		});
-	}, [config, watch, skipInitial, plugins, stdin, getHooks]);
+	}, [config, watch, skipInitial, plugins, getHooks]);
 
 	useEffect(() => {
-		if (watch !== true) {
-			return;
-		}
-
-		if (!config) {
+		if (!config || watch !== true) {
 			return;
 		}
 
@@ -155,13 +132,12 @@ export function Generator(props: GeneratorProps) {
 
 		return () => {
 			instance.close();
-			stdin.stdin.destroy();
 		};
-	}, [config, watch, plugins, stdin, getHooks]);
+	}, [config, watch, plugins, getHooks]);
 
 	return (
 		<>
-			{props.run && <AppStatus output={runOutput} />}
+			{props.run && <AppStatus>{runOutput}</AppStatus>}
 			<GeneratorStatus
 				error={error}
 				running={running}

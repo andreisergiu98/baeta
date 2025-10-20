@@ -6,15 +6,6 @@ export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
 	},
-	compiler: {
-		src: 'src/app',
-		dist: 'dist',
-		bundleWorkspaces: true,
-		cjsGlobals: true, // Required for Prisma to work with ESM
-		esbuild: {
-			format: 'esm',
-		},
-	},
 	plugins: [
 		prismaPlugin({
 			prismaSchema: 'schema.prisma',

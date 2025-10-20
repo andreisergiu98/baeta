@@ -30,10 +30,6 @@
       "types": "./index.ts",
       "default": "./index.ts"
     },
-    "./ink": {
-      "types": "./ink/index.ts",
-      "default": "./ink/index.ts"
-    },
     "./sdk": {
       "types": "./sdk/index.ts",
       "default": "./sdk/index.ts"

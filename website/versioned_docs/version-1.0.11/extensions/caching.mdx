@@ -1,0 +1,229 @@
+---
+sidebar_position: 30
+---
+
+# Caching
+
+Baeta provides a powerful and flexible caching system with support for multiple storage adapters. The caching system offers automatic cache invalidation, parent-based invalidation, and type-safe cache operations.
+
+## Key Features
+
+- Type-safe cache operations
+- Easy updates for stale cache
+- Automatic schema based invalidation
+- Multiple storage adapters
+- TTL support
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/extension-cache" />
+
+## Storage Adapters
+
+Baeta supports several storage adapters for different use cases:
+
+### Redis (Recommended)
+
+Best for production environments with high query volumes.
+
+<PackageManagerAdd package="@baeta/extension-cache-redis ioredis" />
+
+```typescript
+import { RedisStore } from "@baeta/extension-cache-redis";
+import Redis from "ioredis";
+
+const redis = new Redis("redis://localhost:6379");
+const store = new RedisStore(redis);
+```
+
+### Upstash (Recommended for Serverless)
+
+Optimized for serverless environments.
+
+<PackageManagerAdd package="@baeta/extension-cache-upstash @upstash/redis" />
+
+```typescript
+import { UpstashStore, UpstashClient } from "@baeta/extension-cache-upstash";
+import { Redis } from "@upstash/redis";
+
+const redis = new UpstashClient({
+  url: "UPSTASH_REDIS_URL",
+  token: "UPSTASH_REDIS_TOKEN",
+});
+
+// Or alternatively
+
+const redis2 = new Redis({
+  url: "UPSTASH_REDIS_URL",
+  token: "UPSTASH_REDIS_TOKEN",
+  // This is very important as Baeta handles serialization/deserialization internally
+  automaticDeserialization: false,
+});
+
+const store = new UpstashStore(redis);
+```
+
+### Cloudflare Durable Objects
+
+TBA
+
+### Keyv (Limited)
+
+Simple key-value storage, suitable for development or small applications.
+:::note
+Not recommended for production with high query volumes.
+:::
+
+<PackageManagerAdd package="@baeta/extension-cache-keyv keyv" />
+
+```typescript
+import { KeyvStore } from "@baeta/extension-cache-keyv";
+import Keyv from "keyv";
+
+const keyv = new Keyv();
+const store = new KeyvStore(keyv);
+```
+
+## Basic Setup
+
+1. Configure Cache Extension
+
+```typescript
+import { cacheExtension } from "@baeta/extension-cache";
+import { RedisStore } from "@baeta/extension-cache-redis";
+import Redis from "ioredis";
+
+const redis = new Redis("redis://localhost:6379");
+const redisStore = new RedisStore(redis);
+
+export const cacheExt = cacheExtension(redisStore, {
+  ttl: 3600, // TTL in seconds (defaults to 1 hour)
+});
+```
+
+2. Create Type-Specific Cache
+
+```typescript
+import { getUserModule } from "./typedef.ts";
+
+const { User, Query, Mutation } = getUserModule();
+
+export const userCache = User.$createCache({
+  revision: 2, // Optional, cache version
+  ttl: 3600, // Optional, overrides default TTL
+});
+```
+
+:::tip
+When you modify type fields, the store will be automatically invalidated (its hash changes).
+For scenarios where you want to invalidate the store manually, you can use the `revision` option.
+:::
+
+3. Register the Extension
+
+```typescript
+import { createExtensions } from "@baeta/core";
+import { cacheExt } from "./cache-extension";
+
+export default createExtensions(
+  //... other extensions
+  cacheExt,
+  //... other extensions
+);
+```
+
+## Caching Examples
+
+### Basic Query Caching
+
+```typescript
+// Simple approach
+Query.user.$useCache(userCache);
+Query.users.$useCache(userCache);
+
+// Or alternatively. This is same as above
+Query.users.$use(userCache.createMiddleware(Query.users.$cacheRef));
+```
+
+### Mutation Handling
+
+Saving an entity to the store will also update all queries that reference it.
+
+```typescript
+Mutation.updateUser.$use(async (params, next) => {
+  const user = await next();
+  await userCache.save(user);
+  return user;
+});
+```
+
+### Cache Clearing
+
+Because some queries that return lists have sorting or pagination capabilities, when inserting or deleting entities it is very difficult to compute how an update changes them.
+It is easier to wipe them entirely.
+
+```typescript
+await Query.users.$cacheClear(userCache);
+
+// Or alternatively. This, again, is the same as above
+await userCache.deleteQueries(Query.users.$cacheRef);
+```
+
+For certain use cases, ie. an application where entities are scoped into organizations, it might be useful to clear queries that match only certain arguments.
+
+```typescript
+await Query.users.$cacheClear(userCache, {
+  args: {
+    where: {
+      organizationId: "specific-org",
+    },
+  },
+});
+```
+
+### Parent-Based Cache Clearing
+
+For relationship queries, we can invalidate only the queries that reference a certain parentId.
+
+```typescript
+Mutation.createUserPhoto(async ({ args }) => {
+  const result = await db.userPhoto.create({
+    data: {
+      ...args.data,
+      userId: args.userId,
+    },
+  });
+
+  User.photos.$cacheClear(userPhotoCache, {
+    parentRef: args.userId,
+  });
+
+  return result;
+});
+```
+
+## Best Practices
+
+1. Choose the Right Adapter
+
+- Use Redis for production environments
+- Use Upstash for serverless applications
+- Avoid Keyv for high-traffic applications
+
+2. Cache Invalidation Strategy
+
+- Use revision numbers to manually invalidate when needed
+- Implement parent-based invalidation for nested data
+- Clear list caches on mutations that affect ordering
+
+3. Performance Optimization
+
+- Set appropriate TTL values
+- Configure Redis to evacuate least used keys
+- Use selective cache clearing when possible
+
+For detailed examples, see the Baeta caching [example](https://github.com/andreisergiu98/baeta/tree/main/examples/cache).
+
+There is also an [advanced example](https://github.com/andreisergiu98/baeta/tree/main/examples/cache-advanced) that showcases caching for weirdly shaped queries (like relay connectors).

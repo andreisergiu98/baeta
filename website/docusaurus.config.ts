@@ -36,7 +36,19 @@ const config: Config = {
 			{
 				docs: {
 					async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args }) {
-						return injectTypeDocSidebar(await defaultSidebarItemsGenerator(args));
+						return injectTypeDocSidebar(
+							await defaultSidebarItemsGenerator(args),
+							args.version.versionName,
+						);
+					},
+					versions: {
+						current: {
+							label: 'Next (2.X)',
+						},
+						'1.0.11': {
+							label: '1.0.11',
+							path: '1.0.11',
+						},
 					},
 				},
 				pages: {
@@ -85,6 +97,11 @@ const config: Config = {
 					position: 'left',
 					label: 'Examples',
 					href: 'https://github.com/andreisergiu98/baeta/tree/main/examples',
+				},
+				{
+					type: 'docsVersionDropdown',
+					position: 'right',
+					dropdownActiveClassDisabled: true,
 				},
 				{
 					href: 'https://github.com/sponsors/andreisergiu98',

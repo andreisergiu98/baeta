@@ -1,0 +1,147 @@
+---
+sidebar_position: 60
+---
+
+# Error Handling
+
+Baeta provides a set of predefined GraphQL errors to handle common error scenarios in your application through the `@baeta/errors` package.
+
+## Available Errors
+
+### UnauthenticatedError
+
+Used when a user needs to be authenticated to perform an action.
+
+```typescript
+import { UnauthenticatedError } from "@baeta/errors";
+
+Query.protectedData.$use(async ({ ctx }, next) => {
+  if (!ctx.user) {
+    throw new UnauthenticatedError();
+    // Default message: "Access denied! You need to be authenticated to perform this action!"
+  }
+  return next();
+});
+```
+
+### ForbiddenError
+
+Used when a user doesn't have sufficient permissions.
+
+```typescript
+import { ForbiddenError } from "@baeta/errors";
+
+Query.adminData.$use(async ({ ctx }, next) => {
+  if (!ctx.user.isAdmin) {
+    throw new ForbiddenError();
+    // Default message: "Access denied! You don't have permission to perform this action!"
+  }
+  return next();
+});
+```
+
+### BadUserInput
+
+Used when the provided input is invalid.
+
+```typescript
+import { BadUserInput } from "@baeta/errors";
+
+Mutation.createUser(({ args }) => {
+  if (!isValidEmail(args.email)) {
+    throw new BadUserInput("Invalid email format");
+  }
+  // ...
+});
+```
+
+### InternalServerError
+
+Used for internal server errors. In development mode, it includes the original error details.
+
+```typescript
+import { InternalServerError } from "@baeta/errors";
+
+Query.user(async ({ args }) => {
+  try {
+    return await getUserById(args.id);
+  } catch (error) {
+    throw new InternalServerError(error as Error, "Failed to fetch user");
+  }
+});
+```
+
+### AggregateGraphQLError
+
+Used when multiple errors need to be reported together, this is mostly used internally by Baeta.
+
+```typescript
+import { AggregateGraphQLError, BadUserInput } from "@baeta/errors";
+
+Mutation.updateUser(({ args }) => {
+  const errors: GraphQLError[] = [];
+
+  if (!isValidEmail(args.email)) {
+    errors.push(new BadUserInput("Invalid email format"));
+  }
+
+  if (!isValidName(args.name)) {
+    errors.push(new BadUserInput("Invalid name format"));
+  }
+
+  if (errors.length > 0) {
+    throw new AggregateGraphQLError(errors, "Validation failed");
+  }
+
+  // ...
+});
+```
+
+## Error Codes
+
+Each error has a corresponding error code:
+
+```typescript
+enum BaetaErrorCode {
+  Unauthenticated = "UNAUTHENTICATED",
+  Forbidden = "FORBIDDEN",
+  BadUserInput = "BAD_USER_INPUT",
+  AggregateError = "AGGREGATE_ERROR",
+  InternalServerError = "INTERNAL_SERVER_ERROR",
+}
+```
+
+## Development Mode
+
+Development mode is determined by checking the following environment variables in order:
+
+- `BAETA_ENV`
+- `NODE_ENV`
+- `ENVIRONMENT`
+
+If any of these is set to `'development'`, detailed error information will be included:
+
+- `InternalServerError` includes the original error message and stack trace
+- `AggregateGraphQLError` includes stack traces for each error
+
+For the other errors, the stack trace is usually stripped by your GraphQL server of choice.
+
+In production (when these variables are set to `'production'` or are unset), these details are omitted for security.
+
+## Custom Error Options
+
+All errors accept GraphQL error options:
+
+```typescript
+throw new UnauthenticatedError("Custom message", {
+  extensions: {
+    custom: "data",
+  },
+});
+```
+
+## HTTP Status Codes
+
+Some errors include specific HTTP status codes in their extensions:
+
+- `UnauthenticatedError`: 401

@@ -31,24 +31,6 @@ Configuration for the GraphQL code generator.
 <tr>
 <td>
 
-<a id="compiler"></a> `compiler?`
-
-</td>
-<td>
-
-[`CompilerOptions`](../../../compiler/index/interfaces/CompilerOptions.md)
-
-</td>
-<td>
-
-Configuration for the TypeScript compiler.
-It uses esbuild under the hood and creates an optimized bundle.
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="plugins"></a> `plugins?`
 
 </td>

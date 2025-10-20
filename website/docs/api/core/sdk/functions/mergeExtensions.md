@@ -46,7 +46,7 @@
 </td>
 <td>
 
-`T`[]
+readonly `T`[]
 
 </td>
 </tr>

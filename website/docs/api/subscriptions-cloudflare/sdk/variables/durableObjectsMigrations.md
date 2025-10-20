@@ -2,7 +2,7 @@
 
 > `const` **durableObjectsMigrations**: `object`[]
 
-## Type declaration
+## Type Declaration
 
 <table>
 <thead>

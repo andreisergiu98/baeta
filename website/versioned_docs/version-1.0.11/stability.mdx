@@ -1,0 +1,87 @@
+---
+sidebar_position: 2
+---
+
+# Stability
+
+This document outlines the stability status of Baeta packages. Understanding these statuses helps you make informed decisions about which features to use in production.
+
+## Stability Levels
+
+### 🟢 Stable
+
+Tested packages with stable APIs. Breaking changes are only introduced with major version bumps. While these packages are reliable, note that Baeta is still in its early stages with a small user base.
+
+### 🟡 Beta
+
+Feature complete but may receive breaking changes in minor versions. Suitable for most non-critical production use cases.
+
+### 🟠 Early Testing
+
+Experimental packages that may undergo significant changes. Not recommended for production use.
+
+## Package Status
+
+### Core Packages
+
+| Package           | Status    | Tests |
+| ----------------- | --------- | :---: |
+| @baeta/core       | 🟢 Stable |  ✅   |
+| @baeta/directives | 🟢 Stable |  ✅   |
+| @baeta/env        | 🟢 Stable |  ✅   |
+| @baeta/errors     | 🟢 Stable |  ✅   |
+
+### Extensions
+
+| Package                           | Status    | Tests |
+| --------------------------------- | --------- | :---: |
+| @baeta/extension-auth             | 🟢 Stable |  ✅   |
+| @baeta/extension-cache            | 🟡 Beta   |  ✅   |
+| @baeta/extension-cache-cloudflare | 🟡 Beta   |  ✅   |
+| @baeta/extension-cache-keyv       | 🟡 Beta   |  ✅   |
+| @baeta/extension-cache-redis      | 🟡 Beta   |  ✅   |
+| @baeta/extension-cache-upstash    | 🟡 Beta   |  ✅   |
+| @baeta/extension-complexity       | 🟡 Beta   |  ✅   |
+
+### Subscriptions
+
+| Package                         | Status    | Tests |
+| ------------------------------- | --------- | :---: |
+| @baeta/subscriptions-cloudflare | 🟡 Beta   |  ❌   |
+| @baeta/subscriptions-pubsub     | 🟢 Stable |  ✅   |
+
+### Runtime Internals
+
+| Package              | Status    | Tests |
+| -------------------- | --------- | :---: |
+| @baeta/util-encoding | 🟢 Stable |  ✅   |
+| @baeta/util-env      | 🟢 Stable |  ✅   |
+| @baeta/util-log      | 🟢 Stable |  ✅   |
+
+### Development Tools
+
+| Package                  | Status    |
+| ------------------------ | --------- |
+| @baeta/cli               | 🟢 Stable |
+| @baeta/compiler          | 🟢 Stable |
+| @baeta/plugin-autoload   | 🟢 Stable |
+| @baeta/plugin-cloudflare | 🟢 Stable |
+| @baeta/plugin-directives | 🟢 Stable |
+| @baeta/plugin-exec       | 🟢 Stable |
+| @baeta/plugin-gitignore  | 🟢 Stable |
+| @baeta/plugin-graphql    | 🟢 Stable |
+| @baeta/plugin-pagination | 🟢 Stable |
+| @baeta/plugin-prisma     | 🟢 Stable |
+
+### Development Internals
+
+| Package              | Status    |
+| -------------------- | --------- |
+| @baeta/generator     | 🟢 Stable |
+| @baeta/generator-sdk | 🟢 Stable |
+| @baeta/plugin        | 🟢 Stable |
+| @baeta/util-path     | 🟢 Stable |
+
+## Testing Coverage
+
+We're actively working on improving our test coverage. Packages marked with ✅ have unit tests, while those marked with ❌ are pending test implementation.

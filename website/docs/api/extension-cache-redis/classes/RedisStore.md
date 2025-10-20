@@ -96,7 +96,7 @@ const cacheExt = cacheExtension(store, {
 
 ### createStoreAdapter()
 
-> **createStoreAdapter**\<`T`\>(`serialzier`, `options`, `type`, `hash`): [`StoreAdapter`](../../extension-cache/classes/StoreAdapter.md)\<`T`\>
+> **createStoreAdapter**\<`T`\>(`serialzier`, `options`, `type`): [`StoreAdapter`](../../extension-cache/classes/StoreAdapter.md)\<`T`\>
 
 Creates a new store adapter for a specific type
 
@@ -178,23 +178,6 @@ Store configuration options
 <td>
 
 Type name for the cached items
-
-</td>
-</tr>
-<tr>
-<td>
-
-`hash`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-Unique hash for the type
 
 </td>
 </tr>

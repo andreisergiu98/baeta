@@ -39,7 +39,7 @@ Cache reference for a type field or query
 
 ### Constructor
 
-> **new CacheRef**\<`_Result`, `_Root`, `_Args`\>(`type`, `field`, `hash`, `revision`): `CacheRef`\<`_Result`, `_Root`, `_Args`\>
+> **new CacheRef**\<`_Result`, `_Root`, `_Args`\>(`type`, `field`): `CacheRef`\<`_Result`, `_Root`, `_Args`\>
 
 #### Parameters
 
@@ -48,7 +48,6 @@ Cache reference for a type field or query
 <tr>
 <th>Parameter</th>
 <th>Type</th>
-<th>Default value</th>
 </tr>
 </thead>
 <tbody>
@@ -63,11 +62,6 @@ Cache reference for a type field or query
 `string`
 
 </td>
-<td>
-
-`undefined`
-
-</td>
 </tr>
 <tr>
 <td>
@@ -80,45 +74,6 @@ Cache reference for a type field or query
 `string`
 
 </td>
-<td>
-
-`undefined`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`hash`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-`undefined`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`revision`
-
-</td>
-<td>
-
-`number`
-
-</td>
-<td>
-
-`1`
-
-</td>
 </tr>
 </tbody>
 </table>
@@ -128,61 +83,6 @@ Cache reference for a type field or query
 `CacheRef`\<`_Result`, `_Root`, `_Args`\>
 
 ## Methods
-
-### getHash()
-
-> **getHash**(): `string`
-
-#### Returns
-
-`string`
-
----
-
-### getRevision()
-
-> **getRevision**(): `number`
-
-#### Returns
-
-`number`
-
----
-
-### setRevision()
-
-> **setRevision**(`revision`): `void`
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`revision`
-
-</td>
-<td>
-
-`number`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`void`
-
----
 
 ### toString()
 

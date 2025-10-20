@@ -41,7 +41,6 @@
 <thead>
 <tr>
 <th>Property</th>
-<th>Modifier</th>
 <th>Type</th>
 </tr>
 </thead>
@@ -50,11 +49,6 @@
 <td>
 
 <a id="durableobject"></a> `durableObject`
-
-</td>
-<td>
-
-`public`
 
 </td>
 <td>
@@ -150,7 +144,7 @@
 
 ### get()
 
-> **get**(`keys`): `Promise`\<(`null` \| `string`)[]\>
+> **get**(`keys`): `Promise`\<(`string` \| `null`)[]\>
 
 #### Parameters
 
@@ -179,13 +173,13 @@
 
 #### Returns
 
-`Promise`\<(`null` \| `string`)[]\>
+`Promise`\<(`string` \| `null`)[]\>
 
 ---
 
 ### getOne()
 
-> **getOne**(`key`): `Promise`\<`null` \| `string`\>
+> **getOne**(`key`): `Promise`\<`string` \| `null`\>
 
 #### Parameters
 
@@ -214,7 +208,7 @@
 
 #### Returns
 
-`Promise`\<`null` \| `string`\>
+`Promise`\<`string` \| `null`\>
 
 ---
 

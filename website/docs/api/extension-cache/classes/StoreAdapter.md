@@ -1,4 +1,4 @@
-# `abstract` StoreAdapter\<Item\>
+# StoreAdapter\<Item\>
 
 ## Extended by
 
@@ -27,7 +27,7 @@
 
 ### Constructor
 
-> **new StoreAdapter**\<`Item`\>(`serializer`, `options`, `type`, `hash`): `StoreAdapter`\<`Item`\>
+> **new StoreAdapter**\<`Item`\>(`serializer`, `options`, `type`): `StoreAdapter`\<`Item`\>
 
 #### Parameters
 
@@ -67,18 +67,6 @@
 <td>
 
 `type`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`hash`
 
 </td>
 <td>
@@ -152,24 +140,7 @@
 </td>
 <td>
 
-(`refs`) => `Promise`\<`null` \| (`null` \| `Item`)[]\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="hash"></a> `hash`
-
-</td>
-<td>
-
-`protected`
-
-</td>
-<td>
-
-`string`
+(`refs`) => `Promise`\<(`Item` \| `null`)[] \| `null`\>
 
 </td>
 </tr>
@@ -186,7 +157,7 @@
 </td>
 <td>
 
-`DataLoader`\<[`ItemRef`](../type-aliases/ItemRef.md), `null` \| `Item`, [`ItemRef`](../type-aliases/ItemRef.md)\>
+`DataLoader`\<[`ItemRef`](../type-aliases/ItemRef.md), `Item` \| `null`, [`ItemRef`](../type-aliases/ItemRef.md)\>
 
 </td>
 </tr>
@@ -203,7 +174,7 @@
 </td>
 <td>
 
-(`queryRef`, `parentRef?`, `args?`) => `Promise`\<`null` \| `string`[]\>
+(`queryRef`, `parentRef?`, `args?`) => `Promise`\<`string`[] \| `null`\>
 
 </td>
 </tr>
@@ -428,7 +399,7 @@
 
 ### createMiddleware()
 
-> **createMiddleware**\<`Result`, `Root`, `Args`\>(`queryRef`, ...`args`): [`Middleware`](../../core/index/type-aliases/Middleware.md)\<`Result`, `Root`, `unknown`, `Args`\>
+> **createMiddleware**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`queryRef`, ...`optionsArray`): [`Middleware`](../../core/index/type-aliases/Middleware.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 #### Type Parameters
 
@@ -449,7 +420,14 @@
 <tr>
 <td>
 
-`Root`
+`Source`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Context`
 
 </td>
 </tr>
@@ -457,6 +435,13 @@
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -481,19 +466,19 @@
 </td>
 <td>
 
-[`CacheRef`](CacheRef.md)\<`Result`, `Root`, `Args`\>
+[`CacheRef`](CacheRef.md)\<`Result`, `Source`, `Args`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-...`args`
+...`optionsArray`
 
 </td>
 <td>
 
-`Root` _extends_ [`RefCompatibleRoot`](../type-aliases/RefCompatibleRoot.md) ? \[[`CacheMiddlewareOptions`](../interfaces/CacheMiddlewareOptions.md)\<`Root`\<`Root`\>\>\] : \[[`RequiredCacheMiddlewareOptions`](../interfaces/RequiredCacheMiddlewareOptions.md)\<`Root`\>\]
+`Source` _extends_ [`RefCompatibleRoot`](../type-aliases/RefCompatibleRoot.md) ? \[[`CacheMiddlewareOptions`](../interfaces/CacheMiddlewareOptions.md)\<`Source`\<`Source`\>\>\] : \[[`RequiredCacheMiddlewareOptions`](../interfaces/RequiredCacheMiddlewareOptions.md)\<`Source`\>\]
 
 </td>
 </tr>
@@ -502,7 +487,7 @@
 
 #### Returns
 
-[`Middleware`](../../core/index/type-aliases/Middleware.md)\<`Result`, `Root`, `unknown`, `Args`\>
+[`Middleware`](../../core/index/type-aliases/Middleware.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 ---
 
@@ -708,7 +693,7 @@
 
 ### decodeQueryItemRef()
 
-> `protected` **decodeQueryItemRef**(`encodedRef`): `null` \| `string`
+> `protected` **decodeQueryItemRef**(`encodedRef`): `string` \| `null`
 
 #### Parameters
 
@@ -737,7 +722,7 @@
 
 #### Returns
 
-`null` \| `string`
+`string` \| `null`
 
 ---
 
@@ -890,7 +875,7 @@
 </td>
 <td>
 
-`null` \| `Item`
+`Item` \| `null`
 
 </td>
 </tr>
@@ -905,7 +890,7 @@
 
 ### get()
 
-> **get**(`ref`): `Promise`\<`null` \| `Item`\>
+> **get**(`ref`): `Promise`\<`Item` \| `null`\>
 
 #### Parameters
 
@@ -934,7 +919,7 @@
 
 #### Returns
 
-`Promise`\<`null` \| `Item`\>
+`Promise`\<`Item` \| `null`\>
 
 ---
 
@@ -942,7 +927,7 @@
 
 #### Call Signature
 
-> **getMany**(`refs`): `Promise`\<`null` \| `Item`[]\>
+> **getMany**(`refs`): `Promise`\<`Item`[] \| `null`\>
 
 ##### Parameters
 
@@ -971,7 +956,7 @@
 
 ##### Returns
 
-`Promise`\<`null` \| `Item`[]\>
+`Promise`\<`Item`[] \| `null`\>
 
 #### Call Signature
 
@@ -1041,7 +1026,7 @@
 
 ### getQueryResult()
 
-> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher?`): `Promise`\<`null` \| \{ `query`: `Result`; \}\>
+> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher?`): `Promise`\<\{ `query`: `Result`; \} \| `null`\>
 
 #### Type Parameters
 
@@ -1115,7 +1100,7 @@
 
 #### Returns
 
-`Promise`\<`null` \| \{ `query`: `Result`; \}\>
+`Promise`\<\{ `query`: `Result`; \} \| `null`\>
 
 ---
 

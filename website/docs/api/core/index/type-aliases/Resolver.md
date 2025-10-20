@@ -1,6 +1,6 @@
-# Resolver()\<Result, Root, Context, Args\>
+# Resolver()\<Result, Source, Context, Args, Info\>
 
-> **Resolver**\<`Result`, `Root`, `Context`, `Args`\> = (`params`) => `Result` \| `Promise`\<`Result`\>
+> **Resolver**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`) => `Result` \| `PromiseLike`\<`Result`\>
 
 ## Type Parameters
 
@@ -21,7 +21,7 @@
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -36,6 +36,13 @@
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -60,7 +67,7 @@
 </td>
 <td>
 
-[`ResolverParams`](ResolverParams.md)\<`Root`, `Context`, `Args`\>
+[`ResolverParams`](ResolverParams.md)\<`Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>
@@ -69,4 +76,4 @@
 
 ## Returns
 
-`Result` \| `Promise`\<`Result`\>
+`Result` \| `PromiseLike`\<`Result`\>

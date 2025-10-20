@@ -27,7 +27,7 @@
 
 ### Constructor
 
-> **new CloudflareStoreAdapter**\<`Item`\>(`durableObject`, `serializer`, `options`, `type`, `hash`): `CloudflareStoreAdapter`\<`Item`\>
+> **new CloudflareStoreAdapter**\<`Item`\>(`durableObject`, `serializer`, `options`, `type`): `CloudflareStoreAdapter`\<`Item`\>
 
 #### Parameters
 
@@ -87,18 +87,6 @@
 
 </td>
 </tr>
-<tr>
-<td>
-
-`hash`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
 </tbody>
 </table>
 
@@ -125,28 +113,6 @@
 <tr>
 <td>
 
-<a id="hash"></a> `hash`
-
-</td>
-<td>
-
-`protected`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-[`StoreAdapter`](../../../extension-cache/classes/StoreAdapter.md).[`hash`](../../../extension-cache/classes/StoreAdapter.md#hash)
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="loader"></a> `loader`
 
 </td>
@@ -157,7 +123,7 @@
 </td>
 <td>
 
-`DataLoader`\<[`ItemRef`](../../../extension-cache/type-aliases/ItemRef.md), `null` \| `Item`, [`ItemRef`](../../../extension-cache/type-aliases/ItemRef.md)\>
+`DataLoader`\<[`ItemRef`](../../../extension-cache/type-aliases/ItemRef.md), `Item` \| `null`, [`ItemRef`](../../../extension-cache/type-aliases/ItemRef.md)\>
 
 </td>
 <td>
@@ -380,7 +346,7 @@
 
 ### createMiddleware()
 
-> **createMiddleware**\<`Result`, `Root`, `Args`\>(`queryRef`, ...`args`): [`Middleware`](../../../core/index/type-aliases/Middleware.md)\<`Result`, `Root`, `unknown`, `Args`\>
+> **createMiddleware**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`queryRef`, ...`optionsArray`): [`Middleware`](../../../core/index/type-aliases/Middleware.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 #### Type Parameters
 
@@ -401,7 +367,14 @@
 <tr>
 <td>
 
-`Root`
+`Source`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Context`
 
 </td>
 </tr>
@@ -409,6 +382,13 @@
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -433,19 +413,19 @@
 </td>
 <td>
 
-[`CacheRef`](../../../extension-cache/classes/CacheRef.md)\<`Result`, `Root`, `Args`\>
+[`CacheRef`](../../../extension-cache/classes/CacheRef.md)\<`Result`, `Source`, `Args`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-...`args`
+...`optionsArray`
 
 </td>
 <td>
 
-`Root` _extends_ [`RefCompatibleRoot`](../../../extension-cache/type-aliases/RefCompatibleRoot.md) ? \[[`CacheMiddlewareOptions`](../../../extension-cache/interfaces/CacheMiddlewareOptions.md)\<`Root`\<`Root`\>\>\] : \[[`RequiredCacheMiddlewareOptions`](../../../extension-cache/interfaces/RequiredCacheMiddlewareOptions.md)\<`Root`\>\]
+`Source` _extends_ [`RefCompatibleRoot`](../../../extension-cache/type-aliases/RefCompatibleRoot.md) ? \[[`CacheMiddlewareOptions`](../../../extension-cache/interfaces/CacheMiddlewareOptions.md)\<`Source`\<`Source`\>\>\] : \[[`RequiredCacheMiddlewareOptions`](../../../extension-cache/interfaces/RequiredCacheMiddlewareOptions.md)\<`Source`\>\]
 
 </td>
 </tr>
@@ -454,7 +434,7 @@
 
 #### Returns
 
-[`Middleware`](../../../core/index/type-aliases/Middleware.md)\<`Result`, `Root`, `unknown`, `Args`\>
+[`Middleware`](../../../core/index/type-aliases/Middleware.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 #### Inherited from
 
@@ -680,7 +660,7 @@
 
 ### decodeQueryItemRef()
 
-> `protected` **decodeQueryItemRef**(`encodedRef`): `null` \| `string`
+> `protected` **decodeQueryItemRef**(`encodedRef`): `string` \| `null`
 
 #### Parameters
 
@@ -709,7 +689,7 @@
 
 #### Returns
 
-`null` \| `string`
+`string` \| `null`
 
 #### Inherited from
 
@@ -999,7 +979,7 @@
 </td>
 <td>
 
-`null` \| `Item`
+`Item` \| `null`
 
 </td>
 </tr>
@@ -1018,7 +998,7 @@
 
 ### get()
 
-> **get**(`ref`): `Promise`\<`null` \| `Item`\>
+> **get**(`ref`): `Promise`\<`Item` \| `null`\>
 
 #### Parameters
 
@@ -1047,7 +1027,7 @@
 
 #### Returns
 
-`Promise`\<`null` \| `Item`\>
+`Promise`\<`Item` \| `null`\>
 
 #### Inherited from
 
@@ -1059,7 +1039,7 @@
 
 #### Call Signature
 
-> **getMany**(`refs`): `Promise`\<`null` \| `Item`[]\>
+> **getMany**(`refs`): `Promise`\<`Item`[] \| `null`\>
 
 ##### Parameters
 
@@ -1088,7 +1068,7 @@
 
 ##### Returns
 
-`Promise`\<`null` \| `Item`[]\>
+`Promise`\<`Item`[] \| `null`\>
 
 ##### Inherited from
 
@@ -1166,7 +1146,7 @@
 
 ### getPartialMany()
 
-> **getPartialMany**(`refs`): `Promise`\<`null` \| (`null` \| `Item`)[]\>
+> **getPartialMany**(`refs`): `Promise`\<(`Item` \| `null`)[] \| `null`\>
 
 #### Parameters
 
@@ -1195,7 +1175,7 @@
 
 #### Returns
 
-`Promise`\<`null` \| (`null` \| `Item`)[]\>
+`Promise`\<(`Item` \| `null`)[] \| `null`\>
 
 #### Overrides
 
@@ -1205,7 +1185,7 @@
 
 ### getQueryResult()
 
-> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher?`): `Promise`\<`null` \| \{ `query`: `Result`; \}\>
+> **getQueryResult**\<`Result`, `Root`, `Args`\>(`queryRef`, `matcher?`): `Promise`\<\{ `query`: `Result`; \} \| `null`\>
 
 #### Type Parameters
 
@@ -1279,7 +1259,7 @@
 
 #### Returns
 
-`Promise`\<`null` \| \{ `query`: `Result`; \}\>
+`Promise`\<\{ `query`: `Result`; \} \| `null`\>
 
 #### Inherited from
 
@@ -1342,11 +1322,11 @@
 
 ### getTtl()
 
-> `protected` **getTtl**(): `undefined` \| `number`
+> `protected` **getTtl**(): `number` \| `undefined`
 
 #### Returns
 
-`undefined` \| `number`
+`number` \| `undefined`
 
 ---
 
@@ -1391,7 +1371,7 @@ readonly [`ItemRef`](../../../extension-cache/type-aliases/ItemRef.md)[]
 
 ### loadQueryMetadata()
 
-> `protected` **loadQueryMetadata**(`queryRef`, `parentRef?`, `args?`): `Promise`\<`null` \| `string`[]\>
+> `protected` **loadQueryMetadata**(`queryRef`, `parentRef?`, `args?`): `Promise`\<`string`[] \| `null`\>
 
 #### Parameters
 
@@ -1444,7 +1424,7 @@ readonly [`ItemRef`](../../../extension-cache/type-aliases/ItemRef.md)[]
 
 #### Returns
 
-`Promise`\<`null` \| `string`[]\>
+`Promise`\<`string`[] \| `null`\>
 
 #### Overrides
 

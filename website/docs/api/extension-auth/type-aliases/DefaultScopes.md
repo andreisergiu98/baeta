@@ -83,46 +83,12 @@ Default scopes applied to all Query operations
 </td>
 <td>
 
-`object`
+[`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>
 
 </td>
 <td>
 
 Default scopes for Subscription operations
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Subscription.resolve?`
-
-</td>
-<td>
-
-[`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>
-
-</td>
-<td>
-
-Scopes applied during the resolve phase
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Subscription.subscribe?`
-
-</td>
-<td>
-
-[`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>
-
-</td>
-<td>
-
-Scopes applied during the subscription phase
 
 </td>
 </tr>

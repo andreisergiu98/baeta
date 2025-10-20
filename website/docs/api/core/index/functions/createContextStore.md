@@ -1,8 +1,8 @@
 # createContextStore()
 
-> **createContextStore**\<`T`, `Context`\>(`key`, `options?`): readonly \[(`ctx`) => `Promise`\<`T`\>, (`_ctx`, `loader`) => `void`\]
+> **createContextStore**\<`Result`, `Context`\>(`key`, `options?`): readonly \[(`ctx`) => `Promise`\<`Result`\>, (`ctx`, `loader`) => `void`\]
 
-Creates a context store for managing asynchronous values within a context object.
+Creates a context store for managing asynchronous values within the context object.
 See https://baeta.io/docs/guides/context-store
 
 ## Type Parameters
@@ -18,7 +18,7 @@ See https://baeta.io/docs/guides/context-store
 <tr>
 <td>
 
-`T`
+`Result`
 
 </td>
 <td>
@@ -92,7 +92,7 @@ Configuration options for the store
 
 ## Returns
 
-readonly \[(`ctx`) => `Promise`\<`T`\>, (`_ctx`, `loader`) => `void`\]
+readonly \[(`ctx`) => `Promise`\<`Result`\>, (`ctx`, `loader`) => `void`\]
 
 A tuple containing get and load functions for managing the stored value
 
@@ -101,12 +101,12 @@ A tuple containing get and load functions for managing the stored value
 ```typescript
 // Create a store for user data
 const userStoreKey = Symbol("userStore");
-const [getUser, loadUser] = createContextStore<User>(userStoreKey, {
+const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, {
   lazy: true,
 });
 
-// Initialize the store when you create the context
-loadUser(ctx, async () => {
+// Set the loader function after creating the context object
+setUserLoader(ctx, async () => {
   return fetchUser(userId);
 });
 

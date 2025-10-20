@@ -51,7 +51,7 @@
 </td>
 <td>
 
-`null` \| `P`
+`P` \| `null`
 
 </td>
 </tr>

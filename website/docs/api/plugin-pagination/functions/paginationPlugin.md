@@ -1,9 +1,28 @@
 # paginationPlugin()
 
-> **paginationPlugin**(`options`): [`GeneratorPluginV1`](../../generator/interfaces/GeneratorPluginV1.md)\<`unknown`\>
+> **paginationPlugin**\<`T`\>(`options`): [`GeneratorPluginV1`](../../generator/interfaces/GeneratorPluginV1.md)\<`unknown`\>
 
 A plugin that generates Relay-style pagination types for GraphQL.
 See https://baeta.io/docs/plugins/pagination for more details
+
+## Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`T`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Parameters
 
@@ -24,7 +43,7 @@ See https://baeta.io/docs/plugins/pagination for more details
 </td>
 <td>
 
-[`PaginationOptions`](../interfaces/PaginationOptions.md)
+[`PaginationOptions`](../interfaces/PaginationOptions.md)\<keyof `T`\>
 
 </td>
 <td>

@@ -1,4 +1,4 @@
-# TypeExtensions\<Root, Context\>
+# TypeExtensions\<Source, Context, Info, Builder\>
 
 ## Type Parameters
 
@@ -12,7 +12,7 @@
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -20,6 +20,20 @@
 <td>
 
 `Context`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Builder` _extends_ [`TypeBuilder`](../../../classes/TypeBuilder.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 </tr>

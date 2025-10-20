@@ -1,7 +1,5 @@
 # Loader\<TOptions\>
 
-Interface for custom schema loaders.
-
 ## Type Parameters
 
 <table>
@@ -20,7 +18,7 @@ Interface for custom schema loaders.
 </td>
 <td>
 
-`any`
+`GraphQlLoaderAny`
 
 </td>
 </tr>
@@ -31,7 +29,7 @@ Interface for custom schema loaders.
 
 ### load()
 
-> **load**(`pointer`, `options?`): `Promise`\<`null` \| `any`[]\>
+> **load**(`pointer`, `options?`): `Promise`\<`any`[] \| `null`\>
 
 #### Parameters
 
@@ -72,13 +70,13 @@ Interface for custom schema loaders.
 
 #### Returns
 
-`Promise`\<`null` \| `any`[]\>
+`Promise`\<`any`[] \| `null`\>
 
 ---
 
 ### loadSync()?
 
-> `optional` **loadSync**(`pointer`, `options?`): `null` \| `any`[]
+> `optional` **loadSync**(`pointer`, `options?`): `any`[] \| `null`
 
 #### Parameters
 
@@ -119,4 +117,4 @@ Interface for custom schema loaders.
 
 #### Returns
 
-`null` \| `any`[]
+`any`[] \| `null`

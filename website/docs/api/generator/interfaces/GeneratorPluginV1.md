@@ -103,7 +103,7 @@
 </td>
 <td>
 
-[`Generator`](../../plugin/enumerations/PluginType.md#generator)
+`"generator"`
 
 </td>
 </tr>
@@ -115,7 +115,7 @@
 </td>
 <td>
 
-[`V1`](../../generator-sdk/enumerations/GeneratorPluginVersion.md#v1)
+`"v1"`
 
 </td>
 </tr>

@@ -1,5 +1,26 @@
 # @baeta/plugin-prisma
 
+## 2.0.0-next.0
+
+### Major Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`31d1a50`](https://github.com/andreisergiu98/baeta/commit/31d1a509f96535b43ae85d19c770eb1a5f09dc94) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Baeta v2 – major refactor
+  - **Side-effect-free type generation & resolver definitions.**
+    The types generator and resolver definitions were reworked to be side-effect free, improving type safety.
+  - **Stricter type safety.**
+    You must now **explicitly define resolvers for every field** during development—breakages that used to surface at runtime are now caught at compile time.
+  - **Removed `@baeta/compiler`.**
+    Since modern runtimes can execute TypeScript natively, the separate compiler package is no longer needed. Use your runtime’s native TS support or your existing build setup.
+  - **Subscriptions update.**
+    `@baeta/subscriptions-pubsub` now targets **`graphql-subscriptions` v3**.
+
+### Patch Changes
+
+- Updated dependencies [[`31d1a50`](https://github.com/andreisergiu98/baeta/commit/31d1a509f96535b43ae85d19c770eb1a5f09dc94)]:
+  - @baeta/generator-sdk@2.0.0-next.0
+  - @baeta/plugin-exec@2.0.0-next.0
+  - @baeta/util-path@2.0.0-next.0
+
 ## 1.0.11
 
 ### Patch Changes

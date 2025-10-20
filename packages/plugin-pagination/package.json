@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-pagination",
-  "version": "1.0.11",
+  "version": "2.0.0-next.0",
   "keywords": [
     "baeta",
     "graphql",

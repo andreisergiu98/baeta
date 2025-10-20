@@ -7,10 +7,8 @@ type SidebarItems = Awaited<ReturnType<Required<Options>['sidebarItemsGenerator'
 export function getItemsByVersion(version: string) {
 	switch (version) {
 		case 'current':
-			console.log(typedocSidebarCurrent.items.length);
 			return typedocSidebarCurrent;
 		case '1.0.11':
-			console.log(typedocSidebarV1_0_11.items.length);
 			return typedocSidebarV1_0_11;
 		default:
 			throw new Error(`Sidebar not configured for version ${version}`);

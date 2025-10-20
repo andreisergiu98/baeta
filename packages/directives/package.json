@@ -37,7 +37,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "prepack": "prep",
     "postpack": "prep --clean",
     "test": "ava",

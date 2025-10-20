@@ -41,7 +41,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -52,7 +52,7 @@
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20251011.0",
+    "@cloudflare/workers-types": "^4.20251014.0",
     "graphql": "^16.11.0",
     "typescript": "^5.9.3"
   },

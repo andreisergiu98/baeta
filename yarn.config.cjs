@@ -107,10 +107,10 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('engines.node', '>=22.20.0');
 
 			if (workspace.manifest.scripts?.prebuild == null) {
-				workspace.set('scripts.build', 'tsup');
+				workspace.set('scripts.build', 'tsdown');
 				workspace.set('scripts.types', 'tsc --noEmit');
 			} else {
-				workspace.set('scripts.build', 'yarn prebuild && tsup');
+				workspace.set('scripts.build', 'yarn prebuild && tsdown');
 				workspace.set('scripts.types', 'yarn prebuild && tsc --noEmit');
 			}
 

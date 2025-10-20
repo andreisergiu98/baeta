@@ -41,8 +41,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsdown",
     "prepack": "prep",
     "postpack": "prep --clean",
     "test": "ava",
@@ -55,7 +54,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20251011.0",
+    "@cloudflare/workers-types": "^4.20251014.0",
     "esbuild": "^0.25.11",
     "graphql": "^16.11.0",
     "miniflare": "^4.20251008.0",

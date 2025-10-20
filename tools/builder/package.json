@@ -26,23 +26,18 @@
   },
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js"
-    },
-    "./tsup": {
-      "types": "./tsup.d.ts",
-      "import": "./tsup.js"
+    "./tsdown": {
+      "import": "./tsdown.ts"
     }
   },
   "bin": {
     "prep": "./bin/prep.ts",
-    "tsup": "./bin/tsup.js"
+    "tsdown": "./bin/tsdown.ts"
   },
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
     "esbuild": "^0.25.11",
-    "tsup": "^8.5.0"
+    "tsdown": "^0.15.9"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",

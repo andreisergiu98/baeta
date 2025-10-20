@@ -38,7 +38,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -59,11 +59,7 @@
   "ava": {
     "extensions": {
       "ts": "module"
-    },
-    "nodeArguments": [
-      "--no-warnings",
-      "--experimental-transform-types"
-    ]
+    }
   },
   "typedocOptions": {
     "entryPoints": [

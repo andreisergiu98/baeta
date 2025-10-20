@@ -178,5 +178,3 @@ declare global {
 		export type Grants = keyof GrantsMap;
 	}
 }
-
-export type { AuthExtension, BaetaExtensions as AuthExtensionMethods };

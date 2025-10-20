@@ -25,9 +25,9 @@
     "url": "https://github.com/andreisergiu98"
   },
   "bin": {
-    "ava": "./bin/ava.js",
-    "c8": "./bin/c8.js",
-    "madge": "./bin/madge.js"
+    "ava": "./bin/ava.ts",
+    "c8": "./bin/c8.ts",
+    "madge": "./bin/madge.ts"
   },
   "type": "module",
   "exports": {

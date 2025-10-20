@@ -96,5 +96,3 @@ declare global {
 		}
 	}
 }
-
-export type { BaetaExtensions as CacheExtensionMethods };

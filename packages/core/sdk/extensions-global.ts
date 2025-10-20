@@ -40,5 +40,3 @@ declare global {
 		> {}
 	}
 }
-
-export type { BaetaExtensions };

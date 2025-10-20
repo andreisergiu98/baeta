@@ -44,7 +44,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"

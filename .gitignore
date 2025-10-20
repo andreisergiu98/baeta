@@ -22,7 +22,6 @@ yarn-error.log*
 
 ### build ###
 dist
-**/tsup.config.bundle*
 
 ### cache ###
 .turbo

@@ -27,8 +27,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js"
+      "import": "./index.ts"
     }
   },
   "dependencies": {

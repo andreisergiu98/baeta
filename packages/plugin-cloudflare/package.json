@@ -37,7 +37,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "prepack": "prep",
     "postpack": "prep --clean",
     "types": "tsc --noEmit"
@@ -50,7 +50,7 @@
     "@baeta/extension-cache-cloudflare": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20251011.0",
+    "@cloudflare/workers-types": "^4.20251014.0",
     "@types/node": "^22.18.11",
     "graphql": "^16.11.0",
     "typescript": "^5.9.3"

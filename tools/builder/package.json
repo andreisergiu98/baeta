@@ -36,7 +36,7 @@
     }
   },
   "bin": {
-    "prep": "./bin/prep.js",
+    "prep": "./bin/prep.ts",
     "tsup": "./bin/tsup.js"
   },
   "dependencies": {

@@ -14,13 +14,3 @@ export function spawnCli(
 	const cliPath = resolve(cliEntry, path);
 	return execa(execPath, [cliPath, ...args], { stdio: 'inherit', preferLocal: true });
 }
-
-export function spawnTS(root, path, args = process.argv.slice(2)) {
-	const require = createRequire(root);
-	const prepPath = require.resolve(path);
-	const nodeArgs = ['--experimental-transform-types', '--no-warnings'];
-	return execa('node', [...nodeArgs, prepPath, ...args], {
-		stdio: 'inherit',
-		preferLocal: true,
-	});
-}

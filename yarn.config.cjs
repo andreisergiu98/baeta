@@ -120,7 +120,6 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			if (workspace.manifest.devDependencies?.['@baeta/testing']) {
 				workspace.set('scripts.test', 'ava');
 				workspace.set('ava.extensions.ts', 'module');
-				workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
 			} else {
 				workspace.unset('scripts.test');
 				workspace.unset('ava');

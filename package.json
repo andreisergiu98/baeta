@@ -53,6 +53,7 @@
     "@baeta/builder": "workspace:^",
     "@biomejs/biome": "^2.2.6",
     "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.7",
     "@types/node": "^22.18.11",
     "@yarnpkg/sdks": "^3.2.3",
     "@yarnpkg/types": "^4.0.1",
@@ -62,8 +63,5 @@
     "turbo": "^2.5.8",
     "typescript": "^5.9.3"
   },
-  "packageManager": "yarn@4.10.3",
-  "dependencies": {
-    "@changesets/cli": "^2.29.7"
-  }
+  "packageManager": "yarn@4.10.3"
 }

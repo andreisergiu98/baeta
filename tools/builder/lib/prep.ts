@@ -155,17 +155,7 @@ function removeReadmeAndLicense() {
 	return Promise.all([fs.unlink(readmeDist), fs.unlink(licenseDist)]);
 }
 
-async function run() {
-	const arg = process.argv[2];
-
-	if (arg === '--help') {
-		return console.log('Usage: prep.js prepares packages for publish [--clean cleans afterwards]');
-	}
-
-	if (arg === '--clean') {
-		return Promise.all([removeNestedPackages(), removeReadmeAndLicense()]);
-	}
-
+export async function prepGenerate() {
 	const manifest = await getManifest();
 
 	if (manifest != null) {
@@ -173,7 +163,13 @@ async function run() {
 		process.exit(1);
 	}
 
-	return Promise.all([copyReadmeAndLicense(), createNestedPackages()]);
+	await Promise.all([copyReadmeAndLicense(), createNestedPackages()]);
 }
 
-run().catch(console.error);
+export async function prepClean() {
+	await Promise.all([removeNestedPackages(), removeReadmeAndLicense()]);
+}
+
+export function prepHelp() {
+	console.log('Usage: prep prepares packages for publish [--clean cleans afterwards]');
+}

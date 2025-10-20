@@ -1756,7 +1756,7 @@ __metadata:
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.9.3"
   bin:
-    prep: ./bin/prep.js
+    prep: ./bin/prep.ts
     tsup: ./bin/tsup.js
   languageName: unknown
   linkType: soft

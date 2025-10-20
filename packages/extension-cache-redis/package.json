@@ -75,10 +75,6 @@
     "extensions": {
       "ts": "module"
     },
-    "nodeArguments": [
-      "--no-warnings",
-      "--experimental-transform-types"
-    ],
     "environmentVariables": {
       "REDIS_HOST": "localhost",
       "REDIS_PORT": "65535"

@@ -1,5 +1,16 @@
 # @baeta/plugin-cloudflare
 
+## 1.0.12
+
+### Patch Changes
+
+- [`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix npm tag for latest version
+
+- Updated dependencies [[`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925)]:
+  - @baeta/extension-cache-cloudflare@1.0.12
+  - @baeta/generator-sdk@1.0.3
+  - @baeta/subscriptions-cloudflare@0.1.7
+
 ## 1.0.11
 
 ### Patch Changes

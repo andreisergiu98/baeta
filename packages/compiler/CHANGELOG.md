@@ -1,5 +1,16 @@
 # @baeta/compiler
 
+## 1.0.12
+
+### Patch Changes
+
+- [`e848339`](https://github.com/andreisergiu98/baeta/commit/e84833998cd8fd31205ee9340e621ce833af1656) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update dependencies
+
+- [`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix npm tag for latest version
+
+- Updated dependencies [[`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925)]:
+  - @baeta/util-path@1.0.2
+
 ## 1.0.9
 
 ### Patch Changes

@@ -4,16 +4,18 @@ sidebar_position: 10
 
 # Resolvers
 
-Baeta provides a modular, type-safe approach to defining GraphQL resolvers. Let's look at how to implement user resolvers.
+Baeta provides a modular, type-safe approach to defining GraphQL resolvers. Let's look at how to implement `User` and `Query` resolvers.
 
 ## Project Structure
 
 ```
 src/modules/
 └── user/
-    ├── user.gql
-    ├── resolvers.ts
-    └── typedef.ts
+    ├── index.ts          # exports the module
+    ├── user.gql          # schema definition for the module
+    ├── query.resolver.ts # field resolvers for the Query type in the module
+    ├── user.resolver.ts  # field resolvers for the User type in the module
+    └── typedef.ts        # auto-generated types for the module
 ```
 
 ## Schema Definition
@@ -27,6 +29,8 @@ type User {
   lastName: String!
   profile: String
   givenName: String
+  birthDate: DateTime!
+  friends: [User!]!
 }
 
 input UserWhereUniqueInput {
@@ -41,76 +45,108 @@ type Query {
 
 ## Implement Resolvers
 
-After defining your schema, implement the resolvers in `src/modules/user/resolvers.ts`:
+After defining your schema, implement the `User` resolvers in `src/modules/user/user.resolver.ts`:
 
-```typescript
-import { getUserModule } from "./typedef.ts";
-import { UserDataSource } from "./datasource.ts";
+```typescript title="src/modules/user/user.resolver.ts"
+import { UserModule } from "./typedef.ts";
 
-const { Query } = getUserModule();
+const { User } = UserModule;
 
-// Single user resolver
-Query.user(({ args, ctx }) => {
-  return ctx.dataSources.users.findUnique(args.where);
+const toDate = (str: string) => new Date(str);
+
+const userFriends = User.friends.map(async ({ source }) => {
+  return await getFriends(source.id);
 });
 
-// Users list resolver
-Query.users(({ ctx }) => {
-  return ctx.dataSources.users.findMany();
-});
-```
-
-## Resolver Context
-
-Resolvers receive the context object automatically that you define in the `baeta.ts` config file as you can see [Context](./context.mdx), which contains the data sources:
-
-```typescript
-interface Context {
-  dataSources: OrmDataSource;
-}
-```
-
-## Type Safety
-
-Baeta provides full type safety for:
-
-- Arguments
-- Return types
-- Parent types
-- Context
-
-```typescript
-// TypeScript ensures type safety
-Query.user(({ args, ctx }) => {
-  // args.where is typed as UserWhereUniqueInput
-  // return type must match User schema
-  return ctx.dataSources.users.findUnique(args.where);
+export default User.$fields({
+  id: User.id.key("id"),
+  email: User.email.key("email"),
+  lastName: User.lastName.key("lastName"),
+  profile: User.profile.key("profile"),
+  givenName: User.givenName.key("givenName"),
+  birthDate: User.birthDate.key("birthDate").to(toDate),
+  friends: userFriends.withDefault([]),
 });
 ```
 
-## Field Resolvers
+Each field resolver comes with chainable methods that allow you to:
 
-Baeta allows you to define resolvers for any field in your types, not just Query fields:
+- `map(({ source, args, ctx, info }) => any value)`:
+  - Use resolver params to return a new value.
+  - It accepts any value as return type.
+  - Can be async.
+- `resolve(({ source, args, ctx, info }) => expected value)`:
+  - Identical to `.map` but enforces the return type to be of the expected value.
+  - Can be async.
+- `key(string)`:
+  - Return the field value from the source object.
+  - It's a shortcut for `.map(({ source }) => source[key])`.
+- `to((source) => any value)`
+  - Transform the field value before returning it.
+  - It accepts any value as return type.
+- `withDefault(value)`:
+  - Return the default value if the field is null or undefined.
+  - It accepts any value as return type.
+- `undefinedAsNull()`:
+  - Return null if the field is undefined.
 
-```typescript
-const { User } = getUserModule();
-
-User.email(({ root }) => {
-  return root.email.toLowerCase();
-});
-```
-
-## Caveats
-
-:::warning
-When you define a required field in a type (like `fullName: String!`), that field must be resolved in all resolvers that return that type. In our example, because `fullName` is marked as non-nullable (`String!`), both `Query.user` and `Query.users` would need to include this field in their return data.
-
-To add computed required fields without modifying existing resolvers, create a separate module that extends the base type instead. If the field was optional (`String` instead of `String!`), this wouldn't be necessary.
+:::tip
+You can freely chain and compose these methods to transform and pass data however you like. If the way you compose them results in a type mismatch with your schema (such as returning the wrong value), you'll get a type error right when defining the type fields in `User.$fields({...})`.
 :::
 
-### Extending Types in a Separate Module
+The `Query` resolvers are implemented as any other type resolvers.
 
-`src/modules/user-extended/user-extended.gql`:
+```typescript title="src/modules/user/query.resolver.ts"
+import { UserModule } from "./typedef.ts";
+
+const { Query } = UserModule;
+
+const userQuery = Query.user.map(({ args, ctx }) => {
+  return ctx.dataSources.users.findUnique(args.where);
+});
+
+const usersQuery = Query.users.resolve(({ ctx }) => {
+  return ctx.dataSources.users.findMany();
+});
+
+export default Query.$fields({
+  user: userQuery,
+  users: usersQuery,
+});
+```
+
+Finally, compose the module resolvers in `src/modules/user/index.ts`:
+
+```typescript title="src/modules/user/index.ts"
+import { UserModule } from "./typedef.ts";
+import queryResolver from "./query.resolver.ts";
+import userResolver from "./user.resolver.ts";
+
+export default UserModule.$schema({
+  Query: queryResolver,
+  User: userResolver,
+});
+```
+
+:::tip
+The module will be automatically imported in `src/modules/index.ts`.
+:::
+
+## Resolver Parameters
+
+Resolvers receive the following parameters:
+
+- `source`: The parent object.
+  - See [custom types](./custom-types.mdx) on how to customize the type of the source.
+- `args`: The arguments of the field.
+- `ctx`: The context object.
+  - See [custom types](./custom-types.mdx) on how to customize the type of the context.
+- `info`: The GraphQL info object.
+  - See [custom types](./custom-types.mdx) on how to customize the type of the info.
+
+## Extending Types in a Separate Module
+
+`src/modules/user-extended/user-posts.gql`:
 
 ```graphql
 extend type User {
@@ -121,21 +157,21 @@ extend type User {
 
 ### Implementing Extended Resolvers
 
-After defining your schema, implement the resolvers in their respective modules `src/modules/user-extended/resolvers.ts`:
+After defining your schema, implement the resolvers in their respective modules `src/modules/user-posts/resolvers.ts`:
 
 ```typescript
 import { getUserExtendedModule } from "./typedef.ts";
 
 const { User } = getUserExtendedModule();
 
-User.fullName(({ root }) => {
-  return `${root.givenName} ${root.lastName}`;
+const userPosts = User.posts.resolve(({ source, ctx }) => {
+  return ctx.db.posts.findMany({
+    where: { authorId: source.id },
+  });
 });
 
-User.posts(({ root, ctx }) => {
-  return ctx.dataSources.posts.findMany({
-    where: { authorId: root.id },
-  });
+export default User.$fields({
+  posts: userPosts,
 });
 ```
 
@@ -149,12 +185,10 @@ User.posts(({ root, ctx }) => {
 
 2. Type Safety
 
-- Leverage TypeScript's type system
-- Use generated types from schema
+- Leverage generated types from schema
 - Enable strict type checking
 
 3. Error Handling
 
 - User appropriate [GraphQL errors](./errors.mdx)
 - Provide meaningful error messages
-- Handle edge cases

@@ -77,43 +77,68 @@ type Query {
 #### 2. Implement your resolvers
 
 ```typescript
-import { getUserModule } from "./typedef";
+import { UserModule } from "./typedef.ts";
 
-const { Query } = getUserModule();
+const { Query } = UserModule;
 
-Query.user(({ args }) => {
+const userQuery = Query.user.resolve(({ args }) => {
   return dataSource.user.find(args.where);
 });
 
-Query.users(() => {
+const usersQuery = Query.users.resolve(() => {
   return dataSource.user.findMany();
+});
+
+Query.$fields({
+  user: userQuery,
+  users: usersQuery,
 });
 ```
 
 #### 3. Add authorization
 
 ```typescript
-const { Query, Mutation } = getUserModule();
+import { UserModule } from "./typedef.ts";
 
-Query.users.$auth({
-  $or: {
-    isPublic: true,
-    isLoggedIn: true,
-  },
-});
+const { Query } = UserModule;
+
+const userQuery = Query.user
+  .auth({
+    $or: {
+      isPublic: true,
+      isLoggedIn: true,
+    },
+  })
+  .resolve(async ({ args }) => {
+    // ...
+  });
 ```
 
 #### 4. Add caching
 
 ```typescript
-import { getUserModule } from "./typedef";
-
-const { User, Query } = getUserModule();
+const { Query, Mutation, User } = UserModule;
 
 export const userCache = User.$createCache();
 
-Query.user.$useCache(userCache);
-Query.users.$useCache(userCache);
+const userQuery = Query.user
+  .auth({
+    // ...
+  })
+  .useCache(userCache)
+  .resolve(async ({ args }) => {
+    // ...
+  });
+
+const updateUserMutation = Mutation.updateUser
+  .use(async (next) => {
+    const user = await next();
+    await userCache.save(user);
+    return user;
+  })
+  .resolve(async ({ args }) => {
+    // ...
+  });
 ```
 
 ## Compatibility

@@ -13,21 +13,22 @@ const featureList: Array<Omit<SnippetProps, 'idx'>> = [
 		path: 'modules/user/user.gql',
 		language: 'graphql',
 		snippet: `type User {
-    id: ID!
-    name: String!
-    email: String!
-    age: Int
+  id: ID!
+  name: String!
+  email: String!
+  age: Int
 }
-  
+
 input UserWhereUnique {
-    id: ID
-    email: String
+  id: ID
+  email: String
 }
-  
+
 type Query {
-    user(where: UserWhereUnique!): User!
-    users: [User!]!
-}`,
+  user(where: UserWhereUnique!): User!
+  users: [User!]!
+}
+`,
 	},
 	{
 		title: 'Write Clean, Type-Safe Resolvers',
@@ -40,22 +41,23 @@ type Query {
 		),
 		path: 'modules/user/resolvers.ts',
 		language: 'typescript',
-		snippet: `import { UserModule } from './typedef.ts';
+		snippet: `import { UserModule } from "./typedef.ts";
 
 const { Query } = UserModule;
 
 const userQuery = Query.user.resolve(({ args }) => {
-    return dataSource.user.find(args.where);
+  return dataSource.user.find(args.where);
 });
 
 const usersQuery = Query.users.resolve(() => {
-    return dataSource.user.findMany();
+  return dataSource.user.findMany();
 });
 
 Query.$fields({
-    user: userQuery,
-    users: usersQuery,
-});`,
+  user: userQuery,
+  users: usersQuery,
+});
+`,
 	},
 	{
 		title: 'Compose and Extend',
@@ -69,21 +71,22 @@ Query.$fields({
 		path: 'modules/user-photos/user-photos.gql',
 		language: 'graphql',
 		snippet: `type Photo {
-    id: ID!
-    url: String!
-    description: String!
-    postedBy: User!
+  id: ID!
+  url: String!
+  description: String!
+  postedBy: User!
 }
 
 input PhotoCreateData {
-    url: String! @trim
-    description: String!
-    userId: ID!
+  url: String! @trim
+  description: String!
+  userId: ID!
 }
-  
+
 extend type User {
-    photos: [Photo!]!
-}`,
+  photos: [Photo!]!
+}
+`,
 	},
 
 	{
@@ -95,20 +98,20 @@ extend type User {
 			</>
 		),
 		language: 'typescript',
-		snippet: `import { UserModule } from './typedef.ts';
+		snippet: `import { UserModule } from "./typedef.ts";
 
 const { Query } = UserModule;
 
 const userQuery = Query.user
-    .auth({
-        $or: {
-            isPublic: true,
-            isLoggedIn: true,
-        },
-    })
-    .resolve(async ({ args }) => {
-        // ...
-    });
+  .auth({
+    $or: {
+      isPublic: true,
+      isLoggedIn: true,
+    },
+  })
+  .resolve(async ({ args }) => {
+    // ...
+  });
 `,
 	},
 	{
@@ -125,21 +128,23 @@ const userQuery = Query.user
 export const userCache = User.$createCache();
 
 const userQuery = Query.user
-    .useCache(userCache)
-    .resolve(async ({ args }) => {
-        // ...
-    });
-
+  .auth({
+    // ...
+  })
+  .useCache(userCache)
+  .resolve(async ({ args }) => {
+    // ...
+  });
 
 const updateUserMutation = Mutation.updateUser
-    .use(async (next) => {
-        const user = await next();
-        await userCache.save(user);
-        return user;
-    })
-    .resolve(async ({ args }) => {
-        // ...
-    });
+  .use(async (next) => {
+    const user = await next();
+    await userCache.save(user);
+    return user;
+  })
+  .resolve(async ({ args }) => {
+    // ...
+  });
 `,
 	},
 	{
@@ -153,15 +158,16 @@ const updateUserMutation = Mutation.updateUser
 		),
 		language: 'typescript',
 		snippet: `const trimDirective = createInputDirective({
-    name: "trim",
-    target: "scalar",
-    resolve: ({ getValue, setValue }) => {
-      const value = getValue();
-      if (typeof value === "string") {
-        setValue(value.trim());
-      }
-    },
-});`,
+  name: "trim",
+  target: "scalar",
+  resolve: ({ getValue, setValue }) => {
+    const value = getValue();
+    if (typeof value === "string") {
+      setValue(value.trim());
+    }
+  },
+});
+`,
 	},
 ];
 

@@ -1,5 +1,11 @@
 # @baeta/util-log
 
+## 1.0.2
+
+### Patch Changes
+
+- [`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix npm tag for latest version
+
 ## 1.0.1
 
 ### Patch Changes

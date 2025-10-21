@@ -1,5 +1,16 @@
 # @baeta/extension-cache
 
+## 1.0.12
+
+### Patch Changes
+
+- [`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix npm tag for latest version
+
+- Updated dependencies [[`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925)]:
+  - @baeta/core@1.0.12
+  - @baeta/util-encoding@1.0.2
+  - @baeta/util-log@1.0.2
+
 ## 1.0.11
 
 ### Patch Changes

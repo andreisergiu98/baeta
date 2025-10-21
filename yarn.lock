@@ -1751,11 +1751,10 @@ __metadata:
     "@baeta/tools-utils": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/color-hash": "npm:^2.0.0"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/prompts": "npm:^2.4.9"
     "@types/yargs": "npm:^17.0.33"
     commander: "npm:^14.0.1"
-    esbuild: "npm:^0.25.11"
     execa: "npm:^9.6.0"
     prompts: "npm:^2.4.2"
     tsdown: "npm:^0.15.9"
@@ -1776,7 +1775,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
     "@types/lodash.throttle": "npm:^4.1.9"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/react": "npm:^19.2.2"
     "@types/yargs": "npm:^17.0.33"
     "@xterm/addon-serialize": "npm:^0.13.0"
@@ -1877,7 +1876,7 @@ __metadata:
     "@types/body-parser": "npm:^1.19.6"
     "@types/cors": "npm:^2.8.19"
     "@types/express": "npm:^5.0.3"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/ws": "npm:^8.18.1"
     body-parser: "npm:^2.2.0"
     cors: "npm:^2.8.5"
@@ -1898,7 +1897,7 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -1918,7 +1917,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.1.0"
     "@prisma/client": "npm:^6.17.1"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/ws": "npm:^8.18.1"
     "@yarnpkg/pnpify": "npm:^4.1.6"
     graphql: "npm:^16.11.0"
@@ -1946,14 +1945,14 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.1.0"
     "@prisma/client": "npm:^6.17.1"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/ws": "npm:^8.18.1"
     "@yarnpkg/pnpify": "npm:^4.1.6"
     graphql: "npm:^16.11.0"
     graphql-scalars: "npm:^1.25.0"
     graphql-ws: "npm:^6.0.6"
     graphql-yoga: "npm:^5.16.0"
-    ioredis: "npm:^5.8.1"
+    ioredis: "npm:^5.8.2"
     prisma: "npm:^6.17.1"
     typescript: "npm:^5.9.3"
     ws: "npm:^8.18.3"
@@ -1974,14 +1973,14 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.1.0"
     "@prisma/client": "npm:^6.17.1"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/ws": "npm:^8.18.1"
     "@yarnpkg/pnpify": "npm:^4.1.6"
     graphql: "npm:^16.11.0"
     graphql-scalars: "npm:^1.25.0"
     graphql-ws: "npm:^6.0.6"
     graphql-yoga: "npm:^5.16.0"
-    ioredis: "npm:^5.8.1"
+    ioredis: "npm:^5.8.2"
     prisma: "npm:^6.17.1"
     typescript: "npm:^5.9.3"
     ws: "npm:^8.18.3"
@@ -2001,9 +2000,9 @@ __metadata:
     "@hono/graphql-server": "npm:^0.7.0"
     graphql: "npm:^16.11.0"
     hono: "npm:^4.10.1"
-    miniflare: "npm:^4.20251008.0"
+    miniflare: "npm:^4.20251011.0"
     typescript: "npm:^5.9.3"
-    wrangler: "npm:^4.43.0"
+    wrangler: "npm:^4.44.0"
   languageName: unknown
   linkType: soft
 
@@ -2019,9 +2018,9 @@ __metadata:
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     hono: "npm:^4.10.1"
-    miniflare: "npm:^4.20251008.0"
+    miniflare: "npm:^4.20251011.0"
     typescript: "npm:^5.9.3"
-    wrangler: "npm:^4.43.0"
+    wrangler: "npm:^4.44.0"
   languageName: unknown
   linkType: soft
 
@@ -2034,7 +2033,7 @@ __metadata:
     "@baeta/errors": "workspace:^"
     "@baeta/extension-complexity": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     typescript: "npm:^5.9.3"
@@ -2049,7 +2048,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     typescript: "npm:^5.9.3"
@@ -2067,7 +2066,7 @@ __metadata:
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/utils": "npm:^10.9.1"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     typescript: "npm:^5.9.3"
@@ -2086,7 +2085,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.1.0"
     "@prisma/client": "npm:^6.17.1"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/ws": "npm:^8.18.1"
     "@yarnpkg/pnpify": "npm:^4.1.6"
     graphql: "npm:^16.11.0"
@@ -2112,7 +2111,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.1.0"
     "@prisma/client": "npm:^6.17.1"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/ws": "npm:^8.18.1"
     "@yarnpkg/pnpify": "npm:^4.1.6"
     graphql: "npm:^16.11.0"
@@ -2133,7 +2132,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     express: "npm:^5.1.0"
     graphql: "npm:^16.11.0"
     graphql-scalars: "npm:^1.25.0"
@@ -2150,7 +2149,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     typescript: "npm:^5.9.3"
@@ -2165,7 +2164,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     typescript: "npm:^5.9.3"
@@ -2180,7 +2179,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/ws": "npm:^8.18.1"
     graphql: "npm:^16.11.0"
     graphql-ws: "npm:^6.0.6"
@@ -2198,7 +2197,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     typescript: "npm:^5.9.3"
@@ -2235,9 +2234,8 @@ __metadata:
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20251014.0"
-    esbuild: "npm:^0.25.11"
     graphql: "npm:^16.11.0"
-    miniflare: "npm:^4.20251008.0"
+    miniflare: "npm:^4.20251011.0"
     typescript: "npm:^5.9.3"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
@@ -2276,7 +2274,7 @@ __metadata:
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     graphql: "npm:^16.11.0"
-    ioredis: "npm:^5.8.1"
+    ioredis: "npm:^5.8.2"
     typescript: "npm:^5.9.3"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
@@ -2351,7 +2349,7 @@ __metadata:
     "@baeta/util-path": "workspace:^"
     "@parcel/watcher": "npm:^2.5.1"
     "@types/micromatch": "npm:^4.0.9"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     change-case-all: "npm:2.1.0"
     micromatch: "npm:^4.0.8"
     typescript: "npm:^5.9.3"
@@ -2366,7 +2364,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft
@@ -2381,7 +2379,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20251014.0"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     typescript: "npm:^5.9.3"
   peerDependencies:
@@ -2405,7 +2403,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     typescript: "npm:^5.9.3"
   peerDependencies:
@@ -2420,7 +2418,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     execa: "npm:^9.6.0"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -2433,7 +2431,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft
@@ -2449,7 +2447,7 @@ __metadata:
     "@graphql-tools/graphql-file-loader": "npm:^8.1.2"
     "@graphql-tools/load": "npm:^8.1.2"
     "@graphql-tools/utils": "npm:^10.9.1"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     change-case-all: "npm:2.1.0"
     graphql: "npm:^16.11.0"
     typescript: "npm:^5.9.3"
@@ -2466,7 +2464,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     typescript: "npm:^5.9.3"
   peerDependencies:
@@ -2483,7 +2481,7 @@ __metadata:
     "@baeta/plugin-exec": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     execa: "npm:^9.6.0"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -2495,7 +2493,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft
@@ -2540,7 +2538,7 @@ __metadata:
     "@baeta/extension-complexity": "workspace:^"
     "@types/bun": "npm:^1.3.0"
     "@types/deno": "npm:^2.5.0"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -2556,7 +2554,7 @@ __metadata:
     "@baeta/extension-complexity": "workspace:^"
     "@types/bun": "npm:^1.3.0"
     "@types/deno": "npm:^2.5.0"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     graphql: "npm:^16.11.0"
     graphql-yoga: "npm:^5.16.0"
     typescript: "npm:^5.9.3"
@@ -2569,7 +2567,7 @@ __metadata:
   dependencies:
     "@baeta/tools-utils": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/sinon": "npm:^17.0.4"
     ava: "npm:^6.4.1"
     c8: "npm:^10.1.3"
@@ -2602,7 +2600,7 @@ __metadata:
   resolution: "@baeta/tools-utils@workspace:tools/tools-utils"
   dependencies:
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     execa: "npm:^9.6.0"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -2653,7 +2651,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     typescript: "npm:^5.9.3"
     upath: "npm:^2.0.1"
   languageName: unknown
@@ -3049,50 +3047,50 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/unenv-preset@npm:2.7.7":
-  version: 2.7.7
-  resolution: "@cloudflare/unenv-preset@npm:2.7.7"
+"@cloudflare/unenv-preset@npm:2.7.8":
+  version: 2.7.8
+  resolution: "@cloudflare/unenv-preset@npm:2.7.8"
   peerDependencies:
     unenv: 2.0.0-rc.21
     workerd: ^1.20250927.0
   peerDependenciesMeta:
     workerd:
       optional: true
-  checksum: 10/c636a96a27cec4635b38d32e6e679f8a83bb6d19dc1c98b8bed932e04df4ac3ae4a94b751a3b9f02ec344954d837de48f378d09f6b34a2bf5a3fc24c9df6ed34
+  checksum: 10/2ecbae6234c092c9715b4b01697f01f40121ccb02f43dff26b6509102ba9f7c4d2aefadc6418559a60d829d7a2662c33aff87afbef7c67455a3ea5d38d0cb847
   languageName: node
   linkType: hard
 
-"@cloudflare/workerd-darwin-64@npm:1.20251008.0":
-  version: 1.20251008.0
-  resolution: "@cloudflare/workerd-darwin-64@npm:1.20251008.0"
+"@cloudflare/workerd-darwin-64@npm:1.20251011.0":
+  version: 1.20251011.0
+  resolution: "@cloudflare/workerd-darwin-64@npm:1.20251011.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@cloudflare/workerd-darwin-arm64@npm:1.20251008.0":
-  version: 1.20251008.0
-  resolution: "@cloudflare/workerd-darwin-arm64@npm:1.20251008.0"
+"@cloudflare/workerd-darwin-arm64@npm:1.20251011.0":
+  version: 1.20251011.0
+  resolution: "@cloudflare/workerd-darwin-arm64@npm:1.20251011.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@cloudflare/workerd-linux-64@npm:1.20251008.0":
-  version: 1.20251008.0
-  resolution: "@cloudflare/workerd-linux-64@npm:1.20251008.0"
+"@cloudflare/workerd-linux-64@npm:1.20251011.0":
+  version: 1.20251011.0
+  resolution: "@cloudflare/workerd-linux-64@npm:1.20251011.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@cloudflare/workerd-linux-arm64@npm:1.20251008.0":
-  version: 1.20251008.0
-  resolution: "@cloudflare/workerd-linux-arm64@npm:1.20251008.0"
+"@cloudflare/workerd-linux-arm64@npm:1.20251011.0":
+  version: 1.20251011.0
+  resolution: "@cloudflare/workerd-linux-arm64@npm:1.20251011.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@cloudflare/workerd-windows-64@npm:1.20251008.0":
-  version: 1.20251008.0
-  resolution: "@cloudflare/workerd-windows-64@npm:1.20251008.0"
+"@cloudflare/workerd-windows-64@npm:1.20251011.0":
+  version: 1.20251011.0
+  resolution: "@cloudflare/workerd-windows-64@npm:1.20251011.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -4405,24 +4403,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/aix-ppc64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/aix-ppc64@npm:0.25.11"
-  conditions: os=aix & cpu=ppc64
-  languageName: node
-  linkType: hard
-
 "@esbuild/aix-ppc64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/aix-ppc64@npm:0.25.4"
   conditions: os=aix & cpu=ppc64
-  languageName: node
-  linkType: hard
-
-"@esbuild/android-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/android-arm64@npm:0.25.11"
-  conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -4433,24 +4417,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/android-arm@npm:0.25.11"
-  conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
 "@esbuild/android-arm@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/android-arm@npm:0.25.4"
   conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
-"@esbuild/android-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/android-x64@npm:0.25.11"
-  conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
 
@@ -4461,24 +4431,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/darwin-arm64@npm:0.25.11"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/darwin-arm64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/darwin-arm64@npm:0.25.4"
   conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/darwin-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/darwin-x64@npm:0.25.11"
-  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -4489,24 +4445,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/freebsd-arm64@npm:0.25.11"
-  conditions: os=freebsd & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/freebsd-arm64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/freebsd-arm64@npm:0.25.4"
   conditions: os=freebsd & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/freebsd-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/freebsd-x64@npm:0.25.11"
-  conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
@@ -4517,24 +4459,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-arm64@npm:0.25.11"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-arm64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/linux-arm64@npm:0.25.4"
   conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-arm@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-arm@npm:0.25.11"
-  conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
@@ -4545,24 +4473,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ia32@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-ia32@npm:0.25.11"
-  conditions: os=linux & cpu=ia32
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-ia32@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/linux-ia32@npm:0.25.4"
   conditions: os=linux & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-loong64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-loong64@npm:0.25.11"
-  conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
@@ -4573,24 +4487,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-mips64el@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-mips64el@npm:0.25.11"
-  conditions: os=linux & cpu=mips64el
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-mips64el@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/linux-mips64el@npm:0.25.4"
   conditions: os=linux & cpu=mips64el
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-ppc64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-ppc64@npm:0.25.11"
-  conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
@@ -4601,24 +4501,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-riscv64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-riscv64@npm:0.25.11"
-  conditions: os=linux & cpu=riscv64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-riscv64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/linux-riscv64@npm:0.25.4"
   conditions: os=linux & cpu=riscv64
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-s390x@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-s390x@npm:0.25.11"
-  conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
 
@@ -4629,24 +4515,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/linux-x64@npm:0.25.11"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-x64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/linux-x64@npm:0.25.4"
   conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/netbsd-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/netbsd-arm64@npm:0.25.11"
-  conditions: os=netbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -4657,24 +4529,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/netbsd-x64@npm:0.25.11"
-  conditions: os=netbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/netbsd-x64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/netbsd-x64@npm:0.25.4"
   conditions: os=netbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/openbsd-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/openbsd-arm64@npm:0.25.11"
-  conditions: os=openbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -4685,31 +4543,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/openbsd-x64@npm:0.25.11"
-  conditions: os=openbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/openbsd-x64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/openbsd-x64@npm:0.25.4"
   conditions: os=openbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/openharmony-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/openharmony-arm64@npm:0.25.11"
-  conditions: os=openharmony & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/sunos-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/sunos-x64@npm:0.25.11"
-  conditions: os=sunos & cpu=x64
   languageName: node
   linkType: hard
 
@@ -4720,13 +4557,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-arm64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/win32-arm64@npm:0.25.11"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/win32-arm64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/win32-arm64@npm:0.25.4"
@@ -4734,24 +4564,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-ia32@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/win32-ia32@npm:0.25.11"
-  conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
 "@esbuild/win32-ia32@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/win32-ia32@npm:0.25.4"
   conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@esbuild/win32-x64@npm:0.25.11":
-  version: 0.25.11
-  resolution: "@esbuild/win32-x64@npm:0.25.11"
-  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -7334,12 +7150,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.18.11":
-  version: 22.18.11
-  resolution: "@types/node@npm:22.18.11"
+"@types/node@npm:^22.18.12":
+  version: 22.18.12
+  resolution: "@types/node@npm:22.18.12"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/787049231bf4655d57e6deb7e7be46da6b476f29f8184b470e49ce7db45acfd0ad106b67c4f4b09b77f205c83b6b0a0b3d6a69ba17c28a155d3ec4a608eb332d
+  checksum: 10/41b8853302deac6895aa978193fcab53bf8d1f6f5df5fad38e2a33c2c853c3689e905c9dde373e45bb87273b2690e5ac2d6f40809fe72f45264952ba3ae3b196
   languageName: node
   linkType: hard
 
@@ -8725,7 +8541,7 @@ __metadata:
     "@biomejs/biome": "npm:^2.2.6"
     "@changesets/changelog-github": "npm:^0.5.1"
     "@changesets/cli": "npm:^2.29.7"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@yarnpkg/sdks": "npm:^3.2.3"
     "@yarnpkg/types": "npm:^4.0.1"
     husky: "npm:^9.1.7"
@@ -10050,7 +9866,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@docusaurus/logger": "npm:^3.9.2"
     "@types/fs-extra": "npm:^11.0.4"
-    "@types/node": "npm:^22.18.11"
+    "@types/node": "npm:^22.18.12"
     "@types/prompts": "npm:^2.4.9"
     "@types/semver": "npm:^7.7.1"
     "@types/shelljs": "npm:^0.8.17"
@@ -11291,95 +11107,6 @@ __metadata:
   bin:
     esbuild: bin/esbuild
   checksum: 10/227ffe9b31f0b184a0b0a0210bb9d32b2b115b8c5c9b09f08db2c3928cb470fc55a22dbba3c2894365d3abcc62c2089b85638be96a20691d1234d31990ea01b2
-  languageName: node
-  linkType: hard
-
-"esbuild@npm:^0.25.11":
-  version: 0.25.11
-  resolution: "esbuild@npm:0.25.11"
-  dependencies:
-    "@esbuild/aix-ppc64": "npm:0.25.11"
-    "@esbuild/android-arm": "npm:0.25.11"
-    "@esbuild/android-arm64": "npm:0.25.11"
-    "@esbuild/android-x64": "npm:0.25.11"
-    "@esbuild/darwin-arm64": "npm:0.25.11"
-    "@esbuild/darwin-x64": "npm:0.25.11"
-    "@esbuild/freebsd-arm64": "npm:0.25.11"
-    "@esbuild/freebsd-x64": "npm:0.25.11"
-    "@esbuild/linux-arm": "npm:0.25.11"
-    "@esbuild/linux-arm64": "npm:0.25.11"
-    "@esbuild/linux-ia32": "npm:0.25.11"
-    "@esbuild/linux-loong64": "npm:0.25.11"
-    "@esbuild/linux-mips64el": "npm:0.25.11"
-    "@esbuild/linux-ppc64": "npm:0.25.11"
-    "@esbuild/linux-riscv64": "npm:0.25.11"
-    "@esbuild/linux-s390x": "npm:0.25.11"
-    "@esbuild/linux-x64": "npm:0.25.11"
-    "@esbuild/netbsd-arm64": "npm:0.25.11"
-    "@esbuild/netbsd-x64": "npm:0.25.11"
-    "@esbuild/openbsd-arm64": "npm:0.25.11"
-    "@esbuild/openbsd-x64": "npm:0.25.11"
-    "@esbuild/openharmony-arm64": "npm:0.25.11"
-    "@esbuild/sunos-x64": "npm:0.25.11"
-    "@esbuild/win32-arm64": "npm:0.25.11"
-    "@esbuild/win32-ia32": "npm:0.25.11"
-    "@esbuild/win32-x64": "npm:0.25.11"
-  dependenciesMeta:
-    "@esbuild/aix-ppc64":
-      optional: true
-    "@esbuild/android-arm":
-      optional: true
-    "@esbuild/android-arm64":
-      optional: true
-    "@esbuild/android-x64":
-      optional: true
-    "@esbuild/darwin-arm64":
-      optional: true
-    "@esbuild/darwin-x64":
-      optional: true
-    "@esbuild/freebsd-arm64":
-      optional: true
-    "@esbuild/freebsd-x64":
-      optional: true
-    "@esbuild/linux-arm":
-      optional: true
-    "@esbuild/linux-arm64":
-      optional: true
-    "@esbuild/linux-ia32":
-      optional: true
-    "@esbuild/linux-loong64":
-      optional: true
-    "@esbuild/linux-mips64el":
-      optional: true
-    "@esbuild/linux-ppc64":
-      optional: true
-    "@esbuild/linux-riscv64":
-      optional: true
-    "@esbuild/linux-s390x":
-      optional: true
-    "@esbuild/linux-x64":
-      optional: true
-    "@esbuild/netbsd-arm64":
-      optional: true
-    "@esbuild/netbsd-x64":
-      optional: true
-    "@esbuild/openbsd-arm64":
-      optional: true
-    "@esbuild/openbsd-x64":
-      optional: true
-    "@esbuild/openharmony-arm64":
-      optional: true
-    "@esbuild/sunos-x64":
-      optional: true
-    "@esbuild/win32-arm64":
-      optional: true
-    "@esbuild/win32-ia32":
-      optional: true
-    "@esbuild/win32-x64":
-      optional: true
-  bin:
-    esbuild: bin/esbuild
-  checksum: 10/287dfc7909d169501be9daa55973ae9398bd69c7114dfc0b682eef04c22f5c33fdba934398af0f36ed5aab1366ee4be25062235d6a1bff4b74fa3d185e208e56
   languageName: node
   linkType: hard
 
@@ -13392,9 +13119,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ioredis@npm:^5.8.1":
-  version: 5.8.1
-  resolution: "ioredis@npm:5.8.1"
+"ioredis@npm:^5.8.2":
+  version: 5.8.2
+  resolution: "ioredis@npm:5.8.2"
   dependencies:
     "@ioredis/commands": "npm:1.4.0"
     cluster-key-slot: "npm:^1.1.0"
@@ -13405,7 +13132,7 @@ __metadata:
     redis-errors: "npm:^1.2.0"
     redis-parser: "npm:^3.0.0"
     standard-as-callback: "npm:^2.1.0"
-  checksum: 10/f1e328e9ceedde9d9c3ba8b8b844908302852006150601e6918f384d5f9d507cd5e4a9fcfb3bdb6c96cbb5477b89b837b3d38b0d62e1f173408fef46f15734df
+  checksum: 10/550cbe7bba409b5bc38fa290fd2de7f569548603892904680db0f5e74f7163e52e067428be766d9e4d1a7f1220f93abe8e1687804aab951a96a6dafc289947eb
   languageName: node
   linkType: hard
 
@@ -15667,9 +15394,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"miniflare@npm:4.20251008.0, miniflare@npm:^4.20251008.0":
-  version: 4.20251008.0
-  resolution: "miniflare@npm:4.20251008.0"
+"miniflare@npm:4.20251011.0, miniflare@npm:^4.20251011.0":
+  version: 4.20251011.0
+  resolution: "miniflare@npm:4.20251011.0"
   dependencies:
     "@cspotcode/source-map-support": "npm:0.8.1"
     acorn: "npm:8.14.0"
@@ -15679,13 +15406,13 @@ __metadata:
     sharp: "npm:^0.33.5"
     stoppable: "npm:1.1.0"
     undici: "npm:7.14.0"
-    workerd: "npm:1.20251008.0"
+    workerd: "npm:1.20251011.0"
     ws: "npm:8.18.0"
     youch: "npm:4.1.0-beta.10"
     zod: "npm:3.22.3"
   bin:
     miniflare: bootstrap.js
-  checksum: 10/b34cbdab7f591c79132f8eb5eec5a74cf216ab30b2a3154ed1468fd33fb101df65474e2d9c04b54e5a7fe8159c46a4f947811de05badead583d5463cbc9c2624
+  checksum: 10/e6853bd65ce2bd4b6854921359c85111bc6467dbf67b47e6b10339974bd624804c37e74e6b21e9ba73a8349d2470c8729337fbeb83e3e72294d63a1f04f1d6e8
   languageName: node
   linkType: hard
 
@@ -21271,15 +20998,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"workerd@npm:1.20251008.0":
-  version: 1.20251008.0
-  resolution: "workerd@npm:1.20251008.0"
+"workerd@npm:1.20251011.0":
+  version: 1.20251011.0
+  resolution: "workerd@npm:1.20251011.0"
   dependencies:
-    "@cloudflare/workerd-darwin-64": "npm:1.20251008.0"
-    "@cloudflare/workerd-darwin-arm64": "npm:1.20251008.0"
-    "@cloudflare/workerd-linux-64": "npm:1.20251008.0"
-    "@cloudflare/workerd-linux-arm64": "npm:1.20251008.0"
-    "@cloudflare/workerd-windows-64": "npm:1.20251008.0"
+    "@cloudflare/workerd-darwin-64": "npm:1.20251011.0"
+    "@cloudflare/workerd-darwin-arm64": "npm:1.20251011.0"
+    "@cloudflare/workerd-linux-64": "npm:1.20251011.0"
+    "@cloudflare/workerd-linux-arm64": "npm:1.20251011.0"
+    "@cloudflare/workerd-windows-64": "npm:1.20251011.0"
   dependenciesMeta:
     "@cloudflare/workerd-darwin-64":
       optional: true
@@ -21293,25 +21020,25 @@ __metadata:
       optional: true
   bin:
     workerd: bin/workerd
-  checksum: 10/18e6879f77b6269ecfa35a625862c61673c0dc5bc0305ca4aaf3374a97b5c61b0b0bac1273fd6f4b806ed41003d307b3315a2dfeb1f76fc4ed0a90c55f334d9e
+  checksum: 10/df84e2882dd76a5bf437aee6ac15a1f2726a392570ce1bc95e9dcb6f63bd843864df19ba0c3fbfc752366171e2f9a3577ce54d3c51ad929729eea72606cd9483
   languageName: node
   linkType: hard
 
-"wrangler@npm:^4.43.0":
-  version: 4.43.0
-  resolution: "wrangler@npm:4.43.0"
+"wrangler@npm:^4.44.0":
+  version: 4.44.0
+  resolution: "wrangler@npm:4.44.0"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:0.4.0"
-    "@cloudflare/unenv-preset": "npm:2.7.7"
+    "@cloudflare/unenv-preset": "npm:2.7.8"
     blake3-wasm: "npm:2.1.5"
     esbuild: "npm:0.25.4"
     fsevents: "npm:~2.3.2"
-    miniflare: "npm:4.20251008.0"
+    miniflare: "npm:4.20251011.0"
     path-to-regexp: "npm:6.3.0"
     unenv: "npm:2.0.0-rc.21"
-    workerd: "npm:1.20251008.0"
+    workerd: "npm:1.20251011.0"
   peerDependencies:
-    "@cloudflare/workers-types": ^4.20251008.0
+    "@cloudflare/workers-types": ^4.20251011.0
   dependenciesMeta:
     fsevents:
       optional: true
@@ -21321,7 +21048,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 10/9339238ec8e082db0f6d489f1d185df56dc0c2665a658cfb1f38cce89c8ed0dbe2d80dfc4c1e7b648737d5f04feafd777ac34a0c2b3a2ba3e135f22f3ae354d3
+  checksum: 10/9d8cf344a9ac7b4b1bf3382acb3231478299f9b2588ea7439a3ece6bb58b102ac67e9c672c0cbe4a258bda30c804cd4e4bd3550d3793e0bdedee47085a51b31f
   languageName: node
   linkType: hard
 

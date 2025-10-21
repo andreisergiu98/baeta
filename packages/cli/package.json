@@ -69,7 +69,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/lodash.throttle": "^4.1.9",
-    "@types/node": "^22.18.11",
+    "@types/node": "^22.18.12",
     "@types/react": "^19.2.2",
     "@types/yargs": "^17.0.33",
     "graphql": "^16.11.0",

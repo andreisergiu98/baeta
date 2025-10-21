@@ -50,7 +50,7 @@
     "@baeta/tsconfig": "workspace:^",
     "@faker-js/faker": "^10.1.0",
     "@prisma/client": "^6.17.1",
-    "@types/node": "^22.18.11",
+    "@types/node": "^22.18.12",
     "@types/ws": "^8.18.1",
     "@yarnpkg/pnpify": "^4.1.6",
     "typescript": "^5.9.3"

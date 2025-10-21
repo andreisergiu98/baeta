@@ -26,7 +26,6 @@
     "datamodel",
     "dirpath",
     "dmmf",
-    "esbuild",
     "execa",
     "keyv",
     "middlewares",

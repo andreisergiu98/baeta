@@ -34,7 +34,6 @@
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
     "commander": "^14.0.1",
-    "esbuild": "^0.25.11",
     "execa": "^9.6.0",
     "prompts": "^2.4.2",
     "tsdown": "^0.15.9",
@@ -43,7 +42,7 @@
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/color-hash": "^2.0.0",
-    "@types/node": "^22.18.11",
+    "@types/node": "^22.18.12",
     "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.33",
     "typescript": "^5.9.3"

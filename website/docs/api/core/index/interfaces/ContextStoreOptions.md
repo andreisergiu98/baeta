@@ -17,7 +17,7 @@ Configuration options for the context store.
 <tr>
 <td>
 
-<a id="lazy"></a> `lazy?`
+<a id="eager"></a> `eager?`
 
 </td>
 <td>
@@ -28,13 +28,13 @@ Configuration options for the context store.
 <td>
 
 ```ts
-true;
+false;
 ```
 
 </td>
 <td>
 
-Whether to load the value lazily (on first access) or eagerly (immediately).
+Whether to load the value eagerly (immediately) or lazily (on first access).
 
 </td>
 </tr>

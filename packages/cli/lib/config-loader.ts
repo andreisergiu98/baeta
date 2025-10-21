@@ -1,8 +1,8 @@
 import { relative } from '@baeta/util-path';
 import fg from 'fast-glob';
-import type { BaetaOptions } from './config.ts';
-import { importJavaScriptConfig } from './config-loader-esm.ts';
-import { importTypeScriptConfig } from './config-loader-ts.ts';
+import { createJiti } from 'jiti';
+import { makeErrorMessage } from '../sdk/errors.tsx';
+import { type BaetaOptions, isValidConfig } from './config.ts';
 
 export interface LoadedBaetaConfig {
 	config: BaetaOptions;
@@ -24,14 +24,7 @@ export async function discoverBaetaConfig() {
 }
 
 function getRelativeConfigPath(path: string) {
-	return relative(process.cwd(), path);
-}
-
-async function importConfig(configPath: string) {
-	if (configPath.endsWith('ts')) {
-		return importTypeScriptConfig(configPath);
-	}
-	return importJavaScriptConfig(configPath);
+	return `./${relative(process.cwd(), path)}`;
 }
 
 export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | undefined> {
@@ -42,14 +35,31 @@ export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | und
 	}
 
 	const relativeLocation = getRelativeConfigPath(location);
-	const config = await importConfig(relativeLocation);
 
-	if (!config) {
+	const jiti = createJiti(import.meta.url, {
+		tryNative: false,
+		interopDefault: true,
+		moduleCache: false,
+		fsCache: false,
+	});
+
+	const result = await jiti
+		.import(relativeLocation, {
+			parentURL: process.cwd(),
+			default: true,
+		})
+		.catch((err) => {
+			console.error(err);
+			process.exit(1);
+		});
+
+	if (!isValidConfig(result)) {
+		console.error(makeErrorMessage('Invalid config, expected `baeta.ts` with default export.'));
 		return;
 	}
 
 	return {
-		config,
+		config: result.config,
 		location,
 		relativeLocation,
 	};

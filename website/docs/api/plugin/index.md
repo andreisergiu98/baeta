@@ -1,5 +1,9 @@
 # @baeta/plugin
 
-## Enumerations
+## Type Aliases
 
-- [PluginType](enumerations/PluginType.md)
+- [PluginType](type-aliases/PluginType.md)
+
+## Variables
+
+- [PluginType](variables/PluginType.md)

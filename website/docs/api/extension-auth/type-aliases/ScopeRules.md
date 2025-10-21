@@ -5,7 +5,7 @@
 Defines the structure of authorization scope rules.
 Combines individual scope rules with logical operators and granted permissions.
 
-## Type declaration
+## Type Declaration
 
 <table>
 <thead>

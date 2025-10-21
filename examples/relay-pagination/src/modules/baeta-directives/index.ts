@@ -2,8 +2,7 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import { getBaetaDirectivesModule } from "./typedef.ts";
+import { definitions } from "@baeta/directives";
+import { BaetaDirectivesModule } from "./typedef.ts";
 
-import "./directives.baeta";
-
-export const baetaDirectivesModule = getBaetaDirectivesModule();
+export default BaetaDirectivesModule.$directive(definitions.map((definition) => definition.directive)).$schema({});

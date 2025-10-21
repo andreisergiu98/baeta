@@ -22,11 +22,13 @@ export function createWsConnectionsClass<Env, Context, ContextParams>(
 ) => DurableObject {
 	return class BaetaWsConnections implements DurableObject {
 		connections = new Map<string, WebSocket>();
+		state: DurableObjectState;
+		env: Env;
 
-		constructor(
-			public state: DurableObjectState,
-			public env: Env,
-		) {}
+		constructor(state: DurableObjectState, env: Env) {
+			this.state = state;
+			this.env = env;
+		}
 
 		async fetch(request: Request) {
 			const pathName = new URL(request.url).pathname.slice(1);

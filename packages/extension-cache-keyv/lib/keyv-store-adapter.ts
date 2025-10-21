@@ -8,15 +8,11 @@ import {
 import type Keyv from 'keyv';
 
 export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
-	constructor(
-		private client: Keyv,
-		serializer: Serializer,
-		options: StoreOptions<Item>,
-		type: string,
-		hash: string,
-	) {
-		super(serializer, options, type, hash);
+	private client: Keyv;
 
+	constructor(client: Keyv, serializer: Serializer, options: StoreOptions<Item>, type: string) {
+		super(serializer, options, type);
+		this.client = client;
 		if (this.client.iterator == null) {
 			throw new Error('Keyv client does not support iterator');
 		}

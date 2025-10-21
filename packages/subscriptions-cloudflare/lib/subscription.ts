@@ -13,7 +13,7 @@ export type Publish<Map extends Record<string, any>> = <C extends keyof Map, P e
 // biome-ignore lint/suspicious/noExplicitAny: accept any type for generic pubsub map
 export type Subscribe<Map extends Record<string, any>> = <C extends keyof Map, P extends Map[C]>(
 	topic: C,
-) => AsyncIterator<P>;
+) => AsyncIterable<P>;
 
 export function createCloudflareSubscription<
 	Env,

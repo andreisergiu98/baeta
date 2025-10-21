@@ -31,16 +31,17 @@ import { UpstashStoreAdapter } from './upstash-store-adapter.ts';
  * ```
  */
 export class UpstashStore extends Store {
-	constructor(protected client: UpstashClient) {
+	protected client: UpstashClient;
+	constructor(client: UpstashClient) {
 		super();
+		this.client = client;
 	}
 
 	createStoreAdapter<T>(
 		serializer: Serializer,
 		options: StoreOptions<T>,
 		type: string,
-		hash: string,
 	): StoreAdapter<T> {
-		return new UpstashStoreAdapter<T>(this.client, serializer, options, type, hash);
+		return new UpstashStoreAdapter<T>(this.client, serializer, options, type);
 	}
 }

@@ -1,0 +1,93 @@
+---
+sidebar_position: 3
+description: "Create your first GraphQL module with Baeta"
+---
+
+# First Module
+
+Learn how to create your first GraphQL module with Baeta. We'll create a simple user module to demonstrate Baeta's schema-first and modular approach.
+
+## Creating a Module
+
+### 1. Define Schema
+
+Create your first schema file at `src/modules/user/user.gql`:
+
+```graphql
+type User {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  user(id: ID): User
+}
+```
+
+:::tip
+You can split your schema into multiple files (types, inputs, queries) as your module grows.
+:::
+
+### 2. Generate Types
+
+Generate TypeScript definitions for your schema:
+
+```bash
+yarn generate
+# or
+yarn baeta generate
+```
+
+This creates `src/modules/user/typedef.ts` with all necessary type definitions.
+
+:::tip
+Baeta can watch for changes with the `--watch` flag.
+:::
+
+### 3. Add Resolver
+
+Create `src/modules/user/resolvers.ts` to implement your query:
+
+```typescript
+import { getUserModule } from "./typedef";
+
+const { Query } = getUserModule();
+
+Query.user(async (params) => {
+  return {
+    id: params.args.id ?? "id",
+    name: "John Doe",
+  };
+});
+```
+
+### 4. Export Module
+
+Create `src/modules/user/index.ts` to export your module:
+
+```typescript
+import "./resolvers";
+import { getUserModule } from "./typedef";
+
+export const userModule = getUserModule();
+```
+
+:::tip
+You can use **@baeta/plugin-autoload** to automatically load resolvers and modules. This eliminates the need to manually import resolvers and export modules, making development faster and less error-prone.
+:::
+
+## Project Structure
+
+Your module should now look like this:
+
+```
+src/modules/user/
+├── user.gql        # Schema definition
+├── resolvers.ts    # Query/Mutation implementations
+├── typedef.ts      # Auto-generated types
+└── index.ts        # Module export
+```
+
+## Next Steps
+
+Now that you have your first module, learn how to [extend it with another module](./extend-modules).

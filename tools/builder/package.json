@@ -26,28 +26,26 @@
   },
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js"
-    },
-    "./tsup": {
-      "types": "./tsup.d.ts",
-      "import": "./tsup.js"
+    "./tsdown": {
+      "import": "./tsdown.ts"
     }
   },
-  "bin": {
-    "prep": "./bin/prep.js",
-    "tsup": "./bin/tsup.js"
-  },
+  "bin": "./bin/cli.ts",
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
-    "esbuild": "^0.25.5",
-    "tsup": "^8.5.0"
+    "commander": "^14.0.1",
+    "esbuild": "^0.25.11",
+    "execa": "^9.6.0",
+    "prompts": "^2.4.2",
+    "tsdown": "^0.15.9",
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/color-hash": "^2.0.0",
-    "@types/node": "^22.15.30",
-    "typescript": "^5.8.3"
+    "@types/node": "^22.18.11",
+    "@types/prompts": "^2.4.9",
+    "@types/yargs": "^17.0.33",
+    "typescript": "^5.9.3"
   }
 }

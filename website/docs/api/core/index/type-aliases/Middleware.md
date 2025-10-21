@@ -1,6 +1,6 @@
-# Middleware()\<Result, Root, Context, Args\>
+# Middleware()\<Result, Source, Context, Args, Info\>
 
-> **Middleware**\<`Result`, `Root`, `Context`, `Args`\> = (`params`, `next`) => `Promise`\<`Result`\>
+> **Middleware**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = (`next`, `params`) => `Result` \| `PromiseLike`\<`Result`\>
 
 ## Type Parameters
 
@@ -21,7 +21,7 @@
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -36,6 +36,13 @@
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -55,24 +62,24 @@
 <tr>
 <td>
 
-`params`
+`next`
 
 </td>
 <td>
 
-[`MiddlewareParams`](MiddlewareParams.md)\<`Root`, `Context`, `Args`\>
+() => `Promise`\<`Result`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-`next`
+`params`
 
 </td>
 <td>
 
-[`MiddlewareNext`](MiddlewareNext.md)\<`Result`\>
+`MiddlewareParams`\<`Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>
@@ -81,4 +88,4 @@
 
 ## Returns
 
-`Promise`\<`Result`\>
+`Result` \| `PromiseLike`\<`Result`\>

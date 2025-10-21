@@ -63,7 +63,7 @@ test('StoreAdapter.saveQueryResult and getQueryResult', async (t) => {
 	const adapter = createTestAdapter();
 	const item: TestItem = { id: '2', value: 'test2' };
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, item);
 	const result = await adapter.getQueryResult(queryRef);
@@ -78,7 +78,7 @@ test('StoreAdapter.saveQueryResult and getQueryResult with list', async (t) => {
 		{ id: '2', value: 'test2' },
 	];
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, items);
 	const result = await adapter.getQueryResult(queryRef);
@@ -92,7 +92,7 @@ test('StoreAdapter.saveQueryResult with parent ref and args', async (t) => {
 	const parentRef = 'parent1';
 	const args = { filter: 'test' };
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, item, { parentRef, args });
 	const result = await adapter.getQueryResult(queryRef, { parentRef, args });
@@ -104,7 +104,7 @@ test('StoreAdapter.deleteQueries', async (t) => {
 	const adapter = createTestAdapter();
 	const item: TestItem = { id: '1', value: 'test1' };
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, item);
 	await adapter.deleteQueries(queryRef);
@@ -121,7 +121,7 @@ test('StoreAdapter handles null values in lists', async (t) => {
 		{ id: '2', value: 'test2' },
 	];
 
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 
 	await adapter.saveQueryResult(queryRef, items);
 	const result = await adapter.getQueryResult(queryRef);
@@ -131,7 +131,7 @@ test('StoreAdapter handles null values in lists', async (t) => {
 
 test('StoreAdapter handles empty query results', async (t) => {
 	const adapter = createTestAdapter();
-	const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+	const queryRef = new CacheRef('TestQuery', 'test');
 	await adapter.saveQueryResult(queryRef, []);
 	const result = await adapter.getQueryResult(queryRef);
 	t.deepEqual(result?.query, []);
@@ -142,10 +142,9 @@ test('StoreAdapter respects revision option', async (t) => {
 		createSerializer(),
 		{ getRef: (item) => item.id, revision: 2 },
 		'test',
-		'test-hash',
 	);
 	const key = adapter.exposeCreateKey('1');
-	t.is(key, 'test:items:r2_test-hash:1');
+	t.is(key, 'test:items:r2:1');
 });
 
 test('Protected methods - key generation', async (t) => {
@@ -153,10 +152,10 @@ test('Protected methods - key generation', async (t) => {
 	const item: TestItem = { id: '1', value: 'test' };
 
 	const key = adapter.exposeCreateKey('1');
-	t.is(key, 'test:items:r0_test-hash:1');
+	t.is(key, 'test:items:r0:1');
 
 	const itemKey = adapter.exposeCreateKeyByItem(item);
-	t.is(itemKey, 'test:items:r0_test-hash:1');
+	t.is(itemKey, 'test:items:r0:1');
 });
 
 test('Protected methods - query key generation', async (t) => {
@@ -164,7 +163,7 @@ test('Protected methods - query key generation', async (t) => {
 	const parentRef = 'parent1';
 	const args = { filter: 'test' };
 	const queryKey = adapter.exposeCreateKeyByQuery('TestQuery', parentRef, args);
-	t.is(queryKey, 'test:TestQuery:r0_test-hash:parent#_parent1#args#_filter#_test');
+	t.is(queryKey, 'test:TestQuery:r0:parent#_parent1#args#_filter#_test');
 });
 
 test('Protected methods - ref handling', async (t) => {
@@ -427,5 +426,5 @@ class MockStoreAdapter<T> extends StoreAdapter<T> {
 // Test setup helper
 function createTestAdapter<T = TestItem>(options: StoreOptions<T> = {}) {
 	const serializer = createSerializer();
-	return new MockStoreAdapter<T>(serializer, options, 'test', 'test-hash');
+	return new MockStoreAdapter<T>(serializer, options, 'test');
 }

@@ -1,34 +1,21 @@
 import { defineConfig } from '@baeta/cli';
-import { autoloadPlugin } from '@baeta/plugin-autoload';
 import { directivesPlugin } from '@baeta/plugin-directives';
 import { paginationPlugin } from '@baeta/plugin-pagination';
 import { prismaPlugin } from '@baeta/plugin-prisma';
+// This step is optional, but it can be used to improve type safety
+import type { BaseObjectTypes } from './src/__generated__/utility.ts';
 
 export default defineConfig({
 	graphql: {
 		schemas: ['src/**/*.gql'],
-		contextType: 'src/types/context#Context',
-		scalars: {
-			DateTime: 'Date',
-		},
-	},
-	compiler: {
-		src: 'src/app',
-		dist: 'dist',
-		bundleWorkspaces: true,
-		cjsGlobals: true, // Required for Prisma to work with ESM
-		esbuild: {
-			format: 'esm',
-		},
 	},
 	plugins: [
-		autoloadPlugin(),
 		prismaPlugin({
 			prismaSchema: 'schema.prisma',
 			generateCommand: 'yarn prisma generate',
 			generatedSchemaPath: 'src/__generated__/prisma/schema.prisma',
 		}),
-		paginationPlugin({
+		paginationPlugin<BaseObjectTypes>({
 			types: {
 				User: true,
 				UserPhoto: true,

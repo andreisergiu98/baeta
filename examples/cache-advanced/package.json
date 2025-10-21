@@ -26,9 +26,9 @@
   },
   "type": "module",
   "scripts": {
-    "build": "baeta build --generate",
+    "build": "baeta generate",
     "prisma": "pnpify prisma",
-    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
+    "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
   "prisma": {
     "seed": "yarn node --experimental-transform-types --no-warnings ./src/lib/db/seed.ts"
@@ -39,25 +39,24 @@
     "@baeta/extension-cache": "workspace:^",
     "@baeta/extension-cache-redis": "workspace:^",
     "graphql": "^16.11.0",
-    "graphql-scalars": "^1.24.2",
-    "graphql-ws": "^6.0.5",
-    "graphql-yoga": "^5.13.5",
-    "ioredis": "^5.6.1",
-    "prisma": "^6.9.0",
-    "ws": "^8.18.2"
+    "graphql-scalars": "^1.25.0",
+    "graphql-ws": "^6.0.6",
+    "graphql-yoga": "^5.16.0",
+    "ioredis": "^5.8.1",
+    "prisma": "^6.17.1",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
-    "@baeta/plugin-autoload": "workspace:^",
     "@baeta/plugin-directives": "workspace:^",
     "@baeta/plugin-pagination": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@faker-js/faker": "^9.8.0",
-    "@prisma/client": "^6.9.0",
-    "@types/node": "^22.15.30",
+    "@faker-js/faker": "^10.1.0",
+    "@prisma/client": "^6.17.1",
+    "@types/node": "^22.18.11",
     "@types/ws": "^8.18.1",
-    "@yarnpkg/pnpify": "^4.1.5",
-    "typescript": "^5.8.3"
+    "@yarnpkg/pnpify": "^4.1.6",
+    "typescript": "^5.9.3"
   }
 }

@@ -29,16 +29,17 @@ import { KeyvStoreAdapter } from './keyv-store-adapter.ts';
  * ```
  */
 export class KeyvStore extends Store {
-	constructor(protected keyv: Keyv) {
+	protected keyv: Keyv;
+	constructor(keyv: Keyv) {
 		super();
+		this.keyv = keyv;
 	}
 
 	createStoreAdapter<T>(
 		serializer: Serializer,
 		options: StoreOptions<T>,
 		type: string,
-		hash: string,
 	): StoreAdapter<T> {
-		return new KeyvStoreAdapter<T>(this.keyv, serializer, options, type, hash);
+		return new KeyvStoreAdapter<T>(this.keyv, serializer, options, type);
 	}
 }

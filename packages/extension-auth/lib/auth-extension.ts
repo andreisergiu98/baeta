@@ -1,21 +1,21 @@
 import {
 	Extension,
-	type ModuleBuilder,
-	type NativeMiddleware,
-	type ResolverMapper,
+	type FieldBuilder,
+	type ModuleCompiler,
+	nameFunction,
+	type SubscriptionBuilder,
+	type SubscriptionWrapper,
+	type TypeBuilder,
 } from '@baeta/core/sdk';
-import { compileMiddlewares } from './auth-compiler.ts';
+import { isOperationType } from '../utils/resolver.ts';
 import {
-	type AuthMiddlewareOptions,
+	createFallbackMiddleware,
 	createMiddleware,
 	createPostMiddleware,
-	type GetPostScopeRules,
-	type GetScopeRules,
 } from './auth-middlewares.ts';
 import type { ScopeErrorResolver } from './error.ts';
 import type { DefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
-import type { ScopeRules } from './scope-rules.ts';
 
 /**
  * Configuration options for the Auth Extension
@@ -27,126 +27,186 @@ export interface AuthOptions {
 	errorResolver?: ScopeErrorResolver;
 }
 
-export class AuthExtension<Ctx> extends Extension {
-	private authMap: Record<string, Record<string, undefined | NativeMiddleware>> = {};
+interface AuthState {
+	hasAuth: boolean;
+}
 
-	constructor(
-		readonly loadScopes: GetScopeLoader<AuthExtension.Scopes, Ctx>,
-		readonly options: AuthOptions = {},
-	) {
-		super();
-	}
-
-	getMiddlewareMap() {
-		return this.authMap;
-	}
-
-	getTypeExtensions = <Root, Context extends Ctx>(
-		_module: ModuleBuilder,
-		type: string,
-	): BaetaExtensions.TypeExtensions<Root, Context> => {
-		return {
-			$auth: this.createAuthMethod(type, '*'),
-			$postAuth: this.createPostAuthMethod(type, '*'),
-		};
-	};
-
-	getResolverExtensions = <Result, Root, Context extends Ctx, Args>(
-		_module: ModuleBuilder,
-		type: string,
-		field: string,
-	): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
-		return {
-			$auth: this.createAuthMethod(type, field),
-			$postAuth: this.createPostAuthMethod(type, field),
-		};
-	};
-
-	getSubscriptionSubscribeExtensions = <Root, Context extends Ctx, Args>(
-		_module: ModuleBuilder,
-		field: string,
-	): BaetaExtensions.SubscriptionSubscribeExtensions<Root, Context, Args> => {
-		return {
-			$auth: this.createAuthMethod('Subscription', `${field}.subscribe`),
-		};
-	};
-
-	getSubscriptionResolveExtensions = <Result, Root, Context extends Ctx, Args>(
-		_module: ModuleBuilder,
-		field: string,
-	): BaetaExtensions.SubscriptionResolveExtensions<Result, Root, Context, Args> => {
-		return {
-			$auth: this.createAuthMethod('Subscription', `${field}.resolve`),
-			$postAuth: this.createPostAuthMethod('Subscription', `${field}.resolve`),
-		};
-	};
-
-	build = (_module: ModuleBuilder, mapper: ResolverMapper) => {
-		compileMiddlewares<AuthExtension.Scopes, AuthExtension.Grants, Ctx>(
-			mapper,
-			this.authMap,
-			this.loadScopes,
-			this.options.defaultScopes,
-			this.options.errorResolver,
-		);
-	};
-
-	private createAuthMethod<Result, Root, Context extends Ctx, Args>(type: string, field: string) {
-		return (
-			scopes:
-				| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
-				| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Root, Context, Args>,
-			options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
-		) => {
-			const middleware = createMiddleware(
-				type,
-				field,
-				this.loadScopes,
-				scopes,
-				this.options.defaultScopes,
-				options,
-				this.options.errorResolver,
-			);
-			this.registerMiddleware(type, field, middleware);
-		};
-	}
-
-	private createPostAuthMethod<Result, Root, Context extends Ctx, Args>(
-		type: string,
-		field: string,
-	) {
-		return (
-			scopes: GetPostScopeRules<
-				AuthExtension.Scopes,
-				AuthExtension.Grants,
-				Result,
-				Root,
-				Context,
-				Args
-			>,
-			options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Root, Context, Args>,
-		) => {
-			const middleware = createPostMiddleware(
-				type,
-				field,
-				this.loadScopes,
-				scopes,
-				this.options.defaultScopes,
-				options,
-				this.options.errorResolver,
-			);
-			this.registerMiddleware(type, field, middleware);
-		};
-	}
-
-	private registerMiddleware<Result, Root, Context, Args>(
-		type: string,
-		field: string,
-		middleware: NativeMiddleware<Result, Root, Context, Args>,
-	) {
-		if (this.authMap[type] == null) {
-			this.authMap[type] = {};
+declare global {
+	export namespace BaetaExtensions {
+		export interface Extensions {
+			authExtension: AuthExtension<unknown>;
 		}
-		this.authMap[type][field] = middleware as NativeMiddleware;
+	}
+}
+
+export class AuthExtension<Ctx> extends Extension<AuthState> {
+	readonly stateKey = Symbol('auth-state');
+	readonly loadScopes: GetScopeLoader<AuthExtension.Scopes, unknown>;
+	readonly options: AuthOptions;
+
+	constructor(loadScopes: GetScopeLoader<AuthExtension.Scopes, Ctx>, options: AuthOptions = {}) {
+		super();
+		this.loadScopes = loadScopes as GetScopeLoader<AuthExtension.Scopes, unknown>;
+		this.options = options;
+	}
+
+	getTypeExtensions = <Source, Context, Info>(
+		builder: TypeBuilder<Source, Context, Info>,
+	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> => {
+		return {
+			$auth: (scopes, options) => {
+				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
+				const middleware = createMiddleware(
+					editable.type,
+					this.loadScopes,
+					scopes,
+					this.options.defaultScopes,
+					options,
+					this.options.errorResolver,
+				);
+				nameFunction(middleware, `${editable.type}.$auth`);
+				return editable.addMiddleware(middleware).commitToMethods();
+			},
+			$postAuth: (scopes, options) => {
+				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
+				const middleware = createPostMiddleware(
+					editable.type,
+					this.loadScopes,
+					scopes,
+					this.options.defaultScopes,
+					options,
+					this.options.errorResolver,
+				);
+				nameFunction(middleware, `${editable.type}.$postAuth`);
+				return editable.addMiddleware(middleware).commitToMethods();
+			},
+		};
+	};
+
+	getFieldExtensions<Result, Source, Context, Args, Info>(
+		builder: FieldBuilder<Result, Source, Context, Args, Info>,
+	): BaetaExtensions.FieldExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		FieldBuilder<Result, Source, Context, Args, Info>
+	> {
+		return {
+			$auth: (scopes, options) => {
+				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
+				const middleware = createMiddleware<
+					AuthExtension.Scopes,
+					AuthExtension.Grants,
+					Result,
+					Source,
+					Context,
+					Args,
+					Info
+				>(
+					editable.type,
+					this.loadScopes,
+					scopes,
+					this.options.defaultScopes,
+					options,
+					this.options.errorResolver,
+				);
+				nameFunction(middleware, `${editable.type}.${builder.field}.$auth`);
+				return editable.addMiddleware(middleware).commitToMethods();
+			},
+			$postAuth: (scopes, options) => {
+				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
+				const middleware = createPostMiddleware(
+					editable.type,
+					this.loadScopes,
+					scopes,
+					this.options.defaultScopes,
+					options,
+					this.options.errorResolver,
+				);
+				nameFunction(middleware, `${editable.type}.${builder.field}.$postAuth`);
+				return editable.addMiddleware(middleware).commitToMethods();
+			},
+		};
+	}
+
+	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
+		builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
+	): BaetaExtensions.SubscriptionExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		SubscriptionBuilder<Result, Source, Context, Args, Info>
+	> {
+		return {
+			$auth: (scopes, options) => {
+				const editable = builder.edit();
+				this.setState(editable, {
+					hasAuth: true,
+				});
+				const middleware = createMiddleware<
+					AuthExtension.Scopes,
+					AuthExtension.Grants,
+					SubscriptionWrapper<unknown>,
+					Source,
+					Context,
+					Args,
+					Info
+				>(
+					'Subscription',
+					this.loadScopes,
+					scopes,
+					this.options.defaultScopes,
+					options,
+					this.options.errorResolver,
+				);
+				nameFunction(middleware, `Subscription.${editable.field}.$auth`);
+				return editable.addMiddleware(middleware).commitToMethods();
+			},
+		};
+	}
+
+	mutate(compilers: ModuleCompiler[]): void {
+		if (this.options.defaultScopes == null) return;
+
+		for (const compiler of compilers) {
+			for (const typeCompiler of compiler.types) {
+				if (!isOperationType(typeCompiler.type)) continue;
+				if (this.options.defaultScopes[typeCompiler.type] == null) continue;
+
+				const state = this.getState(typeCompiler);
+				if (state?.hasAuth === true) continue;
+
+				for (const fieldCompiler of typeCompiler.fields) {
+					const state = this.getState(fieldCompiler);
+					if (state?.hasAuth === true) continue;
+
+					const middleware = createFallbackMiddleware(
+						typeCompiler.type,
+						this.loadScopes,
+						this.options.defaultScopes,
+						this.options.errorResolver,
+					);
+					if (middleware == null) continue;
+
+					fieldCompiler.addInitialMiddleware(middleware);
+				}
+			}
+		}
 	}
 }

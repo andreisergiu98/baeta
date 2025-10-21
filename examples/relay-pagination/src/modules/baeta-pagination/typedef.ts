@@ -2,64 +2,109 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import * as Types from "../../__generated__/types.ts";
-import type { DocumentNode } from "graphql";
+import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
+import extensions from "../extensions.ts";
+import type {Ctx, Info} from "../types.ts";
+import * as Types from "../../__generated__/types.ts";
 
-
-interface DefinedFields {
-  PageInfo: 'hasPreviousPage' | 'hasNextPage';
-  UserConnection: 'pageInfo' | 'edges';
-  UserEdge: 'cursor' | 'node';
-  UserPhotoConnection: 'pageInfo' | 'edges';
-  UserPhotoEdge: 'cursor' | 'node';
-};
-
-export type PageInfo = Pick<Types.PageInfo, DefinedFields['PageInfo']>;
-export type UserConnection = Pick<Types.UserConnection, DefinedFields['UserConnection']>;
-export type UserEdge = Pick<Types.UserEdge, DefinedFields['UserEdge']>;
-export type User = Pick<Types.User, Types.DefinedFieldsWithoutExtensions["User"]>;
-export type UserPhotoConnection = Pick<Types.UserPhotoConnection, DefinedFields['UserPhotoConnection']>;
-export type UserPhotoEdge = Pick<Types.UserPhotoEdge, DefinedFields['UserPhotoEdge']>;
-export type UserPhoto = Pick<Types.UserPhoto, Types.DefinedFieldsWithoutExtensions["UserPhoto"]>;
-
-export namespace ModuleMetadata {
-  export const id = 'baeta-pagination';
-  export const dirname = './baeta-pagination';
-  export const hashes = {"PageInfo":{"hash":"f4iuf3","fieldsHashes":{"hasNextPage":"11lc64k","hasPreviousPage":"11lc64k"}},"UserConnection":{"hash":"1p21apv","fieldsHashes":{"edges":"phxsgo","pageInfo":"18aoznt"}},"UserEdge":{"hash":"1aocxeo","fieldsHashes":{"cursor":"1ij53kg","node":"14091bp"}},"UserPhotoConnection":{"hash":"481po7","fieldsHashes":{"edges":"12zsdbo","pageInfo":"18aoznt"}},"UserPhotoEdge":{"hash":"1ho7sgp","fieldsHashes":{"cursor":"1ij53kg","node":"e7fyck"}}};
-  export const typedef = {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"PageInfo","loc":{"start":170,"end":178}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"hasPreviousPage","loc":{"start":183,"end":198}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean","loc":{"start":200,"end":207}},"loc":{"start":200,"end":207}},"loc":{"start":200,"end":208}},"directives":[],"loc":{"start":183,"end":208}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"hasNextPage","loc":{"start":211,"end":222}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean","loc":{"start":224,"end":231}},"loc":{"start":224,"end":231}},"loc":{"start":224,"end":232}},"directives":[],"loc":{"start":211,"end":232}}],"loc":{"start":165,"end":234}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserConnection","loc":{"start":241,"end":255}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"pageInfo","loc":{"start":260,"end":268}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo","loc":{"start":270,"end":278}},"loc":{"start":270,"end":278}},"loc":{"start":270,"end":279}},"directives":[],"loc":{"start":260,"end":279}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"edges","loc":{"start":282,"end":287}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserEdge","loc":{"start":290,"end":298}},"loc":{"start":290,"end":298}},"loc":{"start":289,"end":299}},"directives":[],"loc":{"start":282,"end":299}}],"loc":{"start":236,"end":301}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserEdge","loc":{"start":308,"end":316}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"cursor","loc":{"start":321,"end":327}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":329,"end":331}},"loc":{"start":329,"end":331}},"loc":{"start":329,"end":332}},"directives":[],"loc":{"start":321,"end":332}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"node","loc":{"start":335,"end":339}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":341,"end":345}},"loc":{"start":341,"end":345}},"directives":[],"loc":{"start":335,"end":345}}],"loc":{"start":303,"end":347}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhotoConnection","loc":{"start":354,"end":373}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"pageInfo","loc":{"start":378,"end":386}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo","loc":{"start":388,"end":396}},"loc":{"start":388,"end":396}},"loc":{"start":388,"end":397}},"directives":[],"loc":{"start":378,"end":397}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"edges","loc":{"start":400,"end":405}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoEdge","loc":{"start":408,"end":421}},"loc":{"start":408,"end":421}},"loc":{"start":407,"end":422}},"directives":[],"loc":{"start":400,"end":422}}],"loc":{"start":349,"end":424}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhotoEdge","loc":{"start":431,"end":444}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"cursor","loc":{"start":449,"end":455}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":457,"end":459}},"loc":{"start":457,"end":459}},"loc":{"start":457,"end":460}},"directives":[],"loc":{"start":449,"end":460}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"node","loc":{"start":463,"end":467}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":469,"end":478}},"loc":{"start":469,"end":478}},"directives":[],"loc":{"start":463,"end":478}}],"loc":{"start":426,"end":480}}]} as unknown as DocumentNode;
-  
-  export function createManager(module: Baeta.ModuleBuilder) {
-    return {
-      ...module.createModuleMethods<Types.ContextType>(),
-      PageInfo: {
-        ...module.createTypeMethods<PageInfo, Types.ContextType>("PageInfo"),
-        hasPreviousPage: module.createResolverBuilder<Types.Scalars["Boolean"]["output"], PageInfo, Types.ContextType, { }>("PageInfo", "hasPreviousPage"),
-        hasNextPage: module.createResolverBuilder<Types.Scalars["Boolean"]["output"], PageInfo, Types.ContextType, { }>("PageInfo", "hasNextPage"),
-      },
-      UserConnection: {
-        ...module.createTypeMethods<UserConnection, Types.ContextType>("UserConnection"),
-        pageInfo: module.createResolverBuilder<PageInfo, UserConnection, Types.ContextType, { }>("UserConnection", "pageInfo"),
-        edges: module.createResolverBuilder<Types.Maybe<Array<Types.Maybe<UserEdge>>>, UserConnection, Types.ContextType, { }>("UserConnection", "edges"),
-      },
-      UserEdge: {
-        ...module.createTypeMethods<UserEdge, Types.ContextType>("UserEdge"),
-        cursor: module.createResolverBuilder<Types.Scalars["ID"]["output"], UserEdge, Types.ContextType, { }>("UserEdge", "cursor"),
-        node: module.createResolverBuilder<Types.Maybe<User>, UserEdge, Types.ContextType, { }>("UserEdge", "node"),
-      },
-      UserPhotoConnection: {
-        ...module.createTypeMethods<UserPhotoConnection, Types.ContextType>("UserPhotoConnection"),
-        pageInfo: module.createResolverBuilder<PageInfo, UserPhotoConnection, Types.ContextType, { }>("UserPhotoConnection", "pageInfo"),
-        edges: module.createResolverBuilder<Types.Maybe<Array<Types.Maybe<UserPhotoEdge>>>, UserPhotoConnection, Types.ContextType, { }>("UserPhotoConnection", "edges"),
-      },
-      UserPhotoEdge: {
-        ...module.createTypeMethods<UserPhotoEdge, Types.ContextType>("UserPhotoEdge"),
-        cursor: module.createResolverBuilder<Types.Scalars["ID"]["output"], UserPhotoEdge, Types.ContextType, { }>("UserPhotoEdge", "cursor"),
-        node: module.createResolverBuilder<Types.Maybe<UserPhoto>, UserPhotoEdge, Types.ContextType, { }>("UserPhotoEdge", "node"),
-      },
-    };
-  }
+const moduleMetadata = {
+  id: 'baeta-pagination',
+  dirname: './baeta-pagination',
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"PageInfo","loc":{"start":170,"end":178}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"hasPreviousPage","loc":{"start":183,"end":198}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean","loc":{"start":200,"end":207}},"loc":{"start":200,"end":207}},"loc":{"start":200,"end":208}},"directives":[],"loc":{"start":183,"end":208}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"hasNextPage","loc":{"start":211,"end":222}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean","loc":{"start":224,"end":231}},"loc":{"start":224,"end":231}},"loc":{"start":224,"end":232}},"directives":[],"loc":{"start":211,"end":232}}],"loc":{"start":165,"end":234}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserConnection","loc":{"start":241,"end":255}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"pageInfo","loc":{"start":260,"end":268}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo","loc":{"start":270,"end":278}},"loc":{"start":270,"end":278}},"loc":{"start":270,"end":279}},"directives":[],"loc":{"start":260,"end":279}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"edges","loc":{"start":282,"end":287}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserEdge","loc":{"start":290,"end":298}},"loc":{"start":290,"end":298}},"loc":{"start":289,"end":299}},"directives":[],"loc":{"start":282,"end":299}}],"loc":{"start":236,"end":301}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserEdge","loc":{"start":308,"end":316}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"cursor","loc":{"start":321,"end":327}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":329,"end":331}},"loc":{"start":329,"end":331}},"loc":{"start":329,"end":332}},"directives":[],"loc":{"start":321,"end":332}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"node","loc":{"start":335,"end":339}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":341,"end":345}},"loc":{"start":341,"end":345}},"directives":[],"loc":{"start":335,"end":345}}],"loc":{"start":303,"end":347}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhotoConnection","loc":{"start":354,"end":373}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"pageInfo","loc":{"start":378,"end":386}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PageInfo","loc":{"start":388,"end":396}},"loc":{"start":388,"end":396}},"loc":{"start":388,"end":397}},"directives":[],"loc":{"start":378,"end":397}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"edges","loc":{"start":400,"end":405}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoEdge","loc":{"start":408,"end":421}},"loc":{"start":408,"end":421}},"loc":{"start":407,"end":422}},"directives":[],"loc":{"start":400,"end":422}}],"loc":{"start":349,"end":424}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhotoEdge","loc":{"start":431,"end":444}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"cursor","loc":{"start":449,"end":455}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":457,"end":459}},"loc":{"start":457,"end":459}},"loc":{"start":457,"end":460}},"directives":[],"loc":{"start":449,"end":460}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"node","loc":{"start":463,"end":467}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":469,"end":478}},"loc":{"start":469,"end":478}},"directives":[],"loc":{"start":463,"end":478}}],"loc":{"start":426,"end":480}}]} as unknown as DocumentNode
 }
 
-export const createBaetaPaginationModule = () => Baeta.createModuleManager(ModuleMetadata);
-export const getBaetaPaginationModule = Baeta.createSingletonModule(createBaetaPaginationModule);
+interface BaetaModuleTypes {
+  Builders: {
+    PageInfo: Baeta.TypeMethods<Types.PageInfo, Ctx, Info, BaetaModuleObjectTypeFields['PageInfo']['Builder'], BaetaModuleObjectTypeFields['PageInfo']['Factory']>
+    UserConnection: Baeta.TypeMethods<Types.UserConnection, Ctx, Info, BaetaModuleObjectTypeFields['UserConnection']['Builder'], BaetaModuleObjectTypeFields['UserConnection']['Factory']>
+    UserEdge: Baeta.TypeMethods<Types.UserEdge, Ctx, Info, BaetaModuleObjectTypeFields['UserEdge']['Builder'], BaetaModuleObjectTypeFields['UserEdge']['Factory']>
+    UserPhotoConnection: Baeta.TypeMethods<Types.UserPhotoConnection, Ctx, Info, BaetaModuleObjectTypeFields['UserPhotoConnection']['Builder'], BaetaModuleObjectTypeFields['UserPhotoConnection']['Factory']>
+    UserPhotoEdge: Baeta.TypeMethods<Types.UserPhotoEdge, Ctx, Info, BaetaModuleObjectTypeFields['UserPhotoEdge']['Builder'], BaetaModuleObjectTypeFields['UserPhotoEdge']['Factory']>
+  };
+  Factories: {
+    PageInfo: Baeta.TypeCompilerFactory<Types.PageInfo, Ctx, Info, BaetaModuleObjectTypeFields['PageInfo']['Factory']>
+    UserConnection: Baeta.TypeCompilerFactory<Types.UserConnection, Ctx, Info, BaetaModuleObjectTypeFields['UserConnection']['Factory']>
+    UserEdge: Baeta.TypeCompilerFactory<Types.UserEdge, Ctx, Info, BaetaModuleObjectTypeFields['UserEdge']['Factory']>
+    UserPhotoConnection: Baeta.TypeCompilerFactory<Types.UserPhotoConnection, Ctx, Info, BaetaModuleObjectTypeFields['UserPhotoConnection']['Factory']>
+    UserPhotoEdge: Baeta.TypeCompilerFactory<Types.UserPhotoEdge, Ctx, Info, BaetaModuleObjectTypeFields['UserPhotoEdge']['Factory']>
+  };
+};
+
+interface BaetaModuleObjectTypeFields {
+  PageInfo: {
+    Builder: {
+      hasPreviousPage: Baeta.FieldMethods<Types.Scalars["Boolean"], Types.PageInfo, Ctx, {}, Info>
+      hasNextPage: Baeta.FieldMethods<Types.Scalars["Boolean"], Types.PageInfo, Ctx, {}, Info>
+    };
+    Factory: {
+      hasPreviousPage: Baeta.Field<Types.Scalars["Boolean"], Types.Scalars["Boolean"], Types.PageInfo, Ctx, {}, Info>
+      hasNextPage: Baeta.Field<Types.Scalars["Boolean"], Types.Scalars["Boolean"], Types.PageInfo, Ctx, {}, Info>
+    };
+  };
+  UserConnection: {
+    Builder: {
+      pageInfo: Baeta.FieldMethods<Types.PageInfo, Types.UserConnection, Ctx, {}, Info>
+      edges: Baeta.FieldMethods<Array<Types.UserEdge | null> | null, Types.UserConnection, Ctx, {}, Info>
+    };
+    Factory: {
+      pageInfo: Baeta.Field<Types.PageInfo, Types.PageInfo, Types.UserConnection, Ctx, {}, Info>
+      edges: Baeta.Field<Array<Types.UserEdge | null> | null, Array<Types.UserEdge | null> | null, Types.UserConnection, Ctx, {}, Info>
+    };
+  };
+  UserEdge: {
+    Builder: {
+      cursor: Baeta.FieldMethods<Types.Scalars["ID"], Types.UserEdge, Ctx, {}, Info>
+      node: Baeta.FieldMethods<Types.User | null, Types.UserEdge, Ctx, {}, Info>
+    };
+    Factory: {
+      cursor: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.UserEdge, Ctx, {}, Info>
+      node: Baeta.Field<Types.User | null, Types.User | null, Types.UserEdge, Ctx, {}, Info>
+    };
+  };
+  UserPhotoConnection: {
+    Builder: {
+      pageInfo: Baeta.FieldMethods<Types.PageInfo, Types.UserPhotoConnection, Ctx, {}, Info>
+      edges: Baeta.FieldMethods<Array<Types.UserPhotoEdge | null> | null, Types.UserPhotoConnection, Ctx, {}, Info>
+    };
+    Factory: {
+      pageInfo: Baeta.Field<Types.PageInfo, Types.PageInfo, Types.UserPhotoConnection, Ctx, {}, Info>
+      edges: Baeta.Field<Array<Types.UserPhotoEdge | null> | null, Array<Types.UserPhotoEdge | null> | null, Types.UserPhotoConnection, Ctx, {}, Info>
+    };
+  };
+  UserPhotoEdge: {
+    Builder: {
+      cursor: Baeta.FieldMethods<Types.Scalars["ID"], Types.UserPhotoEdge, Ctx, {}, Info>
+      node: Baeta.FieldMethods<Types.UserPhoto | null, Types.UserPhotoEdge, Ctx, {}, Info>
+    };
+    Factory: {
+      cursor: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.UserPhotoEdge, Ctx, {}, Info>
+      node: Baeta.Field<Types.UserPhoto | null, Types.UserPhoto | null, Types.UserPhotoEdge, Ctx, {}, Info>
+    };
+  };
+};
+
+export const BaetaPaginationModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  PageInfo: Baeta.createTypeBuilder("PageInfo", {
+    hasPreviousPage: Baeta.createFieldBuilder("PageInfo", "hasPreviousPage", extensions),
+    hasNextPage: Baeta.createFieldBuilder("PageInfo", "hasNextPage", extensions)
+  }, extensions),
+  UserConnection: Baeta.createTypeBuilder("UserConnection", {
+    pageInfo: Baeta.createFieldBuilder("UserConnection", "pageInfo", extensions),
+    edges: Baeta.createFieldBuilder("UserConnection", "edges", extensions)
+  }, extensions),
+  UserEdge: Baeta.createTypeBuilder("UserEdge", {
+    cursor: Baeta.createFieldBuilder("UserEdge", "cursor", extensions),
+    node: Baeta.createFieldBuilder("UserEdge", "node", extensions)
+  }, extensions),
+  UserPhotoConnection: Baeta.createTypeBuilder("UserPhotoConnection", {
+    pageInfo: Baeta.createFieldBuilder("UserPhotoConnection", "pageInfo", extensions),
+    edges: Baeta.createFieldBuilder("UserPhotoConnection", "edges", extensions)
+  }, extensions),
+  UserPhotoEdge: Baeta.createTypeBuilder("UserPhotoEdge", {
+    cursor: Baeta.createFieldBuilder("UserPhotoEdge", "cursor", extensions),
+    node: Baeta.createFieldBuilder("UserPhotoEdge", "node", extensions)
+  }, extensions)
+}, {
+
+}, extensions);

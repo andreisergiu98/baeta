@@ -86,7 +86,7 @@ A lens to get and set values in an object, that fails silently if the path does 
 </td>
 <td>
 
-() => `null` \| `T`
+() => `T` \| `null`
 
 </td>
 </tr>

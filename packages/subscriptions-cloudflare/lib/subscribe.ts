@@ -114,5 +114,5 @@ export function createSubscriptionInfo(
 }
 
 export function subscribe<T>(topic: string) {
-	return { topic } as unknown as AsyncIterator<T>;
+	return { topic } as unknown as AsyncIterable<T>;
 }

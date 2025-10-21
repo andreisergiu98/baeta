@@ -3,17 +3,16 @@
   "files": {
     "includes": [
       "**",
-      "!**/website/build/**",
-      "!**/website/.docusaurus/**",
+      "!**/website/build",
+      "!**/website/.docusaurus",
       "!**/examples/**/modules/baeta-*/*",
-      "!**/examples/**/modules/autoload.ts",
-      "!**/examples/**/__generated__/**",
+      "!**/examples/**/modules/index.ts",
+      "!**/examples/**/__generated__",
       "!**/examples/**/typedef.ts",
-      "!**/examples/**/.wrangler/**",
-      "!**/.yarn/**",
-      "!**/.tsup/**",
-      "!**/.turbo/**",
-      "!**/dist/**"
+      "!**/examples/**/.wrangler",
+      "!**/.yarn",
+      "!**/.turbo",
+      "!**/dist"
     ]
   },
   "linter": {

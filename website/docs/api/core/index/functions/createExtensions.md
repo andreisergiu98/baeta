@@ -1,6 +1,6 @@
 # createExtensions()
 
-> **createExtensions**(...`extensions`): () => [`Extension`](../../sdk/classes/Extension.md)[]
+> **createExtensions**(`extensions`): [`Extension`](../../sdk/classes/Extension.md)\<`unknown`\>[]
 
 Creates a collection of Baeta extensions to be used in modules.
 The result must be exported as default, and the file path registered in `baeta.ts`.
@@ -20,12 +20,12 @@ See https://baeta.io/docs/extensions/
 <tr>
 <td>
 
-...`extensions`
+`extensions`
 
 </td>
 <td>
 
-() => [`Extension`](../../sdk/classes/Extension.md)[]
+[`Extensions`](../../sdk/namespaces/BaetaExtensions/interfaces/Extensions.md)
 
 </td>
 <td>
@@ -39,7 +39,7 @@ Array of extension factory functions
 
 ## Returns
 
-() => [`Extension`](../../sdk/classes/Extension.md)[]
+[`Extension`](../../sdk/classes/Extension.md)\<`unknown`\>[]
 
 Array of extension factory functions that can be used by Baeta modules
 

@@ -1,0 +1,194 @@
+---
+sidebar_position: 90
+---
+
+# Context Store
+
+Context Store is a feature in Baeta that provides a pattern for managing request-scoped data with lazy loading and caching capabilities. It allows you to define values that can be loaded on-demand and cached throughout the request lifecycle, while maintaining full type safety.
+
+## Why Use Context Store?
+
+Context Store solves several common problems in GraphQL APIs:
+
+### 1. Better Type Safety for Authentication
+
+Without Context Store, handling both authenticated and public routes often leads to compromised type safety:
+
+```typescript
+// Without Context Store
+type Context = {
+  user: User | null; // Have to make it optional for public routes
+};
+
+// Forces unnecessary null checks even in authenticated resolvers
+Query.profile(({ ctx }) => {
+  if (!ctx.user) {
+    // Required even though we know it's authenticated
+    throw new Error("Unauthenticated");
+  }
+  return ctx.user;
+});
+```
+
+With Context Store, you can have precise types for each use case:
+
+```typescript
+// With Context Store
+const optionalUser = await getOptionalUser(ctx); // User | null - for public routes
+const user = await getUser(ctx); // User - for authenticated routes, automatically throws if not authenticated
+```
+
+### 2. Lazy Loading & Performance
+
+Context Store prevents unnecessary database queries by:
+
+- Loading data only when it's actually needed
+- Caching the result for the entire request lifecycle
+
+For example:
+
+```typescript
+// Without Context Store
+const context = {
+  user: await db.user.findUnique({ where: { id: userId } }), // Always queries DB even if user data isn't needed
+};
+
+// With Context Store
+const user = await getUser(ctx); // Only queries DB when this line is executed
+// And subsequent calls in the same request will use cached data
+```
+
+### 3. Request-Scoped Caching
+
+Many applications repeatedly fetch the same data within a single request:
+
+```typescript
+// Without caching - hits database multiple times
+const userProfile = await db.user.findUnique(...);
+const userPreferences = await db.user.findUnique(...); // Same user, another query
+
+// With Context Store - single database query
+const user = await getUser(ctx); // First call fetches from DB
+const userAgain = await getUser(ctx); // Uses cached data
+```
+
+## Creating a Store
+
+Use `createContextStore` to define a store with its loading logic:
+
+```typescript
+import { createContextStore } from "@baeta/core";
+import { UnauthenticatedError } from "@baeta/errors";
+import type { User } from "./modules/user/typedef";
+import type { Context } from "./types/context";
+
+// Define the loader function
+async function loadOptionalUser(ctx: Context) {
+  if (!ctx.userId) {
+    return null;
+  }
+
+  const user = await db.user.findUnique({
+    where: { id: ctx.userId },
+  });
+
+  return user;
+}
+
+// Create the store
+const optionalUserStoreKey = Symbol("optionalUserStore");
+export const [getOptionalUser, setOptionalUserLoader] =
+  createContextStore<User | null>(optionalUserStoreKey, {
+    lazy: true, // Load the user only when requested
+  });
+```
+
+## Chaining Stores
+
+Stores can be chained to create more complex stores:
+
+```typescript
+// Build upon the optional user store
+async function loadUser(ctx: Context) {
+  const user = await getOptionalUser(ctx);
+
+  if (!user) {
+    throw new UnauthenticatedError();
+  }
+
+  return user;
+}
+
+const userStoreKey = Symbol("userStore");
+export const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, {
+  lazy: true,
+});
+```
+
+## Initializing Stores
+
+Initialize your stores in the context creation:
+
+```typescript
+export const yoga = createYoga<ServerContext, Context>({
+  schema: baeta.schema,
+  context: () => {
+    const ctx: Context = {
+      userId: "1",
+    };
+
+    // Set up the loaders
+    setOptionalUserLoader(ctx, () => loadOptionalUser(ctx));
+    setUserLoader(ctx, () => loadUser(ctx));
+
+    return ctx;
+  },
+});
+```
+
+## Using Stores in Resolvers
+
+Access store values in your resolvers:
+
+```typescript
+const { Query } = getUserModule();
+
+Query.me(async ({ ctx }) => {
+  // Optional user store - won't throw if user isn't authenticated
+  const optionalUser = await getOptionalUser(ctx); // User | null
+
+  // Required user store - will throw UnauthenticatedError if user isn't authenticated
+  const requiredUser = await getUser(ctx); // User
+
+  return requiredUser;
+});
+```
+
+## Caching Behavior
+
+Store values are cached for the entire request lifecycle. Multiple calls to the same store will only trigger the loader once:
+
+```typescript
+Query.example(async ({ ctx }) => {
+  // All these calls will only trigger loadOptionalUser once
+  await Promise.all([
+    getOptionalUser(ctx),
+    getOptionalUser(ctx),
+    getOptionalUser(ctx),
+  ]);
+
+  // Uses cached value
+  const user = await getOptionalUser(ctx);
+});
+```
+
+## Configuration Options
+
+The `createContextStore` function accepts these options:
+
+```typescript
+type StoreOptions = {
+  lazy?: boolean; // If true, only loads when first accessed
+  // Add any future options here
+};
+```

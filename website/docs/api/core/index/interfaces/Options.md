@@ -1,4 +1,30 @@
-# Options
+# Options\<Context, Info\>
+
+## Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Context`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Properties
 
@@ -20,7 +46,7 @@
 </td>
 <td>
 
-`Record`\<`string`, `unknown`\>[]
+[`ModuleCompilerFactory`](../../sdk/type-aliases/ModuleCompilerFactory.md)\<`Context`, `Info`, [`TypesResolversMap`](../../sdk/type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>\>[]
 
 </td>
 <td>

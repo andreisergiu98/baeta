@@ -1,7 +1,7 @@
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
 import { Hono } from 'hono';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
 // biome-ignore lint/complexity/noBannedTypes: allow {}
@@ -34,5 +34,7 @@ router.get('/graphql', (ctx) => {
 router.post('/graphql', (ctx) => {
 	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
 });
+
+console.log(router.routes);
 
 export default router;

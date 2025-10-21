@@ -1,22 +1,25 @@
 import { db } from '../../lib/db/prisma.ts';
-import { getUserModule } from './typedef.ts';
+import { UserModule } from './typedef.ts';
 
-const { Subscription } = getUserModule();
+const { Subscription } = UserModule;
 
-Subscription.userCreated({
-	subscribe(params) {
-		return params.ctx.pubsub.subscribe('user-created');
-	},
-	resolve(params) {
-		return db.user.findFirstOrThrow({ where: { id: params.payload } });
-	},
-});
+const userCreatedSubscription = Subscription.userCreated
+	.subscribe(({ ctx }) => {
+		return ctx.pubsub.subscribe('user-created');
+	})
+	.resolve(({ source }) => {
+		return db.user.findFirstOrThrow({ where: { id: source } });
+	});
 
-Subscription.userUpdated({
-	subscribe({ ctx }) {
+const userUpdatedSubscription = Subscription.userUpdated
+	.subscribe(({ ctx }) => {
 		return ctx.pubsub.subscribe('user-updated');
-	},
-	resolve({ payload }) {
-		return payload;
-	},
+	})
+	.resolve(({ source }) => {
+		return source;
+	});
+
+export default Subscription.$fields({
+	userCreated: userCreatedSubscription,
+	userUpdated: userUpdatedSubscription,
 });

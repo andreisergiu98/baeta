@@ -69,7 +69,7 @@ code=${`${pkgManager} install`}`;
     Starts the development server.
 
   code=${`${pkgManager} ${useRunCommand ? 'run ' : ''}build`}
-    Bundles your server application.
+    Generates the Baeta application.
 
 We recommend that you begin by typing:
 

@@ -48,9 +48,7 @@ export const authExt = authExtension<Context>(
 				isLoggedIn: true,
 			},
 			Subscription: {
-				subscribe: {
-					isLoggedIn: true,
-				},
+				isLoggedIn: true,
 			},
 		},
 	},

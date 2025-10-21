@@ -8,7 +8,6 @@
     ]
   },
   "exclude": [
-    "dist",
-    "tsup.config.ts"
+    "dist"
   ]
 }

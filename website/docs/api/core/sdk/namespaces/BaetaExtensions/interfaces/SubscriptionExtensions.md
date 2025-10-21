@@ -1,4 +1,4 @@
-# SubscriptionExtensions\<Root, Context, Args\>
+# SubscriptionExtensions\<Result, Source, Context, Args, Info, Builder\>
 
 ## Type Parameters
 
@@ -12,7 +12,14 @@
 <tr>
 <td>
 
-`Root`
+`Result`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Source`
 
 </td>
 </tr>
@@ -27,6 +34,20 @@
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Builder` _extends_ [`SubscriptionBuilder`](../../../classes/SubscriptionBuilder.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

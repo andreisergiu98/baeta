@@ -2,58 +2,29 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import type { UUID } from '../types/scalars.ts';
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = T | undefined;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-type ContextType = any
-export type { ContextType }
-/** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  DateTime: { input: Date; output: Date; }
-  UUID: { input: UUID; output: UUID; }
+import * as BaetaUtility from "./utility.ts";
+import * as BaetaOverrides from "../modules/types.ts";
+
+export type Scalars = BaetaOverrides.Scalars;
+
+export type Query = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Query"], {
+  user: User | null
+}>
+
+export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
+  id: Scalars["UUID"]
+  email: Scalars["String"]
+  birthday: Scalars["DateTime"]
+}>
+
+export type UserIdArgs = {
 };
 
-export type User = {
-  __typename?: 'User';
-  id: Scalars['UUID']['output'];
-  email: Scalars['String']['output'];
-  birthday: Scalars['DateTime']['output'];
+export type UserEmailArgs = {
 };
 
-export type Query = {
-  __typename?: 'Query';
-  user?: Maybe<User>;
+export type UserBirthdayArgs = {
 };
 
-export type DateTime = Scalars["DateTime"];
-export type Uuid = Scalars["UUID"];
-
-export type DefinedFieldsWithoutExtensions = {
-  User: "id" | "email" | "birthday";
-};
-
-export type DefinedUnionsWithoutExtensions = {
-
-};
-
-export type DefinedUnionsResults = {
-
-};
-
-export type DefinedInterfacesWithoutExtensions = {
-
-};
-
-export type DefinedInterfacesResults = {
-
+export type QueryUserArgs = {
 };

@@ -2,28 +2,32 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import * as Types from "../../__generated__/types.ts";
-import type { DocumentNode } from "graphql";
+import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import baetaExtensions from "../../extensions/index.ts";
+import extensions from "../extensions.ts";
+import type {Ctx, Info} from "../types.ts";
+import * as Types from "../../__generated__/types.ts";
 
-
-export namespace ModuleMetadata {
-  export const id = 'scalars';
-  export const dirname = './scalars';
-  export const hashes = {};
-  export const typedef = {"kind":"Document","definitions":[{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":7,"end":15}},"directives":[],"loc":{"start":0,"end":15}},{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"UUID","loc":{"start":24,"end":28}},"directives":[],"loc":{"start":17,"end":28}}]} as unknown as DocumentNode;
-  
-  export function createManager(module: Baeta.ModuleBuilder) {
-    return {
-      ...module.createModuleMethods<Types.ContextType>(),
-      Scalar: {
-        DateTime: module.createScalarBuilder("DateTime"),
-        UUID: module.createScalarBuilder("UUID"),
-      },
-    };
-  }
+const moduleMetadata = {
+  id: 'scalars',
+  dirname: './scalars',
+  typedef: {"kind":"Document","definitions":[{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":7,"end":15}},"directives":[],"loc":{"start":0,"end":15}},{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"UUID","loc":{"start":24,"end":28}},"directives":[],"loc":{"start":17,"end":28}}]} as unknown as DocumentNode
 }
 
-export const createScalarsModule = () => Baeta.createModuleManager(ModuleMetadata, baetaExtensions);
-export const getScalarsModule = Baeta.createSingletonModule(createScalarsModule);
+interface BaetaModuleTypes {
+  Builders: {
+  };
+  Factories: {
+    DateTime: GraphQLScalarType
+    UUID: GraphQLScalarType
+  };
+};
+
+interface BaetaModuleObjectTypeFields {
+};
+
+export const ScalarsModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+
+}, {
+
+}, extensions);

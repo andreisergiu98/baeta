@@ -1,6 +1,6 @@
 {
   "name": "@baeta/core",
-  "version": "1.0.11",
+  "version": "2.0.0-next.2",
   "keywords": [
     "baeta",
     "graphql",
@@ -28,11 +28,11 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     },
     "./sdk": {
       "types": "./sdk/index.ts",
-      "default": "./dist/sdk/index.js"
+      "default": "./sdk/index.ts"
     }
   },
   "types": "dist/index.d.ts",
@@ -41,16 +41,16 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepack": "prep",
-    "postpack": "prep --clean",
+    "build": "builder build",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --clean",
     "test": "ava",
     "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/errors": "workspace:^",
-    "@graphql-tools/schema": "^10.0.23",
-    "@graphql-tools/utils": "^10.8.6"
+    "@graphql-tools/schema": "^10.0.25",
+    "@graphql-tools/utils": "^10.9.1"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
@@ -58,13 +58,13 @@
     "@baeta/tsconfig": "workspace:^",
     "graphql": "^16.11.0",
     "graphql-tag": "^2.12.6",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.20.0"
   },
   "publishConfig": {
     "access": "public",
@@ -82,11 +82,7 @@
   "ava": {
     "extensions": {
       "ts": "module"
-    },
-    "nodeArguments": [
-      "--no-warnings",
-      "--experimental-transform-types"
-    ]
+    }
   },
   "typedocOptions": {
     "entryPoints": [

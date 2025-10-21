@@ -1,6 +1,5 @@
 import './lib/global-types.ts';
 
-import type { Extension } from '@baeta/core/sdk';
 import { CacheExtension } from './lib/cache-extension.ts';
 import type { SerializerTransformer } from './lib/serializer.ts';
 import type { Store } from './lib/store.ts';
@@ -59,5 +58,5 @@ export function cacheExtension(
 	options?: DefaultStoreOptions,
 	transformers?: SerializerTransformer[],
 ) {
-	return (): Extension => new CacheExtension(store, options, transformers);
+	return new CacheExtension(store, options, transformers);
 }

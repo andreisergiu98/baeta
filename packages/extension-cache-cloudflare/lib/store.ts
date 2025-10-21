@@ -8,16 +8,17 @@ import type { DurableObjectNamespace } from '@cloudflare/workers-types';
 import { CloudflareStoreAdapter } from './cloudflare-store-adapter.ts';
 
 export class CloudflareStore extends Store {
-	constructor(protected client: DurableObjectNamespace) {
+	protected client: DurableObjectNamespace;
+	constructor(client: DurableObjectNamespace) {
 		super();
+		this.client = client;
 	}
 
 	createStoreAdapter<T>(
 		serializer: Serializer,
 		options: StoreOptions<T>,
 		type: string,
-		hash: string,
 	): StoreAdapter<T> {
-		return new CloudflareStoreAdapter<T>(this.client, serializer, options, type, hash);
+		return new CloudflareStoreAdapter<T>(this.client, serializer, options, type);
 	}
 }

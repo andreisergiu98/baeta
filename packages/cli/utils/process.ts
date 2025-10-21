@@ -1,100 +1,55 @@
-import { Writable } from 'node:stream';
-import { execa, parseCommandString, type Subprocess } from 'execa';
+import { SerializeAddon } from '@xterm/addon-serialize';
+import xterm from '@xterm/headless';
+import throttle from 'lodash.throttle';
 import pty from 'node-pty';
-import terminate from 'tree-kill';
-
-export async function terminateProcesses(processes: Subprocess[]) {
-	await Promise.all(processes.map((process) => terminateProcess(process)));
-	processes.splice(0, processes.length);
-}
-
-export async function terminateProcess(process: Subprocess) {
-	return new Promise<void>((resolve) => {
-		if (process.pid == null) {
-			return resolve();
-		}
-		terminate(process.pid, 'SIGTERM', () => resolve());
-	});
-}
-
-export function addProcess(
-	processes: Subprocess[],
-	command: string,
-	stdout: (data: string) => void,
-	onError: (err: unknown) => void,
-) {
-	const [file, ...args] = parseCommandString(command);
-
-	const child = execa(file, args, {
-		stdout: 'pipe',
-		stderr: 'pipe',
-		stripFinalNewline: true,
-	});
-
-	const stream = createStream(stdout);
-	child.stdout?.pipe(stream);
-	child.stderr?.pipe(stream);
-
-	child.catch((err) => {
-		onError?.(err);
-	});
-
-	processes.push(child);
-}
-
-export function startProcess(
-	command: string,
-	stdout: (data: string) => void,
-	onError: (err: unknown) => void,
-) {
-	const [file, ...args] = parseCommandString(command);
-
-	const child = execa(file, args, {
-		stdout: 'pipe',
-		stderr: 'pipe',
-		stripFinalNewline: true,
-	});
-
-	const stream = createStream(stdout);
-	child.stdout?.pipe(stream);
-	child.stderr?.pipe(stream);
-
-	child.catch((err) => {
-		onError?.(err);
-	});
-
-	return child;
-}
-
 export type PtyProcess = ReturnType<typeof startProcessWithPty>;
 
-export function startProcessWithPty(
-	command: string,
-	stdout: (data: string, clear: boolean) => void,
-) {
-	const [file, ...args] = parseCommandString(command);
+const SPACES_REGEXP = / +/g;
+
+export function startProcessWithPty(command: string, stdout: (data: string) => void) {
+	const [file, ...args] = parseCommand(command);
+
+	const cols = process.stdout.columns;
+	const rows = process.stdout.rows;
+
+	const term = new xterm.Terminal({
+		cols: cols,
+		rows: rows,
+		allowProposedApi: true,
+	});
+	const serialize = new SerializeAddon();
+	term.loadAddon(serialize);
 
 	const ptyProc = pty.spawn(file, args, {
 		cwd: process.cwd(),
 		env: process.env,
-		cols: process.stdout.columns,
-		rows: process.stdout.rows,
+		cols: cols,
+		rows: rows,
 	});
 
 	process.stdout.on('resize', () => {
-		ptyProc.resize(process.stdout.columns, process.stdout.rows);
+		const cols = process.stdout.columns;
+		const rows = process.stdout.rows;
+		ptyProc.resize(cols, rows);
+		term.resize(cols, rows);
 	});
 
-	let buffer = '';
 	ptyProc.onData((data) => {
-		buffer += data;
-
-		if (containsClearSequence(data)) {
-			buffer = removeClearSequence(data);
-		}
-
-		stdout(buffer, true);
+		term.write(data);
+		refresh();
 	});
+
+	const refresh = throttle(
+		() => {
+			const screen = serialize.serialize();
+			stdout(screen);
+		},
+		16,
+		{
+			leading: false,
+			trailing: true,
+		},
+	);
 
 	const procData = {
 		didExit: false,
@@ -105,37 +60,30 @@ export function startProcessWithPty(
 
 	ptyProc.onExit(() => {
 		procData.didExit = true;
+		procData.write = (_data: string) => {
+			// do nothing
+		};
+		term.dispose();
 	});
 
 	return procData;
 }
 
-function createStream(onData: (data: string) => void) {
-	const stream = new Writable({
-		write(chunk, _encoding, next) {
-			onData(chunk.toString());
-			next();
-		},
-	});
-	return stream;
-}
+function parseCommand(command: string) {
+	const trimmed = command.trim();
+	if (trimmed === '') {
+		throw new Error('Command cannot be empty');
+	}
+	const tokens: string[] = [];
 
-const CLEAR_SEQUENCES = [
-	'\x1bc', // Full reset (RIS)
-	'\x1b[H\x1b[2J', // Clear screen and move to home
-	'\x1b[2J', // Clear entire screen
-	'\x1b[3J', // Clear screen and scrollback buffer
-	'\x1b[H\x1b[J', // Alternative clear sequence
-	'\x1b[0f\x1b[J', // Another variant
-	'\x1b[2K', // Clear current line
-	'\x1b[H', // Move to home position
-	'\r\x1b[K', // Carriage return + clear line
-];
+	for (const token of trimmed.split(SPACES_REGEXP)) {
+		const previous = tokens.at(-1);
+		if (previous == null || !previous.endsWith('\\')) {
+			tokens.push(token);
+			continue;
+		}
+		tokens[tokens.length - 1] = `${previous.slice(0, -1)} ${token}`;
+	}
 
-function containsClearSequence(data: string) {
-	return CLEAR_SEQUENCES.some((seq) => data.includes(seq));
-}
-
-function removeClearSequence(data: string) {
-	return CLEAR_SEQUENCES.reduce((acc, seq) => acc.replace(seq, ''), data);
+	return tokens;
 }

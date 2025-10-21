@@ -1,6 +1,6 @@
 {
   "name": "@baeta/cli",
-  "version": "1.0.11",
+  "version": "2.0.0-next.2",
   "keywords": [
     "baeta",
     "graphql",
@@ -28,76 +28,68 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
-    },
-    "./ink": {
-      "types": "./ink/index.ts",
-      "default": "./dist/ink/index.js"
+      "default": "./index.ts"
     },
     "./sdk": {
       "types": "./sdk/index.ts",
-      "default": "./dist/sdk/index.js"
+      "default": "./sdk/index.ts"
     }
   },
   "types": "dist/index.d.ts",
   "bin": {
-    "baeta": "./dist/bin/cli.js"
+    "baeta": "./bin/cli-dev.js"
   },
   "files": [
     "dist",
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepack": "prep",
-    "postpack": "prep --clean",
+    "build": "builder build",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --clean",
     "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/generator": "workspace:^",
     "@baeta/plugin-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "ansi-styles": "^6.2.1",
-    "execa": "^9.6.0",
+    "@xterm/addon-serialize": "^0.13.0",
+    "@xterm/headless": "^5.5.0",
+    "@xterm/xterm": "^5.5.0",
+    "ansi-styles": "^6.2.3",
     "fast-glob": "^3.3.3",
-    "ink": "^6.0.0",
+    "ink": "^6.3.1",
+    "jiti": "^2.6.1",
+    "lodash.throttle": "^4.1.1",
     "node-pty": "^1.0.0",
-    "react": "^19.1.0",
-    "tree-kill": "^1.2.2",
+    "react": "^19.2.0",
     "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/compiler": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.30",
-    "@types/react": "^19.1.6",
+    "@types/lodash.throttle": "^4.1.9",
+    "@types/node": "^22.18.11",
+    "@types/react": "^19.2.2",
     "@types/yargs": "^17.0.33",
     "graphql": "^16.11.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "@baeta/compiler": "workspace:^",
     "graphql": "^16.6.0"
   },
-  "peerDependenciesMeta": {
-    "@baeta/compiler": {
-      "optional": true
-    }
-  },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.20.0"
   },
   "publishConfig": {
     "access": "public",
+    "bin": {
+      "baeta": "./dist/bin/cli.js"
+    },
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
-      },
-      "./ink": {
-        "types": "./dist/ink/index.d.ts",
-        "default": "./dist/ink/index.js"
       },
       "./sdk": {
         "types": "./dist/sdk/index.d.ts",
@@ -108,7 +100,6 @@
   "typedocOptions": {
     "entryPoints": [
       "./index.ts",
-      "./ink/index.ts",
       "./sdk/index.ts"
     ],
     "readme": "none",

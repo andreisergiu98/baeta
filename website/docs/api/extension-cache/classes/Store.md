@@ -1,4 +1,4 @@
-# `abstract` Store
+# Store
 
 Base class for cache storage implementations
 

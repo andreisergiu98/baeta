@@ -1,48 +1,90 @@
-import { getUserModule } from './typedef.ts';
+import { UserModule } from './typedef.ts';
 
-const { Query, Mutation, Subscription } = getUserModule();
+const { Query, Mutation, Subscription, User } = UserModule;
 
-Query.user(({ args }) => {
-	return {
-		id: args.where.id,
-		email: 'jon.doe@baeta.io',
-		lastName: 'Doe',
-	};
+export const userResolver = User.$fields({
+	id: User.id.key('id'),
+	email: User.email.key('email'),
+	lastName: User.lastName.key('lastName'),
+	profile: User.profile.key('profile'),
+	givenName: User.givenName.key('givenName'),
 });
 
-Query.user.$use(async ({ args }, next) => {
-	const result = await next();
-	console.log('Got user:', result, 'for args:', args);
-	return result;
-});
+const userQuery = Query.user
+	.use(async (next, { args }) => {
+		const result = await next();
+		console.log('Got user:', result, 'for args:', args);
+		return result;
+	})
+	.resolve(({ args }) => {
+		return {
+			id: args.where.id,
+			email: 'jon.doe@baeta.io',
+			lastName: 'Doe',
+			profile: null,
+			givenName: null,
+		};
+	});
 
-Query.users(() => {
-	const users = Array.from({ length: 10 }).map((_, i) => ({
+const usersQuery = Query.users.resolve(() => {
+	return Array.from({ length: 10 }).map((_, i) => ({
 		id: i.toString(),
 		email: `jon.doe${i}@baeta.io`,
 		lastName: `Doe ${i}`,
+		profile: null,
+		givenName: null,
 	}));
-	return users;
 });
 
-Mutation.updateUser(({ args, ctx }) => {
-	const updatedUser = {
-		id: args.where.id,
-		email: 'jon.doe@baeta.io',
-		givenName: args.data.givenName ?? 'Jon',
-		lastName: args.data.lastName ?? 'Doe',
-	};
+const updateUserMutation = Mutation.updateUser
+	.use(async (next, { args }) => {
+		const result = await next();
+		console.log('Updated user:', result, 'for args:', args);
+		return result;
+	})
+	.resolve(({ args, ctx }) => {
+		const updatedUser = {
+			id: args.where.id,
+			email: 'jon.doe@baeta.io',
+			givenName: args.data.givenName ?? 'Jon',
+			lastName: args.data.lastName ?? 'Doe',
+			profile: null,
+		};
 
-	ctx.publish('user-updated', updatedUser);
+		ctx.publish('user-updated', updatedUser);
 
-	return updatedUser;
+		return updatedUser;
+	});
+
+const userUpdatedSubscription = Subscription.userUpdated
+	.use((next) => {
+		console.log('Before use');
+		return next();
+	})
+	.use(async (next) => {
+		console.log('Before subscribed to user updated');
+		const sub = await next();
+		console.log('After subscribed to user updated');
+		return sub;
+	})
+	.subscribe(({ ctx }) => {
+		console.log('Subscribed to user updated');
+		return ctx.subscribe('user-updated');
+	})
+	.resolve(({ source }) => {
+		console.log('Resolved user updated', source);
+		return source;
+	});
+
+export const queryResolver = Query.$fields({
+	user: userQuery,
+	users: usersQuery,
 });
 
-Subscription.userUpdated({
-	subscribe(params) {
-		return params.ctx.subscribe('user-updated');
-	},
-	resolve(params) {
-		return params.payload;
-	},
+export const mutationResolver = Mutation.$fields({
+	updateUser: updateUserMutation,
+});
+
+export const subscriptionResolver = Subscription.$fields({
+	userUpdated: userUpdatedSubscription,
 });

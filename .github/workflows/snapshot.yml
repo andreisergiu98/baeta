@@ -94,7 +94,7 @@ jobs:
               exit 1
           fi
 
-          yarn release:snapshot
+          yarn builder release --ci --tag=alpha --dry-run
 
       - name: Add failure reaction
         uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 #v4

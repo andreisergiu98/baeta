@@ -1,6 +1,6 @@
 # authExtension()
 
-> **authExtension**\<`Ctx`\>(`loadScopes`, `options`): () => [`Extension`](../../core/sdk/classes/Extension.md)
+> **authExtension**\<`Ctx`\>(`loadScopes`, `options`): `AuthExtension`\<`Ctx`\>
 
 Creates an authentication extension.
 
@@ -73,13 +73,9 @@ Configuration options for the auth extension
 
 ## Returns
 
+`AuthExtension`\<`Ctx`\>
+
 A factory function that creates an AuthExtension instance
-
-> (): [`Extension`](../../core/sdk/classes/Extension.md)
-
-### Returns
-
-[`Extension`](../../core/sdk/classes/Extension.md)
 
 ## Example
 

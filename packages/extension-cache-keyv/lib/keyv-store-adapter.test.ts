@@ -10,7 +10,7 @@ const keyv = new Keyv({ store: etcd });
 
 function createStoreAdapter(options: StoreOptions<TestItem>) {
 	const serializer = createSerializer();
-	return new KeyvStoreAdapter(keyv, serializer, options, 'test', 'test-hash');
+	return new KeyvStoreAdapter(keyv, serializer, options, 'test');
 }
 
 test.beforeEach(async () => {

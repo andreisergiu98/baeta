@@ -1,6 +1,6 @@
-# GetScopeRules()\<Scopes, Grants, Root, Context, Args\>
+# GetScopeRules()\<Scopes, Grants, Source, Context, Args, Info\>
 
-> **GetScopeRules**\<`Scopes`, `Grants`, `Root`, `Context`, `Args`\> = (`params`) => `boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>
+> **GetScopeRules**\<`Scopes`, `Grants`, `Source`, `Context`, `Args`, `Info`\> = (`params`) => `boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `PromiseLike`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>
 
 Function to get scope rules for pre-resolution authorization
 
@@ -30,7 +30,7 @@ Function to get scope rules for pre-resolution authorization
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -45,6 +45,13 @@ Function to get scope rules for pre-resolution authorization
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -69,7 +76,7 @@ Function to get scope rules for pre-resolution authorization
 </td>
 <td>
 
-[`MiddlewareParams`](../../core/index/type-aliases/MiddlewareParams.md)\<`Root`, `Context`, `Args`\>
+[`ResolverParams`](../../core/index/type-aliases/ResolverParams.md)\<`Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>
@@ -78,4 +85,4 @@ Function to get scope rules for pre-resolution authorization
 
 ## Returns
 
-`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>
+`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `PromiseLike`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>

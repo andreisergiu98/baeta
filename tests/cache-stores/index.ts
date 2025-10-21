@@ -82,7 +82,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name}.saveQueryResult and getQueryResult`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const item = { id: '1', value: 'test1' };
 
 		await adapter.saveQueryResult(queryRef, item);
@@ -92,7 +92,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name}.saveQueryResult and getQueryResult list`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const items = [
 			{ id: '1', value: 'test1' },
 			{ id: '2', value: 'test2' },
@@ -105,7 +105,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} query with parent ref and args`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const parentRef = 'parent1';
 		const args = { filter: 'test' };
 		const item = { id: '1', value: 'test1' };
@@ -134,7 +134,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} deleteQueries with pattern matching`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const items = [
 			{ id: '1', value: 'test1' },
 			{ id: '2', value: 'test2' },
@@ -189,11 +189,12 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} query with URL args`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		// @ts-ignore
+		// biome-ignore lint/suspicious/noTsIgnore: ts-expect-error will fail with node types
+		// @ts-ignore URL is a node global
 		const urlArg = new URL('https://example.com/test?query=value') as unknown;
 		const urlArgs = { url: urlArg };
 
@@ -204,11 +205,12 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} query with Buffer args`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
-		// @ts-ignore
+		// biome-ignore lint/suspicious/noTsIgnore: ts-expect-error will fail with node types
+		// @ts-ignore Buffer is a node global
 		const bufferArg = Buffer.from('test buffer') as unknown;
 		const bufferArgs = { buffer: bufferArg };
 
@@ -219,7 +221,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} query with nested objects`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
@@ -234,7 +236,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} query with array args`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
@@ -249,7 +251,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} delete queries by parent ref`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const item = { id: '1', value: 'test1' };
 
 		await adapter.saveQueryResult(queryRef, item, {
@@ -267,7 +269,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} delete queries by args`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const item = { id: '1', value: 'test1' };
 
 		await adapter.saveQueryResult(queryRef, item, {
@@ -285,7 +287,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} delete queries by partial args`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const parentRef = 'parent1';
 		const item = { id: '1', value: 'test1' };
 
@@ -301,7 +303,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} delete all queries`, async (t) => {
 		const { adapter } = createTestAdapter();
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const item = { id: '1', value: 'test1' };
 
 		await adapter.saveQueryResult(queryRef, item, {
@@ -325,7 +327,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} respects TTL for cached items`, async (t) => {
 		const { adapter } = createTestAdapter({ ttl: 1 }); // 1s TTL
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const item = { id: '1', value: 'test1' };
 
 		await adapter.saveQueryResult(queryRef, item, {
@@ -359,7 +361,7 @@ export function runTestsForStoreAdapter(
 
 	test.serial(`${options.name} updates TTL when saving the same item`, async (t) => {
 		const { adapter } = createTestAdapter({ ttl: 1 }); // 1s TTL
-		const queryRef = new CacheRef('TestQuery', 'test', 'test-hash');
+		const queryRef = new CacheRef('TestQuery', 'test');
 		const item = { id: '1', value: 'test1' };
 		const updatedItem = { id: '1', value: 'test1-updated' };
 

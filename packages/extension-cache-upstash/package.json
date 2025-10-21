@@ -1,6 +1,6 @@
 {
   "name": "@baeta/extension-cache-upstash",
-  "version": "1.0.11",
+  "version": "2.0.0-next.2",
   "keywords": [
     "baeta",
     "graphql",
@@ -28,7 +28,7 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     }
   },
   "types": "dist/index.d.ts",
@@ -37,10 +37,9 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "prepack": "prep",
-    "postpack": "prep --clean",
+    "build": "builder build",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --clean",
     "test": "ava",
     "types": "tsc --noEmit"
   },
@@ -51,16 +50,16 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@upstash/redis": "^1.35.0",
+    "@upstash/redis": "^1.35.6",
     "graphql": "^16.11.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",
     "@upstash/redis": "^1.34.3"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.20.0"
   },
   "publishConfig": {
     "access": "public",
@@ -74,11 +73,7 @@
   "ava": {
     "extensions": {
       "ts": "module"
-    },
-    "nodeArguments": [
-      "--no-warnings",
-      "--experimental-transform-types"
-    ]
+    }
   },
   "typedocOptions": {
     "entryPoints": [

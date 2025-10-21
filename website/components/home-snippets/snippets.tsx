@@ -40,18 +40,22 @@ type Query {
 		),
 		path: 'modules/user/resolvers.ts',
 		language: 'typescript',
-		snippet: `import { getUserModule } from "./typedef";
+		snippet: `import { UserModule } from './typedef.ts';
 
-const { Query } = getUserModule();
-    
-Query.user(({ args }) => {
+const { Query } = UserModule;
+
+const userQuery = Query.user.resolve(({ args }) => {
     return dataSource.user.find(args.where);
 });
 
-Query.users(() => {
+const usersQuery = Query.users.resolve(() => {
     return dataSource.user.findMany();
 });
-`,
+
+Query.$fields({
+    user: userQuery,
+    users: usersQuery,
+});`,
 	},
 	{
 		title: 'Compose and Extend',
@@ -91,16 +95,21 @@ extend type User {
 			</>
 		),
 		language: 'typescript',
-		snippet: `import { getUserModule } from './typedef';
+		snippet: `import { UserModule } from './typedef.ts';
 
-const { Query, Mutation } = getUserModule();
+const { Query } = UserModule;
 
-Query.users.$auth({
-    $or: {
-        isPublic: true,
-        isLoggedIn: true,
-    },
-});`,
+const userQuery = Query.user
+    .auth({
+        $or: {
+            isPublic: true,
+            isLoggedIn: true,
+        },
+    })
+    .resolve(async ({ args }) => {
+        // ...
+    });
+`,
 	},
 	{
 		title: 'Simple, Effective Caching',
@@ -111,20 +120,26 @@ Query.users.$auth({
 			</>
 		),
 		language: 'typescript',
-		snippet: `import { getUserModule } from './typedef';
-
-const { User, Query } = getUserModule();
+		snippet: `const { Query, Mutation, User } = UserModule;
 
 export const userCache = User.$createCache();
 
-Query.user.$useCache(userCache);
-Query.users.$useCache(userCache);
+const userQuery = Query.user
+    .useCache(userCache)
+    .resolve(async ({ args }) => {
+        // ...
+    });
 
-Mutation.updateUser.$use(async (params, next) => {
-    const user = await next();
-    await userCache.save(user);
-    return user;
-});
+
+const updateUserMutation = Mutation.updateUser
+    .use(async (next) => {
+        const user = await next();
+        await userCache.save(user);
+        return user;
+    })
+    .resolve(async ({ args }) => {
+        // ...
+    });
 `,
 	},
 	{

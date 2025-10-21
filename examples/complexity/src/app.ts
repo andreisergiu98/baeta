@@ -1,7 +1,7 @@
 import { createServer } from 'node:http';
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({

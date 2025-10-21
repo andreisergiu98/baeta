@@ -825,7 +825,7 @@ https://redis.io/commands/flushdb
 </td>
 <td>
 
-\<`TData`\>(`args_0`, `args_1`, ...`args_2`) => `Promise`\<`null` \| `number`\>
+\<`TData`\>(`args_0`, `args_1`, ...`args_2`) => `Promise`\<`number` \| `null`\>
 
 </td>
 <td>
@@ -854,7 +854,7 @@ https://redis.io/commands/geoadd
 </td>
 <td>
 
-\<`TData`\>(`key`, `member1`, `member2`, `unit?`) => `Promise`\<`null` \| `number`\>
+\<`TData`\>(`key`, `member1`, `member2`, `unit?`) => `Promise`\<`number` \| `null`\>
 
 </td>
 <td>
@@ -883,7 +883,7 @@ https://redis.io/commands/geodist
 </td>
 <td>
 
-\<`TData`\>(`args_0`, ...`args_1`) => `Promise`\<(`null` \| `string`)[]\>
+\<`TData`\>(`args_0`, ...`args_1`) => `Promise`\<(`string` \| `null`)[]\>
 
 </td>
 <td>
@@ -999,7 +999,7 @@ https://redis.io/commands/geosearchstore
 </td>
 <td>
 
-\<`TData`\>(`key`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -1057,7 +1057,7 @@ https://redis.io/commands/getbit
 </td>
 <td>
 
-\<`TData`\>(`key`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -1086,7 +1086,7 @@ https://redis.io/commands/getdel
 </td>
 <td>
 
-\<`TData`\>(`key`, `opts?`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, `opts?`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -1144,7 +1144,7 @@ https://redis.io/commands/getrange
 </td>
 <td>
 
-\<`TData`\>(`key`, `value`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, `value`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -1318,7 +1318,7 @@ https://redis.io/commands/hexpiretime
 </td>
 <td>
 
-\<`TData`\>(`key`, `field`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, `field`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -1347,7 +1347,7 @@ https://redis.io/commands/hget
 </td>
 <td>
 
-\<`TData`\>(`key`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -1492,7 +1492,7 @@ https://redis.io/commands/hlen
 </td>
 <td>
 
-\<`TData`\>(`key`, ...`fields`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, ...`fields`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -1695,7 +1695,7 @@ https://redis.io/commands/hpttl
 </td>
 <td>
 
-\{(`key`): `Promise`\<`null` \| `string`\>; (`key`, `count`): `Promise`\<`string`[]\>; \<`TData`\>(`key`, `count`, `withValues`): `Promise`\<`Partial`\<`TData`\>\>; \}
+\{(`key`): `Promise`\<`string` \| `null`\>; (`key`, `count`): `Promise`\<`string`[]\>; \<`TData`\>(`key`, `count`, `withValues`): `Promise`\<`Partial`\<`TData`\>\>; \}
 
 </td>
 <td>
@@ -2130,7 +2130,7 @@ https://redis.io/commands/lmove
 </td>
 <td>
 
-\<`TData`\>(`numkeys`, `keys`, `args_2`, `count?`) => `Promise`\<`null` \| \[`string`, `TData`[]\]\>
+\<`TData`\>(`numkeys`, `keys`, `args_2`, `count?`) => `Promise`\<\[`string`, `TData`[]\] \| `null`\>
 
 </td>
 <td>
@@ -2159,7 +2159,7 @@ https://redis.io/commands/lmpop
 </td>
 <td>
 
-\<`TData`\>(`key`, `count?`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, `count?`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -2863,7 +2863,7 @@ https://redis.io/commands/publish
 </td>
 <td>
 
-() => `Promise`\<`null` \| `string`\>
+() => `Promise`\<`string` \| `null`\>
 
 </td>
 <td>
@@ -2950,7 +2950,7 @@ https://redis.io/commands/renamenx
 </td>
 <td>
 
-\<`TData`\>(`key`, `count?`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, `count?`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -3240,7 +3240,7 @@ https://redis.io/commands/sdiffstore
 </td>
 <td>
 
-\<`TData`\>(`key`, `value`, `opts?`) => `Promise`\<`null` \| `"OK"` \| `TData`\>
+\<`TData`\>(`key`, `value`, `opts?`) => `Promise`\<`"OK"` \| `TData` \| `null`\>
 
 </td>
 <td>
@@ -3559,7 +3559,7 @@ https://redis.io/commands/smove
 </td>
 <td>
 
-\<`TData`\>(`key`, `count?`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, `count?`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -3588,7 +3588,7 @@ https://redis.io/commands/spop
 </td>
 <td>
 
-\<`TData`\>(`key`, `count?`) => `Promise`\<`null` \| `TData`\>
+\<`TData`\>(`key`, `count?`) => `Promise`\<`TData` \| `null`\>
 
 </td>
 <td>
@@ -4369,7 +4369,7 @@ https://redis.io/commands/xtrim
 </td>
 <td>
 
-\<`TData`\>(...`args`) => `Promise`\<`null` \| `number`\>
+\<`TData`\>(...`args`) => `Promise`\<`number` \| `null`\>
 
 </td>
 <td>
@@ -4572,7 +4572,7 @@ https://redis.io/commands/zlexcount
 </td>
 <td>
 
-(`key`, `members`) => `Promise`\<`null` \| `number`[]\>
+(`key`, `members`) => `Promise`\<`number`[] \| `null`\>
 
 </td>
 <td>
@@ -4688,7 +4688,7 @@ https://redis.io/commands/zrange
 </td>
 <td>
 
-\<`TData`\>(`key`, `member`) => `Promise`\<`null` \| `number`\>
+\<`TData`\>(`key`, `member`) => `Promise`\<`number` \| `null`\>
 
 </td>
 <td>
@@ -4833,7 +4833,7 @@ https://redis.io/commands/zremrangebyscore
 </td>
 <td>
 
-\<`TData`\>(`key`, `member`) => `Promise`\<`null` \| `number`\>
+\<`TData`\>(`key`, `member`) => `Promise`\<`number` \| `null`\>
 
 </td>
 <td>
@@ -4891,7 +4891,7 @@ https://redis.io/commands/zscan
 </td>
 <td>
 
-\<`TData`\>(`key`, `member`) => `Promise`\<`null` \| `number`\>
+\<`TData`\>(`key`, `member`) => `Promise`\<`number` \| `null`\>
 
 </td>
 <td>
@@ -5007,27 +5007,27 @@ https://redis.io/commands/zunionstore
 
 | Name          | Type                                                                               | Description                                      |
 | ------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------ |
-| `arrappend()` | (`key`, `path`, ...`values`) => `Promise`\<(`null` \| `number`)[]\>                | **See** https://redis.io/commands/json.arrappend |
-| `arrindex()`  | (`key`, `path`, `value`, `start?`, `stop?`) => `Promise`\<(`null` \| `number`)[]\> | **See** https://redis.io/commands/json.arrindex  |
-| `arrinsert()` | (`key`, `path`, `index`, ...`values`) => `Promise`\<(`null` \| `number`)[]\>       | **See** https://redis.io/commands/json.arrinsert |
-| `arrlen()`    | (`key`, `path?`) => `Promise`\<(`null` \| `number`)[]\>                            | **See** https://redis.io/commands/json.arrlen    |
+| `arrappend()` | (`key`, `path`, ...`values`) => `Promise`\<(`number` \| `null`)[]\>                | **See** https://redis.io/commands/json.arrappend |
+| `arrindex()`  | (`key`, `path`, `value`, `start?`, `stop?`) => `Promise`\<(`number` \| `null`)[]\> | **See** https://redis.io/commands/json.arrindex  |
+| `arrinsert()` | (`key`, `path`, `index`, ...`values`) => `Promise`\<(`number` \| `null`)[]\>       | **See** https://redis.io/commands/json.arrinsert |
+| `arrlen()`    | (`key`, `path?`) => `Promise`\<(`number` \| `null`)[]\>                            | **See** https://redis.io/commands/json.arrlen    |
 | `arrpop()`    | (`key`, `path?`, `index?`) => `Promise`\<`unknown`[]\>                             | **See** https://redis.io/commands/json.arrpop    |
-| `arrtrim()`   | (`key`, `path?`, `start?`, `stop?`) => `Promise`\<(`null` \| `number`)[]\>         | **See** https://redis.io/commands/json.arrtrim   |
+| `arrtrim()`   | (`key`, `path?`, `start?`, `stop?`) => `Promise`\<(`number` \| `null`)[]\>         | **See** https://redis.io/commands/json.arrtrim   |
 | `clear()`     | (`key`, `path?`) => `Promise`\<`number`\>                                          | **See** https://redis.io/commands/json.clear     |
 | `del()`       | (`key`, `path?`) => `Promise`\<`number`\>                                          | **See** https://redis.io/commands/json.del       |
 | `forget()`    | (`key`, `path?`) => `Promise`\<`number`\>                                          | **See** https://redis.io/commands/json.forget    |
-| `get()`       | \<`TData`\>(...`args`) => `Promise`\<`null` \| `TData`\>                           | **See** https://redis.io/commands/json.get       |
-| `merge()`     | (`key`, `path`, `value`) => `Promise`\<`null` \| `"OK"`\>                          | **See** https://redis.io/commands/json.merge     |
+| `get()`       | \<`TData`\>(...`args`) => `Promise`\<`TData` \| `null`\>                           | **See** https://redis.io/commands/json.get       |
+| `merge()`     | (`key`, `path`, `value`) => `Promise`\<`"OK"` \| `null`\>                          | **See** https://redis.io/commands/json.merge     |
 | `mget()`      | \<`TData`\>(`keys`, `path`) => `Promise`\<`TData`\>                                | **See** https://redis.io/commands/json.mget      |
-| `mset()`      | (...`args`) => `Promise`\<`null` \| `"OK"`\>                                       | **See** https://redis.io/commands/json.mset      |
-| `numincrby()` | (`key`, `path`, `value`) => `Promise`\<(`null` \| `number`)[]\>                    | **See** https://redis.io/commands/json.numincrby |
-| `nummultby()` | (`key`, `path`, `value`) => `Promise`\<(`null` \| `number`)[]\>                    | **See** https://redis.io/commands/json.nummultby |
-| `objkeys()`   | (`key`, `path?`) => `Promise`\<(`null` \| `string`[])[]\>                          | **See** https://redis.io/commands/json.objkeys   |
-| `objlen()`    | (`key`, `path?`) => `Promise`\<(`null` \| `number`)[]\>                            | **See** https://redis.io/commands/json.objlen    |
+| `mset()`      | (...`args`) => `Promise`\<`"OK"` \| `null`\>                                       | **See** https://redis.io/commands/json.mset      |
+| `numincrby()` | (`key`, `path`, `value`) => `Promise`\<(`number` \| `null`)[]\>                    | **See** https://redis.io/commands/json.numincrby |
+| `nummultby()` | (`key`, `path`, `value`) => `Promise`\<(`number` \| `null`)[]\>                    | **See** https://redis.io/commands/json.nummultby |
+| `objkeys()`   | (`key`, `path?`) => `Promise`\<(`string`[] \| `null`)[]\>                          | **See** https://redis.io/commands/json.objkeys   |
+| `objlen()`    | (`key`, `path?`) => `Promise`\<(`number` \| `null`)[]\>                            | **See** https://redis.io/commands/json.objlen    |
 | `resp()`      | (`key`, `path?`) => `Promise`\<`any`\>                                             | **See** https://redis.io/commands/json.resp      |
-| `set()`       | (`key`, `path`, `value`, `opts?`) => `Promise`\<`null` \| `"OK"`\>                 | **See** https://redis.io/commands/json.set       |
-| `strappend()` | (`key`, `path`, `value`) => `Promise`\<(`null` \| `number`)[]\>                    | **See** https://redis.io/commands/json.strappend |
-| `strlen()`    | (`key`, `path?`) => `Promise`\<(`null` \| `number`)[]\>                            | **See** https://redis.io/commands/json.strlen    |
+| `set()`       | (`key`, `path`, `value`, `opts?`) => `Promise`\<`"OK"` \| `null`\>                 | **See** https://redis.io/commands/json.set       |
+| `strappend()` | (`key`, `path`, `value`) => `Promise`\<(`number` \| `null`)[]\>                    | **See** https://redis.io/commands/json.strappend |
+| `strlen()`    | (`key`, `path?`) => `Promise`\<(`number` \| `null`)[]\>                            | **See** https://redis.io/commands/json.strlen    |
 | `toggle()`    | (`key`, `path`) => `Promise`\<`number`[]\>                                         | **See** https://redis.io/commands/json.toggle    |
 | `type()`      | (`key`, `path?`) => `Promise`\<`string`[]\>                                        | **See** https://redis.io/commands/json.type      |
 
@@ -5041,11 +5041,11 @@ https://redis.io/commands/zunionstore
 
 #### Get Signature
 
-> **get** **readYourWritesSyncToken**(): `undefined` \| `string`
+> **get** **readYourWritesSyncToken**(): `string` \| `undefined`
 
 ##### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 #### Set Signature
 
@@ -5069,7 +5069,7 @@ https://redis.io/commands/zunionstore
 </td>
 <td>
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 </td>
 </tr>
@@ -5354,8 +5354,13 @@ Create a new Upstash Redis instance from environment variables.
 Use this to automatically load connection secrets from your environment
 variables. For instance when using the Vercel integration.
 
-This tries to load `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` from
-your environment using `process.env`.
+This tries to load connection details from your environment using `process.env`:
+
+- URL: `UPSTASH_REDIS_REST_URL` or fallback to `KV_REST_API_URL`
+- Token: `UPSTASH_REDIS_REST_TOKEN` or fallback to `KV_REST_API_TOKEN`
+
+The fallback variables provide compatibility with Vercel KV and other platforms
+that may use different naming conventions.
 
 #### Parameters
 

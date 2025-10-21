@@ -50,7 +50,7 @@ function enforceConsistentEntries(workspace) {
 
 		exports[key] = {
 			types: devTypesEntry,
-			default: importEntry,
+			default: devTypesEntry,
 		};
 
 		publishExports[key] = {
@@ -104,23 +104,22 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 		if (!workspace.manifest.private) {
 			workspace.set('publishConfig.access', 'public');
-			workspace.set('engines.node', '>=22.12.0');
+			workspace.set('engines.node', '>=22.20.0');
 
 			if (workspace.manifest.scripts?.prebuild == null) {
-				workspace.set('scripts.build', 'tsup');
+				workspace.set('scripts.build', 'builder build');
 				workspace.set('scripts.types', 'tsc --noEmit');
 			} else {
-				workspace.set('scripts.build', 'yarn prebuild && tsup');
+				workspace.set('scripts.build', 'yarn prebuild && builder build');
 				workspace.set('scripts.types', 'yarn prebuild && tsc --noEmit');
 			}
 
-			workspace.set('scripts.prepack', 'prep');
-			workspace.set('scripts.postpack', 'prep --clean');
+			workspace.set('scripts.prepack', 'builder prepare');
+			workspace.set('scripts.postpack', 'builder prepare --clean');
 
 			if (workspace.manifest.devDependencies?.['@baeta/testing']) {
 				workspace.set('scripts.test', 'ava');
 				workspace.set('ava.extensions.ts', 'module');
-				workspace.set('ava.nodeArguments', ['--no-warnings', '--experimental-transform-types']);
 			} else {
 				workspace.unset('scripts.test');
 				workspace.unset('ava');

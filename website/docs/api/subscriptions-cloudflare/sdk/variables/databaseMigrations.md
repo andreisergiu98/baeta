@@ -2,7 +2,7 @@
 
 > `const` **databaseMigrations**: `object`[]
 
-## Type declaration
+## Type Declaration
 
 <table>
 <thead>

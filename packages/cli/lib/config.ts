@@ -1,4 +1,3 @@
-import type { CompilerOptions } from '@baeta/compiler';
 import type { GeneratorOptions, GeneratorPluginV1 } from '@baeta/generator';
 
 /**
@@ -21,17 +20,32 @@ export interface BaetaOptions {
 	 * Plugins to extend Baeta's functionality.
 	 */
 	plugins?: Plugins;
+}
 
-	/**
-	 * Configuration for the TypeScript compiler.
-	 * It uses esbuild under the hood and creates an optimized bundle.
-	 */
-	compiler?: CompilerOptions;
+export interface DefinedConfig {
+	config: BaetaOptions;
+	version: 'v2';
 }
 
 /**
  * Helper function to define a type-safe Baeta configuration.
  */
-export function defineConfig(config: BaetaOptions) {
-	return { config };
+export function defineConfig(config: BaetaOptions): DefinedConfig {
+	return { config, version: 'v2' };
+}
+
+export function isValidConfig(value: unknown): value is DefinedConfig {
+	if (typeof value !== 'object') {
+		return false;
+	}
+	if (value == null) {
+		return false;
+	}
+	if (!('config' in value)) {
+		return false;
+	}
+	if (!('version' in value)) {
+		return false;
+	}
+	return value.version === 'v2';
 }

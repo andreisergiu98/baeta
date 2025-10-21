@@ -39,6 +39,30 @@ Add custom header at the beginning of the file.
 <tr>
 <td>
 
+<a id="allowoverwrite"></a> `allowOverwrite?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+```ts
+true;
+```
+
+</td>
+<td>
+
+Allow overwriting the file.
+
+</td>
+</tr>
+<tr>
+<td>
+
 <a id="disablebiomeheader"></a> `disableBiomeHeader?`
 
 </td>

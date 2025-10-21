@@ -25,12 +25,13 @@ export type CacheQueryMatching<Args> = {
 };
 
 export abstract class StoreAdapter<Item> {
-	constructor(
-		protected serializer: Serializer,
-		protected options: StoreOptions<Item>,
-		protected type: string,
-		protected hash: string,
-	) {
+	protected serializer: Serializer;
+	protected options: StoreOptions<Item>;
+	protected type: string;
+	constructor(serializer: Serializer, options: StoreOptions<Item>, type: string) {
+		this.serializer = serializer;
+		this.options = options;
+		this.type = type;
 		this.getMany.bind(this);
 	}
 
@@ -189,18 +190,18 @@ export abstract class StoreAdapter<Item> {
 		);
 	};
 
-	createMiddleware = <Result extends null | Item | Item[] | Array<Item | null>, Root, Args>(
-		queryRef: CacheRef<Result, Root, Args>,
-		...args: Root extends RefCompatibleRoot
-			? [options?: CacheMiddlewareOptions<Root>]
-			: [options: RequiredCacheMiddlewareOptions<Root>]
-	): Middleware<Result, Root, unknown, Args> => {
-		return async (params, next): Promise<Result> => {
-			const [options] = args;
+	createMiddleware = <Result, Source, Context, Args, Info>(
+		queryRef: CacheRef<Result, Source, Args>,
+		...optionsArray: Source extends RefCompatibleRoot
+			? [options?: CacheMiddlewareOptions<Source>]
+			: [options: RequiredCacheMiddlewareOptions<Source>]
+	): Middleware<Result, Source, Context, Args, Info> => {
+		return async (next, params): Promise<Result> => {
+			const [options] = optionsArray;
 
 			const parentRef = options?.getRootRef
-				? options.getRootRef(params.root)
-				: getRefFallback(params.root);
+				? options.getRootRef(params.source)
+				: getRefFallback(params.source);
 
 			const matcher = { parentRef, args: params.args };
 
@@ -303,7 +304,7 @@ export abstract class StoreAdapter<Item> {
 
 	protected getRevision() {
 		const version = this.options?.revision?.toString() || '0';
-		return `r${version}_${this.hash}`;
+		return `r${version}`;
 	}
 
 	protected parseItem(value: string): Item {

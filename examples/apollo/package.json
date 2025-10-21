@@ -26,20 +26,18 @@
   },
   "type": "module",
   "scripts": {
-    "build": "baeta build --generate",
-    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps --inspect dist/app'"
+    "build": "baeta generate",
+    "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
   "dependencies": {
-    "@apollo/server": "^4.12.2",
+    "@apollo/server": "^5.0.0",
     "@baeta/core": "workspace:^",
     "graphql": "^16.11.0"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
-    "@baeta/compiler": "workspace:^",
-    "@baeta/plugin-autoload": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.30",
-    "typescript": "^5.8.3"
+    "@types/node": "^22.18.11",
+    "typescript": "^5.9.3"
   }
 }

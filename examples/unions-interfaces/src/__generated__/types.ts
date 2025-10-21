@@ -2,89 +2,98 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import type { Context as ContextType } from '../types/context';
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = T | undefined;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-export type { ContextType }
-/** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
+import * as BaetaUtility from "./utility.ts";
+import * as BaetaOverrides from "../modules/types.ts";
+
+export type Scalars = BaetaOverrides.Scalars;
+
+export type Query = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Query"], {
+  media: Array<Media>
+}>
+
+export type Comic = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Comic"], {
+  id: Scalars["ID"]
+  title: Scalars["String"]
+  year: Scalars["Int"]
+  artist: Scalars["String"]
+  pages: Scalars["Int"]
+}>
+
+export type Movie = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Movie"], {
+  id: Scalars["ID"]
+  title: Scalars["String"]
+  year: Scalars["Int"]
+}>
+
+export type TVShow = BaetaUtility.Or<BaetaOverrides.ObjectTypes["TVShow"], {
+  id: Scalars["ID"]
+  title: Scalars["String"]
+  year: Scalars["Int"]
+  seasons: Scalars["Int"]
+}>
+
+export type Book = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Book"], {
+  id: Scalars["ID"]
+  title: Scalars["String"]
+  year: Scalars["Int"]
+  author: Scalars["String"]
+  pages: Scalars["Int"]
+}>
+
+export type ComicIdArgs = {
 };
 
-export type Readable = {
-  id: Scalars['ID']['output'];
-  pages: Scalars['Int']['output'];
+export type ComicTitleArgs = {
 };
 
-export type Comic = Readable & {
-  __typename?: 'Comic';
-  id: Scalars['ID']['output'];
-  title: Scalars['String']['output'];
-  year: Scalars['Int']['output'];
-  artist: Scalars['String']['output'];
-  pages: Scalars['Int']['output'];
+export type ComicYearArgs = {
 };
 
-export type Media = Comic | Movie | TvShow | Book;
-
-export type Movie = {
-  __typename?: 'Movie';
-  id: Scalars['ID']['output'];
-  title: Scalars['String']['output'];
-  year: Scalars['Int']['output'];
+export type ComicArtistArgs = {
 };
 
-export type TvShow = {
-  __typename?: 'TVShow';
-  id: Scalars['ID']['output'];
-  title: Scalars['String']['output'];
-  year: Scalars['Int']['output'];
-  seasons: Scalars['Int']['output'];
+export type ComicPagesArgs = {
 };
 
-export type Book = Readable & {
-  __typename?: 'Book';
-  id: Scalars['ID']['output'];
-  title: Scalars['String']['output'];
-  year: Scalars['Int']['output'];
-  author: Scalars['String']['output'];
-  pages: Scalars['Int']['output'];
+export type MovieIdArgs = {
 };
 
-export type Query = {
-  __typename?: 'Query';
-  media: Array<Media>;
+export type MovieTitleArgs = {
 };
 
-
-export type DefinedFieldsWithoutExtensions = {
-  Comic: "id" | "title" | "year" | "artist" | "pages";
-  Movie: "id" | "title" | "year";
-  TVShow: "id" | "title" | "year" | "seasons";
-  Book: "id" | "title" | "year" | "author" | "pages";
+export type MovieYearArgs = {
 };
 
-export type DefinedUnionsWithoutExtensions = {
-  Media: Pick<Comic, DefinedFieldsWithoutExtensions["Comic"] | "__typename"> | Pick<Movie, DefinedFieldsWithoutExtensions["Movie"] | "__typename"> | Pick<TvShow, DefinedFieldsWithoutExtensions["TVShow"] | "__typename"> | Pick<Book, DefinedFieldsWithoutExtensions["Book"] | "__typename">;
+export type TVShowIdArgs = {
 };
 
-export type DefinedUnionsResults = {
-  Media: "Comic" | "Movie" | "TVShow" | "Book" | null;
+export type TVShowTitleArgs = {
 };
 
-export type DefinedInterfacesWithoutExtensions = {
-  Readable: Pick<Comic, DefinedFieldsWithoutExtensions["Comic"] | "__typename"> | Pick<Book, DefinedFieldsWithoutExtensions["Book"] | "__typename">;
+export type TVShowYearArgs = {
 };
 
-export type DefinedInterfacesResults = {
-  Readable: "Comic" | "Book" | null;
+export type TVShowSeasonsArgs = {
 };
+
+export type BookIdArgs = {
+};
+
+export type BookTitleArgs = {
+};
+
+export type BookYearArgs = {
+};
+
+export type BookAuthorArgs = {
+};
+
+export type BookPagesArgs = {
+};
+
+export type QueryMediaArgs = {
+};
+
+export type Readable = Comic & {__typename: "Comic"} | Book & {__typename: "Book"}
+
+export type Media = Comic & {__typename: "Comic"} | Movie & {__typename: "Movie"} | TVShow & {__typename: "TVShow"} | Book & {__typename: "Book"}

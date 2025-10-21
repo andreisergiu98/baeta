@@ -1,9 +1,5 @@
 # @baeta/extension-complexity
 
-## Enumerations
-
-- [ComplexityErrorKind](enumerations/ComplexityErrorKind.md)
-
 ## Classes
 
 - [ComplexityError](classes/ComplexityError.md)
@@ -24,6 +20,7 @@
 ## Variables
 
 - [ComplexityErrorCode](variables/ComplexityErrorCode.md)
+- [ComplexityErrorKind](variables/ComplexityErrorKind.md)
 
 ## Functions
 

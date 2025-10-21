@@ -33,10 +33,13 @@ export type CacheValue = {
 };
 
 export class BaetaCache implements DurableObject {
-	constructor(
-		public state: DurableObjectState,
-		public env: { [key: string]: never },
-	) {}
+	state: DurableObjectState;
+	env: { [key: string]: never };
+
+	constructor(state: DurableObjectState, env: { [key: string]: never }) {
+		this.state = state;
+		this.env = env;
+	}
 
 	async fetch(request: Request) {
 		const json = await request.json();

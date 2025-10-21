@@ -1,5 +1,4 @@
 import test, { sinon } from '@baeta/testing';
-import type { GraphQLResolveInfo } from 'graphql';
 import { ComplexityErrorKind } from './complexity-errors.ts';
 import type { ComplexityLimit } from './complexity-limits.ts';
 import { createComplexityMiddleware } from './complexity-middleware.ts';
@@ -43,21 +42,21 @@ const createMocks = async (
 		options,
 		mockResults,
 		mockStore: sinon.stub(mockStore),
-		mockContext,
-		mockRoot,
-		mockArgs,
-		mockInfo: mockInfo as GraphQLResolveInfo,
+		mockParams: {
+			source: mockRoot,
+			args: mockArgs,
+			ctx: mockContext,
+			info: mockInfo,
+		},
 	};
 };
 
 test('middleware calls next when complexity is under limits', async (t) => {
-	const { options, next, mockStore, mockContext, mockRoot, mockArgs, mockInfo } = await createMocks(
-		{
-			depth: 10,
-			breadth: 20,
-			complexity: 200,
-		},
-	);
+	const { options, next, mockStore, mockParams } = await createMocks({
+		depth: 10,
+		breadth: 20,
+		complexity: 200,
+	});
 
 	mockStore.cacheComplexity.returns({
 		depth: 5,
@@ -67,22 +66,17 @@ test('middleware calls next when complexity is under limits', async (t) => {
 
 	const fieldSettingsMap: FieldSettingsMap = {};
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
-	const wrappedResolver = middleware(next);
-
-	await wrappedResolver(mockRoot, mockArgs, mockContext, mockInfo);
+	await middleware(next, mockParams);
 
 	t.true(next.calledOnce);
-	t.true(next.calledWith(mockRoot, mockArgs, mockContext, mockInfo));
 });
 
 test('middleware throws when depth limit is exceeded', async (t) => {
-	const { options, next, mockStore, mockContext, mockRoot, mockArgs, mockInfo } = await createMocks(
-		{
-			depth: 10,
-			breadth: 20,
-			complexity: 200,
-		},
-	);
+	const { options, next, mockStore, mockParams } = await createMocks({
+		depth: 10,
+		breadth: 20,
+		complexity: 200,
+	});
 
 	mockStore.cacheComplexity.returns({
 		depth: 11,
@@ -92,9 +86,8 @@ test('middleware throws when depth limit is exceeded', async (t) => {
 
 	const fieldSettingsMap: FieldSettingsMap = {};
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
-	const wrappedResolver = middleware(next);
 
-	await t.throwsAsync(async () => wrappedResolver(mockRoot, mockArgs, mockContext, mockInfo), {
+	await t.throwsAsync(async () => middleware(next, mockParams), {
 		message: 'Complexity error',
 	});
 
@@ -109,13 +102,11 @@ test('middleware throws when depth limit is exceeded', async (t) => {
 });
 
 test('middleware throws when breadth limit is exceeded', async (t) => {
-	const { options, next, mockStore, mockContext, mockRoot, mockArgs, mockInfo } = await createMocks(
-		{
-			depth: 10,
-			breadth: 20,
-			complexity: 200,
-		},
-	);
+	const { options, next, mockStore, mockParams } = await createMocks({
+		depth: 10,
+		breadth: 20,
+		complexity: 200,
+	});
 
 	mockStore.cacheComplexity.returns({
 		depth: 5,
@@ -125,9 +116,8 @@ test('middleware throws when breadth limit is exceeded', async (t) => {
 
 	const fieldSettingsMap: FieldSettingsMap = {};
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
-	const wrappedResolver = middleware(next);
 
-	await t.throwsAsync(async () => wrappedResolver(mockRoot, mockArgs, mockContext, mockInfo), {
+	await t.throwsAsync(async () => middleware(next, mockParams), {
 		message: 'Complexity error',
 	});
 
@@ -142,13 +132,11 @@ test('middleware throws when breadth limit is exceeded', async (t) => {
 });
 
 test('middleware throws when complexity limit is exceeded', async (t) => {
-	const { options, next, mockStore, mockContext, mockRoot, mockArgs, mockInfo } = await createMocks(
-		{
-			depth: 10,
-			breadth: 20,
-			complexity: 200,
-		},
-	);
+	const { options, next, mockStore, mockParams } = await createMocks({
+		depth: 10,
+		breadth: 20,
+		complexity: 200,
+	});
 
 	// Set up results to exceed complexity limit
 	mockStore.cacheComplexity.returns({
@@ -159,9 +147,8 @@ test('middleware throws when complexity limit is exceeded', async (t) => {
 
 	const fieldSettingsMap: FieldSettingsMap = {};
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
-	const wrappedResolver = middleware(next);
 
-	await t.throwsAsync(async () => wrappedResolver(mockRoot, mockArgs, mockContext, mockInfo), {
+	await t.throwsAsync(async () => middleware(next, mockParams), {
 		message: 'Complexity error',
 	});
 

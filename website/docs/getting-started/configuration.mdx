@@ -11,12 +11,12 @@ Set up your Baeta project configuration in a few simple steps.
 
 Baeta looks for a configuration file in your project root with one of these names:
 
+- `baeta.ts`
+- `.baeta.ts`
 - `baeta.js`
 - `.baeta.js`
 - `baeta.mjs`
 - `.baeta.mjs`
-- `baeta.ts` (requires `@baeta/compiler`)
-- `.baeta.ts` (requires `@baeta/compiler`)
 
 :::note
 While Baeta supports **CommonJS**, the configuration file must use **ESM**. If using `.js` file, ensure `"type": "module"` is set in your `package.json`, otherwise use the `.mjs` file extension.
@@ -38,40 +38,19 @@ export default defineConfig({
 });
 ```
 
-### 2. Configure Build Settings
-
-Add compiler configuration to specify your app's entry point and build output:
-
-```typescript
-import { defineConfig } from "@baeta/cli";
-
-export default defineConfig({
-  graphql: {
-    schemas: ["src/**/*.gql"],
-    modulesDir: "src/modules",
-  },
-  compiler: {
-    src: "src/app.ts", // Your application entry point
-    dist: "dist", // Build output directory
-  },
-});
-```
-
-### 3.Add Package.json Scripts
+### 2.Add Package.json Scripts
 
 ```json
 {
   "scripts": {
-    "build": "baeta build --generate",
     "generate": "baeta generate",
-    "start": "baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'"
+    "start": "baeta generate --watch --run='node --watch --inspect src/app.ts'"
   }
 }
 ```
 
 These scripts provide:
 
-- **build**: Builds your project and generates necessary files
 - **generate**: Updates GraphQL types and resolvers
 - **start**: Runs development server with hot reload
 
@@ -88,7 +67,7 @@ If you're using Bun or Deno you might prefer to run the TypeScript source direct
 :::
 
 :::tip
-Run `baeta generate --help` or `baeta build --help` to see all command options
+Run `baeta generate --help` to see all command options
 :::
 
 ## Next Steps

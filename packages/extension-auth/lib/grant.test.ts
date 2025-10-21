@@ -29,7 +29,7 @@ function createGrantResolverArgs() {
 
 	const result = 'result';
 
-	return [{}, {}, ctx, info, result] as const;
+	return { result, params: { source: {}, args: {}, ctx, info } as const };
 }
 
 test('isGrantedKey: should return true for grantRule', (t) => {
@@ -44,9 +44,9 @@ test('saveGrants: should save resolved grants to the store', async (t) => {
 	const grants = 'grant1';
 	const args = createGrantResolverArgs();
 
-	await saveGrants(...args, grants);
+	await saveGrants(args.params, args.result, grants);
 
-	const store = await getAuthStore(args[2]);
+	const store = await getAuthStore(args.params.ctx);
 
 	t.deepEqual(store.grantCache.getGrants('Query.users.User.photos'), ['grant1']);
 });
@@ -56,14 +56,14 @@ test('saveGrants: should resolve grants if grants is a function', async (t) => {
 
 	let fnCalled = false;
 
-	const grants: GetGrantFn<TestGrant, unknown, unknown, unknown, unknown> = () => {
+	const grants: GetGrantFn<TestGrant, unknown, unknown, unknown, unknown, unknown> = () => {
 		fnCalled = true;
 		return 'grant1';
 	};
 
-	await saveGrants(...args, grants);
+	await saveGrants(args.params, args.result, grants);
 
-	const store = await getAuthStore(args[2]);
+	const store = await getAuthStore(args.params.ctx);
 
 	t.true(fnCalled);
 	t.deepEqual(store.grantCache.getGrants('Query.users.User.photos'), ['grant1']);

@@ -1,6 +1,6 @@
 import { createContextStore } from '@baeta/core';
 import { UnauthenticatedError } from '@baeta/errors';
-import type { User } from './modules/user/typedef.ts';
+import type { User } from './__generated__/types.ts';
 import type { Context } from './types/context.ts';
 
 export async function loadOptionalUser(ctx: Context) {
@@ -17,6 +17,7 @@ export async function loadOptionalUser(ctx: Context) {
 		lastName: 'Doe',
 		givenName: 'John',
 		email: 'john.doe@baeta.io',
+		profile: null,
 	};
 
 	return forgedUser;

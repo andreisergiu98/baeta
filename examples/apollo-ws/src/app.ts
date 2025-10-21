@@ -1,7 +1,7 @@
 import { createServer } from 'node:http';
 import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { expressMiddleware } from '@as-integrations/express5';
 import { createApplication } from '@baeta/core';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -9,7 +9,7 @@ import express from 'express';
 import { useServer } from 'graphql-ws/use/ws';
 import { WebSocketServer } from 'ws';
 import { pubsub } from './lib/pubsub.ts';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
 const baeta = createApplication({

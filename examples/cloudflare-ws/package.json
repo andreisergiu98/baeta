@@ -26,25 +26,23 @@
   },
   "type": "module",
   "scripts": {
-    "build": "baeta build --generate",
+    "build": "baeta generate",
     "start": "baeta build --watch --generate --onSuccess='wrangler dev'"
   },
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
-    "@hono/graphql-server": "^0.6.0",
+    "@hono/graphql-server": "^0.7.0",
     "graphql": "^16.11.0",
-    "hono": "^4.7.11"
+    "hono": "^4.10.1"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
-    "@baeta/compiler": "workspace:^",
-    "@baeta/plugin-autoload": "workspace:^",
     "@baeta/plugin-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250606.0",
-    "miniflare": "^4.20250525.1",
-    "typescript": "^5.8.3",
-    "wrangler": "^4.19.1"
+    "@cloudflare/workers-types": "^4.20251014.0",
+    "miniflare": "^4.20251008.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.43.0"
   }
 }

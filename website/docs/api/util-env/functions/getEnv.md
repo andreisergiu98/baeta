@@ -1,6 +1,6 @@
 # getEnv()
 
-> **getEnv**(`key`, `global`): `undefined` \| `string`
+> **getEnv**(`key`, `global`): `string` \| `undefined`
 
 ## Parameters
 
@@ -52,4 +52,4 @@
 
 ## Returns
 
-`undefined` \| `string`
+`string` \| `undefined`

@@ -11,7 +11,7 @@ const client = new UpstashClient({
 
 function createStoreAdapter(options: StoreOptions<TestItem>) {
 	const serializer = createSerializer();
-	return new UpstashStoreAdapter(client, serializer, options, 'test', 'test-hash');
+	return new UpstashStoreAdapter(client, serializer, options, 'test');
 }
 
 test.beforeEach(async () => {

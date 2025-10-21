@@ -13,7 +13,7 @@
 <tr>
 <td>
 
-<a id="basetypespath"></a> `baseTypesPath`
+<a id="cwd"></a> `cwd`
 
 </td>
 <td>
@@ -25,12 +25,12 @@
 <tr>
 <td>
 
-<a id="cwd"></a> `cwd`
+<a id="importextension"></a> `importExtension`
 
 </td>
 <td>
 
-`string`
+`""` \| `".js"` \| `".ts"`
 
 </td>
 </tr>
@@ -73,19 +73,7 @@
 <tr>
 <td>
 
-<a id="contexttype"></a> `contextType?`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="extensions"></a> `extensions?`
+<a id="typesdir"></a> `typesDir`
 
 </td>
 <td>
@@ -109,36 +97,12 @@
 <tr>
 <td>
 
-<a id="importextension"></a> `importExtension?`
-
-</td>
-<td>
-
-`".js"` \| `".ts"`
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="loaders"></a> `loaders?`
 
 </td>
 <td>
 
 [`Loader`](Loader.md)\<`any`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="scalars"></a> `scalars?`
-
-</td>
-<td>
-
-`Record`\<`string`, `string` \| \{ `input`: `string`; `output`: `string`; \}\>
 
 </td>
 </tr>

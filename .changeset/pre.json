@@ -1,0 +1,43 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@baeta/cli": "1.0.11",
+    "@baeta/core": "1.0.11",
+    "create-baeta": "1.0.11",
+    "@baeta/template-apollo": "0.0.0",
+    "@baeta/template-yoga": "0.0.0",
+    "@baeta/directives": "1.0.11",
+    "@baeta/env": "1.0.9",
+    "@baeta/errors": "1.0.9",
+    "@baeta/extension-auth": "1.0.11",
+    "@baeta/extension-cache": "1.0.11",
+    "@baeta/extension-cache-cloudflare": "1.0.11",
+    "@baeta/extension-cache-keyv": "1.0.11",
+    "@baeta/extension-cache-redis": "1.0.11",
+    "@baeta/extension-cache-upstash": "1.0.11",
+    "@baeta/extension-complexity": "1.0.11",
+    "@baeta/generator": "1.0.2",
+    "@baeta/generator-sdk": "1.0.2",
+    "@baeta/plugin": "1.0.1",
+    "@baeta/plugin-cloudflare": "1.0.11",
+    "@baeta/plugin-directives": "1.0.11",
+    "@baeta/plugin-exec": "1.0.11",
+    "@baeta/plugin-gitignore": "1.0.11",
+    "@baeta/plugin-graphql": "1.0.11",
+    "@baeta/plugin-pagination": "1.0.11",
+    "@baeta/plugin-prisma": "1.0.11",
+    "@baeta/subscriptions-cloudflare": "0.1.6",
+    "@baeta/subscriptions-pubsub": "1.0.9",
+    "@baeta/util-encoding": "1.0.1",
+    "@baeta/util-env": "1.0.1",
+    "@baeta/util-log": "1.0.1",
+    "@baeta/util-path": "1.0.1",
+    "@baeta/tests-cache-stores": "1.0.3"
+  },
+  "changesets": [
+    "fast-kids-hug",
+    "heavy-pandas-kneel",
+    "late-dryers-occur"
+  ]
+}

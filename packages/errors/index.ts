@@ -6,18 +6,22 @@ const isDev = isDevelopmentMode();
 /**
  * Standard error codes used across the Baeta framework.
  */
-export enum BaetaErrorCode {
+export const BaetaErrorCode = {
 	/** Authentication is required but was not provided */
-	Unauthenticated = 'UNAUTHENTICATED',
+	Unauthenticated: 'UNAUTHENTICATED',
 	/** User is authenticated but lacks required permissions */
-	Forbidden = 'FORBIDDEN',
+	Forbidden: 'FORBIDDEN',
 	/** Invalid input provided by the user */
-	BadUserInput = 'BAD_USER_INPUT',
+	BadUserInput: 'BAD_USER_INPUT',
 	/** Unexpected server-side error */
-	InternalServerError = 'INTERNAL_SERVER_ERROR',
+	InternalServerError: 'INTERNAL_SERVER_ERROR',
 	/** Multiple errors occurred simultaneously */
-	AggregateError = 'AGGREGATE_ERROR',
-}
+	AggregateError: 'AGGREGATE_ERROR',
+} as const;
+
+export type BaetaErrorCode = (typeof BaetaErrorCode)[keyof typeof BaetaErrorCode];
+
+export type BaetaErrorCodeKey = keyof typeof BaetaErrorCode;
 
 /**
  * Thrown when a user attempts to access a resource without authentication.
@@ -25,7 +29,7 @@ export enum BaetaErrorCode {
  */
 export class UnauthenticatedError extends GraphQLError {
 	declare readonly extensions: GraphQLErrorExtensions & {
-		code: BaetaErrorCode.Unauthenticated;
+		code: typeof BaetaErrorCode.Unauthenticated;
 		http: { status: 401 };
 	};
 
@@ -51,7 +55,7 @@ export class UnauthenticatedError extends GraphQLError {
  */
 export class ForbiddenError extends GraphQLError {
 	declare readonly extensions: GraphQLErrorExtensions & {
-		code: BaetaErrorCode.Forbidden;
+		code: typeof BaetaErrorCode.Forbidden;
 	};
 
 	constructor(
@@ -73,7 +77,7 @@ export class ForbiddenError extends GraphQLError {
  */
 export class BadUserInput extends GraphQLError {
 	declare readonly extensions: GraphQLErrorExtensions & {
-		code: BaetaErrorCode.BadUserInput;
+		code: typeof BaetaErrorCode.BadUserInput;
 	};
 
 	constructor(message = 'Invalid user input!', options?: GraphQLErrorOptions) {
@@ -94,7 +98,7 @@ export class BadUserInput extends GraphQLError {
  */
 export class InternalServerError extends GraphQLError {
 	declare readonly extensions: GraphQLErrorExtensions & {
-		code: BaetaErrorCode.InternalServerError;
+		code: typeof BaetaErrorCode.InternalServerError;
 	};
 
 	constructor(err: Error, message = 'Internal server error!', options?: GraphQLErrorOptions) {
@@ -122,7 +126,7 @@ function getStackTrace(err: Error) {
  */
 export class AggregateGraphQLError extends GraphQLError {
 	declare readonly extensions: GraphQLErrorExtensions & {
-		code: BaetaErrorCode.AggregateError;
+		code: typeof BaetaErrorCode.AggregateError;
 		errors: Array<{
 			message: string;
 			path?: (string | number)[];

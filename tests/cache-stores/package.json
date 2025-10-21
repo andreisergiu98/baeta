@@ -1,6 +1,6 @@
 {
   "name": "@baeta/tests-cache-stores",
-  "version": "1.0.3",
+  "version": "2.0.0-next.2",
   "private": true,
   "keywords": [
     "baeta",
@@ -38,9 +38,6 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepack": "prep",
-    "postpack": "prep --clean",
     "types": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -51,7 +48,7 @@
     "@baeta/extension-cache": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=22.12.0"
@@ -59,11 +56,7 @@
   "ava": {
     "extensions": {
       "ts": "module"
-    },
-    "nodeArguments": [
-      "--no-warnings",
-      "--experimental-transform-types"
-    ]
+    }
   },
   "typedocOptions": {
     "entryPoints": [

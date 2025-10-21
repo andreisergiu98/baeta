@@ -2,41 +2,61 @@
 /* eslint-disable */
 /* @biome-ignore-all: generated file */
 
-import * as Types from "../../__generated__/types.ts";
-import type { DocumentNode } from "graphql";
+import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
+import extensions from "../extensions.ts";
+import type {Ctx, Info} from "../types.ts";
+import * as Types from "../../__generated__/types.ts";
 
-
-interface DefinedFields {
-  UserPhoto: 'id' | 'userId' | 'url';
-  User: 'photos';
-};
-
-export type UserPhoto = Pick<Types.UserPhoto, DefinedFields['UserPhoto']>;
-export type User = Pick<Types.User, Types.DefinedFieldsWithoutExtensions["User"]>;
-
-export namespace ModuleMetadata {
-  export const id = 'user-photos';
-  export const dirname = './user-photos';
-  export const hashes = {"UserPhoto":{"hash":"c6sgp6","fieldsHashes":{"id":"1ij53kg","url":"bsmiek","userId":"1ij53kg"}},"User":{"hash":"11vpwyu","fieldsHashes":{"photos":"1ve18yx"}}};
-  export const typedef = {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":18,"end":20}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":22,"end":24}},"loc":{"start":22,"end":24}},"loc":{"start":22,"end":25}},"directives":[],"loc":{"start":18,"end":25}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"userId","loc":{"start":27,"end":33}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":35,"end":37}},"loc":{"start":35,"end":37}},"loc":{"start":35,"end":38}},"directives":[],"loc":{"start":27,"end":38}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":40,"end":43}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":45,"end":51}},"loc":{"start":45,"end":51}},"loc":{"start":45,"end":52}},"directives":[],"loc":{"start":40,"end":52}}],"loc":{"start":0,"end":54}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":68,"end":72}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":76,"end":82}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":85,"end":94}},"loc":{"start":85,"end":94}},"loc":{"start":85,"end":95}},"loc":{"start":84,"end":96}},"directives":[],"loc":{"start":76,"end":96}}],"loc":{"start":56,"end":98}}]} as unknown as DocumentNode;
-  
-  export function createManager(module: Baeta.ModuleBuilder) {
-    return {
-      ...module.createModuleMethods<Types.ContextType>(),
-      UserPhoto: {
-        ...module.createTypeMethods<UserPhoto, Types.ContextType>("UserPhoto"),
-        id: module.createResolverBuilder<Types.Scalars["ID"]["output"], UserPhoto, Types.ContextType, { }>("UserPhoto", "id"),
-        userId: module.createResolverBuilder<Types.Scalars["ID"]["output"], UserPhoto, Types.ContextType, { }>("UserPhoto", "userId"),
-        url: module.createResolverBuilder<Types.Scalars["String"]["output"], UserPhoto, Types.ContextType, { }>("UserPhoto", "url"),
-      },
-      User: {
-        ...module.createTypeMethods<User, Types.ContextType>("User"),
-        photos: module.createResolverBuilder<Types.Maybe<Array<UserPhoto>>, User, Types.ContextType, { }>("User", "photos"),
-      },
-    };
-  }
+const moduleMetadata = {
+  id: 'user-photos',
+  dirname: './user-photos',
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":18,"end":20}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":22,"end":24}},"loc":{"start":22,"end":24}},"loc":{"start":22,"end":25}},"directives":[],"loc":{"start":18,"end":25}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"userId","loc":{"start":27,"end":33}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":35,"end":37}},"loc":{"start":35,"end":37}},"loc":{"start":35,"end":38}},"directives":[],"loc":{"start":27,"end":38}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":40,"end":43}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":45,"end":51}},"loc":{"start":45,"end":51}},"loc":{"start":45,"end":52}},"directives":[],"loc":{"start":40,"end":52}}],"loc":{"start":0,"end":54}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":68,"end":72}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":76,"end":82}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":85,"end":94}},"loc":{"start":85,"end":94}},"loc":{"start":85,"end":95}},"loc":{"start":84,"end":96}},"directives":[],"loc":{"start":76,"end":96}}],"loc":{"start":56,"end":98}}]} as unknown as DocumentNode
 }
 
-export const createUserPhotosModule = () => Baeta.createModuleManager(ModuleMetadata);
-export const getUserPhotosModule = Baeta.createSingletonModule(createUserPhotosModule);
+interface BaetaModuleTypes {
+  Builders: {
+    UserPhoto: Baeta.TypeMethods<Types.UserPhoto, Ctx, Info, BaetaModuleObjectTypeFields['UserPhoto']['Builder'], BaetaModuleObjectTypeFields['UserPhoto']['Factory']>
+    User: Baeta.TypeMethods<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
+  };
+  Factories: {
+    UserPhoto: Baeta.TypeCompilerFactory<Types.UserPhoto, Ctx, Info, BaetaModuleObjectTypeFields['UserPhoto']['Factory']>
+    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Factory']>
+  };
+};
+
+interface BaetaModuleObjectTypeFields {
+  UserPhoto: {
+    Builder: {
+      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
+      userId: Baeta.FieldMethods<Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
+      url: Baeta.FieldMethods<Types.Scalars["String"], Types.UserPhoto, Ctx, {}, Info>
+    };
+    Factory: {
+      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
+      userId: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
+      url: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.UserPhoto, Ctx, {}, Info>
+    };
+  };
+  User: {
+    Builder: {
+      photos: Baeta.FieldMethods<Array<Types.UserPhoto> | null, Types.User, Ctx, {}, Info>
+    };
+    Factory: {
+      photos: Baeta.Field<Array<Types.UserPhoto> | null, Array<Types.UserPhoto> | null, Types.User, Ctx, {}, Info>
+    };
+  };
+};
+
+export const UserPhotosModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  UserPhoto: Baeta.createTypeBuilder("UserPhoto", {
+    id: Baeta.createFieldBuilder("UserPhoto", "id", extensions),
+    userId: Baeta.createFieldBuilder("UserPhoto", "userId", extensions),
+    url: Baeta.createFieldBuilder("UserPhoto", "url", extensions)
+  }, extensions),
+  User: Baeta.createTypeBuilder("User", {
+    photos: Baeta.createFieldBuilder("User", "photos", extensions)
+  }, extensions)
+}, {
+
+}, extensions);

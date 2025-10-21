@@ -1,6 +1,6 @@
 {
   "name": "@baeta/extension-auth",
-  "version": "1.0.11",
+  "version": "2.0.0-next.2",
   "keywords": [
     "baeta",
     "graphql",
@@ -28,7 +28,7 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     }
   },
   "types": "dist/index.d.ts",
@@ -37,9 +37,9 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepack": "prep",
-    "postpack": "prep --clean",
+    "build": "builder build",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --clean",
     "test": "ava",
     "types": "tsc --noEmit"
   },
@@ -54,14 +54,14 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "graphql": "^16.11.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",
     "graphql": "^16.6.0"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.20.0"
   },
   "publishConfig": {
     "access": "public",
@@ -75,11 +75,7 @@
   "ava": {
     "extensions": {
       "ts": "module"
-    },
-    "nodeArguments": [
-      "--no-warnings",
-      "--experimental-transform-types"
-    ]
+    }
   },
   "typedocOptions": {
     "entryPoints": [

@@ -1,6 +1,6 @@
 # createEnvParser()
 
-> **createEnvParser**(`getValue`): \<`T`, `R`, `D`\>(`key`, `options`) => `R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
+> **createEnvParser**(`getValue`): \<`T`, `R`, `D`\>(`key`, `options`) => `R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> \| `undefined` : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
 
 Creates an environment variable parser..
 See https://baeta.io/docs/guides/environment
@@ -24,7 +24,7 @@ See https://baeta.io/docs/guides/environment
 </td>
 <td>
 
-(`key`) => `undefined` \| `string`
+(`key`) => `string` \| `undefined`
 
 </td>
 <td>
@@ -40,7 +40,7 @@ Function to retrieve environment variable values
 
 A parsing function that converts environment variables to strongly-typed values
 
-> \<`T`, `R`, `D`\>(`key`, `options`): `R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
+> \<`T`, `R`, `D`\>(`key`, `options`): `R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> \| `undefined` : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
 
 ### Type Parameters
 
@@ -61,14 +61,14 @@ A parsing function that converts environment variables to strongly-typed values
 <tr>
 <td>
 
-`R` _extends_ `undefined` \| `boolean`
+`R` _extends_ `boolean` \| `undefined`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`D` _extends_ `undefined` \| `string` \| `number` \| `boolean`
+`D` _extends_ `string` \| `number` \| `boolean` \| `undefined`
 
 </td>
 </tr>
@@ -114,7 +114,7 @@ A parsing function that converts environment variables to strongly-typed values
 
 ### Returns
 
-`R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? `undefined` \| [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
+`R` _extends_ `true` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> : `D` _extends_ `undefined` ? [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> \| `undefined` : [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\>
 
 ## Example
 

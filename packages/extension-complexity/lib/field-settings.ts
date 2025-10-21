@@ -8,8 +8,7 @@ import {
 
 export type FieldSettingsMap = Record<
 	string,
-	// biome-ignore lint/suspicious/noExplicitAny: Match any type from the original code
-	Record<string, GetFieldSettings<any, any> | undefined> | undefined
+	Record<string, GetFieldSettings<unknown, unknown> | undefined> | undefined
 >;
 
 /**
@@ -71,5 +70,5 @@ export function registerFieldSettingsSetter<Context, Args>(
 	map: FieldSettingsMap,
 ) {
 	map[type] ??= {};
-	map[type][field] = fn;
+	map[type][field] = fn as GetFieldSettings<unknown, unknown>;
 }

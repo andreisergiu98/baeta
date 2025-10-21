@@ -1,6 +1,6 @@
-# ResolverParams\<Root, Context, Args\>
+# ResolverParams\<Source, Context, Args, Info\>
 
-> **ResolverParams**\<`Root`, `Context`, `Args`\> = `object`
+> **ResolverParams**\<`Source`, `Context`, `Args`, `Info`\> = `object`
 
 ## Type Parameters
 
@@ -14,7 +14,7 @@
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -29,6 +29,13 @@
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -72,24 +79,24 @@
 <tr>
 <td>
 
-<a id="info"></a> `info`
+<a id="info-1"></a> `info`
 
 </td>
 <td>
 
-`GraphQLResolveInfo`
+`Info`
 
 </td>
 </tr>
 <tr>
 <td>
 
-<a id="root-1"></a> `root`
+<a id="source-1"></a> `source`
 
 </td>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>

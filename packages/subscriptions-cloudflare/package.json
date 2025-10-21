@@ -1,6 +1,6 @@
 {
   "name": "@baeta/subscriptions-cloudflare",
-  "version": "0.1.6",
+  "version": "0.2.0-next.2",
   "keywords": [
     "baeta",
     "graphql",
@@ -28,11 +28,11 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./dist/index.js"
+      "default": "./index.ts"
     },
     "./sdk": {
       "types": "./sdk/index.ts",
-      "default": "./dist/sdk/index.js"
+      "default": "./sdk/index.ts"
     }
   },
   "types": "dist/index.d.ts",
@@ -41,27 +41,27 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepack": "prep",
-    "postpack": "prep --clean",
+    "build": "builder build",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --clean",
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "graphql-ws": "^6.0.5"
+    "graphql-ws": "^6.0.6"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20250606.0",
+    "@cloudflare/workers-types": "^4.20251014.0",
     "graphql": "^16.11.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4",
     "graphql": "^16.6.0"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.20.0"
   },
   "publishConfig": {
     "access": "public",

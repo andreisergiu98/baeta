@@ -13,7 +13,7 @@ const client = new Redis({
 
 function createStoreAdapter(options: StoreOptions<TestItem>) {
 	const serializer = createSerializer();
-	return new RedisStoreAdapter(client, serializer, options, 'test', 'test-hash');
+	return new RedisStoreAdapter(client, serializer, options, 'test');
 }
 
 test.beforeEach(async () => {

@@ -1,0 +1,3 @@
+# errorNamespace
+
+> `const` **errorNamespace**: `string`

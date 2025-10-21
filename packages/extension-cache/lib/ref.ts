@@ -16,27 +16,16 @@ export type RefCompatibleRoot = { id: string | number | bigint } | { [key: strin
  * Cache reference for a type field or query
  */
 export class CacheRef<_Result, _Root, _Args> {
-	constructor(
-		private type: string,
-		private field: string,
-		private hash: string,
-		private revision = 1,
-	) {}
+	private type: string;
+	private field: string;
+
+	constructor(type: string, field: string) {
+		this.type = type;
+		this.field = field;
+	}
 
 	toString() {
-		return `${this.type}.${this.field}:r${this.revision}_${this.hash}`;
-	}
-
-	getRevision() {
-		return this.revision;
-	}
-
-	setRevision(revision: number) {
-		this.revision = revision;
-	}
-
-	getHash() {
-		return this.hash;
+		return `${this.type}.${this.field}`;
 	}
 }
 

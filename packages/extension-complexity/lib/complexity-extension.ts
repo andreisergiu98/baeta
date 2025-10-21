@@ -1,85 +1,130 @@
 import {
 	Extension,
-	type ModuleBuilder,
-	type NativeMiddleware,
-	type ResolverMapper,
+	type FieldBuilder,
+	type ModuleCompiler,
+	type SubscriptionBuilder,
+	type TypeBuilder,
 } from '@baeta/core/sdk';
 import { createComplexityMiddleware } from './complexity-middleware.ts';
 import { type ComplexityExtensionOptions, normalizeOptions } from './complexity-options.ts';
-import { type FieldSettingsMap, registerFieldSettingsSetter } from './field-settings.ts';
+import {
+	type FieldSettingsMap,
+	type GetFieldSettings,
+	registerFieldSettingsSetter,
+} from './field-settings.ts';
 
-export class ComplexityExtension<Ctx> extends Extension {
-	private readonly options: Required<ComplexityExtensionOptions<Ctx>>;
+interface ComplexityState {
+	fieldSettings: GetFieldSettings<unknown, unknown>;
+}
+
+declare global {
+	export namespace BaetaExtensions {
+		export interface Extensions {
+			complexityExtension: ComplexityExtension<unknown>;
+		}
+	}
+}
+
+export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
+	readonly stateKey = Symbol('complexity-settings');
+	private readonly options: Required<ComplexityExtensionOptions<unknown>>;
 
 	constructor(options: ComplexityExtensionOptions<Ctx> = {}) {
 		super();
-		this.options = normalizeOptions(options);
+		this.options = normalizeOptions(options as ComplexityExtensionOptions<unknown>);
 	}
 
-	private fieldSettingsMap: FieldSettingsMap = {};
-
-	getTypeExtensions = <Root, Context>(
-		_module: ModuleBuilder,
-		type: string,
-	): BaetaExtensions.TypeExtensions<Root, Context> => {
+	getTypeExtensions = <Source, Context, Info>(
+		builder: TypeBuilder<Source, Context, Info>,
+	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> => {
 		return {
 			$complexity: (fn) => {
-				registerFieldSettingsSetter(type, '*', fn, this.fieldSettingsMap);
+				const editable = builder.edit();
+				this.setState(editable, {
+					fieldSettings: fn as GetFieldSettings<unknown, unknown>,
+				});
+				return editable.commitToMethods();
 			},
 		};
 	};
 
-	getResolverExtensions = <Result, Root, Context, Args>(
-		_module: ModuleBuilder,
-		type: string,
-		field: string,
-	): BaetaExtensions.ResolverExtensions<Result, Root, Context, Args> => {
-		return {
-			$complexity: (fn) => {
-				registerFieldSettingsSetter(type, field, fn, this.fieldSettingsMap);
-			},
-		};
-	};
-
-	getSubscriptionExtensions = <Root, Context, Args>(
-		_module: ModuleBuilder,
-		field: string,
-	): BaetaExtensions.SubscriptionExtensions<Root, Context, Args> => {
-		return {
-			$complexity: (fn) => {
-				registerFieldSettingsSetter('Subscription', field, fn, this.fieldSettingsMap);
-			},
-		};
-	};
-
-	createComplexityMiddleware<Result, Root, Context, Args>(): NativeMiddleware<
+	getFieldExtensions = <Result, Source, Context, Args, Info>(
+		builder: FieldBuilder<Result, Source, Context, Args, Info>,
+	): BaetaExtensions.FieldExtensions<
 		Result,
-		Root,
+		Source,
 		Context,
-		Args
-	> {
-		return createComplexityMiddleware<Result, Root, Context, Args>(
-			this.options as Required<ComplexityExtensionOptions<Context>>,
-			this.fieldSettingsMap,
-		);
-	}
+		Args,
+		Info,
+		FieldBuilder<Result, Source, Context, Args, Info>
+	> => {
+		return {
+			$complexity: (fn) => {
+				const editable = builder.edit();
+				this.setState(editable, {
+					fieldSettings: fn as GetFieldSettings<unknown, unknown>,
+				});
+				return editable.commitToMethods();
+			},
+		};
+	};
 
-	build = (_module: ModuleBuilder, mapper: ResolverMapper) => {
-		for (const type of mapper.getTypes()) {
-			if (type !== 'Query' && type !== 'Mutation' && type !== 'Subscription') {
-				continue;
-			}
+	getSubscriptionExtensions = <Result, Source, Context, Args, Info>(
+		builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
+	): BaetaExtensions.SubscriptionExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		SubscriptionBuilder<Result, Source, Context, Args, Info>
+	> => {
+		return {
+			$complexity: (fn) => {
+				const editable = builder.edit();
+				this.setState(editable, {
+					fieldSettings: fn as GetFieldSettings<unknown, unknown>,
+				});
+				return editable.commitToMethods();
+			},
+		};
+	};
 
-			if (type !== 'Subscription') {
-				for (const field of mapper.getTypeFields(type)) {
-					mapper.prependMiddleware(type, field, this.createComplexityMiddleware());
+	mutate(compilers: ModuleCompiler[]): void {
+		const fieldSettingsMap: FieldSettingsMap = {};
+
+		for (const compiler of compilers) {
+			for (const typeCompiler of compiler.types) {
+				const state = this.getState(typeCompiler);
+				if (!state) continue;
+				registerFieldSettingsSetter(typeCompiler.type, '*', state.fieldSettings, fieldSettingsMap);
+				for (const fieldCompiler of typeCompiler.fields) {
+					const state = this.getState(fieldCompiler);
+					if (!state) continue;
+					registerFieldSettingsSetter(
+						typeCompiler.type,
+						fieldCompiler.field,
+						state.fieldSettings,
+						fieldSettingsMap,
+					);
 				}
-				continue;
-			}
-
-			for (const field of mapper.getTypeFields(type)) {
-				mapper.prependMiddleware(type, `${field}.subscribe`, this.createComplexityMiddleware());
 			}
 		}
-	};
+
+		const middleware = createComplexityMiddleware<unknown, unknown, unknown, unknown, unknown>(
+			this.options,
+			fieldSettingsMap,
+		);
+
+		for (const compiler of compilers) {
+			for (const typeCompiler of compiler.types) {
+				if (!['Query', 'Mutation', 'Subscription'].includes(typeCompiler.type)) {
+					continue;
+				}
+				for (const fieldCompiler of typeCompiler.fields) {
+					fieldCompiler.addInitialMiddleware(middleware);
+				}
+			}
+		}
+	}
 }

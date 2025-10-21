@@ -2,7 +2,6 @@
   "search.exclude": {
     "**/.docusaurus": true,
     "**/.pnp.*": true,
-    "**/.tsup": true,
     "**/.turbo": true,
     "**/.yarn": true,
     "**/dist": true,
@@ -10,7 +9,6 @@
   },
   "files.exclude": {
     "**/.docusaurus": true,
-    "**/.tsup": true,
     "**/.turbo": true,
     "**/node_modules": true,
     "**/dist": true,

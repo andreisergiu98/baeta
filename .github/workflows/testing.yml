@@ -22,14 +22,6 @@ jobs:
       - name: Setup env
         uses: ./.github/actions/setup
 
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
       - name: Run type check
         run: yarn types
 
@@ -55,7 +47,7 @@ jobs:
           SRH_TOKEN: example_token
           SRH_CONNECTION_STRING: "redis://redis:6379/0"
       etcd:
-        image: bitnami/etcd:latest
+        image: gcr.io/etcd-development/etcd:v3.6.5
         ports:
           - 22379:2379
           - 22380:2380
@@ -68,14 +60,6 @@ jobs:
 
       - name: Setup env
         uses: ./.github/actions/setup
-
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
 
       - name: Run tests
         run: yarn test
@@ -90,7 +74,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run linting
-        run: yarn linter
+        run: yarn lint
 
   pkg-constraints:
     name: Package constraints

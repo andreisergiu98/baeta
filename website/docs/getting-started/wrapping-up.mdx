@@ -12,25 +12,26 @@ Now that we have our modules ready, let's create and run our GraphQL application
 Create an entry point for your application in `src/app.ts`:
 
 ```typescript
-import { createApplication } from "@baeta/core";
-import { userModule } from "./modules/user";
-import { userPhotosModule } from "./modules/user-photos";
-
-import { createYoga } from "graphql-yoga";
 import { createServer } from "node:http";
+import { createApplication } from "@baeta/core";
+import { createYoga } from "graphql-yoga";
+// Baeta automatically exports all modules
+import modules from "./modules/index.ts";
 
 const baeta = createApplication({
-  modules: [userModule, userPhotosModule],
+  modules,
 });
 
-const yoga = createYoga({
+export const yoga = createYoga({
   schema: baeta.schema,
 });
 
 const server = createServer(yoga);
 
 server.listen(4000, () => {
-  console.log("🚀 Server ready at http://localhost:4000/graphql");
+  console.log(
+    `🚀 Server ready at http://localhost:4000${yoga.graphqlEndpoint}`,
+  );
 });
 ```
 
@@ -44,12 +45,6 @@ Run your application with:
 
 ```bash
 yarn start
-```
-
-Or with the full command:
-
-```bash
-yarn baeta build --watch --generate --onSuccess='node --enable-source-maps dist/app.js'
 ```
 
 ## What's Next?

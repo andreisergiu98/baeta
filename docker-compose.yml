@@ -20,7 +20,7 @@ services:
       SRH_CONNECTION_STRING: "redis://redis-test:6379/1"
 
   etcd-test:
-    image: bitnami/etcd:latest
+    image: gcr.io/etcd-development/etcd:v3.6.5
     ports:
       - "22379:2379"
       - "22380:2380"

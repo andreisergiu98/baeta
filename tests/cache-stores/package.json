@@ -38,9 +38,6 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsdown",
-    "prepack": "prep",
-    "postpack": "prep --clean",
     "types": "tsc --noEmit"
   },
   "peerDependencies": {

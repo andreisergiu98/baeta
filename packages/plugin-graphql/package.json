@@ -37,9 +37,9 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsdown",
-    "prepack": "prep",
-    "postpack": "prep --clean",
+    "build": "builder build",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --clean",
     "types": "tsc --noEmit"
   },
   "dependencies": {

@@ -45,10 +45,6 @@ async function getManifest() {
 }
 
 async function writeManifest(files: string[]) {
-	if (files.length === 0) {
-		return;
-	}
-
 	const manifest: Manifest = {
 		files,
 	};
@@ -99,15 +95,13 @@ async function createNestedPackages() {
 	const pkg = await loadPackageJson();
 
 	if (pkg.name == null) {
-		console.log('Missing name, skipping...');
-		return;
+		return await writeManifest([]);
 	}
 
 	const pkgExports = pkg.publishConfig?.exports || pkg.exports;
 
 	if (pkgExports == null) {
-		console.log('Missing publishConfig.exports and exports, skipping...');
-		return;
+		return await writeManifest([]);
 	}
 
 	const entries = Object.entries(pkgExports);
@@ -159,7 +153,7 @@ export async function prepGenerate() {
 	const manifest = await getManifest();
 
 	if (manifest != null) {
-		console.error('[ERROR] Remove manifest before preparing');
+		console.error('[ERROR] Remove manifest before preparing.');
 		process.exit(1);
 	}
 
@@ -167,9 +161,10 @@ export async function prepGenerate() {
 }
 
 export async function prepClean() {
+	const manifest = await getManifest();
+	if (manifest == null) {
+		console.error('[ERROR] No manifest found, nothing to clean.');
+		process.exit(1);
+	}
 	await Promise.all([removeNestedPackages(), removeReadmeAndLicense()]);
-}
-
-export function prepHelp() {
-	console.log('Usage: prep prepares packages for publish [--clean cleans afterwards]');
 }

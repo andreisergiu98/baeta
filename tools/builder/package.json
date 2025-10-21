@@ -30,19 +30,22 @@
       "import": "./tsdown.ts"
     }
   },
-  "bin": {
-    "prep": "./bin/prep.ts",
-    "tsdown": "./bin/tsdown.ts"
-  },
+  "bin": "./bin/cli.ts",
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
+    "commander": "^14.0.1",
     "esbuild": "^0.25.11",
-    "tsdown": "^0.15.9"
+    "execa": "^9.6.0",
+    "prompts": "^2.4.2",
+    "tsdown": "^0.15.9",
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/color-hash": "^2.0.0",
     "@types/node": "^22.18.11",
+    "@types/prompts": "^2.4.9",
+    "@types/yargs": "^17.0.33",
     "typescript": "^5.9.3"
   }
 }

@@ -40,14 +40,10 @@
     "examples:sync": "./examples/sync.sh",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
-    "linter": "biome check .",
+    "lint": "yarn biome check .",
     "prepare": "husky",
-    "publish": "yarn workspaces foreach -A --no-private npm publish --tolerate-republish \"$@\"",
-    "release": "yarn build && yarn publish \"$@\" && changeset tag",
-    "release:snapshot": "yarn build && yarn publish --tag alpha",
     "test": "yarn turbo test --filter='./packages/*'",
-    "types": "yarn turbo types",
-    "watch": "yarn turbo watch build --filter='./packages/*'"
+    "types": "yarn turbo types"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

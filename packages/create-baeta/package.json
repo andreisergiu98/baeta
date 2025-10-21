@@ -40,9 +40,9 @@
   ],
   "scripts": {
     "prebuild": "node --no-warnings --experimental-transform-types ./scripts/version-manifest.ts",
-    "build": "yarn prebuild && tsdown",
-    "prepack": "prep",
-    "postpack": "prep --clean",
+    "build": "yarn prebuild && builder build",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --clean",
     "types": "yarn prebuild && tsc --noEmit"
   },
   "dependencies": {

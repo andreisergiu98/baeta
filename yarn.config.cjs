@@ -107,15 +107,15 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('engines.node', '>=22.20.0');
 
 			if (workspace.manifest.scripts?.prebuild == null) {
-				workspace.set('scripts.build', 'tsdown');
+				workspace.set('scripts.build', 'builder build');
 				workspace.set('scripts.types', 'tsc --noEmit');
 			} else {
-				workspace.set('scripts.build', 'yarn prebuild && tsdown');
+				workspace.set('scripts.build', 'yarn prebuild && builder build');
 				workspace.set('scripts.types', 'yarn prebuild && tsc --noEmit');
 			}
 
-			workspace.set('scripts.prepack', 'prep');
-			workspace.set('scripts.postpack', 'prep --clean');
+			workspace.set('scripts.prepack', 'builder prepare');
+			workspace.set('scripts.postpack', 'builder prepare --clean');
 
 			if (workspace.manifest.devDependencies?.['@baeta/testing']) {
 				workspace.set('scripts.test', 'ava');

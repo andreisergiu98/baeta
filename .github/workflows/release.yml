@@ -26,7 +26,7 @@ jobs:
         id: changesets
         uses: dotansimha/changesets-action@069996e9be15531bd598272996fa23853d61590e #v1.5.2
         with:
-          publish: yarn release
+          publish: yarn builder release --ci --dry-run
           version: yarn changeset version
           commit: "chore: publish packages"
           title: "chore: publish packages"

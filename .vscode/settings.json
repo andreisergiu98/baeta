@@ -9,6 +9,7 @@
   },
   "files.exclude": {
     "**/.docusaurus": true,
+    "**/.pnp.*": true,
     "**/.turbo": true,
     "**/node_modules": true,
     "**/dist": true,

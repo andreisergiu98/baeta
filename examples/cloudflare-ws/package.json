@@ -34,7 +34,7 @@
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@hono/graphql-server": "^0.6.0",
     "graphql": "^16.11.0",
-    "hono": "^4.7.11"
+    "hono": "^4.10.2"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",

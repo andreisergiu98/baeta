@@ -24,6 +24,7 @@ export function Generator(props: GeneratorProps) {
 	const { config } = useConfig();
 	const [running, setRunning] = useState(false);
 	const [error, setError] = useState<unknown>(undefined);
+	const hasGeneratedRef = useRef(false);
 
 	const [startedPlugins, setStartedPlugins] = useState<GeneratorPluginName[]>([]);
 	const [finishedPlugins, setFinishedPlugins] = useState<GeneratorPluginName[]>([]);
@@ -37,16 +38,28 @@ export function Generator(props: GeneratorProps) {
 	const [runOutput, setRunOutput] = useState<string>('');
 
 	useEffect(() => {
+		if (!process.stdin.isTTY) return;
+
 		process.stdin.setRawMode(true);
 		process.stdin.resume();
 		process.stdin.setEncoding('utf8');
-		process.stdin.on('data', (data) => {
+
+		const handleData = (data: Buffer<ArrayBuffer> | string) => {
 			const value = data.toString();
 			if (value === '\u0003') {
 				process.exit();
 			}
 			runRef.current?.write(value);
-		});
+		};
+
+		process.stdin.on('data', handleData);
+
+		return () => {
+			process.stdin.off('data', handleData);
+			if (process.stdin.isTTY) process.stdin.setRawMode(false);
+
+			process.stdin.pause();
+		};
 	}, []);
 
 	const runCommand = useCallback(() => {
@@ -74,6 +87,7 @@ export function Generator(props: GeneratorProps) {
 				setError(undefined);
 			},
 			onEnd: () => {
+				hasGeneratedRef.current = true;
 				setRunning(false);
 				setStartedPlugins([]);
 				setFinishedPlugins([]);
@@ -134,6 +148,10 @@ export function Generator(props: GeneratorProps) {
 			instance.close();
 		};
 	}, [config, watch, plugins, getHooks]);
+
+	useEffect(() => {
+		if (hasGeneratedRef.current && !running && !watch && !props.run) process.exit(0);
+	}, [running, watch, props.run]);
 
 	return (
 		<>

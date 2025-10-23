@@ -6,7 +6,7 @@ export function renderComponentWithoutConfig<P extends {}>(
 	component: FunctionComponent<P>,
 	props?: P | null,
 ) {
-	render(createElement(component, props));
+	return render(createElement(component, props));
 }
 
 export function renderComponent<P extends {}>(
@@ -14,5 +14,5 @@ export function renderComponent<P extends {}>(
 	props: P,
 	configProps?: ConfigProps,
 ) {
-	render(createElement(ConfigProvider, configProps, createElement(Component, props)));
+	return render(createElement(ConfigProvider, configProps, createElement(Component, props)));
 }

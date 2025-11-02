@@ -1,39 +1,11 @@
 import { Box, Text } from 'ink';
-import { useEffect, useState } from 'react';
 import { useConfig } from './config-provider.tsx';
 import { Spinner } from './spinner.tsx';
 
 export function ConfigStatus() {
-	const { events } = useConfig();
-	const [configChanged, setConfigChanged] = useState(false);
+	const { showConfigChanged } = useConfig();
 
-	useEffect(() => {
-		const showConfigChanged = () => {
-			setConfigChanged(true);
-		};
-
-		events.on('update', showConfigChanged);
-
-		return () => {
-			events.off('update', showConfigChanged);
-		};
-	}, [events]);
-
-	useEffect(() => {
-		if (!configChanged) {
-			return;
-		}
-
-		const id = setTimeout(() => {
-			setConfigChanged(false);
-		}, 1000);
-
-		return () => {
-			clearTimeout(id);
-		};
-	}, [configChanged]);
-
-	if (!configChanged) {
+	if (!showConfigChanged) {
 		return null;
 	}
 

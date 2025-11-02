@@ -1778,15 +1778,11 @@ __metadata:
     "@types/node": "npm:^22.18.12"
     "@types/react": "npm:^19.2.2"
     "@types/yargs": "npm:^17.0.33"
-    "@xterm/addon-serialize": "npm:^0.13.0"
-    "@xterm/headless": "npm:^5.5.0"
-    "@xterm/xterm": "npm:^5.5.0"
     ansi-styles: "npm:^6.2.3"
     fast-glob: "npm:^3.3.3"
     graphql: "npm:^16.11.0"
     ink: "npm:^6.3.1"
     jiti: "npm:^2.6.1"
-    lodash.throttle: "npm:^4.1.1"
     node-pty: "npm:^1.0.0"
     react: "npm:^19.2.0"
     typescript: "npm:^5.9.3"
@@ -7767,26 +7763,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xterm/addon-serialize@npm:^0.13.0":
-  version: 0.13.0
-  resolution: "@xterm/addon-serialize@npm:0.13.0"
-  peerDependencies:
-    "@xterm/xterm": ^5.0.0
-  checksum: 10/c575623c9388fa0a901d0e240d948abd03b2ea83a22949e6729bed3e740f4c70850fcb1322922d3297c56d76cb7b2ca6c5f0a90f9c89faefccd7a80848feb5ba
-  languageName: node
-  linkType: hard
-
 "@xterm/headless@npm:^5.5.0":
   version: 5.5.0
   resolution: "@xterm/headless@npm:5.5.0"
   checksum: 10/6c2e062553496cdcd1a65cc614fea25aeb3c042b4f1b8474effd365f0b49be7a2c508123e326c2fc4a60bac35e2b3006e86c08547a1faddda67efc2f1ac14916
-  languageName: node
-  linkType: hard
-
-"@xterm/xterm@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "@xterm/xterm@npm:5.5.0"
-  checksum: 10/d4cdc402de81a83a3e0ef93f38072cb8f54abe4d65865f2e29b92cbc2593f86d052f6b993895c9e5dec97f47548f504e90bcea0aad6845917c09b03f2f3a4629
   languageName: node
   linkType: hard
 
@@ -8545,7 +8525,7 @@ __metadata:
     "@yarnpkg/sdks": "npm:^3.2.3"
     "@yarnpkg/types": "npm:^4.0.1"
     husky: "npm:^9.1.7"
-    lint-staged: "npm:^16.2.5"
+    lint-staged: "npm:^16.2.6"
     prettier: "npm:^3.6.2"
     turbo: "npm:^2.5.8"
     typescript: "npm:^5.9.3"
@@ -14021,12 +14001,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^16.2.5":
-  version: 16.2.5
-  resolution: "lint-staged@npm:16.2.5"
+"lint-staged@npm:^16.2.6":
+  version: 16.2.6
+  resolution: "lint-staged@npm:16.2.6"
   dependencies:
     commander: "npm:^14.0.1"
-    listr2: "npm:^9.0.4"
+    listr2: "npm:^9.0.5"
     micromatch: "npm:^4.0.8"
     nano-spawn: "npm:^2.0.0"
     pidtree: "npm:^0.6.0"
@@ -14034,13 +14014,13 @@ __metadata:
     yaml: "npm:^2.8.1"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/9a1019d2d95646bb7acb0a43ec1f89427f2066defa7fc89f82c71b25fdc55d1c16e1ac44afbed1440c37615c4bbaeafd687bfb0adf1a08ae5bc9d1015325ca88
+  checksum: 10/c419f1347166ddd06746d4a3e4ce6441f3d0e82dcdcbc3d3615ddf7b82b36c603df2e43dbb1edad5ed00ae29857479e1f880bcca271f8bf4b0db7d0f77861d21
   languageName: node
   linkType: hard
 
-"listr2@npm:^9.0.4":
-  version: 9.0.4
-  resolution: "listr2@npm:9.0.4"
+"listr2@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "listr2@npm:9.0.5"
   dependencies:
     cli-truncate: "npm:^5.0.0"
     colorette: "npm:^2.0.20"
@@ -14048,7 +14028,7 @@ __metadata:
     log-update: "npm:^6.1.0"
     rfdc: "npm:^1.4.1"
     wrap-ansi: "npm:^9.0.0"
-  checksum: 10/8d8665d2efec9a26eb1359c2e86c80d189067e1bd7a7d7ed28a6a9264ec6127caa2a9c4a5b424918e50725600e0e2be058d15c2ad9492df71e3a55a53a82c643
+  checksum: 10/b78ffd60443aed9a8e0fc9162eb941ea4d63210700d61a895eb29348f23fc668327e26bbca87a9e6a6208e7fa96c475fe1f1c6c19b46f376f547e0cba3b935ae
   languageName: node
   linkType: hard
 
@@ -14150,13 +14130,6 @@ __metadata:
   version: 4.4.0
   resolution: "lodash.startcase@npm:4.4.0"
   checksum: 10/3091048a54a2f92bcf2c6441d2bd9a706fb133d5f461ae7c310d6dca1530338a06c91e9e42a5b14b12e875ddae1814d448050dc02afe2cec09b3995d8e836837
-  languageName: node
-  linkType: hard
-
-"lodash.throttle@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "lodash.throttle@npm:4.1.1"
-  checksum: 10/9be9fb2ffd686c20543167883305542f4564062a5f712a40e8c6f2f0d9fd8254a6e9d801c2470b1b24e0cdf2ae83c1277b55aa0fb4799a2db6daf545f53820e1
   languageName: node
   linkType: hard
 

@@ -1,24 +1,19 @@
-import { SerializeAddon } from '@xterm/addon-serialize';
-import xterm from '@xterm/headless';
-import throttle from 'lodash.throttle';
 import pty from 'node-pty';
-export type PtyProcess = ReturnType<typeof startProcessWithPty>;
 
-const SPACES_REGEXP = / +/g;
+export type PtyProcess = {
+	didExit: boolean;
+	write: (data: string) => void;
+	exit: () => void;
+};
 
-export function startProcessWithPty(command: string, stdout: (data: string) => void) {
+export function startProcessWithPty(
+	command: string,
+	onData: (data: string, clear: boolean) => void,
+): PtyProcess {
 	const [file, ...args] = parseCommand(command);
 
 	const cols = process.stdout.columns;
 	const rows = process.stdout.rows;
-
-	const term = new xterm.Terminal({
-		cols: cols,
-		rows: rows,
-		allowProposedApi: true,
-	});
-	const serialize = new SerializeAddon();
-	term.loadAddon(serialize);
 
 	const ptyProc = pty.spawn(file, args, {
 		cwd: process.cwd(),
@@ -31,30 +26,20 @@ export function startProcessWithPty(command: string, stdout: (data: string) => v
 		const cols = process.stdout.columns;
 		const rows = process.stdout.rows;
 		ptyProc.resize(cols, rows);
-		term.resize(cols, rows);
 	});
 
 	ptyProc.onData((data) => {
-		term.write(data);
-		refresh();
+		const { cleaned, cleared } = stripClearControls(data);
+		onData(cleaned, cleared);
 	});
-
-	const refresh = throttle(
-		() => {
-			const screen = serialize.serialize();
-			stdout(screen);
-		},
-		16,
-		{
-			leading: false,
-			trailing: true,
-		},
-	);
 
 	const procData = {
 		didExit: false,
 		write: (data: string) => {
 			ptyProc.write(data);
+		},
+		exit: () => {
+			ptyProc.kill('SIGTERM');
 		},
 	};
 
@@ -63,11 +48,12 @@ export function startProcessWithPty(command: string, stdout: (data: string) => v
 		procData.write = (_data: string) => {
 			// do nothing
 		};
-		term.dispose();
 	});
 
 	return procData;
 }
+
+const SPACES_REGEXP = / +/g;
 
 function parseCommand(command: string) {
 	const trimmed = command.trim();
@@ -86,4 +72,46 @@ function parseCommand(command: string) {
 	}
 
 	return tokens;
+}
+
+const CLEAR_CODES = [
+	'\x1bc', // RIS
+	'\x1b[0J',
+	'\x1b[1J',
+	'\x1b[2J',
+	'\x1b[3J', // erase in display
+	'\x1b[0K',
+	'\x1b[1K',
+	'\x1b[2K', // erase in line
+	'\x1b[H',
+	'\x1b[?1049h',
+	'\x1b[?1049l',
+	'\x1b[?47h',
+	'\x1b[?47l',
+	'\x1b[?1047h',
+	'\x1b[?1047l',
+	'\x0c', // form feed (^L)
+];
+
+function stripClearControls(data: string): {
+	cleared: boolean;
+	cleaned: string;
+} {
+	let cleared = false;
+	let result = '';
+	let i = 0;
+
+	while (i < data.length) {
+		if (data[i] === '\x1b' || data[i] === '\x0c') {
+			const found = CLEAR_CODES.find((seq) => data.startsWith(seq, i));
+			if (found) {
+				cleared = true;
+				i += found.length;
+				continue;
+			}
+		}
+		result += data[i++];
+	}
+
+	return { cleared, cleaned: result };
 }

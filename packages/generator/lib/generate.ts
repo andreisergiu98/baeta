@@ -36,7 +36,7 @@ export async function generate(
 	return executeGenerator(ctx, plugins, stateFilename, hooks);
 }
 
-export function generateAndWatch(
+export async function generateAndWatch(
 	options: GeneratorOptions,
 	plugins: GeneratorPluginV1[],
 	hooks?: GeneratorHooks,
@@ -45,7 +45,12 @@ export function generateAndWatch(
 	const stateFilename = getStateFilename(generatorOptions.cwd);
 	const watcher = new Watcher(generatorOptions.cwd);
 
-	let previousCtx: Ctx | undefined;
+	let previousCtx: Ctx | undefined = await executeGenerator(
+		createCtx({ generatorOptions, plugins }),
+		plugins,
+		stateFilename,
+		hooks,
+	);
 
 	const reload = async (file: WatcherFile) => {
 		const ctx = createCtx({

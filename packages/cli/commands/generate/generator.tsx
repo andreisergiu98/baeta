@@ -6,11 +6,10 @@ import {
 	getGeneratorPlugins,
 } from '@baeta/generator';
 import { graphqlPlugin } from '@baeta/plugin-graphql';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { makeErrorMessage, useConfig } from '../../sdk/index.ts';
+import { useEffect, useMemo, useState } from 'react';
+import { makeErrorMessage, useConfig, useRunCommand } from '../../sdk/index.ts';
 import { flattenArrays } from '../../utils/array.ts';
-import { type PtyProcess, startProcessWithPty } from '../../utils/process.ts';
-import { AppStatus } from './app-status.tsx';
+import { runAsync } from '../../utils/promise.ts';
 import { type GeneratorPluginName, GeneratorStatus } from './generator-status.tsx';
 
 export interface GeneratorProps {
@@ -20,131 +19,121 @@ export interface GeneratorProps {
 }
 
 export function Generator(props: GeneratorProps) {
-	const { watch, skipInitial } = props;
 	const { config } = useConfig();
-	const [running, setRunning] = useState(false);
-	const [error, setError] = useState<unknown>(undefined);
 
-	const [startedPlugins, setStartedPlugins] = useState<GeneratorPluginName[]>([]);
-	const [finishedPlugins, setFinishedPlugins] = useState<GeneratorPluginName[]>([]);
+	const runCommand = useRunCommand(props.run);
+
+	const { running, error, startedPlugins, finishedPlugins, generatorHooks } =
+		useGeneratorHooks(runCommand);
 
 	const plugins = useMemo(() => {
 		const generatorPlugins = getGeneratorPlugins(flattenArrays(config.plugins ?? []));
 		return [...generatorPlugins, graphqlPlugin()];
 	}, [config.plugins]);
 
-	const runRef = useRef<PtyProcess | null>(null);
-	const [runOutput, setRunOutput] = useState<string>('');
-
 	useEffect(() => {
-		process.stdin.setRawMode(true);
-		process.stdin.resume();
-		process.stdin.setEncoding('utf8');
-		process.stdin.on('data', (data) => {
-			const value = data.toString();
-			if (value === '\u0003') {
-				process.exit();
-			}
-			runRef.current?.write(value);
-		});
-	}, []);
-
-	const runCommand = useCallback(() => {
-		if (props.run == null) {
+		if (!config) {
 			return;
 		}
 
-		if (runRef.current && !runRef.current.didExit) {
-			return;
-		}
+		let closeWatcher: () => void = () => {};
 
-		const proc = startProcessWithPty(props.run, (data) => {
-			setRunOutput(data);
-		});
+		const cancel = runAsync(
+			async (isCancelled) => {
+				if (props.watch !== true) {
+					return await generate(config.graphql, plugins, generatorHooks);
+				}
+				const watcher = await generateAndWatch(config.graphql, plugins, generatorHooks);
+				if (isCancelled()) watcher.close();
+				closeWatcher = () => watcher.close();
+			},
+			(error) => {
+				console.log(makeErrorMessage((error as Error).message));
+				process.exit(1);
+			},
+		);
 
-		runRef.current = proc;
-	}, [props.run]);
+		return () => {
+			cancel();
+			closeWatcher();
+		};
+	}, [props.watch, config, plugins, generatorHooks]);
 
-	const getHooks = useCallback((): GeneratorHooks => {
-		return {
+	return (
+		<GeneratorStatus
+			error={error}
+			running={running}
+			watching={props.watch}
+			startedPlugins={startedPlugins}
+			finishedPlugins={finishedPlugins}
+		/>
+	);
+}
+
+const emptyPlugins: GeneratorPluginName[] = [];
+
+function useGeneratorHooks(onEnd?: () => void) {
+	const [running, setRunning] = useState(false);
+	const [error, setError] = useState<unknown>(undefined);
+
+	const [startedPlugins, setStartedPlugins] = useState<GeneratorPluginName[]>(emptyPlugins);
+	const [finishedPlugins, setFinishedPlugins] = useState<GeneratorPluginName[]>(emptyPlugins);
+
+	const generatorHooks = useMemo(
+		(): GeneratorHooks => ({
 			onStart: () => {
 				setRunning(true);
-				setStartedPlugins([]);
-				setFinishedPlugins([]);
+				setStartedPlugins(emptyPlugins);
+				setFinishedPlugins(emptyPlugins);
 				setError(undefined);
 			},
 			onEnd: () => {
 				setRunning(false);
-				setStartedPlugins([]);
-				setFinishedPlugins([]);
-				runCommand();
+				setStartedPlugins(emptyPlugins);
+				setFinishedPlugins(emptyPlugins);
+				onEnd?.();
 			},
 			onError: (error) => {
 				setRunning(false);
-				setStartedPlugins([]);
-				setFinishedPlugins([]);
+				setStartedPlugins(emptyPlugins);
+				setFinishedPlugins(emptyPlugins);
 				setError(error);
 			},
 			onPluginStepStart: (plugin, step) => {
-				if (step === 'generate') {
-					setStartedPlugins((current) => [
-						...current,
-						{
-							id: randomUUID(),
-							name: plugin.name,
-							actionName: plugin.actionName,
-						},
-					]);
+				if (step !== 'generate') {
+					return;
 				}
+				setStartedPlugins((current) => [
+					...current,
+					{
+						id: randomUUID(),
+						name: plugin.name,
+						actionName: plugin.actionName,
+					},
+				]);
 			},
 			onPluginStepEnd: (plugin, step) => {
-				if (step === 'generate') {
-					setFinishedPlugins((current) => [
-						...current,
-						{
-							id: randomUUID(),
-							name: plugin.name,
-							actionName: plugin.actionName,
-						},
-					]);
+				if (step !== 'generate') {
+					return;
 				}
+				setFinishedPlugins((current) => [
+					...current,
+					{
+						id: randomUUID(),
+						name: plugin.name,
+						actionName: plugin.actionName,
+					},
+				]);
 			},
-		};
-	}, [runCommand]);
-
-	useEffect(() => {
-		if (!config || (watch === true && skipInitial === true)) {
-			return;
-		}
-
-		generate(config.graphql, plugins, getHooks()).catch((error) => {
-			console.log(makeErrorMessage(error.message));
-			process.exit(1);
-		});
-	}, [config, watch, skipInitial, plugins, getHooks]);
-
-	useEffect(() => {
-		if (!config || watch !== true) {
-			return;
-		}
-
-		const instance = generateAndWatch(config.graphql, plugins, getHooks());
-
-		return () => {
-			instance.close();
-		};
-	}, [config, watch, plugins, getHooks]);
-
-	return (
-		<>
-			{props.run && <AppStatus>{runOutput}</AppStatus>}
-			<GeneratorStatus
-				error={error}
-				running={running}
-				watching={props.watch}
-				startedPlugins={startedPlugins}
-				finishedPlugins={finishedPlugins}
-			/>
-		</>
+		}),
+		[onEnd],
 	);
+
+	return {
+		running,
+		error,
+		startedPlugins,
+		finishedPlugins,
+		generatorHooks,
+	};
 }

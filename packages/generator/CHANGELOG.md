@@ -1,5 +1,14 @@
 # @baeta/generator
 
+## 2.0.0-next.3
+
+### Patch Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`6de5d15`](https://github.com/andreisergiu98/baeta/commit/6de5d15484d341a1717a1b2f3f45272912e6a886) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix generated import paths with custom config
+
+- Updated dependencies [[`6de5d15`](https://github.com/andreisergiu98/baeta/commit/6de5d15484d341a1717a1b2f3f45272912e6a886)]:
+  - @baeta/generator-sdk@2.0.0-next.3
+
 ## 2.0.0-next.2
 
 ### Patch Changes

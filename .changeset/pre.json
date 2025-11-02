@@ -36,8 +36,11 @@
     "@baeta/tests-cache-stores": "1.0.3"
   },
   "changesets": [
+    "curly-carrots-know",
     "fast-kids-hug",
     "heavy-pandas-kneel",
-    "late-dryers-occur"
+    "late-dryers-occur",
+    "new-socks-lie",
+    "plain-baths-allow"
   ]
 }

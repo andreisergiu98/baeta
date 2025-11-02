@@ -1,5 +1,14 @@
 # @baeta/plugin-exec
 
+## 2.0.0-next.3
+
+### Patch Changes
+
+- Update generator-sdk package
+
+- Updated dependencies [[`6de5d15`](https://github.com/andreisergiu98/baeta/commit/6de5d15484d341a1717a1b2f3f45272912e6a886)]:
+  - @baeta/generator-sdk@2.0.0-next.3
+
 ## 2.0.0-next.2
 
 ### Patch Changes

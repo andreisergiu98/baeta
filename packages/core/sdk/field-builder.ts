@@ -96,7 +96,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 		>;
 		return {
 			...extensions,
-			use: (middleware) => {
+			$use: (middleware) => {
 				nameFunction(middleware, `${this.#type}.${this.#field}.use`);
 				return this.edit().addMiddleware(middleware).commitToMethods();
 			},

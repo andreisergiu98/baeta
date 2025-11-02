@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 2.0.0-next.4
+
+### Patch Changes
+
+- Use $use instead of use for middlewares
+
 ## 2.0.0-next.2
 
 ### Patch Changes

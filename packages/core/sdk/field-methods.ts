@@ -13,7 +13,7 @@ export type Field<Expected, Result, Source, Context, Args, Info> = FieldHelpers<
 >;
 
 export type FieldMethods<Result, Source, Context, Args, Info> = {
-	use: (
+	$use: (
 		middleware: Middleware<Result, Source, Context, Args, Info>,
 	) => FieldMethods<Result, Source, Context, Args, Info>;
 	key: <K extends keyof Source>(key: K) => Field<Result, Source[K], Source, Context, Args, Info>;

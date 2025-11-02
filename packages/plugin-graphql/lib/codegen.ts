@@ -59,12 +59,15 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 		withMaybe: false,
 		withOptional: false,
 		defaultScalars,
+		importExtension: options.importExtension,
+		typesDir: options.typesDir,
+		modulesDir: options.modulesDir,
 	};
 
 	const fieldInfo = createFieldInfoMap(globalDefinitions, defaultScalars);
 
 	const typesContent = [
-		printTypesHeaders(),
+		printTypesHeaders(config),
 		printRootTypesFromMap(
 			config,
 			['Query', 'Mutation', 'Subscription'],
@@ -106,7 +109,8 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 			}),
 			options: {
 				allowOverwrite: false,
-				disableBiomeHeader: true,
+				disableBiomeV1Header: true,
+				disableBiomeV2Header: true,
 				disableEslintHeader: true,
 				disableGenerationNoticeHeader: true,
 			},
@@ -116,7 +120,8 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 			content: printExtensionsTemplate(),
 			options: {
 				allowOverwrite: false,
-				disableBiomeHeader: true,
+				disableBiomeV1Header: true,
+				disableBiomeV2Header: true,
 				disableEslintHeader: true,
 				disableGenerationNoticeHeader: true,
 			},
@@ -136,7 +141,7 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 			registry: createModuleRegistry(document),
 		};
 		files.push({
-			filename: `src/modules/${module}/${options.moduleDefinitionName}`,
+			filename: join(options.modulesDir, `/${module}/${options.moduleDefinitionName}`),
 			content: [
 				printModuleImports(config, module),
 				printModuleMetadata(module, document),

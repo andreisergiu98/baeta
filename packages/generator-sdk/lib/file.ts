@@ -18,10 +18,16 @@ export interface FileOptions {
 	disableEslintHeader?: boolean;
 
 	/**
-	 * Disable biome comment at the beginning of the file.
+	 * Disable biome v1 comment at the beginning of the file.
 	 * @defaultValue false
 	 */
-	disableBiomeHeader?: boolean;
+	disableBiomeV1Header?: boolean;
+
+	/**
+	 * Disable biome v2 comment at the beginning of the file.
+	 * @defaultValue false
+	 */
+	disableBiomeV2Header?: boolean;
 
 	/**
 	 * Allow overwriting the file.
@@ -106,8 +112,13 @@ export class File {
 			headerItems.push(comment);
 		}
 
-		if (this.options?.disableBiomeHeader !== true) {
+		if (this.options?.disableBiomeV1Header !== true) {
 			const comment = this.createComment('@biome-ignore-all: generated file');
+			headerItems.push(comment);
+		}
+
+		if (this.options?.disableBiomeV2Header !== true) {
+			const comment = this.createComment('biome-ignore-all lint: generated file');
 			headerItems.push(comment);
 		}
 

@@ -1,3 +1,5 @@
+import { posixPath, relative } from '@baeta/util-path';
+
 export function buildBlock({ name, lines }: { name: string; lines: string[] }): string {
 	return [`${name} {`, ...lines.filter(Boolean).map(indent(2)), '};'].join('\n');
 }
@@ -20,4 +22,12 @@ export function indent(size: number) {
 
 export function unique<T>(val: T, i: number, all: T[]): boolean {
 	return i === all.indexOf(val);
+}
+
+export function makeRelativePathForImport(from: string, to: string) {
+	const res = posixPath(relative(from, to));
+	if (res.startsWith('.') || res.startsWith('/')) {
+		return res;
+	}
+	return `./${res}`;
 }

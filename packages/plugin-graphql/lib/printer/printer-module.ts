@@ -1,9 +1,9 @@
-import { join, relative } from '@baeta/util-path';
+import { join } from '@baeta/util-path';
 import { pascalCase } from 'change-case-all';
 import type { DocumentNode } from 'graphql';
 import type { FieldInfoMap } from '../visitors/field-info.ts';
 import type { ModuleRegistry } from '../visitors/module-registry.ts';
-import { buildBlock, buildCodeBlock } from './printer-utils.ts';
+import { buildBlock, buildCodeBlock, makeRelativePathForImport } from './printer-utils.ts';
 
 export interface ModulePrinterConfig {
 	registry: ModuleRegistry;
@@ -14,13 +14,13 @@ export interface ModulePrinterConfig {
 }
 
 export function printModuleImports(config: ModulePrinterConfig, moduleName: string) {
-	const typesDir = relative(join(config.modulesDir, moduleName), config.typesDir);
+	const typesDir = makeRelativePathForImport(join(config.modulesDir, moduleName), config.typesDir);
 	return [
 		'import type { DocumentNode, GraphQLScalarType } from "graphql";',
 		'import * as Baeta from "@baeta/core/sdk";',
 		`import extensions from "../extensions${config.importExtension}";`,
 		`import type {Ctx, Info} from "../types${config.importExtension}";`,
-		`import * as Types from "${typesDir}/types${config.importExtension}";`,
+		`import type * as Types from "${typesDir}/types${config.importExtension}";`,
 	].join('\n');
 }
 

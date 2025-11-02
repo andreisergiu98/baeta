@@ -14,13 +14,16 @@ import {
 } from 'graphql';
 import { isScalarType } from '../../utils/scalar.ts';
 import type { DefinitionsMap } from '../visitors/definitions-map.ts';
-import { buildBlock, indent } from './printer-utils.ts';
+import { buildBlock, indent, makeRelativePathForImport } from './printer-utils.ts';
 
 export interface PrinterConfig {
 	globalDefinitions: DefinitionsMap;
 	withMaybe: boolean;
 	withOptional: boolean;
 	defaultScalars: string[];
+	importExtension: '.ts' | '.js' | '';
+	typesDir: string;
+	modulesDir: string;
 }
 
 export function printUtilityTypes(): string {
@@ -64,10 +67,11 @@ export function printBaseObjectTypes(config: PrinterConfig): string {
 	});
 }
 
-export function printTypesHeaders(): string {
+export function printTypesHeaders(config: PrinterConfig): string {
+	const overridesDir = makeRelativePathForImport(config.typesDir, config.modulesDir);
 	return [
-		'import * as BaetaUtility from "./utility.ts";',
-		'import * as BaetaOverrides from "../modules/types.ts";',
+		`import type * as BaetaUtility from "./utility${config.importExtension}";`,
+		`import type * as BaetaOverrides from "${overridesDir}/types${config.importExtension}";`,
 		'',
 		'export type Scalars = BaetaOverrides.Scalars;',
 	].join('\n');

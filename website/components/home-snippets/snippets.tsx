@@ -2,12 +2,11 @@ import { Snippet, type SnippetProps } from './snippet.tsx';
 
 const featureList: Array<Omit<SnippetProps, 'idx'>> = [
 	{
-		title: 'Define Your API Contract',
+		title: 'Define the Schema',
 		description: (
 			<>
-				Start with a clear, readable schema that serves as your API contract. Baeta's schema-first
-				approach lets you focus on designing the perfect API before diving into implementation
-				details.
+				Leverage GraphQL SDL to define schemas for each module, keeping your API organized and easy
+				to maintain.
 			</>
 		),
 		path: 'modules/user/user.gql',
@@ -31,12 +30,11 @@ type Query {
 `,
 	},
 	{
-		title: 'Write Clean, Type-Safe Resolvers',
+		title: 'Implement the Resolvers',
 		description: (
 			<>
-				Focus purely on your business logic while Baeta handles all type definitions and safety. No
-				more type gymnastics or complex and nested resolver patterns - just clean, straightforward
-				code.
+				Baeta generates and enforces types automatically, so you can focus on writing simple,
+				reliable resolvers.
 			</>
 		),
 		path: 'modules/user/resolvers.ts',
@@ -63,9 +61,8 @@ Query.$fields({
 		title: 'Compose and Extend',
 		description: (
 			<>
-				Build your API like building blocks. Baeta's modular architecture lets you split your schema
-				into small, focused pieces that are easy to maintain. Extend existing types seamlessly as
-				your API grows.
+				Create modular schemas that are easy to grow and maintain. Extend types naturally as your
+				API expands.
 			</>
 		),
 		path: 'modules/user-photos/user-photos.gql',
@@ -93,8 +90,8 @@ extend type User {
 		title: 'Scope-Based Authorization',
 		description: (
 			<>
-				Secure your API with granular, scope-based authorization. Define permissions directly in
-				your schema and let Baeta handle the rest.
+				Secure your API with granular, scope-based authorization. Baeta makes permission handling
+				simple and consistent.
 			</>
 		),
 		language: 'typescript',
@@ -148,12 +145,11 @@ const updateUserMutation = Mutation.updateUser
 `,
 	},
 	{
-		title: 'Powerful Custom Directives',
+		title: 'Powerful custom directives',
 		description: (
 			<>
 				Add custom behavior exactly where you need it. Create your own directives for validation,
-				transformation, or any custom logic. Baeta makes it simple to apply complex behaviors
-				declaratively in your schema.
+				transformation, or any custom logic.
 			</>
 		),
 		language: 'typescript',

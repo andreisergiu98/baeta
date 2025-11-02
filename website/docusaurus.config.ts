@@ -9,7 +9,7 @@ const darkCodeTheme = themes.dracula;
 const config: Config = {
 	title: 'Baeta',
 	tagline:
-		'Baeta is a modern, type-safe, schema first GraphQL framework that enables developers to build powerful and scalable GraphQL APIs with ease.',
+		'A schema-first, type-safe GraphQL framework designed for building clear, modular APIs at any scale.',
 	url: 'https://baeta.io',
 	baseUrl: '/',
 	onBrokenLinks: 'throw',

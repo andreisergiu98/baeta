@@ -6,10 +6,7 @@ import {
 	getArgumentValues,
 } from 'graphql';
 
-export type FieldSettingsMap = Record<
-	string,
-	Record<string, GetFieldSettings<unknown, unknown> | undefined> | undefined
->;
+export type FieldSettingsMap = Map<string, Map<string, GetFieldSettings<unknown, unknown>>>;
 
 /**
  * Configuration for field complexity calculation.
@@ -50,13 +47,13 @@ export function getFieldComplexitySettings<Context>(
 	fieldSettingsMap: FieldSettingsMap,
 ) {
 	const args = getArgumentValues(field, selection, info.variableValues);
-	const customComplexity = fieldSettingsMap[type.name]?.[fieldName];
+	const customComplexity = fieldSettingsMap.get(type.name)?.get(fieldName);
 
 	if (customComplexity) {
 		return customComplexity({ args, ctx });
 	}
 
-	const wildCardComplexity = fieldSettingsMap[type.name]?.['*'];
+	const wildCardComplexity = fieldSettingsMap.get(type.name)?.get('*');
 
 	if (wildCardComplexity) {
 		return wildCardComplexity({ args, ctx });
@@ -69,6 +66,8 @@ export function registerFieldSettingsSetter<Context, Args>(
 	fn: GetFieldSettings<Context, Args>,
 	map: FieldSettingsMap,
 ) {
-	map[type] ??= {};
-	map[type][field] = fn as GetFieldSettings<unknown, unknown>;
+	if (!map.has(type)) {
+		map.set(type, new Map());
+	}
+	map.get(type)?.set(field, fn as GetFieldSettings<unknown, unknown>);
 }

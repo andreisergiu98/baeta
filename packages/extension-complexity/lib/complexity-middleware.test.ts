@@ -64,7 +64,7 @@ test('middleware calls next when complexity is under limits', async (t) => {
 		complexity: 100,
 	});
 
-	const fieldSettingsMap: FieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
 	await middleware(next, mockParams);
 
@@ -84,7 +84,7 @@ test('middleware throws when depth limit is exceeded', async (t) => {
 		complexity: 100,
 	});
 
-	const fieldSettingsMap: FieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
 
 	await t.throwsAsync(async () => middleware(next, mockParams), {
@@ -114,7 +114,7 @@ test('middleware throws when breadth limit is exceeded', async (t) => {
 		complexity: 100,
 	});
 
-	const fieldSettingsMap: FieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
 
 	await t.throwsAsync(async () => middleware(next, mockParams), {
@@ -145,7 +145,7 @@ test('middleware throws when complexity limit is exceeded', async (t) => {
 		complexity: 201,
 	});
 
-	const fieldSettingsMap: FieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
 
 	await t.throwsAsync(async () => middleware(next, mockParams), {

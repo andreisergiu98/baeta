@@ -91,7 +91,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 	};
 
 	mutate(compilers: ModuleCompiler[]): void {
-		const fieldSettingsMap: FieldSettingsMap = {};
+		const fieldSettingsMap: FieldSettingsMap = new Map();
 
 		for (const compiler of compilers) {
 			for (const typeCompiler of compiler.types) {

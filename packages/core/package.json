@@ -49,14 +49,14 @@
   },
   "dependencies": {
     "@baeta/errors": "workspace:^",
-    "@graphql-tools/schema": "^10.0.25",
-    "@graphql-tools/utils": "^10.9.1"
+    "@graphql-tools/schema": "^10.0.26",
+    "@graphql-tools/utils": "^10.10.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.11.0",
+    "graphql": "^16.12.0",
     "graphql-tag": "^2.12.6",
     "typescript": "^5.9.3"
   },

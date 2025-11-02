@@ -48,15 +48,15 @@
     "@baeta/util-log": "workspace:^",
     "dataloader": "^2.2.3",
     "flat": "^6.0.1",
-    "superjson": "^2.2.2"
+    "superjson": "^2.2.5"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.11.0",
-    "minimatch": "^10.0.3",
+    "graphql": "^16.12.0",
+    "minimatch": "^10.1.1",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {

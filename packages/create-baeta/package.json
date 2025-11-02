@@ -58,11 +58,11 @@
     "@baeta/builder": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.18.12",
+    "@types/node": "^22.18.13",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
     "@types/shelljs": "^0.8.17",
-    "@types/yargs": "^17.0.33",
+    "@types/yargs": "^17.0.34",
     "typescript": "^5.9.3"
   },
   "engines": {

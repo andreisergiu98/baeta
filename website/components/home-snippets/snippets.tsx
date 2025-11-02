@@ -125,16 +125,16 @@ const userQuery = Query.user
 export const userCache = User.$createCache();
 
 const userQuery = Query.user
-  .auth({
+  .$auth({
     // ...
   })
-  .useCache(userCache)
+  .$useCache(userCache)
   .resolve(async ({ args }) => {
     // ...
   });
 
 const updateUserMutation = Mutation.updateUser
-  .use(async (next) => {
+  .$use(async (next) => {
     const user = await next();
     await userCache.save(user);
     return user;

@@ -1,5 +1,5 @@
 {
   "*": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true",
-  "*.md": "prettier --list-different",
-  "*.mdx": "prettier --list-different"
+  "*.md": "prettier --write",
+  "*.mdx": "prettier --write"
 }

@@ -41,6 +41,7 @@ const config: Config = {
 							args.version.versionName,
 						);
 					},
+					lastVersion: '1.0',
 					versions: {
 						current: {
 							label: 'Next (2.x)',

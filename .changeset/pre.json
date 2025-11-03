@@ -32,8 +32,7 @@
     "@baeta/util-encoding": "1.0.1",
     "@baeta/util-env": "1.0.1",
     "@baeta/util-log": "1.0.1",
-    "@baeta/util-path": "1.0.1",
-    "@baeta/tests-cache-stores": "1.0.3"
+    "@baeta/util-path": "1.0.1"
   },
   "changesets": [
     "curly-carrots-know",
@@ -44,6 +43,7 @@
     "plain-baths-allow",
     "purple-badgers-scream",
     "tall-coins-sin",
+    "tall-papayas-call",
     "whole-pets-allow"
   ]
 }

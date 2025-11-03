@@ -1,5 +1,11 @@
 # @baeta/subscriptions-pubsub
 
+## 2.0.0-next.6
+
+### Patch Changes
+
+- Fix export for subscriptions-pubsub
+
 ## 2.0.0-next.2
 
 ### Patch Changes

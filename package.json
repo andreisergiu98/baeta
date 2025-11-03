@@ -34,17 +34,20 @@
     "packages/create-baeta/meta/*"
   ],
   "scripts": {
-    "build": "yarn turbo build --filter='./packages/*'",
-    "docs": "yarn workspace @baeta/website build",
-    "docs:api": "yarn workspace @baeta/website write-api",
+    "build": "turbo build --filter='./packages/*'",
+    "build:docs": "yarn workspace @baeta/website build",
+    "build:docs:api": "yarn workspace @baeta/website write-api",
+    "check:circular": "turbo test:circular --filter='./packages/*'",
+    "check:constraints": "yarn constraints",
+    "check:formatting": "prettier --check . && sort-package-json **/package.json --check",
+    "check:linting": "biome check .",
+    "check:tests": "turbo test --filter='./packages/*'",
+    "check:types": "turbo types",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:sync": "./examples/sync.sh",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
-    "lint": "yarn biome check .",
-    "prepare": "husky",
-    "test": "yarn turbo test --filter='./packages/*'",
-    "test:circular": "yarn turbo test:circular --filter='./packages/*'",
-    "types": "yarn turbo types"
+    "precommit": "lint-staged -c .lintstagedrc.json",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

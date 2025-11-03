@@ -1,4 +1,4 @@
-export type {
+export {
 	TypedPubSub,
-	TypedPubSubOptions,
+	type TypedPubSubOptions,
 } from './lib/typed-pubsub.ts';

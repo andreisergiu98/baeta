@@ -1,6 +1,6 @@
+import { unlink, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
 import { build } from 'esbuild';
-import { unlink, writeFile } from 'fs/promises';
-import { dirname, join } from 'path';
 
 export * from 'esbuild';
 

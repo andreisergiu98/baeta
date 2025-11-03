@@ -15,14 +15,14 @@
         "^test"
       ]
     },
-    "types": {
-      "dependsOn": [
-        "^types"
-      ]
-    },
     "test:circular": {
       "dependsOn": [
         "^test:circular"
+      ]
+    },
+    "types": {
+      "dependsOn": [
+        "^types"
       ]
     }
   }

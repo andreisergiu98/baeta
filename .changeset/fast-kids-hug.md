@@ -21,7 +21,6 @@
 "@baeta/directives": patch
 "@baeta/generator": patch
 "@baeta/util-path": patch
-"@baeta/tests-cache-stores": patch
 "@baeta/util-env": patch
 "@baeta/util-log": patch
 "@baeta/errors": patch

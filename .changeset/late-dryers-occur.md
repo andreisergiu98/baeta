@@ -20,7 +20,6 @@
 "@baeta/directives": major
 "@baeta/generator": major
 "@baeta/util-path": major
-"@baeta/tests-cache-stores": major
 "@baeta/util-env": major
 "@baeta/util-log": major
 "@baeta/errors": major

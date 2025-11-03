@@ -1,1 +1,1 @@
-yarn lint-staged -c .lintstagedrc.json
+yarn precommit

@@ -13,8 +13,8 @@ on:
       - main
 
 jobs:
-  types:
-    name: Type check
+  build:
+    name: Check build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,11 +22,23 @@ jobs:
       - name: Setup env
         uses: ./.github/actions/setup
 
-      - name: Run type check
-        run: yarn types
+      - name: Run build
+        run: yarn build
+
+  types:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run type checks
+        run: yarn check:types
 
   tests:
-    name: Tests
+    name: Check tests
     runs-on: ubuntu-latest
     services:
       redis:
@@ -61,11 +73,11 @@ jobs:
       - name: Setup env
         uses: ./.github/actions/setup
 
-      - name: Run tests
-        run: yarn test
+      - name: Run test checks
+        run: yarn check:tests
 
   lint:
-    name: Linting check
+    name: Check linting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -73,11 +85,35 @@ jobs:
       - name: Setup env
         uses: ./.github/actions/setup
 
-      - name: Run linting
-        run: yarn lint
+      - name: Run lint checks
+        run: yarn check:linting
+
+  formatting:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run formatting checks
+        run: yarn check:formatting
+
+  circular:
+    name: Check circular dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run circular dependency checks
+        run: yarn check:circular
 
   pkg-constraints:
-    name: Package constraints
+    name: Check package constraints
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -85,5 +121,20 @@ jobs:
       - name: Setup env
         uses: ./.github/actions/setup
 
-      - name: Check package constraints
-        run: yarn constraints
+      - name: Run package constraint checks
+        run: yarn check:constraints
+
+  examples-build:
+    name: Check examples build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run examples build
+        run: yarn examples:build
+
+      - name: Run examples types
+        run: yarn examples:types

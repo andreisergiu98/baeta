@@ -2690,7 +2690,6 @@ __metadata:
     typedoc-docusaurus-theme: "npm:^1.4.2"
     typedoc-plugin-markdown: "npm:4.9.0"
     typescript: "npm:^5.9.3"
-    webpack: "npm:^5.102.1"
   languageName: unknown
   linkType: soft
 
@@ -21133,7 +21132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.102.1, webpack@npm:^5.88.1, webpack@npm:^5.95.0":
+"webpack@npm:^5.88.1, webpack@npm:^5.95.0":
   version: 5.102.1
   resolution: "webpack@npm:5.102.1"
   dependencies:

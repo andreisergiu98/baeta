@@ -29,7 +29,7 @@ const optionalUserStoreKey = Symbol('optionalUserStore');
 export const [getOptionalUser, setOptionalUserLoader] = createContextStore<User | null>(
 	optionalUserStoreKey,
 	{
-		lazy: true, // Load the user only when it's requested
+		eager: false, // (default) Load the user only when it's requested
 	},
 );
 
@@ -51,5 +51,5 @@ const userStoreKey = Symbol('userStore');
 // getUser is a function that returns a promise that resolves to the User, or rejects with an UnauthenticatedError if the user is not authenticated and doesn't exist
 // it will elevate any resolver that uses it to require authentication
 export const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, {
-	lazy: true, // Load the user only when it's requested
+	eager: false, // (default) Load the user only when it's requested
 });

@@ -1,5 +1,5 @@
+import { glob } from 'node:fs/promises';
 import { relative, resolve } from '@baeta/util-path';
-import { glob } from 'fs/promises';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { type BaetaOptions, isValidConfig } from './config.ts';
 

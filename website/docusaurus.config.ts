@@ -43,11 +43,11 @@ const config: Config = {
 					},
 					versions: {
 						current: {
-							label: 'Next (2.X)',
+							label: 'Next (2.x)',
 						},
-						'1.0.11': {
-							label: '1.0.11',
-							path: '1.0.11',
+						'1.0': {
+							label: '1.x',
+							path: '1.0',
 						},
 					},
 				},

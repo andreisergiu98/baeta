@@ -1,6 +1,6 @@
 import type { Options } from '@docusaurus/plugin-content-docs';
 import typedocSidebarCurrent from './docs/api/typedoc-sidebar.ts';
-import typedocSidebarV1_0_11 from './versioned_docs/version-1.0.11/api/typedoc-sidebar.ts';
+import typedocSidebarV1_0 from './versioned_docs/version-1.0/api/typedoc-sidebar.ts';
 
 type SidebarItems = Awaited<ReturnType<Required<Options>['sidebarItemsGenerator']>>;
 
@@ -8,8 +8,8 @@ export function getItemsByVersion(version: string) {
 	switch (version) {
 		case 'current':
 			return typedocSidebarCurrent;
-		case '1.0.11':
-			return typedocSidebarV1_0_11;
+		case '1.0':
+			return typedocSidebarV1_0;
 		default:
 			throw new Error(`Sidebar not configured for version ${version}`);
 	}

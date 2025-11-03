@@ -1,5 +1,5 @@
 import { relative, resolve } from '@baeta/util-path';
-import { glob, readFile } from 'fs/promises';
+import { glob } from 'fs/promises';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { type BaetaOptions, isValidConfig } from './config.ts';
 
@@ -28,12 +28,10 @@ function getRelativeConfigPath(path: string) {
 	return `./${relative(process.cwd(), path)}`;
 }
 
+let cacheIndex = 0;
 async function importConfig(configPath: string): Promise<unknown> {
 	const modulePath = resolve(process.cwd(), configPath);
-	const content = await readFile(modulePath, 'utf-8');
-	const base64 = Buffer.from(content, 'utf-8').toString('base64');
-	const href = `data:application/javascript;base64,${base64}`;
-	const result = await import(href);
+	const result = await import(`${modulePath}?update=${cacheIndex++}`);
 
 	if (typeof result !== 'object' || result === null) {
 		throw new Error('Invalid config, expected `baeta.ts` with default export.');

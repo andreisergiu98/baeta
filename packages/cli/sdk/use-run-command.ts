@@ -39,7 +39,6 @@ export function useRunCommand(command?: string) {
 			write(`${style.blue.open}${style.bold.open}App${style.bold.close}${style.blue.close}\n`);
 		};
 
-		clearScreen();
 		writeHeader();
 
 		const proc = startProcessWithPty(command, (data, clear) => {

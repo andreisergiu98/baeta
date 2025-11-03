@@ -11,7 +11,7 @@ export const userResolver = User.$fields({
 });
 
 const userQuery = Query.user
-	.use(async (next, { args }) => {
+	.$use(async (next, { args }) => {
 		const result = await next();
 		console.log('Got user:', result, 'for args:', args);
 		return result;
@@ -37,7 +37,7 @@ const usersQuery = Query.users.resolve(() => {
 });
 
 const updateUserMutation = Mutation.updateUser
-	.use(async (next, { args }) => {
+	.$use(async (next, { args }) => {
 		const result = await next();
 		console.log('Updated user:', result, 'for args:', args);
 		return result;
@@ -57,11 +57,11 @@ const updateUserMutation = Mutation.updateUser
 	});
 
 const userUpdatedSubscription = Subscription.userUpdated
-	.use((next) => {
+	.$use((next) => {
 		console.log('Before use');
 		return next();
 	})
-	.use(async (next) => {
+	.$use(async (next) => {
 		console.log('Before subscribed to user updated');
 		const sub = await next();
 		console.log('After subscribed to user updated');

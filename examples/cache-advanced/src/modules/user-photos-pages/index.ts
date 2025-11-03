@@ -17,7 +17,7 @@ const userPhotosConnectionRef = new CacheRef<UserPhoto[], UserType, UserPhotosCo
 );
 
 const userPhotosConnectionResolver = User.photosConnection
-	.use(async (next, { source, args }) => {
+	.$use(async (next, { source, args }) => {
 		const cached = await userPhotoCache.getQueryResult(userPhotosConnectionRef, {
 			args,
 			parentRef: source.id,

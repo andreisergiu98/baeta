@@ -7,7 +7,7 @@ const { User, UserPhoto } = UserPhotosModule;
 const userPhotosResolver = User.photos
 	.$useCache(userPhotoCache)
 	// OR
-	.use(userPhotoCache.createMiddleware(User.photos.$cacheRef))
+	.$use(userPhotoCache.createMiddleware(User.photos.$cacheRef))
 	.resolve(({ source }) => {
 		return db.user
 			.findUnique({

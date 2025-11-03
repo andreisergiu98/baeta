@@ -11,7 +11,7 @@ export const userResolver = User.$fields({
 });
 
 const userQuery = Query.user
-	.use(async (next, { args }) => {
+	.$use(async (next, { args }) => {
 		const result = await next();
 		console.log('Got user:', result, 'for args:', args);
 		return result;

@@ -14,7 +14,7 @@ const createUserMutation = Mutation.createUser.resolve(async ({ args, ctx }) => 
 });
 
 const updateUserMutation = Mutation.updateUser
-	.use(async (next, { ctx }) => {
+	.$use(async (next, { ctx }) => {
 		const user = await next();
 		if (user) {
 			ctx.pubsub.publish('user-updated', user);

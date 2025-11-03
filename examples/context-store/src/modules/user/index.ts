@@ -26,7 +26,7 @@ const meResolver = Query.me.resolve(async ({ ctx }) => {
 });
 
 const userResolver = Query.user
-	.use(async (next, { args, ctx }) => {
+	.$use(async (next, { args, ctx }) => {
 		const optionalUser = await getOptionalUser(ctx);
 		const result = await next();
 		console.log('Got user:', result, 'for args:', args, 'for:', optionalUser);

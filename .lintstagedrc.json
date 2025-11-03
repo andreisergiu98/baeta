@@ -1,5 +1,8 @@
 {
   "*": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true",
   "*.md": "prettier --write",
-  "*.mdx": "prettier --write"
+  "*.mdx": "prettier --write",
+  "*.yml": "prettier --write",
+  "*.yaml": "prettier --write",
+  "package.json": "sort-package-json"
 }

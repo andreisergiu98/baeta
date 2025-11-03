@@ -40,8 +40,18 @@
     "build": "builder build",
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
-    "types": "tsc --noEmit",
-    "test": "ava"
+    "test": "ava",
+    "test:circular": "madge --circular --extensions ts,tsx,mts,cts .",
+    "types": "tsc --noEmit"
+  },
+  "ava": {
+    "environmentVariables": {
+      "REDIS_HOST": "localhost",
+      "REDIS_PORT": "65535"
+    },
+    "extensions": {
+      "ts": "module"
+    }
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
@@ -70,13 +80,11 @@
       }
     }
   },
-  "ava": {
-    "extensions": {
-      "ts": "module"
-    },
-    "environmentVariables": {
-      "REDIS_HOST": "localhost",
-      "REDIS_PORT": "65535"
+  "madge": {
+    "detectiveOptions": {
+      "ts": {
+        "skipTypeImports": true
+      }
     }
   },
   "typedocOptions": {

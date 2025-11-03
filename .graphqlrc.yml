@@ -100,4 +100,3 @@ projects:
       - "examples/yoga/src/modules/**/*.gql"
     include:
       - "examples/yoga/src/**/*.gql"
-

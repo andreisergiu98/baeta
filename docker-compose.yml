@@ -3,7 +3,7 @@ services:
     image: redis:7-alpine
     ports:
       - "65535:6379"
-    command: redis-server --save "" --appendonly no  # Disable persistence for tests
+    command: redis-server --save "" --appendonly no # Disable persistence for tests
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 1s
@@ -33,4 +33,3 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
-

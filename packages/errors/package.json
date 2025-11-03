@@ -40,13 +40,20 @@
     "build": "builder build",
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
+    "test:circular": "madge --circular --extensions ts,tsx,mts,cts .",
     "types": "tsc --noEmit"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    }
   },
   "dependencies": {
     "@baeta/util-env": "workspace:^"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
+    "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "graphql": "^16.12.0",
     "typescript": "^5.9.3"
@@ -63,6 +70,13 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
+      }
+    }
+  },
+  "madge": {
+    "detectiveOptions": {
+      "ts": {
+        "skipTypeImports": true
       }
     }
   },

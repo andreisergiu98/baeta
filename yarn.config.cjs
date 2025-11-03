@@ -114,16 +114,15 @@ function enforceWorkspaceMetadata({ Yarn }) {
 				workspace.set('scripts.types', 'yarn prebuild && tsc --noEmit');
 			}
 
+			workspace.set('devDependencies.@baeta/builder', 'workspace:^');
+			workspace.set('devDependencies.@baeta/testing', 'workspace:^');
+			workspace.set('devDependencies.@baeta/tsconfig', 'workspace:^');
+
 			workspace.set('scripts.prepack', 'builder prepare');
 			workspace.set('scripts.postpack', 'builder prepare --clean');
+			workspace.set('scripts.test:circular', 'madge --circular --extensions ts,tsx,mts,cts .');
 
-			if (workspace.manifest.devDependencies?.['@baeta/testing']) {
-				workspace.set('scripts.test', 'ava');
-				workspace.set('ava.extensions.ts', 'module');
-			} else {
-				workspace.unset('scripts.test');
-				workspace.unset('ava');
-			}
+			workspace.set('ava.extensions.ts', 'module');
 
 			enforceConsistentEntries(workspace);
 
@@ -135,6 +134,8 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			]);
 			workspace.set('typedocOptions.readme', 'none');
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
+
+			workspace.set('madge.detectiveOptions.ts.skipTypeImports', true);
 		}
 	}
 }

@@ -40,10 +40,17 @@
     "build": "builder build",
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
+    "test:circular": "madge --circular --extensions ts,tsx,mts,cts .",
     "types": "tsc --noEmit"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    }
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
+    "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "^22.18.13",
     "typescript": "^5.9.3"
@@ -57,6 +64,13 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
+      }
+    }
+  },
+  "madge": {
+    "detectiveOptions": {
+      "ts": {
+        "skipTypeImports": true
       }
     }
   },

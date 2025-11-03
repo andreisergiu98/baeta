@@ -30,9 +30,6 @@
     "prisma": "pnpify prisma",
     "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
-  "prisma": {
-    "seed": "yarn node --experimental-transform-types --no-warnings ./src/lib/db/seed.ts"
-  },
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
@@ -55,5 +52,8 @@
     "@types/ws": "^8.18.1",
     "@yarnpkg/pnpify": "^4.1.6",
     "typescript": "^5.9.3"
+  },
+  "prisma": {
+    "seed": "yarn node --experimental-transform-types --no-warnings ./src/lib/db/seed.ts"
   }
 }

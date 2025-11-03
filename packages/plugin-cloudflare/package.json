@@ -40,7 +40,13 @@
     "build": "builder build",
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
+    "test:circular": "madge --circular --extensions ts,tsx,mts,cts .",
     "types": "tsc --noEmit"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    }
   },
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^"
@@ -49,6 +55,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/extension-cache-cloudflare": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
+    "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20251014.0",
     "@types/node": "^22.18.13",
@@ -77,6 +84,13 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
+      }
+    }
+  },
+  "madge": {
+    "detectiveOptions": {
+      "ts": {
+        "skipTypeImports": true
       }
     }
   },

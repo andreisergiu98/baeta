@@ -19,6 +19,11 @@
       "dependsOn": [
         "^types"
       ]
+    },
+    "test:circular": {
+      "dependsOn": [
+        "^test:circular"
+      ]
     }
   }
 }

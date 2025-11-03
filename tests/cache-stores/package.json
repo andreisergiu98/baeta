@@ -26,13 +26,13 @@
     "url": "https://github.com/andreisergiu98"
   },
   "type": "module",
-  "types": "./index.ts",
   "exports": {
     ".": {
       "types": "./index.ts",
       "default": "./index.ts"
     }
   },
+  "types": "./index.ts",
   "files": [
     "dist",
     "package.json"
@@ -40,8 +40,10 @@
   "scripts": {
     "types": "tsc --noEmit"
   },
-  "peerDependencies": {
-    "@baeta/extension-cache": "workspace:^"
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    }
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
@@ -50,13 +52,11 @@
     "@baeta/tsconfig": "workspace:^",
     "typescript": "^5.9.3"
   },
+  "peerDependencies": {
+    "@baeta/extension-cache": "workspace:^"
+  },
   "engines": {
     "node": ">=22.12.0"
-  },
-  "ava": {
-    "extensions": {
-      "ts": "module"
-    }
   },
   "typedocOptions": {
     "entryPoints": [

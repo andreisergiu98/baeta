@@ -1,9 +1,10 @@
 import { Watcher } from '@baeta/generator';
 import path from '@baeta/util-path';
+import { Box, Text } from 'ink';
 import { type PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type LoadedBaetaConfig, loadConfig } from '../lib/config-loader.ts';
 import { createContextProvider } from '../utils/context.ts';
-import { ConfigStatus } from './config-status.tsx';
+import { Spinner } from './spinner.tsx';
 
 export interface ConfigProps {
 	initialConfig: LoadedBaetaConfig;
@@ -70,5 +71,24 @@ export function ConfigProvider(props: PropsWithChildren<ConfigProps>) {
 			<ConfigStatus />
 			{children}
 		</ConfigProviderBase>
+	);
+}
+
+export function ConfigStatus() {
+	const { showConfigChanged } = useConfig();
+
+	if (!showConfigChanged) {
+		return null;
+	}
+
+	return (
+		<Box flexDirection="column">
+			<Text bold={true} color="yellow">
+				<Spinner /> Config
+			</Text>
+			<Box marginLeft={2}>
+				<Text>Config changed! Restarting...</Text>
+			</Box>
+		</Box>
 	);
 }

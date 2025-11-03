@@ -24,17 +24,17 @@
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
   },
-  "bin": {
-    "ava": "./bin/ava.ts",
-    "c8": "./bin/c8.ts",
-    "madge": "./bin/madge.ts"
-  },
   "type": "module",
   "exports": {
     ".": {
       "types": "./index.ts",
       "import": "./index.ts"
     }
+  },
+  "bin": {
+    "ava": "./bin/ava.ts",
+    "c8": "./bin/c8.ts",
+    "madge": "./bin/madge.ts"
   },
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",

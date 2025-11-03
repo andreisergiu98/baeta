@@ -41,7 +41,13 @@
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
     "test": "ava",
+    "test:circular": "madge --circular --extensions ts,tsx,mts,cts .",
     "types": "tsc --noEmit"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    }
   },
   "dependencies": {
     "@baeta/errors": "workspace:^",
@@ -72,9 +78,11 @@
       }
     }
   },
-  "ava": {
-    "extensions": {
-      "ts": "module"
+  "madge": {
+    "detectiveOptions": {
+      "ts": {
+        "skipTypeImports": true
+      }
     }
   },
   "typedocOptions": {

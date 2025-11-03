@@ -34,13 +34,13 @@ export async function importTSX(source: string, parentURL: string): Promise<unkn
 	}
 
 	const dir = dirname(pathname);
-	const tempFile = join(dir, `temp-file-${Date.now()}.js`);
+	const tempFile = join(dir, `temp-file-${process.pid}-${Date.now()}.js`);
 
 	await writeFile(tempFile, code, 'utf-8');
 
 	try {
 		return await import(tempFile);
 	} finally {
-		await unlink(tempFile);
+		await unlink(tempFile).catch(() => {});
 	}
 }

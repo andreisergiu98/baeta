@@ -1,5 +1,11 @@
 # @baeta/cli
 
+## 2.0.0-next.5
+
+### Patch Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`5a73e27`](https://github.com/andreisergiu98/baeta/commit/5a73e2770ff0b621eecd17f83dcfd516826315b8) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Use native ts import instead of jiti for config loading
+
 ## 2.0.0-next.3
 
 ### Patch Changes

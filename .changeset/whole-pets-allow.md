@@ -2,4 +2,4 @@
 "@baeta/core": patch
 ---
 
-replace .use with .$use for subscriptions middlewars
+replace .use with .$use for subscriptions middlewares

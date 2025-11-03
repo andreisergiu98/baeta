@@ -1,5 +1,11 @@
 # @baeta/core
 
+## 2.0.0-next.5
+
+### Patch Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`b6cba78`](https://github.com/andreisergiu98/baeta/commit/b6cba7872cafc996a290d696804cdaa7c5af363e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - replace .use with .$use for subscriptions middlewares
+
 ## 2.0.0-next.4
 
 ### Patch Changes

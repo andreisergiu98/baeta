@@ -1,4 +1,4 @@
-name: Testing
+name: Checks
 
 permissions:
   contents: read

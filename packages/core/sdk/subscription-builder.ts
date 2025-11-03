@@ -83,7 +83,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 		>;
 		return {
 			...extensions,
-			use: (middleware) => {
+			$use: (middleware) => {
 				nameFunction(middleware, `Subscription.${this.#field}.use`);
 				return this.edit().addMiddleware(middleware).commitToMethods();
 			},

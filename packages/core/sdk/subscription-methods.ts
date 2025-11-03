@@ -20,7 +20,7 @@ export type SubscriptionField<Expected, Result, Source, Context, Args, Info> = S
 >;
 
 export type SubscriptionMethods<Result, Source, Context, Args, Info> = {
-	use: (
+	$use: (
 		middleware: Middleware<SubscriptionWrapper, Source, Context, Args, Info>,
 	) => SubscriptionMethods<Result, Source, Context, Args, Info>;
 	subscribe: <T = Result>(

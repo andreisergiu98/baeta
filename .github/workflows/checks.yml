@@ -17,7 +17,7 @@ jobs:
     name: Check build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -29,7 +29,7 @@ jobs:
     name: Check types
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -41,7 +41,7 @@ jobs:
     name: Check linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -53,7 +53,7 @@ jobs:
     name: Check formatting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -65,7 +65,7 @@ jobs:
     name: Check circular dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -77,7 +77,7 @@ jobs:
     name: Check package constraints
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -89,7 +89,7 @@ jobs:
     name: Check examples build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -135,7 +135,7 @@ jobs:
           ETCD_ADVERTISE_CLIENT_URLS: http://etcd:2379
           ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:2379
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup

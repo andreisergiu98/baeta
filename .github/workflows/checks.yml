@@ -37,45 +37,6 @@ jobs:
       - name: Run type checks
         run: yarn check:types
 
-  tests:
-    name: Check tests
-    runs-on: ubuntu-latest
-    services:
-      redis:
-        image: redis
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 65535:6379
-      redis-http:
-        image: hiett/serverless-redis-http:latest
-        ports:
-          - 60080:80
-        env:
-          SRH_MODE: env
-          SRH_TOKEN: example_token
-          SRH_CONNECTION_STRING: "redis://redis:6379/0"
-      etcd:
-        image: gcr.io/etcd-development/etcd:v3.6.5
-        ports:
-          - 22379:2379
-          - 22380:2380
-        env:
-          ALLOW_NONE_AUTHENTICATION: yes
-          ETCD_ADVERTISE_CLIENT_URLS: http://etcd:2379
-          ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:2379
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup env
-        uses: ./.github/actions/setup
-
-      - name: Run test checks
-        run: yarn check:tests
-
   lint:
     name: Check linting
     runs-on: ubuntu-latest
@@ -138,3 +99,48 @@ jobs:
 
       - name: Run examples types
         run: yarn examples:types
+
+  tests:
+    name: Check tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24, 25]
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 65535:6379
+      redis-http:
+        image: hiett/serverless-redis-http:latest
+        ports:
+          - 60080:80
+        env:
+          SRH_MODE: env
+          SRH_TOKEN: example_token
+          SRH_CONNECTION_STRING: "redis://redis:6379/0"
+      etcd:
+        image: gcr.io/etcd-development/etcd:v3.6.5
+        ports:
+          - 22379:2379
+          - 22380:2380
+        env:
+          ALLOW_NONE_AUTHENTICATION: yes
+          ETCD_ADVERTISE_CLIENT_URLS: http://etcd:2379
+          ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:2379
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Run test checks
+        run: yarn check:tests

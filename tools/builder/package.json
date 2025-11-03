@@ -26,14 +26,18 @@
   },
   "type": "module",
   "exports": {
+    "./bundler": {
+      "import": "./lib/bundler.ts"
+    },
     "./tsdown": {
-      "import": "./tsdown.ts"
+      "import": "./lib/tsdown.ts"
     }
   },
   "bin": "./bin/cli.ts",
   "dependencies": {
     "@baeta/tools-utils": "workspace:^",
     "commander": "^14.0.2",
+    "esbuild": "^0.25.12",
     "execa": "^9.6.0",
     "prompts": "^2.4.2",
     "tsdown": "^0.15.12",

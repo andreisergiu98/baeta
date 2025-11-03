@@ -1,6 +1,5 @@
-import { relative } from '@baeta/util-path';
-import fg from 'fast-glob';
-import { createJiti } from 'jiti';
+import { relative, resolve } from '@baeta/util-path';
+import { glob, readFile } from 'fs/promises';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { type BaetaOptions, isValidConfig } from './config.ts';
 
@@ -11,20 +10,40 @@ export interface LoadedBaetaConfig {
 }
 
 const configNames = ['baeta', '.baeta'];
-const configExtensions = ['js', 'mjs', 'cjs', 'ts'];
+const configExtensions = ['ts', 'mts', 'js', 'mjs'];
 
 export async function discoverBaetaConfig() {
-	const entries = configNames.flatMap((name) => {
-		return configExtensions.map((ext) => `${name}.${ext}`);
-	});
-
-	return fg(entries, { cwd: process.cwd() })
-		.then((res) => res[0])
-		.catch(() => null);
+	for await (const file of await glob(
+		`{${configNames.join(',')}}.{${configExtensions.join(',')}}`,
+		{
+			cwd: process.cwd(),
+		},
+	)) {
+		return file;
+	}
+	return null;
 }
 
 function getRelativeConfigPath(path: string) {
 	return `./${relative(process.cwd(), path)}`;
+}
+
+async function importConfig(configPath: string): Promise<unknown> {
+	const modulePath = resolve(process.cwd(), configPath);
+	const content = await readFile(modulePath, 'utf-8');
+	const base64 = Buffer.from(content, 'utf-8').toString('base64');
+	const href = `data:application/javascript;base64,${base64}`;
+	const result = await import(href);
+
+	if (typeof result !== 'object' || result === null) {
+		throw new Error('Invalid config, expected `baeta.ts` with default export.');
+	}
+
+	if ('default' in result) {
+		return result.default;
+	}
+
+	return result;
 }
 
 export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | undefined> {
@@ -36,22 +55,10 @@ export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | und
 
 	const relativeLocation = getRelativeConfigPath(location);
 
-	const jiti = createJiti(import.meta.url, {
-		tryNative: false,
-		interopDefault: true,
-		moduleCache: false,
-		fsCache: false,
+	const result = await importConfig(relativeLocation).catch((err) => {
+		console.error(err);
+		process.exit(1);
 	});
-
-	const result = await jiti
-		.import(relativeLocation, {
-			parentURL: process.cwd(),
-			default: true,
-		})
-		.catch((err) => {
-			console.error(err);
-			process.exit(1);
-		});
 
 	if (!isValidConfig(result)) {
 		console.error(makeErrorMessage('Invalid config, expected `baeta.ts` with default export.'));

@@ -30,6 +30,10 @@
       "types": "./index.ts",
       "default": "./index.ts"
     },
+    "./cli": {
+      "types": "./cli/index.ts",
+      "default": "./cli/index.ts"
+    },
     "./sdk": {
       "types": "./sdk/index.ts",
       "default": "./sdk/index.ts"
@@ -37,7 +41,7 @@
   },
   "types": "dist/index.d.ts",
   "bin": {
-    "baeta": "./bin/cli-dev.js"
+    "baeta": "./bin/cli-dev.ts"
   },
   "files": [
     "dist",
@@ -54,9 +58,7 @@
     "@baeta/plugin-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
     "ansi-styles": "^6.2.3",
-    "fast-glob": "^3.3.3",
     "ink": "^6.4.0",
-    "jiti": "^2.6.1",
     "node-pty": "^1.0.0",
     "react": "^19.2.0",
     "yargs": "^18.0.0"
@@ -87,6 +89,10 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       },
+      "./cli": {
+        "types": "./dist/cli/index.d.ts",
+        "default": "./dist/cli/index.js"
+      },
       "./sdk": {
         "types": "./dist/sdk/index.d.ts",
         "default": "./dist/sdk/index.js"
@@ -96,6 +102,7 @@
   "typedocOptions": {
     "entryPoints": [
       "./index.ts",
+      "./cli/index.ts",
       "./sdk/index.ts"
     ],
     "readme": "none",

@@ -1,10 +1,5 @@
 import test from '@baeta/testing';
-import {
-	mockMiddleware,
-	mockTypeCompiler,
-	runTypeResolvers,
-	testUseStoreLike,
-} from './__test__/helpers.ts';
+import { mockTypeCompiler, runTypeResolvers, testUseStoreLike } from './__test__/helpers.ts';
 
 test('TypeCompiler should be created correctly', (t) => {
 	const typeCompiler = mockTypeCompiler();

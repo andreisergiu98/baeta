@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
+import { glob } from 'node:fs/promises';
 import { execaCommand } from 'execa';
-import { glob } from 'fs/promises';
 import madge from 'madge';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';

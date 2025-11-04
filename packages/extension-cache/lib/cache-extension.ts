@@ -20,9 +20,9 @@ declare global {
 
 export class CacheExtension extends Extension<never> {
 	readonly stateKey = Symbol('cache-extension-state');
-	private serializer: Serializer;
-	private store: Store;
-	private defaultOptions?: DefaultStoreOptions;
+	private readonly serializer: Serializer;
+	private readonly store: Store;
+	private readonly defaultOptions?: DefaultStoreOptions;
 	constructor(
 		store: Store,
 		defaultOptions?: DefaultStoreOptions,

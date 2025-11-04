@@ -19,20 +19,24 @@ export abstract class Extension<Settings = unknown> {
 	getFieldExtensions<Result, Source, Context, Args, Info>(
 		_builder: FieldBuilder<Result, Source, Context, Args, Info>,
 	) {
+		// To be implemented by the extension if required.
 		return {};
 	}
 
 	getTypeExtensions<Source, Context, Info>(_builder: TypeBuilder<Source, Context, Info>) {
+		// To be implemented by the extension if required.
 		return {};
 	}
 
 	getModuleExtensions<Context, Info>(_builder: ModuleBuilder<Context, Info>) {
+		// To be implemented by the extension if required.
 		return {};
 	}
 
 	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
 		_builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
 	) {
+		// To be implemented by the extension if required.
 		return {};
 	}
 
@@ -44,7 +48,9 @@ export abstract class Extension<Settings = unknown> {
 		builder.useStore<Settings>(this.stateKey).set(settings);
 	}
 
-	mutate(_compilers: ModuleCompiler[]) {}
+	mutate(_compilers: ModuleCompiler[]) {
+		// To be implemented by the extension if required.
+	}
 }
 
 export function mergeExtensions<T, K extends Record<string, unknown>>(

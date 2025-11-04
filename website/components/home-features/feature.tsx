@@ -7,11 +7,11 @@ export interface FeatureProps {
 	description: JSX.Element;
 }
 
-export function Feature({ title, Svg, description }: FeatureProps) {
+export function Feature({ title, Svg, description }: Readonly<FeatureProps>) {
 	return (
 		<div className="col col--3">
 			<div className="text--center margin-bottom--md">
-				<Svg className={styles.featureSvg} role="img" />
+				<Svg className={styles.featureSvg} />
 			</div>
 			<div className="text--center padding-horiz--md">
 				<h3>{title}</h3>

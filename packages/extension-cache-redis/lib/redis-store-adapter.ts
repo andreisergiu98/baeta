@@ -9,7 +9,7 @@ import type Redis from 'ioredis';
 import { collectPipelineErrors } from '../utils/pipeline.ts';
 
 export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
-	private client: Redis;
+	private readonly client: Redis;
 
 	constructor(client: Redis, serializer: Serializer, options: StoreOptions<Item>, type: string) {
 		super(serializer, options, type);

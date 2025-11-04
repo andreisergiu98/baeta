@@ -85,6 +85,18 @@ jobs:
       - name: Run package constraint checks
         run: yarn check:constraints
 
+  pkg-deduplication:
+    name: Check package deduplication
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run yarn dedupe checks
+        run: yarn dedupe --check
+
   examples-build:
     name: Check examples build
     runs-on: ubuntu-latest

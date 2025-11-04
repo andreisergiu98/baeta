@@ -67,7 +67,7 @@ export function createBase64UrlTests(encodeBase64Url: TestFn, decodeBase64Url: T
 	});
 
 	test('encodeBase64Url: should handle binary data', (t) => {
-		const binaryString = String.fromCharCode(...Array(256).keys());
+		const binaryString = String.fromCodePoint(...new Array(256).keys());
 		const encoded = encodeBase64Url(binaryString);
 		const decoded = decodeBase64Url(encoded);
 		t.is(decoded, binaryString);

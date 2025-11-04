@@ -27,7 +27,6 @@ function handleGraphql(request: Request, _env: Env, ctx: ExecutionContext) {
 const router = new Hono<{ Bindings: Env }>();
 
 router.get('/graphql', (ctx) => {
-	ctx.executionCtx;
 	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
 });
 

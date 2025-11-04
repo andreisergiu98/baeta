@@ -31,14 +31,14 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 		generate: async (ctx, next) => {
 			await next();
 
-			const ignoredTags = [...(options?.ignoreTags ?? []), ...defaultIgnoredTags];
+			const ignoredTags = new Set([...(options?.ignoreTags ?? []), ...defaultIgnoredTags]);
 
 			const modulesDir = ctx.generatorOptions.modulesDir;
 			const moduleDefinitionName = ctx.generatorOptions.moduleDefinitionName;
 
 			const filePaths = ctx.fileManager.files
 				.filter((file) => {
-					return !file.filename.endsWith(moduleDefinitionName) && !ignoredTags.includes(file.tag);
+					return !file.filename.endsWith(moduleDefinitionName) && !ignoredTags.has(file.tag);
 				})
 				.map((file) => file.filename);
 

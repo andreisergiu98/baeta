@@ -1,5 +1,5 @@
 // biome-ignore lint/suspicious/noExplicitAny: Accepts any generic function
-export function nameFunction(fn: (...args: any[]) => any | undefined, name: string) {
+export function nameFunction(fn: (...args: any[]) => any, name: string) {
 	try {
 		if (!fn || (fn.name && fn.name !== 'anonymous')) {
 			return;

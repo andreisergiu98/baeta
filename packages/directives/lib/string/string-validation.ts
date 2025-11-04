@@ -49,68 +49,46 @@ const directive = createInputDirective<Args>({
 	target: 'scalar',
 	resolve(params) {
 		const value = params.getValue();
-
 		if (typeof value !== 'string') {
 			return;
 		}
 
 		const config = params.directiveConfig;
 
-		if (config.format === 'EMAIL' && !validateEmail(value)) {
-			throw new BadUserInput('Value must be be a valid email');
+		if (config.format != null) {
+			validateFormat(value, config.format);
 		}
 
-		if (config.format === 'URL' && !isUrl(value)) {
-			throw new BadUserInput('Value must be be a valid URL');
+		if (config.maxLength != null) {
+			validateMaxLength(value, config.maxLength);
 		}
 
-		if (
-			config.format === 'UUID' &&
-			!/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi.test(
-				value,
-			)
-		) {
-			throw new BadUserInput('Value must be be a valid UUID');
+		if (config.minLength != null) {
+			validateMinLength(value, config.minLength);
 		}
 
-		if (config.maxLength != null && value.length > config.maxLength) {
-			throw new BadUserInput(`Value must be at most ${config.maxLength} characters`);
+		if (config.startsWith != null) {
+			validateStartsWith(value, config.startsWith);
 		}
 
-		if (config.minLength != null && value.length < config.minLength) {
-			throw new BadUserInput(`Value must be at least ${config.minLength} characters`);
+		if (config.endsWith != null) {
+			validateEndsWith(value, config.endsWith);
 		}
 
-		if (config.startsWith != null && !value.startsWith(config.startsWith)) {
-			throw new BadUserInput(`Value must start with '${config.startsWith}'`);
+		if (config.includes != null) {
+			validateIncludes(value, config.includes);
 		}
 
-		if (config.endsWith != null && !value.endsWith(config.endsWith)) {
-			throw new BadUserInput(`Value must end with '${config.endsWith}'`);
+		if (config.regex != null) {
+			validateRegexp(value, config.regex, config.regexFlags);
 		}
 
-		if (config.includes != null && !value.includes(config.includes)) {
-			throw new BadUserInput(`Value must include '${config.includes}'`);
+		if (config.oneOf != null) {
+			validateOneOf(value, config.oneOf);
 		}
 
-		if (config.regex != null && !new RegExp(config.regex, config.regexFlags).test(value)) {
-			throw new BadUserInput(
-				`Value must match pattern '${config.regex}'${
-					config.regexFlags != null ? ` with flags '${config.regexFlags}'` : ''
-				}`,
-			);
-		}
-
-		if (config.oneOf != null && !config.oneOf.includes(value)) {
-			throw new BadUserInput(
-				`Value must be one of ${config.oneOf.map((s) => `'${s}'`).join(', ')}`,
-			);
-		}
-
-		if (config.notOneOf?.includes(value)) {
-			throw new BadUserInput(
-				`Value must not be one of ${config.notOneOf.map((s) => `'${s}'`).join(', ')}`,
-			);
+		if (config.notOneOf != null) {
+			validateNotOneOf(value, config.notOneOf);
 		}
 	},
 });
@@ -119,3 +97,74 @@ export const stringValidation = {
 	sdl,
 	directive,
 };
+
+function getLength(value: string) {
+	return [...value].length;
+}
+
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function validateFormat(value: string, format: 'EMAIL' | 'URL' | 'UUID') {
+	if (format === 'EMAIL' && !validateEmail(value)) {
+		throw new BadUserInput('Value must be be a valid email');
+	}
+
+	if (format === 'URL' && !isUrl(value)) {
+		throw new BadUserInput('Value must be be a valid URL');
+	}
+
+	if (format === 'UUID' && !UUID_REGEX.test(value)) {
+		throw new BadUserInput('Value must be be a valid UUID');
+	}
+}
+
+function validateMaxLength(value: string, maxLength: number) {
+	if (getLength(value) > maxLength) {
+		throw new BadUserInput(`Value must be at most ${maxLength} characters`);
+	}
+}
+
+function validateMinLength(value: string, minLength: number) {
+	if (getLength(value) < minLength) {
+		throw new BadUserInput(`Value must be at least ${minLength} characters`);
+	}
+}
+
+function validateStartsWith(value: string, startsWith: string) {
+	if (!value.startsWith(startsWith)) {
+		throw new BadUserInput(`Value must start with '${startsWith}'`);
+	}
+}
+
+function validateEndsWith(value: string, endsWith: string) {
+	if (!value.endsWith(endsWith)) {
+		throw new BadUserInput(`Value must end with '${endsWith}'`);
+	}
+}
+
+function validateIncludes(value: string, includes: string) {
+	if (!value.includes(includes)) {
+		throw new BadUserInput(`Value must include '${includes}'`);
+	}
+}
+
+function validateOneOf(value: string, oneOf: string[]) {
+	if (!oneOf.includes(value)) {
+		const options = oneOf.map((s) => `'${s}'`).join(', ');
+		throw new BadUserInput(`Value must be one of ${options}`);
+	}
+}
+
+function validateNotOneOf(value: string, notOneOf: string[]) {
+	if (notOneOf.includes(value)) {
+		const invalidOptions = notOneOf.map((s) => `'${s}'`).join(', ');
+		throw new BadUserInput(`Value must not be one of ${invalidOptions}`);
+	}
+}
+
+function validateRegexp(value: string, regex: string, flags?: string) {
+	if (!new RegExp(regex, flags).test(value)) {
+		const flagsMessage = flags == null ? '' : ` with flags '${flags}'`;
+		throw new BadUserInput(`Value must match pattern '${regex}'${flagsMessage}`);
+	}
+}

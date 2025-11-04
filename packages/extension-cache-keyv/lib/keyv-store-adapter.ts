@@ -8,7 +8,7 @@ import {
 import type Keyv from 'keyv';
 
 export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
-	private client: Keyv;
+	private readonly client: Keyv;
 
 	constructor(client: Keyv, serializer: Serializer, options: StoreOptions<Item>, type: string) {
 		super(serializer, options, type);

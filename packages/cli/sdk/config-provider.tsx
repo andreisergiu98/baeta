@@ -6,6 +6,7 @@ import { type LoadedBaetaConfig, loadConfig } from '../lib/config-loader.ts';
 import { createContextProvider } from '../utils/context.ts';
 import { Spinner } from './spinner.tsx';
 
+export type { LoadedBaetaConfig } from '../lib/config-loader.ts';
 export interface ConfigProps {
 	initialConfig: LoadedBaetaConfig;
 	watchConfig?: boolean;
@@ -15,9 +16,7 @@ export type ConfigEventMap = {
 	update: [LoadedBaetaConfig];
 };
 
-export type { LoadedBaetaConfig };
-
-export function useConfigStore(props: ConfigProps) {
+export function useConfigStore(props: Readonly<ConfigProps>) {
 	const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);
 	const [showConfigChanged, setShowConfigChanged] = useState(false);
 	const configChangedTimeout = useRef<NodeJS.Timeout | undefined>(undefined);

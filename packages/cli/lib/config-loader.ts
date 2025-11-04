@@ -13,15 +13,14 @@ const configNames = ['baeta', '.baeta'];
 const configExtensions = ['ts', 'mts', 'js', 'mjs'];
 
 export async function discoverBaetaConfig() {
-	for await (const file of await glob(
-		`{${configNames.join(',')}}.{${configExtensions.join(',')}}`,
-		{
-			cwd: process.cwd(),
-		},
-	)) {
-		return file;
+	const generator = glob(`{${configNames.join(',')}}.{${configExtensions.join(',')}}`, {
+		cwd: process.cwd(),
+	});
+	const files: string[] = [];
+	for await (const file of generator) {
+		files.push(file);
 	}
-	return null;
+	return files.at(0) ?? null;
 }
 
 function getRelativeConfigPath(path: string) {
@@ -60,7 +59,7 @@ export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | und
 
 	if (!isValidConfig(result)) {
 		console.error(makeErrorMessage('Invalid config, expected `baeta.ts` with default export.'));
-		return;
+		process.exit(1);
 	}
 
 	return {

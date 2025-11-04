@@ -7,13 +7,18 @@ import type { FieldSettingsMap } from './field-settings.ts';
 import { getComplexityStore } from './store.ts';
 import { loadComplexityStore } from './store-loader.ts';
 
-const createMocks = async (
-	limit: Required<ComplexityLimit> = {
-		depth: 1,
-		breadth: 1,
-		complexity: 1,
-	},
-) => {
+const defaultLimits: Required<ComplexityLimit> = {
+	depth: 1,
+	breadth: 1,
+	complexity: 1,
+};
+
+const createMocks = async (limit: ComplexityLimit) => {
+	const limits = {
+		depth: limit.depth ?? defaultLimits.depth,
+		breadth: limit.breadth ?? defaultLimits.breadth,
+		complexity: limit.complexity ?? defaultLimits.complexity,
+	};
 	const next = sinon.stub().resolves({ data: 'result' });
 
 	const options: Required<ComplexityExtensionOptions<unknown>> = {
@@ -34,7 +39,7 @@ const createMocks = async (
 		complexity: 1,
 	};
 
-	loadComplexityStore(mockContext, options.limit, limit);
+	loadComplexityStore(mockContext, options.limit, limits);
 	const mockStore = await getComplexityStore(mockContext);
 
 	return {

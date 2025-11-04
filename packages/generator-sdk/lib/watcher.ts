@@ -23,15 +23,15 @@ export class Watcher {
 	private readonly cwd: string;
 	private readonly options?: Options;
 
-	private subscription: AsyncSubscription;
+	private readonly subscription: AsyncSubscription;
 
-	private listeners: Record<EventType, WatcherListener[]> = {
+	private readonly listeners: Record<EventType, WatcherListener[]> = {
 		create: [],
 		update: [],
 		delete: [],
 	};
 
-	private watcherIgnore: WatcherIgnore;
+	private readonly watcherIgnore: WatcherIgnore;
 
 	constructor(cwd: string, options?: Options) {
 		this.cwd = cwd;

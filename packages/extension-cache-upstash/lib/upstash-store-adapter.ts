@@ -8,7 +8,7 @@ import {
 import type { UpstashClient } from './upstash-client.ts';
 
 export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
-	private client: UpstashClient;
+	private readonly client: UpstashClient;
 	constructor(
 		client: UpstashClient,
 		serializer: Serializer,

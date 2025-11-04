@@ -54,6 +54,6 @@
     "typescript": "^5.9.3"
   },
   "prisma": {
-    "seed": "yarn node --experimental-transform-types --no-warnings ./src/lib/db/seed.ts"
+    "seed": "yarn node ./src/lib/db/seed.ts"
   }
 }

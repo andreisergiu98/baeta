@@ -14,11 +14,10 @@ import { type GeneratorPluginName, GeneratorStatus } from './generator-status.ts
 
 export interface GeneratorProps {
 	watch?: boolean;
-	skipInitial?: boolean;
 	run?: string;
 }
 
-export function Generator(props: GeneratorProps) {
+export function Generator(props: Readonly<GeneratorProps>) {
 	const { config } = useConfig();
 
 	const runCommand = useRunCommand(props.run);

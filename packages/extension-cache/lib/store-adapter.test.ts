@@ -327,8 +327,8 @@ interface TestItem {
 }
 
 class MockStoreAdapter<T> extends StoreAdapter<T> {
-	private store = new Map<string, T>();
-	private queryStore = new Map<string, string[]>();
+	private readonly store = new Map<string, T>();
+	private readonly queryStore = new Map<string, string[]>();
 
 	getPartialMany = async (refs: ItemRef[]): Promise<Array<T | null> | null> => {
 		return refs.map((ref) => this.store.get(this.createKey(ref)) || null);

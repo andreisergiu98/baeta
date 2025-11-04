@@ -1,11 +1,11 @@
-const bannedKeys = ['__proto__', 'constructor', 'prototype'];
+const bannedKeys = new Set(['__proto__', 'constructor', 'prototype']);
 
 function isValidKey(key: string | number) {
-	return !bannedKeys.includes(key.toString());
+	return !bannedKeys.has(key.toString());
 }
 
 function canUseObject(obj: unknown): obj is { [k: string | number]: unknown } {
-	return obj != null;
+	return obj != null && typeof obj === 'object';
 }
 
 function getValueAt(obj: unknown, key: string | number) {

@@ -64,11 +64,11 @@ function parseCommand(command: string) {
 
 	for (const token of trimmed.split(SPACES_REGEXP)) {
 		const previous = tokens.at(-1);
-		if (previous == null || !previous.endsWith('\\')) {
+		if (previous?.endsWith('\\')) {
+			tokens[tokens.length - 1] = `${previous.slice(0, -1)} ${token}`;
+		} else {
 			tokens.push(token);
-			continue;
 		}
-		tokens[tokens.length - 1] = `${previous.slice(0, -1)} ${token}`;
 	}
 
 	return tokens;

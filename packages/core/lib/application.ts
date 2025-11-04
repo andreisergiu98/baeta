@@ -77,9 +77,9 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	const moduleCompilers = options.modules.map((module) => module.__make());
 	// extensions are the same for all modules
 	const extensions = moduleCompilers[0].extensions;
-	extensions.forEach((ext) => {
+	for (const ext of extensions) {
 		ext.mutate(moduleCompilers);
-	});
+	}
 	const builtModules = moduleCompilers.map((module) => module.build());
 	const typeDefs = builtModules.map((m) => m.typedef);
 	const resolvers = builtModules.map((m) => m.resolvers);

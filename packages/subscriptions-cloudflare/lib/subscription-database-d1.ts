@@ -15,7 +15,7 @@ interface D1SubscriptionRowData {
 }
 
 export class SubscriptionDatabaseD1 implements SubscriptionDatabase {
-	private db: D1Database;
+	private readonly db: D1Database;
 	constructor(db: D1Database) {
 		this.db = db;
 	}

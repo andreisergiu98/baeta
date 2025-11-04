@@ -35,6 +35,16 @@ export async function handler(args: Args) {
 
 	const pkgManager = await getPackageManager(dest, args);
 
+	const useNpm = pkgManager === 'npm';
+	const useBun = pkgManager === 'bun';
+	const useRunCommand = useNpm || useBun;
+	const runCommand = useRunCommand ? 'run ' : '';
+
+	const start = `${pkgManager} start`;
+	const build = `${pkgManager} ${runCommand}build`;
+	const cd = `cd ${dest}`;
+	const install = `${pkgManager} install`;
+
 	if (!args.skipInstall) {
 		shell.cd(dest);
 		logger.info`Installing dependencies with name=${pkgManager}...`;
@@ -50,30 +60,26 @@ export async function handler(args: Args) {
 			logger.error('Dependency installation failed.');
 			logger.info`The app directory has already been created, and you can retry by typing:
 
-code=${`cd ${dest}`}
-code=${`${pkgManager} install`}`;
+code=${cd}
+code=${install}`;
 
 			process.exit(0);
 		}
 	}
 
-	const useNpm = pkgManager === 'npm';
-	const useBun = pkgManager === 'bun';
-	const useRunCommand = useNpm || useBun;
-
 	logger.success`Created name=${dest}.`;
 
 	logger.info`Inside that directory, you can run several commands:
 
-  code=${`${pkgManager} start`}
+  code=${start}
     Starts the development server.
 
-  code=${`${pkgManager} ${useRunCommand ? 'run ' : ''}build`}
+  code=${build}
     Generates the Baeta application.
 
 We recommend that you begin by typing:
 
-  code=${`cd ${dest}`}
-  code=${`${pkgManager} start`}
+  code=${cd}
+  code=${start}
 `;
 }

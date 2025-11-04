@@ -48,10 +48,10 @@ export interface FileOptions {
 
 export class File {
 	persisted = false;
-	filename: string;
-	content: string;
-	tag: string;
-	private options?: FileOptions;
+	readonly filename: string;
+	readonly content: string;
+	readonly tag: string;
+	private readonly options?: FileOptions;
 
 	constructor(filename: string, content: string, tag: string, options?: FileOptions) {
 		this.filename = filename;

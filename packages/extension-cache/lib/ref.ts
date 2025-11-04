@@ -16,8 +16,8 @@ export type RefCompatibleRoot = { id: string | number | bigint } | { [key: strin
  * Cache reference for a type field or query
  */
 export class CacheRef<_Result, _Root, _Args> {
-	private type: string;
-	private field: string;
+	private readonly type: string;
+	private readonly field: string;
 
 	constructor(type: string, field: string) {
 		this.type = type;

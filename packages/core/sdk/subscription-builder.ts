@@ -124,26 +124,27 @@ function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args
 			subscribe,
 			resolver,
 		);
+
+	const chain = <T>(
+		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
+	) => {
+		const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
+			const result = currentResolver(params);
+			return mapMaybePromise(result, (res) =>
+				fn({ source: res, args: params.args, ctx: params.ctx, info: params.info }),
+			);
+		};
+		return resolver;
+	};
+
 	const helpers: SubscriptionFieldWithMake<Expected, Result, Source, Context, Args, Info> = {
-		map: <R>(fn: Resolver<R, Result, Context, Args, Info>) => {
+		map: (fn) => {
 			nameFunction(fn, `Subscription.${field}.map`);
-			const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(p);
-				return mapMaybePromise(result, (res) =>
-					fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }),
-				);
-			};
-			return make(resolver);
+			return make(chain(fn));
 		},
 		resolve: (fn) => {
 			nameFunction(fn, `Subscription.${field}.resolve`);
-			const resolver = (p: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(p);
-				return mapMaybePromise(result, (res) =>
-					fn({ source: res, args: p.args, ctx: p.ctx, info: p.info }),
-				);
-			};
-			return make(resolver);
+			return make(chain(fn));
 		},
 		key: (key) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {

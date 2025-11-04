@@ -8,7 +8,7 @@ import {
 import { CloudflareCacheClient } from './cloudflare-cache-client.ts';
 
 export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
-	private client: CloudflareCacheClient;
+	private readonly client: CloudflareCacheClient;
 
 	constructor(
 		durableObject: DurableObjectNamespace,
@@ -105,7 +105,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 
 		const items = await this.client.list(namespace);
 
-		for await (const key of items) {
+		for (const key of items) {
 			if (key.match(matcher)) {
 				keys.push(key);
 			}

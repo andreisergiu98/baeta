@@ -2,7 +2,7 @@ import test from '@baeta/testing';
 import { selectDefaultScopes } from './scope-defaults.ts';
 
 test('returns undefined if no defaultScopes provided', (t) => {
-	t.is(selectDefaultScopes(false, 'Query', undefined), undefined);
+	t.is(selectDefaultScopes(false, 'Query'), undefined);
 });
 
 test('returns undefined if not an operation type', (t) => {

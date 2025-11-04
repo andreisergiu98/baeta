@@ -11,7 +11,7 @@ export async function getRuntime(): Promise<JavaScriptRuntime> {
 		return 'node';
 	}
 	const choices = ['node', hasBun && 'bun', hasDeno && 'deno']
-		.filter((p): p is string => Boolean(p))
+		.filter((p) => p !== false)
 		.map((p) => ({ title: p, value: p }));
 
 	const runtime = await prompts(

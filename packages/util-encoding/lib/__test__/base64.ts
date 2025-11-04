@@ -55,7 +55,7 @@ export function createBase64Tests(encodeBase64: TestFn, decodeBase64: TestFn) {
 	});
 
 	test('encodeBase64: should handle binary data', (t) => {
-		const binaryString = String.fromCharCode(...Array(256).keys());
+		const binaryString = String.fromCodePoint(...new Array(256).keys());
 		const encoded = encodeBase64(binaryString);
 		const decoded = decodeBase64(encoded);
 		t.is(decoded, binaryString);

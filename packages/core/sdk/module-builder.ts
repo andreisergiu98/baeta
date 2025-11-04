@@ -58,9 +58,9 @@ export class ModuleBuilder<
 			},
 			addTransformer: (transformer: SchemaTransformer | SchemaTransformer[]) => {
 				if (Array.isArray(transformer)) {
-					transformer.forEach((t) => {
+					for (const t of transformer) {
 						draftTransformers.push(t);
-					});
+					}
 				} else {
 					draftTransformers.push(transformer);
 				}
@@ -79,7 +79,7 @@ export class ModuleBuilder<
 					this.#typeBuilders,
 					this.#defaultResolvers,
 					this.#extensions,
-					this.#transformers,
+					draftTransformers,
 					draftStore,
 					draftMiddlewares,
 				),

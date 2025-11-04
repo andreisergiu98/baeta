@@ -18,7 +18,7 @@ export async function getAppName(reqName: string | undefined, rootDir: string): 
 	if (reqName) {
 		const res = await validateAppName(reqName);
 		if (typeof res === 'string') {
-			throw new Error(res);
+			throw new TypeError(res);
 		}
 		return reqName;
 	}

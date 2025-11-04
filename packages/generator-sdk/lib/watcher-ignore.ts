@@ -11,7 +11,7 @@ export class WatcherIgnore {
 	private functions: MatchFn[] = [];
 
 	private globs: MatchFn[] = [];
-	private globsMap = new Map<string, MatchFn>();
+	private readonly globsMap = new Map<string, MatchFn>();
 
 	constructor(cwd: string) {
 		this.cwd = cwd;

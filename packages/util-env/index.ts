@@ -1,3 +1,5 @@
+const MODE_KEYS = ['BAETA_ENV', 'NODE_ENV', 'ENVIRONMENT'];
+
 type NodeGlobal = {
 	process: {
 		env: {
@@ -64,14 +66,13 @@ export function getEnv(
 }
 
 export function isDevelopmentMode(global: Record<string, unknown> = globalThis): boolean {
-	const modeKeys = ['BAETA_ENV', 'NODE_ENV', 'ENVIRONMENT'];
-	const modeValues = modeKeys.map((key) => getEnv(key, global));
+	const modeValues = new Set(MODE_KEYS.map((key) => getEnv(key, global)));
 
-	if (modeValues.includes('production')) {
+	if (modeValues.has('production')) {
 		return false;
 	}
 
-	if (modeValues.includes('development')) {
+	if (modeValues.has('development')) {
 		return true;
 	}
 

@@ -20,3 +20,12 @@ test('nameFunction does not set the name property if the function already has a 
 
 	t.is(fn.name, 'existingName');
 });
+
+test('nameFunction should fail gracefully for unsupported operations', (t) => {
+	const fn = 'myFunction';
+
+	// @ts-expect-error - fn is not a function
+	nameFunction(fn, 'myFunction');
+
+	t.is(fn, 'myFunction');
+});

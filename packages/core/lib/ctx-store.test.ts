@@ -1,5 +1,9 @@
 import test from '@baeta/testing';
-import { type ContextStoreValue, createContextStore } from './ctx-store.ts';
+import {
+	type ContextStoreValue,
+	createContextStore,
+	createContextStoreWithLoader,
+} from './ctx-store.ts';
 
 test('store should wait for get before loading to ctx when lazy', (t) => {
 	const storeKey = Symbol('storeKey');
@@ -79,4 +83,40 @@ test('get should return the same promise when called multiple times', (t) => {
 	set(ctx, loader);
 
 	t.is(get(ctx), get(ctx));
+});
+
+test('get should throw when not set', (t) => {
+	const storeKey = Symbol('storeKey');
+	const [get] = createContextStore(storeKey);
+	const ctx = {} as Record<string | symbol, unknown>;
+	t.throws(() => get(ctx));
+});
+
+test('set should be skipped when already set', async (t) => {
+	const storeKey = Symbol('storeKey');
+	const [get, set] = createContextStore(storeKey);
+
+	const ctx = {} as Record<string | symbol, unknown>;
+
+	set(ctx, async () => 1);
+	set(ctx, async () => 2);
+
+	t.is(await get(ctx), 1);
+});
+
+test('store with loader should work when initialized', async (t) => {
+	const storeKey = Symbol('storeKey');
+	const [get, init] = createContextStoreWithLoader(storeKey, async () => 1);
+
+	const ctx = {} as Record<string | symbol, unknown>;
+	init(ctx);
+
+	t.is(await get(ctx), 1);
+});
+
+test('store with loader should throw when not initialized', (t) => {
+	const storeKey = Symbol('storeKey');
+	const [get] = createContextStoreWithLoader(storeKey, async () => 1);
+	const ctx = {} as Record<string | symbol, unknown>;
+	t.throws(() => get(ctx));
 });

@@ -37,6 +37,10 @@ export class TypeCompiler<
 		return this.#fields;
 	}
 
+	addMiddleware(middleware: Middleware<Any, Source, Context, Any, Info>) {
+		this.#middlewares.push(middleware);
+	}
+
 	useStore<T>(key: symbol) {
 		const get = () => this.#store.get(key) as T | undefined;
 		const set = (value: Readonly<T>) => this.#store.set(key, value);

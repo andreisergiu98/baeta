@@ -72,6 +72,10 @@ export class ModuleBuilder<
 					set: (value: Readonly<T>) => draftStore.set(key, value),
 				};
 			},
+			setStore: (key: symbol, value: Readonly<unknown>) => {
+				draftStore.set(key, value);
+				return session;
+			},
 			commit: () =>
 				new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>(
 					this.#name,

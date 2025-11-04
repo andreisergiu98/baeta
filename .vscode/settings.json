@@ -5,6 +5,7 @@
     "**/.turbo": true,
     "**/.yarn": true,
     "**/dist": true,
+    "packages/*/coverage": true,
     "website/build": true
   },
   "files.exclude": {
@@ -13,6 +14,7 @@
     "**/.turbo": true,
     "**/node_modules": true,
     "**/dist": true,
+    "packages/*/coverage": true,
     "website/build": true,
     "website/.yarn": true
   },

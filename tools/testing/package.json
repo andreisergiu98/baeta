@@ -31,13 +31,7 @@
       "import": "./index.ts"
     }
   },
-  "bin": {
-    "ava": "./bin/ava.ts",
-    "c8": "./bin/c8.ts",
-    "madge": "./bin/madge.ts"
-  },
   "dependencies": {
-    "@baeta/tools-utils": "workspace:^",
     "@types/sinon": "^17.0.4",
     "ava": "^6.4.1",
     "c8": "^10.1.3",

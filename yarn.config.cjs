@@ -120,7 +120,12 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 			workspace.set('scripts.prepack', 'builder prepare');
 			workspace.set('scripts.postpack', 'builder prepare --clean');
-			workspace.set('scripts.test:circular', 'madge --circular --extensions ts,tsx,mts,cts .');
+			if (workspace.manifest.name.startsWith('@baeta/extension-cache')) {
+				workspace.set('scripts.test', 'builder test --skip-coverage');
+			} else {
+				workspace.set('scripts.test', 'builder test');
+			}
+			workspace.set('scripts.test:circular', 'builder test-circular');
 
 			workspace.set('ava.extensions.ts', 'module');
 
@@ -134,8 +139,6 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			]);
 			workspace.set('typedocOptions.readme', 'none');
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
-
-			workspace.set('madge.detectiveOptions.ts.skipTypeImports', true);
 		}
 	}
 }

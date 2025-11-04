@@ -43,7 +43,8 @@
     "build": "yarn prebuild && builder build",
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
-    "test:circular": "madge --circular --extensions ts,tsx,mts,cts .",
+    "test": "builder test",
+    "test:circular": "builder test-circular",
     "types": "yarn prebuild && tsc --noEmit"
   },
   "ava": {
@@ -81,13 +82,6 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
-      }
-    }
-  },
-  "madge": {
-    "detectiveOptions": {
-      "ts": {
-        "skipTypeImports": true
       }
     }
   },

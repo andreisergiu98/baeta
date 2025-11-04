@@ -40,15 +40,11 @@
     "build": "builder build",
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
-    "test": "ava",
-    "test:circular": "madge --circular --extensions ts,tsx,mts,cts .",
+    "test": "builder test --skip-coverage",
+    "test:circular": "builder test-circular",
     "types": "tsc --noEmit"
   },
   "ava": {
-    "environmentVariables": {
-      "REDIS_HOST": "localhost",
-      "REDIS_PORT": "65535"
-    },
     "extensions": {
       "ts": "module"
     }
@@ -77,13 +73,6 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
-      }
-    }
-  },
-  "madge": {
-    "detectiveOptions": {
-      "ts": {
-        "skipTypeImports": true
       }
     }
   },

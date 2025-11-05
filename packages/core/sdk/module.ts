@@ -16,14 +16,14 @@ export function createModuleBuilder<
 	defaultResolvers: IResolvers,
 	extensions: Array<Extension>,
 ) {
-	return new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>(
+	return new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>({
 		name,
 		typedef,
-		builders,
+		typeBuilders: builders,
 		defaultResolvers,
 		extensions,
-		[],
-		new Map(),
-		[],
-	).toMethods();
+		transformers: [],
+		store: new Map(),
+		middlewares: [],
+	}).toMethods();
 }

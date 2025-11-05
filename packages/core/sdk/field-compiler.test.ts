@@ -13,13 +13,13 @@ import {
 import { FieldCompiler } from './field-compiler.ts';
 
 function mockFieldCompiler() {
-	return new FieldCompiler<MockResult, MockSource, MockContext, MockArgs, MockInfo>(
-		'Test',
-		'test',
-		new Map(),
-		[],
-		() => 'test',
-	);
+	return new FieldCompiler<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
+		type: 'Test',
+		field: 'test',
+		store: new Map(),
+		middlewares: [],
+		resolver: () => 'test',
+	});
 }
 
 test('FieldCompiler should be created correctly', (t) => {

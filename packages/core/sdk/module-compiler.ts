@@ -7,6 +7,21 @@ import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompiler } from './type-compiler.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
 
+export interface ModuleCompilerOptions<
+	Context,
+	Info,
+	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
+> {
+	name: string;
+	store: Map<symbol, unknown>;
+	middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
+	typesMap: TypesResolvers;
+	typedef: Readonly<DocumentNode>;
+	defaultResolvers: Readonly<IResolvers>;
+	extensions: ReadonlyArray<Extension>;
+	transformers: Array<SchemaTransformer>;
+}
+
 export class ModuleCompiler<
 	Context = unknown,
 	Info = unknown,
@@ -24,24 +39,15 @@ export class ModuleCompiler<
 	readonly #scalarResolvers: Array<[string, GraphQLScalarType]>;
 	readonly #transformers: SchemaTransformer[];
 
-	constructor(
-		name: string,
-		store: Map<symbol, unknown>,
-		middlewares: Middleware<unknown, unknown, Context, unknown, Info>[],
-		typesMap: TypesResolvers,
-		typedef: Readonly<DocumentNode>,
-		defaultResolvers: Readonly<IResolvers>,
-		extensions: Readonly<Extension[]>,
-		transformers: SchemaTransformer[],
-	) {
-		this.#name = name;
-		this.#store = store;
-		this.#middlewares = middlewares;
-		this.#typedef = typedef;
-		this.#defaultResolvers = defaultResolvers;
-		this.#extensions = extensions;
-		this.#transformers = transformers;
-		const { types, genericResolvers } = getTypeCompilersAndResolvers(typesMap);
+	constructor(options: ModuleCompilerOptions<Context, Info, TypesResolvers>) {
+		this.#name = options.name;
+		this.#store = new Map(options.store);
+		this.#middlewares = [...options.middlewares];
+		this.#typedef = options.typedef;
+		this.#defaultResolvers = options.defaultResolvers;
+		this.#extensions = options.extensions;
+		this.#transformers = [...options.transformers];
+		const { types, genericResolvers } = getTypeCompilersAndResolvers(options.typesMap);
 		this.#types = types;
 		this.#scalarResolvers = genericResolvers;
 	}

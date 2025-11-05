@@ -4,6 +4,22 @@ import { mapMaybePromise } from '../utils/promise.ts';
 import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 import type { SubscriptionWrapper } from './subscription-methods.ts';
 
+export interface SubscriptionCompilerOptions<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	SubscriptionSource,
+	SubscriptionPayload,
+> {
+	field: string;
+	store: Map<symbol, unknown>;
+	middlewares: Array<Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>>;
+	subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>;
+	resolver: Resolver<Result, Source, Context, Args, Info>;
+}
+
 export class SubscriptionCompiler<
 	Result,
 	Source,
@@ -25,18 +41,22 @@ export class SubscriptionCompiler<
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
 
 	constructor(
-		field: string,
-		store: Map<symbol, unknown>,
-		middlewares: Array<Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>>,
-		subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>,
-		resolver: Resolver<Result, Source, Context, Args, Info>,
+		options: SubscriptionCompilerOptions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			SubscriptionSource,
+			SubscriptionPayload
+		>,
 	) {
-		this.#field = field;
-		this.#store = store;
+		this.#field = options.field;
+		this.#store = options.store;
 		this.#initialMiddlewares = [];
-		this.#middlewares = middlewares;
-		this.#subscribe = subscribe;
-		this.#resolver = resolver;
+		this.#middlewares = options.middlewares;
+		this.#subscribe = options.subscribe;
+		this.#resolver = options.resolver;
 	}
 
 	get type() {

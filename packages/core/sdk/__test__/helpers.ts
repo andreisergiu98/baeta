@@ -54,13 +54,13 @@ export function mockInfo() {
 }
 
 export function mockFieldBuilder(field = 'field', type = 'type') {
-	return new FieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>(
+	return new FieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		[],
-		new Map(),
-		[],
-	);
+		extensions: [],
+		store: new Map(),
+		middlewares: [],
+	});
 }
 
 export function mockResolver(
@@ -135,16 +135,16 @@ export function mockTypeBuilder(name = 'type') {
 		MockInfo,
 		MockedTypeBuilders['Builder'],
 		MockedTypeBuilders['Resolvers']
-	>(
-		name,
-		{
+	>({
+		type: name,
+		fieldBuilders: {
 			field1: mockFieldBuilder('field1', 'type').toMethods(),
 			field2: mockFieldBuilder('field2', 'type').toMethods(),
 		},
-		[],
-		new Map(),
-		[],
-	);
+		extensions: [],
+		store: new Map(),
+		middlewares: [],
+	});
 }
 
 type MockedModuleBuilders<Keys extends string> = {
@@ -200,7 +200,16 @@ export function mockModuleBuilder<Keys extends string>(name: string, keys: Keys[
 		MockInfo,
 		MockedModuleBuilders<Keys>['Builder'],
 		MockedModuleBuilders<Keys>['Resolvers']
-	>(name, gql(typedef), builders, {}, [], [], new Map(), []);
+	>({
+		name,
+		typedef: gql(typedef),
+		typeBuilders: builders,
+		defaultResolvers: {},
+		extensions: [],
+		transformers: [],
+		store: new Map(),
+		middlewares: [],
+	});
 }
 
 export function mockDefaultModuleBuilder() {
@@ -251,9 +260,14 @@ export async function runModuleResolvers(
 }
 
 export function mockTypeCompiler(name = 'Type') {
-	return new TypeCompiler<MockSource, MockContext, MockInfo>(name, new Map(), [], {
-		field1: mockFieldBuilder('field1', 'type').toMethods().key('name'),
-		field2: mockFieldBuilder('field2', 'type').toMethods().key('name'),
+	return new TypeCompiler<MockSource, MockContext, MockInfo>({
+		type: name,
+		store: new Map(),
+		middlewares: [],
+		fieldsMap: {
+			field1: mockFieldBuilder('field1', 'type').toMethods().key('name'),
+			field2: mockFieldBuilder('field2', 'type').toMethods().key('name'),
+		},
 	});
 }
 
@@ -263,11 +277,10 @@ export function mockModuleCompiler(
 ) {
 	const type1 = mockTypeBuilder('Type1').toMethods();
 	const type2 = mockTypeBuilder('Type2').toMethods();
-	return new ModuleCompiler<MockContext, MockInfo>(
-		'module',
-		new Map(),
-		[],
-		{
+	return new ModuleCompiler<MockContext, MockInfo>({
+		name: 'module',
+		store: new Map(),
+		typesMap: {
 			...scalars,
 			Type1: type1.$fields({
 				field1: type1.field1.key('name'),
@@ -278,7 +291,7 @@ export function mockModuleCompiler(
 				field2: type2.field2.key('name'),
 			}),
 		},
-		gql`
+		typedef: gql`
             type Type1 {
                 field1: String
                 field2: String
@@ -289,9 +302,10 @@ export function mockModuleCompiler(
             }
         `,
 		defaultResolvers,
-		[],
-		[],
-	);
+		extensions: [],
+		transformers: [],
+		middlewares: [],
+	});
 }
 
 export function testUseStoreLike(t: ExecutionContext, useStoreLike: MockUseStoreLike) {

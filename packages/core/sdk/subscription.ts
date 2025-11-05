@@ -5,10 +5,10 @@ export function createSubscriptionBuilder<Result, Source, Context, Args, Info>(
 	field: string,
 	extensions: Array<Extension>,
 ) {
-	return new SubscriptionBuilder<Result, Source, Context, Args, Info>(
+	return new SubscriptionBuilder<Result, Source, Context, Args, Info>({
 		field,
 		extensions,
-		new Map(),
-		[],
-	).toMethods();
+		store: new Map(),
+		middlewares: [],
+	}).toMethods();
 }

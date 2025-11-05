@@ -4,6 +4,19 @@ import { type Extension, mergeExtensions } from './extension.ts';
 import { TypeCompiler } from './type-compiler.ts';
 import type { FieldsBuildersMap, FieldsResolversMap, TypeMethods } from './type-methods.ts';
 
+export interface TypeBuilderOptions<
+	Source,
+	Context,
+	Info,
+	FieldsBuilders extends FieldsBuildersMap<Source, Context, Info> = any,
+> {
+	type: string;
+	fieldBuilders: Readonly<FieldsBuilders>;
+	extensions: ReadonlyArray<Extension>;
+	store: Map<symbol, Readonly<unknown>>;
+	middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
+}
+
 export class TypeBuilder<
 	Source,
 	Context,
@@ -17,18 +30,12 @@ export class TypeBuilder<
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly #extensions: ReadonlyArray<Extension>;
 
-	constructor(
-		type: string,
-		fieldBuilders: Readonly<FieldsBuilders>,
-		extensions: ReadonlyArray<Extension>,
-		store: Map<symbol, Readonly<unknown>>,
-		middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>,
-	) {
-		this.#type = type;
-		this.#fieldBuilders = fieldBuilders;
-		this.#extensions = extensions;
-		this.#store = new Map(store);
-		this.#middlewares = [...middlewares];
+	constructor(options: TypeBuilderOptions<Source, Context, Info, FieldsBuilders>) {
+		this.#type = options.type;
+		this.#fieldBuilders = options.fieldBuilders;
+		this.#extensions = options.extensions;
+		this.#store = new Map(options.store);
+		this.#middlewares = [...options.middlewares];
 	}
 
 	get type() {
@@ -57,13 +64,13 @@ export class TypeBuilder<
 				return session;
 			},
 			commit: () =>
-				new TypeBuilder(
-					this.#type,
-					this.#fieldBuilders,
-					this.#extensions,
-					draftStore,
-					draftMiddlewares,
-				),
+				new TypeBuilder({
+					type: this.#type,
+					fieldBuilders: this.#fieldBuilders,
+					extensions: this.#extensions,
+					store: draftStore,
+					middlewares: draftMiddlewares,
+				}),
 			commitToMethods: () => session.commit().toMethods(),
 		} as const;
 		return session;
@@ -83,7 +90,12 @@ export class TypeBuilder<
 			...this.#fieldBuilders,
 			$fields: (fields: FieldsResolvers) => ({
 				__make: () =>
-					new TypeCompiler(this.#type, new Map(this.#store), [...this.#middlewares], fields),
+					new TypeCompiler({
+						type: this.#type,
+						store: new Map(this.#store),
+						middlewares: [...this.#middlewares],
+						fieldsMap: fields,
+					}),
 			}),
 			$use: (middleware) => {
 				nameFunction(middleware, `${this.#type}.$use`);

@@ -12,6 +12,13 @@ import type {
 	SubscriptionWrapper,
 } from './subscription-methods.ts';
 
+export interface SubscriptionBuilderOptions<Source, Context, Args, Info> {
+	field: string;
+	extensions: ReadonlyArray<Extension>;
+	store: Map<symbol, Readonly<unknown>>;
+	middlewares: Array<Middleware<SubscriptionWrapper, Source, Context, Args, Info>>;
+}
+
 export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	readonly #field: string;
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
@@ -20,16 +27,11 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 		Middleware<SubscriptionWrapper, Source, Context, Args, Info>
 	>;
 
-	constructor(
-		field: string,
-		extensions: ReadonlyArray<Extension>,
-		store: Map<symbol, Readonly<unknown>>,
-		middlewares: Array<Middleware<SubscriptionWrapper, Source, Context, Args, Info>>,
-	) {
-		this.#field = field;
-		this.#extensions = [...extensions];
-		this.#store = new Map(store);
-		this.#middlewares = [...middlewares];
+	constructor(options: SubscriptionBuilderOptions<Source, Context, Args, Info>) {
+		this.#field = options.field;
+		this.#extensions = options.extensions;
+		this.#store = new Map(options.store);
+		this.#middlewares = [...options.middlewares];
 	}
 
 	get field() {
@@ -58,12 +60,12 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 				return session;
 			},
 			commit: () =>
-				new SubscriptionBuilder<Result, Source, Context, Args, Info>(
-					this.#field,
-					this.#extensions,
-					draftStore,
-					draftMiddlewares,
-				),
+				new SubscriptionBuilder<Result, Source, Context, Args, Info>({
+					field: this.#field,
+					extensions: this.#extensions,
+					store: draftStore,
+					middlewares: draftMiddlewares,
+				}),
 			commitToMethods: () => session.commit().toMethods(),
 		} as const;
 		return session;
@@ -104,11 +106,11 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 					Info,
 					Source,
 					SubscriptionWrapper<Payload>
-				>(
-					this.#field,
-					this.#extensions,
-					this.#store,
-					this.#middlewares as Middleware<
+				>({
+					field: this.#field,
+					extensions: this.#extensions,
+					store: this.#store,
+					middlewares: this.#middlewares as Middleware<
 						SubscriptionWrapper<Payload>,
 						Source,
 						Context,
@@ -116,11 +118,30 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 						Info
 					>[],
 					subscribe,
-					(params) => params.source,
-				);
+					resolver: (params) => params.source,
+				});
 			},
 		};
 	}
+}
+
+interface SubscriptionFieldWithMakeOptions<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	SubscriptionSource,
+	SubscriptionPayload,
+> {
+	field: string;
+	extensions: ReadonlyArray<Extension>;
+	store: ReadonlyMap<symbol, Readonly<unknown>>;
+	middlewares: ReadonlyArray<
+		Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>
+	>;
+	subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>;
+	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
 function createSubscriptionFieldWithMake<
@@ -133,14 +154,15 @@ function createSubscriptionFieldWithMake<
 	SubscriptionSource,
 	SubscriptionPayload,
 >(
-	field: string,
-	extensions: ReadonlyArray<Extension>,
-	store: ReadonlyMap<symbol, Readonly<unknown>>,
-	middlewares: ReadonlyArray<
-		Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>
+	options: SubscriptionFieldWithMakeOptions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		SubscriptionSource,
+		SubscriptionPayload
 	>,
-	subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>,
-	currentResolver: Resolver<Result, Source, Context, Args, Info>,
 ): SubscriptionHelpers<Expected, Result, Source, Context, Args, Info> {
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
 		createSubscriptionFieldWithMake<
@@ -152,19 +174,28 @@ function createSubscriptionFieldWithMake<
 			Info,
 			SubscriptionSource,
 			SubscriptionPayload
-		>(field, extensions, store, middlewares, subscribe, resolver);
+		>({
+			field: options.field,
+			extensions: options.extensions,
+			store: options.store,
+			middlewares: options.middlewares,
+			subscribe: options.subscribe,
+			resolver,
+		});
 
 	const chain = <T>(
 		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
 	) => {
 		const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-			const result = currentResolver(params);
+			const result = options.resolver(params);
 			return mapMaybePromise(result, (res) =>
 				fn({ source: res, args: params.args, ctx: params.ctx, info: params.info }),
 			);
 		};
 		return resolver;
 	};
+
+	const fnNamespace = `Subscription.${options.field}`;
 
 	const helpers: SubscriptionFieldWithMake<
 		Expected,
@@ -177,38 +208,38 @@ function createSubscriptionFieldWithMake<
 		SubscriptionPayload
 	> = {
 		map: (fn) => {
-			nameFunction(fn, `Subscription.${field}.map`);
+			nameFunction(fn, `${fnNamespace}.map`);
 			return make(chain(fn));
 		},
 		resolve: (fn) => {
-			nameFunction(fn, `Subscription.${field}.resolve`);
+			nameFunction(fn, `${fnNamespace}.resolve`);
 			return make(chain(fn));
 		},
 		key: (key) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(result, (res) => res[key]);
 			};
 			return make(resolver);
 		},
 		to: (fn) => {
-			nameFunction(fn, `Subscription.${field}.to`);
+			nameFunction(fn, `${fnNamespace}.to`);
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(result, fn);
 			};
 			return make(resolver);
 		},
 		withDefault: (value) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(result, (res) => res ?? value);
 			};
 			return make(resolver);
 		},
 		undefinedAsNull: () => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(
 					result,
 					(res) => (res ?? null) as Result extends undefined ? NonNullable<Result> | null : Result,
@@ -225,13 +256,13 @@ function createSubscriptionFieldWithMake<
 				Info,
 				SubscriptionSource,
 				SubscriptionPayload
-			>(
-				field,
-				new Map(store),
-				[...middlewares],
-				subscribe,
-				currentResolver as unknown as Resolver<Expected, Source, Context, Args, Info>,
-			),
+			>({
+				field: options.field,
+				store: new Map(options.store),
+				middlewares: [...options.middlewares],
+				subscribe: options.subscribe,
+				resolver: options.resolver as unknown as Resolver<Expected, Source, Context, Args, Info>,
+			}),
 	};
 	return helpers;
 }

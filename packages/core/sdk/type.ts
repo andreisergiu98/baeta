@@ -9,11 +9,11 @@ export function createTypeBuilder<
 	FieldBuilders extends FieldsBuildersMap<Source, Context, Info>,
 	FieldResolvers extends FieldsResolversMap<Source, Context, Info>,
 >(type: string, builders: FieldBuilders, extensions: Array<Extension>) {
-	return new TypeBuilder<Source, Context, Info, FieldBuilders, FieldResolvers>(
+	return new TypeBuilder<Source, Context, Info, FieldBuilders, FieldResolvers>({
 		type,
-		builders,
+		fieldBuilders: builders,
 		extensions,
-		new Map(),
-		[],
-	).toMethods();
+		store: new Map(),
+		middlewares: [],
+	}).toMethods();
 }

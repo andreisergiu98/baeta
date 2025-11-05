@@ -6,6 +6,14 @@ import { type Extension, mergeExtensions } from './extension.ts';
 import { FieldCompiler } from './field-compiler.ts';
 import type { FieldHelpers, FieldMethods, FieldWithMake } from './field-methods.ts';
 
+export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
+	type: string;
+	field: string;
+	extensions: ReadonlyArray<Extension>;
+	store: Map<symbol, Readonly<unknown>>;
+	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
+}
+
 export class FieldBuilder<Result, Source, Context, Args, Info> {
 	readonly #type: string;
 	readonly #field: string;
@@ -13,18 +21,12 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 	readonly #middlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #extensions: ReadonlyArray<Extension>;
 
-	constructor(
-		type: string,
-		field: string,
-		extensions: ReadonlyArray<Extension>,
-		store: Map<symbol, Readonly<unknown>>,
-		middlewares: Array<Middleware<Result, Source, Context, Args, Info>>,
-	) {
-		this.#type = type;
-		this.#field = field;
-		this.#extensions = [...extensions];
-		this.#store = new Map(store);
-		this.#middlewares = [...middlewares];
+	constructor(options: FieldBuilderOptions<Result, Source, Context, Args, Info>) {
+		this.#type = options.type;
+		this.#field = options.field;
+		this.#extensions = [...options.extensions];
+		this.#store = new Map(options.store);
+		this.#middlewares = [...options.middlewares];
 	}
 
 	get type() {
@@ -57,13 +59,13 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 				return session;
 			},
 			commit: () => {
-				return new FieldBuilder(
-					this.#type,
-					this.#field,
-					this.#extensions,
-					draftStore,
-					draftMiddlewares,
-				);
+				return new FieldBuilder({
+					type: this.#type,
+					field: this.#field,
+					extensions: this.#extensions,
+					store: draftStore,
+					middlewares: draftMiddlewares,
+				});
 			},
 			commitToMethods: () => {
 				return session.commit().toMethods();
@@ -73,14 +75,14 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 	}
 
 	#withMake<T>(resolver: Resolver<T, Source, Context, Args, Info>) {
-		return createFieldWithMake(
-			this.#type,
-			this.#field,
-			this.#extensions,
-			this.#store,
-			this.#middlewares,
+		return createFieldWithMake({
+			type: this.#type,
+			field: this.#field,
+			extensions: this.#extensions,
+			store: this.#store,
+			middlewares: this.#middlewares,
 			resolver,
-		);
+		});
 	}
 
 	toMethods(): FieldMethods<Result, Source, Context, Args, Info> {
@@ -118,29 +120,33 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 	}
 }
 
+interface FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info> {
+	type: string;
+	field: string;
+	extensions: ReadonlyArray<Extension>;
+	store: ReadonlyMap<symbol, Readonly<unknown>>;
+	middlewares: ReadonlyArray<Middleware<Expected, Source, Context, Args, Info>>;
+	resolver: Resolver<Result, Source, Context, Args, Info>;
+}
+
 function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
-	type: string,
-	field: string,
-	extensions: ReadonlyArray<Extension>,
-	store: ReadonlyMap<symbol, Readonly<unknown>>,
-	middlewares: ReadonlyArray<Middleware<Expected, Source, Context, Args, Info>>,
-	currentResolver: Resolver<Result, Source, Context, Args, Info>,
+	options: FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info>,
 ): FieldHelpers<Expected, Result, Source, Context, Args, Info> {
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
-		createFieldWithMake<Expected, R, Source, Context, Args, Info>(
-			type,
-			field,
-			extensions,
-			store,
-			middlewares,
+		createFieldWithMake<Expected, R, Source, Context, Args, Info>({
+			type: options.type,
+			field: options.field,
+			extensions: options.extensions,
+			store: options.store,
+			middlewares: options.middlewares,
 			resolver,
-		);
+		});
 
 	const chain = <T>(
 		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
 	) => {
 		const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-			const result = currentResolver(params);
+			const result = options.resolver(params);
 			return mapMaybePromise(result, (res) =>
 				fn({ source: res, args: params.args, ctx: params.ctx, info: params.info }),
 			);
@@ -148,40 +154,42 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 		return resolver;
 	};
 
+	const fnNamespace = `${options.type}.${options.field}`;
+
 	const helpers: FieldWithMake<Expected, Result, Source, Context, Args, Info> = {
 		map: (fn) => {
-			nameFunction(fn, `${type}.${field}.map`);
+			nameFunction(fn, `${fnNamespace}.map`);
 			return make(chain(fn));
 		},
 		resolve: (fn) => {
-			nameFunction(fn, `${type}.${field}.resolve`);
+			nameFunction(fn, `${fnNamespace}.resolve`);
 			return make(chain(fn));
 		},
 		key: (key) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(result, (res) => res[key]);
 			};
 			return make(resolver);
 		},
 		to: (fn) => {
-			nameFunction(fn, `${type}.${field}.to`);
+			nameFunction(fn, `${fnNamespace}.to`);
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(result, fn);
 			};
 			return make(resolver);
 		},
 		withDefault: (value) => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(result, (res) => res ?? value);
 			};
 			return make(resolver);
 		},
 		undefinedAsNull: () => {
 			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = currentResolver(params);
+				const result = options.resolver(params);
 				return mapMaybePromise(
 					result,
 					(res) => (res ?? null) as Result extends undefined ? NonNullable<Result> | null : Result,
@@ -190,13 +198,13 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 			return make(resolver);
 		},
 		__make: () =>
-			new FieldCompiler<Expected, Source, Context, Args, Info>(
-				type,
-				field,
-				new Map(store),
-				[...middlewares],
-				currentResolver as unknown as Resolver<Expected, Source, Context, Args, Info>,
-			),
+			new FieldCompiler<Expected, Source, Context, Args, Info>({
+				type: options.type,
+				field: options.field,
+				store: new Map(options.store),
+				middlewares: [...options.middlewares],
+				resolver: options.resolver as unknown as Resolver<Expected, Source, Context, Args, Info>,
+			}),
 	};
 	return helpers;
 }

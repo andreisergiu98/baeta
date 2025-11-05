@@ -6,6 +6,22 @@ import { concatMiddlewares } from './middleware.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
 
+export interface TypeCompilerOptions<
+	Source,
+	Context,
+	Info,
+	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = FieldsResolversMap<
+		Source,
+		Context,
+		Info
+	>,
+> {
+	type: string;
+	store: Map<symbol, unknown>;
+	middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
+	fieldsMap: FieldsResolvers;
+}
+
 export class TypeCompiler<
 	Source,
 	Context,
@@ -24,16 +40,11 @@ export class TypeCompiler<
 		| SubscriptionCompiler<unknown, unknown, Context, unknown, Info, Source, unknown>
 	>;
 
-	constructor(
-		type: string,
-		store: Map<symbol, unknown>,
-		middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>,
-		fieldsMap: FieldsResolvers,
-	) {
-		this.#type = type;
-		this.#store = store;
-		this.#middlewares = middlewares;
-		this.#fields = Object.values(fieldsMap).map((field) => makeField(field));
+	constructor(options: TypeCompilerOptions<Source, Context, Info, FieldsResolvers>) {
+		this.#type = options.type;
+		this.#store = options.store;
+		this.#middlewares = options.middlewares;
+		this.#fields = Object.values(options.fieldsMap).map((field) => makeField(field));
 	}
 
 	get type() {

@@ -7,13 +7,13 @@ export function createFieldBuilder<Result, Source, Context, Args, Info>(
 	field: string,
 	extensions: Array<Extension>,
 ) {
-	return new FieldBuilder<Result, Source, Context, Args, Info>(
+	return new FieldBuilder<Result, Source, Context, Args, Info>({
 		type,
 		field,
 		extensions,
-		new Map(),
-		[],
-	).toMethods();
+		store: new Map(),
+		middlewares: [],
+	}).toMethods();
 }
 
 export function makeField<Result, Expected, Source, Context, Args, Info>(

@@ -3,6 +3,14 @@ import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver } from '../lib/resolver.ts';
 import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 
+export interface FieldCompilerOptions<Result, Source, Context, Args, Info> {
+	type: string;
+	field: string;
+	store: Map<symbol, unknown>;
+	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
+	resolver: Resolver<Result, Source, Context, Args, Info>;
+}
+
 export class FieldCompiler<Result, Source, Context, Args, Info> {
 	readonly #type: string;
 	readonly #field: string;
@@ -11,19 +19,13 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 	readonly #initialMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
 
-	constructor(
-		type: string,
-		field: string,
-		store: Map<symbol, unknown>,
-		middlewares: Array<Middleware<Result, Source, Context, Args, Info>>,
-		resolver: Resolver<Result, Source, Context, Args, Info>,
-	) {
-		this.#type = type;
-		this.#field = field;
-		this.#store = store;
-		this.#middlewares = middlewares;
+	constructor(options: FieldCompilerOptions<Result, Source, Context, Args, Info>) {
+		this.#type = options.type;
+		this.#field = options.field;
+		this.#store = new Map(options.store);
+		this.#middlewares = [...options.middlewares];
 		this.#initialMiddlewares = [];
-		this.#resolver = resolver;
+		this.#resolver = options.resolver;
 	}
 
 	get type() {

@@ -7,6 +7,21 @@ import { ModuleCompiler } from './module-compiler.ts';
 import type { ModuleMethods, TypesBuildersMap, TypesResolversMap } from './module-methods.ts';
 import type { SchemaTransformer } from './transformer.ts';
 
+export interface ModuleBuilderOptions<
+	Context,
+	Info,
+	TypesBuilders extends TypesBuildersMap<Context, Info> = any,
+> {
+	name: string;
+	typedef: Readonly<DocumentNode>;
+	typeBuilders: Readonly<TypesBuilders>;
+	defaultResolvers: Readonly<IResolvers>;
+	extensions: ReadonlyArray<Extension>;
+	transformers: Array<SchemaTransformer>;
+	store: Map<symbol, Readonly<unknown>>;
+	middlewares: Array<Middleware<unknown, unknown, Context, unknown, Info>>;
+}
+
 export class ModuleBuilder<
 	Context,
 	Info,
@@ -18,28 +33,19 @@ export class ModuleBuilder<
 	readonly #typeBuilders: Readonly<TypesBuilders>;
 	readonly #defaultResolvers: Readonly<IResolvers>;
 	readonly #extensions: ReadonlyArray<Extension>;
-	readonly #transformers: Array<SchemaTransformer>;
+	readonly #transformers: ReadonlyArray<SchemaTransformer>;
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, unknown, Context, unknown, Info>>;
 
-	constructor(
-		name: string,
-		typedef: Readonly<DocumentNode>,
-		typeBuilders: Readonly<TypesBuilders>,
-		defaultResolvers: Readonly<IResolvers>,
-		extensions: ReadonlyArray<Extension>,
-		transformers: ReadonlyArray<SchemaTransformer>,
-		store: Map<symbol, Readonly<unknown>>,
-		middlewares: Array<Middleware<unknown, unknown, Context, unknown, Info>>,
-	) {
-		this.#name = name;
-		this.#typedef = typedef;
-		this.#typeBuilders = typeBuilders;
-		this.#defaultResolvers = defaultResolvers;
-		this.#extensions = extensions;
-		this.#transformers = [...transformers];
-		this.#store = new Map(store);
-		this.#middlewares = [...middlewares];
+	constructor(options: ModuleBuilderOptions<Context, Info, TypesBuilders>) {
+		this.#name = options.name;
+		this.#typedef = options.typedef;
+		this.#typeBuilders = options.typeBuilders;
+		this.#defaultResolvers = options.defaultResolvers;
+		this.#extensions = options.extensions;
+		this.#transformers = [...options.transformers];
+		this.#store = new Map(options.store);
+		this.#middlewares = [...options.middlewares];
 	}
 
 	get name() {
@@ -76,16 +82,16 @@ export class ModuleBuilder<
 				return session;
 			},
 			commit: () =>
-				new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>(
-					this.#name,
-					this.#typedef,
-					this.#typeBuilders,
-					this.#defaultResolvers,
-					this.#extensions,
-					draftTransformers,
-					draftStore,
-					draftMiddlewares,
-				),
+				new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>({
+					name: this.#name,
+					typedef: this.#typedef,
+					typeBuilders: this.#typeBuilders,
+					defaultResolvers: this.#defaultResolvers,
+					extensions: this.#extensions,
+					transformers: draftTransformers,
+					store: draftStore,
+					middlewares: draftMiddlewares,
+				}),
 			commitToMethods: () => session.commit().toMethods(),
 		} as const;
 		return session;
@@ -104,16 +110,16 @@ export class ModuleBuilder<
 			...this.#typeBuilders,
 			$schema: (types: TypesResolvers) => ({
 				__make: () =>
-					new ModuleCompiler(
-						this.#name,
-						new Map(this.#store),
-						[...this.#middlewares],
-						types,
-						this.#typedef,
-						this.#defaultResolvers,
-						this.#extensions,
-						[...this.#transformers],
-					),
+					new ModuleCompiler<Context, Info, TypesResolvers>({
+						name: this.#name,
+						store: new Map(this.#store),
+						middlewares: [...this.#middlewares],
+						typesMap: types,
+						typedef: this.#typedef,
+						defaultResolvers: this.#defaultResolvers,
+						extensions: this.#extensions,
+						transformers: [...this.#transformers],
+					}),
 			}),
 			$use: (middleware) => {
 				nameFunction(middleware, `${this.#name}.$use`);

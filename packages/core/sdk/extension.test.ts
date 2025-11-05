@@ -21,19 +21,45 @@ function mockEditableBuilder() {
 }
 
 function mockFieldBuilder() {
-	return new FieldBuilder('test', 'test', [], new Map(), []);
+	return new FieldBuilder({
+		type: 'test',
+		field: 'test',
+		extensions: [],
+		store: new Map(),
+		middlewares: [],
+	});
 }
 
 function mockTypeBuilder() {
-	return new TypeBuilder('test', {}, [], new Map(), []);
+	return new TypeBuilder({
+		type: 'test',
+		fieldBuilders: {},
+		extensions: [],
+		store: new Map(),
+		middlewares: [],
+	});
 }
 
 function mockModuleBuilder() {
-	return new ModuleBuilder('test', {} as DocumentNode, {}, {}, [], [], new Map(), []);
+	return new ModuleBuilder({
+		name: 'test',
+		typedef: {} as DocumentNode,
+		typeBuilders: {},
+		defaultResolvers: {},
+		extensions: [],
+		transformers: [],
+		store: new Map(),
+		middlewares: [],
+	});
 }
 
 function mockSubscriptionBuilder() {
-	return new SubscriptionBuilder('test', [], new Map(), []);
+	return new SubscriptionBuilder({
+		field: 'test',
+		extensions: [],
+		store: new Map(),
+		middlewares: [],
+	});
 }
 
 test('mergeExtensions merges items correctly', (t) => {

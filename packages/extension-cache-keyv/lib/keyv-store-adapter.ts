@@ -117,7 +117,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 				continue;
 			}
 
-			if (key.match(matcher)) {
+			if (matcher.exec(key)) {
 				keys.push(key);
 			}
 		}

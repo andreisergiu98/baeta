@@ -106,7 +106,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		const items = await this.client.list(namespace);
 
 		for (const key of items) {
-			if (key.match(matcher)) {
+			if (matcher.exec(key)) {
 				keys.push(key);
 			}
 		}

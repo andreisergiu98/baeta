@@ -10,7 +10,7 @@ export async function getPreReleaseTag(): Promise<string> {
 	}
 	const parsed = JSON.parse(preRealase);
 	if (typeof parsed.tag !== 'string') {
-		throw new Error('Invalid pre-release tag');
+		throw new TypeError('Invalid pre-release tag');
 	}
 	return parsed.tag;
 }

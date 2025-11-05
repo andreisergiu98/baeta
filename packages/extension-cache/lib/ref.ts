@@ -44,7 +44,7 @@ export function getRefFallback(root: unknown) {
 
 export function validateRefType(ref: unknown): asserts ref is string | number | bigint {
 	if (typeof ref !== 'string' && typeof ref !== 'number' && typeof ref !== 'bigint') {
-		throw new Error(
+		throw new TypeError(
 			'Reference must be string, number or bigint. Define getRef function in cache options',
 		);
 	}

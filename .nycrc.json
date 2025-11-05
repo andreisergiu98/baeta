@@ -1,6 +1,7 @@
 {
   "reporter": [
-    "text"
+    "text",
+    "lcovonly"
   ],
   "lines": 80,
   "branches": 80,

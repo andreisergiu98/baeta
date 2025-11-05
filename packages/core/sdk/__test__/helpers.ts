@@ -100,7 +100,12 @@ type MockedTypeBuilders = {
 };
 
 export async function runMockedResolver(
-	resolver: GraphQLFieldResolver<MockSource, MockContext, MockArgs, MockResult>,
+	resolver: GraphQLFieldResolver<
+		MockSource,
+		MockContext,
+		MockArgs,
+		MockResult | PromiseLike<MockResult>
+	>,
 ) {
 	return await resolver(
 		{ name: 'test' },

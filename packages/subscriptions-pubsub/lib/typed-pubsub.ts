@@ -1,4 +1,7 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: allow any args */
+
 import type { PubSubEngine } from './pubsub-engine.ts';
+
 /**
  * Configuration options for TypedPubSub
  */
@@ -7,36 +10,33 @@ export interface TypedPubSubOptions {
 	prefix?: string;
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: we need to use `any` in this file to support dynamic typing
-type Any = any;
-
-type PubSubMap = Record<string, Any>;
+type PubSubMap = Record<string, any>;
 type OnMessage<Payload> = (message: Payload) => Promise<void> | void;
 
 type RestPayloadFnArgs<Fn> = Fn extends (
 	triggerName: string,
-	payload: Any,
+	payload: any,
 	...rest: infer Rest
-) => Any
+) => any
 	? Rest
 	: never;
 
 type RestSubscribeFnArgs<Fn> = Fn extends (
 	triggerName: string,
-	onMessage: OnMessage<Any>,
+	onMessage: OnMessage<any>,
 	...rest: infer Rest
-) => Any
+) => any
 	? Rest
 	: never;
 
-type RestUnsubscribeFnArgs<Fn> = Fn extends (subId: number, ...rest: infer Rest) => Any
+type RestUnsubscribeFnArgs<Fn> = Fn extends (subId: number, ...rest: infer Rest) => any
 	? Rest
 	: never;
 
 type RestAsyncIterableIteratorFnArgs<Fn> = Fn extends (
 	triggers: string | readonly string[],
 	...rest: infer Rest
-) => Any
+) => any
 	? Rest
 	: never;
 

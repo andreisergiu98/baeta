@@ -15,7 +15,9 @@ export class TypeCompiler<
 	readonly #type: string;
 	readonly #store: Map<symbol, unknown>;
 	readonly #middlewares: Array<Middleware<Any, Any, Any, Any, Any>>;
-	readonly #fields: ReadonlyArray<FieldCompiler | SubscriptionCompiler>;
+	readonly #fields: ReadonlyArray<
+		FieldCompiler<unknown, Source, Context, unknown, Info> | SubscriptionCompiler
+	>;
 
 	constructor(
 		type: string,

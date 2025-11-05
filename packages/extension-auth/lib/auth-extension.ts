@@ -184,28 +184,42 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 	mutate(compilers: ModuleCompiler[]): void {
 		if (this.options.defaultScopes == null) return;
 
-		for (const compiler of compilers) {
-			for (const typeCompiler of compiler.types) {
-				if (!isOperationType(typeCompiler.type)) continue;
-				if (this.options.defaultScopes[typeCompiler.type] == null) continue;
+		for (const typeCompiler of this.iterateTypes(compilers)) {
+			if (
+				!isOperationType(typeCompiler.type) ||
+				this.options.defaultScopes[typeCompiler.type] == null
+			) {
+				continue;
+			}
 
-				const state = this.getState(typeCompiler);
-				if (state?.hasAuth === true) continue;
+			const typeState = this.getState(typeCompiler);
 
-				for (const fieldCompiler of typeCompiler.fields) {
-					const state = this.getState(fieldCompiler);
-					if (state?.hasAuth === true) continue;
+			if (typeState?.hasAuth === true) {
+				continue;
+			}
 
-					const middleware = createFallbackMiddleware(
-						typeCompiler.type,
-						this.loadScopes,
-						this.options.defaultScopes,
-						this.options.errorResolver,
-					);
-					if (middleware == null) continue;
+			for (const fieldCompiler of typeCompiler.fields) {
+				const fieldState = this.getState(fieldCompiler);
+				if (fieldState?.hasAuth === true) continue;
 
+				const middleware = createFallbackMiddleware(
+					typeCompiler.type,
+					this.loadScopes,
+					this.options.defaultScopes,
+					this.options.errorResolver,
+				);
+
+				if (middleware) {
 					fieldCompiler.addInitialMiddleware(middleware);
 				}
+			}
+		}
+	}
+
+	protected *iterateTypes(compilers: ModuleCompiler[]) {
+		for (const compiler of compilers) {
+			for (const typeCompiler of compiler.types) {
+				yield typeCompiler;
 			}
 		}
 	}

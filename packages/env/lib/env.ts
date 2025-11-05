@@ -50,10 +50,6 @@ function resolveString(value: string) {
 	return value;
 }
 
-function resolveNumber(value: string) {
-	return Number(value);
-}
-
 function resolveBoolean(value: string) {
 	return value === 'true';
 }
@@ -71,7 +67,7 @@ function resolveParam<
 		if (options.resolver) {
 			return options.resolver(rawValue);
 		}
-		return resolveNumber(rawValue);
+		return Number(rawValue);
 	}
 
 	if (options.type === 'boolean') {

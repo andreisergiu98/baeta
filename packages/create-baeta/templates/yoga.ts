@@ -16,7 +16,6 @@ export async function makeYogaTemplate(
 	appVersion: string;
 };
 
-// biome-ignore lint/complexity/noBannedTypes: Empty context
 export type ServerContext = {};
 `,
 		},

@@ -93,21 +93,28 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 	mutate(compilers: ModuleCompiler[]): void {
 		const fieldSettingsMap: FieldSettingsMap = new Map();
 
-		for (const compiler of compilers) {
-			for (const typeCompiler of compiler.types) {
-				const state = this.getState(typeCompiler);
-				if (!state) continue;
-				registerFieldSettingsSetter(typeCompiler.type, '*', state.fieldSettings, fieldSettingsMap);
-				for (const fieldCompiler of typeCompiler.fields) {
-					const state = this.getState(fieldCompiler);
-					if (!state) continue;
-					registerFieldSettingsSetter(
-						typeCompiler.type,
-						fieldCompiler.field,
-						state.fieldSettings,
-						fieldSettingsMap,
-					);
-				}
+		for (const typeCompiler of this.iterateTypes(compilers)) {
+			const typeState = this.getState(typeCompiler);
+
+			if (typeState) {
+				registerFieldSettingsSetter(
+					typeCompiler.type,
+					'*',
+					typeState.fieldSettings,
+					fieldSettingsMap,
+				);
+			}
+
+			for (const fieldCompiler of typeCompiler.fields) {
+				const fieldState = this.getState(fieldCompiler);
+				if (!fieldState) continue;
+
+				registerFieldSettingsSetter(
+					typeCompiler.type,
+					fieldCompiler.field,
+					fieldState.fieldSettings,
+					fieldSettingsMap,
+				);
 			}
 		}
 
@@ -116,14 +123,20 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 			fieldSettingsMap,
 		);
 
+		for (const typeCompiler of this.iterateTypes(compilers)) {
+			if (!['Query', 'Mutation', 'Subscription'].includes(typeCompiler.type)) {
+				continue;
+			}
+			for (const fieldCompiler of typeCompiler.fields) {
+				fieldCompiler.addInitialMiddleware(middleware);
+			}
+		}
+	}
+
+	protected *iterateTypes(compilers: ModuleCompiler[]) {
 		for (const compiler of compilers) {
 			for (const typeCompiler of compiler.types) {
-				if (!['Query', 'Mutation', 'Subscription'].includes(typeCompiler.type)) {
-					continue;
-				}
-				for (const fieldCompiler of typeCompiler.fields) {
-					fieldCompiler.addInitialMiddleware(middleware);
-				}
+				yield typeCompiler;
 			}
 		}
 	}

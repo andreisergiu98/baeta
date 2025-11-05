@@ -39,7 +39,7 @@ export function encodeValue(serializer: Serializer, value: unknown, catchAll?: s
 	}
 
 	if (value === '*') {
-		return catchAll ? catchAll : 'star';
+		return catchAll || 'star';
 	}
 
 	const type = typeof value;
@@ -58,7 +58,7 @@ export function encodeValue(serializer: Serializer, value: unknown, catchAll?: s
 	const str = value.toString();
 
 	if (isSafeString(str)) {
-		return `_${value}`;
+		return `_${str}`;
 	}
 
 	return `enc_${encodeBase64Url(str)}`;
@@ -73,7 +73,7 @@ export function encodePropertyName(value: string) {
 }
 
 export function isSafeString(value: string) {
-	return /^[a-zA-Z0-9_-]+$/i.test(value);
+	return /^[a-z0-9_-]+$/i.test(value);
 }
 
 function encodeObject(serializer: Serializer, value: unknown, catchAll?: string) {

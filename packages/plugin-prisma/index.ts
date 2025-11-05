@@ -1,7 +1,8 @@
 import { createPrismaClientPlugin } from './lib/client-generator.ts';
 import type { PrismaPluginOptions } from './lib/options.ts';
 
-export type { PrismaPluginOptions };
+export type { PrismaPluginOptions } from './lib/options.ts';
+
 export default prismaPlugin;
 
 /**

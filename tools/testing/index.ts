@@ -1,9 +1,9 @@
-import ava from 'ava';
 import sinon from 'sinon';
+
+export { default } from 'ava';
 
 export { sinon };
 export * from 'ava';
-export default ava;
 
 declare function setTimeout(callback: () => void, ms: number): void;
 

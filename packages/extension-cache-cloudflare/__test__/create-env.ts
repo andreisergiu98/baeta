@@ -1,6 +1,4 @@
-import { BaetaCache } from '../lib/baeta-cache.ts';
-
-export { BaetaCache };
+export { BaetaCache } from '../lib/baeta-cache.ts';
 
 export default {
 	async fetch(_request: Request) {

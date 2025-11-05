@@ -1,4 +1,4 @@
-export function collectPipelineErrors(result: [error: Error | null, result: unknown | null][]) {
+export function collectPipelineErrors(result: [error: Error | null, result: unknown][]) {
 	const errors: Error[] = [];
 
 	for (const [error] of result) {

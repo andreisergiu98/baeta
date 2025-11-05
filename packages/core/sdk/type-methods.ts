@@ -1,5 +1,4 @@
 import type { Middleware } from '../lib/middleware.ts';
-import type { Any } from '../types/any.ts';
 import type { Field, FieldMethods } from './field-methods.ts';
 import type { SubscriptionField, SubscriptionMethods } from './subscription-methods.ts';
 import type { TypeBuilder } from './type-builder.ts';
@@ -7,14 +6,14 @@ import type { TypeCompiler } from './type-compiler.ts';
 
 export type FieldsBuildersMap<Source, Context, Info> = Record<
 	string,
-	| FieldMethods<Any, Source, Context, Any, Info>
-	| SubscriptionMethods<Any, Source, Context, Any, Info>
+	| FieldMethods<any, Source, Context, any, Info>
+	| SubscriptionMethods<any, Source, Context, any, Info>
 >;
 
 export type FieldsResolversMap<Source, Context, Info> = Record<
 	string,
-	| Field<Any, Any, Source, Context, Any, Info>
-	| SubscriptionField<Any, Any, Source, Context, Any, Info>
+	| Field<any, any, Source, Context, any, Info>
+	| SubscriptionField<any, any, Source, Context, any, Info>
 >;
 export type TypeMethods<
 	Source,

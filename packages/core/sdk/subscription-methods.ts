@@ -44,13 +44,23 @@ export type SubscriptionHelpers<Expected, Result, Source, Context, Args, Info> =
 	Info
 >;
 
-export type SubscriptionFieldWithMake<Expected, Result, Source, Context, Args, Info> = FieldHelpers<
+export type SubscriptionFieldWithMake<
 	Expected,
 	Result,
 	Source,
 	Context,
 	Args,
-	Info
-> & {
-	__make: () => SubscriptionCompiler<Expected, Source, Context, Args, Info>;
+	Info,
+	SubscriptionSource,
+	SubscriptionPayload,
+> = FieldHelpers<Expected, Result, Source, Context, Args, Info> & {
+	__make: () => SubscriptionCompiler<
+		Expected,
+		Source,
+		Context,
+		Args,
+		Info,
+		SubscriptionSource,
+		SubscriptionPayload
+	>;
 };

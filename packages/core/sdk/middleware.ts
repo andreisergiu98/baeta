@@ -13,3 +13,9 @@ export function composeMiddlewares<Result, Source, Context, Args, Info>(
 		resolver,
 	);
 }
+
+export function concatMiddlewares<Result, Source, Context, Args, Info>(
+	...middlewares: Middleware<Result, Source, Context, Args, Info>[][]
+): Middleware<Result, Source, Context, Args, Info>[] {
+	return middlewares.flat(1);
+}

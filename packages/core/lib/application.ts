@@ -1,6 +1,7 @@
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import { pruneSchema } from '@graphql-tools/utils';
 import {
+	type ModuleCompiler,
 	type ModuleCompilerFactory,
 	type TypesResolversMap,
 	transformSchema,
@@ -78,7 +79,7 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	// extensions are the same for all modules
 	const extensions = moduleCompilers[0].extensions;
 	for (const ext of extensions) {
-		ext.mutate(moduleCompilers);
+		ext.mutate(moduleCompilers as ModuleCompiler[]);
 	}
 	const builtModules = moduleCompilers.map((module) => module.build());
 	const typeDefs = builtModules.map((m) => m.typedef);

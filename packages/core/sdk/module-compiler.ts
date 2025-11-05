@@ -1,21 +1,23 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { DocumentNode, GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
-import type { Any } from '../types/any.ts';
 import type { Extension } from './extension.ts';
 import type { TypesResolversMap } from './module-methods.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompiler } from './type-compiler.ts';
+import type { FieldsResolversMap } from './type-methods.ts';
 
 export class ModuleCompiler<
-	Context = Any,
-	Info = Any,
-	TypesResolvers extends TypesResolversMap<Context, Info> = Any,
+	Context = unknown,
+	Info = unknown,
+	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
 > {
 	readonly #name: string;
 	readonly #store: Map<symbol, unknown>;
-	readonly #middlewares: Middleware<Any, Any, Context, Any, Info>[];
-	readonly #types: ReadonlyArray<TypeCompiler>;
+	readonly #middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
+	readonly #types: ReadonlyArray<
+		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
+	>;
 	readonly #typedef: Readonly<DocumentNode>;
 	readonly #extensions: ReadonlyArray<Extension>;
 	readonly #defaultResolvers: Readonly<IResolvers>;
@@ -25,7 +27,7 @@ export class ModuleCompiler<
 	constructor(
 		name: string,
 		store: Map<symbol, unknown>,
-		middlewares: Middleware<Any, Any, Context, Any, Info>[],
+		middlewares: Middleware<unknown, unknown, Context, unknown, Info>[],
 		typesMap: TypesResolvers,
 		typedef: Readonly<DocumentNode>,
 		defaultResolvers: Readonly<IResolvers>,
@@ -56,7 +58,7 @@ export class ModuleCompiler<
 		return this.#extensions;
 	}
 
-	addMiddleware(middleware: Middleware<Any, Any, Context, Any, Info>) {
+	addMiddleware(middleware: Middleware<unknown, unknown, Context, unknown, Info>) {
 		this.#middlewares.push(middleware);
 	}
 
@@ -81,7 +83,9 @@ export class ModuleCompiler<
 }
 
 function getTypeCompilersAndResolvers<Context, Info>(typesMap: TypesResolversMap<Context, Info>) {
-	const types: TypeCompiler[] = [];
+	const types: Array<
+		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
+	> = [];
 	const genericResolvers: Array<[string, GraphQLScalarType]> = [];
 	for (const [typeName, typeResolver] of Object.entries(typesMap)) {
 		if ('__make' in typeResolver) {

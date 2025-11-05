@@ -88,6 +88,19 @@ export function mockMiddleware(
 	};
 }
 
+export function mockTypeMiddleware(
+	pre?: () => Promise<void>,
+	post?: (result: MockResult) => Promise<MockResult>,
+): Middleware<unknown, MockSource, MockContext, unknown, MockInfo> {
+	return mockMiddleware(pre, post) as Middleware<
+		unknown,
+		MockSource,
+		MockContext,
+		unknown,
+		MockInfo
+	>;
+}
+
 type MockedTypeBuilders = {
 	Builder: {
 		field1: FieldMethods<MockResult, MockSource, MockContext, MockArgs, MockInfo>;

@@ -1,7 +1,7 @@
 import type { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver } from '../lib/resolver.ts';
-import { composeMiddlewares } from './middleware.ts';
+import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 
 export class FieldCompiler<Result, Source, Context, Args, Info> {
 	readonly #type: string;
@@ -49,9 +49,13 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 	}
 
 	build(
-		typeMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>,
+		typeMiddlewares: Middleware<unknown, Source, Context, unknown, Info>[],
 	): GraphQLFieldResolver<Source, Context, Args, Result | PromiseLike<Result>> {
-		const allMiddlewares = [...this.#initialMiddlewares, ...typeMiddlewares, ...this.#middlewares];
+		const allMiddlewares = concatMiddlewares(
+			this.#initialMiddlewares,
+			typeMiddlewares as Middleware<Result, Source, Context, Args, Info>[],
+			this.#middlewares,
+		);
 		const resolver = composeMiddlewares(allMiddlewares, this.#resolver);
 		const resolverAdapter = (
 			source: Source,

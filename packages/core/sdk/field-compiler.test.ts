@@ -6,6 +6,7 @@ import {
 	type MockResult,
 	type MockSource,
 	mockMiddleware,
+	mockTypeMiddleware,
 	runMockedResolver,
 	testUseStoreLike,
 } from './__test__/helpers.ts';
@@ -101,7 +102,7 @@ test('FieldCompiler should use type middlewares correctly', async (t) => {
 		),
 	);
 	const resolver = fieldCompiler.build([
-		mockMiddleware(
+		mockTypeMiddleware(
 			async () => {
 				t.is(i++, 1);
 			},

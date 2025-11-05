@@ -1,5 +1,4 @@
 import type { Middleware } from '../lib/middleware.ts';
-import type { Any } from '../types/any.ts';
 import { nameFunction } from '../utils/functions.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { TypeCompiler } from './type-compiler.ts';
@@ -9,8 +8,8 @@ export class TypeBuilder<
 	Source,
 	Context,
 	Info,
-	FieldsBuilders extends FieldsBuildersMap<Source, Context, Info> = Any,
-	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = Any,
+	FieldsBuilders extends FieldsBuildersMap<Source, Context, Info> = any,
+	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = any,
 > {
 	readonly #type: string;
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;

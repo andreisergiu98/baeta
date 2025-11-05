@@ -1,6 +1,5 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
-import type { Any } from '../types/any.ts';
 import { nameFunction } from '../utils/functions.ts';
 import { mapMaybePromise } from '../utils/promise.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
@@ -87,18 +86,35 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 				nameFunction(middleware, `Subscription.${this.#field}.use`);
 				return this.edit().addMiddleware(middleware).commitToMethods();
 			},
-			subscribe: <T = Result>(fn: Resolver<Subscription<T>, Source, Context, Args, Info>) => {
+			subscribe: <Payload = Result>(
+				fn: Resolver<Subscription<Payload>, Source, Context, Args, Info>,
+			) => {
 				nameFunction(fn, `Subscription.${this.#field}.subscribe`);
 				const subscribe = (params: ResolverParams<Source, Context, Args, Info>) => {
 					return mapMaybePromise(fn(params), (iterator) => ({
 						__internal__asyncIterable: iterator,
 					}));
 				};
-				return createSubscriptionFieldWithMake<Result, T, T, Context, Args, Info>(
+				return createSubscriptionFieldWithMake<
+					Result,
+					Payload,
+					Payload,
+					Context,
+					Args,
+					Info,
+					Source,
+					SubscriptionWrapper<Payload>
+				>(
 					this.#field,
 					this.#extensions,
 					this.#store,
-					this.#middlewares,
+					this.#middlewares as Middleware<
+						SubscriptionWrapper<Payload>,
+						Source,
+						Context,
+						Args,
+						Info
+					>[],
 					subscribe,
 					(params) => params.source,
 				);
@@ -107,23 +123,36 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	}
 }
 
-function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args, Info>(
+function createSubscriptionFieldWithMake<
+	Expected,
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	SubscriptionSource,
+	SubscriptionPayload,
+>(
 	field: string,
 	extensions: ReadonlyArray<Extension>,
 	store: ReadonlyMap<symbol, Readonly<unknown>>,
-	middlewares: ReadonlyArray<Middleware<SubscriptionWrapper, Any, Context, Args, Info>>,
-	subscribe: Resolver<SubscriptionWrapper<Any>, Any, Context, Args, Info>,
+	middlewares: ReadonlyArray<
+		Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>
+	>,
+	subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>,
 	currentResolver: Resolver<Result, Source, Context, Args, Info>,
 ): SubscriptionHelpers<Expected, Result, Source, Context, Args, Info> {
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
-		createSubscriptionFieldWithMake<Expected, R, Source, Context, Args, Info>(
-			field,
-			extensions,
-			store,
-			middlewares,
-			subscribe,
-			resolver,
-		);
+		createSubscriptionFieldWithMake<
+			Expected,
+			R,
+			Source,
+			Context,
+			Args,
+			Info,
+			SubscriptionSource,
+			SubscriptionPayload
+		>(field, extensions, store, middlewares, subscribe, resolver);
 
 	const chain = <T>(
 		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
@@ -137,7 +166,16 @@ function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args
 		return resolver;
 	};
 
-	const helpers: SubscriptionFieldWithMake<Expected, Result, Source, Context, Args, Info> = {
+	const helpers: SubscriptionFieldWithMake<
+		Expected,
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		SubscriptionSource,
+		SubscriptionPayload
+	> = {
 		map: (fn) => {
 			nameFunction(fn, `Subscription.${field}.map`);
 			return make(chain(fn));
@@ -179,7 +217,15 @@ function createSubscriptionFieldWithMake<Expected, Result, Source, Context, Args
 			return make(resolver);
 		},
 		__make: () =>
-			new SubscriptionCompiler<Expected, Source, Context, Args, Info>(
+			new SubscriptionCompiler<
+				Expected,
+				Source,
+				Context,
+				Args,
+				Info,
+				SubscriptionSource,
+				SubscriptionPayload
+			>(
 				field,
 				new Map(store),
 				[...middlewares],

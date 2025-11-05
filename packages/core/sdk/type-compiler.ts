@@ -1,28 +1,33 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { Middleware } from '../lib/middleware.ts';
-import type { Any } from '../types/any.ts';
 import { makeField } from './field.ts';
 import type { FieldCompiler } from './field-compiler.ts';
+import { concatMiddlewares } from './middleware.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
 
 export class TypeCompiler<
-	Source = Any,
-	Context = Any,
-	Info = Any,
-	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = Any,
+	Source,
+	Context,
+	Info,
+	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = FieldsResolversMap<
+		Source,
+		Context,
+		Info
+	>,
 > {
 	readonly #type: string;
 	readonly #store: Map<symbol, unknown>;
-	readonly #middlewares: Array<Middleware<Any, Any, Any, Any, Any>>;
+	readonly #middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly #fields: ReadonlyArray<
-		FieldCompiler<unknown, Source, Context, unknown, Info> | SubscriptionCompiler
+		| FieldCompiler<unknown, Source, Context, unknown, Info>
+		| SubscriptionCompiler<unknown, unknown, Context, unknown, Info, Source, unknown>
 	>;
 
 	constructor(
 		type: string,
 		store: Map<symbol, unknown>,
-		middlewares: Array<Middleware<Any, Any, Any, Any, Any>>,
+		middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>,
 		fieldsMap: FieldsResolvers,
 	) {
 		this.#type = type;
@@ -39,7 +44,7 @@ export class TypeCompiler<
 		return this.#fields;
 	}
 
-	addMiddleware(middleware: Middleware<Any, Source, Context, Any, Info>) {
+	addMiddleware(middleware: Middleware<unknown, Source, Context, unknown, Info>) {
 		this.#middlewares.push(middleware);
 	}
 
@@ -49,9 +54,12 @@ export class TypeCompiler<
 		return { get, set };
 	}
 
-	build(moduleMiddlewares: Middleware<Any, Any, Any, Any, Any>[]) {
+	build(moduleMiddlewares: Middleware<unknown, unknown, Context, unknown, Info>[]) {
 		const resolvers: IResolvers = {};
-		const allMiddlewares = [...moduleMiddlewares, ...this.#middlewares];
+		const allMiddlewares = concatMiddlewares<unknown, Source, Context, unknown, Info>(
+			moduleMiddlewares,
+			this.#middlewares,
+		);
 		for (const compiler of this.#fields) {
 			resolvers[compiler.field] = compiler.build(allMiddlewares);
 		}

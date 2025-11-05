@@ -1,7 +1,6 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { DocumentNode } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
-import type { Any } from '../types/any.ts';
 import { nameFunction } from '../utils/functions.ts';
 import { type Extension, mergeExtensions } from './extension.ts';
 import { ModuleCompiler } from './module-compiler.ts';
@@ -11,8 +10,8 @@ import type { SchemaTransformer } from './transformer.ts';
 export class ModuleBuilder<
 	Context,
 	Info,
-	TypesBuilders extends TypesBuildersMap<Context, Info> = Any,
-	TypesResolvers extends TypesResolversMap<Context, Info> = Any,
+	TypesBuilders extends TypesBuildersMap<Context, Info> = any,
+	TypesResolvers extends TypesResolversMap<Context, Info> = any,
 > {
 	readonly #name: string;
 	readonly #typedef: Readonly<DocumentNode>;

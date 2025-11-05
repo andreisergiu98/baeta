@@ -12,10 +12,10 @@ export type {
 } from './lib/middleware-options.ts';
 export { CacheRef, type ItemRef, type ParentRef, type RefCompatibleRoot } from './lib/ref.ts';
 export type {
+	any as SerializerAny,
 	ClassTransformer,
 	CustomTransformer,
 	Serializer,
-	SerializerAny,
 	SerializerClass,
 	SerializerResult,
 	SerializerTransformer,

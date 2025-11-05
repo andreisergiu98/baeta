@@ -1,10 +1,7 @@
 import { SuperJSON } from 'superjson';
 
-// biome-ignore lint/suspicious/noExplicitAny: allow any
-export type SerializerAny = any;
-
 export declare type SerializerClass = {
-	new (...args: SerializerAny[]): SerializerAny;
+	new (...args: any[]): any;
 };
 
 export declare type SerializerValue =
@@ -39,30 +36,29 @@ export type SymbolTransformer = {
 	identifier?: string;
 };
 
-export type SerializerTransformer<
-	Input = SerializerAny,
-	Output extends SerializerValue = SerializerAny,
-> = CustomTransformer<Input, Output> | ClassTransformer | SymbolTransformer;
+export type SerializerTransformer<Input = any, Output extends SerializerValue = any> =
+	| CustomTransformer<Input, Output>
+	| ClassTransformer
+	| SymbolTransformer;
 
 export interface SerializerResult {
-	json: SerializerAny;
+	json: any;
 	meta?: {
-		values?: SerializerAny;
-		referentialEqualities?: SerializerAny;
+		values?: any;
+		referentialEqualities?: any;
 	};
 }
 
 export interface Serializer {
-	serialize(object: SerializerAny): SerializerResult;
+	serialize(object: any): SerializerResult;
 	deserialize<T = unknown>(payload: SerializerResult): T;
-	stringify(object: SerializerAny): string;
+	stringify(object: any): string;
 	parse<T = unknown>(string: string): T;
 }
 
-export function createSerializer<
-	Input = SerializerAny,
-	Output extends SerializerValue = SerializerAny,
->(serializers?: SerializerTransformer<Input, Output>[]): Serializer {
+export function createSerializer<Input = any, Output extends SerializerValue = any>(
+	serializers?: SerializerTransformer<Input, Output>[],
+): Serializer {
 	const superjson = new SuperJSON();
 
 	for (const serializer of serializers ?? []) {

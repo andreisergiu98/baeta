@@ -5,11 +5,8 @@ import type { FileOptions } from './file.ts';
  * Interface for custom schema loaders.
  */
 
-// biome-ignore lint/suspicious/noExplicitAny: allow any
 export interface Loader<TOptions = any> {
-	// biome-ignore lint/suspicious/noExplicitAny: allow any
 	load(pointer: string, options?: TOptions): Promise<any[] | null>;
-	// biome-ignore lint/suspicious/noExplicitAny: allow any
 	loadSync?(pointer: string, options?: TOptions): any[] | null;
 }
 

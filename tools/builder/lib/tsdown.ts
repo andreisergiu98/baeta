@@ -1,6 +1,6 @@
-import { type Options, defineConfig as originalDefineConfig } from 'tsdown';
+import { defineConfig as originalDefineConfig, type UserConfig } from 'tsdown';
 
-export function defineConfig(config: Options) {
+export function defineConfig(config: UserConfig) {
 	return originalDefineConfig({
 		target: 'es2024',
 		dts: true,

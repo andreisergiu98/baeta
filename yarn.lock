@@ -1958,6 +1958,7 @@ __metadata:
     prisma: "npm:^6.19.0"
     typescript: "npm:^5.9.3"
     ws: "npm:^8.18.3"
+    zod: "npm:^4.1.12"
   languageName: unknown
   linkType: soft
 
@@ -1986,6 +1987,7 @@ __metadata:
     prisma: "npm:^6.19.0"
     typescript: "npm:^5.9.3"
     ws: "npm:^8.18.3"
+    zod: "npm:^4.1.12"
   languageName: unknown
   linkType: soft
 

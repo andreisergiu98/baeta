@@ -17,14 +17,12 @@ export interface DefaultStoreOptions {
 export type StoreOptions<Source> = {
 	/** Manual cache version for invalidation */
 	revision?: number;
-	/** Function to extract object reference id */
-	getRef?: (root: Source) => ItemRef;
 	ttl?: number;
 	serialize: (value: Source) => string;
 	parse: (value: string) => Source;
 } & (Source extends RefCompatibleRoot
 	? {
-			getRef: (source: Source) => ItemRef;
+			getRef?: (source: Source) => ItemRef;
 		}
 	: {
 			getRef: (source: Source) => ItemRef;

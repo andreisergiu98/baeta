@@ -1,32 +1,23 @@
 import './lib/global-types.ts';
 
 import { CacheExtension } from './lib/cache-extension.ts';
-import type { SerializerTransformer } from './lib/serializer.ts';
 import type { Store } from './lib/store.ts';
 import type { DefaultStoreOptions } from './lib/store-options.ts';
 
-export type { CacheArgs } from './lib/cache-args.ts';
+export type { CacheArgsMatcher } from './lib/cache-args.ts';
 export type {
 	CacheMiddlewareOptions,
 	RequiredCacheMiddlewareOptions,
 } from './lib/middleware-options.ts';
 export { CacheRef, type ItemRef, type ParentRef, type RefCompatibleRoot } from './lib/ref.ts';
-export type {
-	ClassTransformer,
-	CustomTransformer,
-	Serializer,
-	SerializerClass,
-	SerializerResult,
-	SerializerTransformer,
-	SerializerValue,
-	SymbolTransformer,
-} from './lib/serializer.ts';
-export { createSerializer } from './lib/serializer.ts';
 export { Store } from './lib/store.ts';
-export { type CacheQueryMatching, StoreAdapter } from './lib/store-adapter.ts';
+export {
+	type CacheQueryMatcher,
+	StoreAdapter,
+	type StoreAdapterOptions,
+} from './lib/store-adapter.ts';
 export type {
 	DefaultStoreOptions,
-	RequiredStoreOptions,
 	StoreOptions,
 } from './lib/store-options.ts';
 
@@ -52,10 +43,6 @@ export type {
  * });
  * ```
  */
-export function cacheExtension(
-	store: Store,
-	options?: DefaultStoreOptions,
-	transformers?: SerializerTransformer[],
-) {
-	return new CacheExtension(store, options, transformers);
+export function cacheExtension(store: Store, options?: DefaultStoreOptions) {
+	return new CacheExtension(store, options);
 }

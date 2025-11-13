@@ -1,4 +1,4 @@
-import { createSerializer, type StoreOptions } from '@baeta/extension-cache';
+import type { StoreAdapterOptions } from '@baeta/extension-cache';
 import test from '@baeta/testing';
 import { runTestsForStoreAdapter, type TestItem } from '@baeta/tests-cache-stores';
 import { UpstashClient } from './upstash-client.ts';
@@ -9,9 +9,8 @@ const client = new UpstashClient({
 	token: 'example_token',
 });
 
-function createStoreAdapter(options: StoreOptions<TestItem>) {
-	const serializer = createSerializer();
-	return new UpstashStoreAdapter(client, serializer, options, 'test');
+function createStoreAdapter(options: StoreAdapterOptions<TestItem>) {
+	return new UpstashStoreAdapter(client, options);
 }
 
 test.beforeEach(async () => {
@@ -22,6 +21,5 @@ test.after(async () => {});
 
 runTestsForStoreAdapter(createStoreAdapter, test, {
 	name: 'UpstashStoreAdapter',
-	serializer: createSerializer(),
 	testTtl: true,
 });

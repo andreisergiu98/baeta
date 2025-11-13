@@ -1,9 +1,9 @@
 import {
+	type CacheRef,
 	type ItemRef,
 	type ParentRef,
-	type Serializer,
 	StoreAdapter,
-	type StoreOptions,
+	type StoreAdapterOptions,
 } from '@baeta/extension-cache';
 import type Redis from 'ioredis';
 import { collectPipelineErrors } from '../utils/pipeline.ts';
@@ -11,8 +11,8 @@ import { collectPipelineErrors } from '../utils/pipeline.ts';
 export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	private readonly client: Redis;
 
-	constructor(client: Redis, serializer: Serializer, options: StoreOptions<Item>, type: string) {
-		super(serializer, options, type);
+	constructor(client: Redis, options: StoreAdapterOptions<Item>) {
+		super(options);
 		this.client = client;
 	}
 
@@ -20,7 +20,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (refs.length === 0) {
 			return null;
 		}
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		const results = await this.client.mget(keys);
 		return results.map((result) => (result == null ? null : this.parseItem(result)));
 	};
@@ -33,7 +33,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 		const pipeline = this.client.pipeline();
 
 		for (const item of items) {
-			const key = this.createKeyByItem(item);
+			const key = this.createItemKey(item);
 			pipeline.set(key, this.stringifyItem(item));
 			if (this.options?.ttl) {
 				pipeline.expire(key, this.options.ttl);
@@ -53,7 +53,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 			return;
 		}
 
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		await this.client.unlink(keys);
 
 		if (evictQueries) {
@@ -62,12 +62,12 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected saveQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		meta: string[],
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 
 		const pipeline = this.client.pipeline();
 		pipeline.unlink(key);
@@ -86,11 +86,11 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected loadQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 		const meta = await this.client.lrange(key, 0, -1);
 		if (meta.length === 0) {
 			return null;
@@ -99,7 +99,7 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected deleteQueriesByRef = async (
-		queryRef?: string,
+		queryRef?: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
@@ -110,11 +110,14 @@ export class RedisStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected async searchQueries(
-		queryRef = '*',
-		parentRef: NonNullable<ParentRef> = '*',
-		args: Record<string, unknown> = {},
+		queryRef?: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
 	) {
-		const matcher = this.createQueryKeyGlobMatcher(queryRef, parentRef, args);
+		const matcher =
+			queryRef == null
+				? this.createQueryKeyGlobMatcher()
+				: this.createQueryKeyGlobMatcher(queryRef, parentRef, args);
 
 		return new Promise<string[]>((resolve, reject) => {
 			const keys: string[] = [];

@@ -1,38 +1,48 @@
 import type { Middleware } from '@baeta/core';
 import { log } from '@baeta/util-log';
 import DataLoader from 'dataloader';
-import type { CacheArgs } from './cache-args.ts';
-import { encodeArgs, encodeValue } from './encoder.ts';
+import type { GraphQLSchema } from 'graphql';
+import type { CacheArgsMatcher } from './cache-args.ts';
+import { encodeArgs, encodeRef } from './encoder.ts';
 import type {
 	CacheMiddlewareOptions,
 	RequiredCacheMiddlewareOptions,
 } from './middleware-options.ts';
 import {
+	assertValidRefType,
 	type CacheRef,
 	getRefFallback,
 	type ItemRef,
 	type ParentRef,
 	type RefCompatibleRoot,
-	validateRefType,
 } from './ref.ts';
-import type { Serializer } from './serializer.ts';
 import type { StoreOptions } from './store-options.ts';
 import { alignItemsWithRefs, arrayIsComplete, fillNullItemsWithFallback } from './utils.ts';
 
-export type CacheQueryMatching<Args> = {
+export type CacheQueryMatcher<Args> = {
 	parentRef?: ParentRef;
-	args?: CacheArgs<Args>;
+	args?: CacheArgsMatcher<Args>;
 };
 
+export interface StoreAdapterOptions<Item> {
+	type: string;
+	options: StoreOptions<Item>;
+	getSchema: () => GraphQLSchema;
+}
+
+type CreateMiddlewareArgs<Result, Source, Args> = Source extends RefCompatibleRoot
+	? [queryRef: CacheRef<Result, Source, Args>, options?: CacheMiddlewareOptions<Source>]
+	: [queryRef: CacheRef<Result, Source, Args>, options: RequiredCacheMiddlewareOptions<Source>];
+
 export abstract class StoreAdapter<Item> {
-	protected serializer: Serializer;
-	protected options: StoreOptions<Item>;
-	protected type: string;
-	constructor(serializer: Serializer, options: StoreOptions<Item>, type: string) {
-		this.serializer = serializer;
+	protected readonly options: StoreOptions<Item>;
+	protected readonly type: string;
+	protected readonly getSchema: () => GraphQLSchema;
+
+	constructor({ options, type, getSchema }: StoreAdapterOptions<Item>) {
 		this.options = options;
 		this.type = type;
-		this.getMany.bind(this);
+		this.getSchema = getSchema;
 	}
 
 	abstract getPartialMany: (refs: ItemRef[]) => Promise<Array<Item | null> | null>;
@@ -42,21 +52,20 @@ export abstract class StoreAdapter<Item> {
 	abstract deleteMany: (refs: ItemRef[], evictQueries?: boolean) => Promise<void>;
 
 	protected abstract saveQueryMetadata: (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		meta: string[],
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => Promise<void>;
 
 	protected abstract loadQueryMetadata: (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => Promise<string[] | null>;
 
-	// biome-ignore lint/correctness/noUnusedVariables: defined for the base class
 	protected abstract deleteQueriesByRef: <Result, Root, Args>(
-		queryRef?: string,
+		queryRef?: CacheRef<Result, Root, Args>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => Promise<void>;
@@ -73,9 +82,9 @@ export abstract class StoreAdapter<Item> {
 		cache: false,
 	});
 
-	get = (ref: ItemRef): Promise<Item | null> => {
+	get(ref: ItemRef): Promise<Item | null> {
 		return this.loader.load(ref);
-	};
+	}
 
 	getMany(refs: ItemRef[]): Promise<Item[] | null>;
 	getMany<T extends ItemRef>(refs: T[], fallback: (refs: T[]) => Promise<Item[]>): Promise<Item[]>;
@@ -96,7 +105,7 @@ export abstract class StoreAdapter<Item> {
 		const missingItems = await fallback(missingRefs);
 
 		this.saveMany(missingItems).catch((err) => {
-			log.error(err, 'Failed to save missing items');
+			log.warn(err, 'Failed to save missing items');
 		});
 
 		const { items, missing, extra } = fillNullItemsWithFallback(results ?? [], missingItems);
@@ -116,30 +125,31 @@ export abstract class StoreAdapter<Item> {
 		return items;
 	}
 
-	save = async (item: Item) => {
+	async save(item: Item) {
 		return this.saveMany([item]);
-	};
+	}
 
-	delete = (ref: ItemRef, evictQueries?: boolean) => {
+	async delete(ref: ItemRef, evictQueries?: boolean) {
 		return this.deleteMany([ref], evictQueries);
-	};
+	}
 
-	deleteQueries = <Result, Root, Args>(
-		queryRef?: CacheRef<Result, Root, Args>,
-		matcher?: CacheQueryMatching<Args>,
-	) => {
-		return this.deleteQueriesByRef(queryRef?.toString(), matcher?.parentRef, matcher?.args);
-	};
-
-	getQueryResult = async <Result, Root, Args>(
+	deleteQueries(): Promise<void>;
+	deleteQueries<Result, Root, Args>(
 		queryRef: CacheRef<Result, Root, Args>,
-		matcher?: CacheQueryMatching<Args>,
-	) => {
-		const meta = await this.loadQueryMetadata(
-			queryRef.toString(),
-			matcher?.parentRef,
-			matcher?.args,
-		);
+		matcher?: CacheQueryMatcher<Args>,
+	): Promise<void>;
+	deleteQueries<Result, Root, Args>(
+		queryRef?: CacheRef<Result, Root, Args>,
+		matcher?: CacheQueryMatcher<Args>,
+	): Promise<void> {
+		return this.deleteQueriesByRef(queryRef, matcher?.parentRef, matcher?.args);
+	}
+
+	async getQueryResult<Result, Root, Args>(
+		queryRef: CacheRef<Result, Root, Args>,
+		matcher?: CacheQueryMatcher<Args>,
+	) {
+		const meta = await this.loadQueryMetadata(queryRef, matcher?.parentRef, matcher?.args);
 
 		if (meta == null) {
 			return null;
@@ -158,16 +168,16 @@ export abstract class StoreAdapter<Item> {
 		}
 
 		const aligned = alignItemsWithRefs(nullableRefs, items);
-		const result = isList ? aligned : aligned[0];
+		const result = isList ? aligned : (aligned.at(0) ?? null);
 
 		return { query: result as Result };
-	};
+	}
 
-	saveQueryResult = async <Result, Root, Args>(
+	async saveQueryResult<Result, Root, Args>(
 		queryRef: CacheRef<Result, Root, Args>,
 		data: Result,
-		matcher?: CacheQueryMatching<Args>,
-	) => {
+		matcher?: CacheQueryMatcher<Args>,
+	) {
 		const isList = Array.isArray(data);
 		const isListIndicator = isList ? '1' : '0';
 
@@ -182,22 +192,14 @@ export abstract class StoreAdapter<Item> {
 			await this.saveMany(itemsFiltered);
 		}
 
-		return this.saveQueryMetadata(
-			queryRef.toString(),
-			itemsData,
-			matcher?.parentRef,
-			matcher?.args,
-		);
-	};
+		return this.saveQueryMetadata(queryRef, itemsData, matcher?.parentRef, matcher?.args);
+	}
 
-	createMiddleware = <Result, Source, Context, Args, Info>(
-		queryRef: CacheRef<Result, Source, Args>,
-		...optionsArray: Source extends RefCompatibleRoot
-			? [options?: CacheMiddlewareOptions<Source>]
-			: [options: RequiredCacheMiddlewareOptions<Source>]
-	): Middleware<Result, Source, Context, Args, Info> => {
+	createMiddleware<Result, Source, Context, Args, Info>(
+		...args: CreateMiddlewareArgs<Result, Source, Args>
+	): Middleware<Result, Source, Context, Args, Info> {
 		return async (next, params): Promise<Result> => {
-			const [options] = optionsArray;
+			const [queryRef, options] = args;
 
 			const parentRef = options?.getRootRef
 				? options.getRootRef(params.source)
@@ -206,7 +208,7 @@ export abstract class StoreAdapter<Item> {
 			const matcher = { parentRef, args: params.args };
 
 			const cached = await this.getQueryResult(queryRef, matcher).catch((err) => {
-				log.error(err, `Failed to get query result for ${queryRef}. Proceeding with resolver.`);
+				log.warn(err, `Failed to get query result for ${queryRef}. Proceeding with resolver.`);
 				return null;
 			});
 
@@ -216,58 +218,92 @@ export abstract class StoreAdapter<Item> {
 
 			const result = await next();
 			this.saveQueryResult(queryRef, result, matcher).catch((err) => {
-				log.error(err, `Failed to save query result for ${queryRef}`);
+				log.warn(err, `Failed to save query result for ${queryRef}`);
 			});
 			return result;
 		};
-	};
+	}
 
-	protected createKey(ref: ItemRef) {
+	protected createItemKey(item: Item) {
+		return this.createItemKeyByRef(this.getRef(item));
+	}
+
+	protected createItemKeyByRef(ref: ItemRef) {
 		return `${this.type}:items:${this.getRevision()}:${ref.toString()}`;
 	}
 
-	protected createKeyByItem(item: Item) {
-		return this.createKey(this.getRef(item));
-	}
-
-	protected createKeyByQuery(
-		queryRef: string,
+	protected createQueryKey(
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) {
-		return `${this.createQueryKeyNamespace(queryRef)}:${this.createQueryKeyHeader(parentRef, args)}`;
+		return `${this.createQueryKeyPrefix(queryRef.toString())}:${this.createQueryKeySuffix(queryRef, parentRef, args)}`;
 	}
 
-	protected createQueryKeyNamespace(queryRef: string) {
+	protected createQueryKeyPrefix(queryRef: string) {
 		return `${this.type}:${queryRef}:${this.getRevision()}`;
 	}
 
-	protected createQueryKeyHeader(parentRef: ParentRef, args?: Record<string, unknown>) {
-		const encodedArgs = encodeArgs(this.serializer, args);
-		const encodedParentRef = encodeValue(this.serializer, parentRef);
+	protected createQueryKeySuffix(
+		queryRef: CacheRef<unknown, unknown, unknown>,
+		parentRef: ParentRef,
+		args?: Record<string, unknown>,
+	) {
+		const encodedArgs = encodeArgs(queryRef.type, queryRef.field, this.getSchema(), args);
+		const encodedParentRef = encodeRef(parentRef);
 		return `parent#${encodedParentRef}#args#${encodedArgs}`;
 	}
 
+	protected createQueryKeyRegExpMatcher(): RegExp;
 	protected createQueryKeyRegExpMatcher(
-		queryRef: string,
-		parentRef: NonNullable<ParentRef>,
-		args: Record<string, unknown>,
+		queryRef: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
+	): RegExp;
+	protected createQueryKeyRegExpMatcher(
+		queryRef?: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
 	) {
-		const parentMatcher = encodeValue(this.serializer, parentRef, '.*');
-		const argsMatcher = encodeArgs(this.serializer, args, '.*');
-		const queryRefMatcher = queryRef === '*' ? '.*' : queryRef;
-		const pattern = `^${this.createQueryKeyNamespace(queryRefMatcher)}:parent#${parentMatcher}#args#.*${argsMatcher}.*`;
+		const wildcard = '.*';
+		if (queryRef === undefined) {
+			const pattern = `^${this.createQueryKeyPrefix(wildcard)}:parent#${wildcard}#args#${wildcard}`;
+			return new RegExp(pattern);
+		}
+		const parentMatcher = isWildcardOrUndefined(parentRef) ? wildcard : encodeRef(parentRef);
+		const argsMatcher = isWildcardOrUndefined(args)
+			? wildcard
+			: encodeArgs(queryRef.type, queryRef.field, this.getSchema(), args, {
+					kind: 'WILDCARD',
+					value: wildcard,
+				});
+		const pattern = `^${this.createQueryKeyPrefix(queryRef.toString())}:parent#${parentMatcher}#args#${wildcard}${argsMatcher}${wildcard}`;
 		return new RegExp(pattern);
 	}
 
+	protected createQueryKeyGlobMatcher(): string;
 	protected createQueryKeyGlobMatcher(
-		queryRef: string,
-		parentRef: NonNullable<ParentRef>,
-		args: Record<string, unknown>,
+		queryRef: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
+	): string;
+	protected createQueryKeyGlobMatcher(
+		queryRef?: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
 	) {
-		const parentMatcher = encodeValue(this.serializer, parentRef, '*');
-		const argsMatcher = encodeArgs(this.serializer, args, '*');
-		return `${this.createQueryKeyNamespace(queryRef)}:parent#${parentMatcher}#args#*${argsMatcher}*`;
+		const wildcard = '*';
+		if (queryRef === undefined) {
+			return `${this.createQueryKeyPrefix(wildcard)}:parent#${wildcard}#args#${wildcard}`;
+		}
+		const parentMatcher = isWildcardOrUndefined(parentRef) ? wildcard : encodeRef(parentRef);
+		const argsMatcher = isWildcardOrUndefined(args)
+			? wildcard
+			: encodeArgs(queryRef.type, queryRef.field, this.getSchema(), args, {
+					kind: 'WILDCARD',
+					value: wildcard,
+				});
+		return `${this.createQueryKeyPrefix(queryRef.toString())}:parent#${parentMatcher}#args#${wildcard}${argsMatcher}${wildcard}`;
 	}
 
 	protected getRef(root: Item): ItemRef {
@@ -280,7 +316,7 @@ export abstract class StoreAdapter<Item> {
 		}
 
 		if (typeof root === 'object' && 'id' in root) {
-			validateRefType(root.id);
+			assertValidRefType(root.id);
 			return root.id.toString();
 		}
 
@@ -307,11 +343,20 @@ export abstract class StoreAdapter<Item> {
 		return `r${version}`;
 	}
 
-	protected parseItem(value: string): Item {
-		return this.serializer.parse(value);
+	protected parseItem(value: string): Item | null {
+		try {
+			return this.options.parse(value);
+		} catch (err) {
+			log.warn(err, `Failed to parse item ${value}, returning null`);
+			return null;
+		}
 	}
 
-	protected stringifyItem(item: Item) {
-		return this.serializer.stringify(item);
+	protected stringifyItem(item: Item): string {
+		return this.options.serialize(item);
 	}
+}
+
+function isWildcardOrUndefined(value: unknown): value is '*' | undefined {
+	return value === '*' || value === undefined;
 }

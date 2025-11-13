@@ -1,4 +1,4 @@
-import type { ItemRef } from './ref.ts';
+import type { ItemRef, RefCompatibleRoot } from './ref.ts';
 
 /**
  * Default options for cache stores
@@ -14,17 +14,18 @@ export interface DefaultStoreOptions {
 /**
  * Configuration options for cache stores
  */
-export interface StoreOptions<Root> extends DefaultStoreOptions {
+export type StoreOptions<Source> = {
 	/** Manual cache version for invalidation */
 	revision?: number;
 	/** Function to extract object reference id */
-	getRef?: (root: Root) => ItemRef;
-}
-
-/**
- * Required configuration options for cache stores
- */
-export interface RequiredStoreOptions<Root> extends StoreOptions<Root> {
-	/** Function to extract object reference id */
-	getRef: (root: Root) => ItemRef;
-}
+	getRef?: (root: Source) => ItemRef;
+	ttl?: number;
+	serialize: (value: Source) => string;
+	parse: (value: string) => Source;
+} & (Source extends RefCompatibleRoot
+	? {
+			getRef: (source: Source) => ItemRef;
+		}
+	: {
+			getRef: (source: Source) => ItemRef;
+		});

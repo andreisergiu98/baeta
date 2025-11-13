@@ -1,4 +1,4 @@
-import { createSerializer, type StoreOptions } from '@baeta/extension-cache';
+import type { StoreAdapterOptions } from '@baeta/extension-cache';
 import test from '@baeta/testing';
 import { runTestsForStoreAdapter, type TestItem } from '@baeta/tests-cache-stores';
 import KeyvEtcd from '@keyv/etcd';
@@ -8,9 +8,8 @@ import { KeyvStoreAdapter } from './keyv-store-adapter.ts';
 const etcd = new KeyvEtcd('http://localhost:22379');
 const keyv = new Keyv({ store: etcd });
 
-function createStoreAdapter(options: StoreOptions<TestItem>) {
-	const serializer = createSerializer();
-	return new KeyvStoreAdapter(keyv, serializer, options, 'test');
+function createStoreAdapter(options: StoreAdapterOptions<TestItem>) {
+	return new KeyvStoreAdapter(keyv, options);
 }
 
 test.beforeEach(async () => {
@@ -23,6 +22,5 @@ test.after(async () => {
 
 runTestsForStoreAdapter(createStoreAdapter, test, {
 	name: 'KeyvStoreAdapter',
-	serializer: createSerializer(),
 	testTtl: true,
 });

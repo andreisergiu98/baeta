@@ -2310,6 +2310,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-encoding": "workspace:^"
     "@baeta/util-log": "workspace:^"
@@ -2317,7 +2318,6 @@ __metadata:
     flat: "npm:^6.0.1"
     graphql: "npm:^16.12.0"
     minimatch: "npm:^10.1.1"
-    superjson: "npm:^2.2.5"
     typescript: "npm:^5.9.3"
   peerDependencies:
     "@baeta/core": "workspace:^"
@@ -2597,7 +2597,12 @@ __metadata:
     "@baeta/extension-cache": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@graphql-tools/schema": "npm:^10.0.26"
+    graphql: "npm:^16.12.0"
+    graphql-scalars: "npm:^1.25.0"
+    graphql-tag: "npm:^2.12.6"
     typescript: "npm:^5.9.3"
+    zod: "npm:^4.1.12"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
   languageName: unknown
@@ -9949,15 +9954,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-anything@npm:^4":
-  version: 4.0.5
-  resolution: "copy-anything@npm:4.0.5"
-  dependencies:
-    is-what: "npm:^5.2.0"
-  checksum: 10/1ee7e6f55c1016a47871ecd09aa765ca825c1ec89c46e6f58686016c80c6fe3d36452a6010d8498c766ea5d60bc5d892d9511b41310a7355b48ac10b39c90c9a
-  languageName: node
-  linkType: hard
-
 "copy-webpack-plugin@npm:^11.0.0":
   version: 11.0.0
   resolution: "copy-webpack-plugin@npm:11.0.0"
@@ -13768,13 +13764,6 @@ __metadata:
   version: 1.2.4
   resolution: "is-url@npm:1.2.4"
   checksum: 10/100e74b3b1feab87a43ef7653736e88d997eb7bd32e71fd3ebc413e58c1cbe56269699c776aaea84244b0567f2a7d68dfaa512a062293ed2f9fdecb394148432
-  languageName: node
-  linkType: hard
-
-"is-what@npm:^5.2.0":
-  version: 5.5.0
-  resolution: "is-what@npm:5.5.0"
-  checksum: 10/d53a6ea1aebf953f3bcf711a28e8463bfe79fc0e4e87575d77c692a30fd3d98f87b88d4c006c06753bf85f771c9d2c1d05b2c6b03c246883261fe190526195d9
   languageName: node
   linkType: hard
 
@@ -19850,15 +19839,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"superjson@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "superjson@npm:2.2.5"
-  dependencies:
-    copy-anything: "npm:^4"
-  checksum: 10/0016a841ab51c02abada4a321561dbfdbd9cf2d739fff44e036e2247b909f438d3c0b4897fedab5581251dae293af2ac96e276376e8508d603505d5d9248d3a4
-  languageName: node
-  linkType: hard
-
 "supertap@npm:^3.0.1":
   version: 3.0.1
   resolution: "supertap@npm:3.0.1"
@@ -21616,7 +21596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^4.1.8":
+"zod@npm:^4.1.12, zod@npm:^4.1.8":
   version: 4.1.12
   resolution: "zod@npm:4.1.12"
   checksum: 10/c5f04e6ac306515c4db6ef73cf7705f521c7a2107c8c8912416a0658d689f361db9bee829b0bf01ef4a22492f1065c5cbcdb523ce532606ac6792fd714f3c326

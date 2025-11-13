@@ -16,8 +16,8 @@ export type RefCompatibleRoot = { id: string | number | bigint } | { [key: strin
  * Cache reference for a type field or query
  */
 export class CacheRef<_Result, _Root, _Args> {
-	private readonly type: string;
-	private readonly field: string;
+	readonly type: string;
+	readonly field: string;
 
 	constructor(type: string, field: string) {
 		this.type = type;
@@ -25,24 +25,19 @@ export class CacheRef<_Result, _Root, _Args> {
 	}
 
 	toString() {
-		return `${this.type}.${this.field}`;
+		return `${this.type}:${this.field}`;
 	}
 }
 
 export function getRefFallback(root: unknown) {
-	if (root == null) {
-		return undefined;
-	}
-
-	if (typeof root === 'object' && 'id' in root) {
-		validateRefType(root.id);
+	if (typeof root === 'object' && root != null && 'id' in root) {
+		assertValidRefType(root.id);
 		return root.id.toString();
 	}
-
 	return undefined;
 }
 
-export function validateRefType(ref: unknown): asserts ref is string | number | bigint {
+export function assertValidRefType(ref: unknown): asserts ref is string | number | bigint {
 	if (typeof ref !== 'string' && typeof ref !== 'number' && typeof ref !== 'bigint') {
 		throw new TypeError(
 			'Reference must be string, number or bigint. Define getRef function in cache options',

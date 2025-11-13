@@ -1,3 +1,4 @@
+import type { GraphQLSchema } from 'graphql';
 import type { FieldBuilder } from './field-builder.ts';
 import type { ModuleBuilder } from './module-builder.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
@@ -15,6 +16,24 @@ interface EditableBuilderLike {
 
 export abstract class Extension<Settings = unknown> {
 	abstract readonly stateKey: symbol;
+
+	protected schema: GraphQLSchema | null = null;
+
+	setSchema(schema: GraphQLSchema) {
+		if (this.schema != null) {
+			throw new Error(`Schema already set for extension ${this.constructor.name}`);
+		}
+		this.schema = schema;
+	}
+
+	getSchema() {
+		if (this.schema == null) {
+			throw new Error(
+				`getSchema must be called after the schema is built for extension ${this.constructor.name}`,
+			);
+		}
+		return this.schema;
+	}
 
 	getFieldExtensions<Result, Source, Context, Args, Info>(
 		_builder: FieldBuilder<Result, Source, Context, Args, Info>,

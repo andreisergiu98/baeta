@@ -91,6 +91,9 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	if (options.pruneSchema) {
 		schema = pruneSchema(schema);
 	}
+	for (const ext of extensions) {
+		ext.setSchema(schema);
+	}
 	return {
 		schema,
 	};

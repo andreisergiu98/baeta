@@ -1,6 +1,4 @@
-import type { Serializer } from './serializer.ts';
-import type { StoreAdapter } from './store-adapter.ts';
-import type { StoreOptions } from './store-options.ts';
+import type { StoreAdapter, StoreAdapterOptions } from './store-adapter.ts';
 
 /**
  * Base class for cache storage implementations
@@ -13,10 +11,5 @@ export abstract class Store {
 	 * @param type - Type name for the cached items
 	 * @param hash - Unique hash for the type
 	 */
-	abstract createStoreAdapter<T>(
-		serializer: Serializer,
-		options: StoreOptions<T>,
-		type: string,
-		hash: string,
-	): StoreAdapter<T>;
+	abstract createStoreAdapter<T>(options: StoreAdapterOptions<T>): StoreAdapter<T>;
 }

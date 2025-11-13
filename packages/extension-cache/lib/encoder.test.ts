@@ -1,6 +1,6 @@
 import test from '@baeta/testing';
+import { type TestItemArgs, testCacheSchema } from '@baeta/tests-cache-stores';
 import { encodeBase64Url } from '@baeta/util-encoding';
-import SuperJSON from 'superjson';
 import {
 	encodeValue as baseEncodeValue,
 	encodeArgs,
@@ -8,70 +8,95 @@ import {
 	isSafeString,
 } from './encoder.ts';
 
-const serializer = new SuperJSON();
-
 function encodeValue(value: unknown, catchAll?: string) {
-	return baseEncodeValue(serializer, value, catchAll);
+	const result = baseEncodeValue(
+		value,
+		catchAll ? { kind: 'WILDCARD', value: catchAll } : undefined,
+	);
+	return result.value;
 }
 
 class Class {
 	a = 1;
 	b = 1;
-
 	getTime() {
 		return new Date();
 	}
 }
 
+const global = globalThis as typeof globalThis & {
+	Buffer: any;
+	URL: any;
+	crypto: {
+		randomUUID: () => string;
+	};
+};
+
+const Buffer = global.Buffer;
+const URL = global.URL;
+
 test('encodeArgs flattens and encodes object properties', (t) => {
 	const date = new Date();
-	const classInstance = new Class();
-	const urlEncoded = encodeBase64Url('"https://google.com/"');
-	const bufferEncoded = encodeBase64Url('[116,101,115,116]');
-
-	const args = {
-		array: [1, 2, { b: [1, 2, { c: [1] }] }],
-		a: {
-			b: { c: date, test: classInstance, bint: BigInt(99999999999999) },
-			// @ts-expect-error URL is a node global
-			url: new URL('https://google.com'),
-			buffer: {
-				// @ts-expect-error Buffer is a node global
-				value: Buffer.from('test'),
+	const args: TestItemArgs = {
+		byte: Buffer.from('test'),
+		input: {
+			byte: Buffer.from('test'),
+			url: new URL('https://example.com'),
+			dateTime: date,
+			value: 'test',
+			nested: {
+				byte: Buffer.from('test'),
+				url: new URL('https://example.com'),
+				dateTime: date,
+				value: 'test',
 			},
 		},
 	};
-	const result = encodeArgs(serializer, args);
-	t.is(
-		result,
-		`_a_b_bint#_99999999999999,_a_b_c#_${date.getTime()},_a_b_test_a#_1,_a_b_test_b#_1,_a_buffer_value#enc_${bufferEncoded},_a_url#enc_${urlEncoded},_array_0#_1,_array_1#_2,_array_2_b_0#_1,_array_2_b_1#_2,_array_2_b_2_c_0#_1`,
-	);
+	const flattenedArgs = {
+		_byte: `enc_${encodeBase64Url('{"type":"Buffer","data":[116,101,115,116]}')}`,
+		_input_byte: `enc_${encodeBase64Url('{"type":"Buffer","data":[116,101,115,116]}')}`,
+		_input_dateTime: `enc_${encodeBase64Url(`"${date.toISOString()}"`)}`,
+		_input_nested_byte: `enc_${encodeBase64Url('{"type":"Buffer","data":[116,101,115,116]}')}`,
+		_input_nested_dateTime: `enc_${encodeBase64Url(`"${date.toISOString()}"`)}`,
+		_input_nested_url: `enc_${encodeBase64Url('https://example.com/')}`,
+		_input_nested_value: '_test',
+		_input_url: `enc_${encodeBase64Url('https://example.com/')}`,
+		_input_value: '_test',
+	};
+	const encodedEntries = Object.entries(flattenedArgs)
+		.map(([key, value]) => [key, value] as const)
+		.map(([key, value]) => `${key}#${value}`)
+		.join(',');
+	const result = encodeArgs('Query', 'item', testCacheSchema, args as Record<string, unknown>);
+	t.deepEqual(result, encodedEntries);
 });
 
 test('encodeValue handles different types', (t) => {
 	t.is(encodeValue(null), 'null');
-	t.is(encodeValue(undefined), 'null');
-	t.is(encodeValue(''), 'empty');
+	t.is(encodeValue(undefined), 'undefined');
+	t.is(encodeValue(''), 'blank');
 	t.is(encodeValue('*'), 'star');
 	t.is(encodeValue('simple'), '_simple');
 	t.is(encodeValue(123), '_123');
 	t.is(encodeValue(true), '_true');
-	t.is(encodeValue(Symbol()), 'unsupported');
+	t.throws(() => encodeValue(Symbol()));
 
 	const date = new Date();
-	t.is(encodeValue(date), `_${date.getTime()}`);
-
-	// @ts-expect-error URL is a node global
-	t.not(encodeValue(new URL('https://google.com')), 'unsupported');
-	// @ts-expect-error Buffer is a node global
-	t.not(encodeValue(Buffer.from('test')), 'unsupported');
-	t.not(encodeValue(new Map([[1, 2]])), 'unsupported');
-	t.not(encodeValue(new Class()), 'unsupported');
+	t.is(encodeValue(date), `enc_${encodeBase64Url(`"${date.toISOString()}"`)}`);
+	const url = new URL('https://example.com');
+	t.is(encodeValue(url), `enc_${encodeBase64Url('"https://example.com/"')}`);
+	const buffer = Buffer.from('test');
+	t.is(encodeValue(buffer), `enc_${encodeBase64Url(`{"type":"Buffer","data":[116,101,115,116]}`)}`);
+	const map = new Map([[1, 2]]);
+	t.is(encodeValue(map), `enc_${encodeBase64Url('{}')}`);
+	const classInstance = new Class();
+	t.is(encodeValue(classInstance), `enc_${encodeBase64Url('{"a":1,"b":1}')}`);
 });
 
 test('encodeValue with catchAll parameter', (t) => {
-	t.is(encodeValue(undefined, '*'), null);
-	t.is(encodeValue('', '*'), null);
+	t.is(encodeValue(null, '*'), 'null');
+	t.is(encodeValue('', '*'), 'blank');
+	t.is(encodeValue(undefined, '*'), '*');
 	t.is(encodeValue('*', '*'), '*');
 });
 

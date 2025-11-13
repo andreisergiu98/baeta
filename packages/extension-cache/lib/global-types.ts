@@ -5,16 +5,11 @@ import type {
 	RequiredCacheMiddlewareOptions,
 } from './middleware-options.ts';
 import type { CacheRef, RefCompatibleRoot } from './ref.ts';
-import type { CacheQueryMatching, StoreAdapter } from './store-adapter.ts';
-import type { RequiredStoreOptions, StoreOptions } from './store-options.ts';
+import type { CacheQueryMatcher, StoreAdapter } from './store-adapter.ts';
+import type { StoreOptions } from './store-options.ts';
 
 /** Utility type to infer the base type of a resolver */
 export type TypeGetter<T> = NonNullable<T> extends Array<infer G> ? NonNullable<G> : NonNullable<T>;
-
-/** Arguments for $createCache method */
-export type CreateCacheArgs<Source> = Source extends RefCompatibleRoot
-	? [options?: StoreOptions<Source>]
-	: [options: RequiredStoreOptions<Source>];
 
 /** Arguments for $useCache method */
 export type UseCacheArgs<Result, Source> = Source extends RefCompatibleRoot
@@ -32,7 +27,7 @@ declare global {
 			/**
 			 * Creates a cache store for a specific type.
 			 *
-			 * @param args - Cache configuration arguments
+			 * @param options - Cache configuration arguments
 			 * @returns Store for type
 			 *
 			 * @example
@@ -40,7 +35,7 @@ declare global {
 			 * const userCache = User.$createCache();
 			 * ```
 			 */
-			$createCache: (...args: CreateCacheArgs<Source>) => StoreAdapter<Source>;
+			$createCache: (options: StoreOptions<Source>) => StoreAdapter<Source>;
 		}
 
 		export interface FieldExtensions<
@@ -74,7 +69,7 @@ declare global {
 			 */
 			$cacheClear: (
 				store: StoreAdapter<TypeGetter<Result>>,
-				matcher?: CacheQueryMatching<Args>,
+				matcher?: CacheQueryMatcher<Args>,
 			) => Promise<void>;
 			/**
 			 * Enables caching for the resolver

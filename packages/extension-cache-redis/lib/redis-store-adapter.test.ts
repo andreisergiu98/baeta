@@ -1,4 +1,4 @@
-import { createSerializer, type StoreOptions } from '@baeta/extension-cache';
+import type { StoreAdapterOptions } from '@baeta/extension-cache';
 import test from '@baeta/testing';
 import { runTestsForStoreAdapter, type TestItem } from '@baeta/tests-cache-stores';
 import Redis from 'ioredis';
@@ -11,9 +11,8 @@ const client = new Redis({
 	maxRetriesPerRequest: 0, // Fail fast in tests
 });
 
-function createStoreAdapter(options: StoreOptions<TestItem>) {
-	const serializer = createSerializer();
-	return new RedisStoreAdapter(client, serializer, options, 'test');
+function createStoreAdapter(options: StoreAdapterOptions<TestItem>) {
+	return new RedisStoreAdapter(client, options);
 }
 
 test.beforeEach(async () => {
@@ -26,6 +25,5 @@ test.after(async () => {
 
 runTestsForStoreAdapter(createStoreAdapter, test, {
 	name: 'RedisStoreAdapter',
-	serializer: createSerializer(),
 	testTtl: true,
 });

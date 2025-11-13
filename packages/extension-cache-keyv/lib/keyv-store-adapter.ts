@@ -1,17 +1,17 @@
 import {
+	type CacheRef,
 	type ItemRef,
 	type ParentRef,
-	type Serializer,
 	StoreAdapter,
-	type StoreOptions,
+	type StoreAdapterOptions,
 } from '@baeta/extension-cache';
 import type Keyv from 'keyv';
 
 export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 	private readonly client: Keyv;
 
-	constructor(client: Keyv, serializer: Serializer, options: StoreOptions<Item>, type: string) {
-		super(serializer, options, type);
+	constructor(client: Keyv, options: StoreAdapterOptions<Item>) {
+		super(options);
 		this.client = client;
 		if (this.client.iterator == null) {
 			throw new Error('Keyv client does not support iterator');
@@ -23,7 +23,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 			return null;
 		}
 
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		const result = await this.client.get(keys);
 
 		return result.map((item) => {
@@ -35,7 +35,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	save = async (item: Item) => {
-		const key = this.createKeyByItem(item);
+		const key = this.createItemKey(item);
 		await this.client.set(key, this.stringifyItem(item), this.getTtl());
 	};
 
@@ -48,7 +48,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 			return;
 		}
 
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		await this.client.delete(keys);
 
 		if (evictQueries) {
@@ -57,21 +57,21 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected saveQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		meta: string[],
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 		await this.client.set(key, meta, this.getTtl());
 	};
 
 	protected loadQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 		const meta = await this.client.get(key).then((res) => (res ?? []) as string[]);
 		if (meta.length === 0) {
 			return null;
@@ -80,7 +80,7 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected deleteQueriesByRef = async (
-		queryRef?: string,
+		queryRef?: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
@@ -98,13 +98,16 @@ export class KeyvStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected async searchQueries(
-		queryRef = '*',
-		parentRef: NonNullable<ParentRef> = '*',
-		args: Record<string, unknown> = {},
+		queryRef?: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
 	) {
 		const keys: string[] = [];
-		const matcher = this.createQueryKeyRegExpMatcher(queryRef, parentRef, args);
-		const namespace = queryRef === '*' ? '' : this.createQueryKeyNamespace(queryRef);
+		const matcher =
+			queryRef == null
+				? this.createQueryKeyRegExpMatcher()
+				: this.createQueryKeyRegExpMatcher(queryRef, parentRef, args);
+		const namespace = queryRef == null ? '' : this.createQueryKeyPrefix(queryRef.toString());
 
 		if (this.client.iterator == null) {
 			throw new Error('Keyv client does not support iterator');

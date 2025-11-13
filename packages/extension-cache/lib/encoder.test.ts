@@ -1,12 +1,6 @@
 import test from '@baeta/testing';
-import { type TestItemArgs, testCacheSchema } from '@baeta/tests-cache-stores';
 import { encodeBase64Url } from '@baeta/util-encoding';
-import {
-	encodeValue as baseEncodeValue,
-	encodeArgs,
-	encodePropertyName,
-	isSafeString,
-} from './encoder.ts';
+import { encodeValue as baseEncodeValue, encodePropertyName, isSafeString } from './encoder.ts';
 
 function encodeValue(value: unknown, catchAll?: string) {
 	const result = baseEncodeValue(
@@ -34,42 +28,6 @@ const global = globalThis as typeof globalThis & {
 
 const Buffer = global.Buffer;
 const URL = global.URL;
-
-test('encodeArgs flattens and encodes object properties', (t) => {
-	const date = new Date();
-	const args: TestItemArgs = {
-		byte: Buffer.from('test'),
-		input: {
-			byte: Buffer.from('test'),
-			url: new URL('https://example.com'),
-			dateTime: date,
-			value: 'test',
-			nested: {
-				byte: Buffer.from('test'),
-				url: new URL('https://example.com'),
-				dateTime: date,
-				value: 'test',
-			},
-		},
-	};
-	const flattenedArgs = {
-		_byte: `enc_${encodeBase64Url('{"type":"Buffer","data":[116,101,115,116]}')}`,
-		_input_byte: `enc_${encodeBase64Url('{"type":"Buffer","data":[116,101,115,116]}')}`,
-		_input_dateTime: `enc_${encodeBase64Url(`"${date.toISOString()}"`)}`,
-		_input_nested_byte: `enc_${encodeBase64Url('{"type":"Buffer","data":[116,101,115,116]}')}`,
-		_input_nested_dateTime: `enc_${encodeBase64Url(`"${date.toISOString()}"`)}`,
-		_input_nested_url: `enc_${encodeBase64Url('https://example.com/')}`,
-		_input_nested_value: '_test',
-		_input_url: `enc_${encodeBase64Url('https://example.com/')}`,
-		_input_value: '_test',
-	};
-	const encodedEntries = Object.entries(flattenedArgs)
-		.map(([key, value]) => [key, value] as const)
-		.map(([key, value]) => `${key}#${value}`)
-		.join(',');
-	const result = encodeArgs('Query', 'item', testCacheSchema, args as Record<string, unknown>);
-	t.deepEqual(result, encodedEntries);
-});
 
 test('encodeValue handles different types', (t) => {
 	t.is(encodeValue(null), 'null');

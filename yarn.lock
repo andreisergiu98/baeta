@@ -2310,7 +2310,6 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/testing": "workspace:^"
-    "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-encoding": "workspace:^"
     "@baeta/util-log": "workspace:^"

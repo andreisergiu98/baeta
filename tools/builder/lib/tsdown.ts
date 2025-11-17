@@ -6,6 +6,7 @@ export function defineConfig(config: UserConfig) {
 		dts: true,
 		clean: true,
 		sourcemap: true,
+		fixedExtension: false,
 		...config,
 	});
 }

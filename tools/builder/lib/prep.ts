@@ -1,25 +1,6 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
-
-interface Pkg {
-	name?: string;
-	type?: string;
-	sideEffects?: boolean;
-	exports?: Exports;
-	publishConfig?: PkgPublishConfig;
-}
-
-interface PkgPublishConfig {
-	exports?: Exports;
-}
-
-type Exports = Record<string, PkgExport>;
-
-interface PkgExport {
-	types?: string;
-	import?: string;
-	require?: string;
-}
+import { loadPackageJson, type PkgExport } from './package-json.ts';
 
 interface ForgedPkg {
 	name: string;
@@ -52,28 +33,7 @@ async function writeManifest(files: string[]) {
 	await fs.writeFile(manifestPath, JSON.stringify(manifest), 'utf-8');
 }
 
-async function removeNestedPackages() {
-	const manifest = await getManifest();
-
-	if (manifest == null) {
-		return;
-	}
-
-	const promises = [fs.unlink(manifestPath)];
-
-	for (const file of manifest.files) {
-		promises.push(fs.unlink(file));
-	}
-
-	await Promise.all(promises);
-}
-
-async function loadPackageJson(): Promise<Pkg> {
-	const content = await fs.readFile(`${process.cwd()}/package.json`, 'utf-8');
-	return JSON.parse(content);
-}
-
-function forgePackage(pkgName: string, entry: string, exports: PkgExport) {
+function forgePackage(pkgName: string, entry: string, pkgExport: PkgExport) {
 	const name = join(pkgName, entry);
 
 	if (name === pkgName) {
@@ -82,27 +42,15 @@ function forgePackage(pkgName: string, entry: string, exports: PkgExport) {
 
 	const forged: ForgedPkg = {
 		name,
+		types: join('../', pkgExport.types),
 	};
-
-	if (exports.types) {
-		forged.types = join('../', exports.types);
-	}
 
 	return forged;
 }
 
-async function createNestedPackages() {
+async function createNestedPackages(): Promise<string[]> {
 	const pkg = await loadPackageJson();
-
-	if (pkg.name == null) {
-		return await writeManifest([]);
-	}
-
-	const pkgExports = pkg.publishConfig?.exports || pkg.exports;
-
-	if (pkgExports == null) {
-		return await writeManifest([]);
-	}
+	const pkgExports = pkg.publishConfig.exports;
 
 	const entries = Object.entries(pkgExports);
 	const created: string[] = [];
@@ -130,23 +78,19 @@ async function createNestedPackages() {
 		promises.push(fs.writeFile(dist, content, 'utf-8'));
 	}
 
-	promises.push(writeManifest(created));
 	await Promise.all(promises);
 	return created;
 }
 
-function copyReadmeAndLicense() {
-	const readmePath = join(process.cwd(), '../../README.md');
-	const readmeDist = join(process.cwd(), 'README.md');
-	const licensePath = join(process.cwd(), '../../LICENSE');
-	const licenseDist = join(process.cwd(), 'LICENSE');
-	return Promise.all([fs.copyFile(readmePath, readmeDist), fs.copyFile(licensePath, licenseDist)]);
-}
-
-function removeReadmeAndLicense() {
-	const readmeDist = join(process.cwd(), 'README.md');
-	const licenseDist = join(process.cwd(), 'LICENSE');
-	return Promise.all([fs.unlink(readmeDist), fs.unlink(licenseDist)]);
+async function copyReadmeAndLicense() {
+	const readmeFile = 'README.md';
+	const licenseFile = 'LICENSE';
+	const readmePath = join(process.cwd(), `../../${readmeFile}`);
+	const readmeDist = join(process.cwd(), readmeFile);
+	const licensePath = join(process.cwd(), `../../${licenseFile}`);
+	const licenseDist = join(process.cwd(), licenseFile);
+	await Promise.all([fs.copyFile(readmePath, readmeDist), fs.copyFile(licensePath, licenseDist)]);
+	return [readmeFile, licenseFile];
 }
 
 export async function prepGenerate() {
@@ -157,7 +101,9 @@ export async function prepGenerate() {
 		process.exit(1);
 	}
 
-	await Promise.all([copyReadmeAndLicense(), createNestedPackages()]);
+	const files = (await Promise.all([copyReadmeAndLicense(), createNestedPackages()])).flat();
+
+	await writeManifest(files);
 }
 
 export async function prepClean() {
@@ -166,5 +112,5 @@ export async function prepClean() {
 		console.error('[ERROR] No manifest found, nothing to clean.');
 		process.exit(1);
 	}
-	await Promise.all([removeNestedPackages(), removeReadmeAndLicense()]);
+	await Promise.all([...manifest.files.map((file) => fs.unlink(file)), fs.unlink(manifestPath)]);
 }

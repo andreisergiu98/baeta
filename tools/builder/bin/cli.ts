@@ -3,8 +3,10 @@
 import { glob } from 'node:fs/promises';
 import { execaCommand } from 'execa';
 import madge from 'madge';
+import { build } from 'tsdown';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import { checkExportFilesExist } from '../lib/check-dist.ts';
 import { getConfirmation } from '../lib/confirmation.ts';
 import { prepClean, prepGenerate } from '../lib/prep.ts';
 import { getPreReleaseTag } from '../lib/release-tag.ts';
@@ -33,8 +35,8 @@ yargs(hideBin(process.argv))
 			yargs.help(false);
 		},
 		async () => {
-			process.argv = process.argv.slice(0, 2).concat(process.argv.slice(3));
-			await import('tsdown/run');
+			await build();
+			await checkExportFilesExist();
 		},
 	)
 	.command(

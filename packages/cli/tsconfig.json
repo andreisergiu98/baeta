@@ -7,8 +7,7 @@
     "types": [
       "react",
       "node"
-    ],
-    "allowJs": true
+    ]
   },
   "exclude": [
     "dist"

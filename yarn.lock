@@ -1753,7 +1753,7 @@ __metadata:
     "@types/madge": "npm:^5.0.3"
     "@types/node": "npm:^22.19.1"
     "@types/prompts": "npm:^2.4.9"
-    "@types/yargs": "npm:^17.0.34"
+    "@types/yargs": "npm:^17.0.35"
     ansi-styles: "npm:^6.2.3"
     ava: "npm:^6.4.1"
     c8: "npm:^10.1.3"
@@ -1762,7 +1762,7 @@ __metadata:
     execa: "npm:^9.6.0"
     madge: "npm:^8.0.0"
     prompts: "npm:^2.4.2"
-    tsdown: "npm:^0.16.4"
+    tsdown: "npm:^0.16.5"
     typescript: "npm:^5.9.3"
     yargs: "npm:^18.0.0"
     zod: "npm:^4.1.12"
@@ -1785,8 +1785,8 @@ __metadata:
     "@baeta/util-path": "workspace:^"
     "@types/lodash.throttle": "npm:^4.1.9"
     "@types/node": "npm:^22.19.1"
-    "@types/react": "npm:^19.2.4"
-    "@types/yargs": "npm:^17.0.34"
+    "@types/react": "npm:^19.2.5"
+    "@types/yargs": "npm:^17.0.35"
     ansi-styles: "npm:^6.2.3"
     graphql: "npm:^16.12.0"
     ink: "npm:^6.5.0"
@@ -2002,13 +2002,13 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20251113.0"
+    "@cloudflare/workers-types": "npm:^4.20251117.0"
     "@hono/graphql-server": "npm:^0.7.0"
     graphql: "npm:^16.12.0"
-    hono: "npm:^4.10.5"
+    hono: "npm:^4.10.6"
     miniflare: "npm:^4.20251109.1"
     typescript: "npm:^5.9.3"
-    wrangler: "npm:^4.48.0"
+    wrangler: "npm:^4.47.0"
   languageName: unknown
   linkType: soft
 
@@ -2019,14 +2019,14 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20251113.0"
+    "@cloudflare/workers-types": "npm:^4.20251117.0"
     "@xterm/headless": "npm:^5.5.0"
     graphql: "npm:^16.12.0"
     graphql-yoga: "npm:^5.16.2"
-    hono: "npm:^4.10.5"
+    hono: "npm:^4.10.6"
     miniflare: "npm:^4.20251109.1"
     typescript: "npm:^5.9.3"
-    wrangler: "npm:^4.48.0"
+    wrangler: "npm:^4.47.0"
   languageName: unknown
   linkType: soft
 
@@ -2239,7 +2239,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20251113.0"
+    "@cloudflare/workers-types": "npm:^4.20251117.0"
     graphql: "npm:^16.12.0"
     miniflare: "npm:^4.20251109.1"
     typescript: "npm:^5.9.3"
@@ -2386,7 +2386,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20251113.0"
+    "@cloudflare/workers-types": "npm:^4.20251117.0"
     "@types/node": "npm:^22.19.1"
     graphql: "npm:^16.12.0"
     typescript: "npm:^5.9.3"
@@ -2520,7 +2520,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20251113.0"
+    "@cloudflare/workers-types": "npm:^4.20251117.0"
     graphql: "npm:^16.12.0"
     graphql-ws: "npm:^6.0.6"
     typescript: "npm:^5.9.3"
@@ -2583,7 +2583,7 @@ __metadata:
   dependencies:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "npm:^22.19.1"
-    "@types/sinon": "npm:^20.0.0"
+    "@types/sinon": "npm:^21.0.0"
     ava: "npm:^6.4.1"
     c8: "npm:^10.1.3"
     madge: "npm:^8.0.0"
@@ -2677,7 +2677,7 @@ __metadata:
     "@docusaurus/theme-classic": "npm:^3.9.2"
     "@docusaurus/types": "npm:^3.9.2"
     "@mdx-js/react": "npm:^3.1.1"
-    "@types/react": "npm:^19.2.4"
+    "@types/react": "npm:^19.2.5"
     "@types/react-dom": "npm:^19.2.3"
     clsx: "npm:^2.1.1"
     prism-react-renderer: "npm:^2.4.1"
@@ -3100,10 +3100,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20251113.0":
-  version: 4.20251113.0
-  resolution: "@cloudflare/workers-types@npm:4.20251113.0"
-  checksum: 10/87630437621ce5e40db581136e944d5e1af4925975af822611869fc07a11eba1812735dbec3ddfef07aa52da143f6887e1f83b4846b64672b84ad21a965348b0
+"@cloudflare/workers-types@npm:^4.20251117.0":
+  version: 4.20251117.0
+  resolution: "@cloudflare/workers-types@npm:4.20251117.0"
+  checksum: 10/436b24a47befaa20c07a3063e1e6312448e5621808544292343ef9843271e7a65725daf64e25a4d189197218bd3e373d3fb56ca8c7330ed3f96927909bc3c4df
   languageName: node
   linkType: hard
 
@@ -7452,12 +7452,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^19.2.4":
-  version: 19.2.4
-  resolution: "@types/react@npm:19.2.4"
+"@types/react@npm:*, @types/react@npm:^19.2.5":
+  version: 19.2.5
+  resolution: "@types/react@npm:19.2.5"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10/99905270fe1ac5726f3447db5b8f4d5444e2a268cfd239bd3a379f65dc01d7ac6f8984f501e4edd4240e8533eaad30dd812a8443af7e356abb712aded427988e
+  checksum: 10/31067648e1380f6ddade8f586c7ff54db89c1b11e23cb307fb69e5bfceae22105721568e2eec15be2af03e63bf5fb6da4284b8621447d20ade7b7afab043b945
   languageName: node
   linkType: hard
 
@@ -7542,12 +7542,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/sinon@npm:^20.0.0":
-  version: 20.0.0
-  resolution: "@types/sinon@npm:20.0.0"
+"@types/sinon@npm:^21.0.0":
+  version: 21.0.0
+  resolution: "@types/sinon@npm:21.0.0"
   dependencies:
     "@types/sinonjs__fake-timers": "npm:*"
-  checksum: 10/abb8d86e1d44e1b618b555104a654730844dcb7bfb45bd7f0a83252cdcbcd167f4a0da8bac3dfd60621ad855582a8697cd695104b06c2aa497ecc789004660b7
+  checksum: 10/3add134347bd2b96c4d136bc41108553d31f2b4ca44c118ae69832d8bd9896d9faec07c08ba933cd25ba8699503303e8743d84fc8f5317c16b5cfb8245d0bc29
   languageName: node
   linkType: hard
 
@@ -7604,12 +7604,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/yargs@npm:^17.0.34, @types/yargs@npm:^17.0.8":
-  version: 17.0.34
-  resolution: "@types/yargs@npm:17.0.34"
+"@types/yargs@npm:^17.0.35, @types/yargs@npm:^17.0.8":
+  version: 17.0.35
+  resolution: "@types/yargs@npm:17.0.35"
   dependencies:
     "@types/yargs-parser": "npm:*"
-  checksum: 10/8e7907479e649e9115dcca94cb059dfe2322992ac5d29120f759564c078abfc13673a31f7ad86a3a5c9de7f241a4e3d70042ba38b794fd1601e44f9a1bc5cefd
+  checksum: 10/47bcd4476a4194ea11617ea71cba8a1eddf5505fc39c44336c1a08d452a0de4486aedbc13f47a017c8efbcb5a8aa358d976880663732ebcbc6dbcbbecadb0581
   languageName: node
   linkType: hard
 
@@ -10074,7 +10074,7 @@ __metadata:
     "@types/prompts": "npm:^2.4.9"
     "@types/semver": "npm:^7.7.1"
     "@types/shelljs": "npm:^0.8.17"
-    "@types/yargs": "npm:^17.0.34"
+    "@types/yargs": "npm:^17.0.35"
     fs-extra: "npm:^11.3.2"
     prompts: "npm:^2.4.2"
     semver: "npm:^7.7.3"
@@ -12914,10 +12914,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.10.5":
-  version: 4.10.5
-  resolution: "hono@npm:4.10.5"
-  checksum: 10/1ef72371c8d485f9c632fe4ae499fd7eb1b7add72422a110c61f78b593725ddca7544c77488fe52f15689355c056d50082c08356ed5eacca31d86c61866bbffe
+"hono@npm:^4.10.6":
+  version: 4.10.6
+  resolution: "hono@npm:4.10.6"
+  checksum: 10/a94a3780b934d2b9c9eb3d94bfd096717cd65beda007da2790db4af95ee49b6a8365fdc087c456ca749280b0d804381b51575d57169601042210f2401ba32f85
   languageName: node
   linkType: hard
 
@@ -15674,7 +15674,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"miniflare@npm:4.20251109.1, miniflare@npm:^4.20251109.1":
+"miniflare@npm:4.20251109.0":
+  version: 4.20251109.0
+  resolution: "miniflare@npm:4.20251109.0"
+  dependencies:
+    "@cspotcode/source-map-support": "npm:0.8.1"
+    acorn: "npm:8.14.0"
+    acorn-walk: "npm:8.3.2"
+    exit-hook: "npm:2.2.1"
+    glob-to-regexp: "npm:0.4.1"
+    sharp: "npm:^0.33.5"
+    stoppable: "npm:1.1.0"
+    undici: "npm:7.14.0"
+    workerd: "npm:1.20251109.0"
+    ws: "npm:8.18.0"
+    youch: "npm:4.1.0-beta.10"
+    zod: "npm:3.22.3"
+  bin:
+    miniflare: bootstrap.js
+  checksum: 10/6e8192d63678b135ca0c749ce4b4dfbbf477b9b72ad0bd4cf20f52b6bf1737d6a03ab13e20b5d794757337d3e6ed8a19c301a83c1f95b03181e9942adf879395
+  languageName: node
+  linkType: hard
+
+"miniflare@npm:^4.20251109.1":
   version: 4.20251109.1
   resolution: "miniflare@npm:4.20251109.1"
   dependencies:
@@ -16253,6 +16275,18 @@ __metadata:
     ms:
       optional: true
   checksum: 10/634d6c87481c08d5a7cc7bd6e6f7caf43d383572c921039e20b38869d6dfed018533332cfa940aaa494d23ca005f5713f161465cbeb92009de0c0db7dce7192f
+  languageName: node
+  linkType: hard
+
+"obug@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "obug@npm:2.0.0"
+  peerDependencies:
+    ms: ^2.0.0
+  peerDependenciesMeta:
+    ms:
+      optional: true
+  checksum: 10/6abd015db5221ef0c88a17cfbfffe7e43bda5723346d75e12f96972aa4ea6aaafea4f2d54dc64dc7923e43e7807bf835743f269920e1e60cf5867dde0cffa80f
   languageName: node
   linkType: hard
 
@@ -20280,9 +20314,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsdown@npm:^0.16.4":
-  version: 0.16.4
-  resolution: "tsdown@npm:0.16.4"
+"tsdown@npm:^0.16.5":
+  version: 0.16.5
+  resolution: "tsdown@npm:0.16.5"
   dependencies:
     ansis: "npm:^4.2.0"
     cac: "npm:^6.7.14"
@@ -20290,7 +20324,7 @@ __metadata:
     diff: "npm:^8.0.2"
     empathic: "npm:^2.0.0"
     hookable: "npm:^5.5.3"
-    obug: "npm:^1.0.0"
+    obug: "npm:^2.0.0"
     rolldown: "npm:1.0.0-beta.50"
     rolldown-plugin-dts: "npm:^0.17.7"
     semver: "npm:^7.7.3"
@@ -20298,7 +20332,7 @@ __metadata:
     tinyglobby: "npm:^0.2.15"
     tree-kill: "npm:^1.2.2"
     unconfig-core: "npm:^7.4.1"
-    unrun: "npm:^0.2.9"
+    unrun: "npm:^0.2.10"
   peerDependencies:
     "@arethetypeswrong/core": ^0.18.1
     "@vitejs/devtools": ^0.0.0-alpha.17
@@ -20321,7 +20355,7 @@ __metadata:
       optional: true
   bin:
     tsdown: dist/run.mjs
-  checksum: 10/64a9bff8519f332d720b61b6b20a02355f9030b8de6a4da33c804a6d4b62d64cd83d7fb8e67616ef967a3903947795d20733cc3406e3569c0b1f65354afc44d9
+  checksum: 10/4611dc7af15f753e40d3230a85f7bf613c358be9b283b2cf523a53862d986fc2b3822da783a05ca432e524017ed0992cba92957c591c9e3f588eaa4e5a33a4e5
   languageName: node
   linkType: hard
 
@@ -20790,9 +20824,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unrun@npm:^0.2.9":
-  version: 0.2.9
-  resolution: "unrun@npm:0.2.9"
+"unrun@npm:^0.2.10":
+  version: 0.2.10
+  resolution: "unrun@npm:0.2.10"
   dependencies:
     "@oxc-project/runtime": "npm:^0.97.0"
     rolldown: "npm:1.0.0-beta.50"
@@ -20803,7 +20837,7 @@ __metadata:
       optional: true
   bin:
     unrun: dist/cli.mjs
-  checksum: 10/b06b5316b2a29dd0f710661eafa2d596d499d60b241d9e9b41e88de9fbd4d1d2cf5c94e0c218b4b9fd85f8270c5c753b7a6c2ed56342a27d761d0d3c370471dd
+  checksum: 10/8033638a3f76b80a36fe9fc14b9566a7034d5ccff3b058b1e7f8d4b4ff598f91697d18adb8db9f42fdd6b74695f4ce0db1087ca3a0efa9a2414949b2f5cb692d
   languageName: node
   linkType: hard
 
@@ -21352,16 +21386,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrangler@npm:^4.48.0":
-  version: 4.48.0
-  resolution: "wrangler@npm:4.48.0"
+"wrangler@npm:^4.47.0":
+  version: 4.47.0
+  resolution: "wrangler@npm:4.47.0"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:0.4.0"
     "@cloudflare/unenv-preset": "npm:2.7.10"
     blake3-wasm: "npm:2.1.5"
     esbuild: "npm:0.25.4"
     fsevents: "npm:~2.3.2"
-    miniflare: "npm:4.20251109.1"
+    miniflare: "npm:4.20251109.0"
     path-to-regexp: "npm:6.3.0"
     unenv: "npm:2.0.0-rc.24"
     workerd: "npm:1.20251109.0"
@@ -21376,7 +21410,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 10/5ef85734e0677cc16d367b7bd1984a814f3fc9f05f7360bcd94e9cb2b04791150694d5f1fac3e900fa3292b8817e6a3f07a4c55eee8d905cf3a38f91e890edab
+  checksum: 10/34ea9fa8a28ea869ab60c8500929c528eb9e6c21912b49ca4700fff0a55f53df2831c955d0a61ab7cd365853dd8cb9b652f70eeb0ce49cbb230354e6c0b06613
   languageName: node
   linkType: hard
 

@@ -66,7 +66,7 @@
     "@docusaurus/plugin-client-redirects": "^3.9.2",
     "@docusaurus/plugin-sitemap": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
-    "@types/react": "^19.2.4",
+    "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "typedoc": "0.28.14",
     "typedoc-docusaurus-theme": "^1.4.2",

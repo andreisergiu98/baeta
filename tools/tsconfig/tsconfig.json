@@ -5,9 +5,10 @@
     "lib": [
       "es2024"
     ],
+    "noEmit": true,
+    "types": [],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
     "erasableSyntaxOnly": true,

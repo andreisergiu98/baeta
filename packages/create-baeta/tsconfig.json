@@ -1,15 +1,15 @@
 {
   "extends": "@baeta/tsconfig/tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "**/*.ts"
   ],
   "exclude": [
-    "dist",
-    "templates/**/*"
+    "dist"
   ]
 }

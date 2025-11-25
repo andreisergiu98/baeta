@@ -33,7 +33,7 @@
     "@apollo/server": "^4.12.2",
     "@baeta/core": "workspace:^",
     "@baeta/subscriptions-pubsub": "workspace:^",
-    "body-parser": "^2.2.0",
+    "body-parser": "^2.2.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "graphql": "^16.11.0",

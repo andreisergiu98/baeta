@@ -3,6 +3,14 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
+import type { ModuleCompilerFactory } from "@baeta/core/sdk";
+import type { Ctx, Info } from "./types.ts"
+import type { BaetaModuleTypes as BaetaDirectivesModuleTypes } from "./baeta-directives/typedef.ts"
+import type { BaetaModuleTypes as BaetaPaginationModuleTypes } from "./baeta-pagination/typedef.ts"
+import type { BaetaModuleTypes as ScalarsModuleTypes } from "./scalars/typedef.ts"
+import type { BaetaModuleTypes as UserPhotosPagesModuleTypes } from "./user-photos-pages/typedef.ts"
+import type { BaetaModuleTypes as UserPhotosModuleTypes } from "./user-photos/typedef.ts"
+import type { BaetaModuleTypes as UserModuleTypes } from "./user/typedef.ts"
 import baetaDirectives from "./baeta-directives/index.ts"
 import baetaPagination from "./baeta-pagination/index.ts"
 import scalars from "./scalars/index.ts"
@@ -10,4 +18,11 @@ import userPhotosPages from "./user-photos-pages/index.ts"
 import userPhotos from "./user-photos/index.ts"
 import user from "./user/index.ts"
 
-export default [baetaDirectives, baetaPagination, scalars, userPhotosPages, userPhotos, user];
+export default [
+    baetaDirectives satisfies ModuleCompilerFactory<Ctx, Info, BaetaDirectivesModuleTypes["Factories"]>,
+    baetaPagination satisfies ModuleCompilerFactory<Ctx, Info, BaetaPaginationModuleTypes["Factories"]>,
+    scalars satisfies ModuleCompilerFactory<Ctx, Info, ScalarsModuleTypes["Factories"]>,
+    userPhotosPages satisfies ModuleCompilerFactory<Ctx, Info, UserPhotosPagesModuleTypes["Factories"]>,
+    userPhotos satisfies ModuleCompilerFactory<Ctx, Info, UserPhotosModuleTypes["Factories"]>,
+    user satisfies ModuleCompilerFactory<Ctx, Info, UserModuleTypes["Factories"]>
+];

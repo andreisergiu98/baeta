@@ -3,7 +3,14 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
+import type { ModuleCompilerFactory } from "@baeta/core/sdk";
+import type { Ctx, Info } from "./types.ts"
+import type { BaetaModuleTypes as ComicModuleTypes } from "./comic/typedef.ts"
+import type { BaetaModuleTypes as MediaModuleTypes } from "./media/typedef.ts"
 import comic from "./comic/index.ts"
 import media from "./media/index.ts"
 
-export default [comic, media];
+export default [
+    comic satisfies ModuleCompilerFactory<Ctx, Info, ComicModuleTypes["Factories"]>,
+    media satisfies ModuleCompilerFactory<Ctx, Info, MediaModuleTypes["Factories"]>
+];

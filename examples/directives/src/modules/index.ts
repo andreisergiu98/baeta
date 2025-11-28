@@ -3,9 +3,20 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
+import type { ModuleCompilerFactory } from "@baeta/core/sdk";
+import type { Ctx, Info } from "./types.ts"
+import type { BaetaModuleTypes as BaetaDirectivesModuleTypes } from "./baeta-directives/typedef.ts"
+import type { BaetaModuleTypes as CustomInputDirectiveModuleTypes } from "./custom-input-directive/typedef.ts"
+import type { BaetaModuleTypes as CustomNativeDirectiveModuleTypes } from "./custom-native-directive/typedef.ts"
+import type { BaetaModuleTypes as UserModuleTypes } from "./user/typedef.ts"
 import baetaDirectives from "./baeta-directives/index.ts"
 import customInputDirective from "./custom-input-directive/index.ts"
 import customNativeDirective from "./custom-native-directive/index.ts"
 import user from "./user/index.ts"
 
-export default [baetaDirectives, customInputDirective, customNativeDirective, user];
+export default [
+    baetaDirectives satisfies ModuleCompilerFactory<Ctx, Info, BaetaDirectivesModuleTypes["Factories"]>,
+    customInputDirective satisfies ModuleCompilerFactory<Ctx, Info, CustomInputDirectiveModuleTypes["Factories"]>,
+    customNativeDirective satisfies ModuleCompilerFactory<Ctx, Info, CustomNativeDirectiveModuleTypes["Factories"]>,
+    user satisfies ModuleCompilerFactory<Ctx, Info, UserModuleTypes["Factories"]>
+];

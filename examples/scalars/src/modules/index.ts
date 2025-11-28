@@ -3,7 +3,14 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
+import type { ModuleCompilerFactory } from "@baeta/core/sdk";
+import type { Ctx, Info } from "./types.ts"
+import type { BaetaModuleTypes as ScalarsModuleTypes } from "./scalars/typedef.ts"
+import type { BaetaModuleTypes as UserModuleTypes } from "./user/typedef.ts"
 import scalars from "./scalars/index.ts"
 import user from "./user/index.ts"
 
-export default [scalars, user];
+export default [
+    scalars satisfies ModuleCompilerFactory<Ctx, Info, ScalarsModuleTypes["Factories"]>,
+    user satisfies ModuleCompilerFactory<Ctx, Info, UserModuleTypes["Factories"]>
+];

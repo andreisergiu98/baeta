@@ -15,7 +15,7 @@ const moduleMetadata = {
   typedef: {"kind":"Document","definitions":[{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":7,"end":15}},"directives":[],"loc":{"start":0,"end":15}},{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"UUID","loc":{"start":24,"end":28}},"directives":[],"loc":{"start":17,"end":28}}]} as unknown as DocumentNode
 }
 
-interface BaetaModuleTypes {
+export interface BaetaModuleTypes {
   Builders: {
   };
   Factories: {

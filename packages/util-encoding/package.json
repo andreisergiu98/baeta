@@ -49,6 +49,9 @@
       "ts": "module"
     }
   },
+  "dependencies": {
+    "js-base64": "^3.7.8"
+  },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",

@@ -38,11 +38,11 @@
     "graphql": "^16.12.0",
     "graphql-scalars": "^1.25.0",
     "graphql-ws": "^6.0.6",
-    "graphql-yoga": "^5.16.2",
+    "graphql-yoga": "^5.17.0",
     "ioredis": "^5.8.2",
     "prisma": "^6.19.0",
     "ws": "^8.18.3",
-    "zod": "^4.1.12"
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",

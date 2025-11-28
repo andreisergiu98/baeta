@@ -103,7 +103,7 @@ import { UserModule } from "./typedef.ts";
 const { Query } = UserModule;
 
 const userQuery = Query.user
-  .auth({
+  .$auth({
     $or: {
       isPublic: true,
       isLoggedIn: true,
@@ -122,10 +122,10 @@ const { Query, Mutation, User } = UserModule;
 export const userCache = User.$createCache();
 
 const userQuery = Query.user
-  .auth({
+  .$auth({
     // ...
   })
-  .useCache(userCache)
+  .$useCache(userCache)
   .resolve(async ({ args }) => {
     // ...
   });

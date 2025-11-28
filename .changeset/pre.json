@@ -35,13 +35,17 @@
     "@baeta/util-path": "1.0.1"
   },
   "changesets": [
+    "blue-bikes-repair",
     "curly-carrots-know",
+    "every-forks-see",
     "fast-kids-hug",
     "heavy-pandas-kneel",
     "late-dryers-occur",
     "new-socks-lie",
+    "olive-suits-flash",
     "plain-baths-allow",
     "purple-badgers-scream",
+    "silent-carpets-obey",
     "tall-coins-sin",
     "tall-papayas-call",
     "whole-pets-allow"

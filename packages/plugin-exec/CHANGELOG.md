@@ -1,5 +1,7 @@
 # @baeta/plugin-exec
 
+## 2.0.0-next.7
+
 ## 2.0.0-next.3
 
 ### Patch Changes

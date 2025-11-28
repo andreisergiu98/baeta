@@ -1,5 +1,11 @@
 # create-baeta
 
+## 2.0.0-next.7
+
+### Patch Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix create-baeta template using the old middleware function call
+
 ## 2.0.0-next.2
 
 ### Patch Changes

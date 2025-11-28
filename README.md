@@ -131,7 +131,7 @@ const userQuery = Query.user
   });
 
 const updateUserMutation = Mutation.updateUser
-  .use(async (next) => {
+  .$use(async (next) => {
     const user = await next();
     await userCache.save(user);
     return user;

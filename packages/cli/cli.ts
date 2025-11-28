@@ -1,5 +1,5 @@
 import yargs from 'yargs';
-import { createBuildCommand } from './commands/build/index.ts';
+import { hideBin } from 'yargs/helpers';
 import { createGenerateCommand } from './commands/generate/index.ts';
 import { loadConfig } from './lib/config-loader.ts';
 import { version } from './package.json';
@@ -9,12 +9,18 @@ process.on('exit', () => {
 	process.stdout.write(fixCursor);
 });
 
-loadConfig().then((config) => {
-	yargs(process.argv.slice(2))
+async function run() {
+	const config = await loadConfig();
+	await yargs(hideBin(process.argv))
 		.scriptName('baeta')
-		.command(createBuildCommand(config))
 		.command(createGenerateCommand(config))
 		.demandCommand()
 		.version(version)
-		.help().argv;
+		.help()
+		.parseAsync();
+}
+
+run().catch((err) => {
+	console.error(err);
+	process.exit(1);
 });

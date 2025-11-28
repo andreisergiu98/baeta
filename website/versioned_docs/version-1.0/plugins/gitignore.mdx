@@ -1,0 +1,41 @@
+---
+sidebar_position: 50
+title: Gitignore
+---
+
+# Gitignore Plugin
+
+The Gitignore plugin automatically adds generated files to your `.gitignore`, keeping your repository clean from auto-generated code. While some developers prefer to track generated files to review changes, this plugin provides a simple way to ignore them.
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/plugin-gitignore" dev={true} />
+
+## Configuration
+
+Enable the gitignore plugin in your `baeta.ts`:
+
+```typescript
+import { defineConfig } from "@baeta/cli";
+import { gitignorePlugin } from "@baeta/plugin-gitignore";
+
+export default defineConfig({
+  // ... other config
+  plugins: [gitignorePlugin()],
+});
+```
+
+:::warning
+For the plugin to work correctly, it should be registered **before** plugins that generate **any** kind of files.
+For most use cases, it should be the first plugin in the list, before even the `autoload plugin`.
+:::
+
+## How It Works
+
+The plugin automatically:
+
+- Detects all generated files from other Baeta plugins
+- Adds appropriate entries to your `.gitignore` file
+- Updates the `.gitignore` file when the configuration changes

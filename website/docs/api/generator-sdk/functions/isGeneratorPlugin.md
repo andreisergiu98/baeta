@@ -20,7 +20,7 @@
 </td>
 <td>
 
-\{ `type`: [`PluginType`](../../plugin/enumerations/PluginType.md); \}
+\{ `type`: [`PluginType`](../../plugin/type-aliases/PluginType.md); \}
 
 </td>
 </tr>
@@ -32,7 +32,7 @@
 </td>
 <td>
 
-[`PluginType`](../../plugin/enumerations/PluginType.md)
+[`PluginType`](../../plugin/type-aliases/PluginType.md)
 
 </td>
 </tr>

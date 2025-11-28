@@ -3,7 +3,10 @@ import { setComplexityStoreLoader } from './store.ts';
 
 export function loadComplexityStore<T>(
 	ctx: T,
-	getLimits: ComplexityLimit | ((ctx: T) => ComplexityLimit | Promise<ComplexityLimit>) | undefined,
+	getLimits:
+		| ComplexityLimit
+		| ((ctx: T) => ComplexityLimit | PromiseLike<ComplexityLimit>)
+		| undefined,
 	defaultLimits: Required<ComplexityLimit>,
 ) {
 	setComplexityStoreLoader(ctx, async () => {

@@ -1,4 +1,4 @@
-# `abstract` SubscriptionDatabase
+# SubscriptionDatabase
 
 ## Constructors
 

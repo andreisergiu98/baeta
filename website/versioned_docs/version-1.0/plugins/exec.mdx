@@ -1,0 +1,62 @@
+---
+sidebar_position: 60
+title: Exec
+---
+
+# Exec Plugin
+
+The Exec plugin provides a flexible way to execute commands or functions during the build process. It's particularly useful for running custom scripts, build steps, or any arbitrary code as part of your Baeta workflow.
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/plugin-exec" dev={true} />
+
+## Usage
+
+Add the exec plugin in your `baeta.ts`:
+
+```typescript
+import { defineConfig } from "@baeta/cli";
+import { createExecPlugin } from "@baeta/plugin-exec";
+
+export default defineConfig({
+  // ... other config
+  plugins: [
+    createExecPlugin({
+      // Optional: Identifier for the plugin instance
+      name: 'build-assets',
+
+      // Optional: Description of what's being generated/executed
+      actionName: 'assets',
+
+      // Required: Command to execute or function to run
+      exec: 'yarn build:assets',
+      // OR
+      exec: async (ctx) => {
+        // Custom logic here
+        await buildAssets();
+      },
+
+      // Optional: Watch configuration for development mode
+      watch: (generatorOptions, watcher, reload) => {
+        const assetsPath = resolve(generatorOptions.cwd, 'src/assets');
+
+        const handleChange = (file: WatcherFile) => {
+          if (file.path.startsWith(assetsPath)) {
+            reload(file);
+          }
+        };
+
+        watcher.on('create', handleChange);
+        watcher.on('update', handleChange);
+        watcher.on('delete', handleChange);
+      }
+
+      // Optional: Skip execution based on condition
+      skip: async (ctx) => process.env.NODE_ENV === 'test',
+    }),
+  ],
+});
+```

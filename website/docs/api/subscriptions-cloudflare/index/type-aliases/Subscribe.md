@@ -1,6 +1,6 @@
 # Subscribe()\<Map\>
 
-> **Subscribe**\<`Map`\> = \<`C`, `P`\>(`topic`) => `AsyncIterator`\<`P`\>
+> **Subscribe**\<`Map`\> = \<`C`, `P`\>(`topic`) => `AsyncIterable`\<`P`\>
 
 ## Type Parameters
 
@@ -74,4 +74,4 @@
 
 ## Returns
 
-`AsyncIterator`\<`P`\>
+`AsyncIterable`\<`P`\>

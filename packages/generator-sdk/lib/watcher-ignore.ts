@@ -5,14 +5,17 @@ export type MatchFn = (testString: string) => boolean;
 export type MatchPattern = string | RegExp | MatchFn;
 
 export class WatcherIgnore {
+	private readonly cwd: string;
 	private files: string[] = [];
 	private regexps: RegExp[] = [];
 	private functions: MatchFn[] = [];
 
 	private globs: MatchFn[] = [];
-	private globsMap = new Map<string, MatchFn>();
+	private readonly globsMap = new Map<string, MatchFn>();
 
-	constructor(private readonly cwd: string) {}
+	constructor(cwd: string) {
+		this.cwd = cwd;
+	}
 
 	ignore(pattern: MatchPattern) {
 		if (pattern instanceof RegExp) {

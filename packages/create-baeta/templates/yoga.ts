@@ -16,7 +16,6 @@ export async function makeYogaTemplate(
 	appVersion: string;
 };
 
-// biome-ignore lint/complexity/noBannedTypes: Empty context
 export type ServerContext = {};
 `,
 		},
@@ -42,7 +41,7 @@ function makeBunFiles(): TemplateFile[] {
 			relativePath: './src/app.ts',
 			content: `import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
@@ -73,7 +72,7 @@ function makeDenoFiles(): TemplateFile[] {
 			relativePath: './src/app.ts',
 			content: `import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
@@ -108,7 +107,7 @@ function makeNodeFiles(): TemplateFile[] {
 			content: `import { createServer } from 'node:http';
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
-import { modules } from './modules/autoload.ts';
+import modules from './modules/index.ts';
 import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({

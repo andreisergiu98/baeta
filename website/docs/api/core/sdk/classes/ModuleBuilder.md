@@ -1,10 +1,71 @@
-# ModuleBuilder
+# ModuleBuilder\<Context, Info, TypesBuilders, TypesResolvers\>
+
+## Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Context`
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+</tr>
+<tr>
+<td>
+
+`TypesBuilders` _extends_ [`TypesBuildersMap`](../type-aliases/TypesBuildersMap.md)\<`Context`, `Info`\>
+
+</td>
+<td>
+
+`Any`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`TypesResolvers` _extends_ [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
+
+</td>
+<td>
+
+`Any`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Constructors
 
 ### Constructor
 
-> **new ModuleBuilder**(`id`, `dirname`, `hashes`, `typedef`, `extensions`): `ModuleBuilder`
+> **new ModuleBuilder**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>(`name`, `typedef`, `typeBuilders`, `defaultResolvers`, `extensions`, `transformers`, `store`, `middlewares`): `ModuleBuilder`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
 
 #### Parameters
 
@@ -19,36 +80,12 @@
 <tr>
 <td>
 
-`id`
+`name`
 
 </td>
 <td>
 
 `string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`dirname`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`hashes`
-
-</td>
-<td>
-
-[`TypeHashMap`](../type-aliases/TypeHashMap.md)
 
 </td>
 </tr>
@@ -60,7 +97,31 @@
 </td>
 <td>
 
-`DocumentNode`
+`Readonly`\<`DocumentNode`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`typeBuilders`
+
+</td>
+<td>
+
+`Readonly`\<`TypesBuilders`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`defaultResolvers`
+
+</td>
+<td>
+
+`Readonly`\<`IResolvers`\>
 
 </td>
 </tr>
@@ -72,7 +133,43 @@
 </td>
 <td>
 
-[`Extension`](Extension.md)[]
+readonly [`Extension`](Extension.md)\<`unknown`\>[]
+
+</td>
+</tr>
+<tr>
+<td>
+
+`transformers`
+
+</td>
+<td>
+
+readonly [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
+
+</td>
+</tr>
+<tr>
+<td>
+
+`store`
+
+</td>
+<td>
+
+`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`middlewares`
+
+</td>
+<td>
+
+[`Middleware`](../../index/type-aliases/Middleware.md)\<`unknown`, `unknown`, `Context`, `unknown`, `Info`\>[]
 
 </td>
 </tr>
@@ -81,160 +178,25 @@
 
 #### Returns
 
-`ModuleBuilder`
+`ModuleBuilder`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
 
-## Properties
+## Accessors
 
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Modifier</th>
-<th>Type</th>
-<th>Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
+### name
 
-<a id="dirname"></a> `dirname`
+#### Get Signature
 
-</td>
-<td>
+> **get** **name**(): `string`
 
-`readonly`
-
-</td>
-<td>
+##### Returns
 
 `string`
-
-</td>
-<td>
-
-`undefined`
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="hashes"></a> `hashes`
-
-</td>
-<td>
-
-`readonly`
-
-</td>
-<td>
-
-[`TypeHashMap`](../type-aliases/TypeHashMap.md)
-
-</td>
-<td>
-
-`undefined`
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="id"></a> `id`
-
-</td>
-<td>
-
-`readonly`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-`undefined`
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="mapper"></a> `mapper`
-
-</td>
-<td>
-
-`readonly`
-
-</td>
-<td>
-
-[`ResolverMapper`](ResolverMapper.md)
-
-</td>
-<td>
-
-`undefined`
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="transformers"></a> `transformers`
-
-</td>
-<td>
-
-`readonly`
-
-</td>
-<td>
-
-[`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
-
-</td>
-<td>
-
-`[]`
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="typedef"></a> `typedef`
-
-</td>
-<td>
-
-`readonly`
-
-</td>
-<td>
-
-`DocumentNode`
-
-</td>
-<td>
-
-`undefined`
-
-</td>
-</tr>
-</tbody>
-</table>
 
 ## Methods
 
-### build()
+### edit()
 
-> **build**(): `object`
+> **edit**(): `object`
 
 #### Returns
 
@@ -251,36 +213,60 @@
 <tr>
 <td>
 
-`resolvers`
+`addMiddleware()`
 
 </td>
 <td>
 
-`IResolvers`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`transform()`
-
-</td>
-<td>
-
-(`schema`) => `GraphQLSchema`
+(`middleware`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly commit: () =\> ModuleBuilder\<...\>; readonly commitToMethods: () =\> Modu...
 
 </td>
 </tr>
 <tr>
 <td>
 
-`typedef`
+`addTransformer()`
 
 </td>
 <td>
 
-`DocumentNode`
+(`transformer`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly commit: () =\> ModuleBuilder\<...\>; readonly commitToMethods: () =\> Modu...
+
+</td>
+</tr>
+<tr>
+<td>
+
+`commit()`
+
+</td>
+<td>
+
+() => `ModuleBuilder`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`commitToMethods()`
+
+</td>
+<td>
+
+() => [`ModuleMethods`](../type-aliases/ModuleMethods.md)\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`useStore()`
+
+</td>
+<td>
+
+\<`T`\>(`key`) => `object`
 
 </td>
 </tr>
@@ -289,565 +275,10 @@
 
 ---
 
-### createMiddlewareBuilder()
+### toMethods()
 
-> **createMiddlewareBuilder**\<`Result`, `Root`, `Context`, `Args`\>(`type`, `field`): (`middleware`) => `void`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Result`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`type`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`field`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
+> **toMethods**(): [`ModuleMethods`](../type-aliases/ModuleMethods.md)\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
 
 #### Returns
 
-> (`middleware`): `void`
-
-##### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`middleware`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Root`, `Context`, `Args`\>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-##### Returns
-
-`void`
-
----
-
-### createModuleMethods()
-
-> **createModuleMethods**\<`Context`\>(): [`ModuleExtensions`](../namespaces/BaetaExtensions/interfaces/ModuleExtensions.md) & `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-[`ModuleExtensions`](../namespaces/BaetaExtensions/interfaces/ModuleExtensions.md) & `object`
-
----
-
-### createResolverBuilder()
-
-> **createResolverBuilder**\<`Result`, `Root`, `Context`, `Args`\>(`type`, `field`): (`resolver`) => `void` & [`ResolverExtensions`](../namespaces/BaetaExtensions/interfaces/ResolverExtensions.md)\<`Result`, `Root`, `Context`, `Args`\> & `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Result`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`type`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`field`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-(`resolver`) => `void` & [`ResolverExtensions`](../namespaces/BaetaExtensions/interfaces/ResolverExtensions.md)\<`Result`, `Root`, `Context`, `Args`\> & `object`
-
----
-
-### createResolveType()
-
-> **createResolveType**\<`Result`, `Value`, `Context`\>(`type`): (`resolver`) => `void`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Result`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Value`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`type`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-> (`resolver`): `void`
-
-##### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`resolver`
-
-</td>
-<td>
-
-[`TypeResolver`](../../index/type-aliases/TypeResolver.md)\<`Result`, `Value`, `Context`\>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-##### Returns
-
-`void`
-
----
-
-### createScalarBuilder()
-
-> **createScalarBuilder**(`scalar`): (`resolver`) => `void`
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`scalar`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-> (`resolver`): `void`
-
-##### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`resolver`
-
-</td>
-<td>
-
-[`ScalarResolver`](../../index/type-aliases/ScalarResolver.md)
-
-</td>
-</tr>
-</tbody>
-</table>
-
-##### Returns
-
-`void`
-
----
-
-### createSubscriptionBuilder()
-
-> **createSubscriptionBuilder**\<`Result`, `Root`, `Context`, `Args`\>(`field`): \<`Payload`\>(`subscription`) => `void` & `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Result`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`field`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-\<`Payload`\>(`subscription`) => `void` & `object`
-
----
-
-### createSubscriptionMethods()
-
-> **createSubscriptionMethods**\<`Root`, `Context`\>(): [`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object` & `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-[`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object` & `object`
-
----
-
-### createTypeMethods()
-
-> **createTypeMethods**\<`Root`, `Context`\>(`type`): [`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`type`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-[`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Root`, `Context`\> & `object`
+[`ModuleMethods`](../type-aliases/ModuleMethods.md)\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>

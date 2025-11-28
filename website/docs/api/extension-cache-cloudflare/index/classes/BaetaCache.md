@@ -40,7 +40,7 @@
 </td>
 <td>
 
-\{[`key`: `string`]: `never`; \}
+\{\[`key`: `string`\]: `never`; \}
 
 </td>
 </tr>
@@ -57,7 +57,6 @@
 <thead>
 <tr>
 <th>Property</th>
-<th>Modifier</th>
 <th>Type</th>
 </tr>
 </thead>
@@ -70,11 +69,6 @@
 </td>
 <td>
 
-`public`
-
-</td>
-<td>
-
 `object`
 
 </td>
@@ -83,11 +77,6 @@
 <td>
 
 <a id="state"></a> `state`
-
-</td>
-<td>
-
-`public`
 
 </td>
 <td>

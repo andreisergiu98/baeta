@@ -1,18 +1,25 @@
-import { getCachedDocumentNodeFromSchema } from '@graphql-codegen/plugin-helpers';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import {
 	loadSchema as loadSchemaToolkit,
 	type UnnormalizedTypeDefPointer,
 } from '@graphql-tools/load';
-import type { BaseLoaderOptions, Loader } from '@graphql-tools/utils';
-import { type GraphQLSchemaExtensions, validateSchema } from 'graphql';
-import { hashSchema } from './hash.ts';
+import {
+	type BaseLoaderOptions,
+	getDocumentNodeFromSchema,
+	type Loader,
+} from '@graphql-tools/utils';
+import { validateSchema } from 'graphql';
 
 export async function loadSchema(
-	schemaPointerMap: UnnormalizedTypeDefPointer,
+	schemas: string | string[],
 	cwd: string,
 	extraLoaders: Loader<BaseLoaderOptions>[] = [],
 ) {
+	const schemaPointerMap: UnnormalizedTypeDefPointer = {};
+	for (const ptr of Array.isArray(schemas) ? schemas : [schemas]) {
+		schemaPointerMap[ptr] = {};
+	}
+
 	const outputSchemaAst = await loadSchemaToolkit(schemaPointerMap, {
 		loaders: [new GraphQLFileLoader(), ...extraLoaders],
 		cwd,
@@ -31,10 +38,8 @@ export async function loadSchema(
 		outputSchemaAst.extensions = {};
 	}
 
-	(outputSchemaAst.extensions as GraphQLSchemaExtensions).hash = hashSchema(outputSchemaAst);
-
 	return {
 		outputSchemaAst,
-		outputSchema: getCachedDocumentNodeFromSchema(outputSchemaAst),
+		outputSchema: getDocumentNodeFromSchema(outputSchemaAst),
 	};
 }

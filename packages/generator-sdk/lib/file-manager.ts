@@ -2,11 +2,14 @@ import { File, type FileOptions } from './file.ts';
 
 export class FileManager {
 	files: File[] = [];
+	fileOptions?: FileOptions;
 
-	constructor(public fileOptions?: FileOptions) {}
+	constructor(fileOptions?: FileOptions) {
+		this.fileOptions = fileOptions;
+	}
 
-	createAndAdd(filename: string, content: string, tag: string) {
-		const file = new File(filename, content, tag, this.fileOptions);
+	createAndAdd(filename: string, content: string, tag: string, options?: FileOptions) {
+		const file = new File(filename, content, tag, { ...this.fileOptions, ...options });
 		this.add(file);
 		return file;
 	}

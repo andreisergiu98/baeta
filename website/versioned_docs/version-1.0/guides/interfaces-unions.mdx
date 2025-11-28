@@ -1,0 +1,143 @@
+---
+sidebar_position: 80
+---
+
+# Interfaces & Unions
+
+Baeta supports both GraphQL Interfaces and Unions. Interfaces allow you to define common fields that multiple types can share, while Unions let you combine different types into a single field.
+
+For more detailed information about Interfaces and Unions, check out the [official GraphQL documentation](https://graphql.org/learn/schema/#interfaces).
+
+## Interfaces
+
+Interfaces define a common set of fields that multiple types must implement.
+
+### Defining an Interface
+
+`src/modules/comic/comic.gql`
+
+```graphql
+interface Readable {
+  id: ID!
+  pages: Int!
+}
+
+type Comic implements Readable {
+  id: ID!
+  title: String!
+  year: Int!
+  artist: String!
+  pages: Int!
+}
+
+type Book implements Readable {
+  id: ID!
+  title: String!
+  year: Int!
+  author: String!
+  pages: Int!
+}
+```
+
+## Unions
+
+Unions allow you to combine multiple types into a single field, without requiring common fields.
+
+### Defining a Union
+
+`src/modules/media/media.gql`
+
+```graphql
+type Movie {
+  id: ID!
+  title: String!
+  year: Int!
+}
+
+type TVShow {
+  id: ID!
+  title: String!
+  year: Int!
+  seasons: Int!
+}
+
+union Media = Movie | TVShow | Book
+
+type Query {
+  media: [Media!]!
+}
+```
+
+### Extending Unions
+
+You can extend existing unions to add more types:
+
+```graphql
+extend union Media = Comic
+```
+
+## Type Resolution
+
+Type resolution must be defined in the module where the union or interface is originally defined, regardless of where types implement or extend them:
+
+```typescript
+import { getMediaModule } from "./typedef";
+
+const { Media, Query } = getMediaModule();
+
+Media.$resolveType(({ value }) => {
+  // If __typename is provided, we don't need to check further
+  if (value.__typename) {
+    return value.__typename;
+  }
+
+  // Check for distinctive fields
+  if ("author" in value) {
+    return "Book";
+  }
+
+  if ("artist" in value) {
+    return "Comic";
+  }
+
+  if ("seasons" in value) {
+    return "TVShow";
+  }
+
+  return "Movie";
+});
+```
+
+## Resolvers
+
+Here's an example of resolving a union field:
+
+```typescript
+Query.media(() => {
+  return [
+    {
+      id: "1",
+      title: "The Book",
+      author: "Jon Doe",
+      year: 2021,
+    },
+    {
+      id: "2",
+      title: "The Movie",
+      year: 2022,
+    },
+    {
+      id: "3",
+      title: "The TV Show",
+      year: 2023,
+      seasons: 1,
+    },
+    {
+      __typename: "Movie",
+      id: "4",
+      title: "Another Movie",
+      year: 2023,
+    },
+  ];
+});
+```

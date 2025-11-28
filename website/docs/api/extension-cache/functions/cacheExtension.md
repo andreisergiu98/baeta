@@ -1,6 +1,6 @@
 # cacheExtension()
 
-> **cacheExtension**(`store`, `options?`, `transformers?`): () => [`Extension`](../../core/sdk/classes/Extension.md)
+> **cacheExtension**(`store`, `options?`, `transformers?`): `CacheExtension`
 
 Creates a cache extension
 
@@ -71,13 +71,9 @@ Serializer transformers for custom scalars that are not serializable by default
 
 ## Returns
 
+`CacheExtension`
+
 Extension factory function
-
-> (): [`Extension`](../../core/sdk/classes/Extension.md)
-
-### Returns
-
-[`Extension`](../../core/sdk/classes/Extension.md)
 
 ## Example
 

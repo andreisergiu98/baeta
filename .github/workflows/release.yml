@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - next
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -17,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
@@ -26,7 +27,7 @@ jobs:
         id: changesets
         uses: dotansimha/changesets-action@069996e9be15531bd598272996fa23853d61590e #v1.5.2
         with:
-          publish: yarn release
+          publish: yarn builder release --ci --check-branch=${{ github.ref_name }} --dry-run
           version: yarn changeset version
           commit: "chore: publish packages"
           title: "chore: publish packages"

@@ -1,0 +1,8 @@
+{
+  "label": "Plugins",
+  "position": 5,
+  "collapsible": false,
+  "link": {
+    "type": "generated-index"
+  }
+}

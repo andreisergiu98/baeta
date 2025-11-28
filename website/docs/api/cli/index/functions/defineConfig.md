@@ -1,6 +1,6 @@
 # defineConfig()
 
-> **defineConfig**(`config`): `object`
+> **defineConfig**(`config`): `DefinedConfig`
 
 Helper function to define a type-safe Baeta configuration.
 
@@ -31,27 +31,4 @@ Helper function to define a type-safe Baeta configuration.
 
 ## Returns
 
-`object`
-
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`config`
-
-</td>
-<td>
-
-[`BaetaOptions`](../interfaces/BaetaOptions.md)
-
-</td>
-</tr>
-</tbody>
-</table>
+`DefinedConfig`

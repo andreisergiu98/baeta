@@ -1,6 +1,6 @@
-# GetGrantFn()\<Grants, Result, Root, Context, Args\>
+# GetGrantFn()\<Grants, Result, Source, Context, Args, Info\>
 
-> **GetGrantFn**\<`Grants`, `Result`, `Root`, `Context`, `Args`\> = (`params`, `result`) => [`GetGrantResult`](GetGrantResult.md)\<`Grants`\> \| `PromiseLike`\<[`GetGrantResult`](GetGrantResult.md)\<`Grants`\>\>
+> **GetGrantFn**\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`, `result`) => [`GetGrantResult`](GetGrantResult.md)\<`Grants`\> \| `PromiseLike`\<[`GetGrantResult`](GetGrantResult.md)\<`Grants`\>\>
 
 Function that determines grants based on resolver parameters and result.
 Used for dynamic permission granting based on resolved data.
@@ -31,7 +31,7 @@ Used for dynamic permission granting based on resolved data.
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -46,6 +46,13 @@ Used for dynamic permission granting based on resolved data.
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -70,7 +77,7 @@ Used for dynamic permission granting based on resolved data.
 </td>
 <td>
 
-[`MiddlewareParams`](../../core/index/type-aliases/MiddlewareParams.md)\<`Root`, `Context`, `Args`\>
+[`ResolverParams`](../../core/index/type-aliases/ResolverParams.md)\<`Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

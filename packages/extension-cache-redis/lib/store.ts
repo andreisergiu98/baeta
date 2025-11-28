@@ -1,9 +1,4 @@
-import {
-	type Serializer,
-	Store,
-	type StoreAdapter,
-	type StoreOptions,
-} from '@baeta/extension-cache';
+import { Store, type StoreAdapter, type StoreAdapterOptions } from '@baeta/extension-cache';
 import type Redis from 'ioredis';
 import { RedisStoreAdapter } from './redis-store-adapter.ts';
 
@@ -26,16 +21,14 @@ import { RedisStoreAdapter } from './redis-store-adapter.ts';
  * ```
  */
 export class RedisStore extends Store {
-	constructor(protected client: Redis) {
+	protected client: Redis;
+
+	constructor(client: Redis) {
 		super();
+		this.client = client;
 	}
 
-	createStoreAdapter<T>(
-		serialzier: Serializer,
-		options: StoreOptions<T>,
-		type: string,
-		hash: string,
-	): StoreAdapter<T> {
-		return new RedisStoreAdapter<T>(this.client, serialzier, options, type, hash);
+	createStoreAdapter<T>(options: StoreAdapterOptions<T>): StoreAdapter<T> {
+		return new RedisStoreAdapter<T>(this.client, options);
 	}
 }

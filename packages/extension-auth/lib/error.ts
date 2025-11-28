@@ -3,7 +3,7 @@ import { log } from '@baeta/util-log';
 import { GraphQLError } from 'graphql';
 
 /** Custom error resolver function for authorization failures. */
-export type ScopeErrorResolver = (err: unknown, path: string) => Error | unknown;
+export type ScopeErrorResolver = (err: unknown, path: string) => unknown;
 
 export function resolveError(err: unknown, resolve: ScopeErrorResolver, path: string) {
 	const resolvedError = resolve(err, path);
@@ -15,7 +15,7 @@ export function resolveError(err: unknown, resolve: ScopeErrorResolver, path: st
 	throw err;
 }
 
-export function defaultErrorResolver(err: unknown, path: string): Error | unknown {
+export function defaultErrorResolver(err: unknown, path: string): unknown {
 	if (err instanceof AggregateError) {
 		return aggregateErrorResolver(err, path);
 	}

@@ -24,11 +24,6 @@
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
   },
-  "bin": {
-    "ava": "./bin/ava.js",
-    "c8": "./bin/c8.js",
-    "madge": "./bin/madge.js"
-  },
   "type": "module",
   "exports": {
     ".": {
@@ -37,16 +32,15 @@
     }
   },
   "dependencies": {
-    "@baeta/tools-utils": "workspace:^",
-    "@types/sinon": "^17.0.4",
-    "ava": "^6.3.0",
+    "@types/sinon": "^21.0.0",
+    "ava": "^6.4.1",
     "c8": "^10.1.3",
     "madge": "^8.0.0",
-    "sinon": "^20.0.0"
+    "sinon": "^21.0.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.15.30",
-    "typescript": "^5.8.3"
+    "@types/node": "^22.19.1",
+    "typescript": "^5.9.3"
   }
 }

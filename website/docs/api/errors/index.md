@@ -1,9 +1,5 @@
 # @baeta/errors
 
-## Enumerations
-
-- [BaetaErrorCode](enumerations/BaetaErrorCode.md)
-
 ## Classes
 
 - [AggregateGraphQLError](classes/AggregateGraphQLError.md)
@@ -11,3 +7,12 @@
 - [ForbiddenError](classes/ForbiddenError.md)
 - [InternalServerError](classes/InternalServerError.md)
 - [UnauthenticatedError](classes/UnauthenticatedError.md)
+
+## Type Aliases
+
+- [BaetaErrorCode](type-aliases/BaetaErrorCode.md)
+- [BaetaErrorCodeKey](type-aliases/BaetaErrorCodeKey.md)
+
+## Variables
+
+- [BaetaErrorCode](variables/BaetaErrorCode.md)

@@ -81,7 +81,6 @@
 <thead>
 <tr>
 <th>Property</th>
-<th>Modifier</th>
 <th>Type</th>
 <th>Default value</th>
 </tr>
@@ -91,11 +90,6 @@
 <td>
 
 <a id="content"></a> `content`
-
-</td>
-<td>
-
-`public`
 
 </td>
 <td>
@@ -117,11 +111,6 @@
 </td>
 <td>
 
-`public`
-
-</td>
-<td>
-
 `string`
 
 </td>
@@ -139,11 +128,6 @@
 </td>
 <td>
 
-`public`
-
-</td>
-<td>
-
 `boolean`
 
 </td>
@@ -157,11 +141,6 @@
 <td>
 
 <a id="tag"></a> `tag`
-
-</td>
-<td>
-
-`public`
 
 </td>
 <td>

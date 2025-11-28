@@ -308,7 +308,7 @@ function validateFieldArguments(
 		);
 	}
 
-	const graphqlErrors = errors.filter((err) => err instanceof GraphQLError) as GraphQLError[];
+	const graphqlErrors = errors.filter((err) => err instanceof GraphQLError);
 
 	if (graphqlErrors.length === 1) {
 		throw graphqlErrors[0];

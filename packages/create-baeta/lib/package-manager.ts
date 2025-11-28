@@ -38,7 +38,7 @@ async function askForPackageManagerChoice(): Promise<PackageManager> {
 		return 'npm';
 	}
 	const choices = ['npm', hasYarn && 'yarn', hasPnpm && 'pnpm', hasBun && 'bun']
-		.filter((p): p is string => Boolean(p))
+		.filter((p) => p !== false)
 		.map((p) => ({ title: p, value: p }));
 
 	const manager = await prompts(

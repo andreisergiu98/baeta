@@ -20,7 +20,7 @@
 </td>
 <td>
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 </td>
 </tr>

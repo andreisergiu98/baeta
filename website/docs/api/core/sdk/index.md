@@ -4,52 +4,50 @@
 
 - [BaetaExtensions](namespaces/BaetaExtensions/index.md)
 
-## Enumerations
-
-- [ExtensionVersion](enumerations/ExtensionVersion.md)
-
 ## Classes
 
 - [Extension](classes/Extension.md)
+- [FieldBuilder](classes/FieldBuilder.md)
+- [FieldCompiler](classes/FieldCompiler.md)
 - [ModuleBuilder](classes/ModuleBuilder.md)
-- [ResolverMapper](classes/ResolverMapper.md)
-
-## Interfaces
-
-- [Module](interfaces/Module.md)
+- [ModuleCompiler](classes/ModuleCompiler.md)
+- [SubscriptionBuilder](classes/SubscriptionBuilder.md)
+- [TypeBuilder](classes/TypeBuilder.md)
+- [TypeCompiler](classes/TypeCompiler.md)
 
 ## Type Aliases
 
 - [ExtensionFactory](type-aliases/ExtensionFactory.md)
-- [FieldResolvers](type-aliases/FieldResolvers.md)
-- [MiddlewareMap](type-aliases/MiddlewareMap.md)
-- [NativeMiddleware](type-aliases/NativeMiddleware.md)
-- [NativeResolver](type-aliases/NativeResolver.md)
-- [NativeSubscription](type-aliases/NativeSubscription.md)
-- [NativeSubscriptionSubscribe](type-aliases/NativeSubscriptionSubscribe.md)
-- [NativeTypeResolver](type-aliases/NativeTypeResolver.md)
-- [ResolversMap](type-aliases/ResolversMap.md)
-- [ScalarsMap](type-aliases/ScalarsMap.md)
+- [Field](type-aliases/Field.md)
+- [FieldHelpers](type-aliases/FieldHelpers.md)
+- [FieldMethods](type-aliases/FieldMethods.md)
+- [FieldsBuildersMap](type-aliases/FieldsBuildersMap.md)
+- [FieldsResolversMap](type-aliases/FieldsResolversMap.md)
+- [FieldWithMake](type-aliases/FieldWithMake.md)
+- [ModuleCompilerFactory](type-aliases/ModuleCompilerFactory.md)
+- [ModuleMethods](type-aliases/ModuleMethods.md)
 - [SchemaTransformer](type-aliases/SchemaTransformer.md)
-- [SubscriptionsResolvers](type-aliases/SubscriptionsResolvers.md)
-- [TypeHash](type-aliases/TypeHash.md)
-- [TypeHashMap](type-aliases/TypeHashMap.md)
+- [Subscription](type-aliases/Subscription.md)
+- [SubscriptionField](type-aliases/SubscriptionField.md)
+- [SubscriptionFieldWithMake](type-aliases/SubscriptionFieldWithMake.md)
+- [SubscriptionHelpers](type-aliases/SubscriptionHelpers.md)
+- [SubscriptionMethods](type-aliases/SubscriptionMethods.md)
+- [SubscriptionWrapper](type-aliases/SubscriptionWrapper.md)
+- [TypeCompilerFactory](type-aliases/TypeCompilerFactory.md)
+- [TypeMethods](type-aliases/TypeMethods.md)
+- [TypesBuildersMap](type-aliases/TypesBuildersMap.md)
+- [TypesResolversMap](type-aliases/TypesResolversMap.md)
 
 ## Functions
 
 - [addValidationToSchema](functions/addValidationToSchema.md)
-- [createMiddlewareAdapter](functions/createMiddlewareAdapter.md)
-- [createModuleManager](functions/createModuleManager.md)
+- [composeMiddlewares](functions/composeMiddlewares.md)
+- [createFieldBuilder](functions/createFieldBuilder.md)
+- [createModuleBuilder](functions/createModuleBuilder.md)
 - [createObjectLens](functions/createObjectLens.md)
-- [createResolverAdapter](functions/createResolverAdapter.md)
-- [createSingletonModule](functions/createSingletonModule.md)
-- [createSubscriptionAdapter](functions/createSubscriptionAdapter.md)
-- [createTypeResolverAdapter](functions/createTypeResolverAdapter.md)
-- [extendFunction](functions/extendFunction.md)
-- [getModuleBuilder](functions/getModuleBuilder.md)
+- [createSubscriptionBuilder](functions/createSubscriptionBuilder.md)
+- [createTypeBuilder](functions/createTypeBuilder.md)
+- [makeField](functions/makeField.md)
 - [mergeExtensions](functions/mergeExtensions.md)
-- [mergeMiddlewareMaps](functions/mergeMiddlewareMaps.md)
 - [nameFunction](functions/nameFunction.md)
-- [resolveExtensions](functions/resolveExtensions.md)
 - [transformSchema](functions/transformSchema.md)
-- [withExtensions](functions/withExtensions.md)

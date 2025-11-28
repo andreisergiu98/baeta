@@ -11,7 +11,12 @@ Baeta provides a set of built-in directives through the `@baeta/plugin-directive
 
 import { PackageManagerAdd } from "@site/components/package-manager";
 
+Runtime dependency:
+
 <PackageManagerAdd package="@baeta/directives" />
+
+Development dependency:
+
 <PackageManagerAdd dev={true} package="@baeta/plugin-directives" />
 
 ## Setup
@@ -27,8 +32,6 @@ export default defineConfig({
   // ... rest of config
 });
 ```
-
-The plugin will generate a `baeta-directives` module that will be automatically loaded if you're using `autoloadPlugin()`.
 
 ## Available Directives
 

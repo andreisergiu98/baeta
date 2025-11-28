@@ -1,6 +1,6 @@
-# GetGrant\<Grants, Result, Root, Context, Args\>
+# GetGrant\<Grants, Result, Source, Context, Args, Info\>
 
-> **GetGrant**\<`Grants`, `Result`, `Root`, `Context`, `Args`\> = [`GetGrantFn`](GetGrantFn.md)\<`Grants`, `Result`, `Root`, `Context`, `Args`\> \| [`GetGrantResult`](GetGrantResult.md)\<`Grants`\>
+> **GetGrant**\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = [`GetGrantFn`](GetGrantFn.md)\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> \| [`GetGrantResult`](GetGrantResult.md)\<`Grants`\>
 
 Union type for grant specifications.
 Can be either a static grant result or a function that determines grants dynamically.
@@ -31,7 +31,7 @@ Can be either a static grant result or a function that determines grants dynamic
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -46,6 +46,13 @@ Can be either a static grant result or a function that determines grants dynamic
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>

@@ -1,0 +1,158 @@
+name: Checks
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Check build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run build
+        run: yarn build
+
+  types:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run type checks
+        run: yarn check:types
+
+  lint:
+    name: Check linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run lint checks
+        run: yarn check:linting
+
+  formatting:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run formatting checks
+        run: yarn check:formatting
+
+  circular:
+    name: Check circular dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run circular dependency checks
+        run: yarn check:circular
+
+  pkg-constraints:
+    name: Check package constraints
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run package constraint checks
+        run: yarn check:constraints
+
+  pkg-deduplication:
+    name: Check package deduplication
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run yarn dedupe checks
+        run: yarn dedupe --check
+
+  examples-build:
+    name: Check examples build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - name: Run examples build
+        run: yarn examples:build
+
+      - name: Run examples types
+        run: yarn examples:types
+
+  tests:
+    name: Check tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24, 25]
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 65535:6379
+      redis-http:
+        image: hiett/serverless-redis-http:latest
+        ports:
+          - 60080:80
+        env:
+          SRH_MODE: env
+          SRH_TOKEN: example_token
+          SRH_CONNECTION_STRING: "redis://redis:6379/0"
+      etcd:
+        image: gcr.io/etcd-development/etcd:v3.6.5
+        ports:
+          - 22379:2379
+          - 22380:2380
+        env:
+          ALLOW_NONE_AUTHENTICATION: yes
+          ETCD_ADVERTISE_CLIENT_URLS: http://etcd:2379
+          ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:2379
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Run test checks
+        run: yarn check:tests

@@ -1,7 +1,11 @@
 import type { Action, GetAction, ListAction, PutAction } from './baeta-cache.ts';
 
 export class CloudflareCacheClient {
-	constructor(public durableObject: DurableObjectNamespace) {}
+	durableObject: DurableObjectNamespace;
+
+	constructor(durableObject: DurableObjectNamespace) {
+		this.durableObject = durableObject;
+	}
 
 	private async post(body: Action) {
 		const stubId = this.durableObject.idFromName('BAETA_CACHE');

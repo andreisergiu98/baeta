@@ -24,14 +24,16 @@ export class ComplexityError extends GraphQLError {
 /**
  * Types of complexity validation errors that can occur during query analysis.
  */
-export enum ComplexityErrorKind {
+export const ComplexityErrorKind = {
 	/** Query exceeds maximum allowed depth */
-	Depth = 'DepthExceeded',
+	Depth: 'DepthExceeded',
 	/** Query exceeds maximum allowed breadth (fields per level) */
-	Breadth = 'BreadthExceeded',
+	Breadth: 'BreadthExceeded',
 	/** Query exceeds total complexity score limit */
-	Complexity = 'ComplexityExceeded',
-}
+	Complexity: 'ComplexityExceeded',
+};
+
+type ComplexityErrorKind = (typeof ComplexityErrorKind)[keyof typeof ComplexityErrorKind];
 
 /**
  * Function type for creating custom complexity error messages.

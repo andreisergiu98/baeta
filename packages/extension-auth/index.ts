@@ -1,6 +1,5 @@
 import './lib/global-types.ts';
 
-import type { Extension } from '@baeta/core/sdk';
 import { AuthExtension, type AuthOptions } from './lib/auth-extension.ts';
 import type { GetScopeLoader } from './lib/scope-resolver.ts';
 
@@ -46,5 +45,5 @@ export function authExtension<Ctx>(
 	loadScopes: GetScopeLoader<AuthExtension.Scopes, Ctx>,
 	options: AuthOptions = {},
 ) {
-	return (): Extension => new AuthExtension(loadScopes, options);
+	return new AuthExtension(loadScopes, options);
 }

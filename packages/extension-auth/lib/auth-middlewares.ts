@@ -1,8 +1,7 @@
-import type { MiddlewareParams } from '@baeta/core';
-import type { NativeMiddleware } from '@baeta/core/sdk';
+import type { Middleware, ResolverParams } from '@baeta/core';
 import { ForbiddenError } from '@baeta/errors';
 import type { GraphQLResolveInfo } from 'graphql';
-import { createResolverPath, isOperationType } from '../utils/resolver.ts';
+import { createResolverPath } from '../utils/resolver.ts';
 import { defaultErrorResolver, resolveError, type ScopeErrorResolver } from './error.ts';
 import { type GetGrant, saveGrants } from './grant.ts';
 import { type DefaultScopes, selectDefaultScopes } from './scope-defaults.ts';
@@ -13,9 +12,9 @@ import { loadAuthStore } from './store-loader.ts';
 /**
  * Options for authorization middlewares
  */
-export interface AuthMiddlewareOptions<Grants extends string, Result, Root, Context, Args> {
+export interface AuthMiddlewareOptions<Grants extends string, Result, Root, Context, Args, Info> {
 	/** Permissions to grant after successful authorization */
-	grants?: GetGrant<Grants, Result, Root, Context, Args>;
+	grants?: GetGrant<Grants, Result, Root, Context, Args, Info>;
 	/** Whether to skip default scopes for this operation */
 	skipDefaults?: boolean;
 	/** Custom error handler for this operation */
@@ -38,12 +37,13 @@ export interface AuthMiddlewareSubscribeOptions {
 export type GetScopeRules<
 	Scopes extends ScopesShape,
 	Grants extends string,
-	Root,
+	Source,
 	Context,
 	Args,
+	Info,
 > = (
-	params: MiddlewareParams<Root, Context, Args>,
-) => boolean | ScopeRules<Scopes, Grants> | Promise<boolean | ScopeRules<Scopes, Grants>>;
+	params: ResolverParams<Source, Context, Args, Info>,
+) => boolean | ScopeRules<Scopes, Grants> | PromiseLike<boolean | ScopeRules<Scopes, Grants>>;
 
 /**
  * Function to get scope rules for post-resolution authorization
@@ -52,13 +52,14 @@ export type GetPostScopeRules<
 	Scopes extends ScopesShape,
 	Grants extends string,
 	Result,
-	Root,
+	Source,
 	Context,
 	Args,
+	Info,
 > = (
-	params: MiddlewareParams<Root, Context, Args>,
+	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
-) => boolean | ScopeRules<Scopes, Grants> | Promise<boolean | ScopeRules<Scopes, Grants>>;
+) => boolean | ScopeRules<Scopes, Grants> | PromiseLike<boolean | ScopeRules<Scopes, Grants>>;
 
 export function createMiddleware<
 	Scopes extends ScopesShape,
@@ -67,40 +68,35 @@ export function createMiddleware<
 	Root,
 	Context,
 	Args,
+	Info,
 >(
 	type: string,
-	field: string,
 	loadScopes: GetScopeLoader<Scopes, Context>,
-	scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Root, Context, Args>,
+	scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Root, Context, Args, Info>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
-	options?: AuthMiddlewareOptions<Grants, Result, Root, Context, Args>,
+	options?: AuthMiddlewareOptions<Grants, Result, Root, Context, Args, Info>,
 	onError?: ScopeErrorResolver,
-): NativeMiddleware<Result, Root, Context, Args> {
+): Middleware<Result, Root, Context, Args, Info> {
 	const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
-	const isSubscribe = type === 'Subscription' && field.endsWith('.subscribe');
-	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, field, globalScopes);
+	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
-	return (next) => async (root, args, ctx, info) => {
-		loadAuthStore(ctx, loadScopes);
+	return async (next, params) => {
+		loadAuthStore(params.ctx, loadScopes);
 
-		const requiredScopes = await getScopes({ root, args, ctx, info });
+		const requiredScopes = await getScopes(params);
 
 		await verifyMiddlewareScopes(
-			ctx,
-			info,
+			params.ctx,
+			params.info as GraphQLResolveInfo,
 			defaultScopes,
 			requiredScopes,
 			options?.onError ?? onError ?? defaultErrorResolver,
 		);
 
-		if (isSubscribe) {
-			return next(root, args, ctx, info);
-		}
-
-		const result = await next(root, args, ctx, info);
+		const result = await next();
 
 		if (options?.grants) {
-			await saveGrants(root, args, ctx, info, result, options.grants);
+			await saveGrants(params, result, options.grants);
 		}
 
 		return result;
@@ -114,33 +110,33 @@ export function createPostMiddleware<
 	Root,
 	Context,
 	Args,
+	Info,
 >(
 	type: string,
-	field: string,
 	loadScopes: GetScopeLoader<Scopes, Context>,
-	getScopes: GetPostScopeRules<Scopes, Grants, Result, Root, Context, Args>,
+	getScopes: GetPostScopeRules<Scopes, Grants, Result, Root, Context, Args, Info>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
-	options?: AuthMiddlewareOptions<Grants, Result, Root, Context, Args>,
+	options?: AuthMiddlewareOptions<Grants, Result, Root, Context, Args, Info>,
 	onError?: ScopeErrorResolver,
-): NativeMiddleware<Result, Root, Context, Args> {
-	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, field, globalScopes);
+): Middleware<Result, Root, Context, Args, Info> {
+	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
-	return (next) => async (root, args, ctx, info) => {
-		loadAuthStore(ctx, loadScopes);
+	return async (next, params) => {
+		loadAuthStore(params.ctx, loadScopes);
 
-		const result = await next(root, args, ctx, info);
-		const requiredScopes = await getScopes({ root, args, ctx, info }, result);
+		const result = await next();
+		const requiredScopes = await getScopes(params, result);
 
 		await verifyMiddlewareScopes(
-			ctx,
-			info,
+			params.ctx,
+			params.info as GraphQLResolveInfo,
 			defaultScopes,
 			requiredScopes,
 			options?.onError ?? onError ?? defaultErrorResolver,
 		);
 
 		if (options?.grants) {
-			await saveGrants(root, args, ctx, info, result, options.grants);
+			await saveGrants(params, result, options.grants);
 		}
 
 		return result;
@@ -153,24 +149,18 @@ export function createFallbackMiddleware<
 	Context,
 >(
 	type: string,
-	field: string,
 	loadScopes: GetScopeLoader<Scopes, Context>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
 	onError?: ScopeErrorResolver,
 ) {
-	if (!isOperationType(type)) {
-		return;
-	}
-
-	const rules = selectDefaultScopes(false, type, field, globalScopes);
+	const rules = selectDefaultScopes(false, type, globalScopes);
 
 	if (rules == null) {
 		return;
 	}
 
-	return createMiddleware(
+	return createMiddleware<Scopes, Grants, unknown, unknown, Context, unknown, unknown>(
 		type,
-		field,
 		loadScopes,
 		rules,
 		{},

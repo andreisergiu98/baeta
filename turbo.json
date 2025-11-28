@@ -12,7 +12,12 @@
     },
     "test": {
       "dependsOn": [
-        "^build"
+        "^test"
+      ]
+    },
+    "test:circular": {
+      "dependsOn": [
+        "^test:circular"
       ]
     },
     "types": {

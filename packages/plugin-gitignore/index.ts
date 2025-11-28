@@ -1,5 +1,5 @@
 import { relative, resolve } from 'node:path';
-import { createPluginV1, FileBlock } from '@baeta/generator-sdk';
+import { createPluginV1, FileBlock, micromatch } from '@baeta/generator-sdk';
 
 /**
  * Configuration options for the gitignore plugin.
@@ -10,13 +10,18 @@ export interface GitignoreOptions {
 	 * File tags are identifiers assigned to generated files
 	 * to categorize them by their plugin or purpose.
 	 */
-	ignoreTags?: string[];
+	skipTags?: string[];
+
+	/**
+	 * Array of files to exclude from .gitignore.
+	 */
+	skipFilesGlobs?: string[];
 }
 export interface GitignoreOptions {
-	ignoreTags?: string[];
+	skipTags?: string[];
 }
 
-const defaultIgnoredTags = ['cloudflare'];
+const defaultSkipTags = ['cloudflare'];
 
 /**
  * A plugin that adds .gitignore entries for generated files.
@@ -31,14 +36,24 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 		generate: async (ctx, next) => {
 			await next();
 
-			const ignoredTags = [...(options?.ignoreTags ?? []), ...defaultIgnoredTags];
-
 			const modulesDir = ctx.generatorOptions.modulesDir;
 			const moduleDefinitionName = ctx.generatorOptions.moduleDefinitionName;
 
+			const skipedTags = new Set([...(options?.skipTags ?? []), ...defaultSkipTags]);
+			const skippedFilesGlobs = [
+				...(options?.skipFilesGlobs ?? []).map((glob) => resolve(ctx.generatorOptions.cwd, glob)),
+			];
+
 			const filePaths = ctx.fileManager.files
 				.filter((file) => {
-					return !file.filename.endsWith(moduleDefinitionName) && !ignoredTags.includes(file.tag);
+					return (
+						!file.filename.endsWith(moduleDefinitionName) &&
+						!skipedTags.has(file.tag) &&
+						!skippedFilesGlobs.some((skippedFile) =>
+							micromatch.isMatch(file.filename, skippedFile),
+						) &&
+						file.options?.disableOverwrite !== true
+					);
 				})
 				.map((file) => file.filename);
 
@@ -46,9 +61,15 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 				.map((file) => relative(ctx.generatorOptions.cwd, file))
 				.filter((file) => !file.endsWith(moduleDefinitionName));
 
-			generatedPaths.push(
-				`${relative(ctx.generatorOptions.cwd, modulesDir)}/**/${moduleDefinitionName}`,
-			);
+			if (
+				!skippedFilesGlobs.some((skippedFile) =>
+					micromatch.isMatch(`${modulesDir}/**/${moduleDefinitionName}`, skippedFile),
+				)
+			) {
+				generatedPaths.push(
+					`${relative(ctx.generatorOptions.cwd, modulesDir)}/**/${moduleDefinitionName}`,
+				);
+			}
 
 			generatedPaths.sort((a, b) => a.localeCompare(b));
 

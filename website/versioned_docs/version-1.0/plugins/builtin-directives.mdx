@@ -1,0 +1,108 @@
+---
+sidebar_position: 20
+title: Directives
+---
+
+# Built-in Directives
+
+Baeta provides a set of built-in directives through the `@baeta/plugin-directives` package.
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/directives" />
+<PackageManagerAdd dev={true} package="@baeta/plugin-directives" />
+
+## Setup
+
+Add the directives plugin to your `baeta.ts` configuration:
+
+```typescript
+import { defineConfig } from "@baeta/cli";
+import { directivesPlugin } from "@baeta/plugin-directives";
+
+export default defineConfig({
+  plugins: [directivesPlugin()],
+  // ... rest of config
+});
+```
+
+The plugin will generate a `baeta-directives` module that will be automatically loaded if you're using `autoloadPlugin()`.
+
+## Available Directives
+
+### String Validation
+
+```graphql
+directive @validString(
+  format: StringFormat # EMAIL, UUID, URL
+  maxLength: Int
+  minLength: Int
+  startsWith: String
+  endsWith: String
+  includes: String
+  regex: String
+  regexFlags: String
+  oneOf: [String!]
+  notOneOf: [String!]
+) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+```
+
+### Number Validation
+
+```graphql
+directive @validFloat(
+  multipleOf: Float
+  max: Float
+  min: Float
+  exclusiveMax: Float
+  exclusiveMin: Float
+  oneOf: [Float!]
+  notOneOf: [Float!]
+) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+directive @validInt(
+  multipleOf: Int
+  max: Int
+  min: Int
+  exclusiveMax: Int
+  exclusiveMin: Int
+  oneOf: [Int!]
+  notOneOf: [Int!]
+) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+```
+
+### Object Validation
+
+```graphql
+directive @constraints(minFields: Int, maxFields: Int) on INPUT_OBJECT
+```
+
+### String Transformation
+
+```graphql
+directive @trim(
+  start: Boolean
+  end: Boolean
+) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+directive @lower on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+```
+
+## Usage Examples
+
+```graphql
+input UserInput @constraints(minFields: 2) {
+  email: String! @validString(format: EMAIL)
+  age: Int! @validInt(min: 18)
+  name: String! @trim @upper
+  score: Float @validFloat(min: 0, max: 100)
+}
+
+type Mutation {
+  createUser(input: UserInput!): User!
+}
+```
+
+For more examples, check out the [Baeta directives example](https://github.com/andreisergiu98/baeta/tree/main/examples/directives).

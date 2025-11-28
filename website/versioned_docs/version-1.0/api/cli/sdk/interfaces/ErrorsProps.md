@@ -1,0 +1,38 @@
+# ErrorsProps
+
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="errors"></a> `errors?`
+
+</td>
+<td>
+
+[`TextOutput`](../type-aliases/TextOutput.md)[]
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="warnings"></a> `warnings?`
+
+</td>
+<td>
+
+[`TextOutput`](../type-aliases/TextOutput.md)[]
+
+</td>
+</tr>
+</tbody>
+</table>

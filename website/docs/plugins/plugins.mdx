@@ -13,7 +13,6 @@ Plugins are registered in your Baeta configuration file `baeta.ts`:
 
 ```typescript
 import { defineConfig } from "@baeta/cli";
-import { autoloadPlugin } from "@baeta/plugin-autoload";
 import { gitignorePlugin } from "@baeta/plugin-gitignore";
 import { prismaPlugin } from "@baeta/plugin-prisma";
 import { execPlugin } from "@baeta/plugin-exec";
@@ -21,9 +20,6 @@ import { execPlugin } from "@baeta/plugin-exec";
 export default defineConfig({
   plugins: [
     gitignorePlugin({
-      // plugin options
-    }),
-    autoloadPlugin({
       // plugin options
     }),
     prismaPlugin({

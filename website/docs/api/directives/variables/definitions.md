@@ -2,7 +2,7 @@
 
 > `const` **definitions**: `object`[]
 
-## Type declaration
+## Type Declaration
 
 <table>
 <thead>

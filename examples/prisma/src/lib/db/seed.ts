@@ -55,7 +55,7 @@ async function insertUser(
 	});
 }
 
-async function main() {
+try {
 	const users = generateUsers(faker.number.int({ min: 8, max: 15 }));
 
 	const promises = users.map(async (user) => {
@@ -63,15 +63,7 @@ async function main() {
 		return insertUser(user, photos);
 	});
 
-	return Promise.all(promises);
+	await Promise.all(promises);
+} finally {
+	await prisma.$disconnect();
 }
-
-main()
-	.then(async () => {
-		await prisma.$disconnect();
-	})
-	.catch(async (e) => {
-		console.error(e);
-		await prisma.$disconnect();
-		process.exit(1);
-	});

@@ -9,11 +9,11 @@ export function createRunner(
 ) {
 	let i = 0;
 
-	const next = async () => {
+	const next = async (): Promise<void> => {
 		const plugin = plugins[i++];
 
 		if (!plugin) {
-			return Promise.resolve();
+			return;
 		}
 
 		const fn = getFn(plugin);

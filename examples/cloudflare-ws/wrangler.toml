@@ -1,7 +1,6 @@
 name = "baeta-cloudflare-ws-example"
 main = "dist/app.mjs"
 compatibility_date = "2023-02-24"
-usage_model = "bundled"
 env = {}
 
 [triggers]

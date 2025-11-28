@@ -37,7 +37,7 @@ function formatError(error: unknown) {
 	return JSON.stringify(error, null, 2);
 }
 
-export function GeneratorStatus(props: Props) {
+export function GeneratorStatus(props: Readonly<Props>) {
 	return (
 		<Layout title="Generator" color="magenta" loading={props.running}>
 			<GeneratorStatusContent {...props} />
@@ -45,7 +45,7 @@ export function GeneratorStatus(props: Props) {
 	);
 }
 
-function GeneratorStatusContent(props: Props) {
+function GeneratorStatusContent(props: Readonly<Props>) {
 	if (props.error) {
 		return <Errors errors={[makeErrorOutput('generator-error', formatError(props.error))]} />;
 	}
@@ -61,15 +61,17 @@ function GeneratorStatusContent(props: Props) {
 	return <Text>Generated</Text>;
 }
 
-function GeneratorPluginsStatus(props: Props) {
+function GeneratorPluginsStatus(
+	props: Readonly<Pick<Props, 'startedPlugins' | 'finishedPlugins'>>,
+) {
 	if (props.startedPlugins.length === 0) {
 		return <Text>Generating...</Text>;
 	}
 
-	const finishedActions = props.finishedPlugins.map((plugin) => plugin.actionName);
+	const finishedActions = new Set(props.finishedPlugins.map((plugin) => plugin.actionName));
 
 	const pluginMessages = props.startedPlugins.map((startedPlugin) => {
-		const isFinished = finishedActions.includes(startedPlugin.actionName);
+		const isFinished = finishedActions.has(startedPlugin.actionName);
 		return (
 			<GeneratorPluginStatus
 				key={startedPlugin.id}
@@ -87,7 +89,7 @@ interface PluginStatus {
 	isFinished: boolean;
 }
 
-function GeneratorPluginStatus(props: PluginStatus) {
+function GeneratorPluginStatus(props: Readonly<PluginStatus>) {
 	const status = props.isFinished ? '✔' : <Spinner />;
 	const task = props.isFinished ? `Generated ${props.name}` : `Generating ${props.name}...`;
 

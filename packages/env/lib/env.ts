@@ -15,13 +15,14 @@ export type EnvInferType<T extends EnvTypes> = T extends 'string'
 
 type InferTypeFromOptions<
 	O extends EnvOptions<EnvTypes, boolean | undefined, EnvInferType<EnvTypes> | undefined>,
-> = O extends EnvOptions<infer T, infer R, infer D>
-	? R extends true
-		? EnvInferType<T>
-		: D extends undefined
-			? EnvInferType<T> | undefined
-			: EnvInferType<T>
-	: never;
+> =
+	O extends EnvOptions<infer T, infer R, infer D>
+		? R extends true
+			? EnvInferType<T>
+			: D extends undefined
+				? EnvInferType<T> | undefined
+				: EnvInferType<T>
+		: never;
 
 export interface EnvOptions<
 	T extends EnvTypes,
@@ -50,10 +51,6 @@ function resolveString(value: string) {
 	return value;
 }
 
-function resolveNumber(value: string) {
-	return Number(value);
-}
-
 function resolveBoolean(value: string) {
 	return value === 'true';
 }
@@ -71,7 +68,7 @@ function resolveParam<
 		if (options.resolver) {
 			return options.resolver(rawValue);
 		}
-		return resolveNumber(rawValue);
+		return Number(rawValue);
 	}
 
 	if (options.type === 'boolean') {

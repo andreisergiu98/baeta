@@ -1,4 +1,4 @@
-import { createSerializer, type StoreOptions } from '@baeta/extension-cache';
+import type { StoreAdapterOptions } from '@baeta/extension-cache';
 import test from '@baeta/testing';
 import { runTestsForStoreAdapter, type TestItem } from '@baeta/tests-cache-stores';
 import { Miniflare } from 'miniflare';
@@ -19,9 +19,8 @@ const mf = new Miniflare({
 const env: { BAETA_CACHE: DurableObjectNamespace } = await mf.getBindings();
 const store = env.BAETA_CACHE;
 
-function createStoreAdapter(options: StoreOptions<TestItem>) {
-	const serializer = createSerializer();
-	return new CloudflareStoreAdapter(store, serializer, options, 'test', 'test-hash');
+function createStoreAdapter(options: StoreAdapterOptions<TestItem>) {
+	return new CloudflareStoreAdapter(store, options);
 }
 
 test.beforeEach(async () => {
@@ -35,6 +34,5 @@ test.after(async () => {
 
 runTestsForStoreAdapter(createStoreAdapter, test, {
 	name: 'CloudflareStoreAdapter',
-	serializer: createSerializer(),
 	testTtl: true,
 });

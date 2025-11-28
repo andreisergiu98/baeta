@@ -1,4 +1,4 @@
-import { build } from 'esbuild';
+import { build } from '@baeta/builder/bundler';
 
 export async function bundleTest() {
 	await build({

@@ -1,37 +1,5 @@
 import test from '@baeta/testing';
-import { extendFunction, nameFunction } from './functions.ts';
-
-test('extendFunction extends the function with the provided properties', (t) => {
-	const originalFn = () => {};
-	const extension = {
-		prop1: 'value1',
-		prop2: 'value2',
-	};
-
-	const extendedFn = extendFunction(originalFn, extension);
-
-	t.is(extendedFn.prop1, 'value1');
-	t.is(extendedFn.prop2, 'value2');
-});
-
-test('extended function retains original function behavior', (t) => {
-	let called = false;
-
-	const originalFn = () => {
-		called = true;
-	};
-
-	const extension = {
-		prop1: 'value1',
-		prop2: 'value2',
-	};
-
-	const extendedFn = extendFunction(originalFn, extension);
-
-	extendedFn();
-
-	t.true(called);
-});
+import { nameFunction } from './functions.ts';
 
 const createAnonymousFunction = () => () => {};
 
@@ -51,4 +19,13 @@ test('nameFunction does not set the name property if the function already has a 
 	nameFunction(fn, 'newName');
 
 	t.is(fn.name, 'existingName');
+});
+
+test('nameFunction should fail gracefully for unsupported operations', (t) => {
+	const fn = 'myFunction';
+
+	// @ts-expect-error - fn is not a function
+	nameFunction(fn, 'myFunction');
+
+	t.is(fn, 'myFunction');
 });

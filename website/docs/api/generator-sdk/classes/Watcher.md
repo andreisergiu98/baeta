@@ -243,7 +243,7 @@
 </td>
 <td>
 
-`null` \| `Error`
+`Error` \| `null`
 
 </td>
 </tr>

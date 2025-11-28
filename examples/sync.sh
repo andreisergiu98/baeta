@@ -8,8 +8,6 @@ cp -r ./examples/yoga/src/{modules,__generated__} ./examples/cloudflare/src
 
 cp -r ./examples/yoga-sse/src/{modules,__generated__} ./examples/cloudflare-ws/src
 
-cp -r ./examples/yoga/src/{modules,__generated__} ./examples/complexity/src
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i '' -e 's/ctx\.pubsub\.publish/ctx.publish/g' -e 's/ctx\.pubsub\.subscribe/ctx.subscribe/g' ./examples/cloudflare-ws/src/modules/user/user.resolvers.ts
 else
@@ -18,13 +16,13 @@ fi
 
 cp -r ./examples/yoga-ws/src/app.ts ./examples/prisma/src
 
-cp -r ./examples/prisma/src/{lib,modules} ./examples/auth/src
+cp -r ./examples/prisma/src/lib ./examples/auth/src
 cp -r ./examples/prisma/{dev.db,.gitignore,schema.prisma} ./examples/auth
 
-cp -r ./examples/prisma/src/{lib,modules,types,app.ts} ./examples/cache/src
+cp -r ./examples/prisma/src/{lib,types,app.ts} ./examples/cache/src
 cp -r ./examples/prisma/{dev.db,.gitignore,schema.prisma} ./examples/cache
 
-cp -r ./examples/prisma/src/{lib,modules,types,app.ts} ./examples/cache-advanced/src
+cp -r ./examples/prisma/src/{lib,types,app.ts} ./examples/cache-advanced/src
 cp -r ./examples/prisma/{dev.db,.gitignore,schema.prisma} ./examples/cache-advanced
 
 cp -r ./examples/prisma/src/{lib,modules,types,app.ts} ./examples/relay-pagination/src

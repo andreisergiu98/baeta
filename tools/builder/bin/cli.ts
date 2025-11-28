@@ -108,6 +108,10 @@ yargs(hideBin(process.argv))
 		'Publishes all packages',
 		async (args) => {
 			return args
+				.option('check-branch', {
+					describe: 'Check if the current branch is matching the expected release',
+					type: 'string',
+				})
 				.option('tag', {
 					describe: 'The tag to use for the release. By default respects the changeset tag',
 					type: 'string',
@@ -149,6 +153,23 @@ yargs(hideBin(process.argv))
 				);
 
 				if (!confirmedReleaseTag) {
+					process.exit(1);
+				}
+			}
+
+			if (args.checkBranch !== undefined) {
+				if (args.checkBranch === 'main') {
+					if (args.tag !== 'latest') {
+						console.error(`Expected release tag to be "latest" for branch "main"`);
+						process.exit(1);
+					}
+				} else if (args.checkBranch === 'next') {
+					if (args.tag !== 'next') {
+						console.error(`Expected release tag to be "next" for branch "next"`);
+						process.exit(1);
+					}
+				} else {
+					console.error(`Invalid branch "${args.checkBranch}"`);
 					process.exit(1);
 				}
 			}

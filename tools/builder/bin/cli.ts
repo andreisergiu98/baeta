@@ -137,7 +137,7 @@ yargs(hideBin(process.argv))
 				});
 		},
 		async (args) => {
-			const runArgs: string[] = ['--tolerate-republish', `--tag=${args.tag}`];
+			const runArgs: string[] = ['--tolerate-republish', `--tag=${args.tag}`, '--provenance'];
 
 			if (args.extraArgs != null) {
 				runArgs.push(args.extraArgs);

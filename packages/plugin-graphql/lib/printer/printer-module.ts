@@ -37,7 +37,7 @@ export function printModuleMetadata(name: string, doc: DocumentNode) {
 
 export function printBaetaModuleTypes(config: ModulePrinterConfig) {
 	return buildBlock({
-		name: 'interface BaetaModuleTypes',
+		name: 'export interface BaetaModuleTypes',
 		lines: [
 			buildBlock({
 				name: 'Builders:',

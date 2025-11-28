@@ -38,6 +38,7 @@ export class ModuleCompiler<
 	readonly #defaultResolvers: Readonly<IResolvers>;
 	readonly #scalarResolvers: Array<[string, GraphQLScalarType]>;
 	readonly #transformers: SchemaTransformer[];
+	readonly #typesMap: TypesResolvers;
 
 	constructor(options: ModuleCompilerOptions<Context, Info, TypesResolvers>) {
 		this.#name = options.name;
@@ -47,6 +48,7 @@ export class ModuleCompiler<
 		this.#defaultResolvers = options.defaultResolvers;
 		this.#extensions = options.extensions;
 		this.#transformers = [...options.transformers];
+		this.#typesMap = options.typesMap;
 		const { types, genericResolvers } = getTypeCompilersAndResolvers(options.typesMap);
 		this.#types = types;
 		this.#scalarResolvers = genericResolvers;

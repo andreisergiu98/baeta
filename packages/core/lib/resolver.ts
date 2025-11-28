@@ -1,12 +1,10 @@
-import type { GraphQLResolveInfo } from 'graphql';
-
-export type Resolver<Result, Root, Context, Args> = (
-	params: ResolverParams<Root, Context, Args>,
-) => Result | Promise<Result>;
-
-export type ResolverParams<Root, Context, Args> = {
-	root: Root;
+export type ResolverParams<Source, Context, Args, Info> = {
+	source: Source;
 	args: Args;
 	ctx: Context;
-	info: GraphQLResolveInfo;
+	info: Info;
 };
+
+export type Resolver<Result, Source, Context, Args, Info> = (
+	params: ResolverParams<Source, Context, Args, Info>,
+) => Result | PromiseLike<Result>;

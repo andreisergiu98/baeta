@@ -1,4 +1,4 @@
-# AuthMiddlewareOptions\<Grants, Result, Root, Context, Args\>
+# AuthMiddlewareOptions\<Grants, Result, Root, Context, Args, Info\>
 
 Options for authorization middlewares
 
@@ -46,6 +46,13 @@ Options for authorization middlewares
 
 </td>
 </tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -68,7 +75,7 @@ Options for authorization middlewares
 </td>
 <td>
 
-[`GetGrant`](../type-aliases/GetGrant.md)\<`Grants`, `Result`, `Root`, `Context`, `Args`\>
+[`GetGrant`](../type-aliases/GetGrant.md)\<`Grants`, `Result`, `Root`, `Context`, `Args`, `Info`\>
 
 </td>
 <td>

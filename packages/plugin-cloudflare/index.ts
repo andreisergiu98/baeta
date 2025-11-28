@@ -53,11 +53,8 @@ async function generateConfigForSubscriptions(options: CloudflarePluginOptions['
 
 	const bindingMigrations: string[] = ['# Migrations for Subscriptions'];
 
-	for (let i = 0; i < durableObjectsMigrations.length; i++) {
-		const migration = durableObjectsMigrations[i];
-		bindingMigrations.push('[[migrations]]');
-		bindingMigrations.push(`tag = "${migration.tag}"`);
-		bindingMigrations.push(...migration.content);
+	for (const migration of durableObjectsMigrations) {
+		bindingMigrations.push('[[migrations]]', `tag = "${migration.tag}"`, ...migration.content);
 	}
 
 	return {
@@ -93,11 +90,8 @@ async function generateConfigForCache(options: CloudflarePluginOptions['cache'])
 
 	const bindingMigrations: string[] = ['# Migrations for Cache'];
 
-	for (let i = 0; i < durableObjectsMigrations.length; i++) {
-		const migration = durableObjectsMigrations[i];
-		bindingMigrations.push('[[migrations]]');
-		bindingMigrations.push(`tag = "${migration.tag}"`);
-		bindingMigrations.push(...migration.content);
+	for (const migration of durableObjectsMigrations) {
+		bindingMigrations.push('[[migrations]]', `tag = "${migration.tag}"`, ...migration.content);
 	}
 
 	return {

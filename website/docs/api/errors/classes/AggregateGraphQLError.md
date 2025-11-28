@@ -145,7 +145,7 @@ Extension fields to add to the formatted error.
 </td>
 <td>
 
-`undefined` \| readonly `SourceLocation`[]
+readonly `SourceLocation`[] \| `undefined`
 
 </td>
 <td>
@@ -248,7 +248,7 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
-`undefined` \| readonly `ASTNode`[]
+readonly `ASTNode`[] \| `undefined`
 
 </td>
 <td>
@@ -280,7 +280,7 @@ An array of GraphQL AST Nodes corresponding to this error.
 </td>
 <td>
 
-`undefined` \| `Error`
+`Error` \| `undefined`
 
 </td>
 <td>
@@ -312,7 +312,7 @@ The original error thrown from a field resolver during execution.
 </td>
 <td>
 
-`undefined` \| readonly (`string` \| `number`)[]
+readonly (`string` \| `number`)[] \| `undefined`
 
 </td>
 <td>
@@ -347,7 +347,7 @@ Enumerable, and appears in the result of JSON.stringify().
 </td>
 <td>
 
-`undefined` \| readonly `number`[]
+readonly `number`[] \| `undefined`
 
 </td>
 <td>
@@ -380,7 +380,7 @@ which correspond to this error.
 </td>
 <td>
 
-`undefined` \| `Source`
+`Source` \| `undefined`
 
 </td>
 <td>

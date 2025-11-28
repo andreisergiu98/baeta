@@ -1,4 +1,4 @@
-import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
+import { createPluginV1, getModuleExportName } from '@baeta/generator-sdk';
 import { join, parse } from '@baeta/util-path';
 
 /**
@@ -26,7 +26,7 @@ export interface PaginationTypeOptions {
 /**
  * Configuration options for the pagination plugin
  */
-export interface PaginationOptions {
+export interface PaginationOptions<Keys extends string | number | symbol = string> {
 	/**
 	 * Map of type names to their pagination configuration.
 	 * @example
@@ -45,7 +45,9 @@ export interface PaginationOptions {
 	 * }
 	 * ```
 	 */
-	types: Record<string, boolean | PaginationTypeOptions>;
+	types: {
+		[key in Keys]?: boolean | PaginationTypeOptions;
+	};
 	/**
 	 * Whether the node field should be nullable in all connections
 	 * @defaultValue true
@@ -56,8 +58,6 @@ export interface PaginationOptions {
 	 * @example ["hasMorePages: Boolean!"]
 	 */
 	pageInfoFields?: string[];
-	/** Whether to create an export file */
-	createExport?: boolean;
 	/**
 	 * Custom name for the pagination module
 	 * @defaultValue 'baeta-pagination'
@@ -87,15 +87,73 @@ function printPageInfo(addFields: string[] = []) {
 	]);
 }
 
-function printExport(moduleDefinitionName: string, moduleName: string, importExt = '') {
-	const parsed = parse(moduleDefinitionName);
-	const method = getModuleGetName(moduleName);
-	const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
+function printResolversForType(module: string, type: string, fields: string[]) {
+	return `${type}: ${module}.${type}.$fields({
+${fields
+	.map((field) => printResolverForField(module, type, field))
+	.map(indent(4))
+	.join(',\n')}
+})`;
+}
 
-	return `import { ${method} } from "./${importName}${importExt}";
+function printResolverForField(module: string, type: string, field: string) {
+	return `${field}: ${module}.${type}.${field}.key('${field}').undefinedAsNull()`;
+}
 
-export const ${getModuleVariableName(moduleName)} = ${method}();
+function getFieldNameFromFieldWithType(field: string) {
+	const [fieldName] = field.split(':');
+	return fieldName;
+}
+
+function printExport(
+	moduleDefinitionName: string,
+	moduleName: string,
+	importExt: string,
+	options: PaginationOptions,
+) {
+	const module = getModuleExportName(moduleName);
+	const typedef = parse(moduleDefinitionName).name + importExt;
+
+	const pageInfoResolver = printResolversForType(module, 'PageInfo', [
+		'hasNextPage',
+		'hasPreviousPage',
+		...(options.pageInfoFields?.map(getFieldNameFromFieldWithType) ?? []),
+	]);
+
+	const typesResolvers = Object.entries(options.types).flatMap(([type, typeOptions]) => {
+		if (typeOptions == null || typeOptions === false) {
+			return [];
+		}
+		const extraEdgeFields = (typeOptions === true ? [] : (typeOptions.edgeFields ?? [])).map(
+			getFieldNameFromFieldWithType,
+		);
+		const extraConnectionFields = (
+			typeOptions === true ? [] : (typeOptions.connectionFields ?? [])
+		).map(getFieldNameFromFieldWithType);
+		return [
+			printResolversForType(module, `${type}Connection`, [
+				'pageInfo',
+				'edges',
+				...extraConnectionFields,
+			]),
+			printResolversForType(module, `${type}Edge`, ['cursor', 'node', ...extraEdgeFields]),
+		];
+	});
+
+	return `import { ${module} } from "./${typedef}";
+
+export default ${module}.$schema({
+${[pageInfoResolver, ...typesResolvers].map(indent(4)).join(',\n')}
+});
 `;
+}
+
+function indent(size: number) {
+	return (text: string) =>
+		text
+			.split('\n')
+			.map((line) => ' '.repeat(size) + line)
+			.join('\n');
 }
 
 function printConnectionTypes(
@@ -144,7 +202,7 @@ function createExportFilename(moduleDir: string) {
  * @param options - Configuration options for the pagination plugin
  * @returns A Baeta generator plugin
  */
-export function paginationPlugin(options: PaginationOptions) {
+export function paginationPlugin<T>(options: PaginationOptions<keyof T>) {
 	const { moduleName = 'baeta-pagination' } = options;
 
 	return createPluginV1({
@@ -158,8 +216,7 @@ export function paginationPlugin(options: PaginationOptions) {
 
 			for (const name in options.types) {
 				const typeOptions = options.types[name];
-
-				if (typeOptions === false) {
+				if (typeOptions == null || typeOptions === false) {
 					continue;
 				}
 
@@ -183,16 +240,13 @@ export function paginationPlugin(options: PaginationOptions) {
 
 			ctx.fileManager.add(definitionFile);
 
-			if (options.createExport === false) {
-				return next();
-			}
-
 			ctx.fileManager.createAndAdd(
 				createExportFilename(moduleDir),
 				printExport(
 					ctx.generatorOptions.moduleDefinitionName,
 					moduleName,
 					ctx.generatorOptions.importExtension,
+					options,
 				),
 				'pagination',
 			);

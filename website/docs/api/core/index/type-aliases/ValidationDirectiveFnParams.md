@@ -2,7 +2,7 @@
 
 > **ValidationDirectiveFnParams**\<`DirectiveConfig`, `Context`\> = [`ValidateParams`](ValidateParams.md)\<`Context`\> & `object`
 
-## Type declaration
+## Type Declaration
 
 <table>
 <thead>

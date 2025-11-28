@@ -1,0 +1,88 @@
+---
+sidebar_position: 20
+---
+
+# Scalars
+
+Baeta provides support for custom GraphQL scalars to handle specific data types like DateTime or UUID.
+
+## Configuration
+
+First, define your scalars in your `baeta.ts` configuration file:
+
+```typescript
+export default defineConfig({
+  graphql: {
+    schemas: ["src/**/*.gql"],
+    scalars: {
+      DateTime: "Date", // Built-in JavaScript Date
+      UUID: "src/types/scalars.ts#UUID", // Custom type
+    },
+  },
+  // ... rest of config
+});
+```
+
+## Schema Definition
+
+Define your scalars in your GraphQL schema `src/modules/scalars/scalars.gql`:
+
+```graphql
+scalar DateTime
+scalar UUID
+```
+
+## Implementation
+
+Implement the scalar resolvers using `graphql-scalars` or your own implementation `src/modules/scalars/resolvers.ts`:
+
+```typescript
+import { DateTimeResolver, UUIDResolver } from "graphql-scalars";
+import { getScalarsModule } from "./typedef.ts";
+
+const { Scalar } = getScalarsModule();
+
+Scalar.DateTime(DateTimeResolver);
+Scalar.UUID(UUIDResolver);
+```
+
+## Usage in Resolvers
+
+The scalars are automatically typed in your resolvers:
+
+```typescript
+const { Query } = getUserModule();
+
+Query.user(({ args }) => {
+  // args.id is typed as UUID
+  // return type createdAt is typed as Date
+  return {
+    id: args.id,
+    createdAt: new Date(),
+  };
+});
+```
+
+## Type Safety
+
+Baeta ensures type safety between your GraphQL schema and TypeScript code:
+
+```typescript
+interface User {
+  id: UUID; // Custom type
+  createdAt: Date; // JavaScript Date
+  email: string; // Regular field
+}
+```
+
+## Built-in Scalars
+
+Baeta supports several common scalar types out of the box:
+
+- `Int`
+- `Float`
+- `String`
+- `Boolean`
+- `ID`
+
+These don't require any additional configuration.

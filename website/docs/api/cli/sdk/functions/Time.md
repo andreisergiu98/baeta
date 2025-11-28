@@ -1,6 +1,6 @@
 # Time()
 
-> **Time**(`props`): `null` \| `Element`
+> **Time**(`props`): `Element` \| `null`
 
 ## Parameters
 
@@ -29,4 +29,4 @@
 
 ## Returns
 
-`null` \| `Element`
+`Element` \| `null`

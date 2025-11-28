@@ -12,7 +12,7 @@ export interface SnippetProps {
 	language?: string;
 }
 
-export function Snippet(props: SnippetProps) {
+export function Snippet(props: Readonly<SnippetProps>) {
 	const left = props.idx % 2 === 1;
 
 	return (

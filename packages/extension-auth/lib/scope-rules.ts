@@ -7,12 +7,6 @@ import { getAuthStore } from './store.ts';
 export type ScopesShape = { [key: string]: unknown } | {};
 
 /**
- * Type alias representing all available scope keys defined in AuthExtension.Scopes.
- * Used as the base for constructing scope rules.
- */
-// export type Scopes = keyof AuthExtension.Scopes;
-
-/**
  * Utility type that enforces boolean scopes must be true.
  * For non-boolean scopes, preserves the original type.
  */

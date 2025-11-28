@@ -6,86 +6,46 @@ permissions:
   pull-requests: write
 
 on:
-  issue_comment:
-    types:
-      - created
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag"
+        required: true
+        default: "alpha"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
-    name: Snapshot Release
-    if: |
-      github.event.issue.pull_request &&
-      (github.event.comment.body == '/snapit' || github.event.comment.body == '/snapshot-release')
+  release-snapshot:
     runs-on: ubuntu-latest
     steps:
-      - name: Enforce permission requirement
-        uses: prince-chrismc/check-actor-permissions-action@d504e74ba31658f4cdf4fcfeb509d4c09736d88e #v3.0.2
-        with:
-          permission: write
+      - name: Checkout Repo
+        uses: actions/checkout@v5
 
-      - name: Add initial reaction
-        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 #v4
-        with:
-          comment-id: ${{ github.event.comment.id }}
-          reactions: eyes
-
-      - name: Validate pull request
-        uses: actions/github-script@v6
-        id: pr_data
+      - name: Get PR number for branch
+        id: pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          script: |
-            try {
-              const pullRequest = await github.rest.pulls.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-              })
-              
-              // Pull request from fork
-              if (context.payload.repository.full_name !== pullRequest.data.head.repo.full_name) {
-                const errorMessage = '`/snapit` is not supported on pull requests from forked repositories.'
-
-                await github.rest.issues.createComment({
-                  issue_number: context.issue.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: errorMessage,
-                })
-
-                core.setFailed(errorMessage)
-              }
-            } catch (err) {
-              core.setFailed(`Request failed with error ${err}`)
-            }
-              
-      - name: Install hub
+          BRANCH: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
         run: |
-          sudo apt-get update && sudo apt-get install -y hub
-
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      # issue_comment requires us to checkout the branch
-      # https://github.com/actions/checkout/issues/331#issuecomment-1120113003
-      - name: Checkout pull request branch
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER=$(gh pr list \
+            --head "$BRANCH" \
+            --repo "$REPO" \
+            --json number \
+            --jq '.[0].number')
+          echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
 
       - name: Setup env
         uses: ./.github/actions/setup
 
       - name: Publish Snapshot
+        if: steps.pr.outputs.pr_number != '' && steps.pr.outputs.pr_number != null
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          yarn changeset version --snapshot ${{ github.event.issue.number }}
+          yarn changeset version --snapshot ${{ steps.pr.outputs.pr_number }}
 
           if [[ `git status --porcelain` ]]; then
               echo "Changes detected, publishing snapshot"
@@ -94,18 +54,4 @@ jobs:
               exit 1
           fi
 
-          yarn release:snapshot
-
-      - name: Add failure reaction
-        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 #v4
-        if: failure()
-        with:
-          comment-id: ${{ github.event.comment.id }}
-          reactions: confused
-
-      - name: Add success reaction
-        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 #v4
-        if: success()
-        with:
-          comment-id: ${{ github.event.comment.id }}
-          reactions: rocket
+          yarn builder release --ci --tag=${{ inputs.tag }}

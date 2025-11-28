@@ -123,10 +123,7 @@ export function applyInputDirective(
 						continue;
 					}
 
-					if (validationsByArgumentName[argumentName] == null) {
-						validationsByArgumentName[argumentName] = [];
-					}
-
+					validationsByArgumentName[argumentName] ??= [];
 					const directiveConfig = directive.args ?? {};
 
 					validationsByArgumentName[argumentName].push({

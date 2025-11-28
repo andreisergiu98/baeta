@@ -18,10 +18,22 @@ export interface FileOptions {
 	disableEslintHeader?: boolean;
 
 	/**
-	 * Disable biome comment at the beginning of the file.
+	 * Disable biome v1 comment at the beginning of the file.
 	 * @defaultValue false
 	 */
-	disableBiomeHeader?: boolean;
+	disableBiomeV1Header?: boolean;
+
+	/**
+	 * Disable biome v2 comment at the beginning of the file.
+	 * @defaultValue false
+	 */
+	disableBiomeV2Header?: boolean;
+
+	/**
+	 * Dissallow overwriting the file.
+	 * @defaultValue false
+	 */
+	disableOverwrite?: boolean;
 
 	/**
 	 * Add custom header at the beginning of the file.
@@ -36,19 +48,31 @@ export interface FileOptions {
 
 export class File {
 	persisted = false;
+	readonly filename: string;
+	readonly content: string;
+	readonly tag: string;
+	readonly options?: FileOptions;
 
-	constructor(
-		public filename: string,
-		public content: string,
-		public tag: string,
-		private options?: FileOptions,
-	) {}
+	constructor(filename: string, content: string, tag: string, options?: FileOptions) {
+		this.filename = filename;
+		this.content = content;
+		this.tag = tag;
+		this.options = options;
+	}
 
 	write = async () => {
 		if (this.persisted) {
 			return;
 		}
 		this.persisted = true;
+
+		if (this.options?.disableOverwrite === true) {
+			const exists = await fs
+				.stat(this.filename)
+				.then((res) => res.isFile())
+				.catch(() => false);
+			if (exists) return;
+		}
 
 		const dir = dirname(this.filename);
 		await fs.mkdir(dir, { recursive: true });
@@ -88,8 +112,13 @@ export class File {
 			headerItems.push(comment);
 		}
 
-		if (this.options?.disableBiomeHeader !== true) {
+		if (this.options?.disableBiomeV1Header !== true) {
 			const comment = this.createComment('@biome-ignore-all: generated file');
+			headerItems.push(comment);
+		}
+
+		if (this.options?.disableBiomeV2Header !== true) {
+			const comment = this.createComment('biome-ignore-all lint: generated file');
 			headerItems.push(comment);
 		}
 

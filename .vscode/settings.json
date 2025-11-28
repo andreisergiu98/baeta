@@ -2,18 +2,19 @@
   "search.exclude": {
     "**/.docusaurus": true,
     "**/.pnp.*": true,
-    "**/.tsup": true,
     "**/.turbo": true,
     "**/.yarn": true,
     "**/dist": true,
+    "packages/*/coverage": true,
     "website/build": true
   },
   "files.exclude": {
     "**/.docusaurus": true,
-    "**/.tsup": true,
+    "**/.pnp.*": true,
     "**/.turbo": true,
     "**/node_modules": true,
     "**/dist": true,
+    "packages/*/coverage": true,
     "website/build": true,
     "website/.yarn": true
   },
@@ -28,7 +29,6 @@
     "datamodel",
     "dirpath",
     "dmmf",
-    "esbuild",
     "execa",
     "keyv",
     "middlewares",

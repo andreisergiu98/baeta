@@ -1,6 +1,6 @@
-import { HomeFeatures } from '@site/components/home-features';
-import { HomeHeader } from '@site/components/home-header';
-import { HomeSnippets } from '@site/components/home-snippets';
+import { HomeFeatures } from '@site/components/home-features/index.ts';
+import { HomeHeader } from '@site/components/home-header/index.ts';
+import { HomeSnippets } from '@site/components/home-snippets/index.ts';
 import Layout from '@theme/Layout';
 import type { JSX } from 'react';
 

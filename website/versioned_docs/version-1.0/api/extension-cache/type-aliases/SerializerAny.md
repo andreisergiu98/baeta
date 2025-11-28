@@ -1,0 +1,3 @@
+# SerializerAny
+
+> **SerializerAny** = `any`

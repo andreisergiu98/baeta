@@ -2,7 +2,7 @@
 
 > **Ctx**\<`T`\> = `object` & `T`
 
-## Type declaration
+## Type Declaration
 
 <table>
 <thead>

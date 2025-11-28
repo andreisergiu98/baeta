@@ -90,7 +90,13 @@ export function createSubscriptionInfo(
 	});
 
 	if (!isExecutionContext(execContext)) {
-		throw new AggregateError(execContext);
+		if (execContext.length === 1) {
+			throw execContext;
+		}
+		throw new AggregateError(
+			execContext,
+			'Multiple GraphQL errors encountered when building the execution context.',
+		);
 	}
 
 	const { field, root, args, info } = getResolverAndArgs({ execContext });
@@ -114,5 +120,5 @@ export function createSubscriptionInfo(
 }
 
 export function subscribe<T>(topic: string) {
-	return { topic } as unknown as AsyncIterator<T>;
+	return { topic } as unknown as AsyncIterable<T>;
 }

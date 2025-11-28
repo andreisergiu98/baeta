@@ -18,13 +18,13 @@ jobs:
     name: Deploy website
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup env
         uses: ./.github/actions/setup
 
       - name: Build website
-        run: yarn docs
+        run: yarn docs:build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e #v4

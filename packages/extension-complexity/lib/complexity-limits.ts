@@ -15,4 +15,4 @@ export interface ComplexityLimit {
  */
 export type GetComplexityLimit<Context> =
 	| ComplexityLimit
-	| ((ctx: Context) => ComplexityLimit | Promise<ComplexityLimit>);
+	| ((ctx: Context) => ComplexityLimit | PromiseLike<ComplexityLimit>);

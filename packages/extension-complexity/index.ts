@@ -1,6 +1,5 @@
 import './lib/global-types.ts';
 
-import type { Extension } from '@baeta/core/sdk';
 import { ComplexityExtension } from './lib/complexity-extension.ts';
 import type { ComplexityExtensionOptions } from './lib/complexity-options.ts';
 
@@ -38,5 +37,5 @@ export type {
  * ```
  */
 export function complexityExtension<Ctx>(options?: ComplexityExtensionOptions<Ctx>) {
-	return (): Extension => new ComplexityExtension(options);
+	return new ComplexityExtension(options);
 }

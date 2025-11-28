@@ -1,14 +1,39 @@
-# Extension
+# Extension\<Settings\>
+
+## Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Settings`
+
+</td>
+<td>
+
+`unknown`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Constructors
 
 ### Constructor
 
-> **new Extension**(): `Extension`
+> **new Extension**\<`Settings`\>(): `Extension`\<`Settings`\>
 
 #### Returns
 
-`Extension`
+`Extension`\<`Settings`\>
 
 ## Properties
 
@@ -16,25 +41,25 @@
 <thead>
 <tr>
 <th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
-<th>Default value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>
 
-<a id="version"></a> `version`
+<a id="statekey"></a> `stateKey`
 
 </td>
 <td>
 
-[`V1`](../enumerations/ExtensionVersion.md#v1)
+`abstract`
 
 </td>
 <td>
 
-`ExtensionVersion.V1`
+`symbol`
 
 </td>
 </tr>
@@ -43,9 +68,56 @@
 
 ## Methods
 
-### build()
+### getFieldExtensions()
 
-> **build**(`module`, `mapper`): `void`
+> **getFieldExtensions**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`_builder`): `object`
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Result`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Source`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Context`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Parameters
 
@@ -60,24 +132,293 @@
 <tr>
 <td>
 
-`module`
+`_builder`
 
 </td>
 <td>
 
-[`ModuleBuilder`](ModuleBuilder.md)
+[`FieldBuilder`](FieldBuilder.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`object`
+
+---
+
+### getModuleExtensions()
+
+> **getModuleExtensions**\<`Context`, `Info`\>(`_builder`): `object`
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Context`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`mapper`
+`Info`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`_builder`
 
 </td>
 <td>
 
-[`ResolverMapper`](ResolverMapper.md)
+[`ModuleBuilder`](ModuleBuilder.md)\<`Context`, `Info`\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`object`
+
+---
+
+### getState()
+
+> **getState**(`builder`): `Settings` \| `undefined`
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`builder`
+
+</td>
+<td>
+
+`EditableBuilderLike`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`Settings` \| `undefined`
+
+---
+
+### getSubscriptionExtensions()
+
+> **getSubscriptionExtensions**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`_builder`): `object`
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Result`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Source`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Context`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`_builder`
+
+</td>
+<td>
+
+[`SubscriptionBuilder`](SubscriptionBuilder.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`object`
+
+---
+
+### getTypeExtensions()
+
+> **getTypeExtensions**\<`Source`, `Context`, `Info`\>(`_builder`): `object`
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Source`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Context`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`_builder`
+
+</td>
+<td>
+
+[`TypeBuilder`](TypeBuilder.md)\<`Source`, `Context`, `Info`\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`object`
+
+---
+
+### mutate()
+
+> **mutate**(`_compilers`): `void`
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`_compilers`
+
+</td>
+<td>
+
+[`ModuleCompiler`](ModuleCompiler.md)\<`any`, `any`, `any`\>[]
 
 </td>
 </tr>
@@ -90,59 +431,9 @@
 
 ---
 
-### getModuleExtensions()
+### setState()
 
-> **getModuleExtensions**(): `object`
-
-#### Returns
-
-`object`
-
----
-
-### getResolverExtensions()
-
-> **getResolverExtensions**\<`Result`, `Root`, `Context`, `Args`\>(`module`, `type`, `field`): `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Result`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
+> **setState**(`builder`, `settings`): `void`
 
 #### Parameters
 
@@ -157,36 +448,24 @@
 <tr>
 <td>
 
-`module`
+`builder`
 
 </td>
 <td>
 
-[`ModuleBuilder`](ModuleBuilder.md)
-
-</td>
-</tr>
-<tr>
-<td>
-
-`type`
-
-</td>
-<td>
-
-`string`
+`EditableBuilderLike`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`field`
+`settings`
 
 </td>
 <td>
 
-`string`
+`Settings`
 
 </td>
 </tr>
@@ -195,334 +474,4 @@
 
 #### Returns
 
-`object`
-
----
-
-### getSubscriptionExtensions()
-
-> **getSubscriptionExtensions**\<`Root`, `Context`, `Args`\>(`module`, `field`): `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`module`
-
-</td>
-<td>
-
-[`ModuleBuilder`](ModuleBuilder.md)
-
-</td>
-</tr>
-<tr>
-<td>
-
-`field`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`object`
-
----
-
-### getSubscriptionResolveExtensions()
-
-> **getSubscriptionResolveExtensions**\<`Result`, `Root`, `Context`, `Args`\>(`module`, `field`): `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Result`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`module`
-
-</td>
-<td>
-
-[`ModuleBuilder`](ModuleBuilder.md)
-
-</td>
-</tr>
-<tr>
-<td>
-
-`field`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`object`
-
----
-
-### getSubscriptionSubscribeExtensions()
-
-> **getSubscriptionSubscribeExtensions**\<`Root`, `Context`, `Args`\>(`module`, `field`): `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Root`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Args`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`module`
-
-</td>
-<td>
-
-[`ModuleBuilder`](ModuleBuilder.md)
-
-</td>
-</tr>
-<tr>
-<td>
-
-`field`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`object`
-
----
-
-### getTransformers()
-
-> **getTransformers**(): [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
-
-#### Returns
-
-[`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
-
----
-
-### getTypeExtensions()
-
-> **getTypeExtensions**\<`Result`, `Context`\>(`module`, `type`): `object`
-
-#### Type Parameters
-
-<table>
-<thead>
-<tr>
-<th>Type Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`Result`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`Context`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`module`
-
-</td>
-<td>
-
-[`ModuleBuilder`](ModuleBuilder.md)
-
-</td>
-</tr>
-<tr>
-<td>
-
-`type`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`object`
+`void`

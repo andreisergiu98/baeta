@@ -23,7 +23,7 @@ Function type for creating custom complexity error messages.
 </td>
 <td>
 
-[`ComplexityErrorKind`](../enumerations/ComplexityErrorKind.md)
+[`ComplexityErrorKind`](../variables/ComplexityErrorKind.md)
 
 </td>
 <td>

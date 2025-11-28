@@ -87,7 +87,7 @@ export function addArgumentValidationsExtension(
 ) {
 	const extensions = initArgumentValidationsExtension(config);
 	extensions.argumentValidations[name] ??= [];
-	(extensions.argumentValidations[name] as ValidationOptions[])[index] = validation;
+	extensions.argumentValidations[name][index] = validation;
 }
 
 export function hasValidateExtension(type: GraphQLNamedInputType) {

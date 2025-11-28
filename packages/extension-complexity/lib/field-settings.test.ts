@@ -20,7 +20,7 @@ const mockSelection = {
 const mockInfo = { variableValues: {} } as unknown as GraphQLResolveInfo;
 
 test('getFieldComplexitySettings should return type-specific field settings', (t) => {
-	const map: FieldSettingsMap = {};
+	const map: FieldSettingsMap = new Map();
 	const expectedSettings = { complexity: 5 };
 	const settingsFn = () => expectedSettings;
 
@@ -40,7 +40,7 @@ test('getFieldComplexitySettings should return type-specific field settings', (t
 });
 
 test('getFieldComplexitySettings should fallback to wildcard settings', (t) => {
-	const map: FieldSettingsMap = {};
+	const map: FieldSettingsMap = new Map();
 	const expectedSettings = { complexity: 3 };
 	const wildcardFn = () => expectedSettings;
 
@@ -60,7 +60,7 @@ test('getFieldComplexitySettings should fallback to wildcard settings', (t) => {
 });
 
 test('getFieldComplexitySettings should return undefined when no settings found', (t) => {
-	const map: FieldSettingsMap = {};
+	const map: FieldSettingsMap = new Map();
 
 	const result = getFieldComplexitySettings(
 		{},
@@ -76,7 +76,7 @@ test('getFieldComplexitySettings should return undefined when no settings found'
 });
 
 test('getFieldComplexitySettings should call the settings function', (t) => {
-	const map: FieldSettingsMap = {};
+	const map: FieldSettingsMap = new Map();
 
 	const settingsFn = sinon.spy((_params: GetFieldSettingsArgs<unknown, unknown>) => {
 		return { complexity: 11 };

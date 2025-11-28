@@ -1,6 +1,6 @@
 # complexityExtension()
 
-> **complexityExtension**\<`Ctx`\>(`options?`): () => [`Extension`](../../core/sdk/classes/Extension.md)
+> **complexityExtension**\<`Ctx`\>(`options?`): `ComplexityExtension`\<`Ctx`\>
 
 Creates a complexity analysis extension for GraphQL queries.
 
@@ -56,13 +56,9 @@ Configuration options for complexity analysis
 
 ## Returns
 
+`ComplexityExtension`\<`Ctx`\>
+
 Extension factory function
-
-> (): [`Extension`](../../core/sdk/classes/Extension.md)
-
-### Returns
-
-[`Extension`](../../core/sdk/classes/Extension.md)
 
 ## Example
 

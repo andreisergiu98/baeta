@@ -1,6 +1,31 @@
-# PaginationOptions
+# PaginationOptions\<Keys\>
 
 Configuration options for the pagination plugin
+
+## Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Keys` _extends_ `string` \| `number` \| `symbol`
+
+</td>
+<td>
+
+`string`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Properties
 
@@ -22,7 +47,7 @@ Configuration options for the pagination plugin
 </td>
 <td>
 
-`Record`\<`string`, `boolean` \| [`PaginationTypeOptions`](PaginationTypeOptions.md)\>
+\{ \[key in string \| number \| symbol\]?: boolean \| PaginationTypeOptions \}
 
 </td>
 <td>
@@ -50,28 +75,6 @@ Map of type names to their pagination configuration.
   }
 }
 ```
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="createexport"></a> `createExport?`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-`undefined`
-
-</td>
-<td>
-
-Whether to create an export file
 
 </td>
 </tr>

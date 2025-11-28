@@ -1,23 +1,17 @@
 import {
+	type CacheRef,
 	type ItemRef,
 	type ParentRef,
-	type Serializer,
 	StoreAdapter,
-	type StoreOptions,
+	type StoreAdapterOptions,
 } from '@baeta/extension-cache';
 import { CloudflareCacheClient } from './cloudflare-cache-client.ts';
 
 export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
-	private client: CloudflareCacheClient;
+	private readonly client: CloudflareCacheClient;
 
-	constructor(
-		durableObject: DurableObjectNamespace,
-		serializer: Serializer,
-		options: StoreOptions<Item>,
-		type: string,
-		hash: string,
-	) {
-		super(serializer, options, type, hash);
+	constructor(durableObject: DurableObjectNamespace, options: StoreAdapterOptions<Item>) {
+		super(options);
 		this.client = new CloudflareCacheClient(durableObject);
 	}
 
@@ -25,14 +19,14 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 		if (refs.length === 0) {
 			return null;
 		}
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		const results = await this.client.get(keys).then((res) => res ?? null);
 		return results.map((result) => (result == null ? null : this.parseItem(result)));
 	};
 
 	saveMany = async (items: Item[]) => {
 		const pairs = items.map(
-			(item) => [this.createKeyByItem(item), this.stringifyItem(item)] as [string, string],
+			(item) => [this.createItemKey(item), this.stringifyItem(item)] as [string, string],
 		);
 		await this.client.put(pairs, this.getTtl());
 	};
@@ -42,7 +36,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 			return;
 		}
 
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		await this.client.delete(keys);
 
 		if (evictQueries) {
@@ -51,21 +45,21 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected saveQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		meta: string[],
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 		await this.client.putOne(key, JSON.stringify(meta), this.getTtl());
 	};
 
 	protected loadQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 		const meta = await this.client
 			.getOne(key)
 			.then((res) => (res ? (JSON.parse(res) as string[]) : []));
@@ -78,7 +72,7 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected deleteQueriesByRef = async (
-		queryRef?: string,
+		queryRef?: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
@@ -96,18 +90,21 @@ export class CloudflareStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected async searchQueries(
-		queryRef = '*',
-		parentRef: NonNullable<ParentRef> = '*',
-		args: Record<string, unknown> = {},
+		queryRef?: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
 	) {
 		const keys: string[] = [];
-		const matcher = this.createQueryKeyRegExpMatcher(queryRef, parentRef, args);
-		const namespace = queryRef === '*' ? '' : this.createQueryKeyNamespace(queryRef);
+		const matcher =
+			queryRef == null
+				? this.createQueryKeyRegExpMatcher()
+				: this.createQueryKeyRegExpMatcher(queryRef, parentRef, args);
+		const namespace = queryRef == null ? '' : this.createQueryKeyPrefix(queryRef.toString());
 
 		const items = await this.client.list(namespace);
 
-		for await (const key of items) {
-			if (key.match(matcher)) {
+		for (const key of items) {
+			if (matcher.exec(key)) {
 				keys.push(key);
 			}
 		}

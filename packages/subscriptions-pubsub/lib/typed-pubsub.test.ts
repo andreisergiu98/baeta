@@ -1,7 +1,6 @@
 import testFn, { type TestFn } from '@baeta/testing';
-import { PubSub as PubSubV2 } from 'graphql-subscriptions-v2';
-import { PubSub as PubSubV3 } from 'graphql-subscriptions-v3';
-import { createTypedPubSub, type TypedPubSub } from './typed-pubsub.ts';
+import { PubSub, type PubSubEngine } from 'graphql-subscriptions';
+import { TypedPubSub } from './typed-pubsub.ts';
 
 interface TestEventMap {
 	'user:created': { id: string; name: string };
@@ -9,8 +8,8 @@ interface TestEventMap {
 }
 
 type Ctx = {
-	pubsub: TypedPubSub<PubSubV2, TestEventMap>;
-	originalPubsub: PubSubV2;
+	pubsub: TypedPubSub<PubSubEngine, TestEventMap>;
+	originalPubsub: PubSubEngine;
 };
 
 const test = testFn as TestFn<Ctx>;
@@ -24,8 +23,8 @@ function createAsyncCallback<T = null>() {
 }
 
 test.beforeEach((t) => {
-	const pubsub = new PubSubV2();
-	const typedPubSub = createTypedPubSub<PubSubV2, TestEventMap>(pubsub);
+	const pubsub = new PubSub();
+	const typedPubSub = new TypedPubSub<PubSubEngine, TestEventMap>(pubsub);
 	t.context = {
 		pubsub: typedPubSub,
 		originalPubsub: pubsub,
@@ -38,9 +37,13 @@ test('publish and subscribe should work', async (t) => {
 	const payload = { id: '1', name: 'John' };
 	const cb = createAsyncCallback<typeof payload>();
 
-	await pubsub.subscribe('user:created', (message) => {
-		cb.call(message);
-	});
+	await pubsub.subscribe(
+		'user:created',
+		(message) => {
+			cb.call(message);
+		},
+		{},
+	);
 
 	pubsub.publish('user:created', payload);
 
@@ -57,13 +60,21 @@ test('subscribe should handle multiple subscribers', async (t) => {
 	const cb1 = createAsyncCallback<typeof payload>();
 	const cb2 = createAsyncCallback<typeof payload>();
 
-	await pubsub.subscribe('user:created', (message) => {
-		cb1.call(message);
-	});
+	await pubsub.subscribe(
+		'user:created',
+		(message) => {
+			cb1.call(message);
+		},
+		{},
+	);
 
-	await pubsub.subscribe('user:created', (message) => {
-		cb2.call(message);
-	});
+	await pubsub.subscribe(
+		'user:created',
+		(message) => {
+			cb2.call(message);
+		},
+		{},
+	);
 
 	pubsub.publish('user:created', payload);
 
@@ -78,9 +89,13 @@ test('unsubscribe should stop receiving messages after unsubscribe', async (t) =
 
 	let receivedCount = 0;
 
-	const subId = await pubsub.subscribe('user:created', () => {
-		receivedCount++;
-	});
+	const subId = await pubsub.subscribe(
+		'user:created',
+		() => {
+			receivedCount++;
+		},
+		{},
+	);
 
 	await pubsub.publish('user:created', { id: '1', name: 'John' });
 	await pubsub.publish('user:created', { id: '1', name: 'John' });
@@ -95,7 +110,7 @@ test('unsubscribe should stop receiving messages after unsubscribe', async (t) =
 });
 
 test('channel prefix should work', async (t) => {
-	const pubsub = createTypedPubSub<PubSubV2, TestEventMap>(t.context.originalPubsub, {
+	const pubsub = new TypedPubSub<PubSubEngine, TestEventMap>(t.context.originalPubsub, {
 		prefix: 'test:',
 	});
 
@@ -116,19 +131,27 @@ test('channel prefix should work', async (t) => {
 		name: string;
 	}>();
 
-	originalPubsub.subscribe('test:user:created', () => {
-		typedPublish.call(mockedUser);
-	});
+	originalPubsub.subscribe(
+		'test:user:created',
+		() => {
+			typedPublish.call(mockedUser);
+		},
+		{},
+	);
 
 	pubsub.publish('user:created', { id: '1', name: 'John' });
 
-	pubsub.subscribe('user:created', () => {
-		typedSubscribe.call(mockedUser);
-	});
+	pubsub.subscribe(
+		'user:created',
+		() => {
+			typedSubscribe.call(mockedUser);
+		},
+		{},
+	);
 
 	originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
 
-	const typedAsyncIterator = pubsub.asyncIterator('user:created');
+	const typedAsyncIterator = pubsub.asyncIterableIterator('user:created');
 
 	const asyncIteratorPromise = typedAsyncIterator.next();
 
@@ -139,45 +162,10 @@ test('channel prefix should work', async (t) => {
 	t.deepEqual((await asyncIteratorPromise).value, mockedUser);
 });
 
-test('asyncIterator should create iterator for single trigger', async (t) => {
-	const { pubsub } = t.context;
-
-	const iterator = pubsub.asyncIterator('user:created');
-	const payload = { id: '1', name: 'John' };
-
-	const resultPromise = iterator.next();
-
-	pubsub.publish('user:created', payload);
-
-	const result = await resultPromise;
-
-	t.deepEqual(result.value, payload);
-	t.false(result.done);
-});
-
-test('asyncIterator should create iterator for multiple triggers', async (t) => {
-	const { pubsub } = t.context;
-
-	const iterator = pubsub.asyncIterator(['user:created', 'user:updated']);
-	const createdPayload = { id: '1', name: 'John' };
-	const updatedPayload = { id: '1', updates: { name: 'John Doe' } };
-
-	const createPromise = iterator.next();
-	pubsub.publish('user:created', createdPayload);
-	const createResult = await createPromise;
-
-	const updatePromise = iterator.next();
-	pubsub.publish('user:updated', updatedPayload);
-	const updateResult = await updatePromise;
-
-	t.deepEqual(createResult.value, createdPayload);
-	t.deepEqual(updateResult.value, updatedPayload);
-});
-
 test('asyncIterableIterator should work with channel prefix', async (t) => {
-	const originalPubsub = new PubSubV3();
+	const originalPubsub = new PubSub();
 
-	const pubsub = createTypedPubSub<PubSubV3, TestEventMap>(originalPubsub, {
+	const pubsub = new TypedPubSub<PubSubEngine, TestEventMap>(originalPubsub, {
 		prefix: 'test:',
 	});
 
@@ -198,8 +186,8 @@ test('asyncIterableIterator should work with channel prefix', async (t) => {
 });
 
 test('asyncIterableIterator should create iterator for single trigger', async (t) => {
-	const originalPubsub = new PubSubV3();
-	const pubsub = createTypedPubSub<PubSubV3, TestEventMap>(originalPubsub);
+	const originalPubsub = new PubSub();
+	const pubsub = new TypedPubSub<PubSubEngine, TestEventMap>(originalPubsub);
 
 	const iterator = pubsub.asyncIterableIterator('user:created');
 	const payload = { id: '1', name: 'John' };
@@ -215,8 +203,8 @@ test('asyncIterableIterator should create iterator for single trigger', async (t
 });
 
 test('asyncIterableIterator should create iterator for multiple triggers', async (t) => {
-	const originalPubsub = new PubSubV3();
-	const pubsub = createTypedPubSub<PubSubV3, TestEventMap>(originalPubsub);
+	const originalPubsub = new PubSub();
+	const pubsub = new TypedPubSub<PubSubEngine, TestEventMap>(originalPubsub);
 
 	const iterator = pubsub.asyncIterableIterator(['user:created', 'user:updated']);
 	const createdPayload = { id: '1', name: 'John' };

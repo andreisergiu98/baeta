@@ -1,11 +1,12 @@
-import { EventEmitter } from 'node:events';
 import { Watcher } from '@baeta/generator';
 import path from '@baeta/util-path';
-import { type PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
+import { Box, Text } from 'ink';
+import { type PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type LoadedBaetaConfig, loadConfig } from '../lib/config-loader.ts';
 import { createContextProvider } from '../utils/context.ts';
-import { ConfigStatus } from './config-status.tsx';
+import { Spinner } from './spinner.tsx';
 
+export type { LoadedBaetaConfig } from '../lib/config-loader.ts';
 export interface ConfigProps {
 	initialConfig: LoadedBaetaConfig;
 	watchConfig?: boolean;
@@ -15,19 +16,21 @@ export type ConfigEventMap = {
 	update: [LoadedBaetaConfig];
 };
 
-export type { LoadedBaetaConfig };
-
-export function useConfigStore(props: ConfigProps) {
+export function useConfigStore(props: Readonly<ConfigProps>) {
 	const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);
-	const events = useMemo(() => new EventEmitter<ConfigEventMap>(), []);
+	const [showConfigChanged, setShowConfigChanged] = useState(false);
+	const configChangedTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
 
 	const updateConfig = useCallback(async () => {
 		const config = await loadConfig();
-		if (config) {
-			setConfig(config);
-			events.emit('update', config);
-		}
-	}, [events]);
+		if (!config) return;
+		setConfig(config);
+		setShowConfigChanged(true);
+		clearTimeout(configChangedTimeout.current);
+		configChangedTimeout.current = setTimeout(() => {
+			setShowConfigChanged(false);
+		}, 1000);
+	}, []);
 
 	useEffect(() => {
 		if (props.watchConfig !== true) {
@@ -50,7 +53,7 @@ export function useConfigStore(props: ConfigProps) {
 		};
 	}, [props.watchConfig, props.initialConfig.location, updateConfig]);
 
-	return useMemo(() => ({ ...config, events }), [config, events]);
+	return useMemo(() => ({ ...config, showConfigChanged }), [config, showConfigChanged]);
 }
 
 export const [ConfigProviderBase, useConfig] = createContextProvider(
@@ -67,5 +70,24 @@ export function ConfigProvider(props: PropsWithChildren<ConfigProps>) {
 			<ConfigStatus />
 			{children}
 		</ConfigProviderBase>
+	);
+}
+
+export function ConfigStatus() {
+	const { showConfigChanged } = useConfig();
+
+	if (!showConfigChanged) {
+		return null;
+	}
+
+	return (
+		<Box flexDirection="column">
+			<Text bold={true} color="yellow">
+				<Spinner /> Config
+			</Text>
+			<Box marginLeft={2}>
+				<Text>Config changed! Restarting...</Text>
+			</Box>
+		</Box>
 	);
 }

@@ -1,9 +1,4 @@
-export type {
-	PubSubEngineV2,
-	PubSubEngineV3,
-} from './lib/pubsub-engine.ts';
-export type {
+export {
 	TypedPubSub,
-	TypedPubSubOptions,
+	type TypedPubSubOptions,
 } from './lib/typed-pubsub.ts';
-export { createTypedPubSub } from './lib/typed-pubsub.ts';

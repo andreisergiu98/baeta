@@ -4,7 +4,6 @@ import { Generator } from './generator.tsx';
 
 interface Args {
 	watch?: boolean;
-	skipInitial?: boolean;
 	run?: string;
 }
 
@@ -20,11 +19,6 @@ export function createGenerateCommand(config?: LoadedBaetaConfig) {
 					boolean: true,
 					describe: 'Watch for changes',
 				})
-				.option('skipInitial', {
-					alias: 's',
-					boolean: true,
-					describe: 'Skip initial generation when running in watch mode',
-				})
 				.option('run', {
 					alias: 'r',
 					string: true,
@@ -39,15 +33,14 @@ export function createGenerateCommand(config?: LoadedBaetaConfig) {
 function createHandler(config?: LoadedBaetaConfig) {
 	return (args: Args) => {
 		if (!config) {
-			console.log(makeErrorMessage("baeta.js is required to run 'generate'"));
+			console.log(makeErrorMessage("baeta.ts is required to run 'generate'"));
 			return;
 		}
 
-		return renderComponent(
+		renderComponent(
 			Generator,
 			{
 				watch: args.watch,
-				skipInitial: args.skipInitial,
 				run: args.run,
 			},
 			{

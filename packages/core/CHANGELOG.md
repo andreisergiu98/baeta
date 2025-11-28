@@ -1,13 +1,53 @@
 # @baeta/core
 
-## 1.0.12
+## 2.0.0-next.5
 
 ### Patch Changes
 
-- [`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix npm tag for latest version
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`b6cba78`](https://github.com/andreisergiu98/baeta/commit/b6cba7872cafc996a290d696804cdaa7c5af363e) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - replace .use with .$use for subscriptions middlewares
 
-- Updated dependencies [[`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925)]:
-  - @baeta/errors@1.0.12
+## 2.0.0-next.4
+
+### Patch Changes
+
+- Use $use instead of use for middlewares
+
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Fix broken types
+
+- Updated dependencies []:
+  - @baeta/errors@2.0.0-next.2
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- Fix release version
+
+- Updated dependencies []:
+  - @baeta/errors@2.0.0-next.1
+
+## 2.0.0-next.0
+
+### Major Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`31d1a50`](https://github.com/andreisergiu98/baeta/commit/31d1a509f96535b43ae85d19c770eb1a5f09dc94) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Baeta v2 – major refactor
+  - **Side-effect-free type generation & resolver definitions.**
+    The types generator and resolver definitions were reworked to be side-effect free, improving type safety.
+  - **Stricter type safety.**
+    You must now **explicitly define resolvers for every field** during development—breakages that used to surface at runtime are now caught at compile time.
+  - **Removed `@baeta/compiler`.**
+    Since modern runtimes can execute TypeScript natively, the separate compiler package is no longer needed. Use your runtime’s native TS support or your existing build setup.
+  - **Subscriptions update.**
+    `@baeta/subscriptions-pubsub` now targets **`graphql-subscriptions` v3**.
+
+### Patch Changes
+
+- Updated dependencies [[`31d1a50`](https://github.com/andreisergiu98/baeta/commit/31d1a509f96535b43ae85d19c770eb1a5f09dc94)]:
+  - @baeta/errors@2.0.0-next.0
 
 ## 1.0.11
 

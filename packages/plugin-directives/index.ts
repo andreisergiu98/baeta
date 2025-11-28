@@ -1,5 +1,5 @@
 import { definitions } from '@baeta/directives';
-import { createPluginV1, getModuleGetName, getModuleVariableName } from '@baeta/generator-sdk';
+import { createPluginV1, getModuleExportName } from '@baeta/generator-sdk';
 import { join, parse } from '@baeta/util-path';
 
 /**
@@ -13,31 +13,13 @@ export interface DirectivesOptions {
 	moduleName?: string;
 }
 
-function printResolver(moduleDefinitionName: string, moduleName: string, importExt = '') {
-	const parsed = parse(moduleDefinitionName);
-	const method = getModuleGetName(moduleName);
-	const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
+function printExport(moduleDefinitionName: string, moduleName: string, importExt: string) {
+	const module = getModuleExportName(moduleName);
 
-	return `import { registerDirectives } from "@baeta/directives";
+	return `import { definitions } from "@baeta/directives";
+import { ${module} } from "./${parse(moduleDefinitionName).name}${importExt}";
 
-import { ${method} } from "./${importName}${importExt}";
-
-registerDirectives(${method}());
-`;
-}
-
-function printExport(moduleDefinitionName: string, moduleName: string, importExt = '') {
-	const parsed = parse(moduleDefinitionName);
-	const method = getModuleGetName(moduleName);
-	const variable = getModuleVariableName(moduleName);
-	const importName = parsed.ext === '.ts' ? parsed.name : moduleDefinitionName;
-
-	return `import { ${method} } from "./${importName}${importExt}";
-
-import "./directives.baeta";
-
-export const ${variable} = ${method}();
-`;
+export default ${module}.$directive(definitions.map((definition) => definition.directive)).$schema({});`;
 }
 
 function printDefinitions() {
@@ -50,10 +32,6 @@ function createDirectivesModuleDir(modulesDir: string, moduleName: string) {
 
 function createGqlFilename(moduleDir: string) {
 	return `${moduleDir}/directives.gql`;
-}
-
-function createResolverFilename(moduleDir: string) {
-	return `${moduleDir}/directives.baeta.ts`;
 }
 
 function createExportFilename(moduleDir: string) {
@@ -86,16 +64,6 @@ export function directivesPlugin(options?: DirectivesOptions) {
 				'directives',
 			);
 			await definitionFile.write();
-
-			ctx.fileManager.createAndAdd(
-				createResolverFilename(moduleDir),
-				printResolver(
-					ctx.generatorOptions.moduleDefinitionName,
-					moduleName,
-					ctx.generatorOptions.importExtension,
-				),
-				'directives',
-			);
 
 			ctx.fileManager.createAndAdd(
 				createExportFilename(moduleDir),

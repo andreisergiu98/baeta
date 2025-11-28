@@ -41,65 +41,6 @@ Glob pattern(s) to locate GraphQL schema files.
 <tr>
 <td>
 
-<a id="basetypespath"></a> `baseTypesPath?`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-```ts
-`${modulesDir}/../__generated__/types.ts`;
-```
-
-</td>
-<td>
-
-Output path for the generated base types file.
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="contexttype"></a> `contextType?`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-```ts
-undefined;
-```
-
-</td>
-<td>
-
-Path to the context type definition.
-Supports both named and default exports.
-
-**Examples**
-
-```ts
-contextType: "src/types/context.ts#Context"; // for named export
-```
-
-```ts
-contextType: "src/types/context.ts"; // for default export
-```
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="cwd"></a> `cwd?`
 
 </td>
@@ -118,37 +59,6 @@ process.cwd();
 <td>
 
 Current working directory for resolving relative paths.
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="extensions"></a> `extensions?`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td>
-
-```ts
-undefined;
-```
-
-</td>
-<td>
-
-Path to Baeta Extensions (ex. auth-extension).
-Only default export is supported.
-
-**Example**
-
-```ts
-extensions: "src/extensions.ts";
-```
 
 </td>
 </tr>
@@ -273,32 +183,24 @@ Root directory where GraphQL modules are defined.
 <tr>
 <td>
 
-<a id="scalars"></a> `scalars?`
+<a id="typesdir"></a> `typesDir?`
 
 </td>
 <td>
 
-`Record`\<`string`, `string` \| \{ `input`: `string`; `output`: `string`; \}\>
+`string`
 
 </td>
 <td>
 
 ```ts
-undefined;
+`${modulesDir}/../__generated__/types.ts`;
 ```
 
 </td>
 <td>
 
-Custom scalar type mappings.
-Maps GraphQL scalar types to TypeScript types.
-Supports global types and imports.
-
-**Example**
-
-```ts
-{ DateTime: 'Date', JSON: 'Record<string, unknown>' }	 *
-```
+Output path for the generated type files.
 
 </td>
 </tr>

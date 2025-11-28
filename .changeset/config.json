@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@3.1.2/schema.json",
   "changelog": [
     "@changesets/changelog-github",
     {
@@ -14,12 +14,10 @@
     "useCalculatedVersion": false,
     "prereleaseTemplate": "{tag}-{datetime}-{commit}"
   },
-  "fixed": [],
-  "linked": [
+  "fixed": [
     [
       "create-baeta",
       "@baeta/cli",
-      "@baeta/compiler",
       "@baeta/core",
       "@baeta/directives",
       "@baeta/env",
@@ -31,7 +29,6 @@
       "@baeta/extension-cache-redis",
       "@baeta/extension-cache-upstash",
       "@baeta/extension-complexity",
-      "@baeta/plugin-autoload",
       "@baeta/plugin-cloudflare",
       "@baeta/plugin-directives",
       "@baeta/plugin-exec",

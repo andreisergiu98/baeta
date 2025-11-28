@@ -3,19 +3,30 @@ import { dirname } from '@baeta/util-path';
 import { File, type FileOptions } from './file.ts';
 
 export class FileBlock extends File {
+	public filename: string;
+	public content: string;
+	public start: string;
+	public end: string;
+	public tag: string;
 	constructor(
-		public filename: string,
-		public content: string,
-		public start: string,
-		public end: string,
-		public tag: string,
+		filename: string,
+		content: string,
+		start: string,
+		end: string,
+		tag: string,
 		options?: FileOptions,
 	) {
 		super(filename, content, tag, {
-			disableBiomeHeader: options?.disableBiomeHeader ?? true,
+			disableBiomeV1Header: options?.disableBiomeV1Header ?? true,
+			disableBiomeV2Header: options?.disableBiomeV2Header ?? true,
 			disableEslintHeader: options?.disableEslintHeader ?? true,
 			disableGenerationNoticeHeader: options?.disableGenerationNoticeHeader ?? true,
 		});
+		this.filename = filename;
+		this.content = content;
+		this.start = start;
+		this.end = end;
+		this.tag = tag;
 	}
 
 	write = async () => {

@@ -1,98 +1,87 @@
-/** biome-ignore-all lint/correctness/noUnusedFunctionParameters: parameters need to be defined */
-/** biome-ignore-all lint/correctness/noUnusedVariables: parameters need to be defined */
-import type { ModuleBuilder } from './module.ts';
-import type { ResolverMapper } from './resolver-mapper.ts';
-import type { SchemaTransformer } from './transformer.ts';
-
-declare global {
-	export namespace BaetaExtensions {
-		export interface ResolverExtensions<Result, Root, Context, Args> {}
-
-		export interface TypeExtensions<Root, Context> {}
-
-		export interface SubscriptionExtensions<Root, Context, Args> {}
-
-		export interface SubscriptionSubscribeExtensions<Root, Context, Args> {}
-
-		export interface SubscriptionResolveExtensions<Result, Root, Context, Args> {}
-
-		export interface ModuleExtensions {}
-	}
-}
-
-export type { BaetaExtensions };
-
-export enum ExtensionVersion {
-	V1 = 'v1',
-}
+import type { GraphQLSchema } from 'graphql';
+import type { FieldBuilder } from './field-builder.ts';
+import type { ModuleBuilder } from './module-builder.ts';
+import type { ModuleCompiler } from './module-compiler.ts';
+import type { SubscriptionBuilder } from './subscription-builder.ts';
+import type { TypeBuilder } from './type-builder.ts';
 
 export type ExtensionFactory<E extends Extension> = () => E;
 
-export class Extension {
-	version = ExtensionVersion.V1;
-
-	getModuleExtensions() {
-		return {};
-	}
-
-	getTypeExtensions<Result, Context>(module: ModuleBuilder, type: string) {
-		return {};
-	}
-
-	getResolverExtensions<Result, Root, Context, Args>(
-		module: ModuleBuilder,
-		type: string,
-		field: string,
-	) {
-		return {};
-	}
-
-	getSubscriptionExtensions<Root, Context, Args>(module: ModuleBuilder, field: string) {
-		return {};
-	}
-
-	getSubscriptionSubscribeExtensions<Root, Context, Args>(module: ModuleBuilder, field: string) {
-		return {};
-	}
-
-	getSubscriptionResolveExtensions<Result, Root, Context, Args>(
-		module: ModuleBuilder,
-		field: string,
-	) {
-		return {};
-	}
-
-	getTransformers(): SchemaTransformer[] {
-		return [];
-	}
-
-	build(module: ModuleBuilder, mapper: ResolverMapper): void {}
+interface EditableBuilderLike {
+	useStore: <T>(key: symbol) => {
+		get: () => T | undefined;
+		set: (value: Readonly<T>) => void;
+	};
 }
 
-export function resolveExtensions<T>(list: Array<() => T>): T[] {
-	return list.map((ext) => ext());
+export abstract class Extension<Settings = unknown> {
+	abstract readonly stateKey: symbol;
+
+	protected schema: GraphQLSchema | null = null;
+
+	setSchema(schema: GraphQLSchema) {
+		if (this.schema != null) {
+			throw new Error(`Schema already set for extension ${this.constructor.name}`);
+		}
+		this.schema = schema;
+	}
+
+	getSchema() {
+		if (this.schema == null) {
+			throw new Error(
+				`getSchema must be called after the schema is built for extension ${this.constructor.name}`,
+			);
+		}
+		return this.schema;
+	}
+
+	getFieldExtensions<Result, Source, Context, Args, Info>(
+		_builder: FieldBuilder<Result, Source, Context, Args, Info>,
+	) {
+		// To be implemented by the extension if required.
+		return {};
+	}
+
+	getTypeExtensions<Source, Context, Info>(_builder: TypeBuilder<Source, Context, Info>) {
+		// To be implemented by the extension if required.
+		return {};
+	}
+
+	getModuleExtensions<Context, Info>(_builder: ModuleBuilder<Context, Info>) {
+		// To be implemented by the extension if required.
+		return {};
+	}
+
+	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
+		_builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
+	) {
+		// To be implemented by the extension if required.
+		return {};
+	}
+
+	getState(builder: EditableBuilderLike) {
+		return builder.useStore<Settings>(this.stateKey).get();
+	}
+
+	setState(builder: EditableBuilderLike, settings: Settings) {
+		builder.useStore<Settings>(this.stateKey).set(settings);
+	}
+
+	mutate(_compilers: ModuleCompiler[]) {
+		// To be implemented by the extension if required.
+	}
 }
 
 export function mergeExtensions<T, K extends Record<string, unknown>>(
-	items: T[],
+	items: Readonly<T[]>,
 	callback: (item: T) => K,
 ) {
 	const list = items.map(callback);
-
 	const merged: Record<string, unknown> = {};
-
 	for (const item of list) {
 		for (const key in item) {
 			merged[key] = item[key];
 		}
 	}
-
 	return merged;
-}
-
-export function withExtensions<Core, Ext>(core: Core, ext: Ext): Ext & Core {
-	return {
-		...ext,
-		...core,
-	};
 }

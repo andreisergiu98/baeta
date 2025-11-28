@@ -58,7 +58,6 @@ function createArgs() {
 
 const postMiddlewareAdapter: typeof createMiddleware = (
 	type,
-	field,
 	loadScopes,
 	scopes,
 	globalScopes,
@@ -68,7 +67,6 @@ const postMiddlewareAdapter: typeof createMiddleware = (
 	const getScopes = typeof scopes === 'function' ? scopes : async () => scopes;
 	return createPostMiddleware(
 		type,
-		field,
 		loadScopes,
 		async (params, _result) => await getScopes(params),
 		globalScopes,
@@ -84,7 +82,8 @@ function testCreateMiddleware(
 		unknown,
 		unknown,
 		unknown,
-		unknown
+		unknown,
+		GraphQLResolveInfo
 	>,
 	name: string,
 ) {
@@ -95,10 +94,11 @@ function testCreateMiddleware(
 			trueScope: true,
 		};
 
-		const middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes);
+		const middleware = createMiddlewareHelper('Query', loadScopes, scopes);
+		const params = { source: null, args: {}, ctx, info };
 
 		const resolver = sinon.spy(async () => 'result');
-		const result = await middleware(resolver)(null, {}, ctx, info);
+		const result = await middleware(resolver, params);
 
 		t.is(result, 'result');
 		t.true(resolver.calledOnce);
@@ -118,15 +118,15 @@ function testCreateMiddleware(
 		};
 
 		const resolver = sinon.spy(async () => 'result');
-
-		let middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes, globalScopes);
-		await t.throwsAsync(middleware(resolver)(null, {}, ctx, info) as Promise<unknown>, {
+		const params = { source: null, args: {}, ctx, info };
+		let middleware = createMiddlewareHelper('Query', loadScopes, scopes, globalScopes);
+		await t.throwsAsync(middleware(resolver, params) as Promise<unknown>, {
 			instanceOf: ForbiddenError,
 		});
 
 		// Making sure the middleware throws because of the global scopes
-		middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes);
-		await t.notThrowsAsync(middleware(resolver)(null, {}, ctx, info) as Promise<unknown>);
+		middleware = createMiddlewareHelper('Query', loadScopes, scopes);
+		await t.notThrowsAsync(middleware(resolver, params) as Promise<unknown>);
 	});
 
 	test(`${name} respects skipDefaultScopes`, async (t) => {
@@ -143,11 +143,12 @@ function testCreateMiddleware(
 		};
 
 		const resolver = sinon.spy(async () => 'result');
+		const params = { source: null, args: {}, ctx, info };
 
-		const middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes, globalScopes, {
+		const middleware = createMiddlewareHelper('Query', loadScopes, scopes, globalScopes, {
 			skipDefaults: true,
 		});
-		await t.notThrowsAsync(middleware(resolver)(null, {}, ctx, info) as Promise<unknown>);
+		await t.notThrowsAsync(middleware(resolver, params) as Promise<unknown>);
 
 		t.true(resolver.calledOnce);
 	});
@@ -162,11 +163,12 @@ function testCreateMiddleware(
 			trueScope: true,
 		};
 
-		const middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes, undefined, {
+		const middleware = createMiddlewareHelper('Query', loadScopes, scopes, undefined, {
 			grants: grantFn,
 		});
+		const params = { source: null, args: {}, ctx, info };
 
-		await middleware(next)(null, {}, ctx, info);
+		await middleware(next, params);
 
 		const store = await getAuthStore(ctx);
 
@@ -184,11 +186,12 @@ function testCreateMiddleware(
 			falseScope: true,
 		};
 
-		const middleware = createMiddlewareHelper('Query', 'test', loadScopes, scopes, undefined, {
+		const middleware = createMiddlewareHelper('Query', loadScopes, scopes, undefined, {
 			grants: grantFn,
 		});
+		const params = { source: null, args: {}, ctx, info };
 
-		await t.throwsAsync(middleware(next)(null, {}, ctx, info) as Promise<unknown>, {
+		await t.throwsAsync(middleware(next, params) as Promise<unknown>, {
 			instanceOf: ForbiddenError,
 		});
 
@@ -214,7 +217,6 @@ function testCreateMiddleware(
 
 		const middleware = createMiddlewareHelper(
 			'Query',
-			'test',
 			loadScopes,
 			scopes,
 			undefined,
@@ -223,8 +225,9 @@ function testCreateMiddleware(
 		);
 
 		const next = sinon.spy(async () => 'result');
+		const params = { source: null, args: {}, ctx, info };
 
-		await t.throwsAsync(middleware(next)(null, {}, ctx, info) as Promise<unknown>);
+		await t.throwsAsync(middleware(next, params) as Promise<unknown>);
 		t.true(errorResolver.calledOnce);
 	});
 
@@ -251,7 +254,6 @@ function testCreateMiddleware(
 
 		const middleware = createMiddlewareHelper(
 			'Query',
-			'test',
 			loadScopes,
 			scopes,
 			undefined,
@@ -260,8 +262,9 @@ function testCreateMiddleware(
 		);
 
 		const next = sinon.spy(async () => 'result');
+		const params = { source: null, args: {}, ctx, info };
 
-		await t.throwsAsync(middleware(next)(null, {}, ctx, info) as Promise<unknown>);
+		await t.throwsAsync(middleware(next, params) as Promise<unknown>);
 
 		t.true(localErrorResolver.calledOnce);
 		t.true(globalErrorResolver.notCalled);
@@ -278,11 +281,12 @@ test("createMiddleware doesn't call resolver for failing scopes", async (t) => {
 		falseScope: true,
 	};
 
-	const middleware = createMiddleware('Query', 'test', loadScopes, scopes);
+	const middleware = createMiddleware('Query', loadScopes, scopes);
 
 	const resolver = sinon.spy(async () => 'result');
+	const params = { source: null, args: {}, ctx, info };
 
-	await t.throwsAsync(middleware(resolver)(null, {}, ctx, info) as Promise<unknown>, {
+	await t.throwsAsync(middleware(resolver, params) as Promise<unknown>, {
 		instanceOf: ForbiddenError,
 	});
 

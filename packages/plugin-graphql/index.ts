@@ -11,17 +11,14 @@ export function graphqlPlugin() {
 					reload(file);
 				}
 			};
-
 			watcher.on('update', handleChange);
 			watcher.on('delete', handleChange);
 		},
 		generate: async (ctx, next) => {
 			const items = await generate(ctx.generatorOptions);
-
 			for (const item of items) {
-				ctx.fileManager.createAndAdd(item.filename, item.content, 'graphql');
+				ctx.fileManager.createAndAdd(item.filename, item.content, 'graphql', item.options);
 			}
-
 			return next();
 		},
 	});

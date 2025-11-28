@@ -25,7 +25,7 @@ Note that the unix / is returned everywhere, so windows \ is always converted to
 </td>
 <td>
 
-`any`[]
+`string`[]
 
 </td>
 <td>

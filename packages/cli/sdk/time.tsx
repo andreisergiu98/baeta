@@ -6,7 +6,7 @@ export interface TimeProps {
 	prefix?: string;
 }
 
-export function Time(props: TimeProps) {
+export function Time(props: Readonly<TimeProps>) {
 	const time = useMemo(() => {
 		if (!props.value) {
 			return '';

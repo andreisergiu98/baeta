@@ -105,7 +105,7 @@ test('calculateComplexity should calculate complexity of simple query', (t) => {
   `;
 
 	const mockInfo = createMockInfo(schema, query);
-	const fieldSettingsMap: FieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const defaults = { complexity: 1, multiplier: 10 };
 
 	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
@@ -127,7 +127,7 @@ test('calculateComplexity should calculate complexity of nested query', (t) => {
   `;
 
 	const mockInfo = createMockInfo(schema, query);
-	const fieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const defaults = { complexity: 1, multiplier: 10 };
 
 	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
@@ -152,7 +152,7 @@ test('calculateComplexity should calculate complexity of deeply nested query', (
   `;
 
 	const mockInfo = createMockInfo(schema, query);
-	const fieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const defaults = { complexity: 1, multiplier: 10 };
 
 	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
@@ -173,7 +173,7 @@ test('calculateComplexity should apply multiplier to list fields', (t) => {
   `;
 
 	const mockInfo = createMockInfo(schema, query);
-	const fieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const defaults = { complexity: 1, multiplier: 10 };
 
 	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
@@ -191,11 +191,9 @@ test('calculateComplexity should use custom field settings', (t) => {
 
 	const mockInfo = createMockInfo(schema, query);
 
-	const fieldSettingsMap = {
-		Query: {
-			simple: () => ({ complexity: 5 }),
-		},
-	};
+	const fieldSettingsMap: FieldSettingsMap = new Map([
+		['Query', new Map([['simple', () => ({ complexity: 5 })]])],
+	]);
 
 	const defaults = { complexity: 1, multiplier: 10 };
 
@@ -214,7 +212,7 @@ test('calculateComplexity should throw for unsupported operation', (t) => {
 		},
 	} as unknown as GraphQLResolveInfo;
 
-	const fieldSettingsMap = {};
+	const fieldSettingsMap: FieldSettingsMap = new Map();
 	const defaults = { complexity: 1, multiplier: 10 };
 
 	t.throws(

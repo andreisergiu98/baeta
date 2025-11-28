@@ -11,7 +11,7 @@ export interface LayoutProps {
 	timePrefix?: string;
 }
 
-export function Layout(props: PropsWithChildren<LayoutProps>) {
+export function Layout(props: Readonly<PropsWithChildren<LayoutProps>>) {
 	return (
 		<Box flexDirection="column">
 			<Box>

@@ -3,20 +3,24 @@
  */
 export interface ContextStoreOptions {
 	/**
-	 * Whether to load the value lazily (on first access) or eagerly (immediately).
-	 * @defaultValue true
+	 * Whether to load the value eagerly (immediately) or lazily (on first access).
+	 * @defaultValue false
 	 */
-	lazy?: boolean;
+	eager?: boolean;
 }
 
-export interface ContextStoreValue<T> {
-	isLoaded: boolean;
-	result?: Promise<T>;
-	load: () => Promise<T>;
-}
+export type ContextStoreValue<T> =
+	| {
+			isLoaded: false;
+			load: () => T | PromiseLike<T>;
+	  }
+	| {
+			isLoaded: true;
+			result: Promise<Awaited<T>>;
+	  };
 
 /**
- * Creates a context store for managing asynchronous values within a context object.
+ * Creates a context store for managing asynchronous values within the context object.
  * See https://baeta.io/docs/guides/context-store
  *
  * @param key - A unique symbol to identify the stored value in the context
@@ -27,10 +31,10 @@ export interface ContextStoreValue<T> {
  * ```typescript
  * // Create a store for user data
  * const userStoreKey = Symbol('userStore');
- * const [getUser, loadUser] = createContextStore<User>(userStoreKey, { lazy: true });
+ * const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, { lazy: true });
  *
- * // Initialize the store when you create the context
- * loadUser(ctx, async () => {
+ * // Set the loader function after creating the context object
+ * setUserLoader(ctx, async () => {
  *   return fetchUser(userId);
  * });
  *
@@ -38,49 +42,93 @@ export interface ContextStoreValue<T> {
  * const user = await getUser(ctx);
  * ```
  */
-export function createContextStore<T, Context = unknown>(
+export function createContextStore<Result, Context = unknown>(
 	key: symbol,
 	options?: ContextStoreOptions,
 ) {
-	const { lazy = true } = options ?? {};
-
-	const get = (ctx: Context): Promise<T> => {
-		const item = (ctx as Record<symbol, ContextStoreValue<T> | undefined>)[key];
+	const get = (ctx: Context): Promise<Result> => {
+		const _ctx = ctx as Record<symbol, ContextStoreValue<Result> | undefined>;
+		const item = _ctx[key];
 
 		if (item == null) {
 			throw new Error('Context store not initialized');
 		}
 
 		if (item.isLoaded) {
-			return item.result as Promise<T>;
+			return item.result;
 		}
 
-		item.result = item.load();
-		item.isLoaded = true;
+		_ctx[key] = {
+			isLoaded: true,
+			result: loadAsync(item.load),
+		};
 
-		return item.result;
+		return _ctx[key].result;
 	};
 
-	const load = (_ctx: Context, loader: () => T | PromiseLike<T>) => {
-		const ctx = _ctx as Record<symbol, ContextStoreValue<T> | undefined>;
+	const setLoader = (ctx: Context, loader: () => Result | PromiseLike<Result>) => {
+		const _ctx = ctx as Record<symbol, ContextStoreValue<Result> | undefined>;
 
-		if (ctx[key] != null) {
+		if (_ctx[key] != null) {
 			return;
 		}
 
-		const item: ContextStoreValue<T> = {
-			load: async () => loader(),
-			isLoaded: false,
-		};
-
-		if (lazy === false) {
-			item.result = item.load();
-			item.result.catch(() => {});
-			item.isLoaded = true;
+		if (options?.eager) {
+			_ctx[key] = {
+				isLoaded: true,
+				result: loadAsync(loader),
+			};
+		} else {
+			_ctx[key] = {
+				isLoaded: false,
+				load: loader,
+			};
 		}
-
-		ctx[key] = item;
 	};
 
-	return [get, load] as const;
+	return [get, setLoader] as const;
+}
+
+/**
+ * Creates a context store for managing asynchronous values within the context object.
+ * See https://baeta.io/docs/guides/context-store
+ *
+ * @param key - A unique symbol to identify the stored value in the context
+ * @param loader - A function that returns the value for the store
+ * @param options - Configuration options for the store
+ * @returns A tuple containing get and load functions for managing the stored value
+ *
+ * @example
+ * ```typescript
+ * // Create a store for user data
+ * const userStoreKey = Symbol('userStore');
+ * const [getUser, initUserStore] = createContextStoreWithLoader(userStoreKey, (userId: string) => { return fetchUser(userId); }, { lazy: true });
+ *
+ * // Initialize the store when you create the context
+ * initUserStore(ctx, userId);
+ *
+ * // Later, retrieve the user in a resolver
+ * const user = await getUser(ctx);
+ * ```
+ */
+export function createContextStoreWithLoader<
+	Result,
+	Context = unknown,
+	Args extends unknown[] = unknown[],
+>(
+	key: symbol,
+	loader: (ctx: Context, ...args: Args) => Result | PromiseLike<Result>,
+	options?: ContextStoreOptions,
+) {
+	const [get, setLoader] = createContextStore<Result, Context>(key, options);
+
+	const init = (ctx: Context, ...args: Args) => {
+		return setLoader(ctx, () => loader(ctx, ...args));
+	};
+
+	return [get, init] as const;
+}
+
+async function loadAsync<T>(fn: () => T | PromiseLike<T>): Promise<Awaited<T>> {
+	return await fn();
 }

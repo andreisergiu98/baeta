@@ -1,28 +1,24 @@
 import {
+	type CacheRef,
 	type ItemRef,
 	type ParentRef,
-	type Serializer,
 	StoreAdapter,
-	type StoreOptions,
+	type StoreAdapterOptions,
 } from '@baeta/extension-cache';
 import type { UpstashClient } from './upstash-client.ts';
 
 export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
-	constructor(
-		private client: UpstashClient,
-		serializer: Serializer,
-		options: StoreOptions<Item>,
-		type: string,
-		hash: string,
-	) {
-		super(serializer, options, type, hash);
+	private readonly client: UpstashClient;
+	constructor(client: UpstashClient, options: StoreAdapterOptions<Item>) {
+		super(options);
+		this.client = client;
 	}
 
 	getPartialMany = async (refs: ItemRef[]): Promise<Array<Item | null> | null> => {
 		if (refs.length === 0) {
 			return null;
 		}
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		const results = await this.client.mget<Array<string | null>>(keys);
 		return results.map((result) => (result == null ? null : this.parseItem(result)));
 	};
@@ -35,7 +31,7 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 		const pipeline = this.client.pipeline();
 
 		for (const item of items) {
-			const key = this.createKeyByItem(item);
+			const key = this.createItemKey(item);
 			pipeline.set(key, this.stringifyItem(item));
 
 			if (this.options?.ttl) {
@@ -51,7 +47,7 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 			return;
 		}
 
-		const keys = refs.map((ref) => this.createKey(ref));
+		const keys = refs.map((ref) => this.createItemKeyByRef(ref));
 		await this.client.unlink(...keys);
 
 		if (evictQueries) {
@@ -60,12 +56,12 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected saveQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		meta: string[],
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 
 		const pipeline = this.client.pipeline();
 		pipeline.unlink(key);
@@ -79,11 +75,11 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected loadQueryMetadata = async (
-		queryRef: string,
+		queryRef: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
-		const key = this.createKeyByQuery(queryRef, parentRef, args);
+		const key = this.createQueryKey(queryRef, parentRef, args);
 		const meta = await this.client.lrange(key, 0, -1);
 		if (meta.length === 0) {
 			return null;
@@ -92,7 +88,7 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected deleteQueriesByRef = async (
-		queryRef?: string,
+		queryRef?: CacheRef<unknown, unknown, unknown>,
 		parentRef?: ParentRef,
 		args?: Record<string, unknown>,
 	) => {
@@ -103,11 +99,14 @@ export class UpstashStoreAdapter<Item> extends StoreAdapter<Item> {
 	};
 
 	protected async searchQueries(
-		queryRef = '*',
-		parentRef: NonNullable<ParentRef> = '*',
-		args: Record<string, unknown> = {},
+		queryRef?: CacheRef<unknown, unknown, unknown>,
+		parentRef?: NonNullable<ParentRef>,
+		args?: Record<string, unknown>,
 	) {
-		const matcher = this.createQueryKeyGlobMatcher(queryRef, parentRef, args);
+		const matcher =
+			queryRef == null
+				? this.createQueryKeyGlobMatcher()
+				: this.createQueryKeyGlobMatcher(queryRef, parentRef, args);
 		return this.scanAll(matcher);
 	}
 

@@ -1,0 +1,3 @@
+# micromatch
+
+> **micromatch**: `Micromatch`

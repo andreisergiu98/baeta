@@ -6,7 +6,7 @@ interface Props {
 	package: string;
 }
 
-export function PackageManagerCreate(props: Props) {
+export function PackageManagerCreate(props: Readonly<Props>) {
 	return (
 		<Tabs groupId="package-manager">
 			<TabItem value="yarn">

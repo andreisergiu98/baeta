@@ -1,6 +1,6 @@
-# GetPostScopeRules()\<Scopes, Grants, Result, Root, Context, Args\>
+# GetPostScopeRules()\<Scopes, Grants, Result, Source, Context, Args, Info\>
 
-> **GetPostScopeRules**\<`Scopes`, `Grants`, `Result`, `Root`, `Context`, `Args`\> = (`params`, `result`) => `boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>
+> **GetPostScopeRules**\<`Scopes`, `Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`, `result`) => `boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `PromiseLike`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>
 
 Function to get scope rules for post-resolution authorization
 
@@ -37,7 +37,7 @@ Function to get scope rules for post-resolution authorization
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -52,6 +52,13 @@ Function to get scope rules for post-resolution authorization
 <td>
 
 `Args`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Info`
 
 </td>
 </tr>
@@ -76,7 +83,7 @@ Function to get scope rules for post-resolution authorization
 </td>
 <td>
 
-[`MiddlewareParams`](../../core/index/type-aliases/MiddlewareParams.md)\<`Root`, `Context`, `Args`\>
+[`ResolverParams`](../../core/index/type-aliases/ResolverParams.md)\<`Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>
@@ -97,4 +104,4 @@ Function to get scope rules for post-resolution authorization
 
 ## Returns
 
-`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `Promise`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>
+`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `PromiseLike`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>

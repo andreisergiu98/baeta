@@ -1,16 +1,55 @@
 # @baeta/plugin-graphql
 
-## 1.0.12
+## 2.0.0-next.3
 
 ### Patch Changes
 
-- [`e848339`](https://github.com/andreisergiu98/baeta/commit/e84833998cd8fd31205ee9340e621ce833af1656) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Update dependencies
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`6de5d15`](https://github.com/andreisergiu98/baeta/commit/6de5d15484d341a1717a1b2f3f45272912e6a886) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix generated import paths with custom config
 
-- [`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix npm tag for latest version
+- Update generator-sdk package
 
-- Updated dependencies [[`c180429`](https://github.com/andreisergiu98/baeta/commit/c180429bbf78b305e9f2b4f55a619ecd49bb0925)]:
-  - @baeta/generator-sdk@1.0.3
-  - @baeta/util-path@1.0.2
+- Updated dependencies [[`6de5d15`](https://github.com/andreisergiu98/baeta/commit/6de5d15484d341a1717a1b2f3f45272912e6a886)]:
+  - @baeta/generator-sdk@2.0.0-next.3
+
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Fix broken types
+
+- Updated dependencies []:
+  - @baeta/generator-sdk@2.0.0-next.2
+  - @baeta/util-path@2.0.0-next.2
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- Fix release version
+
+- Updated dependencies []:
+  - @baeta/generator-sdk@2.0.0-next.1
+  - @baeta/util-path@2.0.0-next.1
+
+## 2.0.0-next.0
+
+### Major Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`31d1a50`](https://github.com/andreisergiu98/baeta/commit/31d1a509f96535b43ae85d19c770eb1a5f09dc94) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Baeta v2 – major refactor
+  - **Side-effect-free type generation & resolver definitions.**
+    The types generator and resolver definitions were reworked to be side-effect free, improving type safety.
+  - **Stricter type safety.**
+    You must now **explicitly define resolvers for every field** during development—breakages that used to surface at runtime are now caught at compile time.
+  - **Removed `@baeta/compiler`.**
+    Since modern runtimes can execute TypeScript natively, the separate compiler package is no longer needed. Use your runtime’s native TS support or your existing build setup.
+  - **Subscriptions update.**
+    `@baeta/subscriptions-pubsub` now targets **`graphql-subscriptions` v3**.
+
+### Patch Changes
+
+- Updated dependencies [[`31d1a50`](https://github.com/andreisergiu98/baeta/commit/31d1a509f96535b43ae85d19c770eb1a5f09dc94)]:
+  - @baeta/generator-sdk@2.0.0-next.0
+  - @baeta/util-path@2.0.0-next.0
 
 ## 1.0.11
 

@@ -112,6 +112,7 @@
 <th>Modifier</th>
 <th>Type</th>
 <th>Default value</th>
+<th>Overrides</th>
 <th>Inherited from</th>
 </tr>
 </thead>
@@ -142,6 +143,11 @@
 [`File`](File.md).[`content`](File.md#content)
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
@@ -162,6 +168,11 @@
 <td>
 
 `undefined`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -196,6 +207,11 @@
 [`File`](File.md).[`filename`](File.md#filename)
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
@@ -216,6 +232,11 @@
 <td>
 
 `false`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 <td>
@@ -250,6 +271,11 @@
 &hyphen;
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
@@ -275,6 +301,11 @@
 <td>
 
 [`File`](File.md).[`tag`](File.md#tag)
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 </tr>

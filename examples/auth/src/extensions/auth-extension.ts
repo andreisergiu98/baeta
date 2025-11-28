@@ -28,12 +28,12 @@ function isLoggedIn(ctx: Context) {
 
 export const authExt = authExtension<Context>(
 	async (ctx) => {
-		const accessList: string[] = ['guest', 'user'];
+		const accessList = new Set(['guest', 'user']);
 		return {
 			isPublic: true,
 			isLoggedIn: isLoggedIn(ctx),
 			hasAccess: (access: string) => {
-				return accessList.includes(access);
+				return accessList.has(access);
 			},
 		};
 	},
@@ -48,9 +48,7 @@ export const authExt = authExtension<Context>(
 				isLoggedIn: true,
 			},
 			Subscription: {
-				subscribe: {
-					isLoggedIn: true,
-				},
+				isLoggedIn: true,
 			},
 		},
 	},

@@ -41,7 +41,6 @@
 <thead>
 <tr>
 <th>Property</th>
-<th>Modifier</th>
 <th>Type</th>
 <th>Default value</th>
 </tr>
@@ -51,11 +50,6 @@
 <td>
 
 <a id="files"></a> `files`
-
-</td>
-<td>
-
-`public`
 
 </td>
 <td>
@@ -73,11 +67,6 @@
 <td>
 
 <a id="fileoptions"></a> `fileOptions?`
-
-</td>
-<td>
-
-`public`
 
 </td>
 <td>
@@ -133,7 +122,7 @@
 
 ### createAndAdd()
 
-> **createAndAdd**(`filename`, `content`, `tag`): [`File`](File.md)
+> **createAndAdd**(`filename`, `content`, `tag`, `options?`): [`File`](File.md)
 
 #### Parameters
 
@@ -181,6 +170,18 @@
 
 </td>
 </tr>
+<tr>
+<td>
+
+`options?`
+
+</td>
+<td>
+
+[`FileOptions`](../interfaces/FileOptions.md)
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -192,7 +193,7 @@
 
 ### get()
 
-> **get**(`filename`): `undefined` \| [`File`](File.md)
+> **get**(`filename`): [`File`](File.md) \| `undefined`
 
 #### Parameters
 
@@ -221,7 +222,7 @@
 
 #### Returns
 
-`undefined` \| [`File`](File.md)
+[`File`](File.md) \| `undefined`
 
 ---
 

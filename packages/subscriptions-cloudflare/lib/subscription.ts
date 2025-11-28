@@ -4,22 +4,19 @@ import { subscribe } from './subscribe.ts';
 import type { SubscriptionsOptions } from './subscription-options.ts';
 import { createWsConnectionsClass } from './ws-connections.ts';
 
-// biome-ignore lint/suspicious/noExplicitAny: accept any type for generic pubsub map
 export type Publish<Map extends Record<string, any>> = <C extends keyof Map, P extends Map[C]>(
 	topic: C,
 	payload: P,
 ) => Promise<void>;
 
-// biome-ignore lint/suspicious/noExplicitAny: accept any type for generic pubsub map
 export type Subscribe<Map extends Record<string, any>> = <C extends keyof Map, P extends Map[C]>(
 	topic: C,
-) => AsyncIterator<P>;
+) => AsyncIterable<P>;
 
 export function createCloudflareSubscription<
 	Env,
 	Context,
 	ContextParams,
-	// biome-ignore lint/suspicious/noExplicitAny: accept any type for generic pubsub map
 	PubSubMap extends Record<string, any> = Record<string, any>,
 >(options: SubscriptionsOptions<Env, Context, ContextParams>) {
 	return {

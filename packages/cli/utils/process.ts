@@ -1,99 +1,36 @@
-import { Writable } from 'node:stream';
-import { execa, parseCommandString, type Subprocess } from 'execa';
 import pty from 'node-pty';
-import terminate from 'tree-kill';
 
-export async function terminateProcesses(processes: Subprocess[]) {
-	await Promise.all(processes.map((process) => terminateProcess(process)));
-	processes.splice(0, processes.length);
-}
-
-export async function terminateProcess(process: Subprocess) {
-	return new Promise<void>((resolve) => {
-		if (process.pid == null) {
-			return resolve();
-		}
-		terminate(process.pid, 'SIGTERM', () => resolve());
-	});
-}
-
-export function addProcess(
-	processes: Subprocess[],
-	command: string,
-	stdout: (data: string) => void,
-	onError: (err: unknown) => void,
-) {
-	const [file, ...args] = parseCommandString(command);
-
-	const child = execa(file, args, {
-		stdout: 'pipe',
-		stderr: 'pipe',
-		stripFinalNewline: true,
-	});
-
-	const stream = createStream(stdout);
-	child.stdout?.pipe(stream);
-	child.stderr?.pipe(stream);
-
-	child.catch((err) => {
-		onError?.(err);
-	});
-
-	processes.push(child);
-}
-
-export function startProcess(
-	command: string,
-	stdout: (data: string) => void,
-	onError: (err: unknown) => void,
-) {
-	const [file, ...args] = parseCommandString(command);
-
-	const child = execa(file, args, {
-		stdout: 'pipe',
-		stderr: 'pipe',
-		stripFinalNewline: true,
-	});
-
-	const stream = createStream(stdout);
-	child.stdout?.pipe(stream);
-	child.stderr?.pipe(stream);
-
-	child.catch((err) => {
-		onError?.(err);
-	});
-
-	return child;
-}
-
-export type PtyProcess = ReturnType<typeof startProcessWithPty>;
+export type PtyProcess = {
+	didExit: boolean;
+	write: (data: string) => void;
+	exit: () => void;
+};
 
 export function startProcessWithPty(
 	command: string,
-	stdout: (data: string, clear: boolean) => void,
-) {
-	const [file, ...args] = parseCommandString(command);
+	onData: (data: string, clear: boolean) => void,
+): PtyProcess {
+	const [file, ...args] = parseCommand(command);
+
+	const cols = process.stdout.columns;
+	const rows = process.stdout.rows;
 
 	const ptyProc = pty.spawn(file, args, {
 		cwd: process.cwd(),
 		env: process.env,
-		cols: process.stdout.columns,
-		rows: process.stdout.rows,
+		cols: cols,
+		rows: rows,
 	});
 
 	process.stdout.on('resize', () => {
-		ptyProc.resize(process.stdout.columns, process.stdout.rows);
+		const cols = process.stdout.columns;
+		const rows = process.stdout.rows;
+		ptyProc.resize(cols, rows);
 	});
 
-	let buffer = '';
 	ptyProc.onData((data) => {
-		buffer += data;
-
-		if (containsClearSequence(data)) {
-			buffer = removeClearSequence(data);
-		}
-
-		stdout(buffer, true);
+		const { cleaned, cleared } = stripClearControls(data);
+		onData(cleaned, cleared);
 	});
 
 	const procData = {
@@ -101,41 +38,80 @@ export function startProcessWithPty(
 		write: (data: string) => {
 			ptyProc.write(data);
 		},
+		exit: () => {
+			ptyProc.kill('SIGTERM');
+		},
 	};
 
 	ptyProc.onExit(() => {
 		procData.didExit = true;
+		procData.write = (_data: string) => {
+			// do nothing
+		};
 	});
 
 	return procData;
 }
 
-function createStream(onData: (data: string) => void) {
-	const stream = new Writable({
-		write(chunk, _encoding, next) {
-			onData(chunk.toString());
-			next();
-		},
-	});
-	return stream;
+const SPACES_REGEXP = / +/g;
+
+function parseCommand(command: string) {
+	const trimmed = command.trim();
+	if (trimmed === '') {
+		throw new Error('Command cannot be empty');
+	}
+	const tokens: string[] = [];
+
+	for (const token of trimmed.split(SPACES_REGEXP)) {
+		const previous = tokens.at(-1);
+		if (previous?.endsWith('\\')) {
+			tokens[tokens.length - 1] = `${previous.slice(0, -1)} ${token}`;
+		} else {
+			tokens.push(token);
+		}
+	}
+
+	return tokens;
 }
 
-const CLEAR_SEQUENCES = [
-	'\x1bc', // Full reset (RIS)
-	'\x1b[H\x1b[2J', // Clear screen and move to home
-	'\x1b[2J', // Clear entire screen
-	'\x1b[3J', // Clear screen and scrollback buffer
-	'\x1b[H\x1b[J', // Alternative clear sequence
-	'\x1b[0f\x1b[J', // Another variant
-	'\x1b[2K', // Clear current line
-	'\x1b[H', // Move to home position
-	'\r\x1b[K', // Carriage return + clear line
+const CLEAR_CODES = [
+	'\x1bc', // RIS
+	'\x1b[0J',
+	'\x1b[1J',
+	'\x1b[2J',
+	'\x1b[3J', // erase in display
+	'\x1b[0K',
+	'\x1b[1K',
+	'\x1b[2K', // erase in line
+	'\x1b[H',
+	'\x1b[?1049h',
+	'\x1b[?1049l',
+	'\x1b[?47h',
+	'\x1b[?47l',
+	'\x1b[?1047h',
+	'\x1b[?1047l',
+	'\x0c', // form feed (^L)
 ];
 
-function containsClearSequence(data: string) {
-	return CLEAR_SEQUENCES.some((seq) => data.includes(seq));
-}
+function stripClearControls(data: string): {
+	cleared: boolean;
+	cleaned: string;
+} {
+	let cleared = false;
+	let result = '';
+	let i = 0;
 
-function removeClearSequence(data: string) {
-	return CLEAR_SEQUENCES.reduce((acc, seq) => acc.replace(seq, ''), data);
+	while (i < data.length) {
+		if (data[i] === '\x1b' || data[i] === '\x0c') {
+			const found = CLEAR_CODES.find((seq) => data.startsWith(seq, i));
+			if (found) {
+				cleared = true;
+				i += found.length;
+				continue;
+			}
+		}
+		result += data[i++];
+	}
+
+	return { cleared, cleaned: result };
 }

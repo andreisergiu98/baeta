@@ -4,35 +4,34 @@ sidebar_position: 1
 
 # Introduction
 
-Building GraphQL APIs shouldn't be complicated. **Baeta** helps developers focus on what matters most - creating powerful, scalable APIs without the boilerplate.
+Building GraphQL APIs doesn't have to be complex. **Baeta** helps developers focus on what matters most — creating clear, maintainable APIs with less boilerplate.
 
 ## What is Baeta?
 
-Baeta is a modern, modular, open-source GraphQL framework designed with flexibility in mind. It follows a granular approach where you only add what you need. Starting with a powerful core for building GraphQL APIs, you can progressively add features through official extensions based on your requirements
+**Baeta** is a modular, type-safe GraphQL framework built around a schema-first approach.
+Instead of mixing schema definitions with code, you define your types using GraphQL SDL, keeping your API design clear and easy to reason about.
 
-### Key Features
+Large schemas can quickly become hard to manage, so Baeta encourages you to split your schema into modules. Each module defines its own types and resolvers, keeping your API organized as it grows.
 
-- **Modular Architecture**: Organize your API into manageable modules
-- **Schema-First Development**: Define your API contract upfront
-- **Type Safety**: Automatic code generation for type-safe development
-- **Middleware & Directives**: Easy integration of custom behaviors
-- **High Performance**: Built for scalability and efficiency
-
-#### And optional extensions and plugins
-
-- **@baeta/extension-auth**: Add powerful scope-based authorization
-- **@baeta/extension-cache**: Implement automatic caching with simple update patterns
-- ... and more!
+It automatically generates types from your schemas, giving you fully type-safe resolvers with no extra code.
 
 ## Why use Baeta?
 
-Baeta makes it easy to build better GraphQL APIs while staying flexible. Here's how:
+**Readable and maintainable**:
+A schema-first workflow makes your API easy to understand and update over time.
 
-**Granular and Progressive:** Start small and add features as you need them. Whether you're building a simple API or a complex system, Baeta scales with your needs.
+**Modular and scalable**:
+Split large schemas into smaller modules that are easy to extend and maintain.
 
-**Modular architecture:** Baeta's modular design allows you to organize your GraphQL API into smaller, more manageable modules that can be added or removed as needed. This makes it easier to maintain and scale your API over time.
+**Type-safe by default**:
+Automatic type generation ensures your resolvers always match your schema.
 
-**Schema-first approach:** With Baeta, you define your schema first, and then logic and resolvers. This approach ensures a consistent and well-defined API for your clients and reduces boilerplate code.
+**Flexible**:
+Add only what you need — extend functionality with optional plugins and extensions like:
+
+- **@baeta/extension-auth**: Granular scope-based authorization
+- **@baeta/extension-cache**: Automatic caching with simple utilities for updating the cache
+- etc...
 
 ## How it Works
 
@@ -60,48 +59,73 @@ type Query {
 #### 2. Implement your resolvers
 
 ```typescript
-import { getUserModule } from "./typedef";
+import { UserModule } from "./typedef.ts";
 
-const { Query } = getUserModule();
+const { Query } = UserModule;
 
-Query.user(({ args }) => {
+const userQuery = Query.user.resolve(({ args }) => {
   return dataSource.user.find(args.where);
 });
 
-Query.users(() => {
+const usersQuery = Query.users.resolve(() => {
   return dataSource.user.findMany();
+});
+
+Query.$fields({
+  user: userQuery,
+  users: usersQuery,
 });
 ```
 
 #### 3. Add authorization
 
 ```typescript
-const { Query, Mutation } = getUserModule();
+import { UserModule } from "./typedef.ts";
 
-Query.users.$auth({
-  $or: {
-    isPublic: true,
-    isLoggedIn: true,
-  },
-});
+const { Query } = UserModule;
+
+const userQuery = Query.user
+  .$auth({
+    $or: {
+      isPublic: true,
+      isLoggedIn: true,
+    },
+  })
+  .resolve(async ({ args }) => {
+    // ...
+  });
 ```
 
 #### 4. Add caching
 
 ```typescript
-import { getUserModule } from "./typedef";
-
-const { User, Query } = getUserModule();
+const { Query, Mutation, User } = UserModule;
 
 export const userCache = User.$createCache();
 
-Query.user.$useCache(userCache);
-Query.users.$useCache(userCache);
+const userQuery = Query.user
+  .$auth({
+    // ...
+  })
+  .$useCache(userCache)
+  .resolve(async ({ args }) => {
+    // ...
+  });
+
+const updateUserMutation = Mutation.updateUser
+  .$use(async (next) => {
+    const user = await next();
+    await userCache.save(user);
+    return user;
+  })
+  .resolve(async ({ args }) => {
+    // ...
+  });
 ```
 
 ## Compatibility
 
-Baeta is compatible with all GraphQL servers, which makes it easy to integrate with your existing stack. It works seamlessly with popular GraphQL server libraries such as **Graphql Yoga** and **Apollo Server**, as well as other popular tools like **Prisma**, **Drizzle** and **Kysely**.
+Baeta is just a schema builder, which makes it compatible with all GraphQL servers. It works seamlessly with popular libraries such as **Graphql Yoga** and **Apollo Server**, as well as other popular tools like **Prisma**, **Drizzle** and **Kysely**.
 
 Baeta's development tools are built for Node.js, but the runtime code is environment-agnostic. This means your Baeta applications can run anywhere JavaScript runs, including:
 

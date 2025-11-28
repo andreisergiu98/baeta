@@ -1,38 +1,59 @@
-type GlobalConsoleLog = {
-	console: ConsoleLogger;
+type GlobalWithConsoleLike = typeof globalThis & {
+	console: Partial<Logger>;
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: respects console.log spec
-export type ConsolePayload = any[];
-
-export type ConsoleLogger = {
-	debug: (...args: ConsolePayload) => void;
-	info: (...args: ConsolePayload) => void;
-	warn: (...args: ConsolePayload) => void;
-	error: (...args: ConsolePayload) => void;
+export type Logger = {
+	debug: (...args: any) => void;
+	info: (...args: any) => void;
+	warn: (...args: any) => void;
+	error: (...args: any) => void;
 };
 
-function hasConsoleLog(global: Record<string, unknown>): global is GlobalConsoleLog {
-	return global.console != null;
+type Level = 'debug' | 'info' | 'warn' | 'error';
+
+const levelValue: Record<Level, number> = {
+	debug: 0,
+	info: 1,
+	warn: 2,
+	error: 3,
+};
+
+function hasConsoleLog(glb: typeof globalThis): glb is GlobalWithConsoleLike {
+	return 'console' in glb && glb.console != null;
 }
 
-function createLogger(): ConsoleLogger {
-	const global = globalThis;
+export function createLogger(level: Level = 'info'): Logger {
+	const glb = globalThis;
+	const noop = () => {};
 
-	if (!hasConsoleLog(global)) {
+	if (!hasConsoleLog(glb)) {
 		return {
-			debug: () => {},
-			info: () => {},
-			warn: () => {},
-			error: () => {},
+			debug: noop,
+			info: noop,
+			warn: noop,
+			error: noop,
 		};
 	}
 
+	const wrap = (withLevel: Level) => {
+		if (levelValue[withLevel] < levelValue[level]) {
+			return noop;
+		}
+		return (...args: any) => {
+			const namespace = `[baeta:${withLevel}]`;
+			if (glb.console[withLevel] == null) {
+				glb.console.info?.(namespace, ...args);
+				return;
+			}
+			glb.console[withLevel]?.(namespace, ...args);
+		};
+	};
+
 	return {
-		debug: (...args: ConsolePayload) => global.console.debug('[baeta:debug]', ...args),
-		info: (...args: ConsolePayload) => global.console.info('[baeta:info]', ...args),
-		warn: (...args: ConsolePayload) => global.console.warn('[baeta:warn]', ...args),
-		error: (...args: ConsolePayload) => global.console.error('[baeta:error]', ...args),
+		debug: wrap('debug'),
+		info: wrap('info'),
+		warn: wrap('warn'),
+		error: wrap('error'),
 	};
 }
 

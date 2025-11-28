@@ -1,0 +1,160 @@
+---
+sidebar_position: 10
+---
+
+# Resolvers
+
+Baeta provides a modular, type-safe approach to defining GraphQL resolvers. Let's look at how to implement user resolvers.
+
+## Project Structure
+
+```
+src/modules/
+└── user/
+    ├── user.gql
+    ├── resolvers.ts
+    └── typedef.ts
+```
+
+## Schema Definition
+
+First, define your types and queries in `src/modules/user/user.gql`:
+
+```graphql
+type User {
+  id: ID!
+  email: String!
+  lastName: String!
+  profile: String
+  givenName: String
+}
+
+input UserWhereUniqueInput {
+  id: ID!
+}
+
+type Query {
+  user(where: UserWhereUniqueInput!): User
+  users: [User!]
+}
+```
+
+## Implement Resolvers
+
+After defining your schema, implement the resolvers in `src/modules/user/resolvers.ts`:
+
+```typescript
+import { getUserModule } from "./typedef.ts";
+import { UserDataSource } from "./datasource.ts";
+
+const { Query } = getUserModule();
+
+// Single user resolver
+Query.user(({ args, ctx }) => {
+  return ctx.dataSources.users.findUnique(args.where);
+});
+
+// Users list resolver
+Query.users(({ ctx }) => {
+  return ctx.dataSources.users.findMany();
+});
+```
+
+## Resolver Context
+
+Resolvers receive the context object automatically that you define in the `baeta.ts` config file as you can see [Context](./context.mdx), which contains the data sources:
+
+```typescript
+interface Context {
+  dataSources: OrmDataSource;
+}
+```
+
+## Type Safety
+
+Baeta provides full type safety for:
+
+- Arguments
+- Return types
+- Parent types
+- Context
+
+```typescript
+// TypeScript ensures type safety
+Query.user(({ args, ctx }) => {
+  // args.where is typed as UserWhereUniqueInput
+  // return type must match User schema
+  return ctx.dataSources.users.findUnique(args.where);
+});
+```
+
+## Field Resolvers
+
+Baeta allows you to define resolvers for any field in your types, not just Query fields:
+
+```typescript
+const { User } = getUserModule();
+
+User.email(({ root }) => {
+  return root.email.toLowerCase();
+});
+```
+
+## Caveats
+
+:::warning
+When you define a required field in a type (like `fullName: String!`), that field must be resolved in all resolvers that return that type. In our example, because `fullName` is marked as non-nullable (`String!`), both `Query.user` and `Query.users` would need to include this field in their return data.
+
+To add computed required fields without modifying existing resolvers, create a separate module that extends the base type instead. If the field was optional (`String` instead of `String!`), this wouldn't be necessary.
+:::
+
+### Extending Types in a Separate Module
+
+`src/modules/user-extended/user-extended.gql`:
+
+```graphql
+extend type User {
+  fullName: String!
+  posts: [Post!]
+}
+```
+
+### Implementing Extended Resolvers
+
+After defining your schema, implement the resolvers in their respective modules `src/modules/user-extended/resolvers.ts`:
+
+```typescript
+import { getUserExtendedModule } from "./typedef.ts";
+
+const { User } = getUserExtendedModule();
+
+User.fullName(({ root }) => {
+  return `${root.givenName} ${root.lastName}`;
+});
+
+User.posts(({ root, ctx }) => {
+  return ctx.dataSources.posts.findMany({
+    where: { authorId: root.id },
+  });
+});
+```
+
+## Best Practices
+
+1. Module Organization
+
+- Keep related schema and resolvers together
+- Use meaningful file names
+- Follow consistent module structure
+
+2. Type Safety
+
+- Leverage TypeScript's type system
+- Use generated types from schema
+- Enable strict type checking
+
+3. Error Handling
+
+- User appropriate [GraphQL errors](./errors.mdx)
+- Provide meaningful error messages
+- Handle edge cases

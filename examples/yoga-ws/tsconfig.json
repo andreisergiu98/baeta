@@ -4,6 +4,9 @@
     "rootDir": "src",
     "outDir": "dist",
     "noEmit": true,
+    "types": [
+      "node"
+    ],
     "emitDeclarationOnly": false
   },
   "exclude": [

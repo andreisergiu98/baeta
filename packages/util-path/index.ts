@@ -34,8 +34,7 @@ export const join = upath.join;
  *
  * @param paths string paths to join
  */
-// biome-ignore lint/suspicious/noExplicitAny: accept any arguments
-export const joinSafe = upath.joinSafe as (...paths: any[]) => string;
+export const joinSafe = upath.joinSafe as (...paths: string[]) => string;
 
 export const normalize = upath.normalize;
 export const normalizeSafe = upath.normalizeSafe;

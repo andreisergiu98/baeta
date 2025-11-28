@@ -31,10 +31,10 @@ async function cleanByState(current: FileManager, stateFile: string) {
 		return;
 	}
 
-	const currentFilenames = current.getPersistedFiles().map((file) => file.filename);
+	const currentFilenames = new Set(current.getPersistedFiles().map((file) => file.filename));
 
 	const toUnlink = state.previousFiles
-		.filter((file) => !currentFilenames.includes(file.filename))
+		.filter((file) => !currentFilenames.has(file.filename))
 		.map((data) => {
 			if (data.type === 'file-block') {
 				return new FileBlock(data.filename, data.content, data.start, data.end, data.tag);

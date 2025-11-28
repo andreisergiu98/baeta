@@ -7,7 +7,7 @@ interface Props {
 	dev?: boolean;
 }
 
-export function PackageManagerAdd(props: Props) {
+export function PackageManagerAdd(props: Readonly<Props>) {
 	const devFlag = props.dev ? ' -D' : '';
 	return (
 		<Tabs groupId="package-manager">

@@ -3,7 +3,6 @@
 ## Packages
 
 - [@baeta/cli](cli/index.md)
-- [@baeta/compiler](compiler/index.md)
 - [@baeta/core](core/index.md)
 - [@baeta/directives](directives/index.md)
 - [@baeta/env](env/index.md)
@@ -18,7 +17,6 @@
 - [@baeta/generator](generator/index.md)
 - [@baeta/generator-sdk](generator-sdk/index.md)
 - [@baeta/plugin](plugin/index.md)
-- [@baeta/plugin-autoload](plugin-autoload/index.md)
 - [@baeta/plugin-cloudflare](plugin-cloudflare/index.md)
 - [@baeta/plugin-directives](plugin-directives/index.md)
 - [@baeta/plugin-exec](plugin-exec/index.md)

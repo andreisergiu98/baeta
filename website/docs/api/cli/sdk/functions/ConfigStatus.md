@@ -1,7 +1,7 @@
 # ConfigStatus()
 
-> **ConfigStatus**(): `null` \| `Element`
+> **ConfigStatus**(): `Element` \| `null`
 
 ## Returns
 
-`null` \| `Element`
+`Element` \| `null`

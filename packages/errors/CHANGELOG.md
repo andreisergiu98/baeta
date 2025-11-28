@@ -1,5 +1,11 @@
 # @baeta/errors
 
+## 2.0.0-next.8
+
+### Patch Changes
+
+- [`2c403a0`](https://github.com/andreisergiu98/baeta/commit/2c403a06fedebf4d55870f37946c70e8e99c3027) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Remove BaetaErrorCodeKey export
+
 ## 2.0.0-next.7
 
 ## 2.0.0-next.2

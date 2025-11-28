@@ -1,5 +1,13 @@
 # @baeta/extension-auth
 
+## 2.0.0-next.8
+
+### Patch Changes
+
+- Updated dependencies [[`2c403a0`](https://github.com/andreisergiu98/baeta/commit/2c403a06fedebf4d55870f37946c70e8e99c3027)]:
+  - @baeta/errors@2.0.0-next.8
+  - @baeta/core@2.0.0-next.8
+
 ## 2.0.0-next.7
 
 ### Patch Changes

@@ -21,8 +21,6 @@ export const BaetaErrorCode = {
 
 export type BaetaErrorCode = (typeof BaetaErrorCode)[keyof typeof BaetaErrorCode];
 
-export type BaetaErrorCodeKey = keyof typeof BaetaErrorCode;
-
 /**
  * Thrown when a user attempts to access a resource without authentication.
  * Results in a 401 HTTP status code.

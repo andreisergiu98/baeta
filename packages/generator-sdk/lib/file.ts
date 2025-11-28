@@ -30,10 +30,10 @@ export interface FileOptions {
 	disableBiomeV2Header?: boolean;
 
 	/**
-	 * Allow overwriting the file.
-	 * @defaultValue true
+	 * Dissallow overwriting the file.
+	 * @defaultValue false
 	 */
-	allowOverwrite?: boolean;
+	disableOverwrite?: boolean;
 
 	/**
 	 * Add custom header at the beginning of the file.
@@ -51,7 +51,7 @@ export class File {
 	readonly filename: string;
 	readonly content: string;
 	readonly tag: string;
-	private readonly options?: FileOptions;
+	readonly options?: FileOptions;
 
 	constructor(filename: string, content: string, tag: string, options?: FileOptions) {
 		this.filename = filename;
@@ -66,7 +66,7 @@ export class File {
 		}
 		this.persisted = true;
 
-		if (this.options?.allowOverwrite === false) {
+		if (this.options?.disableOverwrite === true) {
 			const exists = await fs
 				.stat(this.filename)
 				.then((res) => res.isFile())

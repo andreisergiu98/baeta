@@ -108,7 +108,7 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 				modulesDir: options.modulesDir,
 			}),
 			options: {
-				allowOverwrite: false,
+				disableOverwrite: true,
 				disableBiomeV1Header: true,
 				disableBiomeV2Header: true,
 				disableEslintHeader: true,
@@ -119,7 +119,7 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 			filename: join(options.modulesDir, 'extensions.ts'),
 			content: printExtensionsTemplate(),
 			options: {
-				allowOverwrite: false,
+				disableOverwrite: true,
 				disableBiomeV1Header: true,
 				disableBiomeV2Header: true,
 				disableEslintHeader: true,

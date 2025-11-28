@@ -1,5 +1,11 @@
 # @baeta/plugin-gitignore
 
+## 2.0.0-next.7
+
+### Patch Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix gitignore plugin not skipping files that are only generated at init
+
 ## 2.0.0-next.3
 
 ### Patch Changes

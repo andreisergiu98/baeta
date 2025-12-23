@@ -1,5 +1,11 @@
 # @baeta/util-encoding
 
+## 2.0.0-next.3
+
+### Patch Changes
+
+- [`831cfa2`](https://github.com/andreisergiu98/baeta/commit/831cfa2a11445aaf7f2d1a1d7ddf073db9bb8008) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Bump utility packages
+
 ## 2.0.0-next.2
 
 ### Patch Changes

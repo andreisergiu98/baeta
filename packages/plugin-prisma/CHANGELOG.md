@@ -1,5 +1,12 @@
 # @baeta/plugin-prisma
 
+## 2.0.0-next.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @baeta/plugin-exec@2.0.0-next.10
+
 ## 2.0.0-next.9
 
 ### Patch Changes

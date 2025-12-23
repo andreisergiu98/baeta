@@ -1,5 +1,14 @@
 # @baeta/extension-complexity
 
+## 2.0.0-next.10
+
+### Patch Changes
+
+- [`5607f58`](https://github.com/andreisergiu98/baeta/commit/5607f58827f9a029e3545058895065d40be9f8ab) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Remove unnecessary extra type parameter for subscription builder
+
+- Updated dependencies [[`5607f58`](https://github.com/andreisergiu98/baeta/commit/5607f58827f9a029e3545058895065d40be9f8ab)]:
+  - @baeta/core@2.0.0-next.10
+
 ## 2.0.0-next.9
 
 ### Patch Changes

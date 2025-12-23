@@ -238,10 +238,7 @@ function validateRecursive<TSource, TContext>(
 		return [];
 	}
 
-	let valueType = type;
-	if (valueType instanceof GraphQLNonNull) {
-		valueType = valueType.ofType;
-	}
+	const valueType = type instanceof GraphQLNonNull ? type.ofType : type;
 
 	if (valueType instanceof GraphQLList) {
 		const listType = valueType as GraphQLList<GraphQLType>;

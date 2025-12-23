@@ -11,45 +11,36 @@ export interface SubscriptionCompilerOptions<
 	Args,
 	Info,
 	SubscriptionSource,
-	SubscriptionPayload,
 > {
 	field: string;
 	store: Map<symbol, unknown>;
-	middlewares: Array<Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>>;
-	subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>;
+	middlewares: Array<
+		Middleware<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>
+	>;
+	subscribe: Resolver<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
-export class SubscriptionCompiler<
-	Result,
-	Source,
-	Context,
-	Args,
-	Info,
-	SubscriptionSource,
-	SubscriptionPayload,
-> {
+export class SubscriptionCompiler<Result, Source, Context, Args, Info, SubscriptionSource> {
 	readonly #field: string;
 	readonly #store: Map<symbol, unknown>;
 	readonly #initialMiddlewares: Array<
-		Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>
+		Middleware<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>
 	>;
 	readonly #middlewares: Array<
-		Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>
+		Middleware<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>
 	>;
-	readonly #subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>;
+	readonly #subscribe: Resolver<
+		SubscriptionWrapper<Source>,
+		SubscriptionSource,
+		Context,
+		Args,
+		Info
+	>;
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
 
 	constructor(
-		options: SubscriptionCompilerOptions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			SubscriptionSource,
-			SubscriptionPayload
-		>,
+		options: SubscriptionCompilerOptions<Result, Source, Context, Args, Info, SubscriptionSource>,
 	) {
 		this.#field = options.field;
 		this.#store = options.store;
@@ -74,13 +65,13 @@ export class SubscriptionCompiler<
 	}
 
 	addMiddleware(
-		middleware: Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>,
+		middleware: Middleware<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>,
 	) {
 		this.#middlewares.push(middleware);
 	}
 
 	addInitialMiddleware(
-		middleware: Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>,
+		middleware: Middleware<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>,
 	) {
 		this.#initialMiddlewares.push(middleware);
 	}
@@ -88,7 +79,13 @@ export class SubscriptionCompiler<
 	build(typeMiddlewares: Middleware<unknown, SubscriptionSource, Context, unknown, Info>[]) {
 		const allMiddlewares = concatMiddlewares(
 			this.#initialMiddlewares,
-			typeMiddlewares as Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>[],
+			typeMiddlewares as Middleware<
+				SubscriptionWrapper<Source>,
+				SubscriptionSource,
+				Context,
+				Args,
+				Info
+			>[],
 			this.#middlewares,
 		);
 		const getWrappedSubscription = composeMiddlewares(allMiddlewares, this.#subscribe);
@@ -99,7 +96,7 @@ export class SubscriptionCompiler<
 					args,
 					ctx,
 					info,
-				}) as SubscriptionWrapper<Source>;
+				});
 				return mapMaybePromise(wrappedSubscription, (wrapped) => wrapped.__internal__asyncIterable);
 			},
 			resolve: (source: Source, args: Args, ctx: Context, info: Info) => {

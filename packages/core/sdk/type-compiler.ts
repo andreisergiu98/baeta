@@ -37,7 +37,7 @@ export class TypeCompiler<
 	readonly #middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly #fields: ReadonlyArray<
 		| FieldCompiler<unknown, Source, Context, unknown, Info>
-		| SubscriptionCompiler<unknown, unknown, Context, unknown, Info, Source, unknown>
+		| SubscriptionCompiler<unknown, unknown, Context, unknown, Info, Source>
 	>;
 
 	constructor(options: TypeCompilerOptions<Source, Context, Info, FieldsResolvers>) {

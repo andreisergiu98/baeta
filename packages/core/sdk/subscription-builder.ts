@@ -104,8 +104,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 					Context,
 					Args,
 					Info,
-					Source,
-					SubscriptionWrapper<Payload>
+					Source
 				>({
 					field: this.#field,
 					extensions: this.#extensions,
@@ -132,15 +131,14 @@ interface SubscriptionFieldWithMakeOptions<
 	Args,
 	Info,
 	SubscriptionSource,
-	SubscriptionPayload,
 > {
 	field: string;
 	extensions: ReadonlyArray<Extension>;
 	store: ReadonlyMap<symbol, Readonly<unknown>>;
 	middlewares: ReadonlyArray<
-		Middleware<SubscriptionPayload, SubscriptionSource, Context, Args, Info>
+		Middleware<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>
 	>;
-	subscribe: Resolver<SubscriptionPayload, SubscriptionSource, Context, Args, Info>;
+	subscribe: Resolver<SubscriptionWrapper<Source>, SubscriptionSource, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
@@ -152,7 +150,6 @@ function createSubscriptionFieldWithMake<
 	Args,
 	Info,
 	SubscriptionSource,
-	SubscriptionPayload,
 >(
 	options: SubscriptionFieldWithMakeOptions<
 		Result,
@@ -160,21 +157,11 @@ function createSubscriptionFieldWithMake<
 		Context,
 		Args,
 		Info,
-		SubscriptionSource,
-		SubscriptionPayload
+		SubscriptionSource
 	>,
 ): SubscriptionHelpers<Expected, Result, Source, Context, Args, Info> {
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
-		createSubscriptionFieldWithMake<
-			Expected,
-			R,
-			Source,
-			Context,
-			Args,
-			Info,
-			SubscriptionSource,
-			SubscriptionPayload
-		>({
+		createSubscriptionFieldWithMake<Expected, R, Source, Context, Args, Info, SubscriptionSource>({
 			field: options.field,
 			extensions: options.extensions,
 			store: options.store,
@@ -204,8 +191,7 @@ function createSubscriptionFieldWithMake<
 		Context,
 		Args,
 		Info,
-		SubscriptionSource,
-		SubscriptionPayload
+		SubscriptionSource
 	> = {
 		map: (fn) => {
 			nameFunction(fn, `${fnNamespace}.map`);
@@ -248,15 +234,7 @@ function createSubscriptionFieldWithMake<
 			return make(resolver);
 		},
 		__make: () =>
-			new SubscriptionCompiler<
-				Expected,
-				Source,
-				Context,
-				Args,
-				Info,
-				SubscriptionSource,
-				SubscriptionPayload
-			>({
+			new SubscriptionCompiler<Expected, Source, Context, Args, Info, SubscriptionSource>({
 				field: options.field,
 				store: new Map(options.store),
 				middlewares: [...options.middlewares],

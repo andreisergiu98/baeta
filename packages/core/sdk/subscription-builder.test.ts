@@ -1,5 +1,12 @@
 import test, { sleep } from '@baeta/testing';
-import type { MockArgs, MockContext, MockInfo, MockResult } from './__test__/mocks.ts';
+import { isPromise } from '../utils/promise.ts';
+import {
+	type MockArgs,
+	type MockContext,
+	type MockInfo,
+	type MockResult,
+	mockInfo,
+} from './__test__/mocks.ts';
 import {
 	testSetStoreLike,
 	testUseStoreLike,
@@ -9,6 +16,7 @@ import {
 	executeMockedSubscriptionField,
 	executeMockedSubscriptionResolver,
 	type MockSubscriptionSource,
+	makeMockedSubscriptionField,
 	mockSubscriptionFieldBuilder,
 	mockSubscriptionFieldResolver,
 	mockSubscriptionGenerator,
@@ -34,9 +42,19 @@ test('createSubscriptionBuilder should create a subscription field correctly', a
 		.subscribe(() => mockSubscriptionGenerator())
 		.resolve((params) => `with_resolver_${params.source.value}`);
 
+	const asyncSubscriptionField = subscriptionBuilder
+		.toMethods()
+		.subscribe(async () => {
+			await sleep(5);
+			return mockSubscriptionGenerator();
+		})
+		.resolve((params) => `with_resolver_${params.source.value}`);
+
 	const results = await executeMockedSubscriptionField(subscriptionField);
+	const asyncResults = await executeMockedSubscriptionField(asyncSubscriptionField);
 
 	t.deepEqual(results, ['with_resolver_1', 'with_resolver_2', 'with_resolver_3']);
+	t.deepEqual(asyncResults, ['with_resolver_1', 'with_resolver_2', 'with_resolver_3']);
 });
 
 test('SubscriptionBuilder should be created correctly', (t) => {

@@ -39,7 +39,7 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 			const modulesDir = ctx.generatorOptions.modulesDir;
 			const moduleDefinitionName = ctx.generatorOptions.moduleDefinitionName;
 
-			const skipedTags = new Set([...(options?.skipTags ?? []), ...defaultSkipTags]);
+			const skippedTags = new Set([...(options?.skipTags ?? []), ...defaultSkipTags]);
 			const skippedFilesGlobs = [
 				...(options?.skipFilesGlobs ?? []).map((glob) => resolve(ctx.generatorOptions.cwd, glob)),
 			];
@@ -48,7 +48,7 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 				.filter((file) => {
 					return (
 						!file.filename.endsWith(moduleDefinitionName) &&
-						!skipedTags.has(file.tag) &&
+						!skippedTags.has(file.tag) &&
 						!skippedFilesGlobs.some((skippedFile) =>
 							micromatch.isMatch(file.filename, skippedFile),
 						) &&

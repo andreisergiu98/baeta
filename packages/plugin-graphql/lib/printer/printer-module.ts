@@ -1,16 +1,31 @@
-import { join } from '@baeta/util-path';
+import { join, parse } from '@baeta/util-path';
 import { pascalCase } from 'change-case-all';
 import type { DocumentNode } from 'graphql';
 import type { FieldInfoMap } from '../visitors/field-info.ts';
 import type { ModuleRegistry } from '../visitors/module-registry.ts';
-import { buildBlock, buildCodeBlock, makeRelativePathForImport } from './printer-utils.ts';
+import { buildBlock, buildCodeBlock, indent, makeRelativePathForImport } from './printer-utils.ts';
 
 export interface ModulePrinterConfig {
 	registry: ModuleRegistry;
 	fieldInfo: FieldInfoMap;
 	typesDir: string;
 	modulesDir: string;
+	moduleDefinitionName: string;
 	importExtension: '.ts' | '.js' | '';
+}
+
+export function printModuleIndexStarter(config: ModulePrinterConfig, moduleName: string): string {
+	const typeEntries = Object.entries(config.registry.picks.objects);
+	const types = typeEntries.map(([typeName]) => typeName);
+
+	return [
+		printModuleIndexImports(config, moduleName),
+		printModuleIndexDestructuredTypes(moduleName, types),
+		...typeEntries.map(([typeName, fields]) => printModuleIndexType(typeName, fields)),
+		printModuleIndexSchema(moduleName, types, config.registry.defined.scalars),
+	]
+		.filter((el) => el != null)
+		.join('\n\n');
 }
 
 export function printModuleImports(config: ModulePrinterConfig, moduleName: string) {
@@ -52,6 +67,66 @@ export function printBaetaModuleTypes(config: ModulePrinterConfig) {
 			}),
 		],
 	});
+}
+
+function printModuleIndexDestructuredTypes(moduleName: string, types: string[]) {
+	return `const { ${types.join(', ')} } = ${pascalCase(moduleName)}Module;`;
+}
+
+function printModuleIndexImports(config: ModulePrinterConfig, moduleName: string) {
+	const hasScalars = config.registry.defined.scalars.length > 0;
+	const typedef = parse(config.moduleDefinitionName).name + config.importExtension;
+	const moduleImport = `import { ${pascalCase(moduleName)}Module } from "./${typedef}";`;
+	if (!hasScalars) {
+		return moduleImport;
+	}
+	return [`import { GraphQLScalarType } from "graphql";`, moduleImport].join('\n');
+}
+
+function printModuleIndexSchema(moduleName: string, types: string[], scalars: string[]) {
+	const printedTypes = [
+		...types.map((typeName) => `${typeName}: ${typeName}Resolver,`),
+		...scalars.map(
+			(scalarName) => `${scalarName}: new GraphQLScalarType({ name: '${scalarName}' }),`,
+		),
+	]
+		.map(indent(2))
+		.join('\n');
+
+	return `export default ${pascalCase(moduleName)}Module.$schema({
+${printedTypes}
+});`;
+}
+
+function printModuleIndexType(typeName: string, fields: string[]) {
+	const printedFields = fields
+		.map((fieldName) => printModuleIndexTypeField(typeName, fieldName))
+		.map(indent(2))
+		.join('\n');
+
+	return `const ${typeName}Resolver = ${typeName}.$fields({
+${printedFields}
+});`;
+}
+
+function printModuleIndexTypeField(typeName: string, fieldName: string) {
+	if (typeName === 'Query' || typeName === 'Mutation') {
+		return `${fieldName}: ${typeName}.${fieldName}.resolve((params) => {
+  // Implement resolver logic here
+}),`;
+	}
+
+	if (typeName === 'Subscription') {
+		return `${fieldName}: ${typeName}.${fieldName}
+  .subscribe((params) => {
+    // Implement subscribe logic here
+  })
+  .resolve((params) => {
+    // Implement resolver logic here
+  }),`;
+	}
+
+	return `${fieldName}: ${typeName}.${fieldName}.key('${fieldName}'),`;
 }
 
 function printBaetaModuleTypesForFields(config: ModulePrinterConfig, isFactory: boolean) {

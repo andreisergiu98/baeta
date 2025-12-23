@@ -9,6 +9,7 @@ import {
 	printBaetaModuleTypes,
 	printModuleBuilder,
 	printModuleImports,
+	printModuleIndexStarter,
 	printModuleMetadata,
 	printModuleObjectTypeFields,
 } from './printer/printer-module.ts';
@@ -139,6 +140,7 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 			importExtension: options.importExtension,
 			modulesDir: options.modulesDir,
 			registry: createModuleRegistry(document),
+			moduleDefinitionName: options.moduleDefinitionName,
 		};
 		files.push({
 			filename: join(options.modulesDir, `/${module}/${options.moduleDefinitionName}`),
@@ -149,6 +151,17 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 				printModuleObjectTypeFields(config),
 				printModuleBuilder(config, module),
 			].join('\n\n'),
+		});
+		files.push({
+			filename: join(options.modulesDir, `/${module}/index.ts`),
+			content: printModuleIndexStarter(config, module),
+			options: {
+				disableOverwrite: true,
+				disableBiomeV1Header: true,
+				disableBiomeV2Header: true,
+				disableEslintHeader: true,
+				disableGenerationNoticeHeader: true,
+			},
 		});
 	}
 

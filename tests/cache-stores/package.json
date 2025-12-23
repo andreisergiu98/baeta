@@ -49,7 +49,7 @@
     "graphql": "^16.12.0",
     "graphql-scalars": "^1.25.0",
     "graphql-tag": "^2.12.6",
-    "zod": "^4.1.13"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

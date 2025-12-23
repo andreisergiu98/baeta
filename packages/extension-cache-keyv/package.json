@@ -58,7 +58,7 @@
     "@baeta/tsconfig": "workspace:^",
     "@keyv/etcd": "^2.1.1",
     "graphql": "^16.12.0",
-    "keyv": "^5.5.4",
+    "keyv": "^5.5.5",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {

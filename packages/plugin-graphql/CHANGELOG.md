@@ -1,5 +1,13 @@
 # @baeta/plugin-graphql
 
+## 2.0.0-next.9
+
+### Patch Changes
+
+- Updated dependencies [[`831cfa2`](https://github.com/andreisergiu98/baeta/commit/831cfa2a11445aaf7f2d1a1d7ddf073db9bb8008), [`831cfa2`](https://github.com/andreisergiu98/baeta/commit/831cfa2a11445aaf7f2d1a1d7ddf073db9bb8008)]:
+  - @baeta/generator-sdk@2.0.0-next.4
+  - @baeta/util-path@2.0.0-next.3
+
 ## 2.0.0-next.8
 
 ## 2.0.0-next.7

@@ -1,5 +1,14 @@
 # @baeta/cli
 
+## 2.0.0-next.10
+
+### Patch Changes
+
+- [`d223ccf`](https://github.com/andreisergiu98/baeta/commit/d223ccf1848122103c1d2f703ffbcc50274d9054) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Pin node-pty to a working version
+
+- Updated dependencies []:
+  - @baeta/plugin-graphql@2.0.0-next.10
+
 ## 2.0.0-next.9
 
 ### Patch Changes

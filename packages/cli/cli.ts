@@ -16,6 +16,7 @@ async function run() {
 		.command(createGenerateCommand(config))
 		.demandCommand()
 		.version(version)
+		.strict()
 		.help()
 		.parseAsync();
 }

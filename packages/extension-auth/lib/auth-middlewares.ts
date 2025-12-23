@@ -65,18 +65,18 @@ export function createMiddleware<
 	Scopes extends ScopesShape,
 	Grants extends string,
 	Result,
-	Root,
+	Source,
 	Context,
 	Args,
 	Info,
 >(
 	type: string,
 	loadScopes: GetScopeLoader<Scopes, Context>,
-	scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Root, Context, Args, Info>,
+	scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Source, Context, Args, Info>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
-	options?: AuthMiddlewareOptions<Grants, Result, Root, Context, Args, Info>,
+	options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	onError?: ScopeErrorResolver,
-): Middleware<Result, Root, Context, Args, Info> {
+): Middleware<Result, Source, Context, Args, Info> {
 	const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
@@ -159,7 +159,7 @@ export function createFallbackMiddleware<
 		return;
 	}
 
-	return createMiddleware<Scopes, Grants, unknown, unknown, Context, unknown, unknown>(
+	return createMiddleware<Scopes, Grants, any, unknown, Context, unknown, unknown>(
 		type,
 		loadScopes,
 		rules,

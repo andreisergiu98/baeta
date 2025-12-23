@@ -118,7 +118,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 			}
 		}
 
-		const middleware = createComplexityMiddleware<unknown, unknown, unknown, unknown, unknown>(
+		const middleware = createComplexityMiddleware<any, unknown, unknown, unknown, unknown>(
 			this.options,
 			fieldSettingsMap,
 		);

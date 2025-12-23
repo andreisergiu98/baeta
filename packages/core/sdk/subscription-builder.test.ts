@@ -232,3 +232,65 @@ test('SubscriptionBuilder edit should handle store correctly', async (t) => {
 	testSetStoreLike(t, edit);
 	testUseStoreMutations(t, edit, edit.commit().edit());
 });
+
+test('SubscriptionBuilder should assign parameters correctly', async (t) => {
+	const source = {};
+	const payload = 'test';
+	const args = { userId: '123' };
+	const ctx = { user: { name: 'test' } };
+	const info = mockInfo();
+
+	const fieldBuilder = mockSubscriptionFieldBuilder();
+
+	const generator = {
+		async *[Symbol.asyncIterator]() {
+			yield payload;
+		},
+	};
+
+	const field = fieldBuilder
+		.toMethods()
+		.subscribe((params) => {
+			t.is(params.source, source);
+			t.is(params.args, args);
+			t.is(params.ctx, ctx);
+			t.is(params.info, info);
+			return generator;
+		})
+		.resolve((params) => {
+			t.is(params.source, payload);
+			t.is(params.args, args);
+			t.is(params.ctx, ctx);
+			t.is(params.info, info);
+			return params.source;
+		})
+		.map((params) => {
+			t.is(params.source, 'test');
+			t.is(params.args, args);
+			t.is(params.ctx, ctx);
+			t.is(params.info, info);
+			return params.source;
+		})
+		.map((params) => ({ name: params.source }))
+		.key('name')
+		.to((value) => value?.toLocaleUpperCase())
+		.undefinedAsNull()
+		.withDefault('default')
+		.map((params) => {
+			t.is(params.source, 'TEST');
+			t.is(params.args, args);
+			t.is(params.ctx, ctx);
+			t.is(params.info, info);
+			return params.source;
+		});
+
+	const resolver = makeMockedSubscriptionField(field).build([]);
+
+	const generatorPromise = resolver.subscribe(source, args, ctx, info);
+	const awaitedGenerator = isPromise(generatorPromise) ? await generatorPromise : generatorPromise;
+
+	for await (const payload of awaitedGenerator) {
+		const result = await resolver.resolve(payload, args, ctx, info);
+		t.is(result, 'TEST');
+	}
+});

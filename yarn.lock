@@ -1790,7 +1790,7 @@ __metadata:
     ansi-styles: "npm:^6.2.3"
     graphql: "npm:^16.12.0"
     ink: "npm:^6.5.1"
-    node-pty: "npm:^1.0.0"
+    node-pty: "npm:1.0.0"
     react: "npm:^19.2.0"
     typescript: "npm:^5.9.3"
     yargs: "npm:^18.0.0"
@@ -16069,7 +16069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-pty@npm:^1.0.0":
+"node-pty@npm:1.0.0":
   version: 1.0.0
   resolution: "node-pty@npm:1.0.0"
   dependencies:

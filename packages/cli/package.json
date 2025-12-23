@@ -62,7 +62,7 @@
     "@baeta/util-path": "workspace:^",
     "ansi-styles": "^6.2.3",
     "ink": "^6.5.1",
-    "node-pty": "^1.0.0",
+    "node-pty": "1.0.0",
     "react": "^19.2.0",
     "yargs": "^18.0.0"
   },

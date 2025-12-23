@@ -1,5 +1,11 @@
 # @baeta/plugin-graphql
 
+## 2.0.0-next.11
+
+### Patch Changes
+
+- [`ed81033`](https://github.com/andreisergiu98/baeta/commit/ed81033dc30b5a57f2358e4645ff3f717856cc21) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Generate starter index.ts file for new modules
+
 ## 2.0.0-next.10
 
 ## 2.0.0-next.9

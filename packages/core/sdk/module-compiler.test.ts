@@ -1,6 +1,7 @@
 import test from '@baeta/testing';
 import { GraphQLScalarType } from 'graphql';
-import { mockModuleCompiler, runModuleResolvers, testUseStoreLike } from './__test__/helpers.ts';
+import { executeMockedModuleResolvers, mockModuleCompiler } from './__test__/module-mocks.ts';
+import { testUseStoreLike } from './__test__/store-tests.ts';
 
 test('ModuleCompiler should be created correctly', (t) => {
 	const moduleCompiler = mockModuleCompiler();
@@ -21,7 +22,7 @@ test('ModuleCompiler should handle addMiddleware correctly', async (t) => {
 		return `${result}_1`;
 	});
 	const result = moduleCompiler.build();
-	t.deepEqual(await runModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
 			field1: 'test_1',
 			field2: 'test_1',
@@ -36,7 +37,7 @@ test('ModuleCompiler should handle addMiddleware correctly', async (t) => {
 test('ModuleCompiler should handle build correctly', async (t) => {
 	const moduleCompiler = mockModuleCompiler();
 	const result = moduleCompiler.build();
-	t.deepEqual(await runModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
 			field1: 'test',
 			field2: 'test',
@@ -59,7 +60,7 @@ test('ModuleCompiler should handle scalars correctly', async (t) => {
 
 	const result = moduleCompiler.build();
 
-	t.deepEqual(await runModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
 			field1: 'test',
 			field2: 'test',
@@ -87,7 +88,7 @@ test('ModuleCompiler should handle defaultResolvers correctly', async (t) => {
 	);
 	const result = moduleCompiler.build();
 
-	t.deepEqual(await runModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
 			field1: 'test',
 			field2: 'test',

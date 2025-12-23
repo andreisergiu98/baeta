@@ -1,19 +1,16 @@
 import test from '@baeta/testing';
 import type { Middleware } from '../lib/middleware.ts';
+import type { MockContext, MockInfo, MockSource } from './__test__/mocks.ts';
 import {
-	type MockContext,
-	type MockInfo,
-	type MockSource,
-	mockTypeBuilder,
-	runTypeResolvers,
 	testSetStoreLike,
 	testUseStoreLike,
 	testUseStoreMutations,
-} from './__test__/helpers.ts';
+} from './__test__/store-tests.ts';
+import { executeMockedTypeResolvers, mockTypeBuilder } from './__test__/type-mocks.ts';
 
 test('TypeBuilder should be created correctly', async (t) => {
 	const typeBuilder = mockTypeBuilder();
-	t.is(typeBuilder.type, 'type');
+	t.is(typeBuilder.type, 'Type');
 });
 
 test('TypeBuilder should handle $fields correctly', async (t) => {
@@ -24,7 +21,7 @@ test('TypeBuilder should handle $fields correctly', async (t) => {
 		field2: methods.field2.key('name'),
 	});
 	const resolversMap = fields.__make().build([]);
-	t.deepEqual(await runTypeResolvers(resolversMap), {
+	t.deepEqual(await executeMockedTypeResolvers(resolversMap), {
 		field1: 'test',
 		field2: 'test',
 	});
@@ -48,7 +45,7 @@ test('TypeBuilder should handle $use correctly', async (t) => {
 			field2: methods.field2.key('name'),
 		});
 	const resolversMap = fields.__make().build([]);
-	t.deepEqual(await runTypeResolvers(resolversMap), {
+	t.deepEqual(await executeMockedTypeResolvers(resolversMap), {
 		field1: 'test',
 		field2: 'test',
 	});

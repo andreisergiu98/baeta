@@ -1,45 +1,50 @@
 import test, { sleep } from '@baeta/testing';
+import type { GraphQLResolveInfo } from 'graphql';
+import {
+	executeMockedResolver,
+	mockFieldBuilder,
+	mockMiddleware,
+	mockResolver,
+} from './__test__/field-mocks.ts';
 import {
 	type MockArgs,
 	type MockContext,
 	type MockInfo,
 	type MockResult,
 	type MockSource,
-	mockFieldBuilder,
 	mockInfo,
-	mockMiddleware,
-	mockResolver,
-	runMockedResolver,
+} from './__test__/mocks.ts';
+import {
 	testSetStoreLike,
 	testUseStoreLike,
 	testUseStoreMutations,
-} from './__test__/helpers.ts';
+} from './__test__/store-tests.ts';
 import { createFieldBuilder, makeField } from './field.ts';
 
-test('createFieldBuilder should create field builder correctly', async (t) => {
+test('createFieldBuilder should create a type field correctly', async (t) => {
 	const fieldBuilder = createFieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>(
 		'type',
 		'field',
 		[],
 	);
 	const resolver = makeField(fieldBuilder.map((params) => params.source.name)).build([]);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should be created correctly', (t) => {
 	const fieldBuilder = mockFieldBuilder();
-	t.is(fieldBuilder.type, 'type');
+	t.is(fieldBuilder.type, 'Type');
 	t.is(fieldBuilder.field, 'field');
 });
 
 test('FieldBuilder should handle key correctly', async (t) => {
 	const resolver = mockResolver((methods) => methods.key('name'));
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle map correctly', async (t) => {
 	const resolver = mockResolver((methods) => methods.map((params) => params.source.name));
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle async map correctly', async (t) => {
@@ -49,12 +54,12 @@ test('FieldBuilder should handle async map correctly', async (t) => {
 			return params.source.name;
 		}),
 	);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle resolve correctly', async (t) => {
 	const resolver = mockResolver((methods) => methods.resolve((params) => params.source.name));
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle async resolve correctly', async (t) => {
@@ -64,14 +69,14 @@ test('FieldBuilder should handle async resolve correctly', async (t) => {
 			return params.source.name;
 		}),
 	);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle map helper correctly', async (t) => {
 	const resolver = mockResolver((methods) =>
 		methods.map((params) => params.source).map((params) => params.source.name),
 	);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle async map helper correctly', async (t) => {
@@ -86,14 +91,14 @@ test('FieldBuilder should handle async map helper correctly', async (t) => {
 				return params.source.name;
 			}),
 	);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle resolve helper correctly', async (t) => {
 	const resolver = mockResolver((methods) =>
 		methods.map((params) => params.source).resolve((params) => params.source.name),
 	);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle async resolve helper correctly', async (t) => {
@@ -108,29 +113,29 @@ test('FieldBuilder should handle async resolve helper correctly', async (t) => {
 				return params.source.name;
 			}),
 	);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle key helper correctly', async (t) => {
 	const resolver = mockResolver((methods) => methods.map((params) => params.source).key('name'));
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 });
 
 test('FieldBuilder should handle to helper correctly', async (t) => {
 	const resolver = mockResolver((methods) =>
 		methods.map((params) => params.source.name).to((value) => value.toLocaleUpperCase()),
 	);
-	t.is(await runMockedResolver(resolver), 'TEST');
+	t.is(await executeMockedResolver(resolver), 'TEST');
 });
 
 test('FieldBuilder should handle withDefault helper correctly', async (t) => {
 	const resolver = mockResolver((methods) => methods.map(() => null).withDefault('default'));
-	t.is(await runMockedResolver(resolver), 'default');
+	t.is(await executeMockedResolver(resolver), 'default');
 });
 
 test('FieldBuilder should handle undefinedAsNull helper correctly', async (t) => {
 	const resolver = mockResolver((methods) => methods.map(() => undefined).undefinedAsNull());
-	t.is(await runMockedResolver(resolver), null);
+	t.is(await executeMockedResolver(resolver), null);
 });
 
 test('FieldBuilder should handle middlewares correctly', async (t) => {
@@ -164,7 +169,7 @@ test('FieldBuilder should handle middlewares correctly', async (t) => {
 			.$use(middleware2)
 			.map(() => 'test'),
 	);
-	t.is(await runMockedResolver(resolver), 'test_1_2');
+	t.is(await executeMockedResolver(resolver), 'test_1_2');
 	t.is(i, 2);
 });
 
@@ -201,7 +206,7 @@ test('FieldBuilder edit should handle addMiddleware correctly', async (t) => {
 	const fieldWithMake = fieldBuilder2.toMethods().$use(middleware2).key('name');
 	const fieldCompiler = makeField(fieldWithMake);
 	const resolver = fieldCompiler.build([]);
-	t.is(await runMockedResolver(resolver), 'test_1_2');
+	t.is(await executeMockedResolver(resolver), 'test_1_2');
 	t.is(i, 2);
 });
 
@@ -249,5 +254,5 @@ test('FieldBuilder should assign parameters correctly', async (t) => {
 			}),
 	);
 
-	t.is(await resolver(source, args, ctx, info), 'TEST');
+	t.is(await resolver(source, args, ctx, info as GraphQLResolveInfo), 'TEST');
 });

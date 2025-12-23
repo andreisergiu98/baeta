@@ -1,31 +1,16 @@
 import test from '@baeta/testing';
 import {
-	type MockArgs,
-	type MockContext,
-	type MockInfo,
-	type MockResult,
-	type MockSource,
+	executeMockedResolver,
+	mockFieldCompiler,
 	mockMiddleware,
-	mockTypeMiddleware,
-	runMockedResolver,
-	testUseStoreLike,
-} from './__test__/helpers.ts';
-import { FieldCompiler } from './field-compiler.ts';
-
-function mockFieldCompiler() {
-	return new FieldCompiler<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
-		type: 'Test',
-		field: 'test',
-		store: new Map(),
-		middlewares: [],
-		resolver: () => 'test',
-	});
-}
+} from './__test__/field-mocks.ts';
+import { testUseStoreLike } from './__test__/store-tests.ts';
+import { mockTypeMiddleware } from './__test__/type-mocks.ts';
 
 test('FieldCompiler should be created correctly', (t) => {
 	const fieldCompiler = mockFieldCompiler();
-	t.is(fieldCompiler.type, 'Test');
-	t.is(fieldCompiler.field, 'test');
+	t.is(fieldCompiler.type, 'Type');
+	t.is(fieldCompiler.field, 'field');
 });
 
 test('FieldCompiler should add middleware correctly', async (t) => {
@@ -42,7 +27,7 @@ test('FieldCompiler should add middleware correctly', async (t) => {
 		}),
 	);
 	const resolver = fieldCompiler.build([]);
-	t.is(await runMockedResolver(resolver), 'test');
+	t.is(await executeMockedResolver(resolver), 'test');
 	t.is(i, 2);
 });
 
@@ -72,7 +57,7 @@ test('FieldCompiler should add initial middleware correctly', async (t) => {
 		),
 	);
 	const resolver = fieldCompiler.build([]);
-	t.is(await runMockedResolver(resolver), 'test_1_2');
+	t.is(await executeMockedResolver(resolver), 'test_1_2');
 	t.is(i, 2);
 });
 
@@ -112,7 +97,7 @@ test('FieldCompiler should use type middlewares correctly', async (t) => {
 			},
 		),
 	]);
-	t.is(await runMockedResolver(resolver), 'test_1_2_3');
+	t.is(await executeMockedResolver(resolver), 'test_1_2_3');
 	t.is(i, 3);
 });
 

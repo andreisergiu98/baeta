@@ -99,7 +99,7 @@ export class SubscriptionCompiler<
 					args,
 					ctx,
 					info,
-				}) as SubscriptionWrapper<unknown>;
+				}) as SubscriptionWrapper<Source>;
 				return mapMaybePromise(wrappedSubscription, (wrapped) => wrapped.__internal__asyncIterable);
 			},
 			resolve: (source: Source, args: Args, ctx: Context, info: Info) => {

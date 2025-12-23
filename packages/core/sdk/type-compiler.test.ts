@@ -1,5 +1,6 @@
 import test from '@baeta/testing';
-import { mockTypeCompiler, runTypeResolvers, testUseStoreLike } from './__test__/helpers.ts';
+import { testUseStoreLike } from './__test__/store-tests.ts';
+import { executeMockedTypeResolvers, mockTypeCompiler } from './__test__/type-mocks.ts';
 
 test('TypeCompiler should be created correctly', (t) => {
 	const typeCompiler = mockTypeCompiler();
@@ -19,7 +20,7 @@ test('TypeCompiler should handle addMiddleware correctly', async (t) => {
 		return `${result}_1`;
 	});
 	const resolvers = typeCompiler.build([]);
-	t.deepEqual(await runTypeResolvers(resolvers), {
+	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
 		field1: 'test_1',
 		field2: 'test_1',
 	});
@@ -28,7 +29,7 @@ test('TypeCompiler should handle addMiddleware correctly', async (t) => {
 test('TypeCompiler should handle build correctly', async (t) => {
 	const typeCompiler = mockTypeCompiler();
 	const resolvers = typeCompiler.build([]);
-	t.deepEqual(await runTypeResolvers(resolvers), {
+	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
 		field1: 'test',
 		field2: 'test',
 	});

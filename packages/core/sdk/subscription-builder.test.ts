@@ -1,0 +1,216 @@
+import test, { sleep } from '@baeta/testing';
+import type { MockArgs, MockContext, MockInfo, MockResult } from './__test__/mocks.ts';
+import {
+	testSetStoreLike,
+	testUseStoreLike,
+	testUseStoreMutations,
+} from './__test__/store-tests.ts';
+import {
+	executeMockedSubscriptionField,
+	executeMockedSubscriptionResolver,
+	type MockSubscriptionSource,
+	mockSubscriptionFieldBuilder,
+	mockSubscriptionFieldResolver,
+	mockSubscriptionGenerator,
+} from './__test__/subscription-mocks.ts';
+import { SubscriptionBuilder } from './subscription-builder.ts';
+
+test('createSubscriptionBuilder should create a subscription field correctly', async (t) => {
+	const subscriptionBuilder = new SubscriptionBuilder<
+		MockResult,
+		MockSubscriptionSource,
+		MockContext,
+		MockArgs,
+		MockInfo
+	>({
+		field: 'field',
+		extensions: [],
+		store: new Map(),
+		middlewares: [],
+	});
+
+	const subscriptionField = subscriptionBuilder
+		.toMethods()
+		.subscribe(() => mockSubscriptionGenerator())
+		.resolve((params) => `with_resolver_${params.source.value}`);
+
+	const results = await executeMockedSubscriptionField(subscriptionField);
+
+	t.deepEqual(results, ['with_resolver_1', 'with_resolver_2', 'with_resolver_3']);
+});
+
+test('SubscriptionBuilder should be created correctly', (t) => {
+	const fieldBuilder = mockSubscriptionFieldBuilder();
+	t.is(fieldBuilder.field, 'field');
+});
+
+test('SubscriptionBuilder should handle key correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) => methods.key('value'));
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder should handle map correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map((params) => `with_map_${params.source.value}`),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), [
+		'with_map_1',
+		'with_map_2',
+		'with_map_3',
+	]);
+});
+
+test('SubscriptionBuilder should handle async map correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map(async (params) => {
+			await sleep(5);
+			return `with_async_map_${params.source.value}`;
+		}),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), [
+		'with_async_map_1',
+		'with_async_map_2',
+		'with_async_map_3',
+	]);
+});
+
+test('SubscriptionBuilder should handle resolve correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.resolve((params) => `with_resolve_${params.source.value}`),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), [
+		'with_resolve_1',
+		'with_resolve_2',
+		'with_resolve_3',
+	]);
+});
+
+test('SubscriptionBuilder should handle async resolve correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.resolve(async (params) => {
+			await sleep(5);
+			return `with_async_resolve_${params.source.value}`;
+		}),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), [
+		'with_async_resolve_1',
+		'with_async_resolve_2',
+		'with_async_resolve_3',
+	]);
+});
+
+test('SubscriptionBuilder should handle map helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map((params) => params.source).map((params) => params.source.value),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder should handle async map helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods
+			.map(async (params) => {
+				await sleep(5);
+				return params.source;
+			})
+			.map(async (params) => {
+				await sleep(5);
+				return params.source.value;
+			}),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder should handle resolve helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map((params) => params.source).resolve((params) => params.source.value),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder should handle async resolve helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods
+			.map(async (params) => {
+				await sleep(5);
+				return params.source;
+			})
+			.resolve(async (params) => {
+				await sleep(5);
+				return params.source.value;
+			}),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder should handle key helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map((params) => params.source).key('value'),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder should handle to helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map((params) => params.source.value).to((value) => value?.toLocaleUpperCase() ?? null),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder should handle withDefault helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map(() => null).withDefault('default'),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), ['default', 'default', 'default']);
+});
+
+test('SubscriptionBuilder should handle undefinedAsNull helper correctly', async (t) => {
+	const resolver = mockSubscriptionFieldResolver((methods) =>
+		methods.map(() => undefined).undefinedAsNull(),
+	);
+	t.deepEqual(await executeMockedSubscriptionResolver(resolver), [null, null, null]);
+});
+
+test('SubscriptionBuilder should handle middlewares correctly', async (t) => {
+	const fieldBuilder = mockSubscriptionFieldBuilder();
+
+	let i = 0;
+
+	const fieldWithMake = fieldBuilder
+		.toMethods()
+		.$use(async (next) => {
+			await sleep(5);
+			t.is(i, 0);
+			i++;
+			return next();
+		})
+		.$use((next) => {
+			t.is(i, 1);
+			i++;
+			return next();
+		})
+		.$use(async (next) => {
+			const result = await next();
+			t.is(i, 3);
+			i++;
+			return result;
+		})
+		.subscribe(() => {
+			t.is(i, 2);
+			i++;
+			return mockSubscriptionGenerator(3);
+		})
+		.key('value');
+
+	const results = await executeMockedSubscriptionField(fieldWithMake);
+	t.is(i, 4);
+	t.deepEqual(results, ['1', '2', '3']);
+});
+
+test('SubscriptionBuilder edit should handle store correctly', async (t) => {
+	const fieldBuilder = mockSubscriptionFieldBuilder();
+	const edit = fieldBuilder.edit();
+	testUseStoreLike(t, edit);
+	testSetStoreLike(t, edit);
+	testUseStoreMutations(t, edit, edit.commit().edit());
+});

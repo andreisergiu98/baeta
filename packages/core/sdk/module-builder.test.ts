@@ -1,24 +1,26 @@
 import test from '@baeta/testing';
 import {
-	mockDefaultModuleBuilder,
-	mockSchemaForDefaultModuleBuilder,
-	runModuleResolvers,
+	executeMockedModuleResolvers,
+	mockModuleBuilder,
+	mockSchemaForModuleBuilder,
+} from './__test__/module-mocks.ts';
+import {
 	testSetStoreLike,
 	testUseStoreLike,
 	testUseStoreMutations,
-} from './__test__/helpers.ts';
+} from './__test__/store-tests.ts';
 
 test('ModuleBuilder should be created correctly', async (t) => {
-	const moduleBuilder = mockDefaultModuleBuilder();
+	const moduleBuilder = mockModuleBuilder();
 	t.is(moduleBuilder.name, 'module');
 });
 
 test('ModuleBuilder should handle $schema correctly', async (t) => {
-	const module = mockDefaultModuleBuilder().toMethods();
-	const moduleCompiler = module.$schema(mockSchemaForDefaultModuleBuilder(module)).__make();
+	const module = mockModuleBuilder().toMethods();
+	const moduleCompiler = module.$schema(mockSchemaForModuleBuilder(module)).__make();
 
 	const result = moduleCompiler.build();
-	t.deepEqual(await runModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
 			field1: 'test',
 			field2: 'test',
@@ -31,7 +33,7 @@ test('ModuleBuilder should handle $schema correctly', async (t) => {
 });
 
 test('ModuleBuilder should handle $use correctly', async (t) => {
-	const module = mockDefaultModuleBuilder().toMethods();
+	const module = mockModuleBuilder().toMethods();
 	const result = module
 		.$use(async (next) => {
 			const result = await next();
@@ -40,11 +42,11 @@ test('ModuleBuilder should handle $use correctly', async (t) => {
 			}
 			return result;
 		})
-		.$schema(mockSchemaForDefaultModuleBuilder(module))
+		.$schema(mockSchemaForModuleBuilder(module))
 		.__make()
 		.build();
 
-	t.deepEqual(await runModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
 			field1: 'test_1',
 			field2: 'test_1',
@@ -57,7 +59,7 @@ test('ModuleBuilder should handle $use correctly', async (t) => {
 });
 
 test('ModuleBuilder should handle $directive correctly', async (t) => {
-	const module = mockDefaultModuleBuilder().toMethods();
+	const module = mockModuleBuilder().toMethods();
 	const result = module
 		.$directive((schema) => {
 			return schema;
@@ -70,7 +72,7 @@ test('ModuleBuilder should handle $directive correctly', async (t) => {
 				return schema;
 			},
 		])
-		.$schema(mockSchemaForDefaultModuleBuilder(module))
+		.$schema(mockSchemaForModuleBuilder(module))
 		.__make()
 		.build();
 
@@ -78,7 +80,7 @@ test('ModuleBuilder should handle $directive correctly', async (t) => {
 });
 
 test('ModuleBuilder should handle edit correctly', async (t) => {
-	const module = mockDefaultModuleBuilder();
+	const module = mockModuleBuilder();
 	const editableModule = module.edit();
 
 	editableModule.addMiddleware(async (next) => {
@@ -115,11 +117,11 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 			}
 			return result;
 		})
-		.$schema(mockSchemaForDefaultModuleBuilder(editedModule))
+		.$schema(mockSchemaForModuleBuilder(editedModule))
 		.__make()
 		.build();
 
-	t.deepEqual(await runModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
 			field1: 'test_1_2',
 			field2: 'test_1_2',

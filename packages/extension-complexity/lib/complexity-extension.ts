@@ -34,9 +34,9 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 		this.options = normalizeOptions(options as ComplexityExtensionOptions<unknown>);
 	}
 
-	getTypeExtensions = <Source, Context, Info>(
+	getTypeExtensions<Source, Context, Info>(
 		builder: TypeBuilder<Source, Context, Info>,
-	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> => {
+	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> {
 		return {
 			$complexity: (fn) => {
 				const editable = builder.edit();
@@ -46,9 +46,9 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 				return editable.commitToMethods();
 			},
 		};
-	};
+	}
 
-	getFieldExtensions = <Result, Source, Context, Args, Info>(
+	getFieldExtensions<Result, Source, Context, Args, Info>(
 		builder: FieldBuilder<Result, Source, Context, Args, Info>,
 	): BaetaExtensions.FieldExtensions<
 		Result,
@@ -57,7 +57,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 		Args,
 		Info,
 		FieldBuilder<Result, Source, Context, Args, Info>
-	> => {
+	> {
 		return {
 			$complexity: (fn) => {
 				const editable = builder.edit();
@@ -67,9 +67,9 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 				return editable.commitToMethods();
 			},
 		};
-	};
+	}
 
-	getSubscriptionExtensions = <Result, Source, Context, Args, Info>(
+	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
 		builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
 	): BaetaExtensions.SubscriptionExtensions<
 		Result,
@@ -78,7 +78,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 		Args,
 		Info,
 		SubscriptionBuilder<Result, Source, Context, Args, Info>
-	> => {
+	> {
 		return {
 			$complexity: (fn) => {
 				const editable = builder.edit();
@@ -88,7 +88,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 				return editable.commitToMethods();
 			},
 		};
-	};
+	}
 
 	mutate(compilers: ModuleCompiler[]): void {
 		const fieldSettingsMap: FieldSettingsMap = new Map();

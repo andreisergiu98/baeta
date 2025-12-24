@@ -50,9 +50,9 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 		this.options = options;
 	}
 
-	getTypeExtensions = <Source, Context, Info>(
+	getTypeExtensions<Source, Context, Info>(
 		builder: TypeBuilder<Source, Context, Info>,
-	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> => {
+	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
@@ -87,7 +87,7 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 				return editable.addMiddleware(middleware).commitToMethods();
 			},
 		};
-	};
+	}
 
 	getFieldExtensions<Result, Source, Context, Args, Info>(
 		builder: FieldBuilder<Result, Source, Context, Args, Info>,

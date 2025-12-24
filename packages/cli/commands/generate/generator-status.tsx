@@ -55,17 +55,17 @@ function GeneratorStatusContent(props: Readonly<Props>) {
 	}
 
 	if (props.watching) {
-		return <Text>Watching for changes</Text>;
+		return <Text>• Watching for changes</Text>;
 	}
 
-	return <Text>Generated</Text>;
+	return <Text>• Generated</Text>;
 }
 
 function GeneratorPluginsStatus(
 	props: Readonly<Pick<Props, 'startedPlugins' | 'finishedPlugins'>>,
 ) {
 	if (props.startedPlugins.length === 0) {
-		return <Text>Generating...</Text>;
+		return <Text>• Generating...</Text>;
 	}
 
 	const finishedActions = new Set(props.finishedPlugins.map((plugin) => plugin.actionName));

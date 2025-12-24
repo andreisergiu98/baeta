@@ -5,8 +5,10 @@ import { loadConfig } from './lib/config-loader.ts';
 import { version } from './package.json';
 
 process.on('exit', () => {
-	const fixCursor = '\x1B[?25h';
-	process.stdout.write(fixCursor);
+	if (process.stdout.isTTY) {
+		const fixCursor = '\x1B[?25h';
+		process.stdout.write(fixCursor);
+	}
 });
 
 async function run() {

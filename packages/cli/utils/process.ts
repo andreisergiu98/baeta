@@ -1,3 +1,4 @@
+import { execaCommand, parseCommandString } from 'execa';
 import pty from 'node-pty';
 
 export type PtyProcess = {
@@ -6,11 +7,72 @@ export type PtyProcess = {
 	exit: () => void;
 };
 
-export function startProcessWithPty(
-	command: string,
-	onData: (data: string, clear: boolean) => void,
-): PtyProcess {
-	const [file, ...args] = parseCommand(command);
+export interface StartProcessOptions {
+	command: string;
+	onData: (data: string, clear: boolean) => void;
+	onExit?: () => void;
+	isTTY: boolean;
+}
+
+export function startProcess(options: StartProcessOptions): PtyProcess {
+	if (options.isTTY) {
+		return startProcessWithPty(options);
+	}
+	return startProcessWithExeca(options);
+}
+
+function startProcessWithExeca({ command, onData, onExit }: StartProcessOptions): PtyProcess {
+	const outputStream = new WritableStream<string | Buffer>({
+		write(chunk) {
+			const str = typeof chunk === 'string' ? chunk : chunk.toString('utf-8');
+			const { cleaned, cleared } = stripClearControls(str);
+			onData(cleaned, cleared);
+		},
+	});
+
+	let inputController: ReadableStreamDefaultController<string> | null = null;
+
+	const inputStream = new ReadableStream<string>({
+		start(controller) {
+			inputController = controller;
+		},
+		cancel() {
+			inputController = null;
+		},
+	});
+
+	const subprocess = execaCommand(command, {
+		stdin: inputStream,
+		stdout: outputStream,
+		stderr: outputStream,
+		cwd: process.cwd(),
+		env: process.env,
+	});
+
+	let didExit = false;
+
+	subprocess.on('exit', () => {
+		didExit = true;
+		onExit?.();
+	});
+
+	return {
+		get didExit() {
+			return didExit;
+		},
+		write: (data: string) => {
+			if (didExit) return;
+			inputController?.enqueue(data);
+		},
+		exit: () => {
+			if (didExit) return;
+			subprocess.kill('SIGTERM');
+		},
+	};
+}
+
+function startProcessWithPty({ command, onData, onExit }: StartProcessOptions): PtyProcess {
+	const [file, ...args] = parseCommandString(command);
 
 	const cols = process.stdout.columns;
 	const rows = process.stdout.rows;
@@ -33,45 +95,26 @@ export function startProcessWithPty(
 		onData(cleaned, cleared);
 	});
 
-	const procData = {
-		didExit: false,
+	let didExit = false;
+
+	ptyProc.onExit(() => {
+		didExit = true;
+		onExit?.();
+	});
+
+	return {
+		get didExit() {
+			return didExit;
+		},
 		write: (data: string) => {
+			if (didExit) return;
 			ptyProc.write(data);
 		},
 		exit: () => {
+			if (didExit) return;
 			ptyProc.kill('SIGTERM');
 		},
 	};
-
-	ptyProc.onExit(() => {
-		procData.didExit = true;
-		procData.write = (_data: string) => {
-			// do nothing
-		};
-	});
-
-	return procData;
-}
-
-const SPACES_REGEXP = / +/g;
-
-function parseCommand(command: string) {
-	const trimmed = command.trim();
-	if (trimmed === '') {
-		throw new Error('Command cannot be empty');
-	}
-	const tokens: string[] = [];
-
-	for (const token of trimmed.split(SPACES_REGEXP)) {
-		const previous = tokens.at(-1);
-		if (previous?.endsWith('\\')) {
-			tokens[tokens.length - 1] = `${previous.slice(0, -1)} ${token}`;
-		} else {
-			tokens.push(token);
-		}
-	}
-
-	return tokens;
 }
 
 const CLEAR_CODES = [

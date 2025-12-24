@@ -13,7 +13,7 @@ export interface LayoutProps {
 
 export function Layout(props: Readonly<PropsWithChildren<LayoutProps>>) {
 	return (
-		<Box flexDirection="column">
+		<Box flexDirection="column" marginTop={1}>
 			<Box>
 				<Text color={props.color} bold={true}>
 					{props.title}
@@ -24,9 +24,7 @@ export function Layout(props: Readonly<PropsWithChildren<LayoutProps>>) {
 					{props.loading && <Spinner />}
 				</Text>
 			</Box>
-			<Box marginLeft={2} flexDirection="column">
-				{props.children}
-			</Box>
+			<Box flexDirection="column">{props.children}</Box>
 		</Box>
 	);
 }

@@ -1788,6 +1788,7 @@ __metadata:
     "@types/react": "npm:^19.2.7"
     "@types/yargs": "npm:^17.0.35"
     ansi-styles: "npm:^6.2.3"
+    execa: "npm:^9.6.1"
     graphql: "npm:^16.12.0"
     ink: "npm:^6.6.0"
     node-pty: "npm:1.0.0"

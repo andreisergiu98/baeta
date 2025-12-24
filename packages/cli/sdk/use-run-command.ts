@@ -1,59 +1,63 @@
 import style from 'ansi-styles';
 import { useStdin, useStdout } from 'ink';
-import { useCallback, useEffect, useRef } from 'react';
-import { type PtyProcess, startProcessWithPty } from '../utils/process.ts';
+import { useCallback, useRef } from 'react';
+import { type PtyProcess, startProcess } from '../utils/process.ts';
 
 export function useRunCommand(command?: string) {
 	const runRef = useRef<PtyProcess | null>(null);
 
-	const { stdin, isRawModeSupported, setRawMode } = useStdin();
-	const { write } = useStdout();
-
-	useEffect(() => {
-		if (command == null || !stdin.isTTY) {
-			return;
-		}
-		const handleData = (data: string) => {
-			runRef.current?.write(data);
-		};
-		stdin.unref();
-		if (isRawModeSupported) {
-			setRawMode(true);
-		}
-		stdin.addListener('data', handleData);
-		return () => {
-			setRawMode(false);
-			stdin.removeListener('data', handleData);
-		};
-	}, [stdin, command, isRawModeSupported, setRawMode]);
+	const { stdin } = useStdin();
+	const { stdout, write } = useStdout();
 
 	const runCommand = useCallback(() => {
-		if (command == null || (runRef.current && !runRef.current.didExit)) {
-			return;
+		if (command == null) {
+			return null;
 		}
 
-		const clearScreen = () => {
-			write('\x1b[2J\x1b[H');
-		};
+		if (runRef.current && !runRef.current.didExit) {
+			return runRef.current;
+		}
+
+		const isTTY = stdin.isTTY && stdout.isTTY;
+		const headerPrefix = isTTY ? `${style.blue.open}${style.bold.open}` : '';
+		const headerSuffix = isTTY ? `${style.bold.close}${style.blue.close}\n` : '\n';
+		const toStdout = isTTY ? write : stdout.write.bind(stdout);
+
 		const writeHeader = () => {
-			write(`${style.blue.open}${style.bold.open}App${style.bold.close}${style.blue.close}\n`);
+			toStdout(`${headerPrefix}App${headerSuffix}`);
 		};
+
+		const clearScreen = () => {
+			if (!isTTY) return;
+			toStdout('\x1b[2J\x1b[H');
+		};
+
+		const handleInput = (data: string) => {
+			proc.write(data);
+		};
+
+		stdin.addListener('data', handleInput);
 
 		writeHeader();
-
-		const proc = startProcessWithPty(command, (data, clear) => {
-			if (!clear) {
-				return write(data);
-			}
-			clearScreen();
-			writeHeader();
-			write(data);
+		const proc = startProcess({
+			command,
+			isTTY,
+			onData: (data, clear) => {
+				if (clear) {
+					clearScreen();
+					writeHeader();
+				}
+				toStdout(data);
+			},
+			onExit: () => {
+				stdin.removeListener('data', handleInput);
+			},
 		});
 
 		runRef.current = proc;
 
 		return proc;
-	}, [command, write]);
+	}, [command, stdin, stdout, write]);
 
 	return runCommand;
 }

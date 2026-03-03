@@ -59,9 +59,9 @@
     "@baeta/core": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@graphql-tools/schema": "^10.0.30",
+    "@graphql-tools/schema": "^10.0.31",
     "@types/is-url": "^1.2.32",
-    "graphql": "^16.12.0",
+    "graphql": "^16.13.1",
     "graphql-tag": "^2.12.6",
     "typescript": "^5.9.3"
   },

@@ -54,14 +54,14 @@
     }
   },
   "dependencies": {
-    "graphql-ws": "^6.0.6"
+    "graphql-ws": "^6.0.7"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20251223.0",
-    "graphql": "^16.12.0",
+    "@cloudflare/workers-types": "^4.20260305.1",
+    "graphql": "^16.13.1",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {

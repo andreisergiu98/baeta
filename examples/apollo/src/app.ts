@@ -14,6 +14,7 @@ const server = new ApolloServer<Context>({
 
 const { url } = await startStandaloneServer(server, {
 	listen: { port: 4000 },
+	context: async () => ({ appVersion: '1.0.0' }),
 });
 
 console.log(`🚀  Server ready at: ${url}`);

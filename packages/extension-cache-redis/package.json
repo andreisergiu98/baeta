@@ -56,9 +56,9 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.12.0",
-    "ioredis": "^5.8.2",
-    "typescript": "^5.9.3"
+    "graphql": "catalog:dev",
+    "ioredis": "^5.10.0",
+    "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",

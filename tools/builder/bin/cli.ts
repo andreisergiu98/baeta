@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import { glob } from 'node:fs/promises';
+import { glob, writeFile } from 'node:fs/promises';
 import { execaCommand } from 'execa';
 import madge from 'madge';
 import { build } from 'tsdown';
@@ -8,8 +8,16 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { checkExportFilesExist } from '../lib/check-dist.ts';
 import { getConfirmation } from '../lib/confirmation.ts';
+import { loadPackageJson } from '../lib/package-json.ts';
 import { prepClean, prepGenerate } from '../lib/prep.ts';
 import { getPreReleaseTag } from '../lib/release-tag.ts';
+import {
+	getWorkspaceVersions,
+	isCatalogSpecifier,
+	isWorkspaceSpecifier,
+	resolveCatalogSpecifier,
+	resolveWorkspaceSpecifier,
+} from '../lib/workspace-versions.ts';
 
 yargs(hideBin(process.argv))
 	.command(
@@ -197,6 +205,58 @@ yargs(hideBin(process.argv))
 				await execaCommand('yarn run -T changeset tag', {
 					stdio: 'inherit',
 				});
+			}
+		},
+	)
+	.command(
+		'print-resolved-versions <target>',
+		'Prints the versions of the workspace dependencies',
+		(yargs) => {
+			return yargs
+				.positional('target', {
+					describe: 'The target package.json to resolve the versions for',
+					type: 'string',
+					default: `${process.cwd()}/package.json`,
+				})
+				.option('out', {
+					describe:
+						'Output file to write the resolved versions to. If not provided, prints to stdout.',
+					type: 'string',
+					alias: 'o',
+				});
+		},
+		async (args) => {
+			const pkg = await loadPackageJson(args.target);
+			const { workspaceVersions, defaultCatalog, namedCatalogs } = await getWorkspaceVersions();
+			const fields = ['dependencies', 'devDependencies', 'peerDependencies'] as const;
+			const results: Record<(typeof fields)[number], Record<string, string | undefined>> = {
+				dependencies: {},
+				devDependencies: {},
+				peerDependencies: {},
+			};
+
+			for (const field of fields) {
+				for (const [name, version] of Object.entries(pkg[field] ?? {})) {
+					if (version == null) continue;
+					if (isWorkspaceSpecifier(version)) {
+						results[field][name] = resolveWorkspaceSpecifier(name, version, workspaceVersions);
+					} else if (isCatalogSpecifier(version)) {
+						results[field][name] = resolveCatalogSpecifier(
+							name,
+							version,
+							defaultCatalog,
+							namedCatalogs,
+						);
+					}
+				}
+			}
+
+			const output = JSON.stringify(results, null, 2);
+
+			if (args.out) {
+				await writeFile(args.out, output, 'utf-8');
+			} else {
+				process.stdout.write(output);
 			}
 		},
 	)

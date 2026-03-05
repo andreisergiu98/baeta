@@ -35,17 +35,18 @@
   "bin": "dist/cli.js",
   "files": [
     "dist",
-    "templates",
     "package.json"
   ],
   "scripts": {
-    "prebuild": "node --no-warnings --experimental-transform-types ./scripts/version-manifest.ts",
+    "prebuild": "yarn write:apollo:versions && yarn write:yoga:versions",
     "build": "yarn prebuild && builder build",
     "prepack": "builder prepare",
     "postpack": "builder prepare --clean",
     "test": "builder test",
     "test:circular": "builder test-circular",
-    "types": "yarn prebuild && tsc --noEmit"
+    "types": "yarn prebuild && tsc --noEmit",
+    "write:apollo:versions": "builder print-resolved-versions ./meta/apollo/package.json -o versions.apollo.json",
+    "write:yoga:versions": "builder print-resolved-versions ./meta/yoga/package.json -o versions.yoga.json"
   },
   "ava": {
     "extensions": {
@@ -54,9 +55,9 @@
   },
   "dependencies": {
     "@docusaurus/logger": "^3.9.2",
-    "fs-extra": "^11.3.3",
+    "fs-extra": "^11.3.4",
     "prompts": "^2.4.2",
-    "semver": "^7.7.3",
+    "semver": "^7.7.4",
     "shelljs": "^0.10.0",
     "supports-color": "^10.2.2",
     "yargs": "^18.0.0"
@@ -66,12 +67,12 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.19.3",
+    "@types/node": "catalog:dev",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
     "@types/shelljs": "^0.10.0",
     "@types/yargs": "^17.0.35",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:dev"
   },
   "engines": {
     "node": ">=22.20.0"

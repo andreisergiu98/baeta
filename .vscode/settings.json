@@ -30,6 +30,7 @@
     "dirpath",
     "dmmf",
     "execa",
+    "grapgqlrc",
     "keyv",
     "middlewares",
     "outdir",

@@ -62,9 +62,9 @@
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.13.1",
-    "graphql-tag": "^2.12.6",
-    "typescript": "^5.9.3"
+    "graphql": "catalog:dev",
+    "graphql-tag": "catalog:dev",
+    "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "graphql": "^16.6.0"

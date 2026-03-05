@@ -57,8 +57,8 @@
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@upstash/redis": "^1.36.3",
-    "graphql": "^16.13.1",
-    "typescript": "^5.9.3"
+    "graphql": "catalog:dev",
+    "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",

@@ -61,13 +61,13 @@
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20260305.1",
-    "graphql": "^16.13.1",
+    "graphql": "catalog:dev",
     "miniflare": "^4.20260305.0",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^",
-    "@cloudflare/workers-types": "^4"
+    "@cloudflare/workers-types": "*"
   },
   "engines": {
     "node": ">=22.20.0"

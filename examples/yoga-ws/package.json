@@ -32,16 +32,16 @@
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
-    "graphql": "^16.13.1",
-    "graphql-ws": "^6.0.7",
-    "graphql-yoga": "^5.18.0",
-    "ws": "^8.19.0"
+    "graphql": "catalog:dev",
+    "graphql-ws": "catalog:prod",
+    "graphql-yoga": "catalog:dev",
+    "ws": "catalog:dev"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.19.13",
-    "@types/ws": "^8.18.1",
-    "typescript": "^5.9.3"
+    "@types/node": "catalog:dev",
+    "@types/ws": "catalog:dev",
+    "typescript": "catalog:dev"
   }
 }

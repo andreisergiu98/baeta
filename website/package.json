@@ -56,8 +56,8 @@
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "catalog:prod",
+    "react-dom": "catalog:prod"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
@@ -66,11 +66,11 @@
     "@docusaurus/plugin-client-redirects": "^3.9.2",
     "@docusaurus/plugin-sitemap": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
     "typedoc": "0.28.17",
     "typedoc-docusaurus-theme": "^1.4.2",
     "typedoc-plugin-markdown": "4.10.0",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:dev"
   }
 }

@@ -11,14 +11,14 @@
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
     "@baeta/extension-complexity": "workspace:^",
-    "graphql": "^16.13.1",
-    "graphql-yoga": "^5.18.0"
+    "graphql": "catalog:dev",
+    "graphql-yoga": "catalog:dev"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@types/bun": "^1.3.10",
     "@types/deno": "^2.5.0",
-    "@types/node": "^22.19.13",
-    "typescript": "^5.9.3"
+    "@types/node": "catalog:dev",
+    "typescript": "catalog:dev"
   }
 }

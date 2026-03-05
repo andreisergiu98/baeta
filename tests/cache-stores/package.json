@@ -46,9 +46,9 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "^10.0.31",
-    "graphql": "^16.13.1",
-    "graphql-scalars": "^1.25.0",
-    "graphql-tag": "^2.12.6",
+    "graphql": "catalog:dev",
+    "graphql-scalars": "catalog:dev",
+    "graphql-tag": "catalog:dev",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -56,7 +56,7 @@
     "@baeta/extension-cache": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@baeta/extension-cache": "workspace:^"

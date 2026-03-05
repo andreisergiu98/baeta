@@ -37,10 +37,10 @@
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "graphql": "^16.13.1",
+    "graphql": "catalog:dev",
     "graphql-subscriptions": "^3.0.0",
-    "graphql-ws": "^6.0.7",
-    "ws": "^8.19.0"
+    "graphql-ws": "catalog:prod",
+    "ws": "catalog:dev"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
@@ -48,8 +48,8 @@
     "@types/body-parser": "^1.19.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/node": "^22.19.13",
-    "@types/ws": "^8.18.1",
-    "typescript": "^5.9.3"
+    "@types/node": "catalog:dev",
+    "@types/ws": "catalog:dev",
+    "typescript": "catalog:dev"
   }
 }

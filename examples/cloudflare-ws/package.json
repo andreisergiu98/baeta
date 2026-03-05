@@ -33,7 +33,7 @@
     "@baeta/core": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@hono/graphql-server": "^0.7.0",
-    "graphql": "^16.13.1",
+    "graphql": "catalog:dev",
     "hono": "^4.12.5"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20260305.1",
     "miniflare": "^4.20260305.0",
-    "typescript": "^5.9.3",
+    "typescript": "catalog:dev",
     "wrangler": "^4.70.0"
   }
 }

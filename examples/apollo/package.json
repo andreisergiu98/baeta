@@ -32,12 +32,12 @@
   "dependencies": {
     "@apollo/server": "^5.4.0",
     "@baeta/core": "workspace:^",
-    "graphql": "^16.13.1"
+    "graphql": "catalog:dev"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/node": "^22.19.13",
-    "typescript": "^5.9.3"
+    "@types/node": "catalog:dev",
+    "typescript": "catalog:dev"
   }
 }

@@ -5,8 +5,8 @@ import { loadPackageJson } from './package-json.ts';
 
 export async function checkExportFilesExist() {
 	const pkg = await loadPackageJson();
-	const exports = pkg.publishConfig.exports;
-	const bin = pkg.publishConfig.bin || pkg.bin;
+	const exports = pkg.publishConfig?.exports ?? {};
+	const bin = pkg.publishConfig?.bin || pkg.bin;
 
 	const promises: Promise<void>[] = [];
 
@@ -42,7 +42,7 @@ export async function checkExportFilesExist() {
 	}
 
 	const mandatoryFiles = ['dist', 'package.json'];
-	const missingFiles = mandatoryFiles.filter((file) => !pkg.files.includes(file));
+	const missingFiles = mandatoryFiles.filter((file) => !pkg.files?.includes(file));
 	if (missingFiles.length > 0) {
 		throw new Error(`Missing files inclusion in package ${pkg.name}: ${missingFiles.join(', ')}`);
 	}

@@ -1,6 +1,7 @@
 import type { JavaScriptRuntime } from '../lib/constants.ts';
 import type { TemplateFile } from '../lib/template-file.ts';
 import yogaPackageJson from '../meta/yoga/package.json';
+import versions from '../versions.yoga.json';
 import { makeSharedTemplate } from './shared.ts';
 
 export async function makeYogaTemplate(
@@ -8,7 +9,7 @@ export async function makeYogaTemplate(
 	runtime: JavaScriptRuntime,
 ): Promise<TemplateFile[]> {
 	return [
-		...makeSharedTemplate(appName, runtime, yogaPackageJson),
+		...makeSharedTemplate(appName, runtime, yogaPackageJson, versions),
 		...makeRuntimeFiles(runtime),
 		{
 			relativePath: './src/types/context.ts',

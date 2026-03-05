@@ -54,15 +54,15 @@
     }
   },
   "dependencies": {
-    "graphql-ws": "^6.0.7"
+    "graphql-ws": "catalog:prod"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20260305.1",
-    "graphql": "^16.13.1",
-    "typescript": "^5.9.3"
+    "graphql": "catalog:dev",
+    "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4",

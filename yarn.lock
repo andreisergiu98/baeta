@@ -1801,9 +1801,11 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@types/color-hash": "npm:^2.0.0"
     "@types/madge": "npm:^5.0.3"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     "@types/prompts": "npm:^2.4.9"
     "@types/yargs": "npm:^17.0.35"
+    "@yarnpkg/core": "npm:^4.5.0"
+    "@yarnpkg/fslib": "npm:^3.1.4"
     ansi-styles: "npm:^6.2.3"
     ava: "npm:^7.0.0"
     c8: "npm:^11.0.0"
@@ -1813,7 +1815,8 @@ __metadata:
     madge: "npm:^8.0.0"
     prompts: "npm:^2.4.2"
     tsdown: "npm:^0.21.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
+    yaml: "npm:^2.8.2"
     yargs: "npm:^18.0.0"
     zod: "npm:^4.3.6"
   bin:
@@ -1834,16 +1837,16 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
     "@types/lodash.throttle": "npm:^4.1.9"
-    "@types/node": "npm:^22.19.13"
-    "@types/react": "npm:^19.2.14"
+    "@types/node": "catalog:dev"
+    "@types/react": "catalog:dev"
     "@types/yargs": "npm:^17.0.35"
     ansi-styles: "npm:^6.2.3"
     execa: "npm:^9.6.1"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     ink: "npm:^6.8.0"
     node-pty: "npm:1.0.0"
-    react: "npm:^19.2.4"
-    typescript: "npm:^5.9.3"
+    react: "catalog:prod"
+    typescript: "catalog:dev"
     yargs: "npm:^18.0.0"
   peerDependencies:
     graphql: ^16.6.0
@@ -1862,9 +1865,9 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/schema": "npm:^10.0.31"
     "@graphql-tools/utils": "npm:^11.0.0"
-    graphql: "npm:^16.13.1"
-    graphql-tag: "npm:^2.12.6"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    graphql-tag: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     graphql: ^16.6.0
   languageName: unknown
@@ -1882,10 +1885,10 @@ __metadata:
     "@graphql-tools/schema": "npm:^10.0.31"
     "@types/is-url": "npm:^1.2.32"
     email-validator: "npm:^2.0.4"
-    graphql: "npm:^16.13.1"
-    graphql-tag: "npm:^2.12.6"
+    graphql: "catalog:dev"
+    graphql-tag: "catalog:dev"
     is-url: "npm:^1.2.4"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
@@ -1899,7 +1902,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -1911,8 +1914,8 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-env": "workspace:^"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     graphql: ^16.6.0
   languageName: unknown
@@ -1931,16 +1934,16 @@ __metadata:
     "@types/body-parser": "npm:^1.19.6"
     "@types/cors": "npm:^2.8.19"
     "@types/express": "npm:^5.0.6"
-    "@types/node": "npm:^22.19.13"
-    "@types/ws": "npm:^8.18.1"
+    "@types/node": "catalog:dev"
+    "@types/ws": "catalog:dev"
     body-parser: "npm:^2.2.2"
     cors: "npm:^2.8.6"
     express: "npm:^5.2.1"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     graphql-subscriptions: "npm:^3.0.0"
-    graphql-ws: "npm:^6.0.7"
-    typescript: "npm:^5.9.3"
-    ws: "npm:^8.19.0"
+    graphql-ws: "catalog:prod"
+    typescript: "catalog:dev"
+    ws: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -1952,9 +1955,9 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -1972,16 +1975,16 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.3.0"
     "@prisma/client": "npm:^6.19.2"
-    "@types/node": "npm:^22.19.13"
-    "@types/ws": "npm:^8.18.1"
+    "@types/node": "catalog:dev"
+    "@types/ws": "catalog:dev"
     "@yarnpkg/pnpify": "npm:^4.1.6"
-    graphql: "npm:^16.13.1"
-    graphql-scalars: "npm:^1.25.0"
-    graphql-ws: "npm:^6.0.7"
-    graphql-yoga: "npm:^5.18.0"
+    graphql: "catalog:dev"
+    graphql-scalars: "catalog:dev"
+    graphql-ws: "catalog:prod"
+    graphql-yoga: "catalog:dev"
     prisma: "npm:^6.19.2"
-    typescript: "npm:^5.9.3"
-    ws: "npm:^8.19.0"
+    typescript: "catalog:dev"
+    ws: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2000,17 +2003,17 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.3.0"
     "@prisma/client": "npm:^6.19.2"
-    "@types/node": "npm:^22.19.13"
-    "@types/ws": "npm:^8.18.1"
+    "@types/node": "catalog:dev"
+    "@types/ws": "catalog:dev"
     "@yarnpkg/pnpify": "npm:^4.1.6"
-    graphql: "npm:^16.13.1"
-    graphql-scalars: "npm:^1.25.0"
-    graphql-ws: "npm:^6.0.7"
-    graphql-yoga: "npm:^5.18.0"
+    graphql: "catalog:dev"
+    graphql-scalars: "catalog:dev"
+    graphql-ws: "catalog:prod"
+    graphql-yoga: "catalog:dev"
     ioredis: "npm:^5.10.0"
     prisma: "npm:^6.19.2"
-    typescript: "npm:^5.9.3"
-    ws: "npm:^8.19.0"
+    typescript: "catalog:dev"
+    ws: "catalog:dev"
     zod: "npm:^4.3.6"
   languageName: unknown
   linkType: soft
@@ -2029,17 +2032,17 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.3.0"
     "@prisma/client": "npm:^6.19.2"
-    "@types/node": "npm:^22.19.13"
-    "@types/ws": "npm:^8.18.1"
+    "@types/node": "catalog:dev"
+    "@types/ws": "catalog:dev"
     "@yarnpkg/pnpify": "npm:^4.1.6"
-    graphql: "npm:^16.13.1"
-    graphql-scalars: "npm:^1.25.0"
-    graphql-ws: "npm:^6.0.7"
-    graphql-yoga: "npm:^5.18.0"
+    graphql: "catalog:dev"
+    graphql-scalars: "catalog:dev"
+    graphql-ws: "catalog:prod"
+    graphql-yoga: "catalog:dev"
     ioredis: "npm:^5.10.0"
     prisma: "npm:^6.19.2"
-    typescript: "npm:^5.9.3"
-    ws: "npm:^8.19.0"
+    typescript: "catalog:dev"
+    ws: "catalog:dev"
     zod: "npm:^4.3.6"
   languageName: unknown
   linkType: soft
@@ -2055,10 +2058,10 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260305.1"
     "@hono/graphql-server": "npm:^0.7.0"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     hono: "npm:^4.12.5"
     miniflare: "npm:^4.20260305.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
     wrangler: "npm:^4.70.0"
   languageName: unknown
   linkType: soft
@@ -2071,11 +2074,11 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260305.1"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
     hono: "npm:^4.12.5"
     miniflare: "npm:^4.20260305.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
     wrangler: "npm:^4.70.0"
   languageName: unknown
   linkType: soft
@@ -2089,10 +2092,10 @@ __metadata:
     "@baeta/errors": "workspace:^"
     "@baeta/extension-complexity": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2104,10 +2107,10 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2122,10 +2125,10 @@ __metadata:
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/utils": "npm:^11.0.0"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2141,16 +2144,16 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.3.0"
     "@prisma/client": "npm:^6.19.2"
-    "@types/node": "npm:^22.19.13"
-    "@types/ws": "npm:^8.18.1"
+    "@types/node": "catalog:dev"
+    "@types/ws": "catalog:dev"
     "@yarnpkg/pnpify": "npm:^4.1.6"
-    graphql: "npm:^16.13.1"
-    graphql-scalars: "npm:^1.25.0"
-    graphql-ws: "npm:^6.0.7"
-    graphql-yoga: "npm:^5.18.0"
+    graphql: "catalog:dev"
+    graphql-scalars: "catalog:dev"
+    graphql-ws: "catalog:prod"
+    graphql-yoga: "catalog:dev"
     prisma: "npm:^6.19.2"
-    typescript: "npm:^5.9.3"
-    ws: "npm:^8.19.0"
+    typescript: "catalog:dev"
+    ws: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2167,16 +2170,16 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.3.0"
     "@prisma/client": "npm:^6.19.2"
-    "@types/node": "npm:^22.19.13"
-    "@types/ws": "npm:^8.18.1"
+    "@types/node": "catalog:dev"
+    "@types/ws": "catalog:dev"
     "@yarnpkg/pnpify": "npm:^4.1.6"
-    graphql: "npm:^16.13.1"
-    graphql-scalars: "npm:^1.25.0"
-    graphql-ws: "npm:^6.0.7"
-    graphql-yoga: "npm:^5.18.0"
+    graphql: "catalog:dev"
+    graphql-scalars: "catalog:dev"
+    graphql-ws: "catalog:prod"
+    graphql-yoga: "catalog:dev"
     prisma: "npm:^6.19.2"
-    typescript: "npm:^5.9.3"
-    ws: "npm:^8.19.0"
+    typescript: "catalog:dev"
+    ws: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2188,12 +2191,12 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     express: "npm:^5.2.1"
-    graphql: "npm:^16.13.1"
-    graphql-scalars: "npm:^1.25.0"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    graphql-scalars: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2205,10 +2208,10 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2220,10 +2223,10 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2235,13 +2238,13 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    "@types/ws": "npm:^8.18.1"
-    graphql: "npm:^16.13.1"
-    graphql-ws: "npm:^6.0.7"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
-    ws: "npm:^8.19.0"
+    "@types/node": "catalog:dev"
+    "@types/ws": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-ws: "catalog:prod"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
+    ws: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2253,10 +2256,10 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2271,8 +2274,8 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-log": "workspace:^"
     fast-json-stable-stringify: "npm:^2.1.0"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
@@ -2290,12 +2293,12 @@ __metadata:
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260305.1"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     miniflare: "npm:^4.20260305.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
-    "@cloudflare/workers-types": ^4
+    "@cloudflare/workers-types": "*"
   languageName: unknown
   linkType: soft
 
@@ -2310,9 +2313,9 @@ __metadata:
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@keyv/etcd": "npm:^2.1.1"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     keyv: "npm:^5.6.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
     keyv: ^5.1.3
@@ -2329,9 +2332,9 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     ioredis: "npm:^5.10.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
     ioredis: ^5.4.1
@@ -2349,8 +2352,8 @@ __metadata:
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@upstash/redis": "npm:^1.36.3"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
     "@upstash/redis": ^1.34.3
@@ -2369,9 +2372,9 @@ __metadata:
     "@baeta/util-log": "workspace:^"
     dataloader: "npm:^2.2.3"
     flat: "npm:^6.0.1"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     minimatch: "npm:^10.2.4"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
@@ -2386,8 +2389,8 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
@@ -2405,10 +2408,10 @@ __metadata:
     "@baeta/util-path": "workspace:^"
     "@parcel/watcher": "npm:^2.5.6"
     "@types/micromatch": "npm:^4.0.10"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     change-case-all: "npm:2.1.0"
     micromatch: "npm:^4.0.8"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2421,8 +2424,8 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2437,9 +2440,9 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260305.1"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/extension-cache-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
@@ -2462,9 +2465,9 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     "@baeta/directives": "workspace:^"
   languageName: unknown
@@ -2478,9 +2481,9 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     execa: "npm:^9.6.1"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2492,8 +2495,8 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2509,10 +2512,10 @@ __metadata:
     "@graphql-tools/graphql-file-loader": "npm:^8.1.11"
     "@graphql-tools/load": "npm:^8.1.8"
     "@graphql-tools/utils": "npm:^11.0.0"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     change-case-all: "npm:2.1.0"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     graphql: ^16.6.0
   languageName: unknown
@@ -2527,9 +2530,9 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   peerDependencies:
     graphql: ^16.6.0
   languageName: unknown
@@ -2545,9 +2548,9 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     execa: "npm:^9.6.1"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2558,7 +2561,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2570,9 +2573,9 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260305.1"
-    graphql: "npm:^16.13.1"
-    graphql-ws: "npm:^6.0.7"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    graphql-ws: "catalog:prod"
+    typescript: "catalog:dev"
   peerDependencies:
     "@cloudflare/workers-types": ^4
     graphql: ^16.6.0
@@ -2586,9 +2589,9 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    graphql: "npm:^16.13.1"
+    graphql: "catalog:dev"
     graphql-subscriptions: "npm:^3.0.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2603,9 +2606,9 @@ __metadata:
     "@baeta/extension-complexity": "workspace:^"
     "@types/bun": "npm:^1.3.10"
     "@types/deno": "npm:^2.5.0"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2619,10 +2622,10 @@ __metadata:
     "@baeta/extension-complexity": "workspace:^"
     "@types/bun": "npm:^1.3.10"
     "@types/deno": "npm:^2.5.0"
-    "@types/node": "npm:^22.19.13"
-    graphql: "npm:^16.13.1"
-    graphql-yoga: "npm:^5.18.0"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    graphql-yoga: "catalog:dev"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2631,13 +2634,13 @@ __metadata:
   resolution: "@baeta/testing@workspace:tools/testing"
   dependencies:
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     "@types/sinon": "npm:^21.0.0"
     ava: "npm:^7.0.0"
     c8: "npm:^11.0.0"
     madge: "npm:^8.0.0"
     sinon: "npm:^21.0.2"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2650,10 +2653,10 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/schema": "npm:^10.0.31"
-    graphql: "npm:^16.13.1"
-    graphql-scalars: "npm:^1.25.0"
-    graphql-tag: "npm:^2.12.6"
-    typescript: "npm:^5.9.3"
+    graphql: "catalog:dev"
+    graphql-scalars: "catalog:dev"
+    graphql-tag: "catalog:dev"
+    typescript: "catalog:dev"
     zod: "npm:^4.3.6"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
@@ -2674,7 +2677,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     js-base64: "npm:^3.7.8"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2685,7 +2688,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2696,7 +2699,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -2707,8 +2710,8 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/node": "npm:^22.19.13"
-    typescript: "npm:^5.9.3"
+    "@types/node": "catalog:dev"
+    typescript: "catalog:dev"
     upath: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
@@ -2727,16 +2730,16 @@ __metadata:
     "@docusaurus/theme-classic": "npm:^3.9.2"
     "@docusaurus/types": "npm:^3.9.2"
     "@mdx-js/react": "npm:^3.1.1"
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
+    "@types/react": "catalog:dev"
+    "@types/react-dom": "catalog:dev"
     clsx: "npm:^2.1.1"
     prism-react-renderer: "npm:^2.4.1"
-    react: "npm:^19.2.4"
-    react-dom: "npm:^19.2.4"
+    react: "catalog:prod"
+    react-dom: "catalog:prod"
     typedoc: "npm:0.28.17"
     typedoc-docusaurus-theme: "npm:^1.4.2"
     typedoc-plugin-markdown: "npm:4.10.0"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -7973,7 +7976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/core@npm:^4.4.2, @yarnpkg/core@npm:^4.4.3, @yarnpkg/core@npm:^4.4.4":
+"@yarnpkg/core@npm:^4.4.2, @yarnpkg/core@npm:^4.4.3, @yarnpkg/core@npm:^4.4.4, @yarnpkg/core@npm:^4.5.0":
   version: 4.5.0
   resolution: "@yarnpkg/core@npm:4.5.0"
   dependencies:
@@ -8701,7 +8704,7 @@ __metadata:
     "@biomejs/biome": "npm:^2.4.6"
     "@changesets/changelog-github": "npm:^0.6.0"
     "@changesets/cli": "npm:^2.30.0"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     "@yarnpkg/sdks": "npm:^3.2.3"
     "@yarnpkg/types": "npm:^4.0.1"
     husky: "npm:^9.1.7"
@@ -8709,7 +8712,7 @@ __metadata:
     prettier: "npm:^3.8.1"
     sort-package-json: "npm:^3.6.1"
     turbo: "npm:^2.8.13"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
 
@@ -9995,7 +9998,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@docusaurus/logger": "npm:^3.9.2"
     "@types/fs-extra": "npm:^11.0.4"
-    "@types/node": "npm:^22.19.13"
+    "@types/node": "catalog:dev"
     "@types/prompts": "npm:^2.4.9"
     "@types/semver": "npm:^7.7.1"
     "@types/shelljs": "npm:^0.10.0"
@@ -10005,7 +10008,7 @@ __metadata:
     semver: "npm:^7.7.4"
     shelljs: "npm:^0.10.0"
     supports-color: "npm:^10.2.2"
-    typescript: "npm:^5.9.3"
+    typescript: "catalog:dev"
     yargs: "npm:^18.0.0"
   bin:
     create-baeta: dist/cli.js
@@ -12471,7 +12474,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.13.1, graphql@npm:^16.5.0":
+"graphql@npm:^16.5.0, graphql@npm:^16.6.0":
   version: 16.13.1
   resolution: "graphql@npm:16.13.1"
   checksum: 10/a42f857f60351e1f4665aa5bc5524796d3f45bf81793e6db932f902aff769b0488dafaa1d9c07bddda7122a1f6d0b0105fab12d38992f6b6fb81fc3d7ced1afc

@@ -1841,7 +1841,7 @@ __metadata:
     execa: "npm:^9.6.1"
     graphql: "npm:^16.13.1"
     ink: "npm:^6.8.0"
-    node-pty: "npm:1.1.0"
+    node-pty: "npm:1.0.0"
     react: "npm:^19.2.4"
     typescript: "npm:^5.9.3"
     yargs: "npm:^18.0.0"
@@ -15723,6 +15723,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nan@npm:^2.17.0":
+  version: 2.25.0
+  resolution: "nan@npm:2.25.0"
+  dependencies:
+    node-gyp: "npm:latest"
+  checksum: 10/eb3ac555512ec865be3c6e5d65aa94fe13ef6fc36254854687db950adbce61119839ff2217913c1798033f760cda354e3f50c812bb94fd19f7995b84df1a4b57
+  languageName: node
+  linkType: hard
+
 "nanoid@npm:^3.3.11":
   version: 3.3.11
   resolution: "nanoid@npm:3.3.11"
@@ -15770,7 +15779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-addon-api@npm:^7.0.0, node-addon-api@npm:^7.1.0":
+"node-addon-api@npm:^7.0.0":
   version: 7.1.1
   resolution: "node-addon-api@npm:7.1.1"
   dependencies:
@@ -15850,13 +15859,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-pty@npm:1.1.0":
-  version: 1.1.0
-  resolution: "node-pty@npm:1.1.0"
+"node-pty@npm:1.0.0":
+  version: 1.0.0
+  resolution: "node-pty@npm:1.0.0"
   dependencies:
-    node-addon-api: "npm:^7.1.0"
+    nan: "npm:^2.17.0"
     node-gyp: "npm:latest"
-  checksum: 10/faa869e24ce5d5e40597c9a081dfade09830e7c4404b01fc81bf915b0d1e3c46530276adad234ea018027e923bb5aa4b57e84031312431a2d4d740e7bbc35146
+  checksum: 10/f1803531bfee71fdc8fb97fc544364e64de6bad91d6221b79b6a8e3518032768bff8738960d15f29e5a14aa16b9eb550e1a26ba1ad8c66f86424b9f56fd0ccad
   languageName: node
   linkType: hard
 

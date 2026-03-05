@@ -1,7 +1,7 @@
+import { readFile, stat } from 'node:fs/promises';
+import path from 'node:path';
 import { Configuration, Project, structUtils } from '@yarnpkg/core';
 import { npath, ppath } from '@yarnpkg/fslib';
-import { readFile, stat } from 'fs/promises';
-import path from 'path';
 import { parse as parseYaml } from 'yaml';
 import z from 'zod';
 

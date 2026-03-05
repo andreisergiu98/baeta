@@ -13,7 +13,7 @@ const baeta = createApplication({
 const yoga = createYoga<ServerContext, Context>({
 	schema: baeta.schema,
 	context: {
-		userId: '1', // Comment to 'logout' the user
+		userId: '1', // Comment this line in order to 'logout' the user
 		pubsub,
 	},
 	graphiql: {

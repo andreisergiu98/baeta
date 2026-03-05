@@ -1,0 +1,61 @@
+{
+  "name": "@baeta/examples-shared",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "examples/_shared"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "yarn build:base && yarn build:prisma && yarn build:subscriptions",
+    "build:base": "cd base && baeta generate",
+    "build:prisma": "cd prisma && baeta generate",
+    "build:subscriptions": "cd subscriptions && baeta generate",
+    "prisma": "cd prisma && pnpify prisma",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@apollo/server": "^5.4.0",
+    "@baeta/core": "workspace:^",
+    "@baeta/directives": "workspace:^",
+    "@prisma/adapter-better-sqlite3": "^7.4.2",
+    "@prisma/client": "^7.4.2",
+    "@prisma/client-runtime-utils": "^7.4.2",
+    "graphql": "catalog:dev",
+    "graphql-scalars": "catalog:dev",
+    "graphql-ws": "catalog:prod",
+    "graphql-yoga": "catalog:dev",
+    "ws": "catalog:dev"
+  },
+  "devDependencies": {
+    "@baeta/cli": "workspace:^",
+    "@baeta/plugin-prisma": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@faker-js/faker": "^10.3.0",
+    "@turbo/gen": "^2.8.13",
+    "@types/node": "catalog:dev",
+    "@types/ws": "catalog:dev",
+    "@yarnpkg/pnpify": "^4.1.6",
+    "prisma": "^7.4.2",
+    "typescript": "catalog:dev"
+  }
+}

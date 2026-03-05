@@ -1,7 +1,12 @@
 import { faker } from '@faker-js/faker';
+import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { type Prisma, PrismaClient } from './prisma.ts';
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient({
+	adapter: new PrismaBetterSqlite3({
+		url: 'file:./dev.db',
+	}),
+});
 
 function generateUser() {
 	const person: Prisma.UserCreateInput = {

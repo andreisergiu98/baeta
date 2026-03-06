@@ -31,6 +31,9 @@
       "import": "./index.ts"
     }
   },
+  "scripts": {
+    "types": "tsc --noEmit"
+  },
   "dependencies": {
     "@types/sinon": "^21.0.0",
     "ava": "^7.0.0",

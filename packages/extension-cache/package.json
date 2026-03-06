@@ -39,7 +39,7 @@
   "scripts": {
     "build": "builder build",
     "prepack": "builder prepare",
-    "postpack": "builder prepare --clean",
+    "postpack": "builder prepare --restore",
     "test": "builder test --skip-coverage",
     "test:circular": "builder test-circular",
     "types": "tsc --noEmit"

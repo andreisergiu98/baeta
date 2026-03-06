@@ -3,12 +3,12 @@ import { join } from 'node:path';
 
 export async function getPreReleaseTag(): Promise<string> {
 	const rootDir = join(import.meta.dirname, '../../../.changeset');
-	const preRealaseFile = join(rootDir, 'pre.json');
-	const preRealase = await readFile(preRealaseFile, 'utf8').catch(() => null);
-	if (preRealase == null) {
+	const preReleaseFile = join(rootDir, 'pre.json');
+	const preRelease = await readFile(preReleaseFile, 'utf8').catch(() => null);
+	if (preRelease == null) {
 		return 'latest';
 	}
-	const parsed = JSON.parse(preRealase);
+	const parsed = JSON.parse(preRelease);
 	if (typeof parsed.tag !== 'string') {
 		throw new TypeError('Invalid pre-release tag');
 	}

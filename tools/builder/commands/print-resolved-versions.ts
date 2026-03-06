@@ -1,16 +1,76 @@
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { Configuration, Project, structUtils } from '@yarnpkg/core';
 import { npath, ppath } from '@yarnpkg/fslib';
 import { parse as parseYaml } from 'yaml';
+import type { CommandModule } from 'yargs';
 import z from 'zod';
+import { loadPackageJson } from '../lib/package-json.ts';
+
+interface PrintResolvedVersionsArgs {
+	target: string;
+	out?: string;
+}
 
 const YarnRcSchema = z.object({
 	catalog: z.record(z.string(), z.string()).optional(),
 	catalogs: z.record(z.string(), z.record(z.string(), z.string())).optional(),
 });
 
-export async function getWorkspaceVersions() {
+// biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
+export const printResolvedVersionsCommand: CommandModule<{}, PrintResolvedVersionsArgs> = {
+	command: 'print-resolved-versions <target>',
+	describe: 'Print the versions of workspace or catalog dependencies for package',
+	builder: (yargs) => {
+		return yargs
+			.positional('target', {
+				describe: 'Path to package.json',
+				type: 'string',
+				default: `${process.cwd()}/package.json`,
+			})
+			.option('out', {
+				describe: 'Destination file to write the versions json file, otherwise prints to stdout.',
+				type: 'string',
+				alias: 'o',
+			});
+	},
+	handler: async (args) => {
+		const pkg = await loadPackageJson(args.target);
+		const { workspaceVersions, defaultCatalog, namedCatalogs } = await getWorkspaceVersions();
+		const fields = ['dependencies', 'devDependencies', 'peerDependencies'] as const;
+		const results: Record<(typeof fields)[number], Record<string, string | undefined>> = {
+			dependencies: {},
+			devDependencies: {},
+			peerDependencies: {},
+		};
+
+		for (const field of fields) {
+			for (const [name, version] of Object.entries(pkg[field] ?? {})) {
+				if (version == null) continue;
+				if (isWorkspaceSpecifier(version)) {
+					results[field][name] = resolveWorkspaceSpecifier(name, version, workspaceVersions);
+				} else if (isCatalogSpecifier(version)) {
+					results[field][name] = resolveCatalogSpecifier(
+						name,
+						version,
+						defaultCatalog,
+						namedCatalogs,
+					);
+				}
+			}
+		}
+
+		const output = JSON.stringify(results, null, 2);
+
+		if (args.out) {
+			await writeFile(args.out, output, 'utf-8');
+		} else {
+			process.stdout.write(output);
+		}
+	},
+};
+
+async function getWorkspaceVersions() {
 	const project = await loadProject(process.cwd());
 	const workspaceVersions = await loadWorkspaceVersions(project);
 	const { defaultCatalog, namedCatalogs } = await loadCatalogs(project);
@@ -22,15 +82,15 @@ export async function getWorkspaceVersions() {
 	};
 }
 
-export function isWorkspaceSpecifier(specifier: string): specifier is `workspace:${string}` {
+function isWorkspaceSpecifier(specifier: string): specifier is `workspace:${string}` {
 	return specifier.startsWith('workspace:');
 }
 
-export function isCatalogSpecifier(specifier: string): specifier is `catalog:${string}` {
+function isCatalogSpecifier(specifier: string): specifier is `catalog:${string}` {
 	return specifier.startsWith('catalog:');
 }
 
-export function resolveWorkspaceSpecifier(
+function resolveWorkspaceSpecifier(
 	pkgName: string,
 	specifier: `workspace:${string}`,
 	workspaceVersions: Map<string, string>,
@@ -45,7 +105,7 @@ export function resolveWorkspaceSpecifier(
 	return `^${actual}`;
 }
 
-export function resolveCatalogSpecifier(
+function resolveCatalogSpecifier(
 	pkgName: string,
 	specifier: `catalog:${string}`,
 	defaultCatalog: Map<string, string>,

@@ -40,7 +40,7 @@
     "check:formatting": "prettier --check . && sort-package-json **/package.json --check",
     "check:linting": "biome check .",
     "check:tests": "turbo test --filter='./packages/*'",
-    "check:types": "turbo types --filter='./packages/*'",
+    "check:types": "turbo types",
     "docs:api": "yarn workspace @baeta/website write-api",
     "docs:build": "yarn workspace @baeta/website build",
     "docs:dev": "yarn workspace @baeta/website start",

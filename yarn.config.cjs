@@ -119,7 +119,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('devDependencies.@baeta/tsconfig', 'workspace:^');
 
 			workspace.set('scripts.prepack', 'builder prepare');
-			workspace.set('scripts.postpack', 'builder prepare --clean');
+			workspace.set('scripts.postpack', 'builder prepare --restore');
 			if (workspace.manifest.name.startsWith('@baeta/extension-cache')) {
 				workspace.set('scripts.test', 'builder test --skip-coverage');
 			} else {

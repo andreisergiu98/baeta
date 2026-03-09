@@ -2,7 +2,7 @@ import type { StoreAdapterOptions } from '@baeta/extension-cache';
 import test from '@baeta/testing';
 import { runTestsForStoreAdapter, type TestItem } from '@baeta/tests-cache-stores';
 import { Miniflare } from 'miniflare';
-import { bundleTest } from '../scripts/bundle-worker.ts';
+import { bundleTest } from '../__test__/bundle-worker.ts';
 import { CloudflareCacheClient } from './cloudflare-cache-client.ts';
 import { CloudflareStoreAdapter } from './cloudflare-store-adapter.ts';
 

@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "builder build",
+    "check:deps": "builder check-deps",
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test --skip-coverage",
@@ -51,13 +52,11 @@
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/core": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@upstash/redis": "^1.36.3",
-    "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {

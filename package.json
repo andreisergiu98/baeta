@@ -37,6 +37,7 @@
     "build": "turbo build --filter='./packages/*'",
     "check:circular": "turbo test:circular --filter='./packages/*'",
     "check:constraints": "yarn constraints",
+    "check:deps": "turbo check:deps --filter='./packages/*'",
     "check:formatting": "prettier --check . && sort-package-json **/package.json --check",
     "check:linting": "biome check .",
     "check:tests": "turbo test --filter='./packages/*'",

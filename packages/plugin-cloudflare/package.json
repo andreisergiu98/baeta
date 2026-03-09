@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "builder build",
+    "check:deps": "builder check-deps",
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test",
@@ -66,7 +67,8 @@
   "peerDependencies": {
     "@baeta/extension-cache-cloudflare": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
-    "@cloudflare/workers-types": "^4"
+    "@cloudflare/workers-types": "^4",
+    "graphql": "^16.6.0"
   },
   "peerDependenciesMeta": {
     "@baeta/extension-cache-cloudflare": {

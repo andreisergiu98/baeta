@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "builder build",
+    "check:deps": "builder check-deps",
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test",
@@ -52,8 +53,7 @@
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/plugin-exec": "workspace:^",
-    "@baeta/util-path": "workspace:^",
-    "execa": "^9.6.1"
+    "@baeta/util-path": "workspace:^"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

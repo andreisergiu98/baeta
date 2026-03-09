@@ -1,6 +1,7 @@
 import type { JavaScriptRuntime } from '../lib/constants.ts';
 import type { TemplateFile } from '../lib/template-file.ts';
 import apolloPackageJson from '../meta/apollo/package.json';
+import versions from '../versions.apollo.json';
 import { makeSharedTemplate } from './shared.ts';
 
 export async function makeApolloTemplate(
@@ -8,7 +9,7 @@ export async function makeApolloTemplate(
 	runtime: JavaScriptRuntime,
 ): Promise<TemplateFile[]> {
 	return [
-		...makeSharedTemplate(appName, runtime, apolloPackageJson),
+		...makeSharedTemplate(appName, runtime, apolloPackageJson, versions),
 		{
 			relativePath: './src/types/context.ts',
 			content: `export type Context = {

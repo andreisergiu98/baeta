@@ -33,24 +33,26 @@
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
-    "graphql": "^16.12.0",
-    "graphql-scalars": "^1.25.0",
-    "graphql-ws": "^6.0.6",
-    "graphql-yoga": "^5.18.0",
-    "prisma": "^6.19.1",
-    "ws": "^8.18.3"
+    "@prisma/adapter-better-sqlite3": "^7.4.2",
+    "@prisma/client-runtime-utils": "^7.4.2",
+    "graphql": "catalog:dev",
+    "graphql-scalars": "catalog:dev",
+    "graphql-ws": "catalog:prod",
+    "graphql-yoga": "catalog:dev",
+    "ws": "catalog:dev"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/plugin-directives": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@faker-js/faker": "^10.1.0",
-    "@prisma/client": "^6.19.1",
-    "@types/node": "^22.19.3",
-    "@types/ws": "^8.18.1",
+    "@faker-js/faker": "^10.3.0",
+    "@prisma/client": "^7.4.2",
+    "@types/node": "catalog:dev",
+    "@types/ws": "catalog:dev",
     "@yarnpkg/pnpify": "^4.1.6",
-    "typescript": "^5.9.3"
+    "prisma": "^7.4.2",
+    "typescript": "catalog:dev"
   },
   "prisma": {
     "seed": "yarn node ./src/lib/db/seed.ts"

@@ -39,7 +39,7 @@
   "scripts": {
     "build": "builder build",
     "prepack": "builder prepare",
-    "postpack": "builder prepare --clean",
+    "postpack": "builder prepare --restore",
     "test": "builder test",
     "test:circular": "builder test-circular",
     "types": "tsc --noEmit"
@@ -59,8 +59,8 @@
     "@baeta/core": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "graphql": "^16.12.0",
-    "typescript": "^5.9.3"
+    "graphql": "catalog:dev",
+    "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@baeta/core": "workspace:^",

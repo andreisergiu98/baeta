@@ -1,0 +1,30 @@
+type User {
+	id: ID!
+	email: String!
+	lastName: String!
+	profile: String
+	givenName: String
+}
+
+input UserWhereUniqueInput {
+	id: ID!
+}
+
+input UserUpdateInput {
+	lastName: String
+	profile: String
+	givenName: String
+}
+
+type Query {
+	user(where: UserWhereUniqueInput!): User
+	users: [User!]
+}
+
+type Mutation {
+	updateUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User
+}
+
+type Subscription {
+	userUpdated: User
+}

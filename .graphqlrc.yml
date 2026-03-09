@@ -1,15 +1,15 @@
 projects:
-  examples/apollo-ws:
-    schema:
-      - "examples/apollo-ws/src/modules/**/*.gql"
-    include:
-      - "examples/apollo-ws/src/**/*.gql"
-
   examples/apollo:
     schema:
       - "examples/apollo/src/modules/**/*.gql"
     include:
       - "examples/apollo/src/**/*.gql"
+
+  examples/apollo-ws:
+    schema:
+      - "examples/apollo-ws/src/modules/**/*.gql"
+    include:
+      - "examples/apollo-ws/src/**/*.gql"
 
   examples/auth:
     schema:
@@ -17,29 +17,29 @@ projects:
     include:
       - "examples/auth/src/**/*.gql"
 
-  examples/cache-advanced:
-    schema:
-      - "examples/cache-advanced/src/modules/**/*.gql"
-    include:
-      - "examples/cache-advanced/src/**/*.gql"
-
   examples/cache:
     schema:
       - "examples/cache/src/modules/**/*.gql"
     include:
       - "examples/cache/src/**/*.gql"
 
-  examples/cloudflare-ws:
+  examples/cache-advanced:
     schema:
-      - "examples/cloudflare-ws/src/modules/**/*.gql"
+      - "examples/cache-advanced/src/modules/**/*.gql"
     include:
-      - "examples/cloudflare-ws/src/**/*.gql"
+      - "examples/cache-advanced/src/**/*.gql"
 
   examples/cloudflare:
     schema:
       - "examples/cloudflare/src/modules/**/*.gql"
     include:
       - "examples/cloudflare/src/**/*.gql"
+
+  examples/cloudflare-ws:
+    schema:
+      - "examples/cloudflare-ws/src/modules/**/*.gql"
+    include:
+      - "examples/cloudflare-ws/src/**/*.gql"
 
   examples/complexity:
     schema:
@@ -83,6 +83,12 @@ projects:
     include:
       - "examples/unions-interfaces/src/**/*.gql"
 
+  examples/yoga:
+    schema:
+      - "examples/yoga/src/modules/**/*.gql"
+    include:
+      - "examples/yoga/src/**/*.gql"
+
   examples/yoga-sse:
     schema:
       - "examples/yoga-sse/src/modules/**/*.gql"
@@ -94,9 +100,3 @@ projects:
       - "examples/yoga-ws/src/modules/**/*.gql"
     include:
       - "examples/yoga-ws/src/**/*.gql"
-
-  examples/yoga:
-    schema:
-      - "examples/yoga/src/modules/**/*.gql"
-    include:
-      - "examples/yoga/src/**/*.gql"

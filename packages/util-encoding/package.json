@@ -39,7 +39,7 @@
   "scripts": {
     "build": "builder build",
     "prepack": "builder prepare",
-    "postpack": "builder prepare --clean",
+    "postpack": "builder prepare --restore",
     "test": "builder test",
     "test:circular": "builder test-circular",
     "types": "tsc --noEmit"
@@ -56,7 +56,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "typescript": "^5.9.3"
+    "typescript": "catalog:dev"
   },
   "engines": {
     "node": ">=22.20.0"

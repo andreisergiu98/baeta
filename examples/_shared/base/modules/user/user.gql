@@ -1,0 +1,16 @@
+type User {
+	id: ID!
+	email: String!
+	lastName: String!
+	profile: String
+	givenName: String
+}
+
+input UserWhereUniqueInput {
+	id: ID!
+}
+
+type Query {
+	user(where: UserWhereUniqueInput!): User
+	users: [User!]
+}

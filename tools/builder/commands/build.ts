@@ -1,12 +1,27 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
 import styles from 'ansi-styles';
-import { loadPackageJson } from './package-json.ts';
+import { build } from 'tsdown';
+import type { CommandModule } from 'yargs';
+import { loadPackageJson } from '../lib/package-json.ts';
 
-export async function checkExportFilesExist() {
+// biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
+export const buildCommand: CommandModule<{}, {}> = {
+	command: 'build',
+	describe: 'Build package for publishing',
+	builder: (yargs) => {
+		return yargs;
+	},
+	handler: async () => {
+		await build();
+		await checkExportFilesExist();
+	},
+};
+
+async function checkExportFilesExist() {
 	const pkg = await loadPackageJson();
-	const exports = pkg.publishConfig.exports;
-	const bin = pkg.publishConfig.bin || pkg.bin;
+	const exports = pkg.publishConfig?.exports ?? {};
+	const bin = pkg.publishConfig?.bin || pkg.bin;
 
 	const promises: Promise<void>[] = [];
 
@@ -42,7 +57,7 @@ export async function checkExportFilesExist() {
 	}
 
 	const mandatoryFiles = ['dist', 'package.json'];
-	const missingFiles = mandatoryFiles.filter((file) => !pkg.files.includes(file));
+	const missingFiles = mandatoryFiles.filter((file) => !pkg.files?.includes(file));
 	if (missingFiles.length > 0) {
 		throw new Error(`Missing files inclusion in package ${pkg.name}: ${missingFiles.join(', ')}`);
 	}

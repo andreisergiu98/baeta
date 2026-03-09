@@ -1,7 +1,6 @@
 import tsconfig from '../../../tools/tsconfig/tsconfig.json';
 import type { JavaScriptRuntime } from '../lib/constants.ts';
 import type { TemplateFile } from '../lib/template-file.ts';
-import dependenciesVersions from '../versions.json';
 
 export type PackageJson = {
 	name: string;
@@ -10,13 +9,20 @@ export type PackageJson = {
 	devDependencies: Record<string, string | undefined>;
 };
 
+export type ResolvedPackageVersions = {
+	dependencies: Record<string, string | undefined>;
+	devDependencies: Record<string, string | undefined>;
+	peerDependencies: Record<string, string | undefined>;
+};
+
 export function makeSharedTemplate(
 	appName: string,
 	runtime: JavaScriptRuntime,
 	packageJson: PackageJson,
+	versions: ResolvedPackageVersions,
 ): TemplateFile[] {
 	return [
-		makePackageJson(appName, runtime, packageJson),
+		makePackageJson(appName, runtime, packageJson, versions),
 		{
 			relativePath: './tsconfig.json',
 			content: JSON.stringify(
@@ -349,14 +355,13 @@ function makePackageJson(
 		dependencies: Record<string, string | undefined>;
 		devDependencies: Record<string, string | undefined>;
 	},
+	versions: ResolvedPackageVersions,
 ) {
 	const meta = structuredClone(packageJson);
-
-	for (const [dep, version] of Object.entries(dependenciesVersions)) {
-		if (dep in meta.dependencies) {
-			meta.dependencies[dep] = version;
-		} else if (dep in packageJson.devDependencies) {
-			meta.devDependencies[dep] = version;
+	const fields = ['dependencies', 'devDependencies'] as const;
+	for (const field of fields) {
+		for (const [dep, version] of Object.entries(versions[field] ?? {})) {
+			meta[field][dep] = version;
 		}
 	}
 

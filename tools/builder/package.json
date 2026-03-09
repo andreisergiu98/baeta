@@ -44,13 +44,13 @@
   "dependencies": {
     "@yarnpkg/core": "^4.5.0",
     "@yarnpkg/fslib": "^3.1.4",
-    "ansi-styles": "^6.2.3",
     "ava": "^7.0.0",
     "c8": "^11.0.0",
-    "commander": "^14.0.3",
     "esbuild": "^0.27.3",
     "execa": "^9.6.1",
+    "log-symbols": "^7.0.1",
     "madge": "^8.0.0",
+    "ora": "^9.3.0",
     "prompts": "^2.4.2",
     "tsdown": "^0.21.0",
     "yaml": "^2.8.2",
@@ -59,7 +59,6 @@
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
-    "@types/color-hash": "^2.0.0",
     "@types/madge": "^5.0.3",
     "@types/node": "catalog:dev",
     "@types/prompts": "^2.4.9",

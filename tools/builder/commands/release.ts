@@ -1,4 +1,6 @@
 import { execaCommand } from 'execa';
+import symbols from 'log-symbols';
+import ora from 'ora';
 import type { CommandModule } from 'yargs';
 import { getConfirmation } from '../lib/confirmation.ts';
 import { getPreReleaseTag } from '../lib/release-tag.ts';
@@ -65,28 +67,29 @@ export const releaseCommand: CommandModule<{}, ReleaseArgs> = {
 		if (args.checkBranch !== undefined) {
 			if (args.checkBranch === 'main') {
 				if (args.tag !== 'latest') {
-					console.error(`Expected release tag to be "latest" for branch "main"`);
+					console.error(`${symbols.error} Expected release tag to be "latest" for branch "main"`);
 					process.exit(1);
 				}
 			} else if (args.checkBranch === 'next') {
 				if (args.tag !== 'next') {
-					console.error(`Expected release tag to be "next" for branch "next"`);
+					console.error(`${symbols.error} Expected release tag to be "next" for branch "next"`);
 					process.exit(1);
 				}
 			} else {
-				console.error(`Invalid branch "${args.checkBranch}"`);
+				console.error(`${symbols.error} Invalid branch "${args.checkBranch}"`);
 				process.exit(1);
 			}
 		}
 
 		if (args.skipBuild !== true) {
-			console.log('Building packages...');
+			console.log(`${symbols.info} Building packages before release...`);
 			await execaCommand('yarn run -T build', {
 				stdio: 'inherit',
 			});
+			console.log(`${symbols.success} Build completed successfully`);
 		}
 
-		console.log('Publishing packages...');
+		console.log(`${symbols.info} Publishing packages with tag "${args.tag}"...`);
 
 		const runArgs: string[] = [
 			'--tolerate-republish',
@@ -100,11 +103,14 @@ export const releaseCommand: CommandModule<{}, ReleaseArgs> = {
 			stdio: 'inherit',
 		});
 
+		console.log(`${symbols.success} Packages published successfully`);
+
 		if (args.dryRun !== true && args.tag !== 'alpha') {
-			console.log('Tagging release...');
+			const tagSpinner = ora('Tagging release...').start();
 			await execaCommand('yarn run -T changeset tag', {
 				stdio: 'inherit',
 			});
+			tagSpinner.succeed('Release tagged successfully');
 		}
 	},
 };

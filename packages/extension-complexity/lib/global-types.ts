@@ -4,14 +4,7 @@ import type { GetFieldSettings } from './field-settings.ts';
 
 declare global {
 	export namespace BaetaExtensions {
-		export interface FieldExtensions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			Builder extends FieldBuilder<Result, Source, Context, Args, Info>,
-		> {
+		export interface FieldExtensions<Result, Source, Context, Args, Info> {
 			/**
 			 * Configures complexity calculation for a type field.
 			 *
@@ -28,15 +21,12 @@ declare global {
 			 * Query.simple.$complexity(() => false);
 			 * ```
 			 */
-			$complexity: (fn: GetFieldSettings<Context, Args>) => ReturnType<Builder['toMethods']>;
+			$complexity: (
+				fn: GetFieldSettings<Context, Args>,
+			) => ReturnType<FieldBuilder<Result, Source, Context, Args, Info>['toMethods']>;
 		}
 
-		export interface TypeExtensions<
-			Source,
-			Context,
-			Info,
-			Builder extends TypeBuilder<Source, Context, Info>,
-		> {
+		export interface TypeExtensions<Source, Context, Info> {
 			/**
 			 * Configures complexity calculation for a type field.
 			 *
@@ -53,17 +43,12 @@ declare global {
 			 * Query.simple.$complexity(() => false);
 			 * ```
 			 */
-			$complexity: (fn: GetFieldSettings<Context, unknown>) => ReturnType<Builder['toMethods']>;
+			$complexity: (
+				fn: GetFieldSettings<Context, unknown>,
+			) => ReturnType<TypeBuilder<Source, Context, Info>['toMethods']>;
 		}
 
-		export interface SubscriptionExtensions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			Builder extends SubscriptionBuilder<Result, Source, Context, Args, Info>,
-		> {
+		export interface SubscriptionExtensions<Result, Source, Context, Args, Info> {
 			/**
 			 * Configures complexity calculation for a type field.
 			 *
@@ -80,7 +65,9 @@ declare global {
 			 * Query.simple.$complexity(() => false);
 			 * ```
 			 */
-			$complexity: (fn: GetFieldSettings<Context, Args>) => ReturnType<Builder['toMethods']>;
+			$complexity: (
+				fn: GetFieldSettings<Context, Args>,
+			) => ReturnType<SubscriptionBuilder<Result, Source, Context, Args, Info>['toMethods']>;
 		}
 	}
 }

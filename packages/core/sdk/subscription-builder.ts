@@ -74,14 +74,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	toMethods(): SubscriptionMethods<Result, Source, Context, Args, Info> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getSubscriptionExtensions(this),
-		) as unknown as BaetaExtensions.SubscriptionExtensions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			SubscriptionBuilder<Result, Source, Context, Args, Info>
-		>;
+		) as unknown as BaetaExtensions.SubscriptionExtensions<Result, Source, Context, Args, Info>;
 		return {
 			...extensions,
 			$use: (middleware) => {

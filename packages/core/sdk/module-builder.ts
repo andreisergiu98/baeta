@@ -100,11 +100,7 @@ export class ModuleBuilder<
 	toMethods(): ModuleMethods<Context, Info, TypesBuilders, TypesResolvers> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getModuleExtensions(this),
-		) as unknown as BaetaExtensions.ModuleExtensions<
-			Context,
-			Info,
-			ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>
-		>;
+		) as unknown as BaetaExtensions.ModuleExtensions<Context, Info>;
 		return {
 			...extensions,
 			...this.#typeBuilders,

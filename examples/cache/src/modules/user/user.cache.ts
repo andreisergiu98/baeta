@@ -1,4 +1,6 @@
+import { defineQuery } from '@baeta/cache';
 import { z } from 'zod';
+import { db } from '../../lib/db/prisma.ts';
 import { UserModule } from './typedef.ts';
 
 const { User } = UserModule;
@@ -13,8 +15,44 @@ const UserCacheSchema = z.object({
 	birthday: z.date().nullable(),
 });
 
+const findUser = defineQuery({
+	resolve: async (args: { id: string | null; email: string | null }) => {
+		return db.user.findUnique({
+			where: {
+				id: args.id ?? undefined,
+				email: args.email ?? undefined,
+			},
+		});
+	},
+	indexArgsBy: {
+		id: true,
+		email: true,
+	},
+	onInsert(items, helpers) {
+		const args = items.flatMap((item) => [{ id: item.id }, { email: item.email }] as const);
+		return helpers.invalidateByArgs(args);
+	},
+});
+
+const findUsers = defineQuery({
+	resolve: async () => {
+		return db.user.findMany();
+	},
+	onDelete(_pairs, helpers) {
+		return helpers.invalidateAll();
+	},
+	onInsert(_items, helpers) {
+		return helpers.invalidateAll();
+	},
+});
+
 export const userCache = User.$createCache({
 	revision: 2,
 	parse: (value) => UserCacheSchema.parse(JSON.parse(value)),
 	serialize: (value) => JSON.stringify(UserCacheSchema.encode(value)),
-});
+})
+	.withQueries({
+		findUser,
+		findUsers,
+	})
+	.build();

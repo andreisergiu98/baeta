@@ -1,0 +1,91 @@
+{
+  "name": "@baeta/cache-redis",
+  "version": "2.0.0-next.11",
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/cache-redis"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "builder build",
+    "check:deps": "builder check-deps",
+    "prepack": "builder prepare",
+    "postpack": "builder prepare --restore",
+    "test": "builder test --skip-coverage",
+    "test:circular": "builder test-circular",
+    "types": "tsc --noEmit"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    }
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/cache": "workspace:^",
+    "@baeta/testing": "workspace:^",
+    "@baeta/tests-cache-clients": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "ioredis": "^5.10.0",
+    "typescript": "catalog:dev"
+  },
+  "peerDependencies": {
+    "@baeta/cache": "workspace:^",
+    "ioredis": "^5.10.0"
+  },
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
+  }
+}

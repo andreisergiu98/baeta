@@ -1772,6 +1772,92 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/cache-cloudflare@workspace:^, @baeta/cache-cloudflare@workspace:packages/cache-cloudflare":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-cloudflare@workspace:packages/cache-cloudflare"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-clients": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@cloudflare/workers-types": "npm:^4.20260305.1"
+    miniflare: "npm:^4.20260305.0"
+    typescript: "catalog:dev"
+    zod: "npm:^4.3.6"
+  peerDependencies:
+    "@baeta/cache": "workspace:^"
+    "@cloudflare/workers-types": "*"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/cache-keyv@workspace:packages/cache-keyv":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-keyv@workspace:packages/cache-keyv"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-clients": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@keyv/etcd": "npm:^2.1.1"
+    keyv: "npm:^6.0.0-alpha.2"
+    typescript: "catalog:dev"
+  peerDependencies:
+    "@baeta/cache": "workspace:^"
+    keyv: ^6.0.0-alpha.2
+  languageName: unknown
+  linkType: soft
+
+"@baeta/cache-redis@workspace:^, @baeta/cache-redis@workspace:packages/cache-redis":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-redis@workspace:packages/cache-redis"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-clients": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    ioredis: "npm:^5.10.0"
+    typescript: "catalog:dev"
+  peerDependencies:
+    "@baeta/cache": "workspace:^"
+    ioredis: ^5.10.0
+  languageName: unknown
+  linkType: soft
+
+"@baeta/cache-upstash@workspace:packages/cache-upstash":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-upstash@workspace:packages/cache-upstash"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cache": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-clients": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@upstash/redis": "npm:^1.36.4"
+    typescript: "catalog:dev"
+  peerDependencies:
+    "@baeta/cache": "workspace:^"
+    "@upstash/redis": ^1.34.3
+  languageName: unknown
+  linkType: soft
+
+"@baeta/cache@workspace:^, @baeta/cache@workspace:packages/cache":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache@workspace:packages/cache"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-encoding": "workspace:^"
+    "@baeta/util-log": "workspace:^"
+    dataloader: "npm:^2.2.3"
+    ohash: "npm:^2.0.11"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/cli@workspace:^, @baeta/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@baeta/cli@workspace:packages/cli"
@@ -1935,48 +2021,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/examples-cache-advanced@workspace:examples/cache-advanced":
-  version: 0.0.0-use.local
-  resolution: "@baeta/examples-cache-advanced@workspace:examples/cache-advanced"
-  dependencies:
-    "@baeta/cli": "workspace:^"
-    "@baeta/core": "workspace:^"
-    "@baeta/directives": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
-    "@baeta/extension-cache-redis": "workspace:^"
-    "@baeta/plugin-directives": "workspace:^"
-    "@baeta/plugin-pagination": "workspace:^"
-    "@baeta/plugin-prisma": "workspace:^"
-    "@baeta/tsconfig": "workspace:^"
-    "@faker-js/faker": "npm:^10.3.0"
-    "@prisma/adapter-better-sqlite3": "npm:^7.4.2"
-    "@prisma/client": "npm:^7.4.2"
-    "@prisma/client-runtime-utils": "npm:^7.4.2"
-    "@types/node": "catalog:dev"
-    "@types/ws": "catalog:dev"
-    "@yarnpkg/pnpify": "npm:^4.1.6"
-    graphql: "catalog:dev"
-    graphql-scalars: "catalog:dev"
-    graphql-ws: "catalog:prod"
-    graphql-yoga: "catalog:dev"
-    ioredis: "npm:^5.10.0"
-    prisma: "npm:^7.4.2"
-    typescript: "catalog:dev"
-    ws: "catalog:dev"
-    zod: "npm:^4.3.6"
-  languageName: unknown
-  linkType: soft
-
 "@baeta/examples-cache@workspace:examples/cache":
   version: 0.0.0-use.local
   resolution: "@baeta/examples-cache@workspace:examples/cache"
   dependencies:
+    "@baeta/cache": "workspace:^"
+    "@baeta/cache-redis": "workspace:^"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/directives": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
-    "@baeta/extension-cache-redis": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
+    "@baeta/plugin-pagination": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.3.0"
@@ -2265,91 +2321,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/extension-cache-cloudflare@workspace:^, @baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare":
-  version: 0.0.0-use.local
-  resolution: "@baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare"
-  dependencies:
-    "@baeta/builder": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
-    "@baeta/testing": "workspace:^"
-    "@baeta/tests-cache-stores": "workspace:^"
-    "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260305.1"
-    miniflare: "npm:^4.20260305.0"
-    typescript: "catalog:dev"
-  peerDependencies:
-    "@baeta/extension-cache": "workspace:^"
-    "@cloudflare/workers-types": "*"
-  languageName: unknown
-  linkType: soft
-
-"@baeta/extension-cache-keyv@workspace:packages/extension-cache-keyv":
-  version: 0.0.0-use.local
-  resolution: "@baeta/extension-cache-keyv@workspace:packages/extension-cache-keyv"
-  dependencies:
-    "@baeta/builder": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
-    "@baeta/testing": "workspace:^"
-    "@baeta/tests-cache-stores": "workspace:^"
-    "@baeta/tsconfig": "workspace:^"
-    "@keyv/etcd": "npm:^2.1.1"
-    keyv: "npm:^5.6.0"
-    typescript: "catalog:dev"
-  peerDependencies:
-    "@baeta/extension-cache": "workspace:^"
-    keyv: ^5.1.3
-  languageName: unknown
-  linkType: soft
-
-"@baeta/extension-cache-redis@workspace:^, @baeta/extension-cache-redis@workspace:packages/extension-cache-redis":
-  version: 0.0.0-use.local
-  resolution: "@baeta/extension-cache-redis@workspace:packages/extension-cache-redis"
-  dependencies:
-    "@baeta/builder": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
-    "@baeta/testing": "workspace:^"
-    "@baeta/tests-cache-stores": "workspace:^"
-    "@baeta/tsconfig": "workspace:^"
-    ioredis: "npm:^5.10.0"
-    typescript: "catalog:dev"
-  peerDependencies:
-    "@baeta/extension-cache": "workspace:^"
-    ioredis: ^5.4.1
-  languageName: unknown
-  linkType: soft
-
-"@baeta/extension-cache-upstash@workspace:packages/extension-cache-upstash":
-  version: 0.0.0-use.local
-  resolution: "@baeta/extension-cache-upstash@workspace:packages/extension-cache-upstash"
-  dependencies:
-    "@baeta/builder": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
-    "@baeta/testing": "workspace:^"
-    "@baeta/tests-cache-stores": "workspace:^"
-    "@baeta/tsconfig": "workspace:^"
-    "@upstash/redis": "npm:^1.36.3"
-    typescript: "catalog:dev"
-  peerDependencies:
-    "@baeta/extension-cache": "workspace:^"
-    "@upstash/redis": ^1.34.3
-  languageName: unknown
-  linkType: soft
-
 "@baeta/extension-cache@workspace:^, @baeta/extension-cache@workspace:packages/extension-cache":
   version: 0.0.0-use.local
   resolution: "@baeta/extension-cache@workspace:packages/extension-cache"
   dependencies:
     "@baeta/builder": "workspace:^"
+    "@baeta/cache": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@baeta/util-encoding": "workspace:^"
-    "@baeta/util-log": "workspace:^"
-    dataloader: "npm:^2.2.3"
-    flat: "npm:^6.0.1"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
+    "@baeta/cache": "workspace:^"
     "@baeta/core": "workspace:^"
     graphql: ^16.6.0
   languageName: unknown
@@ -2407,7 +2391,7 @@ __metadata:
   resolution: "@baeta/plugin-cloudflare@workspace:packages/plugin-cloudflare"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/extension-cache-cloudflare": "workspace:^"
+    "@baeta/cache-cloudflare": "workspace:^"
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
@@ -2417,12 +2401,12 @@ __metadata:
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
-    "@baeta/extension-cache-cloudflare": "workspace:^"
+    "@baeta/cache-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@cloudflare/workers-types": ^4
     graphql: ^16.6.0
   peerDependenciesMeta:
-    "@baeta/extension-cache-cloudflare":
+    "@baeta/cache-cloudflare":
       optional: true
     "@baeta/subscriptions-cloudflare":
       optional: true
@@ -2615,22 +2599,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/tests-cache-stores@workspace:^, @baeta/tests-cache-stores@workspace:tests/cache-stores":
+"@baeta/tests-cache-clients@workspace:^, @baeta/tests-cache-clients@workspace:tests/cache-clients":
   version: 0.0.0-use.local
-  resolution: "@baeta/tests-cache-stores@workspace:tests/cache-stores"
+  resolution: "@baeta/tests-cache-clients@workspace:tests/cache-clients"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/extension-cache": "workspace:^"
+    "@baeta/cache": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@graphql-tools/schema": "npm:^10.0.31"
-    graphql: "catalog:dev"
-    graphql-scalars: "catalog:dev"
-    graphql-tag: "catalog:dev"
     typescript: "catalog:dev"
-    zod: "npm:^4.3.6"
   peerDependencies:
-    "@baeta/extension-cache": "workspace:^"
+    "@baeta/cache": "workspace:^"
   languageName: unknown
   linkType: soft
 
@@ -5870,10 +5849,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keyv/serialize@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@keyv/serialize@npm:1.1.1"
-  checksum: 10/e3b2cb1377863342acedd5ff785af3e69269bee9b44707c617d1c8bc14eeb5ac763159d6455903ffe92f143c2238e1e783c4f113f9c8910eacccf172894472da
+"@keyv/serialize@npm:^6.0.0-alpha.2":
+  version: 6.0.0-alpha.2
+  resolution: "@keyv/serialize@npm:6.0.0-alpha.2"
+  checksum: 10/79dae4ba5e9a4da8ce8b65d5e2d65efef8c5924e4ad31f0af3d7fbf00d5a0e640e14975d58e2d23f80125ab14f855cbc8b7efce0b303e17ae613390f144d7493
   languageName: node
   linkType: hard
 
@@ -8076,11 +8055,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:>=13.7.0":
-  version: 25.3.3
-  resolution: "@types/node@npm:25.3.3"
+  version: 25.5.0
+  resolution: "@types/node@npm:25.5.0"
   dependencies:
     undici-types: "npm:~7.18.0"
-  checksum: 10/883e8942b0ddf89f9aae56c4205af8d9a368acd6cab83aa052447a6c5e69ce2bc8ab3f54e549233ada160ba9216dad7f30c62c35867c584fe844ae99f7dea2e0
+  checksum: 10/b1e8116bd8c9ff62e458b76d28a59cf7631537bb17e8961464bf754dd5b07b46f1620f568b2f89970505af9eef478dd74c614651b454c1ea95949ec472c64fcb
   languageName: node
   linkType: hard
 
@@ -8433,12 +8412,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@upstash/redis@npm:^1.36.3":
-  version: 1.36.3
-  resolution: "@upstash/redis@npm:1.36.3"
+"@upstash/redis@npm:^1.36.4":
+  version: 1.36.4
+  resolution: "@upstash/redis@npm:1.36.4"
   dependencies:
     uncrypto: "npm:^0.1.3"
-  checksum: 10/7931ad64a9c6ce002e3c9a0bd0b27ac3240123cfe30314575aa9ad181d5b8e887f03f2e29dd6e6d6ae8eb401174c777a0eb1b43ef08e789bd96fa9c2ea0a00f0
+  checksum: 10/54bd19780ebb7dde751c2de4cf99637918f3a3006c17d635dd7c65c951f7d135b95372ccff5b9001593556b6afef5dfcf8c7a1a434f493edc02f4ddd0a612e14
   languageName: node
   linkType: hard
 
@@ -12821,15 +12800,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flat@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "flat@npm:6.0.1"
-  bin:
-    flat: cli.js
-  checksum: 10/c7a5f2e7e3ba0bec28b9c3aca27e68ff74df446df15cdb77ddef9e3d4fd0e9321ca52e49ca8b861c46157215006666b0dad25457f231083fc7bd2f7fcb67d7eb
-  languageName: node
-  linkType: hard
-
 "follow-redirects@npm:^1.0.0":
   version: 1.15.11
   resolution: "follow-redirects@npm:1.15.11"
@@ -14965,12 +14935,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keyv@npm:^5.6.0":
-  version: 5.6.0
-  resolution: "keyv@npm:5.6.0"
+"keyv@npm:^6.0.0-alpha.2":
+  version: 6.0.0-alpha.2
+  resolution: "keyv@npm:6.0.0-alpha.2"
   dependencies:
-    "@keyv/serialize": "npm:^1.1.1"
-  checksum: 10/f1de999fdf635d703d091981a0a3844fb20081e01d45c6743ada7d01f3a6570dc47d1882e10d0a98d31075b342db8e62b4ebe4f5bf473dcd0903064d718709c1
+    "@keyv/serialize": "npm:^6.0.0-alpha.2"
+  checksum: 10/3764855048202c403511df1b8cffebd3c79228da531635d6385f34d36fc3b7c5b8d7c771767a545a1fd34ae4ea9a7850050168ca8da6c448ceafef7f42044cfb
   languageName: node
   linkType: hard
 

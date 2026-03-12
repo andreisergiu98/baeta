@@ -50,14 +50,9 @@
       "ts": "module"
     }
   },
-  "dependencies": {
-    "@baeta/util-encoding": "workspace:^",
-    "@baeta/util-log": "workspace:^",
-    "dataloader": "^2.2.3",
-    "flat": "^6.0.1"
-  },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
+    "@baeta/cache": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
@@ -65,6 +60,7 @@
     "typescript": "catalog:dev"
   },
   "peerDependencies": {
+    "@baeta/cache": "workspace:^",
     "@baeta/core": "workspace:^",
     "graphql": "^16.6.0"
   },

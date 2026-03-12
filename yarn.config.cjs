@@ -116,7 +116,10 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 			workspace.set('scripts.prepack', 'builder prepare');
 			workspace.set('scripts.postpack', 'builder prepare --restore');
-			if (workspace.manifest.name.startsWith('@baeta/extension-cache')) {
+			if (
+				workspace.manifest.name.startsWith('@baeta/cache') ||
+				workspace.manifest.name.startsWith('@baeta/extension-cache')
+			) {
 				workspace.set('scripts.test', 'builder test --skip-coverage');
 			} else {
 				workspace.set('scripts.test', 'builder test');

@@ -1,5 +1,6 @@
 import { glob } from 'node:fs/promises';
 import { join } from 'node:path';
+import symbols from 'log-symbols';
 import type { CommandModule } from 'yargs';
 import { spawnCli } from '../lib/spawn-cli.ts';
 
@@ -31,7 +32,7 @@ export const testCommand: CommandModule<{}, TestArgs> = {
 			files.push(file);
 		}
 		if (files.length === 0) {
-			console.log('No tests found');
+			console.log(`${symbols.info} No tests found. Skipping!`);
 			return;
 		}
 		await spawnCli({

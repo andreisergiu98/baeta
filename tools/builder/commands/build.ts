@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
-import styles from 'ansi-styles';
+import ora from 'ora';
 import { build } from 'tsdown';
 import type { CommandModule } from 'yargs';
 import { loadPackageJson } from '../lib/package-json.ts';
@@ -13,8 +13,29 @@ export const buildCommand: CommandModule<{}, {}> = {
 		return yargs;
 	},
 	handler: async () => {
-		await build();
-		await checkExportFilesExist();
+		const pkg = await loadPackageJson();
+
+		const buildSpinner = ora(`Building package ${pkg.name}...`).start();
+		await build({
+			logLevel: 'warn',
+		})
+			.then(() => {
+				buildSpinner.succeed(`Package ${pkg.name} built successfully`);
+			})
+			.catch((error) => {
+				buildSpinner.fail(`Package ${pkg.name} build failed`);
+				throw error;
+			});
+
+		const checkSpinner = ora(`Checking export files for package ${pkg.name}...`).start();
+		await checkExportFilesExist()
+			.then(() => {
+				checkSpinner.succeed(`Export files for package ${pkg.name} are valid`);
+			})
+			.catch((error) => {
+				checkSpinner.fail(`Export file check failed for package ${pkg.name}`);
+				throw error;
+			});
 	},
 };
 
@@ -62,5 +83,4 @@ async function checkExportFilesExist() {
 		throw new Error(`Missing files inclusion in package ${pkg.name}: ${missingFiles.join(', ')}`);
 	}
 	await Promise.all(promises);
-	console.log(`${styles.green.open}✔${styles.green.close} Export files exist for ${pkg.name}`);
 }

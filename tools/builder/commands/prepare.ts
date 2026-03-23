@@ -1,5 +1,7 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
+import symbols from 'log-symbols';
+import ora from 'ora';
 import type { CommandModule } from 'yargs';
 import { loadPackageJson, type PkgExport } from '../lib/package-json.ts';
 
@@ -34,24 +36,42 @@ export const prepareCommand: CommandModule<{}, PrepareArgs> = {
 		});
 	},
 	handler: async (args) => {
+		const pkg = await loadPackageJson();
 		const manifest = await getManifest();
+
 		if (args.restore) {
 			if (manifest == null) {
-				console.error('[ERROR] No manifest found, nothing to clean.');
+				console.error(`${symbols.error} No manifest found, nothing to clean.`);
 				process.exit(1);
 			}
-			await Promise.all([
-				...manifest.files.map((file) => fs.unlink(file)),
-				fs.unlink(manifestPath),
-			]);
-			return;
+
+			const spinner = ora(`Restoring package ${pkg.name} to state before prepare...`).start();
+			try {
+				await Promise.all([
+					...manifest.files.map((file) => fs.unlink(file)),
+					fs.unlink(manifestPath),
+				]);
+				spinner.succeed(`Package ${pkg.name} restored successfully`);
+			} catch (error) {
+				spinner.fail(`Failed to restore package ${pkg.name}`);
+				throw error;
+			}
+		} else {
+			if (manifest != null) {
+				console.error(`${symbols.error} Remove manifest before preparing.`);
+				process.exit(1);
+			}
+
+			const spinner = ora(`Preparing package ${pkg.name} for publishing...`).start();
+			try {
+				const files = (await Promise.all([copyReadmeAndLicense(), createNestedPackages()])).flat();
+				await writeManifest(files);
+				spinner.succeed(`Package ${pkg.name} prepared successfully`);
+			} catch (error) {
+				spinner.fail(`Failed to prepare package ${pkg.name}`);
+				throw error;
+			}
 		}
-		if (manifest != null) {
-			console.error('[ERROR] Remove manifest before preparing.');
-			process.exit(1);
-		}
-		const files = (await Promise.all([copyReadmeAndLicense(), createNestedPackages()])).flat();
-		await writeManifest(files);
 	},
 };
 

@@ -1,5 +1,7 @@
 import madge from 'madge';
+import ora from 'ora';
 import type { CommandModule } from 'yargs';
+import { loadPackageJson } from '../lib/package-json.ts';
 
 // biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
 export const checkCircularCommand: CommandModule<{}, {}> = {
@@ -9,6 +11,9 @@ export const checkCircularCommand: CommandModule<{}, {}> = {
 		return yargs;
 	},
 	handler: async () => {
+		const pkg = await loadPackageJson();
+		const spinner = ora(`Checking package ${pkg.name} for circular dependencies...`).start();
+
 		const tester = await madge(process.cwd(), {
 			fileExtensions: ['ts', 'tsx'],
 			detectiveOptions: {
@@ -22,13 +27,17 @@ export const checkCircularCommand: CommandModule<{}, {}> = {
 		});
 
 		const results = await tester.circular();
+		const circularMessages = results.map(
+			(items) => ` - Circular imports found in: ${items.join(' -> ')}`,
+		);
 
-		for (const items of results) {
-			console.log(`Circular imports found in: ${items.join(' -> ')}`);
-		}
-
-		if (results.length > 0) {
+		if (circularMessages.length > 0) {
+			spinner.fail(
+				`Circular dependencies found in package ${pkg.name}: \n${circularMessages.join('\n')}`,
+			);
 			process.exit(1);
+		} else {
+			spinner.succeed(`No circular dependencies found in package ${pkg.name}`);
 		}
 	},
 };

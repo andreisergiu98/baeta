@@ -31,7 +31,7 @@ export class CacheExtension extends Extension<never> {
 
 	getTypeExtensions<Source, Context, Info>(
 		builder: TypeBuilder<Source, Context, Info>,
-	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> {
+	): BaetaExtensions.TypeExtensions<Source, Context, Info> {
 		return {
 			$createCache: (options: StoreOptions<Source>) => {
 				return this.store.createStoreAdapter<Source>({
@@ -48,14 +48,7 @@ export class CacheExtension extends Extension<never> {
 
 	getFieldExtensions<Result, Source, Context, Args, Info>(
 		builder: FieldBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.FieldExtensions<
-		Result,
-		Source,
-		Context,
-		Args,
-		Info,
-		FieldBuilder<Result, Source, Context, Args, Info>
-	> {
+	): BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info> {
 		const ref = new CacheRef<Result, Source, Args>(builder.type, builder.field);
 		return {
 			$cacheRef: ref,

@@ -79,12 +79,7 @@ export class TypeBuilder<
 	toMethods(): TypeMethods<Source, Context, Info, FieldsBuilders, FieldsResolvers> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getTypeExtensions(this),
-		) as unknown as BaetaExtensions.TypeExtensions<
-			Source,
-			Context,
-			Info,
-			TypeBuilder<Source, Context, Info, FieldsBuilders, FieldsResolvers>
-		>;
+		) as unknown as BaetaExtensions.TypeExtensions<Source, Context, Info>;
 		return {
 			...extensions,
 			...this.#fieldBuilders,

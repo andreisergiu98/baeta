@@ -52,7 +52,7 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 
 	getTypeExtensions<Source, Context, Info>(
 		builder: TypeBuilder<Source, Context, Info>,
-	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> {
+	): BaetaExtensions.TypeExtensions<Source, Context, Info> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
@@ -91,14 +91,7 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 
 	getFieldExtensions<Result, Source, Context, Args, Info>(
 		builder: FieldBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.FieldExtensions<
-		Result,
-		Source,
-		Context,
-		Args,
-		Info,
-		FieldBuilder<Result, Source, Context, Args, Info>
-	> {
+	): BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
@@ -145,14 +138,7 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 
 	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
 		builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.SubscriptionExtensions<
-		Result,
-		Source,
-		Context,
-		Args,
-		Info,
-		SubscriptionBuilder<Result, Source, Context, Args, Info>
-	> {
+	): BaetaExtensions.SubscriptionExtensions<Result, Source, Context, Args, Info> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();

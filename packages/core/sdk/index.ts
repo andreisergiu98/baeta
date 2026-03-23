@@ -1,6 +1,8 @@
 export { addValidationToSchema } from '../lib/input-directive/index.ts';
 export * from '../utils/functions.ts';
+export * from '../utils/functions.ts';
 export * from '../utils/object.ts';
+export * from '../utils/promise.ts';
 export * from './extension.ts';
 export * from './extensions-global.ts';
 export * from './field.ts';

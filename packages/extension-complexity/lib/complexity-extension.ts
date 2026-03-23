@@ -36,7 +36,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 
 	getTypeExtensions<Source, Context, Info>(
 		builder: TypeBuilder<Source, Context, Info>,
-	): BaetaExtensions.TypeExtensions<Source, Context, Info, TypeBuilder<Source, Context, Info>> {
+	): BaetaExtensions.TypeExtensions<Source, Context, Info> {
 		return {
 			$complexity: (fn) => {
 				const editable = builder.edit();
@@ -50,14 +50,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 
 	getFieldExtensions<Result, Source, Context, Args, Info>(
 		builder: FieldBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.FieldExtensions<
-		Result,
-		Source,
-		Context,
-		Args,
-		Info,
-		FieldBuilder<Result, Source, Context, Args, Info>
-	> {
+	): BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info> {
 		return {
 			$complexity: (fn) => {
 				const editable = builder.edit();
@@ -71,14 +64,7 @@ export class ComplexityExtension<Ctx> extends Extension<ComplexityState> {
 
 	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
 		builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.SubscriptionExtensions<
-		Result,
-		Source,
-		Context,
-		Args,
-		Info,
-		SubscriptionBuilder<Result, Source, Context, Args, Info>
-	> {
+	): BaetaExtensions.SubscriptionExtensions<Result, Source, Context, Args, Info> {
 		return {
 			$complexity: (fn) => {
 				const editable = builder.edit();

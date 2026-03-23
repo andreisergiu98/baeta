@@ -1,6 +1,5 @@
 import type { GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
-import type { ModuleBuilder } from './module-builder.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompilerFactory, TypeMethods } from './type-methods.ts';
@@ -27,11 +26,7 @@ export type ModuleMethods<
 	$directive: (
 		transformer: SchemaTransformer | SchemaTransformer[],
 	) => ModuleMethods<Context, Info, TypesBuilders, TypesResolvers>;
-} & BaetaExtensions.ModuleExtensions<
-		Context,
-		Info,
-		ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>
-	>;
+} & BaetaExtensions.ModuleExtensions<Context, Info>;
 
 export type ModuleCompilerFactory<
 	Context,

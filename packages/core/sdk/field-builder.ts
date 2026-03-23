@@ -88,14 +88,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 	toMethods(): FieldMethods<Result, Source, Context, Args, Info> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getFieldExtensions(this),
-		) as unknown as BaetaExtensions.FieldExtensions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			FieldBuilder<Result, Source, Context, Args, Info>
-		>;
+		) as unknown as BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info>;
 		return {
 			...extensions,
 			$use: (middleware) => {

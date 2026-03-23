@@ -12,14 +12,7 @@ declare global {
 		/**
 		 * Authorization methods on resolvers.
 		 */
-		export interface FieldExtensions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			Builder extends FieldBuilder<Result, Source, Context, Args, Info>,
-		> {
+		export interface FieldExtensions<Result, Source, Context, Args, Info> {
 			/**
 			 * Checks authorization before resolver execution.
 			 * Use this when authorization can be determined without the resolver's result.
@@ -40,7 +33,7 @@ declare global {
 					| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
 					| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Source, Context, Args, Info>,
 				options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Source, Context, Args, Info>,
-			) => ReturnType<Builder['toMethods']>;
+			) => ReturnType<FieldBuilder<Result, Source, Context, Args, Info>['toMethods']>;
 
 			/**
 			 * Checks authorization after resolver execution.
@@ -70,18 +63,13 @@ declare global {
 					Info
 				>,
 				options?: AuthMiddlewareOptions<AuthExtension.Grants, Result, Source, Context, Args, Info>,
-			) => ReturnType<Builder['toMethods']>;
+			) => ReturnType<FieldBuilder<Result, Source, Context, Args, Info>['toMethods']>;
 		}
 
 		/**
 		 * Authorization methods that apply to all fields of a GraphQL type.
 		 */
-		export interface TypeExtensions<
-			Source,
-			Context,
-			Info,
-			Builder extends TypeBuilder<Source, Context, Info>,
-		> {
+		export interface TypeExtensions<Source, Context, Info> {
 			/**
 			 * Checks authorization before field resolution.
 			 * Applied to all fields of the type.
@@ -105,7 +93,7 @@ declare global {
 					unknown,
 					Info
 				>,
-			) => ReturnType<Builder['toMethods']>;
+			) => ReturnType<TypeBuilder<Source, Context, Info>['toMethods']>;
 
 			/**
 			 * Checks authorization after field resolution.
@@ -130,20 +118,13 @@ declare global {
 					unknown,
 					Info
 				>,
-			) => ReturnType<Builder['toMethods']>;
+			) => ReturnType<TypeBuilder<Source, Context, Info>['toMethods']>;
 		}
 
 		/**
 		 * Authorization methods for subscribe phase.
 		 */
-		export interface SubscriptionExtensions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			Builder extends SubscriptionBuilder<Result, Source, Context, Args, Info>,
-		> {
+		export interface SubscriptionExtensions<Result, Source, Context, Args, Info> {
 			/**
 			 * Checks authorization for both subscribe and resolve phases.
 			 *
@@ -163,7 +144,7 @@ declare global {
 					| ScopeRules<AuthExtension.Scopes, AuthExtension.Grants>
 					| GetScopeRules<AuthExtension.Scopes, AuthExtension.Grants, Source, Context, Args, Info>,
 				options?: AuthMiddlewareSubscribeOptions,
-			) => ReturnType<Builder['toMethods']>;
+			) => ReturnType<SubscriptionBuilder<Result, Source, Context, Args, Info>['toMethods']>;
 		}
 	}
 

@@ -1,6 +1,5 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
-import type { FieldBuilder } from './field-builder.ts';
 import type { FieldCompiler } from './field-compiler.ts';
 
 export type Field<Expected, Result, Source, Context, Args, Info> = FieldHelpers<
@@ -23,14 +22,7 @@ export type FieldMethods<Result, Source, Context, Args, Info> = {
 	resolve: (
 		resolver: Resolver<Result, Source, Context, Args, Info>,
 	) => Field<Result, Result, Source, Context, Args, Info>;
-} & BaetaExtensions.FieldExtensions<
-	Result,
-	Source,
-	Context,
-	Args,
-	Info,
-	FieldBuilder<Result, Source, Context, Args, Info>
->;
+} & BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info>;
 
 export type FieldHelpers<Expected, Result, Source, Context, Args, Info> = {
 	map: <T = Expected>(

@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/correctness/noUnusedVariables: arguments used for inference */
-import type { FieldBuilder, TypeBuilder } from '@baeta/core/sdk';
+import type { Field, FieldBuilder } from '@baeta/core/sdk';
 import type {
 	CacheMiddlewareOptions,
 	RequiredCacheMiddlewareOptions,
@@ -18,12 +18,7 @@ export type UseCacheArgs<Result, Source> = Source extends RefCompatibleRoot
 
 declare global {
 	export namespace BaetaExtensions {
-		export interface TypeExtensions<
-			Source,
-			Context,
-			Info,
-			Builder extends TypeBuilder<Source, Context, Info>,
-		> {
+		export interface TypeExtensions<Source, Context, Info> {
 			/**
 			 * Creates a cache store for a specific type.
 			 *
@@ -38,14 +33,7 @@ declare global {
 			$createCache: (options: StoreOptions<Source>) => StoreAdapter<Source>;
 		}
 
-		export interface FieldExtensions<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			Builder extends FieldBuilder<Result, Source, Context, Args, Info>,
-		> {
+		export interface FieldExtensions<Result, Source, Context, Args, Info> {
 			/**
 			 * Reference cache object for a query or type field.
 			 */
@@ -87,7 +75,9 @@ declare global {
 			 * });
 			 * ```
 			 */
-			$useCache: (...args: UseCacheArgs<Result, Source>) => ReturnType<Builder['toMethods']>;
+			$useCache: (
+				...args: UseCacheArgs<Result, Source>
+			) => ReturnType<FieldBuilder<Result, Source, Context, Args, Info>['toMethods']>;
 		}
 	}
 }

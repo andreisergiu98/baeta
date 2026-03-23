@@ -1,7 +1,6 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Field, FieldMethods } from './field-methods.ts';
 import type { SubscriptionField, SubscriptionMethods } from './subscription-methods.ts';
-import type { TypeBuilder } from './type-builder.ts';
 import type { TypeCompiler } from './type-compiler.ts';
 
 export type FieldsBuildersMap<Source, Context, Info> = Record<
@@ -34,12 +33,7 @@ export type TypeMethods<
 	$use: (
 		middleware: Middleware<unknown, Source, Context, unknown, Info>,
 	) => TypeMethods<Source, Context, Info, FieldsBuilders, FieldsResolvers>;
-} & BaetaExtensions.TypeExtensions<
-	Source,
-	Context,
-	Info,
-	TypeBuilder<Source, Context, Info, FieldsBuilders, FieldsResolvers>
-> &
+} & BaetaExtensions.TypeExtensions<Source, Context, Info> &
 	FieldsBuilders;
 
 export type TypeCompilerFactory<

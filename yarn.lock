@@ -2010,7 +2010,7 @@ __metadata:
     "@cloudflare/workers-types": "npm:^4.20260305.1"
     "@hono/graphql-server": "npm:^0.7.0"
     graphql: "catalog:dev"
-    hono: "npm:^4.12.5"
+    hono: "npm:^4.12.7"
     miniflare: "npm:^4.20260305.0"
     typescript: "catalog:dev"
     wrangler: "npm:^4.70.0"
@@ -2027,7 +2027,7 @@ __metadata:
     "@cloudflare/workers-types": "npm:^4.20260305.1"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
-    hono: "npm:^4.12.5"
+    hono: "npm:^4.12.7"
     miniflare: "npm:^4.20260305.0"
     typescript: "catalog:dev"
     wrangler: "npm:^4.70.0"
@@ -13731,10 +13731,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.12.5":
-  version: 4.12.5
-  resolution: "hono@npm:4.12.5"
-  checksum: 10/3d03cf2885f7c75325869a178bc94291a17a656002b930dc91456cb177366f6f344c7c90c09707c1fcb4c6e40b1f33fac98f1622628061628cabadcf8cf6d3fd
+"hono@npm:^4.12.7":
+  version: 4.12.9
+  resolution: "hono@npm:4.12.9"
+  checksum: 10/2466bab60ef6ca568f1636f27e0b735ce1a7c6f3a03bb2aa5bcab5b67e3a6ed6cb59edaddb5f836fbeb627804fb4c0ac21e59e73345e9e640b3fbd765163b9ed
   languageName: node
   linkType: hard
 

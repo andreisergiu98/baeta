@@ -1782,7 +1782,6 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@types/lodash.throttle": "npm:^4.1.9"
     "@types/node": "catalog:dev"
     "@types/react": "catalog:dev"
     "@types/yargs": "npm:^17.0.35"
@@ -2271,13 +2270,11 @@ __metadata:
   resolution: "@baeta/extension-cache-cloudflare@workspace:packages/extension-cache-cloudflare"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260305.1"
-    graphql: "catalog:dev"
     miniflare: "npm:^4.20260305.0"
     typescript: "catalog:dev"
   peerDependencies:
@@ -2291,13 +2288,11 @@ __metadata:
   resolution: "@baeta/extension-cache-keyv@workspace:packages/extension-cache-keyv"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@keyv/etcd": "npm:^2.1.1"
-    graphql: "catalog:dev"
     keyv: "npm:^5.6.0"
     typescript: "catalog:dev"
   peerDependencies:
@@ -2311,12 +2306,10 @@ __metadata:
   resolution: "@baeta/extension-cache-redis@workspace:packages/extension-cache-redis"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    graphql: "catalog:dev"
     ioredis: "npm:^5.10.0"
     typescript: "catalog:dev"
   peerDependencies:
@@ -2330,13 +2323,11 @@ __metadata:
   resolution: "@baeta/extension-cache-upstash@workspace:packages/extension-cache-upstash"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/core": "workspace:^"
     "@baeta/extension-cache": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-stores": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@upstash/redis": "npm:^1.36.3"
-    graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
     "@baeta/extension-cache": "workspace:^"
@@ -2357,7 +2348,6 @@ __metadata:
     dataloader: "npm:^2.2.3"
     flat: "npm:^6.0.1"
     graphql: "catalog:dev"
-    minimatch: "npm:^10.2.4"
     typescript: "catalog:dev"
   peerDependencies:
     "@baeta/core": "workspace:^"
@@ -2407,7 +2397,6 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@baeta/util-path": "workspace:^"
     "@types/node": "catalog:dev"
     typescript: "catalog:dev"
   languageName: unknown
@@ -2431,6 +2420,7 @@ __metadata:
     "@baeta/extension-cache-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@cloudflare/workers-types": ^4
+    graphql: ^16.6.0
   peerDependenciesMeta:
     "@baeta/extension-cache-cloudflare":
       optional: true
@@ -2450,7 +2440,6 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
     "@types/node": "catalog:dev"
-    graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
     "@baeta/directives": "workspace:^"
@@ -2515,7 +2504,6 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
     "@types/node": "catalog:dev"
-    graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
     graphql: ^16.6.0
@@ -2533,7 +2521,6 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
     "@types/node": "catalog:dev"
-    execa: "npm:^9.6.1"
     typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
@@ -8023,22 +8010,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/e009a2bfb50e90ca9b7c6e8f648f8464067271fd99116f881073fa6fa76dc8d0133181dd65e6614d5fb1220d671d67b0124aef7d97dc02d7e342ab143a47779d
-  languageName: node
-  linkType: hard
-
-"@types/lodash.throttle@npm:^4.1.9":
-  version: 4.1.9
-  resolution: "@types/lodash.throttle@npm:4.1.9"
-  dependencies:
-    "@types/lodash": "npm:*"
-  checksum: 10/6d330072387f062d408747f0dbe62869820ee3f3fbec43965f703ce9c9083e4ff9082faa4fe92aea000d6367b7645955e9c8db6a4e04e6bd769697fdd19c12b1
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:*":
-  version: 4.17.24
-  resolution: "@types/lodash@npm:4.17.24"
-  checksum: 10/0f2082565f60f9787eefc046edc38458054512be5a8b3584ef0bad5fd9e85d0ab55ec5a1fbfae1ed6ba015cf1f9e837d5fb4da1f99fc60b8f74b2a46146fb00f
   languageName: node
   linkType: hard
 
@@ -16652,7 +16623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^10.2.2, minimatch@npm:^10.2.4":
+"minimatch@npm:^10.2.2":
   version: 10.2.4
   resolution: "minimatch@npm:10.2.4"
   dependencies:

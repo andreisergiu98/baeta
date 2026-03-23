@@ -40,6 +40,7 @@
   "scripts": {
     "prebuild": "yarn write:apollo:versions && yarn write:yoga:versions",
     "build": "yarn prebuild && builder build",
+    "check:deps": "builder check-deps",
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test",

@@ -114,10 +114,6 @@ function enforceWorkspaceMetadata({ Yarn }) {
 				workspace.set('scripts.types', 'yarn prebuild && tsc --noEmit');
 			}
 
-			workspace.set('devDependencies.@baeta/builder', 'workspace:^');
-			workspace.set('devDependencies.@baeta/testing', 'workspace:^');
-			workspace.set('devDependencies.@baeta/tsconfig', 'workspace:^');
-
 			workspace.set('scripts.prepack', 'builder prepare');
 			workspace.set('scripts.postpack', 'builder prepare --restore');
 			if (workspace.manifest.name.startsWith('@baeta/extension-cache')) {
@@ -126,6 +122,11 @@ function enforceWorkspaceMetadata({ Yarn }) {
 				workspace.set('scripts.test', 'builder test');
 			}
 			workspace.set('scripts.test:circular', 'builder test-circular');
+			workspace.set('scripts.check:deps', 'builder check-deps');
+
+			workspace.set('devDependencies.@baeta/builder', 'workspace:^');
+			workspace.set('devDependencies.@baeta/testing', 'workspace:^');
+			workspace.set('devDependencies.@baeta/tsconfig', 'workspace:^');
 
 			workspace.set('ava.extensions.ts', 'module');
 

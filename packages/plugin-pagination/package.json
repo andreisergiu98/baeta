@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "builder build",
+    "check:deps": "builder check-deps",
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test",
@@ -58,7 +59,6 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "catalog:dev",
-    "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {

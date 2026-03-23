@@ -42,6 +42,7 @@
   ],
   "scripts": {
     "build": "builder build",
+    "check:deps": "builder check-deps",
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test --skip-coverage",
@@ -55,13 +56,11 @@
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/core": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-stores": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20260305.1",
-    "graphql": "catalog:dev",
     "miniflare": "^4.20260305.0",
     "typescript": "catalog:dev"
   },

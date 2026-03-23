@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "builder build",
+    "check:deps": "builder check-deps",
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test",

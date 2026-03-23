@@ -1,5 +1,5 @@
 {
-  "name": "@baeta/cache-redis",
+  "name": "@baeta/cache-redis-common",
   "version": "2.0.0-next.11",
   "keywords": [
     "baeta",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/cache-redis"
+    "directory": "packages/cache-redis-common"
   },
   "license": "MIT",
   "author": {
@@ -52,16 +52,9 @@
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
-    "@baeta/cache": "workspace:^",
     "@baeta/testing": "workspace:^",
-    "@baeta/tests-cache-clients": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "ioredis": "^5.10.0",
     "typescript": "catalog:dev"
-  },
-  "peerDependencies": {
-    "@baeta/cache": "workspace:^",
-    "ioredis": "^5.10.0"
   },
   "engines": {
     "node": ">=22.20.0"

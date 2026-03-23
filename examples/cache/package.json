@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@baeta/cache": "workspace:^",
-    "@baeta/cache-redis": "workspace:^",
+    "@baeta/cache-ioredis": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@baeta/extension-cache": "workspace:^",

@@ -1,4 +1,4 @@
-import { RedisCacheClient } from '@baeta/cache-redis';
+import { RedisCacheClient } from '@baeta/cache-ioredis';
 import { cacheExtension } from '@baeta/extension-cache';
 import Redis from 'ioredis';
 

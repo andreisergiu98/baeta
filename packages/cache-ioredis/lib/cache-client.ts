@@ -1,61 +1,60 @@
 import type { ItemCacheKey, QueryCacheIndexKey, QueryCacheKey } from '@baeta/cache';
 import { CacheClient, type CacheClientArgs, type CacheClientOptions } from '@baeta/cache';
 import { doBatched } from '@baeta/cache/sdk';
-import { batchPipeline, createRedisScripts, type RedisScripts } from '@baeta/cache-redis-common';
-import { Redis, type RedisConfigNodejs } from '@upstash/redis';
+import {
+	assertNoPipelineErrors,
+	batchPipeline,
+	createRedisScripts,
+	type RedisScripts,
+} from '@baeta/cache-redis-common';
+import type Redis from 'ioredis';
+import type { Cluster as RedisCluster } from 'ioredis';
 
 const INDEX_BUFFER_MS = 1_000;
-const MAX_PIPELINE_SIZE_LIMIT = 10 * 1024 * 1024; // 10MB
-const MAX_PIPELINE_COMMAND_LIMIT = 50_000;
-const MAX_COMMAND_KEYS_LIMIT = 50_000;
+const MAX_PIPELINE_SIZE_LIMIT = 50 * 1024 * 1024; // 50MB
+const MAX_PIPELINE_COMMAND_LIMIT = 100_000;
+const MAX_COMMAND_KEYS_LIMIT = 100_000;
 
-interface UpstashCacheClientOptions extends CacheClientOptions {
+export interface RedisCacheClientOptions extends CacheClientOptions {
 	/**
 	 * Maximum total size of commands in a single pipeline batch. If the batch exceeds this size, it will be executed immediately.
-	 * @defaultValue 10 * 1024 * 1024 (10MB)
+	 * @defaultValue 50 * 1024 * 1024 (50MB)
 	 */
 	maxPipelineSizeLimit?: number;
 	/**
 	 * Maximum number of commands in a single pipeline batch. If the batch exceeds this number, it will be executed immediately.
-	 * @defaultValue 50_000
+	 * @defaultValue 100_000
 	 */
 	maxPipelineCommandLimit?: number;
 	/**
 	 * Maximum number of keys in a single command. If the number of keys exceeds this limit, multiple commands will be executed.
-	 * @defaultValue 50_000
+	 * @defaultValue 100_000
 	 */
 	maxCommandKeysLimit?: number;
 }
 
-export class UpstashCacheClient extends CacheClient {
-	redis: Redis;
+export class RedisCacheClient extends CacheClient {
+	redis: Redis | RedisCluster;
 	protected maxPipelineSizeLimit: number;
 	protected maxPipelineCommandLimit: number;
 	protected maxCommandKeysLimit: number;
 	protected scripts: RedisScripts;
 
-	constructor(
-		redisOptions: Omit<RedisConfigNodejs, 'automaticDeserialization'>,
-		options?: UpstashCacheClientOptions,
-	) {
+	constructor(redis: Redis | RedisCluster, options?: RedisCacheClientOptions) {
 		super({
 			namespace: options?.namespace,
 			revision: options?.revision,
 			ttlMs: options?.ttlMs,
-		});
-		const redis = new Redis({
-			...redisOptions,
-			automaticDeserialization: false,
 		});
 		this.redis = redis;
 		this.maxPipelineSizeLimit = options?.maxPipelineSizeLimit ?? MAX_PIPELINE_SIZE_LIMIT;
 		this.maxPipelineCommandLimit = options?.maxPipelineCommandLimit ?? MAX_PIPELINE_COMMAND_LIMIT;
 		this.maxCommandKeysLimit = options?.maxCommandKeysLimit ?? MAX_COMMAND_KEYS_LIMIT;
 		const loadScript = async (script: string) => {
-			return await this.redis.scriptLoad(script);
+			return await this.redis.script('LOAD', script);
 		};
 		const evalSha = async (sha: string, keys: string[], args: string[]) => {
-			return await this.redis.evalsha(sha, keys, args);
+			return await this.redis.evalsha(sha, keys.length, ...keys, ...args);
 		};
 		this.scripts = createRedisScripts(loadScript, evalSha);
 	}
@@ -69,7 +68,7 @@ export class UpstashCacheClient extends CacheClient {
 		}
 		const values: Array<Item | null> = [];
 		await doBatched(keys, this.maxCommandKeysLimit, async (batch) => {
-			const batchValues = await this.redis.mget<string[]>(batch);
+			const batchValues = await this.redis.mget(batch);
 			for (const value of batchValues) {
 				values.push(value == null ? null : options.parse(value));
 			}
@@ -92,10 +91,14 @@ export class UpstashCacheClient extends CacheClient {
 		await batchPipeline({
 			makePipeline: () => this.redis.pipeline(),
 			addCommand: (pipeline, item) => {
-				pipeline.set(item.key, item.value, { pxat: expiresAt });
+				pipeline.set(item.key, item.value, 'PXAT', expiresAt);
 			},
 			executePipeline: async (pipeline) => {
-				await pipeline.exec();
+				const result = await pipeline.exec();
+				if (result == null) {
+					throw new Error('Unexpected null result from Redis pipeline');
+				}
+				assertNoPipelineErrors(result);
 				return [];
 			},
 			estimateSize: (item) => {
@@ -140,7 +143,7 @@ export class UpstashCacheClient extends CacheClient {
 			return;
 		}
 		await doBatched(keys, this.maxCommandKeysLimit, async (batch) => {
-			await this.redis.unlink(...batch);
+			await this.redis.unlink(batch);
 		});
 	}
 
@@ -167,7 +170,7 @@ export class UpstashCacheClient extends CacheClient {
 		key: QueryCacheKey,
 		options: CacheClientArgs<QueryMetadata>,
 	): Promise<QueryMetadata | null> {
-		const meta = await this.redis.get<string>(key);
+		const meta = await this.redis.get(key);
 		return meta == null ? null : options.parse(meta);
 	}
 
@@ -180,13 +183,14 @@ export class UpstashCacheClient extends CacheClient {
 		const now = Date.now();
 		const expiresAt = now + options.ttlMs;
 		const pipeline = this.redis.pipeline();
-		pipeline.set(key, options.serialize(metadata), { pxat: expiresAt });
+		pipeline.set(key, options.serialize(metadata), 'PXAT', expiresAt);
 		for (const indexKey of indexes) {
-			pipeline.zadd(indexKey, { score: expiresAt, member: key });
-			pipeline.pexpireat(indexKey, expiresAt + INDEX_BUFFER_MS);
+			pipeline.zadd(indexKey, expiresAt, key);
 			pipeline.zremrangebyscore(indexKey, '-inf', now - INDEX_BUFFER_MS);
+			pipeline.pexpireat(indexKey, expiresAt + INDEX_BUFFER_MS);
 		}
-		await pipeline.exec();
+		const result = await pipeline.exec();
+		assertNoPipelineErrors(result);
 	}
 
 	async deleteQueries(indexes: QueryCacheIndexKey[]): Promise<void> {

@@ -38,7 +38,7 @@ export class CloudflareCacheClient extends CacheClient {
 			key,
 			options.serialize(value),
 		]);
-		await this.client.saveItems({ items: serialized, ttlMs: options.ttlMs });
+		await this.client.saveItems({ items: serialized, expiresAt: Date.now() + options.ttlMs });
 	}
 
 	async saveItemsWithDiff<Item>(
@@ -54,7 +54,7 @@ export class CloudflareCacheClient extends CacheClient {
 		]);
 		const result = await this.client.saveItemsWithDiff({
 			items: serialized,
-			ttlMs: options.ttlMs,
+			expiresAt: Date.now() + options.ttlMs,
 		});
 		return result.map((value) => (value === null ? null : options.parse(value)));
 	}
@@ -95,7 +95,7 @@ export class CloudflareCacheClient extends CacheClient {
 			key,
 			indexes,
 			metadata: options.serialize(metadata),
-			ttlMs: options.ttlMs,
+			expiresAt: Date.now() + options.ttlMs,
 		});
 	}
 

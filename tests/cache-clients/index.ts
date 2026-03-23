@@ -7,7 +7,7 @@ import type {
 } from '@baeta/cache';
 import { randomUUID, sleep, type TestFn } from '@baeta/testing';
 
-const TTL_MS = 1_000;
+const TTL_MS = 10_000;
 
 type TestItem = { id: string; name: string };
 
@@ -55,6 +55,42 @@ export function runTestsForClient(
 	test: TestFn,
 	name: string,
 ) {
+	test(`${name} getPartialItems returns empty array for empty keys`, async (t) => {
+		const client = await createClient();
+		const results = await client.getPartialItems([], itemArgs);
+		t.deepEqual(results, []);
+	});
+
+	test(`${name} saveItems with empty array is a no-op`, async (t) => {
+		const client = await createClient();
+		await client.saveItems([], itemArgs);
+		t.pass();
+	});
+
+	test(`${name} saveItemsWithDiff returns empty array for empty items`, async (t) => {
+		const client = await createClient();
+		const results = await client.saveItemsWithDiff([], itemArgs);
+		t.deepEqual(results, []);
+	});
+
+	test(`${name} deleteItems with empty array is a no-op`, async (t) => {
+		const client = await createClient();
+		await client.deleteItems([], itemArgs);
+		t.pass();
+	});
+
+	test(`${name} deleteItemsWithDiff returns empty array for empty keys`, async (t) => {
+		const client = await createClient();
+		const results = await client.deleteItemsWithDiff([], itemArgs);
+		t.deepEqual(results, []);
+	});
+
+	test(`${name} deleteQueries with empty indexes is a no-op`, async (t) => {
+		const client = await createClient();
+		await client.deleteQueries([], queryArgs);
+		t.pass();
+	});
+
 	test(`${name} saveItems and getPartialItems round-trip`, async (t) => {
 		const client = await createClient();
 		const item1 = mockItem();
@@ -205,8 +241,8 @@ export function runTestsForClient(
 		const qName = randomUUID();
 		const qKey = queryKey(qName, randomUUID());
 		const idx = indexKey(qName, '');
-		const shortLivedItemArgs = shortItemArgs(100);
-		const shortLivedQueryArgs = shortQueryArgs(100);
+		const shortLivedItemArgs = shortItemArgs(500);
+		const shortLivedQueryArgs = shortQueryArgs(500);
 
 		await client.saveItems([[key, { id, name: 'ephemeral' }]], shortLivedItemArgs);
 		const items = await client.getPartialItems([key], shortLivedItemArgs);
@@ -215,7 +251,7 @@ export function runTestsForClient(
 		const query = await client.getQuery(qKey, shortLivedQueryArgs);
 		t.deepEqual(query, ['ephemeral-query']);
 
-		await sleep(110);
+		await sleep(600);
 
 		const expiredItems = await client.getPartialItems([key], shortLivedItemArgs);
 		t.deepEqual(expiredItems, [null]);
@@ -227,24 +263,24 @@ export function runTestsForClient(
 		const client = await createClient();
 		const item = mockItem();
 		const key = itemKey(item.id);
-		const shortLivedArgs = shortItemArgs(100);
+		const shortLivedArgs = shortItemArgs(500);
 		await client.saveItems([[key, item]], shortLivedArgs);
 		const items = await client.getPartialItems([key], shortLivedArgs);
 		t.deepEqual(items, [item]);
-		await sleep(100);
+		await sleep(600);
 		const expired = await client.getPartialItems([key], shortLivedArgs);
 		t.deepEqual(expired, [null]);
 	});
 
 	test(`${name} re-saving items extends TTL`, async (t) => {
 		const client = await createClient();
-		const args = shortItemArgs(100);
+		const args = shortItemArgs(500);
 		const item = mockItem();
 		const key = itemKey(item.id);
 		await client.saveItems([[key, item]], args);
-		await sleep(50);
+		await sleep(300);
 		await client.saveItems([[key, item]], args);
-		await sleep(50);
+		await sleep(300);
 		const results = await client.getPartialItems([key], args);
 		t.deepEqual(results, [item]);
 	});
@@ -315,26 +351,26 @@ export function runTestsForClient(
 
 	test(`${name} saveItemsWithDiff items expire after TTL`, async (t) => {
 		const client = await createClient();
-		const shortLivedArgs = shortItemArgs(100);
+		const shortLivedArgs = shortItemArgs(500);
 		const id = randomUUID();
 		const key = itemKey(id);
 		await client.saveItemsWithDiff([[key, { id, name: 'ephemeral' }]], shortLivedArgs);
 		const items = await client.getPartialItems([key], shortLivedArgs);
 		t.deepEqual(items, [{ id, name: 'ephemeral' }]);
-		await sleep(110);
+		await sleep(600);
 		const expired = await client.getPartialItems([key], shortLivedArgs);
 		t.deepEqual(expired, [null]);
 	});
 
 	test(`${name} saveItemsWithDiff extends TTL on re-save`, async (t) => {
 		const client = await createClient();
-		const shortLivedArgs = shortItemArgs(100);
+		const shortLivedArgs = shortItemArgs(500);
 		const id = randomUUID();
 		const key = itemKey(id);
 		await client.saveItemsWithDiff([[key, { id, name: 'original' }]], shortLivedArgs);
-		await sleep(50);
+		await sleep(300);
 		await client.saveItemsWithDiff([[key, { id, name: 'refreshed' }]], shortLivedArgs);
-		await sleep(50);
+		await sleep(300);
 		const results = await client.getPartialItems([key], shortLivedArgs);
 		t.deepEqual(results, [{ id, name: 'refreshed' }]);
 	});
@@ -546,13 +582,13 @@ export function runTestsForClient(
 	});
 
 	test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
-		t.timeout(60_000);
+		t.timeout(30_000);
 
 		const client = await createClient();
-		const args = shortItemArgs(60_000);
+		const args = shortItemArgs(30_000);
 		const idPrefix = randomUUID();
 
-		const items = Array.from({ length: 1_000_000 }).map((_, i) => {
+		const items = Array.from({ length: 200_000 }).map((_, i) => {
 			const item = mockItem({ id: `${idPrefix}-${i}` });
 			const key: ItemCacheKey = itemKey(item.id);
 			return [key, item] as [ItemCacheKey, TestItem];

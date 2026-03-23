@@ -1791,30 +1791,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/cache-keyv@workspace:packages/cache-keyv":
+"@baeta/cache-ioredis@workspace:^, @baeta/cache-ioredis@workspace:packages/cache-ioredis":
   version: 0.0.0-use.local
-  resolution: "@baeta/cache-keyv@workspace:packages/cache-keyv"
+  resolution: "@baeta/cache-ioredis@workspace:packages/cache-ioredis"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/cache": "workspace:^"
-    "@baeta/testing": "workspace:^"
-    "@baeta/tests-cache-clients": "workspace:^"
-    "@baeta/tsconfig": "workspace:^"
-    "@keyv/etcd": "npm:^2.1.1"
-    keyv: "npm:^6.0.0-alpha.2"
-    typescript: "catalog:dev"
-  peerDependencies:
-    "@baeta/cache": "workspace:^"
-    keyv: ^6.0.0-alpha.2
-  languageName: unknown
-  linkType: soft
-
-"@baeta/cache-redis@workspace:^, @baeta/cache-redis@workspace:packages/cache-redis":
-  version: 0.0.0-use.local
-  resolution: "@baeta/cache-redis@workspace:packages/cache-redis"
-  dependencies:
-    "@baeta/builder": "workspace:^"
-    "@baeta/cache": "workspace:^"
+    "@baeta/cache-redis-common": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
@@ -1826,12 +1809,42 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/cache-iovalkey@workspace:packages/cache-iovalkey":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-iovalkey@workspace:packages/cache-iovalkey"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cache": "workspace:^"
+    "@baeta/cache-redis-common": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tests-cache-clients": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    iovalkey: "npm:^0.3.3"
+    typescript: "catalog:dev"
+  peerDependencies:
+    "@baeta/cache": "workspace:^"
+    iovalkey: ^0.3.3
+  languageName: unknown
+  linkType: soft
+
+"@baeta/cache-redis-common@workspace:^, @baeta/cache-redis-common@workspace:packages/cache-redis-common":
+  version: 0.0.0-use.local
+  resolution: "@baeta/cache-redis-common@workspace:packages/cache-redis-common"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/cache-upstash@workspace:packages/cache-upstash":
   version: 0.0.0-use.local
   resolution: "@baeta/cache-upstash@workspace:packages/cache-upstash"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/cache": "workspace:^"
+    "@baeta/cache-redis-common": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
@@ -2026,7 +2039,7 @@ __metadata:
   resolution: "@baeta/examples-cache@workspace:examples/cache"
   dependencies:
     "@baeta/cache": "workspace:^"
-    "@baeta/cache-redis": "workspace:^"
+    "@baeta/cache-ioredis": "workspace:^"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/directives": "workspace:^"
@@ -4933,44 +4946,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grpc/grpc-js@npm:^1.8.20":
-  version: 1.14.3
-  resolution: "@grpc/grpc-js@npm:1.14.3"
-  dependencies:
-    "@grpc/proto-loader": "npm:^0.8.0"
-    "@js-sdsl/ordered-map": "npm:^4.4.2"
-  checksum: 10/bb9bfe2f749179ae5ac7774d30486dfa2e0b004518c28de158b248e0f6f65f40138f01635c48266fa540670220f850216726e3724e1eb29d078817581c96e4db
-  languageName: node
-  linkType: hard
-
-"@grpc/proto-loader@npm:^0.7.8":
-  version: 0.7.15
-  resolution: "@grpc/proto-loader@npm:0.7.15"
-  dependencies:
-    lodash.camelcase: "npm:^4.3.0"
-    long: "npm:^5.0.0"
-    protobufjs: "npm:^7.2.5"
-    yargs: "npm:^17.7.2"
-  bin:
-    proto-loader-gen-types: build/bin/proto-loader-gen-types.js
-  checksum: 10/2e2b33ace8bc34211522751a9e654faf9ac997577a9e9291b1619b4c05d7878a74d2101c3bc43b2b2b92bca7509001678fb191d4eb100684cc2910d66f36c373
-  languageName: node
-  linkType: hard
-
-"@grpc/proto-loader@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@grpc/proto-loader@npm:0.8.0"
-  dependencies:
-    lodash.camelcase: "npm:^4.3.0"
-    long: "npm:^5.0.0"
-    protobufjs: "npm:^7.5.3"
-    yargs: "npm:^17.7.2"
-  bin:
-    proto-loader-gen-types: build/bin/proto-loader-gen-types.js
-  checksum: 10/216813bdca52cd3a84ac355ad93c2c3f54252be47327692fe666fd85baa5b1d50aa681ebc5626ab08926564fb2deae3b2ea435aa5bd883197650bbe56f2ae108
-  languageName: node
-  linkType: hard
-
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -5488,6 +5463,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iovalkey/commands@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@iovalkey/commands@npm:0.1.0"
+  checksum: 10/9226ad4b26b8b3bf8446f4aa95bc0ae45bef0d15af7f087a3484e7f4f50f3f8741ba03f4355ebc3b2982d47a2960cb7f39bb83f33256c258fe1ae34bccbc71e1
+  languageName: node
+  linkType: hard
+
 "@isaacs/fs-minipass@npm:^4.0.0":
   version: 4.0.1
   resolution: "@isaacs/fs-minipass@npm:4.0.1"
@@ -5588,13 +5570,6 @@ __metadata:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
   checksum: 10/da0283270e691bdb5543806077548532791608e52386cfbbf3b9e8fb00457859d1bd01d512851161c886eb3a2f3ce6fd9bcf25db8edf3bddedd275bd4a88d606
-  languageName: node
-  linkType: hard
-
-"@js-sdsl/ordered-map@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "@js-sdsl/ordered-map@npm:4.4.2"
-  checksum: 10/ac64e3f0615ecc015461c9f527f124d2edaa9e68de153c1e270c627e01e83d046522d7e872692fd57a8c514578b539afceff75831c0d8b2a9a7a347fbed35af4
   languageName: node
   linkType: hard
 
@@ -5835,24 +5810,6 @@ __metadata:
   peerDependencies:
     tslib: 2
   checksum: 10/1a6e5301d725a7161b93ff707eb1a954bf4552a2fa96eee9a960d3ae3ed5f993d18b56dcff29e98036341a5968c5d1b2dfe21f76695390e7f0d89b81f24c85e0
-  languageName: node
-  linkType: hard
-
-"@keyv/etcd@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@keyv/etcd@npm:2.1.1"
-  dependencies:
-    etcd3: "npm:^1.1.2"
-  peerDependencies:
-    keyv: ^5.3.3
-  checksum: 10/0279802aab5dea15f80d1b32454107802242899b6c91bb3f2cf116b5955cd6f07de92b6167f133a54a8edbcd7df7b6c856744cd63456f67530f98ca202a1d512
-  languageName: node
-  linkType: hard
-
-"@keyv/serialize@npm:^6.0.0-alpha.2":
-  version: 6.0.0-alpha.2
-  resolution: "@keyv/serialize@npm:6.0.0-alpha.2"
-  checksum: 10/79dae4ba5e9a4da8ce8b65d5e2d65efef8c5924e4ad31f0af3d7fbf00d5a0e640e14975d58e2d23f80125ab14f855cbc8b7efce0b303e17ae613390f144d7493
   languageName: node
   linkType: hard
 
@@ -8054,7 +8011,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=13.7.0":
+"@types/node@npm:*":
   version: 25.5.0
   resolution: "@types/node@npm:25.5.0"
   dependencies:
@@ -9554,13 +9511,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bignumber.js@npm:^9.1.1":
-  version: 9.3.1
-  resolution: "bignumber.js@npm:9.3.1"
-  checksum: 10/1be0372bf0d6d29d0a49b9e6a9cefbd54dad9918232ad21fcd4ec39030260773abf0c76af960c6b3b98d3115a3a71e61c6a111812d1395040a039cfa178e0245
-  languageName: node
-  linkType: hard
-
 "binary-extensions@npm:^2.0.0":
   version: 2.3.0
   resolution: "binary-extensions@npm:2.3.0"
@@ -10472,13 +10422,6 @@ __metadata:
   version: 1.1.2
   resolution: "cluster-key-slot@npm:1.1.2"
   checksum: 10/516ed8b5e1a14d9c3a9c96c72ef6de2d70dfcdbaa0ec3a90bc7b9216c5457e39c09a5775750c272369070308542e671146120153062ab5f2f481bed5de2c925f
-  languageName: node
-  linkType: hard
-
-"cockatiel@npm:^3.1.1":
-  version: 3.2.1
-  resolution: "cockatiel@npm:3.2.1"
-  checksum: 10/b022d588dc1e31db59a17527b89acd6ed52c6d8761402afe112c7688af8836363e260ebf71b6f07c7edd69e62047adbf9fc1b3ffcb9081b7a0a751e6018773a6
   languageName: node
   linkType: hard
 
@@ -12337,18 +12280,6 @@ __metadata:
   version: 1.8.1
   resolution: "etag@npm:1.8.1"
   checksum: 10/571aeb3dbe0f2bbd4e4fadbdb44f325fc75335cd5f6f6b6a091e6a06a9f25ed5392f0863c5442acb0646787446e816f13cbfc6edce5b07658541dff573cab1ff
-  languageName: node
-  linkType: hard
-
-"etcd3@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "etcd3@npm:1.1.2"
-  dependencies:
-    "@grpc/grpc-js": "npm:^1.8.20"
-    "@grpc/proto-loader": "npm:^0.7.8"
-    bignumber.js: "npm:^9.1.1"
-    cockatiel: "npm:^3.1.1"
-  checksum: 10/8ccbecbcbfd151ffd5c551f2ac9a3b6f837c6128bdfa696a917879f34c043cd36a4fed420f88be58a1968720729a1193c3eeecca3e96273443cd9e902f22fcc5
   languageName: node
   linkType: hard
 
@@ -14239,6 +14170,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"iovalkey@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "iovalkey@npm:0.3.3"
+  dependencies:
+    "@iovalkey/commands": "npm:^0.1.0"
+    cluster-key-slot: "npm:^1.1.0"
+    debug: "npm:^4.3.4"
+    denque: "npm:^2.1.0"
+    lodash.defaults: "npm:^4.2.0"
+    lodash.isarguments: "npm:^3.1.0"
+    redis-errors: "npm:^1.2.0"
+    redis-parser: "npm:^3.0.0"
+    standard-as-callback: "npm:^2.1.0"
+  checksum: 10/39368842e6a9dbc85e92dfcd4c1c917a76240bac5c4210e19a0bd3bc7984af9b567dce5de7c560c4517d5d4cb03af229f38582c1dd055c6fd452060774318e8c
+  languageName: node
+  linkType: hard
+
 "ip-address@npm:^10.0.1":
   version: 10.1.0
   resolution: "ip-address@npm:10.1.0"
@@ -14935,15 +14883,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keyv@npm:^6.0.0-alpha.2":
-  version: 6.0.0-alpha.2
-  resolution: "keyv@npm:6.0.0-alpha.2"
-  dependencies:
-    "@keyv/serialize": "npm:^6.0.0-alpha.2"
-  checksum: 10/3764855048202c403511df1b8cffebd3c79228da531635d6385f34d36fc3b7c5b8d7c771767a545a1fd34ae4ea9a7850050168ca8da6c448ceafef7f42044cfb
-  languageName: node
-  linkType: hard
-
 "kind-of@npm:^6.0.0, kind-of@npm:^6.0.2":
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
@@ -15223,13 +15162,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.camelcase@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "lodash.camelcase@npm:4.3.0"
-  checksum: 10/c301cc379310441dc73cd6cebeb91fb254bea74e6ad3027f9346fc43b4174385153df420ffa521654e502fd34c40ef69ca4e7d40ee7129a99e06f306032bfc65
-  languageName: node
-  linkType: hard
-
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -15347,7 +15279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"long@npm:^5.0.0, long@npm:^5.2.1":
+"long@npm:^5.2.1":
   version: 5.3.2
   resolution: "long@npm:5.3.2"
   checksum: 10/b6b55ddae56fcce2864d37119d6b02fe28f6dd6d9e44fd22705f86a9254b9321bd69e9ffe35263b4846d54aba197c64882adcb8c543f2383c1e41284b321ea64
@@ -18908,26 +18840,6 @@ __metadata:
   version: 1.2.4
   resolution: "proto-list@npm:1.2.4"
   checksum: 10/9cc3b46d613fa0d637033b225db1bc98e914c3c05864f7adc9bee728192e353125ef2e49f71129a413f6333951756000b0e54f299d921f02d3e9e370cc994100
-  languageName: node
-  linkType: hard
-
-"protobufjs@npm:^7.2.5, protobufjs@npm:^7.5.3":
-  version: 7.5.4
-  resolution: "protobufjs@npm:7.5.4"
-  dependencies:
-    "@protobufjs/aspromise": "npm:^1.1.2"
-    "@protobufjs/base64": "npm:^1.1.2"
-    "@protobufjs/codegen": "npm:^2.0.4"
-    "@protobufjs/eventemitter": "npm:^1.1.0"
-    "@protobufjs/fetch": "npm:^1.1.0"
-    "@protobufjs/float": "npm:^1.0.2"
-    "@protobufjs/inquire": "npm:^1.1.0"
-    "@protobufjs/path": "npm:^1.1.2"
-    "@protobufjs/pool": "npm:^1.1.0"
-    "@protobufjs/utf8": "npm:^1.1.0"
-    "@types/node": "npm:>=13.7.0"
-    long: "npm:^5.0.0"
-  checksum: 10/88d677bb6f11a2ecec63fdd053dfe6d31120844d04e865efa9c8fbe0674cd077d6624ecfdf014018a20dcb114ae2a59c1b21966dd8073e920650c71370966439
   languageName: node
   linkType: hard
 

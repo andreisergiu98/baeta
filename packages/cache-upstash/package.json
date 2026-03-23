@@ -50,6 +50,9 @@
       "ts": "module"
     }
   },
+  "dependencies": {
+    "@baeta/cache-redis-common": "workspace:^"
+  },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/cache": "workspace:^",

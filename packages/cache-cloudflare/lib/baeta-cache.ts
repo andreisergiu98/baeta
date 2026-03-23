@@ -23,12 +23,12 @@ export class BaetaCache extends DurableObject {
 		this.migrate();
 		this.handler = createActionsRequestHandler(actions, {
 			getPartialItems: (args) => this.getPartialItems(args.keys),
-			saveItems: (args) => this.saveItems(args.items, args.ttlMs),
-			saveItemsWithDiff: (args) => this.saveItemsWithDiff(args.items, args.ttlMs),
+			saveItems: (args) => this.saveItems(args.items, args.expiresAt),
+			saveItemsWithDiff: (args) => this.saveItemsWithDiff(args.items, args.expiresAt),
 			deleteItems: (args) => this.deleteItems(args.keys),
 			deleteItemsWithDiff: (args) => this.deleteItemsWithDiff(args.keys),
 			getQuery: (args) => this.getQuery(args.key),
-			saveQuery: (args) => this.saveQuery(args.key, args.indexes, args.metadata, args.ttlMs),
+			saveQuery: (args) => this.saveQuery(args.key, args.indexes, args.metadata, args.expiresAt),
 			deleteQueries: (args) => this.deleteQueries(args.indexes),
 		});
 	}
@@ -64,14 +64,13 @@ export class BaetaCache extends DurableObject {
 	}
 
 	getPartialItems(keys: string[]) {
-		const now = Date.now();
 		const results: (string | null)[] = [];
 		for (const batch of batchByParams(keys, 1)) {
 			const placeholders = batch.map(() => '?').join(',');
 			const rows = this.sql.exec<{ key: string; value: string }>(
 				`SELECT key, value FROM items WHERE key IN (${placeholders}) AND expires_at > ?`,
 				...batch,
-				now,
+				Date.now(),
 			);
 			const map = new Map<string, string>();
 			for (const row of rows) {
@@ -84,8 +83,7 @@ export class BaetaCache extends DurableObject {
 		return results;
 	}
 
-	async saveItems(items: Array<[string, string]>, ttlMs: number) {
-		const expiresAt = Date.now() + ttlMs;
+	async saveItems(items: Array<[string, string]>, expiresAt: number) {
 		for (const batch of batchByParams(items, 3)) {
 			const placeholders = batch.map(() => '(?, ?, ?)').join(',');
 			this.sql.exec(
@@ -96,11 +94,9 @@ export class BaetaCache extends DurableObject {
 		await this.ensureAlarm();
 	}
 
-	async saveItemsWithDiff(items: Array<[string, string]>, ttlMs: number) {
+	async saveItemsWithDiff(items: Array<[string, string]>, expiresAt: number) {
 		const keys = items.map(([key]) => key);
 		const currentValues = this.getPartialItems(keys);
-		const expiresAt = Date.now() + ttlMs;
-
 		for (const batch of batchByParams(items, 3)) {
 			const placeholders = batch.map(() => '(?, ?, ?)').join(',');
 			this.sql.exec(
@@ -108,7 +104,6 @@ export class BaetaCache extends DurableObject {
 				...batch.flatMap(([key, value]) => [key, value, expiresAt]),
 			);
 		}
-
 		await this.ensureAlarm();
 		return currentValues;
 	}
@@ -138,16 +133,13 @@ export class BaetaCache extends DurableObject {
 		return row?.metadata ? row.metadata : null;
 	}
 
-	async saveQuery(queryKey: string, indexKeys: string[], metadata: string, ttlMs: number) {
-		const expiresAt = Date.now() + ttlMs;
-
+	async saveQuery(queryKey: string, indexKeys: string[], metadata: string, expiresAt: number) {
 		this.sql.exec(
 			'INSERT OR REPLACE INTO queries (key, metadata, expires_at) VALUES (?, ?, ?)',
 			queryKey,
 			metadata,
 			expiresAt,
 		);
-
 		for (const batch of batchByParams(indexKeys, 3)) {
 			const placeholders = batch.map(() => '(?, ?, ?)').join(',');
 			this.sql.exec(
@@ -155,21 +147,18 @@ export class BaetaCache extends DurableObject {
 				...batch.flatMap((indexKey) => [indexKey, queryKey, expiresAt]),
 			);
 		}
-
 		await this.ensureAlarm();
 	}
 
 	deleteQueries(indexKeys: string[]) {
 		for (const batch of batchByParams(indexKeys, 1)) {
 			const placeholders = batch.map(() => '?').join(',');
-
 			this.sql.exec(
 				`DELETE FROM queries WHERE key IN (
 					SELECT query_key FROM query_indexes WHERE index_key IN (${placeholders})
 				)`,
 				...batch,
 			);
-
 			this.sql.exec(`DELETE FROM query_indexes WHERE index_key IN (${placeholders})`, ...batch);
 		}
 	}

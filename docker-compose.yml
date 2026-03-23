@@ -10,6 +10,17 @@ services:
       timeout: 3s
       retries: 30
 
+  valkey-test:
+    image: valkey/valkey:8-alpine
+    ports:
+      - "65534:6379"
+    command: valkey-server --save "" --appendonly no
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
   serverless-redis-http:
     ports:
       - "60080:80"
@@ -18,18 +29,3 @@ services:
       SRH_MODE: env
       SRH_TOKEN: example_token
       SRH_CONNECTION_STRING: "redis://redis-test:6379/1"
-
-  etcd-test:
-    image: gcr.io/etcd-development/etcd:v3.6.5
-    ports:
-      - "22379:2379"
-      - "22380:2380"
-    environment:
-      - ALLOW_NONE_AUTHENTICATION=yes
-      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-test:2379
-      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
-    healthcheck:
-      test: ["CMD", "etcdctl", "endpoint", "health"]
-      interval: 1s
-      timeout: 3s
-      retries: 30

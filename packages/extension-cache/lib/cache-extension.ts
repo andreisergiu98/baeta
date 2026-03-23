@@ -1,4 +1,9 @@
-import { type CacheClient, createCache } from '@baeta/cache';
+import {
+	type CacheClient,
+	type CacheOptions,
+	createCache,
+	type RequiredGetRef,
+} from '@baeta/cache';
 import type { ResolverParams } from '@baeta/core';
 import { Extension, type FieldBuilder, type TypeBuilder } from '@baeta/core/sdk';
 
@@ -23,9 +28,8 @@ export class CacheExtension extends Extension<never> {
 	): BaetaExtensions.TypeExtensions<Source, Context, Info> {
 		return {
 			$createCache: (options) => {
-				//@ts-expect-error - name is required but we want to generate it based on the type
 				return createCache<Source>(this.client, {
-					...options,
+					...(options as CacheOptions<Source> & RequiredGetRef<Source>),
 					name: `glq.${builder.type}`,
 				});
 			},

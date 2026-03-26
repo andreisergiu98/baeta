@@ -33,7 +33,7 @@
     "prisma": "cd prisma && pnpify prisma"
   },
   "dependencies": {
-    "@apollo/server": "^5.4.0",
+    "@apollo/server": "^5.5.0",
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@prisma/adapter-better-sqlite3": "^7.4.2",

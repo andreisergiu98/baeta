@@ -1,9 +1,8 @@
 import sinon from 'sinon';
 
-export { default } from 'ava';
-
-export { sinon };
 export * from 'ava';
+export { default } from 'ava';
+export { sinon };
 
 const global = globalThis as typeof globalThis & {
 	crypto: { randomUUID: () => string };

@@ -50,6 +50,19 @@ function mockItem(data?: Partial<TestItem>): TestItem {
 	};
 }
 
+function mockItems(count = 10): {
+	values: TestItem[];
+	keys: ItemCacheKey[];
+	valueTuples: [ItemCacheKey, TestItem][];
+} {
+	const values = Array.from({ length: count }, () => mockItem());
+	return {
+		values,
+		keys: values.map((item) => itemKey(item.id)),
+		valueTuples: values.map((item) => [itemKey(item.id), item] as const),
+	};
+}
+
 export function runTestsForClient(
 	createClient: () => Promise<CacheClient>,
 	test: TestFn,
@@ -93,145 +106,141 @@ export function runTestsForClient(
 
 	test(`${name} saveItems and getPartialItems round-trip`, async (t) => {
 		const client = await createClient();
-		const item1 = mockItem();
-		const item2 = mockItem();
-		const item3 = mockItem();
-		await client.saveItems(
-			[
-				[itemKey(item1.id), item1],
-				[itemKey(item2.id), item2],
-				[itemKey(item3.id), item3],
-			],
-			itemArgs,
-		);
-		const results = await client.getPartialItems(
-			[itemKey(item1.id), itemKey(item2.id), itemKey(item3.id)],
-			itemArgs,
-		);
-		t.deepEqual(results, [
-			{ id: item1.id, name: item1.name },
-			{ id: item2.id, name: item2.name },
-			{ id: item3.id, name: item3.name },
-		]);
+		const { values, keys, valueTuples } = mockItems();
+		await client.saveItems(valueTuples, itemArgs);
+		const results = await client.getPartialItems(keys, itemArgs);
+		t.deepEqual(results, values);
 	});
 
 	test(`${name} getPartialItems returns nulls for missing keys`, async (t) => {
 		const client = await createClient();
-		const item1 = mockItem();
-		const item2 = mockItem();
-		const item3 = mockItem();
-		await client.saveItems(
-			[
-				[itemKey(item1.id), item1],
-				[itemKey(item2.id), item2],
-			],
-			itemArgs,
-		);
+		const { values, keys, valueTuples } = mockItems();
+		await client.saveItems(valueTuples, itemArgs);
 		const results = await client.getPartialItems(
-			[itemKey(item1.id), itemKey(item2.id), itemKey(item3.id)],
+			[...keys, itemKey(randomUUID()), itemKey(randomUUID())],
 			itemArgs,
 		);
-		t.deepEqual(results, [item1, item2, null]);
+		t.deepEqual(results, [...values, null, null]);
 	});
 
 	test(`${name} deleteItems removes items`, async (t) => {
 		const client = await createClient();
-		const item1 = mockItem();
-		const item2 = mockItem();
-		const item3 = mockItem();
-		await client.saveItems(
-			[
-				[itemKey(item1.id), item1],
-				[itemKey(item2.id), item2],
-				[itemKey(item3.id), item3],
-			],
-			itemArgs,
-		);
-		await client.deleteItems([itemKey(item1.id), itemKey(item2.id)], itemArgs);
-		const results = await client.getPartialItems(
-			[itemKey(item1.id), itemKey(item2.id), itemKey(item3.id)],
-			itemArgs,
-		);
-		t.deepEqual(results, [null, null, item3]);
+		const { values, keys, valueTuples } = mockItems(4);
+		await client.saveItems(valueTuples, itemArgs);
+		await client.deleteItems(keys.slice(0, 2), itemArgs);
+		const results = await client.getPartialItems(keys, itemArgs);
+		t.deepEqual(results, [null, null, ...values.slice(2)]);
 	});
 
 	test(`${name} saveQuery + getQuery round-trip`, async (t) => {
 		const client = await createClient();
-		const item1 = mockItem();
-		const item2 = mockItem();
-		const item3 = mockItem();
-		const name = randomUUID();
-		const key = queryKey(name, randomUUID());
-		const idx = indexKey(name, randomUUID());
-		const queryData = [item1.id, item2.id, item3.id];
-
+		const { values } = mockItems();
+		const key = queryKey('TestQuery', randomUUID());
+		const idx = indexKey('TestQuery', randomUUID());
+		const queryData = values.map((v) => v.id);
 		await client.saveQuery(key, [idx], queryData, queryArgs);
 		const result = await client.getQuery(key, queryArgs);
-
 		t.deepEqual(result, queryData);
 	});
 
 	test(`${name} getQuery returns null for missing query`, async (t) => {
 		const client = await createClient();
-		const key = queryKey(randomUUID(), randomUUID());
+		const key = queryKey('TestQuery', randomUUID());
 		const result = await client.getQuery(key, queryArgs);
 		t.is(result, null);
 	});
 
-	test(`${name} queries with different names are independent`, async (t) => {
+	test(`${name} queries with different ids are independent`, async (t) => {
 		const client = await createClient();
-		const qName = randomUUID();
-		const key1 = queryKey(qName, randomUUID());
-		const key2 = queryKey(qName, randomUUID());
-		await client.saveQuery(key1, [], ['first'], queryArgs);
-		await client.saveQuery(key2, [], ['second'], queryArgs);
-		const result1 = await client.getQuery(key1, queryArgs);
-		const result2 = await client.getQuery(key2, queryArgs);
-		t.deepEqual(result1, ['first']);
-		t.deepEqual(result2, ['second']);
+		const key1 = queryKey('TestQuery', randomUUID());
+		const key2 = queryKey('TestQuery', randomUUID());
+		await client.saveQuery(key1, [], ['value1'], queryArgs);
+		await client.saveQuery(key2, [], ['value2'], queryArgs);
+		t.deepEqual(await client.getQuery(key1, queryArgs), ['value1']);
+		t.deepEqual(await client.getQuery(key2, queryArgs), ['value2']);
 	});
 
 	test(`${name} deleteQueries removes queries by index`, async (t) => {
 		const client = await createClient();
-		const qName = randomUUID();
-		const idx = indexKey(qName, 'shared');
-		const key1 = queryKey(qName, randomUUID());
-		const key2 = queryKey(qName, randomUUID());
-		const key3 = queryKey(qName, randomUUID());
-		await client.saveQuery(key1, [idx], ['a'], queryArgs);
-		await client.saveQuery(key2, [idx], ['b'], queryArgs);
-		await client.saveQuery(key3, [idx], ['c'], queryArgs);
 
+		const queryName = `TestQuery_${randomUUID()}`;
+		const idx = indexKey(queryName, 'shared');
+		const keys = Array.from({ length: 10 }, () => queryKey(queryName, randomUUID()));
+
+		await Promise.all(keys.map((key) => client.saveQuery(key, [idx], ['data'], queryArgs)));
 		await client.deleteQueries([idx], queryArgs);
 
-		const result1 = await client.getQuery(key1, queryArgs);
-		const result2 = await client.getQuery(key2, queryArgs);
-		const result3 = await client.getQuery(key3, queryArgs);
-		t.is(result1, null);
-		t.is(result2, null);
-		t.is(result3, null);
+		t.deepEqual(
+			await Promise.all(keys.map((key) => client.getQuery(key, queryArgs))),
+			keys.map(() => null),
+		);
 	});
 
 	test(`${name} deleteQueries by specific index leaves unrelated queries`, async (t) => {
 		const client = await createClient();
-		const qName = randomUUID();
-		const idxAll = indexKey(qName, '');
-		const idxA = indexKey(qName, 'groupA');
-		const idxB = indexKey(qName, 'groupB');
-		const queryA = queryKey(qName, randomUUID());
-		const queryB = queryKey(qName, randomUUID());
-		await client.saveQuery(queryA, [idxA, idxAll], ['fromA'], queryArgs);
-		await client.saveQuery(queryB, [idxB, idxAll], ['fromB'], queryArgs);
-		await client.deleteQueries([idxA], queryArgs);
+		const queryName = `TestQuery_${randomUUID()}`;
+		const idxAll = indexKey(queryName, '');
+		const idxA = indexKey(queryName, 'a');
+		const idxB = indexKey(queryName, 'b');
+		const queries = Array.from({ length: 10 }, (_, i) => ({
+			query: queryKey(queryName, randomUUID()),
+			index: i % 2 === 0 ? idxA : idxB,
+		}));
 
-		const resultA = await client.getQuery(queryA, queryArgs);
-		let resultB = await client.getQuery(queryB, queryArgs);
-		t.is(resultA, null);
-		t.deepEqual(resultB, ['fromB']);
+		await Promise.all(
+			queries.map(({ query, index }) =>
+				client.saveQuery(query, [index, idxAll], ['data'], queryArgs),
+			),
+		);
+
+		let results = await Promise.all(queries.map(({ query }) => client.getQuery(query, queryArgs)));
+		t.deepEqual(
+			results,
+			queries.map(() => ['data']),
+		);
+
+		await client.deleteQueries([idxA], queryArgs);
+		results = await Promise.all(queries.map(({ query }) => client.getQuery(query, queryArgs)));
+		t.deepEqual(
+			results,
+			queries.map(({ index }) => (index === idxA ? null : ['data'])),
+		);
 
 		await client.deleteQueries([idxAll], queryArgs);
-		resultB = await client.getQuery(queryB, queryArgs);
-		t.is(resultB, null);
+		results = await Promise.all(queries.map(({ query }) => client.getQuery(query, queryArgs)));
+		t.deepEqual(
+			results,
+			queries.map(() => null),
+		);
+	});
+
+	test(`${name} items expire after TTL`, async (t) => {
+		const client = await createClient();
+		const item = mockItem();
+		const key = itemKey(item.id);
+
+		const shortLivedArgs = shortItemArgs(500);
+		await client.saveItems([[key, item]], shortLivedArgs);
+		const items = await client.getPartialItems([key], shortLivedArgs);
+		t.deepEqual(items, [item]);
+
+		await sleep(500);
+
+		const expired = await client.getPartialItems([key], shortLivedArgs);
+		t.deepEqual(expired, [null]);
+	});
+
+	test(`${name} re-saving items extends TTL`, async (t) => {
+		const client = await createClient();
+		const args = shortItemArgs(500);
+		const item = mockItem();
+		const key = itemKey(item.id);
+		await client.saveItems([[key, item]], args);
+		await sleep(250);
+		await client.saveItems([[key, item]], args);
+		await sleep(250);
+		const results = await client.getPartialItems([key], args);
+		t.deepEqual(results, [item]);
 	});
 
 	test(`${name} items and queries expire after TTL`, async (t) => {
@@ -257,32 +266,6 @@ export function runTestsForClient(
 		t.deepEqual(expiredItems, [null]);
 		const expiredQuery = await client.getQuery(qKey, shortLivedQueryArgs);
 		t.is(expiredQuery, null);
-	});
-
-	test(`${name} items expire after TTL`, async (t) => {
-		const client = await createClient();
-		const item = mockItem();
-		const key = itemKey(item.id);
-		const shortLivedArgs = shortItemArgs(500);
-		await client.saveItems([[key, item]], shortLivedArgs);
-		const items = await client.getPartialItems([key], shortLivedArgs);
-		t.deepEqual(items, [item]);
-		await sleep(600);
-		const expired = await client.getPartialItems([key], shortLivedArgs);
-		t.deepEqual(expired, [null]);
-	});
-
-	test(`${name} re-saving items extends TTL`, async (t) => {
-		const client = await createClient();
-		const args = shortItemArgs(500);
-		const item = mockItem();
-		const key = itemKey(item.id);
-		await client.saveItems([[key, item]], args);
-		await sleep(300);
-		await client.saveItems([[key, item]], args);
-		await sleep(300);
-		const results = await client.getPartialItems([key], args);
-		t.deepEqual(results, [item]);
 	});
 
 	test(`${name} saveItemsWithDiff returns nulls for new items`, async (t) => {

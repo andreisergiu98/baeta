@@ -30,7 +30,7 @@
     "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
   "dependencies": {
-    "@apollo/server": "^5.4.0",
+    "@apollo/server": "^5.5.0",
     "@baeta/core": "workspace:^",
     "graphql": "catalog:dev"
   },

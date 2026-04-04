@@ -37,7 +37,7 @@ export function createWsConnectionsClass<Env, Context, ContextParams>(
 			const action = path[0];
 
 			if (action === 'connect') {
-				return this.connect(request, path);
+				return this.createConnection(request, path);
 			}
 
 			if (action === 'close') {
@@ -51,7 +51,7 @@ export function createWsConnectionsClass<Env, Context, ContextParams>(
 			throw new Error('bad_request');
 		}
 
-		async connect(request: Request, path: string[]) {
+		async createConnection(request: Request, path: string[]) {
 			const connectionId = path[1];
 
 			const wsPair = new WebSocketPair();

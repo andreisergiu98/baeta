@@ -68,9 +68,9 @@
     "@docusaurus/types": "^3.9.2",
     "@types/react": "catalog:dev",
     "@types/react-dom": "catalog:dev",
-    "typedoc": "0.28.17",
+    "typedoc": "0.28.18",
     "typedoc-docusaurus-theme": "^1.4.2",
-    "typedoc-plugin-markdown": "4.10.0",
+    "typedoc-plugin-markdown": "4.11.0",
     "typescript": "catalog:dev"
   }
 }

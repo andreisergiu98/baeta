@@ -219,8 +219,8 @@ export function runTestsForClient(
 		const item = mockItem();
 		const key = itemKey(item.id);
 
-		const shortLivedArgs = makeItemArgs(1_000);
-		const delay = sleep(1_100);
+		const shortLivedArgs = makeItemArgs(2_000);
+		const delay = sleep(2_100);
 
 		await client.saveItems([[key, item]], shortLivedArgs);
 		const items = await client.getPartialItems([key], shortLivedArgs);
@@ -234,11 +234,11 @@ export function runTestsForClient(
 
 	test(`${name} re-saving items extends TTL`, async (t) => {
 		const client = await createClient();
-		const args = makeItemArgs(1_000);
+		const args = makeItemArgs(2_000);
 		const item = mockItem();
 		const key = itemKey(item.id);
 
-		const delay = sleep(1_100);
+		const delay = sleep(2_100);
 		await client.saveItems([[key, item]], args);
 
 		await sleep(200);
@@ -253,9 +253,9 @@ export function runTestsForClient(
 		const client = await createClient();
 		const queryName = `TestQuery_${randomUUID()}`;
 		const query = queryKey(queryName, randomUUID());
-		const shortLivedQueryArgs = makeQueryArgs(1_000);
+		const shortLivedQueryArgs = makeQueryArgs(2_000);
 
-		const delay = sleep(1_100);
+		const delay = sleep(2_100);
 		await client.saveQuery(query, [indexKey(queryName, '')], ['data'], shortLivedQueryArgs);
 		let result = await client.getQuery(query, shortLivedQueryArgs);
 		t.deepEqual(result, ['data']);
@@ -268,10 +268,10 @@ export function runTestsForClient(
 
 	test(`${name} saveItemsWithDiff items expire after TTL`, async (t) => {
 		const client = await createClient();
-		const shortLivedArgs = makeItemArgs(1_000);
+		const shortLivedArgs = makeItemArgs(2_000);
 		const { values, keys, valueTuples } = mockItems();
 
-		const delay = sleep(1_100);
+		const delay = sleep(2_100);
 		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
 		let results = await client.getPartialItems(keys, shortLivedArgs);
 		t.deepEqual(results, values);
@@ -286,10 +286,10 @@ export function runTestsForClient(
 
 	test(`${name} saveItemsWithDiff extends TTL on re-save`, async (t) => {
 		const client = await createClient();
-		const shortLivedArgs = makeItemArgs(1_000);
+		const shortLivedArgs = makeItemArgs(2_000);
 		const { values, keys, valueTuples } = mockItems();
 
-		const delay = sleep(1_100);
+		const delay = sleep(2_100);
 		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
 
 		await sleep(200);

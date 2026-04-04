@@ -95,7 +95,7 @@ export class BaetaCache extends DurableObject {
 				json,
 			);
 		}
-		// await this.ensureAlarm();
+		await this.ensureAlarm();
 	}
 
 	async saveItemsWithDiff(items: Array<[string, string]>, expiresAt: number) {
@@ -111,7 +111,7 @@ export class BaetaCache extends DurableObject {
 				json,
 			);
 		}
-		// await this.ensureAlarm();
+		await this.ensureAlarm();
 		return currentValues;
 	}
 
@@ -160,7 +160,7 @@ export class BaetaCache extends DurableObject {
 				json,
 			);
 		}
-		// await this.ensureAlarm();
+		await this.ensureAlarm();
 	}
 
 	deleteQueries(indexKeys: string[]) {

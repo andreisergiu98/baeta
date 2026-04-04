@@ -1,8 +1,4 @@
 ---
-"@baeta/extension-cache-cloudflare": major
-"@baeta/extension-cache-upstash": major
-"@baeta/extension-cache-redis": major
-"@baeta/extension-cache-keyv": major
 "@baeta/extension-complexity": major
 "@baeta/subscriptions-pubsub": major
 "@baeta/plugin-cloudflare": major

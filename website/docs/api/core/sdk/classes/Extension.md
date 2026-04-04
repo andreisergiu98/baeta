@@ -43,9 +43,32 @@
 <th>Property</th>
 <th>Modifier</th>
 <th>Type</th>
+<th>Default value</th>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+<a id="schema"></a> `schema`
+
+</td>
+<td>
+
+`protected`
+
+</td>
+<td>
+
+`GraphQLSchema` \| `null`
+
+</td>
+<td>
+
+`null`
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -60,6 +83,11 @@
 <td>
 
 `symbol`
+
+</td>
+<td>
+
+`undefined`
 
 </td>
 </tr>
@@ -208,6 +236,16 @@
 #### Returns
 
 `object`
+
+---
+
+### getSchema()
+
+> **getSchema**(): `GraphQLSchema`
+
+#### Returns
+
+`GraphQLSchema`
 
 ---
 
@@ -418,7 +456,42 @@
 </td>
 <td>
 
-[`ModuleCompiler`](ModuleCompiler.md)\<`any`, `any`, `any`\>[]
+[`ModuleCompiler`](ModuleCompiler.md)\<`unknown`, `unknown`, [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`unknown`, `unknown`\>\>[]
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`void`
+
+---
+
+### setSchema()
+
+> **setSchema**(`schema`): `void`
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`schema`
+
+</td>
+<td>
+
+`GraphQLSchema`
 
 </td>
 </tr>

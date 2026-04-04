@@ -1,4 +1,4 @@
-# parse()
+# parse
 
 > `const` **parse**: (`pathString`) => `ParsedPath` = `upath.parse`
 

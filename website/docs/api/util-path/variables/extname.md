@@ -1,4 +1,4 @@
-# extname()
+# extname
 
 > `const` **extname**: (`p`) => `string` = `upath.extname`
 

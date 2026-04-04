@@ -1,4 +1,4 @@
-# addExt()
+# addExt
 
 > `const` **addExt**: (`file`, `ext`) => `string` = `upath.addExt`
 

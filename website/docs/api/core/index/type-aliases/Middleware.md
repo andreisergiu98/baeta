@@ -1,4 +1,4 @@
-# Middleware()\<Result, Source, Context, Args, Info\>
+# Middleware\<Result, Source, Context, Args, Info\>
 
 > **Middleware**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = (`next`, `params`) => `Result` \| `PromiseLike`\<`Result`\>
 

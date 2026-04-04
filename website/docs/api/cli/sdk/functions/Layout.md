@@ -20,7 +20,7 @@
 </td>
 <td>
 
-`PropsWithChildren`\<[`LayoutProps`](../interfaces/LayoutProps.md)\>
+`Readonly`\<`PropsWithChildren`\<[`LayoutProps`](../interfaces/LayoutProps.md)\>\>
 
 </td>
 </tr>

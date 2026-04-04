@@ -1,4 +1,4 @@
-# changeExt()
+# changeExt
 
 > `const` **changeExt**: (`filename`, `ext`, `ignoreExts?`, `maxSize?`) => `string` = `upath.changeExt`
 

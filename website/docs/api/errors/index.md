@@ -11,7 +11,6 @@
 ## Type Aliases
 
 - [BaetaErrorCode](type-aliases/BaetaErrorCode.md)
-- [BaetaErrorCodeKey](type-aliases/BaetaErrorCodeKey.md)
 
 ## Variables
 

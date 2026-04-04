@@ -16,7 +16,7 @@
 <tr>
 <td>
 
-<a id="addext"></a> `addExt()`
+<a id="property-addext"></a> `addExt()`
 
 </td>
 <td>
@@ -33,7 +33,7 @@ Adds .ext to filename, but only if it doesn't already have the exact extension.
 <tr>
 <td>
 
-<a id="basename"></a> `basename()`
+<a id="property-basename"></a> `basename()`
 
 </td>
 <td>
@@ -51,7 +51,7 @@ Often used to extract the file name from a fully qualified path.
 <tr>
 <td>
 
-<a id="changeext"></a> `changeExt()`
+<a id="property-changeext"></a> `changeExt()`
 
 </td>
 <td>
@@ -72,7 +72,7 @@ An Array of ignoreExts (eg ['.min']) prevents these from being considered as ext
 <tr>
 <td>
 
-<a id="defaultext"></a> `defaultExt()`
+<a id="property-defaultext"></a> `defaultExt()`
 
 </td>
 <td>
@@ -93,7 +93,7 @@ An Array of ignoreExts (eg ['.min']) will force adding default .ext even if one 
 <tr>
 <td>
 
-<a id="delimiter"></a> `delimiter`
+<a id="property-delimiter"></a> `delimiter`
 
 </td>
 <td>
@@ -110,7 +110,7 @@ An Array of ignoreExts (eg ['.min']) will force adding default .ext even if one 
 <tr>
 <td>
 
-<a id="dirname"></a> `dirname()`
+<a id="property-dirname"></a> `dirname()`
 
 </td>
 <td>
@@ -127,7 +127,7 @@ Return the directory name of a path. Similar to the Unix dirname command.
 <tr>
 <td>
 
-<a id="extname"></a> `extname()`
+<a id="property-extname"></a> `extname()`
 
 </td>
 <td>
@@ -145,7 +145,7 @@ If there is no '.' in the last portion of the path or the first character of it 
 <tr>
 <td>
 
-<a id="format"></a> `format()`
+<a id="property-format"></a> `format()`
 
 </td>
 <td>
@@ -162,7 +162,7 @@ Returns a path string from an object - the opposite of parse().
 <tr>
 <td>
 
-<a id="isabsolute"></a> `isAbsolute()`
+<a id="property-isabsolute"></a> `isAbsolute()`
 
 </td>
 <td>
@@ -179,7 +179,7 @@ Determines whether {path} is an absolute path. An absolute path will always reso
 <tr>
 <td>
 
-<a id="join"></a> `join()`
+<a id="property-join"></a> `join()`
 
 </td>
 <td>
@@ -200,7 +200,7 @@ Arguments must be strings. In v0.8, non-string arguments were silently ignored. 
 <tr>
 <td>
 
-<a id="joinsafe"></a> `joinSafe()`
+<a id="property-joinsafe"></a> `joinSafe()`
 
 </td>
 <td>
@@ -219,7 +219,7 @@ Note that the unix / is returned everywhere, so windows \ is always converted to
 <tr>
 <td>
 
-<a id="normalize"></a> `normalize()`
+<a id="property-normalize"></a> `normalize()`
 
 </td>
 <td>
@@ -237,7 +237,7 @@ When multiple slashes are found, they're replaced by a single one; when the path
 <tr>
 <td>
 
-<a id="normalizesafe"></a> `normalizeSafe()`
+<a id="property-normalizesafe"></a> `normalizeSafe()`
 
 </td>
 <td>
@@ -256,7 +256,7 @@ Note that the unix / is returned everywhere, so windows \ is always converted to
 <tr>
 <td>
 
-<a id="normalizetrim"></a> `normalizeTrim()`
+<a id="property-normalizetrim"></a> `normalizeTrim()`
 
 </td>
 <td>
@@ -273,7 +273,7 @@ Exactly like path.normalizeSafe(path), but it trims any useless ending /.
 <tr>
 <td>
 
-<a id="parse"></a> `parse()`
+<a id="property-parse"></a> `parse()`
 
 </td>
 <td>
@@ -290,7 +290,7 @@ Returns an object from a path string - the opposite of format().
 <tr>
 <td>
 
-<a id="posix"></a> `posix`
+<a id="property-posix"></a> `posix`
 
 </td>
 <td>
@@ -307,7 +307,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-<a id="posixpath"></a> `posixPath()`
+<a id="property-posixpath"></a> `posixPath()`
 
 </td>
 <td>
@@ -324,7 +324,7 @@ _typeof_ `posix`
 <tr>
 <td>
 
-<a id="relative"></a> `relative()`
+<a id="property-relative"></a> `relative()`
 
 </td>
 <td>
@@ -342,7 +342,7 @@ At times we have two absolute paths, and we need to derive the relative path fro
 <tr>
 <td>
 
-<a id="removeext"></a> `removeExt()`
+<a id="property-removeext"></a> `removeExt()`
 
 </td>
 <td>
@@ -359,7 +359,7 @@ Removes the specific ext extension from filename, if it has it. Otherwise it lea
 <tr>
 <td>
 
-<a id="resolve"></a> `resolve()`
+<a id="property-resolve"></a> `resolve()`
 
 </td>
 <td>
@@ -380,7 +380,7 @@ If {to} isn't already absolute, {from} arguments are prepended in right to left 
 <tr>
 <td>
 
-<a id="sep"></a> `sep`
+<a id="property-sep"></a> `sep`
 
 </td>
 <td>
@@ -397,7 +397,7 @@ If {to} isn't already absolute, {from} arguments are prepended in right to left 
 <tr>
 <td>
 
-<a id="tounix"></a> `toUnix()`
+<a id="property-tounix"></a> `toUnix()`
 
 </td>
 <td>
@@ -414,7 +414,7 @@ Just converts all `to/` and consolidates duplicates, without performing any norm
 <tr>
 <td>
 
-<a id="trimext"></a> `trimExt()`
+<a id="property-trimext"></a> `trimExt()`
 
 </td>
 <td>
@@ -435,7 +435,7 @@ An Array of ignoreExts (eg ['.min']) prevents these from being considered as ext
 <tr>
 <td>
 
-<a id="win32"></a> `win32`
+<a id="property-win32"></a> `win32`
 
 </td>
 <td>
@@ -452,7 +452,7 @@ _typeof_ `win32`
 <tr>
 <td>
 
-<a id="winpath"></a> `winPath()`
+<a id="property-winpath"></a> `winPath()`
 
 </td>
 <td>

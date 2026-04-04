@@ -19,7 +19,7 @@ Standard error codes used across the Baeta framework.
 <tr>
 <td>
 
-<a id="aggregateerror"></a> `AggregateError`
+<a id="property-aggregateerror"></a> `AggregateError`
 
 </td>
 <td>
@@ -41,7 +41,7 @@ Multiple errors occurred simultaneously
 <tr>
 <td>
 
-<a id="baduserinput"></a> `BadUserInput`
+<a id="property-baduserinput"></a> `BadUserInput`
 
 </td>
 <td>
@@ -63,7 +63,7 @@ Invalid input provided by the user
 <tr>
 <td>
 
-<a id="forbidden"></a> `Forbidden`
+<a id="property-forbidden"></a> `Forbidden`
 
 </td>
 <td>
@@ -85,7 +85,7 @@ User is authenticated but lacks required permissions
 <tr>
 <td>
 
-<a id="internalservererror"></a> `InternalServerError`
+<a id="property-internalservererror"></a> `InternalServerError`
 
 </td>
 <td>
@@ -107,7 +107,7 @@ Unexpected server-side error
 <tr>
 <td>
 
-<a id="unauthenticated"></a> `Unauthenticated`
+<a id="property-unauthenticated"></a> `Unauthenticated`
 
 </td>
 <td>

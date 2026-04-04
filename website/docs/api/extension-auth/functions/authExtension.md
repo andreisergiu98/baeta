@@ -1,6 +1,6 @@
 # authExtension()
 
-> **authExtension**\<`Ctx`\>(`loadScopes`, `options`): `AuthExtension`\<`Ctx`\>
+> **authExtension**\<`Ctx`\>(`loadScopes`, `options?`): `AuthExtension`\<`Ctx`\>
 
 Creates an authentication extension.
 

@@ -1,6 +1,6 @@
 # TypeMethods\<Source, Context, Info, FieldsBuilders, FieldsResolvers\>
 
-> **TypeMethods**\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\> = `object` & [`TypeExtensions`](../namespaces/BaetaExtensions/interfaces/TypeExtensions.md)\<`Source`, `Context`, `Info`, [`TypeBuilder`](../classes/TypeBuilder.md)\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>\> & `FieldsBuilders`
+> **TypeMethods**\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\> = `object` & `BaetaExtensions.TypeExtensions`\<`Source`, `Context`, `Info`\> & `FieldsBuilders`
 
 ## Type Declaration
 

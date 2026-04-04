@@ -1,4 +1,4 @@
-# MatchFn()
+# MatchFn
 
 > **MatchFn** = (`testString`) => `boolean`
 

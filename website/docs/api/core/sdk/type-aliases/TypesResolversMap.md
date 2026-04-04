@@ -1,6 +1,6 @@
 # TypesResolversMap\<Context, Info\>
 
-> **TypesResolversMap**\<`Context`, `Info`\> = `Record`\<`string`, [`TypeCompilerFactory`](TypeCompilerFactory.md)\<`Any`, `Context`, `Info`\> \| `GraphQLScalarType`\<`Any`, `Any`\>\>
+> **TypesResolversMap**\<`Context`, `Info`\> = `Record`\<`string`, [`TypeCompilerFactory`](TypeCompilerFactory.md)\<`any`, `Context`, `Info`\> \| `GraphQLScalarType`\<`any`, `any`\>\>
 
 ## Type Parameters
 

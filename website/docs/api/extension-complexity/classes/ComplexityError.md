@@ -10,7 +10,7 @@ Thrown when a query exceeds the complexity limits.
 
 ### Constructor
 
-> **new ComplexityError**(`message`, `options?`): `ComplexityError`
+> **new ComplexityError**(`message?`, `options?`): `ComplexityError`
 
 #### Parameters
 
@@ -362,6 +362,33 @@ represent nodes after the first node.
 <td>
 
 `GraphQLError.cause`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="coordinate"></a> `coordinate?`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`string`
+
+</td>
+<td>
+
+An optional schema coordinate (e.g. "MyType.myField") associated with this error.
+
+</td>
+<td>
+
+`GraphQLError.coordinate`
 
 </td>
 </tr>

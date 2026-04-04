@@ -25,7 +25,7 @@ See https://baeta.io/docs/extensions/
 </td>
 <td>
 
-[`Extensions`](../../sdk/namespaces/BaetaExtensions/interfaces/Extensions.md)
+`Extensions`
 
 </td>
 <td>

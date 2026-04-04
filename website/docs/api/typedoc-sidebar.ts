@@ -4,6 +4,387 @@ const typedocSidebar: SidebarsConfig = {
 	items: [
 		{
 			type: 'category',
+			label: '@baeta/cache',
+			items: [
+				{
+					type: 'category',
+					label: 'index',
+					items: [
+						{
+							type: 'category',
+							label: 'Classes',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache/index/classes/CacheClient',
+									label: 'CacheClient',
+								},
+							],
+						},
+						{
+							type: 'category',
+							label: 'Interfaces',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache/index/interfaces/CacheClientArgs',
+									label: 'CacheClientArgs',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/interfaces/CacheClientOptions',
+									label: 'CacheClientOptions',
+								},
+							],
+						},
+						{
+							type: 'category',
+							label: 'Type Aliases',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/Cache',
+									label: 'Cache',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/CacheHooksOptions',
+									label: 'CacheHooksOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/CacheOptions',
+									label: 'CacheOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/CacheWithQueries',
+									label: 'CacheWithQueries',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/CreateCacheFactory',
+									label: 'CreateCacheFactory',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/ItemCacheKey',
+									label: 'ItemCacheKey',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/ItemRef',
+									label: 'ItemRef',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/OptionalGetRef',
+									label: 'OptionalGetRef',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/QueryArgs',
+									label: 'QueryArgs',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/QueryArgsIndexes',
+									label: 'QueryArgsIndexes',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/QueryCacheIndexKey',
+									label: 'QueryCacheIndexKey',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/QueryCacheKey',
+									label: 'QueryCacheKey',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/QueryIndexValue',
+									label: 'QueryIndexValue',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/QueryOptions',
+									label: 'QueryOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/type-aliases/RequiredGetRef',
+									label: 'RequiredGetRef',
+								},
+							],
+						},
+						{
+							type: 'category',
+							label: 'Functions',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache/index/functions/createCache',
+									label: 'createCache',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache/index/functions/defineQuery',
+									label: 'defineQuery',
+								},
+							],
+						},
+					],
+					link: {
+						type: 'doc',
+						id: 'api/cache/index/index',
+					},
+				},
+				{
+					type: 'category',
+					label: 'sdk',
+					items: [
+						{
+							type: 'category',
+							label: 'Functions',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache/sdk/functions/doBatched',
+									label: 'doBatched',
+								},
+							],
+						},
+					],
+					link: {
+						type: 'doc',
+						id: 'api/cache/sdk/index',
+					},
+				},
+			],
+			link: {
+				type: 'doc',
+				id: 'api/cache/index',
+			},
+		},
+		{
+			type: 'category',
+			label: '@baeta/cache-cloudflare',
+			items: [
+				{
+					type: 'category',
+					label: 'index',
+					items: [
+						{
+							type: 'category',
+							label: 'Classes',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache-cloudflare/index/classes/BaetaCache',
+									label: 'BaetaCache',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache-cloudflare/index/classes/CloudflareCacheClient',
+									label: 'CloudflareCacheClient',
+								},
+							],
+						},
+					],
+					link: {
+						type: 'doc',
+						id: 'api/cache-cloudflare/index/index',
+					},
+				},
+				{
+					type: 'category',
+					label: 'sdk',
+					items: [
+						{
+							type: 'category',
+							label: 'Interfaces',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache-cloudflare/sdk/interfaces/DurableObjectMigration',
+									label: 'DurableObjectMigration',
+								},
+							],
+						},
+						{
+							type: 'category',
+							label: 'Variables',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/cache-cloudflare/sdk/variables/baetaCacheName',
+									label: 'baetaCacheName',
+								},
+								{
+									type: 'doc',
+									id: 'api/cache-cloudflare/sdk/variables/durableObjectsMigrations',
+									label: 'durableObjectsMigrations',
+								},
+							],
+						},
+					],
+					link: {
+						type: 'doc',
+						id: 'api/cache-cloudflare/sdk/index',
+					},
+				},
+			],
+			link: {
+				type: 'doc',
+				id: 'api/cache-cloudflare/index',
+			},
+		},
+		{
+			type: 'category',
+			label: '@baeta/cache-ioredis',
+			items: [
+				{
+					type: 'category',
+					label: 'Classes',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-ioredis/classes/RedisCacheClient',
+							label: 'RedisCacheClient',
+						},
+					],
+				},
+				{
+					type: 'category',
+					label: 'Interfaces',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-ioredis/interfaces/RedisCacheClientOptions',
+							label: 'RedisCacheClientOptions',
+						},
+					],
+				},
+			],
+			link: {
+				type: 'doc',
+				id: 'api/cache-ioredis/index',
+			},
+		},
+		{
+			type: 'category',
+			label: '@baeta/cache-iovalkey',
+			items: [
+				{
+					type: 'category',
+					label: 'Classes',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-iovalkey/classes/ValkeyCacheClient',
+							label: 'ValkeyCacheClient',
+						},
+					],
+				},
+				{
+					type: 'category',
+					label: 'Interfaces',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-iovalkey/interfaces/ValkeyCacheClientOptions',
+							label: 'ValkeyCacheClientOptions',
+						},
+					],
+				},
+			],
+			link: {
+				type: 'doc',
+				id: 'api/cache-iovalkey/index',
+			},
+		},
+		{
+			type: 'category',
+			label: '@baeta/cache-redis-common',
+			items: [
+				{
+					type: 'category',
+					label: 'Interfaces',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-redis-common/interfaces/PipelineOptions',
+							label: 'PipelineOptions',
+						},
+					],
+				},
+				{
+					type: 'category',
+					label: 'Type Aliases',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-redis-common/type-aliases/RedisScriptFunction',
+							label: 'RedisScriptFunction',
+						},
+						{
+							type: 'doc',
+							id: 'api/cache-redis-common/type-aliases/RedisScripts',
+							label: 'RedisScripts',
+						},
+					],
+				},
+				{
+					type: 'category',
+					label: 'Functions',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-redis-common/functions/assertNoPipelineErrors',
+							label: 'assertNoPipelineErrors',
+						},
+						{
+							type: 'doc',
+							id: 'api/cache-redis-common/functions/batchPipeline',
+							label: 'batchPipeline',
+						},
+						{
+							type: 'doc',
+							id: 'api/cache-redis-common/functions/createRedisScripts',
+							label: 'createRedisScripts',
+						},
+					],
+				},
+			],
+			link: {
+				type: 'doc',
+				id: 'api/cache-redis-common/index',
+			},
+		},
+		{
+			type: 'category',
+			label: '@baeta/cache-upstash',
+			items: [
+				{
+					type: 'category',
+					label: 'Classes',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/cache-upstash/classes/UpstashCacheClient',
+							label: 'UpstashCacheClient',
+						},
+					],
+				},
+			],
+			link: {
+				type: 'doc',
+				id: 'api/cache-upstash/index',
+			},
+		},
+		{
+			type: 'category',
 			label: '@baeta/cli',
 			items: [
 				{
@@ -172,11 +553,6 @@ const typedocSidebar: SidebarsConfig = {
 								},
 								{
 									type: 'doc',
-									id: 'api/cli/sdk/functions/renderComponentWithoutConfig',
-									label: 'renderComponentWithoutConfig',
-								},
-								{
-									type: 'doc',
 									id: 'api/cli/sdk/functions/Spinner',
 									label: 'Spinner',
 								},
@@ -189,6 +565,11 @@ const typedocSidebar: SidebarsConfig = {
 									type: 'doc',
 									id: 'api/cli/sdk/functions/useConfigStore',
 									label: 'useConfigStore',
+								},
+								{
+									type: 'doc',
+									id: 'api/cli/sdk/functions/useRunCommand',
+									label: 'useRunCommand',
 								},
 							],
 						},
@@ -317,53 +698,6 @@ const typedocSidebar: SidebarsConfig = {
 					items: [
 						{
 							type: 'category',
-							label: 'Namespaces',
-							items: [
-								{
-									type: 'category',
-									label: 'BaetaExtensions',
-									items: [
-										{
-											type: 'category',
-											label: 'Interfaces',
-											items: [
-												{
-													type: 'doc',
-													id: 'api/core/sdk/namespaces/BaetaExtensions/interfaces/Extensions',
-													label: 'Extensions',
-												},
-												{
-													type: 'doc',
-													id: 'api/core/sdk/namespaces/BaetaExtensions/interfaces/FieldExtensions',
-													label: 'FieldExtensions',
-												},
-												{
-													type: 'doc',
-													id: 'api/core/sdk/namespaces/BaetaExtensions/interfaces/ModuleExtensions',
-													label: 'ModuleExtensions',
-												},
-												{
-													type: 'doc',
-													id: 'api/core/sdk/namespaces/BaetaExtensions/interfaces/SubscriptionExtensions',
-													label: 'SubscriptionExtensions',
-												},
-												{
-													type: 'doc',
-													id: 'api/core/sdk/namespaces/BaetaExtensions/interfaces/TypeExtensions',
-													label: 'TypeExtensions',
-												},
-											],
-										},
-									],
-									link: {
-										type: 'doc',
-										id: 'api/core/sdk/namespaces/BaetaExtensions/index',
-									},
-								},
-							],
-						},
-						{
-							type: 'category',
 							label: 'Classes',
 							items: [
 								{
@@ -405,6 +739,47 @@ const typedocSidebar: SidebarsConfig = {
 									type: 'doc',
 									id: 'api/core/sdk/classes/TypeCompiler',
 									label: 'TypeCompiler',
+								},
+							],
+						},
+						{
+							type: 'category',
+							label: 'Interfaces',
+							items: [
+								{
+									type: 'doc',
+									id: 'api/core/sdk/interfaces/FieldBuilderOptions',
+									label: 'FieldBuilderOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/core/sdk/interfaces/FieldCompilerOptions',
+									label: 'FieldCompilerOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/core/sdk/interfaces/ModuleBuilderOptions',
+									label: 'ModuleBuilderOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/core/sdk/interfaces/ModuleCompilerOptions',
+									label: 'ModuleCompilerOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/core/sdk/interfaces/SubscriptionBuilderOptions',
+									label: 'SubscriptionBuilderOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/core/sdk/interfaces/TypeBuilderOptions',
+									label: 'TypeBuilderOptions',
+								},
+								{
+									type: 'doc',
+									id: 'api/core/sdk/interfaces/TypeCompilerOptions',
+									label: 'TypeCompilerOptions',
 								},
 							],
 						},
@@ -530,6 +905,11 @@ const typedocSidebar: SidebarsConfig = {
 								},
 								{
 									type: 'doc',
+									id: 'api/core/sdk/functions/concatMiddlewares',
+									label: 'concatMiddlewares',
+								},
+								{
+									type: 'doc',
 									id: 'api/core/sdk/functions/createFieldBuilder',
 									label: 'createFieldBuilder',
 								},
@@ -555,8 +935,18 @@ const typedocSidebar: SidebarsConfig = {
 								},
 								{
 									type: 'doc',
+									id: 'api/core/sdk/functions/isPromise',
+									label: 'isPromise',
+								},
+								{
+									type: 'doc',
 									id: 'api/core/sdk/functions/makeField',
 									label: 'makeField',
+								},
+								{
+									type: 'doc',
+									id: 'api/core/sdk/functions/mapMaybePromise',
+									label: 'mapMaybePromise',
 								},
 								{
 									type: 'doc',
@@ -699,11 +1089,6 @@ const typedocSidebar: SidebarsConfig = {
 							type: 'doc',
 							id: 'api/errors/type-aliases/BaetaErrorCode',
 							label: 'BaetaErrorCode',
-						},
-						{
-							type: 'doc',
-							id: 'api/errors/type-aliases/BaetaErrorCodeKey',
-							label: 'BaetaErrorCodeKey',
 						},
 					],
 				},
@@ -853,134 +1238,6 @@ const typedocSidebar: SidebarsConfig = {
 			items: [
 				{
 					type: 'category',
-					label: 'Classes',
-					items: [
-						{
-							type: 'doc',
-							id: 'api/extension-cache/classes/CacheRef',
-							label: 'CacheRef',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/classes/Store',
-							label: 'Store',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/classes/StoreAdapter',
-							label: 'StoreAdapter',
-						},
-					],
-				},
-				{
-					type: 'category',
-					label: 'Interfaces',
-					items: [
-						{
-							type: 'doc',
-							id: 'api/extension-cache/interfaces/CacheMiddlewareOptions',
-							label: 'CacheMiddlewareOptions',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/interfaces/DefaultStoreOptions',
-							label: 'DefaultStoreOptions',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/interfaces/RequiredCacheMiddlewareOptions',
-							label: 'RequiredCacheMiddlewareOptions',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/interfaces/RequiredStoreOptions',
-							label: 'RequiredStoreOptions',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/interfaces/Serializer',
-							label: 'Serializer',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/interfaces/SerializerResult',
-							label: 'SerializerResult',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/interfaces/StoreOptions',
-							label: 'StoreOptions',
-						},
-					],
-				},
-				{
-					type: 'category',
-					label: 'Type Aliases',
-					items: [
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/CacheArgs',
-							label: 'CacheArgs',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/CacheQueryMatching',
-							label: 'CacheQueryMatching',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/ClassTransformer',
-							label: 'ClassTransformer',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/CustomTransformer',
-							label: 'CustomTransformer',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/ItemRef',
-							label: 'ItemRef',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/ParentRef',
-							label: 'ParentRef',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/RefCompatibleRoot',
-							label: 'RefCompatibleRoot',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/SerializerAny',
-							label: 'SerializerAny',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/SerializerClass',
-							label: 'SerializerClass',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/SerializerTransformer',
-							label: 'SerializerTransformer',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/SerializerValue',
-							label: 'SerializerValue',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/type-aliases/SymbolTransformer',
-							label: 'SymbolTransformer',
-						},
-					],
-				},
-				{
-					type: 'category',
 					label: 'Functions',
 					items: [
 						{
@@ -988,163 +1245,12 @@ const typedocSidebar: SidebarsConfig = {
 							id: 'api/extension-cache/functions/cacheExtension',
 							label: 'cacheExtension',
 						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache/functions/createSerializer',
-							label: 'createSerializer',
-						},
 					],
 				},
 			],
 			link: {
 				type: 'doc',
 				id: 'api/extension-cache/index',
-			},
-		},
-		{
-			type: 'category',
-			label: '@baeta/extension-cache-cloudflare',
-			items: [
-				{
-					type: 'category',
-					label: 'index',
-					items: [
-						{
-							type: 'category',
-							label: 'Classes',
-							items: [
-								{
-									type: 'doc',
-									id: 'api/extension-cache-cloudflare/index/classes/BaetaCache',
-									label: 'BaetaCache',
-								},
-								{
-									type: 'doc',
-									id: 'api/extension-cache-cloudflare/index/classes/CloudflareCacheClient',
-									label: 'CloudflareCacheClient',
-								},
-								{
-									type: 'doc',
-									id: 'api/extension-cache-cloudflare/index/classes/CloudflareStoreAdapter',
-									label: 'CloudflareStoreAdapter',
-								},
-							],
-						},
-					],
-					link: {
-						type: 'doc',
-						id: 'api/extension-cache-cloudflare/index/index',
-					},
-				},
-				{
-					type: 'category',
-					label: 'sdk',
-					items: [
-						{
-							type: 'category',
-							label: 'Interfaces',
-							items: [
-								{
-									type: 'doc',
-									id: 'api/extension-cache-cloudflare/sdk/interfaces/DurableObjectMigration',
-									label: 'DurableObjectMigration',
-								},
-							],
-						},
-						{
-							type: 'category',
-							label: 'Variables',
-							items: [
-								{
-									type: 'doc',
-									id: 'api/extension-cache-cloudflare/sdk/variables/baetaCacheName',
-									label: 'baetaCacheName',
-								},
-								{
-									type: 'doc',
-									id: 'api/extension-cache-cloudflare/sdk/variables/durableObjectsMigrations',
-									label: 'durableObjectsMigrations',
-								},
-							],
-						},
-					],
-					link: {
-						type: 'doc',
-						id: 'api/extension-cache-cloudflare/sdk/index',
-					},
-				},
-			],
-			link: {
-				type: 'doc',
-				id: 'api/extension-cache-cloudflare/index',
-			},
-		},
-		{
-			type: 'category',
-			label: '@baeta/extension-cache-keyv',
-			items: [
-				{
-					type: 'category',
-					label: 'Classes',
-					items: [
-						{
-							type: 'doc',
-							id: 'api/extension-cache-keyv/classes/KeyvStore',
-							label: 'KeyvStore',
-						},
-					],
-				},
-			],
-			link: {
-				type: 'doc',
-				id: 'api/extension-cache-keyv/index',
-			},
-		},
-		{
-			type: 'category',
-			label: '@baeta/extension-cache-redis',
-			items: [
-				{
-					type: 'category',
-					label: 'Classes',
-					items: [
-						{
-							type: 'doc',
-							id: 'api/extension-cache-redis/classes/RedisStore',
-							label: 'RedisStore',
-						},
-					],
-				},
-			],
-			link: {
-				type: 'doc',
-				id: 'api/extension-cache-redis/index',
-			},
-		},
-		{
-			type: 'category',
-			label: '@baeta/extension-cache-upstash',
-			items: [
-				{
-					type: 'category',
-					label: 'Classes',
-					items: [
-						{
-							type: 'doc',
-							id: 'api/extension-cache-upstash/classes/UpstashClient',
-							label: 'UpstashClient',
-						},
-						{
-							type: 'doc',
-							id: 'api/extension-cache-upstash/classes/UpstashStore',
-							label: 'UpstashStore',
-						},
-					],
-				},
-			],
-			link: {
-				type: 'doc',
-				id: 'api/extension-cache-upstash/index',
 			},
 		},
 		{
@@ -1934,13 +2040,19 @@ const typedocSidebar: SidebarsConfig = {
 			items: [
 				{
 					type: 'category',
-					label: 'Interfaces',
+					label: 'Classes',
 					items: [
 						{
 							type: 'doc',
-							id: 'api/subscriptions-pubsub/interfaces/TypedPubSub',
+							id: 'api/subscriptions-pubsub/classes/TypedPubSub',
 							label: 'TypedPubSub',
 						},
+					],
+				},
+				{
+					type: 'category',
+					label: 'Interfaces',
+					items: [
 						{
 							type: 'doc',
 							id: 'api/subscriptions-pubsub/interfaces/TypedPubSubOptions',
@@ -1960,26 +2072,26 @@ const typedocSidebar: SidebarsConfig = {
 			items: [
 				{
 					type: 'category',
-					label: 'Variables',
+					label: 'Functions',
 					items: [
 						{
 							type: 'doc',
-							id: 'api/util-encoding/variables/decodeBase64',
+							id: 'api/util-encoding/functions/decodeBase64',
 							label: 'decodeBase64',
 						},
 						{
 							type: 'doc',
-							id: 'api/util-encoding/variables/decodeBase64Url',
+							id: 'api/util-encoding/functions/decodeBase64Url',
 							label: 'decodeBase64Url',
 						},
 						{
 							type: 'doc',
-							id: 'api/util-encoding/variables/encodeBase64',
+							id: 'api/util-encoding/functions/encodeBase64',
 							label: 'encodeBase64',
 						},
 						{
 							type: 'doc',
-							id: 'api/util-encoding/variables/encodeBase64Url',
+							id: 'api/util-encoding/functions/encodeBase64Url',
 							label: 'encodeBase64Url',
 						},
 					],
@@ -2026,13 +2138,8 @@ const typedocSidebar: SidebarsConfig = {
 					items: [
 						{
 							type: 'doc',
-							id: 'api/util-log/type-aliases/ConsoleLogger',
-							label: 'ConsoleLogger',
-						},
-						{
-							type: 'doc',
-							id: 'api/util-log/type-aliases/ConsolePayload',
-							label: 'ConsolePayload',
+							id: 'api/util-log/type-aliases/Logger',
+							label: 'Logger',
 						},
 					],
 				},
@@ -2044,6 +2151,17 @@ const typedocSidebar: SidebarsConfig = {
 							type: 'doc',
 							id: 'api/util-log/variables/log',
 							label: 'log',
+						},
+					],
+				},
+				{
+					type: 'category',
+					label: 'Functions',
+					items: [
+						{
+							type: 'doc',
+							id: 'api/util-log/functions/createLogger',
+							label: 'createLogger',
 						},
 					],
 				},

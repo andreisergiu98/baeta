@@ -16,7 +16,24 @@ Configuration options for the gitignore plugin.
 <tr>
 <td>
 
-<a id="ignoretags"></a> `ignoreTags?`
+<a id="skipfilesglobs"></a> `skipFilesGlobs?`
+
+</td>
+<td>
+
+`string`[]
+
+</td>
+<td>
+
+Array of files to exclude from .gitignore.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="skiptags"></a> `skipTags?`
 
 </td>
 <td>

@@ -1,4 +1,4 @@
-# format()
+# format
 
 > `const` **format**: (`pathObject`) => `string`
 

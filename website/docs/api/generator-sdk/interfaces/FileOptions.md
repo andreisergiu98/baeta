@@ -39,31 +39,7 @@ Add custom header at the beginning of the file.
 <tr>
 <td>
 
-<a id="allowoverwrite"></a> `allowOverwrite?`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-```ts
-true;
-```
-
-</td>
-<td>
-
-Allow overwriting the file.
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="disablebiomeheader"></a> `disableBiomeHeader?`
+<a id="disablebiomev1header"></a> `disableBiomeV1Header?`
 
 </td>
 <td>
@@ -80,7 +56,31 @@ false;
 </td>
 <td>
 
-Disable biome comment at the beginning of the file.
+Disable biome v1 comment at the beginning of the file.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="disablebiomev2header"></a> `disableBiomeV2Header?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+```ts
+false;
+```
+
+</td>
+<td>
+
+Disable biome v2 comment at the beginning of the file.
 
 </td>
 </tr>
@@ -129,6 +129,30 @@ false;
 <td>
 
 Disable generation notice at the beginning of the file.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="disableoverwrite"></a> `disableOverwrite?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+```ts
+false;
+```
+
+</td>
+<td>
+
+Dissallow overwriting the file.
 
 </td>
 </tr>

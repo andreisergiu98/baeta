@@ -1,0 +1,3 @@
+# ItemCacheKey
+
+> **ItemCacheKey** = `` `${ItemCacheKeyPrefix}:${ItemCacheKeyId}` ``

@@ -1,4 +1,4 @@
-# normalizeSafe()
+# normalizeSafe
 
 > `const` **normalizeSafe**: (`p`) => `string` = `upath.normalizeSafe`
 

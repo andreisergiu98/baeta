@@ -1,3 +1,3 @@
 # log
 
-> `const` **log**: [`ConsoleLogger`](../type-aliases/ConsoleLogger.md)
+> `const` **log**: [`Logger`](../type-aliases/Logger.md)

@@ -81,6 +81,7 @@
 <thead>
 <tr>
 <th>Property</th>
+<th>Modifier</th>
 <th>Type</th>
 <th>Default value</th>
 </tr>
@@ -90,6 +91,11 @@
 <td>
 
 <a id="content"></a> `content`
+
+</td>
+<td>
+
+`readonly`
 
 </td>
 <td>
@@ -111,6 +117,11 @@
 </td>
 <td>
 
+`readonly`
+
+</td>
+<td>
+
 `string`
 
 </td>
@@ -124,6 +135,11 @@
 <td>
 
 <a id="persisted"></a> `persisted`
+
+</td>
+<td>
+
+`public`
 
 </td>
 <td>
@@ -145,7 +161,34 @@
 </td>
 <td>
 
+`readonly`
+
+</td>
+<td>
+
 `string`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="options"></a> `options?`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+[`FileOptions`](../interfaces/FileOptions.md)
 
 </td>
 <td>

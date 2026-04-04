@@ -1,4 +1,4 @@
-# ValidationDirectiveFn()\<DirectiveConfig, Context\>
+# ValidationDirectiveFn\<DirectiveConfig, Context\>
 
 > **ValidationDirectiveFn**\<`DirectiveConfig`, `Context`\> = (`params`) => `void`
 

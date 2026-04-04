@@ -1,4 +1,4 @@
-# Subscribe()\<Map\>
+# Subscribe\<Map\>
 
 > **Subscribe**\<`Map`\> = \<`C`, `P`\>(`topic`) => `AsyncIterable`\<`P`\>
 

@@ -89,36 +89,7 @@ Configuration options for the input directive
 
 A function that transforms a GraphQL schema by applying the directive
 
-> (`schema`): `GraphQLSchema`
-
-### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`schema`
-
-</td>
-<td>
-
-`GraphQLSchema`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-### Returns
-
-`GraphQLSchema`
+(`schema`) => `GraphQLSchema`
 
 ## Example
 

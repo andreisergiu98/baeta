@@ -14,7 +14,7 @@
 
 ### createSubscription()
 
-> **createSubscription**(`info`): `Promise`\<`void`\>
+> `abstract` **createSubscription**(`info`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -49,7 +49,7 @@
 
 ### deleteSubscription()
 
-> **deleteSubscription**(`id`): `Promise`\<`void`\>
+> `abstract` **deleteSubscription**(`id`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -84,7 +84,7 @@
 
 ### deleteSubscriptions()
 
-> **deleteSubscriptions**(`connectionId`): `Promise`\<`void`\>
+> `abstract` **deleteSubscriptions**(`connectionId`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -119,7 +119,7 @@
 
 ### getSubscriptions()
 
-> **getSubscriptions**(`topic`): `Promise`\<[`SubscriptionInfo`](../interfaces/SubscriptionInfo.md)[]\>
+> `abstract` **getSubscriptions**(`topic`): `Promise`\<[`SubscriptionInfo`](../interfaces/SubscriptionInfo.md)[]\>
 
 #### Parameters
 

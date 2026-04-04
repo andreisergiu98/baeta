@@ -1,4 +1,4 @@
-# ExtensionFactory()\<E\>
+# ExtensionFactory\<E\>
 
 > **ExtensionFactory**\<`E`\> = () => `E`
 

@@ -1,0 +1,3 @@
+# QueryCacheKey
+
+> **QueryCacheKey** = `` `${QueryCacheKeyPrefix}:${QueryCacheKeyId}` ``

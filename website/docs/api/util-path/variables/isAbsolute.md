@@ -1,4 +1,4 @@
-# isAbsolute()
+# isAbsolute
 
 > `const` **isAbsolute**: (`path`) => `boolean` = `upath.isAbsolute`
 

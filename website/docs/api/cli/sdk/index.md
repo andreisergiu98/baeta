@@ -29,7 +29,7 @@
 - [makeErrorMessage](functions/makeErrorMessage.md)
 - [makeErrorOutput](functions/makeErrorOutput.md)
 - [renderComponent](functions/renderComponent.md)
-- [renderComponentWithoutConfig](functions/renderComponentWithoutConfig.md)
 - [Spinner](functions/Spinner.md)
 - [Time](functions/Time.md)
 - [useConfigStore](functions/useConfigStore.md)
+- [useRunCommand](functions/useRunCommand.md)

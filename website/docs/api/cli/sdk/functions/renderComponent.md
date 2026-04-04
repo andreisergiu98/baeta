@@ -1,6 +1,6 @@
 # renderComponent()
 
-> **renderComponent**\<`P`\>(`Component`, `props`, `configProps?`): `void`
+> **renderComponent**\<`P`\>(`Component`, `props`, `configProps?`): `Instance`
 
 ## Type Parameters
 
@@ -72,4 +72,4 @@
 
 ## Returns
 
-`void`
+`Instance`

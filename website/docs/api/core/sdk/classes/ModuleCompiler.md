@@ -18,7 +18,7 @@
 </td>
 <td>
 
-`Any`
+`unknown`
 
 </td>
 </tr>
@@ -30,7 +30,7 @@
 </td>
 <td>
 
-`Any`
+`unknown`
 
 </td>
 </tr>
@@ -42,7 +42,7 @@
 </td>
 <td>
 
-`Any`
+[`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 </tr>
@@ -53,7 +53,7 @@
 
 ### Constructor
 
-> **new ModuleCompiler**\<`Context`, `Info`, `TypesResolvers`\>(`name`, `store`, `middlewares`, `typesMap`, `typedef`, `defaultResolvers`, `extensions`, `transformers`): `ModuleCompiler`\<`Context`, `Info`, `TypesResolvers`\>
+> **new ModuleCompiler**\<`Context`, `Info`, `TypesResolvers`\>(`options`): `ModuleCompiler`\<`Context`, `Info`, `TypesResolvers`\>
 
 #### Parameters
 
@@ -68,96 +68,12 @@
 <tr>
 <td>
 
-`name`
+`options`
 
 </td>
 <td>
 
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`store`
-
-</td>
-<td>
-
-`Map`\<`symbol`, `unknown`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`middlewares`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`any`, `any`, `Context`, `any`, `Info`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`typesMap`
-
-</td>
-<td>
-
-`TypesResolvers`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`typedef`
-
-</td>
-<td>
-
-`Readonly`\<`DocumentNode`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`defaultResolvers`
-
-</td>
-<td>
-
-`Readonly`\<`IResolvers`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-readonly [`Extension`](Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`transformers`
-
-</td>
-<td>
-
-[`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
+[`ModuleCompilerOptions`](../interfaces/ModuleCompilerOptions.md)\<`Context`, `Info`, `TypesResolvers`\>
 
 </td>
 </tr>
@@ -198,11 +114,11 @@ readonly [`Extension`](Extension.md)\<`unknown`\>[]
 
 #### Get Signature
 
-> **get** **types**(): readonly [`TypeCompiler`](TypeCompiler.md)\<`any`, `any`, `any`, `any`\>[]
+> **get** **types**(): readonly [`TypeCompiler`](TypeCompiler.md)\<`unknown`, `Context`, `Info`, [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`unknown`, `Context`, `Info`\>\>[]
 
 ##### Returns
 
-readonly [`TypeCompiler`](TypeCompiler.md)\<`any`, `any`, `any`, `any`\>[]
+readonly [`TypeCompiler`](TypeCompiler.md)\<`unknown`, `Context`, `Info`, [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`unknown`, `Context`, `Info`\>\>[]
 
 ## Methods
 
@@ -228,7 +144,7 @@ readonly [`TypeCompiler`](TypeCompiler.md)\<`any`, `any`, `any`, `any`\>[]
 </td>
 <td>
 
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`any`, `any`, `Context`, `any`, `Info`\>
+[`Middleware`](../../index/type-aliases/Middleware.md)\<`unknown`, `unknown`, `Context`, `unknown`, `Info`\>
 
 </td>
 </tr>

@@ -1,4 +1,4 @@
-# GetPostScopeRules()\<Scopes, Grants, Result, Source, Context, Args, Info\>
+# GetPostScopeRules\<Scopes, Grants, Result, Source, Context, Args, Info\>
 
 > **GetPostScopeRules**\<`Scopes`, `Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`, `result`) => `boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\> \| `PromiseLike`\<`boolean` \| [`ScopeRules`](ScopeRules.md)\<`Scopes`, `Grants`\>\>
 

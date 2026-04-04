@@ -11,7 +11,7 @@ Useful for batch operations where multiple errors need to be reported.
 
 ### Constructor
 
-> **new AggregateGraphQLError**(`errors`, `message`, `options?`): `AggregateGraphQLError`
+> **new AggregateGraphQLError**(`errors`, `message?`, `options?`): `AggregateGraphQLError`
 
 #### Parameters
 

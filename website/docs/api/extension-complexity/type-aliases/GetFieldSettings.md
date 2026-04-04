@@ -1,4 +1,4 @@
-# GetFieldSettings()\<Context, Args\>
+# GetFieldSettings\<Context, Args\>
 
 > **GetFieldSettings**\<`Context`, `Args`\> = (`params`) => [`FieldSettings`](FieldSettings.md) \| `false`
 

@@ -1,3 +1,0 @@
-# ConsolePayload
-
-> **ConsolePayload** = `any`[]

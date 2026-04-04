@@ -1,4 +1,4 @@
-# joinSafe()
+# joinSafe
 
 > `const` **joinSafe**: (...`paths`) => `string`
 

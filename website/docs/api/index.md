@@ -2,6 +2,12 @@
 
 ## Packages
 
+- [@baeta/cache](cache/index.md)
+- [@baeta/cache-cloudflare](cache-cloudflare/index.md)
+- [@baeta/cache-ioredis](cache-ioredis/index.md)
+- [@baeta/cache-iovalkey](cache-iovalkey/index.md)
+- [@baeta/cache-redis-common](cache-redis-common/index.md)
+- [@baeta/cache-upstash](cache-upstash/index.md)
 - [@baeta/cli](cli/index.md)
 - [@baeta/core](core/index.md)
 - [@baeta/directives](directives/index.md)
@@ -9,10 +15,6 @@
 - [@baeta/errors](errors/index.md)
 - [@baeta/extension-auth](extension-auth/index.md)
 - [@baeta/extension-cache](extension-cache/index.md)
-- [@baeta/extension-cache-cloudflare](extension-cache-cloudflare/index.md)
-- [@baeta/extension-cache-keyv](extension-cache-keyv/index.md)
-- [@baeta/extension-cache-redis](extension-cache-redis/index.md)
-- [@baeta/extension-cache-upstash](extension-cache-upstash/index.md)
 - [@baeta/extension-complexity](extension-complexity/index.md)
 - [@baeta/generator](generator/index.md)
 - [@baeta/generator-sdk](generator-sdk/index.md)

@@ -10,7 +10,7 @@ Thrown when an authenticated user lacks the required permissions.
 
 ### Constructor
 
-> **new ForbiddenError**(`message`, `options?`): `ForbiddenError`
+> **new ForbiddenError**(`message?`, `options?`): `ForbiddenError`
 
 #### Parameters
 

@@ -1,6 +1,6 @@
 # FieldsResolversMap\<Source, Context, Info\>
 
-> **FieldsResolversMap**\<`Source`, `Context`, `Info`\> = `Record`\<`string`, [`Field`](Field.md)\<`Any`, `Any`, `Source`, `Context`, `Any`, `Info`\> \| [`SubscriptionField`](SubscriptionField.md)\<`Any`, `Any`, `Source`, `Context`, `Any`, `Info`\>\>
+> **FieldsResolversMap**\<`Source`, `Context`, `Info`\> = `Record`\<`string`, [`Field`](Field.md)\<`any`, `any`, `Source`, `Context`, `any`, `Info`\> \| [`SubscriptionField`](SubscriptionField.md)\<`any`, `any`, `Source`, `Context`, `any`, `Info`\>\>
 
 ## Type Parameters
 

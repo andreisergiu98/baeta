@@ -1,6 +1,6 @@
 # TypesBuildersMap\<Context, Info\>
 
-> **TypesBuildersMap**\<`Context`, `Info`\> = `Record`\<`string`, [`TypeMethods`](TypeMethods.md)\<`Any`, `Context`, `Info`, `Any`, `Any`\>\>
+> **TypesBuildersMap**\<`Context`, `Info`\> = `Record`\<`string`, [`TypeMethods`](TypeMethods.md)\<`any`, `Context`, `Info`, `any`, `any`\>\>
 
 ## Type Parameters
 

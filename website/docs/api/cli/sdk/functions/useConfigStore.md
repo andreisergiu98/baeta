@@ -20,7 +20,7 @@
 </td>
 <td>
 
-[`ConfigProps`](../interfaces/ConfigProps.md)
+`Readonly`\<[`ConfigProps`](../interfaces/ConfigProps.md)\>
 
 </td>
 </tr>
@@ -54,18 +54,6 @@
 <tr>
 <td>
 
-`events`
-
-</td>
-<td>
-
-`EventEmitter`\<[`ConfigEventMap`](../type-aliases/ConfigEventMap.md)\>
-
-</td>
-</tr>
-<tr>
-<td>
-
 `location`
 
 </td>
@@ -84,6 +72,18 @@
 <td>
 
 `string`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`showConfigChanged`
+
+</td>
+<td>
+
+`boolean`
 
 </td>
 </tr>

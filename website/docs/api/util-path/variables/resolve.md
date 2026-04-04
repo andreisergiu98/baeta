@@ -1,4 +1,4 @@
-# resolve()
+# resolve
 
 > `const` **resolve**: (...`pathSegments`) => `string` = `upath.resolve`
 

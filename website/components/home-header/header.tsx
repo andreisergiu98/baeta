@@ -15,14 +15,14 @@ export function HomeHeader() {
 				</div>
 				<p className="hero__subtitle">{siteConfig.tagline}</p>
 				<div className={styles.buttons}>
-					<Link className="button button--secondary button--lg" to="/docs/intro">
-						Introduction
-					</Link>
 					<Link
-						className="button button--secondary button--lg"
+						className="button button--primary button--lg"
 						to="/docs/getting-started/installation"
 					>
 						Getting Started
+					</Link>
+					<Link className="button button--outline button--primary button--lg" to="/docs/intro">
+						Introduction
 					</Link>
 				</div>
 			</div>

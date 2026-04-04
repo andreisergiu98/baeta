@@ -4,7 +4,8 @@ import { themes } from 'prism-react-renderer';
 import { injectTypeDocSidebar } from './docusaurus.sidebars.ts';
 
 const lightCodeTheme = themes.github;
-const darkCodeTheme = themes.dracula;
+const darkCodeTheme = structuredClone(themes.dracula);
+darkCodeTheme.plain.backgroundColor = '#1a1d27';
 
 const config: Config = {
 	title: 'Baeta',

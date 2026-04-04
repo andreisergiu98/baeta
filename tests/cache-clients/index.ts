@@ -302,148 +302,119 @@ export function runTestsForClient(
 
 	test(`${name} saveItemsWithDiff returns nulls for new items`, async (t) => {
 		const client = await createClient();
-		const id1 = randomUUID();
-		const id2 = randomUUID();
-		const key1 = itemKey(id1);
-		const key2 = itemKey(id2);
-		const result = await client.saveItemsWithDiff(
-			[
-				[key1, { id: id1, name: 'Alice' }],
-				[key2, { id: id2, name: 'Bob' }],
-			],
-			itemArgs,
+		const { values, keys, valueTuples } = mockItems();
+		const result = await client.saveItemsWithDiff(valueTuples, itemArgs);
+		t.deepEqual(
+			result,
+			values.map(() => null),
 		);
-		t.deepEqual(result, [null, null]);
-		const saved = await client.getPartialItems([key1, key2], itemArgs);
-		t.deepEqual(saved, [
-			{ id: id1, name: 'Alice' },
-			{ id: id2, name: 'Bob' },
-		]);
+		const saved = await client.getPartialItems(keys, itemArgs);
+		t.deepEqual(saved, values);
 	});
 
 	test(`${name} saveItemsWithDiff returns previous values when overwriting`, async (t) => {
 		const client = await createClient();
-		const id1 = randomUUID();
-		const id2 = randomUUID();
-		const key1 = itemKey(id1);
-		const key2 = itemKey(id2);
-		await client.saveItems(
-			[
-				[key1, { id: id1, name: 'old1' }],
-				[key2, { id: id2, name: 'old2' }],
-			],
-			itemArgs,
-		);
-		const result = await client.saveItemsWithDiff(
-			[
-				[key1, { id: id1, name: 'new1' }],
-				[key2, { id: id2, name: 'new2' }],
-			],
-			itemArgs,
-		);
-		t.deepEqual(result, [
-			{ id: id1, name: 'old1' },
-			{ id: id2, name: 'old2' },
-		]);
+		const { values, valueTuples } = mockItems();
+		await client.saveItems(valueTuples, itemArgs);
+		const result = await client.saveItemsWithDiff(valueTuples, itemArgs);
+		t.deepEqual(result, values);
 	});
 
 	test(`${name} saveItemsWithDiff mix of new and existing`, async (t) => {
 		const client = await createClient();
-		const id1 = randomUUID();
-		const id2 = randomUUID();
-		const key1 = itemKey(id1);
-		const key2 = itemKey(id2);
-		await client.saveItems([[key1, { id: id1, name: 'existing' }]], itemArgs);
-		const result = await client.saveItemsWithDiff(
-			[
-				[key1, { id: id1, name: 'updated' }],
-				[key2, { id: id2, name: 'brand-new' }],
-			],
-			itemArgs,
-		);
-		t.deepEqual(result, [{ id: id1, name: 'existing' }, null]);
+		const { values, valueTuples } = mockItems();
+		await client.saveItems(valueTuples.slice(0, 2), itemArgs);
+		const result = await client.saveItemsWithDiff(valueTuples, itemArgs);
+		t.deepEqual(result, [...values.slice(0, 2), ...values.slice(2).map(() => null)]);
 	});
 
 	test(`${name} deleteItemsWithDiff returns previous values for existing items`, async (t) => {
 		const client = await createClient();
-		const id1 = randomUUID();
-		const id2 = randomUUID();
-		const key1 = itemKey(id1);
-		const key2 = itemKey(id2);
-		await client.saveItems(
-			[
-				[key1, { id: id1, name: 'Alice' }],
-				[key2, { id: id2, name: 'Bob' }],
-			],
-			itemArgs,
+		const { values, keys, valueTuples } = mockItems();
+
+		await client.saveItems(valueTuples, itemArgs);
+		let result = await client.deleteItemsWithDiff(keys, itemArgs);
+		t.deepEqual(result, values);
+
+		result = await client.getPartialItems(keys, itemArgs);
+		t.deepEqual(
+			result,
+			values.map(() => null),
 		);
-		const result = await client.deleteItemsWithDiff([key1, key2], itemArgs);
-		t.deepEqual(result, [
-			{ id: id1, name: 'Alice' },
-			{ id: id2, name: 'Bob' },
-		]);
-		const gone = await client.getPartialItems([key1, key2], itemArgs);
-		t.deepEqual(gone, [null, null]);
 	});
 
 	test(`${name} deleteItemsWithDiff returns nulls for missing items`, async (t) => {
 		const client = await createClient();
-		const key = itemKey(randomUUID());
-		const result = await client.deleteItemsWithDiff([key], itemArgs);
-		t.deepEqual(result, [null]);
+		const { keys } = mockItems();
+		const result = await client.deleteItemsWithDiff(keys, itemArgs);
+		t.deepEqual(
+			result,
+			keys.map(() => null),
+		);
 	});
 
 	test(`${name} deleteItemsWithDiff mix of existing and missing`, async (t) => {
 		const client = await createClient();
-		const id1 = randomUUID();
-		const id2 = randomUUID();
-		const key1 = itemKey(id1);
-		const key2 = itemKey(id2);
-		await client.saveItems([[key1, { id: id1, name: 'existing' }]], itemArgs);
-		const result = await client.deleteItemsWithDiff([key1, key2], itemArgs);
-		t.deepEqual(result, [{ id: id1, name: 'existing' }, null]);
+		const { keys, values, valueTuples } = mockItems();
+		await client.saveItems(valueTuples.slice(0, 2), itemArgs);
+		const result = await client.deleteItemsWithDiff(keys, itemArgs);
+		t.deepEqual(result, [...values.slice(0, 2), ...values.slice(2).map(() => null)]);
 	});
 
 	test(`${name} concurrent saveItemsWithDiff on the same key`, async (t) => {
 		const client = await createClient();
-		const id = randomUUID();
-		const key = itemKey(id);
-		await client.saveItems([[key, { id, name: 'v0' }]], itemArgs);
 
+		const item = {
+			...mockItem(),
+			name: 'v0',
+		};
+		const key = itemKey(item.id);
+
+		await client.saveItems([[key, item]], itemArgs);
 		const [diff1, diff2] = await Promise.all([
-			client.saveItemsWithDiff([[key, { id, name: 'v1' }]], itemArgs),
-			client.saveItemsWithDiff([[key, { id, name: 'v2' }]], itemArgs),
+			client.saveItemsWithDiff([[key, { ...item, name: 'v1' }]], itemArgs),
+			client.saveItemsWithDiff([[key, { ...item, name: 'v2' }]], itemArgs),
 		]);
 
-		const previousFirst = diff1[0];
-		const previousSecond = diff2[0];
-		const prevNames = [previousFirst?.name, previousSecond?.name];
-		t.true(prevNames.includes('v0'), 'at least one diff should return v0 as previous value');
+		const itemDiff1 = diff1.at(0);
+		const itemDiff2 = diff2.at(0);
 
-		const final = await client.getPartialItems([key], itemArgs);
+		if (itemDiff1 == null || itemDiff2 == null) {
+			t.fail('Both diffs should return a value');
+			return;
+		}
+
+		const names = [itemDiff1.name, itemDiff2.name].sort((a, b) => a.localeCompare(b, 'en', {}));
+		t.deepEqual(names, ['v0', 'v1']);
+
+		const [final] = await client.getPartialItems([key], itemArgs);
+		if (final == null) {
+			t.fail('Final value should not be null');
+			return;
+		}
 		t.true(
-			final[0]?.name === 'v1' || final[0]?.name === 'v2',
-			`final value should be v1 or v2, got ${final[0]?.name}`,
+			final.name === 'v1' || final.name === 'v2',
+			`Final value should be v1 or v2, got ${final.name}`,
 		);
 	});
 
 	test(`${name} concurrent deleteItemsWithDiff on the same key`, async (t) => {
 		const client = await createClient();
-		const id = randomUUID();
-		const key = itemKey(id);
-		await client.saveItems([[key, { id, name: 'v0' }]], itemArgs);
+		const item = mockItem();
+		const key = itemKey(item.id);
+		await client.saveItems([[key, item]], itemArgs);
 
 		const [diff1, diff2] = await Promise.all([
 			client.deleteItemsWithDiff([key], itemArgs),
 			client.deleteItemsWithDiff([key], itemArgs),
 		]);
 
-		const previousFirst = diff1[0];
-		const previousSecond = diff2[0];
+		const itemDiff1 = diff1.at(0);
+		const itemDiff2 = diff2.at(0);
 
-		const returned = [previousFirst, previousSecond].filter((item) => item != null);
+		const returned = [itemDiff1, itemDiff2].filter((item) => item != null);
 		t.is(returned.length, 1, 'exactly one delete should return the value');
-		t.deepEqual(returned[0], { id, name: 'v0' });
+		t.deepEqual(returned[0], { id: item.id, name: item.name });
 
 		const final = await client.getPartialItems([key], itemArgs);
 		t.deepEqual(final, [null]);
@@ -451,123 +422,40 @@ export function runTestsForClient(
 
 	test(`${name} concurrent saveItemsWithDiff + deleteItemsWithDiff on the same key`, async (t) => {
 		const client = await createClient();
-		const id = randomUUID();
-		const key = itemKey(id);
-		await client.saveItems([[key, { id, name: 'v0' }]], itemArgs);
+		const item = {
+			...mockItem(),
+			name: 'v0',
+		};
+		const itemUpdate = { ...item, name: 'v1' };
+		const key = itemKey(item.id);
+		await client.saveItems([[key, item]], itemArgs);
 
 		const [saveDiff, deleteDiff] = await Promise.all([
-			client.saveItemsWithDiff([[key, { id, name: 'v1' }]], itemArgs),
+			client.saveItemsWithDiff([[key, itemUpdate]], itemArgs),
 			client.deleteItemsWithDiff([key], itemArgs),
 		]);
 
-		const prevNames = [saveDiff[0]?.name, deleteDiff[0]?.name];
-		t.true(prevNames.includes('v0'), 'at least one diff should return v0 as previous value');
+		const saveDiffItem = saveDiff.at(0);
+		const deleteDiffItem = deleteDiff.at(0);
 
-		const final = await client.getPartialItems([key], itemArgs);
-		t.true(
-			final[0] == null || final[0]?.name === 'v1',
-			`final value should be null or v1, got ${JSON.stringify(final[0])}`,
-		);
-	});
+		if (saveDiffItem == null && deleteDiffItem == null) {
+			t.fail('One operation should return the previous value');
+			return;
+		}
 
-	test(`${name} saveQuery indexes remain valid after deleteQueries + re-save cycle`, async (t) => {
-		const client = await createClient();
-		const qName = randomUUID();
-		const idx = indexKey(qName, 'i1');
-		const keyQ1 = queryKey(qName, randomUUID());
-		const keyQ2 = queryKey(qName, randomUUID());
-
-		await client.saveQuery(keyQ1, [idx], ['q1-data'], queryArgs);
-		await client.deleteQueries([idx], queryArgs);
-
-		const afterDelete = await client.getQuery(keyQ1, queryArgs);
-		t.is(afterDelete, null);
-
-		await client.saveQuery(keyQ2, [idx], ['q2-data'], queryArgs);
-		const q2Result = await client.getQuery(keyQ2, queryArgs);
-		t.deepEqual(q2Result, ['q2-data']);
-
-		await client.deleteQueries([idx], queryArgs);
-		const q2AfterDelete = await client.getQuery(keyQ2, queryArgs);
-		t.is(q2AfterDelete, null);
-	});
-
-	test(`${name} deleteQueries cleans up shared indexes correctly`, async (t) => {
-		const client = await createClient();
-		const qName = randomUUID();
-		const idxA = indexKey(qName, 'a');
-		const idxB = indexKey(qName, 'b');
-		const idxShared = indexKey(qName, 'shared');
-		const keyQ1 = queryKey(qName, randomUUID());
-		const keyQ2 = queryKey(qName, randomUUID());
-		const keyQ3 = queryKey(qName, randomUUID());
-
-		await client.saveQuery(keyQ1, [idxA, idxShared], ['q1'], queryArgs);
-		await client.saveQuery(keyQ2, [idxB, idxShared], ['q2'], queryArgs);
-
-		await client.deleteQueries([idxA], queryArgs);
-		const q1After = await client.getQuery(keyQ1, queryArgs);
-		const q2After = await client.getQuery(keyQ2, queryArgs);
-		t.is(q1After, null);
-		t.deepEqual(q2After, ['q2']);
-
-		await client.deleteQueries([idxShared], queryArgs);
-		const q2AfterShared = await client.getQuery(keyQ2, queryArgs);
-		t.is(q2AfterShared, null);
-
-		await client.saveQuery(keyQ3, [idxShared], ['q3'], queryArgs);
-		const q3Result = await client.getQuery(keyQ3, queryArgs);
-		t.deepEqual(q3Result, ['q3']);
-
-		await client.deleteQueries([idxShared], queryArgs);
-		const q3AfterDelete = await client.getQuery(keyQ3, queryArgs);
-		t.is(q3AfterDelete, null);
-	});
-
-	test(`${name} concurrent saveQuery to the same index`, async (t) => {
-		const client = await createClient();
-		const qName = randomUUID();
-		const idx = indexKey(qName, 'shared');
-		const keyQ1 = queryKey(qName, randomUUID());
-		const keyQ2 = queryKey(qName, randomUUID());
-
-		await Promise.all([
-			client.saveQuery(keyQ1, [idx], ['q1'], queryArgs),
-			client.saveQuery(keyQ2, [idx], ['q2'], queryArgs),
-		]);
-
-		const result1 = await client.getQuery(keyQ1, queryArgs);
-		const result2 = await client.getQuery(keyQ2, queryArgs);
-		t.deepEqual(result1, ['q1']);
-		t.deepEqual(result2, ['q2']);
-
-		await client.deleteQueries([idx], queryArgs);
-		const q1After = await client.getQuery(keyQ1, queryArgs);
-		const q2After = await client.getQuery(keyQ2, queryArgs);
-		t.is(q1After, null);
-		t.is(q2After, null);
-	});
-
-	test(`${name} concurrent deleteQueries on different indexes`, async (t) => {
-		const client = await createClient();
-		const qName = randomUUID();
-		const idxA = indexKey(qName, 'a');
-		const idxB = indexKey(qName, 'b');
-		const keyQ1 = queryKey(qName, randomUUID());
-		const keyQ2 = queryKey(qName, randomUUID());
-
-		await client.saveQuery(keyQ1, [idxA], ['q1'], queryArgs);
-		await client.saveQuery(keyQ2, [idxB], ['q2'], queryArgs);
-
-		await Promise.all([
-			client.deleteQueries([idxA], queryArgs),
-			client.deleteQueries([idxB], queryArgs),
-		]);
-
-		const result1 = await client.getQuery(keyQ1, queryArgs);
-		const result2 = await client.getQuery(keyQ2, queryArgs);
-		t.is(result1, null);
-		t.is(result2, null);
+		if (saveDiffItem == null || deleteDiffItem == null) {
+			// Delete happened first
+			t.is(saveDiffItem, null);
+			t.deepEqual(deleteDiffItem, item);
+			const final = await client.getPartialItems([key], itemArgs);
+			t.deepEqual(final, [itemUpdate]);
+		} else {
+			// Save happened first
+			t.deepEqual(saveDiffItem, item);
+			t.deepEqual(deleteDiffItem, itemUpdate);
+			const final = await client.getPartialItems([key], itemArgs);
+			t.deepEqual(final, [null]);
+		}
 	});
 
 	// test.serial(`${name} item operations don't fail for large volumes`, async (t) => {

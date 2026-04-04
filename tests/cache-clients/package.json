@@ -1,0 +1,73 @@
+{
+  "name": "@baeta/tests-cache-clients",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "tests/cache-clients"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    }
+  },
+  "types": "./index.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "types": "tsc --noEmit"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    }
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/cache": "workspace:^",
+    "@baeta/testing": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "typescript": "catalog:dev"
+  },
+  "peerDependencies": {
+    "@baeta/cache": "workspace:^"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
+  }
+}

@@ -25,6 +25,31 @@ export type Subscription = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Subscript
 
 export type StringFormat = 'EMAIL' | 'UUID' | 'URL'
 
+export type PageInfo = BaetaUtility.Or<BaetaOverrides.ObjectTypes["PageInfo"], {
+  hasPreviousPage: Scalars["Boolean"]
+  hasNextPage: Scalars["Boolean"]
+}>
+
+export type UserConnection = BaetaUtility.Or<BaetaOverrides.ObjectTypes["UserConnection"], {
+  pageInfo: PageInfo
+  edges: Array<UserEdge | null> | null
+}>
+
+export type UserEdge = BaetaUtility.Or<BaetaOverrides.ObjectTypes["UserEdge"], {
+  cursor: Scalars["ID"]
+  node: User | null
+}>
+
+export type UserPhotoConnection = BaetaUtility.Or<BaetaOverrides.ObjectTypes["UserPhotoConnection"], {
+  pageInfo: PageInfo
+  edges: Array<UserPhotoEdge | null> | null
+}>
+
+export type UserPhotoEdge = BaetaUtility.Or<BaetaOverrides.ObjectTypes["UserPhotoEdge"], {
+  cursor: Scalars["ID"]
+  node: UserPhoto | null
+}>
+
 export type UserPhoto = BaetaUtility.Or<BaetaOverrides.ObjectTypes["UserPhoto"], {
   id: Scalars["ID"]
   url: Scalars["String"]
@@ -39,10 +64,38 @@ export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
   birthday: Scalars["DateTime"] | null
 }>
 
-export type UserPhotoIdArgs = {
+export type PageInfoHasPreviousPageArgs = {
 };
 
-export type UserPhotoUrlArgs = {
+export type PageInfoHasNextPageArgs = {
+};
+
+export type UserConnectionPageInfoArgs = {
+};
+
+export type UserConnectionEdgesArgs = {
+};
+
+export type UserEdgeCursorArgs = {
+};
+
+export type UserEdgeNodeArgs = {
+};
+
+export type UserPhotoConnectionPageInfoArgs = {
+};
+
+export type UserPhotoConnectionEdgesArgs = {
+};
+
+export type UserPhotoEdgeCursorArgs = {
+};
+
+export type UserPhotoEdgeNodeArgs = {
+};
+
+export type UserPhotosConnectionArgs = {
+  page: UserPhotoPage
 };
 
 export type UserPhotosArgs = {
@@ -66,6 +119,12 @@ export type UserGivenNameArgs = {
 export type UserBirthdayArgs = {
 };
 
+export type UserPhotoIdArgs = {
+};
+
+export type UserPhotoUrlArgs = {
+};
+
 export type QueryUserArgs = {
   where: UserWhereUniqueInput
 };
@@ -87,6 +146,11 @@ export type SubscriptionUserCreatedArgs = {
 };
 
 export type SubscriptionUserUpdatedArgs = {
+};
+
+export type UserPhotoPage = {
+  cursor: Scalars["ID"] | null
+  limit: Scalars["Int"]
 };
 
 export type UserWhereUniqueInput = {

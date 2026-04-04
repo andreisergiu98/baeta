@@ -17,6 +17,11 @@
   "fixed": [
     [
       "create-baeta",
+      "@baeta/cache",
+      "@baeta/cache-cloudflare",
+      "@baeta/cache-ioredis",
+      "@baeta/cache-iovalkey",
+      "@baeta/cache-upstash",
       "@baeta/cli",
       "@baeta/core",
       "@baeta/directives",
@@ -24,10 +29,6 @@
       "@baeta/errors",
       "@baeta/extension-auth",
       "@baeta/extension-cache",
-      "@baeta/extension-cache-cloudflare",
-      "@baeta/extension-cache-keyv",
-      "@baeta/extension-cache-redis",
-      "@baeta/extension-cache-upstash",
       "@baeta/extension-complexity",
       "@baeta/plugin-cloudflare",
       "@baeta/plugin-directives",

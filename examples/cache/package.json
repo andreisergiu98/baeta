@@ -31,10 +31,11 @@
     "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
   "dependencies": {
+    "@baeta/cache": "workspace:^",
+    "@baeta/cache-ioredis": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@baeta/extension-cache": "workspace:^",
-    "@baeta/extension-cache-redis": "workspace:^",
     "@prisma/adapter-better-sqlite3": "^7.4.2",
     "@prisma/client-runtime-utils": "^7.4.2",
     "graphql": "catalog:dev",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/plugin-directives": "workspace:^",
+    "@baeta/plugin-pagination": "workspace:^",
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@faker-js/faker": "^10.3.0",

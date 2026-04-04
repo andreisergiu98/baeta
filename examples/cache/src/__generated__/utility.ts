@@ -18,8 +18,13 @@ export type BaseScalars = {
 };
 
 export interface BaseObjectTypes {
-  UserPhoto: unknown;
+  PageInfo: unknown;
+  UserConnection: unknown;
+  UserEdge: unknown;
+  UserPhotoConnection: unknown;
+  UserPhotoEdge: unknown;
   User: unknown;
+  UserPhoto: unknown;
   Query: unknown;
   Mutation: unknown;
   Subscription: unknown;

@@ -1,0 +1,11 @@
+import { build } from '@baeta/builder/bundler';
+
+export async function bundleTest() {
+	await build({
+		entryPoints: ['__test__/create-env.ts'],
+		outfile: './dist/create-env.js',
+		external: ['cloudflare:workers'],
+		format: 'esm',
+		bundle: true,
+	});
+}

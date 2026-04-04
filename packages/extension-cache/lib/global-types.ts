@@ -1,83 +1,65 @@
 /** biome-ignore-all lint/correctness/noUnusedVariables: arguments used for inference */
-import type { Field, FieldBuilder } from '@baeta/core/sdk';
 import type {
-	CacheMiddlewareOptions,
-	RequiredCacheMiddlewareOptions,
-} from './middleware-options.ts';
-import type { CacheRef, RefCompatibleRoot } from './ref.ts';
-import type { CacheQueryMatcher, StoreAdapter } from './store-adapter.ts';
-import type { StoreOptions } from './store-options.ts';
-
-/** Utility type to infer the base type of a resolver */
-export type TypeGetter<T> = NonNullable<T> extends Array<infer G> ? NonNullable<G> : NonNullable<T>;
-
-/** Arguments for $useCache method */
-export type UseCacheArgs<Result, Source> = Source extends RefCompatibleRoot
-	? [store: StoreAdapter<TypeGetter<Result>>, options?: CacheMiddlewareOptions<Source>]
-	: [store: StoreAdapter<TypeGetter<Result>>, options: RequiredCacheMiddlewareOptions<Source>];
+	CacheOptions,
+	CreateCacheFactory,
+	OptionalGetRef,
+	RequiredGetRef,
+} from '@baeta/cache';
+import type { ResolverParams } from '@baeta/core';
+import type { Field } from '@baeta/core/sdk';
+import type { RefCompatibleItem } from '../../cache/lib/item.ts';
 
 declare global {
 	export namespace BaetaExtensions {
 		export interface TypeExtensions<Source, Context, Info> {
 			/**
-			 * Creates a cache store for a specific type.
+			 * Creates a cache store for a specific type with optional query definitions.
 			 *
-			 * @param options - Cache configuration arguments
-			 * @returns Store for type
+			 * @param options - Cache configuration and optional query definitions
+			 * @returns CacheStore with item operations and query caches
 			 *
 			 * @example
 			 * ```typescript
-			 * const userCache = User.$createCache();
+			 * const userCache = User.$createCache({
+			 *   revision: 2,
+			 *   parse: (v) => JSON.parse(v),
+			 *   serialize: (v) => JSON.stringify(v),
+			 *   queries: {
+			 *     findUser: async (args: { id?: string }) =>
+			 *       db.user.findFirst({ where: args }),
+			 *   },
+			 * });
 			 * ```
 			 */
-			$createCache: (options: StoreOptions<Source>) => StoreAdapter<Source>;
+			$createCache: (
+				options: Source extends RefCompatibleItem
+					? Omit<CacheOptions<Source>, 'name'> & OptionalGetRef<Source>
+					: Omit<CacheOptions<Source>, 'name'> & RequiredGetRef<Source>,
+			) => CreateCacheFactory<Source>;
 		}
 
 		export interface FieldExtensions<Result, Source, Context, Args, Info> {
 			/**
-			 * Reference cache object for a query or type field.
-			 */
-			$cacheRef: CacheRef<Result, Source, Args>;
-			/**
-			 * Clears cached results for the resolver
+			 * Resolves a field using a cached query.
 			 *
-			 * @param store - Cache store adapter
-			 * @param matcher - Optional criteria for selective clearing
+			 * @param query - A QueryCache instance from a CacheStore
+			 * @param mapper - Maps resolver params to cache query args
+			 * @returns Field resolver that checks cache before executing
 			 *
 			 * @example
 			 * ```typescript
-			 * // Clear all cached users
-			 * await Query.users.$cacheClear(userCache);
-			 *
-			 * // Clear cached users for specific organization
-			 * await Query.users.$cacheClear(userCache, {
-			 *   args: { organizationId: "org-1" }
-			 * });
+			 * Query.user.$resolveCache(
+			 *   userCache.findUser,
+			 *   ({ args }) => ({ id: args.where.id }),
+			 * )
 			 * ```
 			 */
-			$cacheClear: (
-				store: StoreAdapter<TypeGetter<Result>>,
-				matcher?: CacheQueryMatcher<Args>,
-			) => Promise<void>;
-			/**
-			 * Enables caching for the resolver
-			 *
-			 * @param args - Cache configuration arguments
-			 *
-			 * @example
-			 * ```typescript
-			 * // Simple caching
-			 * Query.user.$useCache(userCache);
-			 *
-			 * // With custom options
-			 * Query.user.$useCache(userCache, {
-			 *   getRootRef: (root) => root.userId
-			 * });
-			 * ```
-			 */
-			$useCache: (
-				...args: UseCacheArgs<Result, Source>
-			) => ReturnType<FieldBuilder<Result, Source, Context, Args, Info>['toMethods']>;
+			$resolveCache: <CacheResult, CacheArgs = Record<string, never>>(
+				query: (args: CacheArgs) => CacheResult | Promise<CacheResult>,
+				mapper: (
+					params: ResolverParams<Source, Context, Args, Info>,
+				) => CacheArgs | PromiseLike<CacheArgs>,
+			) => Field<Result, CacheResult, Source, Context, Args, Info>;
 		}
 	}
 }

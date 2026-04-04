@@ -198,13 +198,6 @@ export const syncRules: SyncRule[] = [
 	merge(
 		{
 			from: '_shared/prisma',
-			to: 'cache-advanced',
-		},
-		prismaDefaults,
-	),
-	merge(
-		{
-			from: '_shared/prisma',
 			to: 'relay-pagination',
 		},
 		prismaDefaults,

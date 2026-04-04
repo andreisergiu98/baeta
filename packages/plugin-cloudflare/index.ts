@@ -71,7 +71,7 @@ async function generateConfigForCache(options: CloudflarePluginOptions['cache'])
 		return null;
 	}
 
-	const result = await import('@baeta/extension-cache-cloudflare/sdk').catch(() => {
+	const result = await import('@baeta/cache-cloudflare/sdk').catch(() => {
 		return null;
 	});
 

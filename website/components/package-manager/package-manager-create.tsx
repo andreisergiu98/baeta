@@ -9,8 +9,8 @@ interface Props {
 export function PackageManagerCreate(props: Readonly<Props>) {
 	return (
 		<Tabs groupId="package-manager">
-			<TabItem value="yarn">
-				<CodeBlock language="bash">yarn create {props.package}</CodeBlock>
+			<TabItem value="yarn" label="yarn">
+				<CodeBlock language="bash">yarn dlx create-{props.package}</CodeBlock>
 			</TabItem>
 			<TabItem value="npm">
 				<CodeBlock language="bash">npx create-{props.package}</CodeBlock>
@@ -21,8 +21,8 @@ export function PackageManagerCreate(props: Readonly<Props>) {
 			<TabItem value="bun">
 				<CodeBlock language="bash">bun create {props.package}</CodeBlock>
 			</TabItem>
-			<TabItem value="yarn-2" label="yarn 2+">
-				<CodeBlock language="bash">yarn dlx create-{props.package}</CodeBlock>
+			<TabItem value="yarn-v1" label="yarn v1">
+				<CodeBlock language="bash">yarn create {props.package}</CodeBlock>
 			</TabItem>
 		</Tabs>
 	);

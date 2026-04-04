@@ -15,9 +15,12 @@ Plugins are registered in your Baeta configuration file `baeta.ts`:
 import { defineConfig } from "@baeta/cli";
 import { gitignorePlugin } from "@baeta/plugin-gitignore";
 import { prismaPlugin } from "@baeta/plugin-prisma";
-import { execPlugin } from "@baeta/plugin-exec";
+import { createExecPlugin } from "@baeta/plugin-exec";
 
 export default defineConfig({
+  graphql: {
+    schemas: ["src/**/*.gql"],
+  },
   plugins: [
     gitignorePlugin({
       // plugin options
@@ -25,7 +28,7 @@ export default defineConfig({
     prismaPlugin({
       // plugin options
     }),
-    execPlugin({
+    createExecPlugin({
       // plugin options
     }),
     // Add more plugins here

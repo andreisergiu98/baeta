@@ -11,44 +11,42 @@ Baeta allows you to define a shared context that's available throughout your res
 First, define your context type:
 
 ```typescript
-// src/context.ts
+// src/types/context.ts
 import type { PubSub } from "graphql-yoga";
-import type { PubSubMap } from "../lib/pubsub";
-import type { PrismaClient } from "../lib/db/prisma";
+import type { PubSubMap } from "../lib/pubsub.ts";
 
 export type Context = {
-  db: PrismaClient;
+  userId?: string;
   pubsub: PubSub<PubSubMap>;
 };
+
+// biome-ignore lint/complexity/noBannedTypes: Empty context
+export type ServerContext = {};
 ```
 
 ## Configuration
 
-Add the context type path to your `baeta.ts` configuration:
+The context type is picked up through the `Ctx` type alias in `src/modules/types.ts`. Update this alias to point to your context type:
 
 ```typescript
-import { defineConfig } from "@baeta/cli";
-import { autoloadPlugin } from "@baeta/plugin-autoload";
+// src/modules/types.ts
+import type { Context } from "../types/context.ts";
 
-export default defineConfig({
-  graphql: {
-    schemas: ["src/**/*.gql"],
-    contextType: "src/context#Context", // Path to context type
-  },
-  // ... rest of config
-});
+export type Ctx = Context;
 ```
+
+For more details on the types file, see [Custom Types](./custom-types.mdx).
 
 ## Usage in Resolvers
 
 The context is automatically typed in your resolvers:
 
 ```typescript
-const { Query } = getUserModule();
+const { Query } = UserModule;
 
-Query.user(({ args, ctx }) => {
+const userQuery = Query.user.resolve(({ args, ctx }) => {
   // ctx is typed as Context
-  return ctx.db.user.findUnique({
+  return db.user.findUnique({
     where: args.where,
   });
 });
@@ -59,10 +57,14 @@ Query.user(({ args, ctx }) => {
 Middlewares also get the typed context:
 
 ```typescript
-Mutation.updateUser.$use(async ({ ctx }, next) => {
-  // ctx is typed as Context
-  const result = await next();
-  ctx.pubsub.publish("user-updated", result);
-  return result;
-});
+const updateUserMutation = Mutation.updateUser
+  .$use(async (next, { ctx }) => {
+    // ctx is typed as Context
+    const result = await next();
+    ctx.pubsub.publish("user-updated", result);
+    return result;
+  })
+  .resolve(async ({ args }) => {
+    return db.user.update({ where: args.where, data: args.data });
+  });
 ```

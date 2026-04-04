@@ -78,62 +78,40 @@ extend union Media = Comic
 
 ## Type Resolution
 
-Type resolution must be defined in the module where the union or interface is originally defined, regardless of where types implement or extend them:
+Baeta requires you to include a `__typename` field when returning union or interface types. The generated TypeScript types enforce this — you'll get a type error if `__typename` is missing.
 
-```typescript
-import { getMediaModule } from "./typedef";
-
-const { Media, Query } = getMediaModule();
-
-Media.$resolveType(({ value }) => {
-  // If __typename is provided, we don't need to check further
-  if (value.__typename) {
-    return value.__typename;
-  }
-
-  // Check for distinctive fields
-  if ("author" in value) {
-    return "Book";
-  }
-
-  if ("artist" in value) {
-    return "Comic";
-  }
-
-  if ("seasons" in value) {
-    return "TVShow";
-  }
-
-  return "Movie";
-});
-```
+This eliminates the need for a custom `resolveType` function, as GraphQL can determine the concrete type directly from `__typename`.
 
 ## Resolvers
 
-Here's an example of resolving a union field:
+Here's an example of resolving a union field. Note how each item includes `__typename`:
 
 ```typescript
-Query.media(() => {
+const mediaQuery = Query.media.resolve(() => {
   return [
     {
+      __typename: "Book" as const,
       id: "1",
       title: "The Book",
       author: "Jon Doe",
       year: 2021,
+      pages: 100,
     },
     {
+      __typename: "Movie" as const,
       id: "2",
       title: "The Movie",
       year: 2022,
     },
     {
+      __typename: "TVShow" as const,
       id: "3",
       title: "The TV Show",
       year: 2023,
       seasons: 1,
     },
     {
-      __typename: "Movie",
+      __typename: "Movie" as const,
       id: "4",
       title: "Another Movie",
       year: 2023,

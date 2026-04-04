@@ -31,7 +31,7 @@ Add only what you need — extend functionality with optional plugins and extens
 
 - **@baeta/extension-auth**: Granular scope-based authorization
 - **@baeta/extension-cache**: Automatic caching with simple utilities for updating the cache
-- etc...
+- **@baeta/extension-complexity**: Query complexity analysis to protect against expensive queries
 
 ## How it Works
 
@@ -71,7 +71,7 @@ const usersQuery = Query.users.resolve(() => {
   return dataSource.user.findMany();
 });
 
-Query.$fields({
+export default Query.$fields({
   user: userQuery,
   users: usersQuery,
 });
@@ -99,23 +99,32 @@ const userQuery = Query.user
 #### 4. Add caching
 
 ```typescript
+import { defineQuery } from "@baeta/cache";
+
 const { Query, Mutation, User } = UserModule;
 
-export const userCache = User.$createCache();
+export const userCache = User.$createCache()
+  .withQueries({
+    findUser: defineQuery({
+      resolve: async (args: { id?: string }) => {
+        return dataSource.user.find(args);
+      },
+    }),
+  })
+  .build();
 
 const userQuery = Query.user
   .$auth({
     // ...
   })
-  .$useCache(userCache)
-  .resolve(async ({ args }) => {
-    // ...
-  });
+  .$resolveCache(userCache.queries.findUser, ({ args }) => ({
+    id: args.where.id,
+  }));
 
 const updateUserMutation = Mutation.updateUser
   .$use(async (next) => {
     const user = await next();
-    await userCache.save(user);
+    await userCache.update(user);
     return user;
   })
   .resolve(async ({ args }) => {

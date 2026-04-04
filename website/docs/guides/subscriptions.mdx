@@ -8,28 +8,33 @@ Baeta provides type-safe real-time functionality through GraphQL subscriptions.
 
 ## PubSub Setup
 
-While you can use any PubSub implementation directly, Baeta offers a typed wrapper through `@baeta/subscriptions-pubsub` for enhanced type safety:
+You can use any PubSub implementation. Here's an example using GraphQL Yoga's built-in PubSub:
+
+```typescript
+// src/lib/pubsub.ts
+import { createPubSub } from "graphql-yoga";
+import type { User } from "../__generated__/types.ts";
+
+export type PubSubMap = {
+  "user-created": [string];
+  "user-updated": [User];
+};
+
+export const pubsub = createPubSub<PubSubMap>();
+```
+
+Alternatively, you can use Baeta's [Typed PubSub](./typed-pubsub.mdx) wrapper through `@baeta/subscriptions-pubsub` for `graphql-subscriptions`:
+
+```typescript
+import { createTypedPubSub } from "@baeta/subscriptions-pubsub";
+import { PubSub } from "graphql-subscriptions";
+
+export const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub());
+```
 
 :::warning
 `graphql-subscriptions` is for a single server instance. If you need to scale your application, consider using a more robust solution like `graphql-redis-subscriptions`.
 :::
-
-```typescript
-// src/lib/pubsub.ts
-import { createTypedPubSub } from "@baeta/subscriptions-pubsub";
-import { PubSub } from "graphql-subscriptions";
-import type { User } from "../__generated__/types";
-
-export type PubSubMap = {
-  "user-created": string;
-  "user-updated": User;
-  [c: `user-updated-${string}`]: User; // Dynamic channel
-};
-
-export const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub());
-// Or use PubSub directly without the wrapper
-// export const pubsub = new PubSub();
-```
 
 ## Context Integration
 
@@ -37,11 +42,11 @@ Add PubSub to your context:
 
 ```typescript
 // src/types/context.ts
-import type { TypedPubSub } from "@baeta/subscriptions-pubsub";
-import type { PubSubMap } from "../lib/pubsub";
+import type { PubSub } from "graphql-yoga";
+import type { PubSubMap } from "../lib/pubsub.ts";
 
 export type Context = {
-  pubsub: TypedPubSub<PubSubMap>;
+  pubsub: PubSub<PubSubMap>;
 };
 ```
 
@@ -57,42 +62,39 @@ type Subscription {
 }
 ```
 
-Implementing Subscriptions
+## Implementing Subscriptions
 
-:::note
-The subscription API differs between versions:
-
-- Use `asyncIterator` for graphql-subscriptions v2.x
-- Use `asyncIterableIterator` for graphql-subscriptions v3.x
-  :::
+Subscriptions use the `.subscribe()` and `.resolve()` chain. The `.resolve()` step supports the same chaining methods as regular resolvers (`.map`, `.key`, `.to`, `.withDefault`, etc.):
 
 ```typescript
-// src/modules/user/resolvers.ts
-import { db } from "../../lib/db/prisma";
-import { getUserModule } from "./typedef";
+import { db } from "../../lib/db/prisma.ts";
+import { UserModule } from "./typedef.ts";
 
-const { Subscription } = getUserModule();
+const { Subscription } = UserModule;
 
-// Subscription with database lookup
-Subscription.userCreated({
-  subscribe(params) {
-    return params.ctx.pubsub.asyncIterableIterator("user-created");
-  },
-  resolve(params) {
+// Subscription with database lookup in resolve
+const userCreatedSubscription = Subscription.userCreated
+  .subscribe(({ ctx }) => {
+    return ctx.pubsub.subscribe("user-created");
+  })
+  .resolve(({ source }) => {
     return db.user.findFirstOrThrow({
-      where: { id: params.payload },
+      where: { id: source },
     });
-  },
-});
+  });
 
-// Direct subscription
-Subscription.userUpdated({
-  subscribe({ ctx }) {
-    return ctx.pubsub.asyncIterableIterator("user-updated");
-  },
-  resolve({ payload }) {
-    return payload;
-  },
+// Direct subscription — source is passed through
+const userUpdatedSubscription = Subscription.userUpdated
+  .subscribe(({ ctx }) => {
+    return ctx.pubsub.subscribe("user-updated");
+  })
+  .resolve(({ source }) => {
+    return source;
+  });
+
+export default Subscription.$fields({
+  userCreated: userCreatedSubscription,
+  userUpdated: userUpdatedSubscription,
 });
 ```
 
@@ -102,34 +104,66 @@ Publish events from your mutations or other resolvers:
 
 ```typescript
 // Publishing after user update
-Mutation.updateUser.$use(async ({ ctx }, next) => {
-  const user = await next();
-  if (user) {
-    ctx.pubsub.publish("user-updated", user);
-  }
-  return user;
-});
+const updateUserMutation = Mutation.updateUser
+  .$use(async (next, { ctx }) => {
+    const user = await next();
+    if (user) {
+      ctx.pubsub.publish("user-updated", user);
+    }
+    return user;
+  })
+  .resolve(async ({ args }) => {
+    return db.user.update({
+      where: { id: args.where.id },
+      data: args.data,
+    });
+  });
 
 // Publishing after user creation
-Mutation.createUser(async ({ args, ctx }) => {
-  const user = await ctx.db.user.create({
-    data: args.data,
+const createUserMutation = Mutation.createUser.resolve(
+  async ({ args, ctx }) => {
+    const user = await db.user.create({
+      data: args.data,
+    });
+    ctx.pubsub.publish("user-created", user.id);
+    return user;
+  },
+);
+```
+
+## Subscription Middlewares
+
+You can attach middlewares to subscriptions. Note that middlewares currently only apply to the **subscribe phase** (not the resolve phase):
+
+```typescript
+const userUpdatedSubscription = Subscription.userUpdated
+  .$use((next) => {
+    console.log("Before subscribe");
+    return next();
+  })
+  .$use(async (next) => {
+    console.log("Subscribing to user updates");
+    const sub = await next();
+    console.log("Subscribed");
+    return sub;
+  })
+  .subscribe(({ ctx }) => {
+    return ctx.pubsub.subscribe("user-updated");
+  })
+  .resolve(({ source }) => {
+    return source;
   });
-  ctx.pubsub.publish("user-created", user.id);
-  return user;
-});
 ```
 
 ## Production Setup
 
-For production environments, consider using a multi-instance solution:
+For production environments, consider using a multi-instance solution with `graphql-redis-subscriptions` and the [Typed PubSub](./typed-pubsub.mdx) wrapper:
 
 ```typescript
 // src/lib/pubsub.ts
 import { createTypedPubSub } from "@baeta/subscriptions-pubsub";
 import { RedisPubSub } from "graphql-redis-subscriptions";
-import * as Redis from "ioredis";
-import type { PubSubMap } from "./types";
+import Redis from "ioredis";
 
 const options = {
   host: REDIS_DOMAIN_NAME,
@@ -144,29 +178,3 @@ const redisPubSub = new RedisPubSub({
 export const pubsub = createTypedPubSub<RedisPubSub, PubSubMap>(redisPubSub);
 ```
 
-## Type Safety
-
-The TypedPubSub wrapper ensures type safety for both publishing and subscribing:
-
-```typescript
-// TypeScript will error if channel or payload type doesn't match
-ctx.pubsub.publish("user-updated", 123); // Error: payload should be User
-ctx.pubsub.publish("invalid-channel", user); // Error: channel doesn't exist
-```
-
-## Alternative Solutions
-
-While this documentation uses `graphql-subscriptions`, you can also use other PubSub implementations:
-
-### graphql-yoga
-
-```typescript
-import { createPubSub } from "graphql-yoga";
-
-export type PubSubMap = {
-  "user-created": [string];
-  "user-updated": [User];
-};
-
-export const pubsub = createPubSub<PubSubMap>();
-```

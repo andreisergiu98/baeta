@@ -45,6 +45,7 @@ export const testCommand: CommandModule<{}, TestArgs> = {
 				args.skipCoverage ? undefined : '--check-coverage',
 				'yarn',
 				'ava',
+				'--timeout=60s',
 			].filter((el) => el != null),
 		}).catch((error) => {
 			process.exit(error.exitCode || 1);

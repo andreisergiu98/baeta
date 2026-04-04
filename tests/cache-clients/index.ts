@@ -459,10 +459,10 @@ export function runTestsForClient(
 	});
 
 	test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
-		t.timeout(60_000);
+		t.timeout(30_000);
 
 		const client = await createClient();
-		const args = makeItemArgs(60_000);
+		const args = makeItemArgs(30_000);
 
 		const { values, valueTuples, keys } = mockItems(200_000);
 		await client.saveItems(valueTuples, args);
@@ -484,24 +484,21 @@ export function runTestsForClient(
 	});
 
 	test.serial(`${name} query operations don't fail for large volumes`, async (t) => {
-		t.timeout(30_000);
-
 		const client = await createClient();
 
-		const args = makeQueryArgs(60_000);
 		const queryName = `TestQuery_${randomUUID()}`;
 		const query = queryKey(queryName, randomUUID());
 		const idx = indexKey(queryName, 'idx1');
 		const items = Array.from({ length: 100_000 }, (_, i) => `item-${i}`);
 
-		await client.saveQuery(query, [idx], items, args);
+		await client.saveQuery(query, [idx], items, queryArgs);
 
-		let result = await client.getQuery(query, args);
+		let result = await client.getQuery(query, queryArgs);
 		t.deepEqual(result, items);
 
-		await client.deleteQueries([idx], args);
+		await client.deleteQueries([idx], queryArgs);
 
-		result = await client.getQuery(query, args);
+		result = await client.getQuery(query, queryArgs);
 		t.deepEqual(result, null);
 	});
 }

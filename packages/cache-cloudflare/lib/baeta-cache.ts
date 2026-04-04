@@ -22,13 +22,12 @@ export class BaetaCache extends DurableObject {
 		this.migrate();
 		this.handler = createActionsRequestHandler(actions, {
 			getPartialItems: (args) => this.getPartialItems(args.keys),
-			saveItems: (args) => this.saveItems(args.items, Date.now() + args.ttlMs),
-			saveItemsWithDiff: (args) => this.saveItemsWithDiff(args.items, Date.now() + args.ttlMs),
+			saveItems: (args) => this.saveItems(args.items, args.expiresAt),
+			saveItemsWithDiff: (args) => this.saveItemsWithDiff(args.items, args.expiresAt),
 			deleteItems: (args) => this.deleteItems(args.keys),
 			deleteItemsWithDiff: (args) => this.deleteItemsWithDiff(args.keys),
 			getQuery: (args) => this.getQuery(args.key),
-			saveQuery: (args) =>
-				this.saveQuery(args.key, args.indexes, args.metadata, Date.now() + args.ttlMs),
+			saveQuery: (args) => this.saveQuery(args.key, args.indexes, args.metadata, args.expiresAt),
 			deleteQueries: (args) => this.deleteQueries(args.indexes),
 		});
 	}
@@ -96,7 +95,7 @@ export class BaetaCache extends DurableObject {
 				json,
 			);
 		}
-		await this.ensureAlarm();
+		// await this.ensureAlarm();
 	}
 
 	async saveItemsWithDiff(items: Array<[string, string]>, expiresAt: number) {
@@ -112,7 +111,7 @@ export class BaetaCache extends DurableObject {
 				json,
 			);
 		}
-		await this.ensureAlarm();
+		// await this.ensureAlarm();
 		return currentValues;
 	}
 
@@ -161,7 +160,7 @@ export class BaetaCache extends DurableObject {
 				json,
 			);
 		}
-		await this.ensureAlarm();
+		// await this.ensureAlarm();
 	}
 
 	deleteQueries(indexKeys: string[]) {

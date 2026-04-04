@@ -34,11 +34,11 @@ export class CloudflareCacheClient extends CacheClient {
 		if (items.length === 0) {
 			return;
 		}
-		const serialized: Array<[ItemCacheKey, string]> = items.map(([key, value]) => [
-			key,
-			options.serialize(value),
-		]);
-		await this.client.saveItems({ items: serialized, ttlMs: options.ttlMs });
+		const expiresAt = Date.now() + options.ttlMs;
+		await this.client.saveItems({
+			items: items.map(([key, value]) => [key, options.serialize(value)]),
+			expiresAt,
+		});
 	}
 
 	async saveItemsWithDiff<Item>(
@@ -48,13 +48,10 @@ export class CloudflareCacheClient extends CacheClient {
 		if (items.length === 0) {
 			return [];
 		}
-		const serialized: Array<[ItemCacheKey, string]> = items.map(([key, value]) => [
-			key,
-			options.serialize(value),
-		]);
+		const expiresAt = Date.now() + options.ttlMs;
 		const result = await this.client.saveItemsWithDiff({
-			items: serialized,
-			ttlMs: options.ttlMs,
+			items: items.map(([key, value]) => [key, options.serialize(value)]),
+			expiresAt,
 		});
 		return result.map((value) => (value === null ? null : options.parse(value)));
 	}
@@ -91,11 +88,12 @@ export class CloudflareCacheClient extends CacheClient {
 		metadata: QueryMetadata,
 		options: CacheClientArgs<QueryMetadata>,
 	): Promise<void> {
+		const expiresAt = Date.now() + options.ttlMs;
 		await this.client.saveQuery({
 			key,
 			indexes,
 			metadata: options.serialize(metadata),
-			ttlMs: options.ttlMs,
+			expiresAt,
 		});
 	}
 

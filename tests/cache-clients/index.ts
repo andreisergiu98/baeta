@@ -35,11 +35,11 @@ const queryArgs: CacheClientArgs<string[]> = {
 	parse: (value) => JSON.parse(value),
 };
 
-function shortItemArgs(ttlMs: number): CacheClientArgs<TestItem> {
+function makeItemArgs(ttlMs: number): CacheClientArgs<TestItem> {
 	return { ...itemArgs, ttlMs };
 }
 
-function shortQueryArgs(ttlMs: number): CacheClientArgs<string[]> {
+function makeQueryArgs(ttlMs: number): CacheClientArgs<string[]> {
 	return { ...queryArgs, ttlMs };
 }
 
@@ -219,12 +219,14 @@ export function runTestsForClient(
 		const item = mockItem();
 		const key = itemKey(item.id);
 
-		const shortLivedArgs = shortItemArgs(500);
+		const shortLivedArgs = makeItemArgs(1_000);
+		const delay = sleep(1_100);
+
 		await client.saveItems([[key, item]], shortLivedArgs);
 		const items = await client.getPartialItems([key], shortLivedArgs);
 		t.deepEqual(items, [item]);
 
-		await sleep(500);
+		await delay;
 
 		const expired = await client.getPartialItems([key], shortLivedArgs);
 		t.deepEqual(expired, [null]);
@@ -232,40 +234,70 @@ export function runTestsForClient(
 
 	test(`${name} re-saving items extends TTL`, async (t) => {
 		const client = await createClient();
-		const args = shortItemArgs(500);
+		const args = makeItemArgs(1_000);
 		const item = mockItem();
 		const key = itemKey(item.id);
+
+		const delay = sleep(1_100);
 		await client.saveItems([[key, item]], args);
-		await sleep(250);
+
+		await sleep(200);
 		await client.saveItems([[key, item]], args);
-		await sleep(250);
+		await delay;
+
 		const results = await client.getPartialItems([key], args);
 		t.deepEqual(results, [item]);
 	});
 
-	test(`${name} items and queries expire after TTL`, async (t) => {
+	test(`${name} queries expire after TTL`, async (t) => {
 		const client = await createClient();
-		const id = randomUUID();
-		const key = itemKey(id);
-		const qName = randomUUID();
-		const qKey = queryKey(qName, randomUUID());
-		const idx = indexKey(qName, '');
-		const shortLivedItemArgs = shortItemArgs(500);
-		const shortLivedQueryArgs = shortQueryArgs(500);
+		const queryName = `TestQuery_${randomUUID()}`;
+		const query = queryKey(queryName, randomUUID());
+		const shortLivedQueryArgs = makeQueryArgs(1_000);
 
-		await client.saveItems([[key, { id, name: 'ephemeral' }]], shortLivedItemArgs);
-		const items = await client.getPartialItems([key], shortLivedItemArgs);
-		t.deepEqual(items, [{ id, name: 'ephemeral' }]);
-		await client.saveQuery(qKey, [idx], ['ephemeral-query'], shortLivedQueryArgs);
-		const query = await client.getQuery(qKey, shortLivedQueryArgs);
-		t.deepEqual(query, ['ephemeral-query']);
+		const delay = sleep(1_100);
+		await client.saveQuery(query, [indexKey(queryName, '')], ['data'], shortLivedQueryArgs);
+		let result = await client.getQuery(query, shortLivedQueryArgs);
+		t.deepEqual(result, ['data']);
 
-		await sleep(600);
+		await delay;
 
-		const expiredItems = await client.getPartialItems([key], shortLivedItemArgs);
-		t.deepEqual(expiredItems, [null]);
-		const expiredQuery = await client.getQuery(qKey, shortLivedQueryArgs);
-		t.is(expiredQuery, null);
+		result = await client.getQuery(query, shortLivedQueryArgs);
+		t.is(result, null);
+	});
+
+	test(`${name} saveItemsWithDiff items expire after TTL`, async (t) => {
+		const client = await createClient();
+		const shortLivedArgs = makeItemArgs(1_000);
+		const { values, keys, valueTuples } = mockItems();
+
+		const delay = sleep(1_100);
+		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
+		let results = await client.getPartialItems(keys, shortLivedArgs);
+		t.deepEqual(results, values);
+
+		await delay;
+		results = await client.getPartialItems(keys, shortLivedArgs);
+		t.deepEqual(
+			results,
+			values.map(() => null),
+		);
+	});
+
+	test(`${name} saveItemsWithDiff extends TTL on re-save`, async (t) => {
+		const client = await createClient();
+		const shortLivedArgs = makeItemArgs(1_000);
+		const { values, keys, valueTuples } = mockItems();
+
+		const delay = sleep(1_100);
+		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
+
+		await sleep(200);
+		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
+
+		await delay;
+		const results = await client.getPartialItems(keys, shortLivedArgs);
+		t.deepEqual(results, values);
 	});
 
 	test(`${name} saveItemsWithDiff returns nulls for new items`, async (t) => {
@@ -330,32 +362,6 @@ export function runTestsForClient(
 			itemArgs,
 		);
 		t.deepEqual(result, [{ id: id1, name: 'existing' }, null]);
-	});
-
-	test(`${name} saveItemsWithDiff items expire after TTL`, async (t) => {
-		const client = await createClient();
-		const shortLivedArgs = shortItemArgs(500);
-		const id = randomUUID();
-		const key = itemKey(id);
-		await client.saveItemsWithDiff([[key, { id, name: 'ephemeral' }]], shortLivedArgs);
-		const items = await client.getPartialItems([key], shortLivedArgs);
-		t.deepEqual(items, [{ id, name: 'ephemeral' }]);
-		await sleep(600);
-		const expired = await client.getPartialItems([key], shortLivedArgs);
-		t.deepEqual(expired, [null]);
-	});
-
-	test(`${name} saveItemsWithDiff extends TTL on re-save`, async (t) => {
-		const client = await createClient();
-		const shortLivedArgs = shortItemArgs(500);
-		const id = randomUUID();
-		const key = itemKey(id);
-		await client.saveItemsWithDiff([[key, { id, name: 'original' }]], shortLivedArgs);
-		await sleep(300);
-		await client.saveItemsWithDiff([[key, { id, name: 'refreshed' }]], shortLivedArgs);
-		await sleep(300);
-		const results = await client.getPartialItems([key], shortLivedArgs);
-		t.deepEqual(results, [{ id, name: 'refreshed' }]);
 	});
 
 	test(`${name} deleteItemsWithDiff returns previous values for existing items`, async (t) => {

@@ -53,8 +53,7 @@ local results = {}
 local numKeys = #KEYS
 for i, key in ipairs(KEYS) do
   results[i] = redis.call('GET', key)
-  redis.call('SET', key, ARGV[i])
-  redis.call('PEXPIRE', key, tonumber(ARGV[numKeys + 1]))
+  redis.call('SET', key, ARGV[i], 'PXAT', tonumber(ARGV[numKeys + 1]))
 end
 return results
 `;

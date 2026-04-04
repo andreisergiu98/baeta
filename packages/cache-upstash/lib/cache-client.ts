@@ -114,16 +114,14 @@ export class UpstashCacheClient extends CacheClient {
 		if (items.length === 0) {
 			return [];
 		}
+		const expiresAt = Date.now() + options.ttlMs;
 		const keys: ItemCacheKey[] = new Array(items.length);
 		const values: string[] = new Array(items.length);
 		for (let i = 0; i < items.length; i++) {
 			keys[i] = items[i][0];
 			values[i] = options.serialize(items[i][1]);
 		}
-		const result = await this.scripts.saveWithDiffScript(keys, [
-			...values,
-			options.ttlMs.toString(),
-		]);
+		const result = await this.scripts.saveWithDiffScript(keys, [...values, expiresAt.toString()]);
 		if (!Array.isArray(result)) {
 			throw new Error(`Unexpected non-array result from Redis script: ${typeof result}`);
 		}

@@ -1,9 +1,5 @@
 ---
-"@baeta/extension-cache-cloudflare": patch
 "@baeta/subscriptions-cloudflare": patch
-"@baeta/extension-cache-upstash": patch
-"@baeta/extension-cache-redis": patch
-"@baeta/extension-cache-keyv": patch
 "@baeta/extension-complexity": patch
 "@baeta/subscriptions-pubsub": patch
 "@baeta/plugin-cloudflare": patch

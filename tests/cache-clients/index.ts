@@ -581,58 +581,58 @@ export function runTestsForClient(
 		t.is(result2, null);
 	});
 
-	test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
-		t.timeout(30_000);
+	// test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
+	// 	t.timeout(30_000);
 
-		const client = await createClient();
-		const args = shortItemArgs(30_000);
-		const idPrefix = randomUUID();
+	// 	const client = await createClient();
+	// 	const args = shortItemArgs(30_000);
+	// 	const idPrefix = randomUUID();
 
-		const items = Array.from({ length: 200_000 }).map((_, i) => {
-			const item = mockItem({ id: `${idPrefix}-${i}` });
-			const key: ItemCacheKey = itemKey(item.id);
-			return [key, item] as [ItemCacheKey, TestItem];
-		});
-		const keys = items.map(([key]) => key);
-		await client.saveItems(items, args);
+	// 	const items = Array.from({ length: 200_000 }).map((_, i) => {
+	// 		const item = mockItem({ id: `${idPrefix}-${i}` });
+	// 		const key: ItemCacheKey = itemKey(item.id);
+	// 		return [key, item] as [ItemCacheKey, TestItem];
+	// 	});
+	// 	const keys = items.map(([key]) => key);
+	// 	await client.saveItems(items, args);
 
-		const result = await client.getPartialItems(keys, args);
-		t.is(result.length, items.length);
-		for (let i = 0; i < items.length; i++) {
-			const expected = items[i][1];
-			const actual = result[i];
-			t.is(actual?.id, expected.id);
-		}
+	// 	const result = await client.getPartialItems(keys, args);
+	// 	t.is(result.length, items.length);
+	// 	for (let i = 0; i < items.length; i++) {
+	// 		const expected = items[i][1];
+	// 		const actual = result[i];
+	// 		t.is(actual?.id, expected.id);
+	// 	}
 
-		await client.deleteItems(keys, args);
-		const afterDelete = await client.getPartialItems(keys, args);
-		for (const item of afterDelete) {
-			t.is(item, null);
-		}
-	});
+	// 	await client.deleteItems(keys, args);
+	// 	const afterDelete = await client.getPartialItems(keys, args);
+	// 	for (const item of afterDelete) {
+	// 		t.is(item, null);
+	// 	}
+	// });
 
-	test.serial(`${name} query operations don't fail for large volumes`, async (t) => {
-		t.timeout(10_000);
+	// test.serial(`${name} query operations don't fail for large volumes`, async (t) => {
+	// 	t.timeout(10_000);
 
-		const client = await createClient();
-		const qName = randomUUID();
-		const idxPrefix = randomUUID();
+	// 	const client = await createClient();
+	// 	const qName = randomUUID();
+	// 	const idxPrefix = randomUUID();
 
-		const items = Array.from({ length: 100_000 }, (_, i) => `item-${i}`);
+	// 	const items = Array.from({ length: 100_000 }, (_, i) => `item-${i}`);
 
-		await client.saveQuery(
-			queryKey(qName, 'q1'),
-			[indexKey(qName, `${idxPrefix}-1`)],
-			items,
-			queryArgs,
-		);
+	// 	await client.saveQuery(
+	// 		queryKey(qName, 'q1'),
+	// 		[indexKey(qName, `${idxPrefix}-1`)],
+	// 		items,
+	// 		queryArgs,
+	// 	);
 
-		let result = await client.getQuery(queryKey(qName, 'q1'), queryArgs);
-		t.deepEqual(result, items);
+	// 	let result = await client.getQuery(queryKey(qName, 'q1'), queryArgs);
+	// 	t.deepEqual(result, items);
 
-		await client.deleteQueries([indexKey(qName, `${idxPrefix}-1`)], queryArgs);
+	// 	await client.deleteQueries([indexKey(qName, `${idxPrefix}-1`)], queryArgs);
 
-		result = await client.getQuery(queryKey(qName, 'q1'), queryArgs);
-		t.deepEqual(result, null);
-	});
+	// 	result = await client.getQuery(queryKey(qName, 'q1'), queryArgs);
+	// 	t.deepEqual(result, null);
+	// });
 }

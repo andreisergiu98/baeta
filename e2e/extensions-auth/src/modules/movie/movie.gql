@@ -1,0 +1,25 @@
+type Movie {
+	id: ID!
+	title: String!
+	year: Int!
+	rating: Float
+}
+
+input MovieWhereUniqueInput {
+	id: ID!
+}
+
+input CreateMovieInput {
+	title: String!
+	year: Int!
+	rating: Float
+}
+
+type Query {
+	movie(where: MovieWhereUniqueInput!): Movie
+	publicMovies: [Movie!]
+}
+
+type Mutation {
+	createMovie(input: CreateMovieInput!): Movie!
+}

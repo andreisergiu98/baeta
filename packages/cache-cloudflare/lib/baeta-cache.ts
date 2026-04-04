@@ -2,12 +2,14 @@ import { DurableObject } from 'cloudflare:workers';
 import { actions } from './actions.ts';
 import { createActionsRequestHandler } from './actions-handler.ts';
 
-const JSON_BATCH_SIZE = 5_000;
+const CLEANUP_INTERVAL_MS = 10_000;
+const BATCH_PARAMS = 99; // max 100 bound params per query, keep 1 spare
 
-function batch<T>(items: T[]): T[][] {
+function batchByParams<T>(items: T[], paramsPerItem: number): T[][] {
+	const batchSize = Math.floor(BATCH_PARAMS / paramsPerItem);
 	const batches: T[][] = [];
-	for (let i = 0; i < items.length; i += JSON_BATCH_SIZE) {
-		batches.push(items.slice(i, i + JSON_BATCH_SIZE));
+	for (let i = 0; i < items.length; i += batchSize) {
+		batches.push(items.slice(i, i + batchSize));
 	}
 	return batches;
 }
@@ -63,36 +65,31 @@ export class BaetaCache extends DurableObject {
 	}
 
 	getPartialItems(keys: string[]) {
-		const now = Date.now();
 		const results: (string | null)[] = [];
-		for (const chunk of batch(keys)) {
-			const json = JSON.stringify(chunk);
-			const rows = this.sql
-				.exec<{ value: string | null }>(
-					`SELECT i.value
-					FROM json_each(?) AS je
-					LEFT JOIN items i ON je.value = i.key AND i.expires_at > ?
-					ORDER BY je.key`,
-					json,
-					now,
-				)
-				.toArray();
+		for (const batch of batchByParams(keys, 1)) {
+			const placeholders = batch.map(() => '?').join(',');
+			const rows = this.sql.exec<{ key: string; value: string }>(
+				`SELECT key, value FROM items WHERE key IN (${placeholders}) AND expires_at > ?`,
+				...batch,
+				Date.now(),
+			);
+			const map = new Map<string, string>();
 			for (const row of rows) {
-				results.push(row.value ?? null);
+				map.set(row.key, row.value);
+			}
+			for (const key of batch) {
+				results.push(map.get(key) ?? null);
 			}
 		}
 		return results;
 	}
 
 	async saveItems(items: Array<[string, string]>, expiresAt: number) {
-		for (const chunk of batch(items)) {
-			const json = JSON.stringify(chunk);
+		for (const batch of batchByParams(items, 3)) {
+			const placeholders = batch.map(() => '(?, ?, ?)').join(',');
 			this.sql.exec(
-				`INSERT OR REPLACE INTO items (key, value, expires_at)
-				SELECT json_extract(je.value, '$[0]'), json_extract(je.value, '$[1]'), ?
-				FROM json_each(?) AS je`,
-				expiresAt,
-				json,
+				`INSERT OR REPLACE INTO items (key, value, expires_at) VALUES ${placeholders}`,
+				...batch.flatMap(([key, value]) => [key, value, expiresAt]),
 			);
 		}
 		await this.ensureAlarm();
@@ -101,14 +98,11 @@ export class BaetaCache extends DurableObject {
 	async saveItemsWithDiff(items: Array<[string, string]>, expiresAt: number) {
 		const keys = items.map(([key]) => key);
 		const currentValues = this.getPartialItems(keys);
-		for (const chunk of batch(items)) {
-			const json = JSON.stringify(chunk);
+		for (const batch of batchByParams(items, 3)) {
+			const placeholders = batch.map(() => '(?, ?, ?)').join(',');
 			this.sql.exec(
-				`INSERT OR REPLACE INTO items (key, value, expires_at)
-				SELECT json_extract(je.value, '$[0]'), json_extract(je.value, '$[1]'), ?
-				FROM json_each(?) AS je`,
-				expiresAt,
-				json,
+				`INSERT OR REPLACE INTO items (key, value, expires_at) VALUES ${placeholders}`,
+				...batch.flatMap(([key, value]) => [key, value, expiresAt]),
 			);
 		}
 		await this.ensureAlarm();
@@ -116,12 +110,9 @@ export class BaetaCache extends DurableObject {
 	}
 
 	deleteItems(keys: string[]) {
-		for (const chunk of batch(keys)) {
-			const json = JSON.stringify(chunk);
-			this.sql.exec(
-				'DELETE FROM items WHERE key IN (SELECT je.value FROM json_each(?) AS je)',
-				json,
-			);
+		for (const batch of batchByParams(keys, 1)) {
+			const placeholders = batch.map(() => '?').join(',');
+			this.sql.exec(`DELETE FROM items WHERE key IN (${placeholders})`, ...batch);
 		}
 	}
 
@@ -150,32 +141,27 @@ export class BaetaCache extends DurableObject {
 			metadata,
 			expiresAt,
 		);
-		if (indexKeys.length > 0) {
-			const json = JSON.stringify(indexKeys);
+		for (const batch of batchByParams(indexKeys, 3)) {
+			const placeholders = batch.map(() => '(?, ?, ?)').join(',');
 			this.sql.exec(
-				`INSERT OR REPLACE INTO query_indexes (index_key, query_key, expires_at)
-				SELECT je.value, ?, ? FROM json_each(?) AS je`,
-				queryKey,
-				expiresAt,
-				json,
+				`INSERT OR REPLACE INTO query_indexes (index_key, query_key, expires_at) VALUES ${placeholders}`,
+				...batch.flatMap((indexKey) => [indexKey, queryKey, expiresAt]),
 			);
 		}
 		await this.ensureAlarm();
 	}
 
 	deleteQueries(indexKeys: string[]) {
-		const json = JSON.stringify(indexKeys);
-		this.sql.exec(
-			`DELETE FROM queries WHERE key IN (
-				SELECT query_key FROM query_indexes
-				WHERE index_key IN (SELECT je.value FROM json_each(?) AS je)
-			)`,
-			json,
-		);
-		this.sql.exec(
-			'DELETE FROM query_indexes WHERE index_key IN (SELECT je.value FROM json_each(?) AS je)',
-			json,
-		);
+		for (const batch of batchByParams(indexKeys, 1)) {
+			const placeholders = batch.map(() => '?').join(',');
+			this.sql.exec(
+				`DELETE FROM queries WHERE key IN (
+					SELECT query_key FROM query_indexes WHERE index_key IN (${placeholders})
+				)`,
+				...batch,
+			);
+			this.sql.exec(`DELETE FROM query_indexes WHERE index_key IN (${placeholders})`, ...batch);
+		}
 	}
 
 	async alarm() {
@@ -196,13 +182,13 @@ export class BaetaCache extends DurableObject {
 			.one();
 
 		if (remaining > 0) {
-			await this.ctx.storage.setAlarm(Date.now() + 30_000);
+			await this.ctx.storage.setAlarm(Date.now() + CLEANUP_INTERVAL_MS);
 		}
 	}
 
 	private async ensureAlarm() {
 		if (!(await this.ctx.storage.getAlarm())) {
-			await this.ctx.storage.setAlarm(Date.now() + 30_000);
+			await this.ctx.storage.setAlarm(Date.now() + CLEANUP_INTERVAL_MS);
 		}
 	}
 }

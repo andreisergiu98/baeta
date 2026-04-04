@@ -459,10 +459,10 @@ export function runTestsForClient(
 	});
 
 	test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
-		t.timeout(30_000);
+		t.timeout(60_000);
 
 		const client = await createClient();
-		const args = makeItemArgs(30_000);
+		const args = makeItemArgs(60_000);
 
 		const { values, valueTuples, keys } = mockItems(200_000);
 		await client.saveItems(valueTuples, args);

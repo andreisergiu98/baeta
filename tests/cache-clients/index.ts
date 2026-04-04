@@ -458,58 +458,50 @@ export function runTestsForClient(
 		}
 	});
 
-	// test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
-	// 	t.timeout(30_000);
+	test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
+		t.timeout(60_000);
 
-	// 	const client = await createClient();
-	// 	const args = shortItemArgs(30_000);
-	// 	const idPrefix = randomUUID();
+		const client = await createClient();
+		const args = makeItemArgs(60_000);
 
-	// 	const items = Array.from({ length: 200_000 }).map((_, i) => {
-	// 		const item = mockItem({ id: `${idPrefix}-${i}` });
-	// 		const key: ItemCacheKey = itemKey(item.id);
-	// 		return [key, item] as [ItemCacheKey, TestItem];
-	// 	});
-	// 	const keys = items.map(([key]) => key);
-	// 	await client.saveItems(items, args);
+		const { values, valueTuples, keys } = mockItems(200_000);
+		await client.saveItems(valueTuples, args);
 
-	// 	const result = await client.getPartialItems(keys, args);
-	// 	t.is(result.length, items.length);
-	// 	for (let i = 0; i < items.length; i++) {
-	// 		const expected = items[i][1];
-	// 		const actual = result[i];
-	// 		t.is(actual?.id, expected.id);
-	// 	}
+		const result = await client.getPartialItems(keys, args);
 
-	// 	await client.deleteItems(keys, args);
-	// 	const afterDelete = await client.getPartialItems(keys, args);
-	// 	for (const item of afterDelete) {
-	// 		t.is(item, null);
-	// 	}
-	// });
+		t.is(result.length, values.length);
+		for (let i = 0; i < values.length; i++) {
+			t.is(result[i]?.id, values[i].id);
+		}
 
-	// test.serial(`${name} query operations don't fail for large volumes`, async (t) => {
-	// 	t.timeout(10_000);
+		await client.deleteItems(keys, args);
+		const afterDelete = await client.getPartialItems(keys, args);
+		t.is(afterDelete.length, keys.length);
+		t.is(
+			afterDelete.every((item) => item === null),
+			true,
+		);
+	});
 
-	// 	const client = await createClient();
-	// 	const qName = randomUUID();
-	// 	const idxPrefix = randomUUID();
+	test.serial(`${name} query operations don't fail for large volumes`, async (t) => {
+		t.timeout(30_000);
 
-	// 	const items = Array.from({ length: 100_000 }, (_, i) => `item-${i}`);
+		const client = await createClient();
 
-	// 	await client.saveQuery(
-	// 		queryKey(qName, 'q1'),
-	// 		[indexKey(qName, `${idxPrefix}-1`)],
-	// 		items,
-	// 		queryArgs,
-	// 	);
+		const args = makeQueryArgs(60_000);
+		const queryName = `TestQuery_${randomUUID()}`;
+		const query = queryKey(queryName, randomUUID());
+		const idx = indexKey(queryName, 'idx1');
+		const items = Array.from({ length: 100_000 }, (_, i) => `item-${i}`);
 
-	// 	let result = await client.getQuery(queryKey(qName, 'q1'), queryArgs);
-	// 	t.deepEqual(result, items);
+		await client.saveQuery(query, [idx], items, args);
 
-	// 	await client.deleteQueries([indexKey(qName, `${idxPrefix}-1`)], queryArgs);
+		let result = await client.getQuery(query, args);
+		t.deepEqual(result, items);
 
-	// 	result = await client.getQuery(queryKey(qName, 'q1'), queryArgs);
-	// 	t.deepEqual(result, null);
-	// });
+		await client.deleteQueries([idx], args);
+
+		result = await client.getQuery(query, args);
+		t.deepEqual(result, null);
+	});
 }

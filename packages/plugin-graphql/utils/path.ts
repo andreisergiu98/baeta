@@ -7,7 +7,9 @@ export function fixPath(root: string, toFix: string) {
 }
 
 export function getRelativePath(filepath: string, basePath: string) {
-	const normalizedFilepath = normalize(filepath);
+	const normalizedFilepath = ensureStartsWithSeparator(
+		ensureEndsWithSeparator(normalize(filepath)),
+	);
 	const normalizedBasePath = ensureStartsWithSeparator(
 		ensureEndsWithSeparator(normalize(basePath)),
 	);

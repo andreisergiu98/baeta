@@ -99,7 +99,13 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 		},
 		{
 			filename: join(options.modulesDir, 'index.ts'),
-			content: printAutoload({ importExtension: options.importExtension }, modules),
+			content: printAutoload(
+				{
+					importExtension: options.importExtension,
+					moduleDefinitionName: options.moduleDefinitionName,
+				},
+				modules,
+			),
 		},
 		{
 			filename: join(options.modulesDir, 'types.ts'),

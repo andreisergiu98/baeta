@@ -1,14 +1,15 @@
 import { unlink, writeFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
+import { dirname, join } from 'pathe';
 
 export * from 'esbuild';
 
 export async function importTSX(source: string, parentURL: string): Promise<unknown> {
-	const pathname = new URL(source, parentURL).pathname;
+	const pathUrl = new URL(source, parentURL);
 
 	const result = await build({
-		entryPoints: [pathname],
+		entryPoints: [fileURLToPath(pathUrl)],
 		bundle: true,
 		format: 'esm',
 		sourcemap: 'inline',
@@ -21,7 +22,10 @@ export async function importTSX(source: string, parentURL: string): Promise<unkn
 				name: 'make-all-packages-external',
 				setup(build) {
 					const filter = /^[^./]|^\.[^./]|^\.\.[^/]/; // Must not start with "/" or "./" or "../"
-					build.onResolve({ filter }, (args) => ({ path: args.path, external: true }));
+					build.onResolve({ filter }, (args) => {
+						if (args.kind === 'entry-point') return;
+						return { path: args.path, external: true };
+					});
 				},
 			},
 		],
@@ -33,13 +37,13 @@ export async function importTSX(source: string, parentURL: string): Promise<unkn
 		throw new Error('Failed to bundle TSX file');
 	}
 
-	const dir = dirname(pathname);
+	const dir = dirname(pathUrl.pathname);
 	const tempFile = join(dir, `temp-file-${process.pid}-${Date.now()}.js`);
 
 	await writeFile(tempFile, code, 'utf-8');
 
 	try {
-		return await import(tempFile);
+		return await import(pathToFileURL(tempFile).href);
 	} finally {
 		await unlink(tempFile).catch(() => {});
 	}

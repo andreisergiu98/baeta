@@ -42,7 +42,7 @@ const config: Config = {
 							args.version.versionName,
 						);
 					},
-					lastVersion: '1.0',
+					lastVersion: 'current',
 					versions: {
 						current: {
 							label: 'Next (2.x)',
@@ -199,7 +199,7 @@ const config: Config = {
 				redirects: [
 					{
 						from: '/docs',
-						to: '/docs/next/intro',
+						to: '/docs/intro',
 					},
 				],
 			},

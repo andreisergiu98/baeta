@@ -1987,6 +1987,7 @@ __metadata:
     execa: "npm:^9.6.1"
     graphql: "catalog:dev"
     node-pty: "npm:1.2.0-beta.12"
+    pathe: "npm:^2.0.3"
     typescript: "catalog:dev"
   languageName: unknown
   linkType: soft

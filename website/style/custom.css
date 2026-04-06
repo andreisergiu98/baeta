@@ -6,22 +6,105 @@
 
 /* You can override the default Infima variables here. */
 :root {
-	--ifm-color-primary: #1a5fb4;
-	--ifm-color-primary-dark: #1755a2;
-	--ifm-color-primary-darker: #165199;
-	--ifm-color-primary-darkest: #12427e;
-	--ifm-color-primary-light: #1d68c6;
-	--ifm-color-primary-lighter: #1e6dcf;
-	--ifm-color-primary-lightest: #2b7ce0;
+	--ifm-color-primary: #d9214e;
+	--ifm-color-primary-dark: #c41d46;
+	--ifm-color-primary-darker: #b91b42;
+	--ifm-color-primary-darkest: #991636;
+	--ifm-color-primary-light: #de3660;
+	--ifm-color-primary-lighter: #e04468;
+	--ifm-color-primary-lightest: #e66d89;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-	--ifm-color-primary: #99c1f1;
-	--ifm-color-primary-dark: #76acec;
-	--ifm-color-primary-darker: #65a1ea;
-	--ifm-color-primary-darkest: #3182e3;
-	--ifm-color-primary-light: #bcd6f6;
-	--ifm-color-primary-lighter: #cde1f8;
-	--ifm-color-primary-lightest: #ffffff;
+	--ifm-color-primary: #ff5572;
+	--ifm-color-primary-dark: #ff3258;
+	--ifm-color-primary-darker: #ff204b;
+	--ifm-color-primary-darkest: #ec0034;
+	--ifm-color-primary-light: #ff788c;
+	--ifm-color-primary-lighter: #ff8a9a;
+	--ifm-color-primary-lightest: #ffbfc9;
+	--ifm-background-color: #0f1117;
+	--ifm-background-surface-color: #16181e;
+}
+
+.footer--dark {
+	--ifm-footer-background-color: #1a1a2e;
+}
+
+[data-theme="dark"] .footer--dark {
+	--ifm-footer-background-color: #0a0c11;
+}
+
+/* Algolia DocSearch */
+:root {
+	--docsearch-primary-color: #d9214e;
+	--docsearch-highlight-color: #d9214e;
+	--docsearch-hit-highlight-color: rgba(217, 33, 78, 0.15);
+	--docsearch-searchbox-shadow: inset 0 0 0 2px #d9214e;
+	--docsearch-muted-color: #888888;
+	--docsearch-icon-color: #888888;
+	--docsearch-secondary-text-color: #888888;
+	--docsearch-key-color: #555555;
+	--docsearch-key-gradient: linear-gradient(-26.5deg, #f0f0f0, #e8e8e8);
+	--docsearch-key-shadow:
+		inset 0 -2px 0 0 #cdcdcd, inset 0 0 1px 1px #ffffff, 0 1px 2px 1px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+	--docsearch-primary-color: #ff5572;
+	--docsearch-text-color: #e0e0e0;
+	--docsearch-spacing: 12px;
+	--docsearch-muted-color: #787880;
+	--docsearch-secondary-text-color: #787880;
+	--docsearch-subtle-color: #252830;
+	--docsearch-icon-color: #98989e;
+	--docsearch-hit-color: #e0e0e0;
+	--docsearch-background-color: #1a1c24;
+	--docsearch-logo-color: #787880;
+	--docsearch-container-background: rgba(10, 12, 17, 0.7);
+	--docsearch-modal-background: #16181e;
+	--docsearch-modal-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+	--docsearch-searchbox-background: #1a1c24;
+	--docsearch-searchbox-focus-background: #1e2028;
+	--docsearch-searchbox-shadow: inset 0 0 0 1px #252830;
+	--docsearch-hit-background: #1a1c24;
+	--docsearch-hit-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	--docsearch-hit-active-color: #ffffff;
+	--docsearch-highlight-color: #ff5572;
+	--docsearch-hit-highlight-color: rgba(255, 85, 114, 0.15);
+	--docsearch-footer-background: #0a0c11;
+	--docsearch-footer-shadow: inset 0 1px 0 0 #252830;
+	--docsearch-key-color: #b4b4ba;
+	--docsearch-key-background: #1a1c24;
+	--docsearch-key-gradient: linear-gradient(-26.5deg, #1a1c24, #1e2028);
+	--docsearch-key-shadow:
+		inset 0 -2px 0 0 #0f1117, inset 0 0 1px 1px #252830, 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .DocSearch-Logo svg .cls-1,
+[data-theme="dark"] .DocSearch-Logo svg .cls-2 {
+	fill: #fff;
+}
+
+/* Primary buttons */
+[data-theme="dark"] .button--primary:not(.button--outline) {
+	background-color: #d9214e;
+	border-color: #d9214e;
+}
+
+[data-theme="dark"] .button--primary:not(.button--outline):hover {
+	background-color: #c41d46;
+	border-color: #c41d46;
+}
+
+[data-theme="dark"] .button--primary.button--outline {
+	color: #d9214e;
+	border-color: #d9214e;
+}
+
+[data-theme="dark"] .button--primary.button--outline:hover {
+	color: #000000;
+	border-color: #c41d46;
+	background-color: #c41d46;
 }

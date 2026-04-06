@@ -1,9 +1,9 @@
 import test from '@baeta/testing';
-import { gql } from 'graphql-tag';
+import { parse as gql } from 'graphql';
 import { makeInvalidInputMacro, makeValidInputMacro } from '../../__tests__/macros.ts';
 import { inputConstraints } from './input-validation.ts';
 
-const typeDefs = gql`
+const typeDefs = gql(`
   input MinFieldsInput @constraints(minFields: 1) {
     id: ID
     email: String
@@ -20,7 +20,7 @@ const typeDefs = gql`
   }
 
   ${inputConstraints.sdl}
-`;
+`);
 
 const validInputMacro = makeValidInputMacro(typeDefs, inputConstraints.directive);
 const invalidInputMacro = makeInvalidInputMacro(typeDefs, inputConstraints.directive);
@@ -29,75 +29,75 @@ test(
 	'min fields',
 	validInputMacro,
 	'MinFieldsInput!',
-	gql`
+	gql(`
     query {
       value(input: { id: "1" })
     }
-  `,
+  `),
 );
 
 test(
 	'max fields',
 	validInputMacro,
 	'MaxFieldsInput!',
-	gql`
+	gql(`
     query {
       value(input: { id: "1" })
     }
-  `,
+  `),
 );
 
 test(
 	'min max fields',
 	validInputMacro,
 	'MinMaxFieldsInput!',
-	gql`
+	gql(`
     query {
       value(input: { id: "1" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid min fields',
 	invalidInputMacro,
 	'MinFieldsInput!',
-	gql`
+	gql(`
     query {
       value(input: {})
     }
-  `,
+  `),
 );
 
 test(
 	'invalid max fields',
 	invalidInputMacro,
 	'MaxFieldsInput!',
-	gql`
+	gql(`
     query {
       value(input: { id: "1", email: "test@test.com" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid min max fields',
 	invalidInputMacro,
 	'MinMaxFieldsInput!',
-	gql`
+	gql(`
     query {
       value(input: {})
     }
-  `,
+  `),
 );
 
 test(
 	'invalid min max fields 2',
 	invalidInputMacro,
 	'MinMaxFieldsInput!',
-	gql`
+	gql(`
     query {
       value(input: { id: "1", email: "test@test.com" })
     }
-  `,
+  `),
 );

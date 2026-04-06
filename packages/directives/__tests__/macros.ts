@@ -2,8 +2,13 @@ import { addValidationToSchema } from '@baeta/core/sdk';
 import { BaetaErrorCode } from '@baeta/errors';
 import test from '@baeta/testing';
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
-import { type DocumentNode, execute, type GraphQLError, type GraphQLSchema } from 'graphql';
-import { gql } from 'graphql-tag';
+import {
+	type DocumentNode,
+	execute,
+	type GraphQLError,
+	type GraphQLSchema,
+	parse as gql,
+} from 'graphql';
 
 export function createAndExecute(
 	typeDefs: DocumentNode,
@@ -13,11 +18,11 @@ export function createAndExecute(
 	resolvers: IExecutableSchemaDefinition['resolvers'],
 	returnType: string,
 ) {
-	const queryDef = gql`
+	const queryDef = gql(`
     type Query {
       value(input: ${inputType}): ${returnType}
     }
-  `;
+  `);
 
 	const executableSchema = makeExecutableSchema({
 		typeDefs: [typeDefs, queryDef],

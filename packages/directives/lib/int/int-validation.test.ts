@@ -1,5 +1,5 @@
 import test from '@baeta/testing';
-import { gql } from 'graphql-tag';
+import { parse as gql } from 'graphql';
 import {
 	makeAggregateErrorsInputMacro,
 	makeInvalidInputMacro,
@@ -7,7 +7,7 @@ import {
 } from '../../__tests__/macros.ts';
 import { intValidation } from '../int/int-validation.ts';
 
-const typeDefs = gql`
+const typeDefs = gql(`
   input MinInput {
     min: Int @validInt(min: 10)
   }
@@ -51,7 +51,7 @@ const typeDefs = gql`
   }
 
   ${intValidation.sdl}
-`;
+`);
 
 const validInputMacro = makeValidInputMacro(typeDefs, intValidation.directive);
 const invalidInputMacro = makeInvalidInputMacro(typeDefs, intValidation.directive);
@@ -61,84 +61,84 @@ test(
 	'min',
 	validInputMacro,
 	'MinInput!',
-	gql`
+	gql(`
     query {
       value(input: { min: 10 })
     }
-  `,
+  `),
 );
 
 test(
 	'max',
 	validInputMacro,
 	'MaxInput!',
-	gql`
+	gql(`
     query {
       value(input: { max: 10 })
     }
-  `,
+  `),
 );
 
 test(
 	'exclusiveMin',
 	validInputMacro,
 	'ExclusiveMinInput!',
-	gql`
+	gql(`
     query {
       value(input: { exclusiveMin: 11 })
     }
-  `,
+  `),
 );
 
 test(
 	'exclusiveMax',
 	validInputMacro,
 	'ExclusiveMaxInput!',
-	gql`
+	gql(`
     query {
       value(input: { exclusiveMax: 0 })
     }
-  `,
+  `),
 );
 
 test(
 	'multipleOf',
 	validInputMacro,
 	'MultipleOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { multipleOf: 100 })
     }
-  `,
+  `),
 );
 
 test(
 	'oneOf',
 	validInputMacro,
 	'OneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { oneOf: 10 })
     }
-  `,
+  `),
 );
 
 test(
 	'notOneOf',
 	validInputMacro,
 	'NotOneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { notOneOf: 11 })
     }
-  `,
+  `),
 );
 
 test(
 	'aggregate',
 	validInputMacro,
 	'AggregateInput!',
-	gql`
+	gql(`
     query {
       value(
         input: {
@@ -152,91 +152,91 @@ test(
         }
       )
     }
-  `,
+  `),
 );
 
 test(
 	'invalid min',
 	invalidInputMacro,
 	'MinInput!',
-	gql`
+	gql(`
     query {
       value(input: { min: 9 })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid max',
 	invalidInputMacro,
 	'MaxInput!',
-	gql`
+	gql(`
     query {
       value(input: { max: 11 })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid exclusiveMin',
 	invalidInputMacro,
 	'ExclusiveMinInput!',
-	gql`
+	gql(`
     query {
       value(input: { exclusiveMin: 10 })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid exclusiveMax',
 	invalidInputMacro,
 	'ExclusiveMaxInput!',
-	gql`
+	gql(`
     query {
       value(input: { exclusiveMax: 10 })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid multipleOf',
 	invalidInputMacro,
 	'MultipleOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { multipleOf: 5 })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid oneOf',
 	invalidInputMacro,
 	'OneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { oneOf: 11 })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid notOneOf',
 	invalidInputMacro,
 	'NotOneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { notOneOf: 10 })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid aggregate',
 	aggregateErrorMacro,
 	'AggregateInput!',
-	gql`
+	gql(`
     query {
       value(
         input: {
@@ -250,7 +250,7 @@ test(
         }
       )
     }
-  `,
+  `),
 	7,
 );
 
@@ -258,9 +258,9 @@ test(
 	'skip bad types',
 	validInputMacro,
 	'BadTypeInput!',
-	gql`
+	gql(`
     query {
       value(input: { badType: "10" })
     }
-  `,
+  `),
 );

@@ -199,7 +199,7 @@ const config: Config = {
 				redirects: [
 					{
 						from: '/docs',
-						to: '/docs/intro',
+						to: '/docs/next/intro',
 					},
 				],
 			},

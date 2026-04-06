@@ -20,7 +20,7 @@
 </td>
 <td>
 
-[`ErrorsProps`](../interfaces/ErrorsProps.md)
+`Readonly`\<[`ErrorsProps`](../interfaces/ErrorsProps.md)\>
 
 </td>
 </tr>

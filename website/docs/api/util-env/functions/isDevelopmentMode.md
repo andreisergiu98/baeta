@@ -1,6 +1,6 @@
 # isDevelopmentMode()
 
-> **isDevelopmentMode**(`global`): `boolean`
+> **isDevelopmentMode**(`global?`): `boolean`
 
 ## Parameters
 

@@ -309,6 +309,38 @@
 
 </td>
 </tr>
+<tr>
+<td>
+
+<a id="options"></a> `options?`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+[`FileOptions`](../interfaces/FileOptions.md)
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+<td>
+
+[`File`](File.md).[`options`](File.md#options)
+
+</td>
+</tr>
 </tbody>
 </table>
 

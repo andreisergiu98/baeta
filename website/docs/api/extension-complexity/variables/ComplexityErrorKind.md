@@ -19,7 +19,7 @@ Types of complexity validation errors that can occur during query analysis.
 <tr>
 <td>
 
-<a id="breadth"></a> `Breadth`
+<a id="property-breadth"></a> `Breadth`
 
 </td>
 <td>
@@ -41,7 +41,7 @@ Query exceeds maximum allowed breadth (fields per level)
 <tr>
 <td>
 
-<a id="complexity"></a> `Complexity`
+<a id="property-complexity"></a> `Complexity`
 
 </td>
 <td>
@@ -63,7 +63,7 @@ Query exceeds total complexity score limit
 <tr>
 <td>
 
-<a id="depth"></a> `Depth`
+<a id="property-depth"></a> `Depth`
 
 </td>
 <td>

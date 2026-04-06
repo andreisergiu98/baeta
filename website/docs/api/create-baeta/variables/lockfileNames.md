@@ -16,7 +16,7 @@
 <tr>
 <td>
 
-<a id="bun"></a> `bun`
+<a id="property-bun"></a> `bun`
 
 </td>
 <td>
@@ -33,7 +33,7 @@
 <tr>
 <td>
 
-<a id="npm"></a> `npm`
+<a id="property-npm"></a> `npm`
 
 </td>
 <td>
@@ -50,7 +50,7 @@
 <tr>
 <td>
 
-<a id="pnpm"></a> `pnpm`
+<a id="property-pnpm"></a> `pnpm`
 
 </td>
 <td>
@@ -67,7 +67,7 @@
 <tr>
 <td>
 
-<a id="yarn"></a> `yarn`
+<a id="property-yarn"></a> `yarn`
 
 </td>
 <td>

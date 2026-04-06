@@ -1,4 +1,4 @@
-# GeneratorPluginV1ReloadFn()
+# GeneratorPluginV1ReloadFn
 
 > **GeneratorPluginV1ReloadFn** = (`file`) => `void`
 

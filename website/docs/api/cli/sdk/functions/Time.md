@@ -20,7 +20,7 @@
 </td>
 <td>
 
-[`TimeProps`](../interfaces/TimeProps.md)
+`Readonly`\<[`TimeProps`](../interfaces/TimeProps.md)\>
 
 </td>
 </tr>

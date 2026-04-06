@@ -1,4 +1,4 @@
-# WatcherListener()
+# WatcherListener
 
 > **WatcherListener** = (`path`) => `void`
 

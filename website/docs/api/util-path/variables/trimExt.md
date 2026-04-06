@@ -1,4 +1,4 @@
-# trimExt()
+# trimExt
 
 > `const` **trimExt**: (`filename`, `ignoreExts?`, `maxSize?`) => `string` = `upath.trimExt`
 

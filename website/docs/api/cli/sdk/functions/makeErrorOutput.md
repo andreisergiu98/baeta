@@ -1,6 +1,6 @@
 # makeErrorOutput()
 
-> **makeErrorOutput**(`id`, `message`, `bold`): `object`
+> **makeErrorOutput**(`id`, `message`, `bold?`): `object`
 
 ## Parameters
 

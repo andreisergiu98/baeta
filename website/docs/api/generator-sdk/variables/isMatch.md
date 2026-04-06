@@ -1,4 +1,4 @@
-# isMatch()
+# isMatch
 
 > `const` **isMatch**: (`string`, `pattern`, `options?`) => `boolean` = `micromatch.isMatch`
 

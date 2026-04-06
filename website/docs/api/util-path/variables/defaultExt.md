@@ -1,4 +1,4 @@
-# defaultExt()
+# defaultExt
 
 > `const` **defaultExt**: (`filename`, `ext`, `ignoreExts?`, `maxSize?`) => `string` = `upath.defaultExt`
 

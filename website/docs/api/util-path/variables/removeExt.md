@@ -1,4 +1,4 @@
-# removeExt()
+# removeExt
 
 > `const` **removeExt**: (`filename`, `ext`) => `string`
 

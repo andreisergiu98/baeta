@@ -1,4 +1,4 @@
-# GetGrantFn()\<Grants, Result, Source, Context, Args, Info\>
+# GetGrantFn\<Grants, Result, Source, Context, Args, Info\>
 
 > **GetGrantFn**\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`, `result`) => [`GetGrantResult`](GetGrantResult.md)\<`Grants`\> \| `PromiseLike`\<[`GetGrantResult`](GetGrantResult.md)\<`Grants`\>\>
 

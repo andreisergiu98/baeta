@@ -1,6 +1,6 @@
-# ScopeErrorResolver()
+# ScopeErrorResolver
 
-> **ScopeErrorResolver** = (`err`, `path`) => `Error` \| `unknown`
+> **ScopeErrorResolver** = (`err`, `path`) => `unknown`
 
 Custom error resolver function for authorization failures.
 
@@ -43,4 +43,4 @@ Custom error resolver function for authorization failures.
 
 ## Returns
 
-`Error` \| `unknown`
+`unknown`

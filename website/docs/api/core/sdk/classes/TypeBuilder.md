@@ -54,7 +54,7 @@
 </td>
 <td>
 
-`Any`
+`any`
 
 </td>
 </tr>
@@ -66,7 +66,7 @@
 </td>
 <td>
 
-`Any`
+`any`
 
 </td>
 </tr>
@@ -77,7 +77,7 @@
 
 ### Constructor
 
-> **new TypeBuilder**\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>(`type`, `fieldBuilders`, `extensions`, `store`, `middlewares`): `TypeBuilder`\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>
+> **new TypeBuilder**\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>(`options`): `TypeBuilder`\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>
 
 #### Parameters
 
@@ -92,60 +92,12 @@
 <tr>
 <td>
 
-`type`
+`options`
 
 </td>
 <td>
 
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`fieldBuilders`
-
-</td>
-<td>
-
-`Readonly`\<`FieldsBuilders`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-readonly [`Extension`](Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`store`
-
-</td>
-<td>
-
-`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`middlewares`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\>[]
+[`TypeBuilderOptions`](../interfaces/TypeBuilderOptions.md)\<`Source`, `Context`, `Info`, `FieldsBuilders`\>
 
 </td>
 </tr>

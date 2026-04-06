@@ -1,4 +1,4 @@
-# Publish()\<Map\>
+# Publish\<Map\>
 
 > **Publish**\<`Map`\> = \<`C`, `P`\>(`topic`, `payload`) => `Promise`\<`void`\>
 

@@ -1,4 +1,4 @@
-# join()
+# join
 
 > `const` **join**: \{(...`paths`): `string`; (...`paths`): `string`; \} = `upath.join`
 

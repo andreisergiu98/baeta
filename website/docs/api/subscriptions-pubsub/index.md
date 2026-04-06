@@ -1,6 +1,9 @@
 # @baeta/subscriptions-pubsub
 
+## Classes
+
+- [TypedPubSub](classes/TypedPubSub.md)
+
 ## Interfaces
 
-- [TypedPubSub](interfaces/TypedPubSub.md)
 - [TypedPubSubOptions](interfaces/TypedPubSubOptions.md)

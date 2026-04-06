@@ -1,3 +1,3 @@
 # ConfigProviderBase
 
-> **ConfigProviderBase**: `ProviderWrapped`\<[`ConfigProps`](../interfaces/ConfigProps.md)\>
+> **ConfigProviderBase**: `ProviderWrapped`\<`Readonly`\<[`ConfigProps`](../interfaces/ConfigProps.md)\>\>

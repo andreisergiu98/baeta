@@ -51,7 +51,7 @@
 
 ### Constructor
 
-> **new FieldBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`type`, `field`, `extensions`, `store`, `middlewares`): `FieldBuilder`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+> **new FieldBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`options`): `FieldBuilder`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 #### Parameters
 
@@ -66,60 +66,12 @@
 <tr>
 <td>
 
-`type`
+`options`
 
 </td>
 <td>
 
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`field`
-
-</td>
-<td>
-
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-readonly [`Extension`](Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`store`
-
-</td>
-<td>
-
-`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`middlewares`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>[]
+[`FieldBuilderOptions`](../interfaces/FieldBuilderOptions.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

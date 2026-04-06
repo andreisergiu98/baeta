@@ -1,4 +1,4 @@
-# GeneratorPluginV1Fn()\<Store\>
+# GeneratorPluginV1Fn\<Store\>
 
 > **GeneratorPluginV1Fn**\<`Store`\> = (`ctx`, `next`) => `Promise`\<`void`\>
 

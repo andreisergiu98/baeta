@@ -1,4 +1,4 @@
-# normalize()
+# normalize
 
 > `const` **normalize**: (`p`) => `string` = `upath.normalize`
 

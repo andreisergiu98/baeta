@@ -1,4 +1,4 @@
-# GetScopeLoader()\<Scopes, Ctx\>
+# GetScopeLoader\<Scopes, Ctx\>
 
 > **GetScopeLoader**\<`Scopes`, `Ctx`\> = (`ctx`) => [`ScopeLoaderMap`](ScopeLoaderMap.md)\<`Scopes`\> \| `Promise`\<[`ScopeLoaderMap`](ScopeLoaderMap.md)\<`Scopes`\>\>
 

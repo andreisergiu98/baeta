@@ -2,9 +2,12 @@
 
 ## Type Aliases
 
-- [ConsoleLogger](type-aliases/ConsoleLogger.md)
-- [ConsolePayload](type-aliases/ConsolePayload.md)
+- [Logger](type-aliases/Logger.md)
 
 ## Variables
 
 - [log](variables/log.md)
+
+## Functions
+
+- [createLogger](functions/createLogger.md)

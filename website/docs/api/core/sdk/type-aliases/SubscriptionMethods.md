@@ -1,6 +1,6 @@
 # SubscriptionMethods\<Result, Source, Context, Args, Info\>
 
-> **SubscriptionMethods**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = `object` & [`SubscriptionExtensions`](../namespaces/BaetaExtensions/interfaces/SubscriptionExtensions.md)\<`Result`, `Source`, `Context`, `Args`, `Info`, [`SubscriptionBuilder`](../classes/SubscriptionBuilder.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>\>
+> **SubscriptionMethods**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = `object` & `BaetaExtensions.SubscriptionExtensions`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 ## Type Declaration
 
@@ -15,24 +15,24 @@
 <tr>
 <td>
 
-`subscribe()`
+`$use()`
 
 </td>
 <td>
 
-\<`T`\>(`fn`) => [`SubscriptionField`](SubscriptionField.md)\<`Result`, `T`, `T`, `Context`, `Args`, `Info`\>
+(`middleware`) => `SubscriptionMethods`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-`use()`
+`subscribe()`
 
 </td>
 <td>
 
-(`middleware`) => `SubscriptionMethods`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+\<`T`\>(`fn`) => [`SubscriptionField`](SubscriptionField.md)\<`Result`, `T`, `T`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

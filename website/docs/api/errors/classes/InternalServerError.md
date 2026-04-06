@@ -12,7 +12,7 @@ In production, shows a generic error message.
 
 ### Constructor
 
-> **new InternalServerError**(`err`, `message`, `options?`): `InternalServerError`
+> **new InternalServerError**(`err`, `message?`, `options?`): `InternalServerError`
 
 #### Parameters
 

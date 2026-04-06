@@ -1,4 +1,4 @@
-# dirname()
+# dirname
 
 > `const` **dirname**: (`p`) => `string` = `upath.dirname`
 

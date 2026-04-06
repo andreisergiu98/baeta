@@ -1,6 +1,6 @@
 # ModuleMethods\<Context, Info, TypesBuilders, TypesResolvers\>
 
-> **ModuleMethods**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\> = `TypesBuilders` & `object` & [`ModuleExtensions`](../namespaces/BaetaExtensions/interfaces/ModuleExtensions.md)\<`Context`, `Info`, [`ModuleBuilder`](../classes/ModuleBuilder.md)\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>\>
+> **ModuleMethods**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\> = `TypesBuilders` & `object` & `BaetaExtensions.ModuleExtensions`\<`Context`, `Info`\>
 
 ## Type Declaration
 
@@ -57,6 +57,7 @@
 <thead>
 <tr>
 <th>Type Parameter</th>
+<th>Default type</th>
 </tr>
 </thead>
 <tbody>
@@ -66,11 +67,21 @@
 `Context`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
 `Info`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 </tr>
@@ -80,11 +91,21 @@
 `TypesBuilders` _extends_ [`TypesBuildersMap`](TypesBuildersMap.md)\<`Context`, `Info`\>
 
 </td>
+<td>
+
+[`TypesBuildersMap`](TypesBuildersMap.md)\<`Context`, `Info`\>
+
+</td>
 </tr>
 <tr>
 <td>
 
 `TypesResolvers` _extends_ [`TypesResolversMap`](TypesResolversMap.md)\<`Context`, `Info`\>
+
+</td>
+<td>
+
+[`TypesResolversMap`](TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 </tr>

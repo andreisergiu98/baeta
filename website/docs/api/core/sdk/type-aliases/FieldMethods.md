@@ -1,6 +1,6 @@
 # FieldMethods\<Result, Source, Context, Args, Info\>
 
-> **FieldMethods**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = `object` & [`FieldExtensions`](../namespaces/BaetaExtensions/interfaces/FieldExtensions.md)\<`Result`, `Source`, `Context`, `Args`, `Info`, [`FieldBuilder`](../classes/FieldBuilder.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>\>
+> **FieldMethods**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = `object` & `BaetaExtensions.FieldExtensions`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 ## Type Declaration
 
@@ -12,6 +12,18 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`$use()`
+
+</td>
+<td>
+
+(`middleware`) => `FieldMethods`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -45,18 +57,6 @@
 <td>
 
 (`resolver`) => [`Field`](Field.md)\<`Result`, `Result`, `Source`, `Context`, `Args`, `Info`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`use()`
-
-</td>
-<td>
-
-(`middleware`) => `FieldMethods`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

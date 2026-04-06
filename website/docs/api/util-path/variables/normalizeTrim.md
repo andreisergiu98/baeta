@@ -1,4 +1,4 @@
-# normalizeTrim()
+# normalizeTrim
 
 > `const` **normalizeTrim**: (`p`) => `string` = `upath.normalizeTrim`
 

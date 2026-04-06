@@ -10,7 +10,7 @@ Thrown when the user provides invalid input data.
 
 ### Constructor
 
-> **new BadUserInput**(`message`, `options?`): `BadUserInput`
+> **new BadUserInput**(`message?`, `options?`): `BadUserInput`
 
 #### Parameters
 

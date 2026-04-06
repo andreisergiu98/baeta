@@ -1,4 +1,4 @@
-# relative()
+# relative
 
 > `const` **relative**: (`from`, `to`) => `string` = `upath.relative`
 

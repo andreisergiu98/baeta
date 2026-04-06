@@ -1,5 +1,7 @@
 # Loader\<TOptions\>
 
+Interface for custom schema loaders.
+
 ## Type Parameters
 
 <table>
@@ -18,7 +20,7 @@
 </td>
 <td>
 
-`GraphQlLoaderAny`
+`any`
 
 </td>
 </tr>

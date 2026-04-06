@@ -18,7 +18,7 @@
 </td>
 <td>
 
-`Any`
+&hyphen;
 
 </td>
 </tr>
@@ -30,7 +30,7 @@
 </td>
 <td>
 
-`Any`
+&hyphen;
 
 </td>
 </tr>
@@ -42,7 +42,7 @@
 </td>
 <td>
 
-`Any`
+&hyphen;
 
 </td>
 </tr>
@@ -54,7 +54,7 @@
 </td>
 <td>
 
-`Any`
+[`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 </tr>
@@ -65,7 +65,7 @@
 
 ### Constructor
 
-> **new TypeCompiler**\<`Source`, `Context`, `Info`, `FieldsResolvers`\>(`type`, `store`, `middlewares`, `fieldsMap`): `TypeCompiler`\<`Source`, `Context`, `Info`, `FieldsResolvers`\>
+> **new TypeCompiler**\<`Source`, `Context`, `Info`, `FieldsResolvers`\>(`options`): `TypeCompiler`\<`Source`, `Context`, `Info`, `FieldsResolvers`\>
 
 #### Parameters
 
@@ -80,48 +80,12 @@
 <tr>
 <td>
 
-`type`
+`options`
 
 </td>
 <td>
 
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`store`
-
-</td>
-<td>
-
-`Map`\<`symbol`, `unknown`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`middlewares`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`any`, `any`, `any`, `any`, `any`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`fieldsMap`
-
-</td>
-<td>
-
-`FieldsResolvers`
+[`TypeCompilerOptions`](../interfaces/TypeCompilerOptions.md)\<`Source`, `Context`, `Info`, `FieldsResolvers`\>
 
 </td>
 </tr>
@@ -138,11 +102,11 @@
 
 #### Get Signature
 
-> **get** **fields**(): readonly ([`FieldCompiler`](FieldCompiler.md)\<`any`, `any`, `any`, `any`, `any`\> \| `SubscriptionCompiler`\<`any`, `any`, `any`, `any`, `any`, `any`, `any`\>)[]
+> **get** **fields**(): readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Context`, `unknown`, `Info`, `Source`\>)[]
 
 ##### Returns
 
-readonly ([`FieldCompiler`](FieldCompiler.md)\<`any`, `any`, `any`, `any`, `any`\> \| `SubscriptionCompiler`\<`any`, `any`, `any`, `any`, `any`, `any`, `any`\>)[]
+readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Context`, `unknown`, `Info`, `Source`\>)[]
 
 ---
 
@@ -157,6 +121,41 @@ readonly ([`FieldCompiler`](FieldCompiler.md)\<`any`, `any`, `any`, `any`, `any`
 `string`
 
 ## Methods
+
+### addMiddleware()
+
+> **addMiddleware**(`middleware`): `void`
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`middleware`
+
+</td>
+<td>
+
+[`Middleware`](../../index/type-aliases/Middleware.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`void`
+
+---
 
 ### build()
 
@@ -180,7 +179,7 @@ readonly ([`FieldCompiler`](FieldCompiler.md)\<`any`, `any`, `any`, `any`, `any`
 </td>
 <td>
 
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`any`, `any`, `any`, `any`, `any`\>[]
+[`Middleware`](../../index/type-aliases/Middleware.md)\<`unknown`, `unknown`, `Context`, `unknown`, `Info`\>[]
 
 </td>
 </tr>

@@ -1,6 +1,6 @@
 # generateAndWatch()
 
-> **generateAndWatch**(`options`, `plugins`, `hooks?`): [`Watcher`](../classes/Watcher.md)
+> **generateAndWatch**(`options`, `plugins`, `hooks?`): `Promise`\<[`Watcher`](../classes/Watcher.md)\>
 
 ## Parameters
 
@@ -53,4 +53,4 @@
 
 ## Returns
 
-[`Watcher`](../classes/Watcher.md)
+`Promise`\<[`Watcher`](../classes/Watcher.md)\>

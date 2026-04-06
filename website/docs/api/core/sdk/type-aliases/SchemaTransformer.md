@@ -1,4 +1,4 @@
-# SchemaTransformer()
+# SchemaTransformer
 
 > **SchemaTransformer** = (`schema`) => `GraphQLSchema`
 

@@ -11,7 +11,7 @@ Results in a 401 HTTP status code.
 
 ### Constructor
 
-> **new UnauthenticatedError**(`message`, `options?`): `UnauthenticatedError`
+> **new UnauthenticatedError**(`message?`, `options?`): `UnauthenticatedError`
 
 #### Parameters
 

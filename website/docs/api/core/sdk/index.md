@@ -1,9 +1,5 @@
 # sdk
 
-## Namespaces
-
-- [BaetaExtensions](namespaces/BaetaExtensions/index.md)
-
 ## Classes
 
 - [Extension](classes/Extension.md)
@@ -14,6 +10,16 @@
 - [SubscriptionBuilder](classes/SubscriptionBuilder.md)
 - [TypeBuilder](classes/TypeBuilder.md)
 - [TypeCompiler](classes/TypeCompiler.md)
+
+## Interfaces
+
+- [FieldBuilderOptions](interfaces/FieldBuilderOptions.md)
+- [FieldCompilerOptions](interfaces/FieldCompilerOptions.md)
+- [ModuleBuilderOptions](interfaces/ModuleBuilderOptions.md)
+- [ModuleCompilerOptions](interfaces/ModuleCompilerOptions.md)
+- [SubscriptionBuilderOptions](interfaces/SubscriptionBuilderOptions.md)
+- [TypeBuilderOptions](interfaces/TypeBuilderOptions.md)
+- [TypeCompilerOptions](interfaces/TypeCompilerOptions.md)
 
 ## Type Aliases
 
@@ -42,12 +48,15 @@
 
 - [addValidationToSchema](functions/addValidationToSchema.md)
 - [composeMiddlewares](functions/composeMiddlewares.md)
+- [concatMiddlewares](functions/concatMiddlewares.md)
 - [createFieldBuilder](functions/createFieldBuilder.md)
 - [createModuleBuilder](functions/createModuleBuilder.md)
 - [createObjectLens](functions/createObjectLens.md)
 - [createSubscriptionBuilder](functions/createSubscriptionBuilder.md)
 - [createTypeBuilder](functions/createTypeBuilder.md)
+- [isPromise](functions/isPromise.md)
 - [makeField](functions/makeField.md)
+- [mapMaybePromise](functions/mapMaybePromise.md)
 - [mergeExtensions](functions/mergeExtensions.md)
 - [nameFunction](functions/nameFunction.md)
 - [transformSchema](functions/transformSchema.md)

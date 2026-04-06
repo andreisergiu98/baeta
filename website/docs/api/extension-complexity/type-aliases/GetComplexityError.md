@@ -1,4 +1,4 @@
-# GetComplexityError()
+# GetComplexityError
 
 > **GetComplexityError** = (`kind`, `limits`, `results`) => `GraphQLError`
 

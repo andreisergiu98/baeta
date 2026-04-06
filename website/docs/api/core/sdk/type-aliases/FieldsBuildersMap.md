@@ -1,6 +1,6 @@
 # FieldsBuildersMap\<Source, Context, Info\>
 
-> **FieldsBuildersMap**\<`Source`, `Context`, `Info`\> = `Record`\<`string`, [`FieldMethods`](FieldMethods.md)\<`Any`, `Source`, `Context`, `Any`, `Info`\> \| [`SubscriptionMethods`](SubscriptionMethods.md)\<`Any`, `Source`, `Context`, `Any`, `Info`\>\>
+> **FieldsBuildersMap**\<`Source`, `Context`, `Info`\> = `Record`\<`string`, [`FieldMethods`](FieldMethods.md)\<`any`, `Source`, `Context`, `any`, `Info`\> \| [`SubscriptionMethods`](SubscriptionMethods.md)\<`any`, `Source`, `Context`, `any`, `Info`\>\>
 
 ## Type Parameters
 

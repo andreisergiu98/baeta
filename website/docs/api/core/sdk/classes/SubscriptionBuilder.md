@@ -51,7 +51,7 @@
 
 ### Constructor
 
-> **new SubscriptionBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`field`, `extensions`, `store`, `middlewares`): `SubscriptionBuilder`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+> **new SubscriptionBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`options`): `SubscriptionBuilder`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 #### Parameters
 
@@ -66,48 +66,12 @@
 <tr>
 <td>
 
-`field`
+`options`
 
 </td>
 <td>
 
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-readonly [`Extension`](Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`store`
-
-</td>
-<td>
-
-`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`middlewares`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<[`SubscriptionWrapper`](../type-aliases/SubscriptionWrapper.md), `Source`, `Context`, `Args`, `Info`\>[]
+[`SubscriptionBuilderOptions`](../interfaces/SubscriptionBuilderOptions.md)\<`Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

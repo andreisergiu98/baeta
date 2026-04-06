@@ -1,4 +1,4 @@
-# toUnix()
+# toUnix
 
 > `const` **toUnix**: (`p`) => `string` = `upath.toUnix`
 

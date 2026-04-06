@@ -1,4 +1,4 @@
-# GeneratorPluginV1WatchOptions()
+# GeneratorPluginV1WatchOptions
 
 > **GeneratorPluginV1WatchOptions** = (`options`, `watcher`, `reload`) => `void`
 

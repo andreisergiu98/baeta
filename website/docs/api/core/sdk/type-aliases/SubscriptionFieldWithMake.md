@@ -1,6 +1,6 @@
-# SubscriptionFieldWithMake\<Expected, Result, Source, Context, Args, Info\>
+# SubscriptionFieldWithMake\<Expected, Result, Source, Context, Args, Info, SubscriptionSource\>
 
-> **SubscriptionFieldWithMake**\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`\> = [`FieldHelpers`](FieldHelpers.md)\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`\> & `object`
+> **SubscriptionFieldWithMake**\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`, `SubscriptionSource`\> = [`FieldHelpers`](FieldHelpers.md)\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`\> & `object`
 
 ## Type Declaration
 
@@ -20,7 +20,7 @@
 </td>
 <td>
 
-() => `SubscriptionCompiler`\<`Expected`, `Source`, `Context`, `Args`, `Info`\>
+() => `SubscriptionCompiler`\<`Expected`, `Source`, `Context`, `Args`, `Info`, `SubscriptionSource`\>
 
 </td>
 </tr>
@@ -75,6 +75,13 @@
 <td>
 
 `Info`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`SubscriptionSource`
 
 </td>
 </tr>

@@ -1,4 +1,4 @@
-# basename()
+# basename
 
 > `const` **basename**: (`p`, `ext?`) => `string` = `upath.basename`
 

@@ -42,7 +42,7 @@
 </td>
 <td>
 
-`Any`
+`any`
 
 </td>
 </tr>
@@ -54,7 +54,7 @@
 </td>
 <td>
 
-`Any`
+`any`
 
 </td>
 </tr>
@@ -65,7 +65,7 @@
 
 ### Constructor
 
-> **new ModuleBuilder**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>(`name`, `typedef`, `typeBuilders`, `defaultResolvers`, `extensions`, `transformers`, `store`, `middlewares`): `ModuleBuilder`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
+> **new ModuleBuilder**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>(`options`): `ModuleBuilder`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
 
 #### Parameters
 
@@ -80,96 +80,12 @@
 <tr>
 <td>
 
-`name`
+`options`
 
 </td>
 <td>
 
-`string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`typedef`
-
-</td>
-<td>
-
-`Readonly`\<`DocumentNode`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`typeBuilders`
-
-</td>
-<td>
-
-`Readonly`\<`TypesBuilders`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`defaultResolvers`
-
-</td>
-<td>
-
-`Readonly`\<`IResolvers`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-readonly [`Extension`](Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`transformers`
-
-</td>
-<td>
-
-readonly [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
-
-</td>
-</tr>
-<tr>
-<td>
-
-`store`
-
-</td>
-<td>
-
-`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`middlewares`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`unknown`, `unknown`, `Context`, `unknown`, `Info`\>[]
+[`ModuleBuilderOptions`](../interfaces/ModuleBuilderOptions.md)\<`Context`, `Info`, `TypesBuilders`\>
 
 </td>
 </tr>
@@ -218,7 +134,7 @@ readonly [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
 </td>
 <td>
 
-(`middleware`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly commit: () =\> ModuleBuilder\<...\>; readonly commitToMethods: () =\> Modu...
+(`middleware`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit:...
 
 </td>
 </tr>
@@ -230,7 +146,7 @@ readonly [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
 </td>
 <td>
 
-(`transformer`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly commit: () =\> ModuleBuilder\<...\>; readonly commitToMethods: () =\> Modu...
+(`transformer`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit:...
 
 </td>
 </tr>
@@ -255,6 +171,18 @@ readonly [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
 <td>
 
 () => [`ModuleMethods`](../type-aliases/ModuleMethods.md)\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`setStore()`
+
+</td>
+<td>
+
+(`key`, `value`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit:...
 
 </td>
 </tr>

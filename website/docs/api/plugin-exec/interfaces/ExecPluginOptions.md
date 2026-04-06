@@ -21,7 +21,7 @@ Configuration options for the exec plugin.
 </td>
 <td>
 
-`string` \| (`ctx`) => `void` \| `Promise`\<`void`\>
+`string` \| ((`ctx`) => `void` \| `Promise`\<`void`\>)
 
 </td>
 <td>

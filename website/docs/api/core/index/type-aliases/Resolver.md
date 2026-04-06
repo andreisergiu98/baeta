@@ -1,4 +1,4 @@
-# Resolver()\<Result, Source, Context, Args, Info\>
+# Resolver\<Result, Source, Context, Args, Info\>
 
 > **Resolver**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`) => `Result` \| `PromiseLike`\<`Result`\>
 

@@ -1,6 +1,6 @@
 # makeErrorMessage()
 
-> **makeErrorMessage**(`message`, `bold`): `string`
+> **makeErrorMessage**(`message`, `bold?`): `string`
 
 ## Parameters
 

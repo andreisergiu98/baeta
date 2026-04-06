@@ -1,0 +1,2161 @@
+<!doctype html><html lang=en dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-1.0 docs-doc-page docs-doc-id-api/extension-cache-upstash/classes/UpstashClient" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.9.2"><title data-rh=true>UpstashClient | Baeta</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true property=og:image content=https://baeta.io/img/banner.png /><meta data-rh=true name=twitter:image content=https://baeta.io/img/banner.png /><meta data-rh=true property=og:url content=https://baeta.io/docs/1.0/api/extension-cache-upstash/classes/UpstashClient /><meta data-rh=true property=og:locale content=en /><meta data-rh=true name=docusaurus_locale content=en /><meta data-rh=true name=docsearch:language content=en /><meta data-rh=true name=keywords content="baeta, graphql, schema, types, typescript, framework, builder"/><meta data-rh=true name=twitter:card content=img/banner.png /><meta data-rh=true name=docusaurus_version content=1.0 /><meta data-rh=true name=docusaurus_tag content=docs-default-1.0 /><meta data-rh=true name=docsearch:version content=1.0 /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-1.0 /><meta data-rh=true property=og:title content="UpstashClient | Baeta"/><meta data-rh=true name=description content=Extends /><meta data-rh=true property=og:description content=Extends /><link data-rh=true rel=icon href="/img/favicon.ico?v=1"/><link data-rh=true rel=canonical href=https://baeta.io/docs/1.0/api/extension-cache-upstash/classes/UpstashClient /><link data-rh=true rel=alternate href=https://baeta.io/docs/1.0/api/extension-cache-upstash/classes/UpstashClient hreflang=en /><link data-rh=true rel=alternate href=https://baeta.io/docs/1.0/api/extension-cache-upstash/classes/UpstashClient hreflang=x-default /><link data-rh=true rel=preconnect href=https://4FC0N9XMY9-dsn.algolia.net crossorigin=anonymous /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://baeta.io/docs/1.0/api/","name":"API","position":1},{"@type":"ListItem","item":"https://baeta.io/docs/1.0/api/extension-cache-upstash/","name":"@baeta/extension-cache-upstash","position":2},{"@type":"ListItem","item":"https://baeta.io/docs/1.0/api/extension-cache-upstash/classes/UpstashClient","name":"UpstashClient","position":3}]}</script><link rel=search type=application/opensearchdescription+xml title=Baeta href=/opensearch.xml><link rel=preconnect href=https://baeta.io><link rel=stylesheet href=/assets/css/styles.8d541052.css /><script src=/assets/js/runtime~main.48bfd76a.js defer></script><script src=/assets/js/main.ec3e48c1.js defer></script></head><body class=navigation-with-keyboard><svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/img/logo-baeta.svg /><div role=region aria-label="Skip to main content"><a class=skipToContent_BNyy href=#__docusaurus_skipToContent_fallback>Skip to main content</a></div><nav aria-label=Main class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/><div class=navbar__logo><img src=/img/logo-baeta.svg alt="Baeta Logo" class="themedComponent_zshc themedComponent--light_RSBO"/><img src=/img/logo-baeta.svg alt="Baeta Logo" class="themedComponent_zshc themedComponent--dark_Ae1B"/></div><b class="navbar__title text--truncate">Baeta</b></a><a aria-current=page class="navbar__item navbar__link navbar__link--active" href=/docs/1.0/intro>Docs</a><a href=https://github.com/andreisergiu98/baeta/tree/main/examples target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">Examples<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a class=navbar__link aria-haspopup=true aria-expanded=false role=button href=/docs/1.0/api/extension-cache-upstash/classes/UpstashClient>1.x</a><ul class=dropdown__menu><li><a class=dropdown__link href=/docs/intro>Next (2.x)</a><li><a aria-current=page class="dropdown__link dropdown__link--active" href=/docs/1.0/api/extension-cache-upstash/classes/UpstashClient>1.x</a></ul></div><a href=https://github.com/sponsors/andreisergiu98 target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">Donate<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a><a href=https://discord.gg/j6Y8xRc7ep target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">Discord<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a><a href=https://github.com/andreisergiu98/baeta target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a><div class="toggle_DQ_5 colorModeToggle_KvI0"><button class="clean-btn toggleButton_e3yT toggleButtonDisabled_f2Po" type=button disabled title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_AmoH lightToggleIcon_oaKD"><path fill=currentColor d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_AmoH darkToggleIcon_UO96"><path fill=currentColor d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_AmoH systemToggleIcon_Ysrk"><path fill=currentColor d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"/></svg></button></div><div class=navbarSearchContainer_aD5X><button type=button class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts=Meta+k><span class=DocSearch-Button-Container><svg width=20 height=20 class=DocSearch-Search-Icon viewBox="0 0 24 24" aria-hidden=true><circle cx=11 cy=11 r=8 stroke=currentColor fill=none stroke-width=1.4 /><path d="m21 21-4.3-4.3" stroke=currentColor fill=none stroke-linecap=round stroke-linejoin=round /></svg><span class=DocSearch-Button-Placeholder>Search</span></span><span class=DocSearch-Button-Keys></span></button></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_Jhsr"><div class=docsWrapper_lxl4><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_fvN5" type=button></button><div class=docRoot_EzlW><aside class="theme-doc-sidebar-container docSidebarContainer_h4r3"><div class=sidebarViewport_Rfb3><div class=sidebar_Ptyv><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_lUIs"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/docs/1.0/intro><span title=Introduction class=linkLabel_ys52>Introduction</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link" href=/docs/1.0/category/getting-started><span title="Getting Started" class=categoryLinkLabel_Lou3>Getting Started</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/getting-started/installation><span title=Installation class=linkLabel_ys52>Installation</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/getting-started/configuration><span title=Configuration class=linkLabel_ys52>Configuration</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/getting-started/first-module><span title="First Module" class=linkLabel_ys52>First Module</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/getting-started/extend-modules><span title="Extend modules" class=linkLabel_ys52>Extend modules</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/getting-started/wrapping-up><span title="Wrapping up" class=linkLabel_ys52>Wrapping up</span></a></ul><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/docs/1.0/stability><span title=Stability class=linkLabel_ys52>Stability</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link" href=/docs/1.0/category/guides><span title=Guides class=categoryLinkLabel_Lou3>Guides</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/resolvers><span title=Resolvers class=linkLabel_ys52>Resolvers</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/scalars><span title=Scalars class=linkLabel_ys52>Scalars</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/middlewares><span title=Middlewares class=linkLabel_ys52>Middlewares</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/context><span title=Context class=linkLabel_ys52>Context</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/application><span title=Application class=linkLabel_ys52>Application</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/errors><span title="Error Handling" class=linkLabel_ys52>Error Handling</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/subscriptions><span title=Subscriptions class=linkLabel_ys52>Subscriptions</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/interfaces-unions><span title="Interfaces & Unions" class=linkLabel_ys52>Interfaces & Unions</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/context-store><span title="Context Store" class=linkLabel_ys52>Context Store</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/directives><span title=Directives class=linkLabel_ys52>Directives</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/input-directives><span title="Input Directives" class=linkLabel_ys52>Input Directives</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/typed-pubsub><span title="Typed PubSub" class=linkLabel_ys52>Typed PubSub</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/guides/environment><span title=Environment class=linkLabel_ys52>Environment</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link" href=/docs/1.0/category/extensions><span title=Extensions class=categoryLinkLabel_Lou3>Extensions</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/extensions/><span title=Extensions class=linkLabel_ys52>Extensions</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/extensions/authorization><span title=Authorization class=linkLabel_ys52>Authorization</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/extensions/complexity><span title=Complexity class=linkLabel_ys52>Complexity</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/extensions/caching><span title=Caching class=linkLabel_ys52>Caching</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link" href=/docs/1.0/category/plugins><span title=Plugins class=categoryLinkLabel_Lou3>Plugins</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/plugins/><span title=Plugins class=linkLabel_ys52>Plugins</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/plugins/autoloading><span title=Autoloading class=linkLabel_ys52>Autoloading</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/plugins/builtin-directives><span title=Directives class=linkLabel_ys52>Directives</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/plugins/pagination><span title=Pagination class=linkLabel_ys52>Pagination</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/plugins/prisma><span title=Prisma class=linkLabel_ys52>Prisma</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/plugins/gitignore><span title=Gitignore class=linkLabel_ys52>Gitignore</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/plugins/exec><span title=Exec class=linkLabel_ys52>Exec</span></a></ul><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/docs/1.0/credits><span title=Credits class=linkLabel_ys52>Credits</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist menu__link--active" href=/docs/1.0/api/><span title=API class=categoryLinkLabel_Lou3>API</span></a><button aria-label="Collapse sidebar category 'API'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/cli/><span title=@baeta/cli class=categoryLinkLabel_Lou3>@baeta/cli</span></a><button aria-label="Expand sidebar category '@baeta/cli'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/compiler/><span title=@baeta/compiler class=categoryLinkLabel_Lou3>@baeta/compiler</span></a><button aria-label="Expand sidebar category '@baeta/compiler'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/core/><span title=@baeta/core class=categoryLinkLabel_Lou3>@baeta/core</span></a><button aria-label="Expand sidebar category '@baeta/core'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/directives/><span title=@baeta/directives class=categoryLinkLabel_Lou3>@baeta/directives</span></a><button aria-label="Expand sidebar category '@baeta/directives'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/env/><span title=@baeta/env class=categoryLinkLabel_Lou3>@baeta/env</span></a><button aria-label="Expand sidebar category '@baeta/env'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/errors/><span title=@baeta/errors class=categoryLinkLabel_Lou3>@baeta/errors</span></a><button aria-label="Expand sidebar category '@baeta/errors'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/extension-auth/><span title=@baeta/extension-auth class=categoryLinkLabel_Lou3>@baeta/extension-auth</span></a><button aria-label="Expand sidebar category '@baeta/extension-auth'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/extension-cache/><span title=@baeta/extension-cache class=categoryLinkLabel_Lou3>@baeta/extension-cache</span></a><button aria-label="Expand sidebar category '@baeta/extension-cache'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/extension-cache-cloudflare/><span title=@baeta/extension-cache-cloudflare class=categoryLinkLabel_Lou3>@baeta/extension-cache-cloudflare</span></a><button aria-label="Expand sidebar category '@baeta/extension-cache-cloudflare'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/extension-cache-keyv/><span title=@baeta/extension-cache-keyv class=categoryLinkLabel_Lou3>@baeta/extension-cache-keyv</span></a><button aria-label="Expand sidebar category '@baeta/extension-cache-keyv'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/extension-cache-redis/><span title=@baeta/extension-cache-redis class=categoryLinkLabel_Lou3>@baeta/extension-cache-redis</span></a><button aria-label="Expand sidebar category '@baeta/extension-cache-redis'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist menu__link--active" tabindex=0 href=/docs/1.0/api/extension-cache-upstash/><span title=@baeta/extension-cache-upstash class=categoryLinkLabel_Lou3>@baeta/extension-cache-upstash</span></a><button aria-label="Collapse sidebar category '@baeta/extension-cache-upstash'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true tabindex=0 href=/docs/1.0/api/extension-cache-upstash/classes/UpstashClient><span title=Classes class=categoryLinkLabel_Lou3>Classes</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/docs/1.0/api/extension-cache-upstash/classes/UpstashClient><span title=UpstashClient class=linkLabel_ys52>UpstashClient</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/1.0/api/extension-cache-upstash/classes/UpstashStore><span title=UpstashStore class=linkLabel_ys52>UpstashStore</span></a></ul></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/extension-complexity/><span title=@baeta/extension-complexity class=categoryLinkLabel_Lou3>@baeta/extension-complexity</span></a><button aria-label="Expand sidebar category '@baeta/extension-complexity'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/generator/><span title=@baeta/generator class=categoryLinkLabel_Lou3>@baeta/generator</span></a><button aria-label="Expand sidebar category '@baeta/generator'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/generator-sdk/><span title=@baeta/generator-sdk class=categoryLinkLabel_Lou3>@baeta/generator-sdk</span></a><button aria-label="Expand sidebar category '@baeta/generator-sdk'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin/><span title=@baeta/plugin class=categoryLinkLabel_Lou3>@baeta/plugin</span></a><button aria-label="Expand sidebar category '@baeta/plugin'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-autoload/><span title=@baeta/plugin-autoload class=categoryLinkLabel_Lou3>@baeta/plugin-autoload</span></a><button aria-label="Expand sidebar category '@baeta/plugin-autoload'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-cloudflare/><span title=@baeta/plugin-cloudflare class=categoryLinkLabel_Lou3>@baeta/plugin-cloudflare</span></a><button aria-label="Expand sidebar category '@baeta/plugin-cloudflare'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-directives/><span title=@baeta/plugin-directives class=categoryLinkLabel_Lou3>@baeta/plugin-directives</span></a><button aria-label="Expand sidebar category '@baeta/plugin-directives'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-exec/><span title=@baeta/plugin-exec class=categoryLinkLabel_Lou3>@baeta/plugin-exec</span></a><button aria-label="Expand sidebar category '@baeta/plugin-exec'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-gitignore/><span title=@baeta/plugin-gitignore class=categoryLinkLabel_Lou3>@baeta/plugin-gitignore</span></a><button aria-label="Expand sidebar category '@baeta/plugin-gitignore'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-graphql/><span title=@baeta/plugin-graphql class=categoryLinkLabel_Lou3>@baeta/plugin-graphql</span></a><button aria-label="Expand sidebar category '@baeta/plugin-graphql'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-pagination/><span title=@baeta/plugin-pagination class=categoryLinkLabel_Lou3>@baeta/plugin-pagination</span></a><button aria-label="Expand sidebar category '@baeta/plugin-pagination'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/plugin-prisma/><span title=@baeta/plugin-prisma class=categoryLinkLabel_Lou3>@baeta/plugin-prisma</span></a><button aria-label="Expand sidebar category '@baeta/plugin-prisma'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/subscriptions-cloudflare/><span title=@baeta/subscriptions-cloudflare class=categoryLinkLabel_Lou3>@baeta/subscriptions-cloudflare</span></a><button aria-label="Expand sidebar category '@baeta/subscriptions-cloudflare'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/subscriptions-pubsub/><span title=@baeta/subscriptions-pubsub class=categoryLinkLabel_Lou3>@baeta/subscriptions-pubsub</span></a><button aria-label="Expand sidebar category '@baeta/subscriptions-pubsub'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/util-encoding/><span title=@baeta/util-encoding class=categoryLinkLabel_Lou3>@baeta/util-encoding</span></a><button aria-label="Expand sidebar category '@baeta/util-encoding'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/util-env/><span title=@baeta/util-env class=categoryLinkLabel_Lou3>@baeta/util-env</span></a><button aria-label="Expand sidebar category '@baeta/util-env'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/util-log/><span title=@baeta/util-log class=categoryLinkLabel_Lou3>@baeta/util-log</span></a><button aria-label="Expand sidebar category '@baeta/util-log'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/util-path/><span title=@baeta/util-path class=categoryLinkLabel_Lou3>@baeta/util-path</span></a><button aria-label="Expand sidebar category '@baeta/util-path'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_D5wD menu__link menu__link--sublist" tabindex=0 href=/docs/1.0/api/create-baeta/><span title=create-baeta class=categoryLinkLabel_Lou3>create-baeta</span></a><button aria-label="Expand sidebar category 'create-baeta'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div></ul></ul></nav></div></div></aside><main class=docMainContainer_Xo3k><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_hdBl"><div class="theme-doc-version-banner alert alert--warning margin-bottom--md" role=alert><div>This is documentation for <!-- -->Baeta<!-- --> <b>1.x</b>, which is no longer actively maintained.</div><div class=margin-top--md>For up-to-date documentation, see the <b><a href=/docs/intro>latest version</a></b> (<!-- -->Next (2.x)<!-- -->).</div></div><div class=docItemContainer_Uhzv><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_qftn" aria-label=Breadcrumbs><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label="Home page" class=breadcrumbs__link href=/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_Zlic><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/docs/1.0/api/><span>API</span></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/docs/1.0/api/extension-cache-upstash/><span>@baeta/extension-cache-upstash</span></a><li class=breadcrumbs__item><span class=breadcrumbs__link>Classes</span><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>UpstashClient</span></ul></nav><span class="theme-doc-version-badge badge badge--secondary">Version: 1.x</span><div class="tocCollapsible_d8Uh theme-doc-toc-mobile tocMobile_dVll"><button type=button class="clean-btn tocCollapsibleButton_OJL4">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>UpstashClient</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_dU4u" id=extends>Extends<a href=#extends class=hash-link aria-label="Direct link to Extends" title="Direct link to Extends" translate=no>​</a></h2>
+<ul>
+<li class=""><code>Redis</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_dU4u" id=constructors>Constructors<a href=#constructors class=hash-link aria-label="Direct link to Constructors" title="Direct link to Constructors" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_dU4u" id=constructor>Constructor<a href=#constructor class=hash-link aria-label="Direct link to Constructor" title="Direct link to Constructor" translate=no>​</a></h3>
+<blockquote>
+<p><strong>new UpstashClient</strong>(<code>options</code>): <code>UpstashClient</code></p>
+</blockquote>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=parameters>Parameters<a href=#parameters class=hash-link aria-label="Direct link to Parameters" title="Direct link to Parameters" translate=no>​</a></h4>
+<table><thead><tr><th>Parameter<th>Type<tbody><tr><td>
+<p><code>options</code></p>
+<td>
+<p><code>Omit</code>&lt;<code>RedisConfigNodejs</code>, <code>"automaticDeserialization"</code>></p>
+</table>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=returns>Returns<a href=#returns class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h4>
+<p><code>UpstashClient</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=overrides>Overrides<a href=#overrides class=hash-link aria-label="Direct link to Overrides" title="Direct link to Overrides" translate=no>​</a></h4>
+<p><code>Redis.constructor</code></p>
+<h2 class="anchor anchorTargetStickyNavbar_dU4u" id=properties>Properties<a href=#properties class=hash-link aria-label="Direct link to Properties" title="Direct link to Properties" translate=no>​</a></h2>
+<table><thead><tr><th>Property<th>Modifier<th>Type<th>Description<th>Inherited from<tbody><tr><td>
+<p><a id=addtelemetry class=anchorTargetStickyNavbar_dU4u></a> <code>addTelemetry</code></p>
+<td>
+<p><code>protected</code></p>
+<td>
+<p>(<code>telemetry</code>) => <code>void</code></p>
+<td>
+<p>Technically this is not private, we can hide it from intellisense by doing this</p>
+<td>
+<p><code>Redis.addTelemetry</code></p>
+<tr><td>
+<p><a id=append class=anchorTargetStickyNavbar_dU4u></a> <code>append</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>value</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/append target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/append</a></p>
+<td>
+<p><code>Redis.append</code></p>
+<tr><td>
+<p><a id=autopipeline class=anchorTargetStickyNavbar_dU4u></a> <code>autoPipeline</code></p>
+<td>
+<p><code>protected</code></p>
+<td>
+<p>() => <code>Redis</code></p>
+<td>
+<p>‐</p>
+<td>
+<p><code>Redis.autoPipeline</code></p>
+<tr><td>
+<p><a id=bitcount class=anchorTargetStickyNavbar_dU4u></a> <code>bitcount</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>start</code>, <code>end</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/bitcount target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/bitcount</a></p>
+<td>
+<p><code>Redis.bitcount</code></p>
+<tr><td>
+<p><a id=bitfield class=anchorTargetStickyNavbar_dU4u></a> <code>bitfield</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>BitFieldCommand</code>&lt;<code>Promise</code>&lt;<code>number</code>[]>></p>
+<td>
+<p>Returns an instance that can be used to execute <code>BITFIELD</code> commands on one key.</p>
+<p><strong>Example</strong></p>
+<div class="language-typescript codeBlockContainer_D31j theme-code-block" style=--prism-color:#F8F8F2;--prism-background-color:#1a1d27><div class=codeBlockContent_LS3X><pre tabindex=0 class="prism-code language-typescript codeBlock_rMrg thin-scrollbar" style=color:#F8F8F2;background-color:#1a1d27><code class=codeBlockLines_iZMt><span class=token-line style=color:#F8F8F2><span class="token plain">redis</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">set</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token string" style="color:rgb(255, 121, 198)">"mykey"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token number">0</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> result </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">await</span><span class="token plain"> redis</span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">bitfield</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token string" style="color:rgb(255, 121, 198)">"mykey"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">set</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token string" style="color:rgb(255, 121, 198)">"u4"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token number">0</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token number">16</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">incr</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token string" style="color:rgb(255, 121, 198)">"u4"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"#1"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token number">1</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">exec</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token builtin" style="color:rgb(189, 147, 249)">console</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">log</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">result</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"> </span><span class="token comment" style="color:rgb(98, 114, 164)">// [0, 1]</span><br/></span></code></pre></div></div>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/bitfield target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/bitfield</a></p>
+<td>
+<p><code>Redis.bitfield</code></p>
+<tr><td>
+<p><a id=bitop class=anchorTargetStickyNavbar_dU4u></a> <code>bitop</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>{(<code>op</code>, <code>destinationKey</code>, <code>sourceKey</code>, ...<code>sourceKeys</code>): <code>Promise</code>&lt;<code>number</code>>; (<code>op</code>, <code>destinationKey</code>, <code>sourceKey</code>): <code>Promise</code>&lt;<code>number</code>>; }</p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/bitop target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/bitop</a></p>
+<td>
+<p><code>Redis.bitop</code></p>
+<tr><td>
+<p><a id=bitpos class=anchorTargetStickyNavbar_dU4u></a> <code>bitpos</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>bit</code>, <code>start?</code>, <code>end?</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/bitpos target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/bitpos</a></p>
+<td>
+<p><code>Redis.bitpos</code></p>
+<tr><td>
+<p><a id=client class=anchorTargetStickyNavbar_dU4u></a> <code>client</code></p>
+<td>
+<p><code>protected</code></p>
+<td>
+<p><code>Requester</code></p>
+<td>
+<p>‐</p>
+<td>
+<p><code>Redis.client</code></p>
+<tr><td>
+<p><a id=copy class=anchorTargetStickyNavbar_dU4u></a> <code>copy</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>destinationKey</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>"COPIED"</code> | <code>"NOT_COPIED"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/copy target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/copy</a></p>
+<td>
+<p><code>Redis.copy</code></p>
+<tr><td>
+<p><a id=dbsize class=anchorTargetStickyNavbar_dU4u></a> <code>dbsize</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>() => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/dbsize target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/dbsize</a></p>
+<td>
+<p><code>Redis.dbsize</code></p>
+<tr><td>
+<p><a id=decr class=anchorTargetStickyNavbar_dU4u></a> <code>decr</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/decr target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/decr</a></p>
+<td>
+<p><code>Redis.decr</code></p>
+<tr><td>
+<p><a id=decrby class=anchorTargetStickyNavbar_dU4u></a> <code>decrby</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>decrement</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/decrby target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/decrby</a></p>
+<td>
+<p><code>Redis.decrby</code></p>
+<tr><td>
+<p><a id=del class=anchorTargetStickyNavbar_dU4u></a> <code>del</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(...<code>args</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/del target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/del</a></p>
+<td>
+<p><code>Redis.del</code></p>
+<tr><td>
+<p><a id=echo class=anchorTargetStickyNavbar_dU4u></a> <code>echo</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>message</code>) => <code>Promise</code>&lt;<code>string</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/echo target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/echo</a></p>
+<td>
+<p><code>Redis.echo</code></p>
+<tr><td>
+<p><a id=enableautopipelining class=anchorTargetStickyNavbar_dU4u></a> <code>enableAutoPipelining</code></p>
+<td>
+<p><code>protected</code></p>
+<td>
+<p><code>boolean</code></p>
+<td>
+<p>‐</p>
+<td>
+<p><code>Redis.enableAutoPipelining</code></p>
+<tr><td>
+<p><a id=enabletelemetry class=anchorTargetStickyNavbar_dU4u></a> <code>enableTelemetry</code></p>
+<td>
+<p><code>protected</code></p>
+<td>
+<p><code>boolean</code></p>
+<td>
+<p>‐</p>
+<td>
+<p><code>Redis.enableTelemetry</code></p>
+<tr><td>
+<p><a id=eval class=anchorTargetStickyNavbar_dU4u></a> <code>eval</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TArgs</code>, <code>TData</code>>(<code>script</code>, <code>keys</code>, <code>args</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/eval target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/eval</a></p>
+<td>
+<p><code>Redis.eval</code></p>
+<tr><td>
+<p><a id=evalro class=anchorTargetStickyNavbar_dU4u></a> <code>evalRo</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TArgs</code>, <code>TData</code>>(<code>script</code>, <code>keys</code>, <code>args</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/eval_ro target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/eval_ro</a></p>
+<td>
+<p><code>Redis.evalRo</code></p>
+<tr><td>
+<p><a id=evalsha class=anchorTargetStickyNavbar_dU4u></a> <code>evalsha</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TArgs</code>, <code>TData</code>>(<code>sha1</code>, <code>keys</code>, <code>args</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/evalsha target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/evalsha</a></p>
+<td>
+<p><code>Redis.evalsha</code></p>
+<tr><td>
+<p><a id=evalsharo class=anchorTargetStickyNavbar_dU4u></a> <code>evalshaRo</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TArgs</code>, <code>TData</code>>(<code>sha1</code>, <code>keys</code>, <code>args</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/evalsha_ro target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/evalsha_ro</a></p>
+<td>
+<p><code>Redis.evalshaRo</code></p>
+<tr><td>
+<p><a id=exec class=anchorTargetStickyNavbar_dU4u></a> <code>exec</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TResult</code>>(<code>args</code>) => <code>Promise</code>&lt;<code>TResult</code>></p>
+<td>
+<p>Generic method to execute any Redis command.</p>
+<td>
+<p><code>Redis.exec</code></p>
+<tr><td>
+<p><a id=exists class=anchorTargetStickyNavbar_dU4u></a> <code>exists</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(...<code>args</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/exists target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/exists</a></p>
+<td>
+<p><code>Redis.exists</code></p>
+<tr><td>
+<p><a id=expire class=anchorTargetStickyNavbar_dU4u></a> <code>expire</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>seconds</code>, <code>option?</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/expire target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/expire</a></p>
+<td>
+<p><code>Redis.expire</code></p>
+<tr><td>
+<p><a id=expireat class=anchorTargetStickyNavbar_dU4u></a> <code>expireat</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>unix</code>, <code>option?</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/expireat target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/expireat</a></p>
+<td>
+<p><code>Redis.expireat</code></p>
+<tr><td>
+<p><a id=flushall class=anchorTargetStickyNavbar_dU4u></a> <code>flushall</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>args?</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/flushall target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/flushall</a></p>
+<td>
+<p><code>Redis.flushall</code></p>
+<tr><td>
+<p><a id=flushdb class=anchorTargetStickyNavbar_dU4u></a> <code>flushdb</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>opts?</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/flushdb target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/flushdb</a></p>
+<td>
+<p><code>Redis.flushdb</code></p>
+<tr><td>
+<p><a id=geoadd class=anchorTargetStickyNavbar_dU4u></a> <code>geoadd</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>args_0</code>, <code>args_1</code>, ...<code>args_2</code>) => <code>Promise</code>&lt;<code>null</code> | <code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/geoadd target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/geoadd</a></p>
+<td>
+<p><code>Redis.geoadd</code></p>
+<tr><td>
+<p><a id=geodist class=anchorTargetStickyNavbar_dU4u></a> <code>geodist</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>member1</code>, <code>member2</code>, <code>unit?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/geodist target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/geodist</a></p>
+<td>
+<p><code>Redis.geodist</code></p>
+<tr><td>
+<p><a id=geohash class=anchorTargetStickyNavbar_dU4u></a> <code>geohash</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>args_0</code>, ...<code>args_1</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>string</code>)[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/geohash target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/geohash</a></p>
+<td>
+<p><code>Redis.geohash</code></p>
+<tr><td>
+<p><a id=geopos class=anchorTargetStickyNavbar_dU4u></a> <code>geopos</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>args_0</code>, ...<code>args_1</code>) => <code>Promise</code>&lt;<code>object</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/geopos target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/geopos</a></p>
+<td>
+<p><code>Redis.geopos</code></p>
+<tr><td>
+<p><a id=geosearch class=anchorTargetStickyNavbar_dU4u></a> <code>geosearch</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>centerPoint</code>, <code>shape</code>, <code>order</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>object</code> & <code>object</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/geosearch target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/geosearch</a></p>
+<td>
+<p><code>Redis.geosearch</code></p>
+<tr><td>
+<p><a id=geosearchstore class=anchorTargetStickyNavbar_dU4u></a> <code>geosearchstore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>destination</code>, <code>key</code>, <code>centerPoint</code>, <code>shape</code>, <code>order</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/geosearchstore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/geosearchstore</a></p>
+<td>
+<p><code>Redis.geosearchstore</code></p>
+<tr><td>
+<p><a id=get class=anchorTargetStickyNavbar_dU4u></a> <code>get</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/get target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/get</a></p>
+<td>
+<p><code>Redis.get</code></p>
+<tr><td>
+<p><a id=getbit class=anchorTargetStickyNavbar_dU4u></a> <code>getbit</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>offset</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/getbit target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/getbit</a></p>
+<td>
+<p><code>Redis.getbit</code></p>
+<tr><td>
+<p><a id=getdel class=anchorTargetStickyNavbar_dU4u></a> <code>getdel</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/getdel target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/getdel</a></p>
+<td>
+<p><code>Redis.getdel</code></p>
+<tr><td>
+<p><a id=getex class=anchorTargetStickyNavbar_dU4u></a> <code>getex</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/getex target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/getex</a></p>
+<td>
+<p><code>Redis.getex</code></p>
+<tr><td>
+<p><a id=getrange class=anchorTargetStickyNavbar_dU4u></a> <code>getrange</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>start</code>, <code>end</code>) => <code>Promise</code>&lt;<code>string</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/getrange target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/getrange</a></p>
+<td>
+<p><code>Redis.getrange</code></p>
+<tr><td>
+<p><a id=getset class=anchorTargetStickyNavbar_dU4u></a> <code>getset</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>value</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/getset target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/getset</a></p>
+<td>
+<p><code>Redis.getset</code></p>
+<tr><td>
+<p><a id=hdel class=anchorTargetStickyNavbar_dU4u></a> <code>hdel</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, ...<code>fields</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hdel target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hdel</a></p>
+<td>
+<p><code>Redis.hdel</code></p>
+<tr><td>
+<p><a id=hexists class=anchorTargetStickyNavbar_dU4u></a> <code>hexists</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>field</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hexists target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hexists</a></p>
+<td>
+<p><code>Redis.hexists</code></p>
+<tr><td>
+<p><a id=hexpire class=anchorTargetStickyNavbar_dU4u></a> <code>hexpire</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>, <code>seconds</code>, <code>option?</code>) => <code>Promise</code>&lt;(<code>-2</code> | <code>0</code> | <code>1</code> | <code>2</code>)[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hexpire target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hexpire</a></p>
+<td>
+<p><code>Redis.hexpire</code></p>
+<tr><td>
+<p><a id=hexpireat class=anchorTargetStickyNavbar_dU4u></a> <code>hexpireat</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>, <code>timestamp</code>, <code>option?</code>) => <code>Promise</code>&lt;(<code>-2</code> | <code>0</code> | <code>1</code> | <code>2</code>)[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hexpireat target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hexpireat</a></p>
+<td>
+<p><code>Redis.hexpireat</code></p>
+<tr><td>
+<p><a id=hexpiretime class=anchorTargetStickyNavbar_dU4u></a> <code>hexpiretime</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>) => <code>Promise</code>&lt;<code>number</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hexpiretime target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hexpiretime</a></p>
+<td>
+<p><code>Redis.hexpiretime</code></p>
+<tr><td>
+<p><a id=hget class=anchorTargetStickyNavbar_dU4u></a> <code>hget</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>field</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hget target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hget</a></p>
+<td>
+<p><code>Redis.hget</code></p>
+<tr><td>
+<p><a id=hgetall class=anchorTargetStickyNavbar_dU4u></a> <code>hgetall</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hgetall target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hgetall</a></p>
+<td>
+<p><code>Redis.hgetall</code></p>
+<tr><td>
+<p><a id=hincrby class=anchorTargetStickyNavbar_dU4u></a> <code>hincrby</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>field</code>, <code>increment</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hincrby target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hincrby</a></p>
+<td>
+<p><code>Redis.hincrby</code></p>
+<tr><td>
+<p><a id=hincrbyfloat class=anchorTargetStickyNavbar_dU4u></a> <code>hincrbyfloat</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>field</code>, <code>increment</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hincrbyfloat target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hincrbyfloat</a></p>
+<td>
+<p><code>Redis.hincrbyfloat</code></p>
+<tr><td>
+<p><a id=hkeys class=anchorTargetStickyNavbar_dU4u></a> <code>hkeys</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>string</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hkeys target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hkeys</a></p>
+<td>
+<p><code>Redis.hkeys</code></p>
+<tr><td>
+<p><a id=hlen class=anchorTargetStickyNavbar_dU4u></a> <code>hlen</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hlen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hlen</a></p>
+<td>
+<p><code>Redis.hlen</code></p>
+<tr><td>
+<p><a id=hmget class=anchorTargetStickyNavbar_dU4u></a> <code>hmget</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, ...<code>fields</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hmget target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hmget</a></p>
+<td>
+<p><code>Redis.hmget</code></p>
+<tr><td>
+<p><a id=hmset class=anchorTargetStickyNavbar_dU4u></a> <code>hmset</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>kv</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hmset target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hmset</a></p>
+<td>
+<p><code>Redis.hmset</code></p>
+<tr><td>
+<p><a id=hpersist class=anchorTargetStickyNavbar_dU4u></a> <code>hpersist</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>) => <code>Promise</code>&lt;(<code>-2</code> | <code>-1</code> | <code>1</code>)[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hpersist target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hpersist</a></p>
+<td>
+<p><code>Redis.hpersist</code></p>
+<tr><td>
+<p><a id=hpexpire class=anchorTargetStickyNavbar_dU4u></a> <code>hpexpire</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>, <code>milliseconds</code>, <code>option?</code>) => <code>Promise</code>&lt;(<code>-2</code> | <code>0</code> | <code>1</code> | <code>2</code>)[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hpexpire target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hpexpire</a></p>
+<td>
+<p><code>Redis.hpexpire</code></p>
+<tr><td>
+<p><a id=hpexpireat class=anchorTargetStickyNavbar_dU4u></a> <code>hpexpireat</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>, <code>timestamp</code>, <code>option?</code>) => <code>Promise</code>&lt;(<code>-2</code> | <code>0</code> | <code>1</code> | <code>2</code>)[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hpexpireat target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hpexpireat</a></p>
+<td>
+<p><code>Redis.hpexpireat</code></p>
+<tr><td>
+<p><a id=hpexpiretime class=anchorTargetStickyNavbar_dU4u></a> <code>hpexpiretime</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>) => <code>Promise</code>&lt;<code>number</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hpexpiretime target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hpexpiretime</a></p>
+<td>
+<p><code>Redis.hpexpiretime</code></p>
+<tr><td>
+<p><a id=hpttl class=anchorTargetStickyNavbar_dU4u></a> <code>hpttl</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>) => <code>Promise</code>&lt;<code>number</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hpttl target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hpttl</a></p>
+<td>
+<p><code>Redis.hpttl</code></p>
+<tr><td>
+<p><a id=hrandfield class=anchorTargetStickyNavbar_dU4u></a> <code>hrandfield</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>{(<code>key</code>): <code>Promise</code>&lt;<code>null</code> | <code>string</code>>; (<code>key</code>, <code>count</code>): <code>Promise</code>&lt;<code>string</code>[]>; &lt;<code>TData</code>>(<code>key</code>, <code>count</code>, <code>withValues</code>): <code>Promise</code>&lt;<code>Partial</code>&lt;<code>TData</code>>>; }</p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hrandfield target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hrandfield</a></p>
+<td>
+<p><code>Redis.hrandfield</code></p>
+<tr><td>
+<p><a id=hscan class=anchorTargetStickyNavbar_dU4u></a> <code>hscan</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>cursor</code>, <code>cmdOpts?</code>) => <code>Promise</code>&lt;[<code>string</code>, (<code>string</code> | <code>number</code>)[]]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hscan target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hscan</a></p>
+<td>
+<p><code>Redis.hscan</code></p>
+<tr><td>
+<p><a id=hset class=anchorTargetStickyNavbar_dU4u></a> <code>hset</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>kv</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hset target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hset</a></p>
+<td>
+<p><code>Redis.hset</code></p>
+<tr><td>
+<p><a id=hsetnx class=anchorTargetStickyNavbar_dU4u></a> <code>hsetnx</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>field</code>, <code>value</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hsetnx target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hsetnx</a></p>
+<td>
+<p><code>Redis.hsetnx</code></p>
+<tr><td>
+<p><a id=hstrlen class=anchorTargetStickyNavbar_dU4u></a> <code>hstrlen</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>field</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hstrlen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hstrlen</a></p>
+<td>
+<p><code>Redis.hstrlen</code></p>
+<tr><td>
+<p><a id=httl class=anchorTargetStickyNavbar_dU4u></a> <code>httl</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>fields</code>) => <code>Promise</code>&lt;<code>number</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/httl target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/httl</a></p>
+<td>
+<p><code>Redis.httl</code></p>
+<tr><td>
+<p><a id=hvals class=anchorTargetStickyNavbar_dU4u></a> <code>hvals</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>any</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/hvals target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/hvals</a></p>
+<td>
+<p><code>Redis.hvals</code></p>
+<tr><td>
+<p><a id=incr class=anchorTargetStickyNavbar_dU4u></a> <code>incr</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/incr target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/incr</a></p>
+<td>
+<p><code>Redis.incr</code></p>
+<tr><td>
+<p><a id=incrby class=anchorTargetStickyNavbar_dU4u></a> <code>incrby</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>value</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/incrby target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/incrby</a></p>
+<td>
+<p><code>Redis.incrby</code></p>
+<tr><td>
+<p><a id=incrbyfloat class=anchorTargetStickyNavbar_dU4u></a> <code>incrbyfloat</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>value</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/incrbyfloat target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/incrbyfloat</a></p>
+<td>
+<p><code>Redis.incrbyfloat</code></p>
+<tr><td>
+<p><a id=keys class=anchorTargetStickyNavbar_dU4u></a> <code>keys</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>pattern</code>) => <code>Promise</code>&lt;<code>string</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/keys target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/keys</a></p>
+<td>
+<p><code>Redis.keys</code></p>
+<tr><td>
+<p><a id=lindex class=anchorTargetStickyNavbar_dU4u></a> <code>lindex</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>index</code>) => <code>Promise</code>&lt;<code>any</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lindex target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lindex</a></p>
+<td>
+<p><code>Redis.lindex</code></p>
+<tr><td>
+<p><a id=linsert class=anchorTargetStickyNavbar_dU4u></a> <code>linsert</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>direction</code>, <code>pivot</code>, <code>value</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/linsert target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/linsert</a></p>
+<td>
+<p><code>Redis.linsert</code></p>
+<tr><td>
+<p><a id=llen class=anchorTargetStickyNavbar_dU4u></a> <code>llen</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/llen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/llen</a></p>
+<td>
+<p><code>Redis.llen</code></p>
+<tr><td>
+<p><a id=lmove class=anchorTargetStickyNavbar_dU4u></a> <code>lmove</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>source</code>, <code>destination</code>, <code>whereFrom</code>, <code>whereTo</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lmove target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lmove</a></p>
+<td>
+<p><code>Redis.lmove</code></p>
+<tr><td>
+<p><a id=lmpop class=anchorTargetStickyNavbar_dU4u></a> <code>lmpop</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>numkeys</code>, <code>keys</code>, <code>args_2</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>null</code> | [<code>string</code>, <code>TData</code>[]]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lmpop target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lmpop</a></p>
+<td>
+<p><code>Redis.lmpop</code></p>
+<tr><td>
+<p><a id=lpop class=anchorTargetStickyNavbar_dU4u></a> <code>lpop</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lpop target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lpop</a></p>
+<td>
+<p><code>Redis.lpop</code></p>
+<tr><td>
+<p><a id=lpos class=anchorTargetStickyNavbar_dU4u></a> <code>lpos</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>element</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lpos target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lpos</a></p>
+<td>
+<p><code>Redis.lpos</code></p>
+<tr><td>
+<p><a id=lpush class=anchorTargetStickyNavbar_dU4u></a> <code>lpush</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, ...<code>elements</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lpush target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lpush</a></p>
+<td>
+<p><code>Redis.lpush</code></p>
+<tr><td>
+<p><a id=lpushx class=anchorTargetStickyNavbar_dU4u></a> <code>lpushx</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, ...<code>elements</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lpushx target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lpushx</a></p>
+<td>
+<p><code>Redis.lpushx</code></p>
+<tr><td>
+<p><a id=lrange class=anchorTargetStickyNavbar_dU4u></a> <code>lrange</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TResult</code>>(<code>key</code>, <code>start</code>, <code>end</code>) => <code>Promise</code>&lt;<code>TResult</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lrange target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lrange</a></p>
+<td>
+<p><code>Redis.lrange</code></p>
+<tr><td>
+<p><a id=lrem class=anchorTargetStickyNavbar_dU4u></a> <code>lrem</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>count</code>, <code>value</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lrem target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lrem</a></p>
+<td>
+<p><code>Redis.lrem</code></p>
+<tr><td>
+<p><a id=lset class=anchorTargetStickyNavbar_dU4u></a> <code>lset</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>index</code>, <code>value</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/lset target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/lset</a></p>
+<td>
+<p><code>Redis.lset</code></p>
+<tr><td>
+<p><a id=ltrim class=anchorTargetStickyNavbar_dU4u></a> <code>ltrim</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>start</code>, <code>end</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/ltrim target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/ltrim</a></p>
+<td>
+<p><code>Redis.ltrim</code></p>
+<tr><td>
+<p><a id=mget class=anchorTargetStickyNavbar_dU4u></a> <code>mget</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(...<code>args</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/mget target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/mget</a></p>
+<td>
+<p><code>Redis.mget</code></p>
+<tr><td>
+<p><a id=mset class=anchorTargetStickyNavbar_dU4u></a> <code>mset</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>kv</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/mset target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/mset</a></p>
+<td>
+<p><code>Redis.mset</code></p>
+<tr><td>
+<p><a id=msetnx class=anchorTargetStickyNavbar_dU4u></a> <code>msetnx</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>kv</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/msetnx target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/msetnx</a></p>
+<td>
+<p><code>Redis.msetnx</code></p>
+<tr><td>
+<p><a id=multi class=anchorTargetStickyNavbar_dU4u></a> <code>multi</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>() => <code>Pipeline</code>&lt;[]></p>
+<td>
+<p>Create a new transaction to allow executing multiple steps atomically.</p>
+<p>All the commands in a transaction are serialized and executed sequentially. A request sent by
+another client will never be served in the middle of the execution of a Redis Transaction. This
+guarantees that the commands are executed as a single isolated operation.</p>
+<p><strong>See</strong></p>
+<p>Pipeline</p>
+<td>
+<p><code>Redis.multi</code></p>
+<tr><td>
+<p><a id=persist class=anchorTargetStickyNavbar_dU4u></a> <code>persist</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/persist target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/persist</a></p>
+<td>
+<p><code>Redis.persist</code></p>
+<tr><td>
+<p><a id=pexpire class=anchorTargetStickyNavbar_dU4u></a> <code>pexpire</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>milliseconds</code>, <code>option?</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/pexpire target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/pexpire</a></p>
+<td>
+<p><code>Redis.pexpire</code></p>
+<tr><td>
+<p><a id=pexpireat class=anchorTargetStickyNavbar_dU4u></a> <code>pexpireat</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>unix</code>, <code>option?</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/pexpireat target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/pexpireat</a></p>
+<td>
+<p><code>Redis.pexpireat</code></p>
+<tr><td>
+<p><a id=pfadd class=anchorTargetStickyNavbar_dU4u></a> <code>pfadd</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>args_0</code>, ...<code>args_1</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/pfadd target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/pfadd</a></p>
+<td>
+<p><code>Redis.pfadd</code></p>
+<tr><td>
+<p><a id=pfcount class=anchorTargetStickyNavbar_dU4u></a> <code>pfcount</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>args_0</code>, ...<code>args_1</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/pfcount target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/pfcount</a></p>
+<td>
+<p><code>Redis.pfcount</code></p>
+<tr><td>
+<p><a id=pfmerge class=anchorTargetStickyNavbar_dU4u></a> <code>pfmerge</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>destination_key</code>, ...<code>args_1</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/pfmerge target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/pfmerge</a></p>
+<td>
+<p><code>Redis.pfmerge</code></p>
+<tr><td>
+<p><a id=ping class=anchorTargetStickyNavbar_dU4u></a> <code>ping</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>args?</code>) => <code>Promise</code>&lt;<code>string</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/ping target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/ping</a></p>
+<td>
+<p><code>Redis.ping</code></p>
+<tr><td>
+<p><a id=pipeline class=anchorTargetStickyNavbar_dU4u></a> <code>pipeline</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>() => <code>Pipeline</code>&lt;[]></p>
+<td>
+<p>Create a new pipeline that allows you to send requests in bulk.</p>
+<p><strong>See</strong></p>
+<p>Pipeline</p>
+<td>
+<p><code>Redis.pipeline</code></p>
+<tr><td>
+<p><a id=psetex class=anchorTargetStickyNavbar_dU4u></a> <code>psetex</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>ttl</code>, <code>value</code>) => <code>Promise</code>&lt;<code>string</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/psetex target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/psetex</a></p>
+<td>
+<p><code>Redis.psetex</code></p>
+<tr><td>
+<p><a id=psubscribe class=anchorTargetStickyNavbar_dU4u></a> <code>psubscribe</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TMessage</code>>(<code>patterns</code>) => <code>Subscriber</code>&lt;<code>TMessage</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/psubscribe target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/psubscribe</a></p>
+<td>
+<p><code>Redis.psubscribe</code></p>
+<tr><td>
+<p><a id=pttl class=anchorTargetStickyNavbar_dU4u></a> <code>pttl</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/pttl target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/pttl</a></p>
+<td>
+<p><code>Redis.pttl</code></p>
+<tr><td>
+<p><a id=publish class=anchorTargetStickyNavbar_dU4u></a> <code>publish</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>channel</code>, <code>message</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/publish target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/publish</a></p>
+<td>
+<p><code>Redis.publish</code></p>
+<tr><td>
+<p><a id=randomkey class=anchorTargetStickyNavbar_dU4u></a> <code>randomkey</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>() => <code>Promise</code>&lt;<code>null</code> | <code>string</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/randomkey target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/randomkey</a></p>
+<td>
+<p><code>Redis.randomkey</code></p>
+<tr><td>
+<p><a id=rename class=anchorTargetStickyNavbar_dU4u></a> <code>rename</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>source</code>, <code>destination</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/rename target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/rename</a></p>
+<td>
+<p><code>Redis.rename</code></p>
+<tr><td>
+<p><a id=renamenx class=anchorTargetStickyNavbar_dU4u></a> <code>renamenx</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>source</code>, <code>destination</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/renamenx target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/renamenx</a></p>
+<td>
+<p><code>Redis.renamenx</code></p>
+<tr><td>
+<p><a id=rpop class=anchorTargetStickyNavbar_dU4u></a> <code>rpop</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/rpop target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/rpop</a></p>
+<td>
+<p><code>Redis.rpop</code></p>
+<tr><td>
+<p><a id=rpush class=anchorTargetStickyNavbar_dU4u></a> <code>rpush</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, ...<code>elements</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/rpush target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/rpush</a></p>
+<td>
+<p><code>Redis.rpush</code></p>
+<tr><td>
+<p><a id=rpushx class=anchorTargetStickyNavbar_dU4u></a> <code>rpushx</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, ...<code>elements</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/rpushx target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/rpushx</a></p>
+<td>
+<p><code>Redis.rpushx</code></p>
+<tr><td>
+<p><a id=sadd class=anchorTargetStickyNavbar_dU4u></a> <code>sadd</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>member</code>, ...<code>members</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sadd target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sadd</a></p>
+<td>
+<p><code>Redis.sadd</code></p>
+<tr><td>
+<p><a id=scard class=anchorTargetStickyNavbar_dU4u></a> <code>scard</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/scard target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/scard</a></p>
+<td>
+<p><code>Redis.scard</code></p>
+<tr><td>
+<p><a id=scriptexists class=anchorTargetStickyNavbar_dU4u></a> <code>scriptExists</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(...<code>args</code>) => <code>Promise</code>&lt;<code>number</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/script-exists target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/script-exists</a></p>
+<td>
+<p><code>Redis.scriptExists</code></p>
+<tr><td>
+<p><a id=scriptflush class=anchorTargetStickyNavbar_dU4u></a> <code>scriptFlush</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>opts?</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/script-flush target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/script-flush</a></p>
+<td>
+<p><code>Redis.scriptFlush</code></p>
+<tr><td>
+<p><a id=scriptload class=anchorTargetStickyNavbar_dU4u></a> <code>scriptLoad</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>script</code>) => <code>Promise</code>&lt;<code>string</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/script-load target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/script-load</a></p>
+<td>
+<p><code>Redis.scriptLoad</code></p>
+<tr><td>
+<p><a id=sdiff class=anchorTargetStickyNavbar_dU4u></a> <code>sdiff</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, ...<code>keys</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sdiff target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sdiff</a></p>
+<td>
+<p><code>Redis.sdiff</code></p>
+<tr><td>
+<p><a id=sdiffstore class=anchorTargetStickyNavbar_dU4u></a> <code>sdiffstore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>destination</code>, ...<code>keys</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sdiffstore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sdiffstore</a></p>
+<td>
+<p><code>Redis.sdiffstore</code></p>
+<tr><td>
+<p><a id=set class=anchorTargetStickyNavbar_dU4u></a> <code>set</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>value</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>"OK"</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/set target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/set</a></p>
+<td>
+<p><code>Redis.set</code></p>
+<tr><td>
+<p><a id=setbit class=anchorTargetStickyNavbar_dU4u></a> <code>setbit</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>offset</code>, <code>value</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/setbit target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/setbit</a></p>
+<td>
+<p><code>Redis.setbit</code></p>
+<tr><td>
+<p><a id=setex class=anchorTargetStickyNavbar_dU4u></a> <code>setex</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>ttl</code>, <code>value</code>) => <code>Promise</code>&lt;<code>"OK"</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/setex target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/setex</a></p>
+<td>
+<p><code>Redis.setex</code></p>
+<tr><td>
+<p><a id=setnx class=anchorTargetStickyNavbar_dU4u></a> <code>setnx</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>value</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/setnx target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/setnx</a></p>
+<td>
+<p><code>Redis.setnx</code></p>
+<tr><td>
+<p><a id=setrange class=anchorTargetStickyNavbar_dU4u></a> <code>setrange</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>offset</code>, <code>value</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/setrange target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/setrange</a></p>
+<td>
+<p><code>Redis.setrange</code></p>
+<tr><td>
+<p><a id=sinter class=anchorTargetStickyNavbar_dU4u></a> <code>sinter</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, ...<code>keys</code>) => <code>Promise</code>&lt;<code>string</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sinter target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sinter</a></p>
+<td>
+<p><code>Redis.sinter</code></p>
+<tr><td>
+<p><a id=sinterstore class=anchorTargetStickyNavbar_dU4u></a> <code>sinterstore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>destination</code>, <code>key</code>, ...<code>keys</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sinterstore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sinterstore</a></p>
+<td>
+<p><code>Redis.sinterstore</code></p>
+<tr><td>
+<p><a id=sismember class=anchorTargetStickyNavbar_dU4u></a> <code>sismember</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>member</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sismember target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sismember</a></p>
+<td>
+<p><code>Redis.sismember</code></p>
+<tr><td>
+<p><a id=smembers class=anchorTargetStickyNavbar_dU4u></a> <code>smembers</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/smembers target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/smembers</a></p>
+<td>
+<p><code>Redis.smembers</code></p>
+<tr><td>
+<p><a id=smismember class=anchorTargetStickyNavbar_dU4u></a> <code>smismember</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TMembers</code>>(<code>key</code>, <code>members</code>) => <code>Promise</code>&lt;(<code>0</code> | <code>1</code>)[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/smismember target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/smismember</a></p>
+<td>
+<p><code>Redis.smismember</code></p>
+<tr><td>
+<p><a id=smove class=anchorTargetStickyNavbar_dU4u></a> <code>smove</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>source</code>, <code>destination</code>, <code>member</code>) => <code>Promise</code>&lt;<code>0</code> | <code>1</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/smove target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/smove</a></p>
+<td>
+<p><code>Redis.smove</code></p>
+<tr><td>
+<p><a id=spop class=anchorTargetStickyNavbar_dU4u></a> <code>spop</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/spop target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/spop</a></p>
+<td>
+<p><code>Redis.spop</code></p>
+<tr><td>
+<p><a id=srandmember class=anchorTargetStickyNavbar_dU4u></a> <code>srandmember</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/srandmember target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/srandmember</a></p>
+<td>
+<p><code>Redis.srandmember</code></p>
+<tr><td>
+<p><a id=srem class=anchorTargetStickyNavbar_dU4u></a> <code>srem</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, ...<code>members</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/srem target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/srem</a></p>
+<td>
+<p><code>Redis.srem</code></p>
+<tr><td>
+<p><a id=sscan class=anchorTargetStickyNavbar_dU4u></a> <code>sscan</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>cursor</code>, <code>opts?</code>) => <code>Promise</code>&lt;[<code>string</code>, (<code>string</code> | <code>number</code>)[]]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sscan target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sscan</a></p>
+<td>
+<p><code>Redis.sscan</code></p>
+<tr><td>
+<p><a id=strlen class=anchorTargetStickyNavbar_dU4u></a> <code>strlen</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/strlen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/strlen</a></p>
+<td>
+<p><code>Redis.strlen</code></p>
+<tr><td>
+<p><a id=subscribe class=anchorTargetStickyNavbar_dU4u></a> <code>subscribe</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TMessage</code>>(<code>channels</code>) => <code>Subscriber</code>&lt;<code>TMessage</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/subscribe target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/subscribe</a></p>
+<td>
+<p><code>Redis.subscribe</code></p>
+<tr><td>
+<p><a id=sunion class=anchorTargetStickyNavbar_dU4u></a> <code>sunion</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, ...<code>keys</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sunion target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sunion</a></p>
+<td>
+<p><code>Redis.sunion</code></p>
+<tr><td>
+<p><a id=sunionstore class=anchorTargetStickyNavbar_dU4u></a> <code>sunionstore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>destination</code>, <code>key</code>, ...<code>keys</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/sunionstore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/sunionstore</a></p>
+<td>
+<p><code>Redis.sunionstore</code></p>
+<tr><td>
+<p><a id=time class=anchorTargetStickyNavbar_dU4u></a> <code>time</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>() => <code>Promise</code>&lt;[<code>number</code>, <code>number</code>]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/time target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/time</a></p>
+<td>
+<p><code>Redis.time</code></p>
+<tr><td>
+<p><a id=touch class=anchorTargetStickyNavbar_dU4u></a> <code>touch</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(...<code>args</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/touch target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/touch</a></p>
+<td>
+<p><code>Redis.touch</code></p>
+<tr><td>
+<p><a id=ttl class=anchorTargetStickyNavbar_dU4u></a> <code>ttl</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/ttl target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/ttl</a></p>
+<td>
+<p><code>Redis.ttl</code></p>
+<tr><td>
+<p><a id=type class=anchorTargetStickyNavbar_dU4u></a> <code>type</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>Type</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/type target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/type</a></p>
+<td>
+<p><code>Redis.type</code></p>
+<tr><td>
+<p><a id=unlink class=anchorTargetStickyNavbar_dU4u></a> <code>unlink</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(...<code>args</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/unlink target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/unlink</a></p>
+<td>
+<p><code>Redis.unlink</code></p>
+<tr><td>
+<p><a id=use class=anchorTargetStickyNavbar_dU4u></a> <code>use</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TResult</code>>(<code>middleware</code>) => <code>void</code></p>
+<td>
+<p>Wrap a new middleware around the HTTP client.</p>
+<td>
+<p><code>Redis.use</code></p>
+<tr><td>
+<p><a id=xack class=anchorTargetStickyNavbar_dU4u></a> <code>xack</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>group</code>, <code>id</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xack target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xack</a></p>
+<td>
+<p><code>Redis.xack</code></p>
+<tr><td>
+<p><a id=xadd class=anchorTargetStickyNavbar_dU4u></a> <code>xadd</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>id</code>, <code>entries</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>string</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xadd target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xadd</a></p>
+<td>
+<p><code>Redis.xadd</code></p>
+<tr><td>
+<p><a id=xautoclaim class=anchorTargetStickyNavbar_dU4u></a> <code>xautoclaim</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>group</code>, <code>consumer</code>, <code>minIdleTime</code>, <code>start</code>, <code>options?</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xautoclaim target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xautoclaim</a></p>
+<td>
+<p><code>Redis.xautoclaim</code></p>
+<tr><td>
+<p><a id=xclaim class=anchorTargetStickyNavbar_dU4u></a> <code>xclaim</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>group</code>, <code>consumer</code>, <code>minIdleTime</code>, <code>id</code>, <code>options?</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xclaim target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xclaim</a></p>
+<td>
+<p><code>Redis.xclaim</code></p>
+<tr><td>
+<p><a id=xdel class=anchorTargetStickyNavbar_dU4u></a> <code>xdel</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>ids</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xdel target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xdel</a></p>
+<td>
+<p><code>Redis.xdel</code></p>
+<tr><td>
+<p><a id=xgroup class=anchorTargetStickyNavbar_dU4u></a> <code>xgroup</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>opts</code>) => <code>Promise</code>&lt;<code>never</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xgroup target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xgroup</a></p>
+<td>
+<p><code>Redis.xgroup</code></p>
+<tr><td>
+<p><a id=xinfo class=anchorTargetStickyNavbar_dU4u></a> <code>xinfo</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>options</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xinfo target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xinfo</a></p>
+<td>
+<p><code>Redis.xinfo</code></p>
+<tr><td>
+<p><a id=xlen class=anchorTargetStickyNavbar_dU4u></a> <code>xlen</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xlen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xlen</a></p>
+<td>
+<p><code>Redis.xlen</code></p>
+<tr><td>
+<p><a id=xpending class=anchorTargetStickyNavbar_dU4u></a> <code>xpending</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>group</code>, <code>start</code>, <code>end</code>, <code>count</code>, <code>options?</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xpending target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xpending</a></p>
+<td>
+<p><code>Redis.xpending</code></p>
+<tr><td>
+<p><a id=xrange class=anchorTargetStickyNavbar_dU4u></a> <code>xrange</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>start</code>, <code>end</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>Record</code>&lt;<code>string</code>, <code>Record</code>&lt;<code>string</code>, <code>unknown</code>>>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xrange target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xrange</a></p>
+<td>
+<p><code>Redis.xrange</code></p>
+<tr><td>
+<p><a id=xread class=anchorTargetStickyNavbar_dU4u></a> <code>xread</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(...<code>args</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xread target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xread</a></p>
+<td>
+<p><code>Redis.xread</code></p>
+<tr><td>
+<p><a id=xreadgroup class=anchorTargetStickyNavbar_dU4u></a> <code>xreadgroup</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(...<code>args</code>) => <code>Promise</code>&lt;<code>unknown</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xreadgroup target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xreadgroup</a></p>
+<td>
+<p><code>Redis.xreadgroup</code></p>
+<tr><td>
+<p><a id=xrevrange class=anchorTargetStickyNavbar_dU4u></a> <code>xrevrange</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>end</code>, <code>start</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>Record</code>&lt;<code>string</code>, <code>Record</code>&lt;<code>string</code>, <code>unknown</code>>>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xrevrange target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xrevrange</a></p>
+<td>
+<p><code>Redis.xrevrange</code></p>
+<tr><td>
+<p><a id=xtrim class=anchorTargetStickyNavbar_dU4u></a> <code>xtrim</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>options</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/xtrim target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/xtrim</a></p>
+<td>
+<p><code>Redis.xtrim</code></p>
+<tr><td>
+<p><a id=zadd class=anchorTargetStickyNavbar_dU4u></a> <code>zadd</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(...<code>args</code>) => <code>Promise</code>&lt;<code>null</code> | <code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zadd target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zadd</a></p>
+<td>
+<p><code>Redis.zadd</code></p>
+<tr><td>
+<p><a id=zcard class=anchorTargetStickyNavbar_dU4u></a> <code>zcard</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zcard target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zcard</a></p>
+<td>
+<p><code>Redis.zcard</code></p>
+<tr><td>
+<p><a id=zcount class=anchorTargetStickyNavbar_dU4u></a> <code>zcount</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>min</code>, <code>max</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zcount target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zcount</a></p>
+<td>
+<p><code>Redis.zcount</code></p>
+<tr><td>
+<p><a id=zdiffstore class=anchorTargetStickyNavbar_dU4u></a> <code>zdiffstore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>destination</code>, <code>numkeys</code>, ...<code>keys</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zdiffstore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zdiffstore</a></p>
+<td>
+<p><code>Redis.zdiffstore</code></p>
+<tr><td>
+<p><a id=zincrby class=anchorTargetStickyNavbar_dU4u></a> <code>zincrby</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>increment</code>, <code>member</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zincrby target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zincrby</a></p>
+<td>
+<p><code>Redis.zincrby</code></p>
+<tr><td>
+<p><a id=zinterstore class=anchorTargetStickyNavbar_dU4u></a> <code>zinterstore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>destination</code>, <code>numKeys</code>, <code>keys</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zinterstore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zinterstore</a></p>
+<td>
+<p><code>Redis.zinterstore</code></p>
+<tr><td>
+<p><a id=zlexcount class=anchorTargetStickyNavbar_dU4u></a> <code>zlexcount</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>min</code>, <code>max</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zlexcount target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zlexcount</a></p>
+<td>
+<p><code>Redis.zlexcount</code></p>
+<tr><td>
+<p><a id=zmscore class=anchorTargetStickyNavbar_dU4u></a> <code>zmscore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>members</code>) => <code>Promise</code>&lt;<code>null</code> | <code>number</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zmscore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zmscore</a></p>
+<td>
+<p><code>Redis.zmscore</code></p>
+<tr><td>
+<p><a id=zpopmax class=anchorTargetStickyNavbar_dU4u></a> <code>zpopmax</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>TData</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zpopmax target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zpopmax</a></p>
+<td>
+<p><code>Redis.zpopmax</code></p>
+<tr><td>
+<p><a id=zpopmin class=anchorTargetStickyNavbar_dU4u></a> <code>zpopmin</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>count?</code>) => <code>Promise</code>&lt;<code>TData</code>[]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zpopmin target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zpopmin</a></p>
+<td>
+<p><code>Redis.zpopmin</code></p>
+<tr><td>
+<p><a id=zrange class=anchorTargetStickyNavbar_dU4u></a> <code>zrange</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(...<code>args</code>) => <code>Promise</code>&lt;<code>TData</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zrange target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zrange</a></p>
+<td>
+<p><code>Redis.zrange</code></p>
+<tr><td>
+<p><a id=zrank class=anchorTargetStickyNavbar_dU4u></a> <code>zrank</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>member</code>) => <code>Promise</code>&lt;<code>null</code> | <code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zrank target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zrank</a></p>
+<td>
+<p><code>Redis.zrank</code></p>
+<tr><td>
+<p><a id=zrem class=anchorTargetStickyNavbar_dU4u></a> <code>zrem</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, ...<code>members</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zrem target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zrem</a></p>
+<td>
+<p><code>Redis.zrem</code></p>
+<tr><td>
+<p><a id=zremrangebylex class=anchorTargetStickyNavbar_dU4u></a> <code>zremrangebylex</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>min</code>, <code>max</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zremrangebylex target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zremrangebylex</a></p>
+<td>
+<p><code>Redis.zremrangebylex</code></p>
+<tr><td>
+<p><a id=zremrangebyrank class=anchorTargetStickyNavbar_dU4u></a> <code>zremrangebyrank</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>start</code>, <code>stop</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zremrangebyrank target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zremrangebyrank</a></p>
+<td>
+<p><code>Redis.zremrangebyrank</code></p>
+<tr><td>
+<p><a id=zremrangebyscore class=anchorTargetStickyNavbar_dU4u></a> <code>zremrangebyscore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>min</code>, <code>max</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zremrangebyscore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zremrangebyscore</a></p>
+<td>
+<p><code>Redis.zremrangebyscore</code></p>
+<tr><td>
+<p><a id=zrevrank class=anchorTargetStickyNavbar_dU4u></a> <code>zrevrank</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>member</code>) => <code>Promise</code>&lt;<code>null</code> | <code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zrevrank target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zrevrank</a></p>
+<td>
+<p><code>Redis.zrevrank</code></p>
+<tr><td>
+<p><a id=zscan class=anchorTargetStickyNavbar_dU4u></a> <code>zscan</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>key</code>, <code>cursor</code>, <code>opts?</code>) => <code>Promise</code>&lt;[<code>string</code>, (<code>string</code> | <code>number</code>)[]]></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zscan target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zscan</a></p>
+<td>
+<p><code>Redis.zscan</code></p>
+<tr><td>
+<p><a id=zscore class=anchorTargetStickyNavbar_dU4u></a> <code>zscore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>&lt;<code>TData</code>>(<code>key</code>, <code>member</code>) => <code>Promise</code>&lt;<code>null</code> | <code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zscore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zscore</a></p>
+<td>
+<p><code>Redis.zscore</code></p>
+<tr><td>
+<p><a id=zunion class=anchorTargetStickyNavbar_dU4u></a> <code>zunion</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>numKeys</code>, <code>keys</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>any</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zunion target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zunion</a></p>
+<td>
+<p><code>Redis.zunion</code></p>
+<tr><td>
+<p><a id=zunionstore class=anchorTargetStickyNavbar_dU4u></a> <code>zunionstore</code></p>
+<td>
+<p><code>public</code></p>
+<td>
+<p>(<code>destination</code>, <code>numKeys</code>, <code>keys</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>number</code>></p>
+<td>
+<p><strong>See</strong></p>
+<p><a href=https://redis.io/commands/zunionstore target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/zunionstore</a></p>
+<td>
+<p><code>Redis.zunionstore</code></p>
+<tr><td>
+<p><a id=opts class=anchorTargetStickyNavbar_dU4u></a> <code>opts?</code></p>
+<td>
+<p><code>protected</code></p>
+<td>
+<p><code>CommandOptions</code>&lt;<code>any</code>, <code>any</code>></p>
+<td>
+<p>‐</p>
+<td>
+<p><code>Redis.opts</code></p>
+</table>
+<h2 class="anchor anchorTargetStickyNavbar_dU4u" id=accessors>Accessors<a href=#accessors class=hash-link aria-label="Direct link to Accessors" title="Direct link to Accessors" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_dU4u" id=json>json<a href=#json class=hash-link aria-label="Direct link to json" title="Direct link to json" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=get-signature>Get Signature<a href=#get-signature class=hash-link aria-label="Direct link to Get Signature" title="Direct link to Get Signature" translate=no>​</a></h4>
+<blockquote>
+<p><strong>get</strong> <strong>json</strong>(): <code>object</code></p>
+</blockquote>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=returns-1>Returns<a href=#returns-1 class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name<th>Type<th>Description<tbody><tr><td><code>arrappend()</code><td>(<code>key</code>, <code>path</code>, ...<code>values</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.arrappend target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.arrappend</a><tr><td><code>arrindex()</code><td>(<code>key</code>, <code>path</code>, <code>value</code>, <code>start?</code>, <code>stop?</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.arrindex target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.arrindex</a><tr><td><code>arrinsert()</code><td>(<code>key</code>, <code>path</code>, <code>index</code>, ...<code>values</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.arrinsert target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.arrinsert</a><tr><td><code>arrlen()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.arrlen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.arrlen</a><tr><td><code>arrpop()</code><td>(<code>key</code>, <code>path?</code>, <code>index?</code>) => <code>Promise</code>&lt;<code>unknown</code>[]><td><strong>See</strong> <a href=https://redis.io/commands/json.arrpop target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.arrpop</a><tr><td><code>arrtrim()</code><td>(<code>key</code>, <code>path?</code>, <code>start?</code>, <code>stop?</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.arrtrim target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.arrtrim</a><tr><td><code>clear()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;<code>number</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.clear target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.clear</a><tr><td><code>del()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;<code>number</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.del target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.del</a><tr><td><code>forget()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;<code>number</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.forget target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.forget</a><tr><td><code>get()</code><td>&lt;<code>TData</code>>(...<code>args</code>) => <code>Promise</code>&lt;<code>null</code> | <code>TData</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.get target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.get</a><tr><td><code>merge()</code><td>(<code>key</code>, <code>path</code>, <code>value</code>) => <code>Promise</code>&lt;<code>null</code> | <code>"OK"</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.merge target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.merge</a><tr><td><code>mget()</code><td>&lt;<code>TData</code>>(<code>keys</code>, <code>path</code>) => <code>Promise</code>&lt;<code>TData</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.mget target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.mget</a><tr><td><code>mset()</code><td>(...<code>args</code>) => <code>Promise</code>&lt;<code>null</code> | <code>"OK"</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.mset target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.mset</a><tr><td><code>numincrby()</code><td>(<code>key</code>, <code>path</code>, <code>value</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.numincrby target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.numincrby</a><tr><td><code>nummultby()</code><td>(<code>key</code>, <code>path</code>, <code>value</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.nummultby target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.nummultby</a><tr><td><code>objkeys()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>string</code>[])[]><td><strong>See</strong> <a href=https://redis.io/commands/json.objkeys target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.objkeys</a><tr><td><code>objlen()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.objlen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.objlen</a><tr><td><code>resp()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;<code>any</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.resp target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.resp</a><tr><td><code>set()</code><td>(<code>key</code>, <code>path</code>, <code>value</code>, <code>opts?</code>) => <code>Promise</code>&lt;<code>null</code> | <code>"OK"</code>><td><strong>See</strong> <a href=https://redis.io/commands/json.set target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.set</a><tr><td><code>strappend()</code><td>(<code>key</code>, <code>path</code>, <code>value</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.strappend target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.strappend</a><tr><td><code>strlen()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;(<code>null</code> | <code>number</code>)[]><td><strong>See</strong> <a href=https://redis.io/commands/json.strlen target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.strlen</a><tr><td><code>toggle()</code><td>(<code>key</code>, <code>path</code>) => <code>Promise</code>&lt;<code>number</code>[]><td><strong>See</strong> <a href=https://redis.io/commands/json.toggle target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.toggle</a><tr><td><code>type()</code><td>(<code>key</code>, <code>path?</code>) => <code>Promise</code>&lt;<code>string</code>[]><td><strong>See</strong> <a href=https://redis.io/commands/json.type target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/json.type</a></table>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=inherited-from>Inherited from<a href=#inherited-from class=hash-link aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate=no>​</a></h4>
+<p><code>Redis.json</code></p>
+<hr/>
+<h3 class="anchor anchorTargetStickyNavbar_dU4u" id=readyourwritessynctoken>readYourWritesSyncToken<a href=#readyourwritessynctoken class=hash-link aria-label="Direct link to readYourWritesSyncToken" title="Direct link to readYourWritesSyncToken" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=get-signature-1>Get Signature<a href=#get-signature-1 class=hash-link aria-label="Direct link to Get Signature" title="Direct link to Get Signature" translate=no>​</a></h4>
+<blockquote>
+<p><strong>get</strong> <strong>readYourWritesSyncToken</strong>(): <code>undefined</code> | <code>string</code></p>
+</blockquote>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=returns-2>Returns<a href=#returns-2 class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h5>
+<p><code>undefined</code> | <code>string</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=set-signature>Set Signature<a href=#set-signature class=hash-link aria-label="Direct link to Set Signature" title="Direct link to Set Signature" translate=no>​</a></h4>
+<blockquote>
+<p><strong>set</strong> <strong>readYourWritesSyncToken</strong>(<code>session</code>): <code>void</code></p>
+</blockquote>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=parameters-1>Parameters<a href=#parameters-1 class=hash-link aria-label="Direct link to Parameters" title="Direct link to Parameters" translate=no>​</a></h5>
+<table><thead><tr><th>Parameter<th>Type<tbody><tr><td>
+<p><code>session</code></p>
+<td>
+<p><code>undefined</code> | <code>string</code></p>
+</table>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=returns-3>Returns<a href=#returns-3 class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h5>
+<p><code>void</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=inherited-from-1>Inherited from<a href=#inherited-from-1 class=hash-link aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate=no>​</a></h4>
+<p><code>Redis.readYourWritesSyncToken</code></p>
+<h2 class="anchor anchorTargetStickyNavbar_dU4u" id=methods>Methods<a href=#methods class=hash-link aria-label="Direct link to Methods" title="Direct link to Methods" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_dU4u" id=createscript>createScript()<a href=#createscript class=hash-link aria-label="Direct link to createScript()" title="Direct link to createScript()" translate=no>​</a></h3>
+<blockquote>
+<p><strong>createScript</strong>&lt;<code>TResult</code>, <code>TReadonly</code>>(<code>script</code>, <code>opts?</code>): <code>TReadonly</code> <em>extends</em> <code>true</code> ? <code>ScriptRO</code>&lt;<code>TResult</code>> : <code>Script</code>&lt;<code>TResult</code>></p>
+</blockquote>
+<p>Creates a new script.</p>
+<p>Scripts offer the ability to optimistically try to execute a script without having to send the
+entire script to the server. If the script is loaded on the server, it tries again by sending
+the entire script. Afterwards, the script is cached on the server.</p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=type-parameters>Type Parameters<a href=#type-parameters class=hash-link aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate=no>​</a></h4>
+<table><thead><tr><th>Type Parameter<th>Default type<tbody><tr><td>
+<p><code>TResult</code></p>
+<td>
+<p><code>unknown</code></p>
+<tr><td>
+<p><code>TReadonly</code> <em>extends</em> <code>boolean</code></p>
+<td>
+<p><code>false</code></p>
+</table>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=parameters-2>Parameters<a href=#parameters-2 class=hash-link aria-label="Direct link to Parameters" title="Direct link to Parameters" translate=no>​</a></h4>
+<table><thead><tr><th>Parameter<th>Type<th>Description<tbody><tr><td>
+<p><code>script</code></p>
+<td>
+<p><code>string</code></p>
+<td>
+<p>The script to create</p>
+<tr><td>
+<p><code>opts?</code></p>
+<td>
+<p>{ <code>readonly?</code>: <code>TReadonly</code>; }</p>
+<td>
+<p>Optional options to pass to the script <code>{ readonly?: boolean }</code></p>
+<tr><td>
+<p><code>opts.readonly?</code></p>
+<td>
+<p><code>TReadonly</code></p>
+<td>
+<p>‐</p>
+</table>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=returns-4>Returns<a href=#returns-4 class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h4>
+<p><code>TReadonly</code> <em>extends</em> <code>true</code> ? <code>ScriptRO</code>&lt;<code>TResult</code>> : <code>Script</code>&lt;<code>TResult</code>></p>
+<p>A new script</p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=examples>Examples<a href=#examples class=hash-link aria-label="Direct link to Examples" title="Direct link to Examples" translate=no>​</a></h4>
+<div class="language-ts codeBlockContainer_D31j theme-code-block" style=--prism-color:#F8F8F2;--prism-background-color:#1a1d27><div class=codeBlockContent_LS3X><pre tabindex=0 class="prism-code language-ts codeBlock_rMrg thin-scrollbar" style=color:#F8F8F2;background-color:#1a1d27><code class=codeBlockLines_iZMt><span class=token-line style=color:#F8F8F2><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> redis </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">new</span><span class="token plain"> </span><span class="token class-name">Redis</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token operator">...</span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain" style=display:inline-block></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> script </span><span class="token operator">=</span><span class="token plain"> redis</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token generic-function function" style="color:rgb(80, 250, 123)">createScript</span><span class="token generic-function generic class-name operator">&lt;</span><span class="token generic-function generic class-name builtin" style="color:rgb(189, 147, 249)">string</span><span class="token generic-function generic class-name operator">></span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token string" style="color:rgb(255, 121, 198)">"return ARGV[1];"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> arg1 </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">await</span><span class="token plain"> script</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">eval</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">"Hello World"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token function" style="color:rgb(80, 250, 123)">expect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">arg1</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"Hello World"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><br/></span></code></pre></div></div>
+<div class="language-ts codeBlockContainer_D31j theme-code-block" style=--prism-color:#F8F8F2;--prism-background-color:#1a1d27><div class=codeBlockContent_LS3X><pre tabindex=0 class="prism-code language-ts codeBlock_rMrg thin-scrollbar" style=color:#F8F8F2;background-color:#1a1d27><code class=codeBlockLines_iZMt><span class=token-line style=color:#F8F8F2><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> redis </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">new</span><span class="token plain"> </span><span class="token class-name">Redis</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token operator">...</span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain" style=display:inline-block></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> script </span><span class="token operator">=</span><span class="token plain"> redis</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token generic-function function" style="color:rgb(80, 250, 123)">createScript</span><span class="token generic-function generic class-name operator">&lt;</span><span class="token generic-function generic class-name builtin" style="color:rgb(189, 147, 249)">string</span><span class="token generic-function generic class-name operator">></span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token string" style="color:rgb(255, 121, 198)">"return ARGV[1];"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">readonly</span><span class="token operator">:</span><span class="token plain"> </span><span class="token boolean">true</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> arg1 </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">await</span><span class="token plain"> script</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">evalRo</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">"Hello World"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br/></span><span class=token-line style=color:#F8F8F2><span class="token plain"></span><span class="token function" style="color:rgb(80, 250, 123)">expect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">arg1</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"Hello World"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><br/></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=inherited-from-2>Inherited from<a href=#inherited-from-2 class=hash-link aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate=no>​</a></h4>
+<p><code>Redis.createScript</code></p>
+<hr/>
+<h3 class="anchor anchorTargetStickyNavbar_dU4u" id=scan>scan()<a href=#scan class=hash-link aria-label="Direct link to scan()" title="Direct link to scan()" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=call-signature>Call Signature<a href=#call-signature class=hash-link aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate=no>​</a></h4>
+<blockquote>
+<p><strong>scan</strong>(<code>cursor</code>): <code>Promise</code>&lt;<code>ScanResultStandard</code>></p>
+</blockquote>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=parameters-3>Parameters<a href=#parameters-3 class=hash-link aria-label="Direct link to Parameters" title="Direct link to Parameters" translate=no>​</a></h5>
+<table><thead><tr><th>Parameter<th>Type<tbody><tr><td>
+<p><code>cursor</code></p>
+<td>
+<p><code>string</code> | <code>number</code></p>
+</table>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=returns-5>Returns<a href=#returns-5 class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h5>
+<p><code>Promise</code>&lt;<code>ScanResultStandard</code>></p>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=see>See<a href=#see class=hash-link aria-label="Direct link to See" title="Direct link to See" translate=no>​</a></h5>
+<p><a href=https://redis.io/commands/scan target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/scan</a></p>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=inherited-from-3>Inherited from<a href=#inherited-from-3 class=hash-link aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate=no>​</a></h5>
+<p><code>Redis.scan</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=call-signature-1>Call Signature<a href=#call-signature-1 class=hash-link aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate=no>​</a></h4>
+<blockquote>
+<p><strong>scan</strong>&lt;<code>TOptions</code>>(<code>cursor</code>, <code>opts</code>): <code>Promise</code>&lt;<code>TOptions</code> <em>extends</em> <code>object</code> ? <code>ScanResultWithType</code> : <code>ScanResultStandard</code>></p>
+</blockquote>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=type-parameters-1>Type Parameters<a href=#type-parameters-1 class=hash-link aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate=no>​</a></h5>
+<table><thead><tr><th>Type Parameter<tbody><tr><td>
+<p><code>TOptions</code> <em>extends</em> <code>ScanCommandOptions</code></p>
+</table>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=parameters-4>Parameters<a href=#parameters-4 class=hash-link aria-label="Direct link to Parameters" title="Direct link to Parameters" translate=no>​</a></h5>
+<table><thead><tr><th>Parameter<th>Type<tbody><tr><td>
+<p><code>cursor</code></p>
+<td>
+<p><code>string</code> | <code>number</code></p>
+<tr><td>
+<p><code>opts</code></p>
+<td>
+<p><code>TOptions</code></p>
+</table>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=returns-6>Returns<a href=#returns-6 class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h5>
+<p><code>Promise</code>&lt;<code>TOptions</code> <em>extends</em> <code>object</code> ? <code>ScanResultWithType</code> : <code>ScanResultStandard</code>></p>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=see-1>See<a href=#see-1 class=hash-link aria-label="Direct link to See" title="Direct link to See" translate=no>​</a></h5>
+<p><a href=https://redis.io/commands/scan target=_blank rel="noopener noreferrer" class="">https://redis.io/commands/scan</a></p>
+<h5 class="anchor anchorTargetStickyNavbar_dU4u" id=inherited-from-4>Inherited from<a href=#inherited-from-4 class=hash-link aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate=no>​</a></h5>
+<p><code>Redis.scan</code></p>
+<hr/>
+<h3 class="anchor anchorTargetStickyNavbar_dU4u" id=fromenv>fromEnv()<a href=#fromenv class=hash-link aria-label="Direct link to fromEnv()" title="Direct link to fromEnv()" translate=no>​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>fromEnv</strong>(<code>config?</code>): <code>Redis</code></p>
+</blockquote>
+<p>Create a new Upstash Redis instance from environment variables.</p>
+<p>Use this to automatically load connection secrets from your environment
+variables. For instance when using the Vercel integration.</p>
+<p>This tries to load <code>UPSTASH_REDIS_REST_URL</code> and <code>UPSTASH_REDIS_REST_TOKEN</code> from
+your environment using <code>process.env</code>.</p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=parameters-5>Parameters<a href=#parameters-5 class=hash-link aria-label="Direct link to Parameters" title="Direct link to Parameters" translate=no>​</a></h4>
+<table><thead><tr><th>Parameter<th>Type<tbody><tr><td>
+<p><code>config?</code></p>
+<td>
+<p><code>Omit</code>&lt;<code>RedisConfigNodejs</code>, <code>"url"</code> | <code>"token"</code>></p>
+</table>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=returns-7>Returns<a href=#returns-7 class=hash-link aria-label="Direct link to Returns" title="Direct link to Returns" translate=no>​</a></h4>
+<p><code>Redis</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_dU4u" id=inherited-from-5>Inherited from<a href=#inherited-from-5 class=hash-link aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate=no>​</a></h4>
+<p><code>Redis.fromEnv</code></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href=/docs/1.0/api/extension-cache-upstash/><div class=pagination-nav__sublabel>Previous</div><div class=pagination-nav__label>@baeta/extension-cache-upstash</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/docs/1.0/api/extension-cache-upstash/classes/UpstashStore><div class=pagination-nav__sublabel>Next</div><div class=pagination-nav__label>UpstashStore</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_T1e2 thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#extends class="table-of-contents__link toc-highlight">Extends</a><li><a href=#constructors class="table-of-contents__link toc-highlight">Constructors</a><ul><li><a href=#constructor class="table-of-contents__link toc-highlight">Constructor</a></ul><li><a href=#properties class="table-of-contents__link toc-highlight">Properties</a><li><a href=#accessors class="table-of-contents__link toc-highlight">Accessors</a><ul><li><a href=#json class="table-of-contents__link toc-highlight">json</a><li><a href=#readyourwritessynctoken class="table-of-contents__link toc-highlight">readYourWritesSyncToken</a></ul><li><a href=#methods class="table-of-contents__link toc-highlight">Methods</a><ul><li><a href=#createscript class="table-of-contents__link toc-highlight">createScript()</a><li><a href=#scan class="table-of-contents__link toc-highlight">scan()</a><li><a href=#fromenv class="table-of-contents__link toc-highlight">fromEnv()</a></ul></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class=footer__title>Docs</div><ul class="footer__items clean-list"><li class=footer__item><a class=footer__link-item href=/docs/intro>Introduction</a><li class=footer__item><a class=footer__link-item href=/docs/getting-started/installation>Getting Started</a><li class=footer__item><a href=https://github.com/andreisergiu98/baeta/tree/main/examples target=_blank rel="noopener noreferrer" class=footer__link-item>Examples<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a></ul></div><div class="theme-layout-footer-column col footer__col"><div class=footer__title>More</div><ul class="footer__items clean-list"><li class=footer__item><a href=https://github.com/andreisergiu98/baeta target=_blank rel="noopener noreferrer" class=footer__link-item>GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a><li class=footer__item><a href=https://discord.gg/j6Y8xRc7ep target=_blank rel="noopener noreferrer" class=footer__link-item>Discord<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a><li class=footer__item><a href=https://github.com/sponsors/andreisergiu98 target=_blank rel="noopener noreferrer" class=footer__link-item>Donate<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_aOGM><use href=#theme-svg-external-link /></svg></a></ul></div></div></div></footer></div></body>

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_baeta_website=self.webpackChunk_baeta_website||[]).push([["7365"],{62050:function(e){e.exports=JSON.parse('{"name":"docusaurus-plugin-content-pages","id":"default"}')}}]);

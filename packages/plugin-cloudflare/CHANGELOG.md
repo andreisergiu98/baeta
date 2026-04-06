@@ -1,5 +1,12 @@
 # @baeta/plugin-cloudflare
 
+## 2.0.0-next.12
+
+### Patch Changes
+
+- Updated dependencies [[`54f4361`](https://github.com/andreisergiu98/baeta/commit/54f4361c857f2a3d32a29dd898b2be648ac0bb2c)]:
+  - @baeta/cache-cloudflare@2.0.0-next.12
+
 ## 2.0.0-next.11
 
 ### Patch Changes

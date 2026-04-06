@@ -1,5 +1,12 @@
 # @baeta/core
 
+## 2.0.0-next.12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @baeta/errors@2.0.0-next.12
+
 ## 2.0.0-next.11
 
 ### Patch Changes

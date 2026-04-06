@@ -1,5 +1,16 @@
 # @baeta/cli
 
+## 2.0.0-next.12
+
+### Patch Changes
+
+- [`b322fe0`](https://github.com/andreisergiu98/baeta/commit/b322fe0f149762d0cde18be9da7cebf049d8c055) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Handle --run flag for non TTY environments
+
+- [`4f859e1`](https://github.com/andreisergiu98/baeta/commit/4f859e12c7ca0f964423f48edf06bb93ebd3697a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Enable strict option for yargs
+
+- Updated dependencies []:
+  - @baeta/plugin-graphql@2.0.0-next.12
+
 ## 2.0.0-next.11
 
 ### Patch Changes

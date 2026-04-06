@@ -28,7 +28,13 @@
     "@baeta/util-encoding": "1.0.1",
     "@baeta/util-env": "1.0.1",
     "@baeta/util-log": "1.0.1",
-    "@baeta/util-path": "1.0.1"
+    "@baeta/util-path": "1.0.1",
+    "@baeta/cache": "2.0.0-next.11",
+    "@baeta/cache-cloudflare": "2.0.0-next.11",
+    "@baeta/cache-ioredis": "2.0.0-next.11",
+    "@baeta/cache-iovalkey": "2.0.0-next.11",
+    "@baeta/cache-redis-common": "2.0.0-next.11",
+    "@baeta/cache-upstash": "2.0.0-next.11"
   },
   "changesets": [
     "blue-bikes-repair",
@@ -37,8 +43,10 @@
     "fast-kids-hug",
     "flat-walls-sink",
     "grumpy-windows-reply",
+    "heavy-dogs-tickle",
     "heavy-pandas-kneel",
     "huge-flies-play",
+    "jolly-socks-type",
     "late-dryers-occur",
     "metal-bears-pull",
     "new-socks-lie",
@@ -48,6 +56,7 @@
     "quiet-ears-give",
     "ripe-apes-itch",
     "silent-carpets-obey",
+    "social-rings-love",
     "tall-coins-sin",
     "tall-papayas-call",
     "whole-pets-allow"

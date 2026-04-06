@@ -37,10 +37,20 @@ function enforceConsistentEntries(workspace) {
 		return;
 	}
 
+	/**
+	 * @type {Record<string, { types: string; default: string }>}
+	 */
 	const exports = {};
-	const publishExports = {};
-	const typedocEntries = [];
 
+	/**
+	 * @type {Record<string, { types: string; default: string }>}
+	 */
+	const publishExports = {};
+
+	/**
+	 * @type {string[]}
+	 */
+	const typedocEntries = [];
 	for (const key in workspace.manifest.exports) {
 		const dir = key === '.' ? '' : key.replace('./', '');
 

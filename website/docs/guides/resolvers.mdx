@@ -160,9 +160,9 @@ extend type User {
 After defining your schema, implement the resolvers in their respective modules `src/modules/user-posts/resolvers.ts`:
 
 ```typescript
-import { getUserExtendedModule } from "./typedef.ts";
+import { UserExtendedModule } from "./typedef.ts";
 
-const { User } = getUserExtendedModule();
+const { User } = UserExtendedModule;
 
 const userPosts = User.posts.resolve(({ source, ctx }) => {
   return ctx.db.posts.findMany({

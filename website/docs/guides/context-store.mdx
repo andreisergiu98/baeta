@@ -21,7 +21,7 @@ type Context = {
 };
 
 // Forces unnecessary null checks even in authenticated resolvers
-Query.profile(({ ctx }) => {
+const profileQuery = Query.profile.resolve(({ ctx }) => {
   if (!ctx.user) {
     // Required even though we know it's authenticated
     throw new Error("Unauthenticated");
@@ -74,60 +74,58 @@ const userAgain = await getUser(ctx); // Uses cached data
 
 ## Creating a Store
 
-Use `createContextStore` to define a store with its loading logic:
+The simplest way to create a store is `createContextStoreWithLoader`, which bundles the loader function with the store definition:
 
 ```typescript
-import { createContextStore } from "@baeta/core";
+import { createContextStoreWithLoader } from "@baeta/core";
 import { UnauthenticatedError } from "@baeta/errors";
-import type { User } from "./modules/user/typedef";
-import type { Context } from "./types/context";
+import type { User } from "./__generated__/types.ts";
+import type { Context } from "./types/context.ts";
 
-// Define the loader function
-async function loadOptionalUser(ctx: Context) {
-  if (!ctx.userId) {
-    return null;
-  }
-
-  const user = await db.user.findUnique({
-    where: { id: ctx.userId },
-  });
-
-  return user;
-}
-
-// Create the store
 const optionalUserStoreKey = Symbol("optionalUserStore");
-export const [getOptionalUser, setOptionalUserLoader] =
-  createContextStore<User | null>(optionalUserStoreKey, {
-    lazy: true, // Load the user only when requested
-  });
+
+export const [getOptionalUser, initOptionalUserStore] =
+  createContextStoreWithLoader<User | null, Context>(
+    optionalUserStoreKey,
+    async (ctx) => {
+      if (!ctx.userId) {
+        return null;
+      }
+      return db.user.findUnique({ where: { id: ctx.userId } });
+    },
+  );
 ```
+
+The returned tuple gives you:
+
+- **`getOptionalUser(ctx)`** — retrieves the value, triggering the loader on first access
+- **`initOptionalUserStore(ctx)`** — initializes the store on the context (call this during context creation)
 
 ## Chaining Stores
 
-Stores can be chained to create more complex stores:
+Stores can build upon each other. Here a required user store chains off the optional one:
 
 ```typescript
-// Build upon the optional user store
-async function loadUser(ctx: Context) {
-  const user = await getOptionalUser(ctx);
-
-  if (!user) {
-    throw new UnauthenticatedError();
-  }
-
-  return user;
-}
-
 const userStoreKey = Symbol("userStore");
-export const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, {
-  lazy: true,
-});
+
+export const [getUser, initUserStore] =
+  createContextStoreWithLoader<User, Context>(
+    userStoreKey,
+    async (ctx) => {
+      const user = await getOptionalUser(ctx);
+      if (!user) {
+        throw new UnauthenticatedError();
+      }
+      return user;
+    },
+  );
 ```
+
+Now `getUser(ctx)` returns `User` (never null) and automatically throws if the user isn't authenticated.
 
 ## Initializing Stores
 
-Initialize your stores in the context creation:
+Initialize your stores during context creation:
 
 ```typescript
 export const yoga = createYoga<ServerContext, Context>({
@@ -137,9 +135,8 @@ export const yoga = createYoga<ServerContext, Context>({
       userId: "1",
     };
 
-    // Set up the loaders
-    setOptionalUserLoader(ctx, () => loadOptionalUser(ctx));
-    setUserLoader(ctx, () => loadUser(ctx));
+    initOptionalUserStore(ctx);
+    initUserStore(ctx);
 
     return ctx;
   },
@@ -151,9 +148,9 @@ export const yoga = createYoga<ServerContext, Context>({
 Access store values in your resolvers:
 
 ```typescript
-const { Query } = getUserModule();
+const { Query } = UserModule;
 
-Query.me(async ({ ctx }) => {
+const meQuery = Query.me.resolve(async ({ ctx }) => {
   // Optional user store - won't throw if user isn't authenticated
   const optionalUser = await getOptionalUser(ctx); // User | null
 
@@ -169,8 +166,8 @@ Query.me(async ({ ctx }) => {
 Store values are cached for the entire request lifecycle. Multiple calls to the same store will only trigger the loader once:
 
 ```typescript
-Query.example(async ({ ctx }) => {
-  // All these calls will only trigger loadOptionalUser once
+const exampleQuery = Query.example.resolve(async ({ ctx }) => {
+  // All these calls will only trigger the loader once
   await Promise.all([
     getOptionalUser(ctx),
     getOptionalUser(ctx),
@@ -182,13 +179,54 @@ Query.example(async ({ ctx }) => {
 });
 ```
 
+## Passing Arguments to Loaders
+
+`createContextStoreWithLoader` supports additional arguments beyond context. This is useful when the loader needs data that's only available at initialization time:
+
+```typescript
+const orgStoreKey = Symbol("orgStore");
+
+export const [getOrg, initOrgStore] =
+  createContextStoreWithLoader<Organization, Context, [string]>(
+    orgStoreKey,
+    async (ctx, orgId) => {
+      return db.organization.findUniqueOrThrow({ where: { id: orgId } });
+    },
+  );
+
+// During context creation
+initOrgStore(ctx, requestOrgId);
+```
+
+## Advanced: Manual Loader Setup
+
+For cases where you need full control over the loader, use `createContextStore` directly. This separates store creation from loader assignment:
+
+```typescript
+import { createContextStore } from "@baeta/core";
+
+const optionalUserStoreKey = Symbol("optionalUserStore");
+
+export const [getOptionalUser, setOptionalUserLoader] =
+  createContextStore<User | null>(optionalUserStoreKey);
+
+// During context creation, provide the loader as a closure
+setOptionalUserLoader(ctx, () => {
+  if (!ctx.userId) {
+    return null;
+  }
+  return db.user.findUnique({ where: { id: ctx.userId } });
+});
+```
+
+This is useful when the loader depends on values that can't be passed as simple arguments, or when you want to compose loaders dynamically.
+
 ## Configuration Options
 
-The `createContextStore` function accepts these options:
+Both `createContextStore` and `createContextStoreWithLoader` accept these options:
 
 ```typescript
 type StoreOptions = {
-  lazy?: boolean; // If true, only loads when first accessed
-  // Add any future options here
+  eager?: boolean; // If true, loads immediately when initialized. Default: false (lazy)
 };
 ```

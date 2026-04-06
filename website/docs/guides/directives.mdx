@@ -8,7 +8,7 @@ Directives in Baeta allow you to modify the execution behavior of your GraphQL s
 
 ## Defining a Directive
 
-`src/modules/directives/directives.gql`
+`src/modules/custom-native-directive/custom-native-directive.gql`
 
 ```graphql
 directive @upper on FIELD_DEFINITION
@@ -24,33 +24,36 @@ type Query {
 
 ## Implementing Directive Logic
 
-To implement the directive's behavior, use the `$directive` method:
+Define the directive as a schema transformer function and register it with `$directive` on the module. Like other builder methods, `$directive` is chained before `$schema`:
 
-`src/modules/directives/directives.ts`
+`src/modules/custom-native-directive/index.ts`
 
 ```typescript
-import { MapperKind, getDirective, mapSchema } from "@graphql-tools/utils";
-import { defaultFieldResolver } from "graphql";
-import { getCustomNativeDirectiveModule } from "./typedef";
+import { getDirective, MapperKind, mapSchema } from "@graphql-tools/utils";
+import { defaultFieldResolver, type GraphQLSchema } from "graphql";
+import { CustomNativeDirectiveModule } from "./typedef.ts";
 
-const { $directive, Query } = getCustomNativeDirectiveModule();
+const { Query, NameWithUpper } = CustomNativeDirectiveModule;
 
-$directive((schema) => {
+const queryResolver = Query.$fields({
+  testUpperDirective: Query.testUpperDirective.resolve(({ args }) => {
+    return {
+      name: args.name,
+    };
+  }),
+});
+
+function upperDirective(schema: GraphQLSchema) {
   return mapSchema(schema, {
-    // Executes once for each object field in the schema
     [MapperKind.OBJECT_FIELD]: (fieldConfig) => {
-      // Check whether this field has the specified directive
       const upperDirective = getDirective(schema, fieldConfig, "upper")?.[0];
 
       if (!upperDirective) {
         return fieldConfig;
       }
 
-      // Get this field's original resolver
       const { resolve = defaultFieldResolver } = fieldConfig;
 
-      // Replace the original resolver with a function that *first* calls
-      // the original resolver, then converts its result to upper case
       fieldConfig.resolve = async (source, args, context, info) => {
         const result = await resolve(source, args, context, info);
         if (typeof result === "string") {
@@ -61,17 +64,19 @@ $directive((schema) => {
       return fieldConfig;
     },
   });
-});
+}
 
-// Implement the query resolver
-Query.testUpperDirective(({ args }) => {
-  return {
-    name: args.name,
-  };
+export default CustomNativeDirectiveModule
+  .$directive(upperDirective)
+  .$schema({
+  Query: queryResolver,
+  NameWithUpper: NameWithUpper.$fields({
+    name: NameWithUpper.name.key("name"),
+  }),
 });
 ```
 
-This example creates an `@upper` directive that converts string fields to uppercase. The directive is applied during schema creation and modifies the field's resolver to transform its output.
+This example creates an `@upper` directive that converts string fields to uppercase. The directive transformer is registered via `$directive` and chained into `$schema`, following the same builder pattern as the rest of Baeta.
 
 ## Usage
 

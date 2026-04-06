@@ -31,7 +31,7 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 ```typescript
 import { UnauthenticatedError } from "@baeta/errors";
 import { authExtension } from "@baeta/extension-auth";
-import type { Context } from "../types/context";
+import type { Context } from "../types/context.ts";
 
 declare global {
   export namespace AuthExtension {
@@ -71,14 +71,16 @@ export const authExt = authExtension<Context>(async (ctx) => {
 
 2. Register the Extension
 
+Create `src/modules/extensions.ts`:
+
 ```typescript
 import { createExtensions } from "@baeta/core";
-import { authExt } from "./auth-extension";
+import { authExt } from "../extensions/auth-extension.ts";
 
-export default createExtensions(
-  authExt,
+export default createExtensions({
+  authExtension: authExt,
   //... other extensions
-);
+});
 ```
 
 :::tip
@@ -86,34 +88,33 @@ Authorization checks should be registered first in your chain, as they determine
 The only exception being the `complexity` extension.
 :::
 
-3. Point Baeta to extensions entrypoint (if you haven't already)
-
-```typescript
-export default defineConfig({
-  graphql: {
-    extensions: "src/extensions/index.ts",
-    // ... other config
-  },
-});
-```
-
 ## Authorization Examples
 
 ### Basic Static Rules
 
+Auth rules are chained onto fields and the result is consumed:
+
 ```typescript
 // Public or authenticated access
-Query.user.$auth({
-  $or: {
-    isPublic: true,
-    isLoggedIn: true,
-  },
-});
+const userQuery = Query.user
+  .$auth({
+    $or: {
+      isPublic: true,
+      isLoggedIn: true,
+    },
+  })
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
+  });
 
 // Admin-only access
-Mutation.createUser.$auth({
-  hasAccess: "admin",
-});
+const createUserMutation = Mutation.createUser
+  .$auth({
+    hasAccess: "admin",
+  })
+  .resolve(({ args }) => {
+    return db.user.create({ data: args.data });
+  });
 ```
 
 ### Post-Resolution Authorization
@@ -121,75 +122,97 @@ Mutation.createUser.$auth({
 ```typescript
 // Post-auth checks permission after resolver execution
 // Useful to avoid double database queries when you need the resource for permission checking
-Query.user.$postAuth((params, result) => {
-  if (result && result.id === params.ctx.userId) {
-    return true; // Allow access if user is requesting their own data
-  }
-  return { hasAccess: "admin" }; // Require admin access for other users' data
-});
-
-// Compared to pre-resolution auth which might require an extra database query
-Query.user.$auth(async (params) => {
-  const user = await db.user.findFirst({
-    // Extra database query
-    where: { id: params.args.id },
+const userQuery = Query.user
+  .$postAuth((params, result) => {
+    if (result && result.id === params.ctx.userId) {
+      return true; // Allow access if user is requesting their own data
+    }
+    return { hasAccess: "admin" }; // Require admin access for other users' data
+  })
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
   });
 
-  if (user && user.id === params.ctx.userId) return {};
-  return { hasAccess: "admin" };
-});
+// Compared to pre-resolution auth which might require an extra database query
+const userQuery = Query.user
+  .$auth(async (params) => {
+    const user = await db.user.findFirst({
+      where: { id: params.args.id },
+    });
+    if (user && user.id === params.ctx.userId) return {};
+    return { hasAccess: "admin" };
+  })
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
+  });
 ```
 
 ### Subscription Rules
 
 ```typescript
-// Apply to subscription phase
-Subscription.userCreated.subscribe.$auth({
-  isLoggedIn: true,
-});
-
-// Apply to resolve phase
-Subscription.userCreated.resolve.$auth({
-  isLoggedIn: true,
-});
-
-// Apply to both phases
-Subscription.userCreated.$auth({
-  isLoggedIn: true,
-});
+const userCreatedSubscription = Subscription.userCreated
+  .$auth({
+    isLoggedIn: true,
+  })
+  .subscribe(({ ctx }) => {
+    return ctx.pubsub.subscribe("user-created");
+  })
+  .resolve(({ source }) => {
+    return source;
+  });
 ```
 
 ### Type-wide Rules
 
-```typescript
-// Apply to all Query fields
-Query.$auth({
-  isLoggedIn: true,
-});
+Type-wide rules are chained before `$fields` and apply to all fields of a type:
 
-// Apply to all User fields
-User.$auth({
-  isLoggedIn: true,
-});
+```typescript
+// Apply auth to all Query fields
+const queryResolver = Query
+  .$auth({
+    isLoggedIn: true,
+  })
+  .$fields({
+    user: userQuery,
+    users: usersQuery,
+  });
+
+// Apply auth to all User fields
+const userResolver = User
+  .$auth({
+    isLoggedIn: true,
+  })
+  .$fields({
+    id: User.id.key("id"),
+    email: User.email.key("email"),
+  });
 ```
 
-### Grants system
+### Grants System
 
 ```typescript
-// Grant permission
-Query.user.$auth(
-  {
-    $or: { isPublic: true, isLoggedIn: true },
-  },
-  {
-    grants: ["readUserPhotos"],
-  },
-);
+// Grant permission when resolving user
+const userQuery = Query.user
+  .$auth(
+    {
+      $or: { isPublic: true, isLoggedIn: true },
+    },
+    {
+      grants: ["readUserPhotos"],
+    },
+  )
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
+  });
 
-// Use granted permission
-User.photos.$auth({
-  $granted: "readUserPhotos",
-});
+// Use granted permission on related field
+const userPhotosResolver = User.photos
+  .$auth({
+    $granted: "readUserPhotos",
+  })
+  .resolve(({ source }) => {
+    return db.userPhoto.findMany({ where: { userId: source.id } });
+  });
 ```
 
 ### Authorization Operators
@@ -223,9 +246,7 @@ export const authExt = authExtension<Context>(
         isLoggedIn: true,
       },
       Subscription: {
-        subscribe: {
-          isLoggedIn: true,
-        },
+        isLoggedIn: true,
       },
     },
   },
@@ -237,14 +258,18 @@ export const authExt = authExtension<Context>(
 You can bypass default scopes for specific operations using the `skipDefaults` option:
 
 ```typescript
-Query.publicContent.$auth(
-  {
-    isPublic: true,
-  },
-  {
-    skipDefaults: true,
-  },
-);
+const publicContentQuery = Query.publicContent
+  .$auth(
+    {
+      isPublic: true,
+    },
+    {
+      skipDefaults: true,
+    },
+  )
+  .resolve(() => {
+    return getPublicContent();
+  });
 ```
 
 For detailed examples, see the [Baeta authorization example](https://github.com/andreisergiu98/baeta/tree/main/examples/auth).

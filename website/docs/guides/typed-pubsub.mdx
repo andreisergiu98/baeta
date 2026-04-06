@@ -26,7 +26,7 @@ First, create a type map that defines your subscription channels and their corre
 ```typescript
 import { createTypedPubSub } from "@baeta/subscriptions-pubsub";
 import { PubSub } from "graphql-subscriptions";
-import type { User } from "../__generated__/types";
+import type { User } from "../__generated__/types.ts";
 
 export type PubSubMap = {
   "user-updated": User;
@@ -70,7 +70,7 @@ export function createContext(): Context {
 The typed PubSub system ensures you can only publish to defined channels with the correct payload type:
 
 ```typescript
-Mutation.updateUser(({ args, ctx }) => {
+const updateUserMutation = Mutation.updateUser.resolve(({ args, ctx }) => {
   const updatedUser = {
     id: args.where.id,
     email: "jon.doe@baeta.io",
@@ -90,16 +90,15 @@ Mutation.updateUser(({ args, ctx }) => {
 Create subscription resolvers using the typed asyncIterableIterator:
 
 ```typescript
-Subscription.userUpdated({
-  subscribe(params) {
+const userUpdatedSubscription = Subscription.userUpdated
+  .subscribe(({ ctx }) => {
     // Type-safe subscription - channel name is autocompleted and type-checked
-    return params.ctx.pubsub.asyncIterableIterator("user-updated");
-  },
-  resolve(params) {
-    // params.payload is properly inferred as User
-    return params.payload;
-  },
-});
+    return ctx.pubsub.asyncIterableIterator("user-updated");
+  })
+  .resolve(({ source }) => {
+    // source is properly inferred as User
+    return source;
+  });
 ```
 
 ### Using with Redis

@@ -2,4 +2,100 @@
 sidebar_position: 25
 ---
 
-# Custom types
+# Custom Types
+
+Baeta generates a `src/modules/types.ts` file that lets you customize the TypeScript types used throughout your resolvers. This file acts as the bridge between your application's types and the generated GraphQL types.
+
+## The Types File
+
+The generated file looks like this:
+
+```typescript
+// src/modules/types.ts
+import type { GraphQLResolveInfo } from "graphql";
+import type { BaseObjectTypes, BaseScalars } from "../__generated__/utility.ts";
+import type { Context } from "../types/context.ts";
+
+export interface Scalars extends BaseScalars {}
+
+export interface ObjectTypes extends BaseObjectTypes {}
+
+export type Ctx = Context;
+
+export type Info = GraphQLResolveInfo;
+```
+
+Each section controls a different aspect of type safety in your resolvers.
+
+## Object Types
+
+The `ObjectTypes` interface lets you override the **source type** (also known as the parent or root type) for any GraphQL object type. This is especially useful when your data source returns a different shape than your GraphQL schema.
+
+By default, each object type's source is inferred from the GraphQL schema. When you override it, resolvers for that type will receive your custom type as `source` instead.
+
+### Example: Using Prisma Models
+
+When using Prisma, the database model often differs from the GraphQL type. Use `ObjectTypes` to tell Baeta about the real shape of your data:
+
+```typescript
+import type { BaseObjectTypes, BaseScalars } from "../__generated__/utility.ts";
+import type { User, UserPhoto } from "../lib/db/prisma.ts";
+import type { Context } from "../types/context.ts";
+
+export interface ObjectTypes extends BaseObjectTypes {
+  User: User; // Resolvers for User fields will receive Prisma's User as source
+  UserPhoto: UserPhoto;
+}
+```
+
+Now in your resolvers, `source` is typed as the Prisma model:
+
+```typescript
+const { User } = UserModule;
+
+// source is typed as Prisma's User model, not the GraphQL User type
+const userResolver = User.$fields({
+  id: User.id.key("id"),
+  email: User.email.key("email"),
+  // Compute GraphQL fields from the Prisma model
+  name: User.name.resolve(({ source }) => `${source.firstName} ${source.lastName}`),
+  photos: User.photos.resolve(async ({ source }) => {
+    return db.photo.findMany({ where: { userId: source.id } });
+  }),
+});
+```
+
+:::tip
+This is particularly useful when your database model has fields that don't exist in the GraphQL schema, or when field names differ between your data source and your API.
+:::
+
+## Scalars
+
+The `Scalars` interface lets you map custom GraphQL scalars to TypeScript types. See the [Scalars guide](./scalars.mdx) for more details.
+
+```typescript
+export interface Scalars extends BaseScalars {
+  DateTime: Date;
+  UUID: `${string}-${string}-${string}-${string}-${string}`;
+}
+```
+
+## Context
+
+The `Ctx` type alias defines the context type available in all resolvers and middlewares. See the [Context guide](./context.mdx) for more details.
+
+```typescript
+import type { Context } from "../types/context.ts";
+
+export type Ctx = Context;
+```
+
+## Info
+
+The `Info` type alias defines the GraphQL resolve info type. This defaults to `GraphQLResolveInfo` but can be overridden if you use a library that extends it.
+
+```typescript
+import type { GraphQLResolveInfo } from "graphql";
+
+export type Info = GraphQLResolveInfo;
+```

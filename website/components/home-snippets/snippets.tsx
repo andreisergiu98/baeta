@@ -51,7 +51,7 @@ const usersQuery = Query.users.resolve(() => {
   return dataSource.user.findMany();
 });
 
-Query.$fields({
+export default Query.$fields({
   user: userQuery,
   users: usersQuery,
 });
@@ -100,7 +100,7 @@ extend type User {
 const { Query } = UserModule;
 
 const userQuery = Query.user
-  .auth({
+  .$auth({
     $or: {
       isPublic: true,
       isLoggedIn: true,
@@ -120,23 +120,29 @@ const userQuery = Query.user
 			</>
 		),
 		language: 'typescript',
-		snippet: `const { Query, Mutation, User } = UserModule;
+		snippet: `import { defineQuery } from "@baeta/cache";
 
-export const userCache = User.$createCache();
+const { Query, Mutation, User } = UserModule;
+
+export const userCache = User.$createCache()
+  .withQueries({
+    findUser: defineQuery({
+      resolve: async (args: { id?: string }) => {
+        return dataSource.user.find(args);
+      },
+    }),
+  })
+  .build();
 
 const userQuery = Query.user
-  .$auth({
-    // ...
-  })
-  .$useCache(userCache)
-  .resolve(async ({ args }) => {
-    // ...
-  });
+  .$resolveCache(userCache.queries.findUser, ({ args }) => ({
+    id: args.where.id,
+  }));
 
 const updateUserMutation = Mutation.updateUser
   .$use(async (next) => {
     const user = await next();
-    await userCache.save(user);
+    await userCache.update(user);
     return user;
   })
   .resolve(async ({ args }) => {

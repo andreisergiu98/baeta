@@ -9,17 +9,13 @@ Configure your Baeta project in a few simple steps.
 
 ## Configuration File
 
-Baeta will look for a configuration file in your project root under one of the following names:
+Baeta will look for a configuration file named `baeta` or `.baeta` in the current working directory, with any of the following extensions:
 
-- `baeta.ts`
-- `.baeta.ts`
-- `baeta.js`
-- `.baeta.js`
-- `baeta.mjs`
-- `.baeta.mjs`
+- `.ts`, `.mts`
+- `.js`, `.mjs`
 
 :::note
-While Baeta supports **CommonJS**, the configuration file must use **ESM**. If you're using a `.js` file, ensure `"type": "module"` is set in your `package.json`, otherwise use the `.mjs` file extension.
+The configuration file must use **ESM**. If you're using `.ts` or `.js`, ensure `"type": "module"` is set in your `package.json`, otherwise use the `.mts` or `.mjs` extension.
 :::
 
 ## Basic Configuration
@@ -56,7 +52,6 @@ These scripts provide:
 
 :::tip
 If you're using **Bun** or **Deno** you can replace `start` with either:
-:::
 
 ```json
 {

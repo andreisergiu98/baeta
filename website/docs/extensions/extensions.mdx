@@ -12,9 +12,11 @@ While plugins enhance Baeta during build time, extensions add functionality at r
 Extensions attach additional methods to your GraphQL types and fields using a type-safe API. For example, the authorization extension adds the `$auth()` method to your resolvers, allowing you to define access control rules:
 
 ```typescript
-Query.user.$auth({
-  isLoggedIn: true,
-});
+const userQuery = Query.user
+  .$auth({ isLoggedIn: true })
+  .resolve(({ args }) => {
+    // ...
+  });
 ```
 
 ## Extension Setup
@@ -27,32 +29,22 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 2. Register your extensions:
 
-```typescript
+Create an extensions file at `src/modules/extensions.ts` and export the result of `createExtensions` as the default export:
 
+```typescript
 import { createExtensions } from '@baeta/core';
 import { authExtension } from '@baeta/extension-auth';
 import { complexityExtension } from '@baeta/extension-complexity';
 
-
-export default createExtensions(
-  authExtension(...),
-  complexityExtension(...),
+export default createExtensions({
+  authExtension: authExtension(...),
+  complexityExtension: complexityExtension(...),
   // other extensions...
-);
-```
-
-3. Configure Baeta to use the extensions:
-
-Since extensions are runtime features, the generators need to know where to find them.
-You must specify the path to extensions entrypoint in `baeta.ts` configuration file:
-
-```typescript
-export default defineConfig({
-  graphql: {
-    extensions: "src/extensions/index.ts",
-    // ... other config
-  },
 });
 ```
+
+:::note
+Even if you don't use any extensions, a `src/modules/extensions.ts` file exporting `createExtensions({})` is required for the generated code to work.
+:::
 
 For detailed information about specific extensions, check their respective documentation pages.

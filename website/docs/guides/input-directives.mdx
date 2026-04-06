@@ -30,16 +30,16 @@ type Query {
 
 ## Implementing Input Directives
 
-Use the `createInputDirective` utility from `@baeta/core` to implement the directive's behavior:
+Use the `createInputDirective` utility from `@baeta/core` to create the directive, then register it with `$directive` on the module:
 
-`src/modules/directives/input-directives.ts`
+`src/modules/custom-input-directive/index.ts`
 
 ```typescript
 import { createInputDirective } from "@baeta/core";
-import type { Context } from "../../types/context";
-import { getCustomInputDirectiveModule } from "./typedef";
+import type { Context } from "../../types/context.ts";
+import { CustomInputDirectiveModule } from "./typedef.ts";
 
-const { $directive, Query } = getCustomInputDirectiveModule();
+const { Query } = CustomInputDirectiveModule;
 
 const incrementDirective = createInputDirective<{ by: number }, Context>({
   name: "increment",
@@ -52,10 +52,16 @@ const incrementDirective = createInputDirective<{ by: number }, Context>({
   },
 });
 
-$directive(incrementDirective);
+const queryResolver = Query.$fields({
+  testIncrementDirective: Query.testIncrementDirective.resolve(({ args }) => {
+    return args.value;
+  }),
+});
 
-Query.testIncrementDirective(({ args }) => {
-  return args.value;
+export default CustomInputDirectiveModule
+  .$directive(incrementDirective)
+  .$schema({
+  Query: queryResolver,
 });
 ```
 

@@ -37,7 +37,7 @@ export interface GeneratorOptions {
 	/**
 	 * Filename for the generated module definition file.
 	 * Contains type definitions and the GraphQL AST.
-	 * @defaultValue 'typedef.ts'
+	 * @defaultValue 'typedef'
 	 */
 	moduleDefinitionName?: string;
 
@@ -82,7 +82,7 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 	const cwd = posixPath(options.cwd ?? process.cwd());
 	const schemas = options.schemas ?? ['src/**/*.graphql'];
 	const modulesDir = posixPath(resolve(cwd, options.modulesDir || 'src/modules'));
-	const moduleDefinitionName = options.moduleDefinitionName || 'typedef.ts';
+	const moduleDefinitionName = options.moduleDefinitionName || 'typedef';
 	const defaultTypesDir = resolve(modulesDir, '../__generated__/');
 	const typesDir = resolve(cwd, options.typesDir || defaultTypesDir);
 

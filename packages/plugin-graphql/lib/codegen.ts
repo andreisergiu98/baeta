@@ -149,7 +149,7 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 			moduleDefinitionName: options.moduleDefinitionName,
 		};
 		files.push({
-			filename: join(options.modulesDir, `/${module}/${options.moduleDefinitionName}`),
+			filename: join(options.modulesDir, `/${module}/${options.moduleDefinitionName}.ts`),
 			content: [
 				printModuleImports(config, module),
 				printModuleMetadata(module, document),

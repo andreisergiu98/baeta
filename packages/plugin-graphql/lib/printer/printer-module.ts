@@ -1,4 +1,4 @@
-import { join, parse } from '@baeta/util-path';
+import { join } from '@baeta/util-path';
 import { pascalCase } from 'change-case-all';
 import type { DocumentNode } from 'graphql';
 import type { FieldInfoMap } from '../visitors/field-info.ts';
@@ -75,8 +75,7 @@ function printModuleIndexDestructuredTypes(moduleName: string, types: string[]) 
 
 function printModuleIndexImports(config: ModulePrinterConfig, moduleName: string) {
 	const hasScalars = config.registry.defined.scalars.length > 0;
-	const typedef = parse(config.moduleDefinitionName).name + config.importExtension;
-	const moduleImport = `import { ${pascalCase(moduleName)}Module } from "./${typedef}";`;
+	const moduleImport = `import { ${pascalCase(moduleName)}Module } from "./${config.moduleDefinitionName}${config.importExtension}";`;
 	if (!hasScalars) {
 		return moduleImport;
 	}

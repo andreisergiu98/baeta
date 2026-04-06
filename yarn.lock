@@ -1759,6 +1759,7 @@ __metadata:
     log-symbols: "npm:^7.0.1"
     madge: "npm:^8.0.0"
     ora: "npm:^9.3.0"
+    pathe: "npm:^2.0.3"
     prompts: "npm:^2.4.2"
     tsdown: "npm:^0.21.7"
     typescript: "catalog:dev"
@@ -1888,7 +1889,7 @@ __metadata:
     execa: "npm:^9.6.1"
     graphql: "catalog:dev"
     ink: "npm:^6.8.0"
-    node-pty: "npm:1.0.0"
+    node-pty: "npm:1.2.0-beta.12"
     react: "catalog:prod"
     typescript: "catalog:dev"
     yargs: "npm:^18.0.0"
@@ -16979,15 +16980,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.17.0":
-  version: 2.26.2
-  resolution: "nan@npm:2.26.2"
-  dependencies:
-    node-gyp: "npm:latest"
-  checksum: 10/d978ab0f1c959688289163678fd3dee640c63060ff27dbc73dc507f883508a7cb887f247212aabea9846d413f1016e5496ff9b80720e737a05bed8a5df8cc836
-  languageName: node
-  linkType: hard
-
 "nanoid@npm:^3.3.11":
   version: 3.3.11
   resolution: "nanoid@npm:3.3.11"
@@ -17051,7 +17043,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-addon-api@npm:^7.0.0":
+"node-addon-api@npm:^7.0.0, node-addon-api@npm:^7.1.0":
   version: 7.1.1
   resolution: "node-addon-api@npm:7.1.1"
   dependencies:
@@ -17124,13 +17116,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-pty@npm:1.0.0":
-  version: 1.0.0
-  resolution: "node-pty@npm:1.0.0"
+"node-pty@npm:1.2.0-beta.12":
+  version: 1.2.0-beta.12
+  resolution: "node-pty@npm:1.2.0-beta.12"
   dependencies:
-    nan: "npm:^2.17.0"
+    node-addon-api: "npm:^7.1.0"
     node-gyp: "npm:latest"
-  checksum: 10/f1803531bfee71fdc8fb97fc544364e64de6bad91d6221b79b6a8e3518032768bff8738960d15f29e5a14aa16b9eb550e1a26ba1ad8c66f86424b9f56fd0ccad
+  checksum: 10/971da761c6b5f3dcf47fd6346600e0c4aa27a7bb215eee1982863e088ea1b50460bcfd8a1b2cd697cebb0c096948cb15ef9e9e473a1d9a17a7c462626ad03aba
   languageName: node
   linkType: hard
 

@@ -1,4 +1,4 @@
-import type { FileOptions, NormalizedGeneratorOptions } from '@baeta/generator-sdk';
+import type { File, FileOptions, NormalizedGeneratorOptions } from '@baeta/generator-sdk';
 import { join } from '@baeta/util-path';
 import { concatAST } from 'graphql';
 import { loadSchema } from '../utils/load.ts';
@@ -41,7 +41,10 @@ type GeneratedFile = {
 	options?: FileOptions;
 };
 
-export async function generate(options: NormalizedGeneratorOptions): Promise<GeneratedFile[]> {
+export async function generate(
+	options: NormalizedGeneratorOptions,
+	currentFiles: File[],
+): Promise<GeneratedFile[]> {
 	const { outputSchema, outputSchemaAst } = await loadSchema(
 		options.schemas,
 		options.cwd,
@@ -99,7 +102,13 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 		},
 		{
 			filename: join(options.modulesDir, 'index.ts'),
-			content: printAutoload({ importExtension: options.importExtension }, modules),
+			content: printAutoload(
+				{
+					importExtension: options.importExtension,
+					moduleDefinitionName: options.moduleDefinitionName,
+				},
+				modules,
+			),
 		},
 		{
 			filename: join(options.modulesDir, 'types.ts'),
@@ -143,7 +152,7 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 			moduleDefinitionName: options.moduleDefinitionName,
 		};
 		files.push({
-			filename: join(options.modulesDir, `/${module}/${options.moduleDefinitionName}`),
+			filename: join(options.modulesDir, `/${module}/${options.moduleDefinitionName}.ts`),
 			content: [
 				printModuleImports(config, module),
 				printModuleMetadata(module, document),
@@ -152,17 +161,22 @@ export async function generate(options: NormalizedGeneratorOptions): Promise<Gen
 				printModuleBuilder(config, module),
 			].join('\n\n'),
 		});
-		files.push({
-			filename: join(options.modulesDir, `/${module}/index.ts`),
-			content: printModuleIndexStarter(config, module),
-			options: {
-				disableOverwrite: true,
-				disableBiomeV1Header: true,
-				disableBiomeV2Header: true,
-				disableEslintHeader: true,
-				disableGenerationNoticeHeader: true,
-			},
-		});
+
+		const moduleStarterPath = join(options.modulesDir, `/${module}/index.ts`);
+		const moduleStarterExists = currentFiles.some((file) => file.filename === moduleStarterPath);
+		if (!moduleStarterExists) {
+			files.push({
+				filename: join(options.modulesDir, `/${module}/index.ts`),
+				content: printModuleIndexStarter(config, module),
+				options: {
+					disableOverwrite: true,
+					disableBiomeV1Header: true,
+					disableBiomeV2Header: true,
+					disableEslintHeader: true,
+					disableGenerationNoticeHeader: true,
+				},
+			});
+		}
 	}
 
 	return files;

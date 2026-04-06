@@ -1,6 +1,7 @@
 import { camelCase, pascalCase } from 'change-case-all';
 
 interface AutoloadPrinterConfig {
+	moduleDefinitionName: string;
 	importExtension: '.ts' | '.js' | '';
 }
 
@@ -15,7 +16,7 @@ function printImports(config: AutoloadPrinterConfig, modules: string[]) {
 	];
 	const moduleTypeImports = modules.map(
 		(module) =>
-			`import type { BaetaModuleTypes as ${pascalCase(module)}ModuleTypes } from "./${module}/typedef${config.importExtension}"`,
+			`import type { BaetaModuleTypes as ${pascalCase(module)}ModuleTypes } from "./${module}/${config.moduleDefinitionName}${config.importExtension}"`,
 	);
 	const moduleImports = modules.flatMap(
 		(module) => `import ${camelCase(module)} from "./${module}/index${config.importExtension}"`,

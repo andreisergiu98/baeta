@@ -12,6 +12,6 @@ examples/**/modules/*/typedef.ts linguist-generated
 examples/**/modules/index.ts linguist-generated
 
 # Hide .yarn and docs from language detection
-.yarn linguist-vendored
+.yarn/** linguist-vendored
 website/** linguist-documentation
 packages/*/CHANGELOG.md linguist-documentation

@@ -30,7 +30,7 @@ function getRelativeConfigPath(path: string) {
 let cacheIndex = 0;
 async function importConfig(configPath: string): Promise<unknown> {
 	const modulePath = resolve(process.cwd(), configPath);
-	const result = await import(`${modulePath}?update=${cacheIndex++}`);
+	const result = await import(`file://${modulePath}?update=${cacheIndex++}`);
 
 	if (typeof result !== 'object' || result === null) {
 		throw new Error('Invalid config, expected `baeta.ts` with default export.');

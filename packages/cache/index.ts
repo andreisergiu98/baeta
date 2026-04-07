@@ -1,4 +1,9 @@
-export { CacheClient, type CacheClientArgs, type CacheClientOptions } from './lib/client.ts';
+export {
+	CacheClient,
+	type CacheClientArgs,
+	type CacheClientOptions,
+	type CacheClientSaveOptions,
+} from './lib/client.ts';
 export {
 	type Cache,
 	type CacheHooksOptions,

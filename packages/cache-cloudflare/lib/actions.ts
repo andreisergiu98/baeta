@@ -43,6 +43,7 @@ const saveItemsAction = defineAction(
 	z.object({
 		items: z.array(z.tuple([z.string(), z.string()])),
 		expiresAt: z.number(),
+		disableOverwrite: z.boolean(),
 	}),
 	z.void(),
 );

@@ -65,12 +65,15 @@ export function defineQuery<
 			const data = await options.resolve(args);
 
 			await store
-				.saveQuery({
-					...tag,
-					args,
-					data,
-					indexes: buildIndexes(args, options.indexArgsBy),
-				})
+				.saveQuery(
+					{
+						...tag,
+						args,
+						data,
+						indexes: buildIndexes(args, options.indexArgsBy),
+					},
+					options.replaceExistingItems,
+				)
 				.catch((err) => {
 					log.error(err, `Failed to save query result for ${name}. Proceeding without caching.`);
 				});

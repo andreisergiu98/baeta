@@ -31,17 +31,20 @@
     "tests/*",
     "tools/*",
     "examples/*",
-    "packages/create-baeta/meta/*"
+    "packages/create-baeta/meta/*",
+    "e2e/*"
   ],
   "scripts": {
     "build": "turbo build --filter='./packages/*'",
     "check:circular": "turbo test:circular --filter='./packages/*'",
     "check:constraints": "yarn constraints",
     "check:deps": "turbo check:deps --filter='./packages/*'",
+    "check:e2e": "yarn check:e2e:setup && turbo e2e --filter='./e2e/*'",
+    "check:e2e:setup": "git clean -fdX ./e2e >/dev/null && turbo gen e2e",
     "check:formatting": "prettier --check . && sort-package-json **/package.json --check",
     "check:linting": "biome check .",
     "check:tests": "turbo test --filter='./packages/*'",
-    "check:types": "turbo types",
+    "check:types": "turbo types --filter='./packages/*'",
     "docs:api": "yarn workspace @baeta/website write-api",
     "docs:build": "yarn workspace @baeta/website build",
     "docs:dev": "yarn workspace @baeta/website start",

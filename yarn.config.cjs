@@ -154,6 +154,16 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('typedocOptions.readme', 'none');
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
 		}
+
+		if (workspace.manifest.name.startsWith('@baeta/e2e-')) {
+			workspace.set('scripts.e2e:types', 'tsc --noEmit');
+			if (workspace.manifest.name !== '@baeta/e2e-shared') {
+				workspace.set('scripts.e2e:generate', 'baeta generate && graphql-codegen');
+				workspace.set('scripts.e2e', 'ava');
+			}
+			workspace.set('ava.extensions.ts', 'module');
+			workspace.set('ava.timeout', '120s');
+		}
 	}
 }
 

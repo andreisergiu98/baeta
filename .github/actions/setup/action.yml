@@ -15,25 +15,36 @@ runs:
       with:
         access_token: ${{ github.token }}
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Enable Corepack
+      shell: bash
+      run: |
+        npm uninstall -g yarn || true
+        corepack enable
+
+    - name: Get yarn cache directory
+      id: yarn-cache
+      shell: bash
+      run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+    - name: Cache yarn
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: yarn-cache-${{ runner.os }}-
+
     - name: Cache turbo
       uses: actions/cache@v3
       with:
         path: .turbo
-        key: ${{ runner.os }}-turbo-${{ github.sha }}
+        key: turbo-cache-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
-          ${{ runner.os }}-turbo-
-
-    - name: Enable Corepack
-      shell: bash
-      run: corepack enable
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ inputs.node-version }}
-        cache: "yarn"
-        cache-dependency-path: |
-          **/yarn.lock
+          turbo-cache-${{ runner.os }}-
 
     - name: Install dependencies
       shell: bash

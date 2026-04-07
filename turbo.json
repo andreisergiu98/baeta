@@ -3,31 +3,30 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
       "outputs": [
         "dist/**/*"
       ]
     },
-    "check:deps": {
-      "dependsOn": [
-        "^check:deps"
-      ]
-    },
+    "check:deps": {},
     "test": {
       "dependsOn": [
         "^test"
       ]
     },
-    "test:circular": {
+    "test:circular": {},
+    "types": {},
+    "e2e": {
       "dependsOn": [
-        "^test:circular"
+        "e2e:generate",
+        "e2e:types"
       ]
     },
-    "types": {
+    "e2e:generate": {
+      "cache": false
+    },
+    "e2e:types": {
       "dependsOn": [
-        "^types"
+        "e2e:generate"
       ]
     }
   }

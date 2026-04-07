@@ -40,11 +40,19 @@ export async function importTSX(source: string, parentURL: string): Promise<unkn
 	const dir = dirname(pathUrl.pathname);
 	const tempFile = join(dir, `temp-file-${process.pid}-${Date.now()}.js`);
 
-	await writeFile(tempFile, code, 'utf-8');
+	const writePromise = writeFile(tempFile, code, 'utf-8');
+	const unlinkTempFile = async () => {
+		await writePromise.catch(() => {});
+		await unlink(tempFile).catch(() => {});
+	};
+
+	process.on('exit', unlinkTempFile);
 
 	try {
+		await writePromise;
 		return await import(pathToFileURL(tempFile).href);
 	} finally {
-		await unlink(tempFile).catch(() => {});
+		await unlinkTempFile();
+		process.off('exit', unlinkTempFile);
 	}
 }

@@ -1,0 +1,12 @@
+type Screening {
+	id: ID!
+	movieId: ID!
+	date: String!
+	theater: String!
+	availableSeats: Int!
+}
+
+type Query {
+	screening(id: ID!): Screening
+	screenings(limit: Int): [Screening!]
+}

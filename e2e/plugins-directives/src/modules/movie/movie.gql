@@ -1,0 +1,25 @@
+type Movie {
+	id: ID!
+	title: String!
+	year: Int!
+	rating: Float
+}
+
+input MovieWhereUniqueInput @constraints(minFields: 1, maxFields: 1) {
+	id: ID
+	title: String
+}
+
+type Query {
+	movie(where: MovieWhereUniqueInput!): Movie
+}
+
+input CreateMovieInput {
+	title: String! @trim @validString(minLength: 1, maxLength: 200)
+	year: Int!
+	rating: Float
+}
+
+type Mutation {
+	createMovie(input: CreateMovieInput!): Movie!
+}

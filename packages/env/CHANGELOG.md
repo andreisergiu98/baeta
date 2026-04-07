@@ -1,57 +1,5 @@
 # @baeta/env
 
-## 2.0.0-next.15
-
-### Patch Changes
-
-- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
-
-- Add stricter validation for booleans and numbers by [@andreisergiu98](https://github.com/andreisergiu98) in [#515](https://github.com/andreisergiu98/baeta/pull/515)
-
-- Disallow non-finite numbers as env values by [@andreisergiu98](https://github.com/andreisergiu98) in [#510](https://github.com/andreisergiu98/baeta/pull/510)
-
-## 2.0.0-next.14
-
-## 2.0.0-next.13
-
-## 2.0.0-next.12
-
-## 2.0.0-next.11
-
-## 2.0.0-next.10
-
-## 2.0.0-next.9
-
-## 2.0.0-next.8
-
-## 2.0.0-next.7
-
-## 2.0.0-next.2
-
-### Patch Changes
-
-- Fix broken types
-
-## 2.0.0-next.1
-
-### Patch Changes
-
-- Fix release version
-
-## 2.0.0-next.0
-
-### Major Changes
-
-- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`31d1a50`](https://github.com/andreisergiu98/baeta/commit/31d1a509f96535b43ae85d19c770eb1a5f09dc94) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Baeta v2 – major refactor
-  - **Side-effect-free type generation & resolver definitions.**
-    The types generator and resolver definitions were reworked to be side-effect free, improving type safety.
-  - **Stricter type safety.**
-    You must now **explicitly define resolvers for every field** during development—breakages that used to surface at runtime are now caught at compile time.
-  - **Removed `@baeta/compiler`.**
-    Since modern runtimes can execute TypeScript natively, the separate compiler package is no longer needed. Use your runtime’s native TS support or your existing build setup.
-  - **Subscriptions update.**
-    `@baeta/subscriptions-pubsub` now targets **`graphql-subscriptions` v3**.
-
 ## 1.0.9
 
 ### Patch Changes

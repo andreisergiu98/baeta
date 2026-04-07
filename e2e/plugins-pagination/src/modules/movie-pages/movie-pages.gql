@@ -1,0 +1,8 @@
+input MoviePage {
+	cursor: ID
+	limit: Int!
+}
+
+extend type Query {
+	moviesConnection(page: MoviePage!): MovieConnection
+}

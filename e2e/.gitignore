@@ -45,6 +45,11 @@ custom-paths/src/graphql/extensions.ts
 !scalars/src/modules/types.ts
 !unions-interfaces/src/modules/types.ts
 
+# Plugin artifacts
+plugins-exec/exec-marker.txt
+plugins-exec/skipped-marker.txt
+plugins-gitignore/.gitignore
+
 
 
 

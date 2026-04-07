@@ -1,0 +1,39 @@
+# !!! This file is auto-generated, do not edit by hand !!!
+# To make changes, edit .github/workflows-src/security.ts and then run:
+#
+#   github-actions-workflow-builder --directory ".github/workflows-src"
+
+name: Security
+on:
+  push:
+    branches:
+      - next
+  pull_request: null
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 3 * * *
+jobs:
+  supply-chain-check:
+    name: Supply chain check
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - run: npm install -g sfw@2.0.4
+      - run: sfw yarn install --immutable
+      - run: yarn lockfile-lint --path yarn.lock --type yarn --validate-integrity
+          --allowed-hosts npm yarn --validate-package-names --allowed-schemes
+          "npm:" "workspace:" "patch:"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read

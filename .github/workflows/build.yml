@@ -44,7 +44,7 @@ jobs:
           path: .turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn build
   types:
     name: Check types
@@ -73,7 +73,7 @@ jobs:
           path: .turbo
           key: turbo-types-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-types-24-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:types
   lint:
     name: Check linting
@@ -97,7 +97,7 @@ jobs:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:linting
   formatting:
     name: Check formatting
@@ -121,7 +121,7 @@ jobs:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:formatting
   dependencies:
     name: Check dependencies
@@ -150,7 +150,7 @@ jobs:
           path: .turbo
           key: turbo-deps-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-deps-24-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:deps
   circular-dependencies:
     name: Check circular dependencies
@@ -179,7 +179,7 @@ jobs:
           path: .turbo
           key: turbo-deps-circular-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-deps-circular-24-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:circular
   constraints:
     name: Check package constraints
@@ -203,7 +203,7 @@ jobs:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:constraints
   yarn-dedupe:
     name: Check yarn dedupe
@@ -227,7 +227,7 @@ jobs:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn dedupe --check
   build-examples:
     name: Check examples
@@ -256,7 +256,7 @@ jobs:
           path: .turbo
           key: turbo-examples-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-examples-build-24-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn examples:build
       - run: yarn examples:types
   tests:
@@ -314,7 +314,7 @@ jobs:
           path: .turbo
           key: turbo-tests-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-tests-${{ matrix.node }}-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:tests
   e2e:
     name: Check e2e tests (${{ matrix.machine }} - Node ${{ matrix.node }})
@@ -354,7 +354,7 @@ jobs:
           path: .turbo
           key: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn check:e2e
   publish:
     name: Publish packages or open PR
@@ -395,7 +395,7 @@ jobs:
           path: .turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - uses: dotansimha/changesets-action@069996e9be15531bd598272996fa23853d61590e
         with:
           publish: yarn builder release --ci --check-branch=${{ github.ref_name }}
@@ -447,7 +447,7 @@ jobs:
           path: .turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: |-
           PR_NUMBER=$(gh pr list \
             --head $BRANCH \

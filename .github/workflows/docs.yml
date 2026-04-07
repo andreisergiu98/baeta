@@ -34,7 +34,7 @@ jobs:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - run: yarn install
+      - run: yarn install --immutable
       - run: yarn docs:build
       - uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e
         with:

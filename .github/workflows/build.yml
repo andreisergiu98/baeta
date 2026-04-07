@@ -1,0 +1,482 @@
+# !!! This file is auto-generated, do not edit by hand !!!
+# To make changes, edit .github/workflows-src/build.ts and then run:
+#
+#   github-actions-workflow-builder --directory ".github/workflows-src"
+
+name: Build
+on:
+  push:
+    branches:
+      - main
+      - next
+  pull_request: null
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag
+        required: true
+        default: alpha
+jobs:
+  build:
+    name: Check build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-build-24-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn build
+  types:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-types-24-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-types-24-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:types
+  lint:
+    name: Check linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:linting
+  formatting:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:formatting
+  dependencies:
+    name: Check dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-deps-24-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-deps-24-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:deps
+  circular-dependencies:
+    name: Check circular dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-deps-circular-24-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-deps-circular-24-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:circular
+  constraints:
+    name: Check package constraints
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:constraints
+  yarn-dedupe:
+    name: Check yarn dedupe
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn dedupe --check
+  build-examples:
+    name: Check examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-examples-build-24-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-examples-build-24-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn examples:build
+      - run: yarn examples:types
+  tests:
+    name: Check tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node:
+          - "22"
+          - "24"
+          - 25.6.1
+      fail-fast: false
+    services:
+      redis:
+        image: redis
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 65535:6379
+      valkey:
+        image: valkey/valkey:8-alpine
+        options: --health-cmd "valkey-cli ping" --health-interval 10s --health-timeout
+          5s --health-retries 5
+        ports:
+          - 65534:6379
+      redis-http:
+        image: hiett/serverless-redis-http:latest
+        env:
+          SRH_MODE: env
+          SRH_TOKEN: example_token
+          SRH_CONNECTION_STRING: redis://redis:6379/0
+        ports:
+          - 60080:80
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-tests-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-tests-${{ matrix.node }}-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:tests
+  e2e:
+    name: Check e2e tests (${{ matrix.machine }} - Node ${{ matrix.node }})
+    runs-on: ${{ matrix.machine }}
+    strategy:
+      matrix:
+        node:
+          - "22"
+          - "24"
+          - 25.6.1
+        machine:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn check:e2e
+  publish:
+    name: Publish packages or open PR
+    needs:
+      - build
+      - types
+      - lint
+      - dependencies
+      - circular-dependencies
+      - constraints
+      - tests
+      - e2e
+      - build-examples
+    runs-on: ubuntu-latest
+    if: ${{ (github.event_name == 'push') && ((github.event.ref ==
+      'refs/heads/main') || (github.event.ref == 'refs/heads/next')) }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-build-24-${{ runner.os }}-
+      - run: yarn install
+      - uses: dotansimha/changesets-action@069996e9be15531bd598272996fa23853d61590e
+        with:
+          publish: yarn builder release --ci --check-branch=${{ github.ref_name }}
+          version: yarn changeset version
+          commit: "chore: publish packages"
+          title: "chore: publish packages"
+          createGithubReleases: aggregate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+  publish-snapshot:
+    name: Publish snapshot packages
+    needs:
+      - build
+      - types
+      - lint
+      - dependencies
+      - circular-dependencies
+      - constraints
+      - tests
+      - e2e
+      - build-examples
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-build-24-${{ runner.os }}-
+      - run: yarn install
+      - run: |-
+          PR_NUMBER=$(gh pr list \
+            --head $BRANCH \
+            --repo ${{ github.repository }} \
+            --json number \
+            --jq ".[0].number")
+          echo "pr=$PR_NUMBER" >> $GITHUB_OUTPUT
+        shell: bash
+        env:
+          BRANCH: ${{ github.ref_name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: step_8
+      - if: ${{ (steps.step_8.outputs.pr != '') && (steps.step_8.outputs.pr != null) &&
+          startsWith(github.event.inputs.tag, 'alpha') }}
+        run: |-
+          yarn changeset version --snapshot ${{ steps.step_8.outputs.pr }}
+          if [[ `git status --porcelain` ]]; then
+            echo "Changes detected, publishing snapshot"
+          else
+            echo "::error::No changesets detected, skipping snapshot"
+            exit 1
+          fi
+          yarn builder release --ci --tag=${{ github.event.inputs.tag }}
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+  pull-requests: write

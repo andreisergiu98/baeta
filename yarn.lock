@@ -2881,8 +2881,8 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "catalog:dev"
+    pathe: "npm:^2.0.3"
     typescript: "catalog:dev"
-    upath: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
 
@@ -23056,13 +23056,6 @@ __metadata:
   bin:
     unrun: dist/cli.mjs
   checksum: 10/8da80d45dbda9675bee6ea5c614acff1eee9fd061f029296394317334c5b65c9258a9a137f78545d5def90204ea141608c88fa96e08514b84fd16c9db8a06a3c
-  languageName: node
-  linkType: hard
-
-"upath@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "upath@npm:2.0.1"
-  checksum: 10/7b98a83559a295d59f87f7a8d615c7549d19e4aec4dd9d52be2bf1ba93e1d6ee7d8f2188cdecbf303a22cea3768abff4268b960350152a0264125f577d9ed79e
   languageName: node
   linkType: hard
 

@@ -1,5 +1,42 @@
 # @baeta/cli
 
+## 2.0.0
+
+### Major Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Baeta v2 – major refactor
+  - **Side-effect-free type generation & resolver definitions.**
+    The types generator and resolver definitions were reworked to be side-effect free, improving type safety.
+  - **Stricter type safety.**
+    You must now **explicitly define resolvers for every field** during development—breakages that used to surface at runtime are now caught at compile time.
+  - **Removed `@baeta/compiler`.**
+    Since modern runtimes can execute TypeScript natively, the separate compiler package is no longer needed. Use your runtime’s native TS support or your existing build setup.
+  - **Subscriptions update.**
+    `@baeta/subscriptions-pubsub` now targets **`graphql-subscriptions` v3**.
+
+### Patch Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix broken types
+
+- [`831cfa2`](https://github.com/andreisergiu98/baeta/commit/831cfa2a11445aaf7f2d1a1d7ddf073db9bb8008) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix generator overwriting types.ts file
+
+- [`d223ccf`](https://github.com/andreisergiu98/baeta/commit/d223ccf1848122103c1d2f703ffbcc50274d9054) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Pin node-pty to a working version
+
+- [`b322fe0`](https://github.com/andreisergiu98/baeta/commit/b322fe0f149762d0cde18be9da7cebf049d8c055) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Handle --run flag for non TTY environments
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix release version
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix CLI hanging for single shot commands
+
+- [`4f859e1`](https://github.com/andreisergiu98/baeta/commit/4f859e12c7ca0f964423f48edf06bb93ebd3697a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Enable strict option for yargs
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Use native ts import instead of jiti for config loading
+
+- Updated dependencies [[`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`831cfa2`](https://github.com/andreisergiu98/baeta/commit/831cfa2a11445aaf7f2d1a1d7ddf073db9bb8008), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`ed81033`](https://github.com/andreisergiu98/baeta/commit/ed81033dc30b5a57f2358e4645ff3f717856cc21), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`831cfa2`](https://github.com/andreisergiu98/baeta/commit/831cfa2a11445aaf7f2d1a1d7ddf073db9bb8008), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a)]:
+  - @baeta/plugin-graphql@2.0.0
+  - @baeta/generator@2.0.0
+  - @baeta/util-path@2.0.0
+
 ## 2.0.0-next.12
 
 ### Patch Changes

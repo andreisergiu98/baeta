@@ -1,5 +1,35 @@
 # @baeta/extension-cache
 
+## 2.0.0
+
+### Major Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Baeta v2 – major refactor
+  - **Side-effect-free type generation & resolver definitions.**
+    The types generator and resolver definitions were reworked to be side-effect free, improving type safety.
+  - **Stricter type safety.**
+    You must now **explicitly define resolvers for every field** during development—breakages that used to surface at runtime are now caught at compile time.
+  - **Removed `@baeta/compiler`.**
+    Since modern runtimes can execute TypeScript natively, the separate compiler package is no longer needed. Use your runtime’s native TS support or your existing build setup.
+  - **Subscriptions update.**
+    `@baeta/subscriptions-pubsub` now targets **`graphql-subscriptions` v3**.
+
+### Minor Changes
+
+- [#275](https://github.com/andreisergiu98/baeta/pull/275) [`54f4361`](https://github.com/andreisergiu98/baeta/commit/54f4361c857f2a3d32a29dd898b2be648ac0bb2c) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Decouple cache from graphql
+
+### Patch Changes
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix broken types
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Fix release version
+
+- [#214](https://github.com/andreisergiu98/baeta/pull/214) [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a) Thanks [@andreisergiu98](https://github.com/andreisergiu98)! - Move serialization to store so it could use schema validators like Zod
+
+- Updated dependencies [[`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`54f4361`](https://github.com/andreisergiu98/baeta/commit/54f4361c857f2a3d32a29dd898b2be648ac0bb2c), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a), [`5607f58`](https://github.com/andreisergiu98/baeta/commit/5607f58827f9a029e3545058895065d40be9f8ab), [`c47665a`](https://github.com/andreisergiu98/baeta/commit/c47665a76a0f88bae07f42983b380361e4f0843a)]:
+  - @baeta/core@2.0.0
+  - @baeta/cache@2.0.0
+
 ## 2.0.0-next.12
 
 ### Minor Changes

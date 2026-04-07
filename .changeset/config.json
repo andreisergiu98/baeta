@@ -41,6 +41,11 @@
     ]
   ],
   "ignore": [
+    "@baeta/builder",
+    "@baeta/testing",
+    "@baeta/tsconfig",
+    "@baeta/website",
+    "@baeta/e2e-*",
     "@baeta/examples*",
     "@baeta/template*"
   ]

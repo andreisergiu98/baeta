@@ -94,6 +94,7 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	for (const ext of extensions) {
 		ext.setSchema(schema);
 	}
+	// TODO: remove comment
 	return {
 		schema,
 	};

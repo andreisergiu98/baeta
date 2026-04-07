@@ -18,7 +18,6 @@ export default createWorkflow(
 		setWorkflowName('Build');
 		setPermissions({
 			contents: 'read',
-			'pull-requests': 'write',
 		});
 		addTrigger('push', {
 			branches: ['main', 'next'],
@@ -208,6 +207,9 @@ export default createWorkflow(
 
 		whenTrigger('workflow_dispatch', (event) => {
 			addJob('publish-snapshot', ({ setName, add, run, addDependencies, when }) => {
+				setPermissions({
+					'id-token': 'write',
+				});
 				addDependencies(...releaseDependencies);
 				setName('Publish snapshot packages');
 				add(setupNode(DEFAULT_NODE, 'build'));

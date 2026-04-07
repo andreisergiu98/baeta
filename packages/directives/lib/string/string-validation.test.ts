@@ -1,5 +1,5 @@
 import test from '@baeta/testing';
-import gql from 'graphql-tag';
+import { parse as gql } from 'graphql';
 import {
 	makeAggregateErrorsInputMacro,
 	makeInvalidInputMacro,
@@ -7,7 +7,7 @@ import {
 } from '../../__tests__/macros.ts';
 import { stringValidation } from '../string/string-validation.ts';
 
-const typeDefs = gql`
+const typeDefs = gql(`
   input EmailInput {
     email: String @validString(format: EMAIL)
   }
@@ -72,7 +72,7 @@ const typeDefs = gql`
   }
 
   ${stringValidation.sdl}
-`;
+`);
 
 const validInputMacro = makeValidInputMacro(typeDefs, stringValidation.directive);
 const invalidInputMacro = makeInvalidInputMacro(typeDefs, stringValidation.directive);
@@ -82,139 +82,139 @@ test(
 	'email',
 	validInputMacro,
 	'EmailInput!',
-	gql`
+	gql(`
     query {
       value(input: { email: "test@test.com" })
     }
-  `,
+  `),
 );
 
 test(
 	'url',
 	validInputMacro,
 	'UrlInput!',
-	gql`
+	gql(`
     query {
       value(input: { url: "https://test.com" })
     }
-  `,
+  `),
 );
 
 test(
 	'uuid',
 	validInputMacro,
 	'UUIDInput!',
-	gql`
+	gql(`
     query {
       value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" })
     }
-  `,
+  `),
 );
 
 test(
 	'min',
 	validInputMacro,
 	'MinInput!',
-	gql`
+	gql(`
     query {
       value(input: { min: "foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'max',
 	validInputMacro,
 	'MaxInput!',
-	gql`
+	gql(`
     query {
       value(input: { max: "foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'startsWith',
 	validInputMacro,
 	'StartsWithInput!',
-	gql`
+	gql(`
     query {
       value(input: { startsWith: "foo bar" })
     }
-  `,
+  `),
 );
 
 test(
 	'endsWith',
 	validInputMacro,
 	'EndsWithInput!',
-	gql`
+	gql(`
     query {
       value(input: { endsWith: "bar foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'includes',
 	validInputMacro,
 	'IncludesInput!',
-	gql`
+	gql(`
     query {
       value(input: { includes: "bar foo baz" })
     }
-  `,
+  `),
 );
 
 test(
 	'regex',
 	validInputMacro,
 	'RegexInput!',
-	gql`
+	gql(`
     query {
       value(input: { regex: "FOO" })
     }
-  `,
+  `),
 );
 
 test(
 	'regex flags',
 	validInputMacro,
 	'RegexFlagsInput!',
-	gql`
+	gql(`
     query {
       value(input: { regex: "Foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'oneOf',
 	validInputMacro,
 	'OneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { oneOf: "foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'notOneOf',
 	validInputMacro,
 	'NotOneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { notOneOf: "barr" })
     }
-  `,
+  `),
 );
 
 test(
 	'aggregate',
 	validInputMacro,
 	'AggregateInput!',
-	gql`
+	gql(`
     query {
       value(
         input: {
@@ -229,146 +229,146 @@ test(
         }
       )
     }
-  `,
+  `),
 );
 
 test(
 	'invalid email',
 	invalidInputMacro,
 	'EmailInput!',
-	gql`
+	gql(`
     query {
       value(input: { email: "test@test" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid url',
 	invalidInputMacro,
 	'UrlInput!',
-	gql`
+	gql(`
     query {
       value(input: { url: "https://test" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid uuid',
 	invalidInputMacro,
 	'UUIDInput!',
-	gql`
+	gql(`
     query {
       value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11 a" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid min',
 	invalidInputMacro,
 	'MinInput!',
-	gql`
+	gql(`
     query {
       value(input: { min: "fo" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid max',
 	invalidInputMacro,
 	'MaxInput!',
-	gql`
+	gql(`
     query {
       value(input: { max: "fooo" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid startsWith',
 	invalidInputMacro,
 	'StartsWithInput!',
-	gql`
+	gql(`
     query {
       value(input: { startsWith: "bar foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid endsWith',
 	invalidInputMacro,
 	'EndsWithInput!',
-	gql`
+	gql(`
     query {
       value(input: { endsWith: "foo bar" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid includes',
 	invalidInputMacro,
 	'IncludesInput!',
-	gql`
+	gql(`
     query {
       value(input: { includes: "bar baz" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid regex',
 	invalidInputMacro,
 	'RegexInput!',
-	gql`
+	gql(`
     query {
       value(input: { regex: "foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid regex flags',
 	invalidInputMacro,
 	'RegexFlagsInput!',
-	gql`
+	gql(`
     query {
       value(input: { regex: "Foo1" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid oneOf',
 	invalidInputMacro,
 	'OneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { oneOf: "barr" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid notOneOf',
 	invalidInputMacro,
 	'NotOneOfInput!',
-	gql`
+	gql(`
     query {
       value(input: { notOneOf: "foo" })
     }
-  `,
+  `),
 );
 
 test(
 	'invalid aggregate',
 	aggregateErrorMacro,
 	'AggregateInput!',
-	gql`
+	gql(`
     query {
       value(
         input: {
@@ -383,7 +383,7 @@ test(
         }
       )
     }
-  `,
+  `),
 	8,
 );
 
@@ -391,9 +391,9 @@ test(
 	'skip bad types',
 	validInputMacro,
 	'BadTypeInput!',
-	gql`
+	gql(`
     query {
       value(input: { badType: 10 })
     }
-  `,
+  `),
 );

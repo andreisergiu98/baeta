@@ -1,10 +1,9 @@
 import test from '@baeta/testing';
-import type { GraphQLSchema } from 'graphql';
-import gql from 'graphql-tag';
+import { type GraphQLSchema, parse as gql } from 'graphql';
 import { makeQueryResolverMacro } from '../../__tests__/macros.ts';
 import { lower, trim, upper } from '../string/string-utils.ts';
 
-const typeDefs = gql`
+const typeDefs = gql(`
   input TrimInput {
     value: String @trim
   }
@@ -52,7 +51,7 @@ const typeDefs = gql`
   ${trim.sdl}
   ${lower.sdl}
   ${upper.sdl}
-`;
+`);
 
 interface ValueArgs {
 	input: {
@@ -104,11 +103,11 @@ test(
 	argsValueMacro,
 	'TrimInput!',
 	'foo',
-	gql`
+	gql(`
     query {
       value(input: { value: "  foo  " })
     }
-  `,
+  `),
 );
 
 test(
@@ -116,11 +115,11 @@ test(
 	argsValueMacro,
 	'Trim2Input!',
 	'foo',
-	gql`
+	gql(`
     query {
       value(input: { value: "  foo  " })
     }
-  `,
+  `),
 );
 
 test(
@@ -128,11 +127,11 @@ test(
 	argsValueMacro,
 	'TrimStartInput!',
 	'foo  ',
-	gql`
+	gql(`
     query {
       value(input: { value: "  foo  " })
     }
-  `,
+  `),
 );
 
 test(
@@ -140,11 +139,11 @@ test(
 	argsValueMacro,
 	'TrimStart2Input!',
 	'foo  ',
-	gql`
+	gql(`
     query {
       value(input: { value: "  foo  " })
     }
-  `,
+  `),
 );
 
 test(
@@ -152,11 +151,11 @@ test(
 	argsValueMacro,
 	'TrimEndInput!',
 	'  foo',
-	gql`
+	gql(`
     query {
       value(input: { value: "  foo  " })
     }
-  `,
+  `),
 );
 
 test(
@@ -164,11 +163,11 @@ test(
 	argsValueMacro,
 	'TrimEnd2Input!',
 	'  foo',
-	gql`
+	gql(`
     query {
       value(input: { value: "  foo  " })
     }
-  `,
+  `),
 );
 
 test(
@@ -176,11 +175,11 @@ test(
 	argsValueMacro,
 	'LowerInput!',
 	'foo',
-	gql`
+	gql(`
     query {
       value(input: { value: "FOO" })
     }
-  `,
+  `),
 );
 
 test(
@@ -188,11 +187,11 @@ test(
 	argsValueMacro,
 	'UpperInput!',
 	'FOO',
-	gql`
+	gql(`
     query {
       value(input: { value: "foo" })
     }
-  `,
+  `),
 );
 
 test(
@@ -200,11 +199,11 @@ test(
 	argsAggregateMacro,
 	'AggregateInput!',
 	'foofooFOO',
-	gql`
+	gql(`
     query {
       value(input: { trim: "  foo  ", lower: "FOO", upper: "foo" })
     }
-  `,
+  `),
 );
 
 test(
@@ -212,9 +211,9 @@ test(
 	argsBadTypeMacro,
 	'BadTypeInput!',
 	30,
-	gql`
+	gql(`
     query {
       value(input: { badTrim: 10, badLower: 10, badUpper: 10 })
     }
-  `,
+  `),
 );

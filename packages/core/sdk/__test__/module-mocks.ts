@@ -1,6 +1,5 @@
 import type { IResolvers } from '@graphql-tools/utils';
-import type { GraphQLFieldResolver, GraphQLScalarType } from 'graphql';
-import gql from 'graphql-tag';
+import { type GraphQLFieldResolver, type GraphQLScalarType, parse as gql } from 'graphql';
 import { ModuleBuilder } from '../module-builder.ts';
 import { ModuleCompiler } from '../module-compiler.ts';
 import type { TypeCompilerFactory, TypeMethods } from '../type-methods.ts';
@@ -93,7 +92,7 @@ export function mockModuleCompiler(
 				field2: type2.field2.key('name'),
 			}),
 		},
-		typedef: gql`
+		typedef: gql(`
             type Type1 {
                 field1: String
                 field2: String
@@ -102,7 +101,7 @@ export function mockModuleCompiler(
                 field1: String
                 field2: String
             }
-        `,
+        `),
 		defaultResolvers,
 		extensions: [],
 		transformers: [],

@@ -1911,7 +1911,6 @@ __metadata:
     "@graphql-tools/schema": "npm:^10.0.31"
     "@graphql-tools/utils": "npm:^11.0.0"
     graphql: "catalog:dev"
-    graphql-tag: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
     graphql: ^16.6.0
@@ -1931,7 +1930,6 @@ __metadata:
     "@types/is-url": "npm:^1.2.32"
     email-validator: "npm:^2.0.4"
     graphql: "catalog:dev"
-    graphql-tag: "catalog:dev"
     is-url: "npm:^1.2.4"
     typescript: "catalog:dev"
   peerDependencies:
@@ -13702,17 +13700,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-tag@npm:^2.12.6":
-  version: 2.12.6
-  resolution: "graphql-tag@npm:2.12.6"
-  dependencies:
-    tslib: "npm:^2.1.0"
-  peerDependencies:
-    graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 10/23a2bc1d3fbeae86444204e0ac08522e09dc369559ba75768e47421a7321b59f352fb5b2c9a5c37d3cf6de890dca4e5ac47e740c7cc622e728572ecaa649089e
-  languageName: node
-  linkType: hard
-
 "graphql-ws@npm:^6.0.8":
   version: 6.0.8
   resolution: "graphql-ws@npm:6.0.8"
@@ -21455,7 +21442,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.6.0, tslib@npm:^2.6.3, tslib@npm:^2.8.1":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.6.0, tslib@npm:^2.6.3, tslib@npm:^2.8.1":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7

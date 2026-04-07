@@ -9868,7 +9868,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/parsers@npm:^3.0.3":
+"@yarnpkg/parsers@npm:^3.0.0-rc.48.1, @yarnpkg/parsers@npm:^3.0.3":
   version: 3.0.3
   resolution: "@yarnpkg/parsers@npm:3.0.3"
   dependencies:
@@ -10557,6 +10557,7 @@ __metadata:
     github-actions-workflow-builder: "npm:^4.1.0"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^16.4.0"
+    lockfile-lint: "npm:^5.0.0"
     prettier: "npm:^3.8.1"
     sort-package-json: "npm:^3.6.1"
     turbo: "npm:^2.9.5"
@@ -16461,6 +16462,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lockfile-lint-api@npm:^5.9.2":
+  version: 5.9.2
+  resolution: "lockfile-lint-api@npm:5.9.2"
+  dependencies:
+    "@yarnpkg/parsers": "npm:^3.0.0-rc.48.1"
+    debug: "npm:^4.3.4"
+    object-hash: "npm:^3.0.0"
+  checksum: 10/f317e0cf31921404c4182e3c2a4b8f3a24c62c3f6d03ebb616d9ebd7ffcb168f903cbb6d175a630244923a0f86aadd3b247f85e635a8b937122b19ebf4fc0508
+  languageName: node
+  linkType: hard
+
+"lockfile-lint@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "lockfile-lint@npm:5.0.0"
+  dependencies:
+    cosmiconfig: "npm:^9.0.0"
+    debug: "npm:^4.3.4"
+    fast-glob: "npm:^3.3.2"
+    lockfile-lint-api: "npm:^5.9.2"
+    yargs: "npm:^17.7.2"
+  bin:
+    lockfile-lint: bin/lockfile-lint.js
+  checksum: 10/c25b7bac9c4da6610170994613c8b3e5b922272e6c9f347e75113a2fe1b5ca70f95293b031f76b5a2a514d9b4dd0df2886dc5913740a8f90e113006981d7f9e5
+  languageName: node
+  linkType: hard
+
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -18306,6 +18333,13 @@ __metadata:
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: 10/fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
+  languageName: node
+  linkType: hard
+
+"object-hash@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "object-hash@npm:3.0.0"
+  checksum: 10/f498d456a20512ba7be500cef4cf7b3c183cc72c65372a549c9a0e6dd78ce26f375e9b1315c07592d3fde8f10d5019986eba35970570d477ed9a2a702514432a
   languageName: node
   linkType: hard
 

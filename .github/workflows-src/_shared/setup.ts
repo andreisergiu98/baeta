@@ -7,7 +7,7 @@ import {
 	joinStrings,
 } from 'github-actions-workflow-builder/lib/expression';
 
-const turboCaches = {
+export const turboCaches = {
 	build: 'build',
 	types: 'types',
 	deps: 'deps',
@@ -17,12 +17,21 @@ const turboCaches = {
 	examples: 'examples-build',
 } as const;
 
+type TurboCache = (typeof turboCaches)[keyof typeof turboCaches];
+
 export const DEFAULT_NODE = '24';
 
-export function setupNode(
-	nodeVersion: string | Expression<string>,
-	turboCache?: keyof typeof turboCaches,
-): Steps {
+interface SetupNodeOptions {
+	nodeVersion?: string | Expression<string>;
+	turboCache?: TurboCache;
+	disableYarnCache?: boolean;
+	skipInstall?: boolean;
+}
+
+export function setupNode(options: SetupNodeOptions = {}): Steps {
+	const nodeVersion = options.nodeVersion ?? DEFAULT_NODE;
+	const turboNamespace = options.turboCache;
+
 	return ({ use, run }) => {
 		use('actions/checkout@v6');
 
@@ -40,31 +49,38 @@ export function setupNode(
 			},
 		);
 
-		const yarnDir = run<{
-			dir: string;
-		}>('Get yarn cache directory', `echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT`, {
-			shell: 'bash',
-		});
+		if (!options.disableYarnCache) {
+			const yarnDir = run<{
+				dir: string;
+			}>(
+				'Get yarn cache directory',
+				`echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT`,
+				{
+					shell: 'bash',
+				},
+			);
 
-		use('actions/cache@v5', {
-			with: {
-				path: interpolate`${yarnDir.outputs.dir}`,
-				key: interpolate`yarn-cache-${runner.os}-${hashFiles('**/yarn.lock')}`,
-				'restore-keys': interpolate`yarn-cache-${runner.os}-`,
-			},
-		});
-
-		if (turboCache) {
-			const namespace = turboCaches[turboCache];
 			use('actions/cache@v5', {
 				with: {
-					path: '.turbo',
-					key: interpolate`turbo-${namespace}-${nodeVersion}-${runner.os}-${github.sha}`,
-					'restore-keys': interpolate`turbo-${namespace}-${nodeVersion}-${runner.os}-`,
+					path: interpolate`${yarnDir.outputs.dir}`,
+					key: interpolate`yarn-cache-${runner.os}-${hashFiles('**/yarn.lock')}`,
+					'restore-keys': interpolate`yarn-cache-${runner.os}-`,
 				},
 			});
 		}
 
-		run('yarn install');
+		if (turboNamespace) {
+			use('actions/cache@v5', {
+				with: {
+					path: '.turbo',
+					key: interpolate`turbo-${turboNamespace}-${nodeVersion}-${runner.os}-${github.sha}`,
+					'restore-keys': interpolate`turbo-${turboNamespace}-${nodeVersion}-${runner.os}-`,
+				},
+			});
+		}
+
+		if (!options.skipInstall) {
+			run('yarn install --immutable');
+		}
 	};
 }

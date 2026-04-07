@@ -9,7 +9,7 @@ import {
 	or,
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
-import { DEFAULT_NODE, setupNode } from './_shared/setup.ts';
+import { setupNode, turboCaches } from './_shared/setup.ts';
 
 const NODE_VERSIONS = ['22', '24', '25.6.1'];
 
@@ -36,55 +36,55 @@ export default createWorkflow(
 
 		const buildJob = addJob('build', ({ setName, add, run }) => {
 			setName('Check build');
-			add(setupNode(DEFAULT_NODE, 'build'));
+			add(setupNode({ turboCache: turboCaches.build }));
 			run('yarn build');
 		});
 
 		const typesJob = addJob('types', ({ setName, add, run }) => {
 			setName('Check types');
-			add(setupNode(DEFAULT_NODE, 'types'));
+			add(setupNode({ turboCache: turboCaches.types }));
 			run('yarn check:types');
 		});
 
 		const lintJob = addJob('lint', ({ setName, add, run }) => {
 			setName('Check linting');
-			add(setupNode(DEFAULT_NODE));
+			add(setupNode());
 			run('yarn check:linting');
 		});
 
 		addJob('formatting', ({ setName, add, run }) => {
 			setName('Check formatting');
-			add(setupNode(DEFAULT_NODE));
+			add(setupNode());
 			run('yarn check:formatting');
 		});
 
 		const depsJob = addJob('dependencies', ({ setName, add, run }) => {
 			setName('Check dependencies');
-			add(setupNode(DEFAULT_NODE, 'deps'));
+			add(setupNode({ turboCache: turboCaches.deps }));
 			run('yarn check:deps');
 		});
 
 		const circularDepsJob = addJob('circular-dependencies', ({ setName, add, run }) => {
 			setName('Check circular dependencies');
-			add(setupNode(DEFAULT_NODE, 'circular'));
+			add(setupNode({ turboCache: turboCaches.circular }));
 			run('yarn check:circular');
 		});
 
 		const constraintsJob = addJob('constraints', ({ setName, add, run }) => {
 			setName('Check package constraints');
-			add(setupNode(DEFAULT_NODE));
+			add(setupNode());
 			run('yarn check:constraints');
 		});
 
 		addJob('yarn-dedupe', ({ setName, add, run }) => {
 			setName('Check yarn dedupe');
-			add(setupNode(DEFAULT_NODE));
+			add(setupNode());
 			run('yarn dedupe --check');
 		});
 
 		const buildExamplesJob = addJob('build-examples', ({ setName, add, run }) => {
 			setName('Check examples');
-			add(setupNode(DEFAULT_NODE, 'examples'));
+			add(setupNode({ turboCache: turboCaches.examples }));
 			run('yarn examples:build');
 			run('yarn examples:types');
 		});
@@ -140,7 +140,7 @@ export default createWorkflow(
 				ports: ['60080:80'],
 			});
 
-			add(setupNode(matrix.node, 'tests'));
+			add(setupNode({ nodeVersion: matrix.node, turboCache: turboCaches.tests }));
 			run('yarn check:tests');
 		});
 
@@ -158,7 +158,7 @@ export default createWorkflow(
 			setName(`Check e2e tests (${matrix.machine} - Node ${matrix.node})`);
 			setMachineType(`${matrix.machine}`);
 
-			add(setupNode(matrix.node, 'e2e'));
+			add(setupNode({ nodeVersion: matrix.node, turboCache: turboCaches.e2e }));
 			run('yarn check:e2e');
 		});
 
@@ -184,7 +184,7 @@ export default createWorkflow(
 					});
 					addDependencies(...releaseDependencies);
 					setName('Publish packages or open PR');
-					add(setupNode(DEFAULT_NODE, 'build'));
+					add(setupNode({ turboCache: turboCaches.build }));
 					use('dotansimha/changesets-action@069996e9be15531bd598272996fa23853d61590e', {
 						with: {
 							// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
@@ -209,7 +209,7 @@ export default createWorkflow(
 				});
 				addDependencies(...releaseDependencies);
 				setName('Publish snapshot packages');
-				add(setupNode(DEFAULT_NODE, 'build'));
+				add(setupNode({ turboCache: turboCaches.build }));
 				const prIdJob = run<{ pr: number }>(
 					joinStrings(
 						[

@@ -1,35 +1,51 @@
+# !!! This file is auto-generated, do not edit by hand !!!
+# To make changes, edit .github/workflows-src/docs.ts and then run:
+#
+#   github-actions-workflow-builder --directory ".github/workflows-src"
+
 name: Deploy website
-
-permissions:
-  contents: write
-  pages: write
-  deployments: write
-
 on:
   push:
     branches:
       - next
     paths:
       - website/**
-  workflow_dispatch:
-
+  workflow_dispatch: null
 jobs:
   deploy:
     name: Deploy website
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-
-      - name: Setup env
-        uses: ./.github/actions/setup
-
-      - name: Build website
-        run: yarn docs:build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e #v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Get yarn cache directory
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_4
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.step_4.outputs.dir }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-${{ runner.os }}-
+      - run: yarn install
+      - run: yarn docs:build
+      - uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: write
+  pages: write
+  deployments: write

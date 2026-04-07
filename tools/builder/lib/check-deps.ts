@@ -18,6 +18,7 @@ export interface CheckDepsIssue {
 
 interface PackageOverride {
 	ignoreDeps?: string[];
+	ignoreMissingDeps?: string[];
 	ignoreDevDeps?: string[];
 }
 
@@ -42,6 +43,13 @@ const packageOverrides: Record<string, PackageOverride> = {
 	},
 	'@baeta/subscriptions-cloudflare': {
 		ignoreDevDeps: ['@cloudflare/workers-types'],
+	},
+	'@baeta/cache-cloudflare': {
+		ignoreMissingDeps: ['cloudflare:workers'],
+		ignoreDevDeps: ['@cloudflare/workers-types'],
+	},
+	'@baeta/extension-cache': {
+		ignoreDevDeps: ['graphql'],
 	},
 	'@baeta/subscriptions-pubsub': {
 		ignoreDevDeps: ['graphql'],
@@ -205,7 +213,7 @@ export function checkDependencies(
 					package: imp,
 					message: `'${imp}' is imported in source files but is only in devDependencies (should be in dependencies or peerDependencies)`,
 				});
-			} else {
+			} else if (!overrides?.ignoreMissingDeps?.includes(imp)) {
 				issues.push({
 					type: 'missing-dependency',
 					package: imp,
@@ -220,11 +228,13 @@ export function checkDependencies(
 			continue;
 		}
 		if (!devDeps.has(imp) && !deps.has(imp) && !peerDeps.has(imp)) {
-			issues.push({
-				type: 'missing-dev-dependency',
-				package: imp,
-				message: `'${imp}' is imported in test/dev files but not listed in devDependencies`,
-			});
+			if (!overrides?.ignoreMissingDeps?.includes(imp)) {
+				issues.push({
+					type: 'missing-dev-dependency',
+					package: imp,
+					message: `'${imp}' is imported in test/dev files but not listed in devDependencies`,
+				});
+			}
 		}
 	}
 

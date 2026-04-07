@@ -8621,6 +8621,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/wasm@npm:^1.3.18":
+  version: 1.15.24
+  resolution: "@swc/wasm@npm:1.15.24"
+  checksum: 10/c4936a51769116400b15a10d3a436dbdfd8f22d0ffa15c537e3fabfc891c3bf3a8c124d0a8b379b042d014baf99773ec6c7fda7f0859f3eb2599c42926d01df7
+  languageName: node
+  linkType: hard
+
 "@szmarczak/http-timer@npm:^4.0.5":
   version: 4.0.6
   resolution: "@szmarczak/http-timer@npm:4.0.6"
@@ -10518,6 +10525,7 @@ __metadata:
     "@types/node": "catalog:dev"
     "@yarnpkg/sdks": "npm:^3.2.3"
     "@yarnpkg/types": "npm:^4.0.1"
+    github-actions-workflow-builder: "npm:^4.1.0"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^16.4.0"
     prettier: "npm:^3.8.1"
@@ -14303,6 +14311,17 @@ __metadata:
   version: 4.2.1
   resolution: "git-hooks-list@npm:4.2.1"
   checksum: 10/39449520045539c03b1d45d3a010424849152d6f723b638c6f19cb8c8b0993bb30ed5ef09653f4d1c1356f5fb51a396059096d8bdfcb6ca7ccb54f6e26efc338
+  languageName: node
+  linkType: hard
+
+"github-actions-workflow-builder@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "github-actions-workflow-builder@npm:4.1.0"
+  dependencies:
+    "@swc/wasm": "npm:^1.3.18"
+  bin:
+    github-actions-workflow-builder: lib/cli.js
+  checksum: 10/437df72f0bd8ce838e6c3d60e844630540bd017964450850c28595e38f0a20bf2b0bf771cac6a4434eed5adaa77127ce721de75e1b161e02bfc901e6e678d745
   languageName: node
   linkType: hard
 

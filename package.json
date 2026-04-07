@@ -36,6 +36,8 @@
   ],
   "scripts": {
     "build": "turbo build --filter='./packages/*'",
+    "build:actions": "github-actions-workflow-builder --cleanup --directory .github/workflows-src",
+    "check:actions": "github-actions-workflow-builder --cleanup --check --directory .github/workflows-src",
     "check:circular": "turbo test:circular --filter='./packages/*'",
     "check:constraints": "yarn constraints",
     "check:deps": "turbo check:deps --filter='./packages/*'",
@@ -51,7 +53,7 @@
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:sync": "turbo gen examples && yarn examples:build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
-    "precommit": "lint-staged -c .lintstagedrc.json",
+    "precommit": "lint-staged -c .lintstagedrc.json && yarn check:actions",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -62,6 +64,7 @@
     "@types/node": "catalog:dev",
     "@yarnpkg/sdks": "^3.2.3",
     "@yarnpkg/types": "^4.0.1",
+    "github-actions-workflow-builder": "^4.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",

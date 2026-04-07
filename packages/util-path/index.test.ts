@@ -1,5 +1,5 @@
 import test from '@baeta/testing';
-import { join, normalize, posixPath, toUnix, winPath } from './index.ts';
+import { join, normalize, posixPath, winPath } from './index.ts';
 
 test('posixPath: should convert Windows path to POSIX path', (t) => {
 	const winStyle = 'foo\\bar\\baz';
@@ -42,10 +42,6 @@ test('join: should combine paths using forward slashes', (t) => {
 
 test('normalize: should normalize path with forward slashes', (t) => {
 	t.is(normalize('foo//bar/../baz'), 'foo/baz');
-});
-
-test('toUnix: should convert path to use forward slashes', (t) => {
-	t.is(toUnix('foo\\bar\\baz'), 'foo/bar/baz');
 });
 
 test('posixPath: should handle paths with multiple consecutive separators', (t) => {

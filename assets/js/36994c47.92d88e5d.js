@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_baeta_website=self.webpackChunk_baeta_website||[]).push([["20191"],{45516(e){e.exports=JSON.parse('{"name":"docusaurus-plugin-content-blog","id":"default"}')}}]);

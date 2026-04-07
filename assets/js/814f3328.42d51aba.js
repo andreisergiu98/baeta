@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_baeta_website=self.webpackChunk_baeta_website||[]).push([["61833"],{55513(e){e.exports=JSON.parse('{"title":"Recent posts","items":[]}')}}]);

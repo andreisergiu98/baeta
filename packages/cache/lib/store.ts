@@ -104,6 +104,17 @@ export class CacheStore<Item> {
 		return this.client.saveItems(entries, this.itemCacheArgs);
 	}
 
+	async saveIfNotExists(item: Item | Item[]) {
+		const values = toArray(item);
+		const entries: Array<[ItemCacheKey, Item]> = values.map((item) => [
+			this.getItemKey(item),
+			item,
+		]);
+		return this.client.saveItems(entries, this.itemCacheArgs, {
+			disableOverwrite: true,
+		});
+	}
+
 	async saveWithDiff(item: Item | Item[]): Promise<Array<Item | null>> {
 		const values = toArray(item);
 		const entries: Array<[ItemCacheKey, Item]> = values.map((item) => [
@@ -148,7 +159,7 @@ export class CacheStore<Item> {
 		return { query: result };
 	}
 
-	async saveQuery(query: QueryTagWithData<Item>): Promise<void> {
+	async saveQuery(query: QueryTagWithData<Item>, replaceExistingItems = false): Promise<void> {
 		const data = query.data;
 		const queryKey = this.getQueryKey(query);
 		const queryIndexes = this.getQueryIndexes(query, true);
@@ -158,7 +169,11 @@ export class CacheStore<Item> {
 		const items = nullableItems.filter((item) => item != null);
 
 		if (items.length > 0) {
-			await this.save(items);
+			if (replaceExistingItems) {
+				await this.save(items);
+			} else {
+				await this.saveIfNotExists(items);
+			}
 		}
 
 		const encodedRefs = nullableItems.map((item) => {

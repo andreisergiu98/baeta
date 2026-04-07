@@ -617,3 +617,90 @@ test('get - returns null when cached data is corrupt', async (t) => {
 	const result = await cache.get(item.id);
 	t.is(result, null);
 });
+
+/**
+ * Testing that query saves do not overwrite items that were updated independently,
+ * preventing a race condition where saveQuery could overwrite newer cache values with stale data.
+ */
+
+test('query does not overwrite items updated via cache.update', async (t) => {
+	const { client, cache, resolvers } = createTestCacheWithQueries();
+
+	// 1. Populate the query cache
+	const result1 = await cache.queries.findUser({ id: '1' });
+	t.deepEqual(result1, { id: '1', name: 'Name 1', orgId: 'org1' });
+	t.is(resolvers.findUser.callCount, 1);
+
+	// 2. Update the item directly — this simulates a concurrent mutation
+	await cache.update({ id: '1', name: 'Updated Name', orgId: 'org1' }, { waitForHooks: true });
+
+	// 3. Verify the item in cache is updated
+	const updatedItem = await cache.get('1');
+	t.deepEqual(updatedItem, { id: '1', name: 'Updated Name', orgId: 'org1' });
+
+	// 4. Clear query metadata to force re-resolution (simulating query cache miss)
+	client.queryMeta.clear();
+	client.queryIndexes.clear();
+
+	// 5. Re-resolve the query — resolver returns original stale data
+	const result2 = await cache.queries.findUser({ id: '1' });
+	t.deepEqual(result2, { id: '1', name: 'Name 1', orgId: 'org1' });
+	t.is(resolvers.findUser.callCount, 2);
+
+	// 6. The item in cache should still be the updated value, NOT overwritten by stale query data
+	const itemAfterQuery = await cache.get('1');
+	t.deepEqual(itemAfterQuery, { id: '1', name: 'Updated Name', orgId: 'org1' });
+});
+
+test('query overwrites items when replaceExistingItems is set', async (t) => {
+	const database = [
+		{ id: '1', name: 'Name 1', orgId: 'org1' },
+		{ id: '2', name: 'Name 2', orgId: 'org2' },
+	];
+
+	const client = new MockCacheClient();
+	const resolver = stubResolver(async (args: { id: string }) => {
+		return database.find((item) => item.id === args.id) ?? null;
+	});
+
+	const cache = createCache<TestItem>(client, {
+		name: 'test',
+		parse: (v) => JSON.parse(v) as TestItem,
+		serialize: (v) => JSON.stringify(v),
+		getRef: (item) => item.id,
+	})
+		.withQueries({
+			findUser: defineQuery({
+				resolve: resolver,
+				replaceExistingItems: true,
+				indexArgsBy: { id: true },
+				onInsert(values, helpers) {
+					return helpers.invalidateByArgs(values.map(({ id }) => ({ id })));
+				},
+				onDelete(refs, helpers) {
+					return helpers.invalidateByArgs(refs.map(({ ref }) => ({ id: ref.toString() })));
+				},
+			}),
+		})
+		.build();
+
+	// 1. Populate the query cache
+	const result1 = await cache.queries.findUser({ id: '1' });
+	t.deepEqual(result1, { id: '1', name: 'Name 1', orgId: 'org1' });
+
+	// 2. Update the item directly
+	await cache.update({ id: '1', name: 'Updated Name', orgId: 'org1' }, { waitForHooks: true });
+	const updatedItem = await cache.get('1');
+	t.deepEqual(updatedItem, { id: '1', name: 'Updated Name', orgId: 'org1' });
+
+	// 3. Clear query metadata to force re-resolution
+	client.queryMeta.clear();
+	client.queryIndexes.clear();
+
+	// 4. Re-resolve — with replaceExistingItems, stale data SHOULD overwrite
+	await cache.queries.findUser({ id: '1' });
+
+	// 5. The item should be overwritten with the stale query data
+	const itemAfterQuery = await cache.get('1');
+	t.deepEqual(itemAfterQuery, { id: '1', name: 'Name 1', orgId: 'org1' });
+});

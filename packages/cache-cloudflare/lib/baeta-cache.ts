@@ -24,7 +24,7 @@ export class BaetaCache extends DurableObject {
 		this.migrate();
 		this.handler = createActionsRequestHandler(actions, {
 			getPartialItems: (args) => this.getPartialItems(args.keys),
-			saveItems: (args) => this.saveItems(args.items, args.expiresAt),
+			saveItems: (args) => this.saveItems(args.items, args.expiresAt, args.disableOverwrite),
 			saveItemsWithDiff: (args) => this.saveItemsWithDiff(args.items, args.expiresAt),
 			deleteItems: (args) => this.deleteItems(args.keys),
 			deleteItemsWithDiff: (args) => this.deleteItemsWithDiff(args.keys),
@@ -84,11 +84,12 @@ export class BaetaCache extends DurableObject {
 		return results;
 	}
 
-	async saveItems(items: Array<[string, string]>, expiresAt: number) {
+	async saveItems(items: Array<[string, string]>, expiresAt: number, disableOverwrite: boolean) {
+		const verb = disableOverwrite ? 'INSERT OR IGNORE' : 'INSERT OR REPLACE';
 		for (const batch of batchByParams(items, 3)) {
 			const placeholders = batch.map(() => '(?, ?, ?)').join(',');
 			this.sql.exec(
-				`INSERT OR REPLACE INTO items (key, value, expires_at) VALUES ${placeholders}`,
+				`${verb} INTO items (key, value, expires_at) VALUES ${placeholders}`,
 				...batch.flatMap(([key, value]) => [key, value, expiresAt]),
 			);
 		}

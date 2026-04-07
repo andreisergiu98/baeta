@@ -1,5 +1,6 @@
 import type {
 	CacheClientArgs,
+	CacheClientSaveOptions,
 	ItemCacheKey,
 	QueryCacheIndexKey,
 	QueryCacheKey,
@@ -30,6 +31,7 @@ export class CloudflareCacheClient extends CacheClient {
 	async saveItems<Item>(
 		items: Array<[ItemCacheKey, Item]>,
 		options: CacheClientArgs<Item>,
+		saveOptions: CacheClientSaveOptions = {},
 	): Promise<void> {
 		if (items.length === 0) {
 			return;
@@ -38,6 +40,7 @@ export class CloudflareCacheClient extends CacheClient {
 		await this.client.saveItems({
 			items: items.map(([key, value]) => [key, options.serialize(value)]),
 			expiresAt,
+			disableOverwrite: saveOptions.disableOverwrite ?? false,
 		});
 	}
 

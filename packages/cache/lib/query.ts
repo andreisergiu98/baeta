@@ -74,6 +74,7 @@ export type QueryOptions<
 	indexArgsBy?: Indexes;
 	ttlMs?: number;
 	revision?: number;
+	replaceExistingItems?: boolean;
 	onUpdate?: (
 		pairs: Array<{ next: Item; previous: Item | null }>,
 		helpers: QueryHelpers<Args, Indexes>,

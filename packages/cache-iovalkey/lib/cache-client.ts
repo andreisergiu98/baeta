@@ -1,4 +1,9 @@
-import type { ItemCacheKey, QueryCacheIndexKey, QueryCacheKey } from '@baeta/cache';
+import type {
+	CacheClientSaveOptions,
+	ItemCacheKey,
+	QueryCacheIndexKey,
+	QueryCacheKey,
+} from '@baeta/cache';
 import { CacheClient, type CacheClientArgs, type CacheClientOptions } from '@baeta/cache';
 import { doBatched } from '@baeta/cache/sdk';
 import {
@@ -79,6 +84,7 @@ export class ValkeyCacheClient extends CacheClient {
 	async saveItems<Item>(
 		items: Array<[ItemCacheKey, Item]>,
 		options: CacheClientArgs<Item>,
+		saveOptions: CacheClientSaveOptions = {},
 	): Promise<void> {
 		if (items.length === 0) {
 			return;
@@ -91,7 +97,12 @@ export class ValkeyCacheClient extends CacheClient {
 		await batchPipeline({
 			makePipeline: () => this.valkey.pipeline(),
 			addCommand: (pipeline, item) => {
-				pipeline.set(item.key, item.value, 'PXAT', expiresAt);
+				if (saveOptions.disableOverwrite !== true) {
+					pipeline.set(item.key, item.value, 'PXAT', expiresAt);
+				} else {
+					pipeline.setnx(item.key, item.value);
+					pipeline.pexpireat(item.key, expiresAt);
+				}
 			},
 			executePipeline: async (pipeline) => {
 				const result = await pipeline.exec();

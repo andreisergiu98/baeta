@@ -25,6 +25,14 @@ export interface CacheClientOptions {
 	namespace?: string;
 }
 
+export interface CacheClientSaveOptions {
+	/**
+	 * If true, the save operation will not overwrite existing cache entries. Instead, it will only save entries that do not already exist in the cache.
+	 * @defaultValue false
+	 */
+	disableOverwrite?: boolean;
+}
+
 export abstract class CacheClient {
 	options?: CacheClientOptions;
 
@@ -40,6 +48,7 @@ export abstract class CacheClient {
 	abstract saveItems<Item>(
 		items: Array<[ItemCacheKey, Item]>,
 		options: CacheClientArgs<Item>,
+		saveOptions?: CacheClientSaveOptions,
 	): Promise<void>;
 
 	abstract saveItemsWithDiff<Item>(

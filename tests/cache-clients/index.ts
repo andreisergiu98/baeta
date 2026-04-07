@@ -458,6 +458,52 @@ export function runTestsForClient(
 		}
 	});
 
+	test(`${name} saveItems with disableOverwrite does not overwrite existing items`, async (t) => {
+		const client = await createClient();
+		const { values, keys, valueTuples } = mockItems(5);
+		await client.saveItems(valueTuples, itemArgs);
+
+		const updatedTuples = valueTuples.map(
+			([key, item]) => [key, { ...item, name: 'Updated' }] as [ItemCacheKey, TestItem],
+		);
+		await client.saveItems(updatedTuples, itemArgs, { disableOverwrite: true });
+
+		const results = await client.getPartialItems(keys, itemArgs);
+		t.deepEqual(results, values);
+	});
+
+	test(`${name} saveItems with disableOverwrite saves new items`, async (t) => {
+		const client = await createClient();
+		const { values, keys, valueTuples } = mockItems(5);
+		await client.saveItems(valueTuples, itemArgs, { disableOverwrite: true });
+
+		const results = await client.getPartialItems(keys, itemArgs);
+		t.deepEqual(results, values);
+	});
+
+	test(`${name} saveItems with disableOverwrite handles mix of new and existing`, async (t) => {
+		const client = await createClient();
+		const { values, valueTuples } = mockItems(6);
+
+		// Save first 3 items normally
+		await client.saveItems(valueTuples.slice(0, 3), itemArgs);
+
+		// Try to save all 6 with disableOverwrite — first 3 should be preserved, last 3 saved
+		const updatedTuples = valueTuples.map(
+			([key, item]) => [key, { ...item, name: 'Updated' }] as [ItemCacheKey, TestItem],
+		);
+		await client.saveItems(updatedTuples, itemArgs, { disableOverwrite: true });
+
+		const allKeys = valueTuples.map(([key]) => key);
+		const results = await client.getPartialItems(allKeys, itemArgs);
+
+		// First 3 should be original values, last 3 should be the "Updated" values
+		t.deepEqual(results, [
+			...values.slice(0, 3),
+			...values.slice(3).map((v) => ({ ...v, name: 'Updated' })),
+		]);
+	});
+
 	test.serial(`${name} item operations don't fail for large volumes`, async (t) => {
 		t.timeout(60_000);
 

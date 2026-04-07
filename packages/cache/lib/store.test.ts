@@ -154,6 +154,41 @@ test('delete - item no longer retrievable', async (t) => {
 	t.is(result, null);
 });
 
+test('saveIfNotExists - saves new items', async (t) => {
+	const { store } = createTestStore();
+	await store.saveIfNotExists([
+		{ id: '1', name: 'Alice' },
+		{ id: '2', name: 'Bob' },
+	]);
+	const result = await store.getMany(['1', '2']);
+	t.deepEqual(result, [
+		{ id: '1', name: 'Alice' },
+		{ id: '2', name: 'Bob' },
+	]);
+});
+
+test('saveIfNotExists - does not overwrite existing items', async (t) => {
+	const { store } = createTestStore();
+	await store.save({ id: '1', name: 'Alice' });
+	await store.saveIfNotExists({ id: '1', name: 'Updated Alice' });
+	const result = await store.get('1');
+	t.deepEqual(result, { id: '1', name: 'Alice' });
+});
+
+test('saveIfNotExists - handles mix of new and existing items', async (t) => {
+	const { store } = createTestStore();
+	await store.save({ id: '1', name: 'Alice' });
+	await store.saveIfNotExists([
+		{ id: '1', name: 'Updated Alice' },
+		{ id: '2', name: 'Bob' },
+	]);
+	const result = await store.getMany(['1', '2']);
+	t.deepEqual(result, [
+		{ id: '1', name: 'Alice' },
+		{ id: '2', name: 'Bob' },
+	]);
+});
+
 test('saveQuery - submits query with single item', async (t) => {
 	const { store } = createTestStore();
 	const item = { id: '1', name: 'Alice' };
@@ -214,6 +249,37 @@ test('saveQuery - submits query with nullable items', async (t) => {
 	if (result) {
 		t.deepEqual(result.query, data);
 	}
+});
+
+test('saveQuery - does not overwrite existing items by default', async (t) => {
+	const { store } = createTestStore();
+	await store.save({ id: '1', name: 'Updated Alice' });
+	await store.saveQuery({
+		name: 'findUser',
+		revision: undefined,
+		args: { name: 'Alice' },
+		indexes: [],
+		data: { id: '1', name: 'Alice' },
+	});
+	const result = await store.get('1');
+	t.deepEqual(result, { id: '1', name: 'Updated Alice' });
+});
+
+test('saveQuery - overwrites existing items when replaceExistingItems is true', async (t) => {
+	const { store } = createTestStore();
+	await store.save({ id: '1', name: 'Updated Alice' });
+	await store.saveQuery(
+		{
+			name: 'findUser',
+			revision: undefined,
+			args: { name: 'Alice' },
+			indexes: [],
+			data: { id: '1', name: 'Alice' },
+		},
+		true,
+	);
+	const result = await store.get('1');
+	t.deepEqual(result, { id: '1', name: 'Alice' });
 });
 
 test('getQuery - returns null for cache miss', async (t) => {

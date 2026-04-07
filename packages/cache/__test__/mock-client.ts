@@ -1,5 +1,5 @@
 import test from '@baeta/testing';
-import type { CacheClientArgs } from '../lib/client.ts';
+import type { CacheClientArgs, CacheClientSaveOptions } from '../lib/client.ts';
 import { CacheClient } from '../lib/client.ts';
 import type { ItemCacheKey, QueryCacheIndexKey, QueryCacheKey } from '../lib/key.ts';
 
@@ -26,8 +26,12 @@ export class MockCacheClient extends CacheClient {
 	async saveItems<Item>(
 		items: Array<[ItemCacheKey, Item]>,
 		options: CacheClientArgs<Item>,
+		saveOptions?: CacheClientSaveOptions,
 	): Promise<void> {
 		for (const [key, value] of items) {
+			if (saveOptions?.disableOverwrite && this.items.has(key)) {
+				continue;
+			}
 			this.items.set(key, options.serialize(value));
 		}
 	}

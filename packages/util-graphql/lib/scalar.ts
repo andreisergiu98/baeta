@@ -1,5 +1,5 @@
 import type { NamedTypeNode } from 'graphql';
-import type { DefinitionsMap } from '../lib/visitors/definitions-map.ts';
+import type { DefinitionsMap } from './definitions-map.ts';
 
 export function isScalarType(
 	definitionsMap: DefinitionsMap,

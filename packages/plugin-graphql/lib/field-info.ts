@@ -1,6 +1,5 @@
+import { type DefinitionsMap, isScalarType } from '@baeta/util-graphql';
 import { Kind, type TypeNode } from 'graphql';
-import { isScalarType } from '../../utils/scalar.ts';
-import type { DefinitionsMap } from './definitions-map.ts';
 
 export type FieldInfoMap = Map<string, Map<string, { type: string; hasArguments: boolean }>>;
 

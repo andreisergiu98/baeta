@@ -2767,10 +2767,8 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-graphql": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@graphql-tools/graphql-file-loader": "npm:^8.1.12"
-    "@graphql-tools/load": "npm:^8.1.8"
-    "@graphql-tools/utils": "npm:^11.0.0"
     "@types/node": "catalog:dev"
     change-case-all: "npm:2.1.0"
     graphql: "catalog:dev"
@@ -2941,6 +2939,25 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/util-graphql@workspace:^, @baeta/util-graphql@workspace:packages/util-graphql":
+  version: 0.0.0-use.local
+  resolution: "@baeta/util-graphql@workspace:packages/util-graphql"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
+    "@graphql-tools/graphql-file-loader": "npm:^8.1.12"
+    "@graphql-tools/load": "npm:^8.1.8"
+    "@graphql-tools/utils": "npm:^11.0.0"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  peerDependencies:
+    graphql: ^16.6.0
   languageName: unknown
   linkType: soft
 

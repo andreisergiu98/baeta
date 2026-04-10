@@ -1,4 +1,4 @@
-import { readFile, stat, writeFile } from 'node:fs/promises';
+import { open, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { Configuration, Project, structUtils } from '@yarnpkg/core';
 import { npath, ppath } from '@yarnpkg/fslib';
@@ -167,27 +167,25 @@ async function loadCatalogs(project: Project): Promise<{
 	const projectCwd = npath.fromPortablePath(project.cwd);
 	const yarnRcPath = path.join(projectCwd, '.yarnrc.yml');
 
-	const exists = await stat(yarnRcPath)
-		.then((stat) => stat.isFile())
-		.catch(() => false);
+	try {
+		const fd = await open(yarnRcPath, 'r');
+		const yarnRcContent = await fd.readFile('utf8');
+		await fd.close();
 
-	if (!exists) {
+		const yarnRc = YarnRcSchema.parse(parseYaml(yarnRcContent));
+		const defaultCatalog = new Map<string, string>(Object.entries(yarnRc.catalog ?? {}));
+		const namedCatalogs = new Map<string, Map<string, string>>(
+			Object.entries(yarnRc.catalogs ?? {}).map(([name, entries]) => [
+				name,
+				new Map(Object.entries(entries)),
+			]),
+		);
+
+		return { defaultCatalog, namedCatalogs };
+	} catch {
 		return {
 			defaultCatalog: new Map<string, string>(),
 			namedCatalogs: new Map<string, Map<string, string>>(),
 		};
 	}
-
-	const yarnRcContent = await readFile(yarnRcPath, 'utf8');
-	const yarnRc = YarnRcSchema.parse(parseYaml(yarnRcContent));
-
-	const defaultCatalog = new Map<string, string>(Object.entries(yarnRc.catalog ?? {}));
-	const namedCatalogs = new Map<string, Map<string, string>>(
-		Object.entries(yarnRc.catalogs ?? {}).map(([name, entries]) => [
-			name,
-			new Map(Object.entries(entries)),
-		]),
-	);
-
-	return { defaultCatalog, namedCatalogs };
 }

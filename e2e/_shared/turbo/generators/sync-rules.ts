@@ -99,6 +99,16 @@ export const syncRules: SyncRule[] = [
 	merge(
 		{
 			from: '_shared/base',
+			to: 'plugins-pagination',
+			files: [...movieModuleFiles, ...allTypes],
+		},
+		{},
+	),
+	merge({ from: '_shared/base', to: 'plugins-exec' }, allModulesAndTypes),
+	merge({ from: '_shared/base', to: 'plugins-gitignore' }, allModulesAndTypes),
+	merge(
+		{
+			from: '_shared/base',
 			to: 'plugins-directives',
 			files: [
 				...reviewModuleFiles,

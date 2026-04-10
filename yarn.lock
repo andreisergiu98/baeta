@@ -2113,6 +2113,66 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/e2e-plugins-exec@workspace:e2e/plugins-exec":
+  version: 0.0.0-use.local
+  resolution: "@baeta/e2e-plugins-exec@workspace:e2e/plugins-exec"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/e2e-shared": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-exec": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@graphql-codegen/cli": "catalog:dev"
+    "@graphql-codegen/client-preset": "catalog:dev"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/e2e-plugins-gitignore@workspace:e2e/plugins-gitignore":
+  version: 0.0.0-use.local
+  resolution: "@baeta/e2e-plugins-gitignore@workspace:e2e/plugins-gitignore"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/e2e-shared": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-gitignore": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@graphql-codegen/cli": "catalog:dev"
+    "@graphql-codegen/client-preset": "catalog:dev"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/e2e-plugins-pagination@workspace:e2e/plugins-pagination":
+  version: 0.0.0-use.local
+  resolution: "@baeta/e2e-plugins-pagination@workspace:e2e/plugins-pagination"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/e2e-shared": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/plugin-pagination": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@graphql-codegen/cli": "catalog:dev"
+    "@graphql-codegen/client-preset": "catalog:dev"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/e2e-scalars@workspace:e2e/scalars":
   version: 0.0.0-use.local
   resolution: "@baeta/e2e-scalars@workspace:e2e/scalars"
@@ -2686,7 +2746,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/plugin-gitignore@workspace:packages/plugin-gitignore":
+"@baeta/plugin-gitignore@workspace:^, @baeta/plugin-gitignore@workspace:packages/plugin-gitignore":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-gitignore@workspace:packages/plugin-gitignore"
   dependencies:

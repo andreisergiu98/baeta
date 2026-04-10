@@ -26,6 +26,7 @@
     "camelcase",
     "clsx",
     "codegen",
+    "cooldown",
     "datamodel",
     "dirpath",
     "evalsha",

@@ -9,7 +9,7 @@ export function createFieldInfoMap(definitionsMap: DefinitionsMap, defaultScalar
 		const objectName = objectType.name.value;
 		for (const field of objectType.fields ?? []) {
 			const fieldName = field.name.value;
-			const type = printNamedType(definitionsMap, defaultScalars, field.type, true);
+			const type = printNamedType(definitionsMap, defaultScalars, field.type);
 			const hasArguments = field.arguments != null && field.arguments.length > 0;
 			const fieldMap = map.get(objectName) ?? new Map();
 			fieldMap.set(fieldName, { type, hasArguments });
@@ -33,7 +33,7 @@ function printNamedType(
 			}
 			return `Types.${type.name.value}${withNullable}`;
 		case Kind.LIST_TYPE:
-			return `Array<${printNamedType(definitionsMap, defaultScalars, type.type, nullable)}>${withNullable}`;
+			return `Array<${printNamedType(definitionsMap, defaultScalars, type.type)}>${withNullable}`;
 		case Kind.NON_NULL_TYPE:
 			return printNamedType(definitionsMap, defaultScalars, type.type, false);
 		default:

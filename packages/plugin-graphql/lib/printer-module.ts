@@ -287,7 +287,7 @@ function getArgsType(config: ModulePrinterConfig, type: string, field: string) {
 	if (!hasArgs) {
 		return '{}';
 	}
-	const fieldUpper = field[0].toUpperCase() + field.slice(1);
+	const fieldUpper = pascalCase(field);
 	return `Types.${type}${fieldUpper}Args`;
 }
 

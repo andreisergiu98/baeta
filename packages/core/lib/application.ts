@@ -1,5 +1,4 @@
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
-import { pruneSchema } from '@graphql-tools/utils';
 import {
 	type ModuleCompiler,
 	type ModuleCompilerFactory,
@@ -24,13 +23,6 @@ export interface Options<Context, Info> {
 	 * ```
 	 */
 	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>;
-
-	/**
-	 * When true, removes fields that don't have corresponding resolvers.
-	 *
-	 * @defaultValue false
-	 */
-	pruneSchema?: boolean;
 
 	/**
 	 * Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
@@ -88,9 +80,6 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	let schema = makeSchema(typeDefs, resolvers, options.executableSchemaOptions);
 	schema = transformSchema(schema, transformers);
 	schema = addValidationToSchema(schema);
-	if (options.pruneSchema) {
-		schema = pruneSchema(schema);
-	}
 	for (const ext of extensions) {
 		ext.setSchema(schema);
 	}

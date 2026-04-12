@@ -1,6 +1,6 @@
 {
-  "name": "@baeta/plugin-graphql",
-  "version": "2.0.0-next.12",
+  "name": "@baeta/util-graphql",
+  "version": "2.0.0-next.1",
   "keywords": [
     "baeta",
     "graphql",
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/plugin-graphql"
+    "directory": "packages/util-graphql"
   },
   "license": "MIT",
   "author": {
@@ -51,10 +51,10 @@
     }
   },
   "dependencies": {
-    "@baeta/generator-sdk": "workspace:^",
-    "@baeta/util-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "change-case-all": "2.1.0"
+    "@graphql-tools/graphql-file-loader": "^8.1.12",
+    "@graphql-tools/load": "^8.1.8",
+    "@graphql-tools/utils": "^11.0.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

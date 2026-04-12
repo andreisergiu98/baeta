@@ -1,9 +1,16 @@
 import type { File, FileOptions, NormalizedGeneratorOptions } from '@baeta/generator-sdk';
+import {
+	createDefinitionsMapFromDocument,
+	createDefinitionsMapFromSources,
+	createModuleRegistry,
+	getSourcesFromSchema,
+	groupSourcesByModule,
+	loadSchema,
+} from '@baeta/util-graphql';
 import { join } from '@baeta/util-path';
 import { concatAST } from 'graphql';
-import { loadSchema } from '../utils/load.ts';
-import { getSourcesFromSchema, groupSourcesByModule } from '../utils/source.ts';
-import { printAutoload } from './printer/printer-autoload.ts';
+import { createFieldInfoMap } from './field-info.ts';
+import { printAutoload } from './printer-autoload.ts';
 import {
 	type ModulePrinterConfig,
 	printBaetaModuleTypes,
@@ -12,8 +19,8 @@ import {
 	printModuleIndexStarter,
 	printModuleMetadata,
 	printModuleObjectTypeFields,
-} from './printer/printer-module.ts';
-import { printExtensionsTemplate, printTypesTemplate } from './printer/printer-templates.ts';
+} from './printer-module.ts';
+import { printExtensionsTemplate, printTypesTemplate } from './printer-templates.ts';
 import {
 	type PrinterConfig,
 	printBaseObjectTypes,
@@ -27,13 +34,7 @@ import {
 	printTypesHeaders,
 	printUnionTypesFromMap,
 	printUtilityTypes,
-} from './printer/printer-types.ts';
-import {
-	createDefinitionsMapFromDocument,
-	createDefinitionsMapFromSources,
-} from './visitors/definitions-map.ts';
-import { createFieldInfoMap } from './visitors/field-info.ts';
-import { createModuleRegistry } from './visitors/module-registry.ts';
+} from './printer-types.ts';
 
 type GeneratedFile = {
 	filename: string;

@@ -1,0 +1,14 @@
+{
+  "extends": "@baeta/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "dist"
+  ]
+}

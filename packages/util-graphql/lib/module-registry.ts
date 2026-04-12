@@ -89,13 +89,13 @@ function collectUnionTypes(node: UnionTypeDefinitionNode, picks: Picks) {
 	}
 }
 
-export function pushUnique<T>(list: T[], item: T): void {
+function pushUnique<T>(list: T[], item: T): void {
 	if (!list.includes(item)) {
 		list.push(item);
 	}
 }
 
-export function createObject<K extends string, T>(keys: K[], valueFn: (key: K) => T) {
+function createObject<K extends string, T>(keys: K[], valueFn: (key: K) => T) {
 	const obj: Record<K, T> = {} as Record<K, T>;
 	for (const key of keys) {
 		obj[key] = valueFn(key);

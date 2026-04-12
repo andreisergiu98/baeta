@@ -41,6 +41,9 @@ const packageOverrides: Record<string, PackageOverride> = {
 	'@baeta/plugin-cloudflare': {
 		ignoreDevDeps: ['@cloudflare/workers-types', 'graphql'],
 	},
+	'@baeta/util-graphql': {
+		ignoreDevDeps: ['@types/node'],
+	},
 	'@baeta/subscriptions-cloudflare': {
 		ignoreDevDeps: ['@cloudflare/workers-types'],
 	},

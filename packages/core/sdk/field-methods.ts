@@ -11,10 +11,19 @@ export type Field<Expected, Result, Source, Context, Args, Info> = FieldHelpers<
 	Info
 >;
 
-export type FieldMethods<Result, Source, Context, Args, Info> = {
+export type FieldMethods<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	ModuleName extends string,
+	TypeName extends string,
+	FieldName extends string,
+> = {
 	$use: (
 		middleware: Middleware<Result, Source, Context, Args, Info>,
-	) => FieldMethods<Result, Source, Context, Args, Info>;
+	) => FieldMethods<Result, Source, Context, Args, Info, ModuleName, TypeName, FieldName>;
 	key: <K extends keyof Source>(key: K) => Field<Result, Source[K], Source, Context, Args, Info>;
 	map: <T = Result>(
 		resolver: Resolver<T, Source, Context, Args, Info>,
@@ -22,7 +31,16 @@ export type FieldMethods<Result, Source, Context, Args, Info> = {
 	resolve: (
 		resolver: Resolver<Result, Source, Context, Args, Info>,
 	) => Field<Result, Result, Source, Context, Args, Info>;
-} & BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info>;
+} & BaetaExtensions.FieldExtensions<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	ModuleName,
+	TypeName,
+	FieldName
+>;
 
 export type FieldHelpers<Expected, Result, Source, Context, Args, Info> = {
 	map: <T = Expected>(

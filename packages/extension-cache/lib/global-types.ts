@@ -11,7 +11,13 @@ import type { RefCompatibleItem } from '../../cache/lib/item.ts';
 
 declare global {
 	export namespace BaetaExtensions {
-		export interface TypeExtensions<Source, Context, Info> {
+		export interface TypeExtensions<
+			Source,
+			Context,
+			Info,
+			ModuleName extends string,
+			TypeName extends string,
+		> {
 			/**
 			 * Creates a cache store for a specific type with optional query definitions.
 			 *
@@ -38,7 +44,16 @@ declare global {
 			) => CreateCacheFactory<Source>;
 		}
 
-		export interface FieldExtensions<Result, Source, Context, Args, Info> {
+		export interface FieldExtensions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			ModuleName extends string,
+			TypeName extends string,
+			FieldName extends string,
+		> {
 			/**
 			 * Resolves a field using a cached query.
 			 *

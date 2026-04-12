@@ -8,9 +8,12 @@ export interface TypeBuilderOptions<
 	Source,
 	Context,
 	Info,
+	ModuleName extends string,
+	TypeName extends string,
 	FieldsBuilders extends FieldsBuildersMap<Source, Context, Info> = any,
 > {
-	type: string;
+	module: ModuleName;
+	type: TypeName;
 	fieldBuilders: Readonly<FieldsBuilders>;
 	extensions: ReadonlyArray<Extension>;
 	store: Map<symbol, Readonly<unknown>>;
@@ -21,21 +24,31 @@ export class TypeBuilder<
 	Source,
 	Context,
 	Info,
+	ModuleName extends string,
+	TypeName extends string,
 	FieldsBuilders extends FieldsBuildersMap<Source, Context, Info> = any,
 	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = any,
 > {
-	readonly #type: string;
+	readonly #module: ModuleName;
+	readonly #type: TypeName;
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #fieldBuilders: Readonly<FieldsBuilders>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly #extensions: ReadonlyArray<Extension>;
 
-	constructor(options: TypeBuilderOptions<Source, Context, Info, FieldsBuilders>) {
+	constructor(
+		options: TypeBuilderOptions<Source, Context, Info, ModuleName, TypeName, FieldsBuilders>,
+	) {
+		this.#module = options.module;
 		this.#type = options.type;
 		this.#fieldBuilders = options.fieldBuilders;
 		this.#extensions = options.extensions;
 		this.#store = new Map(options.store);
 		this.#middlewares = [...options.middlewares];
+	}
+
+	get module() {
+		return this.#module;
 	}
 
 	get type() {
@@ -65,6 +78,7 @@ export class TypeBuilder<
 			},
 			commit: () =>
 				new TypeBuilder({
+					module: this.#module,
 					type: this.#type,
 					fieldBuilders: this.#fieldBuilders,
 					extensions: this.#extensions,
@@ -76,10 +90,18 @@ export class TypeBuilder<
 		return session;
 	}
 
-	toMethods(): TypeMethods<Source, Context, Info, FieldsBuilders, FieldsResolvers> {
+	toMethods(): TypeMethods<
+		Source,
+		Context,
+		Info,
+		ModuleName,
+		TypeName,
+		FieldsBuilders,
+		FieldsResolvers
+	> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getTypeExtensions(this),
-		) as unknown as BaetaExtensions.TypeExtensions<Source, Context, Info>;
+		) as unknown as BaetaExtensions.TypeExtensions<Source, Context, Info, ModuleName, TypeName>;
 		return {
 			...extensions,
 			...this.#fieldBuilders,

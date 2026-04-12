@@ -13,6 +13,8 @@ type MockModuleBuilders<Keys extends string> = {
 			MockSource,
 			MockContext,
 			MockInfo,
+			string,
+			string,
 			MockTypeBuilders['Builder'],
 			MockTypeBuilders['Resolvers']
 		>;
@@ -22,6 +24,7 @@ type MockModuleBuilders<Keys extends string> = {
 			MockSource,
 			MockContext,
 			MockInfo,
+			string,
 			MockTypeBuilders['Resolvers']
 		>;
 	};
@@ -31,6 +34,7 @@ export function mockModuleBuilder() {
 	return new ModuleBuilder<
 		MockContext,
 		MockInfo,
+		string,
 		MockModuleBuilders<'Type1' | 'Type2'>['Builder'],
 		MockModuleBuilders<'Type1' | 'Type2'>['Resolvers']
 	>({

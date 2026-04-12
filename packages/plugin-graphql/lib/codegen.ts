@@ -157,8 +157,8 @@ export async function generate(
 			content: [
 				printModuleImports(config, module),
 				printModuleMetadata(module, document),
-				printBaetaModuleTypes(config),
-				printModuleObjectTypeFields(config),
+				printBaetaModuleTypes(config, module),
+				printModuleObjectTypeFields(config, module),
 				printModuleBuilder(config, module),
 			].join('\n\n'),
 		});

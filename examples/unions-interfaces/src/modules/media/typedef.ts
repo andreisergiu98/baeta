@@ -13,29 +13,29 @@ const moduleMetadata = {
   id: 'media',
   dirname: './media',
   typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Movie","loc":{"start":5,"end":10}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":14,"end":16}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":18,"end":20}},"loc":{"start":18,"end":20}},"loc":{"start":18,"end":21}},"directives":[],"loc":{"start":14,"end":21}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":23,"end":28}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":30,"end":36}},"loc":{"start":30,"end":36}},"loc":{"start":30,"end":37}},"directives":[],"loc":{"start":23,"end":37}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":39,"end":43}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":45,"end":48}},"loc":{"start":45,"end":48}},"loc":{"start":45,"end":49}},"directives":[],"loc":{"start":39,"end":49}}],"loc":{"start":0,"end":51}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"TVShow","loc":{"start":58,"end":64}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":68,"end":70}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":72,"end":74}},"loc":{"start":72,"end":74}},"loc":{"start":72,"end":75}},"directives":[],"loc":{"start":68,"end":75}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":77,"end":82}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":84,"end":90}},"loc":{"start":84,"end":90}},"loc":{"start":84,"end":91}},"directives":[],"loc":{"start":77,"end":91}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":93,"end":97}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":99,"end":102}},"loc":{"start":99,"end":102}},"loc":{"start":99,"end":103}},"directives":[],"loc":{"start":93,"end":103}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"seasons","loc":{"start":105,"end":112}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":114,"end":117}},"loc":{"start":114,"end":117}},"loc":{"start":114,"end":118}},"directives":[],"loc":{"start":105,"end":118}}],"loc":{"start":53,"end":120}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Book","loc":{"start":127,"end":131}},"interfaces":[{"kind":"NamedType","name":{"kind":"Name","value":"Readable","loc":{"start":143,"end":151}},"loc":{"start":143,"end":151}}],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":155,"end":157}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":159,"end":161}},"loc":{"start":159,"end":161}},"loc":{"start":159,"end":162}},"directives":[],"loc":{"start":155,"end":162}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":164,"end":169}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":171,"end":177}},"loc":{"start":171,"end":177}},"loc":{"start":171,"end":178}},"directives":[],"loc":{"start":164,"end":178}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":180,"end":184}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":186,"end":189}},"loc":{"start":186,"end":189}},"loc":{"start":186,"end":190}},"directives":[],"loc":{"start":180,"end":190}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"author","loc":{"start":192,"end":198}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":200,"end":206}},"loc":{"start":200,"end":206}},"loc":{"start":200,"end":207}},"directives":[],"loc":{"start":192,"end":207}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"pages","loc":{"start":209,"end":214}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":216,"end":219}},"loc":{"start":216,"end":219}},"loc":{"start":216,"end":220}},"directives":[],"loc":{"start":209,"end":220}}],"loc":{"start":122,"end":222}},{"kind":"UnionTypeDefinition","name":{"kind":"Name","value":"Media","loc":{"start":230,"end":235}},"directives":[],"types":[{"kind":"NamedType","name":{"kind":"Name","value":"Movie","loc":{"start":238,"end":243}},"loc":{"start":238,"end":243}},{"kind":"NamedType","name":{"kind":"Name","value":"TVShow","loc":{"start":246,"end":252}},"loc":{"start":246,"end":252}},{"kind":"NamedType","name":{"kind":"Name","value":"Book","loc":{"start":255,"end":259}},"loc":{"start":255,"end":259}}],"loc":{"start":224,"end":259}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":266,"end":271}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"media","loc":{"start":275,"end":280}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Media","loc":{"start":283,"end":288}},"loc":{"start":283,"end":288}},"loc":{"start":283,"end":289}},"loc":{"start":282,"end":290}},"loc":{"start":282,"end":291}},"directives":[],"loc":{"start":275,"end":291}}],"loc":{"start":261,"end":293}}]} as unknown as DocumentNode
-}
+} as const
 
 export interface BaetaModuleTypes {
   Builders: {
-    Movie: Baeta.TypeMethods<Types.Movie, Ctx, Info, BaetaModuleObjectTypeFields['Movie']['Builder'], BaetaModuleObjectTypeFields['Movie']['Factory']>
-    TVShow: Baeta.TypeMethods<Types.TVShow, Ctx, Info, BaetaModuleObjectTypeFields['TVShow']['Builder'], BaetaModuleObjectTypeFields['TVShow']['Factory']>
-    Book: Baeta.TypeMethods<Types.Book, Ctx, Info, BaetaModuleObjectTypeFields['Book']['Builder'], BaetaModuleObjectTypeFields['Book']['Factory']>
-    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+    Movie: Baeta.TypeMethods<Types.Movie, Ctx, Info, "media", "Movie", BaetaModuleObjectTypeFields['Movie']['Builder'], BaetaModuleObjectTypeFields['Movie']['Factory']>
+    TVShow: Baeta.TypeMethods<Types.TVShow, Ctx, Info, "media", "TVShow", BaetaModuleObjectTypeFields['TVShow']['Builder'], BaetaModuleObjectTypeFields['TVShow']['Factory']>
+    Book: Baeta.TypeMethods<Types.Book, Ctx, Info, "media", "Book", BaetaModuleObjectTypeFields['Book']['Builder'], BaetaModuleObjectTypeFields['Book']['Factory']>
+    Query: Baeta.TypeMethods<{}, Ctx, Info, "media", "Query", BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
   };
   Factories: {
-    Movie: Baeta.TypeCompilerFactory<Types.Movie, Ctx, Info, BaetaModuleObjectTypeFields['Movie']['Factory']>
-    TVShow: Baeta.TypeCompilerFactory<Types.TVShow, Ctx, Info, BaetaModuleObjectTypeFields['TVShow']['Factory']>
-    Book: Baeta.TypeCompilerFactory<Types.Book, Ctx, Info, BaetaModuleObjectTypeFields['Book']['Factory']>
-    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+    Movie: Baeta.TypeCompilerFactory<Types.Movie, Ctx, Info, "Movie", BaetaModuleObjectTypeFields['Movie']['Factory']>
+    TVShow: Baeta.TypeCompilerFactory<Types.TVShow, Ctx, Info, "TVShow", BaetaModuleObjectTypeFields['TVShow']['Factory']>
+    Book: Baeta.TypeCompilerFactory<Types.Book, Ctx, Info, "Book", BaetaModuleObjectTypeFields['Book']['Factory']>
+    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, "Query", BaetaModuleObjectTypeFields['Query']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   Movie: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Movie, Ctx, {}, Info>
-      title: Baeta.FieldMethods<Types.Scalars["String"], Types.Movie, Ctx, {}, Info>
-      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.Movie, Ctx, {}, Info>
+      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Movie, Ctx, {}, Info, "media", "Movie", "id">
+      title: Baeta.FieldMethods<Types.Scalars["String"], Types.Movie, Ctx, {}, Info, "media", "Movie", "title">
+      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.Movie, Ctx, {}, Info, "media", "Movie", "year">
     };
     Factory: {
       id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.Movie, Ctx, {}, Info>
@@ -45,10 +45,10 @@ interface BaetaModuleObjectTypeFields {
   };
   TVShow: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.TVShow, Ctx, {}, Info>
-      title: Baeta.FieldMethods<Types.Scalars["String"], Types.TVShow, Ctx, {}, Info>
-      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info>
-      seasons: Baeta.FieldMethods<Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info>
+      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.TVShow, Ctx, {}, Info, "media", "TVShow", "id">
+      title: Baeta.FieldMethods<Types.Scalars["String"], Types.TVShow, Ctx, {}, Info, "media", "TVShow", "title">
+      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info, "media", "TVShow", "year">
+      seasons: Baeta.FieldMethods<Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info, "media", "TVShow", "seasons">
     };
     Factory: {
       id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.TVShow, Ctx, {}, Info>
@@ -59,11 +59,11 @@ interface BaetaModuleObjectTypeFields {
   };
   Book: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Book, Ctx, {}, Info>
-      title: Baeta.FieldMethods<Types.Scalars["String"], Types.Book, Ctx, {}, Info>
-      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.Book, Ctx, {}, Info>
-      author: Baeta.FieldMethods<Types.Scalars["String"], Types.Book, Ctx, {}, Info>
-      pages: Baeta.FieldMethods<Types.Scalars["Int"], Types.Book, Ctx, {}, Info>
+      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Book, Ctx, {}, Info, "media", "Book", "id">
+      title: Baeta.FieldMethods<Types.Scalars["String"], Types.Book, Ctx, {}, Info, "media", "Book", "title">
+      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.Book, Ctx, {}, Info, "media", "Book", "year">
+      author: Baeta.FieldMethods<Types.Scalars["String"], Types.Book, Ctx, {}, Info, "media", "Book", "author">
+      pages: Baeta.FieldMethods<Types.Scalars["Int"], Types.Book, Ctx, {}, Info, "media", "Book", "pages">
     };
     Factory: {
       id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.Book, Ctx, {}, Info>
@@ -75,7 +75,7 @@ interface BaetaModuleObjectTypeFields {
   };
   Query: {
     Builder: {
-      media: Baeta.FieldMethods<Array<Types.Media>, {}, Ctx, {}, Info>
+      media: Baeta.FieldMethods<Array<Types.Media>, {}, Ctx, {}, Info, "media", "Query", "media">
     };
     Factory: {
       media: Baeta.Field<Array<Types.Media>, Array<Types.Media>, {}, Ctx, {}, Info>
@@ -83,27 +83,27 @@ interface BaetaModuleObjectTypeFields {
   };
 };
 
-export const MediaModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  Movie: Baeta.createTypeBuilder("Movie", {
-    id: Baeta.createFieldBuilder("Movie", "id", extensions),
-    title: Baeta.createFieldBuilder("Movie", "title", extensions),
-    year: Baeta.createFieldBuilder("Movie", "year", extensions)
+export const MediaModule = Baeta.createModuleBuilder<Ctx, Info, "media", BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  Movie: Baeta.createTypeBuilder("media", "Movie", {
+    id: Baeta.createFieldBuilder("media", "Movie", "id", extensions),
+    title: Baeta.createFieldBuilder("media", "Movie", "title", extensions),
+    year: Baeta.createFieldBuilder("media", "Movie", "year", extensions)
   }, extensions),
-  TVShow: Baeta.createTypeBuilder("TVShow", {
-    id: Baeta.createFieldBuilder("TVShow", "id", extensions),
-    title: Baeta.createFieldBuilder("TVShow", "title", extensions),
-    year: Baeta.createFieldBuilder("TVShow", "year", extensions),
-    seasons: Baeta.createFieldBuilder("TVShow", "seasons", extensions)
+  TVShow: Baeta.createTypeBuilder("media", "TVShow", {
+    id: Baeta.createFieldBuilder("media", "TVShow", "id", extensions),
+    title: Baeta.createFieldBuilder("media", "TVShow", "title", extensions),
+    year: Baeta.createFieldBuilder("media", "TVShow", "year", extensions),
+    seasons: Baeta.createFieldBuilder("media", "TVShow", "seasons", extensions)
   }, extensions),
-  Book: Baeta.createTypeBuilder("Book", {
-    id: Baeta.createFieldBuilder("Book", "id", extensions),
-    title: Baeta.createFieldBuilder("Book", "title", extensions),
-    year: Baeta.createFieldBuilder("Book", "year", extensions),
-    author: Baeta.createFieldBuilder("Book", "author", extensions),
-    pages: Baeta.createFieldBuilder("Book", "pages", extensions)
+  Book: Baeta.createTypeBuilder("media", "Book", {
+    id: Baeta.createFieldBuilder("media", "Book", "id", extensions),
+    title: Baeta.createFieldBuilder("media", "Book", "title", extensions),
+    year: Baeta.createFieldBuilder("media", "Book", "year", extensions),
+    author: Baeta.createFieldBuilder("media", "Book", "author", extensions),
+    pages: Baeta.createFieldBuilder("media", "Book", "pages", extensions)
   }, extensions),
-  Query: Baeta.createTypeBuilder("Query", {
-    media: Baeta.createFieldBuilder("Query", "media", extensions)
+  Query: Baeta.createTypeBuilder("media", "Query", {
+    media: Baeta.createFieldBuilder("media", "Query", "media", extensions)
   }, extensions)
 }, {
   Media: { __resolveType: (source: {__typename: string}) => { return source.__typename; }}

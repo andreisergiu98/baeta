@@ -33,7 +33,17 @@ export function mockMiddleware(
 }
 
 export function mockFieldBuilder({ field = 'field', type = 'Type' }: MockFieldOptions = {}) {
-	return new FieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
+	return new FieldBuilder<
+		MockResult,
+		MockSource,
+		MockContext,
+		MockArgs,
+		MockInfo,
+		string,
+		string,
+		string
+	>({
+		module: 'module',
 		type,
 		field,
 		extensions: [],
@@ -54,7 +64,16 @@ export function mockFieldCompiler({ field = 'field', type = 'Type' }: MockFieldO
 
 export function mockResolver(
 	fn: (
-		methods: FieldMethods<MockResult, MockSource, MockContext, MockArgs, MockInfo>,
+		methods: FieldMethods<
+			MockResult,
+			MockSource,
+			MockContext,
+			MockArgs,
+			MockInfo,
+			string,
+			string,
+			string
+		>,
 	) => Field<MockResult, MockResult, MockSource, MockContext, MockArgs, MockInfo>,
 ) {
 	const fieldBuilder = mockFieldBuilder();

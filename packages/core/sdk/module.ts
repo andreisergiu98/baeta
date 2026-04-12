@@ -7,16 +7,17 @@ import type { TypesBuildersMap, TypesResolversMap } from './module-methods.ts';
 export function createModuleBuilder<
 	Context,
 	Info,
+	ModuleName extends string,
 	TypesBuilders extends TypesBuildersMap<Context, Info> = TypesBuildersMap<Context, Info>,
 	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
 >(
-	name: string,
+	name: ModuleName,
 	typedef: DocumentNode,
 	builders: TypesBuilders,
 	defaultResolvers: IResolvers,
 	extensions: Array<Extension>,
 ) {
-	return new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>({
+	return new ModuleBuilder<Context, Info, ModuleName, TypesBuilders, TypesResolvers>({
 		name,
 		typedef,
 		typeBuilders: builders,

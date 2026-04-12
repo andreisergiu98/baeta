@@ -22,6 +22,7 @@ function mockEditableBuilder() {
 
 function mockFieldBuilder() {
 	return new FieldBuilder({
+		module: 'test',
 		type: 'test',
 		field: 'test',
 		extensions: [],
@@ -32,6 +33,7 @@ function mockFieldBuilder() {
 
 function mockTypeBuilder() {
 	return new TypeBuilder({
+		module: 'test',
 		type: 'test',
 		fieldBuilders: {},
 		extensions: [],
@@ -55,6 +57,7 @@ function mockModuleBuilder() {
 
 function mockSubscriptionBuilder() {
 	return new SubscriptionBuilder({
+		module: 'test',
 		field: 'test',
 		extensions: [],
 		store: new Map(),

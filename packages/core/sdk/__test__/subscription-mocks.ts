@@ -41,8 +41,11 @@ export function mockSubscriptionFieldBuilder({
 		MockSubscriptionSource,
 		MockContext,
 		MockArgs,
-		MockInfo
+		MockInfo,
+		string,
+		string
 	>({
+		module: 'module',
 		field,
 		extensions: [],
 		store: new Map(),

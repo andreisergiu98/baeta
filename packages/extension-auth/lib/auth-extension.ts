@@ -50,9 +50,9 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 		this.options = options;
 	}
 
-	getTypeExtensions<Source, Context, Info>(
-		builder: TypeBuilder<Source, Context, Info>,
-	): BaetaExtensions.TypeExtensions<Source, Context, Info> {
+	getTypeExtensions<Source, Context, Info, ModuleName extends string, TypeName extends string>(
+		builder: TypeBuilder<Source, Context, Info, ModuleName, TypeName>,
+	): BaetaExtensions.TypeExtensions<Source, Context, Info, ModuleName, TypeName> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
@@ -89,9 +89,27 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 		};
 	}
 
-	getFieldExtensions<Result, Source, Context, Args, Info>(
-		builder: FieldBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info> {
+	getFieldExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName extends string,
+		TypeName extends string,
+		FieldName extends string,
+	>(
+		builder: FieldBuilder<Result, Source, Context, Args, Info, ModuleName, TypeName, FieldName>,
+	): BaetaExtensions.FieldExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName,
+		TypeName,
+		FieldName
+	> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();
@@ -136,9 +154,25 @@ export class AuthExtension<Ctx> extends Extension<AuthState> {
 		};
 	}
 
-	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
-		builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.SubscriptionExtensions<Result, Source, Context, Args, Info> {
+	getSubscriptionExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName extends string,
+		FieldName extends string,
+	>(
+		builder: SubscriptionBuilder<Result, Source, Context, Args, Info, ModuleName, FieldName>,
+	): BaetaExtensions.SubscriptionExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName,
+		FieldName
+	> {
 		return {
 			$auth: (scopes, options) => {
 				const editable = builder.edit();

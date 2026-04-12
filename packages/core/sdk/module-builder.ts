@@ -10,9 +10,10 @@ import type { SchemaTransformer } from './transformer.ts';
 export interface ModuleBuilderOptions<
 	Context,
 	Info,
+	ModuleName extends string,
 	TypesBuilders extends TypesBuildersMap<Context, Info> = any,
 > {
-	name: string;
+	name: ModuleName;
 	typedef: Readonly<DocumentNode>;
 	typeBuilders: Readonly<TypesBuilders>;
 	defaultResolvers: Readonly<IResolvers>;
@@ -25,10 +26,11 @@ export interface ModuleBuilderOptions<
 export class ModuleBuilder<
 	Context,
 	Info,
+	ModuleName extends string = string,
 	TypesBuilders extends TypesBuildersMap<Context, Info> = any,
 	TypesResolvers extends TypesResolversMap<Context, Info> = any,
 > {
-	readonly #name: string;
+	readonly #name: ModuleName;
 	readonly #typedef: Readonly<DocumentNode>;
 	readonly #typeBuilders: Readonly<TypesBuilders>;
 	readonly #defaultResolvers: Readonly<IResolvers>;
@@ -37,7 +39,7 @@ export class ModuleBuilder<
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, unknown, Context, unknown, Info>>;
 
-	constructor(options: ModuleBuilderOptions<Context, Info, TypesBuilders>) {
+	constructor(options: ModuleBuilderOptions<Context, Info, ModuleName, TypesBuilders>) {
 		this.#name = options.name;
 		this.#typedef = options.typedef;
 		this.#typeBuilders = options.typeBuilders;
@@ -82,7 +84,7 @@ export class ModuleBuilder<
 				return session;
 			},
 			commit: () =>
-				new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>({
+				new ModuleBuilder<Context, Info, ModuleName, TypesBuilders, TypesResolvers>({
 					name: this.#name,
 					typedef: this.#typedef,
 					typeBuilders: this.#typeBuilders,
@@ -97,10 +99,10 @@ export class ModuleBuilder<
 		return session;
 	}
 
-	toMethods(): ModuleMethods<Context, Info, TypesBuilders, TypesResolvers> {
+	toMethods(): ModuleMethods<Context, Info, ModuleName, TypesBuilders, TypesResolvers> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getModuleExtensions(this),
-		) as unknown as BaetaExtensions.ModuleExtensions<Context, Info>;
+		) as unknown as BaetaExtensions.ModuleExtensions<Context, Info, ModuleName>;
 		return {
 			...extensions,
 			...this.#typeBuilders,

@@ -13,27 +13,27 @@ const moduleMetadata = {
   id: 'user',
   dirname: './user',
   typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"User","loc":{"start":5,"end":9}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":13,"end":15}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":17,"end":19}},"loc":{"start":17,"end":19}},"loc":{"start":17,"end":20}},"directives":[],"loc":{"start":13,"end":20}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"email","loc":{"start":22,"end":27}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":29,"end":35}},"loc":{"start":29,"end":35}},"loc":{"start":29,"end":36}},"directives":[],"loc":{"start":22,"end":36}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"lastName","loc":{"start":38,"end":46}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":48,"end":54}},"loc":{"start":48,"end":54}},"loc":{"start":48,"end":55}},"directives":[],"loc":{"start":38,"end":55}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"profile","loc":{"start":57,"end":64}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":66,"end":72}},"loc":{"start":66,"end":72}},"directives":[],"loc":{"start":57,"end":72}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"givenName","loc":{"start":74,"end":83}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":85,"end":91}},"loc":{"start":85,"end":91}},"directives":[],"loc":{"start":74,"end":91}}],"loc":{"start":0,"end":93}},{"kind":"InputObjectTypeDefinition","name":{"kind":"Name","value":"UserWhereUniqueInput","loc":{"start":101,"end":121}},"directives":[],"fields":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"id","loc":{"start":125,"end":127}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":129,"end":131}},"loc":{"start":129,"end":131}},"loc":{"start":129,"end":132}},"directives":[],"loc":{"start":125,"end":132}}],"loc":{"start":95,"end":134}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":141,"end":146}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"me","loc":{"start":150,"end":152}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":154,"end":158}},"loc":{"start":154,"end":158}},"loc":{"start":154,"end":159}},"directives":[],"loc":{"start":150,"end":159}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"user","loc":{"start":161,"end":165}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"where","loc":{"start":166,"end":171}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserWhereUniqueInput","loc":{"start":173,"end":193}},"loc":{"start":173,"end":193}},"loc":{"start":173,"end":194}},"directives":[],"loc":{"start":166,"end":194}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":197,"end":201}},"loc":{"start":197,"end":201}},"directives":[],"loc":{"start":161,"end":201}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"users","loc":{"start":203,"end":208}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":211,"end":215}},"loc":{"start":211,"end":215}},"loc":{"start":211,"end":216}},"loc":{"start":210,"end":217}},"directives":[],"loc":{"start":203,"end":217}}],"loc":{"start":136,"end":219}}]} as unknown as DocumentNode
-}
+} as const
 
 export interface BaetaModuleTypes {
   Builders: {
-    User: Baeta.TypeMethods<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
-    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+    User: Baeta.TypeMethods<Types.User, Ctx, Info, "user", "User", BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
+    Query: Baeta.TypeMethods<{}, Ctx, Info, "user", "Query", BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
   };
   Factories: {
-    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Factory']>
-    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, "User", BaetaModuleObjectTypeFields['User']['Factory']>
+    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, "Query", BaetaModuleObjectTypeFields['Query']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   User: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.User, Ctx, {}, Info>
-      email: Baeta.FieldMethods<Types.Scalars["String"], Types.User, Ctx, {}, Info>
-      lastName: Baeta.FieldMethods<Types.Scalars["String"], Types.User, Ctx, {}, Info>
-      profile: Baeta.FieldMethods<Types.Scalars["String"] | null, Types.User, Ctx, {}, Info>
-      givenName: Baeta.FieldMethods<Types.Scalars["String"] | null, Types.User, Ctx, {}, Info>
+      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.User, Ctx, {}, Info, "user", "User", "id">
+      email: Baeta.FieldMethods<Types.Scalars["String"], Types.User, Ctx, {}, Info, "user", "User", "email">
+      lastName: Baeta.FieldMethods<Types.Scalars["String"], Types.User, Ctx, {}, Info, "user", "User", "lastName">
+      profile: Baeta.FieldMethods<Types.Scalars["String"] | null, Types.User, Ctx, {}, Info, "user", "User", "profile">
+      givenName: Baeta.FieldMethods<Types.Scalars["String"] | null, Types.User, Ctx, {}, Info, "user", "User", "givenName">
     };
     Factory: {
       id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.User, Ctx, {}, Info>
@@ -45,9 +45,9 @@ interface BaetaModuleObjectTypeFields {
   };
   Query: {
     Builder: {
-      me: Baeta.FieldMethods<Types.User, {}, Ctx, {}, Info>
-      user: Baeta.FieldMethods<Types.User | null, {}, Ctx, Types.QueryUserArgs, Info>
-      users: Baeta.FieldMethods<Array<Types.User> | null, {}, Ctx, {}, Info>
+      me: Baeta.FieldMethods<Types.User, {}, Ctx, {}, Info, "user", "Query", "me">
+      user: Baeta.FieldMethods<Types.User | null, {}, Ctx, Types.QueryUserArgs, Info, "user", "Query", "user">
+      users: Baeta.FieldMethods<Array<Types.User> | null, {}, Ctx, {}, Info, "user", "Query", "users">
     };
     Factory: {
       me: Baeta.Field<Types.User, Types.User, {}, Ctx, {}, Info>
@@ -57,18 +57,18 @@ interface BaetaModuleObjectTypeFields {
   };
 };
 
-export const UserModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  User: Baeta.createTypeBuilder("User", {
-    id: Baeta.createFieldBuilder("User", "id", extensions),
-    email: Baeta.createFieldBuilder("User", "email", extensions),
-    lastName: Baeta.createFieldBuilder("User", "lastName", extensions),
-    profile: Baeta.createFieldBuilder("User", "profile", extensions),
-    givenName: Baeta.createFieldBuilder("User", "givenName", extensions)
+export const UserModule = Baeta.createModuleBuilder<Ctx, Info, "user", BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  User: Baeta.createTypeBuilder("user", "User", {
+    id: Baeta.createFieldBuilder("user", "User", "id", extensions),
+    email: Baeta.createFieldBuilder("user", "User", "email", extensions),
+    lastName: Baeta.createFieldBuilder("user", "User", "lastName", extensions),
+    profile: Baeta.createFieldBuilder("user", "User", "profile", extensions),
+    givenName: Baeta.createFieldBuilder("user", "User", "givenName", extensions)
   }, extensions),
-  Query: Baeta.createTypeBuilder("Query", {
-    me: Baeta.createFieldBuilder("Query", "me", extensions),
-    user: Baeta.createFieldBuilder("Query", "user", extensions),
-    users: Baeta.createFieldBuilder("Query", "users", extensions)
+  Query: Baeta.createTypeBuilder("user", "Query", {
+    me: Baeta.createFieldBuilder("user", "Query", "me", extensions),
+    user: Baeta.createFieldBuilder("user", "Query", "user", extensions),
+    users: Baeta.createFieldBuilder("user", "Query", "users", extensions)
   }, extensions)
 }, {
 

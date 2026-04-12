@@ -35,26 +35,43 @@ export abstract class Extension<Settings = unknown> {
 		return this.schema;
 	}
 
-	getFieldExtensions<Result, Source, Context, Args, Info>(
-		_builder: FieldBuilder<Result, Source, Context, Args, Info>,
+	getFieldExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName extends string,
+		TypeName extends string,
+		FieldName extends string,
+	>(_builder: FieldBuilder<Result, Source, Context, Args, Info, ModuleName, TypeName, FieldName>) {
+		// To be implemented by the extension if required.
+		return {};
+	}
+
+	getTypeExtensions<Source, Context, Info, ModuleName extends string, TypeName extends string>(
+		_builder: TypeBuilder<Source, Context, Info, ModuleName, TypeName>,
 	) {
 		// To be implemented by the extension if required.
 		return {};
 	}
 
-	getTypeExtensions<Source, Context, Info>(_builder: TypeBuilder<Source, Context, Info>) {
-		// To be implemented by the extension if required.
-		return {};
-	}
-
-	getModuleExtensions<Context, Info>(_builder: ModuleBuilder<Context, Info>) {
-		// To be implemented by the extension if required.
-		return {};
-	}
-
-	getSubscriptionExtensions<Result, Source, Context, Args, Info>(
-		_builder: SubscriptionBuilder<Result, Source, Context, Args, Info>,
+	getModuleExtensions<Context, Info, ModuleName extends string>(
+		_builder: ModuleBuilder<Context, Info, ModuleName>,
 	) {
+		// To be implemented by the extension if required.
+		return {};
+	}
+
+	getSubscriptionExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName extends string,
+		FieldName extends string,
+	>(_builder: SubscriptionBuilder<Result, Source, Context, Args, Info, ModuleName, FieldName>) {
 		// To be implemented by the extension if required.
 		return {};
 	}

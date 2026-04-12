@@ -12,26 +12,50 @@ import type {
 	SubscriptionWrapper,
 } from './subscription-methods.ts';
 
-export interface SubscriptionBuilderOptions<Source, Context, Args, Info> {
-	field: string;
+export interface SubscriptionBuilderOptions<
+	Source,
+	Context,
+	Args,
+	Info,
+	ModuleName extends string,
+	FieldName extends string,
+> {
+	module: ModuleName;
+	field: FieldName;
 	extensions: ReadonlyArray<Extension>;
 	store: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<SubscriptionWrapper, Source, Context, Args, Info>>;
 }
 
-export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
-	readonly #field: string;
+export class SubscriptionBuilder<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	ModuleName extends string,
+	FieldName extends string,
+> {
+	readonly #module: ModuleName;
+	readonly #field: FieldName;
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #extensions: ReadonlyArray<Extension>;
 	readonly #middlewares: ReadonlyArray<
 		Middleware<SubscriptionWrapper, Source, Context, Args, Info>
 	>;
 
-	constructor(options: SubscriptionBuilderOptions<Source, Context, Args, Info>) {
+	constructor(
+		options: SubscriptionBuilderOptions<Source, Context, Args, Info, ModuleName, FieldName>,
+	) {
+		this.#module = options.module;
 		this.#field = options.field;
 		this.#extensions = options.extensions;
 		this.#store = new Map(options.store);
 		this.#middlewares = [...options.middlewares];
+	}
+
+	get module() {
+		return this.#module;
 	}
 
 	get field() {
@@ -60,7 +84,8 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 				return session;
 			},
 			commit: () =>
-				new SubscriptionBuilder<Result, Source, Context, Args, Info>({
+				new SubscriptionBuilder<Result, Source, Context, Args, Info, ModuleName, FieldName>({
+					module: this.#module,
 					field: this.#field,
 					extensions: this.#extensions,
 					store: draftStore,
@@ -71,10 +96,18 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 		return session;
 	}
 
-	toMethods(): SubscriptionMethods<Result, Source, Context, Args, Info> {
+	toMethods(): SubscriptionMethods<Result, Source, Context, Args, Info, ModuleName, FieldName> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getSubscriptionExtensions(this),
-		) as unknown as BaetaExtensions.SubscriptionExtensions<Result, Source, Context, Args, Info>;
+		) as unknown as BaetaExtensions.SubscriptionExtensions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			ModuleName,
+			FieldName
+		>;
 		return {
 			...extensions,
 			$use: (middleware) => {

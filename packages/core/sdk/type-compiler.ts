@@ -10,13 +10,14 @@ export interface TypeCompilerOptions<
 	Source,
 	Context,
 	Info,
+	TypeName extends string,
 	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = FieldsResolversMap<
 		Source,
 		Context,
 		Info
 	>,
 > {
-	type: string;
+	type: TypeName;
 	store: Map<symbol, unknown>;
 	middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	fieldsMap: FieldsResolvers;
@@ -26,13 +27,14 @@ export class TypeCompiler<
 	Source,
 	Context,
 	Info,
+	TypeName extends string,
 	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = FieldsResolversMap<
 		Source,
 		Context,
 		Info
 	>,
 > {
-	readonly #type: string;
+	readonly #type: TypeName;
 	readonly #store: Map<symbol, unknown>;
 	readonly #middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly #fields: ReadonlyArray<
@@ -40,7 +42,7 @@ export class TypeCompiler<
 		| SubscriptionCompiler<unknown, unknown, Context, unknown, Info, Source>
 	>;
 
-	constructor(options: TypeCompilerOptions<Source, Context, Info, FieldsResolvers>) {
+	constructor(options: TypeCompilerOptions<Source, Context, Info, TypeName, FieldsResolvers>) {
 		this.#type = options.type;
 		this.#store = options.store;
 		this.#middlewares = options.middlewares;

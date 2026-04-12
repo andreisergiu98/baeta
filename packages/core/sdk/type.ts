@@ -6,10 +6,21 @@ export function createTypeBuilder<
 	Source,
 	Context,
 	Info,
+	ModuleName extends string,
+	TypeName extends string,
 	FieldBuilders extends FieldsBuildersMap<Source, Context, Info>,
 	FieldResolvers extends FieldsResolversMap<Source, Context, Info>,
->(type: string, builders: FieldBuilders, extensions: Array<Extension>) {
-	return new TypeBuilder<Source, Context, Info, FieldBuilders, FieldResolvers>({
+>(module: ModuleName, type: TypeName, builders: FieldBuilders, extensions: Array<Extension>) {
+	return new TypeBuilder<
+		Source,
+		Context,
+		Info,
+		ModuleName,
+		TypeName,
+		FieldBuilders,
+		FieldResolvers
+	>({
+		module,
 		type,
 		fieldBuilders: builders,
 		extensions,

@@ -31,7 +31,7 @@ export class ModuleCompiler<
 	readonly #store: Map<symbol, unknown>;
 	readonly #middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
 	readonly #types: ReadonlyArray<
-		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
+		TypeCompiler<unknown, Context, Info, string, FieldsResolversMap<unknown, Context, Info>>
 	>;
 	readonly #typedef: Readonly<DocumentNode>;
 	readonly #extensions: ReadonlyArray<Extension>;
@@ -92,7 +92,7 @@ export class ModuleCompiler<
 
 function getTypeCompilersAndResolvers<Context, Info>(typesMap: TypesResolversMap<Context, Info>) {
 	const types: Array<
-		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
+		TypeCompiler<unknown, Context, Info, string, FieldsResolversMap<unknown, Context, Info>>
 	> = [];
 	const genericResolvers: Array<[string, GraphQLScalarType]> = [];
 	for (const [typeName, typeResolver] of Object.entries(typesMap)) {

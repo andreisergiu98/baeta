@@ -22,11 +22,16 @@ import {
 import { createFieldBuilder, makeField } from './field.ts';
 
 test('createFieldBuilder should create a type field correctly', async (t) => {
-	const fieldBuilder = createFieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>(
-		'type',
-		'field',
-		[],
-	);
+	const fieldBuilder = createFieldBuilder<
+		MockResult,
+		MockSource,
+		MockContext,
+		MockArgs,
+		MockInfo,
+		string,
+		string,
+		string
+	>('module', 'type', 'field', []);
 	const resolver = makeField(fieldBuilder.map((params) => params.source.name)).build([]);
 	t.is(await executeMockedResolver(resolver), 'test');
 });

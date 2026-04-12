@@ -29,8 +29,11 @@ test('createSubscriptionBuilder should create a subscription field correctly', a
 		MockSubscriptionSource,
 		MockContext,
 		MockArgs,
-		MockInfo
+		MockInfo,
+		string,
+		string
 	>({
+		module: 'module',
 		field: 'field',
 		extensions: [],
 		store: new Map(),

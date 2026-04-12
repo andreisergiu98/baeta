@@ -13,7 +13,7 @@ const moduleMetadata = {
   id: 'scalars',
   dirname: './scalars',
   typedef: {"kind":"Document","definitions":[{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"DateTime","loc":{"start":7,"end":15}},"directives":[],"loc":{"start":0,"end":15}},{"kind":"ScalarTypeDefinition","name":{"kind":"Name","value":"UUID","loc":{"start":24,"end":28}},"directives":[],"loc":{"start":17,"end":28}}]} as unknown as DocumentNode
-}
+} as const
 
 export interface BaetaModuleTypes {
   Builders: {
@@ -27,7 +27,7 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
 };
 
-export const ScalarsModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+export const ScalarsModule = Baeta.createModuleBuilder<Ctx, Info, "scalars", BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
 
 }, {
 

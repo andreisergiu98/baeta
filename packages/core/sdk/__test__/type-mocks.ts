@@ -13,8 +13,26 @@ interface MockTypeOptions {
 
 export type MockTypeBuilders = {
 	Builder: {
-		field1: FieldMethods<MockResult, MockSource, MockContext, MockArgs, MockInfo>;
-		field2: FieldMethods<MockResult, MockSource, MockContext, MockArgs, MockInfo>;
+		field1: FieldMethods<
+			MockResult,
+			MockSource,
+			MockContext,
+			MockArgs,
+			MockInfo,
+			string,
+			string,
+			string
+		>;
+		field2: FieldMethods<
+			MockResult,
+			MockSource,
+			MockContext,
+			MockArgs,
+			MockInfo,
+			string,
+			string,
+			string
+		>;
 	};
 	Resolvers: {
 		field1: Field<MockResult, MockResult, MockSource, MockContext, MockArgs, MockInfo>;
@@ -40,9 +58,12 @@ export function mockTypeBuilder({ type = 'Type' }: MockTypeOptions = {}) {
 		MockSource,
 		MockContext,
 		MockInfo,
+		string,
+		string,
 		MockTypeBuilders['Builder'],
 		MockTypeBuilders['Resolvers']
 	>({
+		module: 'module',
 		type,
 		fieldBuilders: {
 			field1: mockFieldBuilder({ field: 'field1', type }).toMethods(),
@@ -55,7 +76,7 @@ export function mockTypeBuilder({ type = 'Type' }: MockTypeOptions = {}) {
 }
 
 export function mockTypeCompiler({ type = 'Type' }: MockTypeOptions = {}) {
-	return new TypeCompiler<MockSource, MockContext, MockInfo>({
+	return new TypeCompiler<MockSource, MockContext, MockInfo, string>({
 		type,
 		store: new Map(),
 		middlewares: [],

@@ -40,7 +40,7 @@ export function printModuleImports(config: ModulePrinterConfig, moduleName: stri
 }
 
 export function printModuleMetadata(name: string, doc: DocumentNode) {
-	return buildCodeBlock({
+	const block = buildCodeBlock({
 		name: 'const moduleMetadata =',
 		lines: [
 			`id: '${name}'`,
@@ -48,20 +48,21 @@ export function printModuleMetadata(name: string, doc: DocumentNode) {
 			`typedef: ${JSON.stringify(doc)} as unknown as DocumentNode`,
 		],
 	});
+	return `${block} as const`;
 }
 
-export function printBaetaModuleTypes(config: ModulePrinterConfig) {
+export function printBaetaModuleTypes(config: ModulePrinterConfig, moduleName: string) {
 	return buildBlock({
 		name: 'export interface BaetaModuleTypes',
 		lines: [
 			buildBlock({
 				name: 'Builders:',
-				lines: printBaetaModuleTypesForFields(config, false),
+				lines: printBaetaModuleTypesForFields(config, moduleName, false),
 			}),
 			buildBlock({
 				name: 'Factories:',
 				lines: [
-					...printBaetaModuleTypesForFields(config, true),
+					...printBaetaModuleTypesForFields(config, moduleName, true),
 					...printBaetaModuleTypesScalars(config),
 				],
 			}),
@@ -128,15 +129,20 @@ function printModuleIndexTypeField(typeName: string, fieldName: string) {
 	return `${fieldName}: ${typeName}.${fieldName}.key('${fieldName}'),`;
 }
 
-function printBaetaModuleTypesForFields(config: ModulePrinterConfig, isFactory: boolean) {
+function printBaetaModuleTypesForFields(
+	config: ModulePrinterConfig,
+	moduleName: string,
+	isFactory: boolean,
+) {
 	return config.registry.defined.objects
 		.map((typeName) =>
-			printObjectTypeModuleType(typeName, config.registry.picks.objects, isFactory),
+			printObjectTypeModuleType(moduleName, typeName, config.registry.picks.objects, isFactory),
 		)
 		.filter(Boolean);
 }
 
 function printObjectTypeModuleType(
+	moduleName: string,
 	typeName: string,
 	objects: Record<string, string[] | undefined>,
 	isFactory: boolean,
@@ -149,18 +155,20 @@ function printObjectTypeModuleType(
 	const contextType = getContextType();
 	const infoType = getInfoType();
 	if (isFactory) {
-		return `${typeName}: Baeta.TypeCompilerFactory<${parentType}, ${contextType}, ${infoType}, BaetaModuleObjectTypeFields['${typeName}']['Factory']>`;
+		return `${typeName}: Baeta.TypeCompilerFactory<${parentType}, ${contextType}, ${infoType}, "${typeName}", BaetaModuleObjectTypeFields['${typeName}']['Factory']>`;
 	}
-	return `${typeName}: Baeta.TypeMethods<${parentType}, ${contextType}, ${infoType}, BaetaModuleObjectTypeFields['${typeName}']['Builder'], BaetaModuleObjectTypeFields['${typeName}']['Factory']>`;
+	return `${typeName}: Baeta.TypeMethods<${parentType}, ${contextType}, ${infoType}, "${moduleName}", "${typeName}", BaetaModuleObjectTypeFields['${typeName}']['Builder'], BaetaModuleObjectTypeFields['${typeName}']['Factory']>`;
 }
 
 function printBaetaModuleTypesScalars(config: ModulePrinterConfig) {
 	return config.registry.defined.scalars.map((scalar) => `${scalar}: GraphQLScalarType`);
 }
 
-export function printModuleObjectTypeFields(config: ModulePrinterConfig) {
+export function printModuleObjectTypeFields(config: ModulePrinterConfig, moduleName: string) {
 	const objects = config.registry.defined.objects
-		.map((typeName) => printObjectTypeFields(config, typeName, config.registry.picks.objects))
+		.map((typeName) =>
+			printObjectTypeFields(config, moduleName, typeName, config.registry.picks.objects),
+		)
 		.filter(Boolean);
 	return buildBlock({
 		name: 'interface BaetaModuleObjectTypeFields',
@@ -170,6 +178,7 @@ export function printModuleObjectTypeFields(config: ModulePrinterConfig) {
 
 function printObjectTypeFields(
 	config: ModulePrinterConfig,
+	moduleName: string,
 	typeName: string,
 	objects: Record<string, string[] | undefined>,
 ) {
@@ -178,7 +187,7 @@ function printObjectTypeFields(
 		return '';
 	}
 	const fieldsBuilders = fields.map((field) =>
-		printObjectTypeFieldBuilders(config, typeName, field),
+		printObjectTypeFieldBuilders(config, moduleName, typeName, field),
 	);
 	const fieldsFactories = fields.map((field) =>
 		printObjectTypeFieldFactories(config, typeName, field),
@@ -200,6 +209,7 @@ function printObjectTypeFields(
 
 function printObjectTypeFieldBuilders(
 	config: ModulePrinterConfig,
+	moduleName: string,
 	typeName: string,
 	field: string,
 ) {
@@ -208,8 +218,10 @@ function printObjectTypeFieldBuilders(
 	const argumentsType = getArgsType(config, typeName, field);
 	const contextType = getContextType();
 	const infoType = getInfoType();
-	const namespace = typeName === 'Subscription' ? 'SubscriptionMethods' : 'FieldMethods';
-	return `${field}: Baeta.${namespace}<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}>`;
+	if (typeName === 'Subscription') {
+		return `${field}: Baeta.SubscriptionMethods<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, "${moduleName}", "${field}">`;
+	}
+	return `${field}: Baeta.FieldMethods<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, "${moduleName}", "${typeName}", "${field}">`;
 }
 
 function printObjectTypeFieldFactories(
@@ -228,7 +240,7 @@ function printObjectTypeFieldFactories(
 
 export function printModuleBuilder(config: ModulePrinterConfig, moduleName: string) {
 	const objectTypes = config.registry.defined.objects
-		.map((typeName) => printObjectTypeBuilder(typeName, config.registry.picks.objects))
+		.map((typeName) => printObjectTypeBuilder(moduleName, typeName, config.registry.picks.objects))
 		.filter(Boolean);
 	const builders = buildCodeBlock({
 		name: '',
@@ -243,7 +255,7 @@ export function printModuleBuilder(config: ModulePrinterConfig, moduleName: stri
 	const infoType = getInfoType();
 	const contextType = getContextType();
 	return [
-		`export const ${pascalCase(moduleName)}Module = Baeta.createModuleBuilder<${contextType}, ${infoType}, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef,`,
+		`export const ${pascalCase(moduleName)}Module = Baeta.createModuleBuilder<${contextType}, ${infoType}, "${moduleName}", BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef,`,
 		builders,
 		',',
 		typeNameResolvers,
@@ -251,8 +263,14 @@ export function printModuleBuilder(config: ModulePrinterConfig, moduleName: stri
 	].join('');
 }
 
-function printObjectTypeBuilder(typeName: string, objects: Record<string, string[] | undefined>) {
-	const fields = objects[typeName]?.map((field) => printObjectTypeFieldBuilder(typeName, field));
+function printObjectTypeBuilder(
+	moduleName: string,
+	typeName: string,
+	objects: Record<string, string[] | undefined>,
+) {
+	const fields = objects[typeName]?.map((field) =>
+		printObjectTypeFieldBuilder(moduleName, typeName, field),
+	);
 	if (fields == null || fields.length === 0) {
 		return '';
 	}
@@ -260,7 +278,7 @@ function printObjectTypeBuilder(typeName: string, objects: Record<string, string
 		name: '',
 		lines: fields,
 	});
-	return `${typeName}: Baeta.createTypeBuilder("${typeName}",${content}, ${getExtensionsVar()})`;
+	return `${typeName}: Baeta.createTypeBuilder("${moduleName}", "${typeName}",${content}, ${getExtensionsVar()})`;
 }
 
 function printTypeNameResolver() {
@@ -291,11 +309,11 @@ function getArgsType(config: ModulePrinterConfig, type: string, field: string) {
 	return `Types.${type}${fieldUpper}Args`;
 }
 
-function printObjectTypeFieldBuilder(typeName: string, field: string) {
+function printObjectTypeFieldBuilder(moduleName: string, typeName: string, field: string) {
 	if (typeName === 'Subscription') {
-		return `${field}: Baeta.createSubscriptionBuilder("${field}", ${getExtensionsVar()})`;
+		return `${field}: Baeta.createSubscriptionBuilder("${moduleName}", "${field}", ${getExtensionsVar()})`;
 	}
-	return `${field}: Baeta.createFieldBuilder("${typeName}", "${field}", ${getExtensionsVar()})`;
+	return `${field}: Baeta.createFieldBuilder("${moduleName}", "${typeName}", "${field}", ${getExtensionsVar()})`;
 }
 
 function getContextType() {

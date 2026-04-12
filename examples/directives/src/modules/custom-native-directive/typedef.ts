@@ -13,23 +13,23 @@ const moduleMetadata = {
   id: 'custom-native-directive',
   dirname: './custom-native-directive',
   typedef: {"kind":"Document","definitions":[{"kind":"DirectiveDefinition","name":{"kind":"Name","value":"upper","loc":{"start":11,"end":16}},"arguments":[],"repeatable":false,"locations":[{"kind":"Name","value":"FIELD_DEFINITION","loc":{"start":20,"end":36}}],"loc":{"start":0,"end":36}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"NameWithUpper","loc":{"start":43,"end":56}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"name","loc":{"start":60,"end":64}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":66,"end":72}},"loc":{"start":66,"end":72}},"loc":{"start":66,"end":73}},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"upper","loc":{"start":75,"end":80}},"arguments":[],"loc":{"start":74,"end":80}}],"loc":{"start":60,"end":80}}],"loc":{"start":38,"end":82}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":89,"end":94}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"testUpperDirective","loc":{"start":98,"end":116}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"name","loc":{"start":117,"end":121}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":123,"end":129}},"loc":{"start":123,"end":129}},"loc":{"start":123,"end":130}},"directives":[],"loc":{"start":117,"end":130}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"NameWithUpper","loc":{"start":133,"end":146}},"loc":{"start":133,"end":146}},"directives":[],"loc":{"start":98,"end":146}}],"loc":{"start":84,"end":148}}]} as unknown as DocumentNode
-}
+} as const
 
 export interface BaetaModuleTypes {
   Builders: {
-    NameWithUpper: Baeta.TypeMethods<Types.NameWithUpper, Ctx, Info, BaetaModuleObjectTypeFields['NameWithUpper']['Builder'], BaetaModuleObjectTypeFields['NameWithUpper']['Factory']>
-    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+    NameWithUpper: Baeta.TypeMethods<Types.NameWithUpper, Ctx, Info, "custom-native-directive", "NameWithUpper", BaetaModuleObjectTypeFields['NameWithUpper']['Builder'], BaetaModuleObjectTypeFields['NameWithUpper']['Factory']>
+    Query: Baeta.TypeMethods<{}, Ctx, Info, "custom-native-directive", "Query", BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
   };
   Factories: {
-    NameWithUpper: Baeta.TypeCompilerFactory<Types.NameWithUpper, Ctx, Info, BaetaModuleObjectTypeFields['NameWithUpper']['Factory']>
-    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+    NameWithUpper: Baeta.TypeCompilerFactory<Types.NameWithUpper, Ctx, Info, "NameWithUpper", BaetaModuleObjectTypeFields['NameWithUpper']['Factory']>
+    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, "Query", BaetaModuleObjectTypeFields['Query']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   NameWithUpper: {
     Builder: {
-      name: Baeta.FieldMethods<Types.Scalars["String"], Types.NameWithUpper, Ctx, {}, Info>
+      name: Baeta.FieldMethods<Types.Scalars["String"], Types.NameWithUpper, Ctx, {}, Info, "custom-native-directive", "NameWithUpper", "name">
     };
     Factory: {
       name: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.NameWithUpper, Ctx, {}, Info>
@@ -37,7 +37,7 @@ interface BaetaModuleObjectTypeFields {
   };
   Query: {
     Builder: {
-      testUpperDirective: Baeta.FieldMethods<Types.NameWithUpper | null, {}, Ctx, Types.QueryTestUpperDirectiveArgs, Info>
+      testUpperDirective: Baeta.FieldMethods<Types.NameWithUpper | null, {}, Ctx, Types.QueryTestUpperDirectiveArgs, Info, "custom-native-directive", "Query", "testUpperDirective">
     };
     Factory: {
       testUpperDirective: Baeta.Field<Types.NameWithUpper | null, Types.NameWithUpper | null, {}, Ctx, Types.QueryTestUpperDirectiveArgs, Info>
@@ -45,12 +45,12 @@ interface BaetaModuleObjectTypeFields {
   };
 };
 
-export const CustomNativeDirectiveModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  NameWithUpper: Baeta.createTypeBuilder("NameWithUpper", {
-    name: Baeta.createFieldBuilder("NameWithUpper", "name", extensions)
+export const CustomNativeDirectiveModule = Baeta.createModuleBuilder<Ctx, Info, "custom-native-directive", BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  NameWithUpper: Baeta.createTypeBuilder("custom-native-directive", "NameWithUpper", {
+    name: Baeta.createFieldBuilder("custom-native-directive", "NameWithUpper", "name", extensions)
   }, extensions),
-  Query: Baeta.createTypeBuilder("Query", {
-    testUpperDirective: Baeta.createFieldBuilder("Query", "testUpperDirective", extensions)
+  Query: Baeta.createTypeBuilder("custom-native-directive", "Query", {
+    testUpperDirective: Baeta.createFieldBuilder("custom-native-directive", "Query", "testUpperDirective", extensions)
   }, extensions)
 }, {
 

@@ -6,27 +6,63 @@ import { type Extension, mergeExtensions } from './extension.ts';
 import { FieldCompiler } from './field-compiler.ts';
 import type { FieldHelpers, FieldMethods, FieldWithMake } from './field-methods.ts';
 
-export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
-	type: string;
-	field: string;
+export interface FieldBuilderOptions<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	ModuleName extends string,
+	TypeName extends string,
+	FieldName extends string,
+> {
+	module: ModuleName;
+	type: TypeName;
+	field: FieldName;
 	extensions: ReadonlyArray<Extension>;
 	store: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 }
 
-export class FieldBuilder<Result, Source, Context, Args, Info> {
-	readonly #type: string;
-	readonly #field: string;
+export class FieldBuilder<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	ModuleName extends string,
+	TypeName extends string,
+	FieldName extends string,
+> {
+	readonly #module: ModuleName;
+	readonly #type: TypeName;
+	readonly #field: FieldName;
 	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #middlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #extensions: ReadonlyArray<Extension>;
 
-	constructor(options: FieldBuilderOptions<Result, Source, Context, Args, Info>) {
+	constructor(
+		options: FieldBuilderOptions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			ModuleName,
+			TypeName,
+			FieldName
+		>,
+	) {
+		this.#module = options.module;
 		this.#type = options.type;
 		this.#field = options.field;
 		this.#extensions = [...options.extensions];
 		this.#store = new Map(options.store);
 		this.#middlewares = [...options.middlewares];
+	}
+
+	get module() {
+		return this.#module;
 	}
 
 	get type() {
@@ -59,7 +95,17 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 				return session;
 			},
 			commit: () => {
-				return new FieldBuilder({
+				return new FieldBuilder<
+					Result,
+					Source,
+					Context,
+					Args,
+					Info,
+					ModuleName,
+					TypeName,
+					FieldName
+				>({
+					module: this.#module,
 					type: this.#type,
 					field: this.#field,
 					extensions: this.#extensions,
@@ -85,10 +131,19 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 		});
 	}
 
-	toMethods(): FieldMethods<Result, Source, Context, Args, Info> {
+	toMethods(): FieldMethods<Result, Source, Context, Args, Info, ModuleName, TypeName, FieldName> {
 		const extensions = mergeExtensions(this.#extensions, (ext) =>
 			ext.getFieldExtensions(this),
-		) as unknown as BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info>;
+		) as unknown as BaetaExtensions.FieldExtensions<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			ModuleName,
+			TypeName,
+			FieldName
+		>;
 		return {
 			...extensions,
 			$use: (middleware) => {

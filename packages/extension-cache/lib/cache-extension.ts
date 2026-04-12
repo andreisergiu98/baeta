@@ -23,9 +23,9 @@ export class CacheExtension extends Extension<never> {
 		this.client = client;
 	}
 
-	getTypeExtensions<Source, Context, Info>(
-		builder: TypeBuilder<Source, Context, Info>,
-	): BaetaExtensions.TypeExtensions<Source, Context, Info> {
+	getTypeExtensions<Source, Context, Info, ModuleName extends string, TypeName extends string>(
+		builder: TypeBuilder<Source, Context, Info, ModuleName, TypeName>,
+	): BaetaExtensions.TypeExtensions<Source, Context, Info, ModuleName, TypeName> {
 		return {
 			$createCache: (options) => {
 				return createCache<Source>(this.client, {
@@ -36,9 +36,27 @@ export class CacheExtension extends Extension<never> {
 		};
 	}
 
-	getFieldExtensions<Result, Source, Context, Args, Info>(
-		builder: FieldBuilder<Result, Source, Context, Args, Info>,
-	): BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info> {
+	getFieldExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName extends string,
+		TypeName extends string,
+		FieldName extends string,
+	>(
+		builder: FieldBuilder<Result, Source, Context, Args, Info, ModuleName, TypeName, FieldName>,
+	): BaetaExtensions.FieldExtensions<
+		Result,
+		Source,
+		Context,
+		Args,
+		Info,
+		ModuleName,
+		TypeName,
+		FieldName
+	> {
 		return {
 			$resolveCache: <CacheResult, CacheArgs = Record<string, never>>(
 				query: (args: CacheArgs) => CacheResult | Promise<CacheResult>,

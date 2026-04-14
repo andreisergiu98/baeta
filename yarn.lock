@@ -2859,7 +2859,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/extension-complexity": "workspace:^"
-    "@types/bun": "npm:^1.3.11"
+    "@types/bun": "npm:^1.3.12"
     "@types/deno": "npm:^2.5.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
@@ -2875,7 +2875,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
     "@baeta/extension-complexity": "workspace:^"
-    "@types/bun": "npm:^1.3.11"
+    "@types/bun": "npm:^1.3.12"
     "@types/deno": "npm:^2.5.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
@@ -8876,12 +8876,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bun@npm:^1.3.11":
-  version: 1.3.11
-  resolution: "@types/bun@npm:1.3.11"
+"@types/bun@npm:^1.3.12":
+  version: 1.3.12
+  resolution: "@types/bun@npm:1.3.12"
   dependencies:
-    bun-types: "npm:1.3.11"
-  checksum: 10/e296e03b857f4bd70b2fabbd62c2eb76a2bf22b48526dea6d6f036832723a5faec2f2076bfffcc49b34e675edb54e7750b04b90e9eed8266a1f473ca366794d5
+    bun-types: "npm:1.3.12"
+  checksum: 10/d005ca0957853d2b8de02c2029da7369bf450b60ff650da7078eb2f4881c1dcf39b17c951883c411c45d130e6baecf5b0bbf1741bfee866f4f7177419d61d391
   languageName: node
   linkType: hard
 
@@ -10918,12 +10918,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bun-types@npm:1.3.11":
-  version: 1.3.11
-  resolution: "bun-types@npm:1.3.11"
+"bun-types@npm:1.3.12":
+  version: 1.3.12
+  resolution: "bun-types@npm:1.3.12"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 10/e59b9447e0e1e639a0305ad0d5f14604c57450e9a871117915d30b491c79be21cdc77990bc01df7f99356cb66c914a0706aca064acd63d3c06f4cceb16348a63
+  checksum: 10/56e861eba24627ae07161c7a11aff2622fa6a15cfb85862304de3113a16e6fd7dd37fe6e0f5099c08617245153dc81db72bc8212183f0ecac4da3cec85b9dd52
   languageName: node
   linkType: hard
 

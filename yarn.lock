@@ -1818,7 +1818,7 @@ __metadata:
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260405.1"
-    miniflare: "npm:^4.20260405.0"
+    miniflare: "npm:^4.20260409.0"
     typescript: "catalog:dev"
     zod: "npm:^4.3.6"
   peerDependencies:
@@ -3412,9 +3412,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudflare/workerd-darwin-64@npm:1.20260409.1":
+  version: 1.20260409.1
+  resolution: "@cloudflare/workerd-darwin-64@npm:1.20260409.1"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@cloudflare/workerd-darwin-arm64@npm:1.20260405.1":
   version: 1.20260405.1
   resolution: "@cloudflare/workerd-darwin-arm64@npm:1.20260405.1"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@cloudflare/workerd-darwin-arm64@npm:1.20260409.1":
+  version: 1.20260409.1
+  resolution: "@cloudflare/workerd-darwin-arm64@npm:1.20260409.1"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -3426,6 +3440,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudflare/workerd-linux-64@npm:1.20260409.1":
+  version: 1.20260409.1
+  resolution: "@cloudflare/workerd-linux-64@npm:1.20260409.1"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@cloudflare/workerd-linux-arm64@npm:1.20260405.1":
   version: 1.20260405.1
   resolution: "@cloudflare/workerd-linux-arm64@npm:1.20260405.1"
@@ -3433,9 +3454,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudflare/workerd-linux-arm64@npm:1.20260409.1":
+  version: 1.20260409.1
+  resolution: "@cloudflare/workerd-linux-arm64@npm:1.20260409.1"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@cloudflare/workerd-windows-64@npm:1.20260405.1":
   version: 1.20260405.1
   resolution: "@cloudflare/workerd-windows-64@npm:1.20260405.1"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@cloudflare/workerd-windows-64@npm:1.20260409.1":
+  version: 1.20260409.1
+  resolution: "@cloudflare/workerd-windows-64@npm:1.20260409.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -17894,6 +17929,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"miniflare@npm:^4.20260409.0":
+  version: 4.20260409.0
+  resolution: "miniflare@npm:4.20260409.0"
+  dependencies:
+    "@cspotcode/source-map-support": "npm:0.8.1"
+    sharp: "npm:^0.34.5"
+    undici: "npm:7.24.4"
+    workerd: "npm:1.20260409.1"
+    ws: "npm:8.18.0"
+    youch: "npm:4.1.0-beta.10"
+  bin:
+    miniflare: bootstrap.js
+  checksum: 10/a6c63a0c88148a6e6eb9cf43a1f97cae81026eb19c8df514bccceb93dae75bb14f63c2a5c508c7f0285c77deb6758763ef76bcaaed52afd028f01dd62965ba55
+  languageName: node
+  linkType: hard
+
 "minimalistic-assert@npm:^1.0.0":
   version: 1.0.1
   resolution: "minimalistic-assert@npm:1.0.1"
@@ -23753,6 +23804,32 @@ __metadata:
   bin:
     workerd: bin/workerd
   checksum: 10/aa6380a38234f8904b338c9d0150d34c2a4c46bde05792482aa6b8648e4ce3c1d98b2c2687d12f7b1ad36cc799982c4ecc2e8826c5561638323a88eae3b9a617
+  languageName: node
+  linkType: hard
+
+"workerd@npm:1.20260409.1":
+  version: 1.20260409.1
+  resolution: "workerd@npm:1.20260409.1"
+  dependencies:
+    "@cloudflare/workerd-darwin-64": "npm:1.20260409.1"
+    "@cloudflare/workerd-darwin-arm64": "npm:1.20260409.1"
+    "@cloudflare/workerd-linux-64": "npm:1.20260409.1"
+    "@cloudflare/workerd-linux-arm64": "npm:1.20260409.1"
+    "@cloudflare/workerd-windows-64": "npm:1.20260409.1"
+  dependenciesMeta:
+    "@cloudflare/workerd-darwin-64":
+      optional: true
+    "@cloudflare/workerd-darwin-arm64":
+      optional: true
+    "@cloudflare/workerd-linux-64":
+      optional: true
+    "@cloudflare/workerd-linux-arm64":
+      optional: true
+    "@cloudflare/workerd-windows-64":
+      optional: true
+  bin:
+    workerd: bin/workerd
+  checksum: 10/6c5c0f71a78af8be8cdf4d53d2bfff39c0e415d008b7956c0397ff8e8bec51487839f1347d978b151f0a253b40a0108a36a8c544a42e2559128c2e19fab52aaf
   languageName: node
   linkType: hard
 

@@ -42,7 +42,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@yarnpkg/core": "^4.6.0",
+    "@yarnpkg/core": "^4.7.0",
     "@yarnpkg/fslib": "^3.1.5",
     "ava": "^7.0.0",
     "c8": "^11.0.0",

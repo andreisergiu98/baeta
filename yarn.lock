@@ -1817,7 +1817,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260405.1"
+    "@cloudflare/workers-types": "npm:^4.20260425.1"
     miniflare: "npm:^4.20260405.0"
     typescript: "catalog:dev"
     zod: "npm:^4.3.6"
@@ -2698,7 +2698,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260405.1"
+    "@cloudflare/workers-types": "npm:^4.20260425.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -2827,7 +2827,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260405.1"
+    "@cloudflare/workers-types": "npm:^4.20260425.1"
     graphql: "catalog:dev"
     graphql-ws: "catalog:prod"
     typescript: "catalog:dev"
@@ -3444,6 +3444,13 @@ __metadata:
   version: 4.20260405.1
   resolution: "@cloudflare/workers-types@npm:4.20260405.1"
   checksum: 10/7afdbb06a33134a347e23e61c57a971af653e6c5294593bb045b8fa03a9857c3dc32afee65000b8d4714a3b2601a634c0a2c1c0aac81fcb9d081fc90d9cf9c2b
+  languageName: node
+  linkType: hard
+
+"@cloudflare/workers-types@npm:^4.20260425.1":
+  version: 4.20260425.1
+  resolution: "@cloudflare/workers-types@npm:4.20260425.1"
+  checksum: 10/6b53d3a1c880547423c2d6808359d620f64a8978cc710f7ad48ff6a6b63f2c6a4537126f8c38e9bb599524637dc700b724061ef73a9ea34618400d6522f628e6
   languageName: node
   linkType: hard
 

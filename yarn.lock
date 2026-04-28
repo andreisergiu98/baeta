@@ -2951,7 +2951,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
     "@graphql-tools/graphql-file-loader": "npm:^8.1.12"
-    "@graphql-tools/load": "npm:^8.1.8"
+    "@graphql-tools/load": "npm:^8.1.10"
     "@graphql-tools/utils": "npm:^11.0.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
@@ -5906,6 +5906,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/load@npm:^8.1.10":
+  version: 8.1.10
+  resolution: "@graphql-tools/load@npm:8.1.10"
+  dependencies:
+    "@graphql-tools/schema": "npm:^10.0.33"
+    "@graphql-tools/utils": "npm:^11.1.0"
+    p-limit: "npm:3.1.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 10/d3c3de3f46ee5126ddcbca44212b15464179d99a466c7fd4a2dd89b32403b0c1e47695a50c474d344c3eb777f22ab4a69bb8671e032b1be60b0070771b0aed7d
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/merge@npm:^9.0.0, @graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.7":
   version: 9.1.7
   resolution: "@graphql-tools/merge@npm:9.1.7"
@@ -5915,6 +5929,18 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 10/e0b77dfc16e91d7c2450df0b57a85a93e11f0f67e37e396bcf04275d1db8ed1b7257c763ebe6e7f122041d81f00d6aa954fbec531fa6c0b449d195a9aff199cc
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/merge@npm:^9.1.9":
+  version: 9.1.9
+  resolution: "@graphql-tools/merge@npm:9.1.9"
+  dependencies:
+    "@graphql-tools/utils": "npm:^11.1.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 10/848c4e976a49d2105e2aca0101c5c08e10b16a10acde39b1e22578831d879dafbdc3d285b9e9ab72e323cd75fcc17cc393d7a7ba127b0a25a7514e3d86c421a3
   languageName: node
   linkType: hard
 
@@ -5952,6 +5978,19 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 10/5b775736f8b8454319e07cadc7d41bc5c9cc804a393490aaffd1bb7f59afddb02b498837e870bf98db4a1a989a721d5d8e2fd2b97409d078bac14503c2d4f9cb
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/schema@npm:^10.0.33":
+  version: 10.0.33
+  resolution: "@graphql-tools/schema@npm:10.0.33"
+  dependencies:
+    "@graphql-tools/merge": "npm:^9.1.9"
+    "@graphql-tools/utils": "npm:^11.1.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 10/51d150646348902810512e4401a970ae1316775c32641dd3799d5ae2aeedc42a76523730839c5f8add3a45bc6d22e719c3089ec385817799e51494478c70311a
   languageName: node
   linkType: hard
 
@@ -6002,6 +6041,20 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 10/4cc7577ab85d60908a1d5d448071b318791b798f571cd4b8e4289e0e0eeae9d7183b661a1a7d5da3cedaf5f9b62b936031e3a90d2e17a1c50acbd95d9106ba3c
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/utils@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "@graphql-tools/utils@npm:11.1.0"
+  dependencies:
+    "@graphql-typed-document-node/core": "npm:^3.1.1"
+    "@whatwg-node/promise-helpers": "npm:^1.0.0"
+    cross-inspect: "npm:1.0.1"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 10/d0bcccc1e2f72ed54a9e017896b80f3a03bbb00bb336b82fac1d0ead65a3b89a3c33ae8c74ae1c82fe34ea7e045c71d8a1ca87fa720abc0d83dd55d16dfcbfa9
   languageName: node
   linkType: hard
 

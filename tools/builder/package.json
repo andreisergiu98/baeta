@@ -42,7 +42,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@yarnpkg/core": "^4.6.0",
+    "@yarnpkg/core": "^4.7.0",
     "@yarnpkg/fslib": "^3.1.5",
     "ava": "^7.0.0",
     "c8": "^11.0.0",
@@ -50,10 +50,10 @@
     "execa": "^9.6.1",
     "log-symbols": "^7.0.1",
     "madge": "^8.0.0",
-    "ora": "^9.3.0",
+    "ora": "^9.4.0",
     "pathe": "^2.0.3",
     "prompts": "^2.4.2",
-    "tsdown": "^0.21.7",
+    "tsdown": "^0.21.10",
     "yaml": "^2.8.3",
     "yargs": "^18.0.0",
     "zod": "^4.3.6"

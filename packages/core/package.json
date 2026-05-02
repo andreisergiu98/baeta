@@ -56,8 +56,8 @@
   },
   "dependencies": {
     "@baeta/errors": "workspace:^",
-    "@graphql-tools/schema": "^10.0.31",
-    "@graphql-tools/utils": "^11.0.0"
+    "@graphql-tools/schema": "^10.0.33",
+    "@graphql-tools/utils": "^11.1.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

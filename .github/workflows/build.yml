@@ -267,7 +267,7 @@ jobs:
         node:
           - "22"
           - "24"
-          - 25.6.1
+          - "25"
       fail-fast: false
     services:
       redis:
@@ -324,7 +324,7 @@ jobs:
         node:
           - "22"
           - "24"
-          - 25.6.1
+          - "25"
         machine:
           - ubuntu-latest
           - windows-latest

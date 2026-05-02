@@ -11,7 +11,7 @@ import {
 } from 'github-actions-workflow-builder/lib/expression';
 import { setupNode, turboCaches } from './_shared/setup.ts';
 
-const NODE_VERSIONS = ['22', '24', '25.6.1'];
+const NODE_VERSIONS = ['22', '24', '25'];
 
 export default createWorkflow(
 	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, whenTrigger, when }) => {

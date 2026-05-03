@@ -27,7 +27,8 @@
   "type": "module",
   "scripts": {
     "build": "baeta generate",
-    "start": "baeta generate --watch --run='wrangler dev'"
+    "start": "baeta generate --watch --run='wrangler dev'",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@baeta/core": "workspace:^",

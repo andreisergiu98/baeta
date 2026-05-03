@@ -1,0 +1,10 @@
+type Product @key(fields: "id") {
+	id: ID!
+	name: String!
+	price: Float!
+	owner: User
+}
+
+type Query {
+	product(id: ID!): Product
+}

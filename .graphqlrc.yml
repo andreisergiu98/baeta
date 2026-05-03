@@ -53,6 +53,24 @@ projects:
     include:
       - "examples/directives/src/**/*.gql"
 
+  examples/federation-subgraph-products:
+    schema:
+      - "examples/federation-subgraph-products/src/modules/**/*.gql"
+    include:
+      - "examples/federation-subgraph-products/src/**/*.gql"
+
+  examples/federation-subgraph-users:
+    schema:
+      - "examples/federation-subgraph-users/src/modules/**/*.gql"
+    include:
+      - "examples/federation-subgraph-users/src/**/*.gql"
+
+  examples/federation-supergraph:
+    schema:
+      - "examples/federation-supergraph/src/modules/**/*.gql"
+    include:
+      - "examples/federation-supergraph/src/**/*.gql"
+
   examples/prisma:
     schema:
       - "examples/prisma/src/modules/**/*.gql"

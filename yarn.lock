@@ -270,6 +270,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@apollo/rover@npm:^0.38.1":
+  version: 0.38.1
+  resolution: "@apollo/rover@npm:0.38.1"
+  dependencies:
+    detect-libc: "npm:2.1.2"
+    tar: "npm:^7.0.0"
+    undici: "npm:^7.0.0"
+  bin:
+    rover: run.js
+  checksum: 10/9e0b0adf07445448082bf4be6960a402128a93f1ffff735568de41d83434802c43546a0c23fb8f8ab165b8f34df865de47a4b8e395b987bdde131e354ea63159
+  languageName: node
+  linkType: hard
+
 "@apollo/server-gateway-interface@npm:^2.0.0":
   version: 2.0.0
   resolution: "@apollo/server-gateway-interface@npm:2.0.0"
@@ -2478,6 +2491,46 @@ __metadata:
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
     typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-federation-subgraph-products@workspace:examples/federation-subgraph-products":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-federation-subgraph-products@workspace:examples/federation-subgraph-products"
+  dependencies:
+    "@apollo/server": "npm:^5.5.0"
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/federation": "workspace:^"
+    "@baeta/plugin-federation": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-federation-subgraph-users@workspace:examples/federation-subgraph-users":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-federation-subgraph-users@workspace:examples/federation-subgraph-users"
+  dependencies:
+    "@apollo/server": "npm:^5.5.0"
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/federation": "workspace:^"
+    "@baeta/plugin-federation": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/examples-federation-supergraph@workspace:examples/federation-supergraph":
+  version: 0.0.0-use.local
+  resolution: "@baeta/examples-federation-supergraph@workspace:examples/federation-supergraph"
+  dependencies:
+    "@apollo/rover": "npm:^0.38.1"
   languageName: unknown
   linkType: soft
 
@@ -10765,6 +10818,9 @@ __metadata:
     sort-package-json: "npm:^3.6.1"
     turbo: "npm:^2.9.8"
     typescript: "catalog:dev"
+  dependenciesMeta:
+    "@apollo/rover@0.38.1":
+      unplugged: true
   languageName: unknown
   linkType: soft
 
@@ -12608,7 +12664,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-libc@npm:^2.0.0, detect-libc@npm:^2.0.3, detect-libc@npm:^2.1.2":
+"detect-libc@npm:2.1.2, detect-libc@npm:^2.0.0, detect-libc@npm:^2.0.3, detect-libc@npm:^2.1.2":
   version: 2.1.2
   resolution: "detect-libc@npm:2.1.2"
   checksum: 10/b736c8d97d5d46164c0d1bed53eb4e6a3b1d8530d460211e2d52f1c552875e706c58a5376854e4e54f8b828c9cada58c855288c968522eb93ac7696d65970766
@@ -21889,7 +21945,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:^7.4.0, tar@npm:^7.5.3, tar@npm:^7.5.4":
+"tar@npm:^7.0.0, tar@npm:^7.4.0, tar@npm:^7.5.3, tar@npm:^7.5.4":
   version: 7.5.13
   resolution: "tar@npm:7.5.13"
   dependencies:
@@ -22460,6 +22516,13 @@ __metadata:
   version: 7.24.8
   resolution: "undici@npm:7.24.8"
   checksum: 10/99c11a4022f8f0a70bc88701169d3588b19312b835c57e186fd29158b55284e2b5689e7586bf16038f675bff2ab08a5a1ca4ef4c55d144fbb69ea43df170ade6
+  languageName: node
+  linkType: hard
+
+"undici@npm:^7.0.0":
+  version: 7.25.0
+  resolution: "undici@npm:7.25.0"
+  checksum: 10/038d3568c72bb976e3cc389284f7f1cc64cd70d578300e4676a449fbcb624a35fe99ac127b5f3729f18b8246d6c090444ab61b1b67736bb88f52a3e913d76bf8
   languageName: node
   linkType: hard
 

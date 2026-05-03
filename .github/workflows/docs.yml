@@ -3,17 +3,20 @@
 #
 #   github-actions-workflow-builder --directory ".github/workflows-src"
 
-name: Deploy website
+name: Build website
 on:
   push:
     branches:
       - next
     paths:
       - website/**
+  pull_request:
+    paths:
+      - website/**
   workflow_dispatch: null
 jobs:
-  deploy:
-    name: Deploy website
+  build:
+    name: Build website
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -36,7 +39,15 @@ jobs:
           restore-keys: yarn-cache-${{ runner.os }}-
       - run: yarn install --immutable
       - run: yarn docs:build
-      - uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e
+      - if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website/build
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+      - if: ${{ github.event_name == 'push' }}
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build

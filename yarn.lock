@@ -2655,6 +2655,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/federation@workspace:packages/federation":
+  version: 0.0.0-use.local
+  resolution: "@baeta/federation@workspace:packages/federation"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  peerDependencies:
+    graphql: ^16.6.0
+  languageName: unknown
+  linkType: soft
+
 "@baeta/generator-sdk@workspace:^, @baeta/generator-sdk@workspace:packages/generator-sdk":
   version: 0.0.0-use.local
   resolution: "@baeta/generator-sdk@workspace:packages/generator-sdk"
@@ -2741,6 +2755,25 @@ __metadata:
     "@types/node": "catalog:dev"
     execa: "npm:^9.6.1"
     typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/plugin-federation@workspace:packages/plugin-federation":
+  version: 0.0.0-use.local
+  resolution: "@baeta/plugin-federation@workspace:packages/plugin-federation"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/generator-sdk": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-graphql": "workspace:^"
+    "@baeta/util-path": "workspace:^"
+    "@graphql-tools/merge": "npm:^9.1.7"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  peerDependencies:
+    graphql: ^16.6.0
   languageName: unknown
   linkType: soft
 
@@ -5893,7 +5926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:^9.0.0, @graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.9":
+"@graphql-tools/merge@npm:^9.0.0, @graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.7, @graphql-tools/merge@npm:^9.1.9":
   version: 9.1.9
   resolution: "@graphql-tools/merge@npm:9.1.9"
   dependencies:

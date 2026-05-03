@@ -1,0 +1,10 @@
+type Review {
+	id: ID!
+	movieId: ID!
+	score: Int!
+	comment: String!
+}
+
+extend type Movie {
+	reviews: [Review!]
+}

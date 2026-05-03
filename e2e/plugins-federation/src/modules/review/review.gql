@@ -1,0 +1,10 @@
+type Review @key(fields: "id") {
+	id: ID!
+	movieId: ID!
+	score: Int!
+	comment: String!
+}
+
+extend type Movie {
+	reviews: [Review!]
+}

@@ -4275,13 +4275,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/logger@npm:3.10.0, @docusaurus/logger@npm:^3.10.0":
+"@docusaurus/logger@npm:3.10.0":
   version: 3.10.0
   resolution: "@docusaurus/logger@npm:3.10.0"
   dependencies:
     chalk: "npm:^4.1.2"
     tslib: "npm:^2.6.0"
   checksum: 10/9a591b9329efa0a7ea4d0d9cbc8c4f073a6ce4eec9ff77282061de0807130a03cbed962741323405df7eab94c47f28411d428999f5bd8de671f738d14a9f8a56
+  languageName: node
+  linkType: hard
+
+"@docusaurus/logger@npm:^3.10.1":
+  version: 3.10.1
+  resolution: "@docusaurus/logger@npm:3.10.1"
+  dependencies:
+    chalk: "npm:^4.1.2"
+    tslib: "npm:^2.6.0"
+  checksum: 10/84adf6f031edc9483d0214de5922678cc7133201a3375bb6e34a1305119142a85b261d3b77f65c0389523d200e150092a75eaaee5ffb4cf7b065ef087849513f
   languageName: node
   linkType: hard
 
@@ -12016,7 +12026,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@docusaurus/logger": "npm:^3.10.0"
+    "@docusaurus/logger": "npm:^3.10.1"
     "@types/fs-extra": "npm:^11.0.4"
     "@types/node": "catalog:dev"
     "@types/prompts": "npm:^2.4.9"

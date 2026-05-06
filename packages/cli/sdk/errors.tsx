@@ -1,4 +1,4 @@
-import style from 'ansi-styles';
+import { styleText } from 'node:util';
 import { Text } from 'ink';
 import type { TextOutput } from '../types/text.ts';
 
@@ -9,8 +9,8 @@ export interface ErrorsProps {
 	errors?: TextOutput[];
 }
 
-const errorIcon = `${style.red.open}✘${style.red.close}`;
-const errorTag = `${style.bgRed.open}[ERROR]${style.bgRed.close}`;
+const errorIcon = styleText('red', '✘');
+const errorTag = styleText('bgRed', '[ERROR]');
 
 export const errorNamespace = `${errorIcon} ${errorTag}`;
 
@@ -21,7 +21,7 @@ export function makeErrorMessage(message: string, bold = false) {
 		return wrapped;
 	}
 
-	return `${style.bold.open}${wrapped}${style.bold.close}`;
+	return styleText('bold', wrapped);
 }
 
 export function makeErrorOutput(id: string, message: string, bold = false) {

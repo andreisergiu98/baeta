@@ -2202,7 +2202,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@graphql-codegen/cli": "catalog:dev"
     "@graphql-codegen/client-preset": "catalog:dev"
-    "@turbo/gen": "npm:^2.9.6"
+    "@turbo/gen": "npm:^2.9.8"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -8813,6 +8813,18 @@ __metadata:
   bin:
     gen: dist/cli.js
   checksum: 10/54a28d0039eb27306257b07cb144a13141af3a459ad9567fce5fcbe47f1392e22ca7b331f62184dac3f24b468c01fc51728afd44d1fd4eb77f4f7799d95f3a0d
+  languageName: node
+  linkType: hard
+
+"@turbo/gen@npm:^2.9.8":
+  version: 2.9.8
+  resolution: "@turbo/gen@npm:2.9.8"
+  dependencies:
+    "@inquirer/prompts": "npm:^7.10.1"
+    esbuild: "npm:^0.25.0"
+  bin:
+    gen: dist/cli.js
+  checksum: 10/9a99977b0d7b6237ab1e6c8204f2365f6188dd9822c1522db513b1a5b273536d0bced63bc4f0cc6b7fe12e8af399fe670fa8034498b5502116531f804432ad24
   languageName: node
   linkType: hard
 

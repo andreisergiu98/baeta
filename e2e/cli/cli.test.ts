@@ -22,6 +22,15 @@ async function fileExists(path: string): Promise<boolean> {
 	return stats?.isFile() ?? false;
 }
 
+async function waitForFile(path: string, timeoutMs = 30_000): Promise<void> {
+	const start = Date.now();
+	while (Date.now() - start < timeoutMs) {
+		if (await fileExists(path)) return;
+		await new Promise((resolve) => setTimeout(resolve, 50));
+	}
+	throw new Error(`Timed out waiting for file: ${path}`);
+}
+
 function killProc(proc: { pid?: number; kill: (signal?: 'SIGTERM') => void }) {
 	if (process.platform === 'win32' && proc.pid) {
 		execa('taskkill', ['/pid', proc.pid.toString(), '/T', '/F']).catch((err) => {
@@ -151,9 +160,12 @@ test.serial('baeta generate --run executes command after generation', async (t) 
 // ─── Watch mode (non-interactive / piped) ───
 
 test.serial('baeta generate --watch exits on SIGTERM (non-interactive)', async (t) => {
+	const generatedTypesPath = resolve(cwd, 'src/__generated__/types.ts');
+	await unlink(generatedTypesPath).catch(() => null);
+
 	const proc = execa('yarn', ['baeta', 'generate', '--watch'], { cwd, env: procEnv });
 
-	await waitForOutput(proc, 'Watching');
+	await waitForFile(generatedTypesPath);
 
 	killProc(proc);
 

@@ -43,7 +43,7 @@ function deployWebsite(): Steps {
 	return ({ use }) => {
 		use(actions.ghPages, {
 			with: {
-				github_token: secrets['GITHUB_TOKEN'],
+				github_token: secrets.GITHUB_TOKEN,
 				publish_dir: './website/build',
 				user_name: 'github-actions[bot]',
 				user_email: '41898282+github-actions[bot]@users.noreply.github.com',

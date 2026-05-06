@@ -1,5 +1,5 @@
+import { readFile, writeFile } from 'node:fs/promises';
 import type { CodegenConfig } from '@graphql-codegen/cli';
-import { readFile, writeFile } from 'fs/promises';
 
 export function createCodegenConfig(config: {
 	schema: string | string[];

@@ -49,7 +49,6 @@
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test",
-    "test:circular": "builder test-circular",
     "types": "tsc --noEmit"
   },
   "ava": {

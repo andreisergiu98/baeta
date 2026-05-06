@@ -134,7 +134,6 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			} else {
 				workspace.set('scripts.test', 'builder test');
 			}
-			workspace.set('scripts.test:circular', 'builder test-circular');
 			workspace.set('scripts.check:deps', 'builder check-deps');
 
 			workspace.set('devDependencies.@baeta/builder', 'workspace:^');

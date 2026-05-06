@@ -3,7 +3,6 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { buildCommand } from '../commands/build.ts';
-import { checkCircularCommand } from '../commands/check-circular.ts';
 import { checkDepsCommand } from '../commands/check-deps.ts';
 import { prepareCommand } from '../commands/prepare.ts';
 import { printResolvedVersionsCommand } from '../commands/print-resolved-versions.ts';
@@ -14,7 +13,6 @@ import { testCommand } from '../commands/test.ts';
 await yargs(hideBin(process.argv))
 	.scriptName('builder')
 	.command(buildCommand)
-	.command(checkCircularCommand)
 	.command(checkDepsCommand)
 	.command(prepareCommand)
 	.command(printResolvedVersionsCommand)

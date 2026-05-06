@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@types/sinon": "^21.0.1",
-    "ava": "^7.0.0",
+    "ava": "^8.0.0",
     "sinon": "^21.1.2"
   },
   "devDependencies": {

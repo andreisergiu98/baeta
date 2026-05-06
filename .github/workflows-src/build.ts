@@ -3,15 +3,26 @@ import { github, secrets } from 'github-actions-workflow-builder/context';
 import {
 	and,
 	eq,
+	format,
+	fromJSON,
 	interpolate,
 	joinStrings,
 	neq,
 	or,
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
+import {
+	createNodeVersion,
+	setNodeBuildMatrix,
+	setNodeBuildMatrixWithMachine,
+} from './_shared/node.ts';
 import { setupNode, turboCaches } from './_shared/setup.ts';
 
-const NODE_VERSIONS = ['22', '24', '25.6.1'];
+const NODE_VERSIONS = [
+	createNodeVersion('22'),
+	createNodeVersion('24.14.1'),
+	createNodeVersion('25.6.1'),
+];
 
 export default createWorkflow(
 	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, whenTrigger, when }) => {
@@ -89,15 +100,8 @@ export default createWorkflow(
 			run('yarn examples:types');
 		});
 
-		const testsJob = addJob('tests', ({ setName, add, run, setBuildMatrix, addService }) => {
-			const matrix = setBuildMatrix(
-				{
-					node: NODE_VERSIONS,
-				},
-				{
-					failFast: false,
-				},
-			);
+		const testsJob = addJob('tests', ({ setName, add, run, addService }) => {
+			const matrix = add(setNodeBuildMatrix(NODE_VERSIONS, { failFast: false }));
 
 			setName(`Check tests (Node ${matrix.node})`);
 
@@ -140,25 +144,23 @@ export default createWorkflow(
 				ports: ['60080:80'],
 			});
 
-			add(setupNode({ nodeVersion: matrix.node, turboCache: turboCaches.tests }));
+			add(setupNode({ node: matrix, turboCache: turboCaches.tests }));
 			run('yarn check:tests');
 		});
 
-		const e2eJob = addJob('e2e', ({ setName, add, run, setBuildMatrix, setMachineType }) => {
-			const matrix = setBuildMatrix(
-				{
-					node: NODE_VERSIONS,
-					machine: ['ubuntu-latest', 'windows-latest', 'macos-latest'] as const,
-				},
-				{
-					failFast: false,
-				},
+		const e2eJob = addJob('e2e', ({ setName, add, run, setMachineType }) => {
+			const matrix = add(
+				setNodeBuildMatrixWithMachine(
+					NODE_VERSIONS,
+					['ubuntu-latest', 'windows-latest', 'macos-latest'],
+					{ failFast: false },
+				),
 			);
 
 			setName(`Check e2e tests (${matrix.machine} - Node ${matrix.node})`);
 			setMachineType(`${matrix.machine}`);
 
-			add(setupNode({ nodeVersion: matrix.node, turboCache: turboCaches.e2e }));
+			add(setupNode({ node: matrix, turboCache: turboCaches.e2e }));
 			run('yarn check:e2e');
 		});
 

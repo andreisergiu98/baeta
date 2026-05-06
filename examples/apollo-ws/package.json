@@ -27,7 +27,8 @@
   "type": "module",
   "scripts": {
     "build": "baeta generate",
-    "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
+    "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@apollo/server": "^5.5.0",

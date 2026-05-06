@@ -52,7 +52,7 @@
     "docs:dev": "yarn workspace @baeta/website start",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:sync": "turbo gen examples && yarn examples:build",
-    "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run tsc --noEmit",
+    "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run types",
     "precommit": "lint-staged -c .lintstagedrc.json && yarn check:actions",
     "prepare": "husky"
   },

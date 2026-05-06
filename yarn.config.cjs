@@ -155,6 +155,28 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
 		}
 
+		if (workspace.manifest.name.startsWith('@baeta/examples-')) {
+			const excludeFromBuild = ['@baeta/examples-shared', '@baeta/examples-federation-supergraph'];
+			const excludeFromTypes = ['@baeta/examples-federation-supergraph'];
+			const excludeFromStart = [
+				...excludeFromBuild,
+				'@baeta/examples-cloudflare',
+				'@baeta/examples-cloudflare-ws',
+			];
+			if (!excludeFromBuild.includes(workspace.manifest.name)) {
+				workspace.set('scripts.build', 'baeta generate');
+			}
+			if (!excludeFromTypes.includes(workspace.manifest.name)) {
+				workspace.set('scripts.types', 'tsc --noEmit');
+			}
+			if (!excludeFromStart.includes(workspace.manifest.name)) {
+				workspace.set(
+					'scripts.start',
+					"baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'",
+				);
+			}
+		}
+
 		if (workspace.manifest.name.startsWith('@baeta/e2e-')) {
 			workspace.set('scripts.e2e:types', 'tsc --noEmit');
 			if (workspace.manifest.name !== '@baeta/e2e-shared') {

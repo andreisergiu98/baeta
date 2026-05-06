@@ -30,7 +30,8 @@
     "build:base": "cd base && baeta generate",
     "build:prisma": "cd prisma && baeta generate",
     "build:subscriptions": "cd subscriptions && baeta generate",
-    "prisma": "cd prisma && pnpify prisma"
+    "prisma": "cd prisma && pnpify prisma",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@apollo/server": "^5.5.0",

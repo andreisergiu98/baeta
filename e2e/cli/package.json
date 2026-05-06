@@ -31,9 +31,9 @@
     "e2e:types": "tsc --noEmit"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    },
+    "extensions": [
+      "ts"
+    ],
     "timeout": "120s"
   },
   "dependencies": {

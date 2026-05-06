@@ -45,9 +45,9 @@
     "types": "tsc --noEmit"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    }
+    "extensions": [
+      "ts"
+    ]
   },
   "dependencies": {
     "js-base64": "^3.7.8"

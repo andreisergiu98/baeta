@@ -2,6 +2,8 @@
 
 import { spawnCli } from '../lib/spawn-cli.ts';
 
-await spawnCli({ root: import.meta.url, lib: 'ava', path: '../cli.mjs' }).catch((error) => {
+// import "ava";
+
+await spawnCli({ root: import.meta.url, lib: 'ava', path: '../cli.js' }).catch((error) => {
 	process.exit(error.exitCode || 1);
 });

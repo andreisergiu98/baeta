@@ -49,9 +49,9 @@
     "write:yoga:versions": "builder print-resolved-versions ./meta/yoga/package.json -o versions.yoga.json"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    }
+    "extensions": [
+      "ts"
+    ]
   },
   "dependencies": {
     "@docusaurus/logger": "^3.10.1",

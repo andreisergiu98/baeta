@@ -45,9 +45,9 @@
     "types": "tsc --noEmit"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    }
+    "extensions": [
+      "ts"
+    ]
   },
   "dependencies": {
     "@baeta/cache-redis-common": "workspace:^"

@@ -31,7 +31,8 @@
     },
     {
       "matchPackageNames": [
-        "node"
+        "node",
+        "actions/node-versions"
       ],
       "enabled": false
     }

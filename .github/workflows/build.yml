@@ -21,8 +21,8 @@ jobs:
     name: Check build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -34,12 +34,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
@@ -50,8 +50,8 @@ jobs:
     name: Check types
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -63,12 +63,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-types-24-${{ runner.os }}-${{ github.sha }}
@@ -79,8 +79,8 @@ jobs:
     name: Check linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -92,7 +92,7 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
@@ -103,8 +103,8 @@ jobs:
     name: Check formatting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -116,7 +116,7 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
@@ -127,8 +127,8 @@ jobs:
     name: Check dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -140,12 +140,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-deps-24-${{ runner.os }}-${{ github.sha }}
@@ -156,8 +156,8 @@ jobs:
     name: Check circular dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -169,12 +169,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-deps-circular-24-${{ runner.os }}-${{ github.sha }}
@@ -185,8 +185,8 @@ jobs:
     name: Check package constraints
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -198,7 +198,7 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
@@ -209,8 +209,8 @@ jobs:
     name: Check yarn dedupe
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -222,7 +222,7 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
@@ -233,8 +233,8 @@ jobs:
     name: Check examples
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -246,12 +246,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-examples-build-24-${{ runner.os }}-${{ github.sha }}
@@ -294,8 +294,8 @@ jobs:
         ports:
           - 60080:80
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: ${{ matrix.version }}
       - name: Enable Corepack
@@ -307,12 +307,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-tests-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
@@ -337,8 +337,8 @@ jobs:
           }}
       fail-fast: false
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: ${{ matrix.version }}
       - name: Enable Corepack
@@ -350,12 +350,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
@@ -378,8 +378,8 @@ jobs:
     if: ${{ (github.event_name == 'push') && ((github.event.ref ==
       'refs/heads/main') || (github.event.ref == 'refs/heads/next')) }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -391,12 +391,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
@@ -430,8 +430,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'workflow_dispatch' }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.14.1
       - name: Enable Corepack
@@ -443,12 +443,12 @@ jobs:
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_4
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.step_4.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@v5
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: .turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}

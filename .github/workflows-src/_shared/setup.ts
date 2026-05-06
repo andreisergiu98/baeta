@@ -6,6 +6,7 @@ import {
 	interpolate,
 	joinStrings,
 } from 'github-actions-workflow-builder/lib/expression';
+import { createNodeVersion, type NodeVersion } from './node.ts';
 
 export const turboCaches = {
 	build: 'build',
@@ -19,17 +20,17 @@ export const turboCaches = {
 
 type TurboCache = (typeof turboCaches)[keyof typeof turboCaches];
 
-export const DEFAULT_NODE = '24';
+export const DEFAULT_NODE = createNodeVersion('24.14.1');
 
 interface SetupNodeOptions {
-	nodeVersion?: string | Expression<string>;
+	node?: NodeVersion<string | Expression<string>>;
 	turboCache?: TurboCache;
 	disableYarnCache?: boolean;
 	skipInstall?: boolean;
 }
 
 export function setupNode(options: SetupNodeOptions = {}): Steps {
-	const nodeVersion = options.nodeVersion ?? DEFAULT_NODE;
+	const node = options.node ?? DEFAULT_NODE;
 	const turboNamespace = options.turboCache;
 
 	return ({ use, run }) => {
@@ -37,7 +38,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 
 		use('actions/setup-node@v6', {
 			with: {
-				'node-version': nodeVersion,
+				'node-version': node.version,
 			},
 		});
 
@@ -73,8 +74,8 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 			use('actions/cache@v5', {
 				with: {
 					path: '.turbo',
-					key: interpolate`turbo-${turboNamespace}-${nodeVersion}-${runner.os}-${github.sha}`,
-					'restore-keys': interpolate`turbo-${turboNamespace}-${nodeVersion}-${runner.os}-`,
+					key: interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-${github.sha}`,
+					'restore-keys': interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-`,
 				},
 			});
 		}

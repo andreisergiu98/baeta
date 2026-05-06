@@ -10,13 +10,11 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "strict": true,
-    "noImplicitAny": true,
     "erasableSyntaxOnly": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
-    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   }

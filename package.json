@@ -35,9 +35,9 @@
     "e2e/*"
   ],
   "scripts": {
+    "actions:build": "github-actions-workflow-builder --cleanup --directory .github/workflows-src",
+    "actions:check": "github-actions-workflow-builder --cleanup --check --directory .github/workflows-src",
     "build": "turbo build --filter='./packages/*'",
-    "build:actions": "github-actions-workflow-builder --cleanup --directory .github/workflows-src",
-    "check:actions": "github-actions-workflow-builder --cleanup --check --directory .github/workflows-src",
     "check:circular": "turbo test:circular --filter='./packages/*'",
     "check:constraints": "yarn constraints",
     "check:deps": "turbo check:deps --filter='./packages/*'",
@@ -47,13 +47,13 @@
     "check:linting": "biome check .",
     "check:tests": "turbo test --filter='./packages/*'",
     "check:types": "turbo types --filter='./packages/*'",
-    "docs:api": "yarn workspace @baeta/website write-api",
     "docs:build": "yarn workspace @baeta/website build",
     "docs:dev": "yarn workspace @baeta/website start",
+    "docs:generate": "yarn workspace @baeta/website write-api",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
     "examples:sync": "turbo gen examples && yarn examples:build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run types",
-    "precommit": "lint-staged -c .lintstagedrc.json && yarn check:actions",
+    "precommit": "lint-staged -c .lintstagedrc.json && yarn actions:check",
     "prepare": "husky"
   },
   "devDependencies": {

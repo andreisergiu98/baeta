@@ -75,12 +75,6 @@ export default createWorkflow(
 			run('yarn check:deps');
 		});
 
-		const circularDepsJob = addJob('circular-dependencies', ({ setName, add, run }) => {
-			setName('Check circular dependencies');
-			add(setupNode({ turboCache: turboCaches.circular }));
-			run('yarn check:circular');
-		});
-
 		const constraintsJob = addJob('constraints', ({ setName, add, run }) => {
 			setName('Check package constraints');
 			add(setupNode());
@@ -169,7 +163,6 @@ export default createWorkflow(
 			typesJob,
 			lintJob,
 			depsJob,
-			circularDepsJob,
 			constraintsJob,
 			testsJob,
 			e2eJob,
@@ -197,7 +190,7 @@ export default createWorkflow(
 							createGithubReleases: 'aggregate',
 						},
 						env: {
-							GITHUB_TOKEN: secrets['GITHUB_TOKEN'],
+							GITHUB_TOKEN: secrets.GITHUB_TOKEN,
 						},
 					});
 				});
@@ -229,7 +222,7 @@ export default createWorkflow(
 						env: {
 							// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
 							BRANCH: '${{ github.ref_name }}',
-							GITHUB_TOKEN: secrets['GITHUB_TOKEN'],
+							GITHUB_TOKEN: secrets.GITHUB_TOKEN,
 						},
 					},
 				);
@@ -237,7 +230,7 @@ export default createWorkflow(
 					and(
 						neq(prIdJob.outputs.pr, ''),
 						neq(prIdJob.outputs.pr, null),
-						startsWith(event.inputs['tag'], 'alpha'),
+						startsWith(event.inputs.tag, 'alpha'),
 					),
 					() => {
 						run(
@@ -250,14 +243,14 @@ export default createWorkflow(
 									'  echo "::error::No changesets detected, skipping snapshot"',
 									'  exit 1',
 									'fi',
-									`yarn builder release --ci --tag=${event.inputs['tag']}`,
+									`yarn builder release --ci --tag=${event.inputs.tag}`,
 								],
 								'\n',
 							),
 							{
 								shell: 'bash',
 								env: {
-									GITHUB_TOKEN: secrets['GITHUB_TOKEN'],
+									GITHUB_TOKEN: secrets.GITHUB_TOKEN,
 								},
 							},
 						);

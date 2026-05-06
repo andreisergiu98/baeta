@@ -14,7 +14,6 @@
         "^test"
       ]
     },
-    "test:circular": {},
     "e2e": {
       "dependsOn": [
         "e2e:generate",

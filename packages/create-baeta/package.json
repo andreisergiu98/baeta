@@ -44,7 +44,6 @@
     "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
     "test": "builder test",
-    "test:circular": "builder test-circular",
     "types": "yarn prebuild && tsc --noEmit",
     "write:apollo:versions": "builder print-resolved-versions ./meta/apollo/package.json -o versions.apollo.json",
     "write:yoga:versions": "builder print-resolved-versions ./meta/yoga/package.json -o versions.yoga.json"

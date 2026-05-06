@@ -38,7 +38,6 @@
     "actions:build": "github-actions-workflow-builder --cleanup --directory .github/workflows-src",
     "actions:check": "github-actions-workflow-builder --cleanup --check --directory .github/workflows-src",
     "build": "turbo build --filter='./packages/*'",
-    "check:circular": "turbo test:circular --filter='./packages/*'",
     "check:constraints": "yarn constraints",
     "check:deps": "turbo check:deps --filter='./packages/*'",
     "check:e2e": "yarn check:e2e:setup && turbo e2e --filter='./e2e/*'",

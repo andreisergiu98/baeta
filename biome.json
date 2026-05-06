@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
   "files": {
     "includes": [
       "**",
@@ -27,7 +27,8 @@
       "recommended": true,
       "suspicious": {
         "noExplicitAny": "off",
-        "noExportsInTest": "off"
+        "noExportsInTest": "off",
+        "noImportCycles": "error"
       },
       "correctness": {
         "useImportExtensions": "error",

@@ -152,35 +152,6 @@ jobs:
           restore-keys: turbo-deps-24-${{ runner.os }}-
       - run: yarn install --immutable
       - run: yarn check:deps
-  circular-dependencies:
-    name: Check circular dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
-        with:
-          node-version: 24.14.1
-      - name: Enable Corepack
-        run: |-
-          npm uninstall -g yarn || true
-          corepack enable
-        shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
-      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
-        with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
-      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
-        with:
-          path: .turbo
-          key: turbo-deps-circular-24-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-deps-circular-24-${{ runner.os }}-
-      - run: yarn install --immutable
-      - run: yarn check:circular
   constraints:
     name: Check package constraints
     runs-on: ubuntu-latest
@@ -369,7 +340,6 @@ jobs:
       - types
       - lint
       - dependencies
-      - circular-dependencies
       - constraints
       - tests
       - e2e
@@ -422,7 +392,6 @@ jobs:
       - types
       - lint
       - dependencies
-      - circular-dependencies
       - constraints
       - tests
       - e2e

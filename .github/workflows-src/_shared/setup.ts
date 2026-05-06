@@ -15,7 +15,6 @@ export const turboCaches = {
 	deps: 'deps',
 	tests: 'tests',
 	e2e: 'e2e',
-	circular: 'deps-circular',
 	examples: 'examples-build',
 } as const;
 

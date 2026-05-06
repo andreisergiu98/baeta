@@ -5,7 +5,7 @@ import { actions } from './_shared/actions.ts';
 import { setupNode } from './_shared/setup.ts';
 
 export default createWorkflow(
-	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, when }) => {
+	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob }) => {
 		setWorkflowName('Build website');
 		setPermissions({
 			contents: 'write',

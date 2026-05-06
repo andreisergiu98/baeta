@@ -3,7 +3,13 @@ import symbols from 'log-symbols';
 import ora from 'ora';
 import type { CommandModule } from 'yargs';
 import { getConfirmation } from '../lib/confirmation.ts';
+import { createReleaseNotes } from '../lib/release-notes.ts';
 import { getPreReleaseTag } from '../lib/release-tag.ts';
+import {
+	getPublicWorkspacePackages,
+	isPackagePublished,
+	loadWorkspaceProject,
+} from '../lib/workspace.ts';
 
 export const command = 'release';
 export const description = 'Publishes all packages';
@@ -15,6 +21,7 @@ interface ReleaseArgs {
 	'dry-run'?: boolean;
 	'check-branch'?: string;
 	'extra-args'?: string;
+	'create-release'?: boolean;
 }
 
 const preReleaseTag = await getPreReleaseTag();
@@ -51,6 +58,11 @@ export const releaseCommand: CommandModule<{}, ReleaseArgs> = {
 			.option('extra-args', {
 				describe: 'Extra arguments to pass to the npm publish command',
 				type: 'string',
+			})
+			.option('create-release', {
+				describe: 'Whether to create a GitHub release for this release',
+				type: 'boolean',
+				default: false,
 			});
 	},
 	handler: async (args) => {
@@ -89,14 +101,25 @@ export const releaseCommand: CommandModule<{}, ReleaseArgs> = {
 			console.log(`${symbols.success} Build completed successfully`);
 		}
 
+		const project = await loadWorkspaceProject();
+		const workspacePackages = await Promise.all(
+			getPublicWorkspacePackages(project).map(async (pkg) => {
+				return {
+					...pkg,
+					isPublished: await isPackagePublished(pkg.name, pkg.version),
+				};
+			}),
+		);
+		const unpublishedPackages = workspacePackages.filter((pkg) => !pkg.isPublished);
+
 		console.log(`${symbols.info} Publishing packages with tag "${args.tag}"...`);
 
 		const runArgs: string[] = [
 			'--tolerate-republish',
 			`--tag=${args.tag}`,
-			'--provenance',
-			args.extraArgs,
+			!args.dryRun ? '--provenance' : undefined,
 			args.dryRun ? '--dry-run' : undefined,
+			args.extraArgs,
 		].filter((el) => el != null);
 
 		await execaCommand(`yarn workspaces foreach -A --no-private npm publish ${runArgs.join(' ')}`, {
@@ -111,6 +134,15 @@ export const releaseCommand: CommandModule<{}, ReleaseArgs> = {
 				stdio: 'inherit',
 			});
 			tagSpinner.succeed('Release tagged successfully');
+		}
+
+		if (args.createRelease && unpublishedPackages.length > 0) {
+			await createReleaseNotes({
+				packages: unpublishedPackages,
+				githubToken: process.env.GITHUB_TOKEN,
+				isPrerelease: args.tag !== 'latest',
+				dryRun: args.dryRun,
+			});
 		}
 	},
 };

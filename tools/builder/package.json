@@ -42,6 +42,8 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
+    "@actions/github": "^9.1.1",
+    "@changesets/release-utils": "^0.2.7",
     "@yarnpkg/core": "^4.7.0",
     "@yarnpkg/fslib": "^3.1.5",
     "ava": "^8.0.0",
@@ -59,7 +61,6 @@
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
-    "@types/madge": "^5.0.3",
     "@types/node": "catalog:dev",
     "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.35",

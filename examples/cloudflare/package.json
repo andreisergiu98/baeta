@@ -34,14 +34,14 @@
     "@baeta/core": "workspace:^",
     "graphql": "catalog:dev",
     "graphql-yoga": "catalog:dev",
-    "hono": "^4.12.15"
+    "hono": "^4.12.16"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20260426.1",
-    "miniflare": "^4.20260426.0",
+    "@cloudflare/workers-types": "^4.20260503.1",
+    "miniflare": "^4.20260430.0",
     "typescript": "catalog:dev",
-    "wrangler": "^4.86.0"
+    "wrangler": "^4.87.0"
   }
 }

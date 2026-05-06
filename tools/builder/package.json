@@ -54,9 +54,9 @@
     "pathe": "^2.0.3",
     "prompts": "^2.4.2",
     "tsdown": "^0.21.10",
-    "yaml": "^2.8.3",
+    "yaml": "^2.8.4",
     "yargs": "^18.0.0",
-    "zod": "^4.3.6"
+    "zod": "^4.4.2"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",

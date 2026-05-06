@@ -30,6 +30,19 @@
       "groupName": "all non-major dependencies"
     },
     {
+      "matchDepTypes": [
+        "dependencies",
+        "devDependencies"
+      ],
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchDepTypes": [
+        "peerDependencies"
+      ],
+      "rangeStrategy": "replace"
+    },
+    {
       "matchPackageNames": [
         "node",
         "actions/node-versions"

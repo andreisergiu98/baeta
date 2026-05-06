@@ -1,11 +1,11 @@
 import createWorkflow, { type Steps } from 'github-actions-workflow-builder';
 import { github, secrets } from 'github-actions-workflow-builder/context';
-import { interpolate } from 'github-actions-workflow-builder/lib/expression';
+import { eq, interpolate } from 'github-actions-workflow-builder/lib/expression';
 import { actions } from './_shared/actions.ts';
 import { setupNode } from './_shared/setup.ts';
 
 export default createWorkflow(
-	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob }) => {
+	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, when }) => {
 		setWorkflowName('Build website');
 		setPermissions({
 			contents: 'write',
@@ -25,15 +25,17 @@ export default createWorkflow(
 			cancelInProgress: true,
 		});
 
-		addJob('build', ({ setName, add, run, whenTrigger }) => {
+		addJob('build', ({ setName, add, run, whenTrigger, when }) => {
 			setName('Build website');
 			add(setupNode());
 			run('yarn docs:build');
-			whenTrigger('workflow_dispatch', () => {
-				add(deployWebsite());
-			});
-			whenTrigger('push', () => {
-				add(deployWebsite());
+			when(eq(github.repository, 'andreisergiu98/baeta'), () => {
+				whenTrigger('workflow_dispatch', () => {
+					add(deployWebsite());
+				});
+				whenTrigger('push', () => {
+					add(deployWebsite());
+				});
 			});
 		});
 	},

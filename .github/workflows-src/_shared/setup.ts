@@ -6,6 +6,7 @@ import {
 	interpolate,
 	joinStrings,
 } from 'github-actions-workflow-builder/lib/expression';
+import { actions } from './actions.ts';
 import { createNodeVersion, type NodeVersion } from './node.ts';
 
 export const turboCaches = {
@@ -34,9 +35,9 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 	const turboNamespace = options.turboCache;
 
 	return ({ use, run }) => {
-		use('actions/checkout@v6');
+		use(actions.checkout);
 
-		use('actions/setup-node@v6', {
+		use(actions.setupNode, {
 			with: {
 				'node-version': node.version,
 			},
@@ -61,7 +62,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 				},
 			);
 
-			use('actions/cache@v5', {
+			use(actions.cache, {
 				with: {
 					path: interpolate`${yarnDir.outputs.dir}`,
 					key: interpolate`yarn-cache-${runner.os}-${hashFiles('**/yarn.lock')}`,
@@ -71,7 +72,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 		}
 
 		if (turboNamespace) {
-			use('actions/cache@v5', {
+			use(actions.cache, {
 				with: {
 					path: '.turbo',
 					key: interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-${github.sha}`,

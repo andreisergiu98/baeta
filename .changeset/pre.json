@@ -34,14 +34,21 @@
     "@baeta/cache-ioredis": "2.0.0-next.11",
     "@baeta/cache-iovalkey": "2.0.0-next.11",
     "@baeta/cache-redis-common": "2.0.0-next.11",
-    "@baeta/cache-upstash": "2.0.0-next.11"
+    "@baeta/cache-upstash": "2.0.0-next.11",
+    "@baeta/federation": "2.0.0-next.1",
+    "@baeta/plugin-federation": "2.0.0-next.1",
+    "@baeta/util-graphql": "2.0.0-next.1"
   },
   "changesets": [
+    "better-garlics-raise",
+    "big-adults-cry",
     "blue-bikes-repair",
+    "cuddly-days-sin",
     "curly-carrots-know",
     "every-forks-see",
     "fast-kids-hug",
     "flat-walls-sink",
+    "giant-beans-show",
     "grumpy-windows-reply",
     "heavy-dogs-tickle",
     "heavy-pandas-kneel",
@@ -54,11 +61,13 @@
     "plain-baths-allow",
     "purple-badgers-scream",
     "quiet-ears-give",
+    "ready-views-marry",
     "ripe-apes-itch",
     "silent-carpets-obey",
     "social-rings-love",
     "tall-coins-sin",
     "tall-papayas-call",
+    "tidy-planes-fail",
     "whole-pets-allow"
   ]
 }

@@ -2768,7 +2768,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-graphql": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@graphql-tools/merge": "npm:^9.1.7"
+    "@graphql-tools/merge": "npm:^9.1.9"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -5926,7 +5926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:^9.0.0, @graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.7, @graphql-tools/merge@npm:^9.1.9":
+"@graphql-tools/merge@npm:^9.0.0, @graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.9":
   version: 9.1.9
   resolution: "@graphql-tools/merge@npm:9.1.9"
   dependencies:

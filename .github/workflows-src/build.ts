@@ -198,7 +198,7 @@ export default createWorkflow(
 								createGithubReleases: 'aggregate',
 							},
 							env: {
-								GITHUB_TOKEN: secrets.GITHUB_TOKEN,
+								GITHUB_TOKEN: secrets.RELEASE_PR_TOKEN,
 							},
 						});
 					});

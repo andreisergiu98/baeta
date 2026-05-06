@@ -1,6 +1,7 @@
 import createWorkflow, { type Steps } from 'github-actions-workflow-builder';
 import { github, secrets } from 'github-actions-workflow-builder/context';
 import { interpolate } from 'github-actions-workflow-builder/lib/expression';
+import { actions } from './_shared/actions.ts';
 import { setupNode } from './_shared/setup.ts';
 
 export default createWorkflow(
@@ -40,7 +41,7 @@ export default createWorkflow(
 
 function deployWebsite(): Steps {
 	return ({ use }) => {
-		use('peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e', {
+		use(actions.ghPages, {
 			with: {
 				github_token: secrets['GITHUB_TOKEN'],
 				publish_dir: './website/build',

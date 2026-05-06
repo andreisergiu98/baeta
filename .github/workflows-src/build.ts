@@ -9,6 +9,7 @@ import {
 	or,
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
+import { actions } from './_shared/actions.ts';
 import {
 	createNodeVersion,
 	setNodeBuildMatrix,
@@ -185,7 +186,7 @@ export default createWorkflow(
 					addDependencies(...releaseDependencies);
 					setName('Publish packages or open PR');
 					add(setupNode({ turboCache: turboCaches.build }));
-					use('dotansimha/changesets-action@069996e9be15531bd598272996fa23853d61590e', {
+					use(actions.changesets, {
 						with: {
 							// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
 							publish: 'yarn builder release --ci --check-branch=${{ github.ref_name }}',

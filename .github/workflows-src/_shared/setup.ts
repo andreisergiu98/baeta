@@ -21,7 +21,7 @@ export const turboCaches = {
 
 type TurboCache = (typeof turboCaches)[keyof typeof turboCaches];
 
-export const DEFAULT_NODE = createNodeVersion('24.14.1');
+export const DEFAULT_NODE = createNodeVersion('22');
 
 interface SetupNodeOptions {
 	node?: NodeVersion<string | Expression<string>>;

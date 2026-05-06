@@ -2131,6 +2131,48 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/e2e-plugins-federation-options@workspace:e2e/plugins-federation-options":
+  version: 0.0.0-use.local
+  resolution: "@baeta/e2e-plugins-federation-options@workspace:e2e/plugins-federation-options"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/e2e-shared": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/federation": "workspace:^"
+    "@baeta/plugin-federation": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@graphql-codegen/cli": "catalog:dev"
+    "@graphql-codegen/client-preset": "catalog:dev"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/e2e-plugins-federation@workspace:e2e/plugins-federation":
+  version: 0.0.0-use.local
+  resolution: "@baeta/e2e-plugins-federation@workspace:e2e/plugins-federation"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/cli": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/e2e-shared": "workspace:^"
+    "@baeta/errors": "workspace:^"
+    "@baeta/federation": "workspace:^"
+    "@baeta/plugin-federation": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@graphql-codegen/cli": "catalog:dev"
+    "@graphql-codegen/client-preset": "catalog:dev"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/e2e-plugins-gitignore@workspace:e2e/plugins-gitignore":
   version: 0.0.0-use.local
   resolution: "@baeta/e2e-plugins-gitignore@workspace:e2e/plugins-gitignore"
@@ -2655,7 +2697,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/federation@workspace:packages/federation":
+"@baeta/federation@workspace:^, @baeta/federation@workspace:packages/federation":
   version: 0.0.0-use.local
   resolution: "@baeta/federation@workspace:packages/federation"
   dependencies:
@@ -2758,7 +2800,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/plugin-federation@workspace:packages/plugin-federation":
+"@baeta/plugin-federation@workspace:^, @baeta/plugin-federation@workspace:packages/plugin-federation":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin-federation@workspace:packages/plugin-federation"
   dependencies:

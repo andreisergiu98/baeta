@@ -105,6 +105,25 @@ export const syncRules: SyncRule[] = [
 		{},
 	),
 	merge({ from: '_shared/base', to: 'plugins-exec' }, allModulesAndTypes),
+	merge(
+		{
+			from: '_shared/base',
+			to: 'plugins-federation',
+			files: [...allTypes],
+		},
+		{},
+	),
+	merge(
+		{
+			from: '_shared/base',
+			to: 'plugins-federation-options',
+			files: [
+				'modules/extensions.ts:src/graphql/extensions.ts',
+				'types/context.ts:src/types/context.ts',
+			],
+		},
+		{},
+	),
 	merge({ from: '_shared/base', to: 'plugins-gitignore' }, allModulesAndTypes),
 	merge(
 		{

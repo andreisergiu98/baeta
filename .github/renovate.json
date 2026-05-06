@@ -28,6 +28,12 @@
         "patch"
       ],
       "groupName": "all non-major dependencies"
+    },
+    {
+      "matchPackageNames": [
+        "node"
+      ],
+      "enabled": false
     }
   ]
 }

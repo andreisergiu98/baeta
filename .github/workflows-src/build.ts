@@ -3,8 +3,6 @@ import { github, secrets } from 'github-actions-workflow-builder/context';
 import {
 	and,
 	eq,
-	format,
-	fromJSON,
 	interpolate,
 	joinStrings,
 	neq,

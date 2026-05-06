@@ -373,13 +373,14 @@ jobs:
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
-      - uses: dotansimha/changesets-action@069996e9be15531bd598272996fa23853d61590e
+      - uses: changesets/action@6a0a831ff30acef54f2c6aa1cbbc1096b066edaf
         with:
-          publish: yarn builder release --ci --check-branch=${{ github.ref_name }}
+          publish: yarn builder release --ci --create-release --check-branch=${{
+            github.ref_name }}
           version: yarn changeset version
           commit: "chore: publish packages"
           title: "chore: publish packages"
-          createGithubReleases: aggregate
+          createGithubReleases: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:

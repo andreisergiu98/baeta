@@ -1,21 +1,16 @@
-import { open, writeFile } from 'node:fs/promises';
-import path from 'node:path';
-import { Configuration, Project, structUtils } from '@yarnpkg/core';
-import { npath, ppath } from '@yarnpkg/fslib';
-import { parse as parseYaml } from 'yaml';
+import { writeFile } from 'node:fs/promises';
 import type { CommandModule } from 'yargs';
-import z from 'zod';
 import { loadPackageJson } from '../lib/package-json.ts';
+import {
+	loadWorkspaceCatalogs,
+	loadWorkspaceProject,
+	loadWorkspaceVersionsMap,
+} from '../lib/workspace.ts';
 
 interface PrintResolvedVersionsArgs {
 	target: string;
 	out?: string;
 }
-
-const YarnRcSchema = z.object({
-	catalog: z.record(z.string(), z.string()).optional(),
-	catalogs: z.record(z.string(), z.record(z.string(), z.string())).optional(),
-});
 
 // biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
 export const printResolvedVersionsCommand: CommandModule<{}, PrintResolvedVersionsArgs> = {
@@ -71,9 +66,9 @@ export const printResolvedVersionsCommand: CommandModule<{}, PrintResolvedVersio
 };
 
 async function getWorkspaceVersions() {
-	const project = await loadProject(process.cwd());
-	const workspaceVersions = await loadWorkspaceVersions(project);
-	const { defaultCatalog, namedCatalogs } = await loadCatalogs(project);
+	const project = await loadWorkspaceProject();
+	const workspaceVersions = await loadWorkspaceVersionsMap(project);
+	const { defaultCatalog, namedCatalogs } = await loadWorkspaceCatalogs(project);
 
 	return {
 		workspaceVersions,
@@ -139,53 +134,4 @@ function resolveCatalogSpecifier(
 	}
 
 	return version;
-}
-
-async function loadProject(absPath: string): Promise<Project> {
-	const portableCwd = ppath.dirname(npath.toPortablePath(absPath));
-	const configuration = await Configuration.find(portableCwd, null, {
-		strict: false,
-	});
-	const { project } = await Project.find(configuration, portableCwd);
-	return project;
-}
-
-async function loadWorkspaceVersions(project: Project): Promise<Map<string, string>> {
-	const workspaceVersions = new Map<string, string>();
-	for (const workspace of project.workspaces) {
-		const { manifest } = workspace;
-		if (!manifest.name || !manifest.version) continue;
-		workspaceVersions.set(structUtils.stringifyIdent(manifest.name), manifest.version);
-	}
-	return workspaceVersions;
-}
-
-async function loadCatalogs(project: Project): Promise<{
-	defaultCatalog: Map<string, string>;
-	namedCatalogs: Map<string, Map<string, string>>;
-}> {
-	const projectCwd = npath.fromPortablePath(project.cwd);
-	const yarnRcPath = path.join(projectCwd, '.yarnrc.yml');
-
-	try {
-		const fd = await open(yarnRcPath, 'r');
-		const yarnRcContent = await fd.readFile('utf8');
-		await fd.close();
-
-		const yarnRc = YarnRcSchema.parse(parseYaml(yarnRcContent));
-		const defaultCatalog = new Map<string, string>(Object.entries(yarnRc.catalog ?? {}));
-		const namedCatalogs = new Map<string, Map<string, string>>(
-			Object.entries(yarnRc.catalogs ?? {}).map(([name, entries]) => [
-				name,
-				new Map(Object.entries(entries)),
-			]),
-		);
-
-		return { defaultCatalog, namedCatalogs };
-	} catch {
-		return {
-			defaultCatalog: new Map<string, string>(),
-			namedCatalogs: new Map<string, Map<string, string>>(),
-		};
-	}
 }

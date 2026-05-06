@@ -190,12 +190,13 @@ export default createWorkflow(
 						add(setupNode({ turboCache: turboCaches.build }));
 						use(actions.changesets, {
 							with: {
-								// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
-								publish: 'yarn builder release --ci --check-branch=${{ github.ref_name }}',
+								publish:
+									// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
+									'yarn builder release --ci --create-release --check-branch=${{ github.ref_name }}',
 								version: 'yarn changeset version',
 								commit: 'chore: publish packages',
 								title: 'chore: publish packages',
-								createGithubReleases: 'aggregate',
+								createGithubReleases: false,
 							},
 							env: {
 								GITHUB_TOKEN: secrets.GITHUB_TOKEN,

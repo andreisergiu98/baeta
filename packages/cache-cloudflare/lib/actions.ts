@@ -45,7 +45,7 @@ const saveItemsAction = defineAction(
 		expiresAt: z.number(),
 		disableOverwrite: z.boolean(),
 	}),
-	z.void(),
+	z.void().optional(),
 );
 
 const saveItemsWithDiffAction = defineAction(
@@ -62,7 +62,7 @@ const deleteItemsAction = defineAction(
 	z.object({
 		keys: z.array(z.string()),
 	}),
-	z.void(),
+	z.void().optional(),
 );
 
 const deleteItemsWithDiffAction = defineAction(
@@ -89,7 +89,7 @@ const saveQueryAction = defineAction(
 		metadata: z.string(),
 		expiresAt: z.number(),
 	}),
-	z.void(),
+	z.void().optional(),
 );
 
 const deleteQueriesAction = defineAction(
@@ -97,7 +97,7 @@ const deleteQueriesAction = defineAction(
 	z.object({
 		indexes: z.array(z.string()),
 	}),
-	z.void(),
+	z.void().optional(),
 );
 
 export const actions = [

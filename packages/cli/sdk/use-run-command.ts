@@ -1,4 +1,4 @@
-import style from 'ansi-styles';
+import { styleText } from 'node:util';
 import { useStdin, useStdout } from 'ink';
 import { useCallback, useRef } from 'react';
 import { type PtyProcess, startProcess } from '../utils/process.ts';
@@ -19,12 +19,11 @@ export function useRunCommand(command?: string) {
 		}
 
 		const isTTY = stdin.isTTY && stdout.isTTY;
-		const headerPrefix = isTTY ? `${style.blue.open}${style.bold.open}` : '';
-		const headerSuffix = isTTY ? `${style.bold.close}${style.blue.close}\n` : '\n';
+		const header = isTTY ? styleText(['blue', 'bold'], 'App') : 'App';
 		const toStdout = isTTY ? write : stdout.write.bind(stdout);
 
 		const writeHeader = () => {
-			toStdout(`${headerPrefix}App${headerSuffix}`);
+			toStdout(`${header}\n`);
 		};
 
 		const clearScreen = () => {

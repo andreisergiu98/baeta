@@ -1920,7 +1920,6 @@ __metadata:
     "@types/node": "catalog:dev"
     "@types/react": "catalog:dev"
     "@types/yargs": "npm:^17.0.35"
-    ansi-styles: "npm:^6.2.3"
     execa: "npm:^9.6.1"
     graphql: "catalog:dev"
     ink: "npm:^7.0.1"

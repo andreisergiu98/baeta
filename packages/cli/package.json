@@ -61,7 +61,6 @@
     "@baeta/generator": "workspace:^",
     "@baeta/plugin-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "ansi-styles": "^6.2.3",
     "execa": "^9.6.1",
     "ink": "^7.0.1",
     "node-pty": "1.2.0-beta.12",

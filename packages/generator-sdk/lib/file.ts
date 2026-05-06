@@ -30,7 +30,7 @@ export interface FileOptions {
 	disableBiomeV2Header?: boolean;
 
 	/**
-	 * Dissallow overwriting the file.
+	 * Disallow overwriting the file.
 	 * @defaultValue false
 	 */
 	disableOverwrite?: boolean;

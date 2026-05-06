@@ -2,6 +2,8 @@ import { normalize } from '@baeta/util-path';
 import type { Source } from '@graphql-tools/utils';
 import type { GraphQLSchema } from 'graphql';
 
+export type { Source };
+
 const SEP = '/';
 
 export function groupSourcesByModule(sources: Source[], basePath: string) {

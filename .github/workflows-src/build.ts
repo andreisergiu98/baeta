@@ -10,6 +10,7 @@ import {
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
 import { actions } from './_shared/actions.ts';
+import { images } from './_shared/images.ts';
 import {
 	createNodeVersion,
 	setNodeBuildMatrix,
@@ -106,7 +107,7 @@ export default createWorkflow(
 
 			addService({
 				name: 'redis',
-				image: 'redis',
+				image: images.redis,
 				options: joinStrings(
 					[
 						`--health-cmd "redis-cli ping"`,
@@ -120,7 +121,7 @@ export default createWorkflow(
 			});
 			addService({
 				name: 'valkey',
-				image: 'valkey/valkey:8-alpine',
+				image: images.valkey,
 				options: joinStrings(
 					[
 						`--health-cmd "valkey-cli ping"`,
@@ -134,7 +135,7 @@ export default createWorkflow(
 			});
 			addService({
 				name: 'redis-http',
-				image: 'hiett/serverless-redis-http:latest',
+				image: images.serverlessRedisHttp,
 				env: {
 					SRH_MODE: 'env',
 					SRH_TOKEN: 'example_token',

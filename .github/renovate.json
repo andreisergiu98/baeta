@@ -35,6 +35,24 @@
         "actions/node-versions"
       ],
       "enabled": false
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "redis"
+      ],
+      "allowedVersions": "<8"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "valkey/valkey"
+      ],
+      "allowedVersions": "<9"
     }
   ]
 }

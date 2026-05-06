@@ -26,6 +26,9 @@ const NODE_VERSIONS = [
 
 export default createWorkflow(
 	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, whenTrigger, when }) => {
+		setPermissions({
+			contents: 'read',
+		});
 		setWorkflowName('Build');
 		addTrigger('push', {
 			branches: ['main', 'next'],
@@ -170,88 +173,99 @@ export default createWorkflow(
 		];
 
 		whenTrigger('push', (event) => {
-			when(or(eq(event.ref, 'refs/heads/main'), eq(event.ref, 'refs/heads/next')), () => {
-				addJob('publish', ({ setName, add, use, addDependencies, setPermissions }) => {
-					setPermissions({
-						contents: 'write',
-						'pull-requests': 'write',
-						'id-token': 'write',
+			when(
+				and(
+					or(eq(event.ref, 'refs/heads/main'), eq(event.ref, 'refs/heads/next')),
+					eq(github.repository, 'andreisergiu98/baeta'),
+				),
+				() => {
+					addJob('publish', ({ setName, add, use, addDependencies, setPermissions }) => {
+						setPermissions({
+							contents: 'write',
+							'pull-requests': 'write',
+							'id-token': 'write',
+						});
+						addDependencies(...releaseDependencies);
+						setName('Publish packages or open PR');
+						add(setupNode({ turboCache: turboCaches.build }));
+						use(actions.changesets, {
+							with: {
+								// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
+								publish: 'yarn builder release --ci --check-branch=${{ github.ref_name }}',
+								version: 'yarn changeset version',
+								commit: 'chore: publish packages',
+								title: 'chore: publish packages',
+								createGithubReleases: 'aggregate',
+							},
+							env: {
+								GITHUB_TOKEN: secrets.GITHUB_TOKEN,
+							},
+						});
 					});
-					addDependencies(...releaseDependencies);
-					setName('Publish packages or open PR');
-					add(setupNode({ turboCache: turboCaches.build }));
-					use(actions.changesets, {
-						with: {
-							// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
-							publish: 'yarn builder release --ci --check-branch=${{ github.ref_name }}',
-							version: 'yarn changeset version',
-							commit: 'chore: publish packages',
-							title: 'chore: publish packages',
-							createGithubReleases: 'aggregate',
-						},
-						env: {
-							GITHUB_TOKEN: secrets.GITHUB_TOKEN,
-						},
-					});
-				});
-			});
+				},
+			);
 		});
 
 		whenTrigger('workflow_dispatch', (event) => {
-			addJob('publish-snapshot', ({ setName, add, run, addDependencies, when }) => {
-				setPermissions({
-					'id-token': 'write',
-				});
-				addDependencies(...releaseDependencies);
-				setName('Publish snapshot packages');
-				add(setupNode({ turboCache: turboCaches.build }));
-				const prIdJob = run<{ pr: number }>(
-					joinStrings(
-						[
-							'PR_NUMBER=$(gh pr list \\',
-							'  --head $BRANCH \\',
-							`  --repo ${github.repository} \\`,
-							'  --json number \\',
-							'  --jq ".[0].number")',
-							'echo "pr=$PR_NUMBER" >> $GITHUB_OUTPUT',
-						],
-						'\n',
-					),
-					{
-						shell: 'bash',
-						env: {
-							// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
-							BRANCH: '${{ github.ref_name }}',
-							GITHUB_TOKEN: secrets.GITHUB_TOKEN,
-						},
-					},
-				);
-				when(
-					and(
-						neq(prIdJob.outputs.pr, ''),
-						neq(prIdJob.outputs.pr, null),
-						startsWith(event.inputs.tag, 'alpha'),
-					),
-					() => {
-						run(
+			when(eq(github.repository, 'andreisergiu98/baeta'), () => {
+				addJob(
+					'publish-snapshot',
+					({ setName, setPermissions, add, run, addDependencies, when }) => {
+						setPermissions({
+							'id-token': 'write',
+						});
+						addDependencies(...releaseDependencies);
+						setName('Publish snapshot packages');
+						add(setupNode({ turboCache: turboCaches.build }));
+						const prIdJob = run<{ pr: number }>(
 							joinStrings(
 								[
-									`yarn changeset version --snapshot ${prIdJob.outputs.pr}`,
-									'if [[ `git status --porcelain` ]]; then',
-									`  echo "Changes detected, publishing snapshot"`,
-									'else',
-									'  echo "::error::No changesets detected, skipping snapshot"',
-									'  exit 1',
-									'fi',
-									`yarn builder release --ci --tag=${event.inputs.tag}`,
+									'PR_NUMBER=$(gh pr list \\',
+									'  --head $BRANCH \\',
+									`  --repo ${github.repository} \\`,
+									'  --json number \\',
+									'  --jq ".[0].number")',
+									'echo "pr=$PR_NUMBER" >> $GITHUB_OUTPUT',
 								],
 								'\n',
 							),
 							{
 								shell: 'bash',
 								env: {
+									// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
+									BRANCH: '${{ github.ref_name }}',
 									GITHUB_TOKEN: secrets.GITHUB_TOKEN,
 								},
+							},
+						);
+						when(
+							and(
+								neq(prIdJob.outputs.pr, ''),
+								neq(prIdJob.outputs.pr, null),
+								startsWith(event.inputs.tag, 'alpha'),
+							),
+							() => {
+								run(
+									joinStrings(
+										[
+											`yarn changeset version --snapshot ${prIdJob.outputs.pr}`,
+											'if [[ `git status --porcelain` ]]; then',
+											`  echo "Changes detected, publishing snapshot"`,
+											'else',
+											'  echo "::error::No changesets detected, skipping snapshot"',
+											'  exit 1',
+											'fi',
+											`yarn builder release --ci --tag=${event.inputs.tag}`,
+										],
+										'\n',
+									),
+									{
+										shell: 'bash',
+										env: {
+											GITHUB_TOKEN: secrets.GITHUB_TOKEN,
+										},
+									},
+								);
 							},
 						);
 					},

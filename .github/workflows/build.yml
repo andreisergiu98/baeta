@@ -345,8 +345,9 @@ jobs:
       - e2e
       - build-examples
     runs-on: ubuntu-latest
-    if: ${{ (github.event_name == 'push') && ((github.event.ref ==
-      'refs/heads/main') || (github.event.ref == 'refs/heads/next')) }}
+    if: ${{ (github.event_name == 'push') && (((github.event.ref ==
+      'refs/heads/main') || (github.event.ref == 'refs/heads/next')) &&
+      (github.repository == 'andreisergiu98/baeta')) }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -397,7 +398,8 @@ jobs:
       - e2e
       - build-examples
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' }}
+    if: ${{ (github.event_name == 'workflow_dispatch') && (github.repository ==
+      'andreisergiu98/baeta') }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -449,8 +451,10 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      id-token: write
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 permissions:
-  id-token: write
+  contents: read

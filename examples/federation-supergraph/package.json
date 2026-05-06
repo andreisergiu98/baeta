@@ -1,0 +1,34 @@
+{
+  "name": "@baeta/examples-federation-supergraph",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "examples/federation-supergraph"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "rover dev --supergraph-config supergraph.yaml"
+  },
+  "dependencies": {
+    "@apollo/rover": "^0.38.1"
+  }
+}

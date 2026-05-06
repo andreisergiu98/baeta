@@ -1,0 +1,46 @@
+{
+  "name": "@baeta/examples-federation-subgraph-products",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "graphql",
+    "schema",
+    "types",
+    "typescript",
+    "framework",
+    "builder"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "examples/federation-subgraph-products"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "baeta generate",
+    "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@apollo/server": "^5.5.0",
+    "@baeta/core": "workspace:^",
+    "@baeta/federation": "workspace:^",
+    "graphql": "catalog:dev"
+  },
+  "devDependencies": {
+    "@baeta/cli": "workspace:^",
+    "@baeta/plugin-federation": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/node": "catalog:dev",
+    "typescript": "catalog:dev"
+  }
+}

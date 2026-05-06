@@ -1,0 +1,10 @@
+federation_version: =2.9.0
+subgraphs:
+  users:
+    routing_url: http://localhost:4001
+    schema:
+      subgraph_url: http://localhost:4001
+  products:
+    routing_url: http://localhost:4002
+    schema:
+      subgraph_url: http://localhost:4002

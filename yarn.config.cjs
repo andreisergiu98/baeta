@@ -140,7 +140,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('devDependencies.@baeta/testing', 'workspace:^');
 			workspace.set('devDependencies.@baeta/tsconfig', 'workspace:^');
 
-			workspace.set('ava.extensions.ts', 'module');
+			workspace.set('ava.extensions', ['ts']);
 
 			enforceConsistentEntries(workspace);
 
@@ -182,7 +182,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 				workspace.set('scripts.e2e:generate', 'baeta generate && graphql-codegen');
 				workspace.set('scripts.e2e', 'ava');
 			}
-			workspace.set('ava.extensions.ts', 'module');
+			workspace.set('ava.extensions', ['ts']);
 			workspace.set('ava.timeout', '120s');
 		}
 	}

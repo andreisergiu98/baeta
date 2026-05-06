@@ -45,9 +45,9 @@
     "types": "tsc --noEmit"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    }
+    "extensions": [
+      "ts"
+    ]
   },
   "dependencies": {
     "pathe": "^2.0.3"

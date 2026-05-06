@@ -49,9 +49,9 @@
     "types": "tsc --noEmit"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    }
+    "extensions": [
+      "ts"
+    ]
   },
   "dependencies": {
     "graphql-ws": "catalog:prod"

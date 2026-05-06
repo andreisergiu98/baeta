@@ -45,9 +45,9 @@
     "types": "tsc --noEmit"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    }
+    "extensions": [
+      "ts"
+    ]
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

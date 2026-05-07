@@ -21,6 +21,7 @@
       "after 12pm on monday"
     ]
   },
+  "ignorePaths": [],
   "packageRules": [
     {
       "matchUpdateTypes": [

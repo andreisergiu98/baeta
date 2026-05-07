@@ -31,6 +31,7 @@ export default createWorkflow(
 			run('npm install -g sfw@2.0.4');
 			run('sfw yarn install --immutable');
 			run(
+				'Run yarn lockfile-lint --path yarn.lock',
 				joinStrings(
 					[
 						'yarn lockfile-lint',

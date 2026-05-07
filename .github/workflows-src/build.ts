@@ -188,11 +188,11 @@ export default createWorkflow(
 						addDependencies(...releaseDependencies);
 						setName('Publish packages or open PR');
 						add(setupNode({ turboCache: turboCaches.build }));
-						use(actions.changesets, {
+						use('Run @changesets/action', actions.changesets, {
 							with: {
 								publish:
 									// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
-									'yarn builder release --ci --create-release --check-branch=${{ github.ref_name }}',
+									'yarn builder release --ci --create-release --create-tags --check-branch=${{ github.ref_name }} --verbose',
 								version: 'yarn changeset version',
 								commit: 'chore: publish packages',
 								title: 'chore: publish packages',
@@ -219,6 +219,7 @@ export default createWorkflow(
 						setName('Publish snapshot packages');
 						add(setupNode({ turboCache: turboCaches.build }));
 						const prIdJob = run<{ pr: number }>(
+							'Get PR number',
 							joinStrings(
 								[
 									'PR_NUMBER=$(gh pr list \\',
@@ -247,6 +248,7 @@ export default createWorkflow(
 							),
 							() => {
 								run(
+									'Publish snapshot',
 									joinStrings(
 										[
 											`yarn changeset version --snapshot ${prIdJob.outputs.pr}`,
@@ -256,7 +258,7 @@ export default createWorkflow(
 											'  echo "::error::No changesets detected, skipping snapshot"',
 											'  exit 1',
 											'fi',
-											`yarn builder release --ci --tag=${event.inputs.tag}`,
+											`yarn builder release --ci --tag=${event.inputs.tag} --verbose`,
 										],
 										'\n',
 									),

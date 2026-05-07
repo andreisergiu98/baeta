@@ -1,6 +1,6 @@
 import { open } from 'node:fs/promises';
 import path from 'node:path';
-import { Configuration, Project, structUtils } from '@yarnpkg/core';
+import { Configuration, Project, structUtils, type Workspace } from '@yarnpkg/core';
 import { npath, ppath } from '@yarnpkg/fslib';
 import { parse as parseYaml } from 'yaml';
 import z from 'zod';
@@ -21,7 +21,7 @@ export interface PublicWorkspacePackage {
 
 export function getPublicWorkspacePackages(project: Project): PublicWorkspacePackage[] {
 	const packages: PublicWorkspacePackage[] = [];
-	for (const workspace of project.workspaces) {
+	for (const workspace of topologicalSort(project.workspaces)) {
 		if (!workspace.manifest.name) {
 			throw new Error(`Workspace at ${workspace.cwd} does not have a name in its manifest`);
 		}
@@ -38,6 +38,62 @@ export function getPublicWorkspacePackages(project: Project): PublicWorkspacePac
 		});
 	}
 	return packages;
+}
+
+function topologicalSort(workspaces: Workspace[]): Workspace[] {
+	const targetSet = new Set(workspaces);
+	const nameToWorkspace = new Map<string, Workspace>();
+
+	for (const ws of workspaces) {
+		if (ws.manifest.name) {
+			nameToWorkspace.set(structUtils.stringifyIdent(ws.manifest.name), ws);
+		}
+	}
+
+	const remaining = new Map<Workspace, Set<Workspace>>();
+	for (const workspace of workspaces) {
+		const deps = new Set<Workspace>();
+		const allDeps = [
+			...workspace.manifest.dependencies.values(),
+			...workspace.manifest.peerDependencies.values(),
+		];
+		for (const dep of allDeps) {
+			const depWorkspace = nameToWorkspace.get(structUtils.stringifyIdent(dep));
+			if (depWorkspace && targetSet.has(depWorkspace)) {
+				deps.add(depWorkspace);
+			}
+		}
+		remaining.set(workspace, deps);
+	}
+
+	const sorted: Workspace[] = [];
+	while (remaining.size > 0) {
+		const ready = [...remaining.entries()].filter(([_, deps]) => deps.size === 0).map(([ws]) => ws);
+		if (ready.length === 0) {
+			throw new Error('Circular dependency detected in publish set');
+		}
+		for (const workspace of ready) {
+			sorted.push(workspace);
+			remaining.delete(workspace);
+		}
+		for (const deps of remaining.values()) {
+			for (const workspace of ready) {
+				deps.delete(workspace);
+			}
+		}
+	}
+
+	const isCreateBaeta = (workspace: Workspace) => {
+		return (
+			workspace.manifest.name &&
+			structUtils.stringifyIdent(workspace.manifest.name) === 'create-baeta'
+		);
+	};
+
+	const createBaetaWorkspace = sorted.find(isCreateBaeta);
+	if (!createBaetaWorkspace) return sorted;
+
+	return [...sorted.filter((ws) => ws !== createBaetaWorkspace), createBaetaWorkspace];
 }
 
 const YarnRcSchema = z.object({

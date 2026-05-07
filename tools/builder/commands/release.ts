@@ -114,6 +114,10 @@ export const releaseCommand: CommandModule<{}, ReleaseArgs> = {
 		}
 
 		const packages = await getPackagesForPublish();
+		if (packages.length === 0) {
+			console.warn(`${symbols.warning} No unpublished packages found, skipping release.`);
+			return;
+		}
 
 		await runPublish({
 			packages,
@@ -168,11 +172,6 @@ interface PublishOptions {
 }
 
 async function runPublish({ packages, tag, dryRun, extraArgs }: PublishOptions) {
-	if (packages.length === 0) {
-		console.warn(`${symbols.warning} No unpublished packages found, skipping publish step`);
-		return;
-	}
-
 	console.log(`${symbols.info} Publishing packages with tag "${tag}"...`);
 
 	const runArgs: string[] = [`--tag=${tag}`, !dryRun ? '--provenance' : '--dry-run'];
@@ -197,13 +196,6 @@ interface CreateGithubReleaseOptions {
 }
 
 async function runCreateGithubRelease({ packages, tag, dryRun }: CreateGithubReleaseOptions) {
-	if (packages.length === 0) {
-		console.warn(
-			`${symbols.warning} No unpublished packages found, skipping GitHub release creation`,
-		);
-		return;
-	}
-
 	const isPrerelease = tag !== 'latest';
 
 	if (dryRun) {
@@ -246,11 +238,6 @@ interface CreateVersionTagsOptions {
 }
 
 async function runCreateVersionTags({ packages, dryRun }: CreateVersionTagsOptions) {
-	if (packages.length === 0) {
-		console.warn(`${symbols.warning} No unpublished packages found, skipping version tag creation`);
-		return;
-	}
-
 	if (dryRun) {
 		const tags = packages.map((pkg) => `  - ${pkg.name}@${pkg.version}`).join('\n');
 		console.log(`${symbols.info} Would create version tags for the following packages:\n${tags}`);

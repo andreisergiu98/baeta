@@ -19,7 +19,8 @@
     "enabled": true,
     "schedule": [
       "after 12pm on monday"
-    ]
+    ],
+    "minimumReleaseAge": "3 days"
   },
   "ignorePaths": [],
   "packageRules": [

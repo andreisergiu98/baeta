@@ -1838,7 +1838,7 @@ __metadata:
     typescript: "catalog:dev"
     yaml: "npm:^2.8.4"
     yargs: "npm:^18.0.0"
-    zod: "npm:^4.4.2"
+    zod: "npm:^4.4.3"
   bin:
     ava: ./bin/ava.ts
     builder: ./bin/cli.ts
@@ -1855,10 +1855,10 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260503.1"
+    "@cloudflare/workers-types": "npm:^4.20260504.1"
     miniflare: "npm:^4.20260430.0"
     typescript: "catalog:dev"
-    zod: "npm:^4.4.2"
+    zod: "npm:^4.4.3"
   peerDependencies:
     "@baeta/cache": "workspace:^"
     "@cloudflare/workers-types": "*"
@@ -2431,7 +2431,7 @@ __metadata:
     prisma: "npm:^7.8.0"
     typescript: "catalog:dev"
     ws: "catalog:dev"
-    zod: "npm:^4.4.2"
+    zod: "npm:^4.4.3"
   languageName: unknown
   linkType: soft
 
@@ -2444,7 +2444,7 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260503.1"
+    "@cloudflare/workers-types": "npm:^4.20260504.1"
     "@hono/graphql-server": "npm:^0.7.0"
     graphql: "catalog:dev"
     hono: "npm:^4.12.16"
@@ -2461,7 +2461,7 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260503.1"
+    "@cloudflare/workers-types": "npm:^4.20260504.1"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
     hono: "npm:^4.12.16"
@@ -2831,7 +2831,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260503.1"
+    "@cloudflare/workers-types": "npm:^4.20260504.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -2979,7 +2979,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260503.1"
+    "@cloudflare/workers-types": "npm:^4.20260504.1"
     graphql: "catalog:dev"
     graphql-ws: "catalog:prod"
     typescript: "catalog:dev"
@@ -3609,10 +3609,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20260503.1":
-  version: 4.20260503.1
-  resolution: "@cloudflare/workers-types@npm:4.20260503.1"
-  checksum: 10/59d8994d1fc0661b3ef0efed173a8fff24422e96c2c60cf2c0a9d9edf55ba6c49a33c346df5b18cda0f8870954908326dace8046977f181cd2226210fde36495
+"@cloudflare/workers-types@npm:^4.20260504.1":
+  version: 4.20260504.1
+  resolution: "@cloudflare/workers-types@npm:4.20260504.1"
+  checksum: 10/fce13f2c23bfffbf016081fca90de5e24016c0d424a71e07fa532d5207a0ebf7de58af492008b8931c2ba83a7755c7df11cc2ca20793eb76a6b3a82b4c107735
   languageName: node
   linkType: hard
 
@@ -24125,10 +24125,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "zod@npm:4.4.2"
-  checksum: 10/f3da704d9fc18afe95172a3a2d2b6971c1113cd26f16abbbdb4edcd04db062f89329f2e8a2b59f9b05aabb5ee47cd2c861219a4e8c06b435faf3473a2344e3db
+"zod@npm:^4.4.3":
+  version: 4.4.3
+  resolution: "zod@npm:4.4.3"
+  checksum: 10/804b9a42aa8f35f2b3c5a8dff906291cb749115f83ee2afe3576d70b5b5c53c965365c7f4967690647a9c54af9838ff232a85ff9577a0a36c44b68bc6cdefe36
   languageName: node
   linkType: hard
 

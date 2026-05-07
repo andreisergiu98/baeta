@@ -1,4 +1,5 @@
 import { GraphQLError, type GraphQLSchema, getArgumentValues, parse } from 'graphql';
+import type { SubscribeMessage, SubscribePayload } from 'graphql-ws';
 import { collectFields } from 'graphql/execution/collectFields';
 import {
 	buildExecutionContext,
@@ -7,7 +8,6 @@ import {
 	getFieldDef,
 } from 'graphql/execution/execute';
 import { addPath } from 'graphql/jsutils/Path';
-import type { SubscribeMessage, SubscribePayload } from 'graphql-ws';
 
 export interface SubscriptionInfo {
 	id: string;

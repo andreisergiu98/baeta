@@ -4,7 +4,7 @@ import { useServer } from 'graphql-ws/use/ws';
 import type { YogaServerInstance } from 'graphql-yoga';
 import { WebSocketServer } from 'ws';
 
-/** 
+/**
 /* See https://github.com/dotansimha/graphql-yoga/blob/main/examples/graphql-ws/src/app.ts
 /* for the original implementation
 */

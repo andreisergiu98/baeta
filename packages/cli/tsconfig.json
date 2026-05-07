@@ -2,16 +2,8 @@
   "extends": "@baeta/tsconfig/tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "types": [
-      "react",
-      "node"
-    ]
+    "types": ["react", "node"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "dist"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["dist"]
 }

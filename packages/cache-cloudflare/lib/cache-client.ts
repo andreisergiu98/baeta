@@ -6,8 +6,8 @@ import type {
 	QueryCacheKey,
 } from '@baeta/cache';
 import { CacheClient, type CacheClientOptions } from '@baeta/cache';
-import { actions } from './actions.ts';
 import { type ActionClientMap, buildClient } from './actions-client.ts';
+import { actions } from './actions.ts';
 
 export class CloudflareCacheClient extends CacheClient {
 	client: ActionClientMap<typeof actions>;

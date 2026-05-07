@@ -5,13 +5,13 @@ import type {
 	QueryCacheKey,
 } from '@baeta/cache';
 import { CacheClient, type CacheClientArgs, type CacheClientOptions } from '@baeta/cache';
-import { doBatched } from '@baeta/cache/sdk';
 import {
 	assertNoPipelineErrors,
 	batchPipeline,
 	createRedisScripts,
 	type RedisScripts,
 } from '@baeta/cache-redis-common';
+import { doBatched } from '@baeta/cache/sdk';
 import type Redis from 'ioredis';
 import type { Cluster as RedisCluster } from 'ioredis';
 

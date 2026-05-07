@@ -1,5 +1,4 @@
 import './lib/global-types.ts';
-
 import { AuthExtension, type AuthOptions } from './lib/auth-extension.ts';
 import type { GetScopeLoader } from './lib/scope-resolver.ts';
 

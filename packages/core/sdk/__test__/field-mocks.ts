@@ -1,9 +1,9 @@
 import type { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
 import type { Middleware } from '../../lib/middleware.ts';
-import { makeField } from '../field.ts';
 import { FieldBuilder } from '../field-builder.ts';
 import { FieldCompiler } from '../field-compiler.ts';
 import type { Field, FieldMethods } from '../field-methods.ts';
+import { makeField } from '../field.ts';
 import {
 	type MockArgs,
 	type MockContext,

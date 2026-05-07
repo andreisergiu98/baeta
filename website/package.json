@@ -3,26 +3,26 @@
   "private": true,
   "keywords": [
     "baeta",
+    "builder",
+    "framework",
     "graphql",
     "schema",
     "types",
-    "typescript",
-    "framework",
-    "builder"
+    "typescript"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "website"
-  },
   "license": "MIT",
   "author": {
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "website"
   },
   "scripts": {
     "build": "docusaurus build",
@@ -36,18 +36,6 @@
     "write-api": "node ./write-api.mjs",
     "write-heading-ids": "docusaurus write-heading-ids",
     "write-translations": "docusaurus write-translations"
-  },
-  "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",
@@ -72,5 +60,17 @@
     "typedoc-docusaurus-theme": "^1.4.2",
     "typedoc-plugin-markdown": "4.11.0",
     "typescript": "catalog:dev"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

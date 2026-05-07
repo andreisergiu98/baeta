@@ -5,11 +5,7 @@
     "outDir": "dist",
     "noEmit": true,
     "emitDeclarationOnly": false,
-    "types": [
-      "@cloudflare/workers-types"
-    ]
+    "types": ["@cloudflare/workers-types"]
   },
-  "exclude": [
-    "./baeta.ts"
-  ]
+  "exclude": ["./baeta.ts"]
 }

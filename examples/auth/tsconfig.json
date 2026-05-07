@@ -6,8 +6,5 @@
     "noEmit": true,
     "emitDeclarationOnly": false
   },
-  "exclude": [
-    "./baeta.ts",
-    "prisma.config.ts"
-  ]
+  "exclude": ["./baeta.ts", "prisma.config.ts"]
 }

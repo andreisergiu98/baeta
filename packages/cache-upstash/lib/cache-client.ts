@@ -5,8 +5,8 @@ import type {
 	QueryCacheKey,
 } from '@baeta/cache';
 import { CacheClient, type CacheClientArgs, type CacheClientOptions } from '@baeta/cache';
-import { doBatched } from '@baeta/cache/sdk';
 import { batchPipeline, createRedisScripts, type RedisScripts } from '@baeta/cache-redis-common';
+import { doBatched } from '@baeta/cache/sdk';
 import { Redis, type RedisConfigNodejs } from '@upstash/redis';
 
 const INDEX_BUFFER_MS = 1_000;

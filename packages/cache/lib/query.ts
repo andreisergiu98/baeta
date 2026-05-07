@@ -62,7 +62,7 @@ export type QueryHelpers<Args extends QueryArgs, Indexes extends QueryArgsIndexe
 export type QueryResult<Item> = null | Item | Array<null | Item>;
 
 export type ItemFromQueryResult<R> =
-	R extends Array<infer I | null> ? NonNullable<I> : R extends null ? never : R;
+	R extends Array<(infer I) | null> ? NonNullable<I> : R extends null ? never : R;
 
 export type QueryOptions<
 	Result extends QueryResult<Item>,

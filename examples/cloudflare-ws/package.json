@@ -3,26 +3,26 @@
   "private": true,
   "keywords": [
     "baeta",
+    "builder",
+    "framework",
     "graphql",
     "schema",
     "types",
-    "typescript",
-    "framework",
-    "builder"
+    "typescript"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "examples/cloudflare-ws"
-  },
   "license": "MIT",
   "author": {
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "examples/cloudflare-ws"
   },
   "type": "module",
   "scripts": {

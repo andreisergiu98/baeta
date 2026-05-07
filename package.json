@@ -3,28 +3,27 @@
   "private": true,
   "keywords": [
     "baeta",
+    "builder",
+    "framework",
     "graphql",
     "schema",
     "types",
-    "typescript",
-    "framework",
-    "builder"
+    "typescript"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "."
   },
   "license": "MIT",
   "author": {
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
   },
-  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "."
+  },
   "workspaces": [
     "website",
     "packages/*",
@@ -34,6 +33,7 @@
     "packages/create-baeta/meta/*",
     "e2e/*"
   ],
+  "type": "module",
   "scripts": {
     "actions:build": "github-actions-workflow-builder --cleanup --directory .github/workflows-src",
     "actions:check": "github-actions-workflow-builder --cleanup --check --directory .github/workflows-src",
@@ -42,7 +42,7 @@
     "check:deps": "turbo check:deps --filter='./packages/*'",
     "check:e2e": "yarn check:e2e:setup && turbo e2e --filter='./e2e/*'",
     "check:e2e:setup": "git clean -fdX ./e2e >/dev/null && turbo gen e2e",
-    "check:formatting": "prettier --check . && sort-package-json **/package.json --check",
+    "check:formatting": "oxfmt --check",
     "check:linting": "biome check .",
     "check:tests": "turbo test --filter='./packages/*'",
     "check:types": "turbo types --filter='./packages/*'",
@@ -67,8 +67,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "lockfile-lint": "^5.0.0",
-    "prettier": "^3.8.3",
-    "sort-package-json": "^3.6.1",
+    "oxfmt": "^0.48.0",
     "turbo": "^2.9.8",
     "typescript": "catalog:dev"
   },

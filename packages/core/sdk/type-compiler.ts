@@ -1,7 +1,7 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { Middleware } from '../lib/middleware.ts';
-import { makeField } from './field.ts';
 import type { FieldCompiler } from './field-compiler.ts';
+import { makeField } from './field.ts';
 import { concatMiddlewares } from './middleware.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
 import type { FieldsResolversMap } from './type-methods.ts';

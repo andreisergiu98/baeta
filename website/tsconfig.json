@@ -3,10 +3,7 @@
   "docs": "https://v2.docusaurus.io/docs/typescript-support",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "es2020"
-    ],
+    "lib": ["dom", "es2020"],
     "module": "node16",
     "moduleResolution": "node16",
     "noEmit": true,
@@ -19,15 +16,10 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": [
-      "@docusaurus/module-type-aliases",
-      "@docusaurus/theme-classic"
-    ],
+    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
     "baseUrl": ".",
     "paths": {
-      "@site/*": [
-        "./*"
-      ]
+      "@site/*": ["./*"]
     }
   }
 }

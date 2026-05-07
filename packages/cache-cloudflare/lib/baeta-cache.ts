@@ -1,6 +1,6 @@
 import { DurableObject } from 'cloudflare:workers';
-import { actions } from './actions.ts';
 import { createActionsRequestHandler } from './actions-handler.ts';
+import { actions } from './actions.ts';
 
 const CLEANUP_INTERVAL_MS = 10_000;
 const BATCH_PARAMS = 99; // max 100 bound params per query, keep 1 spare

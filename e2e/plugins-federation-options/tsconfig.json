@@ -4,16 +4,9 @@
     "rootDir": "src",
     "outDir": "dist",
     "noEmit": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "emitDeclarationOnly": false
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "./baeta.ts",
-    "./codegen.ts"
-  ]
+  "include": ["src"],
+  "exclude": ["./baeta.ts", "./codegen.ts"]
 }

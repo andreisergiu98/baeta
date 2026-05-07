@@ -7,11 +7,7 @@
     "emitDeclarationOnly": false,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "types": [
-      "@cloudflare/workers-types"
-    ]
+    "types": ["@cloudflare/workers-types"]
   },
-  "exclude": [
-    "./baeta.ts"
-  ]
+  "exclude": ["./baeta.ts"]
 }

@@ -3,51 +3,55 @@
   "version": "2.0.0-next.13",
   "keywords": [
     "baeta",
+    "builder",
+    "framework",
     "graphql",
     "schema",
     "types",
-    "typescript",
-    "framework",
-    "builder"
+    "typescript"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/plugin-pagination"
   },
   "license": "MIT",
   "author": {
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/plugin-pagination"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "type": "module",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./index.ts",
       "default": "./index.ts"
     }
   },
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "package.json"
-  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
   "scripts": {
     "build": "builder build",
     "check:deps": "builder check-deps",
-    "prepack": "builder prepare",
     "postpack": "builder prepare --restore",
+    "prepack": "builder prepare",
     "test": "builder test",
     "types": "tsc --noEmit"
-  },
-  "ava": {
-    "extensions": [
-      "ts"
-    ]
   },
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
@@ -63,17 +67,13 @@
   "peerDependencies": {
     "graphql": "^16.6.0"
   },
+  "ava": {
+    "extensions": [
+      "ts"
+    ]
+  },
   "engines": {
     "node": ">=22.20.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
-    }
   },
   "typedocOptions": {
     "entryPoints": [

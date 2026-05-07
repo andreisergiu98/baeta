@@ -43,7 +43,7 @@ export default createWorkflow(
 
 function deployWebsite(): Steps {
 	return ({ use }) => {
-		use(actions.ghPages, {
+		use('Deploy website', actions.ghPages, {
 			with: {
 				github_token: secrets.GITHUB_TOKEN,
 				publish_dir: './website/build',

@@ -34,9 +34,9 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 	const turboNamespace = options.turboCache;
 
 	return ({ use, run }) => {
-		use(actions.checkout);
+		use('Checkout', actions.checkout);
 
-		use(actions.setupNode, {
+		use(`Setup Node ${node.node}`, actions.setupNode, {
 			with: {
 				'node-version': node.version,
 			},
@@ -61,7 +61,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 				},
 			);
 
-			use(actions.cache, {
+			use('Setup Yarn Cache', actions.cache, {
 				with: {
 					path: interpolate`${yarnDir.outputs.dir}`,
 					key: interpolate`yarn-cache-${runner.os}-${hashFiles('**/yarn.lock')}`,
@@ -71,7 +71,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 		}
 
 		if (turboNamespace) {
-			use(actions.cache, {
+			use(`Setup Turbo Cache for ${turboNamespace}`, actions.cache, {
 				with: {
 					path: '.turbo',
 					key: interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-${github.sha}`,

@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
-import symbols from 'log-symbols';
 import ora from 'ora';
 import type { CommandModule } from 'yargs';
 import { loadPackageJson, type PkgExport } from '../lib/package-json.ts';
@@ -41,8 +40,7 @@ export const prepareCommand: CommandModule<{}, PrepareArgs> = {
 
 		if (args.restore) {
 			if (manifest == null) {
-				console.error(`${symbols.error} No manifest found, nothing to clean.`);
-				process.exit(1);
+				throw new Error('No manifest found, nothing to clean.');
 			}
 
 			const spinner = ora(`Restoring package ${pkg.name} to state before prepare...`).start();
@@ -58,8 +56,7 @@ export const prepareCommand: CommandModule<{}, PrepareArgs> = {
 			}
 		} else {
 			if (manifest != null) {
-				console.error(`${symbols.error} Remove manifest before preparing.`);
-				process.exit(1);
+				throw new Error('Remove manifest before preparing.');
 			}
 
 			const spinner = ora(`Preparing package ${pkg.name} for publishing...`).start();

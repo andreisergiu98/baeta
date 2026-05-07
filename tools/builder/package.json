@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@actions/github": "^9.1.1",
-    "@changesets/release-utils": "^0.2.7",
+    "@octokit/request-error": "^7.1.0",
     "@yarnpkg/core": "^4.7.0",
     "@yarnpkg/fslib": "^3.1.5",
     "ava": "^8.0.0",
@@ -51,6 +51,7 @@
     "esbuild": "^0.28.0",
     "execa": "^9.6.1",
     "log-symbols": "^7.0.1",
+    "marked": "^18.0.3",
     "ora": "^9.4.0",
     "pathe": "^2.0.3",
     "prompts": "^2.4.2",

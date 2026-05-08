@@ -117,7 +117,7 @@ export async function executeMockedSubscriptionField(
 		MockSubscriptionSource
 	>(field).build([]);
 
-	return executeMockedSubscriptionResolver(resolver);
+	return await executeMockedSubscriptionResolver(resolver);
 }
 export async function executeMockedSubscriptionResolver(resolver: SubscriptionResolver) {
 	const results: MockResult[] = [];

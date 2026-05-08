@@ -83,10 +83,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 				'federation',
 			);
 
-			await Promise.all([
-				await schemaSpecFile.write(),
-				fs.unlink(schemaTypesFilePath).catch(() => {}),
-			]);
+			await Promise.all([schemaSpecFile.write(), fs.unlink(schemaTypesFilePath).catch(() => {})]);
 
 			const { outputSchemaAst } = await loadSchema(
 				ctx.generatorOptions.schemas,
@@ -152,7 +149,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 			);
 			await schemaTypesFile.write();
 
-			return next();
+			return await next();
 		},
 	});
 }

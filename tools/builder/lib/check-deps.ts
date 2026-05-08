@@ -1,6 +1,6 @@
 import fs, { glob } from 'node:fs/promises';
 import { join } from 'node:path';
-import ts from 'typescript';
+import * as ts from 'typescript';
 import type { Pkg } from './package-json.ts';
 
 export interface CheckDepsIssue {

@@ -41,7 +41,7 @@ export function getChangelogEntry(changelog: string, version: string) {
 			continue;
 		}
 
-		if (endIndex == null && headingStartInfo != null && headingStartInfo.depth === depth) {
+		if (endIndex == null && headingStartInfo?.depth === depth) {
 			endIndex = i;
 			break;
 		}

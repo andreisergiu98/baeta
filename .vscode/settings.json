@@ -45,7 +45,10 @@
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.preferences.importModuleSpecifierEnding": "js",
   "js/ts.tsdk.path": ".yarn/sdks/typescript/lib",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
+  "eslint.nodePath": ".yarn/sdks",
+  "eslint.options": {
+    "flags": ["unstable_native_nodejs_ts_config"]
+  },
   "[typescript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },

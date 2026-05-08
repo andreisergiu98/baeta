@@ -23,7 +23,7 @@ export async function getAppName(reqName: string | undefined, rootDir: string): 
 		return reqName;
 	}
 
-	return prompts(
+	return await prompts(
 		{
 			type: 'text',
 			name: 'appName',

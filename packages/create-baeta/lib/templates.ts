@@ -11,7 +11,7 @@ function createTemplateChoices(): Choice[] {
 }
 
 async function askTemplateChoice() {
-	return prompts(
+	return await prompts(
 		{
 			type: 'select',
 			name: 'template',

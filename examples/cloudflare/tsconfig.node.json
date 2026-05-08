@@ -1,0 +1,10 @@
+{
+  "extends": "@baeta/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noEmit": true,
+    "emitDeclarationOnly": false,
+    "types": ["node"]
+  },
+  "include": ["baeta.ts"]
+}

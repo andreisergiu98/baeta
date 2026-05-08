@@ -41,6 +41,6 @@ export function createComplexityMiddleware<Result, Root, Context, Args, Info>(
 			throw options.complexityError(ComplexityErrorKind.Breadth, limits.breadth, results.breadth);
 		}
 
-		return next();
+		return await next();
 	};
 }

@@ -60,9 +60,16 @@ export default createWorkflow(
 			run('yarn check:types');
 		});
 
-		const lintJob = addJob('lint', ({ setName, add, run }) => {
+		const lintJob = addJob('lint', ({ setName, add, run, use }) => {
 			setName('Check linting');
 			add(setupNode());
+			use('Setup ESLint Cache', actions.cache, {
+				with: {
+					path: '.cache/eslint',
+					key: interpolate`eslint-${github.sha}`,
+					'restore-keys': 'eslint-',
+				},
+			});
 			run('yarn check:linting');
 		});
 
@@ -191,7 +198,6 @@ export default createWorkflow(
 						use('Run @changesets/action', actions.changesets, {
 							with: {
 								publish:
-									// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
 									'yarn builder release --ci --create-release --create-tags --check-branch=${{ github.ref_name }} --verbose',
 								version: 'yarn changeset version',
 								commit: 'chore: publish packages',
@@ -234,7 +240,6 @@ export default createWorkflow(
 							{
 								shell: 'bash',
 								env: {
-									// biome-ignore lint/suspicious/noTemplateCurlyInString: ga template
 									BRANCH: '${{ github.ref_name }}',
 									GITHUB_TOKEN: secrets.GITHUB_TOKEN,
 								},

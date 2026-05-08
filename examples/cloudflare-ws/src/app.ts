@@ -63,12 +63,12 @@ const wsMiddleware: MiddlewareHandler = (ctx, next) => {
 	if (upgradeHeader !== 'websocket') {
 		return next();
 	}
-	return subscriptions.handleWS(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
+	return subscriptions.handleWS(ctx.req.raw, ctx.env, ctx.executionCtx);
 };
 
 const graphqlMiddleware: MiddlewareHandler = (ctx, next) => {
 	const contextParams = getContextParams(ctx.req.raw, ctx.env);
-	const context = createContext(contextParams, ctx.env, ctx.executionCtx as ExecutionContext);
+	const context = createContext(contextParams, ctx.env, ctx.executionCtx);
 	Object.assign(ctx.executionCtx, context);
 	return server(ctx, next);
 };

@@ -1,7 +1,7 @@
 {
   "recommendations": [
     "arcanis.vscode-zipfs",
-    "biomejs.biome",
+    "dbaeumer.vscode-eslint",
     "graphql.vscode-graphql",
     "graphql.vscode-graphql-syntax",
     "oxc.oxc-vscode"

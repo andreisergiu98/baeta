@@ -202,5 +202,5 @@ export async function verifyMiddlewareScopes<
 		return;
 	}
 
-	return Promise.all(promises).catch((err) => resolveError(err, errorResolver, fullPath));
+	return await Promise.all(promises).catch((err) => resolveError(err, errorResolver, fullPath));
 }

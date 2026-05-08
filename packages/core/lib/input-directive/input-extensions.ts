@@ -21,7 +21,7 @@ export type ValidateParams<Context = unknown> = {
 	info: GraphQLResolveInfo;
 };
 
-export type ValidateFn = <Context>(params: ValidateParams<Context>) => void | Promise<void>;
+export type ValidateFn = <Context>(params: ValidateParams<Context>) => void;
 
 export type ValidationOptions = {
 	target: ValidationTarget;

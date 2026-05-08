@@ -92,7 +92,7 @@ function parseDirective(
 	knownScalars: Set<string>,
 ): FederationDirective {
 	const directive: FederationDirective = {
-		name: `@${def.name.value}` as `@${string}`,
+		name: `@${def.name.value}`,
 		locations: def.locations.map((loc) => loc.value),
 	};
 	if (def.arguments?.length) {
@@ -133,7 +133,7 @@ async function fetchSpec(version: string): Promise<string> {
 	if (!res.ok) {
 		throw new Error(`HTTP ${res.status} fetching ${url}`);
 	}
-	return res.text();
+	return await res.text();
 }
 
 async function fetchAllSpecs(): Promise<FederationSpec[]> {

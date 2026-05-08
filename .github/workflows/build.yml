@@ -45,7 +45,7 @@ jobs:
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
@@ -78,7 +78,7 @@ jobs:
       - name: Setup Turbo Cache for types
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-types-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-types-24-${{ runner.os }}-
       - run: yarn install --immutable
@@ -109,6 +109,12 @@ jobs:
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
       - run: yarn install --immutable
+      - name: Setup ESLint Cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .cache/eslint
+          key: eslint-${{ github.sha }}
+          restore-keys: eslint-
       - run: yarn check:linting
   formatting:
     name: Check formatting
@@ -165,7 +171,7 @@ jobs:
       - name: Setup Turbo Cache for deps
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-deps-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-deps-24-${{ runner.os }}-
       - run: yarn install --immutable
@@ -252,7 +258,7 @@ jobs:
       - name: Setup Turbo Cache for examples-build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-examples-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-examples-build-24-${{ runner.os }}-
       - run: yarn install --immutable
@@ -317,7 +323,7 @@ jobs:
       - name: Setup Turbo Cache for tests
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-tests-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-tests-${{ matrix.node }}-${{ runner.os }}-
       - run: yarn install --immutable
@@ -364,7 +370,7 @@ jobs:
       - name: Setup Turbo Cache for e2e
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-
       - run: yarn install --immutable
@@ -409,7 +415,7 @@ jobs:
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
@@ -467,7 +473,7 @@ jobs:
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: .turbo
+          path: .cache/turbo
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable

@@ -87,14 +87,14 @@ test('verifyGrant resolves when grant exists', async (t) => {
 
 test('verifyScopes throws error when scopes is undefined', async (t) => {
 	const ctx = {};
-	await t.throwsAsync(verifyScopes(ctx, undefined, '$and' as LogicRule, 'path'), {
+	await t.throwsAsync(verifyScopes(ctx, undefined, '$and', 'path'), {
 		message: 'Scope definitions cannot be empty!',
 	});
 });
 
 test('verifyScopes throws error when scopes object is empty', async (t) => {
 	const ctx = {};
-	await t.throwsAsync(verifyScopes(ctx, {}, '$and' as LogicRule, 'path'), {
+	await t.throwsAsync(verifyScopes(ctx, {}, '$and', 'path'), {
 		message: 'Scope definitions cannot be empty!',
 	});
 });

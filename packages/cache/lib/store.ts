@@ -101,7 +101,7 @@ export class CacheStore<Item> {
 			this.getItemKey(item),
 			item,
 		]);
-		return this.client.saveItems(entries, this.itemCacheArgs);
+		return await this.client.saveItems(entries, this.itemCacheArgs);
 	}
 
 	async saveIfNotExists(item: Item | Item[]) {
@@ -110,7 +110,7 @@ export class CacheStore<Item> {
 			this.getItemKey(item),
 			item,
 		]);
-		return this.client.saveItems(entries, this.itemCacheArgs, {
+		return await this.client.saveItems(entries, this.itemCacheArgs, {
 			disableOverwrite: true,
 		});
 	}
@@ -188,7 +188,7 @@ export class CacheStore<Item> {
 			isList,
 		};
 
-		return this.client.saveQuery(queryKey, queryIndexes, metadata, this.queryCacheArgs);
+		return await this.client.saveQuery(queryKey, queryIndexes, metadata, this.queryCacheArgs);
 	}
 
 	deleteQueries(query: QueryTagWithIndexes): Promise<void> {

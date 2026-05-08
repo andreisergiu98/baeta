@@ -4,7 +4,7 @@ import { UserModule } from './typedef.ts';
 const { Query } = UserModule;
 
 const userQuery = Query.user.resolve(async ({ args }) => {
-	return db.user.findFirst({
+	return await db.user.findFirst({
 		where: {
 			id: args.where.id ?? undefined,
 			email: args.where.email ?? undefined,
@@ -13,7 +13,7 @@ const userQuery = Query.user.resolve(async ({ args }) => {
 });
 
 const usersQuery = Query.users.resolve(async ({ args }) => {
-	return db.user.findMany({
+	return await db.user.findMany({
 		where: args.where
 			? {
 					id: args.where.id ?? undefined,

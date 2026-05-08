@@ -23,7 +23,6 @@ interface Manifest {
 
 const manifestPath = '.publish.prep';
 
-// biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
 export const prepareCommand: CommandModule<{}, PrepareArgs> = {
 	command: 'prepare',
 	describe: 'Prepare package for publishing',

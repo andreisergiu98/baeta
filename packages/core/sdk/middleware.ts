@@ -9,7 +9,7 @@ export function composeMiddlewares<Result, Source, Context, Args, Info>(
 		return resolver;
 	}
 	return middlewares.reduceRight<Resolver<Result, Source, Context, Args, Info>>(
-		(next, middleware) => (params) => middleware(async () => next(params), params),
+		(next, middleware) => (params) => middleware(async () => await next(params), params),
 		resolver,
 	);
 }

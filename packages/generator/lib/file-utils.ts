@@ -44,5 +44,5 @@ async function cleanByState(current: FileManager, stateFile: string) {
 
 	const promises = toUnlink.map((file) => file.unlink().catch(() => {}));
 
-	return Promise.all(promises).then(() => {});
+	return await Promise.all(promises).then(() => {});
 }

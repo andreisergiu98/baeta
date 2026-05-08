@@ -18,7 +18,7 @@ export const userPhotoCache = UserPhoto.$createCache({
 	.withQueries({
 		findUserPhotos: defineQuery({
 			resolve: async (args: { userId: string }) => {
-				return db.user
+				return await db.user
 					.findUnique({
 						where: {
 							id: args.userId,
@@ -42,7 +42,7 @@ export const userPhotoCache = UserPhoto.$createCache({
 		}),
 		findPhotosConnection: defineQuery({
 			resolve: async (args: { userId: string; cursor?: string | null; limit: number }) => {
-				return db.user
+				return await db.user
 					.findUnique({
 						where: {
 							id: args.userId,

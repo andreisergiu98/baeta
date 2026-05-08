@@ -20,7 +20,9 @@ const yoga = createYoga<ServerContext, Context>({
 	},
 });
 
-const server = createServer(yoga);
+const server = createServer((req, res) => {
+	void yoga(req, res);
+});
 
 const ws = useWebSocketServer(server, yoga);
 
@@ -30,10 +32,11 @@ server.listen(4000, () => {
 
 const stop = async () => {
 	await ws.dispose();
-	return new Promise<void>((resolve) => server.close(() => resolve()));
+	return await new Promise<void>((resolve) => server.close(() => resolve()));
 };
 
-process.on('SIGINT', async () => {
-	await stop();
-	process.exit(0);
+process.on('SIGINT', () => {
+	void stop().then(() => {
+		process.exit(0);
+	});
 });

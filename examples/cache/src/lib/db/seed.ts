@@ -48,7 +48,7 @@ async function insertUser(
 	user: Prisma.UserCreateInput,
 	photos: Prisma.UserPhotoCreateWithoutUserInput[],
 ) {
-	return prisma.user.create({
+	return await prisma.user.create({
 		data: {
 			...user,
 			photos: {
@@ -65,7 +65,7 @@ try {
 
 	const promises = users.map(async (user) => {
 		const photos = generatePhotos(faker.number.int({ min: 7, max: 15 }));
-		return insertUser(user, photos);
+		return await insertUser(user, photos);
 	});
 
 	await Promise.all(promises);

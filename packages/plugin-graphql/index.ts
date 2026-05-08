@@ -19,7 +19,7 @@ export function graphqlPlugin() {
 			for (const item of items) {
 				ctx.fileManager.createAndAdd(item.filename, item.content, 'graphql', item.options);
 			}
-			return next();
+			return await next();
 		},
 	});
 }

@@ -4,7 +4,6 @@ import { Hono } from 'hono';
 import modules from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
-// biome-ignore lint/complexity/noBannedTypes: allow {}
 export type Env = {};
 
 const baeta = createApplication({
@@ -27,11 +26,11 @@ function handleGraphql(request: Request, _env: Env, ctx: ExecutionContext) {
 const router = new Hono<{ Bindings: Env }>();
 
 router.get('/graphql', (ctx) => {
-	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
+	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
 });
 
 router.post('/graphql', (ctx) => {
-	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx as ExecutionContext);
+	return handleGraphql(ctx.req.raw, ctx.env, ctx.executionCtx);
 });
 
 console.log(router.routes);

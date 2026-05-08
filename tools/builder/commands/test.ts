@@ -9,7 +9,6 @@ interface TestArgs {
 	config: string;
 }
 
-// biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
 export const testCommand: CommandModule<{}, TestArgs> = {
 	command: 'test',
 	describe: 'Run tests with coverage for package',

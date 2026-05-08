@@ -96,7 +96,7 @@ export async function getPackageManager(
 		return defaultPackageManager;
 	}
 
-	return askForPackageManagerChoice();
+	return await askForPackageManagerChoice();
 }
 
 export function getInstallCommand(pkgManager: PackageManager): string {

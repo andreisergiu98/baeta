@@ -1,5 +1,5 @@
 import type { Steps } from 'github-actions-workflow-builder';
-import { type ContextValue, fromJSON } from 'github-actions-workflow-builder/lib/expression';
+import { type ContextValue } from 'github-actions-workflow-builder/lib/expression';
 
 export type NodeVersion<T = string> = {
 	node: T;
@@ -8,58 +8,67 @@ export type NodeVersion<T = string> = {
 
 export function createNodeVersion(version: string): NodeVersion {
 	const major = version.split('.')[0];
-	return {
-		node: major,
-		version,
-	};
+	return { node: major, version };
 }
 
+function conditionalJson<T>(prValue: T, defaultValue: T): T {
+	const pr = JSON.stringify(prValue);
+	const def = JSON.stringify(defaultValue);
+	return `\${{ fromJSON(github.event_name == 'pull_request' && '${pr}' || '${def}') }}` as unknown as T;
+}
+
+export type NodeMatrixConfig = {
+	node: NodeVersion[];
+};
+
+export type NodeMachineMatrixConfig = NodeMatrixConfig & {
+	machine: string[];
+};
+
+type MatrixOptions = { failFast?: boolean; maxParallel?: number };
+
 export function setNodeBuildMatrix(
-	versions: NodeVersion[],
-	options?: { failFast?: boolean; maxParallel?: number },
-): Steps<
-	ContextValue<{
-		node: string;
-		version: string;
-	}>
-> {
+	configs: { pr: NodeMatrixConfig; default: NodeMatrixConfig },
+	options?: MatrixOptions,
+): Steps<ContextValue<{ node: string; version: string }>> {
 	return ({ setBuildMatrix }) => {
 		return setBuildMatrix(
 			{
-				node: versions.map((v) => v.node),
+				node: conditionalJson(
+					configs.pr.node.map((v) => v.node),
+					configs.default.node.map((v) => v.node),
+				),
 			},
 			{
 				...options,
-				include: fromJSON(
-					JSON.stringify(versions.map((v) => ({ node: v.node, version: v.version }))),
-				) as unknown as { node?: string | undefined; version?: string | undefined }[],
+				include: conditionalJson(
+					configs.pr.node.map((v) => ({ node: v.node, version: v.version })),
+					configs.default.node.map((v) => ({ node: v.node, version: v.version })),
+				) as unknown as { node?: string; version?: string }[],
 			},
 		);
 	};
 }
 
 export function setNodeBuildMatrixWithMachine(
-	versions: NodeVersion[],
-	machines: string[],
-	options?: { failFast?: boolean; maxParallel?: number },
-): Steps<
-	ContextValue<{
-		node: string;
-		machine: string;
-		version: string;
-	}>
-> {
-	return ({ setBuildMatrix }) => {
+	configs: { pr: NodeMachineMatrixConfig; default: NodeMachineMatrixConfig },
+	options?: MatrixOptions,
+): Steps<ContextValue<{ node: string; machine: string; version: string }>> {
+	return ({ setBuildMatrix, run }) => {
 		return setBuildMatrix(
 			{
-				node: versions.map((v) => v.node),
-				machine: machines,
+				node: conditionalJson(
+					configs.pr.node.map((v) => v.node),
+					configs.default.node.map((v) => v.node),
+				),
+				machine: conditionalJson(configs.pr.machine, configs.default.machine),
 			},
 			{
 				...options,
-				include: fromJSON(
-					JSON.stringify(versions.map((v) => ({ node: v.node, version: v.version }))),
-				) as unknown as { node?: string | undefined; version?: string | undefined }[],
+				include: conditionalJson(
+					configs.pr.node.map((v) => ({ node: v.node, version: v.version })),
+					configs.default.node.map((v) => ({ node: v.node, version: v.version })),
+				) as unknown as { node?: string; version?: string }[],
 			},
 		);
 	};

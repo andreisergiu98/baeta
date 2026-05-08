@@ -18,10 +18,11 @@ import {
 } from './_shared/node.ts';
 import { setupNode, turboCaches } from './_shared/setup.ts';
 
-const NODE_VERSIONS = [
+const TEST_NODE_VERSIONS = [
 	createNodeVersion('22'),
 	createNodeVersion('24.14.1'),
 	createNodeVersion('25.6.1'),
+	createNodeVersion('26'),
 ];
 
 export default createWorkflow(
@@ -105,7 +106,7 @@ export default createWorkflow(
 		});
 
 		const testsJob = addJob('tests', ({ setName, add, run, addService }) => {
-			const matrix = add(setNodeBuildMatrix(NODE_VERSIONS, { failFast: false }));
+			const matrix = add(setNodeBuildMatrix(TEST_NODE_VERSIONS, { failFast: false }));
 
 			setName(`Check tests (Node ${matrix.node})`);
 
@@ -155,7 +156,7 @@ export default createWorkflow(
 		const e2eJob = addJob('e2e', ({ setName, add, run, setMachineType }) => {
 			const matrix = add(
 				setNodeBuildMatrixWithMachine(
-					NODE_VERSIONS,
+					TEST_NODE_VERSIONS,
 					['ubuntu-latest', 'windows-latest', 'macos-latest'],
 					{ failFast: false },
 				),

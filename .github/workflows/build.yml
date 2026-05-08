@@ -273,8 +273,9 @@ jobs:
           - "22"
           - "24"
           - "25"
+          - "26"
         include: ${{
-          fromJSON('[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"}]')
+          fromJSON('[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"},{"node":"26","version":"26"}]')
           }}
       fail-fast: false
     services:
@@ -337,12 +338,13 @@ jobs:
           - "22"
           - "24"
           - "25"
+          - "26"
         machine:
           - ubuntu-latest
           - windows-latest
           - macos-latest
         include: ${{
-          fromJSON('[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"}]')
+          fromJSON('[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"},{"node":"26","version":"26"}]')
           }}
       fail-fast: false
     steps:

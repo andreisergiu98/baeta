@@ -37,7 +37,7 @@
   "dependencies": {
     "@types/sinon": "^21.0.1",
     "ava": "^8.0.0",
-    "sinon": "^21.1.2"
+    "sinon": "^22.0.0"
   },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",

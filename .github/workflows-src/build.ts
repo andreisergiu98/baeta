@@ -10,20 +10,27 @@ import {
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
 import { actions } from './_shared/actions.ts';
-import { images } from './_shared/images.ts';
 import {
 	createNodeVersion,
 	setNodeBuildMatrix,
 	setNodeBuildMatrixWithMachine,
 } from './_shared/node.ts';
+import { redisService, valkeyService, redisHttpService } from './_shared/services.ts';
 import { setupNode, turboCaches } from './_shared/setup.ts';
 
-const TEST_NODE_VERSIONS = [
-	createNodeVersion('22'),
-	createNodeVersion('24.14.1'),
-	createNodeVersion('25.6.1'),
-	createNodeVersion('26'),
-];
+const MAIN_TEST_MATRIX = {
+	node: [
+		createNodeVersion('22'),
+		createNodeVersion('24.14.1'),
+		createNodeVersion('25.6.1'),
+		createNodeVersion('26'),
+	],
+	machine: ['ubuntu-latest', 'windows-latest', 'macos-latest'],
+};
+const PR_TEST_MATRIX = {
+	node: [createNodeVersion('22')],
+	machine: ['ubuntu-latest'],
+};
 
 export default createWorkflow(
 	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, whenTrigger, when }) => {
@@ -105,50 +112,20 @@ export default createWorkflow(
 			run('yarn examples:types');
 		});
 
-		const testsJob = addJob('tests', ({ setName, add, run, addService }) => {
-			const matrix = add(setNodeBuildMatrix(TEST_NODE_VERSIONS, { failFast: false }));
-
+		const testsJob = addJob('tests', ({ setName, add, run, use, addService }) => {
+			const matrix = add(
+				setNodeBuildMatrix(
+					{
+						pr: PR_TEST_MATRIX,
+						default: MAIN_TEST_MATRIX,
+					},
+					{ failFast: false },
+				),
+			);
 			setName(`Check tests (Node ${matrix.node})`);
-
-			addService({
-				name: 'redis',
-				image: images.redis,
-				options: joinStrings(
-					[
-						`--health-cmd "redis-cli ping"`,
-						'--health-interval 10s',
-						'--health-timeout 5s',
-						'--health-retries 5',
-					],
-					' ',
-				),
-				ports: ['65535:6379'],
-			});
-			addService({
-				name: 'valkey',
-				image: images.valkey,
-				options: joinStrings(
-					[
-						`--health-cmd "valkey-cli ping"`,
-						'--health-interval 10s',
-						'--health-timeout 5s',
-						'--health-retries 5',
-					],
-					' ',
-				),
-				ports: ['65534:6379'],
-			});
-			addService({
-				name: 'redis-http',
-				image: images.serverlessRedisHttp,
-				env: {
-					SRH_MODE: 'env',
-					SRH_TOKEN: 'example_token',
-					SRH_CONNECTION_STRING: 'redis://redis:6379/0',
-				},
-				ports: ['60080:80'],
-			});
-
+			add(redisService(65535));
+			add(valkeyService(65534));
+			add(redisHttpService(60080));
 			add(setupNode({ node: matrix, turboCache: turboCaches.tests }));
 			run('yarn check:tests');
 		});
@@ -156,15 +133,12 @@ export default createWorkflow(
 		const e2eJob = addJob('e2e', ({ setName, add, run, setMachineType }) => {
 			const matrix = add(
 				setNodeBuildMatrixWithMachine(
-					TEST_NODE_VERSIONS,
-					['ubuntu-latest', 'windows-latest', 'macos-latest'],
+					{ pr: PR_TEST_MATRIX, default: MAIN_TEST_MATRIX },
 					{ failFast: false },
 				),
 			);
-
 			setName(`Check e2e tests (${matrix.machine} - Node ${matrix.node})`);
 			setMachineType(`${matrix.machine}`);
-
 			add(setupNode({ node: matrix, turboCache: turboCaches.e2e }));
 			run('yarn check:e2e');
 		});

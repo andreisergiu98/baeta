@@ -269,13 +269,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node:
-          - "22"
-          - "24"
-          - "25"
-          - "26"
-        include: ${{
-          fromJSON('[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"},{"node":"26","version":"26"}]')
+        node: ${{ fromJSON(github.event_name == 'pull_request' && '["22"]' ||
+          '["22","24","25","26"]') }}
+        include: ${{ fromJSON(github.event_name == 'pull_request' &&
+          '[{"node":"22","version":"22"}]' ||
+          '[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"},{"node":"26","version":"26"}]')
           }}
       fail-fast: false
     services:
@@ -296,9 +294,13 @@ jobs:
         env:
           SRH_MODE: env
           SRH_TOKEN: example_token
-          SRH_CONNECTION_STRING: redis://redis:6379/0
+          SRH_CONNECTION_STRING: redis://redis-http-internal-redis:6379/0
         ports:
           - 60080:80
+      redis-http-internal-redis:
+        image: redis:7-alpine
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -334,17 +336,13 @@ jobs:
     runs-on: ${{ matrix.machine }}
     strategy:
       matrix:
-        node:
-          - "22"
-          - "24"
-          - "25"
-          - "26"
-        machine:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
-        include: ${{
-          fromJSON('[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"},{"node":"26","version":"26"}]')
+        node: ${{ fromJSON(github.event_name == 'pull_request' && '["22"]' ||
+          '["22","24","25","26"]') }}
+        machine: ${{ fromJSON(github.event_name == 'pull_request' && '["ubuntu-latest"]'
+          || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+        include: ${{ fromJSON(github.event_name == 'pull_request' &&
+          '[{"node":"22","version":"22"}]' ||
+          '[{"node":"22","version":"22"},{"node":"24","version":"24.14.1"},{"node":"25","version":"25.6.1"},{"node":"26","version":"26"}]')
           }}
       fail-fast: false
     steps:

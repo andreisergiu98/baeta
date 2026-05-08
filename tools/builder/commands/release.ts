@@ -3,13 +3,13 @@ import { execa, execaCommand } from 'execa';
 import symbols from 'log-symbols';
 import ora from 'ora';
 import type { CommandModule } from 'yargs';
-import { getConfirmation } from '../lib/confirmation.ts';
+import { getConfirmation } from '../lib/prompts.ts';
 import {
 	createPackagesVersionTags,
 	createReleaseNotes,
 	createReleaseNotesMetadata,
-} from '../lib/github.ts';
-import { getPreReleaseTag } from '../lib/release-tag.ts';
+} from '../lib/release-notes.ts';
+import { getReleaseTag } from '../lib/release-tag.ts';
 import {
 	getPublicWorkspacePackages,
 	isPackagePublished,
@@ -28,7 +28,7 @@ interface ReleaseArgs {
 	'create-tags'?: boolean;
 }
 
-const preReleaseTag = await getPreReleaseTag();
+const preReleaseTag = await getReleaseTag();
 const branchTagMap = new Map<string, string>([
 	['main', 'latest'],
 	['next', 'next'],

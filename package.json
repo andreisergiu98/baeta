@@ -25,6 +25,7 @@
     "directory": "."
   },
   "workspaces": [
+    "config",
     "website",
     "packages/*",
     "tests/*",

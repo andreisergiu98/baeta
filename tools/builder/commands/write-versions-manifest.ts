@@ -7,14 +7,15 @@ import {
 	loadWorkspaceVersionsMap,
 } from '../lib/workspace.ts';
 
-interface PrintResolvedVersionsArgs {
+interface WriteVersionsManifestArgs {
 	target: string;
 	out?: string;
 }
 
-export const printResolvedVersionsCommand: CommandModule<{}, PrintResolvedVersionsArgs> = {
-	command: 'print-resolved-versions <target>',
-	describe: 'Print the versions of workspace or catalog dependencies for package',
+export const writeVersionsManifestCommand: CommandModule<{}, WriteVersionsManifestArgs> = {
+	command: 'write-versions-manifest <target>',
+	describe:
+		'Write the versions of workspace or catalog dependencies for package to a file or stdout',
 	builder: (yargs) => {
 		return yargs
 			.positional('target', {

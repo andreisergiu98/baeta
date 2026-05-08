@@ -1,12 +1,16 @@
+import { BUILD_DEFAULTS } from '@baeta/workspace-config';
 import { defineConfig as originalDefineConfig, type UserConfig } from 'tsdown';
+import type { Pkg } from './package-json-schema.ts';
 
-export function defineConfig(config: UserConfig) {
+interface TsdownConfig extends Omit<UserConfig, 'entry'> {
+	additionalEntrypoints?: string[];
+}
+
+export function defineConfig(pkg: Pick<Pkg, 'exports'>, config: TsdownConfig = {}) {
+	const entrypoints = Object.values(pkg.exports ?? {}).map((entry) => entry.default);
 	return originalDefineConfig({
-		target: 'es2024',
-		dts: true,
-		clean: true,
-		sourcemap: true,
-		fixedExtension: false,
+		...BUILD_DEFAULTS,
 		...config,
+		entry: [...entrypoints, ...(config.additionalEntrypoints ?? [])],
 	});
 }

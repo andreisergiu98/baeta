@@ -54,8 +54,8 @@
     "prepack": "builder prepare",
     "test": "builder test",
     "types": "yarn prebuild && tsc --noEmit",
-    "write:apollo:versions": "builder print-resolved-versions ./meta/apollo/package.json -o versions.apollo.json",
-    "write:yoga:versions": "builder print-resolved-versions ./meta/yoga/package.json -o versions.yoga.json"
+    "write:apollo:versions": "builder write-versions-manifest ./meta/apollo/package.json -o versions.apollo.json",
+    "write:yoga:versions": "builder write-versions-manifest ./meta/yoga/package.json -o versions.yoga.json"
   },
   "dependencies": {
     "@docusaurus/logger": "^3.10.1",

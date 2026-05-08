@@ -1,11 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import * as github from '@actions/github';
+import { PACKAGES_WITH_FIXED_VERSIONS } from '@baeta/workspace-config';
 import { RequestError } from '@octokit/request-error';
-import changesetConfig from '../../../.changeset/config.json' with { type: 'json' };
 import { getChangelogEntry } from './changelog.ts';
 import type { PublicWorkspacePackage } from './workspace.ts';
-
-const fixedPackages = new Set(changesetConfig.fixed[0] ?? []);
 
 interface CreateReleaseNotesOptions {
 	githubToken: string;
@@ -110,7 +108,7 @@ function createVersionMetadata(mainVersion: string | undefined, isPrerelease: bo
 }
 
 function getFixedGroupVersion(packages: PublicWorkspacePackage[]) {
-	return packages.find((pkg) => fixedPackages.has(pkg.name))?.version;
+	return packages.find((pkg) => PACKAGES_WITH_FIXED_VERSIONS.has(pkg.name))?.version;
 }
 
 async function createPackagesWithReleaseNotes(packages: PublicWorkspacePackage[]) {

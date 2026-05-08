@@ -5,12 +5,12 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { buildCommand } from '../commands/build.ts';
 import { checkDepsCommand } from '../commands/check-deps.ts';
+import { checkTsconfigCommand } from '../commands/check-tsconfig.ts';
 import { prepareCommand } from '../commands/prepare.ts';
-import { printResolvedVersionsCommand } from '../commands/print-resolved-versions.ts';
 import { printTagCommand } from '../commands/print-tag.ts';
 import { releaseCommand } from '../commands/release.ts';
 import { testCommand } from '../commands/test.ts';
-import { validateTsconfigCommand } from '../commands/validate-tsconfig.ts';
+import { writeVersionsManifestCommand } from '../commands/write-versions-manifest.ts';
 
 const argv = hideBin(process.argv);
 
@@ -24,12 +24,12 @@ await yargs(argv)
 	})
 	.command(buildCommand)
 	.command(checkDepsCommand)
+	.command(checkTsconfigCommand)
 	.command(prepareCommand)
-	.command(printResolvedVersionsCommand)
 	.command(printTagCommand)
 	.command(releaseCommand)
 	.command(testCommand)
-	.command(validateTsconfigCommand)
+	.command(writeVersionsManifestCommand)
 	.fail((msg, err, yargs) => {
 		if (err) {
 			yargs.showHelp();

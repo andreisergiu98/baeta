@@ -322,9 +322,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/server@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "@apollo/server@npm:5.5.0"
+"@apollo/server@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "@apollo/server@npm:5.5.1"
   dependencies:
     "@apollo/cache-control-types": "npm:^1.0.3"
     "@apollo/server-gateway-interface": "npm:^2.0.0"
@@ -345,11 +345,10 @@ __metadata:
     loglevel: "npm:^1.6.8"
     lru-cache: "npm:^11.1.0"
     negotiator: "npm:^1.0.0"
-    uuid: "npm:^11.1.0"
     whatwg-mimetype: "npm:^4.0.0"
   peerDependencies:
     graphql: ^16.11.0
-  checksum: 10/35ec7455e90d15cc44c6cd4ea0c0983cd642d0cad843e7e0cb4d7754762ccd7a9e23b05ab9c1313c175b4179e6f4fa08ecb1ad0f34a429a53840cbf6964faef2
+  checksum: 10/d70ea5287ca3a62604f458924a6b77c6b99803d88228d7e01a0e89d1d29cf2a0e5af0d854ed847a3a453730bf9b44620620efc687b298582d4a48aa5db1b9073
   languageName: node
   linkType: hard
 
@@ -2392,7 +2391,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/examples-apollo-ws@workspace:examples/apollo-ws"
   dependencies:
-    "@apollo/server": "npm:^5.5.0"
+    "@apollo/server": "npm:^5.5.1"
     "@as-integrations/express5": "npm:^1.1.2"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
@@ -2418,7 +2417,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/examples-apollo@workspace:examples/apollo"
   dependencies:
-    "@apollo/server": "npm:^5.5.0"
+    "@apollo/server": "npm:^5.5.1"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
@@ -2581,7 +2580,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/examples-federation-subgraph-products@workspace:examples/federation-subgraph-products"
   dependencies:
-    "@apollo/server": "npm:^5.5.0"
+    "@apollo/server": "npm:^5.5.1"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/federation": "workspace:^"
@@ -2597,7 +2596,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/examples-federation-subgraph-users@workspace:examples/federation-subgraph-users"
   dependencies:
-    "@apollo/server": "npm:^5.5.0"
+    "@apollo/server": "npm:^5.5.1"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/federation": "workspace:^"
@@ -2693,7 +2692,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/examples-shared@workspace:examples/_shared"
   dependencies:
-    "@apollo/server": "npm:^5.5.0"
+    "@apollo/server": "npm:^5.5.1"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/directives": "workspace:^"
@@ -3063,7 +3062,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/template-apollo@workspace:packages/create-baeta/meta/apollo"
   dependencies:
-    "@apollo/server": "npm:^5.5.0"
+    "@apollo/server": "npm:^5.5.1"
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
@@ -24274,15 +24273,6 @@ __metadata:
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: 10/5d6949693d58cb2e636a84f3ee1c6e7b2f9c16cb1d42d0ecb386d8c025c69e327205aa1c69e2868cc06a01e5e20681fbba55a4e0ed0cce913d60334024eae798
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^11.1.0":
-  version: 11.1.1
-  resolution: "uuid@npm:11.1.1"
-  bin:
-    uuid: dist/esm/bin/uuid
-  checksum: 10/16411d3dc12a08d6691616c09a75e66a7f900ba1beef6628a76fe0602f82fae2ee537b564d0b7bc95c24f58d059ca9b58c75a1e806118efb50e17822ff00ddd2
   languageName: node
   linkType: hard
 

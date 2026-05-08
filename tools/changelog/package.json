@@ -1,0 +1,45 @@
+{
+  "name": "@baeta/changelog",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "builder",
+    "framework",
+    "graphql",
+    "schema",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "tools/changelog"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "require": "./index.ts"
+    }
+  },
+  "scripts": {
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@changesets/get-github-info": "^0.8.0",
+    "@changesets/types": "^6.1.0"
+  },
+  "devDependencies": {
+    "@baeta/tsconfig": "workspace:^",
+    "@types/node": "catalog:dev",
+    "typescript": "catalog:dev"
+  }
+}

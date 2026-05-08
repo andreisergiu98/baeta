@@ -4,10 +4,10 @@ import type {
 	CreateCacheFactory,
 	OptionalGetRef,
 	RequiredGetRef,
+	RefCompatibleItem,
 } from '@baeta/cache';
 import type { ResolverParams } from '@baeta/core';
 import type { Field } from '@baeta/core/sdk';
-import type { RefCompatibleItem } from '../../cache/lib/item.ts';
 
 declare global {
 	export namespace BaetaExtensions {

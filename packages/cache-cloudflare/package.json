@@ -58,7 +58,7 @@
     "check:deps": "builder check-deps",
     "postpack": "builder prepare --restore",
     "prepack": "builder prepare",
-    "test": "builder test --skip-coverage",
+    "test": "builder test",
     "types": "tsc --noEmit"
   },
   "dependencies": {

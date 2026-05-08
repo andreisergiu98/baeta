@@ -12,7 +12,7 @@ export {
 	createCache,
 } from './lib/create-cache.ts';
 export { defineQuery } from './lib/define-query.ts';
-export type { ItemRef } from './lib/item.ts';
+export type { ItemRef, RefCompatibleItem } from './lib/item.ts';
 export type { ItemCacheKey, QueryCacheIndexKey, QueryCacheKey } from './lib/key.ts';
 export type { CacheOptions, OptionalGetRef, RequiredGetRef } from './lib/options.ts';
 export type { QueryArgs, QueryArgsIndexes, QueryIndexValue, QueryOptions } from './lib/query.ts';

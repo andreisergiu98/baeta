@@ -27,7 +27,8 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "require": "./index.ts"
+      "require": "./index.ts",
+      "default": "./index.ts"
     }
   },
   "scripts": {

@@ -4,6 +4,7 @@ import { z } from 'zod';
 export const PkgExportSchema = z
 	.object({
 		types: z.string(),
+		require: z.string().optional(),
 		default: z.string(),
 	})
 	.strict();
@@ -20,6 +21,7 @@ export const PackageJSONSchema = z.looseObject({
 	module: z.string().optional(),
 	bin: PkgBinSchema.optional(),
 	sideEffects: z.boolean().optional(),
+	private: z.boolean().optional(),
 	exports: PkgExportsSchema.optional(),
 	publishConfig: z
 		.object({

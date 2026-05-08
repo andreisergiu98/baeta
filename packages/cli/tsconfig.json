@@ -1,6 +1,7 @@
 {
   "extends": "@baeta/tsconfig/tsconfig.json",
   "compilerOptions": {
+    "rootDir": ".",
     "jsx": "react-jsx",
     "types": ["react", "node"]
   },

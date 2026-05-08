@@ -1,9 +1,6 @@
 {
   "extends": "@baeta/tsconfig/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "noEmit": true,
-    "emitDeclarationOnly": false,
     "types": ["@cloudflare/workers-types"]
   },
   "include": ["**/*.ts"],

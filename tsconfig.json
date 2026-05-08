@@ -5,6 +5,7 @@
   },
   "include": [
     ".github/workflows-src/**/*.ts",
+    ".lintstagedrc.js",
     "shared-ignores.ts",
     "oxfmt.config.ts",
     "eslint.config.ts",

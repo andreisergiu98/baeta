@@ -1,5 +1,11 @@
 # @baeta/subscriptions-pubsub
 
+## 2.0.0-next.14
+
+### Patch Changes
+
+- Fix wrong error being thrown in the case for single errors by [@andreisergiu98](https://github.com/andreisergiu98) in [#397](https://github.com/andreisergiu98/baeta/pull/397)
+
 ## 2.0.0-next.13
 
 ## 2.0.0-next.12

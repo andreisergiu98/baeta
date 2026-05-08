@@ -1,5 +1,11 @@
 # @baeta/plugin-federation
 
+## 2.0.0-next.14
+
+### Patch Changes
+
+- Fix some promises not being properly handled, posing a risk for unhandled exceptions by [@andreisergiu98](https://github.com/andreisergiu98) in [#397](https://github.com/andreisergiu98/baeta/pull/397)
+
 ## 2.0.0-next.13
 
 ### Patch Changes

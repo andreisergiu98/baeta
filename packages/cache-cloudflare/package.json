@@ -70,7 +70,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-clients": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20260504.1",
+    "@cloudflare/workers-types": "^4.20260505.1",
     "miniflare": "^4.20260430.0",
     "typescript": "catalog:dev"
   },

@@ -1,5 +1,12 @@
 # @baeta/cache-cloudflare
 
+## 2.0.0-next.14
+
+### Patch Changes
+
+- Updated dependencies:
+  - @baeta/cache@2.0.0-next.14
+
 ## 2.0.0-next.13
 
 ### Patch Changes

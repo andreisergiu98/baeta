@@ -1,5 +1,14 @@
 # @baeta/cli
 
+## 2.0.0-next.14
+
+### Patch Changes
+
+- Fix some promises not being properly handled, posing a risk for unhandled exceptions by [@andreisergiu98](https://github.com/andreisergiu98) in [#397](https://github.com/andreisergiu98/baeta/pull/397)
+- Updated dependencies [[`f6f8162`](https://github.com/andreisergiu98/baeta/commit/f6f8162e8393479b47cedf480eb4ec0fd4f8c311)]:
+  - @baeta/generator@2.0.0-next.5
+  - @baeta/plugin-graphql@2.0.0-next.14
+
 ## 2.0.0-next.13
 
 ### Patch Changes

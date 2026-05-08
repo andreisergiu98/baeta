@@ -1,30 +1,21 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
+import { SKIP_TSCONFIG_CHECK } from '@baeta/workspace-config';
 import type { Workspace } from '@yarnpkg/core';
 import symbols from 'log-symbols';
 import ora from 'ora';
 import type { CommandModule } from 'yargs';
-import { loadPackageJson, type Pkg } from '../lib/package-json.ts';
+import { buildLiteralSchema } from '../lib/literal-schema.ts';
+import type { Pkg } from '../lib/package-json-schema.ts';
+import { loadPackageJson } from '../lib/package-json.ts';
 import { loadWorkspaceProject } from '../lib/workspace.ts';
-import { buildLiteralSchema } from '../lib/zod.ts';
 
-const SKIP_WORKSPACES = new Set([
-	'baeta',
-	'@baeta/website',
-	'@baeta/tsconfig',
-	'@baeta/examples-federation-supergraph',
-	'@baeta/template-apollo',
-	'@baeta/template-yoga',
-	'@baeta/examples-cloudflare',
-	'@baeta/examples-cloudflare-ws',
-]);
-
-interface ValidateTsconfigArgs {
+interface CheckTsconfigArgs {
 	'apply-fix': boolean;
 }
 
-export const validateTsconfigCommand: CommandModule<{}, ValidateTsconfigArgs> = {
-	command: 'validate-tsconfig',
+export const checkTsconfigCommand: CommandModule<{}, CheckTsconfigArgs> = {
+	command: 'check-tsconfig',
 	describe: 'Validates tsconfig.json files in all workspaces',
 	builder: (yargs) => {
 		return yargs.option('apply-fix', {
@@ -53,7 +44,7 @@ export const validateTsconfigCommand: CommandModule<{}, ValidateTsconfigArgs> = 
 
 async function checkWorkspace(workspace: Workspace, args: { applyFix: boolean }) {
 	const pkg = await loadPackageJson(`${workspace.cwd}/package.json`);
-	if (SKIP_WORKSPACES.has(pkg.name)) {
+	if (SKIP_TSCONFIG_CHECK.has(pkg.name)) {
 		console.info(`${symbols.info} ${pkg.name}: skipping tsconfig check`);
 		return { success: true } as const;
 	}

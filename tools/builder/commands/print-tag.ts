@@ -1,5 +1,5 @@
 import type { CommandModule } from 'yargs';
-import { getPreReleaseTag } from '../lib/release-tag.ts';
+import { getReleaseTag } from '../lib/release-tag.ts';
 
 export const printTagCommand: CommandModule<{}, {}> = {
 	command: 'print-tag',
@@ -8,7 +8,7 @@ export const printTagCommand: CommandModule<{}, {}> = {
 		return yargs;
 	},
 	handler: async () => {
-		const tag = await getPreReleaseTag();
+		const tag = await getReleaseTag();
 		process.stdout.write(tag);
 	},
 };

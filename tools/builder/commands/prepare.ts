@@ -2,7 +2,8 @@ import fs from 'node:fs/promises';
 import { join } from 'node:path';
 import ora from 'ora';
 import type { CommandModule } from 'yargs';
-import { loadPackageJson, type PkgExport } from '../lib/package-json.ts';
+import type { PkgExport } from '../lib/package-json-schema.ts';
+import { loadPackageJson } from '../lib/package-json.ts';
 
 interface PrepareArgs {
 	restore?: boolean;

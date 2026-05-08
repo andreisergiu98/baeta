@@ -1,5 +1,4 @@
 import { defineConfig } from '@baeta/builder/tsdown';
+import pkg from './package.json' with { type: 'json' };
 
-export default defineConfig({
-	entry: ['./index.ts', '!dist'],
-});
+export default defineConfig(pkg);

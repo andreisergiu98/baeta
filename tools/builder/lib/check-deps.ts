@@ -1,7 +1,8 @@
 import fs, { glob } from 'node:fs/promises';
 import { join } from 'node:path';
+import { ALLOWED_UNUSED_DEV_DEPS, PACKAGE_DEPENDENCY_OVERRIDES } from '@baeta/workspace-config';
 import * as ts from 'typescript';
-import type { Pkg } from './package-json.ts';
+import type { Pkg } from './package-json-schema.ts';
 
 export interface CheckDepsIssue {
 	type:
@@ -15,49 +16,6 @@ export interface CheckDepsIssue {
 	package: string;
 	message: string;
 }
-
-interface PackageOverride {
-	ignoreDeps?: string[];
-	ignoreMissingDeps?: string[];
-	ignoreDevDeps?: string[];
-}
-
-const globalIgnoreDeps: string[] = [];
-const globalIgnoreDevDeps = ['@baeta/builder', '@baeta/testing', '@baeta/tsconfig', 'typescript'];
-
-const packageOverrides: Record<string, PackageOverride> = {
-	'@baeta/plugin-graphql': {
-		ignoreDevDeps: ['@types/node'],
-	},
-	'@baeta/plugin-directives': {
-		ignoreDevDeps: ['@types/node'],
-	},
-	'@baeta/plugin-pagination': {
-		ignoreDevDeps: ['@types/node'],
-	},
-	'@baeta/plugin-exec': {
-		ignoreDevDeps: ['@types/node'],
-	},
-	'@baeta/plugin-cloudflare': {
-		ignoreDevDeps: ['@cloudflare/workers-types', 'graphql'],
-	},
-	'@baeta/util-graphql': {
-		ignoreDevDeps: ['@types/node'],
-	},
-	'@baeta/subscriptions-cloudflare': {
-		ignoreDevDeps: ['@cloudflare/workers-types'],
-	},
-	'@baeta/cache-cloudflare': {
-		ignoreMissingDeps: ['cloudflare:workers'],
-		ignoreDevDeps: ['@cloudflare/workers-types'],
-	},
-	'@baeta/extension-cache': {
-		ignoreDevDeps: ['graphql'],
-	},
-	'@baeta/subscriptions-pubsub': {
-		ignoreDevDeps: ['graphql'],
-	},
-};
 
 export function extractImports(filePath: string, content: string): string[] {
 	const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
@@ -180,9 +138,9 @@ export function checkDependencies(
 	const peerDeps = new Set(Object.keys(pkg.peerDependencies ?? {}));
 	const allDeclaredDeps = new Set([...deps, ...devDeps, ...peerDeps]);
 	const allImports = new Set([...sourceImports, ...testImports]);
-	const overrides = packageOverrides[pkg.name];
-	const ignoredDeps = new Set([...globalIgnoreDeps, ...(overrides?.ignoreDeps ?? [])]);
-	const ignoredDevDeps = new Set([...globalIgnoreDevDeps, ...(overrides?.ignoreDevDeps ?? [])]);
+	const overrides = PACKAGE_DEPENDENCY_OVERRIDES[pkg.name];
+	const ignoredDeps = new Set([...(overrides?.ignoreDeps ?? [])]);
+	const ignoredDevDeps = new Set([...ALLOWED_UNUSED_DEV_DEPS, ...(overrides?.ignoreDevDeps ?? [])]);
 
 	if (overrides?.ignoreDeps) {
 		for (const ignored of overrides.ignoreDeps) {

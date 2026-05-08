@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import { join } from 'node:path';
+import { BUILD_DEFAULTS } from '@baeta/workspace-config';
 import ora from 'ora';
 import { build } from 'tsdown';
 import type { CommandModule } from 'yargs';
@@ -86,7 +87,7 @@ async function checkExportFilesExist() {
 		}
 	}
 
-	const mandatoryFiles = ['dist', 'package.json'];
+	const mandatoryFiles = [BUILD_DEFAULTS.outDir, 'package.json'];
 	const missingFiles = mandatoryFiles.filter((file) => !pkg.files?.includes(file));
 	if (missingFiles.length > 0) {
 		throw new Error(`Missing files inclusion in package ${pkg.name}: ${missingFiles.join(', ')}`);

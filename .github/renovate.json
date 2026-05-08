@@ -31,7 +31,15 @@
       "rangeStrategy": "replace"
     },
     {
-      "matchPackageNames": ["node", "actions/node-versions"],
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "<23"
+    },
+    {
+      "matchPackageNames": ["node"],
+      "allowedVersions": "<25"
+    },
+    {
+      "matchPackageNames": ["actions/node-versions"],
       "enabled": false
     },
     {

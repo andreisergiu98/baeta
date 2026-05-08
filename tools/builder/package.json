@@ -32,13 +32,16 @@
   "type": "module",
   "exports": {
     "./bundler": {
-      "import": "./lib/bundler.ts"
+      "types": "./lib/bundler.ts",
+      "default": "./lib/bundler.ts"
     },
     "./tsdown": {
-      "import": "./lib/tsdown.ts"
+      "types": "./lib/tsdown.ts",
+      "default": "./lib/tsdown.ts"
     },
     "./tsx-loader": {
-      "import": "./lib/tsx-loader.ts"
+      "types": "./lib/tsx-loader.ts",
+      "default": "./lib/tsx-loader.ts"
     }
   },
   "scripts": {

@@ -4,6 +4,7 @@
     "target": "es2024",
     "lib": ["es2024"],
     "noEmit": true,
+    "emitDeclarationOnly": false,
     "types": [],
     "module": "esnext",
     "moduleResolution": "bundler",

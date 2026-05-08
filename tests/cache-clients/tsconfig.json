@@ -1,5 +1,7 @@
 {
   "extends": "@baeta/tsconfig/tsconfig.json",
-  "include": ["**/*.ts"],
-  "exclude": ["dist"]
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": ["**/*.ts"]
 }

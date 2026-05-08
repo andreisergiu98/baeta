@@ -63,6 +63,16 @@ async function checkExportFilesExist() {
 		const entryExport = exports[entry];
 		for (const condition in entryExport) {
 			const conditionExport = entryExport[condition as keyof typeof entryExport];
+			if (conditionExport == null) {
+				throw new Error(
+					`Export entry ${entry} is missing condition ${condition} in package ${pkg.name}`,
+				);
+			}
+			if (condition === 'require') {
+				throw new Error(
+					`Export entry ${entry} has a 'require' condition, which is not supported in package ${pkg.name}.`,
+				);
+			}
 			promises.push(checkFile(conditionExport));
 		}
 	}

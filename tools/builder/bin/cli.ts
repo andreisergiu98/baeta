@@ -10,6 +10,7 @@ import { printResolvedVersionsCommand } from '../commands/print-resolved-version
 import { printTagCommand } from '../commands/print-tag.ts';
 import { releaseCommand } from '../commands/release.ts';
 import { testCommand } from '../commands/test.ts';
+import { validateTsconfigCommand } from '../commands/validate-tsconfig.ts';
 
 const argv = hideBin(process.argv);
 
@@ -28,17 +29,18 @@ await yargs(argv)
 	.command(printTagCommand)
 	.command(releaseCommand)
 	.command(testCommand)
+	.command(validateTsconfigCommand)
 	.fail((msg, err, yargs) => {
 		if (err) {
 			yargs.showHelp();
-			console.error(`${symbols.error} ${err.message}`);
+			console.error(`\n${symbols.error} ${err.message}`);
 			if (argv.includes('--verbose') || argv.includes('--verbose=true')) {
 				console.error(err);
 			}
 			process.exit(1);
 		}
 		yargs.showHelp();
-		console.error(`${symbols.error} ${msg}`);
+		console.error(`\n${symbols.error} ${msg}`);
 		process.exit(1);
 	})
 	.demandCommand()

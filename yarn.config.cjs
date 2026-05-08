@@ -114,6 +114,8 @@ function enforceWorkspaceMetadata({ Yarn }) {
 		}
 
 		if (!workspace.manifest.private) {
+			enforceConsistentEntries(workspace);
+
 			workspace.set('publishConfig.access', 'public');
 			workspace.set('engines.node', '>=22.20.0');
 
@@ -124,17 +126,9 @@ function enforceWorkspaceMetadata({ Yarn }) {
 				workspace.set('scripts.build', 'yarn prebuild && builder build');
 				workspace.set('scripts.types', 'yarn prebuild && tsc --noEmit');
 			}
-
 			workspace.set('scripts.prepack', 'builder prepare');
 			workspace.set('scripts.postpack', 'builder prepare --restore');
-			if (
-				workspace.manifest.name.startsWith('@baeta/cache') ||
-				workspace.manifest.name.startsWith('@baeta/extension-cache')
-			) {
-				workspace.set('scripts.test', 'builder test --skip-coverage');
-			} else {
-				workspace.set('scripts.test', 'builder test');
-			}
+			workspace.set('scripts.test', 'builder test');
 			workspace.set('scripts.check:deps', 'builder check-deps');
 
 			workspace.set('devDependencies.@baeta/builder', 'workspace:^');
@@ -142,8 +136,6 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('devDependencies.@baeta/tsconfig', 'workspace:^');
 
 			workspace.set('ava.extensions', ['ts']);
-
-			enforceConsistentEntries(workspace);
 
 			workspace.set('typedocOptions.sort', [
 				'kind',

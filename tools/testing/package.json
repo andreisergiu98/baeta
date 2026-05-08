@@ -28,7 +28,7 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "import": "./index.ts"
+      "default": "./index.ts"
     }
   },
   "scripts": {

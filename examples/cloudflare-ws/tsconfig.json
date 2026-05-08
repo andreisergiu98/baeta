@@ -1,13 +1,4 @@
 {
-  "extends": "@baeta/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "noEmit": true,
-    "emitDeclarationOnly": false,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "types": ["@cloudflare/workers-types"]
-  },
-  "exclude": ["./baeta.ts"]
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

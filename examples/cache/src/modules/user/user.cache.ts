@@ -17,7 +17,7 @@ const UserCacheSchema = z.object({
 
 const findUser = defineQuery({
 	resolve: async (args: { id: string | null; email: string | null }) => {
-		return db.user.findUnique({
+		return await db.user.findUnique({
 			where: {
 				id: args.id ?? undefined,
 				email: args.email ?? undefined,
@@ -36,7 +36,7 @@ const findUser = defineQuery({
 
 const findUsers = defineQuery({
 	resolve: async () => {
-		return db.user.findMany();
+		return await db.user.findMany();
 	},
 	onDelete(_pairs, helpers) {
 		return helpers.invalidateAll();

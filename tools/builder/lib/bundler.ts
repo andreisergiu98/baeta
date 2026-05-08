@@ -31,7 +31,7 @@ export async function importTSX(source: string, parentURL: string): Promise<unkn
 		],
 	});
 
-	const code = await result.outputFiles?.[0]?.text;
+	const code = result.outputFiles?.[0]?.text;
 
 	if (code == null) {
 		throw new Error('Failed to bundle TSX file');
@@ -41,9 +41,9 @@ export async function importTSX(source: string, parentURL: string): Promise<unkn
 	const tempFile = join(dir, `temp-file-${process.pid}-${Date.now()}.js`);
 
 	const writePromise = writeFile(tempFile, code, 'utf-8');
-	const unlinkTempFile = async () => {
-		await writePromise.catch(() => {});
-		await unlink(tempFile).catch(() => {});
+
+	const unlinkTempFile = () => {
+		writePromise.then(() => unlink(tempFile)).catch(() => {});
 	};
 
 	process.on('exit', unlinkTempFile);
@@ -52,7 +52,7 @@ export async function importTSX(source: string, parentURL: string): Promise<unkn
 		await writePromise;
 		return await import(pathToFileURL(tempFile).href);
 	} finally {
-		await unlinkTempFile();
+		await unlink(tempFile);
 		process.off('exit', unlinkTempFile);
 	}
 }

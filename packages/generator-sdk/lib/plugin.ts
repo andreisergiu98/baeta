@@ -44,7 +44,7 @@ export interface GeneratorPluginV1<Store = unknown> {
 }
 
 const defaultPluginFn: GeneratorPluginV1Fn<unknown> = async (_ctx, next) => {
-	return next();
+	return await next();
 };
 
 const defaultWatchFn = () => ({ include: [], ignore: [] });

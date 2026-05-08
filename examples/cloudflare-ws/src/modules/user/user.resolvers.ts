@@ -42,7 +42,7 @@ const updateUserMutation = Mutation.updateUser
 		console.log('Updated user:', result, 'for args:', args);
 		return result;
 	})
-	.resolve(({ args, ctx }) => {
+	.resolve(async ({ args, ctx }) => {
 		const updatedUser = {
 			id: args.where.id,
 			email: 'jon.doe@baeta.io',
@@ -51,7 +51,7 @@ const updateUserMutation = Mutation.updateUser
 			profile: null,
 		};
 
-		ctx.publish('user-updated', updatedUser);
+		await ctx.publish('user-updated', updatedUser);
 
 		return updatedUser;
 	});

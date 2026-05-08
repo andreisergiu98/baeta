@@ -55,7 +55,7 @@ test("store should be loaded when get is called and it's lazy", async (t) => {
 
 	t.is(store.isLoaded, false);
 
-	get(ctx);
+	void get(ctx);
 
 	store = ctx[storeKey] as ContextStoreValue<1>;
 	t.is(store.isLoaded, true);

@@ -26,7 +26,7 @@ const updateUserMutation = Mutation.updateUser
 		return user;
 	})
 	.resolve(async ({ args }) => {
-		return db.user.update({
+		return await db.user.update({
 			where: {
 				id: args.where.id ?? undefined,
 				email: args.where.email ?? undefined,

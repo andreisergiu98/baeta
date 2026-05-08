@@ -43,12 +43,12 @@ export function createExecPlugin(options: ExecPluginOptions) {
 			const skipped = await options.skip?.(ctx);
 
 			if (skipped === true) {
-				return next();
+				return await next();
 			}
 
 			if (typeof options.exec !== 'string') {
 				await options.exec(ctx);
-				return next();
+				return await next();
 			}
 
 			const child = execaCommand(options.exec, {
@@ -60,7 +60,7 @@ export function createExecPlugin(options: ExecPluginOptions) {
 				throw new Error(err.stderr);
 			});
 
-			return next();
+			return await next();
 		},
 	});
 }

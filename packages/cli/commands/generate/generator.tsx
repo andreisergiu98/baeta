@@ -43,8 +43,12 @@ export function Generator(props: Readonly<GeneratorProps>) {
 					return await generate(config.graphql, plugins, generatorHooks);
 				}
 				const watcher = await generateAndWatch(config.graphql, plugins, generatorHooks);
-				if (isCancelled()) watcher.close();
-				closeWatcher = () => watcher.close();
+				closeWatcher = () => {
+					runAsync(async () => await watcher.close());
+				};
+				if (isCancelled()) {
+					closeWatcher();
+				}
 			},
 			(error) => {
 				console.log(makeErrorMessage((error as Error).message));

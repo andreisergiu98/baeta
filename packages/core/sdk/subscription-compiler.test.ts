@@ -56,7 +56,7 @@ test('SubscriptionCompiler should use type middlewares correctly', async (t) => 
 	});
 	fieldCompiler.addMiddleware(async (next) => {
 		t.is(i++, 2);
-		return next();
+		return await next();
 	});
 	const resolver = fieldCompiler.build([
 		(next) => {

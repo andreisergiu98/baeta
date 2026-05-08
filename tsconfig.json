@@ -1,0 +1,13 @@
+{
+  "extends": "@baeta/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [
+    ".github/workflows-src/**/*.ts",
+    "shared-ignores.ts",
+    "oxfmt.config.ts",
+    "eslint.config.ts",
+    "yarn.config.cjs"
+  ]
+}

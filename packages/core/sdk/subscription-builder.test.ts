@@ -200,7 +200,7 @@ test('SubscriptionBuilder should handle middlewares correctly', async (t) => {
 			await sleep(5);
 			t.is(i, 0);
 			i++;
-			return next();
+			return await next();
 		})
 		.$use((next) => {
 			t.is(i, 1);

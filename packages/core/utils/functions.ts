@@ -7,5 +7,7 @@ export function nameFunction(fn: (...args: any[]) => any, name: string) {
 			value: name,
 			configurable: true,
 		});
-	} catch {}
+	} catch {
+		// do nothing
+	}
 }

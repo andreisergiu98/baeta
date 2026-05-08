@@ -79,19 +79,19 @@ export class File {
 
 		const content = await this.buildContent();
 
-		return fs.writeFile(this.filename, content, 'utf-8');
+		return await fs.writeFile(this.filename, content, 'utf-8');
 	};
 
 	unlink = async () => {
 		this.persisted = false;
-		return fs.unlink(this.filename);
+		return await fs.unlink(this.filename);
 	};
 
 	protected async buildContent() {
 		const content = this.buildHeader() + this.content;
 
 		if (this.options?.transformContent) {
-			return this.options.transformContent(this.filename, content, this.tag);
+			return await this.options.transformContent(this.filename, content, this.tag);
 		}
 
 		return content;

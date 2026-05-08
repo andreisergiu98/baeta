@@ -33,7 +33,7 @@ export async function generate(
 	const generatorOptions = loadOptions(options);
 	const stateFilename = getStateFilename(generatorOptions.cwd);
 	const ctx = createCtx({ generatorOptions, plugins });
-	return executeGenerator(ctx, plugins, stateFilename, hooks);
+	return await executeGenerator(ctx, plugins, stateFilename, hooks);
 }
 
 export async function generateAndWatch(
@@ -52,14 +52,21 @@ export async function generateAndWatch(
 		hooks,
 	);
 
-	const reload = async (file: WatcherFile) => {
+	const reload = (file: WatcherFile) => {
 		const ctx = createCtx({
 			generatorOptions,
 			plugins,
 			watching: true,
 			changedFile: file,
 		});
-		previousCtx = await executeGenerator(ctx, plugins, stateFilename, hooks, previousCtx);
+		// TODO: add proper scheduler to avoid multiple executions when multiple files change in a short period of time
+		executeGenerator(ctx, plugins, stateFilename, hooks, previousCtx)
+			.then((newCtx) => {
+				previousCtx = newCtx;
+			})
+			.catch(() => {
+				// Errors are handled in executeGenerator, so we can ignore them here
+			});
 	};
 
 	for (const plugin of plugins) {
@@ -82,31 +89,31 @@ async function executeGenerator(
 		return;
 	}
 
-	const onSetupStart = (plugin: GeneratorPluginV1) => {
-		hooks?.onPluginStepStart?.(plugin, 'setup');
+	const onSetupStart = async (plugin: GeneratorPluginV1) => {
+		await hooks?.onPluginStepStart?.(plugin, 'setup');
 	};
 
-	const onGenerateStart = (plugin: GeneratorPluginV1) => {
-		hooks?.onPluginStepStart?.(plugin, 'generate');
+	const onGenerateStart = async (plugin: GeneratorPluginV1) => {
+		await hooks?.onPluginStepStart?.(plugin, 'generate');
 	};
 
-	const onEndStart = (plugin: GeneratorPluginV1) => {
-		hooks?.onPluginStepStart?.(plugin, 'end');
+	const onEndStart = async (plugin: GeneratorPluginV1) => {
+		await hooks?.onPluginStepStart?.(plugin, 'end');
 	};
 
-	const onSetupEnd = (plugin: GeneratorPluginV1) => {
+	const onSetupEnd = async (plugin: GeneratorPluginV1) => {
 		ctx.didSetup.push(plugin.name);
-		hooks?.onPluginStepEnd?.(plugin, 'setup');
+		await hooks?.onPluginStepEnd?.(plugin, 'setup');
 	};
 
-	const onGenerateEnd = (plugin: GeneratorPluginV1) => {
+	const onGenerateEnd = async (plugin: GeneratorPluginV1) => {
 		ctx.didGenerate.push(plugin.name);
-		hooks?.onPluginStepEnd?.(plugin, 'generate');
+		await hooks?.onPluginStepEnd?.(plugin, 'generate');
 	};
 
-	const onEndEnd = (plugin: GeneratorPluginV1) => {
+	const onEndEnd = async (plugin: GeneratorPluginV1) => {
 		ctx.didEnd.push(plugin.name);
-		hooks?.onPluginStepEnd?.(plugin, 'setup');
+		await hooks?.onPluginStepEnd?.(plugin, 'end');
 	};
 
 	try {
@@ -125,7 +132,7 @@ async function executeGenerator(
 		await hooks?.onError?.(e)?.catch(() => null);
 	}
 
-	saveState(stateFilename, ctx);
+	await saveState(stateFilename, ctx).catch(() => null);
 
 	return ctx;
 }

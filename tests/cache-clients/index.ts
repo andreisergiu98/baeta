@@ -12,15 +12,15 @@ const TTL_MS = 10_000;
 type TestItem = { id: string; name: string };
 
 function itemKey(id: string): ItemCacheKey {
-	return `t:{s:item:rev_1}:id:${id}` as ItemCacheKey;
+	return `t:{s:item:rev_1}:id:${id}`;
 }
 
 function queryKey(name: string, id: string): QueryCacheKey {
-	return `t:{s:query:${name}:rev_1}:id:${id}` as QueryCacheKey;
+	return `t:{s:query:${name}:rev_1}:id:${id}`;
 }
 
 function indexKey(name: string, idx: string): QueryCacheIndexKey {
-	return `t:{s:query:${name}:rev_1}:idx:${idx}` as QueryCacheIndexKey;
+	return `t:{s:query:${name}:rev_1}:idx:${idx}`;
 }
 
 const itemArgs: CacheClientArgs<TestItem> = {

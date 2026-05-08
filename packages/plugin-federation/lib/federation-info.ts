@@ -114,11 +114,7 @@ function getKeyDirectiveSelectionSet(directive: ConstDirectiveNode): string | nu
 		return null;
 	}
 	const resolvableArg = directive.arguments?.find((arg) => arg.name.value === 'resolvable');
-	if (
-		resolvableArg &&
-		resolvableArg.value.kind === Kind.BOOLEAN &&
-		resolvableArg.value.value === false
-	) {
+	if (resolvableArg?.value.kind === Kind.BOOLEAN && resolvableArg.value.value === false) {
 		return null;
 	}
 	return fieldsArg.value.value.trim().replaceAll(/\s+/g, '');

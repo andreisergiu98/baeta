@@ -25,6 +25,7 @@ dist
 
 ### cache ###
 .turbo
+.cache
 
 ### test ###
 packages/*/coverage

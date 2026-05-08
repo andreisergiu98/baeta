@@ -7,12 +7,13 @@ const baeta = createApplication({
 	modules,
 });
 
-// biome-ignore lint/complexity/noBannedTypes: Empty contexts
 export const yoga = createYoga<{}, {}>({
 	schema: baeta.schema,
 });
 
-const server = createServer(yoga);
+const server = createServer((req, res) => {
+	void yoga(req, res);
+});
 
 server.listen(4000, () => {
 	console.log(`🚀 Server ready at http://localhost:4000${yoga.graphqlEndpoint}`);

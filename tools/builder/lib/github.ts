@@ -114,7 +114,7 @@ function getFixedGroupVersion(packages: PublicWorkspacePackage[]) {
 }
 
 async function createPackagesWithReleaseNotes(packages: PublicWorkspacePackage[]) {
-	return Promise.all(
+	return await Promise.all(
 		packages.map(async (pkg) => {
 			return {
 				...pkg,

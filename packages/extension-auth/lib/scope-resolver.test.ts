@@ -25,9 +25,11 @@ test('createScopeResolver handles boolean loader', async (t) => {
 	const { ctx } = createCtx();
 
 	const trueResolver = createScopeResolver(ctx, 'fn-true', true);
+	// eslint-disable-next-line @typescript-eslint/await-thenable
 	await t.notThrows(() => trueResolver(null));
 
 	const falseResolver = createScopeResolver({}, 'fn-false', false);
+	// eslint-disable-next-line @typescript-eslint/await-thenable
 	await t.throws(() => falseResolver(null), { instanceOf: ForbiddenError });
 });
 
@@ -38,13 +40,13 @@ test('createScopeResolver handles function loader', async (t) => {
 		await delay(10);
 		return true;
 	});
-	await t.notThrowsAsync(async () => trueResolver(null));
+	await t.notThrowsAsync(async () => await trueResolver(null));
 
 	const falseResolver = createScopeResolver(ctx, 'fn-false', async () => {
 		await delay(10);
 		return false;
 	});
-	await t.throwsAsync(async () => falseResolver(null), { instanceOf: ForbiddenError });
+	await t.throwsAsync(async () => await falseResolver(null), { instanceOf: ForbiddenError });
 });
 
 test('createScopeResolver caches function loaders', async (t) => {
@@ -54,13 +56,13 @@ test('createScopeResolver caches function loaders', async (t) => {
 		await delay(10);
 		return true;
 	});
-	await t.notThrowsAsync(async () => trueResolver(null));
+	await t.notThrowsAsync(async () => await trueResolver(null));
 
 	const falseResolver = createScopeResolver(ctx, 'fn-true', async () => {
 		await delay(10);
 		return false;
 	});
-	await t.notThrowsAsync(async () => falseResolver(null));
+	await t.notThrowsAsync(async () => await falseResolver(null));
 });
 
 test('createScopeResolverMap creates resolver for each scope', (t) => {

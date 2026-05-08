@@ -48,7 +48,7 @@ export class CacheExtension extends Extension<never> {
 			) => {
 				return builder.toMethods().map(async (params) => {
 					const args = await mapper(params);
-					return query(args);
+					return await query(args);
 				});
 			},
 		};

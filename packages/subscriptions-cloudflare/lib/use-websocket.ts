@@ -58,7 +58,7 @@ export function useWebsocket(
 		clearInterval(pinger);
 		clearTimeout(pongTimeout);
 		clearTimeout(connectionTimeout);
-		deleteSubscriptions();
+		deleteSubscriptions().catch(() => null);
 	};
 
 	if (protocol !== GRAPHQL_TRANSPORT_WS_PROTOCOL) {

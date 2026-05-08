@@ -17,9 +17,6 @@ export interface GitignoreOptions {
 	 */
 	skipFilesGlobs?: string[];
 }
-export interface GitignoreOptions {
-	skipTags?: string[];
-}
 
 const defaultSkipTags = ['cloudflare'];
 

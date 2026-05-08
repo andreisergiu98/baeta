@@ -239,7 +239,7 @@ function printValue(config: PrinterConfig, value: string, nullable: boolean): st
 	return `${value} | null`;
 }
 
-function printOptionalMarker(config: PrinterConfig, type: TypeNode): string {
+function printOptionalMarker(config: PrinterConfig, type: TypeNode) {
 	return config.withOptional && type.kind !== Kind.NON_NULL_TYPE ? '?' : '';
 }
 

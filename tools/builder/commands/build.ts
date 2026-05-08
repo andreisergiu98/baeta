@@ -5,7 +5,6 @@ import { build } from 'tsdown';
 import type { CommandModule } from 'yargs';
 import { loadPackageJson } from '../lib/package-json.ts';
 
-// biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
 export const buildCommand: CommandModule<{}, {}> = {
 	command: 'build',
 	describe: 'Build package for publishing',

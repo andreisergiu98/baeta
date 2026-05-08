@@ -106,6 +106,10 @@ export const syncRules: SyncRule[] = [
 					file: 'src/modules/user/user.resolvers.ts',
 					replacements: [['ctx.pubsub.subscribe', 'ctx.pubsub.asyncIterableIterator']],
 				},
+				{
+					file: 'src/modules/user/user.resolvers.ts',
+					replacements: [['ctx.pubsub.publish', 'await ctx.pubsub.publish']],
+				},
 			],
 		},
 		subscriptionsDefaults,
@@ -134,7 +138,7 @@ export const syncRules: SyncRule[] = [
 				{
 					file: 'src/modules/user/user.resolvers.ts',
 					replacements: [
-						['ctx.pubsub.publish', 'ctx.publish'],
+						['ctx.pubsub.publish', 'await ctx.publish'],
 						['ctx.pubsub.subscribe', 'ctx.subscribe'],
 					],
 				},

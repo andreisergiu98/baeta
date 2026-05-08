@@ -74,9 +74,11 @@ export function createContextStore<Result, Context = unknown>(
 		}
 
 		if (options?.eager) {
+			const promise = loadAsync(loader);
+			promise.catch(() => {});
 			_ctx[key] = {
 				isLoaded: true,
-				result: loadAsync(loader),
+				result: promise,
 			};
 		} else {
 			_ctx[key] = {

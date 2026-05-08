@@ -12,7 +12,6 @@ interface PrintResolvedVersionsArgs {
 	out?: string;
 }
 
-// biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
 export const printResolvedVersionsCommand: CommandModule<{}, PrintResolvedVersionsArgs> = {
 	command: 'print-resolved-versions <target>',
 	describe: 'Print the versions of workspace or catalog dependencies for package',

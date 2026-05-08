@@ -1,10 +1,12 @@
-import type {
-	CacheClientSaveOptions,
-	ItemCacheKey,
-	QueryCacheIndexKey,
-	QueryCacheKey,
+import {
+	CacheClient,
+	type CacheClientSaveOptions,
+	type ItemCacheKey,
+	type QueryCacheIndexKey,
+	type QueryCacheKey,
+	type CacheClientArgs,
+	type CacheClientOptions,
 } from '@baeta/cache';
-import { CacheClient, type CacheClientArgs, type CacheClientOptions } from '@baeta/cache';
 import {
 	assertNoPipelineErrors,
 	batchPipeline,

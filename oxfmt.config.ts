@@ -1,4 +1,5 @@
 import { defineConfig } from 'oxfmt';
+import ignorePatterns from './shared-ignores.ts';
 
 export default defineConfig({
 	printWidth: 100,
@@ -41,18 +42,5 @@ export default defineConfig({
 			},
 		},
 	],
-	ignorePatterns: [
-		'**/examples/**/modules/baeta-*/*',
-		'**/examples/**/modules/index.ts',
-		'**/examples/**/__generated__',
-		'**/examples/**/typedef.ts',
-		'**/e2e/**/modules/baeta-*/*',
-		'**/e2e/**/modules/index.ts',
-		'**/e2e/**/__generated__',
-		'**/e2e/**/typedef.ts',
-		'**/e2e/**/types.gen.ts',
-		'**/e2e/**/custom-types',
-		'**/examples/**/.wrangler',
-		'**/.yarn',
-	],
+	ignorePatterns,
 });

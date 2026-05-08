@@ -41,6 +41,7 @@ function parseLiteral(ast: ValueNode, variables: any): any {
 	switch (ast.kind) {
 		case Kind.STRING:
 		case Kind.BOOLEAN:
+		case Kind.ENUM:
 			return ast.value;
 		case Kind.INT:
 		case Kind.FLOAT:

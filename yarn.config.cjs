@@ -109,7 +109,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			'typescript',
 		]);
 
-		if (workspace.ident !== '@baeta/website') {
+		if (workspace.ident !== '@baeta/website' && workspace.ident !== '@baeta/changelog') {
 			workspace.set('type', 'module');
 		}
 

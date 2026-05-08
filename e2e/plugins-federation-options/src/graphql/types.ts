@@ -1,6 +1,6 @@
 import type { GraphQLResolveInfo } from 'graphql';
-import type { Context } from '../types/context.ts';
 import type { BaseObjectTypes, BaseScalars } from '../types-gen/utility.ts';
+import type { Context } from '../types/context.ts';
 
 export interface Scalars extends BaseScalars {}
 

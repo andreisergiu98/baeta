@@ -16,10 +16,7 @@ const forgedCtx: ExecutionContext = {
 
 export function createWsConnectionsClass<Env, Context, ContextParams>(
 	options: SubscriptionsOptions<Env, Context, ContextParams>,
-): new (
-	state: DurableObjectState,
-	env: Env,
-) => DurableObject {
+): new (state: DurableObjectState, env: Env) => DurableObject {
 	return class BaetaWsConnections implements DurableObject {
 		connections = new Map<string, WebSocket>();
 		state: DurableObjectState;

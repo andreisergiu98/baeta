@@ -1,9 +1,5 @@
 {
   "extends": "@baeta/tsconfig/tsconfig.json",
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "dist"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["dist"]
 }

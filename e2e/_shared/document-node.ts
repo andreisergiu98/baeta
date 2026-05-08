@@ -7,5 +7,5 @@ interface DocumentTypeDecoration<TResult, TVariables> {
 export interface TypedDocumentNode<
 	TResult = { [key: string]: any },
 	TVariables = { [key: string]: any },
-> extends DocumentNode,
-		DocumentTypeDecoration<TResult, TVariables> {}
+>
+	extends DocumentNode, DocumentTypeDecoration<TResult, TVariables> {}

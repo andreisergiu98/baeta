@@ -10,8 +10,8 @@ import {
 import type { DefaultScopes } from './scope-defaults.ts';
 import type { ScopeLoaderMap } from './scope-resolver.ts';
 import type { ScopeRules } from './scope-rules.ts';
-import { getAuthStore } from './store.ts';
 import { loadAuthStore } from './store-loader.ts';
+import { getAuthStore } from './store.ts';
 
 declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));

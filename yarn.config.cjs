@@ -100,12 +100,12 @@ function enforceWorkspaceMetadata({ Yarn }) {
 
 		workspace.set('keywords', [
 			'baeta',
+			'builder',
+			'framework',
 			'graphql',
 			'schema',
 			'types',
 			'typescript',
-			'framework',
-			'builder',
 		]);
 
 		if (workspace.ident !== '@baeta/website') {

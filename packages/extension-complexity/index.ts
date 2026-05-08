@@ -1,5 +1,4 @@
 import './lib/global-types.ts';
-
 import { ComplexityExtension } from './lib/complexity-extension.ts';
 import type { ComplexityExtensionOptions } from './lib/complexity-options.ts';
 

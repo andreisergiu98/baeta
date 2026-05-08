@@ -4,8 +4,8 @@ import type { ComplexityLimit } from './complexity-limits.ts';
 import { createComplexityMiddleware } from './complexity-middleware.ts';
 import type { ComplexityExtensionOptions } from './complexity-options.ts';
 import type { FieldSettingsMap } from './field-settings.ts';
-import { getComplexityStore } from './store.ts';
 import { loadComplexityStore } from './store-loader.ts';
+import { getComplexityStore } from './store.ts';
 
 const defaultLimits: Required<ComplexityLimit> = {
 	depth: 1,

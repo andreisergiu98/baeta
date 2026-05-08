@@ -3,9 +3,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "noEmit": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "emitDeclarationOnly": false
   }
 }

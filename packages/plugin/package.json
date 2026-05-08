@@ -3,60 +3,38 @@
   "version": "2.0.0-next.3",
   "keywords": [
     "baeta",
+    "builder",
+    "framework",
     "graphql",
     "schema",
     "types",
-    "typescript",
-    "framework",
-    "builder"
+    "typescript"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/plugin"
   },
   "license": "MIT",
   "author": {
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/plugin"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "type": "module",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./index.ts",
       "default": "./index.ts"
     }
-  },
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "package.json"
-  ],
-  "scripts": {
-    "build": "builder build",
-    "check:deps": "builder check-deps",
-    "prepack": "builder prepare",
-    "postpack": "builder prepare --restore",
-    "test": "builder test",
-    "types": "tsc --noEmit"
-  },
-  "ava": {
-    "extensions": [
-      "ts"
-    ]
-  },
-  "devDependencies": {
-    "@baeta/builder": "workspace:^",
-    "@baeta/testing": "workspace:^",
-    "@baeta/tsconfig": "workspace:^",
-    "typescript": "catalog:dev"
-  },
-  "engines": {
-    "node": ">=22.20.0"
   },
   "publishConfig": {
     "access": "public",
@@ -66,6 +44,28 @@
         "default": "./dist/index.js"
       }
     }
+  },
+  "scripts": {
+    "build": "builder build",
+    "check:deps": "builder check-deps",
+    "postpack": "builder prepare --restore",
+    "prepack": "builder prepare",
+    "test": "builder test",
+    "types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/testing": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "typescript": "catalog:dev"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ]
+  },
+  "engines": {
+    "node": ">=22.20.0"
   },
   "typedocOptions": {
     "entryPoints": [

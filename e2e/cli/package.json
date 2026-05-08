@@ -3,38 +3,32 @@
   "private": true,
   "keywords": [
     "baeta",
+    "builder",
+    "framework",
     "graphql",
     "schema",
     "types",
-    "typescript",
-    "framework",
-    "builder"
+    "typescript"
   ],
   "homepage": "https://github.com/andreisergiu98/baeta#readme",
   "bugs": {
     "url": "https://github.com/andreisergiu98/baeta/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "e2e/cli"
   },
   "license": "MIT",
   "author": {
     "name": "Andrei Pampu",
     "url": "https://github.com/andreisergiu98"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreisergiu98/baeta.git",
+    "directory": "e2e/cli"
+  },
   "type": "module",
   "scripts": {
     "e2e": "ava",
     "e2e:generate": "baeta generate && graphql-codegen",
     "e2e:types": "tsc --noEmit"
-  },
-  "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "timeout": "120s"
   },
   "dependencies": {
     "@baeta/core": "workspace:^",
@@ -54,5 +48,11 @@
     "node-pty": "1.2.0-beta.12",
     "pathe": "^2.0.3",
     "typescript": "catalog:dev"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "timeout": "120s"
   }
 }

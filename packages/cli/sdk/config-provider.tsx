@@ -4,6 +4,8 @@ import { Box, Text } from 'ink';
 import { type PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type LoadedBaetaConfig, loadConfig } from '../lib/config-loader.ts';
 import { createContextProvider } from '../utils/context.ts';
+import { runAsync } from '../utils/promise.ts';
+import { makeErrorMessage } from './errors.tsx';
 import { Spinner } from './spinner.tsx';
 
 export type { LoadedBaetaConfig } from '../lib/config-loader.ts';
@@ -19,17 +21,19 @@ export type ConfigEventMap = {
 export function useConfigStore(props: Readonly<ConfigProps>) {
 	const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);
 	const [showConfigChanged, setShowConfigChanged] = useState(false);
-	const configChangedTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
+	const configChangedTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-	const updateConfig = useCallback(async () => {
-		const config = await loadConfig();
-		if (!config) return;
-		setConfig(config);
-		setShowConfigChanged(true);
-		clearTimeout(configChangedTimeout.current);
-		configChangedTimeout.current = setTimeout(() => {
-			setShowConfigChanged(false);
-		}, 1000);
+	const updateConfig = useCallback(() => {
+		runAsync(async () => {
+			const config = await loadConfig();
+			if (!config) return;
+			setConfig(config);
+			setShowConfigChanged(true);
+			clearTimeout(configChangedTimeoutRef.current);
+			configChangedTimeoutRef.current = setTimeout(() => {
+				setShowConfigChanged(false);
+			}, 1000);
+		});
 	}, []);
 
 	useEffect(() => {
@@ -49,7 +53,10 @@ export function useConfigStore(props: Readonly<ConfigProps>) {
 		watcher.on('delete', updateConfig);
 
 		return () => {
-			watcher.close();
+			watcher.close().catch((err) => {
+				console.error(makeErrorMessage('Failed to close config watcher.', err));
+			});
+			clearTimeout(configChangedTimeoutRef.current);
 		};
 	}, [props.watchConfig, props.initialConfig.location, updateConfig]);
 

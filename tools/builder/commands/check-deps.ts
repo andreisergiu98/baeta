@@ -4,7 +4,6 @@ import type { CommandModule } from 'yargs';
 import { type CheckDepsIssue, checkDependencies, scanPackageImports } from '../lib/check-deps.ts';
 import { loadPackageJson } from '../lib/package-json.ts';
 
-// biome-ignore lint/complexity/noBannedTypes: Allow empty dictionary
 export const checkDepsCommand: CommandModule<{}, {}> = {
 	command: 'check-deps',
 	describe: 'Check that package dependencies match source imports',

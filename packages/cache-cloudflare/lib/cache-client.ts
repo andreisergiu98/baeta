@@ -1,11 +1,12 @@
-import type {
-	CacheClientArgs,
-	CacheClientSaveOptions,
-	ItemCacheKey,
-	QueryCacheIndexKey,
-	QueryCacheKey,
+import {
+	type CacheClientArgs,
+	type CacheClientSaveOptions,
+	type ItemCacheKey,
+	type QueryCacheIndexKey,
+	type QueryCacheKey,
+	CacheClient,
+	type CacheClientOptions,
 } from '@baeta/cache';
-import { CacheClient, type CacheClientOptions } from '@baeta/cache';
 import { type ActionClientMap, buildClient } from './actions-client.ts';
 import { actions } from './actions.ts';
 

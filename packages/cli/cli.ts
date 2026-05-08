@@ -2,7 +2,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { createGenerateCommand } from './commands/generate/index.ts';
 import { loadConfig } from './lib/config-loader.ts';
-import { version } from './package.json';
+import pkg from './package.json' with { type: 'json' };
 
 process.on('exit', () => {
 	if (process.stdout.isTTY) {
@@ -17,7 +17,7 @@ async function run() {
 		.scriptName('baeta')
 		.command(createGenerateCommand(config))
 		.demandCommand()
-		.version(version)
+		.version(pkg.version)
 		.strict()
 		.help()
 		.parseAsync();

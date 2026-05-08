@@ -21,7 +21,7 @@ process.on('unhandledRejection', (err) => {
 	process.exit(1);
 });
 
-yargs(hideBin(process.argv))
+await yargs(hideBin(process.argv))
 	.version(version)
 	.command({
 		command: '* [appName] [template] [rootDir]',

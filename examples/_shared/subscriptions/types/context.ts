@@ -5,5 +5,4 @@ export type Context = {
 	pubsub: PubSub<PubSubMap>;
 };
 
-// biome-ignore lint/complexity/noBannedTypes: Empty context
 export type ServerContext = {};

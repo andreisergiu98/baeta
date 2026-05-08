@@ -34,15 +34,15 @@ export function createWsConnectionsClass<Env, Context, ContextParams>(
 			const action = path[0];
 
 			if (action === 'connect') {
-				return this.createConnection(request, path);
+				return await this.createConnection(request, path);
 			}
 
 			if (action === 'close') {
-				return this.close(path);
+				return await this.close(path);
 			}
 
 			if (action === 'publish') {
-				return this.publish(request);
+				return await this.publish(request);
 			}
 
 			throw new Error('bad_request');

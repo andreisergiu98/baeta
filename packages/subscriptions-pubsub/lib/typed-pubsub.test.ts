@@ -45,7 +45,7 @@ test('publish and subscribe should work', async (t) => {
 		{},
 	);
 
-	pubsub.publish('user:created', payload);
+	void pubsub.publish('user:created', payload);
 
 	const publishedPayload = await cb.promise;
 
@@ -76,7 +76,7 @@ test('subscribe should handle multiple subscribers', async (t) => {
 		{},
 	);
 
-	pubsub.publish('user:created', payload);
+	void pubsub.publish('user:created', payload);
 
 	const received = await Promise.all([cb1.promise, cb2.promise]);
 
@@ -131,7 +131,7 @@ test('channel prefix should work', async (t) => {
 		name: string;
 	}>();
 
-	originalPubsub.subscribe(
+	void originalPubsub.subscribe(
 		'test:user:created',
 		() => {
 			typedPublish.call(mockedUser);
@@ -139,9 +139,9 @@ test('channel prefix should work', async (t) => {
 		{},
 	);
 
-	pubsub.publish('user:created', { id: '1', name: 'John' });
+	void pubsub.publish('user:created', { id: '1', name: 'John' });
 
-	pubsub.subscribe(
+	void pubsub.subscribe(
 		'user:created',
 		() => {
 			typedSubscribe.call(mockedUser);
@@ -149,13 +149,13 @@ test('channel prefix should work', async (t) => {
 		{},
 	);
 
-	originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
+	void originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
 
 	const typedAsyncIterator = pubsub.asyncIterableIterator('user:created');
 
 	const asyncIteratorPromise = typedAsyncIterator.next();
 
-	originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
+	void originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
 
 	t.deepEqual(await typedPublish.promise, mockedUser);
 	t.deepEqual(await typedSubscribe.promise, mockedUser);
@@ -174,13 +174,13 @@ test('asyncIterableIterator should work with channel prefix', async (t) => {
 		name: 'John',
 	};
 
-	originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
+	void originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
 
 	const typedAsyncIterator = pubsub.asyncIterableIterator('user:created');
 
 	const asyncIteratorPromise = typedAsyncIterator.next();
 
-	originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
+	void originalPubsub.publish('test:user:created', { id: '1', name: 'John' });
 
 	t.deepEqual((await asyncIteratorPromise).value, mockedUser);
 });
@@ -194,7 +194,7 @@ test('asyncIterableIterator should create iterator for single trigger', async (t
 
 	const resultPromise = iterator.next();
 
-	pubsub.publish('user:created', payload);
+	void pubsub.publish('user:created', payload);
 
 	const result = await resultPromise;
 
@@ -211,11 +211,11 @@ test('asyncIterableIterator should create iterator for multiple triggers', async
 	const updatedPayload = { id: '1', updates: { name: 'John Doe' } };
 
 	const createPromise = iterator.next();
-	pubsub.publish('user:created', createdPayload);
+	void pubsub.publish('user:created', createdPayload);
 	const createResult = await createPromise;
 
 	const updatePromise = iterator.next();
-	pubsub.publish('user:updated', updatedPayload);
+	void pubsub.publish('user:updated', updatedPayload);
 	const updateResult = await updatePromise;
 
 	t.deepEqual(createResult.value, createdPayload);

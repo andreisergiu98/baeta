@@ -3,7 +3,6 @@ import { isGrantedKey } from './grant.ts';
 import { isLogicRule, type LogicRule } from './rule.ts';
 import { getAuthStore } from './store.ts';
 
-// biome-ignore lint/complexity/noBannedTypes: allow {}
 export type ScopesShape = { [key: string]: unknown } | {};
 
 /**
@@ -50,17 +49,17 @@ export async function verifyScope<Scopes extends ScopesShape, Grants extends str
 	parentPath: string,
 ) {
 	if (isLogicRule(key)) {
-		return verifyScopes(ctx, scopes[key], key, parentPath);
+		return await verifyScopes(ctx, scopes[key], key, parentPath);
 	}
 
 	if (isGrantedKey(key)) {
-		return verifyGrant(ctx, scopes[key], parentPath);
+		return await verifyGrant(ctx, scopes[key], parentPath);
 	}
 
 	const store = await getAuthStore(ctx);
 	const value = (scopes as { [k: string]: unknown })[key];
 	const resolve = store.scopes[key];
-	return resolve(value);
+	return await resolve(value);
 }
 
 export async function verifyChainScopes<Scopes extends ScopesShape, Grants extends string>(
@@ -105,7 +104,7 @@ export async function verifyOrScopes<Scopes extends ScopesShape, Grants extends 
 		promises.push(verifyScope(ctx, scopes, key, parentPath));
 	}
 
-	return Promise.any(promises);
+	return await Promise.any(promises);
 }
 
 export async function verifyAndScopes<Scopes extends ScopesShape, Grants extends string>(
@@ -120,7 +119,7 @@ export async function verifyAndScopes<Scopes extends ScopesShape, Grants extends
 		promises.push(verifyScope(ctx, scopes, key, parentPath));
 	}
 
-	return Promise.all(promises).then(() => true as const);
+	return await Promise.all(promises).then(() => true as const);
 }
 
 export async function verifyScopes<Scopes extends ScopesShape, Grants extends string>(
@@ -140,19 +139,19 @@ export async function verifyScopes<Scopes extends ScopesShape, Grants extends st
 	}
 
 	if (rule === '$chain') {
-		return verifyChainScopes(ctx, scopes, keys, parentPath);
+		return await verifyChainScopes(ctx, scopes, keys, parentPath);
 	}
 
 	if (rule === '$race') {
-		return verifyRaceScopes(ctx, scopes, keys, parentPath);
+		return await verifyRaceScopes(ctx, scopes, keys, parentPath);
 	}
 
 	if (rule === '$or') {
-		return verifyOrScopes(ctx, scopes, keys, parentPath);
+		return await verifyOrScopes(ctx, scopes, keys, parentPath);
 	}
 
 	if (rule === '$and') {
-		return verifyAndScopes(ctx, scopes, keys, parentPath);
+		return await verifyAndScopes(ctx, scopes, keys, parentPath);
 	}
 
 	throw new Error("Invalid logic rule! Must be one of '$chain', '$race', '$or', or '$and'.");

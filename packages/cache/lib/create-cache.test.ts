@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-assignment */
 import test, { randomUUID, sinon } from '@baeta/testing';
 import { log } from '@baeta/util-log';
 import { MockCacheClient } from '../__test__/mock-client.ts';

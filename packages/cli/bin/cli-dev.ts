@@ -1,5 +1,5 @@
 #! /usr/bin/env node
 
-import { importTSX } from '@baeta/builder/bundler';
-
-await importTSX('../cli.ts', import.meta.url);
+import { register } from 'node:module';
+register('@baeta/builder/tsx-loader', import.meta.url);
+await import(new URL('../cli.ts', import.meta.url).href);

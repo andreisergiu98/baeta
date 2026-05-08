@@ -34,7 +34,6 @@ const branchTagMap = new Map<string, string>([
 	['next', 'next'],
 ]);
 
-// biome-ignore lint/complexity/noBannedTypes: Empty dictionary
 export const releaseCommand: CommandModule<{}, ReleaseArgs> = {
 	command: 'release',
 	describe: 'Publish all packages',

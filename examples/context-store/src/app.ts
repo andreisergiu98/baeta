@@ -23,7 +23,9 @@ export const yoga = createYoga<ServerContext, Context>({
 	},
 });
 
-const server = createServer(yoga);
+const server = createServer((req, res) => {
+	void yoga(req, res);
+});
 
 server.listen(4000, () => {
 	console.log(`🚀 Server ready at http://localhost:4000${yoga.graphqlEndpoint}`);

@@ -39,7 +39,7 @@ export function createPrismaClientPlugin(options: PrismaPluginOptions) {
 			}
 
 			if (!ctx.watching && generatedSchemaPath) {
-				return compareSchemas(ctx.generatorOptions.cwd, prismaSchema, generatedSchemaPath);
+				return await compareSchemas(ctx.generatorOptions.cwd, prismaSchema, generatedSchemaPath);
 			}
 
 			return false;

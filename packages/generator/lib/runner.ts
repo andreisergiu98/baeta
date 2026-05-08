@@ -4,8 +4,8 @@ export function createRunner(
 	ctx: Ctx,
 	plugins: GeneratorPluginV1[],
 	getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
-	onStart?: (plugin: GeneratorPluginV1) => void,
-	onFinish?: (plugin: GeneratorPluginV1) => void,
+	onStart?: (plugin: GeneratorPluginV1) => Promise<void>,
+	onFinish?: (plugin: GeneratorPluginV1) => Promise<void>,
 ) {
 	let i = 0;
 
@@ -18,11 +18,11 @@ export function createRunner(
 
 		const fn = getFn(plugin);
 
-		onStart?.(plugin);
+		await onStart?.(plugin);
 
 		await fn(ctx, async () => {
-			onFinish?.(plugin);
-			return next();
+			await onFinish?.(plugin);
+			return await next();
 		});
 	};
 
@@ -33,8 +33,8 @@ export function startRunner(
 	ctx: Ctx<unknown>,
 	plugins: GeneratorPluginV1[],
 	getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
-	onStart?: (plugin: GeneratorPluginV1) => void,
-	onFinish?: (plugin: GeneratorPluginV1) => void,
+	onStart?: (plugin: GeneratorPluginV1) => Promise<void>,
+	onFinish?: (plugin: GeneratorPluginV1) => Promise<void>,
 ) {
 	const run = createRunner(ctx, plugins, getFn, onStart, onFinish);
 	return run();

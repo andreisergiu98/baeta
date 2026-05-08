@@ -75,7 +75,7 @@ export function directivesPlugin(options?: DirectivesOptions) {
 				'directives',
 			);
 
-			return next();
+			return await next();
 		},
 	});
 }

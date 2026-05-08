@@ -73,7 +73,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 		if (turboNamespace) {
 			use(`Setup Turbo Cache for ${turboNamespace}`, actions.cache, {
 				with: {
-					path: '.turbo',
+					path: '.cache/turbo',
 					key: interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-${github.sha}`,
 					'restore-keys': interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-`,
 				},

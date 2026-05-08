@@ -251,7 +251,7 @@ export function paginationPlugin<T>(options: PaginationOptions<keyof T>) {
 				'pagination',
 			);
 
-			return next();
+			return await next();
 		},
 	});
 }

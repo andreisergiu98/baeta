@@ -44,7 +44,7 @@ export function buildSyncActions(): PlopTypes.ActionType[] {
 				templateFiles: [templatePath(src, relativeSrc, '**', '*'), ...negativeGlobs],
 				globOptions: { dot: true },
 				force: true,
-			} as Omit<PlopTypes.AddManyActionConfig, 'path'>);
+			});
 		}
 	}
 

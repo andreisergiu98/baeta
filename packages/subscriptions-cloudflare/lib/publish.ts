@@ -31,7 +31,7 @@ export async function publish<Env, Context, ContextParams>(
 		),
 	);
 
-	return Promise.all(promises).then(() => {});
+	return await Promise.all(promises).then(() => {});
 }
 
 async function publishToConnectionPool<Env, Context, ContextParams>(
@@ -51,7 +51,7 @@ async function publishToConnectionPool<Env, Context, ContextParams>(
 	const stubId = connections.idFromString(connectionPoolId);
 	const stub = connections.get(stubId);
 
-	return stub.fetch('https://baeta-ws-connections-durable-object.internal/publish', {
+	return await stub.fetch('https://baeta-ws-connections-durable-object.internal/publish', {
 		method: 'POST',
 		body: JSON.stringify(messages),
 		headers: { 'content-type': 'application/json' },

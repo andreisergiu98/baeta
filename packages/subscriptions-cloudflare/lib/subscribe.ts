@@ -91,7 +91,7 @@ export function createSubscriptionInfo(
 
 	if (!isExecutionContext(execContext)) {
 		if (execContext.length === 1) {
-			throw execContext;
+			throw execContext[0];
 		}
 		throw new AggregateError(
 			execContext,

@@ -36,7 +36,9 @@ function createRedisScript(
 		} catch (err) {
 			if (err instanceof Error && err.message.includes('NOSCRIPT')) {
 				if (attempts >= 3) {
-					throw new Error('Redis script failed after 3 attempts');
+					throw new Error('Redis script failed after 3 attempts', {
+						cause: err,
+					});
 				}
 				// If the script was evicted from Redis, we need to reload it and try again
 				sha = null;

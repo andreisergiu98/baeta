@@ -41,6 +41,8 @@ export async function loadPackageJson(file = `${process.cwd()}/package.json`): P
 		const content = await fs.readFile(file, 'utf-8');
 		return PackageJSONSchema.parse(JSON.parse(content));
 	} catch (error) {
-		throw new Error(`Error loading package.json at ${file}: ${error}`);
+		throw new Error(`Error loading package.json at ${file}: ${error}`, {
+			cause: error,
+		});
 	}
 }

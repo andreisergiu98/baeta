@@ -1898,7 +1898,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260504.1"
+    "@cloudflare/workers-types": "npm:^4.20260505.1"
     miniflare: "npm:^4.20260430.0"
     typescript: "catalog:dev"
     zod: "npm:^4.4.3"
@@ -1965,7 +1965,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@upstash/redis": "npm:^1.37.0"
+    "@upstash/redis": "npm:^1.38.0"
     typescript: "catalog:dev"
   peerDependencies:
     "@baeta/cache": "workspace:^"
@@ -2015,7 +2015,7 @@ __metadata:
     "@types/yargs": "npm:^17.0.35"
     execa: "npm:^9.6.1"
     graphql: "catalog:dev"
-    ink: "npm:^7.0.1"
+    ink: "npm:^7.0.2"
     node-pty: "npm:1.2.0-beta.12"
     react: "catalog:prod"
     typescript: "catalog:dev"
@@ -2336,7 +2336,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@graphql-codegen/cli": "catalog:dev"
     "@graphql-codegen/client-preset": "catalog:dev"
-    "@turbo/gen": "npm:^2.9.8"
+    "@turbo/gen": "npm:^2.9.9"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -2499,11 +2499,11 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260504.1"
+    "@cloudflare/workers-types": "npm:^4.20260505.1"
     "@hono/graphql-server": "npm:^0.7.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
-    hono: "npm:^4.12.16"
+    hono: "npm:^4.12.17"
     miniflare: "npm:^4.20260430.0"
     typescript: "catalog:dev"
     wrangler: "npm:^4.87.0"
@@ -2517,11 +2517,11 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260504.1"
+    "@cloudflare/workers-types": "npm:^4.20260505.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
-    hono: "npm:^4.12.16"
+    hono: "npm:^4.12.17"
     miniflare: "npm:^4.20260430.0"
     typescript: "catalog:dev"
     wrangler: "npm:^4.87.0"
@@ -2703,7 +2703,7 @@ __metadata:
     "@prisma/adapter-better-sqlite3": "npm:^7.8.0"
     "@prisma/client": "npm:^7.8.0"
     "@prisma/client-runtime-utils": "npm:^7.8.0"
-    "@turbo/gen": "npm:^2.9.8"
+    "@turbo/gen": "npm:^2.9.9"
     "@types/node": "catalog:dev"
     "@types/ws": "catalog:dev"
     "@yarnpkg/pnpify": "npm:^4.1.6"
@@ -2888,7 +2888,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260504.1"
+    "@cloudflare/workers-types": "npm:^4.20260505.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -3036,7 +3036,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260504.1"
+    "@cloudflare/workers-types": "npm:^4.20260505.1"
     graphql: "catalog:dev"
     graphql-ws: "catalog:prod"
     typescript: "catalog:dev"
@@ -3524,10 +3524,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20260504.1":
-  version: 4.20260504.1
-  resolution: "@cloudflare/workers-types@npm:4.20260504.1"
-  checksum: 10/fce13f2c23bfffbf016081fca90de5e24016c0d424a71e07fa532d5207a0ebf7de58af492008b8931c2ba83a7755c7df11cc2ca20793eb76a6b3a82b4c107735
+"@cloudflare/workers-types@npm:^4.20260505.1":
+  version: 4.20260505.1
+  resolution: "@cloudflare/workers-types@npm:4.20260505.1"
+  checksum: 10/c75d324b0f7e7bd3d238428f9525e8112182789031ec672e1da70998102f1fc04cab8b937c6934a9bd60c2e00ceb2e4c071694c763a1c2c391f85e00a4653622
   languageName: node
   linkType: hard
 
@@ -9741,56 +9741,56 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@turbo/darwin-64@npm:2.9.8":
-  version: 2.9.8
-  resolution: "@turbo/darwin-64@npm:2.9.8"
+"@turbo/darwin-64@npm:2.9.9":
+  version: 2.9.9
+  resolution: "@turbo/darwin-64@npm:2.9.9"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/darwin-arm64@npm:2.9.8":
-  version: 2.9.8
-  resolution: "@turbo/darwin-arm64@npm:2.9.8"
+"@turbo/darwin-arm64@npm:2.9.9":
+  version: 2.9.9
+  resolution: "@turbo/darwin-arm64@npm:2.9.9"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@turbo/gen@npm:^2.9.8":
-  version: 2.9.8
-  resolution: "@turbo/gen@npm:2.9.8"
+"@turbo/gen@npm:^2.9.9":
+  version: 2.9.9
+  resolution: "@turbo/gen@npm:2.9.9"
   dependencies:
     "@inquirer/prompts": "npm:^7.10.1"
     esbuild: "npm:^0.25.0"
   bin:
     gen: dist/cli.js
-  checksum: 10/9a99977b0d7b6237ab1e6c8204f2365f6188dd9822c1522db513b1a5b273536d0bced63bc4f0cc6b7fe12e8af399fe670fa8034498b5502116531f804432ad24
+  checksum: 10/4e39e101412c1490d60132b68169067cad5bb59912e708c79d23d51f5df3df12f4167443cf8ad2822e5fdc6c902d0ce59483030133a8a4fdec97ee2b185a365a
   languageName: node
   linkType: hard
 
-"@turbo/linux-64@npm:2.9.8":
-  version: 2.9.8
-  resolution: "@turbo/linux-64@npm:2.9.8"
+"@turbo/linux-64@npm:2.9.9":
+  version: 2.9.9
+  resolution: "@turbo/linux-64@npm:2.9.9"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/linux-arm64@npm:2.9.8":
-  version: 2.9.8
-  resolution: "@turbo/linux-arm64@npm:2.9.8"
+"@turbo/linux-arm64@npm:2.9.9":
+  version: 2.9.9
+  resolution: "@turbo/linux-arm64@npm:2.9.9"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@turbo/windows-64@npm:2.9.8":
-  version: 2.9.8
-  resolution: "@turbo/windows-64@npm:2.9.8"
+"@turbo/windows-64@npm:2.9.9":
+  version: 2.9.9
+  resolution: "@turbo/windows-64@npm:2.9.9"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@turbo/windows-arm64@npm:2.9.8":
-  version: 2.9.8
-  resolution: "@turbo/windows-arm64@npm:2.9.8"
+"@turbo/windows-arm64@npm:2.9.9":
+  version: 2.9.9
+  resolution: "@turbo/windows-arm64@npm:2.9.9"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -10726,12 +10726,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@upstash/redis@npm:^1.37.0":
-  version: 1.37.0
-  resolution: "@upstash/redis@npm:1.37.0"
+"@upstash/redis@npm:^1.38.0":
+  version: 1.38.0
+  resolution: "@upstash/redis@npm:1.38.0"
   dependencies:
     uncrypto: "npm:^0.1.3"
-  checksum: 10/05f4ab997a5ad072929848fcc7578da12dd364c55340b631a091fe06b57d1ef21835e16929b584b76feb64b34cdd154d3a3edd087518e5a2dd16e4a78c0aef1a
+  checksum: 10/02cbf44e2b28d5db01029607bafe5c14f06a0a79f9249b80f95d08ecfd3a4e67bb39fe4d6099efb457c9aaea8200d10d8e28a37611a6237b90749157bfc5b600
   languageName: node
   linkType: hard
 
@@ -11724,7 +11724,7 @@ __metadata:
     lint-staged: "npm:^16.4.0"
     lockfile-lint: "npm:^5.0.0"
     oxfmt: "npm:^0.48.0"
-    turbo: "npm:^2.9.8"
+    turbo: "npm:^2.9.9"
     typescript: "catalog:dev"
     typescript-eslint: "npm:^8.59.2"
   dependenciesMeta:
@@ -16134,10 +16134,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.12.16, hono@npm:^4.12.8":
-  version: 4.12.16
-  resolution: "hono@npm:4.12.16"
-  checksum: 10/60ebaf89dc62820a9caf2b15dcc720d29037489c292bdd4e14e59ce3481978f08c1268ad1d179bc15b241e027717dad812ed37eb4bb3dd19589038be5da3ba6f
+"hono@npm:^4.12.17, hono@npm:^4.12.8":
+  version: 4.12.17
+  resolution: "hono@npm:4.12.17"
+  checksum: 10/5ddbe390cc5f30cd4e0e3ac50d4896fbfa5fa275218345512508cc9061da0a8b504fe6fd81d200cab20e228f5622d0096348460b68ebcf1b47a28ec3501c9d83
   languageName: node
   linkType: hard
 
@@ -16570,9 +16570,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ink@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "ink@npm:7.0.1"
+"ink@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "ink@npm:7.0.2"
   dependencies:
     "@alcalzone/ansi-tokenize": "npm:^0.3.0"
     ansi-escapes: "npm:^7.3.0"
@@ -16608,7 +16608,7 @@ __metadata:
       optional: true
     react-devtools-core:
       optional: true
-  checksum: 10/561972a1c53992f878c1150fd708c33c60231e80c24bc4a89c5f6a95547884dd0d56fb286b47cbe1a6fb4aa963e250b434280d39c9390cf844ca278ae9ff8dfa
+  checksum: 10/86f485897ea5b7869edb24c6879b4b336d040345b2525ca9d7cc3200c81e46270c1755351e6076f93f0d284335554bd2c36b7065c1eec7493bcc4e7d9fd68789
   languageName: node
   linkType: hard
 
@@ -23645,16 +23645,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo@npm:^2.9.8":
-  version: 2.9.8
-  resolution: "turbo@npm:2.9.8"
+"turbo@npm:^2.9.9":
+  version: 2.9.9
+  resolution: "turbo@npm:2.9.9"
   dependencies:
-    "@turbo/darwin-64": "npm:2.9.8"
-    "@turbo/darwin-arm64": "npm:2.9.8"
-    "@turbo/linux-64": "npm:2.9.8"
-    "@turbo/linux-arm64": "npm:2.9.8"
-    "@turbo/windows-64": "npm:2.9.8"
-    "@turbo/windows-arm64": "npm:2.9.8"
+    "@turbo/darwin-64": "npm:2.9.9"
+    "@turbo/darwin-arm64": "npm:2.9.9"
+    "@turbo/linux-64": "npm:2.9.9"
+    "@turbo/linux-arm64": "npm:2.9.9"
+    "@turbo/windows-64": "npm:2.9.9"
+    "@turbo/windows-arm64": "npm:2.9.9"
   dependenciesMeta:
     "@turbo/darwin-64":
       optional: true
@@ -23670,7 +23670,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10/03d972a27d02f86dcae186bba9a6df97f2aa5c6d339c5a40bc4bb5e84bd486e85750291ede5de176dd342c0d608b76828d60f0524d40aa702cf8dce81caf66b3
+  checksum: 10/9fa919c66fa67f42f1f811daf27ca6598d9bef22a6087d89b893daa8905693095461f0887b88cd765d7d2266c7ec42a1178aeb9e906a2612b23d12b857b57e81
   languageName: node
   linkType: hard
 

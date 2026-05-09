@@ -4,6 +4,7 @@
 /** @type {import('@yarnpkg/types')} */
 const { defineConfig } = require('@yarnpkg/types');
 const path = require('node:path');
+const { GRAPHQL_PEER_VERSION } = require('@baeta/workspace-config');
 
 /**
  * This rule will enforce that a workspace MUST depend on the same version of
@@ -145,6 +146,10 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			]);
 			workspace.set('typedocOptions.readme', 'none');
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
+
+			if (workspace.manifest.peerDependencies?.graphql) {
+				workspace.set('peerDependencies.graphql', GRAPHQL_PEER_VERSION);
+			}
 		}
 
 		if (workspace.manifest.name.startsWith('@baeta/examples-')) {

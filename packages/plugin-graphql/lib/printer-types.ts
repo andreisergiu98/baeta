@@ -1,5 +1,5 @@
 import { type DefinitionsMap, isScalarType } from '@baeta/util-graphql';
-import { pascalCase } from 'change-case-all';
+import { pascalCase } from 'change-case';
 import {
 	type EnumTypeDefinitionNode,
 	type FieldDefinitionNode,

@@ -54,9 +54,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@baeta/errors": "workspace:^",
-    "email-validator": "^2.0.4",
-    "is-url": "^1.2.4"
+    "@baeta/errors": "workspace:^"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
@@ -64,7 +62,6 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@graphql-tools/schema": "^10.0.33",
-    "@types/is-url": "^1.2.32",
     "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },

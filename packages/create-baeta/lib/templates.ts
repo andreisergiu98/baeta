@@ -1,32 +1,28 @@
 import path from 'node:path';
 import { logger } from '@docusaurus/logger';
+import select from '@inquirer/select';
 import fs from 'fs-extra';
-import prompts, { type Choice } from 'prompts';
 import { makeApolloTemplate } from '../templates/apollo.ts';
 import { makeYogaTemplate } from '../templates/yoga.ts';
 import { type JavaScriptRuntime, type Template, templates } from './constants.ts';
 
-function createTemplateChoices(): Choice[] {
-	return templates.map((template) => ({ title: template, value: template }));
+function createTemplateChoices() {
+	return templates.map((template) => ({ name: template, value: template }));
 }
 
 async function askTemplateChoice() {
-	return await prompts(
-		{
-			type: 'select',
-			name: 'template',
+	try {
+		return await select<Template>({
 			message: 'Select a template below...',
 			choices: createTemplateChoices(),
-		},
-		{
-			onCancel() {
-				logger.error('A choice is required.');
-				process.exit(1);
-			},
-		},
-	).then((result) => {
-		return (result as { template: Template }).template;
-	});
+		});
+	} catch (error) {
+		if (error instanceof Error && error.name === 'ExitPromptError') {
+			logger.error('A choice is required.');
+			process.exit(1);
+		}
+		throw error;
+	}
 }
 
 export async function getTemplate(reqTemplate: string | undefined) {

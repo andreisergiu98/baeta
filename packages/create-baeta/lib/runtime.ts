@@ -1,5 +1,5 @@
 import { logger } from '@docusaurus/logger';
-import prompts from 'prompts';
+import select from '@inquirer/select';
 import shell from 'shelljs';
 import { defaultJavaScriptRuntime, type JavaScriptRuntime } from './constants.ts';
 
@@ -10,23 +10,20 @@ export async function getRuntime(): Promise<JavaScriptRuntime> {
 	if (!hasDeno && !hasBun) {
 		return 'node';
 	}
-	const choices = ['node', hasBun && 'bun', hasDeno && 'deno']
+	const choices = ['node' as const, hasBun && ('bun' as const), hasDeno && ('deno' as const)]
 		.filter((p) => p !== false)
-		.map((p) => ({ title: p, value: p }));
+		.map((p) => ({ value: p }));
 
-	const runtime = await prompts(
-		{
-			type: 'select',
-			name: 'runtime',
+	try {
+		return await select<JavaScriptRuntime>({
 			message: 'Select a runtime...',
 			choices,
-		},
-		{
-			onCancel() {
-				logger.info`Falling back to name=${defaultJavaScriptRuntime}`;
-			},
-		},
-	).then((result) => (result as { runtime?: JavaScriptRuntime }).runtime);
-
-	return runtime ?? defaultJavaScriptRuntime;
+		});
+	} catch (error) {
+		if (error instanceof Error && error.name === 'ExitPromptError') {
+			logger.info`Falling back to name=${defaultJavaScriptRuntime}`;
+			return defaultJavaScriptRuntime;
+		}
+		throw error;
+	}
 }

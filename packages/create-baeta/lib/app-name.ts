@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { logger } from '@docusaurus/logger';
+import input from '@inquirer/input';
 import fs from 'fs-extra';
-import prompts from 'prompts';
 
 export async function getAppName(reqName: string | undefined, rootDir: string): Promise<string> {
 	async function validateAppName(appName: string) {
@@ -23,19 +23,17 @@ export async function getAppName(reqName: string | undefined, rootDir: string): 
 		return reqName;
 	}
 
-	return await prompts(
-		{
-			type: 'text',
-			name: 'appName',
+	try {
+		return await input({
 			message: 'What should we name this app?',
-			initial: 'baeta-app',
+			default: 'baeta-app',
 			validate: validateAppName,
-		},
-		{
-			onCancel() {
-				logger.error('An app name is required.');
-				process.exit(1);
-			},
-		},
-	).then((result) => (result as { appName: string }).appName);
+		});
+	} catch (error) {
+		if (error instanceof Error && error.name === 'ExitPromptError') {
+			logger.error('An app name is required.');
+			process.exit(1);
+		}
+		throw error;
+	}
 }

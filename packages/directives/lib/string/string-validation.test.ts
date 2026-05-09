@@ -8,18 +8,6 @@ import {
 import { stringValidation } from '../string/string-validation.ts';
 
 const typeDefs = gql(`
-  input EmailInput {
-    email: String @validString(format: EMAIL)
-  }
-
-  input UrlInput {
-    url: String @validString(format: URL)
-  }
-
-  input UUIDInput {
-    uuid: String @validString(format: UUID)
-  }
-
   input MinInput {
     min: String @validString(minLength: 3)
   }
@@ -77,39 +65,6 @@ const typeDefs = gql(`
 const validInputMacro = makeValidInputMacro(typeDefs, stringValidation.directive);
 const invalidInputMacro = makeInvalidInputMacro(typeDefs, stringValidation.directive);
 const aggregateErrorMacro = makeAggregateErrorsInputMacro(typeDefs, stringValidation.directive);
-
-test(
-	'email',
-	validInputMacro,
-	'EmailInput!',
-	gql(`
-    query {
-      value(input: { email: "test@test.com" })
-    }
-  `),
-);
-
-test(
-	'url',
-	validInputMacro,
-	'UrlInput!',
-	gql(`
-    query {
-      value(input: { url: "https://test.com" })
-    }
-  `),
-);
-
-test(
-	'uuid',
-	validInputMacro,
-	'UUIDInput!',
-	gql(`
-    query {
-      value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" })
-    }
-  `),
-);
 
 test(
 	'min',
@@ -228,39 +183,6 @@ test(
           notOneOf: "barr"
         }
       )
-    }
-  `),
-);
-
-test(
-	'invalid email',
-	invalidInputMacro,
-	'EmailInput!',
-	gql(`
-    query {
-      value(input: { email: "test@test" })
-    }
-  `),
-);
-
-test(
-	'invalid url',
-	invalidInputMacro,
-	'UrlInput!',
-	gql(`
-    query {
-      value(input: { url: "https://test" })
-    }
-  `),
-);
-
-test(
-	'invalid uuid',
-	invalidInputMacro,
-	'UUIDInput!',
-	gql(`
-    query {
-      value(input: { uuid: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11 a" })
     }
   `),
 );

@@ -1,7 +1,7 @@
 import path from 'node:path';
-import { logger } from '@docusaurus/logger';
+import logger from '@docusaurus/logger';
+import select from '@inquirer/select';
 import fs from 'fs-extra';
-import prompts from 'prompts';
 import shell from 'shelljs';
 import type { CliOptions } from './cli-options.ts';
 import {
@@ -37,25 +37,25 @@ async function askForPackageManagerChoice(): Promise<PackageManager> {
 	if (!hasYarn && !hasPnpm && !hasBun) {
 		return 'npm';
 	}
-	const choices = ['npm', hasYarn && 'yarn', hasPnpm && 'pnpm', hasBun && 'bun']
+	const choices = [
+		'npm' as const,
+		hasYarn && ('yarn' as const),
+		hasPnpm && ('pnpm' as const),
+		hasBun && ('bun' as const),
+	]
 		.filter((p) => p !== false)
-		.map((p) => ({ title: p, value: p }));
+		.map((p) => ({ value: p }));
 
-	const manager = await prompts(
-		{
-			type: 'select',
-			name: 'packageManager',
+	try {
+		return await select<PackageManager>({
 			message: 'Select a package manager...',
 			choices,
-		},
-		{
-			onCancel() {
-				logger.info`Falling back to name=${defaultPackageManager}`;
-			},
-		},
-	).then((result) => (result as { packageManager?: PackageManager }).packageManager);
-
-	return manager ?? defaultPackageManager;
+			default: defaultPackageManager,
+		});
+	} catch (error) {
+		logger.info`Falling back to name=${defaultPackageManager}`;
+		return defaultPackageManager;
+	}
 }
 
 export async function getPackageManager(

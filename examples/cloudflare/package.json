@@ -34,7 +34,7 @@
     "@baeta/core": "workspace:^",
     "graphql": "catalog:dev",
     "graphql-yoga": "catalog:dev",
-    "hono": "^4.12.17"
+    "hono": "^4.12.18"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",

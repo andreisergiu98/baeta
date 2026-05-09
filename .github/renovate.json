@@ -35,11 +35,7 @@
       "allowedVersions": "<23"
     },
     {
-      "matchPackageNames": ["node"],
-      "allowedVersions": "<25"
-    },
-    {
-      "matchPackageNames": ["actions/node-versions"],
+      "matchPackageNames": ["node", "actions/node-versions"],
       "enabled": false
     },
     {

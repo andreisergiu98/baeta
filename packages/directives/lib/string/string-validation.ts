@@ -6,11 +6,8 @@
  */
 import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
-import { validate as validateEmail } from 'email-validator';
-import isUrl from 'is-url';
 
 interface Args {
-	format?: 'EMAIL' | 'UUID' | 'URL';
 	maxLength?: number;
 	minLength?: number;
 	startsWith?: string;
@@ -24,14 +21,7 @@ interface Args {
 
 const name = 'validString';
 
-const sdl = `enum StringFormat {
-    EMAIL
-    UUID
-    URL
-}
-
-directive @${name}(
-    format: StringFormat
+const sdl = `directive @${name}(
     maxLength: Int
     minLength: Int
     startsWith: String
@@ -54,10 +44,6 @@ const directive = createInputDirective<Args>({
 		}
 
 		const config = params.directiveConfig;
-
-		if (config.format != null) {
-			validateFormat(value, config.format);
-		}
 
 		if (config.maxLength != null) {
 			validateMaxLength(value, config.maxLength);
@@ -100,22 +86,6 @@ export const stringValidation = {
 
 function getLength(value: string) {
 	return [...value].length;
-}
-
-const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-
-function validateFormat(value: string, format: 'EMAIL' | 'URL' | 'UUID') {
-	if (format === 'EMAIL' && !validateEmail(value)) {
-		throw new BadUserInput('Value must be be a valid email');
-	}
-
-	if (format === 'URL' && !isUrl(value)) {
-		throw new BadUserInput('Value must be be a valid URL');
-	}
-
-	if (format === 'UUID' && !UUID_REGEX.test(value)) {
-		throw new BadUserInput('Value must be be a valid UUID');
-	}
 }
 
 function validateMaxLength(value: string, maxLength: number) {

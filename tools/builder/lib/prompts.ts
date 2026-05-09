@@ -1,15 +1,12 @@
-import prompts from 'prompts';
+import confirm from '@inquirer/confirm';
 
 type GetConfirmationOptions = {
 	initial?: boolean;
 };
 
 export async function getConfirmation(message: string, options: GetConfirmationOptions = {}) {
-	const { confirmation } = await prompts({
-		name: 'confirmation',
-		type: 'confirm',
+	return await confirm({
 		message,
-		initial: options.initial,
+		default: options.initial,
 	});
-	return confirmation === true;
 }

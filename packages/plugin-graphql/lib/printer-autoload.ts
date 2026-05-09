@@ -1,4 +1,4 @@
-import { camelCase, pascalCase } from 'change-case-all';
+import { camelCase, pascalCase } from 'change-case';
 
 interface AutoloadPrinterConfig {
 	moduleDefinitionName: string;

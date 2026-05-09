@@ -1861,9 +1861,9 @@ __metadata:
     "@actions/github": "npm:^9.1.1"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/workspace-config": "workspace:^"
+    "@inquirer/confirm": "npm:^6.0.12"
     "@octokit/request-error": "npm:^7.1.0"
     "@types/node": "catalog:dev"
-    "@types/prompts": "npm:^2.4.9"
     "@types/yargs": "npm:^17.0.35"
     "@yarnpkg/core": "npm:^4.7.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
@@ -1876,7 +1876,6 @@ __metadata:
     ora: "npm:^9.4.0"
     oxc-transform: "npm:^0.129.0"
     pathe: "npm:^2.0.3"
-    prompts: "npm:^2.4.2"
     tsdown: "npm:^0.21.10"
     typescript: "catalog:dev"
     yaml: "npm:^2.8.4"
@@ -2054,10 +2053,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@graphql-tools/schema": "npm:^10.0.33"
-    "@types/is-url": "npm:^1.2.32"
-    email-validator: "npm:^2.0.4"
     graphql: "catalog:dev"
-    is-url: "npm:^1.2.4"
     typescript: "catalog:dev"
   peerDependencies:
     "@baeta/core": "workspace:^"
@@ -2859,7 +2855,7 @@ __metadata:
     "@parcel/watcher": "npm:^2.5.6"
     "@types/micromatch": "npm:^4.0.10"
     "@types/node": "catalog:dev"
-    change-case-all: "npm:2.1.0"
+    change-case: "npm:^5.4.4"
     micromatch: "npm:^4.0.8"
     typescript: "catalog:dev"
   languageName: unknown
@@ -2979,7 +2975,7 @@ __metadata:
     "@baeta/util-graphql": "workspace:^"
     "@baeta/util-path": "workspace:^"
     "@types/node": "catalog:dev"
-    change-case-all: "npm:2.1.0"
+    change-case: "npm:^5.4.4"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
@@ -10066,13 +10062,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/is-url@npm:^1.2.32":
-  version: 1.2.32
-  resolution: "@types/is-url@npm:1.2.32"
-  checksum: 10/f76697c868680b3be88d7f18f9724a334c62a8dc1b0f40fad8dc725b2072ad74f38d50b4ce902c07a65bb081ae2782baf06f5b3334c64bd2679c35e0a12042c5
-  languageName: node
-  linkType: hard
-
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.6
   resolution: "@types/istanbul-lib-coverage@npm:2.0.6"
@@ -10221,16 +10210,6 @@ __metadata:
   version: 1.26.6
   resolution: "@types/prismjs@npm:1.26.6"
   checksum: 10/37c056eb7a9130ef6548d7655af78ea575c8eaa9167ea2dd64d8719384b1af4a385ffe928aa4939da607ce276703a6787bdac8ecc79a373e2a73ddf6d75bc161
-  languageName: node
-  linkType: hard
-
-"@types/prompts@npm:^2.4.9":
-  version: 2.4.9
-  resolution: "@types/prompts@npm:2.4.9"
-  dependencies:
-    "@types/node": "npm:*"
-    kleur: "npm:^3.0.3"
-  checksum: 10/69b8372f4c790b45fea16a46ff8d1bcc71b14579481776b67bd6263637118a7ecb1f12e1311506c29fadc81bf618dc64f1a91f903cfd5be67a0455a227b3e462
   languageName: node
   linkType: hard
 
@@ -12300,7 +12279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"change-case-all@npm:2.1.0, change-case-all@npm:^2.1.0":
+"change-case-all@npm:^2.1.0":
   version: 2.1.0
   resolution: "change-case-all@npm:2.1.0"
   dependencies:
@@ -12312,7 +12291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"change-case@npm:^5.2.0":
+"change-case@npm:^5.2.0, change-case@npm:^5.4.4":
   version: 5.4.4
   resolution: "change-case@npm:5.4.4"
   checksum: 10/446e5573f3c854290a91292afef92b957d2e43a928260c91989b482aa860caaa29711b6725fc40c200af68061cbab357b033446d16a17bc5c553636994074e92
@@ -13041,14 +13020,14 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@docusaurus/logger": "npm:^3.10.1"
+    "@inquirer/input": "npm:^5.0.12"
+    "@inquirer/select": "npm:^5.1.4"
     "@types/fs-extra": "npm:^11.0.4"
     "@types/node": "catalog:dev"
-    "@types/prompts": "npm:^2.4.9"
     "@types/semver": "npm:^7.7.1"
     "@types/shelljs": "npm:^0.10.0"
     "@types/yargs": "npm:^17.0.35"
     fs-extra: "npm:^11.3.4"
-    prompts: "npm:^2.4.2"
     semver: "npm:^7.7.4"
     shelljs: "npm:^0.10.0"
     supports-color: "npm:^10.2.2"
@@ -13833,13 +13812,6 @@ __metadata:
   version: 1.5.349
   resolution: "electron-to-chromium@npm:1.5.349"
   checksum: 10/f4247aae718e9bfd94d4ba0e5c77929d94d4d211a2f71c07b76fbeba8391fa2b979b7ccb9dab75c398e885c12128b22d6b4234c2a88c85e5cc5d3fe37530c945
-  languageName: node
-  linkType: hard
-
-"email-validator@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "email-validator@npm:2.0.4"
-  checksum: 10/8444077b052686ca272e42f43aeea7cb2935147890f3ed48869f6029d21f6914500bee23b2346348ed88659119ebad223c11c998843b30a3bcec2fa0abaffda3
   languageName: node
   linkType: hard
 
@@ -17042,13 +17014,6 @@ __metadata:
   version: 2.1.0
   resolution: "is-unicode-supported@npm:2.1.0"
   checksum: 10/f254e3da6b0ab1a57a94f7273a7798dd35d1d45b227759f600d0fa9d5649f9c07fa8d3c8a6360b0e376adf916d151ec24fc9a50c5295c58bae7ca54a76a063f9
-  languageName: node
-  linkType: hard
-
-"is-url@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "is-url@npm:1.2.4"
-  checksum: 10/100e74b3b1feab87a43ef7653736e88d997eb7bd32e71fd3ebc413e58c1cbe56269699c776aaea84244b0567f2a7d68dfaa512a062293ed2f9fdecb394148432
   languageName: node
   linkType: hard
 

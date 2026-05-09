@@ -1,6 +1,6 @@
 import type { ModuleRegistry } from '@baeta/util-graphql';
 import { join } from '@baeta/util-path';
-import { pascalCase } from 'change-case-all';
+import { pascalCase } from 'change-case';
 import type { DocumentNode } from 'graphql';
 import type { FieldInfoMap } from './field-info.ts';
 import { buildBlock, buildCodeBlock, indent, makeRelativePathForImport } from './printer-utils.ts';

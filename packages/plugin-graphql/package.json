@@ -57,7 +57,7 @@
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/util-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "change-case-all": "2.1.0"
+    "change-case": "^5.4.4"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

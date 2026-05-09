@@ -59,8 +59,9 @@
   },
   "dependencies": {
     "@docusaurus/logger": "^3.10.1",
+    "@inquirer/input": "^5.0.12",
+    "@inquirer/select": "^5.1.4",
     "fs-extra": "^11.3.4",
-    "prompts": "^2.4.2",
     "semver": "^7.7.4",
     "shelljs": "^0.10.0",
     "supports-color": "^10.2.2",
@@ -72,7 +73,6 @@
     "@baeta/tsconfig": "workspace:^",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "catalog:dev",
-    "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
     "@types/shelljs": "^0.10.0",
     "@types/yargs": "^17.0.35",

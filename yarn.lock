@@ -3221,7 +3221,6 @@ __metadata:
   dependencies:
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "catalog:dev"
-    tsdown: "npm:^0.21.10"
     typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
@@ -11695,6 +11694,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/changelog": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/workspace-config": "workspace:^"
     "@changesets/cli": "npm:^2.31.0"
     "@eslint-react/eslint-plugin": "npm:^5.7.2"
     "@eslint/css": "npm:^1.2.0"

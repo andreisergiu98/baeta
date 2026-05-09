@@ -1,5 +1,9 @@
-import { type UserConfig } from 'tsdown';
 import changesetConfig from '../.changeset/config.json' with { type: 'json' };
+
+/**
+ * We use constraints until peer dependencies are supported by yarn catalog.
+ */
+export const GRAPHQL_PEER_VERSION = '^16.6.0';
 
 /*
  * tsdown defaults for packages that require building.
@@ -11,7 +15,7 @@ export const BUILD_DEFAULTS = {
 	sourcemap: true,
 	fixedExtension: false,
 	outDir: 'dist',
-} as const satisfies UserConfig;
+} as const;
 
 /**
  * Packages that diverge too much from default tsconfig and should be skipped.

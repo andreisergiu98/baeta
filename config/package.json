@@ -34,9 +34,6 @@
   "scripts": {
     "types": "tsc --noEmit"
   },
-  "dependencies": {
-    "tsdown": "^0.21.10"
-  },
   "devDependencies": {
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "catalog:dev",

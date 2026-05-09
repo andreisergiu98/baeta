@@ -76,7 +76,7 @@
     "github-actions-workflow-builder": "^4.1.0",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
+    "lint-staged": "^17.0.2",
     "lockfile-lint": "^5.0.0",
     "oxfmt": "^0.48.0",
     "turbo": "^2.9.9",

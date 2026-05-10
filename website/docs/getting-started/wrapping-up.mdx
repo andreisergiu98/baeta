@@ -24,11 +24,13 @@ const baeta = createApplication({
   // plugins: [authAppPlugin, complexityAppPlugin],
 });
 
-export const yoga = createYoga({
+const yoga = createYoga({
   schema: baeta.schema,
 });
 
-const server = createServer(yoga);
+const server = createServer((req, res) => {
+  void yoga(req, res);
+});
 
 server.listen(4000, () => {
   console.log(
@@ -60,5 +62,5 @@ Now that you have a running GraphQL API, you can:
 - [Add custom directives](../guides/directives)
 
 :::tip
-Visit our [examples repository](https://github.com/andreisergiu98/baeta/tree/chore/examples/examples) for more complex implementations and real-world usage patterns.
+Visit our [examples](https://github.com/andreisergiu98/baeta/tree/main/examples) for more complex implementations and real-world usage patterns.
 :::

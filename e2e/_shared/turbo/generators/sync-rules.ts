@@ -125,7 +125,7 @@ export const syncRules: SyncRule[] = [
 	merge(
 		{
 			from: '_shared/base',
-			to: 'extensions-complexity',
+			to: 'complexity',
 			files: [...allModules],
 		},
 		{},

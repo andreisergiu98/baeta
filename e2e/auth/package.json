@@ -22,7 +22,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "e2e/extensions-auth"
+    "directory": "e2e/auth"
   },
   "type": "module",
   "scripts": {

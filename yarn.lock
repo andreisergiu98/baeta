@@ -1854,9 +1854,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@baeta/auth@workspace:^, @baeta/auth@workspace:packages/extension-auth":
+"@baeta/auth@workspace:^, @baeta/auth@workspace:packages/auth":
   version: 0.0.0-use.local
-  resolution: "@baeta/auth@workspace:packages/extension-auth"
+  resolution: "@baeta/auth@workspace:packages/auth"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
@@ -2045,9 +2045,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/complexity@workspace:^, @baeta/complexity@workspace:packages/extension-complexity":
+"@baeta/complexity@workspace:^, @baeta/complexity@workspace:packages/complexity":
   version: 0.0.0-use.local
-  resolution: "@baeta/complexity@workspace:packages/extension-complexity"
+  resolution: "@baeta/complexity@workspace:packages/complexity"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
@@ -2175,9 +2175,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/e2e-extensions-auth@workspace:e2e/extensions-auth":
+"@baeta/e2e-extensions-auth@workspace:e2e/auth":
   version: 0.0.0-use.local
-  resolution: "@baeta/e2e-extensions-auth@workspace:e2e/extensions-auth"
+  resolution: "@baeta/e2e-extensions-auth@workspace:e2e/auth"
   dependencies:
     "@baeta/auth": "workspace:^"
     "@baeta/builder": "workspace:^"
@@ -2195,9 +2195,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/e2e-extensions-complexity@workspace:e2e/extensions-complexity":
+"@baeta/e2e-extensions-complexity@workspace:e2e/complexity":
   version: 0.0.0-use.local
-  resolution: "@baeta/e2e-extensions-complexity@workspace:e2e/extensions-complexity"
+  resolution: "@baeta/e2e-extensions-complexity@workspace:e2e/complexity"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/cli": "workspace:^"

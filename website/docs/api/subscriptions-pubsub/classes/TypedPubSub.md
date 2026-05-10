@@ -33,7 +33,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
   }),
   {
     prefix: "feature-1:",
-  },
+  }
 );
 ```
 
@@ -49,14 +49,14 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 <tr>
 <td>
 
-`Engine` _extends_ `PubSubEngine`
+`Engine` *extends* `PubSubEngine`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`Map` _extends_ `PubSubMap`
+`Map` *extends* `PubSubMap`
 
 </td>
 </tr>
@@ -193,7 +193,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 <tr>
 <td>
 
-`C` _extends_ `string` \| `number` \| `symbol`
+`C` *extends* `string` \| `number` \| `symbol`
 
 </td>
 </tr>
@@ -241,7 +241,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 
 `AsyncIterableIterator`\<`Map`\[`C`\], `any`, `any`\>
 
----
+***
 
 ### mapChannel()
 
@@ -259,7 +259,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 <tr>
 <td>
 
-`C` _extends_ `string` \| `number` \| `symbol`
+`C` *extends* `string` \| `number` \| `symbol`
 
 </td>
 </tr>
@@ -295,7 +295,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 
 `string`
 
----
+***
 
 ### mapTriggers()
 
@@ -313,7 +313,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 <tr>
 <td>
 
-`C` _extends_ `string` \| `number` \| `symbol`
+`C` *extends* `string` \| `number` \| `symbol`
 
 </td>
 </tr>
@@ -349,7 +349,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 
 `string` \| `string`[]
 
----
+***
 
 ### publish()
 
@@ -367,7 +367,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 <tr>
 <td>
 
-`C` _extends_ `string` \| `number` \| `symbol`
+`C` *extends* `string` \| `number` \| `symbol`
 
 </td>
 </tr>
@@ -427,7 +427,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 
 `Promise`\<`void`\>
 
----
+***
 
 ### subscribe()
 
@@ -445,7 +445,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 <tr>
 <td>
 
-`C` _extends_ `string` \| `number` \| `symbol`
+`C` *extends* `string` \| `number` \| `symbol`
 
 </td>
 </tr>
@@ -505,7 +505,7 @@ const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
 
 `Promise`\<`number`\>
 
----
+***
 
 ### unsubscribe()
 

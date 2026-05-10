@@ -499,7 +499,7 @@ represent nodes after the first node.
 
 `GraphQLError.toJSON`
 
----
+***
 
 ### toString()
 

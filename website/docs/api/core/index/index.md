@@ -21,5 +21,4 @@
 
 - [createApplication](functions/createApplication.md)
 - [createContextStore](functions/createContextStore.md)
-- [createExtensions](functions/createExtensions.md)
 - [createInputDirective](functions/createInputDirective.md)

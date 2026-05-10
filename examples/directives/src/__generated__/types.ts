@@ -18,8 +18,6 @@ export type Mutation = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Mutation"], {
   createUser: User | null
 }>
 
-export type StringFormat = 'EMAIL' | 'UUID' | 'URL'
-
 export type NameWithUpper = BaetaUtility.Or<BaetaOverrides.ObjectTypes["NameWithUpper"], {
   name: Scalars["String"]
 }>

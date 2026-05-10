@@ -1,7 +1,4 @@
-import './lib/global-types.ts';
-import { ComplexityExtension } from './lib/complexity-extension.ts';
-import type { ComplexityExtensionOptions } from './lib/complexity-options.ts';
-
+export { createComplexity } from './lib/create-complexity.ts';
 export {
 	ComplexityError,
 	ComplexityErrorCode,
@@ -15,26 +12,3 @@ export type {
 	GetFieldSettings,
 	GetFieldSettingsArgs,
 } from './lib/field-settings.ts';
-
-/**
- * Creates a complexity analysis extension for GraphQL queries.
- *
- * @param options - Configuration options for complexity analysis
- * @returns Extension factory function
- *
- * @example
- * ```typescript
- * const complexity = complexityExtension<Context>({
- *   defaultComplexity: 1,
- *   defaultListMultiplier: 10,
- *   limit: {
- *     depth: 5,
- *     breadth: 10,
- *     complexity: 100
- *   }
- * });
- * ```
- */
-export function complexityExtension<Ctx>(options?: ComplexityExtensionOptions<Ctx>) {
-	return new ComplexityExtension(options);
-}

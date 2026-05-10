@@ -4,11 +4,11 @@ import { UserModule } from './typedef.ts';
 const { Subscription } = UserModule;
 
 const userCreatedSubscription = Subscription.userCreated
-	.subscribe(({ ctx }) => {
-		return ctx.pubsub.subscribe('user-created');
+	.subscribe((params) => {
+		return params.ctx.pubsub.subscribe('user-created');
 	})
-	.resolve(({ source }) => {
-		return db.user.findFirstOrThrow({ where: { id: source } });
+	.resolve((params) => {
+		return db.user.findFirstOrThrow({ where: { id: params.source } });
 	});
 
 const userUpdatedSubscription = Subscription.userUpdated

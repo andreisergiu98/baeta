@@ -133,7 +133,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### deleteItemsWithDiff()
 
@@ -199,7 +199,7 @@
 
 `Promise`\<(`Item` \| `null`)[]\>
 
----
+***
 
 ### deleteQueries()
 
@@ -265,7 +265,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### getPartialItems()
 
@@ -331,7 +331,7 @@
 
 `Promise`\<(`Item` \| `null`)[]\>
 
----
+***
 
 ### getQuery()
 
@@ -397,11 +397,11 @@
 
 `Promise`\<`QueryMetadata` \| `null`\>
 
----
+***
 
 ### saveItems()
 
-> `abstract` **saveItems**\<`Item`\>(`items`, `options`): `Promise`\<`void`\>
+> `abstract` **saveItems**\<`Item`\>(`items`, `options`, `saveOptions?`): `Promise`\<`void`\>
 
 #### Type Parameters
 
@@ -456,6 +456,18 @@
 
 </td>
 </tr>
+<tr>
+<td>
+
+`saveOptions?`
+
+</td>
+<td>
+
+[`CacheClientSaveOptions`](../interfaces/CacheClientSaveOptions.md)
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -463,7 +475,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### saveItemsWithDiff()
 
@@ -529,7 +541,7 @@
 
 `Promise`\<(`Item` \| `null`)[]\>
 
----
+***
 
 ### saveQuery()
 

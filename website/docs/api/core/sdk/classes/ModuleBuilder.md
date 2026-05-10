@@ -37,7 +37,7 @@
 <tr>
 <td>
 
-`TypesBuilders` _extends_ [`TypesBuildersMap`](../type-aliases/TypesBuildersMap.md)\<`Context`, `Info`\>
+`TypesBuilders` *extends* [`TypesBuildersMap`](../type-aliases/TypesBuildersMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>
@@ -49,7 +49,7 @@
 <tr>
 <td>
 
-`TypesResolvers` _extends_ [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
+`TypesResolvers` *extends* [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>
@@ -96,6 +96,37 @@
 
 `ModuleBuilder`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
 
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Modifier</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="requiredpluginids"></a> `requiredPluginIds`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`ReadonlySet`\<[`PluginId`](../type-aliases/PluginId.md)\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Accessors
 
 ### name
@@ -134,7 +165,19 @@
 </td>
 <td>
 
-(`middleware`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit:...
+(`middleware`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
+
+</td>
+</tr>
+<tr>
+<td>
+
+`addRequiredPluginId()`
+
+</td>
+<td>
+
+(`id`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
 
 </td>
 </tr>
@@ -146,7 +189,7 @@
 </td>
 <td>
 
-(`transformer`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit:...
+(`transformer`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
 
 </td>
 </tr>
@@ -177,31 +220,19 @@
 <tr>
 <td>
 
-`setStore()`
+`mergeMeta()`
 
 </td>
 <td>
 
-(`key`, `value`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit:...
-
-</td>
-</tr>
-<tr>
-<td>
-
-`useStore()`
-
-</td>
-<td>
-
-\<`T`\>(`key`) => `object`
+(`meta`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
 
 </td>
 </tr>
 </tbody>
 </table>
 
----
+***
 
 ### toMethods()
 

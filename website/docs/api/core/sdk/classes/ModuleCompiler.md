@@ -37,7 +37,7 @@
 <tr>
 <td>
 
-`TypesResolvers` _extends_ [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
+`TypesResolvers` *extends* [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>
@@ -84,19 +84,44 @@
 
 `ModuleCompiler`\<`Context`, `Info`, `TypesResolvers`\>
 
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Modifier</th>
+<th>Type</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="kind"></a> `kind`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`"Module"`
+
+</td>
+<td>
+
+`'Module'`
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Accessors
-
-### extensions
-
-#### Get Signature
-
-> **get** **extensions**(): readonly [`Extension`](Extension.md)\<`unknown`\>[]
-
-##### Returns
-
-readonly [`Extension`](Extension.md)\<`unknown`\>[]
-
----
 
 ### name
 
@@ -108,7 +133,7 @@ readonly [`Extension`](Extension.md)\<`unknown`\>[]
 
 `string`
 
----
+***
 
 ### types
 
@@ -155,7 +180,7 @@ readonly [`TypeCompiler`](TypeCompiler.md)\<`unknown`, `Context`, `Info`, [`Fiel
 
 `void`
 
----
+***
 
 ### build()
 
@@ -170,9 +195,27 @@ readonly [`TypeCompiler`](TypeCompiler.md)\<`unknown`, `Context`, `Info`, [`Fiel
 <tr>
 <th>Name</th>
 <th>Type</th>
+<th>Default value</th>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`requiredPluginIds`
+
+</td>
+<td>
+
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
+
+</td>
+<td>
+
+`allRequiredPluginIds`
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -182,6 +225,11 @@ readonly [`TypeCompiler`](TypeCompiler.md)\<`unknown`, `Context`, `Info`, [`Fiel
 <td>
 
 `IResolvers`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 </tr>
@@ -196,6 +244,11 @@ readonly [`TypeCompiler`](TypeCompiler.md)\<`unknown`, `Context`, `Info`, [`Fiel
 [`SchemaTransformer`](../type-aliases/SchemaTransformer.md)[]
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
@@ -208,15 +261,20 @@ readonly [`TypeCompiler`](TypeCompiler.md)\<`unknown`, `Context`, `Info`, [`Fiel
 `Readonly`\<`DocumentNode`\>
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 </tbody>
 </table>
 
----
+***
 
-### useStore()
+### useMetadata()
 
-> **useStore**\<`T`\>(`key`): `object`
+> **useMetadata**\<`T`\>(`key`): `object`
 
 #### Type Parameters
 

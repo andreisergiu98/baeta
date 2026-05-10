@@ -27,7 +27,6 @@ Configuration options for the exec plugin.
 <td>
 
 Command to execute - can be either:
-
 - A string command to be executed via shell
 - A function that receives the generator context
 

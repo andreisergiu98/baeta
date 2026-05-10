@@ -1,6 +1,6 @@
 # createSubscriptionBuilder()
 
-> **createSubscriptionBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`field`, `extensions`): [`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+> **createSubscriptionBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`field`): [`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`, `never`\>
 
 ## Type Parameters
 
@@ -71,21 +71,9 @@
 
 </td>
 </tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-[`Extension`](../classes/Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
 </tbody>
 </table>
 
 ## Returns
 
-[`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+[`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`, `never`\>

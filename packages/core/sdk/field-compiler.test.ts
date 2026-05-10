@@ -4,7 +4,7 @@ import {
 	mockFieldCompiler,
 	mockMiddleware,
 } from './__test__/field-mocks.ts';
-import { testUseStoreLike } from './__test__/store-tests.ts';
+import { testStoreLike } from './__test__/store-tests.ts';
 import { mockTypeMiddleware } from './__test__/type-mocks.ts';
 
 test('FieldCompiler should be created correctly', (t) => {
@@ -26,7 +26,7 @@ test('FieldCompiler should add middleware correctly', async (t) => {
 			t.is(i++, 1);
 		}),
 	);
-	const resolver = fieldCompiler.build([]);
+	const { resolver } = fieldCompiler.build([]);
 	t.is(await executeMockedResolver(resolver), 'test');
 	t.is(i, 2);
 });
@@ -45,7 +45,7 @@ test('FieldCompiler should add initial middleware correctly', async (t) => {
 			},
 		),
 	);
-	fieldCompiler.addInitialMiddleware(
+	fieldCompiler.addTopLevelMiddleware(
 		mockMiddleware(
 			async () => {
 				t.is(i++, 0);
@@ -56,7 +56,7 @@ test('FieldCompiler should add initial middleware correctly', async (t) => {
 			},
 		),
 	);
-	const resolver = fieldCompiler.build([]);
+	const { resolver } = fieldCompiler.build([]);
 	t.is(await executeMockedResolver(resolver), 'test_1_2');
 	t.is(i, 2);
 });
@@ -64,7 +64,7 @@ test('FieldCompiler should add initial middleware correctly', async (t) => {
 test('FieldCompiler should use type middlewares correctly', async (t) => {
 	let i = 0;
 	const fieldCompiler = mockFieldCompiler();
-	fieldCompiler.addInitialMiddleware(
+	fieldCompiler.addTopLevelMiddleware(
 		mockMiddleware(
 			async () => {
 				t.is(i++, 0);
@@ -86,7 +86,7 @@ test('FieldCompiler should use type middlewares correctly', async (t) => {
 			},
 		),
 	);
-	const resolver = fieldCompiler.build([
+	const { resolver } = fieldCompiler.build([
 		mockTypeMiddleware(
 			async () => {
 				t.is(i++, 1);
@@ -101,7 +101,7 @@ test('FieldCompiler should use type middlewares correctly', async (t) => {
 	t.is(i, 3);
 });
 
-test('FieldCompiler should use store correctly', async (t) => {
+test('FieldCompiler should use metadata correctly', async (t) => {
 	const fieldCompiler = mockFieldCompiler();
-	testUseStoreLike(t, fieldCompiler);
+	testStoreLike(t, (key) => fieldCompiler.useMetadata(key));
 });

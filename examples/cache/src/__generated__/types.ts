@@ -23,8 +23,6 @@ export type Subscription = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Subscript
   userUpdated: User
 }>
 
-export type StringFormat = 'EMAIL' | 'UUID' | 'URL'
-
 export type PageInfo = BaetaUtility.Or<BaetaOverrides.ObjectTypes["PageInfo"], {
   hasPreviousPage: Scalars["Boolean"]
   hasNextPage: Scalars["Boolean"]

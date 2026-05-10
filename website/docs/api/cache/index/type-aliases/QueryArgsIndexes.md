@@ -15,7 +15,7 @@
 <tr>
 <td>
 
-`Args` _extends_ [`QueryArgs`](QueryArgs.md)
+`Args` *extends* [`QueryArgs`](QueryArgs.md)
 
 </td>
 <td>

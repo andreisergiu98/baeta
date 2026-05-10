@@ -42,7 +42,6 @@ const allModules: PathMapping[] = [...movieModuleFiles, ...reviewModuleFiles];
 
 const allTypes: PathMapping[] = [
 	'modules/types.ts:src/modules/types.ts',
-	'modules/extensions.ts:src/modules/extensions.ts',
 	'types/context.ts:src/types/context.ts',
 ];
 
@@ -65,10 +64,7 @@ export const syncRules: SyncRule[] = [
 		{
 			from: '_shared/base',
 			to: 'custom-paths',
-			files: [
-				'modules/extensions.ts:src/graphql/extensions.ts',
-				'types/context.ts:src/types/context.ts',
-			],
+			files: ['types/context.ts:src/types/context.ts'],
 		},
 		{},
 	),
@@ -76,11 +72,7 @@ export const syncRules: SyncRule[] = [
 		{
 			from: '_shared/base',
 			to: 'scalars',
-			files: [
-				...reviewModuleFiles,
-				'modules/extensions.ts:src/modules/extensions.ts',
-				'types/context.ts:src/types/context.ts',
-			],
+			files: [...reviewModuleFiles, 'types/context.ts:src/types/context.ts'],
 		},
 		{},
 	),
@@ -88,11 +80,7 @@ export const syncRules: SyncRule[] = [
 		{
 			from: '_shared/base',
 			to: 'unions-interfaces',
-			files: [
-				...reviewModuleFiles,
-				'modules/extensions.ts:src/modules/extensions.ts',
-				'types/context.ts:src/types/context.ts',
-			],
+			files: [...reviewModuleFiles, 'types/context.ts:src/types/context.ts'],
 		},
 		{},
 	),
@@ -117,10 +105,7 @@ export const syncRules: SyncRule[] = [
 		{
 			from: '_shared/base',
 			to: 'plugins-federation-options',
-			files: [
-				'modules/extensions.ts:src/graphql/extensions.ts',
-				'types/context.ts:src/types/context.ts',
-			],
+			files: ['types/context.ts:src/types/context.ts'],
 		},
 		{},
 	),
@@ -132,7 +117,6 @@ export const syncRules: SyncRule[] = [
 			files: [
 				...reviewModuleFiles,
 				'modules/types.ts:src/modules/types.ts',
-				'modules/extensions.ts:src/modules/extensions.ts',
 				'types/context.ts:src/types/context.ts',
 			],
 		},

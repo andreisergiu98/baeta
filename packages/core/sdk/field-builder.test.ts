@@ -14,20 +14,14 @@ import {
 	type MockSource,
 	mockInfo,
 } from './__test__/mocks.ts';
-import {
-	testSetStoreLike,
-	testUseStoreLike,
-	testUseStoreMutations,
-} from './__test__/store-tests.ts';
 import { createFieldBuilder, makeField } from './field.ts';
 
 test('createFieldBuilder should create a type field correctly', async (t) => {
 	const fieldBuilder = createFieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>(
 		'type',
 		'field',
-		[],
 	);
-	const resolver = makeField(fieldBuilder.map((params) => params.source.name)).build([]);
+	const { resolver } = makeField(fieldBuilder.map((params) => params.source.name)).build([]);
 	t.is(await executeMockedResolver(resolver), 'test');
 });
 
@@ -205,17 +199,29 @@ test('FieldBuilder edit should handle addMiddleware correctly', async (t) => {
 
 	const fieldWithMake = fieldBuilder2.toMethods().$use(middleware2).key('name');
 	const fieldCompiler = makeField(fieldWithMake);
-	const resolver = fieldCompiler.build([]);
+	const { resolver } = fieldCompiler.build([]);
 	t.is(await executeMockedResolver(resolver), 'test_1_2');
 	t.is(i, 2);
 });
 
-test('FieldBuilder edit should handle store correctly', async (t) => {
-	const fieldBuilder = mockFieldBuilder();
-	const edit = fieldBuilder.edit();
-	testUseStoreLike(t, edit);
-	testSetStoreLike(t, edit);
-	testUseStoreMutations(t, edit, edit.commit().edit());
+test('FieldBuilder edit should handle mergeMeta correctly', (t) => {
+	const key1 = Symbol('1');
+	const key2 = Symbol('2');
+
+	const edit1 = mockFieldBuilder().edit();
+	edit1.mergeMeta(new Map([[key1, 1]]));
+	edit1.mergeMeta(new Map([[key2, 2]]));
+
+	const edit2 = mockFieldBuilder().edit();
+	edit2.mergeMeta(new Map([[key1, 99]]));
+
+	const compiler1 = makeField(edit1.commitToMethods().key('name'));
+	const compiler2 = makeField(edit2.commitToMethods().key('name'));
+
+	t.is(compiler1.useMetadata<number>(key1).get(), 1);
+	t.is(compiler1.useMetadata<number>(key2).get(), 2);
+	t.is(compiler2.useMetadata<number>(key1).get(), 99);
+	t.is(compiler2.useMetadata<number>(key2).get(), undefined);
 });
 
 test('FieldBuilder should assign parameters correctly', async (t) => {

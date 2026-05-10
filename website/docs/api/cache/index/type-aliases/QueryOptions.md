@@ -15,7 +15,7 @@
 <tr>
 <td>
 
-`Result` _extends_ `QueryResult`\<`Item`\>
+`Result` *extends* `QueryResult`\<`Item`\>
 
 </td>
 <td>
@@ -27,7 +27,7 @@
 <tr>
 <td>
 
-`Args` _extends_ [`QueryArgs`](QueryArgs.md)
+`Args` *extends* [`QueryArgs`](QueryArgs.md)
 
 </td>
 <td>
@@ -39,7 +39,7 @@
 <tr>
 <td>
 
-`Indexes` _extends_ [`QueryArgsIndexes`](QueryArgsIndexes.md)\<`Args`, `Indexes`\>
+`Indexes` *extends* [`QueryArgsIndexes`](QueryArgsIndexes.md)\<`Args`, `Indexes`\>
 
 </td>
 <td>
@@ -130,6 +130,18 @@
 <td>
 
 (`pairs`, `helpers`) => `Promise`\<`void`\> \| `void`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="replaceexistingitems"></a> `replaceExistingItems?`
+
+</td>
+<td>
+
+`boolean`
 
 </td>
 </tr>

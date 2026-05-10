@@ -51,7 +51,7 @@
 <tr>
 <td>
 
-`PubSubMap` _extends_ `Record`\<`string`, `any`\>
+`PubSubMap` *extends* `Record`\<`string`, `any`\>
 
 </td>
 <td>

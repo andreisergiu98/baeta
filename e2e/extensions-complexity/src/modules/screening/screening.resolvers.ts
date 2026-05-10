@@ -1,10 +1,13 @@
+import { complexity } from '../../lib/complexity.ts';
 import { ScreeningModule } from './typedef.ts';
 
 const { Query, Screening } = ScreeningModule;
 
-export const screeningResolver = Screening.$complexity(() => ({
-	complexity: 3,
-})).$fields({
+export const screeningResolver = Screening.$use(
+	complexity(() => ({
+		complexity: 3,
+	})),
+).$fields({
 	id: Screening.id.key('id'),
 	movieId: Screening.movieId.key('movieId'),
 	date: Screening.date.key('date'),
@@ -23,9 +26,11 @@ const screeningQuery = Query.screening.resolve(({ args }) => {
 });
 
 const screeningsQuery = Query.screenings
-	.$complexity(({ args }) => ({
-		multiplier: args.limit ?? 10,
-	}))
+	.$use(
+		complexity(({ args }) => ({
+			multiplier: args.limit ?? 10,
+		})),
+	)
 	.resolve(({ args }) => {
 		const limit = args.limit ?? 10;
 		return Array.from({ length: limit }).map((_, i) => ({

@@ -30,7 +30,6 @@ export async function generateDocs() {
 		hidePageHeader: true,
 		hideBreadcrumbs: true,
 		excludeScopesInPaths: true,
-		formatWithPrettier: true,
 		parametersFormat: 'htmlTable',
 		propertiesFormat: 'htmlTable',
 		typeDeclarationFormat: 'htmlTable',

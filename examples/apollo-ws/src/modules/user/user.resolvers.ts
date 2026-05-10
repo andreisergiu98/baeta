@@ -57,9 +57,10 @@ const updateUserMutation = Mutation.updateUser
 	});
 
 const userUpdatedSubscription = Subscription.userUpdated
-	.$use((next) => {
+	.$use(async (next) => {
 		console.log('Before use');
-		return next();
+		const t = await next();
+		return t;
 	})
 	.$use(async (next) => {
 		console.log('Before subscribed to user updated');
@@ -69,11 +70,18 @@ const userUpdatedSubscription = Subscription.userUpdated
 	})
 	.subscribe(({ ctx }) => {
 		console.log('Subscribed to user updated');
-		return ctx.pubsub.asyncIterableIterator('user-updated');
+		const t = ctx.pubsub.asyncIterableIterator('user-updated');
+		return t;
 	})
 	.resolve(({ source }) => {
 		console.log('Resolved user updated', source);
-		return source;
+		return {
+			id: source.id,
+			email: 'jon.doe@baeta.io',
+			givenName: 'Jon',
+			lastName: 'Doe',
+			profile: null,
+		};
 	});
 
 export const queryResolver = Query.$fields({

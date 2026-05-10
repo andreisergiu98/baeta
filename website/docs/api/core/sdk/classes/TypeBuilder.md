@@ -49,7 +49,7 @@
 <tr>
 <td>
 
-`FieldsBuilders` _extends_ [`FieldsBuildersMap`](../type-aliases/FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsBuilders` *extends* [`FieldsBuildersMap`](../type-aliases/FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>
@@ -61,7 +61,7 @@
 <tr>
 <td>
 
-`FieldsResolvers` _extends_ [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsResolvers` *extends* [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>
@@ -108,6 +108,37 @@
 
 `TypeBuilder`\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>
 
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Modifier</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="requiredpluginids"></a> `requiredPluginIds`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`ReadonlySet`\<[`PluginId`](../type-aliases/PluginId.md)\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Accessors
 
 ### type
@@ -146,7 +177,19 @@
 </td>
 <td>
 
-(`middleware`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ get: () =\> T \| undefined; set: (value: Readonly\<...\>) =\> void; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit: () =\> T...
+(`middleware`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> TypeBuilder\<...\>; readonly commitToMethods: () =\> TypeMethods\<...\>; \}
+
+</td>
+</tr>
+<tr>
+<td>
+
+`addRequiredPluginId()`
+
+</td>
+<td>
+
+(`id`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> TypeBuilder\<...\>; readonly commitToMethods: () =\> TypeMethods\<...\>; \}
 
 </td>
 </tr>
@@ -177,12 +220,12 @@
 <tr>
 <td>
 
-`setStore()`
+`mergeMeta()`
 
 </td>
 <td>
 
-(`key`, `value`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ get: () =\> T \| undefined; set: (value: Readonly\<...\>) =\> void; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit: () =\> T...
+(`meta`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> TypeBuilder\<...\>; readonly commitToMethods: () =\> TypeMethods\<...\>; \}
 
 </td>
 </tr>
@@ -198,22 +241,10 @@
 
 </td>
 </tr>
-<tr>
-<td>
-
-`useStore()`
-
-</td>
-<td>
-
-\<`T`\>(`key`) => `object`
-
-</td>
-</tr>
 </tbody>
 </table>
 
----
+***
 
 ### toMethods()
 

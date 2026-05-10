@@ -39,7 +39,6 @@ export default defineConfig({
 
 ```graphql
 directive @validString(
-  format: StringFormat # EMAIL, UUID, URL
   maxLength: Int
   minLength: Int
   startsWith: String
@@ -97,7 +96,7 @@ directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 
 ```graphql
 input UserInput @constraints(minFields: 2) {
-  email: String! @validString(format: EMAIL)
+  email: String! @validString(regex: "^[^@\\s]+@[^@\\s]+$")
   age: Int! @validInt(min: 18)
   name: String! @trim @upper
   score: Float @validFloat(min: 0, max: 100)

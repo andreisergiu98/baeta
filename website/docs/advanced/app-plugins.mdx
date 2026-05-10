@@ -1,0 +1,49 @@
+---
+sidebar_position: 5
+title: App Plugins
+---
+
+# App Plugins
+
+App plugins extend Baeta at the application level. They can attach middlewares, read or set metadata across modules, and inspect the compiled schema. Several built-in features ship as app plugins — [authorization](./authorization) and [complexity](./complexity) are the most common — and you can compose them in a single application.
+
+## Registration
+
+App plugins are registered on `createApplication` via the `plugins` option:
+
+```typescript
+// src/app.ts
+import { createApplication } from "@baeta/core";
+import { authAppPlugin } from "./lib/auth.ts";
+import { complexityAppPlugin } from "./lib/complexity.ts";
+import modules from "./modules/index.ts";
+
+const baeta = createApplication({
+  modules,
+  plugins: [authAppPlugin, complexityAppPlugin],
+});
+```
+
+If a module uses a plugin helper (e.g. `auth(...)`, `complexity(...)`) without the corresponding app plugin being registered, Baeta throws at schema build time. You won't get silent no-ops.
+
+## Plugin Ordering
+
+The order of plugins in the `plugins:` array matters. Two invariants hold:
+
+1. **Registration order = setup order.** Each plugin's setup phase runs in array order. Later plugins observe compilers already mutated by earlier ones, so they can read metadata set by earlier plugins and react to it.
+2. **Earlier plugins wrap later ones at runtime.** Middlewares attached by the first plugin run _outside_ middlewares attached by later plugins. With `plugins: [A, B]` and a resolver `R`, execution unfolds as:
+
+   ```
+   A pre  →  B pre  →  R  →  B post  →  A post
+   ```
+
+   So the first-registered plugin's pre-hook runs first; its post-hook runs last.
+
+## Choosing an Order
+
+When two plugins both gate field access, the order shapes a real tradeoff. Auth vs. complexity is the canonical example:
+
+- **`plugins: [authAppPlugin, complexityAppPlugin]`** — auth runs first. Unauthenticated requests bounce immediately, and complexity is never computed for them. This avoids leaking schema shape through complexity errors and matches how most large GraphQL APIs (GitHub, Shopify, GitLab) behave. Recommended default.
+- **`plugins: [complexityAppPlugin, authAppPlugin]`** — complexity runs first. Over-budget queries are rejected before auth's `loadScopes(ctx)` runs, which saves I/O on expensive-but-doomed queries. The trade is that unauthenticated callers can probe complexity errors to learn about your schema.
+
+If you serve a fully public schema where shape isn't sensitive, complexity-first is the cheaper choice. Otherwise prefer auth-first.

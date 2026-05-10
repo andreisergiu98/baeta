@@ -1,3 +1,7 @@
 # sep
 
-> `const` **sep**: `string` = `upath.sep`
+> `const` **sep**: `"/"` = `"/"`
+
+Constant for path separator.
+
+Always equals to `"/"`.

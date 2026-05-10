@@ -1,18 +1,16 @@
-import type { Extension } from './extension.ts';
 import { FieldBuilder } from './field-builder.ts';
 import type { Field, FieldWithMake } from './field-methods.ts';
 
 export function createFieldBuilder<Result, Source, Context, Args, Info>(
 	type: string,
 	field: string,
-	extensions: Array<Extension>,
 ) {
 	return new FieldBuilder<Result, Source, Context, Args, Info>({
 		type,
 		field,
-		extensions,
-		store: new Map(),
+		metadata: new Map(),
 		middlewares: [],
+		requiredPluginIds: new Set(),
 	}).toMethods();
 }
 

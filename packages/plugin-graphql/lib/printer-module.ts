@@ -33,7 +33,6 @@ export function printModuleImports(config: ModulePrinterConfig, moduleName: stri
 	return [
 		'import type { DocumentNode, GraphQLScalarType } from "graphql";',
 		'import * as Baeta from "@baeta/core/sdk";',
-		`import extensions from "../extensions${config.importExtension}";`,
 		`import type {Ctx, Info} from "../types${config.importExtension}";`,
 		`import type * as Types from "${typesDir}/types${config.importExtension}";`,
 	].join('\n');
@@ -247,7 +246,7 @@ export function printModuleBuilder(config: ModulePrinterConfig, moduleName: stri
 		builders,
 		',',
 		typeNameResolvers,
-		`, ${getExtensionsVar()});`,
+		`);`,
 	].join('');
 }
 
@@ -260,7 +259,7 @@ function printObjectTypeBuilder(typeName: string, objects: Record<string, string
 		name: '',
 		lines: fields,
 	});
-	return `${typeName}: Baeta.createTypeBuilder("${typeName}",${content}, ${getExtensionsVar()})`;
+	return `${typeName}: Baeta.createTypeBuilder("${typeName}",${content})`;
 }
 
 function printTypeNameResolver() {
@@ -293,9 +292,9 @@ function getArgsType(config: ModulePrinterConfig, type: string, field: string) {
 
 function printObjectTypeFieldBuilder(typeName: string, field: string) {
 	if (typeName === 'Subscription') {
-		return `${field}: Baeta.createSubscriptionBuilder("${field}", ${getExtensionsVar()})`;
+		return `${field}: Baeta.createSubscriptionBuilder("${field}")`;
 	}
-	return `${field}: Baeta.createFieldBuilder("${typeName}", "${field}", ${getExtensionsVar()})`;
+	return `${field}: Baeta.createFieldBuilder("${typeName}", "${field}")`;
 }
 
 function getContextType() {
@@ -304,8 +303,4 @@ function getContextType() {
 
 function getInfoType() {
 	return 'Info';
-}
-
-function getExtensionsVar() {
-	return 'extensions';
 }

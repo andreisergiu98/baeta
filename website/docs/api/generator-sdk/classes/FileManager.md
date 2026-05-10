@@ -118,7 +118,7 @@
 
 `void`
 
----
+***
 
 ### createAndAdd()
 
@@ -189,7 +189,7 @@
 
 [`File`](File.md)
 
----
+***
 
 ### get()
 
@@ -224,7 +224,7 @@
 
 [`File`](File.md) \| `undefined`
 
----
+***
 
 ### getAll()
 
@@ -234,7 +234,7 @@
 
 [`File`](File.md)[]
 
----
+***
 
 ### getByTag()
 
@@ -269,7 +269,7 @@
 
 [`File`](File.md)[]
 
----
+***
 
 ### getPersistedFiles()
 
@@ -279,7 +279,7 @@
 
 [`File`](File.md)[]
 
----
+***
 
 ### remove()
 
@@ -314,7 +314,7 @@
 
 `void`
 
----
+***
 
 ### removeAll()
 
@@ -324,7 +324,7 @@
 
 `void`
 
----
+***
 
 ### removeByTag()
 
@@ -359,7 +359,7 @@
 
 `void`
 
----
+***
 
 ### unlinkAll()
 
@@ -369,7 +369,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### writeAll()
 
@@ -379,7 +379,7 @@
 
 `Promise`\<`void`[]\>
 
----
+***
 
 ### writeByTag()
 

@@ -1,4 +1,3 @@
-import type { Extension } from './extension.ts';
 import { TypeBuilder } from './type-builder.ts';
 import type { FieldsBuildersMap, FieldsResolversMap } from './type-methods.ts';
 
@@ -8,12 +7,12 @@ export function createTypeBuilder<
 	Info,
 	FieldBuilders extends FieldsBuildersMap<Source, Context, Info>,
 	FieldResolvers extends FieldsResolversMap<Source, Context, Info>,
->(type: string, builders: FieldBuilders, extensions: Array<Extension>) {
+>(type: string, builders: FieldBuilders) {
 	return new TypeBuilder<Source, Context, Info, FieldBuilders, FieldResolvers>({
 		type,
 		fieldBuilders: builders,
-		extensions,
-		store: new Map(),
+		metadata: new Map(),
 		middlewares: [],
+		requiredPluginIds: new Set(),
 	}).toMethods();
 }

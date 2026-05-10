@@ -1,6 +1,6 @@
 import type { Middleware } from '../lib/middleware.ts';
 import { nameFunction } from '../utils/functions.ts';
-import { type Extension, mergeExtensions } from './extension.ts';
+import type { PluginId } from './app-plugin.ts';
 import { TypeCompiler } from './type-compiler.ts';
 import type { FieldsBuildersMap, FieldsResolversMap, TypeMethods } from './type-methods.ts';
 
@@ -12,9 +12,9 @@ export interface TypeBuilderOptions<
 > {
 	type: string;
 	fieldBuilders: Readonly<FieldsBuilders>;
-	extensions: ReadonlyArray<Extension>;
-	store: Map<symbol, Readonly<unknown>>;
+	metadata: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
+	requiredPluginIds: Set<PluginId>;
 }
 
 export class TypeBuilder<
@@ -25,17 +25,17 @@ export class TypeBuilder<
 	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = any,
 > {
 	readonly #type: string;
-	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #metadata: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #fieldBuilders: Readonly<FieldsBuilders>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, Source, Context, unknown, Info>>;
-	readonly #extensions: ReadonlyArray<Extension>;
+	readonly requiredPluginIds: ReadonlySet<PluginId>;
 
 	constructor(options: TypeBuilderOptions<Source, Context, Info, FieldsBuilders>) {
 		this.#type = options.type;
 		this.#fieldBuilders = options.fieldBuilders;
-		this.#extensions = options.extensions;
-		this.#store = new Map(options.store);
+		this.#metadata = new Map(options.metadata);
 		this.#middlewares = [...options.middlewares];
+		this.requiredPluginIds = new Set(options.requiredPluginIds);
 	}
 
 	get type() {
@@ -43,33 +43,32 @@ export class TypeBuilder<
 	}
 
 	edit() {
-		const draftStore = new Map(this.#store);
+		const draftMetadata = new Map(this.#metadata);
 		const draftMiddlewares = [...this.#middlewares];
+		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
 		const session = {
 			type: this.#type,
 			addMiddleware: (middleware: Middleware<unknown, Source, Context, unknown, Info>) => {
 				draftMiddlewares.push(middleware);
 				return session;
 			},
-			useStore: <T>(key: symbol) => {
-				return {
-					get: () => draftStore.get(key) as T | undefined,
-					set: (value: Readonly<T>) => {
-						draftStore.set(key, value);
-					},
-				};
+			addRequiredPluginId: (id: PluginId) => {
+				draftRequiredPluginIds.add(id);
+				return session;
 			},
-			setStore: (key: symbol, value: Readonly<unknown>) => {
-				draftStore.set(key, value);
+			mergeMeta: (meta: Map<symbol, unknown>) => {
+				for (const [key, value] of meta) {
+					draftMetadata.set(key, value as Readonly<unknown>);
+				}
 				return session;
 			},
 			commit: () =>
 				new TypeBuilder({
 					type: this.#type,
 					fieldBuilders: this.#fieldBuilders,
-					extensions: this.#extensions,
-					store: draftStore,
+					metadata: draftMetadata,
 					middlewares: draftMiddlewares,
+					requiredPluginIds: draftRequiredPluginIds,
 				}),
 			commitToMethods: () => session.commit().toMethods(),
 		} as const;
@@ -77,24 +76,33 @@ export class TypeBuilder<
 	}
 
 	toMethods(): TypeMethods<Source, Context, Info, FieldsBuilders, FieldsResolvers> {
-		const extensions = mergeExtensions(this.#extensions, (ext) =>
-			ext.getTypeExtensions(this),
-		) as unknown as BaetaExtensions.TypeExtensions<Source, Context, Info>;
 		return {
-			...extensions,
 			...this.#fieldBuilders,
 			$fields: (fields: FieldsResolvers) => ({
 				__make: () =>
 					new TypeCompiler({
 						type: this.#type,
-						store: new Map(this.#store),
+						metadata: new Map(this.#metadata),
 						middlewares: [...this.#middlewares],
 						fieldsMap: fields,
+						requiredPluginIds: new Set(this.requiredPluginIds),
 					}),
 			}),
-			$use: (middleware) => {
-				nameFunction(middleware, `${this.#type}.$use`);
-				return this.edit().addMiddleware(middleware).commitToMethods();
+			$use: (input) => {
+				if (typeof input === 'function') {
+					nameFunction(input, `${this.#type}.use`);
+					return this.edit().addMiddleware(input).commitToMethods();
+				}
+				const result = input.buildPlugin({ type: this.#type, kind: 'type' });
+				const session = this.edit().addRequiredPluginId(result.id);
+				if (result.middleware) {
+					nameFunction(result.middleware, `${this.#type}.use`);
+					session.addMiddleware(result.middleware);
+				}
+				if (result.meta) {
+					session.mergeMeta(result.meta);
+				}
+				return session.commitToMethods();
 			},
 		};
 	}

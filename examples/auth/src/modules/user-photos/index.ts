@@ -1,12 +1,15 @@
+import { auth } from '../../lib/auth.ts';
 import { db } from '../../lib/db/prisma.ts';
 import { UserPhotosModule } from './typedef.ts';
 
 const { User, UserPhoto } = UserPhotosModule;
 
 const userPhotosResolver = User.photos
-	.$auth({
-		$granted: 'readUserPhotos',
-	})
+	.$use(
+		auth({
+			$granted: 'readUserPhotos',
+		}),
+	)
 	.resolve(({ source }) => {
 		return db.user
 			.findUnique({

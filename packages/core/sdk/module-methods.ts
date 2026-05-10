@@ -1,5 +1,6 @@
 import type { GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
+import type { PluginId } from './app-plugin.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompilerFactory, TypeMethods } from './type-methods.ts';
@@ -21,12 +22,24 @@ export type ModuleMethods<
 > = TypesBuilders & {
 	$schema: (fields: TypesResolvers) => ModuleCompilerFactory<Context, Info, TypesResolvers>;
 	$use: (
-		middleware: Middleware<unknown, unknown, Context, unknown, Info>,
+		input: ModuleUseInput<Context, Info>,
 	) => ModuleMethods<Context, Info, TypesBuilders, TypesResolvers>;
 	$directive: (
 		transformer: SchemaTransformer | SchemaTransformer[],
 	) => ModuleMethods<Context, Info, TypesBuilders, TypesResolvers>;
-} & BaetaExtensions.ModuleExtensions<Context, Info>;
+};
+
+export type ModuleUsePlugin<Context, Info> = {
+	buildPlugin: (options: { name: string; kind: 'module' }) => {
+		id: PluginId;
+		middleware?: Middleware<unknown, unknown, Context, unknown, Info>;
+		meta?: Map<symbol, unknown>;
+	};
+};
+
+export type ModuleUseInput<Context, Info> =
+	| Middleware<unknown, unknown, Context, unknown, Info>
+	| ModuleUsePlugin<Context, Info>;
 
 export type ModuleCompilerFactory<
 	Context,

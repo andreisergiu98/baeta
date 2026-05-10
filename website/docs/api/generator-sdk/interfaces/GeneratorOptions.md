@@ -28,7 +28,7 @@ Options for the Baeta Generator.
 <td>
 
 ```ts
-["src/∗∗/∗.gql", "src/∗∗/∗.graphql"];
+['src/∗∗/∗.gql', 'src/∗∗/∗.graphql']
 ```
 
 </td>
@@ -52,7 +52,7 @@ Glob pattern(s) to locate GraphQL schema files.
 <td>
 
 ```ts
-process.cwd();
+process.cwd()
 ```
 
 </td>
@@ -98,7 +98,7 @@ Configuration options for generated files.
 <td>
 
 ```ts
-".ts";
+'.ts'
 ```
 
 </td>
@@ -145,7 +145,7 @@ Custom schema loaders for processing schema files.
 <td>
 
 ```ts
-"typedef.ts";
+'typedef'
 ```
 
 </td>
@@ -170,7 +170,7 @@ Contains type definitions and the GraphQL AST.
 <td>
 
 ```ts
-"src/modules";
+'src/modules'
 ```
 
 </td>
@@ -194,7 +194,7 @@ Root directory where GraphQL modules are defined.
 <td>
 
 ```ts
-`${modulesDir}/../__generated__/types.ts`;
+`${modulesDir}/../__generated__/types.ts`
 ```
 
 </td>

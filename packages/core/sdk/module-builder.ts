@@ -2,7 +2,7 @@ import type { IResolvers } from '@graphql-tools/utils';
 import type { DocumentNode } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import { nameFunction } from '../utils/functions.ts';
-import { type Extension, mergeExtensions } from './extension.ts';
+import type { PluginId } from './app-plugin.ts';
 import { ModuleCompiler } from './module-compiler.ts';
 import type { ModuleMethods, TypesBuildersMap, TypesResolversMap } from './module-methods.ts';
 import type { SchemaTransformer } from './transformer.ts';
@@ -16,10 +16,10 @@ export interface ModuleBuilderOptions<
 	typedef: Readonly<DocumentNode>;
 	typeBuilders: Readonly<TypesBuilders>;
 	defaultResolvers: Readonly<IResolvers>;
-	extensions: ReadonlyArray<Extension>;
 	transformers: Array<SchemaTransformer>;
-	store: Map<symbol, Readonly<unknown>>;
+	metadata: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<unknown, unknown, Context, unknown, Info>>;
+	requiredPluginIds: Set<PluginId>;
 }
 
 export class ModuleBuilder<
@@ -32,20 +32,20 @@ export class ModuleBuilder<
 	readonly #typedef: Readonly<DocumentNode>;
 	readonly #typeBuilders: Readonly<TypesBuilders>;
 	readonly #defaultResolvers: Readonly<IResolvers>;
-	readonly #extensions: ReadonlyArray<Extension>;
 	readonly #transformers: ReadonlyArray<SchemaTransformer>;
-	readonly #store: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #metadata: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, unknown, Context, unknown, Info>>;
+	readonly requiredPluginIds: ReadonlySet<PluginId>;
 
 	constructor(options: ModuleBuilderOptions<Context, Info, TypesBuilders>) {
 		this.#name = options.name;
 		this.#typedef = options.typedef;
 		this.#typeBuilders = options.typeBuilders;
 		this.#defaultResolvers = options.defaultResolvers;
-		this.#extensions = options.extensions;
 		this.#transformers = [...options.transformers];
-		this.#store = new Map(options.store);
+		this.#metadata = new Map(options.metadata);
 		this.#middlewares = [...options.middlewares];
+		this.requiredPluginIds = new Set(options.requiredPluginIds);
 	}
 
 	get name() {
@@ -53,9 +53,10 @@ export class ModuleBuilder<
 	}
 
 	edit() {
-		const draftStore = new Map(this.#store);
+		const draftMetadata = new Map(this.#metadata);
 		const draftMiddlewares = [...this.#middlewares];
 		const draftTransformers = [...this.#transformers];
+		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
 		const session = {
 			addMiddleware: (middleware: Middleware<unknown, unknown, Context, unknown, Info>) => {
 				draftMiddlewares.push(middleware);
@@ -71,14 +72,14 @@ export class ModuleBuilder<
 				}
 				return session;
 			},
-			useStore: <T>(key: symbol) => {
-				return {
-					get: () => draftStore.get(key) as T | undefined,
-					set: (value: Readonly<T>) => draftStore.set(key, value),
-				};
+			addRequiredPluginId: (id: PluginId) => {
+				draftRequiredPluginIds.add(id);
+				return session;
 			},
-			setStore: (key: symbol, value: Readonly<unknown>) => {
-				draftStore.set(key, value);
+			mergeMeta: (meta: Map<symbol, unknown>) => {
+				for (const [key, value] of meta) {
+					draftMetadata.set(key, value as Readonly<unknown>);
+				}
 				return session;
 			},
 			commit: () =>
@@ -87,10 +88,10 @@ export class ModuleBuilder<
 					typedef: this.#typedef,
 					typeBuilders: this.#typeBuilders,
 					defaultResolvers: this.#defaultResolvers,
-					extensions: this.#extensions,
 					transformers: draftTransformers,
-					store: draftStore,
+					metadata: draftMetadata,
 					middlewares: draftMiddlewares,
+					requiredPluginIds: draftRequiredPluginIds,
 				}),
 			commitToMethods: () => session.commit().toMethods(),
 		} as const;
@@ -98,28 +99,36 @@ export class ModuleBuilder<
 	}
 
 	toMethods(): ModuleMethods<Context, Info, TypesBuilders, TypesResolvers> {
-		const extensions = mergeExtensions(this.#extensions, (ext) =>
-			ext.getModuleExtensions(this),
-		) as unknown as BaetaExtensions.ModuleExtensions<Context, Info>;
 		return {
-			...extensions,
 			...this.#typeBuilders,
 			$schema: (types: TypesResolvers) => ({
 				__make: () =>
 					new ModuleCompiler<Context, Info, TypesResolvers>({
 						name: this.#name,
-						store: new Map(this.#store),
+						metadata: new Map(this.#metadata),
 						middlewares: [...this.#middlewares],
 						typesMap: types,
 						typedef: this.#typedef,
 						defaultResolvers: this.#defaultResolvers,
-						extensions: this.#extensions,
 						transformers: [...this.#transformers],
+						requiredPluginIds: new Set(this.requiredPluginIds),
 					}),
 			}),
-			$use: (middleware) => {
-				nameFunction(middleware, `${this.#name}.$use`);
-				return this.edit().addMiddleware(middleware).commitToMethods();
+			$use: (input) => {
+				if (typeof input === 'function') {
+					nameFunction(input, `${this.#name}.use`);
+					return this.edit().addMiddleware(input).commitToMethods();
+				}
+				const result = input.buildPlugin({ name: this.#name, kind: 'module' });
+				const session = this.edit().addRequiredPluginId(result.id);
+				if (result.middleware) {
+					nameFunction(result.middleware, `${this.#name}.use`);
+					session.addMiddleware(result.middleware);
+				}
+				if (result.meta) {
+					session.mergeMeta(result.meta);
+				}
+				return session.commitToMethods();
 			},
 			$directive: (transformer) => {
 				return this.edit().addTransformer(transformer).commitToMethods();

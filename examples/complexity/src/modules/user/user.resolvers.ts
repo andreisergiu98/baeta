@@ -1,10 +1,13 @@
+import { complexity } from '../../lib/complexity.ts';
 import { UserModule } from './typedef.ts';
 
 const { Query, User } = UserModule;
 
-export const userResolver = User.$complexity(() => ({
-	complexity: 2,
-})).$fields({
+export const userResolver = User.$use(
+	complexity(() => ({
+		complexity: 2,
+	})),
+).$fields({
 	id: User.id.key('id'),
 	email: User.email.key('email'),
 	lastName: User.lastName.key('lastName'),
@@ -29,14 +32,16 @@ const userQuery = Query.user
 	});
 
 const usersQuery = Query.users
-	.$complexity(({ ctx }) => {
-		if (ctx.appVersion === '1') {
-			return { multiplier: 1 };
-		}
-		return {
-			multiplier: 5,
-		};
-	})
+	.$use(
+		complexity(({ ctx }) => {
+			if (ctx.appVersion === '1') {
+				return { multiplier: 1 };
+			}
+			return {
+				multiplier: 5,
+			};
+		}),
+	)
 	.resolve(() => {
 		const users = Array.from({ length: 10 }).map((_, i) => ({
 			id: i.toString(),

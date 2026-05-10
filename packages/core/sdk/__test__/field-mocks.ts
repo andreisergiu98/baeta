@@ -36,9 +36,9 @@ export function mockFieldBuilder({ field = 'field', type = 'Type' }: MockFieldOp
 	return new FieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		extensions: [],
-		store: new Map(),
+		metadata: new Map(),
 		middlewares: [],
+		requiredPluginIds: new Set(),
 	});
 }
 
@@ -46,8 +46,9 @@ export function mockFieldCompiler({ field = 'field', type = 'Type' }: MockFieldO
 	return new FieldCompiler<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		store: new Map(),
+		metadata: new Map(),
 		middlewares: [],
+		requiredPluginIds: new Set(),
 		resolver: () => 'test',
 	});
 }
@@ -60,7 +61,7 @@ export function mockResolver(
 	const fieldBuilder = mockFieldBuilder();
 	const fieldWithMake = fn(fieldBuilder.toMethods());
 	const fieldCompiler = makeField(fieldWithMake);
-	return fieldCompiler.build([]);
+	return fieldCompiler.build([]).resolver;
 }
 
 export async function executeMockedResolver(

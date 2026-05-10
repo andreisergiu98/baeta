@@ -28,7 +28,7 @@ Configuration options for the context store.
 <td>
 
 ```ts
-false;
+false
 ```
 
 </td>

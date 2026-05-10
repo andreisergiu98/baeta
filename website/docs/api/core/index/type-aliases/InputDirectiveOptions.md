@@ -130,7 +130,6 @@ The depth 2 indicates the second nested list, and so on.
 The directive config is provided as an argument, so depth can be based on directive arguments.
 
 So in the following example:
-
 ```
 input Input {
   list: [[[String!]!]!]! @validList(maxItems: 2, listDepth: 0) @validList(maxItems: 5, listDepth: 1) @validList(maxItems: 3, listDepth: 2)

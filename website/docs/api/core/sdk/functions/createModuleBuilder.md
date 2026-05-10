@@ -1,6 +1,6 @@
 # createModuleBuilder()
 
-> **createModuleBuilder**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>(`name`, `typedef`, `builders`, `defaultResolvers`, `extensions`): [`ModuleMethods`](../type-aliases/ModuleMethods.md)\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
+> **createModuleBuilder**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>(`name`, `typedef`, `builders`, `defaultResolvers`): [`ModuleMethods`](../type-aliases/ModuleMethods.md)\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
 
 ## Type Parameters
 
@@ -39,7 +39,7 @@
 <tr>
 <td>
 
-`TypesBuilders` _extends_ [`TypesBuildersMap`](../type-aliases/TypesBuildersMap.md)\<`Context`, `Info`\>
+`TypesBuilders` *extends* [`TypesBuildersMap`](../type-aliases/TypesBuildersMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>
@@ -51,7 +51,7 @@
 <tr>
 <td>
 
-`TypesResolvers` _extends_ [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
+`TypesResolvers` *extends* [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>
@@ -118,18 +118,6 @@
 <td>
 
 `IResolvers`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-[`Extension`](../classes/Extension.md)\<`unknown`\>[]
 
 </td>
 </tr>

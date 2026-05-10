@@ -23,14 +23,7 @@ directive @validInt(
     notOneOf: [Int!]
 ) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 
-enum StringFormat {
-    EMAIL
-    UUID
-    URL
-}
-
 directive @validString(
-    format: StringFormat
     maxLength: Int
     minLength: Int
     startsWith: String

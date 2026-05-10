@@ -5,7 +5,6 @@
 
 import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import extensions from "../extensions.ts";
 import type {Ctx, Info} from "../types.ts";
 import type * as Types from "../../__generated__/types.ts";
 
@@ -77,22 +76,22 @@ interface BaetaModuleObjectTypeFields {
 
 export const UserModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
   User: Baeta.createTypeBuilder("User", {
-    id: Baeta.createFieldBuilder("User", "id", extensions),
-    email: Baeta.createFieldBuilder("User", "email", extensions),
-    lastName: Baeta.createFieldBuilder("User", "lastName", extensions),
-    profile: Baeta.createFieldBuilder("User", "profile", extensions),
-    givenName: Baeta.createFieldBuilder("User", "givenName", extensions)
-  }, extensions),
+    id: Baeta.createFieldBuilder("User", "id"),
+    email: Baeta.createFieldBuilder("User", "email"),
+    lastName: Baeta.createFieldBuilder("User", "lastName"),
+    profile: Baeta.createFieldBuilder("User", "profile"),
+    givenName: Baeta.createFieldBuilder("User", "givenName")
+  }),
   Query: Baeta.createTypeBuilder("Query", {
-    user: Baeta.createFieldBuilder("Query", "user", extensions),
-    users: Baeta.createFieldBuilder("Query", "users", extensions)
-  }, extensions),
+    user: Baeta.createFieldBuilder("Query", "user"),
+    users: Baeta.createFieldBuilder("Query", "users")
+  }),
   Mutation: Baeta.createTypeBuilder("Mutation", {
-    updateUser: Baeta.createFieldBuilder("Mutation", "updateUser", extensions)
-  }, extensions),
+    updateUser: Baeta.createFieldBuilder("Mutation", "updateUser")
+  }),
   Subscription: Baeta.createTypeBuilder("Subscription", {
-    userUpdated: Baeta.createSubscriptionBuilder("userUpdated", extensions)
-  }, extensions)
+    userUpdated: Baeta.createSubscriptionBuilder("userUpdated")
+  })
 }, {
 
-}, extensions);
+});

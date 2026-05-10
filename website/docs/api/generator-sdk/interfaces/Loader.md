@@ -74,7 +74,7 @@ Interface for custom schema loaders.
 
 `Promise`\<`any`[] \| `null`\>
 
----
+***
 
 ### loadSync()?
 

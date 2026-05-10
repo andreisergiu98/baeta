@@ -37,7 +37,7 @@
 <tr>
 <td>
 
-`TypesResolvers` _extends_ [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
+`TypesResolvers` *extends* [`TypesResolversMap`](../type-aliases/TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>
@@ -74,12 +74,12 @@
 <tr>
 <td>
 
-<a id="extensions"></a> `extensions`
+<a id="metadata"></a> `metadata`
 
 </td>
 <td>
 
-readonly [`Extension`](../classes/Extension.md)\<`unknown`\>[]
+`Map`\<`symbol`, `unknown`\>
 
 </td>
 </tr>
@@ -110,12 +110,12 @@ readonly [`Extension`](../classes/Extension.md)\<`unknown`\>[]
 <tr>
 <td>
 
-<a id="store"></a> `store`
+<a id="requiredpluginids"></a> `requiredPluginIds`
 
 </td>
 <td>
 
-`Map`\<`symbol`, `unknown`\>
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
 
 </td>
 </tr>

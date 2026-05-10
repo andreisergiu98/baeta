@@ -28,7 +28,7 @@
 <td>
 
 ```ts
-false;
+false
 ```
 
 </td>

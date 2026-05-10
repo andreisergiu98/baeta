@@ -71,7 +71,7 @@
 </td>
 <td>
 
-[`SubscriptionBuilderOptions`](../interfaces/SubscriptionBuilderOptions.md)\<`Source`, `Context`, `Args`, `Info`\>
+[`SubscriptionBuilderOptions`](../interfaces/SubscriptionBuilderOptions.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>
@@ -81,6 +81,37 @@
 #### Returns
 
 `SubscriptionBuilder`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Modifier</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="requiredpluginids"></a> `requiredPluginIds`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`ReadonlySet`\<[`PluginId`](../type-aliases/PluginId.md)\>
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Accessors
 
@@ -120,7 +151,19 @@
 </td>
 <td>
 
-(`middleware`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<SubscriptionWrapper, Source, Context, Args, Info\>) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethod...
+(`middleware`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethods: \<P = neve...
+
+</td>
+</tr>
+<tr>
+<td>
+
+`addRequiredPluginId()`
+
+</td>
+<td>
+
+(`id`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethods: \<P = neve...
 
 </td>
 </tr>
@@ -144,7 +187,7 @@
 </td>
 <td>
 
-() => [`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+\<`P`\>() => [`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`, `P`\>
 
 </td>
 </tr>
@@ -163,36 +206,49 @@
 <tr>
 <td>
 
-`setStore()`
+`mergeMeta()`
 
 </td>
 <td>
 
-(`key`, `value`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<SubscriptionWrapper, Source, Context, Args, Info\>) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethod...
-
-</td>
-</tr>
-<tr>
-<td>
-
-`useStore()`
-
-</td>
-<td>
-
-\<`T`\>(`key`) => `object`
+(`meta`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethods: \<P = neve...
 
 </td>
 </tr>
 </tbody>
 </table>
 
----
+***
 
 ### toMethods()
 
-> **toMethods**(): [`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+> **toMethods**\<`Payload`\>(): [`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`, `Payload`\>
+
+#### Type Parameters
+
+<table>
+<thead>
+<tr>
+<th>Type Parameter</th>
+<th>Default type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`Payload`
+
+</td>
+<td>
+
+`never`
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Returns
 
-[`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+[`SubscriptionMethods`](../type-aliases/SubscriptionMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`, `Payload`\>

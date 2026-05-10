@@ -1,7 +1,7 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { DocumentNode, GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
-import type { Extension } from './extension.ts';
+import type { PluginId } from './app-plugin.ts';
 import type { TypesResolversMap } from './module-methods.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompiler } from './type-compiler.ts';
@@ -13,13 +13,13 @@ export interface ModuleCompilerOptions<
 	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
 > {
 	name: string;
-	store: Map<symbol, unknown>;
+	metadata: Map<symbol, unknown>;
 	middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
 	typesMap: TypesResolvers;
 	typedef: Readonly<DocumentNode>;
 	defaultResolvers: Readonly<IResolvers>;
-	extensions: ReadonlyArray<Extension>;
 	transformers: Array<SchemaTransformer>;
+	requiredPluginIds: Set<PluginId>;
 }
 
 export class ModuleCompiler<
@@ -27,29 +27,30 @@ export class ModuleCompiler<
 	Info = unknown,
 	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
 > {
+	readonly kind = 'Module';
 	readonly #name: string;
-	readonly #store: Map<symbol, unknown>;
+	readonly #metadata: Map<symbol, unknown>;
 	readonly #middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
 	readonly #types: ReadonlyArray<
 		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
 	>;
 	readonly #typedef: Readonly<DocumentNode>;
-	readonly #extensions: ReadonlyArray<Extension>;
 	readonly #defaultResolvers: Readonly<IResolvers>;
 	readonly #scalarResolvers: Array<[string, GraphQLScalarType]>;
 	readonly #transformers: SchemaTransformer[];
+	readonly #requiredPluginIds: ReadonlySet<PluginId>;
 
 	constructor(options: ModuleCompilerOptions<Context, Info, TypesResolvers>) {
 		this.#name = options.name;
-		this.#store = new Map(options.store);
+		this.#metadata = new Map(options.metadata);
 		this.#middlewares = [...options.middlewares];
 		this.#typedef = options.typedef;
 		this.#defaultResolvers = options.defaultResolvers;
-		this.#extensions = options.extensions;
 		this.#transformers = [...options.transformers];
 		const { types, genericResolvers } = getTypeCompilersAndResolvers(options.typesMap);
 		this.#types = types;
 		this.#scalarResolvers = genericResolvers;
+		this.#requiredPluginIds = options.requiredPluginIds;
 	}
 
 	get name() {
@@ -60,17 +61,13 @@ export class ModuleCompiler<
 		return this.#types;
 	}
 
-	get extensions() {
-		return this.#extensions;
-	}
-
 	addMiddleware(middleware: Middleware<unknown, unknown, Context, unknown, Info>) {
 		this.#middlewares.push(middleware);
 	}
 
-	useStore<T>(key: symbol) {
-		const get = () => this.#store.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#store.set(key, value);
+	useMetadata<T>(key: symbol) {
+		const get = () => this.#metadata.get(key) as T | undefined;
+		const set = (value: Readonly<T>) => this.#metadata.set(key, value);
 		return { get, set };
 	}
 
@@ -78,13 +75,21 @@ export class ModuleCompiler<
 		const resolvers: IResolvers = {
 			...this.#defaultResolvers,
 		};
+		const allRequiredPluginIds = new Set(this.#requiredPluginIds);
 		for (const [name, resolver] of this.#scalarResolvers) {
 			resolvers[name] = resolver;
 		}
 		for (const compiler of this.#types) {
-			resolvers[compiler.type] = compiler.build(this.#middlewares);
+			const built = compiler.build(this.#middlewares);
+			resolvers[compiler.type] = built.resolvers;
+			built.requiredPluginIds.forEach((id) => allRequiredPluginIds.add(id));
 		}
-		return { resolvers, typedef: this.#typedef, transformers: this.#transformers };
+		return {
+			resolvers,
+			typedef: this.#typedef,
+			transformers: this.#transformers,
+			requiredPluginIds: allRequiredPluginIds,
+		};
 	}
 }
 

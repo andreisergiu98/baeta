@@ -31,9 +31,9 @@
     "e2e:types": "tsc --noEmit"
   },
   "dependencies": {
+    "@baeta/auth": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
-    "@baeta/extension-auth": "workspace:^",
     "graphql": "catalog:dev"
   },
   "devDependencies": {

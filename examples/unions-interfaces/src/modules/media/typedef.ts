@@ -5,7 +5,6 @@
 
 import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import extensions from "../extensions.ts";
 import type {Ctx, Info} from "../types.ts";
 import type * as Types from "../../__generated__/types.ts";
 
@@ -85,26 +84,26 @@ interface BaetaModuleObjectTypeFields {
 
 export const MediaModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
   Movie: Baeta.createTypeBuilder("Movie", {
-    id: Baeta.createFieldBuilder("Movie", "id", extensions),
-    title: Baeta.createFieldBuilder("Movie", "title", extensions),
-    year: Baeta.createFieldBuilder("Movie", "year", extensions)
-  }, extensions),
+    id: Baeta.createFieldBuilder("Movie", "id"),
+    title: Baeta.createFieldBuilder("Movie", "title"),
+    year: Baeta.createFieldBuilder("Movie", "year")
+  }),
   TVShow: Baeta.createTypeBuilder("TVShow", {
-    id: Baeta.createFieldBuilder("TVShow", "id", extensions),
-    title: Baeta.createFieldBuilder("TVShow", "title", extensions),
-    year: Baeta.createFieldBuilder("TVShow", "year", extensions),
-    seasons: Baeta.createFieldBuilder("TVShow", "seasons", extensions)
-  }, extensions),
+    id: Baeta.createFieldBuilder("TVShow", "id"),
+    title: Baeta.createFieldBuilder("TVShow", "title"),
+    year: Baeta.createFieldBuilder("TVShow", "year"),
+    seasons: Baeta.createFieldBuilder("TVShow", "seasons")
+  }),
   Book: Baeta.createTypeBuilder("Book", {
-    id: Baeta.createFieldBuilder("Book", "id", extensions),
-    title: Baeta.createFieldBuilder("Book", "title", extensions),
-    year: Baeta.createFieldBuilder("Book", "year", extensions),
-    author: Baeta.createFieldBuilder("Book", "author", extensions),
-    pages: Baeta.createFieldBuilder("Book", "pages", extensions)
-  }, extensions),
+    id: Baeta.createFieldBuilder("Book", "id"),
+    title: Baeta.createFieldBuilder("Book", "title"),
+    year: Baeta.createFieldBuilder("Book", "year"),
+    author: Baeta.createFieldBuilder("Book", "author"),
+    pages: Baeta.createFieldBuilder("Book", "pages")
+  }),
   Query: Baeta.createTypeBuilder("Query", {
-    media: Baeta.createFieldBuilder("Query", "media", extensions)
-  }, extensions)
+    media: Baeta.createFieldBuilder("Query", "media")
+  })
 }, {
   Media: { __resolveType: (source: {__typename: string}) => { return source.__typename; }}
-}, extensions);
+});

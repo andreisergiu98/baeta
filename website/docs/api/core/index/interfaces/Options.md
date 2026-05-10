@@ -33,7 +33,6 @@
 <tr>
 <th>Property</th>
 <th>Type</th>
-<th>Default value</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -51,18 +50,35 @@
 </td>
 <td>
 
-`undefined`
-
-</td>
-<td>
-
 Array of module objects to include in the application.
 
 **Example**
 
 ```typescript
-const modules = [userModule, postModule, commentModule];
+const modules = [
+  userModule,
+  postModule,
+  commentModule
+];
 ```
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="buildschema"></a> `buildSchema?`
+
+</td>
+<td>
+
+(`options`) => `GraphQLSchema`
+
+</td>
+<td>
+
+Optional function to build the GraphQL schema. If not provided, the default implementation using makeExecutableSchema will be used.
+This allows you to customize the schema building process, for example by using a different library or applying additional transformations.
 
 </td>
 </tr>
@@ -79,11 +95,6 @@ const modules = [userModule, postModule, commentModule];
 </td>
 <td>
 
-`undefined`
-
-</td>
-<td>
-
 Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
 
 </td>
@@ -91,24 +102,17 @@ Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools
 <tr>
 <td>
 
-<a id="pruneschema"></a> `pruneSchema?`
+<a id="plugins"></a> `plugins?`
 
 </td>
 <td>
 
-`boolean`
+[`AppPlugin`](../../sdk/interfaces/AppPlugin.md)[]
 
 </td>
 <td>
 
-```ts
-false;
-```
-
-</td>
-<td>
-
-When true, removes fields that don't have corresponding resolvers.
+Optional array of plugins to extend the functionality of the application.
 
 </td>
 </tr>

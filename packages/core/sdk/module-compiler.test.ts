@@ -1,18 +1,17 @@
 import test from '@baeta/testing';
 import { GraphQLScalarType } from 'graphql';
 import { executeMockedModuleResolvers, mockModuleCompiler } from './__test__/module-mocks.ts';
-import { testUseStoreLike } from './__test__/store-tests.ts';
+import { testStoreLike } from './__test__/store-tests.ts';
 
 test('ModuleCompiler should be created correctly', (t) => {
 	const moduleCompiler = mockModuleCompiler();
 	t.is(moduleCompiler.name, 'module');
 	t.is(moduleCompiler.types.length, 2);
-	t.is(moduleCompiler.extensions.length, 0);
 });
 
-test('ModuleCompiler should handle useStore correctly', (t) => {
+test('ModuleCompiler should handle metadata correctly', (t) => {
 	const moduleCompiler = mockModuleCompiler();
-	testUseStoreLike(t, moduleCompiler);
+	testStoreLike(t, (key) => moduleCompiler.useMetadata(key));
 });
 
 test('ModuleCompiler should handle addMiddleware correctly', async (t) => {

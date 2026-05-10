@@ -20,6 +20,8 @@ import modules from "./modules/index.ts";
 
 const baeta = createApplication({
   modules,
+  // Register app plugins like auth or complexity here
+  // plugins: [authAppPlugin, complexityAppPlugin],
 });
 
 export const yoga = createYoga({
@@ -51,9 +53,9 @@ yarn start
 
 Now that you have a running GraphQL API, you can:
 
-- [Add authorization](../extensions/authorization)
-- [Implement caching](../extensions/caching)
-- [Safeguard from malicious operations](../extensions/complexity)
+- [Add authorization](../advanced/authorization)
+- [Implement caching](../advanced/caching)
+- [Safeguard from malicious operations](../advanced/complexity)
 - [Add validation](../plugins/builtin-directives)
 - [Add custom directives](../guides/directives)
 

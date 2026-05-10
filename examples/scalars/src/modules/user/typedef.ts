@@ -5,7 +5,6 @@
 
 import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import extensions from "../extensions.ts";
 import type {Ctx, Info} from "../types.ts";
 import type * as Types from "../../__generated__/types.ts";
 
@@ -51,13 +50,13 @@ interface BaetaModuleObjectTypeFields {
 
 export const UserModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
   User: Baeta.createTypeBuilder("User", {
-    id: Baeta.createFieldBuilder("User", "id", extensions),
-    email: Baeta.createFieldBuilder("User", "email", extensions),
-    birthday: Baeta.createFieldBuilder("User", "birthday", extensions)
-  }, extensions),
+    id: Baeta.createFieldBuilder("User", "id"),
+    email: Baeta.createFieldBuilder("User", "email"),
+    birthday: Baeta.createFieldBuilder("User", "birthday")
+  }),
   Query: Baeta.createTypeBuilder("Query", {
-    user: Baeta.createFieldBuilder("Query", "user", extensions)
-  }, extensions)
+    user: Baeta.createFieldBuilder("Query", "user")
+  })
 }, {
 
-}, extensions);
+});

@@ -1,6 +1,6 @@
 # TypeMethods\<Source, Context, Info, FieldsBuilders, FieldsResolvers\>
 
-> **TypeMethods**\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\> = `object` & `BaetaExtensions.TypeExtensions`\<`Source`, `Context`, `Info`\> & `FieldsBuilders`
+> **TypeMethods**\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\> = `FieldsBuilders` & `object`
 
 ## Type Declaration
 
@@ -32,7 +32,7 @@
 </td>
 <td>
 
-(`middleware`) => `TypeMethods`\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>
+(`input`) => `TypeMethods`\<`Source`, `Context`, `Info`, `FieldsBuilders`, `FieldsResolvers`\>
 
 </td>
 </tr>
@@ -88,7 +88,7 @@
 <tr>
 <td>
 
-`FieldsBuilders` _extends_ [`FieldsBuildersMap`](FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsBuilders` *extends* [`FieldsBuildersMap`](FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>
@@ -100,7 +100,7 @@
 <tr>
 <td>
 
-`FieldsResolvers` _extends_ [`FieldsResolversMap`](FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsResolvers` *extends* [`FieldsResolversMap`](FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>

@@ -31,7 +31,7 @@
 <td>
 
 ```ts
-"baeta";
+"baeta"
 ```
 
 </td>
@@ -55,7 +55,7 @@ Optional namespace to prefix all cache keys
 <td>
 
 ```ts
-"default";
+"default"
 ```
 
 </td>

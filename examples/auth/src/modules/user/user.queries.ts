@@ -1,24 +1,27 @@
+import { auth } from '../../lib/auth.ts';
 import { db } from '../../lib/db/prisma.ts';
 import { UserModule } from './typedef.ts';
 
 const { Query } = UserModule;
 
 const userQuery = Query.user
-	.$auth(
-		{
-			$or: {
-				// We allow logged out users to read the list of users.
-				isPublic: true, // Is logged out
-				isLoggedIn: true, // Is logged in
+	.$use(
+		auth(
+			{
+				$or: {
+					// We allow logged out users to read the list of users.
+					isPublic: true, // Is logged out
+					isLoggedIn: true, // Is logged in
+				},
 			},
-		},
-		{
-			skipDefaults: true, // Default scopes are still obligatory and would fail for logged out users.
-			// If this auth check passes, the user will be granted the `readUserPhotos` grant.
-			// Grants are a simple way to make sure relations won't leak unauthorized access.
-			// Grants still need to be required on the other end, see user-photos.
-			grants: ['readUserPhotos'],
-		},
+			{
+				skipDefaults: true, // Default scopes are still obligatory and would fail for logged out users.
+				// If this auth check passes, the user will be granted the `readUserPhotos` grant.
+				// Grants are a simple way to make sure relations won't leak unauthorized access.
+				// Grants still need to be required on the other end, see user-photos.
+				grants: ['readUserPhotos'],
+			},
+		),
 	)
 	.resolve(async ({ args }) => {
 		return await db.user.findFirst({
@@ -30,17 +33,19 @@ const userQuery = Query.user
 	});
 
 const usersQuery = Query.users
-	.$auth(
-		{
-			$or: {
-				isPublic: true,
-				isLoggedIn: true,
+	.$use(
+		auth(
+			{
+				$or: {
+					isPublic: true,
+					isLoggedIn: true,
+				},
 			},
-		},
-		{
-			skipDefaults: true,
-			grants: ['readUserPhotos'],
-		},
+			{
+				skipDefaults: true,
+				grants: ['readUserPhotos'],
+			},
+		),
 	)
 	.resolve(async ({ args }) => {
 		return await db.user.findMany({
@@ -54,16 +59,18 @@ const usersQuery = Query.users
 	});
 
 // Auth scopes can be applied to the type level as well
-export default Query.$auth(
-	{
-		$or: {
-			isPublic: true,
-			isLoggedIn: true,
+export default Query.$use(
+	auth(
+		{
+			$or: {
+				isPublic: true,
+				isLoggedIn: true,
+			},
 		},
-	},
-	{
-		skipDefaults: true,
-	},
+		{
+			skipDefaults: true,
+		},
+	),
 ).$fields({
 	user: userQuery,
 	users: usersQuery,

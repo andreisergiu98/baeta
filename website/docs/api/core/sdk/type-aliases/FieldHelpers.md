@@ -122,7 +122,7 @@
 </td>
 <td>
 
-() => [`Field`](Field.md)\<`Expected`, `Result` _extends_ `undefined` ? `NonNullable`\<`Result`\> \| `null` : `Result`, `Source`, `Context`, `Args`, `Info`\>
+() => [`Field`](Field.md)\<`Expected`, `Result` *extends* `undefined` ? `NonNullable`\<`Result`\> \| `null` : `Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

@@ -1,5 +1,6 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
+import type { PluginId } from './app-plugin.ts';
 import type { FieldCompiler } from './field-compiler.ts';
 
 export type Field<Expected, Result, Source, Context, Args, Info> = FieldHelpers<
@@ -13,7 +14,7 @@ export type Field<Expected, Result, Source, Context, Args, Info> = FieldHelpers<
 
 export type FieldMethods<Result, Source, Context, Args, Info> = {
 	$use: (
-		middleware: Middleware<Result, Source, Context, Args, Info>,
+		input: FieldUseInput<Result, Source, Context, Args, Info>,
 	) => FieldMethods<Result, Source, Context, Args, Info>;
 	key: <K extends keyof Source>(key: K) => Field<Result, Source[K], Source, Context, Args, Info>;
 	map: <T = Result>(
@@ -22,7 +23,19 @@ export type FieldMethods<Result, Source, Context, Args, Info> = {
 	resolve: (
 		resolver: Resolver<Result, Source, Context, Args, Info>,
 	) => Field<Result, Result, Source, Context, Args, Info>;
-} & BaetaExtensions.FieldExtensions<Result, Source, Context, Args, Info>;
+};
+
+export type FieldUsePlugin<Result, Source, Context, Args, Info> = {
+	buildPlugin: (options: { type: string; field: string; kind: 'field' }) => {
+		id: PluginId;
+		middleware?: Middleware<Result, Source, Context, Args, Info>;
+		meta?: Map<symbol, unknown>;
+	};
+};
+
+export type FieldUseInput<Result, Source, Context, Args, Info> =
+	| Middleware<Result, Source, Context, Args, Info>
+	| FieldUsePlugin<Result, Source, Context, Args, Info>;
 
 export type FieldHelpers<Expected, Result, Source, Context, Args, Info> = {
 	map: <T = Expected>(

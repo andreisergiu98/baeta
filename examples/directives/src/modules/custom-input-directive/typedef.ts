@@ -5,7 +5,6 @@
 
 import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import extensions from "../extensions.ts";
 import type {Ctx, Info} from "../types.ts";
 import type * as Types from "../../__generated__/types.ts";
 
@@ -37,8 +36,8 @@ interface BaetaModuleObjectTypeFields {
 
 export const CustomInputDirectiveModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
   Query: Baeta.createTypeBuilder("Query", {
-    testIncrementDirective: Baeta.createFieldBuilder("Query", "testIncrementDirective", extensions)
-  }, extensions)
+    testIncrementDirective: Baeta.createFieldBuilder("Query", "testIncrementDirective")
+  })
 }, {
 
-}, extensions);
+});

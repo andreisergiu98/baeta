@@ -8,9 +8,9 @@
     "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'"
   },
   "dependencies": {
+    "@baeta/complexity": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
-    "@baeta/extension-complexity": "workspace:^",
     "graphql": "catalog:dev",
     "graphql-yoga": "catalog:dev"
   },

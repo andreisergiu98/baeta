@@ -210,7 +210,7 @@
 
 `Promise`\<`string`\>
 
----
+***
 
 ### buildHeader()
 
@@ -220,7 +220,7 @@
 
 `string`
 
----
+***
 
 ### createComment()
 
@@ -255,7 +255,7 @@
 
 `string`
 
----
+***
 
 ### unlink()
 
@@ -265,7 +265,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### write()
 

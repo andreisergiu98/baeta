@@ -72,6 +72,18 @@
 <tr>
 <td>
 
+<a id="metadata"></a> `metadata`
+
+</td>
+<td>
+
+`Map`\<`symbol`, `unknown`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
 <a id="middlewares"></a> `middlewares`
 
 </td>
@@ -84,24 +96,24 @@
 <tr>
 <td>
 
-<a id="resolver"></a> `resolver`
+<a id="requiredpluginids"></a> `requiredPluginIds`
 
 </td>
 <td>
 
-[`Resolver`](../../index/type-aliases/Resolver.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-<a id="store"></a> `store`
+<a id="resolver"></a> `resolver`
 
 </td>
 <td>
 
-`Map`\<`symbol`, `unknown`\>
+[`Resolver`](../../index/type-aliases/Resolver.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

@@ -70,7 +70,7 @@
 
 `void`
 
----
+***
 
 ### isIgnored()
 
@@ -105,7 +105,7 @@
 
 `boolean`
 
----
+***
 
 ### isMicromatch()
 
@@ -140,7 +140,7 @@
 
 `boolean`
 
----
+***
 
 ### resolveFile()
 
@@ -175,7 +175,7 @@
 
 `string`
 
----
+***
 
 ### unignore()
 

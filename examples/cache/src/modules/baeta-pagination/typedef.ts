@@ -5,7 +5,6 @@
 
 import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import extensions from "../extensions.ts";
 import type {Ctx, Info} from "../types.ts";
 import type * as Types from "../../__generated__/types.ts";
 
@@ -87,25 +86,25 @@ interface BaetaModuleObjectTypeFields {
 
 export const BaetaPaginationModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
   PageInfo: Baeta.createTypeBuilder("PageInfo", {
-    hasPreviousPage: Baeta.createFieldBuilder("PageInfo", "hasPreviousPage", extensions),
-    hasNextPage: Baeta.createFieldBuilder("PageInfo", "hasNextPage", extensions)
-  }, extensions),
+    hasPreviousPage: Baeta.createFieldBuilder("PageInfo", "hasPreviousPage"),
+    hasNextPage: Baeta.createFieldBuilder("PageInfo", "hasNextPage")
+  }),
   UserConnection: Baeta.createTypeBuilder("UserConnection", {
-    pageInfo: Baeta.createFieldBuilder("UserConnection", "pageInfo", extensions),
-    edges: Baeta.createFieldBuilder("UserConnection", "edges", extensions)
-  }, extensions),
+    pageInfo: Baeta.createFieldBuilder("UserConnection", "pageInfo"),
+    edges: Baeta.createFieldBuilder("UserConnection", "edges")
+  }),
   UserEdge: Baeta.createTypeBuilder("UserEdge", {
-    cursor: Baeta.createFieldBuilder("UserEdge", "cursor", extensions),
-    node: Baeta.createFieldBuilder("UserEdge", "node", extensions)
-  }, extensions),
+    cursor: Baeta.createFieldBuilder("UserEdge", "cursor"),
+    node: Baeta.createFieldBuilder("UserEdge", "node")
+  }),
   UserPhotoConnection: Baeta.createTypeBuilder("UserPhotoConnection", {
-    pageInfo: Baeta.createFieldBuilder("UserPhotoConnection", "pageInfo", extensions),
-    edges: Baeta.createFieldBuilder("UserPhotoConnection", "edges", extensions)
-  }, extensions),
+    pageInfo: Baeta.createFieldBuilder("UserPhotoConnection", "pageInfo"),
+    edges: Baeta.createFieldBuilder("UserPhotoConnection", "edges")
+  }),
   UserPhotoEdge: Baeta.createTypeBuilder("UserPhotoEdge", {
-    cursor: Baeta.createFieldBuilder("UserPhotoEdge", "cursor", extensions),
-    node: Baeta.createFieldBuilder("UserPhotoEdge", "node", extensions)
-  }, extensions)
+    cursor: Baeta.createFieldBuilder("UserPhotoEdge", "cursor"),
+    node: Baeta.createFieldBuilder("UserPhotoEdge", "node")
+  })
 }, {
 
-}, extensions);
+});

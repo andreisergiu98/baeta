@@ -1,0 +1,167 @@
+---
+sidebar_position: 20
+title: Complexity
+---
+
+# Query Complexity
+
+Baeta provides a query complexity analysis system that helps protect your GraphQL API from resource-exhausting queries. It calculates the complexity of incoming queries and rejects those that exceed configured limits.
+
+## Key Features
+
+- Automatic complexity calculation for all fields
+- Customizable complexity per field
+- Dynamic limits based on context
+- List operation handling with multipliers
+- Depth and breadth limitations
+- Context-aware complexity rules
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/complexity" />
+
+## Basic Setup
+
+### 1. Create the app plugin
+
+`createComplexity` returns two things:
+
+- `complexity` — a helper passed to `$use` to override settings for specific types or fields.
+- `complexityAppPlugin` — the app plugin you register on `createApplication`.
+
+```typescript
+// src/lib/complexity.ts
+import { createComplexity } from "@baeta/complexity";
+import type { Context } from "../types/context.ts";
+
+export const { complexity, complexityAppPlugin } = createComplexity<Context>({
+  // Default complexity score for fields
+  defaultComplexity: 1,
+  // Multiplier applied to list fields
+  defaultListMultiplier: 10,
+  // Dynamic limits based on context
+  async limit(ctx) {
+    return {
+      depth: 10, // Maximum query depth
+      breadth: 50, // Maximum number of fields at each level
+      complexity: 1000, // Maximum total complexity score
+    };
+  },
+  // Alternatively, use static limits
+  // limit: {
+  //   depth: 10,
+  //   breadth: 50,
+  //   complexity: 1000,
+  // }
+});
+```
+
+### 2. Register the app plugin
+
+```typescript
+// src/app.ts
+import { createApplication } from "@baeta/core";
+import { complexityAppPlugin } from "./lib/complexity.ts";
+import modules from "./modules/index.ts";
+
+const baeta = createApplication({
+  modules,
+  plugins: [complexityAppPlugin],
+});
+```
+
+:::note
+The `complexityAppPlugin` must be passed to `createApplication`. If a module uses `complexity(...)` but the plugin isn't registered, Baeta will throw at schema build time.
+:::
+
+:::tip
+For most APIs, register `authAppPlugin` _before_ `complexityAppPlugin` so unauthenticated requests bounce before any cost calculation runs — complexity-first is cheaper on the I/O side but leaks schema-shape information to anonymous callers. See [App Plugins](./app-plugins#plugin-ordering) for the full tradeoff.
+:::
+
+## Customizing Complexity Rules
+
+### Field-Level Configuration
+
+You can override complexity settings for specific fields or types by chaining `$use(complexity(...))`:
+
+```typescript
+import { complexity } from "../../lib/complexity.ts";
+import { UserModule } from "./typedef.ts";
+
+const { Query, User } = UserModule;
+
+// Custom complexity for a type — chain into $fields
+const userResolver = User
+  .$use(
+    complexity(() => ({
+      complexity: 2,
+    })),
+  )
+  .$fields({
+    id: User.id.key("id"),
+    email: User.email.key("email"),
+  });
+
+// Disable complexity for a specific field
+const userQuery = Query.user
+  .$use(complexity(() => false))
+  .resolve(({ args }) => {
+    return findUser(args.where);
+  });
+
+// Custom complexity score for a list field
+const usersQuery = Query.users
+  .$use(
+    complexity(({ args, ctx }) => ({
+      complexity: 1,
+      multiplier: 5,
+    })),
+  )
+  .resolve(() => {
+    return findUsers();
+  });
+```
+
+### Dynamic Complexity Rules
+
+Complexity rules can be determined dynamically based on context or arguments:
+
+```typescript
+const usersQuery = Query.users
+  .$use(
+    complexity(({ args, ctx }) => {
+      return {
+        complexity: 1,
+        multiplier: args.limit,
+      };
+    }),
+  )
+  .resolve(() => {
+    return findUsers();
+  });
+```
+
+## How Complexity is Calculated
+
+1. Each field has a base complexity (default: 1)
+2. List fields are multiplied by the list multiplier
+3. Nested fields add to the total complexity
+4. The total is compared against the configured limit
+
+Example:
+
+```graphql
+query {
+  users(first: 10) {
+    # complexity: 1 * 10 (multiplier)
+    name # complexity: 1 * 10 (inherited multiplier)
+    posts {
+      # complexity: 1 * 10 * 10 (nested list)
+      title # complexity: 1 * 10 * 10 (inherited multiplier)
+    }
+  }
+}
+# Total complexity: 210
+```

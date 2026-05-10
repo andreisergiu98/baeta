@@ -20,6 +20,10 @@ const baeta = createApplication({
 });
 ```
 
+## App Plugins
+
+App plugins extend Baeta at the application level — authorization, complexity, and other cross-cutting concerns plug in here. They are registered via the `plugins` option, and registration order is significant. See [App Plugins](../advanced/app-plugins) for the full system, the ordering contract, and the auth-vs-complexity tradeoff.
+
 ## Server Integration
 
 ### GraphQL Yoga

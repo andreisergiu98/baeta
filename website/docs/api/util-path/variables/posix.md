@@ -1,3 +1,3 @@
 # posix
 
-> `const` **posix**: _typeof_ `posix` = `upath.posix`
+> `const` **posix**: `NodePath`\[`"posix"`\]

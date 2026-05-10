@@ -94,7 +94,7 @@
 
 `string`
 
----
+***
 
 ### type
 
@@ -132,7 +132,19 @@
 </td>
 <td>
 
-(`middleware`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (middleware: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMet...
+(`mw`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMethods: () =\> FieldMetho...
+
+</td>
+</tr>
+<tr>
+<td>
+
+`addRequiredPluginId()`
+
+</td>
+<td>
+
+(`id`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMethods: () =\> FieldMetho...
 
 </td>
 </tr>
@@ -175,12 +187,12 @@
 <tr>
 <td>
 
-`setStore()`
+`mergeMeta()`
 
 </td>
 <td>
 
-(`key`, `value`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (middleware: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly useStore: \<T\>(key: symbol) =\> \{ ...; \}; readonly setStore: (key: symbol, value: Readonly\<...\>) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMet...
+(`meta`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMethods: () =\> FieldMetho...
 
 </td>
 </tr>
@@ -196,22 +208,10 @@
 
 </td>
 </tr>
-<tr>
-<td>
-
-`useStore()`
-
-</td>
-<td>
-
-\<`T`\>(`key`) => `object`
-
-</td>
-</tr>
 </tbody>
 </table>
 
----
+***
 
 ### toMethods()
 

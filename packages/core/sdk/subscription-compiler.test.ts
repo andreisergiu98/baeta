@@ -1,5 +1,5 @@
 import test from '@baeta/testing';
-import { testUseStoreLike } from './__test__/store-tests.ts';
+import { testStoreLike } from './__test__/store-tests.ts';
 import {
 	executeMockedSubscriptionResolver,
 	mockSubscriptionFieldCompiler,
@@ -11,54 +11,54 @@ test('SubscriptionCompiler should be created correctly', (t) => {
 	t.is(fieldCompiler.field, 'field');
 });
 
-test('SubscriptionCompiler should add middleware correctly', async (t) => {
+test('SubscriptionCompiler should add subscribe middleware correctly', async (t) => {
 	let i = 0;
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	fieldCompiler.addMiddleware((next) => {
+	fieldCompiler.addSubscribeMiddleware((next) => {
 		t.is(i++, 0);
 		return next();
 	});
-	fieldCompiler.addMiddleware(async (next) => {
+	fieldCompiler.addSubscribeMiddleware(async (next) => {
 		const generator = await next();
 		t.is(i++, 1);
 		return generator;
 	});
-	const result = await executeMockedSubscriptionResolver(fieldCompiler.build([]));
+	const result = await executeMockedSubscriptionResolver(fieldCompiler.build([]).resolver);
 
 	t.is(i, 2);
 	t.deepEqual(result, ['1']);
 });
 
-test('SubscriptionCompiler should add initial middleware correctly', async (t) => {
+test('SubscriptionCompiler should add initial subscribe middleware correctly', async (t) => {
 	let i = 0;
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	fieldCompiler.addMiddleware((next) => {
+	fieldCompiler.addSubscribeMiddleware((next) => {
 		t.is(i++, 1);
 		return next();
 	});
-	fieldCompiler.addInitialMiddleware((next) => {
+	fieldCompiler.addTopLevelSubscribeMiddleware((next) => {
 		t.is(i++, 0);
 		return next();
 	});
-	const resolver = fieldCompiler.build([]);
+	const { resolver } = fieldCompiler.build([]);
 	const result = await executeMockedSubscriptionResolver(resolver);
 
 	t.is(i, 2);
 	t.deepEqual(result, ['1']);
 });
 
-test('SubscriptionCompiler should use type middlewares correctly', async (t) => {
+test('SubscriptionCompiler should use type subscribe middlewares correctly', async (t) => {
 	let i = 0;
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	fieldCompiler.addInitialMiddleware((next) => {
+	fieldCompiler.addTopLevelSubscribeMiddleware((next) => {
 		t.is(i++, 0);
 		return next();
 	});
-	fieldCompiler.addMiddleware(async (next) => {
+	fieldCompiler.addSubscribeMiddleware(async (next) => {
 		t.is(i++, 2);
 		return await next();
 	});
-	const resolver = fieldCompiler.build([
+	const { resolver } = fieldCompiler.build([
 		(next) => {
 			t.is(i++, 1);
 			return next();
@@ -69,7 +69,12 @@ test('SubscriptionCompiler should use type middlewares correctly', async (t) => 
 	t.deepEqual(result, ['1']);
 });
 
-test('SubscriptionCompiler should use store correctly', async (t) => {
+test('SubscriptionCompiler should use subscribe store correctly', (t) => {
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	testUseStoreLike(t, fieldCompiler);
+	testStoreLike(t, (key) => fieldCompiler.useSubscribeMetadata(key));
+});
+
+test('SubscriptionCompiler should use resolve store correctly', (t) => {
+	const fieldCompiler = mockSubscriptionFieldCompiler();
+	testStoreLike(t, (key) => fieldCompiler.useResolveMetadata(key));
 });

@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
+    "url": "git+https://github.com/andreisergiu98/baeta.git",
     "directory": "packages/plugin-pagination"
   },
   "files": [
-    "dist",
-    "package.json"
+    "dist"
   ],
   "type": "module",
+  "sideEffects": false,
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -62,6 +62,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "catalog:dev",
+    "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {

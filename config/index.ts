@@ -55,7 +55,7 @@ export const PACKAGE_DEPENDENCY_OVERRIDES: Record<string, PackageDependenciesOve
 		ignoreDevDeps: ['@types/node'],
 	},
 	'@baeta/plugin-pagination': {
-		ignoreDevDeps: ['@types/node'],
+		ignoreDevDeps: ['@types/node', 'graphql'],
 	},
 	'@baeta/plugin-exec': {
 		ignoreDevDeps: ['@types/node'],

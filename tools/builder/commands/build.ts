@@ -87,7 +87,7 @@ async function checkExportFilesExist() {
 		}
 	}
 
-	const mandatoryFiles = [BUILD_DEFAULTS.outDir, 'package.json'];
+	const mandatoryFiles = [BUILD_DEFAULTS.outDir];
 	const missingFiles = mandatoryFiles.filter((file) => !pkg.files?.includes(file));
 	if (missingFiles.length > 0) {
 		throw new Error(`Missing files inclusion in package ${pkg.name}: ${missingFiles.join(', ')}`);

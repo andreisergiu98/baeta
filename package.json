@@ -21,8 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "."
+    "url": "git+https://github.com/andreisergiu98/baeta.git"
   },
   "workspaces": [
     "config",
@@ -72,11 +71,13 @@
     "eslint": "^10.3.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.2",
+    "eslint-plugin-package-json": "^0.91.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-unused-imports": "^4.4.1",
     "github-actions-workflow-builder": "^4.1.0",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
+    "jsonc-eslint-parser": "^3.1.0",
     "lint-staged": "^17.0.2",
     "lockfile-lint": "^5.0.0",
     "oxfmt": "^0.48.0",

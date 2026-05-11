@@ -21,17 +21,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
+    "url": "git+https://github.com/andreisergiu98/baeta.git",
     "directory": "packages/cli"
   },
   "bin": {
     "baeta": "./bin/cli-dev.ts"
   },
   "files": [
-    "dist",
-    "package.json"
+    "dist"
   ],
   "type": "module",
+  "sideEffects": false,
   "types": "dist/index.d.ts",
   "exports": {
     ".": {

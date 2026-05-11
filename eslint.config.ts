@@ -2,6 +2,7 @@ import react from '@eslint-react/eslint-plugin';
 import css from '@eslint/css';
 import js from '@eslint/js';
 import importX from 'eslint-plugin-import-x';
+import packageJson from 'eslint-plugin-package-json';
 import reactHooks from 'eslint-plugin-react-hooks';
 import unusedImports from 'eslint-plugin-unused-imports';
 import { defineConfig, globalIgnores } from 'eslint/config';
@@ -85,6 +86,27 @@ export const baseConfig = defineConfig([
 		plugins: { css },
 		language: 'css/css',
 		extends: ['css/recommended'],
+	},
+	{
+		extends: [packageJson.configs.recommended, packageJson.configs['recommended-publishable']],
+		files: ['**/package.json'],
+		rules: {
+			'package-json/no-redundant-publishConfig': 'off',
+			'package-json/sort-collections': 'off',
+			'package-json/order-properties': 'off',
+			'package-json/require-type': [
+				'error',
+				{
+					ignorePrivate: true,
+				},
+			],
+			'package-json/require-description': [
+				'off',
+				{
+					ignorePrivate: false,
+				},
+			],
+		},
 	},
 	{
 		files: ['**/__generated__/**', '**/lib/db/prisma.ts'],

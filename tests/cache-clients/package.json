@@ -21,13 +21,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/andreisergiu98/baeta.git",
+    "url": "git+https://github.com/andreisergiu98/baeta.git",
     "directory": "tests/cache-clients"
   },
-  "files": [
-    "dist",
-    "package.json"
-  ],
   "type": "module",
   "types": "./index.ts",
   "exports": {

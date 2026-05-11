@@ -95,8 +95,10 @@ function enforceWorkspaceMetadata({ Yarn }) {
 		workspace.set('author.url', 'https://github.com/andreisergiu98');
 
 		workspace.set('repository.type', 'git');
-		workspace.set('repository.url', 'https://github.com/andreisergiu98/baeta.git');
-		workspace.set('repository.directory', workspace.cwd);
+		workspace.set('repository.url', 'git+https://github.com/andreisergiu98/baeta.git');
+		if (workspace.manifest.name !== 'baeta') {
+			workspace.set('repository.directory', workspace.cwd);
+		}
 
 		workspace.set('license', 'MIT');
 
@@ -117,6 +119,8 @@ function enforceWorkspaceMetadata({ Yarn }) {
 		if (!workspace.manifest.private) {
 			enforceConsistentEntries(workspace);
 
+			workspace.set('files', ['dist']);
+			workspace.set('sideEffects', false);
 			workspace.set('publishConfig.access', 'public');
 			workspace.set('engines.node', '>=22.20.0');
 

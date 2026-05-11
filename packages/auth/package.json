@@ -1,5 +1,5 @@
 {
-  "name": "@baeta/complexity",
+  "name": "@baeta/auth",
   "version": "2.0.0-next.14",
   "keywords": [
     "baeta",
@@ -22,7 +22,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreisergiu98/baeta.git",
-    "directory": "packages/extension-complexity"
+    "directory": "packages/auth"
   },
   "files": [
     "dist",
@@ -52,6 +52,11 @@
     "prepack": "builder prepare",
     "test": "builder test",
     "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/errors": "workspace:^",
+    "@baeta/util-log": "workspace:^",
+    "fast-json-stable-stringify": "^2.1.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

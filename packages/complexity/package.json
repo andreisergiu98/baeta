@@ -1,6 +1,6 @@
 {
   "name": "@baeta/complexity",
-  "version": "2.0.0-next.14",
+  "version": "2.0.0-next.15",
   "description": "Query complexity analysis for Baeta.",
   "keywords": [
     "baeta",

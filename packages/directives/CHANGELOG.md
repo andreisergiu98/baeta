@@ -1,5 +1,14 @@
 # @baeta/directives
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop "format" option for "@validString" directive by [@andreisergiu98](https://github.com/andreisergiu98) in [#418](https://github.com/andreisergiu98/baeta/pull/418)
+- Updated dependencies [[`7bce3e4`](https://github.com/andreisergiu98/baeta/commit/7bce3e4c4940782bcb51739797307a6d57c91e7d)]:
+  - @baeta/core@2.0.0-next.15
+  - @baeta/errors@2.0.0-next.15
+
 ## 2.0.0-next.14
 
 ### Patch Changes

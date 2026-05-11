@@ -1,5 +1,12 @@
 # @baeta/cache-iovalkey
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Updated dependencies:
+  - @baeta/cache@2.0.0-next.15
+
 ## 2.0.0-next.14
 
 ### Patch Changes

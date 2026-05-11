@@ -1,5 +1,15 @@
 # @baeta/plugin-graphql
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop extensions concept and api in favor of app plugins by [@andreisergiu98](https://github.com/andreisergiu98) in [#428](https://github.com/andreisergiu98/baeta/pull/428)
+
+- Drop change-case-all dependency in favor of change-case by [@andreisergiu98](https://github.com/andreisergiu98) in [#418](https://github.com/andreisergiu98/baeta/pull/418)
+- Updated dependencies [[`03c2bc9`](https://github.com/andreisergiu98/baeta/commit/03c2bc9913b6ffdc15f627f9d177347e0805defd)]:
+  - @baeta/generator-sdk@2.0.0-next.6
+
 ## 2.0.0-next.14
 
 ## 2.0.0-next.13

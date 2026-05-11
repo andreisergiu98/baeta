@@ -1,5 +1,13 @@
 # @baeta/core
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop extensions concept and api in favor of app plugins by [@andreisergiu98](https://github.com/andreisergiu98) in [#428](https://github.com/andreisergiu98/baeta/pull/428)
+- Updated dependencies:
+  - @baeta/errors@2.0.0-next.15
+
 ## 2.0.0-next.14
 
 ### Patch Changes

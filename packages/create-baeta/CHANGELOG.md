@@ -1,5 +1,11 @@
 # create-baeta
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop prompts dependency in favor of inquirer by [@andreisergiu98](https://github.com/andreisergiu98) in [#418](https://github.com/andreisergiu98/baeta/pull/418)
+
 ## 2.0.0-next.14
 
 ## 2.0.0-next.13

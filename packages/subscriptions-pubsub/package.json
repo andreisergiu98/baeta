@@ -1,6 +1,6 @@
 {
   "name": "@baeta/subscriptions-pubsub",
-  "version": "2.0.0-next.14",
+  "version": "2.0.0-next.15",
   "description": "Typed PubSub helpers for Baeta subscriptions.",
   "keywords": [
     "baeta",

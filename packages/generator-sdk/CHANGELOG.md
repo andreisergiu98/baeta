@@ -1,5 +1,11 @@
 # @baeta/generator-sdk
 
+## 2.0.0-next.6
+
+### Patch Changes
+
+- Drop change-case-all dependency in favor of change-case by [@andreisergiu98](https://github.com/andreisergiu98) in [#418](https://github.com/andreisergiu98/baeta/pull/418)
+
 ## 2.0.0-next.5
 
 ### Patch Changes

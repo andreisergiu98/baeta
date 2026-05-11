@@ -61,7 +61,7 @@
     "@docusaurus/logger": "^3.10.1",
     "@inquirer/input": "^5.0.12",
     "@inquirer/select": "^5.1.4",
-    "fs-extra": "^11.3.4",
+    "fs-extra": "^11.3.5",
     "semver": "^7.7.4",
     "shelljs": "^0.10.0",
     "supports-color": "^10.2.2",

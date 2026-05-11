@@ -62,7 +62,7 @@
     "@baeta/tsconfig": "workspace:^",
     "@baeta/workspace-config": "workspace:^",
     "@changesets/cli": "^2.31.0",
-    "@eslint-react/eslint-plugin": "^5.7.2",
+    "@eslint-react/eslint-plugin": "^5.7.4",
     "@eslint/css": "^1.2.0",
     "@eslint/js": "^10.0.1",
     "@types/node": "catalog:dev",
@@ -80,7 +80,7 @@
     "lint-staged": "^17.0.2",
     "lockfile-lint": "^5.0.0",
     "oxfmt": "^0.48.0",
-    "turbo": "^2.9.9",
+    "turbo": "^2.9.10",
     "typescript": "catalog:dev",
     "typescript-eslint": "^8.59.2"
   },

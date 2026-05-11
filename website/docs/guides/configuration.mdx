@@ -1,0 +1,66 @@
+---
+sidebar_position: 5
+title: Configuration
+---
+
+# Configuration Reference
+
+All configuration is done through `baeta.ts` using [`defineConfig`](/docs/api/cli/index/functions/defineConfig).
+
+## GraphQL Options
+
+Only `schemas` is required:
+
+```typescript
+import { defineConfig } from "@baeta/cli";
+
+export default defineConfig({
+  graphql: {
+    // Glob pattern(s) to locate GraphQL schema files (required)
+    schemas: ["src/**/*.gql"],
+
+    // Root directory where GraphQL modules are defined (default: "src/modules")
+    modulesDir: "src/modules",
+
+    // Output path for generated type files (default: "${modulesDir}/../__generated__/")
+    typesDir: "src/__generated__",
+
+    // Filename for the generated module definition file (default: "typedef")
+    moduleDefinitionName: "typedef",
+
+    // File extension for generated imports (default: ".ts")
+    // Set to ".js" for bundler compatibility or false to omit
+    importExtension: ".ts",
+
+    // Options for generated files
+    fileOptions: {
+      disableEslintHeader: true,
+      disableBiomeV1Header: true,
+    },
+  },
+});
+```
+
+For all available options, see the [`GeneratorOptions`](/docs/api/generator-sdk/interfaces/GeneratorOptions) and [`FileOptions`](/docs/api/generator-sdk/interfaces/FileOptions) API references.
+
+## Plugins
+
+Add plugins to extend the build process:
+
+```typescript
+import { defineConfig } from "@baeta/cli";
+import { federationPlugin } from "@baeta/plugin-federation";
+import { prismaPlugin } from "@baeta/plugin-prisma";
+
+export default defineConfig({
+  graphql: {
+    schemas: ["src/**/*.gql"],
+  },
+  plugins: [
+    federationPlugin(),
+    prismaPlugin({ prismaSchema: "schema.prisma" }),
+  ],
+});
+```
+
+See the [Plugins](/docs/plugins) section for available plugins and their options.

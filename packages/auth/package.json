@@ -1,6 +1,7 @@
 {
   "name": "@baeta/auth",
   "version": "2.0.0-next.14",
+  "description": "Authorization for Baeta.",
   "keywords": [
     "baeta",
     "builder",

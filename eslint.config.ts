@@ -101,9 +101,9 @@ export const baseConfig = defineConfig([
 				},
 			],
 			'package-json/require-description': [
-				'off',
+				'error',
 				{
-					ignorePrivate: false,
+					ignorePrivate: true,
 				},
 			],
 		},

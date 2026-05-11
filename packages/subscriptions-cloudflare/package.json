@@ -1,6 +1,7 @@
 {
   "name": "@baeta/subscriptions-cloudflare",
   "version": "0.2.0-next.2",
+  "description": "Cloudflare subscription transport for Baeta.",
   "keywords": [
     "baeta",
     "builder",

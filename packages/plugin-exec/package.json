@@ -1,6 +1,7 @@
 {
   "name": "@baeta/plugin-exec",
   "version": "2.0.0-next.14",
+  "description": "Command execution plugin for Baeta.",
   "keywords": [
     "baeta",
     "builder",

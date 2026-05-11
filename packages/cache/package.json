@@ -1,6 +1,7 @@
 {
   "name": "@baeta/cache",
   "version": "2.0.0-next.14",
+  "description": "Type-safe caching for Baeta.",
   "keywords": [
     "baeta",
     "builder",

@@ -1,6 +1,7 @@
 {
   "name": "@baeta/generator-sdk",
   "version": "2.0.0-next.5",
+  "description": "SDK for Baeta generator plugins.",
   "keywords": [
     "baeta",
     "builder",

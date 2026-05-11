@@ -1,6 +1,7 @@
 {
   "name": "@baeta/util-encoding",
   "version": "2.0.0-next.3",
+  "description": "Encoding utilities for Baeta.",
   "keywords": [
     "baeta",
     "builder",

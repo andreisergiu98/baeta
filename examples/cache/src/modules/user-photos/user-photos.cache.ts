@@ -1,6 +1,7 @@
-import { defineQuery } from '@baeta/cache';
+import { createCache, defineQuery } from '@baeta/cache';
 import { z } from 'zod';
 import { db } from '../../lib/db/prisma.ts';
+import { redisClient } from '../../lib/redis.ts';
 import { UserPhotosModule } from './typedef.ts';
 
 const { UserPhoto } = UserPhotosModule;
@@ -11,7 +12,8 @@ const UserPhotoCacheSchema = z.object({
 	url: z.string(),
 });
 
-export const userPhotoCache = UserPhoto.$createCache({
+export const userPhotoCache = createCache(redisClient, {
+	name: 'UserPhotoCache',
 	parse: (value) => UserPhotoCacheSchema.parse(JSON.parse(value)),
 	serialize: (value) => JSON.stringify(UserPhotoCacheSchema.encode(value)),
 })

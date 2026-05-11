@@ -1,3 +1,3 @@
 # Template
 
-> **Template** = _typeof_ [`templates`](../variables/templates.md)\[`number`\]
+> **Template** = *typeof* [`templates`](../variables/templates.md)\[`number`\]

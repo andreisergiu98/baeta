@@ -42,29 +42,6 @@ export function makeSharedTemplate(
 			),
 		},
 		{
-			relativePath: './src/modules/extensions.ts',
-			content: `import { createExtensions } from '@baeta/core';
-import { complexityExtension } from '@baeta/extension-complexity';
-import type { Context } from '../types/context.ts';
-
-const complexity = complexityExtension<Context>({
-	defaultComplexity: 1,
-	defaultListMultiplier: 10,
-	async limit(ctx) {
-		return {
-			depth: 10,
-			breadth: 50,
-			complexity: 1000,
-		};
-	},
-});
-
-export default createExtensions({
-	complexityExtension: complexity
-});
-`,
-		},
-		{
 			relativePath: './src/modules/user/user.gql',
 			content: `type User {
 	id: ID!

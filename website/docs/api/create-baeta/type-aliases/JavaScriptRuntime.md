@@ -1,3 +1,3 @@
 # JavaScriptRuntime
 
-> **JavaScriptRuntime** = _typeof_ [`runtimes`](../variables/runtimes.md)\[`number`\]
+> **JavaScriptRuntime** = *typeof* [`runtimes`](../variables/runtimes.md)\[`number`\]

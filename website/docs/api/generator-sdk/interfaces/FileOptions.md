@@ -50,7 +50,7 @@ Add custom header at the beginning of the file.
 <td>
 
 ```ts
-false;
+false
 ```
 
 </td>
@@ -74,7 +74,7 @@ Disable biome v1 comment at the beginning of the file.
 <td>
 
 ```ts
-false;
+false
 ```
 
 </td>
@@ -98,7 +98,7 @@ Disable biome v2 comment at the beginning of the file.
 <td>
 
 ```ts
-false;
+false
 ```
 
 </td>
@@ -122,7 +122,7 @@ Disable eslint-disable comment at the beginning of the file.
 <td>
 
 ```ts
-false;
+false
 ```
 
 </td>
@@ -146,13 +146,13 @@ Disable generation notice at the beginning of the file.
 <td>
 
 ```ts
-false;
+false
 ```
 
 </td>
 <td>
 
-Dissallow overwriting the file.
+Disallow overwriting the file.
 
 </td>
 </tr>

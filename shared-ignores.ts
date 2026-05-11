@@ -1,5 +1,6 @@
 export default [
 	'**/website/build',
+	'**/website/docs/api',
 	'**/website/.docusaurus',
 	'**/examples/**/modules/baeta-*',
 	'**/examples/**/modules/index.ts',

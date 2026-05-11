@@ -37,7 +37,7 @@ Additional fields to add to the connection type
 **Example**
 
 ```ts
-connectionFields: ["totalCount: Int!"];
+connectionFields: ["totalCount: Int!"]
 ```
 
 </td>
@@ -56,7 +56,7 @@ connectionFields: ["totalCount: Int!"];
 <td>
 
 ```ts
-"ID!";
+"ID!"
 ```
 
 </td>
@@ -89,7 +89,7 @@ Additional fields to add to the edge type
 **Example**
 
 ```ts
-edgeFields: ["hasPhotos: Boolean!"];
+edgeFields: ["hasPhotos: Boolean!"]
 ```
 
 </td>

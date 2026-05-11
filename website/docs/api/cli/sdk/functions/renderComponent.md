@@ -14,7 +14,7 @@
 <tr>
 <td>
 
-`P` _extends_ `object`
+`P` *extends* `object`
 
 </td>
 </tr>

@@ -31,7 +31,7 @@
 <td>
 
 ```ts
-100_000;
+100_000
 ```
 
 </td>
@@ -60,7 +60,7 @@ Maximum number of keys in a single command. If the number of keys exceeds this l
 <td>
 
 ```ts
-100_000;
+100_000
 ```
 
 </td>
@@ -118,7 +118,7 @@ Maximum total size of commands in a single pipeline batch. If the batch exceeds 
 <td>
 
 ```ts
-"baeta";
+"baeta"
 ```
 
 </td>
@@ -147,7 +147,7 @@ Optional namespace to prefix all cache keys
 <td>
 
 ```ts
-"default";
+"default"
 ```
 
 </td>

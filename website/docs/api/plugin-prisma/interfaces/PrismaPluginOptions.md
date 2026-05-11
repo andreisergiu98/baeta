@@ -38,7 +38,7 @@ Used to avoid unnecessary regeneration
 **Example**
 
 ```ts
-"node_modules/@prisma/client/schema.prisma";
+'node_modules/@prisma/client/schema.prisma'
 ```
 
 </td>
@@ -66,7 +66,7 @@ Path to the Prisma schema file
 **Example**
 
 ```ts
-"prisma/schema.prisma";
+'prisma/schema.prisma'
 ```
 
 </td>
@@ -85,7 +85,7 @@ Path to the Prisma schema file
 <td>
 
 ```ts
-true;
+true
 ```
 
 </td>
@@ -109,7 +109,7 @@ Whether to generate the Prisma client
 <td>
 
 ```ts
-"prisma generate";
+'prisma generate'
 ```
 
 </td>

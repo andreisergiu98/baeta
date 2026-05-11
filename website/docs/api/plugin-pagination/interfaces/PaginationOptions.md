@@ -15,7 +15,7 @@ Configuration options for the pagination plugin
 <tr>
 <td>
 
-`Keys` _extends_ `string` \| `number` \| `symbol`
+`Keys` *extends* `string` \| `number` \| `symbol`
 
 </td>
 <td>
@@ -92,7 +92,7 @@ Map of type names to their pagination configuration.
 <td>
 
 ```ts
-"baeta-pagination";
+'baeta-pagination'
 ```
 
 </td>
@@ -116,7 +116,7 @@ Custom name for the pagination module
 <td>
 
 ```ts
-true;
+true
 ```
 
 </td>
@@ -149,7 +149,7 @@ Additional fields to add to the PageInfo type
 **Example**
 
 ```ts
-["hasMorePages: Boolean!"];
+["hasMorePages: Boolean!"]
 ```
 
 </td>

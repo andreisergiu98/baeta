@@ -194,7 +194,7 @@
 
 `DurableObject.alarm`
 
----
+***
 
 ### deleteItems()
 
@@ -229,7 +229,7 @@
 
 `void`
 
----
+***
 
 ### deleteItemsWithDiff()
 
@@ -264,7 +264,7 @@
 
 (`string` \| `null`)[]
 
----
+***
 
 ### deleteQueries()
 
@@ -299,7 +299,7 @@
 
 `void`
 
----
+***
 
 ### fetch()
 
@@ -338,7 +338,7 @@
 
 `DurableObject.fetch`
 
----
+***
 
 ### getPartialItems()
 
@@ -373,7 +373,7 @@
 
 (`string` \| `null`)[]
 
----
+***
 
 ### getQuery()
 
@@ -408,11 +408,11 @@
 
 `string` \| `null`
 
----
+***
 
 ### saveItems()
 
-> **saveItems**(`items`, `expiresAt`): `Promise`\<`void`\>
+> **saveItems**(`items`, `expiresAt`, `disableOverwrite`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -448,6 +448,18 @@
 
 </td>
 </tr>
+<tr>
+<td>
+
+`disableOverwrite`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -455,7 +467,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### saveItemsWithDiff()
 
@@ -502,7 +514,7 @@
 
 `Promise`\<(`string` \| `null`)[]\>
 
----
+***
 
 ### saveQuery()
 
@@ -573,7 +585,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### connect()?
 
@@ -612,7 +624,7 @@
 
 `DurableObject.connect`
 
----
+***
 
 ### webSocketClose()?
 
@@ -687,7 +699,7 @@
 
 `DurableObject.webSocketClose`
 
----
+***
 
 ### webSocketError()?
 
@@ -738,7 +750,7 @@
 
 `DurableObject.webSocketError`
 
----
+***
 
 ### webSocketMessage()?
 

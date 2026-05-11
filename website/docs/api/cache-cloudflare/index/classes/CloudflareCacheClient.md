@@ -74,7 +74,7 @@
 </td>
 <td>
 
-`ActionClientMap`\<_typeof_ `actions`\>
+`ActionClientMap`\<*typeof* `actions`\>
 
 </td>
 <td>
@@ -142,7 +142,7 @@
 
 [`CacheClient`](../../../cache/index/classes/CacheClient.md).[`deleteItems`](../../../cache/index/classes/CacheClient.md#deleteitems)
 
----
+***
 
 ### deleteItemsWithDiff()
 
@@ -212,7 +212,7 @@
 
 [`CacheClient`](../../../cache/index/classes/CacheClient.md).[`deleteItemsWithDiff`](../../../cache/index/classes/CacheClient.md#deleteitemswithdiff)
 
----
+***
 
 ### deleteQueries()
 
@@ -251,7 +251,7 @@
 
 [`CacheClient`](../../../cache/index/classes/CacheClient.md).[`deleteQueries`](../../../cache/index/classes/CacheClient.md#deletequeries)
 
----
+***
 
 ### getPartialItems()
 
@@ -321,7 +321,7 @@
 
 [`CacheClient`](../../../cache/index/classes/CacheClient.md).[`getPartialItems`](../../../cache/index/classes/CacheClient.md#getpartialitems)
 
----
+***
 
 ### getQuery()
 
@@ -391,11 +391,11 @@
 
 [`CacheClient`](../../../cache/index/classes/CacheClient.md).[`getQuery`](../../../cache/index/classes/CacheClient.md#getquery)
 
----
+***
 
 ### saveItems()
 
-> **saveItems**\<`Item`\>(`items`, `options`): `Promise`\<`void`\>
+> **saveItems**\<`Item`\>(`items`, `options`, `saveOptions?`): `Promise`\<`void`\>
 
 #### Type Parameters
 
@@ -450,6 +450,18 @@
 
 </td>
 </tr>
+<tr>
+<td>
+
+`saveOptions`
+
+</td>
+<td>
+
+[`CacheClientSaveOptions`](../../../cache/index/interfaces/CacheClientSaveOptions.md)
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -461,7 +473,7 @@
 
 [`CacheClient`](../../../cache/index/classes/CacheClient.md).[`saveItems`](../../../cache/index/classes/CacheClient.md#saveitems)
 
----
+***
 
 ### saveItemsWithDiff()
 
@@ -531,7 +543,7 @@
 
 [`CacheClient`](../../../cache/index/classes/CacheClient.md).[`saveItemsWithDiff`](../../../cache/index/classes/CacheClient.md#saveitemswithdiff)
 
----
+***
 
 ### saveQuery()
 

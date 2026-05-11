@@ -133,14 +133,14 @@ const createUserMutation = Mutation.createUser.resolve(
 
 ## Subscription Middlewares
 
-You can attach middlewares to subscriptions. Note that middlewares currently only apply to the **subscribe phase** (not the resolve phase):
+You can attach middlewares to both phases of a subscription independently:
+
+- `$use` calls **before** `.subscribe(...)` wrap the **subscribe phase** — they run once per subscription, around the call that returns the async iterable.
+- `$use` calls **between** `.subscribe(...)` and `.resolve(...)` wrap the **resolve phase** — they run once per published event, around the resolver that maps the payload to the response.
 
 ```typescript
 const userUpdatedSubscription = Subscription.userUpdated
-  .$use((next) => {
-    console.log("Before subscribe");
-    return next();
-  })
+  // Subscribe-phase middleware — runs once when the client connects
   .$use(async (next) => {
     console.log("Subscribing to user updates");
     const sub = await next();
@@ -150,10 +150,18 @@ const userUpdatedSubscription = Subscription.userUpdated
   .subscribe(({ ctx }) => {
     return ctx.pubsub.subscribe("user-updated");
   })
+  // Resolve-phase middleware — runs once per published event
+  .$use(async (next) => {
+    const result = await next();
+    console.log("Delivering update:", result);
+    return result;
+  })
   .resolve(({ source }) => {
     return source;
   });
 ```
+
+App-plugin helpers like `auth` work on both phases — see the [authorization guide](../advanced/authorization#subscription-rules) for an example.
 
 ## Production Setup
 

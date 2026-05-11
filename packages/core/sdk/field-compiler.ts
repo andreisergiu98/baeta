@@ -1,31 +1,36 @@
 import type { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver } from '../lib/resolver.ts';
+import type { PluginId } from './app-plugin.ts';
 import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 
 export interface FieldCompilerOptions<Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	store: Map<symbol, unknown>;
+	metadata: Map<symbol, unknown>;
 	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
+	requiredPluginIds: Set<PluginId>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
 export class FieldCompiler<Result, Source, Context, Args, Info> {
+	readonly kind = 'Field';
 	readonly #type: string;
 	readonly #field: string;
-	readonly #store: Map<symbol, unknown>;
+	readonly #metadata: Map<symbol, unknown>;
 	readonly #middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
-	readonly #initialMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
+	readonly #topLevelMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
+	readonly #requiredPluginIds: ReadonlySet<PluginId>;
 
 	constructor(options: FieldCompilerOptions<Result, Source, Context, Args, Info>) {
 		this.#type = options.type;
 		this.#field = options.field;
-		this.#store = new Map(options.store);
-		this.#middlewares = [...options.middlewares];
-		this.#initialMiddlewares = [];
+		this.#metadata = options.metadata;
+		this.#middlewares = options.middlewares;
+		this.#topLevelMiddlewares = [];
 		this.#resolver = options.resolver;
+		this.#requiredPluginIds = options.requiredPluginIds;
 	}
 
 	get type() {
@@ -40,33 +45,34 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 		this.#middlewares.push(middleware);
 	}
 
-	addInitialMiddleware(middleware: Middleware<Result, Source, Context, Args, Info>) {
-		this.#initialMiddlewares.push(middleware);
+	addTopLevelMiddleware(middleware: Middleware<Result, Source, Context, Args, Info>) {
+		this.#topLevelMiddlewares.push(middleware);
 	}
 
-	useStore<T>(key: symbol) {
-		const get = () => this.#store.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#store.set(key, value);
+	useMetadata<T>(key: symbol) {
+		const get = () => this.#metadata.get(key) as T | undefined;
+		const set = (value: Readonly<T>) => this.#metadata.set(key, value);
 		return { get, set };
 	}
 
-	build(
-		typeMiddlewares: Middleware<unknown, Source, Context, unknown, Info>[],
-	): GraphQLFieldResolver<Source, Context, Args, Result | PromiseLike<Result>> {
+	build(typeMiddlewares: Middleware<unknown, Source, Context, unknown, Info>[]) {
 		const allMiddlewares = concatMiddlewares(
-			this.#initialMiddlewares,
+			this.#topLevelMiddlewares,
 			typeMiddlewares as Middleware<Result, Source, Context, Args, Info>[],
 			this.#middlewares,
 		);
 		const resolver = composeMiddlewares(allMiddlewares, this.#resolver);
-		const resolverAdapter = (
-			source: Source,
-			args: Args,
-			ctx: Context,
-			info: GraphQLResolveInfo,
-		) => {
+		const resolverAdapter: GraphQLFieldResolver<
+			Source,
+			Context,
+			Args,
+			Result | PromiseLike<Result>
+		> = (source: Source, args: Args, ctx: Context, info: GraphQLResolveInfo) => {
 			return resolver({ source, args, ctx, info: info as Info });
 		};
-		return resolverAdapter;
+		return {
+			resolver: resolverAdapter,
+			requiredPluginIds: this.#requiredPluginIds,
+		};
 	}
 }

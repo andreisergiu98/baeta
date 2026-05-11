@@ -1,3 +1,3 @@
 # PluginType
 
-> **PluginType** = _typeof_ [`PluginType`](../variables/PluginType.md)\[keyof _typeof_ [`PluginType`](../variables/PluginType.md)\]
+> **PluginType** = *typeof* [`PluginType`](../variables/PluginType.md)\[keyof *typeof* [`PluginType`](../variables/PluginType.md)\]

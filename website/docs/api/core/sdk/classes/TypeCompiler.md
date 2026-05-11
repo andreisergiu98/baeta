@@ -49,7 +49,7 @@
 <tr>
 <td>
 
-`FieldsResolvers` _extends_ [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsResolvers` *extends* [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>
@@ -96,19 +96,78 @@
 
 `TypeCompiler`\<`Source`, `Context`, `Info`, `FieldsResolvers`\>
 
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Modifier</th>
+<th>Type</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="kind"></a> `kind`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`"Type"`
+
+</td>
+<td>
+
+`'Type'`
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="requiredpluginids"></a> `requiredPluginIds`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Accessors
 
 ### fields
 
 #### Get Signature
 
-> **get** **fields**(): readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Context`, `unknown`, `Info`, `Source`\>)[]
+> **get** **fields**(): readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Source`, `Context`, `unknown`, `Info`\>)[]
 
 ##### Returns
 
-readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Context`, `unknown`, `Info`, `Source`\>)[]
+readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Source`, `Context`, `unknown`, `Info`\>)[]
 
----
+***
 
 ### type
 
@@ -155,11 +214,11 @@ readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `
 
 `void`
 
----
+***
 
 ### build()
 
-> **build**(`moduleMiddlewares`): `IResolvers`
+> **build**(`moduleMiddlewares`): `object`
 
 #### Parameters
 
@@ -188,13 +247,59 @@ readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `
 
 #### Returns
 
+`object`
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`requiredPluginIds`
+
+</td>
+<td>
+
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
+
+</td>
+<td>
+
+`allRequiredPluginIds`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`resolvers`
+
+</td>
+<td>
+
 `IResolvers`
 
----
+</td>
+<td>
 
-### useStore()
+&hyphen;
 
-> **useStore**\<`T`\>(`key`): `object`
+</td>
+</tr>
+</tbody>
+</table>
+
+***
+
+### useMetadata()
+
+> **useMetadata**\<`T`\>(`key`): `object`
 
 #### Type Parameters
 

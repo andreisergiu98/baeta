@@ -16,7 +16,7 @@
 <tr>
 <td>
 
-`Item` _extends_ `RefCompatibleItem`
+`Item` *extends* [`RefCompatibleItem`](../type-aliases/RefCompatibleItem.md)
 
 </td>
 </tr>

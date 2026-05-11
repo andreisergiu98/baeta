@@ -82,6 +82,43 @@
 
 `FieldCompiler`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Modifier</th>
+<th>Type</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="kind"></a> `kind`
+
+</td>
+<td>
+
+`readonly`
+
+</td>
+<td>
+
+`"Field"`
+
+</td>
+<td>
+
+`'Field'`
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Accessors
 
 ### field
@@ -94,7 +131,7 @@
 
 `string`
 
----
+***
 
 ### type
 
@@ -107,41 +144,6 @@
 `string`
 
 ## Methods
-
-### addInitialMiddleware()
-
-> **addInitialMiddleware**(`middleware`): `void`
-
-#### Parameters
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`middleware`
-
-</td>
-<td>
-
-[`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Returns
-
-`void`
-
----
 
 ### addMiddleware()
 
@@ -176,11 +178,46 @@
 
 `void`
 
----
+***
+
+### addTopLevelMiddleware()
+
+> **addTopLevelMiddleware**(`middleware`): `void`
+
+#### Parameters
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`middleware`
+
+</td>
+<td>
+
+[`Middleware`](../../index/type-aliases/Middleware.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Returns
+
+`void`
+
+***
 
 ### build()
 
-> **build**(`typeMiddlewares`): `GraphQLFieldResolver`\<`Source`, `Context`, `Args`, `Result` \| `PromiseLike`\<`Result`\>\>
+> **build**(`typeMiddlewares`): `object`
 
 #### Parameters
 
@@ -209,13 +246,59 @@
 
 #### Returns
 
+`object`
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`requiredPluginIds`
+
+</td>
+<td>
+
+`ReadonlySet`\<[`PluginId`](../type-aliases/PluginId.md)\>
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+</tr>
+<tr>
+<td>
+
+`resolver`
+
+</td>
+<td>
+
 `GraphQLFieldResolver`\<`Source`, `Context`, `Args`, `Result` \| `PromiseLike`\<`Result`\>\>
 
----
+</td>
+<td>
 
-### useStore()
+`resolverAdapter`
 
-> **useStore**\<`T`\>(`key`): `object`
+</td>
+</tr>
+</tbody>
+</table>
+
+***
+
+### useMetadata()
+
+> **useMetadata**\<`T`\>(`key`): `object`
 
 #### Type Parameters
 

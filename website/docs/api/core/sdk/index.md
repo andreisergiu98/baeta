@@ -2,7 +2,6 @@
 
 ## Classes
 
-- [Extension](classes/Extension.md)
 - [FieldBuilder](classes/FieldBuilder.md)
 - [FieldCompiler](classes/FieldCompiler.md)
 - [ModuleBuilder](classes/ModuleBuilder.md)
@@ -13,6 +12,7 @@
 
 ## Interfaces
 
+- [AppPlugin](interfaces/AppPlugin.md)
 - [FieldBuilderOptions](interfaces/FieldBuilderOptions.md)
 - [FieldCompilerOptions](interfaces/FieldCompilerOptions.md)
 - [ModuleBuilderOptions](interfaces/ModuleBuilderOptions.md)
@@ -23,32 +23,41 @@
 
 ## Type Aliases
 
-- [ExtensionFactory](type-aliases/ExtensionFactory.md)
 - [Field](type-aliases/Field.md)
 - [FieldHelpers](type-aliases/FieldHelpers.md)
 - [FieldMethods](type-aliases/FieldMethods.md)
 - [FieldsBuildersMap](type-aliases/FieldsBuildersMap.md)
 - [FieldsResolversMap](type-aliases/FieldsResolversMap.md)
+- [FieldUseInput](type-aliases/FieldUseInput.md)
+- [FieldUsePlugin](type-aliases/FieldUsePlugin.md)
 - [FieldWithMake](type-aliases/FieldWithMake.md)
 - [ModuleCompilerFactory](type-aliases/ModuleCompilerFactory.md)
 - [ModuleMethods](type-aliases/ModuleMethods.md)
+- [ModuleUseInput](type-aliases/ModuleUseInput.md)
+- [ModuleUsePlugin](type-aliases/ModuleUsePlugin.md)
+- [Or](type-aliases/Or.md)
+- [PluginId](type-aliases/PluginId.md)
 - [SchemaTransformer](type-aliases/SchemaTransformer.md)
 - [Subscription](type-aliases/Subscription.md)
 - [SubscriptionField](type-aliases/SubscriptionField.md)
+- [SubscriptionFieldUseInput](type-aliases/SubscriptionFieldUseInput.md)
 - [SubscriptionFieldWithMake](type-aliases/SubscriptionFieldWithMake.md)
-- [SubscriptionHelpers](type-aliases/SubscriptionHelpers.md)
 - [SubscriptionMethods](type-aliases/SubscriptionMethods.md)
-- [SubscriptionWrapper](type-aliases/SubscriptionWrapper.md)
+- [SubscriptionResolveMethods](type-aliases/SubscriptionResolveMethods.md)
+- [SubscriptionUsePlugin](type-aliases/SubscriptionUsePlugin.md)
 - [TypeCompilerFactory](type-aliases/TypeCompilerFactory.md)
 - [TypeMethods](type-aliases/TypeMethods.md)
 - [TypesBuildersMap](type-aliases/TypesBuildersMap.md)
 - [TypesResolversMap](type-aliases/TypesResolversMap.md)
+- [TypeUseInput](type-aliases/TypeUseInput.md)
+- [TypeUsePlugin](type-aliases/TypeUsePlugin.md)
 
 ## Functions
 
 - [addValidationToSchema](functions/addValidationToSchema.md)
 - [composeMiddlewares](functions/composeMiddlewares.md)
 - [concatMiddlewares](functions/concatMiddlewares.md)
+- [createAppPluginId](functions/createAppPluginId.md)
 - [createFieldBuilder](functions/createFieldBuilder.md)
 - [createModuleBuilder](functions/createModuleBuilder.md)
 - [createObjectLens](functions/createObjectLens.md)
@@ -57,6 +66,5 @@
 - [isPromise](functions/isPromise.md)
 - [makeField](functions/makeField.md)
 - [mapMaybePromise](functions/mapMaybePromise.md)
-- [mergeExtensions](functions/mergeExtensions.md)
 - [nameFunction](functions/nameFunction.md)
 - [transformSchema](functions/transformSchema.md)

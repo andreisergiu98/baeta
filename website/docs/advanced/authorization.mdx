@@ -1,0 +1,295 @@
+---
+sidebar_position: 10
+---
+
+# Authorization
+
+Baeta provides a flexible and type-safe authorization system that lets you define granular access controls at the operation, type, and field level. With support for default scopes, dynamic rules, and a permission granting system, you can implement complex authorization patterns while keeping resolvers clean.
+
+## Key Features
+
+- Type-safe authorization rules
+- Default scopes with override capability
+- Pre and post-resolution authorization
+- Granular field-level permissions
+- Permission grants between resolvers
+- Scope caching for performance
+- Async/sync authorization support
+- Subscription-specific controls
+- Type-wide authorization rules
+
+## Installation
+
+import { PackageManagerAdd } from "@site/components/package-manager";
+
+<PackageManagerAdd package="@baeta/auth" />
+
+## Basic Setup
+
+### 1. Define authorization scopes
+
+`createAuth` returns three things:
+
+- `auth` — a helper passed to `$use` to apply pre-resolution scope rules.
+- `authAfter` — a helper passed to `$use` to apply post-resolution scope rules.
+- `authAppPlugin` — the app plugin you register on `createApplication`.
+
+```typescript
+// src/lib/auth.ts
+import { createAuth } from "@baeta/auth";
+import { UnauthenticatedError } from "@baeta/errors";
+import type { Context } from "../types/context.ts";
+
+export interface Scopes {
+  isPublic: boolean;
+  isLoggedIn: boolean;
+  hasAccess: "guest" | "user" | "moderator" | "admin";
+}
+
+export type Grants = "readUserPhotos";
+
+export const { auth, authAfter, authAppPlugin } = createAuth<Context, Scopes, Grants>(
+  async (ctx) => {
+    const accessList = new Set(["guest", "user"]);
+    return {
+      isPublic: true,
+      isLoggedIn: () => {
+        // Scope loaders are resolved lazily, only when a rule asks for them
+        if (!ctx.userId) {
+          throw new UnauthenticatedError();
+        }
+        return true;
+      },
+      hasAccess: (access: string) => {
+        // Scope loaders are also required for non-boolean scopes
+        return accessList.has(access);
+      },
+    };
+  },
+);
+```
+
+### 2. Register the app plugin
+
+```typescript
+// src/app.ts
+import { createApplication } from "@baeta/core";
+import { authAppPlugin } from "./lib/auth.ts";
+import modules from "./modules/index.ts";
+
+const baeta = createApplication({
+  modules,
+  plugins: [authAppPlugin],
+});
+```
+
+:::note
+The `authAppPlugin` must be passed to `createApplication`. If a module uses `auth(...)` or `authAfter(...)` but the plugin isn't registered, Baeta will throw at schema build time.
+:::
+
+:::tip
+For most APIs, register `authAppPlugin` before any plugin that performs per-field work (complexity, caching, logging). Middlewares attached by earlier plugins wrap those attached by later plugins, so auth-first means unauthenticated requests bounce immediately without exposing internals. See [App Plugins](./app-plugins#plugin-ordering) for the contract and the auth-vs-complexity tradeoff.
+:::
+
+## Authorization Examples
+
+### Basic Static Rules
+
+Auth helpers are chained onto fields with `$use`:
+
+```typescript
+import { auth } from "../../lib/auth.ts";
+
+// Public or authenticated access
+const userQuery = Query.user
+  .$use(
+    auth({
+      $or: {
+        isPublic: true,
+        isLoggedIn: true,
+      },
+    }),
+  )
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
+  });
+
+// Admin-only access
+const createUserMutation = Mutation.createUser
+  .$use(
+    auth({
+      hasAccess: "admin",
+    }),
+  )
+  .resolve(({ args }) => {
+    return db.user.create({ data: args.data });
+  });
+```
+
+### Post-Resolution Authorization
+
+Use `authAfter` to check permission after the resolver runs. It's useful when the resource itself is needed to decide access — avoiding an extra database query:
+
+```typescript
+const userQuery = Query.user
+  .$use(
+    authAfter((params, result) => {
+      if (result && result.id === params.ctx.userId) {
+        return true; // Allow access if user is requesting their own data
+      }
+      return { hasAccess: "admin" };
+    }),
+  )
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
+  });
+
+// Compared to pre-resolution auth, which might require an extra query
+const userQuery = Query.user
+  .$use(
+    auth(async (params) => {
+      const user = await db.user.findFirst({
+        where: { id: params.args.id },
+      });
+      if (user && user.id === params.ctx.userId) return {};
+      return { hasAccess: "admin" };
+    }),
+  )
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
+  });
+```
+
+### Subscription Rules
+
+`auth` can be chained on a subscription before `subscribe`/`resolve` — it works on both legs:
+
+```typescript
+const userCreatedSubscription = Subscription.userCreated
+  // Protects the subscribe phase
+  .$use(auth({ isLoggedIn: true }))
+  .subscribe(({ ctx }) => {
+    return ctx.pubsub.subscribe("user-created");
+  })
+  // Protects the resolve phase
+  .$use(auth({ isLoggedIn: true }))
+  .resolve(({ source }) => {
+    return source;
+  });
+```
+
+### Type-wide Rules
+
+Type-wide rules are chained before `$fields` and apply to all fields of a type:
+
+```typescript
+// Apply auth to all Query fields
+const queryResolver = Query
+  .$use(auth({ isLoggedIn: true }))
+  .$fields({
+    user: userQuery,
+    users: usersQuery,
+  });
+
+// Apply auth to all User fields
+const userResolver = User
+  .$use(auth({ isLoggedIn: true }))
+  .$fields({
+    id: User.id.key("id"),
+    email: User.email.key("email"),
+  });
+```
+
+### Grants System
+
+```typescript
+// Grant permission when resolving user
+const userQuery = Query.user
+  .$use(
+    auth(
+      {
+        $or: { isPublic: true, isLoggedIn: true },
+      },
+      {
+        grants: ["readUserPhotos"],
+      },
+    ),
+  )
+  .resolve(({ args }) => {
+    return db.user.findFirst({ where: args.where });
+  });
+
+// Use granted permission on related field
+const userPhotosResolver = User.photos
+  .$use(
+    auth({
+      $granted: "readUserPhotos",
+    }),
+  )
+  .resolve(({ source }) => {
+    return db.userPhoto.findMany({ where: { userId: source.id } });
+  });
+```
+
+### Authorization Operators
+
+- `$or`: Any condition must be true
+- `$and`: All conditions must be true
+- `$chain`: Sequential evaluation
+- `$race`: Parallel evaluation
+- `$granted`: Check granted permissions
+
+## Default Scopes
+
+Default scopes provide base authorization rules that apply to all operations. They are defined when creating auth and are combined with local rules using an AND operator.
+
+### Defining Default Scopes
+
+```typescript
+export const { auth, authAfter, authAppPlugin } = createAuth<Context, Scopes, Grants>(
+  async (ctx) => {
+    // Define user scope values as explained above
+    return {...};
+  },
+  {
+    // All queries, mutations, and subscriptions will require the user to be logged in.
+    // You will still need to pay attention to relationships and nested queries.
+    defaultScopes: {
+      Query: {
+        isLoggedIn: true,
+      },
+      Mutation: {
+        isLoggedIn: true,
+      },
+      Subscription: {
+        isLoggedIn: true,
+      },
+    },
+  },
+);
+```
+
+When default scopes are configured, the `authAppPlugin` automatically attaches a fallback middleware to every operation field that does not already have an `auth()`/`authAfter()` rule, so unprotected operations cannot accidentally slip through.
+
+### Skipping Default Scopes
+
+You can bypass default scopes for specific operations using the `skipDefaults` option:
+
+```typescript
+const publicContentQuery = Query.publicContent
+  .$use(
+    auth(
+      {
+        isPublic: true,
+      },
+      {
+        skipDefaults: true,
+      },
+    ),
+  )
+  .resolve(() => {
+    return getPublicContent();
+  });
+```
+
+For detailed examples, see the [Baeta authorization example](https://github.com/andreisergiu98/baeta/tree/main/examples/auth).

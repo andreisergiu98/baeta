@@ -1,3 +1,3 @@
 # PackageManager
 
-> **PackageManager** = keyof _typeof_ [`lockfileNames`](../variables/lockfileNames.md)
+> **PackageManager** = keyof *typeof* [`lockfileNames`](../variables/lockfileNames.md)

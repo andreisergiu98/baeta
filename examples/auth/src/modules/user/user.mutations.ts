@@ -1,4 +1,5 @@
 import { ForbiddenError } from '@baeta/errors';
+import { auth } from '../../lib/auth.ts';
 import { db } from '../../lib/db/prisma.ts';
 import { UserModule } from './typedef.ts';
 
@@ -6,9 +7,11 @@ const { Mutation } = UserModule;
 
 const createUserMutation = Mutation.createUser
 	// Only admins can create users.
-	.$auth({
-		hasAccess: 'admin',
-	})
+	.$use(
+		auth({
+			hasAccess: 'admin',
+		}),
+	)
 	.resolve(async ({ args, ctx }) => {
 		const user = await db.user.create({
 			data: args.data,
@@ -21,27 +24,29 @@ const createUserMutation = Mutation.createUser
 
 const updateUserMutation = Mutation.updateUser
 	// We allow the user to update its own profile, but only admins can update other users.
-	.$auth(async ({ args, ctx }) => {
-		const user = await db.user.findFirst({
-			where: {
-				id: args.where.id ?? undefined,
-				email: args.where.email ?? undefined,
-			},
-		});
+	.$use(
+		auth(async ({ args, ctx }) => {
+			const user = await db.user.findFirst({
+				where: {
+					id: args.where.id ?? undefined,
+					email: args.where.email ?? undefined,
+				},
+			});
 
-		if (user && user.id === ctx.userId) {
-			return true;
-		}
+			if (user && user.id === ctx.userId) {
+				return true;
+			}
 
-		if (!user) {
-			// We can also throw any time.
-			throw new ForbiddenError();
-		}
+			if (!user) {
+				// We can also throw any time.
+				throw new ForbiddenError();
+			}
 
-		return {
-			hasAccess: 'admin',
-		};
-	})
+			return {
+				hasAccess: 'admin',
+			};
+		}),
+	)
 	.$use(async (next, { ctx }) => {
 		const user = await next();
 		if (user) {

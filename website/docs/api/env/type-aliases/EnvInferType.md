@@ -1,6 +1,6 @@
 # EnvInferType\<T\>
 
-> **EnvInferType**\<`T`\> = `T` _extends_ `"string"` ? `string` : `T` _extends_ `"number"` ? `number` : `boolean`
+> **EnvInferType**\<`T`\> = `T` *extends* `"string"` ? `string` : `T` *extends* `"number"` ? `number` : `boolean`
 
 Maps environment variable types to their TypeScript equivalents.
 
@@ -17,7 +17,7 @@ Maps environment variable types to their TypeScript equivalents.
 <tr>
 <td>
 
-`T` _extends_ [`EnvTypes`](EnvTypes.md)
+`T` *extends* [`EnvTypes`](EnvTypes.md)
 
 </td>
 <td>

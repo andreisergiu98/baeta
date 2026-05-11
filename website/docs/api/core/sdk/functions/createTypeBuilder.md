@@ -1,6 +1,6 @@
 # createTypeBuilder()
 
-> **createTypeBuilder**\<`Source`, `Context`, `Info`, `FieldBuilders`, `FieldResolvers`\>(`type`, `builders`, `extensions`): [`TypeMethods`](../type-aliases/TypeMethods.md)\<`Source`, `Context`, `Info`, `FieldBuilders`, `FieldResolvers`\>
+> **createTypeBuilder**\<`Source`, `Context`, `Info`, `FieldBuilders`, `FieldResolvers`\>(`type`, `builders`): [`TypeMethods`](../type-aliases/TypeMethods.md)\<`Source`, `Context`, `Info`, `FieldBuilders`, `FieldResolvers`\>
 
 ## Type Parameters
 
@@ -35,14 +35,14 @@
 <tr>
 <td>
 
-`FieldBuilders` _extends_ [`FieldsBuildersMap`](../type-aliases/FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
+`FieldBuilders` *extends* [`FieldsBuildersMap`](../type-aliases/FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-`FieldResolvers` _extends_ [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
+`FieldResolvers` *extends* [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 </tr>
@@ -80,18 +80,6 @@
 <td>
 
 `FieldBuilders`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-[`Extension`](../classes/Extension.md)\<`unknown`\>[]
 
 </td>
 </tr>

@@ -1,4 +1,4 @@
-# SubscriptionBuilderOptions\<Source, Context, Args, Info\>
+# SubscriptionBuilderOptions\<Result, Source, Context, Args, Info\>
 
 ## Type Parameters
 
@@ -9,6 +9,13 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+`Result`
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -53,18 +60,6 @@
 <tr>
 <td>
 
-<a id="extensions"></a> `extensions`
-
-</td>
-<td>
-
-readonly [`Extension`](../classes/Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="field"></a> `field`
 
 </td>
@@ -77,24 +72,36 @@ readonly [`Extension`](../classes/Extension.md)\<`unknown`\>[]
 <tr>
 <td>
 
-<a id="middlewares"></a> `middlewares`
+<a id="metadata"></a> `metadata`
 
 </td>
 <td>
 
-[`Middleware`](../../index/type-aliases/Middleware.md)\<[`SubscriptionWrapper`](../type-aliases/SubscriptionWrapper.md), `Source`, `Context`, `Args`, `Info`\>[]
+`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
 
 </td>
 </tr>
 <tr>
 <td>
 
-<a id="store"></a> `store`
+<a id="middlewares"></a> `middlewares`
 
 </td>
 <td>
 
-`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
+[`Middleware`](../../index/type-aliases/Middleware.md)\<[`Subscription`](../type-aliases/Subscription.md)\<`unknown`\>, `Source`, `Context`, `Args`, `Info`\>[]
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="requiredpluginids"></a> `requiredPluginIds`
+
+</td>
+<td>
+
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
 
 </td>
 </tr>

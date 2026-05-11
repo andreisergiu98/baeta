@@ -28,7 +28,7 @@
 <tr>
 <td>
 
-`TypesResolvers` _extends_ [`TypesResolversMap`](TypesResolversMap.md)\<`Context`, `Info`\>
+`TypesResolvers` *extends* [`TypesResolversMap`](TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 </tr>

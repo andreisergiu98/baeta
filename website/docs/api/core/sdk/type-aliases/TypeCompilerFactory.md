@@ -51,7 +51,7 @@
 <tr>
 <td>
 
-`FieldsResolvers` _extends_ [`FieldsResolversMap`](FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsResolvers` *extends* [`FieldsResolversMap`](FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>

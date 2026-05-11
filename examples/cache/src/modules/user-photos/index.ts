@@ -4,9 +4,11 @@ import { userPhotoCache } from './user-photos.cache.ts';
 const { User, UserPhoto } = UserPhotosModule;
 
 const userPhotosResolver = User.photos
-	.$resolveCache(userPhotoCache.queries.findUserPhotos, ({ source }) => ({
-		userId: source.id,
-	}))
+	.map(({ source }) =>
+		userPhotoCache.queries.findUserPhotos({
+			userId: source.id,
+		}),
+	)
 	.withDefault([]);
 
 export default UserPhotosModule.$schema({

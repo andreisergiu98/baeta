@@ -45,7 +45,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### deleteSubscription()
 
@@ -80,7 +80,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### deleteSubscriptions()
 
@@ -115,7 +115,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### getSubscriptions()
 

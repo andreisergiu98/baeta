@@ -14,7 +14,7 @@
 <tr>
 <td>
 
-`Map` _extends_ `Record`\<`string`, `any`\>
+`Map` *extends* `Record`\<`string`, `any`\>
 
 </td>
 </tr>
@@ -33,14 +33,14 @@
 <tr>
 <td>
 
-`C` _extends_ keyof `Map`
+`C` *extends* keyof `Map`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`P` _extends_ `Map`\[`C`\]
+`P` *extends* `Map`\[`C`\]
 
 </td>
 </tr>

@@ -12,21 +12,21 @@
 <tr>
 <td>
 
-`T` _extends_ [`EnvTypes`](../type-aliases/EnvTypes.md)
+`T` *extends* [`EnvTypes`](../type-aliases/EnvTypes.md)
 
 </td>
 </tr>
 <tr>
 <td>
 
-`R` _extends_ `boolean` \| `undefined`
+`R` *extends* `boolean` \| `undefined`
 
 </td>
 </tr>
 <tr>
 <td>
 
-`D` _extends_ [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> \| `undefined`
+`D` *extends* [`EnvInferType`](../type-aliases/EnvInferType.md)\<`T`\> \| `undefined`
 
 </td>
 </tr>

@@ -1,6 +1,6 @@
 # createFieldBuilder()
 
-> **createFieldBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`type`, `field`, `extensions`): [`FieldMethods`](../type-aliases/FieldMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+> **createFieldBuilder**\<`Result`, `Source`, `Context`, `Args`, `Info`\>(`type`, `field`): [`FieldMethods`](../type-aliases/FieldMethods.md)\<`Result`, `Source`, `Context`, `Args`, `Info`\>
 
 ## Type Parameters
 
@@ -80,18 +80,6 @@
 <td>
 
 `string`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`extensions`
-
-</td>
-<td>
-
-[`Extension`](../classes/Extension.md)\<`unknown`\>[]
 
 </td>
 </tr>

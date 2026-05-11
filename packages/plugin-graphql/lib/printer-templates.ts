@@ -19,10 +19,3 @@ export type Ctx = {};
 export type Info = GraphQLResolveInfo;
 `;
 }
-
-export function printExtensionsTemplate() {
-	return `import { createExtensions } from '@baeta/core';
-
-export default createExtensions({});
-`;
-}

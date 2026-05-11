@@ -3,6 +3,7 @@
   "tag": "next",
   "initialVersions": {
     "@baeta/cli": "1.0.11",
+    "@baeta/auth": "1.0.11",
     "@baeta/core": "1.0.11",
     "create-baeta": "1.0.11",
     "@baeta/template-apollo": "0.0.0",
@@ -10,9 +11,7 @@
     "@baeta/directives": "1.0.11",
     "@baeta/env": "1.0.9",
     "@baeta/errors": "1.0.9",
-    "@baeta/extension-auth": "1.0.11",
-    "@baeta/extension-cache": "1.0.11",
-    "@baeta/extension-complexity": "1.0.11",
+    "@baeta/complexity": "1.0.11",
     "@baeta/generator": "1.0.2",
     "@baeta/generator-sdk": "1.0.2",
     "@baeta/plugin": "1.0.1",

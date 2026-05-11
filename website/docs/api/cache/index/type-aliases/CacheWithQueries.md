@@ -21,7 +21,7 @@
 <tr>
 <td>
 
-`QueryDefinitions` _extends_ `QueryDefinitionMap`\<`Item`\>
+`QueryDefinitions` *extends* `QueryDefinitionMap`\<`Item`\>
 
 </td>
 </tr>
@@ -100,7 +100,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### deleteQueries()
 
@@ -110,7 +110,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### get()
 
@@ -145,7 +145,7 @@
 
 `Promise`\<`Item` \| `null`\>
 
----
+***
 
 ### getMany()
 
@@ -180,7 +180,7 @@
 
 `Promise`\<`Item`[] \| `null`\>
 
----
+***
 
 ### getPartial()
 
@@ -215,7 +215,7 @@
 
 `Promise`\<(`Item` \| `null`)[]\>
 
----
+***
 
 ### insert()
 
@@ -262,7 +262,7 @@
 
 `Promise`\<`void`\>
 
----
+***
 
 ### update()
 

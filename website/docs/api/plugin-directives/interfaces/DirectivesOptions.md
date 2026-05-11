@@ -28,7 +28,7 @@ Configuration options for the directives plugin.
 <td>
 
 ```ts
-"baeta-directives";
+'baeta-directives'
 ```
 
 </td>

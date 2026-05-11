@@ -16,7 +16,7 @@ type Query {
 }
 
 input CreateUserInput {
-	email: String! @trim @lower @validString(format: EMAIL, minLength: 5, maxLength: 128)
+	email: String! @trim @lower @validString(minLength: 5, maxLength: 128)
 	username: String! @trim @lower @validString(minLength: 4, maxLength: 32)
 	lastName: String! @trim
 	firstName: String @trim
@@ -24,7 +24,7 @@ input CreateUserInput {
 
 type Mutation {
 	createUser(
-		email: String! @trim @lower @validString(format: EMAIL, minLength: 5, maxLength: 128)
+		email: String! @trim @lower @validString(minLength: 5, maxLength: 128)
 		lastName: String!
 	): User
 }

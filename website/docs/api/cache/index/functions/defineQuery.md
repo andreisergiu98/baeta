@@ -27,7 +27,7 @@
 <tr>
 <td>
 
-`Args` _extends_ [`QueryArgs`](../type-aliases/QueryArgs.md)
+`Args` *extends* [`QueryArgs`](../type-aliases/QueryArgs.md)
 
 </td>
 <td>
@@ -39,7 +39,7 @@
 <tr>
 <td>
 
-`Indexes` _extends_ [`QueryArgsIndexes`](../type-aliases/QueryArgsIndexes.md)\<`Args`, `Indexes`\>
+`Indexes` *extends* [`QueryArgsIndexes`](../type-aliases/QueryArgsIndexes.md)\<`Args`, `Indexes`\>
 
 </td>
 <td>

@@ -4,11 +4,6 @@ import {
 	mockModuleBuilder,
 	mockSchemaForModuleBuilder,
 } from './__test__/module-mocks.ts';
-import {
-	testSetStoreLike,
-	testUseStoreLike,
-	testUseStoreMutations,
-} from './__test__/store-tests.ts';
 
 test('ModuleBuilder should be created correctly', async (t) => {
 	const moduleBuilder = mockModuleBuilder();
@@ -100,11 +95,17 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 		},
 	]);
 
-	testUseStoreLike(t, editableModule);
-	testSetStoreLike(t, editableModule);
-	testUseStoreMutations(t, editableModule, editableModule.commit().edit());
+	const metaKey = Symbol('meta');
+	editableModule.mergeMeta(new Map([[metaKey, 'merged']]));
 
 	const editedModule = editableModule.commit().toMethods();
+	const editedCompiler = editedModule.$schema(mockSchemaForModuleBuilder(editedModule)).__make();
+	t.is(editedCompiler.useMetadata<string>(metaKey).get(), 'merged');
+
+	const isolatedKey = Symbol('isolated');
+	const otherEdit = mockModuleBuilder().edit();
+	otherEdit.mergeMeta(new Map([[isolatedKey, 'other']]));
+	t.is(editedCompiler.useMetadata<string>(isolatedKey).get(), undefined);
 
 	const result = editedModule
 		.$directive((schema) => {

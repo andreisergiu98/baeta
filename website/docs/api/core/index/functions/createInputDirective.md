@@ -95,25 +95,24 @@ A function that transforms a GraphQL schema by applying the directive
 
 ```typescript
 const trimDirective = createInputDirective<TrimArgs>({
-  name: "trim",
-  target: "scalar",
-  resolve(params) {
-    const value = params.getValue();
+	name: 'trim',
+	target: 'scalar',
+	resolve(params) {
+		const value = params.getValue();
 
-    if (typeof value !== "string") {
-      return;
-    }
+		if (typeof value !== 'string') {
+			return;
+		}
 
-    const config = params.directiveConfig;
+		const config = params.directiveConfig;
 
-    if (config.start === true && config.end !== true) {
-      return params.setValue(value.trimStart());
-    }
-    if (config.end === true && config.start !== true) {
-      return params.setValue(value.trimEnd());
-    }
+		if (config.start === true && config.end !== true) {
+			return params.setValue(value.trimStart());
+		}
+		if (config.end === true && config.start !== true) {
+			return params.setValue(value.trimEnd());
+		}
 
-    params.setValue(value.trim());
-  },
+		params.setValue(value.trim());
+	},
 });
-```

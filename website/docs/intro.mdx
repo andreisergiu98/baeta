@@ -27,11 +27,11 @@ Split large schemas into smaller modules that are easy to extend and maintain.
 Automatic type generation ensures your resolvers always match your schema.
 
 **Flexible**:
-Add only what you need — extend functionality with optional plugins and extensions like:
+Add only what you need — extend functionality with optional build-time plugins, runtime app plugins, and libraries like:
 
-- **@baeta/extension-auth**: Granular scope-based authorization
-- **@baeta/extension-cache**: Automatic caching with simple utilities for updating the cache
-- **@baeta/extension-complexity**: Query complexity analysis to protect against expensive queries
+- **@baeta/auth**: Granular scope-based authorization
+- **@baeta/complexity**: Query complexity analysis to protect against expensive queries
+- **@baeta/cache**: Type-safe caching with declarative queries and automatic reconciliation
 
 ## How it Works
 
@@ -80,17 +80,20 @@ export default Query.$fields({
 #### 3. Add authorization
 
 ```typescript
+import { auth } from "./lib/auth.ts";
 import { UserModule } from "./typedef.ts";
 
 const { Query } = UserModule;
 
 const userQuery = Query.user
-  .$auth({
-    $or: {
-      isPublic: true,
-      isLoggedIn: true,
-    },
-  })
+  .$use(
+    auth({
+      $or: {
+        isPublic: true,
+        isLoggedIn: true,
+      },
+    }),
+  )
   .resolve(async ({ args }) => {
     // ...
   });
@@ -99,11 +102,12 @@ const userQuery = Query.user
 #### 4. Add caching
 
 ```typescript
-import { defineQuery } from "@baeta/cache";
+import { createCache, defineQuery } from "@baeta/cache";
+import { redisClient } from "./lib/redis.ts";
 
 const { Query, Mutation, User } = UserModule;
 
-export const userCache = User.$createCache()
+export const userCache = createCache(redisClient, { name: "UserCache" })
   .withQueries({
     findUser: defineQuery({
       resolve: async (args: { id?: string }) => {
@@ -113,13 +117,9 @@ export const userCache = User.$createCache()
   })
   .build();
 
-const userQuery = Query.user
-  .$auth({
-    // ...
-  })
-  .$resolveCache(userCache.queries.findUser, ({ args }) => ({
-    id: args.where.id,
-  }));
+const userQuery = Query.user.map(({ args }) =>
+  userCache.queries.findUser({ id: args.where.id }),
+);
 
 const updateUserMutation = Mutation.updateUser
   .$use(async (next) => {

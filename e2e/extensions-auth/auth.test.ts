@@ -2,9 +2,10 @@ import { createApplication } from '@baeta/core';
 import { execute } from '@baeta/e2e-shared/execute';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
+import { authAppPlugin } from './src/lib/auth.ts';
 import modules from './src/modules/index.ts';
 
-const { schema } = createApplication({ modules });
+const { schema } = createApplication({ modules, plugins: [authAppPlugin] });
 
 const MovieQuery = graphql(`
 	query MovieQuery($where: MovieWhereUniqueInput!) {

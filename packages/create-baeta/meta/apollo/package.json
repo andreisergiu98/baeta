@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",
+    "@baeta/complexity": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
-    "@baeta/extension-complexity": "workspace:^",
     "graphql": "catalog:dev"
   },
   "devDependencies": {

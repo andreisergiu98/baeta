@@ -5,7 +5,6 @@
 
 import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import extensions from "../extensions.ts";
 import type {Ctx, Info} from "../types.ts";
 import type * as Types from "../../__generated__/types.ts";
 
@@ -47,11 +46,11 @@ interface BaetaModuleObjectTypeFields {
 
 export const CustomNativeDirectiveModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
   NameWithUpper: Baeta.createTypeBuilder("NameWithUpper", {
-    name: Baeta.createFieldBuilder("NameWithUpper", "name", extensions)
-  }, extensions),
+    name: Baeta.createFieldBuilder("NameWithUpper", "name")
+  }),
   Query: Baeta.createTypeBuilder("Query", {
-    testUpperDirective: Baeta.createFieldBuilder("Query", "testUpperDirective", extensions)
-  }, extensions)
+    testUpperDirective: Baeta.createFieldBuilder("Query", "testUpperDirective")
+  })
 }, {
 
-}, extensions);
+});

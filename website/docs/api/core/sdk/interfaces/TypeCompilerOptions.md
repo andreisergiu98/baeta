@@ -49,7 +49,7 @@
 <tr>
 <td>
 
-`FieldsResolvers` _extends_ [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsResolvers` *extends* [`FieldsResolversMap`](../type-aliases/FieldsResolversMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>
@@ -86,6 +86,18 @@
 <tr>
 <td>
 
+<a id="metadata"></a> `metadata`
+
+</td>
+<td>
+
+`Map`\<`symbol`, `unknown`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
 <a id="middlewares"></a> `middlewares`
 
 </td>
@@ -98,12 +110,12 @@
 <tr>
 <td>
 
-<a id="store"></a> `store`
+<a id="requiredpluginids"></a> `requiredPluginIds`
 
 </td>
 <td>
 
-`Map`\<`symbol`, `unknown`\>
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
 
 </td>
 </tr>

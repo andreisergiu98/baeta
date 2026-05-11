@@ -5,7 +5,6 @@
 
 import type { DocumentNode, GraphQLScalarType } from "graphql";
 import * as Baeta from "@baeta/core/sdk";
-import extensions from "../extensions.ts";
 import type {Ctx, Info} from "../types.ts";
 import type * as Types from "../../__generated__/types.ts";
 
@@ -29,4 +28,4 @@ export const BaetaDirectivesModule = Baeta.createModuleBuilder<Ctx, Info, BaetaM
 
 }, {
 
-}, extensions);
+});

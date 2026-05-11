@@ -50,10 +50,10 @@ export function mockModuleBuilder() {
 			Type2: mockTypeBuilder({ type: 'Type2' }).toMethods(),
 		},
 		defaultResolvers: {},
-		extensions: [],
 		transformers: [],
-		store: new Map(),
+		metadata: new Map(),
 		middlewares: [],
+		requiredPluginIds: new Set(),
 	});
 }
 
@@ -80,7 +80,7 @@ export function mockModuleCompiler(
 	const type2 = mockTypeBuilder({ type: 'Type2' }).toMethods();
 	return new ModuleCompiler<MockContext, MockInfo>({
 		name: 'module',
-		store: new Map(),
+		metadata: new Map(),
 		typesMap: {
 			...scalars,
 			Type1: type1.$fields({
@@ -103,9 +103,9 @@ export function mockModuleCompiler(
             }
         `),
 		defaultResolvers,
-		extensions: [],
 		transformers: [],
 		middlewares: [],
+		requiredPluginIds: new Set(),
 	});
 }
 

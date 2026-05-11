@@ -154,5 +154,6 @@ export async function verifyScopes<Scopes extends ScopesShape, Grants extends st
 		return await verifyAndScopes(ctx, scopes, keys, parentPath);
 	}
 
+	rule satisfies never;
 	throw new Error("Invalid logic rule! Must be one of '$chain', '$race', '$or', or '$and'.");
 }

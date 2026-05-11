@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/complexity/noBannedTypes: Allow empty for source */
+import type { GraphQLResolveInfo } from 'graphql';
 import { isPromise } from '../../utils/promise.ts';
 import type { Field } from '../field-methods.ts';
 import { SubscriptionBuilder } from '../subscription-builder.ts';
@@ -23,13 +24,13 @@ type SubscriptionResolver = {
 		source: MockSubscriptionSource,
 		args: MockArgs,
 		ctx: MockContext,
-		info: MockInfo,
+		info: GraphQLResolveInfo,
 	) => AsyncIterable<{ value: MockResult }> | PromiseLike<AsyncIterable<{ value: MockResult }>>;
 	resolve: (
 		source: { value: MockResult },
 		args: MockArgs,
 		ctx: MockContext,
-		info: MockInfo,
+		info: GraphQLResolveInfo,
 	) => MockResult | PromiseLike<MockResult>;
 };
 
@@ -44,9 +45,9 @@ export function mockSubscriptionFieldBuilder({
 		MockInfo
 	>({
 		field,
-		extensions: [],
-		store: new Map(),
+		metadata: new Map(),
 		middlewares: [],
+		requiredPluginIds: new Set(),
 	});
 }
 
@@ -63,7 +64,8 @@ export function mockSubscriptionFieldResolver(
 	) => Field<MockResult, MockResult, { value: MockResult }, MockContext, MockArgs, MockInfo>,
 ) {
 	const fieldBuilder = mockSubscriptionFieldBuilder();
-	const fieldWithMake = fn(fieldBuilder.toMethods().subscribe(() => mockSubscriptionGenerator(3)));
+	const subscribed = fieldBuilder.toMethods().subscribe(() => mockSubscriptionGenerator(3));
+	const fieldWithMake = fn(subscribed.map((params) => params.source));
 	return makeMockedSubscriptionField<
 		MockResult,
 		MockResult,
@@ -72,7 +74,7 @@ export function mockSubscriptionFieldResolver(
 		MockArgs,
 		MockInfo,
 		MockSubscriptionSource
-	>(fieldWithMake).build([]);
+	>(fieldWithMake).build([]).resolver;
 }
 
 export function mockSubscriptionFieldCompiler({
@@ -81,15 +83,18 @@ export function mockSubscriptionFieldCompiler({
 	return new SubscriptionCompiler<
 		MockResult,
 		{ value: MockResult },
+		MockSubscriptionSource,
 		MockContext,
 		MockArgs,
-		MockInfo,
-		MockSubscriptionSource
+		MockInfo
 	>({
 		field,
-		store: new Map(),
-		middlewares: [],
-		subscribe: () => ({ __internal__asyncIterable: mockSubscriptionGenerator(1) }),
+		subscribeMetadata: new Map(),
+		subscribeMiddlewares: [],
+		subscribe: () => mockSubscriptionGenerator(1),
+		resolveMetadata: new Map(),
+		resolveMiddlewares: [],
+		requiredPluginIds: new Set(),
 		resolver: (params) => params.source.value,
 	});
 }
@@ -115,7 +120,7 @@ export async function executeMockedSubscriptionField(
 		MockArgs,
 		MockInfo,
 		MockSubscriptionSource
-	>(field).build([]);
+	>(field).build([]).resolver;
 
 	return await executeMockedSubscriptionResolver(resolver);
 }
@@ -128,7 +133,7 @@ export async function executeMockedSubscriptionResolver(resolver: SubscriptionRe
 	const ctx = {
 		user: { name: 'test' },
 	};
-	const info = mockInfo();
+	const info = mockInfo() as GraphQLResolveInfo;
 
 	const maybePromise = resolver.subscribe(source, args, ctx, info);
 	const generator = isPromise(maybePromise) ? await maybePromise : maybePromise;

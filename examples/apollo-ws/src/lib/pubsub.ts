@@ -1,9 +1,9 @@
 import { TypedPubSub } from '@baeta/subscriptions-pubsub';
 import { PubSub } from 'graphql-subscriptions';
-import type { User } from '../__generated__/types.ts';
+// import type { User } from '../__generated__/types.ts';
 
 export type PubSubMap = {
-	'user-updated': User;
+	'user-updated': { id: string };
 };
 
 /**

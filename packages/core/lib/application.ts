@@ -1,5 +1,6 @@
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import type { GraphQLSchema } from 'graphql';
+import type { AppPlugin, PluginId } from '../sdk/app-plugin.ts';
 import {
 	type ModuleCompiler,
 	type ModuleCompilerFactory,
@@ -32,6 +33,11 @@ export interface Options<Context, Info> {
 	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>;
 
 	/**
+	 * Optional array of plugins to extend the functionality of the application.
+	 */
+	plugins?: AppPlugin[];
+
+	/**
 	 * Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
 	 */
 	executableSchemaOptions?: ExecutableSchemaOptions;
@@ -61,14 +67,11 @@ export interface Options<Context, Info> {
  * ```
  */
 export function createApplication<Context, Info>(options: Options<Context, Info>) {
-	const { typeDefs, resolvers, transformers, extensions } = compileModules(options.modules);
+	const { typeDefs, resolvers, transformers } = compileModules(options.modules, options.plugins);
 	const buildSchemaFn = options.buildSchema ?? buildSchema;
 	let schema = buildSchemaFn({ typeDefs, resolvers, options: options.executableSchemaOptions });
 	schema = transformSchema(schema, transformers);
 	schema = addValidationToSchema(schema);
-	for (const ext of extensions) {
-		ext.setSchema(schema);
-	}
 	return {
 		schema,
 	};
@@ -90,24 +93,38 @@ function buildSchema(options: BuildSchemaOptions) {
 
 function compileModules<Context, Info>(
 	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>,
+	plugins: AppPlugin[] = [],
 ) {
 	if (modules.length === 0) {
 		throw new Error('Cannot create schema without modules.');
 	}
 	const moduleCompilers = modules.map((module) => module.__make());
-	// extensions are the same for all modules
-	const extensions = moduleCompilers[0].extensions;
-	for (const ext of extensions) {
-		ext.mutate(moduleCompilers as ModuleCompiler[]);
+	const registeredPluginIds = new Set<PluginId>();
+	for (const plugin of plugins) {
+		registeredPluginIds.add(plugin.id);
+		plugin.mutate(moduleCompilers as ModuleCompiler[]);
 	}
 	const builtModules = moduleCompilers.map((module) => module.build());
 	const typeDefs = builtModules.map((m) => m.typedef);
 	const resolvers = builtModules.map((m) => m.resolvers);
 	const transformers = builtModules.flatMap((m) => m.transformers);
+
+	for (const module of builtModules) {
+		for (const pluginId of module.requiredPluginIds) {
+			if (!registeredPluginIds.has(pluginId)) {
+				throw new Error(
+					`Modules are using the plugin ${pluginId.name}, but it is not registered in the application.`,
+					{
+						cause: pluginId.definedIn,
+					},
+				);
+			}
+		}
+	}
+
 	return {
 		typeDefs,
 		resolvers,
 		transformers,
-		extensions,
 	};
 }

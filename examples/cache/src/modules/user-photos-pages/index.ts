@@ -5,11 +5,13 @@ import { UserPhotosPagesModule } from './typedef.ts';
 const { User } = UserPhotosPagesModule;
 
 const userPhotosConnectionResolver = User.photosConnection
-	.$resolveCache(userPhotoCache.queries.findPhotosConnection, ({ source, args }) => ({
-		userId: source.id,
-		cursor: args.page.cursor,
-		limit: args.page.limit,
-	}))
+	.map(({ source, args }) =>
+		userPhotoCache.queries.findPhotosConnection({
+			userId: source.id,
+			cursor: args.page.cursor,
+			limit: args.page.limit,
+		}),
+	)
 	.map(({ source, args }) => {
 		return createEdges(source ?? [], args.page.cursor, args.page.limit, (photo) => photo.id);
 	});

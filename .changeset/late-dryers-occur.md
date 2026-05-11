@@ -1,12 +1,11 @@
 ---
-"@baeta/extension-complexity": major
+"@baeta/complexity": major
 "@baeta/subscriptions-pubsub": major
 "@baeta/plugin-cloudflare": major
 "@baeta/plugin-directives": major
 "@baeta/plugin-pagination": major
 "@baeta/plugin-gitignore": major
-"@baeta/extension-cache": major
-"@baeta/extension-auth": major
+"@baeta/auth": major
 "@baeta/plugin-graphql": major
 "@baeta/generator-sdk": major
 "@baeta/plugin-prisma": major

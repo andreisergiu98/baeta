@@ -23,8 +23,6 @@ export type Subscription = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Subscript
   userUpdated: User
 }>
 
-export type StringFormat = 'EMAIL' | 'UUID' | 'URL'
-
 export type UserPhoto = BaetaUtility.Or<BaetaOverrides.ObjectTypes["UserPhoto"], {
   id: Scalars["ID"]
   url: Scalars["String"]

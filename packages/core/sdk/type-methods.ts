@@ -1,4 +1,5 @@
 import type { Middleware } from '../lib/middleware.ts';
+import type { PluginId } from './app-plugin.ts';
 import type { Field, FieldMethods } from './field-methods.ts';
 import type { SubscriptionField, SubscriptionMethods } from './subscription-methods.ts';
 import type { TypeCompiler } from './type-compiler.ts';
@@ -28,13 +29,24 @@ export type TypeMethods<
 		Context,
 		Info
 	>,
-> = {
+> = FieldsBuilders & {
 	$fields: (fields: FieldsResolvers) => TypeCompilerFactory<Source, Context, Info, FieldsResolvers>;
 	$use: (
-		middleware: Middleware<unknown, Source, Context, unknown, Info>,
+		input: TypeUseInput<Source, Context, Info>,
 	) => TypeMethods<Source, Context, Info, FieldsBuilders, FieldsResolvers>;
-} & BaetaExtensions.TypeExtensions<Source, Context, Info> &
-	FieldsBuilders;
+};
+
+export type TypeUsePlugin<Source, Context, Info> = {
+	buildPlugin: (options: { type: string; kind: 'type' }) => {
+		id: PluginId;
+		middleware?: Middleware<unknown, Source, Context, unknown, Info>;
+		meta?: Map<symbol, unknown>;
+	};
+};
+
+export type TypeUseInput<Source, Context, Info> =
+	| Middleware<unknown, Source, Context, unknown, Info>
+	| TypeUsePlugin<Source, Context, Info>;
 
 export type TypeCompilerFactory<
 	Source,

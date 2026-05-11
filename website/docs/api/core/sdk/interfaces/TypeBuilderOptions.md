@@ -49,7 +49,7 @@
 <tr>
 <td>
 
-`FieldsBuilders` _extends_ [`FieldsBuildersMap`](../type-aliases/FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
+`FieldsBuilders` *extends* [`FieldsBuildersMap`](../type-aliases/FieldsBuildersMap.md)\<`Source`, `Context`, `Info`\>
 
 </td>
 <td>
@@ -74,24 +74,24 @@
 <tr>
 <td>
 
-<a id="extensions"></a> `extensions`
-
-</td>
-<td>
-
-readonly [`Extension`](../classes/Extension.md)\<`unknown`\>[]
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="fieldbuilders"></a> `fieldBuilders`
 
 </td>
 <td>
 
 `Readonly`\<`FieldsBuilders`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="metadata"></a> `metadata`
+
+</td>
+<td>
+
+`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
 
 </td>
 </tr>
@@ -110,12 +110,12 @@ readonly [`Extension`](../classes/Extension.md)\<`unknown`\>[]
 <tr>
 <td>
 
-<a id="store"></a> `store`
+<a id="requiredpluginids"></a> `requiredPluginIds`
 
 </td>
 <td>
 
-`Map`\<`symbol`, `Readonly`\<`unknown`\>\>
+`Set`\<[`PluginId`](../type-aliases/PluginId.md)\>
 
 </td>
 </tr>

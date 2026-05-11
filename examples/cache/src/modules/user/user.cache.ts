@@ -1,6 +1,7 @@
-import { defineQuery } from '@baeta/cache';
+import { createCache, defineQuery } from '@baeta/cache';
 import { z } from 'zod';
 import { db } from '../../lib/db/prisma.ts';
+import { redisClient } from '../../lib/redis.ts';
 import { UserModule } from './typedef.ts';
 
 const { User } = UserModule;
@@ -46,8 +47,9 @@ const findUsers = defineQuery({
 	},
 });
 
-export const userCache = User.$createCache({
+export const userCache = createCache(redisClient, {
 	revision: 2,
+	name: 'UserCache',
 	parse: (value) => UserCacheSchema.parse(JSON.parse(value)),
 	serialize: (value) => JSON.stringify(UserCacheSchema.encode(value)),
 })

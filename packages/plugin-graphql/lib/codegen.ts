@@ -20,7 +20,7 @@ import {
 	printModuleMetadata,
 	printModuleObjectTypeFields,
 } from './printer-module.ts';
-import { printExtensionsTemplate, printTypesTemplate } from './printer-templates.ts';
+import { printTypesTemplate } from './printer-templates.ts';
 import {
 	type PrinterConfig,
 	printBaseObjectTypes,
@@ -118,17 +118,6 @@ export async function generate(
 				typesDir: options.typesDir,
 				modulesDir: options.modulesDir,
 			}),
-			options: {
-				disableOverwrite: true,
-				disableBiomeV1Header: true,
-				disableBiomeV2Header: true,
-				disableEslintHeader: true,
-				disableGenerationNoticeHeader: true,
-			},
-		},
-		{
-			filename: join(options.modulesDir, 'extensions.ts'),
-			content: printExtensionsTemplate(),
 			options: {
 				disableOverwrite: true,
 				disableBiomeV1Header: true,

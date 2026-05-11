@@ -379,7 +379,7 @@
 
 `string`
 
----
+***
 
 ### buildContent()
 
@@ -393,7 +393,7 @@
 
 [`File`](File.md).[`buildContent`](File.md#buildcontent)
 
----
+***
 
 ### buildHeader()
 
@@ -407,7 +407,7 @@
 
 [`File`](File.md).[`buildHeader`](File.md#buildheader)
 
----
+***
 
 ### buildPadding()
 
@@ -442,7 +442,7 @@
 
 `""` \| "\n" \| "\n\n"
 
----
+***
 
 ### createComment()
 
@@ -481,7 +481,7 @@
 
 [`File`](File.md).[`createComment`](File.md#createcomment)
 
----
+***
 
 ### getExistingContent()
 
@@ -491,7 +491,7 @@
 
 `Promise`\<readonly \[`string`, `FileHandle`\] \| readonly \[`""`, `null`\]\>
 
----
+***
 
 ### getSlices()
 
@@ -526,7 +526,7 @@
 
 readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
----
+***
 
 ### unlink()
 
@@ -540,7 +540,7 @@ readonly \[`string`, `""`, `false`\] \| readonly \[`string`, `string`, `true`\]
 
 [`File`](File.md).[`unlink`](File.md#unlink)
 
----
+***
 
 ### write()
 

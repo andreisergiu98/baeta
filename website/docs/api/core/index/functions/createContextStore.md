@@ -100,10 +100,8 @@ A tuple containing get and load functions for managing the stored value
 
 ```typescript
 // Create a store for user data
-const userStoreKey = Symbol("userStore");
-const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, {
-  lazy: true,
-});
+const userStoreKey = Symbol('userStore');
+const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, { lazy: true });
 
 // Set the loader function after creating the context object
 setUserLoader(ctx, async () => {

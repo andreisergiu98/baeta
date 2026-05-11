@@ -1,3 +1,4 @@
+import { auth } from '../../lib/auth.ts';
 import { MovieModule } from './typedef.ts';
 
 const { Query, Mutation, Movie } = MovieModule;
@@ -10,13 +11,15 @@ export const movieResolver = Movie.$fields({
 });
 
 const movieQuery = Query.movie
-	.$auth(
-		{
-			isLoggedIn: true,
-		},
-		{
-			grants: ['readReviews'],
-		},
+	.$use(
+		auth(
+			{
+				isLoggedIn: true,
+			},
+			{
+				grants: ['readReviews'],
+			},
+		),
 	)
 	.resolve(({ args }) => {
 		return {
@@ -28,13 +31,15 @@ const movieQuery = Query.movie
 	});
 
 const publicMoviesQuery = Query.publicMovies
-	.$auth(
-		{
-			isPublic: true,
-		},
-		{
-			skipDefaults: true,
-		},
+	.$use(
+		auth(
+			{
+				isPublic: true,
+			},
+			{
+				skipDefaults: true,
+			},
+		),
 	)
 	.resolve(() => {
 		return Array.from({ length: 3 }).map((_, i) => ({
@@ -46,9 +51,11 @@ const publicMoviesQuery = Query.publicMovies
 	});
 
 const createMovieMutation = Mutation.createMovie
-	.$auth({
-		hasRole: 'admin',
-	})
+	.$use(
+		auth({
+			hasRole: 'admin',
+		}),
+	)
 	.resolve(({ args }) => {
 		return {
 			id: '99',

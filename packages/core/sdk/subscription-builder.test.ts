@@ -1,4 +1,5 @@
 import test, { sleep } from '@baeta/testing';
+import type { GraphQLResolveInfo } from 'graphql';
 import { isPromise } from '../utils/promise.ts';
 import {
 	type MockArgs,
@@ -7,11 +8,6 @@ import {
 	type MockResult,
 	mockInfo,
 } from './__test__/mocks.ts';
-import {
-	testSetStoreLike,
-	testUseStoreLike,
-	testUseStoreMutations,
-} from './__test__/store-tests.ts';
 import {
 	executeMockedSubscriptionField,
 	executeMockedSubscriptionResolver,
@@ -32,9 +28,9 @@ test('createSubscriptionBuilder should create a subscription field correctly', a
 		MockInfo
 	>({
 		field: 'field',
-		extensions: [],
-		store: new Map(),
+		metadata: new Map(),
 		middlewares: [],
+		requiredPluginIds: new Set(),
 	});
 
 	const subscriptionField = subscriptionBuilder
@@ -218,19 +214,41 @@ test('SubscriptionBuilder should handle middlewares correctly', async (t) => {
 			i++;
 			return mockSubscriptionGenerator(3);
 		})
-		.key('value');
+		.resolve((params) => params.source.value);
 
 	const results = await executeMockedSubscriptionField(fieldWithMake);
 	t.is(i, 4);
 	t.deepEqual(results, ['1', '2', '3']);
 });
 
-test('SubscriptionBuilder edit should handle store correctly', async (t) => {
-	const fieldBuilder = mockSubscriptionFieldBuilder();
-	const edit = fieldBuilder.edit();
-	testUseStoreLike(t, edit);
-	testSetStoreLike(t, edit);
-	testUseStoreMutations(t, edit, edit.commit().edit());
+test('SubscriptionBuilder edit should handle mergeMeta correctly', (t) => {
+	const key1 = Symbol('1');
+	const key2 = Symbol('2');
+
+	const edit1 = mockSubscriptionFieldBuilder().edit();
+	edit1.mergeMeta(new Map([[key1, 1]]));
+	edit1.mergeMeta(new Map([[key2, 2]]));
+
+	const edit2 = mockSubscriptionFieldBuilder().edit();
+	edit2.mergeMeta(new Map([[key1, 99]]));
+
+	const compiler1 = makeMockedSubscriptionField(
+		edit1
+			.commitToMethods()
+			.subscribe(() => mockSubscriptionGenerator(1))
+			.resolve((params) => params.source.value),
+	);
+	const compiler2 = makeMockedSubscriptionField(
+		edit2
+			.commitToMethods()
+			.subscribe(() => mockSubscriptionGenerator(1))
+			.resolve((params) => params.source.value),
+	);
+
+	t.is(compiler1.useSubscribeMetadata<number>(key1).get(), 1);
+	t.is(compiler1.useSubscribeMetadata<number>(key2).get(), 2);
+	t.is(compiler2.useSubscribeMetadata<number>(key1).get(), 99);
+	t.is(compiler2.useSubscribeMetadata<number>(key2).get(), undefined);
 });
 
 test('SubscriptionBuilder should assign parameters correctly', async (t) => {
@@ -284,13 +302,13 @@ test('SubscriptionBuilder should assign parameters correctly', async (t) => {
 			return params.source;
 		});
 
-	const resolver = makeMockedSubscriptionField(field).build([]);
+	const { resolver } = makeMockedSubscriptionField(field).build([]);
 
-	const generatorPromise = resolver.subscribe(source, args, ctx, info);
+	const generatorPromise = resolver.subscribe(source, args, ctx, info as GraphQLResolveInfo);
 	const awaitedGenerator = isPromise(generatorPromise) ? await generatorPromise : generatorPromise;
 
 	for await (const payload of awaitedGenerator) {
-		const result = await resolver.resolve(payload, args, ctx, info);
+		const result = await resolver.resolve(payload, args, ctx, info as GraphQLResolveInfo);
 		t.is(result, 'TEST');
 	}
 });

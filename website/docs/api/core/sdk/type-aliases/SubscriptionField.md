@@ -1,6 +1,6 @@
 # SubscriptionField\<Expected, Result, Source, Context, Args, Info\>
 
-> **SubscriptionField**\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`\> = [`SubscriptionHelpers`](SubscriptionHelpers.md)\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`\>
+> **SubscriptionField**\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`\> = [`FieldHelpers`](FieldHelpers.md)\<`Expected`, `Result`, `Source`, `Context`, `Args`, `Info`\>
 
 ## Type Parameters
 

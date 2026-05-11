@@ -1,43 +1,6 @@
-# SubscriptionMethods\<Result, Source, Context, Args, Info\>
+# SubscriptionMethods\<Result, Source, Context, Args, Info, Payload\>
 
-> **SubscriptionMethods**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = `object` & `BaetaExtensions.SubscriptionExtensions`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
-
-## Type Declaration
-
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`$use()`
-
-</td>
-<td>
-
-(`middleware`) => `SubscriptionMethods`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
-
-</td>
-</tr>
-<tr>
-<td>
-
-`subscribe()`
-
-</td>
-<td>
-
-\<`T`\>(`fn`) => [`SubscriptionField`](SubscriptionField.md)\<`Result`, `T`, `T`, `Context`, `Args`, `Info`\>
-
-</td>
-</tr>
-</tbody>
-</table>
+> **SubscriptionMethods**\<`Result`, `Source`, `Context`, `Args`, `Info`, `Payload`\> = `object`
 
 ## Type Parameters
 
@@ -45,6 +8,7 @@
 <thead>
 <tr>
 <th>Type Parameter</th>
+<th>Default type</th>
 </tr>
 </thead>
 <tbody>
@@ -54,11 +18,21 @@
 `Result`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
 `Source`
+
+</td>
+<td>
+
+&hyphen;
 
 </td>
 </tr>
@@ -68,6 +42,11 @@
 `Context`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
@@ -75,11 +54,70 @@
 `Args`
 
 </td>
+<td>
+
+&hyphen;
+
+</td>
 </tr>
 <tr>
 <td>
 
 `Info`
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Payload`
+
+</td>
+<td>
+
+`never`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Properties
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<a id="use"></a> `$use`
+
+</td>
+<td>
+
+\<`T`\>(`input`) => `SubscriptionMethods`\<`Result`, `Source`, `Context`, `Args`, `Info`, [`Or`](Or.md)\<`Payload`, `T`\>\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="subscribe"></a> `subscribe`
+
+</td>
+<td>
+
+\<`T`\>(`fn`) => [`SubscriptionResolveMethods`](SubscriptionResolveMethods.md)\<`Result`, [`Or`](Or.md)\<`Payload`, `T`\>, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

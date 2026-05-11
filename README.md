@@ -35,10 +35,11 @@ Building GraphQL APIs shouldn't be complicated. **Baeta** is a modern, modular, 
 - **Middleware & Directives**: Easy integration of custom behaviors
 - **High Performance**: Built for scalability and efficiency
 
-#### And optional extensions and plugins
+#### And optional app plugins and libraries
 
-- **@baeta/extension-auth**: Add powerful scope-based authorization
-- **@baeta/extension-cache**: Implement automatic caching with simple update patterns
+- **@baeta/auth**: Add powerful scope-based authorization
+- **@baeta/complexity**: Reject resource-exhausting queries with depth, breadth and complexity limits
+- **@baeta/cache**: Type-safe caching with declarative queries and automatic reconciliation
 - ... and more!
 
 ## Why use Baeta?
@@ -98,17 +99,20 @@ Query.$fields({
 #### 3. Add authorization
 
 ```typescript
+import { auth } from "./lib/auth.ts";
 import { UserModule } from "./typedef.ts";
 
 const { Query } = UserModule;
 
 const userQuery = Query.user
-  .$auth({
-    $or: {
-      isPublic: true,
-      isLoggedIn: true,
-    },
-  })
+  .$use(
+    auth({
+      $or: {
+        isPublic: true,
+        isLoggedIn: true,
+      },
+    }),
+  )
   .resolve(async ({ args }) => {
     // ...
   });
@@ -117,23 +121,29 @@ const userQuery = Query.user
 #### 4. Add caching
 
 ```typescript
+import { createCache, defineQuery } from "@baeta/cache";
+import { redisClient } from "./lib/redis.ts";
+
 const { Query, Mutation, User } = UserModule;
 
-export const userCache = User.$createCache();
-
-const userQuery = Query.user
-  .$auth({
-    // ...
+export const userCache = createCache(redisClient, { name: "UserCache" })
+  .withQueries({
+    findUser: defineQuery({
+      resolve: async (args: { id?: string | null }) => {
+        return dataSource.user.find(args);
+      },
+    }),
   })
-  .$useCache(userCache)
-  .resolve(async ({ args }) => {
-    // ...
-  });
+  .build();
+
+const userQuery = Query.user.map(({ args }) =>
+  userCache.queries.findUser({ id: args.where.id }),
+);
 
 const updateUserMutation = Mutation.updateUser
   .$use(async (next) => {
     const user = await next();
-    await userCache.save(user);
+    await userCache.update(user);
     return user;
   })
   .resolve(async ({ args }) => {

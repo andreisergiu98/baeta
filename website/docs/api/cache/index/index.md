@@ -8,6 +8,7 @@
 
 - [CacheClientArgs](interfaces/CacheClientArgs.md)
 - [CacheClientOptions](interfaces/CacheClientOptions.md)
+- [CacheClientSaveOptions](interfaces/CacheClientSaveOptions.md)
 
 ## Type Aliases
 
@@ -25,6 +26,7 @@
 - [QueryCacheKey](type-aliases/QueryCacheKey.md)
 - [QueryIndexValue](type-aliases/QueryIndexValue.md)
 - [QueryOptions](type-aliases/QueryOptions.md)
+- [RefCompatibleItem](type-aliases/RefCompatibleItem.md)
 - [RequiredGetRef](type-aliases/RequiredGetRef.md)
 
 ## Functions

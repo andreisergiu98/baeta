@@ -1,6 +1,6 @@
 # ModuleMethods\<Context, Info, TypesBuilders, TypesResolvers\>
 
-> **ModuleMethods**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\> = `TypesBuilders` & `object` & `BaetaExtensions.ModuleExtensions`\<`Context`, `Info`\>
+> **ModuleMethods**\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\> = `TypesBuilders` & `object`
 
 ## Type Declaration
 
@@ -44,7 +44,7 @@
 </td>
 <td>
 
-(`middleware`) => `ModuleMethods`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
+(`input`) => `ModuleMethods`\<`Context`, `Info`, `TypesBuilders`, `TypesResolvers`\>
 
 </td>
 </tr>
@@ -88,7 +88,7 @@
 <tr>
 <td>
 
-`TypesBuilders` _extends_ [`TypesBuildersMap`](TypesBuildersMap.md)\<`Context`, `Info`\>
+`TypesBuilders` *extends* [`TypesBuildersMap`](TypesBuildersMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>
@@ -100,7 +100,7 @@
 <tr>
 <td>
 
-`TypesResolvers` _extends_ [`TypesResolversMap`](TypesResolversMap.md)\<`Context`, `Info`\>
+`TypesResolvers` *extends* [`TypesResolversMap`](TypesResolversMap.md)\<`Context`, `Info`\>
 
 </td>
 <td>

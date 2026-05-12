@@ -71,8 +71,8 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-clients": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20260506.1",
-    "miniflare": "^4.20260504.0",
+    "@cloudflare/workers-types": "^4.20260509.1",
+    "miniflare": "^4.20260507.1",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {

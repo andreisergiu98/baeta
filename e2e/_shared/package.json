@@ -52,7 +52,7 @@
     "@baeta/tsconfig": "workspace:^",
     "@graphql-codegen/cli": "catalog:dev",
     "@graphql-codegen/client-preset": "catalog:dev",
-    "@turbo/gen": "^2.9.9",
+    "@turbo/gen": "^2.9.12",
     "@types/node": "catalog:dev",
     "typescript": "catalog:dev"
   },

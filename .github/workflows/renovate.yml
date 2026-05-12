@@ -37,6 +37,12 @@ jobs:
         env:
           LOG_LEVEL: debug
         id: step_1
+      - name: Login to ghcr.io
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
       - name: Setup Node 24
@@ -51,14 +57,20 @@ jobs:
       - name: Get yarn cache directory
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         shell: bash
-        id: step_5
+        id: step_6
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_5.outputs.dir }}
+          path: ${{ steps.step_6.outputs.dir }}
           key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-cache-${{ runner.os }}-
       - run: yarn install --immutable
+      - name: Get yarn info
+        run: |-
+          echo "yarnDir=$(yarn config get globalFolder)" >> $GITHUB_OUTPUT
+          echo "yarnVersion=$(yarn --version)" >> $GITHUB_OUTPUT
+        shell: bash
+        id: step_9
       - name: Use Renovate Cache
         if: ${{ github.event.inputs.cache != 'disabled' }}
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
@@ -66,24 +78,50 @@ jobs:
           path: /tmp/renovate/cache/renovate/repository
           key: renovate-cache-${{ github.run_id }}
           restore-keys: renovate-cache-
-      - name: Cache Renovate Install
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
-        with:
-          path: ~/.npm
-          key: renovate-npm-cache-${{ runner.os }}-43.150.0
-          restore-keys: renovate-npm-cache-
+      - name: Fix-up Renovate cache permissions
+        if: ${{ github.event.inputs.cache != 'disabled' }}
+        run: sudo chown -R 12021:0 /tmp/renovate/ || true
+      - name: Fix-up yarn cache permissions
+        run: sudo chown -R 12021:0 ${{ steps.step_9.outputs.yarnDir }}
+      - name: Write Renovate Entrypoint
+        run: >-
+          cat > /tmp/renovate-entrypoint.sh <<'EOF'
+
+          #!/bin/bash
+
+          set -e
+
+          runuser -u ubuntu -- install-tool node 24.14.1
+
+          runuser -u ubuntu -- install-tool yarn ${{
+          steps.step_9.outputs.yarnVersion }}
+
+          exec runuser -u ubuntu --preserve-environment renovate
+
+          EOF
+
+          chmod +x /tmp/renovate-entrypoint.sh
+        shell: bash
       - name: Run Renovate
-        run: npx --yes renovate@43.150.0
+        uses: renovatebot/github-action@693b9ef15eec82123529a37c782242f091365961
+        with:
+          token: ${{ steps.step_1.outputs.token }}
+          configurationFile: .github/renovate.json
+          docker-user: root
+          docker-cmd-file: /tmp/renovate-entrypoint.sh
+          docker-volumes: /tmp:/tmp;${{ steps.step_9.outputs.yarnDir
+            }}:/home/ubuntu/.yarn/berry
         env:
-          RENOVATE_TOKEN: ${{ steps.step_1.outputs.token }}
-          RENOVATE_CONFIG_FILE: .github/renovate.json
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.cache }}
           RENOVATE_PLATFORM_COMMIT: enabled
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           RENOVATE_ALLOWED_COMMANDS: '["^yarn install --immutable
             --immutable-cache$","^yarn actions:build$"]'
+          RENOVATE_CUSTOM_ENV_VARIABLES: '{"YARN_GLOBAL_FOLDER":"/home/ubuntu/.yarn/berry","YARN_ENABLE_GLOBAL_CACHE":"true"}'
           LOG_LEVEL: ${{ github.event.inputs.logLevel }}
           NODE_OPTIONS: --max-old-space-size=4096
+      - name: Restore yarn cache permissions
+        run: sudo chown -R $(id -u):$(id -g) ${{ steps.step_9.outputs.yarnDir }}
 concurrency:
   group: renovate
 permissions:

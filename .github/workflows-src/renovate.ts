@@ -5,7 +5,9 @@ import { actions } from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
 import { setupNode } from './_shared/setup.ts';
 
-const allowedCommands = ['^yarn install$', '^yarn actions:build$'];
+const allowedCommands = ['^yarn install --immutable --immutable-cache$', '^yarn actions:build$'];
+
+const renovateVersion = '43.150.0';
 
 export default createWorkflow(
 	({ setWorkflowName, addJob, setConcurrency, addTrigger, setPermissions }) => {
@@ -55,12 +57,12 @@ export default createWorkflow(
 			use('Cache Renovate Install', actions.cache, {
 				with: {
 					path: '~/.npm',
-					key: interpolate`renovate-npm-cache-${runner.os}`,
+					key: interpolate`renovate-npm-cache-${runner.os}-${renovateVersion}`,
 					'restore-keys': 'renovate-npm-cache-',
 				},
 			});
 
-			run('Run Renovate', 'npx --yes renovate', {
+			run('Run Renovate', `npx --yes renovate@${renovateVersion}`, {
 				env: {
 					RENOVATE_TOKEN: getToken.outputs.token,
 					RENOVATE_CONFIG_FILE: '.github/renovate.json',

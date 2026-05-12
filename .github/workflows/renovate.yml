@@ -70,17 +70,18 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: ~/.npm
-          key: renovate-npm-cache-${{ runner.os }}
+          key: renovate-npm-cache-${{ runner.os }}-43.150.0
           restore-keys: renovate-npm-cache-
       - name: Run Renovate
-        run: npx --yes renovate
+        run: npx --yes renovate@43.150.0
         env:
           RENOVATE_TOKEN: ${{ steps.step_1.outputs.token }}
           RENOVATE_CONFIG_FILE: .github/renovate.json
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.cache }}
           RENOVATE_PLATFORM_COMMIT: enabled
           RENOVATE_REPOSITORIES: ${{ github.repository }}
-          RENOVATE_ALLOWED_COMMANDS: '["^yarn install$","^yarn actions:build$"]'
+          RENOVATE_ALLOWED_COMMANDS: '["^yarn install --immutable
+            --immutable-cache$","^yarn actions:build$"]'
           LOG_LEVEL: ${{ github.event.inputs.logLevel }}
           NODE_OPTIONS: --max-old-space-size=4096
 concurrency:

@@ -50,7 +50,7 @@
   "dependencies": {
     "@actions/github": "^9.1.1",
     "@baeta/workspace-config": "workspace:^",
-    "@inquirer/confirm": "^6.0.12",
+    "@inquirer/confirm": "^6.0.13",
     "@octokit/request-error": "^7.1.0",
     "@yarnpkg/core": "^4.7.0",
     "@yarnpkg/fslib": "^3.1.5",
@@ -61,10 +61,10 @@
     "log-symbols": "^7.0.1",
     "marked": "^18.0.3",
     "ora": "^9.4.0",
-    "oxc-transform": "^0.129.0",
+    "oxc-transform": "^0.130.0",
     "pathe": "^2.0.3",
     "tsdown": "^0.22.0",
-    "yaml": "^2.8.4",
+    "yaml": "^2.9.0",
     "yargs": "^18.0.0",
     "zod": "^4.4.3"
   },

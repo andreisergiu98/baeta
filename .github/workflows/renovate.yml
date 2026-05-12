@@ -1,0 +1,61 @@
+# !!! This file is auto-generated, do not edit by hand !!!
+# To make changes, edit .github/workflows-src/renovate.ts and then run:
+#
+#   github-actions-workflow-builder --directory ".github/workflows-src"
+
+name: Renovate
+on:
+  schedule:
+    - cron: 0 */4 * * *
+  workflow_dispatch: null
+  push:
+    branches:
+      - main
+      - next
+    paths:
+      - .github/renovate.json
+      - .github/workflows/renovate.yml
+  issues:
+    types:
+      - edited
+      - closed
+  pull_request_target:
+    types:
+      - edited
+jobs:
+  Renovate:
+    runs-on: ubuntu-latest
+    if: ${{ ((github.event_name != 'issues') && (github.event_name !=
+      'pull_request_target')) || ((github.event_name == 'issues') &&
+      ((github.event.issue.user.login == 'baeta-bot[bot]') &&
+      (github.event.sender.login != 'baeta-bot[bot]'))) || ((github.event_name
+      == 'pull_request_target') && startsWith(github.head_ref, 'renovate/') &&
+      ((github.event.pull_request.user.login == 'baeta-bot[bot]') &&
+      (github.event.sender.login != 'baeta-bot[bot]'))) }}
+    steps:
+      - name: Create GitHub App Token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3
+        with:
+          client-id: ${{ secrets.BAETA_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.BAETA_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.repository }}
+        env:
+          LOG_LEVEL: debug
+        id: step_1
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - name: Run Renovate
+        uses: renovatebot/github-action@693b9ef15eec82123529a37c782242f091365961
+        with:
+          token: ${{ steps.step_1.outputs.token }}
+          configurationFile: .github/renovate.json
+        env:
+          RENOVATE_PLATFORM_COMMIT: enabled
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          LOG_LEVEL: debug
+          NODE_OPTIONS: --max-old-space-size=4096
+concurrency:
+  group: renovate
+permissions:
+  contents: read

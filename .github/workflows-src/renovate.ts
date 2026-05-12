@@ -1,100 +1,76 @@
 import createWorkflow from 'github-actions-workflow-builder';
-import { github } from 'github-actions-workflow-builder/context';
-import {
-	and,
-	type ContextValue,
-	eq,
-	neq,
-	or,
-	startsWith,
-} from 'github-actions-workflow-builder/lib/expression';
+import { github, secrets } from 'github-actions-workflow-builder/context';
+import { interpolate, neq } from 'github-actions-workflow-builder/lib/expression';
 import { actions } from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
 
-const BOT_LOGIN = 'baeta-bot[bot]';
-
 export default createWorkflow(
-	({ setWorkflowName, addJob, setConcurrency, addTrigger, when, setPermissions }) => {
+	({ setWorkflowName, addJob, setConcurrency, addTrigger, setPermissions }) => {
 		setWorkflowName('Renovate');
-		setConcurrency({
-			group: `renovate`,
-		});
-		addTrigger('schedule', [
-			{
-				cron: '0 */4 * * *',
+		setConcurrency({ group: 'renovate' });
+
+		const dispatch = addTrigger('workflow_dispatch', {
+			inputs: {
+				cache: {
+					required: false,
+					default: 'enabled',
+					description: 'Enable Renovate cache',
+					// @ts-expect-error - Missing type definition
+					type: 'choice',
+					options: ['enabled', 'disabled'],
+				},
+				logLevel: {
+					required: false,
+					default: 'info',
+					description: 'Log level for Renovate',
+					// @ts-expect-error - Missing type definition
+					type: 'choice',
+					options: ['debug', 'info'],
+				},
 			},
-		]);
-		addTrigger('workflow_dispatch');
-		addTrigger('push', {
-			branches: ['main', 'next'],
-			paths: ['.github/renovate.json', '.github/workflows/renovate.yml'],
 		});
-		addTrigger('issues', {
-			types: ['edited', 'closed'],
-		});
-		addTrigger('pull_request_target', {
-			types: ['edited'],
-		});
+
 		setPermissions({
 			contents: 'read',
 		});
 
-		when(
-			or(
-				and(neq(github.event_name, 'issues'), neq(github.event_name, 'pull_request_target')),
-				and(eq(github.event_name, 'issues'), issueEditedByBot()),
-				and(
-					eq(github.event_name, 'pull_request_target'),
-					startsWith(github.head_ref, 'renovate/'),
-					prEditedByBot(),
-				),
-			),
-			() => {
-				addJob('Renovate', ({ use, add }) => {
-					const getToken = add(useBaetaBotToken());
-					use('Checkout', actions.checkout);
-					use('Run Renovate', actions.renovate, {
-						with: {
-							token: getToken.outputs.token,
-							configurationFile: '.github/renovate.json',
-						},
-						env: {
-							RENOVATE_PLATFORM_COMMIT: 'enabled',
-							RENOVATE_REPOSITORIES: github.repository,
-							LOG_LEVEL: 'debug',
-							NODE_OPTIONS: '--max-old-space-size=4096',
-						},
-					});
+		addJob('Renovate', ({ use, add, when, run }) => {
+			const getToken = add(useBaetaBotToken());
+
+			use('Login to ghcr.io', actions.dockerLogin, {
+				with: {
+					registry: 'ghcr.io',
+					username: github.actor,
+					password: secrets.GITHUB_TOKEN,
+				},
+			});
+
+			use('Checkout', actions.checkout);
+
+			when(neq(dispatch.inputs.cache, 'disabled'), () => {
+				use('Use Renovate Cache', actions.cache, {
+					with: {
+						path: '/tmp/renovate/cache/renovate/repository',
+						key: interpolate`renovate-cache-${github.run_id}`,
+						'restore-keys': 'renovate-cache-',
+					},
 				});
-			},
-		);
+				run('Fix cache permissions', 'sudo chown -R 12021:0 /tmp/renovate/ || true');
+			});
+
+			use('Run Renovate', actions.renovate, {
+				with: {
+					token: getToken.outputs.token,
+					configurationFile: '.github/renovate.json',
+				},
+				env: {
+					RENOVATE_REPOSITORY_CACHE: dispatch.inputs.cache,
+					RENOVATE_PLATFORM_COMMIT: 'enabled',
+					RENOVATE_REPOSITORIES: github.repository,
+					LOG_LEVEL: dispatch.inputs.logLevel,
+					NODE_OPTIONS: '--max-old-space-size=4096',
+				},
+			});
+		});
 	},
 );
-
-function issueEditedByBot() {
-	const issueEvent = github.event as ContextValue<{
-		issue: {
-			user: {
-				login: string;
-			};
-		};
-		sender: {
-			login: string;
-		};
-	}>;
-	return and(eq(issueEvent.issue.user.login, BOT_LOGIN), neq(issueEvent.sender.login, BOT_LOGIN));
-}
-
-function prEditedByBot() {
-	const prEvent = github.event as ContextValue<{
-		pull_request: {
-			user: {
-				login: string;
-			};
-		};
-		sender: {
-			login: string;
-		};
-	}>;
-	return and(eq(prEvent.pull_request.user.login, BOT_LOGIN), neq(prEvent.sender.login, BOT_LOGIN));
-}

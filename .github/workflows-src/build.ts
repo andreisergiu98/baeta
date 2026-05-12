@@ -10,6 +10,7 @@ import {
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
 import { actions } from './_shared/actions.ts';
+import { useBaetaBotToken } from './_shared/bot-token.ts';
 import {
 	createNodeVersion,
 	setNodeBuildMatrix,
@@ -170,6 +171,7 @@ export default createWorkflow(
 						addDependencies(...releaseDependencies);
 						setName('Publish packages or open PR');
 						add(setupNode({ turboCache: turboCaches.build }));
+						const getToken = add(useBaetaBotToken());
 						use('Run @changesets/action', actions.changesets, {
 							with: {
 								publish:
@@ -180,7 +182,8 @@ export default createWorkflow(
 								createGithubReleases: false,
 							},
 							env: {
-								GITHUB_TOKEN: secrets.GITHUB_TOKEN,
+								GITHUB_TOKEN: getToken.outputs.token,
+								RELEASE_GITHUB_TOKEN: secrets.GITHUB_TOKEN,
 							},
 						});
 					});

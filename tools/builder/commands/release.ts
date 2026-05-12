@@ -209,9 +209,11 @@ async function runCreateGithubRelease({ packages, tag, dryRun }: CreateGithubRel
 		return;
 	}
 
-	const githubToken = process.env.GITHUB_TOKEN;
+	const githubToken = process.env.RELEASE_GITHUB_TOKEN;
 	if (!githubToken) {
-		throw new Error('GITHUB_TOKEN environment variable is required to create a GitHub release');
+		throw new Error(
+			'RELEASE_GITHUB_TOKEN environment variable is required to create a GitHub release',
+		);
 	}
 
 	const spinner = ora('Creating GitHub release...').start();
@@ -243,9 +245,9 @@ async function runCreateVersionTags({ packages, dryRun }: CreateVersionTagsOptio
 		return;
 	}
 
-	const githubToken = process.env.GITHUB_TOKEN;
+	const githubToken = process.env.RELEASE_GITHUB_TOKEN;
 	if (!githubToken) {
-		throw new Error('GITHUB_TOKEN environment variable is required to create version tags');
+		throw new Error('RELEASE_GITHUB_TOKEN environment variable is required to create version tags');
 	}
 
 	const spinner = ora('Tagging packages...').start();

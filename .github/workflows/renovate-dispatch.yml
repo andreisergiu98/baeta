@@ -7,7 +7,6 @@ name: Renovate Dispatch
 on:
   schedule:
     - cron: 0 */4 * * *
-  workflow_dispatch: null
   push:
     branches:
       - main
@@ -22,6 +21,7 @@ on:
   pull_request_target:
     types:
       - edited
+      - closed
 jobs:
   renovate-dispatch:
     runs-on: ubuntu-latest

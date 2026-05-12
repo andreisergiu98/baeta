@@ -11674,7 +11674,7 @@ __metadata:
     globals: "npm:^17.6.0"
     husky: "npm:^9.1.7"
     jsonc-eslint-parser: "npm:^3.1.0"
-    lint-staged: "npm:^17.0.3"
+    lint-staged: "npm:^17.0.4"
     lockfile-lint: "npm:^5.0.0"
     oxfmt: "npm:^0.48.0"
     turbo: "npm:^2.9.12"
@@ -17593,9 +17593,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^17.0.3":
-  version: 17.0.3
-  resolution: "lint-staged@npm:17.0.3"
+"lint-staged@npm:^17.0.4":
+  version: 17.0.4
+  resolution: "lint-staged@npm:17.0.4"
   dependencies:
     listr2: "npm:^10.2.1"
     picomatch: "npm:^4.0.4"
@@ -17607,7 +17607,7 @@ __metadata:
       optional: true
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/83e46030e4a42a352eac7a797d1d3561eeda5f1f26a93bdb0ce76b9cd7f8c5524298bc2b620c0b38c534e0cf576bcbb574efec1ad2efa320bdc7ecf39a26bf11
+  checksum: 10/a9b1bf30450523ea301e6d95782963f3b94fc7dd012647a523fa494f072aa046f2e60d854885bb9f909bf69b6bf2e02d70ddc42553a8ead9307532688005f64c
   languageName: node
   linkType: hard
 

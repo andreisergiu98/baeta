@@ -20,7 +20,6 @@ export default createWorkflow(({ setWorkflowName, addJob, addTrigger, when, setP
 			cron: '0 */4 * * *',
 		},
 	]);
-	addTrigger('workflow_dispatch');
 	addTrigger('push', {
 		branches: ['main', 'next'],
 		paths: ['.github/renovate.json', '.github/workflows/renovate.yml'],
@@ -29,7 +28,7 @@ export default createWorkflow(({ setWorkflowName, addJob, addTrigger, when, setP
 		types: ['edited', 'closed'],
 	});
 	addTrigger('pull_request_target', {
-		types: ['edited'],
+		types: ['edited', 'closed'],
 	});
 	setPermissions({
 		contents: 'read',

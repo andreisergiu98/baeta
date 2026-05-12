@@ -179,6 +179,7 @@ export default createWorkflow(
 								version: 'yarn changeset version',
 								commit: 'chore: publish packages',
 								title: 'chore: publish packages',
+								commitMode: 'github-api',
 								createGithubReleases: false,
 							},
 							env: {

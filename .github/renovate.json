@@ -47,6 +47,29 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["valkey/valkey"],
       "allowedVersions": "<9"
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": [".github/workflows-src/_shared/actions.ts"],
+      "groupName": "github actions",
+      "postUpgradeTasks": {
+        "commands": ["yarn install", "yarn actions:build"],
+        "fileFilters": [".github/workflows/**", ".github/workflows-src/_shared/actions.ts"],
+        "executionMode": "branch"
+      }
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "github-actions-pinned",
+      "managerFilePatterns": ["/^\\.github/workflows-src/_shared/actions\\.ts$/"],
+      "matchStrings": [
+        "['\"](?<depName>[^'\"@\\s]+)@(?<currentDigest>[a-f0-9]{40})['\"],\\s*//\\s*(?<currentValue>[Vv]?\\d+\\.\\d+\\.\\d+)"
+      ],
+      "datasourceTemplate": "github-tags",
+      "versioningTemplate": "semver",
+      "depTypeTemplate": "action"
     }
   ],
   "dependencyDashboardFooter": "\n- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository\n"

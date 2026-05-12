@@ -48,5 +48,6 @@
       "matchPackageNames": ["valkey/valkey"],
       "allowedVersions": "<9"
     }
-  ]
+  ],
+  "dependencyDashboardFooter": "\n- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository\n"
 }

@@ -6,7 +6,7 @@ import {
 	interpolate,
 	joinStrings,
 } from 'github-actions-workflow-builder/lib/expression';
-import { actions } from './actions.ts';
+import { useCache, useCheckout, useSetupNode } from './actions.ts';
 import { createNodeVersion, type NodeVersion } from './node.ts';
 
 export const turboCaches = {
@@ -26,21 +26,24 @@ interface SetupNodeOptions {
 	node?: NodeVersion<string | Expression<string>>;
 	turboCache?: TurboCache;
 	disableYarnCache?: boolean;
+	yarnCacheNamespace?: string;
 	skipInstall?: boolean;
 }
 
 export function setupNode(options: SetupNodeOptions = {}): Steps {
 	const node = options.node ?? DEFAULT_NODE;
 	const turboNamespace = options.turboCache;
+	const yarnCacheNamespace = options.yarnCacheNamespace ? `-${options.yarnCacheNamespace}` : '';
 
-	return ({ use, run }) => {
-		use('Checkout', actions.checkout);
+	return ({ run, add }) => {
+		add(useCheckout());
 
-		use(`Setup Node ${node.node}`, actions.setupNode, {
-			with: {
-				'node-version': node.version,
-			},
-		});
+		add(
+			useSetupNode({
+				stepName: `Setup Node ${node.node}`,
+				nodeVersion: node.version,
+			}),
+		);
 
 		run(
 			'Enable Corepack',
@@ -61,23 +64,25 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 				},
 			);
 
-			use('Setup Yarn Cache', actions.cache, {
-				with: {
-					path: interpolate`${yarnDir.outputs.dir}`,
-					key: interpolate`yarn-cache-${runner.os}-${hashFiles('**/yarn.lock')}`,
-					'restore-keys': interpolate`yarn-cache-${runner.os}-`,
-				},
-			});
+			add(
+				useCache({
+					stepName: 'Setup Yarn Cache',
+					paths: [interpolate`${yarnDir.outputs.dir}`],
+					key: interpolate`yarn-cache-${runner.os}-${hashFiles('**/yarn.lock')}${yarnCacheNamespace}`,
+					restoreKeys: [interpolate`yarn-cache-${runner.os}-`],
+				}),
+			);
 		}
 
 		if (turboNamespace) {
-			use(`Setup Turbo Cache for ${turboNamespace}`, actions.cache, {
-				with: {
-					path: '.cache/turbo',
+			add(
+				useCache({
+					stepName: `Setup Turbo Cache for ${turboNamespace}`,
+					paths: ['.cache/turbo'],
 					key: interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-${github.sha}`,
-					'restore-keys': interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-`,
-				},
-			});
+					restoreKeys: [interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-`],
+				}),
+			);
 		}
 
 		if (!options.skipInstall) {

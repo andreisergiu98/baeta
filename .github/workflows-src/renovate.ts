@@ -6,7 +6,7 @@ import {
 	neq,
 	type Expression,
 } from 'github-actions-workflow-builder/lib/expression';
-import { actions } from './_shared/actions.ts';
+import { useCache, useDockerLogin, useRenovate } from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
 import { DEFAULT_NODE, setupNode } from './_shared/setup.ts';
 
@@ -44,15 +44,20 @@ export default createWorkflow(
 		addJob('Renovate', ({ use, add, when, run }) => {
 			const getToken = add(useBaetaBotToken());
 
-			use('Login to ghcr.io', actions.dockerLogin, {
-				with: {
+			add(
+				useDockerLogin({
+					stepName: 'Login to ghcr.io',
 					registry: 'ghcr.io',
 					username: github.actor,
 					password: secrets.GITHUB_TOKEN,
-				},
-			});
+				}),
+			);
 
-			add(setupNode());
+			add(
+				setupNode({
+					yarnCacheNamespace: 'renovate',
+				}),
+			);
 
 			const yarnInfo = run<{ yarnDir: string; yarnVersion: string }>(
 				'Get yarn info',
@@ -67,13 +72,14 @@ export default createWorkflow(
 			);
 
 			when(neq(dispatch.inputs.cache, 'disabled'), () => {
-				use('Use Renovate Cache', actions.cache, {
-					with: {
-						path: '/tmp/renovate/cache/renovate/repository',
+				add(
+					useCache({
+						stepName: 'Setup Renovate Cache',
+						paths: ['/tmp/renovate/cache/renovate/repository'],
 						key: interpolate`renovate-cache-${github.run_id}`,
-						'restore-keys': 'renovate-cache-',
-					},
-				});
+						restoreKeys: ['renovate-cache-'],
+					}),
+				);
 				run('Fix-up Renovate cache permissions', 'sudo chown -R 12021:0 /tmp/renovate/ || true');
 			});
 
@@ -90,27 +96,25 @@ export default createWorkflow(
 				},
 			);
 
-			use('Run Renovate', actions.renovate, {
-				with: {
-					token: getToken.outputs.token,
+			add(
+				useRenovate({
+					token: getToken.token,
 					configurationFile: '.github/renovate.json',
-					'docker-user': 'root',
-					'docker-cmd-file': '/tmp/renovate-entrypoint.sh',
-					'docker-volumes': interpolate`/tmp:/tmp;${yarnInfo.outputs.yarnDir}:${yarnGlobalDir}`,
-				},
-				env: {
-					RENOVATE_REPOSITORY_CACHE: dispatch.inputs.cache,
-					RENOVATE_PLATFORM_COMMIT: 'enabled',
-					RENOVATE_REPOSITORIES: github.repository,
-					RENOVATE_ALLOWED_COMMANDS: JSON.stringify(allowedCommands),
-					RENOVATE_CUSTOM_ENV_VARIABLES: JSON.stringify({
+					logLevel: dispatch.inputs.logLevel,
+					repositoryCache: dispatch.inputs.cache,
+					platformCommit: 'enabled',
+					repositories: github.repository,
+					nodeOptions: '--max-old-space-size=4096',
+					dockerUser: 'root',
+					dockerCmdFile: '/tmp/renovate-entrypoint.sh',
+					dockerVolumes: ['/tmp:/tmp', `${yarnInfo.outputs.yarnDir}:${yarnGlobalDir}`],
+					allowedCommands,
+					customEnvVariables: {
 						YARN_GLOBAL_FOLDER: yarnGlobalDir,
 						YARN_ENABLE_GLOBAL_CACHE: 'true',
-					}),
-					LOG_LEVEL: dispatch.inputs.logLevel,
-					NODE_OPTIONS: '--max-old-space-size=4096',
-				},
-			});
+					},
+				}),
+			);
 
 			run(
 				'Restore yarn cache permissions',

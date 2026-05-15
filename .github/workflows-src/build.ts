@@ -9,7 +9,7 @@ import {
 	or,
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
-import { actions } from './_shared/actions.ts';
+import { useCache, useChangesets } from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
 import {
 	createNodeVersion,
@@ -72,13 +72,14 @@ export default createWorkflow(
 		const lintJob = addJob('lint', ({ setName, add, run, use }) => {
 			setName('Check linting');
 			add(setupNode());
-			use('Setup ESLint Cache', actions.cache, {
-				with: {
-					path: '.cache/eslint',
+			add(
+				useCache({
+					stepName: 'Setup ESLint Cache',
+					paths: ['.cache/eslint'],
 					key: interpolate`eslint-${github.sha}`,
-					'restore-keys': 'eslint-',
-				},
-			});
+					restoreKeys: ['eslint-'],
+				}),
+			);
 			run('yarn check:linting');
 		});
 
@@ -172,21 +173,17 @@ export default createWorkflow(
 						setName('Publish packages or open PR');
 						add(setupNode({ turboCache: turboCaches.build }));
 						const getToken = add(useBaetaBotToken());
-						use('Run @changesets/action', actions.changesets, {
-							with: {
-								publish:
+						add(
+							useChangesets({
+								publishCommand:
 									'yarn builder release --ci --create-release --create-tags --check-branch=${{ github.ref_name }} --verbose',
-								version: 'yarn changeset version',
-								commit: 'chore: publish packages',
-								title: 'chore: publish packages',
-								commitMode: 'github-api',
-								createGithubReleases: false,
-							},
-							env: {
-								GITHUB_TOKEN: getToken.outputs.token,
-								RELEASE_GITHUB_TOKEN: secrets.GITHUB_TOKEN,
-							},
-						});
+								versionCommand: 'yarn changeset version',
+								commitMessage: 'chore: publish packages',
+								prTitle: 'chore: publish packages',
+								createPRToken: getToken.token,
+								createReleaseToken: secrets.GITHUB_TOKEN,
+							}),
+						);
 					});
 				},
 			);

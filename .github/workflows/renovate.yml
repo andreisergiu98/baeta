@@ -27,15 +27,13 @@ jobs:
   Renovate:
     runs-on: ubuntu-latest
     steps:
-      - name: Create GitHub App Token
+      - name: Create Baeta Bot Token
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3
         with:
           client-id: ${{ secrets.BAETA_BOT_CLIENT_ID }}
           private-key: ${{ secrets.BAETA_BOT_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: baeta
-        env:
-          LOG_LEVEL: debug
+          repositories: ${{ github.repository }}
         id: step_1
       - name: Login to ghcr.io
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121
@@ -43,7 +41,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -62,7 +60,7 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: ${{ steps.step_6.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-renovate
           restore-keys: yarn-cache-${{ runner.os }}-
       - run: yarn install --immutable
       - name: Get yarn info
@@ -71,7 +69,7 @@ jobs:
           echo "yarnVersion=$(yarn --version)" >> $GITHUB_OUTPUT
         shell: bash
         id: step_9
-      - name: Use Renovate Cache
+      - name: Setup Renovate Cache
         if: ${{ github.event.inputs.cache != 'disabled' }}
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:

@@ -45,7 +45,6 @@
     }
   },
   "publishConfig": {
-    "access": "public",
     "bin": {
       "baeta": "./dist/bin/cli.js"
     },
@@ -58,7 +57,8 @@
         "types": "./dist/sdk/index.d.ts",
         "default": "./dist/sdk/index.js"
       }
-    }
+    },
+    "access": "public"
   },
   "scripts": {
     "build": "builder build",

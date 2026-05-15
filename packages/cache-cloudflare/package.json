@@ -42,7 +42,6 @@
     }
   },
   "publishConfig": {
-    "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -52,7 +51,8 @@
         "types": "./dist/sdk/index.d.ts",
         "default": "./dist/sdk/index.js"
       }
-    }
+    },
+    "access": "public"
   },
   "scripts": {
     "build": "builder build",

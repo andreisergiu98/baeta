@@ -420,7 +420,7 @@ jobs:
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
       - name: Create Baeta Bot Token
-        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
           client-id: ${{ secrets.BAETA_BOT_CLIENT_ID }}
           private-key: ${{ secrets.BAETA_BOT_PRIVATE_KEY }}

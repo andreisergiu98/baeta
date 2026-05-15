@@ -1,10 +1,10 @@
 /** biome-ignore-all lint/complexity/noBannedTypes: Allow empty for source */
 import type { GraphQLResolveInfo } from 'graphql';
 import { isPromise } from '../../utils/promise.ts';
-import type { Field } from '../field-methods.ts';
 import { SubscriptionBuilder } from '../subscription-builder.ts';
 import { SubscriptionCompiler } from '../subscription-compiler.ts';
-import type { SubscriptionField, SubscriptionFieldWithMake } from '../subscription-methods.ts';
+import type { SubscriptionField } from '../subscription-methods.ts';
+import { makeSymbol } from '../symbols.ts';
 import {
 	type MockArgs,
 	type MockContext,
@@ -56,25 +56,26 @@ export function mockSubscriptionFieldResolver(
 		methods: SubscriptionField<
 			MockResult,
 			{ value: MockResult },
-			{ value: MockResult },
+			MockSubscriptionSource,
 			MockContext,
 			MockArgs,
-			MockInfo
+			MockInfo,
+			{ value: MockResult }
 		>,
-	) => Field<MockResult, MockResult, { value: MockResult }, MockContext, MockArgs, MockInfo>,
+	) => SubscriptionField<
+		MockResult,
+		MockResult,
+		MockSubscriptionSource,
+		MockContext,
+		MockArgs,
+		MockInfo,
+		{ value: MockResult }
+	>,
 ) {
 	const fieldBuilder = mockSubscriptionFieldBuilder();
 	const subscribed = fieldBuilder.toMethods().subscribe(() => mockSubscriptionGenerator(3));
 	const fieldWithMake = fn(subscribed.map((params) => params.source));
-	return makeMockedSubscriptionField<
-		MockResult,
-		MockResult,
-		{ value: MockResult },
-		MockContext,
-		MockArgs,
-		MockInfo,
-		MockSubscriptionSource
-	>(fieldWithMake).build([]).resolver;
+	return makeMockedSubscriptionField(fieldWithMake).build([]).resolver;
 }
 
 export function mockSubscriptionFieldCompiler({
@@ -99,7 +100,7 @@ export function mockSubscriptionFieldCompiler({
 	});
 }
 
-export function mockSubscriptionGenerator(steps = 3) {
+export function mockSubscriptionGenerator(steps = 3): AsyncIterable<{ value: MockResult }> {
 	return {
 		async *[Symbol.asyncIterator]() {
 			for (let i = 1; i <= steps; i++) {
@@ -110,18 +111,17 @@ export function mockSubscriptionGenerator(steps = 3) {
 }
 
 export async function executeMockedSubscriptionField(
-	field: Field<MockResult, MockResult, { value: MockResult }, MockContext, MockArgs, MockInfo>,
-) {
-	const resolver = makeMockedSubscriptionField<
+	field: SubscriptionField<
 		MockResult,
 		MockResult,
-		{ value: MockResult },
+		MockSubscriptionSource,
 		MockContext,
 		MockArgs,
 		MockInfo,
-		MockSubscriptionSource
-	>(field).build([]).resolver;
-
+		{ value: MockResult }
+	>,
+) {
+	const resolver = makeMockedSubscriptionField(field).build([]).resolver;
 	return await executeMockedSubscriptionResolver(resolver);
 }
 export async function executeMockedSubscriptionResolver(resolver: SubscriptionResolver) {
@@ -147,23 +147,13 @@ export async function executeMockedSubscriptionResolver(resolver: SubscriptionRe
 }
 
 export function makeMockedSubscriptionField<
-	Result,
 	Expected,
-	Source,
+	Result,
+	ParentSource,
 	Context,
 	Args,
 	Info,
-	SubscriptionSource,
->(field: Field<Result, Expected, Source, Context, Args, Info>) {
-	return (
-		field as SubscriptionFieldWithMake<
-			Result,
-			Expected,
-			Source,
-			Context,
-			Args,
-			Info,
-			SubscriptionSource
-		>
-	).__make();
+	Source,
+>(field: SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Source>) {
+	return field[makeSymbol]();
 }

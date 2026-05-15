@@ -4,7 +4,8 @@ import { nameFunction } from '../utils/functions.ts';
 import { mapMaybePromise } from '../utils/promise.ts';
 import type { PluginId } from './app-plugin.ts';
 import { FieldCompiler } from './field-compiler.ts';
-import type { FieldHelpers, FieldMethods, FieldWithMake } from './field-methods.ts';
+import type { Field, FieldMethods } from './field-methods.ts';
+import { makePluginSymbol, makeSymbol } from './symbols.ts';
 
 export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
 	type: string;
@@ -89,7 +90,11 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 					nameFunction(input, `${this.#type}.${this.#field}.use`);
 					return this.edit().addMiddleware(input).commitToMethods();
 				}
-				const result = input.buildPlugin({ type: this.#type, field: this.#field, kind: 'field' });
+				const result = input[makePluginSymbol]({
+					type: this.#type,
+					field: this.#field,
+					kind: 'field',
+				});
 				const session = this.edit().addRequiredPluginId(result.id);
 				if (result.middleware) {
 					nameFunction(result.middleware, `${this.#type}.${this.#field}.use`);
@@ -129,7 +134,7 @@ interface FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info> {
 
 function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 	options: FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info>,
-): FieldHelpers<Expected, Result, Source, Context, Args, Info> {
+): Field<Expected, Result, Source, Context, Args, Info> {
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
 		createFieldWithMake<Expected, R, Source, Context, Args, Info>({
 			type: options.type,
@@ -154,7 +159,7 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 
 	const fnNamespace = `${options.type}.${options.field}`;
 
-	const helpers: FieldWithMake<Expected, Result, Source, Context, Args, Info> = {
+	const helpers: Field<Expected, Result, Source, Context, Args, Info> = {
 		map: (fn) => {
 			nameFunction(fn, `${fnNamespace}.map`);
 			return make(chain(fn));
@@ -195,7 +200,7 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 			};
 			return make(resolver);
 		},
-		__make: () =>
+		[makeSymbol]: () =>
 			new FieldCompiler<Expected, Source, Context, Args, Info>({
 				type: options.type,
 				field: options.field,

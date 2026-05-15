@@ -3,6 +3,7 @@ import type { DocumentNode, GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
 import type { TypesResolversMap } from './module-methods.ts';
+import { makeSymbol } from './symbols.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompiler } from './type-compiler.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
@@ -99,8 +100,8 @@ function getTypeCompilersAndResolvers<Context, Info>(typesMap: TypesResolversMap
 	> = [];
 	const genericResolvers: Array<[string, GraphQLScalarType]> = [];
 	for (const [typeName, typeResolver] of Object.entries(typesMap)) {
-		if ('__make' in typeResolver) {
-			types.push(typeResolver.__make());
+		if (makeSymbol in typeResolver) {
+			types.push(typeResolver[makeSymbol]());
 		} else {
 			genericResolvers.push([typeName, typeResolver]);
 		}

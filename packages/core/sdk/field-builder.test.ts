@@ -14,14 +14,16 @@ import {
 	type MockSource,
 	mockInfo,
 } from './__test__/mocks.ts';
-import { createFieldBuilder, makeField } from './field.ts';
+import { createFieldBuilder } from './field.ts';
+import { makeSymbol } from './symbols.ts';
 
 test('createFieldBuilder should create a type field correctly', async (t) => {
 	const fieldBuilder = createFieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>(
 		'type',
 		'field',
 	);
-	const { resolver } = makeField(fieldBuilder.map((params) => params.source.name)).build([]);
+	const field = fieldBuilder.map((params) => params.source.name);
+	const { resolver } = field[makeSymbol]().build([]);
 	t.is(await executeMockedResolver(resolver), 'test');
 });
 
@@ -198,7 +200,7 @@ test('FieldBuilder edit should handle addMiddleware correctly', async (t) => {
 	t.is(fieldBuilder === fieldBuilder2, false);
 
 	const fieldWithMake = fieldBuilder2.toMethods().$use(middleware2).key('name');
-	const fieldCompiler = makeField(fieldWithMake);
+	const fieldCompiler = fieldWithMake[makeSymbol]();
 	const { resolver } = fieldCompiler.build([]);
 	t.is(await executeMockedResolver(resolver), 'test_1_2');
 	t.is(i, 2);
@@ -215,8 +217,8 @@ test('FieldBuilder edit should handle mergeMeta correctly', (t) => {
 	const edit2 = mockFieldBuilder().edit();
 	edit2.mergeMeta(new Map([[key1, 99]]));
 
-	const compiler1 = makeField(edit1.commitToMethods().key('name'));
-	const compiler2 = makeField(edit2.commitToMethods().key('name'));
+	const compiler1 = edit1.commitToMethods().key('name')[makeSymbol]();
+	const compiler2 = edit2.commitToMethods().key('name')[makeSymbol]();
 
 	t.is(compiler1.useMetadata<number>(key1).get(), 1);
 	t.is(compiler1.useMetadata<number>(key2).get(), 2);

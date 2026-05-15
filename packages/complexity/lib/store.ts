@@ -6,7 +6,7 @@ export interface ComplexityStore {
 	cacheComplexity: (fn: () => Required<ComplexityLimit>) => Required<ComplexityLimit>;
 }
 
-export const complexityStoreKey = Symbol('complexity-extension');
+export const complexityStoreKey = Symbol('@baeta/complexity');
 
 export const [getComplexityStore, setComplexityStoreLoader] =
 	createContextStore<ComplexityStore>(complexityStoreKey);

@@ -4,6 +4,7 @@ import {
 	mockModuleBuilder,
 	mockSchemaForModuleBuilder,
 } from './__test__/module-mocks.ts';
+import { makeSymbol } from './symbols.ts';
 
 test('ModuleBuilder should be created correctly', async (t) => {
 	const moduleBuilder = mockModuleBuilder();
@@ -12,7 +13,7 @@ test('ModuleBuilder should be created correctly', async (t) => {
 
 test('ModuleBuilder should handle $schema correctly', async (t) => {
 	const module = mockModuleBuilder().toMethods();
-	const moduleCompiler = module.$schema(mockSchemaForModuleBuilder(module)).__make();
+	const moduleCompiler = module.$schema(mockSchemaForModuleBuilder(module))[makeSymbol]();
 
 	const result = moduleCompiler.build();
 	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
@@ -29,7 +30,7 @@ test('ModuleBuilder should handle $schema correctly', async (t) => {
 
 test('ModuleBuilder should handle $use correctly', async (t) => {
 	const module = mockModuleBuilder().toMethods();
-	const result = module
+	const schema = module
 		.$use(async (next) => {
 			const result = await next();
 			if (typeof result === 'string') {
@@ -37,9 +38,8 @@ test('ModuleBuilder should handle $use correctly', async (t) => {
 			}
 			return result;
 		})
-		.$schema(mockSchemaForModuleBuilder(module))
-		.__make()
-		.build();
+		.$schema(mockSchemaForModuleBuilder(module));
+	const result = schema[makeSymbol]().build();
 
 	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {
@@ -55,7 +55,7 @@ test('ModuleBuilder should handle $use correctly', async (t) => {
 
 test('ModuleBuilder should handle $directive correctly', async (t) => {
 	const module = mockModuleBuilder().toMethods();
-	const result = module
+	const schema = module
 		.$directive((schema) => {
 			return schema;
 		})
@@ -67,9 +67,8 @@ test('ModuleBuilder should handle $directive correctly', async (t) => {
 				return schema;
 			},
 		])
-		.$schema(mockSchemaForModuleBuilder(module))
-		.__make()
-		.build();
+		.$schema(mockSchemaForModuleBuilder(module));
+	const result = schema[makeSymbol]().build();
 
 	t.is(result.transformers.length, 3);
 });
@@ -99,7 +98,8 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 	editableModule.mergeMeta(new Map([[metaKey, 'merged']]));
 
 	const editedModule = editableModule.commit().toMethods();
-	const editedCompiler = editedModule.$schema(mockSchemaForModuleBuilder(editedModule)).__make();
+	const editedSchema = editedModule.$schema(mockSchemaForModuleBuilder(editedModule));
+	const editedCompiler = editedSchema[makeSymbol]();
 	t.is(editedCompiler.useMetadata<string>(metaKey).get(), 'merged');
 
 	const isolatedKey = Symbol('isolated');
@@ -107,7 +107,7 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 	otherEdit.mergeMeta(new Map([[isolatedKey, 'other']]));
 	t.is(editedCompiler.useMetadata<string>(isolatedKey).get(), undefined);
 
-	const result = editedModule
+	const finalSchema = editedModule
 		.$directive((schema) => {
 			return schema;
 		})
@@ -118,9 +118,8 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 			}
 			return result;
 		})
-		.$schema(mockSchemaForModuleBuilder(editedModule))
-		.__make()
-		.build();
+		.$schema(mockSchemaForModuleBuilder(editedModule));
+	const result = finalSchema[makeSymbol]().build();
 
 	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
 		Type1: {

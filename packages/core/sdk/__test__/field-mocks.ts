@@ -3,7 +3,7 @@ import type { Middleware } from '../../lib/middleware.ts';
 import { FieldBuilder } from '../field-builder.ts';
 import { FieldCompiler } from '../field-compiler.ts';
 import type { Field, FieldMethods } from '../field-methods.ts';
-import { makeField } from '../field.ts';
+import { makeSymbol } from '../symbols.ts';
 import {
 	type MockArgs,
 	type MockContext,
@@ -60,7 +60,7 @@ export function mockResolver(
 ) {
 	const fieldBuilder = mockFieldBuilder();
 	const fieldWithMake = fn(fieldBuilder.toMethods());
-	const fieldCompiler = makeField(fieldWithMake);
+	const fieldCompiler = fieldWithMake[makeSymbol]();
 	return fieldCompiler.build([]).resolver;
 }
 

@@ -20,3 +20,4 @@ export * from './type.ts';
 export * from './type-builder.ts';
 export * from './type-compiler.ts';
 export * from './type-methods.ts';
+export * from './symbols.ts';

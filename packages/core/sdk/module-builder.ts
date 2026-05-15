@@ -5,6 +5,7 @@ import { nameFunction } from '../utils/functions.ts';
 import type { PluginId } from './app-plugin.ts';
 import { ModuleCompiler } from './module-compiler.ts';
 import type { ModuleMethods, TypesBuildersMap, TypesResolversMap } from './module-methods.ts';
+import { makePluginSymbol, makeSymbol } from './symbols.ts';
 import type { SchemaTransformer } from './transformer.ts';
 
 export interface ModuleBuilderOptions<
@@ -102,7 +103,7 @@ export class ModuleBuilder<
 		return {
 			...this.#typeBuilders,
 			$schema: (types: TypesResolvers) => ({
-				__make: () =>
+				[makeSymbol]: () =>
 					new ModuleCompiler<Context, Info, TypesResolvers>({
 						name: this.#name,
 						metadata: new Map(this.#metadata),
@@ -119,7 +120,7 @@ export class ModuleBuilder<
 					nameFunction(input, `${this.#name}.use`);
 					return this.edit().addMiddleware(input).commitToMethods();
 				}
-				const result = input.buildPlugin({ name: this.#name, kind: 'module' });
+				const result = input[makePluginSymbol]({ name: this.#name, kind: 'module' });
 				const session = this.edit().addRequiredPluginId(result.id);
 				if (result.middleware) {
 					nameFunction(result.middleware, `${this.#name}.use`);

@@ -7,11 +7,12 @@ import { SubscriptionCompiler } from './subscription-compiler.ts';
 import type {
 	Or,
 	Subscription,
+	SubscriptionField,
 	SubscriptionFieldUseInput,
-	SubscriptionFieldWithMake,
 	SubscriptionMethods,
 	SubscriptionResolveMethods,
 } from './subscription-methods.ts';
+import { makePluginSymbol, makeSymbol } from './symbols.ts';
 
 export interface SubscriptionBuilderOptions<Result, Source, Context, Args, Info> {
 	field: string;
@@ -91,7 +92,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 						.addMiddleware(input as Middleware<Subscription<unknown>, Source, Context, Args, Info>)
 						.commitToMethods<Or<Payload, T>>();
 				}
-				const result = input.buildPlugin({
+				const result = input[makePluginSymbol]({
 					type: 'Subscription',
 					field: this.#field,
 					kind: 'field',
@@ -217,14 +218,14 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 		});
 	}
 
-	toMethods(): SubscriptionResolveMethods<Result, Source, Context, Args, Info> {
+	toMethods(): SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info> {
 		return {
 			$use: (input) => {
 				if (typeof input === 'function') {
 					nameFunction(input, `Subscription.${this.#field}.resolve.use`);
 					return this.edit().addMiddleware(input).commitToMethods();
 				}
-				const result = input.buildPlugin({
+				const result = input[makePluginSymbol]({
 					type: 'Subscription',
 					field: this.#field,
 					kind: 'field',
@@ -291,7 +292,7 @@ function createSubscriptionFieldWithMake<
 		Args,
 		Info
 	>,
-): SubscriptionFieldWithMake<Expected, Result, Source, Context, Args, Info, ParentSource> {
+): SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Source> {
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
 		createSubscriptionFieldWithMake<Expected, R, Source, ParentSource, Context, Args, Info>({
 			...options,
@@ -352,7 +353,7 @@ function createSubscriptionFieldWithMake<
 			};
 			return make(resolver);
 		},
-		__make: () =>
+		[makeSymbol]: () =>
 			new SubscriptionCompiler<Expected, Source, ParentSource, Context, Args, Info>({
 				field: options.field,
 				subscribeMetadata: new Map(options.subscribeMetadata),

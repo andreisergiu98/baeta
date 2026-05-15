@@ -5,6 +5,7 @@ import {
 	type ModuleCompiler,
 	type ModuleCompilerFactory,
 	type TypesResolversMap,
+	makeSymbol,
 	transformSchema,
 } from '../sdk/index.ts';
 import { addValidationToSchema } from './input-directive/input-schema.ts';
@@ -98,7 +99,7 @@ function compileModules<Context, Info>(
 	if (modules.length === 0) {
 		throw new Error('Cannot create schema without modules.');
 	}
-	const moduleCompilers = modules.map((module) => module.__make());
+	const moduleCompilers = modules.map((module) => module[makeSymbol]());
 	const registeredPluginIds = new Set<PluginId>();
 	for (const plugin of plugins) {
 		registeredPluginIds.add(plugin.id);

@@ -33,7 +33,7 @@ interface SetupNodeOptions {
 export function setupNode(options: SetupNodeOptions = {}): Steps {
 	const node = options.node ?? DEFAULT_NODE;
 	const turboNamespace = options.turboCache;
-	const yarnCacheNamespace = options.yarnCacheNamespace ? `-${options.yarnCacheNamespace}` : '';
+	const yarnCacheNamespace = options.yarnCacheNamespace ? `${options.yarnCacheNamespace}-` : '';
 
 	return ({ run, add }) => {
 		add(useCheckout());
@@ -68,7 +68,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 				useCache({
 					stepName: 'Setup Yarn Cache',
 					paths: [interpolate`${yarnDir.outputs.dir}`],
-					key: interpolate`yarn-cache-${runner.os}-${hashFiles('**/yarn.lock')}${yarnCacheNamespace}`,
+					key: interpolate`yarn-cache-${runner.os}-${yarnCacheNamespace}${hashFiles('**/yarn.lock')}`,
 					restoreKeys: [interpolate`yarn-cache-${runner.os}-`],
 				}),
 			);

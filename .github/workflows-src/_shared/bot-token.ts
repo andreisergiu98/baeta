@@ -1,26 +1,22 @@
 import type { Steps } from 'github-actions-workflow-builder';
-import { github, secrets, type StepContext } from 'github-actions-workflow-builder/lib/context';
+import { github, secrets } from 'github-actions-workflow-builder/lib/context';
 import type { ContextValue } from 'github-actions-workflow-builder/lib/ContextValue';
-import { actions } from './actions.ts';
+import { useGithubAppToken } from './actions.ts';
 
 export function useBaetaBotToken(): Steps<
-	ContextValue<
-		StepContext<{
-			token: string;
-		}>
-	>
+	ContextValue<{
+		token: string;
+	}>
 > {
-	return ({ use }) => {
-		return use<{ token: string }>('Create GitHub App Token', actions.createGithubAppToken, {
-			with: {
-				'client-id': secrets.BAETA_BOT_CLIENT_ID,
-				'private-key': secrets.BAETA_BOT_PRIVATE_KEY,
+	return ({ add }) => {
+		return add(
+			useGithubAppToken({
+				stepName: 'Create Baeta Bot Token',
+				clientId: secrets.BAETA_BOT_CLIENT_ID,
+				clientSecret: secrets.BAETA_BOT_PRIVATE_KEY,
 				owner: github.repository_owner,
-				repositories: 'baeta',
-			},
-			env: {
-				LOG_LEVEL: 'debug',
-			},
-		});
+				repositories: github.repository,
+			}),
+		);
 	};
 }

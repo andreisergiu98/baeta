@@ -21,7 +21,7 @@ jobs:
     name: Check build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -54,7 +54,7 @@ jobs:
     name: Check types
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -87,7 +87,7 @@ jobs:
     name: Check linting
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -120,7 +120,7 @@ jobs:
     name: Check formatting
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -147,7 +147,7 @@ jobs:
     name: Check dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -180,7 +180,7 @@ jobs:
     name: Check package constraints
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -207,7 +207,7 @@ jobs:
     name: Check yarn dedupe
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -234,7 +234,7 @@ jobs:
     name: Check examples
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -302,7 +302,7 @@ jobs:
         options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s
           --health-retries 5
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -346,7 +346,7 @@ jobs:
           }}
       fail-fast: false
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -391,7 +391,7 @@ jobs:
       'refs/heads/main') || (github.event.ref == 'refs/heads/next')) &&
       (github.repository == 'andreisergiu98/baeta')) }}
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -419,15 +419,13 @@ jobs:
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
-      - name: Create GitHub App Token
+      - name: Create Baeta Bot Token
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3
         with:
           client-id: ${{ secrets.BAETA_BOT_CLIENT_ID }}
           private-key: ${{ secrets.BAETA_BOT_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: baeta
-        env:
-          LOG_LEVEL: debug
+          repositories: ${{ github.repository }}
         id: step_8
       - name: Run @changesets/action
         uses: changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b
@@ -461,7 +459,7 @@ jobs:
     if: ${{ (github.event_name == 'workflow_dispatch') && (github.repository ==
       'andreisergiu98/baeta') }}
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e

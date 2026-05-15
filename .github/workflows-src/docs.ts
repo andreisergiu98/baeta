@@ -1,7 +1,7 @@
 import createWorkflow, { type Steps } from 'github-actions-workflow-builder';
 import { github, secrets } from 'github-actions-workflow-builder/context';
 import { eq, interpolate } from 'github-actions-workflow-builder/lib/expression';
-import { actions } from './_shared/actions.ts';
+import { useGhPages } from './_shared/actions.ts';
 import { setupNode } from './_shared/setup.ts';
 
 export default createWorkflow(
@@ -42,14 +42,15 @@ export default createWorkflow(
 );
 
 function deployWebsite(): Steps {
-	return ({ use }) => {
-		use('Deploy website', actions.ghPages, {
-			with: {
-				github_token: secrets.GITHUB_TOKEN,
-				publish_dir: './website/build',
-				user_name: 'github-actions[bot]',
-				user_email: '41898282+github-actions[bot]@users.noreply.github.com',
-			},
-		});
+	return ({ add }) => {
+		add(
+			useGhPages({
+				stepName: 'Deploy website',
+				githubToken: secrets.GITHUB_TOKEN,
+				publishDir: './website/build',
+				userName: 'github-actions[bot]',
+				userEmail: '41898282+github-actions[bot]@users.noreply.github.com',
+			}),
+		);
 	};
 }

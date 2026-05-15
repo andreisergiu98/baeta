@@ -9,7 +9,7 @@ import {
 	or,
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
-import { actions } from './_shared/actions.ts';
+import { useGithubScript } from './_shared/actions.ts';
 
 const BOT_LOGIN = 'baeta-bot[bot]';
 
@@ -45,9 +45,10 @@ export default createWorkflow(({ setWorkflowName, addJob, addTrigger, when, setP
 			),
 		),
 		() => {
-			addJob('renovate-dispatch', ({ use }) => {
-				use('Dispatch Renovate', actions.githubScript, {
-					with: {
+			addJob('renovate-dispatch', ({ add }) => {
+				add(
+					useGithubScript({
+						stepName: 'Dispatch Renovate',
 						script: joinStrings(
 							[
 								'await github.rest.actions.createWorkflowDispatch({',
@@ -59,8 +60,8 @@ export default createWorkflow(({ setWorkflowName, addJob, addTrigger, when, setP
 							],
 							'\n',
 						),
-					},
-				});
+					}),
+				);
 			});
 		},
 	);

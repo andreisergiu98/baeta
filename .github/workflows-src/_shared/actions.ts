@@ -1,4 +1,8 @@
-export const actions = {
+import type { Steps } from 'github-actions-workflow-builder';
+import type { ContextValue } from 'github-actions-workflow-builder/lib/ContextValue';
+import { joinStrings, type Expression } from 'github-actions-workflow-builder/lib/expression';
+
+const actions = {
 	checkout: 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd', // v6.0.2
 	setupNode: 'actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e', // v6.4.0
 	cache: 'actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae', // v5.0.5
@@ -9,3 +13,215 @@ export const actions = {
 	ghPages: 'peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e', // v4.0.0
 	renovate: 'renovatebot/github-action@693b9ef15eec82123529a37c782242f091365961', // v46.1.14
 };
+
+export interface UseCheckoutOptions {
+	stepName?: string;
+	ref?: Expression<string>;
+	fetchDepth?: Expression<number>;
+}
+
+export function useCheckout(options: UseCheckoutOptions = {}): Steps {
+	return ({ use }) => {
+		use(options.stepName || 'Git Checkout', actions.checkout, {
+			with: {
+				ref: options.ref,
+				'fetch-depth': options.fetchDepth,
+			},
+		});
+	};
+}
+
+export interface UseCacheOptions {
+	stepName?: string;
+	paths: Expression<string>[];
+	key: Expression<string>;
+	restoreKeys?: Expression<string>[];
+}
+
+export function useCache(options: UseCacheOptions): Steps<{
+	cacheHit: Expression<boolean>;
+	cacheMiss: Expression<boolean>;
+}> {
+	return ({ use }) => {
+		const { outputs } = use<{ cacheHit: boolean; cacheMiss: boolean }>(
+			options.stepName || 'Enable Cache',
+			actions.cache,
+			{
+				with: {
+					path: joinStrings(options.paths, '\n'),
+					key: options.key,
+					'restore-keys': options.restoreKeys && joinStrings(options.restoreKeys, '\n'),
+				},
+			},
+		);
+		return outputs;
+	};
+}
+
+export interface UseSetupNodeOptions {
+	stepName?: string;
+	nodeVersion?: Expression<string>;
+}
+
+export function useSetupNode(options: UseSetupNodeOptions = {}): Steps {
+	return ({ use }) => {
+		use(options.stepName || 'Setup Node', actions.setupNode, {
+			with: {
+				'node-version': options.nodeVersion,
+			},
+		});
+	};
+}
+
+export interface UseGithubAppTokenOptions {
+	stepName?: string;
+	clientId: Expression<string>;
+	clientSecret: Expression<string>;
+	owner: Expression<string>;
+	repositories: Expression<string>;
+}
+
+export function useGithubAppToken(
+	options: UseGithubAppTokenOptions,
+): Steps<ContextValue<{ token: string }>> {
+	return ({ use }) => {
+		const { outputs } = use<{ token: string }>(
+			options.stepName || 'Create GitHub App Token',
+			actions.createGithubAppToken,
+			{
+				with: {
+					'client-id': options.clientId,
+					'private-key': options.clientSecret,
+					owner: options.owner,
+					repositories: options.repositories,
+				},
+			},
+		);
+		return outputs;
+	};
+}
+
+export interface UseGithubScriptOptions {
+	stepName?: string;
+	script: Expression<string>;
+}
+
+export function useGithubScript(options: UseGithubScriptOptions): Steps {
+	return ({ use }) => {
+		use(options.stepName || 'Run Github Script', actions.githubScript, {
+			with: {
+				script: options.script,
+			},
+		});
+	};
+}
+
+export interface UseDockerLoginOptions {
+	stepName?: string;
+	registry: Expression<string>;
+	username: Expression<string>;
+	password: Expression<string>;
+}
+
+export function useDockerLogin(options: UseDockerLoginOptions): Steps {
+	return ({ use }) => {
+		use(options.stepName || 'Docker Login', actions.dockerLogin, {
+			with: {
+				registry: options.registry,
+				username: options.username,
+				password: options.password,
+			},
+		});
+	};
+}
+
+export interface UseChangesetsOptions {
+	stepName?: string;
+	publishCommand: Expression<string>;
+	versionCommand: Expression<string>;
+	commitMessage: Expression<string>;
+	prTitle: Expression<string>;
+	createPRToken: Expression<string>;
+	createReleaseToken: Expression<string>;
+}
+
+export function useChangesets(options: UseChangesetsOptions): Steps {
+	return ({ use }) => {
+		use(options.stepName || 'Run @changesets/action', actions.changesets, {
+			with: {
+				publish: options.publishCommand,
+				version: options.versionCommand,
+				commit: options.commitMessage,
+				title: options.prTitle,
+				commitMode: 'github-api',
+				createGithubReleases: false,
+			},
+			env: {
+				GITHUB_TOKEN: options.createPRToken,
+				RELEASE_GITHUB_TOKEN: options.createReleaseToken,
+			},
+		});
+	};
+}
+
+export interface UseGhPagesOptions {
+	stepName?: string;
+	githubToken: Expression<string>;
+	publishDir: Expression<string>;
+	userName: Expression<string>;
+	userEmail: Expression<string>;
+}
+
+export function useGhPages(options: UseGhPagesOptions): Steps {
+	return ({ use }) => {
+		use(options.stepName || 'Deploy to GitHub Pages', actions.ghPages, {
+			with: {
+				github_token: options.githubToken,
+				publish_dir: options.publishDir,
+				user_name: options.userName,
+				user_email: options.userEmail,
+			},
+		});
+	};
+}
+
+export interface UseRenovateOptions {
+	stepName?: string;
+	token: Expression<string>;
+	configurationFile: Expression<string>;
+	logLevel?: Expression<string>;
+	repositoryCache?: Expression<string>;
+	platformCommit?: Expression<string>;
+	repositories?: Expression<string>;
+	nodeOptions?: Expression<string>;
+	allowedCommands?: Expression<string>[];
+	dockerUser?: Expression<string>;
+	dockerCmdFile?: Expression<string>;
+	dockerVolumes?: Expression<string>[];
+	customEnvVariables?: Record<string, Expression<string>>;
+}
+
+export function useRenovate(options: UseRenovateOptions): Steps {
+	return ({ use }) => {
+		use(options.stepName || 'Run Renovate', actions.renovate, {
+			with: {
+				token: options.token,
+				configurationFile: options.configurationFile,
+				'docker-user': options.dockerUser,
+				'docker-cmd-file': options.dockerCmdFile,
+				'docker-volumes': options.dockerVolumes && joinStrings(options.dockerVolumes, ';'),
+			},
+			env: {
+				RENOVATE_REPOSITORY_CACHE: options.repositoryCache,
+				RENOVATE_PLATFORM_COMMIT: options.platformCommit,
+				RENOVATE_REPOSITORIES: options.repositories,
+				RENOVATE_ALLOWED_COMMANDS:
+					options.allowedCommands && JSON.stringify(options.allowedCommands),
+				RENOVATE_CUSTOM_ENV_VARIABLES:
+					options.customEnvVariables && JSON.stringify(options.customEnvVariables),
+				LOG_LEVEL: options.logLevel,
+				NODE_OPTIONS: options.nodeOptions,
+			},
+		});
+	};
+}

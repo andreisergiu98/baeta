@@ -3,62 +3,61 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'product',
-  dirname: './product',
-  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Product","loc":{"start":5,"end":12}},"interfaces":[],"directives":[{"kind":"Directive","name":{"kind":"Name","value":"key","loc":{"start":14,"end":17}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"fields","loc":{"start":18,"end":24}},"value":{"kind":"StringValue","value":"id","block":false,"loc":{"start":26,"end":30}},"loc":{"start":18,"end":30}}],"loc":{"start":13,"end":31}}],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":35,"end":37}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":39,"end":41}},"loc":{"start":39,"end":41}},"loc":{"start":39,"end":42}},"directives":[],"loc":{"start":35,"end":42}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"name","loc":{"start":44,"end":48}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":50,"end":56}},"loc":{"start":50,"end":56}},"loc":{"start":50,"end":57}},"directives":[],"loc":{"start":44,"end":57}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"price","loc":{"start":59,"end":64}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float","loc":{"start":66,"end":71}},"loc":{"start":66,"end":71}},"loc":{"start":66,"end":72}},"directives":[],"loc":{"start":59,"end":72}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"owner","loc":{"start":74,"end":79}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":81,"end":85}},"loc":{"start":81,"end":85}},"directives":[],"loc":{"start":74,"end":85}}],"loc":{"start":0,"end":87}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":94,"end":99}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"product","loc":{"start":103,"end":110}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"id","loc":{"start":111,"end":113}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":115,"end":117}},"loc":{"start":115,"end":117}},"loc":{"start":115,"end":118}},"directives":[],"loc":{"start":111,"end":118}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"Product","loc":{"start":121,"end":128}},"loc":{"start":121,"end":128}},"directives":[],"loc":{"start":103,"end":128}}],"loc":{"start":89,"end":130}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Product","loc":{"start":5,"end":12}},"interfaces":[],"directives":[{"kind":"Directive","name":{"kind":"Name","value":"key","loc":{"start":14,"end":17}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"fields","loc":{"start":18,"end":24}},"value":{"kind":"StringValue","value":"id","block":false,"loc":{"start":26,"end":30}},"loc":{"start":18,"end":30}}],"loc":{"start":13,"end":31}}],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":35,"end":37}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":39,"end":41}},"loc":{"start":39,"end":41}},"loc":{"start":39,"end":42}},"directives":[],"loc":{"start":35,"end":42}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"name","loc":{"start":44,"end":48}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":50,"end":56}},"loc":{"start":50,"end":56}},"loc":{"start":50,"end":57}},"directives":[],"loc":{"start":44,"end":57}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"price","loc":{"start":59,"end":64}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float","loc":{"start":66,"end":71}},"loc":{"start":66,"end":71}},"loc":{"start":66,"end":72}},"directives":[],"loc":{"start":59,"end":72}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"owner","loc":{"start":74,"end":79}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":81,"end":85}},"loc":{"start":81,"end":85}},"directives":[],"loc":{"start":74,"end":85}}],"loc":{"start":0,"end":87}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":94,"end":99}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"product","loc":{"start":103,"end":110}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"id","loc":{"start":111,"end":113}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":115,"end":117}},"loc":{"start":115,"end":117}},"loc":{"start":115,"end":118}},"directives":[],"loc":{"start":111,"end":118}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"Product","loc":{"start":121,"end":128}},"loc":{"start":121,"end":128}},"directives":[],"loc":{"start":103,"end":128}}],"loc":{"start":89,"end":130}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    Product: Baeta.TypeMethods<Types.Product, Ctx, Info, BaetaModuleObjectTypeFields['Product']['Builder'], BaetaModuleObjectTypeFields['Product']['Factory']>
-    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+    Product: BaetaSdk.TypeMethods<BaetaTypes.Product, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Product']['Builder'], BaetaModuleObjectTypeFields['Product']['Factory']>
+    Query: BaetaSdk.TypeMethods<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
   };
   Factories: {
-    Product: Baeta.TypeCompilerFactory<Types.Product, Ctx, Info, BaetaModuleObjectTypeFields['Product']['Factory']>
-    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+    Product: BaetaSdk.TypeCompilerFactory<BaetaTypes.Product, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Product']['Factory']>
+    Query: BaetaSdk.TypeCompilerFactory<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   Product: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Product, Ctx, {}, Info>
-      name: Baeta.FieldMethods<Types.Scalars["String"], Types.Product, Ctx, {}, Info>
-      price: Baeta.FieldMethods<Types.Scalars["Float"], Types.Product, Ctx, {}, Info>
-      owner: Baeta.FieldMethods<Types.User | null, Types.Product, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      name: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      price: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Float"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      owner: BaetaSdk.FieldMethods<BaetaTypes.User | null, BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.Product, Ctx, {}, Info>
-      name: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.Product, Ctx, {}, Info>
-      price: Baeta.Field<Types.Scalars["Float"], Types.Scalars["Float"], Types.Product, Ctx, {}, Info>
-      owner: Baeta.Field<Types.User | null, Types.User | null, Types.Product, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      name: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      price: BaetaSdk.Field<BaetaTypes.Scalars["Float"], BaetaTypes.Scalars["Float"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      owner: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
   Query: {
     Builder: {
-      product: Baeta.FieldMethods<Types.Product | null, {}, Ctx, Types.QueryProductArgs, Info>
+      product: BaetaSdk.FieldMethods<BaetaTypes.Product | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryProductArgs, BaetaUserTypes.Info>
     };
     Factory: {
-      product: Baeta.Field<Types.Product | null, Types.Product | null, {}, Ctx, Types.QueryProductArgs, Info>
+      product: BaetaSdk.Field<BaetaTypes.Product | null, BaetaTypes.Product | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryProductArgs, BaetaUserTypes.Info>
     };
   };
 };
 
-export const ProductModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  Product: Baeta.createTypeBuilder("Product", {
-    id: Baeta.createFieldBuilder("Product", "id"),
-    name: Baeta.createFieldBuilder("Product", "name"),
-    price: Baeta.createFieldBuilder("Product", "price"),
-    owner: Baeta.createFieldBuilder("Product", "owner")
+export const ProductModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  Product: BaetaSdk.createTypeBuilder("Product", {
+    id: BaetaSdk.createFieldBuilder("Product", "id"),
+    name: BaetaSdk.createFieldBuilder("Product", "name"),
+    price: BaetaSdk.createFieldBuilder("Product", "price"),
+    owner: BaetaSdk.createFieldBuilder("Product", "owner")
   }),
-  Query: Baeta.createTypeBuilder("Query", {
-    product: Baeta.createFieldBuilder("Query", "product")
+  Query: BaetaSdk.createTypeBuilder("Query", {
+    product: BaetaSdk.createFieldBuilder("Query", "product")
   })
 }, {
 

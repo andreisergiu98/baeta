@@ -3,59 +3,58 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'user-photos',
-  dirname: './user-photos',
-  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":18,"end":20}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":22,"end":24}},"loc":{"start":22,"end":24}},"loc":{"start":22,"end":25}},"directives":[],"loc":{"start":18,"end":25}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"userId","loc":{"start":27,"end":33}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":35,"end":37}},"loc":{"start":35,"end":37}},"loc":{"start":35,"end":38}},"directives":[],"loc":{"start":27,"end":38}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":40,"end":43}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":45,"end":51}},"loc":{"start":45,"end":51}},"loc":{"start":45,"end":52}},"directives":[],"loc":{"start":40,"end":52}}],"loc":{"start":0,"end":54}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":68,"end":72}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":76,"end":82}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":85,"end":94}},"loc":{"start":85,"end":94}},"loc":{"start":85,"end":95}},"loc":{"start":84,"end":96}},"directives":[],"loc":{"start":76,"end":96}}],"loc":{"start":56,"end":98}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"UserPhoto","loc":{"start":5,"end":14}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":18,"end":20}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":22,"end":24}},"loc":{"start":22,"end":24}},"loc":{"start":22,"end":25}},"directives":[],"loc":{"start":18,"end":25}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"userId","loc":{"start":27,"end":33}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":35,"end":37}},"loc":{"start":35,"end":37}},"loc":{"start":35,"end":38}},"directives":[],"loc":{"start":27,"end":38}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"url","loc":{"start":40,"end":43}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":45,"end":51}},"loc":{"start":45,"end":51}},"loc":{"start":45,"end":52}},"directives":[],"loc":{"start":40,"end":52}}],"loc":{"start":0,"end":54}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":68,"end":72}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photos","loc":{"start":76,"end":82}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhoto","loc":{"start":85,"end":94}},"loc":{"start":85,"end":94}},"loc":{"start":85,"end":95}},"loc":{"start":84,"end":96}},"directives":[],"loc":{"start":76,"end":96}}],"loc":{"start":56,"end":98}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    UserPhoto: Baeta.TypeMethods<Types.UserPhoto, Ctx, Info, BaetaModuleObjectTypeFields['UserPhoto']['Builder'], BaetaModuleObjectTypeFields['UserPhoto']['Factory']>
-    User: Baeta.TypeMethods<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
+    UserPhoto: BaetaSdk.TypeMethods<BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['UserPhoto']['Builder'], BaetaModuleObjectTypeFields['UserPhoto']['Factory']>
+    User: BaetaSdk.TypeMethods<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
   };
   Factories: {
-    UserPhoto: Baeta.TypeCompilerFactory<Types.UserPhoto, Ctx, Info, BaetaModuleObjectTypeFields['UserPhoto']['Factory']>
-    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Factory']>
+    UserPhoto: BaetaSdk.TypeCompilerFactory<BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['UserPhoto']['Factory']>
+    User: BaetaSdk.TypeCompilerFactory<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   UserPhoto: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
-      userId: Baeta.FieldMethods<Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
-      url: Baeta.FieldMethods<Types.Scalars["String"], Types.UserPhoto, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      userId: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      url: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
-      userId: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.UserPhoto, Ctx, {}, Info>
-      url: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.UserPhoto, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      userId: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      url: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
   User: {
     Builder: {
-      photos: Baeta.FieldMethods<Array<Types.UserPhoto> | null, Types.User, Ctx, {}, Info>
+      photos: BaetaSdk.FieldMethods<Array<BaetaTypes.UserPhoto> | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      photos: Baeta.Field<Array<Types.UserPhoto> | null, Array<Types.UserPhoto> | null, Types.User, Ctx, {}, Info>
+      photos: BaetaSdk.Field<Array<BaetaTypes.UserPhoto> | null, Array<BaetaTypes.UserPhoto> | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
 };
 
-export const UserPhotosModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  UserPhoto: Baeta.createTypeBuilder("UserPhoto", {
-    id: Baeta.createFieldBuilder("UserPhoto", "id"),
-    userId: Baeta.createFieldBuilder("UserPhoto", "userId"),
-    url: Baeta.createFieldBuilder("UserPhoto", "url")
+export const UserPhotosModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  UserPhoto: BaetaSdk.createTypeBuilder("UserPhoto", {
+    id: BaetaSdk.createFieldBuilder("UserPhoto", "id"),
+    userId: BaetaSdk.createFieldBuilder("UserPhoto", "userId"),
+    url: BaetaSdk.createFieldBuilder("UserPhoto", "url")
   }),
-  User: Baeta.createTypeBuilder("User", {
-    photos: Baeta.createFieldBuilder("User", "photos")
+  User: BaetaSdk.createTypeBuilder("User", {
+    photos: BaetaSdk.createFieldBuilder("User", "photos")
   })
 }, {
 

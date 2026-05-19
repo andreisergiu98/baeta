@@ -21,7 +21,9 @@ export function printResolvers(
 	const relativeGeneratedTypesDir = relative(options.federationRootDir, options.typesDir);
 	const imports = [
 		'import * as BaetaFederation from "@baeta/federation"',
-		`import type * as FederationTypes from "${relativeGeneratedTypesDir}/federation${options.extension}"`,
+		info.resolvableEntitiesMap.size > 0
+			? `import type * as FederationTypes from "${relativeGeneratedTypesDir}/federation${options.extension}"`
+			: null,
 		`import federationSDL from "./federation-sdl${options.extension}"`,
 		`import { ${moduleExportName} } from "./${options.moduleDefinitionName}${options.extension}"`,
 		info.resolvableEntitiesMap.size > 0

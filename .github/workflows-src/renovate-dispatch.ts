@@ -51,11 +51,15 @@ export default createWorkflow(({ setWorkflowName, addJob, addTrigger, when, setP
 						stepName: 'Dispatch Renovate',
 						script: joinStrings(
 							[
+								'const hour = new Date().getUTCHours();',
+								'const isResetSlot = context.eventName === "schedule" && hour >= 2 && hour < 6;',
+								'const cache = isResetSlot ? "reset" : "enabled";',
 								'await github.rest.actions.createWorkflowDispatch({',
 								'  owner: context.repo.owner,',
 								'  repo: context.repo.repo,',
 								'  workflow_id: "renovate.yml",',
 								'  ref: context.payload.repository.default_branch,',
+								'  inputs: { cache },',
 								'});',
 							],
 							'\n',

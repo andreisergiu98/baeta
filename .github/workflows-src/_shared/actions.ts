@@ -66,6 +66,71 @@ export function useCache(options: UseCacheOptions): Steps<{
 	};
 }
 
+export interface UseCacheRestoreOptions {
+	stepName?: string;
+	paths: Expression<string>[];
+	key: Expression<string>;
+	restoreKeys?: Expression<string>[];
+	failOnCacheMiss?: Expression<boolean>;
+	lookupOnly?: Expression<boolean>;
+}
+
+export function useCacheRestore(options: UseCacheRestoreOptions): Steps<{
+	cacheHit: Expression<boolean>;
+	cacheMiss: Expression<boolean>;
+	cachePrimaryKey: Expression<string>;
+	cacheMatchedKey: Expression<string>;
+}> {
+	return ({ use }) => {
+		const { outputs } = use<{
+			'cache-hit': string;
+			'cache-primary-key': string;
+			'cache-matched-key': string;
+		}>(
+			options.stepName || 'Restore Cache',
+			actions.cache.replace('actions/cache@', 'actions/cache/restore@'),
+			{
+				with: {
+					path: joinStrings(options.paths, '\n'),
+					key: options.key,
+					'restore-keys': options.restoreKeys && joinStrings(options.restoreKeys, '\n'),
+					'fail-on-cache-miss': options.failOnCacheMiss,
+					'lookup-only': options.lookupOnly,
+				},
+			},
+		);
+		return {
+			cacheHit: eq(outputs['cache-hit'], 'true'),
+			cacheMiss: neq(outputs['cache-hit'], 'true'),
+			cachePrimaryKey: outputs['cache-primary-key'],
+			cacheMatchedKey: outputs['cache-matched-key'],
+		};
+	};
+}
+
+export interface UseCacheSaveOptions {
+	stepName?: string;
+	paths: Expression<string>[];
+	key: Expression<string>;
+	uploadChunkSize?: Expression<number>;
+}
+
+export function useCacheSave(options: UseCacheSaveOptions): Steps {
+	return ({ use }) => {
+		use(
+			options.stepName || 'Save Cache',
+			actions.cache.replace('actions/cache@', 'actions/cache/save@'),
+			{
+				with: {
+					path: joinStrings(options.paths, '\n'),
+					key: options.key,
+					'upload-chunk-size': options.uploadChunkSize,
+				},
+			},
+		);
+	};
+}
+
 export interface UseSetupNodeOptions {
 	stepName?: string;
 	nodeVersion?: Expression<string>;

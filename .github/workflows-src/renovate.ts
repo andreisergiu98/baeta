@@ -1,18 +1,21 @@
 import createWorkflow from 'github-actions-workflow-builder';
 import { github, secrets } from 'github-actions-workflow-builder/context';
 import {
+	and,
+	eq,
 	interpolate,
 	joinStrings,
-	neq,
+	not,
+	success,
 	type Expression,
 } from 'github-actions-workflow-builder/lib/expression';
-import { useCache, useDockerLogin, useRenovate } from './_shared/actions.ts';
+import { useCacheRestore, useCacheSave, useDockerLogin, useRenovate } from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
 import { DEFAULT_NODE, setupNode } from './_shared/setup.ts';
 
-const allowedCommands = ['^yarn install --immutable --immutable-cache$', '^yarn actions:build$'];
-const yarnGlobalDir = '/home/ubuntu/.yarn/berry';
 const nodeVersion = DEFAULT_NODE.version;
+const renovateCacheKey = 'renovate-cache-v2';
+const allowedCommands = ['^yarn install --immutable --immutable-cache$', '^yarn actions:build$'];
 
 export default createWorkflow(
 	({ setWorkflowName, addJob, setConcurrency, addTrigger, setPermissions }) => {
@@ -23,10 +26,10 @@ export default createWorkflow(
 				cache: {
 					required: false,
 					default: 'enabled',
-					description: 'Enable Renovate cache',
+					description: 'Cache mode',
 					// @ts-expect-error - Missing type definition
 					type: 'choice',
-					options: ['enabled', 'disabled'],
+					options: ['enabled', 'disabled', 'reset'],
 				},
 				logLevel: {
 					required: false,
@@ -38,10 +41,15 @@ export default createWorkflow(
 				},
 			},
 		});
+
+		const disableCache = eq(dispatch.inputs.cache, 'disabled');
+		const resetCache = eq(dispatch.inputs.cache, 'reset');
+
 		setPermissions({
 			contents: 'read',
+			actions: 'write',
 		});
-		addJob('Renovate', ({ use, add, when, run }) => {
+		addJob('Renovate', ({ add, when, run }) => {
 			const getToken = add(useBaetaBotToken());
 
 			add(
@@ -55,46 +63,49 @@ export default createWorkflow(
 
 			add(
 				setupNode({
-					disableYarnCache: true,
+					skipInstall: true,
 				}),
 			);
 
-			const yarnInfo = run<{ yarnDir: string; yarnVersion: string }>(
+			const { outputs: yarnInfo } = run<{ version: string }>(
 				'Get yarn info',
-				joinStrings(
-					[
-						`echo "yarnDir=$(yarn config get globalFolder)" >> $GITHUB_OUTPUT`,
-						`echo "yarnVersion=$(yarn --version)" >> $GITHUB_OUTPUT`,
-					],
-					'\n',
-				),
-				{ shell: 'bash' },
+				joinStrings([`echo "version=$(yarn --version)" >> $GITHUB_OUTPUT`], '\n'),
 			);
 
-			when(neq(dispatch.inputs.cache, 'disabled'), () => {
-				add(
-					useCache({
-						stepName: 'Setup Renovate Cache',
-						paths: ['/tmp/renovate/cache/renovate/repository'],
-						key: interpolate`renovate-cache-${github.run_id}`,
-						restoreKeys: ['renovate-cache-'],
+			const cacheHit = when(not(disableCache), () => {
+				const cacheResult = add(
+					useCacheRestore({
+						stepName: 'Restore Renovate Cache',
+						paths: ['/tmp/renovate/cache'],
+						key: renovateCacheKey,
 					}),
 				);
-				run('Fix-up Renovate cache permissions', 'sudo chown -R 12021:0 /tmp/renovate/ || true');
+
+				when(and(resetCache, cacheResult.cacheHit), () => {
+					run(
+						'Wipe Renovate Cache',
+						joinStrings(
+							[
+								'mv /tmp/renovate/cache/renovate/repository /tmp/renovate-repo-keep',
+								'rm -rf /tmp/renovate/cache',
+								'mkdir -p /tmp/renovate/cache/renovate',
+								'mv /tmp/renovate-repo-keep /tmp/renovate/cache/renovate/repository',
+							],
+							'\n',
+						),
+					);
+				});
+
+				when(cacheResult.cacheHit, () => {
+					run('Fix-up Renovate cache permissions', 'sudo chown -R 12021:0 /tmp/renovate/ || true');
+				});
+
+				return cacheResult.cacheHit;
 			});
 
-			run(
-				'Fix-up yarn cache permissions',
-				interpolate`sudo chown -R 12021:0 ${yarnInfo.outputs.yarnDir}`,
-			);
-
-			run(
-				'Write Renovate Entrypoint',
-				makeEntrypointScript(nodeVersion, yarnInfo.outputs.yarnVersion),
-				{
-					shell: 'bash',
-				},
-			);
+			run('Write Renovate Entrypoint', makeEntrypointScript(nodeVersion, yarnInfo.version), {
+				shell: 'bash',
+			});
 
 			add(
 				useRenovate({
@@ -107,19 +118,24 @@ export default createWorkflow(
 					nodeOptions: '--max-old-space-size=4096',
 					dockerUser: 'root',
 					dockerCmdFile: '/tmp/renovate-entrypoint.sh',
-					dockerVolumes: ['/tmp:/tmp', `${yarnInfo.outputs.yarnDir}:${yarnGlobalDir}`],
 					allowedCommands,
-					customEnvVariables: {
-						YARN_GLOBAL_FOLDER: yarnGlobalDir,
-						YARN_ENABLE_GLOBAL_CACHE: 'true',
-					},
 				}),
 			);
 
-			run(
-				'Restore yarn cache permissions',
-				interpolate`sudo chown -R $(id -u):$(id -g) ${yarnInfo.outputs.yarnDir}`,
-			);
+			when(and(success(), not(disableCache)), () => {
+				when(cacheHit, () => {
+					run('Remove Renovate Cache', `gh cache delete ${renovateCacheKey}`, {
+						env: { GH_TOKEN: secrets.GITHUB_TOKEN },
+					});
+				});
+				add(
+					useCacheSave({
+						stepName: 'Save Renovate Cache',
+						paths: ['/tmp/renovate/cache'],
+						key: renovateCacheKey,
+					}),
+				);
+			});
 		});
 	},
 );
@@ -127,15 +143,18 @@ export default createWorkflow(
 function makeEntrypointScript(
 	nodeVersion: string | Expression<string>,
 	yarnVersion: string | Expression<string>,
-): string {
-	return [
-		`cat > /tmp/renovate-entrypoint.sh <<'EOF'`,
-		`#!/bin/bash`,
-		`set -e`,
-		`runuser -u ubuntu -- install-tool node ${nodeVersion}`,
-		`runuser -u ubuntu -- install-tool yarn ${yarnVersion}`,
-		`exec runuser -u ubuntu --preserve-environment renovate`,
-		`EOF`,
-		`chmod +x /tmp/renovate-entrypoint.sh`,
-	].join('\n');
+): Expression<string> {
+	return joinStrings(
+		[
+			`cat > /tmp/renovate-entrypoint.sh <<'EOF'`,
+			`#!/bin/bash`,
+			`set -e`,
+			interpolate`runuser -u ubuntu -- install-tool node ${nodeVersion}`,
+			interpolate`runuser -u ubuntu -- install-tool yarn ${yarnVersion}`,
+			`exec runuser -u ubuntu --preserve-environment renovate`,
+			`EOF`,
+			`chmod +x /tmp/renovate-entrypoint.sh`,
+		],
+		'\n',
+	);
 }

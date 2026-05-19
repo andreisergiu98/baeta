@@ -19,6 +19,7 @@
     "noErrorTruncation": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "noUnusedLocals": true
   }
 }

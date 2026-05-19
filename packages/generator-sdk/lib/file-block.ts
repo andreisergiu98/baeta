@@ -3,11 +3,11 @@ import { dirname } from '@baeta/util-path';
 import { File, type FileOptions } from './file.ts';
 
 export class FileBlock extends File {
-	public filename: string;
-	public content: string;
+	public override filename: string;
+	public override content: string;
+	public override tag: string;
 	public start: string;
 	public end: string;
-	public tag: string;
 	constructor(
 		filename: string,
 		content: string,
@@ -29,7 +29,7 @@ export class FileBlock extends File {
 		this.tag = tag;
 	}
 
-	write = async () => {
+	override write = async () => {
 		if (this.persisted) {
 			return;
 		}
@@ -52,7 +52,7 @@ export class FileBlock extends File {
 		}
 	};
 
-	unlink = async () => {
+	override unlink = async () => {
 		this.persisted = false;
 
 		const [existingContent, fd] = await this.getExistingContent();

@@ -11,23 +11,25 @@ export interface FileOptions {
 	 */
 	disableGenerationNoticeHeader?: boolean;
 
-	/**
-	 * Disable eslint-disable comment at the beginning of the file.
-	 * @defaultValue false
-	 */
-	disableEslintHeader?: boolean;
-
-	/**
-	 * Disable biome v1 comment at the beginning of the file.
-	 * @defaultValue false
-	 */
-	disableBiomeV1Header?: boolean;
-
-	/**
-	 * Disable biome v2 comment at the beginning of the file.
-	 * @defaultValue false
-	 */
-	disableBiomeV2Header?: boolean;
+	disableLintHeaders?:
+		| true
+		| {
+				/**
+				 * Disable eslint-disable comment at the beginning of the file.
+				 * @defaultValue false
+				 */
+				eslint?: boolean;
+				/**
+				 * Disable biome v1 comment at the beginning of the file.
+				 * @defaultValue false
+				 */
+				biomeV1?: boolean;
+				/**
+				 * Disable biome v2 comment at the beginning of the file.
+				 * @defaultValue false
+				 */
+				biomeV2?: boolean;
+		  };
 
 	/**
 	 * Disallow overwriting the file.
@@ -107,19 +109,21 @@ export class File {
 			headerItems.push(comment);
 		}
 
-		if (this.options?.disableEslintHeader !== true) {
-			const comment = this.createComment('eslint-disable');
-			headerItems.push(comment);
-		}
+		if (this.options?.disableLintHeaders !== true) {
+			if (this.options?.disableLintHeaders?.eslint !== true) {
+				const comment = this.createComment('eslint-disable');
+				headerItems.push(comment);
+			}
 
-		if (this.options?.disableBiomeV1Header !== true) {
-			const comment = this.createComment('@biome-ignore-all: generated file');
-			headerItems.push(comment);
-		}
+			if (this.options?.disableLintHeaders?.biomeV1 !== true) {
+				const comment = this.createComment('@biome-ignore-all: generated file');
+				headerItems.push(comment);
+			}
 
-		if (this.options?.disableBiomeV2Header !== true) {
-			const comment = this.createComment('biome-ignore-all lint: generated file');
-			headerItems.push(comment);
+			if (this.options?.disableLintHeaders?.biomeV2 !== true) {
+				const comment = this.createComment('biome-ignore-all lint: generated file');
+				headerItems.push(comment);
+			}
 		}
 
 		if (this.options?.addHeader) {

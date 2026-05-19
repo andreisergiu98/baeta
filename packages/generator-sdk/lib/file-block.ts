@@ -17,9 +17,7 @@ export class FileBlock extends File {
 		options?: FileOptions,
 	) {
 		super(filename, content, tag, {
-			disableBiomeV1Header: options?.disableBiomeV1Header ?? true,
-			disableBiomeV2Header: options?.disableBiomeV2Header ?? true,
-			disableEslintHeader: options?.disableEslintHeader ?? true,
+			disableLintHeaders: options?.disableLintHeaders ?? true,
 			disableGenerationNoticeHeader: options?.disableGenerationNoticeHeader ?? true,
 		});
 		this.filename = filename;

@@ -135,9 +135,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 				'federation',
 				{
 					disableOverwrite: true,
-					disableBiomeV1Header: true,
-					disableBiomeV2Header: true,
-					disableEslintHeader: true,
+					disableLintHeaders: true,
 					disableGenerationNoticeHeader: true,
 				},
 			);

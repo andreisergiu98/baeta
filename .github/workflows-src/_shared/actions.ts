@@ -1,6 +1,11 @@
 import type { Steps } from 'github-actions-workflow-builder';
 import type { ContextValue } from 'github-actions-workflow-builder/lib/ContextValue';
-import { joinStrings, type Expression } from 'github-actions-workflow-builder/lib/expression';
+import {
+	eq,
+	joinStrings,
+	neq,
+	type Expression,
+} from 'github-actions-workflow-builder/lib/expression';
 
 const actions = {
 	checkout: 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd', // v6.0.2
@@ -43,7 +48,7 @@ export function useCache(options: UseCacheOptions): Steps<{
 	cacheMiss: Expression<boolean>;
 }> {
 	return ({ use }) => {
-		const { outputs } = use<{ cacheHit: boolean; cacheMiss: boolean }>(
+		const { outputs } = use<{ 'cache-hit': string }>(
 			options.stepName || 'Enable Cache',
 			actions.cache,
 			{
@@ -54,7 +59,10 @@ export function useCache(options: UseCacheOptions): Steps<{
 				},
 			},
 		);
-		return outputs;
+		return {
+			cacheHit: eq(outputs['cache-hit'], 'true'),
+			cacheMiss: neq(outputs['cache-hit'], 'true'),
+		};
 	};
 }
 

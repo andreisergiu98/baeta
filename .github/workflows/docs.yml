@@ -30,17 +30,15 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn docs:build
       - name: Deploy website
         if: ${{ (github.repository == 'andreisergiu98/baeta') && (github.event_name ==

@@ -26,14 +26,13 @@ interface SetupNodeOptions {
 	node?: NodeVersion<string | Expression<string>>;
 	turboCache?: TurboCache;
 	disableYarnCache?: boolean;
-	yarnCacheNamespace?: string;
+
 	skipInstall?: boolean;
 }
 
 export function setupNode(options: SetupNodeOptions = {}): Steps {
 	const node = options.node ?? DEFAULT_NODE;
 	const turboNamespace = options.turboCache;
-	const yarnCacheNamespace = options.yarnCacheNamespace ? `${options.yarnCacheNamespace}-` : '';
 
 	return ({ run, add }) => {
 		add(useCheckout());
@@ -54,22 +53,12 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 		);
 
 		if (!options.disableYarnCache) {
-			const yarnDir = run<{
-				dir: string;
-			}>(
-				'Get yarn cache directory',
-				`echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT`,
-				{
-					shell: 'bash',
-				},
-			);
-
 			add(
 				useCache({
 					stepName: 'Setup Yarn Cache',
-					paths: [interpolate`${yarnDir.outputs.dir}`],
-					key: interpolate`yarn-cache-${runner.os}-${yarnCacheNamespace}${hashFiles('**/yarn.lock')}`,
-					restoreKeys: [interpolate`yarn-cache-${runner.os}-`],
+					paths: ['.yarn/cache'],
+					key: interpolate`yarn-cache-v1-${runner.os}-${hashFiles('**/yarn.lock')}`,
+					restoreKeys: [interpolate`yarn-cache-v1-${runner.os}-`],
 				}),
 			);
 		}
@@ -86,7 +75,11 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 		}
 
 		if (!options.skipInstall) {
-			run('yarn install --immutable');
+			run('yarn install --immutable', {
+				env: {
+					YARN_ENABLE_GLOBAL_CACHE: 'false',
+				},
+			});
 		}
 	};
 }

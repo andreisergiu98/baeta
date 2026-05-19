@@ -55,7 +55,7 @@ export default createWorkflow(
 
 			add(
 				setupNode({
-					yarnCacheNamespace: 'renovate',
+					disableYarnCache: true,
 				}),
 			);
 

@@ -36,12 +36,20 @@ jobs:
       - name: Dispatch Renovate
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         with:
-          script: |-
+          script: >-
+            const hour = new Date().getUTCHours();
+
+            const isResetSlot = context.eventName === "schedule" && hour >= 2 &&
+            hour < 6;
+
+            const cache = isResetSlot ? "reset" : "enabled";
+
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: "renovate.yml",
               ref: context.payload.repository.default_branch,
+              inputs: { cache },
             });
 permissions:
   contents: read

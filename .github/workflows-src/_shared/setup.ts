@@ -26,7 +26,6 @@ interface SetupNodeOptions {
 	node?: NodeVersion<string | Expression<string>>;
 	turboCache?: TurboCache;
 	disableYarnCache?: boolean;
-
 	skipInstall?: boolean;
 }
 
@@ -52,7 +51,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 			},
 		);
 
-		if (!options.disableYarnCache) {
+		if (!options.disableYarnCache && !options.skipInstall) {
 			add(
 				useCache({
 					stepName: 'Setup Yarn Cache',

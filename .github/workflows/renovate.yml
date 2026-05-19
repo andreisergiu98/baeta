@@ -10,11 +10,12 @@ on:
       cache:
         required: false
         default: enabled
-        description: Enable Renovate cache
+        description: Cache mode
         type: choice
         options:
           - enabled
           - disabled
+          - reset
       logLevel:
         required: false
         default: info
@@ -52,27 +53,29 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - run: yarn install --immutable
-        env:
-          YARN_ENABLE_GLOBAL_CACHE: "false"
       - name: Get yarn info
-        run: |-
-          echo "yarnDir=$(yarn config get globalFolder)" >> $GITHUB_OUTPUT
-          echo "yarnVersion=$(yarn --version)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_7
-      - name: Setup Renovate Cache
-        if: ${{ github.event.inputs.cache != 'disabled' }}
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        run: echo "version=$(yarn --version)" >> $GITHUB_OUTPUT
+        id: step_6
+      - name: Restore Renovate Cache
+        if: ${{ !(github.event.inputs.cache == 'disabled') }}
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: /tmp/renovate/cache/renovate/repository
-          key: renovate-cache-${{ github.run_id }}
-          restore-keys: renovate-cache-
+          path: /tmp/renovate/cache
+          key: renovate-cache-v2
+        id: step_7
+      - name: Wipe Renovate Cache
+        if: ${{ !(github.event.inputs.cache == 'disabled') &&
+          ((github.event.inputs.cache == 'reset') &&
+          (steps.step_7.outputs.cache-hit == 'true')) }}
+        run: |-
+          mv /tmp/renovate/cache/renovate/repository /tmp/renovate-repo-keep
+          rm -rf /tmp/renovate/cache
+          mkdir -p /tmp/renovate/cache/renovate
+          mv /tmp/renovate-repo-keep /tmp/renovate/cache/renovate/repository
       - name: Fix-up Renovate cache permissions
-        if: ${{ github.event.inputs.cache != 'disabled' }}
+        if: ${{ !(github.event.inputs.cache == 'disabled') &&
+          (steps.step_7.outputs.cache-hit == 'true') }}
         run: sudo chown -R 12021:0 /tmp/renovate/ || true
-      - name: Fix-up yarn cache permissions
-        run: sudo chown -R 12021:0 ${{ steps.step_7.outputs.yarnDir }}
       - name: Write Renovate Entrypoint
         run: >-
           cat > /tmp/renovate-entrypoint.sh <<'EOF'
@@ -84,7 +87,7 @@ jobs:
           runuser -u ubuntu -- install-tool node 24.14.1
 
           runuser -u ubuntu -- install-tool yarn ${{
-          steps.step_7.outputs.yarnVersion }}
+          steps.step_6.outputs.version }}
 
           exec runuser -u ubuntu --preserve-environment renovate
 
@@ -99,20 +102,28 @@ jobs:
           configurationFile: .github/renovate.json
           docker-user: root
           docker-cmd-file: /tmp/renovate-entrypoint.sh
-          docker-volumes: /tmp:/tmp;${{ steps.step_7.outputs.yarnDir
-            }}:/home/ubuntu/.yarn/berry
         env:
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.cache }}
           RENOVATE_PLATFORM_COMMIT: enabled
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           RENOVATE_ALLOWED_COMMANDS: '["^yarn install --immutable
             --immutable-cache$","^yarn actions:build$"]'
-          RENOVATE_CUSTOM_ENV_VARIABLES: '{"YARN_GLOBAL_FOLDER":"/home/ubuntu/.yarn/berry","YARN_ENABLE_GLOBAL_CACHE":"true"}'
           LOG_LEVEL: ${{ github.event.inputs.logLevel }}
           NODE_OPTIONS: --max-old-space-size=4096
-      - name: Restore yarn cache permissions
-        run: sudo chown -R $(id -u):$(id -g) ${{ steps.step_7.outputs.yarnDir }}
+      - name: Remove Renovate Cache
+        if: ${{ (success() && !(github.event.inputs.cache == 'disabled')) &&
+          (steps.step_7.outputs.cache-hit == 'true') }}
+        run: gh cache delete renovate-cache-v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Save Renovate Cache
+        if: ${{ success() && !(github.event.inputs.cache == 'disabled') }}
+        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: /tmp/renovate/cache
+          key: renovate-cache-v2
 concurrency:
   group: renovate
 permissions:
   contents: read
+  actions: write

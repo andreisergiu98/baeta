@@ -52,23 +52,15 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_6
-      - name: Setup Yarn Cache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
-        with:
-          path: ${{ steps.step_6.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-renovate-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - name: Get yarn info
         run: |-
           echo "yarnDir=$(yarn config get globalFolder)" >> $GITHUB_OUTPUT
           echo "yarnVersion=$(yarn --version)" >> $GITHUB_OUTPUT
         shell: bash
-        id: step_9
+        id: step_7
       - name: Setup Renovate Cache
         if: ${{ github.event.inputs.cache != 'disabled' }}
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
@@ -80,7 +72,7 @@ jobs:
         if: ${{ github.event.inputs.cache != 'disabled' }}
         run: sudo chown -R 12021:0 /tmp/renovate/ || true
       - name: Fix-up yarn cache permissions
-        run: sudo chown -R 12021:0 ${{ steps.step_9.outputs.yarnDir }}
+        run: sudo chown -R 12021:0 ${{ steps.step_7.outputs.yarnDir }}
       - name: Write Renovate Entrypoint
         run: >-
           cat > /tmp/renovate-entrypoint.sh <<'EOF'
@@ -92,7 +84,7 @@ jobs:
           runuser -u ubuntu -- install-tool node 24.14.1
 
           runuser -u ubuntu -- install-tool yarn ${{
-          steps.step_9.outputs.yarnVersion }}
+          steps.step_7.outputs.yarnVersion }}
 
           exec runuser -u ubuntu --preserve-environment renovate
 
@@ -107,7 +99,7 @@ jobs:
           configurationFile: .github/renovate.json
           docker-user: root
           docker-cmd-file: /tmp/renovate-entrypoint.sh
-          docker-volumes: /tmp:/tmp;${{ steps.step_9.outputs.yarnDir
+          docker-volumes: /tmp:/tmp;${{ steps.step_7.outputs.yarnDir
             }}:/home/ubuntu/.yarn/berry
         env:
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.cache }}
@@ -119,7 +111,7 @@ jobs:
           LOG_LEVEL: ${{ github.event.inputs.logLevel }}
           NODE_OPTIONS: --max-old-space-size=4096
       - name: Restore yarn cache permissions
-        run: sudo chown -R $(id -u):$(id -g) ${{ steps.step_9.outputs.yarnDir }}
+        run: sudo chown -R $(id -u):$(id -g) ${{ steps.step_7.outputs.yarnDir }}
 concurrency:
   group: renovate
 permissions:

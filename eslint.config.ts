@@ -27,6 +27,9 @@ export const baseConfig = defineConfig([
 	{
 		files: [JS_TS],
 		extends: [importX.flatConfigs.recommended, importX.flatConfigs.typescript],
+		settings: {
+			'import-x/external-module-folders': ['node_modules', '.yarn'],
+		},
 		rules: {
 			'import-x/default': 'off',
 			'import-x/no-unresolved': 'off',

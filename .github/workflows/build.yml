@@ -32,16 +32,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -49,6 +45,8 @@ jobs:
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn build
   types:
     name: Check types
@@ -65,16 +63,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for types
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -82,6 +76,8 @@ jobs:
           key: turbo-types-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-types-24-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn check:types
   lint:
     name: Check linting
@@ -98,17 +94,15 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - name: Setup ESLint Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -131,17 +125,15 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn check:formatting
   dependencies:
     name: Check dependencies
@@ -158,16 +150,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for deps
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -175,6 +163,8 @@ jobs:
           key: turbo-deps-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-deps-24-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn check:deps
   constraints:
     name: Check package constraints
@@ -191,17 +181,15 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn check:constraints
   yarn-dedupe:
     name: Check yarn dedupe
@@ -218,17 +206,15 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn dedupe --check
   build-examples:
     name: Check examples
@@ -245,16 +231,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for examples-build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -262,6 +244,8 @@ jobs:
           key: turbo-examples-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-examples-build-24-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn examples:build
       - run: yarn examples:types
   tests:
@@ -313,16 +297,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for tests
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -330,6 +310,8 @@ jobs:
           key: turbo-tests-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-tests-${{ matrix.node }}-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn check:tests
   e2e:
     name: Check e2e tests (${{ matrix.machine }} - Node ${{ matrix.node }})
@@ -357,16 +339,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for e2e
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -374,6 +352,8 @@ jobs:
           key: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - run: yarn check:e2e
   publish:
     name: Publish packages or open PR
@@ -402,16 +382,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -419,6 +395,8 @@ jobs:
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - name: Create Baeta Bot Token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
@@ -426,7 +404,7 @@ jobs:
           private-key: ${{ secrets.BAETA_BOT_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
           repositories: ${{ github.repository }}
-        id: step_8
+        id: step_7
       - name: Run @changesets/action
         uses: changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b
         with:
@@ -438,7 +416,7 @@ jobs:
           commitMode: github-api
           createGithubReleases: false
         env:
-          GITHUB_TOKEN: ${{ steps.step_8.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.step_7.outputs.token }}
           RELEASE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       contents: write
@@ -470,16 +448,12 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn cache directory
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-        shell: bash
-        id: step_4
       - name: Setup Yarn Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
-          path: ${{ steps.step_4.outputs.dir }}
-          key: yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-${{ runner.os }}-
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -487,6 +461,8 @@ jobs:
           key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-build-24-${{ runner.os }}-
       - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
       - name: Get PR number
         run: |-
           PR_NUMBER=$(gh pr list \
@@ -499,12 +475,12 @@ jobs:
         env:
           BRANCH: ${{ github.ref_name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        id: step_8
+        id: step_7
       - name: Publish snapshot
-        if: ${{ (steps.step_8.outputs.pr != '') && (steps.step_8.outputs.pr != null) &&
+        if: ${{ (steps.step_7.outputs.pr != '') && (steps.step_7.outputs.pr != null) &&
           startsWith(github.event.inputs.tag, 'alpha') }}
         run: >-
-          yarn changeset version --snapshot ${{ steps.step_8.outputs.pr }}
+          yarn changeset version --snapshot ${{ steps.step_7.outputs.pr }}
 
           if [[ `git status --porcelain` ]]; then
             echo "Changes detected, publishing snapshot"

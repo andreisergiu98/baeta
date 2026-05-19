@@ -14,10 +14,10 @@ export default createWorkflow(
 		});
 		addTrigger('push', {
 			branches: ['next'],
-			paths: ['website/**'],
+			paths: ['website/**', 'yarn.lock'],
 		});
 		addTrigger('pull_request', {
-			paths: ['website/**'],
+			paths: ['website/**', 'yarn.lock'],
 		});
 		addTrigger('workflow_dispatch');
 		setConcurrency({

@@ -10,9 +10,11 @@ on:
       - next
     paths:
       - website/**
+      - yarn.lock
   pull_request:
     paths:
       - website/**
+      - yarn.lock
   workflow_dispatch: null
 jobs:
   build:

@@ -60,7 +60,7 @@ export class BaetaCache extends DurableObject {
 		`);
 	}
 
-	async fetch(request: Request) {
+	override async fetch(request: Request) {
 		return await this.handler(request);
 	}
 
@@ -165,7 +165,7 @@ export class BaetaCache extends DurableObject {
 		}
 	}
 
-	async alarm() {
+	override async alarm() {
 		const now = Date.now();
 
 		this.sql.exec('DELETE FROM items WHERE expires_at <= ?', now);

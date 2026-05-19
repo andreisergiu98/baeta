@@ -51,7 +51,7 @@
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@faker-js/faker": "^10.4.0",
-    "@turbo/gen": "^2.9.12",
+    "@turbo/gen": "^2.9.14",
     "@types/node": "catalog:dev",
     "@types/ws": "catalog:dev",
     "@yarnpkg/pnpify": "^4.1.6",

@@ -31,12 +31,12 @@
       "rangeStrategy": "replace"
     },
     {
-      "matchPackageNames": ["@types/node"],
+      "matchPackageNames": ["node"],
       "allowedVersions": "<23"
     },
     {
-      "matchPackageNames": ["node", "actions/node-versions"],
-      "enabled": false
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "<23"
     },
     {
       "matchDatasources": ["docker"],
@@ -47,6 +47,10 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["valkey/valkey"],
       "allowedVersions": "<9"
+    },
+    {
+      "matchPackageNames": ["actions/node-versions"],
+      "enabled": false
     },
     {
       "matchManagers": ["custom.regex"],

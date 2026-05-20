@@ -23,10 +23,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -42,8 +42,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .cache/turbo
-          key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-build-24-${{ runner.os }}-
+          key: turbo-build-22-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-build-22-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -54,10 +54,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -73,8 +73,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .cache/turbo
-          key: turbo-types-24-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-types-24-${{ runner.os }}-
+          key: turbo-types-22-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-types-22-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -85,10 +85,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -116,10 +116,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -141,10 +141,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -160,8 +160,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .cache/turbo
-          key: turbo-deps-24-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-deps-24-${{ runner.os }}-
+          key: turbo-deps-22-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-deps-22-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -172,10 +172,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -197,10 +197,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -222,10 +222,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -241,8 +241,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .cache/turbo
-          key: turbo-examples-build-24-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-examples-build-24-${{ runner.os }}-
+          key: turbo-examples-build-22-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-examples-build-22-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -373,10 +373,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -392,8 +392,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .cache/turbo
-          key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-build-24-${{ runner.os }}-
+          key: turbo-build-22-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-build-22-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -439,10 +439,10 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - name: Setup Node 24
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "22"
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -458,8 +458,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .cache/turbo
-          key: turbo-build-24-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-build-24-${{ runner.os }}-
+          key: turbo-build-22-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-build-22-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"

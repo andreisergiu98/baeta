@@ -120,7 +120,7 @@ export async function generate(
 			}),
 			options: {
 				disableOverwrite: true,
-				disableLintHeaders: true,
+				enableLintHeaders: false,
 				disableGenerationNoticeHeader: true,
 			},
 		},
@@ -158,7 +158,7 @@ export async function generate(
 				content: printModuleIndexStarter(config, module),
 				options: {
 					disableOverwrite: true,
-					disableLintHeaders: true,
+					enableLintHeaders: false,
 					disableGenerationNoticeHeader: true,
 				},
 			});

@@ -135,7 +135,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 				'federation',
 				{
 					disableOverwrite: true,
-					disableLintHeaders: true,
+					enableLintHeaders: false,
 					disableGenerationNoticeHeader: true,
 				},
 			);

@@ -5,6 +5,7 @@ import {
 	type FieldUsePlugin,
 	type SubscriptionUsePlugin,
 	type TypeUsePlugin,
+	makePluginSymbol,
 } from '@baeta/core/sdk';
 import { createComplexityMiddleware } from './complexity-middleware.ts';
 import { normalizeOptions, type ComplexityExtensionOptions } from './complexity-options.ts';
@@ -37,7 +38,7 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 		fn: GetFieldSettings<Context, Args>,
 	): ComplexityPlugin<Result, Source, Context, Args, Info> => {
 		return {
-			buildPlugin: () => {
+			[makePluginSymbol]: () => {
 				const meta = new Map<symbol, ComplexityState>([
 					[
 						stateKey,

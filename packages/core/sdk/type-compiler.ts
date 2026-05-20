@@ -2,9 +2,9 @@ import type { IResolvers } from '@graphql-tools/utils';
 import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
 import type { FieldCompiler } from './field-compiler.ts';
-import { makeField } from './field.ts';
 import { concatMiddlewares } from './middleware.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
+import { makeSymbol } from './symbols.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
 
 export interface TypeCompilerOptions<
@@ -40,7 +40,7 @@ export class TypeCompiler<
 	readonly #middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly #fields: ReadonlyArray<
 		| FieldCompiler<unknown, Source, Context, unknown, Info>
-		| SubscriptionCompiler<unknown, unknown, Source, Context, unknown, Info>
+		| SubscriptionCompiler<unknown, Source, Source, Context, unknown, Info>
 	>;
 	readonly requiredPluginIds: Set<PluginId>;
 
@@ -48,7 +48,7 @@ export class TypeCompiler<
 		this.#type = options.type;
 		this.#metadata = options.metadata;
 		this.#middlewares = options.middlewares;
-		this.#fields = Object.values(options.fieldsMap).map((field) => makeField(field));
+		this.#fields = Object.values(options.fieldsMap).map((field) => field[makeSymbol]());
 		this.requiredPluginIds = options.requiredPluginIds;
 	}
 

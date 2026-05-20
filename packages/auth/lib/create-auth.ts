@@ -6,6 +6,7 @@ import {
 	type SubscriptionUsePlugin,
 	type TypeUsePlugin,
 	createAppPluginId,
+	makePluginSymbol,
 	nameFunction,
 } from '@baeta/core/sdk';
 import { isOperationType } from '../utils/resolver.ts';
@@ -63,7 +64,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 	const makeAuthBuilder = <Result, Source, Context, Args, Info>(
 		buildMiddleware: (type: string) => Middleware<Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> => ({
-		buildPlugin: ({ type, field, subscriptionFieldKind }: BuildContext) => {
+		[makePluginSymbol]: ({ type, field, subscriptionFieldKind }: BuildContext) => {
 			const middleware = buildMiddleware(type) as Middleware<any, Source, Context, any, Info>;
 			nameFunction(middleware, buildMiddlewareName(type, field, subscriptionFieldKind));
 			return { id, middleware, meta: metadata };

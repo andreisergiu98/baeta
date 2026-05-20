@@ -1,19 +1,47 @@
 import type { Middleware } from '../lib/middleware.ts';
-import type { Resolver } from '../lib/resolver.ts';
+import type { Resolver, ResolverParams } from '../lib/resolver.ts';
 import type { PluginId } from './app-plugin.ts';
-import type { FieldHelpers } from './field-methods.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
+import type { makePluginSymbol, makeSymbol } from './symbols.ts';
 
 export type Subscription<Result = unknown> = AsyncIterable<Result>;
 
-export type SubscriptionField<Expected, Result, Source, Context, Args, Info> = FieldHelpers<
-	Expected,
-	Result,
-	Source,
-	Context,
-	Args,
-	Info
->;
+export type SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Source = any> = {
+	map: <T = Expected>(
+		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
+	) => SubscriptionField<Expected, T, ParentSource, Context, Args, Info, Source>;
+	resolve: (
+		fn: (params: ResolverParams<Result, Context, Args, Info>) => Expected | PromiseLike<Expected>,
+	) => SubscriptionField<Expected, Expected, ParentSource, Context, Args, Info, Source>;
+	key: <K extends keyof Result>(
+		key: K,
+	) => SubscriptionField<Expected, Result[K], ParentSource, Context, Args, Info, Source>;
+	to: <T = Expected>(
+		fn: (source: Result) => T,
+	) => SubscriptionField<Expected, T, ParentSource, Context, Args, Info, Source>;
+	withDefault: <T = Expected>(
+		value: T,
+	) => SubscriptionField<
+		Expected,
+		T | NonNullable<Result>,
+		ParentSource,
+		Context,
+		Args,
+		Info,
+		Source
+	>;
+	undefinedAsNull: () => SubscriptionField<
+		Expected,
+		Result extends undefined ? NonNullable<Result> | null : Result,
+		ParentSource,
+		Context,
+		Args,
+		Info,
+		Source
+	>;
+} & {
+	[makeSymbol]: () => SubscriptionCompiler<Expected, Source, ParentSource, Context, Args, Info>;
+};
 
 export type Or<T, Fallback> = [T] extends [never] ? Fallback : T;
 
@@ -30,7 +58,7 @@ export type SubscriptionMethods<Result, Source, Context, Args, Info, Payload = n
 	) => SubscriptionMethods<Result, Source, Context, Args, Info, Or<Payload, T>>;
 	subscribe: <T = Result>(
 		fn: Resolver<Subscription<Or<Payload, T>>, Source, Context, Args, Info>,
-	) => SubscriptionResolveMethods<Result, Or<Payload, T>, Context, Args, Info>;
+	) => SubscriptionResolveMethods<Result, Or<Payload, T>, Source, Context, Args, Info>;
 };
 
 export type SubscriptionUsePlugin<
@@ -41,8 +69,8 @@ export type SubscriptionUsePlugin<
 	Info,
 	FieldKind extends 'subscribe' | 'resolve',
 > = {
-	buildPlugin: (options: {
-		type: string;
+	[makePluginSymbol]: (options: {
+		type: 'Subscription';
 		field: string;
 		kind: 'field';
 		subscriptionFieldKind: FieldKind;
@@ -64,19 +92,14 @@ export type SubscriptionFieldUseInput<
 	| Middleware<Result, Source, Context, Args, Info>
 	| SubscriptionUsePlugin<Result, Source, Context, Args, Info, FieldKind>;
 
-export type SubscriptionResolveMethods<Result, Source, Context, Args, Info> = {
+export type SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info> = {
 	$use: (
 		input: SubscriptionFieldUseInput<Result, Source, Context, Args, Info, 'resolve'>,
-	) => SubscriptionResolveMethods<Result, Source, Context, Args, Info>;
+	) => SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info>;
 	map: <T = Result>(
 		resolver: Resolver<T, Source, Context, Args, Info>,
-	) => SubscriptionField<Result, T, Source, Context, Args, Info>;
+	) => SubscriptionField<Result, T, ParentSource, Context, Args, Info, Source>;
 	resolve: (
 		resolver: Resolver<Result, Source, Context, Args, Info>,
-	) => SubscriptionField<Result, Result, Source, Context, Args, Info>;
+	) => SubscriptionField<Result, Result, ParentSource, Context, Args, Info, Source>;
 };
-
-export type SubscriptionFieldWithMake<Expected, Result, Source, Context, Args, Info, ParentSource> =
-	FieldHelpers<Expected, Result, Source, Context, Args, Info> & {
-		__make: () => SubscriptionCompiler<Expected, Source, ParentSource, Context, Args, Info>;
-	};

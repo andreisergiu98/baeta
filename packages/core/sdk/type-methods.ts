@@ -2,6 +2,7 @@ import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
 import type { Field, FieldMethods } from './field-methods.ts';
 import type { SubscriptionField, SubscriptionMethods } from './subscription-methods.ts';
+import type { makePluginSymbol, makeSymbol } from './symbols.ts';
 import type { TypeCompiler } from './type-compiler.ts';
 
 export type FieldsBuildersMap<Source, Context, Info> = Record<
@@ -36,18 +37,6 @@ export type TypeMethods<
 	) => TypeMethods<Source, Context, Info, FieldsBuilders, FieldsResolvers>;
 };
 
-export type TypeUsePlugin<Source, Context, Info> = {
-	buildPlugin: (options: { type: string; kind: 'type' }) => {
-		id: PluginId;
-		middleware?: Middleware<unknown, Source, Context, unknown, Info>;
-		meta?: Map<symbol, unknown>;
-	};
-};
-
-export type TypeUseInput<Source, Context, Info> =
-	| Middleware<unknown, Source, Context, unknown, Info>
-	| TypeUsePlugin<Source, Context, Info>;
-
 export type TypeCompilerFactory<
 	Source,
 	Context,
@@ -58,5 +47,17 @@ export type TypeCompilerFactory<
 		Info
 	>,
 > = {
-	__make: () => TypeCompiler<Source, Context, Info, FieldsResolvers>;
+	[makeSymbol]: () => TypeCompiler<Source, Context, Info, FieldsResolvers>;
 };
+
+export type TypeUsePlugin<Source, Context, Info> = {
+	[makePluginSymbol]: (options: { type: string; kind: 'type' }) => {
+		id: PluginId;
+		middleware?: Middleware<unknown, Source, Context, unknown, Info>;
+		meta?: Map<symbol, unknown>;
+	};
+};
+
+export type TypeUseInput<Source, Context, Info> =
+	| Middleware<unknown, Source, Context, unknown, Info>
+	| TypeUsePlugin<Source, Context, Info>;

@@ -1,6 +1,7 @@
 import type { Middleware } from '../lib/middleware.ts';
 import { nameFunction } from '../utils/functions.ts';
 import type { PluginId } from './app-plugin.ts';
+import { makePluginSymbol, makeSymbol } from './symbols.ts';
 import { TypeCompiler } from './type-compiler.ts';
 import type { FieldsBuildersMap, FieldsResolversMap, TypeMethods } from './type-methods.ts';
 
@@ -79,7 +80,7 @@ export class TypeBuilder<
 		return {
 			...this.#fieldBuilders,
 			$fields: (fields: FieldsResolvers) => ({
-				__make: () =>
+				[makeSymbol]: () =>
 					new TypeCompiler({
 						type: this.#type,
 						metadata: new Map(this.#metadata),
@@ -93,7 +94,7 @@ export class TypeBuilder<
 					nameFunction(input, `${this.#type}.use`);
 					return this.edit().addMiddleware(input).commitToMethods();
 				}
-				const result = input.buildPlugin({ type: this.#type, kind: 'type' });
+				const result = input[makePluginSymbol]({ type: this.#type, kind: 'type' });
 				const session = this.edit().addRequiredPluginId(result.id);
 				if (result.middleware) {
 					nameFunction(result.middleware, `${this.#type}.use`);

@@ -2,6 +2,7 @@ import type { GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
+import type { makePluginSymbol, makeSymbol } from './symbols.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompilerFactory, TypeMethods } from './type-methods.ts';
 
@@ -29,8 +30,16 @@ export type ModuleMethods<
 	) => ModuleMethods<Context, Info, TypesBuilders, TypesResolvers>;
 };
 
+export type ModuleCompilerFactory<
+	Context,
+	Info,
+	TypesResolvers extends TypesResolversMap<Context, Info>,
+> = {
+	[makeSymbol]: () => ModuleCompiler<Context, Info, TypesResolvers>;
+};
+
 export type ModuleUsePlugin<Context, Info> = {
-	buildPlugin: (options: { name: string; kind: 'module' }) => {
+	[makePluginSymbol]: (options: { name: string; kind: 'module' }) => {
 		id: PluginId;
 		middleware?: Middleware<unknown, unknown, Context, unknown, Info>;
 		meta?: Map<symbol, unknown>;
@@ -40,11 +49,3 @@ export type ModuleUsePlugin<Context, Info> = {
 export type ModuleUseInput<Context, Info> =
 	| Middleware<unknown, unknown, Context, unknown, Info>
 	| ModuleUsePlugin<Context, Info>;
-
-export type ModuleCompilerFactory<
-	Context,
-	Info,
-	TypesResolvers extends TypesResolversMap<Context, Info>,
-> = {
-	__make: () => ModuleCompiler<Context, Info, TypesResolvers>;
-};

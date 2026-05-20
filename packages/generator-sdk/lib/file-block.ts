@@ -17,7 +17,7 @@ export class FileBlock extends File {
 		options?: FileOptions,
 	) {
 		super(filename, content, tag, {
-			disableLintHeaders: options?.disableLintHeaders ?? true,
+			enableLintHeaders: options?.enableLintHeaders ?? false,
 			disableGenerationNoticeHeader: options?.disableGenerationNoticeHeader ?? true,
 		});
 		this.filename = filename;

@@ -11,21 +11,31 @@ export interface FileOptions {
 	 */
 	disableGenerationNoticeHeader?: boolean;
 
-	disableLintHeaders?:
-		| true
+	/**
+	 * Enable lint disabling headers at the beginning of the file.
+	 * Can be either a boolean to enable all supported lint headers or an object to enable specific ones.
+	 * @defaultValue false
+	 */
+	enableLintHeaders?:
+		| boolean
 		| {
 				/**
-				 * Disable eslint-disable comment at the beginning of the file.
+				 * Enable oxlint comment at the beginning of the file.
+				 * @defaultValue false
+				 */
+				oxlint?: boolean;
+				/**
+				 * Enable eslint-disable comment at the beginning of the file.
 				 * @defaultValue false
 				 */
 				eslint?: boolean;
 				/**
-				 * Disable biome v1 comment at the beginning of the file.
+				 * Enable biome v1 comment at the beginning of the file.
 				 * @defaultValue false
 				 */
 				biomeV1?: boolean;
 				/**
-				 * Disable biome v2 comment at the beginning of the file.
+				 * Enable biome v2 comment at the beginning of the file.
 				 * @defaultValue false
 				 */
 				biomeV2?: boolean;
@@ -109,18 +119,35 @@ export class File {
 			headerItems.push(comment);
 		}
 
-		if (this.options?.disableLintHeaders !== true) {
-			if (this.options?.disableLintHeaders?.eslint !== true) {
+		if (
+			this.options?.enableLintHeaders === true ||
+			typeof this.options?.enableLintHeaders === 'object'
+		) {
+			if (
+				this.options?.enableLintHeaders === true ||
+				this.options?.enableLintHeaders?.eslint !== false
+			) {
 				const comment = this.createComment('eslint-disable');
 				headerItems.push(comment);
 			}
-
-			if (this.options?.disableLintHeaders?.biomeV1 !== true) {
+			if (
+				this.options?.enableLintHeaders === true ||
+				this.options?.enableLintHeaders?.oxlint !== false
+			) {
+				const comment = this.createComment('oxlint-disable');
+				headerItems.push(comment);
+			}
+			if (
+				this.options?.enableLintHeaders === true ||
+				this.options?.enableLintHeaders?.biomeV1 !== false
+			) {
 				const comment = this.createComment('@biome-ignore-all: generated file');
 				headerItems.push(comment);
 			}
-
-			if (this.options?.disableLintHeaders?.biomeV2 !== true) {
+			if (
+				this.options?.enableLintHeaders === true ||
+				this.options?.enableLintHeaders?.biomeV2 !== false
+			) {
 				const comment = this.createComment('biome-ignore-all lint: generated file');
 				headerItems.push(comment);
 			}
@@ -140,11 +167,9 @@ export class File {
 
 	protected createComment(comment: string) {
 		const extension = extname(this.filename);
-
 		if (['.gql', '.graphql'].includes(extension)) {
 			return `# ${comment}`;
 		}
-
 		return `/* ${comment} */`;
 	}
 }

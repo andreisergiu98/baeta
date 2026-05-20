@@ -14,6 +14,7 @@ import {
 	type SelectionSetNode,
 } from 'graphql';
 import type { FederationInfo } from './federation-info.ts';
+import { namespace } from './namespace.ts';
 
 interface PrintFederationTypesOptions {
 	extension: '' | '.ts' | '.js';
@@ -26,6 +27,7 @@ export function printFederationTypes(
 	federationInfo: FederationInfo,
 	options: PrintFederationTypesOptions,
 ) {
+	const hasEntities = federationInfo.resolvableEntitiesMap.size > 0;
 	const entitiesRepresentations = [...federationInfo.resolvableEntitiesMap.entries()].map(
 		([typeName, fields]) => buildRepresentationForType(schema, typeName, fields),
 	);
@@ -40,23 +42,30 @@ export function printFederationTypes(
 	const relativeModulesDir = relative(options.typesDir, options.modulesDir);
 
 	return [
-		`import type {Ctx, Info} from "${relativeModulesDir}/types${options.extension}";`,
-		`import * as Types from "./types${options.extension}";`,
+		hasEntities
+			? `import type * as ${namespace.globalTypes} from "./types${options.extension}";`
+			: '',
+		hasEntities
+			? `import type * as ${namespace.userTypes} from "${relativeModulesDir}/types${options.extension}";`
+			: '',
 		'',
-		'type Result<T> = T | PromiseLike<T>;',
+		hasEntities ? 'type Result<T> = T | PromiseLike<T>;' : '',
 		'',
 		entitiesRepresentations.join('\n\n'),
 		'',
 		entityHandlerTypes.join('\n\n'),
 		'',
-		`export type EntityRepresentation = ${entityRepresentationUnion};`,
-		'',
-		`export type EntityHandlerMap = { ${[...federationInfo.resolvableEntitiesMap.keys()].map((typeName) => `"${typeName}": ${typeName}EntityHandler`).join('; ')} };`,
-	].join('\n');
+		`export type EntityRepresentation = ${entityRepresentationUnion};\n`,
+		hasEntities
+			? `export type EntityHandlerMap = { ${[...federationInfo.resolvableEntitiesMap.keys()].map((typeName) => `"${typeName}": ${typeName}EntityHandler`).join('; ')} };`
+			: 'export type EntityHandlerMap = { }',
+	]
+		.filter((el) => (hasEntities ? true : el !== ''))
+		.join('\n');
 }
 
 function buildEntityHandlerTypeForType(typeName: string) {
-	return `export type ${typeName}EntityHandler = (representation: ${typeName}EntityRepresentation, ctx: Ctx, info: Info) => Result<Types.${typeName} & {__typename: "${typeName}"} | null>`;
+	return `export type ${typeName}EntityHandler = (representation: ${typeName}EntityRepresentation, ctx: ${namespace.userTypes}.Ctx, info: ${namespace.userTypes}.Info) => Result<${namespace.globalTypes}.${typeName} & {__typename: "${typeName}"} | null>`;
 }
 
 function buildRepresentationForType(schema: GraphQLSchema, typeName: string, fields: Set<string>) {
@@ -109,5 +118,5 @@ function unwrap(type: any): any {
 }
 
 function scalarToTS(name: string): string {
-	return `Types.Scalars["${name}"]`;
+	return `${namespace.globalTypes}.Scalars["${name}"]`;
 }

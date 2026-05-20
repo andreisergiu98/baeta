@@ -3,40 +3,39 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'user',
-  dirname: './user',
-  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"User","loc":{"start":5,"end":9}},"interfaces":[],"directives":[{"kind":"Directive","name":{"kind":"Name","value":"key","loc":{"start":11,"end":14}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"fields","loc":{"start":15,"end":21}},"value":{"kind":"StringValue","value":"id","block":false,"loc":{"start":23,"end":27}},"loc":{"start":15,"end":27}},{"kind":"Argument","name":{"kind":"Name","value":"resolvable","loc":{"start":29,"end":39}},"value":{"kind":"BooleanValue","value":false,"loc":{"start":41,"end":46}},"loc":{"start":29,"end":46}}],"loc":{"start":10,"end":47}}],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":51,"end":53}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":55,"end":57}},"loc":{"start":55,"end":57}},"loc":{"start":55,"end":58}},"directives":[],"loc":{"start":51,"end":58}}],"loc":{"start":0,"end":60}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"User","loc":{"start":5,"end":9}},"interfaces":[],"directives":[{"kind":"Directive","name":{"kind":"Name","value":"key","loc":{"start":11,"end":14}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"fields","loc":{"start":15,"end":21}},"value":{"kind":"StringValue","value":"id","block":false,"loc":{"start":23,"end":27}},"loc":{"start":15,"end":27}},{"kind":"Argument","name":{"kind":"Name","value":"resolvable","loc":{"start":29,"end":39}},"value":{"kind":"BooleanValue","value":false,"loc":{"start":41,"end":46}},"loc":{"start":29,"end":46}}],"loc":{"start":10,"end":47}}],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":51,"end":53}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":55,"end":57}},"loc":{"start":55,"end":57}},"loc":{"start":55,"end":58}},"directives":[],"loc":{"start":51,"end":58}}],"loc":{"start":0,"end":60}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    User: Baeta.TypeMethods<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
+    User: BaetaSdk.TypeMethods<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
   };
   Factories: {
-    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Factory']>
+    User: BaetaSdk.TypeCompilerFactory<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   User: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.User, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.User, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
 };
 
-export const UserModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  User: Baeta.createTypeBuilder("User", {
-    id: Baeta.createFieldBuilder("User", "id")
+export const UserModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  User: BaetaSdk.createTypeBuilder("User", {
+    id: BaetaSdk.createFieldBuilder("User", "id")
   })
 }, {
 

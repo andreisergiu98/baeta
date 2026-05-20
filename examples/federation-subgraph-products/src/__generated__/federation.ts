@@ -3,14 +3,14 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type {Ctx, Info} from "../modules/types.ts";
-import * as Types from "./types.ts";
+import type * as BaetaTypes from "./types.ts";
+import type * as BaetaUserTypes from "../modules/types.ts";
 
 type Result<T> = T | PromiseLike<T>;
 
-export type ProductEntityRepresentation = { __typename: "Product" } & ({ id: Types.Scalars["ID"] })
+export type ProductEntityRepresentation = { __typename: "Product" } & ({ id: BaetaTypes.Scalars["ID"] })
 
-export type ProductEntityHandler = (representation: ProductEntityRepresentation, ctx: Ctx, info: Info) => Result<Types.Product & {__typename: "Product"} | null>
+export type ProductEntityHandler = (representation: ProductEntityRepresentation, ctx: BaetaUserTypes.Ctx, info: BaetaUserTypes.Info) => Result<BaetaTypes.Product & {__typename: "Product"} | null>
 
 export type EntityRepresentation = ProductEntityRepresentation;
 

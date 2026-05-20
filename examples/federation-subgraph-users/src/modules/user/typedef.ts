@@ -3,68 +3,67 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'user',
-  dirname: './user',
-  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"User","loc":{"start":5,"end":9}},"interfaces":[],"directives":[{"kind":"Directive","name":{"kind":"Name","value":"key","loc":{"start":11,"end":14}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"fields","loc":{"start":15,"end":21}},"value":{"kind":"StringValue","value":"id","block":false,"loc":{"start":23,"end":27}},"loc":{"start":15,"end":27}}],"loc":{"start":10,"end":28}}],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":32,"end":34}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":36,"end":38}},"loc":{"start":36,"end":38}},"loc":{"start":36,"end":39}},"directives":[],"loc":{"start":32,"end":39}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"email","loc":{"start":41,"end":46}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":48,"end":54}},"loc":{"start":48,"end":54}},"loc":{"start":48,"end":55}},"directives":[],"loc":{"start":41,"end":55}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"lastName","loc":{"start":57,"end":65}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":67,"end":73}},"loc":{"start":67,"end":73}},"loc":{"start":67,"end":74}},"directives":[],"loc":{"start":57,"end":74}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"profile","loc":{"start":76,"end":83}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":85,"end":91}},"loc":{"start":85,"end":91}},"directives":[],"loc":{"start":76,"end":91}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"givenName","loc":{"start":93,"end":102}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":104,"end":110}},"loc":{"start":104,"end":110}},"directives":[],"loc":{"start":93,"end":110}}],"loc":{"start":0,"end":112}},{"kind":"InputObjectTypeDefinition","name":{"kind":"Name","value":"UserWhereUniqueInput","loc":{"start":120,"end":140}},"directives":[],"fields":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"id","loc":{"start":144,"end":146}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":148,"end":150}},"loc":{"start":148,"end":150}},"loc":{"start":148,"end":151}},"directives":[],"loc":{"start":144,"end":151}}],"loc":{"start":114,"end":153}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":160,"end":165}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"user","loc":{"start":169,"end":173}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"where","loc":{"start":174,"end":179}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserWhereUniqueInput","loc":{"start":181,"end":201}},"loc":{"start":181,"end":201}},"loc":{"start":181,"end":202}},"directives":[],"loc":{"start":174,"end":202}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":205,"end":209}},"loc":{"start":205,"end":209}},"directives":[],"loc":{"start":169,"end":209}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"users","loc":{"start":211,"end":216}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":219,"end":223}},"loc":{"start":219,"end":223}},"loc":{"start":219,"end":224}},"loc":{"start":218,"end":225}},"directives":[],"loc":{"start":211,"end":225}}],"loc":{"start":155,"end":227}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"User","loc":{"start":5,"end":9}},"interfaces":[],"directives":[{"kind":"Directive","name":{"kind":"Name","value":"key","loc":{"start":11,"end":14}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"fields","loc":{"start":15,"end":21}},"value":{"kind":"StringValue","value":"id","block":false,"loc":{"start":23,"end":27}},"loc":{"start":15,"end":27}}],"loc":{"start":10,"end":28}}],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":32,"end":34}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":36,"end":38}},"loc":{"start":36,"end":38}},"loc":{"start":36,"end":39}},"directives":[],"loc":{"start":32,"end":39}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"email","loc":{"start":41,"end":46}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":48,"end":54}},"loc":{"start":48,"end":54}},"loc":{"start":48,"end":55}},"directives":[],"loc":{"start":41,"end":55}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"lastName","loc":{"start":57,"end":65}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":67,"end":73}},"loc":{"start":67,"end":73}},"loc":{"start":67,"end":74}},"directives":[],"loc":{"start":57,"end":74}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"profile","loc":{"start":76,"end":83}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":85,"end":91}},"loc":{"start":85,"end":91}},"directives":[],"loc":{"start":76,"end":91}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"givenName","loc":{"start":93,"end":102}},"arguments":[],"type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":104,"end":110}},"loc":{"start":104,"end":110}},"directives":[],"loc":{"start":93,"end":110}}],"loc":{"start":0,"end":112}},{"kind":"InputObjectTypeDefinition","name":{"kind":"Name","value":"UserWhereUniqueInput","loc":{"start":120,"end":140}},"directives":[],"fields":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"id","loc":{"start":144,"end":146}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":148,"end":150}},"loc":{"start":148,"end":150}},"loc":{"start":148,"end":151}},"directives":[],"loc":{"start":144,"end":151}}],"loc":{"start":114,"end":153}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":160,"end":165}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"user","loc":{"start":169,"end":173}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"where","loc":{"start":174,"end":179}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserWhereUniqueInput","loc":{"start":181,"end":201}},"loc":{"start":181,"end":201}},"loc":{"start":181,"end":202}},"directives":[],"loc":{"start":174,"end":202}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":205,"end":209}},"loc":{"start":205,"end":209}},"directives":[],"loc":{"start":169,"end":209}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"users","loc":{"start":211,"end":216}},"arguments":[],"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"User","loc":{"start":219,"end":223}},"loc":{"start":219,"end":223}},"loc":{"start":219,"end":224}},"loc":{"start":218,"end":225}},"directives":[],"loc":{"start":211,"end":225}}],"loc":{"start":155,"end":227}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    User: Baeta.TypeMethods<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
-    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+    User: BaetaSdk.TypeMethods<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
+    Query: BaetaSdk.TypeMethods<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
   };
   Factories: {
-    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Factory']>
-    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+    User: BaetaSdk.TypeCompilerFactory<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Factory']>
+    Query: BaetaSdk.TypeCompilerFactory<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   User: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.User, Ctx, {}, Info>
-      email: Baeta.FieldMethods<Types.Scalars["String"], Types.User, Ctx, {}, Info>
-      lastName: Baeta.FieldMethods<Types.Scalars["String"], Types.User, Ctx, {}, Info>
-      profile: Baeta.FieldMethods<Types.Scalars["String"] | null, Types.User, Ctx, {}, Info>
-      givenName: Baeta.FieldMethods<Types.Scalars["String"] | null, Types.User, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      email: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      lastName: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      profile: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      givenName: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.User, Ctx, {}, Info>
-      email: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.User, Ctx, {}, Info>
-      lastName: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.User, Ctx, {}, Info>
-      profile: Baeta.Field<Types.Scalars["String"] | null, Types.Scalars["String"] | null, Types.User, Ctx, {}, Info>
-      givenName: Baeta.Field<Types.Scalars["String"] | null, Types.Scalars["String"] | null, Types.User, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      email: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      lastName: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      profile: BaetaSdk.Field<BaetaTypes.Scalars["String"] | null, BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      givenName: BaetaSdk.Field<BaetaTypes.Scalars["String"] | null, BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
   Query: {
     Builder: {
-      user: Baeta.FieldMethods<Types.User | null, {}, Ctx, Types.QueryUserArgs, Info>
-      users: Baeta.FieldMethods<Array<Types.User> | null, {}, Ctx, {}, Info>
+      user: BaetaSdk.FieldMethods<BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryUserArgs, BaetaUserTypes.Info>
+      users: BaetaSdk.FieldMethods<Array<BaetaTypes.User> | null, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      user: Baeta.Field<Types.User | null, Types.User | null, {}, Ctx, Types.QueryUserArgs, Info>
-      users: Baeta.Field<Array<Types.User> | null, Array<Types.User> | null, {}, Ctx, {}, Info>
+      user: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryUserArgs, BaetaUserTypes.Info>
+      users: BaetaSdk.Field<Array<BaetaTypes.User> | null, Array<BaetaTypes.User> | null, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
 };
 
-export const UserModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  User: Baeta.createTypeBuilder("User", {
-    id: Baeta.createFieldBuilder("User", "id"),
-    email: Baeta.createFieldBuilder("User", "email"),
-    lastName: Baeta.createFieldBuilder("User", "lastName"),
-    profile: Baeta.createFieldBuilder("User", "profile"),
-    givenName: Baeta.createFieldBuilder("User", "givenName")
+export const UserModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  User: BaetaSdk.createTypeBuilder("User", {
+    id: BaetaSdk.createFieldBuilder("User", "id"),
+    email: BaetaSdk.createFieldBuilder("User", "email"),
+    lastName: BaetaSdk.createFieldBuilder("User", "lastName"),
+    profile: BaetaSdk.createFieldBuilder("User", "profile"),
+    givenName: BaetaSdk.createFieldBuilder("User", "givenName")
   }),
-  Query: Baeta.createTypeBuilder("Query", {
-    user: Baeta.createFieldBuilder("Query", "user"),
-    users: Baeta.createFieldBuilder("Query", "users")
+  Query: BaetaSdk.createTypeBuilder("Query", {
+    user: BaetaSdk.createFieldBuilder("Query", "user"),
+    users: BaetaSdk.createFieldBuilder("Query", "users")
   })
 }, {
 

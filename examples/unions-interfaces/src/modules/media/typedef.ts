@@ -3,106 +3,105 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'media',
-  dirname: './media',
-  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Movie","loc":{"start":5,"end":10}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":14,"end":16}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":18,"end":20}},"loc":{"start":18,"end":20}},"loc":{"start":18,"end":21}},"directives":[],"loc":{"start":14,"end":21}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":23,"end":28}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":30,"end":36}},"loc":{"start":30,"end":36}},"loc":{"start":30,"end":37}},"directives":[],"loc":{"start":23,"end":37}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":39,"end":43}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":45,"end":48}},"loc":{"start":45,"end":48}},"loc":{"start":45,"end":49}},"directives":[],"loc":{"start":39,"end":49}}],"loc":{"start":0,"end":51}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"TVShow","loc":{"start":58,"end":64}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":68,"end":70}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":72,"end":74}},"loc":{"start":72,"end":74}},"loc":{"start":72,"end":75}},"directives":[],"loc":{"start":68,"end":75}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":77,"end":82}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":84,"end":90}},"loc":{"start":84,"end":90}},"loc":{"start":84,"end":91}},"directives":[],"loc":{"start":77,"end":91}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":93,"end":97}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":99,"end":102}},"loc":{"start":99,"end":102}},"loc":{"start":99,"end":103}},"directives":[],"loc":{"start":93,"end":103}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"seasons","loc":{"start":105,"end":112}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":114,"end":117}},"loc":{"start":114,"end":117}},"loc":{"start":114,"end":118}},"directives":[],"loc":{"start":105,"end":118}}],"loc":{"start":53,"end":120}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Book","loc":{"start":127,"end":131}},"interfaces":[{"kind":"NamedType","name":{"kind":"Name","value":"Readable","loc":{"start":143,"end":151}},"loc":{"start":143,"end":151}}],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":155,"end":157}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":159,"end":161}},"loc":{"start":159,"end":161}},"loc":{"start":159,"end":162}},"directives":[],"loc":{"start":155,"end":162}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":164,"end":169}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":171,"end":177}},"loc":{"start":171,"end":177}},"loc":{"start":171,"end":178}},"directives":[],"loc":{"start":164,"end":178}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":180,"end":184}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":186,"end":189}},"loc":{"start":186,"end":189}},"loc":{"start":186,"end":190}},"directives":[],"loc":{"start":180,"end":190}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"author","loc":{"start":192,"end":198}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":200,"end":206}},"loc":{"start":200,"end":206}},"loc":{"start":200,"end":207}},"directives":[],"loc":{"start":192,"end":207}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"pages","loc":{"start":209,"end":214}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":216,"end":219}},"loc":{"start":216,"end":219}},"loc":{"start":216,"end":220}},"directives":[],"loc":{"start":209,"end":220}}],"loc":{"start":122,"end":222}},{"kind":"UnionTypeDefinition","name":{"kind":"Name","value":"Media","loc":{"start":230,"end":235}},"directives":[],"types":[{"kind":"NamedType","name":{"kind":"Name","value":"Movie","loc":{"start":238,"end":243}},"loc":{"start":238,"end":243}},{"kind":"NamedType","name":{"kind":"Name","value":"TVShow","loc":{"start":246,"end":252}},"loc":{"start":246,"end":252}},{"kind":"NamedType","name":{"kind":"Name","value":"Book","loc":{"start":255,"end":259}},"loc":{"start":255,"end":259}}],"loc":{"start":224,"end":259}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":266,"end":271}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"media","loc":{"start":275,"end":280}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Media","loc":{"start":283,"end":288}},"loc":{"start":283,"end":288}},"loc":{"start":283,"end":289}},"loc":{"start":282,"end":290}},"loc":{"start":282,"end":291}},"directives":[],"loc":{"start":275,"end":291}}],"loc":{"start":261,"end":293}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Movie","loc":{"start":5,"end":10}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":14,"end":16}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":18,"end":20}},"loc":{"start":18,"end":20}},"loc":{"start":18,"end":21}},"directives":[],"loc":{"start":14,"end":21}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":23,"end":28}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":30,"end":36}},"loc":{"start":30,"end":36}},"loc":{"start":30,"end":37}},"directives":[],"loc":{"start":23,"end":37}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":39,"end":43}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":45,"end":48}},"loc":{"start":45,"end":48}},"loc":{"start":45,"end":49}},"directives":[],"loc":{"start":39,"end":49}}],"loc":{"start":0,"end":51}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"TVShow","loc":{"start":58,"end":64}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":68,"end":70}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":72,"end":74}},"loc":{"start":72,"end":74}},"loc":{"start":72,"end":75}},"directives":[],"loc":{"start":68,"end":75}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":77,"end":82}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":84,"end":90}},"loc":{"start":84,"end":90}},"loc":{"start":84,"end":91}},"directives":[],"loc":{"start":77,"end":91}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":93,"end":97}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":99,"end":102}},"loc":{"start":99,"end":102}},"loc":{"start":99,"end":103}},"directives":[],"loc":{"start":93,"end":103}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"seasons","loc":{"start":105,"end":112}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":114,"end":117}},"loc":{"start":114,"end":117}},"loc":{"start":114,"end":118}},"directives":[],"loc":{"start":105,"end":118}}],"loc":{"start":53,"end":120}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Book","loc":{"start":127,"end":131}},"interfaces":[{"kind":"NamedType","name":{"kind":"Name","value":"Readable","loc":{"start":143,"end":151}},"loc":{"start":143,"end":151}}],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":155,"end":157}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":159,"end":161}},"loc":{"start":159,"end":161}},"loc":{"start":159,"end":162}},"directives":[],"loc":{"start":155,"end":162}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":164,"end":169}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":171,"end":177}},"loc":{"start":171,"end":177}},"loc":{"start":171,"end":178}},"directives":[],"loc":{"start":164,"end":178}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":180,"end":184}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":186,"end":189}},"loc":{"start":186,"end":189}},"loc":{"start":186,"end":190}},"directives":[],"loc":{"start":180,"end":190}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"author","loc":{"start":192,"end":198}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":200,"end":206}},"loc":{"start":200,"end":206}},"loc":{"start":200,"end":207}},"directives":[],"loc":{"start":192,"end":207}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"pages","loc":{"start":209,"end":214}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":216,"end":219}},"loc":{"start":216,"end":219}},"loc":{"start":216,"end":220}},"directives":[],"loc":{"start":209,"end":220}}],"loc":{"start":122,"end":222}},{"kind":"UnionTypeDefinition","name":{"kind":"Name","value":"Media","loc":{"start":230,"end":235}},"directives":[],"types":[{"kind":"NamedType","name":{"kind":"Name","value":"Movie","loc":{"start":238,"end":243}},"loc":{"start":238,"end":243}},{"kind":"NamedType","name":{"kind":"Name","value":"TVShow","loc":{"start":246,"end":252}},"loc":{"start":246,"end":252}},{"kind":"NamedType","name":{"kind":"Name","value":"Book","loc":{"start":255,"end":259}},"loc":{"start":255,"end":259}}],"loc":{"start":224,"end":259}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":266,"end":271}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"media","loc":{"start":275,"end":280}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Media","loc":{"start":283,"end":288}},"loc":{"start":283,"end":288}},"loc":{"start":283,"end":289}},"loc":{"start":282,"end":290}},"loc":{"start":282,"end":291}},"directives":[],"loc":{"start":275,"end":291}}],"loc":{"start":261,"end":293}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    Movie: Baeta.TypeMethods<Types.Movie, Ctx, Info, BaetaModuleObjectTypeFields['Movie']['Builder'], BaetaModuleObjectTypeFields['Movie']['Factory']>
-    TVShow: Baeta.TypeMethods<Types.TVShow, Ctx, Info, BaetaModuleObjectTypeFields['TVShow']['Builder'], BaetaModuleObjectTypeFields['TVShow']['Factory']>
-    Book: Baeta.TypeMethods<Types.Book, Ctx, Info, BaetaModuleObjectTypeFields['Book']['Builder'], BaetaModuleObjectTypeFields['Book']['Factory']>
-    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+    Movie: BaetaSdk.TypeMethods<BaetaTypes.Movie, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Movie']['Builder'], BaetaModuleObjectTypeFields['Movie']['Factory']>
+    TVShow: BaetaSdk.TypeMethods<BaetaTypes.TVShow, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['TVShow']['Builder'], BaetaModuleObjectTypeFields['TVShow']['Factory']>
+    Book: BaetaSdk.TypeMethods<BaetaTypes.Book, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Book']['Builder'], BaetaModuleObjectTypeFields['Book']['Factory']>
+    Query: BaetaSdk.TypeMethods<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
   };
   Factories: {
-    Movie: Baeta.TypeCompilerFactory<Types.Movie, Ctx, Info, BaetaModuleObjectTypeFields['Movie']['Factory']>
-    TVShow: Baeta.TypeCompilerFactory<Types.TVShow, Ctx, Info, BaetaModuleObjectTypeFields['TVShow']['Factory']>
-    Book: Baeta.TypeCompilerFactory<Types.Book, Ctx, Info, BaetaModuleObjectTypeFields['Book']['Factory']>
-    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+    Movie: BaetaSdk.TypeCompilerFactory<BaetaTypes.Movie, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Movie']['Factory']>
+    TVShow: BaetaSdk.TypeCompilerFactory<BaetaTypes.TVShow, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['TVShow']['Factory']>
+    Book: BaetaSdk.TypeCompilerFactory<BaetaTypes.Book, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Book']['Factory']>
+    Query: BaetaSdk.TypeCompilerFactory<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   Movie: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Movie, Ctx, {}, Info>
-      title: Baeta.FieldMethods<Types.Scalars["String"], Types.Movie, Ctx, {}, Info>
-      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.Movie, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.Movie, Ctx, {}, Info>
-      title: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.Movie, Ctx, {}, Info>
-      year: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], Types.Movie, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
   TVShow: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.TVShow, Ctx, {}, Info>
-      title: Baeta.FieldMethods<Types.Scalars["String"], Types.TVShow, Ctx, {}, Info>
-      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info>
-      seasons: Baeta.FieldMethods<Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      seasons: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.TVShow, Ctx, {}, Info>
-      title: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.TVShow, Ctx, {}, Info>
-      year: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info>
-      seasons: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], Types.TVShow, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      seasons: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
   Book: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Book, Ctx, {}, Info>
-      title: Baeta.FieldMethods<Types.Scalars["String"], Types.Book, Ctx, {}, Info>
-      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.Book, Ctx, {}, Info>
-      author: Baeta.FieldMethods<Types.Scalars["String"], Types.Book, Ctx, {}, Info>
-      pages: Baeta.FieldMethods<Types.Scalars["Int"], Types.Book, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      author: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pages: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.Book, Ctx, {}, Info>
-      title: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.Book, Ctx, {}, Info>
-      year: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], Types.Book, Ctx, {}, Info>
-      author: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.Book, Ctx, {}, Info>
-      pages: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], Types.Book, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      author: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pages: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
   Query: {
     Builder: {
-      media: Baeta.FieldMethods<Array<Types.Media>, {}, Ctx, {}, Info>
+      media: BaetaSdk.FieldMethods<Array<BaetaTypes.Media>, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      media: Baeta.Field<Array<Types.Media>, Array<Types.Media>, {}, Ctx, {}, Info>
+      media: BaetaSdk.Field<Array<BaetaTypes.Media>, Array<BaetaTypes.Media>, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
 };
 
-export const MediaModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  Movie: Baeta.createTypeBuilder("Movie", {
-    id: Baeta.createFieldBuilder("Movie", "id"),
-    title: Baeta.createFieldBuilder("Movie", "title"),
-    year: Baeta.createFieldBuilder("Movie", "year")
+export const MediaModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  Movie: BaetaSdk.createTypeBuilder("Movie", {
+    id: BaetaSdk.createFieldBuilder("Movie", "id"),
+    title: BaetaSdk.createFieldBuilder("Movie", "title"),
+    year: BaetaSdk.createFieldBuilder("Movie", "year")
   }),
-  TVShow: Baeta.createTypeBuilder("TVShow", {
-    id: Baeta.createFieldBuilder("TVShow", "id"),
-    title: Baeta.createFieldBuilder("TVShow", "title"),
-    year: Baeta.createFieldBuilder("TVShow", "year"),
-    seasons: Baeta.createFieldBuilder("TVShow", "seasons")
+  TVShow: BaetaSdk.createTypeBuilder("TVShow", {
+    id: BaetaSdk.createFieldBuilder("TVShow", "id"),
+    title: BaetaSdk.createFieldBuilder("TVShow", "title"),
+    year: BaetaSdk.createFieldBuilder("TVShow", "year"),
+    seasons: BaetaSdk.createFieldBuilder("TVShow", "seasons")
   }),
-  Book: Baeta.createTypeBuilder("Book", {
-    id: Baeta.createFieldBuilder("Book", "id"),
-    title: Baeta.createFieldBuilder("Book", "title"),
-    year: Baeta.createFieldBuilder("Book", "year"),
-    author: Baeta.createFieldBuilder("Book", "author"),
-    pages: Baeta.createFieldBuilder("Book", "pages")
+  Book: BaetaSdk.createTypeBuilder("Book", {
+    id: BaetaSdk.createFieldBuilder("Book", "id"),
+    title: BaetaSdk.createFieldBuilder("Book", "title"),
+    year: BaetaSdk.createFieldBuilder("Book", "year"),
+    author: BaetaSdk.createFieldBuilder("Book", "author"),
+    pages: BaetaSdk.createFieldBuilder("Book", "pages")
   }),
-  Query: Baeta.createTypeBuilder("Query", {
-    media: Baeta.createFieldBuilder("Query", "media")
+  Query: BaetaSdk.createTypeBuilder("Query", {
+    media: BaetaSdk.createFieldBuilder("Query", "media")
   })
 }, {
   Media: { __resolveType: (source: {__typename: string}) => { return source.__typename; }}

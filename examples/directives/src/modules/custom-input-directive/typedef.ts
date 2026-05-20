@@ -3,40 +3,39 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'custom-input-directive',
-  dirname: './custom-input-directive',
-  typedef: {"kind":"Document","definitions":[{"kind":"DirectiveDefinition","name":{"kind":"Name","value":"increment","loc":{"start":11,"end":20}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"by","loc":{"start":21,"end":23}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":25,"end":28}},"loc":{"start":25,"end":28}},"loc":{"start":25,"end":29}},"directives":[],"loc":{"start":21,"end":29}}],"repeatable":false,"locations":[{"kind":"Name","value":"INPUT_FIELD_DEFINITION","loc":{"start":34,"end":56}},{"kind":"Name","value":"ARGUMENT_DEFINITION","loc":{"start":59,"end":78}}],"loc":{"start":0,"end":78}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":85,"end":90}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"testIncrementDirective","loc":{"start":94,"end":116}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"value","loc":{"start":117,"end":122}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":124,"end":127}},"loc":{"start":124,"end":127}},"loc":{"start":124,"end":128}},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"increment","loc":{"start":130,"end":139}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"by","loc":{"start":140,"end":142}},"value":{"kind":"IntValue","value":"1","loc":{"start":144,"end":145}},"loc":{"start":140,"end":145}}],"loc":{"start":129,"end":146}}],"loc":{"start":117,"end":146}}],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":149,"end":152}},"loc":{"start":149,"end":152}},"loc":{"start":149,"end":153}},"directives":[],"loc":{"start":94,"end":153}}],"loc":{"start":80,"end":155}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"DirectiveDefinition","name":{"kind":"Name","value":"increment","loc":{"start":11,"end":20}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"by","loc":{"start":21,"end":23}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":25,"end":28}},"loc":{"start":25,"end":28}},"loc":{"start":25,"end":29}},"directives":[],"loc":{"start":21,"end":29}}],"directives":[],"repeatable":false,"locations":[{"kind":"Name","value":"INPUT_FIELD_DEFINITION","loc":{"start":34,"end":56}},{"kind":"Name","value":"ARGUMENT_DEFINITION","loc":{"start":59,"end":78}}],"loc":{"start":0,"end":78}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Query","loc":{"start":85,"end":90}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"testIncrementDirective","loc":{"start":94,"end":116}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"value","loc":{"start":117,"end":122}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":124,"end":127}},"loc":{"start":124,"end":127}},"loc":{"start":124,"end":128}},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"increment","loc":{"start":130,"end":139}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"by","loc":{"start":140,"end":142}},"value":{"kind":"IntValue","value":"1","loc":{"start":144,"end":145}},"loc":{"start":140,"end":145}}],"loc":{"start":129,"end":146}}],"loc":{"start":117,"end":146}}],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":149,"end":152}},"loc":{"start":149,"end":152}},"loc":{"start":149,"end":153}},"directives":[],"loc":{"start":94,"end":153}}],"loc":{"start":80,"end":155}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    Query: Baeta.TypeMethods<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
+    Query: BaetaSdk.TypeMethods<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Builder'], BaetaModuleObjectTypeFields['Query']['Factory']>
   };
   Factories: {
-    Query: Baeta.TypeCompilerFactory<{}, Ctx, Info, BaetaModuleObjectTypeFields['Query']['Factory']>
+    Query: BaetaSdk.TypeCompilerFactory<{}, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Query']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   Query: {
     Builder: {
-      testIncrementDirective: Baeta.FieldMethods<Types.Scalars["Int"], {}, Ctx, Types.QueryTestIncrementDirectiveArgs, Info>
+      testIncrementDirective: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestIncrementDirectiveArgs, BaetaUserTypes.Info>
     };
     Factory: {
-      testIncrementDirective: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], {}, Ctx, Types.QueryTestIncrementDirectiveArgs, Info>
+      testIncrementDirective: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestIncrementDirectiveArgs, BaetaUserTypes.Info>
     };
   };
 };
 
-export const CustomInputDirectiveModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  Query: Baeta.createTypeBuilder("Query", {
-    testIncrementDirective: Baeta.createFieldBuilder("Query", "testIncrementDirective")
+export const CustomInputDirectiveModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  Query: BaetaSdk.createTypeBuilder("Query", {
+    testIncrementDirective: BaetaSdk.createFieldBuilder("Query", "testIncrementDirective")
   })
 }, {
 

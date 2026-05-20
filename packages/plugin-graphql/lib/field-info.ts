@@ -1,5 +1,6 @@
 import { type DefinitionsMap, isScalarType } from '@baeta/util-graphql';
 import { Kind, type TypeNode } from 'graphql';
+import { namespace } from './namespace.ts';
 
 export type FieldInfoMap = Map<string, Map<string, { type: string; hasArguments: boolean }>>;
 
@@ -29,9 +30,9 @@ function printNamedType(
 	switch (type.kind) {
 		case Kind.NAMED_TYPE:
 			if (isScalarType(definitionsMap, defaultScalars, type)) {
-				return `Types.Scalars["${type.name.value}"]${withNullable}`;
+				return `${namespace.globalTypes}.Scalars["${type.name.value}"]${withNullable}`;
 			}
-			return `Types.${type.name.value}${withNullable}`;
+			return `${namespace.globalTypes}.${type.name.value}${withNullable}`;
 		case Kind.LIST_TYPE:
 			return `Array<${printNamedType(definitionsMap, defaultScalars, type.type)}>${withNullable}`;
 		case Kind.NON_NULL_TYPE:

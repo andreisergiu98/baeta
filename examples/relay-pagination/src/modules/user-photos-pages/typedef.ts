@@ -3,40 +3,39 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'user-photos-pages',
-  dirname: './user-photos-pages',
-  typedef: {"kind":"Document","definitions":[{"kind":"InputObjectTypeDefinition","name":{"kind":"Name","value":"UserPhotoPage","loc":{"start":6,"end":19}},"directives":[],"fields":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"cursor","loc":{"start":23,"end":29}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":31,"end":33}},"loc":{"start":31,"end":33}},"directives":[],"loc":{"start":23,"end":33}},{"kind":"InputValueDefinition","name":{"kind":"Name","value":"limit","loc":{"start":35,"end":40}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":42,"end":45}},"loc":{"start":42,"end":45}},"loc":{"start":42,"end":46}},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"validInt","loc":{"start":48,"end":56}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"min","loc":{"start":57,"end":60}},"value":{"kind":"IntValue","value":"1","loc":{"start":62,"end":63}},"loc":{"start":57,"end":63}},{"kind":"Argument","name":{"kind":"Name","value":"max","loc":{"start":65,"end":68}},"value":{"kind":"IntValue","value":"50","loc":{"start":70,"end":72}},"loc":{"start":65,"end":72}}],"loc":{"start":47,"end":73}}],"loc":{"start":35,"end":73}}],"loc":{"start":0,"end":75}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":89,"end":93}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photosConnection","loc":{"start":97,"end":113}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"page","loc":{"start":114,"end":118}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoPage","loc":{"start":120,"end":133}},"loc":{"start":120,"end":133}},"loc":{"start":120,"end":134}},"directives":[],"loc":{"start":114,"end":134}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoConnection","loc":{"start":137,"end":156}},"loc":{"start":137,"end":156}},"directives":[],"loc":{"start":97,"end":156}}],"loc":{"start":77,"end":158}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"InputObjectTypeDefinition","name":{"kind":"Name","value":"UserPhotoPage","loc":{"start":6,"end":19}},"directives":[],"fields":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"cursor","loc":{"start":23,"end":29}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":31,"end":33}},"loc":{"start":31,"end":33}},"directives":[],"loc":{"start":23,"end":33}},{"kind":"InputValueDefinition","name":{"kind":"Name","value":"limit","loc":{"start":35,"end":40}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":42,"end":45}},"loc":{"start":42,"end":45}},"loc":{"start":42,"end":46}},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"validInt","loc":{"start":48,"end":56}},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"min","loc":{"start":57,"end":60}},"value":{"kind":"IntValue","value":"1","loc":{"start":62,"end":63}},"loc":{"start":57,"end":63}},{"kind":"Argument","name":{"kind":"Name","value":"max","loc":{"start":65,"end":68}},"value":{"kind":"IntValue","value":"50","loc":{"start":70,"end":72}},"loc":{"start":65,"end":72}}],"loc":{"start":47,"end":73}}],"loc":{"start":35,"end":73}}],"loc":{"start":0,"end":75}},{"kind":"ObjectTypeExtension","name":{"kind":"Name","value":"User","loc":{"start":89,"end":93}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"photosConnection","loc":{"start":97,"end":113}},"arguments":[{"kind":"InputValueDefinition","name":{"kind":"Name","value":"page","loc":{"start":114,"end":118}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoPage","loc":{"start":120,"end":133}},"loc":{"start":120,"end":133}},"loc":{"start":120,"end":134}},"directives":[],"loc":{"start":114,"end":134}}],"type":{"kind":"NamedType","name":{"kind":"Name","value":"UserPhotoConnection","loc":{"start":137,"end":156}},"loc":{"start":137,"end":156}},"directives":[],"loc":{"start":97,"end":156}}],"loc":{"start":77,"end":158}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    User: Baeta.TypeMethods<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
+    User: BaetaSdk.TypeMethods<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Builder'], BaetaModuleObjectTypeFields['User']['Factory']>
   };
   Factories: {
-    User: Baeta.TypeCompilerFactory<Types.User, Ctx, Info, BaetaModuleObjectTypeFields['User']['Factory']>
+    User: BaetaSdk.TypeCompilerFactory<BaetaTypes.User, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['User']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   User: {
     Builder: {
-      photosConnection: Baeta.FieldMethods<Types.UserPhotoConnection | null, Types.User, Ctx, Types.UserPhotosConnectionArgs, Info>
+      photosConnection: BaetaSdk.FieldMethods<BaetaTypes.UserPhotoConnection | null, BaetaTypes.User, BaetaUserTypes.Ctx, BaetaTypes.UserPhotosConnectionArgs, BaetaUserTypes.Info>
     };
     Factory: {
-      photosConnection: Baeta.Field<Types.UserPhotoConnection | null, Types.UserPhotoConnection | null, Types.User, Ctx, Types.UserPhotosConnectionArgs, Info>
+      photosConnection: BaetaSdk.Field<BaetaTypes.UserPhotoConnection | null, BaetaTypes.UserPhotoConnection | null, BaetaTypes.User, BaetaUserTypes.Ctx, BaetaTypes.UserPhotosConnectionArgs, BaetaUserTypes.Info>
     };
   };
 };
 
-export const UserPhotosPagesModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  User: Baeta.createTypeBuilder("User", {
-    photosConnection: Baeta.createFieldBuilder("User", "photosConnection")
+export const UserPhotosPagesModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  User: BaetaSdk.createTypeBuilder("User", {
+    photosConnection: BaetaSdk.createFieldBuilder("User", "photosConnection")
   })
 }, {
 

@@ -2,9 +2,6 @@ import { createCache, defineQuery } from '@baeta/cache';
 import { z } from 'zod';
 import { db } from '../../lib/db/prisma.ts';
 import { redisClient } from '../../lib/redis.ts';
-import { UserModule } from './typedef.ts';
-
-const { User } = UserModule;
 
 const UserCacheSchema = z.object({
 	id: z.string(),

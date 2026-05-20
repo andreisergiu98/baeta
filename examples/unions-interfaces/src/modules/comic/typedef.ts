@@ -3,52 +3,51 @@
 /* @biome-ignore-all: generated file */
 /* biome-ignore-all lint: generated file */
 
-import type { DocumentNode, GraphQLScalarType } from "graphql";
-import * as Baeta from "@baeta/core/sdk";
-import type {Ctx, Info} from "../types.ts";
-import type * as Types from "../../__generated__/types.ts";
+import * as BaetaSdk from "@baeta/core/sdk";
+import type * as BaetaGraphql from "graphql";
+import type * as BaetaTypes from "../../__generated__/types.ts";
+import type * as BaetaUserTypes from "../types.ts";
 
 const moduleMetadata = {
   id: 'comic',
-  dirname: './comic',
-  typedef: {"kind":"Document","definitions":[{"kind":"InterfaceTypeDefinition","name":{"kind":"Name","value":"Readable","loc":{"start":10,"end":18}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":22,"end":24}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":26,"end":28}},"loc":{"start":26,"end":28}},"loc":{"start":26,"end":29}},"directives":[],"loc":{"start":22,"end":29}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"pages","loc":{"start":31,"end":36}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":38,"end":41}},"loc":{"start":38,"end":41}},"loc":{"start":38,"end":42}},"directives":[],"loc":{"start":31,"end":42}}],"loc":{"start":0,"end":44}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Comic","loc":{"start":51,"end":56}},"interfaces":[{"kind":"NamedType","name":{"kind":"Name","value":"Readable","loc":{"start":68,"end":76}},"loc":{"start":68,"end":76}}],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":80,"end":82}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":84,"end":86}},"loc":{"start":84,"end":86}},"loc":{"start":84,"end":87}},"directives":[],"loc":{"start":80,"end":87}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":89,"end":94}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":96,"end":102}},"loc":{"start":96,"end":102}},"loc":{"start":96,"end":103}},"directives":[],"loc":{"start":89,"end":103}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":105,"end":109}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":111,"end":114}},"loc":{"start":111,"end":114}},"loc":{"start":111,"end":115}},"directives":[],"loc":{"start":105,"end":115}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"artist","loc":{"start":117,"end":123}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":125,"end":131}},"loc":{"start":125,"end":131}},"loc":{"start":125,"end":132}},"directives":[],"loc":{"start":117,"end":132}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"pages","loc":{"start":134,"end":139}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":141,"end":144}},"loc":{"start":141,"end":144}},"loc":{"start":141,"end":145}},"directives":[],"loc":{"start":134,"end":145}}],"loc":{"start":46,"end":147}},{"kind":"UnionTypeExtension","name":{"kind":"Name","value":"Media","loc":{"start":162,"end":167}},"directives":[],"types":[{"kind":"NamedType","name":{"kind":"Name","value":"Comic","loc":{"start":170,"end":175}},"loc":{"start":170,"end":175}}],"loc":{"start":149,"end":175}}]} as unknown as DocumentNode
+  typedef: {"kind":"Document","definitions":[{"kind":"InterfaceTypeDefinition","name":{"kind":"Name","value":"Readable","loc":{"start":10,"end":18}},"interfaces":[],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":22,"end":24}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":26,"end":28}},"loc":{"start":26,"end":28}},"loc":{"start":26,"end":29}},"directives":[],"loc":{"start":22,"end":29}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"pages","loc":{"start":31,"end":36}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":38,"end":41}},"loc":{"start":38,"end":41}},"loc":{"start":38,"end":42}},"directives":[],"loc":{"start":31,"end":42}}],"loc":{"start":0,"end":44}},{"kind":"ObjectTypeDefinition","name":{"kind":"Name","value":"Comic","loc":{"start":51,"end":56}},"interfaces":[{"kind":"NamedType","name":{"kind":"Name","value":"Readable","loc":{"start":68,"end":76}},"loc":{"start":68,"end":76}}],"directives":[],"fields":[{"kind":"FieldDefinition","name":{"kind":"Name","value":"id","loc":{"start":80,"end":82}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID","loc":{"start":84,"end":86}},"loc":{"start":84,"end":86}},"loc":{"start":84,"end":87}},"directives":[],"loc":{"start":80,"end":87}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"title","loc":{"start":89,"end":94}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":96,"end":102}},"loc":{"start":96,"end":102}},"loc":{"start":96,"end":103}},"directives":[],"loc":{"start":89,"end":103}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"year","loc":{"start":105,"end":109}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":111,"end":114}},"loc":{"start":111,"end":114}},"loc":{"start":111,"end":115}},"directives":[],"loc":{"start":105,"end":115}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"artist","loc":{"start":117,"end":123}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String","loc":{"start":125,"end":131}},"loc":{"start":125,"end":131}},"loc":{"start":125,"end":132}},"directives":[],"loc":{"start":117,"end":132}},{"kind":"FieldDefinition","name":{"kind":"Name","value":"pages","loc":{"start":134,"end":139}},"arguments":[],"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int","loc":{"start":141,"end":144}},"loc":{"start":141,"end":144}},"loc":{"start":141,"end":145}},"directives":[],"loc":{"start":134,"end":145}}],"loc":{"start":46,"end":147}},{"kind":"UnionTypeExtension","name":{"kind":"Name","value":"Media","loc":{"start":162,"end":167}},"directives":[],"types":[{"kind":"NamedType","name":{"kind":"Name","value":"Comic","loc":{"start":170,"end":175}},"loc":{"start":170,"end":175}}],"loc":{"start":149,"end":175}}]} as unknown as BaetaGraphql.DocumentNode
 }
 
 export interface BaetaModuleTypes {
   Builders: {
-    Comic: Baeta.TypeMethods<Types.Comic, Ctx, Info, BaetaModuleObjectTypeFields['Comic']['Builder'], BaetaModuleObjectTypeFields['Comic']['Factory']>
+    Comic: BaetaSdk.TypeMethods<BaetaTypes.Comic, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Comic']['Builder'], BaetaModuleObjectTypeFields['Comic']['Factory']>
   };
   Factories: {
-    Comic: Baeta.TypeCompilerFactory<Types.Comic, Ctx, Info, BaetaModuleObjectTypeFields['Comic']['Factory']>
+    Comic: BaetaSdk.TypeCompilerFactory<BaetaTypes.Comic, BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleObjectTypeFields['Comic']['Factory']>
   };
 };
 
 interface BaetaModuleObjectTypeFields {
   Comic: {
     Builder: {
-      id: Baeta.FieldMethods<Types.Scalars["ID"], Types.Comic, Ctx, {}, Info>
-      title: Baeta.FieldMethods<Types.Scalars["String"], Types.Comic, Ctx, {}, Info>
-      year: Baeta.FieldMethods<Types.Scalars["Int"], Types.Comic, Ctx, {}, Info>
-      artist: Baeta.FieldMethods<Types.Scalars["String"], Types.Comic, Ctx, {}, Info>
-      pages: Baeta.FieldMethods<Types.Scalars["Int"], Types.Comic, Ctx, {}, Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      artist: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pages: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
     Factory: {
-      id: Baeta.Field<Types.Scalars["ID"], Types.Scalars["ID"], Types.Comic, Ctx, {}, Info>
-      title: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.Comic, Ctx, {}, Info>
-      year: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], Types.Comic, Ctx, {}, Info>
-      artist: Baeta.Field<Types.Scalars["String"], Types.Scalars["String"], Types.Comic, Ctx, {}, Info>
-      pages: Baeta.Field<Types.Scalars["Int"], Types.Scalars["Int"], Types.Comic, Ctx, {}, Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      artist: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pages: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
     };
   };
 };
 
-export const ComicModule = Baeta.createModuleBuilder<Ctx, Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-  Comic: Baeta.createTypeBuilder("Comic", {
-    id: Baeta.createFieldBuilder("Comic", "id"),
-    title: Baeta.createFieldBuilder("Comic", "title"),
-    year: Baeta.createFieldBuilder("Comic", "year"),
-    artist: Baeta.createFieldBuilder("Comic", "artist"),
-    pages: Baeta.createFieldBuilder("Comic", "pages")
+export const ComicModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
+  Comic: BaetaSdk.createTypeBuilder("Comic", {
+    id: BaetaSdk.createFieldBuilder("Comic", "id"),
+    title: BaetaSdk.createFieldBuilder("Comic", "title"),
+    year: BaetaSdk.createFieldBuilder("Comic", "year"),
+    artist: BaetaSdk.createFieldBuilder("Comic", "artist"),
+    pages: BaetaSdk.createFieldBuilder("Comic", "pages")
   })
 }, {
   Readable: { __resolveType: (source: {__typename: string}) => { return source.__typename; }}

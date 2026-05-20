@@ -13,6 +13,8 @@ const actions = {
 	cache: 'actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae', // v5.0.5
 	createGithubAppToken: 'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1', // v3.2.0
 	githubScript: 'actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3', // v9.0.0
+	uploadArtifact: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a', // v7.0.1
+	downloadArtifact: 'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c', // v8.0.1
 	changesets: 'changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b', // v1.8.0
 	dockerLogin: 'docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121', // v4.1.0
 	ghPages: 'peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453', // v4.1.0
@@ -128,6 +130,84 @@ export function useCacheSave(options: UseCacheSaveOptions): Steps {
 				},
 			},
 		);
+	};
+}
+
+export interface UseUploadArtifactOptions {
+	stepName?: string;
+	name?: Expression<string>;
+	path: Expression<string>;
+	ifNoFilesFound?: 'warn' | 'error' | 'ignore';
+	retentionDays?: Expression<number>;
+	compressionLevel?: Expression<number>;
+	overwrite?: Expression<boolean>;
+	includeHiddenFiles?: Expression<boolean>;
+	archive?: Expression<boolean>;
+}
+
+export function useUploadArtifact(options: UseUploadArtifactOptions): Steps {
+	return ({ use }) => {
+		const { outputs } = use<{
+			'artifact-id': string;
+			'artifact-url': string;
+			'artifact-name': string;
+		}>(options.stepName || 'Upload Artifact', actions.uploadArtifact, {
+			with: {
+				name: options.name,
+				path: options.path,
+				archive: options.archive,
+				overwrite: options.overwrite,
+				'if-no-files-found': options.ifNoFilesFound,
+				'retention-days': options.retentionDays,
+				'compression-level': options.compressionLevel,
+				'include-hidden-files': options.includeHiddenFiles,
+			},
+		});
+		return {
+			artifactId: outputs['artifact-id'],
+			artifactUrl: outputs['artifact-url'],
+			artifactName: outputs['artifact-name'],
+		};
+	};
+}
+
+export interface UseDownloadArtifactOptions {
+	stepName?: string;
+	name: Expression<string>;
+	artifactIds?: Expression<string>[];
+	path?: Expression<string>;
+	patterns?: Expression<string>;
+	mergeMultiple?: Expression<boolean>;
+	githubToken?: Expression<string>;
+	repository?: Expression<string>;
+	runId?: Expression<string>;
+	skipDecompress?: Expression<boolean>;
+	digestMismatch?: 'info' | 'warn' | 'error' | 'ignore';
+	continueOnError?: Expression<boolean>;
+}
+
+export function useDownloadArtifact(options: UseDownloadArtifactOptions): Steps {
+	return ({ use }) => {
+		const { outputs } = use<{
+			'download-path': string;
+		}>(options.stepName || 'Download Artifact', actions.downloadArtifact, {
+			with: {
+				name: options.name,
+				path: options.path,
+				patterns: options.patterns,
+				repository: options.repository,
+				'artifact-ids': options.artifactIds ? joinStrings(options.artifactIds, ',') : undefined,
+				'run-id': options.runId,
+				'merge-multiple': options.mergeMultiple,
+				'github-token': options.githubToken,
+				'skip-decompress': options.skipDecompress,
+				'digest-mismatch': options.digestMismatch,
+			},
+			continueOnError: options.continueOnError,
+		});
+		return {
+			downloadPath: outputs['download-path'],
+		};
 	};
 }
 

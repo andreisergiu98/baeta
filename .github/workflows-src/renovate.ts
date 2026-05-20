@@ -5,22 +5,39 @@ import {
 	eq,
 	interpolate,
 	joinStrings,
+	neq,
 	not,
 	success,
 	type Expression,
 } from 'github-actions-workflow-builder/lib/expression';
-import { useCacheRestore, useCacheSave, useDockerLogin, useRenovate } from './_shared/actions.ts';
+import {
+	useCacheRestore,
+	useCacheSave,
+	useDockerLogin,
+	useDownloadArtifact,
+	useRenovate,
+	useUploadArtifact,
+} from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
 import { DEFAULT_NODE, setupNode } from './_shared/setup.ts';
 
 const nodeVersion = DEFAULT_NODE.version;
-const renovateCacheKey = 'renovate-cache-v2';
 const allowedCommands = ['^yarn install --immutable --immutable-cache$', '^yarn actions:build$'];
+
+const renovateCacheDir = '/tmp/renovate/cache';
+const renovateCacheKey = 'renovate-cache-v2';
+const renovateRepositoryCacheName = 'renovate-repository-cache';
+const renovateRepositoryCacheDir = '/tmp/renovate/cache/renovate/repository';
 
 export default createWorkflow(
 	({ setWorkflowName, addJob, setConcurrency, addTrigger, setPermissions }) => {
 		setWorkflowName('Renovate');
 		setConcurrency({ group: 'renovate' });
+		setPermissions({
+			contents: 'read',
+			actions: 'write',
+		});
+
 		const dispatch = addTrigger('workflow_dispatch', {
 			inputs: {
 				cache: {
@@ -45,10 +62,6 @@ export default createWorkflow(
 		const disableCache = eq(dispatch.inputs.cache, 'disabled');
 		const resetCache = eq(dispatch.inputs.cache, 'reset');
 
-		setPermissions({
-			contents: 'read',
-			actions: 'write',
-		});
 		addJob('Renovate', ({ add, when, run }) => {
 			const getToken = add(useBaetaBotToken());
 
@@ -68,45 +81,65 @@ export default createWorkflow(
 			);
 
 			const { outputs: yarnInfo } = run<{ version: string }>(
-				'Get yarn info',
+				'Get Yarn info',
 				joinStrings([`echo "version=$(yarn --version)" >> $GITHUB_OUTPUT`], '\n'),
 			);
 
-			const cacheHit = when(not(disableCache), () => {
-				const cacheResult = add(
-					useCacheRestore({
-						stepName: 'Restore Renovate Cache',
-						paths: ['/tmp/renovate/cache'],
-						key: renovateCacheKey,
-					}),
-				);
-
-				when(and(resetCache, cacheResult.cacheHit), () => {
-					run(
-						'Wipe Renovate Cache',
-						joinStrings(
-							[
-								'mv /tmp/renovate/cache/renovate/repository /tmp/renovate-repo-keep',
-								'rm -rf /tmp/renovate/cache',
-								'mkdir -p /tmp/renovate/cache/renovate',
-								'mv /tmp/renovate-repo-keep /tmp/renovate/cache/renovate/repository',
-							],
-							'\n',
-						),
+			when(not(disableCache), () => {
+				when(not(resetCache), () => {
+					add(
+						useCacheRestore({
+							stepName: 'Restore Renovate Cache',
+							paths: [renovateCacheDir],
+							key: renovateCacheKey,
+						}),
 					);
 				});
 
-				when(cacheResult.cacheHit, () => {
-					run('Fix-up Renovate cache permissions', 'sudo chown -R 12021:0 /tmp/renovate/ || true');
+				run(
+					'Prepare Renovate repository cache dir',
+					joinStrings(
+						[
+							`rm -rf ${renovateRepositoryCacheDir} || true`,
+							`mkdir -p ${renovateRepositoryCacheDir}`,
+						],
+						'\n',
+					),
+				);
+
+				const { outputs: lastRun } = run<{ runId: string }>(
+					'Get last Renovate run id',
+					joinStrings(
+						[
+							interpolate`run_id=$(gh run list --workflow="${github.workflow}" --branch="\${{ github.ref_name }}" --status=success --limit=1 --json databaseId --jq '.[0].databaseId  // empty')`,
+							`echo "runId=$run_id" >> $GITHUB_OUTPUT`,
+						],
+						'\n',
+					),
+					{
+						env: { GH_TOKEN: secrets.GITHUB_TOKEN },
+					},
+				);
+
+				when(neq(lastRun.runId, ''), () => {
+					add(
+						useDownloadArtifact({
+							stepName: 'Download Renovate repository cache',
+							name: renovateRepositoryCacheName,
+							path: renovateRepositoryCacheDir,
+							runId: lastRun.runId,
+							githubToken: secrets.GITHUB_TOKEN,
+							continueOnError: true,
+						}),
+					);
 				});
 
-				return cacheResult.cacheHit;
+				run('Fix-up Renovate cache permissions', 'sudo chown -R 12021:0 /tmp/renovate/ || true');
 			});
 
-			run('Write Renovate Entrypoint', makeEntrypointScript(nodeVersion, yarnInfo.version), {
+			run('Write Renovate entrypoint', makeEntrypointScript(nodeVersion, yarnInfo.version), {
 				shell: 'bash',
 			});
-
 			add(
 				useRenovate({
 					token: getToken.token,
@@ -122,16 +155,22 @@ export default createWorkflow(
 				}),
 			);
 
-			when(and(success(), not(disableCache)), () => {
-				when(cacheHit, () => {
-					run('Remove Renovate Cache', `gh cache delete ${renovateCacheKey}`, {
-						env: { GH_TOKEN: secrets.GITHUB_TOKEN },
-					});
+			when(and(not(disableCache), success()), () => {
+				add(
+					useUploadArtifact({
+						stepName: 'Upload Renovate repository cache',
+						name: renovateRepositoryCacheName,
+						path: renovateRepositoryCacheDir,
+						retentionDays: 1,
+					}),
+				);
+				run('Remove Renovate cache', `gh cache delete ${renovateCacheKey} || true`, {
+					env: { GH_TOKEN: secrets.GITHUB_TOKEN },
 				});
 				add(
 					useCacheSave({
 						stepName: 'Save Renovate Cache',
-						paths: ['/tmp/renovate/cache'],
+						paths: [renovateCacheDir],
 						key: renovateCacheKey,
 					}),
 				);

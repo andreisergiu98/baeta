@@ -53,30 +53,46 @@ jobs:
           npm uninstall -g yarn || true
           corepack enable
         shell: bash
-      - name: Get yarn info
+      - name: Get Yarn info
         run: echo "version=$(yarn --version)" >> $GITHUB_OUTPUT
         id: step_6
       - name: Restore Renovate Cache
-        if: ${{ !(github.event.inputs.cache == 'disabled') }}
+        if: ${{ !(github.event.inputs.cache == 'disabled') &&
+          !(github.event.inputs.cache == 'reset') }}
         uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: /tmp/renovate/cache
           key: renovate-cache-v2
-        id: step_7
-      - name: Wipe Renovate Cache
-        if: ${{ !(github.event.inputs.cache == 'disabled') &&
-          ((github.event.inputs.cache == 'reset') &&
-          (steps.step_7.outputs.cache-hit == 'true')) }}
+      - name: Prepare Renovate repository cache dir
+        if: ${{ !(github.event.inputs.cache == 'disabled') }}
         run: |-
-          mv /tmp/renovate/cache/renovate/repository /tmp/renovate-repo-keep
-          rm -rf /tmp/renovate/cache
-          mkdir -p /tmp/renovate/cache/renovate
-          mv /tmp/renovate-repo-keep /tmp/renovate/cache/renovate/repository
-      - name: Fix-up Renovate cache permissions
+          rm -rf /tmp/renovate/cache/renovate/repository || true
+          mkdir -p /tmp/renovate/cache/renovate/repository
+      - name: Get last Renovate run id
+        if: ${{ !(github.event.inputs.cache == 'disabled') }}
+        run: >-
+          run_id=$(gh run list --workflow="${{ github.workflow }}" --branch="${{
+          github.ref_name }}" --status=success --limit=1 --json databaseId --jq
+          '.[0].databaseId  // empty')
+
+          echo "runId=$run_id" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: step_9
+      - name: Download Renovate repository cache
         if: ${{ !(github.event.inputs.cache == 'disabled') &&
-          (steps.step_7.outputs.cache-hit == 'true') }}
+          (steps.step_9.outputs.runId != '') }}
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: renovate-repository-cache
+          path: /tmp/renovate/cache/renovate/repository
+          run-id: ${{ steps.step_9.outputs.runId }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+      - name: Fix-up Renovate cache permissions
+        if: ${{ !(github.event.inputs.cache == 'disabled') }}
         run: sudo chown -R 12021:0 /tmp/renovate/ || true
-      - name: Write Renovate Entrypoint
+      - name: Write Renovate entrypoint
         run: >-
           cat > /tmp/renovate-entrypoint.sh <<'EOF'
 
@@ -110,14 +126,20 @@ jobs:
             --immutable-cache$","^yarn actions:build$"]'
           LOG_LEVEL: ${{ github.event.inputs.logLevel }}
           NODE_OPTIONS: --max-old-space-size=4096
-      - name: Remove Renovate Cache
-        if: ${{ (success() && !(github.event.inputs.cache == 'disabled')) &&
-          (steps.step_7.outputs.cache-hit == 'true') }}
-        run: gh cache delete renovate-cache-v2
+      - name: Upload Renovate repository cache
+        if: ${{ !(github.event.inputs.cache == 'disabled') && success() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: renovate-repository-cache
+          path: /tmp/renovate/cache/renovate/repository
+          retention-days: 1
+      - name: Remove Renovate cache
+        if: ${{ !(github.event.inputs.cache == 'disabled') && success() }}
+        run: gh cache delete renovate-cache-v2 || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Save Renovate Cache
-        if: ${{ success() && !(github.event.inputs.cache == 'disabled') }}
+        if: ${{ !(github.event.inputs.cache == 'disabled') && success() }}
         uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: /tmp/renovate/cache

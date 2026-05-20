@@ -11686,7 +11686,7 @@ __metadata:
     eslint: "npm:^10.4.0"
     eslint-import-resolver-typescript: "npm:^4.4.4"
     eslint-plugin-import-x: "npm:^4.16.2"
-    eslint-plugin-package-json: "npm:^0.91.2"
+    eslint-plugin-package-json: "npm:^1.0.0"
     eslint-plugin-react-hooks: "npm:^7.1.1"
     eslint-plugin-unused-imports: "npm:^4.4.1"
     github-actions-workflow-builder: "npm:^4.1.0"
@@ -14415,24 +14415,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-package-json@npm:^0.91.2":
-  version: 0.91.2
-  resolution: "eslint-plugin-package-json@npm:0.91.2"
+"eslint-plugin-package-json@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "eslint-plugin-package-json@npm:1.0.0"
   dependencies:
     "@altano/repository-tools": "npm:^2.0.1"
     change-case: "npm:^5.4.4"
     detect-indent: "npm:^7.0.2"
     detect-newline: "npm:^4.0.1"
     eslint-fix-utils: "npm:~0.4.1"
-    package-json-validator: "npm:^1.4.1"
+    jsonc-eslint-parser: "npm:^3.1.0"
+    package-json-validator: "npm:^1.5.0"
     semver: "npm:^7.7.3"
     sort-object-keys: "npm:^2.0.0"
     sort-package-json: "npm:^3.4.0"
-    validate-npm-package-name: "npm:^7.0.0"
   peerDependencies:
-    eslint: ">=8.0.0"
-    jsonc-eslint-parser: ">=2.0.0"
-  checksum: 10/986e7eb9d4b3e969f3a803d933759da36c196078d21ec3bf9bc714dba181756c3b6d7e2c99e85d1fe20c9276ee9394ade37bef57ad3039e6fa03280c137af741
+    eslint: ">=9.0.0"
+  checksum: 10/1fa1cde59ccefb7be780299379f79c805a14184faeff9c64953789786bfdc8b19aabf781d48632b79fe7bcc4ac18fa563d7d6a82eb0a90a3c83d59b468b535e9
   languageName: node
   linkType: hard
 
@@ -19888,7 +19887,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"package-json-validator@npm:^1.4.1":
+"package-json-validator@npm:^1.5.0":
   version: 1.5.1
   resolution: "package-json-validator@npm:1.5.1"
   dependencies:

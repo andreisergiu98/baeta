@@ -1,6 +1,11 @@
 import changesetConfig from '../.changeset/config.json' with { type: 'json' };
 
 /**
+ * Supported Node.js versions for Baeta packages.
+ */
+export const SUPPORTED_NODE_VERSIONS = '^22.20.0 || ^24.0.0 || >=26.0.0';
+
+/**
  * We use constraints until peer dependencies are supported by yarn catalog.
  */
 export const GRAPHQL_PEER_VERSION = '^16.6.0';

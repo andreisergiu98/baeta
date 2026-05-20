@@ -4,7 +4,7 @@
 /** @type {import('@yarnpkg/types')} */
 const { defineConfig } = require('@yarnpkg/types');
 const path = require('node:path');
-const { GRAPHQL_PEER_VERSION } = require('@baeta/workspace-config');
+const { GRAPHQL_PEER_VERSION, SUPPORTED_NODE_VERSIONS } = require('@baeta/workspace-config');
 
 /**
  * This rule will enforce that a workspace MUST depend on the same version of
@@ -122,7 +122,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('files', ['dist']);
 			workspace.set('sideEffects', false);
 			workspace.set('publishConfig.access', 'public');
-			workspace.set('engines.node', '>=22.20.0');
+			workspace.set('engines.node', SUPPORTED_NODE_VERSIONS);
 
 			if (workspace.manifest.scripts?.prebuild == null) {
 				workspace.set('scripts.build', 'builder build');

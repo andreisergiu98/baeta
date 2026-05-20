@@ -72,6 +72,7 @@ async function checkWorkspace(workspace: Workspace, args: { applyFix: boolean })
 			rootDir: '.',
 			jsx: withReact ? 'react-jsx' : undefined,
 			types: expectedTypes.length > 0 ? expectedTypes : undefined,
+			noUnusedLocals: pkg.name.startsWith('@baeta/e2e') ? false : undefined,
 		},
 		include: ['**/*.ts', withReact ? '**/*.tsx' : null].filter((el) => el != null),
 		exclude: pkg.private ? undefined : ['dist'],

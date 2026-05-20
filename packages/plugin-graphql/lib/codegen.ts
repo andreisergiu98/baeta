@@ -120,9 +120,7 @@ export async function generate(
 			}),
 			options: {
 				disableOverwrite: true,
-				disableBiomeV1Header: true,
-				disableBiomeV2Header: true,
-				disableEslintHeader: true,
+				disableLintHeaders: true,
 				disableGenerationNoticeHeader: true,
 			},
 		},
@@ -160,9 +158,7 @@ export async function generate(
 				content: printModuleIndexStarter(config, module),
 				options: {
 					disableOverwrite: true,
-					disableBiomeV1Header: true,
-					disableBiomeV2Header: true,
-					disableEslintHeader: true,
+					disableLintHeaders: true,
 					disableGenerationNoticeHeader: true,
 				},
 			});

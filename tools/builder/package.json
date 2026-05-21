@@ -61,7 +61,7 @@
     "log-symbols": "^7.0.1",
     "marked": "^18.0.3",
     "ora": "^9.4.0",
-    "oxc-transform": "^0.131.0",
+    "oxc-transform": "^0.132.0",
     "pathe": "^2.0.3",
     "tsdown": "^0.22.0",
     "yaml": "^2.9.0",

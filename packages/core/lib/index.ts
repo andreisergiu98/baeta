@@ -1,5 +1,9 @@
 export { createApplication, type ExecutableSchemaOptions, type Options } from './application.ts';
-export { type ContextStoreOptions, createContextStore } from './ctx-store.ts';
+export {
+	type ContextStoreOptions,
+	createContextStore,
+	createContextStoreWithLoader,
+} from './ctx-store.ts';
 export {
 	createInputDirective,
 	type InputDirectiveOptions,

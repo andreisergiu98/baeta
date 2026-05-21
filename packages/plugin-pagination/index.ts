@@ -238,8 +238,6 @@ export function paginationPlugin<T>(options: PaginationOptions<keyof T>) {
 			);
 			await definitionFile.write();
 
-			ctx.fileManager.add(definitionFile);
-
 			ctx.fileManager.createAndAdd(
 				createExportFilename(moduleDir),
 				printExport(

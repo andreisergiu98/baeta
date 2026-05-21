@@ -4,19 +4,19 @@ sidebar_position: 110
 
 # Input Directives
 
-While GraphQL doesn't natively support modifying query arguments and inputs through directives, Baeta provides a utility called Input Directives that enables this functionality.
+GraphQL doesn't include a built-in way to mutate input values via directives — the spec only covers schema-side transforms. `createInputDirective` from `@baeta/core` fills the gap with a small API for reading and writing input values before they reach the resolver.
 
-## Target Types
+## Target types
 
-Input directives can target different types of inputs:
+Each input directive declares what shape of input it operates on:
 
-- `scalar`: For primitive values like numbers, strings, etc.
-- `list`: For array values
-- `object`: For complex object inputs
+- `scalar` — primitive values (numbers, strings, booleans).
+- `list` — array values.
+- `object` — complex object inputs.
 
-## Defining Input Directives
+## Defining the directive
 
-First, define your input directive in the schema:
+Declare the directive in the schema:
 
 `src/modules/directives/input-directives.gql`
 
@@ -28,9 +28,14 @@ type Query {
 }
 ```
 
-## Implementing Input Directives
+## Implementing the directive
 
-Use the `createInputDirective` utility from `@baeta/core` to create the directive, then register it with `$directive` on the module:
+`createInputDirective<DirectiveArgs, Context>` takes two type parameters:
+
+- `DirectiveArgs` — the shape of the directive's arguments in the schema. `directive @increment(by: Int!) …` ⇒ `{ by: number }`.
+- `Context` — your application's GraphQL context type. Used to type `ctx` inside `resolve`.
+
+Register the directive on the module with `$directive` (same place schema transformers go):
 
 `src/modules/custom-input-directive/index.ts`
 
@@ -65,17 +70,15 @@ export default CustomInputDirectiveModule
 });
 ```
 
-## How It Works
+## How it works
 
-The input directive processes the input value before it reaches the resolver:
+The directive runs before the resolver:
 
-1. `getValue()` retrieves the original input value.
-2. The directive logic modifies the value.
-3. `setValue()` updates the input value.
+1. `getValue()` reads the incoming input value.
+2. Your logic computes the new value.
+3. `setValue()` replaces it. The resolver sees the new value as if it had been sent that way.
 
 ## Usage
-
-When querying, the directive will modify the input before it reaches the resolver:
 
 ```graphql
 query {
@@ -85,6 +88,6 @@ query {
 }
 ```
 
-This feature is particularly useful for input validation and data transformation.
+Use input directives for validation, normalization (trim, lowercase), unit conversion, and any other pre-resolver transform.
 
-For more examples and implementations, visit the [Baeta directives examples](https://github.com/andreisergiu98/baeta/tree/main/examples/directives).
+See the [directives example](https://github.com/andreisergiu98/baeta/tree/main/examples/directives) for runnable code.

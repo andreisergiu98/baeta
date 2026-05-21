@@ -21,4 +21,5 @@
 
 - [createApplication](functions/createApplication.md)
 - [createContextStore](functions/createContextStore.md)
+- [createContextStoreWithLoader](functions/createContextStoreWithLoader.md)
 - [createInputDirective](functions/createInputDirective.md)

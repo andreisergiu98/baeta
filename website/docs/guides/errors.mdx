@@ -2,15 +2,15 @@
 sidebar_position: 60
 ---
 
-# Error Handling
+# Error handling
 
-Baeta provides a set of predefined GraphQL errors to handle common error scenarios in your application through the `@baeta/errors` package.
+`@baeta/errors` ships ready-made `GraphQLError` subclasses for the cases you hit on almost every API: unauthenticated, forbidden, bad input, internal failure. Each one tags `extensions.code` so clients can branch on the failure mode without parsing strings.
 
-## Available Errors
+## Available errors
 
 ### UnauthenticatedError
 
-Used when a user needs to be authenticated to perform an action.
+Throw when authentication is required but missing. Sets `extensions.code = "UNAUTHENTICATED"` and HTTP status `401`.
 
 ```typescript
 import { UnauthenticatedError } from "@baeta/errors";
@@ -30,7 +30,7 @@ const protectedDataQuery = Query.protectedData
 
 ### ForbiddenError
 
-Used when a user doesn't have sufficient permissions.
+Throw when the request is authenticated but lacks permission. `extensions.code = "FORBIDDEN"`.
 
 ```typescript
 import { ForbiddenError } from "@baeta/errors";
@@ -50,7 +50,7 @@ const adminDataQuery = Query.adminData
 
 ### BadUserInput
 
-Used when the provided input is invalid.
+Throw for invalid input like validation failures or malformed identifiers. `extensions.code = "BAD_USER_INPUT"`.
 
 ```typescript
 import { BadUserInput } from "@baeta/errors";
@@ -65,7 +65,11 @@ const createUserMutation = Mutation.createUser.resolve(({ args }) => {
 
 ### InternalServerError
 
-Used for internal server errors. In development mode, it includes the original error details.
+Wrap unexpected failures. In development the original message and stack trace surface; in production only the generic message reaches the client.
+
+:::warning
+**Never run with development mode enabled in production.** When dev mode is on, `InternalServerError` returns the original error's **message and full stack trace** in the GraphQL response, including DB driver errors, file paths, line numbers, and any sensitive data the underlying exception happened to carry. See [Development mode](#development-mode) for how the mode is determined.
+:::
 
 ```typescript
 import { InternalServerError } from "@baeta/errors";
@@ -81,7 +85,7 @@ const userQuery = Query.user.resolve(async ({ args }) => {
 
 ### AggregateGraphQLError
 
-Used when multiple errors need to be reported together, this is mostly used internally by Baeta.
+Reports several errors at once. Primarily used internally (e.g. when `rule.or` in `@baeta/auth` collapses multiple scope failures into a single response).
 
 ```typescript
 import { AggregateGraphQLError, BadUserInput } from "@baeta/errors";
@@ -119,26 +123,24 @@ enum BaetaErrorCode {
 }
 ```
 
-## Development Mode
+## Development mode
 
-Development mode is determined by checking the following environment variables in order:
+Baeta checks `BAETA_ENV`, `NODE_ENV`, and `ENVIRONMENT` in that order of precedence to decide whether dev mode is on:
 
-- `BAETA_ENV`
-- `NODE_ENV`
-- `ENVIRONMENT`
+- If any of the three is `"production"`, dev mode is **off** (production wins, even if another var says `"development"`).
+- Otherwise, if any of the three is `"development"`, dev mode is **on**.
+- If none of them is set to either value, dev mode is **off**.
 
-If any of these is set to `'development'`, detailed error information will be included:
+When dev mode is on, error responses include extra detail:
 
-- `InternalServerError` includes the original error message and stack trace
-- `AggregateGraphQLError` includes stack traces for each error
+- `InternalServerError` surfaces the original message and stack trace.
+- `AggregateGraphQLError` includes per-error stack traces.
 
-For the other errors, the stack trace is usually stripped by your GraphQL server of choice.
+For the other errors, your GraphQL server typically strips the trace before responding. In production these details are omitted.
 
-In production (when these variables are set to `'production'` or are unset), these details are omitted for security.
+## Custom error options
 
-## Custom Error Options
-
-All errors accept GraphQL error options:
+All errors accept the standard `GraphQLErrorOptions`:
 
 ```typescript
 throw new UnauthenticatedError("Custom message", {
@@ -148,8 +150,6 @@ throw new UnauthenticatedError("Custom message", {
 });
 ```
 
-## HTTP Status Codes
+## HTTP status codes
 
-Some errors include specific HTTP status codes in their extensions:
-
-- `UnauthenticatedError`: 401
+`UnauthenticatedError` sets `extensions.http.status = 401`. The other errors leave the status to your GraphQL server's default.

@@ -5,7 +5,7 @@ title: Prisma
 
 # Prisma Plugin
 
-The Prisma plugin automates Prisma client generation when your schema changes, streamlining your development workflow and CI/CD pipelines.
+Regenerates the Prisma client whenever `schema.prisma` changes, so you never have to remember to run `prisma generate` by hand.
 
 ## Installation
 
@@ -15,9 +15,9 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 ## Configuration
 
-Enable prisma plugin in your `baeta.ts`:
+In `baeta.ts`:
 
-```typescript
+```typescript title="baeta.ts"
 import { defineConfig } from "@baeta/cli";
 import { prismaPlugin } from "@baeta/plugin-prisma";
 
@@ -35,14 +35,14 @@ export default defineConfig({
 
 For the full configuration interface, see the [`PrismaPluginOptions`](/docs/api/plugin-prisma/interfaces/PrismaPluginOptions) API reference.
 
-## How It Works
+:::tip
+To regenerate the client **and** push schema changes to the database in one step, set `generateCommand: "prisma db push"`.
+:::
 
-The plugin will automatically:
+## How it works
 
-- Watch for changes in your Prisma schema
-- Generate the client when changes are detected
-- Place the generated files in the specified path
+On every run, the plugin:
 
-## Push schema to the database
-
-Replace `generateCommand` with `prisma db push`, this will generate the client and push the schema to the database.
+- Watches `prismaSchema` for changes.
+- Runs `generateCommand` when it sees one.
+- Writes the result to the configured path.

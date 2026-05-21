@@ -4,34 +4,13 @@ sidebar_position: 1
 
 # Introduction
 
-Building GraphQL APIs doesn't have to be complex. **Baeta** helps developers focus on what matters most — creating clear, maintainable APIs with less boilerplate.
+**Baeta** is a schema-first, type-safe GraphQL framework for building modular APIs. The runtime is small and environment-agnostic; the type generation does the heavy lifting so resolvers stay focused on data, not plumbing.
 
-## What is Baeta?
+## Why Baeta
 
-**Baeta** is a modular, type-safe GraphQL framework built around a schema-first approach.
-Instead of mixing schema definitions with code, you define your types using GraphQL SDL, keeping your API design clear and easy to reason about.
-
-Large schemas can quickly become hard to manage, so Baeta encourages you to split your schema into modules. Each module defines its own types and resolvers, keeping your API organized as it grows.
-
-It automatically generates types from your schemas, giving you fully type-safe resolvers with no extra code.
-
-## Why use Baeta?
-
-**Readable and maintainable**:
-A schema-first workflow makes your API easy to understand and update over time.
-
-**Modular and scalable**:
-Split large schemas into smaller modules that are easy to extend and maintain.
-
-**Type-safe by default**:
-Automatic type generation ensures your resolvers always match your schema.
-
-**Flexible**:
-Add only what you need — extend functionality with optional build-time plugins, runtime app plugins, and libraries like:
-
-- **@baeta/auth**: Granular scope-based authorization
-- **@baeta/complexity**: Query complexity analysis to protect against expensive queries
-- **@baeta/cache**: Type-safe caching with declarative queries and automatic reconciliation
+- **Schema-first.** Describe your API in GraphQL SDL, then implement resolvers against generated types.
+- **Modular.** Split a large schema across modules and let Baeta stitch them together. Each module owns its types, resolvers, and tests.
+- **Opt-in features.** Add what you need — [authorization](./advanced/authorization), [complexity limits](./advanced/complexity), [caching](./advanced/caching), [federation](./plugins/federation), [pagination](./plugins/pagination) — each as a separate package.
 
 ## How it Works
 
@@ -97,14 +76,19 @@ const userQuery = Query.user
 ```typescript
 import { createCache, defineQuery } from "@baeta/cache";
 import { redisClient } from "./lib/redis.ts";
+import { UserModule } from "./typedef.ts";
 
-const { Query, Mutation, User } = UserModule;
+const { Query, Mutation } = UserModule;
 
-export const userCache = createCache(redisClient, { name: "UserCache" })
+export const userCache = createCache(redisClient, {
+  name: "UserCache",
+  parse: JSON.parse,
+  serialize: JSON.stringify,
+})
   .withQueries({
     findUser: defineQuery({
-      resolve: async (args: { id?: string }) => {
-        return dataSource.user.find(args);
+      resolve: async (args: { id: string }) => {
+        return dataSource.user.findUnique({ where: args });
       },
     }),
   })
@@ -117,7 +101,7 @@ const userQuery = Query.user.map(({ args }) =>
 const updateUserMutation = Mutation.updateUser
   .$use(async (next) => {
     const user = await next();
-    await userCache.update(user);
+    if (user) await userCache.update(user);
     return user;
   })
   .resolve(async ({ args }) => {
@@ -127,18 +111,15 @@ const updateUserMutation = Mutation.updateUser
 
 ## Compatibility
 
-Baeta is just a schema builder, which makes it compatible with all GraphQL servers. It works seamlessly with popular libraries such as **Graphql Yoga** and **Apollo Server**, as well as other popular tools like **Prisma**, **Drizzle** and **Kysely**.
+Baeta produces a standard `GraphQLSchema`, so it drops into any GraphQL server — Yoga, Apollo, Mercurius — and pairs with the data layer of your choice (Prisma, Drizzle, Kysely, raw drivers).
 
-Baeta's development tools are built for Node.js, but the runtime code is environment-agnostic. This means your Baeta applications can run anywhere JavaScript runs, including:
+The build tooling needs Node.js, but the runtime is environment-agnostic. Anywhere a `GraphQLSchema` runs, Baeta runs:
 
-- Deno
+- Node.js, Bun, Deno
 - Cloudflare Workers
-- AWS Lambda
-- Vercel Edge Functions
-- Bun
-- Node.js
+- AWS Lambda, Vercel Edge Functions
 - Any other JavaScript runtime
 
-## Ready to get started?
+## Next
 
-Head over to the the next page to learn more and to get started!
+[Install Baeta and build your first module.](./getting-started/installation)

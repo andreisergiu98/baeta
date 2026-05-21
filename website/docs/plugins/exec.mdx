@@ -5,7 +5,7 @@ title: Exec
 
 # Exec Plugin
 
-The Exec plugin provides a flexible way to execute commands or functions during the build process. It's particularly useful for running custom scripts, build steps, or any arbitrary code as part of your Baeta workflow.
+The exec plugin runs a shell command or an arbitrary function during code generation. Use it for build steps that have to happen alongside Baeta's own generation — formatting hooks, asset bundling, anything you'd otherwise wire as a separate npm script.
 
 ## Installation
 
@@ -14,8 +14,6 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 <PackageManagerAdd package="@baeta/plugin-exec" dev={true} />
 
 ## Usage
-
-Add the exec plugin in your `baeta.ts`:
 
 ```typescript
 import { defineConfig } from "@baeta/cli";

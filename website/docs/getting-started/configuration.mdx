@@ -5,24 +5,22 @@ description: "Configure your Baeta project with TypeScript"
 
 # Configuration
 
-Configure your Baeta project in a few simple steps.
+Baeta is configured through a single file at the project root.
 
-## Configuration File
+## Configuration file
 
-Baeta will look for a configuration file named `baeta` or `.baeta` in the current working directory, with any of the following extensions:
+Baeta looks for a file named `baeta` or `.baeta` with any of these extensions, in the working directory:
 
 - `.ts`, `.mts`
 - `.js`, `.mjs`
 
 :::note
-The configuration file must use **ESM**. If you're using `.ts` or `.js`, ensure `"type": "module"` is set in your `package.json`, otherwise use the `.mts` or `.mjs` extension.
+The config file must be **ESM**. For `.ts`/`.js`, set `"type": "module"` in `package.json`; otherwise use the `.mts` or `.mjs` extension.
 :::
 
-## Basic Configuration
+## Minimum config
 
-### 1. Define Schema Location
-
-First, specify where your GraphQL schemas are located:
+### 1. Point at your schemas
 
 ```typescript
 import { defineConfig } from "@baeta/cli";
@@ -34,21 +32,23 @@ export default defineConfig({
 });
 ```
 
-### 2. Add package.json Scripts
+### 2. Wire up `package.json` scripts
 
 ```json
 {
   "scripts": {
     "build": "baeta generate",
-    "start": "baeta generate --watch --run='node --watch --inspect src/app.ts'"
+    "start": "baeta generate --watch --run='node --watch --inspect src/app.ts'",
+    "types": "tsc --noEmit"
   }
 }
 ```
 
-These scripts provide:
+What these do:
 
-- **build**: Updates GraphQL types and resolvers
-- **start**: Runs development server with automatic restart on changes
+- **build** — generates GraphQL types and module typedefs from your schema files.
+- **start** — runs the generator in watch mode and launches the app alongside it via `--run`. The `--run` process is long-lived: Baeta starts it once and only respawns it if it exits. Live reload comes from `node --watch` inside `--run`, which restarts the app when source files (including the typedefs Baeta regenerates) change.
+- **types** — typechecks without emitting. Use it in CI.
 
 :::tip
 If you're using **Bun** or **Deno** you can replace `start` with either:
@@ -63,11 +63,9 @@ If you're using **Bun** or **Deno** you can replace `start` with either:
 :::
 
 :::tip
-Run `baeta generate --help` for a list of all available commands.
+Run `baeta generate --help` for the full flag list. `--watch` re-runs the generator on schema changes. `--run='…'` is launched once as a long-running process; Baeta won't kill it on each regenerate, so the inner command (typically `node --watch` / `bun --watch` / `deno --watch`) handles its own reloads.
 :::
 
-## Next Steps
+## Next
 
-Once configured, you're ready to [create your first module](./first-module).
-
-For all available options, see the [Configuration Reference](/docs/guides/configuration) guide.
+[Create your first module.](./first-module) For the full set of config options, see the [Configuration Reference](/docs/guides/configuration).

@@ -1,15 +1,15 @@
 ---
 sidebar_position: 5
-title: Configuration
+title: Configuration Reference
 ---
 
 # Configuration Reference
 
-All configuration is done through `baeta.ts` using [`defineConfig`](/docs/api/cli/index/functions/defineConfig).
+Every configurable knob is set via [`defineConfig`](/docs/api/cli/index/functions/defineConfig) in `baeta.ts`. This page is the reference for the minimum setup, see [Getting started → Configuration](../getting-started/configuration).
 
-## GraphQL Options
+## GraphQL options
 
-Only `schemas` is required:
+Only `schemas` is required. Everything else has a sensible default:
 
 ```typescript
 import { defineConfig } from "@baeta/cli";
@@ -34,18 +34,18 @@ export default defineConfig({
 
     // Options for generated files
     fileOptions: {
-      disableEslintHeader: true,
-      disableBiomeV1Header: true,
+      // Add lint-disable comments at the top of generated files.
+      enableLintHeaders: { eslint: true, biomeV1: true },
     },
   },
 });
 ```
 
-For all available options, see the [`GeneratorOptions`](/docs/api/generator-sdk/interfaces/GeneratorOptions) and [`FileOptions`](/docs/api/generator-sdk/interfaces/FileOptions) API references.
+For the full type signatures, see [`GeneratorOptions`](/docs/api/generator-sdk/interfaces/GeneratorOptions) and [`FileOptions`](/docs/api/generator-sdk/interfaces/FileOptions).
 
 ## Plugins
 
-Add plugins to extend the build process:
+Plugins extend the build process — code generation, watchers, command execution, etc. Order matters: the [Gitignore plugin](/docs/plugins/gitignore) must run first, others are mostly order-independent.
 
 ```typescript
 import { defineConfig } from "@baeta/cli";
@@ -63,4 +63,4 @@ export default defineConfig({
 });
 ```
 
-See the [Plugins](/docs/plugins) section for available plugins and their options.
+For the full list, see [Plugins](/docs/plugins).

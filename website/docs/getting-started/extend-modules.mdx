@@ -5,7 +5,7 @@ description: "Learn how to extend modules in Baeta"
 
 # Extend modules
 
-One of the powerful features of Baeta is the ability to extend existing modules. In this guide, we'll extend our user module by adding photo capabilities.
+Modules don't have to own their types end-to-end. A second module can extend a type defined elsewhere — useful when different concerns live in different folders. Here we add a `photos` field to the existing `User` type from a separate `user-photos` module.
 
 ### 1. Define the schema
 
@@ -23,24 +23,20 @@ extend type User {
 ```
 
 :::tip
-Use the **extend** keyword to add new fields to existing types from other modules.
+The GraphQL `extend` keyword is what makes this cross-module: any module can add fields to a type declared elsewhere, and Baeta stitches them together at build time.
 :::
 
 ### 2. Generate the types
-
-Generate TypeScript definitions for your new schema:
 
 ```bash
 yarn build
 ```
 
-:::tip
-If you are using the watch mode, types will be automatically generated on each change.
-:::
+The watcher (started via `yarn start`) regenerates types on save, so you only run `yarn build` manually.
 
-### 3. Create the resolvers
+### 3. Implement the resolvers
 
-Create `src/modules/user-photos/resolvers.ts` to implement the photos field:
+`src/modules/user-photos/resolvers.ts`:
 
 ```typescript
 import { UserPhotosModule } from "./typedef.ts";
@@ -66,7 +62,7 @@ export const userResolver = User.$fields({
 
 ### 4. Export the module
 
-Create `src/modules/user-photos/index.ts` to export your extension module:
+`src/modules/user-photos/index.ts`:
 
 ```typescript
 import { userPhotosResolver, userResolver } from "./resolvers.ts";
@@ -78,9 +74,7 @@ export default UserPhotosModule.$schema({
 });
 ```
 
-## Project Structure
-
-Your extended modules should now look like this:
+## Project structure
 
 ```
 src/modules/
@@ -94,9 +88,9 @@ src/modules/
 │   ├── resolvers.ts
 │   ├── typedef.ts
 │   └── index.ts
-└── index.ts # All modules are automatically collected and exported by Baeta
+└── index.ts          # generated; collects every module in this folder
 ```
 
-## Next Steps
+## Next
 
-Let's [wrap everything up](./wrapping-up) and see how to use our modules.
+[Wire everything into a running server.](./wrapping-up)

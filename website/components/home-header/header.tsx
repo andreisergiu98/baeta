@@ -21,8 +21,11 @@ export function HomeHeader() {
 					>
 						Getting Started
 					</Link>
-					<Link className="button button--outline button--primary button--lg" to="/docs/intro">
-						Introduction
+					<Link
+						className="button button--outline button--primary button--lg"
+						to="https://github.com/andreisergiu98/baeta"
+					>
+						View on GitHub
 					</Link>
 				</div>
 			</div>

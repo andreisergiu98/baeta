@@ -5,11 +5,11 @@ description: "Create and run your Baeta GraphQL application"
 
 # Wrapping up
 
-Now that we have our modules ready, let's create and run our GraphQL application.
+With the modules in place, all that's left is an entry point that hands the generated schema to a GraphQL server.
 
 ## Create the application
 
-Create an entry point for your application in `src/app.ts`:
+`src/app.ts`:
 
 ```typescript
 import { createServer } from "node:http";
@@ -40,27 +40,25 @@ server.listen(4000, () => {
 ```
 
 :::note
-We're using GraphQL Yoga for this example due to its simple setup, but Baeta is compatible with all GraphQL servers like Apollo Server, Express GraphQL, and others.
+This example uses GraphQL Yoga because the setup is short. Baeta works with any GraphQL server — see the [Application guide](../guides/application#server-integration) for Apollo Server and other integrations.
 :::
 
-### Start the application
-
-Run your application with:
+### Start the server
 
 ```bash
 yarn start
 ```
 
-## What's Next?
+## What's next
 
-Now that you have a running GraphQL API, you can:
+You now have a running GraphQL API. From here:
 
 - [Add authorization](../advanced/authorization)
 - [Implement caching](../advanced/caching)
 - [Safeguard from malicious operations](../advanced/complexity)
-- [Add validation](../plugins/builtin-directives)
+- [Use built-in validation directives](../plugins/builtin-directives)
 - [Add custom directives](../guides/directives)
 
 :::tip
-Visit our [examples](https://github.com/andreisergiu98/baeta/tree/main/examples) for more complex implementations and real-world usage patterns.
+The [examples folder](https://github.com/andreisergiu98/baeta/tree/main/examples) has runnable apps for each of the above plus federation, pagination, Prisma, and Cloudflare Workers.
 :::

@@ -14,6 +14,7 @@
 
 ## Interfaces
 
+- [FileLintOptions](interfaces/FileLintOptions.md)
 - [FileOptions](interfaces/FileOptions.md)
 - [GeneratorOptions](interfaces/GeneratorOptions.md)
 - [GeneratorPluginV1](interfaces/GeneratorPluginV1.md)

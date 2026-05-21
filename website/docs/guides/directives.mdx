@@ -1,12 +1,13 @@
 ---
 sidebar_position: 100
+title: Custom Directives
 ---
 
-# Directives
+# Custom Directives
 
-Directives in Baeta allow you to modify the execution behavior of your GraphQL schema. They can be applied to various parts of your schema and provide a way to add metadata or transform data.
+A custom directive is a schema-transformer function paired with a `directive @name` declaration. Register the transformer with `$directive` on a module and Baeta applies it to the compiled schema. For input/argument transforms specifically, see [Input Directives](./input-directives.mdx); the API there is friendlier than hand-rolling a schema transformer.
 
-## Defining a Directive
+## Defining a directive
 
 `src/modules/custom-native-directive/custom-native-directive.gql`
 
@@ -22,9 +23,9 @@ type Query {
 }
 ```
 
-## Implementing Directive Logic
+## Implementing the directive
 
-Define the directive as a schema transformer function and register it with `$directive` on the module. Like other builder methods, `$directive` is chained before `$schema`:
+Write the directive as a schema-transformer (here using `@graphql-tools/utils`) and register it with `$directive` before `$schema`:
 
 `src/modules/custom-native-directive/index.ts`
 
@@ -76,11 +77,11 @@ export default CustomNativeDirectiveModule
 });
 ```
 
-This example creates an `@upper` directive that converts string fields to uppercase. The directive transformer is registered via `$directive` and chained into `$schema`, following the same builder pattern as the rest of Baeta.
+`@upper` uppercases string fields. The transformer is chained before `$schema` so the directive is applied as the module's schema is compiled.
 
 ## Usage
 
-When querying, the directive will automatically transform the result:
+The directive transforms the result transparently:
 
 ```graphql
 query {
@@ -90,4 +91,4 @@ query {
 }
 ```
 
-For more information on directives, see the [GraphQL documentation](https://graphql.org/learn/execution/#directives) and the [Baeta directives example](https://github.com/andreisergiu98/baeta/tree/main/examples/directives).
+See the [GraphQL spec on directives](https://graphql.org/learn/execution/#directives) for the underlying semantics, and the [directives example](https://github.com/andreisergiu98/baeta/tree/main/examples/directives) for runnable code.

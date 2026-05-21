@@ -4,15 +4,15 @@ sidebar_position: 80
 
 # Interfaces & Unions
 
-Baeta supports both GraphQL Interfaces and Unions. Interfaces allow you to define common fields that multiple types can share, while Unions let you combine different types into a single field.
+Interfaces and unions are GraphQL's **abstract types**. An **interface** defines a set of fields that a concrete Object type (or another interface) must include to implement it. A **union** has no fields of its own; it only lists which Object types a field may return.
 
-For more detailed information about Interfaces and Unions, check out the [official GraphQL documentation](https://graphql.org/learn/schema/#interfaces).
+Baeta supports both directly in your `.gql` files and infers `__typename` requirements automatically.
+
+See the [GraphQL spec](https://graphql.org/learn/schema/#interfaces) for the underlying semantics.
 
 ## Interfaces
 
-Interfaces define a common set of fields that multiple types must implement.
-
-### Defining an Interface
+### Defining an interface
 
 `src/modules/comic/comic.gql`
 
@@ -41,9 +41,7 @@ type Book implements Readable {
 
 ## Unions
 
-Unions allow you to combine multiple types into a single field, without requiring common fields.
-
-### Defining a Union
+### Defining a union
 
 `src/modules/media/media.gql`
 
@@ -68,23 +66,21 @@ type Query {
 }
 ```
 
-### Extending Unions
+### Extending unions
 
-You can extend existing unions to add more types:
+Other modules can add new members to a union via `extend`:
 
 ```graphql
 extend union Media = Comic
 ```
 
-## Type Resolution
+## Type resolution
 
-Baeta requires you to include a `__typename` field when returning union or interface types. The generated TypeScript types enforce this — you'll get a type error if `__typename` is missing.
-
-This eliminates the need for a custom `resolveType` function, as GraphQL can determine the concrete type directly from `__typename`.
+Resolvers that return a union or interface must include `__typename` on every returned value. The generated types enforce this: omit `__typename` and the resolver fails to typecheck, so you never need a custom `resolveType`.
 
 ## Resolvers
 
-Here's an example of resolving a union field. Note how each item includes `__typename`:
+Each entry below carries its own `__typename`:
 
 ```typescript
 const mediaQuery = Query.media.resolve(() => {

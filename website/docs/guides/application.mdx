@@ -4,14 +4,13 @@ sidebar_position: 50
 
 # Application
 
-This guide explains how to set up a Baeta application and integrate it with a GraphQL server.
+`createApplication` is where everything comes together: a list of modules in, a runnable `GraphQLSchema` out. From there you hand the schema to the server of your choice.
 
-## Module Registration
+## Module registration
 
-Baeta automatically collects and exports all modules in `src/modules/index.ts`. Simply import them and pass to `createApplication`:
+The generator collects every module under `src/modules/` and re-exports them from `src/modules/index.ts`. Pass that default export to `createApplication`:
 
-```typescript
-// src/app.ts
+```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
 import modules from "./modules/index.ts";
 
@@ -20,15 +19,15 @@ const baeta = createApplication({
 });
 ```
 
-## App Plugins
+## App plugins
 
-App plugins extend Baeta at the application level — authorization, complexity, and other cross-cutting concerns plug in here. They are registered via the `plugins` option, and registration order is significant. See [App Plugins](../advanced/app-plugins) for the full system, the ordering contract, and the auth-vs-complexity tradeoff.
+App plugins extend Baeta at the application level with authorization, complexity, and other cross-cutting concerns. Register them with the `plugins` option. **Order matters**: earlier plugins wrap later ones at runtime. See [App Plugins](../advanced/app-plugins) for the contract and the auth-vs-complexity tradeoff.
 
-## Server Integration
+## Server integration
 
 ### GraphQL Yoga
 
-```typescript
+```typescript title="src/app.ts"
 import { createServer } from "node:http";
 import { createApplication } from "@baeta/core";
 import { createYoga } from "graphql-yoga";
@@ -57,7 +56,7 @@ server.listen(4000, () => {
 
 ### Apollo Server
 
-```typescript
+```typescript title="src/app.ts"
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { createApplication } from "@baeta/core";

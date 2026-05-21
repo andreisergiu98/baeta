@@ -4,14 +4,13 @@ sidebar_position: 40
 
 # Context
 
-Baeta allows you to define a shared context that's available throughout your resolvers and middlewares.
+The context object is shared across every resolver and middleware in a request. Use it for per-request state like auth, loaders, transport-specific helpers, or anything resolvers shouldn't reach for themselves.
 
-## Define Context Type
+## Define the context type
 
-First, define your context type:
+Declare the shape your app needs:
 
-```typescript
-// src/types/context.ts
+```typescript title="src/types/context.ts"
 import type { PubSub } from "graphql-yoga";
 import type { PubSubMap } from "../lib/pubsub.ts";
 
@@ -23,22 +22,21 @@ export type Context = {
 export type ServerContext = {};
 ```
 
-## Configuration
+## Wire it up
 
-The context type is picked up through the `Ctx` type alias in `src/modules/types.ts`. Update this alias to point to your context type:
+Baeta picks up the context type from the `Ctx` alias in `src/modules/types.ts`. Point it at your `Context`:
 
-```typescript
-// src/modules/types.ts
+```typescript title="src/modules/types.ts"
 import type { Context } from "../types/context.ts";
 
 export type Ctx = Context;
 ```
 
-For more details on the types file, see [Custom Types](./custom-types.mdx).
+For everything else in that file, see [Custom Types](./custom-types.mdx).
 
-## Usage in Resolvers
+## Using context in resolvers
 
-The context is automatically typed in your resolvers:
+`ctx` is fully typed:
 
 ```typescript
 const { Query } = UserModule;
@@ -51,9 +49,9 @@ const userQuery = Query.user.resolve(({ args, ctx }) => {
 });
 ```
 
-## Usage in Middlewares
+## Using context in middlewares
 
-Middlewares also get the typed context:
+Middlewares get the same typed `ctx`:
 
 ```typescript
 const updateUserMutation = Mutation.updateUser

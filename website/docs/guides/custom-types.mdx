@@ -4,14 +4,13 @@ sidebar_position: 25
 
 # Custom Types
 
-Baeta generates a `src/modules/types.ts` file that lets you customize the TypeScript types used throughout your resolvers. This file acts as the bridge between your application's types and the generated GraphQL types.
+`src/modules/types.ts` is the single place to override the TypeScript types Baeta hands to your resolvers: source types per GraphQL type, scalar mappings, the context shape, and the `info` type.
 
-## The Types File
+## The types file
 
-The generated file looks like this:
+Generated shape:
 
-```typescript
-// src/modules/types.ts
+```typescript title="src/modules/types.ts"
 import type { GraphQLResolveInfo } from "graphql";
 import type { BaseObjectTypes, BaseScalars } from "../__generated__/utility.ts";
 import type { Context } from "../types/context.ts";
@@ -25,17 +24,15 @@ export type Ctx = Context;
 export type Info = GraphQLResolveInfo;
 ```
 
-Each section controls a different aspect of type safety in your resolvers.
+Each interface covers a different slice of type safety.
 
-## Object Types
+## Object types
 
-The `ObjectTypes` interface lets you override the **source type** (also known as the parent or root type) for any GraphQL object type. This is especially useful when your data source returns a different shape than your GraphQL schema.
+`ObjectTypes` overrides the **source type** for any GraphQL object type. By default, the source matches the GraphQL type itself; override it when your data layer returns a different shape.
 
-By default, each object type's source is inferred from the GraphQL schema. When you override it, resolvers for that type will receive your custom type as `source` instead.
+### Example: Prisma models
 
-### Example: Using Prisma Models
-
-When using Prisma, the database model often differs from the GraphQL type. Use `ObjectTypes` to tell Baeta about the real shape of your data:
+A Prisma model usually has fields the GraphQL type doesn't expose (and vice versa). Tell Baeta the source is the Prisma model:
 
 ```typescript
 import type { BaseObjectTypes, BaseScalars } from "../__generated__/utility.ts";
@@ -48,7 +45,7 @@ export interface ObjectTypes extends BaseObjectTypes {
 }
 ```
 
-Now in your resolvers, `source` is typed as the Prisma model:
+In resolvers, `source` is now typed as the Prisma model:
 
 ```typescript
 const { User } = UserModule;
@@ -58,20 +55,16 @@ const userResolver = User.$fields({
   id: User.id.key("id"),
   email: User.email.key("email"),
   // Compute GraphQL fields from the Prisma model
-  name: User.name.resolve(({ source }) => `${source.firstName} ${source.lastName}`),
-  photos: User.photos.resolve(async ({ source }) => {
+  name: User.name.map(({ source }) => `${source.firstName} ${source.lastName}`),
+  photos: User.photos.map(async ({ source }) => {
     return db.photo.findMany({ where: { userId: source.id } });
   }),
 });
 ```
 
-:::tip
-This is particularly useful when your database model has fields that don't exist in the GraphQL schema, or when field names differ between your data source and your API.
-:::
-
 ## Scalars
 
-The `Scalars` interface lets you map custom GraphQL scalars to TypeScript types. See the [Scalars guide](./scalars.mdx) for more details.
+`Scalars` maps custom GraphQL scalars to TypeScript types. See the [Scalars guide](./scalars.mdx) for the full setup.
 
 ```typescript
 export interface Scalars extends BaseScalars {
@@ -82,7 +75,7 @@ export interface Scalars extends BaseScalars {
 
 ## Context
 
-The `Ctx` type alias defines the context type available in all resolvers and middlewares. See the [Context guide](./context.mdx) for more details.
+`Ctx` is the context type seen by every resolver and middleware. See the [Context guide](./context.mdx).
 
 ```typescript
 import type { Context } from "../types/context.ts";
@@ -92,7 +85,7 @@ export type Ctx = Context;
 
 ## Info
 
-The `Info` type alias defines the GraphQL resolve info type. This defaults to `GraphQLResolveInfo` but can be overridden if you use a library that extends it.
+`Info` is the resolver `info` type. It defaults to `GraphQLResolveInfo`; override it if you use a library that extends it.
 
 ```typescript
 import type { GraphQLResolveInfo } from "graphql";

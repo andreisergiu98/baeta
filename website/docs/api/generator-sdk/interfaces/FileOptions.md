@@ -39,78 +39,6 @@ Add custom header at the beginning of the file.
 <tr>
 <td>
 
-<a id="disablebiomev1header"></a> `disableBiomeV1Header?`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-```ts
-false
-```
-
-</td>
-<td>
-
-Disable biome v1 comment at the beginning of the file.
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="disablebiomev2header"></a> `disableBiomeV2Header?`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-```ts
-false
-```
-
-</td>
-<td>
-
-Disable biome v2 comment at the beginning of the file.
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="disableeslintheader"></a> `disableEslintHeader?`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-```ts
-false
-```
-
-</td>
-<td>
-
-Disable eslint-disable comment at the beginning of the file.
-
-</td>
-</tr>
-<tr>
-<td>
-
 <a id="disablegenerationnoticeheader"></a> `disableGenerationNoticeHeader?`
 
 </td>
@@ -153,6 +81,31 @@ false
 <td>
 
 Disallow overwriting the file.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="enablelintheaders"></a> `enableLintHeaders?`
+
+</td>
+<td>
+
+`boolean` \| [`FileLintOptions`](FileLintOptions.md)
+
+</td>
+<td>
+
+```ts
+false
+```
+
+</td>
+<td>
+
+Enable lint disabling headers at the beginning of the file.
+Can be either a boolean to enable all supported lint headers or an object to enable specific ones.
 
 </td>
 </tr>

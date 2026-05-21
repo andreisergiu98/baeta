@@ -4,7 +4,7 @@ sidebar_position: 30
 
 # Pagination
 
-The Pagination plugin adds support for Relay-style pagination, automatically generating the necessary GraphQL types for cursor-based pagination.
+The pagination plugin generates Relay-style connection types (`Connection`, `Edge`, `PageInfo`) for the types you list. You define the input shape; the plugin writes the SDL.
 
 ## Installation
 
@@ -14,7 +14,7 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 ## Configuration
 
-Enable pagination plugin in your `baeta.ts`:
+In `baeta.ts`:
 
 ```typescript
 import { defineConfig } from "@baeta/cli";
@@ -52,7 +52,7 @@ For the full configuration interface, see the [`PaginationOptions`](/docs/api/pl
 
 ## Usage
 
-Define your pagination input type and use the generated connection type:
+Declare your pagination input and reference the generated connection type:
 
 ```graphql
 input UserPhotoPage {
@@ -65,14 +65,13 @@ extend type User {
 }
 ```
 
-The plugin will automatically generate:
+For each registered type, the plugin generates:
 
-- Connection types (e.g., UserPhotoConnection)
-- Edge types (e.g., UserPhotoEdge)
-- PageInfo type with standard and custom fields
-- All necessary TypeScript types for your resolvers
+- `<Type>Connection`
+- `<Type>Edge`
+- The shared `PageInfo` (plus any custom fields you added)
+- The TypeScript types your resolvers need
 
 :::tip
-The implementation of resolvers depends on your data source (ORM, database, etc.).
-For a showcase of how to implement pagination with Prisma, check out the [pagination example](https://github.com/andreisergiu98/baeta/tree/main/examples/relay-pagination).
+How you fetch the actual page depends on your data layer. The [relay-pagination example](https://github.com/andreisergiu98/baeta/tree/main/examples/relay-pagination) shows the Prisma flavor end-to-end.
 :::

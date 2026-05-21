@@ -5,7 +5,7 @@ title: Federation
 
 # Federation Plugin
 
-The Federation plugin adds [Apollo Federation](https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/federation/) support to your Baeta subgraph.
+The federation plugin makes a Baeta module a valid [Apollo Federation](https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/federation/) subgraph: it generates the federation spec directives, the `_Entity` union, the `_entities`/`_service` resolvers, and typed handler signatures.
 
 ## Installation
 
@@ -49,18 +49,15 @@ export default defineConfig({
 
 For the full configuration interface, see the [`FederationPluginOptions`](/docs/api/plugin-federation/interfaces/FederationPluginOptions) API reference.
 
-## How It Works
+## How it works
 
-The plugin generates the federation spec directives based on the chosen `version` and `include` options. These directives are available in your schema files.
+Based on `version` and `include`, the plugin makes the federation directives available in your schema files. It also writes `__generated__/federation.ts` with the SDL, the `_Entity` union (from types with a resolvable `@key`), the `_entities`/`_service` resolvers, and typed handler signatures.
 
-It also generates the federation SDL, the `_Entity` union (from types with a resolvable `@key`), the `_entities` and `_service` resolvers, and typed entity handler signatures in `__generated__/federation.ts`.
+## Entity handlers
 
-## Entity Handlers
+The only manual step is registering entity handlers. `src/modules/baeta-federation/entity-handlers.ts` is generated once and never overwritten:
 
-The only manual step is registering entity handlers in `src/modules/baeta-federation/entity-handlers.ts`. This file is generated once and never overwritten:
-
-```typescript
-// src/modules/baeta-federation/entity-handlers.ts
+```typescript title="src/modules/baeta-federation/entity-handlers.ts"
 import type { EntityHandlerMap } from "../../__generated__/federation.ts";
 import { handleProductEntity } from "../product/product.entity.ts";
 
@@ -71,10 +68,9 @@ const entityHandlersMap: EntityHandlerMap = {
 export default entityHandlersMap;
 ```
 
-Each handler receives the entity representation and returns the resolved entity:
+Each handler receives the federation representation and returns the resolved entity:
 
-```typescript
-// src/modules/product/product.entity.ts
+```typescript title="src/modules/product/product.entity.ts"
 import type { ProductEntityHandler } from "../../__generated__/federation.ts";
 
 export const handleProductEntity: ProductEntityHandler = async (
@@ -93,5 +89,5 @@ export const handleProductEntity: ProductEntityHandler = async (
 ```
 
 :::tip
-Check the [federation-subgraph-products](https://github.com/andreisergiu98/baeta/tree/main/examples/federation-subgraph-products) and [federation-subgraph-users](https://github.com/andreisergiu98/baeta/tree/main/examples/federation-subgraph-users) examples for complete working subgraphs.
+The [federation-subgraph-products](https://github.com/andreisergiu98/baeta/tree/main/examples/federation-subgraph-products) and [federation-subgraph-users](https://github.com/andreisergiu98/baeta/tree/main/examples/federation-subgraph-users) examples are complete working subgraphs you can run locally.
 :::

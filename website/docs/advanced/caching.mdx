@@ -4,17 +4,16 @@ sidebar_position: 30
 
 # Caching
 
-Baeta ships a caching library with support for multiple storage adapters. The cache offers declarative query definitions, automatic cache reconciliation on insert/update/delete, and type-safe cache operations.
+`@baeta/cache` is a typed cache layer for resolvers. You declare each query with `defineQuery`, point the cache at a storage adapter (Redis, Valkey, Upstash, Cloudflare), and the cache handles serialization, key derivation, and invalidation when you mutate the underlying data.
 
-## Key Features
+## At a glance
 
-- Type-safe cache operations
-- Declarative query definitions with `defineQuery`
-- Automatic cache reconciliation on insert/update/delete
-- Index-based query invalidation
-- Custom serialization/deserialization
-- Multiple storage adapters
-- TTL support
+- Type-safe cache operations (`get`, `update`, `insert`, `delete`, per-query helpers).
+- Declarative query definitions via `defineQuery`.
+- Automatic reconciliation across queries on insert/update/delete.
+- Index-based invalidation for relationship queries.
+- Custom serialization (Zod, JSON, anything).
+- Pluggable storage with TTL support.
 
 ## Installation
 
@@ -22,18 +21,15 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 <PackageManagerAdd package="@baeta/cache" />
 
-## Storage Adapters
+## Storage adapters
 
-Baeta supports several storage adapters for different use cases:
+### Redis (recommended)
 
-### Redis (Recommended)
-
-Best for production environments with high query volumes.
+The default choice for most production deployments.
 
 <PackageManagerAdd package="@baeta/cache-ioredis ioredis" />
 
-```typescript
-// src/lib/redis.ts
+```typescript title="src/lib/redis.ts"
 import { RedisCacheClient } from "@baeta/cache-ioredis";
 import Redis from "ioredis";
 
@@ -42,16 +38,31 @@ const redis = new Redis("redis://localhost:6379");
 export const redisClient = new RedisCacheClient(redis);
 ```
 
-### Upstash (Recommended for Serverless)
+### Valkey
 
-Optimized for serverless environments.
+Drop-in alternative for projects on [Valkey](https://valkey.io) — the open-source Redis fork — using the [iovalkey](https://github.com/valkey-io/iovalkey) client.
+
+<PackageManagerAdd package="@baeta/cache-iovalkey iovalkey" />
+
+```typescript title="src/lib/valkey.ts"
+import { ValkeyCacheClient } from "@baeta/cache-iovalkey";
+import Valkey from "iovalkey";
+
+const valkey = new Valkey("valkey://localhost:6379");
+
+export const valkeyClient = new ValkeyCacheClient(valkey);
+```
+
+### Upstash (recommended for serverless)
+
+HTTP-based Redis client — works in Workers, Lambda, and other environments where TCP connections are awkward.
 
 <PackageManagerAdd package="@baeta/cache-upstash @upstash/redis" />
 
-```typescript
+```typescript title="src/lib/upstash.ts"
 import { UpstashCacheClient } from "@baeta/cache-upstash";
 
-const client = new UpstashCacheClient({
+export const upstashClient = new UpstashCacheClient({
   url: "UPSTASH_REDIS_URL",
   token: "UPSTASH_REDIS_TOKEN",
 });
@@ -59,23 +70,30 @@ const client = new UpstashCacheClient({
 
 ### Cloudflare
 
-For Cloudflare Workers environments.
+Durable-Objects-backed cache for Cloudflare Workers.
 
 <PackageManagerAdd package="@baeta/cache-cloudflare" />
 
-## Basic Setup
+## Basic setup
 
-### 1. Create a cache with queries
+### 1. Define a cache with queries
 
-```typescript
-// src/modules/user/user.cache.ts
+```typescript title="src/modules/user/user.cache.ts"
 import { createCache, defineQuery } from "@baeta/cache";
+import { z } from "zod";
 import { redisClient } from "../../lib/redis.ts";
 import { db } from "../../lib/db.ts";
 
+const UserCacheSchema = z.object({
+  id: z.string(),
+  email: z.string(),
+  lastName: z.string(),
+  givenName: z.string().nullable(),
+});
+
 const findUser = defineQuery({
-  resolve: async (args: { id?: string | null; email?: string | null }) => {
-    return db.user.findFirst({
+  resolve: async (args: { id: string | null; email: string | null }) => {
+    return db.user.findUnique({
       where: {
         id: args.id ?? undefined,
         email: args.email ?? undefined,
@@ -85,15 +103,20 @@ const findUser = defineQuery({
 });
 
 const findUsers = defineQuery({
-  resolve: async (_args: {}) => {
+  resolve: async () => {
     return db.user.findMany();
   },
 });
 
 export const userCache = createCache(redisClient, {
   name: "UserCache",
-  // Custom serialization (optional)
-  parse: (value) => JSON.parse(value),
+  // Bump whenever the cached value shape changes — invalidates all entries.
+  revision: 1,
+  // Optional: time-to-live per entry. Defaults to 1 hour.
+  ttlMs: 60 * 60 * 1000,
+  // Custom serialization. The real example uses Zod to validate on the
+  // way out so corrupted entries surface immediately.
+  parse: (value) => UserCacheSchema.parse(JSON.parse(value)),
   serialize: (value) => JSON.stringify(value),
 })
   .withQueries({
@@ -104,14 +127,18 @@ export const userCache = createCache(redisClient, {
 ```
 
 :::tip
-Bump the `revision` option whenever the shape of cached values changes — it invalidates all existing entries for that cache.
+`revision` is a fast invalidation switch — bumping it makes every previously cached entry a miss without touching the store. Use it whenever you change the shape (fields, types) of cached values; relying on `parse` alone to catch shape drift will cause runtime errors on stale entries.
 :::
 
-## Caching Examples
+:::tip
+`ttlMs` defaults to `3_600_000` (1 hour). You can also set a default on the storage client itself — per-cache `ttlMs` overrides the client default.
+:::
 
-### Basic Query Caching
+## Patterns
 
-Use `.map()` to route a field through a cached query. The mapper turns the resolver's parameters into the query arguments:
+### Reading through the cache
+
+`.map()` routes a resolver through a cached query — the mapper turns resolver params into the query arguments:
 
 ```typescript
 import { UserModule } from "./typedef.ts";
@@ -132,9 +159,9 @@ export default Query.$fields({
 });
 ```
 
-### Mutation Handling
+### Reconciling on mutation
 
-Use `update` for existing items and `insert` for new items — the cache will automatically reconcile all related queries:
+Use `update` for existing items and `insert` for new ones. The cache reconciles every related query automatically:
 
 ```typescript
 const createUserMutation = Mutation.createUser.resolve(async ({ args }) => {
@@ -161,9 +188,9 @@ const updateUserMutation = Mutation.updateUser
   });
 ```
 
-### Index-Based Query Invalidation
+### Index-based invalidation
 
-For relationship queries, use `indexArgsBy` to enable targeted invalidation. When items are inserted or deleted, only queries matching the relevant index values are invalidated:
+For relationship queries — "all photos for user X" — declare `indexArgsBy` to make invalidation surgical. Only the queries whose index matches the changed items are dropped:
 
 ```typescript
 import { createCache, defineQuery } from "@baeta/cache";
@@ -213,22 +240,11 @@ const userPhotosResolver = User.photos
   .withDefault([]);
 ```
 
-## Best Practices
+## Best practices
 
-1. Choose the Right Adapter
+- **Pick the adapter that matches your runtime.** Redis or Valkey for long-lived Node processes; Upstash for serverless; Cloudflare for Workers.
+- **Prefer `insert`/`update`/`delete` over manual invalidation.** They give the cache enough information to reconcile related queries; bare invalidation drops more than necessary.
+- **Use `indexArgsBy` for relationship queries.** It scopes invalidation to the affected index keys instead of flushing the whole query.
+- **Bump `revision`** whenever the cached value shape changes — instant invalidation without touching the store.
 
-- Use Redis for production environments
-- Use Upstash for serverless applications
-
-2. Cache Invalidation Strategy
-
-- Use `indexArgsBy` for targeted invalidation of relationship queries
-- Implement `onInsert`/`onDelete` hooks for automatic query invalidation
-- Use `insert` for new items and `update` for existing items
-
-3. Performance Optimization
-
-- Configure Redis to evacuate least used keys
-- Use index-based invalidation over full query clearing when possible
-
-For detailed examples, see the [Baeta caching example](https://github.com/andreisergiu98/baeta/tree/main/examples/cache).
+For a runnable end-to-end setup, see the [caching example](https://github.com/andreisergiu98/baeta/tree/main/examples/cache).

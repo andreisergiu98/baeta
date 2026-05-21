@@ -3,12 +3,16 @@ sidebar_position: 120
 title: Typed PubSub
 ---
 
-# Typed PubSub System
+# Typed PubSub
 
-Baeta provides a type-safe wrapper around `graphql-subscriptions` PubSub system. This utility ensures that your subscription channels and their payloads are properly typed, helping catch potential errors at compile time.
+`TypedPubSub` is a thin wrapper around `graphql-subscriptions` that types channel names and payloads. The publish and subscribe methods accept only channels declared in your event map; typos and payload mismatches fail at compile time.
 
 :::tip
-If you are using GraphQL Yoga this is package is unnecessary as it already provides a type-safe PubSub system.
+GraphQL Yoga already ships a type-safe PubSub. If you're on Yoga, you don't need this package.
+:::
+
+:::note
+Yoga's PubSub uses **tuple payloads** (`'channel': [Payload]`); `TypedPubSub` (over `graphql-subscriptions`) uses the bare type. Don't copy a `PubSubMap` between the two without flipping the shape.
 :::
 
 ## Installation
@@ -17,14 +21,14 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 <PackageManagerAdd package="@baeta/subscriptions-pubsub" />
 
-## Basic Setup
+## Basic setup
 
-1. Define Your Event Map
+### 1. Declare your channels
 
-First, create a type map that defines your subscription channels and their corresponding payload types:
+Map each channel name to its payload type:
 
 ```typescript
-import { createTypedPubSub } from "@baeta/subscriptions-pubsub";
+import { TypedPubSub } from "@baeta/subscriptions-pubsub";
 import { PubSub } from "graphql-subscriptions";
 import type { User } from "../__generated__/types.ts";
 
@@ -37,17 +41,15 @@ export type PubSubMap = {
 };
 ```
 
-2. Create the Typed PubSub Instance
+### 2. Create the instance
 
 ```typescript
-/**
- * For development/simple setups. For production, consider using
- * more robust solutions like graphql-redis-subscriptions
- */
-export const pubsub = createTypedPubSub<PubSub, PubSubMap>(new PubSub());
+// In-memory transport — fine for development and single-instance deployments.
+// For multi-instance setups, see "Using with Redis" below.
+export const pubsub = new TypedPubSub<PubSub, PubSubMap>(new PubSub());
 ```
 
-3. Add to Your Context
+### 3. Add it to your context
 
 ```typescript
 export interface Context {
@@ -65,9 +67,9 @@ export function createContext(): Context {
 
 ## Usage
 
-### Publishing Events
+### Publishing events
 
-The typed PubSub system ensures you can only publish to defined channels with the correct payload type:
+Publish accepts only declared channels and the right payload type:
 
 ```typescript
 const updateUserMutation = Mutation.updateUser.resolve(({ args, ctx }) => {
@@ -85,9 +87,9 @@ const updateUserMutation = Mutation.updateUser.resolve(({ args, ctx }) => {
 });
 ```
 
-### Subscribing to Events
+### Subscribing to events
 
-Create subscription resolvers using the typed asyncIterableIterator:
+Get a typed async iterable for a channel:
 
 ```typescript
 const userUpdatedSubscription = Subscription.userUpdated
@@ -103,7 +105,7 @@ const userUpdatedSubscription = Subscription.userUpdated
 
 ### Using with Redis
 
-For production environments, you might want to use a more robust solution like `graphql-redis-subscriptions`:
+For multi-instance deployments, swap the in-memory transport for `graphql-redis-subscriptions`:
 
 ```typescript
 import { RedisPubSub } from "graphql-redis-subscriptions";
@@ -115,13 +117,13 @@ const options = {
   retryStrategy: (times) => Math.min(times * 50, 2000),
 };
 
-const pubsub = createTypedPubSub<RedisPubSub, PubSubMap>(
+const pubsub = new TypedPubSub<RedisPubSub, PubSubMap>(
   new RedisPubSub({
     publisher: new Redis(options),
     subscriber: new Redis(options),
   }),
   {
-    prefix: "feature-1:", // Optionally supports prefixing channels
+    prefix: "feature-1:", // optional channel prefix
   },
 );
 ```

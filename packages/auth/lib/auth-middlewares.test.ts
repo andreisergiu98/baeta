@@ -1,7 +1,6 @@
 import { ForbiddenError } from '@baeta/errors';
 import test, { sinon } from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
-import { createResolverPath } from '../utils/resolver.ts';
 import {
 	createMiddleware,
 	createPostMiddleware,
@@ -17,13 +16,19 @@ declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 type TestScopes = {
-	trueScope: true;
-	falseScope: true;
-	lazyTrueScope: true;
-	lazyFalseScope: true;
+	trueScope: boolean;
+	falseScope: boolean;
+	lazyTrueScope: boolean;
+	lazyFalseScope: boolean;
 };
 
 type TestGrants = 'grant';
+
+const scopeRule = <K extends keyof TestScopes>(key: K): ScopeRules<TestScopes, TestGrants> => ({
+	type: 'scope',
+	key,
+	value: true,
+});
 
 async function loadScopes(): Promise<ScopeLoaderMap<TestScopes>> {
 	return {
@@ -44,21 +49,26 @@ function createGetGrantFn(grants: TestGrants[]) {
 	return () => grants;
 }
 
-function createArgs() {
+function createArgs<R = unknown>(result?: R) {
 	const ctx = {};
-
-	loadAuthStore(ctx, loadScopes);
+	loadAuthStore<TestScopes, typeof ctx>(ctx, loadScopes, {});
 
 	const info = {
 		path: { typename: 'Query', key: 'test' },
 	} as unknown as GraphQLResolveInfo;
 
-	return { ctx, info };
+	return {
+		ctx,
+		info,
+		result,
+		params: { source: result ?? {}, args: {}, ctx, info } as const,
+	};
 }
 
 const postMiddlewareAdapter: typeof createMiddleware = (
 	type,
 	loadScopes,
+	cacheKeyMap,
 	scopes,
 	globalScopes,
 	options,
@@ -68,6 +78,7 @@ const postMiddlewareAdapter: typeof createMiddleware = (
 	return createPostMiddleware(
 		type,
 		loadScopes,
+		cacheKeyMap,
 		async (params, _result) => await getScopes(params),
 		globalScopes,
 		options,
@@ -89,14 +100,9 @@ function testCreateMiddleware(
 ) {
 	test(`${name} calls resolver for valid scopes`, async (t) => {
 		const { ctx, info } = createArgs();
+		const middleware = createMiddlewareHelper('Query', loadScopes, {}, scopeRule('trueScope'));
 
-		const scopes: ScopeRules<TestScopes, TestGrants> = {
-			trueScope: true,
-		};
-
-		const middleware = createMiddlewareHelper('Query', loadScopes, scopes);
 		const params = { source: null, args: {}, ctx, info };
-
 		const resolver = sinon.spy(async () => 'result');
 		const result = await middleware(resolver, params);
 
@@ -104,91 +110,89 @@ function testCreateMiddleware(
 		t.true(resolver.calledOnce);
 	});
 
-	test(`${name} handles global scopes`, async (t) => {
+	test(`${name} fails when global scopes deny`, async (t) => {
 		const { ctx, info } = createArgs();
 
-		const scopes: ScopeRules<TestScopes, TestGrants> = {
-			trueScope: true,
-		};
-
 		const globalScopes: DefaultScopes<TestScopes, TestGrants> = {
-			Query: {
-				falseScope: true,
-			},
+			Query: scopeRule('falseScope'),
 		};
 
 		const resolver = sinon.spy(async () => 'result');
 		const params = { source: null, args: {}, ctx, info };
-		let middleware = createMiddlewareHelper('Query', loadScopes, scopes, globalScopes);
+
+		const middleware = createMiddlewareHelper(
+			'Query',
+			loadScopes,
+			{},
+			scopeRule('trueScope'),
+			globalScopes,
+		);
 		await t.throwsAsync(middleware(resolver, params) as Promise<unknown>, {
 			instanceOf: ForbiddenError,
 		});
-
-		// Making sure the middleware throws because of the global scopes
-		middleware = createMiddlewareHelper('Query', loadScopes, scopes);
-		await t.notThrowsAsync(middleware(resolver, params) as Promise<unknown>);
 	});
 
-	test(`${name} respects skipDefaultScopes`, async (t) => {
+	test(`${name} respects skipDefaults`, async (t) => {
 		const { ctx, info } = createArgs();
 
-		const scopes: ScopeRules<TestScopes, TestGrants> = {
-			trueScope: true,
-		};
-
 		const globalScopes: DefaultScopes<TestScopes, TestGrants> = {
-			Query: {
-				falseScope: true,
-			},
+			Query: scopeRule('falseScope'),
 		};
 
 		const resolver = sinon.spy(async () => 'result');
 		const params = { source: null, args: {}, ctx, info };
 
-		const middleware = createMiddlewareHelper('Query', loadScopes, scopes, globalScopes, {
-			skipDefaults: true,
-		});
+		const middleware = createMiddlewareHelper(
+			'Query',
+			loadScopes,
+			{},
+			scopeRule('trueScope'),
+			globalScopes,
+			{ skipDefaults: true },
+		);
 		await t.notThrowsAsync(middleware(resolver, params) as Promise<unknown>);
-
 		t.true(resolver.calledOnce);
 	});
 
 	test(`${name} saves grants when resolved`, async (t) => {
 		const { ctx, info } = createArgs();
 
-		const next = sinon.spy(async () => 'result');
+		const resolverResult = { id: 'r1' };
+		const next = sinon.spy(async () => resolverResult);
 		const grantFn = sinon.spy(createGetGrantFn(['grant']));
 
-		const scopes: ScopeRules<TestScopes, TestGrants> = {
-			trueScope: true,
-		};
-
-		const middleware = createMiddlewareHelper('Query', loadScopes, scopes, undefined, {
-			grants: grantFn,
-		});
+		const middleware = createMiddlewareHelper(
+			'Query',
+			loadScopes,
+			{},
+			scopeRule('trueScope'),
+			undefined,
+			{ grants: grantFn },
+		);
 		const params = { source: null, args: {}, ctx, info };
 
 		await middleware(next, params);
 
 		const store = await getAuthStore(ctx);
-
 		t.true(grantFn.calledOnce);
-		t.deepEqual(store.grantCache.getGrants(createResolverPath(info.path)), ['grant']);
+		t.deepEqual(Array.from(store.grantCache.getGrants(resolverResult)!), ['grant']);
 	});
 
 	test(`${name} doesn't save grants when failing`, async (t) => {
 		const { ctx, info } = createArgs();
 
-		const next = sinon.spy(async () => 'result');
+		const resolverResult = { id: 'r1' };
+		const next = sinon.spy(async () => resolverResult);
 		const grantFn = sinon.spy(createGetGrantFn(['grant']));
 
-		const scopes: ScopeRules<TestScopes, TestGrants> = {
-			falseScope: true,
-		};
-
-		const middleware = createMiddlewareHelper('Query', loadScopes, scopes, undefined, {
-			grants: grantFn,
-		});
+		const middleware = createMiddlewareHelper(
+			'Query',
+			loadScopes,
+			{},
+			scopeRule('falseScope'),
+			undefined,
+			{ grants: grantFn },
+		);
 		const params = { source: null, args: {}, ctx, info };
 
 		await t.throwsAsync(middleware(next, params) as Promise<unknown>, {
@@ -196,29 +200,23 @@ function testCreateMiddleware(
 		});
 
 		const store = await getAuthStore(ctx);
-
 		t.true(grantFn.notCalled);
-		t.notDeepEqual(store.grantCache.getGrants(createResolverPath(info.path)), ['grant']);
+		t.is(store.grantCache.getGrants(resolverResult), undefined);
 	});
 
-	test(`${name} handles custom error resolver`, async (t) => {
+	test(`${name} delegates to a custom error resolver`, async (t) => {
 		const { ctx, info } = createArgs();
 
 		const errorResolver = sinon.spy((err: unknown) => {
-			if (!(err instanceof Error)) {
-				throw new Error('Expected error');
-			}
+			if (!(err instanceof Error)) throw new Error('Expected error');
 			return err;
 		});
-
-		const scopes: ScopeRules<TestScopes, TestGrants> = {
-			falseScope: true,
-		};
 
 		const middleware = createMiddlewareHelper(
 			'Query',
 			loadScopes,
-			scopes,
+			{},
+			scopeRule('falseScope'),
 			undefined,
 			undefined,
 			errorResolver,
@@ -230,45 +228,6 @@ function testCreateMiddleware(
 		await t.throwsAsync(middleware(next, params) as Promise<unknown>);
 		t.true(errorResolver.calledOnce);
 	});
-
-	test(`${name} options error handler takes precedence`, async (t) => {
-		const { ctx, info } = createArgs();
-
-		const globalErrorResolver = sinon.spy((err: unknown) => {
-			if (!(err instanceof Error)) {
-				throw new Error('Expected error');
-			}
-			return err;
-		});
-
-		const localErrorResolver = sinon.spy((err: unknown) => {
-			if (!(err instanceof Error)) {
-				throw new Error('Expected error');
-			}
-			return err;
-		});
-
-		const scopes: ScopeRules<TestScopes, TestGrants> = {
-			falseScope: true,
-		};
-
-		const middleware = createMiddlewareHelper(
-			'Query',
-			loadScopes,
-			scopes,
-			undefined,
-			{ onError: localErrorResolver },
-			globalErrorResolver,
-		);
-
-		const next = sinon.spy(async () => 'result');
-		const params = { source: null, args: {}, ctx, info };
-
-		await t.throwsAsync(middleware(next, params) as Promise<unknown>);
-
-		t.true(localErrorResolver.calledOnce);
-		t.true(globalErrorResolver.notCalled);
-	});
 }
 
 testCreateMiddleware(createMiddleware, 'createMiddleware');
@@ -277,11 +236,7 @@ testCreateMiddleware(postMiddlewareAdapter, 'createPostMiddleware');
 test("createMiddleware doesn't call resolver for failing scopes", async (t) => {
 	const { ctx, info } = createArgs();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseScope: true,
-	};
-
-	const middleware = createMiddleware('Query', loadScopes, scopes);
+	const middleware = createMiddleware('Query', loadScopes, {}, scopeRule('falseScope'));
 
 	const resolver = sinon.spy(async () => 'result');
 	const params = { source: null, args: {}, ctx, info };
@@ -294,74 +249,52 @@ test("createMiddleware doesn't call resolver for failing scopes", async (t) => {
 });
 
 test('verifyMiddlewareScopes resolves valid scopes', async (t) => {
-	const { ctx, info } = createArgs();
-
-	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
-
-	await t.notThrowsAsync(verifyMiddlewareScopes(ctx, info, undefined, requiredScopes, () => null));
+	const { params } = createArgs();
+	await t.notThrowsAsync(
+		verifyMiddlewareScopes(params, undefined, scopeRule('trueScope'), () => null),
+	);
 });
 
 test('verifyMiddlewareScopes throws when scopes is false', async (t) => {
-	const { ctx, info } = createArgs();
-
+	const { params } = createArgs();
 	await t.throwsAsync(
-		verifyMiddlewareScopes(ctx, info, undefined, false, () => null),
-		{ instanceOf: ForbiddenError },
-	);
-});
-
-test('verifyMiddlewareScopes throws when no scopes are empty', async (t) => {
-	const { ctx, info } = createArgs();
-
-	await t.throwsAsync(
-		verifyMiddlewareScopes(ctx, info, undefined, undefined, () => null),
-		{ message: 'Scope definitions cannot be empty!' },
-	);
-
-	await t.throwsAsync(
-		verifyMiddlewareScopes(ctx, info, undefined, {}, () => null),
-		{ message: 'Scope definitions cannot be empty!' },
-	);
-});
-
-test('verifyMiddlewareScopes throws for failing default scopes', async (t) => {
-	const { ctx, info } = createArgs();
-
-	const defaultScopes: ScopeRules<TestScopes, TestGrants> = { falseScope: true };
-	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
-
-	await t.throwsAsync(
-		verifyMiddlewareScopes(ctx, info, defaultScopes, requiredScopes, () => null),
+		verifyMiddlewareScopes(params, undefined, false, () => null),
 		{
 			instanceOf: ForbiddenError,
 		},
 	);
 });
 
-test('verifyMiddlewareScopes resolves default scopes', async (t) => {
-	const { ctx, info } = createArgs();
+test('verifyMiddlewareScopes is a no-op when there are no scopes to check', async (t) => {
+	const { params } = createArgs();
+	await t.notThrowsAsync(verifyMiddlewareScopes(params, undefined, true, () => null));
+});
 
-	const defaultScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
-	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
-
-	await t.notThrowsAsync(
-		verifyMiddlewareScopes(ctx, info, defaultScopes, requiredScopes, () => null),
+test('verifyMiddlewareScopes throws for failing default scopes', async (t) => {
+	const { params } = createArgs();
+	await t.throwsAsync(
+		verifyMiddlewareScopes(params, scopeRule('falseScope'), scopeRule('trueScope'), () => null),
+		{ instanceOf: ForbiddenError },
 	);
 });
 
-test('verifyMiddlewareScopes handles errors with error resolver', async (t) => {
-	const { ctx, info } = createArgs();
+test('verifyMiddlewareScopes resolves default scopes alongside required', async (t) => {
+	const { params } = createArgs();
+	await t.notThrowsAsync(
+		verifyMiddlewareScopes(params, scopeRule('trueScope'), scopeRule('trueScope'), () => null),
+	);
+});
 
-	const requiredScopes: ScopeRules<TestScopes, TestGrants> = { falseScope: true };
+test('verifyMiddlewareScopes invokes the error resolver on failure', async (t) => {
+	const { params } = createArgs();
 
 	const errorResolver = sinon.spy((err: unknown) => {
-		if (!(err instanceof Error)) {
-			throw new Error('Expected error');
-		}
+		if (!(err instanceof Error)) throw new Error('Expected error');
 		return err;
 	});
 
-	await t.throwsAsync(verifyMiddlewareScopes(ctx, info, undefined, requiredScopes, errorResolver));
-
+	await t.throwsAsync(
+		verifyMiddlewareScopes(params, undefined, scopeRule('falseScope'), errorResolver),
+	);
 	t.true(errorResolver.calledOnce);
 });

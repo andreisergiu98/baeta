@@ -41,7 +41,7 @@
 <tr>
 <td>
 
-<a id="buildplugin"></a> `buildPlugin`
+<a id="makepluginsymbol"></a> `[makePluginSymbol]`
 
 </td>
 <td>

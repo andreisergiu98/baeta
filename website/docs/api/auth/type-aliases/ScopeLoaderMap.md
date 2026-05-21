@@ -1,6 +1,6 @@
 # ScopeLoaderMap\<Scopes\>
 
-> **ScopeLoaderMap**\<`Scopes`\> = `{ [K in keyof Scopes]: ScopeLoader<Scopes[K]> }`
+> **ScopeLoaderMap**\<`Scopes`\> = \{ \[K in keyof Scopes\]: Scopes\[K\] extends boolean ? boolean \| (() =\> boolean \| Promise\<boolean\>) : (param: Scopes\[K\]) =\> boolean \| Promise\<boolean\> \}
 
 Maps scope names to their respective loaders.
 Each loader handles authorization checks for its scope.

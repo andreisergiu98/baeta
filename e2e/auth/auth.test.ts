@@ -35,6 +35,41 @@ const CreateMovieMutation = graphql(`
 	}
 `);
 
+const MovieWithReviewsQuery = graphql(`
+	query MovieWithReviewsQuery($where: MovieWhereUniqueInput!) {
+		movie(where: $where) {
+			id
+			reviews {
+				id
+				score
+				comment
+			}
+		}
+	}
+`);
+
+const PublicMoviesWithReviewsQuery = graphql(`
+	query PublicMoviesWithReviewsQuery {
+		publicMovies {
+			id
+			reviews {
+				id
+			}
+		}
+	}
+`);
+
+const ReviewsAfterCreate = graphql(`
+	mutation ReviewsAfterCreate($input: CreateMovieInput!) {
+		createMovie(input: $input) {
+			id
+			reviews {
+				id
+			}
+		}
+	}
+`);
+
 test.serial('logged-in user can query movie', async (t) => {
 	const result = await execute({
 		schema,
@@ -94,4 +129,44 @@ test.serial('admin can createMovie', async (t) => {
 
 	t.falsy(result.errors);
 	t.is(result.data?.createMovie.title, 'New Movie');
+});
+
+test.serial('reviews are readable on a movie granted readReviews', async (t) => {
+	const result = await execute({
+		schema,
+		document: MovieWithReviewsQuery,
+		variableValues: { where: { id: '1' } },
+		contextValue: { userId: '1', role: 'user' },
+	});
+
+	t.falsy(result.errors);
+	t.is(result.data?.movie?.id, '1');
+	t.is(result.data?.movie?.reviews?.length, 2);
+	t.is(result.data?.movie?.reviews?.[0]?.id, 'r1');
+});
+
+test.serial('reviews are gated when the parent resolver does not grant', async (t) => {
+	// publicMovies does not call `grants: ['readReviews']`, so the nested
+	// Movie.reviews resolver must reject access via scope.$granted.
+	const result = await execute({
+		schema,
+		document: PublicMoviesWithReviewsQuery,
+		contextValue: { userId: '1', role: 'user' },
+	});
+
+	t.truthy(result.errors);
+	t.truthy(result.errors?.length);
+});
+
+test.serial('reviews are gated after a Mutation that does not grant', async (t) => {
+	// Mutation.createMovie omits `grants`, so the returned Movie should
+	// not carry the readReviews grant — even for an admin.
+	const result = await execute({
+		schema,
+		document: ReviewsAfterCreate,
+		variableValues: { input: { title: 'X', year: 2024 } },
+		contextValue: { userId: '1', role: 'admin' },
+	});
+
+	t.truthy(result.errors);
 });

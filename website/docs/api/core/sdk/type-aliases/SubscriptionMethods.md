@@ -117,7 +117,7 @@
 </td>
 <td>
 
-\<`T`\>(`fn`) => [`SubscriptionResolveMethods`](SubscriptionResolveMethods.md)\<`Result`, [`Or`](Or.md)\<`Payload`, `T`\>, `Context`, `Args`, `Info`\>
+\<`T`\>(`fn`) => [`SubscriptionResolveMethods`](SubscriptionResolveMethods.md)\<`Result`, [`Or`](Or.md)\<`Payload`, `T`\>, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>

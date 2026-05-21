@@ -1,3 +1,3 @@
 # ScopesShape
 
-> **ScopesShape** = \{\[`key`: `string`\]: `unknown`; \} \| \{ \}
+> **ScopesShape** = `Record`\<`string`, `unknown`\>

@@ -1,4 +1,4 @@
-import { auth } from '../../lib/auth.ts';
+import { auth, rule, scope } from '../../lib/auth.ts';
 import { db } from '../../lib/db/prisma.ts';
 import { UserModule } from './typedef.ts';
 
@@ -7,13 +7,8 @@ const { Query } = UserModule;
 const userQuery = Query.user
 	.$use(
 		auth(
-			{
-				$or: {
-					// We allow logged out users to read the list of users.
-					isPublic: true, // Is logged out
-					isLoggedIn: true, // Is logged in
-				},
-			},
+			// We allow both logged in and logged out users to read a user.
+			rule.or(scope.isPublic, scope.isLoggedIn),
 			{
 				skipDefaults: true, // Default scopes are still obligatory and would fail for logged out users.
 				// If this auth check passes, the user will be granted the `readUserPhotos` grant.
@@ -34,18 +29,10 @@ const userQuery = Query.user
 
 const usersQuery = Query.users
 	.$use(
-		auth(
-			{
-				$or: {
-					isPublic: true,
-					isLoggedIn: true,
-				},
-			},
-			{
-				skipDefaults: true,
-				grants: ['readUserPhotos'],
-			},
-		),
+		auth(rule.or(scope.isPublic, scope.isLoggedIn), {
+			skipDefaults: true,
+			grants: ['readUserPhotos'],
+		}),
 	)
 	.resolve(async ({ args }) => {
 		return await db.user.findMany({
@@ -60,17 +47,7 @@ const usersQuery = Query.users
 
 // Auth scopes can be applied to the type level as well
 export default Query.$use(
-	auth(
-		{
-			$or: {
-				isPublic: true,
-				isLoggedIn: true,
-			},
-		},
-		{
-			skipDefaults: true,
-		},
-	),
+	auth(rule.or(scope.isPublic, scope.isLoggedIn), { skipDefaults: true }),
 ).$fields({
 	user: userQuery,
 	users: usersQuery,

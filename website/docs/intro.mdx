@@ -80,20 +80,13 @@ export default Query.$fields({
 #### 3. Add authorization
 
 ```typescript
-import { auth } from "./lib/auth.ts";
+import { auth, rule, scope } from "./lib/auth.ts";
 import { UserModule } from "./typedef.ts";
 
 const { Query } = UserModule;
 
 const userQuery = Query.user
-  .$use(
-    auth({
-      $or: {
-        isPublic: true,
-        isLoggedIn: true,
-      },
-    }),
-  )
+  .$use(auth(rule.or(scope.isPublic, scope.isLoggedIn)))
   .resolve(async ({ args }) => {
     // ...
   });

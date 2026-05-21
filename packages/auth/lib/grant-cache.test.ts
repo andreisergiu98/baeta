@@ -1,33 +1,79 @@
-import test from '@baeta/testing';
+import test, { sinon } from '@baeta/testing';
+import { log } from '@baeta/util-log';
 import { createGrantCache } from './grant-cache.ts';
 
-test('setGrants: should ignore empty paths', (t) => {
-	const grantCache = createGrantCache();
-	grantCache.setGrants('', 'grant1');
-	t.deepEqual(grantCache.getGrants(''), undefined);
+test.before(() => {
+	sinon.stub(log, 'warn');
 });
 
-test('setGrants: should set and get grants for a path', (t) => {
-	const grantCache = createGrantCache();
-	grantCache.setGrants('path1', 'grant1');
-	t.deepEqual(grantCache.getGrants('path1'), ['grant1']);
+test.after(() => {
+	sinon.restore();
 });
 
-test('setGrants: should overwrite existing grants for a path', (t) => {
-	const grantCache = createGrantCache();
-	grantCache.setGrants('path1', 'grant1');
-	grantCache.setGrants('path1', 'grant2');
-	t.deepEqual(grantCache.getGrants('path1'), ['grant2']);
+test('getGrants returns undefined for unknown target', (t) => {
+	const cache = createGrantCache();
+	t.is(cache.getGrants({}), undefined);
 });
 
-test('setGrants: should handle array of grants', (t) => {
-	const grantCache = createGrantCache();
-	grantCache.setGrants('path1', ['grant1', 'grant2']);
-	t.deepEqual(grantCache.getGrants('path1'), ['grant1', 'grant2']);
+test('addGrants stores grants on the target object', (t) => {
+	const cache = createGrantCache();
+	const target = { id: 1 };
+	cache.addGrants(target, ['grant1']);
+
+	const grants = cache.getGrants(target);
+	t.true(grants instanceof Set);
+	t.deepEqual(Array.from(grants!), ['grant1']);
 });
 
-test('setGrants: should handle empty array of grants', (t) => {
-	const grantCache = createGrantCache();
-	grantCache.setGrants('path1', []);
-	t.deepEqual(grantCache.getGrants('path1'), []);
+test('addGrants merges with existing grants for the same target', (t) => {
+	const cache = createGrantCache();
+	const target = { id: 1 };
+	cache.addGrants(target, ['grant1']);
+	cache.addGrants(target, ['grant2']);
+
+	t.deepEqual(Array.from(cache.getGrants(target)!), ['grant1', 'grant2']);
+});
+
+test('addGrants deduplicates repeated grants', (t) => {
+	const cache = createGrantCache();
+	const target = { id: 1 };
+	cache.addGrants(target, ['grant1', 'grant1']);
+	cache.addGrants(target, ['grant1']);
+
+	t.deepEqual(Array.from(cache.getGrants(target)!), ['grant1']);
+});
+
+test('addGrants keeps targets isolated', (t) => {
+	const cache = createGrantCache();
+	const a = { id: 1 };
+	const b = { id: 2 };
+	cache.addGrants(a, ['grantA']);
+	cache.addGrants(b, ['grantB']);
+
+	t.deepEqual(Array.from(cache.getGrants(a) ?? []), ['grantA']);
+	t.deepEqual(Array.from(cache.getGrants(b) ?? []), ['grantB']);
+});
+
+test('addGrants ignores non-object targets and logs a warning', (t) => {
+	const warn = log.warn as sinon.SinonStub;
+	warn.resetHistory();
+
+	const cache = createGrantCache();
+	cache.addGrants('not-an-object', ['grant1']);
+	cache.addGrants(undefined, ['grant1']);
+	cache.addGrants(null, ['grant1']);
+
+	t.is(cache.getGrants('not-an-object'), undefined);
+	t.is(cache.getGrants(null), undefined);
+	t.is(warn.callCount, 3);
+});
+
+test('addGrants accepts an empty grants array', (t) => {
+	const cache = createGrantCache();
+	const target = { id: 1 };
+	cache.addGrants(target, []);
+
+	const grants = cache.getGrants(target);
+	t.true(grants instanceof Set);
+	t.is(grants?.size, 0);
 });

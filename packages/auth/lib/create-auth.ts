@@ -18,7 +18,10 @@ import {
 	createMiddleware,
 	createPostMiddleware,
 } from './auth-middlewares.ts';
+import { defineRules, type RuleAccessor } from './define-rules.ts';
+import { defineScopes, type ScopeAccessor } from './define-scopes.ts';
 import type { ScopeErrorResolver } from './error.ts';
+import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import type { DefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
 import type { ScopeRules, ScopesShape } from './scope-rules.ts';
@@ -43,9 +46,21 @@ interface BuildContext {
 /** Configuration options for Auth */
 export interface AuthOptions<Scopes extends ScopesShape, Grants extends string> {
 	/** Default authorization scopes for queries, mutations or subscriptions */
-	defaultScopes?: DefaultScopes<Scopes, Grants>;
+	defaultScopes?: (opt: {
+		scope: ScopeAccessor<Scopes, Grants>;
+		rule: RuleAccessor<Scopes, Grants>;
+	}) => DefaultScopes<Scopes, Grants>;
 	/** Custom error resolver for authorization failures */
 	errorResolver?: ScopeErrorResolver;
+
+	/**
+	 * Per-scope cache key overrides. Recommended for scopes whose argument
+	 * isn't safely auto-serializable: serializable args (primitives, plain
+	 * objects, arrays of those) are stringified automatically, and anything
+	 * else falls back to reference identity — which may miss cache hits when
+	 * callers construct equivalent-but-distinct values.
+	 */
+	cacheKeyMap?: ScopeCacheKeyMap<Scopes>;
 }
 
 interface AuthState {
@@ -56,31 +71,38 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 	loadScopes: GetScopeLoader<Scopes, Context>,
 	globalOptions: AuthOptions<Scopes, Grants> = {},
 ) {
-	const scopeLoader = loadScopes as GetScopeLoader<Scopes, unknown>;
 	const id = createAppPluginId('Baeta Auth');
 	const stateKey = Symbol('auth');
-	const metadata = new Map<symbol, AuthState>([[stateKey, { hasAuth: true }]]);
+	const scope = defineScopes<Scopes, Grants>();
+	const rule = defineRules<Scopes, Grants>();
+	const scopeLoader = loadScopes as GetScopeLoader<Scopes, unknown>;
+	const defaultScopes = globalOptions.defaultScopes?.({ scope, rule });
+	const cacheKeyMap: ScopeCacheKeyMap<Scopes> = globalOptions.cacheKeyMap ?? {};
 
 	const makeAuthBuilder = <Result, Source, Context, Args, Info>(
 		buildMiddleware: (type: string) => Middleware<Result, Source, Context, Args, Info>,
-	): AuthPlugin<Result, Source, Context, Args, Info> => ({
-		[makePluginSymbol]: ({ type, field, subscriptionFieldKind }: BuildContext) => {
-			const middleware = buildMiddleware(type) as Middleware<any, Source, Context, any, Info>;
-			nameFunction(middleware, buildMiddlewareName(type, field, subscriptionFieldKind));
-			return { id, middleware, meta: metadata };
-		},
-	});
+	): AuthPlugin<Result, Source, Context, Args, Info> => {
+		return {
+			[makePluginSymbol]: ({ type, field, subscriptionFieldKind }: BuildContext) => {
+				const middleware = buildMiddleware(type) as Middleware<any, Source, Context, any, Info>;
+				nameFunction(middleware, buildMiddlewareName(type, field, subscriptionFieldKind));
+				const metadata = new Map<symbol, AuthState>([[stateKey, { hasAuth: true }]]);
+				return { id, middleware, meta: metadata };
+			},
+		};
+	};
 
 	const auth = <Result, Source, Context, Args, Info>(
 		scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Source, Context, Args, Info>,
 		options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> =>
-		makeAuthBuilder((type) =>
+		makeAuthBuilder<Result, Source, Context, Args, Info>((type) =>
 			createMiddleware(
 				type,
 				scopeLoader,
+				cacheKeyMap,
 				scopes,
-				globalOptions.defaultScopes,
+				defaultScopes,
 				options,
 				globalOptions.errorResolver,
 			),
@@ -90,12 +112,13 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		getScopes: GetPostScopeRules<Scopes, Grants, Result, Source, Context, Args, Info>,
 		options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> =>
-		makeAuthBuilder((type) =>
+		makeAuthBuilder<Result, Source, Context, Args, Info>((type) =>
 			createPostMiddleware(
 				type,
 				scopeLoader,
+				cacheKeyMap,
 				getScopes,
-				globalOptions.defaultScopes,
+				defaultScopes,
 				options,
 				globalOptions.errorResolver,
 			),
@@ -105,17 +128,18 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		id,
 		name: 'Baeta Auth',
 		mutate: (compilers) => {
-			if (globalOptions.defaultScopes == null) return;
+			if (defaultScopes == null) return;
 			for (const typeCompiler of iterateTypes(compilers)) {
 				if (!isOperationType(typeCompiler.type)) continue;
-				if (globalOptions.defaultScopes[typeCompiler.type] == null) continue;
+				if (defaultScopes[typeCompiler.type] == null) continue;
 				if (hasAuth(typeCompiler.useMetadata<AuthState>(stateKey).get())) continue;
 				for (const fieldCompiler of typeCompiler.fields) {
 					if (hasAuth(readFieldAuthState(fieldCompiler, stateKey))) continue;
 					const middleware = createFallbackMiddleware(
 						typeCompiler.type,
 						scopeLoader,
-						globalOptions.defaultScopes,
+						cacheKeyMap,
+						defaultScopes,
 						globalOptions.errorResolver,
 					);
 					if (!middleware) {
@@ -131,7 +155,13 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		},
 	};
 
-	return { auth, authAfter, authAppPlugin };
+	return {
+		auth,
+		authAfter,
+		authAppPlugin,
+		rule,
+		scope,
+	};
 }
 
 function buildMiddlewareName(

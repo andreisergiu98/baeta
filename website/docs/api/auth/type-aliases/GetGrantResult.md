@@ -1,6 +1,6 @@
-# GetGrantResult\<Grants\>
+# GetGrantResult\<Grant, Result\>
 
-> **GetGrantResult**\<`Grants`\> = `Grants` \| `Grants`[]
+> **GetGrantResult**\<`Grant`, `Result`\> = `Grant` \| `Grant`[] \| [`GrantConfig`](GrantConfig.md)\<`Grant`, `Result`\> \| [`GrantConfig`](GrantConfig.md)\<`Grant`, `Result`\>[]
 
 Represents the result of a grant operation.
 Can be either a single grant or an array of grants defined in AuthExtension.GrantsMap.
@@ -17,7 +17,14 @@ Can be either a single grant or an array of grants defined in AuthExtension.Gran
 <tr>
 <td>
 
-`Grants` *extends* `string`
+`Grant` *extends* `string`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Result`
 
 </td>
 </tr>

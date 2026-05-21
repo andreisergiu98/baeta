@@ -95,17 +95,13 @@ extend type User {
 			</>
 		),
 		language: 'typescript',
-		snippet: `import { UserModule } from "./typedef.ts";
+		snippet: `import { auth, rule, scope } from "./lib/auth.ts";
+import { UserModule } from "./typedef.ts";
 
 const { Query } = UserModule;
 
 const userQuery = Query.user
-  .$auth({
-    $or: {
-      isPublic: true,
-      isLoggedIn: true,
-    },
-  })
+  .$use(auth(rule.or(scope.isPublic, scope.isLoggedIn)))
   .resolve(async ({ args }) => {
     // ...
   });

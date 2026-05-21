@@ -1,6 +1,6 @@
 # aggregateErrorResolver()
 
-> **aggregateErrorResolver**(`err`, `path`): `any`
+> **aggregateErrorResolver**(`err`): `any`
 
 Default error resolver for authorization failures.
 If multiple authorization errors are encountered they are combined into `AggregateGraphQLError` with proper HTTP status codes.
@@ -24,18 +24,6 @@ If multiple authorization errors are encountered they are combined into `Aggrega
 <td>
 
 `AggregateError`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`path`
-
-</td>
-<td>
-
-`string`
 
 </td>
 </tr>

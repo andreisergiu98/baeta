@@ -1,5 +1,5 @@
 import { ForbiddenError } from '@baeta/errors';
-import { auth } from '../../lib/auth.ts';
+import { auth, scope } from '../../lib/auth.ts';
 import { db } from '../../lib/db/prisma.ts';
 import { UserModule } from './typedef.ts';
 
@@ -7,11 +7,7 @@ const { Mutation } = UserModule;
 
 const createUserMutation = Mutation.createUser
 	// Only admins can create users.
-	.$use(
-		auth({
-			hasAccess: 'admin',
-		}),
-	)
+	.$use(auth(scope.hasAccess('admin')))
 	.resolve(async ({ args, ctx }) => {
 		const user = await db.user.create({
 			data: args.data,
@@ -42,9 +38,7 @@ const updateUserMutation = Mutation.updateUser
 				throw new ForbiddenError();
 			}
 
-			return {
-				hasAccess: 'admin',
-			};
+			return scope.hasAccess('admin');
 		}),
 	)
 	.$use(async (next, { ctx }) => {

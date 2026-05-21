@@ -1,6 +1,6 @@
 # ScopeLoader\<T\>
 
-> **ScopeLoader**\<`T`\> = `boolean` \| ((`value`) => `boolean` \| `Promise`\<`boolean`\>)
+> **ScopeLoader**\<`T`\> = `T` *extends* `boolean` ? `boolean` \| (() => `boolean` \| `Promise`\<`boolean`\>) : (`param`) => `boolean` \| `Promise`\<`boolean`\>
 
 Represents a scope loader that can be either a boolean value or a function.
 Function loaders receive the scope value and return a boolean result.

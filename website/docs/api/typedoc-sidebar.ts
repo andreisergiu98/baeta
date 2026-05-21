@@ -16,11 +16,6 @@ const typedocSidebar: SidebarsConfig = {
             },
             {
               type: "doc",
-              id: "api/auth/interfaces/AuthMiddlewareSubscribeOptions",
-              label: "AuthMiddlewareSubscribeOptions"
-            },
-            {
-              type: "doc",
               id: "api/auth/interfaces/AuthOptions",
               label: "AuthOptions"
             }
@@ -67,8 +62,23 @@ const typedocSidebar: SidebarsConfig = {
             },
             {
               type: "doc",
+              id: "api/auth/type-aliases/GrantConfig",
+              label: "GrantConfig"
+            },
+            {
+              type: "doc",
               id: "api/auth/type-aliases/LogicRule",
               label: "LogicRule"
+            },
+            {
+              type: "doc",
+              id: "api/auth/type-aliases/ScopeCacheKeyFn",
+              label: "ScopeCacheKeyFn"
+            },
+            {
+              type: "doc",
+              id: "api/auth/type-aliases/ScopeCacheKeyMap",
+              label: "ScopeCacheKeyMap"
             },
             {
               type: "doc",
@@ -99,6 +109,11 @@ const typedocSidebar: SidebarsConfig = {
               type: "doc",
               id: "api/auth/type-aliases/ScopesShape",
               label: "ScopesShape"
+            },
+            {
+              type: "doc",
+              id: "api/auth/type-aliases/SerializableScope",
+              label: "SerializableScope"
             }
           ]
         },
@@ -115,6 +130,11 @@ const typedocSidebar: SidebarsConfig = {
               type: "doc",
               id: "api/auth/functions/createAuth",
               label: "createAuth"
+            },
+            {
+              type: "doc",
+              id: "api/auth/functions/createScopeCacheKey",
+              label: "createScopeCacheKey"
             }
           ]
         }
@@ -1016,11 +1036,6 @@ const typedocSidebar: SidebarsConfig = {
                 },
                 {
                   type: "doc",
-                  id: "api/core/sdk/type-aliases/FieldHelpers",
-                  label: "FieldHelpers"
-                },
-                {
-                  type: "doc",
                   id: "api/core/sdk/type-aliases/FieldMethods",
                   label: "FieldMethods"
                 },
@@ -1043,11 +1058,6 @@ const typedocSidebar: SidebarsConfig = {
                   type: "doc",
                   id: "api/core/sdk/type-aliases/FieldUsePlugin",
                   label: "FieldUsePlugin"
-                },
-                {
-                  type: "doc",
-                  id: "api/core/sdk/type-aliases/FieldWithMake",
-                  label: "FieldWithMake"
                 },
                 {
                   type: "doc",
@@ -1101,11 +1111,6 @@ const typedocSidebar: SidebarsConfig = {
                 },
                 {
                   type: "doc",
-                  id: "api/core/sdk/type-aliases/SubscriptionFieldWithMake",
-                  label: "SubscriptionFieldWithMake"
-                },
-                {
-                  type: "doc",
                   id: "api/core/sdk/type-aliases/SubscriptionMethods",
                   label: "SubscriptionMethods"
                 },
@@ -1148,6 +1153,22 @@ const typedocSidebar: SidebarsConfig = {
                   type: "doc",
                   id: "api/core/sdk/type-aliases/TypeUsePlugin",
                   label: "TypeUsePlugin"
+                }
+              ]
+            },
+            {
+              type: "category",
+              label: "Variables",
+              items: [
+                {
+                  type: "doc",
+                  id: "api/core/sdk/variables/makePluginSymbol",
+                  label: "makePluginSymbol"
+                },
+                {
+                  type: "doc",
+                  id: "api/core/sdk/variables/makeSymbol",
+                  label: "makeSymbol"
                 }
               ]
             },
@@ -1204,11 +1225,6 @@ const typedocSidebar: SidebarsConfig = {
                   type: "doc",
                   id: "api/core/sdk/functions/isPromise",
                   label: "isPromise"
-                },
-                {
-                  type: "doc",
-                  id: "api/core/sdk/functions/makeField",
-                  label: "makeField"
                 },
                 {
                   type: "doc",

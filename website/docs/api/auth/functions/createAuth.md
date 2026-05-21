@@ -120,5 +120,29 @@
 
 </td>
 </tr>
+<tr>
+<td>
+
+`rule`
+
+</td>
+<td>
+
+`RuleAccessor`\<`Scopes`, `Grants`\>
+
+</td>
+</tr>
+<tr>
+<td>
+
+`scope`
+
+</td>
+<td>
+
+`ScopeAccessor`\<`Scopes`, `Grants`\>
+
+</td>
+</tr>
 </tbody>
 </table>

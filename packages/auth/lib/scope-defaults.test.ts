@@ -1,37 +1,39 @@
 import test from '@baeta/testing';
-import { selectDefaultScopes } from './scope-defaults.ts';
+import { type DefaultScopes, selectDefaultScopes } from './scope-defaults.ts';
+import type { ScopeRules } from './scope-rules.ts';
+
+type TestScopes = { isPublic: boolean };
+type TestGrants = string;
+
+const trueScope: ScopeRules<TestScopes, TestGrants> = {
+	type: 'scope',
+	key: 'isPublic',
+	value: true,
+};
 
 test('returns undefined if no defaultScopes provided', (t) => {
 	t.is(selectDefaultScopes(false, 'Query'), undefined);
 });
 
 test('returns undefined if not an operation type', (t) => {
-	t.is(selectDefaultScopes(false, 'Type', {}), undefined);
+	t.is(selectDefaultScopes<TestScopes, TestGrants>(false, 'Type', {}), undefined);
 });
 
 test('returns undefined if skipDefaults is true', (t) => {
-	t.is(selectDefaultScopes(true, 'Query', {}), undefined);
+	t.is(selectDefaultScopes<TestScopes, TestGrants>(true, 'Query', {}), undefined);
 });
 
 test('returns Query scopes for Query type', (t) => {
-	const defaultScopes = {
-		Query: { some: 'scope' },
-	};
-	t.is(selectDefaultScopes(false, 'Query', defaultScopes), defaultScopes.Query);
+	const defaultScopes: DefaultScopes<TestScopes, TestGrants> = { Query: trueScope };
+	t.is(selectDefaultScopes(false, 'Query', defaultScopes), trueScope);
 });
 
 test('returns Mutation scopes for Mutation type', (t) => {
-	const defaultScopes = {
-		Mutation: { some: 'scope' },
-	};
-	t.is(selectDefaultScopes(false, 'Mutation', defaultScopes), defaultScopes.Mutation);
+	const defaultScopes: DefaultScopes<TestScopes, TestGrants> = { Mutation: trueScope };
+	t.is(selectDefaultScopes(false, 'Mutation', defaultScopes), trueScope);
 });
 
-test('returns subscribe scopes for Subscription', (t) => {
-	const defaultScopes = {
-		Subscription: {
-			subscribe: { some: 'scope' },
-		},
-	};
-	t.is(selectDefaultScopes(false, 'Subscription', defaultScopes), defaultScopes.Subscription);
+test('returns Subscription scopes for Subscription type', (t) => {
+	const defaultScopes: DefaultScopes<TestScopes, TestGrants> = { Subscription: trueScope };
+	t.is(selectDefaultScopes(false, 'Subscription', defaultScopes), trueScope);
 });

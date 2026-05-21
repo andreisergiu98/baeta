@@ -57,7 +57,7 @@
   "dependencies": {
     "@baeta/errors": "workspace:^",
     "@baeta/util-log": "workspace:^",
-    "fast-json-stable-stringify": "^2.1.0"
+    "safe-stable-stringify": "^2.5.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

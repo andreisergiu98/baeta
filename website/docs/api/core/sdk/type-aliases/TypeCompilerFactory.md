@@ -76,7 +76,7 @@
 <tr>
 <td>
 
-<a id="__make"></a> `__make`
+<a id="makesymbol"></a> `[makeSymbol]`
 
 </td>
 <td>

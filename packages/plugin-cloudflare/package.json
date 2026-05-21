@@ -63,7 +63,7 @@
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20260517.1",
+    "@cloudflare/workers-types": "^4.20260518.1",
     "@types/node": "catalog:dev",
     "graphql": "catalog:dev",
     "typescript": "catalog:dev"

@@ -4,18 +4,18 @@ sidebar_position: 10
 
 # Authorization
 
-Baeta provides a flexible, type-safe authorization system that lets you define granular access controls at the operation, type, and field level. Rules are composed from a typed `scope` accessor and `rule` combinators, and the package ships with grant propagation, scope caching, and customizable error handling.
+`@baeta/auth` is a scope-based authorization system. You declare the _scopes_ your app cares about (`isLoggedIn`, `hasRole('admin')`, `ownsResource(id)`), Baeta loads them lazily per request, and resolvers gate themselves with `auth(scope.X)` or `auth(rule.or(scope.X, scope.Y))`. Failures throw typed errors; successes are cached for the rest of the request.
 
-## Key Features
+## At a glance
 
-- Type-safe scope and rule builders
-- Default scopes with a callback for typed composition
-- Pre- and post-resolution authorization
-- Field-level, type-level and operation-level rules
-- Grants attached to resolver results (with custom targets and array support)
-- Per-request scope caching with optional custom key functions
-- Sync/async loaders
-- Subscription-specific controls (subscribe and resolve legs)
+- Typed `scope` accessor and `rule` combinators.
+- Default scopes for `Query` / `Mutation` / `Subscription` so unprotected operations can't slip through.
+- Pre- and post-resolution checks (`auth`, `authAfter`).
+- Field-, type-, and module-level rules.
+- Grant propagation: attach permissions to resolver results so descendants can consume them without a re-check.
+- Per-request scope caching with optional custom key functions.
+- Sync and async scope loaders.
+- Independent control over a subscription's subscribe and resolve legs.
 
 ## Installation
 
@@ -23,20 +23,19 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 <PackageManagerAdd package="@baeta/auth" />
 
-## Basic Setup
+## Basic setup
 
 ### 1. Define scopes and create auth
 
 `createAuth` returns:
 
-- `auth` — used with `$use` to attach pre-resolution scope rules.
-- `authAfter` — used with `$use` to attach post-resolution scope rules.
-- `authAppPlugin` — the app plugin you register on `createApplication`.
-- `scope` — a typed accessor that produces scope rules (`scope.isLoggedIn`, `scope.hasAccess('admin')`, `scope.$granted('readUserPhotos')`).
-- `rule` — combinators that group rules (`rule.and`, `rule.or`, `rule.chain`, `rule.race`).
+- `auth`: chains onto `$use` to attach pre-resolution scope rules.
+- `authAfter`: same shape, runs after the resolver (handy when the decision depends on the resolved value).
+- `authAppPlugin`: the app plugin you register on `createApplication`.
+- `scope`: typed accessor for individual rules (`scope.isLoggedIn`, `scope.hasAccess('admin')`, `scope.$granted('readUserPhotos')`).
+- `rule`: combinators that group rules (`rule.and`, `rule.or`, `rule.chain`, `rule.race`).
 
-```typescript
-// src/lib/auth.ts
+```typescript title="src/lib/auth.ts"
 import { createAuth } from "@baeta/auth";
 import { UnauthenticatedError } from "@baeta/errors";
 import type { Context } from "../types/context.ts";
@@ -71,15 +70,14 @@ export const { auth, authAfter, authAppPlugin, scope, rule } = createAuth<
 });
 ```
 
-A boolean scope is declared as `boolean`. A parameterized scope is declared as its argument type (`string`, a literal union, an object, etc.). The accessor adapts:
+Scope types determine how you call the accessor:
 
-- `scope.isLoggedIn` → a boolean-scope rule (no call site)
-- `scope.hasAccess('admin')` → a parameterized-scope rule
+- A `boolean` scope is read as a property, like `scope.isLoggedIn`.
+- A parameterized scope is called with its argument, like `scope.hasAccess('admin')`. The argument type comes from the `Scopes` map (a string, a literal union, an object, anything you choose).
 
 ### 2. Register the app plugin
 
-```typescript
-// src/app.ts
+```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
 import { authAppPlugin } from "./lib/auth.ts";
 import modules from "./modules/index.ts";
@@ -98,21 +96,21 @@ The `authAppPlugin` must be passed to `createApplication`. If a module uses `aut
 Register `authAppPlugin` before plugins that perform per-field work (complexity, caching, logging). Middlewares attached by earlier plugins wrap those attached by later plugins, so auth-first means unauthenticated requests bounce immediately without exposing internals. See [App Plugins](./app-plugins#plugin-ordering) for the contract.
 :::
 
-## Composing Rules
+## Composing rules
 
 ### The `scope` accessor
 
-`scope` is the typed entry point for individual rules:
+Use `scope` to produce a single rule:
 
 | Form                               | Meaning                                          |
 | ---------------------------------- | ------------------------------------------------ |
-| `scope.isLoggedIn`                 | Boolean scope — required to resolve true         |
+| `scope.isLoggedIn`                 | Boolean scope, required to resolve true          |
 | `scope.hasAccess('admin')`         | Parameterized scope with a typed argument        |
 | `scope.$granted('readUserPhotos')` | Granted permission check (see [Grants](#grants)) |
 
 ### The `rule` combinators
 
-`rule` exposes four combinators for grouping rules. They all take two or more rules:
+Combine rules with one of four combinators. Each takes two or more rules:
 
 | Combinator   | Semantics                                                        |
 | ------------ | ---------------------------------------------------------------- |
@@ -121,7 +119,7 @@ Register `authAppPlugin` before plugins that perform per-field work (complexity,
 | `rule.chain` | Rules evaluated in order; stops on first failure                 |
 | `rule.race`  | Rules evaluated in order; stops on first success                 |
 
-Combinators nest freely:
+Combinators nest:
 
 ```typescript
 auth(
@@ -134,7 +132,7 @@ auth(
 
 ### Static rules
 
-A single scope or a combined rule can be passed directly:
+Pass a scope (or combined rule) directly to `auth()`:
 
 ```typescript
 import { auth, rule, scope } from "../../lib/auth.ts";
@@ -152,7 +150,7 @@ const createUserMutation = Mutation.createUser
 
 ### Dynamic rules
 
-Pass a function to compute the rule per request. Return `true` to short-circuit success, `false` to deny, or any `ScopeRules` value:
+Pass a function when the rule depends on request data. Return `true` to allow, `false` to deny, or any `ScopeRules` value to delegate to scope/rule evaluation:
 
 ```typescript
 const updateUserMutation = Mutation.updateUser
@@ -160,7 +158,7 @@ const updateUserMutation = Mutation.updateUser
     auth(async ({ args, ctx }) => {
       const user = await db.user.findFirst({ where: args.where });
       if (user && user.id === ctx.userId) {
-        return true; // Owner — allow
+        return true; // Owner, allow
       }
       return scope.hasAccess("admin");
     }),
@@ -170,7 +168,7 @@ const updateUserMutation = Mutation.updateUser
 
 ### Post-resolution authorization
 
-`authAfter` runs after the resolver — useful when the decision depends on the resolved value itself:
+When the decision depends on the resolved value, use `authAfter`. It runs after the resolver and avoids the duplicate fetch a pre-resolution dynamic rule would need:
 
 ```typescript
 const userQuery = Query.user
@@ -184,8 +182,6 @@ const userQuery = Query.user
   )
   .resolve(({ args }) => db.user.findFirst({ where: args.where }));
 ```
-
-This avoids the duplicate fetch that pre-resolution dynamic rules typically need.
 
 ### Type-wide rules
 
@@ -207,7 +203,7 @@ export default User.$use(auth(scope.isLoggedIn)).$fields({
 
 ### Subscriptions
 
-`auth` can be chained on both the subscribe and resolve legs of a subscription. Each `$use` only protects the leg that follows it:
+A subscription has two phases (subscribe and resolve) and `auth` chains onto either or both. Each `$use` only protects the phase that follows it:
 
 ```typescript
 const userCreatedSubscription = Subscription.userCreated
@@ -217,9 +213,9 @@ const userCreatedSubscription = Subscription.userCreated
   .resolve(({ source }) => source);
 ```
 
-## Default Scopes
+## Default scopes
 
-Default scopes apply to every operation of a type (`Query`, `Mutation`, `Subscription`) and combine with local rules under AND semantics. They are defined via a callback so you can use the typed `scope` and `rule` builders:
+Default scopes apply to every operation of `Query` / `Mutation` / `Subscription` and combine with local rules under AND semantics. They're defined via a callback that hands you the typed `scope` and `rule` builders:
 
 ```typescript
 export const { auth, authAfter, authAppPlugin, scope, rule } = createAuth<
@@ -240,11 +236,11 @@ export const { auth, authAfter, authAppPlugin, scope, rule } = createAuth<
 );
 ```
 
-When `defaultScopes` is configured, `authAppPlugin` attaches a fallback middleware to every operation field that has no `auth()`/`authAfter()` rule, so unprotected operations cannot accidentally slip through.
+When `defaultScopes` is set, `authAppPlugin` attaches a fallback middleware to every operation field that doesn't carry an `auth()` / `authAfter()`. Unprotected operations can't slip through by accident.
 
 ### Skipping defaults
 
-Bypass defaults for a specific operation with `skipDefaults`:
+`skipDefaults` opts a single operation out:
 
 ```typescript
 const publicContent = Query.publicContent
@@ -254,16 +250,18 @@ const publicContent = Query.publicContent
 
 ## Grants
 
-The grant system propagates permissions from one resolver to its descendants. The model is:
+Grants propagate a permission from a parent resolver to its descendants, so a child resolver doesn't have to repeat work the parent already authorized.
 
-1. A resolver that returns a value can attach grants to **the result object**.
-2. A descendant resolver whose `params.source` is that same object can use `scope.$granted(name)` to consume the grant.
+The model:
 
-Grants are stored in a `WeakMap` keyed by the result object, so they live exactly as long as the result does and never leak across requests.
+1. A resolver attaches grants to **the result object** it returns.
+2. A descendant resolver whose `params.source` is that same object reads the grant with `scope.$granted(name)`.
+
+Grants are stored in a `WeakMap` keyed by the result object, so they live exactly as long as the result and never leak across requests.
 
 ### Attaching grants
 
-Add `grants` to the second argument of `auth()` or `authAfter()`. The simplest form is an array of grant names:
+Pass `grants` in the second argument of `auth()` or `authAfter()`. An array of grant names is the simplest form:
 
 ```typescript
 const userQuery = Query.user
@@ -275,7 +273,7 @@ const userQuery = Query.user
   .resolve(({ args }) => db.user.findFirst({ where: args.where }));
 ```
 
-You can also compute grants dynamically with a function — it receives the resolver params plus the resolved value:
+A function computes grants per result. It receives the resolver params plus the resolved value:
 
 ```typescript
 .$use(
@@ -291,7 +289,7 @@ You can also compute grants dynamically with a function — it receives the reso
 
 ### Consuming grants
 
-Use `scope.$granted` in a downstream resolver:
+Read the grant downstream with `scope.$granted`:
 
 ```typescript
 const userPhotosResolver = User.photos
@@ -301,11 +299,11 @@ const userPhotosResolver = User.photos
   );
 ```
 
-Because grants are keyed by the result object, `User.photos` finds the grant only when its `source` is the same `User` object that `Query.user` returned — there's no path matching, no string keys, and no cross-request bleed.
+Because grants key off the result object's identity, `User.photos` only finds the grant when its `source` _is_ the same `User` object that `Query.user` returned.
 
 ### Array results
 
-If a resolver returns an array, the default flow attaches the grant to **each element**. Child resolvers iterating per item see the grant:
+When a resolver returns an array, the grant attaches to **each element**. Child resolvers iterating per item see it:
 
 ```typescript
 const usersQuery = Query.users
@@ -319,7 +317,7 @@ const usersQuery = Query.users
 
 ### Custom targets
 
-When the grant belongs to something other than the resolver's direct return value — a nested entity, a wrapper field, or an object derived from the result — supply a `GrantConfig` with a `target` function:
+Sometimes the grant belongs to a nested value rather than the resolver's direct return: a wrapper, a nested entity, an object derived from the result. Pass a `GrantConfig` with a `target` function:
 
 ```typescript
 const meQuery = Query.me
@@ -337,7 +335,7 @@ const meQuery = Query.me
   }));
 ```
 
-For array results, `target` is invoked per entry so you can relocate the grant element-by-element:
+For array results, `target` runs per entry:
 
 ```typescript
 auth(scope.isLoggedIn, {
@@ -348,27 +346,29 @@ auth(scope.isLoggedIn, {
 });
 ```
 
-`target` must return a non-primitive value — grants are stored in a `WeakMap`, so they can only key off objects. Returning a primitive logs a warning and drops the grant for that entry. You can also pass an array of grant configs to attach different grants to different sub-objects of the same result.
+`target` must return a non-primitive; the `WeakMap` can only key off objects. A primitive return logs a warning and drops the grant for that entry.
 
-## Scope Caching
+You can also pass an array of grant configs to attach different grants to different sub-objects of the same result.
 
-Within a single request, scope loaders are cached so the same scope-with-the-same-argument never runs twice. The cache is per-context and discarded when the request finishes.
+## Scope caching
+
+Within a single request, each scope-with-argument combination runs at most once. The cache is per-context and gone when the request finishes.
 
 ### How keys are derived
 
-For each cache lookup, Baeta picks a key for the scope's argument using this order:
+For each lookup, Baeta picks a key for the scope's argument in this order:
 
-1. **Custom key function** — if `cacheKeyMap` has an entry for the scope, the function is called and its return value is used directly.
-2. **Auto-serialize** — if the argument is a primitive, a plain object, or an array of those (recursively), it's serialized to a stable JSON-shaped string.
-3. **Reference identity** — anything else (class instances, `Date`, `Map`, `Set`, etc.) is used as a `Map` key by reference. Two structurally-equal but distinct objects will not share a cache entry.
+1. **Custom key function**: if `cacheKeyMap` has an entry for the scope, its return value is the key.
+2. **Auto-serialize**: for primitives, plain objects, and arrays of those (recursively), Baeta serializes to a stable JSON-shaped string.
+3. **Reference identity**: anything else (class instances, `Date`, `Map`, `Set`) is used as a `Map` key by reference. Two structurally-equal but distinct objects won't share a cache entry.
 
-Boolean scopes don't take an argument, so they don't go through the cache key path.
+Boolean scopes don't take an argument, so they skip the cache-key path entirely. `ScopeCacheKeyMap` rejects them at the type level.
 
 ### When to provide a custom key
 
-The auto-serializer is conservative: it only walks plain objects. If your scope receives a class instance, a `Date`, or any object with non-enumerable state, the fallback is reference identity — which means a fresh value built per call will never hit the cache.
+The auto-serializer only walks plain objects. If a scope receives a class instance, a `Date`, or any object with non-enumerable state, the fallback is reference identity, which means a fresh value built per call never hits the cache.
 
-Supply a `cacheKeyMap` entry to give those scopes a stable key:
+A `cacheKeyMap` entry fixes that with a stable key:
 
 ```typescript
 type Scopes = {
@@ -383,12 +383,12 @@ createAuth<Context, Scopes, Grants>(
   }),
   {
     cacheKeyMap: {
-      // String args are already serializable — entry is optional.
+      // String args are already serializable, entry is optional.
       hasRole: (role) => `role:${role}`,
       // Plain objects are serializable, but you can shorten the key if
       // many fields are irrelevant to the decision.
       ownsResource: ({ ownerId, resourceId }) => `${ownerId}:${resourceId}`,
-      // Class instances need a custom key — otherwise the cache falls back
+      // Class instances need a custom key; otherwise the cache falls back
       // to reference identity and new Project(...) calls never share results.
       canAccessProject: (project) => project.id,
     },
@@ -396,27 +396,21 @@ createAuth<Context, Scopes, Grants>(
 );
 ```
 
-The returned value must be **stable** (equal inputs produce equal keys) — strings are easiest, but any value that compares equal as a `Map` key works (including a stable object reference).
+Return a **stable** value (equal inputs produce equal keys). Strings are easiest; any value that compares equal as a `Map` key works, including a stable object reference.
 
-### Anatomy of a cached call
+### Concurrency and errors
 
-When `scope.hasAccess('admin')` evaluates:
+Values are stored as the in-flight `Promise<boolean>`, so concurrent rule evaluations all `await` the same promise instead of re-invoking the loader. If the loader throws, the rejection is cached too: subsequent callers in the same request see the same error instead of retrying.
 
-1. The cache layer asks "does `hasAccess` have a custom key fn?" — if yes, it uses the result.
-2. Otherwise it checks `'admin'` against `canSafelySerialize` — strings pass, so the key becomes the serialized form.
-3. The cache map is indexed under the scope name; values are stored as the in-flight `Promise<boolean>`, so concurrent rule evaluations all `await` the same promise instead of re-invoking the loader.
+## Custom error handling
 
-If the loader throws, the rejection is cached too — subsequent callers within the request see the same error rather than retrying.
-
-## Custom Error Handling
-
-`createAuth` accepts an `errorResolver` to map any error thrown during authorization. The default behavior:
+`createAuth` accepts an `errorResolver` that maps any error thrown during authorization. Defaults:
 
 - A single `GraphQLError` passes through unchanged.
-- An `AggregateError` (from `rule.or`) is collapsed into an `AggregateGraphQLError`, with HTTP status reconciled to `401` if any constituent is unauthenticated.
+- An `AggregateError` (from `rule.or`) collapses into an `AggregateGraphQLError`, with HTTP status reconciled to `401` if any constituent is unauthenticated.
 - Anything else is logged and rethrown wrapped in `InternalServerError`.
 
-Override it by providing a function `(err) => unknown`:
+Override with a `(err) => unknown`:
 
 ```typescript
 import { createAuth } from "@baeta/auth";
@@ -432,8 +426,8 @@ createAuth<Context, Scopes, Grants>(loader, {
 });
 ```
 
-Return an `Error` to throw it, or return any non-error value to rethrow the original.
+Return an `Error` to throw it. Return any non-error value to rethrow the original.
 
 ## Reference
 
-For a complete runnable example, see [`examples/auth`](https://github.com/andreisergiu98/baeta/tree/main/examples/auth). The API reference for `@baeta/auth` is generated from source in the [API docs](../api/auth/index.md).
+For a runnable end-to-end setup, see [`examples/auth`](https://github.com/andreisergiu98/baeta/tree/main/examples/auth). The full API reference for `@baeta/auth` lives at [API → @baeta/auth](../api/auth/index.md).

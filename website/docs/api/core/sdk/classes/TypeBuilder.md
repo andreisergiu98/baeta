@@ -177,7 +177,7 @@
 </td>
 <td>
 
-(`middleware`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> TypeBuilder\<...\>; readonly commitToMethods: () =\> TypeMethods\<...\>; \}
+(`middleware`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> TypeBuilder\<Source, Context, Info, FieldsBuilders, any\>; readonly commitToMethods: () =\> TypeMethods\<Source, Context, Info, FieldsBuilders, any\>; \}
 
 </td>
 </tr>
@@ -189,7 +189,7 @@
 </td>
 <td>
 
-(`id`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> TypeBuilder\<...\>; readonly commitToMethods: () =\> TypeMethods\<...\>; \}
+(`id`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> TypeBuilder\<Source, Context, Info, FieldsBuilders, any\>; readonly commitToMethods: () =\> TypeMethods\<Source, Context, Info, FieldsBuilders, any\>; \}
 
 </td>
 </tr>
@@ -225,7 +225,7 @@
 </td>
 <td>
 
-(`meta`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> TypeBuilder\<...\>; readonly commitToMethods: () =\> TypeMethods\<...\>; \}
+(`meta`) => \{ readonly type: string; readonly addMiddleware: (middleware: Middleware\<unknown, Source, Context, unknown, Info\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> TypeBuilder\<Source, Context, Info, FieldsBuilders, any\>; readonly commitToMethods: () =\> TypeMethods\<Source, Context, Info, FieldsBuilders, any\>; \}
 
 </td>
 </tr>

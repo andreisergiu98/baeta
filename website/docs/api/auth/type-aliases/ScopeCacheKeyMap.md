@@ -1,10 +1,10 @@
 # ScopeCacheKeyMap\<Scopes\>
 
-> **ScopeCacheKeyMap**\<`Scopes`\> = `{ [K in keyof Scopes]?: ScopeCacheKeyFn<Scopes[K]> }`
+> **ScopeCacheKeyMap**\<`Scopes`\> = `{ [K in keyof Scopes as Scopes[K] extends boolean ? never : K]?: ScopeCacheKeyFn<Scopes[K]> }`
 
-Per-scope overrides for cache key generation. Provide an entry when the
-scope's argument can't be safely auto-serialized (class instances, `Map`,
-etc.) or when a more compact key is preferable.
+Provide an entry when the scope's argument can't be safely
+auto-serialized in a stable manner or when a more compact key
+is preferable.
 
 ## Type Parameters
 

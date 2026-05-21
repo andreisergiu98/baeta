@@ -4,9 +4,9 @@ sidebar_position: 10
 
 # Resolvers
 
-Baeta provides a modular, type-safe approach to defining GraphQL resolvers. Let's look at how to implement `User` and `Query` resolvers.
+Resolvers in Baeta are chained method calls on the generated module: declare them once per field with `.resolve()` / `.map()` / `.key()`, then collect them with `$fields`. This page walks through a `User` type and its `Query` together.
 
-## Project Structure
+## Project structure
 
 ```
 src/modules/
@@ -18,9 +18,9 @@ src/modules/
     └── typedef.ts        # auto-generated types for the module
 ```
 
-## Schema Definition
+## Schema definition
 
-First, define your types and queries in `src/modules/user/user.gql`:
+`src/modules/user/user.gql`:
 
 ```graphql
 type User {
@@ -43,9 +43,9 @@ type Query {
 }
 ```
 
-## Implement Resolvers
+## Implement the resolvers
 
-After defining your schema, implement the `User` resolvers in `src/modules/user/user.resolver.ts`:
+Define the field resolvers in `src/modules/user/user.resolver.ts`:
 
 ```typescript title="src/modules/user/user.resolver.ts"
 import { UserModule } from "./typedef.ts";
@@ -69,32 +69,22 @@ export default User.$fields({
 });
 ```
 
-Each field resolver comes with chainable methods that allow you to:
+Field resolvers expose a small set of chainable helpers. Pick the strictest one that fits:
 
-- `map(({ source, args, ctx, info }) => any value)`:
-  - Use resolver params to return a new value.
-  - It accepts any value as return type.
-  - Can be async.
-- `resolve(({ source, args, ctx, info }) => expected value)`:
-  - Identical to `.map` but enforces the return type to be of the expected value.
-  - Can be async.
-- `key(string)`:
-  - Return the field value from the source object.
-  - It's a shortcut for `.map(({ source }) => source[key])`.
-- `to((source) => any value)`
-  - Transform the field value before returning it.
-  - It accepts any value as return type.
-- `withDefault(value)`:
-  - Return the default value if the field is null or undefined.
-  - It accepts any value as return type.
-- `undefinedAsNull()`:
-  - Return null if the field is undefined.
+| Method                | What it does                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `.resolve(fn)`        | Type-checked resolver — return type must match the schema field. Async-friendly.                                   |
+| `.map(fn)`            | Same shape as `.resolve`, but accepts any return type. Use for chained transforms that converge to the right type. |
+| `.key("name")`        | Shorthand for `.map(({ source }) => source.name)`.                                                                 |
+| `.to(fn)`             | Transforms whatever the previous step produced.                                                                    |
+| `.withDefault(value)` | Substitutes `value` when the result is `null`/`undefined`.                                                         |
+| `.undefinedAsNull()`  | Maps `undefined` to `null` (useful for nullable fields).                                                           |
 
 :::tip
-You can freely chain and compose these methods to transform and pass data however you like. If the way you compose them results in a type mismatch with your schema (such as returning the wrong value), you'll get a type error right when defining the type fields in `User.$fields({...})`.
+These methods compose freely. If the composition produces the wrong type for the field, the error surfaces when you pass the resolver into `User.$fields({…})`.
 :::
 
-The `Query` resolvers are implemented as any other type resolvers.
+`Query` resolvers work the same way:
 
 ```typescript title="src/modules/user/query.resolver.ts"
 import { UserModule } from "./typedef.ts";
@@ -132,19 +122,16 @@ export default UserModule.$schema({
 The module will be automatically imported in `src/modules/index.ts`.
 :::
 
-## Resolver Parameters
+## Resolver parameters
 
-Resolvers receive the following parameters:
+Every resolver receives a single argument with four properties:
 
-- `source`: The parent object.
-  - See [custom types](./custom-types.mdx) on how to customize the type of the source.
-- `args`: The arguments of the field.
-- `ctx`: The context object.
-  - See [custom types](./custom-types.mdx) on how to customize the type of the context.
-- `info`: The GraphQL info object.
-  - See [custom types](./custom-types.mdx) on how to customize the type of the info.
+- `source` — the parent object. Customize its type via the [`ObjectTypes` interface](./custom-types#object-types).
+- `args` — the field arguments, typed from the schema.
+- `ctx` — the request context. See [Context](./context).
+- `info` — the `GraphQLResolveInfo` for the field.
 
-## Extending Types in a Separate Module
+## Extending a type from another module
 
 `src/modules/user-extended/user-posts.gql`:
 
@@ -155,9 +142,7 @@ extend type User {
 }
 ```
 
-### Implementing Extended Resolvers
-
-After defining your schema, implement the resolvers in their respective modules `src/modules/user-posts/resolvers.ts`:
+Resolve the extended field in the new module — `src/modules/user-posts/resolvers.ts`:
 
 ```typescript
 import { UserExtendedModule } from "./typedef.ts";
@@ -175,20 +160,10 @@ export default User.$fields({
 });
 ```
 
-## Best Practices
+:::tip
+Override source types via the [`ObjectTypes` interface](./custom-types.mdx#object-types) when your data layer's shape diverges from the GraphQL schema.
+:::
 
-1. Module Organization
-
-- Keep related schema and resolvers together
-- Use meaningful file names
-- Follow consistent module structure
-
-2. Type Safety
-
-- Leverage generated types from schema
-- Enable strict type checking
-
-3. Error Handling
-
-- User appropriate [GraphQL errors](./errors.mdx)
-- Provide meaningful error messages
+:::tip
+Throw typed errors from [`@baeta/errors`](./errors.mdx) so clients can branch on `extensions.code` instead of message strings.
+:::

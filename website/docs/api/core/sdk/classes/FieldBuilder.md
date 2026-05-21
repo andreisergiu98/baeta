@@ -132,7 +132,7 @@
 </td>
 <td>
 
-(`mw`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMethods: () =\> FieldMetho...
+(`mw`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly commit: () =\> FieldBuilder\<Result, Source, Context, Args, Info\>; readonly commitToMethods: () =\> FieldMethods\<Result, Source, Context, Args, Info\>; \}
 
 </td>
 </tr>
@@ -144,7 +144,7 @@
 </td>
 <td>
 
-(`id`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMethods: () =\> FieldMetho...
+(`id`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly commit: () =\> FieldBuilder\<Result, Source, Context, Args, Info\>; readonly commitToMethods: () =\> FieldMethods\<Result, Source, Context, Args, Info\>; \}
 
 </td>
 </tr>
@@ -192,7 +192,7 @@
 </td>
 <td>
 
-(`meta`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly commit: () =\> FieldBuilder\<...\>; readonly commitToMethods: () =\> FieldMetho...
+(`meta`) => \{ readonly type: string; readonly field: string; readonly addMiddleware: (mw: Middleware\<Result, Source, Context, Args, Info\>) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly commit: () =\> FieldBuilder\<Result, Source, Context, Args, Info\>; readonly commitToMethods: () =\> FieldMethods\<Result, Source, Context, Args, Info\>; \}
 
 </td>
 </tr>

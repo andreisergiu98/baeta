@@ -5,11 +5,11 @@ title: Plugins
 
 # Plugins
 
-Plugins are part of the core building blocks in Baeta that add functionality at build time. They can generate code, execute commands, transform files, and more.
+Plugins extend Baeta at **build time**: they generate code, run external commands, transform files, and shape the output of `yarn build`. They are different from [app plugins](../advanced/app-plugins) (`authAppPlugin`, `complexityAppPlugin`), which extend Baeta at **runtime**.
 
 ## Configuration
 
-Plugins are registered in your Baeta configuration file `baeta.ts`:
+Register plugins in `baeta.ts`:
 
 ```typescript
 import { defineConfig } from "@baeta/cli";
@@ -37,5 +37,5 @@ export default defineConfig({
 ```
 
 :::tip
-Sometimes the order of plugins matters. Check the plugin documentation for any specific requirements.
+Order matters for some plugins. [Gitignore](./gitignore) should run first; the others are mostly order-independent. Each plugin's page calls out anything special.
 :::

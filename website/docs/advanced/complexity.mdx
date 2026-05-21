@@ -5,16 +5,15 @@ title: Complexity
 
 # Query Complexity
 
-Baeta provides a query complexity analysis system that helps protect your GraphQL API from resource-exhausting queries. It calculates the complexity of incoming queries and rejects those that exceed configured limits.
+`@baeta/complexity` scores every incoming query and rejects requests that exceed your configured budget. The default scoring is "1 per field, list multiplier on list types" — override either globally or per field as needed.
 
-## Key Features
+## At a glance
 
-- Automatic complexity calculation for all fields
-- Customizable complexity per field
-- Dynamic limits based on context
-- List operation handling with multipliers
-- Depth and breadth limitations
-- Context-aware complexity rules
+- Automatic complexity scoring for every field.
+- Per-field overrides via `$use(complexity(...))`.
+- Limits computed dynamically from `ctx` (e.g. higher for authenticated users).
+- List multiplier reflects breadth across `[T]` fields.
+- Hard caps on query depth and breadth.
 
 ## Installation
 
@@ -22,17 +21,16 @@ import { PackageManagerAdd } from "@site/components/package-manager";
 
 <PackageManagerAdd package="@baeta/complexity" />
 
-## Basic Setup
+## Basic setup
 
 ### 1. Create the app plugin
 
-`createComplexity` returns two things:
+`createComplexity` returns:
 
-- `complexity` — a helper passed to `$use` to override settings for specific types or fields.
-- `complexityAppPlugin` — the app plugin you register on `createApplication`.
+- `complexity` — a helper for `$use` to override settings on a type or field.
+- `complexityAppPlugin` — register this on `createApplication`.
 
-```typescript
-// src/lib/complexity.ts
+```typescript title="src/lib/complexity.ts"
 import { createComplexity } from "@baeta/complexity";
 import type { Context } from "../types/context.ts";
 
@@ -60,8 +58,7 @@ export const { complexity, complexityAppPlugin } = createComplexity<Context>({
 
 ### 2. Register the app plugin
 
-```typescript
-// src/app.ts
+```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
 import { complexityAppPlugin } from "./lib/complexity.ts";
 import modules from "./modules/index.ts";
@@ -73,18 +70,18 @@ const baeta = createApplication({
 ```
 
 :::note
-The `complexityAppPlugin` must be passed to `createApplication`. If a module uses `complexity(...)` but the plugin isn't registered, Baeta will throw at schema build time.
+Forgetting to register `complexityAppPlugin` is a build-time error: if any module uses `complexity(...)` without the plugin, Baeta throws at schema build.
 :::
 
 :::tip
-For most APIs, register `authAppPlugin` _before_ `complexityAppPlugin` so unauthenticated requests bounce before any cost calculation runs — complexity-first is cheaper on the I/O side but leaks schema-shape information to anonymous callers. See [App Plugins](./app-plugins#plugin-ordering) for the full tradeoff.
+Register `authAppPlugin` **before** `complexityAppPlugin` for most APIs — unauthenticated requests bounce before any cost calculation runs. Complexity-first saves I/O on expensive-but-doomed queries but leaks schema shape to anonymous callers. See [App Plugins](./app-plugins#plugin-ordering) for the full tradeoff.
 :::
 
-## Customizing Complexity Rules
+## Customizing the rules
 
-### Field-Level Configuration
+### Per-field overrides
 
-You can override complexity settings for specific fields or types by chaining `$use(complexity(...))`:
+Chain `$use(complexity(...))` on a field or type to override the defaults:
 
 ```typescript
 import { complexity } from "../../lib/complexity.ts";
@@ -124,9 +121,9 @@ const usersQuery = Query.users
   });
 ```
 
-### Dynamic Complexity Rules
+### Dynamic rules
 
-Complexity rules can be determined dynamically based on context or arguments:
+Compute the cost from `ctx` or `args`:
 
 ```typescript
 const usersQuery = Query.users
@@ -143,12 +140,12 @@ const usersQuery = Query.users
   });
 ```
 
-## How Complexity is Calculated
+## How the score is calculated
 
-1. Each field has a base complexity (default: 1)
-2. List fields are multiplied by the list multiplier
-3. Nested fields add to the total complexity
-4. The total is compared against the configured limit
+1. Every field gets a base complexity (default: `1`).
+2. List fields multiply their subtree by the list multiplier.
+3. Nested costs add up.
+4. The total is compared against the configured `complexity` limit; over-budget queries fail.
 
 Example:
 

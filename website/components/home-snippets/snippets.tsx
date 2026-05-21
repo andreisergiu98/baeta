@@ -94,6 +94,7 @@ extend type User {
 				simple and consistent.
 			</>
 		),
+		path: 'modules/user/user.queries.ts',
 		language: 'typescript',
 		snippet: `import { auth, rule, scope } from "./lib/auth.ts";
 import { UserModule } from "./typedef.ts";
@@ -115,30 +116,36 @@ const userQuery = Query.user
 				predictably when mutations occur.
 			</>
 		),
+		path: 'modules/user/user.cache.ts',
 		language: 'typescript',
-		snippet: `import { defineQuery } from "@baeta/cache";
+		snippet: `import { createCache, defineQuery } from "@baeta/cache";
+import { redisClient } from "./lib/redis.ts";
+import { UserModule } from "./typedef.ts";
 
-const { Query, Mutation, User } = UserModule;
+const { Query, Mutation } = UserModule;
 
-export const userCache = User.$createCache()
+export const userCache = createCache(redisClient, {
+  name: "UserCache",
+  parse: JSON.parse,
+  serialize: JSON.stringify,
+})
   .withQueries({
     findUser: defineQuery({
-      resolve: async (args: { id?: string }) => {
-        return dataSource.user.find(args);
+      resolve: async (args: { id: string }) => {
+        return dataSource.user.findUnique({ where: args });
       },
     }),
   })
   .build();
 
-const userQuery = Query.user
-  .$resolveCache(userCache.queries.findUser, ({ args }) => ({
-    id: args.where.id,
-  }));
+const userQuery = Query.user.map(({ args }) =>
+  userCache.queries.findUser({ id: args.where.id }),
+);
 
 const updateUserMutation = Mutation.updateUser
   .$use(async (next) => {
     const user = await next();
-    await userCache.update(user);
+    if (user) await userCache.update(user);
     return user;
   })
   .resolve(async ({ args }) => {
@@ -154,8 +161,11 @@ const updateUserMutation = Mutation.updateUser
 				transformation, or any custom logic.
 			</>
 		),
+		path: 'lib/directives/trim.ts',
 		language: 'typescript',
-		snippet: `const trimDirective = createInputDirective({
+		snippet: `import { createInputDirective } from "@baeta/core";
+
+export const trimDirective = createInputDirective({
   name: "trim",
   target: "scalar",
   resolve: ({ getValue, setValue }) => {

@@ -151,7 +151,7 @@
 </td>
 <td>
 
-(`middleware`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethods: \<P = neve...
+(`middleware`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> SubscriptionBuilder\<Result, Source, Context, Args, Info\>; readonly commitToMethods: \<P = never\>() =\> SubscriptionMethods\<Result, Source, Context, Args, Info, P\>; \}
 
 </td>
 </tr>
@@ -163,7 +163,7 @@
 </td>
 <td>
 
-(`id`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethods: \<P = neve...
+(`id`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> SubscriptionBuilder\<Result, Source, Context, Args, Info\>; readonly commitToMethods: \<P = never\>() =\> SubscriptionMethods\<Result, Source, Context, Args, Info, P\>; \}
 
 </td>
 </tr>
@@ -211,7 +211,7 @@
 </td>
 <td>
 
-(`meta`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> SubscriptionBuilder\<...\>; readonly commitToMethods: \<P = neve...
+(`meta`) => \{ readonly field: string; readonly addMiddleware: (middleware: Middleware\<Subscription\<unknown\>, Source, Context, Args, Info\>) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> SubscriptionBuilder\<Result, Source, Context, Args, Info\>; readonly commitToMethods: \<P = never\>() =\> SubscriptionMethods\<Result, Source, Context, Args, Info, P\>; \}
 
 </td>
 </tr>

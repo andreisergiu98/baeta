@@ -90,7 +90,7 @@ const usersQuery = Query.users.resolve(() => {
   return dataSource.user.findMany();
 });
 
-Query.$fields({
+export default Query.$fields({
   user: userQuery,
   users: usersQuery,
 });
@@ -99,20 +99,13 @@ Query.$fields({
 #### 3. Add authorization
 
 ```typescript
-import { auth } from "./lib/auth.ts";
+import { auth, rule, scope } from "./lib/auth.ts";
 import { UserModule } from "./typedef.ts";
 
 const { Query } = UserModule;
 
 const userQuery = Query.user
-  .$use(
-    auth({
-      $or: {
-        isPublic: true,
-        isLoggedIn: true,
-      },
-    }),
-  )
+  .$use(auth(rule.or(scope.isPublic, scope.isLoggedIn)))
   .resolve(async ({ args }) => {
     // ...
   });
@@ -124,13 +117,17 @@ const userQuery = Query.user
 import { createCache, defineQuery } from "@baeta/cache";
 import { redisClient } from "./lib/redis.ts";
 
-const { Query, Mutation, User } = UserModule;
+const { Query, Mutation } = UserModule;
 
-export const userCache = createCache(redisClient, { name: "UserCache" })
+export const userCache = createCache(redisClient, {
+  name: "UserCache",
+  parse: JSON.parse,
+  serialize: JSON.stringify,
+})
   .withQueries({
     findUser: defineQuery({
-      resolve: async (args: { id?: string | null }) => {
-        return dataSource.user.find(args);
+      resolve: async (args: { id: string }) => {
+        return dataSource.user.findUnique({ where: args });
       },
     }),
   })
@@ -143,7 +140,7 @@ const userQuery = Query.user.map(({ args }) =>
 const updateUserMutation = Mutation.updateUser
   .$use(async (next) => {
     const user = await next();
-    await userCache.update(user);
+    if (user) await userCache.update(user);
     return user;
   })
   .resolve(async ({ args }) => {

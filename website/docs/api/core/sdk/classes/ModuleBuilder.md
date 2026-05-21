@@ -165,7 +165,7 @@
 </td>
 <td>
 
-(`middleware`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
+(`middleware`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> any; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> ModuleBuilder\<Context, Info, TypesBuilders, TypesResolvers\>; readonly commitToMethods: () =\> ModuleMethods\<Context, Info, TypesBuilders, TypesResolvers\>; \}
 
 </td>
 </tr>
@@ -177,7 +177,7 @@
 </td>
 <td>
 
-(`id`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
+(`id`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> any; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> ModuleBuilder\<Context, Info, TypesBuilders, TypesResolvers\>; readonly commitToMethods: () =\> ModuleMethods\<Context, Info, TypesBuilders, TypesResolvers\>; \}
 
 </td>
 </tr>
@@ -189,7 +189,7 @@
 </td>
 <td>
 
-(`transformer`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
+(`transformer`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> any; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> ModuleBuilder\<Context, Info, TypesBuilders, TypesResolvers\>; readonly commitToMethods: () =\> ModuleMethods\<Context, Info, TypesBuilders, TypesResolvers\>; \}
 
 </td>
 </tr>
@@ -225,7 +225,7 @@
 </td>
 <td>
 
-(`meta`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> ...; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> ...; readonly addRequiredPluginId: (id: PluginId) =\> ...; readonly mergeMeta: (meta: Map\<...\>) =\> ...; readonly commit: () =\> ModuleB...
+(`meta`) => \{ readonly addMiddleware: (middleware: Middleware\<unknown, unknown, Context, unknown, Info\>) =\> any; readonly addTransformer: (transformer: SchemaTransformer \| SchemaTransformer\[\]) =\> any; readonly addRequiredPluginId: (id: PluginId) =\> any; readonly mergeMeta: (meta: Map\<symbol, unknown\>) =\> any; readonly commit: () =\> ModuleBuilder\<Context, Info, TypesBuilders, TypesResolvers\>; readonly commitToMethods: () =\> ModuleMethods\<Context, Info, TypesBuilders, TypesResolvers\>; \}
 
 </td>
 </tr>

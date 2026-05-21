@@ -1,18 +1,16 @@
 ---
-sidebar_position: 90
+sidebar_position: 45
 ---
 
 # Context Store
 
-Context Store is a feature in Baeta that provides a pattern for managing request-scoped data with lazy loading and caching capabilities. It allows you to define values that can be loaded on-demand and cached throughout the request lifecycle, while maintaining full type safety.
+A context store is a typed, request-scoped slot on the context that loads its value lazily and memoizes the result for the rest of the request. It's the idiomatic way to share per-request data (the current user, the active organization, a tenant config) between resolvers without padding the `Context` type with optional fields or paying for queries you may not use.
 
-## Why Use Context Store?
+## Why use a context store?
 
-Context Store solves several common problems in GraphQL APIs:
+### Precise types for auth-sensitive resolvers
 
-### 1. Better Type Safety for Authentication
-
-Without Context Store, handling both authenticated and public routes often leads to compromised type safety:
+Without a store, mixing authenticated and public routes pushes you toward an optional `user` on the context. Every authenticated resolver then has to re-check for `null`:
 
 ```typescript
 // Without Context Store
@@ -30,7 +28,7 @@ const profileQuery = Query.profile.resolve(({ ctx }) => {
 });
 ```
 
-With Context Store, you can have precise types for each use case:
+With a store you get one loader per audience and no defensive null checks:
 
 ```typescript
 // With Context Store
@@ -38,14 +36,9 @@ const optionalUser = await getOptionalUser(ctx); // User | null - for public rou
 const user = await getUser(ctx); // User - for authenticated routes, automatically throws if not authenticated
 ```
 
-### 2. Lazy Loading & Performance
+### Lazy loading
 
-Context Store prevents unnecessary database queries by:
-
-- Loading data only when it's actually needed
-- Caching the result for the entire request lifecycle
-
-For example:
+Without a store, anything you put on the context runs for every request, even when no resolver needs it. A store defers the work to the first call:
 
 ```typescript
 // Without Context Store
@@ -58,9 +51,9 @@ const user = await getUser(ctx); // Only queries DB when this line is executed
 // And subsequent calls in the same request will use cached data
 ```
 
-### 3. Request-Scoped Caching
+### Request-scoped memoization
 
-Many applications repeatedly fetch the same data within a single request:
+Repeated reads in the same request return the cached value: one DB hit per store per request, regardless of how many resolvers ask.
 
 ```typescript
 // Without caching - hits database multiple times
@@ -74,60 +67,63 @@ const userAgain = await getUser(ctx); // Uses cached data
 
 ## Creating a Store
 
-The simplest way to create a store is `createContextStoreWithLoader`, which bundles the loader function with the store definition:
+A store is created with `createContextStore`. It returns a `[get, setLoader]` tuple. `get(ctx)` reads the value (triggering the loader on first access) and `setLoader(ctx, loader)` registers the loader against a context object.
 
-```typescript
-import { createContextStoreWithLoader } from "@baeta/core";
-import { UnauthenticatedError } from "@baeta/errors";
+```typescript title="src/store.ts"
+import { createContextStore } from "@baeta/core";
 import type { User } from "./__generated__/types.ts";
 import type { Context } from "./types/context.ts";
 
+export async function loadOptionalUser(ctx: Context) {
+  if (!ctx.userId) {
+    return null;
+  }
+  return db.user.findUnique({ where: { id: ctx.userId } });
+}
+
+// Symbols are used as store keys so two stores can't collide by name;
+// each `Symbol(...)` call creates a fresh, unique identity.
 const optionalUserStoreKey = Symbol("optionalUserStore");
 
-export const [getOptionalUser, initOptionalUserStore] =
-  createContextStoreWithLoader<User | null, Context>(
-    optionalUserStoreKey,
-    async (ctx) => {
-      if (!ctx.userId) {
-        return null;
-      }
-      return db.user.findUnique({ where: { id: ctx.userId } });
-    },
-  );
+export const [getOptionalUser, setOptionalUserLoader] =
+  createContextStore<User | null>(optionalUserStoreKey);
 ```
 
-The returned tuple gives you:
+The returned tuple:
 
-- **`getOptionalUser(ctx)`** — retrieves the value, triggering the loader on first access
-- **`initOptionalUserStore(ctx)`** — initializes the store on the context (call this during context creation)
+- **`getOptionalUser(ctx)`**: retrieves the value, triggering the loader on first access.
+- **`setOptionalUserLoader(ctx, loader)`**: registers the loader against the context. Called once during context creation.
 
 ## Chaining Stores
 
 Stores can build upon each other. Here a required user store chains off the optional one:
 
-```typescript
+```typescript title="src/store.ts"
+import { UnauthenticatedError } from "@baeta/errors";
+
+export async function loadUser(ctx: Context) {
+  const user = await getOptionalUser(ctx);
+  if (!user) {
+    throw new UnauthenticatedError();
+  }
+  return user;
+}
+
 const userStoreKey = Symbol("userStore");
 
-export const [getUser, initUserStore] =
-  createContextStoreWithLoader<User, Context>(
-    userStoreKey,
-    async (ctx) => {
-      const user = await getOptionalUser(ctx);
-      if (!user) {
-        throw new UnauthenticatedError();
-      }
-      return user;
-    },
-  );
+export const [getUser, setUserLoader] =
+  createContextStore<User>(userStoreKey);
 ```
 
 Now `getUser(ctx)` returns `User` (never null) and automatically throws if the user isn't authenticated.
 
 ## Initializing Stores
 
-Initialize your stores during context creation:
+Register loaders during context creation:
 
-```typescript
+```typescript title="src/app.ts"
+import { loadOptionalUser, loadUser, setOptionalUserLoader, setUserLoader } from "./store.ts";
+
 export const yoga = createYoga<ServerContext, Context>({
   schema: baeta.schema,
   context: () => {
@@ -135,13 +131,15 @@ export const yoga = createYoga<ServerContext, Context>({
       userId: "1",
     };
 
-    initOptionalUserStore(ctx);
-    initUserStore(ctx);
+    setOptionalUserLoader(ctx, () => loadOptionalUser(ctx));
+    setUserLoader(ctx, () => loadUser(ctx));
 
     return ctx;
   },
 });
 ```
+
+The loader is wrapped in a closure that captures the freshly-built `ctx`, so each request gets its own store.
 
 ## Using Stores in Resolvers
 
@@ -179,11 +177,13 @@ const exampleQuery = Query.example.resolve(async ({ ctx }) => {
 });
 ```
 
-## Passing Arguments to Loaders
+## Shortcut: `createContextStoreWithLoader`
 
-`createContextStoreWithLoader` supports additional arguments beyond context. This is useful when the loader needs data that's only available at initialization time:
+When the loader doesn't need to be assembled at initialization time, `createContextStoreWithLoader` bundles the loader with the store definition. It's a thin wrapper over `createContextStore` that swaps the `setLoader(ctx, loader)` step for an `init(ctx, ...args)` call.
 
-```typescript
+```typescript title="src/store.ts"
+import { createContextStoreWithLoader } from "@baeta/core";
+
 const orgStoreKey = Symbol("orgStore");
 
 export const [getOrg, initOrgStore] =
@@ -193,33 +193,16 @@ export const [getOrg, initOrgStore] =
       return db.organization.findUniqueOrThrow({ where: { id: orgId } });
     },
   );
+```
 
+Initialize it the same way as `createContextStore`, passing any extra args after `ctx`:
+
+```typescript title="src/app.ts"
 // During context creation
 initOrgStore(ctx, requestOrgId);
 ```
 
-## Advanced: Manual Loader Setup
-
-For cases where you need full control over the loader, use `createContextStore` directly. This separates store creation from loader assignment:
-
-```typescript
-import { createContextStore } from "@baeta/core";
-
-const optionalUserStoreKey = Symbol("optionalUserStore");
-
-export const [getOptionalUser, setOptionalUserLoader] =
-  createContextStore<User | null>(optionalUserStoreKey);
-
-// During context creation, provide the loader as a closure
-setOptionalUserLoader(ctx, () => {
-  if (!ctx.userId) {
-    return null;
-  }
-  return db.user.findUnique({ where: { id: ctx.userId } });
-});
-```
-
-This is useful when the loader depends on values that can't be passed as simple arguments, or when you want to compose loaders dynamically.
+Reach for `createContextStoreWithLoader` when the loader is a pure function of `(ctx, ...args)`. Stick with `createContextStore` when the loader needs to close over state that's only available at request time (e.g. headers, auth tokens, derived helpers).
 
 ## Configuration Options
 

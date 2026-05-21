@@ -5,7 +5,7 @@ title: Environment
 
 # Environment Parser
 
-Baeta provides a type-safe environment variable parser that helps you validate and transform environment variables at runtime while maintaining full type safety.
+Baeta provides a type-safe environment variable parser that validates and transforms environment variables at runtime.
 
 ## Installation
 
@@ -43,19 +43,13 @@ export const config = {
 };
 ```
 
-## Configuration Options
-
-### Types
-
-The parser supports three basic types:
+## Supported types
 
 - `string`
 - `number`
 - `boolean`
 
-## TypeScript Support
-
-The parser provides full type inference:
+## Type inference
 
 ```typescript
 const config = {
@@ -71,20 +65,20 @@ const config = {
 // config.port is inferred as number
 const port: number = config.port; // OK
 const port: string = config.port; // Type error
-const prefix: string = config.cachePrefix; // Possible type undefined is not assignable to string
+const prefix: string = config.cachePrefix; // Error: 'string | undefined' is not assignable to 'string'
 ```
 
-## Error Handling
+## Error handling
 
-The parser will throw descriptive errors when:
+The parser throws on:
 
-- A required variable is missing
-- Type conversion fails (e.g., parsing a number)
-- Custom resolver throws an error
+- a required variable that's missing,
+- a type conversion failure (e.g. `"abc"` for a `number`),
+- an error thrown by a custom `resolver`.
 
 ## Examples
 
-### Required Variables
+### Required variables
 
 ```typescript
 const config = {
@@ -95,7 +89,7 @@ const config = {
 };
 ```
 
-### Default Values
+### Default values
 
 ```typescript
 const config = {
@@ -106,7 +100,7 @@ const config = {
 };
 ```
 
-### Custom Resolvers
+### Custom resolvers
 
 ```typescript
 const config = {
@@ -118,9 +112,7 @@ const config = {
 };
 ```
 
-### Complex Configuration Example
-
-Here's a more comprehensive example showing various use cases:
+### A larger example
 
 ```typescript
 import { createEnvParser } from "@baeta/env";
@@ -161,11 +153,13 @@ export const config = {
 };
 ```
 
-## Environment Sources
+## Environment sources
+
+The first argument to `createEnvParser` is a `(key) => string | undefined` lookup — point it at whichever environment your runtime exposes.
 
 ### Node.js
 
-Using Node's built-in `process.env`:
+`process.env`:
 
 ```typescript
 const parse = createEnvParser((key) => process.env[key]);
@@ -173,7 +167,7 @@ const parse = createEnvParser((key) => process.env[key]);
 
 ### Deno
 
-Using Deno's built-in Deno.env:
+`Deno.env`:
 
 ```typescript
 const parse = createEnvParser((key) => Deno.env.get(key));
@@ -181,7 +175,7 @@ const parse = createEnvParser((key) => Deno.env.get(key));
 
 ### Bun
 
-Using Bun's built-in process.env or Bun.env:
+Bun exposes both `process.env` (Node-compatible) and `Bun.env`:
 
 ```typescript
 // Using process.env (Node.js compatible)
@@ -193,7 +187,7 @@ const parse = createEnvParser((key) => Bun.env[key]);
 
 ### Vite
 
-When using Vite, you can access environment variables through `import.meta.env`:
+Vite exposes vars via `import.meta.env`:
 
 ```typescript
 const parse = createEnvParser((key) => import.meta.env[key]);
@@ -201,9 +195,7 @@ const parse = createEnvParser((key) => import.meta.env[key]);
 
 ### Next.js
 
-Next.js requires special handling of environment variables during bundling. Only variables prefixed with `NEXT_PUBLIC_` are included in the client bundle, and they must be accessed via `process.env.NEXT_PUBLIC_*` directly in your code, since the bundler inlines them.
-
-To work around this limitation, you can create a map of your environment variables:
+Next.js inlines `NEXT_PUBLIC_*` variables at build time — they have to be accessed via literal `process.env.NEXT_PUBLIC_*` so the bundler can replace them. A small mapping keeps the parser API usable:
 
 ```typescript
 const envMap = {
@@ -220,5 +212,3 @@ export const config = {
   }),
 };
 ```
-
-Or you can edit the Webpack configuration to include a global map of public variables.

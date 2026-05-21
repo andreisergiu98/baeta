@@ -4,25 +4,25 @@ sidebar_position: 2
 
 # Stability
 
-This document outlines the stability status of Baeta packages. Understanding these statuses helps you make informed decisions about which features to use in production.
+Each Baeta package falls into one of three stability tiers. Pick the ones that fit your tolerance for change.
 
-## Stability Levels
+## Stability levels
 
 ### 🟢 Stable
 
-Tested packages with stable APIs. Breaking changes are only introduced with major version bumps. While these packages are reliable, note that Baeta is still in its early stages with a small user base.
+Tested, with a stable public API. Breaking changes only land in major version bumps. Baeta as a project is still young, but these packages are safe to depend on.
 
 ### 🟡 Beta
 
-Feature complete but may receive breaking changes in minor versions. Suitable for most non-critical production use cases.
+Feature-complete, but may take breaking changes in minor versions. Fine for most production use cases — pin minor versions if you want extra safety.
 
-### 🟠 Early Testing
+### 🟠 Early testing
 
-Experimental packages that may undergo significant changes. Not recommended for production use.
+Experimental. Expect significant API churn. Not recommended for production.
 
-## Package Status
+## Package status
 
-### Core Packages
+### Core packages
 
 | Package           | Status    | Tests |
 | ----------------- | --------- | :---: |
@@ -32,14 +32,14 @@ Experimental packages that may undergo significant changes. Not recommended for 
 | @baeta/directives | 🟢 Stable |  ✅   |
 | @baeta/cache      | 🟡 Beta   |  ✅   |
 
-### App Plugins
+### App plugins
 
 | Package           | Status    | Tests |
 | ----------------- | --------- | :---: |
 | @baeta/auth       | 🟢 Stable |  ✅   |
-| @baeta/complexity | 🟡 Beta   |  ✅   |
+| @baeta/complexity | 🟢 Stable |  ✅   |
 
-### Cache Adapters
+### Cache adapters
 
 | Package                 | Status  | Tests |
 | ----------------------- | ------- | :---: |
@@ -55,19 +55,26 @@ Experimental packages that may undergo significant changes. Not recommended for 
 | @baeta/subscriptions-cloudflare | 🟡 Beta   |  ❌   |
 | @baeta/subscriptions-pubsub     | 🟢 Stable |  ✅   |
 
-### Development Tools
+### Federation
 
-| Package                  | Status    |
-| ------------------------ | --------- |
-| @baeta/cli               | 🟢 Stable |
-| @baeta/plugin-cloudflare | 🟢 Stable |
-| @baeta/plugin-directives | 🟢 Stable |
-| @baeta/plugin-exec       | 🟢 Stable |
-| @baeta/plugin-gitignore  | 🟢 Stable |
-| @baeta/plugin-graphql    | 🟢 Stable |
-| @baeta/plugin-pagination | 🟢 Stable |
-| @baeta/plugin-prisma     | 🟢 Stable |
+| Package                  | Status  | Tests |
+| ------------------------ | ------- | :---: |
+| @baeta/federation        | 🟡 Beta |  ✅   |
+| @baeta/plugin-federation | 🟡 Beta |  ✅   |
 
-## Testing Coverage
+### Development tools
 
-We're actively working on improving our test coverage. Packages marked with ✅ have unit tests, while those marked with ❌ are pending test implementation.
+| Package                  | Status    | Tests |
+| ------------------------ | --------- | :---: |
+| @baeta/cli               | 🟢 Stable |  ✅   |
+| @baeta/plugin-cloudflare | 🟢 Stable |  ❌   |
+| @baeta/plugin-directives | 🟢 Stable |  ✅   |
+| @baeta/plugin-exec       | 🟢 Stable |  ✅   |
+| @baeta/plugin-gitignore  | 🟢 Stable |  ✅   |
+| @baeta/plugin-graphql    | 🟢 Stable |  ✅   |
+| @baeta/plugin-pagination | 🟢 Stable |  ✅   |
+| @baeta/plugin-prisma     | 🟢 Stable |  ❌   |
+
+## Testing coverage
+
+Every runtime package ships with unit tests except where flagged ❌ in the tables above. Test coverage is enforced in CI and gates releases — a ❌ row means the package has no public test suite yet, not that its tests are failing. Coverage gaps for current ❌ entries are tracked as project work.

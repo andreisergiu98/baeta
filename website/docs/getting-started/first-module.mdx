@@ -3,11 +3,11 @@ sidebar_position: 3
 description: "Create your first GraphQL module with Baeta"
 ---
 
-# First Module
+# First module
 
-Learn how to create your first GraphQL module with Baeta. We'll create a simple user module to demonstrate Baeta's schema-first and modular approach.
+A module bundles a slice of your GraphQL schema (`.gql`), its generated types (`typedef.ts`), and its resolvers (`*.ts`) into a single folder. This page walks through building a small `user` module end-to-end.
 
-## Creating a Module
+## Creating a module
 
 ### 1. Define the schema
 
@@ -30,23 +30,19 @@ You can split your schema into multiple files (types, inputs, queries) as your m
 
 ### 2. Generate the types
 
-Generate TypeScript definitions for your schema:
-
 ```bash
 yarn build
-# or
-yarn baeta generate
 ```
 
-This creates `src/modules/user/typedef.ts` with all necessary type definitions.
+This produces `src/modules/user/typedef.ts` with the types for everything declared in `user.gql`.
 
 :::tip
-Baeta can watch for changes with the `--watch` flag.
+Use `--watch` (or the `start` script wired up in [Configuration](./configuration#2-wire-up-packagejson-scripts)) to regenerate on file change.
 :::
 
-### 3. Create the resolvers
+### 3. Implement the resolvers
 
-Create `src/modules/user/resolvers.ts` to implement your query:
+`src/modules/user/resolvers.ts`:
 
 ```typescript
 import { UserModule } from "./typedef.ts";
@@ -69,14 +65,12 @@ export const queryResolver = Query.$fields({
 ```
 
 :::tip
-The `key` is a helper that picks the specified field from the source object and returns it.
-
-By default the source of a type is the same as the GraphQL type itself, but the source can always be overridden.
+`key("name")` is shorthand for `.resolve(({ source }) => source.name)`. The default source for a type matches the GraphQL type itself; override it via [Custom Types](../guides/custom-types#object-types) when your data layer's shape differs.
 :::
 
 ### 4. Export the module
 
-Create `src/modules/user/index.ts` to export your module:
+`src/modules/user/index.ts`:
 
 ```typescript
 import { queryResolver, userResolver } from "./resolvers.ts";
@@ -88,18 +82,18 @@ export default UserModule.$schema({
 });
 ```
 
-## Project Structure
+## Project structure
 
-Your module should now look like this:
+The module now lives in its own folder:
 
 ```
 src/modules/user/
-├── user.gql        # Schema definition
-├── resolvers.ts    # Query/Mutation implementations
-├── typedef.ts      # Auto-generated types
-└── index.ts        # Module export
+├── user.gql        # schema
+├── resolvers.ts    # query/mutation implementations
+├── typedef.ts      # generated types (don't edit)
+└── index.ts        # module export
 ```
 
-## Next Steps
+## Next
 
-Now that you have your first module, learn how to [extend it with another module](./extend-modules).
+[Extend the module with a second one](./extend-modules) to see how Baeta stitches modules together.

@@ -5,7 +5,7 @@ title: Directives
 
 # Built-in Directives
 
-Baeta provides a set of built-in directives through the `@baeta/plugin-directives` package.
+`@baeta/plugin-directives` ships a catalog of ready-made directives for the common cases: string/number/object validation and a few string transforms. Enable the plugin and use the directives directly in your `.gql` files — no extra wiring needed.
 
 ## Installation
 
@@ -35,9 +35,9 @@ export default defineConfig({
 
 For the full configuration interface, see the [`DirectivesOptions`](/docs/api/plugin-directives/interfaces/DirectivesOptions) API reference.
 
-## Available Directives
+## Available directives
 
-### String Validation
+### String validation
 
 ```graphql
 directive @validString(
@@ -53,7 +53,7 @@ directive @validString(
 ) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 ```
 
-### Number Validation
+### Number validation
 
 ```graphql
 directive @validFloat(
@@ -77,13 +77,13 @@ directive @validInt(
 ) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 ```
 
-### Object Validation
+### Object validation
 
 ```graphql
 directive @constraints(minFields: Int, maxFields: Int) on INPUT_OBJECT
 ```
 
-### String Transformation
+### String transformation
 
 ```graphql
 directive @trim(
@@ -94,7 +94,7 @@ directive @lower on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 ```
 
-## Usage Examples
+## Usage
 
 ```graphql
 input UserInput @constraints(minFields: 2) {
@@ -109,4 +109,4 @@ type Mutation {
 }
 ```
 
-For more examples, check out the [Baeta directives example](https://github.com/andreisergiu98/baeta/tree/main/examples/directives).
+See the [directives example](https://github.com/andreisergiu98/baeta/tree/main/examples/directives) for a runnable setup.

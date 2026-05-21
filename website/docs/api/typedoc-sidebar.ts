@@ -923,6 +923,11 @@ const typedocSidebar: SidebarsConfig = {
                 },
                 {
                   type: "doc",
+                  id: "api/core/index/functions/createContextStoreWithLoader",
+                  label: "createContextStoreWithLoader"
+                },
+                {
+                  type: "doc",
                   id: "api/core/index/functions/createInputDirective",
                   label: "createInputDirective"
                 }
@@ -1588,6 +1593,11 @@ const typedocSidebar: SidebarsConfig = {
           type: "category",
           label: "Interfaces",
           items: [
+            {
+              type: "doc",
+              id: "api/generator-sdk/interfaces/FileLintOptions",
+              label: "FileLintOptions"
+            },
             {
               type: "doc",
               id: "api/generator-sdk/interfaces/FileOptions",

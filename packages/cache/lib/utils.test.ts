@@ -1,12 +1,6 @@
 import test from '@baeta/testing';
 import type { ItemRef } from './item.ts';
-import {
-	alignItemsWithRefs,
-	arrayIsComplete,
-	fillNullItemsWithFallback,
-	toArray,
-	zip,
-} from './utils.ts';
+import { alignItemsWithRefs, arrayIsComplete, toArray, zip } from './utils.ts';
 
 test('arrayIsComplete - returns false for null input', (t) => {
 	const result = arrayIsComplete(null);
@@ -57,60 +51,6 @@ test('alignItemsWithRefs - should handle empty arrays', (t) => {
 	const items: unknown[] = [];
 	const result = alignItemsWithRefs(refs, items);
 	t.deepEqual(result, []);
-});
-
-test('fillNullItemsWithFallback - handles non null items', (t) => {
-	const items = [1, 2, 3, 4];
-	const fallbacks: number[] = [];
-	const result = fillNullItemsWithFallback(items, fallbacks);
-	t.deepEqual(result.items, [1, 2, 3, 4]);
-	t.is(result.extra, 0);
-	t.is(result.missing, 0);
-});
-
-test('fillNullItemsWithFallback - replaces null items with fallbacks', (t) => {
-	const items = [1, null, 3, null];
-	const fallbacks = [2, 4];
-	const result = fillNullItemsWithFallback(items, fallbacks);
-	t.deepEqual(result.items, [1, 2, 3, 4]);
-	t.is(result.extra, 0);
-	t.is(result.missing, 0);
-});
-
-test('fillNullItemsWithFallback - has correct missing count when not enough fallbacks', (t) => {
-	const items = [null, null, 3, null];
-	const fallbacks = [1];
-	const result = fillNullItemsWithFallback(items, fallbacks);
-	t.deepEqual(result.items, [1, 3]);
-	t.is(result.extra, 0);
-	t.is(result.missing, 2);
-});
-
-test('fillNullItemsWithFallback - has correct extra count when too many fallbacks', (t) => {
-	const items = [1, null, 3];
-	const fallbacks = [2, 4, 5];
-	const result = fillNullItemsWithFallback(items, fallbacks);
-	t.deepEqual(result.items, [1, 2, 3]);
-	t.is(result.extra, 2);
-	t.is(result.missing, 0);
-});
-
-test('fillNullItemsWithFallback - handles no nulls in items', (t) => {
-	const items = [1, 2, 3];
-	const fallbacks = [10, 20, 30];
-	const result = fillNullItemsWithFallback(items, fallbacks);
-	t.deepEqual(result.items, [1, 2, 3]);
-	t.is(result.extra, 3);
-	t.is(result.missing, 0);
-});
-
-test('fillNullItemsWithFallback - handles empty arrays', (t) => {
-	const items: Array<number | null> = [];
-	const fallbacks: number[] = [];
-	const result = fillNullItemsWithFallback(items, fallbacks);
-	t.deepEqual(result.items, []);
-	t.is(result.extra, 0);
-	t.is(result.missing, 0);
 });
 
 test('toArray - wraps single item in array', (t) => {

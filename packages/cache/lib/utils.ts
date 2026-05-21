@@ -23,23 +23,6 @@ export function alignItemsWithRefs<T>(partialRefs: Array<ItemRef | null>, items:
 	return aligned;
 }
 
-export function fillNullItemsWithFallback<T>(items: Array<T | null>, fallbacks: T[]) {
-	let fallbackIndex = 0;
-	const completeItems: T[] = [];
-	for (const item of items) {
-		if (item != null) {
-			completeItems.push(item);
-		} else if (fallbackIndex < fallbacks.length) {
-			completeItems.push(fallbacks[fallbackIndex++]);
-		}
-	}
-	return {
-		items: completeItems,
-		missing: items.length - completeItems.length,
-		extra: fallbacks.length - fallbackIndex,
-	};
-}
-
 export function toArray<T>(item: T | T[]): T[] {
 	return Array.isArray(item) ? item : [item];
 }

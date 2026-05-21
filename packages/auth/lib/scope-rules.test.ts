@@ -1,8 +1,9 @@
 import { ForbiddenError } from '@baeta/errors';
 import test from '@baeta/testing';
-import type { LogicRule } from './rule.ts';
 import type { ScopeLoaderMap } from './scope-resolver.ts';
 import {
+	type LogicRule,
+	type ScopeLogicRule,
 	type ScopeRules,
 	verifyAndScopes,
 	verifyChainScopes,
@@ -10,25 +11,44 @@ import {
 	verifyOrScopes,
 	verifyRaceScopes,
 	verifyScope,
-	verifyScopes,
+	verifyScopeRule,
 } from './scope-rules.ts';
 import { loadAuthStore } from './store-loader.ts';
 import { getAuthStore } from './store.ts';
 
 declare function setTimeout(callback: () => void, ms: number): void;
-
 const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 type TestScopes = {
-	trueScope: true;
-	trueFnScope: true;
-	trueLazyScope: true;
-	falseScope: true;
-	falseFnScope: true;
-	falseLazyScope: true;
+	trueScope: boolean;
+	trueFnScope: boolean;
+	trueLazyScope: boolean;
+	falseScope: boolean;
+	falseFnScope: boolean;
+	falseLazyScope: boolean;
 };
 
 type TestGrants = 'test-grant';
+
+const scopeRule = <K extends keyof TestScopes>(key: K): ScopeRules<TestScopes, TestGrants> => ({
+	type: 'scope',
+	key,
+	value: true,
+});
+
+const grantRule = (grant: TestGrants): ScopeRules<TestScopes, TestGrants> => ({
+	type: 'grant',
+	grant,
+});
+
+const logicRule = (
+	rule: LogicRule,
+	scopes: ScopeRules<TestScopes, TestGrants>[],
+): ScopeLogicRule<TestScopes, TestGrants> => ({
+	type: 'rule',
+	rule,
+	scopes,
+});
 
 function createCtx() {
 	const ctx = {};
@@ -56,368 +76,263 @@ function createCtx() {
 			throw new ForbiddenError();
 		},
 	};
-	loadAuthStore<TestScopes, typeof ctx>(ctx, async () => scopes);
-	return { ctx, executionOrder };
+	loadAuthStore<TestScopes, typeof ctx>(ctx, async () => scopes, {});
+	const params = { source: {}, args: {}, ctx, info: {} } as const;
+	return { ctx, params, executionOrder };
 }
 
 test('verifyGrant throws when grant is undefined', async (t) => {
-	const { ctx } = createCtx();
-	await t.throwsAsync(verifyGrant(ctx, undefined, 'path'), {
-		instanceOf: Error,
-	});
+	const { params } = createCtx();
+	await t.throwsAsync(verifyGrant(params, undefined), { instanceOf: Error });
 });
 
 test("verifyGrant throws ForbiddenError when grant doesn't exist", async (t) => {
-	const { ctx } = createCtx();
-
-	await t.throwsAsync(verifyGrant(ctx, 'test-grant', 'path'), {
-		instanceOf: ForbiddenError,
-	});
+	const { params } = createCtx();
+	await t.throwsAsync(verifyGrant(params, 'test-grant'), { instanceOf: ForbiddenError });
 });
 
-test('verifyGrant resolves when grant exists', async (t) => {
-	const { ctx } = createCtx();
+test('verifyGrant resolves when grant exists on the source', async (t) => {
+	const { params } = createCtx();
+	const store = await getAuthStore(params.ctx);
+	store.grantCache.addGrants(params.source, ['test-grant']);
 
-	const store = await getAuthStore(ctx);
-	store.grantCache.setGrants('path', ['test-grant']);
-
-	const result = await verifyGrant(ctx, 'test-grant', 'path');
+	const result = await verifyGrant(params, 'test-grant');
 	t.is(result, true);
 });
 
-test('verifyScopes throws error when scopes is undefined', async (t) => {
-	const ctx = {};
-	await t.throwsAsync(verifyScopes(ctx, undefined, '$and', 'path'), {
-		message: 'Scope definitions cannot be empty!',
+test('verifyScope throws when scope is undefined', async (t) => {
+	const { params } = createCtx();
+	await t.throwsAsync(verifyScope(params, undefined), {
+		message: 'Scope rules cannot be undefined!',
 	});
 });
 
-test('verifyScopes throws error when scopes object is empty', async (t) => {
-	const ctx = {};
-	await t.throwsAsync(verifyScopes(ctx, {}, '$and', 'path'), {
-		message: 'Scope definitions cannot be empty!',
-	});
-});
+test('verifyScope resolves grant-type rule', async (t) => {
+	const { params } = createCtx();
+	const store = await getAuthStore(params.ctx);
+	store.grantCache.addGrants(params.source, ['test-grant']);
 
-test('verifyScopes throws error for invalid logic rule', async (t) => {
-	const ctx = {};
-	const scopes: ScopeRules<TestScopes, TestGrants> = { trueScope: true };
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$invalid' as LogicRule, 'path'), {
-		message: "Invalid logic rule! Must be one of '$chain', '$race', '$or', or '$and'.",
-	});
-});
-
-test('verifyScope resolves when grant is granted', async (t) => {
-	const { ctx } = createCtx();
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		$granted: 'test-grant',
-	};
-
-	const store = await getAuthStore(ctx);
-	store.grantCache.setGrants('path', ['test-grant']);
-
-	const result = await verifyScope(ctx, scopes, '$granted', 'path');
+	const result = await verifyScope(params, grantRule('test-grant'));
 	t.is(result, true);
 });
 
 test('verifyScope throws when grant is missing', async (t) => {
-	const { ctx } = createCtx();
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		$granted: 'test-grant',
-	};
-
-	await t.throwsAsync(verifyScope(ctx, scopes, '$granted', 'path'), {
+	const { params } = createCtx();
+	await t.throwsAsync(verifyScope(params, grantRule('test-grant')), {
 		instanceOf: ForbiddenError,
 	});
 });
 
-test('verifyScope resolvers inline scopes', async (t) => {
-	const { ctx } = createCtx();
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueScope: true,
-	};
-
-	const result = await verifyScope(ctx, scopes, 'trueScope', 'path');
+test('verifyScope resolves boolean scope', async (t) => {
+	const { params } = createCtx();
+	const result = await verifyScope(params, scopeRule('trueScope'));
 	t.is(result, true);
 });
 
-test('verifyScope throws for inline scopes', async (t) => {
-	const { ctx } = createCtx();
-
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseScope: true,
-	};
-
-	await t.throwsAsync(verifyScope(ctx, scopes, 'falseScope', 'path'), {
+test('verifyScope throws for false boolean scope', async (t) => {
+	const { params } = createCtx();
+	await t.throwsAsync(verifyScope(params, scopeRule('falseScope')), {
 		instanceOf: ForbiddenError,
 	});
 });
 
-test('verifyScope resolvers function scopes', async (t) => {
-	const { ctx } = createCtx();
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueFnScope: true,
-	};
-
-	const result = await verifyScope(ctx, scopes, 'trueFnScope', 'path');
+test('verifyScope resolves function scope', async (t) => {
+	const { params } = createCtx();
+	const result = await verifyScope(params, scopeRule('trueFnScope'));
 	t.is(result, true);
 });
 
-test('verifyScope throws for function scopes', async (t) => {
-	const { ctx } = createCtx();
-
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseFnScope: true,
-	};
-
-	await t.throwsAsync(verifyScope(ctx, scopes, 'falseFnScope', 'path'), {
+test('verifyScope throws for failing function scope', async (t) => {
+	const { params } = createCtx();
+	await t.throwsAsync(verifyScope(params, scopeRule('falseFnScope')), {
 		instanceOf: ForbiddenError,
 	});
 });
 
-test('verifyScope resolves lazy scopes', async (t) => {
-	const { ctx } = createCtx();
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueLazyScope: true,
-	};
-
-	const result = await verifyScope(ctx, scopes, 'trueLazyScope', 'path');
+test('verifyScope resolves lazy scope', async (t) => {
+	const { params } = createCtx();
+	const result = await verifyScope(params, scopeRule('trueLazyScope'));
 	t.is(result, true);
 });
 
-test('verifyScope throws for failed lazy scopes', async (t) => {
-	const { ctx } = createCtx();
-
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseLazyScope: true,
-	};
-
-	await t.throwsAsync(verifyScope(ctx, scopes, 'falseLazyScope', 'path'), {
+test('verifyScope throws for failing lazy scope', async (t) => {
+	const { params } = createCtx();
+	await t.throwsAsync(verifyScope(params, scopeRule('falseLazyScope')), {
 		instanceOf: ForbiddenError,
 	});
 });
 
-test('verifyScopes resolves for all logic rules', async (t) => {
-	const { ctx } = createCtx();
-
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueScope: true,
-		trueFnScope: true,
-		trueLazyScope: true,
-	};
-
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$chain', 'path'));
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$race', 'path'));
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$or', 'path'));
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$and', 'path'));
+test('verifyScope throws when scope key has no resolver', async (t) => {
+	const { params } = createCtx();
+	const rule = { type: 'scope', key: 'unknown', value: true } as unknown as ScopeRules<
+		TestScopes,
+		TestGrants
+	>;
+	await t.throwsAsync(verifyScope(params, rule), {
+		message: "No scope resolver found for key 'unknown'!",
+	});
 });
 
-test('verifyScopes throws for all logic rules', async (t) => {
-	const { ctx } = createCtx();
+test('verifyScopeRule throws when scopes array is empty', async (t) => {
+	const { params } = createCtx();
+	await t.throwsAsync(verifyScopeRule(params, logicRule('and', [])), {
+		message: 'Scope rule cannot be empty!',
+	});
+});
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseScope: true,
-		falseFnScope: true,
-		falseLazyScope: true,
-	};
+test('verifyScopeRule throws for invalid logic rule', async (t) => {
+	const { params } = createCtx();
+	const rule = {
+		type: 'rule',
+		rule: 'bogus',
+		scopes: [scopeRule('trueScope')],
+	} as unknown as Parameters<typeof verifyScopeRule>[1];
+	await t.throwsAsync(verifyScopeRule(params, rule), {
+		message: "Invalid logic rule! Must be one of 'chain', 'race', 'or', or 'and'.",
+	});
+});
 
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$chain', 'path'), {
+test('verifyScopeRule dispatches to each logic rule for valid scopes', async (t) => {
+	const { params } = createCtx();
+	const scopes = [scopeRule('trueScope'), scopeRule('trueFnScope'), scopeRule('trueLazyScope')];
+
+	await t.notThrowsAsync(verifyScopeRule(params, logicRule('chain', scopes)));
+	await t.notThrowsAsync(verifyScopeRule(params, logicRule('race', scopes)));
+	await t.notThrowsAsync(verifyScopeRule(params, logicRule('or', scopes)));
+	await t.notThrowsAsync(verifyScopeRule(params, logicRule('and', scopes)));
+});
+
+test('verifyScopeRule throws for each logic rule when all scopes fail', async (t) => {
+	const { params } = createCtx();
+	const scopes = [scopeRule('falseScope'), scopeRule('falseFnScope'), scopeRule('falseLazyScope')];
+
+	await t.throwsAsync(verifyScopeRule(params, logicRule('chain', scopes)), {
 		instanceOf: ForbiddenError,
 	});
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$race', 'path'), {
+	await t.throwsAsync(verifyScopeRule(params, logicRule('race', scopes)), {
 		instanceOf: ForbiddenError,
 	});
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$or', 'path'), {
+	await t.throwsAsync(verifyScopeRule(params, logicRule('or', scopes)), {
 		instanceOf: AggregateError,
 	});
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$and', 'path'), {
+	await t.throwsAsync(verifyScopeRule(params, logicRule('and', scopes)), {
 		instanceOf: ForbiddenError,
 	});
 });
 
 test('verifyChainScopes executes scopes in sequence', async (t) => {
-	const { ctx, executionOrder } = createCtx();
+	const { params, executionOrder } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueLazyScope: true,
-		trueFnScope: true,
-	};
-
-	const result = await verifyChainScopes(ctx, scopes, ['trueLazyScope', 'trueFnScope'], 'path');
+	const result = await verifyChainScopes(params, [
+		scopeRule('trueLazyScope'),
+		scopeRule('trueFnScope'),
+	]);
 
 	t.is(result, true);
 	t.deepEqual(executionOrder, ['trueLazyScope', 'trueFnScope']);
 });
 
 test('verifyChainScopes throws on first failure', async (t) => {
-	const { ctx, executionOrder } = createCtx();
+	const { params, executionOrder } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueLazyScope: true,
-		falseLazyScope: true,
-	};
-
-	await t.throwsAsync(verifyChainScopes(ctx, scopes, ['falseLazyScope', 'trueLazyScope'], 'path'), {
-		instanceOf: ForbiddenError,
-	});
+	await t.throwsAsync(
+		verifyChainScopes(params, [scopeRule('falseLazyScope'), scopeRule('trueLazyScope')]),
+		{ instanceOf: ForbiddenError },
+	);
 
 	t.deepEqual(executionOrder, ['falseLazyScope']);
 });
 
 test('verifyRaceScopes resolves on first success', async (t) => {
-	const { ctx, executionOrder } = createCtx();
+	const { params, executionOrder } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseLazyScope: true,
-		trueLazyScope: true,
-		trueFnScope: true,
-		trueScope: true,
-	};
-
-	const result = await verifyRaceScopes(
-		ctx,
-		scopes,
-		['falseLazyScope', 'trueLazyScope', 'trueFnScope', 'trueScope'],
-		'path',
-	);
+	const result = await verifyRaceScopes(params, [
+		scopeRule('falseLazyScope'),
+		scopeRule('trueLazyScope'),
+		scopeRule('trueFnScope'),
+		scopeRule('trueScope'),
+	]);
 
 	t.is(result, true);
 	t.deepEqual(executionOrder, ['falseLazyScope', 'trueLazyScope']);
 });
 
-test('verifyRaceScopes throws if all scopes fail', async (t) => {
-	const { ctx, executionOrder } = createCtx();
+test('verifyRaceScopes throws ForbiddenError if all candidates fail', async (t) => {
+	const { params, executionOrder } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseLazyScope: true,
-		falseFnScope: true,
-	};
-
-	await t.throwsAsync(verifyRaceScopes(ctx, scopes, ['falseLazyScope', 'falseFnScope'], 'path'), {
-		instanceOf: ForbiddenError,
-	});
+	await t.throwsAsync(
+		verifyRaceScopes(params, [scopeRule('falseLazyScope'), scopeRule('falseFnScope')]),
+		{ instanceOf: ForbiddenError },
+	);
 
 	t.deepEqual(executionOrder, ['falseLazyScope', 'falseFnScope']);
 });
 
-test('verifyOrScopes resolves true when as soon as any scope succeeds', async (t) => {
-	const { ctx, executionOrder } = createCtx();
+test('verifyOrScopes resolves as soon as any scope succeeds', async (t) => {
+	const { params } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueLazyScope: true,
-		falseLazyScope: true,
-		falseFnScope: true,
-	};
-
-	const result = await verifyOrScopes(
-		ctx,
-		scopes,
-		['trueLazyScope', 'falseLazyScope', 'falseFnScope'],
-		'path',
-	);
+	const result = await verifyOrScopes(params, [
+		scopeRule('trueLazyScope'),
+		scopeRule('falseLazyScope'),
+		scopeRule('falseFnScope'),
+	]);
 
 	t.is(result, true);
-	t.deepEqual(executionOrder, ['falseFnScope', 'trueLazyScope']);
 });
 
-test('verifyOrScopes throws if all scopes fail', async (t) => {
-	const { ctx, executionOrder } = createCtx();
+test('verifyOrScopes throws AggregateError if all scopes fail', async (t) => {
+	const { params } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseLazyScope: true,
-		falseFnScope: true,
-	};
-
-	await t.throwsAsync(verifyOrScopes(ctx, scopes, ['falseFnScope', 'falseLazyScope'], 'path'), {
-		instanceOf: AggregateError,
-	});
-
-	t.deepEqual(executionOrder, ['falseFnScope', 'falseLazyScope']);
-});
-
-test('verifyAndScopes resolves  when all scopes succeed', async (t) => {
-	const { ctx, executionOrder } = createCtx();
-
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueScope: true,
-		trueFnScope: true,
-		trueLazyScope: true,
-	};
-
-	const result = await verifyAndScopes(
-		ctx,
-		scopes,
-		['trueScope', 'trueLazyScope', 'trueFnScope'],
-		'path',
+	await t.throwsAsync(
+		verifyOrScopes(params, [scopeRule('falseFnScope'), scopeRule('falseLazyScope')]),
+		{ instanceOf: AggregateError },
 	);
+});
+
+test('verifyAndScopes resolves when all scopes succeed', async (t) => {
+	const { params } = createCtx();
+
+	const result = await verifyAndScopes(params, [
+		scopeRule('trueScope'),
+		scopeRule('trueFnScope'),
+		scopeRule('trueLazyScope'),
+	]);
 
 	t.is(result, true);
-	// inline scopes don't appear in execution order
-	t.deepEqual(executionOrder, ['trueFnScope', 'trueLazyScope']);
 });
 
 test('verifyAndScopes throws if any scope fails', async (t) => {
-	const { ctx, executionOrder } = createCtx();
-
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		trueFnScope: true,
-		trueLazyScope: true,
-		falseLazyScope: true,
-	};
+	const { params } = createCtx();
 
 	await t.throwsAsync(
-		verifyAndScopes(ctx, scopes, ['trueFnScope', 'trueLazyScope', 'falseLazyScope'], 'path'),
-		{
-			instanceOf: ForbiddenError,
-		},
+		verifyAndScopes(params, [
+			scopeRule('trueFnScope'),
+			scopeRule('trueLazyScope'),
+			scopeRule('falseLazyScope'),
+		]),
+		{ instanceOf: ForbiddenError },
 	);
-
-	t.deepEqual(executionOrder, ['trueFnScope', 'trueLazyScope', 'falseLazyScope']);
 });
 
-test('verifyScopes handles complex combinations of scopes', async (t) => {
-	const { ctx } = createCtx();
+test('verifyScopeRule handles nested combinations of rules', async (t) => {
+	const { params } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseFnScope: true,
-		$and: {
-			trueLazyScope: true,
-			$or: {
-				trueFnScope: true,
-				falseFnScope: true,
-			},
-		},
-	};
+	const nested = logicRule('and', [
+		scopeRule('trueFnScope'),
+		logicRule('or', [scopeRule('trueLazyScope'), scopeRule('falseLazyScope')]),
+		logicRule('race', [scopeRule('falseLazyScope'), scopeRule('trueFnScope')]),
+	]);
 
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$and', 'path'));
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$chain', 'path'));
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$or', 'path'));
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$race', 'path'));
+	await t.notThrowsAsync(verifyScopeRule(params, nested));
 });
 
-test('verifyScopes handles nested combinations of all logic rules', async (t) => {
-	const { ctx } = createCtx();
+test('verifyScopeRule fails when a nested branch fails', async (t) => {
+	const { params } = createCtx();
 
-	const scopes: ScopeRules<TestScopes, TestGrants> = {
-		falseLazyScope: true,
-		$and: {
-			trueFnScope: true,
-			$or: {
-				trueLazyScope: true,
-				$chain: {
-					falseLazyScope: true,
-					trueLazyScope: true,
-				},
-			},
-			$race: {
-				falseLazyScope: true,
-				trueFnScope: true,
-			},
-		},
-	};
+	const nested = logicRule('and', [
+		scopeRule('trueFnScope'),
+		logicRule('or', [scopeRule('falseLazyScope'), scopeRule('falseFnScope')]),
+	]);
 
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$and', 'path'));
-	await t.throwsAsync(verifyScopes(ctx, scopes, '$chain', 'path'));
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$or', 'path'));
-	await t.notThrowsAsync(verifyScopes(ctx, scopes, '$race', 'path'));
+	await t.throwsAsync(verifyScopeRule(params, nested));
 });

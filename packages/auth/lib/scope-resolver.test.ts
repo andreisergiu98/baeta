@@ -1,15 +1,21 @@
 import { ForbiddenError } from '@baeta/errors';
 import test from '@baeta/testing';
-import { createScopeResolver, createScopeResolverMap, resolveBoolean } from './scope-resolver.ts';
+import {
+	createScopeResolver,
+	createScopeResolverMap,
+	resolveBoolean,
+	type ScopeLoaderMap,
+} from './scope-resolver.ts';
 import { loadAuthStore } from './store-loader.ts';
 
 declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
+type CtxScopes = { isAdmin: boolean; role: string };
+
 function createCtx() {
 	const ctx = {};
-	const scopes = {};
-	loadAuthStore<typeof scopes, typeof ctx>(ctx, async () => ({}));
+	loadAuthStore<CtxScopes, typeof ctx>(ctx, async () => ({ isAdmin: true, role: () => true }), {});
 	return { ctx };
 }
 
@@ -49,24 +55,26 @@ test('createScopeResolver handles function loader', async (t) => {
 	await t.throwsAsync(async () => await falseResolver(null), { instanceOf: ForbiddenError });
 });
 
-test('createScopeResolver caches function loaders', async (t) => {
+test('createScopeResolver memoizes function loaders by argument', async (t) => {
 	const { ctx } = createCtx();
 
-	const trueResolver = createScopeResolver(ctx, 'fn-true', async () => {
-		await delay(10);
-		return true;
+	let calls = 0;
+	const resolver = createScopeResolver(ctx, 'role', async (param: unknown) => {
+		calls++;
+		await delay(5);
+		return param === 'admin';
 	});
-	await t.notThrowsAsync(async () => await trueResolver(null));
 
-	const falseResolver = createScopeResolver(ctx, 'fn-true', async () => {
-		await delay(10);
-		return false;
-	});
-	await t.notThrowsAsync(async () => await falseResolver(null));
+	await resolver('admin');
+	await resolver('admin');
+	t.is(calls, 1, 'second call with same arg should hit cache');
+
+	await t.throwsAsync(async () => await resolver('user'), { instanceOf: ForbiddenError });
+	t.is(calls, 2, 'different arg should re-invoke');
 });
 
 test('createScopeResolverMap creates resolver for each scope', (t) => {
-	const scopeMap = {
+	const scopeMap: ScopeLoaderMap<{ scope1: boolean; scope2: string }> = {
 		scope1: true,
 		scope2: () => true,
 	};

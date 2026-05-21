@@ -1,6 +1,6 @@
-# SubscriptionResolveMethods\<Result, Source, Context, Args, Info\>
+# SubscriptionResolveMethods\<Result, Source, ParentSource, Context, Args, Info\>
 
-> **SubscriptionResolveMethods**\<`Result`, `Source`, `Context`, `Args`, `Info`\> = `object`
+> **SubscriptionResolveMethods**\<`Result`, `Source`, `ParentSource`, `Context`, `Args`, `Info`\> = `object`
 
 ## Type Parameters
 
@@ -22,6 +22,13 @@
 <td>
 
 `Source`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`ParentSource`
 
 </td>
 </tr>
@@ -67,7 +74,7 @@
 </td>
 <td>
 
-(`input`) => `SubscriptionResolveMethods`\<`Result`, `Source`, `Context`, `Args`, `Info`\>
+(`input`) => `SubscriptionResolveMethods`\<`Result`, `Source`, `ParentSource`, `Context`, `Args`, `Info`\>
 
 </td>
 </tr>
@@ -79,7 +86,7 @@
 </td>
 <td>
 
-\<`T`\>(`resolver`) => [`SubscriptionField`](SubscriptionField.md)\<`Result`, `T`, `Source`, `Context`, `Args`, `Info`\>
+\<`T`\>(`resolver`) => [`SubscriptionField`](SubscriptionField.md)\<`Result`, `T`, `ParentSource`, `Context`, `Args`, `Info`, `Source`\>
 
 </td>
 </tr>
@@ -91,7 +98,7 @@
 </td>
 <td>
 
-(`resolver`) => [`SubscriptionField`](SubscriptionField.md)\<`Result`, `Result`, `Source`, `Context`, `Args`, `Info`\>
+(`resolver`) => [`SubscriptionField`](SubscriptionField.md)\<`Result`, `Result`, `ParentSource`, `Context`, `Args`, `Info`, `Source`\>
 
 </td>
 </tr>

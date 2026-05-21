@@ -161,11 +161,11 @@
 
 #### Get Signature
 
-> **get** **fields**(): readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Source`, `Context`, `unknown`, `Info`\>)[]
+> **get** **fields**(): readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `Source`, `Source`, `Context`, `unknown`, `Info`\>)[]
 
 ##### Returns
 
-readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `unknown`, `Source`, `Context`, `unknown`, `Info`\>)[]
+readonly ([`FieldCompiler`](FieldCompiler.md)\<`unknown`, `Source`, `Context`, `unknown`, `Info`\> \| `SubscriptionCompiler`\<`unknown`, `Source`, `Source`, `Context`, `unknown`, `Info`\>)[]
 
 ***
 

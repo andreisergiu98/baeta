@@ -37,7 +37,9 @@ export type GetScopeLoader<Scopes extends ScopesShape, Ctx> = (
  * const roleLoader: ScopeLoader<string> = (role) => userRole === role;
  * ```
  */
-export type ScopeLoader<T> = boolean | ((value: T) => boolean | Promise<boolean>);
+export type ScopeLoader<T> = T extends boolean
+	? boolean | (() => boolean | Promise<boolean>)
+	: (param: T) => boolean | Promise<boolean>;
 
 /**
  * Maps scope names to their respective loaders.
@@ -53,7 +55,9 @@ export type ScopeLoader<T> = boolean | ((value: T) => boolean | Promise<boolean>
  * ```
  */
 export type ScopeLoaderMap<Scopes extends ScopesShape> = {
-	[K in keyof Scopes]: ScopeLoader<Scopes[K]>;
+	[K in keyof Scopes]: Scopes[K] extends boolean
+		? boolean | (() => boolean | Promise<boolean>)
+		: (param: Scopes[K]) => boolean | Promise<boolean>;
 };
 
 type ScopeResolver = (value: unknown) => true | Promise<true>;
@@ -72,7 +76,7 @@ export function resolveBoolean(param: boolean) {
 export function createScopeResolver(
 	ctx: unknown,
 	name: string,
-	value: ScopeLoader<unknown>,
+	value: boolean | ScopeLoader<unknown>,
 ): ScopeResolver {
 	const isFunction = typeof value === 'function';
 
@@ -80,17 +84,16 @@ export function createScopeResolver(
 		return () => resolveBoolean(value);
 	}
 
-	return async (param: unknown) => {
+	return async (params: unknown) => {
 		const store = await getAuthStore(ctx);
-		const key = store.scopeCache.createKey(name, param);
-		const cached = await store.scopeCache.getScopeValue(key);
+		const cached = await store.scopeCache.getScopeValue(name, params);
 
 		if (cached != null) {
 			return resolveBoolean(cached);
 		}
 
-		const awaitableResult = value(param);
-		store.scopeCache.setScopeValue(key, awaitableResult);
+		const awaitableResult = value(params);
+		store.scopeCache.setScopeValue(name, params, awaitableResult);
 		return resolveBoolean(await awaitableResult);
 	};
 }
@@ -100,10 +103,8 @@ export function createScopeResolverMap<Scopes extends ScopesShape>(
 	scopeLoaderMap: ScopeLoaderMap<Scopes>,
 ): ScopeResolverMap {
 	const map: ScopeResolverMap = {};
-
 	for (const [key, value] of Object.entries(scopeLoaderMap)) {
-		map[key] = createScopeResolver(ctx, key, value as ScopeLoader<unknown>);
+		map[key] = createScopeResolver(ctx, key, value);
 	}
-
 	return map;
 }

@@ -1,4 +1,4 @@
-# AuthMiddlewareOptions\<Grants, Result, Root, Context, Args, Info\>
+# AuthMiddlewareOptions\<Grants, Result, Source, Context, Args, Info\>
 
 Options for authorization middlewares
 
@@ -28,7 +28,7 @@ Options for authorization middlewares
 <tr>
 <td>
 
-`Root`
+`Source`
 
 </td>
 </tr>
@@ -75,29 +75,12 @@ Options for authorization middlewares
 </td>
 <td>
 
-[`GetGrant`](../type-aliases/GetGrant.md)\<`Grants`, `Result`, `Root`, `Context`, `Args`, `Info`\>
+[`GetGrant`](../type-aliases/GetGrant.md)\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\>
 
 </td>
 <td>
 
 Permissions to grant after successful authorization
-
-</td>
-</tr>
-<tr>
-<td>
-
-<a id="onerror"></a> `onError?`
-
-</td>
-<td>
-
-[`ScopeErrorResolver`](../type-aliases/ScopeErrorResolver.md)
-
-</td>
-<td>
-
-Custom error handler for this operation
 
 </td>
 </tr>

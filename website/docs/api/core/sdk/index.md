@@ -24,13 +24,11 @@
 ## Type Aliases
 
 - [Field](type-aliases/Field.md)
-- [FieldHelpers](type-aliases/FieldHelpers.md)
 - [FieldMethods](type-aliases/FieldMethods.md)
 - [FieldsBuildersMap](type-aliases/FieldsBuildersMap.md)
 - [FieldsResolversMap](type-aliases/FieldsResolversMap.md)
 - [FieldUseInput](type-aliases/FieldUseInput.md)
 - [FieldUsePlugin](type-aliases/FieldUsePlugin.md)
-- [FieldWithMake](type-aliases/FieldWithMake.md)
 - [ModuleCompilerFactory](type-aliases/ModuleCompilerFactory.md)
 - [ModuleMethods](type-aliases/ModuleMethods.md)
 - [ModuleUseInput](type-aliases/ModuleUseInput.md)
@@ -41,7 +39,6 @@
 - [Subscription](type-aliases/Subscription.md)
 - [SubscriptionField](type-aliases/SubscriptionField.md)
 - [SubscriptionFieldUseInput](type-aliases/SubscriptionFieldUseInput.md)
-- [SubscriptionFieldWithMake](type-aliases/SubscriptionFieldWithMake.md)
 - [SubscriptionMethods](type-aliases/SubscriptionMethods.md)
 - [SubscriptionResolveMethods](type-aliases/SubscriptionResolveMethods.md)
 - [SubscriptionUsePlugin](type-aliases/SubscriptionUsePlugin.md)
@@ -51,6 +48,11 @@
 - [TypesResolversMap](type-aliases/TypesResolversMap.md)
 - [TypeUseInput](type-aliases/TypeUseInput.md)
 - [TypeUsePlugin](type-aliases/TypeUsePlugin.md)
+
+## Variables
+
+- [makePluginSymbol](variables/makePluginSymbol.md)
+- [makeSymbol](variables/makeSymbol.md)
 
 ## Functions
 
@@ -64,7 +66,6 @@
 - [createSubscriptionBuilder](functions/createSubscriptionBuilder.md)
 - [createTypeBuilder](functions/createTypeBuilder.md)
 - [isPromise](functions/isPromise.md)
-- [makeField](functions/makeField.md)
 - [mapMaybePromise](functions/mapMaybePromise.md)
 - [nameFunction](functions/nameFunction.md)
 - [transformSchema](functions/transformSchema.md)

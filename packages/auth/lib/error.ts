@@ -3,10 +3,10 @@ import { log } from '@baeta/util-log';
 import { GraphQLError } from 'graphql';
 
 /** Custom error resolver function for authorization failures. */
-export type ScopeErrorResolver = (err: unknown, path: string) => unknown;
+export type ScopeErrorResolver = (err: unknown) => unknown;
 
-export function resolveError(err: unknown, resolve: ScopeErrorResolver, path: string) {
-	const resolvedError = resolve(err, path);
+export function resolveError(err: unknown, resolve: ScopeErrorResolver) {
+	const resolvedError = resolve(err);
 
 	if (resolvedError instanceof Error) {
 		throw resolvedError;
@@ -15,13 +15,13 @@ export function resolveError(err: unknown, resolve: ScopeErrorResolver, path: st
 	throw err;
 }
 
-export function defaultErrorResolver(err: unknown, path: string): unknown {
+export function defaultErrorResolver(err: unknown): unknown {
 	if (err instanceof AggregateError) {
-		return aggregateErrorResolver(err, path);
+		return aggregateErrorResolver(err);
 	}
 
 	if (!isGraphqlError(err)) {
-		log.warn(`Non GraphQLError encountered by auth at path: ${path}`, err);
+		log.warn(`Non GraphQLError encountered by auth`, err);
 	}
 
 	return err;
@@ -31,10 +31,10 @@ export function defaultErrorResolver(err: unknown, path: string): unknown {
  * Default error resolver for authorization failures.
  * If multiple authorization errors are encountered they are combined into `AggregateGraphQLError` with proper HTTP status codes.
  */
-export function aggregateErrorResolver(err: AggregateError, path: string) {
+export function aggregateErrorResolver(err: AggregateError) {
 	if (err.errors.length === 1) {
 		if (!isGraphqlError(err.errors[0])) {
-			log.warn(`Non GraphQLError encountered by auth at path: ${path}`, err);
+			log.warn(`Non GraphQLError encountered by auth`, err);
 		}
 		return err.errors[0];
 	}
@@ -45,7 +45,7 @@ export function aggregateErrorResolver(err: AggregateError, path: string) {
 	for (const error of err.errors) {
 		if (!isGraphqlError(error)) {
 			errors.push(new InternalServerError(error));
-			log.warn(`Non GraphQLError encountered by auth at path: ${path}`, err);
+			log.warn(`Non GraphQLError encountered by auth`, err);
 			continue;
 		}
 

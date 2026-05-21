@@ -1,34 +1,21 @@
 import type { Middleware, ResolverParams } from '@baeta/core';
 import { ForbiddenError } from '@baeta/errors';
-import type { GraphQLResolveInfo } from 'graphql';
-import { createResolverPath } from '../utils/resolver.ts';
 import { defaultErrorResolver, resolveError, type ScopeErrorResolver } from './error.ts';
 import { type GetGrant, saveGrants } from './grant.ts';
+import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import { type DefaultScopes, selectDefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
-import { type ScopeRules, type ScopesShape, verifyScopes } from './scope-rules.ts';
+import { verifyScope, type ScopeRules, type ScopesShape } from './scope-rules.ts';
 import { loadAuthStore } from './store-loader.ts';
 
 /**
  * Options for authorization middlewares
  */
-export interface AuthMiddlewareOptions<Grants extends string, Result, Root, Context, Args, Info> {
+export interface AuthMiddlewareOptions<Grants extends string, Result, Source, Context, Args, Info> {
 	/** Permissions to grant after successful authorization */
-	grants?: GetGrant<Grants, Result, Root, Context, Args, Info>;
+	grants?: GetGrant<Grants, Result, Source, Context, Args, Info>;
 	/** Whether to skip default scopes for this operation */
 	skipDefaults?: boolean;
-	/** Custom error handler for this operation */
-	onError?: ScopeErrorResolver;
-}
-
-/**
- * Options for authorization middlewares
- */
-export interface AuthMiddlewareSubscribeOptions {
-	/** Whether to skip default scopes for this operation */
-	skipDefaults?: boolean;
-	/** Custom error handler for this operation */
-	onError?: ScopeErrorResolver;
 }
 
 /**
@@ -72,6 +59,7 @@ export function createMiddleware<
 >(
 	type: string,
 	loadScopes: GetScopeLoader<Scopes, Context>,
+	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
 	scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Source, Context, Args, Info>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
 	options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
@@ -81,16 +69,15 @@ export function createMiddleware<
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
 	return async (next, params) => {
-		loadAuthStore(params.ctx, loadScopes);
+		loadAuthStore(params.ctx, loadScopes, cacheKeyMap);
 
 		const requiredScopes = await getScopes(params);
 
 		await verifyMiddlewareScopes(
-			params.ctx,
-			params.info as GraphQLResolveInfo,
+			params,
 			defaultScopes,
 			requiredScopes,
-			options?.onError ?? onError ?? defaultErrorResolver,
+			onError ?? defaultErrorResolver,
 		);
 
 		const result = await next();
@@ -107,32 +94,32 @@ export function createPostMiddleware<
 	Scopes extends ScopesShape,
 	Grants extends string,
 	Result,
-	Root,
+	Source,
 	Context,
 	Args,
 	Info,
 >(
 	type: string,
 	loadScopes: GetScopeLoader<Scopes, Context>,
-	getScopes: GetPostScopeRules<Scopes, Grants, Result, Root, Context, Args, Info>,
+	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
+	getScopes: GetPostScopeRules<Scopes, Grants, Result, Source, Context, Args, Info>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
-	options?: AuthMiddlewareOptions<Grants, Result, Root, Context, Args, Info>,
+	options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	onError?: ScopeErrorResolver,
-): Middleware<Result, Root, Context, Args, Info> {
+): Middleware<Result, Source, Context, Args, Info> {
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
 	return async (next, params) => {
-		loadAuthStore(params.ctx, loadScopes);
+		loadAuthStore(params.ctx, loadScopes, cacheKeyMap);
 
 		const result = await next();
 		const requiredScopes = await getScopes(params, result);
 
 		await verifyMiddlewareScopes(
-			params.ctx,
-			params.info as GraphQLResolveInfo,
+			params,
 			defaultScopes,
 			requiredScopes,
-			options?.onError ?? onError ?? defaultErrorResolver,
+			onError ?? defaultErrorResolver,
 		);
 
 		if (options?.grants) {
@@ -150,6 +137,7 @@ export function createFallbackMiddleware<
 >(
 	type: string,
 	loadScopes: GetScopeLoader<Scopes, Context>,
+	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
 	onError?: ScopeErrorResolver,
 ) {
@@ -162,6 +150,7 @@ export function createFallbackMiddleware<
 	return createMiddleware<Scopes, Grants, any, unknown, Context, unknown, unknown>(
 		type,
 		loadScopes,
+		cacheKeyMap,
 		rules,
 		{},
 		{
@@ -174,10 +163,10 @@ export function createFallbackMiddleware<
 export async function verifyMiddlewareScopes<
 	Scopes extends ScopesShape,
 	Grants extends string,
+	Source,
 	Context,
 >(
-	ctx: Context,
-	info: GraphQLResolveInfo,
+	params: ResolverParams<Source, Context, unknown, unknown>,
 	defaultScopes: ScopeRules<Scopes, Grants> | undefined,
 	requiredScopes: ScopeRules<Scopes, Grants> | boolean | undefined,
 	errorResolver: ScopeErrorResolver,
@@ -187,20 +176,18 @@ export async function verifyMiddlewareScopes<
 	}
 
 	const promises: Promise<unknown>[] = [];
-	const fullPath = createResolverPath(info.path);
-	const parentPath = createResolverPath(info.path.prev);
 
 	if (defaultScopes) {
-		promises.push(verifyScopes(ctx, defaultScopes, '$and', parentPath));
+		promises.push(verifyScope(params, defaultScopes));
 	}
 
 	if (requiredScopes !== true) {
-		promises.push(verifyScopes(ctx, requiredScopes, '$and', parentPath));
+		promises.push(verifyScope(params, requiredScopes));
 	}
 
 	if (promises.length === 0) {
 		return;
 	}
 
-	return await Promise.all(promises).catch((err) => resolveError(err, errorResolver, fullPath));
+	return await Promise.all(promises).catch((err) => resolveError(err, errorResolver));
 }

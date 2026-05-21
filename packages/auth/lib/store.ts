@@ -9,6 +9,6 @@ export interface AuthStore {
 	grantCache: GrantCache;
 }
 
-export const authStoreKey = Symbol('auth-extension');
+export const authStoreKey = Symbol('@baeta/auth');
 
 export const [getAuthStore, setAuthStore] = createContextStore<AuthStore>(authStoreKey);

@@ -1,6 +1,6 @@
-# ScopeRule\<T\>
+# ScopeRule\<Scopes, Grants\>
 
-> **ScopeRule**\<`T`\> = `T` *extends* `boolean` ? `true` : `T`
+> **ScopeRule**\<`Scopes`, `Grants`\> = `{ [K in keyof Scopes]: { key: K; type: "scope"; value: Scopes[K] extends boolean ? true : Scopes[K] } }`\[keyof `Scopes`\] \| \{ `grant`: `Grants`; `type`: `"grant"`; \}
 
 Utility type that enforces boolean scopes must be true.
 For non-boolean scopes, preserves the original type.
@@ -17,7 +17,14 @@ For non-boolean scopes, preserves the original type.
 <tr>
 <td>
 
-`T`
+`Scopes` *extends* [`ScopesShape`](ScopesShape.md)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`Grants` *extends* `string`
 
 </td>
 </tr>

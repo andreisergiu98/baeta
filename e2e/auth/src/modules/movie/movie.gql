@@ -3,6 +3,13 @@ type Movie {
 	title: String!
 	year: Int!
 	rating: Float
+	reviews: [Review!]!
+}
+
+type Review {
+	id: ID!
+	score: Int!
+	comment: String!
 }
 
 input MovieWhereUniqueInput {

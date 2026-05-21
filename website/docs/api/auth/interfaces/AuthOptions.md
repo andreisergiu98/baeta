@@ -42,12 +42,33 @@ Configuration options for Auth
 <tr>
 <td>
 
+<a id="cachekeymap"></a> `cacheKeyMap?`
+
+</td>
+<td>
+
+[`ScopeCacheKeyMap`](../type-aliases/ScopeCacheKeyMap.md)\<`Scopes`\>
+
+</td>
+<td>
+
+Per-scope cache key overrides. Recommended for scopes whose argument
+isn't safely auto-serializable: serializable args (primitives, plain
+objects, arrays of those) are stringified automatically, and anything
+else falls back to reference identity — which may miss cache hits when
+callers construct equivalent-but-distinct values.
+
+</td>
+</tr>
+<tr>
+<td>
+
 <a id="defaultscopes"></a> `defaultScopes?`
 
 </td>
 <td>
 
-[`DefaultScopes`](../type-aliases/DefaultScopes.md)\<`Scopes`, `Grants`\>
+(`opt`) => [`DefaultScopes`](../type-aliases/DefaultScopes.md)\<`Scopes`, `Grants`\>
 
 </td>
 <td>

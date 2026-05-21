@@ -1,6 +1,6 @@
 # GetGrantFn\<Grants, Result, Source, Context, Args, Info\>
 
-> **GetGrantFn**\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`, `result`) => [`GetGrantResult`](GetGrantResult.md)\<`Grants`\> \| `PromiseLike`\<[`GetGrantResult`](GetGrantResult.md)\<`Grants`\>\>
+> **GetGrantFn**\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = (`params`, `result`) => [`GetGrantResult`](GetGrantResult.md)\<`Grants`, `Result`\> \| `PromiseLike`\<[`GetGrantResult`](GetGrantResult.md)\<`Grants`, `Result`\>\>
 
 Function that determines grants based on resolver parameters and result.
 Used for dynamic permission granting based on resolved data.
@@ -98,4 +98,4 @@ Used for dynamic permission granting based on resolved data.
 
 ## Returns
 
-[`GetGrantResult`](GetGrantResult.md)\<`Grants`\> \| `PromiseLike`\<[`GetGrantResult`](GetGrantResult.md)\<`Grants`\>\>
+[`GetGrantResult`](GetGrantResult.md)\<`Grants`, `Result`\> \| `PromiseLike`\<[`GetGrantResult`](GetGrantResult.md)\<`Grants`, `Result`\>\>

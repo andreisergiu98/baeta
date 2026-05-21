@@ -1,17 +1,27 @@
 import type { ResolverParams } from '@baeta/core';
-import type { GraphQLResolveInfo } from 'graphql';
-import { createResolverPath } from '../utils/resolver.ts';
 import { getAuthStore } from './store.ts';
-
-export const grantRule = '$granted' as const;
-
-export type GrantKey = typeof grantRule;
 
 /**
  * Represents the result of a grant operation.
  * Can be either a single grant or an array of grants defined in AuthExtension.GrantsMap.
  */
-export type GetGrantResult<Grants extends string> = Grants | Grants[];
+export type GetGrantResult<Grant extends string, Result> =
+	| Grant
+	| Grant[]
+	| GrantConfig<Grant, Result>
+	| GrantConfig<Grant, Result>[];
+
+/**
+ * Attaches a grant to a specific object derived from the resolver result,
+ * instead of the result itself. For array results, `target` is invoked per
+ * entry. `target` must return a non-primitive value.
+ */
+export type GrantConfig<Grant extends string, Result> = {
+	grant: Grant | Grant[];
+	target: (result: GrantTarget<Result>) => unknown;
+};
+
+type GrantTarget<Result> = Result extends Array<infer U> ? U : Result;
 
 /**
  * Function that determines grants based on resolver parameters and result.
@@ -20,7 +30,7 @@ export type GetGrantResult<Grants extends string> = Grants | Grants[];
 export type GetGrantFn<Grants extends string, Result, Source, Context, Args, Info> = (
 	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
-) => GetGrantResult<Grants> | PromiseLike<GetGrantResult<Grants>>;
+) => GetGrantResult<Grants, Result> | PromiseLike<GetGrantResult<Grants, Result>>;
 
 /**
  * Union type for grant specifications.
@@ -28,34 +38,60 @@ export type GetGrantFn<Grants extends string, Result, Source, Context, Args, Inf
  */
 export type GetGrant<Grants extends string, Result, Source, Context, Args, Info> =
 	| GetGrantFn<Grants, Result, Source, Context, Args, Info>
-	| GetGrantResult<Grants>;
+	| GetGrantResult<Grants, Result>;
 
-export function isGrantedKey(rule: string): rule is GrantKey {
-	return rule === grantRule;
-}
-
-export async function saveGrants<Grants extends string, Result, Root, Context, Args, Info>(
-	params: ResolverParams<Root, Context, Args, Info>,
+export async function saveGrants<Grants extends string, Result, Source, Context, Args, Info>(
+	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
-	grants: GetGrant<Grants, Result, Root, Context, Args, Info>,
+	grants: GetGrant<Grants, Result, Source, Context, Args, Info>,
 ) {
+	if (result == null) return;
 	const [store, resolvedGrants] = await Promise.all([
 		getAuthStore(params.ctx),
 		resolveGrants(params, result, grants),
 	]);
-	store.grantCache.setGrants(
-		createResolverPath((params.info as GraphQLResolveInfo).path),
-		resolvedGrants,
-	);
+	const entries = Array.isArray(result) ? result : [result];
+	resolvedGrants.forEach(({ grant, target }) => {
+		for (const entry of entries) {
+			if (entry == null) continue;
+			store.grantCache.addGrants(target(entry), grant);
+		}
+	});
 }
 
-function resolveGrants<Grants extends string, Result, Source, Context, Args, Info>(
+function defaultTarget<Entry>(entry: Entry) {
+	return entry;
+}
+
+function normalizeGrant<Grant extends string, Result>(
+	grants: Grant | GrantConfig<Grant, Result>,
+): { grant: Grant[]; target: (entry: GrantTarget<Result>) => unknown } {
+	if (typeof grants === 'string') {
+		return { grant: [grants], target: defaultTarget };
+	}
+	return {
+		grant: Array.isArray(grants.grant) ? grants.grant : [grants.grant],
+		target: grants.target,
+	};
+}
+
+function normalizeGrants<Grant extends string, Result>(
+	grants: GetGrantResult<Grant, Result>,
+): Array<{ grant: Grant[]; target: (entry: GrantTarget<Result>) => unknown }> {
+	if (Array.isArray(grants)) {
+		return grants.map((el) => normalizeGrant(el));
+	}
+	return [normalizeGrant(grants)];
+}
+
+async function resolveGrants<Grants extends string, Result, Source, Context, Args, Info>(
 	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
 	grants: GetGrant<Grants, Result, Source, Context, Args, Info>,
 ) {
 	if (typeof grants !== 'function') {
-		return grants;
+		return normalizeGrants(grants);
 	}
-	return grants(params, result);
+	const grantFnResult = await grants(params, result);
+	return normalizeGrants(grantFnResult);
 }

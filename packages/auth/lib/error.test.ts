@@ -15,25 +15,32 @@ test.after(() => {
 test('resolveError throws resolved error when resolver returns an error', (t) => {
 	const customError = new Error('Custom error');
 	const resolver = () => customError;
-	t.throws(() => resolveError(new Error(), resolver, 'test/path'), { is: customError });
+	t.throws(() => resolveError(new Error(), resolver), { is: customError });
 });
 
 test("resolveError throws original error when resolver doesn't return an error", (t) => {
 	const originalError = new Error('Original error');
 	const resolver = () => 10;
-	t.throws(() => resolveError(originalError, resolver, 'test/path'), { is: originalError });
+	t.throws(() => resolveError(originalError, resolver), { is: originalError });
 });
 
 test('defaultErrorResolver returns original error for non-aggregate errors', (t) => {
 	const error = new GraphQLError('Test error');
-	const result = defaultErrorResolver(error, 'test/path');
+	const result = defaultErrorResolver(error);
 	t.is(result, error);
+});
+
+test('defaultErrorResolver delegates to aggregateErrorResolver for AggregateError', (t) => {
+	const inner = new GraphQLError('Inner');
+	const aggregate = new AggregateError([inner]);
+	const result = defaultErrorResolver(aggregate);
+	t.is(result, inner);
 });
 
 test('aggregateErrorResolver returns single error when AggregateError contains one error', (t) => {
 	const singleError = new GraphQLError('Single error');
 	const aggregateError = new AggregateError([singleError]);
-	const result = aggregateErrorResolver(aggregateError, 'test/path');
+	const result = aggregateErrorResolver(aggregateError);
 	t.is(result, singleError);
 });
 
@@ -42,7 +49,7 @@ test('aggregateErrorResolver combines multiple GraphQLErrors into AggregateGraph
 	const error2 = new GraphQLError('Error 2');
 	const aggregateError = new AggregateError([error1, error2]);
 
-	const result = aggregateErrorResolver(aggregateError, 'test/path') as AggregateGraphQLError;
+	const result = aggregateErrorResolver(aggregateError) as AggregateGraphQLError;
 
 	t.true(result instanceof AggregateGraphQLError);
 	t.is(result.extensions.errors.length, 2);
@@ -53,7 +60,7 @@ test('aggregateErrorResolver wraps non-GraphQLErrors in InternalServerError', (t
 	const graphqlError = new GraphQLError('GraphQL error');
 	const aggregateError = new AggregateError([regularError, graphqlError]);
 
-	const result = aggregateErrorResolver(aggregateError, 'test/path') as AggregateGraphQLError;
+	const result = aggregateErrorResolver(aggregateError) as AggregateGraphQLError;
 
 	t.true(result instanceof AggregateGraphQLError);
 	t.is(result.extensions.errors.length, 2);
@@ -65,7 +72,7 @@ test('aggregateErrorResolver preserves HTTP status when combining errors', (t) =
 	const error2 = new UnauthenticatedError();
 	const aggregateError = new AggregateError([error1, error2]);
 
-	const result = aggregateErrorResolver(aggregateError, 'test/path') as AggregateGraphQLError;
+	const result = aggregateErrorResolver(aggregateError) as AggregateGraphQLError;
 
 	t.deepEqual(result.extensions?.http, { status: 401 });
 });
@@ -82,7 +89,7 @@ test('aggregateErrorResolver prioritizes 401 status code', (t) => {
 	});
 	const aggregateError = new AggregateError([error1, error2, error3]);
 
-	const result = aggregateErrorResolver(aggregateError, 'test/path') as AggregateGraphQLError;
+	const result = aggregateErrorResolver(aggregateError) as AggregateGraphQLError;
 
 	t.deepEqual(result.extensions.http, { status: 401 });
 });

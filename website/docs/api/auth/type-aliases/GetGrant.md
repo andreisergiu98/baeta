@@ -1,6 +1,6 @@
 # GetGrant\<Grants, Result, Source, Context, Args, Info\>
 
-> **GetGrant**\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = [`GetGrantFn`](GetGrantFn.md)\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> \| [`GetGrantResult`](GetGrantResult.md)\<`Grants`\>
+> **GetGrant**\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> = [`GetGrantFn`](GetGrantFn.md)\<`Grants`, `Result`, `Source`, `Context`, `Args`, `Info`\> \| [`GetGrantResult`](GetGrantResult.md)\<`Grants`, `Result`\>
 
 Union type for grant specifications.
 Can be either a static grant result or a function that determines grants dynamically.

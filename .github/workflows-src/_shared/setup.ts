@@ -20,7 +20,7 @@ export const turboCaches = {
 
 type TurboCache = (typeof turboCaches)[keyof typeof turboCaches];
 
-export const DEFAULT_NODE = createNodeVersion('24.14.1');
+export const DEFAULT_NODE = createNodeVersion('24');
 
 interface SetupNodeOptions {
 	node?: NodeVersion<string | Expression<string>>;
@@ -40,6 +40,8 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 			useSetupNode({
 				stepName: `Setup Node ${node.node}`,
 				nodeVersion: node.version,
+				checkLatest: true,
+				packageManagerCache: false,
 			}),
 		);
 

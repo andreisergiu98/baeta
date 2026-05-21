@@ -214,6 +214,8 @@ export function useDownloadArtifact(options: UseDownloadArtifactOptions): Steps 
 export interface UseSetupNodeOptions {
 	stepName?: string;
 	nodeVersion?: Expression<string>;
+	checkLatest?: Expression<boolean>;
+	packageManagerCache?: Expression<boolean>;
 }
 
 export function useSetupNode(options: UseSetupNodeOptions = {}): Steps {
@@ -221,6 +223,8 @@ export function useSetupNode(options: UseSetupNodeOptions = {}): Steps {
 		use(options.stepName || 'Setup Node', actions.setupNode, {
 			with: {
 				'node-version': options.nodeVersion,
+				'check-latest': options.checkLatest,
+				'package-manager-cache': options.packageManagerCache,
 			},
 		});
 	};

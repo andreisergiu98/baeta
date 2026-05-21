@@ -47,7 +47,9 @@ jobs:
       - name: Setup Node 24
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 24.14.1
+          node-version: "24"
+          check-latest: true
+          package-manager-cache: false
       - name: Enable Corepack
         run: |-
           npm uninstall -g yarn || true
@@ -100,7 +102,7 @@ jobs:
 
           set -e
 
-          runuser -u ubuntu -- install-tool node 24.14.1
+          runuser -u ubuntu -- install-tool node 24
 
           runuser -u ubuntu -- install-tool yarn ${{
           steps.step_6.outputs.version }}

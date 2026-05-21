@@ -20,12 +20,7 @@ import { redisService, valkeyService, redisHttpService } from './_shared/service
 import { setupNode, turboCaches } from './_shared/setup.ts';
 
 const MAIN_TEST_MATRIX = {
-	node: [
-		createNodeVersion('22'),
-		createNodeVersion('24.14.1'),
-		createNodeVersion('25.6.1'),
-		createNodeVersion('26'),
-	],
+	node: [createNodeVersion('22'), createNodeVersion('24'), createNodeVersion('26')],
 	machine: ['ubuntu-latest', 'windows-latest', 'macos-latest'],
 };
 const PR_TEST_MATRIX = {

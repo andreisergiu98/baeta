@@ -73,6 +73,7 @@ export function defineQuery<
 						indexes: buildIndexes(args, options.indexArgsBy),
 					},
 					options.replaceExistingItems,
+					options.ttlMs,
 				)
 				.catch((err) => {
 					log.error(err, `Failed to save query result for ${name}. Proceeding without caching.`);

@@ -159,7 +159,11 @@ export class CacheStore<Item> {
 		return { query: result };
 	}
 
-	async saveQuery(query: QueryTagWithData<Item>, replaceExistingItems = false): Promise<void> {
+	async saveQuery(
+		query: QueryTagWithData<Item>,
+		replaceExistingItems = false,
+		ttlMs?: number,
+	): Promise<void> {
 		const data = query.data;
 		const queryKey = this.getQueryKey(query);
 		const queryIndexes = this.getQueryIndexes(query, true);
@@ -188,7 +192,10 @@ export class CacheStore<Item> {
 			isList,
 		};
 
-		return await this.client.saveQuery(queryKey, queryIndexes, metadata, this.queryCacheArgs);
+		return await this.client.saveQuery(queryKey, queryIndexes, metadata, {
+			...this.queryCacheArgs,
+			ttlMs: ttlMs ?? this.queryCacheArgs.ttlMs,
+		});
 	}
 
 	deleteQueries(query: QueryTagWithIndexes): Promise<void> {

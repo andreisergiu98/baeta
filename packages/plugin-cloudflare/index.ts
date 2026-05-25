@@ -115,7 +115,7 @@ export function cloudflarePlugin(options?: CloudflarePluginOptions) {
 			const cacheConfig = await generateConfigForCache(options?.cache);
 
 			if (!subscriptionsConfig && !cacheConfig) {
-				return await next();
+				return;
 			}
 
 			const databaseConfigurations: string[] = [];
@@ -158,7 +158,7 @@ export function cloudflarePlugin(options?: CloudflarePluginOptions) {
 			ctx.fileManager.add(file);
 
 			if (!subscriptionsConfig) {
-				return await next();
+				return;
 			}
 
 			for (const migration of subscriptionsConfig.databaseMigrations) {
@@ -172,8 +172,6 @@ export function cloudflarePlugin(options?: CloudflarePluginOptions) {
 					'cloudflare',
 				);
 			}
-
-			return await next();
 		},
 	});
 }

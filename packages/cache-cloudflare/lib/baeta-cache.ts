@@ -85,6 +85,10 @@ export class BaetaCache extends DurableObject {
 	}
 
 	async saveItems(items: Array<[string, string]>, expiresAt: number, disableOverwrite: boolean) {
+		if (disableOverwrite) {
+			// Clean-up expired items before inserting new ones so we don't ignore valid items
+			this.sql.exec(`DELETE FROM items WHERE expires_at <= ?`, Date.now());
+		}
 		const verb = disableOverwrite ? 'INSERT OR IGNORE' : 'INSERT OR REPLACE';
 		for (const batch of batchByParams(items, 3)) {
 			const placeholders = batch.map(() => '(?, ?, ?)').join(',');

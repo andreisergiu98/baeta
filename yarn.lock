@@ -11751,7 +11751,9 @@ __metadata:
     typescript: "catalog:dev"
     typescript-eslint: "npm:^8.59.4"
   dependenciesMeta:
-    "@apollo/rover@0.38.1":
+    "@apollo/rover@0.39.1":
+      unplugged: true
+    github-actions-workflow-builder@4.1.0:
       unplugged: true
   languageName: unknown
   linkType: soft

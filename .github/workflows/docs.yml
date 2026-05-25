@@ -20,6 +20,43 @@ jobs:
   build:
     name: Build website
     runs-on: ubuntu-latest
+    if: ${{ !((github.repository == 'andreisergiu98/baeta') && ((github.event_name
+      == 'push') || (github.event_name == 'workflow_dispatch'))) }}
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - name: Setup Node 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: "24"
+          check-latest: true
+          package-manager-cache: false
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Setup Yarn Cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .yarn/cache
+          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v1-${{ runner.os }}-
+      - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
+      - run: yarn docs:build
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+  release:
+    name: Release website
+    runs-on: ubuntu-latest
+    if: ${{ (github.repository == 'andreisergiu98/baeta') && ((github.event_name ==
+      'push') || (github.event_name == 'workflow_dispatch')) }}
     steps:
       - name: Git Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -46,27 +83,16 @@ jobs:
           YARN_ENABLE_HARDENED_MODE: "1"
       - run: yarn docs:build
       - name: Deploy website
-        if: ${{ (github.repository == 'andreisergiu98/baeta') && (github.event_name ==
-          'workflow_dispatch') }}
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
-      - name: Deploy website
-        if: ${{ (github.repository == 'andreisergiu98/baeta') && (github.event_name ==
-          'push') }}
-        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/build
-          user_name: github-actions[bot]
-          user_email: 41898282+github-actions[bot]@users.noreply.github.com
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-permissions:
-  contents: write
-  pages: write
-  deployments: write
+    concurrency:
+      group: publish-website
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pages: write
+      deployments: write

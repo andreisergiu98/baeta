@@ -23,9 +23,12 @@ export function createScopeCache<Scopes extends ScopesShape>(
 			return scopeCache.get(scope)?.get(makeKey(scope, params));
 		},
 		setScopeValue: (scope: string, params: unknown, value: boolean | Promise<boolean>) => {
-			const inScopeMap = scopeCache.get(scope) ?? new Map<any, boolean | Promise<boolean>>();
-			inScopeMap.set(makeKey(scope, params), value);
-			scopeCache.set(scope, inScopeMap);
+			let scopeParamsMap = scopeCache.get(scope);
+			if (scopeParamsMap == null) {
+				scopeParamsMap = new Map<any, boolean | Promise<boolean>>();
+				scopeCache.set(scope, scopeParamsMap);
+			}
+			scopeParamsMap.set(makeKey(scope, params), value);
 		},
 	};
 }

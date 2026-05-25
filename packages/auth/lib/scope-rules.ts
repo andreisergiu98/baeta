@@ -67,11 +67,15 @@ export async function verifyScope<Scopes extends ScopesShape, Grants extends str
 
 	if (scope.type === 'scope') {
 		const store = await getAuthStore(params.ctx);
-		const resolve = store.scopes[scope.key as string];
+		const resolve = store.scopes.get(scope.key as string);
 		if (resolve == null) {
 			throw new Error(`No scope resolver found for key '${scope.key as string}'!`);
 		}
-		return await resolve(scope.value);
+		const result = await resolve(scope.value);
+		if (result !== true) {
+			throw new Error('Scope resolver should throw for non true results!');
+		}
+		return true;
 	}
 
 	scope satisfies never;

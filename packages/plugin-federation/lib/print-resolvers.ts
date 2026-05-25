@@ -17,21 +17,24 @@ export function printResolvers(
 	info: FederationInfo,
 	options: PrintResolversOptions,
 ): string {
+	const hasEntities = info.resolvableEntitiesMap.size > 0;
 	const moduleExportName = getModuleExportName(options.moduleName);
 	const relativeGeneratedTypesDir = relative(options.federationRootDir, options.typesDir);
 	const imports = [
-		'import * as BaetaFederation from "@baeta/federation"',
-		info.resolvableEntitiesMap.size > 0
-			? `import type * as FederationTypes from "${relativeGeneratedTypesDir}/federation${options.extension}"`
+		'import * as BaetaFederation from "@baeta/federation";',
+		hasEntities
+			? `import type * as FederationTypes from "${relativeGeneratedTypesDir}/federation${options.extension}";`
 			: null,
-		`import federationSDL from "./federation-sdl${options.extension}"`,
-		`import { ${moduleExportName} } from "./${options.moduleDefinitionName}${options.extension}"`,
-		info.resolvableEntitiesMap.size > 0
-			? `import handlersMap from "./entity-handlers${options.extension}"`
+		`import federationSDL from "./federation-sdl${options.extension}";`,
+		`import { ${moduleExportName} } from "./${options.moduleDefinitionName}${options.extension}";`,
+		hasEntities ? `import handlers from "./entity-handlers${options.extension}";` : null,
+		hasEntities ? '' : null,
+		hasEntities
+			? `const handlersMap = new Map<string, FederationTypes.EntityHandlerMap[keyof FederationTypes.EntityHandlerMap]>(Object.entries(handlers satisfies FederationTypes.EntityHandlerMap));`
 			: null,
 	]
 		.filter((el) => el != null)
-		.join(';\n');
+		.join('\n');
 
 	const scalars = getUniqueScalars(spec, options.includedDirectiveNames);
 	const scalarResolvers = scalars.map(printScalarResolver);
@@ -83,7 +86,7 @@ function printEntityFieldResolver(moduleExportName: string) {
 	return [
 		`_entities: ${moduleExportName}.Query._entities.resolve((params) => {`,
 		'  const representations = params.args.representations as FederationTypes.EntityRepresentation[];',
-		'  return BaetaFederation.resolveEntities(representations, handlersMap satisfies FederationTypes.EntityHandlerMap, params.ctx, params.info);',
+		'  return BaetaFederation.resolveEntities(representations, handlersMap, params.ctx, params.info);',
 		'}),',
 	]
 		.map(ident(2))

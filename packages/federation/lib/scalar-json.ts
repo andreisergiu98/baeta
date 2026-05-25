@@ -26,6 +26,8 @@ function identity<T>(value: T): T {
 	return value;
 }
 
+const bannedKeys = new Set(['__proto__', 'constructor', 'prototype']);
+
 function parseObject(ast: ValueNode, variables: any): any {
 	if (ast.kind !== Kind.OBJECT) {
 		throw new GraphQLError(`JSONObject cannot represent non-object value: ${print(ast)}`, {
@@ -33,7 +35,9 @@ function parseObject(ast: ValueNode, variables: any): any {
 		});
 	}
 	return Object.fromEntries(
-		ast.fields.map((field) => [field.name.value, parseLiteral(field.value, variables)]),
+		ast.fields
+			.filter((field) => !bannedKeys.has(field.name.value))
+			.map((field) => [field.name.value, parseLiteral(field.value, variables)]),
 	);
 }
 

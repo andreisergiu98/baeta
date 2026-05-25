@@ -4,13 +4,15 @@ import * as BaetaFederation from "@baeta/federation";
 import type * as FederationTypes from "../../__generated__/federation.ts";
 import federationSDL from "./federation-sdl.ts";
 import { BaetaFederationModule } from "./typedef.ts";
-import handlersMap from "./entity-handlers.ts"
+import handlers from "./entity-handlers.ts";
+
+const handlersMap = new Map<string, FederationTypes.EntityHandlerMap[keyof FederationTypes.EntityHandlerMap]>(Object.entries(handlers satisfies FederationTypes.EntityHandlerMap));
 
 export default BaetaFederationModule.$schema({
   Query: BaetaFederationModule.Query.$fields({
     _entities: BaetaFederationModule.Query._entities.resolve((params) => {
       const representations = params.args.representations as FederationTypes.EntityRepresentation[];
-      return BaetaFederation.resolveEntities(representations, handlersMap satisfies FederationTypes.EntityHandlerMap, params.ctx, params.info);
+      return BaetaFederation.resolveEntities(representations, handlersMap, params.ctx, params.info);
     }),
     _service: BaetaFederationModule.Query._service.resolve(() => {
       return { sdl: federationSDL };

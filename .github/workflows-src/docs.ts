@@ -27,7 +27,7 @@ export default createWorkflow(
 
 		addJob('build', ({ setName, add, run, whenTrigger, when }) => {
 			setName('Build website');
-			add(setupNode());
+			add(setupNode({ enableYarnHardenedMode: true }));
 			run('yarn docs:build');
 			when(eq(github.repository, 'andreisergiu98/baeta'), () => {
 				whenTrigger('workflow_dispatch', () => {

@@ -58,6 +58,9 @@ jobs:
       - name: Get Yarn info
         run: echo "version=$(yarn --version)" >> $GITHUB_OUTPUT
         id: step_6
+      - name: Get Node.js info
+        run: echo "version=$(node --version | sed 's/^v//')" >> $GITHUB_OUTPUT
+        id: step_7
       - name: Restore Renovate Cache
         if: ${{ !(github.event.inputs.cache == 'disabled') &&
           !(github.event.inputs.cache == 'reset') }}
@@ -80,15 +83,15 @@ jobs:
           echo "runId=$run_id" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        id: step_9
+        id: step_10
       - name: Download Renovate repository cache
         if: ${{ !(github.event.inputs.cache == 'disabled') &&
-          (steps.step_9.outputs.runId != '') }}
+          (steps.step_10.outputs.runId != '') }}
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: renovate-repository-cache
           path: /tmp/renovate/cache/renovate/repository
-          run-id: ${{ steps.step_9.outputs.runId }}
+          run-id: ${{ steps.step_10.outputs.runId }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
       - name: Fix-up Renovate cache permissions
@@ -102,7 +105,8 @@ jobs:
 
           set -e
 
-          runuser -u ubuntu -- install-tool node 24
+          runuser -u ubuntu -- install-tool node ${{
+          steps.step_7.outputs.version }}
 
           runuser -u ubuntu -- install-tool yarn ${{
           steps.step_6.outputs.version }}

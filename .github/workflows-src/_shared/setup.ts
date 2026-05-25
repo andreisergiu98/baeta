@@ -27,11 +27,11 @@ interface SetupNodeOptions {
 	turboCache?: TurboCache;
 	disableYarnCache?: boolean;
 	skipInstall?: boolean;
+	enableYarnHardenedMode?: boolean;
 }
 
 export function setupNode(options: SetupNodeOptions = {}): Steps {
 	const node = options.node ?? DEFAULT_NODE;
-	const turboNamespace = options.turboCache;
 
 	return ({ run, add }) => {
 		add(useCheckout());
@@ -64,13 +64,13 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 			);
 		}
 
-		if (turboNamespace) {
+		if (options.turboCache) {
 			add(
 				useCache({
-					stepName: `Setup Turbo Cache for ${turboNamespace}`,
+					stepName: `Setup Turbo Cache for ${options.turboCache}`,
 					paths: ['.cache/turbo'],
-					key: interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-${github.sha}`,
-					restoreKeys: [interpolate`turbo-${turboNamespace}-${node.node}-${runner.os}-`],
+					key: interpolate`turbo-${options.turboCache}-${node.node}-${runner.os}-${github.sha}`,
+					restoreKeys: [interpolate`turbo-${options.turboCache}-${node.node}-${runner.os}-`],
 				}),
 			);
 		}
@@ -79,6 +79,7 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 			run('yarn install --immutable', {
 				env: {
 					YARN_ENABLE_GLOBAL_CACHE: 'false',
+					YARN_ENABLE_HARDENED_MODE: options.enableYarnHardenedMode ? '1' : '0',
 				},
 			});
 		}

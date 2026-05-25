@@ -96,9 +96,9 @@ export default createWorkflow(
 			run('yarn check:constraints');
 		});
 
-		addJob('yarn-dedupe', ({ setName, add, run }) => {
+		const lockfileJob = addJob('yarn-dedupe', ({ setName, add, run }) => {
 			setName('Check yarn dedupe');
-			add(setupNode());
+			add(setupNode({ enableYarnHardenedMode: true }));
 			run('yarn dedupe --check');
 		});
 
@@ -146,6 +146,7 @@ export default createWorkflow(
 			lintJob,
 			depsJob,
 			constraintsJob,
+			lockfileJob,
 			testsJob,
 			e2eJob,
 			buildExamplesJob,
@@ -166,7 +167,7 @@ export default createWorkflow(
 						});
 						addDependencies(...releaseDependencies);
 						setName('Publish packages or open PR');
-						add(setupNode({ turboCache: turboCaches.build }));
+						add(setupNode({ turboCache: turboCaches.build, enableYarnHardenedMode: true }));
 						const getToken = add(useBaetaBotToken());
 						add(
 							useChangesets({
@@ -194,7 +195,7 @@ export default createWorkflow(
 						});
 						addDependencies(...releaseDependencies);
 						setName('Publish snapshot packages');
-						add(setupNode({ turboCache: turboCaches.build }));
+						add(setupNode({ turboCache: turboCaches.build, enableYarnHardenedMode: true }));
 						const prIdJob = run<{ pr: number }>(
 							'Get PR number',
 							joinStrings(

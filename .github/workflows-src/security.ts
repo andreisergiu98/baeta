@@ -27,7 +27,7 @@ export default createWorkflow(
 		addJob('supply-chain-check', ({ setName, run, add, setTimeout }) => {
 			setName('Supply chain check');
 			setTimeout(30);
-			add(setupNode({ disableYarnCache: true, skipInstall: true }));
+			add(setupNode({ skipInstall: true }));
 			run('npm install -g sfw@2.0.4');
 			run('sfw yarn install --immutable');
 			run(

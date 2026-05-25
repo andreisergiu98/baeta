@@ -49,6 +49,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn build
   types:
     name: Check types
@@ -82,6 +83,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:types
   lint:
     name: Check linting
@@ -109,6 +111,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - name: Setup ESLint Cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -142,6 +145,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:formatting
   dependencies:
     name: Check dependencies
@@ -175,6 +179,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:deps
   constraints:
     name: Check package constraints
@@ -202,6 +207,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:constraints
   yarn-dedupe:
     name: Check yarn dedupe
@@ -229,6 +235,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "1"
       - run: yarn dedupe --check
   build-examples:
     name: Check examples
@@ -262,6 +269,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn examples:build
       - run: yarn examples:types
   tests:
@@ -330,6 +338,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:tests
   e2e:
     name: Check e2e tests (${{ matrix.machine }} - Node ${{ matrix.node }})
@@ -374,6 +383,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:e2e
   publish:
     name: Publish packages or open PR
@@ -383,6 +393,7 @@ jobs:
       - lint
       - dependencies
       - constraints
+      - yarn-dedupe
       - tests
       - e2e
       - build-examples
@@ -419,6 +430,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "1"
       - name: Create Baeta Bot Token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
@@ -452,6 +464,7 @@ jobs:
       - lint
       - dependencies
       - constraints
+      - yarn-dedupe
       - tests
       - e2e
       - build-examples
@@ -487,6 +500,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "1"
       - name: Get PR number
         run: |-
           PR_NUMBER=$(gh pr list \

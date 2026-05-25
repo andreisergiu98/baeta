@@ -31,11 +31,15 @@
       "rangeStrategy": "replace"
     },
     {
+      "matchPackageNames": ["node"],
+      "allowedVersions": "<25"
+    },
+    {
       "matchPackageNames": ["@types/node"],
       "allowedVersions": "<23"
     },
     {
-      "matchPackageNames": ["node", "actions/node-versions"],
+      "matchPackageNames": ["actions/node-versions"],
       "enabled": false
     },
     {

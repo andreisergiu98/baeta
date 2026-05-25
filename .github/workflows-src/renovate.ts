@@ -22,7 +22,7 @@ import { useBaetaBotToken } from './_shared/bot-token.ts';
 import { DEFAULT_NODE, setupNode } from './_shared/setup.ts';
 
 const nodeVersion = DEFAULT_NODE.version;
-const allowedCommands = ['^yarn install --immutable --immutable-cache$', '^yarn actions:build$'];
+const allowedCommands = ['^yarn install --immutable$', '^yarn actions:build$'];
 
 const renovateCacheDir = '/tmp/renovate/cache';
 const renovateCacheKey = 'renovate-cache-v2';

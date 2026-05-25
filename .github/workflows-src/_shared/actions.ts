@@ -16,7 +16,7 @@ const actions = {
 	uploadArtifact: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a', // v7.0.1
 	downloadArtifact: 'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c', // v8.0.1
 	changesets: 'changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b', // v1.8.0
-	dockerLogin: 'docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121', // v4.1.0
+	dockerLogin: 'docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee', // v4.2.0
 	ghPages: 'peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453', // v4.1.0
 	renovate: 'renovatebot/github-action@693b9ef15eec82123529a37c782242f091365961', // v46.1.14
 };

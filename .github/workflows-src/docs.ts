@@ -1,56 +1,76 @@
 import createWorkflow, { type Steps } from 'github-actions-workflow-builder';
 import { github, secrets } from 'github-actions-workflow-builder/context';
-import { eq, interpolate } from 'github-actions-workflow-builder/lib/expression';
+import { and, eq, interpolate, not, or } from 'github-actions-workflow-builder/lib/expression';
 import { useGhPages } from './_shared/actions.ts';
 import { setupNode } from './_shared/setup.ts';
 
-export default createWorkflow(
-	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob }) => {
-		setWorkflowName('Build website');
-		setPermissions({
-			contents: 'write',
-			pages: 'write',
-			deployments: 'write',
-		});
-		addTrigger('push', {
-			branches: ['next'],
-			paths: ['website/**', 'yarn.lock'],
-		});
-		addTrigger('pull_request', {
-			paths: ['website/**', 'yarn.lock'],
-		});
-		addTrigger('workflow_dispatch');
-		setConcurrency({
-			group: interpolate`${github.workflow}-${github.ref}`,
-			cancelInProgress: true,
-		});
+export default createWorkflow(({ setWorkflowName, addTrigger, addJob, when }) => {
+	setWorkflowName('Build website');
+	addTrigger('push', {
+		branches: ['next'],
+		paths: ['website/**', 'yarn.lock'],
+	});
+	addTrigger('pull_request', {
+		paths: ['website/**', 'yarn.lock'],
+	});
+	addTrigger('workflow_dispatch');
 
-		addJob('build', ({ setName, add, run, whenTrigger, when }) => {
-			setName('Build website');
-			add(setupNode({ enableYarnHardenedMode: true }));
-			run('yarn docs:build');
-			when(eq(github.repository, 'andreisergiu98/baeta'), () => {
-				whenTrigger('workflow_dispatch', () => {
-					add(deployWebsite());
-				});
-				whenTrigger('push', () => {
-					add(deployWebsite());
-				});
+	const isReleaseEvent = and(
+		eq(github.repository, 'andreisergiu98/baeta'),
+		or(eq(github.event_name, 'push'), eq(github.event_name, 'workflow_dispatch')),
+	);
+
+	when(not(isReleaseEvent), () => {
+		addJob('build', ({ add }) => {
+			add(buildWebsite(false));
+		});
+	});
+
+	when(isReleaseEvent, () => {
+		addJob('release', ({ add }) => {
+			add(buildWebsite(true));
+		});
+	});
+});
+
+function buildWebsite(withRelease: boolean): Steps {
+	return ({ setName, add, run, setConcurrency, setPermissions }) => {
+		if (withRelease) {
+			setName('Release website');
+			setConcurrency({
+				group: 'publish-website',
+				cancelInProgress: false,
 			});
-		});
-	},
-);
+			setPermissions({
+				contents: 'write',
+				pages: 'write',
+				deployments: 'write',
+			});
+			add(setupNode({ enableYarnHardenedMode: true }));
+		} else {
+			setName('Build website');
+			setConcurrency({
+				group: interpolate`${github.workflow}-${github.ref}`,
+				cancelInProgress: true,
+			});
+			setPermissions({
+				contents: 'read',
+			});
+			add(setupNode());
+		}
 
-function deployWebsite(): Steps {
-	return ({ add }) => {
-		add(
-			useGhPages({
-				stepName: 'Deploy website',
-				githubToken: secrets.GITHUB_TOKEN,
-				publishDir: './website/build',
-				userName: 'github-actions[bot]',
-				userEmail: '41898282+github-actions[bot]@users.noreply.github.com',
-			}),
-		);
+		run('yarn docs:build');
+
+		if (withRelease) {
+			add(
+				useGhPages({
+					stepName: 'Deploy website',
+					githubToken: secrets.GITHUB_TOKEN,
+					publishDir: './website/build',
+					userName: 'github-actions[bot]',
+					userEmail: '41898282+github-actions[bot]@users.noreply.github.com',
+				}),
+			);
+		}
 	};
 }

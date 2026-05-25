@@ -61,17 +61,17 @@
     "@baeta/tsconfig": "workspace:^",
     "@baeta/workspace-config": "workspace:^",
     "@changesets/cli": "^2.31.0",
-    "@eslint-react/eslint-plugin": "^5.8.1",
+    "@eslint-react/eslint-plugin": "^5.8.3",
     "@eslint/css": "^1.2.0",
     "@eslint/js": "^10.0.1",
     "@types/node": "catalog:dev",
-    "@typescript-eslint/parser": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.4",
     "@yarnpkg/sdks": "^3.2.3",
     "@yarnpkg/types": "^4.0.1",
     "eslint": "^10.4.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.2",
-    "eslint-plugin-package-json": "^1.0.0",
+    "eslint-plugin-package-json": "^1.1.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-unused-imports": "^4.4.1",
     "github-actions-workflow-builder": "^4.1.0",
@@ -80,15 +80,15 @@
     "jsonc-eslint-parser": "^3.1.0",
     "lint-staged": "^17.0.5",
     "lockfile-lint": "^5.0.0",
-    "oxfmt": "^0.50.0",
+    "oxfmt": "^0.51.0",
     "turbo": "^2.9.14",
     "typescript": "catalog:dev",
-    "typescript-eslint": "^8.59.3"
+    "typescript-eslint": "^8.59.4"
   },
   "dependenciesMeta": {
     "@apollo/rover@0.38.1": {
       "unplugged": true
     }
   },
-  "packageManager": "yarn@4.14.1+sha512.64df448055b2d37ba269d7db535a469b8da93f8ef1140c25fd7a83c00a8fbaacb214ca0e02553b92a2c54cef78bb67d0b4817fab02001df0e24fac0faccc3b42"
+  "packageManager": "yarn@4.15.0+sha512.07ec708ac11e2eaa4ea2b04cfbb272812f7e74a753f1595eaef4486c663a98306a30cca3e6fc40f7a0b168dcfb3a2490b6a5e0501e20fb69cc36f563dd161c53"
 }

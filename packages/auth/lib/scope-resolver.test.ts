@@ -78,11 +78,9 @@ test('createScopeResolverMap creates resolver for each scope', (t) => {
 		scope1: true,
 		scope2: () => true,
 	};
-
 	const resolverMap = createScopeResolverMap({}, scopeMap);
-
-	t.true('scope1' in resolverMap);
-	t.true('scope2' in resolverMap);
-	t.is(typeof resolverMap.scope1, 'function');
-	t.is(typeof resolverMap.scope2, 'function');
+	t.true(resolverMap.has('scope1'));
+	t.true(resolverMap.has('scope2'));
+	t.is(typeof resolverMap.get('scope1'), 'function');
+	t.is(typeof resolverMap.get('scope2'), 'function');
 });

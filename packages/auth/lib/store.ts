@@ -2,9 +2,10 @@ import { createContextStore } from '@baeta/core';
 import type { GrantCache } from './grant-cache.ts';
 import type { ScopeCache } from './scope-cache.ts';
 import type { ScopeResolverMap } from './scope-resolver.ts';
+import type { ScopesShape } from './scope-rules.ts';
 
 export interface AuthStore {
-	scopes: ScopeResolverMap;
+	scopes: ScopeResolverMap<ScopesShape>;
 	scopeCache: ScopeCache;
 	grantCache: GrantCache;
 }

@@ -62,9 +62,7 @@ export type ScopeLoaderMap<Scopes extends ScopesShape> = {
 
 type ScopeResolver = (value: unknown) => true | Promise<true>;
 
-export type ScopeResolverMap = {
-	[k: string]: ScopeResolver;
-};
+export type ScopeResolverMap<Scopes extends ScopesShape> = Map<keyof Scopes, ScopeResolver>;
 
 export function resolveBoolean(param: boolean) {
 	if (param !== true) {
@@ -92,19 +90,20 @@ export function createScopeResolver(
 			return resolveBoolean(cached);
 		}
 
-		const awaitableResult = value(params);
-		store.scopeCache.setScopeValue(name, params, awaitableResult);
-		return resolveBoolean(await awaitableResult);
+		const resultPromise = value(params);
+		store.scopeCache.setScopeValue(name, params, resultPromise);
+		const result = await resultPromise;
+		return resolveBoolean(result);
 	};
 }
 
 export function createScopeResolverMap<Scopes extends ScopesShape>(
 	ctx: unknown,
 	scopeLoaderMap: ScopeLoaderMap<Scopes>,
-): ScopeResolverMap {
-	const map: ScopeResolverMap = {};
+): ScopeResolverMap<Scopes> {
+	const map = new Map<keyof Scopes, ScopeResolver>();
 	for (const [key, value] of Object.entries(scopeLoaderMap)) {
-		map[key] = createScopeResolver(ctx, key, value);
+		map.set(key, createScopeResolver(ctx, key, value));
 	}
 	return map;
 }

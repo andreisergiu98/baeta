@@ -53,7 +53,7 @@
       "matchFileNames": [".github/workflows-src/_shared/actions.ts"],
       "groupName": "github actions",
       "postUpgradeTasks": {
-        "commands": ["yarn install --immutable --immutable-cache", "yarn actions:build"],
+        "commands": ["yarn install --immutable", "yarn actions:build"],
         "fileFilters": [".github/workflows/**", ".github/workflows-src/_shared/actions.ts"],
         "executionMode": "branch"
       }

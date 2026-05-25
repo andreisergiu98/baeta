@@ -122,8 +122,7 @@ jobs:
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.cache }}
           RENOVATE_PLATFORM_COMMIT: enabled
           RENOVATE_REPOSITORIES: ${{ github.repository }}
-          RENOVATE_ALLOWED_COMMANDS: '["^yarn install --immutable
-            --immutable-cache$","^yarn actions:build$"]'
+          RENOVATE_ALLOWED_COMMANDS: '["^yarn install --immutable$","^yarn actions:build$"]'
           LOG_LEVEL: ${{ github.event.inputs.logLevel }}
           NODE_OPTIONS: --max-old-space-size=4096
       - name: Upload Renovate repository cache

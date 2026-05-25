@@ -15,7 +15,7 @@ export function printHandlersStarter(options: PrintHandlersStarterOptions) {
 		"* so it's safe to edit it directly.",
 		'*/',
 		'',
-		`import type { EntityHandlerMap } from "${relativeTypesDir}/federation.ts";`,
+		`import type { EntityHandlerMap } from "${relativeTypesDir}/federation${options.extension}";`,
 		'',
 		'const entityHandlersMap: EntityHandlerMap = {',
 		'',

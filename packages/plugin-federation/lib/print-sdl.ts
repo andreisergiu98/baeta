@@ -22,5 +22,5 @@ export function printSDL(
 		},
 	);
 	const sdl = ['', print(merged), ''].join('\n');
-	return `export default \`${sdl}\`;`;
+	return `export default ${JSON.stringify(sdl)};\n`;
 }

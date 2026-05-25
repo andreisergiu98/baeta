@@ -42,29 +42,32 @@ export type ValidateExtension = {
 };
 
 export function initValidationsExtension(config: GraphQLInputObjectType | GraphQLInputFieldConfig) {
-	if (config.extensions?.validations == null) {
-		Object.defineProperty(config.extensions, 'validations', {
+	const extensions = ensureExtensions(config);
+	if (extensions.validations == null) {
+		Object.defineProperty(extensions, 'validations', {
 			value: [],
 			writable: true,
 		});
 	}
-	return config.extensions as ValidationsExtension;
+	return extensions as ValidationsExtension;
 }
 
 export function initArgumentValidationsExtension(
 	config: GraphQLFieldConfig<unknown, unknown, unknown>,
 ) {
-	if (config.extensions?.argumentValidations == null) {
-		Object.defineProperty(config.extensions, 'argumentValidations', {
+	const extensions = ensureExtensions(config);
+	if (extensions.argumentValidations == null) {
+		Object.defineProperty(extensions, 'argumentValidations', {
 			value: {},
 			writable: true,
 		});
 	}
-	return config.extensions as ArgumentValidationsExtension;
+	return extensions as ArgumentValidationsExtension;
 }
 
 export function addValidateExtension(type: GraphQLInputObjectType) {
-	Object.defineProperty(type.extensions, 'validate', {
+	const extensions = ensureExtensions(type);
+	Object.defineProperty(extensions, 'validate', {
 		value: true,
 		writable: false,
 	});
@@ -116,4 +119,13 @@ export function getArgumentValidationsFromExtensions(
 ) {
 	const extension = type.extensions as Maybe<ArgumentValidationsExtension>;
 	return extension?.argumentValidations?.[name]?.filter((opt) => opt != null);
+}
+
+function ensureExtensions<T extends { extensions?: Readonly<Record<string, unknown>> | null }>(
+	target: T,
+): Record<string, unknown> {
+	if (target.extensions == null) {
+		(target as { extensions: Record<string, unknown> }).extensions = {};
+	}
+	return target.extensions as Record<string, unknown>;
 }

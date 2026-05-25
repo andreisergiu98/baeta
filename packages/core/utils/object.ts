@@ -36,6 +36,13 @@ export function createObjectLens<T = unknown>(
 	input: Record<string, unknown>,
 	path: Array<string | number>,
 ) {
+	if (path.length === 0) {
+		return {
+			get: () => null,
+			set: () => false,
+		};
+	}
+
 	let i = 0;
 	let current: unknown = input;
 

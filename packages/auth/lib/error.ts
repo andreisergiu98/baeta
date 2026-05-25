@@ -48,14 +48,10 @@ export function aggregateErrorResolver(err: AggregateError) {
 			log.warn(`Non GraphQLError encountered by auth`, err);
 			continue;
 		}
-
 		errors.push(error);
-
 		if (error.extensions.http && http?.status !== 401) {
 			http = error.extensions.http;
 		}
-
-		error.extensions.http = undefined;
 	}
 
 	return new AggregateGraphQLError(errors, undefined, {

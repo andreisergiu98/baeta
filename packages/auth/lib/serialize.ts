@@ -36,10 +36,8 @@ export function canSafelySerialize(
 }
 
 export function isSerializablePrimitive(value: any): value is string | number | boolean | null {
-	return (
-		value === null ||
-		typeof value === 'boolean' ||
-		typeof value === 'number' ||
-		typeof value === 'string'
-	);
+	if (typeof value === 'number') {
+		return Number.isFinite(value);
+	}
+	return value === null || typeof value === 'boolean' || typeof value === 'string';
 }

@@ -43,6 +43,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "1"
       - run: yarn docs:build
       - name: Deploy website
         if: ${{ (github.repository == 'andreisergiu98/baeta') && (github.event_name ==

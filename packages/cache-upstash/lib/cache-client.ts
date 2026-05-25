@@ -103,8 +103,7 @@ export class UpstashCacheClient extends CacheClient {
 				if (saveOptions.disableOverwrite !== true) {
 					pipeline.set(item.key, item.value, { pxat: expiresAt });
 				} else {
-					pipeline.setnx(item.key, item.value);
-					pipeline.pexpireat(item.key, expiresAt);
+					pipeline.set(item.key, item.value, { pxat: expiresAt, nx: true });
 				}
 			},
 			executePipeline: async (pipeline) => {

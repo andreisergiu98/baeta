@@ -102,8 +102,7 @@ export class ValkeyCacheClient extends CacheClient {
 				if (saveOptions.disableOverwrite !== true) {
 					pipeline.set(item.key, item.value, 'PXAT', expiresAt);
 				} else {
-					pipeline.setnx(item.key, item.value);
-					pipeline.pexpireat(item.key, expiresAt);
+					pipeline.set(item.key, item.value, 'PXAT', expiresAt, 'NX');
 				}
 			},
 			executePipeline: async (pipeline) => {
@@ -131,22 +130,19 @@ export class ValkeyCacheClient extends CacheClient {
 			return [];
 		}
 		const expiresAt = Date.now() + options.ttlMs;
-		const keys: ItemCacheKey[] = new Array(items.length);
-		const values: string[] = new Array(items.length);
-		for (let i = 0; i < items.length; i++) {
-			keys[i] = items[i][0];
-			values[i] = options.serialize(items[i][1]);
+		const tx = this.valkey.multi();
+		for (const item of items) {
+			tx.get(item[0]);
+			tx.set(item[0], options.serialize(item[1]), 'PXAT', expiresAt);
 		}
-		const result = await this.scripts.saveWithDiffScript(keys, [...values, expiresAt.toString()]);
-		if (!Array.isArray(result)) {
-			throw new Error(`Unexpected non-array result from Valkey script: ${typeof result}`);
+		const result = await tx.exec();
+		assertNoPipelineErrors(result, 'Valkey');
+		const results: Array<Item | null> = [];
+		for (let i = 0; i < result.length; i += 2) {
+			const value = result[i][1];
+			results.push(value == null ? null : options.parse(value as string));
 		}
-		return result.map((value) => {
-			if (typeof value === 'string') {
-				return options.parse(value);
-			}
-			return null;
-		});
+		return results;
 	}
 
 	async deleteItems(keys: ItemCacheKey[]): Promise<void> {
@@ -165,16 +161,19 @@ export class ValkeyCacheClient extends CacheClient {
 		if (keys.length === 0) {
 			return [];
 		}
-		const result = await this.scripts.deleteWithDiffScript(keys, []);
-		if (!Array.isArray(result)) {
-			throw new Error(`Unexpected non-array result from Valkey script: ${typeof result}`);
+		const tx = this.valkey.multi();
+		for (const key of keys) {
+			tx.get(key);
+			tx.unlink(key);
 		}
-		return result.map((value) => {
-			if (typeof value === 'string') {
-				return options.parse(value);
-			}
-			return null;
-		});
+		const result = await tx.exec();
+		assertNoPipelineErrors(result, 'Valkey');
+		const results: Array<Item | null> = [];
+		for (let i = 0; i < result.length; i += 2) {
+			const value = result[i][1];
+			results.push(value == null ? null : options.parse(value as string));
+		}
+		return results;
 	}
 
 	async getQuery<QueryMetadata>(
@@ -193,14 +192,14 @@ export class ValkeyCacheClient extends CacheClient {
 	): Promise<void> {
 		const now = Date.now();
 		const expiresAt = now + options.ttlMs;
-		const pipeline = this.valkey.pipeline();
-		pipeline.set(key, options.serialize(metadata), 'PXAT', expiresAt);
+		const tx = this.valkey.multi();
+		tx.set(key, options.serialize(metadata), 'PXAT', expiresAt);
 		for (const indexKey of indexes) {
-			pipeline.zadd(indexKey, expiresAt, key);
-			pipeline.zremrangebyscore(indexKey, '-inf', now - INDEX_BUFFER_MS);
-			pipeline.pexpireat(indexKey, expiresAt + INDEX_BUFFER_MS);
+			tx.zadd(indexKey, expiresAt, key);
+			tx.zremrangebyscore(indexKey, '-inf', now - INDEX_BUFFER_MS);
+			tx.pexpireat(indexKey, expiresAt + INDEX_BUFFER_MS);
 		}
-		const result = await pipeline.exec();
+		const result = await tx.exec();
 		assertNoPipelineErrors(result, 'Valkey');
 	}
 

@@ -38,7 +38,7 @@
     "write-translations": "docusaurus write-translations"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.10.1",
+    "@docusaurus/core": "patch:@docusaurus/core@npm%3A3.10.1#~/.yarn/patches/@docusaurus-core-npm-3.10.1-ca011c3645.patch",
     "@docusaurus/preset-classic": "^3.10.1",
     "@docusaurus/theme-classic": "^3.10.1",
     "@mdx-js/react": "^3.1.1",

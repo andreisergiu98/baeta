@@ -75,7 +75,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 	const stateKey = Symbol('auth');
 	const scope = defineScopes<Scopes, Grants>();
 	const rule = defineRules<Scopes, Grants>();
-	const scopeLoader = loadScopes as GetScopeLoader<Scopes, unknown>;
+	const loadScopesFn = loadScopes as GetScopeLoader<Scopes, unknown>;
 	const defaultScopes = globalOptions.defaultScopes?.({ scope, rule });
 	const cacheKeyMap: ScopeCacheKeyMap<Scopes> = globalOptions.cacheKeyMap ?? {};
 
@@ -99,7 +99,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		makeAuthBuilder<Result, Source, Context, Args, Info>((type) =>
 			createMiddleware(
 				type,
-				scopeLoader,
+				loadScopesFn,
 				cacheKeyMap,
 				scopes,
 				defaultScopes,
@@ -112,17 +112,22 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		getScopes: GetPostScopeRules<Scopes, Grants, Result, Source, Context, Args, Info>,
 		options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> =>
-		makeAuthBuilder<Result, Source, Context, Args, Info>((type) =>
-			createPostMiddleware(
+		makeAuthBuilder<Result, Source, Context, Args, Info>((type) => {
+			if (type === 'Mutation') {
+				throw new Error(
+					'"authAfter" cannot be used on Mutations! authAfter is executed after the resolver thus cannot protect mutations. Use "auth" instead for mutations.',
+				);
+			}
+			return createPostMiddleware(
 				type,
-				scopeLoader,
+				loadScopesFn,
 				cacheKeyMap,
 				getScopes,
 				defaultScopes,
 				options,
 				globalOptions.errorResolver,
-			),
-		);
+			);
+		});
 
 	const authAppPlugin: AppPlugin = {
 		id,
@@ -137,7 +142,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 					if (hasAuth(readFieldAuthState(fieldCompiler, stateKey))) continue;
 					const middleware = createFallbackMiddleware(
 						typeCompiler.type,
-						scopeLoader,
+						loadScopesFn,
 						cacheKeyMap,
 						defaultScopes,
 						globalOptions.errorResolver,

@@ -1,6 +1,9 @@
+import { constants as fsConstants } from 'node:fs';
 import { mkdir, open, writeFile } from 'node:fs/promises';
 import { dirname } from '@baeta/util-path';
 import { File, type FileOptions } from './file.ts';
+
+const OPEN_FLAGS_RW = fsConstants.O_RDWR | fsConstants.O_NOFOLLOW;
 
 export class FileBlock extends File {
 	public override filename: string;
@@ -41,12 +44,15 @@ export class FileBlock extends File {
 		this.content = this.addBlockToContent(existingContent);
 		const content = await this.buildContent();
 
-		if (fd) {
+		if (!fd) {
+			return await writeFile(this.filename, content, 'utf-8');
+		}
+
+		try {
 			await fd.truncate(0);
 			await fd.write(content, 0, 'utf-8');
+		} finally {
 			await fd.close();
-		} else {
-			await writeFile(this.filename, content, 'utf-8');
 		}
 	};
 
@@ -55,22 +61,29 @@ export class FileBlock extends File {
 
 		const [existingContent, fd] = await this.getExistingContent();
 
-		if (fd) {
+		if (!fd) {
+			return;
+		}
+
+		try {
 			const [start, end] = this.getSlices(existingContent);
 			await fd.truncate(0);
 			await fd.write(start + end, 0, 'utf-8');
+		} finally {
 			await fd.close();
 		}
 	};
 
 	protected async getExistingContent() {
-		try {
-			const fd = await open(this.filename, 'r+');
-			const existingContent = await fd.readFile('utf-8');
-			return [existingContent, fd] as const;
-		} catch {
+		const fd = await open(this.filename, OPEN_FLAGS_RW).catch(() => null);
+		if (!fd) {
 			return ['', null] as const;
 		}
+		const existingContent = await fd.readFile('utf-8').catch(async (err) => {
+			await fd.close();
+			throw err;
+		});
+		return [existingContent, fd] as const;
 	}
 
 	protected getSlices(existingContent: string) {

@@ -1,5 +1,9 @@
+import { constants as fsConstants } from 'node:fs';
 import fs from 'node:fs/promises';
 import { dirname, extname } from '@baeta/util-path';
+
+const OPEN_FLAGS_CREATE_EXCL =
+	fsConstants.O_CREAT | fsConstants.O_EXCL | fsConstants.O_WRONLY | fsConstants.O_NOFOLLOW;
 
 /**
  * Options for generated files.
@@ -78,20 +82,29 @@ export class File {
 		}
 		this.persisted = true;
 
-		if (this.options?.disableOverwrite === true) {
-			const exists = await fs
-				.stat(this.filename)
-				.then((res) => res.isFile())
-				.catch(() => false);
-			if (exists) return;
-		}
-
 		const dir = dirname(this.filename);
 		await fs.mkdir(dir, { recursive: true });
 
 		const content = await this.buildContent();
 
-		return await fs.writeFile(this.filename, content, 'utf-8');
+		if (!this.options?.disableOverwrite) {
+			return await fs.writeFile(this.filename, content, 'utf-8');
+		}
+
+		let fd: fs.FileHandle | undefined;
+		try {
+			fd = await fs.open(this.filename, OPEN_FLAGS_CREATE_EXCL, 0o644);
+		} catch (err) {
+			if ((err as NodeJS.ErrnoException).code === 'EEXIST') {
+				return;
+			}
+			throw err;
+		}
+		try {
+			await fd.writeFile(content, 'utf-8');
+		} finally {
+			await fd.close();
+		}
 	};
 
 	unlink = async () => {

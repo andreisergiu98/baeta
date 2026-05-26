@@ -1,4 +1,5 @@
 import type { ComplexityLimit } from './complexity-limits.ts';
+import { sanitizeLimit } from './sanitize-limit.ts';
 import { setComplexityStoreLoader } from './store.ts';
 
 export function loadComplexityStore<T>(
@@ -25,9 +26,9 @@ export function loadComplexityStore<T>(
 
 		return {
 			limits: {
-				depth: limits?.depth ?? defaultLimits.depth,
-				breadth: limits?.breadth ?? defaultLimits.breadth,
-				complexity: limits?.complexity ?? defaultLimits.complexity,
+				depth: sanitizeLimit(limits?.depth, defaultLimits.depth),
+				breadth: sanitizeLimit(limits?.breadth, defaultLimits.breadth),
+				complexity: sanitizeLimit(limits?.complexity, defaultLimits.complexity),
 			},
 			cacheComplexity,
 		};

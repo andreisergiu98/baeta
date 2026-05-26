@@ -179,10 +179,11 @@ export class BaetaCache extends DurableObject {
 		// re-schedule only if there's still data
 		const { remaining } = this.sql
 			.exec<{ remaining: number }>(
-				`SELECT
-					(SELECT COUNT(*) FROM items) +
-					(SELECT COUNT(*) FROM queries) +
-					(SELECT COUNT(*) FROM query_indexes) as remaining`,
+				`SELECT (
+					EXISTS(SELECT 1 FROM items) OR
+					EXISTS(SELECT 1 FROM queries) OR
+					EXISTS(SELECT 1 FROM query_indexes)
+				) AS remaining`,
 			)
 			.one();
 

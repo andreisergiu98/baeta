@@ -154,11 +154,17 @@ function buildIndexes<Args extends QueryArgs, Indexes extends QueryArgsIndexes<A
 		if (value === undefined) {
 			continue;
 		}
-		if (Array.isArray(value)) {
-			continue;
-		}
-		if (typeof value === 'object' && value !== null) {
-			continue;
+		if (
+			typeof value !== 'string' &&
+			typeof value !== 'number' &&
+			typeof value !== 'boolean' &&
+			value !== null
+		) {
+			throw new TypeError(
+				`Cache index '${key}' must be a primitive (string, number, boolean, or null) but received ${
+					Array.isArray(value) ? 'array' : typeof value
+				}.`,
+			);
 		}
 		indexes.push([key, value]);
 	}

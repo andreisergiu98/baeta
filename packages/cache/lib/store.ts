@@ -65,7 +65,7 @@ export class CacheStore<Item> {
 		};
 		this.queryCacheArgs = {
 			ttlMs: ttlMs ?? DEFAULT_TTL_MS,
-			parse: (value: string) => JSON.parse(value) as QueryMetadata,
+			parse: (value: string) => parseQueryMetadataSafely(value),
 			serialize: (meta: QueryMetadata) => JSON.stringify(meta),
 		};
 	}
@@ -256,9 +256,36 @@ function parseItemSafely<T>(value: string, parseItem: (value: string) => T): T |
 	try {
 		return parseItem(value);
 	} catch (err) {
-		log.warn(err, 'Failed to parse item, returning null', {
-			value,
-		});
+		log.warn(err, 'Failed to parse item, returning null');
 		return null;
 	}
+}
+
+function parseQueryMetadataSafely(value: string): QueryMetadata | null {
+	let parsed: unknown;
+	try {
+		parsed = JSON.parse(value);
+	} catch (err) {
+		log.warn(err, 'Failed to parse query metadata, treating as cache miss');
+		return null;
+	}
+	if (!isValidQueryMetadata(parsed)) {
+		log.warn('Query metadata has invalid shape, treating as cache miss');
+		return null;
+	}
+	return parsed;
+}
+
+function isValidQueryMetadata(value: unknown): value is QueryMetadata {
+	if (value == null || typeof value !== 'object') {
+		return false;
+	}
+	const candidate = value as { refs?: unknown; isList?: unknown };
+	if (!Array.isArray(candidate.refs)) {
+		return false;
+	}
+	if (typeof candidate.isList !== 'boolean') {
+		return false;
+	}
+	return candidate.refs.every((ref) => ref === null || typeof ref === 'string');
 }

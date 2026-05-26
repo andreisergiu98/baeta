@@ -1,4 +1,5 @@
 import { glob } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 import { relative, resolve } from '@baeta/util-path';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 import { type BaetaOptions, isValidConfig } from './config.ts';
@@ -30,7 +31,9 @@ function getRelativeConfigPath(path: string) {
 let cacheIndex = 0;
 async function importConfig(configPath: string): Promise<unknown> {
 	const modulePath = resolve(process.cwd(), configPath);
-	const result = await import(`file://${modulePath}?update=${cacheIndex++}`);
+	const url = pathToFileURL(modulePath);
+	url.searchParams.set('update', String(cacheIndex++));
+	const result = await import(url.href);
 
 	if (typeof result !== 'object' || result === null) {
 		throw new Error('Invalid config, expected `baeta.ts` with default export.');

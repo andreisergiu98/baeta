@@ -63,7 +63,7 @@ export async function handler(args: Args) {
 code=${cd}
 code=${install}`;
 
-			process.exit(0);
+			process.exit(1);
 		}
 	}
 

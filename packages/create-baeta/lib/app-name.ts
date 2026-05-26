@@ -3,12 +3,19 @@ import { logger } from '@docusaurus/logger';
 import input from '@inquirer/input';
 import fs from 'fs-extra';
 
+const APP_NAME_RE = /^(?:@[a-z0-9][a-z0-9._-]*\/)?[a-z0-9][a-z0-9._-]*$/;
+
 export async function getAppName(reqName: string | undefined, rootDir: string): Promise<string> {
+	const resolvedRoot = path.resolve(rootDir);
+
 	async function validateAppName(appName: string) {
 		if (!appName) {
 			return 'An app name is required.';
 		}
-		const dest = path.resolve(rootDir, appName);
+		if (!APP_NAME_RE.test(appName)) {
+			return 'App name must contain only lowercase letters, digits, dashes, underscores, or dots, and may optionally include an npm scope.';
+		}
+		const dest = path.resolve(resolvedRoot, appName);
 		if (await fs.pathExists(dest)) {
 			return logger.interpolate`Directory already exists at path=${dest}!`;
 		}

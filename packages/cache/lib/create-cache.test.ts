@@ -171,6 +171,28 @@ test('get - returns null for missing item', async (t) => {
 	t.is(result, null);
 });
 
+test('defineQuery throws on non-primitive index values', async (t) => {
+	const client = new MockCacheClient();
+	const cache = createCache<TestItem>(client, {
+		name: 'test',
+		parse: (v) => JSON.parse(v) as TestItem,
+		serialize: (v) => JSON.stringify(v),
+	})
+		.withQueries({
+			byTags: defineQuery({
+				resolve: async (_args: { tags: string }) => null,
+				indexArgsBy: { tags: true },
+			}),
+		})
+		.build();
+
+	await t.throwsAsync(
+		// @ts-expect-error - intentionally passing array to a string-typed index
+		cache.queries.byTags({ tags: ['a', 'b'] }),
+		{ instanceOf: TypeError, message: /must be a primitive/ },
+	);
+});
+
 test('get - returns existing item', async (t) => {
 	const { cache } = createTestCache();
 

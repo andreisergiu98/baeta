@@ -109,7 +109,9 @@ export class File {
 
 	unlink = async () => {
 		this.persisted = false;
-		return await fs.unlink(this.filename);
+		return await fs.unlink(this.filename).catch(() => {
+			// Ignore errors when trying to unlink, as the file might not exist or be already unlinked.
+		});
 	};
 
 	protected async buildContent() {

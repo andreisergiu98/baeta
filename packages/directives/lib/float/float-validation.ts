@@ -42,10 +42,17 @@ const directive = createInputDirective<Args>({
 
 		const config = params.directiveConfig;
 
-		if (config.multipleOf != null && value % config.multipleOf !== 0) {
-			throw new BadUserInput(`Value must be a multiple of ${config.multipleOf}`);
+		if (config.multipleOf != null) {
+			if (config.multipleOf === 0) {
+				throw new Error(`Invalid @${name}(multipleOf: 0): must be non-zero`);
+			}
+			const ratio = value / config.multipleOf;
+			const rounded = Math.round(ratio);
+			const tolerance = 1e-9 * Math.max(1, Math.abs(ratio));
+			if (!Number.isFinite(ratio) || Math.abs(ratio - rounded) > tolerance) {
+				throw new BadUserInput(`Value must be a multiple of ${config.multipleOf}`);
+			}
 		}
-
 		if (config.max != null && value > config.max) {
 			throw new BadUserInput(`Value must not be greater than ${config.max}`);
 		}

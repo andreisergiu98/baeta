@@ -42,8 +42,13 @@ const directive = createInputDirective<Args>({
 
 		const config = params.directiveConfig;
 
-		if (config.multipleOf != null && value % config.multipleOf !== 0) {
-			throw new BadUserInput(`Value must be a multiple of ${config.multipleOf}`);
+		if (config.multipleOf != null) {
+			if (config.multipleOf === 0) {
+				throw new Error(`Invalid @${name}(multipleOf: 0): must be non-zero`);
+			}
+			if (value % config.multipleOf !== 0) {
+				throw new BadUserInput(`Value must be a multiple of ${config.multipleOf}`);
+			}
 		}
 
 		if (config.max != null && value > config.max) {

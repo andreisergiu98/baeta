@@ -132,8 +132,19 @@ function validateNotOneOf(value: string, notOneOf: string[]) {
 	}
 }
 
+const regexCache = new Map<string, RegExp>();
+function getCachedRegExp(pattern: string, flags?: string): RegExp {
+	const key = `${flags ?? ''}\0${pattern}`;
+	let regex = regexCache.get(key);
+	if (regex == null) {
+		regex = new RegExp(pattern, flags);
+		regexCache.set(key, regex);
+	}
+	return regex;
+}
+
 function validateRegexp(value: string, regex: string, flags?: string) {
-	if (!new RegExp(regex, flags).test(value)) {
+	if (!getCachedRegExp(regex, flags).test(value)) {
 		const flagsMessage = flags == null ? '' : ` with flags '${flags}'`;
 		throw new BadUserInput(`Value must match pattern '${regex}'${flagsMessage}`);
 	}

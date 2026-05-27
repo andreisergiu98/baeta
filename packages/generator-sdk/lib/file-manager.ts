@@ -32,6 +32,9 @@ export class FileManager {
 
 	remove(filename: string) {
 		const index = this.files.findIndex((file) => file.filename === filename);
+		if (index < 0) {
+			return;
+		}
 		this.files.splice(index, 1);
 	}
 
@@ -43,21 +46,19 @@ export class FileManager {
 		this.files = this.files.filter((file) => file.tag !== tag);
 	}
 
-	writeAll() {
+	async writeAll() {
 		const toWrite = this.files.filter((file) => !file.persisted);
-		return Promise.all(toWrite.map((file) => file.write()));
+		await Promise.all(toWrite.map((file) => file.write()));
 	}
 
-	writeByTag(tag: string) {
+	async writeByTag(tag: string) {
 		const files = this.getByTag(tag);
 		const toWrite = files.filter((file) => !file.persisted);
-		return Promise.all(toWrite.map((file) => file.write()));
+		await Promise.all(toWrite.map((file) => file.write()));
 	}
 
-	unlinkAll() {
-		return Promise.all(this.files.map((file) => file.unlink())).then(() => {
-			// void
-		});
+	async unlinkAll() {
+		await Promise.all(this.files.map((file) => file.unlink()));
 	}
 
 	getPersistedFiles() {

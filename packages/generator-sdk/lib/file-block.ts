@@ -88,9 +88,11 @@ export class FileBlock extends File {
 
 	protected getSlices(existingContent: string) {
 		const startMarkerIndex = existingContent.indexOf(this.start);
-		const endMarkerIndex = existingContent.lastIndexOf(this.end);
-
-		if (startMarkerIndex === -1 || endMarkerIndex === -1) {
+		if (startMarkerIndex === -1) {
+			return [existingContent, '', false] as const;
+		}
+		const endMarkerIndex = existingContent.indexOf(this.end, startMarkerIndex + this.start.length);
+		if (endMarkerIndex === -1) {
 			return [existingContent, '', false] as const;
 		}
 

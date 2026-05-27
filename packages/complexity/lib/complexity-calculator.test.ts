@@ -202,6 +202,68 @@ test('calculateComplexity should use custom field settings', (t) => {
 	t.is(result.complexity, 5);
 });
 
+test('calculateComplexity should reject NaN complexity from user callback', (t) => {
+	const schema = createTestSchema();
+	const query = `query { simple }`;
+	const mockInfo = createMockInfo(schema, query);
+
+	const fieldSettingsMap: FieldSettingsMap = new Map([
+		['Query', new Map([['simple', () => ({ complexity: Number.NaN })]])],
+	]);
+
+	const defaults = { complexity: 1, multiplier: 10 };
+	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
+
+	t.true(Number.isFinite(result.complexity));
+	t.true(result.complexity >= 0);
+});
+
+test('calculateComplexity should reject negative complexity from user callback', (t) => {
+	const schema = createTestSchema();
+	const query = `query { simple }`;
+	const mockInfo = createMockInfo(schema, query);
+
+	const fieldSettingsMap: FieldSettingsMap = new Map([
+		['Query', new Map([['simple', () => ({ complexity: -1_000_000 })]])],
+	]);
+
+	const defaults = { complexity: 1, multiplier: 10 };
+	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
+
+	t.true(result.complexity >= 0);
+});
+
+test('calculateComplexity should reject negative multiplier from user callback', (t) => {
+	const schema = createTestSchema();
+	const query = `query { list { items } }`;
+	const mockInfo = createMockInfo(schema, query);
+
+	const fieldSettingsMap: FieldSettingsMap = new Map([
+		['Query', new Map([['list', () => ({ multiplier: -100 })]])],
+	]);
+
+	const defaults = { complexity: 1, multiplier: 10 };
+	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
+
+	t.true(Number.isFinite(result.complexity));
+	t.true(result.complexity >= 0);
+});
+
+test('calculateComplexity should reject Infinity from user callback', (t) => {
+	const schema = createTestSchema();
+	const query = `query { simple }`;
+	const mockInfo = createMockInfo(schema, query);
+
+	const fieldSettingsMap: FieldSettingsMap = new Map([
+		['Query', new Map([['simple', () => ({ complexity: Number.POSITIVE_INFINITY })]])],
+	]);
+
+	const defaults = { complexity: 1, multiplier: 10 };
+	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
+
+	t.true(Number.isFinite(result.complexity));
+});
+
 test('calculateComplexity should throw for unsupported operation', (t) => {
 	const schema = createTestSchema();
 

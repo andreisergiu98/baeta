@@ -22,6 +22,7 @@ import { isListOrNullableList } from '../utils/graphlq.ts';
 import { capitalize } from '../utils/string.ts';
 import { ComplexityError } from './complexity-errors.ts';
 import { type FieldSettingsMap, getFieldComplexitySettings } from './field-settings.ts';
+import { sanitizeLimit } from './sanitize-limit.ts';
 
 interface ComplexityDefaults {
 	complexity: number;
@@ -41,13 +42,18 @@ export function calculateComplexity<Context>(
 		throw new ComplexityError(`Unsupported operation ${operationName}`);
 	}
 
+	const safeDefaults: ComplexityDefaults = {
+		complexity: sanitizeLimit(defaults.complexity, 1),
+		multiplier: sanitizeLimit(defaults.multiplier, 10),
+	};
+
 	return complexityFromSelectionSet(
 		ctx,
 		info,
 		operationType,
 		info.operation.selectionSet,
 		fieldSettingsMap,
-		defaults,
+		safeDefaults,
 	);
 }
 
@@ -119,12 +125,14 @@ function complexityFromFragment<Context>(
 		? info.schema.getType(fragment.typeCondition.name.value)
 		: type;
 
-	if (!isOutputType(fragmentType)) {
-		throw new ComplexityError(`Unsupported fragment type ${fragmentType}`);
+	if (!fragmentType) {
+		throw new ComplexityError(
+			`Fragment type ${fragment.typeCondition?.name.value ?? 'unknown'} not found`,
+		);
 	}
 
-	if (!fragmentType) {
-		throw new ComplexityError(`Fragment type ${fragmentType} not found`);
+	if (!isOutputType(fragmentType)) {
+		throw new ComplexityError(`Unsupported fragment type ${fragmentType}`);
 	}
 
 	return complexityFromSelectionSet(
@@ -184,10 +192,11 @@ function complexityFromField<Context>(
 	let breadth = 1;
 	let complexity = 0;
 
-	const listMultiplier = fieldComplexitySettings?.multiplier ?? defaults.multiplier;
+	const listMultiplier = sanitizeLimit(fieldComplexitySettings?.multiplier, defaults.multiplier);
 	const multiplier = field && isListOrNullableList(field.type) ? listMultiplier : 1;
+	const fieldComplexity = sanitizeLimit(fieldComplexitySettings?.complexity, defaults.complexity);
 
-	complexity += (fieldComplexitySettings?.complexity ?? defaults.complexity) * multiplier;
+	complexity += fieldComplexity * multiplier;
 
 	if (!field || !selection.selectionSet) {
 		return {

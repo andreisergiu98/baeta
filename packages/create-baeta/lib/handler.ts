@@ -46,9 +46,9 @@ export async function handler(args: Args) {
 	const install = `${pkgManager} install`;
 
 	if (!args.skipInstall) {
-		shell.cd(dest);
 		logger.info`Installing dependencies with name=${pkgManager}...`;
 		const result = shell.exec(getInstallCommand(pkgManager), {
+			cwd: dest,
 			env: {
 				...process.env,
 				...(supportsColor.stdout ? { FORCE_COLOR: '1' } : {}),

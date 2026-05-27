@@ -1,11 +1,11 @@
 export const defaultPackageManager = 'npm';
 
 export const lockfileNames = {
-	npm: 'package-lock.json',
-	yarn: 'yarn.lock',
-	pnpm: 'pnpm-lock.yaml',
-	bun: 'bun.lockb',
-};
+	npm: ['package-lock.json'],
+	yarn: ['yarn.lock'],
+	pnpm: ['pnpm-lock.yaml'],
+	bun: ['bun.lock', 'bun.lockb'],
+} as const;
 
 export const packageManagers = Object.keys(lockfileNames) as PackageManager[];
 

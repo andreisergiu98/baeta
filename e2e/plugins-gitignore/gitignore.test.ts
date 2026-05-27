@@ -20,8 +20,7 @@ const MovieQuery = graphql(`
 `);
 
 function readGitignore() {
-	// Normalize backslashes to forward slashes for cross-platform assertions
-	return readFileSync(resolve(fixturePath, '.gitignore'), 'utf-8').replaceAll('\\', '/');
+	return readFileSync(resolve(fixturePath, '.gitignore'), 'utf-8');
 }
 
 test.serial('gitignore plugin creates .gitignore with generated paths', (t) => {

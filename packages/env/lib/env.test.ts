@@ -85,6 +85,14 @@ test('handles boolean false correctly', (t) => {
 test('throws on invalid number format', (t) => {
 	const parse = createEnvParser(createMockEnv({ NUM: 'not-a-number' }));
 
-	const result = parse('NUM', { type: 'number' });
-	t.true(Number.isNaN(result));
+	t.throws(() => parse('NUM', { type: 'number' }), {
+		message: /not a finite number/,
+	});
+});
+
+test('treats empty string as a set value (not unset)', (t) => {
+	const parse = createEnvParser(createMockEnv({ MSG: '' }));
+
+	const result = parse('MSG', { type: 'string', default: 'fallback' });
+	t.is(result, '');
 });

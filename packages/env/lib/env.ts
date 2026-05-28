@@ -60,7 +60,7 @@ function resolveParam<
 	R extends boolean | undefined,
 	D extends EnvInferType<T> | undefined,
 >(key: string, options: EnvOptions<T, R, D>, rawValue: string | undefined) {
-	if (!rawValue) {
+	if (rawValue == null) {
 		return options.default;
 	}
 
@@ -68,7 +68,13 @@ function resolveParam<
 		if (options.resolver) {
 			return options.resolver(rawValue);
 		}
-		return Number(rawValue);
+		const parsed = Number(rawValue);
+		if (!Number.isFinite(parsed)) {
+			throw new Error(
+				`Env param '${key}' has type 'number' but the value '${rawValue}' is not a finite number.`,
+			);
+		}
+		return parsed;
 	}
 
 	if (options.type === 'boolean') {

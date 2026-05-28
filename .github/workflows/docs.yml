@@ -47,9 +47,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn docs:build
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
     permissions:
       contents: read
   release:
@@ -96,3 +93,6 @@ jobs:
       contents: write
       pages: write
       deployments: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true

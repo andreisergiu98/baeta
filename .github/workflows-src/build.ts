@@ -1,4 +1,4 @@
-import createWorkflow, { type Steps } from 'github-actions-workflow-builder';
+import createWorkflow from 'github-actions-workflow-builder';
 import { github, secrets } from 'github-actions-workflow-builder/context';
 import {
 	and,
@@ -8,7 +8,6 @@ import {
 	neq,
 	or,
 	startsWith,
-	type Expression,
 } from 'github-actions-workflow-builder/lib/expression';
 import { useCache, useChangesets } from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
@@ -26,11 +25,11 @@ const MAIN_TEST_MATRIX = {
 };
 const PR_TEST_MATRIX = {
 	node: [createNodeVersion('22')],
-	machine: ['ubuntu-latest'],
+	machine: ['ubuntu-latest', 'windows-latest', 'macos-latest'],
 };
 
 export default createWorkflow(
-	({ setWorkflowName, setPermissions, addTrigger, addJob, whenTrigger, when }) => {
+	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, whenTrigger, when }) => {
 		setPermissions({
 			contents: 'read',
 		});
@@ -49,22 +48,24 @@ export default createWorkflow(
 			},
 		});
 
+		setConcurrency({
+			group: interpolate`${github.workflow}-\${{ github.head_ref || github.run_id }}`,
+			cancelInProgress: true,
+		});
+
 		const buildJob = addJob('build', ({ setName, add, run }) => {
-			add(jobConcurrency('build'));
 			setName('Check build');
 			add(setupNode({ turboCache: turboCaches.build }));
 			run('yarn build');
 		});
 
 		const typesJob = addJob('types', ({ setName, add, run }) => {
-			add(jobConcurrency('types'));
 			setName('Check types');
 			add(setupNode({ turboCache: turboCaches.types }));
 			run('yarn check:types');
 		});
 
 		const lintJob = addJob('lint', ({ setName, add, run }) => {
-			add(jobConcurrency('lint'));
 			setName('Check linting');
 			add(setupNode());
 			add(
@@ -79,35 +80,30 @@ export default createWorkflow(
 		});
 
 		addJob('formatting', ({ setName, add, run }) => {
-			add(jobConcurrency('formatting'));
 			setName('Check formatting');
 			add(setupNode());
 			run('yarn check:formatting');
 		});
 
 		const depsJob = addJob('dependencies', ({ setName, add, run }) => {
-			add(jobConcurrency('dependencies'));
 			setName('Check dependencies');
 			add(setupNode({ turboCache: turboCaches.deps }));
 			run('yarn check:deps');
 		});
 
 		const constraintsJob = addJob('constraints', ({ setName, add, run }) => {
-			add(jobConcurrency('constraints'));
 			setName('Check package constraints');
 			add(setupNode());
 			run('yarn check:constraints');
 		});
 
 		const lockfileJob = addJob('yarn-dedupe', ({ setName, add, run }) => {
-			add(jobConcurrency('yarn-dedupe'));
 			setName('Check yarn dedupe');
 			add(setupNode({ enableYarnHardenedMode: true }));
 			run('yarn dedupe --check');
 		});
 
 		const buildExamplesJob = addJob('build-examples', ({ setName, add, run }) => {
-			add(jobConcurrency('build-examples'));
 			setName('Check examples');
 			add(setupNode({ turboCache: turboCaches.examples }));
 			run('yarn examples:build');
@@ -124,7 +120,6 @@ export default createWorkflow(
 					{ failFast: false },
 				),
 			);
-			add(jobConcurrency(interpolate`tests-${matrix.node}`));
 			setName(`Check tests (Node ${matrix.node})`);
 			add(redisService(65535));
 			add(valkeyService(65534));
@@ -140,7 +135,6 @@ export default createWorkflow(
 					{ failFast: false },
 				),
 			);
-			add(jobConcurrency(interpolate`e2e-${matrix.node}-${matrix.machine}`));
 			setName(`Check e2e tests (${matrix.machine} - Node ${matrix.node})`);
 			setMachineType(`${matrix.machine}`);
 			add(setupNode({ node: matrix, turboCache: turboCaches.e2e }));
@@ -269,12 +263,3 @@ export default createWorkflow(
 		});
 	},
 );
-
-function jobConcurrency(group: Expression<string>): Steps {
-	return ({ setConcurrency }) => {
-		setConcurrency({
-			group: interpolate`${github.workflow}-${github.ref}-${group}`,
-			cancelInProgress: true,
-		});
-	};
-}

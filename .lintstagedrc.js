@@ -6,4 +6,5 @@
  */
 export default {
 	'*': 'oxfmt --no-error-on-unmatched-pattern',
+	'.github/{workflows,workflows-src}/**': () => 'yarn actions:check',
 };

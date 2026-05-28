@@ -25,17 +25,20 @@ const directive = createInputDirective<Args>({
 		}
 
 		const config = params.directiveConfig;
-		const keys = Object.keys(value);
+		let definedCount = 0;
+		for (const v of Object.values(value)) {
+			if (v != null) definedCount++;
+		}
 
-		if (config.maxFields && keys.length > config.maxFields) {
+		if (config.maxFields && definedCount > config.maxFields) {
 			throw new BadUserInput(
-				`Maximum ${config.maxFields} number of fields allowed, got ${keys.length}!`,
+				`Maximum ${config.maxFields} number of fields allowed, got ${definedCount}!`,
 			);
 		}
 
-		if (config.minFields && keys.length < config.minFields) {
+		if (config.minFields && definedCount < config.minFields) {
 			throw new BadUserInput(
-				`Minimum ${config.minFields} number of fields allowed, got ${keys.length}!`,
+				`Minimum ${config.minFields} number of fields allowed, got ${definedCount}!`,
 			);
 		}
 	},

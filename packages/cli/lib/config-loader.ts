@@ -12,6 +12,9 @@ export interface LoadedBaetaConfig {
 
 const configNames = ['baeta', '.baeta'];
 const configExtensions = ['ts', 'mts', 'js', 'mjs'];
+const configNameOrder = configExtensions.flatMap((ext) =>
+	configNames.map((name) => `${name}.${ext}`),
+);
 
 export async function discoverBaetaConfig() {
 	const generator = glob(`{${configNames.join(',')}}.{${configExtensions.join(',')}}`, {
@@ -21,7 +24,9 @@ export async function discoverBaetaConfig() {
 	for await (const file of generator) {
 		files.push(file);
 	}
-	return files.at(0) ?? null;
+	return (
+		files.toSorted((a, b) => configNameOrder.indexOf(a) - configNameOrder.indexOf(b)).at(0) ?? null
+	);
 }
 
 function getRelativeConfigPath(path: string) {

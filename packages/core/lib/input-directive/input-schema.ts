@@ -279,7 +279,7 @@ function validateFieldArguments(
 	info: GraphQLResolveInfo,
 ) {
 	const argEntries = Object.entries(args);
-	const argsDefinitionMap: Record<string, GraphQLArgument> = {};
+	const argsDefinitionMap: Record<string, GraphQLArgument | undefined> = {};
 
 	for (const arg of field.args) {
 		argsDefinitionMap[arg.name] = arg;
@@ -289,6 +289,9 @@ function validateFieldArguments(
 
 	for (const [argumentName, argumentValue] of argEntries) {
 		const argumentDefinition = argsDefinitionMap[argumentName];
+		if (argumentDefinition == null) {
+			continue;
+		}
 		const argumentValidations = getArgumentValidationsFromExtensions(field, argumentName);
 
 		errors.push(

@@ -54,11 +54,10 @@ export async function copyTemplate(
 	dest: string,
 ) {
 	const files = await getTemplateFiles(template, appName, runtime);
-
-	const promises = files.map((file) => {
+	const promises = files.map(async (file) => {
 		const filePath = path.join(dest, file.relativePath);
-		return fs.ensureDir(path.dirname(filePath)).then(() => fs.writeFile(filePath, file.content));
+		await fs.ensureDir(path.dirname(filePath));
+		await fs.writeFile(filePath, file.content);
 	});
-
 	await Promise.all(promises);
 }

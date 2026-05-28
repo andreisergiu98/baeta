@@ -15,9 +15,11 @@ async function findPackageManagerFromLockFile(
 	rootDir: string,
 ): Promise<PackageManager | undefined> {
 	for (const packageManager of packageManagers) {
-		const lockFilePath = path.join(rootDir, lockfileNames[packageManager]);
-		if (await fs.pathExists(lockFilePath)) {
-			return packageManager;
+		for (const lockFileName of lockfileNames[packageManager]) {
+			const lockFilePath = path.join(rootDir, lockFileName);
+			if (await fs.pathExists(lockFilePath)) {
+				return packageManager;
+			}
 		}
 	}
 	return undefined;
@@ -53,8 +55,11 @@ async function askForPackageManagerChoice(): Promise<PackageManager> {
 			default: defaultPackageManager,
 		});
 	} catch (error) {
-		logger.info`Falling back to name=${defaultPackageManager}`;
-		return defaultPackageManager;
+		if (error instanceof Error && error.name === 'ExitPromptError') {
+			logger.info`Falling back to name=${defaultPackageManager}`;
+			return defaultPackageManager;
+		}
+		throw error;
 	}
 }
 

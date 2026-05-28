@@ -5,6 +5,7 @@ import { type PtyProcess, startProcess } from '../utils/process.ts';
 
 export function useRunCommand(command?: string) {
 	const runRef = useRef<PtyProcess | null>(null);
+	const handleInputRef = useRef<(data: string) => void>(() => {});
 
 	const { stdin } = useStdin();
 	const { stdout, write } = useStdout();
@@ -35,6 +36,8 @@ export function useRunCommand(command?: string) {
 			proc.write(data);
 		};
 
+		stdin.removeListener('data', handleInputRef.current);
+		handleInputRef.current = handleInput;
 		stdin.addListener('data', handleInput);
 
 		writeHeader();

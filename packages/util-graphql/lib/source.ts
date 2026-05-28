@@ -41,8 +41,12 @@ function getRelativePath(filepath: string, basePath: string) {
 	const normalizedBasePath = ensureStartsWithSeparator(
 		ensureEndsWithSeparator(normalize(basePath)),
 	);
-	const [, relativePath] = normalizedFilepath.split(normalizedBasePath);
-	return relativePath;
+	const idx = normalizedFilepath.indexOf(normalizedBasePath);
+	if (idx === -1) {
+		return undefined;
+	}
+	const relativePath = normalizedFilepath.slice(idx + normalizedBasePath.length);
+	return relativePath.length > 0 ? relativePath : undefined;
 }
 
 function ensureStartsWithSeparator(path: string) {

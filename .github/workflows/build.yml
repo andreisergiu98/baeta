@@ -51,9 +51,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn build
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-build
-      cancel-in-progress: true
   types:
     name: Check types
     runs-on: ubuntu-latest
@@ -88,9 +85,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:types
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-types
-      cancel-in-progress: true
   lint:
     name: Check linting
     runs-on: ubuntu-latest
@@ -125,9 +119,6 @@ jobs:
           key: eslint-${{ github.sha }}
           restore-keys: eslint-
       - run: yarn check:linting
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-lint
-      cancel-in-progress: true
   formatting:
     name: Check formatting
     runs-on: ubuntu-latest
@@ -156,9 +147,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:formatting
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-formatting
-      cancel-in-progress: true
   dependencies:
     name: Check dependencies
     runs-on: ubuntu-latest
@@ -193,9 +181,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:deps
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-dependencies
-      cancel-in-progress: true
   constraints:
     name: Check package constraints
     runs-on: ubuntu-latest
@@ -224,9 +209,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:constraints
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-constraints
-      cancel-in-progress: true
   yarn-dedupe:
     name: Check yarn dedupe
     runs-on: ubuntu-latest
@@ -255,9 +237,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "1"
       - run: yarn dedupe --check
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-yarn-dedupe
-      cancel-in-progress: true
   build-examples:
     name: Check examples
     runs-on: ubuntu-latest
@@ -293,9 +272,6 @@ jobs:
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn examples:build
       - run: yarn examples:types
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-build-examples
-      cancel-in-progress: true
   tests:
     name: Check tests (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
@@ -364,9 +340,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:tests
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-tests-${{ matrix.node }}
-      cancel-in-progress: true
   e2e:
     name: Check e2e tests (${{ matrix.machine }} - Node ${{ matrix.node }})
     runs-on: ${{ matrix.machine }}
@@ -374,8 +347,9 @@ jobs:
       matrix:
         node: ${{ fromJSON(github.event_name == 'pull_request' && '["22"]' ||
           '["22","24","26"]') }}
-        machine: ${{ fromJSON(github.event_name == 'pull_request' && '["ubuntu-latest"]'
-          || '["ubuntu-latest","windows-latest","macos-latest"]') }}
+        machine: ${{ fromJSON(github.event_name == 'pull_request' &&
+          '["ubuntu-latest","windows-latest","macos-latest"]' ||
+          '["ubuntu-latest","windows-latest","macos-latest"]') }}
         include: ${{ fromJSON(github.event_name == 'pull_request' &&
           '[{"node":"22","version":"22"}]' ||
           '[{"node":"22","version":"22"},{"node":"24","version":"24"},{"node":"26","version":"26"}]')
@@ -412,10 +386,6 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:e2e
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-e2e-${{ matrix.node }}-${{
-        matrix.machine }}
-      cancel-in-progress: true
   publish:
     name: Publish packages or open PR
     needs:
@@ -571,5 +541,8 @@ jobs:
       cancel-in-progress: false
     permissions:
       id-token: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 permissions:
   contents: read

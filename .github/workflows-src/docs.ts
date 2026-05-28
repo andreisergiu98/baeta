@@ -4,7 +4,7 @@ import { and, eq, interpolate, not, or } from 'github-actions-workflow-builder/l
 import { useGhPages } from './_shared/actions.ts';
 import { setupNode } from './_shared/setup.ts';
 
-export default createWorkflow(({ setWorkflowName, addTrigger, addJob, when }) => {
+export default createWorkflow(({ setWorkflowName, setConcurrency, addTrigger, addJob, when }) => {
 	setWorkflowName('Build website');
 	addTrigger('push', {
 		branches: ['next'],
@@ -14,6 +14,11 @@ export default createWorkflow(({ setWorkflowName, addTrigger, addJob, when }) =>
 		paths: ['website/**', 'yarn.lock'],
 	});
 	addTrigger('workflow_dispatch');
+
+	setConcurrency({
+		group: interpolate`${github.workflow}-\${{ github.head_ref || github.run_id }}`,
+		cancelInProgress: true,
+	});
 
 	const isReleaseEvent = and(
 		eq(github.repository, 'andreisergiu98/baeta'),
@@ -49,10 +54,6 @@ function buildWebsite(withRelease: boolean): Steps {
 			add(setupNode({ enableYarnHardenedMode: true }));
 		} else {
 			setName('Build website');
-			setConcurrency({
-				group: interpolate`${github.workflow}-${github.ref}`,
-				cancelInProgress: true,
-			});
 			setPermissions({
 				contents: 'read',
 			});

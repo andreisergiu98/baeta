@@ -51,8 +51,33 @@ function resolveString(value: string) {
 	return value;
 }
 
-function resolveBoolean(value: string) {
-	return value === 'true';
+const TRUE_VALUES = new Set(['true', '1', 'yes', 'on']);
+const FALSE_VALUES = new Set(['false', '0', 'no', 'off']);
+
+function resolveBoolean(key: string, value: string) {
+	const normalized = value.trim().toLowerCase();
+	if (TRUE_VALUES.has(normalized)) return true;
+	if (FALSE_VALUES.has(normalized)) return false;
+	throw new Error(
+		`Env param '${key}' has type 'boolean' but the value '${value}' is not recognised. Expected one of: true/false, 1/0, yes/no, on/off.`,
+	);
+}
+
+const NUMBER_RE = /^[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?$/;
+
+function resolveNumber(key: string, value: string) {
+	if (!NUMBER_RE.test(value)) {
+		throw new Error(
+			`Env param '${key}' has type 'number' but the value '${value}' is not a valid decimal number.`,
+		);
+	}
+	const parsed = Number(value);
+	if (!Number.isFinite(parsed)) {
+		throw new Error(
+			`Env param '${key}' has type 'number' but the value '${value}' is not a finite number.`,
+		);
+	}
+	return parsed;
 }
 
 function resolveParam<
@@ -65,23 +90,23 @@ function resolveParam<
 	}
 
 	if (options.type === 'number') {
+		if (rawValue === '') {
+			return options.default;
+		}
 		if (options.resolver) {
 			return options.resolver(rawValue);
 		}
-		const parsed = Number(rawValue);
-		if (!Number.isFinite(parsed)) {
-			throw new Error(
-				`Env param '${key}' has type 'number' but the value '${rawValue}' is not a finite number.`,
-			);
-		}
-		return parsed;
+		return resolveNumber(key, rawValue);
 	}
 
 	if (options.type === 'boolean') {
+		if (rawValue === '') {
+			return options.default;
+		}
 		if (options.resolver) {
 			return options.resolver(rawValue);
 		}
-		return resolveBoolean(rawValue);
+		return resolveBoolean(key, rawValue);
 	}
 
 	if (options.type === 'string') {

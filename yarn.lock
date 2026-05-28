@@ -2930,6 +2930,7 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "catalog:dev"
     typescript: "catalog:dev"
   languageName: unknown

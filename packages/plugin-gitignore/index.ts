@@ -1,5 +1,6 @@
 import { relative, resolve } from 'node:path';
 import { createPluginV1, FileBlock, micromatch } from '@baeta/generator-sdk';
+import { posixPath } from '@baeta/util-path';
 
 /**
  * Configuration options for the gitignore plugin.
@@ -37,35 +38,33 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 			const moduleDefinitionName = ctx.generatorOptions.moduleDefinitionName;
 
 			const skippedTags = new Set([...(options?.skipTags ?? []), ...defaultSkipTags]);
-			const skippedFilesGlobs = [
-				...(options?.skipFilesGlobs ?? []).map((glob) => resolve(ctx.generatorOptions.cwd, glob)),
-			];
+			const skippedFilesGlobs = options?.skipFilesGlobs ?? [];
+
+			const toRelativePosix = (absolute: string) => {
+				return posixPath(relative(ctx.generatorOptions.cwd, absolute));
+			};
 
 			const filePaths = ctx.fileManager.files
 				.filter((file) => {
+					const relativePath = toRelativePosix(file.filename);
 					return (
 						!file.filename.endsWith(moduleDefinitionName) &&
 						!skippedTags.has(file.tag) &&
-						!skippedFilesGlobs.some((skippedFile) =>
-							micromatch.isMatch(file.filename, skippedFile),
-						) &&
+						!skippedFilesGlobs.some((glob) => micromatch.isMatch(relativePath, glob)) &&
 						file.options?.disableOverwrite !== true
 					);
 				})
 				.map((file) => file.filename);
 
 			const generatedPaths = filePaths
-				.map((file) => relative(ctx.generatorOptions.cwd, file))
+				.map(toRelativePosix)
 				.filter((file) => !file.endsWith(moduleDefinitionName));
 
-			if (
-				!skippedFilesGlobs.some((skippedFile) =>
-					micromatch.isMatch(`${modulesDir}/**/${moduleDefinitionName}`, skippedFile),
-				)
-			) {
-				generatedPaths.push(
-					`${relative(ctx.generatorOptions.cwd, modulesDir)}/**/${moduleDefinitionName}`,
-				);
+			const modulesDirRelativePosix = toRelativePosix(modulesDir);
+			const moduleDefinitionGlob = `${modulesDirRelativePosix}/**/${moduleDefinitionName}`;
+
+			if (!skippedFilesGlobs.some((glob) => micromatch.isMatch(moduleDefinitionGlob, glob))) {
+				generatedPaths.push(moduleDefinitionGlob);
 			}
 
 			generatedPaths.sort((a, b) => a.localeCompare(b));

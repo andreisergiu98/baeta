@@ -20,8 +20,4 @@ export interface BaetaModuleTypes {
 
 
 
-export const ScalarsModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-
-}, {
-
-});
+export const ScalarsModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {}, {});

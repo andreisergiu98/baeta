@@ -72,6 +72,4 @@ export const UserModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, Baeta
   Mutation: BaetaSdk.createTypeBuilder("Mutation", {
     createUser: BaetaSdk.createFieldBuilder("Mutation", "createUser")
   })
-}, {
-
-});
+}, {});

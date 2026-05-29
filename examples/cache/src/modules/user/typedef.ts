@@ -97,6 +97,4 @@ export const UserModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, Baeta
     userCreated: BaetaSdk.createSubscriptionBuilder("userCreated"),
     userUpdated: BaetaSdk.createSubscriptionBuilder("userUpdated")
   })
-}, {
-
-});
+}, {});

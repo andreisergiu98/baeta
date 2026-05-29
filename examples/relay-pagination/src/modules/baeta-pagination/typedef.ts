@@ -101,6 +101,4 @@ export const BaetaPaginationModule = BaetaSdk.createModuleBuilder<BaetaUserTypes
     cursor: BaetaSdk.createFieldBuilder("UserPhotoEdge", "cursor"),
     node: BaetaSdk.createFieldBuilder("UserPhotoEdge", "node")
   })
-}, {
-
-});
+}, {});

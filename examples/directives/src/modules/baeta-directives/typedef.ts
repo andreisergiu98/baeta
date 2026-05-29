@@ -18,8 +18,4 @@ export interface BaetaModuleTypes {
 
 
 
-export const BaetaDirectivesModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {
-
-}, {
-
-});
+export const BaetaDirectivesModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, BaetaUserTypes.Info, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef, {}, {});

@@ -34,6 +34,4 @@ export const CustomInputDirectiveModule = BaetaSdk.createModuleBuilder<BaetaUser
   Query: BaetaSdk.createTypeBuilder("Query", {
     testIncrementDirective: BaetaSdk.createFieldBuilder("Query", "testIncrementDirective")
   })
-}, {
-
-});
+}, {});

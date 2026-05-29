@@ -56,6 +56,4 @@ export const ProductModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx, Ba
   Query: BaetaSdk.createTypeBuilder("Query", {
     product: BaetaSdk.createFieldBuilder("Query", "product")
   })
-}, {
-
-});
+}, {});

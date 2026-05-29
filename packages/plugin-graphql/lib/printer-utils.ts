@@ -5,6 +5,9 @@ export function buildBlock({ name, lines }: { name: string; lines: string[] }): 
 }
 
 export function buildCodeBlock({ name, lines }: { name: string; lines: string[] }) {
+	if (lines.length === 0) {
+		return `${name} {}`;
+	}
 	const linesWithSep = lines.filter(Boolean).map(indent(2)).join(',\n');
 	return [`${name} {`, linesWithSep, '}'].join('\n');
 }

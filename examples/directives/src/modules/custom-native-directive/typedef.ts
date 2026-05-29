@@ -47,6 +47,4 @@ export const CustomNativeDirectiveModule = BaetaSdk.createModuleBuilder<BaetaUse
   Query: BaetaSdk.createTypeBuilder("Query", {
     testUpperDirective: BaetaSdk.createFieldBuilder("Query", "testUpperDirective")
   })
-}, {
-
-});
+}, {});

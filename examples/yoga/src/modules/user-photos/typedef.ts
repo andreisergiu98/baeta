@@ -53,6 +53,4 @@ export const UserPhotosModule = BaetaSdk.createModuleBuilder<BaetaUserTypes.Ctx,
   User: BaetaSdk.createTypeBuilder("User", {
     photos: BaetaSdk.createFieldBuilder("User", "photos")
   })
-}, {
-
-});
+}, {});

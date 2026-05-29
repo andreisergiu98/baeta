@@ -1,5 +1,13 @@
 # @baeta/errors
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc)]:
+  - @baeta/util-env@2.0.0-next.4
+
 ## 2.0.0-next.14
 
 ## 2.0.0-next.13

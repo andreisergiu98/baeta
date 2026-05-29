@@ -1,5 +1,17 @@
 # @baeta/plugin-cloudflare
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Remove extra unnecessary calls to next by [@andreisergiu98](https://github.com/andreisergiu98) in [#493](https://github.com/andreisergiu98/baeta/pull/493)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc), [`5ad1513`](https://github.com/andreisergiu98/baeta/commit/5ad15133405b9b3f957f9752c709c0be63748fa2), [`1249b32`](https://github.com/andreisergiu98/baeta/commit/1249b32c42270151d6d6de46d54c82c1f975719b), [`3571c17`](https://github.com/andreisergiu98/baeta/commit/3571c1785a4eb1361c47b80725c990cefa27a791), [`d179c12`](https://github.com/andreisergiu98/baeta/commit/d179c12488f6ac11add26f8337e088f791d820b7), [`6b20dca`](https://github.com/andreisergiu98/baeta/commit/6b20dcaaee2761a8f4d3a1b3eadc7ee032eddd96), [`03c2bc9`](https://github.com/andreisergiu98/baeta/commit/03c2bc9913b6ffdc15f627f9d177347e0805defd)]:
+  - @baeta/subscriptions-cloudflare@0.2.0-next.3
+  - @baeta/cache-cloudflare@2.0.0-next.15
+  - @baeta/generator-sdk@2.0.0-next.6
+
 ## 2.0.0-next.14
 
 ### Patch Changes

@@ -1,5 +1,22 @@
 # @baeta/generator-sdk
 
+## 2.0.0-next.6
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Improve guards for file writes by [@andreisergiu98](https://github.com/andreisergiu98) in [#511](https://github.com/andreisergiu98/baeta/pull/511)
+
+- Ensure end marker is after start marker for file blocks by [@andreisergiu98](https://github.com/andreisergiu98) in [#526](https://github.com/andreisergiu98/baeta/pull/526)
+
+- Group linting headers under one option by [@andreisergiu98](https://github.com/andreisergiu98) in [#468](https://github.com/andreisergiu98/baeta/pull/468)
+
+- Drop change-case-all dependency in favor of change-case by [@andreisergiu98](https://github.com/andreisergiu98) in [#418](https://github.com/andreisergiu98/baeta/pull/418)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc)]:
+  - @baeta/util-path@2.0.0-next.5
+  - @baeta/plugin@2.0.0-next.4
+
 ## 2.0.0-next.5
 
 ### Patch Changes

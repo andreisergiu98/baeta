@@ -1,5 +1,15 @@
 # @baeta/env
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Add stricter validation for booleans and numbers by [@andreisergiu98](https://github.com/andreisergiu98) in [#515](https://github.com/andreisergiu98/baeta/pull/515)
+
+- Disallow non-finite numbers as env values by [@andreisergiu98](https://github.com/andreisergiu98) in [#510](https://github.com/andreisergiu98/baeta/pull/510)
+
 ## 2.0.0-next.14
 
 ## 2.0.0-next.13

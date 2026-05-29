@@ -1,5 +1,11 @@
 # @baeta/subscriptions-cloudflare
 
+## 0.2.0-next.3
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
 ## 0.2.0-next.2
 
 ### Patch Changes

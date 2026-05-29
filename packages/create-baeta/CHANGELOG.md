@@ -1,5 +1,17 @@
 # create-baeta
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Validate app name by [@andreisergiu98](https://github.com/andreisergiu98) in [#512](https://github.com/andreisergiu98/baeta/pull/512)
+
+- Drop prompts dependency in favor of inquirer by [@andreisergiu98](https://github.com/andreisergiu98) in [#418](https://github.com/andreisergiu98/baeta/pull/418)
+
+- Check for bun.lock by [@andreisergiu98](https://github.com/andreisergiu98) in [#516](https://github.com/andreisergiu98/baeta/pull/516)
+
 ## 2.0.0-next.14
 
 ## 2.0.0-next.13

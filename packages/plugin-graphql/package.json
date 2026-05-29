@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-graphql",
-  "version": "2.0.0-next.14",
+  "version": "2.0.0-next.15",
   "description": "GraphQL codegen plugin for Baeta.",
   "keywords": [
     "baeta",

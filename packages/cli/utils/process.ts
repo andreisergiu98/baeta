@@ -1,10 +1,9 @@
 import { execaCommand, parseCommandString } from 'execa';
-import pty from 'node-pty';
 
 export type PtyProcess = {
 	didExit: boolean;
 	write: (data: string) => void;
-	exit: () => void;
+	exit: () => Promise<void>;
 };
 
 export interface StartProcessOptions {
@@ -14,9 +13,11 @@ export interface StartProcessOptions {
 	isTTY: boolean;
 }
 
-export function startProcess(options: StartProcessOptions): PtyProcess {
+const EXIT_TIMEOUT = 5_000;
+
+export async function startProcess(options: StartProcessOptions): Promise<PtyProcess> {
 	if (options.isTTY) {
-		return startProcessWithPty(options);
+		return await startProcessWithPty(options);
 	}
 	return startProcessWithExeca(options);
 }
@@ -64,31 +65,40 @@ function startProcessWithExeca({ command, onData, onExit }: StartProcessOptions)
 			if (didExit) return;
 			inputController?.enqueue(data);
 		},
-		exit: () => {
+		exit: async () => {
 			if (didExit) return;
-			subprocess.kill('SIGTERM');
+			return await new Promise((resolve) => {
+				subprocess.on('exit', resolve);
+				setTimeout(resolve, EXIT_TIMEOUT);
+				subprocess.kill('SIGTERM');
+			});
 		},
 	};
 }
 
-function startProcessWithPty({ command, onData, onExit }: StartProcessOptions): PtyProcess {
+async function startProcessWithPty({
+	command,
+	onData,
+	onExit,
+}: StartProcessOptions): Promise<PtyProcess> {
+	const { spawn } = await import('node-pty');
+
 	const [file, ...args] = parseCommandString(command);
 
 	const cols = process.stdout.columns;
 	const rows = process.stdout.rows;
 
-	const ptyProc = pty.spawn(file, args, {
+	const ptyProc = spawn(file, args, {
 		cwd: process.cwd(),
 		env: process.env,
 		cols: cols,
 		rows: rows,
 	});
 
-	process.stdout.on('resize', () => {
-		const cols = process.stdout.columns;
-		const rows = process.stdout.rows;
-		ptyProc.resize(cols, rows);
-	});
+	const onResize = () => {
+		ptyProc.resize(process.stdout.columns, process.stdout.rows);
+	};
+	process.stdout.on('resize', onResize);
 
 	ptyProc.onData((data) => {
 		const { cleaned, cleared } = stripClearControls(data);
@@ -99,6 +109,7 @@ function startProcessWithPty({ command, onData, onExit }: StartProcessOptions): 
 
 	ptyProc.onExit(() => {
 		didExit = true;
+		process.stdout.removeListener('resize', onResize);
 		onExit?.();
 	});
 
@@ -110,9 +121,13 @@ function startProcessWithPty({ command, onData, onExit }: StartProcessOptions): 
 			if (didExit) return;
 			ptyProc.write(data);
 		},
-		exit: () => {
+		exit: async () => {
 			if (didExit) return;
 			ptyProc.kill('SIGTERM');
+			return await new Promise((resolve) => {
+				ptyProc.onExit(() => resolve());
+				setTimeout(resolve, EXIT_TIMEOUT);
+			});
 		},
 	};
 }

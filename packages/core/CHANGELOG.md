@@ -1,5 +1,21 @@
 # @baeta/core
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Use symbols for make functions and plugins by [@andreisergiu98](https://github.com/andreisergiu98) in [#451](https://github.com/andreisergiu98/baeta/pull/451)
+
+- Add guard for missing arg definition by [@andreisergiu98](https://github.com/andreisergiu98) in [#519](https://github.com/andreisergiu98/baeta/pull/519)
+
+- Drop extensions concept and api in favor of app plugins by [@andreisergiu98](https://github.com/andreisergiu98) in [#428](https://github.com/andreisergiu98/baeta/pull/428)
+
+- Fix potential unwanted overwrite of graphql extensions by [@andreisergiu98](https://github.com/andreisergiu98) in [#494](https://github.com/andreisergiu98/baeta/pull/494)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc)]:
+  - @baeta/errors@2.0.0-next.15
+
 ## 2.0.0-next.14
 
 ### Patch Changes

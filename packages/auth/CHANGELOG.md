@@ -1,5 +1,29 @@
 # @baeta/extension-auth
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Disallow authAfter for mutations by [@andreisergiu98](https://github.com/andreisergiu98) in [#492](https://github.com/andreisergiu98/baeta/pull/492)
+
+- Switch to builder pattern for auth scopes and grants by [@andreisergiu98](https://github.com/andreisergiu98) in [#453](https://github.com/andreisergiu98/baeta/pull/453)
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Use Map for storing scope resolvers by [@andreisergiu98](https://github.com/andreisergiu98) in [#490](https://github.com/andreisergiu98/baeta/pull/490)
+
+- Avoid mutating original error when creating aggregate errors by [@andreisergiu98](https://github.com/andreisergiu98) in [#489](https://github.com/andreisergiu98/baeta/pull/489)
+
+- Use resolver result for grant target by [@andreisergiu98](https://github.com/andreisergiu98) in [#453](https://github.com/andreisergiu98/baeta/pull/453)
+
+- Drop extensions concept and api in favor of app plugins by [@andreisergiu98](https://github.com/andreisergiu98) in [#428](https://github.com/andreisergiu98/baeta/pull/428)
+
+- Make non-finite scope args non-serializble by [@andreisergiu98](https://github.com/andreisergiu98) in [#491](https://github.com/andreisergiu98/baeta/pull/491)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc), [`efc7a36`](https://github.com/andreisergiu98/baeta/commit/efc7a36b00fbae81ff10bdd5fdebbe7ffcc88913), [`7d0e8b2`](https://github.com/andreisergiu98/baeta/commit/7d0e8b26a4bd58321546366f2b164e168c456532), [`7bce3e4`](https://github.com/andreisergiu98/baeta/commit/7bce3e4c4940782bcb51739797307a6d57c91e7d), [`6cb2888`](https://github.com/andreisergiu98/baeta/commit/6cb2888843a1e52e33e4504dc5582a272c998e2e)]:
+  - @baeta/util-log@2.0.0-next.4
+  - @baeta/errors@2.0.0-next.15
+  - @baeta/core@2.0.0-next.15
+
 ## 2.0.0-next.14
 
 ### Patch Changes

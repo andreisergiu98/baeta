@@ -1,5 +1,18 @@
 # @baeta/cache
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Fix ttl override not being forwarded for queries by [@andreisergiu98](https://github.com/andreisergiu98) in [#496](https://github.com/andreisergiu98/baeta/pull/496)
+
+- Validate indexes and query metadata by [@andreisergiu98](https://github.com/andreisergiu98) in [#507](https://github.com/andreisergiu98/baeta/pull/507)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc)]:
+  - @baeta/util-encoding@2.0.0-next.4
+  - @baeta/util-log@2.0.0-next.4
+
 ## 2.0.0-next.14
 
 ## 2.0.0-next.13

@@ -1,6 +1,6 @@
 {
   "name": "@baeta/generator",
-  "version": "2.0.0-next.5",
+  "version": "2.0.0-next.6",
   "description": "Code generator for Baeta.",
   "keywords": [
     "baeta",

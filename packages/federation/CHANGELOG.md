@@ -1,5 +1,13 @@
 # @baeta/federation
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Use Map for federation entity handlers by [@andreisergiu98](https://github.com/andreisergiu98) in [#488](https://github.com/andreisergiu98/baeta/pull/488)
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
 ## 2.0.0-next.14
 
 ## 2.0.0-next.13

@@ -1,5 +1,22 @@
 # @baeta/directives
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Cache string regex directives by [@andreisergiu98](https://github.com/andreisergiu98) in [#520](https://github.com/andreisergiu98/baeta/pull/520)
+
+- Drop "format" option for "@validString" directive by [@andreisergiu98](https://github.com/andreisergiu98) in [#418](https://github.com/andreisergiu98/baeta/pull/418)
+
+- Handle multipleOf edge cases in @validInt and @validFloat by [@andreisergiu98](https://github.com/andreisergiu98) in [#522](https://github.com/andreisergiu98/baeta/pull/522)
+
+- Count only defined fields for constraint directive by [@andreisergiu98](https://github.com/andreisergiu98) in [#521](https://github.com/andreisergiu98/baeta/pull/521)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc), [`efc7a36`](https://github.com/andreisergiu98/baeta/commit/efc7a36b00fbae81ff10bdd5fdebbe7ffcc88913), [`7d0e8b2`](https://github.com/andreisergiu98/baeta/commit/7d0e8b26a4bd58321546366f2b164e168c456532), [`7bce3e4`](https://github.com/andreisergiu98/baeta/commit/7bce3e4c4940782bcb51739797307a6d57c91e7d), [`6cb2888`](https://github.com/andreisergiu98/baeta/commit/6cb2888843a1e52e33e4504dc5582a272c998e2e)]:
+  - @baeta/errors@2.0.0-next.15
+  - @baeta/core@2.0.0-next.15
+
 ## 2.0.0-next.14
 
 ### Patch Changes

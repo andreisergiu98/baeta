@@ -1,5 +1,23 @@
 # @baeta/cli
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+
+- Ensure single stdin listener at a time by [@andreisergiu98](https://github.com/andreisergiu98) in [#514](https://github.com/andreisergiu98/baeta/pull/514)
+
+- Ensure deterministic config order by [@andreisergiu98](https://github.com/andreisergiu98) in [#513](https://github.com/andreisergiu98/baeta/pull/513)
+
+- Import node-pty dynamically only when needed by [@andreisergiu98](https://github.com/andreisergiu98) in [#527](https://github.com/andreisergiu98/baeta/pull/527)
+
+- Add proper encoding for config path by [@andreisergiu98](https://github.com/andreisergiu98) in [#509](https://github.com/andreisergiu98/baeta/pull/509)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc), [`716f996`](https://github.com/andreisergiu98/baeta/commit/716f996e5d284fe34c122c6a54a26c738afe2103), [`2e6f2d9`](https://github.com/andreisergiu98/baeta/commit/2e6f2d9fffdf96b5cc6569ca6fc75d0d243d71a2), [`7bce3e4`](https://github.com/andreisergiu98/baeta/commit/7bce3e4c4940782bcb51739797307a6d57c91e7d), [`03c2bc9`](https://github.com/andreisergiu98/baeta/commit/03c2bc9913b6ffdc15f627f9d177347e0805defd)]:
+  - @baeta/plugin-graphql@2.0.0-next.15
+  - @baeta/generator@2.0.0-next.6
+  - @baeta/util-path@2.0.0-next.5
+
 ## 2.0.0-next.14
 
 ### Patch Changes

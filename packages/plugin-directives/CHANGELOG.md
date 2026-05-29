@@ -1,5 +1,15 @@
 # @baeta/plugin-directives
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Drop Node v23 and v25 by [@andreisergiu98](https://github.com/andreisergiu98) in [#474](https://github.com/andreisergiu98/baeta/pull/474)
+- Updated dependencies [[`dc89e17`](https://github.com/andreisergiu98/baeta/commit/dc89e1728926f4bd5a5e1351635c38bf8d5938dc), [`f8c7a8d`](https://github.com/andreisergiu98/baeta/commit/f8c7a8d95b0025ea25ab6054ab395f9dd68fd316), [`1249b32`](https://github.com/andreisergiu98/baeta/commit/1249b32c42270151d6d6de46d54c82c1f975719b), [`03c2bc9`](https://github.com/andreisergiu98/baeta/commit/03c2bc9913b6ffdc15f627f9d177347e0805defd), [`3571c17`](https://github.com/andreisergiu98/baeta/commit/3571c1785a4eb1361c47b80725c990cefa27a791), [`ef8c2c9`](https://github.com/andreisergiu98/baeta/commit/ef8c2c914e97e3ae91086c030d65432626fb30ac), [`d179c12`](https://github.com/andreisergiu98/baeta/commit/d179c12488f6ac11add26f8337e088f791d820b7), [`535dcf4`](https://github.com/andreisergiu98/baeta/commit/535dcf4a5d40d1f2d5d07ff215c011f387918260), [`03c2bc9`](https://github.com/andreisergiu98/baeta/commit/03c2bc9913b6ffdc15f627f9d177347e0805defd)]:
+  - @baeta/generator-sdk@2.0.0-next.6
+  - @baeta/directives@2.0.0-next.15
+  - @baeta/util-path@2.0.0-next.5
+
 ## 2.0.0-next.14
 
 ### Patch Changes

@@ -73,7 +73,7 @@
     "@baeta/plugin-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
     "execa": "^9.6.1",
-    "ink": "^7.0.4",
+    "ink": "^7.0.5",
     "node-pty": "1.2.0-beta.13",
     "react": "catalog:prod",
     "yargs": "^18.0.0"

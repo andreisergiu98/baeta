@@ -8,14 +8,14 @@ import {
 } from 'github-actions-workflow-builder/lib/expression';
 
 const actions = {
-	checkout: 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd', // v6.0.2
+	checkout: 'actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10', // v6.0.3
 	setupNode: 'actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e', // v6.4.0
 	cache: 'actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae', // v5.0.5
 	createGithubAppToken: 'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1', // v3.2.0
 	githubScript: 'actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3', // v9.0.0
 	uploadArtifact: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a', // v7.0.1
 	downloadArtifact: 'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c', // v8.0.1
-	changesets: 'changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b', // v1.8.0
+	changesets: 'changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d', // v1.9.0
 	dockerLogin: 'docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee', // v4.2.0
 	ghPages: 'peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453', // v4.1.0
 	renovate: 'renovatebot/github-action@693b9ef15eec82123529a37c782242f091365961', // v46.1.14

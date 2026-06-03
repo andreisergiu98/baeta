@@ -69,7 +69,7 @@
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20260530.1",
+    "@cloudflare/workers-types": "^4.20260531.1",
     "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },

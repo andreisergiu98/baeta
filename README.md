@@ -5,9 +5,10 @@
 <div align="center">
   <h1>Baeta</h1>
   <a href="https://www.npmjs.com/package/@baeta/cli"><img src="https://img.shields.io/npm/v/@baeta/cli.svg?style=flat" /></a>
-   <a href="https://github.com/andreisergiu98/baeta/actions/workflows/checks.yml"><img src="https://img.shields.io/github/actions/workflow/status/andreisergiu98/baeta/checks.yml" /></a>
+   <a href="https://github.com/andreisergiu98/baeta/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/andreisergiu98/baeta/build.yml" /></a>
   <a href="https://github.com/andreisergiu98/baeta/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>
   <a href="https://github.com/andreisergiu98/baeta/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" /></a>
+  <img alt="nycrc config on GitHub" src="https://img.shields.io/nycrc/andreisergiu98/baeta?config=.nycrc.json&preferredThreshold=branches&color=green">
   <br />
   <br />
   <a href="https://baeta.io/docs/getting-started/installation">Getting Started</a>

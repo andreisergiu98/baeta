@@ -7,7 +7,7 @@ import { setupNode } from './_shared/setup.ts';
 export default createWorkflow(({ setWorkflowName, setConcurrency, addTrigger, addJob, when }) => {
 	setWorkflowName('Build website');
 	addTrigger('push', {
-		branches: ['next'],
+		branches: ['main'],
 		paths: ['website/**', 'yarn.lock'],
 	});
 	addTrigger('pull_request', {

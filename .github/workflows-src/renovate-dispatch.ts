@@ -21,7 +21,7 @@ export default createWorkflow(({ setWorkflowName, addJob, addTrigger, when, setP
 		},
 	]);
 	addTrigger('push', {
-		branches: ['main', 'next'],
+		branches: ['main'],
 		paths: ['.github/renovate.json', '.github/workflows/renovate.yml'],
 	});
 	addTrigger('issues', {

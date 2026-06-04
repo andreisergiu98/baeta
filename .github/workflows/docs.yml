@@ -7,7 +7,7 @@ name: Build website
 on:
   push:
     branches:
-      - next
+      - main
     paths:
       - website/**
       - yarn.lock

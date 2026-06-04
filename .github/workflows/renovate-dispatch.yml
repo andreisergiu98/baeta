@@ -10,7 +10,6 @@ on:
   push:
     branches:
       - main
-      - next
     paths:
       - .github/renovate.json
       - .github/workflows/renovate.yml

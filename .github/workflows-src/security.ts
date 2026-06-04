@@ -10,7 +10,7 @@ export default createWorkflow(
 			contents: 'read',
 		});
 		addTrigger('push', {
-			branches: ['next'],
+			branches: ['main', 'next'],
 		});
 		addTrigger('pull_request');
 		addTrigger('workflow_dispatch');

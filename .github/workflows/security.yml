@@ -7,6 +7,7 @@ name: Security
 on:
   push:
     branches:
+      - main
       - next
   pull_request: null
   workflow_dispatch: null

@@ -1,4 +1,5 @@
 export default [
+	'**/packages/*/CHANGELOG.md',
 	'**/website/build',
 	'**/website/docs/api',
 	'**/website/.docusaurus',

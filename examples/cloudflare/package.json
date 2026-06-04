@@ -39,7 +39,7 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20260531.1",
+    "@cloudflare/workers-types": "^4.20260601.1",
     "@types/node": "catalog:dev",
     "miniflare": "^4.20260526.0",
     "typescript": "catalog:dev",

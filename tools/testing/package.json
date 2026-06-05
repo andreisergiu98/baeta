@@ -25,6 +25,9 @@
     "url": "git+https://github.com/andreisergiu98/baeta.git",
     "directory": "tools/testing"
   },
+  "bin": {
+    "ava": "./bin/ava.ts"
+  },
   "type": "module",
   "exports": {
     ".": {

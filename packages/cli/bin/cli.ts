@@ -1,3 +1,4 @@
 #! /usr/bin/env node
 
-import '../cli.ts';
+import { run } from '../cli.ts';
+await run();

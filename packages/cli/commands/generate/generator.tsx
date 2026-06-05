@@ -62,6 +62,12 @@ export function Generator(props: Readonly<GeneratorProps>) {
 		};
 	}, [props.watch, config, plugins, generatorHooks]);
 
+	useEffect(() => {
+		if (error && !props.watch) {
+			process.exitCode = 1;
+		}
+	}, [error, props.watch]);
+
 	return (
 		<GeneratorStatus
 			error={error}

@@ -51,6 +51,13 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn build
+      - name: Upload package dist
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: package-dist
+          path: packages/*/dist
+          if-no-files-found: error
+          retention-days: 1
   types:
     name: Check types
     runs-on: ubuntu-latest
@@ -342,6 +349,8 @@ jobs:
       - run: yarn check:tests
   e2e:
     name: Check e2e tests (${{ matrix.machine }} - Node ${{ matrix.node }})
+    needs:
+      - build
     runs-on: ${{ matrix.machine }}
     strategy:
       matrix:
@@ -385,7 +394,12 @@ jobs:
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
-      - run: yarn check:e2e
+      - name: Download package dist
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: package-dist
+          path: packages
+      - run: yarn check:e2e:ci
   publish:
     name: Publish packages or open PR
     needs:
@@ -431,7 +445,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
-          YARN_ENABLE_HARDENED_MODE: "1"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - name: Create Baeta Bot Token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
@@ -504,7 +518,7 @@ jobs:
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
-          YARN_ENABLE_HARDENED_MODE: "1"
+          YARN_ENABLE_HARDENED_MODE: "0"
       - name: Get PR number
         run: |-
           PR_NUMBER=$(gh pr list \

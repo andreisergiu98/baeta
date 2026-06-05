@@ -9,7 +9,12 @@ import {
 	or,
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
-import { useCache, useChangesets } from './_shared/actions.ts';
+import {
+	useCache,
+	useChangesets,
+	useDownloadArtifact,
+	useUploadArtifact,
+} from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
 import {
 	createNodeVersion,
@@ -57,6 +62,15 @@ export default createWorkflow(
 			setName('Check build');
 			add(setupNode({ turboCache: turboCaches.build }));
 			run('yarn build');
+			add(
+				useUploadArtifact({
+					stepName: 'Upload package dist',
+					name: 'package-dist',
+					path: 'packages/*/dist',
+					ifNoFilesFound: 'error',
+					retentionDays: 1,
+				}),
+			);
 		});
 
 		const typesJob = addJob('types', ({ setName, add, run }) => {
@@ -128,7 +142,7 @@ export default createWorkflow(
 			run('yarn check:tests');
 		});
 
-		const e2eJob = addJob('e2e', ({ setName, add, run, setMachineType }) => {
+		const e2eJob = addJob('e2e', ({ setName, add, run, setMachineType, addDependencies }) => {
 			const matrix = add(
 				setNodeBuildMatrixWithMachine(
 					{ pr: PR_TEST_MATRIX, default: MAIN_TEST_MATRIX },
@@ -137,8 +151,16 @@ export default createWorkflow(
 			);
 			setName(`Check e2e tests (${matrix.machine} - Node ${matrix.node})`);
 			setMachineType(`${matrix.machine}`);
+			addDependencies(buildJob);
 			add(setupNode({ node: matrix, turboCache: turboCaches.e2e }));
-			run('yarn check:e2e');
+			add(
+				useDownloadArtifact({
+					stepName: 'Download package dist',
+					name: 'package-dist',
+					path: 'packages',
+				}),
+			);
+			run('yarn check:e2e:ci');
 		});
 
 		const releaseDependencies = [
@@ -172,7 +194,7 @@ export default createWorkflow(
 						});
 						addDependencies(...releaseDependencies);
 						setName('Publish packages or open PR');
-						add(setupNode({ turboCache: turboCaches.build, enableYarnHardenedMode: true }));
+						add(setupNode({ turboCache: turboCaches.build }));
 						const getToken = add(useBaetaBotToken());
 						add(
 							useChangesets({
@@ -204,7 +226,7 @@ export default createWorkflow(
 						});
 						addDependencies(...releaseDependencies);
 						setName('Publish snapshot packages');
-						add(setupNode({ turboCache: turboCaches.build, enableYarnHardenedMode: true }));
+						add(setupNode({ turboCache: turboCaches.build }));
 						const prIdJob = run<{ pr: number }>(
 							'Get PR number',
 							joinStrings(

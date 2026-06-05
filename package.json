@@ -41,6 +41,7 @@
     "check:constraints": "yarn constraints",
     "check:deps": "turbo check:deps --filter='./packages/*'",
     "check:e2e": "yarn check:e2e:setup && yarn build && yarn builder e2e",
+    "check:e2e:ci": "yarn check:e2e:setup && yarn builder e2e",
     "check:e2e:setup": "git clean -fdX ./e2e >/dev/null && turbo gen e2e",
     "check:formatting": "oxfmt --check",
     "check:linting": "eslint --flag unstable_native_nodejs_ts_config --cache --cache-location .cache/eslint .",

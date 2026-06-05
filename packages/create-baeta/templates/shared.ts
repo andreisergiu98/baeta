@@ -33,6 +33,7 @@ export function makeSharedTemplate(
 						rootDir: 'src',
 						outDir: 'dist',
 						noEmit: true,
+						types: [runtime],
 						emitDeclarationOnly: false,
 					},
 					exclude: ['baeta.ts'],

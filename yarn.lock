@@ -1865,7 +1865,6 @@ __metadata:
     "@types/yargs": "npm:^17.0.35"
     "@yarnpkg/core": "npm:^4.8.0"
     "@yarnpkg/fslib": "npm:^3.1.5"
-    ava: "npm:^8.0.1"
     c8: "npm:^11.0.0"
     esbuild: "npm:^0.28.0"
     execa: "npm:^9.6.1"
@@ -1880,9 +1879,7 @@ __metadata:
     yargs: "npm:^18.0.0"
     zod: "npm:^4.4.3"
   bin:
-    ava: ./bin/ava.ts
     builder: ./bin/cli.ts
-    c8: ./bin/c8.ts
   languageName: unknown
   linkType: soft
 
@@ -3061,6 +3058,8 @@ __metadata:
     ava: "npm:^8.0.1"
     sinon: "npm:^22.0.0"
     typescript: "catalog:dev"
+  bin:
+    ava: ./bin/ava.ts
   languageName: unknown
   linkType: soft
 

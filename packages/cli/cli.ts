@@ -4,26 +4,24 @@ import { createGenerateCommand } from './commands/generate/index.ts';
 import { loadConfig } from './lib/config-loader.ts';
 import pkg from './package.json' with { type: 'json' };
 
-process.on('exit', () => {
-	if (process.stdout.isTTY) {
-		const fixCursor = '\x1B[?25h';
-		process.stdout.write(fixCursor);
+export async function run() {
+	try {
+		const config = await loadConfig();
+		await yargs(hideBin(process.argv))
+			.scriptName('baeta')
+			.command(createGenerateCommand(config))
+			.demandCommand()
+			.version(pkg.version)
+			.strict()
+			.help()
+			.parseAsync();
+	} catch (err) {
+		console.error(err);
+		process.exitCode = 1;
+	} finally {
+		if (process.stdout.isTTY) {
+			const fixCursor = '\x1B[?25h';
+			process.stdout.write(fixCursor);
+		}
 	}
-});
-
-async function run() {
-	const config = await loadConfig();
-	await yargs(hideBin(process.argv))
-		.scriptName('baeta')
-		.command(createGenerateCommand(config))
-		.demandCommand()
-		.version(pkg.version)
-		.strict()
-		.help()
-		.parseAsync();
 }
-
-run().catch((err) => {
-	console.error(err);
-	process.exit(1);
-});

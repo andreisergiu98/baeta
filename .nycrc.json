@@ -1,5 +1,6 @@
 {
   "reporter": ["text", "lcovonly"],
+  "exclude": ["**/*.test.ts", "**/__test__/**"],
   "lines": 80,
   "branches": 80,
   "statements": 80

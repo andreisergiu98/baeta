@@ -32,7 +32,7 @@
     },
     {
       "matchPackageNames": ["node"],
-      "allowedVersions": "<25"
+      "allowedVersions": "<23"
     },
     {
       "matchPackageNames": ["@types/node"],

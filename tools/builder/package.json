@@ -25,11 +25,7 @@
     "url": "git+https://github.com/andreisergiu98/baeta.git",
     "directory": "tools/builder"
   },
-  "bin": {
-    "ava": "./bin/ava.ts",
-    "builder": "./bin/cli.ts",
-    "c8": "./bin/c8.ts"
-  },
+  "bin": "./bin/cli.ts",
   "type": "module",
   "exports": {
     "./bundler": {

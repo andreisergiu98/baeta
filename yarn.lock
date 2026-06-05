@@ -1880,9 +1880,7 @@ __metadata:
     yargs: "npm:^18.0.0"
     zod: "npm:^4.4.3"
   bin:
-    ava: ./bin/ava.ts
     builder: ./bin/cli.ts
-    c8: ./bin/c8.ts
   languageName: unknown
   linkType: soft
 
@@ -3061,6 +3059,8 @@ __metadata:
     ava: "npm:^8.0.1"
     sinon: "npm:^22.0.0"
     typescript: "catalog:dev"
+  bin:
+    ava: ./bin/ava.ts
   languageName: unknown
   linkType: soft
 

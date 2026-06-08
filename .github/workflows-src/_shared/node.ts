@@ -21,10 +21,6 @@ export type NodeMatrixConfig = {
 	node: NodeVersion[];
 };
 
-export type NodeMachineMatrixConfig = NodeMatrixConfig & {
-	machine: string[];
-};
-
 type MatrixOptions = { failFast?: boolean; maxParallel?: number };
 
 export function setNodeBuildMatrix(
@@ -38,30 +34,6 @@ export function setNodeBuildMatrix(
 					configs.pr.node.map((v) => v.node),
 					configs.default.node.map((v) => v.node),
 				),
-			},
-			{
-				...options,
-				include: conditionalJson(
-					configs.pr.node.map((v) => ({ node: v.node, version: v.version })),
-					configs.default.node.map((v) => ({ node: v.node, version: v.version })),
-				) as unknown as { node?: string; version?: string }[],
-			},
-		);
-	};
-}
-
-export function setNodeBuildMatrixWithMachine(
-	configs: { pr: NodeMachineMatrixConfig; default: NodeMachineMatrixConfig },
-	options?: MatrixOptions,
-): Steps<ContextValue<{ node: string; machine: string; version: string }>> {
-	return ({ setBuildMatrix, run }) => {
-		return setBuildMatrix(
-			{
-				node: conditionalJson(
-					configs.pr.node.map((v) => v.node),
-					configs.default.node.map((v) => v.node),
-				),
-				machine: conditionalJson(configs.pr.machine, configs.default.machine),
 			},
 			{
 				...options,

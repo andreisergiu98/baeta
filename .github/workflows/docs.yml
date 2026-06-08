@@ -40,8 +40,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -72,8 +72,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"

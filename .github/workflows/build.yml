@@ -38,8 +38,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -79,8 +79,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - name: Setup Turbo Cache for types
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -113,8 +113,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -147,8 +147,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -175,8 +175,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - name: Setup Turbo Cache for deps
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -209,8 +209,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -237,8 +237,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -265,8 +265,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - name: Setup Turbo Cache for examples-build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -280,7 +280,7 @@ jobs:
       - run: yarn examples:build
       - run: yarn examples:types
   tests:
-    name: Check tests (Node ${{ matrix.node }})
+    name: Check tests - Node ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -334,8 +334,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - name: Setup Turbo Cache for tests
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -347,18 +347,17 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:tests
-  e2e:
-    name: Check e2e tests (${{ matrix.machine }} - Node ${{ matrix.node }})
+  e2e-node:
+    name: Check e2e tests - Node ${{ matrix.node }}
     needs:
       - build
-    runs-on: ${{ matrix.machine }}
+    runs-on: ubuntu-latest
+    env:
+      NODE_COMPILE_CACHE: .cache/node-compile
     strategy:
       matrix:
         node: ${{ fromJSON(github.event_name == 'pull_request' && '["22"]' ||
           '["22","24","26"]') }}
-        machine: ${{ fromJSON(github.event_name == 'pull_request' &&
-          '["ubuntu-latest","windows-latest","macos-latest"]' ||
-          '["ubuntu-latest","windows-latest","macos-latest"]') }}
         include: ${{ fromJSON(github.event_name == 'pull_request' &&
           '[{"node":"22","version":"22"}]' ||
           '[{"node":"22","version":"22"},{"node":"24","version":"24"},{"node":"26","version":"26"}]')
@@ -382,14 +381,21 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
-      - name: Setup Turbo Cache for e2e
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
+      - name: Setup Turbo Cache for e2e-node
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .cache/turbo
-          key: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
-          restore-keys: turbo-e2e-${{ matrix.node }}-${{ runner.os }}-
+          key: turbo-e2e-node-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-e2e-node-${{ matrix.node }}-${{ runner.os }}-
+      - name: Setup Node Compile Cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .cache/node-compile
+          key: node-compile-e2e-node-${{ matrix.node }}-${{ runner.os }}-${{
+            hashFiles('**/yarn.lock') }}
+          restore-keys: node-compile-e2e-node-${{ matrix.node }}-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -404,7 +410,135 @@ jobs:
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
-      - run: yarn check:e2e
+      - run: yarn check:e2e:setup
+      - run: yarn check:e2e:run
+  e2e-graphql:
+    name: Check e2e tests - GraphQL ${{ matrix.graphql }}
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    env:
+      NODE_COMPILE_CACHE: .cache/node-compile
+    strategy:
+      matrix:
+        graphql:
+          - 16.6.0
+          - ^17.0.0-rc.0
+      fail-fast: false
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - name: Setup Node 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: "24"
+          check-latest: true
+          package-manager-cache: false
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Setup Yarn Cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .yarn/cache
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
+      - name: Setup Turbo Cache for e2e-graphql-${{ matrix.graphql }}
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .cache/turbo
+          key: turbo-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-${{ github.sha
+            }}
+          restore-keys: turbo-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-
+      - name: Setup Node Compile Cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .cache/node-compile
+          key: node-compile-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-${{
+            hashFiles('**/yarn.lock') }}
+          restore-keys: node-compile-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-
+      - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
+      - name: Download package dist
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: package-dist
+          path: packages
+      - run: yarn builder use-dist
+      - run: yarn builder set-catalog graphql ${{ matrix.graphql }}
+      - run: yarn install --no-immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
+      - run: yarn check:e2e:setup
+      - run: yarn check:e2e:run
+  e2e-platform:
+    name: Check e2e tests - ${{ matrix.platform }}
+    needs:
+      - build
+    runs-on: ${{ matrix.platform }}
+    env:
+      NODE_COMPILE_CACHE: .cache/node-compile
+    strategy:
+      matrix:
+        platform:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+      fail-fast: false
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - name: Setup Node 26
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: "26"
+          check-latest: true
+          package-manager-cache: false
+      - name: Enable Corepack
+        run: |-
+          npm uninstall -g yarn || true
+          corepack enable
+        shell: bash
+      - name: Setup Yarn Cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .yarn/cache
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
+      - name: Setup Turbo Cache for e2e-platform
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .cache/turbo
+          key: turbo-e2e-platform-26-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-e2e-platform-26-${{ runner.os }}-
+      - name: Setup Node Compile Cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: .cache/node-compile
+          key: node-compile-e2e-platform-26-${{ runner.os }}-${{ hashFiles('**/yarn.lock')
+            }}
+          restore-keys: node-compile-e2e-platform-26-${{ runner.os }}-
+      - run: yarn install --immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
+      - name: Download package dist
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: package-dist
+          path: packages
+      - run: yarn builder use-dist
+      - run: yarn install --no-immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
+      - run: yarn check:e2e:setup
+      - run: yarn check:e2e:run
   publish:
     name: Publish packages or open PR
     needs:
@@ -415,7 +549,9 @@ jobs:
       - constraints
       - yarn-dedupe
       - tests
-      - e2e
+      - e2e-node
+      - e2e-graphql
+      - e2e-platform
       - build-examples
     runs-on: ubuntu-latest
     if: ${{ (github.event_name == 'push') && (((github.event.ref ==
@@ -439,8 +575,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
@@ -489,7 +625,9 @@ jobs:
       - constraints
       - yarn-dedupe
       - tests
-      - e2e
+      - e2e-node
+      - e2e-graphql
+      - e2e-platform
       - build-examples
     runs-on: ubuntu-latest
     if: ${{ (github.event_name == 'workflow_dispatch') && (github.repository ==
@@ -512,8 +650,8 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: .yarn/cache
-          key: yarn-cache-v1-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: yarn-cache-v1-${{ runner.os }}-
+          key: yarn-cache-v2-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-cache-v2-${{ runner.os }}-
       - name: Setup Turbo Cache for build
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:

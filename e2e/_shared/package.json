@@ -51,12 +51,12 @@
     "graphql": "catalog:dev"
   },
   "devDependencies": {
+    "@baeta/builder": "workspace:^",
     "@baeta/cli": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@graphql-codegen/cli": "catalog:dev",
     "@graphql-codegen/client-preset": "catalog:dev",
-    "@turbo/gen": "^2.9.16",
     "@types/node": "catalog:dev",
     "typescript": "catalog:dev"
   },

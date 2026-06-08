@@ -1,37 +1,6 @@
-export interface SyncRule {
-	from: string;
-	to: string;
-	dirs: PathMapping[];
-	files: PathMapping[];
-	transforms: TextTransform[];
-	ignore: string[];
-}
-
-interface TextTransform {
-	file: string;
-	replacements: [search: string, replace: string][];
-}
-
-type PathMapping = `${string}:${string}`;
-
-export function pathsFromMapping(mapping: PathMapping): [string, string] {
-	const [relativeSrc, relativeDest] = mapping.split(':');
-	return [relativeSrc, relativeDest];
-}
-
-function merge(
-	rule: Pick<SyncRule, 'from' | 'to'> & Partial<SyncRule>,
-	baseRule: Partial<SyncRule>,
-): SyncRule {
-	return {
-		from: rule.from,
-		to: rule.to,
-		files: (rule.files ?? []).concat(baseRule.files ?? []),
-		dirs: (rule.dirs ?? []).concat(baseRule.dirs ?? []),
-		transforms: (rule.transforms ?? []).concat(baseRule.transforms ?? []),
-		ignore: (rule.ignore ?? []).concat(baseRule.ignore ?? []),
-	};
-}
+import fs from 'node:fs';
+import path from 'node:path';
+import { type AddRule, defineGenerateConfig, merge, type SyncRule } from '@baeta/builder/generate';
 
 const baseDefaults: Partial<SyncRule> = {
 	dirs: ['modules:src/modules', 'types:src/types'],
@@ -72,71 +41,66 @@ const prismaDefaults: Partial<SyncRule> = {
 	],
 };
 
-export const syncRules: SyncRule[] = [
+const base = 'examples/_shared/base';
+const subscriptions = 'examples/_shared/subscriptions';
+const prisma = 'examples/_shared/prisma';
+
+function getExampleDirs(): string[] {
+	const examplesDir = path.resolve(process.cwd(), 'examples');
+	return fs
+		.readdirSync(examplesDir, { withFileTypes: true })
+		.filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
+		.map((entry) => entry.name)
+		.sort();
+}
+
+function buildGraphqlRc(): AddRule {
+	const lines: string[] = ['projects:'];
+	for (const name of getExampleDirs()) {
+		lines.push(`  examples/${name}:`);
+		lines.push('    schema:');
+		lines.push(`      - "examples/${name}/src/modules/**/*.gql"`);
+		lines.push('    include:');
+		lines.push(`      - "examples/${name}/src/**/*.gql"`);
+		lines.push('');
+	}
+	return { kind: 'add', to: '.graphqlrc.yml', content: lines.join('\n') };
+}
+
+const pubsubResolvers = 'src/modules/user/user.resolvers.ts';
+
+export default defineGenerateConfig([
+	merge({ from: base, to: 'examples/yoga' }, baseDefaults),
+	merge({ from: base, to: 'examples/apollo', ignore: ['app.ts'] }, baseDefaults),
+	merge({ from: base, to: 'examples/cloudflare', ignore: ['types/context.ts'] }, baseDefaults),
 	merge(
 		{
-			from: '_shared/base',
-			to: 'yoga',
-		},
-		baseDefaults,
-	),
-	merge(
-		{
-			from: '_shared/base',
-			to: 'apollo',
-			ignore: ['app.ts'],
-		},
-		baseDefaults,
-	),
-	merge(
-		{
-			from: '_shared/base',
-			to: 'cloudflare',
-			ignore: ['types/context.ts'],
-		},
-		baseDefaults,
-	),
-	merge(
-		{
-			from: '_shared/subscriptions',
-			to: 'apollo-ws',
+			from: subscriptions,
+			to: 'examples/apollo-ws',
 			ignore: ['lib/pubsub.ts', 'types/context.ts', 'app.ts'],
 			transforms: [
 				{
-					file: 'src/modules/user/user.resolvers.ts',
+					file: pubsubResolvers,
 					replacements: [['ctx.pubsub.subscribe', 'ctx.pubsub.asyncIterableIterator']],
 				},
 				{
-					file: 'src/modules/user/user.resolvers.ts',
+					file: pubsubResolvers,
 					replacements: [['ctx.pubsub.publish', 'await ctx.pubsub.publish']],
 				},
 			],
 		},
 		subscriptionsDefaults,
 	),
+	merge({ from: subscriptions, to: 'examples/yoga-sse' }, subscriptionsDefaults),
+	merge({ from: subscriptions, to: 'examples/yoga-ws', ignore: ['app.ts'] }, subscriptionsDefaults),
 	merge(
 		{
-			from: '_shared/subscriptions',
-			to: 'yoga-sse',
-		},
-		subscriptionsDefaults,
-	),
-	merge(
-		{
-			from: '_shared/subscriptions',
-			to: 'yoga-ws',
-			ignore: ['app.ts'],
-		},
-		subscriptionsDefaults,
-	),
-	merge(
-		{
-			from: '_shared/subscriptions',
-			to: 'cloudflare-ws',
+			from: subscriptions,
+			to: 'examples/cloudflare-ws',
 			ignore: ['lib/pubsub.ts', 'types/context.ts', 'app.ts'],
 			transforms: [
 				{
-					file: 'src/modules/user/user.resolvers.ts',
+					file: pubsubResolvers,
 					replacements: [
 						['ctx.pubsub.publish', 'await ctx.publish'],
 						['ctx.pubsub.subscribe', 'ctx.subscribe'],
@@ -146,19 +110,12 @@ export const syncRules: SyncRule[] = [
 		},
 		subscriptionsDefaults,
 	),
-	// Prisma
+	merge({ from: prisma, to: 'examples/prisma', dirs: ['modules:src/modules'] }, prismaDefaults),
 	merge(
 		{
-			from: '_shared/prisma',
-			to: 'prisma',
-			dirs: ['modules:src/modules'],
-		},
-		prismaDefaults,
-	),
-	merge(
-		{
-			from: '_shared/prisma',
-			to: 'auth',
+			from: prisma,
+			to: 'examples/auth',
+			ignore: ['app.ts'],
 			transforms: [
 				{
 					file: 'src/app.ts',
@@ -192,18 +149,7 @@ export const syncRules: SyncRule[] = [
 		},
 		prismaDefaults,
 	),
-	merge(
-		{
-			from: '_shared/prisma',
-			to: 'cache',
-		},
-		prismaDefaults,
-	),
-	merge(
-		{
-			from: '_shared/prisma',
-			to: 'relay-pagination',
-		},
-		prismaDefaults,
-	),
-];
+	merge({ from: prisma, to: 'examples/cache' }, prismaDefaults),
+	merge({ from: prisma, to: 'examples/relay-pagination' }, prismaDefaults),
+	buildGraphqlRc(),
+]);

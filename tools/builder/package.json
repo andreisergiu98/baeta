@@ -32,6 +32,10 @@
       "types": "./lib/bundler.ts",
       "default": "./lib/bundler.ts"
     },
+    "./generate": {
+      "types": "./lib/generate.ts",
+      "default": "./lib/generate.ts"
+    },
     "./tsdown": {
       "types": "./lib/tsdown.ts",
       "default": "./lib/tsdown.ts"

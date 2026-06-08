@@ -6,6 +6,7 @@ import { hideBin } from 'yargs/helpers';
 import { buildCommand } from './commands/build.ts';
 import { checkDepsCommand } from './commands/check-deps.ts';
 import { checkTsconfigCommand } from './commands/check-tsconfig.ts';
+import { generateCommand } from './commands/generate.ts';
 import { prepareCommand } from './commands/prepare.ts';
 import { printTagCommand } from './commands/print-tag.ts';
 import { releaseCommand } from './commands/release.ts';
@@ -27,6 +28,7 @@ export async function run() {
 		.command(buildCommand)
 		.command(checkDepsCommand)
 		.command(checkTsconfigCommand)
+		.command(generateCommand)
 		.command(prepareCommand)
 		.command(printTagCommand)
 		.command(releaseCommand)

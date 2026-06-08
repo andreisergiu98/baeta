@@ -27,7 +27,8 @@
   "type": "module",
   "scripts": {
     "e2e": "ava",
-    "e2e:generate": "baeta generate && graphql-codegen",
+    "e2e:generate:baeta": "baeta generate",
+    "e2e:generate:operations": "graphql-codegen",
     "e2e:types": "tsc --noEmit"
   },
   "dependencies": {

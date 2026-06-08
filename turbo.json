@@ -2,21 +2,32 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "cacheDir": ".cache/turbo",
+  "concurrency": "10",
+  "remoteCache": {
+    "enabled": false
+  },
   "tasks": {
     "build": {
       "outputs": ["dist/**/*"]
     },
+    "test": {},
     "types": {},
     "check:deps": {},
-    "test": {},
     "e2e": {
-      "dependsOn": ["e2e:generate", "e2e:types"]
-    },
-    "e2e:generate": {
-      "cache": false
+      "dependsOn": ["e2e:generate:operations", "e2e:types"],
+      "inputs": ["$TURBO_DEFAULT$", "src/**", "base/**"]
     },
     "e2e:types": {
-      "dependsOn": ["e2e:generate"]
+      "dependsOn": ["e2e:generate:operations"],
+      "inputs": ["$TURBO_DEFAULT$", "src/**", "base/**"]
+    },
+    "e2e:generate:baeta": {
+      "cache": false
+    },
+    "e2e:generate:operations": {
+      "dependsOn": ["e2e:generate:baeta"],
+      "inputs": ["$TURBO_DEFAULT$", "src/**", "base/**", "!src/__generated__/gql/**"],
+      "outputs": ["src/__generated__/gql/**/*"]
     }
   }
 }

@@ -44,7 +44,7 @@
     }
   },
   "scripts": {
-    "e2e:generate": "cd base && baeta generate",
+    "e2e:generate:baeta": "cd base && baeta generate",
     "e2e:types": "tsc --noEmit"
   },
   "dependencies": {

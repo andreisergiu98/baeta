@@ -9,6 +9,7 @@ import { checkTsconfigCommand } from './commands/check-tsconfig.ts';
 import { prepareCommand } from './commands/prepare.ts';
 import { printTagCommand } from './commands/print-tag.ts';
 import { releaseCommand } from './commands/release.ts';
+import { setCatalogCommand } from './commands/set-catalog.ts';
 import { testCommand } from './commands/test.ts';
 import { useDist } from './commands/use-dist.ts';
 import { writeVersionsManifestCommand } from './commands/write-versions-manifest.ts';
@@ -29,6 +30,7 @@ export async function run() {
 		.command(prepareCommand)
 		.command(printTagCommand)
 		.command(releaseCommand)
+		.command(setCatalogCommand)
 		.command(testCommand)
 		.command(useDist)
 		.command(writeVersionsManifestCommand)

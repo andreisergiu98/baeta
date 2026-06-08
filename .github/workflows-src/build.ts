@@ -9,29 +9,22 @@ import {
 	or,
 	startsWith,
 } from 'github-actions-workflow-builder/lib/expression';
-import {
-	useCache,
-	useChangesets,
-	useDownloadArtifact,
-	useUploadArtifact,
-} from './_shared/actions.ts';
+import { useCache, useChangesets, useUploadArtifact } from './_shared/actions.ts';
 import { useBaetaBotToken } from './_shared/bot-token.ts';
-import {
-	createNodeVersion,
-	setNodeBuildMatrix,
-	setNodeBuildMatrixWithMachine,
-} from './_shared/node.ts';
-import { redisService, valkeyService, redisHttpService } from './_shared/services.ts';
-import { setupNode, turboCaches, yarnInstall } from './_shared/setup.ts';
+import { e2e } from './_shared/e2e.ts';
+import { createNodeVersion, setNodeBuildMatrix } from './_shared/node.ts';
+import { redisHttpService, redisService, valkeyService } from './_shared/services.ts';
+import { setupNode, turboCaches } from './_shared/setup.ts';
 
-const MAIN_TEST_MATRIX = {
-	node: [createNodeVersion('22'), createNodeVersion('24'), createNodeVersion('26')],
-	machine: ['ubuntu-latest', 'windows-latest', 'macos-latest'],
-};
 const PR_TEST_MATRIX = {
 	node: [createNodeVersion('22')],
-	machine: ['ubuntu-latest', 'windows-latest', 'macos-latest'],
 };
+const MAIN_TEST_MATRIX = {
+	node: [createNodeVersion('22'), createNodeVersion('24'), createNodeVersion('26')],
+};
+const E2E_PLATFORMS = ['ubuntu-latest', 'windows-latest', 'macos-latest'];
+const E2E_PLATFORM_NODE = createNodeVersion('26');
+const E2E_GRAPHQL_VERSIONS = ['16.6.0', '^17.0.0-rc.0'];
 
 export default createWorkflow(
 	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, whenTrigger, when }) => {
@@ -134,7 +127,7 @@ export default createWorkflow(
 					{ failFast: false },
 				),
 			);
-			setName(`Check tests (Node ${matrix.node})`);
+			setName(`Check tests - Node ${matrix.node}`);
 			add(redisService(65535));
 			add(valkeyService(65534));
 			add(redisHttpService(60080));
@@ -142,30 +135,62 @@ export default createWorkflow(
 			run('yarn check:tests');
 		});
 
-		const e2eJob = addJob('e2e', ({ setName, add, run, setMachineType, addDependencies }) => {
+		const e2eNodeJob = addJob('e2e-node', ({ setName, add }) => {
 			const matrix = add(
-				setNodeBuildMatrixWithMachine(
-					{ pr: PR_TEST_MATRIX, default: MAIN_TEST_MATRIX },
+				setNodeBuildMatrix(
+					{
+						pr: PR_TEST_MATRIX,
+						default: MAIN_TEST_MATRIX,
+					},
 					{ failFast: false },
 				),
 			);
-			setName(`Check e2e tests (${matrix.machine} - Node ${matrix.node})`);
-			setMachineType(`${matrix.machine}`);
-			addDependencies(buildJob);
-			add(setupNode({ node: matrix, turboCache: turboCaches.e2e }));
+			setName(`Check e2e tests - Node ${matrix.node}`);
 			add(
-				useDownloadArtifact({
-					stepName: 'Download package dist',
-					name: 'package-dist',
-					path: 'packages',
+				e2e({
+					buildJob,
+					node: matrix,
+					turboCache: turboCaches.e2eNode,
 				}),
 			);
-
-			run('yarn builder use-dist');
-			add(yarnInstall({ disableImmutableInstall: true }));
-
-			run('yarn check:e2e');
 		});
+
+		const e2eGraphqlJob = addJob('e2e-graphql', ({ setName, add, run }) => {
+			const matrix = add(({ setBuildMatrix }) =>
+				setBuildMatrix({ graphql: E2E_GRAPHQL_VERSIONS }, { failFast: false }),
+			);
+			setName(`Check e2e tests - GraphQL ${matrix.graphql}`);
+			add(
+				e2e({
+					buildJob,
+					graphql: matrix.graphql,
+					turboCache: turboCaches.e2eGraphql(matrix.graphql),
+				}),
+			);
+		});
+
+		const e2ePlatformJob = addJob(
+			'e2e-platform',
+			({ setName, add, setBuildMatrix, setMachineType }) => {
+				const matrix = setBuildMatrix(
+					{
+						platform: E2E_PLATFORMS,
+					},
+					{
+						failFast: false,
+					},
+				);
+				setMachineType(`${matrix.platform}`);
+				setName(`Check e2e tests - ${matrix.platform}`);
+				add(
+					e2e({
+						buildJob,
+						node: E2E_PLATFORM_NODE,
+						turboCache: turboCaches.e2ePlatform,
+					}),
+				);
+			},
+		);
 
 		const releaseDependencies = [
 			buildJob,
@@ -175,7 +200,9 @@ export default createWorkflow(
 			constraintsJob,
 			lockfileJob,
 			testsJob,
-			e2eJob,
+			e2eNodeJob,
+			e2eGraphqlJob,
+			e2ePlatformJob,
 			buildExamplesJob,
 		];
 

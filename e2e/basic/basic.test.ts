@@ -58,14 +58,13 @@ const MovieByIdQuery = graphql(`
 	}
 `);
 
-test.serial('Query.movie returns a movie', async (t) => {
+test('Query.movie returns a movie', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieQuery,
 		variableValues: { where: { id: '1' } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.movie?.id, '1');
 	t.is(result.data?.movie?.title, 'Inception');
@@ -73,38 +72,35 @@ test.serial('Query.movie returns a movie', async (t) => {
 	t.is(result.data?.movie?.rating, 8.8);
 });
 
-test.serial('Query.movies returns a list', async (t) => {
+test('Query.movies returns a list', async (t) => {
 	const result = await execute({
 		schema,
 		document: MoviesQuery,
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.movies?.length, 3);
 });
 
-test.serial('Mutation.createMovie creates a movie', async (t) => {
+test('Mutation.createMovie creates a movie', async (t) => {
 	const result = await execute({
 		schema,
 		document: CreateMovieMutation,
 		variableValues: { input: { title: 'New Movie', year: 2024 } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.createMovie.title, 'New Movie');
 	t.is(result.data?.createMovie.year, 2024);
 });
 
-test.serial('Movie.reviews resolves cross-module relationship', async (t) => {
+test('Movie.reviews resolves cross-module relationship', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieWithReviewsQuery,
 		variableValues: { where: { id: '1' } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.movie?.reviews?.length, 2);
 	for (const review of result.data?.movie?.reviews ?? []) {
@@ -113,14 +109,13 @@ test.serial('Movie.reviews resolves cross-module relationship', async (t) => {
 	}
 });
 
-test.serial('$use middleware runs on resolvers', async (t) => {
+test('$use middleware runs on resolvers', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieByIdQuery,
 		variableValues: { where: { id: '42' } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.movie?.id, '42');
 });

@@ -399,7 +399,12 @@ jobs:
         with:
           name: package-dist
           path: packages
-      - run: yarn check:e2e:ci
+      - run: yarn builder use-dist
+      - run: yarn install --no-immutable
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: "false"
+          YARN_ENABLE_HARDENED_MODE: "0"
+      - run: yarn check:e2e
   publish:
     name: Publish packages or open PR
     needs:

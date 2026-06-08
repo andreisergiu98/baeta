@@ -22,7 +22,7 @@ import {
 	setNodeBuildMatrixWithMachine,
 } from './_shared/node.ts';
 import { redisService, valkeyService, redisHttpService } from './_shared/services.ts';
-import { setupNode, turboCaches } from './_shared/setup.ts';
+import { setupNode, turboCaches, yarnInstall } from './_shared/setup.ts';
 
 const MAIN_TEST_MATRIX = {
 	node: [createNodeVersion('22'), createNodeVersion('24'), createNodeVersion('26')],
@@ -160,7 +160,11 @@ export default createWorkflow(
 					path: 'packages',
 				}),
 			);
-			run('yarn check:e2e:ci');
+
+			run('yarn builder use-dist');
+			add(yarnInstall({ disableImmutableInstall: true }));
+
+			run('yarn check:e2e');
 		});
 
 		const releaseDependencies = [

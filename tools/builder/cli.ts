@@ -6,11 +6,11 @@ import { hideBin } from 'yargs/helpers';
 import { buildCommand } from './commands/build.ts';
 import { checkDepsCommand } from './commands/check-deps.ts';
 import { checkTsconfigCommand } from './commands/check-tsconfig.ts';
-import { e2eCommand } from './commands/e2e.ts';
 import { prepareCommand } from './commands/prepare.ts';
 import { printTagCommand } from './commands/print-tag.ts';
 import { releaseCommand } from './commands/release.ts';
 import { testCommand } from './commands/test.ts';
+import { useDist } from './commands/use-dist.ts';
 import { writeVersionsManifestCommand } from './commands/write-versions-manifest.ts';
 
 export async function run() {
@@ -26,11 +26,11 @@ export async function run() {
 		.command(buildCommand)
 		.command(checkDepsCommand)
 		.command(checkTsconfigCommand)
-		.command(e2eCommand)
 		.command(prepareCommand)
 		.command(printTagCommand)
 		.command(releaseCommand)
 		.command(testCommand)
+		.command(useDist)
 		.command(writeVersionsManifestCommand)
 		.fail((msg, err, yargs) => {
 			if (err) {

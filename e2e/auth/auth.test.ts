@@ -70,82 +70,76 @@ const ReviewsAfterCreate = graphql(`
 	}
 `);
 
-test.serial('logged-in user can query movie', async (t) => {
+test('logged-in user can query movie', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieQuery,
 		variableValues: { where: { id: '1' } },
 		contextValue: { userId: '1', role: 'user' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.movie?.id, '1');
 	t.is(result.data?.movie?.title, 'Inception');
 });
 
-test.serial('unauthenticated user is rejected by default scope', async (t) => {
+test('unauthenticated user is rejected by default scope', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieQuery,
 		variableValues: { where: { id: '1' } },
 		contextValue: {},
 	});
-
 	t.truthy(result.errors);
 	t.truthy(result.errors?.length);
 });
 
-test.serial('publicMovies is accessible without authentication (skipDefaults)', async (t) => {
+test('publicMovies is accessible without authentication (skipDefaults)', async (t) => {
 	const result = await execute({
 		schema,
 		document: PublicMoviesQuery,
 		contextValue: {},
 	});
-
 	t.falsy(result.errors);
 	t.truthy(result.data?.publicMovies);
 	t.is(result.data?.publicMovies?.length, 3);
 });
 
-test.serial('non-admin cannot createMovie', async (t) => {
+test('non-admin cannot createMovie', async (t) => {
 	const result = await execute({
 		schema,
 		document: CreateMovieMutation,
 		variableValues: { input: { title: 'New Movie', year: 2024 } },
 		contextValue: { userId: '1', role: 'user' },
 	});
-
 	t.truthy(result.errors);
 	t.truthy(result.errors?.length);
 });
 
-test.serial('admin can createMovie', async (t) => {
+test('admin can createMovie', async (t) => {
 	const result = await execute({
 		schema,
 		document: CreateMovieMutation,
 		variableValues: { input: { title: 'New Movie', year: 2024 } },
 		contextValue: { userId: '1', role: 'admin' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.createMovie.title, 'New Movie');
 });
 
-test.serial('reviews are readable on a movie granted readReviews', async (t) => {
+test('reviews are readable on a movie granted readReviews', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieWithReviewsQuery,
 		variableValues: { where: { id: '1' } },
 		contextValue: { userId: '1', role: 'user' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.movie?.id, '1');
 	t.is(result.data?.movie?.reviews?.length, 2);
 	t.is(result.data?.movie?.reviews?.[0]?.id, 'r1');
 });
 
-test.serial('reviews are gated when the parent resolver does not grant', async (t) => {
+test('reviews are gated when the parent resolver does not grant', async (t) => {
 	// publicMovies does not call `grants: ['readReviews']`, so the nested
 	// Movie.reviews resolver must reject access via scope.$granted.
 	const result = await execute({
@@ -153,12 +147,11 @@ test.serial('reviews are gated when the parent resolver does not grant', async (
 		document: PublicMoviesWithReviewsQuery,
 		contextValue: { userId: '1', role: 'user' },
 	});
-
 	t.truthy(result.errors);
 	t.truthy(result.errors?.length);
 });
 
-test.serial('reviews are gated after a Mutation that does not grant', async (t) => {
+test('reviews are gated after a Mutation that does not grant', async (t) => {
 	// Mutation.createMovie omits `grants`, so the returned Movie should
 	// not carry the readReviews grant — even for an admin.
 	const result = await execute({
@@ -167,6 +160,5 @@ test.serial('reviews are gated after a Mutation that does not grant', async (t) 
 		variableValues: { input: { title: 'X', year: 2024 } },
 		contextValue: { userId: '1', role: 'admin' },
 	});
-
 	t.truthy(result.errors);
 });

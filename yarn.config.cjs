@@ -4,7 +4,11 @@
 /** @type {import('@yarnpkg/types')} */
 const { defineConfig } = require('@yarnpkg/types');
 const path = require('node:path');
-const { GRAPHQL_PEER_VERSION, SUPPORTED_NODE_VERSIONS } = require('@baeta/workspace-config');
+const {
+	GRAPHQL_PEER_VERSION,
+	SUPPORTED_NODE_VERSIONS,
+	LEGACY_GRAPHQL_PEER_VERSION,
+} = require('@baeta/workspace-config');
 
 /**
  * This rule will enforce that a workspace MUST depend on the same version of
@@ -13,6 +17,9 @@ const { GRAPHQL_PEER_VERSION, SUPPORTED_NODE_VERSIONS } = require('@baeta/worksp
  */
 function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 	for (const dependency of Yarn.dependencies()) {
+		if (dependency.workspace.ident === '@baeta/subscriptions-cloudflare') {
+			continue;
+		}
 		if (dependency.type === 'peerDependencies') {
 			continue;
 		}
@@ -20,6 +27,9 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 		for (const otherDependency of Yarn.dependencies({
 			ident: dependency.ident,
 		})) {
+			if (otherDependency.workspace.ident === '@baeta/subscriptions-cloudflare') {
+				continue;
+			}
 			if (otherDependency.type === 'peerDependencies') {
 				continue;
 			}
@@ -152,7 +162,11 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
 
 			if (workspace.manifest.peerDependencies?.graphql) {
-				workspace.set('peerDependencies.graphql', GRAPHQL_PEER_VERSION);
+				if (workspace.ident === '@baeta/subscriptions-cloudflare') {
+					workspace.set('peerDependencies.graphql', LEGACY_GRAPHQL_PEER_VERSION);
+				} else {
+					workspace.set('peerDependencies.graphql', GRAPHQL_PEER_VERSION);
+				}
 			}
 		}
 

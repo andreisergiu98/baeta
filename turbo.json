@@ -13,14 +13,16 @@
     "test": {
       "dependsOn": ["^test"]
     },
-    "types": {},
+    "types": {
+      "dependsOn": ["^types"]
+    },
     "check:deps": {},
     "e2e": {
       "dependsOn": ["e2e:generate:operations", "e2e:types"],
       "inputs": ["$TURBO_DEFAULT$", "src/**", "base/**"]
     },
     "e2e:types": {
-      "dependsOn": ["e2e:generate:operations"],
+      "dependsOn": ["^types", "e2e:generate:operations"],
       "inputs": ["$TURBO_DEFAULT$", "src/**", "base/**"]
     },
     "e2e:generate:baeta": {

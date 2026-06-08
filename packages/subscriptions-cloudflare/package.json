@@ -70,7 +70,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20260605.1",
-    "graphql": "catalog:dev",
+    "graphql": "^16.6.0",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {

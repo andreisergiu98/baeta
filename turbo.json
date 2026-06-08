@@ -10,7 +10,9 @@
     "build": {
       "outputs": ["dist/**/*"]
     },
-    "test": {},
+    "test": {
+      "dependsOn": ["^test"]
+    },
     "types": {},
     "check:deps": {},
     "e2e": {

@@ -10,7 +10,7 @@ export function e2e(options: {
 	turboCache: Expression<string>;
 	graphql?: Expression<string>;
 }): Steps {
-	return ({ run, add, addDependencies, setEnv }) => {
+	return ({ run, add, addDependencies }) => {
 		addDependencies(options.buildJob);
 
 		add(

@@ -42,7 +42,7 @@
     "check:deps": "turbo check:deps --filter='./packages/*'",
     "check:e2e": "yarn check:e2e:setup && yarn check:e2e:run",
     "check:e2e:run": "turbo e2e --filter='./e2e/*'",
-    "check:e2e:setup": "git clean -fdX ./e2e >/dev/null && turbo gen e2e",
+    "check:e2e:setup": "git clean -fdX ./e2e >/dev/null && builder generate ./e2e/_shared/generate-rules.ts",
     "check:formatting": "oxfmt --check",
     "check:linting": "eslint --flag unstable_native_nodejs_ts_config --cache --cache-location .cache/eslint .",
     "check:tests": "turbo test --filter='./packages/*'",
@@ -51,7 +51,7 @@
     "docs:dev": "yarn workspace @baeta/website start",
     "docs:generate": "yarn workspace @baeta/website write-api",
     "examples:build": "yarn workspaces foreach -Wp --from '@baeta/examples*' run build",
-    "examples:sync": "turbo gen examples && yarn examples:build",
+    "examples:sync": "builder generate ./examples/_shared/generate-rules.ts && yarn examples:build",
     "examples:types": "yarn workspaces foreach -Wp --from '@baeta/examples*' run types",
     "precommit": "lint-staged -c .lintstagedrc.js",
     "prepare": "husky"

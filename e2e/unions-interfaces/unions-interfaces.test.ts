@@ -43,13 +43,12 @@ const MediaReadableQuery = graphql(`
 	}
 `);
 
-test.serial('union type resolves with __typename', async (t) => {
+test('union type resolves with __typename', async (t) => {
 	const result = await execute({
 		schema,
 		document: MediaQuery,
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	const media = result.data?.media;
 	t.falsy(result.errors);
 	t.is(media?.length, 3);
@@ -60,13 +59,12 @@ test.serial('union type resolves with __typename', async (t) => {
 	t.is(media?.[2]?.__typename === 'TVShow' ? media[2].seasons : undefined, 3);
 });
 
-test.serial('interface fields resolve on implementing types', async (t) => {
+test('interface fields resolve on implementing types', async (t) => {
 	const result = await execute({
 		schema,
 		document: MediaReadableQuery,
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	const media = result.data?.media;
 	t.falsy(result.errors);
 	const book = media?.find((m) => 'pages' in m && m.pages !== undefined);

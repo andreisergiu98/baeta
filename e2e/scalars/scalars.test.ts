@@ -16,7 +16,7 @@ const MovieWithDateQuery = graphql(`
 	}
 `);
 
-test.serial('DateTime scalar serializes correctly', async (t) => {
+test('DateTime scalar serializes correctly', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieWithDateQuery,

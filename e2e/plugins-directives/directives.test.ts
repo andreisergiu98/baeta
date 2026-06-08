@@ -23,38 +23,35 @@ const MovieQuery = graphql(`
 	}
 `);
 
-test.serial('@trim transforms input', async (t) => {
+test('@trim transforms input', async (t) => {
 	const result = await execute({
 		schema,
 		document: CreateMovieMutation,
 		variableValues: { input: { title: '  Inception  ', year: 2010, rating: 8.8 } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.createMovie.title, 'Inception');
 });
 
-test.serial('@validString rejects empty title', async (t) => {
+test('@validString rejects empty title', async (t) => {
 	const result = await execute({
 		schema,
 		document: CreateMovieMutation,
 		variableValues: { input: { title: '', year: 2010 } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.truthy(result.errors);
 	t.truthy(result.errors?.length);
 });
 
-test.serial('@constraints rejects too many fields in where input', async (t) => {
+test('@constraints rejects too many fields in where input', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieQuery,
 		variableValues: { where: { id: '1', title: 'Inception' } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.truthy(result.errors);
 	t.truthy(result.errors?.length);
 });

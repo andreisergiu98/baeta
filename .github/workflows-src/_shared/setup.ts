@@ -76,12 +76,20 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 		}
 
 		if (!options.skipInstall) {
-			run('yarn install --immutable', {
-				env: {
-					YARN_ENABLE_GLOBAL_CACHE: 'false',
-					YARN_ENABLE_HARDENED_MODE: options.enableYarnHardenedMode ? '1' : '0',
-				},
-			});
+			add(yarnInstall({ enableHardenedMode: options.enableYarnHardenedMode }));
 		}
+	};
+}
+
+export function yarnInstall(
+	options: { enableHardenedMode?: boolean; disableImmutableInstall?: boolean } = {},
+): Steps {
+	return ({ run }) => {
+		run(`yarn install ${options.disableImmutableInstall ? '--no-immutable' : '--immutable'}`, {
+			env: {
+				YARN_ENABLE_GLOBAL_CACHE: 'false',
+				YARN_ENABLE_HARDENED_MODE: options.enableHardenedMode ? '1' : '0',
+			},
+		});
 	};
 }

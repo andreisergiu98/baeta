@@ -66,7 +66,7 @@ const ScreeningsFullQuery = graphql(`
 	}
 `);
 
-test.serial('simple query within limits succeeds', async (t) => {
+test('simple query within limits succeeds', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieQuery,
@@ -78,7 +78,7 @@ test.serial('simple query within limits succeeds', async (t) => {
 	t.is(result.data?.movie?.id, '1');
 });
 
-test.serial('query exceeding depth limit fails', async (t) => {
+test('query exceeding depth limit fails', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieWithReviewsQuery,
@@ -90,7 +90,7 @@ test.serial('query exceeding depth limit fails', async (t) => {
 	t.truthy(result.errors?.some((e) => e.message.includes('Depth limit')));
 });
 
-test.serial('$complexity multiplier affects calculation', async (t) => {
+test('$complexity multiplier affects calculation', async (t) => {
 	const result = await execute({
 		schema,
 		document: MoviesQuery,
@@ -101,7 +101,7 @@ test.serial('$complexity multiplier affects calculation', async (t) => {
 	t.truthy(result.data?.movies);
 });
 
-test.serial('screening query with small limit succeeds', async (t) => {
+test('screening query with small limit succeeds', async (t) => {
 	const result = await execute({
 		schema,
 		document: ScreeningQuery,
@@ -114,7 +114,7 @@ test.serial('screening query with small limit succeeds', async (t) => {
 	t.is(result.data?.screening?.theater, 'Theater 1');
 });
 
-test.serial('screening query with args-based complexity within limits', async (t) => {
+test('screening query with args-based complexity within limits', async (t) => {
 	const result = await execute({
 		schema,
 		document: ScreeningsQuery,
@@ -126,7 +126,7 @@ test.serial('screening query with args-based complexity within limits', async (t
 	t.is(result.data?.screenings?.length, 2);
 });
 
-test.serial('screening query with high limit exceeds complexity', async (t) => {
+test('screening query with high limit exceeds complexity', async (t) => {
 	const result = await execute({
 		schema,
 		document: ScreeningsFullQuery,

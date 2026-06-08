@@ -1,7 +1,8 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createApplication } from '@baeta/core';
 import { execute } from '@baeta/e2e-shared/execute';
+import { createRelativeExists } from '@baeta/e2e-shared/utils';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
 import modules from './src/modules/index.ts';
@@ -48,21 +49,30 @@ const MovieQuery = graphql(`
 	}
 `);
 
-test.serial('generates federation files at default module path', (t) => {
-	t.true(existsSync(resolve(federationDir, 'index.ts')));
-	t.true(existsSync(resolve(federationDir, 'typedef.ts')));
-	t.true(existsSync(resolve(federationDir, 'federation-sdl.ts')));
-	t.true(existsSync(resolve(federationDir, 'federation-spec.gql')));
-	t.true(existsSync(resolve(federationDir, 'federation-types.gql')));
-	t.true(existsSync(resolve(federationDir, 'entity-handlers.ts')));
+test('generates federation files at default module path', async (t) => {
+	const exists = createRelativeExists(federationDir);
+	const files = [
+		'index.ts',
+		'typedef.ts',
+		'federation-sdl.ts',
+		'federation-spec.gql',
+		'federation-types.gql',
+		'entity-handlers.ts',
+	];
+	const filePromises = files.map(exists);
+	const results = await Promise.all(filePromises);
+	for (const result of results) {
+		t.true(result, 'All federation files should exist');
+	}
 });
 
-test.serial('generates federation types in default typesDir', (t) => {
-	t.true(existsSync(resolve(fixturePath, 'src/__generated__/federation.ts')));
+test('generates federation types in default typesDir', async (t) => {
+	const exists = createRelativeExists(fixturePath);
+	t.true(await exists('src/__generated__/federation.ts'));
 });
 
-test.serial('federation-spec.gql declares default directives only', (t) => {
-	const spec = readFileSync(resolve(federationDir, 'federation-spec.gql'), 'utf-8');
+test('federation-spec.gql declares default directives only', async (t) => {
+	const spec = await readFile(resolve(federationDir, 'federation-spec.gql'), 'utf-8');
 	t.true(spec.includes('Federation Specification 2.9'));
 	t.true(spec.includes('directive @key'));
 	t.true(spec.includes('directive @external'));
@@ -73,20 +83,19 @@ test.serial('federation-spec.gql declares default directives only', (t) => {
 	t.false(spec.includes('directive @inaccessible'));
 });
 
-test.serial('federation-types.gql declares _Entity union and _service', (t) => {
-	const types = readFileSync(resolve(federationDir, 'federation-types.gql'), 'utf-8');
+test('federation-types.gql declares _Entity union and _service', async (t) => {
+	const types = await readFile(resolve(federationDir, 'federation-types.gql'), 'utf-8');
 	t.true(types.includes('union _Entity = Movie | Review'));
 	t.true(types.includes('_service: _Service!'));
 	t.true(types.includes('_entities(representations: [_Any!]!): [_Entity]!'));
 });
 
-test.serial('Query._service returns SDL with default federation @link', async (t) => {
+test('Query._service returns SDL with default federation @link', async (t) => {
 	const result = await execute({
 		schema,
 		document: ServiceQuery,
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	const sdl = result.data?._service.sdl ?? '';
 	t.true(sdl.includes('https://specs.apollo.dev/federation/v2.9'));
@@ -96,7 +105,7 @@ test.serial('Query._service returns SDL with default federation @link', async (t
 	t.false(sdl.includes('"@shareable"'));
 });
 
-test.serial('Query._entities resolves Movie via reference handler', async (t) => {
+test('Query._entities resolves Movie via reference handler', async (t) => {
 	const result = await execute({
 		schema,
 		document: EntitiesQuery,
@@ -105,7 +114,6 @@ test.serial('Query._entities resolves Movie via reference handler', async (t) =>
 		},
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?._entities.length, 1);
 	const [entity] = result.data?._entities ?? [];
@@ -118,7 +126,7 @@ test.serial('Query._entities resolves Movie via reference handler', async (t) =>
 	}
 });
 
-test.serial('Query._entities resolves a mix of entity types in one call', async (t) => {
+test('Query._entities resolves a mix of entity types in one call', async (t) => {
 	const result = await execute({
 		schema,
 		document: EntitiesQuery,
@@ -130,7 +138,6 @@ test.serial('Query._entities resolves a mix of entity types in one call', async 
 		},
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?._entities.length, 2);
 	const [movieEntity, reviewEntity] = result.data?._entities ?? [];
@@ -143,14 +150,13 @@ test.serial('Query._entities resolves a mix of entity types in one call', async 
 	}
 });
 
-test.serial('regular queries still work alongside federation', async (t) => {
+test('regular queries still work alongside federation', async (t) => {
 	const result = await execute({
 		schema,
 		document: MovieQuery,
 		variableValues: { where: { id: '1' } },
 		contextValue: { appVersion: '1.0.0' },
 	});
-
 	t.falsy(result.errors);
 	t.is(result.data?.movie?.id, '1');
 	t.is(result.data?.movie?.title, 'Inception');

@@ -2,7 +2,8 @@ import { defineConfig } from '@baeta/cli';
 import { createExecPlugin } from '@baeta/plugin-exec';
 
 const isWindows = process.platform === 'win32';
-const touchCmd = isWindows ? 'cmd /c echo. > exec-marker.txt' : 'touch exec-marker.txt';
+const markerCmd = isWindows ? 'cmd /c echo. > exec-marker.txt' : 'touch exec-marker.txt';
+const skippedCmd = isWindows ? 'cmd /c echo. > skipped-marker.txt' : 'touch skipped-marker.txt';
 
 export default defineConfig({
 	graphql: {
@@ -12,12 +13,12 @@ export default defineConfig({
 		createExecPlugin({
 			name: 'exec-marker',
 			actionName: 'marker file',
-			exec: touchCmd,
+			exec: markerCmd,
 		}),
 		createExecPlugin({
 			name: 'exec-skipped',
 			actionName: 'skipped command',
-			exec: isWindows ? 'cmd /c echo. > skipped-marker.txt' : 'touch skipped-marker.txt',
+			exec: skippedCmd,
 			skip: () => true,
 		}),
 	],

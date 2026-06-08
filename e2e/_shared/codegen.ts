@@ -26,20 +26,20 @@ export function createCodegenConfig(config: {
 		hooks: {
 			afterAllFileWrite: [
 				async (...files: string[]) => {
-					for (const filePath of files) {
-						const content = await readFile(filePath, 'utf-8');
-						if (content.includes('@graphql-typed-document-node/core')) {
-							await writeFile(
-								filePath,
-								content.replaceAll(
-									'@graphql-typed-document-node/core',
-									'@baeta/e2e-shared/document-node',
-								),
-							);
-						}
-					}
+					await Promise.all(files.map(patchDocumentNodeType));
 				},
 			],
 		},
 	};
+}
+
+async function patchDocumentNodeType(filePath: string) {
+	const content = await readFile(filePath, 'utf-8');
+	if (!content.includes('@graphql-typed-document-node/core')) {
+		return;
+	}
+	await writeFile(
+		filePath,
+		content.replaceAll('@graphql-typed-document-node/core', '@baeta/e2e-shared/document-node'),
+	);
 }

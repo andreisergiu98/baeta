@@ -34,6 +34,10 @@
       "types": "./execute.ts",
       "default": "./execute.ts"
     },
+    "./utils": {
+      "types": "./utils.ts",
+      "default": "./utils.ts"
+    },
     "./document-node": {
       "types": "./document-node.ts",
       "default": "./document-node.ts"

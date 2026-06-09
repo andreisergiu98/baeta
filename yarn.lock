@@ -1892,7 +1892,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260605.1"
+    "@cloudflare/workers-types": "npm:^4.20260606.1"
     miniflare: "npm:^4.20260603.0"
     typescript: "catalog:dev"
     zod: "npm:^4.4.3"
@@ -2505,7 +2505,7 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260605.1"
+    "@cloudflare/workers-types": "npm:^4.20260606.1"
     "@hono/graphql-server": "npm:^0.7.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
@@ -2523,7 +2523,7 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260605.1"
+    "@cloudflare/workers-types": "npm:^4.20260606.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
@@ -2841,7 +2841,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260605.1"
+    "@cloudflare/workers-types": "npm:^4.20260606.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -2991,8 +2991,8 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260605.1"
-    graphql: "npm:^16.6.0"
+    "@cloudflare/workers-types": "npm:^4.20260606.1"
+    graphql: "npm:^16.14.1"
     graphql-ws: "catalog:prod"
     typescript: "catalog:dev"
   peerDependencies:
@@ -3491,10 +3491,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20260605.1":
-  version: 4.20260605.1
-  resolution: "@cloudflare/workers-types@npm:4.20260605.1"
-  checksum: 10c0/ac2e558452ab9247152bed038f92f45afb6d75c4035bdfabb4571356cddd14bb99439feeac6ea3beff3b8da9de1a29339c451cee2c64dd692461d859320eec39
+"@cloudflare/workers-types@npm:^4.20260606.1":
+  version: 4.20260606.1
+  resolution: "@cloudflare/workers-types@npm:4.20260606.1"
+  checksum: 10c0/77d9e2d44a1652b73a25684eaeb61e0e53cc9b988bd7e7a745e197df3018fc70b032278b12132e1711c43cbd7199edd5aa241a119f64e62c9285a8f4bb84cc33
   languageName: node
   linkType: hard
 
@@ -9735,11 +9735,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 25.9.1
-  resolution: "@types/node@npm:25.9.1"
+  version: 25.9.2
+  resolution: "@types/node@npm:25.9.2"
   dependencies:
     undici-types: "npm:>=7.24.0 <7.24.7"
-  checksum: 10c0/9a04682842bebbcf21a1779dfeab9aa733d7bd7bbc0a0edb641ab3a9a3d43eac543225acf669c334f458f1956443ebc072bc3c72840c543b8b356cab5c82d456
+  checksum: 10c0/f14c0d56361febb985eccc45cf0834ee6e2f07c4389a636f3e1a55ebde320077a80bface18c9afd3092f5fa295925502c1a9d55f805efa813f634aa9c941cbac
   languageName: node
   linkType: hard
 
@@ -9767,11 +9767,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^22.19.17":
-  version: 22.19.19
-  resolution: "@types/node@npm:22.19.19"
+  version: 22.19.20
+  resolution: "@types/node@npm:22.19.20"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/402e0f088c94cabda3cd721546bd8e4e75e098e0b342f6e03b90ca1e19c28986f9650112c64fcfd09fc8cebc0f8b20291a513153e90489331cf666e1e5503e16
+  checksum: 10c0/933d4466f1a498dd7c8e173af7265a53e9d410cab4a827ccc348414d5065a9a40ba7a7c994a71b3ee651188111db3b43573b830dc30a61a7489f3e6efc537bf7
   languageName: node
   linkType: hard
 
@@ -9838,11 +9838,11 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:*, @types/react@npm:^19.2.14":
-  version: 19.2.16
-  resolution: "@types/react@npm:19.2.16"
+  version: 19.2.17
+  resolution: "@types/react@npm:19.2.17"
   dependencies:
     csstype: "npm:^3.2.2"
-  checksum: 10c0/96f2850b67c5aa4a695bc32eb06c7609acdda1c0c597ace21ad24a5b9e2ccbccd97c0643253579fd629789a422a3694b4bbcb26e5fc6aec5f0357820bf0ee81c
+  checksum: 10c0/bc2c4af96b3e480604424de70d5ebda90c5f4b485df471858c0bc2d7d70364b606ec3c4d8579f94f01aa0c6c0591f56bcf14cba5689f5eea4b74250ccdc3a232
   languageName: node
   linkType: hard
 
@@ -15442,7 +15442,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.5.0, graphql@npm:^16.6.0":
+"graphql@npm:^16.14.1, graphql@npm:^16.5.0, graphql@npm:^16.6.0":
   version: 16.14.1
   resolution: "graphql@npm:16.14.1"
   checksum: 10c0/a67358b4c6bbda0876903d3f6bbba46058ac7bc00c043ae0b435148e2a00481e9c7716f54f271659786f27f58bf355245216938d98ade980fd141885c907efff

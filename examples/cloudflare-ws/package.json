@@ -1,5 +1,6 @@
 {
   "name": "@baeta/examples-cloudflare-ws",
+  "version": "0.0.0",
   "private": true,
   "keywords": [
     "baeta",

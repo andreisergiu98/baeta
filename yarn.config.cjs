@@ -126,6 +126,10 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('type', 'module');
 		}
 
+		if (workspace.manifest.private) {
+			workspace.set('version', '0.0.0');
+		}
+
 		if (!workspace.manifest.private) {
 			enforceConsistentEntries(workspace);
 

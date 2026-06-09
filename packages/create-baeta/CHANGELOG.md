@@ -1,5 +1,13 @@
 # create-baeta
 
+## 2.0.0-next.16
+
+### Major Changes
+
+- `create baeta` (still offering the `yoga` and `apollo` templates with Node/Bun/Deno runtime selection) now scaffolds a v2 project end to end. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
 ## 1.0.11
 
 ### Patch Changes

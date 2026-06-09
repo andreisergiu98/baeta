@@ -1,5 +1,28 @@
 # @baeta/util-log
 
+## 2.0.0-next.5
+
+### Major Changes
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+- `createLogger` is now a public export and accepts a log `level` argument (`'debug' | 'info' | 'warn' | 'error'`, default `'info'`) so messages below the configured level are dropped. The exported types changed accordingly: the `ConsoleLogger` and `ConsolePayload` type exports were removed and replaced by a single `Logger` type. The pre-built `log` export is unchanged. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+  **v1:**
+
+  ```typescript
+  import { log, type ConsoleLogger } from "@baeta/util-log";
+  // createLogger was internal; no level filtering
+  ```
+
+  **v2:**
+
+  ```typescript
+  import { log, createLogger, type Logger } from "@baeta/util-log";
+
+  const logger = createLogger("warn"); // debug/info calls become no-ops
+  ```
+
 ## 1.0.1
 
 ### Patch Changes

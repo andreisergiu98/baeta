@@ -1,5 +1,23 @@
 # @baeta/generator
 
+## 2.0.0-next.7
+
+### Major Changes
+
+- `@baeta/generator` drives the generate/watch pipeline that runs Baeta's codegen plugins. It was reworked for the v2 side-effect-free generation flow. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+  - `GeneratorOptions` no longer carries the GraphQL-specific knobs that the old graphql-codegen pipeline needed: `baseTypesPath`, `contextType`, `extensions`, and `scalars` are gone. Type/context/scalar configuration now lives in the generated `src/modules/types.ts`. A new `typesDir` option controls where shared `__generated__` types are emitted (default `${modulesDir}/../__generated__/`).
+  - Plugins can now mark individual generated files as non-overwriting. The runner respects `disableOverwrite` so generator-authored starter files (e.g. a module's `index.ts` or `types.ts`) are written once and never clobbered on regeneration.
+
+  Generation remains plugin-driven via `generate(options, plugins, hooks)` / `generateAndWatch(...)`, with the GraphQL codegen supplied by `@baeta/plugin-graphql`.
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+### Patch Changes
+
+- Updated dependencies [[`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c)]:
+  - @baeta/generator-sdk@2.0.0-next.7
+
 ## 1.0.2
 
 ### Patch Changes

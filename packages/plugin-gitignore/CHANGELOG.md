@@ -1,5 +1,36 @@
 # @baeta/plugin-gitignore
 
+## 2.0.0-next.16
+
+### Major Changes
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+- The gitignore plugin still auto-populates `.gitignore` with Baeta's generated files, but its options changed. `ignoreTags` was renamed to `skipTags`, and a new `skipFilesGlobs` option lets you exclude specific generated files by glob. Files marked `disableOverwrite` are now also excluded from `.gitignore`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+  **v1:**
+
+  ```typescript
+  gitignorePlugin({
+    ignoreTags: ["cloudflare"],
+  });
+  ```
+
+  **v2:**
+
+  ```typescript
+  gitignorePlugin({
+    skipTags: ["cloudflare"],
+    skipFilesGlobs: ["src/modules/**/schema.ts"],
+  });
+  ```
+
+### Patch Changes
+
+- Updated dependencies [[`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c)]:
+  - @baeta/generator-sdk@2.0.0-next.7
+  - @baeta/util-path@2.0.0-next.6
+
 ## 1.0.11
 
 ### Patch Changes

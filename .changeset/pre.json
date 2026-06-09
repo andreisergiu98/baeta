@@ -80,5 +80,35 @@
     "@baeta/tsconfig": "0.0.0",
     "@baeta/website": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "orange-zebras-punch",
+    "v2-auth",
+    "v2-cache-cloudflare",
+    "v2-cache-ioredis",
+    "v2-cache-iovalkey",
+    "v2-cache-redis-common",
+    "v2-cache-upstash",
+    "v2-cache",
+    "v2-cli",
+    "v2-complexity",
+    "v2-core",
+    "v2-create-baeta",
+    "v2-directives",
+    "v2-env",
+    "v2-errors",
+    "v2-federation",
+    "v2-generator-sdk",
+    "v2-generator",
+    "v2-node-support",
+    "v2-plugin-directives",
+    "v2-plugin-federation",
+    "v2-plugin-gitignore",
+    "v2-plugin-graphql",
+    "v2-plugin-pagination",
+    "v2-rebuilt-packages",
+    "v2-subscriptions-cloudflare",
+    "v2-subscriptions-pubsub",
+    "v2-util-graphql",
+    "v2-util-log"
+  ]
 }

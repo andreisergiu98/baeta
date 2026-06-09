@@ -41,5 +41,16 @@
       "@baeta/subscriptions-pubsub"
     ]
   ],
-  "ignore": ["@baeta/e2e-*", "@baeta/examples*", "@baeta/template*"]
+  "ignore": [
+    "@baeta/e2e-*",
+    "@baeta/examples-*",
+    "@baeta/template-*",
+    "@baeta/tests-*",
+    "@baeta/builder",
+    "@baeta/changelog",
+    "@baeta/testing",
+    "@baeta/tsconfig",
+    "@baeta/website",
+    "@baeta/workspace-config"
+  ]
 }

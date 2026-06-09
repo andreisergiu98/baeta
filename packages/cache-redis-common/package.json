@@ -1,6 +1,6 @@
 {
   "name": "@baeta/cache-redis-common",
-  "version": "2.0.0-next.13",
+  "version": "2.0.0-next.14",
   "description": "Shared Redis primitives for Baeta cache adapters.",
   "keywords": [
     "baeta",

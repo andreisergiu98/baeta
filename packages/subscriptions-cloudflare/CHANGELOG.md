@@ -1,5 +1,15 @@
 # @baeta/subscriptions-cloudflare
 
+## 0.2.0-next.4
+
+### Minor Changes
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+- Updated for Baeta v2. The public API is unchanged, except that the `Subscribe<Map>` by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+  helper now returns an `AsyncIterable` instead of an `AsyncIterator`, matching the v2
+  subscription builder's `.subscribe()`.
+
 ## 0.1.6
 
 ### Patch Changes

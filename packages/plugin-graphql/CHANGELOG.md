@@ -1,5 +1,56 @@
 # @baeta/plugin-graphql
 
+## 2.0.0-next.16
+
+### Major Changes
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+- The whole generator was rewritten to emit the new side-effect-free builder API (the resolver API itself is documented under `@baeta/core`). by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+  **v1 (generated accessor, side-effect registration):**
+
+  ```typescript
+  import { getUserModule } from "./typedef";
+
+  const { Query } = getUserModule();
+
+  Query.user(async (params) => {
+    return { id: params.args.id ?? "id", name: "John Doe" };
+  });
+  ```
+
+  **v2 (generated module builder + starter `index.ts`):**
+
+  ```typescript
+  import { UserModule } from "./typedef.ts";
+
+  const { Query, User } = UserModule;
+
+  export default UserModule.$schema({
+    User: User.$fields({
+      id: User.id.key("id"),
+      name: User.name.resolve((params) => {
+        // Implement resolver logic here
+      }),
+    }),
+    Query: Query.$fields({
+      user: Query.user.resolve((params) => {
+        // Implement resolver logic here
+      }),
+    }),
+  });
+  ```
+
+  The full set of field/middleware/builder helpers is documented in the `@baeta/core` changelog entry.
+
+### Patch Changes
+
+- Updated dependencies [[`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c)]:
+  - @baeta/generator-sdk@2.0.0-next.7
+  - @baeta/util-graphql@2.0.0-next.4
+  - @baeta/util-path@2.0.0-next.6
+
 ## 1.0.11
 
 ### Patch Changes

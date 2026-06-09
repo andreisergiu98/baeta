@@ -1,6 +1,6 @@
 {
   "name": "@baeta/plugin-pagination",
-  "version": "2.0.0-next.15",
+  "version": "2.0.0-next.16",
   "description": "Relay-style pagination plugin for Baeta.",
   "keywords": [
     "baeta",

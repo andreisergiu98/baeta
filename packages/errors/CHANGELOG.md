@@ -1,5 +1,47 @@
 # @baeta/errors
 
+## 2.0.0-next.16
+
+### Major Changes
+
+- `BaetaErrorCode` is no longer a TypeScript `enum`. It is now a plain `const` object plus a derived union type that share the same name: by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+  **v1:**
+
+  ```typescript
+  export enum BaetaErrorCode {
+    Unauthenticated = "UNAUTHENTICATED",
+    Forbidden = "FORBIDDEN",
+    BadUserInput = "BAD_USER_INPUT",
+    InternalServerError = "INTERNAL_SERVER_ERROR",
+    AggregateError = "AGGREGATE_ERROR",
+  }
+  ```
+
+  **v2:**
+
+  ```typescript
+  export const BaetaErrorCode = {
+    Unauthenticated: "UNAUTHENTICATED",
+    Forbidden: "FORBIDDEN",
+    BadUserInput: "BAD_USER_INPUT",
+    InternalServerError: "INTERNAL_SERVER_ERROR",
+    AggregateError: "AGGREGATE_ERROR",
+  } as const;
+
+  export type BaetaErrorCode =
+    (typeof BaetaErrorCode)[keyof typeof BaetaErrorCode];
+  ```
+
+  Value access is unchanged (`BaetaErrorCode.Forbidden === 'FORBIDDEN'`), and `BaetaErrorCode` still works as a type (it now resolves to the union of code strings). Code that relied on enum-only behavior must be updated: using a single member as a type (`BaetaErrorCode.Forbidden` in type position) and enum reverse-mapping (`BaetaErrorCode['FORBIDDEN']`) are no longer available. The error classes (`UnauthenticatedError`, `ForbiddenError`, `BadUserInput`, `InternalServerError`, `AggregateGraphQLError`) and their runtime behavior are otherwise unchanged.
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+### Patch Changes
+
+- Updated dependencies [[`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c)]:
+  - @baeta/util-env@2.0.0-next.5
+
 ## 1.0.9
 
 ### Patch Changes

@@ -1,5 +1,36 @@
 # @baeta/plugin-pagination
 
+## 2.0.0-next.16
+
+### Major Changes
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+- The pagination plugin still emits the same Relay-style SDL (`Connection`, `Edge`, `PageInfo`), but its generated `index.ts` now wires up the new v2 builder-pattern resolvers instead of v1's side-effect module getter. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+  The `createExport` option was removed (the resolver file is always generated), and the `types` map is now type-checked against your schema via `paginationPlugin<T>({ types })`.
+
+  **Options change:**
+
+  ```typescript
+  // v1
+  paginationPlugin({
+    types: { User: true },
+    createExport: false, // could opt out of the generated export file
+  });
+
+  // v2
+  paginationPlugin<Types>({
+    types: { User: true }, // keys are now type-checked; createExport removed
+  });
+  ```
+
+### Patch Changes
+
+- Updated dependencies [[`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c)]:
+  - @baeta/generator-sdk@2.0.0-next.7
+  - @baeta/util-path@2.0.0-next.6
+
 ## 1.0.11
 
 ### Patch Changes

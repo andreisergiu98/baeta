@@ -1,5 +1,27 @@
 # @baeta/directives
 
+## 2.0.0-next.16
+
+### Major Changes
+
+- `@baeta/directives` still ships the same catalog of built-in input/object directives (`@validString`, `@validInt`, `@validFloat`, `@constraints`, `@trim`, `@lower`, `@upper`), but the way directives are applied to a module changed along with the new side-effect-free builder API. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+  #### How directives are registered
+
+  In v1 a module came from a `getXModule()` factory and `$directive` was a void side-effect method that pushed a schema transformer onto the module. In v2 the module is a direct export and `$directive()` is an immutable method you chain before `$schema()` — `Module.$directive(transformer).$schema({ ... })` — accepting a single transformer or an array.
+
+  #### `@validString` `format` argument removed
+
+  The `format: EMAIL | UUID | URL` argument (and the generated `StringFormat` enum) was dropped from `@validString`, along with its `email-validator` and `is-url` dependencies.
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+### Patch Changes
+
+- Updated dependencies [[`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c), [`046dc5c`](https://github.com/andreisergiu98/baeta/commit/046dc5c29a8ec0f613b9430caa659c08d41a678c)]:
+  - @baeta/core@2.0.0-next.16
+  - @baeta/errors@2.0.0-next.16
+
 ## 1.0.11
 
 ### Patch Changes

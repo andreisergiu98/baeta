@@ -1,5 +1,13 @@
 # @baeta/util-path
 
+## 2.0.0-next.6
+
+### Major Changes
+
+- Drop support for Node.js v23 and v25. Baeta now targets the active LTS releases — Node.js `^22.20.0`, `^24.0.0`, or `>=26.0.0`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
+- Updated for Baeta v2. by [@andreisergiu98](https://github.com/andreisergiu98) in [#290](https://github.com/andreisergiu98/baeta/pull/290)
+
 ## 1.0.1
 
 ### Patch Changes

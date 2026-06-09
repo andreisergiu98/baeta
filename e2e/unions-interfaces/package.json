@@ -1,5 +1,6 @@
 {
   "name": "@baeta/e2e-unions-interfaces",
+  "version": "0.0.0",
   "private": true,
   "keywords": [
     "baeta",

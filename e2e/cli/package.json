@@ -1,5 +1,6 @@
 {
   "name": "@baeta/e2e-cli",
+  "version": "0.0.0",
   "private": true,
   "keywords": [
     "baeta",

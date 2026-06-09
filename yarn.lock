@@ -2992,7 +2992,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^4.20260605.1"
-    graphql: "catalog:dev"
+    graphql: "npm:^16.6.0"
     graphql-ws: "catalog:prod"
     typescript: "catalog:dev"
   peerDependencies:

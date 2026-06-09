@@ -9,6 +9,7 @@ export const SUPPORTED_NODE_VERSIONS = '^22.20.0 || ^24.0.0 || >=26.0.0';
  * We use constraints until peer dependencies are supported by yarn catalog.
  */
 export const GRAPHQL_PEER_VERSION = '^16.6.0';
+export const LEGACY_GRAPHQL_PEER_VERSION = '^16.6.0';
 
 /*
  * tsdown defaults for packages that require building.

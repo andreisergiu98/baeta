@@ -37,7 +37,7 @@ export function valkeyService(port: number, name = 'valkey'): Steps {
 }
 
 export function redisHttpService(port: number, name = 'redis-http'): Steps {
-	return ({ addService, use }) => {
+	return ({ addService }) => {
 		addService({
 			name,
 			image: images.serverlessRedisHttp,

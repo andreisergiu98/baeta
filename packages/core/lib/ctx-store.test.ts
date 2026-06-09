@@ -7,7 +7,7 @@ import {
 
 test('store should wait for get before loading to ctx when lazy', (t) => {
 	const storeKey = Symbol('storeKey');
-	const [_get, set] = createContextStore(storeKey, {
+	const [, set] = createContextStore(storeKey, {
 		eager: false,
 	});
 
@@ -23,7 +23,7 @@ test('store should wait for get before loading to ctx when lazy', (t) => {
 
 test('store should preload when not lazy', async (t) => {
 	const storeKey = Symbol('storeKey');
-	const [_get, set] = createContextStore(storeKey, {
+	const [, set] = createContextStore(storeKey, {
 		eager: true,
 	});
 

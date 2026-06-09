@@ -155,7 +155,7 @@ export default createWorkflow(
 			);
 		});
 
-		const e2eGraphqlJob = addJob('e2e-graphql', ({ setName, add, run }) => {
+		const e2eGraphqlJob = addJob('e2e-graphql', ({ setName, add }) => {
 			const matrix = add(({ setBuildMatrix }) =>
 				setBuildMatrix({ graphql: E2E_GRAPHQL_VERSIONS }, { failFast: false }),
 			);
@@ -264,7 +264,7 @@ export default createWorkflow(
 								[
 									'PR_NUMBER=$(gh pr list \\',
 									'  --head $BRANCH \\',
-									`  --repo ${github.repository} \\`,
+									interpolate`  --repo ${github.repository} \\`,
 									'  --json number \\',
 									'  --jq ".[0].number")',
 									'echo "pr=$PR_NUMBER" >> $GITHUB_OUTPUT',
@@ -290,14 +290,14 @@ export default createWorkflow(
 									'Publish snapshot',
 									joinStrings(
 										[
-											`yarn changeset version --snapshot ${prIdJob.outputs.pr}`,
+											interpolate`yarn changeset version --snapshot ${prIdJob.outputs.pr}`,
 											'if [[ `git status --porcelain` ]]; then',
 											`  echo "Changes detected, publishing snapshot"`,
 											'else',
 											'  echo "::error::No changesets detected, skipping snapshot"',
 											'  exit 1',
 											'fi',
-											`yarn builder release --ci --tag=${event.inputs.tag} --verbose`,
+											interpolate`yarn builder release --ci --tag=${event.inputs.tag} --verbose`,
 										],
 										'\n',
 									),

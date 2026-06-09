@@ -1,12 +1,9 @@
-import { resolve } from 'node:path';
 import { createApplication } from '@baeta/core';
 import { execute } from '@baeta/e2e-shared/execute';
 import { createRelativeExists } from '@baeta/e2e-shared/utils';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
 import modules from './src/modules/index.ts';
-
-const fixturePath = resolve(import.meta.dirname, '.');
 
 const { schema } = createApplication({ modules });
 

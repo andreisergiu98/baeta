@@ -89,9 +89,6 @@
   "dependenciesMeta": {
     "@apollo/rover@0.40.0": {
       "unplugged": true
-    },
-    "github-actions-workflow-builder@4.1.0": {
-      "unplugged": true
     }
   },
   "resolutions": {

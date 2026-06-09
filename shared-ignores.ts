@@ -19,4 +19,5 @@ export default [
 	'**/.turbo',
 	'**/dist',
 	'.pnp.cjs',
+	'.pnp.loader.mjs',
 ];

@@ -31,11 +31,15 @@ export const baseConfig = defineConfig([
 			'import-x/external-module-folders': ['node_modules', '.yarn'],
 		},
 		rules: {
-			'import-x/default': 'off',
-			'import-x/no-unresolved': 'off',
 			'import-x/no-named-as-default': 'off',
 			'import-x/no-named-as-default-member': 'off',
 			'import-x/no-cycle': 'error',
+			'import-x/no-unresolved': [
+				'error',
+				{
+					ignore: ['^cloudflare:workers$'],
+				},
+			],
 			'import-x/extensions': ['error', 'ignorePackages', { checkTypeImports: false }],
 		},
 	},
@@ -44,9 +48,7 @@ export const baseConfig = defineConfig([
 		plugins: { 'unused-imports': unusedImports },
 		rules: {
 			'@typescript-eslint/no-empty-object-type': 'off',
-			'@typescript-eslint/no-namespace': 'off',
 			'@typescript-eslint/no-unused-expressions': 'off',
-			'@typescript-eslint/no-unused-vars': 'off',
 			'@typescript-eslint/no-explicit-any': 'off',
 			'unused-imports/no-unused-imports': 'warn',
 			'no-param-reassign': 'error',
@@ -66,6 +68,7 @@ export const baseConfig = defineConfig([
 			'@typescript-eslint/only-throw-error': 'error',
 			'@typescript-eslint/no-unnecessary-template-expression': 'error',
 			'@typescript-eslint/no-unnecessary-type-assertion': 'error',
+			'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
 			'@typescript-eslint/no-base-to-string': 'error',
 			'@typescript-eslint/await-thenable': 'error',
 			'@typescript-eslint/no-redundant-type-constituents': 'error',
@@ -112,9 +115,10 @@ export const baseConfig = defineConfig([
 		},
 	},
 	{
-		files: ['**/__generated__/**', '**/lib/db/prisma.ts'],
+		files: ['packages/create-baeta/templates/**/*', 'examples/**/*', 'e2e/**/*'],
 		rules: {
 			'import-x/extensions': 'off',
+			'import-x/no-unresolved': 'off',
 		},
 	},
 	{

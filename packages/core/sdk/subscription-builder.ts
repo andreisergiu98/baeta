@@ -14,6 +14,7 @@ import type {
 } from './subscription-methods.ts';
 import { makePluginSymbol, makeSymbol } from './symbols.ts';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface SubscriptionBuilderOptions<Result, Source, Context, Args, Info> {
 	field: string;
 	metadata: Map<symbol, Readonly<unknown>>;

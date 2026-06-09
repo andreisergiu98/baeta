@@ -41,5 +41,9 @@
       "@baeta/subscriptions-pubsub"
     ]
   ],
-  "ignore": ["@baeta/e2e-*", "@baeta/examples*", "@baeta/template*"]
+  "privatePackages": {
+    "version": false,
+    "tag": false
+  },
+  "ignore": []
 }

@@ -8,7 +8,7 @@ import {
 } from 'github-actions-workflow-builder/lib/expression';
 
 const actions = {
-	checkout: 'actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10', // v6.0.3
+	checkout: 'actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0', // v7.0.0
 	setupNode: 'actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e', // v6.4.0
 	cache: 'actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae', // v5.0.5
 	createGithubAppToken: 'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1', // v3.2.0

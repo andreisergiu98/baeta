@@ -71,7 +71,7 @@
     "typescript": "catalog:dev"
   },
   "peerDependencies": {
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0 || ^17.0.0"
   },
   "ava": {
     "extensions": [

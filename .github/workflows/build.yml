@@ -423,7 +423,8 @@ jobs:
       matrix:
         graphql:
           - 16.6.0
-          - ^17.0.0-rc.0
+          - 17.0.0
+          - ^17.0.0
       fail-fast: false
     steps:
       - name: Git Checkout

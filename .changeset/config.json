@@ -8,7 +8,7 @@
   ],
   "commit": false,
   "access": "public",
-  "baseBranch": "main",
+  "baseBranch": "next",
   "updateInternalDependencies": "patch",
   "snapshot": {
     "useCalculatedVersion": false,

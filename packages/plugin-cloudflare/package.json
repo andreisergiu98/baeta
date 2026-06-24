@@ -72,7 +72,7 @@
     "@baeta/cache-cloudflare": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@cloudflare/workers-types": "^4",
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0 || ^17.0.0"
   },
   "peerDependenciesMeta": {
     "@baeta/cache-cloudflare": {

@@ -24,7 +24,7 @@ const MAIN_TEST_MATRIX = {
 };
 const E2E_PLATFORMS = ['ubuntu-latest', 'windows-latest', 'macos-latest'];
 const E2E_PLATFORM_NODE = createNodeVersion('26');
-const E2E_GRAPHQL_VERSIONS = ['16.6.0', '^17.0.0-rc.0'];
+const E2E_GRAPHQL_VERSIONS = ['16.6.0', '17.0.0', '^17.0.0'];
 
 export default createWorkflow(
 	({ setWorkflowName, setPermissions, setConcurrency, addTrigger, addJob, whenTrigger, when }) => {

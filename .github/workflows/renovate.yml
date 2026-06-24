@@ -64,7 +64,7 @@ jobs:
       - name: Restore Renovate Cache
         if: ${{ !(github.event.inputs.cache == 'disabled') &&
           !(github.event.inputs.cache == 'reset') }}
-        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8
         with:
           path: /tmp/renovate/cache
           key: renovate-cache-v2
@@ -145,7 +145,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Save Renovate Cache
         if: ${{ !(github.event.inputs.cache == 'disabled') && success() }}
-        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        uses: actions/cache/save@2c8a9bd7457de244a408f35966fab2fb45fda9c8
         with:
           path: /tmp/renovate/cache
           key: renovate-cache-v2

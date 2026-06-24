@@ -10,7 +10,7 @@ import {
 const actions = {
 	checkout: 'actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0', // v7.0.0
 	setupNode: 'actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e', // v6.4.0
-	cache: 'actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae', // v5.0.5
+	cache: 'actions/cache@2c8a9bd7457de244a408f35966fab2fb45fda9c8', // v6.0.0
 	createGithubAppToken: 'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1', // v3.2.0
 	githubScript: 'actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3', // v9.0.0
 	uploadArtifact: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a', // v7.0.1

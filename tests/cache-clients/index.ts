@@ -8,6 +8,8 @@ import type {
 import { randomUUID, sleep, type TestFn } from '@baeta/testing';
 
 const TTL_MS = 10_000;
+const SHORT_TTL_MS = 500;
+const SHORT_TTL_DELAY_MS = SHORT_TTL_MS + 100;
 
 type TestItem = { id: string; name: string };
 
@@ -214,13 +216,13 @@ export function runTestsForClient(
 		);
 	});
 
-	test(`${name} items expire after TTL`, async (t) => {
+	test.serial(`${name} items expire after TTL`, async (t) => {
 		const client = await createClient();
 		const item = mockItem();
 		const key = itemKey(item.id);
 
-		const shortLivedArgs = makeItemArgs(2_000);
-		const delay = sleep(2_100);
+		const shortLivedArgs = makeItemArgs(SHORT_TTL_MS);
+		const delay = sleep(SHORT_TTL_DELAY_MS);
 
 		await client.saveItems([[key, item]], shortLivedArgs);
 		const items = await client.getPartialItems([key], shortLivedArgs);
@@ -232,16 +234,16 @@ export function runTestsForClient(
 		t.deepEqual(expired, [null]);
 	});
 
-	test(`${name} re-saving items extends TTL`, async (t) => {
+	test.serial(`${name} re-saving items extends TTL`, async (t) => {
 		const client = await createClient();
-		const args = makeItemArgs(2_000);
+		const args = makeItemArgs(SHORT_TTL_MS);
 		const item = mockItem();
 		const key = itemKey(item.id);
 
-		const delay = sleep(2_100);
+		const delay = sleep(SHORT_TTL_DELAY_MS);
 		await client.saveItems([[key, item]], args);
 
-		await sleep(200);
+		await sleep(SHORT_TTL_MS / 2);
 		await client.saveItems([[key, item]], args);
 		await delay;
 
@@ -249,13 +251,13 @@ export function runTestsForClient(
 		t.deepEqual(results, [item]);
 	});
 
-	test(`${name} queries expire after TTL`, async (t) => {
+	test.serial(`${name} queries expire after TTL`, async (t) => {
 		const client = await createClient();
 		const queryName = `TestQuery_${randomUUID()}`;
 		const query = queryKey(queryName, randomUUID());
-		const shortLivedQueryArgs = makeQueryArgs(2_000);
+		const shortLivedQueryArgs = makeQueryArgs(SHORT_TTL_MS);
 
-		const delay = sleep(2_100);
+		const delay = sleep(SHORT_TTL_DELAY_MS);
 		await client.saveQuery(query, [indexKey(queryName, '')], ['data'], shortLivedQueryArgs);
 		let result = await client.getQuery(query, shortLivedQueryArgs);
 		t.deepEqual(result, ['data']);
@@ -266,12 +268,12 @@ export function runTestsForClient(
 		t.is(result, null);
 	});
 
-	test(`${name} saveItemsWithDiff items expire after TTL`, async (t) => {
+	test.serial(`${name} saveItemsWithDiff items expire after TTL`, async (t) => {
 		const client = await createClient();
-		const shortLivedArgs = makeItemArgs(2_000);
+		const shortLivedArgs = makeItemArgs(SHORT_TTL_MS);
 		const { values, keys, valueTuples } = mockItems();
 
-		const delay = sleep(2_100);
+		const delay = sleep(SHORT_TTL_DELAY_MS);
 		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
 		let results = await client.getPartialItems(keys, shortLivedArgs);
 		t.deepEqual(results, values);
@@ -284,15 +286,15 @@ export function runTestsForClient(
 		);
 	});
 
-	test(`${name} saveItemsWithDiff extends TTL on re-save`, async (t) => {
+	test.serial(`${name} saveItemsWithDiff extends TTL on re-save`, async (t) => {
 		const client = await createClient();
-		const shortLivedArgs = makeItemArgs(2_000);
+		const shortLivedArgs = makeItemArgs(SHORT_TTL_MS);
 		const { values, keys, valueTuples } = mockItems();
 
-		const delay = sleep(2_100);
+		const delay = sleep(SHORT_TTL_DELAY_MS);
 		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
 
-		await sleep(200);
+		await sleep(SHORT_TTL_MS / 2);
 		await client.saveItemsWithDiff(valueTuples, shortLivedArgs);
 
 		await delay;

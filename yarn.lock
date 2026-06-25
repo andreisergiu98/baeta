@@ -11145,7 +11145,7 @@ __metadata:
     eslint: "npm:^10.5.0"
     eslint-import-resolver-typescript: "npm:^4.4.5"
     eslint-plugin-import-x: "npm:^4.16.2"
-    eslint-plugin-package-json: "npm:^1.4.0"
+    eslint-plugin-package-json: "npm:^1.5.0"
     eslint-plugin-react-hooks: "npm:^7.1.1"
     eslint-plugin-unused-imports: "npm:^4.4.1"
     github-actions-workflow-builder: "npm:^4.1.0"
@@ -13720,9 +13720,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-package-json@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "eslint-plugin-package-json@npm:1.4.0"
+"eslint-plugin-package-json@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "eslint-plugin-package-json@npm:1.5.0"
   dependencies:
     "@altano/repository-tools": "npm:^2.0.1"
     change-case: "npm:^5.4.4"
@@ -13741,7 +13741,7 @@ __metadata:
   peerDependenciesMeta:
     "@eslint/json":
       optional: true
-  checksum: 10c0/c81813c227876c1aae7ebf9ca049afb0827b88951b8bf2b33ca2a6809a92e6a73a06eb2f3277777949b4546900511e3ccfbbc3d4db3807486a69d98da4dff770
+  checksum: 10c0/b8cef1c2cf1731d1db8d30ff7a50641ad4474a13d7a46d04e6a5c45667e7038c0117e2b3748351f50c04228f3b88b0aa21e3e4ea62b95bce533a4f1852e23b99
   languageName: node
   linkType: hard
 

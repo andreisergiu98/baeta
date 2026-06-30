@@ -74,7 +74,7 @@
     "@baeta/util-path": "workspace:^",
     "execa": "^9.6.1",
     "ink": "^7.1.0",
-    "node-pty": "1.2.0-beta.13",
+    "node-pty": "1.2.0-beta.14",
     "react": "catalog:prod",
     "yargs": "^18.0.0"
   },

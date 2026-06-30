@@ -47,7 +47,7 @@
     "@graphql-codegen/client-preset": "catalog:dev",
     "@types/node": "catalog:dev",
     "execa": "^9.6.1",
-    "node-pty": "1.2.0-beta.13",
+    "node-pty": "1.2.0-beta.14",
     "pathe": "^2.0.3",
     "typescript": "catalog:dev"
   },

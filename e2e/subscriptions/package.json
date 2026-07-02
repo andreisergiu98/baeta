@@ -1,0 +1,58 @@
+{
+  "name": "@baeta/e2e-subscriptions",
+  "version": "0.0.0",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "builder",
+    "framework",
+    "graphql",
+    "schema",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreisergiu98/baeta.git",
+    "directory": "e2e/subscriptions"
+  },
+  "type": "module",
+  "scripts": {
+    "e2e": "ava",
+    "e2e:generate:baeta": "baeta generate",
+    "e2e:generate:operations": "graphql-codegen",
+    "e2e:types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/core": "workspace:^",
+    "@baeta/subscriptions-pubsub": "workspace:^",
+    "graphql": "catalog:dev",
+    "graphql-subscriptions": "^3.0.0"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/cli": "workspace:^",
+    "@baeta/e2e-shared": "workspace:^",
+    "@baeta/testing": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@graphql-codegen/cli": "catalog:dev",
+    "@graphql-codegen/client-preset": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "typescript": "catalog:dev"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "timeout": "120s"
+  }
+}

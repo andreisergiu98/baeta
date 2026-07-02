@@ -3,6 +3,8 @@ type Movie {
 	title: String!
 	year: Int!
 	rating: Float
+	slug: String
+	genre: String
 }
 
 input MovieWhereUniqueInput @constraints(minFields: 1, maxFields: 1) {
@@ -16,8 +18,10 @@ type Query {
 
 input CreateMovieInput {
 	title: String! @trim @validString(minLength: 1, maxLength: 200)
-	year: Int!
-	rating: Float
+	year: Int! @validInt(min: 1888, max: 2100)
+	rating: Float @validFloat(min: 0, max: 10)
+	slug: String @lower
+	genre: String @upper
 }
 
 type Mutation {

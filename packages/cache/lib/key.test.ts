@@ -1,5 +1,4 @@
 import test from '@baeta/testing';
-import { encodeBase64 } from '@baeta/util-encoding';
 import { hash } from 'ohash';
 import {
 	buildCacheRevisionId,
@@ -49,19 +48,18 @@ test('buildQueryCacheIndexKeyId - returns proper id for all types', (t) => {
 		['str', 'value'],
 		['empty', ''],
 	];
-	const expectedHashes = [
-		hash('null=null'),
-		hash(`number=_${encodeBase64('1')}`),
-		hash(`true=_${encodeBase64('true')}`),
-		hash(`false=_${encodeBase64('false')}`),
-		hash(`str=_${encodeBase64('value')}`),
-		hash(`empty=_${encodeBase64('')}`),
-	];
+	const expectedHashes = indexes.map((idx) => hash(idx));
 	const results = indexes.map((idx) => buildQueryCacheIndexKeyId(idx));
 	t.deepEqual(
 		results,
 		expectedHashes.map((h) => `idx:${h}`),
 	);
+});
+
+test('buildQueryCacheIndexKeyId - distinguishes value types', (t) => {
+	t.not(buildQueryCacheIndexKeyId(['userId', 1]), buildQueryCacheIndexKeyId(['userId', '1']));
+	t.not(buildQueryCacheIndexKeyId(['flag', true]), buildQueryCacheIndexKeyId(['flag', 'true']));
+	t.not(buildQueryCacheIndexKeyId(['value', null]), buildQueryCacheIndexKeyId(['value', 'null']));
 });
 
 test('buildQueryCacheIndexKeysIds - empty array returns [idx:]', (t) => {

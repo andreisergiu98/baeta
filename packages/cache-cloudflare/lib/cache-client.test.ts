@@ -19,6 +19,13 @@ const mf = new Miniflare({
 const env: { BAETA_CACHE: DurableObjectNamespace } = await mf.getBindings();
 const store = env.BAETA_CACHE;
 
+// Warm-up worker
+await new CloudflareCacheClient(store).getPartialItems(['t:s:item:rev_1:id:warmup'], {
+	ttlMs: 1000,
+	serialize: JSON.stringify,
+	parse: JSON.parse,
+});
+
 test.after.always(async () => {
 	await mf.dispose();
 });

@@ -1,8 +1,7 @@
 import path from 'node:path';
-import logger from '@docusaurus/logger';
 import select from '@inquirer/select';
-import fs from 'fs-extra';
-import shell from 'shelljs';
+import { isCommandAvailable } from '../utils/commands.ts';
+import { pathExists } from '../utils/fs.ts';
 import type { CliOptions } from './cli-options.ts';
 import {
 	defaultPackageManager,
@@ -10,6 +9,7 @@ import {
 	type PackageManager,
 	packageManagers,
 } from './constants.ts';
+import { logger } from './logger.ts';
 
 async function findPackageManagerFromLockFile(
 	rootDir: string,
@@ -17,7 +17,7 @@ async function findPackageManagerFromLockFile(
 	for (const packageManager of packageManagers) {
 		for (const lockFileName of lockfileNames[packageManager]) {
 			const lockFilePath = path.join(rootDir, lockFileName);
-			if (await fs.pathExists(lockFilePath)) {
+			if (await pathExists(lockFilePath)) {
 				return packageManager;
 			}
 		}
@@ -32,9 +32,11 @@ function findPackageManagerFromUserAgent(): PackageManager | undefined {
 }
 
 async function askForPackageManagerChoice(): Promise<PackageManager> {
-	const hasYarn = shell.exec('yarn --version', { silent: true }).code === 0;
-	const hasPnpm = shell.exec('pnpm --version', { silent: true }).code === 0;
-	const hasBun = shell.exec('bun --version', { silent: true }).code === 0;
+	const [hasYarn, hasPnpm, hasBun] = await Promise.all([
+		isCommandAvailable('yarn'),
+		isCommandAvailable('pnpm'),
+		isCommandAvailable('bun'),
+	]);
 
 	if (!hasYarn && !hasPnpm && !hasBun) {
 		return 'npm';
@@ -104,12 +106,9 @@ export async function getPackageManager(
 	return await askForPackageManagerChoice();
 }
 
-export function getInstallCommand(pkgManager: PackageManager): string {
+export function getInstallArgs(pkgManager: PackageManager): string[] {
 	if (pkgManager === 'yarn') {
-		return 'yarn';
+		return [];
 	}
-	if (pkgManager === 'bun') {
-		return 'bun install';
-	}
-	return `${pkgManager} install --color always`;
+	return ['install'];
 }

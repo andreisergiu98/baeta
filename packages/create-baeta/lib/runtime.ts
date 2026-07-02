@@ -1,11 +1,13 @@
-import { logger } from '@docusaurus/logger';
 import select from '@inquirer/select';
-import shell from 'shelljs';
+import { isCommandAvailable } from '../utils/commands.ts';
 import { defaultJavaScriptRuntime, type JavaScriptRuntime } from './constants.ts';
+import { logger } from './logger.ts';
 
 export async function getRuntime(): Promise<JavaScriptRuntime> {
-	const hasBun = shell.exec('bun --version', { silent: true }).code === 0;
-	const hasDeno = shell.exec('deno --version', { silent: true }).code === 0;
+	const [hasBun, hasDeno] = await Promise.all([
+		isCommandAvailable('bun'),
+		isCommandAvailable('deno'),
+	]);
 
 	if (!hasDeno && !hasBun) {
 		return 'node';

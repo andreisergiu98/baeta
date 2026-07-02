@@ -1,10 +1,9 @@
 import path from 'node:path';
-import { logger } from '@docusaurus/logger';
-import shell from 'shelljs';
-import supportsColor from 'supports-color';
+import { execa } from 'execa';
 import { getAppName } from './app-name.ts';
 import type { PackageManager } from './constants.ts';
-import { getInstallCommand, getPackageManager } from './package-manager.ts';
+import { logger } from './logger.ts';
+import { getInstallArgs, getPackageManager } from './package-manager.ts';
 import { getRuntime } from './runtime.ts';
 import { copyTemplate, getTemplate } from './templates.ts';
 
@@ -47,15 +46,13 @@ export async function handler(args: Args) {
 
 	if (!args.skipInstall) {
 		logger.info`Installing dependencies with name=${pkgManager}...`;
-		const result = shell.exec(getInstallCommand(pkgManager), {
+		const result = await execa(pkgManager, getInstallArgs(pkgManager), {
 			cwd: dest,
-			env: {
-				...process.env,
-				...(supportsColor.stdout ? { FORCE_COLOR: '1' } : {}),
-			},
+			stdio: 'inherit',
+			reject: false,
 		});
 
-		if (result.code !== 0) {
+		if (result.failed) {
 			console.error('Dependency installation failed.');
 			logger.error('Dependency installation failed.');
 			logger.info`The app directory has already been created, and you can retry by typing:

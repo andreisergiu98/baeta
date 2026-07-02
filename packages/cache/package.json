@@ -63,7 +63,6 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@baeta/util-encoding": "workspace:^",
     "@baeta/util-log": "workspace:^",
     "dataloader": "^2.2.3",
     "ohash": "^2.0.11"

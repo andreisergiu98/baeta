@@ -1974,7 +1974,6 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@baeta/util-encoding": "workspace:^"
     "@baeta/util-log": "workspace:^"
     dataloader: "npm:^2.2.3"
     ohash: "npm:^2.0.11"
@@ -3103,7 +3102,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@baeta/util-encoding@workspace:^, @baeta/util-encoding@workspace:packages/util-encoding":
+"@baeta/util-encoding@workspace:packages/util-encoding":
   version: 0.0.0-use.local
   resolution: "@baeta/util-encoding@workspace:packages/util-encoding"
   dependencies:

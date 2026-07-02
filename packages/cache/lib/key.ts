@@ -1,4 +1,3 @@
-import { encodeBase64 } from '@baeta/util-encoding';
 import { hash } from 'ohash';
 import type { QueryArgs, QueryIndex } from './query.ts';
 
@@ -30,10 +29,7 @@ export function buildQueryCacheIndexKeyId(index?: QueryIndex | undefined): Query
 	if (index == null) {
 		return 'idx:';
 	}
-	const key = index[0];
-	const value = index[1];
-	const safeValue = value === null ? 'null' : `_${encodeBase64(value.toString())}`;
-	return `idx:${hash(`${key}=${safeValue}`)}`;
+	return `idx:${hash(index)}`;
 }
 
 export function buildQueryCacheIndexKeysIds(indexes: QueryIndex[]): QueryCacheIndexKeyId[] {

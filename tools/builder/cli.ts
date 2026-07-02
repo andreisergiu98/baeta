@@ -4,6 +4,7 @@ import symbols from 'log-symbols';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { buildCommand } from './commands/build.ts';
+import { checkBranchTipCommand } from './commands/check-branch-tip.ts';
 import { checkDepsCommand } from './commands/check-deps.ts';
 import { checkTsconfigCommand } from './commands/check-tsconfig.ts';
 import { generateCommand } from './commands/generate.ts';
@@ -26,6 +27,7 @@ export async function run() {
 			global: true,
 		})
 		.command(buildCommand)
+		.command(checkBranchTipCommand)
 		.command(checkDepsCommand)
 		.command(checkTsconfigCommand)
 		.command(generateCommand)

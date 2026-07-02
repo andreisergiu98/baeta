@@ -588,15 +588,22 @@ jobs:
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
+      - name: Check branch tip
+        run: yarn builder check-branch-tip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: step_7
       - name: Create Baeta Bot Token
+        if: ${{ fromJSON(steps.step_7.outputs.isTip) == true }}
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
           client-id: ${{ secrets.BAETA_BOT_CLIENT_ID }}
           private-key: ${{ secrets.BAETA_BOT_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
           repositories: ${{ github.repository }}
-        id: step_7
+        id: step_8
       - name: Run @changesets/action
+        if: ${{ fromJSON(steps.step_7.outputs.isTip) == true }}
         uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d
         with:
           publish: yarn builder release --ci --create-release --create-tags
@@ -604,10 +611,11 @@ jobs:
           version: yarn changeset version
           commit: "chore: publish packages"
           title: "chore: publish packages"
+          prDraft: create
           commitMode: github-api
           createGithubReleases: false
         env:
-          GITHUB_TOKEN: ${{ steps.step_7.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.step_8.outputs.token }}
           RELEASE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     concurrency:
       group: publish-packages

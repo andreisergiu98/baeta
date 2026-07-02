@@ -298,6 +298,7 @@ export interface UseChangesetsOptions {
 	versionCommand: Expression<string>;
 	commitMessage: Expression<string>;
 	prTitle: Expression<string>;
+	prDraft?: 'create' | 'always';
 	createPRToken: Expression<string>;
 	createReleaseToken: Expression<string>;
 }
@@ -310,6 +311,7 @@ export function useChangesets(options: UseChangesetsOptions): Steps {
 				version: options.versionCommand,
 				commit: options.commitMessage,
 				title: options.prTitle,
+				prDraft: options.prDraft,
 				commitMode: 'github-api',
 				createGithubReleases: false,
 			},

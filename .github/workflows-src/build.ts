@@ -213,32 +213,50 @@ export default createWorkflow(
 					eq(github.repository, 'andreisergiu98/baeta'),
 				),
 				() => {
-					addJob('publish', ({ setName, add, addDependencies, setPermissions, setConcurrency }) => {
-						setConcurrency({
-							group: 'publish-packages',
-							cancelInProgress: false,
-						});
-						setPermissions({
-							contents: 'write',
-							'pull-requests': 'write',
-							'id-token': 'write',
-						});
-						addDependencies(...releaseDependencies);
-						setName('Publish packages or open PR');
-						add(setupNode({ turboCache: turboCaches.build }));
-						const getToken = add(useBaetaBotToken());
-						add(
-							useChangesets({
-								publishCommand:
-									'yarn builder release --ci --create-release --create-tags --check-branch=${{ github.ref_name }} --verbose',
-								versionCommand: 'yarn changeset version',
-								commitMessage: 'chore: publish packages',
-								prTitle: 'chore: publish packages',
-								createPRToken: getToken.token,
-								createReleaseToken: secrets.GITHUB_TOKEN,
-							}),
-						);
-					});
+					addJob(
+						'publish',
+						({ setName, add, run, when, addDependencies, setPermissions, setConcurrency }) => {
+							setConcurrency({
+								group: 'publish-packages',
+								cancelInProgress: false,
+							});
+							setPermissions({
+								contents: 'write',
+								'pull-requests': 'write',
+								'id-token': 'write',
+							});
+							addDependencies(...releaseDependencies);
+							setName('Publish packages or open PR');
+							add(setupNode({ turboCache: turboCaches.build }));
+
+							const branchTip = run<{ isTip: boolean }>(
+								'Check branch tip',
+								'yarn builder check-branch-tip',
+								{
+									env: {
+										GITHUB_TOKEN: secrets.GITHUB_TOKEN,
+									},
+									jsonOutputs: true,
+								},
+							);
+
+							when(eq(branchTip.outputs.isTip, true), () => {
+								const getToken = add(useBaetaBotToken());
+								add(
+									useChangesets({
+										publishCommand:
+											'yarn builder release --ci --create-release --create-tags --check-branch=${{ github.ref_name }} --verbose',
+										versionCommand: 'yarn changeset version',
+										commitMessage: 'chore: publish packages',
+										prTitle: 'chore: publish packages',
+										prDraft: 'create',
+										createPRToken: getToken.token,
+										createReleaseToken: secrets.GITHUB_TOKEN,
+									}),
+								);
+							});
+						},
+					);
 				},
 			);
 		});

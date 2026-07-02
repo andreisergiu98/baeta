@@ -49,6 +49,8 @@ directive @validString(
 ) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 ```
 
+Validation stops at the first failing check, and `maxLength` is enforced before `regex` is tested. Always pair `regex` with `maxLength`: the pattern runs on the server against client-supplied strings, and the length cap bounds the work a backtracking-heavy pattern can do.
+
 ### Number Validation
 
 ```graphql

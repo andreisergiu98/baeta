@@ -352,7 +352,7 @@ You can also pass an array of grant configs to attach different grants to differ
 
 ## Scope caching
 
-Within a single request, each scope-with-argument combination runs at most once. The cache is per-context and gone when the request finishes.
+Within a single request, each scope-with-argument combination runs at most once. The cache is per-context and gone when the request finishes, so never share a context across users: cached decisions would be replayed for the wrong principal.
 
 ### How keys are derived
 
@@ -396,7 +396,7 @@ createAuth<Context, Scopes, Grants>(
 );
 ```
 
-Return a **stable** value (equal inputs produce equal keys). Strings are easiest; any value that compares equal as a `Map` key works, including a stable object reference.
+Return a **stable** value (equal inputs produce equal keys) that is also **distinct for distinct inputs**: scope results are cached under this key, so a collision replays one argument's authorization decision for another. Strings are easiest; any value that compares equal as a `Map` key works, including a stable object reference.
 
 ### Concurrency and errors
 

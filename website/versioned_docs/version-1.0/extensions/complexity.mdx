@@ -105,7 +105,7 @@ Query.users.$complexity(({ args, ctx }) => ({
 
 ### Dynamic Complexity Rules
 
-Complexity rules can be determined dynamically based on context or arguments:
+Complexity rules can be determined dynamically based on context or arguments. For paginated fields this is the recommended setup — deriving the multiplier from the page-size argument makes the score track the amount of work actually requested:
 
 ```typescript
 Query.users.$complexity(({ args, ctx }) => {
@@ -123,12 +123,16 @@ Query.users.$complexity(({ args, ctx }) => {
 3. Nested fields add to the total complexity
 4. The total is compared against the configured limit
 
+:::warning
+The default list multiplier is a flat constant, it is **not** derived from paging arguments. `users(first: 100000)` scores the same as `users(first: 1)` unless the field sets its multiplier from `args` (see [Dynamic Complexity Rules](#dynamic-complexity-rules)).
+:::
+
 Example:
 
 ```graphql
 query {
-  users(first: 10) {
-    # complexity: 1 * 10 (multiplier)
+  users(first: 100) {
+    # complexity: 1 * 10 (default multiplier)
     name # complexity: 1 * 10 (inherited multiplier)
     posts {
       # complexity: 1 * 10 * 10 (nested list)

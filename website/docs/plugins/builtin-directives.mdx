@@ -53,6 +53,8 @@ directive @validString(
 ) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 ```
 
+Checks run in the order listed and stop at the first failure, so `maxLength` is enforced before `regex` is tested. Always pair `regex` with `maxLength`: the pattern runs on the server against client-supplied strings, and the length cap bounds the work a backtracking-heavy pattern can do.
+
 ### Number validation
 
 ```graphql
@@ -98,7 +100,7 @@ directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 
 ```graphql
 input UserInput @constraints(minFields: 2) {
-  email: String! @validString(regex: "^[^@\\s]+@[^@\\s]+$")
+  email: String! @validString(regex: "^[^@\\s]+@[^@\\s]+$", maxLength: 254)
   age: Int! @validInt(min: 18)
   name: String! @trim @upper
   score: Float @validFloat(min: 0, max: 100)

@@ -97,6 +97,8 @@ export default defineConfig({
 });
 ```
 
+Scope results and grants are cached on the context object for the duration of a request, so never share a context across users: cached decisions would be replayed for the wrong principal.
+
 ## Authorization Examples
 
 ### Basic Static Rules

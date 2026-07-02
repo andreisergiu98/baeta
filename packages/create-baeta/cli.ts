@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import { logger } from '@docusaurus/logger';
 import semver from 'semver';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { packageManagers } from './lib/constants.ts';
 import { handler } from './lib/handler.ts';
+import { logger } from './lib/logger.ts';
 import { engines, version } from './package.json';
 
 const requiredVersion = engines.node;

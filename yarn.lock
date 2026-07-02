@@ -4403,7 +4403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/logger@npm:3.10.1, @docusaurus/logger@npm:^3.10.1":
+"@docusaurus/logger@npm:3.10.1":
   version: 3.10.1
   resolution: "@docusaurus/logger@npm:3.10.1"
   dependencies:
@@ -9427,16 +9427,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/fs-extra@npm:^11.0.4":
-  version: 11.0.4
-  resolution: "@types/fs-extra@npm:11.0.4"
-  dependencies:
-    "@types/jsonfile": "npm:*"
-    "@types/node": "npm:*"
-  checksum: 10c0/9e34f9b24ea464f3c0b18c3f8a82aefc36dc524cc720fc2b886e5465abc66486ff4e439ea3fb2c0acebf91f6d3f74e514f9983b1f02d4243706bdbb7511796ad
-  languageName: node
-  linkType: hard
-
 "@types/gtag.js@npm:^0.0.20":
   version: 0.0.20
   resolution: "@types/gtag.js@npm:0.0.20"
@@ -9526,15 +9516,6 @@ __metadata:
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 10c0/a996a745e6c5d60292f36731dd41341339d4eeed8180bb09226e5c8d23759067692b1d88e5d91d72ee83dfc00d3aca8e7bd43ea120516c17922cbcb7c3e252db
-  languageName: node
-  linkType: hard
-
-"@types/jsonfile@npm:*":
-  version: 6.1.4
-  resolution: "@types/jsonfile@npm:6.1.4"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10c0/b12d068b021e4078f6ac4441353965769be87acf15326173e2aea9f3bf8ead41bd0ad29421df5bbeb0123ec3fc02eb0a734481d52903704a1454a1845896b9eb
   languageName: node
   linkType: hard
 
@@ -9783,16 +9764,6 @@ __metadata:
     "@types/http-errors": "npm:*"
     "@types/node": "npm:*"
   checksum: 10c0/a3c6126bdbf9685e6c7dc03ad34639666eff32754e912adeed9643bf3dd3aa0ff043002a7f69039306e310d233eb8e160c59308f95b0a619f32366bbc48ee094
-  languageName: node
-  linkType: hard
-
-"@types/shelljs@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "@types/shelljs@npm:0.10.0"
-  dependencies:
-    "@types/node": "npm:*"
-    fast-glob: "npm:^3.3.2"
-  checksum: 10c0/105ffd5851f159843d58de799b10ce6079c9b0759cc8cebdba249b2c97aed18a828b9f1267eabff9f972a0613f5413971c5796f035d1385bddc60214b22539a6
   languageName: node
   linkType: hard
 
@@ -12480,18 +12451,14 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@docusaurus/logger": "npm:^3.10.1"
     "@inquirer/input": "npm:^5.1.2"
     "@inquirer/select": "npm:^5.2.1"
-    "@types/fs-extra": "npm:^11.0.4"
     "@types/node": "catalog:dev"
     "@types/semver": "npm:^7.7.1"
-    "@types/shelljs": "npm:^0.10.0"
     "@types/yargs": "npm:^17.0.35"
-    fs-extra: "npm:^11.3.5"
+    execa: "npm:^9.6.1"
+    log-symbols: "npm:^7.0.1"
     semver: "npm:^7.8.5"
-    shelljs: "npm:^0.10.0"
-    supports-color: "npm:^10.2.2"
     typescript: "catalog:dev"
     yargs: "npm:^18.0.0"
   bin:
@@ -14704,7 +14671,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^11.1.1, fs-extra@npm:^11.2.0, fs-extra@npm:^11.3.5":
+"fs-extra@npm:^11.1.1, fs-extra@npm:^11.2.0":
   version: 11.3.5
   resolution: "fs-extra@npm:11.3.5"
   dependencies:
@@ -21933,16 +21900,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shelljs@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "shelljs@npm:0.10.0"
-  dependencies:
-    execa: "npm:^5.1.1"
-    fast-glob: "npm:^3.3.2"
-  checksum: 10c0/3a18d524e2302fedd6e2b143bc17fd1e4583f41d19cb8ab747f8b00cfe39370044835f72adcab63a25ce004cae1605a8825afb3fa4dd5f78217b17b9ef966468
-  languageName: node
-  linkType: hard
-
 "side-channel-list@npm:^1.0.1":
   version: 1.0.1
   resolution: "side-channel-list@npm:1.0.1"
@@ -22572,7 +22529,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"supports-color@npm:^10.0.0, supports-color@npm:^10.2.2":
+"supports-color@npm:^10.0.0":
   version: 10.2.2
   resolution: "supports-color@npm:10.2.2"
   checksum: 10c0/fb28dd7e0cdf80afb3f2a41df5e068d60c8b4f97f7140de2eaed5b42e075d82a0e980b20a2c0efd2b6d73cfacb55555285d8cc719fa0472220715aefeaa1da7c

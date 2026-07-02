@@ -1,7 +1,7 @@
 import path from 'node:path';
-import { logger } from '@docusaurus/logger';
 import input from '@inquirer/input';
-import fs from 'fs-extra';
+import { pathExists } from '../utils/fs.ts';
+import { logger } from './logger.ts';
 
 const APP_NAME_RE = /^(?:@[a-z0-9][a-z0-9._-]*\/)?[a-z0-9][a-z0-9._-]*$/;
 
@@ -16,7 +16,7 @@ export async function getAppName(reqName: string | undefined, rootDir: string): 
 			return 'App name must contain only lowercase letters, digits, dashes, underscores, or dots, and may optionally include an npm scope.';
 		}
 		const dest = path.resolve(resolvedRoot, appName);
-		if (await fs.pathExists(dest)) {
+		if (await pathExists(dest)) {
 			return logger.interpolate`Directory already exists at path=${dest}!`;
 		}
 		return true;

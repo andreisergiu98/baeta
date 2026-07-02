@@ -6,6 +6,7 @@
  */
 import { AggregateGraphQLError, BadUserInput } from '@baeta/errors';
 import {
+	defaultFieldResolver,
 	type GraphQLArgument,
 	GraphQLError,
 	type GraphQLField,
@@ -333,10 +334,7 @@ function wrapValidatedFieldResolvers(fieldsWithArguments: GraphQLField<unknown, 
 	});
 
 	for (const field of fieldsToValidate) {
-		const { resolve: originalResolve } = field;
-		if (originalResolve == null) {
-			continue;
-		}
+		const originalResolve = field.resolve ?? defaultFieldResolver;
 
 		field.resolve = (source, args, context, info) => {
 			validateFieldArguments(field, source, args, context, info);

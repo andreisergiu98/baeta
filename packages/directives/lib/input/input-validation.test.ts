@@ -1,6 +1,11 @@
+import { BaetaErrorCode } from '@baeta/errors';
 import test from '@baeta/testing';
 import { parse as gql } from 'graphql';
-import { makeInvalidInputMacro, makeValidInputMacro } from '../../__tests__/macros.ts';
+import {
+	createAndExecute,
+	makeInvalidInputMacro,
+	makeValidInputMacro,
+} from '../../__tests__/macros.ts';
 import { inputConstraints } from './input-validation.ts';
 
 const typeDefs = gql(`
@@ -15,6 +20,11 @@ const typeDefs = gql(`
   }
 
   input MinMaxFieldsInput @constraints(minFields: 1, maxFields: 1) {
+    id: ID
+    email: String
+  }
+
+  input EmptyOnlyInput @constraints(maxFields: 0) {
     id: ID
     email: String
   }
@@ -101,3 +111,43 @@ test(
     }
   `),
 );
+
+test(
+	'max fields 0 allows empty input',
+	validInputMacro,
+	'EmptyOnlyInput!',
+	gql(`
+    query {
+      value(input: {})
+    }
+  `),
+);
+
+test(
+	'max fields 0 rejects populated input',
+	invalidInputMacro,
+	'EmptyOnlyInput!',
+	gql(`
+    query {
+      value(input: { id: "1" })
+    }
+  `),
+);
+
+test('validates fields relying on the default resolver', async (t) => {
+	const result = await createAndExecute(
+		typeDefs,
+		'MaxFieldsInput!',
+		inputConstraints.directive,
+		gql(`
+    query {
+      value(input: { id: "1", email: "test@test.com" })
+    }
+  `),
+		{},
+		'Boolean',
+	);
+
+	t.is(result.errors?.length, 1);
+	t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
+});

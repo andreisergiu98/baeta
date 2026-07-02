@@ -30,13 +30,13 @@ const directive = createInputDirective<Args>({
 			if (v != null) definedCount++;
 		}
 
-		if (config.maxFields && definedCount > config.maxFields) {
+		if (config.maxFields != null && definedCount > config.maxFields) {
 			throw new BadUserInput(
 				`Maximum ${config.maxFields} number of fields allowed, got ${definedCount}!`,
 			);
 		}
 
-		if (config.minFields && definedCount < config.minFields) {
+		if (config.minFields != null && definedCount < config.minFields) {
 			throw new BadUserInput(
 				`Minimum ${config.minFields} number of fields allowed, got ${definedCount}!`,
 			);

@@ -7,6 +7,8 @@ const movieFields = Movie.$fields({
 	title: Movie.title.key('title'),
 	year: Movie.year.key('year'),
 	rating: Movie.rating.key('rating'),
+	slug: Movie.slug.key('slug'),
+	genre: Movie.genre.key('genre'),
 });
 
 const movieQuery = Query.movie.resolve(({ args }) => {
@@ -15,6 +17,8 @@ const movieQuery = Query.movie.resolve(({ args }) => {
 		title: args.where.title ?? 'Inception',
 		year: 2010,
 		rating: 8.8,
+		slug: null,
+		genre: null,
 	};
 });
 
@@ -24,6 +28,8 @@ const createMovieMutation = Mutation.createMovie.resolve(({ args }) => {
 		title: args.input.title,
 		year: args.input.year,
 		rating: args.input.rating ?? null,
+		slug: args.input.slug ?? null,
+		genre: args.input.genre ?? null,
 	};
 });
 

@@ -35,7 +35,7 @@
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@baeta/errors": "workspace:^",
-    "@graphql-tools/utils": "^11.1.0",
+    "@graphql-tools/utils": "^11.1.1",
     "graphql": "catalog:dev",
     "graphql-yoga": "catalog:dev"
   },

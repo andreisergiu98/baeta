@@ -1892,7 +1892,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260627.1"
+    "@cloudflare/workers-types": "npm:^4.20260629.1"
     miniflare: "npm:^4.20260625.0"
     typescript: "catalog:dev"
     zod: "npm:^4.4.3"
@@ -2045,8 +2045,8 @@ __metadata:
     "@baeta/errors": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@graphql-tools/schema": "npm:^10.0.33"
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/schema": "npm:^10.0.34"
+    "@graphql-tools/utils": "npm:^11.1.1"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
@@ -2063,7 +2063,7 @@ __metadata:
     "@baeta/errors": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@graphql-tools/schema": "npm:^10.0.33"
+    "@graphql-tools/schema": "npm:^10.0.34"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
@@ -2505,7 +2505,7 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260627.1"
+    "@cloudflare/workers-types": "npm:^4.20260629.1"
     "@hono/graphql-server": "npm:^0.7.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
@@ -2523,7 +2523,7 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260627.1"
+    "@cloudflare/workers-types": "npm:^4.20260629.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
@@ -2575,7 +2575,7 @@ __metadata:
     "@baeta/errors": "workspace:^"
     "@baeta/plugin-directives": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/utils": "npm:^11.1.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
@@ -2841,7 +2841,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260627.1"
+    "@cloudflare/workers-types": "npm:^4.20260629.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -2899,7 +2899,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-graphql": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@graphql-tools/merge": "npm:^9.1.9"
+    "@graphql-tools/merge": "npm:^9.1.10"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -2991,7 +2991,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260627.1"
+    "@cloudflare/workers-types": "npm:^4.20260629.1"
     graphql: "npm:^16.14.2"
     graphql-ws: "catalog:prod"
     typescript: "catalog:dev"
@@ -3114,9 +3114,9 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-path": "workspace:^"
-    "@graphql-tools/graphql-file-loader": "npm:^8.1.14"
-    "@graphql-tools/load": "npm:^8.1.10"
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/graphql-file-loader": "npm:^8.1.15"
+    "@graphql-tools/load": "npm:^8.1.11"
+    "@graphql-tools/utils": "npm:^11.1.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
@@ -3491,10 +3491,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20260627.1":
-  version: 4.20260627.1
-  resolution: "@cloudflare/workers-types@npm:4.20260627.1"
-  checksum: 10c0/cd96c92585a821c74ce741156be67945a3171ae152658bedf5f6d1e69df6ac252ce2478bf92ba0708e1ce8b02bc60bc430f5f1a102a2e62e7fde14aee6565d1b
+"@cloudflare/workers-types@npm:^4.20260629.1":
+  version: 4.20260629.1
+  resolution: "@cloudflare/workers-types@npm:4.20260629.1"
+  checksum: 10c0/0d1277de729b5a196bd13dd418613a0089b396bffe1d3b42c94c806c2cfc719490b63adff65f460c47ce54c56524bc2d3be9f38bed5f1ace3d846682cacd4f8a
   languageName: node
   linkType: hard
 
@@ -5176,9 +5176,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint-react/ast@npm:5.9.5":
-  version: 5.9.5
-  resolution: "@eslint-react/ast@npm:5.9.5"
+"@eslint-react/ast@npm:5.10.0":
+  version: 5.10.0
+  resolution: "@eslint-react/ast@npm:5.10.0"
   dependencies:
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/typescript-estree": "npm:^8.62.0"
@@ -5187,19 +5187,19 @@ __metadata:
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/5baef6be3ab9727bbec7863262fb492b8758da56efe9c1fe4bc0484faacc4a92fb79083fdb92c788ab73ed8ea60bee0a50549f7d96b1cb2f7ea6607d9005aed4
+  checksum: 10c0/09984e848df17c68e76072107a8589e6680148ab4c8842dda3db5e4033cd207438292d20cb48d0b4dfb476f36d9dfaf192fe92ed4bf0cab63aa967270ec5edf7
   languageName: node
   linkType: hard
 
-"@eslint-react/core@npm:5.9.5":
-  version: 5.9.5
-  resolution: "@eslint-react/core@npm:5.9.5"
+"@eslint-react/core@npm:5.10.0":
+  version: 5.10.0
+  resolution: "@eslint-react/core@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/jsx": "npm:5.9.5"
-    "@eslint-react/shared": "npm:5.9.5"
-    "@eslint-react/var": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/jsx": "npm:5.10.0"
+    "@eslint-react/shared": "npm:5.10.0"
+    "@eslint-react/var": "npm:5.10.0"
     "@typescript-eslint/scope-manager": "npm:^8.62.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
@@ -5207,79 +5207,79 @@ __metadata:
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/1252905a62e61119f798b5742952fa2e1430a720a4f5587b741db46c37bd54b5925c3664a5ee7a2d6a198d97a456d2e0e7ad08f689daae5e5b489646fb460e88
+  checksum: 10c0/4e0a86b9c802b63e729d111339c5d1e3363a85d498b06cf10cabaa11ed6bdc9a708f4e39d4dd549cdf17995f8b62e80677e7f57bfb6fd7512f6910441f5c854b
   languageName: node
   linkType: hard
 
-"@eslint-react/eslint-plugin@npm:^5.9.5":
-  version: 5.9.5
-  resolution: "@eslint-react/eslint-plugin@npm:5.9.5"
+"@eslint-react/eslint-plugin@npm:^5.10.0":
+  version: 5.10.0
+  resolution: "@eslint-react/eslint-plugin@npm:5.10.0"
   dependencies:
-    "@eslint-react/shared": "npm:5.9.5"
-    eslint-plugin-react-dom: "npm:5.9.5"
-    eslint-plugin-react-jsx: "npm:5.9.5"
-    eslint-plugin-react-naming-convention: "npm:5.9.5"
-    eslint-plugin-react-rsc: "npm:5.9.5"
-    eslint-plugin-react-web-api: "npm:5.9.5"
-    eslint-plugin-react-x: "npm:5.9.5"
+    "@eslint-react/shared": "npm:5.10.0"
+    eslint-plugin-react-dom: "npm:5.10.0"
+    eslint-plugin-react-jsx: "npm:5.10.0"
+    eslint-plugin-react-naming-convention: "npm:5.10.0"
+    eslint-plugin-react-rsc: "npm:5.10.0"
+    eslint-plugin-react-web-api: "npm:5.10.0"
+    eslint-plugin-react-x: "npm:5.10.0"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/54c4112d44a94c5d66e53dcba8d9815647027765550cb41911b46123730d8c084a168d1c030b81ff659caf2b3ad788559004c97037a4180d495bc27e35d27565
+  checksum: 10c0/a1fefbb6ea8938eb3af310b26b2a236bd3e45ad29255ea8256c4d1b5d781a4581fe356dfede3059a5293ad1f503cfe592670f4b9026b64744e9856354b03cc21
   languageName: node
   linkType: hard
 
-"@eslint-react/eslint@npm:5.9.5":
-  version: 5.9.5
-  resolution: "@eslint-react/eslint@npm:5.9.5"
+"@eslint-react/eslint@npm:5.10.0":
+  version: 5.10.0
+  resolution: "@eslint-react/eslint@npm:5.10.0"
   dependencies:
     "@typescript-eslint/utils": "npm:^8.62.0"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/d051171d23a3996700998410cd322aed3661224ac9e11a8d69f929a2b1b2c25411efbea41c170d4c451309e3c099c7fbcbadd93b8087428f103a5bd628f9557f
+  checksum: 10c0/63c0d6a3a641d28a58981d23d2fc0e138968a1996d7ced538ab559d4dddf02d57726e5f986a6395a97cb22a35fcc85fe9da61791a5562e766ea6ead6788b9465
   languageName: node
   linkType: hard
 
-"@eslint-react/jsx@npm:5.9.5":
-  version: 5.9.5
-  resolution: "@eslint-react/jsx@npm:5.9.5"
+"@eslint-react/jsx@npm:5.10.0":
+  version: 5.10.0
+  resolution: "@eslint-react/jsx@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/shared": "npm:5.9.5"
-    "@eslint-react/var": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/shared": "npm:5.10.0"
+    "@eslint-react/var": "npm:5.10.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
     ts-pattern: "npm:^5.9.0"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/e1c8dbbc134ade7e89b658a96098bdce79dbfedb0f87b1bf7e8b63881e5a83a5ec2248009908e4e82e9e106b9a50cfeba0c2ea4dc626971dee9cb546a202a50f
+  checksum: 10c0/1d94b80179731088d8d9963a67feb1558dd0c8f92afc227a508b7ceddb7d1531efa2e98bb600e0dd3ba17cf2662203e286a2873bd270c2759ad1e93b421369df
   languageName: node
   linkType: hard
 
-"@eslint-react/shared@npm:5.9.5":
-  version: 5.9.5
-  resolution: "@eslint-react/shared@npm:5.9.5"
+"@eslint-react/shared@npm:5.10.0":
+  version: 5.10.0
+  resolution: "@eslint-react/shared@npm:5.10.0"
   dependencies:
-    "@eslint-react/eslint": "npm:5.9.5"
+    "@eslint-react/eslint": "npm:5.10.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
     ts-pattern: "npm:^5.9.0"
     zod: "npm:^3.25.0 || ^4.0.0"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/b54bf1c0addbf2e32c440d2b46b9642733749d015386212b92c59376151b8e9e463d8011cefed57550804b9d29ff04787bc6cd51c029fa6a4d25e7d64af2514b
+  checksum: 10c0/3de8be54f7cf5d353ae0605880e8ab5c23c1b43c617c88bed56169adc5f612577561514a279785c4a07ee2d6e7e3e61e021003d44d7d0940ae0f11b38320eb73
   languageName: node
   linkType: hard
 
-"@eslint-react/var@npm:5.9.5":
-  version: 5.9.5
-  resolution: "@eslint-react/var@npm:5.9.5"
+"@eslint-react/var@npm:5.10.0":
+  version: 5.10.0
+  resolution: "@eslint-react/var@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
     "@typescript-eslint/scope-manager": "npm:^8.62.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
@@ -5287,7 +5287,7 @@ __metadata:
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/9325d009c8f573924f8c70380bd0f9578a3671c516c26edda32eef59e9aa415fba03659a7e0ac7055790e261107e19a778bae09d71eaa4cc290e727f314a4283
+  checksum: 10c0/90320dc2b0bc710f70713c9432403e0d1c8f57ddaf140a0ac9dd973d660d6376d2393b668d174fd09dd07a8694f96d80a63b539851894d49b28af1bd62bd9c6d
   languageName: node
   linkType: hard
 
@@ -5809,18 +5809,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/graphql-file-loader@npm:^8.0.0, @graphql-tools/graphql-file-loader@npm:^8.1.11, @graphql-tools/graphql-file-loader@npm:^8.1.14":
-  version: 8.1.14
-  resolution: "@graphql-tools/graphql-file-loader@npm:8.1.14"
+"@graphql-tools/graphql-file-loader@npm:^8.0.0, @graphql-tools/graphql-file-loader@npm:^8.1.11, @graphql-tools/graphql-file-loader@npm:^8.1.15":
+  version: 8.1.15
+  resolution: "@graphql-tools/graphql-file-loader@npm:8.1.15"
   dependencies:
-    "@graphql-tools/import": "npm:^7.1.14"
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/import": "npm:^7.1.15"
+    "@graphql-tools/utils": "npm:^11.1.1"
     globby: "npm:^11.0.3"
     tslib: "npm:^2.4.0"
     unixify: "npm:^1.0.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/08229afc98a1138c0b0bc993607eb43accd7431a6a7c8a2334c9eba67e17901a13dd7a0dd8e85386ac1423e19da6a8c9e62b9efd177453f401f00a9fe4bd01a8
+  checksum: 10c0/ea44436cf7bdf6d3d335f4e12e4207dbbe8c9c1953d0354938b1a3dbd7ba570d3510ac08078002cc16bdd8932178f92521b2187d0b4861aabc5761476846d9cf
   languageName: node
   linkType: hard
 
@@ -5841,16 +5841,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/import@npm:^7.1.14":
-  version: 7.1.14
-  resolution: "@graphql-tools/import@npm:7.1.14"
+"@graphql-tools/import@npm:^7.1.15":
+  version: 7.1.15
+  resolution: "@graphql-tools/import@npm:7.1.15"
   dependencies:
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/utils": "npm:^11.1.1"
     resolve-from: "npm:5.0.0"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/0796b5c7e22b8ee9539e2fc27e522f4e1922523fecbaf8113da3766c50312426a639f295feb82c72fba6b3a71dcd89557c48a20349b46b2bf4bb8caa2b1f0009
+  checksum: 10c0/f1a56e33b9d70925c8416abb06e725e49a881d2655064be5b3ccf30765e51f179339ba14a12c3d7ea437f2fb66c4ec6f73535b1ed56bd0204e79dd2e51c9c4da
   languageName: node
   linkType: hard
 
@@ -5868,29 +5868,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/load@npm:^8.1.0, @graphql-tools/load@npm:^8.1.10, @graphql-tools/load@npm:^8.1.8":
-  version: 8.1.10
-  resolution: "@graphql-tools/load@npm:8.1.10"
+"@graphql-tools/load@npm:^8.1.0, @graphql-tools/load@npm:^8.1.11, @graphql-tools/load@npm:^8.1.8":
+  version: 8.1.11
+  resolution: "@graphql-tools/load@npm:8.1.11"
   dependencies:
-    "@graphql-tools/schema": "npm:^10.0.33"
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/schema": "npm:^10.0.34"
+    "@graphql-tools/utils": "npm:^11.1.1"
     p-limit: "npm:3.1.0"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/10cf01eb53241161a6caf51969dd9fbb67809d31330e0e0d08235acf7eee47697bfe7d93944d4adf9361eca8ce9b0eb852da75c5bb3bf93d60ff1b0283434203
+  checksum: 10c0/0ca692e80081511b40b79d5a0883cd343f7553d77cb49849e40b389b4f4f56e57116c19e65ee7c041b83339f2d26eee9df04c8f654439ca56d2c80c1603170e4
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:^9.0.0, @graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.9":
-  version: 9.1.9
-  resolution: "@graphql-tools/merge@npm:9.1.9"
+"@graphql-tools/merge@npm:^9.0.0, @graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.10":
+  version: 9.1.10
+  resolution: "@graphql-tools/merge@npm:9.1.10"
   dependencies:
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/utils": "npm:^11.1.1"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/de16a915b09d1d3a3e0105d0b6cbdfd75feaa5ef7cbf4eec489c817d390b6aacd169b8e68e6efcefe82c92c4e88d36723b5e24a7035494100ead7efcef446359
+  checksum: 10c0/3844e3d83480216f74e461f20756016031d64e5ee020b78bc44dedc731eacaf373d872df9e3bf5bfeb456e0d610b4b2d66a888100a37ec3e60ece98e890fe031
   languageName: node
   linkType: hard
 
@@ -5918,16 +5918,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/schema@npm:^10.0.0, @graphql-tools/schema@npm:^10.0.11, @graphql-tools/schema@npm:^10.0.29, @graphql-tools/schema@npm:^10.0.33":
-  version: 10.0.33
-  resolution: "@graphql-tools/schema@npm:10.0.33"
+"@graphql-tools/schema@npm:^10.0.0, @graphql-tools/schema@npm:^10.0.11, @graphql-tools/schema@npm:^10.0.29, @graphql-tools/schema@npm:^10.0.34":
+  version: 10.0.34
+  resolution: "@graphql-tools/schema@npm:10.0.34"
   dependencies:
-    "@graphql-tools/merge": "npm:^9.1.9"
-    "@graphql-tools/utils": "npm:^11.1.0"
+    "@graphql-tools/merge": "npm:^9.1.10"
+    "@graphql-tools/utils": "npm:^11.1.1"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/6c32d175b4832d063017d86cfe392502bd69dddb58d9ec47939818a103a6c23201402bbd13756f4bfd5ad14677e8b54af46adce4a4e63aa5d7fe8853351d3dce
+  checksum: 10c0/ae8a44de0ac29d0e66416f7e7d9e8fb0756fbd7fec1ab6e078ae725301120fcf07c07bdb7478db16ccb1eed2ddb5c4905d507c2f41724e7a2804a8ccd3a9b0c6
   languageName: node
   linkType: hard
 
@@ -5967,9 +5967,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:^11.0.0, @graphql-tools/utils@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "@graphql-tools/utils@npm:11.1.0"
+"@graphql-tools/utils@npm:^11.0.0, @graphql-tools/utils@npm:^11.1.0, @graphql-tools/utils@npm:^11.1.1":
+  version: 11.1.1
+  resolution: "@graphql-tools/utils@npm:11.1.1"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.1.1"
     "@whatwg-node/promise-helpers": "npm:^1.0.0"
@@ -5977,7 +5977,7 @@ __metadata:
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/4858ee4a1df0f858c65a5459d991bedcfde488054484c8707c97e2ce9db9a8f74aaaa0d7c20f38ff872507db9a73fc1182d4d1860dd72099509552538dfd477a
+  checksum: 10c0/5a617173cf9786e07f90fc38596e3f921744aafd0ecab9584bde18ada654c9024f547a66d71f44a58ca58532538c1bb3ae5877f4579db80dfc2a2500cd81645a
   languageName: node
   linkType: hard
 
@@ -11128,7 +11128,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/workspace-config": "workspace:^"
     "@changesets/cli": "npm:^2.31.0"
-    "@eslint-react/eslint-plugin": "npm:^5.9.5"
+    "@eslint-react/eslint-plugin": "npm:^5.10.0"
     "@eslint/css": "npm:^1.3.0"
     "@eslint/js": "npm:^10.0.1"
     "@types/node": "catalog:dev"
@@ -11137,7 +11137,7 @@ __metadata:
     "@yarnpkg/types": "npm:^4.0.1"
     eslint: "npm:^10.6.0"
     eslint-import-resolver-typescript: "npm:^4.4.5"
-    eslint-plugin-import-x: "npm:^4.17.0"
+    eslint-plugin-import-x: "npm:^4.17.1"
     eslint-plugin-package-json: "npm:^1.5.0"
     eslint-plugin-react-hooks: "npm:^7.1.1"
     eslint-plugin-unused-imports: "npm:^4.4.1"
@@ -13686,9 +13686,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import-x@npm:^4.17.0":
-  version: 4.17.0
-  resolution: "eslint-plugin-import-x@npm:4.17.0"
+"eslint-plugin-import-x@npm:^4.17.1":
+  version: 4.17.1
+  resolution: "eslint-plugin-import-x@npm:4.17.1"
   dependencies:
     "@typescript-eslint/types": "npm:^8.56.0"
     comment-parser: "npm:^1.4.1"
@@ -13708,7 +13708,7 @@ __metadata:
       optional: true
     eslint-import-resolver-node:
       optional: true
-  checksum: 10c0/d7a6e23cb7920ac478c011e4688d5ddf1b80566c7989da3578347796025d8bd80b11373e317eb79e3f13a587eec2be3628faa7b5eceeaebf788fb9cedb0bf3e4
+  checksum: 10c0/4ea2ace22c3d805f2253063912211c438055f112ca9a2124df262311744975fc96443e4526fd80eef0acec7845a48fb6d1da444a4c4b0ff9786927fe2755f2a7
   languageName: node
   linkType: hard
 
@@ -13737,21 +13737,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-dom@npm:5.9.5":
-  version: 5.9.5
-  resolution: "eslint-plugin-react-dom@npm:5.9.5"
+"eslint-plugin-react-dom@npm:5.10.0":
+  version: 5.10.0
+  resolution: "eslint-plugin-react-dom@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/jsx": "npm:5.9.5"
-    "@eslint-react/shared": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/jsx": "npm:5.10.0"
+    "@eslint-react/shared": "npm:5.10.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
     compare-versions: "npm:^6.1.1"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/99034804be923385adf92edb518879cadaf5840a6ab6052f74274314208ef92926bc73e4db61d6ea154ad45eb0f425a5c54bbb9a5b894029a4b976a591061e4c
+  checksum: 10c0/24baa90ad0e7a994cc29c39ab27624298baf22c2d78e77dde3380c2ef19bfe535a3670cc0883e768a9cc0e0b690a4121eabb4ce7ba33e5bf88e6283505680530
   languageName: node
   linkType: hard
 
@@ -13770,69 +13770,69 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-jsx@npm:5.9.5":
-  version: 5.9.5
-  resolution: "eslint-plugin-react-jsx@npm:5.9.5"
+"eslint-plugin-react-jsx@npm:5.10.0":
+  version: 5.10.0
+  resolution: "eslint-plugin-react-jsx@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/core": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/jsx": "npm:5.9.5"
-    "@eslint-react/shared": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/core": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/jsx": "npm:5.10.0"
+    "@eslint-react/shared": "npm:5.10.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/b7b3af9e3931c42fa7deee7562e2203e5b71e5090dc1a761f4ef3a296a61ae0d075e7e1dec2d6fb39a48503d92110e69f32a874d2aea49801443044297123012
+  checksum: 10c0/ba7676f1c8b3f91efc8f2484c366bb090ce024ebc1e3c0fe1d2de52c973ead263bd1ade718f222b43518cadb565fde18c21394e1b53a2be6a5f74ea5a79b1c40
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-naming-convention@npm:5.9.5":
-  version: 5.9.5
-  resolution: "eslint-plugin-react-naming-convention@npm:5.9.5"
+"eslint-plugin-react-naming-convention@npm:5.10.0":
+  version: 5.10.0
+  resolution: "eslint-plugin-react-naming-convention@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/core": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/var": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/core": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/var": "npm:5.10.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
     ts-pattern: "npm:^5.9.0"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/1d869a9589c41e5a338b8cc85069fd3a015befb0424fa3320ee033911d8d50f11af5a444bed6903c6c4ef3d4c44201d4418e12da2d018f731676d25e82854615
+  checksum: 10c0/6a7807a728d27a3830ca378ebb5227dee78fac326acc3a3b5c45979feb05dacf85df4f8962e571993bcf363e4d7db759bbe2f7e53d1a2e83413f358ddafc7546
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-rsc@npm:5.9.5":
-  version: 5.9.5
-  resolution: "eslint-plugin-react-rsc@npm:5.9.5"
+"eslint-plugin-react-rsc@npm:5.10.0":
+  version: 5.10.0
+  resolution: "eslint-plugin-react-rsc@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/core": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/shared": "npm:5.9.5"
-    "@eslint-react/var": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/core": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/shared": "npm:5.10.0"
+    "@eslint-react/var": "npm:5.10.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/0c9d416d1ab30319f8440dd4bddbcc0db5fd6e66381a0ff8773441309df20eaaab9591601b24110182d652b0c8511deb215e6cfa563923d038e65329cdeb10e8
+  checksum: 10c0/2b45c1cfbf99a71b11c110a60f609ae9c826d733148bce191f563840fde6030b05fa7cbdd008fdb9fc6350dcda5e1332873f43e3736350971dd1064cc789966f
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-web-api@npm:5.9.5":
-  version: 5.9.5
-  resolution: "eslint-plugin-react-web-api@npm:5.9.5"
+"eslint-plugin-react-web-api@npm:5.10.0":
+  version: 5.10.0
+  resolution: "eslint-plugin-react-web-api@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/core": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/shared": "npm:5.9.5"
-    "@eslint-react/var": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/core": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/shared": "npm:5.10.0"
+    "@eslint-react/var": "npm:5.10.0"
     "@typescript-eslint/types": "npm:^8.62.0"
     "@typescript-eslint/utils": "npm:^8.62.0"
     birecord: "npm:^0.1.1"
@@ -13840,20 +13840,20 @@ __metadata:
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/6703cff16e26f7154719f2ecc558c4f3e22d2f578ff413c86e3b8f075afdfba85ee2c32fae3755dcc23b5aa2246a5e0509ff92ca4ea0c42307d62e7e4221396c
+  checksum: 10c0/530ecedd7781dd965d7de06a9d53c775315c14483df2f74b89724cb16debe58a0265de22c82bc60be944b44fc567c3af12c15fccdf9844eb3aa9a04115b6f59c
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-x@npm:5.9.5":
-  version: 5.9.5
-  resolution: "eslint-plugin-react-x@npm:5.9.5"
+"eslint-plugin-react-x@npm:5.10.0":
+  version: 5.10.0
+  resolution: "eslint-plugin-react-x@npm:5.10.0"
   dependencies:
-    "@eslint-react/ast": "npm:5.9.5"
-    "@eslint-react/core": "npm:5.9.5"
-    "@eslint-react/eslint": "npm:5.9.5"
-    "@eslint-react/jsx": "npm:5.9.5"
-    "@eslint-react/shared": "npm:5.9.5"
-    "@eslint-react/var": "npm:5.9.5"
+    "@eslint-react/ast": "npm:5.10.0"
+    "@eslint-react/core": "npm:5.10.0"
+    "@eslint-react/eslint": "npm:5.10.0"
+    "@eslint-react/jsx": "npm:5.10.0"
+    "@eslint-react/shared": "npm:5.10.0"
+    "@eslint-react/var": "npm:5.10.0"
     "@typescript-eslint/scope-manager": "npm:^8.62.0"
     "@typescript-eslint/type-utils": "npm:^8.62.0"
     "@typescript-eslint/types": "npm:^8.62.0"
@@ -13866,7 +13866,7 @@ __metadata:
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 10c0/e71a2edad0c52d5c6b410dbbb85eb8a010414e7cacfee7ffb5ed4ad640c106669f87b746c974a27ffc26c4e4a312f20d0ea636f9383dbe9683bc0e34649ebd54
+  checksum: 10c0/6e7af6a19067cbd5a783340b47099d0eba5cc709a293b1112f668dd84d6c76bc65b21cf8f4d2d3cd52b25d7c637eda676edb1aed77f912445fbdfca98d257abd
   languageName: node
   linkType: hard
 

@@ -1,0 +1,9 @@
+{
+  "extends": "@baeta/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "types": ["node"],
+    "noUnusedLocals": false
+  },
+  "include": ["**/*.ts"]
+}

@@ -7,6 +7,7 @@
 import {
 	type FieldNode,
 	type FragmentDefinitionNode,
+	type GraphQLField,
 	type GraphQLNamedType,
 	type GraphQLResolveInfo,
 	getNamedType,
@@ -15,8 +16,10 @@ import {
 	isObjectType,
 	isOutputType,
 	Kind,
+	SchemaMetaFieldDef,
 	type SelectionNode,
 	type SelectionSetNode,
+	TypeMetaFieldDef,
 } from 'graphql';
 import { isListOrNullableList } from '../utils/graphlq.ts';
 import { capitalize } from '../utils/string.ts';
@@ -156,7 +159,9 @@ function complexityFromField<Context>(
 	const fieldName = selection.name.value;
 
 	const field =
-		isObjectType(type) || isInterfaceType(type) ? type.getFields()[fieldName] : undefined;
+		isObjectType(type) || isInterfaceType(type)
+			? (type.getFields()[fieldName] ?? getMetaFieldDef(info, type, fieldName))
+			: undefined;
 
 	if (!field && !fieldName.startsWith('__')) {
 		throw new ComplexityError(`Field ${fieldName} not found on type ${type.name}`);
@@ -224,4 +229,21 @@ function complexityFromField<Context>(
 		breadth,
 		complexity,
 	};
+}
+
+function getMetaFieldDef(
+	info: GraphQLResolveInfo,
+	type: GraphQLNamedType,
+	fieldName: string,
+): GraphQLField<unknown, unknown> | undefined {
+	if (type !== info.schema.getQueryType()) {
+		return undefined;
+	}
+	if (fieldName === SchemaMetaFieldDef.name) {
+		return SchemaMetaFieldDef;
+	}
+	if (fieldName === TypeMetaFieldDef.name) {
+		return TypeMetaFieldDef;
+	}
+	return undefined;
 }

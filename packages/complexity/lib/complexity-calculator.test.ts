@@ -284,3 +284,70 @@ test('calculateComplexity should throw for unsupported operation', (t) => {
 		{ instanceOf: ComplexityError, message: /Unsupported operation/ },
 	);
 });
+
+test('calculateComplexity should traverse the __schema introspection subtree', (t) => {
+	const schema = createTestSchema();
+	const query = `
+    query {
+      __schema {
+        types {
+          name
+        }
+      }
+    }
+  `;
+
+	const mockInfo = createMockInfo(schema, query);
+	const fieldSettingsMap: FieldSettingsMap = new Map();
+	const defaults = { complexity: 1, multiplier: 10 };
+
+	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
+
+	// __schema (1) + types list (1 * 10) + name inside the list (1 * 10)
+	t.is(result.depth, 3);
+	t.is(result.breadth, 3);
+	t.is(result.complexity, 21);
+});
+
+test('calculateComplexity should traverse the __type introspection subtree', (t) => {
+	const schema = createTestSchema();
+	const query = `
+    query {
+      __type(name: "Nested") {
+        fields {
+          name
+        }
+      }
+    }
+  `;
+
+	const mockInfo = createMockInfo(schema, query);
+	const fieldSettingsMap: FieldSettingsMap = new Map();
+	const defaults = { complexity: 1, multiplier: 10 };
+
+	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
+
+	// __type (1) + fields list (1 * 10) + name inside the list (1 * 10)
+	t.is(result.depth, 3);
+	t.is(result.breadth, 3);
+	t.is(result.complexity, 21);
+});
+
+test('calculateComplexity should score __typename as a plain field', (t) => {
+	const schema = createTestSchema();
+	const query = `
+    query {
+      __typename
+    }
+  `;
+
+	const mockInfo = createMockInfo(schema, query);
+	const fieldSettingsMap: FieldSettingsMap = new Map();
+	const defaults = { complexity: 1, multiplier: 10 };
+
+	const result = calculateComplexity({}, mockInfo, fieldSettingsMap, defaults);
+
+	t.is(result.depth, 1);
+	t.is(result.breadth, 1);
+	t.is(result.complexity, 1);
+});

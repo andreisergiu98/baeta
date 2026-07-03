@@ -70,12 +70,12 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^4.20260630.1",
-    "graphql": "^16.14.2",
+    "graphql": "^17.0.1",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4",
-    "graphql": "^16.6.0"
+    "graphql": "^17.0.0"
   },
   "ava": {
     "extensions": [

@@ -12,5 +12,5 @@ export {
 	type ValidationDirectiveFnParams,
 	type ValidationTarget,
 } from './input-directive/index.ts';
-export type { Middleware } from './middleware.ts';
+export type { Middleware, MiddlewareParams } from './middleware.ts';
 export type { Resolver, ResolverParams } from './resolver.ts';

@@ -71,10 +71,10 @@ test('SubscriptionCompiler should use type subscribe middlewares correctly', asy
 
 test('SubscriptionCompiler should use subscribe store correctly', (t) => {
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	testStoreLike(t, (key) => fieldCompiler.useSubscribeMetadata(key));
+	testStoreLike(t, (key) => fieldCompiler.useSubscribeState(key));
 });
 
 test('SubscriptionCompiler should use resolve store correctly', (t) => {
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	testStoreLike(t, (key) => fieldCompiler.useResolveMetadata(key));
+	testStoreLike(t, (key) => fieldCompiler.useResolveState(key));
 });

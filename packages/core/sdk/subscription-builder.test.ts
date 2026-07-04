@@ -28,7 +28,7 @@ test('createSubscriptionBuilder should create a subscription field correctly', a
 		MockInfo
 	>({
 		field: 'field',
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	});
@@ -221,16 +221,16 @@ test('SubscriptionBuilder should handle middlewares correctly', async (t) => {
 	t.deepEqual(results, ['1', '2', '3']);
 });
 
-test('SubscriptionBuilder edit should handle mergeMeta correctly', (t) => {
+test('SubscriptionBuilder edit should handle mergeState correctly', (t) => {
 	const key1 = Symbol('1');
 	const key2 = Symbol('2');
 
 	const edit1 = mockSubscriptionFieldBuilder().edit();
-	edit1.mergeMeta(new Map([[key1, 1]]));
-	edit1.mergeMeta(new Map([[key2, 2]]));
+	edit1.mergeState(new Map([[key1, 1]]));
+	edit1.mergeState(new Map([[key2, 2]]));
 
 	const edit2 = mockSubscriptionFieldBuilder().edit();
-	edit2.mergeMeta(new Map([[key1, 99]]));
+	edit2.mergeState(new Map([[key1, 99]]));
 
 	const compiler1 = makeMockedSubscriptionField(
 		edit1
@@ -245,10 +245,10 @@ test('SubscriptionBuilder edit should handle mergeMeta correctly', (t) => {
 			.resolve((params) => params.source.value),
 	);
 
-	t.is(compiler1.useSubscribeMetadata<number>(key1).get(), 1);
-	t.is(compiler1.useSubscribeMetadata<number>(key2).get(), 2);
-	t.is(compiler2.useSubscribeMetadata<number>(key1).get(), 99);
-	t.is(compiler2.useSubscribeMetadata<number>(key2).get(), undefined);
+	t.is(compiler1.useSubscribeState<number>(key1).get(), 1);
+	t.is(compiler1.useSubscribeState<number>(key2).get(), 2);
+	t.is(compiler2.useSubscribeState<number>(key1).get(), 99);
+	t.is(compiler2.useSubscribeState<number>(key2).get(), undefined);
 });
 
 test('SubscriptionBuilder should assign parameters correctly', async (t) => {

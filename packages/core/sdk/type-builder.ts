@@ -13,7 +13,7 @@ export interface TypeBuilderOptions<
 > {
 	type: string;
 	fieldBuilders: Readonly<FieldsBuilders>;
-	metadata: Map<symbol, Readonly<unknown>>;
+	state: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	requiredPluginIds: Set<PluginId>;
 }
@@ -26,7 +26,7 @@ export class TypeBuilder<
 	FieldsResolvers extends FieldsResolversMap<Source, Context, Info> = any,
 > {
 	readonly #type: string;
-	readonly #metadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #state: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #fieldBuilders: Readonly<FieldsBuilders>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly requiredPluginIds: ReadonlySet<PluginId>;
@@ -34,7 +34,7 @@ export class TypeBuilder<
 	constructor(options: TypeBuilderOptions<Source, Context, Info, FieldsBuilders>) {
 		this.#type = options.type;
 		this.#fieldBuilders = options.fieldBuilders;
-		this.#metadata = new Map(options.metadata);
+		this.#state = new Map(options.state);
 		this.#middlewares = [...options.middlewares];
 		this.requiredPluginIds = new Set(options.requiredPluginIds);
 	}
@@ -44,7 +44,7 @@ export class TypeBuilder<
 	}
 
 	edit() {
-		const draftMetadata = new Map(this.#metadata);
+		const draftState = new Map(this.#state);
 		const draftMiddlewares = [...this.#middlewares];
 		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
 		const session = {
@@ -57,9 +57,13 @@ export class TypeBuilder<
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			mergeMeta: (meta: Map<symbol, unknown>) => {
-				for (const [key, value] of meta) {
-					draftMetadata.set(key, value as Readonly<unknown>);
+			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
+				draftState.set(pluginId.key, value as Readonly<unknown>);
+				return session;
+			},
+			mergeState: (state: Map<symbol, unknown>) => {
+				for (const [key, value] of state) {
+					draftState.set(key, value as Readonly<unknown>);
 				}
 				return session;
 			},
@@ -67,7 +71,7 @@ export class TypeBuilder<
 				new TypeBuilder({
 					type: this.#type,
 					fieldBuilders: this.#fieldBuilders,
-					metadata: draftMetadata,
+					state: draftState,
 					middlewares: draftMiddlewares,
 					requiredPluginIds: draftRequiredPluginIds,
 				}),
@@ -83,7 +87,7 @@ export class TypeBuilder<
 				[makeSymbol]: () =>
 					new TypeCompiler({
 						type: this.#type,
-						metadata: new Map(this.#metadata),
+						state: new Map(this.#state),
 						middlewares: [...this.#middlewares],
 						fieldsMap: fields,
 						requiredPluginIds: new Set(this.requiredPluginIds),
@@ -100,8 +104,8 @@ export class TypeBuilder<
 					nameFunction(result.middleware, `${this.#type}.use`);
 					session.addMiddleware(result.middleware);
 				}
-				if (result.meta) {
-					session.mergeMeta(result.meta);
+				if (result.state) {
+					session.setPluginState(result.id, result.state);
 				}
 				return session.commitToMethods();
 			},

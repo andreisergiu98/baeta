@@ -17,14 +17,14 @@ import { makePluginSymbol, makeSymbol } from './symbols.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface SubscriptionBuilderOptions<Result, Source, Context, Args, Info> {
 	field: string;
-	metadata: Map<symbol, Readonly<unknown>>;
+	state: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<Subscription<unknown>, Source, Context, Args, Info>>;
 	requiredPluginIds: Set<PluginId>;
 }
 
 export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	readonly #field: string;
-	readonly #metadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #state: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #middlewares: ReadonlyArray<
 		Middleware<Subscription<unknown>, Source, Context, Args, Info>
 	>;
@@ -32,7 +32,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 
 	constructor(options: SubscriptionBuilderOptions<Result, Source, Context, Args, Info>) {
 		this.#field = options.field;
-		this.#metadata = new Map(options.metadata);
+		this.#state = new Map(options.state);
 		this.#middlewares = [...options.middlewares];
 		this.requiredPluginIds = new Set(options.requiredPluginIds);
 	}
@@ -42,7 +42,7 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	}
 
 	edit() {
-		const draftMetadata = new Map(this.#metadata);
+		const draftState = new Map(this.#state);
 		const draftMiddlewares = [...this.#middlewares];
 		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
 		const session = {
@@ -57,16 +57,20 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			mergeMeta: (meta: Map<symbol, unknown>) => {
-				for (const [key, value] of meta) {
-					draftMetadata.set(key, value as Readonly<unknown>);
+			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
+				draftState.set(pluginId.key, value as Readonly<unknown>);
+				return session;
+			},
+			mergeState: (state: Map<symbol, unknown>) => {
+				for (const [key, value] of state) {
+					draftState.set(key, value as Readonly<unknown>);
 				}
 				return session;
 			},
 			commit: () =>
 				new SubscriptionBuilder<Result, Source, Context, Args, Info>({
 					field: this.#field,
-					metadata: draftMetadata,
+					state: draftState,
 					middlewares: draftMiddlewares,
 					requiredPluginIds: draftRequiredPluginIds,
 				}),
@@ -106,8 +110,8 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 						result.middleware as Middleware<Subscription<unknown>, Source, Context, Args, Info>,
 					);
 				}
-				if (result.meta) {
-					session.mergeMeta(result.meta);
+				if (result.state) {
+					session.setPluginState(result.id, result.state);
 				}
 				return session.commitToMethods<Or<Payload, T>>();
 			},
@@ -118,12 +122,12 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 				nameFunction(fn, `Subscription.${this.#field}.subscribe`);
 				return new SubscriptionResolveBuilder<Result, Or<Payload, T>, Source, Context, Args, Info>({
 					field: this.#field,
-					subscribeMetadata: this.#metadata,
+					subscribeState: this.#state,
 					subscribeMiddlewares: this.#middlewares as ReadonlyArray<
 						Middleware<Subscription<Or<Payload, T>>, Source, Context, Args, Info>
 					>,
 					subscribe: fn,
-					resolveMetadata: new Map(),
+					resolveState: new Map(),
 					resolveMiddlewares: [],
 					requiredPluginIds: this.requiredPluginIds,
 				}).toMethods();
@@ -134,24 +138,24 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 
 interface SubscriptionResolveBuilderOptions<Result, Source, ParentSource, Context, Args, Info> {
 	field: string;
-	subscribeMetadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	subscribeState: ReadonlyMap<symbol, Readonly<unknown>>;
 	subscribeMiddlewares: ReadonlyArray<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveMetadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	resolveState: ReadonlyMap<symbol, Readonly<unknown>>;
 	resolveMiddlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	requiredPluginIds: ReadonlySet<PluginId>;
 }
 
 class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info> {
 	readonly #field: string;
-	readonly #subscribeMetadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #subscribeState: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #subscribeMiddlewares: ReadonlyArray<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
 	readonly #subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	readonly #resolveMetadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #resolveState: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #resolveMiddlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	readonly requiredPluginIds: ReadonlySet<PluginId>;
 
@@ -159,10 +163,10 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 		options: SubscriptionResolveBuilderOptions<Result, Source, ParentSource, Context, Args, Info>,
 	) {
 		this.#field = options.field;
-		this.#subscribeMetadata = options.subscribeMetadata;
+		this.#subscribeState = options.subscribeState;
 		this.#subscribeMiddlewares = options.subscribeMiddlewares;
 		this.#subscribe = options.subscribe;
-		this.#resolveMetadata = new Map(options.resolveMetadata);
+		this.#resolveState = new Map(options.resolveState);
 		this.#resolveMiddlewares = [...options.resolveMiddlewares];
 		this.requiredPluginIds = new Set(options.requiredPluginIds);
 	}
@@ -172,7 +176,7 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 	}
 
 	edit() {
-		const draftMetadata = new Map(this.#resolveMetadata);
+		const draftState = new Map(this.#resolveState);
 		const draftMiddlewares = [...this.#resolveMiddlewares];
 		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
 		const session = {
@@ -185,19 +189,23 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			mergeMeta: (meta: Map<symbol, unknown>) => {
-				for (const [key, value] of meta) {
-					draftMetadata.set(key, value as Readonly<unknown>);
+			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
+				draftState.set(pluginId.key, value as Readonly<unknown>);
+				return session;
+			},
+			mergeState: (state: Map<symbol, unknown>) => {
+				for (const [key, value] of state) {
+					draftState.set(key, value as Readonly<unknown>);
 				}
 				return session;
 			},
 			commit: () =>
 				new SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info>({
 					field: this.#field,
-					subscribeMetadata: this.#subscribeMetadata,
+					subscribeState: this.#subscribeState,
 					subscribeMiddlewares: this.#subscribeMiddlewares,
 					subscribe: this.#subscribe,
-					resolveMetadata: draftMetadata,
+					resolveState: draftState,
 					resolveMiddlewares: draftMiddlewares,
 					requiredPluginIds: draftRequiredPluginIds,
 				}),
@@ -209,10 +217,10 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 	#withMake<T>(resolver: Resolver<T, Source, Context, Args, Info>) {
 		return createSubscriptionFieldWithMake<Result, T, Source, ParentSource, Context, Args, Info>({
 			field: this.#field,
-			subscribeMetadata: this.#subscribeMetadata,
+			subscribeState: this.#subscribeState,
 			subscribeMiddlewares: this.#subscribeMiddlewares,
 			subscribe: this.#subscribe,
-			resolveMetadata: this.#resolveMetadata,
+			resolveState: this.#resolveState,
 			resolveMiddlewares: this.#resolveMiddlewares,
 			requiredPluginIds: this.requiredPluginIds,
 			resolver,
@@ -237,8 +245,8 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 					nameFunction(result.middleware, `Subscription.${this.#field}.resolve.use`);
 					session.addMiddleware(result.middleware);
 				}
-				if (result.meta) {
-					session.mergeMeta(result.meta);
+				if (result.state) {
+					session.setPluginState(result.id, result.state);
 				}
 				return session.commitToMethods();
 			},
@@ -264,12 +272,12 @@ interface SubscriptionFieldWithMakeOptions<
 	Info,
 > {
 	field: string;
-	subscribeMetadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	subscribeState: ReadonlyMap<symbol, Readonly<unknown>>;
 	subscribeMiddlewares: ReadonlyArray<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveMetadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	resolveState: ReadonlyMap<symbol, Readonly<unknown>>;
 	resolveMiddlewares: ReadonlyArray<Middleware<Expected, Source, Context, Args, Info>>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 	requiredPluginIds: ReadonlySet<PluginId>;
@@ -357,10 +365,10 @@ function createSubscriptionFieldWithMake<
 		[makeSymbol]: () =>
 			new SubscriptionCompiler<Expected, Source, ParentSource, Context, Args, Info>({
 				field: options.field,
-				subscribeMetadata: new Map(options.subscribeMetadata),
+				subscribeState: new Map(options.subscribeState),
 				subscribeMiddlewares: [...options.subscribeMiddlewares],
 				subscribe: options.subscribe,
-				resolveMetadata: new Map(options.resolveMetadata),
+				resolveState: new Map(options.resolveState),
 				resolveMiddlewares: [...options.resolveMiddlewares] as Array<
 					Middleware<Expected, Source, Context, Args, Info>
 				>,

@@ -48,7 +48,7 @@ export function mockTypeBuilder({ type = 'Type' }: MockTypeOptions = {}) {
 			field1: mockFieldBuilder({ field: 'field1', type }).toMethods(),
 			field2: mockFieldBuilder({ field: 'field2', type }).toMethods(),
 		},
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	});
@@ -57,7 +57,7 @@ export function mockTypeBuilder({ type = 'Type' }: MockTypeOptions = {}) {
 export function mockTypeCompiler({ type = 'Type' }: MockTypeOptions = {}) {
 	return new TypeCompiler<MockSource, MockContext, MockInfo>({
 		type,
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 		fieldsMap: {

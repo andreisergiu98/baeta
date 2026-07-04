@@ -7,7 +7,7 @@ export function createFieldBuilder<Result, Source, Context, Args, Info>(
 	return new FieldBuilder<Result, Source, Context, Args, Info>({
 		type,
 		field,
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	}).toMethods();

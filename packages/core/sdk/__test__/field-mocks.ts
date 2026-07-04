@@ -36,7 +36,7 @@ export function mockFieldBuilder({ field = 'field', type = 'Type' }: MockFieldOp
 	return new FieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	});
@@ -46,7 +46,7 @@ export function mockFieldCompiler({ field = 'field', type = 'Type' }: MockFieldO
 	return new FieldCompiler<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 		resolver: () => 'test',

@@ -68,6 +68,7 @@ export type SubscriptionUsePlugin<
 	Args,
 	Info,
 	FieldKind extends 'subscribe' | 'resolve',
+	State = unknown,
 > = {
 	[makePluginSymbol]: (options: {
 		type: 'Subscription';
@@ -75,9 +76,9 @@ export type SubscriptionUsePlugin<
 		kind: 'field';
 		subscriptionFieldKind: FieldKind;
 	}) => {
-		id: PluginId;
+		id: PluginId<State>;
 		middleware?: Middleware<Result, Source, Context, Args, Info>;
-		meta?: Map<symbol, unknown>;
+		state?: State;
 	};
 };
 

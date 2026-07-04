@@ -94,18 +94,18 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 		},
 	]);
 
-	const metaKey = Symbol('meta');
-	editableModule.mergeMeta(new Map([[metaKey, 'merged']]));
+	const stateKey = Symbol('state');
+	editableModule.mergeState(new Map([[stateKey, 'merged']]));
 
 	const editedModule = editableModule.commit().toMethods();
 	const editedSchema = editedModule.$schema(mockSchemaForModuleBuilder(editedModule));
 	const editedCompiler = editedSchema[makeSymbol]();
-	t.is(editedCompiler.useMetadata<string>(metaKey).get(), 'merged');
+	t.is(editedCompiler.useState<string>(stateKey).get(), 'merged');
 
 	const isolatedKey = Symbol('isolated');
 	const otherEdit = mockModuleBuilder().edit();
-	otherEdit.mergeMeta(new Map([[isolatedKey, 'other']]));
-	t.is(editedCompiler.useMetadata<string>(isolatedKey).get(), undefined);
+	otherEdit.mergeState(new Map([[isolatedKey, 'other']]));
+	t.is(editedCompiler.useState<string>(isolatedKey).get(), undefined);
 
 	const finalSchema = editedModule
 		.$directive((schema) => {

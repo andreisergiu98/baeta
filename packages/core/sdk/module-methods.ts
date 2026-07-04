@@ -38,11 +38,11 @@ export type ModuleCompilerFactory<
 	[makeSymbol]: () => ModuleCompiler<Context, Info, TypesResolvers>;
 };
 
-export type ModuleUsePlugin<Context, Info> = {
+export type ModuleUsePlugin<Context, Info, State = unknown> = {
 	[makePluginSymbol]: (options: { name: string; kind: 'module' }) => {
-		id: PluginId;
+		id: PluginId<State>;
 		middleware?: Middleware<unknown, unknown, Context, unknown, Info>;
-		meta?: Map<symbol, unknown>;
+		state?: State;
 	};
 };
 

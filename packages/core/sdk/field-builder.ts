@@ -10,7 +10,7 @@ import { makePluginSymbol, makeSymbol } from './symbols.ts';
 export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	metadata: Map<symbol, Readonly<unknown>>;
+	state: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	requiredPluginIds: Set<PluginId>;
 }
@@ -18,14 +18,14 @@ export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
 export class FieldBuilder<Result, Source, Context, Args, Info> {
 	readonly #type: string;
 	readonly #field: string;
-	readonly #metadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #state: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #middlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #requiredPluginIds: ReadonlySet<PluginId>;
 
 	constructor(options: FieldBuilderOptions<Result, Source, Context, Args, Info>) {
 		this.#type = options.type;
 		this.#field = options.field;
-		this.#metadata = new Map(options.metadata);
+		this.#state = new Map(options.state);
 		this.#middlewares = [...options.middlewares];
 		this.#requiredPluginIds = new Set(options.requiredPluginIds);
 	}
@@ -42,7 +42,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 		return createFieldWithMake({
 			type: this.#type,
 			field: this.#field,
-			metadata: this.#metadata,
+			state: this.#state,
 			middlewares: this.#middlewares,
 			requiredPluginIds: this.#requiredPluginIds,
 			resolver,
@@ -50,7 +50,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 	}
 
 	edit() {
-		const draftMetadata = new Map(this.#metadata);
+		const draftState = new Map(this.#state);
 		const draftMiddlewares = [...this.#middlewares];
 		const draftRequiredPluginIds = new Set(this.#requiredPluginIds);
 		const session = {
@@ -60,21 +60,25 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 				draftMiddlewares.push(mw);
 				return session;
 			},
-			mergeMeta: (meta: Map<symbol, unknown>) => {
-				for (const [key, value] of meta) {
-					draftMetadata.set(key, value as Readonly<unknown>);
-				}
-				return session;
-			},
 			addRequiredPluginId: (id: PluginId) => {
 				draftRequiredPluginIds.add(id);
+				return session;
+			},
+			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
+				draftState.set(pluginId.key, value as Readonly<unknown>);
+				return session;
+			},
+			mergeState: (state: Map<symbol, unknown>) => {
+				for (const [key, value] of state) {
+					draftState.set(key, value as Readonly<unknown>);
+				}
 				return session;
 			},
 			commit: () =>
 				new FieldBuilder({
 					type: this.#type,
 					field: this.#field,
-					metadata: draftMetadata,
+					state: draftState,
 					middlewares: draftMiddlewares,
 					requiredPluginIds: draftRequiredPluginIds,
 				}),
@@ -100,8 +104,8 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 					nameFunction(result.middleware, `${this.#type}.${this.#field}.use`);
 					session.addMiddleware(result.middleware);
 				}
-				if (result.meta) {
-					session.mergeMeta(result.meta);
+				if (result.state) {
+					session.setPluginState(result.id, result.state);
 				}
 				return session.commitToMethods();
 			},
@@ -126,7 +130,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 interface FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	metadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	state: ReadonlyMap<symbol, Readonly<unknown>>;
 	middlewares: ReadonlyArray<Middleware<Expected, Source, Context, Args, Info>>;
 	requiredPluginIds: ReadonlySet<PluginId>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
@@ -139,7 +143,7 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 		createFieldWithMake<Expected, R, Source, Context, Args, Info>({
 			type: options.type,
 			field: options.field,
-			metadata: options.metadata,
+			state: options.state,
 			middlewares: options.middlewares,
 			requiredPluginIds: options.requiredPluginIds,
 			resolver,
@@ -204,7 +208,7 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 			new FieldCompiler<Expected, Source, Context, Args, Info>({
 				type: options.type,
 				field: options.field,
-				metadata: new Map(options.metadata),
+				state: new Map(options.state),
 				middlewares: [...options.middlewares],
 				requiredPluginIds: new Set(options.requiredPluginIds),
 				resolver: options.resolver as unknown as Resolver<Expected, Source, Context, Args, Info>,

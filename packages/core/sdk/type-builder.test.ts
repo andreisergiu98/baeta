@@ -48,16 +48,16 @@ test('TypeBuilder should handle $use correctly', async (t) => {
 	t.is(i, 2);
 });
 
-test('TypeBuilder edit should handle mergeMeta correctly', (t) => {
+test('TypeBuilder edit should handle mergeState correctly', (t) => {
 	const key1 = Symbol('1');
 	const key2 = Symbol('2');
 
 	const edit1 = mockTypeBuilder().edit();
-	edit1.mergeMeta(new Map([[key1, 1]]));
-	edit1.mergeMeta(new Map([[key2, 2]]));
+	edit1.mergeState(new Map([[key1, 1]]));
+	edit1.mergeState(new Map([[key2, 2]]));
 
 	const edit2 = mockTypeBuilder().edit();
-	edit2.mergeMeta(new Map([[key1, 99]]));
+	edit2.mergeState(new Map([[key1, 99]]));
 
 	const methods1 = edit1.commitToMethods();
 	const methods2 = edit2.commitToMethods();
@@ -72,8 +72,8 @@ test('TypeBuilder edit should handle mergeMeta correctly', (t) => {
 	});
 	const compiler2 = methods2WithFields[makeSymbol]();
 
-	t.is(compiler1.useMetadata<number>(key1).get(), 1);
-	t.is(compiler1.useMetadata<number>(key2).get(), 2);
-	t.is(compiler2.useMetadata<number>(key1).get(), 99);
-	t.is(compiler2.useMetadata<number>(key2).get(), undefined);
+	t.is(compiler1.useState<number>(key1).get(), 1);
+	t.is(compiler1.useState<number>(key2).get(), 2);
+	t.is(compiler2.useState<number>(key1).get(), 99);
+	t.is(compiler2.useState<number>(key2).get(), undefined);
 });

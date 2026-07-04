@@ -15,23 +15,23 @@ import {
 	type GetFieldSettings,
 } from './field-settings.ts';
 
+interface ComplexityState {
+	fieldSettings: GetFieldSettings<unknown, unknown>;
+}
+
 type ComplexityPlugin<Result, Source, Context, Args, Info> = FieldUsePlugin<
 	Result,
 	Source,
 	Context,
 	Args,
-	Info
+	Info,
+	ComplexityState
 > &
-	TypeUsePlugin<Source, Context, Info> &
-	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'subscribe'>;
-
-interface ComplexityState {
-	fieldSettings: GetFieldSettings<unknown, unknown>;
-}
+	TypeUsePlugin<Source, Context, Info, ComplexityState> &
+	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'subscribe', ComplexityState>;
 
 export function createComplexity<Context>(options: ComplexityExtensionOptions<Context>) {
-	const id = createAppPluginId('Baeta Complexity');
-	const stateKey = Symbol('complexity-settings');
+	const id = createAppPluginId<ComplexityState>('@baeta/complexity');
 	const normalizedOptions = normalizeOptions(options as ComplexityExtensionOptions<unknown>);
 
 	const complexity = <Result, Source, Context, Args, Info>(
@@ -39,30 +39,23 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 	): ComplexityPlugin<Result, Source, Context, Args, Info> => {
 		return {
 			[makePluginSymbol]: () => {
-				const meta = new Map<symbol, ComplexityState>([
-					[
-						stateKey,
-						{
-							fieldSettings: fn as GetFieldSettings<unknown, unknown>,
-						},
-					],
-				]);
 				return {
 					id,
-					meta,
+					state: {
+						fieldSettings: fn as GetFieldSettings<unknown, unknown>,
+					},
 				};
 			},
 		};
 	};
 
-	const complexityAppPlugin: AppPlugin = {
+	const complexityAppPlugin: AppPlugin<ComplexityState> = {
 		id,
-		name: 'Baeta Complexity',
 		mutate: (compilers) => {
 			const fieldSettingsMap: FieldSettingsMap = new Map();
 
 			for (const typeCompiler of iterateTypes(compilers)) {
-				const typeState = typeCompiler.useMetadata<ComplexityState>(stateKey).get();
+				const typeState = typeCompiler.usePluginState(id).get();
 
 				if (typeState) {
 					registerFieldSettingsSetter(
@@ -76,8 +69,8 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 				for (const fieldCompiler of typeCompiler.fields) {
 					const fieldState =
 						fieldCompiler.kind === 'Field'
-							? fieldCompiler.useMetadata<ComplexityState>(stateKey).get()
-							: fieldCompiler.useSubscribeMetadata<ComplexityState>(stateKey).get();
+							? fieldCompiler.usePluginState(id).get()
+							: fieldCompiler.useSubscribePluginState(id).get();
 					if (!fieldState) continue;
 					registerFieldSettingsSetter(
 						typeCompiler.type,

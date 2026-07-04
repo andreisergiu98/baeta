@@ -50,11 +50,11 @@ export type TypeCompilerFactory<
 	[makeSymbol]: () => TypeCompiler<Source, Context, Info, FieldsResolvers>;
 };
 
-export type TypeUsePlugin<Source, Context, Info> = {
+export type TypeUsePlugin<Source, Context, Info, State = unknown> = {
 	[makePluginSymbol]: (options: { type: string; kind: 'type' }) => {
-		id: PluginId;
+		id: PluginId<State>;
 		middleware?: Middleware<unknown, Source, Context, unknown, Info>;
-		meta?: Map<symbol, unknown>;
+		state?: State;
 	};
 };
 

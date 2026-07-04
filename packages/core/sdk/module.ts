@@ -15,7 +15,7 @@ export function createModuleBuilder<
 		typeBuilders: builders,
 		defaultResolvers,
 		transformers: [],
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	}).toMethods();

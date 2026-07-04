@@ -18,7 +18,7 @@ export interface ModuleBuilderOptions<
 	typeBuilders: Readonly<TypesBuilders>;
 	defaultResolvers: Readonly<IResolvers>;
 	transformers: Array<SchemaTransformer>;
-	metadata: Map<symbol, Readonly<unknown>>;
+	state: Map<symbol, Readonly<unknown>>;
 	middlewares: Array<Middleware<unknown, unknown, Context, unknown, Info>>;
 	requiredPluginIds: Set<PluginId>;
 }
@@ -34,7 +34,7 @@ export class ModuleBuilder<
 	readonly #typeBuilders: Readonly<TypesBuilders>;
 	readonly #defaultResolvers: Readonly<IResolvers>;
 	readonly #transformers: ReadonlyArray<SchemaTransformer>;
-	readonly #metadata: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #state: ReadonlyMap<symbol, Readonly<unknown>>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, unknown, Context, unknown, Info>>;
 	readonly requiredPluginIds: ReadonlySet<PluginId>;
 
@@ -44,7 +44,7 @@ export class ModuleBuilder<
 		this.#typeBuilders = options.typeBuilders;
 		this.#defaultResolvers = options.defaultResolvers;
 		this.#transformers = [...options.transformers];
-		this.#metadata = new Map(options.metadata);
+		this.#state = new Map(options.state);
 		this.#middlewares = [...options.middlewares];
 		this.requiredPluginIds = new Set(options.requiredPluginIds);
 	}
@@ -54,7 +54,7 @@ export class ModuleBuilder<
 	}
 
 	edit() {
-		const draftMetadata = new Map(this.#metadata);
+		const draftState = new Map(this.#state);
 		const draftMiddlewares = [...this.#middlewares];
 		const draftTransformers = [...this.#transformers];
 		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
@@ -77,9 +77,13 @@ export class ModuleBuilder<
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			mergeMeta: (meta: Map<symbol, unknown>) => {
-				for (const [key, value] of meta) {
-					draftMetadata.set(key, value as Readonly<unknown>);
+			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
+				draftState.set(pluginId.key, value as Readonly<unknown>);
+				return session;
+			},
+			mergeState: (state: Map<symbol, unknown>) => {
+				for (const [key, value] of state) {
+					draftState.set(key, value as Readonly<unknown>);
 				}
 				return session;
 			},
@@ -90,7 +94,7 @@ export class ModuleBuilder<
 					typeBuilders: this.#typeBuilders,
 					defaultResolvers: this.#defaultResolvers,
 					transformers: draftTransformers,
-					metadata: draftMetadata,
+					state: draftState,
 					middlewares: draftMiddlewares,
 					requiredPluginIds: draftRequiredPluginIds,
 				}),
@@ -106,7 +110,7 @@ export class ModuleBuilder<
 				[makeSymbol]: () =>
 					new ModuleCompiler<Context, Info, TypesResolvers>({
 						name: this.#name,
-						metadata: new Map(this.#metadata),
+						state: new Map(this.#state),
 						middlewares: [...this.#middlewares],
 						typesMap: types,
 						typedef: this.#typedef,
@@ -126,8 +130,8 @@ export class ModuleBuilder<
 					nameFunction(result.middleware, `${this.#name}.use`);
 					session.addMiddleware(result.middleware);
 				}
-				if (result.meta) {
-					session.mergeMeta(result.meta);
+				if (result.state) {
+					session.setPluginState(result.id, result.state);
 				}
 				return session.commitToMethods();
 			},

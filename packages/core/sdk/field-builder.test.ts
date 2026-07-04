@@ -206,24 +206,24 @@ test('FieldBuilder edit should handle addMiddleware correctly', async (t) => {
 	t.is(i, 2);
 });
 
-test('FieldBuilder edit should handle mergeMeta correctly', (t) => {
+test('FieldBuilder edit should handle mergeState correctly', (t) => {
 	const key1 = Symbol('1');
 	const key2 = Symbol('2');
 
 	const edit1 = mockFieldBuilder().edit();
-	edit1.mergeMeta(new Map([[key1, 1]]));
-	edit1.mergeMeta(new Map([[key2, 2]]));
+	edit1.mergeState(new Map([[key1, 1]]));
+	edit1.mergeState(new Map([[key2, 2]]));
 
 	const edit2 = mockFieldBuilder().edit();
-	edit2.mergeMeta(new Map([[key1, 99]]));
+	edit2.mergeState(new Map([[key1, 99]]));
 
 	const compiler1 = edit1.commitToMethods().key('name')[makeSymbol]();
 	const compiler2 = edit2.commitToMethods().key('name')[makeSymbol]();
 
-	t.is(compiler1.useMetadata<number>(key1).get(), 1);
-	t.is(compiler1.useMetadata<number>(key2).get(), 2);
-	t.is(compiler2.useMetadata<number>(key1).get(), 99);
-	t.is(compiler2.useMetadata<number>(key2).get(), undefined);
+	t.is(compiler1.useState<number>(key1).get(), 1);
+	t.is(compiler1.useState<number>(key2).get(), 2);
+	t.is(compiler2.useState<number>(key1).get(), 99);
+	t.is(compiler2.useState<number>(key2).get(), undefined);
 });
 
 test('FieldBuilder should assign parameters correctly', async (t) => {

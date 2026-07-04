@@ -7,7 +7,7 @@ import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 export interface FieldCompilerOptions<Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	metadata: Map<symbol, unknown>;
+	state: Map<symbol, unknown>;
 	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	requiredPluginIds: Set<PluginId>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
@@ -17,7 +17,7 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 	readonly kind = 'Field';
 	readonly #type: string;
 	readonly #field: string;
-	readonly #metadata: Map<symbol, unknown>;
+	readonly #state: Map<symbol, unknown>;
 	readonly #middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #topLevelMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
@@ -26,7 +26,7 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 	constructor(options: FieldCompilerOptions<Result, Source, Context, Args, Info>) {
 		this.#type = options.type;
 		this.#field = options.field;
-		this.#metadata = options.metadata;
+		this.#state = options.state;
 		this.#middlewares = options.middlewares;
 		this.#topLevelMiddlewares = [];
 		this.#resolver = options.resolver;
@@ -49,10 +49,14 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 		this.#topLevelMiddlewares.push(middleware);
 	}
 
-	useMetadata<T>(key: symbol) {
-		const get = () => this.#metadata.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#metadata.set(key, value);
+	useState<T>(key: symbol) {
+		const get = () => this.#state.get(key) as T | undefined;
+		const set = (value: Readonly<T>) => this.#state.set(key, value);
 		return { get, set };
+	}
+
+	usePluginState<State>(pluginId: PluginId<State>) {
+		return this.useState<State>(pluginId.key);
 	}
 
 	build(typeMiddlewares: Middleware<unknown, Source, Context, unknown, Info>[]) {

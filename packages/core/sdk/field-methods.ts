@@ -41,11 +41,11 @@ export type FieldMethods<Result, Source, Context, Args, Info> = {
 	) => Field<Result, Result, Source, Context, Args, Info>;
 };
 
-export type FieldUsePlugin<Result, Source, Context, Args, Info> = {
+export type FieldUsePlugin<Result, Source, Context, Args, Info, State = unknown> = {
 	[makePluginSymbol]: (options: { type: string; field: string; kind: 'field' }) => {
-		id: PluginId;
+		id: PluginId<State>;
 		middleware?: Middleware<Result, Source, Context, Args, Info>;
-		meta?: Map<symbol, unknown>;
+		state?: State;
 	};
 };
 

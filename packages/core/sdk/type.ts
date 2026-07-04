@@ -11,7 +11,7 @@ export function createTypeBuilder<
 	return new TypeBuilder<Source, Context, Info, FieldBuilders, FieldResolvers>({
 		type,
 		fieldBuilders: builders,
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	}).toMethods();

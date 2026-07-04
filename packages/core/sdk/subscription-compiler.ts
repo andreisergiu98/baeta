@@ -7,10 +7,10 @@ import type { Subscription } from './subscription-methods.ts';
 
 export interface SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info> {
 	field: string;
-	subscribeMetadata: Map<symbol, unknown>;
+	subscribeState: Map<symbol, unknown>;
 	subscribeMiddlewares: Array<Middleware<Subscription<Source>, ParentSource, Context, Args, Info>>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveMetadata: Map<symbol, unknown>;
+	resolveState: Map<symbol, unknown>;
 	resolveMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 	requiredPluginIds: Set<PluginId>;
@@ -19,7 +19,7 @@ export interface SubscriptionCompilerOptions<Result, Source, ParentSource, Conte
 export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, Info> {
 	readonly kind = 'Subscription';
 	readonly #field: string;
-	readonly #subscribeMetadata: Map<symbol, unknown>;
+	readonly #subscribeState: Map<symbol, unknown>;
 	readonly #subscribeMiddlewares: Array<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
@@ -27,7 +27,7 @@ export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, I
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
 	readonly #subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	readonly #resolveMetadata: Map<symbol, unknown>;
+	readonly #resolveState: Map<symbol, unknown>;
 	readonly #resolveMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #topLevelResolveMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
@@ -37,11 +37,11 @@ export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, I
 		options: SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info>,
 	) {
 		this.#field = options.field;
-		this.#subscribeMetadata = options.subscribeMetadata;
+		this.#subscribeState = options.subscribeState;
 		this.#subscribeMiddlewares = options.subscribeMiddlewares;
 		this.#topLevelSubscribeMiddlewares = [];
 		this.#subscribe = options.subscribe;
-		this.#resolveMetadata = options.resolveMetadata;
+		this.#resolveState = options.resolveState;
 		this.#resolveMiddlewares = options.resolveMiddlewares;
 		this.#topLevelResolveMiddlewares = [];
 		this.#resolver = options.resolver;
@@ -56,16 +56,24 @@ export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, I
 		return this.#field;
 	}
 
-	useSubscribeMetadata<T>(key: symbol) {
-		const get = () => this.#subscribeMetadata.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#subscribeMetadata.set(key, value);
+	useSubscribeState<T>(key: symbol) {
+		const get = () => this.#subscribeState.get(key) as T | undefined;
+		const set = (value: Readonly<T>) => this.#subscribeState.set(key, value);
 		return { get, set };
 	}
 
-	useResolveMetadata<T>(key: symbol) {
-		const get = () => this.#resolveMetadata.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#resolveMetadata.set(key, value);
+	useSubscribePluginState<T>(pluginId: PluginId<T>) {
+		return this.useSubscribeState<T>(pluginId.key);
+	}
+
+	useResolveState<T>(key: symbol) {
+		const get = () => this.#resolveState.get(key) as T | undefined;
+		const set = (value: Readonly<T>) => this.#resolveState.set(key, value);
 		return { get, set };
+	}
+
+	useResolvePluginState<T>(pluginId: PluginId<T>) {
+		return this.useResolveState<T>(pluginId.key);
 	}
 
 	addSubscribeMiddleware(

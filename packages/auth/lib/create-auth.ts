@@ -3,6 +3,7 @@ import {
 	type AppPlugin,
 	type FieldUsePlugin,
 	type ModuleCompiler,
+	type PluginId,
 	type SubscriptionUsePlugin,
 	type TypeUsePlugin,
 	createAppPluginId,
@@ -31,11 +32,16 @@ type AuthPlugin<Result, Source, Context, Args, Info> = FieldUsePlugin<
 	Source,
 	Context,
 	Args,
-	Info
+	Info,
+	AuthState
 > &
-	TypeUsePlugin<Source, Context, Info> &
-	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'resolve'> &
-	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'subscribe'>;
+	TypeUsePlugin<Source, Context, Info, AuthState> &
+	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'resolve', AuthState> &
+	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'subscribe', AuthState>;
+
+interface AuthState {
+	hasAuth: true;
+}
 
 interface BuildContext {
 	type: string;
@@ -63,16 +69,11 @@ export interface AuthOptions<Scopes extends ScopesShape, Grants extends string> 
 	cacheKeyMap?: ScopeCacheKeyMap<Scopes>;
 }
 
-interface AuthState {
-	hasAuth: true;
-}
-
 export function createAuth<Context, Scopes extends ScopesShape, Grants extends string>(
 	loadScopes: GetScopeLoader<Scopes, Context>,
 	globalOptions: AuthOptions<Scopes, Grants> = {},
 ) {
-	const id = createAppPluginId('Baeta Auth');
-	const stateKey = Symbol('auth');
+	const id = createAppPluginId<AuthState>('@baeta/auth');
 	const scope = defineScopes<Scopes, Grants>();
 	const rule = defineRules<Scopes, Grants>();
 	const loadScopesFn = loadScopes as GetScopeLoader<Scopes, unknown>;
@@ -86,8 +87,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 			[makePluginSymbol]: ({ type, field, subscriptionFieldKind }: BuildContext) => {
 				const middleware = buildMiddleware(type) as Middleware<any, Source, Context, any, Info>;
 				nameFunction(middleware, buildMiddlewareName(type, field, subscriptionFieldKind));
-				const metadata = new Map<symbol, AuthState>([[stateKey, { hasAuth: true }]]);
-				return { id, middleware, meta: metadata };
+				return { id, middleware, state: { hasAuth: true } };
 			},
 		};
 	};
@@ -129,17 +129,16 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 			);
 		});
 
-	const authAppPlugin: AppPlugin = {
+	const authAppPlugin: AppPlugin<AuthState> = {
 		id,
-		name: 'Baeta Auth',
 		mutate: (compilers) => {
 			if (defaultScopes == null) return;
 			for (const typeCompiler of iterateTypes(compilers)) {
 				if (!isOperationType(typeCompiler.type)) continue;
 				if (defaultScopes[typeCompiler.type] == null) continue;
-				if (hasAuth(typeCompiler.useMetadata<AuthState>(stateKey).get())) continue;
+				if (hasAuth(typeCompiler.usePluginState(id).get())) continue;
 				for (const fieldCompiler of typeCompiler.fields) {
-					if (hasAuth(readFieldAuthState(fieldCompiler, stateKey))) continue;
+					if (hasAuth(readFieldAuthState(fieldCompiler, id))) continue;
 					const middleware = createFallbackMiddleware(
 						typeCompiler.type,
 						loadScopesFn,
@@ -185,11 +184,11 @@ function hasAuth(state: AuthState | undefined) {
 
 function readFieldAuthState(
 	field: ModuleCompiler['types'][number]['fields'][number],
-	key: symbol,
+	pluginId: PluginId<AuthState>,
 ): AuthState | undefined {
 	return field.kind === 'Field'
-		? field.useMetadata<AuthState>(key).get()
-		: field.useSubscribeMetadata<AuthState>(key).get();
+		? field.usePluginState(pluginId).get()
+		: field.useSubscribePluginState(pluginId).get();
 }
 
 function* iterateTypes(compilers: ModuleCompiler[]) {

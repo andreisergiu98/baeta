@@ -8,9 +8,9 @@ test('TypeCompiler should be created correctly', (t) => {
 	t.is(typeCompiler.fields.length, 2);
 });
 
-test('TypeCompiler should handle metadata correctly', (t) => {
+test('TypeCompiler should handle state correctly', (t) => {
 	const typeCompiler = mockTypeCompiler();
-	testStoreLike(t, (key) => typeCompiler.useMetadata(key));
+	testStoreLike(t, (key) => typeCompiler.useState(key));
 });
 
 test('TypeCompiler should handle addMiddleware correctly', async (t) => {

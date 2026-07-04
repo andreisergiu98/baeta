@@ -45,7 +45,7 @@ export function mockSubscriptionFieldBuilder({
 		MockInfo
 	>({
 		field,
-		metadata: new Map(),
+		state: new Map(),
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	});
@@ -90,10 +90,10 @@ export function mockSubscriptionFieldCompiler({
 		MockInfo
 	>({
 		field,
-		subscribeMetadata: new Map(),
+		subscribeState: new Map(),
 		subscribeMiddlewares: [],
 		subscribe: () => mockSubscriptionGenerator(1),
-		resolveMetadata: new Map(),
+		resolveState: new Map(),
 		resolveMiddlewares: [],
 		requiredPluginIds: new Set(),
 		resolver: (params) => params.source.value,

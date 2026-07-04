@@ -101,7 +101,7 @@ test('FieldCompiler should use type middlewares correctly', async (t) => {
 	t.is(i, 3);
 });
 
-test('FieldCompiler should use metadata correctly', async (t) => {
+test('FieldCompiler should use state correctly', async (t) => {
 	const fieldCompiler = mockFieldCompiler();
-	testStoreLike(t, (key) => fieldCompiler.useMetadata(key));
+	testStoreLike(t, (key) => fieldCompiler.useState(key));
 });

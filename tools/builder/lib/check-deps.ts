@@ -39,6 +39,13 @@ export function extractImports(filePath: string, content: string): string[] {
 		) {
 			imports.push(node.arguments[0].text);
 		}
+		if (
+			ts.isImportTypeNode(node) &&
+			ts.isLiteralTypeNode(node.argument) &&
+			ts.isStringLiteral(node.argument.literal)
+		) {
+			imports.push(node.argument.literal.text);
+		}
 		ts.forEachChild(node, visit);
 	};
 	visit(sourceFile);
@@ -168,13 +175,16 @@ export function checkDependencies(
 
 	for (const imp of sourceImports) {
 		if (!deps.has(imp) && !peerDeps.has(imp)) {
+			if (overrides?.ignoreMissingDeps?.includes(imp)) {
+				continue;
+			}
 			if (devDeps.has(imp)) {
 				issues.push({
 					type: 'wrong-type-should-be-dep',
 					package: imp,
 					message: `'${imp}' is imported in source files but is only in devDependencies (should be in dependencies or peerDependencies)`,
 				});
-			} else if (!overrides?.ignoreMissingDeps?.includes(imp)) {
+			} else {
 				issues.push({
 					type: 'missing-dependency',
 					package: imp,

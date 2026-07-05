@@ -9,6 +9,7 @@ import {
 } from '@baeta/core/sdk';
 import { createComplexityMiddleware } from './complexity-middleware.ts';
 import { normalizeOptions, type ComplexityExtensionOptions } from './complexity-options.ts';
+import { createComplexityStore } from './complexity-store.ts';
 import {
 	registerFieldSettingsSetter,
 	type FieldSettingsMap,
@@ -32,6 +33,7 @@ type ComplexityPlugin<Result, Source, Context, Args, Info> = FieldUsePlugin<
 
 export function createComplexity<Context>(options: ComplexityExtensionOptions<Context>) {
 	const id = createAppPluginId<ComplexityState>('@baeta/complexity');
+	const cacheStore = createComplexityStore<unknown>();
 	const normalizedOptions = normalizeOptions(options as ComplexityExtensionOptions<unknown>);
 
 	const complexity = <Result, Source, Context, Args, Info>(
@@ -84,6 +86,7 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 			const middleware = createComplexityMiddleware<any, unknown, unknown, unknown, unknown>(
 				normalizedOptions,
 				fieldSettingsMap,
+				cacheStore,
 			);
 
 			for (const typeCompiler of iterateTypes(compilers)) {

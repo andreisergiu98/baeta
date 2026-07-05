@@ -3,22 +3,19 @@ import type { GraphQLResolveInfo } from 'graphql';
 import { calculateComplexity } from './complexity-calculator.ts';
 import { ComplexityErrorKind } from './complexity-errors.ts';
 import { type ComplexityExtensionOptions, defaultLimits } from './complexity-options.ts';
+import { type ComplexityStore } from './complexity-store.ts';
 import type { FieldSettingsMap } from './field-settings.ts';
-import { loadComplexityStore } from './store-loader.ts';
-import { getComplexityStore } from './store.ts';
 
 export function createComplexityMiddleware<Result, Root, Context, Args, Info>(
 	options: Required<ComplexityExtensionOptions<Context>>,
 	fieldSettingsMap: FieldSettingsMap,
+	complexityStore: ComplexityStore<Context>,
 ): Middleware<Result, Root, Context, Args, Info> {
 	return async (next, params) => {
-		loadComplexityStore(params.ctx, options.limit, defaultLimits);
+		complexityStore.load(params.ctx, options.limit, defaultLimits);
+		const { limits, cacheComplexity } = await complexityStore.get(params.ctx);
 
-		const store = await getComplexityStore(params.ctx);
-
-		const limits = store.limits;
-
-		const results = store.cacheComplexity(() => {
+		const results = cacheComplexity(() => {
 			return calculateComplexity(params.ctx, params.info as GraphQLResolveInfo, fieldSettingsMap, {
 				complexity: options.defaultComplexity,
 				multiplier: options.defaultListMultiplier,

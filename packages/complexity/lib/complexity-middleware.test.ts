@@ -3,9 +3,8 @@ import { ComplexityErrorKind } from './complexity-errors.ts';
 import type { ComplexityLimit } from './complexity-limits.ts';
 import { createComplexityMiddleware } from './complexity-middleware.ts';
 import type { ComplexityExtensionOptions } from './complexity-options.ts';
+import { createComplexityStore } from './complexity-store.ts';
 import type { FieldSettingsMap } from './field-settings.ts';
-import { loadComplexityStore } from './store-loader.ts';
-import { getComplexityStore } from './store.ts';
 
 const defaultLimits: Required<ComplexityLimit> = {
 	depth: 1,
@@ -39,12 +38,14 @@ const createMocks = async (limit: ComplexityLimit) => {
 		complexity: 1,
 	};
 
-	loadComplexityStore(mockContext, options.limit, limits);
-	const mockStore = await getComplexityStore(mockContext);
+	const store = createComplexityStore<unknown>();
+	store.load(mockContext, options.limit, limits);
+	const mockStore = await store.get(mockContext);
 
 	return {
 		next,
 		options,
+		store,
 		mockResults,
 		mockStore: sinon.stub(mockStore),
 		mockParams: {
@@ -57,7 +58,7 @@ const createMocks = async (limit: ComplexityLimit) => {
 };
 
 test('middleware calls next when complexity is under limits', async (t) => {
-	const { options, next, mockStore, mockParams } = await createMocks({
+	const { options, next, store, mockStore, mockParams } = await createMocks({
 		depth: 10,
 		breadth: 20,
 		complexity: 200,
@@ -70,14 +71,14 @@ test('middleware calls next when complexity is under limits', async (t) => {
 	});
 
 	const fieldSettingsMap: FieldSettingsMap = new Map();
-	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
+	const middleware = createComplexityMiddleware(options, fieldSettingsMap, store);
 	await middleware(next, mockParams);
 
 	t.true(next.calledOnce);
 });
 
 test('middleware throws when depth limit is exceeded', async (t) => {
-	const { options, next, mockStore, mockParams } = await createMocks({
+	const { options, next, store, mockStore, mockParams } = await createMocks({
 		depth: 10,
 		breadth: 20,
 		complexity: 200,
@@ -90,7 +91,7 @@ test('middleware throws when depth limit is exceeded', async (t) => {
 	});
 
 	const fieldSettingsMap: FieldSettingsMap = new Map();
-	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
+	const middleware = createComplexityMiddleware(options, fieldSettingsMap, store);
 
 	await t.throwsAsync(async () => middleware(next, mockParams), {
 		message: 'Complexity error',
@@ -107,7 +108,7 @@ test('middleware throws when depth limit is exceeded', async (t) => {
 });
 
 test('middleware throws when breadth limit is exceeded', async (t) => {
-	const { options, next, mockStore, mockParams } = await createMocks({
+	const { options, next, store, mockStore, mockParams } = await createMocks({
 		depth: 10,
 		breadth: 20,
 		complexity: 200,
@@ -120,7 +121,7 @@ test('middleware throws when breadth limit is exceeded', async (t) => {
 	});
 
 	const fieldSettingsMap: FieldSettingsMap = new Map();
-	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
+	const middleware = createComplexityMiddleware(options, fieldSettingsMap, store);
 
 	await t.throwsAsync(async () => middleware(next, mockParams), {
 		message: 'Complexity error',
@@ -137,7 +138,7 @@ test('middleware throws when breadth limit is exceeded', async (t) => {
 });
 
 test('middleware throws when complexity limit is exceeded', async (t) => {
-	const { options, next, mockStore, mockParams } = await createMocks({
+	const { options, next, store, mockStore, mockParams } = await createMocks({
 		depth: 10,
 		breadth: 20,
 		complexity: 200,
@@ -151,7 +152,7 @@ test('middleware throws when complexity limit is exceeded', async (t) => {
 	});
 
 	const fieldSettingsMap: FieldSettingsMap = new Map();
-	const middleware = createComplexityMiddleware(options, fieldSettingsMap);
+	const middleware = createComplexityMiddleware(options, fieldSettingsMap, store);
 
 	await t.throwsAsync(async () => middleware(next, mockParams), {
 		message: 'Complexity error',

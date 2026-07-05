@@ -1,10 +1,10 @@
 import type { ResolverParams } from '@baeta/core';
 import { ForbiddenError } from '@baeta/errors';
-import { getAuthStore } from './store.ts';
+import type { AuthStoreResult } from './auth-store.ts';
+import type { GrantCache } from './grant-cache.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 export type LogicRule = 'and' | 'or' | 'chain' | 'race';
-
-export type ScopesShape = Record<string, unknown>;
 
 /**
  * Defines the structure of authorization scope rules.
@@ -37,12 +37,12 @@ export type ScopeLogicRule<Scopes extends ScopesShape, Grants extends string> = 
 export async function verifyGrant(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	grant: string | undefined,
+	grantCache: GrantCache,
 ): Promise<true> {
 	if (grant == null) {
 		throw new Error("Grant key '$granted' must be defined in the scope rules!");
 	}
-	const store = await getAuthStore(params.ctx);
-	const granted = store.grantCache.getGrants(params.source);
+	const granted = grantCache.getGrants(params.source);
 	if (granted?.has(grant) !== true) {
 		throw new ForbiddenError();
 	}
@@ -52,22 +52,22 @@ export async function verifyGrant(
 export async function verifyScope<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scope: ScopeRules<Scopes, Grants> | undefined,
+	store: AuthStoreResult,
 ) {
 	if (scope == null) {
 		throw new Error('Scope rules cannot be undefined!');
 	}
 
 	if (scope.type === 'rule') {
-		return await verifyScopeRule(params, scope);
+		return await verifyScopeRule(params, scope, store);
 	}
 
 	if (scope.type === 'grant') {
-		return await verifyGrant(params, scope.grant);
+		return await verifyGrant(params, scope.grant, store.grantCache);
 	}
 
 	if (scope.type === 'scope') {
-		const store = await getAuthStore(params.ctx);
-		const resolve = store.scopes.get(scope.key as string);
+		const resolve = store.scopeResolverMap.get(scope.key as string);
 		if (resolve == null) {
 			throw new Error(`No scope resolver found for key '${scope.key as string}'!`);
 		}
@@ -85,25 +85,26 @@ export async function verifyScope<Scopes extends ScopesShape, Grants extends str
 export async function verifyScopeRule<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scope: ScopeLogicRule<Scopes, Grants>,
+	store: AuthStoreResult,
 ): Promise<true> {
 	if (scope.scopes.length === 0) {
 		throw new Error('Scope rule cannot be empty!');
 	}
 
 	if (scope.rule === 'chain') {
-		return await verifyChainScopes(params, scope.scopes);
+		return await verifyChainScopes(params, scope.scopes, store);
 	}
 
 	if (scope.rule === 'race') {
-		return await verifyRaceScopes(params, scope.scopes);
+		return await verifyRaceScopes(params, scope.scopes, store);
 	}
 
 	if (scope.rule === 'or') {
-		return await verifyOrScopes(params, scope.scopes);
+		return await verifyOrScopes(params, scope.scopes, store);
 	}
 
 	if (scope.rule === 'and') {
-		return await verifyAndScopes(params, scope.scopes);
+		return await verifyAndScopes(params, scope.scopes, store);
 	}
 
 	scope.rule satisfies never;
@@ -113,9 +114,10 @@ export async function verifyScopeRule<Scopes extends ScopesShape, Grants extends
 export async function verifyChainScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scopes: ScopeRules<Scopes, Grants>[],
+	store: AuthStoreResult,
 ): Promise<true> {
 	for (const scope of scopes) {
-		await verifyScope(params, scope);
+		await verifyScope(params, scope, store);
 	}
 	return true;
 }
@@ -123,9 +125,10 @@ export async function verifyChainScopes<Scopes extends ScopesShape, Grants exten
 export async function verifyRaceScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scopes: ScopeRules<Scopes, Grants>[],
+	store: AuthStoreResult,
 ): Promise<true> {
 	for (const scope of scopes) {
-		const result = await verifyScope(params, scope).catch((err) => err);
+		const result = await verifyScope(params, scope, store).catch((err) => err);
 		if (result === true) {
 			return true;
 		}
@@ -136,16 +139,18 @@ export async function verifyRaceScopes<Scopes extends ScopesShape, Grants extend
 export async function verifyOrScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scopes: ScopeRules<Scopes, Grants>[],
+	store: AuthStoreResult,
 ): Promise<true> {
-	const promises = scopes.map((scope) => verifyScope(params, scope));
+	const promises = scopes.map((scope) => verifyScope(params, scope, store));
 	return await Promise.any(promises);
 }
 
 export async function verifyAndScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scopes: ScopeRules<Scopes, Grants>[],
+	store: AuthStoreResult,
 ): Promise<true> {
-	const promises = scopes.map((scope) => verifyScope(params, scope));
+	const promises = scopes.map((scope) => verifyScope(params, scope, store));
 	await Promise.all(promises);
 	return true;
 }

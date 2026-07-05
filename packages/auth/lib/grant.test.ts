@@ -1,11 +1,9 @@
 import test, { sinon } from '@baeta/testing';
 import { log } from '@baeta/util-log';
+import { createGrantCache } from './grant-cache.ts';
 import { type GetGrantFn, type GrantConfig, saveGrants } from './grant.ts';
-import { loadAuthStore } from './store-loader.ts';
-import { getAuthStore } from './store.ts';
 
 type TestGrant = 'grant1' | 'grant2';
-type TestScopes = Record<string, never>;
 
 test.before(() => {
 	sinon.stub(log, 'warn');
@@ -16,21 +14,19 @@ test.after(() => {
 });
 
 function createArgs<Result extends object | null | undefined>(result: Result) {
-	const ctx = {};
-	loadAuthStore<TestScopes, typeof ctx>(ctx, async () => ({}), {});
 	return {
 		result,
-		params: { source: {}, args: {}, ctx, info: {} } as const,
+		grantCache: createGrantCache(),
+		params: { source: {}, args: {}, ctx: {}, info: {} } as const,
 	};
 }
 
 test('saveGrants attaches a string grant to the result object', async (t) => {
 	const args = createArgs({ id: 'r1' });
 
-	await saveGrants(args.params, args.result, 'grant1');
+	await saveGrants(args.params, args.result, 'grant1', args.grantCache);
 
-	const store = await getAuthStore(args.params.ctx);
-	t.deepEqual(Array.from(store.grantCache.getGrants(args.result)!), ['grant1']);
+	t.deepEqual(Array.from(args.grantCache.getGrants(args.result)!), ['grant1']);
 });
 
 test('saveGrants attaches multiple grants from an array', async (t) => {
@@ -40,10 +36,10 @@ test('saveGrants attaches multiple grants from an array', async (t) => {
 		args.params,
 		args.result,
 		['grant1', 'grant2'],
+		args.grantCache,
 	);
 
-	const store = await getAuthStore(args.params.ctx);
-	t.deepEqual(Array.from(store.grantCache.getGrants(args.result) ?? []).sort(), [
+	t.deepEqual(Array.from(args.grantCache.getGrants(args.result) ?? []).sort(), [
 		'grant1',
 		'grant2',
 	]);
@@ -56,11 +52,10 @@ test('saveGrants invokes a grant resolver function', async (t) => {
 		() => 'grant1',
 	);
 
-	await saveGrants(args.params, args.result, fn);
+	await saveGrants(args.params, args.result, fn, args.grantCache);
 
-	const store = await getAuthStore(args.params.ctx);
 	t.true(fn.calledOnce);
-	t.deepEqual(Array.from(store.grantCache.getGrants(args.result) ?? []), ['grant1']);
+	t.deepEqual(Array.from(args.grantCache.getGrants(args.result) ?? []), ['grant1']);
 });
 
 test('saveGrants distributes grants across array results', async (t) => {
@@ -68,11 +63,10 @@ test('saveGrants distributes grants across array results', async (t) => {
 	const b = { id: 'b' };
 	const args = createArgs([a, b]);
 
-	await saveGrants(args.params, args.result, 'grant1');
+	await saveGrants(args.params, args.result, 'grant1', args.grantCache);
 
-	const store = await getAuthStore(args.params.ctx);
-	t.deepEqual(Array.from(store.grantCache.getGrants(a)!), ['grant1']);
-	t.deepEqual(Array.from(store.grantCache.getGrants(b)!), ['grant1']);
+	t.deepEqual(Array.from(args.grantCache.getGrants(a)!), ['grant1']);
+	t.deepEqual(Array.from(args.grantCache.getGrants(b)!), ['grant1']);
 });
 
 test('saveGrants uses GrantConfig.target to relocate grants', async (t) => {
@@ -89,11 +83,11 @@ test('saveGrants uses GrantConfig.target to relocate grants', async (t) => {
 		args.params,
 		args.result,
 		config,
+		args.grantCache,
 	);
 
-	const store = await getAuthStore(args.params.ctx);
-	t.is(store.grantCache.getGrants(wrapper), undefined);
-	t.deepEqual(Array.from(store.grantCache.getGrants(inner)!), ['grant1']);
+	t.is(args.grantCache.getGrants(wrapper), undefined);
+	t.deepEqual(Array.from(args.grantCache.getGrants(inner)!), ['grant1']);
 });
 
 test('saveGrants applies GrantConfig.target per element of array results', async (t) => {
@@ -110,23 +104,22 @@ test('saveGrants applies GrantConfig.target per element of array results', async
 		args.params,
 		args.result,
 		config,
+		args.grantCache,
 	);
 
-	const store = await getAuthStore(args.params.ctx);
-	t.deepEqual(Array.from(store.grantCache.getGrants(a.user) ?? []), ['grant1']);
-	t.deepEqual(Array.from(store.grantCache.getGrants(b.user) ?? []), ['grant1']);
+	t.deepEqual(Array.from(args.grantCache.getGrants(a.user) ?? []), ['grant1']);
+	t.deepEqual(Array.from(args.grantCache.getGrants(b.user) ?? []), ['grant1']);
 });
 
 test('saveGrants is a no-op when result is null', async (t) => {
 	const args = createArgs(null);
 
-	await saveGrants(args.params, args.result, 'grant1');
+	await saveGrants(args.params, args.result, 'grant1', args.grantCache);
 
-	const store = await getAuthStore(args.params.ctx);
 	// Nothing to assert on, just verify it didn't throw and didn't warn.
 	const warn = log.warn as sinon.SinonStub;
 	const callsBefore = warn.callCount;
-	t.is(store.grantCache.getGrants({}), undefined);
+	t.is(args.grantCache.getGrants({}), undefined);
 	t.is(warn.callCount, callsBefore);
 });
 
@@ -137,9 +130,8 @@ test('saveGrants skips null entries inside array results', async (t) => {
 	const warn = log.warn as sinon.SinonStub;
 	warn.resetHistory();
 
-	await saveGrants(args.params, args.result, 'grant1');
+	await saveGrants(args.params, args.result, 'grant1', args.grantCache);
 
-	const store = await getAuthStore(args.params.ctx);
-	t.deepEqual(Array.from(store.grantCache.getGrants(live)!), ['grant1']);
+	t.deepEqual(Array.from(args.grantCache.getGrants(live)!), ['grant1']);
 	t.is(warn.callCount, 0);
 });

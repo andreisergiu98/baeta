@@ -1,4 +1,4 @@
-import type { ScopesShape } from './scope-rules.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 /**
  * Builds a cache key for a single scope. The returned value must be stable —

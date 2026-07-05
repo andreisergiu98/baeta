@@ -1,23 +1,15 @@
 import { ForbiddenError } from '@baeta/errors';
 import test from '@baeta/testing';
+import { createScopeCache } from './scope-cache.ts';
 import {
 	createScopeResolver,
 	createScopeResolverMap,
 	resolveBoolean,
 	type ScopeLoaderMap,
 } from './scope-resolver.ts';
-import { loadAuthStore } from './store-loader.ts';
 
 declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
-
-type CtxScopes = { isAdmin: boolean; role: string };
-
-function createCtx() {
-	const ctx = {};
-	loadAuthStore<CtxScopes, typeof ctx>(ctx, async () => ({ isAdmin: true, role: () => true }), {});
-	return { ctx };
-}
 
 test('resolveBoolean returns true for true input', (t) => {
 	t.is(resolveBoolean(true), true);
@@ -28,27 +20,27 @@ test('resolveBoolean throws ForbiddenError for false input', (t) => {
 });
 
 test('createScopeResolver handles boolean loader', async (t) => {
-	const { ctx } = createCtx();
+	const scopeCache = createScopeCache({});
 
-	const trueResolver = createScopeResolver(ctx, 'fn-true', true);
+	const trueResolver = createScopeResolver(scopeCache, 'fn-true', true);
 	// eslint-disable-next-line @typescript-eslint/await-thenable
 	await t.notThrows(() => trueResolver(null));
 
-	const falseResolver = createScopeResolver({}, 'fn-false', false);
+	const falseResolver = createScopeResolver(scopeCache, 'fn-false', false);
 	// eslint-disable-next-line @typescript-eslint/await-thenable
 	await t.throws(() => falseResolver(null), { instanceOf: ForbiddenError });
 });
 
 test('createScopeResolver handles function loader', async (t) => {
-	const { ctx } = createCtx();
+	const scopeCache = createScopeCache({});
 
-	const trueResolver = createScopeResolver(ctx, 'fn-true', async () => {
+	const trueResolver = createScopeResolver(scopeCache, 'fn-true', async () => {
 		await delay(10);
 		return true;
 	});
 	await t.notThrowsAsync(async () => await trueResolver(null));
 
-	const falseResolver = createScopeResolver(ctx, 'fn-false', async () => {
+	const falseResolver = createScopeResolver(scopeCache, 'fn-false', async () => {
 		await delay(10);
 		return false;
 	});
@@ -56,10 +48,10 @@ test('createScopeResolver handles function loader', async (t) => {
 });
 
 test('createScopeResolver memoizes function loaders by argument', async (t) => {
-	const { ctx } = createCtx();
+	const scopeCache = createScopeCache({});
 
 	let calls = 0;
-	const resolver = createScopeResolver(ctx, 'role', async (param: unknown) => {
+	const resolver = createScopeResolver(scopeCache, 'role', async (param: unknown) => {
 		calls++;
 		await delay(5);
 		return param === 'admin';
@@ -78,7 +70,7 @@ test('createScopeResolverMap creates resolver for each scope', (t) => {
 		scope1: true,
 		scope2: () => true,
 	};
-	const resolverMap = createScopeResolverMap({}, scopeMap);
+	const resolverMap = createScopeResolverMap(createScopeCache({}), scopeMap);
 	t.true(resolverMap.has('scope1'));
 	t.true(resolverMap.has('scope2'));
 	t.is(typeof resolverMap.get('scope1'), 'function');

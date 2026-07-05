@@ -1,6 +1,6 @@
 import { ForbiddenError } from '@baeta/errors';
-import type { ScopesShape } from './scope-rules.ts';
-import { getAuthStore } from './store.ts';
+import type { ScopeCache } from './scope-cache.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 /**
  * Function that creates scope loaders for authorization checks.
@@ -72,7 +72,7 @@ export function resolveBoolean(param: boolean) {
 }
 
 export function createScopeResolver(
-	ctx: unknown,
+	scopeCache: ScopeCache,
 	name: string,
 	value: boolean | ScopeLoader<unknown>,
 ): ScopeResolver {
@@ -83,27 +83,26 @@ export function createScopeResolver(
 	}
 
 	return async (params: unknown) => {
-		const store = await getAuthStore(ctx);
-		const cached = await store.scopeCache.getScopeValue(name, params);
+		const cached = await scopeCache.getScopeValue(name, params);
 
 		if (cached != null) {
 			return resolveBoolean(cached);
 		}
 
 		const resultPromise = value(params);
-		store.scopeCache.setScopeValue(name, params, resultPromise);
+		scopeCache.setScopeValue(name, params, resultPromise);
 		const result = await resultPromise;
 		return resolveBoolean(result);
 	};
 }
 
 export function createScopeResolverMap<Scopes extends ScopesShape>(
-	ctx: unknown,
+	scopeCache: ScopeCache,
 	scopeLoaderMap: ScopeLoaderMap<Scopes>,
 ): ScopeResolverMap<Scopes> {
 	const map = new Map<keyof Scopes, ScopeResolver>();
 	for (const [key, value] of Object.entries(scopeLoaderMap)) {
-		map.set(key, createScopeResolver(ctx, key, value));
+		map.set(key, createScopeResolver(scopeCache, key, value));
 	}
 	return map;
 }

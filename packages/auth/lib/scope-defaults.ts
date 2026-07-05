@@ -1,5 +1,6 @@
 import { isOperationType } from '../utils/resolver.ts';
-import type { ScopeRules, ScopesShape } from './scope-rules.ts';
+import type { ScopeRules } from './scope-rules.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 /** Configuration for default authorization scopes that apply to all operations of a specific type. */
 export type DefaultScopes<Scopes extends ScopesShape, Grants extends string> = {

@@ -1,4 +1,5 @@
-import type { ScopeRule, ScopeRules, ScopesShape } from './scope-rules.ts';
+import type { ScopeRule, ScopeRules } from './scope-rules.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 export type ScopeAccessor<Scopes extends ScopesShape, Grants extends string> = {
 	[K in keyof Scopes]: Scopes[K] extends boolean

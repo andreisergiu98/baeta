@@ -1,5 +1,5 @@
 import type { ResolverParams } from '@baeta/core';
-import { getAuthStore } from './store.ts';
+import type { GrantCache } from './grant-cache.ts';
 
 /**
  * Represents the result of a grant operation.
@@ -44,17 +44,15 @@ export async function saveGrants<Grants extends string, Result, Source, Context,
 	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
 	grants: GetGrant<Grants, Result, Source, Context, Args, Info>,
+	grantCache: GrantCache,
 ) {
 	if (result == null) return;
-	const [store, resolvedGrants] = await Promise.all([
-		getAuthStore(params.ctx),
-		resolveGrants(params, result, grants),
-	]);
+	const resolvedGrants = await resolveGrants(params, result, grants);
 	const entries = Array.isArray(result) ? result : [result];
 	resolvedGrants.forEach(({ grant, target }) => {
 		for (const entry of entries) {
 			if (entry == null) continue;
-			store.grantCache.addGrants(target(entry), grant);
+			grantCache.addGrants(target(entry), grant);
 		}
 	});
 }

@@ -29,7 +29,7 @@
   "scripts": {
     "build": "baeta generate",
     "start": "baeta generate --watch --run='wrangler dev'",
-    "types": "tsc --noEmit"
+    "types": "tsc -b"
   },
   "dependencies": {
     "@baeta/core": "workspace:^",

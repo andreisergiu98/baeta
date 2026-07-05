@@ -9,7 +9,17 @@ export const SUPPORTED_NODE_VERSIONS = '^22.20.0 || ^24.0.0 || >=26.0.0';
  * We use constraints until peer dependencies are supported by yarn catalog.
  */
 export const GRAPHQL_PEER_VERSION = '^16.6.0 || ^17.0.0';
-export const LEGACY_GRAPHQL_PEER_VERSION = '^16.6.0';
+export const GRAPHQL_NEXT_PEER_VERSION = '^17.0.0';
+
+export const GRAPHQL_NEXT_WORKSPACES = [
+	'@baeta/examples-centrifugo',
+	'@baeta/examples-cloudflare-ws',
+	'@baeta/subscriptions-cloudflare',
+	'@baeta/subscriptions-stateless',
+	'@baeta/subscriptions-stateless-dedupe',
+	'@baeta/subscriptions-stateless-filter',
+	'@baeta/plugin-cloudflare',
+];
 
 /*
  * tsdown defaults for packages that require building.
@@ -86,6 +96,12 @@ export const PACKAGE_DEPENDENCY_OVERRIDES: Record<string, PackageDependenciesOve
 		ignoreDevDeps: ['graphql'],
 	},
 	'@baeta/subscriptions-pubsub': {
+		ignoreDevDeps: ['graphql'],
+	},
+	'@baeta/subscriptions-stateless-dedupe': {
+		ignoreDevDeps: ['graphql'],
+	},
+	'@baeta/subscriptions-stateless-filter': {
 		ignoreDevDeps: ['graphql'],
 	},
 };

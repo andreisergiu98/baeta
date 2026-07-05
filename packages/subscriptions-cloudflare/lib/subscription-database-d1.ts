@@ -1,4 +1,5 @@
-import type { SubscriptionInfo } from './subscribe.ts';
+import type { SubscriptionState } from '@baeta/subscriptions-stateless';
+import { getConnectionPoolId } from './connection-id.ts';
 import type { SubscriptionDatabase } from './subscription-database.ts';
 
 interface D1SubscriptionRow {
@@ -10,8 +11,10 @@ interface D1SubscriptionRow {
 }
 
 interface D1SubscriptionRowData {
-	subscription: SubscriptionInfo['subscription'];
-	contextParams: unknown;
+	query: string;
+	variables: string | undefined;
+	operationName: string | undefined;
+	contextParams: string | undefined;
 }
 
 export class SubscriptionDatabaseD1 implements SubscriptionDatabase {
@@ -22,7 +25,7 @@ export class SubscriptionDatabaseD1 implements SubscriptionDatabase {
 
 	protected table = 'Subscriptions';
 
-	async getSubscriptions(topic: string): Promise<SubscriptionInfo[]> {
+	async getSubscriptions(topic: string): Promise<SubscriptionState[]> {
 		const res = await this.db
 			.prepare(`SELECT * FROM ${this.table} WHERE topic = ?`)
 			.bind(topic)
@@ -37,19 +40,26 @@ export class SubscriptionDatabaseD1 implements SubscriptionDatabase {
 				id: row.id,
 				topic: row.topic,
 				connectionId: row.connectionId,
-				connectionPoolId: row.connectionPoolId,
-				subscription: data.subscription,
+				query: data.query,
+				variables: data.variables,
+				operationName: data.operationName,
 				contextParams: data.contextParams,
 			};
 		});
 	}
 
-	async createSubscription(info: SubscriptionInfo): Promise<void> {
+	async createSubscription(state: SubscriptionState): Promise<void> {
 		await this.db
 			.prepare(
 				`INSERT INTO ${this.table} (id, connectionId, connectionPoolId, topic, data) VALUES (?, ?, ?, ?, ?)`,
 			)
-			.bind(info.id, info.connectionId, info.connectionPoolId, info.topic, serializeData(info))
+			.bind(
+				state.id,
+				state.connectionId,
+				getConnectionPoolId(state.connectionId),
+				state.topic,
+				serializeData(state),
+			)
 			.run();
 	}
 
@@ -65,10 +75,12 @@ export class SubscriptionDatabaseD1 implements SubscriptionDatabase {
 	}
 }
 
-export function serializeData(info: SubscriptionInfo) {
+export function serializeData(state: SubscriptionState) {
 	const data: D1SubscriptionRowData = {
-		subscription: info.subscription,
-		contextParams: info.contextParams,
+		query: state.query,
+		variables: state.variables,
+		operationName: state.operationName,
+		contextParams: state.contextParams,
 	};
 	return JSON.stringify(data);
 }

@@ -1,4 +1,5 @@
-import type { ScopeRules, ScopesShape } from './scope-rules.ts';
+import type { ScopeRules } from './scope-rules.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 export type RuleAccessor<Scopes extends ScopesShape, Grants extends string> = {
 	and(

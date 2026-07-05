@@ -19,13 +19,15 @@ import {
 	createMiddleware,
 	createPostMiddleware,
 } from './auth-middlewares.ts';
+import { createAuthStore } from './auth-store.ts';
 import { defineRules, type RuleAccessor } from './define-rules.ts';
 import { defineScopes, type ScopeAccessor } from './define-scopes.ts';
 import type { ScopeErrorResolver } from './error.ts';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import type { DefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
-import type { ScopeRules, ScopesShape } from './scope-rules.ts';
+import type { ScopeRules } from './scope-rules.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 type AuthPlugin<Result, Source, Context, Args, Info> = FieldUsePlugin<
 	Result,
@@ -74,6 +76,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 	globalOptions: AuthOptions<Scopes, Grants> = {},
 ) {
 	const id = createAppPluginId<AuthState>('@baeta/auth');
+	const authStore = createAuthStore<Scopes, unknown>();
 	const scope = defineScopes<Scopes, Grants>();
 	const rule = defineRules<Scopes, Grants>();
 	const loadScopesFn = loadScopes as GetScopeLoader<Scopes, unknown>;
@@ -101,6 +104,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 				type,
 				loadScopesFn,
 				cacheKeyMap,
+				authStore,
 				scopes,
 				defaultScopes,
 				options,
@@ -122,6 +126,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 				type,
 				loadScopesFn,
 				cacheKeyMap,
+				authStore,
 				getScopes,
 				defaultScopes,
 				options,
@@ -143,6 +148,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 						typeCompiler.type,
 						loadScopesFn,
 						cacheKeyMap,
+						authStore,
 						defaultScopes,
 						globalOptions.errorResolver,
 					);

@@ -1,12 +1,13 @@
 import type { Middleware, ResolverParams } from '@baeta/core';
 import { ForbiddenError } from '@baeta/errors';
+import type { AuthStore } from './auth-store.ts';
 import { defaultErrorResolver, resolveError, type ScopeErrorResolver } from './error.ts';
 import { type GetGrant, saveGrants } from './grant.ts';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import { type DefaultScopes, selectDefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
-import { verifyScope, type ScopeRules, type ScopesShape } from './scope-rules.ts';
-import { loadAuthStore } from './store-loader.ts';
+import { verifyScope, type ScopeRules } from './scope-rules.ts';
+import type { ScopesShape } from './scope-shape.ts';
 
 /**
  * Options for authorization middlewares
@@ -58,8 +59,9 @@ export function createMiddleware<
 	Info,
 >(
 	type: string,
-	loadScopes: GetScopeLoader<Scopes, Context>,
+	loadScopes: GetScopeLoader<Scopes, unknown>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
+	authStore: AuthStore<Scopes, unknown>,
 	scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Source, Context, Args, Info>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
 	options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
@@ -69,7 +71,7 @@ export function createMiddleware<
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
 	return async (next, params) => {
-		loadAuthStore(params.ctx, loadScopes, cacheKeyMap);
+		authStore.load(params.ctx, loadScopes, cacheKeyMap);
 
 		const requiredScopes = await getScopes(params);
 
@@ -78,12 +80,14 @@ export function createMiddleware<
 			defaultScopes,
 			requiredScopes,
 			onError ?? defaultErrorResolver,
+			authStore,
 		);
 
 		const result = await next();
 
-		if (options?.grants) {
-			await saveGrants(params, result, options.grants);
+		if (options?.grants && result != null) {
+			const { grantCache } = await authStore.get(params.ctx);
+			await saveGrants(params, result, options.grants, grantCache);
 		}
 
 		return result;
@@ -100,8 +104,9 @@ export function createPostMiddleware<
 	Info,
 >(
 	type: string,
-	loadScopes: GetScopeLoader<Scopes, Context>,
+	loadScopes: GetScopeLoader<Scopes, unknown>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
+	authStore: AuthStore<Scopes, unknown>,
 	getScopes: GetPostScopeRules<Scopes, Grants, Result, Source, Context, Args, Info>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
 	options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
@@ -110,7 +115,7 @@ export function createPostMiddleware<
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
 	return async (next, params) => {
-		loadAuthStore(params.ctx, loadScopes, cacheKeyMap);
+		authStore.load(params.ctx, loadScopes, cacheKeyMap);
 
 		const result = await next();
 		const requiredScopes = await getScopes(params, result);
@@ -120,10 +125,12 @@ export function createPostMiddleware<
 			defaultScopes,
 			requiredScopes,
 			onError ?? defaultErrorResolver,
+			authStore,
 		);
 
-		if (options?.grants) {
-			await saveGrants(params, result, options.grants);
+		if (options?.grants && result != null) {
+			const { grantCache } = await authStore.get(params.ctx);
+			await saveGrants(params, result, options.grants, grantCache);
 		}
 
 		return result;
@@ -136,8 +143,9 @@ export function createFallbackMiddleware<
 	Context,
 >(
 	type: string,
-	loadScopes: GetScopeLoader<Scopes, Context>,
+	loadScopes: GetScopeLoader<Scopes, unknown>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
+	authStore: AuthStore<Scopes, unknown>,
 	globalScopes?: DefaultScopes<Scopes, Grants>,
 	onError?: ScopeErrorResolver,
 ) {
@@ -151,6 +159,7 @@ export function createFallbackMiddleware<
 		type,
 		loadScopes,
 		cacheKeyMap,
+		authStore,
 		rules,
 		{},
 		{
@@ -170,23 +179,25 @@ export async function verifyMiddlewareScopes<
 	defaultScopes: ScopeRules<Scopes, Grants> | undefined,
 	requiredScopes: ScopeRules<Scopes, Grants> | boolean | undefined,
 	errorResolver: ScopeErrorResolver,
+	authStore: AuthStore<Scopes, unknown>,
 ) {
 	if (requiredScopes === false) {
 		throw new ForbiddenError();
 	}
 
+	if (!defaultScopes && requiredScopes === true) {
+		return;
+	}
+
+	const store = await authStore.get(params.ctx);
 	const promises: Promise<unknown>[] = [];
 
 	if (defaultScopes) {
-		promises.push(verifyScope(params, defaultScopes));
+		promises.push(verifyScope(params, defaultScopes, store));
 	}
 
 	if (requiredScopes !== true) {
-		promises.push(verifyScope(params, requiredScopes));
-	}
-
-	if (promises.length === 0) {
-		return;
+		promises.push(verifyScope(params, requiredScopes, store));
 	}
 
 	return await Promise.all(promises).catch((err) => resolveError(err, errorResolver));

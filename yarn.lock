@@ -1892,7 +1892,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260702.1"
+    "@cloudflare/workers-types": "npm:^5.20260703.1"
     miniflare: "npm:^4.20260701.0"
     typescript: "catalog:dev"
     zod: "npm:^4.4.3"
@@ -2524,7 +2524,7 @@ __metadata:
     "@baeta/plugin-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260702.1"
+    "@cloudflare/workers-types": "npm:^5.20260703.1"
     "@hono/graphql-server": "npm:^0.7.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
@@ -2542,7 +2542,7 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260702.1"
+    "@cloudflare/workers-types": "npm:^5.20260703.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
@@ -2860,14 +2860,14 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260702.1"
+    "@cloudflare/workers-types": "npm:^5.20260703.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
     "@baeta/cache-cloudflare": "workspace:^"
     "@baeta/subscriptions-cloudflare": "workspace:^"
-    "@cloudflare/workers-types": ^4
+    "@cloudflare/workers-types": ^5.0.0
     graphql: ^16.6.0 || ^17.0.0
   peerDependenciesMeta:
     "@baeta/cache-cloudflare":
@@ -3010,12 +3010,12 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@cloudflare/workers-types": "npm:^4.20260702.1"
+    "@cloudflare/workers-types": "npm:^5.20260703.1"
     graphql: "npm:^16.14.2"
     graphql-ws: "catalog:prod"
     typescript: "catalog:dev"
   peerDependencies:
-    "@cloudflare/workers-types": ^4
+    "@cloudflare/workers-types": ^5.0.0
     graphql: ^16.6.0
   languageName: unknown
   linkType: soft
@@ -3510,10 +3510,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20260702.1":
-  version: 4.20260702.1
-  resolution: "@cloudflare/workers-types@npm:4.20260702.1"
-  checksum: 10c0/2dbd1d8d99285b49f90457321cc6f3668ac2fb89c9e24b36539e60f67925611078724093176bfbe06c8ab8d98eafd4902e4faa2e96a1378f96b14498c28ccdda
+"@cloudflare/workers-types@npm:^5.20260703.1":
+  version: 5.20260703.1
+  resolution: "@cloudflare/workers-types@npm:5.20260703.1"
+  checksum: 10c0/dd817e5083f5cbc296c2c691874df47138a00c63b55133b8c41fb4213c4f22ba284c8f9422dec48dfbec186b0bd87e1b12737dab99e4fa732249d9c6c8c7c391
   languageName: node
   linkType: hard
 

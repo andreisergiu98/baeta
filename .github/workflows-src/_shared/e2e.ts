@@ -17,7 +17,6 @@ export function e2e(options: {
 			setupNode({
 				node: options.node,
 				turboCache: options.turboCache,
-				enableNodeCompileCache: true,
 			}),
 		);
 

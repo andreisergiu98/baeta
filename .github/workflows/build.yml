@@ -352,8 +352,6 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-latest
-    env:
-      NODE_COMPILE_CACHE: .cache/node-compile
     strategy:
       matrix:
         node: ${{ fromJSON(github.event_name == 'pull_request' && '["22"]' ||
@@ -389,13 +387,6 @@ jobs:
           path: .cache/turbo
           key: turbo-e2e-node-${{ matrix.node }}-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-e2e-node-${{ matrix.node }}-${{ runner.os }}-
-      - name: Setup Node Compile Cache
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-        with:
-          path: .cache/node-compile
-          key: node-compile-e2e-node-${{ matrix.node }}-${{ runner.os }}-${{
-            hashFiles('**/yarn.lock') }}
-          restore-keys: node-compile-e2e-node-${{ matrix.node }}-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -417,8 +408,6 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-latest
-    env:
-      NODE_COMPILE_CACHE: .cache/node-compile
     strategy:
       matrix:
         graphql:
@@ -453,13 +442,6 @@ jobs:
           key: turbo-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-${{ github.sha
             }}
           restore-keys: turbo-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-
-      - name: Setup Node Compile Cache
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-        with:
-          path: .cache/node-compile
-          key: node-compile-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-${{
-            hashFiles('**/yarn.lock') }}
-          restore-keys: node-compile-e2e-graphql-${{ matrix.graphql }}-24-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"
@@ -482,8 +464,6 @@ jobs:
     needs:
       - build
     runs-on: ${{ matrix.platform }}
-    env:
-      NODE_COMPILE_CACHE: .cache/node-compile
     strategy:
       matrix:
         platform:
@@ -517,13 +497,6 @@ jobs:
           path: .cache/turbo
           key: turbo-e2e-platform-26-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-e2e-platform-26-${{ runner.os }}-
-      - name: Setup Node Compile Cache
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-        with:
-          path: .cache/node-compile
-          key: node-compile-e2e-platform-26-${{ runner.os }}-${{ hashFiles('**/yarn.lock')
-            }}
-          restore-keys: node-compile-e2e-platform-26-${{ runner.os }}-
       - run: yarn install --immutable
         env:
           YARN_ENABLE_GLOBAL_CACHE: "false"

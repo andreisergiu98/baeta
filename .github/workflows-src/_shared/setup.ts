@@ -24,21 +24,18 @@ export type TurboCache = (typeof turboCaches)[keyof typeof turboCaches];
 
 export const DEFAULT_NODE = createNodeVersion('24');
 
-const NODE_COMPILE_CACHE_DIR = '.cache/node-compile';
-
 interface SetupNodeOptions {
 	node?: NodeVersion<string | Expression<string>>;
 	turboCache?: string | Expression<string>;
 	disableYarnCache?: boolean;
 	skipInstall?: boolean;
 	enableYarnHardenedMode?: boolean;
-	enableNodeCompileCache?: boolean;
 }
 
 export function setupNode(options: SetupNodeOptions = {}): Steps {
 	const node = options.node ?? DEFAULT_NODE;
 
-	return ({ run, add, setEnv }) => {
+	return ({ run, add }) => {
 		add(useCheckout());
 
 		add(
@@ -76,18 +73,6 @@ export function setupNode(options: SetupNodeOptions = {}): Steps {
 					paths: ['.cache/turbo'],
 					key: interpolate`turbo-${options.turboCache}-${node.node}-${runner.os}-${github.sha}`,
 					restoreKeys: [interpolate`turbo-${options.turboCache}-${node.node}-${runner.os}-`],
-				}),
-			);
-		}
-
-		if (options.turboCache && options.enableNodeCompileCache) {
-			setEnv('NODE_COMPILE_CACHE', NODE_COMPILE_CACHE_DIR);
-			add(
-				useCache({
-					stepName: 'Setup Node Compile Cache',
-					paths: [NODE_COMPILE_CACHE_DIR],
-					key: interpolate`node-compile-${options.turboCache}-${node.node}-${runner.os}-${hashFiles('**/yarn.lock')}`,
-					restoreKeys: [interpolate`node-compile-${options.turboCache}-${node.node}-${runner.os}-`],
 				}),
 			);
 		}

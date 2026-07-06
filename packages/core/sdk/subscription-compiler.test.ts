@@ -14,11 +14,11 @@ test('SubscriptionCompiler should be created correctly', (t) => {
 test('SubscriptionCompiler should add subscribe middleware correctly', async (t) => {
 	let i = 0;
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	fieldCompiler.addSubscribeMiddleware((next) => {
+	fieldCompiler.subscribe.addMiddleware((next) => {
 		t.is(i++, 0);
 		return next();
 	});
-	fieldCompiler.addSubscribeMiddleware(async (next) => {
+	fieldCompiler.subscribe.addMiddleware(async (next) => {
 		const generator = await next();
 		t.is(i++, 1);
 		return generator;
@@ -32,11 +32,11 @@ test('SubscriptionCompiler should add subscribe middleware correctly', async (t)
 test('SubscriptionCompiler should add initial subscribe middleware correctly', async (t) => {
 	let i = 0;
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	fieldCompiler.addSubscribeMiddleware((next) => {
+	fieldCompiler.subscribe.addMiddleware((next) => {
 		t.is(i++, 1);
 		return next();
 	});
-	fieldCompiler.addTopLevelSubscribeMiddleware((next) => {
+	fieldCompiler.subscribe.addTopLevelMiddleware((next) => {
 		t.is(i++, 0);
 		return next();
 	});
@@ -50,11 +50,11 @@ test('SubscriptionCompiler should add initial subscribe middleware correctly', a
 test('SubscriptionCompiler should use type subscribe middlewares correctly', async (t) => {
 	let i = 0;
 	const fieldCompiler = mockSubscriptionFieldCompiler();
-	fieldCompiler.addTopLevelSubscribeMiddleware((next) => {
+	fieldCompiler.subscribe.addTopLevelMiddleware((next) => {
 		t.is(i++, 0);
 		return next();
 	});
-	fieldCompiler.addSubscribeMiddleware(async (next) => {
+	fieldCompiler.subscribe.addMiddleware(async (next) => {
 		t.is(i++, 2);
 		return await next();
 	});
@@ -76,10 +76,10 @@ test('SubscriptionCompiler should read subscribe plugin state correctly', (t) =>
 		subscribeState: new Map([[plugin1.key, 1]]),
 	});
 
-	t.is(fieldCompiler.hasPluginSubscribeState(plugin1), true);
-	t.is(fieldCompiler.getPluginSubscribeState(plugin1), 1);
-	t.is(fieldCompiler.hasPluginSubscribeState(plugin2), false);
-	t.is(fieldCompiler.getPluginSubscribeState(plugin2), undefined);
+	t.is(fieldCompiler.subscribe.hasPluginState(plugin1), true);
+	t.is(fieldCompiler.subscribe.getPluginState(plugin1), 1);
+	t.is(fieldCompiler.subscribe.hasPluginState(plugin2), false);
+	t.is(fieldCompiler.subscribe.getPluginState(plugin2), undefined);
 });
 
 test('SubscriptionCompiler should read resolve plugin state correctly', (t) => {
@@ -89,8 +89,8 @@ test('SubscriptionCompiler should read resolve plugin state correctly', (t) => {
 		resolveState: new Map([[plugin1.key, 1]]),
 	});
 
-	t.is(fieldCompiler.hasPluginResolveState(plugin1), true);
-	t.is(fieldCompiler.getPluginResolveState(plugin1), 1);
-	t.is(fieldCompiler.hasPluginResolveState(plugin2), false);
-	t.is(fieldCompiler.getPluginResolveState(plugin2), undefined);
+	t.is(fieldCompiler.resolve.hasPluginState(plugin1), true);
+	t.is(fieldCompiler.resolve.getPluginState(plugin1), 1);
+	t.is(fieldCompiler.resolve.hasPluginState(plugin2), false);
+	t.is(fieldCompiler.resolve.getPluginState(plugin2), undefined);
 });

@@ -77,7 +77,7 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 					const fieldState =
 						fieldCompiler.kind === 'Field'
 							? fieldCompiler.getPluginState(id)
-							: fieldCompiler.getPluginSubscribeState(id);
+							: fieldCompiler.subscribe.getPluginState(id);
 					if (!fieldState) continue;
 					registerFieldSettingsSetter(
 						typeCompiler.type,
@@ -102,7 +102,7 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 					if (fieldCompiler.kind === 'Field') {
 						fieldCompiler.addTopLevelMiddleware(middleware);
 					} else {
-						fieldCompiler.addTopLevelSubscribeMiddleware(middleware);
+						fieldCompiler.subscribe.addTopLevelMiddleware(middleware);
 					}
 				}
 			}

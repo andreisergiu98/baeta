@@ -1,8 +1,8 @@
 import type { GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
-import type { PluginId } from './app-plugin.ts';
+import type { UsePlugin } from './app-plugin.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
-import type { makePluginSymbol, makeSymbol } from './symbols.ts';
+import type { makeSymbol } from './symbols.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompilerFactory, TypeMethods } from './type-methods.ts';
 
@@ -38,13 +38,16 @@ export type ModuleCompilerFactory<
 	[makeSymbol]: () => ModuleCompiler<Context, Info, TypesResolvers>;
 };
 
-export type ModuleUsePlugin<Context, Info, State = unknown> = {
-	[makePluginSymbol]: (options: { name: string; kind: 'module' }) => {
-		id: PluginId<State>;
-		middleware?: Middleware<unknown, unknown, Context, unknown, Info>;
-		state?: State;
-	};
-};
+export type ModuleUsePlugin<Context, Info, State = unknown> = UsePlugin<
+	'module',
+	unknown,
+	unknown,
+	Context,
+	unknown,
+	Info,
+	{},
+	State
+>;
 
 export type ModuleUseInput<Context, Info> =
 	| Middleware<unknown, unknown, Context, unknown, Info>

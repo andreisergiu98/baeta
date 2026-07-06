@@ -4,6 +4,7 @@ import {
 	mockModuleBuilder,
 	mockSchemaForModuleBuilder,
 } from './__test__/module-mocks.ts';
+import { createAppPluginId } from './app-plugin.ts';
 import { makeSymbol } from './symbols.ts';
 
 test('ModuleBuilder should be created correctly', async (t) => {
@@ -94,18 +95,23 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 		},
 	]);
 
-	const stateKey = Symbol('state');
-	editableModule.mergeState(new Map([[stateKey, 'merged']]));
+	const statePlugin = createAppPluginId<string>('state');
+	editableModule.setPluginState(statePlugin, 'edited');
+
+	t.is(editableModule.hasPluginState(statePlugin), true);
+	t.is(editableModule.getPluginState(statePlugin), 'edited');
 
 	const editedModule = editableModule.commit().toMethods();
 	const editedSchema = editedModule.$schema(mockSchemaForModuleBuilder(editedModule));
 	const editedCompiler = editedSchema[makeSymbol]();
-	t.is(editedCompiler.useState<string>(stateKey).get(), 'merged');
+	t.is(editedCompiler.getPluginState(statePlugin), 'edited');
 
-	const isolatedKey = Symbol('isolated');
+	const isolatedPlugin = createAppPluginId<string>('isolated');
 	const otherEdit = mockModuleBuilder().edit();
-	otherEdit.mergeState(new Map([[isolatedKey, 'other']]));
-	t.is(editedCompiler.useState<string>(isolatedKey).get(), undefined);
+	otherEdit.setPluginState(isolatedPlugin, 'other');
+	otherEdit.unsetPluginState(isolatedPlugin);
+	t.is(otherEdit.hasPluginState(isolatedPlugin), false);
+	t.is(editedCompiler.getPluginState(isolatedPlugin), undefined);
 
 	const finalSchema = editedModule
 		.$directive((schema) => {

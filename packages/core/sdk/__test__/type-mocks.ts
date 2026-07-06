@@ -9,6 +9,7 @@ import type { MockArgs, MockContext, MockInfo, MockResult, MockSource } from './
 
 interface MockTypeOptions {
 	type?: string;
+	state?: Map<symbol, unknown>;
 }
 
 export type MockTypeBuilders = {
@@ -35,7 +36,7 @@ export function mockTypeMiddleware(
 	>;
 }
 
-export function mockTypeBuilder({ type = 'Type' }: MockTypeOptions = {}) {
+export function mockTypeBuilder({ type = 'Type', state = new Map() }: MockTypeOptions = {}) {
 	return new TypeBuilder<
 		MockSource,
 		MockContext,
@@ -48,16 +49,16 @@ export function mockTypeBuilder({ type = 'Type' }: MockTypeOptions = {}) {
 			field1: mockFieldBuilder({ field: 'field1', type }).toMethods(),
 			field2: mockFieldBuilder({ field: 'field2', type }).toMethods(),
 		},
-		state: new Map(),
+		state,
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	});
 }
 
-export function mockTypeCompiler({ type = 'Type' }: MockTypeOptions = {}) {
+export function mockTypeCompiler({ type = 'Type', state = new Map() }: MockTypeOptions = {}) {
 	return new TypeCompiler<MockSource, MockContext, MockInfo>({
 		type,
-		state: new Map(),
+		state,
 		middlewares: [],
 		requiredPluginIds: new Set(),
 		fieldsMap: {

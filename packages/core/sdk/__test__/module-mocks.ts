@@ -75,12 +75,13 @@ export function mockSchemaForModuleBuilder(
 export function mockModuleCompiler(
 	scalars: Record<string, GraphQLScalarType> = {},
 	defaultResolvers: IResolvers = {},
+	state: Map<symbol, unknown> = new Map(),
 ) {
 	const type1 = mockTypeBuilder({ type: 'Type1' }).toMethods();
 	const type2 = mockTypeBuilder({ type: 'Type2' }).toMethods();
 	return new ModuleCompiler<MockContext, MockInfo>({
 		name: 'module',
-		state: new Map(),
+		state,
 		typesMap: {
 			...scalars,
 			Type1: type1.$fields({

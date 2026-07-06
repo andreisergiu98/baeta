@@ -1,8 +1,8 @@
 import type { Middleware } from '../lib/middleware.ts';
-import type { PluginId } from './app-plugin.ts';
+import type { UsePlugin } from './app-plugin.ts';
 import type { Field, FieldMethods } from './field-methods.ts';
 import type { SubscriptionField, SubscriptionMethods } from './subscription-methods.ts';
-import type { makePluginSymbol, makeSymbol } from './symbols.ts';
+import type { makeSymbol } from './symbols.ts';
 import type { TypeCompiler } from './type-compiler.ts';
 
 export type FieldsBuildersMap<Source, Context, Info> = Record<
@@ -50,13 +50,16 @@ export type TypeCompilerFactory<
 	[makeSymbol]: () => TypeCompiler<Source, Context, Info, FieldsResolvers>;
 };
 
-export type TypeUsePlugin<Source, Context, Info, State = unknown> = {
-	[makePluginSymbol]: (options: { type: string; kind: 'type' }) => {
-		id: PluginId<State>;
-		middleware?: Middleware<unknown, Source, Context, unknown, Info>;
-		state?: State;
-	};
-};
+export type TypeUsePlugin<Source, Context, Info, State = unknown> = UsePlugin<
+	'type',
+	unknown,
+	Source,
+	Context,
+	unknown,
+	Info,
+	{ type: string },
+	State
+>;
 
 export type TypeUseInput<Source, Context, Info> =
 	| Middleware<unknown, Source, Context, unknown, Info>

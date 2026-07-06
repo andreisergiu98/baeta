@@ -1,4 +1,6 @@
+import type { Middleware } from '../lib/middleware.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
+import type { makePluginSymbol } from './symbols.ts';
 
 export interface AppPlugin<State = unknown> {
 	/**
@@ -28,3 +30,37 @@ export function createAppPluginId<State = unknown>(name: string): PluginId<State
 		definedIn: new Error(`Plugin "${name}" is not registered in the application.`),
 	};
 }
+
+export type UsePlugin<
+	Kind extends 'field' | 'type' | 'module' | 'subscription',
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Extra,
+	State = unknown,
+> = {
+	[makePluginSymbol]: {
+		id: PluginId<State>;
+		make: (
+			session: MakePluginSession<Result, Source, Context, Args, Info>,
+			metadata: { kind: Kind } & Extra,
+		) => void;
+	};
+};
+
+export type MakePluginSession<Result, Source, Context, Args, Info> = {
+	addMiddleware: (
+		middleware: Middleware<Result, Source, Context, Args, Info>,
+	) => MakePluginSession<Result, Source, Context, Args, Info>;
+	hasPluginState: (pluginId: PluginId) => boolean;
+	getPluginState: <T>(pluginId: PluginId<T>) => Readonly<T> | undefined;
+	setPluginState: <T>(
+		pluginId: PluginId<T>,
+		value: Readonly<T>,
+	) => MakePluginSession<Result, Source, Context, Args, Info>;
+	unsetPluginState: <T>(
+		pluginId: PluginId<T>,
+	) => MakePluginSession<Result, Source, Context, Args, Info>;
+};

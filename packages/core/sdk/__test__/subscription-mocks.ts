@@ -19,6 +19,11 @@ interface MockSubscriptionFieldOptions {
 	field?: string;
 }
 
+interface MockSubscriptionFieldCompilerOptions extends MockSubscriptionFieldOptions {
+	subscribeState?: Map<symbol, unknown>;
+	resolveState?: Map<symbol, unknown>;
+}
+
 type SubscriptionResolver = {
 	subscribe: (
 		source: MockSubscriptionSource,
@@ -80,7 +85,9 @@ export function mockSubscriptionFieldResolver(
 
 export function mockSubscriptionFieldCompiler({
 	field = 'field',
-}: MockSubscriptionFieldOptions = {}) {
+	subscribeState = new Map(),
+	resolveState = new Map(),
+}: MockSubscriptionFieldCompilerOptions = {}) {
 	return new SubscriptionCompiler<
 		MockResult,
 		{ value: MockResult },
@@ -90,10 +97,10 @@ export function mockSubscriptionFieldCompiler({
 		MockInfo
 	>({
 		field,
-		subscribeState: new Map(),
+		subscribeState,
 		subscribeMiddlewares: [],
 		subscribe: () => mockSubscriptionGenerator(1),
-		resolveState: new Map(),
+		resolveState,
 		resolveMiddlewares: [],
 		requiredPluginIds: new Set(),
 		resolver: (params) => params.source.value,

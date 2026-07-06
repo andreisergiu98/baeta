@@ -14,6 +14,7 @@ import {
 	type MockSource,
 	mockInfo,
 } from './__test__/mocks.ts';
+import { createAppPluginId } from './app-plugin.ts';
 import { createFieldBuilder } from './field.ts';
 import { makeSymbol } from './symbols.ts';
 
@@ -206,24 +207,31 @@ test('FieldBuilder edit should handle addMiddleware correctly', async (t) => {
 	t.is(i, 2);
 });
 
-test('FieldBuilder edit should handle mergeState correctly', (t) => {
-	const key1 = Symbol('1');
-	const key2 = Symbol('2');
+test('FieldBuilder edit should handle plugin state correctly', (t) => {
+	const plugin1 = createAppPluginId<number>('1');
+	const plugin2 = createAppPluginId<number>('2');
 
 	const edit1 = mockFieldBuilder().edit();
-	edit1.mergeState(new Map([[key1, 1]]));
-	edit1.mergeState(new Map([[key2, 2]]));
+	edit1.setPluginState(plugin1, 1);
+	edit1.setPluginState(plugin2, 2);
+
+	t.is(edit1.hasPluginState(plugin1), true);
+	t.is(edit1.getPluginState(plugin1), 1);
 
 	const edit2 = mockFieldBuilder().edit();
-	edit2.mergeState(new Map([[key1, 99]]));
+	edit2.setPluginState(plugin1, 99);
+	edit2.setPluginState(plugin2, 2);
+	edit2.unsetPluginState(plugin2);
+
+	t.is(edit2.hasPluginState(plugin2), false);
 
 	const compiler1 = edit1.commitToMethods().key('name')[makeSymbol]();
 	const compiler2 = edit2.commitToMethods().key('name')[makeSymbol]();
 
-	t.is(compiler1.useState<number>(key1).get(), 1);
-	t.is(compiler1.useState<number>(key2).get(), 2);
-	t.is(compiler2.useState<number>(key1).get(), 99);
-	t.is(compiler2.useState<number>(key2).get(), undefined);
+	t.is(compiler1.getPluginState(plugin1), 1);
+	t.is(compiler1.getPluginState(plugin2), 2);
+	t.is(compiler2.getPluginState(plugin1), 99);
+	t.is(compiler2.getPluginState(plugin2), undefined);
 });
 
 test('FieldBuilder should assign parameters correctly', async (t) => {

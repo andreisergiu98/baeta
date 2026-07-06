@@ -1,7 +1,7 @@
 import test from '@baeta/testing';
 import { GraphQLScalarType } from 'graphql';
 import { executeMockedModuleResolvers, mockModuleCompiler } from './__test__/module-mocks.ts';
-import { testStoreLike } from './__test__/store-tests.ts';
+import { createAppPluginId } from './app-plugin.ts';
 
 test('ModuleCompiler should be created correctly', (t) => {
 	const moduleCompiler = mockModuleCompiler();
@@ -9,9 +9,15 @@ test('ModuleCompiler should be created correctly', (t) => {
 	t.is(moduleCompiler.types.length, 2);
 });
 
-test('ModuleCompiler should handle state correctly', (t) => {
-	const moduleCompiler = mockModuleCompiler();
-	testStoreLike(t, (key) => moduleCompiler.useState(key));
+test('ModuleCompiler should read plugin state correctly', (t) => {
+	const plugin1 = createAppPluginId<number>('1');
+	const plugin2 = createAppPluginId<number>('2');
+	const moduleCompiler = mockModuleCompiler({}, {}, new Map([[plugin1.key, 1]]));
+
+	t.is(moduleCompiler.hasPluginState(plugin1), true);
+	t.is(moduleCompiler.getPluginState(plugin1), 1);
+	t.is(moduleCompiler.hasPluginState(plugin2), false);
+	t.is(moduleCompiler.getPluginState(plugin2), undefined);
 });
 
 test('ModuleCompiler should handle addMiddleware correctly', async (t) => {

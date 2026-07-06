@@ -16,6 +16,7 @@ import {
 interface MockFieldOptions {
 	field?: string;
 	type?: string;
+	state?: Map<symbol, unknown>;
 }
 
 export function mockMiddleware(
@@ -32,21 +33,29 @@ export function mockMiddleware(
 	};
 }
 
-export function mockFieldBuilder({ field = 'field', type = 'Type' }: MockFieldOptions = {}) {
+export function mockFieldBuilder({
+	field = 'field',
+	type = 'Type',
+	state = new Map(),
+}: MockFieldOptions = {}) {
 	return new FieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		state: new Map(),
+		state,
 		middlewares: [],
 		requiredPluginIds: new Set(),
 	});
 }
 
-export function mockFieldCompiler({ field = 'field', type = 'Type' }: MockFieldOptions = {}) {
+export function mockFieldCompiler({
+	field = 'field',
+	type = 'Type',
+	state = new Map(),
+}: MockFieldOptions = {}) {
 	return new FieldCompiler<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		state: new Map(),
+		state,
 		middlewares: [],
 		requiredPluginIds: new Set(),
 		resolver: () => 'test',

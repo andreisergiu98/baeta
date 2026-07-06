@@ -45,12 +45,6 @@ interface AuthState {
 	hasAuth: true;
 }
 
-interface BuildContext {
-	type: string;
-	field?: string;
-	subscriptionFieldKind?: 'subscribe' | 'resolve';
-}
-
 /** Configuration options for Auth */
 export interface AuthOptions<Scopes extends ScopesShape, Grants extends string> {
 	/** Default authorization scopes for queries, mutations or subscriptions */
@@ -87,10 +81,27 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		buildMiddleware: (type: string) => Middleware<Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> => {
 		return {
-			[makePluginSymbol]: ({ type, field, subscriptionFieldKind }: BuildContext) => {
-				const middleware = buildMiddleware(type) as Middleware<any, Source, Context, any, Info>;
-				nameFunction(middleware, buildMiddlewareName(type, field, subscriptionFieldKind));
-				return { id, middleware, state: { hasAuth: true } };
+			[makePluginSymbol]: {
+				id,
+				make: (session, metadata) => {
+					const middleware = buildMiddleware(metadata.type) as Middleware<
+						any,
+						Source,
+						Context,
+						any,
+						Info
+					>;
+					nameFunction(
+						middleware,
+						buildMiddlewareName(
+							metadata.type,
+							metadata.kind !== 'type' ? metadata.field : undefined,
+							metadata.kind === 'subscription' ? metadata.phase : undefined,
+						),
+					);
+					session.setPluginState(id, { hasAuth: true });
+					session.addMiddleware(middleware);
+				},
 			},
 		};
 	};
@@ -141,7 +152,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 			for (const typeCompiler of iterateTypes(compilers)) {
 				if (!isOperationType(typeCompiler.type)) continue;
 				if (defaultScopes[typeCompiler.type] == null) continue;
-				if (hasAuth(typeCompiler.usePluginState(id).get())) continue;
+				if (hasAuth(typeCompiler.getPluginState(id))) continue;
 				for (const fieldCompiler of typeCompiler.fields) {
 					if (hasAuth(readFieldAuthState(fieldCompiler, id))) continue;
 					const middleware = createFallbackMiddleware(
@@ -177,9 +188,9 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 function buildMiddlewareName(
 	type: string,
 	field: string | undefined,
-	subscriptionFieldKind: 'subscribe' | 'resolve' | undefined,
+	subscriptionPhase: 'subscribe' | 'resolve' | undefined,
 ) {
-	if (field && subscriptionFieldKind) return `${type}.${field}.${subscriptionFieldKind}.$use.auth`;
+	if (field && subscriptionPhase) return `${type}.${field}.${subscriptionPhase}.$use.auth`;
 	if (field) return `${type}.${field}.$use.auth`;
 	return `${type}.$use.auth`;
 }
@@ -193,8 +204,8 @@ function readFieldAuthState(
 	pluginId: PluginId<AuthState>,
 ): AuthState | undefined {
 	return field.kind === 'Field'
-		? field.usePluginState(pluginId).get()
-		: field.useSubscribePluginState(pluginId).get();
+		? field.getPluginState(pluginId)
+		: field.getPluginSubscribeState(pluginId);
 }
 
 function* iterateTypes(compilers: ModuleCompiler[]) {

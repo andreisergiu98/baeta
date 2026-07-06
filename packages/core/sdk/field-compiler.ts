@@ -7,7 +7,7 @@ import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 export interface FieldCompilerOptions<Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	state: Map<symbol, unknown>;
+	state: ReadonlyMap<symbol, unknown>;
 	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	requiredPluginIds: Set<PluginId>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
@@ -17,7 +17,7 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 	readonly kind = 'Field';
 	readonly #type: string;
 	readonly #field: string;
-	readonly #state: Map<symbol, unknown>;
+	readonly #state: ReadonlyMap<symbol, unknown>;
 	readonly #middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #topLevelMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
@@ -49,14 +49,12 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 		this.#topLevelMiddlewares.push(middleware);
 	}
 
-	useState<T>(key: symbol) {
-		const get = () => this.#state.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#state.set(key, value);
-		return { get, set };
+	hasPluginState(pluginId: PluginId) {
+		return this.#state.has(pluginId.key);
 	}
 
-	usePluginState<State>(pluginId: PluginId<State>) {
-		return this.useState<State>(pluginId.key);
+	getPluginState<T>(pluginId: PluginId<T>): Readonly<T> | undefined {
+		return this.#state.get(pluginId.key) as Readonly<T> | undefined;
 	}
 
 	build(typeMiddlewares: Middleware<unknown, Source, Context, unknown, Info>[]) {

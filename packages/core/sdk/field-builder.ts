@@ -10,7 +10,7 @@ import { makePluginSymbol, makeSymbol } from './symbols.ts';
 export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	state: Map<symbol, Readonly<unknown>>;
+	state: ReadonlyMap<symbol, unknown>;
 	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	requiredPluginIds: Set<PluginId>;
 }
@@ -18,7 +18,7 @@ export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
 export class FieldBuilder<Result, Source, Context, Args, Info> {
 	readonly #type: string;
 	readonly #field: string;
-	readonly #state: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #state: ReadonlyMap<symbol, unknown>;
 	readonly #middlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #requiredPluginIds: ReadonlySet<PluginId>;
 
@@ -64,14 +64,15 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
-				draftState.set(pluginId.key, value as Readonly<unknown>);
+			hasPluginState: (pluginId: PluginId) => draftState.has(pluginId.key),
+			getPluginState: <T>(pluginId: PluginId<T>) =>
+				draftState.get(pluginId.key) as Readonly<T> | undefined,
+			setPluginState: <T>(pluginId: PluginId<T>, value: Readonly<T>) => {
+				draftState.set(pluginId.key, value);
 				return session;
 			},
-			mergeState: (state: Map<symbol, unknown>) => {
-				for (const [key, value] of state) {
-					draftState.set(key, value as Readonly<unknown>);
-				}
+			unsetPluginState: <T>(pluginId: PluginId<T>) => {
+				draftState.delete(pluginId.key);
 				return session;
 			},
 			commit: () =>
@@ -94,19 +95,13 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 					nameFunction(input, `${this.#type}.${this.#field}.use`);
 					return this.edit().addMiddleware(input).commitToMethods();
 				}
-				const result = input[makePluginSymbol]({
+				const plugin = input[makePluginSymbol];
+				const session = this.edit().addRequiredPluginId(plugin.id);
+				plugin.make(session, {
+					kind: 'field',
 					type: this.#type,
 					field: this.#field,
-					kind: 'field',
 				});
-				const session = this.edit().addRequiredPluginId(result.id);
-				if (result.middleware) {
-					nameFunction(result.middleware, `${this.#type}.${this.#field}.use`);
-					session.addMiddleware(result.middleware);
-				}
-				if (result.state) {
-					session.setPluginState(result.id, result.state);
-				}
 				return session.commitToMethods();
 			},
 			key: <K extends keyof Source>(key: K) => {
@@ -130,7 +125,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 interface FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	state: ReadonlyMap<symbol, Readonly<unknown>>;
+	state: ReadonlyMap<symbol, unknown>;
 	middlewares: ReadonlyArray<Middleware<Expected, Source, Context, Args, Info>>;
 	requiredPluginIds: ReadonlySet<PluginId>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;

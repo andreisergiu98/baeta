@@ -253,10 +253,10 @@ test('SubscriptionBuilder edit should handle plugin state correctly', (t) => {
 			.resolve((params) => params.source.value),
 	);
 
-	t.is(compiler1.getPluginSubscribeState(plugin1), 1);
-	t.is(compiler1.getPluginSubscribeState(plugin2), 2);
-	t.is(compiler2.getPluginSubscribeState(plugin1), 99);
-	t.is(compiler2.getPluginSubscribeState(plugin2), undefined);
+	t.is(compiler1.subscribe.getPluginState(plugin1), 1);
+	t.is(compiler1.subscribe.getPluginState(plugin2), 2);
+	t.is(compiler2.subscribe.getPluginState(plugin1), 99);
+	t.is(compiler2.subscribe.getPluginState(plugin2), undefined);
 });
 
 test('SubscriptionBuilder should assign parameters correctly', async (t) => {

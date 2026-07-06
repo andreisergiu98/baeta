@@ -169,7 +169,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 					if (fieldCompiler.kind === 'Field') {
 						fieldCompiler.addTopLevelMiddleware(middleware);
 					} else {
-						fieldCompiler.addTopLevelSubscribeMiddleware(middleware);
+						fieldCompiler.subscribe.addTopLevelMiddleware(middleware);
 					}
 				}
 			}
@@ -205,7 +205,7 @@ function readFieldAuthState(
 ): AuthState | undefined {
 	return field.kind === 'Field'
 		? field.getPluginState(pluginId)
-		: field.getPluginSubscribeState(pluginId);
+		: field.subscribe.getPluginState(pluginId);
 }
 
 function* iterateTypes(compilers: ModuleCompiler[]) {

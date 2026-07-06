@@ -56,41 +56,39 @@ export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, I
 		return this.#field;
 	}
 
-	hasPluginSubscribeState(pluginId: PluginId) {
-		return this.#subscribeState.has(pluginId.key);
-	}
+	readonly subscribe = {
+		addMiddleware: (
+			middleware: Middleware<Subscription<Source>, ParentSource, Context, Args, Info>,
+		) => {
+			this.#subscribeMiddlewares.push(middleware);
+		},
+		addTopLevelMiddleware: (
+			middleware: Middleware<Subscription<Source>, ParentSource, Context, Args, Info>,
+		) => {
+			this.#topLevelSubscribeMiddlewares.push(middleware);
+		},
+		hasPluginState: (pluginId: PluginId) => {
+			return this.#subscribeState.has(pluginId.key);
+		},
+		getPluginState: <T>(pluginId: PluginId<T>): Readonly<T> | undefined => {
+			return this.#subscribeState.get(pluginId.key) as Readonly<T> | undefined;
+		},
+	};
 
-	getPluginSubscribeState<T>(pluginId: PluginId<T>): Readonly<T> | undefined {
-		return this.#subscribeState.get(pluginId.key) as Readonly<T> | undefined;
-	}
-
-	hasPluginResolveState(pluginId: PluginId) {
-		return this.#resolveState.has(pluginId.key);
-	}
-
-	getPluginResolveState<T>(pluginId: PluginId<T>): Readonly<T> | undefined {
-		return this.#resolveState.get(pluginId.key) as Readonly<T> | undefined;
-	}
-
-	addSubscribeMiddleware(
-		middleware: Middleware<Subscription<Source>, ParentSource, Context, Args, Info>,
-	) {
-		this.#subscribeMiddlewares.push(middleware);
-	}
-
-	addTopLevelSubscribeMiddleware(
-		middleware: Middleware<Subscription<Source>, ParentSource, Context, Args, Info>,
-	) {
-		this.#topLevelSubscribeMiddlewares.push(middleware);
-	}
-
-	addResolveMiddleware(middleware: Middleware<Result, Source, Context, Args, Info>) {
-		this.#resolveMiddlewares.push(middleware);
-	}
-
-	addTopLevelResolveMiddleware(middleware: Middleware<Result, Source, Context, Args, Info>) {
-		this.#topLevelResolveMiddlewares.push(middleware);
-	}
+	readonly resolve = {
+		addMiddleware: (middleware: Middleware<Result, Source, Context, Args, Info>) => {
+			this.#resolveMiddlewares.push(middleware);
+		},
+		addTopLevelMiddleware: (middleware: Middleware<Result, Source, Context, Args, Info>) => {
+			this.#topLevelResolveMiddlewares.push(middleware);
+		},
+		hasPluginState: (pluginId: PluginId) => {
+			return this.#resolveState.has(pluginId.key);
+		},
+		getPluginState: <T>(pluginId: PluginId<T>): Readonly<T> | undefined => {
+			return this.#resolveState.get(pluginId.key) as Readonly<T> | undefined;
+		},
+	};
 
 	build(typeSubscribeMiddlewares: Middleware<unknown, ParentSource, Context, unknown, Info>[]) {
 		const allSubscribeMiddlewares = concatMiddlewares(

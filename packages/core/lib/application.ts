@@ -1,14 +1,11 @@
 import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
 import type { GraphQLSchema } from 'graphql';
 import type { AppPlugin, PluginId } from '../sdk/app-plugin.ts';
-import {
-	type ModuleCompiler,
-	type ModuleCompilerFactory,
-	type TypesResolversMap,
-	makeSymbol,
-	transformSchema,
-} from '../sdk/index.ts';
+import type { ModuleCompiler } from '../sdk/module-compiler.ts';
+import type { ModuleCompilerFactory, TypesResolversMap } from '../sdk/module-methods.ts';
 import { attachSchemaStates, type SetSchemaState } from '../sdk/schema-state.ts';
+import { makeSymbol } from '../sdk/symbols.ts';
+import { transformSchema } from '../sdk/transformer.ts';
 import { addValidationToSchema } from './input-directive/input-schema.ts';
 
 export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;

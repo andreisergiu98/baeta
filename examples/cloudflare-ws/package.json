@@ -42,7 +42,7 @@
     "@baeta/cli": "workspace:^",
     "@baeta/plugin-cloudflare": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^4.20260702.1",
+    "@cloudflare/workers-types": "^5.20260703.1",
     "@types/node": "catalog:dev",
     "miniflare": "^4.20260701.0",
     "typescript": "catalog:dev",

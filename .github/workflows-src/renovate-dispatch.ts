@@ -45,7 +45,8 @@ export default createWorkflow(({ setWorkflowName, addJob, addTrigger, when, setP
 			),
 		),
 		() => {
-			addJob('renovate-dispatch', ({ add }) => {
+			addJob('renovate-dispatch', ({ add, setTimeout }) => {
+				setTimeout(10);
 				add(
 					useGithubScript({
 						stepName: 'Dispatch Renovate',

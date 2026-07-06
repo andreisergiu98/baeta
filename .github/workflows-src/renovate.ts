@@ -61,7 +61,9 @@ export default createWorkflow(
 		const disableCache = eq(dispatch.inputs.cache, 'disabled');
 		const resetCache = eq(dispatch.inputs.cache, 'reset');
 
-		addJob('Renovate', ({ add, when, run }) => {
+		addJob('Renovate', ({ add, when, run, setTimeout }) => {
+			setTimeout(30);
+
 			const getToken = add(useBaetaBotToken());
 
 			add(

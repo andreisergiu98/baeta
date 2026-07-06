@@ -20,6 +20,7 @@ jobs:
   build:
     name: Check build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -61,6 +62,7 @@ jobs:
   types:
     name: Check types
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -95,6 +97,7 @@ jobs:
   lint:
     name: Check linting
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -129,6 +132,7 @@ jobs:
   formatting:
     name: Check formatting
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -157,6 +161,7 @@ jobs:
   dependencies:
     name: Check dependencies
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -191,6 +196,7 @@ jobs:
   constraints:
     name: Check package constraints
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -219,6 +225,7 @@ jobs:
   yarn-dedupe:
     name: Check yarn dedupe
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -247,6 +254,7 @@ jobs:
   build-examples:
     name: Check examples
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -282,6 +290,7 @@ jobs:
   tests:
     name: Check tests - Node ${{ matrix.node }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       matrix:
         node: ${{ fromJSON(github.event_name == 'pull_request' && '["22"]' ||
@@ -352,6 +361,7 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       matrix:
         node: ${{ fromJSON(github.event_name == 'pull_request' && '["22"]' ||
@@ -408,6 +418,7 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       matrix:
         graphql:
@@ -464,6 +475,7 @@ jobs:
     needs:
       - build
     runs-on: ${{ matrix.platform }}
+    timeout-minutes: 10
     strategy:
       matrix:
         platform:
@@ -531,6 +543,7 @@ jobs:
     if: ${{ (github.event_name == 'push') && (((github.event.ref ==
       'refs/heads/main') || (github.event.ref == 'refs/heads/next')) &&
       (github.repository == 'andreisergiu98/baeta')) }}
+    timeout-minutes: 30
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -614,6 +627,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ (github.event_name == 'workflow_dispatch') && (github.repository ==
       'andreisergiu98/baeta') }}
+    timeout-minutes: 30
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0

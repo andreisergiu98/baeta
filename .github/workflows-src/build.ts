@@ -51,8 +51,9 @@ export default createWorkflow(
 			cancelInProgress: true,
 		});
 
-		const buildJob = addJob('build', ({ setName, add, run }) => {
+		const buildJob = addJob('build', ({ setName, setTimeout, add, run }) => {
 			setName('Check build');
+			setTimeout(10);
 			add(setupNode({ turboCache: turboCaches.build }));
 			run('yarn build');
 			add(
@@ -66,14 +67,16 @@ export default createWorkflow(
 			);
 		});
 
-		const typesJob = addJob('types', ({ setName, add, run }) => {
+		const typesJob = addJob('types', ({ setName, setTimeout, add, run }) => {
 			setName('Check types');
+			setTimeout(10);
 			add(setupNode({ turboCache: turboCaches.types }));
 			run('yarn check:types');
 		});
 
-		const lintJob = addJob('lint', ({ setName, add, run }) => {
+		const lintJob = addJob('lint', ({ setName, setTimeout, add, run }) => {
 			setName('Check linting');
+			setTimeout(10);
 			add(setupNode());
 			add(
 				useCache({
@@ -86,38 +89,43 @@ export default createWorkflow(
 			run('yarn check:linting');
 		});
 
-		addJob('formatting', ({ setName, add, run }) => {
+		addJob('formatting', ({ setName, setTimeout, add, run }) => {
 			setName('Check formatting');
+			setTimeout(10);
 			add(setupNode());
 			run('yarn check:formatting');
 		});
 
-		const depsJob = addJob('dependencies', ({ setName, add, run }) => {
+		const depsJob = addJob('dependencies', ({ setName, setTimeout, add, run }) => {
 			setName('Check dependencies');
+			setTimeout(10);
 			add(setupNode({ turboCache: turboCaches.deps }));
 			run('yarn check:deps');
 		});
 
-		const constraintsJob = addJob('constraints', ({ setName, add, run }) => {
+		const constraintsJob = addJob('constraints', ({ setName, setTimeout, add, run }) => {
 			setName('Check package constraints');
+			setTimeout(10);
 			add(setupNode());
 			run('yarn check:constraints');
 		});
 
-		const lockfileJob = addJob('yarn-dedupe', ({ setName, add, run }) => {
+		const lockfileJob = addJob('yarn-dedupe', ({ setName, setTimeout, add, run }) => {
 			setName('Check yarn dedupe');
+			setTimeout(10);
 			add(setupNode({ enableYarnHardenedMode: true }));
 			run('yarn dedupe --check');
 		});
 
-		const buildExamplesJob = addJob('build-examples', ({ setName, add, run }) => {
+		const buildExamplesJob = addJob('build-examples', ({ setName, setTimeout, add, run }) => {
 			setName('Check examples');
+			setTimeout(10);
 			add(setupNode({ turboCache: turboCaches.examples }));
 			run('yarn examples:build');
 			run('yarn examples:types');
 		});
 
-		const testsJob = addJob('tests', ({ setName, add, run }) => {
+		const testsJob = addJob('tests', ({ setName, setTimeout, add, run }) => {
 			const matrix = add(
 				setNodeBuildMatrix(
 					{
@@ -128,6 +136,7 @@ export default createWorkflow(
 				),
 			);
 			setName(`Check tests - Node ${matrix.node}`);
+			setTimeout(10);
 			add(redisService(65535));
 			add(valkeyService(65534));
 			add(redisHttpService(60080));
@@ -135,7 +144,7 @@ export default createWorkflow(
 			run('yarn check:tests');
 		});
 
-		const e2eNodeJob = addJob('e2e-node', ({ setName, add }) => {
+		const e2eNodeJob = addJob('e2e-node', ({ setName, setTimeout, add }) => {
 			const matrix = add(
 				setNodeBuildMatrix(
 					{
@@ -146,6 +155,7 @@ export default createWorkflow(
 				),
 			);
 			setName(`Check e2e tests - Node ${matrix.node}`);
+			setTimeout(10);
 			add(
 				e2e({
 					buildJob,
@@ -155,11 +165,12 @@ export default createWorkflow(
 			);
 		});
 
-		const e2eGraphqlJob = addJob('e2e-graphql', ({ setName, add }) => {
+		const e2eGraphqlJob = addJob('e2e-graphql', ({ setName, setTimeout, add }) => {
 			const matrix = add(({ setBuildMatrix }) =>
 				setBuildMatrix({ graphql: E2E_GRAPHQL_VERSIONS }, { failFast: false }),
 			);
 			setName(`Check e2e tests - GraphQL ${matrix.graphql}`);
+			setTimeout(10);
 			add(
 				e2e({
 					buildJob,
@@ -171,7 +182,7 @@ export default createWorkflow(
 
 		const e2ePlatformJob = addJob(
 			'e2e-platform',
-			({ setName, add, setBuildMatrix, setMachineType }) => {
+			({ setName, setTimeout, add, setBuildMatrix, setMachineType }) => {
 				const matrix = setBuildMatrix(
 					{
 						platform: E2E_PLATFORMS,
@@ -182,6 +193,7 @@ export default createWorkflow(
 				);
 				setMachineType(`${matrix.platform}`);
 				setName(`Check e2e tests - ${matrix.platform}`);
+				setTimeout(10);
 				add(
 					e2e({
 						buildJob,
@@ -215,7 +227,16 @@ export default createWorkflow(
 				() => {
 					addJob(
 						'publish',
-						({ setName, add, run, when, addDependencies, setPermissions, setConcurrency }) => {
+						({
+							setName,
+							setTimeout,
+							add,
+							run,
+							when,
+							addDependencies,
+							setPermissions,
+							setConcurrency,
+						}) => {
 							setConcurrency({
 								group: 'publish-packages',
 								cancelInProgress: false,
@@ -227,6 +248,7 @@ export default createWorkflow(
 							});
 							addDependencies(...releaseDependencies);
 							setName('Publish packages or open PR');
+							setTimeout(30);
 							add(setupNode({ turboCache: turboCaches.build }));
 
 							const branchTip = run<{ isTip: boolean }>(
@@ -265,7 +287,16 @@ export default createWorkflow(
 			when(eq(github.repository, 'andreisergiu98/baeta'), () => {
 				addJob(
 					'publish-snapshot',
-					({ setName, setPermissions, setConcurrency, add, run, addDependencies, when }) => {
+					({
+						setName,
+						setTimeout,
+						setPermissions,
+						setConcurrency,
+						add,
+						run,
+						addDependencies,
+						when,
+					}) => {
 						setConcurrency({
 							group: interpolate`${github.workflow}-${github.ref}-snapshots`,
 							cancelInProgress: false,
@@ -275,6 +306,7 @@ export default createWorkflow(
 						});
 						addDependencies(...releaseDependencies);
 						setName('Publish snapshot packages');
+						setTimeout(30);
 						add(setupNode({ turboCache: turboCaches.build }));
 						const prIdJob = run<{ pr: number }>(
 							'Get PR number',

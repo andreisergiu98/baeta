@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ !((github.repository == 'andreisergiu98/baeta') && ((github.event_name
       == 'push') || (github.event_name == 'workflow_dispatch'))) }}
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -54,6 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ (github.repository == 'andreisergiu98/baeta') && ((github.event_name ==
       'push') || (github.event_name == 'workflow_dispatch')) }}
+    timeout-minutes: 10
     steps:
       - name: Git Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0

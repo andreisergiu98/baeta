@@ -31,6 +31,7 @@ jobs:
       == 'pull_request_target') && startsWith(github.head_ref, 'renovate/') &&
       ((github.event.pull_request.user.login == 'baeta-bot[bot]') &&
       (github.event.sender.login != 'baeta-bot[bot]'))) }}
+    timeout-minutes: 10
     steps:
       - name: Dispatch Renovate
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3

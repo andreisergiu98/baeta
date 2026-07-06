@@ -26,13 +26,15 @@ export default createWorkflow(({ setWorkflowName, setConcurrency, addTrigger, ad
 	);
 
 	when(not(isReleaseEvent), () => {
-		addJob('build', ({ add }) => {
+		addJob('build', ({ add, setTimeout }) => {
+			setTimeout(10);
 			add(buildWebsite(false));
 		});
 	});
 
 	when(isReleaseEvent, () => {
-		addJob('release', ({ add }) => {
+		addJob('release', ({ add, setTimeout }) => {
+			setTimeout(10);
 			add(buildWebsite(true));
 		});
 	});

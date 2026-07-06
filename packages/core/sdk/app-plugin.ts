@@ -1,8 +1,9 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
+import type { SetSchemaState } from './schema-state.ts';
 import type { makePluginSymbol } from './symbols.ts';
 
-export interface AppPlugin<State = unknown> {
+export interface AppPlugin<State = unknown, SchemaState = undefined> {
 	/**
 	 * Unique id of the plugin
 	 */
@@ -11,7 +12,11 @@ export interface AppPlugin<State = unknown> {
 	/**
 	 * Mutate function that receives the list of module compilers before they are built. This allows the plugin to modify the module compilers, for example by adding middlewares or transformers.
 	 */
-	mutate: (compilers: ModuleCompiler[]) => void;
+	mutate: (
+		compilers: ModuleCompiler[],
+	) => SchemaState extends undefined
+		? { schemaState?: SetSchemaState<SchemaState> } | undefined
+		: { schemaState: SetSchemaState<SchemaState> };
 }
 
 const stateTypeSymbol = Symbol.for('@baeta/core/app-plugin/state-type');

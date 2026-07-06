@@ -21,3 +21,4 @@ export * from './type-builder.ts';
 export * from './type-compiler.ts';
 export * from './type-methods.ts';
 export * from './symbols.ts';
+export * from './schema-state.ts';

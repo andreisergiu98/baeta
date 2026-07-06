@@ -8,6 +8,7 @@ import {
 	makeSymbol,
 	transformSchema,
 } from '../sdk/index.ts';
+import { attachSchemaStates, type SetSchemaState } from '../sdk/schema-state.ts';
 import { addValidationToSchema } from './input-directive/input-schema.ts';
 
 export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
@@ -36,7 +37,7 @@ export interface Options<Context, Info> {
 	/**
 	 * Optional array of plugins to extend the functionality of the application.
 	 */
-	plugins?: AppPlugin[];
+	plugins?: AppPlugin<any, any>[];
 
 	/**
 	 * Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
@@ -68,10 +69,14 @@ export interface Options<Context, Info> {
  * ```
  */
 export function createApplication<Context, Info>(options: Options<Context, Info>) {
-	const { typeDefs, resolvers, transformers } = compileModules(options.modules, options.plugins);
+	const { typeDefs, resolvers, transformers, schemaStates } = compileModules(
+		options.modules,
+		options.plugins,
+	);
 	const buildSchemaFn = options.buildSchema ?? buildSchema;
 	let schema = buildSchemaFn({ typeDefs, resolvers, options: options.executableSchemaOptions });
 	schema = transformSchema(schema, transformers);
+	schema = attachSchemaStates(schema, schemaStates);
 	schema = addValidationToSchema(schema);
 	return {
 		schema,
@@ -94,16 +99,20 @@ function buildSchema(options: BuildSchemaOptions) {
 
 function compileModules<Context, Info>(
 	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>,
-	plugins: AppPlugin[] = [],
+	plugins: AppPlugin<any, any>[] = [],
 ) {
 	if (modules.length === 0) {
 		throw new Error('Cannot create schema without modules.');
 	}
 	const moduleCompilers = modules.map((module) => module[makeSymbol]());
 	const registeredPluginIds = new Set<PluginId>();
+	const schemaStates: SetSchemaState[] = [];
 	for (const plugin of plugins) {
 		registeredPluginIds.add(plugin.id);
-		plugin.mutate(moduleCompilers as ModuleCompiler[]);
+		const result = plugin.mutate(moduleCompilers as ModuleCompiler[]);
+		if (result?.schemaState) {
+			schemaStates.push(result.schemaState);
+		}
 	}
 	const builtModules = moduleCompilers.map((module) => module.build());
 	const typeDefs = builtModules.map((m) => m.typedef);
@@ -127,5 +136,6 @@ function compileModules<Context, Info>(
 		typeDefs,
 		resolvers,
 		transformers,
+		schemaStates,
 	};
 }

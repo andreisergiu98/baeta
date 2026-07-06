@@ -14,7 +14,7 @@ export interface ModuleCompilerOptions<
 	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
 > {
 	name: string;
-	state: Map<symbol, unknown>;
+	state: ReadonlyMap<symbol, unknown>;
 	middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
 	typesMap: TypesResolvers;
 	typedef: Readonly<DocumentNode>;
@@ -30,7 +30,7 @@ export class ModuleCompiler<
 > {
 	readonly kind = 'Module';
 	readonly #name: string;
-	readonly #state: Map<symbol, unknown>;
+	readonly #state: ReadonlyMap<symbol, unknown>;
 	readonly #middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
 	readonly #types: ReadonlyArray<
 		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
@@ -66,14 +66,12 @@ export class ModuleCompiler<
 		this.#middlewares.push(middleware);
 	}
 
-	useState<T>(key: symbol) {
-		const get = () => this.#state.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#state.set(key, value);
-		return { get, set };
+	hasPluginState(pluginId: PluginId) {
+		return this.#state.has(pluginId.key);
 	}
 
-	usePluginState<T>(pluginId: PluginId<T>) {
-		return this.useState<T>(pluginId.key);
+	getPluginState<T>(pluginId: PluginId<T>): Readonly<T> | undefined {
+		return this.#state.get(pluginId.key) as Readonly<T> | undefined;
 	}
 
 	build() {

@@ -1,9 +1,9 @@
 import test from '@baeta/testing';
-import { testStoreLike } from './__test__/store-tests.ts';
 import {
 	executeMockedSubscriptionResolver,
 	mockSubscriptionFieldCompiler,
 } from './__test__/subscription-mocks.ts';
+import { createAppPluginId } from './app-plugin.ts';
 
 test('SubscriptionCompiler should be created correctly', (t) => {
 	const fieldCompiler = mockSubscriptionFieldCompiler();
@@ -69,12 +69,28 @@ test('SubscriptionCompiler should use type subscribe middlewares correctly', asy
 	t.deepEqual(result, ['1']);
 });
 
-test('SubscriptionCompiler should use subscribe store correctly', (t) => {
-	const fieldCompiler = mockSubscriptionFieldCompiler();
-	testStoreLike(t, (key) => fieldCompiler.useSubscribeState(key));
+test('SubscriptionCompiler should read subscribe plugin state correctly', (t) => {
+	const plugin1 = createAppPluginId<number>('1');
+	const plugin2 = createAppPluginId<number>('2');
+	const fieldCompiler = mockSubscriptionFieldCompiler({
+		subscribeState: new Map([[plugin1.key, 1]]),
+	});
+
+	t.is(fieldCompiler.hasPluginSubscribeState(plugin1), true);
+	t.is(fieldCompiler.getPluginSubscribeState(plugin1), 1);
+	t.is(fieldCompiler.hasPluginSubscribeState(plugin2), false);
+	t.is(fieldCompiler.getPluginSubscribeState(plugin2), undefined);
 });
 
-test('SubscriptionCompiler should use resolve store correctly', (t) => {
-	const fieldCompiler = mockSubscriptionFieldCompiler();
-	testStoreLike(t, (key) => fieldCompiler.useResolveState(key));
+test('SubscriptionCompiler should read resolve plugin state correctly', (t) => {
+	const plugin1 = createAppPluginId<number>('1');
+	const plugin2 = createAppPluginId<number>('2');
+	const fieldCompiler = mockSubscriptionFieldCompiler({
+		resolveState: new Map([[plugin1.key, 1]]),
+	});
+
+	t.is(fieldCompiler.hasPluginResolveState(plugin1), true);
+	t.is(fieldCompiler.getPluginResolveState(plugin1), 1);
+	t.is(fieldCompiler.hasPluginResolveState(plugin2), false);
+	t.is(fieldCompiler.getPluginResolveState(plugin2), undefined);
 });

@@ -1,8 +1,8 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
-import type { PluginId } from './app-plugin.ts';
+import type { UsePlugin } from './app-plugin.ts';
 import type { FieldCompiler } from './field-compiler.ts';
-import type { makePluginSymbol, makeSymbol } from './symbols.ts';
+import type { makeSymbol } from './symbols.ts';
 
 export type Field<Expected, Result, Source, Context, Args, Info> = {
 	map: <T = Expected>(
@@ -41,13 +41,16 @@ export type FieldMethods<Result, Source, Context, Args, Info> = {
 	) => Field<Result, Result, Source, Context, Args, Info>;
 };
 
-export type FieldUsePlugin<Result, Source, Context, Args, Info, State = unknown> = {
-	[makePluginSymbol]: (options: { type: string; field: string; kind: 'field' }) => {
-		id: PluginId<State>;
-		middleware?: Middleware<Result, Source, Context, Args, Info>;
-		state?: State;
-	};
-};
+export type FieldUsePlugin<Result, Source, Context, Args, Info, State = unknown> = UsePlugin<
+	'field',
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	{ type: string; field: string },
+	State
+>;
 
 export type FieldUseInput<Result, Source, Context, Args, Info> =
 	| Middleware<Result, Source, Context, Args, Info>

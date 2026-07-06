@@ -17,6 +17,7 @@ import {
 	mockSubscriptionFieldResolver,
 	mockSubscriptionGenerator,
 } from './__test__/subscription-mocks.ts';
+import { createAppPluginId } from './app-plugin.ts';
 import { SubscriptionBuilder } from './subscription-builder.ts';
 
 test('createSubscriptionBuilder should create a subscription field correctly', async (t) => {
@@ -221,16 +222,23 @@ test('SubscriptionBuilder should handle middlewares correctly', async (t) => {
 	t.deepEqual(results, ['1', '2', '3']);
 });
 
-test('SubscriptionBuilder edit should handle mergeState correctly', (t) => {
-	const key1 = Symbol('1');
-	const key2 = Symbol('2');
+test('SubscriptionBuilder edit should handle plugin state correctly', (t) => {
+	const plugin1 = createAppPluginId<number>('1');
+	const plugin2 = createAppPluginId<number>('2');
 
 	const edit1 = mockSubscriptionFieldBuilder().edit();
-	edit1.mergeState(new Map([[key1, 1]]));
-	edit1.mergeState(new Map([[key2, 2]]));
+	edit1.setPluginState(plugin1, 1);
+	edit1.setPluginState(plugin2, 2);
+
+	t.is(edit1.hasPluginState(plugin1), true);
+	t.is(edit1.getPluginState(plugin1), 1);
 
 	const edit2 = mockSubscriptionFieldBuilder().edit();
-	edit2.mergeState(new Map([[key1, 99]]));
+	edit2.setPluginState(plugin1, 99);
+	edit2.setPluginState(plugin2, 2);
+	edit2.unsetPluginState(plugin2);
+
+	t.is(edit2.hasPluginState(plugin2), false);
 
 	const compiler1 = makeMockedSubscriptionField(
 		edit1
@@ -245,10 +253,10 @@ test('SubscriptionBuilder edit should handle mergeState correctly', (t) => {
 			.resolve((params) => params.source.value),
 	);
 
-	t.is(compiler1.useSubscribeState<number>(key1).get(), 1);
-	t.is(compiler1.useSubscribeState<number>(key2).get(), 2);
-	t.is(compiler2.useSubscribeState<number>(key1).get(), 99);
-	t.is(compiler2.useSubscribeState<number>(key2).get(), undefined);
+	t.is(compiler1.getPluginSubscribeState(plugin1), 1);
+	t.is(compiler1.getPluginSubscribeState(plugin2), 2);
+	t.is(compiler2.getPluginSubscribeState(plugin1), 99);
+	t.is(compiler2.getPluginSubscribeState(plugin2), undefined);
 });
 
 test('SubscriptionBuilder should assign parameters correctly', async (t) => {

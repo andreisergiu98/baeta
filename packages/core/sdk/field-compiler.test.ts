@@ -4,8 +4,8 @@ import {
 	mockFieldCompiler,
 	mockMiddleware,
 } from './__test__/field-mocks.ts';
-import { testStoreLike } from './__test__/store-tests.ts';
 import { mockTypeMiddleware } from './__test__/type-mocks.ts';
+import { createAppPluginId } from './app-plugin.ts';
 
 test('FieldCompiler should be created correctly', (t) => {
 	const fieldCompiler = mockFieldCompiler();
@@ -101,7 +101,13 @@ test('FieldCompiler should use type middlewares correctly', async (t) => {
 	t.is(i, 3);
 });
 
-test('FieldCompiler should use state correctly', async (t) => {
-	const fieldCompiler = mockFieldCompiler();
-	testStoreLike(t, (key) => fieldCompiler.useState(key));
+test('FieldCompiler should read plugin state correctly', (t) => {
+	const plugin1 = createAppPluginId<number>('1');
+	const plugin2 = createAppPluginId<number>('2');
+	const fieldCompiler = mockFieldCompiler({ state: new Map([[plugin1.key, 1]]) });
+
+	t.is(fieldCompiler.hasPluginState(plugin1), true);
+	t.is(fieldCompiler.getPluginState(plugin1), 1);
+	t.is(fieldCompiler.hasPluginState(plugin2), false);
+	t.is(fieldCompiler.getPluginState(plugin2), undefined);
 });

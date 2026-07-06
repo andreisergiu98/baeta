@@ -40,13 +40,18 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 		fn: GetFieldSettings<Context, Args>,
 	): ComplexityPlugin<Result, Source, Context, Args, Info> => {
 		return {
-			[makePluginSymbol]: () => {
-				return {
-					id,
-					state: {
+			[makePluginSymbol]: {
+				id,
+				make: (session, metadata) => {
+					if (session.hasPluginState(id)) {
+						const field = metadata.kind !== 'type' ? metadata.field : undefined;
+						const name = [metadata.type, field].filter((el) => el).join('.');
+						throw new Error(`Complexity limits are already registered for "${name}".`);
+					}
+					session.setPluginState(id, {
 						fieldSettings: fn as GetFieldSettings<unknown, unknown>,
-					},
-				};
+					});
+				},
 			},
 		};
 	};
@@ -57,7 +62,7 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 			const fieldSettingsMap: FieldSettingsMap = new Map();
 
 			for (const typeCompiler of iterateTypes(compilers)) {
-				const typeState = typeCompiler.usePluginState(id).get();
+				const typeState = typeCompiler.getPluginState(id);
 
 				if (typeState) {
 					registerFieldSettingsSetter(
@@ -71,8 +76,8 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 				for (const fieldCompiler of typeCompiler.fields) {
 					const fieldState =
 						fieldCompiler.kind === 'Field'
-							? fieldCompiler.usePluginState(id).get()
-							: fieldCompiler.useSubscribePluginState(id).get();
+							? fieldCompiler.getPluginState(id)
+							: fieldCompiler.getPluginSubscribeState(id);
 					if (!fieldState) continue;
 					registerFieldSettingsSetter(
 						typeCompiler.type,

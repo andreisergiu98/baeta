@@ -18,7 +18,7 @@ export interface TypeCompilerOptions<
 	>,
 > {
 	type: string;
-	state: Map<symbol, unknown>;
+	state: ReadonlyMap<symbol, unknown>;
 	middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	fieldsMap: FieldsResolvers;
 	requiredPluginIds: Set<PluginId>;
@@ -36,7 +36,7 @@ export class TypeCompiler<
 > {
 	readonly kind = 'Type';
 	readonly #type: string;
-	readonly #state: Map<symbol, unknown>;
+	readonly #state: ReadonlyMap<symbol, unknown>;
 	readonly #middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
 	readonly #fields: ReadonlyArray<
 		| FieldCompiler<unknown, Source, Context, unknown, Info>
@@ -64,14 +64,12 @@ export class TypeCompiler<
 		this.#middlewares.push(middleware);
 	}
 
-	useState<T>(key: symbol) {
-		const get = () => this.#state.get(key) as T | undefined;
-		const set = (value: Readonly<T>) => this.#state.set(key, value);
-		return { get, set };
+	hasPluginState(pluginId: PluginId) {
+		return this.#state.has(pluginId.key);
 	}
 
-	usePluginState<T>(pluginId: PluginId<T>) {
-		return this.useState<T>(pluginId.key);
+	getPluginState<T>(pluginId: PluginId<T>): Readonly<T> | undefined {
+		return this.#state.get(pluginId.key) as Readonly<T> | undefined;
 	}
 
 	build(moduleMiddlewares: Middleware<unknown, unknown, Context, unknown, Info>[]) {

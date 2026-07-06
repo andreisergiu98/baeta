@@ -17,14 +17,14 @@ import { makePluginSymbol, makeSymbol } from './symbols.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface SubscriptionBuilderOptions<Result, Source, Context, Args, Info> {
 	field: string;
-	state: Map<symbol, Readonly<unknown>>;
+	state: ReadonlyMap<symbol, unknown>;
 	middlewares: Array<Middleware<Subscription<unknown>, Source, Context, Args, Info>>;
 	requiredPluginIds: Set<PluginId>;
 }
 
 export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	readonly #field: string;
-	readonly #state: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #state: ReadonlyMap<symbol, unknown>;
 	readonly #middlewares: ReadonlyArray<
 		Middleware<Subscription<unknown>, Source, Context, Args, Info>
 	>;
@@ -41,30 +41,31 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 		return this.#field;
 	}
 
-	edit() {
+	edit<MiddlewareResult extends Subscription<unknown> = Subscription<unknown>>() {
 		const draftState = new Map(this.#state);
 		const draftMiddlewares = [...this.#middlewares];
 		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
 		const session = {
 			field: this.#field,
-			addMiddleware: (
-				middleware: Middleware<Subscription<unknown>, Source, Context, Args, Info>,
-			) => {
-				draftMiddlewares.push(middleware);
+			addMiddleware: (middleware: Middleware<MiddlewareResult, Source, Context, Args, Info>) => {
+				draftMiddlewares.push(
+					middleware as unknown as Middleware<Subscription<unknown>, Source, Context, Args, Info>,
+				);
 				return session;
 			},
 			addRequiredPluginId: (id: PluginId) => {
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
-				draftState.set(pluginId.key, value as Readonly<unknown>);
+			hasPluginState: (pluginId: PluginId) => draftState.has(pluginId.key),
+			getPluginState: <T>(pluginId: PluginId<T>) =>
+				draftState.get(pluginId.key) as Readonly<T> | undefined,
+			setPluginState: <T>(pluginId: PluginId<T>, value: Readonly<T>) => {
+				draftState.set(pluginId.key, value);
 				return session;
 			},
-			mergeState: (state: Map<symbol, unknown>) => {
-				for (const [key, value] of state) {
-					draftState.set(key, value as Readonly<unknown>);
-				}
+			unsetPluginState: <T>(pluginId: PluginId<T>) => {
+				draftState.delete(pluginId.key);
 				return session;
 			},
 			commit: () =>
@@ -93,26 +94,20 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 			) => {
 				if (typeof input === 'function') {
 					nameFunction(input, `Subscription.${this.#field}.subscribe.use`);
-					return this.edit()
-						.addMiddleware(input as Middleware<Subscription<unknown>, Source, Context, Args, Info>)
+					return this.edit<Subscription<Or<Or<Payload, T>, unknown>>>()
+						.addMiddleware(input)
 						.commitToMethods<Or<Payload, T>>();
 				}
-				const result = input[makePluginSymbol]({
+				const plugin = input[makePluginSymbol];
+				const session = this.edit<Subscription<Or<Or<Payload, T>, unknown>>>().addRequiredPluginId(
+					plugin.id,
+				);
+				plugin.make(session, {
+					kind: 'subscription',
+					phase: 'subscribe',
 					type: 'Subscription',
 					field: this.#field,
-					kind: 'field',
-					subscriptionFieldKind: 'subscribe',
 				});
-				const session = this.edit().addRequiredPluginId(result.id);
-				if (result.middleware) {
-					nameFunction(result.middleware, `Subscription.${this.#field}.subscribe.use`);
-					session.addMiddleware(
-						result.middleware as Middleware<Subscription<unknown>, Source, Context, Args, Info>,
-					);
-				}
-				if (result.state) {
-					session.setPluginState(result.id, result.state);
-				}
 				return session.commitToMethods<Or<Payload, T>>();
 			},
 
@@ -138,24 +133,24 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 
 interface SubscriptionResolveBuilderOptions<Result, Source, ParentSource, Context, Args, Info> {
 	field: string;
-	subscribeState: ReadonlyMap<symbol, Readonly<unknown>>;
+	subscribeState: ReadonlyMap<symbol, unknown>;
 	subscribeMiddlewares: ReadonlyArray<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveState: ReadonlyMap<symbol, Readonly<unknown>>;
+	resolveState: ReadonlyMap<symbol, unknown>;
 	resolveMiddlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	requiredPluginIds: ReadonlySet<PluginId>;
 }
 
 class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info> {
 	readonly #field: string;
-	readonly #subscribeState: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #subscribeState: ReadonlyMap<symbol, unknown>;
 	readonly #subscribeMiddlewares: ReadonlyArray<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
 	readonly #subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	readonly #resolveState: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #resolveState: ReadonlyMap<symbol, unknown>;
 	readonly #resolveMiddlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
 	readonly requiredPluginIds: ReadonlySet<PluginId>;
 
@@ -189,14 +184,15 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
-				draftState.set(pluginId.key, value as Readonly<unknown>);
+			hasPluginState: (pluginId: PluginId) => draftState.has(pluginId.key),
+			getPluginState: <T>(pluginId: PluginId<T>) =>
+				draftState.get(pluginId.key) as Readonly<T> | undefined,
+			setPluginState: <T>(pluginId: PluginId<T>, value: Readonly<T>) => {
+				draftState.set(pluginId.key, value);
 				return session;
 			},
-			mergeState: (state: Map<symbol, unknown>) => {
-				for (const [key, value] of state) {
-					draftState.set(key, value as Readonly<unknown>);
-				}
+			unsetPluginState: <T>(pluginId: PluginId<T>) => {
+				draftState.delete(pluginId.key);
 				return session;
 			},
 			commit: () =>
@@ -234,20 +230,14 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 					nameFunction(input, `Subscription.${this.#field}.resolve.use`);
 					return this.edit().addMiddleware(input).commitToMethods();
 				}
-				const result = input[makePluginSymbol]({
+				const plugin = input[makePluginSymbol];
+				const session = this.edit().addRequiredPluginId(plugin.id);
+				plugin.make(session, {
+					kind: 'subscription',
+					phase: 'resolve',
 					type: 'Subscription',
 					field: this.#field,
-					kind: 'field',
-					subscriptionFieldKind: 'resolve',
 				});
-				const session = this.edit().addRequiredPluginId(result.id);
-				if (result.middleware) {
-					nameFunction(result.middleware, `Subscription.${this.#field}.resolve.use`);
-					session.addMiddleware(result.middleware);
-				}
-				if (result.state) {
-					session.setPluginState(result.id, result.state);
-				}
 				return session.commitToMethods();
 			},
 			map: (resolver) => {
@@ -272,12 +262,12 @@ interface SubscriptionFieldWithMakeOptions<
 	Info,
 > {
 	field: string;
-	subscribeState: ReadonlyMap<symbol, Readonly<unknown>>;
+	subscribeState: ReadonlyMap<symbol, unknown>;
 	subscribeMiddlewares: ReadonlyArray<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
 	>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveState: ReadonlyMap<symbol, Readonly<unknown>>;
+	resolveState: ReadonlyMap<symbol, unknown>;
 	resolveMiddlewares: ReadonlyArray<Middleware<Expected, Source, Context, Args, Info>>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 	requiredPluginIds: ReadonlySet<PluginId>;

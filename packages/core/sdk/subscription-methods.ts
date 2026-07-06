@@ -1,8 +1,8 @@
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
-import type { PluginId } from './app-plugin.ts';
+import type { UsePlugin } from './app-plugin.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
-import type { makePluginSymbol, makeSymbol } from './symbols.ts';
+import type { makeSymbol } from './symbols.ts';
 
 export type Subscription<Result = unknown> = AsyncIterable<Result>;
 
@@ -67,20 +67,22 @@ export type SubscriptionUsePlugin<
 	Context,
 	Args,
 	Info,
-	FieldKind extends 'subscribe' | 'resolve',
+	Phase extends 'subscribe' | 'resolve',
 	State = unknown,
-> = {
-	[makePluginSymbol]: (options: {
+> = UsePlugin<
+	'subscription',
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	{
 		type: 'Subscription';
+		phase: Phase;
 		field: string;
-		kind: 'field';
-		subscriptionFieldKind: FieldKind;
-	}) => {
-		id: PluginId<State>;
-		middleware?: Middleware<Result, Source, Context, Args, Info>;
-		state?: State;
-	};
-};
+	},
+	State
+>;
 
 export type SubscriptionFieldUseInput<
 	Result,

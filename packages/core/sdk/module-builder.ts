@@ -18,7 +18,7 @@ export interface ModuleBuilderOptions<
 	typeBuilders: Readonly<TypesBuilders>;
 	defaultResolvers: Readonly<IResolvers>;
 	transformers: Array<SchemaTransformer>;
-	state: Map<symbol, Readonly<unknown>>;
+	state: ReadonlyMap<symbol, unknown>;
 	middlewares: Array<Middleware<unknown, unknown, Context, unknown, Info>>;
 	requiredPluginIds: Set<PluginId>;
 }
@@ -34,7 +34,7 @@ export class ModuleBuilder<
 	readonly #typeBuilders: Readonly<TypesBuilders>;
 	readonly #defaultResolvers: Readonly<IResolvers>;
 	readonly #transformers: ReadonlyArray<SchemaTransformer>;
-	readonly #state: ReadonlyMap<symbol, Readonly<unknown>>;
+	readonly #state: ReadonlyMap<symbol, unknown>;
 	readonly #middlewares: ReadonlyArray<Middleware<unknown, unknown, Context, unknown, Info>>;
 	readonly requiredPluginIds: ReadonlySet<PluginId>;
 
@@ -77,14 +77,15 @@ export class ModuleBuilder<
 				draftRequiredPluginIds.add(id);
 				return session;
 			},
-			setPluginState: <T>(pluginId: PluginId<T>, value: T) => {
-				draftState.set(pluginId.key, value as Readonly<unknown>);
+			hasPluginState: (pluginId: PluginId) => draftState.has(pluginId.key),
+			getPluginState: <T>(pluginId: PluginId<T>) =>
+				draftState.get(pluginId.key) as Readonly<T> | undefined,
+			setPluginState: <T>(pluginId: PluginId<T>, value: Readonly<T>) => {
+				draftState.set(pluginId.key, value);
 				return session;
 			},
-			mergeState: (state: Map<symbol, unknown>) => {
-				for (const [key, value] of state) {
-					draftState.set(key, value as Readonly<unknown>);
-				}
+			unsetPluginState: <T>(pluginId: PluginId<T>) => {
+				draftState.delete(pluginId.key);
 				return session;
 			},
 			commit: () =>
@@ -124,15 +125,11 @@ export class ModuleBuilder<
 					nameFunction(input, `${this.#name}.use`);
 					return this.edit().addMiddleware(input).commitToMethods();
 				}
-				const result = input[makePluginSymbol]({ name: this.#name, kind: 'module' });
-				const session = this.edit().addRequiredPluginId(result.id);
-				if (result.middleware) {
-					nameFunction(result.middleware, `${this.#name}.use`);
-					session.addMiddleware(result.middleware);
-				}
-				if (result.state) {
-					session.setPluginState(result.id, result.state);
-				}
+				const plugin = input[makePluginSymbol];
+				const session = this.edit().addRequiredPluginId(plugin.id);
+				plugin.make(session, {
+					kind: 'module',
+				});
 				return session.commitToMethods();
 			},
 			$directive: (transformer) => {

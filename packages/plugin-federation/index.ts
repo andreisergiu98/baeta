@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import { createPluginV1 } from '@baeta/generator-sdk';
 import { getSourcesFromSchema, loadSchema } from '@baeta/util-graphql';
+import { normalize } from '@baeta/util-path';
 import { buildFederationInfo } from './lib/federation-info.ts';
 import { printFederationTypes } from './lib/print-federation-types.ts';
 import { printHandlersStarter } from './lib/print-handlers-starter.ts';
@@ -91,7 +92,11 @@ export function federationPlugin<const Version extends FederationVersion>(
 				ctx.generatorOptions.loaders,
 			);
 			const sources = getSourcesFromSchema(outputSchemaAst).filter((source) => {
-				return source.location !== schemaSpecFilePath && source.location !== schemaTypesFilePath;
+				if (!source.location) {
+					return true;
+				}
+				const location = normalize(source.location);
+				return location !== schemaSpecFilePath && location !== schemaTypesFilePath;
 			});
 
 			const federationInfo = buildFederationInfo(specification, sources);

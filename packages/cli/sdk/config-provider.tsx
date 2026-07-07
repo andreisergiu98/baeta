@@ -1,5 +1,6 @@
+import { realpathSync } from 'node:fs';
 import { Watcher } from '@baeta/generator';
-import path from '@baeta/util-path';
+import path, { posixPath } from '@baeta/util-path';
 import { Box, Text } from 'ink';
 import { type PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type LoadedBaetaConfig, loadConfig } from '../lib/config-loader.ts';
@@ -17,6 +18,14 @@ export interface ConfigProps {
 export type ConfigEventMap = {
 	update: [LoadedBaetaConfig];
 };
+
+function resolveConfigPath(location: string) {
+	try {
+		return posixPath(realpathSync(location));
+	} catch {
+		return path.resolve(location);
+	}
+}
 
 export function useConfigStore(props: Readonly<ConfigProps>) {
 	const [config, setConfig] = useState<LoadedBaetaConfig>(props.initialConfig);
@@ -41,12 +50,11 @@ export function useConfigStore(props: Readonly<ConfigProps>) {
 			return;
 		}
 
-		const configDir = path.dirname(props.initialConfig.location);
-		const relativeConfigFile = path.relative(process.cwd(), props.initialConfig.location);
+		const configPath = resolveConfigPath(props.initialConfig.location);
+		const configDir = path.dirname(configPath);
 
-		const watcher = new Watcher(configDir, {
-			ignore: [`!${relativeConfigFile}`],
-		});
+		const watcher = new Watcher(configDir);
+		watcher.ignore((eventPath) => eventPath !== configPath);
 
 		watcher.on('create', updateConfig);
 		watcher.on('update', updateConfig);

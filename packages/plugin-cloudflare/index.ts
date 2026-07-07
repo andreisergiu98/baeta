@@ -1,5 +1,5 @@
-import { resolve } from 'node:path';
 import { createPluginV1, FileBlock } from '@baeta/generator-sdk';
+import { posixPath, resolve } from '@baeta/util-path';
 
 export interface CloudflarePluginOptions {
 	ws?: {
@@ -29,7 +29,9 @@ async function generateConfigForSubscriptions(options: CloudflarePluginOptions['
 		return null;
 	}
 
-	const databaseMigrationsPath = options?.databaseMigrationsPath ?? './migrations/subscriptions';
+	const databaseMigrationsPath = posixPath(
+		options?.databaseMigrationsPath ?? './migrations/subscriptions',
+	);
 	const { databaseMigrations, durableObjectsMigrations, wsConnectionClassName } = result;
 
 	const databaseConfiguration: string[] = [

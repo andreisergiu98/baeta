@@ -2860,6 +2860,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@cloudflare/workers-types": "npm:^5.20260703.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"

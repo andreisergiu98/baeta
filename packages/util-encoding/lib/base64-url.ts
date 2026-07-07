@@ -5,5 +5,8 @@ export function encodeBase64Url(value: string) {
 }
 
 export function decodeBase64Url(value: string) {
+	if (!Base64.isValid(value)) {
+		throw new Error('Invalid base64url input!');
+	}
 	return Base64.decode(value);
 }

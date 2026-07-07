@@ -72,3 +72,7 @@ test('base64 round trip: should handle empty string', (t) => {
 	const decoded = decodeBase64(encoded);
 	t.is(decoded, original);
 });
+
+test('decodeBase64: should throw on invalid input', (t) => {
+	t.throws(() => decodeBase64('%%%not-base64%%%'));
+});

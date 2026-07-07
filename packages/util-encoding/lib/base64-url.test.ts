@@ -84,3 +84,7 @@ test('base64url round trip: should handle empty string', (t) => {
 	const decoded = decodeBase64Url(encoded);
 	t.is(decoded, original);
 });
+
+test('decodeBase64Url: should throw on invalid input', (t) => {
+	t.throws(() => decodeBase64Url('%%%not-base64%%%'));
+});

@@ -1,12 +1,12 @@
 /* eslint-disable no-useless-assignment */
 import test, { randomUUID, sinon } from '@baeta/testing';
-import { log } from '@baeta/util-log';
 import { MockCacheClient } from '../__test__/mock-client.ts';
 import { createCache } from './create-cache.ts';
 import { defineQuery } from './define-query.ts';
+import { logger } from './logger.ts';
 
-log.error = () => {};
-log.warn = () => {};
+logger.error = () => {};
+logger.warn = () => {};
 
 type TestItem = { id: string; name: string; orgId: string };
 

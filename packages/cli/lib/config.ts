@@ -49,3 +49,10 @@ export function isValidConfig(value: unknown): value is DefinedConfig {
 	}
 	return value.version === 'v2';
 }
+
+export function explainInvalidConfig(value: unknown): string {
+	if (typeof value === 'object' && value != null && 'version' in value && value.version !== 'v2') {
+		return `Unsupported config version \`${String(value.version)}\`. Expected \`v2\`, create the config with \`defineConfig\` from @baeta/cli.`;
+	}
+	return 'Invalid config, expected `baeta.ts` with default export created with `defineConfig`.';
+}

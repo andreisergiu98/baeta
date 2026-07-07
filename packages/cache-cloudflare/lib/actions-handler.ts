@@ -1,5 +1,8 @@
+import { createLogger } from '@baeta/util-log';
 import z from 'zod';
 import type { Action } from './actions.ts';
+
+const logger = createLogger('@baeta/cache-cloudflare');
 
 export type ActionHandlerMap<Actions extends ReadonlyArray<Action<any, any, any>>> = {
 	[K in Actions[number]['type']]: Extract<Actions[number], Action<K, any, any>> extends Action<
@@ -52,6 +55,11 @@ export function createActionsRequestHandler<
 				{ status: 200 },
 			);
 		} catch (err) {
+			logger.error({
+				type: 'actions-handler',
+				message: 'Cache action handler failed.',
+				error: err,
+			});
 			if (err instanceof Error) {
 				return new Response(JSON.stringify({ error: 'internal_error', message: err.message }), {
 					status: 500,

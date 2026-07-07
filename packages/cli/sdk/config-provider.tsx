@@ -35,7 +35,10 @@ export function useConfigStore(props: Readonly<ConfigProps>) {
 	const updateConfig = useCallback(() => {
 		runAsync(async () => {
 			const config = await loadConfig();
-			if (!config) return;
+			if (!config) {
+				console.error(makeErrorMessage('Config no longer found. Keeping the previous config.'));
+				return;
+			}
 			setConfig(config);
 			setShowConfigChanged(true);
 			clearTimeout(configChangedTimeoutRef.current);
@@ -62,7 +65,7 @@ export function useConfigStore(props: Readonly<ConfigProps>) {
 
 		return () => {
 			watcher.close().catch((err) => {
-				console.error(makeErrorMessage('Failed to close config watcher.', err));
+				console.error(makeErrorMessage('Failed to close config watcher.'), err);
 			});
 			clearTimeout(configChangedTimeoutRef.current);
 		};

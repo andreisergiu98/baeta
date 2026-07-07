@@ -63,6 +63,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
+    "@baeta/util-log": "workspace:^",
     "zod": "^4.4.3"
   },
   "devDependencies": {

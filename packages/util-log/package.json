@@ -54,6 +54,9 @@
     "test": "builder test",
     "types": "tsc --noEmit"
   },
+  "dependencies": {
+    "@baeta/util-env": "workspace:^"
+  },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",

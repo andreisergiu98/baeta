@@ -1,7 +1,7 @@
-import { log } from '@baeta/util-log';
 import type { CacheClient } from './client.ts';
 import type { QueryDefinitionMap, QueryMethod, QueryMethodMap } from './define-query.ts';
 import type { ItemRef, RefCompatibleItem } from './item.ts';
+import { logger } from './logger.ts';
 import type { CacheOptions, OptionalGetRef, RequiredGetRef } from './options.ts';
 import type { QueryOnDeleteHook, QueryOnInsertHook, QueryOnUpdateHook, QueryTag } from './query.ts';
 import { CacheStore } from './store.ts';
@@ -230,7 +230,11 @@ async function fireHook<T>(
 		Promise.resolve()
 			.then(() => hook(value))
 			.catch((err) => {
-				log.error(err, 'Error in cache hook');
+				logger.error({
+					type: 'cache-hook',
+					message: 'Error in cache hook',
+					error: err,
+				});
 			});
 	}
 }

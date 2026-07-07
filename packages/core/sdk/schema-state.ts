@@ -1,4 +1,5 @@
 import { GraphQLSchema } from 'graphql';
+import { logger } from '../lib/logger.ts';
 
 export const baetaSchemaStateKey = '@baeta/core/schemaState';
 
@@ -22,11 +23,21 @@ export function attachSchemaStates(schema: GraphQLSchema, states: SetSchemaState
 	if (states.length === 0) {
 		return schema;
 	}
+	const stateMap = new Map<symbol, unknown>();
+	for (const [key, state] of states) {
+		if (stateMap.has(key)) {
+			logger.warn({
+				type: 'schema-state',
+				message: `Schema state ${String(key)} was registered multiple times. Keeping the last value.`,
+			});
+		}
+		stateMap.set(key, state);
+	}
 	return new GraphQLSchema({
 		...schema.toConfig(),
 		extensions: {
 			...schema.extensions,
-			[baetaSchemaStateKey]: new Map(states),
+			[baetaSchemaStateKey]: stateMap,
 		},
 	});
 }

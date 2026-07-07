@@ -22,6 +22,7 @@ export function createAuthStore<Scopes extends ScopesShape, Context>() {
 	const [get, load] = createContextStoreWithLoader(
 		Symbol('@baeta/auth'),
 		authStoreLoader<Scopes, Context>,
+		{ warnOnDuplicateLoader: false },
 	);
 	return {
 		get,

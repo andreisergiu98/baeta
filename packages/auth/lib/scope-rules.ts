@@ -1,7 +1,9 @@
 import type { ResolverParams } from '@baeta/core';
 import { ForbiddenError } from '@baeta/errors';
+import { GraphQLError } from 'graphql';
 import type { AuthStoreResult } from './auth-store.ts';
 import type { GrantCache } from './grant-cache.ts';
+import { logger } from './logger.ts';
 import type { ScopesShape } from './scope-shape.ts';
 
 export type LogicRule = 'and' | 'or' | 'chain' | 'race';
@@ -131,6 +133,13 @@ export async function verifyRaceScopes<Scopes extends ScopesShape, Grants extend
 		const result = await verifyScope(params, scope, store).catch((err) => err);
 		if (result === true) {
 			return true;
+		}
+		if (!(result instanceof GraphQLError)) {
+			logger.warn({
+				type: 'non-graphql-error',
+				message: `Non GraphQLError encountered by auth`,
+				extra: { origin: result },
+			});
 		}
 	}
 	throw new ForbiddenError();

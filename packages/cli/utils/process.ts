@@ -1,4 +1,5 @@
 import { execaCommand, parseCommandString } from 'execa';
+import { makeErrorMessage } from '../sdk/errors.tsx';
 
 export type PtyProcess = {
 	didExit: boolean;
@@ -54,6 +55,16 @@ function startProcessWithExeca({ command, onData, onExit }: StartProcessOptions)
 
 	subprocess.on('exit', () => {
 		didExit = true;
+		onExit?.();
+	});
+
+	subprocess.catch((err) => {
+		if (didExit) return;
+		didExit = true;
+		onData(
+			`${makeErrorMessage(`Failed to run \`${command}\`.`)}\n${err.shortMessage ?? err}\n`,
+			false,
+		);
 		onExit?.();
 	});
 

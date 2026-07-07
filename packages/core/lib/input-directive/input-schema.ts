@@ -21,6 +21,7 @@ import {
 	getNamedType,
 	Kind,
 } from 'graphql';
+import { logger } from '../logger.ts';
 import {
 	addValidateExtension,
 	getArgumentValidationsFromExtensions,
@@ -310,6 +311,15 @@ function validateFieldArguments(
 	}
 
 	const graphqlErrors = errors.filter((err) => err instanceof GraphQLError);
+	const unexpectedErrors = errors.filter((err) => !(err instanceof GraphQLError));
+
+	if (unexpectedErrors.length > 0) {
+		logger.error({
+			type: 'input-validation',
+			message: 'Input validation threw non-GraphQL errors.',
+			extra: { errors: unexpectedErrors },
+		});
+	}
 
 	if (graphqlErrors.length === 1) {
 		throw graphqlErrors[0];

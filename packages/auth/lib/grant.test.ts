@@ -1,12 +1,12 @@
 import test, { sinon } from '@baeta/testing';
-import { log } from '@baeta/util-log';
 import { createGrantCache } from './grant-cache.ts';
 import { type GetGrantFn, type GrantConfig, saveGrants } from './grant.ts';
+import { logger } from './logger.ts';
 
 type TestGrant = 'grant1' | 'grant2';
 
 test.before(() => {
-	sinon.stub(log, 'warn');
+	sinon.stub(logger, 'warn');
 });
 
 test.after(() => {
@@ -117,7 +117,7 @@ test('saveGrants is a no-op when result is null', async (t) => {
 	await saveGrants(args.params, args.result, 'grant1', args.grantCache);
 
 	// Nothing to assert on, just verify it didn't throw and didn't warn.
-	const warn = log.warn as sinon.SinonStub;
+	const warn = logger.warn as sinon.SinonStub;
 	const callsBefore = warn.callCount;
 	t.is(args.grantCache.getGrants({}), undefined);
 	t.is(warn.callCount, callsBefore);
@@ -127,7 +127,7 @@ test('saveGrants skips null entries inside array results', async (t) => {
 	const live = { id: 'live' };
 	const args = createArgs([live, null] as Array<typeof live | null>);
 
-	const warn = log.warn as sinon.SinonStub;
+	const warn = logger.warn as sinon.SinonStub;
 	warn.resetHistory();
 
 	await saveGrants(args.params, args.result, 'grant1', args.grantCache);

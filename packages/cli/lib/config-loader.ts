@@ -2,7 +2,7 @@ import { glob } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { relative, resolve } from '@baeta/util-path';
 import { makeErrorMessage } from '../sdk/errors.tsx';
-import { type BaetaOptions, isValidConfig } from './config.ts';
+import { type BaetaOptions, explainInvalidConfig, isValidConfig } from './config.ts';
 
 export interface LoadedBaetaConfig {
 	config: BaetaOptions;
@@ -61,12 +61,12 @@ export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | und
 	const relativeLocation = getRelativeConfigPath(location);
 
 	const result = await importConfig(relativeLocation).catch((err) => {
-		console.error(err);
+		console.error(makeErrorMessage(`Failed to load config from \`${relativeLocation}\`.`), err);
 		process.exit(1);
 	});
 
 	if (!isValidConfig(result)) {
-		console.error(makeErrorMessage('Invalid config, expected `baeta.ts` with default export.'));
+		console.error(makeErrorMessage(explainInvalidConfig(result)));
 		process.exit(1);
 	}
 

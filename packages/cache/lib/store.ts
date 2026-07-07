@@ -1,4 +1,3 @@
-import { log } from '@baeta/util-log';
 import DataLoader from 'dataloader';
 import type { CacheClient, CacheClientArgs } from './client.ts';
 import { assertValidRefType, type ItemRef } from './item.ts';
@@ -15,6 +14,7 @@ import {
 	type QueryCacheKey,
 	type QueryCacheKeyPrefix,
 } from './key.ts';
+import { logger } from './logger.ts';
 import { DEFAULT_NAMESPACE, DEFAULT_REVISION, DEFAULT_TTL_MS } from './options.ts';
 import type { QueryTag, QueryTagWithArgs, QueryTagWithData, QueryTagWithIndexes } from './query.ts';
 import { alignItemsWithRefs, arrayIsComplete, toArray } from './utils.ts';
@@ -53,6 +53,11 @@ export class CacheStore<Item> {
 		serialize,
 		getRef,
 	}: CacheStoreOptions<Item>) {
+		if (ttlMs != null && (!Number.isFinite(ttlMs) || ttlMs <= 0)) {
+			throw new Error(
+				`Invalid ttlMs for cache "${name}": ${ttlMs}. Expected a positive number of milliseconds.`,
+			);
+		}
 		this.name = name;
 		this.namespace = namespace ?? DEFAULT_NAMESPACE;
 		this.revision = revision?.toString() ?? DEFAULT_REVISION;
@@ -256,7 +261,11 @@ function parseItemSafely<T>(value: string, parseItem: (value: string) => T): T |
 	try {
 		return parseItem(value);
 	} catch (err) {
-		log.warn(err, 'Failed to parse item, returning null');
+		logger.warn({
+			type: 'parse-item',
+			message: 'Failed to parse item, returning null',
+			error: err,
+		});
 		return null;
 	}
 }
@@ -266,11 +275,18 @@ function parseQueryMetadataSafely(value: string): QueryMetadata | null {
 	try {
 		parsed = JSON.parse(value);
 	} catch (err) {
-		log.warn(err, 'Failed to parse query metadata, treating as cache miss');
+		logger.warn({
+			type: 'parse-query-metadata',
+			message: 'Failed to parse query metadata, treating as cache miss',
+			error: err,
+		});
 		return null;
 	}
 	if (!isValidQueryMetadata(parsed)) {
-		log.warn('Query metadata has invalid shape, treating as cache miss');
+		logger.warn({
+			type: 'parse-query-metadata',
+			message: 'Query metadata has invalid shape, treating as cache miss',
+		});
 		return null;
 	}
 	return parsed;

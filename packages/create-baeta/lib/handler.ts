@@ -53,7 +53,6 @@ export async function handler(args: Args) {
 		});
 
 		if (result.failed) {
-			console.error('Dependency installation failed.');
 			logger.error('Dependency installation failed.');
 			logger.info`The app directory has already been created, and you can retry by typing:
 

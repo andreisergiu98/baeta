@@ -94,7 +94,7 @@ function addKeyDirectivesSelectionSetToMap(
 	directives: readonly ConstDirectiveNode[] = [],
 ) {
 	for (const directive of directives) {
-		const selectionSet = getKeyDirectiveSelectionSet(directive);
+		const selectionSet = getKeyDirectiveSelectionSet(directive, typeName);
 		if (!selectionSet) continue;
 		const existing = map.get(typeName) ?? new Set<string>();
 		existing.add(selectionSet);
@@ -102,15 +102,25 @@ function addKeyDirectivesSelectionSetToMap(
 	}
 }
 
-function getKeyDirectiveSelectionSet(directive: ConstDirectiveNode): string | null {
+function getKeyDirectiveSelectionSet(
+	directive: ConstDirectiveNode,
+	typeName: string,
+): string | null {
 	if (directive.name.value !== 'key') {
 		return null;
 	}
 	const fieldsArg = directive.arguments?.find((arg) => arg.name.value === 'fields');
-	if (!fieldsArg) {
+
+	if (fieldsArg == null) {
+		console.warn(
+			`Ignoring @key directive on '${typeName}' because it is missing the 'fields' argument.`,
+		);
 		return null;
 	}
 	if (fieldsArg.value.kind !== Kind.STRING) {
+		console.warn(
+			`Ignoring @key directive on '${typeName}' because it has a non-string 'fields' argument.`,
+		);
 		return null;
 	}
 	const resolvableArg = directive.arguments?.find((arg) => arg.name.value === 'resolvable');

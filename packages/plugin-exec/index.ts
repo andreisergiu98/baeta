@@ -57,7 +57,8 @@ export function createExecPlugin(options: ExecPluginOptions) {
 			});
 
 			await child.catch((err) => {
-				throw new Error(err.stderr);
+				const message = [err.shortMessage, err.stderr, err.stdout].filter(Boolean).join('\n');
+				throw new Error(message || `Command failed: ${options.exec}`, { cause: err });
 			});
 
 			return await next();

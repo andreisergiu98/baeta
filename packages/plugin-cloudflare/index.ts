@@ -21,7 +21,13 @@ async function generateConfigForSubscriptions(options: CloudflarePluginOptions['
 		return null;
 	}
 
-	const result = await import('@baeta/subscriptions-cloudflare/sdk').catch(() => {
+	const result = await import('@baeta/subscriptions-cloudflare/sdk').catch((err: unknown) => {
+		if (options?.enable === true) {
+			throw new Error(
+				`Cloudflare plugin: 'ws.enable' is set, but '@baeta/subscriptions-cloudflare' could not be loaded: ${err}`,
+				{ cause: err },
+			);
+		}
 		return null;
 	});
 
@@ -73,7 +79,13 @@ async function generateConfigForCache(options: CloudflarePluginOptions['cache'])
 		return null;
 	}
 
-	const result = await import('@baeta/cache-cloudflare/sdk').catch(() => {
+	const result = await import('@baeta/cache-cloudflare/sdk').catch((err: unknown) => {
+		if (options?.enable === true) {
+			throw new Error(
+				`Cloudflare plugin: 'cache.enable' is set, but '@baeta/cache-cloudflare' could not be loaded: ${err}`,
+				{ cause: err },
+			);
+		}
 		return null;
 	});
 

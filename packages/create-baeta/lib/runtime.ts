@@ -23,7 +23,7 @@ export async function getRuntime(): Promise<JavaScriptRuntime> {
 		});
 	} catch (error) {
 		if (error instanceof Error && error.name === 'ExitPromptError') {
-			logger.info`Falling back to name=${defaultJavaScriptRuntime}`;
+			logger.warn`Falling back to name=${defaultJavaScriptRuntime}`;
 			return defaultJavaScriptRuntime;
 		}
 		throw error;

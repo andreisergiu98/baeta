@@ -27,6 +27,11 @@ async function askTemplateChoice() {
 
 export async function getTemplate(reqTemplate: string | undefined) {
 	const userProvided = reqTemplate ? templates.find((t) => t === reqTemplate) : null;
+
+	if (reqTemplate && !userProvided) {
+		throw new Error(`Unknown template '${reqTemplate}'. Expected one of: ${templates.join(', ')}.`);
+	}
+
 	const template = userProvided ?? (await askTemplateChoice());
 
 	if (!template) {

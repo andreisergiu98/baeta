@@ -86,7 +86,11 @@ export async function saveState(filename: string, ctx: Ctx) {
 		await fs.mkdir(path.dirname(filename), { recursive: true });
 		await fs.writeFile(filename, JSON.stringify(state, null, 2));
 		return true;
-	} catch {
+	} catch (err) {
+		console.warn(
+			`Failed to save generator state to '${filename}'. Stale generated files may not be cleaned up on the next run.`,
+			err,
+		);
 		return false;
 	}
 }

@@ -1,4 +1,4 @@
-import path from '@baeta/util-path';
+import path, { posixPath } from '@baeta/util-path';
 import micromatch from 'micromatch';
 
 export type MatchFn = (testString: string) => boolean;
@@ -43,7 +43,7 @@ export class WatcherIgnore {
 	}
 
 	resolveFile(file: string) {
-		return path.isAbsolute(file) ? file : path.join(this.cwd, file);
+		return posixPath(path.isAbsolute(file) ? file : path.join(this.cwd, file));
 	}
 
 	unignore(pattern: MatchPattern) {

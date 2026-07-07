@@ -1,6 +1,5 @@
-import { relative, resolve } from 'node:path';
 import { createPluginV1, FileBlock, micromatch } from '@baeta/generator-sdk';
-import { posixPath } from '@baeta/util-path';
+import { relative, resolve } from '@baeta/util-path';
 
 /**
  * Configuration options for the gitignore plugin.
@@ -35,20 +34,20 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 			await next();
 
 			const modulesDir = ctx.generatorOptions.modulesDir;
-			const moduleDefinitionName = ctx.generatorOptions.moduleDefinitionName;
+			const moduleDefinitionFileName = `${ctx.generatorOptions.moduleDefinitionName}.ts`;
 
 			const skippedTags = new Set([...(options?.skipTags ?? []), ...defaultSkipTags]);
 			const skippedFilesGlobs = options?.skipFilesGlobs ?? [];
 
 			const toRelativePosix = (absolute: string) => {
-				return posixPath(relative(ctx.generatorOptions.cwd, absolute));
+				return relative(ctx.generatorOptions.cwd, absolute);
 			};
 
 			const filePaths = ctx.fileManager.files
 				.filter((file) => {
 					const relativePath = toRelativePosix(file.filename);
 					return (
-						!file.filename.endsWith(moduleDefinitionName) &&
+						!file.filename.endsWith(`/${moduleDefinitionFileName}`) &&
 						!skippedTags.has(file.tag) &&
 						!skippedFilesGlobs.some((glob) => micromatch.isMatch(relativePath, glob)) &&
 						file.options?.disableOverwrite !== true
@@ -58,10 +57,10 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 
 			const generatedPaths = filePaths
 				.map(toRelativePosix)
-				.filter((file) => !file.endsWith(moduleDefinitionName));
+				.filter((file) => !file.endsWith(`/${moduleDefinitionFileName}`));
 
 			const modulesDirRelativePosix = toRelativePosix(modulesDir);
-			const moduleDefinitionGlob = `${modulesDirRelativePosix}/**/${moduleDefinitionName}`;
+			const moduleDefinitionGlob = `${modulesDirRelativePosix}/**/${moduleDefinitionFileName}`;
 
 			if (!skippedFilesGlobs.some((glob) => micromatch.isMatch(moduleDefinitionGlob, glob))) {
 				generatedPaths.push(moduleDefinitionGlob);

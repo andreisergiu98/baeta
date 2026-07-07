@@ -67,7 +67,10 @@ export const PACKAGE_DEPENDENCY_OVERRIDES: Record<string, PackageDependenciesOve
 		ignoreDevDeps: ['@types/node'],
 	},
 	'@baeta/plugin-cloudflare': {
-		ignoreDevDeps: ['@cloudflare/workers-types', 'graphql'],
+		ignoreDevDeps: ['@types/node', '@cloudflare/workers-types', 'graphql'],
+	},
+	'@baeta/plugin-gitignore': {
+		ignoreDevDeps: ['@types/node'],
 	},
 	'@baeta/util-graphql': {
 		ignoreDevDeps: ['@types/node'],

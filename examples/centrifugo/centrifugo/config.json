@@ -1,0 +1,35 @@
+{
+  "client": {
+    "allowed_origins": ["http://localhost:4000", "http://127.0.0.1:4000"],
+    "proxy": {
+      "connect": {
+        "enabled": true,
+        "endpoint": "http://host.docker.internal:4000/centrifugo/connect"
+      }
+    }
+  },
+  "channel": {
+    "proxy": {
+      "subscribe": {
+        "endpoint": "http://host.docker.internal:4000/centrifugo/subscribe"
+      }
+    },
+    "namespaces": [
+      {
+        "name": "graphql",
+        "subscribe_proxy_enabled": true
+      }
+    ]
+  },
+  "rpc": {
+    "proxy": {
+      "endpoint": "http://host.docker.internal:4000/centrifugo/rpc"
+    },
+    "without_namespace": {
+      "proxy_enabled": true
+    }
+  },
+  "http_api": {
+    "key": "api-key-for-demo"
+  }
+}

@@ -42,7 +42,7 @@ export class Watcher {
 
 	onEvents = (err: Error | null, events: Event[]) => {
 		if (err) {
-			console.error(err);
+			console.error('File watcher error.', err);
 			return;
 		}
 
@@ -79,6 +79,10 @@ export class Watcher {
 
 	createSubscription() {
 		const promise = subscribe(this.cwd, this.onEvents, this.options);
+
+		promise.catch((err) => {
+			console.error(`Failed to start file watcher for '${this.cwd}'.`, err);
+		});
 
 		const unsubscribe = async () => {
 			const subscription = await promise;

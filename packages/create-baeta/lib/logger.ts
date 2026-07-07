@@ -49,6 +49,9 @@ export const logger = {
 	success: (...args: LogArgs) => {
 		console.log(symbols.success, format(args));
 	},
+	warn: (...args: LogArgs) => {
+		console.warn(symbols.warning, format(args));
+	},
 	error: (...args: LogArgs) => {
 		console.error(symbols.error, format(args));
 	},

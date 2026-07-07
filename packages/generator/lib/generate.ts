@@ -117,7 +117,7 @@ async function executeGenerator(
 	};
 
 	try {
-		await hooks?.onStart?.()?.catch(() => null);
+		await hooks?.onStart?.();
 
 		await startRunner(ctx, plugins, (plugin) => plugin.setup, onSetupStart, onSetupEnd);
 		await startRunner(ctx, plugins, (plugin) => plugin.generate, onGenerateStart, onGenerateEnd);
@@ -127,9 +127,13 @@ async function executeGenerator(
 
 		await cleanPreviousFiles(ctx.fileManager, stateFilename, prev?.fileManager);
 
-		await hooks?.onEnd?.()?.catch(() => null);
+		await hooks?.onEnd?.();
 	} catch (e) {
-		await hooks?.onError?.(e)?.catch(() => null);
+		if (hooks?.onError == null) {
+			console.error('Generation failed.', e);
+		} else {
+			await hooks.onError(e);
+		}
 	}
 
 	await saveState(stateFilename, ctx).catch(() => null);

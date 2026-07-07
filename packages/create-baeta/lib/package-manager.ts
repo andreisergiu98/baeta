@@ -58,7 +58,7 @@ async function askForPackageManagerChoice(): Promise<PackageManager> {
 		});
 	} catch (error) {
 		if (error instanceof Error && error.name === 'ExitPromptError') {
-			logger.info`Falling back to name=${defaultPackageManager}`;
+			logger.warn`Falling back to name=${defaultPackageManager}`;
 			return defaultPackageManager;
 		}
 		throw error;

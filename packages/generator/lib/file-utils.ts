@@ -42,7 +42,11 @@ async function cleanByState(current: FileManager, stateFile: string) {
 			return new File(data.filename, data.content, data.tag);
 		});
 
-	const promises = toUnlink.map((file) => file.unlink().catch(() => {}));
+	const promises = toUnlink.map((file) =>
+		file.unlink().catch((err) => {
+			console.warn(`Failed to clean up stale generated file '${file.filename}'.`, err);
+		}),
+	);
 
 	return await Promise.all(promises).then(() => {});
 }

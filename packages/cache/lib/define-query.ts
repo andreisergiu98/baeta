@@ -1,4 +1,4 @@
-import { log } from '@baeta/util-log';
+import { logger } from './logger.ts';
 import type {
 	IndexedQueryArgs,
 	ItemFromQueryResult,
@@ -54,7 +54,11 @@ export function defineQuery<
 					args,
 				})
 				.catch((err) => {
-					log.error(err, `Failed to get query result for ${name}. Proceeding without caching.`);
+					logger.error({
+						type: 'query-cache',
+						message: `Failed to get query result for ${name}. Proceeding without caching.`,
+						error: err,
+					});
 					return null;
 				});
 
@@ -76,7 +80,11 @@ export function defineQuery<
 					options.ttlMs,
 				)
 				.catch((err) => {
-					log.error(err, `Failed to save query result for ${name}. Proceeding without caching.`);
+					logger.error({
+						type: 'query-cache',
+						message: `Failed to save query result for ${name}. Proceeding without caching.`,
+						error: err,
+					});
 				});
 
 			return data;

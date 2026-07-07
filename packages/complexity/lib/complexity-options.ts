@@ -1,5 +1,6 @@
 import { type GetComplexityError, getDefaultComplexityError } from './complexity-errors.ts';
 import type { GetComplexityLimit } from './complexity-limits.ts';
+import { assertValidLimit } from './sanitize-limit.ts';
 
 /**
  * Configuration options for the complexity extension.
@@ -30,6 +31,15 @@ export const defaultLimits = {
 export type NormalizedOptions = Required<ComplexityExtensionOptions<unknown>>;
 
 export function normalizeOptions(options: ComplexityExtensionOptions<unknown>): NormalizedOptions {
+	assertValidLimit('defaultComplexity', options.defaultComplexity);
+	assertValidLimit('defaultListMultiplier', options.defaultListMultiplier);
+
+	if (typeof options.limit === 'object' && options.limit != null) {
+		assertValidLimit('limit.depth', options.limit.depth);
+		assertValidLimit('limit.breadth', options.limit.breadth);
+		assertValidLimit('limit.complexity', options.limit.complexity);
+	}
+
 	return {
 		limit: options.limit ?? defaultLimits,
 		defaultComplexity: options.defaultComplexity ?? 1,

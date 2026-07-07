@@ -66,8 +66,14 @@ export function registerFieldSettingsSetter<Context, Args>(
 	fn: GetFieldSettings<Context, Args>,
 	map: FieldSettingsMap,
 ) {
-	if (!map.has(type)) {
-		map.set(type, new Map());
+	let fields = map.get(type);
+	if (!fields) {
+		fields = new Map();
+		map.set(type, fields);
 	}
-	map.get(type)?.set(field, fn as GetFieldSettings<unknown, unknown>);
+	if (fields.has(field)) {
+		const name = field === '*' ? type : `${type}.${field}`;
+		throw new Error(`Complexity limits are already registered for "${name}".`);
+	}
+	fields.set(field, fn as GetFieldSettings<unknown, unknown>);
 }

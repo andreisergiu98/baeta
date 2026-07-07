@@ -146,11 +146,10 @@ export function createFallbackMiddleware<
 	loadScopes: GetScopeLoader<Scopes, unknown>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
 	authStore: AuthStore<Scopes, unknown>,
-	globalScopes?: DefaultScopes<Scopes, Grants>,
+	globalScopes: DefaultScopes<Scopes, Grants>,
 	onError?: ScopeErrorResolver,
 ) {
 	const rules = selectDefaultScopes(false, type, globalScopes);
-
 	if (rules == null) {
 		return;
 	}

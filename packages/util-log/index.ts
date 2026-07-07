@@ -1,60 +1,59 @@
-type GlobalWithConsoleLike = typeof globalThis & {
-	console: Partial<Logger>;
-};
+import { getEnv } from '@baeta/util-env';
+import { createConsoleLogger } from './lib/console.ts';
+import { parseLogLevel, shouldLog, type BaetaLogLevel } from './lib/level.ts';
+import { createLogMethods } from './lib/log-methods.ts';
+import type { BaetaLogMessage, BaetaLogMessageBase } from './lib/message.ts';
+import type { BaetaLogTransport } from './lib/transport.ts';
 
-export type Logger = {
-	debug: (...args: any) => void;
-	info: (...args: any) => void;
-	warn: (...args: any) => void;
-	error: (...args: any) => void;
-};
+export type { BaetaLogLevel, BaetaLogMessage, BaetaLogTransport };
 
-type Level = 'debug' | 'info' | 'warn' | 'error';
-
-const levelValue: Record<Level, number> = {
-	debug: 0,
-	info: 1,
-	warn: 2,
-	error: 3,
-};
-
-function hasConsoleLog(glb: typeof globalThis): glb is GlobalWithConsoleLike {
-	return 'console' in glb && glb.console != null;
+export interface LogSettings {
+	level: BaetaLogLevel;
+	transport: BaetaLogTransport;
 }
 
-export function createLogger(level: Level = 'info'): Logger {
-	const glb = globalThis;
-	const noop = () => {};
+type GlobalThisWithLogSettings = typeof globalThis & {
+	[settingsSymbol]?: LogSettings;
+};
 
-	if (!hasConsoleLog(glb)) {
-		return {
-			debug: noop,
-			info: noop,
-			warn: noop,
-			error: noop,
-		};
+const settingsSymbol = Symbol.for('@baeta/util-log/settings');
+
+export const defaultLogTransport = createConsoleLogger();
+
+const defaultSettings = {
+	level: parseLogLevel(getEnv('BAETA_LOG_LEVEL')) ?? 'info',
+	transport: defaultLogTransport,
+};
+
+export function setBaetaLogLevel(level: BaetaLogLevel): void {
+	const settings = getLogSettings();
+	setLogSettings({ ...settings, level });
+}
+
+export function setBaetaLogTransport(transport: BaetaLogTransport): void {
+	const settings = getLogSettings();
+	setLogSettings({ ...settings, transport });
+}
+
+export function createLogger(packageName: string) {
+	return createLogMethods<BaetaLogMessageBase>((level, message) => {
+		send(level, { package: packageName, ...message });
+	});
+}
+
+export const log = createLogMethods<BaetaLogMessage>(send);
+
+function send(level: BaetaLogLevel, message: BaetaLogMessage): void {
+	const settings = getLogSettings();
+	if (shouldLog(level, settings.level)) {
+		settings.transport(level, message);
 	}
-
-	const wrap = (withLevel: Level) => {
-		if (levelValue[withLevel] < levelValue[level]) {
-			return noop;
-		}
-		return (...args: any) => {
-			const namespace = `[baeta:${withLevel}]`;
-			if (glb.console[withLevel] == null) {
-				glb.console.info?.(namespace, ...args);
-				return;
-			}
-			glb.console[withLevel]?.(namespace, ...args);
-		};
-	};
-
-	return {
-		debug: wrap('debug'),
-		info: wrap('info'),
-		warn: wrap('warn'),
-		error: wrap('error'),
-	};
 }
 
-export const log = createLogger();
+function getLogSettings(): LogSettings {
+	return (globalThis as GlobalThisWithLogSettings)[settingsSymbol] ?? defaultSettings;
+}
+
+function setLogSettings(settings: LogSettings): void {
+	(globalThis as GlobalThisWithLogSettings)[settingsSymbol] = settings;
+}

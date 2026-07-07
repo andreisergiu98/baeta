@@ -1,4 +1,4 @@
-import { log } from '@baeta/util-log';
+import { logger } from './logger.ts';
 
 export function createGrantCache() {
 	const cache = new WeakMap<object, Set<string>>();
@@ -9,10 +9,11 @@ export function createGrantCache() {
 		},
 		addGrants: (result: unknown, values: string[]) => {
 			if (!isValidTarget(result)) {
-				log.warn(
-					`Attempted to add grants for a non-object result. Grants will not be saved.`,
-					new Error().stack,
-				);
+				logger.warn({
+					type: 'invalid-grant-target',
+					message: `Attempted to add grants for a non-object result. Grants will not be saved.`,
+					extra: { stack: new Error().stack },
+				});
 				return;
 			}
 			const existing = cache.get(result) ?? new Set<string>();

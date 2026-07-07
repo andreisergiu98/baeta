@@ -3,6 +3,7 @@ import { hideBin } from 'yargs/helpers';
 import { createGenerateCommand } from './commands/generate/index.ts';
 import { loadConfig } from './lib/config-loader.ts';
 import pkg from './package.json' with { type: 'json' };
+import { makeErrorMessage } from './sdk/errors.tsx';
 
 export async function run() {
 	try {
@@ -16,7 +17,7 @@ export async function run() {
 			.help()
 			.parseAsync();
 	} catch (err) {
-		console.error(err);
+		console.error(makeErrorMessage('Command failed.'), err);
 		process.exitCode = 1;
 	} finally {
 		if (process.stdout.isTTY) {

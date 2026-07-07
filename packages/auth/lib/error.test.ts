@@ -1,11 +1,11 @@
 import { AggregateGraphQLError, BaetaErrorCode, UnauthenticatedError } from '@baeta/errors';
 import test, { sinon } from '@baeta/testing';
-import { log } from '@baeta/util-log';
 import { GraphQLError } from 'graphql';
 import { aggregateErrorResolver, defaultErrorResolver, resolveError } from './error.ts';
+import { logger } from './logger.ts';
 
 test.before(() => {
-	sinon.stub(log, 'warn');
+	sinon.stub(logger, 'warn');
 });
 
 test.after(() => {

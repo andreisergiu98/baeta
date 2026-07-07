@@ -1,3 +1,5 @@
+import { logger } from './logger.ts';
+
 /**
  * Configuration options for the context store.
  */
@@ -7,6 +9,13 @@ export interface ContextStoreOptions {
 	 * @defaultValue false
 	 */
 	eager?: boolean;
+	/**
+	 * Whether to warn when a loader is set on a context that already has one.
+	 * The existing loader is always kept. Disable when setting the loader
+	 * repeatedly is expected, e.g. from a middleware that runs per field.
+	 * @defaultValue true
+	 */
+	warnOnDuplicateLoader?: boolean;
 }
 
 export type ContextStoreValue<T> =
@@ -70,12 +79,24 @@ export function createContextStore<Result, Context = unknown>(
 		const _ctx = ctx as Record<symbol, ContextStoreValue<Result> | undefined>;
 
 		if (_ctx[key] != null) {
+			if (options?.warnOnDuplicateLoader !== false) {
+				logger.warn({
+					type: 'context-store',
+					message: `Loader for context store ${String(key)} is already set. Keeping the existing one.`,
+				});
+			}
 			return;
 		}
 
 		if (options?.eager) {
 			const promise = loadAsync(loader);
-			promise.catch(() => {});
+			promise.catch((err) => {
+				logger.debug({
+					type: 'context-store-eager-load',
+					message: `Eager loader for context store ${String(key)} failed.`,
+					error: err,
+				});
+			});
 			_ctx[key] = {
 				isLoaded: true,
 				result: promise,

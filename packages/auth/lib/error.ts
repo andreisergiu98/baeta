@@ -1,6 +1,6 @@
 import { AggregateGraphQLError, InternalServerError } from '@baeta/errors';
-import { log } from '@baeta/util-log';
 import { GraphQLError } from 'graphql';
+import { logger } from './logger.ts';
 
 /** Custom error resolver function for authorization failures. */
 export type ScopeErrorResolver = (err: unknown) => unknown;
@@ -21,7 +21,11 @@ export function defaultErrorResolver(err: unknown): unknown {
 	}
 
 	if (!isGraphqlError(err)) {
-		log.warn(`Non GraphQLError encountered by auth`, err);
+		logger.warn({
+			type: 'non-graphql-error',
+			message: `Non GraphQLError encountered by auth`,
+			extra: { origin: err },
+		});
 	}
 
 	return err;
@@ -34,7 +38,11 @@ export function defaultErrorResolver(err: unknown): unknown {
 export function aggregateErrorResolver(err: AggregateError) {
 	if (err.errors.length === 1) {
 		if (!isGraphqlError(err.errors[0])) {
-			log.warn(`Non GraphQLError encountered by auth`, err);
+			logger.warn({
+				type: 'non-graphql-error',
+				message: `Non GraphQLError encountered by auth`,
+				extra: { origin: err },
+			});
 		}
 		return err.errors[0];
 	}
@@ -45,7 +53,11 @@ export function aggregateErrorResolver(err: AggregateError) {
 	for (const error of err.errors) {
 		if (!isGraphqlError(error)) {
 			errors.push(new InternalServerError(error));
-			log.warn(`Non GraphQLError encountered by auth`, err);
+			logger.warn({
+				type: 'non-graphql-error',
+				message: `Non GraphQLError encountered by auth`,
+				extra: { origin: err },
+			});
 			continue;
 		}
 		errors.push(error);

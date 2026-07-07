@@ -1892,6 +1892,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tests-cache-clients": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-log": "workspace:^"
     "@cloudflare/workers-types": "npm:^5.20260703.1"
     miniflare: "npm:^4.20260701.0"
     typescript: "catalog:dev"
@@ -2028,6 +2029,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-log": "workspace:^"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
@@ -2044,6 +2046,7 @@ __metadata:
     "@baeta/errors": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-log": "workspace:^"
     "@graphql-tools/schema": "npm:^10.0.34"
     "@graphql-tools/utils": "npm:^11.1.1"
     graphql: "catalog:dev"
@@ -3152,6 +3155,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-env": "workspace:^"
     typescript: "catalog:dev"
   languageName: unknown
   linkType: soft

@@ -211,5 +211,8 @@ Both `createContextStore` and `createContextStoreWithLoader` accept these option
 ```typescript
 type StoreOptions = {
   eager?: boolean; // If true, loads immediately when initialized. Default: false (lazy)
+  warnOnDuplicateLoader?: boolean; // Warn when a loader is set on a context that already has one. Default: true
 };
 ```
+
+Setting a loader on a context that already has one keeps the existing loader and logs a warning. If your setup intentionally registers the same loader multiple times per request (e.g. from a middleware that runs per field), disable the warning with `warnOnDuplicateLoader: false`.

@@ -1,9 +1,9 @@
 import test, { sinon } from '@baeta/testing';
-import { log } from '@baeta/util-log';
 import { createGrantCache } from './grant-cache.ts';
+import { logger } from './logger.ts';
 
 test.before(() => {
-	sinon.stub(log, 'warn');
+	sinon.stub(logger, 'warn');
 });
 
 test.after(() => {
@@ -55,7 +55,7 @@ test('addGrants keeps targets isolated', (t) => {
 });
 
 test('addGrants ignores non-object targets and logs a warning', (t) => {
-	const warn = log.warn as sinon.SinonStub;
+	const warn = logger.warn as sinon.SinonStub;
 	warn.resetHistory();
 
 	const cache = createGrantCache();

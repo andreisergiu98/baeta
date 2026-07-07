@@ -46,8 +46,8 @@ export function calculateComplexity<Context>(
 	}
 
 	const safeDefaults: ComplexityDefaults = {
-		complexity: sanitizeLimit(defaults.complexity, 1),
-		multiplier: sanitizeLimit(defaults.multiplier, 10),
+		complexity: sanitizeLimit(defaults.complexity, 1, 'defaultComplexity'),
+		multiplier: sanitizeLimit(defaults.multiplier, 10, 'defaultListMultiplier'),
 	};
 
 	return complexityFromSelectionSet(
@@ -197,9 +197,17 @@ function complexityFromField<Context>(
 	let breadth = 1;
 	let complexity = 0;
 
-	const listMultiplier = sanitizeLimit(fieldComplexitySettings?.multiplier, defaults.multiplier);
+	const listMultiplier = sanitizeLimit(
+		fieldComplexitySettings?.multiplier,
+		defaults.multiplier,
+		`${type.name}.${fieldName} multiplier`,
+	);
 	const multiplier = field && isListOrNullableList(field.type) ? listMultiplier : 1;
-	const fieldComplexity = sanitizeLimit(fieldComplexitySettings?.complexity, defaults.complexity);
+	const fieldComplexity = sanitizeLimit(
+		fieldComplexitySettings?.complexity,
+		defaults.complexity,
+		`${type.name}.${fieldName} complexity`,
+	);
 
 	complexity += fieldComplexity * multiplier;
 

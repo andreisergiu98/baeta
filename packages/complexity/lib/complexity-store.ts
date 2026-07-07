@@ -8,6 +8,7 @@ export function createComplexityStore<Context>() {
 	const [get, load] = createContextStoreWithLoader(
 		Symbol('@baeta/complexity'),
 		complexityStoreLoader<Context>,
+		{ warnOnDuplicateLoader: false },
 	);
 	return {
 		get,
@@ -36,9 +37,9 @@ async function complexityStoreLoader<Context>(
 
 	return {
 		limits: {
-			depth: sanitizeLimit(limits?.depth, defaultLimits.depth),
-			breadth: sanitizeLimit(limits?.breadth, defaultLimits.breadth),
-			complexity: sanitizeLimit(limits?.complexity, defaultLimits.complexity),
+			depth: sanitizeLimit(limits?.depth, defaultLimits.depth, 'limit.depth'),
+			breadth: sanitizeLimit(limits?.breadth, defaultLimits.breadth, 'limit.breadth'),
+			complexity: sanitizeLimit(limits?.complexity, defaultLimits.complexity, 'limit.complexity'),
 		},
 		cacheComplexity,
 	};

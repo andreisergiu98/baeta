@@ -2,6 +2,7 @@ export default [
 	'**/packages/*/CHANGELOG.md',
 	'**/website/build',
 	'**/website/docs/api',
+	'**/website/versioned_docs/*/api',
 	'**/website/.docusaurus',
 	'**/examples/**/modules/baeta-*',
 	'**/examples/**/modules/index.ts',

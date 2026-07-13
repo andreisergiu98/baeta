@@ -1,0 +1,60 @@
+{
+  "name": "@baeta/examples-centrifugo",
+  "version": "0.0.0",
+  "private": true,
+  "keywords": [
+    "baeta",
+    "builder",
+    "framework",
+    "graphql",
+    "schema",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreisergiu98/baeta.git",
+    "directory": "examples/centrifugo"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "baeta generate",
+    "centrifugo": "docker compose up",
+    "client": "node --enable-source-maps src/client.ts",
+    "start": "baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/core": "workspace:^",
+    "@baeta/env": "workspace:^",
+    "@baeta/subscriptions-stateless": "workspace:^",
+    "@baeta/subscriptions-stateless-dedupe": "workspace:^",
+    "@baeta/subscriptions-stateless-filter": "workspace:^",
+    "@koa/bodyparser": "^6.1.0",
+    "@koa/router": "^15.6.0",
+    "@urql/core": "^6.0.3",
+    "centrifuge": "^5.7.0",
+    "graphql": "catalog:next",
+    "koa": "^3.2.1",
+    "wonka": "^6.3.6",
+    "ws": "catalog:dev",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@baeta/cli": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/koa": "^3",
+    "@types/node": "catalog:dev",
+    "@types/ws": "catalog:dev",
+    "typescript": "catalog:dev"
+  }
+}

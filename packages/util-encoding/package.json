@@ -55,7 +55,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "js-base64": "^3.8.0"
+    "js-base64": "^3.8.1"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

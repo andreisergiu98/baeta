@@ -35,15 +35,15 @@
     "@baeta/core": "workspace:^",
     "graphql": "catalog:dev",
     "graphql-yoga": "catalog:dev",
-    "hono": "^4.12.27"
+    "hono": "^4.12.28"
   },
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^5.20260703.1",
+    "@cloudflare/workers-types": "^5.20260710.1",
     "@types/node": "catalog:dev",
-    "miniflare": "^4.20260701.0",
+    "miniflare": "^4.20260708.1",
     "typescript": "catalog:dev",
-    "wrangler": "^4.107.0"
+    "wrangler": "^4.110.0"
   }
 }

@@ -62,7 +62,7 @@
     "@baeta/core": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@graphql-tools/schema": "^10.0.34",
+    "@graphql-tools/schema": "^10.0.36",
     "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },

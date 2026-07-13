@@ -63,11 +63,11 @@
     "@baeta/tsconfig": "workspace:^",
     "@baeta/workspace-config": "workspace:^",
     "@changesets/cli": "^2.31.0",
-    "@eslint-react/eslint-plugin": "^5.10.2",
+    "@eslint-react/eslint-plugin": "^5.13.2",
     "@eslint/css": "^1.4.0",
     "@eslint/js": "^10.0.1",
     "@types/node": "catalog:dev",
-    "@typescript-eslint/parser": "^8.62.1",
+    "@typescript-eslint/parser": "^8.63.0",
     "@yarnpkg/sdks": "^3.3.0",
     "@yarnpkg/types": "^4.0.1",
     "eslint": "^10.6.0",
@@ -82,10 +82,10 @@
     "jsonc-eslint-parser": "^3.1.0",
     "lint-staged": "^17.0.8",
     "lockfile-lint": "^5.0.0",
-    "oxfmt": "^0.57.0",
-    "turbo": "^2.10.2",
+    "oxfmt": "^0.58.0",
+    "turbo": "^2.10.4",
     "typescript": "catalog:dev",
-    "typescript-eslint": "^8.62.1"
+    "typescript-eslint": "^8.63.0"
   },
   "dependenciesMeta": {
     "@apollo/rover@0.40.0": {
@@ -95,5 +95,5 @@
   "resolutions": {
     "@docusaurus/core@npm:3.10.1": "patch:@docusaurus/core@npm%3A3.10.1#~/.yarn/patches/@docusaurus-core-npm-3.10.1-ca011c3645.patch"
   },
-  "packageManager": "yarn@4.17.0+sha512.c2957de2f9025ab14d63b24d0d8be1f1655810e22c341042c27f7ecd017b180ec12db73d69ac366d71b304ef9f069349ce462de96f04f8f1da317f4f762c95ae"
+  "packageManager": "yarn@4.17.1+sha512.ccbfabf7d7b6b32075088be9386fb9a2e00bb6887ef07fa56effabc890a56d53da1ccc4128d62db245fcbd3961b236d75335bdf7d5320ed6eafb7588b7ad4697"
 }

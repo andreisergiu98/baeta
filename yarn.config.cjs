@@ -7,7 +7,8 @@ const path = require('node:path');
 const {
 	GRAPHQL_PEER_VERSION,
 	SUPPORTED_NODE_VERSIONS,
-	LEGACY_GRAPHQL_PEER_VERSION,
+	GRAPHQL_NEXT_PEER_VERSION,
+	GRAPHQL_NEXT_WORKSPACES,
 } = require('@baeta/workspace-config');
 
 /**
@@ -17,7 +18,10 @@ const {
  */
 function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 	for (const dependency of Yarn.dependencies()) {
-		if (dependency.workspace.ident === '@baeta/subscriptions-cloudflare') {
+		if (
+			dependency.workspace.ident &&
+			GRAPHQL_NEXT_WORKSPACES.includes(dependency.workspace.ident)
+		) {
 			continue;
 		}
 		if (dependency.type === 'peerDependencies') {
@@ -27,7 +31,10 @@ function enforceConsistentDependenciesAcrossTheProject({ Yarn }) {
 		for (const otherDependency of Yarn.dependencies({
 			ident: dependency.ident,
 		})) {
-			if (otherDependency.workspace.ident === '@baeta/subscriptions-cloudflare') {
+			if (
+				otherDependency.workspace.ident &&
+				GRAPHQL_NEXT_WORKSPACES.includes(otherDependency.workspace.ident)
+			) {
 				continue;
 			}
 			if (otherDependency.type === 'peerDependencies') {
@@ -166,8 +173,8 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('typedocOptions.tsconfig', './tsconfig.json');
 
 			if (workspace.manifest.peerDependencies?.graphql) {
-				if (workspace.ident === '@baeta/subscriptions-cloudflare') {
-					workspace.set('peerDependencies.graphql', LEGACY_GRAPHQL_PEER_VERSION);
+				if (workspace.ident && GRAPHQL_NEXT_WORKSPACES.includes(workspace.ident)) {
+					workspace.set('peerDependencies.graphql', GRAPHQL_NEXT_PEER_VERSION);
 				} else {
 					workspace.set('peerDependencies.graphql', GRAPHQL_PEER_VERSION);
 				}
@@ -186,7 +193,15 @@ function enforceWorkspaceMetadata({ Yarn }) {
 				workspace.set('scripts.build', 'baeta generate');
 			}
 			if (!excludeFromTypes.includes(workspace.manifest.name)) {
-				workspace.set('scripts.types', 'tsc --noEmit');
+				if (
+					['@baeta/examples-cloudflare', '@baeta/examples-cloudflare-ws'].includes(
+						workspace.manifest.name,
+					)
+				) {
+					workspace.set('scripts.types', 'tsc -b');
+				} else {
+					workspace.set('scripts.types', 'tsc --noEmit');
+				}
 			}
 			if (!excludeFromStart.includes(workspace.manifest.name)) {
 				workspace.set(

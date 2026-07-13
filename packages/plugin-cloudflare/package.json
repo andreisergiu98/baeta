@@ -66,20 +66,23 @@
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^5.20260710.1",
     "@types/node": "catalog:dev",
-    "graphql": "catalog:dev",
+    "graphql": "catalog:next",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@baeta/cache-cloudflare": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
     "@cloudflare/workers-types": "^5.0.0",
-    "graphql": "^16.6.0 || ^17.0.0"
+    "graphql": "^17.0.0"
   },
   "peerDependenciesMeta": {
     "@baeta/cache-cloudflare": {
       "optional": true
     },
     "@baeta/subscriptions-cloudflare": {
+      "optional": true
+    },
+    "graphql": {
       "optional": true
     }
   },

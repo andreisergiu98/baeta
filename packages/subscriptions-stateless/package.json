@@ -1,0 +1,92 @@
+{
+  "name": "@baeta/subscriptions-stateless",
+  "version": "0.0.0",
+  "description": "Stateless GraphQL subscriptions core for Baeta.",
+  "keywords": [
+    "baeta",
+    "builder",
+    "framework",
+    "graphql",
+    "schema",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/subscriptions-stateless"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "builder build",
+    "check:deps": "builder check-deps",
+    "postpack": "builder prepare --restore",
+    "prepack": "builder prepare",
+    "test": "builder test",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/util-log": "workspace:^",
+    "lru-cache": "^11.5.1"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/testing": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "graphql": "catalog:next",
+    "typescript": "catalog:dev"
+  },
+  "peerDependencies": {
+    "graphql": "^17.0.0"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ]
+  },
+  "engines": {
+    "node": "^22.20.0 || ^24.0.0 || >=26.0.0"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
+  }
+}

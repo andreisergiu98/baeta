@@ -28,14 +28,16 @@
   "type": "module",
   "scripts": {
     "build": "baeta generate",
-    "start": "baeta build --watch --generate --onSuccess='wrangler dev'",
-    "types": "tsc --noEmit"
+    "start": "baeta generate --watch --run='wrangler dev'",
+    "types": "tsc -b"
   },
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/subscriptions-cloudflare": "workspace:^",
-    "@hono/graphql-server": "^0.7.0",
-    "graphql": "catalog:dev",
+    "@baeta/subscriptions-stateless": "workspace:^",
+    "@baeta/subscriptions-stateless-dedupe": "workspace:^",
+    "@baeta/subscriptions-stateless-filter": "workspace:^",
+    "graphql": "catalog:next",
     "hono": "^4.12.29"
   },
   "devDependencies": {

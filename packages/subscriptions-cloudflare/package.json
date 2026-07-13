@@ -67,15 +67,17 @@
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
+    "@baeta/subscriptions-stateless": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@cloudflare/workers-types": "^5.20260710.1",
-    "graphql": "^16.14.2",
+    "graphql": "catalog:next",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {
+    "@baeta/subscriptions-stateless": "workspace:^",
     "@cloudflare/workers-types": "^5.0.0",
-    "graphql": "^16.6.0"
+    "graphql": "^17.0.0"
   },
   "ava": {
     "extensions": [

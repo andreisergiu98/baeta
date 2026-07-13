@@ -13,15 +13,7 @@ import {
 } from 'graphql-ws';
 
 const CONNECTION_INIT_TIMEOUT = 5000;
-
-const pingMessage = stringifyMessage({ type: MessageType.Ping });
-
-function createMessage<T extends MessageType>(type: T, payload?: Record<string, unknown>) {
-	if (payload) {
-		return { type, payload };
-	}
-	return { type };
-}
+const PING_MESSAGE = stringifyMessage({ type: MessageType.Ping });
 
 export function useWebsocket(
 	socket: WebSocket,
@@ -47,7 +39,7 @@ export function useWebsocket(
 			return;
 		}
 
-		socket.send(pingMessage);
+		socket.send(PING_MESSAGE);
 
 		pongTimeout = setTimeout(() => {
 			socket.close(CloseCode.ConnectionAcknowledgementTimeout, 'Pong timeout');
@@ -130,8 +122,16 @@ export function useWebsocket(
 	socket.addEventListener('close', handleClose);
 
 	socket.addEventListener('message', (ev) => {
-		handleEvent(ev).catch(() => {
+		handleEvent(ev).catch((error) => {
+			console.error('Failed to handle websocket message:', error);
 			socket.close(1011, 'Internal error');
 		});
 	});
+}
+
+function createMessage<T extends MessageType>(type: T, payload?: Record<string, unknown>) {
+	if (payload) {
+		return { type, payload };
+	}
+	return { type };
 }

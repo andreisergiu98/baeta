@@ -1,3 +1,4 @@
+import { dedupe, filter } from '../../lib/subscriptions.ts';
 import { UserModule } from './typedef.ts';
 
 const { Query, Mutation, Subscription, User } = UserModule;
@@ -51,7 +52,7 @@ const updateUserMutation = Mutation.updateUser
 			profile: null,
 		};
 
-		await ctx.publish('user-updated', updatedUser);
+		await ctx.emit('user-updated', updatedUser);
 
 		return updatedUser;
 	});
@@ -69,8 +70,14 @@ const userUpdatedSubscription = Subscription.userUpdated
 	})
 	.subscribe(({ ctx }) => {
 		console.log('Subscribed to user updated');
-		return ctx.subscribe('user-updated');
+		return ctx.listen('user-updated');
 	})
+	.$use(
+		filter(async ({ source }) => {
+			return source.id !== '1';
+		}),
+	)
+	.$use(dedupe())
 	.resolve(({ source }) => {
 		console.log('Resolved user updated', source);
 		return source;

@@ -2540,7 +2540,7 @@ __metadata:
     "@hono/graphql-server": "npm:^0.7.0"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
-    hono: "npm:^4.12.28"
+    hono: "npm:^4.12.29"
     miniflare: "npm:^4.20260708.1"
     typescript: "catalog:dev"
     wrangler: "npm:^4.110.0"
@@ -2558,7 +2558,7 @@ __metadata:
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     graphql-yoga: "catalog:dev"
-    hono: "npm:^4.12.28"
+    hono: "npm:^4.12.29"
     miniflare: "npm:^4.20260708.1"
     typescript: "catalog:dev"
     wrangler: "npm:^4.110.0"
@@ -15545,10 +15545,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.12.28, hono@npm:^4.12.8":
-  version: 4.12.28
-  resolution: "hono@npm:4.12.28"
-  checksum: 10c0/ae40349d1e2bbc3cd1f08083644287dc8cbdb9ca6ed8f1bcd5cd896a72763a79dd38a4153ef9bfb4102ae8f2203c36fa9033863f03431f9f52d21f4d720dbce5
+"hono@npm:^4.12.29, hono@npm:^4.12.8":
+  version: 4.12.29
+  resolution: "hono@npm:4.12.29"
+  checksum: 10c0/ee56efba993e765088c8e160e3e6fbe28138e0ae84a9f0e810917ef7cbb4dff2c50c947cabad1ec4852a5baf0225354a9e6dc8da9da66af0b0827e842a1870f7
   languageName: node
   linkType: hard
 

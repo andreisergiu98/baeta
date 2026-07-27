@@ -1,5 +1,25 @@
 # @baeta/auth
 
+## 2.0.0-next.17
+
+### Minor Changes
+
+- Add support for GraphQL 17 by [@andreisergiu98](https://github.com/andreisergiu98) in [#572](https://github.com/andreisergiu98/baeta/pull/572)
+
+### Patch Changes
+
+- Refactor app plugins so they make use of builder session by [@andreisergiu98](https://github.com/andreisergiu98) in [#610](https://github.com/andreisergiu98/baeta/pull/610)
+
+- Scope auth store to plugin instance by [@andreisergiu98](https://github.com/andreisergiu98) in [#601](https://github.com/andreisergiu98/baeta/pull/601)
+
+- Use plugin id for state key by [@andreisergiu98](https://github.com/andreisergiu98) in [#598](https://github.com/andreisergiu98/baeta/pull/598)
+
+- Add support for custom transport for logs and improve tracing by [@andreisergiu98](https://github.com/andreisergiu98) in [#616](https://github.com/andreisergiu98/baeta/pull/616)
+- Updated dependencies [[`c2b0d74`](https://github.com/andreisergiu98/baeta/commit/c2b0d746c3fa36fcf3bed8d434b08fd6f97323f8), [`fd14516`](https://github.com/andreisergiu98/baeta/commit/fd14516e9268835bfca58ba8ff7273c773640ffa), [`2299cd4`](https://github.com/andreisergiu98/baeta/commit/2299cd4e1d915c01072b58ae1c36caea1c0ca1b6), [`5fabeb4`](https://github.com/andreisergiu98/baeta/commit/5fabeb43959a57ac56354d9ae02a4387a1b35998), [`1a5be91`](https://github.com/andreisergiu98/baeta/commit/1a5be91e4181bd9ba0382d163b805e95305d6e53), [`75f3636`](https://github.com/andreisergiu98/baeta/commit/75f36365a8e4f9e48ed22ee783e0b15e124f6e51), [`7cd558c`](https://github.com/andreisergiu98/baeta/commit/7cd558c2a2c1111df0b6de663b6db50ad881bc88)]:
+  - @baeta/core@2.0.0-next.17
+  - @baeta/errors@2.0.0-next.17
+  - @baeta/util-log@2.0.0-next.6
+
 ## 2.0.0-next.16
 
 ### Major Changes

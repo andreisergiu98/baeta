@@ -1,5 +1,13 @@
 # @baeta/util-encoding
 
+## 2.0.0-next.6
+
+### Patch Changes
+
+- Add support for custom transport for logs and improve tracing by [@andreisergiu98](https://github.com/andreisergiu98) in [#616](https://github.com/andreisergiu98/baeta/pull/616)
+
+- Throw on invalid encodings by [@andreisergiu98](https://github.com/andreisergiu98) in [#617](https://github.com/andreisergiu98/baeta/pull/617)
+
 ## 2.0.0-next.5
 
 ### Major Changes

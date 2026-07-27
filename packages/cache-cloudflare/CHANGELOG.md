@@ -1,5 +1,14 @@
 # @baeta/cache-cloudflare
 
+## 2.0.0-next.17
+
+### Patch Changes
+
+- Add support for custom transport for logs and improve tracing by [@andreisergiu98](https://github.com/andreisergiu98) in [#616](https://github.com/andreisergiu98/baeta/pull/616)
+- Updated dependencies [[`37364b1`](https://github.com/andreisergiu98/baeta/commit/37364b1eceac797cd4077e2e26fb1492c752bf6c), [`7cd558c`](https://github.com/andreisergiu98/baeta/commit/7cd558c2a2c1111df0b6de663b6db50ad881bc88)]:
+  - @baeta/cache@2.0.0-next.17
+  - @baeta/util-log@2.0.0-next.6
+
 ## 2.0.0-next.16
 
 ### Major Changes

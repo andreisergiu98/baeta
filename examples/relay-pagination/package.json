@@ -35,8 +35,8 @@
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
-    "@prisma/adapter-better-sqlite3": "^7.8.0",
-    "@prisma/client-runtime-utils": "^7.8.0",
+    "@prisma/adapter-better-sqlite3": "^7.9.0",
+    "@prisma/client-runtime-utils": "^7.9.0",
     "graphql": "catalog:dev",
     "graphql-scalars": "catalog:dev",
     "graphql-ws": "catalog:prod",
@@ -50,11 +50,11 @@
     "@baeta/plugin-prisma": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@faker-js/faker": "^10.5.0",
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^7.9.0",
     "@types/node": "catalog:dev",
     "@types/ws": "catalog:dev",
     "@yarnpkg/pnpify": "^4.1.6",
-    "prisma": "^7.8.0",
+    "prisma": "^7.9.0",
     "typescript": "catalog:dev"
   },
   "prisma": {

@@ -63,7 +63,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-clients": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@upstash/redis": "^1.38.0",
+    "@upstash/redis": "^1.38.1",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {

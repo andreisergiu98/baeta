@@ -43,7 +43,7 @@
     "graphql-scalars": "catalog:dev",
     "graphql-ws": "catalog:prod",
     "graphql-yoga": "catalog:dev",
-    "ioredis": "^5.11.1",
+    "ioredis": "^6.0.0",
     "ws": "catalog:dev",
     "zod": "^4.4.3"
   },

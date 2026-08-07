@@ -1,5 +1,11 @@
 # @baeta/generator-sdk
 
+## 2.0.0-next.8
+
+### Patch Changes
+
+- Add support for custom transport for logs and improve tracing by [@andreisergiu98](https://github.com/andreisergiu98) in [#616](https://github.com/andreisergiu98/baeta/pull/616)
+
 ## 2.0.0-next.7
 
 ### Major Changes

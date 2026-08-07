@@ -1,5 +1,11 @@
 # @baeta/util-graphql
 
+## 2.0.0-next.5
+
+### Minor Changes
+
+- Add support for GraphQL 17 by [@andreisergiu98](https://github.com/andreisergiu98) in [#572](https://github.com/andreisergiu98/baeta/pull/572)
+
 ## 2.0.0-next.4
 
 ### Major Changes

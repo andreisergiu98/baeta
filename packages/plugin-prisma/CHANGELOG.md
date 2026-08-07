@@ -1,5 +1,13 @@
 # @baeta/plugin-prisma
 
+## 2.0.0-next.17
+
+### Patch Changes
+
+- Updated dependencies [[`7cd558c`](https://github.com/andreisergiu98/baeta/commit/7cd558c2a2c1111df0b6de663b6db50ad881bc88)]:
+  - @baeta/generator-sdk@2.0.0-next.8
+  - @baeta/plugin-exec@2.0.0-next.17
+
 ## 2.0.0-next.16
 
 ### Major Changes

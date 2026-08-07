@@ -1,6 +1,6 @@
 {
   "name": "@baeta/util-log",
-  "version": "2.0.0-next.5",
+  "version": "2.0.0-next.6",
   "description": "Logger utilities for Baeta.",
   "keywords": [
     "baeta",

@@ -1,5 +1,15 @@
 # @baeta/cache
 
+## 2.0.0-next.17
+
+### Patch Changes
+
+- Hash index tuples via ohash to avoid collision of different types by [@andreisergiu98](https://github.com/andreisergiu98) in [#591](https://github.com/andreisergiu98/baeta/pull/591)
+
+- Add support for custom transport for logs and improve tracing by [@andreisergiu98](https://github.com/andreisergiu98) in [#616](https://github.com/andreisergiu98/baeta/pull/616)
+- Updated dependencies [[`7cd558c`](https://github.com/andreisergiu98/baeta/commit/7cd558c2a2c1111df0b6de663b6db50ad881bc88)]:
+  - @baeta/util-log@2.0.0-next.6
+
 ## 2.0.0-next.16
 
 ### Major Changes

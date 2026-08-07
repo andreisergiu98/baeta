@@ -1,5 +1,18 @@
 # @baeta/plugin-cloudflare
 
+## 2.0.0-next.17
+
+### Minor Changes
+
+- Add support for GraphQL 17 by [@andreisergiu98](https://github.com/andreisergiu98) in [#572](https://github.com/andreisergiu98/baeta/pull/572)
+
+### Patch Changes
+
+- Add support for custom transport for logs and improve tracing by [@andreisergiu98](https://github.com/andreisergiu98) in [#616](https://github.com/andreisergiu98/baeta/pull/616)
+- Updated dependencies [[`7cd558c`](https://github.com/andreisergiu98/baeta/commit/7cd558c2a2c1111df0b6de663b6db50ad881bc88)]:
+  - @baeta/cache-cloudflare@2.0.0-next.17
+  - @baeta/generator-sdk@2.0.0-next.8
+
 ## 2.0.0-next.16
 
 ### Major Changes

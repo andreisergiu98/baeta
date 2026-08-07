@@ -78,10 +78,24 @@
     "@baeta/changelog": "0.0.0",
     "@baeta/testing": "0.0.0",
     "@baeta/tsconfig": "0.0.0",
-    "@baeta/website": "0.0.0"
+    "@baeta/website": "0.0.0",
+    "@baeta/e2e-subscriptions": "0.0.0"
   },
   "changesets": [
+    "big-eagles-juggle",
+    "big-phones-rhyme",
+    "busy-pianos-scream",
+    "fresh-beds-knock",
+    "new-results-begin",
+    "open-ducks-pay",
+    "orange-lies-wave",
     "orange-zebras-punch",
+    "quiet-waves-burn",
+    "silver-dots-scream",
+    "spicy-impalas-pick",
+    "spicy-toes-shake",
+    "sweet-jars-rhyme",
+    "tasty-rings-move",
     "v2-auth",
     "v2-cache-cloudflare",
     "v2-cache-ioredis",
@@ -109,6 +123,7 @@
     "v2-subscriptions-cloudflare",
     "v2-subscriptions-pubsub",
     "v2-util-graphql",
-    "v2-util-log"
+    "v2-util-log",
+    "wet-pillows-find"
   ]
 }

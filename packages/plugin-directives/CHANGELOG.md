@@ -1,5 +1,13 @@
 # @baeta/plugin-directives
 
+## 2.0.0-next.17
+
+### Patch Changes
+
+- Updated dependencies [[`47ffa69`](https://github.com/andreisergiu98/baeta/commit/47ffa69572e96c065deda45d26a0f20510e1fef9), [`5fabeb4`](https://github.com/andreisergiu98/baeta/commit/5fabeb43959a57ac56354d9ae02a4387a1b35998), [`7cd558c`](https://github.com/andreisergiu98/baeta/commit/7cd558c2a2c1111df0b6de663b6db50ad881bc88)]:
+  - @baeta/directives@2.0.0-next.17
+  - @baeta/generator-sdk@2.0.0-next.8
+
 ## 2.0.0-next.16
 
 ### Major Changes

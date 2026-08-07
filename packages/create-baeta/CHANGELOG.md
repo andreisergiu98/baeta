@@ -1,5 +1,13 @@
 # create-baeta
 
+## 2.0.0-next.17
+
+### Patch Changes
+
+- Refactor create-baeta logger and drop unnecessary dependencies by [@andreisergiu98](https://github.com/andreisergiu98) in [#588](https://github.com/andreisergiu98/baeta/pull/588)
+
+- Add support for custom transport for logs and improve tracing by [@andreisergiu98](https://github.com/andreisergiu98) in [#616](https://github.com/andreisergiu98/baeta/pull/616)
+
 ## 2.0.0-next.16
 
 ### Major Changes

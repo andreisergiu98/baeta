@@ -1,5 +1,12 @@
 # @baeta/cache-iovalkey
 
+## 2.0.0-next.17
+
+### Patch Changes
+
+- Updated dependencies [[`37364b1`](https://github.com/andreisergiu98/baeta/commit/37364b1eceac797cd4077e2e26fb1492c752bf6c), [`7cd558c`](https://github.com/andreisergiu98/baeta/commit/7cd558c2a2c1111df0b6de663b6db50ad881bc88)]:
+  - @baeta/cache@2.0.0-next.17
+
 ## 2.0.0-next.16
 
 ### Major Changes

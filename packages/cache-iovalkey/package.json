@@ -63,12 +63,12 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-clients": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "iovalkey": "^0.3.3",
+    "iovalkey": "^0.4.0",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {
     "@baeta/cache": "workspace:^",
-    "iovalkey": "^0.3.3"
+    "iovalkey": "^0.4.0"
   },
   "ava": {
     "extensions": [

@@ -1,5 +1,5 @@
 import { writeFile } from 'node:fs/promises';
-import { execa, execaCommand } from 'execa';
+import { execa } from 'execa';
 import symbols from 'log-symbols';
 import ora from 'ora';
 import type { CommandModule } from 'yargs';
@@ -157,7 +157,7 @@ async function getPackagesForPublish() {
 
 async function runBuild() {
 	console.log(`${symbols.info} Building packages before release...`);
-	await execaCommand('yarn run -T build', {
+	await execa('yarn', ['run', '-T', 'build'], {
 		stdio: 'inherit',
 	});
 	console.log(`${symbols.success} Build completed successfully`);

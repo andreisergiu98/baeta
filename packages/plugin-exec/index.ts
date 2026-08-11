@@ -1,5 +1,5 @@
 import { type Ctx, createPluginV1, type GeneratorPluginV1WatchOptions } from '@baeta/generator-sdk';
-import { execaCommand } from 'execa';
+import { execa, parseCommandString } from 'execa';
 
 /**
  * Configuration options for the exec plugin.
@@ -51,7 +51,8 @@ export function createExecPlugin(options: ExecPluginOptions) {
 				return await next();
 			}
 
-			const child = execaCommand(options.exec, {
+			const [program, ...args] = parseCommandString(options.exec);
+			const child = execa(program, args, {
 				cwd: process.cwd(),
 				stdio: 'pipe',
 			});

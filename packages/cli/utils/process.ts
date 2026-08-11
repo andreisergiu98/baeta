@@ -1,4 +1,4 @@
-import { execaCommand, parseCommandString } from 'execa';
+import { execa, parseCommandString } from 'execa';
 import { makeErrorMessage } from '../sdk/errors.tsx';
 
 export type PtyProcess = {
@@ -43,7 +43,8 @@ function startProcessWithExeca({ command, onData, onExit }: StartProcessOptions)
 		},
 	});
 
-	const subprocess = execaCommand(command, {
+	const [program, ...args] = parseCommandString(command);
+	const subprocess = execa(program, args, {
 		stdin: inputStream,
 		stdout: outputStream,
 		stderr: outputStream,
@@ -53,7 +54,7 @@ function startProcessWithExeca({ command, onData, onExit }: StartProcessOptions)
 
 	let didExit = false;
 
-	subprocess.on('exit', () => {
+	subprocess.nodeChildProcess.on('exit', () => {
 		didExit = true;
 		onExit?.();
 	});
@@ -79,7 +80,7 @@ function startProcessWithExeca({ command, onData, onExit }: StartProcessOptions)
 		exit: async () => {
 			if (didExit) return;
 			return await new Promise((resolve) => {
-				subprocess.on('exit', resolve);
+				subprocess.nodeChildProcess.on('exit', resolve);
 				setTimeout(resolve, EXIT_TIMEOUT);
 				subprocess.kill('SIGTERM');
 			});

@@ -1895,7 +1895,7 @@ __metadata:
     "@yarnpkg/fslib": "npm:^3.1.5"
     c8: "npm:^12.0.0"
     esbuild: "npm:^0.28.1"
-    execa: "npm:^9.6.1"
+    execa: "npm:^10.0.1"
     log-symbols: "npm:^7.0.1"
     marked: "npm:^18.0.9"
     ora: "npm:^9.4.1"
@@ -2035,7 +2035,7 @@ __metadata:
     "@types/node": "catalog:dev"
     "@types/react": "catalog:dev"
     "@types/yargs": "npm:^17.0.35"
-    execa: "npm:^9.6.1"
+    execa: "npm:^10.0.1"
     graphql: "catalog:dev"
     ink: "npm:^7.1.1"
     node-pty: "npm:1.2.0-beta.15"
@@ -2135,7 +2135,7 @@ __metadata:
     "@graphql-codegen/cli": "catalog:dev"
     "@graphql-codegen/client-preset": "catalog:dev"
     "@types/node": "catalog:dev"
-    execa: "npm:^9.6.1"
+    execa: "npm:^10.0.1"
     graphql: "catalog:dev"
     node-pty: "npm:1.2.0-beta.15"
     pathe: "npm:^2.0.3"
@@ -2935,7 +2935,7 @@ __metadata:
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@types/node": "catalog:dev"
-    execa: "npm:^9.6.1"
+    execa: "npm:^10.0.1"
     typescript: "catalog:dev"
   languageName: unknown
   linkType: soft
@@ -12791,7 +12791,7 @@ __metadata:
     "@types/node": "catalog:dev"
     "@types/semver": "npm:^7.8.0"
     "@types/yargs": "npm:^17.0.35"
-    execa: "npm:^9.6.1"
+    execa: "npm:^10.0.1"
     log-symbols: "npm:^7.0.1"
     semver: "npm:^7.8.5"
     typescript: "catalog:dev"
@@ -14605,6 +14605,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"execa@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "execa@npm:10.0.1"
+  dependencies:
+    "@sindresorhus/merge-streams": "npm:^4.0.0"
+    figures: "npm:^6.1.0"
+    get-stream: "npm:^9.0.1"
+    human-signals: "npm:^8.0.1"
+    is-plain-obj: "npm:^4.1.0"
+    is-stream: "npm:^4.0.1"
+    npm-run-path: "npm:^6.0.0"
+    pretty-ms: "npm:^9.3.0"
+    signal-exit: "npm:^4.1.0"
+    strip-final-newline: "npm:^4.0.0"
+    which-command: "npm:^0.1.0"
+    yoctocolors: "npm:^2.1.2"
+  checksum: 10c0/5fc05e35729344d8fdddbc92d91d995cb9cb9080f953cd60367285a7001f1bca9a7deb6f421413a62e6f80d2c2e91af9cda6990b0a88e854cb414506b4b05fce
+  languageName: node
+  linkType: hard
+
 "execa@npm:^5.1.1":
   version: 5.1.1
   resolution: "execa@npm:5.1.1"
@@ -14619,26 +14639,6 @@ __metadata:
     signal-exit: "npm:^3.0.3"
     strip-final-newline: "npm:^2.0.0"
   checksum: 10c0/c8e615235e8de4c5addf2fa4c3da3e3aa59ce975a3e83533b4f6a71750fb816a2e79610dc5f1799b6e28976c9ae86747a36a606655bf8cb414a74d8d507b304f
-  languageName: node
-  linkType: hard
-
-"execa@npm:^9.6.1":
-  version: 9.6.1
-  resolution: "execa@npm:9.6.1"
-  dependencies:
-    "@sindresorhus/merge-streams": "npm:^4.0.0"
-    cross-spawn: "npm:^7.0.6"
-    figures: "npm:^6.1.0"
-    get-stream: "npm:^9.0.0"
-    human-signals: "npm:^8.0.1"
-    is-plain-obj: "npm:^4.1.0"
-    is-stream: "npm:^4.0.1"
-    npm-run-path: "npm:^6.0.0"
-    pretty-ms: "npm:^9.2.0"
-    signal-exit: "npm:^4.1.0"
-    strip-final-newline: "npm:^4.0.0"
-    yoctocolors: "npm:^2.1.1"
-  checksum: 10c0/636b36585306a3c8bc3a9d7b25d2d915fb06d8c9b9b02a804280d62562de3b34535affc1b7702b039320e0953daa6545a073f3c4b63fe974c1fe11336c56b467
   languageName: node
   linkType: hard
 
@@ -15320,7 +15320,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-stream@npm:^9.0.0":
+"get-stream@npm:^9.0.1":
   version: 9.0.1
   resolution: "get-stream@npm:9.0.1"
   dependencies:
@@ -20906,7 +20906,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-ms@npm:^9.2.0, pretty-ms@npm:^9.3.0":
+"pretty-ms@npm:^9.3.0":
   version: 9.3.0
   resolution: "pretty-ms@npm:9.3.0"
   dependencies:
@@ -24556,6 +24556,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"which-command@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "which-command@npm:0.1.0"
+  bin:
+    which-command: cli.js
+  checksum: 10c0/15b3952b466961ce147de197ef2d40d0f6242dac7d07785936541f7b8f6dba632bd6eab0abac362b80efc0029c536d044717c10aa96562831b0d0a7d548a0029
+  languageName: node
+  linkType: hard
+
 "which-typed-array@npm:^1.1.16":
   version: 1.1.22
   resolution: "which-typed-array@npm:1.1.22"
@@ -24911,7 +24920,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yoctocolors@npm:^2.1.1":
+"yoctocolors@npm:^2.1.1, yoctocolors@npm:^2.1.2":
   version: 2.2.0
   resolution: "yoctocolors@npm:2.2.0"
   checksum: 10c0/ca179aa83401aa0711f268fda38145a44c828e612a5f5265439efb5796cd63c46ca6b786bae3b74c75440a48518c36b5b23cba7fbb76ea8af5a9f85f830a5754

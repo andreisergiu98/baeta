@@ -2015,7 +2015,7 @@ __metadata:
   resolution: "@baeta/changelog@workspace:tools/changelog"
   dependencies:
     "@baeta/tsconfig": "workspace:^"
-    "@changesets/get-github-info": "npm:^0.8.0"
+    "@changesets/get-github-info": "npm:^1.0.0"
     "@changesets/types": "npm:^6.1.0"
     "@types/node": "catalog:dev"
     typescript: "catalog:dev"
@@ -3362,13 +3362,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/get-github-info@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@changesets/get-github-info@npm:0.8.0"
+"@changesets/get-github-info@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@changesets/get-github-info@npm:1.0.0"
   dependencies:
-    dataloader: "npm:^1.4.0"
-    node-fetch: "npm:^2.5.0"
-  checksum: 10c0/b7c53e368a1e77504a704de3080ee99c63e7610c3a69549ab6709089bdb3ae2faed33059852033440afe8225827504aae8124c464a65cd91a9ada1de1955cb9e
+    dataloader: "npm:^2.2.3"
+  checksum: 10c0/ae395c58bb360a425e09f07b342f6de49fdb1e21e9c196a9a821f87d6999fdbaab0e3c588ab5a748e54921d143912b2a9f44c4e7f1761944a7c6106a8449073f
   languageName: node
   linkType: hard
 
@@ -13252,13 +13251,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dataloader@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "dataloader@npm:1.4.0"
-  checksum: 10c0/5fa4c843b9e60195092f1fc7e2acaff318ed46886dc670ddff683bc560f12d4079e6d1e77749501b7e111a8582d26a2aa2a2fbe6d7d5e1520cef64f4e1fd242d
-  languageName: node
-  linkType: hard
-
 "dataloader@npm:^2.2.3":
   version: 2.2.3
   resolution: "dataloader@npm:2.2.3"
@@ -19054,7 +19046,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.5.0, node-fetch@npm:^2.6.7":
+"node-fetch@npm:^2.6.7":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:

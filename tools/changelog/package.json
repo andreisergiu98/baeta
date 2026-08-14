@@ -36,7 +36,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@changesets/get-github-info": "^0.8.0",
+    "@changesets/get-github-info": "^1.0.0",
     "@changesets/types": "^6.1.0"
   },
   "devDependencies": {

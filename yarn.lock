@@ -2016,7 +2016,7 @@ __metadata:
   dependencies:
     "@baeta/tsconfig": "workspace:^"
     "@changesets/get-github-info": "npm:^0.8.0"
-    "@changesets/types": "npm:^6.1.0"
+    "@changesets/types": "npm:^7.0.0"
     "@types/node": "catalog:dev"
     typescript: "catalog:dev"
   languageName: unknown
@@ -3473,6 +3473,13 @@ __metadata:
   version: 6.1.0
   resolution: "@changesets/types@npm:6.1.0"
   checksum: 10c0/b4cea3a4465d1eaf0bbd7be1e404aca5a055a61d4cc72aadcb73bbbda1670b4022736b8d3052616cbf1f451afa0637545d077697f4b923236539af9cd5abce6c
+  languageName: node
+  linkType: hard
+
+"@changesets/types@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@changesets/types@npm:7.0.0"
+  checksum: 10c0/494e09ff94968c1c81521f5ac8c6ab60a1e30d7d0cd9ea7f83c2cbac92efba38b03e008ee6fb4592d90b05d69bad864b6ae8155827d52a51c652f5c24d36ec83
   languageName: node
   linkType: hard
 

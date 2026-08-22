@@ -590,7 +590,7 @@ jobs:
         id: step_8
       - name: Run @changesets/action
         if: ${{ fromJSON(steps.step_7.outputs.isTip) == true }}
-        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d
+        uses: changesets/action@8488615a623b1b9c987934bb89eae8af6a946ac1
         with:
           publish: yarn builder release --ci --create-release --create-tags
             --check-branch=${{ github.ref_name }} --verbose

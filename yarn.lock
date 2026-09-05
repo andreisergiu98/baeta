@@ -5345,24 +5345,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/css-tree@npm:^4.0.4":
-  version: 4.0.5
-  resolution: "@eslint/css-tree@npm:4.0.5"
+"@eslint/css-tree@npm:^4.0.5":
+  version: 4.1.0
+  resolution: "@eslint/css-tree@npm:4.1.0"
   dependencies:
-    mdn-data: "npm:2.29.0"
+    mdn-data: "npm:2.34.0"
     source-map-js: "npm:^1.2.1"
-  checksum: 10c0/7fbcb169c98dc8172503b3b1f4bd58b65959e611387f936aa0df193b4c3111f02a79597b7363a5120dddac491117d448e02216379f675070fad7ab1256d8da3b
+  checksum: 10c0/df41242133c6d8aef21b3e9ececfbf1231e727b5a2d3d84d33c39a43340f6638670e2d4a3709cb23f93ce6dfab806b702a4b7c73a65bb2aad28e843dd4c7c8f5
   languageName: node
   linkType: hard
 
-"@eslint/css@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "@eslint/css@npm:1.4.0"
+"@eslint/css@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@eslint/css@npm:2.0.0"
   dependencies:
     "@eslint/core": "npm:^1.2.1"
-    "@eslint/css-tree": "npm:^4.0.4"
+    "@eslint/css-tree": "npm:^4.0.5"
     "@eslint/plugin-kit": "npm:^0.7.2"
-  checksum: 10c0/ccfce5699d30d1e5301120ed011e9163fc176ce0c1d1fcc4a4264f9d279cf4610b4d156b25202bc439cfb819e0017fd6c89863780ae6d2e63bf369a10a0a2852
+  checksum: 10c0/0a9339eb154d63a8a02eed21b854b2c054173be8d54da6e8e42bcf4c3b8f65af0d0634b4e5ab54ffb1380cfa47ba8933d849fb118ac5429fa8c716563df984f8
   languageName: node
   linkType: hard
 
@@ -11499,7 +11499,7 @@ __metadata:
     "@baeta/workspace-config": "workspace:^"
     "@changesets/cli": "npm:^2.31.1"
     "@eslint-react/eslint-plugin": "npm:^5.18.3"
-    "@eslint/css": "npm:^1.4.0"
+    "@eslint/css": "npm:^2.0.0"
     "@eslint/js": "npm:^10.0.1"
     "@types/node": "catalog:dev"
     "@typescript-eslint/parser": "npm:^8.66.0"
@@ -18032,10 +18032,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdn-data@npm:2.29.0":
-  version: 2.29.0
-  resolution: "mdn-data@npm:2.29.0"
-  checksum: 10c0/b973a82d0764ebe611014e3be1c174cbcd235f3d5f1f943530be03b2d2ec74e9db0b0018b2940e8f1f41ca887d1298dcd1d49738e6982f484dbbebccc0250652
+"mdn-data@npm:2.34.0":
+  version: 2.34.0
+  resolution: "mdn-data@npm:2.34.0"
+  checksum: 10c0/cc58ccae5d374b48c39cf4da8a93716710cbc8132c765c65529ee0ee0c0b36ceb09d637bbac378bb44ddf70f34d85d8d274e59a947a93f510de241801825c58d
   languageName: node
   linkType: hard
 

@@ -59,8 +59,8 @@
     "write:yoga:versions": "builder write-versions-manifest ./meta/yoga/package.json -o versions.yoga.json"
   },
   "dependencies": {
-    "@inquirer/input": "^5.1.2",
-    "@inquirer/select": "^5.2.1",
+    "@inquirer/input": "^5.1.4",
+    "@inquirer/select": "^5.2.3",
     "execa": "^10.0.1",
     "log-symbols": "^7.0.1",
     "semver": "^7.8.5",

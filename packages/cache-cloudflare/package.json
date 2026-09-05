@@ -64,7 +64,7 @@
   },
   "dependencies": {
     "@baeta/util-log": "workspace:^",
-    "zod": "^4.4.3"
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
@@ -72,7 +72,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-clients": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@cloudflare/workers-types": "^5.20260808.1",
+    "@cloudflare/workers-types": "^5.20260902.1",
     "miniflare": "^4.20260730.0",
     "typescript": "catalog:dev"
   },

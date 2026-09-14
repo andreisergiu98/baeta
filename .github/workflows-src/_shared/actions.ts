@@ -18,7 +18,7 @@ const actions = {
 	changesets: 'changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d', // v1.9.0
 	dockerLogin: 'docker/login-action@dbcb813823bdd20940b903addbd779551569679f', // v4.6.0
 	ghPages: 'peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453', // v4.1.0
-	renovate: 'renovatebot/github-action@316d7cd859606d6039a2182b7d69199e9b036835', // v46.2.1
+	renovate: 'renovatebot/github-action@c314dda4a9a93b08239ec978f2043b9a433b9ac4', // v46.3.0
 };
 
 export interface UseCheckoutOptions {

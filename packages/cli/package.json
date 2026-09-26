@@ -76,7 +76,7 @@
     "ink": "^7.1.1",
     "node-pty": "1.2.0-beta.15",
     "react": "catalog:prod",
-    "yargs": "^18.1.0"
+    "yargs": "^18.2.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

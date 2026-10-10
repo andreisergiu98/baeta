@@ -314,58 +314,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/rover-darwin-arm64@npm:0.41.0":
-  version: 0.41.0
-  resolution: "@apollo/rover-darwin-arm64@npm:0.41.0"
+"@apollo/rover-darwin-arm64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@apollo/rover-darwin-arm64@npm:1.0.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@apollo/rover-darwin-x64@npm:0.41.0":
-  version: 0.41.0
-  resolution: "@apollo/rover-darwin-x64@npm:0.41.0"
+"@apollo/rover-darwin-x64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@apollo/rover-darwin-x64@npm:1.0.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@apollo/rover-linux-arm64@npm:0.41.0":
-  version: 0.41.0
-  resolution: "@apollo/rover-linux-arm64@npm:0.41.0"
+"@apollo/rover-linux-arm64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@apollo/rover-linux-arm64@npm:1.0.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@apollo/rover-linux-x64-musl@npm:0.41.0":
-  version: 0.41.0
-  resolution: "@apollo/rover-linux-x64-musl@npm:0.41.0"
+"@apollo/rover-linux-x64-musl@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@apollo/rover-linux-x64-musl@npm:1.0.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@apollo/rover-linux-x64@npm:0.41.0":
-  version: 0.41.0
-  resolution: "@apollo/rover-linux-x64@npm:0.41.0"
+"@apollo/rover-linux-x64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@apollo/rover-linux-x64@npm:1.0.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@apollo/rover-win32-x64@npm:0.41.0":
-  version: 0.41.0
-  resolution: "@apollo/rover-win32-x64@npm:0.41.0"
+"@apollo/rover-win32-x64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@apollo/rover-win32-x64@npm:1.0.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@apollo/rover@npm:^0.41.0":
-  version: 0.41.0
-  resolution: "@apollo/rover@npm:0.41.0"
+"@apollo/rover@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@apollo/rover@npm:1.0.0"
   dependencies:
-    "@apollo/rover-darwin-arm64": "npm:0.41.0"
-    "@apollo/rover-darwin-x64": "npm:0.41.0"
-    "@apollo/rover-linux-arm64": "npm:0.41.0"
-    "@apollo/rover-linux-x64": "npm:0.41.0"
-    "@apollo/rover-linux-x64-musl": "npm:0.41.0"
-    "@apollo/rover-win32-x64": "npm:0.41.0"
+    "@apollo/rover-darwin-arm64": "npm:1.0.0"
+    "@apollo/rover-darwin-x64": "npm:1.0.0"
+    "@apollo/rover-linux-arm64": "npm:1.0.0"
+    "@apollo/rover-linux-x64": "npm:1.0.0"
+    "@apollo/rover-linux-x64-musl": "npm:1.0.0"
+    "@apollo/rover-win32-x64": "npm:1.0.0"
   dependenciesMeta:
     "@apollo/rover-darwin-arm64":
       optional: true
@@ -381,7 +381,7 @@ __metadata:
       optional: true
   bin:
     rover: bin/rover.js
-  checksum: 10c0/05155bad9212b1b61f1601524994257445fd3a616b64a1c79da8fc6b00893a0b2e98a8573bc173218f8172ea9701970fb0e70f9dbe1b798e2b090daa1b441481
+  checksum: 10c0/20d8476c5e7d5a11961a11d856c261c4ee8760ceae35984a1e9468c983ce933e9dc0d23ca51affd2f7efde58872a5c21586fea2f8147c57775fe5f08e59252cc
   languageName: node
   linkType: hard
 
@@ -2669,7 +2669,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@baeta/examples-federation-supergraph@workspace:examples/federation-supergraph"
   dependencies:
-    "@apollo/rover": "npm:^0.41.0"
+    "@apollo/rover": "npm:^1.0.0"
   languageName: unknown
   linkType: soft
 

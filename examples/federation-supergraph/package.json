@@ -30,6 +30,6 @@
     "start": "rover dev --supergraph-config supergraph.yaml"
   },
   "dependencies": {
-    "@apollo/rover": "^0.41.0"
+    "@apollo/rover": "^1.0.0"
   }
 }

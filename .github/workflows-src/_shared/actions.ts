@@ -13,12 +13,12 @@ const actions = {
 	cache: 'actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9', // v6.1.0
 	createGithubAppToken: 'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1', // v3.2.0
 	githubScript: 'actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3', // v9.0.0
-	uploadArtifact: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a', // v7.0.1
-	downloadArtifact: 'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c', // v8.0.1
+	uploadArtifact: 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9', // v7.0.2
+	downloadArtifact: 'actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333', // v8.0.2
 	changesets: 'changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d', // v1.9.0
 	dockerLogin: 'docker/login-action@dbcb813823bdd20940b903addbd779551569679f', // v4.6.0
 	ghPages: 'peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453', // v4.1.0
-	renovate: 'renovatebot/github-action@316d7cd859606d6039a2182b7d69199e9b036835', // v46.2.1
+	renovate: 'renovatebot/github-action@230ce922b08968d0a4f6f70f295601daff09ef1d', // v46.3.7
 };
 
 export interface UseCheckoutOptions {

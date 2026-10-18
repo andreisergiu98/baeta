@@ -1872,7 +1872,7 @@ __metadata:
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-log": "workspace:^"
     graphql: "catalog:dev"
-    safe-stable-stringify: "npm:^2.5.0"
+    safe-stable-stringify: "npm:^3.0.0"
     typescript: "catalog:dev"
   peerDependencies:
     "@baeta/core": "workspace:^"
@@ -22087,10 +22087,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-stable-stringify@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "safe-stable-stringify@npm:2.5.0"
-  checksum: 10c0/baea14971858cadd65df23894a40588ed791769db21bafb7fd7608397dbdce9c5aac60748abae9995e0fc37e15f2061980501e012cd48859740796bea2987f49
+"safe-stable-stringify@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "safe-stable-stringify@npm:3.0.0"
+  checksum: 10c0/100c30671dae9eecee2872874d73bf52a2bf36d3e9cf697d76783aee5c4cfc10e3ef52a9b7ab466d77f4338c2f68b76e51f028127318bbaec6cca1e8cc606f47
   languageName: node
   linkType: hard
 

@@ -34,7 +34,7 @@
   "dependencies": {
     "@baeta/core": "workspace:^",
     "@baeta/errors": "workspace:^",
-    "express": "^5.2.1",
+    "express": "^5.3.0",
     "graphql": "catalog:dev",
     "graphql-scalars": "catalog:dev",
     "graphql-yoga": "catalog:dev"

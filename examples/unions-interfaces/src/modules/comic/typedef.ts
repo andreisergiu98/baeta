@@ -22,18 +22,18 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   Comic: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      artist: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      pages: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "id">
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "title">
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "year">
+      artist: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "artist">
+      pages: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "pages">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      artist: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      pages: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "id">
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "title">
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "year">
+      artist: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "artist">
+      pages: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Comic, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Comic", "pages">
     };
   };
 };

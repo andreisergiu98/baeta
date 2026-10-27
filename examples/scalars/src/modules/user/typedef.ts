@@ -24,22 +24,22 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   User: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["UUID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      email: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      birthday: BaetaSdk.FieldMethods<BaetaTypes.Scalars["DateTime"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["UUID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "id">
+      email: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "email">
+      birthday: BaetaSdk.FieldMethods<BaetaTypes.Scalars["DateTime"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "birthday">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["UUID"], BaetaTypes.Scalars["UUID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      email: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      birthday: BaetaSdk.Field<BaetaTypes.Scalars["DateTime"], BaetaTypes.Scalars["DateTime"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["UUID"], BaetaTypes.Scalars["UUID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "id">
+      email: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "email">
+      birthday: BaetaSdk.Field<BaetaTypes.Scalars["DateTime"], BaetaTypes.Scalars["DateTime"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "birthday">
     };
   };
   Query: {
     Builder: {
-      user: BaetaSdk.FieldMethods<BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      user: BaetaSdk.FieldMethods<BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Query", "user">
     };
     Factory: {
-      user: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      user: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Query", "user">
     };
   };
 };

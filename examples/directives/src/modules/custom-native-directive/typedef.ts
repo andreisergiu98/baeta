@@ -24,18 +24,18 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   NameWithUpper: {
     Builder: {
-      name: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.NameWithUpper, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      name: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.NameWithUpper, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "NameWithUpper", "name">
     };
     Factory: {
-      name: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.NameWithUpper, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      name: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.NameWithUpper, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "NameWithUpper", "name">
     };
   };
   Query: {
     Builder: {
-      testUpperDirective: BaetaSdk.FieldMethods<BaetaTypes.NameWithUpper | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestUpperDirectiveArgs, BaetaUserTypes.Info>
+      testUpperDirective: BaetaSdk.FieldMethods<BaetaTypes.NameWithUpper | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestUpperDirectiveArgs, BaetaUserTypes.Info, "Query", "testUpperDirective">
     };
     Factory: {
-      testUpperDirective: BaetaSdk.Field<BaetaTypes.NameWithUpper | null, BaetaTypes.NameWithUpper | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestUpperDirectiveArgs, BaetaUserTypes.Info>
+      testUpperDirective: BaetaSdk.Field<BaetaTypes.NameWithUpper | null, BaetaTypes.NameWithUpper | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestUpperDirectiveArgs, BaetaUserTypes.Info, "Query", "testUpperDirective">
     };
   };
 };

@@ -22,10 +22,10 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   Query: {
     Builder: {
-      testIncrementDirective: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestIncrementDirectiveArgs, BaetaUserTypes.Info>
+      testIncrementDirective: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestIncrementDirectiveArgs, BaetaUserTypes.Info, "Query", "testIncrementDirective">
     };
     Factory: {
-      testIncrementDirective: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestIncrementDirectiveArgs, BaetaUserTypes.Info>
+      testIncrementDirective: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], {}, BaetaUserTypes.Ctx, BaetaTypes.QueryTestIncrementDirectiveArgs, BaetaUserTypes.Info, "Query", "testIncrementDirective">
     };
   };
 };

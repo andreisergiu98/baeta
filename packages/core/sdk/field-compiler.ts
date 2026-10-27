@@ -5,24 +5,40 @@ import type { PluginId } from './app-plugin.ts';
 import type { BuilderContext } from './builder-context.ts';
 import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 
-export interface FieldCompilerOptions<Result, Source, Context, Args, Info> {
-	type: string;
-	field: string;
+export interface FieldCompilerOptions<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string = string,
+	Name extends string = string,
+> {
+	type: Type;
+	field: Name;
 	context: BuilderContext<Result, Source, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
-export class FieldCompiler<Result, Source, Context, Args, Info> {
+export class FieldCompiler<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string = string,
+	Name extends string = string,
+> {
 	readonly kind = 'Field';
-	readonly #type: string;
-	readonly #field: string;
+	readonly #type: Type;
+	readonly #field: Name;
 	readonly #state: ReadonlyMap<symbol, unknown>;
 	readonly #middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #topLevelMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
 	readonly #resolver: Resolver<Result, Source, Context, Args, Info>;
 	readonly #requiredPluginIds: ReadonlySet<PluginId>;
 
-	constructor(options: FieldCompilerOptions<Result, Source, Context, Args, Info>) {
+	constructor(options: FieldCompilerOptions<Result, Source, Context, Args, Info, Type, Name>) {
 		this.#type = options.type;
 		this.#field = options.field;
 		this.#state = new Map(options.context.state);

@@ -1,9 +1,11 @@
 import test from '@baeta/testing';
 import type { Middleware } from '../lib/middleware.ts';
-import type { MockContext, MockInfo, MockSource } from './__test__/mocks.ts';
+import type { MockArgs, MockContext, MockInfo, MockResult, MockSource } from './__test__/mocks.ts';
 import { executeMockedTypeResolvers, mockTypeBuilder } from './__test__/type-mocks.ts';
 import { createAppPluginId } from './app-plugin.ts';
+import { createFieldBuilder } from './field.ts';
 import { makeSymbol } from './symbols.ts';
+import { createTypeBuilder } from './type.ts';
 
 test('TypeBuilder should be created correctly', async (t) => {
 	const typeBuilder = mockTypeBuilder();
@@ -16,6 +18,64 @@ test('TypeBuilder should handle $fields correctly', async (t) => {
 	const fields = typeBuilder.toMethods().$fields({
 		field1: methods.field1.key('name'),
 		field2: methods.field2.key('name'),
+	});
+	const { resolvers } = fields[makeSymbol]().build([]);
+	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
+		field1: 'test',
+		field2: 'test',
+	});
+});
+
+test('TypeBuilder $fields should only accept fields under their own type and name', async (t) => {
+	const field1 = createFieldBuilder<
+		MockResult,
+		MockSource,
+		MockContext,
+		MockArgs,
+		MockInfo,
+		'Type',
+		'field1'
+	>('Type', 'field1');
+	const field2 = createFieldBuilder<
+		MockResult,
+		MockSource,
+		MockContext,
+		MockArgs,
+		MockInfo,
+		'Type',
+		'field2'
+	>('Type', 'field2');
+	const otherField1 = createFieldBuilder<
+		MockResult,
+		MockSource,
+		MockContext,
+		MockArgs,
+		MockInfo,
+		'Other',
+		'field1'
+	>('Other', 'field1');
+	const methods = createTypeBuilder<
+		MockSource,
+		MockContext,
+		MockInfo,
+		{ field1: typeof field1; field2: typeof field2 },
+		{ field1: ReturnType<typeof field1.resolve>; field2: ReturnType<typeof field2.resolve> }
+	>('Type', { field1, field2 });
+
+	methods.$fields({
+		// @ts-expect-error - field2 can't be placed under field1
+		field1: field2.key('name'),
+		field2: field2.key('name'),
+	});
+	methods.$fields({
+		// @ts-expect-error - a field of another type can't be placed under field1
+		field1: otherField1.key('name'),
+		field2: field2.key('name'),
+	});
+
+	const fields = methods.$fields({
+		field1: field1.key('name'),
+		field2: field2.key('name'),
 	});
 	const { resolvers } = fields[makeSymbol]().build([]);
 	t.deepEqual(await executeMockedTypeResolvers(resolvers), {

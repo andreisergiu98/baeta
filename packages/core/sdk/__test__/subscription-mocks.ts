@@ -68,6 +68,7 @@ export function mockSubscriptionFieldResolver(
 			MockContext,
 			MockArgs,
 			MockInfo,
+			string,
 			{ value: MockResult }
 		>,
 	) => SubscriptionField<
@@ -77,6 +78,7 @@ export function mockSubscriptionFieldResolver(
 		MockContext,
 		MockArgs,
 		MockInfo,
+		string,
 		{ value: MockResult }
 	>,
 ) {
@@ -133,6 +135,7 @@ export async function executeMockedSubscriptionField(
 		MockContext,
 		MockArgs,
 		MockInfo,
+		string,
 		{ value: MockResult }
 	>,
 ) {
@@ -168,7 +171,8 @@ export function makeMockedSubscriptionField<
 	Context,
 	Args,
 	Info,
+	Name extends string,
 	Source,
->(field: SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Source>) {
+>(field: SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Name, Source>) {
 	return field[makeSymbol]();
 }

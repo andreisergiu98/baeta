@@ -26,34 +26,34 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   User: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      email: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      lastName: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      profile: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      givenName: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "id">
+      email: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "email">
+      lastName: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "lastName">
+      profile: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "profile">
+      givenName: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "givenName">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      email: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      lastName: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      profile: BaetaSdk.Field<BaetaTypes.Scalars["String"] | null, BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      givenName: BaetaSdk.Field<BaetaTypes.Scalars["String"] | null, BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "id">
+      email: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "email">
+      lastName: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "lastName">
+      profile: BaetaSdk.Field<BaetaTypes.Scalars["String"] | null, BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "profile">
+      givenName: BaetaSdk.Field<BaetaTypes.Scalars["String"] | null, BaetaTypes.Scalars["String"] | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "givenName">
     };
   };
   Query: {
     Builder: {
-      user: BaetaSdk.FieldMethods<BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryUserArgs, BaetaUserTypes.Info>
+      user: BaetaSdk.FieldMethods<BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryUserArgs, BaetaUserTypes.Info, "Query", "user">
     };
     Factory: {
-      user: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryUserArgs, BaetaUserTypes.Info>
+      user: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryUserArgs, BaetaUserTypes.Info, "Query", "user">
     };
   };
   Mutation: {
     Builder: {
-      createUser: BaetaSdk.FieldMethods<BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.MutationCreateUserArgs, BaetaUserTypes.Info>
+      createUser: BaetaSdk.FieldMethods<BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.MutationCreateUserArgs, BaetaUserTypes.Info, "Mutation", "createUser">
     };
     Factory: {
-      createUser: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.MutationCreateUserArgs, BaetaUserTypes.Info>
+      createUser: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, {}, BaetaUserTypes.Ctx, BaetaTypes.MutationCreateUserArgs, BaetaUserTypes.Info, "Mutation", "createUser">
     };
   };
 };

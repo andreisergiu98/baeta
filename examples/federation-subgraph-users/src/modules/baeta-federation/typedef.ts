@@ -26,20 +26,20 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   _Service: {
     Builder: {
-      sdl: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes._Service, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      sdl: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes._Service, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "_Service", "sdl">
     };
     Factory: {
-      sdl: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes._Service, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      sdl: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes._Service, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "_Service", "sdl">
     };
   };
   Query: {
     Builder: {
-      _service: BaetaSdk.FieldMethods<BaetaTypes._Service, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      _entities: BaetaSdk.FieldMethods<Array<BaetaTypes._Entity | null>, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryEntitiesArgs, BaetaUserTypes.Info>
+      _service: BaetaSdk.FieldMethods<BaetaTypes._Service, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Query", "_service">
+      _entities: BaetaSdk.FieldMethods<Array<BaetaTypes._Entity | null>, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryEntitiesArgs, BaetaUserTypes.Info, "Query", "_entities">
     };
     Factory: {
-      _service: BaetaSdk.Field<BaetaTypes._Service, BaetaTypes._Service, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      _entities: BaetaSdk.Field<Array<BaetaTypes._Entity | null>, Array<BaetaTypes._Entity | null>, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryEntitiesArgs, BaetaUserTypes.Info>
+      _service: BaetaSdk.Field<BaetaTypes._Service, BaetaTypes._Service, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Query", "_service">
+      _entities: BaetaSdk.Field<Array<BaetaTypes._Entity | null>, Array<BaetaTypes._Entity | null>, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryEntitiesArgs, BaetaUserTypes.Info, "Query", "_entities">
     };
   };
 };

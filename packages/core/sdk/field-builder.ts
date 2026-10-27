@@ -12,18 +12,34 @@ import {
 } from './resolver-chain.ts';
 import { makeSymbol } from './symbols.ts';
 
-export interface FieldBuilderOptions<Result, Source, Context, Args, Info> {
-	type: string;
-	field: string;
+export interface FieldBuilderOptions<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string = string,
+	Name extends string = string,
+> {
+	type: Type;
+	field: Name;
 	context: BuilderContext<Result, Source, Context, Args, Info>;
 }
 
-export class FieldBuilder<Result, Source, Context, Args, Info> {
-	readonly #type: string;
-	readonly #field: string;
+export class FieldBuilder<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string = string,
+	Name extends string = string,
+> {
+	readonly #type: Type;
+	readonly #field: Name;
 	readonly #context: BuilderContext<Result, Source, Context, Args, Info>;
 
-	constructor(options: FieldBuilderOptions<Result, Source, Context, Args, Info>) {
+	constructor(options: FieldBuilderOptions<Result, Source, Context, Args, Info, Type, Name>) {
 		this.#type = options.type;
 		this.#field = options.field;
 		this.#context = options.context;
@@ -44,8 +60,8 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 			Context,
 			Args,
 			Info,
-			FieldMethods<Result, Source, Context, Args, Info>,
-			FieldBuilder<Result, Source, Context, Args, Info>
+			FieldMethods<Result, Source, Context, Args, Info, Type, Name>,
+			FieldBuilder<Result, Source, Context, Args, Info, Type, Name>
 		>(this.#context, (nextContext) => {
 			return new FieldBuilder({
 				type: this.#type,
@@ -55,7 +71,7 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 		});
 	}
 
-	toMethods(): FieldMethods<Result, Source, Context, Args, Info> {
+	toMethods(): FieldMethods<Result, Source, Context, Args, Info, Type, Name> {
 		const make = <T>(resolver: Resolver<T, Source, Context, Args, Info>) => {
 			return createFieldWithMake({
 				type: this.#type,
@@ -92,19 +108,37 @@ export class FieldBuilder<Result, Source, Context, Args, Info> {
 	}
 }
 
-interface FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info> {
-	type: string;
-	field: string;
+interface FieldWithMakeOptions<
+	Expected,
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string,
+	Name extends string,
+> {
+	type: Type;
+	field: Name;
 	context: BuilderContext<Expected, Source, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
-function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
-	options: FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info>,
-): Field<Expected, Result, Source, Context, Args, Info> {
+function createFieldWithMake<
+	Expected,
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string,
+	Name extends string,
+>(
+	options: FieldWithMakeOptions<Expected, Result, Source, Context, Args, Info, Type, Name>,
+): Field<Expected, Result, Source, Context, Args, Info, Type, Name> {
 	const prefix = `${options.type}.${options.field}`;
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) => {
-		return createFieldWithMake<Expected, R, Source, Context, Args, Info>({
+		return createFieldWithMake<Expected, R, Source, Context, Args, Info, Type, Name>({
 			type: options.type,
 			field: options.field,
 			context: options.context,
@@ -119,7 +153,7 @@ function createFieldWithMake<Expected, Result, Source, Context, Args, Info>(
 		withDefault: (value) => make(chainWithDefaultResolver(options.resolver, value)),
 		undefinedAsNull: () => make(chainUndefinedAsNullResolver(options.resolver)),
 		[makeSymbol]: () =>
-			new FieldCompiler<Expected, Source, Context, Args, Info>({
+			new FieldCompiler<Expected, Source, Context, Args, Info, Type, Name>({
 				type: options.type,
 				field: options.field,
 				context: options.context,

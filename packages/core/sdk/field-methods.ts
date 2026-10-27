@@ -4,41 +4,66 @@ import type { UsePlugin } from './app-plugin.ts';
 import type { FieldCompiler } from './field-compiler.ts';
 import type { makeSymbol } from './symbols.ts';
 
-export type Field<Expected, Result, Source, Context, Args, Info> = {
+export type Field<
+	Expected,
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string = string,
+	Name extends string = string,
+> = {
+	[makeSymbol]: () => FieldCompiler<Expected, Source, Context, Args, Info, Type, Name>;
+} & {
 	map: <T = Expected>(
 		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
-	) => Field<Expected, T, Source, Context, Args, Info>;
+	) => Field<Expected, T, Source, Context, Args, Info, Type, Name>;
 	resolve: (
 		fn: (params: ResolverParams<Result, Context, Args, Info>) => Expected | PromiseLike<Expected>,
-	) => Field<Expected, Expected, Source, Context, Args, Info>;
-	key: <K extends keyof Result>(key: K) => Field<Expected, Result[K], Source, Context, Args, Info>;
-	to: <T = Expected>(fn: (source: Result) => T) => Field<Expected, T, Source, Context, Args, Info>;
+	) => Field<Expected, Expected, Source, Context, Args, Info, Type, Name>;
+	key: <K extends keyof Result>(
+		key: K,
+	) => Field<Expected, Result[K], Source, Context, Args, Info, Type, Name>;
+	to: <T = Expected>(
+		fn: (source: Result) => T,
+	) => Field<Expected, T, Source, Context, Args, Info, Type, Name>;
 	withDefault: <T = Expected>(
 		value: T,
-	) => Field<Expected, T | NonNullable<Result>, Source, Context, Args, Info>;
+	) => Field<Expected, T | NonNullable<Result>, Source, Context, Args, Info, Type, Name>;
 	undefinedAsNull: () => Field<
 		Expected,
 		Result extends undefined ? NonNullable<Result> | null : Result,
 		Source,
 		Context,
 		Args,
-		Info
+		Info,
+		Type,
+		Name
 	>;
-} & {
-	[makeSymbol]: () => FieldCompiler<Expected, Source, Context, Args, Info>;
 };
 
-export type FieldMethods<Result, Source, Context, Args, Info> = {
+export type FieldMethods<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Type extends string = string,
+	Name extends string = string,
+> = {
 	$use: (
 		input: FieldUseInput<Result, Source, Context, Args, Info>,
-	) => FieldMethods<Result, Source, Context, Args, Info>;
-	key: <K extends keyof Source>(key: K) => Field<Result, Source[K], Source, Context, Args, Info>;
+	) => FieldMethods<Result, Source, Context, Args, Info, Type, Name>;
+	key: <K extends keyof Source>(
+		key: K,
+	) => Field<Result, Source[K], Source, Context, Args, Info, Type, Name>;
 	map: <T = Result>(
 		resolver: Resolver<T, Source, Context, Args, Info>,
-	) => Field<Result, T, Source, Context, Args, Info>;
+	) => Field<Result, T, Source, Context, Args, Info, Type, Name>;
 	resolve: (
 		resolver: Resolver<Result, Source, Context, Args, Info>,
-	) => Field<Result, Result, Source, Context, Args, Info>;
+	) => Field<Result, Result, Source, Context, Args, Info, Type, Name>;
 };
 
 export type FieldUsePlugin<Result, Source, Context, Args, Info, State = unknown> = UsePlugin<

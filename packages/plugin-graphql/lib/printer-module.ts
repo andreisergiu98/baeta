@@ -217,8 +217,9 @@ function printObjectTypeFieldBuilders(
 	const argumentsType = getArgsType(config, typeName, field);
 	const contextType = getContextType();
 	const infoType = getInfoType();
+	const nameTypes = getFieldNameTypes(typeName, field);
 	const fieldType = typeName === 'Subscription' ? 'SubscriptionMethods' : 'FieldMethods';
-	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}>`;
+	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`;
 }
 
 function printObjectTypeFieldFactories(
@@ -231,8 +232,9 @@ function printObjectTypeFieldFactories(
 	const argumentsType = getArgsType(config, typeName, field);
 	const contextType = getContextType();
 	const infoType = getInfoType();
+	const nameTypes = getFieldNameTypes(typeName, field);
 	const fieldType = typeName === 'Subscription' ? 'SubscriptionField' : 'Field';
-	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}>`;
+	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`;
 }
 
 export function printModuleBuilder(config: ModulePrinterConfig, moduleName: string) {
@@ -289,6 +291,13 @@ function getResultType(config: ModulePrinterConfig, type: string, field: string)
 		return '{}';
 	}
 	return fieldType;
+}
+
+function getFieldNameTypes(type: string, field: string) {
+	if (type === 'Subscription') {
+		return `"${field}"`;
+	}
+	return `"${type}", "${field}"`;
 }
 
 function getArgsType(config: ModulePrinterConfig, type: string, field: string) {

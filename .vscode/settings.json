@@ -48,6 +48,7 @@
   "eslint.options": {
     "flags": ["unstable_native_nodejs_ts_config"]
   },
+  "oxc.path.oxfmt": ".yarn/sdks/oxfmt/bin/oxfmt",
   "[typescript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },

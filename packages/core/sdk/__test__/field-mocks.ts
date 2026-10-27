@@ -1,5 +1,6 @@
 import type { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
 import type { Middleware } from '../../lib/middleware.ts';
+import { createBuilderContext } from '../builder-context.ts';
 import { FieldBuilder } from '../field-builder.ts';
 import { FieldCompiler } from '../field-compiler.ts';
 import type { Field, FieldMethods } from '../field-methods.ts';
@@ -41,9 +42,11 @@ export function mockFieldBuilder({
 	return new FieldBuilder<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		state,
-		middlewares: [],
-		requiredPluginIds: new Set(),
+		context: createBuilderContext({
+			state,
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 	});
 }
 
@@ -55,9 +58,11 @@ export function mockFieldCompiler({
 	return new FieldCompiler<MockResult, MockSource, MockContext, MockArgs, MockInfo>({
 		type,
 		field,
-		state,
-		middlewares: [],
-		requiredPluginIds: new Set(),
+		context: createBuilderContext({
+			state,
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 		resolver: () => 'test',
 	});
 }

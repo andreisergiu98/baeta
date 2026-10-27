@@ -1,8 +1,13 @@
-import type { Middleware } from '../lib/middleware.ts';
-import type { Resolver, ResolverParams } from '../lib/resolver.ts';
+import type { Resolver } from '../lib/resolver.ts';
 import { nameFunction } from '../utils/functions.ts';
-import { mapMaybePromise } from '../utils/promise.ts';
-import type { PluginId } from './app-plugin.ts';
+import { BuilderEditor, type BuilderContext, createBuilderContext } from './builder-context.ts';
+import {
+	chainKeyResolver,
+	chainMapResolver,
+	chainToResolver,
+	chainUndefinedAsNullResolver,
+	chainWithDefaultResolver,
+} from './resolver-chain.ts';
 import { SubscriptionCompiler } from './subscription-compiler.ts';
 import type {
 	Or,
@@ -12,72 +17,57 @@ import type {
 	SubscriptionMethods,
 	SubscriptionResolveMethods,
 } from './subscription-methods.ts';
-import { makePluginSymbol, makeSymbol } from './symbols.ts';
+import { makeSymbol } from './symbols.ts';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface SubscriptionBuilderOptions<Result, Source, Context, Args, Info> {
 	field: string;
-	state: ReadonlyMap<symbol, unknown>;
-	middlewares: Array<Middleware<Subscription<unknown>, Source, Context, Args, Info>>;
-	requiredPluginIds: Set<PluginId>;
+	context: BuilderContext<Subscription<unknown>, Source, Context, Args, Info>;
 }
 
 export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 	readonly #field: string;
-	readonly #state: ReadonlyMap<symbol, unknown>;
-	readonly #middlewares: ReadonlyArray<
-		Middleware<Subscription<unknown>, Source, Context, Args, Info>
-	>;
-	readonly requiredPluginIds: ReadonlySet<PluginId>;
+	readonly #context: BuilderContext<Subscription<unknown>, Source, Context, Args, Info>;
 
 	constructor(options: SubscriptionBuilderOptions<Result, Source, Context, Args, Info>) {
 		this.#field = options.field;
-		this.#state = new Map(options.state);
-		this.#middlewares = [...options.middlewares];
-		this.requiredPluginIds = new Set(options.requiredPluginIds);
+		this.#context = options.context;
 	}
 
 	get field() {
 		return this.#field;
 	}
 
-	edit<MiddlewareResult extends Subscription<unknown> = Subscription<unknown>>() {
-		const draftState = new Map(this.#state);
-		const draftMiddlewares = [...this.#middlewares];
-		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
-		const session = {
-			field: this.#field,
-			addMiddleware: (middleware: Middleware<MiddlewareResult, Source, Context, Args, Info>) => {
-				draftMiddlewares.push(
-					middleware as unknown as Middleware<Subscription<unknown>, Source, Context, Args, Info>,
-				);
-				return session;
-			},
-			addRequiredPluginId: (id: PluginId) => {
-				draftRequiredPluginIds.add(id);
-				return session;
-			},
-			hasPluginState: (pluginId: PluginId) => draftState.has(pluginId.key),
-			getPluginState: <T>(pluginId: PluginId<T>) =>
-				draftState.get(pluginId.key) as Readonly<T> | undefined,
-			setPluginState: <T>(pluginId: PluginId<T>, value: Readonly<T>) => {
-				draftState.set(pluginId.key, value);
-				return session;
-			},
-			unsetPluginState: <T>(pluginId: PluginId<T>) => {
-				draftState.delete(pluginId.key);
-				return session;
-			},
-			commit: () =>
-				new SubscriptionBuilder<Result, Source, Context, Args, Info>({
+	edit<Payload = never>() {
+		return new BuilderEditor<
+			Subscription<Or<Payload, unknown>>,
+			Source,
+			Context,
+			Args,
+			Info,
+			SubscriptionMethods<Result, Source, Context, Args, Info, Payload>,
+			SubscriptionBuilder<Result, Source, Context, Args, Info>
+		>(
+			this.#context as BuilderContext<
+				Subscription<Or<Payload, unknown>>,
+				Source,
+				Context,
+				Args,
+				Info
+			>,
+			(nextContext) => {
+				return new SubscriptionBuilder<Result, Source, Context, Args, Info>({
 					field: this.#field,
-					state: draftState,
-					middlewares: draftMiddlewares,
-					requiredPluginIds: draftRequiredPluginIds,
-				}),
-			commitToMethods: <P = never>() => session.commit().toMethods<P>(),
-		} as const;
-		return session;
+					context: nextContext as BuilderContext<
+						Subscription<unknown>,
+						Source,
+						Context,
+						Args,
+						Info
+					>,
+				});
+			},
+		);
 	}
 
 	toMethods<Payload = never>(): SubscriptionMethods<Result, Source, Context, Args, Info, Payload> {
@@ -92,23 +82,14 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 					'subscribe'
 				>,
 			) => {
-				if (typeof input === 'function') {
-					nameFunction(input, `Subscription.${this.#field}.subscribe.use`);
-					return this.edit<Subscription<Or<Or<Payload, T>, unknown>>>()
-						.addMiddleware(input)
-						.commitToMethods<Or<Payload, T>>();
-				}
-				const plugin = input[makePluginSymbol];
-				const session = this.edit<Subscription<Or<Or<Payload, T>, unknown>>>().addRequiredPluginId(
-					plugin.id,
-				);
-				plugin.make(session, {
-					kind: 'subscription',
-					phase: 'subscribe',
-					type: 'Subscription',
-					field: this.#field,
-				});
-				return session.commitToMethods<Or<Payload, T>>();
+				return this.edit<Or<Payload, T>>()
+					.use(input, `Subscription.${this.#field}.subscribe.use`, {
+						kind: 'subscription',
+						phase: 'subscribe',
+						type: 'Subscription',
+						field: this.#field,
+					})
+					.commitToMethods();
 			},
 
 			subscribe: <T = Result>(
@@ -117,14 +98,19 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 				nameFunction(fn, `Subscription.${this.#field}.subscribe`);
 				return new SubscriptionResolveBuilder<Result, Or<Payload, T>, Source, Context, Args, Info>({
 					field: this.#field,
-					subscribeState: this.#state,
-					subscribeMiddlewares: this.#middlewares as ReadonlyArray<
-						Middleware<Subscription<Or<Payload, T>>, Source, Context, Args, Info>
+					subscribeContext: this.#context as BuilderContext<
+						Subscription<Or<Payload, T>>,
+						Source,
+						Context,
+						Args,
+						Info
 					>,
 					subscribe: fn,
-					resolveState: new Map(),
-					resolveMiddlewares: [],
-					requiredPluginIds: this.requiredPluginIds,
+					resolveContext: createBuilderContext({
+						state: new Map(),
+						middlewares: [],
+						requiredPluginIds: new Set(),
+					}),
 				}).toMethods();
 			},
 		};
@@ -133,37 +119,30 @@ export class SubscriptionBuilder<Result, Source, Context, Args, Info> {
 
 interface SubscriptionResolveBuilderOptions<Result, Source, ParentSource, Context, Args, Info> {
 	field: string;
-	subscribeState: ReadonlyMap<symbol, unknown>;
-	subscribeMiddlewares: ReadonlyArray<
-		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
-	>;
+	subscribeContext: BuilderContext<Subscription<Source>, ParentSource, Context, Args, Info>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveState: ReadonlyMap<symbol, unknown>;
-	resolveMiddlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
-	requiredPluginIds: ReadonlySet<PluginId>;
+	resolveContext: BuilderContext<Result, Source, Context, Args, Info>;
 }
 
 class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info> {
 	readonly #field: string;
-	readonly #subscribeState: ReadonlyMap<symbol, unknown>;
-	readonly #subscribeMiddlewares: ReadonlyArray<
-		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
+	readonly #subscribeContext: BuilderContext<
+		Subscription<Source>,
+		ParentSource,
+		Context,
+		Args,
+		Info
 	>;
 	readonly #subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	readonly #resolveState: ReadonlyMap<symbol, unknown>;
-	readonly #resolveMiddlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
-	readonly requiredPluginIds: ReadonlySet<PluginId>;
+	readonly #resolveContext: BuilderContext<Result, Source, Context, Args, Info>;
 
 	constructor(
 		options: SubscriptionResolveBuilderOptions<Result, Source, ParentSource, Context, Args, Info>,
 	) {
 		this.#field = options.field;
-		this.#subscribeState = options.subscribeState;
-		this.#subscribeMiddlewares = options.subscribeMiddlewares;
+		this.#subscribeContext = options.subscribeContext;
 		this.#subscribe = options.subscribe;
-		this.#resolveState = new Map(options.resolveState);
-		this.#resolveMiddlewares = [...options.resolveMiddlewares];
-		this.requiredPluginIds = new Set(options.requiredPluginIds);
+		this.#resolveContext = options.resolveContext;
 	}
 
 	get field() {
@@ -171,82 +150,52 @@ class SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, In
 	}
 
 	edit() {
-		const draftState = new Map(this.#resolveState);
-		const draftMiddlewares = [...this.#resolveMiddlewares];
-		const draftRequiredPluginIds = new Set(this.requiredPluginIds);
-		const session = {
-			field: this.#field,
-			addMiddleware: (middleware: Middleware<Result, Source, Context, Args, Info>) => {
-				draftMiddlewares.push(middleware);
-				return session;
-			},
-			addRequiredPluginId: (id: PluginId) => {
-				draftRequiredPluginIds.add(id);
-				return session;
-			},
-			hasPluginState: (pluginId: PluginId) => draftState.has(pluginId.key),
-			getPluginState: <T>(pluginId: PluginId<T>) =>
-				draftState.get(pluginId.key) as Readonly<T> | undefined,
-			setPluginState: <T>(pluginId: PluginId<T>, value: Readonly<T>) => {
-				draftState.set(pluginId.key, value);
-				return session;
-			},
-			unsetPluginState: <T>(pluginId: PluginId<T>) => {
-				draftState.delete(pluginId.key);
-				return session;
-			},
-			commit: () =>
-				new SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info>({
-					field: this.#field,
-					subscribeState: this.#subscribeState,
-					subscribeMiddlewares: this.#subscribeMiddlewares,
-					subscribe: this.#subscribe,
-					resolveState: draftState,
-					resolveMiddlewares: draftMiddlewares,
-					requiredPluginIds: draftRequiredPluginIds,
-				}),
-			commitToMethods: () => session.commit().toMethods(),
-		} as const;
-		return session;
-	}
-
-	#withMake<T>(resolver: Resolver<T, Source, Context, Args, Info>) {
-		return createSubscriptionFieldWithMake<Result, T, Source, ParentSource, Context, Args, Info>({
-			field: this.#field,
-			subscribeState: this.#subscribeState,
-			subscribeMiddlewares: this.#subscribeMiddlewares,
-			subscribe: this.#subscribe,
-			resolveState: this.#resolveState,
-			resolveMiddlewares: this.#resolveMiddlewares,
-			requiredPluginIds: this.requiredPluginIds,
-			resolver,
+		return new BuilderEditor<
+			Result,
+			Source,
+			Context,
+			Args,
+			Info,
+			SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info>,
+			SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info>
+		>(this.#resolveContext, (nextContext) => {
+			return new SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info>({
+				field: this.#field,
+				subscribeContext: this.#subscribeContext,
+				subscribe: this.#subscribe,
+				resolveContext: nextContext,
+			});
 		});
 	}
 
 	toMethods(): SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info> {
+		const make = <T>(resolver: Resolver<T, Source, Context, Args, Info>) => {
+			return createSubscriptionFieldWithMake<Result, T, Source, ParentSource, Context, Args, Info>({
+				field: this.#field,
+				subscribeContext: this.#subscribeContext,
+				subscribe: this.#subscribe,
+				resolveContext: this.#resolveContext,
+				resolver,
+			});
+		};
 		return {
 			$use: (input) => {
-				if (typeof input === 'function') {
-					nameFunction(input, `Subscription.${this.#field}.resolve.use`);
-					return this.edit().addMiddleware(input).commitToMethods();
-				}
-				const plugin = input[makePluginSymbol];
-				const session = this.edit().addRequiredPluginId(plugin.id);
-				plugin.make(session, {
-					kind: 'subscription',
-					phase: 'resolve',
-					type: 'Subscription',
-					field: this.#field,
-				});
-				return session.commitToMethods();
+				return this.edit()
+					.use(input, `Subscription.${this.#field}.resolve.use`, {
+						kind: 'subscription',
+						phase: 'resolve',
+						type: 'Subscription',
+						field: this.#field,
+					})
+					.commitToMethods();
 			},
 			map: (resolver) => {
 				nameFunction(resolver, `Subscription.${this.#field}.map`);
-				return this.#withMake(resolver);
+				return make(resolver);
 			},
 			resolve: (resolver) => {
 				nameFunction(resolver, `Subscription.${this.#field}.resolve`);
-				return this.#withMake(resolver);
+				return make(resolver);
 			},
 		};
 	}
@@ -262,15 +211,10 @@ interface SubscriptionFieldWithMakeOptions<
 	Info,
 > {
 	field: string;
-	subscribeState: ReadonlyMap<symbol, unknown>;
-	subscribeMiddlewares: ReadonlyArray<
-		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
-	>;
+	subscribeContext: BuilderContext<Subscription<Source>, ParentSource, Context, Args, Info>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveState: ReadonlyMap<symbol, unknown>;
-	resolveMiddlewares: ReadonlyArray<Middleware<Expected, Source, Context, Args, Info>>;
+	resolveContext: BuilderContext<Expected, Source, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
-	requiredPluginIds: ReadonlySet<PluginId>;
 }
 
 function createSubscriptionFieldWithMake<
@@ -292,77 +236,29 @@ function createSubscriptionFieldWithMake<
 		Info
 	>,
 ): SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Source> {
-	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) =>
-		createSubscriptionFieldWithMake<Expected, R, Source, ParentSource, Context, Args, Info>({
-			...options,
+	const prefix = `Subscription.${options.field}`;
+	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) => {
+		return createSubscriptionFieldWithMake<Expected, R, Source, ParentSource, Context, Args, Info>({
+			field: options.field,
+			subscribeContext: options.subscribeContext,
+			subscribe: options.subscribe,
+			resolveContext: options.resolveContext,
 			resolver,
 		});
-
-	const chain = <T>(
-		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
-	) => {
-		return (params: ResolverParams<Source, Context, Args, Info>) => {
-			const result = options.resolver(params);
-			return mapMaybePromise(result, (res) =>
-				fn({ source: res, args: params.args, ctx: params.ctx, info: params.info }),
-			);
-		};
 	};
-
-	const fnNamespace = `Subscription.${options.field}`;
-
 	return {
-		map: (fn) => {
-			nameFunction(fn, `${fnNamespace}.map`);
-			return make(chain(fn));
-		},
-		resolve: (fn) => {
-			nameFunction(fn, `${fnNamespace}.resolve`);
-			return make(chain(fn));
-		},
-		key: (key) => {
-			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = options.resolver(params);
-				return mapMaybePromise(result, (res) => res[key]);
-			};
-			return make(resolver);
-		},
-		to: (fn) => {
-			nameFunction(fn, `${fnNamespace}.to`);
-			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = options.resolver(params);
-				return mapMaybePromise(result, fn);
-			};
-			return make(resolver);
-		},
-		withDefault: (value) => {
-			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = options.resolver(params);
-				return mapMaybePromise(result, (res) => res ?? value);
-			};
-			return make(resolver);
-		},
-		undefinedAsNull: () => {
-			const resolver = (params: ResolverParams<Source, Context, Args, Info>) => {
-				const result = options.resolver(params);
-				return mapMaybePromise(
-					result,
-					(res) => (res ?? null) as Result extends undefined ? NonNullable<Result> | null : Result,
-				);
-			};
-			return make(resolver);
-		},
+		map: (fn) => make(chainMapResolver(`${prefix}.map`, options.resolver, fn)),
+		resolve: (fn) => make(chainMapResolver(`${prefix}.resolve`, options.resolver, fn)),
+		key: (key) => make(chainKeyResolver(options.resolver, key)),
+		to: (fn) => make(chainToResolver(`${prefix}.to`, options.resolver, fn)),
+		withDefault: (value) => make(chainWithDefaultResolver(options.resolver, value)),
+		undefinedAsNull: () => make(chainUndefinedAsNullResolver(options.resolver)),
 		[makeSymbol]: () =>
 			new SubscriptionCompiler<Expected, Source, ParentSource, Context, Args, Info>({
 				field: options.field,
-				subscribeState: new Map(options.subscribeState),
-				subscribeMiddlewares: [...options.subscribeMiddlewares],
+				subscribeContext: options.subscribeContext,
 				subscribe: options.subscribe,
-				resolveState: new Map(options.resolveState),
-				resolveMiddlewares: [...options.resolveMiddlewares] as Array<
-					Middleware<Expected, Source, Context, Args, Info>
-				>,
-				requiredPluginIds: new Set(options.requiredPluginIds),
+				resolveContext: options.resolveContext,
 				resolver: options.resolver as unknown as Resolver<Expected, Source, Context, Args, Info>,
 			}),
 	};

@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/complexity/noBannedTypes: Allow empty for source */
 import type { GraphQLResolveInfo } from 'graphql';
 import { isPromise } from '../../utils/promise.ts';
+import { createBuilderContext } from '../builder-context.ts';
 import { SubscriptionBuilder } from '../subscription-builder.ts';
 import { SubscriptionCompiler } from '../subscription-compiler.ts';
 import type { SubscriptionField } from '../subscription-methods.ts';
@@ -50,9 +51,11 @@ export function mockSubscriptionFieldBuilder({
 		MockInfo
 	>({
 		field,
-		state: new Map(),
-		middlewares: [],
-		requiredPluginIds: new Set(),
+		context: createBuilderContext({
+			state: new Map(),
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 	});
 }
 
@@ -97,12 +100,17 @@ export function mockSubscriptionFieldCompiler({
 		MockInfo
 	>({
 		field,
-		subscribeState,
-		subscribeMiddlewares: [],
+		subscribeContext: createBuilderContext({
+			state: subscribeState,
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 		subscribe: () => mockSubscriptionGenerator(1),
-		resolveState,
-		resolveMiddlewares: [],
-		requiredPluginIds: new Set(),
+		resolveContext: createBuilderContext({
+			state: resolveState,
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 		resolver: (params) => params.source.value,
 	});
 }

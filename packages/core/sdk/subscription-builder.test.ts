@@ -18,6 +18,7 @@ import {
 	mockSubscriptionGenerator,
 } from './__test__/subscription-mocks.ts';
 import { createAppPluginId } from './app-plugin.ts';
+import { createBuilderContext } from './builder-context.ts';
 import { SubscriptionBuilder } from './subscription-builder.ts';
 
 test('createSubscriptionBuilder should create a subscription field correctly', async (t) => {
@@ -29,9 +30,11 @@ test('createSubscriptionBuilder should create a subscription field correctly', a
 		MockInfo
 	>({
 		field: 'field',
-		state: new Map(),
-		middlewares: [],
-		requiredPluginIds: new Set(),
+		context: createBuilderContext({
+			state: new Map(),
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 	});
 
 	const subscriptionField = subscriptionBuilder

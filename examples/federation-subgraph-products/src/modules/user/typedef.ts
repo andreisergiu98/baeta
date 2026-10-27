@@ -22,10 +22,10 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   User: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "id">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "id">
     };
   };
 };

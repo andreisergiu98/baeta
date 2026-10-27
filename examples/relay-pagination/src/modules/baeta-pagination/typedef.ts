@@ -30,52 +30,52 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   PageInfo: {
     Builder: {
-      hasPreviousPage: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      hasNextPage: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      hasPreviousPage: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "PageInfo", "hasPreviousPage">
+      hasNextPage: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "PageInfo", "hasNextPage">
     };
     Factory: {
-      hasPreviousPage: BaetaSdk.Field<BaetaTypes.Scalars["Boolean"], BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      hasNextPage: BaetaSdk.Field<BaetaTypes.Scalars["Boolean"], BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      hasPreviousPage: BaetaSdk.Field<BaetaTypes.Scalars["Boolean"], BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "PageInfo", "hasPreviousPage">
+      hasNextPage: BaetaSdk.Field<BaetaTypes.Scalars["Boolean"], BaetaTypes.Scalars["Boolean"], BaetaTypes.PageInfo, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "PageInfo", "hasNextPage">
     };
   };
   UserConnection: {
     Builder: {
-      pageInfo: BaetaSdk.FieldMethods<BaetaTypes.PageInfo, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      edges: BaetaSdk.FieldMethods<Array<BaetaTypes.UserEdge | null> | null, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pageInfo: BaetaSdk.FieldMethods<BaetaTypes.PageInfo, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserConnection", "pageInfo">
+      edges: BaetaSdk.FieldMethods<Array<BaetaTypes.UserEdge | null> | null, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserConnection", "edges">
     };
     Factory: {
-      pageInfo: BaetaSdk.Field<BaetaTypes.PageInfo, BaetaTypes.PageInfo, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      edges: BaetaSdk.Field<Array<BaetaTypes.UserEdge | null> | null, Array<BaetaTypes.UserEdge | null> | null, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pageInfo: BaetaSdk.Field<BaetaTypes.PageInfo, BaetaTypes.PageInfo, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserConnection", "pageInfo">
+      edges: BaetaSdk.Field<Array<BaetaTypes.UserEdge | null> | null, Array<BaetaTypes.UserEdge | null> | null, BaetaTypes.UserConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserConnection", "edges">
     };
   };
   UserEdge: {
     Builder: {
-      cursor: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      node: BaetaSdk.FieldMethods<BaetaTypes.User | null, BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      cursor: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserEdge", "cursor">
+      node: BaetaSdk.FieldMethods<BaetaTypes.User | null, BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserEdge", "node">
     };
     Factory: {
-      cursor: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      node: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      cursor: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserEdge", "cursor">
+      node: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, BaetaTypes.UserEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserEdge", "node">
     };
   };
   UserPhotoConnection: {
     Builder: {
-      pageInfo: BaetaSdk.FieldMethods<BaetaTypes.PageInfo, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      edges: BaetaSdk.FieldMethods<Array<BaetaTypes.UserPhotoEdge | null> | null, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pageInfo: BaetaSdk.FieldMethods<BaetaTypes.PageInfo, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoConnection", "pageInfo">
+      edges: BaetaSdk.FieldMethods<Array<BaetaTypes.UserPhotoEdge | null> | null, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoConnection", "edges">
     };
     Factory: {
-      pageInfo: BaetaSdk.Field<BaetaTypes.PageInfo, BaetaTypes.PageInfo, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      edges: BaetaSdk.Field<Array<BaetaTypes.UserPhotoEdge | null> | null, Array<BaetaTypes.UserPhotoEdge | null> | null, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      pageInfo: BaetaSdk.Field<BaetaTypes.PageInfo, BaetaTypes.PageInfo, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoConnection", "pageInfo">
+      edges: BaetaSdk.Field<Array<BaetaTypes.UserPhotoEdge | null> | null, Array<BaetaTypes.UserPhotoEdge | null> | null, BaetaTypes.UserPhotoConnection, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoConnection", "edges">
     };
   };
   UserPhotoEdge: {
     Builder: {
-      cursor: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      node: BaetaSdk.FieldMethods<BaetaTypes.UserPhoto | null, BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      cursor: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoEdge", "cursor">
+      node: BaetaSdk.FieldMethods<BaetaTypes.UserPhoto | null, BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoEdge", "node">
     };
     Factory: {
-      cursor: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      node: BaetaSdk.Field<BaetaTypes.UserPhoto | null, BaetaTypes.UserPhoto | null, BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      cursor: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoEdge", "cursor">
+      node: BaetaSdk.Field<BaetaTypes.UserPhoto | null, BaetaTypes.UserPhoto | null, BaetaTypes.UserPhotoEdge, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhotoEdge", "node">
     };
   };
 };

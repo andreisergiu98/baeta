@@ -6,19 +6,38 @@ import type { makeSymbol } from './symbols.ts';
 
 export type Subscription<Result = unknown> = AsyncIterable<Result>;
 
-export type SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Source = any> = {
+export type SubscriptionField<
+	Expected,
+	Result,
+	ParentSource,
+	Context,
+	Args,
+	Info,
+	Name extends string = string,
+	Source = any,
+> = {
+	[makeSymbol]: () => SubscriptionCompiler<
+		Expected,
+		Source,
+		ParentSource,
+		Context,
+		Args,
+		Info,
+		Name
+	>;
+} & {
 	map: <T = Expected>(
 		fn: (params: ResolverParams<Result, Context, Args, Info>) => T | PromiseLike<T>,
-	) => SubscriptionField<Expected, T, ParentSource, Context, Args, Info, Source>;
+	) => SubscriptionField<Expected, T, ParentSource, Context, Args, Info, Name, Source>;
 	resolve: (
 		fn: (params: ResolverParams<Result, Context, Args, Info>) => Expected | PromiseLike<Expected>,
-	) => SubscriptionField<Expected, Expected, ParentSource, Context, Args, Info, Source>;
+	) => SubscriptionField<Expected, Expected, ParentSource, Context, Args, Info, Name, Source>;
 	key: <K extends keyof Result>(
 		key: K,
-	) => SubscriptionField<Expected, Result[K], ParentSource, Context, Args, Info, Source>;
+	) => SubscriptionField<Expected, Result[K], ParentSource, Context, Args, Info, Name, Source>;
 	to: <T = Expected>(
 		fn: (source: Result) => T,
-	) => SubscriptionField<Expected, T, ParentSource, Context, Args, Info, Source>;
+	) => SubscriptionField<Expected, T, ParentSource, Context, Args, Info, Name, Source>;
 	withDefault: <T = Expected>(
 		value: T,
 	) => SubscriptionField<
@@ -28,6 +47,7 @@ export type SubscriptionField<Expected, Result, ParentSource, Context, Args, Inf
 		Context,
 		Args,
 		Info,
+		Name,
 		Source
 	>;
 	undefinedAsNull: () => SubscriptionField<
@@ -37,15 +57,22 @@ export type SubscriptionField<Expected, Result, ParentSource, Context, Args, Inf
 		Context,
 		Args,
 		Info,
+		Name,
 		Source
 	>;
-} & {
-	[makeSymbol]: () => SubscriptionCompiler<Expected, Source, ParentSource, Context, Args, Info>;
 };
 
 export type Or<T, Fallback> = [T] extends [never] ? Fallback : T;
 
-export type SubscriptionMethods<Result, Source, Context, Args, Info, Payload = never> = {
+export type SubscriptionMethods<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+	Name extends string = string,
+	Payload = never,
+> = {
 	$use: <T = Payload>(
 		input: SubscriptionFieldUseInput<
 			Subscription<Or<Or<Payload, T>, unknown>>,
@@ -55,10 +82,10 @@ export type SubscriptionMethods<Result, Source, Context, Args, Info, Payload = n
 			Info,
 			'subscribe'
 		>,
-	) => SubscriptionMethods<Result, Source, Context, Args, Info, Or<Payload, T>>;
+	) => SubscriptionMethods<Result, Source, Context, Args, Info, Name, Or<Payload, T>>;
 	subscribe: <T = Result>(
 		fn: Resolver<Subscription<Or<Payload, T>>, Source, Context, Args, Info>,
-	) => SubscriptionResolveMethods<Result, Or<Payload, T>, Source, Context, Args, Info>;
+	) => SubscriptionResolveMethods<Result, Or<Payload, T>, Source, Context, Args, Info, Name>;
 };
 
 export type SubscriptionUsePlugin<
@@ -95,14 +122,22 @@ export type SubscriptionFieldUseInput<
 	| Middleware<Result, Source, Context, Args, Info>
 	| SubscriptionUsePlugin<Result, Source, Context, Args, Info, FieldKind>;
 
-export type SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info> = {
+export type SubscriptionResolveMethods<
+	Result,
+	Source,
+	ParentSource,
+	Context,
+	Args,
+	Info,
+	Name extends string = string,
+> = {
 	$use: (
 		input: SubscriptionFieldUseInput<Result, Source, Context, Args, Info, 'resolve'>,
-	) => SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info>;
+	) => SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info, Name>;
 	map: <T = Result>(
 		resolver: Resolver<T, Source, Context, Args, Info>,
-	) => SubscriptionField<Result, T, ParentSource, Context, Args, Info, Source>;
+	) => SubscriptionField<Result, T, ParentSource, Context, Args, Info, Name, Source>;
 	resolve: (
 		resolver: Resolver<Result, Source, Context, Args, Info>,
-	) => SubscriptionField<Result, Result, ParentSource, Context, Args, Info, Source>;
+	) => SubscriptionField<Result, Result, ParentSource, Context, Args, Info, Name, Source>;
 };

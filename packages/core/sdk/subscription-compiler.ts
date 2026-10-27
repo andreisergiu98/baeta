@@ -6,17 +6,33 @@ import type { BuilderContext } from './builder-context.ts';
 import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 import type { Subscription } from './subscription-methods.ts';
 
-export interface SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info> {
-	field: string;
+export interface SubscriptionCompilerOptions<
+	Result,
+	Source,
+	ParentSource,
+	Context,
+	Args,
+	Info,
+	Name extends string = string,
+> {
+	field: Name;
 	subscribeContext: BuilderContext<Subscription<Source>, ParentSource, Context, Args, Info>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
 	resolveContext: BuilderContext<Result, Source, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
-export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, Info> {
+export class SubscriptionCompiler<
+	Result,
+	Source,
+	ParentSource,
+	Context,
+	Args,
+	Info,
+	Name extends string = string,
+> {
 	readonly kind = 'Subscription';
-	readonly #field: string;
+	readonly #field: Name;
 	readonly #subscribeState: ReadonlyMap<symbol, unknown>;
 	readonly #subscribeMiddlewares: Array<
 		Middleware<Subscription<Source>, ParentSource, Context, Args, Info>
@@ -32,7 +48,7 @@ export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, I
 	readonly #requiredPluginIds: ReadonlySet<PluginId>;
 
 	constructor(
-		options: SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info>,
+		options: SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info, Name>,
 	) {
 		this.#field = options.field;
 		this.#subscribeState = new Map(options.subscribeContext.state);

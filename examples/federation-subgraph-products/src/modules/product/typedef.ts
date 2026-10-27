@@ -24,24 +24,24 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   Product: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      name: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      price: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Float"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      owner: BaetaSdk.FieldMethods<BaetaTypes.User | null, BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "id">
+      name: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "name">
+      price: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Float"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "price">
+      owner: BaetaSdk.FieldMethods<BaetaTypes.User | null, BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "owner">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      name: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      price: BaetaSdk.Field<BaetaTypes.Scalars["Float"], BaetaTypes.Scalars["Float"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      owner: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "id">
+      name: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "name">
+      price: BaetaSdk.Field<BaetaTypes.Scalars["Float"], BaetaTypes.Scalars["Float"], BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "price">
+      owner: BaetaSdk.Field<BaetaTypes.User | null, BaetaTypes.User | null, BaetaTypes.Product, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Product", "owner">
     };
   };
   Query: {
     Builder: {
-      product: BaetaSdk.FieldMethods<BaetaTypes.Product | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryProductArgs, BaetaUserTypes.Info>
+      product: BaetaSdk.FieldMethods<BaetaTypes.Product | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryProductArgs, BaetaUserTypes.Info, "Query", "product">
     };
     Factory: {
-      product: BaetaSdk.Field<BaetaTypes.Product | null, BaetaTypes.Product | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryProductArgs, BaetaUserTypes.Info>
+      product: BaetaSdk.Field<BaetaTypes.Product | null, BaetaTypes.Product | null, {}, BaetaUserTypes.Ctx, BaetaTypes.QueryProductArgs, BaetaUserTypes.Info, "Query", "product">
     };
   };
 };

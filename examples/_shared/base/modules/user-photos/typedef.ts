@@ -24,22 +24,22 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   UserPhoto: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      userId: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      url: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhoto", "id">
+      userId: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhoto", "userId">
+      url: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhoto", "url">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      userId: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      url: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhoto", "id">
+      userId: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhoto", "userId">
+      url: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.UserPhoto, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "UserPhoto", "url">
     };
   };
   User: {
     Builder: {
-      photos: BaetaSdk.FieldMethods<Array<BaetaTypes.UserPhoto> | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      photos: BaetaSdk.FieldMethods<Array<BaetaTypes.UserPhoto> | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "photos">
     };
     Factory: {
-      photos: BaetaSdk.Field<Array<BaetaTypes.UserPhoto> | null, Array<BaetaTypes.UserPhoto> | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      photos: BaetaSdk.Field<Array<BaetaTypes.UserPhoto> | null, Array<BaetaTypes.UserPhoto> | null, BaetaTypes.User, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "User", "photos">
     };
   };
 };

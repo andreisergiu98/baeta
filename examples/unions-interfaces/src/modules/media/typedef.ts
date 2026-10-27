@@ -28,52 +28,52 @@ export interface BaetaModuleTypes {
 interface BaetaModuleObjectTypeFields {
   Movie: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Movie", "id">
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Movie", "title">
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Movie", "year">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Movie", "id">
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Movie", "title">
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Movie, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Movie", "year">
     };
   };
   TVShow: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      seasons: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "id">
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "title">
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "year">
+      seasons: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "seasons">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      seasons: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "id">
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "title">
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "year">
+      seasons: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.TVShow, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "TVShow", "seasons">
     };
   };
   Book: {
     Builder: {
-      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      author: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      pages: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.FieldMethods<BaetaTypes.Scalars["ID"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "id">
+      title: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "title">
+      year: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "year">
+      author: BaetaSdk.FieldMethods<BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "author">
+      pages: BaetaSdk.FieldMethods<BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "pages">
     };
     Factory: {
-      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      author: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
-      pages: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      id: BaetaSdk.Field<BaetaTypes.Scalars["ID"], BaetaTypes.Scalars["ID"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "id">
+      title: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "title">
+      year: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "year">
+      author: BaetaSdk.Field<BaetaTypes.Scalars["String"], BaetaTypes.Scalars["String"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "author">
+      pages: BaetaSdk.Field<BaetaTypes.Scalars["Int"], BaetaTypes.Scalars["Int"], BaetaTypes.Book, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Book", "pages">
     };
   };
   Query: {
     Builder: {
-      media: BaetaSdk.FieldMethods<Array<BaetaTypes.Media>, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      media: BaetaSdk.FieldMethods<Array<BaetaTypes.Media>, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Query", "media">
     };
     Factory: {
-      media: BaetaSdk.Field<Array<BaetaTypes.Media>, Array<BaetaTypes.Media>, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info>
+      media: BaetaSdk.Field<Array<BaetaTypes.Media>, Array<BaetaTypes.Media>, {}, BaetaUserTypes.Ctx, {}, BaetaUserTypes.Info, "Query", "media">
     };
   };
 };

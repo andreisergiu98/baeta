@@ -29,6 +29,19 @@ test('ModuleBuilder should handle $schema correctly', async (t) => {
 	});
 });
 
+test('ModuleBuilder $schema should throw for missing, unexpected, or misplaced types', (t) => {
+	const module = mockModuleBuilder().toMethods();
+	const { Type1, Type2 } = mockSchemaForModuleBuilder(module);
+	const schema = module.$schema({
+		Type1: Type2,
+		Type3: Type1,
+	} as unknown as Parameters<typeof module.$schema>[0]);
+	t.throws(() => schema[makeSymbol](), {
+		message:
+			'Invalid $schema for module "module": missing "Type2", unexpected "Type3", "Type1" was given the resolver for Type2.',
+	});
+});
+
 test('ModuleBuilder should handle $use correctly', async (t) => {
 	const module = mockModuleBuilder().toMethods();
 	const schema = module

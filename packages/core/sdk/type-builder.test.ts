@@ -1,7 +1,11 @@
 import test from '@baeta/testing';
 import type { Middleware } from '../lib/middleware.ts';
 import type { MockArgs, MockContext, MockInfo, MockResult, MockSource } from './__test__/mocks.ts';
-import { executeMockedTypeResolvers, mockTypeBuilder } from './__test__/type-mocks.ts';
+import {
+	executeMockedTypeResolvers,
+	type MockTypeBuilders,
+	mockTypeBuilder,
+} from './__test__/type-mocks.ts';
 import { createAppPluginId } from './app-plugin.ts';
 import { createFieldBuilder } from './field.ts';
 import { makeSymbol } from './symbols.ts';
@@ -81,6 +85,30 @@ test('TypeBuilder $fields should only accept fields under their own type and nam
 	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
 		field1: 'test',
 		field2: 'test',
+	});
+});
+
+test('TypeBuilder $fields should throw for missing or unexpected fields', (t) => {
+	const methods = mockTypeBuilder().toMethods();
+	const fields = methods.$fields({
+		field1: methods.field1.key('name'),
+		field3: methods.field2.key('name'),
+	} as unknown as MockTypeBuilders['Resolvers']);
+	t.throws(() => fields[makeSymbol](), {
+		message: 'Invalid $fields for type "Type": missing "field2", unexpected "field3".',
+	});
+});
+
+test('TypeBuilder $fields should throw for fields placed under another name or type', (t) => {
+	const methods = mockTypeBuilder().toMethods();
+	const other = mockTypeBuilder({ type: 'Other' }).toMethods();
+	const fields = methods.$fields({
+		field1: methods.field2.key('name'),
+		field2: other.field2.key('name'),
+	});
+	t.throws(() => fields[makeSymbol](), {
+		message:
+			'Invalid $fields for type "Type": "field1" was given the resolver for Type.field2, "field2" was given the resolver for Other.field2.',
 	});
 });
 

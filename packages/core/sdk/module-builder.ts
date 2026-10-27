@@ -60,6 +60,7 @@ export class ModuleBuilder<
 				[makeSymbol]: () =>
 					new ModuleCompiler<Context, Info, TypesResolvers>({
 						name: this.#name,
+						typeNames: Object.keys(this.#typeBuilders),
 						context: this.#context,
 						typesMap: types,
 						typedef: this.#typedef,

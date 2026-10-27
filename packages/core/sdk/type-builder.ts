@@ -52,6 +52,7 @@ export class TypeBuilder<
 				[makeSymbol]: () =>
 					new TypeCompiler({
 						type: this.#type,
+						fieldNames: Object.keys(this.#fieldBuilders),
 						context: this.#context,
 						fieldsMap: fields,
 					}),

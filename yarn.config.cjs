@@ -200,7 +200,10 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			workspace.set('scripts.e2e:types', 'tsc --noEmit');
 			if (workspace.manifest.name !== '@baeta/e2e-shared') {
 				workspace.set('scripts.e2e:generate:baeta', 'baeta generate');
-				workspace.set('scripts.e2e:generate:operations', 'graphql-codegen');
+				workspace.set(
+					'scripts.e2e:generate:operations',
+					'NODE_OPTIONS="$NODE_OPTIONS --conditions=module-sync" graphql-codegen',
+				);
 				workspace.set('scripts.e2e', 'ava');
 			}
 			workspace.set('ava.extensions', ['ts']);

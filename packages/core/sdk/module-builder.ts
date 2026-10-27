@@ -42,12 +42,7 @@ export class ModuleBuilder<
 	}
 
 	edit() {
-		return new ModuleBuilderEditor<
-			Context,
-			Info,
-			ModuleMethods<Context, Info, TypesBuilders, TypesResolvers>,
-			ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>
-		>(this.#context, (nextContext) => {
+		return new ModuleBuilderEditor(this.#context, (nextContext) => {
 			return new ModuleBuilder<Context, Info, TypesBuilders, TypesResolvers>({
 				name: this.#name,
 				typedef: this.#typedef,

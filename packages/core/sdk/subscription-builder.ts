@@ -1,6 +1,10 @@
 import type { Resolver } from '../lib/resolver.ts';
 import { nameFunction } from '../utils/functions.ts';
-import { BuilderEditor, type BuilderContext, createBuilderContext } from './builder-context.ts';
+import {
+	BuilderEditor,
+	type BuilderContext,
+	createEmptyBuilderContext,
+} from './builder-context.ts';
 import {
 	chainKeyResolver,
 	chainMapResolver,
@@ -59,8 +63,8 @@ export class SubscriptionBuilder<
 			Context,
 			Args,
 			Info,
-			SubscriptionMethods<Result, Source, Context, Args, Info, Name, Payload>,
-			SubscriptionBuilder<Result, Source, Context, Args, Info, Name>
+			SubscriptionBuilder<Result, Source, Context, Args, Info, Name>,
+			SubscriptionMethods<Result, Source, Context, Args, Info, Name, Payload>
 		>(
 			this.#context as BuilderContext<
 				Subscription<Or<Payload, unknown>>,
@@ -136,11 +140,7 @@ export class SubscriptionBuilder<
 						Info
 					>,
 					subscribe: fn,
-					resolveContext: createBuilderContext({
-						state: new Map(),
-						middlewares: [],
-						requiredPluginIds: new Set(),
-					}),
+					resolveContext: createEmptyBuilderContext(),
 				}).toMethods();
 			},
 		};
@@ -204,15 +204,7 @@ class SubscriptionResolveBuilder<
 	}
 
 	edit() {
-		return new BuilderEditor<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			SubscriptionResolveMethods<Result, Source, ParentSource, Context, Args, Info, Name>,
-			SubscriptionResolveBuilder<Result, Source, ParentSource, Context, Args, Info, Name>
-		>(this.#resolveContext, (nextContext) => {
+		return new BuilderEditor(this.#resolveContext, (nextContext) => {
 			return new SubscriptionResolveBuilder<
 				Result,
 				Source,

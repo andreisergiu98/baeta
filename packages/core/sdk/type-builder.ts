@@ -36,16 +36,8 @@ export class TypeBuilder<
 	}
 
 	edit() {
-		return new BuilderEditor<
-			unknown,
-			Source,
-			Context,
-			unknown,
-			Info,
-			TypeMethods<Source, Context, Info, FieldsBuilders, FieldsResolvers>,
-			TypeBuilder<Source, Context, Info, FieldsBuilders, FieldsResolvers>
-		>(this.#context, (nextContext) => {
-			return new TypeBuilder({
+		return new BuilderEditor(this.#context, (nextContext) => {
+			return new TypeBuilder<Source, Context, Info, FieldsBuilders, FieldsResolvers>({
 				type: this.#type,
 				fieldBuilders: this.#fieldBuilders,
 				context: nextContext,

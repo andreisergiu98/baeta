@@ -1,6 +1,9 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import { type GraphQLFieldResolver, type GraphQLScalarType, parse as gql } from 'graphql';
-import { createModuleBuilderContext } from '../module-builder-context.ts';
+import {
+	createModuleBuilderContext,
+	createEmptyModuleBuilderContext,
+} from '../module-builder-context.ts';
 import { ModuleBuilder } from '../module-builder.ts';
 import { ModuleCompiler } from '../module-compiler.ts';
 import type { TypeCompilerFactory, TypeMethods } from '../type-methods.ts';
@@ -51,12 +54,7 @@ export function mockModuleBuilder() {
 			Type2: mockTypeBuilder({ type: 'Type2' }).toMethods(),
 		},
 		defaultResolvers: {},
-		context: createModuleBuilderContext({
-			state: new Map(),
-			middlewares: [],
-			requiredPluginIds: new Set(),
-			transformers: [],
-		}),
+		context: createEmptyModuleBuilderContext(),
 	});
 }
 

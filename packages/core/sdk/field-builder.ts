@@ -54,15 +54,7 @@ export class FieldBuilder<
 	}
 
 	edit() {
-		return new BuilderEditor<
-			Result,
-			Source,
-			Context,
-			Args,
-			Info,
-			FieldMethods<Result, Source, Context, Args, Info, Type, Name>,
-			FieldBuilder<Result, Source, Context, Args, Info, Type, Name>
-		>(this.#context, (nextContext) => {
+		return new BuilderEditor(this.#context, (nextContext) => {
 			return new FieldBuilder({
 				type: this.#type,
 				field: this.#field,

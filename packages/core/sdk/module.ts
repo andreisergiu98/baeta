@@ -1,6 +1,6 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { DocumentNode } from 'graphql';
-import { createModuleBuilderContext } from './module-builder-context.ts';
+import { createEmptyModuleBuilderContext } from './module-builder-context.ts';
 import { ModuleBuilder } from './module-builder.ts';
 import type { TypesBuildersMap, TypesResolversMap } from './module-methods.ts';
 
@@ -15,11 +15,6 @@ export function createModuleBuilder<
 		typedef,
 		typeBuilders: builders,
 		defaultResolvers,
-		context: createModuleBuilderContext({
-			state: new Map(),
-			middlewares: [],
-			requiredPluginIds: new Set(),
-			transformers: [],
-		}),
+		context: createEmptyModuleBuilderContext(),
 	}).toMethods();
 }

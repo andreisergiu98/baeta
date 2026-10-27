@@ -39,7 +39,7 @@
       "allowedVersions": "<23"
     },
     {
-      "matchPackageNames": ["actions/node-versions"],
+      "matchPackageNames": ["actions/node-versions", "@yarnpkg/core"],
       "enabled": false
     },
     {

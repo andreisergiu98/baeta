@@ -2,14 +2,13 @@ import type { GraphQLFieldResolver, GraphQLResolveInfo } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver } from '../lib/resolver.ts';
 import type { PluginId } from './app-plugin.ts';
+import type { BuilderContext } from './builder-context.ts';
 import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 
 export interface FieldCompilerOptions<Result, Source, Context, Args, Info> {
 	type: string;
 	field: string;
-	state: ReadonlyMap<symbol, unknown>;
-	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
-	requiredPluginIds: Set<PluginId>;
+	context: BuilderContext<Result, Source, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
 }
 
@@ -26,11 +25,11 @@ export class FieldCompiler<Result, Source, Context, Args, Info> {
 	constructor(options: FieldCompilerOptions<Result, Source, Context, Args, Info>) {
 		this.#type = options.type;
 		this.#field = options.field;
-		this.#state = options.state;
-		this.#middlewares = options.middlewares;
+		this.#state = new Map(options.context.state);
+		this.#middlewares = [...options.context.middlewares];
+		this.#requiredPluginIds = new Set(options.context.requiredPluginIds);
 		this.#topLevelMiddlewares = [];
 		this.#resolver = options.resolver;
-		this.#requiredPluginIds = options.requiredPluginIds;
 	}
 
 	get type() {

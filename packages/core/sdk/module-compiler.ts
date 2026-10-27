@@ -2,6 +2,7 @@ import type { IResolvers } from '@graphql-tools/utils';
 import type { DocumentNode, GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
+import type { ModuleBuilderContext } from './module-builder-context.ts';
 import type { TypesResolversMap } from './module-methods.ts';
 import { makeSymbol } from './symbols.ts';
 import type { SchemaTransformer } from './transformer.ts';
@@ -14,13 +15,10 @@ export interface ModuleCompilerOptions<
 	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
 > {
 	name: string;
-	state: ReadonlyMap<symbol, unknown>;
-	middlewares: Middleware<unknown, unknown, Context, unknown, Info>[];
+	context: ModuleBuilderContext<Context, Info>;
 	typesMap: TypesResolvers;
 	typedef: Readonly<DocumentNode>;
 	defaultResolvers: Readonly<IResolvers>;
-	transformers: Array<SchemaTransformer>;
-	requiredPluginIds: Set<PluginId>;
 }
 
 export class ModuleCompiler<
@@ -43,15 +41,15 @@ export class ModuleCompiler<
 
 	constructor(options: ModuleCompilerOptions<Context, Info, TypesResolvers>) {
 		this.#name = options.name;
-		this.#state = new Map(options.state);
-		this.#middlewares = [...options.middlewares];
+		this.#state = new Map(options.context.state);
+		this.#middlewares = [...options.context.middlewares];
 		this.#typedef = options.typedef;
 		this.#defaultResolvers = options.defaultResolvers;
-		this.#transformers = [...options.transformers];
+		this.#transformers = [...options.context.transformers];
 		const { types, genericResolvers } = getTypeCompilersAndResolvers(options.typesMap);
 		this.#types = types;
 		this.#scalarResolvers = genericResolvers;
-		this.#requiredPluginIds = options.requiredPluginIds;
+		this.#requiredPluginIds = new Set(options.context.requiredPluginIds);
 	}
 
 	get name() {

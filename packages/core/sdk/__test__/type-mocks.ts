@@ -1,6 +1,7 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { GraphQLFieldResolver } from 'graphql';
 import type { Middleware } from '../../lib/middleware.ts';
+import { createBuilderContext } from '../builder-context.ts';
 import type { Field, FieldMethods } from '../field-methods.ts';
 import { TypeBuilder } from '../type-builder.ts';
 import { TypeCompiler } from '../type-compiler.ts';
@@ -49,18 +50,22 @@ export function mockTypeBuilder({ type = 'Type', state = new Map() }: MockTypeOp
 			field1: mockFieldBuilder({ field: 'field1', type }).toMethods(),
 			field2: mockFieldBuilder({ field: 'field2', type }).toMethods(),
 		},
-		state,
-		middlewares: [],
-		requiredPluginIds: new Set(),
+		context: createBuilderContext({
+			state,
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 	});
 }
 
 export function mockTypeCompiler({ type = 'Type', state = new Map() }: MockTypeOptions = {}) {
 	return new TypeCompiler<MockSource, MockContext, MockInfo>({
 		type,
-		state,
-		middlewares: [],
-		requiredPluginIds: new Set(),
+		context: createBuilderContext({
+			state,
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 		fieldsMap: {
 			field1: mockFieldBuilder({ field: 'field1', type }).toMethods().key('name'),
 			field2: mockFieldBuilder({ field: 'field2', type }).toMethods().key('name'),

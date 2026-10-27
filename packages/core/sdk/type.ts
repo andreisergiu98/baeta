@@ -1,3 +1,4 @@
+import { createBuilderContext } from './builder-context.ts';
 import { TypeBuilder } from './type-builder.ts';
 import type { FieldsBuildersMap, FieldsResolversMap } from './type-methods.ts';
 
@@ -11,8 +12,10 @@ export function createTypeBuilder<
 	return new TypeBuilder<Source, Context, Info, FieldBuilders, FieldResolvers>({
 		type,
 		fieldBuilders: builders,
-		state: new Map(),
-		middlewares: [],
-		requiredPluginIds: new Set(),
+		context: createBuilderContext({
+			state: new Map(),
+			middlewares: [],
+			requiredPluginIds: new Set(),
+		}),
 	}).toMethods();
 }

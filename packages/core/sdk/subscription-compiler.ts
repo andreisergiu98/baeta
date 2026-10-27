@@ -2,18 +2,16 @@ import type { GraphQLResolveInfo } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { Resolver } from '../lib/resolver.ts';
 import type { PluginId } from './app-plugin.ts';
+import type { BuilderContext } from './builder-context.ts';
 import { composeMiddlewares, concatMiddlewares } from './middleware.ts';
 import type { Subscription } from './subscription-methods.ts';
 
 export interface SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info> {
 	field: string;
-	subscribeState: ReadonlyMap<symbol, unknown>;
-	subscribeMiddlewares: Array<Middleware<Subscription<Source>, ParentSource, Context, Args, Info>>;
+	subscribeContext: BuilderContext<Subscription<Source>, ParentSource, Context, Args, Info>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
-	resolveState: ReadonlyMap<symbol, unknown>;
-	resolveMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
+	resolveContext: BuilderContext<Result, Source, Context, Args, Info>;
 	resolver: Resolver<Result, Source, Context, Args, Info>;
-	requiredPluginIds: Set<PluginId>;
 }
 
 export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, Info> {
@@ -37,15 +35,18 @@ export class SubscriptionCompiler<Result, Source, ParentSource, Context, Args, I
 		options: SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info>,
 	) {
 		this.#field = options.field;
-		this.#subscribeState = options.subscribeState;
-		this.#subscribeMiddlewares = options.subscribeMiddlewares;
+		this.#subscribeState = new Map(options.subscribeContext.state);
+		this.#subscribeMiddlewares = [...options.subscribeContext.middlewares];
 		this.#topLevelSubscribeMiddlewares = [];
 		this.#subscribe = options.subscribe;
-		this.#resolveState = options.resolveState;
-		this.#resolveMiddlewares = options.resolveMiddlewares;
+		this.#resolveState = new Map(options.resolveContext.state);
+		this.#resolveMiddlewares = [...options.resolveContext.middlewares];
 		this.#topLevelResolveMiddlewares = [];
 		this.#resolver = options.resolver;
-		this.#requiredPluginIds = options.requiredPluginIds;
+		this.#requiredPluginIds = new Set([
+			...options.subscribeContext.requiredPluginIds,
+			...options.resolveContext.requiredPluginIds,
+		]);
 	}
 
 	get type() {

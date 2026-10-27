@@ -1,6 +1,7 @@
 import type { IResolvers } from '@graphql-tools/utils';
 import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
+import type { BuilderContext } from './builder-context.ts';
 import type { FieldCompiler } from './field-compiler.ts';
 import { concatMiddlewares } from './middleware.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
@@ -18,10 +19,8 @@ export interface TypeCompilerOptions<
 	>,
 > {
 	type: string;
-	state: ReadonlyMap<symbol, unknown>;
-	middlewares: Array<Middleware<unknown, Source, Context, unknown, Info>>;
+	context: BuilderContext<unknown, Source, Context, unknown, Info>;
 	fieldsMap: FieldsResolvers;
-	requiredPluginIds: Set<PluginId>;
 }
 
 export class TypeCompiler<
@@ -46,10 +45,10 @@ export class TypeCompiler<
 
 	constructor(options: TypeCompilerOptions<Source, Context, Info, FieldsResolvers>) {
 		this.#type = options.type;
-		this.#state = options.state;
-		this.#middlewares = options.middlewares;
 		this.#fields = Object.values(options.fieldsMap).map((field) => field[makeSymbol]());
-		this.requiredPluginIds = options.requiredPluginIds;
+		this.#state = new Map(options.context.state);
+		this.#middlewares = [...options.context.middlewares];
+		this.requiredPluginIds = new Set(options.context.requiredPluginIds);
 	}
 
 	get type() {

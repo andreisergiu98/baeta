@@ -1,8 +1,3 @@
-/* eslint-disable */
-/* oxlint-disable */
-/* @biome-ignore-all: generated file */
-/* biome-ignore-all lint: generated file */
-
 name = "baeta-cloudflare-ws-example"
 main = "dist/app.mjs"
 compatibility_date = "2023-02-24"

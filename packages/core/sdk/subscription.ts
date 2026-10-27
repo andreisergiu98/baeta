@@ -1,4 +1,4 @@
-import { createBuilderContext } from './builder-context.ts';
+import { createEmptyBuilderContext } from './builder-context.ts';
 import { SubscriptionBuilder } from './subscription-builder.ts';
 
 export function createSubscriptionBuilder<
@@ -11,10 +11,6 @@ export function createSubscriptionBuilder<
 >(field: Name) {
 	return new SubscriptionBuilder<Result, Source, Context, Args, Info, Name>({
 		field,
-		context: createBuilderContext({
-			state: new Map(),
-			middlewares: [],
-			requiredPluginIds: new Set(),
-		}),
+		context: createEmptyBuilderContext(),
 	}).toMethods();
 }

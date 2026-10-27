@@ -3,12 +3,6 @@ import { nameFunction } from '../utils/functions.ts';
 import type { PluginId, UsePlugin } from './app-plugin.ts';
 import { makePluginSymbol } from './symbols.ts';
 
-export interface CreateBuilderContextOptions<Result, Source, Context, Args, Info> {
-	state: Map<symbol, unknown>;
-	middlewares: Array<Middleware<Result, Source, Context, Args, Info>>;
-	requiredPluginIds: Set<PluginId>;
-}
-
 export interface BuilderContext<Result, Source, Context, Args, Info> {
 	state: ReadonlyMap<symbol, unknown>;
 	middlewares: ReadonlyArray<Middleware<Result, Source, Context, Args, Info>>;
@@ -16,12 +10,26 @@ export interface BuilderContext<Result, Source, Context, Args, Info> {
 }
 
 export function createBuilderContext<Result, Source, Context, Args, Info>(
-	options: CreateBuilderContextOptions<Result, Source, Context, Args, Info>,
+	context: BuilderContext<Result, Source, Context, Args, Info>,
 ): BuilderContext<Result, Source, Context, Args, Info> {
 	return {
-		state: new Map(options.state),
-		middlewares: [...options.middlewares],
-		requiredPluginIds: new Set(options.requiredPluginIds),
+		state: new Map(context.state),
+		middlewares: [...context.middlewares],
+		requiredPluginIds: new Set(context.requiredPluginIds),
+	};
+}
+
+export function createEmptyBuilderContext<Result, Source, Context, Args, Info>(): BuilderContext<
+	Result,
+	Source,
+	Context,
+	Args,
+	Info
+> {
+	return {
+		state: new Map(),
+		middlewares: [],
+		requiredPluginIds: new Set(),
 	};
 }
 
@@ -31,8 +39,8 @@ export class BuilderEditor<
 	Context,
 	Args,
 	Info,
-	Methods,
 	Builder extends { toMethods: () => Methods },
+	Methods = ReturnType<Builder['toMethods']>,
 > {
 	#draftState: Map<symbol, unknown>;
 	#draftMiddlewares: Array<Middleware<Result, Source, Context, Args, Info>>;

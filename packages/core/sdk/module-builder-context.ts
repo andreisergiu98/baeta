@@ -1,17 +1,5 @@
-import {
-	type BuilderContext,
-	BuilderEditor,
-	type CreateBuilderContextOptions,
-	createBuilderContext,
-} from './builder-context.ts';
+import { type BuilderContext, BuilderEditor, createBuilderContext } from './builder-context.ts';
 import type { SchemaTransformer } from './transformer.ts';
-
-export interface CreateModuleBuilderContextOptions<
-	Context,
-	Info,
-> extends CreateBuilderContextOptions<unknown, unknown, Context, unknown, Info> {
-	transformers: Array<SchemaTransformer>;
-}
 
 export interface ModuleBuilderContext<Context, Info> extends BuilderContext<
 	unknown,
@@ -24,20 +12,32 @@ export interface ModuleBuilderContext<Context, Info> extends BuilderContext<
 }
 
 export function createModuleBuilderContext<Context, Info>(
-	options: CreateModuleBuilderContextOptions<Context, Info>,
+	context: ModuleBuilderContext<Context, Info>,
 ): ModuleBuilderContext<Context, Info> {
 	return {
-		...createBuilderContext(options),
-		transformers: [...options.transformers],
+		...createBuilderContext(context),
+		transformers: [...context.transformers],
+	};
+}
+
+export function createEmptyModuleBuilderContext<Context, Info>(): ModuleBuilderContext<
+	Context,
+	Info
+> {
+	return {
+		state: new Map(),
+		middlewares: [],
+		requiredPluginIds: new Set(),
+		transformers: [],
 	};
 }
 
 export class ModuleBuilderEditor<
 	Context,
 	Info,
-	Methods,
 	Builder extends { toMethods: () => Methods },
-> extends BuilderEditor<unknown, unknown, Context, unknown, Info, Methods, Builder> {
+	Methods = ReturnType<Builder['toMethods']>,
+> extends BuilderEditor<unknown, unknown, Context, unknown, Info, Builder, Methods> {
 	#draftTransformers: Array<SchemaTransformer>;
 
 	constructor(

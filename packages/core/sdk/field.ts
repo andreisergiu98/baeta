@@ -1,4 +1,4 @@
-import { createBuilderContext } from './builder-context.ts';
+import { createEmptyBuilderContext } from './builder-context.ts';
 import { FieldBuilder } from './field-builder.ts';
 
 export function createFieldBuilder<
@@ -13,10 +13,6 @@ export function createFieldBuilder<
 	return new FieldBuilder<Result, Source, Context, Args, Info, Type, Name>({
 		type,
 		field,
-		context: createBuilderContext({
-			state: new Map(),
-			middlewares: [],
-			requiredPluginIds: new Set(),
-		}),
+		context: createEmptyBuilderContext(),
 	}).toMethods();
 }

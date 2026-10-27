@@ -4,6 +4,7 @@ import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
 import type { ModuleBuilderContext } from './module-builder-context.ts';
 import type { TypesResolversMap } from './module-methods.ts';
+import { assertResolversMap } from './resolvers-map.ts';
 import { makeSymbol } from './symbols.ts';
 import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompiler } from './type-compiler.ts';
@@ -15,6 +16,7 @@ export interface ModuleCompilerOptions<
 	TypesResolvers extends TypesResolversMap<Context, Info> = TypesResolversMap<Context, Info>,
 > {
 	name: string;
+	typeNames: readonly string[];
 	context: ModuleBuilderContext<Context, Info>;
 	typesMap: TypesResolvers;
 	typedef: Readonly<DocumentNode>;
@@ -47,7 +49,12 @@ export class ModuleCompiler<
 		this.#defaultResolvers = options.defaultResolvers;
 		this.#transformers = [...options.context.transformers];
 		const { types, genericResolvers } = getTypeCompilersAndResolvers(options.typesMap);
-		this.#types = types;
+		assertResolversMap(
+			`$schema for module "${options.name}"`,
+			options.typeNames,
+			types.map(([key, compiler]) => ({ key, expected: key, actual: compiler.type })),
+		);
+		this.#types = types.map(([, compiler]) => compiler);
 		this.#scalarResolvers = genericResolvers;
 		this.#requiredPluginIds = new Set(options.context.requiredPluginIds);
 	}
@@ -96,12 +103,12 @@ export class ModuleCompiler<
 
 function getTypeCompilersAndResolvers<Context, Info>(typesMap: TypesResolversMap<Context, Info>) {
 	const types: Array<
-		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
+		[string, TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>]
 	> = [];
 	const genericResolvers: Array<[string, GraphQLScalarType]> = [];
 	for (const [typeName, typeResolver] of Object.entries(typesMap)) {
 		if (makeSymbol in typeResolver) {
-			types.push(typeResolver[makeSymbol]());
+			types.push([typeName, typeResolver[makeSymbol]()]);
 		} else {
 			genericResolvers.push([typeName, typeResolver]);
 		}

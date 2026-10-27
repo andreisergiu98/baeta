@@ -4,6 +4,7 @@ import type { PluginId } from './app-plugin.ts';
 import type { BuilderContext } from './builder-context.ts';
 import type { FieldCompiler } from './field-compiler.ts';
 import { concatMiddlewares } from './middleware.ts';
+import { assertResolversMap } from './resolvers-map.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
 import { makeSymbol } from './symbols.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
@@ -19,6 +20,7 @@ export interface TypeCompilerOptions<
 	>,
 > {
 	type: string;
+	fieldNames: readonly string[];
 	context: BuilderContext<unknown, Source, Context, unknown, Info>;
 	fieldsMap: FieldsResolvers;
 }
@@ -45,7 +47,19 @@ export class TypeCompiler<
 
 	constructor(options: TypeCompilerOptions<Source, Context, Info, FieldsResolvers>) {
 		this.#type = options.type;
-		this.#fields = Object.values(options.fieldsMap).map((field) => field[makeSymbol]());
+		const fields = Object.entries(options.fieldsMap).map(
+			([key, field]) => [key, field[makeSymbol]()] as const,
+		);
+		assertResolversMap(
+			`$fields for type "${options.type}"`,
+			options.fieldNames,
+			fields.map(([key, compiler]) => ({
+				key,
+				expected: `${options.type}.${key}`,
+				actual: `${compiler.type}.${compiler.field}`,
+			})),
+		);
+		this.#fields = fields.map(([, compiler]) => compiler);
 		this.#state = new Map(options.context.state);
 		this.#middlewares = [...options.context.middlewares];
 		this.requiredPluginIds = new Set(options.context.requiredPluginIds);

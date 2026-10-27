@@ -61,6 +61,7 @@ export function mockTypeBuilder({ type = 'Type', state = new Map() }: MockTypeOp
 export function mockTypeCompiler({ type = 'Type', state = new Map() }: MockTypeOptions = {}) {
 	return new TypeCompiler<MockSource, MockContext, MockInfo>({
 		type,
+		fieldNames: ['field1', 'field2'],
 		context: createBuilderContext({
 			state,
 			middlewares: [],

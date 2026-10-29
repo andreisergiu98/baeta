@@ -39,6 +39,10 @@
     "./sdk": {
       "types": "./sdk/index.ts",
       "default": "./sdk/index.ts"
+    },
+    "./utils": {
+      "types": "./utils/index.ts",
+      "default": "./utils/index.ts"
     }
   },
   "publishConfig": {
@@ -50,6 +54,10 @@
       "./sdk": {
         "types": "./dist/sdk/index.d.ts",
         "default": "./dist/sdk/index.js"
+      },
+      "./utils": {
+        "types": "./dist/utils/index.d.ts",
+        "default": "./dist/utils/index.js"
       }
     },
     "access": "public"
@@ -89,7 +97,8 @@
   "typedocOptions": {
     "entryPoints": [
       "./index.ts",
-      "./sdk/index.ts"
+      "./sdk/index.ts",
+      "./utils/index.ts"
     ],
     "readme": "none",
     "tsconfig": "./tsconfig.json",

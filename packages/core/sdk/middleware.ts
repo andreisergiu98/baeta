@@ -5,13 +5,9 @@ export function composeMiddlewares<Result, Source, Context, Args, Info>(
 	middlewares: Middleware<Result, Source, Context, Args, Info>[],
 	resolver: Resolver<Result, Source, Context, Args, Info>,
 ): Resolver<Result, Source, Context, Args, Info> {
-	if (middlewares.length === 0) {
-		return resolver;
-	}
 	return middlewares.reduceRight<Resolver<Result, Source, Context, Args, Info>>(
-		(next, middleware) => (params) => middleware(async () => await next(params), params),
-		// eslint-disable-next-line @typescript-eslint/return-await
-		async (params) => resolver(params),
+		(next, middleware) => (params) => middleware(() => next(params), params),
+		resolver,
 	);
 }
 

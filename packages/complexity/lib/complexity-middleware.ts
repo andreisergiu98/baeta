@@ -1,9 +1,10 @@
-import type { Middleware } from '@baeta/core';
+import type { Middleware, MiddlewareParams } from '@baeta/core';
+import { mapMaybePromise } from '@baeta/core/utils';
 import type { GraphQLResolveInfo } from 'graphql';
 import { calculateComplexity } from './complexity-calculator.ts';
 import { ComplexityErrorKind } from './complexity-errors.ts';
 import { type ComplexityExtensionOptions, defaultLimits } from './complexity-options.ts';
-import { type ComplexityStore } from './complexity-store.ts';
+import { type ComplexityStore, type ComplexityStoreValue } from './complexity-store.ts';
 import type { FieldSettingsMap } from './field-settings.ts';
 
 export function createComplexityMiddleware<Result, Root, Context, Args, Info>(
@@ -11,10 +12,10 @@ export function createComplexityMiddleware<Result, Root, Context, Args, Info>(
 	fieldSettingsMap: FieldSettingsMap,
 	complexityStore: ComplexityStore<Context>,
 ): Middleware<Result, Root, Context, Args, Info> {
-	return async (next, params) => {
-		complexityStore.load(params.ctx, options.limit, defaultLimits);
-		const { limits, cacheComplexity } = await complexityStore.get(params.ctx);
-
+	const checkLimits = (
+		{ limits, cacheComplexity }: ComplexityStoreValue,
+		params: MiddlewareParams<Root, Context, Args, Info>,
+	) => {
 		const results = cacheComplexity(() => {
 			return calculateComplexity(params.ctx, params.info as GraphQLResolveInfo, fieldSettingsMap, {
 				complexity: options.defaultComplexity,
@@ -37,7 +38,14 @@ export function createComplexityMiddleware<Result, Root, Context, Args, Info>(
 		if (results.breadth > limits.breadth) {
 			throw options.complexityError(ComplexityErrorKind.Breadth, limits.breadth, results.breadth);
 		}
+	};
 
-		return await next();
+	return (next, params) => {
+		complexityStore.load(params.ctx, options.limit, defaultLimits);
+
+		return mapMaybePromise(complexityStore.getMaybeSync(params.ctx), (store) => {
+			checkLimits(store, params);
+			return next();
+		});
 	};
 }

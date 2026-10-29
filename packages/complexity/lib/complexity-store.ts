@@ -1,11 +1,14 @@
 import { createContextStoreWithLoader } from '@baeta/core';
+import { mapMaybePromise } from '@baeta/core/utils';
 import type { ComplexityLimit } from './complexity-limits.ts';
 import { sanitizeLimit } from './sanitize-limit.ts';
 
 export type ComplexityStore<Context> = ReturnType<typeof createComplexityStore<Context>>;
 
+export type ComplexityStoreValue = ReturnType<typeof createComplexityStoreValue>;
+
 export function createComplexityStore<Context>() {
-	const [get, load] = createContextStoreWithLoader(
+	const [get, load, getMaybeSync] = createContextStoreWithLoader(
 		Symbol('@baeta/complexity'),
 		complexityStoreLoader<Context>,
 		{ warnOnDuplicateLoader: false },
@@ -13,10 +16,11 @@ export function createComplexityStore<Context>() {
 	return {
 		get,
 		load,
+		getMaybeSync,
 	};
 }
 
-async function complexityStoreLoader<Context>(
+function complexityStoreLoader<Context>(
 	ctx: Context,
 	getLimits:
 		| ComplexityLimit
@@ -24,8 +28,15 @@ async function complexityStoreLoader<Context>(
 		| undefined,
 	defaultLimits: Required<ComplexityLimit>,
 ) {
+	const limits = typeof getLimits === 'function' ? getLimits(ctx) : getLimits;
+	return mapMaybePromise(limits, (limits) => createComplexityStoreValue(limits, defaultLimits));
+}
+
+function createComplexityStoreValue(
+	limits: ComplexityLimit | undefined,
+	defaultLimits: Required<ComplexityLimit>,
+) {
 	let cache: Required<ComplexityLimit> | undefined;
-	const limits = typeof getLimits === 'function' ? await getLimits(ctx) : getLimits;
 
 	const cacheComplexity = (fn: () => Required<ComplexityLimit>) => {
 		if (cache) {

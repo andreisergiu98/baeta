@@ -4,4 +4,4 @@ export {
 	mapMaybePromiseAll,
 	mapMaybePromiseAny,
 	thenMaybePromise,
-} from './promise.ts';
+} from './lib/maybe-promise.ts';

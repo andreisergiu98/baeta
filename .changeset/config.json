@@ -38,6 +38,7 @@
       "@baeta/plugin-graphql",
       "@baeta/plugin-pagination",
       "@baeta/plugin-prisma",
+      "@baeta/promises",
       "@baeta/subscriptions-pubsub"
     ]
   ],

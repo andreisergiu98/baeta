@@ -187,7 +187,7 @@ export const [getOrg, setOrgLoader, getOrgMaybeSync] =
 ```
 
 ```typescript
-import { mapMaybePromise } from "@baeta/core/utils";
+import { mapMaybePromise } from "@baeta/promises";
 
 const planQuery = Query.plan.resolve(({ ctx }) => {
   return mapMaybePromise(getOrgMaybeSync(ctx), (org) => org.plan);

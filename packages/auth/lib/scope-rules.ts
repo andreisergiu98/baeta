@@ -1,11 +1,11 @@
 import type { ResolverParams } from '@baeta/core';
+import { ForbiddenError } from '@baeta/errors';
 import {
 	mapMaybePromise,
 	mapMaybePromiseAll,
 	mapMaybePromiseAny,
 	thenMaybePromise,
-} from '@baeta/core/utils';
-import { ForbiddenError } from '@baeta/errors';
+} from '@baeta/promises';
 import { GraphQLError } from 'graphql';
 import type { AuthStoreResult } from './auth-store.ts';
 import type { GrantCache } from './grant-cache.ts';

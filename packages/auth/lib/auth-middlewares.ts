@@ -1,6 +1,6 @@
 import type { Middleware, ResolverParams } from '@baeta/core';
-import { mapMaybePromise, thenMaybePromise } from '@baeta/core/utils';
 import { ForbiddenError } from '@baeta/errors';
+import { mapMaybePromise, thenMaybePromise } from '@baeta/promises';
 import type { AuthStore } from './auth-store.ts';
 import { defaultErrorResolver, resolveError, type ScopeErrorResolver } from './error.ts';
 import { type GetGrant, saveGrants } from './grant.ts';

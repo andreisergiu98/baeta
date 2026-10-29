@@ -1868,6 +1868,7 @@ __metadata:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/errors": "workspace:^"
+    "@baeta/promises": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-log": "workspace:^"
@@ -2055,6 +2056,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/core": "workspace:^"
+    "@baeta/promises": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-log": "workspace:^"
@@ -2072,6 +2074,7 @@ __metadata:
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/errors": "workspace:^"
+    "@baeta/promises": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@baeta/util-log": "workspace:^"
@@ -3027,6 +3030,17 @@ __metadata:
 "@baeta/plugin@workspace:^, @baeta/plugin@workspace:packages/plugin":
   version: 0.0.0-use.local
   resolution: "@baeta/plugin@workspace:packages/plugin"
+  dependencies:
+    "@baeta/builder": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
+"@baeta/promises@workspace:^, @baeta/promises@workspace:packages/promises":
+  version: 0.0.0-use.local
+  resolution: "@baeta/promises@workspace:packages/promises"
   dependencies:
     "@baeta/builder": "workspace:^"
     "@baeta/testing": "workspace:^"

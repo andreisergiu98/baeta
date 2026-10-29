@@ -1,8 +1,111 @@
 import test from '@baeta/testing';
-import { mapMaybePromiseAll, mapMaybePromiseAny } from './promise.ts';
+import {
+	isPromise,
+	mapMaybePromise,
+	mapMaybePromiseAll,
+	mapMaybePromiseAny,
+	thenMaybePromise,
+} from './maybe-promise.ts';
 
 declare function setTimeout(callback: () => void, ms: number): void;
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+test('isPromise detects promises and thenables', (t) => {
+	t.true(isPromise(Promise.resolve(1)));
+	t.true(isPromise({ then: () => {} }));
+	t.true(isPromise(Object.assign(() => {}, { then: () => {} })));
+});
+
+test('isPromise rejects plain values', (t) => {
+	t.false(isPromise(null));
+	t.false(isPromise(undefined));
+	t.false(isPromise(1));
+	t.false(isPromise('then'));
+	t.false(isPromise({ then: true }));
+});
+
+test('mapMaybePromise maps sync values synchronously', (t) => {
+	t.is(
+		mapMaybePromise(2, (n) => n * 2),
+		4,
+	);
+});
+
+test('mapMaybePromise chains promises', async (t) => {
+	const result = mapMaybePromise(Promise.resolve(2), (n) => n * 2);
+	t.true(result instanceof Promise);
+	t.is(await result, 4);
+});
+
+test('thenMaybePromise runs thenFn synchronously for sync results', (t) => {
+	t.is(
+		thenMaybePromise(
+			() => 2,
+			(n) => n * 2,
+			() => -1,
+		),
+		4,
+	);
+});
+
+test('thenMaybePromise catches sync throws from run', (t) => {
+	t.is(
+		thenMaybePromise(
+			(): number => {
+				throw new Error('boom');
+			},
+			(n) => n * 2,
+			() => -1,
+		),
+		-1,
+	);
+});
+
+test('thenMaybePromise catches sync throws from thenFn', (t) => {
+	t.is(
+		thenMaybePromise(
+			() => 2,
+			(): number => {
+				throw new Error('boom');
+			},
+			() => -1,
+		),
+		-1,
+	);
+});
+
+test('thenMaybePromise chains async results', async (t) => {
+	const result = thenMaybePromise(
+		async () => 2,
+		(n) => n * 2,
+		() => -1,
+	);
+	t.true(result instanceof Promise);
+	t.is(await result, 4);
+});
+
+test('thenMaybePromise catches async rejections from run and thenFn', async (t) => {
+	t.is(
+		await thenMaybePromise(
+			async (): Promise<number> => {
+				throw new Error('boom');
+			},
+			(n) => n * 2,
+			() => -1,
+		),
+		-1,
+	);
+	t.is(
+		await thenMaybePromise(
+			() => 2,
+			async (): Promise<number> => {
+				throw new Error('boom');
+			},
+			() => -1,
+		),
+		-1,
+	);
+});
 
 test('mapMaybePromiseAll returns sync results synchronously', (t) => {
 	t.deepEqual(

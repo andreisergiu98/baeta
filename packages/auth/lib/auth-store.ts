@@ -1,5 +1,5 @@
 import { createContextStoreWithLoader } from '@baeta/core';
-import { mapMaybePromise } from '@baeta/core/utils';
+import { mapMaybePromise } from '@baeta/promises';
 import { createGrantCache, type GrantCache } from './grant-cache.ts';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import { createScopeCache } from './scope-cache.ts';

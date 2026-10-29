@@ -1,4 +1,4 @@
-import { isPromise } from '@baeta/core/utils';
+import { isPromise } from '@baeta/promises';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import type { ScopesShape } from './scope-shape.ts';
 import { canSafelySerialize, createScopeCacheKey } from './serialize.ts';

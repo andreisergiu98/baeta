@@ -1,6 +1,6 @@
+import { mapMaybePromise } from '@baeta/promises';
 import type { Resolver, ResolverParams } from '../lib/resolver.ts';
 import { nameFunction } from '../utils/functions.ts';
-import { mapMaybePromise } from '../utils/promise.ts';
 
 export function chainMapResolver<Next, Result, Source, Context, Args, Info>(
 	name: string,

@@ -1,5 +1,5 @@
 import type { Middleware, MiddlewareParams } from '@baeta/core';
-import { mapMaybePromise } from '@baeta/core/utils';
+import { mapMaybePromise } from '@baeta/promises';
 import type { GraphQLResolveInfo } from 'graphql';
 import { calculateComplexity } from './complexity-calculator.ts';
 import { ComplexityErrorKind } from './complexity-errors.ts';

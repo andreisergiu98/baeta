@@ -67,7 +67,7 @@ const userAgain = await getUser(ctx); // Uses cached data
 
 ## Creating a Store
 
-A store is created with `createContextStore`. It returns a `[get, setLoader]` tuple. `get(ctx)` reads the value (triggering the loader on first access) and `setLoader(ctx, loader)` registers the loader against a context object.
+A store is created with `createContextStore`. It returns a `[get, setLoader, getMaybeSync]` tuple. `get(ctx)` reads the value (triggering the loader on first access) and `setLoader(ctx, loader)` registers the loader against a context object. `getMaybeSync(ctx)` is covered in [Reading cached values synchronously](#reading-cached-values-synchronously).
 
 ```typescript title="src/store.ts"
 import { createContextStore } from "@baeta/core";
@@ -176,6 +176,25 @@ const exampleQuery = Query.example.resolve(async ({ ctx }) => {
   const user = await getOptionalUser(ctx);
 });
 ```
+
+## Reading cached values synchronously
+
+`get(ctx)` always returns a promise, so every read pays for an `await` even when the value is already cached. `getMaybeSync(ctx)`, the third element of the tuple, returns the value directly once it has resolved and falls back to the loader's promise while it's still loading. A sync loader resolves straight away, so even the first read is sync. If the loader rejects, `getMaybeSync` keeps returning the rejected promise. With `eager: true` the loader starts during context creation, so the value is usually resolved by the time resolvers read it.
+
+```typescript title="src/store.ts"
+export const [getOrg, setOrgLoader, getOrgMaybeSync] =
+  createContextStore<Organization>(orgStoreKey);
+```
+
+```typescript
+import { mapMaybePromise } from "@baeta/core/utils";
+
+const planQuery = Query.plan.resolve(({ ctx }) => {
+  return mapMaybePromise(getOrgMaybeSync(ctx), (org) => org.plan);
+});
+```
+
+Reach for it on hot paths, such as type-level or module-level middlewares that run for every field, where an `async` function would add a promise hop to fields that could otherwise resolve synchronously. Everywhere else, `await get(ctx)` is simpler.
 
 ## Shortcut: `createContextStoreWithLoader`
 

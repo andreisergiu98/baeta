@@ -1,3 +1,4 @@
+import { isPromise } from '../utils/promise.ts';
 import { logger } from './logger.ts';
 
 /**
@@ -23,9 +24,19 @@ export type ContextStoreValue<T> =
 			isLoaded: false;
 			load: () => T | PromiseLike<T>;
 	  }
+	| LoadedContextStoreValue<T>;
+
+type LoadedContextStoreValue<T> =
 	| {
 			isLoaded: true;
+			isResolved: false;
 			result: Promise<Awaited<T>>;
+	  }
+	| {
+			isLoaded: true;
+			isResolved: true;
+			result: Promise<Awaited<T>>;
+			value: Awaited<T>;
 	  };
 
 /**
@@ -34,13 +45,13 @@ export type ContextStoreValue<T> =
  *
  * @param key - A unique symbol to identify the stored value in the context
  * @param options - Configuration options for the store
- * @returns A tuple containing get and load functions for managing the stored value
+ * @returns A tuple containing get, setLoader and getMaybeSync functions for managing the stored value
  *
  * @example
  * ```typescript
  * // Create a store for user data
  * const userStoreKey = Symbol('userStore');
- * const [getUser, setUserLoader] = createContextStore<User>(userStoreKey, { lazy: true });
+ * const [getUser, setUserLoader, getUserMaybeSync] = createContextStore<User>(userStoreKey);
  *
  * // Set the loader function after creating the context object
  * setUserLoader(ctx, async () => {
@@ -49,30 +60,51 @@ export type ContextStoreValue<T> =
  *
  * // Later, retrieve the user in a resolver
  * const user = await getUser(ctx);
+ *
+ * // Or read the cached user synchronously, falling back to a promise while it loads
+ * const nameOrPromise = mapMaybePromise(getUserMaybeSync(ctx), (user) => user.name);
  * ```
  */
 export function createContextStore<Result, Context = unknown>(
 	key: symbol,
 	options?: ContextStoreOptions,
 ) {
-	const get = (ctx: Context): Promise<Result> => {
+	const load = (
+		_ctx: Record<symbol, ContextStoreValue<Result> | undefined>,
+		loader: () => Result | PromiseLike<Result>,
+	): LoadedContextStoreValue<Result> => {
+		const item = runLoader(loader);
+		_ctx[key] = item;
+		if (!item.isResolved) {
+			item.result.then(
+				(value) => {
+					_ctx[key] = { isLoaded: true, isResolved: true, result: item.result, value };
+				},
+				() => {},
+			);
+		}
+		return item;
+	};
+
+	const getLoaded = (ctx: Context) => {
 		const _ctx = ctx as Record<symbol, ContextStoreValue<Result> | undefined>;
 		const item = _ctx[key];
-
 		if (item == null) {
 			throw new Error('Context store not initialized');
 		}
-
 		if (item.isLoaded) {
-			return item.result;
+			return item;
 		}
+		return load(_ctx, item.load);
+	};
 
-		_ctx[key] = {
-			isLoaded: true,
-			result: loadAsync(item.load),
-		};
+	const get = (ctx: Context): Promise<Result> => {
+		return getLoaded(ctx).result;
+	};
 
-		return _ctx[key].result;
+	const getMaybeSync = (ctx: Context): Result | Promise<Result> => {
+		const item = getLoaded(ctx);
+		return item.isResolved ? item.value : item.result;
 	};
 
 	const setLoader = (ctx: Context, loader: () => Result | PromiseLike<Result>) => {
@@ -89,18 +121,13 @@ export function createContextStore<Result, Context = unknown>(
 		}
 
 		if (options?.eager) {
-			const promise = loadAsync(loader);
-			promise.catch((err) => {
+			load(_ctx, loader).result.catch((err) => {
 				logger.debug({
 					type: 'context-store-eager-load',
 					message: `Eager loader for context store ${String(key)} failed.`,
 					error: err,
 				});
 			});
-			_ctx[key] = {
-				isLoaded: true,
-				result: promise,
-			};
 		} else {
 			_ctx[key] = {
 				isLoaded: false,
@@ -109,7 +136,7 @@ export function createContextStore<Result, Context = unknown>(
 		}
 	};
 
-	return [get, setLoader] as const;
+	return [get, setLoader, getMaybeSync] as const;
 }
 
 /**
@@ -119,13 +146,13 @@ export function createContextStore<Result, Context = unknown>(
  * @param key - A unique symbol to identify the stored value in the context
  * @param loader - A function that returns the value for the store
  * @param options - Configuration options for the store
- * @returns A tuple containing get and load functions for managing the stored value
+ * @returns A tuple containing get, init and getMaybeSync functions for managing the stored value
  *
  * @example
  * ```typescript
  * // Create a store for user data
  * const userStoreKey = Symbol('userStore');
- * const [getUser, initUserStore] = createContextStoreWithLoader(userStoreKey, (userId: string) => { return fetchUser(userId); }, { lazy: true });
+ * const [getUser, initUserStore] = createContextStoreWithLoader(userStoreKey, (userId: string) => { return fetchUser(userId); });
  *
  * // Initialize the store when you create the context
  * initUserStore(ctx, userId);
@@ -143,15 +170,23 @@ export function createContextStoreWithLoader<
 	loader: (ctx: Context, ...args: Args) => Result | PromiseLike<Result>,
 	options?: ContextStoreOptions,
 ) {
-	const [get, setLoader] = createContextStore<Result, Context>(key, options);
-
+	const [get, setLoader, getMaybeSync] = createContextStore<Result, Context>(key, options);
 	const init = (ctx: Context, ...args: Args) => {
 		return setLoader(ctx, () => loader(ctx, ...args));
 	};
-
-	return [get, init] as const;
+	return [get, init, getMaybeSync] as const;
 }
 
-async function loadAsync<T>(fn: () => T | PromiseLike<T>): Promise<Awaited<T>> {
-	return await fn();
+function runLoader<T>(fn: () => T | PromiseLike<T>): LoadedContextStoreValue<T> {
+	let value: T | PromiseLike<T>;
+	try {
+		value = fn();
+	} catch (err) {
+		return { isLoaded: true, isResolved: false, result: Promise.reject(err) };
+	}
+	if (isPromise(value)) {
+		return { isLoaded: true, isResolved: false, result: Promise.resolve(value) };
+	}
+	const resolved = value as Awaited<T>;
+	return { isLoaded: true, isResolved: true, result: Promise.resolve(resolved), value: resolved };
 }

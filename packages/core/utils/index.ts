@@ -1,1 +1,7 @@
-export { isPromise, mapMaybePromise, thenMaybePromise } from './promise.ts';
+export {
+	isPromise,
+	mapMaybePromise,
+	mapMaybePromiseAll,
+	mapMaybePromiseAny,
+	thenMaybePromise,
+} from './promise.ts';

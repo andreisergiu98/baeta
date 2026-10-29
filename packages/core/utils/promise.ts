@@ -15,3 +15,20 @@ export function mapMaybePromise<R, U>(
 	}
 	return result.then(fn);
 }
+
+export function thenMaybePromise<R, U>(
+	run: () => R | PromiseLike<R>,
+	thenFn: (x: R) => U | PromiseLike<U>,
+	catchFn: (error: unknown) => U | PromiseLike<U>,
+): U | PromiseLike<U> {
+	try {
+		const result = run();
+		if (isPromise(result)) {
+			return result.then(thenFn).then(undefined, catchFn);
+		}
+		const output = thenFn(result);
+		return isPromise(output) ? output.then(undefined, catchFn) : output;
+	} catch (error) {
+		return catchFn(error);
+	}
+}

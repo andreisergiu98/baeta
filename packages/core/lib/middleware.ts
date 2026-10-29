@@ -6,6 +6,6 @@ export type MiddlewareParams<Source, Context, Args, Info> = {
 };
 
 export type Middleware<Result, Source, Context, Args, Info> = (
-	next: () => Promise<Result>,
+	next: () => Result | PromiseLike<Result>,
 	params: MiddlewareParams<Source, Context, Args, Info>,
 ) => Result | PromiseLike<Result>;

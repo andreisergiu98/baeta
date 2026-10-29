@@ -8,7 +8,7 @@ Middlewares wrap a resolver so you can run logic before, after, or instead of it
 
 A middleware receives two arguments:
 
-- `next: () => Promise<Result>` — calls the wrapped resolver (or the next middleware in the chain). Call it once and `await` its return.
+- `next: () => Result | PromiseLike<Result>` — calls the wrapped resolver (or the next middleware in the chain). Call it once and `await` its return. It returns a plain value when everything below it is synchronous, so chains of sync middlewares and resolvers stay sync; don't chain `.then()`, `.catch()` or `.finally()` on it.
 - `params: { source, args, ctx, info }` — same parameters the resolver gets. Destructure what you need.
 
 Whatever the middleware returns becomes the value the caller sees. That means you can short-circuit (skip `next()`), transform the result, or rewrap errors.
@@ -152,7 +152,7 @@ const userResolver = User
 ```
 
 :::caution
-Type-level `$use` adds an async hop to every field of the type. The cost is usually invisible next to I/O, but can show up in synthetic benchmarks.
+An `async` type-level middleware adds a promise hop to every field of the type, including fields that would otherwise resolve synchronously. The cost is usually invisible next to I/O, but can show up in synthetic benchmarks. A sync middleware that returns `next()` directly adds no hop, so drop `async` when there's nothing to `await`.
 :::
 
 ## Module-level middlewares
@@ -174,7 +174,7 @@ export default UserModule
 ```
 
 :::caution
-Same applies at module scope, with a broader blast radius: every field of every type in the module pays the cost.
+Same applies at module scope, with a broader blast radius: an `async` module-level middleware makes every field of every type in the module pay the cost.
 :::
 
 :::tip

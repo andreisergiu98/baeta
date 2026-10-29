@@ -1,3 +1,4 @@
+import { isPromise } from '@baeta/core/utils';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import type { ScopesShape } from './scope-shape.ts';
 import { canSafelySerialize, createScopeCacheKey } from './serialize.ts';
@@ -28,7 +29,16 @@ export function createScopeCache<Scopes extends ScopesShape>(
 				scopeParamsMap = new Map<any, boolean | Promise<boolean>>();
 				scopeCache.set(scope, scopeParamsMap);
 			}
-			scopeParamsMap.set(makeKey(scope, params), value);
+			const key = makeKey(scope, params);
+			scopeParamsMap.set(key, value);
+			if (isPromise(value)) {
+				const swapPromiseWithValue = (resolved: boolean) => {
+					if (scopeParamsMap.get(key) === value) {
+						scopeParamsMap.set(key, resolved);
+					}
+				};
+				value.then(swapPromiseWithValue, () => {});
+			}
 		},
 	};
 }

@@ -1,4 +1,5 @@
 import type { ResolverParams } from '@baeta/core';
+import { mapMaybePromise } from '@baeta/core/utils';
 import type { GrantCache } from './grant-cache.ts';
 
 /**
@@ -40,19 +41,20 @@ export type GetGrant<Grants extends string, Result, Source, Context, Args, Info>
 	| GetGrantFn<Grants, Result, Source, Context, Args, Info>
 	| GetGrantResult<Grants, Result>;
 
-export async function saveGrants<Grants extends string, Result, Source, Context, Args, Info>(
+export function saveGrants<Grants extends string, Result, Source, Context, Args, Info>(
 	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
 	grants: GetGrant<Grants, Result, Source, Context, Args, Info>,
 	grantCache: GrantCache,
 ) {
 	if (result == null) return;
-	const resolvedGrants = await resolveGrants(params, result, grants);
-	const entries = Array.isArray(result) ? result : [result];
-	resolvedGrants.forEach(({ grant, target }) => {
-		for (const entry of entries) {
-			if (entry == null) continue;
-			grantCache.addGrants(target(entry), grant);
+	return mapMaybePromise(resolveGrants(params, result, grants), (resolvedGrants) => {
+		const entries = Array.isArray(result) ? result : [result];
+		for (const resolvedGrant of resolvedGrants) {
+			for (const entry of entries) {
+				if (entry == null) continue;
+				grantCache.addGrants(resolvedGrant.target(entry), resolvedGrant.grant);
+			}
 		}
 	});
 }
@@ -82,7 +84,7 @@ function normalizeGrants<Grant extends string, Result>(
 	return [normalizeGrant(grants)];
 }
 
-async function resolveGrants<Grants extends string, Result, Source, Context, Args, Info>(
+function resolveGrants<Grants extends string, Result, Source, Context, Args, Info>(
 	params: ResolverParams<Source, Context, Args, Info>,
 	result: Result,
 	grants: GetGrant<Grants, Result, Source, Context, Args, Info>,
@@ -90,6 +92,5 @@ async function resolveGrants<Grants extends string, Result, Source, Context, Arg
 	if (typeof grants !== 'function') {
 		return normalizeGrants(grants);
 	}
-	const grantFnResult = await grants(params, result);
-	return normalizeGrants(grantFnResult);
+	return mapMaybePromise(grants(params, result), (grantFnResult) => normalizeGrants(grantFnResult));
 }

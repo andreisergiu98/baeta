@@ -137,7 +137,7 @@ function testCreateMiddleware(
 			scopeRule('trueScope'),
 			globalScopes,
 		);
-		await t.throwsAsync(middleware(resolver, params) as Promise<unknown>, {
+		await t.throwsAsync(async () => middleware(resolver, params), {
 			instanceOf: ForbiddenError,
 		});
 	});
@@ -161,7 +161,7 @@ function testCreateMiddleware(
 			globalScopes,
 			{ skipDefaults: true },
 		);
-		await t.notThrowsAsync(middleware(resolver, params) as Promise<unknown>);
+		await t.notThrowsAsync(async () => middleware(resolver, params));
 		t.true(resolver.calledOnce);
 	});
 
@@ -208,7 +208,7 @@ function testCreateMiddleware(
 		);
 		const params = { source: null, args: {}, ctx, info };
 
-		await t.throwsAsync(middleware(next, params) as Promise<unknown>, {
+		await t.throwsAsync(async () => middleware(next, params), {
 			instanceOf: ForbiddenError,
 		});
 
@@ -239,7 +239,7 @@ function testCreateMiddleware(
 		const next = sinon.spy(async () => 'result');
 		const params = { source: null, args: {}, ctx, info };
 
-		await t.throwsAsync(middleware(next, params) as Promise<unknown>);
+		await t.throwsAsync(async () => middleware(next, params));
 		t.true(errorResolver.calledOnce);
 	});
 }
@@ -255,7 +255,7 @@ test("createMiddleware doesn't call resolver for failing scopes", async (t) => {
 	const resolver = sinon.spy(async () => 'result');
 	const params = { source: null, args: {}, ctx, info };
 
-	await t.throwsAsync(middleware(resolver, params) as Promise<unknown>, {
+	await t.throwsAsync(async () => middleware(resolver, params), {
 		instanceOf: ForbiddenError,
 	});
 
@@ -265,14 +265,15 @@ test("createMiddleware doesn't call resolver for failing scopes", async (t) => {
 test('verifyMiddlewareScopes resolves valid scopes', async (t) => {
 	const { params, store } = createArgs();
 	await t.notThrowsAsync(
-		verifyMiddlewareScopes(params, undefined, scopeRule('trueScope'), () => null, store),
+		async () =>
+			await verifyMiddlewareScopes(params, undefined, scopeRule('trueScope'), () => null, store),
 	);
 });
 
 test('verifyMiddlewareScopes throws when scopes is false', async (t) => {
 	const { params, store } = createArgs();
 	await t.throwsAsync(
-		verifyMiddlewareScopes(params, undefined, false, () => null, store),
+		async () => await verifyMiddlewareScopes(params, undefined, false, () => null, store),
 		{
 			instanceOf: ForbiddenError,
 		},
@@ -281,19 +282,22 @@ test('verifyMiddlewareScopes throws when scopes is false', async (t) => {
 
 test('verifyMiddlewareScopes is a no-op when there are no scopes to check', async (t) => {
 	const { params, store } = createArgs();
-	await t.notThrowsAsync(verifyMiddlewareScopes(params, undefined, true, () => null, store));
+	await t.notThrowsAsync(
+		async () => await verifyMiddlewareScopes(params, undefined, true, () => null, store),
+	);
 });
 
 test('verifyMiddlewareScopes throws for failing default scopes', async (t) => {
 	const { params, store } = createArgs();
 	await t.throwsAsync(
-		verifyMiddlewareScopes(
-			params,
-			scopeRule('falseScope'),
-			scopeRule('trueScope'),
-			() => null,
-			store,
-		),
+		async () =>
+			await verifyMiddlewareScopes(
+				params,
+				scopeRule('falseScope'),
+				scopeRule('trueScope'),
+				() => null,
+				store,
+			),
 		{ instanceOf: ForbiddenError },
 	);
 });
@@ -301,13 +305,14 @@ test('verifyMiddlewareScopes throws for failing default scopes', async (t) => {
 test('verifyMiddlewareScopes resolves default scopes alongside required', async (t) => {
 	const { params, store } = createArgs();
 	await t.notThrowsAsync(
-		verifyMiddlewareScopes(
-			params,
-			scopeRule('trueScope'),
-			scopeRule('trueScope'),
-			() => null,
-			store,
-		),
+		async () =>
+			await verifyMiddlewareScopes(
+				params,
+				scopeRule('trueScope'),
+				scopeRule('trueScope'),
+				() => null,
+				store,
+			),
 	);
 });
 
@@ -320,7 +325,69 @@ test('verifyMiddlewareScopes invokes the error resolver on failure', async (t) =
 	});
 
 	await t.throwsAsync(
-		verifyMiddlewareScopes(params, undefined, scopeRule('falseScope'), errorResolver, store),
+		async () =>
+			await verifyMiddlewareScopes(
+				params,
+				undefined,
+				scopeRule('falseScope'),
+				errorResolver,
+				store,
+			),
 	);
 	t.true(errorResolver.calledOnce);
+});
+
+test('createMiddleware runs synchronously for sync scopes, resolver and grants', (t) => {
+	const ctx = {};
+	const store = createAuthStore<TestScopes, unknown>();
+	const loadSyncScopes = (): ScopeLoaderMap<TestScopes> => ({
+		trueScope: () => true,
+		falseScope: false,
+		lazyTrueScope: true,
+		lazyFalseScope: false,
+	});
+	const info = { path: { typename: 'Query', key: 'test' } } as unknown as GraphQLResolveInfo;
+
+	const resolverResult = { id: 'r1' };
+	const next = sinon.spy(() => resolverResult);
+	const middleware = createMiddleware(
+		'Query',
+		loadSyncScopes,
+		{},
+		store,
+		scopeRule('trueScope'),
+		{ Query: scopeRule('lazyTrueScope') },
+		{ grants: ['grant'] },
+	);
+
+	const result = middleware(next, { source: null, args: {}, ctx, info });
+
+	t.is(result, resolverResult);
+	t.true(next.calledOnce);
+
+	const authStore = store.getMaybeSync(ctx);
+	t.false(authStore instanceof Promise);
+	if (!(authStore instanceof Promise)) {
+		t.deepEqual(Array.from(authStore.grantCache.getGrants(resolverResult)!), ['grant']);
+	}
+});
+
+test('createMiddleware throws synchronously for failing sync scopes', (t) => {
+	const ctx = {};
+	const store = createAuthStore<TestScopes, unknown>();
+	const loadSyncScopes = (): ScopeLoaderMap<TestScopes> => ({
+		trueScope: true,
+		falseScope: false,
+		lazyTrueScope: true,
+		lazyFalseScope: false,
+	});
+	const info = { path: { typename: 'Query', key: 'test' } } as unknown as GraphQLResolveInfo;
+
+	const next = sinon.spy(() => 'result');
+	const middleware = createMiddleware('Query', loadSyncScopes, {}, store, () => false);
+
+	t.throws(() => middleware(next, { source: null, args: {}, ctx, info }), {
+		instanceOf: ForbiddenError,
+	});
+	t.false(next.called);
 });

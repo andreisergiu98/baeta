@@ -76,3 +76,43 @@ test('createScopeResolverMap creates resolver for each scope', (t) => {
 	t.is(typeof resolverMap.get('scope1'), 'function');
 	t.is(typeof resolverMap.get('scope2'), 'function');
 });
+
+test('createScopeResolver resolves sync loaders synchronously', (t) => {
+	const scopeCache = createScopeCache({});
+	const resolver = createScopeResolver(scopeCache, 'sync', () => true);
+	t.is(resolver(null), true);
+	t.is(resolver(null), true);
+});
+
+test('createScopeResolver resolves cached async results synchronously', async (t) => {
+	const scopeCache = createScopeCache({});
+
+	let calls = 0;
+	const resolver = createScopeResolver(scopeCache, 'async', async () => {
+		calls++;
+		await delay(5);
+		return true;
+	});
+
+	const first = resolver(null);
+	t.true(first instanceof Promise);
+	t.is(await first, true);
+
+	t.is(resolver(null), true);
+	t.is(calls, 1);
+});
+
+test('createScopeResolver keeps replaying a rejected loader', async (t) => {
+	const scopeCache = createScopeCache({});
+
+	let calls = 0;
+	const resolver = createScopeResolver(scopeCache, 'rejected', async () => {
+		calls++;
+		await delay(5);
+		throw new ForbiddenError();
+	});
+
+	await t.throwsAsync(async () => await resolver(null), { instanceOf: ForbiddenError });
+	await t.throwsAsync(async () => await resolver(null), { instanceOf: ForbiddenError });
+	t.is(calls, 1);
+});

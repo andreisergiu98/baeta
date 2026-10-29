@@ -72,3 +72,32 @@ test('parameter-less lazy loaders share a single cache entry', (t) => {
 	t.is(cache.getScopeValue('isAdmin'), true);
 	t.is(cache.getScopeValue('isAdmin', undefined), true);
 });
+
+test('a promise value is replaced by its resolved value once it settles', async (t) => {
+	const cache = createScopeCache<TestScopes>({});
+	const promise = Promise.resolve(true);
+	cache.setScopeValue('role', 'admin', promise);
+
+	t.is(cache.getScopeValue('role', 'admin'), promise);
+	await promise;
+	t.is(cache.getScopeValue('role', 'admin'), true);
+});
+
+test('a rejected promise value stays cached', async (t) => {
+	const cache = createScopeCache<TestScopes>({});
+	const promise = Promise.reject(new Error('boom'));
+	cache.setScopeValue('role', 'admin', promise);
+
+	await t.throwsAsync(promise, { message: 'boom' });
+	t.is(cache.getScopeValue('role', 'admin'), promise);
+});
+
+test('a settling promise does not overwrite a newer value', async (t) => {
+	const cache = createScopeCache<TestScopes>({});
+	const promise = Promise.resolve(true);
+	cache.setScopeValue('role', 'admin', promise);
+	cache.setScopeValue('role', 'admin', false);
+
+	await promise;
+	t.is(cache.getScopeValue('role', 'admin'), false);
+});

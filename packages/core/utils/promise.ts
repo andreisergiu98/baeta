@@ -32,3 +32,37 @@ export function thenMaybePromise<R, U>(
 		return catchFn(error);
 	}
 }
+
+export function mapMaybePromiseAll<T, U>(
+	items: readonly T[],
+	fn: (item: T) => U | PromiseLike<U>,
+): U[] | Promise<U[]> {
+	const results = items.map((item) => runCatching(fn, item));
+	if (results.some((result) => isPromise(result))) {
+		return Promise.all(results);
+	}
+	return results as U[];
+}
+
+export function mapMaybePromiseAny<T, U>(
+	items: readonly T[],
+	fn: (item: T) => U | PromiseLike<U>,
+): U | Promise<U> {
+	const results = items.map((item) => runCatching(fn, item));
+	const pending = results.filter((result) => isPromise(result));
+	if (pending.length === results.length) {
+		return Promise.any(pending);
+	}
+	for (const result of pending) {
+		result.then(undefined, () => {});
+	}
+	return results.find((result) => !isPromise(result)) as U;
+}
+
+function runCatching<T, U>(fn: (item: T) => U | PromiseLike<U>, item: T): U | PromiseLike<U> {
+	try {
+		return fn(item);
+	} catch (error) {
+		return Promise.reject(error);
+	}
+}

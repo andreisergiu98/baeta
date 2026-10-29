@@ -1,5 +1,11 @@
 # @baeta/subscriptions-cloudflare
 
+## 0.2.0-next.5
+
+### Patch Changes
+
+- fix(deps): update all non-major dependencies by [@baeta-bot](https://github.com/apps/baeta-bot) in [#645](https://github.com/andreisergiu98/baeta/pull/645)
+
 ## 0.2.0-next.4
 
 ### Minor Changes

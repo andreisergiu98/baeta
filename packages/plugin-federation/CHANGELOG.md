@@ -1,5 +1,13 @@
 # @baeta/plugin-federation
 
+## 2.0.0-next.18
+
+### Patch Changes
+
+- fix(deps): update all non-major dependencies by [@baeta-bot](https://github.com/apps/baeta-bot) in [#645](https://github.com/andreisergiu98/baeta/pull/645)
+- Updated dependencies [[`f3f2dc9`](https://github.com/andreisergiu98/baeta/commit/f3f2dc9ff29eab02d7d3b36b68e39c2a757a0e9c), [`fd2419f`](https://github.com/andreisergiu98/baeta/commit/fd2419fc692b1c1682da6e8c0d0e4383753b2271)]:
+  - @baeta/util-graphql@2.0.0-next.6
+
 ## 2.0.0-next.17
 
 ### Minor Changes

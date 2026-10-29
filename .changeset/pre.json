@@ -79,22 +79,32 @@
     "@baeta/testing": "0.0.0",
     "@baeta/tsconfig": "0.0.0",
     "@baeta/website": "0.0.0",
-    "@baeta/e2e-subscriptions": "0.0.0"
+    "@baeta/e2e-subscriptions": "0.0.0",
+    "@baeta/promises": "2.0.0-next.17"
   },
   "changesets": [
+    "auth-sync-middleware",
     "big-eagles-juggle",
     "big-phones-rhyme",
     "busy-pianos-scream",
+    "complexity-sync-middleware",
+    "context-store-get-maybe-sync",
+    "crisp-spoons-shave",
     "fresh-beds-knock",
+    "new-promises-package",
     "new-results-begin",
+    "nine-points-judge",
     "open-ducks-pay",
     "orange-lies-wave",
     "orange-zebras-punch",
     "quiet-waves-burn",
     "silver-dots-scream",
+    "solid-banks-march",
     "spicy-impalas-pick",
     "spicy-toes-shake",
+    "spotty-items-feel",
     "sweet-jars-rhyme",
+    "sync-middleware-next",
     "tasty-rings-move",
     "v2-auth",
     "v2-cache-cloudflare",
@@ -124,6 +134,7 @@
     "v2-subscriptions-pubsub",
     "v2-util-graphql",
     "v2-util-log",
-    "wet-pillows-find"
+    "wet-pillows-find",
+    "wild-worlds-sell"
   ]
 }

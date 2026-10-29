@@ -1,5 +1,28 @@
 # @baeta/core
 
+## 2.0.0-next.18
+
+### Minor Changes
+
+- Validate $fields and $schema maps when compiling by [@andreisergiu98](https://github.com/andreisergiu98) in [#668](https://github.com/andreisergiu98/baeta/pull/668)
+
+- feat: type-check $fields keys against their field builders by [@andreisergiu98](https://github.com/andreisergiu98) in [#666](https://github.com/andreisergiu98/baeta/pull/666)
+
+### Patch Changes
+
+- Context stores return a third `getMaybeSync(ctx)` function that returns the cached value synchronously once it has resolved, and falls back to the loader's promise while it's still loading. Sync loaders resolve immediately, so the first read is already sync. by [@andreisergiu98](https://github.com/andreisergiu98) in [#672](https://github.com/andreisergiu98/baeta/pull/672)
+
+- Update @graphql-tools/utils to 13.1.3 by [@andreisergiu98](https://github.com/andreisergiu98) in [#663](https://github.com/andreisergiu98/baeta/pull/663)
+
+- fix(deps): update all non-major dependencies by [@baeta-bot](https://github.com/apps/baeta-bot) in [#645](https://github.com/andreisergiu98/baeta/pull/645)
+
+- Middleware `next` returns `Result | PromiseLike<Result>` and `composeMiddlewares` no longer wraps each step in an async function, so sync middleware chains stay sync. Use `await next()`; don't chain `.then()`, `.catch()` or `.finally()` on it. by [@andreisergiu98](https://github.com/andreisergiu98) in [#671](https://github.com/andreisergiu98/baeta/pull/671)
+
+- refactor: share builder context and editor across sdk builders by [@andreisergiu98](https://github.com/andreisergiu98) in [#665](https://github.com/andreisergiu98/baeta/pull/665)
+- Updated dependencies [[`6e7f5b1`](https://github.com/andreisergiu98/baeta/commit/6e7f5b12f9047c0443be6711f949e91f0d6fea38)]:
+  - @baeta/promises@2.0.0-next.18
+  - @baeta/errors@2.0.0-next.18
+
 ## 2.0.0-next.17
 
 ### Minor Changes

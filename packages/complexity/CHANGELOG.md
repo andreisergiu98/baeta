@@ -1,5 +1,14 @@
 # @baeta/complexity
 
+## 2.0.0-next.18
+
+### Patch Changes
+
+- The complexity middleware runs synchronously once the per-request limits are loaded. Static limits and sync limit functions load synchronously, so every root field stays sync; an async limit function only makes the first root field of a request wait. by [@andreisergiu98](https://github.com/andreisergiu98) in [#673](https://github.com/andreisergiu98/baeta/pull/673)
+- Updated dependencies [[`96ac140`](https://github.com/andreisergiu98/baeta/commit/96ac1406626568d521ce149813ba849f99f2116b), [`f3f2dc9`](https://github.com/andreisergiu98/baeta/commit/f3f2dc9ff29eab02d7d3b36b68e39c2a757a0e9c), [`6e7f5b1`](https://github.com/andreisergiu98/baeta/commit/6e7f5b12f9047c0443be6711f949e91f0d6fea38), [`07d5a7a`](https://github.com/andreisergiu98/baeta/commit/07d5a7a0c7721010cbf6257f5e72ee80e7e2f7c0), [`fd2419f`](https://github.com/andreisergiu98/baeta/commit/fd2419fc692b1c1682da6e8c0d0e4383753b2271), [`dcd7b14`](https://github.com/andreisergiu98/baeta/commit/dcd7b149e3ee9be648ae422ae263a2822bf3f4ae), [`343f3d5`](https://github.com/andreisergiu98/baeta/commit/343f3d54d6fc68f384a4f9d6482c0d63462acf95), [`bc2d3d6`](https://github.com/andreisergiu98/baeta/commit/bc2d3d67b3280c669551a65304553d13e98c9010)]:
+  - @baeta/core@2.0.0-next.18
+  - @baeta/promises@2.0.0-next.18
+
 ## 2.0.0-next.17
 
 ### Minor Changes

@@ -1,4 +1,10 @@
 import type { ResolverParams } from '@baeta/core';
+import {
+	mapMaybePromise,
+	mapMaybePromiseAll,
+	mapMaybePromiseAny,
+	thenMaybePromise,
+} from '@baeta/core/utils';
 import { ForbiddenError } from '@baeta/errors';
 import { GraphQLError } from 'graphql';
 import type { AuthStoreResult } from './auth-store.ts';
@@ -36,11 +42,13 @@ export type ScopeLogicRule<Scopes extends ScopesShape, Grants extends string> = 
 	scopes: ScopeRules<Scopes, Grants>[];
 };
 
-export async function verifyGrant(
+type VerifyResult = true | PromiseLike<true>;
+
+export function verifyGrant(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	grant: string | undefined,
 	grantCache: GrantCache,
-): Promise<true> {
+): true {
 	if (grant == null) {
 		throw new Error("Grant key '$granted' must be defined in the scope rules!");
 	}
@@ -51,21 +59,21 @@ export async function verifyGrant(
 	return true;
 }
 
-export async function verifyScope<Scopes extends ScopesShape, Grants extends string>(
+export function verifyScope<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scope: ScopeRules<Scopes, Grants> | undefined,
 	store: AuthStoreResult,
-) {
+): VerifyResult {
 	if (scope == null) {
 		throw new Error('Scope rules cannot be undefined!');
 	}
 
 	if (scope.type === 'rule') {
-		return await verifyScopeRule(params, scope, store);
+		return verifyScopeRule(params, scope, store);
 	}
 
 	if (scope.type === 'grant') {
-		return await verifyGrant(params, scope.grant, store.grantCache);
+		return verifyGrant(params, scope.grant, store.grantCache);
 	}
 
 	if (scope.type === 'scope') {
@@ -73,93 +81,101 @@ export async function verifyScope<Scopes extends ScopesShape, Grants extends str
 		if (resolve == null) {
 			throw new Error(`No scope resolver found for key '${scope.key as string}'!`);
 		}
-		const result = await resolve(scope.value);
-		if (result !== true) {
-			throw new Error('Scope resolver should throw for non true results!');
-		}
-		return true;
+		return mapMaybePromise(resolve(scope.value), (result): true => {
+			if (result !== true) {
+				throw new Error('Scope resolver should throw for non true results!');
+			}
+			return true;
+		});
 	}
 
 	scope satisfies never;
 	throw new Error('Invalid scope rule! Must be a scope, grant, or nested rule.');
 }
 
-export async function verifyScopeRule<Scopes extends ScopesShape, Grants extends string>(
+export function verifyScopeRule<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scope: ScopeLogicRule<Scopes, Grants>,
 	store: AuthStoreResult,
-): Promise<true> {
+): VerifyResult {
 	if (scope.scopes.length === 0) {
 		throw new Error('Scope rule cannot be empty!');
 	}
 
 	if (scope.rule === 'chain') {
-		return await verifyChainScopes(params, scope.scopes, store);
+		return verifyChainScopes(params, scope.scopes, store);
 	}
 
 	if (scope.rule === 'race') {
-		return await verifyRaceScopes(params, scope.scopes, store);
+		return verifyRaceScopes(params, scope.scopes, store);
 	}
 
 	if (scope.rule === 'or') {
-		return await verifyOrScopes(params, scope.scopes, store);
+		return verifyOrScopes(params, scope.scopes, store);
 	}
 
 	if (scope.rule === 'and') {
-		return await verifyAndScopes(params, scope.scopes, store);
+		return verifyAndScopes(params, scope.scopes, store);
 	}
 
 	scope.rule satisfies never;
 	throw new Error("Invalid logic rule! Must be one of 'chain', 'race', 'or', or 'and'.");
 }
 
-export async function verifyChainScopes<Scopes extends ScopesShape, Grants extends string>(
+export function verifyChainScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scopes: ScopeRules<Scopes, Grants>[],
 	store: AuthStoreResult,
-): Promise<true> {
-	for (const scope of scopes) {
-		await verifyScope(params, scope, store);
+	index = 0,
+): VerifyResult {
+	if (index >= scopes.length) {
+		return true;
 	}
-	return true;
+	return mapMaybePromise(verifyScope(params, scopes[index], store), () =>
+		verifyChainScopes(params, scopes, store, index + 1),
+	);
 }
 
-export async function verifyRaceScopes<Scopes extends ScopesShape, Grants extends string>(
+export function verifyRaceScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scopes: ScopeRules<Scopes, Grants>[],
 	store: AuthStoreResult,
-): Promise<true> {
-	for (const scope of scopes) {
-		const result = await verifyScope(params, scope, store).catch((err) => err);
-		if (result === true) {
-			return true;
-		}
-		if (!(result instanceof GraphQLError)) {
-			logger.warn({
-				type: 'non-graphql-error',
-				message: `Non GraphQLError encountered by auth`,
-				extra: { origin: result },
-			});
-		}
+	index = 0,
+): VerifyResult {
+	if (index >= scopes.length) {
+		throw new ForbiddenError();
 	}
-	throw new ForbiddenError();
+	return thenMaybePromise(
+		() => verifyScope(params, scopes[index], store),
+		(): true => true,
+		(err) => {
+			if (!(err instanceof GraphQLError)) {
+				logger.warn({
+					type: 'non-graphql-error',
+					message: `Non GraphQLError encountered by auth`,
+					extra: { origin: err },
+				});
+			}
+			return verifyRaceScopes(params, scopes, store, index + 1);
+		},
+	);
 }
 
-export async function verifyOrScopes<Scopes extends ScopesShape, Grants extends string>(
+export function verifyOrScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
 	scopes: ScopeRules<Scopes, Grants>[],
 	store: AuthStoreResult,
-): Promise<true> {
-	const promises = scopes.map((scope) => verifyScope(params, scope, store));
-	return await Promise.any(promises);
+): VerifyResult {
+	return mapMaybePromiseAny(scopes, (scope) => verifyScope(params, scope, store));
 }
 
-export async function verifyAndScopes<Scopes extends ScopesShape, Grants extends string>(
+export function verifyAndScopes<Scopes extends ScopesShape, Grants extends string>(
 	params: ResolverParams<unknown, unknown, unknown, unknown>,
-	scopes: ScopeRules<Scopes, Grants>[],
+	scopes: (ScopeRules<Scopes, Grants> | undefined)[],
 	store: AuthStoreResult,
-): Promise<true> {
-	const promises = scopes.map((scope) => verifyScope(params, scope, store));
-	await Promise.all(promises);
-	return true;
+): VerifyResult {
+	return mapMaybePromise(
+		mapMaybePromiseAll(scopes, (scope) => verifyScope(params, scope, store)),
+		(): true => true,
+	);
 }

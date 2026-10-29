@@ -1,3 +1,4 @@
+import { mapMaybePromise } from '@baeta/core/utils';
 import { ForbiddenError } from '@baeta/errors';
 import type { ScopeCache } from './scope-cache.ts';
 import type { ScopesShape } from './scope-shape.ts';
@@ -60,7 +61,7 @@ export type ScopeLoaderMap<Scopes extends ScopesShape> = {
 		: (param: Scopes[K]) => boolean | Promise<boolean>;
 };
 
-type ScopeResolver = (value: unknown) => true | Promise<true>;
+type ScopeResolver = (value: unknown) => true | PromiseLike<true>;
 
 export type ScopeResolverMap<Scopes extends ScopesShape> = Map<keyof Scopes, ScopeResolver>;
 
@@ -82,17 +83,15 @@ export function createScopeResolver(
 		return () => resolveBoolean(value);
 	}
 
-	return async (params: unknown) => {
-		const cached = await scopeCache.getScopeValue(name, params);
-
+	return (params: unknown) => {
+		const cached = scopeCache.getScopeValue(name, params);
 		if (cached != null) {
-			return resolveBoolean(cached);
+			return mapMaybePromise(cached, resolveBoolean);
 		}
 
-		const resultPromise = value(params);
-		scopeCache.setScopeValue(name, params, resultPromise);
-		const result = await resultPromise;
-		return resolveBoolean(result);
+		const result = value(params);
+		scopeCache.setScopeValue(name, params, result);
+		return mapMaybePromise(result, resolveBoolean);
 	};
 }
 

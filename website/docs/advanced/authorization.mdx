@@ -70,6 +70,8 @@ export const { auth, authAfter, authAppPlugin, scope, rule } = createAuth<
 });
 ```
 
+The function passed to `createAuth` runs lazily, once per request, and returns a _scope loader_ for each scope. A scope loader is either a plain boolean or a function returning `boolean | Promise<boolean>`; return `false` or throw to deny.
+
 Scope types determine how you call the accessor:
 
 - A `boolean` scope is read as a property, like `scope.isLoggedIn`.
@@ -400,7 +402,7 @@ Return a **stable** value (equal inputs produce equal keys) that is also **disti
 
 ### Concurrency and errors
 
-Values are stored as the in-flight `Promise<boolean>`, so concurrent rule evaluations all `await` the same promise instead of re-invoking the loader. If the loader throws, the rejection is cached too: subsequent callers in the same request see the same error instead of retrying.
+While an async scope loader runs, its in-flight `Promise<boolean>` is cached, so concurrent rule evaluations all wait on the same promise instead of re-invoking the loader. Once it resolves, the cache holds the plain boolean. If the loader throws, the rejection is cached too: subsequent callers in the same request see the same error instead of retrying.
 
 ## Custom error handling
 
@@ -416,7 +418,7 @@ Override with a `(err) => unknown`:
 import { createAuth } from "@baeta/auth";
 import { ForbiddenError } from "@baeta/errors";
 
-createAuth<Context, Scopes, Grants>(loader, {
+createAuth<Context, Scopes, Grants>(getScopeLoader, {
   errorResolver: (err) => {
     if (err instanceof Error && err.message === "BANNED") {
       return new ForbiddenError("Account suspended");

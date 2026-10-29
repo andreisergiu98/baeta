@@ -1,4 +1,5 @@
 import type { Middleware, ResolverParams } from '@baeta/core';
+import { mapMaybePromise, thenMaybePromise } from '@baeta/core/utils';
 import { ForbiddenError } from '@baeta/errors';
 import type { AuthStore } from './auth-store.ts';
 import { defaultErrorResolver, resolveError, type ScopeErrorResolver } from './error.ts';
@@ -6,7 +7,7 @@ import { type GetGrant, saveGrants } from './grant.ts';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import { type DefaultScopes, selectDefaultScopes } from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
-import { verifyScope, type ScopeRules } from './scope-rules.ts';
+import { verifyAndScopes, type ScopeRules } from './scope-rules.ts';
 import type { ScopesShape } from './scope-shape.ts';
 
 /**
@@ -70,27 +71,24 @@ export function createMiddleware<
 	const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
-	return async (next, params) => {
+	return (next, params) => {
 		authStore.load(params.ctx, loadScopes, cacheKeyMap);
 
-		const requiredScopes = await getScopes(params);
-
-		await verifyMiddlewareScopes(
-			params,
-			defaultScopes,
-			requiredScopes,
-			onError ?? defaultErrorResolver,
-			authStore,
+		const verified = mapMaybePromise(getScopes(params), (requiredScopes) =>
+			verifyMiddlewareScopes(
+				params,
+				defaultScopes,
+				requiredScopes,
+				onError ?? defaultErrorResolver,
+				authStore,
+			),
 		);
 
-		const result = await next();
-
-		if (options?.grants && result != null) {
-			const { grantCache } = await authStore.get(params.ctx);
-			await saveGrants(params, result, options.grants, grantCache);
-		}
-
-		return result;
+		return mapMaybePromise(verified, () =>
+			mapMaybePromise(next(), (result) =>
+				saveResultGrants(params, result, authStore, options?.grants),
+			),
+		);
 	};
 }
 
@@ -114,26 +112,24 @@ export function createPostMiddleware<
 ): Middleware<Result, Source, Context, Args, Info> {
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
-	return async (next, params) => {
+	return (next, params) => {
 		authStore.load(params.ctx, loadScopes, cacheKeyMap);
 
-		const result = await next();
-		const requiredScopes = await getScopes(params, result);
+		return mapMaybePromise(next(), (result) => {
+			const verified = mapMaybePromise(getScopes(params, result), (requiredScopes) =>
+				verifyMiddlewareScopes(
+					params,
+					defaultScopes,
+					requiredScopes,
+					onError ?? defaultErrorResolver,
+					authStore,
+				),
+			);
 
-		await verifyMiddlewareScopes(
-			params,
-			defaultScopes,
-			requiredScopes,
-			onError ?? defaultErrorResolver,
-			authStore,
-		);
-
-		if (options?.grants && result != null) {
-			const { grantCache } = await authStore.get(params.ctx);
-			await saveGrants(params, result, options.grants, grantCache);
-		}
-
-		return result;
+			return mapMaybePromise(verified, () =>
+				saveResultGrants(params, result, authStore, options?.grants),
+			);
+		});
 	};
 }
 
@@ -168,7 +164,7 @@ export function createFallbackMiddleware<
 	);
 }
 
-export async function verifyMiddlewareScopes<
+export function verifyMiddlewareScopes<
 	Scopes extends ScopesShape,
 	Grants extends string,
 	Source,
@@ -188,16 +184,43 @@ export async function verifyMiddlewareScopes<
 		return;
 	}
 
-	const store = await authStore.get(params.ctx);
-	const promises: Promise<unknown>[] = [];
+	return mapMaybePromise(authStore.getMaybeSync(params.ctx), (store) => {
+		const scopes: (ScopeRules<Scopes, Grants> | undefined)[] = [];
 
-	if (defaultScopes) {
-		promises.push(verifyScope(params, defaultScopes, store));
+		if (defaultScopes) {
+			scopes.push(defaultScopes);
+		}
+
+		if (requiredScopes !== true) {
+			scopes.push(requiredScopes);
+		}
+
+		return thenMaybePromise(
+			() => verifyAndScopes(params, scopes, store),
+			() => undefined,
+			(err) => resolveError(err, errorResolver),
+		);
+	});
+}
+
+function saveResultGrants<
+	Scopes extends ScopesShape,
+	Grants extends string,
+	Result,
+	Source,
+	Context,
+	Args,
+	Info,
+>(
+	params: ResolverParams<Source, Context, Args, Info>,
+	result: Result,
+	authStore: AuthStore<Scopes, unknown>,
+	grants: GetGrant<Grants, Result, Source, Context, Args, Info> | undefined,
+): Result | PromiseLike<Result> {
+	if (!grants || result == null) {
+		return result;
 	}
-
-	if (requiredScopes !== true) {
-		promises.push(verifyScope(params, requiredScopes, store));
-	}
-
-	return await Promise.all(promises).catch((err) => resolveError(err, errorResolver));
+	return mapMaybePromise(authStore.getMaybeSync(params.ctx), ({ grantCache }) =>
+		mapMaybePromise(saveGrants(params, result, grants, grantCache), () => result),
+	);
 }

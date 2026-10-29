@@ -1,4 +1,5 @@
 import { createContextStoreWithLoader } from '@baeta/core';
+import { mapMaybePromise } from '@baeta/core/utils';
 import { createGrantCache, type GrantCache } from './grant-cache.ts';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
 import { createScopeCache } from './scope-cache.ts';
@@ -19,7 +20,7 @@ export type AuthStore<Scopes extends ScopesShape, Context> = ReturnType<
 >;
 
 export function createAuthStore<Scopes extends ScopesShape, Context>() {
-	const [get, load] = createContextStoreWithLoader(
+	const [get, load, getMaybeSync] = createContextStoreWithLoader(
 		Symbol('@baeta/auth'),
 		authStoreLoader<Scopes, Context>,
 		{ warnOnDuplicateLoader: false },
@@ -27,21 +28,23 @@ export function createAuthStore<Scopes extends ScopesShape, Context>() {
 	return {
 		get,
 		load,
+		getMaybeSync,
 	};
 }
 
-async function authStoreLoader<Scopes extends ScopesShape, Context>(
+function authStoreLoader<Scopes extends ScopesShape, Context>(
 	ctx: Context,
 	getScopeLoader: GetScopeLoader<Scopes, Context>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
-): Promise<AuthStoreResult> {
-	const scopeLoaders = await getScopeLoader(ctx);
-	const scopeCache = createScopeCache(cacheKeyMap);
-	return {
-		scopeResolverMap: createScopeResolverMap(
-			scopeCache,
-			scopeLoaders,
-		) as ScopeResolverMap<ScopesShape>,
-		grantCache: createGrantCache(),
-	};
+): AuthStoreResult | PromiseLike<AuthStoreResult> {
+	return mapMaybePromise(getScopeLoader(ctx), (scopeLoaders) => {
+		const scopeCache = createScopeCache(cacheKeyMap);
+		return {
+			scopeResolverMap: createScopeResolverMap(
+				scopeCache,
+				scopeLoaders,
+			) as ScopeResolverMap<ScopesShape>,
+			grantCache: createGrantCache(),
+		};
+	});
 }

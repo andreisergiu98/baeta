@@ -1,6 +1,5 @@
-/** biome-ignore-all lint/complexity/noBannedTypes: Allow empty for source */
+import { isPromise } from '@baeta/promises';
 import type { GraphQLResolveInfo } from 'graphql';
-import { isPromise } from '../../utils/promise.ts';
 import { createBuilderContext, createEmptyBuilderContext } from '../builder-context.ts';
 import { SubscriptionBuilder } from '../subscription-builder.ts';
 import { SubscriptionCompiler } from '../subscription-compiler.ts';

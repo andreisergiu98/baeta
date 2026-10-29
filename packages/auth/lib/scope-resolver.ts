@@ -1,5 +1,5 @@
-import { mapMaybePromise } from '@baeta/core/utils';
 import { ForbiddenError } from '@baeta/errors';
+import { mapMaybePromise } from '@baeta/promises';
 import type { ScopeCache } from './scope-cache.ts';
 import type { ScopesShape } from './scope-shape.ts';
 

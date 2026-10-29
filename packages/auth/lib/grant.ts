@@ -1,5 +1,5 @@
 import type { ResolverParams } from '@baeta/core';
-import { mapMaybePromise } from '@baeta/core/utils';
+import { mapMaybePromise } from '@baeta/promises';
 import type { GrantCache } from './grant-cache.ts';
 
 /**

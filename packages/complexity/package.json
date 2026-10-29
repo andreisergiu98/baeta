@@ -55,6 +55,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
+    "@baeta/promises": "workspace:^",
     "@baeta/util-log": "workspace:^"
   },
   "devDependencies": {

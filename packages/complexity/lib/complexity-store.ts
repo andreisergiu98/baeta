@@ -1,5 +1,5 @@
 import { createContextStoreWithLoader } from '@baeta/core';
-import { mapMaybePromise } from '@baeta/core/utils';
+import { mapMaybePromise } from '@baeta/promises';
 import type { ComplexityLimit } from './complexity-limits.ts';
 import { sanitizeLimit } from './sanitize-limit.ts';
 

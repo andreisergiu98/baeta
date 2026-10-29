@@ -1,4 +1,4 @@
-import { isPromise } from '../utils/promise.ts';
+import { isPromise } from '@baeta/promises';
 import { logger } from './logger.ts';
 
 /**

@@ -1,6 +1,6 @@
+import { isPromise } from '@baeta/promises';
 import test, { sleep } from '@baeta/testing';
 import type { GraphQLResolveInfo } from 'graphql';
-import { isPromise } from '../utils/promise.ts';
 import {
 	type MockArgs,
 	type MockContext,

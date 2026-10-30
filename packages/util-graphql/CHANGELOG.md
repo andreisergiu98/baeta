@@ -1,5 +1,13 @@
 # @baeta/util-graphql
 
+## 2.0.0-next.6
+
+### Patch Changes
+
+- Update @graphql-tools/utils to 13.1.3 by [@andreisergiu98](https://github.com/andreisergiu98) in [#663](https://github.com/andreisergiu98/baeta/pull/663)
+
+- fix(deps): update all non-major dependencies by [@baeta-bot](https://github.com/apps/baeta-bot) in [#645](https://github.com/andreisergiu98/baeta/pull/645)
+
 ## 2.0.0-next.5
 
 ### Minor Changes

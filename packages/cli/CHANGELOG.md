@@ -1,5 +1,13 @@
 # @baeta/cli
 
+## 2.0.0-next.18
+
+### Patch Changes
+
+- fix(deps): update all non-major dependencies by [@baeta-bot](https://github.com/apps/baeta-bot) in [#645](https://github.com/andreisergiu98/baeta/pull/645)
+- Updated dependencies [[`dcd7b14`](https://github.com/andreisergiu98/baeta/commit/dcd7b149e3ee9be648ae422ae263a2822bf3f4ae)]:
+  - @baeta/plugin-graphql@2.0.0-next.18
+
 ## 2.0.0-next.17
 
 ### Minor Changes

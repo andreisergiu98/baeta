@@ -1,5 +1,14 @@
 # @baeta/plugin-cloudflare
 
+## 2.0.0-next.18
+
+### Patch Changes
+
+- fix(deps): update all non-major dependencies by [@baeta-bot](https://github.com/apps/baeta-bot) in [#645](https://github.com/andreisergiu98/baeta/pull/645)
+- Updated dependencies [[`fd2419f`](https://github.com/andreisergiu98/baeta/commit/fd2419fc692b1c1682da6e8c0d0e4383753b2271)]:
+  - @baeta/subscriptions-cloudflare@0.2.0-next.5
+  - @baeta/cache-cloudflare@2.0.0-next.18
+
 ## 2.0.0-next.17
 
 ### Minor Changes

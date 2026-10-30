@@ -1,5 +1,15 @@
 # @baeta/auth
 
+## 2.0.0-next.18
+
+### Patch Changes
+
+- Auth middlewares run synchronously when everything they depend on is sync or already cached: the function passed to `createAuth`, the scope loaders a rule touches, rule and grant functions, and the resolver. Resolved async scope results are cached as plain booleans, so only the first check of a scope in a request waits on its loader. by [@andreisergiu98](https://github.com/andreisergiu98) in [#675](https://github.com/andreisergiu98/baeta/pull/675)
+- Updated dependencies [[`96ac140`](https://github.com/andreisergiu98/baeta/commit/96ac1406626568d521ce149813ba849f99f2116b), [`f3f2dc9`](https://github.com/andreisergiu98/baeta/commit/f3f2dc9ff29eab02d7d3b36b68e39c2a757a0e9c), [`6e7f5b1`](https://github.com/andreisergiu98/baeta/commit/6e7f5b12f9047c0443be6711f949e91f0d6fea38), [`07d5a7a`](https://github.com/andreisergiu98/baeta/commit/07d5a7a0c7721010cbf6257f5e72ee80e7e2f7c0), [`fd2419f`](https://github.com/andreisergiu98/baeta/commit/fd2419fc692b1c1682da6e8c0d0e4383753b2271), [`dcd7b14`](https://github.com/andreisergiu98/baeta/commit/dcd7b149e3ee9be648ae422ae263a2822bf3f4ae), [`343f3d5`](https://github.com/andreisergiu98/baeta/commit/343f3d54d6fc68f384a4f9d6482c0d63462acf95), [`bc2d3d6`](https://github.com/andreisergiu98/baeta/commit/bc2d3d67b3280c669551a65304553d13e98c9010)]:
+  - @baeta/core@2.0.0-next.18
+  - @baeta/promises@2.0.0-next.18
+  - @baeta/errors@2.0.0-next.18
+
 ## 2.0.0-next.17
 
 ### Minor Changes

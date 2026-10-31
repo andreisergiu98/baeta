@@ -39,8 +39,8 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/sinon": "^22.0.1",
-    "ava": "^8.1.2",
+    "@types/sinon": "^22.0.2",
+    "ava": "^8.2.0",
     "sinon": "^22.1.0"
   },
   "devDependencies": {

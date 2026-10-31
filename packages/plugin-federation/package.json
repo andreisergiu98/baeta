@@ -60,7 +60,7 @@
     "@baeta/generator-sdk": "workspace:^",
     "@baeta/util-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "@graphql-tools/merge": "^10.0.6"
+    "@graphql-tools/merge": "^10.0.7"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

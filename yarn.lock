@@ -2559,7 +2559,7 @@ __metadata:
     "@baeta/subscriptions-cloudflare": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@cloudflare/workers-types": "npm:^5.20261028.1"
-    "@hono/graphql-server": "npm:^0.7.0"
+    "@hono/graphql-server": "npm:^0.7.1"
     "@types/node": "catalog:dev"
     graphql: "catalog:dev"
     hono: "npm:^4.13.14"
@@ -6265,14 +6265,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/graphql-server@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@hono/graphql-server@npm:0.7.0"
+"@hono/graphql-server@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "@hono/graphql-server@npm:0.7.1"
   dependencies:
     graphql: "npm:^16.5.0"
   peerDependencies:
     hono: ">=3.0.0"
-  checksum: 10c0/40f45f56bf70cfe93ae40919522a2692318ecd789657b4b5ef62ae0b665ce5b64e28c4a34f1adabef2744498fe42699ffbd04b0f2259bf7435aab0e9a239e9c7
+  checksum: 10c0/935c9d0acfc6c87fa5ad34a1ad8054b6d848f768516d3482c25652389b2129ccbf7e78d448d9cf75ba6ced3f50a8af034b34f86581b61ccbe10b373ce63b9ead
   languageName: node
   linkType: hard
 

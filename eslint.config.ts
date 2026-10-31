@@ -59,7 +59,11 @@ export const baseConfig = defineConfig([
 	{
 		files: [TS],
 		languageOptions: {
-			parserOptions: { projectService: true },
+			parserOptions: {
+				projectService: true,
+				disallowAutomaticSingleRunInference: true,
+				tsconfigRootDir: import.meta.dirname,
+			},
 		},
 		rules: {
 			'@typescript-eslint/no-floating-promises': 'error',

@@ -41,6 +41,7 @@ Building GraphQL APIs shouldn't be complicated. **Baeta** is a modern, modular, 
 - **@baeta/auth**: Add powerful scope-based authorization
 - **@baeta/complexity**: Reject resource-exhausting queries with depth, breadth and complexity limits
 - **@baeta/cache**: Type-safe caching with declarative queries and automatic reconciliation
+- **@baeta/directives**: Validate arguments and input fields with built-in or custom input directives
 - ... and more!
 
 ## Why use Baeta?

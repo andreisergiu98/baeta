@@ -9,23 +9,23 @@ type User {
 
 input UserWhereUniqueInput @constraints(minFields: 1, maxFields: 1) {
 	id: ID
-	email: String @trim @lower
+	email: String
 }
 
 input CreateUserInput {
-	email: String! @trim @lower
-	lastName: String! @trim @validString(minLength: 3, maxLength: 20)
-	givenName: String @trim @validString(minLength: 3, maxLength: 20)
+	email: String!
+	lastName: String! @validString(minLength: 3, maxLength: 20)
+	givenName: String @validString(minLength: 3, maxLength: 20)
 	birthday: DateTime
-	profile: String @trim
+	profile: String
 }
 
 input UpdateUserInput @constraints(minFields: 1) {
-	email: String @trim @lower
-	lastName: String @trim @validString(minLength: 3, maxLength: 20)
-	givenName: String @trim @validString(minLength: 3, maxLength: 20)
+	email: String
+	lastName: String @validString(minLength: 3, maxLength: 20)
+	givenName: String @validString(minLength: 3, maxLength: 20)
 	birthday: DateTime
-	profile: String @trim
+	profile: String
 }
 
 type Query {

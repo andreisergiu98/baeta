@@ -55,14 +55,15 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@baeta/errors": "workspace:^"
+    "@baeta/errors": "workspace:^",
+    "@baeta/util-log": "workspace:^",
+    "@graphql-tools/utils": "^13.2.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/core": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@graphql-tools/schema": "^11.0.7",
     "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },

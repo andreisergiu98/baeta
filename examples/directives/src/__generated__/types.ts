@@ -6,7 +6,7 @@ import type * as BaetaOverrides from "../modules/types.ts";
 export type Scalars = BaetaOverrides.Scalars;
 
 export type Query = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Query"], {
-  testIncrementDirective: Scalars["Int"]
+  testUniqueItemsDirective: Array<Scalars["Int"]>
   testUpperDirective: NameWithUpper | null
   user: User | null
 }>
@@ -27,8 +27,8 @@ export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
   givenName: Scalars["String"] | null
 }>
 
-export type QueryTestIncrementDirectiveArgs = {
-  value: Scalars["Int"]
+export type QueryTestUniqueItemsDirectiveArgs = {
+  values: Array<Scalars["Int"]>
 };
 
 export type QueryTestUpperDirectiveArgs = {

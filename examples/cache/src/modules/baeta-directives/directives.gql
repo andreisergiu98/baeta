@@ -36,7 +36,3 @@ directive @constraints(
     minFields: Int
     maxFields: Int
 ) on INPUT_OBJECT
-
-directive @trim(start: Boolean, end: Boolean) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
-directive @lower on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
-directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION

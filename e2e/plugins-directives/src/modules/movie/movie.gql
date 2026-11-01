@@ -17,11 +17,11 @@ type Query {
 }
 
 input CreateMovieInput {
-	title: String! @trim @validString(minLength: 1, maxLength: 200)
+	title: String! @validString(minLength: 1, maxLength: 200)
 	year: Int! @validInt(min: 1888, max: 2100)
 	rating: Float @validFloat(min: 0, max: 10)
-	slug: String @lower
-	genre: String @upper
+	slug: String
+	genre: String
 }
 
 type Mutation {

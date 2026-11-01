@@ -1,10 +1,11 @@
 import { createApplication } from '@baeta/core';
+import { inputValidationAppPlugin } from '@baeta/directives';
 import { execute } from '@baeta/e2e-shared/execute';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
 import modules from './src/modules/index.ts';
 
-const { schema } = createApplication({ modules });
+const { schema } = createApplication({ modules, plugins: [inputValidationAppPlugin] });
 
 const CreateMovieMutation = graphql(`
 	mutation CreateMovieMutation($input: CreateMovieInput!) {
@@ -25,15 +26,10 @@ const MovieQuery = graphql(`
 	}
 `);
 
-test('@trim transforms input', async (t) => {
-	const result = await execute({
-		schema,
-		document: CreateMovieMutation,
-		variableValues: { input: { title: '  Inception  ', year: 2010, rating: 8.8 } },
-		contextValue: { appVersion: '1.0.0' },
+test('generated directives module requires inputValidationAppPlugin', (t) => {
+	t.throws(() => createApplication({ modules }), {
+		message: /Modules are using the plugin @baeta\/directives/,
 	});
-	t.falsy(result.errors);
-	t.is(result.data?.createMovie.title, 'Inception');
 });
 
 test('@validString rejects empty title', async (t) => {
@@ -110,26 +106,4 @@ test('@validFloat rejects rating above max', async (t) => {
 	});
 	t.truthy(result.errors);
 	t.truthy(result.errors?.length);
-});
-
-test('@lower transforms slug to lowercase', async (t) => {
-	const result = await execute({
-		schema,
-		document: CreateMovieMutation,
-		variableValues: { input: { title: 'Inception', year: 2010, slug: 'The-Movie-Slug' } },
-		contextValue: { appVersion: '1.0.0' },
-	});
-	t.falsy(result.errors);
-	t.is(result.data?.createMovie.slug, 'the-movie-slug');
-});
-
-test('@upper transforms genre to uppercase', async (t) => {
-	const result = await execute({
-		schema,
-		document: CreateMovieMutation,
-		variableValues: { input: { title: 'Inception', year: 2010, genre: 'sci-fi' } },
-		contextValue: { appVersion: '1.0.0' },
-	});
-	t.falsy(result.errors);
-	t.is(result.data?.createMovie.genre, 'SCI-FI');
 });

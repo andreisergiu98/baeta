@@ -67,6 +67,10 @@ export class ModuleCompiler<
 		return this.#types;
 	}
 
+	get typedef() {
+		return this.#typedef;
+	}
+
 	addMiddleware(middleware: Middleware<unknown, unknown, Context, unknown, Info>) {
 		this.#middlewares.push(middleware);
 	}

@@ -5,7 +5,7 @@ title: Directives
 
 # Built-in Directives
 
-`@baeta/plugin-directives` ships a catalog of ready-made directives for the common cases: string/number/object validation and a few string transforms. Enable the plugin and use the directives directly in your `.gql` files — no extra wiring needed.
+`@baeta/plugin-directives` ships a catalog of ready-made [input directives](../guides/input-directives.mdx) for the common cases: string, number and object validation. Enable the plugin, register the validation app plugin, and use the directives directly in your `.gql` files.
 
 ## Installation
 
@@ -34,6 +34,21 @@ export default defineConfig({
 ```
 
 For the full configuration interface, see the [`DirectivesOptions`](/docs/api/plugin-directives/interfaces/DirectivesOptions) API reference.
+
+The plugin generates a `baeta-directives` module that registers the directives. That module requires `inputValidationAppPlugin`, so add it to your application:
+
+```typescript title="src/app.ts"
+import { createApplication } from "@baeta/core";
+import { inputValidationAppPlugin } from "@baeta/directives";
+import modules from "./modules/index.ts";
+
+const baeta = createApplication({
+  modules,
+  plugins: [inputValidationAppPlugin],
+});
+```
+
+See [Plugin order](../guides/input-directives.mdx#plugin-order) when you also use auth or complexity.
 
 ## Available directives
 
@@ -85,24 +100,13 @@ directive @validInt(
 directive @constraints(minFields: Int, maxFields: Int) on INPUT_OBJECT
 ```
 
-### String transformation
-
-```graphql
-directive @trim(
-  start: Boolean
-  end: Boolean
-) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
-directive @lower on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
-directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
-```
-
 ## Usage
 
 ```graphql
 input UserInput @constraints(minFields: 2) {
   email: String! @validString(regex: "^[^@\\s]+@[^@\\s]+$", maxLength: 254)
   age: Int! @validInt(min: 18)
-  name: String! @trim @upper
+  name: String! @validString(minLength: 1, maxLength: 100)
   score: Float @validFloat(min: 0, max: 100)
 }
 

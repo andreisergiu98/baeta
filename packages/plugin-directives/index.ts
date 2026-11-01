@@ -16,10 +16,10 @@ export interface DirectivesOptions {
 function printExport(moduleDefinitionName: string, moduleName: string, importExt: string) {
 	const module = getModuleExportName(moduleName);
 
-	return `import { definitions } from "@baeta/directives";
+	return `import { definitions, inputDirectives } from "@baeta/directives";
 import { ${module} } from "./${parse(moduleDefinitionName).name}${importExt}";
 
-export default ${module}.$directive(definitions.map((definition) => definition.directive)).$schema({});`;
+export default ${module}.$use(inputDirectives(definitions.map((definition) => definition.directive))).$schema({});`;
 }
 
 function printDefinitions() {
@@ -40,6 +40,8 @@ function createExportFilename(moduleDir: string) {
 
 /**
  * A plugin that generates the directives and resolvers for the built-in Baeta directives.
+ * The generated module requires `inputValidationAppPlugin` from `@baeta/directives` to be
+ * registered in the application.
  * See https://baeta.io/docs/plugins/builtin-directives
  *
  * @param options - Configuration options for the directives plugin

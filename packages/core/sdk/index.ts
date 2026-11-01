@@ -1,4 +1,3 @@
-export { addValidationToSchema } from '../lib/input-directive/index.ts';
 export { nameFunction } from '../utils/functions.ts';
 export {
 	type AppPlugin,

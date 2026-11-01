@@ -1,5 +1,6 @@
 import { createServer } from 'node:http';
 import { createApplication } from '@baeta/core';
+import { inputValidationAppPlugin } from '@baeta/directives';
 import { createYoga } from 'graphql-yoga';
 import { pubsub } from './lib/pubsub.ts';
 import { useWebSocketServer } from './lib/ws.ts';
@@ -8,6 +9,7 @@ import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
 	modules,
+	plugins: [inputValidationAppPlugin],
 });
 
 const yoga = createYoga<ServerContext, Context>({

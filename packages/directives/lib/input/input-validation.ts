@@ -1,5 +1,5 @@
-import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
+import { createInputDirective } from '../directive.ts';
 
 interface Args {
 	minFields?: number;
@@ -18,7 +18,7 @@ const directive = createInputDirective<Args>({
 	name,
 	target: 'object',
 	resolve(params) {
-		const value = params.getValue();
+		const value = params.value;
 
 		if (typeof value !== 'object' || value == null) {
 			return;

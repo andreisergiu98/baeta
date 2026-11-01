@@ -1,5 +1,7 @@
 # @baeta/plugin-graphql
 
+## 2.0.0-next.19
+
 ## 2.0.0-next.18
 
 ### Minor Changes

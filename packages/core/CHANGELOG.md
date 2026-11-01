@@ -1,5 +1,18 @@
 # @baeta/core
 
+## 2.0.0-next.19
+
+### Major Changes
+
+- Move input directives from `@baeta/core` to `@baeta/directives` as `inputValidationAppPlugin`, registered per module with `$use(inputDirectives([...]))`. Input directives are validation-only: `getValue()` became `value`, `setValue()` and the `@trim`, `@lower` and `@upper` directives were removed. by [@andreisergiu98](https://github.com/andreisergiu98) in [#678](https://github.com/andreisergiu98/baeta/pull/678)
+
+  App plugins can return `onSchema` from `mutate`, and `ModuleCompiler` exposes `typedef`.
+
+### Patch Changes
+
+- Updated dependencies:
+  - @baeta/promises@2.0.0-next.19
+
 ## 2.0.0-next.18
 
 ### Minor Changes

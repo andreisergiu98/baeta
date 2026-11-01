@@ -36,6 +36,7 @@
     "outdir",
     "pexpireat",
     "unnormalized",
+    "unvalidated",
     "upstash",
     "valkey",
     "zadd",

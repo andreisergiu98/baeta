@@ -1,11 +1,7 @@
-import { BaetaErrorCode } from '@baeta/errors';
 import test from '@baeta/testing';
-import { parse as gql } from 'graphql';
-import {
-	createAndExecute,
-	makeInvalidInputMacro,
-	makeValidInputMacro,
-} from '../../__tests__/macros.ts';
+import { concatAST, parse as gql } from 'graphql';
+import { createTestSchema } from '../../__tests__/app.ts';
+import { makeInvalidInputMacro, makeValidInputMacro } from '../../__tests__/macros.ts';
 import { inputConstraints } from './input-validation.ts';
 
 const typeDefs = gql(`
@@ -134,20 +130,17 @@ test(
   `),
 );
 
-test('validates fields relying on the default resolver', async (t) => {
-	const result = await createAndExecute(
-		typeDefs,
-		'MaxFieldsInput!',
-		inputConstraints.directive,
-		gql(`
-    query {
-      value(input: { id: "1", email: "test@test.com" })
-    }
-  `),
-		{},
-		'Boolean',
+test('rejects validated arguments on fields without a Baeta resolver at startup', (t) => {
+	t.throws(
+		() =>
+			createTestSchema({
+				typeDefs: concatAST([
+					typeDefs,
+					gql('type Query { value(input: MaxFieldsInput!): Boolean }'),
+				]),
+				directives: [inputConstraints.directive],
+				resolvers: { Query: {} },
+			}),
+		{ message: /Query\.value has arguments that use input directives, but no resolver/ },
 	);
-
-	t.is(result.errors?.length, 1);
-	t.is(result.errors?.[0].extensions.code, BaetaErrorCode.BadUserInput);
 });

@@ -1,11 +1,13 @@
 import { createServer } from 'node:http';
 import { createApplication } from '@baeta/core';
+import { inputValidationAppPlugin } from '@baeta/directives';
 import { createYoga } from 'graphql-yoga';
 import modules from './modules/index.ts';
 import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
 	modules,
+	plugins: [inputValidationAppPlugin],
 });
 
 export const yoga = createYoga<ServerContext, Context>({

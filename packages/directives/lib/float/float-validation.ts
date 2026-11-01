@@ -4,8 +4,8 @@
  * Copyright (c) 2022-present Marc Duez
  * Adapted by Baeta developers
  */
-import { createInputDirective } from '@baeta/core';
 import { BadUserInput } from '@baeta/errors';
+import { createInputDirective } from '../directive.ts';
 
 interface Args {
 	multipleOf?: number;
@@ -34,7 +34,7 @@ const directive = createInputDirective<Args>({
 	name,
 	target: 'scalar',
 	resolve(params) {
-		const value = params.getValue();
+		const value = params.value;
 
 		if (typeof value !== 'number') {
 			return;

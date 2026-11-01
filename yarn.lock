@@ -2073,7 +2073,6 @@ __metadata:
   resolution: "@baeta/core@workspace:packages/core"
   dependencies:
     "@baeta/builder": "workspace:^"
-    "@baeta/errors": "workspace:^"
     "@baeta/promises": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
@@ -2096,7 +2095,8 @@ __metadata:
     "@baeta/errors": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@graphql-tools/schema": "npm:^11.0.7"
+    "@baeta/util-log": "workspace:^"
+    "@graphql-tools/utils": "npm:^13.2.0"
     graphql: "catalog:dev"
     typescript: "catalog:dev"
   peerDependencies:
@@ -2757,6 +2757,7 @@ __metadata:
     "@baeta/cli": "workspace:^"
     "@baeta/core": "workspace:^"
     "@baeta/directives": "workspace:^"
+    "@baeta/plugin-directives": "workspace:^"
     "@baeta/plugin-prisma": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
     "@faker-js/faker": "npm:^10.6.0"

@@ -6,7 +6,6 @@ import type { ModuleCompilerFactory, TypesResolversMap } from '../sdk/module-met
 import { attachSchemaStates, type SetSchemaState } from '../sdk/schema-state.ts';
 import { makeSymbol } from '../sdk/symbols.ts';
 import { transformSchema } from '../sdk/transformer.ts';
-import { addValidationToSchema } from './input-directive/input-schema.ts';
 
 export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
 
@@ -66,7 +65,7 @@ export interface Options<Context, Info> {
  * ```
  */
 export function createApplication<Context, Info>(options: Options<Context, Info>) {
-	const { typeDefs, resolvers, transformers, schemaStates } = compileModules(
+	const { typeDefs, resolvers, transformers, schemaStates, schemaHooks } = compileModules(
 		options.modules,
 		options.plugins,
 	);
@@ -74,7 +73,9 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	let schema = buildSchemaFn({ typeDefs, resolvers, options: options.executableSchemaOptions });
 	schema = transformSchema(schema, transformers);
 	schema = attachSchemaStates(schema, schemaStates);
-	schema = addValidationToSchema(schema);
+	for (const onSchema of schemaHooks) {
+		onSchema(schema);
+	}
 	return {
 		schema,
 	};
@@ -104,11 +105,15 @@ function compileModules<Context, Info>(
 	const moduleCompilers = modules.map((module) => module[makeSymbol]());
 	const registeredPluginIds = new Set<PluginId>();
 	const schemaStates: SetSchemaState[] = [];
+	const schemaHooks: Array<(schema: GraphQLSchema) => void> = [];
 	for (const plugin of plugins) {
 		registeredPluginIds.add(plugin.id);
 		const result = plugin.mutate(moduleCompilers as ModuleCompiler[]);
 		if (result?.schemaState) {
 			schemaStates.push(result.schemaState);
+		}
+		if (result?.onSchema) {
+			schemaHooks.push(result.onSchema);
 		}
 	}
 	const builtModules = moduleCompilers.map((module) => module.build());
@@ -134,5 +139,6 @@ function compileModules<Context, Info>(
 		resolvers,
 		transformers,
 		schemaStates,
+		schemaHooks,
 	};
 }

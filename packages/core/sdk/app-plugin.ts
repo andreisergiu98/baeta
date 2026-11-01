@@ -1,3 +1,4 @@
+import type { GraphQLSchema } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
 import type { SetSchemaState } from './schema-state.ts';
@@ -15,9 +16,14 @@ export interface AppPlugin<State = unknown, SchemaState = undefined> {
 	mutate: (
 		compilers: ModuleCompiler[],
 	) => SchemaState extends undefined
-		? { schemaState?: SetSchemaState<SchemaState> } | undefined
-		: { schemaState: SetSchemaState<SchemaState> };
+		? AppPluginMutateResult<SchemaState> | undefined
+		: AppPluginMutateResult<SchemaState> & { schemaState: SetSchemaState<SchemaState> };
 }
+
+export type AppPluginMutateResult<SchemaState> = {
+	schemaState?: SetSchemaState<SchemaState>;
+	onSchema?: (schema: GraphQLSchema) => void;
+};
 
 const stateTypeSymbol = Symbol.for('@baeta/core/app-plugin/state-type');
 

@@ -4,27 +4,52 @@ sidebar_position: 110
 
 # Input Directives
 
-GraphQL doesn't include a built-in way to mutate input values via directives — the spec only covers schema-side transforms. `createInputDirective` from `@baeta/core` fills the gap with a small API for reading and writing input values before they reach the resolver.
+GraphQL directives only describe the schema, the spec has no way to run them against incoming values. `@baeta/directives` fills the gap: an input directive validates field arguments, input fields and input types before the resolver runs.
+
+## Setup
+
+Register `inputValidationAppPlugin` in your application:
+
+```typescript title="src/app.ts"
+import { createApplication } from "@baeta/core";
+import { inputValidationAppPlugin } from "@baeta/directives";
+import modules from "./modules/index.ts";
+
+const baeta = createApplication({
+  modules,
+  plugins: [inputValidationAppPlugin],
+});
+```
+
+Any module that registers input directives requires the plugin, so `createApplication` throws at startup if it's missing.
+
+### Plugin order
+
+Validation runs as a top-level middleware: it always runs before module, type and field middlewares, including `auth(...)` rules, and before `subscribe` on subscription fields. Among [app plugins](../advanced/app-plugins#plugin-ordering), earlier plugins run first. Register it after `complexityAppPlugin`, so over-budget queries are rejected before any validation work, and before `authAppPlugin`, so auth's default scopes see validated arguments:
+
+```typescript
+plugins: [complexityAppPlugin, inputValidationAppPlugin, authAppPlugin],
+```
 
 ## Target types
 
-Each input directive declares what shape of input it operates on:
+Each input directive declares what shape of input it validates:
 
-- `scalar` — primitive values (numbers, strings, booleans).
-- `list` — array values.
-- `object` — complex object inputs.
+- `scalar` — leaf values (scalars and enums). On list fields it runs once per item.
+- `list` — list values. `getListDepth` picks the nesting level for lists of lists; the default is the outermost list.
+- `object` — input objects. Use it on `INPUT_OBJECT` definitions, or on fields and arguments whose type is an input object.
 
 ## Defining the directive
 
 Declare the directive in the schema:
 
-`src/modules/directives/input-directives.gql`
+`src/modules/custom-input-directive/custom-input-directive.gql`
 
 ```graphql
-directive @increment(by: Int!) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+directive @uniqueItems on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 
 type Query {
-  testIncrementDirective(value: Int! @increment(by: 1)): Int!
+  testUniqueItemsDirective(values: [Int!]! @uniqueItems): [Int!]!
 }
 ```
 
@@ -32,62 +57,59 @@ type Query {
 
 `createInputDirective<DirectiveArgs, Context>` takes two type parameters:
 
-- `DirectiveArgs` — the shape of the directive's arguments in the schema. `directive @increment(by: Int!) …` ⇒ `{ by: number }`.
+- `DirectiveArgs` — the shape of the directive's arguments in the schema. `directive @validInt(min: Int) …` ⇒ `{ min?: number }`.
 - `Context` — your application's GraphQL context type. Used to type `ctx` inside `resolve`.
 
-Register the directive on the module with `$directive` (same place schema transformers go):
+`resolve` receives the `value` to validate (never `null` or `undefined`), the `directiveConfig`, the `path` to the value, plus `args`, `root`, `ctx` and `info` from the field. Throw a GraphQL error, such as `BadUserInput` from `@baeta/errors`, to reject the value. Any other error is treated as a bug in the directive, not a validation failure (see [How it works](#how-it-works)). `resolve` must be synchronous.
+
+Register the directive on the module that declares it with `$use(inputDirectives([...]))`. Directives apply to the whole schema, so a directive registered in one module also validates usages in other modules:
 
 `src/modules/custom-input-directive/index.ts`
 
 ```typescript
-import { createInputDirective } from "@baeta/core";
+import { createInputDirective, inputDirectives } from "@baeta/directives";
+import { BadUserInput } from "@baeta/errors";
 import type { Context } from "../../types/context.ts";
 import { CustomInputDirectiveModule } from "./typedef.ts";
 
 const { Query } = CustomInputDirectiveModule;
 
-const incrementDirective = createInputDirective<{ by: number }, Context>({
-  name: "increment",
-  target: "scalar",
-  resolve: ({ directiveConfig, getValue, setValue }) => {
-    const value = getValue();
-    if (typeof value === "number") {
-      setValue(value + directiveConfig.by);
+const uniqueItemsDirective = createInputDirective<Record<string, never>, Context>({
+  name: "uniqueItems",
+  target: "list",
+  resolve: ({ value }) => {
+    if (Array.isArray(value) && new Set(value).size !== value.length) {
+      throw new BadUserInput("List items must be unique");
     }
   },
 });
 
 const queryResolver = Query.$fields({
-  testIncrementDirective: Query.testIncrementDirective.resolve(({ args }) => {
-    return args.value;
+  testUniqueItemsDirective: Query.testUniqueItemsDirective.resolve(({ args }) => {
+    return args.values;
   }),
 });
 
-export default CustomInputDirectiveModule
-  .$directive(incrementDirective)
-  .$schema({
+export default CustomInputDirectiveModule.$use(inputDirectives([uniqueItemsDirective])).$schema({
   Query: queryResolver,
 });
 ```
 
 ## How it works
 
-The directive runs before the resolver:
+When the application starts, the plugin compiles a check for every field whose arguments use an input directive, directly or through nested input types. At runtime:
 
-1. `getValue()` reads the incoming input value.
-2. Your logic computes the new value.
-3. `setValue()` replaces it. The resolver sees the new value as if it had been sent that way.
+1. The check walks the argument values and runs each directive on the values it targets.
+2. Errors from every directive are collected. If they're all GraphQL errors, one is thrown as-is and several are thrown together as an `AggregateGraphQLError`. If any directive throws something else, the errors are logged and rethrown (several together as an `AggregateError`), so the field fails with an internal server error rather than a validation error.
+3. If nothing failed, the field's middlewares and resolver run with the original arguments.
 
 ## Usage
 
 ```graphql
 query {
-  testIncrementDirective(value: 5) {
-    # value will be incremented to 6 before reaching the resolver
-  }
+  testUniqueItemsDirective(values: [1, 2, 2])
+  # fails with "List items must be unique" before the resolver runs
 }
 ```
-
-Use input directives for validation, normalization (trim, lowercase), unit conversion, and any other pre-resolver transform.
 
 See the [directives example](https://github.com/andreisergiu98/baeta/tree/main/examples/directives) for runnable code.

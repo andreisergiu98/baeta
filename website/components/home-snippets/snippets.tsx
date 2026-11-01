@@ -75,7 +75,7 @@ export default Query.$fields({
 }
 
 input PhotoCreateData {
-  url: String! @trim
+  url: String! @validString(maxLength: 2048)
   description: String!
   userId: ID!
 }
@@ -157,21 +157,21 @@ const updateUserMutation = Mutation.updateUser
 		title: 'Powerful custom directives',
 		description: (
 			<>
-				Add custom behavior exactly where you need it. Create your own directives for validation,
-				transformation, or any custom logic.
+				Add custom behavior exactly where you need it. Validate arguments and input fields with your
+				own directives, or write schema directives for any custom logic.
 			</>
 		),
-		path: 'lib/directives/trim.ts',
+		path: 'lib/directives/unique-items.ts',
 		language: 'typescript',
-		snippet: `import { createInputDirective } from "@baeta/core";
+		snippet: `import { createInputDirective } from "@baeta/directives";
+import { BadUserInput } from "@baeta/errors";
 
-export const trimDirective = createInputDirective({
-  name: "trim",
-  target: "scalar",
-  resolve: ({ getValue, setValue }) => {
-    const value = getValue();
-    if (typeof value === "string") {
-      setValue(value.trim());
+export const uniqueItemsDirective = createInputDirective({
+  name: "uniqueItems",
+  target: "list",
+  resolve: ({ value }) => {
+    if (Array.isArray(value) && new Set(value).size !== value.length) {
+      throw new BadUserInput("List items must be unique");
     }
   },
 });

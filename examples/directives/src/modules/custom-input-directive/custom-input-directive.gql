@@ -1,5 +1,5 @@
-directive @increment(by: Int!) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+directive @uniqueItems on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
 
 type Query {
-	testIncrementDirective(value: Int! @increment(by: 1)): Int!
+	testUniqueItemsDirective(values: [Int!]! @uniqueItems): [Int!]!
 }

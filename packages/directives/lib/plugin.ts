@@ -7,7 +7,7 @@ import {
 	makePluginSymbol,
 	nameFunction,
 } from '@baeta/core/sdk';
-import { Kind } from 'graphql';
+import { type DocumentNode, Kind } from 'graphql';
 import {
 	type ArgumentsCheck,
 	createValidationCoordinate,
@@ -62,28 +62,26 @@ export function inputDirectives<Context, Info>(
  * @example
  * ```typescript
  * const baeta = createApplication({
- * 	modules,
+ * 	sources,
  * 	plugins: [complexityAppPlugin, inputValidationAppPlugin, authAppPlugin],
  * });
  * ```
  */
 export const inputValidationAppPlugin: AppPlugin<InputValidationState> = {
 	id,
-	mutate: (compilers) => {
+	mutate: (compilers, { document }) => {
 		const directives = collectDirectives(compilers);
 		if (directives.size === 0) {
 			return;
 		}
 
 		const slots: ValidationSlot[] = [];
-		const resolvedFields = new Set<ValidationCoordinate>();
-		const fieldsWithArguments = findFieldsWithArguments(compilers);
+		const fieldsWithArguments = findFieldsWithArguments(document);
 
 		for (const compiler of compilers) {
 			for (const typeCompiler of compiler.types) {
 				for (const fieldCompiler of typeCompiler.fields) {
 					const coordinate = createValidationCoordinate(typeCompiler.type, fieldCompiler.field);
-					resolvedFields.add(coordinate);
 
 					if (!fieldsWithArguments.has(coordinate)) {
 						continue;
@@ -124,11 +122,6 @@ export const inputValidationAppPlugin: AppPlugin<InputValidationState> = {
 					if (validatedFields.has(coordinate)) {
 						continue;
 					}
-					if (resolvedFields.has(coordinate)) {
-						throw new Error(
-							`${coordinate} has arguments that use input directives, but they aren't declared in the module typedefs, so they can't be validated.`,
-						);
-					}
 					throw new Error(
 						`${coordinate} has arguments that use input directives, but no resolver for it is registered in a Baeta module, so they can't be validated.`,
 					);
@@ -156,20 +149,18 @@ function collectDirectives(compilers: ModuleCompiler[]) {
 	return directivesMap;
 }
 
-function findFieldsWithArguments(compilers: ModuleCompiler[]) {
+function findFieldsWithArguments(document: DocumentNode) {
 	const coordinates = new Set<ValidationCoordinate>();
-	for (const compiler of compilers) {
-		for (const definition of compiler.typedef.definitions) {
-			if (
-				definition.kind !== Kind.OBJECT_TYPE_DEFINITION &&
-				definition.kind !== Kind.OBJECT_TYPE_EXTENSION
-			) {
-				continue;
-			}
-			for (const field of definition.fields ?? []) {
-				if (field.arguments != null && field.arguments.length > 0) {
-					coordinates.add(createValidationCoordinate(definition.name.value, field.name.value));
-				}
+	for (const definition of document.definitions) {
+		if (
+			definition.kind !== Kind.OBJECT_TYPE_DEFINITION &&
+			definition.kind !== Kind.OBJECT_TYPE_EXTENSION
+		) {
+			continue;
+		}
+		for (const field of definition.fields ?? []) {
+			if (field.arguments != null && field.arguments.length > 0) {
+				coordinates.add(createValidationCoordinate(definition.name.value, field.name.value));
 			}
 		}
 	}

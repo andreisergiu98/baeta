@@ -23,8 +23,8 @@ test('TypeBuilder should handle $fields correctly', async (t) => {
 		field1: methods.field1.key('name'),
 		field2: methods.field2.key('name'),
 	});
-	const { resolvers } = fields[makeSymbol]().build([]);
-	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
+	const { fields: records } = fields[makeSymbol]().build([]);
+	t.deepEqual(await executeMockedTypeResolvers(records), {
 		field1: 'test',
 		field2: 'test',
 	});
@@ -81,8 +81,8 @@ test('TypeBuilder $fields should only accept fields under their own type and nam
 		field1: field1.key('name'),
 		field2: field2.key('name'),
 	});
-	const { resolvers } = fields[makeSymbol]().build([]);
-	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
+	const { fields: records } = fields[makeSymbol]().build([]);
+	t.deepEqual(await executeMockedTypeResolvers(records), {
 		field1: 'test',
 		field2: 'test',
 	});
@@ -129,8 +129,8 @@ test('TypeBuilder should handle $use correctly', async (t) => {
 			field1: methods.field1.key('name'),
 			field2: methods.field2.key('name'),
 		});
-	const { resolvers } = fields[makeSymbol]().build([]);
-	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
+	const { fields: records } = fields[makeSymbol]().build([]);
+	t.deepEqual(await executeMockedTypeResolvers(records), {
 		field1: 'test',
 		field2: 'test',
 	});

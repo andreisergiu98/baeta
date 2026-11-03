@@ -25,8 +25,8 @@ test('TypeCompiler should handle addMiddleware correctly', async (t) => {
 		const result = await next();
 		return `${result}_1`;
 	});
-	const { resolvers } = typeCompiler.build([]);
-	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
+	const { fields: records } = typeCompiler.build([]);
+	t.deepEqual(await executeMockedTypeResolvers(records), {
 		field1: 'test_1',
 		field2: 'test_1',
 	});
@@ -34,8 +34,8 @@ test('TypeCompiler should handle addMiddleware correctly', async (t) => {
 
 test('TypeCompiler should handle build correctly', async (t) => {
 	const typeCompiler = mockTypeCompiler();
-	const { resolvers } = typeCompiler.build([]);
-	t.deepEqual(await executeMockedTypeResolvers(resolvers), {
+	const { fields: records } = typeCompiler.build([]);
+	t.deepEqual(await executeMockedTypeResolvers(records), {
 		field1: 'test',
 		field2: 'test',
 	});

@@ -5,7 +5,7 @@ title: Custom Directives
 
 # Custom Directives
 
-A custom directive is a schema-transformer function paired with a `directive @name` declaration. Register the transformer with `$directive` on a module and Baeta applies it to the compiled schema. To validate input fields and arguments, see [Input Directives](./input-directives.mdx); the API there is friendlier than hand-rolling a schema transformer.
+A custom directive is a `directive @name` declaration paired with a schema transformer that you apply to the application schema. To validate input fields and arguments, see [Input Directives](./input-directives.mdx); the API there is friendlier than hand-rolling a schema transformer. To wrap resolvers, [middlewares](./middlewares.mdx) and [app plugins](../advanced/app-plugins.mdx) are usually a better fit: they run inside Baeta's middleware chain and don't rebuild the schema.
 
 ## Defining a directive
 
@@ -25,26 +25,15 @@ type Query {
 
 ## Implementing the directive
 
-Write the directive as a schema-transformer (here using `@graphql-tools/utils`) and register it with `$directive` before `$schema`:
+Write the directive as a schema transformer, here using `@graphql-tools/utils`:
 
-`src/modules/custom-native-directive/index.ts`
+`src/modules/custom-native-directive/upper-directive.ts`
 
 ```typescript
 import { getDirective, MapperKind, mapSchema } from "@graphql-tools/utils";
 import { defaultFieldResolver, type GraphQLSchema } from "graphql";
-import { CustomNativeDirectiveModule } from "./typedef.ts";
 
-const { Query, NameWithUpper } = CustomNativeDirectiveModule;
-
-const queryResolver = Query.$fields({
-  testUpperDirective: Query.testUpperDirective.resolve(({ args }) => {
-    return {
-      name: args.name,
-    };
-  }),
-});
-
-function upperDirective(schema: GraphQLSchema) {
+export function upperDirective(schema: GraphQLSchema) {
   return mapSchema(schema, {
     [MapperKind.OBJECT_FIELD]: (fieldConfig) => {
       const upperDirective = getDirective(schema, fieldConfig, "upper")?.[0];
@@ -66,18 +55,46 @@ function upperDirective(schema: GraphQLSchema) {
     },
   });
 }
+```
 
-export default CustomNativeDirectiveModule
-  .$directive(upperDirective)
-  .$schema({
-  Query: queryResolver,
+Resolve the module's fields as usual:
+
+`src/modules/custom-native-directive/index.ts`
+
+```typescript
+import { CustomNativeDirectiveModule } from "./typedef.ts";
+
+const { Query, NameWithUpper } = CustomNativeDirectiveModule;
+
+export default CustomNativeDirectiveModule.$schema({
+  Query: Query.$fields({
+    testUpperDirective: Query.testUpperDirective.resolve(({ args }) => {
+      return {
+        name: args.name,
+      };
+    }),
+  }),
   NameWithUpper: NameWithUpper.$fields({
     name: NameWithUpper.name.key("name"),
   }),
 });
 ```
 
-`@upper` uppercases string fields. The transformer is chained before `$schema` so the directive is applied as the module's schema is compiled.
+Then apply the transformer to the application schema before handing it to your server:
+
+`src/app.ts`
+
+```typescript
+import { createApplication } from "@baeta/core";
+import { upperDirective } from "./modules/custom-native-directive/upper-directive.ts";
+import sources from "./modules/index.ts";
+
+const baeta = createApplication({ sources });
+
+const schema = upperDirective(baeta.schema);
+```
+
+`@upper` makes string fields uppercase across the whole schema, including fields declared in other modules. The transformer wraps the compiled resolvers, so it runs outside Baeta's middleware chain: anything it does before calling `resolve` happens before auth, complexity and input validation.
 
 ## Usage
 

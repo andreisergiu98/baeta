@@ -3,9 +3,9 @@ import { execute } from '@baeta/e2e-shared/execute';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
 import { complexityAppPlugin } from './src/lib/complexity.ts';
-import modules from './src/modules/index.ts';
+import sources from './src/modules/index.ts';
 
-const { schema } = createApplication({ modules, plugins: [complexityAppPlugin] });
+const { schema } = createApplication({ sources, plugins: [complexityAppPlugin] });
 
 const MovieQuery = graphql(`
 	query MovieQuery($where: MovieWhereUniqueInput!) {

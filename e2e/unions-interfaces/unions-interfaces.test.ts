@@ -2,9 +2,9 @@ import { createApplication } from '@baeta/core';
 import { execute } from '@baeta/e2e-shared/execute';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
-import modules from './src/modules/index.ts';
+import sources from './src/modules/index.ts';
 
-const { schema } = createApplication({ modules });
+const { schema } = createApplication({ sources });
 
 const MediaQuery = graphql(`
 	query MediaQuery {

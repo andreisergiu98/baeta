@@ -26,33 +26,12 @@ export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
   id: Scalars["ID"]
 }>
 
-export type _ServiceSdlArgs = {
-};
-
-export type QueryServiceArgs = {
-};
-
 export type QueryEntitiesArgs = {
   representations: Array<Scalars["_Any"]>
 };
 
 export type QueryProductArgs = {
   id: Scalars["ID"]
-};
-
-export type ProductIdArgs = {
-};
-
-export type ProductNameArgs = {
-};
-
-export type ProductPriceArgs = {
-};
-
-export type ProductOwnerArgs = {
-};
-
-export type UserIdArgs = {
 };
 
 export type _Entity = Product & {__typename: "Product"}

@@ -14,15 +14,3 @@ export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
   email: Scalars["String"]
   birthday: Scalars["DateTime"]
 }>
-
-export type UserIdArgs = {
-};
-
-export type UserEmailArgs = {
-};
-
-export type UserBirthdayArgs = {
-};
-
-export type QueryUserArgs = {
-};

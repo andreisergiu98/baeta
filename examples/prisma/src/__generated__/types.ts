@@ -34,39 +34,12 @@ export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
   birthday: Scalars["DateTime"] | null
 }>
 
-export type UserPhotoIdArgs = {
-};
-
-export type UserPhotoUrlArgs = {
-};
-
-export type UserPhotosArgs = {
-};
-
-export type UserIdArgs = {
-};
-
-export type UserEmailArgs = {
-};
-
-export type UserLastNameArgs = {
-};
-
-export type UserProfileArgs = {
-};
-
-export type UserGivenNameArgs = {
-};
-
-export type UserBirthdayArgs = {
-};
-
 export type QueryUserArgs = {
   where: UserWhereUniqueInput
 };
 
 export type QueryUsersArgs = {
-  where: UserWhereUniqueInput | null
+  where?: UserWhereUniqueInput | null
 };
 
 export type MutationCreateUserArgs = {
@@ -78,29 +51,23 @@ export type MutationUpdateUserArgs = {
   data: UpdateUserInput
 };
 
-export type SubscriptionUserCreatedArgs = {
-};
-
-export type SubscriptionUserUpdatedArgs = {
-};
-
 export type UserWhereUniqueInput = {
-  id: Scalars["ID"] | null
-  email: Scalars["String"] | null
+  id?: Scalars["ID"] | null
+  email?: Scalars["String"] | null
 };
 
 export type CreateUserInput = {
   email: Scalars["String"]
   lastName: Scalars["String"]
-  givenName: Scalars["String"] | null
-  birthday: Scalars["DateTime"] | null
-  profile: Scalars["String"] | null
+  givenName?: Scalars["String"] | null
+  birthday?: Scalars["DateTime"] | null
+  profile?: Scalars["String"] | null
 };
 
 export type UpdateUserInput = {
-  email: Scalars["String"] | null
-  lastName: Scalars["String"] | null
-  givenName: Scalars["String"] | null
-  birthday: Scalars["DateTime"] | null
-  profile: Scalars["String"] | null
+  email?: Scalars["String"] | null
+  lastName?: Scalars["String"] | null
+  givenName?: Scalars["String"] | null
+  birthday?: Scalars["DateTime"] | null
+  profile?: Scalars["String"] | null
 };

@@ -270,5 +270,5 @@ test('FieldBuilder should assign parameters correctly', async (t) => {
 			}),
 	);
 
-	t.is(await resolver(source, args, ctx, info as GraphQLResolveInfo), 'TEST');
+	t.is(await resolver.resolve(source, args, ctx, info as GraphQLResolveInfo), 'TEST');
 });

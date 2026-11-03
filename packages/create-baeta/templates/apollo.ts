@@ -22,11 +22,11 @@ export async function makeApolloTemplate(
 			content: `import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { createApplication } from '@baeta/core';
-import modules from './modules/index.ts';
+import sources from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
 const baeta = createApplication({
-	modules,
+	sources,
 });
 
 const server = new ApolloServer<Context>({

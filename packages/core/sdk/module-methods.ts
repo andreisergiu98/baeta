@@ -3,7 +3,6 @@ import type { Middleware } from '../lib/middleware.ts';
 import type { UsePlugin } from './app-plugin.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
 import type { makeSymbol } from './symbols.ts';
-import type { SchemaTransformer } from './transformer.ts';
 import type { TypeCompilerFactory, TypeMethods } from './type-methods.ts';
 
 export type TypesBuildersMap<Context, Info> = Record<
@@ -24,9 +23,6 @@ export type ModuleMethods<
 	$schema: (fields: TypesResolvers) => ModuleCompilerFactory<Context, Info, TypesResolvers>;
 	$use: (
 		input: ModuleUseInput<Context, Info>,
-	) => ModuleMethods<Context, Info, TypesBuilders, TypesResolvers>;
-	$directive: (
-		transformer: SchemaTransformer | SchemaTransformer[],
 	) => ModuleMethods<Context, Info, TypesBuilders, TypesResolvers>;
 };
 

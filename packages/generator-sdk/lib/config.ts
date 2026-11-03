@@ -36,7 +36,7 @@ export interface GeneratorOptions {
 
 	/**
 	 * Filename for the generated module definition file.
-	 * Contains type definitions and the GraphQL AST.
+	 * Contains the module builder and its types.
 	 * @defaultValue 'typedef'
 	 */
 	moduleDefinitionName?: string;

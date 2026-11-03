@@ -1,13 +1,13 @@
 import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
 import { Hono } from 'hono';
-import modules from './modules/index.ts';
+import sources from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
 export type Env = {};
 
 const baeta = createApplication({
-	modules,
+	sources,
 });
 
 const yoga = createYoga({

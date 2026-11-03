@@ -1,4 +1,4 @@
-import type { IResolvers } from '@graphql-tools/utils';
+import type { GraphQLFieldResolver } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
 import type { BuilderContext } from './builder-context.ts';
@@ -8,6 +8,13 @@ import { assertResolversMap } from './resolvers-map.ts';
 import type { SubscriptionCompiler } from './subscription-compiler.ts';
 import { makeSymbol } from './symbols.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
+
+export interface FieldResolverRecord {
+	type: string;
+	field: string;
+	resolve: GraphQLFieldResolver<any, any>;
+	subscribe?: GraphQLFieldResolver<any, any>;
+}
 
 export interface TypeCompilerOptions<
 	Source,
@@ -86,17 +93,23 @@ export class TypeCompiler<
 	}
 
 	build(moduleMiddlewares: Middleware<unknown, unknown, Context, unknown, Info>[]) {
-		const resolvers: IResolvers = {};
-		const allRequiredPluginIds = new Set(this.requiredPluginIds);
+		const fields: FieldResolverRecord[] = [];
+		const requiredPluginIds = new Set(this.requiredPluginIds);
 		const allMiddlewares = concatMiddlewares<unknown, Source, Context, unknown, Info>(
 			moduleMiddlewares,
 			this.#middlewares,
 		);
 		for (const compiler of this.#fields) {
-			const { resolver, requiredPluginIds } = compiler.build(allMiddlewares);
-			resolvers[compiler.field] = resolver;
-			requiredPluginIds.forEach((id) => allRequiredPluginIds.add(id));
+			const { resolver, requiredPluginIds: fieldRequiredPluginIds } =
+				compiler.build(allMiddlewares);
+			fieldRequiredPluginIds.forEach((id) => requiredPluginIds.add(id));
+			fields.push({
+				type: this.#type,
+				field: compiler.field,
+				resolve: resolver.resolve,
+				subscribe: resolver.subscribe,
+			});
 		}
-		return { resolvers, requiredPluginIds: allRequiredPluginIds };
+		return { fields, requiredPluginIds };
 	}
 }

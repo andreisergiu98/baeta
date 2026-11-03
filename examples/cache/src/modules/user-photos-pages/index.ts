@@ -13,7 +13,12 @@ const userPhotosConnectionResolver = User.photosConnection
 		}),
 	)
 	.map(({ source, args }) => {
-		return createEdges(source ?? [], args.page.cursor, args.page.limit, (photo) => photo.id);
+		return createEdges(
+			source ?? [],
+			args.page.cursor ?? null,
+			args.page.limit,
+			(photo) => photo.id,
+		);
 	});
 
 export default UserPhotosPagesModule.$schema({

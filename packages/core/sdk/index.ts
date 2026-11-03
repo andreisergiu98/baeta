@@ -19,6 +19,5 @@ export type {
 	SubscriptionUsePlugin,
 } from './subscription-methods.ts';
 export { makePluginSymbol } from './symbols.ts';
-export type { SchemaTransformer } from './transformer.ts';
 export { createTypeBuilder } from './type.ts';
 export type { TypeCompilerFactory, TypeMethods, TypeUsePlugin } from './type-methods.ts';

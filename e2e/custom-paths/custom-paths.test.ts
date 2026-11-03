@@ -3,9 +3,9 @@ import { execute } from '@baeta/e2e-shared/execute';
 import { createRelativeExists } from '@baeta/e2e-shared/utils';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
-import modules from './src/graphql/index.ts';
+import sources from './src/graphql/index.ts';
 
-const { schema } = createApplication({ modules });
+const { schema } = createApplication({ sources });
 
 const MovieQuery = graphql(`
 	query MovieQuery($where: MovieWhereUniqueInput!) {

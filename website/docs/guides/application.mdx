@@ -4,20 +4,41 @@ sidebar_position: 50
 
 # Application
 
-`createApplication` is where everything comes together: a list of modules in, a runnable `GraphQLSchema` out. From there you hand the schema to the server of your choice.
+`createApplication` is where everything comes together: the schema and the modules that resolve it go in, a runnable `GraphQLSchema` comes out. From there you hand the schema to the server of your choice.
 
-## Module registration
+## Sources
 
-The generator collects every module under `src/modules/` and re-exports them from `src/modules/index.ts`. Pass that default export to `createApplication`:
+The generator merges the schema files of every module under `src/modules/`, validates the result and writes it to `src/__generated__/sdl.ts`. It re-exports that SDL together with every module from `src/modules/index.ts`. Pass that default export as `sources`:
 
 ```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
-import modules from "./modules/index.ts";
+import sources from "./modules/index.ts";
 
 const baeta = createApplication({
-  modules,
+  sources,
 });
 ```
+
+`createApplication` builds the schema from `sources.sdl`, then attaches each module's resolvers and scalars to it. It throws at startup when a module resolves a field the schema doesn't define, when two modules resolve the same field, or when a module implements a scalar the schema doesn't declare.
+
+## Validation
+
+`createApplication` checks `sources.sdl` against GraphQL's validation rules at startup. The generator runs the same checks before it writes `sdl.ts`, so with generated sources you can skip them with `assumeValid`. Validation is close to half of `createApplication`'s time, which matters most for serverless cold starts. Resolvers and scalars are checked against the schema either way.
+
+```typescript title="src/app.ts"
+const baeta = createApplication({
+  sources,
+  assumeValid: true,
+});
+```
+
+:::warning
+Only skip validation for SDL the generator wrote. An invalid schema that isn't validated fails during requests instead of at startup.
+:::
+
+## Transforming the schema
+
+`baeta.schema` is a plain `GraphQLSchema`. To change it further, for example with a schema transformer from `@graphql-tools/utils`, transform it before you pass it to your server (see [Directives](./directives.mdx)). Keep `schema.extensions` when you rebuild the schema: app plugins store their state there, and `mapSchema` keeps it for you.
 
 ## App plugins
 
@@ -31,11 +52,11 @@ App plugins extend Baeta at the application level with authorization, complexity
 import { createServer } from "node:http";
 import { createApplication } from "@baeta/core";
 import { createYoga } from "graphql-yoga";
-import modules from "./modules/index.ts";
+import sources from "./modules/index.ts";
 import type { Context, ServerContext } from "./types/context.ts";
 
 const baeta = createApplication({
-  modules,
+  sources,
 });
 
 export const yoga = createYoga<ServerContext, Context>({
@@ -60,11 +81,11 @@ server.listen(4000, () => {
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { createApplication } from "@baeta/core";
-import modules from "./modules/index.ts";
+import sources from "./modules/index.ts";
 import type { Context } from "./types/context.ts";
 
 const baeta = createApplication({
-  modules,
+  sources,
 });
 
 const server = new ApolloServer<Context>({

@@ -40,10 +40,10 @@ The plugin generates a `baeta-directives` module that registers the directives. 
 ```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
 import { inputValidationAppPlugin } from "@baeta/directives";
-import modules from "./modules/index.ts";
+import sources from "./modules/index.ts";
 
 const baeta = createApplication({
-  modules,
+  sources,
   plugins: [inputValidationAppPlugin],
 });
 ```

@@ -39,37 +39,19 @@ export type QueryUserArgs = {
   where: UserWhereUniqueInput
 };
 
-export type NameWithUpperNameArgs = {
-};
-
-export type UserIdArgs = {
-};
-
-export type UserEmailArgs = {
-};
-
-export type UserLastNameArgs = {
-};
-
-export type UserProfileArgs = {
-};
-
-export type UserGivenNameArgs = {
-};
-
 export type MutationCreateUserArgs = {
   email: Scalars["String"]
   lastName: Scalars["String"]
 };
 
 export type UserWhereUniqueInput = {
-  id: Scalars["ID"] | null
-  email: Scalars["String"] | null
+  id?: Scalars["ID"] | null
+  email?: Scalars["String"] | null
 };
 
 export type CreateUserInput = {
   email: Scalars["String"]
   username: Scalars["String"]
   lastName: Scalars["String"]
-  firstName: Scalars["String"] | null
+  firstName?: Scalars["String"] | null
 };

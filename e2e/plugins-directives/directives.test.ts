@@ -3,9 +3,9 @@ import { inputValidationAppPlugin } from '@baeta/directives';
 import { execute } from '@baeta/e2e-shared/execute';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
-import modules from './src/modules/index.ts';
+import sources from './src/modules/index.ts';
 
-const { schema } = createApplication({ modules, plugins: [inputValidationAppPlugin] });
+const { schema } = createApplication({ sources, plugins: [inputValidationAppPlugin] });
 
 const CreateMovieMutation = graphql(`
 	mutation CreateMovieMutation($input: CreateMovieInput!) {
@@ -27,7 +27,7 @@ const MovieQuery = graphql(`
 `);
 
 test('generated directives module requires inputValidationAppPlugin', (t) => {
-	t.throws(() => createApplication({ modules }), {
+	t.throws(() => createApplication({ sources }), {
 		message: /Modules are using the plugin @baeta\/directives/,
 	});
 });

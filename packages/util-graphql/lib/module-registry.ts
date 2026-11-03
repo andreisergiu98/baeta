@@ -22,9 +22,8 @@ export type ModuleRegistry = {
 };
 
 export function createModuleRegistry(document: DocumentNode): ModuleRegistry {
-	const picks: Record<RegistryKeys, Record<string, string[]>> = createObject(
-		registryKeys,
-		() => ({}),
+	const picks: Record<RegistryKeys, Record<string, string[]>> = createObject(registryKeys, () =>
+		Object.create(null),
 	);
 	const defined: Registry = createObject(registryKeys, () => []);
 

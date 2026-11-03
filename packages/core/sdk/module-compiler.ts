@@ -1,13 +1,11 @@
-import type { IResolvers } from '@graphql-tools/utils';
-import type { DocumentNode, GraphQLScalarType } from 'graphql';
+import type { GraphQLScalarType } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { PluginId } from './app-plugin.ts';
-import type { ModuleBuilderContext } from './module-builder-context.ts';
+import type { BuilderContext } from './builder-context.ts';
 import type { TypesResolversMap } from './module-methods.ts';
 import { assertResolversMap } from './resolvers-map.ts';
 import { makeSymbol } from './symbols.ts';
-import type { SchemaTransformer } from './transformer.ts';
-import type { TypeCompiler } from './type-compiler.ts';
+import type { FieldResolverRecord, TypeCompiler } from './type-compiler.ts';
 import type { FieldsResolversMap } from './type-methods.ts';
 
 export interface ModuleCompilerOptions<
@@ -17,10 +15,13 @@ export interface ModuleCompilerOptions<
 > {
 	name: string;
 	typeNames: readonly string[];
-	context: ModuleBuilderContext<Context, Info>;
+	context: BuilderContext<unknown, unknown, Context, unknown, Info>;
 	typesMap: TypesResolvers;
-	typedef: Readonly<DocumentNode>;
-	defaultResolvers: Readonly<IResolvers>;
+}
+
+export interface ScalarRecord {
+	type: string;
+	scalar: GraphQLScalarType;
 }
 
 export class ModuleCompiler<
@@ -35,27 +36,21 @@ export class ModuleCompiler<
 	readonly #types: ReadonlyArray<
 		TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>
 	>;
-	readonly #typedef: Readonly<DocumentNode>;
-	readonly #defaultResolvers: Readonly<IResolvers>;
-	readonly #scalarResolvers: Array<[string, GraphQLScalarType]>;
-	readonly #transformers: SchemaTransformer[];
+	readonly #scalars: ReadonlyArray<ScalarRecord>;
 	readonly #requiredPluginIds: ReadonlySet<PluginId>;
 
 	constructor(options: ModuleCompilerOptions<Context, Info, TypesResolvers>) {
 		this.#name = options.name;
 		this.#state = new Map(options.context.state);
 		this.#middlewares = [...options.context.middlewares];
-		this.#typedef = options.typedef;
-		this.#defaultResolvers = options.defaultResolvers;
-		this.#transformers = [...options.context.transformers];
-		const { types, genericResolvers } = getTypeCompilersAndResolvers(options.typesMap);
+		const { types, scalars } = getTypeCompilersAndScalars(options.typesMap);
 		assertResolversMap(
 			`$schema for module "${options.name}"`,
 			options.typeNames,
 			types.map(([key, compiler]) => ({ key, expected: key, actual: compiler.type })),
 		);
 		this.#types = types.map(([, compiler]) => compiler);
-		this.#scalarResolvers = genericResolvers;
+		this.#scalars = scalars;
 		this.#requiredPluginIds = new Set(options.context.requiredPluginIds);
 	}
 
@@ -65,10 +60,6 @@ export class ModuleCompiler<
 
 	get types() {
 		return this.#types;
-	}
-
-	get typedef() {
-		return this.#typedef;
 	}
 
 	addMiddleware(middleware: Middleware<unknown, unknown, Context, unknown, Info>) {
@@ -84,38 +75,35 @@ export class ModuleCompiler<
 	}
 
 	build() {
-		const resolvers: IResolvers = {
-			...this.#defaultResolvers,
-		};
-		const allRequiredPluginIds = new Set(this.#requiredPluginIds);
-		for (const [name, resolver] of this.#scalarResolvers) {
-			resolvers[name] = resolver;
-		}
+		const fields: FieldResolverRecord[] = [];
+		const requiredPluginIds = new Set(this.#requiredPluginIds);
 		for (const compiler of this.#types) {
 			const built = compiler.build(this.#middlewares);
-			resolvers[compiler.type] = built.resolvers;
-			built.requiredPluginIds.forEach((id) => allRequiredPluginIds.add(id));
+			built.requiredPluginIds.forEach((id) => requiredPluginIds.add(id));
+			for (const record of built.fields) {
+				fields.push(record);
+			}
 		}
 		return {
-			resolvers,
-			typedef: this.#typedef,
-			transformers: this.#transformers,
-			requiredPluginIds: allRequiredPluginIds,
+			name: this.#name,
+			fields,
+			scalars: this.#scalars,
+			requiredPluginIds,
 		};
 	}
 }
 
-function getTypeCompilersAndResolvers<Context, Info>(typesMap: TypesResolversMap<Context, Info>) {
+function getTypeCompilersAndScalars<Context, Info>(typesMap: TypesResolversMap<Context, Info>) {
 	const types: Array<
 		[string, TypeCompiler<unknown, Context, Info, FieldsResolversMap<unknown, Context, Info>>]
 	> = [];
-	const genericResolvers: Array<[string, GraphQLScalarType]> = [];
+	const scalars: ScalarRecord[] = [];
 	for (const [typeName, typeResolver] of Object.entries(typesMap)) {
 		if (makeSymbol in typeResolver) {
 			types.push([typeName, typeResolver[makeSymbol]()]);
 		} else {
-			genericResolvers.push([typeName, typeResolver]);
+			scalars.push({ type: typeName, scalar: typeResolver });
 		}
 	}
-	return { types, genericResolvers };
+	return { types, scalars };
 }

@@ -1,4 +1,4 @@
-export { createApplication, type ExecutableSchemaOptions, type Options } from './application.ts';
+export { createApplication, type Options } from './application.ts';
 export {
 	type ContextStoreOptions,
 	createContextStore,

@@ -61,10 +61,10 @@ export const { complexity, complexityAppPlugin } = createComplexity<Context>({
 ```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
 import { complexityAppPlugin } from "./lib/complexity.ts";
-import modules from "./modules/index.ts";
+import sources from "./modules/index.ts";
 
 const baeta = createApplication({
-  modules,
+  sources,
   plugins: [complexityAppPlugin],
 });
 ```

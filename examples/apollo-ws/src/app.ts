@@ -9,11 +9,11 @@ import express from 'express';
 import { useServer } from 'graphql-ws/use/ws';
 import { WebSocketServer } from 'ws';
 import { pubsub } from './lib/pubsub.ts';
-import modules from './modules/index.ts';
+import sources from './modules/index.ts';
 import type { Context } from './types/context.ts';
 
 const baeta = createApplication({
-	modules,
+	sources,
 });
 
 const app = express();

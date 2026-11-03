@@ -88,7 +88,10 @@ export class FieldCompiler<
 			return resolver({ source, args, ctx, info: info as Info });
 		};
 		return {
-			resolver: resolverAdapter,
+			resolver: {
+				resolve: resolverAdapter,
+				subscribe: undefined,
+			},
 			requiredPluginIds: this.#requiredPluginIds,
 		};
 	}

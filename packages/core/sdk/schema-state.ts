@@ -1,4 +1,4 @@
-import { GraphQLSchema } from 'graphql';
+import type { GraphQLSchema } from 'graphql';
 import { logger } from '../lib/logger.ts';
 
 export const baetaSchemaStateKey = '@baeta/core/schemaState';
@@ -19,9 +19,9 @@ export function createSchemaState<T>(key: symbol) {
 	};
 }
 
-export function attachSchemaStates(schema: GraphQLSchema, states: SetSchemaState[]): GraphQLSchema {
+export function attachSchemaStates(schema: GraphQLSchema, states: SetSchemaState[]) {
 	if (states.length === 0) {
-		return schema;
+		return;
 	}
 	const stateMap = new Map<symbol, unknown>();
 	for (const [key, state] of states) {
@@ -33,11 +33,8 @@ export function attachSchemaStates(schema: GraphQLSchema, states: SetSchemaState
 		}
 		stateMap.set(key, state);
 	}
-	return new GraphQLSchema({
-		...schema.toConfig(),
-		extensions: {
-			...schema.extensions,
-			[baetaSchemaStateKey]: stateMap,
-		},
-	});
+	schema.extensions = {
+		...schema.extensions,
+		[baetaSchemaStateKey]: stateMap,
+	};
 }

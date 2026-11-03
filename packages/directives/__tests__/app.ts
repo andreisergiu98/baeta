@@ -7,7 +7,7 @@ import {
 	createTypeBuilder,
 } from '@baeta/core/sdk';
 import test from '@baeta/testing';
-import { type DocumentNode, parse } from 'graphql';
+import { type DocumentNode, print } from 'graphql';
 import type { InputDirective } from '../lib/directive.ts';
 import { inputDirectives, inputValidationAppPlugin } from '../lib/plugin.ts';
 
@@ -28,7 +28,7 @@ export type TestSchemaOptions = {
 };
 
 export function createTestSchema(options: TestSchemaOptions) {
-	const typedef = typeof options.typeDefs === 'string' ? parse(options.typeDefs) : options.typeDefs;
+	const sdl = typeof options.typeDefs === 'string' ? options.typeDefs : print(options.typeDefs);
 	const resolvers = options.resolvers ?? {};
 	const subscriptions = options.subscriptions ?? {};
 
@@ -46,7 +46,7 @@ export function createTestSchema(options: TestSchemaOptions) {
 		);
 	}
 
-	const TestModule: any = createModuleBuilder<any, any>('test', typedef, builders, {});
+	const TestModule: any = createModuleBuilder<any, any>('test', builders);
 
 	const types: Record<string, any> = {};
 	for (const [type, fields] of Object.entries(resolvers)) {
@@ -73,7 +73,7 @@ export function createTestSchema(options: TestSchemaOptions) {
 	}
 
 	return createApplication({
-		modules: [module.$schema(types)],
+		sources: { sdl, modules: [module.$schema(types)] },
 		plugins: options.plugins ?? [inputValidationAppPlugin],
 	}).schema;
 }

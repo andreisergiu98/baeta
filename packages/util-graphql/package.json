@@ -56,9 +56,9 @@
   },
   "dependencies": {
     "@baeta/util-path": "workspace:^",
-    "@graphql-tools/graphql-file-loader": "^9.1.0",
-    "@graphql-tools/load": "^9.1.0",
-    "@graphql-tools/utils": "^13.2.0"
+    "@graphql-tools/graphql-file-loader": "^9.1.1",
+    "@graphql-tools/load": "^9.1.2",
+    "@graphql-tools/utils": "^13.2.1"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

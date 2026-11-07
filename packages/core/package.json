@@ -65,8 +65,8 @@
   "dependencies": {
     "@baeta/promises": "workspace:^",
     "@baeta/util-log": "workspace:^",
-    "@graphql-tools/schema": "^11.0.7",
-    "@graphql-tools/utils": "^13.2.0"
+    "@graphql-tools/schema": "^11.0.8",
+    "@graphql-tools/utils": "^13.2.1"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

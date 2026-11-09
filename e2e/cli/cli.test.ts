@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { readFile, stat, unlink, writeFile } from 'node:fs/promises';
 import test from '@baeta/testing';
 import { execa, type ResultPromise as Proc } from 'execa';
@@ -66,6 +67,29 @@ function waitForOutput(proc: Proc, match: string, timeoutMs = 30_000): Promise<v
 	});
 }
 
+function printProcessTree(rootPid: number) {
+	if (isWindows) {
+		return;
+	}
+	const rows = execFileSync('ps', ['-A', '-o', 'pid=,ppid=,pgid=,tpgid=,stat=,args='])
+		.toString()
+		.split('\n')
+		.map((line) => line.trim().split(/\s+/))
+		.filter((row) => row.length >= 6);
+	const tree = new Set([rootPid]);
+	let size: number;
+	do {
+		size = tree.size;
+		for (const [pid, ppid] of rows) {
+			if (tree.has(Number(ppid))) {
+				tree.add(Number(pid));
+			}
+		}
+	} while (tree.size !== size);
+	const lines = rows.filter(([pid]) => tree.has(Number(pid))).map((row) => row.join(' '));
+	console.error(['PID PPID PGID TPGID STAT ARGS', ...lines].join('\n'));
+}
+
 function spawnPty(args: string[]) {
 	let output = '';
 
@@ -105,6 +129,7 @@ function spawnPty(args: string[]) {
 	const waitForExit = (timeoutMs = 10_000) =>
 		new Promise<{ exitCode: number; signal?: number }>((resolve, reject) => {
 			const timer = setTimeout(() => {
+				printProcessTree(proc.pid);
 				killProc(proc);
 				reject(new Error('Timed out waiting for PTY exit'));
 			}, timeoutMs);

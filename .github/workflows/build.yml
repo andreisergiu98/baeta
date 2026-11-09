@@ -412,7 +412,17 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:e2e:setup
+      - name: Schedule e2e process dump
+        run: (sleep 360; ps -A -o pid,ppid,pgid,etime,stat,args >
+          "$RUNNER_TEMP/e2e-processes.txt") > /dev/null 2>&1 &
+        shell: bash
       - run: yarn check:e2e:run
+        env:
+          TURBO_LOG_ORDER: stream
+      - name: Show e2e processes after 6 minutes
+        if: ${{ always() }}
+        run: cat "$RUNNER_TEMP/e2e-processes.txt" 2>/dev/null || true
+        shell: bash
   e2e-graphql:
     name: Check e2e tests - GraphQL ${{ matrix.graphql }}
     needs:
@@ -469,7 +479,17 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:e2e:setup
+      - name: Schedule e2e process dump
+        run: (sleep 360; ps -A -o pid,ppid,pgid,etime,stat,args >
+          "$RUNNER_TEMP/e2e-processes.txt") > /dev/null 2>&1 &
+        shell: bash
       - run: yarn check:e2e:run
+        env:
+          TURBO_LOG_ORDER: stream
+      - name: Show e2e processes after 6 minutes
+        if: ${{ always() }}
+        run: cat "$RUNNER_TEMP/e2e-processes.txt" 2>/dev/null || true
+        shell: bash
   e2e-platform:
     name: Check e2e tests - ${{ matrix.platform }}
     needs:
@@ -524,7 +544,17 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: "false"
           YARN_ENABLE_HARDENED_MODE: "0"
       - run: yarn check:e2e:setup
+      - name: Schedule e2e process dump
+        run: (sleep 360; ps -A -o pid,ppid,pgid,etime,stat,args >
+          "$RUNNER_TEMP/e2e-processes.txt") > /dev/null 2>&1 &
+        shell: bash
       - run: yarn check:e2e:run
+        env:
+          TURBO_LOG_ORDER: stream
+      - name: Show e2e processes after 6 minutes
+        if: ${{ always() }}
+        run: cat "$RUNNER_TEMP/e2e-processes.txt" 2>/dev/null || true
+        shell: bash
   publish:
     name: Publish packages or open PR
     needs:

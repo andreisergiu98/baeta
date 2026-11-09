@@ -63,14 +63,19 @@ export interface PaginationOptions<Keys extends string | number | symbol = strin
 	 * @defaultValue 'baeta-pagination'
 	 */
 	moduleName?: string;
+	/**
+	 * Mark the generated types `@shareable`, so several federated subgraphs can define them.
+	 * @defaultValue `true` when the federation plugin is used, otherwise `false`
+	 */
+	shareable?: boolean;
 }
 
 function printFields(fields: string[]) {
 	return fields.map((field) => `  ${field}`).join('\n');
 }
 
-function printType(name: string, fields: string[]) {
-	return `type ${name} {
+function printType(name: string, shareable: boolean, fields: string[]) {
+	return `type ${name}${shareable ? ' @shareable' : ''} {
 ${printFields(fields)}
 }`;
 }
@@ -79,8 +84,8 @@ function printTypes(types: string[]) {
 	return `${types.join('\n\n')}\n`;
 }
 
-function printPageInfo(addFields: string[] = []) {
-	return printType('PageInfo', [
+function printPageInfo(shareable: boolean, addFields: string[] = []) {
+	return printType('PageInfo', shareable, [
 		...addFields,
 		'hasPreviousPage: Boolean!',
 		'hasNextPage: Boolean!',
@@ -101,8 +106,7 @@ function printResolverForField(module: string, type: string, field: string) {
 }
 
 function getFieldNameFromFieldWithType(field: string) {
-	const [fieldName] = field.split(':');
-	return fieldName;
+	return field.match(/^\s*(\w+)/)?.[1] ?? field;
 }
 
 function printExport(
@@ -160,6 +164,7 @@ function printConnectionTypes(
 	name: string,
 	typeOptions: PaginationTypeOptions,
 	options: PaginationOptions,
+	shareable: boolean,
 ) {
 	const {
 		cursorType = 'ID!',
@@ -168,16 +173,16 @@ function printConnectionTypes(
 		edgeFields = [],
 	} = typeOptions;
 
-	const connection = printType(`${name}Connection`, [
+	const connection = printType(`${name}Connection`, shareable, [
 		...connectionFields,
 		'pageInfo: PageInfo!',
 		`edges: [${name}Edge]`,
 	]);
 
-	const edge = printType(`${name}Edge`, [
+	const edge = printType(`${name}Edge`, shareable, [
 		...edgeFields,
 		`cursor: ${cursorType}`,
-		`node: ${nodeType}${options.nullableNode === false ? '!' : ''}`,
+		`node: ${nodeType}${options.nullableNode === false && !nodeType.endsWith('!') ? '!' : ''}`,
 	]);
 
 	return [connection, edge];
@@ -212,7 +217,9 @@ export function paginationPlugin<T>(options: PaginationOptions<keyof T>) {
 			watcher.ignore(`${createConnectionModuleDir(generatorOptions.modulesDir, moduleName)}/**`);
 		},
 		setup: async (ctx, next) => {
-			const types: string[] = [printPageInfo(options.pageInfoFields)];
+			const shareable =
+				options.shareable ?? ctx.plugins.some((plugin) => plugin.name === 'federation');
+			const types: string[] = [printPageInfo(shareable, options.pageInfoFields)];
 			for (const name in options.types) {
 				const typeOptions = options.types[name];
 				if (typeOptions == null || typeOptions === false) {
@@ -222,6 +229,7 @@ export function paginationPlugin<T>(options: PaginationOptions<keyof T>) {
 					name,
 					typeOptions === true ? {} : typeOptions,
 					options,
+					shareable,
 				);
 				types.push(...connectionTypes);
 			}

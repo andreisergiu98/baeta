@@ -24,6 +24,7 @@ const DEFAULT_DIRECTIVES = [
 	'@requires',
 	'@provides',
 	'@extends',
+	'@shareable',
 ] as const satisfies FederationDirectiveNamesByVersion<'2.0'>[];
 
 type DefaultFederationVersion = typeof DEFAULT_VERSION;
@@ -42,7 +43,7 @@ export interface FederationPluginOptions<
 	 */
 	version?: Version;
 	/** Directives to include in the generated federation module. Can be either a list of directive names or 'all' to include all available directives for the specified version.
-	 * @defaultValue ['@key', '@external', '@requires', '@provides', '@extends']
+	 * @defaultValue ['@key', '@external', '@requires', '@provides', '@extends', '@shareable']
 	 */
 	include?:
 		| Exclude<FederationDirectiveNamesByVersion<Version>, DefaultFederationDirectives>[]
@@ -59,7 +60,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 	options?: FederationPluginOptions<Version>,
 ) {
 	return createPluginV1({
-		name: 'graphql',
+		name: 'federation',
 		actionName: 'GraphQL federation',
 		watch: (generatorOptions, watcher) => {
 			const federationRootDir = getModuleRootDir(generatorOptions.modulesDir, options);

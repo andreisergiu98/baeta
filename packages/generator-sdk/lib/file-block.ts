@@ -1,16 +1,15 @@
+import { createHash } from 'node:crypto';
 import { constants as fsConstants } from 'node:fs';
-import { mkdir, open, writeFile } from 'node:fs/promises';
+import { type FileHandle, mkdir, open, writeFile } from 'node:fs/promises';
 import { dirname } from '@baeta/util-path';
-import { File, type FileOptions } from './file.ts';
+import { assertCanModifyByState, File, type FileOptions } from './file.ts';
 
 const OPEN_FLAGS_RW = fsConstants.O_RDWR | fsConstants.O_NOFOLLOW;
 
 export class FileBlock extends File {
-	public override filename: string;
-	public override content: string;
-	public override tag: string;
-	public start: string;
-	public end: string;
+	readonly start: string;
+	readonly end: string;
+
 	constructor(
 		filename: string,
 		content: string,
@@ -23,106 +22,124 @@ export class FileBlock extends File {
 			enableLintHeaders: options?.enableLintHeaders ?? false,
 			disableGenerationNoticeHeader: options?.disableGenerationNoticeHeader ?? true,
 		});
-		this.filename = filename;
-		this.content = content;
 		this.start = start;
 		this.end = end;
-		this.tag = tag;
 	}
 
 	override write = async () => {
-		if (this.persisted) {
-			return;
-		}
-		this.persisted = true;
+		assertCanModifyByState(this.state);
+		this.state = { status: 'writing' };
 
-		const dir = dirname(this.filename);
-		await mkdir(dir, { recursive: true });
-
-		const [existingContent, fd] = await this.getExistingContent();
-
-		this.content = this.addBlockToContent(existingContent);
-		const content = await this.buildContent();
-
-		if (!fd) {
-			return await writeFile(this.filename, content, 'utf-8');
-		}
-
+		let fd: FileHandle | null = null;
 		try {
-			await fd.truncate(0);
-			await fd.write(content, 0, 'utf-8');
+			await mkdir(dirname(this.filename), { recursive: true });
+			const existing = await this.readExisting();
+			fd = existing.fd;
+
+			const { content, hash } = await this.buildFileContent(existing.content);
+
+			if (fd) {
+				await fd.truncate(0);
+				await fd.write(content, 0, 'utf-8');
+			} else {
+				await writeFile(this.filename, content, 'utf-8');
+			}
+			this.state = { status: 'persisted', hash };
+		} catch (err) {
+			this.state = { status: 'errored', err: err as Error };
+			throw err;
 		} finally {
-			await fd.close();
+			await fd?.close().catch(() => {});
 		}
 	};
 
 	override unlink = async () => {
-		this.persisted = false;
+		assertCanModifyByState(this.state);
+		this.state = { status: 'removing' };
 
-		const [existingContent, fd] = await this.getExistingContent();
-
-		if (!fd) {
-			return;
-		}
-
+		let fd: FileHandle | null = null;
 		try {
-			const [start, end] = this.getSlices(existingContent);
-			await fd.truncate(0);
-			await fd.write(start + end, 0, 'utf-8');
+			const existing = await this.readExisting();
+			fd = existing.fd;
+
+			const slices = fd ? this.getSlices(existing.content) : null;
+			if (fd && slices) {
+				await fd.truncate(0);
+				await fd.write(slices[0] + slices[1], 0, 'utf-8');
+			}
+			this.state = { status: 'removed' };
+		} catch (err) {
+			this.state = { status: 'errored', err: err as Error };
+			throw err;
 		} finally {
-			await fd.close();
+			await fd?.close().catch(() => {});
 		}
 	};
 
-	protected async getExistingContent() {
-		const fd = await open(this.filename, OPEN_FLAGS_RW).catch(() => null);
-		if (!fd) {
-			return ['', null] as const;
+	protected async buildFileContent(existing: string) {
+		const block = `${this.start}\n${this.buildHeader()}${this.content}\n${this.end}\n`;
+		const hash = createHash('sha256').update(block).digest('hex');
+
+		const slices = this.getSlices(existing);
+		let content = slices
+			? slices[0] + block + slices[1]
+			: existing + this.buildPadding(existing) + block;
+
+		if (this.options?.transformContent) {
+			content = await this.options.transformContent(this.filename, content, this.tag);
 		}
-		const existingContent = await fd.readFile('utf-8').catch(async (err) => {
-			await fd.close();
-			throw err;
-		});
-		return [existingContent, fd] as const;
+
+		return { content, hash };
 	}
 
-	protected getSlices(existingContent: string) {
-		const startMarkerIndex = existingContent.indexOf(this.start);
-		if (startMarkerIndex === -1) {
-			return [existingContent, '', false] as const;
-		}
-		const endMarkerIndex = existingContent.indexOf(this.end, startMarkerIndex + this.start.length);
-		if (endMarkerIndex === -1) {
-			return [existingContent, '', false] as const;
+	protected async readExisting(): Promise<{ content: string; fd: FileHandle | null }> {
+		let fd: FileHandle;
+		try {
+			fd = await open(this.filename, OPEN_FLAGS_RW);
+		} catch (err) {
+			// Only a missing file falls back to a fresh write. Anything else (ELOOP from
+			// O_NOFOLLOW, EACCES, EISDIR) must not fall through to writeFile.
+			if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+				return { content: '', fd: null };
+			}
+			throw err;
 		}
 
+		try {
+			return { content: await fd.readFile('utf-8'), fd };
+		} catch (err) {
+			await fd.close().catch(() => {});
+			throw err;
+		}
+	}
+
+	protected getSlices(existing: string): readonly [before: string, after: string] | null {
+		const startIndex = existing.indexOf(this.start);
+		if (startIndex === -1) {
+			return null;
+		}
+
+		const endIndex = existing.indexOf(this.end, startIndex + this.start.length);
+		if (endIndex === -1) {
+			throw new Error(
+				`Found start marker without a matching end marker in ${this.filename}: ${this.start}`,
+			);
+		}
+
+		const after = existing.slice(endIndex + this.end.length);
 		return [
-			existingContent.slice(0, startMarkerIndex),
-			existingContent.slice(endMarkerIndex + this.end.length),
-			true,
+			existing.slice(0, startIndex),
+			after.startsWith('\n') ? after.slice(1) : after,
 		] as const;
 	}
 
-	protected addBlockToContent(existingContent: string) {
-		const block = `${this.start}\n${this.content}\n${this.end}`;
-		const [startSlice, endSlice, hasMarkers] = this.getSlices(existingContent);
-		const padding = hasMarkers ? '' : this.buildPadding(existingContent);
-		return startSlice + padding + block + endSlice;
-	}
-
-	protected buildPadding(existingContent: string) {
-		if (existingContent === '') {
+	protected buildPadding(existing: string) {
+		if (existing === '' || existing.endsWith('\n\n')) {
 			return '';
 		}
-
-		if (existingContent.endsWith('\n\n')) {
-			return '';
-		}
-
-		if (existingContent.endsWith('\n')) {
+		if (existing.endsWith('\n')) {
 			return '\n';
 		}
-
 		return '\n\n';
 	}
 }

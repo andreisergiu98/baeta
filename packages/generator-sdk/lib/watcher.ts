@@ -1,3 +1,4 @@
+import { realpathSync } from 'node:fs';
 import path, { posixPath } from '@baeta/util-path';
 import {
 	type AsyncSubscription,
@@ -19,9 +20,15 @@ export interface WatcherFile {
 	path: string;
 	relativePath: string;
 }
+
+export interface WatcherOptions extends Options {
+	onClose?: () => void | Promise<void>;
+}
+
 export class Watcher {
 	private readonly cwd: string;
-	private readonly options?: Options;
+	private readonly realCwd: string;
+	private readonly options?: WatcherOptions;
 
 	private readonly subscription: AsyncSubscription;
 
@@ -33,10 +40,11 @@ export class Watcher {
 
 	private readonly watcherIgnore: WatcherIgnore;
 
-	constructor(cwd: string, options?: Options) {
-		this.cwd = cwd;
+	constructor(cwd: string, options?: WatcherOptions) {
+		this.cwd = path.resolve(cwd);
+		this.realCwd = getRealPath(this.cwd);
 		this.options = options;
-		this.watcherIgnore = new WatcherIgnore(cwd);
+		this.watcherIgnore = new WatcherIgnore(this.cwd);
 		this.subscription = this.createSubscription();
 	}
 
@@ -46,20 +54,31 @@ export class Watcher {
 			return;
 		}
 
-		const filteredEvents = events.filter((event) => {
-			return !this.watcherIgnore.isIgnored(posixPath(event.path));
-		});
-
-		for (const event of filteredEvents) {
+		for (const event of events) {
+			const file = this.toCwdPath(event.path);
+			if (this.watcherIgnore.isIgnored(file)) {
+				continue;
+			}
 			for (const listener of this.listeners[event.type]) {
 				listener({
 					type: event.type,
-					path: posixPath(event.path),
-					relativePath: posixPath(path.relative(this.cwd, event.path)),
+					path: file,
+					relativePath: path.relative(this.cwd, file),
 				});
 			}
 		}
 	};
+
+	private toCwdPath(eventPath: string) {
+		const file = posixPath(eventPath);
+		if (
+			this.realCwd !== this.cwd &&
+			(file === this.realCwd || file.startsWith(`${this.realCwd}/`))
+		) {
+			return this.cwd + file.slice(this.realCwd.length);
+		}
+		return file;
+	}
 
 	on(event: EventType, listener: WatcherListener) {
 		this.listeners[event].push(listener);
@@ -94,7 +113,16 @@ export class Watcher {
 		};
 	}
 
-	close() {
-		return this.subscription.unsubscribe();
+	async close() {
+		await this.subscription.unsubscribe();
+		await this.options?.onClose?.();
+	}
+}
+
+function getRealPath(dir: string) {
+	try {
+		return posixPath(realpathSync(dir));
+	} catch {
+		return dir;
 	}
 }

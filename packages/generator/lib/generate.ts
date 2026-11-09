@@ -1,15 +1,24 @@
 import {
 	type Ctx,
 	type GeneratorOptions,
+	type GeneratorPluginV1Fn,
 	type GeneratorPluginV1WithId,
+	type GeneratorStep,
 	loadOptions,
+	type PluginStepState,
 	Watcher,
 	type WatcherFile,
 } from '@baeta/generator-sdk';
 import { createCtx } from './ctx.ts';
-import { cleanPreviousFiles } from './file-utils.ts';
-import { getStateFilename, saveState } from './persistence.ts';
+import {
+	flush,
+	getGeneratedFiles,
+	getStaleFiles,
+	mergeGeneratedFiles,
+	unlinkStaleFiles,
+} from './file-utils.ts';
 import { startRunner } from './runner.ts';
+import { type GeneratedFiles, getStateFilename, readState, writeState } from './state.ts';
 
 export interface GeneratorHooks {
 	onStart?: () => void | Promise<void>;
@@ -17,11 +26,13 @@ export interface GeneratorHooks {
 	onError?: (error: unknown) => void | Promise<void>;
 	onPluginStepStart?: (
 		plugin: GeneratorPluginV1WithId,
-		step: 'setup' | 'generate' | 'end',
+		step: GeneratorStep,
+		state: Extract<PluginStepState, { status: 'started' }>,
 	) => void | Promise<void>;
 	onPluginStepEnd?: (
 		plugin: GeneratorPluginV1WithId,
-		step: 'setup' | 'generate' | 'end',
+		step: GeneratorStep,
+		state: Extract<PluginStepState, { status: 'finished' }>,
 	) => void | Promise<void>;
 }
 
@@ -31,9 +42,9 @@ export async function generate(
 	hooks?: GeneratorHooks,
 ) {
 	const generatorOptions = loadOptions(options);
-	const stateFilename = getStateFilename(generatorOptions.cwd);
+	const stateFilename = getStateFilename(generatorOptions.cacheDir);
 	const ctx = createCtx({ generatorOptions, plugins });
-	return await executeGenerator(ctx, plugins, stateFilename, hooks);
+	await executeGenerator(ctx, plugins, stateFilename, hooks);
 }
 
 export async function generateAndWatch(
@@ -41,37 +52,55 @@ export async function generateAndWatch(
 	plugins: GeneratorPluginV1WithId[],
 	hooks?: GeneratorHooks,
 ) {
+	let isClosed = false;
+	let previous: GeneratedFiles | undefined;
+	let pendingRun: Promise<GeneratedFiles> | undefined;
+	let shouldReload = false;
+	let changedFiles: WatcherFile[] = [];
+
 	const generatorOptions = loadOptions(options);
-	const stateFilename = getStateFilename(generatorOptions.cwd);
-	const watcher = new Watcher(generatorOptions.cwd);
+	const stateFilename = getStateFilename(generatorOptions.cacheDir);
+	const watcher = new Watcher(generatorOptions.cwd, {
+		onClose: async () => {
+			isClosed = true;
+			await pendingRun;
+		},
+	});
 
-	let previousCtx: Ctx | undefined = await executeGenerator(
-		createCtx({ generatorOptions, plugins }),
-		plugins,
-		stateFilename,
-		hooks,
-	);
+	const reload = (file?: WatcherFile) => {
+		if (file) {
+			changedFiles.push(file);
+		}
 
-	const reload = (file: WatcherFile) => {
+		if (pendingRun) {
+			shouldReload = true;
+			return;
+		}
+
 		const ctx = createCtx({
 			generatorOptions,
 			plugins,
 			watching: true,
-			changedFile: file,
+			changedFiles: changedFiles,
 		});
-		// TODO: add proper scheduler to avoid multiple executions when multiple files change in a short period of time
-		executeGenerator(ctx, plugins, stateFilename, hooks, previousCtx)
-			.then((newCtx) => {
-				previousCtx = newCtx;
-			})
-			.catch(() => {
-				// Errors are handled in executeGenerator, so we can ignore them here
-			});
+		shouldReload = false;
+		changedFiles = [];
+
+		const finishRun = (generated: GeneratedFiles) => {
+			previous = generated;
+			pendingRun = undefined;
+			if (shouldReload && !isClosed) reload();
+		};
+
+		pendingRun = executeGenerator(ctx, plugins, stateFilename, hooks, previous);
+		pendingRun.then(finishRun).catch(() => {});
 	};
 
 	for (const plugin of plugins) {
 		plugin.watch(generatorOptions, watcher, reload);
 	}
+
+	reload();
 
 	return watcher;
 }
@@ -81,62 +110,121 @@ async function executeGenerator(
 	plugins: GeneratorPluginV1WithId[],
 	stateFilename: string,
 	hooks?: GeneratorHooks,
-	prev?: Ctx,
+	previous?: GeneratedFiles,
 ) {
-	const first = plugins[0];
+	const previousFiles = previous ?? (await readState(stateFilename));
 
-	if (first == null) {
-		return;
-	}
-
-	const onSetupStart = async (plugin: GeneratorPluginV1WithId) => {
-		await hooks?.onPluginStepStart?.(plugin, 'setup');
-	};
-
-	const onGenerateStart = async (plugin: GeneratorPluginV1WithId) => {
-		await hooks?.onPluginStepStart?.(plugin, 'generate');
-	};
-
-	const onEndStart = async (plugin: GeneratorPluginV1WithId) => {
-		await hooks?.onPluginStepStart?.(plugin, 'end');
-	};
-
-	const onSetupEnd = async (plugin: GeneratorPluginV1WithId) => {
-		ctx.didSetup.push(plugin.name);
-		await hooks?.onPluginStepEnd?.(plugin, 'setup');
-	};
-
-	const onGenerateEnd = async (plugin: GeneratorPluginV1WithId) => {
-		ctx.didGenerate.push(plugin.name);
-		await hooks?.onPluginStepEnd?.(plugin, 'generate');
-	};
-
-	const onEndEnd = async (plugin: GeneratorPluginV1WithId) => {
-		ctx.didEnd.push(plugin.name);
-		await hooks?.onPluginStepEnd?.(plugin, 'end');
+	const notifyError = async (err: unknown) => {
+		if (hooks?.onError == null) {
+			return console.error('Generation failed.', err);
+		}
+		try {
+			await hooks.onError(err);
+		} catch (err) {
+			console.error('Error in onError hook:', err);
+		}
 	};
 
 	try {
+		if (plugins.length === 0) {
+			throw new Error('No generator plugins provided');
+		}
+
+		const stepFns = [
+			createPluginStepFns(ctx, hooks, 'setup'),
+			createPluginStepFns(ctx, hooks, 'generate'),
+			createPluginStepFns(ctx, hooks, 'end'),
+		];
+
 		await hooks?.onStart?.();
+		for (const { run, onStart, onEnd } of stepFns) {
+			await startRunner(ctx, plugins, run, onStart, onEnd);
+			await flush(ctx.fileManager);
+		}
 
-		await startRunner(ctx, plugins, (plugin) => plugin.setup, onSetupStart, onSetupEnd);
-		await startRunner(ctx, plugins, (plugin) => plugin.generate, onGenerateStart, onGenerateEnd);
-		await startRunner(ctx, plugins, (plugin) => plugin.end, onEndStart, onEndEnd);
-
-		await ctx.fileManager.writeAll();
-
-		await cleanPreviousFiles(ctx.fileManager, stateFilename, prev?.fileManager);
+		const currentFiles = getGeneratedFiles(ctx.generatorOptions.cwd, ctx.fileManager);
+		const staleFiles = getStaleFiles(previousFiles, currentFiles);
+		await unlinkStaleFiles(ctx.generatorOptions.cwd, staleFiles);
+		await writeState(stateFilename, currentFiles);
 
 		await hooks?.onEnd?.();
-	} catch (e) {
-		if (hooks?.onError == null) {
-			console.error('Generation failed.', e);
-		} else {
-			await hooks.onError(e);
-		}
+		return currentFiles;
+	} catch (err) {
+		const currentFiles = getGeneratedFiles(ctx.generatorOptions.cwd, ctx.fileManager, {
+			failedRun: true,
+		});
+		const mergedFiles = mergeGeneratedFiles(previousFiles, currentFiles);
+		await writeState(stateFilename, mergedFiles);
+
+		await notifyError(err);
+		return mergedFiles;
 	}
+}
 
-	await saveState(stateFilename, ctx).catch(() => null);
+function createPluginStepFns(
+	ctx: Ctx,
+	hooks: GeneratorHooks | undefined,
+	step: GeneratorStep,
+): {
+	run: (plugin: GeneratorPluginV1WithId) => GeneratorPluginV1Fn;
+	onStart: (plugin: GeneratorPluginV1WithId) => Promise<void>;
+	onEnd: (plugin: GeneratorPluginV1WithId) => Promise<void>;
+} {
+	return {
+		run: (plugin: GeneratorPluginV1WithId) => {
+			return plugin[step];
+		},
+		onStart: async (plugin: GeneratorPluginV1WithId) => {
+			const pluginState = ctx.pluginStates.get(plugin.id);
+			if (!pluginState) {
+				throw new PluginStepError(plugin, step, `Plugin state not found for plugin ${plugin.name}`);
+			}
+			if (pluginState[step].status !== 'pending') {
+				throw new PluginStepError(
+					plugin,
+					step,
+					`Plugin step ${step} for plugin ${plugin.name} is not pending`,
+				);
+			}
+			const nextState = { status: 'started' as const, startedAt: performance.now() };
+			pluginState[step] = nextState;
+			await hooks?.onPluginStepStart?.(plugin, step, nextState);
+		},
+		onEnd: async (plugin: GeneratorPluginV1WithId) => {
+			const pluginState = ctx.pluginStates.get(plugin.id);
+			if (!pluginState) {
+				throw new PluginStepError(plugin, step, `Plugin state not found for plugin ${plugin.name}`);
+			}
+			if (pluginState[step].status !== 'started') {
+				throw new PluginStepError(
+					plugin,
+					step,
+					`Plugin step ${step} for plugin ${plugin.name} is not started`,
+				);
+			}
+			const nextPlugin = ctx.plugins[ctx.plugins.indexOf(plugin) + 1];
+			if (nextPlugin && ctx.pluginStates.get(nextPlugin.id)?.[step].status === 'pending') {
+				throw new PluginStepError(
+					plugin,
+					step,
+					`next() was not called, so ${nextPlugin.name} and the plugins after it did not run`,
+				);
+			}
+			const nextState = {
+				status: 'finished' as const,
+				startedAt: pluginState[step].startedAt,
+				finishedAt: performance.now(),
+			};
+			pluginState[step] = nextState;
+			await hooks?.onPluginStepEnd?.(plugin, step, nextState);
+		},
+	};
+}
 
-	return ctx;
+class PluginStepError extends Error {
+	id: symbol;
+	constructor(plugin: GeneratorPluginV1WithId, step: GeneratorStep, message: string) {
+		super(`Plugin step error for plugin ${plugin.name} at step ${step}: ${message}`);
+		this.id = plugin.id;
+	}
 }

@@ -65,6 +65,13 @@ export interface GeneratorOptions {
 	 * @defaultValue '.ts'
 	 */
 	importExtension?: '.js' | '.ts' | false;
+
+	/**
+	 * Directory for the generator cache, which records the generated files so the next run can
+	 * remove the ones it no longer generates.
+	 * @defaultValue 'node_modules/.cache/baeta'
+	 */
+	cacheDir?: string;
 }
 
 export interface NormalizedGeneratorOptions {
@@ -76,6 +83,7 @@ export interface NormalizedGeneratorOptions {
 	fileOptions?: FileOptions;
 	loaders?: Loader[];
 	importExtension: '.js' | '.ts' | '';
+	cacheDir: string;
 }
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
@@ -95,5 +103,6 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 		fileOptions: options.fileOptions,
 		loaders: options.loaders,
 		importExtension: options.importExtension === false ? '' : (options.importExtension ?? '.ts'),
+		cacheDir: resolve(cwd, options.cacheDir ?? 'node_modules/.cache/baeta'),
 	};
 }

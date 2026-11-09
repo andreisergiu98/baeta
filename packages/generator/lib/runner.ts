@@ -8,24 +8,16 @@ export function createRunner(
 	onFinish?: (plugin: GeneratorPluginV1WithId) => Promise<void>,
 ) {
 	let i = 0;
-
 	const next = async (): Promise<void> => {
 		const plugin = plugins[i++];
-
 		if (!plugin) {
 			return;
 		}
-
 		const fn = getFn(plugin);
-
 		await onStart?.(plugin);
-
-		await fn(ctx, async () => {
-			await onFinish?.(plugin);
-			return await next();
-		});
+		await fn(ctx, next);
+		await onFinish?.(plugin);
 	};
-
 	return next;
 }
 

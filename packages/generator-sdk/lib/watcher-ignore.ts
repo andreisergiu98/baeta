@@ -28,12 +28,13 @@ export class WatcherIgnore {
 			return;
 		}
 
-		if (!this.isMicromatch(pattern)) {
+		const relativePattern = this.relativeToCwd(pattern);
+		if (!this.isMicromatch(relativePattern)) {
 			this.files.push(this.resolveFile(pattern));
 			return;
 		}
 
-		this.globsMap.set(pattern, micromatch.matcher(pattern));
+		this.globsMap.set(pattern, micromatch.matcher(relativePattern));
 		this.globs = Array.from(this.globsMap.values());
 	}
 
@@ -44,6 +45,11 @@ export class WatcherIgnore {
 
 	resolveFile(file: string) {
 		return posixPath(path.isAbsolute(file) ? file : path.join(this.cwd, file));
+	}
+
+	private relativeToCwd(file: string) {
+		const prefix = `${this.cwd}/`;
+		return file.startsWith(prefix) ? file.slice(prefix.length) : file;
 	}
 
 	unignore(pattern: MatchPattern) {
@@ -57,7 +63,7 @@ export class WatcherIgnore {
 			return;
 		}
 
-		if (!this.isMicromatch(pattern)) {
+		if (!this.isMicromatch(this.relativeToCwd(pattern))) {
 			const file = this.resolveFile(pattern);
 			this.files = this.files.filter((p) => p !== file);
 			return;
@@ -72,7 +78,8 @@ export class WatcherIgnore {
 			return true;
 		}
 
-		if (this.globs.some((f) => f(path))) {
+		const relativePath = this.relativeToCwd(path);
+		if (this.globs.some((f) => f(relativePath))) {
 			return true;
 		}
 

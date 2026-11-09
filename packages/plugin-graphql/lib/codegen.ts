@@ -47,7 +47,7 @@ type GeneratedFile = {
 
 export async function generate(
 	options: NormalizedGeneratorOptions,
-	currentFiles: File[],
+	currentFiles: readonly File[],
 ): Promise<GeneratedFile[]> {
 	const { outputSchema, outputSchemaAst } = await loadSchema(
 		options.schemas,

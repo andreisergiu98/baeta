@@ -34,7 +34,7 @@ export function createPrismaClientPlugin(options: PrismaPluginOptions) {
 		skip: async (ctx: Ctx) => {
 			const schema = resolve(ctx.generatorOptions.cwd, prismaSchema);
 
-			if (ctx.watching && ctx.changedFile?.path !== schema) {
+			if (ctx.watching && ctx.changedFiles?.every((file) => file.path !== schema)) {
 				return true;
 			}
 

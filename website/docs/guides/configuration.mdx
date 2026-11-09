@@ -32,6 +32,10 @@ export default defineConfig({
     // Set to ".js" for bundler compatibility or false to omit
     importExtension: ".ts",
 
+    // Where the generator records generated files, so the next run can remove
+    // the ones it no longer generates (default: "node_modules/.cache/baeta")
+    cacheDir: "node_modules/.cache/baeta",
+
     // Options for generated files
     fileOptions: {
       // Add lint-disable comments at the top of generated files.

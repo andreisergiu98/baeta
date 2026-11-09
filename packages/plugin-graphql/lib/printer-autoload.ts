@@ -1,5 +1,5 @@
+import { makeRelativePathForImport } from '@baeta/util-path';
 import { camelCase, pascalCase } from 'change-case';
-import { makeRelativePathForImport } from './printer-utils.ts';
 
 interface AutoloadPrinterConfig {
 	moduleDefinitionName: string;

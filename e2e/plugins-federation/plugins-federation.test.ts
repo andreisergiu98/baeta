@@ -150,6 +150,27 @@ test('Query._entities resolves a mix of entity types in one call', async (t) => 
 	}
 });
 
+test('Query._entities fails only the invalid representation', async (t) => {
+	const result = await execute({
+		schema,
+		document: EntitiesQuery,
+		variableValues: {
+			representations: [
+				{ __typename: 'Movie', id: '7' },
+				{ __typename: 'Unknown', id: '7' },
+			],
+		},
+		contextValue: { appVersion: '1.0.0' },
+	});
+	const [movieEntity, invalidEntity] = result.data?._entities ?? [];
+	t.is(movieEntity?.__typename, 'Movie');
+	t.is(invalidEntity, null);
+	t.deepEqual(
+		result.errors?.map((error) => error.path),
+		[['_entities', 1]],
+	);
+});
+
 test('regular queries still work alongside federation', async (t) => {
 	const result = await execute({
 		schema,

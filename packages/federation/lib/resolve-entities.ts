@@ -17,14 +17,18 @@ export async function resolveEntities<
 	info: Info,
 ) {
 	const promises = representations.map(async (representation) => {
-		const typename = representation.__typename;
-		const handler = entityHandlerMap.get(typename);
-		if (handler == null) {
-			throw new Error(
-				`Entity representation is missing or has invalid __typename: ${String(typename)}`,
-			);
+		try {
+			const typename = representation.__typename;
+			const handler = entityHandlerMap.get(typename);
+			if (handler == null) {
+				throw new Error(
+					`Entity representation is missing or has invalid __typename: ${String(typename)}`,
+				);
+			}
+			return await handler(representation, ctx, info);
+		} catch (error) {
+			return error;
 		}
-		return await handler(representation, ctx, info);
 	});
 	return await Promise.all(promises);
 }

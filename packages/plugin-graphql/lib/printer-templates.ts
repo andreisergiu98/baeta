@@ -1,4 +1,4 @@
-import { makeRelativePathForImport } from './printer-utils.ts';
+import { makeRelativePathForImport } from '@baeta/util-path';
 
 export function printTypesTemplate(options: {
 	importExtension: '.js' | '.ts' | '';

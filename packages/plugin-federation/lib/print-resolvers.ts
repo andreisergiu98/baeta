@@ -1,5 +1,5 @@
 import { getModuleExportName } from '@baeta/generator-sdk';
-import { relative } from '@baeta/util-path';
+import { makeRelativePathForImport } from '@baeta/util-path';
 import type { FederationInfo } from './federation-info.ts';
 import type { FederationDirectiveName, FederationDirectiveScalar, FederationSpec } from './spec.ts';
 
@@ -19,7 +19,10 @@ export function printResolvers(
 ): string {
 	const hasEntities = info.resolvableEntitiesMap.size > 0;
 	const moduleExportName = getModuleExportName(options.moduleName);
-	const relativeGeneratedTypesDir = relative(options.federationRootDir, options.typesDir);
+	const relativeGeneratedTypesDir = makeRelativePathForImport(
+		options.federationRootDir,
+		options.typesDir,
+	);
 	const imports = [
 		'import * as BaetaFederation from "@baeta/federation";',
 		hasEntities

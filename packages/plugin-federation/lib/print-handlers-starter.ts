@@ -1,4 +1,4 @@
-import { relative } from '@baeta/util-path';
+import { makeRelativePathForImport } from '@baeta/util-path';
 
 interface PrintHandlersStarterOptions {
 	typesDir: string;
@@ -7,7 +7,7 @@ interface PrintHandlersStarterOptions {
 }
 
 export function printHandlersStarter(options: PrintHandlersStarterOptions) {
-	const relativeTypesDir = relative(options.federationRootDir, options.typesDir);
+	const relativeTypesDir = makeRelativePathForImport(options.federationRootDir, options.typesDir);
 	return [
 		'/**',
 		'* Register your reference resolvers for federation entities in this file.',

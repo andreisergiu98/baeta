@@ -1,10 +1,10 @@
 import type { ModuleRegistry } from '@baeta/util-graphql';
-import { join } from '@baeta/util-path';
+import { join, makeRelativePathForImport } from '@baeta/util-path';
 import { pascalCase } from 'change-case';
 import type { FieldInfoMap } from './field-info.ts';
 import { namespace } from './namespace.ts';
 import { getArgsTypeName } from './printer-types.ts';
-import { buildBlock, buildCodeBlock, indent, makeRelativePathForImport } from './printer-utils.ts';
+import { buildBlock, buildCodeBlock, indent } from './printer-utils.ts';
 
 export interface ModulePrinterConfig {
 	registry: ModuleRegistry;

@@ -30,7 +30,7 @@ export function gitignorePlugin(options?: GitignoreOptions) {
 	return createPluginV1({
 		name: 'gitignore-plugin',
 		actionName: 'add  generated files to .gitignore',
-		generate: async (ctx, next) => {
+		end: async (ctx, next) => {
 			await next();
 
 			const modulesDir = ctx.generatorOptions.modulesDir;

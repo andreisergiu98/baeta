@@ -36,6 +36,10 @@ export default defineConfig({
 });
 ```
 
-:::tip
-Order matters for some plugins. [Gitignore](./gitignore) should run first; the others are mostly order-independent. Each plugin's page calls out anything special.
-:::
+## Steps
+
+Each run has three steps: `setup`, `generate` and `end`. All plugins finish a step before the next one starts, and the files added in a step are written before the next step:
+
+- `setup` adds the files other plugins read, such as the `.gql` files from the directives, pagination and federation plugins.
+- `generate` adds the generated code. Baeta's GraphQL types always generate last.
+- `end` sees every generated file. The gitignore plugin uses it to list them.

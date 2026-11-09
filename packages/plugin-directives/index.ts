@@ -50,23 +50,19 @@ function createExportFilename(moduleDir: string) {
  */
 export function directivesPlugin(options?: DirectivesOptions) {
 	const { moduleName = 'baeta-directives' } = options ?? {};
-
 	return createPluginV1({
 		name: 'directives',
 		actionName: 'directives',
 		watch: (generatorOptions, watcher) => {
 			watcher.ignore(`${createDirectivesModuleDir(generatorOptions.modulesDir, moduleName)}/**`);
 		},
+		setup: async (ctx, next) => {
+			const moduleDir = createDirectivesModuleDir(ctx.generatorOptions.modulesDir, moduleName);
+			ctx.fileManager.createAndAdd(createGqlFilename(moduleDir), printDefinitions(), 'directives');
+			return await next();
+		},
 		generate: async (ctx, next) => {
 			const moduleDir = createDirectivesModuleDir(ctx.generatorOptions.modulesDir, moduleName);
-
-			const definitionFile = ctx.fileManager.createAndAdd(
-				createGqlFilename(moduleDir),
-				printDefinitions(),
-				'directives',
-			);
-			await definitionFile.write();
-
 			ctx.fileManager.createAndAdd(
 				createExportFilename(moduleDir),
 				printExport(
@@ -76,7 +72,6 @@ export function directivesPlugin(options?: DirectivesOptions) {
 				),
 				'directives',
 			);
-
 			return await next();
 		},
 	});

@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@baeta/generator-sdk": "workspace:^",
-    "execa": "^10.2.1"
+    "@baeta/util-path": "workspace:^"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

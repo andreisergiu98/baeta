@@ -1,6 +1,6 @@
 import select from '@inquirer/select';
 import { isCommandAvailable } from '../utils/commands.ts';
-import { defaultJavaScriptRuntime, type JavaScriptRuntime } from './constants.ts';
+import type { JavaScriptRuntime } from './constants.ts';
 import { logger } from './logger.ts';
 
 export async function getRuntime(): Promise<JavaScriptRuntime> {
@@ -23,8 +23,8 @@ export async function getRuntime(): Promise<JavaScriptRuntime> {
 		});
 	} catch (error) {
 		if (error instanceof Error && error.name === 'ExitPromptError') {
-			logger.warn`Falling back to name=${defaultJavaScriptRuntime}`;
-			return defaultJavaScriptRuntime;
+			logger.error('A runtime is required.');
+			process.exit(1);
 		}
 		throw error;
 	}

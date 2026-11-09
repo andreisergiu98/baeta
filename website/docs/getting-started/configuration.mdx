@@ -38,7 +38,7 @@ export default defineConfig({
 {
   "scripts": {
     "build": "baeta generate",
-    "start": "baeta generate --watch --run='node --watch --inspect src/app.ts'",
+    "start": "baeta generate --watch --run=\"node --watch --inspect src/app.ts\"",
     "types": "tsc --noEmit"
   }
 }
@@ -55,15 +55,15 @@ If you're using **Bun** or **Deno** you can replace `start` with either:
 
 ```json
 {
-  "start:bun": "baeta generate --watch --run='bun --watch --inspect src/app.ts'",
-  "start:deno": "baeta generate --watch --run='deno --watch --inspect --allow-net --allow-read --allow-env src/app.ts'"
+  "start:bun": "baeta generate --watch --run=\"bun --watch --inspect src/app.ts\"",
+  "start:deno": "baeta generate --watch --run=\"deno --watch --inspect --allow-net --allow-read --allow-env src/app.ts\""
 }
 ```
 
 :::
 
 :::tip
-Run `baeta generate --help` for the full flag list. `--watch` re-runs the generator on schema changes. `--run='…'` runs through your shell. Baeta restarts it only after a crash, not on each regenerate, so the inner command (typically `node --watch` / `bun --watch` / `deno --watch`) handles its own reloads.
+Run `baeta generate --help` for the full flag list. `--watch` re-runs the generator on schema changes. `--run="…"` runs through your shell.
 :::
 
 ## Next

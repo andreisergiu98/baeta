@@ -58,8 +58,8 @@ async function askForPackageManagerChoice(): Promise<PackageManager> {
 		});
 	} catch (error) {
 		if (error instanceof Error && error.name === 'ExitPromptError') {
-			logger.warn`Falling back to name=${defaultPackageManager}`;
-			return defaultPackageManager;
+			logger.error('A package manager is required.');
+			process.exit(1);
 		}
 		throw error;
 	}

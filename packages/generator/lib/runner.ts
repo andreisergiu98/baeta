@@ -1,11 +1,11 @@
-import type { Ctx, GeneratorPluginV1, GeneratorPluginV1Fn } from '@baeta/generator-sdk';
+import type { Ctx, GeneratorPluginV1Fn, GeneratorPluginV1WithId } from '@baeta/generator-sdk';
 
 export function createRunner(
 	ctx: Ctx,
-	plugins: GeneratorPluginV1[],
-	getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
-	onStart?: (plugin: GeneratorPluginV1) => Promise<void>,
-	onFinish?: (plugin: GeneratorPluginV1) => Promise<void>,
+	plugins: GeneratorPluginV1WithId[],
+	getFn: (plugin: GeneratorPluginV1WithId) => GeneratorPluginV1Fn,
+	onStart?: (plugin: GeneratorPluginV1WithId) => Promise<void>,
+	onFinish?: (plugin: GeneratorPluginV1WithId) => Promise<void>,
 ) {
 	let i = 0;
 
@@ -31,10 +31,10 @@ export function createRunner(
 
 export function startRunner(
 	ctx: Ctx<unknown>,
-	plugins: GeneratorPluginV1[],
-	getFn: (plugin: GeneratorPluginV1) => GeneratorPluginV1Fn,
-	onStart?: (plugin: GeneratorPluginV1) => Promise<void>,
-	onFinish?: (plugin: GeneratorPluginV1) => Promise<void>,
+	plugins: GeneratorPluginV1WithId[],
+	getFn: (plugin: GeneratorPluginV1WithId) => GeneratorPluginV1Fn,
+	onStart?: (plugin: GeneratorPluginV1WithId) => Promise<void>,
+	onFinish?: (plugin: GeneratorPluginV1WithId) => Promise<void>,
 ) {
 	const run = createRunner(ctx, plugins, getFn, onStart, onFinish);
 	return run();

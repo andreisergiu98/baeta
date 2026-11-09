@@ -166,9 +166,4 @@ const websiteConfig = defineConfig({
 	},
 });
 
-const cliConfig = defineConfig({
-	files: [`packages/cli/${JS_TS}`],
-	extends: [reactConfig],
-});
-
-export default defineConfig([globalIgnores(ignorePatterns), baseConfig, websiteConfig, cliConfig]);
+export default defineConfig([globalIgnores(ignorePatterns), baseConfig, websiteConfig]);

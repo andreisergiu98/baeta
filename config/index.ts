@@ -54,6 +54,9 @@ export interface PackageDependenciesOverrides {
 }
 
 export const PACKAGE_DEPENDENCY_OVERRIDES: Record<string, PackageDependenciesOverrides> = {
+	'@baeta/cli': {
+		ignoreDevDeps: ['graphql'],
+	},
 	'@baeta/plugin-graphql': {
 		ignoreDevDeps: ['@types/node'],
 	},

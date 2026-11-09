@@ -1,7 +1,7 @@
 import {
 	type Ctx,
 	type GeneratorOptions,
-	type GeneratorPluginV1,
+	type GeneratorPluginV1WithId,
 	loadOptions,
 	Watcher,
 	type WatcherFile,
@@ -16,18 +16,18 @@ export interface GeneratorHooks {
 	onEnd?: () => void | Promise<void>;
 	onError?: (error: unknown) => void | Promise<void>;
 	onPluginStepStart?: (
-		plugin: GeneratorPluginV1,
+		plugin: GeneratorPluginV1WithId,
 		step: 'setup' | 'generate' | 'end',
 	) => void | Promise<void>;
 	onPluginStepEnd?: (
-		plugin: GeneratorPluginV1,
+		plugin: GeneratorPluginV1WithId,
 		step: 'setup' | 'generate' | 'end',
 	) => void | Promise<void>;
 }
 
 export async function generate(
 	options: GeneratorOptions,
-	plugins: GeneratorPluginV1[],
+	plugins: GeneratorPluginV1WithId[],
 	hooks?: GeneratorHooks,
 ) {
 	const generatorOptions = loadOptions(options);
@@ -38,7 +38,7 @@ export async function generate(
 
 export async function generateAndWatch(
 	options: GeneratorOptions,
-	plugins: GeneratorPluginV1[],
+	plugins: GeneratorPluginV1WithId[],
 	hooks?: GeneratorHooks,
 ) {
 	const generatorOptions = loadOptions(options);
@@ -78,7 +78,7 @@ export async function generateAndWatch(
 
 async function executeGenerator(
 	ctx: Ctx,
-	plugins: GeneratorPluginV1[],
+	plugins: GeneratorPluginV1WithId[],
 	stateFilename: string,
 	hooks?: GeneratorHooks,
 	prev?: Ctx,
@@ -89,29 +89,29 @@ async function executeGenerator(
 		return;
 	}
 
-	const onSetupStart = async (plugin: GeneratorPluginV1) => {
+	const onSetupStart = async (plugin: GeneratorPluginV1WithId) => {
 		await hooks?.onPluginStepStart?.(plugin, 'setup');
 	};
 
-	const onGenerateStart = async (plugin: GeneratorPluginV1) => {
+	const onGenerateStart = async (plugin: GeneratorPluginV1WithId) => {
 		await hooks?.onPluginStepStart?.(plugin, 'generate');
 	};
 
-	const onEndStart = async (plugin: GeneratorPluginV1) => {
+	const onEndStart = async (plugin: GeneratorPluginV1WithId) => {
 		await hooks?.onPluginStepStart?.(plugin, 'end');
 	};
 
-	const onSetupEnd = async (plugin: GeneratorPluginV1) => {
+	const onSetupEnd = async (plugin: GeneratorPluginV1WithId) => {
 		ctx.didSetup.push(plugin.name);
 		await hooks?.onPluginStepEnd?.(plugin, 'setup');
 	};
 
-	const onGenerateEnd = async (plugin: GeneratorPluginV1) => {
+	const onGenerateEnd = async (plugin: GeneratorPluginV1WithId) => {
 		ctx.didGenerate.push(plugin.name);
 		await hooks?.onPluginStepEnd?.(plugin, 'generate');
 	};
 
-	const onEndEnd = async (plugin: GeneratorPluginV1) => {
+	const onEndEnd = async (plugin: GeneratorPluginV1WithId) => {
 		ctx.didEnd.push(plugin.name);
 		await hooks?.onPluginStepEnd?.(plugin, 'end');
 	};

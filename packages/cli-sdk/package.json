@@ -1,0 +1,88 @@
+{
+  "name": "@baeta/cli-sdk",
+  "version": "2.0.0-next.1",
+  "description": "Building blocks for Baeta CLI plugins.",
+  "keywords": [
+    "baeta",
+    "builder",
+    "framework",
+    "graphql",
+    "schema",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://github.com/andreisergiu98/baeta#readme",
+  "bugs": {
+    "url": "https://github.com/andreisergiu98/baeta/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Andrei Pampu",
+    "url": "https://github.com/andreisergiu98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreisergiu98/baeta.git",
+    "directory": "packages/cli-sdk"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "builder build",
+    "check:deps": "builder check-deps",
+    "postpack": "builder prepare --restore",
+    "prepack": "builder prepare",
+    "test": "builder test",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baeta/plugin": "workspace:^"
+  },
+  "devDependencies": {
+    "@baeta/builder": "workspace:^",
+    "@baeta/testing": "workspace:^",
+    "@baeta/tsconfig": "workspace:^",
+    "@types/node": "catalog:dev",
+    "typescript": "catalog:dev"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ]
+  },
+  "engines": {
+    "node": "^22.20.0 || ^24.0.0 || >=26.0.0"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./index.ts"
+    ],
+    "readme": "none",
+    "tsconfig": "./tsconfig.json",
+    "sort": [
+      "kind",
+      "instance-first",
+      "required-first",
+      "alphabetical-ignoring-documents"
+    ]
+  }
+}

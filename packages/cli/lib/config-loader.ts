@@ -1,14 +1,15 @@
 import { glob } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { relative, resolve } from '@baeta/util-path';
-import { makeErrorMessage } from '../sdk/errors.tsx';
-import { type BaetaOptions, explainInvalidConfig, isValidConfig } from './config.ts';
+import type { BaetaOptions, DefinedConfig } from './config.ts';
 
 export interface LoadedBaetaConfig {
 	config: BaetaOptions;
 	location: string;
 	relativeLocation: string;
 }
+
+export type ConfigResult = ({ ok: true } & LoadedBaetaConfig) | { ok: false; error: Error };
 
 const configNames = ['baeta', '.baeta'];
 const configExtensions = ['ts', 'mts', 'js', 'mjs'];
@@ -17,11 +18,11 @@ const configNameOrder = configExtensions.flatMap((ext) =>
 );
 
 export async function discoverBaetaConfig() {
-	const generator = glob(`{${configNames.join(',')}}.{${configExtensions.join(',')}}`, {
+	const globFiles = glob(`{${configNames.join(',')}}.{${configExtensions.join(',')}}`, {
 		cwd: process.cwd(),
 	});
 	const files: string[] = [];
-	for await (const file of generator) {
+	for await (const file of globFiles) {
 		files.push(file);
 	}
 	return (
@@ -29,15 +30,18 @@ export async function discoverBaetaConfig() {
 	);
 }
 
+export function isMatchingConfigFilename(filename: string) {
+	return configNameOrder.includes(filename);
+}
+
 function getRelativeConfigPath(path: string) {
 	return `./${relative(process.cwd(), path)}`;
 }
 
-let cacheIndex = 0;
-async function importConfig(configPath: string): Promise<unknown> {
+async function importConfig(configPath: string, cacheIndex: number): Promise<unknown> {
 	const modulePath = resolve(process.cwd(), configPath);
 	const url = pathToFileURL(modulePath);
-	url.searchParams.set('update', String(cacheIndex++));
+	url.searchParams.set('update', String(cacheIndex));
 	const result = await import(url.href);
 
 	if (typeof result !== 'object' || result === null) {
@@ -51,28 +55,63 @@ async function importConfig(configPath: string): Promise<unknown> {
 	return result;
 }
 
-export async function loadConfig(path?: string): Promise<LoadedBaetaConfig | undefined> {
+export async function loadConfig(path?: string, cacheIndex = 0): Promise<ConfigResult> {
 	const location = path ?? (await discoverBaetaConfig());
 
 	if (location == null) {
-		return;
+		return { ok: false, error: new Error('No config file found.') };
 	}
 
 	const relativeLocation = getRelativeConfigPath(location);
 
-	const result = await importConfig(relativeLocation).catch((err) => {
-		console.error(makeErrorMessage(`Failed to load config from \`${relativeLocation}\`.`), err);
-		process.exit(1);
-	});
+	let result: unknown;
+	try {
+		result = await importConfig(relativeLocation, cacheIndex);
+	} catch (err) {
+		return {
+			ok: false,
+			error: new Error(`Failed to load config from \`${relativeLocation}\`.`, { cause: err }),
+		};
+	}
 
 	if (!isValidConfig(result)) {
-		console.error(makeErrorMessage(explainInvalidConfig(result)));
-		process.exit(1);
+		return { ok: false, error: new Error(explainInvalidConfig(result)) };
 	}
 
 	return {
+		ok: true,
 		config: result.config,
 		location,
 		relativeLocation,
 	};
+}
+
+export function getLoadedConfig(config: ConfigResult) {
+	if (!config.ok) {
+		throw config.error;
+	}
+	return config;
+}
+
+function isValidConfig(value: unknown): value is DefinedConfig {
+	if (typeof value !== 'object') {
+		return false;
+	}
+	if (value == null) {
+		return false;
+	}
+	if (!('config' in value)) {
+		return false;
+	}
+	if (!('version' in value)) {
+		return false;
+	}
+	return value.version === 'v2';
+}
+
+function explainInvalidConfig(value: unknown): string {
+	if (typeof value === 'object' && value != null && 'version' in value && value.version !== 'v2') {
+		return `Unsupported config version \`${String(value.version)}\`. Expected \`v2\`, create the config with \`defineConfig\` from @baeta/cli.`;
+	}
+	return 'Invalid config, expected `baeta.ts` with default export created with `defineConfig`.';
 }

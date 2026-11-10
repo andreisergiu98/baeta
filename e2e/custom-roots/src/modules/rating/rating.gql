@@ -1,0 +1,8 @@
+type Rating {
+	movieId: ID!
+	score: Int!
+}
+
+type RootQuery {
+	ratings: [Rating!]!
+}

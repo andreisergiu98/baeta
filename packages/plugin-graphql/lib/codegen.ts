@@ -4,6 +4,7 @@ import {
 	createDefinitionsMapFromDocument,
 	createDefinitionsMapFromSources,
 	createModuleRegistry,
+	getRootTypeNames,
 	getSourcesFromSchema,
 	groupSourcesByModule,
 	loadSchema,
@@ -59,9 +60,10 @@ export async function generate(
 	const modules = Array.from(sourcesByModule.keys());
 	assertModuleNames(modules);
 	const moduleDocuments = getModuleDocuments(sourcesByModule);
-	const sdl = buildModulesSdl(Array.from(moduleDocuments.values()), options.modulesDir);
+	const { sdl, roots } = buildModulesSdl(Array.from(moduleDocuments.values()), options.modulesDir);
+	const rootTypeNames = getRootTypeNames(roots);
 	const globalDefinitions = createDefinitionsMapFromDocument(outputSchema);
-	const modulesDefinitions = createDefinitionsMapFromSources(sources);
+	const modulesDefinitions = createDefinitionsMapFromSources(sources, rootTypeNames);
 
 	const defaultScalars = ['ID', 'Int', 'Float', 'String', 'Boolean'];
 
@@ -79,11 +81,7 @@ export async function generate(
 
 	const typesContent = [
 		printTypesHeaders(config),
-		printRootTypesFromMap(
-			config,
-			['Query', 'Mutation', 'Subscription'],
-			globalDefinitions.objectTypeMap,
-		),
+		printRootTypesFromMap(config, rootTypeNames, globalDefinitions.objectTypeMap),
 		...printEnumTypesFromMap(globalDefinitions.enumTypeMap),
 		...printObjectTypeTypesFromMap(config, modulesDefinitions.objectTypeMap),
 		...printObjectTypeFieldsArgsFromMap(config, globalDefinitions.objectTypeMap),
@@ -121,6 +119,7 @@ export async function generate(
 					typesDir: options.typesDir,
 				},
 				Array.from(moduleDocuments.keys()),
+				roots,
 			),
 		},
 		{
@@ -146,6 +145,7 @@ export async function generate(
 			modulesDir: options.modulesDir,
 			registry: createModuleRegistry(document),
 			moduleDefinitionName: options.moduleDefinitionName,
+			roots,
 		};
 		files.push({
 			filename: join(options.modulesDir, `/${module}/${options.moduleDefinitionName}.ts`),

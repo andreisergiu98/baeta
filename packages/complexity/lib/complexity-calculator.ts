@@ -22,7 +22,6 @@ import {
 	TypeMetaFieldDef,
 } from 'graphql';
 import { isListOrNullableList } from '../utils/graphlq.ts';
-import { capitalize } from '../utils/string.ts';
 import { ComplexityError } from './complexity-errors.ts';
 import { type FieldSettingsMap, getFieldComplexitySettings } from './field-settings.ts';
 import { sanitizeLimit } from './sanitize-limit.ts';
@@ -38,11 +37,10 @@ export function calculateComplexity<Context>(
 	fieldSettingsMap: FieldSettingsMap,
 	defaults: ComplexityDefaults,
 ) {
-	const operationName = capitalize(info.operation.operation);
-	const operationType = info.schema.getType(operationName);
+	const operationType = info.schema.getRootType(info.operation.operation);
 
-	if (!operationType || !isOutputType(operationType)) {
-		throw new ComplexityError(`Unsupported operation ${operationName}`);
+	if (!operationType) {
+		throw new ComplexityError(`Unsupported operation ${info.operation.operation}`);
 	}
 
 	const safeDefaults: ComplexityDefaults = {

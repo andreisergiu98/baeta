@@ -5,7 +5,11 @@ import type { AuthStore } from './auth-store.ts';
 import { defaultErrorResolver, resolveError, type ScopeErrorResolver } from './error.ts';
 import { type GetGrant, saveGrants } from './grant.ts';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
-import { type DefaultScopes, selectDefaultScopes } from './scope-defaults.ts';
+import {
+	type DefaultScopes,
+	type DefaultScopesOperation,
+	selectDefaultScopes,
+} from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
 import { verifyAndScopes, type ScopeRules } from './scope-rules.ts';
 import type { ScopesShape } from './scope-shape.ts';
@@ -59,7 +63,7 @@ export function createMiddleware<
 	Args,
 	Info,
 >(
-	type: string,
+	operation: DefaultScopesOperation | undefined,
 	loadScopes: GetScopeLoader<Scopes, unknown>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
 	authStore: AuthStore<Scopes, unknown>,
@@ -69,7 +73,7 @@ export function createMiddleware<
 	onError?: ScopeErrorResolver,
 ): Middleware<Result, Source, Context, Args, Info> {
 	const getScopes = isGetScopeRules(scopes) ? scopes : () => scopes;
-	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
+	const defaultScopes = selectDefaultScopes(options?.skipDefaults, operation, globalScopes);
 
 	return (next, params) => {
 		authStore.load(params.ctx, loadScopes, cacheKeyMap);
@@ -101,7 +105,7 @@ export function createPostMiddleware<
 	Args,
 	Info,
 >(
-	type: string,
+	operation: DefaultScopesOperation | undefined,
 	loadScopes: GetScopeLoader<Scopes, unknown>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
 	authStore: AuthStore<Scopes, unknown>,
@@ -110,7 +114,7 @@ export function createPostMiddleware<
 	options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	onError?: ScopeErrorResolver,
 ): Middleware<Result, Source, Context, Args, Info> {
-	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
+	const defaultScopes = selectDefaultScopes(options?.skipDefaults, operation, globalScopes);
 	const errorResolver = onError ?? defaultErrorResolver;
 
 	return (next, params) => {
@@ -143,20 +147,20 @@ export function createFallbackMiddleware<
 	Grants extends string,
 	Context,
 >(
-	type: string,
+	operation: DefaultScopesOperation | undefined,
 	loadScopes: GetScopeLoader<Scopes, unknown>,
 	cacheKeyMap: ScopeCacheKeyMap<Scopes>,
 	authStore: AuthStore<Scopes, unknown>,
 	globalScopes: DefaultScopes<Scopes, Grants>,
 	onError?: ScopeErrorResolver,
 ) {
-	const rules = selectDefaultScopes(false, type, globalScopes);
+	const rules = selectDefaultScopes(false, operation, globalScopes);
 	if (rules == null) {
 		return;
 	}
 
 	return createMiddleware<Scopes, Grants, any, unknown, Context, unknown, unknown>(
-		type,
+		operation,
 		loadScopes,
 		cacheKeyMap,
 		authStore,

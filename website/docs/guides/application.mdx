@@ -8,7 +8,7 @@ sidebar_position: 50
 
 ## Sources
 
-The generator merges the schema files of every module under `src/modules/`, validates the result and writes it to `src/__generated__/sdl.ts`. It re-exports that SDL together with every module from `src/modules/index.ts`. Pass that default export as `sources`:
+The generator merges the schema files of every module under `src/modules/`, validates the result and writes it to `src/__generated__/sdl.ts`. It re-exports that SDL together with the names of the root types and every module from `src/modules/index.ts`. Pass that default export as `sources`:
 
 ```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
@@ -20,6 +20,19 @@ const baeta = createApplication({
 ```
 
 `createApplication` builds the schema from `sources.sdl`, then attaches each module's resolvers and scalars to it. It throws at startup when a module resolves a field the schema doesn't define, when two modules resolve the same field, or when a module implements a scalar the schema doesn't declare.
+
+### Root types
+
+The root types are `Query`, `Mutation` and `Subscription` by default. To use other names, declare them in a `schema` block in any module's schema file:
+
+```graphql title="src/modules/app/app.gql"
+schema {
+  query: RootQuery
+  mutation: RootMutation
+}
+```
+
+Each module then resolves its root fields on `RootQuery` and `RootMutation`.
 
 ## Validation
 

@@ -8,6 +8,7 @@ import {
 import type { AppPlugin, PluginId } from '../sdk/app-plugin.ts';
 import type { ModuleCompiler } from '../sdk/module-compiler.ts';
 import type { ModuleCompilerFactory, TypesResolversMap } from '../sdk/module-methods.ts';
+import type { RootTypes } from '../sdk/root-types.ts';
 import { attachResolvers } from '../sdk/schema-resolvers.ts';
 import { attachSchemaStates, type SetSchemaState } from '../sdk/schema-state.ts';
 import { makeSymbol } from '../sdk/symbols.ts';
@@ -29,6 +30,11 @@ export interface Options<Context, Info> {
 		 * The whole schema as SDL. The generator writes it to `sdl.ts` in the types directory.
 		 */
 		sdl: string;
+		/**
+		 * The names of the schema's root types. Plugins use them before the schema is built, and
+		 * `createApplication` throws if they don't match the built schema.
+		 */
+		roots: RootTypes;
 		/**
 		 * Modules that resolve the schema's fields and implement its scalars.
 		 */
@@ -70,10 +76,12 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	const { modules, schemaStates, schemaHooks } = compileModules(
 		options.sources.modules,
 		document,
+		options.sources.roots,
 		options.plugins,
 	);
 	const assumeValid = options.assumeValid ?? false;
 	const schema = buildSchema(document, assumeValid);
+	assertRootTypes(schema, options.sources.roots);
 	attachResolvers(schema, modules);
 	if (!assumeValid) {
 		validateSchema(schema);
@@ -111,6 +119,25 @@ function validateSchema(schema: GraphQLSchema) {
 	}
 }
 
+function assertRootTypes(schema: GraphQLSchema, roots: RootTypes) {
+	const schemaRoots: Record<keyof RootTypes, string | undefined> = {
+		query: schema.getQueryType()?.name,
+		mutation: schema.getMutationType()?.name,
+		subscription: schema.getSubscriptionType()?.name,
+	};
+	for (const operation of ['query', 'mutation', 'subscription'] as const) {
+		if (schemaRoots[operation] !== roots[operation]) {
+			throw new Error(
+				`The schema's ${operation} root type is ${formatRootType(schemaRoots[operation])}, but sources.roots.${operation} is ${formatRootType(roots[operation])}. Pass the roots generated with the schema.`,
+			);
+		}
+	}
+}
+
+function formatRootType(type: string | undefined) {
+	return type == null ? 'not set' : `"${type}"`;
+}
+
 function createSchemaError(cause: unknown) {
 	return new Error(
 		`Couldn't build schema! Reason: ${cause instanceof Error ? cause.message : cause}`,
@@ -121,6 +148,7 @@ function createSchemaError(cause: unknown) {
 function compileModules<Context, Info>(
 	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>,
 	document: DocumentNode,
+	roots: RootTypes,
 	plugins: AppPlugin<any, any>[] = [],
 ) {
 	if (modules.length === 0) {
@@ -132,7 +160,7 @@ function compileModules<Context, Info>(
 	const schemaHooks: Array<(schema: GraphQLSchema) => void> = [];
 	for (const plugin of plugins) {
 		registeredPluginIds.add(plugin.id);
-		const result = plugin.mutate(moduleCompilers as ModuleCompiler[], { document });
+		const result = plugin.mutate(moduleCompilers as ModuleCompiler[], { document, roots });
 		if (result?.schemaState) {
 			schemaStates.push(result.schemaState);
 		}

@@ -240,7 +240,7 @@ export const { auth, authAfter, authAppPlugin, scope, rule } = createAuth<
 );
 ```
 
-When `defaultScopes` is set, `authAppPlugin` attaches a fallback middleware to every operation field that doesn't carry an `auth()` / `authAfter()`. Unprotected operations can't slip through by accident.
+When `defaultScopes` is set, `authAppPlugin` attaches a fallback middleware to every operation field that doesn't carry an `auth()` / `authAfter()`. Unprotected operations can't slip through by accident. The keys name the operation, so with [custom root types](../guides/application#root-types) `Query` applies to the fields of the query root type, whatever it's called.
 
 ### Skipping defaults
 

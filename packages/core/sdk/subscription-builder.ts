@@ -32,6 +32,7 @@ export interface SubscriptionBuilderOptions<
 	Info,
 	Name extends string = string,
 > {
+	type: string;
 	field: Name;
 	context: BuilderContext<Subscription<unknown>, Source, Context, Args, Info>;
 }
@@ -44,10 +45,12 @@ export class SubscriptionBuilder<
 	Info,
 	Name extends string = string,
 > {
+	readonly #type: string;
 	readonly #field: Name;
 	readonly #context: BuilderContext<Subscription<unknown>, Source, Context, Args, Info>;
 
 	constructor(options: SubscriptionBuilderOptions<Result, Source, Context, Args, Info, Name>) {
+		this.#type = options.type;
 		this.#field = options.field;
 		this.#context = options.context;
 	}
@@ -75,6 +78,7 @@ export class SubscriptionBuilder<
 			>,
 			(nextContext) => {
 				return new SubscriptionBuilder<Result, Source, Context, Args, Info, Name>({
+					type: this.#type,
 					field: this.#field,
 					context: nextContext as BuilderContext<
 						Subscription<unknown>,
@@ -109,10 +113,10 @@ export class SubscriptionBuilder<
 				>,
 			) => {
 				return this.edit<Or<Payload, T>>()
-					.use(input, `Subscription.${this.#field}.subscribe.use`, {
+					.use(input, `${this.#type}.${this.#field}.subscribe.use`, {
 						kind: 'subscription',
 						phase: 'subscribe',
-						type: 'Subscription',
+						type: this.#type,
 						field: this.#field,
 					})
 					.commitToMethods();
@@ -121,7 +125,7 @@ export class SubscriptionBuilder<
 			subscribe: <T = Result>(
 				fn: Resolver<Subscription<Or<Payload, T>>, Source, Context, Args, Info>,
 			) => {
-				nameFunction(fn, `Subscription.${this.#field}.subscribe`);
+				nameFunction(fn, `${this.#type}.${this.#field}.subscribe`);
 				return new SubscriptionResolveBuilder<
 					Result,
 					Or<Payload, T>,
@@ -131,6 +135,7 @@ export class SubscriptionBuilder<
 					Info,
 					Name
 				>({
+					type: this.#type,
 					field: this.#field,
 					subscribeContext: this.#context as BuilderContext<
 						Subscription<Or<Payload, T>>,
@@ -156,6 +161,7 @@ interface SubscriptionResolveBuilderOptions<
 	Info,
 	Name extends string,
 > {
+	type: string;
 	field: Name;
 	subscribeContext: BuilderContext<Subscription<Source>, ParentSource, Context, Args, Info>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
@@ -171,6 +177,7 @@ class SubscriptionResolveBuilder<
 	Info,
 	Name extends string,
 > {
+	readonly #type: string;
 	readonly #field: Name;
 	readonly #subscribeContext: BuilderContext<
 		Subscription<Source>,
@@ -193,6 +200,7 @@ class SubscriptionResolveBuilder<
 			Name
 		>,
 	) {
+		this.#type = options.type;
 		this.#field = options.field;
 		this.#subscribeContext = options.subscribeContext;
 		this.#subscribe = options.subscribe;
@@ -214,6 +222,7 @@ class SubscriptionResolveBuilder<
 				Info,
 				Name
 			>({
+				type: this.#type,
 				field: this.#field,
 				subscribeContext: this.#subscribeContext,
 				subscribe: this.#subscribe,
@@ -234,6 +243,7 @@ class SubscriptionResolveBuilder<
 				Info,
 				Name
 			>({
+				type: this.#type,
 				field: this.#field,
 				subscribeContext: this.#subscribeContext,
 				subscribe: this.#subscribe,
@@ -244,20 +254,20 @@ class SubscriptionResolveBuilder<
 		return {
 			$use: (input) => {
 				return this.edit()
-					.use(input, `Subscription.${this.#field}.resolve.use`, {
+					.use(input, `${this.#type}.${this.#field}.resolve.use`, {
 						kind: 'subscription',
 						phase: 'resolve',
-						type: 'Subscription',
+						type: this.#type,
 						field: this.#field,
 					})
 					.commitToMethods();
 			},
 			map: (resolver) => {
-				nameFunction(resolver, `Subscription.${this.#field}.map`);
+				nameFunction(resolver, `${this.#type}.${this.#field}.map`);
 				return make(resolver);
 			},
 			resolve: (resolver) => {
-				nameFunction(resolver, `Subscription.${this.#field}.resolve`);
+				nameFunction(resolver, `${this.#type}.${this.#field}.resolve`);
 				return make(resolver);
 			},
 		};
@@ -274,6 +284,7 @@ interface SubscriptionFieldWithMakeOptions<
 	Info,
 	Name extends string,
 > {
+	type: string;
 	field: Name;
 	subscribeContext: BuilderContext<Subscription<Source>, ParentSource, Context, Args, Info>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
@@ -302,7 +313,7 @@ function createSubscriptionFieldWithMake<
 		Name
 	>,
 ): SubscriptionField<Expected, Result, ParentSource, Context, Args, Info, Name, Source> {
-	const prefix = `Subscription.${options.field}`;
+	const prefix = `${options.type}.${options.field}`;
 	const make = <R>(resolver: Resolver<R, Source, Context, Args, Info>) => {
 		return createSubscriptionFieldWithMake<
 			Expected,
@@ -314,6 +325,7 @@ function createSubscriptionFieldWithMake<
 			Info,
 			Name
 		>({
+			type: options.type,
 			field: options.field,
 			subscribeContext: options.subscribeContext,
 			subscribe: options.subscribe,
@@ -330,6 +342,7 @@ function createSubscriptionFieldWithMake<
 		undefinedAsNull: () => make(chainUndefinedAsNullResolver(options.resolver)),
 		[makeSymbol]: () =>
 			new SubscriptionCompiler<Expected, Source, ParentSource, Context, Args, Info, Name>({
+				type: options.type,
 				field: options.field,
 				subscribeContext: options.subscribeContext,
 				subscribe: options.subscribe,

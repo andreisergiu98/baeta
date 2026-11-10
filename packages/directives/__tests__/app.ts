@@ -1,13 +1,14 @@
 import { createApplication, type Middleware } from '@baeta/core';
 import {
 	type AppPlugin,
+	type RootTypes,
 	createFieldBuilder,
 	createModuleBuilder,
 	createSubscriptionBuilder,
 	createTypeBuilder,
 } from '@baeta/core/sdk';
 import test from '@baeta/testing';
-import { type DocumentNode, print } from 'graphql';
+import { buildSchema, type DocumentNode, print } from 'graphql';
 import type { InputDirective } from '../lib/directive.ts';
 import { inputDirectives, inputValidationAppPlugin } from '../lib/plugin.ts';
 
@@ -42,7 +43,7 @@ export function createTestSchema(options: TestSchemaOptions) {
 	if (Object.keys(subscriptions).length > 0) {
 		builders.Subscription = createTypeBuilder(
 			'Subscription',
-			mapFields(subscriptions, (_, field) => createSubscriptionBuilder(field)),
+			mapFields(subscriptions, (_, field) => createSubscriptionBuilder('Subscription', field)),
 		);
 	}
 
@@ -73,9 +74,18 @@ export function createTestSchema(options: TestSchemaOptions) {
 	}
 
 	return createApplication({
-		sources: { sdl, modules: [module.$schema(types)] },
+		sources: { sdl, roots: getRootTypes(sdl), modules: [module.$schema(types)] },
 		plugins: options.plugins ?? [inputValidationAppPlugin],
 	}).schema;
+}
+
+function getRootTypes(sdl: string): RootTypes {
+	const schema = buildSchema(sdl);
+	return {
+		query: schema.getQueryType()?.name ?? 'Query',
+		mutation: schema.getMutationType()?.name,
+		subscription: schema.getSubscriptionType()?.name,
+	};
 }
 
 function mapFields<T, R>(fields: Record<string, T>, fn: (value: T, field: string) => R) {

@@ -11,6 +11,7 @@ export type { Field, FieldMethods, FieldUsePlugin } from './field-methods.ts';
 export { createModuleBuilder } from './module.ts';
 export { ModuleCompiler } from './module-compiler.ts';
 export type { ModuleCompilerFactory, ModuleMethods, ModuleUsePlugin } from './module-methods.ts';
+export type { RootTypes } from './root-types.ts';
 export { createSchemaState, type SetSchemaState } from './schema-state.ts';
 export { createSubscriptionBuilder } from './subscription.ts';
 export type {

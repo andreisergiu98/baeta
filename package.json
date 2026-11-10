@@ -38,7 +38,7 @@
   "scripts": {
     "actions:build": "github-actions-workflow-builder --cleanup --directory .github/workflows-src",
     "actions:check": "github-actions-workflow-builder --cleanup --check --directory .github/workflows-src",
-    "build": "turbo build --filter='!./examples/*' --filter='!./website'",
+    "build": "turbo build --filter='!./examples/*' --filter='!./website' --filter='!./packages/create-baeta/meta/*'",
     "check:constraints": "yarn constraints",
     "check:deps": "turbo check:deps",
     "check:e2e": "yarn check:e2e:setup && yarn check:e2e:run",

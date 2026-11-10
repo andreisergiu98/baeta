@@ -43,6 +43,10 @@ export interface GeneratorPluginV1<Store = unknown> {
 	watch: GeneratorPluginV1WatchOptions;
 }
 
+export interface GeneratorPluginV1WithId<Store = unknown> extends GeneratorPluginV1<Store> {
+	id: symbol;
+}
+
 const defaultPluginFn: GeneratorPluginV1Fn<unknown> = async (_ctx, next) => {
 	return await next();
 };

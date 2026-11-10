@@ -1,6 +1,7 @@
 export type {
 	GeneratorOptions,
 	GeneratorPluginV1,
+	GeneratorPluginV1WithId,
 	WatcherFile,
 	WatcherListener,
 } from '@baeta/generator-sdk';

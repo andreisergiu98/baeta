@@ -26,7 +26,7 @@
     "directory": "packages/cli"
   },
   "bin": {
-    "baeta": "./bin/cli-dev.ts"
+    "baeta": "./bin/cli.ts"
   },
   "files": [
     "dist"
@@ -38,10 +38,6 @@
     ".": {
       "types": "./index.ts",
       "default": "./index.ts"
-    },
-    "./sdk": {
-      "types": "./sdk/index.ts",
-      "default": "./sdk/index.ts"
     }
   },
   "publishConfig": {
@@ -52,10 +48,6 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
-      },
-      "./sdk": {
-        "types": "./dist/sdk/index.d.ts",
-        "default": "./dist/sdk/index.js"
       }
     },
     "access": "public"
@@ -69,22 +61,19 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
+    "@baeta/cli-sdk": "workspace:^",
     "@baeta/generator": "workspace:^",
     "@baeta/plugin-graphql": "workspace:^",
     "@baeta/util-path": "workspace:^",
-    "execa": "^10.2.1",
-    "ink": "^7.1.1",
-    "node-pty": "1.2.0-beta.18",
-    "react": "catalog:prod",
-    "yargs": "^18.2.0"
+    "@bomb.sh/tab": "^0.0.22",
+    "citty": "^0.2.2",
+    "yocto-spinner": "^1.2.2"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@types/node": "catalog:dev",
-    "@types/react": "catalog:dev",
-    "@types/yargs": "^17.0.35",
     "graphql": "catalog:dev",
     "typescript": "catalog:dev"
   },
@@ -101,8 +90,7 @@
   },
   "typedocOptions": {
     "entryPoints": [
-      "./index.ts",
-      "./sdk/index.ts"
+      "./index.ts"
     ],
     "readme": "none",
     "tsconfig": "./tsconfig.json",

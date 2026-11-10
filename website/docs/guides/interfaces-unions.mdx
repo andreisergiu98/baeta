@@ -115,3 +115,41 @@ const mediaQuery = Query.media.resolve(() => {
   ];
 });
 ```
+
+## OneOf input objects
+
+A `@oneOf` input object takes exactly one of its fields, which makes it the input-side counterpart of a union. It needs `graphql` 16.9 or later.
+
+`src/modules/media/media.gql`
+
+```graphql
+input MediaLookup @oneOf {
+  id: ID
+  title: String
+}
+
+type Query {
+  media: [Media!]!
+  findMedia(by: MediaLookup!): Media
+}
+```
+
+The generated type is a union with one member per field. GraphQL rejects any value that doesn't set exactly one field and leaves out the fields that weren't set, so the field that was set is non-null and the others are typed `never`:
+
+```typescript
+export type MediaLookup =
+  | { id: Scalars["ID"]; title?: never }
+  | { id?: never; title: Scalars["String"] };
+```
+
+Checking whether a field is set narrows the value to that member:
+
+```typescript
+const findMedia = Query.findMedia.resolve(({ args }) => {
+  const { by } = args;
+  if (by.id != null) {
+    return media.find((item) => item.id === by.id) ?? null;
+  }
+  return media.find((item) => item.title === by.title) ?? null;
+});
+```

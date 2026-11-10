@@ -1,5 +1,14 @@
 # create-baeta
 
+## 2.0.0-next.19
+
+### Patch Changes
+
+- Scaffolded `start` scripts quote `--run` with double quotes, so they work with npm and pnpm on Windows. by [@andreisergiu98](https://github.com/andreisergiu98) in [#686](https://github.com/andreisergiu98/baeta/pull/686)
+  Pressing Ctrl+C at the runtime or package manager prompt now exits instead of falling back to node and npm.
+
+- Support `createApplication({ sources })`: `inputValidationAppPlugin` reads field arguments from the application's schema document, and the `create-baeta` templates pass the generated sources. by [@andreisergiu98](https://github.com/andreisergiu98) in [#682](https://github.com/andreisergiu98/baeta/pull/682)
+
 ## 2.0.0-next.18
 
 ### Patch Changes

@@ -1,5 +1,27 @@
 # @baeta/plugin-graphql
 
+## 2.0.0-next.19
+
+### Major Changes
+
+- `createApplication` takes `sources`, the default export of the generated `modules/index.ts`: `{ sdl, modules }`. The generator merges and validates the whole schema and writes it to `sdl.ts` in the types directory. Core builds it once with graphql-js instead of merging per-module typedefs with `@graphql-tools/schema`, and validates it at startup unless `assumeValid: true` is passed. by [@andreisergiu98](https://github.com/andreisergiu98) in [#682](https://github.com/andreisergiu98/baeta/pull/682)
+
+  Removed: `$directive`, `SchemaTransformer`, the `executableSchemaOptions` and `buildSchema` options, `ModuleCompiler.typedef`, and the typedef argument of `createModuleBuilder`. App plugins receive the schema document as the second argument of `mutate`. `@baeta/util-graphql` adds `buildSdl`.
+
+### Minor Changes
+
+- Print schema descriptions, default values and `@specifiedBy` URLs as TSDoc in the generated types and module builders, and add a `deprecatedTsdoc` option that tags deprecations with `@deprecated` instead of noting them in the description. by [@andreisergiu98](https://github.com/andreisergiu98) in [#695](https://github.com/andreisergiu98/baeta/pull/695)
+
+- Generate `@oneOf` input objects as a union with exactly one field set, instead of an object with every field optional. by [@andreisergiu98](https://github.com/andreisergiu98) in [#696](https://github.com/andreisergiu98/baeta/pull/696)
+
+### Patch Changes
+
+- `makeRelativePathForImport` moved from plugin-graphql to `@baeta/util-path` so the federation plugin can share it. by [@andreisergiu98](https://github.com/andreisergiu98) in [#689](https://github.com/andreisergiu98/baeta/pull/689)
+- Updated dependencies [[`498d138`](https://github.com/andreisergiu98/baeta/commit/498d1380eecdbf66370243194be768b1b8a821db), [`5a6632f`](https://github.com/andreisergiu98/baeta/commit/5a6632f4bfa4b50d03b6c42b5247ca378535e7ff), [`23968bb`](https://github.com/andreisergiu98/baeta/commit/23968bb87a40c0023d23629c86122b6a6991c6fc), [`2ee2b3c`](https://github.com/andreisergiu98/baeta/commit/2ee2b3c51c055f8d66404404d0c752d511bb6158)]:
+  - @baeta/util-graphql@2.0.0-next.7
+  - @baeta/generator-sdk@2.0.0-next.9
+  - @baeta/util-path@2.0.0-next.7
+
 ## 2.0.0-next.18
 
 ### Minor Changes

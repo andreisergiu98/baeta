@@ -1,5 +1,23 @@
 # @baeta/plugin-directives
 
+## 2.0.0-next.19
+
+### Major Changes
+
+- Move input directives from `@baeta/core` to `@baeta/directives` as `inputValidationAppPlugin`, registered per module with `$use(inputDirectives([...]))`. Input directives are validation-only: `getValue()` became `value`, `setValue()` and the `@trim`, `@lower` and `@upper` directives were removed. by [@andreisergiu98](https://github.com/andreisergiu98) in [#678](https://github.com/andreisergiu98/baeta/pull/678)
+
+  App plugins can return `onSchema` from `mutate`, and `ModuleCompiler` exposes `typedef`.
+
+### Patch Changes
+
+- The directives, pagination and federation plugins add their `.gql` files in `setup`, so federation no longer fails when it's listed before the other two. The gitignore plugin runs in `end` and no longer needs to be listed first. by [@andreisergiu98](https://github.com/andreisergiu98) in [#685](https://github.com/andreisergiu98/baeta/pull/685)
+
+- Support `createApplication({ sources })`: `inputValidationAppPlugin` reads field arguments from the application's schema document, and the `create-baeta` templates pass the generated sources. by [@andreisergiu98](https://github.com/andreisergiu98) in [#682](https://github.com/andreisergiu98/baeta/pull/682)
+- Updated dependencies [[`1f7d6cd`](https://github.com/andreisergiu98/baeta/commit/1f7d6cdf9ffdba0fc9d8f10b1fcbeba39c992faa), [`5a6632f`](https://github.com/andreisergiu98/baeta/commit/5a6632f4bfa4b50d03b6c42b5247ca378535e7ff), [`498d138`](https://github.com/andreisergiu98/baeta/commit/498d1380eecdbf66370243194be768b1b8a821db), [`23968bb`](https://github.com/andreisergiu98/baeta/commit/23968bb87a40c0023d23629c86122b6a6991c6fc), [`2ee2b3c`](https://github.com/andreisergiu98/baeta/commit/2ee2b3c51c055f8d66404404d0c752d511bb6158)]:
+  - @baeta/directives@2.0.0-next.19
+  - @baeta/generator-sdk@2.0.0-next.9
+  - @baeta/util-path@2.0.0-next.7
+
 ## 2.0.0-next.18
 
 ### Patch Changes

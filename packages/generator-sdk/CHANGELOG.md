@@ -1,5 +1,23 @@
 # @baeta/generator-sdk
 
+## 2.0.0-next.9
+
+### Major Changes
+
+- `File.persisted` is replaced by `File.state`, and generated files start with a `@fileHash` comment. by [@andreisergiu98](https://github.com/andreisergiu98) in [#684](https://github.com/andreisergiu98/baeta/pull/684)
+  `Ctx` has `plugins` and `pluginStates` instead of `didSetup`, `didGenerate`, `didEnd` and `pluginNames`. `changedFile` is now `changedFiles`, because watch mode batches changes made during a run into one rerun.
+  The generator cache moved from the system temp folder to `node_modules/.cache/baeta`, set with the new `cacheDir` option, and is only saved after a successful run.
+  `FileManager` keeps only `files`, `add`, `createAndAdd` and `get`; the generator writes files after each step and removes stale ones at the end of a run.
+
+### Minor Changes
+
+- Print schema descriptions, default values and `@specifiedBy` URLs as TSDoc in the generated types and module builders, and add a `deprecatedTsdoc` option that tags deprecations with `@deprecated` instead of noting them in the description. by [@andreisergiu98](https://github.com/andreisergiu98) in [#695](https://github.com/andreisergiu98/baeta/pull/695)
+
+### Patch Changes
+
+- Updated dependencies [[`2ee2b3c`](https://github.com/andreisergiu98/baeta/commit/2ee2b3c51c055f8d66404404d0c752d511bb6158)]:
+  - @baeta/util-path@2.0.0-next.7
+
 ## 2.0.0-next.8
 
 ### Patch Changes

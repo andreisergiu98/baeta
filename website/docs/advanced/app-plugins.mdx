@@ -19,7 +19,7 @@ import sources from "./modules/index.ts";
 
 const baeta = createApplication({
   sources,
-  plugins: [authAppPlugin, complexityAppPlugin],
+  plugins: [complexityAppPlugin, authAppPlugin],
 });
 ```
 
@@ -40,7 +40,16 @@ The order in `plugins` matters. Two invariants:
 
 ## Choosing an order
 
-When two plugins both gate field access, the order shapes a real tradeoff. Auth vs. complexity is the canonical example:
+The order is your choice. Each plugin rejects a request at its own position, so the order decides which check a caller hits first.
 
-- **`plugins: [authAppPlugin, complexityAppPlugin]`** _(recommended)._ Auth runs first; unauthenticated requests bounce before complexity runs. This avoids leaking schema shape through complexity errors and matches how most large GraphQL APIs (GitHub, Shopify, GitLab) behave.
-- **`plugins: [complexityAppPlugin, authAppPlugin]`.** Complexity runs first; over-budget queries are rejected before auth's scope loaders run. Saves I/O on expensive-but-doomed queries, but unauthenticated callers can probe complexity errors to learn about your schema.
+A common setup authenticates before execution: creating the context throws for an invalid token and lets requests without one through as anonymous. The plugins handle the rest:
+
+```typescript
+plugins: [complexityAppPlugin, inputValidationAppPlugin, authAppPlugin],
+```
+
+- Complexity rejects over-budget queries before any other work runs.
+- Input validation rejects invalid arguments, so auth rules see validated arguments.
+- Auth checks permissions.
+
+With `authAppPlugin` first, anonymous callers are rejected before complexity or validation runs, so they can't learn about the schema from those errors. The cost is running scope loaders for queries that complexity would reject anyway.

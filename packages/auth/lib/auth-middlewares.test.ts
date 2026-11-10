@@ -140,6 +140,7 @@ function testCreateMiddleware(
 		await t.throwsAsync(async () => middleware(resolver, params), {
 			instanceOf: ForbiddenError,
 		});
+		t.true(resolver.notCalled);
 	});
 
 	test(`${name} respects skipDefaults`, async (t) => {

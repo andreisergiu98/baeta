@@ -74,7 +74,7 @@ Forgetting to register `complexityAppPlugin` is a build-time error: if any modul
 :::
 
 :::tip
-Register `authAppPlugin` **before** `complexityAppPlugin` for most APIs — unauthenticated requests bounce before any cost calculation runs. Complexity-first saves I/O on expensive-but-doomed queries but leaks schema shape to anonymous callers. See [App Plugins](./app-plugins#plugin-ordering) for the full tradeoff.
+Whether complexity runs before or after auth is your choice; see [Choosing an order](./app-plugins#choosing-an-order) for the tradeoff.
 :::
 
 ## Customizing the rules

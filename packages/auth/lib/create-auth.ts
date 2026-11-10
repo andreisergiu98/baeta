@@ -3,14 +3,12 @@ import {
 	type AppPlugin,
 	type FieldUsePlugin,
 	type ModuleCompiler,
-	type PluginId,
 	type SubscriptionUsePlugin,
 	type TypeUsePlugin,
 	createAppPluginId,
 	makePluginSymbol,
 	nameFunction,
 } from '@baeta/core/sdk';
-import { isOperationType } from '../utils/resolver.ts';
 import {
 	type AuthMiddlewareOptions,
 	type GetPostScopeRules,
@@ -41,9 +39,13 @@ type AuthPlugin<Result, Source, Context, Args, Info> = FieldUsePlugin<
 	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'resolve', AuthState> &
 	SubscriptionUsePlugin<Result, Source, Context, Args, Info, 'subscribe', AuthState>;
 
-interface AuthState {
-	hasAuth: true;
+interface AuthEntry {
+	name: string;
+	after: boolean;
+	build: (type: string) => Middleware<any, any, any, any, any>;
 }
+
+type AuthState = AuthEntry[];
 
 /** Configuration options for Auth */
 export interface AuthOptions<Scopes extends ScopesShape, Grants extends string> {
@@ -78,29 +80,22 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 	const cacheKeyMap: ScopeCacheKeyMap<Scopes> = globalOptions.cacheKeyMap ?? {};
 
 	const makeAuthBuilder = <Result, Source, Context, Args, Info>(
-		buildMiddleware: (type: string) => Middleware<Result, Source, Context, Args, Info>,
+		after: boolean,
+		build: (type: string) => Middleware<Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> => {
 		return {
 			[makePluginSymbol]: {
 				id,
 				make: (session, metadata) => {
-					const middleware = buildMiddleware(metadata.type) as Middleware<
-						any,
-						Source,
-						Context,
-						any,
-						Info
-					>;
-					nameFunction(
-						middleware,
-						buildMiddlewareName(
-							metadata.type,
-							metadata.kind !== 'type' ? metadata.field : undefined,
-							metadata.kind === 'subscription' ? metadata.phase : undefined,
-						),
+					const name = buildMiddlewareName(
+						metadata.type,
+						metadata.kind !== 'type' ? metadata.field : undefined,
+						metadata.kind === 'subscription' ? metadata.phase : undefined,
 					);
-					session.setPluginState(id, { hasAuth: true });
-					session.addMiddleware(middleware);
+					session.setPluginState(id, [
+						...(session.getPluginState(id) ?? []),
+						{ name, after, build },
+					]);
 				},
 			},
 		};
@@ -110,7 +105,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Source, Context, Args, Info>,
 		options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> =>
-		makeAuthBuilder<Result, Source, Context, Args, Info>((type) =>
+		makeAuthBuilder<Result, Source, Context, Args, Info>(false, (type) =>
 			createMiddleware(
 				type,
 				loadScopesFn,
@@ -127,13 +122,8 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		getScopes: GetPostScopeRules<Scopes, Grants, Result, Source, Context, Args, Info>,
 		options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> =>
-		makeAuthBuilder<Result, Source, Context, Args, Info>((type) => {
-			if (type === 'Mutation') {
-				throw new Error(
-					'"authAfter" cannot be used on Mutations! authAfter is executed after the resolver thus cannot protect mutations. Use "auth" instead for mutations.',
-				);
-			}
-			return createPostMiddleware(
+		makeAuthBuilder<Result, Source, Context, Args, Info>(true, (type) =>
+			createPostMiddleware(
 				type,
 				loadScopesFn,
 				cacheKeyMap,
@@ -142,34 +132,54 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 				defaultScopes,
 				options,
 				globalOptions.errorResolver,
-			);
-		});
+			),
+		);
+
+	const createFallback = (type: string) => {
+		if (defaultScopes == null) {
+			return;
+		}
+		return createFallbackMiddleware(
+			type,
+			loadScopesFn,
+			cacheKeyMap,
+			authStore,
+			defaultScopes,
+			globalOptions.errorResolver,
+		);
+	};
 
 	const authAppPlugin: AppPlugin<AuthState> = {
 		id,
 		mutate: (compilers) => {
-			if (defaultScopes == null) return;
 			for (const typeCompiler of iterateTypes(compilers)) {
-				if (!isOperationType(typeCompiler.type)) continue;
-				if (defaultScopes[typeCompiler.type] == null) continue;
-				if (hasAuth(typeCompiler.getPluginState(id))) continue;
+				const type = typeCompiler.type;
+				const typeEntries = typeCompiler.getPluginState(id) ?? [];
+				const fallback = typeEntries.length === 0 ? createFallback(type) : undefined;
+
 				for (const fieldCompiler of typeCompiler.fields) {
-					if (hasAuth(readFieldAuthState(fieldCompiler, id))) continue;
-					const middleware = createFallbackMiddleware(
-						typeCompiler.type,
-						loadScopesFn,
-						cacheKeyMap,
-						authStore,
-						defaultScopes,
-						globalOptions.errorResolver,
+					const subscribe = fieldCompiler.kind === 'Subscription';
+					const target = subscribe ? fieldCompiler.subscribe : fieldCompiler;
+					const middlewares = buildMiddlewares(
+						type,
+						[...typeEntries, ...(target.getPluginState(id) ?? [])],
+						subscribe,
 					);
-					if (!middleware) {
-						continue;
+					if (middlewares.length === 0 && fallback != null) {
+						middlewares.push(fallback);
 					}
-					if (fieldCompiler.kind === 'Field') {
-						fieldCompiler.addTopLevelMiddleware(middleware);
-					} else {
-						fieldCompiler.subscribe.addTopLevelMiddleware(middleware);
+					for (const middleware of middlewares) {
+						target.addTopLevelMiddleware(middleware);
+					}
+					if (subscribe) {
+						const subscriptionResolveMiddlewares = buildMiddlewares(
+							type,
+							fieldCompiler.resolve.getPluginState(id) ?? [],
+							false,
+						);
+						for (const middleware of subscriptionResolveMiddlewares) {
+							fieldCompiler.resolve.addTopLevelMiddleware(middleware);
+						}
 					}
 				}
 			}
@@ -195,17 +205,22 @@ function buildMiddlewareName(
 	return `${type}.$use.auth`;
 }
 
-function hasAuth(state: AuthState | undefined) {
-	return state?.hasAuth === true;
-}
-
-function readFieldAuthState(
-	field: ModuleCompiler['types'][number]['fields'][number],
-	pluginId: PluginId<AuthState>,
-): AuthState | undefined {
-	return field.kind === 'Field'
-		? field.getPluginState(pluginId)
-		: field.subscribe.getPluginState(pluginId);
+function buildMiddlewares(type: string, entries: Readonly<AuthState>, subscribe: boolean) {
+	return entries.map((entry) => {
+		if (entry.after && type === 'Mutation') {
+			throw new Error(
+				'"authAfter" cannot be used on Mutations! authAfter is executed after the resolver thus cannot protect mutations. Use "auth" instead for mutations.',
+			);
+		}
+		if (entry.after && subscribe) {
+			throw new Error(
+				'"authAfter" cannot be used on subscribe! authAfter is executed after subscribe thus cannot protect subscriptions. Use "auth" instead, or "authAfter" on resolve.',
+			);
+		}
+		const middleware = entry.build(type);
+		nameFunction(middleware, entry.name);
+		return middleware;
+	});
 }
 
 function* iterateTypes(compilers: ModuleCompiler[]) {

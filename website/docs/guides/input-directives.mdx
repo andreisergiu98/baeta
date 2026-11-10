@@ -25,7 +25,7 @@ Any module that registers input directives requires the plugin, so `createApplic
 
 ### Plugin order
 
-Validation runs as a top-level middleware: it always runs before module, type and field middlewares, including `auth(...)` rules, and before `subscribe` on subscription fields. Among [app plugins](../advanced/app-plugins#plugin-ordering), earlier plugins run first. Register it after `complexityAppPlugin`, so over-budget queries are rejected before any validation work, and before `authAppPlugin`, so auth's default scopes see validated arguments:
+Validation runs as a top-level middleware: it always runs before module, type and field middlewares, and before `subscribe` on subscription fields. Among [app plugins](../advanced/app-plugins#plugin-ordering), earlier plugins run first. In the [common setup](../advanced/app-plugins#choosing-an-order) it sits after `complexityAppPlugin`, so over-budget queries are rejected before any validation work, and before `authAppPlugin`, so auth rules see validated arguments:
 
 ```typescript
 plugins: [complexityAppPlugin, inputValidationAppPlugin, authAppPlugin],

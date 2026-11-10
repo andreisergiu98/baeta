@@ -1,5 +1,18 @@
 # @baeta/util-graphql
 
+## 2.0.0-next.7
+
+### Major Changes
+
+- `createApplication` takes `sources`, the default export of the generated `modules/index.ts`: `{ sdl, modules }`. The generator merges and validates the whole schema and writes it to `sdl.ts` in the types directory. Core builds it once with graphql-js instead of merging per-module typedefs with `@graphql-tools/schema`, and validates it at startup unless `assumeValid: true` is passed. by [@andreisergiu98](https://github.com/andreisergiu98) in [#682](https://github.com/andreisergiu98/baeta/pull/682)
+
+  Removed: `$directive`, `SchemaTransformer`, the `executableSchemaOptions` and `buildSchema` options, `ModuleCompiler.typedef`, and the typedef argument of `createModuleBuilder`. App plugins receive the schema document as the second argument of `mutate`. `@baeta/util-graphql` adds `buildSdl`.
+
+### Patch Changes
+
+- Updated dependencies [[`2ee2b3c`](https://github.com/andreisergiu98/baeta/commit/2ee2b3c51c055f8d66404404d0c752d511bb6158)]:
+  - @baeta/util-path@2.0.0-next.7
+
 ## 2.0.0-next.6
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @baeta/federation
 
+## 2.0.0-next.19
+
+### Patch Changes
+
+- `makeRelativePathForImport` moved from plugin-graphql to `@baeta/util-path` so the federation plugin can share it. by [@andreisergiu98](https://github.com/andreisergiu98) in [#689](https://github.com/andreisergiu98/baeta/pull/689)
+
 ## 2.0.0-next.18
 
 ## 2.0.0-next.17

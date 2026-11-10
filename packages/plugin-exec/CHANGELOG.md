@@ -1,5 +1,15 @@
 # @baeta/plugin-exec
 
+## 2.0.0-next.19
+
+### Patch Changes
+
+- String commands run through the shell, and they run in the generator's working directory instead of `process.cwd()`. by [@andreisergiu98](https://github.com/andreisergiu98) in [#687](https://github.com/andreisergiu98/baeta/pull/687)
+  The new `cwd` option sets a different directory, resolved against the generator's.
+- Updated dependencies [[`5a6632f`](https://github.com/andreisergiu98/baeta/commit/5a6632f4bfa4b50d03b6c42b5247ca378535e7ff), [`23968bb`](https://github.com/andreisergiu98/baeta/commit/23968bb87a40c0023d23629c86122b6a6991c6fc), [`2ee2b3c`](https://github.com/andreisergiu98/baeta/commit/2ee2b3c51c055f8d66404404d0c752d511bb6158)]:
+  - @baeta/generator-sdk@2.0.0-next.9
+  - @baeta/util-path@2.0.0-next.7
+
 ## 2.0.0-next.18
 
 ### Patch Changes

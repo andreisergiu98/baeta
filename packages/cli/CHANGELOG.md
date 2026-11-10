@@ -1,5 +1,17 @@
 # @baeta/cli
 
+## 2.0.0-next.19
+
+### Patch Changes
+
+- `generate` prints timestamped lines with a spinner instead of an Ink UI, and exits 1 without a valid config. by [@andreisergiu98](https://github.com/andreisergiu98) in [#683](https://github.com/andreisergiu98/baeta/pull/683)
+  `generate --run` passes on the command's exit code and stdin instead of hanging. With `--watch`, a crashed command starts again after the next successful generation.
+  `@baeta/cli/sdk` moved to the new `@baeta/cli-sdk` package, and CLI plugins can add their own commands.
+- Updated dependencies [[`498d138`](https://github.com/andreisergiu98/baeta/commit/498d1380eecdbf66370243194be768b1b8a821db), [`5a6632f`](https://github.com/andreisergiu98/baeta/commit/5a6632f4bfa4b50d03b6c42b5247ca378535e7ff), [`23968bb`](https://github.com/andreisergiu98/baeta/commit/23968bb87a40c0023d23629c86122b6a6991c6fc), [`e9ae29e`](https://github.com/andreisergiu98/baeta/commit/e9ae29e816e46a389d56226533d4d67dbb6d0e8f), [`2ee2b3c`](https://github.com/andreisergiu98/baeta/commit/2ee2b3c51c055f8d66404404d0c752d511bb6158)]:
+  - @baeta/plugin-graphql@2.0.0-next.19
+  - @baeta/generator@2.0.0-next.9
+  - @baeta/util-path@2.0.0-next.7
+
 ## 2.0.0-next.18
 
 ### Patch Changes

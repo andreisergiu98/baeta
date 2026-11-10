@@ -1,5 +1,21 @@
 # @baeta/auth
 
+## 2.0.0-next.19
+
+### Minor Changes
+
+- All auth checks, including `auth()` and `authAfter()` on types and fields, now run as top-level middlewares at `authAppPlugin`'s position, so plugin order applies to them. by [@andreisergiu98](https://github.com/andreisergiu98) in [#691](https://github.com/andreisergiu98/baeta/pull/691)
+  Boolean scopes such as `auth(scope.isLoggedIn)` and default scopes now hit the scope cache.
+  `authAfter` checks default scopes before the resolver, and using it on a Mutation or a subscription's `subscribe` fails when the application is created.
+  Nested `rule.or` failures keep their error codes, and `rule.race` fails with every rule's error, like `rule.or`, instead of a new `ForbiddenError`.
+
+### Patch Changes
+
+- Updated dependencies [[`1f7d6cd`](https://github.com/andreisergiu98/baeta/commit/1f7d6cdf9ffdba0fc9d8f10b1fcbeba39c992faa), [`498d138`](https://github.com/andreisergiu98/baeta/commit/498d1380eecdbf66370243194be768b1b8a821db)]:
+  - @baeta/core@2.0.0-next.19
+  - @baeta/errors@2.0.0-next.19
+  - @baeta/promises@2.0.0-next.19
+
 ## 2.0.0-next.18
 
 ### Patch Changes

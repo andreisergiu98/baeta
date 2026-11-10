@@ -2937,8 +2937,8 @@ __metadata:
     "@baeta/generator-sdk": "workspace:^"
     "@baeta/testing": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
+    "@baeta/util-path": "workspace:^"
     "@types/node": "catalog:dev"
-    execa: "npm:^10.2.1"
     typescript: "catalog:dev"
   languageName: unknown
   linkType: soft

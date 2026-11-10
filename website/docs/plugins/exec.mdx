@@ -37,6 +37,9 @@ export default defineConfig({
         await buildAssets();
       },
 
+      // Optional: Working directory for string commands, relative to the generator's cwd
+      cwd: 'assets',
+
       // Optional: Watch configuration for development mode
       watch: (generatorOptions, watcher, reload) => {
         const assetsPath = resolve(generatorOptions.cwd, 'src/assets');

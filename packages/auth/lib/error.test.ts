@@ -93,3 +93,21 @@ test('aggregateErrorResolver prioritizes 401 status code', (t) => {
 
 	t.deepEqual(result.extensions.http, { status: 401 });
 });
+
+test('aggregateErrorResolver flattens nested AggregateErrors', (t) => {
+	const unauthenticated = new UnauthenticatedError();
+	const forbidden = new GraphQLError('Forbidden');
+
+	const nested = aggregateErrorResolver(
+		new AggregateError([new AggregateError([unauthenticated, forbidden])]),
+	) as AggregateGraphQLError;
+	const siblings = aggregateErrorResolver(
+		new AggregateError([new AggregateError([unauthenticated]), forbidden]),
+	) as AggregateGraphQLError;
+
+	t.true(nested instanceof AggregateGraphQLError);
+	t.is(nested.extensions.errors.length, 2);
+	t.deepEqual(nested.extensions.http, { status: 401 });
+	t.is(siblings.extensions.errors.length, 2);
+	t.is(siblings.extensions.errors[0].extensions?.code, BaetaErrorCode.Unauthenticated);
+});

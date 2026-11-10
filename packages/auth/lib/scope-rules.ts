@@ -6,10 +6,8 @@ import {
 	mapMaybePromiseAny,
 	thenMaybePromise,
 } from '@baeta/promises';
-import { GraphQLError } from 'graphql';
 import type { AuthStoreResult } from './auth-store.ts';
 import type { GrantCache } from './grant-cache.ts';
-import { logger } from './logger.ts';
 import type { ScopesShape } from './scope-shape.ts';
 
 export type LogicRule = 'and' | 'or' | 'chain' | 'race';
@@ -141,23 +139,15 @@ export function verifyRaceScopes<Scopes extends ScopesShape, Grants extends stri
 	scopes: ScopeRules<Scopes, Grants>[],
 	store: AuthStoreResult,
 	index = 0,
+	errors: unknown[] = [],
 ): VerifyResult {
 	if (index >= scopes.length) {
-		throw new ForbiddenError();
+		throw new AggregateError(errors);
 	}
 	return thenMaybePromise(
 		() => verifyScope(params, scopes[index], store),
 		(): true => true,
-		(err) => {
-			if (!(err instanceof GraphQLError)) {
-				logger.warn({
-					type: 'non-graphql-error',
-					message: `Non GraphQLError encountered by auth`,
-					extra: { origin: err },
-				});
-			}
-			return verifyRaceScopes(params, scopes, store, index + 1);
-		},
+		(err) => verifyRaceScopes(params, scopes, store, index + 1, [...errors, err]),
 	);
 }
 

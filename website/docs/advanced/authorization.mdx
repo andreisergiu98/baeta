@@ -95,7 +95,7 @@ The `authAppPlugin` must be passed to `createApplication`. If a module uses `aut
 :::
 
 :::tip
-Register `authAppPlugin` before plugins that perform per-field work (complexity, caching, logging). Middlewares attached by earlier plugins wrap those attached by later plugins, so auth-first means unauthenticated requests bounce immediately without exposing internals. See [App Plugins](./app-plugins#plugin-ordering) for the contract.
+Every auth check, including `auth(...)` and `authAfter(...)` on types and fields, runs at `authAppPlugin`'s position among the app plugins, outside module, type and field middlewares. Where to put it is your choice; see [Choosing an order](./app-plugins#choosing-an-order).
 :::
 
 ## Composing rules
@@ -114,12 +114,12 @@ Use `scope` to produce a single rule:
 
 Combine rules with one of four combinators. Each takes two or more rules:
 
-| Combinator   | Semantics                                                        |
-| ------------ | ---------------------------------------------------------------- |
-| `rule.and`   | All rules must succeed (parallel)                                |
-| `rule.or`    | Any rule may succeed (parallel; aggregates errors when all fail) |
-| `rule.chain` | Rules evaluated in order; stops on first failure                 |
-| `rule.race`  | Rules evaluated in order; stops on first success                 |
+| Combinator   | Semantics                                                                         |
+| ------------ | --------------------------------------------------------------------------------- |
+| `rule.and`   | All rules must succeed (parallel)                                                 |
+| `rule.or`    | Any rule may succeed (parallel; aggregates errors when all fail)                  |
+| `rule.chain` | Rules evaluated in order; stops on first failure                                  |
+| `rule.race`  | Rules evaluated in order; stops on first success; aggregates errors when all fail |
 
 Combinators nest:
 
@@ -184,6 +184,8 @@ const userQuery = Query.user
   )
   .resolve(({ args }) => db.user.findFirst({ where: args.where }));
 ```
+
+Default scopes are still checked before the resolver runs. `authAfter` can't be used on mutations or on a subscription's `subscribe`, because their side effects would already have happened, so `createApplication` throws. Use `auth` there, or `authAfter` on a subscription's `resolve`.
 
 ### Type-wide rules
 
@@ -409,7 +411,7 @@ While an async scope loader runs, its in-flight `Promise<boolean>` is cached, so
 `createAuth` accepts an `errorResolver` that maps any error thrown during authorization. Defaults:
 
 - A single `GraphQLError` passes through unchanged.
-- An `AggregateError` (from `rule.or`) collapses into an `AggregateGraphQLError`, with HTTP status reconciled to `401` if any constituent is unauthenticated.
+- An `AggregateError` (from `rule.or` or `rule.race`, including nested ones) collapses into an `AggregateGraphQLError`, with HTTP status reconciled to `401` if any constituent is unauthenticated.
 - Anything else is logged and rethrown wrapped in `InternalServerError`.
 
 Override with a `(err) => unknown`:

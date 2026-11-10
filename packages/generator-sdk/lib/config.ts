@@ -72,6 +72,14 @@ export interface GeneratorOptions {
 	 * @defaultValue 'node_modules/.cache/baeta'
 	 */
 	cacheDir?: string;
+
+	/**
+	 * Tag deprecated fields, arguments and input fields with `@deprecated` in the generated TSDoc,
+	 * so editors strike them through wherever they're used, resolvers included.
+	 * When disabled, the deprecation reason is added to the description instead, as it always is for enum values.
+	 * @defaultValue false
+	 */
+	deprecatedTsdoc?: boolean;
 }
 
 export interface NormalizedGeneratorOptions {
@@ -84,6 +92,7 @@ export interface NormalizedGeneratorOptions {
 	loaders?: Loader[];
 	importExtension: '.js' | '.ts' | '';
 	cacheDir: string;
+	deprecatedTsdoc: boolean;
 }
 
 export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptions {
@@ -104,5 +113,6 @@ export function loadOptions(options: GeneratorOptions): NormalizedGeneratorOptio
 		loaders: options.loaders,
 		importExtension: options.importExtension === false ? '' : (options.importExtension ?? '.ts'),
 		cacheDir: resolve(cwd, options.cacheDir ?? 'node_modules/.cache/baeta'),
+		deprecatedTsdoc: options.deprecatedTsdoc ?? false,
 	};
 }

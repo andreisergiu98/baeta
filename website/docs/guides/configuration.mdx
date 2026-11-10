@@ -36,6 +36,11 @@ export default defineConfig({
     // the ones it no longer generates (default: "node_modules/.cache/baeta")
     cacheDir: "node_modules/.cache/baeta",
 
+    // Tag deprecated fields, arguments and input fields with @deprecated so editors
+    // strike them through; when false, the deprecation reason is added to the
+    // description instead (default: false)
+    deprecatedTsdoc: false,
+
     // Options for generated files
     fileOptions: {
       // Add lint-disable comments at the top of generated files.

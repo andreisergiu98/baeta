@@ -1,14 +1,17 @@
-import type { ModuleRegistry } from '@baeta/util-graphql';
+import type { DefinitionsMap, ModuleRegistry } from '@baeta/util-graphql';
 import { join, makeRelativePathForImport } from '@baeta/util-path';
 import { pascalCase } from 'change-case';
 import type { FieldInfoMap } from './field-info.ts';
 import { namespace } from './namespace.ts';
+import { printFieldTsdoc, printScalarTsdoc, printTypeTsdoc, withTsdoc } from './printer-tsdoc.ts';
 import { getArgsTypeName } from './printer-types.ts';
 import { buildBlock, buildCodeBlock, indent } from './printer-utils.ts';
 
 export interface ModulePrinterConfig {
 	registry: ModuleRegistry;
 	fieldInfo: FieldInfoMap;
+	globalDefinitions: DefinitionsMap;
+	deprecatedTsdoc: boolean;
 	typesDir: string;
 	modulesDir: string;
 	moduleDefinitionName: string;
@@ -125,34 +128,36 @@ function printModuleIndexTypeField(typeName: string, fieldName: string) {
 
 function printBaetaModuleTypesForFields(config: ModulePrinterConfig, isFactory: boolean) {
 	return config.registry.defined.objects
-		.map((typeName) =>
-			printObjectTypeModuleType(typeName, config.registry.picks.objects, isFactory),
-		)
+		.map((typeName) => printObjectTypeModuleType(config, typeName, isFactory))
 		.filter(Boolean);
 }
 
 function printObjectTypeModuleType(
+	config: ModulePrinterConfig,
 	typeName: string,
-	objects: Record<string, string[] | undefined>,
 	isFactory: boolean,
 ) {
-	const object = objects[typeName];
+	const object = config.registry.picks.objects[typeName];
 	if (!object) {
 		return '';
 	}
 	const parentType = getParentType(typeName);
 	const contextType = getContextType();
 	const infoType = getInfoType();
-	if (isFactory) {
-		return `${typeName}: ${namespace.sdk}.TypeCompilerFactory<${parentType}, ${contextType}, ${infoType}, BaetaModuleObjectTypeFields['${typeName}']['Factory']>`;
-	}
-	return `${typeName}: ${namespace.sdk}.TypeMethods<${parentType}, ${contextType}, ${infoType}, BaetaModuleObjectTypeFields['${typeName}']['Builder'], BaetaModuleObjectTypeFields['${typeName}']['Factory']>`;
+	const definition = config.globalDefinitions.objectTypeMap.get(typeName);
+	const tsdoc = definition == null ? null : printTypeTsdoc(definition);
+	const moduleType = isFactory
+		? `${typeName}: ${namespace.sdk}.TypeCompilerFactory<${parentType}, ${contextType}, ${infoType}, BaetaModuleObjectTypeFields['${typeName}']['Factory']>`
+		: `${typeName}: ${namespace.sdk}.TypeMethods<${parentType}, ${contextType}, ${infoType}, BaetaModuleObjectTypeFields['${typeName}']['Builder'], BaetaModuleObjectTypeFields['${typeName}']['Factory']>`;
+	return withTsdoc(tsdoc, moduleType);
 }
 
 function printBaetaModuleTypesScalars(config: ModulePrinterConfig) {
-	return config.registry.defined.scalars.map(
-		(scalar) => `${scalar}: ${namespace.graphql}.GraphQLScalarType`,
-	);
+	return config.registry.defined.scalars.map((scalar) => {
+		const definition = config.globalDefinitions.scalarTypeMap.get(scalar);
+		const tsdoc = definition == null ? null : printScalarTsdoc(definition);
+		return withTsdoc(tsdoc, `${scalar}: ${namespace.graphql}.GraphQLScalarType`);
+	});
 }
 
 export function printModuleObjectTypeFields(config: ModulePrinterConfig) {
@@ -210,7 +215,10 @@ function printObjectTypeFieldBuilders(
 	const infoType = getInfoType();
 	const nameTypes = getFieldNameTypes(typeName, field);
 	const fieldType = typeName === 'Subscription' ? 'SubscriptionMethods' : 'FieldMethods';
-	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`;
+	return withTsdoc(
+		getFieldTsdoc(config, typeName, field),
+		`${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`,
+	);
 }
 
 function printObjectTypeFieldFactories(
@@ -225,7 +233,17 @@ function printObjectTypeFieldFactories(
 	const infoType = getInfoType();
 	const nameTypes = getFieldNameTypes(typeName, field);
 	const fieldType = typeName === 'Subscription' ? 'SubscriptionField' : 'Field';
-	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`;
+	return withTsdoc(
+		getFieldTsdoc(config, typeName, field),
+		`${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`,
+	);
+}
+
+function getFieldTsdoc(config: ModulePrinterConfig, typeName: string, fieldName: string) {
+	const field = config.globalDefinitions.objectTypeMap
+		.get(typeName)
+		?.fields?.find((field) => field.name.value === fieldName);
+	return field == null ? null : printFieldTsdoc(config, field);
 }
 
 export function printModuleBuilder(config: ModulePrinterConfig, moduleName: string) {

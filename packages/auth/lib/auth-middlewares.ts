@@ -68,7 +68,7 @@ export function createMiddleware<
 	options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	onError?: ScopeErrorResolver,
 ): Middleware<Result, Source, Context, Args, Info> {
-	const getScopes = typeof scopes === 'function' ? scopes : () => scopes;
+	const getScopes = isGetScopeRules(scopes) ? scopes : () => scopes;
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
 
 	return (next, params) => {
@@ -111,25 +111,30 @@ export function createPostMiddleware<
 	onError?: ScopeErrorResolver,
 ): Middleware<Result, Source, Context, Args, Info> {
 	const defaultScopes = selectDefaultScopes(options?.skipDefaults, type, globalScopes);
+	const errorResolver = onError ?? defaultErrorResolver;
 
 	return (next, params) => {
 		authStore.load(params.ctx, loadScopes, cacheKeyMap);
 
-		return mapMaybePromise(next(), (result) => {
-			const verified = mapMaybePromise(getScopes(params, result), (requiredScopes) =>
-				verifyMiddlewareScopes(
-					params,
-					defaultScopes,
-					requiredScopes,
-					onError ?? defaultErrorResolver,
-					authStore,
-				),
-			);
+		const verifiedDefaults = verifyMiddlewareScopes(
+			params,
+			defaultScopes,
+			true,
+			errorResolver,
+			authStore,
+		);
 
-			return mapMaybePromise(verified, () =>
-				saveResultGrants(params, result, authStore, options?.grants),
-			);
-		});
+		return mapMaybePromise(verifiedDefaults, () =>
+			mapMaybePromise(next(), (result) => {
+				const verified = mapMaybePromise(getScopes(params, result), (requiredScopes) =>
+					verifyMiddlewareScopes(params, undefined, requiredScopes, errorResolver, authStore),
+				);
+
+				return mapMaybePromise(verified, () =>
+					saveResultGrants(params, result, authStore, options?.grants),
+				);
+			}),
+		);
 	};
 }
 
@@ -201,6 +206,19 @@ export function verifyMiddlewareScopes<
 			(err) => resolveError(err, errorResolver),
 		);
 	});
+}
+
+function isGetScopeRules<
+	Scopes extends ScopesShape,
+	Grants extends string,
+	Source,
+	Context,
+	Args,
+	Info,
+>(
+	scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Source, Context, Args, Info>,
+): scopes is GetScopeRules<Scopes, Grants, Source, Context, Args, Info> {
+	return typeof scopes === 'function' && !('type' in scopes);
 }
 
 function saveResultGrants<

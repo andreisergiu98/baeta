@@ -223,7 +223,7 @@ test('verifyScopeRule throws for each logic rule when all scopes fail', async (t
 		},
 	);
 	await t.throwsAsync(async () => await verifyScopeRule(params, logicRule('race', scopes), store), {
-		instanceOf: ForbiddenError,
+		instanceOf: AggregateError,
 	});
 	await t.throwsAsync(async () => await verifyScopeRule(params, logicRule('or', scopes), store), {
 		instanceOf: AggregateError,
@@ -280,19 +280,20 @@ test('verifyRaceScopes resolves on first success', async (t) => {
 	t.deepEqual(executionOrder, ['falseLazyScope', 'trueLazyScope']);
 });
 
-test('verifyRaceScopes throws ForbiddenError if all candidates fail', async (t) => {
+test('verifyRaceScopes throws AggregateError if all candidates fail', async (t) => {
 	const { params, store, executionOrder } = createCtx();
 
-	await t.throwsAsync(
+	const error = await t.throwsAsync(
 		async () =>
 			await verifyRaceScopes(
 				params,
 				[scopeRule('falseLazyScope'), scopeRule('falseFnScope')],
 				store,
 			),
-		{ instanceOf: ForbiddenError },
+		{ instanceOf: AggregateError },
 	);
 
+	t.is(error.errors.length, 2);
 	t.deepEqual(executionOrder, ['falseLazyScope', 'falseFnScope']);
 });
 

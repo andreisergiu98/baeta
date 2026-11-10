@@ -79,7 +79,7 @@ test('federation-spec.gql declares default directives only', async (t) => {
 	t.true(spec.includes('directive @requires'));
 	t.true(spec.includes('directive @provides'));
 	t.true(spec.includes('directive @extends'));
-	t.false(spec.includes('directive @shareable'));
+	t.true(spec.includes('directive @shareable'));
 	t.false(spec.includes('directive @inaccessible'));
 });
 

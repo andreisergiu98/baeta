@@ -29,6 +29,9 @@ export default defineConfig({
       // Make the node field nullable in all connections
       nullableNode: true,
 
+      // Mark the generated types @shareable (default: true with the federation plugin)
+      shareable: false,
+
       // Configure pagination for specific types
       types: {
         // Simple configuration - generate default connection types

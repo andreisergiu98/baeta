@@ -21,7 +21,7 @@ import {
 	printTypeTsdoc,
 	withTsdoc,
 } from './printer-tsdoc.ts';
-import { buildBlock, indent } from './printer-utils.ts';
+import { buildBlock, findDirective, indent } from './printer-utils.ts';
 
 export interface PrinterConfig {
 	globalDefinitions: DefinitionsMap;
@@ -181,14 +181,40 @@ export function printInputObjectTypeTypesFromMap(
 }
 
 function printInputObjectType(config: PrinterConfig, type: InputObjectTypeDefinitionNode) {
+	const tsdoc = printTypeTsdoc(type);
+	if (findDirective(type, 'oneOf') != null) {
+		return withTsdoc(tsdoc, printOneOfInputObjectType(config, type));
+	}
 	const fields = type.fields?.map((field) => printInputObjectTypeField(config, field));
 	return withTsdoc(
-		printTypeTsdoc(type),
+		tsdoc,
 		buildBlock({
 			name: `export type ${type.name.value} =`,
 			lines: fields ?? [],
 		}),
 	);
+}
+
+function printOneOfInputObjectType(config: PrinterConfig, type: InputObjectTypeDefinitionNode) {
+	const fields = type.fields ?? [];
+	const members = fields.map((selected) => {
+		const lines = fields.map((field) =>
+			printOneOfInputObjectTypeField(config, field, field === selected),
+		);
+		return ['| {', ...lines.map(indent(2)), '}'].join('\n');
+	});
+	return `${[`export type ${type.name.value} =`, ...members.map(indent(2))].join('\n')};`;
+}
+
+function printOneOfInputObjectTypeField(
+	config: PrinterConfig,
+	field: InputValueDefinitionNode,
+	isSelected: boolean,
+) {
+	const fieldToPrint = isSelected
+		? `${field.name.value}: ${printType(config, field.type, false)}`
+		: `${field.name.value}?: never`;
+	return withTsdoc(printFieldTsdoc(config, field), fieldToPrint);
 }
 
 function printInputObjectTypeField(config: PrinterConfig, field: InputValueDefinitionNode) {

@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import { createPluginV1 } from '@baeta/generator-sdk';
+import { createPluginV1, type Ctx } from '@baeta/generator-sdk';
 import { getSourcesFromSchema, loadSchema } from '@baeta/util-graphql';
 import { normalize } from '@baeta/util-path';
 import { buildFederationInfo } from './lib/federation-info.ts';
@@ -65,26 +65,34 @@ export function federationPlugin<const Version extends FederationVersion>(
 			const federationRootDir = getModuleRootDir(generatorOptions.modulesDir, options);
 			watcher.ignore(`${federationRootDir}/*.gql`);
 		},
-		generate: async (ctx, next) => {
-			const moduleName = options?.moduleName ?? DEFAULT_MODULE_NAME;
-			const specification = findSpecification(options?.version ?? DEFAULT_VERSION);
-			const directiveNames = buildDirectiveNames(specification, options?.include);
-
-			const federationRootDir = getModuleRootDir(ctx.generatorOptions.modulesDir, options);
-			const federationTypesFilePath = `${ctx.generatorOptions.typesDir}/federation.ts`;
-			const sdlFilePath = `${federationRootDir}/federation-sdl.ts`;
-			const schemaSpecFilePath = `${federationRootDir}/federation-spec.gql`;
-			const schemaTypesFilePath = `${federationRootDir}/federation-types.gql`;
-			const entityHandlersFilePath = `${federationRootDir}/entity-handlers.ts`;
-			const resolversFilePath = `${federationRootDir}/index.ts`;
-
-			const schemaSpecFile = ctx.fileManager.createAndAdd(
+		setup: async (ctx, next) => {
+			const { specification, directiveNames, federationRootDir } = buildFederationOptions(
+				ctx,
+				options,
+			);
+			const { schemaSpecFilePath, schemaTypesFilePath } = buildFederationFilePaths(
+				ctx,
+				federationRootDir,
+			);
+			ctx.fileManager.createAndAdd(
 				schemaSpecFilePath,
 				printSchemaSpec(specification, directiveNames),
 				'federation',
 			);
-
-			await Promise.all([schemaSpecFile.write(), fs.unlink(schemaTypesFilePath).catch(() => {})]);
+			await fs.unlink(schemaTypesFilePath).catch(() => {});
+			return await next();
+		},
+		generate: async (ctx, next) => {
+			const { moduleName, specification, directiveNames, federationRootDir } =
+				buildFederationOptions(ctx, options);
+			const {
+				federationTypesFilePath,
+				sdlFilePath,
+				schemaSpecFilePath,
+				schemaTypesFilePath,
+				entityHandlersFilePath,
+				resolversFilePath,
+			} = buildFederationFilePaths(ctx, federationRootDir);
 
 			const { outputSchemaAst } = await loadSchema(
 				ctx.generatorOptions.schemas,
@@ -155,6 +163,33 @@ export function federationPlugin<const Version extends FederationVersion>(
 			return await next();
 		},
 	});
+}
+
+function buildFederationOptions<Version extends FederationVersion>(
+	ctx: Ctx,
+	options?: FederationPluginOptions<Version>,
+) {
+	const moduleName = options?.moduleName ?? DEFAULT_MODULE_NAME;
+	const specification = findSpecification(options?.version ?? DEFAULT_VERSION);
+	const directiveNames = buildDirectiveNames(specification, options?.include);
+	const federationRootDir = getModuleRootDir(ctx.generatorOptions.modulesDir, options);
+	return {
+		moduleName,
+		specification,
+		directiveNames,
+		federationRootDir,
+	};
+}
+
+function buildFederationFilePaths(ctx: Ctx, federationRootDir: string) {
+	return {
+		federationTypesFilePath: `${ctx.generatorOptions.typesDir}/federation.ts`,
+		sdlFilePath: `${federationRootDir}/federation-sdl.ts`,
+		schemaSpecFilePath: `${federationRootDir}/federation-spec.gql`,
+		schemaTypesFilePath: `${federationRootDir}/federation-types.gql`,
+		entityHandlersFilePath: `${federationRootDir}/entity-handlers.ts`,
+		resolversFilePath: `${federationRootDir}/index.ts`,
+	};
 }
 
 function getModuleRootDir<Version extends FederationVersion>(

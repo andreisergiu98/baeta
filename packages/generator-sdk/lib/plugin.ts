@@ -23,11 +23,22 @@ export type GeneratorPluginV1WatchOptions = (
 	reload: GeneratorPluginV1ReloadFn,
 ) => void;
 
+/**
+ * A run calls `setup` on every plugin, then `generate`, then `end`. Each step runs the plugins in
+ * order, and `next()` continues to the next plugin. Files added to `ctx.fileManager` are written
+ * after each step.
+ */
 export type GeneratorPluginV1Factory<Store = unknown> = {
 	name: string;
 	actionName: string;
+	/**
+	 * Add files that other plugins read from disk here, such as `.gql` schema files, so they exist
+	 * before any plugin's `generate` runs.
+	 */
 	setup?: GeneratorPluginV1Fn<Store>;
+	/** Generate the plugin's output. */
 	generate?: GeneratorPluginV1Fn<Store>;
+	/** Runs after the files from `generate` are written, with every generated file in `ctx.fileManager`. */
 	end?: GeneratorPluginV1Fn<Store>;
 	watch?: GeneratorPluginV1WatchOptions;
 };

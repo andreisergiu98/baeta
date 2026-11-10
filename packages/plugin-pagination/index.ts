@@ -211,33 +211,26 @@ export function paginationPlugin<T>(options: PaginationOptions<keyof T>) {
 		watch: (generatorOptions, watcher) => {
 			watcher.ignore(`${createConnectionModuleDir(generatorOptions.modulesDir, moduleName)}/**`);
 		},
-		generate: async (ctx, next) => {
+		setup: async (ctx, next) => {
 			const types: string[] = [printPageInfo(options.pageInfoFields)];
-
 			for (const name in options.types) {
 				const typeOptions = options.types[name];
 				if (typeOptions == null || typeOptions === false) {
 					continue;
 				}
-
 				const connectionTypes = printConnectionTypes(
 					name,
 					typeOptions === true ? {} : typeOptions,
 					options,
 				);
-
 				types.push(...connectionTypes);
 			}
-
 			const moduleDir = createConnectionModuleDir(ctx.generatorOptions.modulesDir, moduleName);
-
-			const definitionFile = ctx.fileManager.createAndAdd(
-				createGqlFilename(moduleDir),
-				printTypes(types),
-				'pagination',
-			);
-			await definitionFile.write();
-
+			ctx.fileManager.createAndAdd(createGqlFilename(moduleDir), printTypes(types), 'pagination');
+			return await next();
+		},
+		generate: async (ctx, next) => {
+			const moduleDir = createConnectionModuleDir(ctx.generatorOptions.modulesDir, moduleName);
 			ctx.fileManager.createAndAdd(
 				createExportFilename(moduleDir),
 				printExport(

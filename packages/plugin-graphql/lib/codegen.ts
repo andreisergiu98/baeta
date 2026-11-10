@@ -73,6 +73,7 @@ export async function generate(
 		importExtension: options.importExtension,
 		typesDir: options.typesDir,
 		modulesDir: options.modulesDir,
+		deprecatedTsdoc: options.deprecatedTsdoc,
 	};
 
 	const fieldInfo = createFieldInfoMap(globalDefinitions, defaultScalars);
@@ -142,6 +143,8 @@ export async function generate(
 		const config: ModulePrinterConfig = {
 			typesDir: options.typesDir,
 			fieldInfo,
+			globalDefinitions,
+			deprecatedTsdoc: options.deprecatedTsdoc,
 			importExtension: options.importExtension,
 			modulesDir: options.modulesDir,
 			registry: createModuleRegistry(document),

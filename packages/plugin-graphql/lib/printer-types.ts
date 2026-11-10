@@ -14,6 +14,13 @@ import {
 	type TypeNode,
 	type UnionTypeDefinitionNode,
 } from 'graphql';
+import {
+	printEnumTsdoc,
+	printFieldTsdoc,
+	printScalarTsdoc,
+	printTypeTsdoc,
+	withTsdoc,
+} from './printer-tsdoc.ts';
 import { buildBlock, indent } from './printer-utils.ts';
 
 export interface PrinterConfig {
@@ -24,6 +31,7 @@ export interface PrinterConfig {
 	importExtension: '.ts' | '.js' | '';
 	typesDir: string;
 	modulesDir: string;
+	deprecatedTsdoc: boolean;
 }
 
 export function printUtilityTypes(): string {
@@ -49,8 +57,8 @@ export function printBaseScalars(config: PrinterConfig): string {
 			return `${scalar}: ${type};`;
 		})
 		.filter((el) => el != null);
-	const customScalars = [...config.globalDefinitions.scalarTypeMap.values()].map(
-		(scalar) => `${scalar.name.value}: unknown;`,
+	const customScalars = [...config.globalDefinitions.scalarTypeMap.values()].map((scalar) =>
+		withTsdoc(printScalarTsdoc(scalar), `${scalar.name.value}: unknown;`),
 	);
 
 	return buildBlock({
@@ -97,12 +105,18 @@ export function printObjectTypeTypesFromMap(
 
 function printObjectType(config: PrinterConfig, type: ObjectTypeDefinitionNode) {
 	const fields = type.fields?.map((field) => printObjectTypeField(config, field));
-	return `export type ${type.name.value} = ${printOrObjectType(type, fields)}`;
+	return withTsdoc(
+		printTypeTsdoc(type),
+		`export type ${type.name.value} = ${printOrObjectType(type, fields)}`,
+	);
 }
 
 function printObjectTypeField(config: PrinterConfig, field: FieldDefinitionNode) {
 	const optionalMarker = printOptionalMarker(config, field.type);
-	return `${field.name.value}${optionalMarker}: ${printType(config, field.type)}`;
+	return withTsdoc(
+		printFieldTsdoc(config, field),
+		`${field.name.value}${optionalMarker}: ${printType(config, field.type)}`,
+	);
 }
 
 export function printEnumTypesFromMap(map: Map<string, EnumTypeDefinitionNode>) {
@@ -111,7 +125,10 @@ export function printEnumTypesFromMap(map: Map<string, EnumTypeDefinitionNode>) 
 
 function printEnumType(type: EnumTypeDefinitionNode) {
 	const values = type.values?.map((value) => `'${value.name.value}'`);
-	return `export type ${type.name.value} = ${values?.join(' | ') || 'never'}`;
+	return withTsdoc(
+		printEnumTsdoc(type),
+		`export type ${type.name.value} = ${values?.join(' | ') || 'never'}`,
+	);
 }
 
 export function printInterfaceTypesFromMap(
@@ -127,7 +144,10 @@ function printInterfaceType(config: PrinterConfig, type: InterfaceTypeDefinition
 		t.interfaces?.some((i) => i.name.value === type.name.value),
 	);
 	const types = implementingTypes.map((t) => printNamedTypeForInterface(t.name.value));
-	return `export type ${type.name.value} = ${types.join(' | ') || 'never'}`;
+	return withTsdoc(
+		printTypeTsdoc(type),
+		`export type ${type.name.value} = ${types.join(' | ') || 'never'}`,
+	);
 }
 
 function printNamedTypeForInterface(name: string) {
@@ -143,7 +163,10 @@ export function printUnionTypesFromMap(
 
 function printUnionType(config: PrinterConfig, type: UnionTypeDefinitionNode) {
 	const types = type.types?.map((type) => printNamedTypeForUnion(config, type));
-	return `export type ${type.name.value} = ${types?.join(' | ') || 'never'}`;
+	return withTsdoc(
+		printTypeTsdoc(type),
+		`export type ${type.name.value} = ${types?.join(' | ') || 'never'}`,
+	);
 }
 
 function printNamedTypeForUnion(config: PrinterConfig, type: NamedTypeNode) {
@@ -159,14 +182,20 @@ export function printInputObjectTypeTypesFromMap(
 
 function printInputObjectType(config: PrinterConfig, type: InputObjectTypeDefinitionNode) {
 	const fields = type.fields?.map((field) => printInputObjectTypeField(config, field));
-	return buildBlock({
-		name: `export type ${type.name.value} =`,
-		lines: fields ?? [],
-	});
+	return withTsdoc(
+		printTypeTsdoc(type),
+		buildBlock({
+			name: `export type ${type.name.value} =`,
+			lines: fields ?? [],
+		}),
+	);
 }
 
 function printInputObjectTypeField(config: PrinterConfig, field: InputValueDefinitionNode) {
-	return `${field.name.value}${printInputOptionalMarker(field)}: ${printType(config, field.type)}`;
+	return withTsdoc(
+		printFieldTsdoc(config, field),
+		`${field.name.value}${printInputOptionalMarker(field)}: ${printType(config, field.type)}`,
+	);
 }
 
 export function getArgsTypeName(typeName: string, fieldName: string) {
@@ -217,7 +246,10 @@ function printObjectTypeFieldArgs(config: PrinterConfig, name: string, field: Fi
 }
 
 function printObjectTypeFieldArg(config: PrinterConfig, arg: InputValueDefinitionNode) {
-	return `${arg.name.value}${printInputOptionalMarker(arg)}: ${printType(config, arg.type)}`;
+	return withTsdoc(
+		printFieldTsdoc(config, arg),
+		`${arg.name.value}${printInputOptionalMarker(arg)}: ${printType(config, arg.type)}`,
+	);
 }
 
 function printType(config: PrinterConfig, type: TypeNode, nullable = true): string {

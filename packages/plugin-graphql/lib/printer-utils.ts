@@ -1,3 +1,5 @@
+import type { ConstDirectiveNode } from 'graphql';
+
 export function buildBlock({ name, lines }: { name: string; lines: string[] }): string {
 	return [`${name} {`, ...lines.filter(Boolean).map(indent(2)), '};'].join('\n');
 }
@@ -23,4 +25,11 @@ export function indent(size: number) {
 
 export function unique<T>(val: T, i: number, all: T[]): boolean {
 	return i === all.indexOf(val);
+}
+
+export function findDirective(
+	node: { readonly directives?: readonly ConstDirectiveNode[] },
+	name: string,
+) {
+	return node.directives?.find((directive) => directive.name.value === name);
 }

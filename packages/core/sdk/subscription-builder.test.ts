@@ -29,6 +29,7 @@ test('createSubscriptionBuilder should create a subscription field correctly', a
 		MockArgs,
 		MockInfo
 	>({
+		type: 'Subscription',
 		field: 'field',
 		context: createEmptyBuilderContext(),
 	});

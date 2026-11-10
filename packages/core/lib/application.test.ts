@@ -12,12 +12,14 @@ import {
 import { type AppPlugin, createAppPluginId } from '../sdk/app-plugin.ts';
 import { createFieldBuilder } from '../sdk/field.ts';
 import { createModuleBuilder } from '../sdk/module.ts';
+import type { RootTypes } from '../sdk/root-types.ts';
 import { createSchemaState } from '../sdk/schema-state.ts';
 import { createSubscriptionBuilder } from '../sdk/subscription.ts';
 import { createTypeBuilder } from '../sdk/type.ts';
 import { createApplication } from './application.ts';
 
 const sdl = 'type Query { hello: String }';
+const roots = { query: 'Query' };
 
 function createTestModule() {
 	return resolveQueryModule(createQueryModule('test', 'hello'), 'hello', 'world');
@@ -54,7 +56,7 @@ function createSchemaPlugin(onSchema: (schema: GraphQLSchema) => void): AppPlugi
 test('createApplication passes the final schema to onSchema', async (t) => {
 	const received: GraphQLSchema[] = [];
 	const { schema } = createApplication({
-		sources: { sdl, modules: [createTestModule()] },
+		sources: { sdl, roots, modules: [createTestModule()] },
 		plugins: [createSchemaPlugin((schema) => received.push(schema))],
 	});
 
@@ -68,7 +70,7 @@ test('createApplication fails when onSchema throws', (t) => {
 	t.throws(
 		() =>
 			createApplication({
-				sources: { sdl, modules: [createTestModule()] },
+				sources: { sdl, roots, modules: [createTestModule()] },
 				plugins: [
 					createSchemaPlugin(() => {
 						throw new Error('invalid schema');
@@ -95,8 +97,8 @@ test('createApplication runs onSchema once per application', (t) => {
 		},
 	};
 
-	createApplication({ sources: { sdl, modules: [createTestModule()] }, plugins: [plugin] });
-	createApplication({ sources: { sdl, modules: [createTestModule()] }, plugins: [plugin] });
+	createApplication({ sources: { sdl, roots, modules: [createTestModule()] }, plugins: [plugin] });
+	createApplication({ sources: { sdl, roots, modules: [createTestModule()] }, plugins: [plugin] });
 
 	t.is(calls, 2);
 });
@@ -105,7 +107,7 @@ test('createApplication attaches plugin schema states to the schema it returns',
 	const state = createSchemaState<{ limit: number }>(Symbol('limits'));
 	const seen: unknown[] = [];
 	const { schema } = createApplication({
-		sources: { sdl, modules: [createTestModule()] },
+		sources: { sdl, roots, modules: [createTestModule()] },
 		assumeValid: true,
 		plugins: [
 			{
@@ -122,21 +124,24 @@ test('createApplication attaches plugin schema states to the schema it returns',
 	t.deepEqual(seen, [{ limit: 10 }]);
 });
 
-test('createApplication passes the schema document to plugins', (t) => {
+test('createApplication passes the schema document and root types to plugins', (t) => {
 	const documents: DocumentNode[] = [];
+	const received: RootTypes[] = [];
 	createApplication({
-		sources: { sdl, modules: [createTestModule()] },
+		sources: { sdl, roots, modules: [createTestModule()] },
 		plugins: [
 			{
 				id: createAppPluginId('document-plugin'),
-				mutate: (_, { document }) => {
-					documents.push(document);
+				mutate: (_, app) => {
+					documents.push(app.document);
+					received.push(app.roots);
 				},
 			},
 		],
 	});
 
 	t.deepEqual(documents.map(print), [print(parse(sdl))]);
+	t.deepEqual(received, [roots]);
 });
 
 test('createApplication rejects a field resolved by two modules', (t) => {
@@ -145,6 +150,7 @@ test('createApplication rejects a field resolved by two modules', (t) => {
 			createApplication({
 				sources: {
 					sdl: 'type Query { me: String }',
+					roots,
 					modules: [
 						resolveQueryModule(createQueryModule('public', 'me'), 'me', 'public'),
 						resolveQueryModule(createQueryModule('admin', 'me'), 'me', 'admin'),
@@ -162,6 +168,7 @@ test('createApplication merges fields named like Object.prototype keys from seve
 	const { schema } = createApplication({
 		sources: {
 			sdl: 'type Query { constructor: String driver: String }',
+			roots,
 			modules: [
 				resolveQueryModule(createQueryModule('teams', 'constructor'), 'constructor', 'Ferrari'),
 				resolveQueryModule(createQueryModule('drivers', 'driver'), 'driver', 'Leclerc'),
@@ -179,6 +186,7 @@ test('createApplication rejects a resolver for a field the schema does not defin
 			createApplication({
 				sources: {
 					sdl,
+					roots,
 					modules: [resolveQueryModule(createQueryModule('extra', 'goodbye'), 'goodbye', 'x')],
 				},
 			}),
@@ -199,6 +207,7 @@ test('createApplication rejects a resolver for a type that is not an object type
 			createApplication({
 				sources: {
 					sdl: 'input Filter { id: ID } type Query { hello(filter: Filter): String }',
+					roots,
 					modules: [
 						module.$schema({ Filter: module.Filter.$fields({ id: module.Filter.id.key('id') }) }),
 					],
@@ -216,6 +225,7 @@ test('createApplication implements scalars and keeps their name, description and
 	const { schema } = createApplication({
 		sources: {
 			sdl: '"Point in time" scalar DateTime @specifiedBy(url: "https://example.com") type Query { now: DateTime }',
+			roots,
 			modules: [
 				module.$schema({
 					Query: module.Query.$fields({ now: module.Query.now.resolve(() => new Date(0)) }),
@@ -263,6 +273,7 @@ test('createApplication parses default values with the implemented scalars', asy
 					filter(filter: Filter = {}): Boolean
 				}
 			`,
+			roots,
 			modules: [
 				module.$schema({
 					DateTime: new GraphQLScalarType({
@@ -320,6 +331,7 @@ test('createApplication rejects a scalar implementation for a type that is not a
 			createApplication({
 				sources: {
 					sdl,
+					roots,
 					modules: [
 						module.$schema({
 							Query: module.Query.$fields({ hello: module.Query.hello.resolve(() => 'world') }),
@@ -339,6 +351,7 @@ test('createApplication resolves abstract types from __typename', async (t) => {
 	const { schema } = createApplication({
 		sources: {
 			sdl: 'type Cat { name: String } type Dog { name: String } union Pet = Cat | Dog type Query { pet: Pet }',
+			roots,
 			modules: [
 				resolveQueryModule(createQueryModule('pets', 'pet'), 'pet', {
 					__typename: 'Dog',
@@ -358,12 +371,16 @@ test('createApplication attaches subscribe resolvers', async (t) => {
 			hello: createFieldBuilder<string, unknown, unknown, {}, unknown>('Query', 'hello'),
 		}),
 		Subscription: createTypeBuilder('Subscription', {
-			tick: createSubscriptionBuilder<number, unknown, unknown, {}, unknown>('tick'),
+			tick: createSubscriptionBuilder<number, unknown, unknown, {}, unknown>(
+				'Subscription',
+				'tick',
+			),
 		}),
 	});
 	const { schema } = createApplication({
 		sources: {
 			sdl: 'type Query { hello: String } type Subscription { tick: Int }',
+			roots: { query: 'Query', subscription: 'Subscription' },
 			modules: [
 				module.$schema({
 					Query: module.Query.$fields({ hello: module.Query.hello.resolve(() => 'world') }),
@@ -395,11 +412,91 @@ test('createApplication validates the schema unless assumeValid is set', (t) => 
 		'interface Node { id: ID! } type User implements Node { name: String } type Query { user: User }';
 	const modules = [resolveQueryModule(createQueryModule('users', 'user'), 'user', null)];
 
-	t.throws(() => createApplication({ sources: { sdl: invalidSdl, modules } }), {
+	t.throws(() => createApplication({ sources: { sdl: invalidSdl, roots, modules } }), {
 		message:
 			"Couldn't build schema! Reason: Interface field Node.id expected but User does not provide it.",
 	});
 	t.notThrows(() =>
-		createApplication({ sources: { sdl: invalidSdl, modules }, assumeValid: true }),
+		createApplication({ sources: { sdl: invalidSdl, roots, modules }, assumeValid: true }),
+	);
+});
+
+test('createApplication supports custom root types', async (t) => {
+	const sdl = `
+		schema { query: RootQuery subscription: RootSubscription }
+		type RootQuery { hello: String }
+		type RootSubscription { tick: Int }
+	`;
+	const module = createModuleBuilder<unknown, unknown>('roots', {
+		RootQuery: createTypeBuilder('RootQuery', {
+			hello: createFieldBuilder<string, unknown, unknown, {}, unknown>('RootQuery', 'hello'),
+		}),
+		RootSubscription: createTypeBuilder('RootSubscription', {
+			tick: createSubscriptionBuilder<number, unknown, unknown, {}, unknown>(
+				'RootSubscription',
+				'tick',
+			),
+		}),
+	});
+	const { schema } = createApplication({
+		sources: {
+			sdl,
+			roots: { query: 'RootQuery', subscription: 'RootSubscription' },
+			modules: [
+				module.$schema({
+					RootQuery: module.RootQuery.$fields({
+						hello: module.RootQuery.hello.resolve(() => 'world'),
+					}),
+					RootSubscription: module.RootSubscription.$fields({
+						tick: module.RootSubscription.tick
+							.subscribe(async function* () {
+								yield 1;
+							})
+							.resolve(({ source }: { source: unknown }) => source),
+					}),
+				}),
+			],
+		},
+	});
+
+	const result = await graphql({ schema, source: '{ hello }' });
+	const stream = await subscribe({ schema, document: parse('subscription { tick }') });
+	const events: unknown[] = [];
+	if (Symbol.asyncIterator in stream) {
+		for await (const event of stream) {
+			events.push(event);
+		}
+	}
+
+	t.deepEqual(result.data, { hello: 'world' });
+	t.deepEqual(events, [{ data: { tick: 1 } }]);
+});
+
+test('createApplication rejects root types that do not match the schema', (t) => {
+	const modules = [createTestModule()];
+
+	t.throws(
+		() =>
+			createApplication({
+				sources: {
+					sdl: 'schema { query: Query mutation: RootMutation } type Query { hello: String } type RootMutation { ok: Boolean }',
+					roots: { query: 'Query', mutation: 'Mutation' },
+					modules,
+				},
+			}),
+		{
+			message:
+				'The schema\'s mutation root type is "RootMutation", but sources.roots.mutation is "Mutation". Pass the roots generated with the schema.',
+		},
+	);
+	t.throws(
+		() =>
+			createApplication({
+				sources: { sdl, roots: { query: 'Query', subscription: 'Subscription' }, modules },
+			}),
+		{
+			message:
+				'The schema\'s subscription root type is not set, but sources.roots.subscription is "Subscription". Pass the roots generated with the schema.',
+		},
 	);
 });

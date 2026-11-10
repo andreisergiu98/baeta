@@ -1,4 +1,4 @@
-import { isOperationType } from '../utils/resolver.ts';
+import type { RootTypes } from '@baeta/core/sdk';
 import type { ScopeRules } from './scope-rules.ts';
 import type { ScopesShape } from './scope-shape.ts';
 
@@ -12,32 +12,30 @@ export type DefaultScopes<Scopes extends ScopesShape, Grants extends string> = {
 	Subscription?: ScopeRules<Scopes, Grants>;
 };
 
+export type DefaultScopesOperation = keyof DefaultScopes<ScopesShape, string>;
+
+export function getDefaultScopesOperation(
+	type: string,
+	roots: RootTypes,
+): DefaultScopesOperation | undefined {
+	if (type === roots.query) {
+		return 'Query';
+	}
+	if (type === roots.mutation) {
+		return 'Mutation';
+	}
+	if (type === roots.subscription) {
+		return 'Subscription';
+	}
+}
+
 export function selectDefaultScopes<Scopes extends ScopesShape, Grants extends string>(
 	skipDefaults: boolean | undefined,
-	type: string,
+	operation: DefaultScopesOperation | undefined,
 	defaultScopes?: DefaultScopes<Scopes, Grants>,
 ) {
-	if (!defaultScopes) {
+	if (!defaultScopes || operation == null || skipDefaults === true) {
 		return;
 	}
-
-	if (!isOperationType(type)) {
-		return;
-	}
-
-	if (skipDefaults === true) {
-		return;
-	}
-
-	if (type === 'Query') {
-		return defaultScopes.Query;
-	}
-
-	if (type === 'Mutation') {
-		return defaultScopes.Mutation;
-	}
-
-	if (type === 'Subscription') {
-		return defaultScopes.Subscription;
-	}
+	return defaultScopes[operation];
 }

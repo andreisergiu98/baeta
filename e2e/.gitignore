@@ -58,6 +58,8 @@ subscriptions/src/modules/movie/typedef.ts
 !auth/src/types/
 !complexity/src/modules/types.ts
 !complexity/src/types/
+!custom-roots/src/modules/types.ts
+!custom-roots/src/types/
 !scalars/src/modules/types.ts
 !subscriptions/src/modules/types.ts
 !subscriptions/src/types/

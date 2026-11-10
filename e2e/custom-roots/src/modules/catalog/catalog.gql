@@ -1,0 +1,23 @@
+schema {
+	query: RootQuery
+	mutation: RootMutation
+	subscription: RootSubscription
+}
+
+type Movie {
+	id: ID!
+	title: String!
+}
+
+type RootQuery {
+	movie(id: ID!): Movie
+	movies: [Movie!]!
+}
+
+type RootMutation {
+	renameMovie(id: ID!, title: String!): Movie
+}
+
+type RootSubscription {
+	movieRenamed(id: ID!): Movie!
+}

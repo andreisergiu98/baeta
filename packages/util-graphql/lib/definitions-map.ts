@@ -23,11 +23,11 @@ function createRegistry() {
 	};
 }
 
-export function createDefinitionsMapFromSources(sources: Source[]) {
+export function createDefinitionsMapFromSources(sources: Source[], rootTypeNames: string[]) {
 	const registry = createRegistry();
 	for (const source of sources) {
 		if (source.document) {
-			collectTypesFromDocument(source.document, registry, ['Query', 'Mutation', 'Subscription']);
+			collectTypesFromDocument(source.document, registry, rootTypeNames);
 		}
 	}
 	return registry;

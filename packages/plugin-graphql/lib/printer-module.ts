@@ -1,4 +1,4 @@
-import type { ModuleRegistry } from '@baeta/util-graphql';
+import { getRootTypeNames, type ModuleRegistry, type RootTypes } from '@baeta/util-graphql';
 import { join, makeRelativePathForImport } from '@baeta/util-path';
 import { pascalCase } from 'change-case';
 import type { FieldInfoMap } from './field-info.ts';
@@ -13,6 +13,7 @@ export interface ModulePrinterConfig {
 	modulesDir: string;
 	moduleDefinitionName: string;
 	importExtension: '.ts' | '.js' | '';
+	roots: RootTypes;
 }
 
 export function printModuleIndexStarter(config: ModulePrinterConfig, moduleName: string): string {
@@ -22,7 +23,7 @@ export function printModuleIndexStarter(config: ModulePrinterConfig, moduleName:
 	return [
 		printModuleIndexImports(config, moduleName),
 		printModuleIndexDestructuredTypes(moduleName, types),
-		...typeEntries.map(([typeName, fields]) => printModuleIndexType(typeName, fields)),
+		...typeEntries.map(([typeName, fields]) => printModuleIndexType(config, typeName, fields)),
 		printModuleIndexSchema(moduleName, types, config.registry.defined.scalars),
 	]
 		.filter((el) => el != null)
@@ -92,9 +93,9 @@ ${printedTypes}
 });`;
 }
 
-function printModuleIndexType(typeName: string, fields: string[]) {
+function printModuleIndexType(config: ModulePrinterConfig, typeName: string, fields: string[]) {
 	const printedFields = fields
-		.map((fieldName) => printModuleIndexTypeField(typeName, fieldName))
+		.map((fieldName) => printModuleIndexTypeField(config.roots, typeName, fieldName))
 		.map(indent(2))
 		.join('\n');
 
@@ -103,14 +104,14 @@ ${printedFields}
 });`;
 }
 
-function printModuleIndexTypeField(typeName: string, fieldName: string) {
-	if (typeName === 'Query' || typeName === 'Mutation') {
+function printModuleIndexTypeField(roots: RootTypes, typeName: string, fieldName: string) {
+	if (typeName === roots.query || typeName === roots.mutation) {
 		return `${fieldName}: ${typeName}.${fieldName}.resolve((params) => {
   // Implement resolver logic here
 }),`;
 	}
 
-	if (typeName === 'Subscription') {
+	if (typeName === roots.subscription) {
 		return `${fieldName}: ${typeName}.${fieldName}
   .subscribe((params) => {
     // Implement subscribe logic here
@@ -126,12 +127,13 @@ function printModuleIndexTypeField(typeName: string, fieldName: string) {
 function printBaetaModuleTypesForFields(config: ModulePrinterConfig, isFactory: boolean) {
 	return config.registry.defined.objects
 		.map((typeName) =>
-			printObjectTypeModuleType(typeName, config.registry.picks.objects, isFactory),
+			printObjectTypeModuleType(config, typeName, config.registry.picks.objects, isFactory),
 		)
 		.filter(Boolean);
 }
 
 function printObjectTypeModuleType(
+	config: ModulePrinterConfig,
 	typeName: string,
 	objects: Record<string, string[] | undefined>,
 	isFactory: boolean,
@@ -140,7 +142,7 @@ function printObjectTypeModuleType(
 	if (!object) {
 		return '';
 	}
-	const parentType = getParentType(typeName);
+	const parentType = getParentType(config.roots, typeName);
 	const contextType = getContextType();
 	const infoType = getInfoType();
 	if (isFactory) {
@@ -203,13 +205,13 @@ function printObjectTypeFieldBuilders(
 	typeName: string,
 	field: string,
 ) {
-	const parentType = getParentType(typeName);
+	const parentType = getParentType(config.roots, typeName);
 	const resultType = getResultType(config, typeName, field);
 	const argumentsType = getArgsType(config, typeName, field);
 	const contextType = getContextType();
 	const infoType = getInfoType();
-	const nameTypes = getFieldNameTypes(typeName, field);
-	const fieldType = typeName === 'Subscription' ? 'SubscriptionMethods' : 'FieldMethods';
+	const nameTypes = getFieldNameTypes(config.roots, typeName, field);
+	const fieldType = typeName === config.roots.subscription ? 'SubscriptionMethods' : 'FieldMethods';
 	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`;
 }
 
@@ -218,19 +220,21 @@ function printObjectTypeFieldFactories(
 	typeName: string,
 	field: string,
 ) {
-	const parentType = getParentType(typeName);
+	const parentType = getParentType(config.roots, typeName);
 	const resultType = getResultType(config, typeName, field);
 	const argumentsType = getArgsType(config, typeName, field);
 	const contextType = getContextType();
 	const infoType = getInfoType();
-	const nameTypes = getFieldNameTypes(typeName, field);
-	const fieldType = typeName === 'Subscription' ? 'SubscriptionField' : 'Field';
+	const nameTypes = getFieldNameTypes(config.roots, typeName, field);
+	const fieldType = typeName === config.roots.subscription ? 'SubscriptionField' : 'Field';
 	return `${field}: ${namespace.sdk}.${fieldType}<${resultType}, ${resultType}, ${parentType}, ${contextType}, ${argumentsType}, ${infoType}, ${nameTypes}>`;
 }
 
 export function printModuleBuilder(config: ModulePrinterConfig, moduleName: string) {
 	const objectTypes = config.registry.defined.objects
-		.map((typeName) => printObjectTypeBuilder(typeName, config.registry.picks.objects))
+		.map((typeName) =>
+			printObjectTypeBuilder(config.roots, typeName, config.registry.picks.objects),
+		)
 		.filter(Boolean);
 	const builders = buildCodeBlock({
 		name: '',
@@ -245,8 +249,14 @@ export function printModuleBuilder(config: ModulePrinterConfig, moduleName: stri
 	].join('');
 }
 
-function printObjectTypeBuilder(typeName: string, objects: Record<string, string[] | undefined>) {
-	const fields = objects[typeName]?.map((field) => printObjectTypeFieldBuilder(typeName, field));
+function printObjectTypeBuilder(
+	roots: RootTypes,
+	typeName: string,
+	objects: Record<string, string[] | undefined>,
+) {
+	const fields = objects[typeName]?.map((field) =>
+		printObjectTypeFieldBuilder(roots, typeName, field),
+	);
 	if (fields == null || fields.length === 0) {
 		return '';
 	}
@@ -257,8 +267,8 @@ function printObjectTypeBuilder(typeName: string, objects: Record<string, string
 	return `${typeName}: ${namespace.sdk}.createTypeBuilder("${typeName}",${content})`;
 }
 
-function getParentType(type: string) {
-	if (['Query', 'Mutation', 'Subscription'].includes(type)) {
+function getParentType(roots: RootTypes, type: string) {
+	if (getRootTypeNames(roots).includes(type)) {
 		return '{}';
 	}
 	return `${namespace.globalTypes}.${type}`;
@@ -272,8 +282,8 @@ function getResultType(config: ModulePrinterConfig, type: string, field: string)
 	return fieldType;
 }
 
-function getFieldNameTypes(type: string, field: string) {
-	if (type === 'Subscription') {
+function getFieldNameTypes(roots: RootTypes, type: string, field: string) {
+	if (type === roots.subscription) {
 		return `"${field}"`;
 	}
 	return `"${type}", "${field}"`;
@@ -287,9 +297,9 @@ function getArgsType(config: ModulePrinterConfig, type: string, field: string) {
 	return `${namespace.globalTypes}.${getArgsTypeName(type, field)}`;
 }
 
-function printObjectTypeFieldBuilder(typeName: string, field: string) {
-	if (typeName === 'Subscription') {
-		return `${field}: ${namespace.sdk}.createSubscriptionBuilder("${field}")`;
+function printObjectTypeFieldBuilder(roots: RootTypes, typeName: string, field: string) {
+	if (typeName === roots.subscription) {
+		return `${field}: ${namespace.sdk}.createSubscriptionBuilder("${typeName}", "${field}")`;
 	}
 	return `${field}: ${namespace.sdk}.createFieldBuilder("${typeName}", "${field}")`;
 }

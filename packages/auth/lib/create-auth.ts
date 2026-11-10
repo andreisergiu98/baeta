@@ -22,7 +22,11 @@ import { defineRules, type RuleAccessor } from './define-rules.ts';
 import { defineScopes, type ScopeAccessor } from './define-scopes.ts';
 import type { ScopeErrorResolver } from './error.ts';
 import type { ScopeCacheKeyMap } from './scope-cache-keys.ts';
-import type { DefaultScopes } from './scope-defaults.ts';
+import {
+	type DefaultScopes,
+	type DefaultScopesOperation,
+	getDefaultScopesOperation,
+} from './scope-defaults.ts';
 import type { GetScopeLoader } from './scope-resolver.ts';
 import type { ScopeRules } from './scope-rules.ts';
 import type { ScopesShape } from './scope-shape.ts';
@@ -42,7 +46,7 @@ type AuthPlugin<Result, Source, Context, Args, Info> = FieldUsePlugin<
 interface AuthEntry {
 	name: string;
 	after: boolean;
-	build: (type: string) => Middleware<any, any, any, any, any>;
+	build: (operation: DefaultScopesOperation | undefined) => Middleware<any, any, any, any, any>;
 }
 
 type AuthState = AuthEntry[];
@@ -81,7 +85,9 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 
 	const makeAuthBuilder = <Result, Source, Context, Args, Info>(
 		after: boolean,
-		build: (type: string) => Middleware<Result, Source, Context, Args, Info>,
+		build: (
+			operation: DefaultScopesOperation | undefined,
+		) => Middleware<Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> => {
 		return {
 			[makePluginSymbol]: {
@@ -105,9 +111,9 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		scopes: ScopeRules<Scopes, Grants> | GetScopeRules<Scopes, Grants, Source, Context, Args, Info>,
 		options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> =>
-		makeAuthBuilder<Result, Source, Context, Args, Info>(false, (type) =>
+		makeAuthBuilder<Result, Source, Context, Args, Info>(false, (operation) =>
 			createMiddleware(
-				type,
+				operation,
 				loadScopesFn,
 				cacheKeyMap,
 				authStore,
@@ -122,9 +128,9 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 		getScopes: GetPostScopeRules<Scopes, Grants, Result, Source, Context, Args, Info>,
 		options?: AuthMiddlewareOptions<Grants, Result, Source, Context, Args, Info>,
 	): AuthPlugin<Result, Source, Context, Args, Info> =>
-		makeAuthBuilder<Result, Source, Context, Args, Info>(true, (type) =>
+		makeAuthBuilder<Result, Source, Context, Args, Info>(true, (operation) =>
 			createPostMiddleware(
-				type,
+				operation,
 				loadScopesFn,
 				cacheKeyMap,
 				authStore,
@@ -135,12 +141,12 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 			),
 		);
 
-	const createFallback = (type: string) => {
+	const createFallback = (operation: DefaultScopesOperation | undefined) => {
 		if (defaultScopes == null) {
 			return;
 		}
 		return createFallbackMiddleware(
-			type,
+			operation,
 			loadScopesFn,
 			cacheKeyMap,
 			authStore,
@@ -151,17 +157,17 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 
 	const authAppPlugin: AppPlugin<AuthState> = {
 		id,
-		mutate: (compilers) => {
+		mutate: (compilers, { roots }) => {
 			for (const typeCompiler of iterateTypes(compilers)) {
-				const type = typeCompiler.type;
+				const operation = getDefaultScopesOperation(typeCompiler.type, roots);
 				const typeEntries = typeCompiler.getPluginState(id) ?? [];
-				const fallback = typeEntries.length === 0 ? createFallback(type) : undefined;
+				const fallback = typeEntries.length === 0 ? createFallback(operation) : undefined;
 
 				for (const fieldCompiler of typeCompiler.fields) {
 					const subscribe = fieldCompiler.kind === 'Subscription';
 					const target = subscribe ? fieldCompiler.subscribe : fieldCompiler;
 					const middlewares = buildMiddlewares(
-						type,
+						operation,
 						[...typeEntries, ...(target.getPluginState(id) ?? [])],
 						subscribe,
 					);
@@ -173,7 +179,7 @@ export function createAuth<Context, Scopes extends ScopesShape, Grants extends s
 					}
 					if (subscribe) {
 						const subscriptionResolveMiddlewares = buildMiddlewares(
-							type,
+							operation,
 							fieldCompiler.resolve.getPluginState(id) ?? [],
 							false,
 						);
@@ -205,9 +211,13 @@ function buildMiddlewareName(
 	return `${type}.$use.auth`;
 }
 
-function buildMiddlewares(type: string, entries: Readonly<AuthState>, subscribe: boolean) {
+function buildMiddlewares(
+	operation: DefaultScopesOperation | undefined,
+	entries: Readonly<AuthState>,
+	subscribe: boolean,
+) {
 	return entries.map((entry) => {
-		if (entry.after && type === 'Mutation') {
+		if (entry.after && operation === 'Mutation') {
 			throw new Error(
 				'"authAfter" cannot be used on Mutations! authAfter is executed after the resolver thus cannot protect mutations. Use "auth" instead for mutations.',
 			);
@@ -217,7 +227,7 @@ function buildMiddlewares(type: string, entries: Readonly<AuthState>, subscribe:
 				'"authAfter" cannot be used on subscribe! authAfter is executed after subscribe thus cannot protect subscriptions. Use "auth" instead, or "authAfter" on resolve.',
 			);
 		}
-		const middleware = entry.build(type);
+		const middleware = entry.build(operation);
 		nameFunction(middleware, entry.name);
 		return middleware;
 	});

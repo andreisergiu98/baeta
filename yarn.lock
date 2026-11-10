@@ -2182,6 +2182,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@baeta/e2e-custom-roots@workspace:e2e/custom-roots":
+  version: 0.0.0-use.local
+  resolution: "@baeta/e2e-custom-roots@workspace:e2e/custom-roots"
+  dependencies:
+    "@baeta/auth": "workspace:^"
+    "@baeta/builder": "workspace:^"
+    "@baeta/cli": "workspace:^"
+    "@baeta/complexity": "workspace:^"
+    "@baeta/core": "workspace:^"
+    "@baeta/e2e-shared": "workspace:^"
+    "@baeta/testing": "workspace:^"
+    "@baeta/tsconfig": "workspace:^"
+    "@graphql-codegen/cli": "catalog:dev"
+    "@graphql-codegen/client-preset": "catalog:dev"
+    "@types/node": "catalog:dev"
+    graphql: "catalog:dev"
+    typescript: "catalog:dev"
+  languageName: unknown
+  linkType: soft
+
 "@baeta/e2e-extensions-auth@workspace:e2e/auth":
   version: 0.0.0-use.local
   resolution: "@baeta/e2e-extensions-auth@workspace:e2e/auth"

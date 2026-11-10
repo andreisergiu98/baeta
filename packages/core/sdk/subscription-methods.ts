@@ -104,7 +104,7 @@ export type SubscriptionUsePlugin<
 	Args,
 	Info,
 	{
-		type: 'Subscription';
+		type: string;
 		phase: Phase;
 		field: string;
 	},

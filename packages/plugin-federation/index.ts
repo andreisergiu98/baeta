@@ -109,6 +109,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 			});
 
 			const federationInfo = buildFederationInfo(specification, sources);
+			const queryTypeName = outputSchemaAst.getQueryType()?.name ?? 'Query';
 
 			ctx.fileManager.createAndAdd(
 				sdlFilePath,
@@ -135,6 +136,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 					extension: ctx.generatorOptions.importExtension,
 					moduleDefinitionName: ctx.generatorOptions.moduleDefinitionName,
 					includedDirectiveNames: directiveNames,
+					queryTypeName,
 				}),
 				'federation',
 			);
@@ -156,7 +158,7 @@ export function federationPlugin<const Version extends FederationVersion>(
 
 			const schemaTypesFile = ctx.fileManager.createAndAdd(
 				schemaTypesFilePath,
-				printSchemaTypes(federationInfo),
+				printSchemaTypes(federationInfo, queryTypeName),
 				'federation',
 			);
 			await schemaTypesFile.write();

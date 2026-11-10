@@ -8,8 +8,9 @@ export function createSubscriptionBuilder<
 	Args,
 	Info,
 	Name extends string = string,
->(field: Name) {
+>(type: string, field: Name) {
 	return new SubscriptionBuilder<Result, Source, Context, Args, Info, Name>({
+		type,
 		field,
 		context: createEmptyBuilderContext(),
 	}).toMethods();

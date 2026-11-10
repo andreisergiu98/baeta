@@ -1,6 +1,7 @@
 import type { DocumentNode, GraphQLSchema } from 'graphql';
 import type { Middleware } from '../lib/middleware.ts';
 import type { ModuleCompiler } from './module-compiler.ts';
+import type { RootTypes } from './root-types.ts';
 import type { SetSchemaState } from './schema-state.ts';
 import type { makePluginSymbol } from './symbols.ts';
 
@@ -14,11 +15,11 @@ export interface AppPlugin<State = unknown, SchemaState = undefined> {
 	 * Mutate function that receives the list of module compilers before they are built. This allows the plugin to modify the module compilers, for example by adding middlewares.
 	 *
 	 * @param compilers - The module compilers of the application
-	 * @param app - The application's parsed schema document
+	 * @param app - The application's parsed schema document and the names of its root types
 	 */
 	mutate: (
 		compilers: ModuleCompiler[],
-		app: { document: DocumentNode },
+		app: { document: DocumentNode; roots: RootTypes },
 	) => SchemaState extends undefined
 		? AppPluginMutateResult<SchemaState> | undefined
 		: AppPluginMutateResult<SchemaState> & { schemaState: SetSchemaState<SchemaState> };

@@ -49,6 +49,7 @@ export function mockSubscriptionFieldBuilder({
 		MockArgs,
 		MockInfo
 	>({
+		type: 'Subscription',
 		field,
 		context: createEmptyBuilderContext(),
 	});
@@ -96,6 +97,7 @@ export function mockSubscriptionFieldCompiler({
 		MockArgs,
 		MockInfo
 	>({
+		type: 'Subscription',
 		field,
 		subscribeContext: createBuilderContext({
 			state: subscribeState,

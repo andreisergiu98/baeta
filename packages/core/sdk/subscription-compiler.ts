@@ -15,6 +15,7 @@ export interface SubscriptionCompilerOptions<
 	Info,
 	Name extends string = string,
 > {
+	type: string;
 	field: Name;
 	subscribeContext: BuilderContext<Subscription<Source>, ParentSource, Context, Args, Info>;
 	subscribe: Resolver<Subscription<Source>, ParentSource, Context, Args, Info>;
@@ -32,6 +33,7 @@ export class SubscriptionCompiler<
 	Name extends string = string,
 > {
 	readonly kind = 'Subscription';
+	readonly #type: string;
 	readonly #field: Name;
 	readonly #subscribeState: ReadonlyMap<symbol, unknown>;
 	readonly #subscribeMiddlewares: Array<
@@ -50,6 +52,7 @@ export class SubscriptionCompiler<
 	constructor(
 		options: SubscriptionCompilerOptions<Result, Source, ParentSource, Context, Args, Info, Name>,
 	) {
+		this.#type = options.type;
 		this.#field = options.field;
 		this.#subscribeState = new Map(options.subscribeContext.state);
 		this.#subscribeMiddlewares = [...options.subscribeContext.middlewares];
@@ -66,7 +69,7 @@ export class SubscriptionCompiler<
 	}
 
 	get type() {
-		return 'Subscription' as const;
+		return this.#type;
 	}
 
 	get field() {

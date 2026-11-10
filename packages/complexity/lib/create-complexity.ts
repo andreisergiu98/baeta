@@ -58,7 +58,7 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 
 	const complexityAppPlugin: AppPlugin<ComplexityState> = {
 		id,
-		mutate: (compilers) => {
+		mutate: (compilers, { roots }) => {
 			const fieldSettingsMap: FieldSettingsMap = new Map();
 
 			for (const typeCompiler of iterateTypes(compilers)) {
@@ -94,8 +94,9 @@ export function createComplexity<Context>(options: ComplexityExtensionOptions<Co
 				cacheStore,
 			);
 
+			const rootTypeNames = [roots.query, roots.mutation, roots.subscription];
 			for (const typeCompiler of iterateTypes(compilers)) {
-				if (!['Query', 'Mutation', 'Subscription'].includes(typeCompiler.type)) {
+				if (!rootTypeNames.includes(typeCompiler.type)) {
 					continue;
 				}
 				for (const fieldCompiler of typeCompiler.fields) {

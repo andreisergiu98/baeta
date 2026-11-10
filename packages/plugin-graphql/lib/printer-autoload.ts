@@ -1,3 +1,4 @@
+import type { RootTypes } from '@baeta/util-graphql';
 import { makeRelativePathForImport } from '@baeta/util-path';
 import { camelCase, pascalCase } from 'change-case';
 
@@ -8,8 +9,8 @@ interface AutoloadPrinterConfig {
 	typesDir: string;
 }
 
-export function printAutoload(config: AutoloadPrinterConfig, modules: string[]) {
-	return [printImports(config, modules), printExport(modules)].join('\n\n');
+export function printAutoload(config: AutoloadPrinterConfig, modules: string[], roots: RootTypes) {
+	return [printImports(config, modules), printExport(modules, roots)].join('\n\n');
 }
 
 function printImports(config: AutoloadPrinterConfig, modules: string[]) {
@@ -30,8 +31,13 @@ function printImports(config: AutoloadPrinterConfig, modules: string[]) {
 	return [...dependencyImports, ...moduleTypeImports, ...moduleImports].join('\n');
 }
 
-function printExport(modules: string[]) {
-	return `export default {\n    sdl,\n    modules: [\n${modules.map(printModuleWithSatisfies).join(',\n')}\n    ],\n};`;
+function printExport(modules: string[], roots: RootTypes) {
+	return `export default {\n    sdl,\n    roots: ${printRoots(roots)},\n    modules: [\n${modules.map(printModuleWithSatisfies).join(',\n')}\n    ],\n};`;
+}
+
+function printRoots(roots: RootTypes) {
+	const entries = Object.entries(roots).map(([operation, type]) => `${operation}: "${type}"`);
+	return `{ ${entries.join(', ')} }`;
 }
 
 function printModuleWithSatisfies(module: string) {

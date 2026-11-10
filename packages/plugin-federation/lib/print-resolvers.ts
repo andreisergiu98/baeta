@@ -10,6 +10,7 @@ interface PrintResolversOptions {
 	federationRootDir: string;
 	moduleDefinitionName: string;
 	includedDirectiveNames: Set<FederationDirectiveName>;
+	queryTypeName: string;
 }
 
 export function printResolvers(
@@ -43,7 +44,7 @@ export function printResolvers(
 	const scalarResolvers = scalars.map(printScalarResolver);
 
 	const moduleExportBody = [
-		printQueryTypeResolver(info, moduleExportName),
+		printQueryTypeResolver(info, moduleExportName, options.queryTypeName),
 		printServiceTypeResolver(moduleExportName),
 		printScalarResolver({ name: '_Any', serialize: 'json' }),
 		...scalarResolvers,
@@ -72,11 +73,16 @@ function printServiceTypeResolver(moduleExportName: string) {
 	].join('\n');
 }
 
-function printQueryTypeResolver(info: FederationInfo, moduleExportName: string) {
+function printQueryTypeResolver(
+	info: FederationInfo,
+	moduleExportName: string,
+	queryTypeName: string,
+) {
+	const queryType = `${moduleExportName}.${queryTypeName}`;
 	return [
-		`Query: ${moduleExportName}.Query.$fields({`,
-		info.resolvableEntitiesMap.size > 0 ? printEntityFieldResolver(moduleExportName) : null,
-		`  _service: ${moduleExportName}.Query._service.resolve(() => {`,
+		`${queryTypeName}: ${queryType}.$fields({`,
+		info.resolvableEntitiesMap.size > 0 ? printEntityFieldResolver(queryType) : null,
+		`  _service: ${queryType}._service.resolve(() => {`,
 		'    return { sdl: federationSDL };',
 		'  }),',
 		'})',
@@ -85,9 +91,9 @@ function printQueryTypeResolver(info: FederationInfo, moduleExportName: string) 
 		.join('\n');
 }
 
-function printEntityFieldResolver(moduleExportName: string) {
+function printEntityFieldResolver(queryType: string) {
 	return [
-		`_entities: ${moduleExportName}.Query._entities.resolve((params) => {`,
+		`_entities: ${queryType}._entities.resolve((params) => {`,
 		'  const representations = params.args.representations as FederationTypes.EntityRepresentation[];',
 		'  return BaetaFederation.resolveEntities(representations, handlersMap, params.ctx, params.info);',
 		'}),',

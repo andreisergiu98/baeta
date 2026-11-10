@@ -21,7 +21,7 @@ const userPhotosConnectionResolver = User.photosConnection.resolve(async ({ sour
 				: undefined,
 		});
 
-	return createEdges(photos ?? [], args.page.cursor, args.page.limit, (photo) => photo.id);
+	return createEdges(photos ?? [], args.page.cursor ?? null, args.page.limit, (photo) => photo.id);
 });
 
 export default UserPhotosPagesModule.$schema({

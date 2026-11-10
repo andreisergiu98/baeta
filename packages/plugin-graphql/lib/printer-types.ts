@@ -165,32 +165,50 @@ function printInputObjectType(config: PrinterConfig, type: InputObjectTypeDefini
 }
 
 function printInputObjectTypeField(config: PrinterConfig, field: InputValueDefinitionNode) {
-	const optionalMarker = printOptionalMarker(config, field.type);
-	return `${field.name.value}${optionalMarker}: ${printType(config, field.type)}`;
+	return `${field.name.value}${printInputOptionalMarker(field)}: ${printType(config, field.type)}`;
+}
+
+export function getArgsTypeName(typeName: string, fieldName: string) {
+	return `${typeName + pascalCase(fieldName)}Args`;
 }
 
 export function printObjectTypeFieldsArgsFromMap(
 	config: PrinterConfig,
 	map: Map<string, ObjectTypeDefinitionNode>,
 ) {
-	return [...map.values()].flatMap((type) => printObjectTypeArgs(config, type));
+	const owners = new Map(
+		getDefinedTypeNames(config.globalDefinitions).map((name) => [name, `type ${name}`]),
+	);
+	return [...map.values()].flatMap((type) =>
+		(type.fields ?? [])
+			.filter((field) => field.arguments != null && field.arguments.length > 0)
+			.map((field) => {
+				const coordinate = `${type.name.value}.${field.name.value}`;
+				const name = getArgsTypeName(type.name.value, field.name.value);
+				const owner = owners.get(name);
+				if (owner != null) {
+					throw new Error(
+						`The arguments type ${name} for ${coordinate} collides with ${owner}. Rename one of them.`,
+					);
+				}
+				owners.set(name, `the arguments type for ${coordinate}`);
+				return printObjectTypeFieldArgs(config, name, field);
+			}),
+	);
 }
 
-function printObjectTypeArgs(config: PrinterConfig, type: ObjectTypeDefinitionNode) {
-	if (type.fields == null) {
-		return [];
-	}
-	return type.fields
-		.map((field) => printObjectTypeFieldArgs(config, type.name.value, field))
-		.filter(Boolean);
+function getDefinedTypeNames(definitions: DefinitionsMap) {
+	return [
+		...definitions.scalarTypeMap.keys(),
+		...definitions.enumTypeMap.keys(),
+		...definitions.objectTypeMap.keys(),
+		...definitions.inputObjectTypeMap.keys(),
+		...definitions.unionTypeMap.keys(),
+		...definitions.interfaceTypeMap.keys(),
+	];
 }
 
-function printObjectTypeFieldArgs(
-	config: PrinterConfig,
-	typeName: string,
-	field: FieldDefinitionNode,
-) {
-	const name = `${typeName + pascalCase(field.name.value)}Args`;
+function printObjectTypeFieldArgs(config: PrinterConfig, name: string, field: FieldDefinitionNode) {
 	return buildBlock({
 		name: `export type ${name} =`,
 		lines: field.arguments?.map((arg) => printObjectTypeFieldArg(config, arg)) ?? [],
@@ -198,7 +216,7 @@ function printObjectTypeFieldArgs(
 }
 
 function printObjectTypeFieldArg(config: PrinterConfig, arg: InputValueDefinitionNode) {
-	return `${arg.name.value}: ${printType(config, arg.type)}`;
+	return `${arg.name.value}${printInputOptionalMarker(arg)}: ${printType(config, arg.type)}`;
 }
 
 function printType(config: PrinterConfig, type: TypeNode, nullable = true): string {
@@ -241,6 +259,10 @@ function printValue(config: PrinterConfig, value: string, nullable: boolean): st
 
 function printOptionalMarker(config: PrinterConfig, type: TypeNode) {
 	return config.withOptional && type.kind !== Kind.NON_NULL_TYPE ? '?' : '';
+}
+
+function printInputOptionalMarker(input: InputValueDefinitionNode) {
+	return input.type.kind !== Kind.NON_NULL_TYPE && input.defaultValue == null ? '?' : '';
 }
 
 function printOrObjectType(type: ObjectTypeDefinitionNode, fields?: string[]): string {

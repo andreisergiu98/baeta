@@ -149,8 +149,8 @@ const { Query } = UserModule;
 export default Query.$fields({
   user: Query.user.map(({ args }) =>
     userCache.queries.findUser({
-      id: args.where.id,
-      email: args.where.email,
+      id: args.where.id ?? null,
+      email: args.where.email ?? null,
     }),
   ),
   users: Query.users

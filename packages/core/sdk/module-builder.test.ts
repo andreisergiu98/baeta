@@ -17,7 +17,7 @@ test('ModuleBuilder should handle $schema correctly', async (t) => {
 	const moduleCompiler = module.$schema(mockSchemaForModuleBuilder(module))[makeSymbol]();
 
 	const result = moduleCompiler.build();
-	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.fields), {
 		Type1: {
 			field1: 'test',
 			field2: 'test',
@@ -55,7 +55,7 @@ test('ModuleBuilder should handle $use correctly', async (t) => {
 		.$schema(mockSchemaForModuleBuilder(module));
 	const result = schema[makeSymbol]().build();
 
-	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.fields), {
 		Type1: {
 			field1: 'test_1',
 			field2: 'test_1',
@@ -65,26 +65,6 @@ test('ModuleBuilder should handle $use correctly', async (t) => {
 			field2: 'test_1',
 		},
 	});
-});
-
-test('ModuleBuilder should handle $directive correctly', async (t) => {
-	const module = mockModuleBuilder().toMethods();
-	const schema = module
-		.$directive((schema) => {
-			return schema;
-		})
-		.$directive([
-			(schema) => {
-				return schema;
-			},
-			(schema) => {
-				return schema;
-			},
-		])
-		.$schema(mockSchemaForModuleBuilder(module));
-	const result = schema[makeSymbol]().build();
-
-	t.is(result.transformers.length, 3);
 });
 
 test('ModuleBuilder should handle edit correctly', async (t) => {
@@ -98,15 +78,6 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 		}
 		return result;
 	});
-
-	editableModule.addTransformer([
-		(schema) => {
-			return schema;
-		},
-		(schema) => {
-			return schema;
-		},
-	]);
 
 	const statePlugin = createAppPluginId<string>('state');
 	editableModule.setPluginState(statePlugin, 'edited');
@@ -127,9 +98,6 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 	t.is(editedCompiler.getPluginState(isolatedPlugin), undefined);
 
 	const finalSchema = editedModule
-		.$directive((schema) => {
-			return schema;
-		})
 		.$use(async (next) => {
 			const result = await next();
 			if (typeof result === 'string') {
@@ -140,7 +108,7 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 		.$schema(mockSchemaForModuleBuilder(editedModule));
 	const result = finalSchema[makeSymbol]().build();
 
-	t.deepEqual(await executeMockedModuleResolvers(result.resolvers), {
+	t.deepEqual(await executeMockedModuleResolvers(result.fields), {
 		Type1: {
 			field1: 'test_1_2',
 			field2: 'test_1_2',
@@ -150,6 +118,4 @@ test('ModuleBuilder should handle edit correctly', async (t) => {
 			field2: 'test_1_2',
 		},
 	});
-
-	t.is(result.transformers.length, 3);
 });

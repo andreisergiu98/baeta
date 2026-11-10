@@ -1,10 +1,9 @@
-import type { IResolvers } from '@graphql-tools/utils';
 import type { GraphQLFieldResolver } from 'graphql';
 import type { Middleware } from '../../lib/middleware.ts';
 import { createBuilderContext } from '../builder-context.ts';
 import type { Field, FieldMethods } from '../field-methods.ts';
 import { TypeBuilder } from '../type-builder.ts';
-import { TypeCompiler } from '../type-compiler.ts';
+import { type FieldResolverRecord, TypeCompiler } from '../type-compiler.ts';
 import { executeMockedResolver, mockFieldBuilder, mockMiddleware } from './field-mocks.ts';
 import type { MockArgs, MockContext, MockInfo, MockResult, MockSource } from './mocks.ts';
 
@@ -74,12 +73,17 @@ export function mockTypeCompiler({ type = 'Type', state = new Map() }: MockTypeO
 	});
 }
 
-export async function executeMockedTypeResolvers(resolvers: IResolvers) {
+export async function executeMockedTypeResolvers(fields: readonly FieldResolverRecord[]) {
 	const results: Record<string, unknown> = {};
-	for (const field of ['field1', 'field2']) {
-		results[field] = await executeMockedResolver(
-			resolvers[field] as GraphQLFieldResolver<MockSource, MockContext, MockArgs, MockResult>,
-		);
+	for (const record of fields) {
+		results[record.field] = await executeMockedResolver({
+			resolve: record.resolve as GraphQLFieldResolver<
+				MockSource,
+				MockContext,
+				MockArgs,
+				MockResult
+			>,
+		});
 	}
 	return results;
 }

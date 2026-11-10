@@ -5,12 +5,12 @@ import { execute } from '@baeta/e2e-shared/execute';
 import { createRelativeExists } from '@baeta/e2e-shared/utils';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
-import modules from './src/modules/index.ts';
+import sources from './src/modules/index.ts';
 
 const fixturePath = resolve(import.meta.dirname, '.');
 const federationDir = resolve(fixturePath, 'src/modules/baeta-federation');
 
-const { schema } = createApplication({ modules });
+const { schema } = createApplication({ sources });
 
 const ServiceQuery = graphql(`
 	query ServiceQuery {

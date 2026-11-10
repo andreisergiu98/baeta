@@ -5,10 +5,10 @@ import test from '@baeta/testing';
 import { type ExecutionResult, subscribe } from 'graphql';
 import { graphql } from './src/__generated__/gql/index.ts';
 import { createMoviePubSub } from './src/lib/pubsub.ts';
-import modules from './src/modules/index.ts';
+import sources from './src/modules/index.ts';
 import type { Context } from './src/types/context.ts';
 
-const { schema } = createApplication({ modules });
+const { schema } = createApplication({ sources });
 
 const MovieCreatedSubscription = graphql(`
 	subscription MovieCreatedSubscription {

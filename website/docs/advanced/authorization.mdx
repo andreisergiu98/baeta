@@ -82,10 +82,10 @@ Scope types determine how you call the accessor:
 ```typescript title="src/app.ts"
 import { createApplication } from "@baeta/core";
 import { authAppPlugin } from "./lib/auth.ts";
-import modules from "./modules/index.ts";
+import sources from "./modules/index.ts";
 
 const baeta = createApplication({
-  modules,
+  sources,
   plugins: [authAppPlugin],
 });
 ```

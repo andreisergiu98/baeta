@@ -3,11 +3,11 @@ import { createApplication } from '@baeta/core';
 import { createYoga } from 'graphql-yoga';
 import { pubsub } from './lib/pubsub.ts';
 import { useWebSocketServer } from './lib/ws.ts';
-import modules from './modules/index.ts';
+import sources from './modules/index.ts';
 import type { Context, ServerContext } from './types/context.ts';
 
 const baeta = createApplication({
-	modules,
+	sources,
 });
 
 const yoga = createYoga<ServerContext, Context>({

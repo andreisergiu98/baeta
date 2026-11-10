@@ -78,15 +78,15 @@ export function mockResolver(
 	return fieldCompiler.build([]).resolver;
 }
 
-export async function executeMockedResolver(
-	resolver: GraphQLFieldResolver<
+export async function executeMockedResolver(resolver: {
+	resolve: GraphQLFieldResolver<
 		MockSource,
 		MockContext,
 		MockArgs,
 		MockResult | PromiseLike<MockResult>
-	>,
-) {
-	return await resolver(
+	>;
+}) {
+	return await resolver.resolve(
 		{ name: 'test' },
 		{ userId: '123' },
 		{ user: { name: 'test' } },

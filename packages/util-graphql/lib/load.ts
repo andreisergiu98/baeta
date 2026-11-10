@@ -9,6 +9,7 @@ import {
 	type Loader,
 } from '@graphql-tools/utils';
 import { validateSchema } from 'graphql';
+import { formatSchemaErrors } from './schema-errors.ts';
 
 export async function loadSchema(
 	schemas: string | string[],
@@ -29,9 +30,7 @@ export async function loadSchema(
 	const errors = validateSchema(outputSchemaAst);
 
 	if (errors.length > 0) {
-		const messages = errors.map((e) => e.toString()).join('\n\n--------------------\n\n');
-		const subject = errors.length === 1 ? 'error' : 'errors';
-		throw new Error(`Invalid schema. Found ${errors.length} ${subject}:\n\n${messages}`);
+		throw new Error(formatSchemaErrors(errors));
 	}
 
 	if (!outputSchemaAst.extensions) {

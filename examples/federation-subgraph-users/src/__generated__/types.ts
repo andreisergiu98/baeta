@@ -24,36 +24,12 @@ export type User = BaetaUtility.Or<BaetaOverrides.ObjectTypes["User"], {
   givenName: Scalars["String"] | null
 }>
 
-export type _ServiceSdlArgs = {
-};
-
-export type QueryServiceArgs = {
-};
-
 export type QueryEntitiesArgs = {
   representations: Array<Scalars["_Any"]>
 };
 
 export type QueryUserArgs = {
   where: UserWhereUniqueInput
-};
-
-export type QueryUsersArgs = {
-};
-
-export type UserIdArgs = {
-};
-
-export type UserEmailArgs = {
-};
-
-export type UserLastNameArgs = {
-};
-
-export type UserProfileArgs = {
-};
-
-export type UserGivenNameArgs = {
 };
 
 export type UserWhereUniqueInput = {

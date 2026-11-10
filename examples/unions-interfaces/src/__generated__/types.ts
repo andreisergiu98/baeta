@@ -38,60 +38,6 @@ export type Book = BaetaUtility.Or<BaetaOverrides.ObjectTypes["Book"], {
   pages: Scalars["Int"]
 }>
 
-export type ComicIdArgs = {
-};
-
-export type ComicTitleArgs = {
-};
-
-export type ComicYearArgs = {
-};
-
-export type ComicArtistArgs = {
-};
-
-export type ComicPagesArgs = {
-};
-
-export type MovieIdArgs = {
-};
-
-export type MovieTitleArgs = {
-};
-
-export type MovieYearArgs = {
-};
-
-export type TVShowIdArgs = {
-};
-
-export type TVShowTitleArgs = {
-};
-
-export type TVShowYearArgs = {
-};
-
-export type TVShowSeasonsArgs = {
-};
-
-export type BookIdArgs = {
-};
-
-export type BookTitleArgs = {
-};
-
-export type BookYearArgs = {
-};
-
-export type BookAuthorArgs = {
-};
-
-export type BookPagesArgs = {
-};
-
-export type QueryMediaArgs = {
-};
-
 export type Readable = Comic & {__typename: "Comic"} | Book & {__typename: "Book"}
 
 export type Media = Comic & {__typename: "Comic"} | Movie & {__typename: "Movie"} | TVShow & {__typename: "TVShow"} | Book & {__typename: "Book"}

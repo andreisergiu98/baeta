@@ -5,12 +5,12 @@ import { execute } from '@baeta/e2e-shared/execute';
 import { exists, createRelativeExists } from '@baeta/e2e-shared/utils';
 import test from '@baeta/testing';
 import { graphql } from './src/__generated__/gql/index.ts';
-import modules from './src/graphql/index.ts';
+import sources from './src/graphql/index.ts';
 
 const apolloDir = resolve(import.meta.dirname, 'src/graphql/apollo');
 const typesDir = resolve(import.meta.dirname, 'src/types-gen');
 
-const { schema } = createApplication({ modules });
+const { schema } = createApplication({ sources });
 
 const ServiceQuery = graphql(`
 	query ServiceQuery {

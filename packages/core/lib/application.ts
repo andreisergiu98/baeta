@@ -1,78 +1,84 @@
-import { type IExecutableSchemaDefinition, makeExecutableSchema } from '@graphql-tools/schema';
-import type { GraphQLSchema } from 'graphql';
+import {
+	assertValidSchema,
+	buildASTSchema,
+	type DocumentNode,
+	type GraphQLSchema,
+	parse,
+} from 'graphql';
 import type { AppPlugin, PluginId } from '../sdk/app-plugin.ts';
 import type { ModuleCompiler } from '../sdk/module-compiler.ts';
 import type { ModuleCompilerFactory, TypesResolversMap } from '../sdk/module-methods.ts';
+import { attachResolvers } from '../sdk/schema-resolvers.ts';
 import { attachSchemaStates, type SetSchemaState } from '../sdk/schema-state.ts';
 import { makeSymbol } from '../sdk/symbols.ts';
-import { transformSchema } from '../sdk/transformer.ts';
-
-export type ExecutableSchemaOptions = Omit<IExecutableSchemaDefinition, 'typeDefs' | 'resolvers'>;
-
-export interface BuildSchemaOptions {
-	typeDefs: IExecutableSchemaDefinition['typeDefs'];
-	resolvers: IExecutableSchemaDefinition['resolvers'];
-	options?: ExecutableSchemaOptions;
-}
 
 export interface Options<Context, Info> {
 	/**
-	 * Array of module objects to include in the application.
+	 * The schema and the modules that resolve it. Pass the default export of the generated
+	 * `modules/index.ts`.
 	 *
 	 * @example
 	 * ```typescript
-	 * const modules = [
-	 *   userModule,
-	 *   postModule,
-	 *   commentModule
-	 * ];
+	 * import sources from './modules/index.ts';
+	 *
+	 * const baeta = createApplication({ sources });
 	 * ```
 	 */
-	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>;
+	sources: {
+		/**
+		 * The whole schema as SDL. The generator writes it to `sdl.ts` in the types directory.
+		 */
+		sdl: string;
+		/**
+		 * Modules that resolve the schema's fields and implement its scalars.
+		 */
+		modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>;
+	};
+
+	/**
+	 * Skips validating `sources.sdl` against GraphQL's validation rules at startup. The generator
+	 * already validates the schema before it writes `sdl.ts`, so this is safe for unmodified
+	 * generated sources. Resolvers and scalars are still checked against the schema.
+	 *
+	 * @defaultValue false
+	 */
+	assumeValid?: boolean;
 
 	/**
 	 * Optional array of plugins to extend the functionality of the application.
 	 */
 	plugins?: AppPlugin<any, any>[];
-
-	/**
-	 * Options to pass to makeExecutableSchema. See https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema
-	 */
-	executableSchemaOptions?: ExecutableSchemaOptions;
-
-	/**
-	 * Optional function to build the GraphQL schema. If not provided, the default implementation using makeExecutableSchema will be used.
-	 * This allows you to customize the schema building process, for example by using a different library or applying additional transformations.
-	 * @param options - An object containing the type definitions and resolvers to build the schema from.
-	 * @returns The built GraphQL schema.
-	 */
-	buildSchema?: (options: BuildSchemaOptions) => GraphQLSchema;
 }
 
 /**
- * Creates a Baeta application by combining the modules.
+ * Creates a Baeta application from the schema and the modules that resolve it.
  *
  * @param options - Configuration options for the application
  * @returns An object containing the GraphQL schema
  *
  * @example
  * ```typescript
- * const baeta = createApplication({
- *   modules: [userModule, postModule],
- * });
+ * import sources from './modules/index.ts';
+ *
+ * const baeta = createApplication({ sources });
  *
  * const { schema } = baeta;
  * ```
  */
 export function createApplication<Context, Info>(options: Options<Context, Info>) {
-	const { typeDefs, resolvers, transformers, schemaStates, schemaHooks } = compileModules(
-		options.modules,
+	const document = parseSdl(options.sources.sdl);
+	const { modules, schemaStates, schemaHooks } = compileModules(
+		options.sources.modules,
+		document,
 		options.plugins,
 	);
-	const buildSchemaFn = options.buildSchema ?? buildSchema;
-	let schema = buildSchemaFn({ typeDefs, resolvers, options: options.executableSchemaOptions });
-	schema = transformSchema(schema, transformers);
-	schema = attachSchemaStates(schema, schemaStates);
+	const assumeValid = options.assumeValid ?? false;
+	const schema = buildSchema(document, assumeValid);
+	attachResolvers(schema, modules);
+	if (!assumeValid) {
+		validateSchema(schema);
+	}
+	attachSchemaStates(schema, schemaStates);
 	for (const onSchema of schemaHooks) {
 		onSchema(schema);
 	}
@@ -81,22 +87,40 @@ export function createApplication<Context, Info>(options: Options<Context, Info>
 	};
 }
 
-function buildSchema(options: BuildSchemaOptions) {
+function parseSdl(sdl: string) {
 	try {
-		return makeExecutableSchema({
-			...options.options,
-			typeDefs: options.typeDefs,
-			resolvers: options.resolvers,
-		});
+		return parse(sdl, { noLocation: true });
 	} catch (e) {
-		throw new Error(`Couldn't build schema! Reason: ${e instanceof Error ? e.message : e}`, {
-			cause: e,
-		});
+		throw createSchemaError(e);
 	}
+}
+
+function buildSchema(document: DocumentNode, assumeValid: boolean) {
+	try {
+		return buildASTSchema(document, { assumeValid, assumeValidSDL: assumeValid });
+	} catch (e) {
+		throw createSchemaError(e);
+	}
+}
+
+function validateSchema(schema: GraphQLSchema) {
+	try {
+		assertValidSchema(schema);
+	} catch (e) {
+		throw createSchemaError(e);
+	}
+}
+
+function createSchemaError(cause: unknown) {
+	return new Error(
+		`Couldn't build schema! Reason: ${cause instanceof Error ? cause.message : cause}`,
+		{ cause },
+	);
 }
 
 function compileModules<Context, Info>(
 	modules: Array<ModuleCompilerFactory<Context, Info, TypesResolversMap<Context, Info>>>,
+	document: DocumentNode,
 	plugins: AppPlugin<any, any>[] = [],
 ) {
 	if (modules.length === 0) {
@@ -108,7 +132,7 @@ function compileModules<Context, Info>(
 	const schemaHooks: Array<(schema: GraphQLSchema) => void> = [];
 	for (const plugin of plugins) {
 		registeredPluginIds.add(plugin.id);
-		const result = plugin.mutate(moduleCompilers as ModuleCompiler[]);
+		const result = plugin.mutate(moduleCompilers as ModuleCompiler[], { document });
 		if (result?.schemaState) {
 			schemaStates.push(result.schemaState);
 		}
@@ -117,10 +141,6 @@ function compileModules<Context, Info>(
 		}
 	}
 	const builtModules = moduleCompilers.map((module) => module.build());
-	const typeDefs = builtModules.map((m) => m.typedef);
-	const resolvers = builtModules.map((m) => m.resolvers);
-	const transformers = builtModules.flatMap((m) => m.transformers);
-
 	for (const module of builtModules) {
 		for (const pluginId of module.requiredPluginIds) {
 			if (!registeredPluginIds.has(pluginId)) {
@@ -133,11 +153,8 @@ function compileModules<Context, Info>(
 			}
 		}
 	}
-
 	return {
-		typeDefs,
-		resolvers,
-		transformers,
+		modules: builtModules,
 		schemaStates,
 		schemaHooks,
 	};

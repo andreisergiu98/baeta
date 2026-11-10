@@ -15,10 +15,10 @@ Pass plugins to `createApplication`:
 import { createApplication } from "@baeta/core";
 import { authAppPlugin } from "./lib/auth.ts";
 import { complexityAppPlugin } from "./lib/complexity.ts";
-import modules from "./modules/index.ts";
+import sources from "./modules/index.ts";
 
 const baeta = createApplication({
-  modules,
+  sources,
   plugins: [authAppPlugin, complexityAppPlugin],
 });
 ```

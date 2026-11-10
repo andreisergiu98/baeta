@@ -1,9 +1,9 @@
 import type { ModuleRegistry } from '@baeta/util-graphql';
 import { join } from '@baeta/util-path';
 import { pascalCase } from 'change-case';
-import type { DocumentNode } from 'graphql';
 import type { FieldInfoMap } from './field-info.ts';
 import { namespace } from './namespace.ts';
+import { getArgsTypeName } from './printer-types.ts';
 import { buildBlock, buildCodeBlock, indent, makeRelativePathForImport } from './printer-utils.ts';
 
 export interface ModulePrinterConfig {
@@ -32,9 +32,10 @@ export function printModuleIndexStarter(config: ModulePrinterConfig, moduleName:
 export function printModuleImports(config: ModulePrinterConfig, moduleName: string) {
 	const typesDir = makeRelativePathForImport(join(config.modulesDir, moduleName), config.typesDir);
 	const hasTypes = config.registry.defined.objects.length > 0;
+	const hasScalars = config.registry.defined.scalars.length > 0;
 	return [
 		`import * as ${namespace.sdk} from "@baeta/core/sdk";`,
-		`import type * as ${namespace.graphql} from "graphql";`,
+		hasScalars ? `import type * as ${namespace.graphql} from "graphql";` : null,
 		hasTypes
 			? `import type * as ${namespace.globalTypes} from "${typesDir}/types${config.importExtension}";`
 			: null,
@@ -42,16 +43,6 @@ export function printModuleImports(config: ModulePrinterConfig, moduleName: stri
 	]
 		.filter((el) => el != null)
 		.join('\n');
-}
-
-export function printModuleMetadata(name: string, doc: DocumentNode) {
-	return buildCodeBlock({
-		name: 'const moduleMetadata =',
-		lines: [
-			`id: '${name}'`,
-			`typedef: ${JSON.stringify(doc)} as unknown as ${namespace.graphql}.DocumentNode`,
-		],
-	});
 }
 
 export function printBaetaModuleTypes(config: ModulePrinterConfig) {
@@ -245,19 +236,11 @@ export function printModuleBuilder(config: ModulePrinterConfig, moduleName: stri
 		name: '',
 		lines: objectTypes,
 	});
-	const typeNameResolvers = buildCodeBlock({
-		name: '',
-		lines: [...config.registry.defined.unions, ...config.registry.defined.interfaces].map(
-			(name) => `${name}: ${printTypeNameResolver()}`,
-		),
-	});
 	const infoType = getInfoType();
 	const contextType = getContextType();
 	return [
-		`export const ${pascalCase(moduleName)}Module = ${namespace.sdk}.createModuleBuilder<${contextType}, ${infoType}, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(moduleMetadata.id, moduleMetadata.typedef,`,
+		`export const ${pascalCase(moduleName)}Module = ${namespace.sdk}.createModuleBuilder<${contextType}, ${infoType}, BaetaModuleTypes['Builders'], BaetaModuleTypes['Factories']>(${JSON.stringify(moduleName)}, `,
 		builders,
-		',',
-		typeNameResolvers,
 		`);`,
 	].join('');
 }
@@ -272,10 +255,6 @@ function printObjectTypeBuilder(typeName: string, objects: Record<string, string
 		lines: fields,
 	});
 	return `${typeName}: ${namespace.sdk}.createTypeBuilder("${typeName}",${content})`;
-}
-
-function printTypeNameResolver() {
-	return '{ __resolveType: (source: {__typename: string}) => { return source.__typename; }}';
 }
 
 function getParentType(type: string) {
@@ -305,8 +284,7 @@ function getArgsType(config: ModulePrinterConfig, type: string, field: string) {
 	if (!hasArgs) {
 		return '{}';
 	}
-	const fieldUpper = pascalCase(field);
-	return `${namespace.globalTypes}.${type}${fieldUpper}Args`;
+	return `${namespace.globalTypes}.${getArgsTypeName(type, field)}`;
 }
 
 function printObjectTypeFieldBuilder(typeName: string, field: string) {

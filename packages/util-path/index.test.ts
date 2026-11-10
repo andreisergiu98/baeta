@@ -1,5 +1,5 @@
 import test from '@baeta/testing';
-import { join, normalize, posixPath, winPath } from './index.ts';
+import { join, makeRelativePathForImport, normalize, posixPath, winPath } from './index.ts';
 
 test('posixPath: should convert Windows path to POSIX path', (t) => {
 	const winStyle = 'foo\\bar\\baz';
@@ -58,4 +58,12 @@ test('posixPath: should handle mixed separators', (t) => {
 
 test('winPath: should handle mixed separators', (t) => {
 	t.is(winPath('foo/bar\\baz/qux'), 'foo\\bar\\baz\\qux');
+});
+
+test('makeRelativePathForImport: should prefix child paths with ./', (t) => {
+	t.is(makeRelativePathForImport('src/graphql', 'src/graphql/modules'), './modules');
+});
+
+test('makeRelativePathForImport: should keep parent paths unchanged', (t) => {
+	t.is(makeRelativePathForImport('src/modules', 'src/__generated__'), '../__generated__');
 });

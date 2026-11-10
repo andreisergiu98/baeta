@@ -1,4 +1,4 @@
-import { relative } from '@baeta/util-path';
+import { makeRelativePathForImport } from '@baeta/util-path';
 import {
 	type GraphQLInterfaceType,
 	GraphQLList,
@@ -39,7 +39,7 @@ export function printFederationTypes(
 			.map((typeName) => `${typeName}EntityRepresentation`)
 			.join(' | ') || 'never';
 
-	const relativeModulesDir = relative(options.typesDir, options.modulesDir);
+	const relativeModulesDir = makeRelativePathForImport(options.typesDir, options.modulesDir);
 
 	return [
 		hasEntities
@@ -100,7 +100,9 @@ function selectionSetToTS(
 		const field = fields[name];
 		if (!field) throw new Error(`Field "${name}" not found on ${parentType.name}`);
 		const naked = unwrap(field.type);
-		if (isScalarType(naked) || isEnumType(naked)) {
+		if (isEnumType(naked)) {
+			parts.push(`${name}: ${namespace.globalTypes}.${naked.name}`);
+		} else if (isScalarType(naked)) {
 			parts.push(`${name}: ${scalarToTS(naked.name)}`);
 		} else if ((isObjectType(naked) || isInterfaceType(naked)) && selection.selectionSet) {
 			const nested = selectionSetToTS(selection.selectionSet, naked);

@@ -127,5 +127,5 @@ function getKeyDirectiveSelectionSet(
 	if (resolvableArg?.value.kind === Kind.BOOLEAN && resolvableArg.value.value === false) {
 		return null;
 	}
-	return fieldsArg.value.value.trim().replaceAll(/\s+/g, '');
+	return fieldsArg.value.value.trim().replaceAll(/\s+/g, ' ');
 }

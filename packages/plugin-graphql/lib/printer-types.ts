@@ -1,4 +1,5 @@
 import { type DefinitionsMap, isScalarType } from '@baeta/util-graphql';
+import { makeRelativePathForImport } from '@baeta/util-path';
 import { pascalCase } from 'change-case';
 import {
 	type EnumTypeDefinitionNode,
@@ -13,7 +14,7 @@ import {
 	type TypeNode,
 	type UnionTypeDefinitionNode,
 } from 'graphql';
-import { buildBlock, indent, makeRelativePathForImport } from './printer-utils.ts';
+import { buildBlock, indent } from './printer-utils.ts';
 
 export interface PrinterConfig {
 	globalDefinitions: DefinitionsMap;

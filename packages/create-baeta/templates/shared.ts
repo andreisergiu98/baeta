@@ -349,13 +349,13 @@ function makePackageJson(
 	}
 
 	if (runtime === 'bun') {
-		meta.scripts.start = `baeta generate --watch --run='bun --watch --inspect src/app.ts'`;
+		meta.scripts.start = `baeta generate --watch --run="bun --watch --inspect src/app.ts"`;
 		meta.devDependencies['@types/node'] = undefined;
 		meta.devDependencies['@types/deno'] = undefined;
 	}
 
 	if (runtime === 'deno') {
-		meta.scripts.start = `baeta generate --watch --run='deno --watch --allow-env --allow-read --allow-net src/app.ts'`;
+		meta.scripts.start = `baeta generate --watch --run="deno --watch --allow-env --allow-read --allow-net src/app.ts"`;
 		meta.devDependencies['@types/node'] = undefined;
 		meta.devDependencies['@types/bun'] = undefined;
 	}

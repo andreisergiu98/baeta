@@ -23,6 +23,8 @@ export async function handler(args: Args) {
 
 	const runtime = await getRuntime();
 
+	const pkgManager = await getPackageManager(dest, args);
+
 	logger.info('Creating new Baeta project...');
 
 	try {
@@ -31,8 +33,6 @@ export async function handler(args: Args) {
 		logger.error`Copying Baeta template name=${template} failed!`;
 		throw err;
 	}
-
-	const pkgManager = await getPackageManager(dest, args);
 
 	const useNpm = pkgManager === 'npm';
 	const useBun = pkgManager === 'bun';

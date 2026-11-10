@@ -191,7 +191,7 @@ function enforceWorkspaceMetadata({ Yarn }) {
 			if (!excludeFromStart.includes(workspace.manifest.name)) {
 				workspace.set(
 					'scripts.start',
-					"baeta generate --watch --run='node --watch --enable-source-maps --inspect src/app.ts'",
+					'baeta generate --watch --run="node --watch --enable-source-maps --inspect src/app.ts"',
 				);
 			}
 		}

@@ -76,5 +76,7 @@
       "depTypeTemplate": "action"
     }
   ],
-  "dependencyDashboardFooter": "\n- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository\n"
+  "dependencyDashboard": {
+    "footer": "\n- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository\n"
+  }
 }

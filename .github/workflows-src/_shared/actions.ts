@@ -16,9 +16,9 @@ const actions = {
 	uploadArtifact: 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9', // v7.0.2
 	downloadArtifact: 'actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333', // v8.0.2
 	changesets: 'changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d', // v1.9.0
-	dockerLogin: 'docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6', // v4.7.0
+	dockerLogin: 'docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550', // v4.8.0
 	ghPages: 'peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453', // v4.1.0
-	renovate: 'renovatebot/github-action@a63d9a7bc606f7336fd20b47f2f32259a35e6213', // v46.3.9
+	renovate: 'renovatebot/github-action@266fef21329c44765ad42f9dea1f01f5d2d91084', // v46.3.13
 };
 
 export interface UseCheckoutOptions {

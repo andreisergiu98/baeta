@@ -36,7 +36,7 @@
     "@baeta/core": "workspace:^",
     "@baeta/subscriptions-pubsub": "workspace:^",
     "graphql": "catalog:dev",
-    "graphql-subscriptions": "^3.0.0"
+    "graphql-subscriptions": "^3.1.0"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

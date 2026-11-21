@@ -59,7 +59,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "graphql": "catalog:dev",
-    "graphql-subscriptions": "^3.0.0",
+    "graphql-subscriptions": "^3.1.0",
     "typescript": "catalog:dev"
   },
   "ava": {

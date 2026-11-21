@@ -35,7 +35,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/server": "^5.5.1",
+    "@apollo/server": "^5.5.2",
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@prisma/adapter-better-sqlite3": "^7.10.1",

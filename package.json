@@ -62,7 +62,7 @@
     "@baeta/changelog": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
     "@baeta/workspace-config": "workspace:^",
-    "@changesets/cli": "^2.31.1",
+    "@changesets/cli": "^3.0.3",
     "@eslint-react/eslint-plugin": "^5.28.8",
     "@eslint/css": "^2.0.1",
     "@eslint/js": "^10.0.1",

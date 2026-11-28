@@ -63,7 +63,7 @@
     "@baeta/testing": "workspace:^",
     "@baeta/tests-cache-clients": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "ioredis": "^6.0.0",
+    "ioredis": "^6.1.0",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {

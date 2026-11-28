@@ -58,7 +58,7 @@
     "@baeta/errors": "workspace:^",
     "@baeta/promises": "workspace:^",
     "@baeta/util-log": "workspace:^",
-    "safe-stable-stringify": "^3.0.0"
+    "safe-stable-stringify": "^3.0.1"
   },
   "devDependencies": {
     "@baeta/builder": "workspace:^",

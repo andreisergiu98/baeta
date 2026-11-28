@@ -52,7 +52,7 @@
     "@prisma/client": "^7.10.1",
     "@types/node": "catalog:dev",
     "@types/ws": "catalog:dev",
-    "@yarnpkg/pnpify": "^4.1.7",
+    "@yarnpkg/pnpify": "^4.1.8",
     "prisma": "^7.10.1",
     "typescript": "catalog:dev"
   },

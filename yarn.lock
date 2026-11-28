@@ -2609,7 +2609,7 @@ __metadata:
     "@baeta/core": "workspace:^"
     "@baeta/subscriptions-pubsub": "workspace:^"
     "@baeta/tsconfig": "workspace:^"
-    "@types/body-parser": "npm:^1.19.6"
+    "@types/body-parser": "npm:^2.2.0"
     "@types/cors": "npm:^2.8.19"
     "@types/express": "npm:^5.0.6"
     "@types/node": "catalog:dev"
@@ -9735,13 +9735,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/body-parser@npm:*, @types/body-parser@npm:^1.19.6":
-  version: 1.19.6
-  resolution: "@types/body-parser@npm:1.19.6"
+"@types/body-parser@npm:*, @types/body-parser@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@types/body-parser@npm:2.2.0"
   dependencies:
     "@types/connect": "npm:*"
     "@types/node": "npm:*"
-  checksum: 10c0/542da05c924dce58ee23f50a8b981fee36921850c82222e384931fda3e106f750f7880c47be665217d72dbe445129049db6eb1f44e7a06b09d62af8f3cca8ea7
+  checksum: 10c0/e14e6bec59d9ce606010f746194ee95efde9659ac1f7f9431b1d151cc9234532b27e278f540a885e556a4abd8a313df7b552bd42614eab634ff499e471e0cbf1
   languageName: node
   linkType: hard
 

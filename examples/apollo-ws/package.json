@@ -47,7 +47,7 @@
   "devDependencies": {
     "@baeta/cli": "workspace:^",
     "@baeta/tsconfig": "workspace:^",
-    "@types/body-parser": "^1.19.6",
+    "@types/body-parser": "^2.2.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "catalog:dev",

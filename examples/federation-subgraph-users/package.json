@@ -32,7 +32,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/server": "^5.5.1",
+    "@apollo/server": "^5.5.2",
     "@baeta/core": "workspace:^",
     "@baeta/federation": "workspace:^",
     "graphql": "catalog:dev"

@@ -35,7 +35,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/server": "^5.5.1",
+    "@apollo/server": "^5.5.2",
     "@baeta/core": "workspace:^",
     "@baeta/directives": "workspace:^",
     "@prisma/adapter-better-sqlite3": "^7.10.1",
@@ -56,7 +56,7 @@
     "@faker-js/faker": "^10.6.0",
     "@types/node": "catalog:dev",
     "@types/ws": "catalog:dev",
-    "@yarnpkg/pnpify": "^4.1.7",
+    "@yarnpkg/pnpify": "^4.1.8",
     "prisma": "^7.10.1",
     "typescript": "catalog:dev"
   }
